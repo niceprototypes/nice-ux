@@ -39,8 +39,8 @@ const InnerFlexStyled = styled.div `
 // Default breakpoint values from helpshelf-ui
 const DEFAULT_BREAKPOINT_MD = 980;
 const DEFAULT_BREAKPOINT_LG = 1280;
-const Tile = ({ children, breakpointMd = DEFAULT_BREAKPOINT_MD, breakpointLg = DEFAULT_BREAKPOINT_LG }) => {
-    return (React__namespace.createElement(Flex, { direction: "column", grow: 1 },
+const Tile = ({ children, breakpointMd = DEFAULT_BREAKPOINT_MD, breakpointLg = DEFAULT_BREAKPOINT_LG, className, style }) => {
+    return (React__namespace.createElement(Flex, { direction: "column", grow: 1, className: className, style: style },
         React__namespace.createElement(InnerFlexStyled, { as: Flex, direction: "column", grow: 1, "$breakpointMd": breakpointMd, "$breakpointLg": breakpointLg }, children)));
 };
 

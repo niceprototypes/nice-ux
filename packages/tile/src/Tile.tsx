@@ -10,10 +10,12 @@ const DEFAULT_BREAKPOINT_LG = 1280
 const Tile: React.FC<TileProps> = ({ 
   children, 
   breakpointMd = DEFAULT_BREAKPOINT_MD,
-  breakpointLg = DEFAULT_BREAKPOINT_LG 
+  breakpointLg = DEFAULT_BREAKPOINT_LG,
+  className,
+  style
 }) => {
   return (
-    <Flex direction="column" grow={1}>
+    <Flex direction="column" grow={1} className={className} style={style}>
       <InnerFlexStyled 
         as={Flex} 
         direction="column" 

@@ -4,6 +4,8 @@ interface TileProps {
     children: React.ReactNode;
     breakpointMd?: number;
     breakpointLg?: number;
+    className?: string;
+    style?: React.CSSProperties;
 }
 
 declare const Tile: React.FC<TileProps>;
