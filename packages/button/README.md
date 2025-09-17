@@ -2,13 +2,15 @@
 
 A flexible and customizable React button component with built-in theming support, designed to work seamlessly with the nice-react ecosystem.
 
+> **⚠️ Storybook Notice**: Storybook has been temporarily removed due to React 19 compatibility issues. The Storybook configuration is preserved in the `storybook-preserve` branch and will be restored when Storybook officially supports React 19.
+
 ## Features
 
 - 🎨 **Theming**: Full CSS variable support with customizable themes
 - 📐 **Flexible Sizing**: 4 predefined sizes (1-4) with responsive scaling
 - 🎯 **Multiple Variants**: Primary, secondary, muted, highlighted styles
 - 🔄 **State Management**: Disabled, success, error, warning, active states
-- 🖼️ **Icon Support**: Configurable icon components with positioning
+- 🖼️ **Icon Support**: Built-in icon support with nice-react-icon
 - ♿ **Accessibility**: ARIA support, keyboard navigation, screen reader friendly
 - 📱 **Responsive**: Works across all device sizes
 - 🔧 **TypeScript**: Full type safety and IntelliSense support
@@ -53,13 +55,12 @@ function App() {
 | `size` | `1 \| 2 \| 3 \| 4` | `3` | Button size (smallest to largest) |
 | `status` | `ButtonStatusType` | `"primary"` | Visual variant of the button |
 | `state` | `ButtonStateType` | `"default"` | Interactive state of the button |
-| `icon` | `string` | - | Icon identifier (requires iconComponent) |
+| `icon` | `string` | - | Icon name from nice-react-icon |
 | `iconPosition` | `"left" \| "right"` | `"right"` | Position of icon relative to text |
 | `iconRotation` | `number` | `0` | Icon rotation in degrees |
 | `disabled` | `boolean` | `false` | Whether button is disabled |
 | `fullWidth` | `boolean` | `false` | Whether button takes full container width |
 | `onClick` | `() => void` | - | Click event handler |
-| `iconComponent` | `React.ComponentType` | - | Custom icon component |
 | `theme` | `ButtonTheme` | - | Theme configuration object |
 | `className` | `string` | - | Additional CSS class |
 | `type` | `"button" \| "submit" \| "reset"` | `"button"` | HTML button type |
@@ -107,41 +108,44 @@ import Button from 'nice-react-button'
 
 ### Buttons with Icons
 
-First, create an icon component that matches the `IconComponentProps` interface:
+Icons are automatically rendered using nice-react-icon. Just specify the icon name:
 
 ```tsx
-import { IconComponentProps } from 'nice-react-button'
+import Button from 'nice-react-button'
 
-const MyIcon: React.FC<IconComponentProps> = ({
-  name,
-  size,
-  color,
-  rotation,
-  strokeWidth
-}) => {
-  // Your icon implementation
-  return (
-    <svg
-      width={size * 8}
-      height={size * 8}
-      style={{
-        color,
-        transform: `rotate(${rotation}deg)`
-      }}
-    >
-      {/* Your icon SVG content */}
-    </svg>
-  )
-}
-
-// Use with icon
+// Button with right icon (default)
 <Button
   icon="arrow"
-  iconPosition="left"
-  iconComponent={MyIcon}
+  onClick={handleClick}
 >
   Next Step
 </Button>
+
+// Button with left icon
+<Button
+  icon="check"
+  iconPosition="left"
+  onClick={handleClick}
+>
+  Save Changes
+</Button>
+
+// Button with rotated icon
+<Button
+  icon="arrow"
+  iconRotation={180}
+  iconPosition="left"
+  onClick={handleClick}
+>
+  Previous
+</Button>
+
+// Icon-only button
+<Button
+  icon="search"
+  aria-label="Search"
+  onClick={handleClick}
+/>
 ```
 
 ### Button States
@@ -294,10 +298,9 @@ If you're migrating from the internal Button component:
 
    // After
    import Button from 'nice-react-button'
-   import MyIcon from '@/components/Icon'
 
-   // Add iconComponent prop
-   <Button iconComponent={MyIcon} icon="arrow">
+   // Icons work automatically now
+   <Button icon="arrow">
      Click me
    </Button>
    ```
@@ -317,8 +320,6 @@ npm test
 # Build for production
 npm run build
 
-# Start Storybook
-npm run storybook
 ```
 
 ## Contributing
