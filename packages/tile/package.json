@@ -1,6 +1,6 @@
 {
   "name": "nice-react-tile",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "type": "module",
   "description": "A responsive Tile component for React with styled-components",
   "main": "dist/index.js",

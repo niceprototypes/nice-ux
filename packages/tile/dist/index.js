@@ -31,7 +31,7 @@ const OuterStyled = styled.div `
   ${({ $backgroundImage }) => {
     if ($backgroundImage) {
         return styled.css `
-        background-image: url(${$backgroundImage});
+        background-image: ${$backgroundImage};
         background-attachment: fixed;
         background-size: cover;
         background-position: center;
