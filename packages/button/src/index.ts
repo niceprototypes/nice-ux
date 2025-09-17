@@ -6,7 +6,7 @@
  * and accessibility features. Designed to work seamlessly with the nice-react ecosystem.
  *
  * @author Nice Prototypes
- * @version 1.0.0
+ * @version 1.1.0
  * @license MIT
  */
 
@@ -24,7 +24,6 @@ export type {
   ButtonStatusType,
   ButtonStateType,
   ButtonTheme,
-  IconComponentProps,
 } from "./types"
 
 // Utility exports

@@ -45,24 +45,6 @@ export interface ButtonTheme {
   }
 }
 
-/**
- * Props for custom icon component
- * Allows consumers to provide their own icon implementation
- */
-export interface IconComponentProps {
-  /** Icon name/identifier */
-  name?: string
-  /** Icon size matching button size */
-  size?: ButtonSizeType
-  /** Icon color */
-  color?: string
-  /** Icon rotation in degrees */
-  rotation?: number
-  /** Stroke width for outlined icons */
-  strokeWidth?: number
-  /** Additional CSS class */
-  className?: string
-}
 
 /**
  * Main props interface for the Button component
@@ -81,8 +63,7 @@ export interface ButtonProps {
   state?: ButtonStateType
 
   /**
-   * Icon name/identifier to display
-   * Behavior depends on iconComponent prop
+   * Icon name from nice-react-icon to display
    */
   icon?: string
 
@@ -131,11 +112,6 @@ export interface ButtonProps {
    */
   className?: string
 
-  /**
-   * Custom icon component to render icons
-   * If not provided, icons will not be rendered
-   */
-  iconComponent?: React.ComponentType<IconComponentProps>
 
   /**
    * Theme configuration for customizing appearance

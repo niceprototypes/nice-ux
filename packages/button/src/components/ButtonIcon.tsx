@@ -1,5 +1,6 @@
 import * as React from "react"
-import { IconComponentProps, ButtonSizeType } from "../types"
+import Icon, { IconNameType, IconSizeType } from "nice-react-icon"
+import { ButtonSizeType } from "../types"
 
 /**
  * Props for the ButtonIcon component
@@ -17,13 +18,11 @@ interface ButtonIconProps {
   color?: string
   /** Whether this is just a spacer (no actual icon) */
   isSpacerOnly?: boolean
-  /** Custom icon component */
-  iconComponent?: React.ComponentType<IconComponentProps>
 }
 
 /**
  * ButtonIcon component handles icon rendering within buttons
- * Supports custom icon components or falls back to spacer
+ * Uses nice-react-icon for consistent icon rendering
  */
 const ButtonIcon: React.FC<ButtonIconProps> = ({
   size,
@@ -32,18 +31,12 @@ const ButtonIcon: React.FC<ButtonIconProps> = ({
   iconPosition,
   color,
   isSpacerOnly = false,
-  iconComponent: IconComponent,
 }) => {
-  // If no icon component provided, render nothing
-  if (!IconComponent) {
-    return null
-  }
-
-  // If this is just a spacer, render icon component without name
+  // If this is just a spacer, render icon without name
   if (isSpacerOnly) {
     return (
-      <IconComponent
-        size={size}
+      <Icon
+        size={size as IconSizeType}
         color={color}
       />
     )
@@ -56,9 +49,9 @@ const ButtonIcon: React.FC<ButtonIconProps> = ({
 
   // Render the actual icon
   return (
-    <IconComponent
-      name={icon}
-      size={size}
+    <Icon
+      name={icon as IconNameType}
+      size={size as IconSizeType}
       color={color}
       rotation={iconRotation}
       strokeWidth={2}

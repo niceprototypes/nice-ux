@@ -13,7 +13,7 @@ import { getIconColor, shouldRenderIcon, mergeTheme } from "../utils"
  * - Multiple sizes (1-4)
  * - Various statuses (primary, secondary, etc.)
  * - States (disabled, success, error, etc.)
- * - Icon support with custom icon components
+ * - Icon support with nice-react-icon
  * - Full theming capabilities
  * - Accessibility support
  * - TypeScript support
@@ -21,12 +21,10 @@ import { getIconColor, shouldRenderIcon, mergeTheme } from "../utils"
  * @example
  * ```tsx
  * import Button from 'nice-react-button'
- * import MyIcon from './MyIcon'
  *
  * <Button
  *   status="primary"
  *   icon="arrow"
- *   iconComponent={MyIcon}
  *   onClick={() => console.log('clicked')}
  * >
  *   Click me
@@ -45,7 +43,6 @@ const Button: React.FC<ButtonProps> = ({
   fullWidth = false,
   children,
   className,
-  iconComponent,
   theme,
   type = "button",
   "aria-label": ariaLabel,
@@ -91,7 +88,6 @@ const Button: React.FC<ButtonProps> = ({
               iconPosition={iconPosition}
               color={iconColor}
               isSpacerOnly={!icon || iconPosition !== "left"}
-              iconComponent={iconComponent}
             />
           )}
 
@@ -113,7 +109,6 @@ const Button: React.FC<ButtonProps> = ({
               iconPosition={iconPosition}
               color={iconColor}
               isSpacerOnly={!icon || iconPosition !== "right"}
-              iconComponent={iconComponent}
             />
           )}
         </Flex>

@@ -1,66 +1,9 @@
 import React from 'react'
-import Button, { IconComponentProps } from '../src'
+import Button from '../src'
 
 /**
- * Example icon component that implements IconComponentProps
- * This demonstrates how to create a custom icon component
- */
-const ExampleIcon: React.FC<IconComponentProps> = ({
-  name,
-  size = 3,
-  color = 'currentColor',
-  rotation = 0,
-  strokeWidth = 2,
-  className
-}) => {
-  // Calculate icon size based on button size
-  const iconSize = size * 6
-
-  // Icon definitions - in a real app, these would come from an icon library
-  const getIconPath = (iconName?: string) => {
-    switch (iconName) {
-      case 'arrow':
-        return <path d="M5 12h14m-7-7l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
-      case 'check':
-        return <path d="M5 12l5 5L20 7" strokeLinecap="round" strokeLinejoin="round" />
-      case 'plus':
-        return <path d="M12 5v14m-7-7h14" strokeLinecap="round" strokeLinejoin="round" />
-      case 'x':
-        return <path d="M18 6L6 18M6 6l12 12" strokeLinecap="round" strokeLinejoin="round" />
-      case 'search':
-        return (
-          <>
-            <circle cx="11" cy="11" r="8" />
-            <path d="m21 21-4.35-4.35" strokeLinecap="round" strokeLinejoin="round" />
-          </>
-        )
-      default:
-        // Default spacer icon (invisible)
-        return null
-    }
-  }
-
-  return (
-    <svg
-      width={iconSize}
-      height={iconSize}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke={color}
-      strokeWidth={strokeWidth}
-      style={{
-        transform: `rotate(${rotation}deg)`,
-        transition: 'transform 0.2s ease'
-      }}
-      className={className}
-    >
-      {getIconPath(name)}
-    </svg>
-  )
-}
-
-/**
- * Example showing buttons with icons
+ * Example showing buttons with icons using nice-react-icon
+ * Icons are automatically rendered from the icon name string
  */
 const IconExample: React.FC = () => {
   const handleClick = () => {
@@ -78,7 +21,6 @@ const IconExample: React.FC = () => {
           <Button
             icon="arrow"
             iconPosition="right"
-            iconComponent={ExampleIcon}
             onClick={handleClick}
           >
             Next
@@ -87,7 +29,6 @@ const IconExample: React.FC = () => {
             icon="arrow"
             iconPosition="left"
             iconRotation={180}
-            iconComponent={ExampleIcon}
             onClick={handleClick}
           >
             Previous
@@ -95,7 +36,6 @@ const IconExample: React.FC = () => {
           <Button
             icon="check"
             iconPosition="left"
-            iconComponent={ExampleIcon}
             status="primary"
             onClick={handleClick}
           >
@@ -104,7 +44,6 @@ const IconExample: React.FC = () => {
           <Button
             icon="plus"
             iconPosition="left"
-            iconComponent={ExampleIcon}
             status="secondary"
             onClick={handleClick}
           >
@@ -119,20 +58,17 @@ const IconExample: React.FC = () => {
         <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
           <Button
             icon="search"
-            iconComponent={ExampleIcon}
             aria-label="Search"
             onClick={handleClick}
           />
           <Button
             icon="plus"
-            iconComponent={ExampleIcon}
             status="primary"
             aria-label="Add new item"
             onClick={handleClick}
           />
           <Button
             icon="x"
-            iconComponent={ExampleIcon}
             status="secondary"
             aria-label="Close"
             onClick={handleClick}
@@ -147,7 +83,6 @@ const IconExample: React.FC = () => {
           <Button
             icon="arrow"
             iconRotation={0}
-            iconComponent={ExampleIcon}
             onClick={handleClick}
           >
             Right
@@ -155,7 +90,6 @@ const IconExample: React.FC = () => {
           <Button
             icon="arrow"
             iconRotation={90}
-            iconComponent={ExampleIcon}
             onClick={handleClick}
           >
             Down
@@ -163,7 +97,6 @@ const IconExample: React.FC = () => {
           <Button
             icon="arrow"
             iconRotation={180}
-            iconComponent={ExampleIcon}
             onClick={handleClick}
           >
             Left
@@ -171,7 +104,6 @@ const IconExample: React.FC = () => {
           <Button
             icon="arrow"
             iconRotation={270}
-            iconComponent={ExampleIcon}
             onClick={handleClick}
           >
             Up
@@ -186,7 +118,6 @@ const IconExample: React.FC = () => {
           <Button
             size={1}
             icon="check"
-            iconComponent={ExampleIcon}
             onClick={handleClick}
           >
             Small
@@ -194,7 +125,6 @@ const IconExample: React.FC = () => {
           <Button
             size={2}
             icon="check"
-            iconComponent={ExampleIcon}
             onClick={handleClick}
           >
             Medium
@@ -202,7 +132,6 @@ const IconExample: React.FC = () => {
           <Button
             size={3}
             icon="check"
-            iconComponent={ExampleIcon}
             onClick={handleClick}
           >
             Large
@@ -210,7 +139,6 @@ const IconExample: React.FC = () => {
           <Button
             size={4}
             icon="check"
-            iconComponent={ExampleIcon}
             onClick={handleClick}
           >
             Extra Large
