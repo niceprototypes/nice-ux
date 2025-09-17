@@ -23,7 +23,24 @@ function _interopNamespaceDefault(e) {
 
 var React__namespace = /*#__PURE__*/_interopNamespaceDefault(React);
 
-const InnerFlexStyled = styled.div `
+const OuterStyled = styled.div `
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  ${({ $backgroundImage }) => {
+    if ($backgroundImage) {
+        return styled.css `
+        background-image: url(${$backgroundImage});
+        background-attachment: fixed;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      `;
+    }
+}}
+`;
+const InnerStyled = styled.div `
   margin: 0 auto;
   width: 100%;
   
@@ -39,9 +56,9 @@ const InnerFlexStyled = styled.div `
 // Default breakpoint values from helpshelf-ui
 const DEFAULT_BREAKPOINT_MD = 980;
 const DEFAULT_BREAKPOINT_LG = 1280;
-const Tile = ({ children, breakpointMd = DEFAULT_BREAKPOINT_MD, breakpointLg = DEFAULT_BREAKPOINT_LG, className, style }) => {
-    return (React__namespace.createElement(Flex, { direction: "column", grow: 1, className: className, style: style },
-        React__namespace.createElement(InnerFlexStyled, { as: Flex, direction: "column", grow: 1, "$breakpointMd": breakpointMd, "$breakpointLg": breakpointLg }, children)));
+const Tile = ({ children, breakpointMd = DEFAULT_BREAKPOINT_MD, breakpointLg = DEFAULT_BREAKPOINT_LG, className, style, backgroundImage }) => {
+    return (React__namespace.createElement(OuterStyled, { as: Flex, className: className, style: style, "$backgroundImage": backgroundImage },
+        React__namespace.createElement(InnerStyled, { as: Flex, direction: "column", grow: 1, "$breakpointMd": breakpointMd, "$breakpointLg": breakpointLg }, children)));
 };
 
 module.exports = Tile;

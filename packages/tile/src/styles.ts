@@ -1,6 +1,26 @@
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 
-export const InnerFlexStyled = styled.div<{ 
+export const OuterStyled = styled.div<{
+  $backgroundImage?: string
+}>`
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  ${({ $backgroundImage }) => {
+    if ($backgroundImage) {
+      return css`
+        background-image: url(${$backgroundImage});
+        background-attachment: fixed;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      `
+    }
+  }}
+`
+
+export const InnerStyled = styled.div<{
   $isComplete?: boolean
   $breakpointMd: number
   $breakpointLg: number

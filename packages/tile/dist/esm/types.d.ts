@@ -5,4 +5,5 @@ export interface TileProps {
     breakpointLg?: number;
     className?: string;
     style?: React.CSSProperties;
+    backgroundImage?: string;
 }

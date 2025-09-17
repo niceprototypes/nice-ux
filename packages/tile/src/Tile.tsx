@@ -1,7 +1,7 @@
 import * as React from "react"
 import Flex from "nice-react-flex"
 import { TileProps } from "./types"
-import { InnerFlexStyled } from "./styles"
+import { OuterStyled, InnerStyled } from "./styles"
 
 // Default breakpoint values from helpshelf-ui
 const DEFAULT_BREAKPOINT_MD = 980
@@ -12,11 +12,12 @@ const Tile: React.FC<TileProps> = ({
   breakpointMd = DEFAULT_BREAKPOINT_MD,
   breakpointLg = DEFAULT_BREAKPOINT_LG,
   className,
-  style
+  style,
+  backgroundImage
 }) => {
   return (
-    <Flex direction="column" grow={1} className={className} style={style}>
-      <InnerFlexStyled 
+    <OuterStyled as={Flex} className={className} style={style} $backgroundImage={backgroundImage}>
+      <InnerStyled
         as={Flex} 
         direction="column" 
         grow={1}
@@ -24,8 +25,8 @@ const Tile: React.FC<TileProps> = ({
         $breakpointLg={breakpointLg}
       >
         {children}
-      </InnerFlexStyled>
-    </Flex>
+      </InnerStyled>
+    </OuterStyled>
   )
 }
 
