@@ -39,6 +39,7 @@ export default {
     'react-dom',
     'styled-components',
     'nice-react-typography',
-    'nice-react-flex'
+    'nice-react-flex',
+    'nice-react-icon'
   ]
 };

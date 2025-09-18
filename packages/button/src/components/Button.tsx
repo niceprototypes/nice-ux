@@ -4,7 +4,7 @@ import Flex from "nice-react-flex"
 import ButtonIcon from "./ButtonIcon"
 import { ButtonOuter, ButtonInner, ButtonText } from "./Button.styles"
 import { ButtonProps } from "../types"
-import { getIconColor, shouldRenderIcon, mergeTheme } from "../utils"
+import { getIconColor, mergeTheme } from "../utils"
 
 /**
  * A flexible and customizable React button component with built-in theming support
@@ -48,11 +48,11 @@ const Button: React.FC<ButtonProps> = ({
   "aria-label": ariaLabel,
   "data-testid": testId,
 }) => {
-  // Merge user theme with defaults
-  const mergedTheme = mergeTheme(theme)
-
-  // Determine if button should be disabled
+  const hasChildren = !!children
+  const hasIcon = !!icon
   const isDisabled = disabled || state === "disabled"
+  const isLeft = iconPosition === "left"
+  const mergedTheme = mergeTheme(theme)
 
   // Get icon color based on button status and theme
   const iconColor = getIconColor(status, mergedTheme)
@@ -64,7 +64,7 @@ const Button: React.FC<ButtonProps> = ({
       $status={status}
       $disabled={isDisabled}
       $fullWidth={fullWidth}
-      $hasIcon={!!icon}
+      $hasIcon={hasIcon}
       $theme={mergedTheme}
       onClick={isDisabled ? undefined : onClick}
       disabled={isDisabled}
@@ -80,16 +80,14 @@ const Button: React.FC<ButtonProps> = ({
           grow={1}
         >
           {/* Left icon */}
-          {shouldRenderIcon(children, icon, iconPosition, "left") && (
-            <ButtonIcon
-              size={size}
-              icon={icon && iconPosition === "left" ? icon : undefined}
-              iconRotation={iconRotation}
-              iconPosition={iconPosition}
-              color={iconColor}
-              isSpacerOnly={!icon || iconPosition !== "left"}
-            />
-          )}
+          {(hasChildren || (hasIcon && isLeft)) && (
+              <ButtonIcon
+                size={size}
+                icon={isLeft ? icon : undefined}
+                iconRotation={iconRotation}
+                color={iconColor}
+              />
+            )}
 
           {/* Button text content */}
           {children && (
@@ -101,16 +99,14 @@ const Button: React.FC<ButtonProps> = ({
           )}
 
           {/* Right icon */}
-          {shouldRenderIcon(children, icon, iconPosition, "right") && (
-            <ButtonIcon
-              size={size}
-              icon={icon && iconPosition === "right" ? icon : undefined}
-              iconRotation={iconRotation}
-              iconPosition={iconPosition}
-              color={iconColor}
-              isSpacerOnly={!icon || iconPosition !== "right"}
-            />
-          )}
+          {(hasChildren || (hasIcon && !isLeft)) && (
+              <ButtonIcon
+                size={size}
+                icon={!isLeft ? icon : undefined}
+                iconRotation={iconRotation}
+                color={iconColor}
+              />
+            )}
         </Flex>
       </ButtonInner>
     </ButtonOuter>

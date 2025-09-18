@@ -97,20 +97,3 @@ export const getIconColor = (status?: ButtonStatusType, theme?: ButtonTheme): st
       return undefined
   }
 }
-
-/**
- * Determines if an icon should be rendered based on children and icon props
- * @param children - Button children (text content)
- * @param icon - Icon name
- * @param iconPosition - Icon position
- * @param position - Position to check ("left" | "right")
- * @returns True if icon should be rendered in the specified position
- */
-export const shouldRenderIcon = (
-  children: React.ReactNode,
-  icon?: string,
-  iconPosition?: "left" | "right",
-  position?: "left" | "right"
-): boolean => {
-  return (!!children && !!icon) || (!!icon && iconPosition === position)
-}

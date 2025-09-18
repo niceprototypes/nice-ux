@@ -12,8 +12,6 @@ interface ButtonIconProps {
   icon?: string
   /** Icon rotation in degrees */
   iconRotation?: number
-  /** Icon position relative to text */
-  iconPosition: "left" | "right"
   /** Icon color */
   color?: string
   /** Whether this is just a spacer (no actual icon) */
@@ -28,23 +26,16 @@ const ButtonIcon: React.FC<ButtonIconProps> = ({
   size,
   icon,
   iconRotation = 0,
-  iconPosition,
   color,
-  isSpacerOnly = false,
 }) => {
   // If this is just a spacer, render icon without name
-  if (isSpacerOnly) {
+  if (!icon) {
     return (
       <Icon
         size={size as IconSizeType}
         color={color}
       />
     )
-  }
-
-  // If no icon name provided, render nothing
-  if (!icon) {
-    return null
   }
 
   // Render the actual icon

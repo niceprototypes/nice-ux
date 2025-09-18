@@ -12,10 +12,6 @@
 
 // Main component export
 export { default } from "./components/Button"
-export { default as Button } from "./components/Button"
-
-// Component exports
-export { default as ButtonIcon } from "./components/ButtonIcon"
 
 // Type exports
 export type {
@@ -35,7 +31,6 @@ export {
   isValidButtonStatus,
   isValidButtonState,
   getIconColor,
-  shouldRenderIcon,
 } from "./utils"
 
 // Style exports for advanced customization
