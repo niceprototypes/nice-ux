@@ -123,8 +123,6 @@ export const ButtonOuter = styled.button.withConfig({
   border-radius: calc(${({ $size }) => getCssVariable("cell-height", $size)} / 2);
   cursor: ${({ $disabled }) => ($disabled ? "not-allowed" : "pointer")};
   text-align: center;
-  padding: ${({ $hasIcon, $size }) =>
-    $hasIcon ? "0" : `0 calc(${getCssVariable("cell-height", $size)} / 2)`};
   opacity: ${({ $disabled }) => ($disabled ? 0.5 : 1)};
 
   /* Smooth transitions */

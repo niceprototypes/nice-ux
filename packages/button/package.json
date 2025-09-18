@@ -1,6 +1,6 @@
 {
   "name": "nice-react-button",
-  "version": "2.1.4",
+  "version": "2.1.6",
   "description": "A flexible and customizable React button component with built-in theming support",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
