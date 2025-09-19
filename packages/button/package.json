@@ -52,8 +52,8 @@
     "nice-react-flex": ">=1.0.0",
     "nice-react-icon": "^1.0.0",
     "nice-react-typography": ">=1.0.0",
-    "react": ">=19.0.0",
-    "react-dom": ">=19.0.0",
+    "react": ">=19.1.8",
+    "react-dom": ">=19.1.8",
     "styled-components": ">=6.0.0"
   },
   "peerDependenciesMeta": {

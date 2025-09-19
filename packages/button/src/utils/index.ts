@@ -29,7 +29,7 @@ export const defaultButtonTheme: ButtonTheme = {
     // Border colors and width
     borderColor: "var(--border-color-default)",
     borderWidth: "var(--border-width-1)",
-  }
+  },
 }
 
 /**
@@ -85,7 +85,10 @@ export const isValidButtonState = (state: any): state is ButtonStateType => {
  * @param theme - Theme configuration
  * @returns Color string for the icon
  */
-export const getIconColor = (status?: ButtonStatusType, theme?: ButtonTheme): string | undefined => {
+export const getIconColor = (
+  status?: ButtonStatusType,
+  theme?: ButtonTheme
+): string | undefined => {
   const mergedTheme = mergeTheme(theme)
 
   switch (status) {
