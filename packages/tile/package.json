@@ -1,6 +1,6 @@
 {
   "name": "nice-react-tile",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "type": "module",
   "description": "A responsive Tile component for React with styled-components",
   "main": "dist/index.js",
@@ -28,8 +28,8 @@
   "author": "",
   "license": "MIT",
   "peerDependencies": {
-    "react": ">=19.1.8",
-    "react-dom": ">=19.1.8",
+    "react": ">=19.1.1",
+    "react-dom": ">=19.1.1",
     "styled-components": ">=6.0.0"
   },
   "devDependencies": {
@@ -44,7 +44,7 @@
     "eslint-plugin-react": "^7.32.2",
     "jest": "^29.5.0",
     "nice-react-flex": "^1.0.0",
-    "react": "^19.1.8",
+    "react": "^19.1.1",
     "react-is": "^19.1.1",
     "rollup": "^4.9.1",
     "rollup-plugin-dts": "^6.1.0",
@@ -60,5 +60,5 @@
   "bugs": {
     "url": "https://github.com/niceprototypes/nice-react-tile/issues"
   },
-  "homepage": "https://github.com/niceprototypes/nice-react-tile#readme",
+  "homepage": "https://github.com/niceprototypes/nice-react-tile#readme"
 }
