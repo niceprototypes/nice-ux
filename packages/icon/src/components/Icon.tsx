@@ -50,12 +50,12 @@ const Icon: React.FC<IconProps> = ({
     if (color) return color // Use explicitly provided color
     if (status) {
       // Use status-specific icon stroke colors for primary status
-      if (status === "primary") return "var(--icon-stroke-color-primary, currentColor)"
+      if (status === "primary") return "var(--icon-stroke-color-primary)"
       // For other statuses, use the content color pattern
-      return `var(--content-color-${status}, currentColor)`
+      return `var(--content-color-${status})`
     }
     // Use primary icon color when active, default when inactive
-    return `var(--icon-stroke-color-${isActive ? "primary" : "default"}, currentColor)`
+    return `var(--icon-stroke-color-${isActive ? "primary" : "default"})`
   }
 
   const statusColor = getIconColor()
