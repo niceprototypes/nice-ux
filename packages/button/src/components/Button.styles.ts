@@ -26,7 +26,7 @@ export const ButtonOuter = styled.button.withConfig({
   $fullWidth?: boolean
   $hasIcon?: boolean
   $theme?: ButtonTheme
-  $borderRadius?: number
+  $borderRadius?: string
 }>`
   /* Reset browser button styles */
   background: none;
