@@ -1,6 +1,6 @@
 {
   "name": "nice-react-button",
-  "version": "2.1.6",
+  "version": "2.1.7",
   "description": "A flexible and customizable React button component with built-in theming support",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -52,8 +52,8 @@
     "nice-react-flex": ">=1.0.0",
     "nice-react-icon": "^1.0.0",
     "nice-react-typography": ">=1.0.0",
-    "react": ">=19.1.8",
-    "react-dom": ">=19.1.8",
+    "react": ">=19.1.1",
+    "react-dom": ">=19.1.1",
     "styled-components": ">=6.0.0"
   },
   "peerDependenciesMeta": {
