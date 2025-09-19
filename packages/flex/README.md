@@ -15,13 +15,13 @@ A highly flexible and responsive flexbox container component for React with styl
 ## Installation
 
 ```bash
-npm install @niceprototypes/nice-react-flex
+npm install nice-react-flex
 ```
 
 ## Basic Usage
 
 ```jsx
-import Flex from '@niceprototypes/nice-react-flex'
+import Flex from 'nice-react-flex'
 
 // Simple horizontal layout
 <Flex direction="row" gap={2} alignItems="center">
@@ -46,15 +46,15 @@ import Flex from '@niceprototypes/nice-react-flex'
 
 ### Layout Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `direction` | `"row" \| "column"` or responsive object | `undefined` | Flex direction (main axis) |
-| `alignItems` | Alignment value or responsive object | `undefined` | Cross-axis alignment |
-| `justifyContent` | Justification value or responsive object | `undefined` | Main-axis alignment |
-| `gap` | `GapSize (0-6)` or responsive object | `undefined` | Space between flex items |
-| `grow` | `number` or responsive object | `undefined` | Flex grow value |
-| `spacing` | Spacing configuration | `undefined` | Padding/margin spacing |
-| `type` | `"padding" \| "margin"` | `"padding"` | How spacing is applied |
+| Prop | Type | Default      | Description |
+|------|------|--------------|-------------|
+| `direction` | `"row" \| "column"` or responsive object | `row`        | Flex direction (main axis) |
+| `alignItems` | Alignment value or responsive object | `flex-start` | Cross-axis alignment |
+| `justifyContent` | Justification value or responsive object | `flex-start` | Main-axis alignment |
+| `gap` | `GapSize (0-6)` or responsive object | `0`          | Space between flex items |
+| `grow` | `number` or responsive object | `0`          | Flex grow value |
+| `spacing` | Spacing configuration | `0`          | Padding/margin spacing |
+| `type` | `"padding" \| "margin"` | `"padding"`  | How spacing is applied |
 
 ### Standard Props
 
@@ -269,7 +269,7 @@ The component is built with a clean, modular architecture:
 Full TypeScript support with comprehensive type definitions:
 
 ```tsx
-import Flex, { FlexProps, GapSize, SpacingDefinition } from '@niceprototypes/nice-react-flex'
+import Flex, { FlexProps, GapSize, SpacingDefinition } from 'nice-react-flex'
 
 const MyComponent: React.FC = () => {
   const spacing: SpacingDefinition = { horizontal: 2, vertical: 1 }
