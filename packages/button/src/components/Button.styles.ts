@@ -3,13 +3,12 @@ import { ButtonProps, ButtonTheme } from "../types"
 import { getCssVariable } from "../utils"
 import { getStateStyles, getStatusStyles } from "../services/buttonHelpers"
 
-
 /**
  * Inner wrapper for button content
  */
 export const ButtonInner = styled.div`
-  margin: calc(${props => props.theme?.cssVariables?.borderWidth || "var(--border-width-1)"} * -1)
-          calc(${props => props.theme?.cssVariables?.borderWidth || "var(--border-width-1)"} * -1) 0;
+  margin: calc(${(props) => props.theme?.cssVariables?.borderWidth || "var(--border-width-1)"} * -1)
+    calc(${(props) => props.theme?.cssVariables?.borderWidth || "var(--border-width-1)"} * -1) 0;
 `
 
 /**
@@ -44,11 +43,11 @@ export const ButtonOuter = styled.button.withConfig({
   height: ${({ $size }) => getCssVariable("cell-height", $size)};
   font-weight: 500;
   border: ${({ $theme }) => $theme?.cssVariables?.borderWidth || "var(--border-width-1)"} solid
-         ${({ $theme }) => $theme?.cssVariables?.borderColor || "var(--border-color-default)"};
+    ${({ $theme }) => $theme?.cssVariables?.borderColor || "var(--border-color-default)"};
   border-radius: calc(${({ $size }) => getCssVariable("cell-height", $size)} / 2);
   cursor: ${({ $disabled }) => ($disabled ? "not-allowed" : "pointer")};
   text-align: center;
-  opacity: ${({ $disabled }) => ($disabled ? 0.5 : 1)};
+  opacity: 0.2;
 
   /* Smooth transitions */
   transition: all 0.15s ease-in-out;
