@@ -133,4 +133,10 @@ export interface ButtonProps {
    * Test ID for testing
    */
   "data-testid"?: string
+
+  /**
+   * Custom border radius in pixels for all corners
+   * If not provided, defaults to pill shape (50% of button height)
+   */
+  borderRadius?: number
 }

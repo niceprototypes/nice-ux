@@ -1,7 +1,9 @@
 import styled from "styled-components"
 import { ButtonProps, ButtonTheme } from "../types"
 import { getCssVariable } from "../utils"
-import { getStateStyles, getStatusStyles } from "../services/buttonHelpers"
+import getStateStyles from "../services/getStateStyles"
+import getStatusStyles from "../services/getStatusStyles"
+import getBorderRadius from "../services/getBorderRadius"
 
 /**
  * Inner wrapper for button content
@@ -24,6 +26,7 @@ export const ButtonOuter = styled.button.withConfig({
   $fullWidth?: boolean
   $hasIcon?: boolean
   $theme?: ButtonTheme
+  $borderRadius?: number
 }>`
   /* Reset browser button styles */
   background: none;
@@ -44,10 +47,10 @@ export const ButtonOuter = styled.button.withConfig({
   font-weight: 500;
   border: ${({ $theme }) => $theme?.cssVariables?.borderWidth || "var(--border-width-1)"} solid
     ${({ $theme }) => $theme?.cssVariables?.borderColor || "var(--border-color-default)"};
-  border-radius: calc(${({ $size }) => getCssVariable("cell-height", $size)} / 2);
+  border-radius: ${({ $size, $borderRadius }) => getBorderRadius($size, $borderRadius)};
   cursor: ${({ $disabled }) => ($disabled ? "not-allowed" : "pointer")};
   text-align: center;
-  opacity: 0.2;
+  opacity: ${({ $disabled }) => ($disabled ? 0.5 : 1)};
 
   /* Smooth transitions */
   transition: all 0.15s ease-in-out;

@@ -47,6 +47,7 @@ const Button: React.FC<ButtonProps> = ({
   type = "button",
   "aria-label": ariaLabel,
   "data-testid": testId,
+  borderRadius,
 }) => {
   const hasChildren = !!children
   const hasIcon = !!icon
@@ -66,6 +67,7 @@ const Button: React.FC<ButtonProps> = ({
       $fullWidth={fullWidth}
       $hasIcon={hasIcon}
       $theme={mergedTheme}
+      $borderRadius={borderRadius}
       onClick={isDisabled ? undefined : onClick}
       disabled={isDisabled}
       className={className}
@@ -74,20 +76,16 @@ const Button: React.FC<ButtonProps> = ({
       data-testid={testId}
     >
       <ButtonInner theme={mergedTheme}>
-        <Flex
-          justifyContent={{ sm: "center" }}
-          alignItems={{ sm: "center" }}
-          grow={1}
-        >
+        <Flex justifyContent={{ sm: "center" }} alignItems={{ sm: "center" }} grow={1}>
           {/* Left icon */}
           {(hasChildren || (hasIcon && isLeft)) && (
-              <ButtonIcon
-                size={size}
-                icon={isLeft ? icon : undefined}
-                iconRotation={iconRotation}
-                color={iconColor}
-              />
-            )}
+            <ButtonIcon
+              size={size}
+              icon={isLeft ? icon : undefined}
+              iconRotation={iconRotation}
+              color={iconColor}
+            />
+          )}
 
           {/* Button text content */}
           {children && (
@@ -100,13 +98,13 @@ const Button: React.FC<ButtonProps> = ({
 
           {/* Right icon */}
           {(hasChildren || (hasIcon && !isLeft)) && (
-              <ButtonIcon
-                size={size}
-                icon={!isLeft ? icon : undefined}
-                iconRotation={iconRotation}
-                color={iconColor}
-              />
-            )}
+            <ButtonIcon
+              size={size}
+              icon={!isLeft ? icon : undefined}
+              iconRotation={iconRotation}
+              color={iconColor}
+            />
+          )}
         </Flex>
       </ButtonInner>
     </ButtonOuter>

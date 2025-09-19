@@ -3,45 +3,32 @@ import { ButtonProps, ButtonTheme } from "../types"
 import { mergeTheme } from "../utils"
 
 /**
- * Generates styles for button state
+ * Generates CSS styles for different button status variants.
+ *
+ * This function handles the visual styling for various button variants that define
+ * the button's role and prominence in the UI hierarchy. Each status represents
+ * a different semantic meaning and visual weight, from primary call-to-action
+ * buttons to subtle muted buttons.
+ *
+ * Status variants include:
+ * - primary: High emphasis, inverse colors for call-to-action
+ * - secondary: Medium emphasis, standard colors with borders
+ * - muted: Low emphasis, minimal styling for subtle actions
+ * - highlighted: Special emphasis with highlight colors
+ * - default: Standard button appearance
+ *
+ * @param status - The button variant/status (primary, secondary, muted, highlighted, default)
+ * @param theme - Optional theme configuration to override default styling
+ * @returns CSS template literal with status-specific styles
+ *
+ * @example
+ * ```tsx
+ * const MyButton = styled.button`
+ *   ${({ status, theme }) => getStatusStyles(status, theme)}
+ * `
+ * ```
  */
-export const getStateStyles = (state?: ButtonProps["state"], theme?: ButtonTheme) => {
-  const mergedTheme = mergeTheme(theme)
-
-  switch (state) {
-    case "disabled":
-      return css`
-        color: var(--content-color-3);
-        background-color: transparent;
-        border-color: ${mergedTheme.cssVariables?.borderColor};
-        cursor: not-allowed;
-        pointer-events: none;
-      `
-    case "success":
-      return css`
-        border-color: ${mergedTheme.colors?.success || "var(--color-success)"};
-      `
-    case "error":
-      return css`
-        border-color: ${mergedTheme.colors?.error || "var(--color-error)"};
-      `
-    case "warning":
-      return css`
-        border-color: ${mergedTheme.colors?.warning || "var(--color-warning)"};
-      `
-    case "active":
-      return css`
-        opacity: 0.8;
-      `
-    default:
-      return css``
-  }
-}
-
-/**
- * Generates styles for button status/variant
- */
-export const getStatusStyles = (status?: ButtonProps["status"], theme?: ButtonTheme) => {
+const getStatusStyles = (status?: ButtonProps["status"], theme?: ButtonTheme) => {
   const mergedTheme = mergeTheme(theme)
 
   switch (status) {
@@ -78,3 +65,5 @@ export const getStatusStyles = (status?: ButtonProps["status"], theme?: ButtonTh
       `
   }
 }
+
+export default getStatusStyles
