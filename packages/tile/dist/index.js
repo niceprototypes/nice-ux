@@ -28,6 +28,14 @@ const OuterStyled = styled.div `
   flex-direction: column;
   flex-grow: 1;
 
+  ${({ $backgroundColor }) => {
+    if ($backgroundColor) {
+        return styled.css `
+        background-color: ${$backgroundColor};
+      `;
+    }
+}}
+
   ${({ $backgroundImage }) => {
     if ($backgroundImage) {
         return styled.css `
@@ -56,8 +64,8 @@ const InnerStyled = styled.div `
 // Default breakpoint values from helpshelf-ui
 const DEFAULT_BREAKPOINT_MD = 980;
 const DEFAULT_BREAKPOINT_LG = 1280;
-const Tile = ({ children, breakpointMd = DEFAULT_BREAKPOINT_MD, breakpointLg = DEFAULT_BREAKPOINT_LG, className, style, backgroundImage }) => {
-    return (React__namespace.createElement(OuterStyled, { as: Flex, className: className, style: style, "$backgroundImage": backgroundImage },
+const Tile = ({ children, breakpointMd = DEFAULT_BREAKPOINT_MD, breakpointLg = DEFAULT_BREAKPOINT_LG, className, style, backgroundImage, backgroundColor }) => {
+    return (React__namespace.createElement(OuterStyled, { as: Flex, className: className, style: style, "$backgroundImage": backgroundImage, "$backgroundColor": backgroundColor },
         React__namespace.createElement(InnerStyled, { as: Flex, direction: "column", grow: 1, "$breakpointMd": breakpointMd, "$breakpointLg": breakpointLg }, children)));
 };
 

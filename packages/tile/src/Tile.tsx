@@ -7,19 +7,26 @@ import { OuterStyled, InnerStyled } from "./styles"
 const DEFAULT_BREAKPOINT_MD = 980
 const DEFAULT_BREAKPOINT_LG = 1280
 
-const Tile: React.FC<TileProps> = ({ 
-  children, 
+const Tile: React.FC<TileProps> = ({
+  children,
   breakpointMd = DEFAULT_BREAKPOINT_MD,
   breakpointLg = DEFAULT_BREAKPOINT_LG,
   className,
   style,
-  backgroundImage
+  backgroundImage,
+  backgroundColor
 }) => {
   return (
-    <OuterStyled as={Flex} className={className} style={style} $backgroundImage={backgroundImage}>
+    <OuterStyled
+      as={Flex}
+      className={className}
+      style={style}
+      $backgroundImage={backgroundImage}
+      $backgroundColor={backgroundColor}
+    >
       <InnerStyled
-        as={Flex} 
-        direction="column" 
+        as={Flex}
+        direction="column"
         grow={1}
         $breakpointMd={breakpointMd}
         $breakpointLg={breakpointLg}

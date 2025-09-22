@@ -7,4 +7,5 @@ export interface TileProps {
   className?: string
   style?: React.CSSProperties
   backgroundImage?: string
+  backgroundColor?: string
 }
