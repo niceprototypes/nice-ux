@@ -6,11 +6,15 @@
   "style": "index.css",
   "files": [
     "index.css",
-    "variables.css",
-    "README.md"
+    "variables.css"
   ],
   "scripts": {
-    "test": "echo \"No tests configured\""
+    "test": "echo \"No tests configured\"",
+    "prepublishOnly": "npm test"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "keywords": [
     "css",
@@ -25,10 +29,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yourusername/nice-css-variables.git"
+    "url": "git+https://github.com/niceprototypes/nice-css-variables.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/nice-css-variables/issues"
+    "url": "https://github.com/niceprototypes/nice-css-variables/issues"
   },
-  "homepage": "https://github.com/yourusername/nice-css-variables#readme"
+  "homepage": "https://github.com/niceprototypes/nice-css-variables#readme"
 }
