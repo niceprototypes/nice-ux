@@ -1,0 +1,34 @@
+{
+  "name": "nice-css-variables",
+  "version": "1.0.0",
+  "description": "A collection of CSS custom properties (variables) for consistent design tokens",
+  "main": "index.css",
+  "style": "index.css",
+  "files": [
+    "index.css",
+    "variables.css",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "echo \"No tests configured\""
+  },
+  "keywords": [
+    "css",
+    "css-variables",
+    "custom-properties",
+    "design-tokens",
+    "design-system",
+    "theming",
+    "nice"
+  ],
+  "author": "Mohammed Ibrahim",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/nice-css-variables.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/nice-css-variables/issues"
+  },
+  "homepage": "https://github.com/yourusername/nice-css-variables#readme"
+}
