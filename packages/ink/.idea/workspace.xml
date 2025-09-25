@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="9c09e921-d0d2-45f8-bee6-dd2296b0583c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Typography.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Typography.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +29,9 @@
     "git-widget-placeholder": "main",
     "last_opened_file_path": "/Users/mohammedibrahim/Code/nice-react-typography",
     "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "preferences.lookFeel",
     "ts.external.directory.path": "/Users/mohammedibrahim/Code/nice-react-typography/node_modules/typescript/lib",
@@ -53,7 +56,7 @@
       <workItem from="1757911330887" duration="35000" />
       <workItem from="1758685584427" duration="68000" />
       <workItem from="1758686748084" duration="67000" />
-      <workItem from="1758763569065" duration="105000" />
+      <workItem from="1758763569065" duration="827000" />
     </task>
     <servers />
   </component>
