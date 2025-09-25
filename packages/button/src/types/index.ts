@@ -132,4 +132,10 @@ export interface ButtonProps {
    * config={{ light: { primary: { default: { fill: "#666" } } } }}
    */
   config?: ThemeConfig
+
+  /**
+   * Whether to apply antialiased font rendering to the button text
+   * @default undefined
+   */
+  antialiased?: boolean
 }

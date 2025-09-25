@@ -53,6 +53,7 @@ const Button: React.FC<ButtonProps> = ({
   "data-testid": testId,
   borderRadius,
   config,
+  antialiased = false,
 }) => {
   const hasChildren = !!children
   const hasIcon = !!icon
@@ -96,7 +97,7 @@ const Button: React.FC<ButtonProps> = ({
           {/* Button text content */}
           {children && (
             <ButtonText>
-              <Typography size={size} as="span" color={themeStyles.color}>
+              <Typography size={size} as="span" color={themeStyles.color} antialiased={antialiased}>
                 {children}
               </Typography>
             </ButtonText>

@@ -92,7 +92,7 @@ export const defaultThemes: ButtonThemes = {
     secondary: {
       default: {
         backgroundColor: "transparent",
-        borderColor: "#444",
+        borderColor: "rgba(255,255,255,0.25)",
         color: "#fff",
       },
       disabled: {
