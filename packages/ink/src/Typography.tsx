@@ -6,7 +6,7 @@ import getEffectiveLineHeight from "./services/getEffectiveLineHeight"
 
 const Typography: React.FC<TypographyProps> = ({
   align,
-  antialiased = true,
+  antialiased = false,
   legibilityOptimized = false,
   as = "p",
   children,
@@ -18,9 +18,6 @@ const Typography: React.FC<TypographyProps> = ({
   status,
   weight,
 }) => {
-  // Determine color based on status if provided
-  const statusColor = status ? `var(--content-color-${status})` : color
-
   return (
     <StyledTypography
       $align={align}
@@ -28,7 +25,7 @@ const Typography: React.FC<TypographyProps> = ({
       $legibilityOptimized={legibilityOptimized}
       $as={as}
       $code={code}
-      $color={statusColor}
+      $color={status ? `var(--content-color-${status})` : color}
       $lineHeight={getEffectiveLineHeight(lineHeight, as)}
       $size={size}
       $weight={getEffectiveFontWeight(weight, as)}
