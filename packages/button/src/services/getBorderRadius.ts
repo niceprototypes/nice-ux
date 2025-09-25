@@ -1,4 +1,4 @@
-import { getCssVariable } from "../utils"
+import getCssVariable from "./getCssVariable"
 
 /**
  * Calculates the border radius for a button based on size and custom radius value.

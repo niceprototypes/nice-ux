@@ -1,4 +1,5 @@
 import * as React from "react"
+import { ThemeConfig } from "./themes"
 
 /**
  * Defines the size of the button component
@@ -20,30 +21,14 @@ export type ButtonStatusType = "primary" | "secondary" | "default" | "muted" | "
  * Interactive state of the button
  * Affects styling and behavior
  */
-export type ButtonStateType = "success" | "error" | "warning" | "active" | "default" | "disabled"
+export type ButtonStateType = "default" | "disabled" | "attention" | "success" | "warning"
 
 /**
- * Theme configuration for customizing button appearance
+ * Theme mode for light/dark appearance
  */
-export interface ButtonTheme {
-  /** CSS variable overrides for colors */
-  colors?: {
-    primary?: string
-    secondary?: string
-    success?: string
-    error?: string
-    warning?: string
-  }
-  /** CSS variable names for theming */
-  cssVariables?: {
-    contentColor?: string
-    contentColorInverse?: string
-    backgroundColor?: string
-    backgroundColorInverse?: string
-    borderColor?: string
-    borderWidth?: string
-  }
-}
+export type ButtonModeType = "light" | "dark"
+
+export * from "./themes"
 
 
 /**
@@ -61,6 +46,12 @@ export interface ButtonProps {
    * @default "default"
    */
   state?: ButtonStateType
+
+  /**
+   * Theme mode for light/dark appearance
+   * @default "light"
+   */
+  mode?: ButtonModeType
 
   /**
    * Icon name from nice-react-icon to display
@@ -112,12 +103,6 @@ export interface ButtonProps {
    */
   className?: string
 
-
-  /**
-   * Theme configuration for customizing appearance
-   */
-  theme?: ButtonTheme
-
   /**
    * HTML button type
    * @default "button"
@@ -139,4 +124,12 @@ export interface ButtonProps {
    * If not provided, defaults to pill shape (50% of button height)
    */
   borderRadius?: string
+
+  /**
+   * Theme configuration overrides
+   * Allows partial overrides of the default theme values
+   * @example
+   * config={{ light: { primary: { default: { fill: "#666" } } } }}
+   */
+  config?: ThemeConfig
 }

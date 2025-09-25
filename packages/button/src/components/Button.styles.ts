@@ -1,16 +1,14 @@
 import styled from "styled-components"
-import { ButtonProps, ButtonTheme } from "../types"
-import { getCssVariable } from "../utils"
-import getStateStyles from "../services/getStateStyles"
-import getStatusStyles from "../services/getStatusStyles"
+import getCssVariable from "../services/getCssVariable"
 import getBorderRadius from "../services/getBorderRadius"
+import { ThemeDesignValues } from "../types/themes"
 
 /**
  * Inner wrapper for button content
  */
-export const ButtonInner = styled.div`
-  margin: calc(${(props) => props.theme?.cssVariables?.borderWidth || "var(--border-width-1)"} * -1)
-    calc(${(props) => props.theme?.cssVariables?.borderWidth || "var(--border-width-1)"} * -1) 0;
+export const ButtonInner = styled.div<{ $borderWidth?: string }>`
+  margin: calc(${(props) => props.$borderWidth || "1px"} * -1)
+    calc(${(props) => props.$borderWidth || "1px"} * -1) 0;
 `
 
 /**
@@ -20,20 +18,16 @@ export const ButtonOuter = styled.button.withConfig({
   shouldForwardProp: (prop) => !prop.startsWith("$"),
 })<{
   $size: number
-  $state?: ButtonProps["state"]
-  $status?: ButtonProps["status"]
+  $themeStyles: ThemeDesignValues
   $disabled?: boolean
   $fullWidth?: boolean
   $hasIcon?: boolean
-  $theme?: ButtonTheme
   $borderRadius?: string
 }>`
   /* Reset browser button styles */
   background: none;
-  border: none;
   padding: 0;
   margin: 0;
-  cursor: pointer;
   outline: none;
   text-decoration: none;
   font-family: inherit;
@@ -45,12 +39,13 @@ export const ButtonOuter = styled.button.withConfig({
   width: ${({ $fullWidth }) => ($fullWidth ? "100%" : "auto")};
   height: ${({ $size }) => getCssVariable("cell-height", $size)};
   font-weight: 500;
-  border: ${({ $theme }) => $theme?.cssVariables?.borderWidth || "var(--border-width-1)"} solid
-    ${({ $theme }) => $theme?.cssVariables?.borderColor || "var(--border-color-default)"};
+  background-color: ${({ $themeStyles }) => $themeStyles.backgroundColor};
+  border: ${({ $themeStyles }) => $themeStyles.borderWidth || "1px"} solid
+    ${({ $themeStyles }) => $themeStyles.borderColor};
+  color: ${({ $themeStyles }) => $themeStyles.color};
   border-radius: ${({ $size, $borderRadius }) => getBorderRadius($size, $borderRadius)};
   cursor: ${({ $disabled }) => ($disabled ? "not-allowed" : "pointer")};
   text-align: center;
-  opacity: ${({ $disabled }) => ($disabled ? 0.5 : 1)};
 
   /* Smooth transitions */
   transition: all 0.15s ease-in-out;
@@ -71,12 +66,6 @@ export const ButtonOuter = styled.button.withConfig({
   &:active:not(:disabled) {
     transform: translateY(0);
   }
-
-  /* Apply status styles */
-  ${({ $status, $theme }) => getStatusStyles($status, $theme)}
-
-  /* Apply state styles */
-  ${({ $state, $theme }) => getStateStyles($state, $theme)}
 `
 
 /**

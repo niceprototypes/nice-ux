@@ -6,12 +6,15 @@
  * and accessibility features. Designed to work seamlessly with the nice-react ecosystem.
  *
  * @author Nice Prototypes
- * @version 1.1.0
+ * @version 2.0.0
  * @license MIT
  */
 
 // Main component export
 export { default } from "./components/Button"
+
+// Global styles export
+export { default as GlobalButtonStyles } from "./styles/GlobalButtonStyles"
 
 // Type exports
 export type {
@@ -19,28 +22,28 @@ export type {
   ButtonSizeType,
   ButtonStatusType,
   ButtonStateType,
-  ButtonTheme,
+  ButtonModeType,
+  ButtonThemes,
+  ThemeDesignValues,
+  ThemeConfig,
+  StateTheme,
+  StatusTheme,
+  ModeTheme,
 } from "./types"
 
-// Utility exports
-export {
-  getCssVariable,
-  defaultButtonTheme,
-  mergeTheme,
-  isValidButtonSize,
-  isValidButtonStatus,
-  isValidButtonState,
-  getIconColor,
-} from "./utils"
+// Service exports
+export { default as getCssVariable } from "./services/getCssVariable"
+export { default as isValidButtonSize } from "./services/isValidButtonSize"
+export { default as isValidButtonStatus } from "./services/isValidButtonStatus"
+export { default as isValidButtonState } from "./services/isValidButtonState"
 
 // Style exports for advanced customization
-export {
-  ButtonOuter,
-  ButtonInner,
-  ButtonText,
-} from "./components/Button.styles"
+export { ButtonOuter, ButtonInner, ButtonText } from "./components/Button.styles"
 
 // Helper function exports
-export { default as getStateStyles } from "./services/getStateStyles"
-export { default as getStatusStyles } from "./services/getStatusStyles"
 export { default as getBorderRadius } from "./services/getBorderRadius"
+export { default as getThemeStyles } from "./services/getThemeStyles"
+export { default as mergeThemeConfig } from "./services/mergeThemeConfig"
+
+// Constants exports
+export { defaultThemes } from "./constants/defaultThemes"

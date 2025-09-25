@@ -4,15 +4,19 @@ import Flex from "nice-react-flex"
 import ButtonIcon from "./ButtonIcon"
 import { ButtonOuter, ButtonInner, ButtonText } from "./Button.styles"
 import { ButtonProps } from "../types"
-import { getIconColor, mergeTheme } from "../utils"
+import getThemeStyles from "../services/getThemeStyles"
+import mergeThemeConfig from "../services/mergeThemeConfig"
+import { defaultThemes } from "../constants/defaultThemes"
 
 /**
+ * Button component v2.0.0
  * A flexible and customizable React button component with built-in theming support
  *
  * Features:
  * - Multiple sizes (1-4)
+ * - Light/dark mode support
  * - Various statuses (primary, secondary, etc.)
- * - States (disabled, success, error, etc.)
+ * - States (default, disabled, attention, success, warning)
  * - Icon support with nice-react-icon
  * - Full theming capabilities
  * - Accessibility support
@@ -34,6 +38,7 @@ import { getIconColor, mergeTheme } from "../utils"
 const Button: React.FC<ButtonProps> = ({
   size = 3,
   state = "default",
+  mode = "light",
   icon,
   iconRotation = 0,
   iconPosition = "right",
@@ -43,30 +48,31 @@ const Button: React.FC<ButtonProps> = ({
   fullWidth = false,
   children,
   className,
-  theme,
   type = "button",
   "aria-label": ariaLabel,
   "data-testid": testId,
   borderRadius,
+  config,
 }) => {
   const hasChildren = !!children
   const hasIcon = !!icon
   const isDisabled = disabled || state === "disabled"
   const isLeft = iconPosition === "left"
-  const mergedTheme = mergeTheme(theme)
 
-  // Get icon color based on button status and theme
-  const iconColor = getIconColor(status, mergedTheme)
+  // Merge config with default themes
+  const mergedThemes = mergeThemeConfig(defaultThemes, config)
+
+  // Get the theme styles for the current mode/status/state combination
+  const actualState = isDisabled ? "disabled" : state
+  const themeStyles = getThemeStyles(mergedThemes, mode, status, actualState)
 
   return (
     <ButtonOuter
       $size={size}
-      $state={state}
-      $status={status}
+      $themeStyles={themeStyles}
       $disabled={isDisabled}
       $fullWidth={fullWidth}
       $hasIcon={hasIcon}
-      $theme={mergedTheme}
       $borderRadius={borderRadius}
       onClick={isDisabled ? undefined : onClick}
       disabled={isDisabled}
@@ -75,7 +81,7 @@ const Button: React.FC<ButtonProps> = ({
       aria-label={ariaLabel}
       data-testid={testId}
     >
-      <ButtonInner theme={mergedTheme}>
+      <ButtonInner $borderWidth={themeStyles.borderWidth || "1px"}>
         <Flex justifyContent={{ sm: "center" }} alignItems={{ sm: "center" }} grow={1}>
           {/* Left icon */}
           {(hasChildren || (hasIcon && isLeft)) && (
@@ -83,14 +89,14 @@ const Button: React.FC<ButtonProps> = ({
               size={size}
               icon={isLeft ? icon : undefined}
               iconRotation={iconRotation}
-              color={iconColor}
+              color={themeStyles.color}
             />
           )}
 
           {/* Button text content */}
           {children && (
             <ButtonText>
-              <Typography size={size} as="span">
+              <Typography size={size} as="span" color={themeStyles.color}>
                 {children}
               </Typography>
             </ButtonText>
@@ -102,7 +108,7 @@ const Button: React.FC<ButtonProps> = ({
               size={size}
               icon={!isLeft ? icon : undefined}
               iconRotation={iconRotation}
-              color={iconColor}
+              color={themeStyles.color}
             />
           )}
         </Flex>
