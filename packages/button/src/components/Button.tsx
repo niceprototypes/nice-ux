@@ -56,6 +56,7 @@ const Button: React.FC<ButtonProps> = ({
   antialiased = false,
   backgroundColor,
   backgroundImage,
+  borderColor,
 }) => {
   const hasChildren = !!children
   const hasIcon = !!icon
@@ -79,6 +80,7 @@ const Button: React.FC<ButtonProps> = ({
       $borderRadius={borderRadius}
       $backgroundColor={backgroundColor}
       $backgroundImage={backgroundImage}
+      $borderColor={borderColor}
       onClick={isDisabled ? undefined : onClick}
       disabled={isDisabled}
       className={className}

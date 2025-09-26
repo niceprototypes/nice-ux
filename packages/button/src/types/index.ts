@@ -30,7 +30,6 @@ export type ButtonModeType = "light" | "dark"
 
 export * from "./themes"
 
-
 /**
  * Main props interface for the Button component
  */
@@ -150,4 +149,9 @@ export interface ButtonProps {
    * Works alongside backgroundColor if both are provided
    */
   backgroundImage?: string
+
+  /**
+   * Custom border color that overrides theme styles
+   */
+  borderColor?: string
 }

@@ -22,20 +22,10 @@ interface ButtonIconProps {
  * ButtonIcon component handles icon rendering within buttons
  * Uses nice-react-icon for consistent icon rendering
  */
-const ButtonIcon: React.FC<ButtonIconProps> = ({
-  size,
-  icon,
-  iconRotation = 0,
-  color,
-}) => {
+const ButtonIcon: React.FC<ButtonIconProps> = ({ size, icon, iconRotation = 0, color }) => {
   // If this is just a spacer, render icon without name
   if (!icon) {
-    return (
-      <Icon
-        size={size as IconSizeType}
-        color={color}
-      />
-    )
+    return <Icon size={size as IconSizeType} color={color} />
   }
 
   // Render the actual icon

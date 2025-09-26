@@ -25,6 +25,7 @@ export const ButtonOuter = styled.button.withConfig({
   $borderRadius?: string
   $backgroundColor?: string
   $backgroundImage?: string
+  $borderColor?: string
 }>`
   /* Reset browser button styles */
   background: none;
@@ -43,10 +44,9 @@ export const ButtonOuter = styled.button.withConfig({
   font-weight: 500;
   background-color: ${({ $backgroundColor, $themeStyles }) =>
     $backgroundColor || $themeStyles.backgroundColor};
-  background-image: ${({ $backgroundImage }) =>
-    $backgroundImage || "none"};
+  background-image: ${({ $backgroundImage }) => $backgroundImage || "none"};
   border: ${({ $themeStyles }) => $themeStyles.borderWidth || "1px"} solid
-    ${({ $themeStyles }) => $themeStyles.borderColor};
+    ${({ $borderColor, $themeStyles }) => $borderColor || $themeStyles.borderColor};
   color: ${({ $themeStyles }) => $themeStyles.color};
   border-radius: ${({ $size, $borderRadius }) => getBorderRadius($size, $borderRadius)};
   cursor: ${({ $disabled }) => ($disabled ? "not-allowed" : "pointer")};

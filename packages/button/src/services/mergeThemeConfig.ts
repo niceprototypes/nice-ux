@@ -6,15 +6,13 @@ import { ButtonThemes, ThemeConfig } from "../types/themes"
  * @param config - The partial config to merge
  * @returns Merged theme configuration
  */
-const mergeThemeConfig = (
-  defaultThemes: ButtonThemes,
-  config?: ThemeConfig
-): ButtonThemes => {
+const mergeThemeConfig = (defaultThemes: ButtonThemes, config?: ThemeConfig): ButtonThemes => {
   if (!config) {
     return defaultThemes
   }
 
   // Deep merge helper function
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const deepMerge = (target: any, source: any): any => {
     if (!source) return target
 

@@ -5,8 +5,8 @@ import { ButtonStateType } from "../types"
  * @param state - Value to check
  * @returns True if valid button state
  */
-const isValidButtonState = (state: any): state is ButtonStateType => {
-  return ["default", "disabled", "attention", "success", "warning"].includes(state)
+const isValidButtonState = (state: unknown): state is ButtonStateType => {
+  return ["default", "disabled", "attention", "success", "warning"].includes(state as string)
 }
 
 export default isValidButtonState

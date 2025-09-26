@@ -84,26 +84,159 @@ function App() {
 
 ## Usage Examples
 
-### Basic Buttons
+### Basic Button States & Statuses
+
+#### Status Variations
 
 ```tsx
 import Button from 'nice-react-button'
 
-// Primary button
-<Button status="primary" onClick={handleClick}>
-  Save Changes
+// Primary (default) - Filled button with primary color
+<Button status="primary">
+  Primary Button
 </Button>
 
-// Secondary button
-<Button status="secondary" onClick={handleClick}>
-  Cancel
+// Secondary - Outlined button with border
+<Button status="secondary">
+  Secondary Button
 </Button>
 
-// Different sizes
-<Button size={1}>Small</Button>
-<Button size={2}>Medium</Button>
-<Button size={3}>Large</Button>
-<Button size={4}>Extra Large</Button>
+// Default - Minimal styling with subtle background
+<Button status="default">
+  Default Button
+</Button>
+
+// Muted - Subdued appearance for less important actions
+<Button status="muted">
+  Muted Button
+</Button>
+
+// Highlighted - Emphasized button with accent colors
+<Button status="highlighted">
+  Highlighted Button
+</Button>
+```
+
+#### State Variations
+
+```tsx
+// Default state - Normal interactive button
+<Button state="default">
+  Default State
+</Button>
+
+// Disabled state - Non-interactive, grayed out
+<Button state="disabled">
+  Disabled State
+</Button>
+// Alternative: using disabled prop
+<Button disabled>
+  Also Disabled
+</Button>
+
+// Success state - Indicates successful action
+<Button state="success">
+  Success State
+</Button>
+
+// Error state - Indicates error or destructive action
+<Button state="error">
+  Error State
+</Button>
+
+// Warning state - Indicates caution needed
+<Button state="warning">
+  Warning State
+</Button>
+
+// Active state - Currently pressed or active
+<Button state="active">
+  Active State
+</Button>
+```
+
+#### Size Variations
+
+```tsx
+// Size 1 - Extra small (24px height)
+<Button size={1}>
+  XS
+</Button>
+
+// Size 2 - Small (32px height)
+<Button size={2}>
+  Small
+</Button>
+
+// Size 3 - Medium/Default (40px height)
+<Button size={3}>
+  Medium
+</Button>
+
+// Size 4 - Large (48px height)
+<Button size={4}>
+  Large
+</Button>
+```
+
+### Mode Variations (Light/Dark)
+
+```tsx
+// Light mode (default)
+<Button mode="light" status="primary">
+  Light Mode
+</Button>
+
+// Dark mode
+<Button mode="dark" status="primary">
+  Dark Mode
+</Button>
+
+// Dark mode with secondary status
+<Button mode="dark" status="secondary">
+  Dark Secondary
+</Button>
+```
+
+### Complete Configuration Examples
+
+```tsx
+// Primary button, size 4, with success state
+<Button
+  status="primary"
+  state="success"
+  size={4}
+>
+  Saved Successfully
+</Button>
+
+// Secondary button, disabled, with icon
+<Button
+  status="secondary"
+  state="disabled"
+  icon="lock"
+  iconPosition="left"
+>
+  Locked
+</Button>
+
+// Muted button, warning state, full width
+<Button
+  status="muted"
+  state="warning"
+  fullWidth
+>
+  Proceed with Caution
+</Button>
+
+// Error state with delete action
+<Button
+  status="primary"
+  state="error"
+  icon="trash"
+>
+  Delete Item
+</Button>
 ```
 
 ### Buttons with Icons
@@ -113,7 +246,7 @@ Icons are automatically rendered using nice-react-icon. Just specify the icon na
 ```tsx
 import Button from 'nice-react-button'
 
-// Button with right icon (default)
+// Button with right icon (default position)
 <Button
   icon="arrow"
   onClick={handleClick}
@@ -130,7 +263,7 @@ import Button from 'nice-react-button'
   Save Changes
 </Button>
 
-// Button with rotated icon
+// Button with rotated icon (180° rotation)
 <Button
   icon="arrow"
   iconRotation={180}
@@ -140,43 +273,55 @@ import Button from 'nice-react-button'
   Previous
 </Button>
 
-// Icon-only button
+// Icon-only button (no text)
 <Button
   icon="search"
   aria-label="Search"
   onClick={handleClick}
 />
+
+// Multiple icon combinations
+<Button
+  icon="folder"
+  iconPosition="left"
+  status="secondary"
+>
+  Open File
+</Button>
+
+// Icon with different states
+<Button
+  icon="check"
+  iconPosition="left"
+  state="success"
+>
+  Saved
+</Button>
+
+<Button
+  icon="trash"
+  state="error"
+>
+  Delete File
+</Button>
 ```
 
-### Button States
+### Full Width Buttons
 
 ```tsx
-// Disabled button
-<Button disabled>
-  Disabled Button
-</Button>
-
-// Success state
-<Button state="success">
-  Form Saved
-</Button>
-
-// Error state
-<Button state="error">
-  Delete Item
-</Button>
-
-// Warning state
-<Button state="warning">
-  Proceed with Caution
-</Button>
-```
-
-### Full Width Button
-
-```tsx
+// Full width primary button
 <Button fullWidth status="primary">
   Full Width Button
+</Button>
+
+// Full width secondary button
+<Button fullWidth status="secondary">
+  Secondary Full Width
+</Button>
+
+// Full width with icon
+<Button fullWidth icon="arrow" status="primary">
+  Submit Form
 </Button>
 ```
 

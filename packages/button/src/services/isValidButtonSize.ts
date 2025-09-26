@@ -5,8 +5,8 @@ import { ButtonSizeType } from "../types"
  * @param size - Value to check
  * @returns True if valid button size
  */
-const isValidButtonSize = (size: any): size is ButtonSizeType => {
-  return [1, 2, 3, 4].includes(size)
+const isValidButtonSize = (size: unknown): size is ButtonSizeType => {
+  return [1, 2, 3, 4].includes(size as number)
 }
 
 export default isValidButtonSize

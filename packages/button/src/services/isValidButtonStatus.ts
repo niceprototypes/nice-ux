@@ -5,8 +5,8 @@ import { ButtonStatusType } from "../types"
  * @param status - Value to check
  * @returns True if valid button status
  */
-const isValidButtonStatus = (status: any): status is ButtonStatusType => {
-  return ["primary", "secondary", "default", "muted", "highlighted"].includes(status)
+const isValidButtonStatus = (status: unknown): status is ButtonStatusType => {
+  return ["primary", "secondary", "default", "muted", "highlighted"].includes(status as string)
 }
 
 export default isValidButtonStatus
