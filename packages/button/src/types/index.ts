@@ -138,4 +138,16 @@ export interface ButtonProps {
    * @default undefined
    */
   antialiased?: boolean
+
+  /**
+   * Custom background color that overrides theme styles
+   * Works alongside backgroundImage if both are provided
+   */
+  backgroundColor?: string
+
+  /**
+   * Custom background image that overrides theme styles
+   * Works alongside backgroundColor if both are provided
+   */
+  backgroundImage?: string
 }

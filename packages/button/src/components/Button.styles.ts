@@ -23,6 +23,8 @@ export const ButtonOuter = styled.button.withConfig({
   $fullWidth?: boolean
   $hasIcon?: boolean
   $borderRadius?: string
+  $backgroundColor?: string
+  $backgroundImage?: string
 }>`
   /* Reset browser button styles */
   background: none;
@@ -39,7 +41,10 @@ export const ButtonOuter = styled.button.withConfig({
   width: ${({ $fullWidth }) => ($fullWidth ? "100%" : "auto")};
   height: ${({ $size }) => getCssVariable("cell-height", $size)};
   font-weight: 500;
-  background-color: ${({ $themeStyles }) => $themeStyles.backgroundColor};
+  background-color: ${({ $backgroundColor, $themeStyles }) =>
+    $backgroundColor || $themeStyles.backgroundColor};
+  background-image: ${({ $backgroundImage }) =>
+    $backgroundImage || "none"};
   border: ${({ $themeStyles }) => $themeStyles.borderWidth || "1px"} solid
     ${({ $themeStyles }) => $themeStyles.borderColor};
   color: ${({ $themeStyles }) => $themeStyles.color};
