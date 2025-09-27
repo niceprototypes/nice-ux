@@ -154,4 +154,16 @@ export interface ButtonProps {
    * Custom border color that overrides theme styles
    */
   borderColor?: string
+
+  /**
+   * Whether to remove icon slots when no icons are present
+   * @default false
+   */
+  condensed?: boolean
+
+  /**
+   * Font weight of the button text (1-4)
+   * @default 2
+   */
+  fontWeight?: 1 | 2 | 3 | 4
 }

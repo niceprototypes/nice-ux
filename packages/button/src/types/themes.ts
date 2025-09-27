@@ -8,6 +8,8 @@ export interface ThemeDesignValues {
   borderColor: string
   color: string
   borderWidth?: string
+  fontWeight?: string
+  borderRadius?: string
 }
 
 /**

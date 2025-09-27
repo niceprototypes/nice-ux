@@ -40,8 +40,7 @@ export const ButtonOuter = styled.button.withConfig({
   /* Button-specific styles */
   display: block;
   width: ${({ $fullWidth }) => ($fullWidth ? "100%" : "auto")};
-  height: ${({ $size }) => getCssVariable("cell-height", $size)};
-  font-weight: 500;
+  font-weight: ${getCssVariable("font-weight", 2)};
   background-color: ${({ $backgroundColor, $themeStyles }) =>
     $backgroundColor || $themeStyles.backgroundColor};
   background-image: ${({ $backgroundImage }) => $backgroundImage || "none"};
@@ -76,9 +75,12 @@ export const ButtonOuter = styled.button.withConfig({
 /**
  * Text content wrapper
  */
-export const ButtonText = styled.div`
+export const ButtonText = styled.span`
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `

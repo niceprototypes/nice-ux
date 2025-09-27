@@ -57,6 +57,8 @@ const Button: React.FC<ButtonProps> = ({
   backgroundColor,
   backgroundImage,
   borderColor,
+  condensed = false,
+  fontWeight = 2,
 }) => {
   const hasChildren = !!children
   const hasIcon = !!icon
@@ -91,7 +93,7 @@ const Button: React.FC<ButtonProps> = ({
       <ButtonInner $borderWidth={themeStyles.borderWidth || "1px"}>
         <Flex justifyContent={{ sm: "center" }} alignItems={{ sm: "center" }} grow={1}>
           {/* Left icon */}
-          {(hasChildren || (hasIcon && isLeft)) && (
+          {(condensed ? (hasIcon && isLeft) : (hasChildren || (hasIcon && isLeft))) && (
             <ButtonIcon
               size={size}
               icon={isLeft ? icon : undefined}
@@ -103,14 +105,14 @@ const Button: React.FC<ButtonProps> = ({
           {/* Button text content */}
           {children && (
             <ButtonText>
-              <Typography size={size} as="span" color={themeStyles.color} antialiased={antialiased}>
+              <Typography size={size} as="span" color={themeStyles.color} antialiased={antialiased} fontWeight={fontWeight}>
                 {children}
               </Typography>
             </ButtonText>
           )}
 
           {/* Right icon */}
-          {(hasChildren || (hasIcon && !isLeft)) && (
+          {(condensed ? (hasIcon && !isLeft) : (hasChildren || (hasIcon && !isLeft))) && (
             <ButtonIcon
               size={size}
               icon={!isLeft ? icon : undefined}
