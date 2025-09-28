@@ -3,6 +3,7 @@ import styled, { css } from "styled-components"
 export const OuterStyled = styled.div<{
   $backgroundImage?: string
   $backgroundColor?: string
+  $isMobile?: boolean
 }>`
   display: flex;
   flex-direction: column;
@@ -16,12 +17,12 @@ export const OuterStyled = styled.div<{
     }
   }}
 
-  ${({ $backgroundImage }) => {
+  ${({ $backgroundImage, $isMobile }) => {
     if ($backgroundImage) {
       return css`
         background-image: ${$backgroundImage};
         background-attachment: fixed;
-        background-size: cover;
+        background-size: ${$isMobile ? 'auto 100%' : 'cover'};
         background-position: center;
         background-repeat: no-repeat;
       `
