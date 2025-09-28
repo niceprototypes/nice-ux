@@ -166,4 +166,16 @@ export interface ButtonProps {
    * @default 2
    */
   fontWeight?: 1 | 2 | 3 | 4
+
+  /**
+   * Border width of the button (1-4)
+   * @default 1
+   */
+  borderWidth?: 1 | 2 | 3 | 4
+
+  /**
+   * Whether the button should have a border
+   * @default true
+   */
+  bordered?: boolean
 }

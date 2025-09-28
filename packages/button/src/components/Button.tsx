@@ -1,15 +1,15 @@
 import * as React from "react"
 import Typography from "nice-react-typography"
-import Flex from "nice-react-flex"
 import ButtonIcon from "./ButtonIcon"
-import { ButtonOuter, ButtonInner, ButtonText } from "./Button.styles"
+import { ButtonOuter, ButtonInner, ButtonText, ButtonIconPositioned } from "./Button.styles"
 import { ButtonProps } from "../types"
 import getThemeStyles from "../services/getThemeStyles"
 import mergeThemeConfig from "../services/mergeThemeConfig"
+import getCssVariable from "../services/getCssVariable"
 import { defaultThemes } from "../constants/defaultThemes"
 
 /**
- * Button component v2.0.0
+ * Button component v2.0.0 - LIVE TEST CHANGE
  * A flexible and customizable React button component with built-in theming support
  *
  * Features:
@@ -36,31 +36,32 @@ import { defaultThemes } from "../constants/defaultThemes"
  * ```
  */
 const Button: React.FC<ButtonProps> = ({
-  size = 3,
-  state = "default",
-  mode = "light",
-  icon,
-  iconRotation = 0,
-  iconPosition = "right",
-  status = "primary",
-  onClick,
-  disabled = false,
-  fullWidth = false,
-  children,
-  className,
-  type = "button",
-  "aria-label": ariaLabel,
-  "data-testid": testId,
-  borderRadius,
-  config,
   antialiased = false,
+  "aria-label": ariaLabel,
   backgroundColor,
   backgroundImage,
   borderColor,
+  borderRadius,
+  borderWidth = 1,
+  bordered = true,
+  children,
+  className,
   condensed = false,
+  config,
+  "data-testid": testId,
+  disabled = false,
   fontWeight = 2,
+  fullWidth = false,
+  icon,
+  iconPosition = "right",
+  iconRotation = 0,
+  mode = "light",
+  onClick,
+  size = 3,
+  state = "default",
+  status = "primary",
+  type = "button",
 }) => {
-  const hasChildren = !!children
   const hasIcon = !!icon
   const isDisabled = disabled || state === "disabled"
   const isLeft = iconPosition === "left"
@@ -74,54 +75,62 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <ButtonOuter
-      $size={size}
-      $themeStyles={themeStyles}
-      $disabled={isDisabled}
-      $fullWidth={fullWidth}
-      $hasIcon={hasIcon}
-      $borderRadius={borderRadius}
       $backgroundColor={backgroundColor}
       $backgroundImage={backgroundImage}
       $borderColor={borderColor}
-      onClick={isDisabled ? undefined : onClick}
-      disabled={isDisabled}
-      className={className}
-      type={type}
+      $borderRadius={borderRadius}
+      $bordered={bordered}
+      $condensed={condensed}
+      $disabled={isDisabled}
+      $fullWidth={fullWidth}
+      $hasIcon={hasIcon}
+      $size={size}
+      $themeStyles={themeStyles}
       aria-label={ariaLabel}
+      className={className}
       data-testid={testId}
+      disabled={isDisabled}
+      onClick={isDisabled ? undefined : onClick}
+      type={type}
     >
-      <ButtonInner $borderWidth={themeStyles.borderWidth || "1px"}>
-        <Flex justifyContent={{ sm: "center" }} alignItems={{ sm: "center" }} grow={1}>
-          {/* Left icon */}
-          {(condensed ? (hasIcon && isLeft) : (hasChildren || (hasIcon && isLeft))) && (
-            <ButtonIcon
-              size={size}
-              icon={isLeft ? icon : undefined}
-              iconRotation={iconRotation}
+      {/* Left positioned icon */}
+      <ButtonIconPositioned $size={size} $isLeft={true}>
+        <ButtonIcon
+          color={themeStyles.color}
+          icon={hasIcon && isLeft ? icon : undefined}
+          iconRotation={iconRotation}
+          size={size}
+        />
+      </ButtonIconPositioned>
+      <ButtonInner
+        $borderWidth={themeStyles.borderWidth || getCssVariable("border-width", borderWidth)}
+        $bordered={bordered}
+        $size={size}
+      >
+        {/* Button text content */}
+        {children && (
+          <ButtonText $size={size}>
+            <Typography
+              antialiased={antialiased}
+              as="span"
               color={themeStyles.color}
-            />
-          )}
-
-          {/* Button text content */}
-          {children && (
-            <ButtonText>
-              <Typography size={size} as="span" color={themeStyles.color} antialiased={antialiased} fontWeight={fontWeight}>
-                {children}
-              </Typography>
-            </ButtonText>
-          )}
-
-          {/* Right icon */}
-          {(condensed ? (hasIcon && !isLeft) : (hasChildren || (hasIcon && !isLeft))) && (
-            <ButtonIcon
+              fontWeight={fontWeight}
               size={size}
-              icon={!isLeft ? icon : undefined}
-              iconRotation={iconRotation}
-              color={themeStyles.color}
-            />
-          )}
-        </Flex>
+            >
+              {children}
+            </Typography>
+          </ButtonText>
+        )}
       </ButtonInner>
+      {/* Right positioned icon */}
+      <ButtonIconPositioned $size={size} $isLeft={false}>
+        <ButtonIcon
+          color={themeStyles.color}
+          icon={hasIcon && !isLeft ? icon : undefined}
+          iconRotation={iconRotation}
+          size={size}
+        />
+      </ButtonIconPositioned>
     </ButtonOuter>
   )
 }
