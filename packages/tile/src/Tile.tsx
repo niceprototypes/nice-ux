@@ -14,8 +14,7 @@ const Tile: React.FC<TileProps> = ({
   className,
   style,
   backgroundImage,
-  backgroundColor,
-  isMobile = false
+  backgroundColor
 }) => {
   return (
     <OuterStyled
@@ -24,7 +23,6 @@ const Tile: React.FC<TileProps> = ({
       style={style}
       $backgroundImage={backgroundImage}
       $backgroundColor={backgroundColor}
-      $isMobile={isMobile}
     >
       <InnerStyled
         as={Flex}

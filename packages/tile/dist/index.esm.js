@@ -15,12 +15,12 @@ const OuterStyled = styled.div `
     }
 }}
 
-  ${({ $backgroundImage }) => {
+  ${({ $backgroundImage, $isMobile }) => {
     if ($backgroundImage) {
         return css `
         background-image: ${$backgroundImage};
         background-attachment: fixed;
-        background-size: cover;
+        background-size: ${$isMobile ? 'auto 100%' : 'cover'};
         background-position: center;
         background-repeat: no-repeat;
       `;
@@ -43,8 +43,8 @@ const InnerStyled = styled.div `
 // Default breakpoint values from helpshelf-ui
 const DEFAULT_BREAKPOINT_MD = 980;
 const DEFAULT_BREAKPOINT_LG = 1280;
-const Tile = ({ children, breakpointMd = DEFAULT_BREAKPOINT_MD, breakpointLg = DEFAULT_BREAKPOINT_LG, className, style, backgroundImage, backgroundColor }) => {
-    return (React.createElement(OuterStyled, { as: Flex, className: className, style: style, "$backgroundImage": backgroundImage, "$backgroundColor": backgroundColor },
+const Tile = ({ children, breakpointMd = DEFAULT_BREAKPOINT_MD, breakpointLg = DEFAULT_BREAKPOINT_LG, className, style, backgroundImage, backgroundColor, isMobile = false }) => {
+    return (React.createElement(OuterStyled, { as: Flex, className: className, style: style, "$backgroundImage": backgroundImage, "$backgroundColor": backgroundColor, "$isMobile": isMobile },
         React.createElement(InnerStyled, { as: Flex, direction: "column", grow: 1, "$breakpointMd": breakpointMd, "$breakpointLg": breakpointLg }, children)));
 };
 

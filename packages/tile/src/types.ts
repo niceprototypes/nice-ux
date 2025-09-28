@@ -8,5 +8,4 @@ export interface TileProps {
   style?: React.CSSProperties
   backgroundImage?: string
   backgroundColor?: string
-  isMobile?: boolean
 }
