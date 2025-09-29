@@ -114,7 +114,7 @@ const Button: React.FC<ButtonProps> = ({
               antialiased={antialiased}
               as="span"
               color={themeStyles.color}
-              fontWeight={fontWeight}
+              weight={fontWeight}
               size={size}
             >
               {children}
