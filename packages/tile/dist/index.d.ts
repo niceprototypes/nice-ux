@@ -8,6 +8,8 @@ interface TileProps {
     style?: React.CSSProperties;
     backgroundImage?: string;
     backgroundColor?: string;
+    backgroundPosition?: string;
+    backgroundSize?: string;
 }
 
 declare const Tile: React.FC<TileProps>;

@@ -3,6 +3,8 @@ import styled, { css } from "styled-components"
 export const OuterStyled = styled.div<{
   $backgroundImage?: string
   $backgroundColor?: string
+  $backgroundPosition?: string
+  $backgroundSize?: string
 }>`
   display: flex;
   flex-direction: column;
@@ -16,12 +18,12 @@ export const OuterStyled = styled.div<{
     }
   }}
 
-  ${({ $backgroundImage }) => {
+  ${({ $backgroundImage, $backgroundPosition, $backgroundSize }) => {
     if ($backgroundImage) {
       return css`
         background-image: ${$backgroundImage};
-        background-size: cover;
-        background-position: center;
+        background-size: ${$backgroundSize || "cover"};
+        background-position: ${$backgroundPosition || "center"};
         background-repeat: no-repeat;
 
         @media (orientation: landscape) {
