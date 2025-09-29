@@ -1,6 +1,6 @@
 {
   "name": "nice-react-flex",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "type": "module",
   "description": "A flexible and responsive Flex component for React with styled-components",
   "main": "dist/index.js",
