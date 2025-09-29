@@ -50,7 +50,7 @@ const Button: React.FC<ButtonProps> = ({
   config,
   "data-testid": testId,
   disabled = false,
-  fontWeight = 2,
+  fontWeight = 3,
   fullWidth = false,
   icon,
   iconPosition = "right",
