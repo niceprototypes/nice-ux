@@ -107,6 +107,7 @@ const styleSpacing = (type: "padding" | "margin", def?: SpacingDefinition) => {
  * - `align-items`: Aligns items on the cross axis
  * - `justify-content`: Aligns items on the main axis
  * - `flex-grow` & `flex-basis`: Controls item growth behavior
+ * - `flex-wrap`: Controls whether items wrap to new lines
  * - `gap`: Sets space between flex items using CSS Grid gap
  * 
  * **Spacing Integration**: Uses the styleSpacing helper to generate padding
@@ -173,6 +174,13 @@ export const styleFlex = (breakpoint: Breakpoint, props: FlexProps): string => {
         ? props.justifyContent
         : undefined
 
+  const wrap =
+    typeof props.wrap === "object"
+      ? props.wrap[breakpoint]
+      : breakpoint === "sm" && typeof props.wrap === "string"
+        ? props.wrap
+        : undefined
+
   // Spacing requires checking for breakpoint structure
   const spacing =
     typeof props.spacing === "object" &&
@@ -204,6 +212,11 @@ export const styleFlex = (breakpoint: Breakpoint, props: FlexProps): string => {
   if (grow !== undefined) {
     styles.push(`flex-grow: ${grow};`)
     styles.push("flex-basis: 0;")
+  }
+
+  // Flex wrap - controls whether items wrap to new lines
+  if (wrap) {
+    styles.push(`flex-wrap: ${wrap};`)
   }
 
   // Gap between flex items using CSS Grid gap property

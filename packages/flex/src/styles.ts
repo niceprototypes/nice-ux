@@ -22,7 +22,7 @@ import { styleFlex } from "./services/styleFlex"
  * 
  * 1. **Prop Filtering**: Uses `shouldForwardProp` to prevent style-related props from
  *    being passed to the DOM, avoiding React warnings about unknown DOM properties.
- *    Filtered props: type, spacing, gap, direction, alignItems, justifyContent, grow
+ *    Filtered props: type, spacing, gap, direction, alignItems, justifyContent, grow, wrap
  * 
  * 2. **Mobile-First Responsive Design**: Applies styles in a mobile-first approach:
  *    - Base styles: Always applied (sm breakpoint)
@@ -78,7 +78,7 @@ import { styleFlex } from "./services/styleFlex"
  */
 export const FlexStyled = styled.div.withConfig({
   shouldForwardProp: (prop) =>
-    !["type", "spacing", "gap", "direction", "alignItems", "justifyContent", "grow"].includes(
+    !["type", "spacing", "gap", "direction", "alignItems", "justifyContent", "grow", "wrap"].includes(
       prop as string
     ),
 })<FlexProps>`

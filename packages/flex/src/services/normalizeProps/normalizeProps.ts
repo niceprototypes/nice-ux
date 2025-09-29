@@ -5,7 +5,7 @@ import { FlexProps, GapSize, SpacingDefinition } from "../../types"
  * These props can be specified as either simple values or breakpoint objects.
  * Note: spacing is handled separately due to its more complex structure
  */
-const BREAKPOINT_PROPS = ["gap", "direction", "grow"] as const
+const BREAKPOINT_PROPS = ["gap", "direction", "grow", "wrap", "alignItems", "justifyContent"] as const
 
 /**
  * normalizeProps Service

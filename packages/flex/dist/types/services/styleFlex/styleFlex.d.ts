@@ -31,6 +31,7 @@ type Breakpoint = "sm" | "md" | "lg";
  * - `align-items`: Aligns items on the cross axis
  * - `justify-content`: Aligns items on the main axis
  * - `flex-grow` & `flex-basis`: Controls item growth behavior
+ * - `flex-wrap`: Controls whether items wrap to new lines
  * - `gap`: Sets space between flex items using CSS Grid gap
  *
  * **Spacing Integration**: Uses the styleSpacing helper to generate padding

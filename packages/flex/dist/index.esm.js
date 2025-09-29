@@ -119,6 +119,7 @@ const styleSpacing = (type, def) => {
  * - `align-items`: Aligns items on the cross axis
  * - `justify-content`: Aligns items on the main axis
  * - `flex-grow` & `flex-basis`: Controls item growth behavior
+ * - `flex-wrap`: Controls whether items wrap to new lines
  * - `gap`: Sets space between flex items using CSS Grid gap
  *
  * **Spacing Integration**: Uses the styleSpacing helper to generate padding
@@ -173,6 +174,11 @@ const styleFlex = (breakpoint, props) => {
         : breakpoint === "sm" && typeof props.justifyContent === "string"
             ? props.justifyContent
             : undefined;
+    const wrap = typeof props.wrap === "object"
+        ? props.wrap[breakpoint]
+        : breakpoint === "sm" && typeof props.wrap === "string"
+            ? props.wrap
+            : undefined;
     // Spacing requires checking for breakpoint structure
     const spacing = typeof props.spacing === "object" &&
         ("sm" in props.spacing || "md" in props.spacing || "lg" in props.spacing)
@@ -198,6 +204,10 @@ const styleFlex = (breakpoint, props) => {
     if (grow !== undefined) {
         styles.push(`flex-grow: ${grow};`);
         styles.push("flex-basis: 0;");
+    }
+    // Flex wrap - controls whether items wrap to new lines
+    if (wrap) {
+        styles.push(`flex-wrap: ${wrap};`);
     }
     // Gap between flex items using CSS Grid gap property
     if (gap !== undefined) {
@@ -232,7 +242,7 @@ const styleFlex = (breakpoint, props) => {
  *
  * 1. **Prop Filtering**: Uses `shouldForwardProp` to prevent style-related props from
  *    being passed to the DOM, avoiding React warnings about unknown DOM properties.
- *    Filtered props: type, spacing, gap, direction, alignItems, justifyContent, grow
+ *    Filtered props: type, spacing, gap, direction, alignItems, justifyContent, grow, wrap
  *
  * 2. **Mobile-First Responsive Design**: Applies styles in a mobile-first approach:
  *    - Base styles: Always applied (sm breakpoint)
@@ -287,7 +297,7 @@ const styleFlex = (breakpoint, props) => {
  * }
  */
 const FlexStyled = styled.div.withConfig({
-    shouldForwardProp: (prop) => !["type", "spacing", "gap", "direction", "alignItems", "justifyContent", "grow"].includes(prop),
+    shouldForwardProp: (prop) => !["type", "spacing", "gap", "direction", "alignItems", "justifyContent", "grow", "wrap"].includes(prop),
 }) `
   ${(props) => styleFlex('sm', props)}
 
@@ -305,7 +315,7 @@ const FlexStyled = styled.div.withConfig({
  * These props can be specified as either simple values or breakpoint objects.
  * Note: spacing is handled separately due to its more complex structure
  */
-const BREAKPOINT_PROPS = ["gap", "direction", "grow"];
+const BREAKPOINT_PROPS = ["gap", "direction", "grow", "wrap", "alignItems", "justifyContent"];
 /**
  * normalizeProps Service
  *

@@ -101,6 +101,11 @@ type SpacingDefinition = {
  *   - Static: grow={1}
  *   - Responsive: grow={{ sm: 0, md: 1 }}
  *
+ * @property [wrap] - Controls flex wrapping behavior
+ *   - Values: "nowrap" | "wrap" | "wrap-reverse"
+ *   - Static: wrap="wrap"
+ *   - Responsive: wrap={{ sm: "wrap", md: "nowrap" }}
+ *
  * @property [spacing] - Padding or margin spacing configuration
  *   - Simple: spacing={2} (applies to all sides at sm breakpoint)
  *   - Definition: spacing={{ all: 2, horizontal: 3 }}
@@ -165,6 +170,11 @@ type FlexProps = {
         sm?: number;
         md?: number;
         lg?: number;
+    };
+    wrap?: "nowrap" | "wrap" | "wrap-reverse" | {
+        sm?: "nowrap" | "wrap" | "wrap-reverse";
+        md?: "nowrap" | "wrap" | "wrap-reverse";
+        lg?: "nowrap" | "wrap" | "wrap-reverse";
     };
     spacing?: GapSize | SpacingDefinition | {
         sm?: SpacingDefinition;
