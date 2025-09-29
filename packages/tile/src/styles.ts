@@ -21,9 +21,13 @@ export const OuterStyled = styled.div<{
       return css`
         background-image: ${$backgroundImage};
         background-attachment: fixed;
-        background-size: cover;
+        background-size: auto 100%;
         background-position: center;
         background-repeat: no-repeat;
+
+        @media (orientation: landscape) {
+          background-size: cover;
+        }
       `
     }
   }}
