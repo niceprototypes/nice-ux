@@ -5,6 +5,7 @@ export const OuterStyled = styled.div<{
   $backgroundColor?: string
   $backgroundPosition?: string
   $backgroundSize?: string
+  $backgroundAttachment?: string
 }>`
   display: flex;
   flex-direction: column;
@@ -18,7 +19,7 @@ export const OuterStyled = styled.div<{
     }
   }}
 
-  ${({ $backgroundImage, $backgroundPosition, $backgroundSize }) => {
+  ${({ $backgroundImage, $backgroundPosition, $backgroundSize, $backgroundAttachment }) => {
     if ($backgroundImage) {
       return css`
         background-image: ${$backgroundImage};
@@ -27,7 +28,7 @@ export const OuterStyled = styled.div<{
         background-repeat: no-repeat;
 
         @media (orientation: landscape) {
-          background-attachment: fixed;
+          background-attachment: ${$backgroundAttachment || "fixed"};
         }
       `
     }

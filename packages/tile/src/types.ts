@@ -10,4 +10,5 @@ export interface TileProps {
   backgroundColor?: string
   backgroundPosition?: string
   backgroundSize?: string
+  backgroundAttachment?: string
 }
