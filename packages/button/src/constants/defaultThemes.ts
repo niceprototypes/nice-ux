@@ -93,12 +93,12 @@ export const defaultThemes: ButtonThemes = {
       default: {
         backgroundColor: "transparent",
         borderColor: "rgba(255,255,255,0.25)",
-        color: "#fff",
+        color: "rgba(255,255,255,0.5)",
       },
       disabled: {
-        backgroundColor: "transparent",
-        borderColor: "#333",
-        color: "#888",
+        backgroundColor: "rgba(255,255,255,0.05)",
+        borderColor: "rgba(255,255,255,0.25)",
+        color: "rgba(255,255,255,0.5)",
       },
       attention: {
         backgroundColor: "transparent",
