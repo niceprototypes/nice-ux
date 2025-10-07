@@ -22,6 +22,12 @@ export const StyledTypography = styled.p<{
 }>`
   margin: 0;
 
+  ${({ $as }) =>
+    ($as === "h1" || $as === "h2" || $as === "h3" || $as === "h4") &&
+    css`
+      font-family: var(--font-family-heading);
+    `}
+
   ${({ $code }) =>
     $code &&
     css`

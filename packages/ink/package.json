@@ -58,5 +58,8 @@
   "bugs": {
     "url": "https://github.com/niceprototypes/nice-react-typography/issues"
   },
-  "homepage": "https://github.com/niceprototypes/nice-react-typography#readme"
+  "homepage": "https://github.com/niceprototypes/nice-react-typography#readme",
+  "dependencies": {
+    "nice-css-variables": "^1.0.5"
+  }
 }
