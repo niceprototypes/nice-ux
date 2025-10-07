@@ -51,6 +51,7 @@
 	--content-color-warning: hsla(29, 98%, 62%, 1);
 
 	/* font family */
+	--font-family-heading: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 	--font-family-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 	--font-family-code: source-code-pro, Menlo, Monaco, Consolas, "Courier New";
 
