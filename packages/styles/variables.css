@@ -78,15 +78,6 @@
 	--line-height-condensed: 1.25;
 }
 
-/* LEVEL 0: BRAND */
-
-:root {
-	--brand-color-1: #FF1A22;
-	--brand-color-2: #FF5D12;
-	--brand-color-3: #FFAC38;
-	--brand-color-4: #FFCF3F;
-}
-
 /* LEVEL 0: COMPONENTS */
 
 :root {
@@ -115,6 +106,12 @@
 	/* content color inverse */
 	--content-color-1-inverse: var(--background-color-1);
 	--content-color-2-inverse: var(--background-color-2);
+	--content-color-3-inverse: var(--background-color-1);
+	--content-color-4-inverse: var(--background-color-1);
+
+	/* border color inverse */
+	--border-color-default-inverse: var(--content-color-4);
+	--border-color-primary-inverse: var(--background-color-1);
 
 	/* content color status */
 	--content-color-default: var(--content-color-2);
@@ -125,17 +122,11 @@
 /* LEVEL 1: COMPONENTS */
 
 :root {
-	/* Icon */
+	/* icon stroke color */
 	--icon-stroke-color-default: var(--content-color-4);
 	--icon-stroke-color-primary: var(--content-color-2);
-}
-
-/* LEVEL 1: ONBOARDING */
-
-:root {
-	/* top gap */
-	--onboarding-top-gap-sm: var(--gap-size-4);
-	--onboarding-top-gap-md: var(--gap-size-5);
-
-	--onboarding-header-left-padding: calc(var(--cell-height-2) + var(--gap-size-3));
+	
+	/* icon stroke color inverse */
+	--icon-stroke-color-default-inverse: var(--content-color-1);
+	--icon-stroke-color-primary-inverse: var(--background-color-1);
 }
