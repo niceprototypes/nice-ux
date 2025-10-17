@@ -1,6 +1,6 @@
 {
   "name": "nice-react-typography",
-  "version": "1.3.4",
+  "version": "1.3.5",
   "type": "module",
   "description": "A flexible and customizable Typography component for React with styled-components",
   "main": "dist/index.js",
@@ -60,6 +60,6 @@
   },
   "homepage": "https://github.com/niceprototypes/nice-react-typography#readme",
   "dependencies": {
-    "nice-css-variables": "^1.0.5"
+    "nice-css-variables": "^1.1.0"
   }
 }
