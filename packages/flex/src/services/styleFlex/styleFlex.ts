@@ -173,7 +173,16 @@ export const styleFlex = (breakpoint: Breakpoint, props: FlexProps): string => {
   const alignItems = getBreakpointValue(props.alignItems, breakpoint)
   const justifyContent = getBreakpointValue(props.justifyContent, breakpoint)
   const wrap = getBreakpointValue(props.wrap, breakpoint)
-  const spacing = getBreakpointValue(props.spacing, breakpoint)
+
+  // Spacing requires special handling since it can be GapSize | SpacingDefinition | responsive object
+  // We only want SpacingDefinition objects, not simple GapSize values
+  const spacing =
+    typeof props.spacing === "object" && props.spacing !== null &&
+    ("sm" in props.spacing || "md" in props.spacing || "lg" in props.spacing)
+      ? (props.spacing as any)[breakpoint]
+      : breakpoint === "sm" && typeof props.spacing === "object" && props.spacing !== null
+        ? props.spacing as SpacingDefinition
+        : undefined
 
   // Base flex display - only set for small breakpoint
   // Higher breakpoints inherit the flex display value
