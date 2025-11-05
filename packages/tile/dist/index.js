@@ -68,28 +68,25 @@ const InnerStyled = styled.div `
 
 const TileSlot = ({ children, title, titleAlign = "left", titleColor, }) => {
     return (React__namespace.createElement(Flex, { direction: "column", gap: 5 },
-        title && (React__namespace.createElement(Flex, { direction: "column", spacing: { sm: { horizontal: 4 }, md: { horizontal: 0 } } },
+        title && (React__namespace.createElement(Flex, { direction: "column" },
             React__namespace.createElement(Typography, { as: "h4", size: 5, align: titleAlign, color: titleColor }, title))),
         children));
 };
 
-const TileTop = ({ children, title, titleAlign = "left", titleColor, contentLeft, contentRight, spacing = "var(--nice-tile-spacing, 8rem)", }) => {
-    return (React__namespace.createElement(Flex, { direction: "column", gap: 6 }, !!contentLeft || !!contentRight ? (React__namespace.createElement(Flex, { direction: { sm: "column", md: "row" }, alignItems: "center", gap: 5, spacing: { vertical: spacing } },
+const TileLayout = ({ children, title, titleAlign = "left", titleColor, contentLeft, contentRight, }) => {
+    return (React__namespace.createElement(Flex, { direction: "column", gap: 6 }, !!contentLeft || !!contentRight ? (React__namespace.createElement(Flex, { direction: { sm: "column", md: "row" }, alignItems: "center", gap: 5 },
         contentLeft,
         React__namespace.createElement(Flex, { direction: "column", grow: 1 },
             React__namespace.createElement(TileSlot, { title: title, titleAlign: titleAlign, titleColor: titleColor }, children)),
-        contentRight)) : (React__namespace.createElement(Flex, { direction: "column", spacing: { vertical: spacing } },
-        React__namespace.createElement(TileSlot, { title: title, titleAlign: titleAlign, titleColor: titleColor }, children)))));
+        contentRight)) : (React__namespace.createElement(TileSlot, { title: title, titleAlign: titleAlign, titleColor: titleColor }, children))));
 };
 
 // Default breakpoint values from helpshelf-ui
 const DEFAULT_BREAKPOINT_MD = 980;
 const DEFAULT_BREAKPOINT_LG = 1280;
-const Tile = ({ children, breakpointMd = DEFAULT_BREAKPOINT_MD, breakpointLg = DEFAULT_BREAKPOINT_LG, className, style, backgroundImage, backgroundColor, backgroundPosition = "center", backgroundSize = "cover", backgroundAttachment = "fixed", fullWidth = false, title, titleAlign = "left", titleColor, contentLeft: TileLeft, contentRight: TileRight, contentBottom: TileBottom, spacing, }) => {
+const Tile = ({ children, breakpointMd = DEFAULT_BREAKPOINT_MD, breakpointLg = DEFAULT_BREAKPOINT_LG, className, style, backgroundImage, backgroundColor, backgroundPosition = "center", backgroundSize = "cover", backgroundAttachment = "fixed", fullWidth = false, title, titleAlign = "left", titleColor, contentLeft: TileLeft, contentRight: TileRight, spacing = "var(--nice-tile-spacing, 8rem)", }) => {
     return (React__namespace.createElement(OuterStyled, { as: Flex, className: className, style: style, "$backgroundImage": backgroundImage, "$backgroundColor": backgroundColor, "$backgroundPosition": backgroundPosition, "$backgroundSize": backgroundSize, "$backgroundAttachment": backgroundAttachment, "$fullWidth": fullWidth },
-        React__namespace.createElement(InnerStyled, { as: Flex, direction: "column", grow: 1, "$breakpointMd": breakpointMd, "$breakpointLg": breakpointLg }, title || TileLeft || TileRight || TileBottom ? (React__namespace.createElement(Flex, { direction: "column" },
-            React__namespace.createElement(TileTop, { title: title, titleAlign: titleAlign, titleColor: titleColor, contentLeft: TileLeft, contentRight: TileRight, spacing: spacing }, children),
-            TileBottom)) : (React__namespace.createElement(TileSlot, { title: title, titleAlign: titleAlign, titleColor: titleColor }, children)))));
+        React__namespace.createElement(InnerStyled, { as: Flex, direction: "column", grow: 1, "$breakpointMd": breakpointMd, "$breakpointLg": breakpointLg, spacing: { sm: { vertical: spacing, horizontal: 4 }, md: { horizontal: null } } }, title || TileLeft || TileRight ? (React__namespace.createElement(TileLayout, { title: title, titleAlign: titleAlign, titleColor: titleColor, contentLeft: TileLeft, contentRight: TileRight }, children)) : (React__namespace.createElement(TileSlot, { title: title, titleAlign: titleAlign, titleColor: titleColor }, children)))));
 };
 
 module.exports = Tile;

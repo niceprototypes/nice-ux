@@ -17,6 +17,5 @@ export interface TileProps {
   titleColor?: string
   contentLeft?: React.ReactNode
   contentRight?: React.ReactNode
-  contentBottom?: React.ReactNode
-  spacing?: string
+  spacing?: string | null
 }

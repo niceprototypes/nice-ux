@@ -18,10 +18,7 @@ const TileSlot: React.FC<TileSlotProps> = ({
   return (
     <Flex direction="column" gap={5}>
       {title && (
-        <Flex
-          direction="column"
-          spacing={{ sm: { horizontal: 4 }, md: { horizontal: 0 } }}
-        >
+        <Flex direction="column">
           <Typography as="h4" size={5} align={titleAlign} color={titleColor}>
             {title}
           </Typography>
