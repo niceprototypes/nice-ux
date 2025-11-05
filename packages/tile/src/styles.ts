@@ -6,10 +6,12 @@ export const OuterStyled = styled.div<{
   $backgroundPosition?: string
   $backgroundSize?: string
   $backgroundAttachment?: string
+  $fullWidth?: boolean
 }>`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  ${({ $fullWidth }) => $fullWidth && css`width: 100%;`}
 
   ${({ $backgroundColor }) => {
     if ($backgroundColor) {

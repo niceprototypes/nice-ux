@@ -2,6 +2,8 @@ import * as React from "react"
 import Flex from "nice-react-flex"
 import { TileProps } from "./types"
 import { OuterStyled, InnerStyled } from "./styles"
+import TileTop from "./TileTop"
+import TileSlot from "./TileSlot"
 
 // Default breakpoint values from helpshelf-ui
 const DEFAULT_BREAKPOINT_MD = 980
@@ -17,7 +19,15 @@ const Tile: React.FC<TileProps> = ({
   backgroundColor,
   backgroundPosition = "center",
   backgroundSize = "cover",
-  backgroundAttachment = "fixed"
+  backgroundAttachment = "fixed",
+  fullWidth = false,
+  title,
+  titleAlign = "left",
+  titleColor,
+  contentLeft: TileLeft,
+  contentRight: TileRight,
+  contentBottom: TileBottom,
+  spacing,
 }) => {
   return (
     <OuterStyled
@@ -29,6 +39,7 @@ const Tile: React.FC<TileProps> = ({
       $backgroundPosition={backgroundPosition}
       $backgroundSize={backgroundSize}
       $backgroundAttachment={backgroundAttachment}
+      $fullWidth={fullWidth}
     >
       <InnerStyled
         as={Flex}
@@ -37,7 +48,25 @@ const Tile: React.FC<TileProps> = ({
         $breakpointMd={breakpointMd}
         $breakpointLg={breakpointLg}
       >
-        {children}
+        {title || TileLeft || TileRight || TileBottom ? (
+          <Flex direction="column">
+            <TileTop
+              title={title}
+              titleAlign={titleAlign}
+              titleColor={titleColor}
+              contentLeft={TileLeft}
+              contentRight={TileRight}
+              spacing={spacing}
+            >
+              {children}
+            </TileTop>
+            {TileBottom}
+          </Flex>
+        ) : (
+          <TileSlot title={title} titleAlign={titleAlign} titleColor={titleColor}>
+            {children}
+          </TileSlot>
+        )}
       </InnerStyled>
     </OuterStyled>
   )
