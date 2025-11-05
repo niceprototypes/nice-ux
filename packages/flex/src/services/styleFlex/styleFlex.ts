@@ -7,19 +7,50 @@ import { FlexProps, GapSize, SpacingDefinition } from "../../types"
 type Breakpoint = "sm" | "md" | "lg"
 
 /**
+ * Extracts the value for a specific breakpoint from a prop that can be either
+ * a simple value or a responsive object
+ *
+ * @function getBreakpointValue
+ * @param {T | { sm?: T; md?: T; lg?: T } | undefined} value - The prop value
+ * @param {Breakpoint} breakpoint - The target breakpoint
+ * @returns {T | undefined} The value for the specified breakpoint
+ *
+ * @example
+ * getBreakpointValue("row", "sm") // returns "row"
+ * getBreakpointValue("row", "md") // returns undefined (simple values only apply at sm)
+ * getBreakpointValue({ sm: "column", md: "row" }, "md") // returns "row"
+ */
+const getBreakpointValue = <T>(
+  value: T | { sm?: T; md?: T; lg?: T } | undefined,
+  breakpoint: Breakpoint
+): T | undefined => {
+  if (value === undefined) return undefined
+  if (typeof value === "object" && value !== null && ("sm" in value || "md" in value || "lg" in value)) {
+    return (value as any)[breakpoint]
+  }
+  return breakpoint === "sm" ? (value as T) : undefined
+}
+
+/**
  * Converts a GapSize value to its corresponding CSS custom property
- * 
+ *
  * @function getGapSize
- * @param {GapSize} [size] - The gap size (0-6)
- * @returns {string | undefined} CSS custom property string or "0" for zero values
- * 
+ * @param {GapSize} [size] - The gap size (0-6 or custom string)
+ * @returns {string | undefined} CSS custom property string, "0" for zero values, or the string value as-is
+ *
  * @example
  * getGapSize(0) // returns "0"
  * getGapSize(3) // returns "var(--gap-size-3)"
+ * getGapSize("2rem") // returns "2rem"
+ * getGapSize("var(--custom-spacing, 8rem)") // returns "var(--custom-spacing, 8rem)"
  * getGapSize(undefined) // returns undefined
  */
-const getGapSize = (size?: GapSize) =>
-  size !== undefined ? (size === 0 ? "0" : `var(--gap-size-${size})`) : undefined
+const getGapSize = (size?: GapSize) => {
+  if (size === undefined) return undefined
+  if (size === 0) return "0"
+  if (typeof size === "string") return size
+  return `var(--gap-size-${size})`
+}
 
 /**
  * Generates CSS spacing properties (padding or margin) from a SpacingDefinition
@@ -135,58 +166,14 @@ const styleSpacing = (type: "padding" | "margin", def?: SpacingDefinition) => {
 export const styleFlex = (breakpoint: Breakpoint, props: FlexProps): string => {
   const styles: string[] = []
 
-  // Extract values for this specific breakpoint
-  // For object props, get the breakpoint-specific value
-  // For simple props, only apply at 'sm' breakpoint (since props are normalized)
-  
-  const direction =
-    typeof props.direction === "object"
-      ? props.direction[breakpoint]
-      : breakpoint === "sm" && typeof props.direction === "string"
-        ? props.direction
-        : undefined
-
-  const gap =
-    typeof props.gap === "object"
-      ? props.gap[breakpoint]
-      : breakpoint === "sm" && typeof props.gap === "number"
-        ? props.gap
-        : undefined
-
-  const grow =
-    typeof props.grow === "object"
-      ? props.grow[breakpoint]
-      : breakpoint === "sm" && typeof props.grow === "number"
-        ? props.grow
-        : undefined
-
-  const alignItems =
-    typeof props.alignItems === "object"
-      ? props.alignItems[breakpoint]
-      : breakpoint === "sm" && typeof props.alignItems === "string"
-        ? props.alignItems
-        : undefined
-
-  const justifyContent =
-    typeof props.justifyContent === "object"
-      ? props.justifyContent[breakpoint]
-      : breakpoint === "sm" && typeof props.justifyContent === "string"
-        ? props.justifyContent
-        : undefined
-
-  const wrap =
-    typeof props.wrap === "object"
-      ? props.wrap[breakpoint]
-      : breakpoint === "sm" && typeof props.wrap === "string"
-        ? props.wrap
-        : undefined
-
-  // Spacing requires checking for breakpoint structure
-  const spacing =
-    typeof props.spacing === "object" &&
-    ("sm" in props.spacing || "md" in props.spacing || "lg" in props.spacing)
-      ? (props.spacing as any)[breakpoint]
-      : undefined
+  // Extract values for this specific breakpoint using the helper function
+  const direction = getBreakpointValue(props.direction, breakpoint)
+  const gap = getBreakpointValue(props.gap, breakpoint)
+  const grow = getBreakpointValue(props.grow, breakpoint)
+  const alignItems = getBreakpointValue(props.alignItems, breakpoint)
+  const justifyContent = getBreakpointValue(props.justifyContent, breakpoint)
+  const wrap = getBreakpointValue(props.wrap, breakpoint)
+  const spacing = getBreakpointValue(props.spacing, breakpoint)
 
   // Base flex display - only set for small breakpoint
   // Higher breakpoints inherit the flex display value
@@ -221,7 +208,10 @@ export const styleFlex = (breakpoint: Breakpoint, props: FlexProps): string => {
 
   // Gap between flex items using CSS Grid gap property
   if (gap !== undefined) {
-    styles.push(`gap: var(--gap-size-${gap});`)
+    const gapValue = getGapSize(gap)
+    if (gapValue) {
+      styles.push(`gap: ${gapValue};`)
+    }
   }
 
   // Spacing (padding/margin) using the spacing helper

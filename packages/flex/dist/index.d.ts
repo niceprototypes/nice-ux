@@ -6,13 +6,14 @@ import * as React from 'react';
  * Defines the available size values for gaps and spacing throughout the component.
  * These values map to CSS custom properties (e.g., --gap-size-1, --gap-size-2, etc.)
  *
- * @type {0 | 1 | 2 | 3 | 4 | 5 | 6}
+ * @type {0 | 1 | 2 | 3 | 4 | 5 | 6 | string}
  *
  * Values:
  * - 0: No gap/spacing
  * - 1-6: Incrementally larger spacing values defined by CSS variables
+ * - string: Custom CSS value (e.g., "2rem", "var(--custom-spacing)", "100px")
  */
-type GapSize = 0 | 1 | 2 | 3 | 4 | 5 | 6;
+type GapSize = 0 | 1 | 2 | 3 | 4 | 5 | 6 | string;
 /**
  * FlexType Type
  *

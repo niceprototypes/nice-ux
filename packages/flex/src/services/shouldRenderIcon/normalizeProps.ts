@@ -87,7 +87,11 @@ const normalizeProps = (props: FlexProps): FlexProps => {
       // Simple number becomes a SpacingDefinition at sm breakpoint
       // spacing={3} -> spacing={{ sm: { all: 3 } }}
       normalizedProps.spacing = { sm: { all: props.spacing as GapSize } }
-    } else if (!("sm" in props.spacing || "md" in props.spacing || "lg" in props.spacing)) {
+    } else if (typeof props.spacing === "string") {
+      // String value (like CSS variable) becomes a SpacingDefinition at sm breakpoint
+      // spacing="var(--spacing)" -> spacing={{ sm: { all: "var(--spacing)" } }}
+      normalizedProps.spacing = { sm: { all: props.spacing } }
+    } else if (typeof props.spacing === "object" && !("sm" in props.spacing || "md" in props.spacing || "lg" in props.spacing)) {
       // SpacingDefinition object becomes breakpoint-wrapped
       // spacing={{ all: 3 }} -> spacing={{ sm: { all: 3 } }}
       normalizedProps.spacing = { sm: props.spacing as SpacingDefinition }

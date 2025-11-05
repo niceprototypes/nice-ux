@@ -74,25 +74,83 @@ const normalizeProps = (props: FlexProps): FlexProps => {
   // These props can be either simple values or breakpoint objects
   BREAKPOINT_PROPS.forEach((propName) => {
     const value = props[propName as keyof FlexProps]
-    if (value !== undefined && typeof value !== "object") {
-      // Convert simple value to breakpoint object with sm value
-      // The semicolon at the start prevents ASI issues with the bracket notation
-      ;(normalizedProps as any)[propName] = { sm: value }
+    if (value !== undefined) {
+      if (typeof value !== "object") {
+        // Special handling for gap prop: only normalize numbers, not strings
+        // TODO: Remove this conditional logic once migration to string-only gap values is complete
+        if (propName === "gap") {
+          if (typeof value === "number") {
+            // Convert simple number to breakpoint object with sm value
+            ;(normalizedProps as any)[propName] = { sm: value }
+          }
+          // If gap is a string, leave as-is (no normalization)
+        } else {
+          // Convert simple value to breakpoint object with sm value
+          // The semicolon at the start prevents ASI issues with the bracket notation
+          ;(normalizedProps as any)[propName] = { sm: value }
+        }
+      } else if (propName === "gap") {
+        // Handle breakpoint objects for gap: normalize number values, leave strings as-is
+        // TODO: Remove this normalization logic once migration to string-only gap values is complete
+        const breakpointObj = value as Record<string, any>
+        const normalizedBreakpoints: Record<string, any> = {}
+        let hasChanges = false
+
+        Object.keys(breakpointObj).forEach((breakpoint) => {
+          const bpValue = breakpointObj[breakpoint]
+          if (typeof bpValue === "number") {
+            // Normalize number to string or keep as number based on your normalization logic
+            normalizedBreakpoints[breakpoint] = bpValue
+          } else {
+            // Keep string values as-is
+            normalizedBreakpoints[breakpoint] = bpValue
+            hasChanges = true
+          }
+        })
+
+        // Only update if we found string values (to preserve reference equality when possible)
+        if (hasChanges || Object.keys(normalizedBreakpoints).length > 0) {
+          ;(normalizedProps as any)[propName] = normalizedBreakpoints
+        }
+      }
     }
   })
   
   // Special handling for the spacing prop due to its nested structure
+  // TODO: Remove number normalization logic once migration to string-only spacing values is complete
   if (props.spacing !== undefined) {
     if (typeof props.spacing === "number") {
       // Simple number becomes a SpacingDefinition at sm breakpoint
       // spacing={3} -> spacing={{ sm: { all: 3 } }}
       normalizedProps.spacing = { sm: { all: props.spacing as GapSize } }
+    } else if (typeof props.spacing === "string") {
+      // String values are left as-is (no normalization)
+      // This allows direct CSS values like "10px" or "1rem"
     } else if (!("sm" in props.spacing || "md" in props.spacing || "lg" in props.spacing)) {
       // SpacingDefinition object becomes breakpoint-wrapped
-      // spacing={{ all: 3 }} -> spacing={{ sm: { all: 3 } }}
-      normalizedProps.spacing = { sm: props.spacing as SpacingDefinition }
+      // Check if values in SpacingDefinition are numbers - if so, normalize; if strings, wrap as-is
+      const spacingDef = props.spacing as SpacingDefinition
+      const hasNumbers = Object.values(spacingDef).some(v => typeof v === "number")
+
+      if (hasNumbers) {
+        // spacing={{ all: 3 }} -> spacing={{ sm: { all: 3 } }}
+        normalizedProps.spacing = { sm: spacingDef }
+      }
+      // If all values are strings, leave as-is (no normalization needed)
+    } else {
+      // Has breakpoint keys (sm/md/lg) - check if individual spacing values need normalization
+      // This handles cases like: spacing={{ sm: { all: 2 }, md: { all: "16px" } }}
+      const breakpointSpacing = props.spacing as Record<string, SpacingDefinition>
+      const normalizedSpacing: Record<string, SpacingDefinition> = {}
+
+      Object.keys(breakpointSpacing).forEach((breakpoint) => {
+        const spacingDef = breakpointSpacing[breakpoint]
+        // Always include the spacing definition, whether it has numbers or strings
+        normalizedSpacing[breakpoint] = spacingDef
+      })
+
+      normalizedProps.spacing = normalizedSpacing
     }
-    // If already has breakpoint keys (sm/md/lg), leave as-is
   }
   
   return normalizedProps
