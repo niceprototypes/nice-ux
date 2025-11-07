@@ -22,7 +22,7 @@ const Tile: React.FC<TileProps> = ({
   titleColor,
   contentLeft: TileLeft,
   contentRight: TileRight,
-  spacing = null,
+  spacing,
 }) => {
   return (
     <OuterStyled
