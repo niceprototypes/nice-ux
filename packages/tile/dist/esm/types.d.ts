@@ -1,4 +1,5 @@
 import * as React from "react";
+import type { GapSize, SpacingDefinition } from "nice-react-flex";
 export interface TileProps {
     children: React.ReactNode;
     breakpointMd?: number;
@@ -16,5 +17,9 @@ export interface TileProps {
     titleColor?: string;
     contentLeft?: React.ReactNode;
     contentRight?: React.ReactNode;
-    spacing?: string;
+    spacing?: GapSize | SpacingDefinition | {
+        sm?: SpacingDefinition;
+        md?: SpacingDefinition;
+        lg?: SpacingDefinition;
+    };
 }

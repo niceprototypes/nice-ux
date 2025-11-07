@@ -16,30 +16,30 @@ const TileLayout: React.FC<TileLayoutProps> = ({
   title,
   titleAlign = "left",
   titleColor,
-  contentLeft,
-  contentRight,
+  contentLeft: LeftRendered,
+  contentRight: RightRendered,
 }) => {
+  const SlotRendered = (
+    <TileSlot title={title} titleAlign={titleAlign} titleColor={titleColor}>
+      {children}
+    </TileSlot>
+  )
+
   return (
     <Flex direction="column" gap={6}>
-      {!!contentLeft || !!contentRight ? (
+      {!!LeftRendered || !!RightRendered ? (
         <Flex
           direction={{ sm: "column", md: "row" }}
           alignItems="center"
           gap={5}
         >
-          {contentLeft}
+          {LeftRendered}
           <Flex direction="column" grow={1}>
-            <TileSlot title={title} titleAlign={titleAlign} titleColor={titleColor}>
-              {children}
-            </TileSlot>
+            {SlotRendered}
           </Flex>
-          {contentRight}
+          {RightRendered}
         </Flex>
-      ) : (
-        <TileSlot title={title} titleAlign={titleAlign} titleColor={titleColor}>
-          {children}
-        </TileSlot>
-      )}
+      ) : SlotRendered}
     </Flex>
   )
 }

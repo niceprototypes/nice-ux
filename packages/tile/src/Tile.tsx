@@ -5,14 +5,10 @@ import { OuterStyled, InnerStyled } from "./styles"
 import TileLayout from "./TileLayout"
 import TileSlot from "./TileSlot"
 
-// Default breakpoint values from helpshelf-ui
-const DEFAULT_BREAKPOINT_MD = 980
-const DEFAULT_BREAKPOINT_LG = 1280
-
 const Tile: React.FC<TileProps> = ({
   children,
-  breakpointMd = DEFAULT_BREAKPOINT_MD,
-  breakpointLg = DEFAULT_BREAKPOINT_LG,
+  breakpointMd,
+  breakpointLg,
   className,
   style,
   backgroundImage,
@@ -26,7 +22,7 @@ const Tile: React.FC<TileProps> = ({
   titleColor,
   contentLeft: TileLeft,
   contentRight: TileRight,
-  spacing = "var(--nice-tile-spacing, 8rem)",
+  spacing = null,
 }) => {
   return (
     <OuterStyled
@@ -44,9 +40,9 @@ const Tile: React.FC<TileProps> = ({
         as={Flex}
         direction="column"
         grow={1}
+        spacing={spacing}
         $breakpointMd={breakpointMd}
         $breakpointLg={breakpointLg}
-        spacing={{ sm: { vertical: spacing, horizontal: 4 }, md: { horizontal: null } }}
       >
         {title || TileLeft || TileRight ? (
           <TileLayout

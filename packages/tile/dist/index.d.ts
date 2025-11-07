@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { GapSize, SpacingDefinition } from 'nice-react-flex';
 
 interface TileProps {
     children: React.ReactNode;
@@ -17,7 +18,11 @@ interface TileProps {
     titleColor?: string;
     contentLeft?: React.ReactNode;
     contentRight?: React.ReactNode;
-    spacing?: string;
+    spacing?: GapSize | SpacingDefinition | {
+        sm?: SpacingDefinition;
+        md?: SpacingDefinition;
+        lg?: SpacingDefinition;
+    };
 }
 
 declare const Tile: React.FC<TileProps>;
