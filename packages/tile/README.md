@@ -1,6 +1,6 @@
 # nice-react-tile
 
-A responsive Tile component for React with styled-components, providing flexible layout with customizable breakpoints.
+A responsive Tile component for React with styled-components, providing flexible layout with customizable breakpoints, background styling, and advanced layout features.
 
 ## Installation
 
@@ -13,10 +13,12 @@ npm install nice-react-tile
 Make sure you have the following peer dependencies installed:
 
 ```bash
-npm install react styled-components nice-react-flex
+npm install react react-dom styled-components nice-react-flex nice-react-typography
 ```
 
 ## Usage
+
+### Basic Usage
 
 ```tsx
 import React from 'react'
@@ -32,6 +34,62 @@ const App = () => (
 export default App
 ```
 
+### With Title and Background
+
+```tsx
+<Tile
+  title="Welcome"
+  titleAlign="center"
+  backgroundColor="#f5f5f5"
+>
+  <p>Content with a title and background color</p>
+</Tile>
+```
+
+### With Background Image
+
+```tsx
+<Tile
+  backgroundImage="url('/path/to/image.jpg')"
+  backgroundPosition="center"
+  backgroundSize="cover"
+  backgroundAttachment="fixed"
+>
+  <div>Content with background image</div>
+</Tile>
+```
+
+### With Split Layout
+
+```tsx
+<Tile
+  title="Dashboard"
+  contentLeft={<div>Left sidebar content</div>}
+  contentRight={<div>Right sidebar content</div>}
+>
+  <div>Main content area</div>
+</Tile>
+```
+
+### With Custom Spacing
+
+```tsx
+<Tile spacing="lg">
+  <div>Content with large spacing between children</div>
+</Tile>
+
+// Or with responsive spacing
+<Tile
+  spacing={{
+    sm: { x: 'sm', y: 'md' },
+    md: { x: 'md', y: 'lg' },
+    lg: { x: 'lg', y: 'xl' }
+  }}
+>
+  <div>Content with responsive spacing</div>
+</Tile>
+```
+
 ## Props
 
 | Prop | Type | Default | Description |
@@ -39,6 +97,27 @@ export default App
 | `children` | `React.ReactNode` | - | Content to be rendered inside the tile |
 | `breakpointMd` | `number` | `980` | Medium breakpoint value in pixels |
 | `breakpointLg` | `number` | `1280` | Large breakpoint value in pixels |
+| `className` | `string` | - | Custom CSS class name |
+| `style` | `React.CSSProperties` | - | Custom inline styles |
+| `backgroundImage` | `string` | - | Background image (use CSS `url()` syntax) |
+| `backgroundColor` | `string` | - | Background color |
+| `backgroundPosition` | `string` | `"center"` | Background image position |
+| `backgroundSize` | `string` | `"cover"` | Background image size |
+| `backgroundAttachment` | `string` | `"fixed"` | Background attachment (applied only on landscape orientation) |
+| `fullWidth` | `boolean` | `false` | Force tile to take full width |
+| `title` | `string \| React.ReactNode` | - | Title to display at the top of the tile |
+| `titleAlign` | `"left" \| "center" \| "right"` | `"left"` | Alignment of the title |
+| `titleColor` | `string` | - | Color of the title text |
+| `contentLeft` | `React.ReactNode` | - | Content for left sidebar (creates split layout) |
+| `contentRight` | `React.ReactNode` | - | Content for right sidebar (creates split layout) |
+| `spacing` | `GapSize \| SpacingDefinition \| object` | - | Spacing between child elements (from nice-react-flex) |
+
+### Spacing Types
+
+The `spacing` prop accepts:
+- **GapSize**: Simple string values like `"sm"`, `"md"`, `"lg"`, `"xl"`
+- **SpacingDefinition**: Object with `x` and `y` properties for horizontal and vertical spacing
+- **Responsive object**: Different spacing for `sm`, `md`, and `lg` breakpoints
 
 ## Custom Breakpoints
 
@@ -50,11 +129,20 @@ You can customize the breakpoints to match your design system:
 </Tile>
 ```
 
+## Layout Features
+
+### Split Layout
+When `contentLeft` or `contentRight` props are provided, the tile automatically creates a three-column layout with sidebars and main content area.
+
+### Title Display
+The `title` prop can accept either a string or a custom React component, giving you full control over the title appearance.
+
 ## Default Behavior
 
 - Content is full-width on mobile and tablet
 - At the large breakpoint (1280px by default), content is constrained to the breakpoint width and centered
 - Uses flexbox layout with `direction="column"` and `grow={1}`
+- Background images use `fixed` attachment only on landscape orientation for better mobile performance
 
 ## License
 
