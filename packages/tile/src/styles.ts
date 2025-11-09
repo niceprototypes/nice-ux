@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components"
+import Flex from "nice-react-flex"
 
 export const OuterStyled = styled.div<{
   $backgroundImage?: string
@@ -37,7 +38,7 @@ export const OuterStyled = styled.div<{
   }}
 `
 
-export const InnerStyled = styled.div<{
+export const InnerStyled = styled(Flex)<{
   $isComplete?: boolean
   $breakpointMd?: number
   $breakpointLg?: number

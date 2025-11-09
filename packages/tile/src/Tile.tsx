@@ -37,7 +37,6 @@ const Tile: React.FC<TileProps> = ({
       $fullWidth={fullWidth}
     >
       <InnerStyled
-        as={Flex}
         direction="column"
         grow={1}
         spacing={spacing}
