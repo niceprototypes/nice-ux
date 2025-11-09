@@ -1,6 +1,6 @@
 {
   "name": "nice-react-typography",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "type": "module",
   "description": "A flexible and customizable Typography component for React with styled-components",
   "main": "dist/index.js",
