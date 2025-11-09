@@ -4,6 +4,29 @@ import { TypographyProps } from "./types"
 import getEffectiveFontWeight from "./services/getEffectiveFontWeight"
 import getEffectiveLineHeight from "./services/getEffectiveLineHeight"
 
+/**
+ * Typography component for rendering text with flexible styling options.
+ *
+ * Provides comprehensive text styling control with semantic HTML elements,
+ * CSS custom properties, and accessibility features.
+ *
+ * @example
+ * ```tsx
+ * // Simple heading
+ * <Typography as="h1">Main Heading</Typography>
+ *
+ * // Custom size and weight
+ * <Typography size="1.125rem" weight="500">Custom text</Typography>
+ *
+ * // Using CSS variables
+ * <Typography size="var(--text-lg)" weight="var(--font-semibold)">
+ *   Themed text
+ * </Typography>
+ *
+ * // Status-based color
+ * <Typography status="success">Success message</Typography>
+ * ```
+ */
 const Typography: React.FC<TypographyProps> = ({
   align,
   antialiased = false,

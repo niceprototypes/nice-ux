@@ -1,29 +1,75 @@
 import * as React from "react"
 
-export type TypographyAsType = "h1" | "h2" | "h3" | "h4" | "p" | "span"
+/**
+ * Text alignment options
+ */
+export type AlignType = "left" | "center" | "right" | "justify"
 
-export type StatusType = 
-  | "success"
-  | "error"
-  | "warning"
+/**
+ * Line height options using CSS custom properties
+ * - `default`: Standard line height (1.5) for body text
+ * - `condensed`: Tighter line height (1.25) for headings
+ */
+export type LineHeightType = "default" | "condensed"
+
+/**
+ * Semantic status colors mapped to CSS custom properties
+ * - **Functional**: `active`, `default`, `disabled`, `error`, `success`, `warning`
+ * - **Visual**: `highlighted`, `primary`, `secondary`
+ */
+export type StatusType =
   | "active"
   | "default"
   | "disabled"
+  | "error"
   | "highlighted"
   | "primary"
   | "secondary"
+  | "success"
+  | "warning"
 
+/**
+ * HTML element types supported by the Typography component
+ */
+export type TypographyAsType = "h1" | "h2" | "h3" | "h4" | "p" | "span"
+
+/**
+ * Props for the Typography component
+ */
 export type TypographyProps = {
-  as?: TypographyAsType
-  size?: number // 1-6, where 1 is smallest and 6 is largest
-  weight?: number
-  color?: string
+  /** Text alignment */
+  align?: AlignType
+
+  /** Enable font antialiasing for smoother text rendering */
   antialiased?: boolean
-  legibilityOptimized?: boolean
-  align?: "left" | "center" | "right" | "justify"
-  lineHeight?: "default" | "condensed"
-  status?: StatusType
-  code?: boolean
+
+  /** HTML element to render */
+  as?: TypographyAsType
+
+  /** Text content or child elements */
   children: React.ReactNode
+
+  /** CSS class name for styling */
   className?: string
+
+  /** Apply monospace font for code snippets */
+  code?: boolean
+
+  /** Custom text color (any valid CSS color value) */
+  color?: string
+
+  /** Apply legibility optimizations (hardware acceleration, 3D transforms) */
+  legibilityOptimized?: boolean
+
+  /** Line height setting (defaults based on element type) */
+  lineHeight?: LineHeightType
+
+  /** Font size (any valid CSS size value or CSS variable) */
+  size?: string
+
+  /** Semantic status color (overrides color prop) */
+  status?: StatusType
+
+  /** Font weight (any valid CSS weight value or CSS variable) */
+  weight?: string
 }

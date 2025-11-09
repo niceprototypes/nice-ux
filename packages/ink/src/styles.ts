@@ -1,7 +1,15 @@
 import styled, { css } from "styled-components"
-import { TypographyAsType } from "./types"
-import { getCssVariable, styleAntialiasing } from "./utils"
+import { TypographyAsType, AlignType, LineHeightType } from "./types"
+import { styleAntialiasing } from "./utils"
 
+/**
+ * CSS styles for optimized text legibility
+ *
+ * Applies hardware acceleration and 3D transform optimizations:
+ * - Backface visibility for sharper text
+ * - 3D perspective for improved rendering
+ * - Transform hints for GPU acceleration
+ */
 export const styleOptimizedLegibility = css`
   backface-visibility: hidden;
   perspective: 1000px;
@@ -11,64 +19,66 @@ export const styleOptimizedLegibility = css`
 
 export const StyledTypography = styled.p<{
   $as: TypographyAsType
-  $size?: number
-  $weight?: number
+  $size?: string
+  $weight?: string
   $color?: string
   $antialiased?: boolean
   $legibilityOptimized?: boolean
-  $align?: "left" | "center" | "right" | "justify"
-  $lineHeight?: "default" | "condensed"
+  $align?: AlignType
+  $lineHeight?: LineHeightType
   $code?: boolean
 }>`
   margin: 0;
 
   ${({ $as }) =>
-    ($as === "h1" || $as === "h2" || $as === "h3" || $as === "h4") &&
-    css`
-      font-family: var(--font-family-heading);
-    `}
+      ($as === "h1" || $as === "h2" || $as === "h3" || $as === "h4") &&
+      css`
+        font-family: var(--font-family-heading);
+      `}
 
   ${({ $code }) =>
-    $code &&
-    css`
-      font-family: "SF Mono", "Monaco", "Inconsolata", "Fira Code", monospace;
-    `}
+      $code &&
+      css`
+        font-family: "SF Mono", "Monaco", "Inconsolata", "Fira Code", monospace;
+      `}
 
   ${({ $color }) =>
-    $color &&
-    css`
-      color: ${$color};
-    `}
+      $color &&
+      css`
+        color: ${$color};
+      `}
 
-  ${({ $as, $size }) => {
-    // Determine default size based on element type
-    const defaultSize = $as === "h1" ? 5 : $as === "h2" ? 4 : $as === "h3" ? 3 : 3
-    const actualSize = $size || defaultSize
-
-    return css`
-      font-size: ${getCssVariable("font-size", actualSize)};
-    `
-  }}
+  ${({ $size }) =>
+      $size
+          ? css`
+            font-size: ${$size};
+          `
+          : css`
+            font-size: var(--typography-size-default, 1rem);
+          `}
 
   ${({ $weight }) =>
-    $weight &&
-    css`
-      font-weight: var(--font-weight-${$weight});
-    `}
+      $weight
+          ? css`
+            font-weight: ${$weight};
+          `
+          : css`
+            font-weight: var(--typography-weight-default, normal);
+          `}
 
   ${({ $antialiased }) => $antialiased && styleAntialiasing}
 
   ${({ $legibilityOptimized }) => $legibilityOptimized && styleOptimizedLegibility}
 
   ${({ $align }) =>
-    $align &&
-    css`
-      text-align: ${$align};
-    `}
+      $align &&
+      css`
+        text-align: ${$align};
+      `}
 
   ${({ $lineHeight }) =>
-    $lineHeight &&
-    css`
-      line-height: var(--line-height-${$lineHeight});
-    `}
+      $lineHeight &&
+      css`
+        line-height: var(--line-height-${$lineHeight});
+      `}
 `
