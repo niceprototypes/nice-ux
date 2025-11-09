@@ -2,6 +2,33 @@
 
 A flexible and customizable typography component for React with styled-components. Provides comprehensive text styling control with semantic HTML elements, CSS custom properties, and accessibility features.
 
+## Why Choose nice-react-typography?
+
+Unlike monolithic UI frameworks that enforce their design system and component ecosystem, `nice-react-typography` is built on web standards and provides direct control over typography:
+
+### Framework Independence
+- **Composable architecture**: Integrates with any UI library or framework (Material-UI, Chakra, Ant Design, or standalone)
+- **Minimal dependencies**: Requires only React and styled-components
+- **Incremental adoption**: Integrate into existing codebases without refactoring
+
+### Standards-Based Design
+- **CSS Custom Properties**: Uses native CSS variables rather than proprietary theming systems
+- **Cross-system compatibility**: Works with any design system that uses CSS variables
+- **Web standards foundation**: Relies on stable CSS specifications rather than framework-specific APIs
+
+### Direct Control
+- **Custom design tokens**: Define typography scales and weights to match your specifications
+- **Value flexibility**: Accepts literal CSS values (`"1.5rem"`, `"600"`) or CSS variables (`var(--text-lg)`)
+- **No theming layer**: Bypasses theme providers and context APIs in favor of standard CSS variables
+- **Safe fallbacks**: CSS variables include sensible defaults (`1rem` for size, `normal` for weight) that render correctly even when design tokens are undefined
+
+### Focused Implementation
+- **Single responsibility**: Handles typography styling without additional UI concerns
+- **Small package size**: ~10KB compared to 100KB+ for full UI frameworks
+- **Minimal runtime cost**: No theme context lookups or prop transformation overhead
+
+Designed for teams building production applications who need reliable typography without framework dependencies, or for design systems requiring precise control over type rendering.
+
 ## Features
 
 - 🎯 **Semantic HTML**: Supports h1-h4, p, and span elements
@@ -69,7 +96,19 @@ import Typography from 'nice-react-typography'
 
 ## CSS Custom Properties
 
-The component uses CSS custom properties for flexible theming. Define these in your application:
+The component uses CSS custom properties with built-in fallback values, ensuring typography renders correctly even when design tokens are not defined.
+
+### Fallback Mechanism
+
+All CSS variables include safe defaults using the native CSS `var()` fallback syntax:
+
+```css
+/* Component implementation */
+font-size: var(--typography-size-default, 1rem);     /* Falls back to 1rem */
+font-weight: var(--typography-weight-default, normal); /* Falls back to normal */
+```
+
+This means the component works immediately after installation without requiring CSS variable definitions. Define custom values only when needed to override defaults.
 
 ### Typography Defaults
 
@@ -90,6 +129,8 @@ The component uses CSS custom properties for flexible theming. Define these in y
   --font-family-heading: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 ```
+
+All variables are optional. Undefined variables automatically use their fallback values.
 
 ## Status Types
 
