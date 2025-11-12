@@ -1,295 +1,103 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import { useDeviceDetector } from "nice-react-hook-device-detector"
-import Flex from "nice-react-flex"
-import Typography from "nice-react-typography"
+import { useDeviceDetector, DeviceProvider, useDevice } from "nice-react-hook-device-detector"
 import { useEffect, useState } from "react"
 
 /**
- * # useDeviceDetector Hook
+ * # useDeviceDetector Hook (v1.1+)
  *
- * A React hook for detecting mobile devices with enhanced debugging capabilities.
+ * A React hook for detecting mobile devices with enhanced debugging capabilities and Chrome DevTools support.
  *
- * ## Features
+ * ## Why Choose This Hook?
  *
- * - **User Agent Detection**: Identifies mobile devices from user agent strings
- * - **Touch Capability**: Detects touch-enabled devices
- * - **Viewport Width**: Considers screen size (≤480px as mobile)
- * - **Chrome DevTools Support**: Works with mobile emulation
- * - **Debug Mode**: Force mobile view via localStorage or URL parameter
- * - **Responsive**: Automatically updates on window resize
+ * Unlike simple user agent checks, this hook:
+ * - Uses multi-layered detection (user agent, touch, viewport, DevTools)
+ * - Responds to window resize events in real-time
+ * - Includes debug mode for easy testing
+ * - Provides both hook and context-based APIs
+ * - Zero dependencies except React
  *
- * ## Usage
+ * ## Key Features
  *
- * ```tsx
- * import { useDeviceDetector } from 'nice-react-hook-device-detector'
+ * - **Smart Detection**: Combines user agent, touch capability, and viewport width
+ * - **DevTools Support**: Works with Chrome DevTools mobile emulation
+ * - **Debug Mode**: Force mobile/desktop via localStorage or URL parameters
+ * - **Responsive**: Auto-updates on window resize
+ * - **Two APIs**: Direct hook or Context Provider pattern
+ * - **TypeScript**: Full type definitions included
  *
- * function MyComponent() {
- *   const isMobile = useDeviceDetector()
+ * ## Detection Methods
  *
- *   return (
- *     <div>
- *       {isMobile ? (
- *         <MobileView />
- *       ) : (
- *         <DesktopView />
- *       )}
- *     </div>
- *   )
- * }
- * ```
+ * The hook uses a comprehensive 5-layer approach:
+ * 1. **Debug Mode**: Check localStorage (`debug-mobile`) or URL param (`?mobile=true`)
+ * 2. **User Agent**: Parse browser UA string for mobile indicators
+ * 3. **Touch Support**: Detect `ontouchstart` or `maxTouchPoints > 0`
+ * 4. **Viewport Width**: Screens ≤ 480px considered mobile
+ * 5. **DevTools**: Combine touch + small screen for emulation detection
  *
  * ## Debug Mode
  *
- * Enable mobile view for testing:
- * - URL parameter: `?mobile=true`
- * - localStorage: `localStorage.setItem('debug-mobile', 'true')`
+ * Enable mobile mode for testing:
+ * ```javascript
+ * // Method 1: localStorage
+ * localStorage.setItem('debug-mobile', 'true')
  *
- * ## Detection Criteria
- *
- * Device is considered mobile if:
- * 1. User agent matches mobile patterns (Android, iPhone, iPad, etc.), OR
- * 2. Has touch capability AND viewport width ≤ 480px
+ * // Method 2: URL parameter
+ * window.location.href = '?mobile=true'
+ * ```
  */
 
-// Demo component that uses the hook
-function DeviceDetectorDemo() {
-  const isMobile = useDeviceDetector()
-  const [windowWidth, setWindowWidth] = useState<number>(0)
+// Helper component to display device info
+const DeviceInfo = ({ isMobile }: { isMobile: boolean }) => {
+  const [windowWidth, setWindowWidth] = useState(
+    typeof window !== "undefined" ? window.innerWidth : 0
+  )
 
   useEffect(() => {
-    const updateWidth = () => setWindowWidth(window.innerWidth)
-    updateWidth()
-    window.addEventListener("resize", updateWidth)
-    return () => window.removeEventListener("resize", updateWidth)
+    const handleResize = () => setWindowWidth(window.innerWidth)
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
   }, [])
 
   return (
-    <Flex direction="column" gap={3} type="padding" spacing={{ all: 3 }}>
-      <Flex
-        direction="column"
-        gap={2}
-        type="padding"
-        spacing={{ all: 3 }}
-        style={{
-          backgroundColor: isMobile ? "#e3f2fd" : "#f3e5f5",
-          borderRadius: "8px",
-          border: `2px solid ${isMobile ? "#1976d2" : "#7b1fa2"}`,
-        }}
-      >
-        <Typography as="h3" size={4} weight={700}>
-          Device Detection Result
-        </Typography>
-
-        <Flex direction="row" gap={2} alignItems="center">
-          <Typography as="p" size={3} weight={600}>
-            Device Type:
-          </Typography>
-          <Typography
-            as="p"
-            size={3}
-            status={isMobile ? "active" : "success"}
-            weight={700}
-          >
-            {isMobile ? "📱 Mobile" : "🖥️ Desktop"}
-          </Typography>
-        </Flex>
-
-        <Flex direction="row" gap={2} alignItems="center">
-          <Typography as="p" size={3} weight={600}>
-            Window Width:
-          </Typography>
-          <Typography as="p" size={3} code>
-            {windowWidth}px
-          </Typography>
-        </Flex>
-
-        <Flex direction="row" gap={2} alignItems="center">
-          <Typography as="p" size={3} weight={600}>
-            Mobile Breakpoint:
-          </Typography>
-          <Typography as="p" size={3} code>
-            ≤ 480px
-          </Typography>
-        </Flex>
-      </Flex>
-
-      <Flex direction="column" gap={2}>
-        <Typography as="h4" size={3} weight={600}>
-          Detection Details
-        </Typography>
-
-        <Flex direction="column" gap={1}>
-          <Typography as="p" size={2}>
-            <strong>User Agent:</strong>
-          </Typography>
-          <Typography as="p" size={1} code style={{ backgroundColor: "#f5f5f5", padding: "8px", borderRadius: "4px", wordBreak: "break-all" }}>
-            {navigator.userAgent}
-          </Typography>
-        </Flex>
-
-        <Flex direction="column" gap={1}>
-          <Typography as="p" size={2}>
-            <strong>Touch Capability:</strong> {('ontouchstart' in window || navigator.maxTouchPoints > 0) ? "Yes ✓" : "No ✗"}
-          </Typography>
-          <Typography as="p" size={2}>
-            <strong>Max Touch Points:</strong> {navigator.maxTouchPoints}
-          </Typography>
-        </Flex>
-      </Flex>
-    </Flex>
-  )
-}
-
-// Debug mode demo
-function DebugModeDemo() {
-  const isMobile = useDeviceDetector()
-  const [debugEnabled, setDebugEnabled] = useState(false)
-
-  useEffect(() => {
-    const isDebugMode = localStorage.getItem("debug-mobile") === "true" ||
-                        new URLSearchParams(window.location.search).get("mobile") === "true"
-    setDebugEnabled(isDebugMode)
-  }, [])
-
-  const enableDebugMode = () => {
-    localStorage.setItem("debug-mobile", "true")
-    window.location.reload()
-  }
-
-  const disableDebugMode = () => {
-    localStorage.removeItem("debug-mobile")
-    window.location.reload()
-  }
-
-  return (
-    <Flex direction="column" gap={3} type="padding" spacing={{ all: 3 }}>
-      <Flex
-        direction="column"
-        gap={2}
-        type="padding"
-        spacing={{ all: 2 }}
-        style={{ backgroundColor: "#fff3e0", borderRadius: "8px" }}
-      >
-        <Typography as="h4" size={3} weight={600}>
-          Debug Mode
-        </Typography>
-
-        <Typography as="p" size={2}>
-          Debug mode allows you to force mobile view for testing purposes without using browser dev tools.
-        </Typography>
-
-        <Flex direction="column" gap={1}>
-          <Typography as="p" size={2} weight={600}>
-            Status: {debugEnabled ? "🟢 Enabled" : "🔴 Disabled"}
-          </Typography>
-          <Typography as="p" size={2}>
-            Currently detected as: <strong>{isMobile ? "Mobile" : "Desktop"}</strong>
-          </Typography>
-        </Flex>
-
-        <Flex direction="row" gap={2}>
-          <button
-            onClick={enableDebugMode}
-            style={{
-              padding: "8px 16px",
-              backgroundColor: "#4caf50",
-              color: "white",
-              border: "none",
-              borderRadius: "4px",
-              cursor: "pointer",
-              fontSize: "14px",
-            }}
-          >
-            Enable Debug Mode
-          </button>
-          <button
-            onClick={disableDebugMode}
-            style={{
-              padding: "8px 16px",
-              backgroundColor: "#f44336",
-              color: "white",
-              border: "none",
-              borderRadius: "4px",
-              cursor: "pointer",
-              fontSize: "14px",
-            }}
-          >
-            Disable Debug Mode
-          </button>
-        </Flex>
-      </Flex>
-
-      <Flex direction="column" gap={1}>
-        <Typography as="p" size={2}>
-          <strong>Method 1: localStorage</strong>
-        </Typography>
-        <Typography as="p" size={1} code style={{ backgroundColor: "#f5f5f5", padding: "8px", borderRadius: "4px" }}>
-          localStorage.setItem('debug-mobile', 'true')
-        </Typography>
-
-        <Typography as="p" size={2} style={{ marginTop: "12px" }}>
-          <strong>Method 2: URL Parameter</strong>
-        </Typography>
-        <Typography as="p" size={1} code style={{ backgroundColor: "#f5f5f5", padding: "8px", borderRadius: "4px" }}>
-          ?mobile=true
-        </Typography>
-      </Flex>
-    </Flex>
-  )
-}
-
-// Responsive layout example
-function ResponsiveLayoutExample() {
-  const isMobile = useDeviceDetector()
-
-  return (
-    <Flex
-      direction={isMobile ? "column" : "row"}
-      gap={isMobile ? 2 : 3}
-      type="padding"
-      spacing={{ all: 3 }}
+    <div
+      style={{
+        padding: "24px",
+        borderRadius: "8px",
+        backgroundColor: isMobile ? "#dcfce7" : "#dbeafe",
+        border: `2px solid ${isMobile ? "#16a34a" : "#2563eb"}`,
+        fontFamily: "system-ui, sans-serif",
+      }}
     >
-      <Flex
-        direction="column"
-        gap={2}
-        type="padding"
-        spacing={{ all: 2 }}
+      <div
         style={{
-          flex: 1,
-          backgroundColor: "#e8f5e9",
-          borderRadius: "8px",
+          fontSize: "24px",
+          fontWeight: "bold",
+          marginBottom: "16px",
+          color: isMobile ? "#15803d" : "#1e40af",
         }}
       >
-        <Typography as="h4" size={3} weight={600}>
-          Sidebar
-        </Typography>
-        <Typography as="p" size={2}>
-          {isMobile ? "Stacked on mobile" : "Side-by-side on desktop"}
-        </Typography>
-      </Flex>
-
-      <Flex
-        direction="column"
-        gap={2}
-        type="padding"
-        spacing={{ all: 2 }}
-        style={{
-          flex: 2,
-          backgroundColor: "#e3f2fd",
-          borderRadius: "8px",
-        }}
-      >
-        <Typography as="h4" size={3} weight={600}>
-          Main Content
-        </Typography>
-        <Typography as="p" size={2}>
-          Layout automatically adjusts based on device type.
-        </Typography>
-        <Typography as="p" size={2}>
-          Current layout: <strong>{isMobile ? "Mobile (Column)" : "Desktop (Row)"}</strong>
-        </Typography>
-      </Flex>
-    </Flex>
+        {isMobile ? "📱 Mobile Device" : "🖥️ Desktop Device"}
+      </div>
+      <div style={{ fontSize: "14px", color: "#374151", lineHeight: "1.6" }}>
+        <div>
+          <strong>Detection Status:</strong> {isMobile ? "Mobile" : "Desktop"}
+        </div>
+        <div>
+          <strong>Window Width:</strong> {windowWidth}px
+        </div>
+        <div>
+          <strong>Mobile Threshold:</strong> ≤ 480px
+        </div>
+        <div>
+          <strong>User Agent:</strong>{" "}
+          {typeof navigator !== "undefined"
+            ? navigator.userAgent.includes("Mobile")
+              ? "Mobile UA"
+              : "Desktop UA"
+            : "N/A"}
+        </div>
+      </div>
+    </div>
   )
 }
 
@@ -299,7 +107,9 @@ const meta = {
     layout: "padded",
     docs: {
       description: {
-        component: "A React hook for detecting mobile devices with enhanced debugging capabilities.",
+        component:
+          "Mobile device detection hook with multi-layered detection strategy, " +
+          "debug mode support, and real-time responsiveness. Works with direct hook calls or Context API.",
       },
     },
   },
@@ -310,152 +120,874 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 /**
- * Basic device detection display
+ * Basic usage of the hook directly in a component.
+ * Returns a boolean indicating if a mobile device is detected.
  */
-export const BasicDetection: Story = {
-  render: () => <DeviceDetectorDemo />,
+export const BasicUsage: Story = {
+  render: () => {
+    const isMobile = useDeviceDetector()
+    return <DeviceInfo isMobile={isMobile} />
+  },
 }
 
 /**
- * Debug mode for testing mobile views
+ * Demonstrates conditional rendering based on device type.
+ * A common pattern for showing different UIs on mobile vs desktop.
+ */
+export const ConditionalRendering: Story = {
+  render: () => {
+    const isMobile = useDeviceDetector()
+
+    return (
+      <div style={{ fontFamily: "system-ui, sans-serif" }}>
+        {isMobile ? (
+          <div
+            style={{
+              padding: "16px",
+              backgroundColor: "#fef3c7",
+              borderRadius: "8px",
+              border: "2px solid #f59e0b",
+            }}
+          >
+            <h3 style={{ margin: "0 0 8px 0", color: "#92400e" }}>
+              📱 Mobile View
+            </h3>
+            <p style={{ margin: 0, fontSize: "14px", color: "#78350f" }}>
+              This content is optimized for mobile devices with touch
+              interactions and simplified navigation.
+            </p>
+          </div>
+        ) : (
+          <div
+            style={{
+              padding: "24px",
+              backgroundColor: "#e0e7ff",
+              borderRadius: "8px",
+              border: "2px solid #6366f1",
+            }}
+          >
+            <h3 style={{ margin: "0 0 12px 0", color: "#3730a3" }}>
+              🖥️ Desktop View
+            </h3>
+            <p style={{ margin: 0, fontSize: "16px", color: "#4338ca" }}>
+              This content is optimized for desktop with advanced features, rich
+              interactions, and full navigation menus.
+            </p>
+          </div>
+        )}
+      </div>
+    )
+  },
+}
+
+/**
+ * Shows how to use the hook for conditional styling.
+ * Adjust padding, font sizes, or layouts based on device type.
+ */
+export const ConditionalStyling: Story = {
+  render: () => {
+    const isMobile = useDeviceDetector()
+
+    return (
+      <div
+        style={{
+          padding: isMobile ? "12px" : "32px",
+          fontSize: isMobile ? "14px" : "16px",
+          backgroundColor: "#f3f4f6",
+          borderRadius: "8px",
+          fontFamily: "system-ui, sans-serif",
+          maxWidth: isMobile ? "100%" : "600px",
+          margin: "0 auto",
+        }}
+      >
+        <h3
+          style={{
+            fontSize: isMobile ? "18px" : "24px",
+            marginTop: 0,
+            color: "#1f2937",
+          }}
+        >
+          Responsive Styling
+        </h3>
+        <p style={{ color: "#4b5563", lineHeight: "1.6" }}>
+          This component adapts its padding ({isMobile ? "12px" : "32px"}),
+          font size ({isMobile ? "14px" : "16px"}), and max width (
+          {isMobile ? "100%" : "600px"}) based on the detected device type.
+        </p>
+        <div
+          style={{
+            marginTop: "16px",
+            padding: "12px",
+            backgroundColor: isMobile ? "#dcfce7" : "#dbeafe",
+            borderRadius: "4px",
+            fontSize: "13px",
+          }}
+        >
+          <strong>Current Device:</strong> {isMobile ? "Mobile" : "Desktop"}
+        </div>
+      </div>
+    )
+  },
+}
+
+/**
+ * Context Provider approach for sharing device state across multiple components.
+ * More efficient than calling useDeviceDetector() in each component.
+ */
+export const UsingContextProvider: Story = {
+  render: () => {
+    const HeaderComponent = () => {
+      const { isMobile } = useDevice()
+      return (
+        <div
+          style={{
+            padding: "16px",
+            backgroundColor: "#1f2937",
+            color: "white",
+            borderRadius: "8px 8px 0 0",
+          }}
+        >
+          <h4 style={{ margin: 0, fontSize: isMobile ? "16px" : "20px" }}>
+            {isMobile ? "☰ Mobile Header" : "🏠 Desktop Header"}
+          </h4>
+        </div>
+      )
+    }
+
+    const ContentComponent = () => {
+      const { isMobile } = useDevice()
+      return (
+        <div
+          style={{
+            padding: isMobile ? "12px" : "24px",
+            backgroundColor: "#f9fafb",
+          }}
+        >
+          <p style={{ margin: 0, fontSize: "14px", color: "#4b5563" }}>
+            Both components use useDevice() hook but detection happens only
+            once at the Provider level.
+          </p>
+        </div>
+      )
+    }
+
+    const FooterComponent = () => {
+      const { isMobile } = useDevice()
+      return (
+        <div
+          style={{
+            padding: "12px",
+            backgroundColor: "#e5e7eb",
+            borderRadius: "0 0 8px 8px",
+            fontSize: "12px",
+            textAlign: "center",
+          }}
+        >
+          {isMobile ? "Compact Footer" : "Full Featured Footer"}
+        </div>
+      )
+    }
+
+    return (
+      <DeviceProvider>
+        <div style={{ maxWidth: "600px", margin: "0 auto" }}>
+          <HeaderComponent />
+          <ContentComponent />
+          <FooterComponent />
+        </div>
+      </DeviceProvider>
+    )
+  },
+}
+
+/**
+ * Debug mode demonstration.
+ * Use localStorage or URL parameters to force mobile/desktop detection for testing.
  */
 export const DebugMode: Story = {
-  render: () => <DebugModeDemo />,
-}
+  render: () => {
+    const isMobile = useDeviceDetector()
+    const [debugEnabled, setDebugEnabled] = useState(
+      localStorage.getItem("debug-mobile") === "true"
+    )
 
-/**
- * Responsive layout example using the hook
- */
-export const ResponsiveLayout: Story = {
-  render: () => <ResponsiveLayoutExample />,
-}
+    const enableDebug = () => {
+      localStorage.setItem("debug-mobile", "true")
+      setDebugEnabled(true)
+      window.location.reload()
+    }
 
-/**
- * Code example
- */
-export const CodeExample: Story = {
-  render: () => (
-    <Flex direction="column" gap={3} type="padding" spacing={{ all: 3 }}>
-      <Typography as="h3" size={4} weight={700}>
-        Usage Example
-      </Typography>
+    const disableDebug = () => {
+      localStorage.removeItem("debug-mobile")
+      setDebugEnabled(false)
+      window.location.reload()
+    }
 
-      <Flex direction="column" gap={1}>
-        <Typography as="p" size={2} weight={600}>
-          1. Import the hook
-        </Typography>
-        <Typography as="p" size={2} code style={{ backgroundColor: "#f5f5f5", padding: "8px", borderRadius: "4px" }}>
-          {`import { useDeviceDetector } from 'nice-react-hook-device-detector'`}
-        </Typography>
-      </Flex>
+    return (
+      <div style={{ fontFamily: "system-ui, sans-serif" }}>
+        <div
+          style={{
+            padding: "20px",
+            backgroundColor: "#fef9c3",
+            borderRadius: "8px",
+            border: "2px solid #eab308",
+            marginBottom: "16px",
+          }}
+        >
+          <h3 style={{ marginTop: 0, color: "#713f12" }}>🐛 Debug Mode</h3>
+          <p style={{ fontSize: "14px", color: "#854d0e", lineHeight: "1.6" }}>
+            Debug mode allows you to test mobile-specific features without an
+            actual mobile device. Enable it via localStorage or URL parameters.
+          </p>
 
-      <Flex direction="column" gap={1}>
-        <Typography as="p" size={2} weight={600}>
-          2. Use in your component
-        </Typography>
-        <pre style={{ backgroundColor: "#f5f5f5", padding: "16px", borderRadius: "4px", overflow: "auto" }}>
-          <code>{`function MyComponent() {
-  const isMobile = useDeviceDetector()
+          <div style={{ marginTop: "16px" }}>
+            <button
+              onClick={enableDebug}
+              style={{
+                padding: "8px 16px",
+                marginRight: "8px",
+                backgroundColor: "#22c55e",
+                color: "white",
+                border: "none",
+                borderRadius: "4px",
+                cursor: "pointer",
+                fontWeight: "500",
+              }}
+            >
+              Enable Debug Mode
+            </button>
+            <button
+              onClick={disableDebug}
+              style={{
+                padding: "8px 16px",
+                backgroundColor: "#ef4444",
+                color: "white",
+                border: "none",
+                borderRadius: "4px",
+                cursor: "pointer",
+                fontWeight: "500",
+              }}
+            >
+              Disable Debug Mode
+            </button>
+          </div>
 
-  return (
-    <div>
-      {isMobile ? (
-        <MobileNavigation />
-      ) : (
-        <DesktopNavigation />
-      )}
-    </div>
-  )
-}`}</code>
-        </pre>
-      </Flex>
-
-      <Flex direction="column" gap={1}>
-        <Typography as="p" size={2} weight={600}>
-          3. Conditional rendering based on device
-        </Typography>
-        <pre style={{ backgroundColor: "#f5f5f5", padding: "16px", borderRadius: "4px", overflow: "auto" }}>
-          <code>{`function App() {
-  const isMobile = useDeviceDetector()
-
-  return (
-    <Flex direction={isMobile ? "column" : "row"}>
-      <Sidebar />
-      <MainContent />
-    </Flex>
-  )
-}`}</code>
-        </pre>
-      </Flex>
-    </Flex>
-  ),
-}
-
-/**
- * Detection criteria explanation
- */
-export const DetectionCriteria: Story = {
-  render: () => (
-    <Flex direction="column" gap={3} type="padding" spacing={{ all: 3 }}>
-      <Typography as="h3" size={4} weight={700}>
-        Detection Criteria
-      </Typography>
-
-      <Flex direction="column" gap={2}>
-        <div style={{ backgroundColor: "#e3f2fd", padding: "16px", borderRadius: "8px" }}>
-          <Typography as="h4" size={3} weight={600} style={{ marginBottom: "8px" }}>
-            Method 1: User Agent Detection
-          </Typography>
-          <Typography as="p" size={2}>
-            Checks if the user agent string contains mobile device identifiers:
-          </Typography>
-          <Typography as="p" size={2} code style={{ marginTop: "8px", display: "block" }}>
-            Android | BlackBerry | iPhone | iPad | iPod | Opera Mini | IEMobile | WPDesktop | Mobile
-          </Typography>
+          <div
+            style={{
+              marginTop: "16px",
+              padding: "12px",
+              backgroundColor: "white",
+              borderRadius: "4px",
+              fontSize: "13px",
+            }}
+          >
+            <div>
+              <strong>Debug Status:</strong>{" "}
+              {debugEnabled ? "✅ Enabled" : "❌ Disabled"}
+            </div>
+            <div style={{ marginTop: "4px" }}>
+              <strong>Current Detection:</strong>{" "}
+              {isMobile ? "📱 Mobile" : "🖥️ Desktop"}
+            </div>
+          </div>
         </div>
 
-        <div style={{ backgroundColor: "#f3e5f5", padding: "16px", borderRadius: "8px" }}>
-          <Typography as="h4" size={3} weight={600} style={{ marginBottom: "8px" }}>
-            Method 2: Touch + Viewport Detection
-          </Typography>
-          <Typography as="p" size={2}>
-            Considers a device mobile if it has:
-          </Typography>
-          <ul style={{ marginTop: "8px", marginLeft: "20px" }}>
+        <div
+          style={{
+            padding: "16px",
+            backgroundColor: "#f3f4f6",
+            borderRadius: "8px",
+            fontSize: "13px",
+            color: "#374151",
+          }}
+        >
+          <h4 style={{ marginTop: 0 }}>Debug Methods:</h4>
+          <div style={{ lineHeight: "1.8" }}>
+            <div>
+              <strong>Method 1 (localStorage):</strong>
+            </div>
+            <code
+              style={{
+                display: "block",
+                padding: "8px",
+                backgroundColor: "#1f2937",
+                color: "#10b981",
+                borderRadius: "4px",
+                marginTop: "4px",
+                marginBottom: "12px",
+              }}
+            >
+              localStorage.setItem('debug-mobile', 'true')
+            </code>
+
+            <div>
+              <strong>Method 2 (URL parameter):</strong>
+            </div>
+            <code
+              style={{
+                display: "block",
+                padding: "8px",
+                backgroundColor: "#1f2937",
+                color: "#10b981",
+                borderRadius: "4px",
+                marginTop: "4px",
+              }}
+            >
+              ?mobile=true
+            </code>
+          </div>
+        </div>
+      </div>
+    )
+  },
+}
+
+/**
+ * Real-time responsiveness demonstration.
+ * The hook automatically updates when window is resized.
+ * Try resizing your browser window or using DevTools responsive mode.
+ */
+export const ResponsiveDemo: Story = {
+  render: () => {
+    const isMobile = useDeviceDetector()
+    const [resizeCount, setResizeCount] = useState(0)
+
+    useEffect(() => {
+      const handleResize = () => setResizeCount((c) => c + 1)
+      window.addEventListener("resize", handleResize)
+      return () => window.removeEventListener("resize", handleResize)
+    }, [])
+
+    return (
+      <div style={{ fontFamily: "system-ui, sans-serif" }}>
+        <div
+          style={{
+            padding: "20px",
+            backgroundColor: "#f0fdf4",
+            borderRadius: "8px",
+            border: "2px solid #22c55e",
+            marginBottom: "16px",
+          }}
+        >
+          <h3 style={{ marginTop: 0, color: "#15803d" }}>
+            📐 Responsive Detection
+          </h3>
+          <p style={{ fontSize: "14px", color: "#166534", lineHeight: "1.6" }}>
+            Try resizing your browser window or using Chrome DevTools responsive
+            mode. The hook will automatically detect changes and update.
+          </p>
+
+          <div
+            style={{
+              marginTop: "16px",
+              padding: "16px",
+              backgroundColor: "white",
+              borderRadius: "4px",
+            }}
+          >
+            <div style={{ fontSize: "14px", lineHeight: "1.8" }}>
+              <div>
+                <strong>Current Device:</strong>{" "}
+                <span
+                  style={{
+                    color: isMobile ? "#15803d" : "#1e40af",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {isMobile ? "📱 Mobile" : "🖥️ Desktop"}
+                </span>
+              </div>
+              <div>
+                <strong>Window Width:</strong>{" "}
+                {typeof window !== "undefined" ? window.innerWidth : 0}px
+              </div>
+              <div>
+                <strong>Resize Events:</strong> {resizeCount}
+              </div>
+              <div>
+                <strong>Threshold:</strong> 480px
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          style={{
+            padding: "16px",
+            backgroundColor: "#eff6ff",
+            borderRadius: "8px",
+            fontSize: "13px",
+          }}
+        >
+          <h4 style={{ marginTop: 0, color: "#1e40af" }}>💡 Testing Tips:</h4>
+          <ul style={{ marginBottom: 0, paddingLeft: "20px", color: "#1e3a8a" }}>
+            <li>Open Chrome DevTools (F12)</li>
+            <li>Toggle device toolbar (Ctrl+Shift+M / Cmd+Shift+M)</li>
+            <li>Select a mobile device from the dropdown</li>
+            <li>Watch the detection update in real-time</li>
+          </ul>
+        </div>
+      </div>
+    )
+  },
+}
+
+/**
+ * Feature toggling based on device type.
+ * Show/hide features or interactions based on mobile vs desktop.
+ */
+export const FeatureToggling: Story = {
+  render: () => {
+    const isMobile = useDeviceDetector()
+
+    const features = [
+      {
+        name: "Touch Gestures",
+        mobile: true,
+        desktop: false,
+        icon: "👆",
+      },
+      {
+        name: "Keyboard Shortcuts",
+        mobile: false,
+        desktop: true,
+        icon: "⌨️",
+      },
+      {
+        name: "Hover Effects",
+        mobile: false,
+        desktop: true,
+        icon: "🖱️",
+      },
+      {
+        name: "Swipe Navigation",
+        mobile: true,
+        desktop: false,
+        icon: "👉",
+      },
+      {
+        name: "Advanced Filters",
+        mobile: false,
+        desktop: true,
+        icon: "🔍",
+      },
+      {
+        name: "Bottom Sheet",
+        mobile: true,
+        desktop: false,
+        icon: "📱",
+      },
+    ]
+
+    const activeFeatures = features.filter((f) =>
+      isMobile ? f.mobile : f.desktop
+    )
+    const inactiveFeatures = features.filter((f) =>
+      isMobile ? !f.mobile : !f.desktop
+    )
+
+    return (
+      <div style={{ fontFamily: "system-ui, sans-serif" }}>
+        <div
+          style={{
+            padding: "20px",
+            backgroundColor: "#f0fdf4",
+            borderRadius: "8px",
+            marginBottom: "16px",
+          }}
+        >
+          <h3 style={{ marginTop: 0, color: "#15803d" }}>
+            ✨ Active Features ({isMobile ? "Mobile" : "Desktop"})
+          </h3>
+          <div style={{ display: "grid", gap: "8px" }}>
+            {activeFeatures.map((feature) => (
+              <div
+                key={feature.name}
+                style={{
+                  padding: "12px",
+                  backgroundColor: "white",
+                  borderRadius: "6px",
+                  border: "2px solid #22c55e",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "12px",
+                }}
+              >
+                <span style={{ fontSize: "24px" }}>{feature.icon}</span>
+                <span style={{ fontWeight: "500", color: "#15803d" }}>
+                  {feature.name}
+                </span>
+                <span
+                  style={{
+                    marginLeft: "auto",
+                    fontSize: "12px",
+                    padding: "4px 8px",
+                    backgroundColor: "#dcfce7",
+                    borderRadius: "4px",
+                    color: "#15803d",
+                  }}
+                >
+                  ✓ Enabled
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div
+          style={{
+            padding: "20px",
+            backgroundColor: "#fef2f2",
+            borderRadius: "8px",
+          }}
+        >
+          <h3 style={{ marginTop: 0, color: "#991b1b" }}>
+            🚫 Disabled Features
+          </h3>
+          <div style={{ display: "grid", gap: "8px" }}>
+            {inactiveFeatures.map((feature) => (
+              <div
+                key={feature.name}
+                style={{
+                  padding: "12px",
+                  backgroundColor: "white",
+                  borderRadius: "6px",
+                  border: "2px solid #fecaca",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "12px",
+                  opacity: 0.6,
+                }}
+              >
+                <span style={{ fontSize: "24px", filter: "grayscale(100%)" }}>
+                  {feature.icon}
+                </span>
+                <span style={{ fontWeight: "500", color: "#991b1b" }}>
+                  {feature.name}
+                </span>
+                <span
+                  style={{
+                    marginLeft: "auto",
+                    fontSize: "12px",
+                    padding: "4px 8px",
+                    backgroundColor: "#fee2e2",
+                    borderRadius: "4px",
+                    color: "#991b1b",
+                  }}
+                >
+                  ✗ Disabled
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    )
+  },
+}
+
+/**
+ * Complete navigation example showing mobile vs desktop navigation patterns.
+ * Demonstrates a common real-world use case.
+ */
+export const NavigationExample: Story = {
+  render: () => {
+    const isMobile = useDeviceDetector()
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+    const navItems = ["Home", "Products", "About", "Contact"]
+
+    return (
+      <div style={{ fontFamily: "system-ui, sans-serif" }}>
+        {isMobile ? (
+          // Mobile Navigation
+          <div>
+            <div
+              style={{
+                padding: "16px",
+                backgroundColor: "#1f2937",
+                color: "white",
+                borderRadius: "8px",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <div style={{ fontWeight: "bold", fontSize: "18px" }}>
+                📱 MyApp
+              </div>
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                style={{
+                  backgroundColor: "transparent",
+                  border: "2px solid white",
+                  color: "white",
+                  padding: "8px 16px",
+                  borderRadius: "4px",
+                  cursor: "pointer",
+                  fontSize: "16px",
+                }}
+              >
+                {mobileMenuOpen ? "✕" : "☰"}
+              </button>
+            </div>
+
+            {mobileMenuOpen && (
+              <div
+                style={{
+                  marginTop: "8px",
+                  backgroundColor: "white",
+                  border: "2px solid #e5e7eb",
+                  borderRadius: "8px",
+                  overflow: "hidden",
+                }}
+              >
+                {navItems.map((item, i) => (
+                  <div
+                    key={item}
+                    style={{
+                      padding: "16px",
+                      borderBottom:
+                        i < navItems.length - 1 ? "1px solid #e5e7eb" : "none",
+                      cursor: "pointer",
+                      fontSize: "16px",
+                    }}
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+            )}
+
+            <div
+              style={{
+                marginTop: "16px",
+                padding: "12px",
+                backgroundColor: "#fef3c7",
+                borderRadius: "6px",
+                fontSize: "13px",
+                color: "#78350f",
+              }}
+            >
+              <strong>Mobile Pattern:</strong> Hamburger menu with full-screen
+              overlay
+            </div>
+          </div>
+        ) : (
+          // Desktop Navigation
+          <div>
+            <div
+              style={{
+                padding: "20px 32px",
+                backgroundColor: "#1f2937",
+                color: "white",
+                borderRadius: "8px",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <div style={{ fontWeight: "bold", fontSize: "24px" }}>
+                🖥️ MyApp
+              </div>
+              <div style={{ display: "flex", gap: "32px" }}>
+                {navItems.map((item) => (
+                  <div
+                    key={item}
+                    style={{
+                      cursor: "pointer",
+                      fontSize: "16px",
+                      transition: "color 0.2s",
+                    }}
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div
+              style={{
+                marginTop: "16px",
+                padding: "12px",
+                backgroundColor: "#dbeafe",
+                borderRadius: "6px",
+                fontSize: "13px",
+                color: "#1e3a8a",
+              }}
+            >
+              <strong>Desktop Pattern:</strong> Horizontal navigation bar with
+              visible menu items
+            </div>
+          </div>
+        )}
+      </div>
+    )
+  },
+}
+
+/**
+ * Performance comparison between direct hook usage and Context Provider.
+ * Shows component re-render counts.
+ */
+export const PerformanceComparison: Story = {
+  render: () => {
+    const [hookRenderCount, setHookRenderCount] = useState(0)
+    const [contextRenderCount, setContextRenderCount] = useState(0)
+
+    const DirectHookComponent = ({ label }: { label: string }) => {
+      const isMobile = useDeviceDetector()
+      const [renders, setRenders] = useState(0)
+
+      useEffect(() => {
+        setRenders((r) => r + 1)
+        setHookRenderCount((c) => c + 1)
+      })
+
+      return (
+        <div
+          style={{
+            padding: "12px",
+            backgroundColor: "#fef2f2",
+            borderRadius: "4px",
+            marginBottom: "8px",
+            fontSize: "13px",
+          }}
+        >
+          <strong>{label}</strong>: {isMobile ? "Mobile" : "Desktop"} (Renders:{" "}
+          {renders})
+        </div>
+      )
+    }
+
+    const ContextComponent = ({ label }: { label: string }) => {
+      const { isMobile } = useDevice()
+      const [renders, setRenders] = useState(0)
+
+      useEffect(() => {
+        setRenders((r) => r + 1)
+        setContextRenderCount((c) => c + 1)
+      })
+
+      return (
+        <div
+          style={{
+            padding: "12px",
+            backgroundColor: "#f0fdf4",
+            borderRadius: "4px",
+            marginBottom: "8px",
+            fontSize: "13px",
+          }}
+        >
+          <strong>{label}</strong>: {isMobile ? "Mobile" : "Desktop"} (Renders:{" "}
+          {renders})
+        </div>
+      )
+    }
+
+    return (
+      <div style={{ fontFamily: "system-ui, sans-serif" }}>
+        <div
+          style={{
+            padding: "16px",
+            backgroundColor: "#fffbeb",
+            borderRadius: "8px",
+            marginBottom: "16px",
+            border: "2px solid #f59e0b",
+          }}
+        >
+          <h3 style={{ marginTop: 0, color: "#92400e" }}>
+            ⚡ Performance Considerations
+          </h3>
+          <p style={{ fontSize: "14px", color: "#78350f", lineHeight: "1.6" }}>
+            When multiple components need device detection, using Context
+            Provider is more efficient as it creates only one detection instance
+            and event listener.
+          </p>
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+          <div>
+            <h4
+              style={{
+                margin: "0 0 12px 0",
+                color: "#991b1b",
+                fontSize: "16px",
+              }}
+            >
+              ❌ Direct Hook (3 instances)
+            </h4>
+            <DirectHookComponent label="Component 1" />
+            <DirectHookComponent label="Component 2" />
+            <DirectHookComponent label="Component 3" />
+            <div
+              style={{
+                marginTop: "12px",
+                padding: "12px",
+                backgroundColor: "#fee2e2",
+                borderRadius: "4px",
+                fontSize: "13px",
+              }}
+            >
+              <strong>Total Renders:</strong> {hookRenderCount}
+              <br />
+              <strong>Event Listeners:</strong> 3
+            </div>
+          </div>
+
+          <div>
+            <h4
+              style={{
+                margin: "0 0 12px 0",
+                color: "#15803d",
+                fontSize: "16px",
+              }}
+            >
+              ✅ Context Provider (1 instance)
+            </h4>
+            <DeviceProvider>
+              <ContextComponent label="Component 1" />
+              <ContextComponent label="Component 2" />
+              <ContextComponent label="Component 3" />
+            </DeviceProvider>
+            <div
+              style={{
+                marginTop: "12px",
+                padding: "12px",
+                backgroundColor: "#dcfce7",
+                borderRadius: "4px",
+                fontSize: "13px",
+              }}
+            >
+              <strong>Total Renders:</strong> {contextRenderCount}
+              <br />
+              <strong>Event Listeners:</strong> 1
+            </div>
+          </div>
+        </div>
+
+        <div
+          style={{
+            marginTop: "16px",
+            padding: "16px",
+            backgroundColor: "#f3f4f6",
+            borderRadius: "8px",
+            fontSize: "13px",
+            color: "#374151",
+          }}
+        >
+          <h4 style={{ marginTop: 0 }}>📊 Recommendation:</h4>
+          <ul style={{ marginBottom: 0, paddingLeft: "20px" }}>
             <li>
-              <Typography as="span" size={2}>
-                Touch capability (ontouchstart or maxTouchPoints {'>'} 0)
-              </Typography>
+              <strong>Use Direct Hook:</strong> Single component or 1-2 uses
             </li>
             <li>
-              <Typography as="span" size={2}>
-                AND viewport width ≤ 480px
-              </Typography>
+              <strong>Use Context Provider:</strong> Multiple components or
+              app-wide detection
             </li>
           </ul>
         </div>
-
-        <div style={{ backgroundColor: "#fff3e0", padding: "16px", borderRadius: "8px" }}>
-          <Typography as="h4" size={3} weight={600} style={{ marginBottom: "8px" }}>
-            Method 3: Debug Mode
-          </Typography>
-          <Typography as="p" size={2}>
-            Override detection for testing:
-          </Typography>
-          <ul style={{ marginTop: "8px", marginLeft: "20px" }}>
-            <li>
-              <Typography as="span" size={2} code>
-                localStorage.getItem('debug-mobile') === 'true'
-              </Typography>
-            </li>
-            <li>
-              <Typography as="span" size={2} code>
-                URL parameter: ?mobile=true
-              </Typography>
-            </li>
-          </ul>
-        </div>
-      </Flex>
-    </Flex>
-  ),
+      </div>
+    )
+  },
 }
