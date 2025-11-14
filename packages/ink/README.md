@@ -46,6 +46,42 @@ Designed for teams building production applications who need reliable typography
 npm install nice-react-typography
 ```
 
+### Optional: Install CSS Variables Package
+
+For a complete design system with pre-defined CSS custom properties, install `nice-styles`:
+
+```bash
+npm install nice-styles
+```
+
+Then import the CSS variables in your app:
+
+```css
+/* Import all variables */
+@import 'nice-styles/variables.css';
+
+/* Or import individual categories for better performance */
+@import 'nice-styles/static/css/font-size.css';
+@import 'nice-styles/static/css/content-color.css';
+@import 'nice-styles/static/css/line-height.css';
+```
+
+The `nice-styles` package provides:
+- Font size scale (12px - 24px)
+- Content colors with semantic meanings (success, error, warning, etc.)
+- Line heights (default and condensed)
+- Font families (heading, body, code)
+- And more design tokens
+
+You can also use the constants directly in JavaScript/TypeScript:
+
+```typescript
+import { fontSize, contentColor } from 'nice-styles'
+
+console.log(fontSize.default) // '16px'
+console.log(contentColor.success) // 'hsla(146, 68%, 44%, 1)'
+```
+
 ## Basic Usage
 
 ```jsx
@@ -134,19 +170,25 @@ All variables are optional. Undefined variables automatically use their fallback
 
 ## Status Types
 
-Status props map to semantic CSS custom properties:
+Status props map to semantic CSS custom properties. The Typography component supports the following status types:
 
 ```css
 :root {
-  /* Functional status colors */
-  --content-color-success: #10b981;
-  --content-color-error: #ef4444;
-  --content-color-warning: #f59e0b;
-  --content-color-active: #3b82f6;
-  --content-color-default: #6b7280;
-  
-  /* Visual status colors */
-  --content-color-muted: #9ca3af;
+  /* Core status colors (provided by nice-styles v3.0.0+) */
+  --status-color-active: hsla(202, 100%, 50%, 1);
+  --status-color-success: hsla(146, 68%, 44%, 1);
+  --status-color-error: hsla(10, 92%, 63%, 1);
+  --status-color-warning: hsla(29, 98%, 62%, 1);
+
+  /* Shade variants (provided by nice-styles v3.0.0+) */
+  --content-color-darker: hsla(210, 15%, 5%, 1);
+  --content-color-dark: hsla(210, 5%, 25%, 1);
+  --content-color-default: hsla(210, 5%, 45%, 1);
+  --content-color-light: hsla(210, 5%, 65%, 1);
+  --content-color-lighter: hsla(210, 5%, 85%, 1);
+
+  /* Extended status colors (define these in your app if needed) */
+  --content-color-disabled: #9ca3af;
   --content-color-highlighted: #fbbf24;
   --content-color-primary: #6366f1;
   --content-color-secondary: #8b5cf6;
@@ -155,8 +197,13 @@ Status props map to semantic CSS custom properties:
 
 ### Available Status Types
 
-- **Functional**: `active`, `default`, `disabled`, `error`, `success`, `warning`
-- **Visual**: `highlighted`, `primary`, `secondary`
+The Typography component supports these status types:
+
+- **Core status colors (from nice-styles v3.0.0+)**: `active`, `error`, `success`, `warning` → mapped to `--status-color-*`
+- **Shade variants (from nice-styles v3.0.0+)**: `darker`, `dark`, `default`, `light`, `lighter` → mapped to `--content-color-*`
+- **Extended (custom)**: `disabled`, `highlighted`, `primary`, `secondary` → mapped to `--content-color-*`
+
+Note: Core status colors and shade variants are provided by `nice-styles` v3.0.0+. Extended status colors must be defined in your application's CSS if you want to use them.
 
 ## Examples
 
@@ -384,8 +431,9 @@ const MyComponent: React.FC = () => {
 
 ## Dependencies
 
-- React 16.8+
-- styled-components 5.0+
+- React 19.1.1+
+- styled-components 6.0+
+- nice-styles (optional) - Provides CSS custom property definitions
 
 ## Contributing
 

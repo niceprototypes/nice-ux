@@ -14,15 +14,20 @@ export type LineHeightType = "default" | "condensed"
 
 /**
  * Semantic status colors mapped to CSS custom properties
- * - **Functional**: `active`, `default`, `disabled`, `error`, `success`, `warning`
- * - **Visual**: `highlighted`, `primary`, `secondary`
+ * - **Core status colors (from nice-styles v3.0.0+)**: `active`, `error`, `success`, `warning` → `--status-color-*`
+ * - **Shade variants (from nice-styles v3.0.0+)**: `darker`, `dark`, `default`, `light`, `lighter` → `--content-color-*`
+ * - **Extended (custom)**: `disabled`, `highlighted`, `primary`, `secondary` → `--content-color-*`
  */
 export type StatusType =
   | "active"
+  | "dark"
+  | "darker"
   | "default"
   | "disabled"
   | "error"
   | "highlighted"
+  | "light"
+  | "lighter"
   | "primary"
   | "secondary"
   | "success"

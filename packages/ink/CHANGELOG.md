@@ -5,6 +5,94 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.2] - 2025-11-12
+
+### Changed
+
+- **Refactored CSS fallback handling**: Split CSS variables and fallback values into separate props
+  - `$size` now defaults to `var(--typography-size-default)` with `$sizeFallback` defaulting to `1rem`
+  - `$weight` now defaults to `var(--typography-weight-default)` with `$weightFallback` defaulting to `normal`
+  - `$fontFamily` now defaults to `var(--font-family-heading)` with `$fontFamilyFallback` defaulting to `inherit`
+  - CSS now outputs both the variable and fallback as separate declarations for better browser compatibility
+
+### Added
+
+- **New service**: `getEffectiveColor` - Extracts color determination logic into a dedicated service
+  - Consistent with existing `getEffectiveFontWeight` and `getEffectiveLineHeight` services
+  - Handles status-based color vs custom color logic
+
+### Improved
+
+- Better separation of concerns in styled component props
+- More maintainable and testable code structure
+
+## [3.0.1] - 2025-11-11
+
+### Changed
+
+- **Updated `nice-styles` to v2.0.1**: Upgraded dependency from v1.1.1 to v2.0.1
+  - Adopts semantic naming convention (e.g., `fontSize.default` instead of `FONT_SIZE_3`)
+  - Uses "reverse" naming instead of "inverse" (e.g., `backgroundColorReverse`)
+  - No breaking changes for this package - all CSS variable names remain compatible
+  - Improved TypeScript constants for design tokens
+
+### Added
+
+- **New shade variant status types**: Added support for content color shade variants from `nice-styles` v2.0+
+  - New status types: `darker`, `dark`, `light`, `lighter`
+  - These map to `--content-color-darker`, `--content-color-dark`, `--content-color-light`, `--content-color-lighter`
+  - Enables fine-grained control over text color shades
+
+### Documentation
+
+- Updated README examples to use semantic naming from `nice-styles` v2.0.0+
+  - Changed examples from `FONT_SIZE_3, CONTENT_COLOR_SUCCESS` to `fontSize.default, contentColor.success`
+- Updated all documentation to reflect the new `nice-styles` API
+- Clarified distinction between core status colors (from `nice-styles`), shade variants (from `nice-styles`), and extended status colors (custom)
+- Added comprehensive status color examples showing all available types
+
+## [3.0.0] - 2025-01-10
+
+### Breaking Changes
+
+- **BREAKING**: Replaced `nice-css-variables` dependency with `nice-styles`
+  - `nice-css-variables` has been deprecated in favor of `nice-styles`
+  - The `nice-styles` package provides the same CSS variables with additional features:
+    - Modular CSS imports for better performance
+    - TypeScript constants for all design token values
+    - Better organized with individual CSS files per category
+  - No code changes required in components, only package.json update needed
+
+### Migration
+
+If you were using `nice-css-variables`:
+
+```bash
+npm uninstall nice-css-variables
+npm install nice-styles
+```
+
+Update your CSS imports:
+
+```css
+/* Old */
+@import 'nice-css-variables';
+
+/* New - import all variables */
+@import 'nice-styles/variables.css';
+
+/* Or import selectively for better performance */
+@import 'nice-styles/static/css/content-color.css';
+@import 'nice-styles/static/css/font-size.css';
+```
+
+TypeScript/JavaScript usage:
+
+```typescript
+// New: You can now import constants directly
+import { CONTENT_COLOR_SUCCESS, FONT_SIZE_3 } from 'nice-styles'
+```
+
 ## [2.0.0] - 2025-01-09
 
 ### Breaking Changes

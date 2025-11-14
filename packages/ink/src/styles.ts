@@ -20,7 +20,11 @@ export const styleOptimizedLegibility = css`
 export const StyledTypography = styled.p<{
   $as: TypographyAsType
   $size?: string
+  $sizeFallback?: string
   $weight?: string
+  $weightFallback?: string
+  $fontFamily?: string
+  $fontFamilyFallback?: string
   $color?: string
   $antialiased?: boolean
   $legibilityOptimized?: boolean
@@ -30,10 +34,11 @@ export const StyledTypography = styled.p<{
 }>`
   margin: 0;
 
-  ${({ $as }) =>
+  ${({ $as, $fontFamily = "var(--font-family-heading)", $fontFamilyFallback = "inherit" }) =>
       ($as === "h1" || $as === "h2" || $as === "h3" || $as === "h4") &&
       css`
-        font-family: var(--font-family-heading);
+        font-family: ${$fontFamily};
+        font-family: ${$fontFamilyFallback};
       `}
 
   ${({ $code }) =>
@@ -48,23 +53,11 @@ export const StyledTypography = styled.p<{
         color: ${$color};
       `}
 
-  ${({ $size }) =>
-      $size
-          ? css`
-            font-size: ${$size};
-          `
-          : css`
-            font-size: var(--typography-size-default, 1rem);
-          `}
+  font-size: ${({ $size = "var(--typography-size-default)", $sizeFallback = "1rem" }) => $size};
+  font-size: ${({ $sizeFallback = "1rem" }) => $sizeFallback};
 
-  ${({ $weight }) =>
-      $weight
-          ? css`
-            font-weight: ${$weight};
-          `
-          : css`
-            font-weight: var(--typography-weight-default, normal);
-          `}
+  font-weight: ${({ $weight = "var(--typography-weight-default)", $weightFallback = "normal" }) => $weight};
+  font-weight: ${({ $weightFallback = "normal" }) => $weightFallback};
 
   ${({ $antialiased }) => $antialiased && styleAntialiasing}
 
@@ -79,6 +72,6 @@ export const StyledTypography = styled.p<{
   ${({ $lineHeight }) =>
       $lineHeight &&
       css`
-        line-height: var(--line-height-${$lineHeight});
+        line-height: var(--line-height-${$lineHeight}, normal);
       `}
 `

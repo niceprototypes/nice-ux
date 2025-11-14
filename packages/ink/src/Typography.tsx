@@ -1,6 +1,7 @@
 import * as React from "react"
 import { StyledTypography } from "./styles"
 import { TypographyProps } from "./types"
+import getEffectiveColor from "./services/getEffectiveColor"
 import getEffectiveFontWeight from "./services/getEffectiveFontWeight"
 import getEffectiveLineHeight from "./services/getEffectiveLineHeight"
 
@@ -48,7 +49,7 @@ const Typography: React.FC<TypographyProps> = ({
       $legibilityOptimized={legibilityOptimized}
       $as={as}
       $code={code}
-      $color={status ? `var(--content-color-${status})` : color}
+      $color={getEffectiveColor(color, status)}
       $lineHeight={getEffectiveLineHeight(lineHeight, as)}
       $size={size}
       $weight={getEffectiveFontWeight(weight, as)}
