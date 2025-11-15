@@ -115,7 +115,18 @@ export const Constants: Story = {
           demo={<span style={{ color: "var(--background-color-active)", fontSize: "1.5rem" }}>⬤</span>}
         />
 
-        <SectionHeader>Border Colors</SectionHeader>
+        <SectionHeader>Border Color</SectionHeader>
+        <VariableRow
+          name="--border-color-default"
+          value="hsla(240, 9%, 91%, 1)"
+          demo={<div style={{
+            width: "80px",
+            height: "40px",
+            backgroundColor: "white",
+            border: "2px solid var(--border-color-default)",
+            borderRadius: "4px",
+          }} />}
+        />
         <VariableRow
           name="--border-color-dark"
           value="hsla(210, 8%, 58%, 1)"
@@ -135,17 +146,6 @@ export const Constants: Story = {
             height: "40px",
             backgroundColor: "white",
             border: "2px solid var(--border-color-darker)",
-            borderRadius: "4px",
-          }} />}
-        />
-        <VariableRow
-          name="--border-color-default"
-          value="hsla(240, 9%, 91%, 1)"
-          demo={<div style={{
-            width: "80px",
-            height: "40px",
-            backgroundColor: "white",
-            border: "2px solid var(--border-color-default)",
             borderRadius: "4px",
           }} />}
         />
@@ -214,7 +214,7 @@ export const Constants: Story = {
           demo={<div style={{
             width: "150px",
             height: "75px",
-            backgroundColor: "#f3f4f6",
+            backgroundColor: "white",
             border: "1px solid var(--border-color-default)",
             borderRadius: "8px",
           }} />}
@@ -225,7 +225,7 @@ export const Constants: Story = {
           demo={<div style={{
             width: "200px",
             height: "100px",
-            backgroundColor: "#f3f4f6",
+            backgroundColor: "white",
             border: "1px solid var(--border-color-default)",
             borderRadius: "8px",
           }} />}
@@ -313,7 +313,7 @@ export const Constants: Story = {
         />
         <VariableRow
           name="--content-color-default"
-          value="hsla(210, 5%, 45%, 1)"
+          value="hsla(0, 0%, 0%, 1)"
           demo={<span style={{ color: "var(--content-color-default)", fontSize: "1.5rem" }}>⬤</span>}
         />
         <VariableRow
