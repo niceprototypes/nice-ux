@@ -119,17 +119,35 @@ export const Constants: Story = {
         <VariableRow
           name="--border-color-dark"
           value="hsla(210, 8%, 58%, 1)"
-          demo={<span style={{ color: "var(--border-color-dark)", fontSize: "1.5rem" }}>⬤</span>}
+          demo={<div style={{
+            width: "80px",
+            height: "40px",
+            backgroundColor: "white",
+            border: "2px solid var(--border-color-dark)",
+            borderRadius: "4px",
+          }} />}
         />
         <VariableRow
           name="--border-color-darker"
           value="hsla(210, 10%, 25%, 1)"
-          demo={<span style={{ color: "var(--border-color-darker)", fontSize: "1.5rem" }}>⬤</span>}
+          demo={<div style={{
+            width: "80px",
+            height: "40px",
+            backgroundColor: "white",
+            border: "2px solid var(--border-color-darker)",
+            borderRadius: "4px",
+          }} />}
         />
         <VariableRow
           name="--border-color-default"
           value="hsla(240, 9%, 91%, 1)"
-          demo={<span style={{ color: "var(--border-color-default)", fontSize: "1.5rem" }}>⬤</span>}
+          demo={<div style={{
+            width: "80px",
+            height: "40px",
+            backgroundColor: "white",
+            border: "2px solid var(--border-color-default)",
+            borderRadius: "4px",
+          }} />}
         />
 
         <SectionHeader>Border Radius</SectionHeader>
