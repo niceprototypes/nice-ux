@@ -53,11 +53,47 @@ export const StyledTypography = styled.p<{
         color: ${$color};
       `}
 
-  font-size: ${({ $size = "var(--typography-size-default)", $sizeFallback = "1rem" }) => $size};
-  font-size: ${({ $sizeFallback = "1rem" }) => $sizeFallback};
+  ${({ $as, $size, $sizeFallback }) => {
+    // If user provided a size, use it directly
+    if ($size) {
+      return css`
+        font-size: ${$size};
+        font-size: ${$sizeFallback || $size};
+      `
+    }
 
-  font-weight: ${({ $weight = "var(--typography-weight-default)", $weightFallback = "normal" }) => $weight};
-  font-weight: ${({ $weightFallback = "normal" }) => $weightFallback};
+    // Otherwise, use heading-specific defaults
+    switch ($as) {
+      case "h1":
+        return css`
+          font-size: var(--typography-size-h1);
+          font-size: ${$sizeFallback || "3rem"};
+        `
+      case "h2":
+        return css`
+          font-size: var(--typography-size-h2);
+          font-size: ${$sizeFallback || "2.25rem"};
+        `
+      case "h3":
+        return css`
+          font-size: var(--typography-size-h3);
+          font-size: ${$sizeFallback || "1.875rem"};
+        `
+      case "h4":
+        return css`
+          font-size: var(--typography-size-h4);
+          font-size: ${$sizeFallback || "1.5rem"};
+        `
+      default:
+        return css`
+          font-size: var(--typography-size-default);
+          font-size: ${$sizeFallback || "1rem"};
+        `
+    }
+  }}
+
+  font-weight: ${({ $weight, $weightFallback = "normal" }) =>
+    $weight || `var(--typography-weight-default, ${$weightFallback})`};
 
   ${({ $antialiased }) => $antialiased && styleAntialiasing}
 

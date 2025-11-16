@@ -34,7 +34,6 @@ Designed for teams building production applications who need reliable typography
 - 🎯 **Semantic HTML**: Supports h1-h4, p, and span elements
 - 📏 **Flexible Sizing**: CSS custom property-based sizing with fallbacks
 - 🎨 **Rich Styling**: Weight, color, alignment, and line-height control
-- 💡 **Status Colors**: Built-in semantic color support for status messages
 - 🔤 **Code Support**: Monospace font styling for code snippets
 - ♿ **Accessibility**: Font antialiasing and legibility optimizations
 - 💪 **TypeScript**: Full TypeScript support with comprehensive type definitions
@@ -100,8 +99,8 @@ import Typography from 'nice-react-typography'
   Themed text
 </Typography>
 
-// Status message with semantic color
-<Typography status="success">
+// Custom color with CSS variable
+<Typography color="var(--content-color-success)">
   Operation completed successfully
 </Typography>
 
@@ -117,18 +116,17 @@ import Typography from 'nice-react-typography'
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `align` | `AlignType` | - | Text alignment: `"left"`, `"center"`, `"right"`, `"justify"` |
-| `antialiased` | `boolean` | `false` | Enable font antialiasing |
+| `children` | `React.ReactNode` | - | Text content or elements (required) |
 | `as` | `TypographyAsType` | `"p"` | HTML element: `"h1"`, `"h2"`, `"h3"`, `"h4"`, `"p"`, `"span"` |
-| `children` | `React.ReactNode` | - | Text content or elements |
-| `className` | `string` | - | CSS class name |
-| `code` | `boolean` | `false` | Apply monospace font for code |
-| `color` | `string` | - | Custom text color (any CSS color value) |
-| `legibilityOptimized` | `boolean` | `false` | Apply legibility optimizations |
-| `lineHeight` | `LineHeightType` | Based on `as` prop | Line height: `"default"` or `"condensed"` |
 | `size` | `string` | `var(--typography-size-default, 1rem)` | Font size (any CSS size value or variable) |
-| `status` | `StatusType` | - | Semantic status color (overrides `color`) |
 | `weight` | `string` | `var(--typography-weight-default, normal)` | Font weight (any CSS weight value or variable) |
+| `align` | `AlignType` | - | Text alignment: `"left"`, `"center"`, `"right"`, `"justify"` |
+| `lineHeight` | `LineHeightType` | Based on `as` prop | Line height: `"default"` or `"condensed"` |
+| `color` | `string` | - | Custom text color (any CSS color value or variable) |
+| `antialiased` | `boolean` | `false` | Enable font antialiasing |
+| `legibilityOptimized` | `boolean` | `false` | Apply legibility optimizations |
+| `code` | `boolean` | `false` | Apply monospace font for code |
+| `className` | `string` | - | CSS class name |
 
 ## CSS Custom Properties
 

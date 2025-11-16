@@ -13,7 +13,7 @@ const getDefaultFontWeight = (as: TypographyAsType): string | undefined => {
     case "h1":
     case "h2":
     case "h3":
-      return "var(--typography-weight-heading, 600)"
+      return "var(--typography-weight-heading, bold)"
     default:
       return undefined
   }

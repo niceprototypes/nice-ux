@@ -13,27 +13,6 @@ export type AlignType = "left" | "center" | "right" | "justify"
 export type LineHeightType = "default" | "condensed"
 
 /**
- * Semantic status colors mapped to CSS custom properties
- * - **Core status colors (from nice-styles v3.0.0+)**: `active`, `error`, `success`, `warning` → `--status-color-*`
- * - **Shade variants (from nice-styles v3.0.0+)**: `darker`, `dark`, `default`, `light`, `lighter` → `--content-color-*`
- * - **Extended (custom)**: `disabled`, `highlighted`, `primary`, `secondary` → `--content-color-*`
- */
-export type StatusType =
-  | "active"
-  | "dark"
-  | "darker"
-  | "default"
-  | "disabled"
-  | "error"
-  | "highlighted"
-  | "light"
-  | "lighter"
-  | "primary"
-  | "secondary"
-  | "success"
-  | "warning"
-
-/**
  * HTML element types supported by the Typography component
  */
 export type TypographyAsType = "h1" | "h2" | "h3" | "h4" | "p" | "span"
@@ -71,9 +50,6 @@ export type TypographyProps = {
 
   /** Font size (any valid CSS size value or CSS variable) */
   size?: string
-
-  /** Semantic status color (overrides color prop) */
-  status?: StatusType
 
   /** Font weight (any valid CSS weight value or CSS variable) */
   weight?: string

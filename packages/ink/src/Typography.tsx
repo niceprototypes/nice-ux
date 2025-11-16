@@ -24,8 +24,8 @@ import getEffectiveLineHeight from "./services/getEffectiveLineHeight"
  *   Themed text
  * </Typography>
  *
- * // Status-based color
- * <Typography status="success">Success message</Typography>
+ * // Custom color
+ * <Typography color="var(--content-color-success)">Success message</Typography>
  * ```
  */
 const Typography: React.FC<TypographyProps> = ({
@@ -39,7 +39,6 @@ const Typography: React.FC<TypographyProps> = ({
   color,
   lineHeight,
   size,
-  status,
   weight,
 }) => {
   return (
@@ -49,7 +48,7 @@ const Typography: React.FC<TypographyProps> = ({
       $legibilityOptimized={legibilityOptimized}
       $as={as}
       $code={code}
-      $color={getEffectiveColor(color, status)}
+      $color={getEffectiveColor(color)}
       $lineHeight={getEffectiveLineHeight(lineHeight, as)}
       $size={size}
       $weight={getEffectiveFontWeight(weight, as)}
