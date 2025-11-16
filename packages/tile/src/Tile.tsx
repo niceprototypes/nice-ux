@@ -17,9 +17,6 @@ const Tile: React.FC<TileProps> = ({
   backgroundSize = "cover",
   backgroundAttachment = "fixed",
   fullWidth = false,
-  title,
-  titleAlign = "left",
-  titleColor,
   contentLeft: TileLeft,
   contentRight: TileRight,
   spacing,
@@ -43,18 +40,15 @@ const Tile: React.FC<TileProps> = ({
         $breakpointMd={breakpointMd}
         $breakpointLg={breakpointLg}
       >
-        {title || TileLeft || TileRight ? (
+        {TileLeft || TileRight ? (
           <TileLayout
-            title={title}
-            titleAlign={titleAlign}
-            titleColor={titleColor}
             contentLeft={TileLeft}
             contentRight={TileRight}
           >
             {children}
           </TileLayout>
         ) : (
-          <TileSlot title={title} titleAlign={titleAlign} titleColor={titleColor}>
+          <TileSlot>
             {children}
           </TileSlot>
         )}

@@ -13,9 +13,6 @@ export interface TileProps {
   backgroundSize?: string
   backgroundAttachment?: string
   fullWidth?: boolean
-  title?: string | React.ReactNode
-  titleAlign?: "left" | "center" | "right"
-  titleColor?: string
   contentLeft?: React.ReactNode
   contentRight?: React.ReactNode
   spacing?: GapSize | SpacingDefinition | {

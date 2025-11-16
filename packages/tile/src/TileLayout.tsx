@@ -4,23 +4,17 @@ import TileSlot from "./TileSlot"
 
 export interface TileLayoutProps {
   children?: React.ReactNode
-  title?: React.ReactNode
-  titleAlign?: "left" | "center" | "right"
-  titleColor?: string
   contentLeft?: React.ReactNode
   contentRight?: React.ReactNode
 }
 
 const TileLayout: React.FC<TileLayoutProps> = ({
   children,
-  title,
-  titleAlign = "left",
-  titleColor,
   contentLeft: LeftRendered,
   contentRight: RightRendered,
 }) => {
   const SlotRendered = (
-    <TileSlot title={title} titleAlign={titleAlign} titleColor={titleColor}>
+    <TileSlot>
       {children}
     </TileSlot>
   )

@@ -6,8 +6,4 @@ export declare const OuterStyled: import("styled-components").StyledComponent<st
     $backgroundAttachment?: string;
     $fullWidth?: boolean;
 }, never>;
-export declare const InnerStyled: import("styled-components").StyledComponent<any, any, {
-    $isComplete?: boolean;
-    $breakpointMd?: number;
-    $breakpointLg?: number;
-}, string | number | symbol>;
+export declare const InnerStyled: import("styled-components").StyledComponent<any, any, any, any>;
