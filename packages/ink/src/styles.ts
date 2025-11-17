@@ -1,3 +1,12 @@
+/**
+ * Styled Components for Typography
+ *
+ * This module contains the styled-components implementation for the Typography component.
+ * It handles dynamic styling based on props and provides fallback values for CSS custom properties.
+ *
+ * @module styles
+ */
+
 import styled, { css } from "styled-components"
 import { TypographyAsType, AlignType, LineHeightType } from "./types"
 import { styleAntialiasing } from "./utils"
@@ -5,10 +14,15 @@ import { styleAntialiasing } from "./utils"
 /**
  * CSS styles for optimized text legibility
  *
- * Applies hardware acceleration and 3D transform optimizations:
- * - Backface visibility for sharper text
- * - 3D perspective for improved rendering
- * - Transform hints for GPU acceleration
+ * Applies hardware acceleration and 3D transform optimizations for better text rendering:
+ * - `backface-visibility: hidden` - Prevents text from showing through during transforms
+ * - `perspective: 1000px` - Enables 3D rendering context
+ * - `transform-style: preserve-3d` - Maintains 3D positioning of child elements
+ * - `will-change: transform` - Hints browser to optimize for transform animations
+ *
+ * @remarks
+ * Use this when you need crisp text rendering during animations or transforms.
+ * May impact performance on low-end devices.
  */
 export const styleOptimizedLegibility = css`
   backface-visibility: hidden;

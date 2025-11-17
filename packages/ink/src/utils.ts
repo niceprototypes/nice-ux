@@ -1,12 +1,24 @@
+/**
+ * Utility Functions and Styles
+ *
+ * Common utilities and CSS snippets used across the Typography component.
+ *
+ * @module utils
+ */
+
 import { css } from "styled-components"
 
 /**
- * CSS styles for font antialiasing
+ * Anti-aliasing styles for smoother text rendering
  *
- * Applies cross-browser font smoothing for improved text rendering:
- * - WebKit/Blink: antialiased font smoothing
- * - Firefox: grayscale font smoothing
- * - All browsers: optimized text rendering for legibility
+ * Applies font smoothing optimizations across different browsers:
+ * - `-webkit-font-smoothing: antialiased` - Makes text smoother on WebKit browsers (Safari, Chrome)
+ * - `-moz-osx-font-smoothing: grayscale` - Enables grayscale antialiasing on Firefox for macOS
+ * - `text-rendering: optimizeLegibility` - Enables kerning and ligatures for better typography
+ *
+ * @remarks
+ * Use the `antialiased` prop on Typography component to enable these styles.
+ * Best for light text on dark backgrounds.
  */
 export const styleAntialiasing = css`
   -webkit-font-smoothing: antialiased;

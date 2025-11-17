@@ -25,7 +25,7 @@ import getEffectiveLineHeight from "./services/getEffectiveLineHeight"
  * </Typography>
  *
  * // Custom color
- * <Typography color="var(--content-color-success)">Success message</Typography>
+ * <Typography color="var(--foreground-color-success)">Success message</Typography>
  * ```
  */
 const Typography: React.FC<TypographyProps> = ({

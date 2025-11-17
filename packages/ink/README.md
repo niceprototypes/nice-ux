@@ -172,36 +172,29 @@ Status props map to semantic CSS custom properties. The Typography component sup
 
 ```css
 :root {
-  /* Core status colors (provided by nice-styles v3.0.0+) */
-  --status-color-active: hsla(202, 100%, 50%, 1);
-  --status-color-success: hsla(146, 68%, 44%, 1);
-  --status-color-error: hsla(10, 92%, 63%, 1);
-  --status-color-warning: hsla(29, 98%, 62%, 1);
+  /* Foreground colors (provided by nice-styles v4.0.0+) */
+  --foreground-color-base: hsla(210, 5%, 5%, 1);
+  --foreground-color-dark: hsla(210, 5%, 25%, 1);
+  --foreground-color-medium: hsla(210, 5%, 45%, 1);
+  --foreground-color-light: hsla(210, 5%, 65%, 1);
+  --foreground-color-lighter: hsla(210, 5%, 85%, 1);
 
-  /* Shade variants (provided by nice-styles v3.0.0+) */
-  --content-color-darker: hsla(210, 15%, 5%, 1);
-  --content-color-dark: hsla(210, 5%, 25%, 1);
-  --content-color-default: hsla(210, 5%, 45%, 1);
-  --content-color-light: hsla(210, 5%, 65%, 1);
-  --content-color-lighter: hsla(210, 5%, 85%, 1);
-
-  /* Extended status colors (define these in your app if needed) */
-  --content-color-disabled: #9ca3af;
-  --content-color-highlighted: #fbbf24;
-  --content-color-primary: #6366f1;
-  --content-color-secondary: #8b5cf6;
+  /* Semantic colors (provided by nice-styles v4.0.0+) */
+  --foreground-color-link: hsla(202, 100%, 50%, 1);
+  --foreground-color-success: hsla(146, 68%, 44%, 1);
+  --foreground-color-warning: hsla(29, 98%, 62%, 1);
+  --foreground-color-error: hsla(10, 92%, 63%, 1);
 }
 ```
 
-### Available Status Types
+### Available Color Variables
 
-The Typography component supports these status types:
+The Typography component supports color values from nice-styles v4.0.0+:
 
-- **Core status colors (from nice-styles v3.0.0+)**: `active`, `error`, `success`, `warning` → mapped to `--status-color-*`
-- **Shade variants (from nice-styles v3.0.0+)**: `darker`, `dark`, `default`, `light`, `lighter` → mapped to `--content-color-*`
-- **Extended (custom)**: `disabled`, `highlighted`, `primary`, `secondary` → mapped to `--content-color-*`
+- **Neutral shades**: `--foreground-color-base`, `--foreground-color-dark`, `--foreground-color-medium`, `--foreground-color-light`, `--foreground-color-lighter`
+- **Semantic colors**: `--foreground-color-link`, `--foreground-color-success`, `--foreground-color-warning`, `--foreground-color-error`
 
-Note: Core status colors and shade variants are provided by `nice-styles` v3.0.0+. Extended status colors must be defined in your application's CSS if you want to use them.
+Note: All foreground colors are provided by `nice-styles` v4.0.0+.
 
 ## Examples
 
