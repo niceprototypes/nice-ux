@@ -1,0 +1,8 @@
+#storybook-docs h1.sbdocs-title + div:not(.sb-anchor) {
+  margin-bottom: 4rem;
+  margin-top: 3rem;
+}
+
+#storybook-docs h1.sbdocs-title + div:not(.sb-anchor) + .sb-anchor {
+  display: none;
+}

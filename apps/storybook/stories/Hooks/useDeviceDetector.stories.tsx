@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import { useDeviceDetector, DeviceProvider, useDevice } from "nice-react-hook-device-detector"
 import { useEffect, useState } from "react"
+import { generateDescriptionString } from "../../src/utilities"
 
 /**
  * # useDeviceDetector Hook (v1.1+)
@@ -101,20 +102,28 @@ const DeviceInfo = ({ isMobile }: { isMobile: boolean }) => {
   )
 }
 
+// Wrapper component for the hook stories
+const HookWrapper = () => null
+
 const meta = {
   title: "Hooks/useDeviceDetector",
+  component: HookWrapper,
   parameters: {
     layout: "padded",
+    controls: { disable: true },
     docs: {
       description: {
-        component:
-          "Mobile device detection hook with multi-layered detection strategy, " +
-          "debug mode support, and real-time responsiveness. Works with direct hook calls or Context API.",
+        component: generateDescriptionString([
+          "Install using",
+          { value: "npm i nice-react-hook-device-detector", code: true },
+          { value: "for mobile device detection with multi-layered strategy.", newLine: true },
+          "Works with direct hook calls or Context API for optimal performance.",
+        ]),
       },
     },
   },
   tags: ["autodocs"],
-} satisfies Meta
+} satisfies Meta<typeof HookWrapper>
 
 export default meta
 type Story = StoryObj<typeof meta>

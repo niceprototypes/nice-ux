@@ -213,30 +213,96 @@ The documentation includes:
 
 ### For Local Development
 
-1. Link local packages (optional):
+#### Using nice-npm-link for Symlinking
+
+`nice-npm-link` creates symlinks to local packages for development, allowing changes to be reflected in real-time.
+
 ```bash
 # Install nice-npm-link globally
 npm install -g nice-npm-link
 
-# Link each package
-nnl ../nice-react-flex
-nnl ../nice-react-typography
-nnl ../nice-react-tile
-nnl ../nice-react-button
-nnl ../nice-react-icon
-nnl ../nice-react-hook-device-detector
+# Link packages from your local filesystem
+nice-npm-link ../nice-react-flex
+nice-npm-link ../nice-react-typography
+nice-npm-link ../nice-react-tile
+nice-npm-link ../nice-react-button
+nice-npm-link ../nice-react-icon
+nice-npm-link ../nice-react-hook-device-detector
+nice-npm-link ../nice-styles
 ```
 
-2. Start watch mode in packages:
+This creates symlinks in `node_modules/` pointing to your local package directories using the `file:` protocol in package.json.
+
+#### Understanding Symlinks vs npm link
+
+**Symlinks (what nice-npm-link creates):**
+- Uses `file:` protocol: `"nice-react-typography": "file:../nice-react-typography"`
+- Creates direct filesystem link to the package directory
+- Vite/Storybook can watch and hot-reload source files directly
+- No build step needed for most packages (Vite compiles on-the-fly)
+
+**npm link (traditional approach):**
+- Two-step process through npm's global directory
+- Points to built `dist` folder via package.json `main` field
+- Requires manual rebuild when source changes
+- More complex setup
+
+#### When Do You Need Watch Mode?
+
+**React Components (nice-react-typography, nice-react-button, etc.):**
+- **NO watch mode needed** - Vite automatically watches and compiles `.tsx` files from the symlinked `src/` directory
+- Changes appear instantly with hot module replacement
+- Just edit the source files and see updates in Storybook
+
+**Packages with Build Steps (nice-styles):**
+- **YES, watch mode required** - These packages have custom build processes
+- nice-styles generates CSS files from TypeScript constants
+- Must run watch mode to regenerate output files:
+
 ```bash
-cd ../nice-react-flex && npm run dev &
-cd ../nice-react-typography && npm run dev &
-# ... etc
+# In the nice-styles directory
+cd ../nice-styles
+npm run watch  # Runs: tsc --watch & node scripts/generate-css.ts --watch
 ```
 
-3. Start Storybook with hot reload:
+This is necessary because:
+1. nice-styles exports generated files (`variables.css`), not source
+2. The build script transforms TypeScript objects → CSS custom properties
+3. Vite can't automatically run custom build scripts
+
+**When to use watch mode:**
+- Package has a build step that generates output files (CSS, compiled assets, etc.)
+- Package uses custom code generation or transformation scripts
+- Package exports built artifacts rather than source files
+
+**When watch mode is NOT needed:**
+- Package is pure TypeScript/JSX that Vite can compile directly
+- No custom build process beyond standard TS/JSX compilation
+- Package source files can be consumed as-is by the bundler
+
+#### Complete Development Setup
+
 ```bash
+# 1. Link all packages
+nice-npm-link ../nice-react-flex
+nice-npm-link ../nice-react-typography
+nice-npm-link ../nice-react-button
+nice-npm-link ../nice-react-icon
+nice-npm-link ../nice-react-tile
+nice-npm-link ../nice-react-hook-device-detector
+nice-npm-link ../nice-styles
+
+# 2. Start watch mode ONLY for packages that need it
+cd ../nice-styles
+npm run watch &  # Only needed for packages with custom build steps
+cd -
+
+# 3. Start Storybook with hot reload
 npm run storybook
+
+# Now you can edit:
+# - React components → changes appear instantly (no build needed)
+# - nice-styles constants → automatically rebuilt by watch mode
 ```
 
 ### For Production Use

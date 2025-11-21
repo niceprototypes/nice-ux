@@ -1,0 +1,1 @@
+export { generateDescriptionString } from "./generateDescriptionString"
