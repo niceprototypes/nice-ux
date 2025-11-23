@@ -21,7 +21,23 @@ const meta = {
     docs: {
       description: {
         component: generateDescriptionString([
-          "Todo",
+          { value: "[REPO](https://github.com/niceprototypes/nice-styles)", newLine: true },
+          { value: "SETUP", newLine: true },
+          { value: "npm i nice-styles", code: true, newLine: true },
+          { value: "import { getToken } from \"nice-styles\"", code: true, newLine: true },
+          { value: "USAGE", newLine: true },
+          { value: "getToken(\"fontSize\").key", code: true },
+          "\u2002\u2192\u2002",
+          { value: "\"--font-size-base\"", code: true, newLine: true },
+          { value: "getToken(\"fontSize\", \"large\").key", code: true },
+          "\u2002\u2192\u2002",
+          { value: "\"--font-size-large\"", code: true, newLine: true },
+          { value: "getToken(\"fontSize\", \"large\").var", code: true },
+          "\u2002\u2192\u2002",
+          { value: "var(\"--font-size-large\")", code: true, newLine: true },
+          { value: "getToken(\"fontSize\", \"large\").value", code: true },
+          "\u2002\u2192\u2002",
+          { value: "\"24px\"", code: true, newLine: true },
         ]),
       },
     },
@@ -40,10 +56,12 @@ const createVariables = <T extends string | { name: string }>(
 ) => {
   return variants.map(variant => {
     const itemName = typeof variant === "string" ? variant : variant.name
-    const token = getToken(groupName as any, itemName)
 
+    const token = getToken(groupName as any, itemName)
     return {
-      name: token.toString(),
+      name: itemName,
+      key: token.key,
+      var: token.var,
       value: token.value,
       demo: renderDemo ? renderDemo(variant as any) : undefined,
     }
@@ -61,16 +79,18 @@ const prepareBackgroundColor = () =>
   createVariables(
     "backgroundColor",
     [
-      { name: "base", backgroundColor: getToken("backgroundColor", "alternate").var() },
-      { name: "alternate", backgroundColor: getToken("backgroundColor", "base").var() },
+      { name: "base", backgroundColor: getToken("backgroundColor").var },
+      { name: "alternate", backgroundColor: getToken("backgroundColor", "alternate").var },
     ],
     ({ backgroundColor }: any) => (
       <Demo
-        borderRadius={getToken("borderRadius", "base").var()}
+        borderRadius={getToken("borderRadius", "small").var}
         style={{
           backgroundColor,
-          width: getToken("cellHeight", "larger").var(),
-          height: getToken("cellHeight", "base").var(),
+          border: `${getToken("borderWidth").var} solid ${getToken("borderColor").var}`,
+          borderRadius: getToken("borderRadius", "small").var,
+          width: getToken("cellHeight", "larger").var,
+          height: getToken("cellHeight").var,
         }} />
     ),
   )
@@ -84,7 +104,8 @@ const prepareBorderColor = () =>
         backgroundColor: "white",
         width: "150px",
         height: "75px",
-        border: `${getToken("borderWidth", "base").var()} solid ${getToken("borderColor", variant).var()}`,
+        border: `${getToken("borderWidth").var} solid ${getToken("borderColor", variant).var}`,
+        borderRadius: getToken("borderRadius", "small").var,
       }} />
     ),
   )
@@ -101,10 +122,10 @@ const prepareBorderRadius = () =>
     ],
     ({ name, width, height }: any) => (
       <Demo style={{
-        borderRadius: getToken("borderRadius", name).var(),
+        borderRadius: getToken("borderRadius", name).var,
         width,
         height,
-        border: `${getToken("borderWidth", "base").var()} solid ${getToken("foregroundColor", "light").var()}`,
+        border: `${getToken("borderWidth").var} solid ${getToken("foregroundColor", "light").var}`,
       }} />
     ),
   )
@@ -120,7 +141,8 @@ const prepareBorderWidth = () =>
       <Demo style={{
         width,
         height,
-        border: `${getToken("borderWidth", name).var()} solid ${getToken("foregroundColor", "light").var()}`,
+        border: `${getToken("borderWidth", name).var} solid ${getToken("foregroundColor", "light").var}`,
+        borderRadius: getToken("borderRadius", "small").var,
       }} />
     ),
   )
@@ -129,15 +151,19 @@ const prepareBoxShadow = () =>
   createVariables(
     "boxShadow",
     [
-      { name: "downBase", width: "60px", height: "30px" },
-      { name: "downLarge", width: "120px", height: "60px" },
-      { name: "upBase", width: "60px", height: "30px" },
-      { name: "upLarge", width: "120px", height: "60px" },
+      { name: "base", width: "60px", height: "30px" },
+      { name: "large", width: "120px", height: "60px" },
     ],
     ({ name, width, height }: any) => (
-      <Demo backgroundColor="rgba(0, 0, 0, 0.05)" borderRadius={getToken("borderRadius", "base").var()}
-            spacing={{ all: "base" }}
-            style={{ width, height, boxShadow: getToken("boxShadow", name).var() }} />
+      <Demo backgroundColor="rgba(0, 0, 0, 0.05)" borderRadius={getToken("borderRadius", "small").var}
+            spacing={{ all: "large" }}
+            style={{
+              backgroundColor: getToken("backgroundColor").var,
+              width,
+              height,
+              borderRadius: getToken("borderRadius", "small").var,
+              boxShadow: getToken("boxShadow", name).var,
+            }} />
     ),
   )
 
@@ -147,9 +173,10 @@ const prepareCellHeight = () =>
     ["smaller", "small", "base", "large", "larger"],
     (variant) => (
       <Demo style={{
-        width: getToken("cellHeight", variant).var(),
-        height: getToken("cellHeight", variant).var(),
-        border: `${getToken("borderWidth", "base").var()} solid ${getToken("foregroundColor", "light").var()}`,
+        width: getToken("cellHeight", variant).var,
+        height: getToken("cellHeight", variant).var,
+        border: `${getToken("borderWidth").var} solid ${getToken("foregroundColor", "light").var}`,
+        borderRadius: getToken("borderRadius", "small").var,
       }} />
     ),
   )
@@ -162,7 +189,7 @@ const prepareForegroundColor = () =>
       <Demo style={{
         width: "24px",
         height: "24px",
-        backgroundColor: getToken("foregroundColor", variant).var(),
+        backgroundColor: getToken("foregroundColor", variant).var,
         borderRadius: "50%",
       }} />
     ),
@@ -192,7 +219,7 @@ const prepareFontWeight = () =>
   createVariables(
     "fontWeight",
     ["light", "base", "medium", "semibold", "bold", "extrabold", "black"],
-    (variant) => <Typography size="large" weight={getToken("fontWeight", variant).var()}>Sample</Typography>,
+    (variant) => <Typography size="large" weight={getToken("fontWeight", variant).var}>Sample</Typography>,
   )
 
 const prepareGap = () =>
@@ -230,33 +257,35 @@ const storiesData = {
 }
 
 // Helper to create story objects
-const createStory = (kebabName: string, pascalKey: keyof typeof storiesData): Story => ({
-  name: kebabName,
-  render: () => <VariableList variables={storiesData[pascalKey].variables} />,
-  parameters: {
-    docs: {
-      source: {
-        code: null,
-      },
-      canvas: {
-        sourceState: "none",
+const createStory = (camelName: string, pascalKey: keyof typeof storiesData): Story => {
+  return {
+    name: camelName,
+    render: () => <VariableList variables={storiesData[pascalKey].variables} />,
+    parameters: {
+      docs: {
+        source: {
+          code: null,
+        },
+        canvas: {
+          sourceState: "none",
+        },
       },
     },
-  },
-})
+  }
+}
 
 // Dynamically generate story exports
-export const AnimationDuration: Story = createStory("animation-duration", "AnimationDuration")
-export const AnimationEasing: Story = createStory("animation-easing", "AnimationEasing")
-export const BackgroundColor: Story = createStory("background-color", "BackgroundColor")
-export const BorderColor: Story = createStory("border-color", "BorderColor")
-export const BorderRadius: Story = createStory("border-radius", "BorderRadius")
-export const BorderWidth: Story = createStory("border-width", "BorderWidth")
-export const BoxShadow: Story = createStory("box-shadow", "BoxShadow")
-export const CellHeight: Story = createStory("cell-height", "CellHeight")
-export const ForegroundColor: Story = createStory("foreground-color", "ForegroundColor")
-export const FontFamily: Story = createStory("font-family", "FontFamily")
-export const FontSize: Story = createStory("font-size", "FontSize")
-export const FontWeight: Story = createStory("font-weight", "FontWeight")
+export const AnimationDuration: Story = createStory("animationDuration", "AnimationDuration")
+export const AnimationEasing: Story = createStory("animationEasing", "AnimationEasing")
+export const BackgroundColor: Story = createStory("backgroundColor", "BackgroundColor")
+export const BorderColor: Story = createStory("borderColor", "BorderColor")
+export const BorderRadius: Story = createStory("borderRadius", "BorderRadius")
+export const BorderWidth: Story = createStory("borderWidth", "BorderWidth")
+export const BoxShadow: Story = createStory("boxShadow", "BoxShadow")
+export const CellHeight: Story = createStory("cellHeight", "CellHeight")
+export const ForegroundColor: Story = createStory("foregroundColor", "ForegroundColor")
+export const FontFamily: Story = createStory("fontFamily", "FontFamily")
+export const FontSize: Story = createStory("fontSize", "FontSize")
+export const FontWeight: Story = createStory("fontWeight", "FontWeight")
 export const Gap: Story = createStory("gap", "Gap")
-export const LineHeight: Story = createStory("line-height", "LineHeight")
+export const LineHeight: Story = createStory("lineHeight", "LineHeight")

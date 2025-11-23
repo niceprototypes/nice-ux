@@ -125,7 +125,7 @@ export const Align: Story = {
 
     return (
       <VariableList
-        propName="align"
+        label="align"
         isString
         variables={[
           { name: "left", demo: <Typography align="left">{loremIpsum}</Typography> },
@@ -150,7 +150,7 @@ export const Antialiased: Story = {
   render: () => {
     return (
       <VariableList
-        propName="antialiased"
+        label="antialiased"
         variables={[
           { name: "false", demo: <Typography antialiased={false} size="large">Normal rendering</Typography> },
           { name: "true", demo: <Typography antialiased={true} size="large">Antialiased rendering</Typography> },
@@ -168,7 +168,7 @@ export const As: Story = {
   render: () => {
     return (
       <VariableList
-        propName="as"
+        label="as"
         isString
         variables={[
           { name: "h1", demo: <Typography as="h1">Heading 1</Typography> },
@@ -191,7 +191,7 @@ export const Code: Story = {
   render: () => {
     return (
       <VariableList
-        propName="code"
+        label="code"
         variables={[
           {
             name: "false",
@@ -224,7 +224,7 @@ export const Color: Story = {
   render: () => {
     return (
       <VariableList
-        propName="color"
+        label="color"
         isString
         variables={[
           { name: "lighter", demo: <Typography color="lighter">Lighter foreground color</Typography> },
@@ -251,7 +251,7 @@ export const LegibilityOptimized: Story = {
   render: () => {
     return (
       <VariableList
-        propName="legibilityOptimized"
+        label="legibilityOptimized"
         variables={[
           {
             name: "false",
@@ -277,7 +277,7 @@ export const LineHeight: Story = {
 
     return (
       <VariableList
-        propName="lineHeight"
+        label="lineHeight"
         isString
         variables={[
           { name: "condensed", demo: <Typography lineHeight="condensed">{loremIpsum}</Typography> },
@@ -297,7 +297,7 @@ export const Size: Story = {
   render: () => {
     return (
       <VariableList
-        propName="size"
+        label="size"
         isString
         variables={[
           { name: "smaller", demo: <Typography size="smaller">Sample</Typography> },
@@ -319,7 +319,7 @@ export const Weight: Story = {
   render: () => {
     return (
       <VariableList
-        propName="weight"
+        label="weight"
         isString
         variables={[
           { name: "300", demo: <Typography weight="300">Light weight text</Typography> },

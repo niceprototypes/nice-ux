@@ -1,8 +1,7 @@
 export interface VariableRowProps {
   name: string
-  value?: string
+  description?: string
   demo?: React.ReactNode
   code?: string
-  spacer?: boolean
-  propName?: string
+  label?: string
 }
