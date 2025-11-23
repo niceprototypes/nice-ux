@@ -19,7 +19,7 @@
     "nice-react-styles": "file:../nice-react-styles",
     "nice-react-tile": "^2.0.5",
     "nice-react-typography": "file:../nice-react-typography",
-    "nice-styles": "^4.0.1"
+    "nice-styles": "file:../nice-styles"
   },
   "devDependencies": {
     "@storybook/addon-docs": "^9.1.10",

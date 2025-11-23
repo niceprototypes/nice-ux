@@ -4,4 +4,5 @@ export interface VariableRowProps {
   demo?: React.ReactNode
   code?: string
   spacer?: boolean
+  propName?: string
 }

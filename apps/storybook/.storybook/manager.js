@@ -1,6 +1,5 @@
 import { addons } from 'storybook/manager-api';
 import { create } from 'storybook/theming';
-import { StyleConstants } from 'nice-styles';
 
 const theme = create({
   base: 'light',
@@ -9,8 +8,8 @@ const theme = create({
   brandImage: '/logo.svg',
   brandTarget: '_self',
 
-  fontBase: StyleConstants.FONT_FAMILY_BASE,
-  fontCode: StyleConstants.FONT_FAMILY_CODE,
+  fontBase: '"Google Sans Flex", sans-serif',
+  fontCode: '"Roboto Mono", "Courier New", serif',
 });
 
 addons.setConfig({

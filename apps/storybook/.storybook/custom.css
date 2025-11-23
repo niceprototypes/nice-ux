@@ -6,3 +6,7 @@
 #storybook-docs h1.sbdocs-title + div:not(.sb-anchor) + .sb-anchor {
   display: none;
 }
+
+a.sbdocs {
+  color: var(--foreground-color-link);
+}
