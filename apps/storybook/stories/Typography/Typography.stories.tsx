@@ -197,7 +197,7 @@ export const Code: Story = {
             name: "false",
             demo: (
               <Typography>
-                Use the <Typography code as="span">Typography</Typography> component
+                Hello world
               </Typography>
             ),
           },
@@ -205,7 +205,7 @@ export const Code: Story = {
             name: "true",
             demo: (
               <Typography code>
-                const greeting = "Hello World"
+                hello_world
               </Typography>
             ),
           },
@@ -300,11 +300,11 @@ export const Size: Story = {
         label="size"
         isString
         variables={[
-          { name: "smaller", demo: <Typography size="smaller">Sample</Typography> },
-          { name: "small", demo: <Typography size="small">Sample</Typography> },
-          { name: "base", demo: <Typography size="base">Sample</Typography> },
-          { name: "large", demo: <Typography size="large">Sample</Typography> },
-          { name: "larger", demo: <Typography size="larger">Sample</Typography> },
+          { name: "smaller", demo: <Typography size="smaller">Smaller size text</Typography> },
+          { name: "small", demo: <Typography size="small">Small size text</Typography> },
+          { name: "base", demo: <Typography size="base">Base size text</Typography> },
+          { name: "large", demo: <Typography size="large">Large size text</Typography> },
+          { name: "larger", demo: <Typography size="larger">arger size text</Typography> },
         ]}
       />
     )
@@ -322,13 +322,13 @@ export const Weight: Story = {
         label="weight"
         isString
         variables={[
-          { name: "300", demo: <Typography weight="300">Light weight text</Typography> },
-          { name: "400", demo: <Typography weight="400">Regular weight text</Typography> },
-          { name: "500", demo: <Typography weight="500">Medium weight text</Typography> },
-          { name: "600", demo: <Typography weight="600">Semibold weight text</Typography> },
-          { name: "700", demo: <Typography weight="700">Bold weight text</Typography> },
-          { name: "800", demo: <Typography weight="800">Extra Bold weight text</Typography> },
-          { name: "900", demo: <Typography weight="900">Black weight text</Typography> },
+          { name: "light", demo: <Typography weight="light">Light weight text</Typography> },
+          { name: "base", demo: <Typography weight="base">Base weight text</Typography> },
+          { name: "medium", demo: <Typography weight="medium">Medium weight text</Typography> },
+          { name: "semibold", demo: <Typography weight="semibold">Semibold weight text</Typography> },
+          { name: "bold", demo: <Typography weight="bold">Bold weight text</Typography> },
+          { name: "extrabold", demo: <Typography weight="extrabold">Extrabold weight text</Typography> },
+          { name: "black", demo: <Typography weight="black">Black weight text</Typography> },
         ]}
       />
     )
