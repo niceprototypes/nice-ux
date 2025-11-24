@@ -1,4 +1,5 @@
 import * as React from "react"
+import type { ForegroundColorType, FontSizeType, FontWeightType, LineHeightType } from "nice-styles"
 
 /**
  * Text alignment options
@@ -6,16 +7,9 @@ import * as React from "react"
 export type AlignType = "left" | "center" | "right" | "justify"
 
 /**
- * Line height options using CSS custom properties
- * - `default`: Standard line height (1.5) for body text
- * - `condensed`: Tighter line height (1.25) for headings
- */
-export type LineHeightType = "default" | "condensed"
-
-/**
  * HTML element types supported by the Typography component
  */
-export type TypographyAsType = "h1" | "h2" | "h3" | "h4" | "p" | "span"
+export type AsType = "h1" | "h2" | "h3" | "h4" | "p" | "span"
 
 /**
  * Props for the Typography component
@@ -28,7 +22,7 @@ export type TypographyProps = {
   antialiased?: boolean
 
   /** HTML element to render */
-  as?: TypographyAsType
+  as?: AsType
 
   /** Text content or child elements */
   children: React.ReactNode
@@ -39,8 +33,8 @@ export type TypographyProps = {
   /** Apply monospace font for code snippets */
   code?: boolean
 
-  /** Custom text color (any valid CSS color value) */
-  color?: string
+  /** Text color from nice-styles tokens (lighter, light, medium, heavy, base, disabled, link, success, warning, error) */
+  color?: ForegroundColorType
 
   /** Apply legibility optimizations (hardware acceleration, 3D transforms) */
   legibilityOptimized?: boolean
@@ -48,9 +42,9 @@ export type TypographyProps = {
   /** Line height setting (defaults based on element type) */
   lineHeight?: LineHeightType
 
-  /** Font size (any valid CSS size value or CSS variable) */
-  size?: string
+  /** Font size from nice-styles tokens */
+  size?: FontSizeType
 
-  /** Font weight (any valid CSS weight value or CSS variable) */
-  weight?: string
+  /** Font weight from nice-styles tokens */
+  weight?: FontWeightType
 }

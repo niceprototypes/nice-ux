@@ -8,7 +8,9 @@
  */
 
 import styled, { css } from "styled-components"
-import { TypographyAsType, AlignType, LineHeightType } from "./types"
+import type { ForegroundColorType, FontSizeType, FontWeightType, LineHeightType } from "nice-styles"
+import { getToken } from "nice-styles"
+import { AsType, AlignType } from "./types"
 import { styleAntialiasing } from "./utils"
 
 /**
@@ -32,14 +34,10 @@ export const styleOptimizedLegibility = css`
 `
 
 export const StyledTypography = styled.p<{
-  $as: TypographyAsType
-  $size?: string
-  $sizeFallback?: string
-  $weight?: string
-  $weightFallback?: string
-  $fontFamily?: string
-  $fontFamilyFallback?: string
-  $color?: string
+  $as: AsType
+  $size?: FontSizeType
+  $weight?: FontWeightType
+  $color?: ForegroundColorType
   $antialiased?: boolean
   $legibilityOptimized?: boolean
   $align?: AlignType
@@ -48,80 +46,97 @@ export const StyledTypography = styled.p<{
 }>`
   margin: 0;
 
-  ${({ $as, $fontFamily = "var(--font-family-heading)", $fontFamilyFallback = "inherit" }) =>
-      ($as === "h1" || $as === "h2" || $as === "h3" || $as === "h4") &&
-      css`
-        font-family: ${$fontFamily};
-        font-family: ${$fontFamilyFallback};
-      `}
-
-  ${({ $code }) =>
-      $code &&
-      css`
-        font-family: "SF Mono", "Monaco", "Inconsolata", "Fira Code", monospace;
-      `}
-
-  ${({ $color }) =>
-      $color &&
-      css`
-        color: ${$color};
-      `}
-
-  ${({ $as, $size, $sizeFallback }) => {
-    // If user provided a size, use it directly
-    if ($size) {
+  /* Font family with nice-styles fallback */
+  ${({ $as, $code }) => {
+    if ($code) {
       return css`
-        font-size: ${$size};
-        font-size: ${$sizeFallback || $size};
+        font-family: ${getToken("fontFamily", "code").var};
       `
     }
 
-    // Otherwise, use heading-specific defaults
-    switch ($as) {
-      case "h1":
-        return css`
-          font-size: var(--typography-size-h1);
-          font-size: ${$sizeFallback || "3rem"};
-        `
-      case "h2":
-        return css`
-          font-size: var(--typography-size-h2);
-          font-size: ${$sizeFallback || "2.25rem"};
-        `
-      case "h3":
-        return css`
-          font-size: var(--typography-size-h3);
-          font-size: ${$sizeFallback || "1.875rem"};
-        `
-      case "h4":
-        return css`
-          font-size: var(--typography-size-h4);
-          font-size: ${$sizeFallback || "1.5rem"};
-        `
-      default:
-        return css`
-          font-size: var(--typography-size-default);
-          font-size: ${$sizeFallback || "1rem"};
-        `
+    if ($as === "h1" || $as === "h2" || $as === "h3" || $as === "h4") {
+      return css`
+        font-family: ${getToken("fontFamily", "heading").var};
+      `
+    }
+
+    return css`
+      font-family: ${getToken("fontFamily", "base").var};
+    `
+  }}
+
+  /* Color */
+  ${({ $color }) => {
+    if (!$color) return ''
+
+    return css`
+      color: ${getToken("foregroundColor", $color).var};
+    `
+  }}
+
+  /* Font size */
+  ${({ $as, $size }) => {
+    // Determine effective font size
+    let effectiveSize: FontSizeType
+
+    if ($size) {
+      effectiveSize = $size
+    } else {
+      // Default sizes for headings
+      switch ($as) {
+        case "h1":
+          effectiveSize = "larger"
+          break
+        case "h2":
+          effectiveSize = "large"
+          break
+        default:
+          effectiveSize = "base"
+      }
+    }
+
+    return css`
+      font-size: ${getToken("fontSize", effectiveSize).var};
+    `
+  }}
+
+  /* Font weight */
+  ${({ $as, $weight }) => {
+    if ($weight) {
+      return css`
+        font-weight: ${getToken("fontWeight", $weight).var};
+      `
+    }
+
+    // Default weights for headings
+    if ($as === "h1" || $as === "h2" || $as === "h3") {
+      return css`
+        font-weight: ${getToken("fontWeight", "bold").var};
+      `
     }
   }}
 
-  font-weight: ${({ $weight, $weightFallback = "normal" }) =>
-    $weight || `var(--typography-weight-default, ${$weightFallback})`};
-
+  /* Antialiasing */
   ${({ $antialiased }) => $antialiased && styleAntialiasing}
 
+  /* Optimized legibility */
   ${({ $legibilityOptimized }) => $legibilityOptimized && styleOptimizedLegibility}
 
+  /* Text alignment */
   ${({ $align }) =>
       $align &&
       css`
         text-align: ${$align};
       `}
 
-  ${({ $lineHeight }) =>
-      $lineHeight &&
-      css`
-        line-height: var(--line-height-${$lineHeight}, normal);
-      `}
+  /* Line height with nice-styles fallback */
+  ${({ $lineHeight, $as }) => {
+    // Use provided line height or determine default
+    const effectiveLineHeight = $lineHeight ||
+      (($as === "h1" || $as === "h2" || $as === "h3" || $as === "h4") ? "condensed" : "base")
+
+    return css`
+      line-height: ${getToken("lineHeight", effectiveLineHeight).var};
+    `
+  }}
 `

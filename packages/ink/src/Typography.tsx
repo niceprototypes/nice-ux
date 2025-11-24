@@ -1,31 +1,36 @@
 import * as React from "react"
 import { StyledTypography } from "./styles"
 import { TypographyProps } from "./types"
-import getEffectiveColor from "./services/getEffectiveColor"
-import getEffectiveFontWeight from "./services/getEffectiveFontWeight"
-import getEffectiveLineHeight from "./services/getEffectiveLineHeight"
 
 /**
  * Typography component for rendering text with flexible styling options.
  *
  * Provides comprehensive text styling control with semantic HTML elements,
- * CSS custom properties, and accessibility features.
+ * CSS custom properties, and accessibility features. Font families are inlined
+ * from nice-styles design tokens for consistent typography across applications.
  *
  * @example
  * ```tsx
  * // Simple heading
  * <Typography as="h1">Main Heading</Typography>
  *
- * // Custom size and weight
- * <Typography size="1.125rem" weight="500">Custom text</Typography>
+ * // Custom size from nice-styles tokens
+ * <Typography size="large">Large text</Typography>
  *
- * // Using CSS variables
- * <Typography size="var(--text-lg)" weight="var(--font-semibold)">
- *   Themed text
- * </Typography>
+ * // Success message with semantic color
+ * <Typography color="success">Operation completed successfully</Typography>
  *
- * // Custom color
- * <Typography color="var(--foreground-color-success)">Success message</Typography>
+ * // Error message
+ * <Typography color="error">Something went wrong</Typography>
+ *
+ * // Link styling
+ * <Typography color="link">Click here</Typography>
+ *
+ * // Code snippet with monospace font
+ * <Typography code>const greeting = "Hello, World!"</Typography>
+ *
+ * // Custom line height
+ * <Typography lineHeight="expanded">Highly readable text</Typography>
  * ```
  */
 const Typography: React.FC<TypographyProps> = ({
@@ -48,10 +53,10 @@ const Typography: React.FC<TypographyProps> = ({
       $legibilityOptimized={legibilityOptimized}
       $as={as}
       $code={code}
-      $color={getEffectiveColor(color)}
-      $lineHeight={getEffectiveLineHeight(lineHeight, as)}
+      $color={color}
+      $lineHeight={lineHeight}
       $size={size}
-      $weight={getEffectiveFontWeight(weight, as)}
+      $weight={weight}
       as={as}
       className={className}
     >
