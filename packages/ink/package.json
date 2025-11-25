@@ -61,6 +61,6 @@
   },
   "homepage": "https://github.com/niceprototypes/nice-react-typography#readme",
   "dependencies": {
-    "nice-styles": "^4.1.3"
+    "nice-styles": "^4.1.5"
   }
 }
