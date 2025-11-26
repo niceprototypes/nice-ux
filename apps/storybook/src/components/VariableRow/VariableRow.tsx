@@ -3,6 +3,7 @@ import Typography from "nice-react-typography"
 import { CellFlex } from "./styles"
 import { VariableRowProps } from "./types"
 import Flex from "nice-react-flex"
+import CodePreview from "../CodePreview"
 
 const VariableRow: React.FC<VariableRowProps> = ({
   name,
@@ -10,6 +11,7 @@ const VariableRow: React.FC<VariableRowProps> = ({
   demo,
   label,
   value,
+  code,
 }) => {
   return (
     <Flex alignItems="center" gap="base">
@@ -25,7 +27,7 @@ const VariableRow: React.FC<VariableRowProps> = ({
           </Typography>
         </Flex>
         {description && (
-          <Typography code color="light" size="small">
+          <Typography code color="light" size="smaller">
             {description}
           </Typography>
         )}
@@ -33,11 +35,16 @@ const VariableRow: React.FC<VariableRowProps> = ({
       <CellFlex grow={1} alignItems="center" gap="base">
         {demo}
         {value && (
-          <Typography code as="span" color="light" size="small">
+          <Typography code as="span" color="light" size="smaller">
             {value}
           </Typography>
         )}
       </CellFlex>
+      {code && (
+        <CellFlex $width="24em">
+          <CodePreview code={code} />
+        </CellFlex>
+      )}
     </Flex>
   )
 }

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react"
 import { getToken } from "nice-styles"
 import Typography from "nice-react-typography"
 import Demo from "../../src/components/Demo"
-import DemoList from "../../src/components/DemoList"
+import DemoDots from "../../src/components/DemoDots"
 import VariableList from "../../src/components/VariableList"
 import { generateDescriptionString } from "../../src/utilities"
 import Flex from "nice-react-flex"
@@ -283,9 +283,9 @@ const prepareFontFamily = () =>
   createVariables(
     "fontFamily",
     [
-      { name: "heading", size: "larger", weight: "bold", text: "Heading" },
-      { name: "base", size: "large", text: "Body" },
-      { name: "code", size: "large", code: true, text: "Code" },
+      { name: "heading", weight: "bold", text: "Heading" },
+      { name: "base", text: "Body" },
+      { name: "code", code: true, text: "Code" },
     ],
     ({ size, weight, code, text }: any) => (
       <Typography size={size} weight={weight} code={code}>
@@ -306,7 +306,7 @@ const prepareFontWeight = () =>
     "fontWeight",
     ["light", "base", "medium", "semibold", "bold", "extrabold", "black"],
     variant => (
-      <Typography size="large" weight={variant}>
+      <Typography weight={variant}>
         Sample
       </Typography>
     )
@@ -317,7 +317,7 @@ const prepareGap = () =>
     "gap",
     ["smaller", "small", "base", "large", "larger"],
     variant => (
-      <DemoList
+      <DemoDots
         gap={variant as any}
         demos={[
           {

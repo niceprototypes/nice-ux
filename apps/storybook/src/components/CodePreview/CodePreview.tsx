@@ -69,8 +69,6 @@ const CodePreview: React.FC<CodePreviewProps> = ({ code, display = "block" }) =>
 
   return (
     <div style={{
-      display,
-      flexGrow: display === "block" ? 1 : 0,
       backgroundColor: colors.background,
       padding: "0.5em",
       borderRadius: "8px",

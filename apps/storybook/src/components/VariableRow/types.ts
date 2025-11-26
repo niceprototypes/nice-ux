@@ -4,4 +4,5 @@ export interface VariableRowProps {
   demo?: React.ReactNode
   label?: string
   value?: string
+  code?: string
 }

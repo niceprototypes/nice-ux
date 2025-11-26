@@ -8,6 +8,7 @@ interface VariableListProps {
     var?: string
     value?: string
     demo?: React.ReactNode
+    code?: string
   }>
   label?: string
   isString?: boolean
@@ -16,7 +17,7 @@ interface VariableListProps {
 const VariableList = ({ variables, label, isString = false }: VariableListProps) => {
   return (
     <Flex direction="column" gap="larger">
-      {variables.map((variable) => {
+      {variables.map((variable, index) => {
         let formattedName = variable.name
 
         // Only wrap in quotes or brackets if label is present
@@ -30,12 +31,13 @@ const VariableList = ({ variables, label, isString = false }: VariableListProps)
 
         return (
           <VariableRow
-            key={variable.name}
+            key={variable.name || `variable-${index}`}
             name={formattedName}
             description={variable.key}
             demo={variable.demo}
             label={label}
             value={variable.value}
+            code={variable.code}
           />
         )
       })}

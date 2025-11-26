@@ -1,8 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import Flex from "nice-react-flex"
 import { getToken } from "nice-styles"
-import DemoList from "../../src/components/DemoList"
-import CodePreview from "../../src/components/CodePreview"
+import VariableList from "../../src/components/VariableList"
+import DemoDots from "../../src/components/DemoDots"
+
+// Flex import needed for meta component reference
 
 /**
  * A highly flexible and responsive flexbox container component that provides
@@ -16,14 +18,17 @@ const meta = {
   parameters: {
     layout: "padded",
     controls: { disable: true },
+    docs: {
+      source: { code: null },
+      canvas: { sourceState: "none" },
+    },
   },
   tags: ["autodocs"],
   argTypes: {
     // Required props first
     children: {
       name: "children *",
-      description:
-        "Child elements to render inside the flex container (required)",
+      description: "Child elements (required)",
       control: "text",
       table: {
         type: { summary: "React.ReactNode" },
@@ -126,31 +131,11 @@ type Story = StoryObj<typeof meta>
 
 export const Basic: Story = {
   render: () => (
-    <DemoList
-      demos={[
+    <VariableList
+      variables={[
         {
-          backgroundColor: getToken("foregroundColor", "error").var,
-          borderRadius: "50%",
-          style: {
-            width: getToken("cellHeight", "smaller").var,
-            height: getToken("cellHeight", "smaller").var,
-          },
-        },
-        {
-          backgroundColor: getToken("foregroundColor", "warning").var,
-          borderRadius: "50%",
-          style: {
-            width: getToken("cellHeight", "smaller").var,
-            height: getToken("cellHeight", "smaller").var,
-          },
-        },
-        {
-          backgroundColor: getToken("foregroundColor", "link").var,
-          borderRadius: "50%",
-          style: {
-            width: getToken("cellHeight", "smaller").var,
-            height: getToken("cellHeight", "smaller").var,
-          },
+          demo: <DemoDots dots={[{ color: "error" }, { color: "link" }]} />,
+          code: `<Flex>{children}</Flex>`,
         },
       ]}
     />
@@ -163,35 +148,32 @@ export const Basic: Story = {
 export const Direction: Story = {
   name: "direction",
   render: () => (
-      <DemoList
-        direction="column"
-        demos={[
-          {
-            backgroundColor: getToken("foregroundColor", "error").var,
-            borderRadius: "50%",
-            style: {
-              width: getToken("cellHeight", "smaller").var,
-              height: getToken("cellHeight", "smaller").var,
-            },
-          },
-          {
-            backgroundColor: getToken("foregroundColor", "warning").var,
-            borderRadius: "50%",
-            style: {
-              width: getToken("cellHeight", "smaller").var,
-              height: getToken("cellHeight", "smaller").var,
-            },
-          },
-          {
-            backgroundColor: getToken("foregroundColor", "link").var,
-            borderRadius: "50%",
-            style: {
-              width: getToken("cellHeight", "smaller").var,
-              height: getToken("cellHeight", "smaller").var,
-            },
-          },
-        ]}
-      />
+    <VariableList
+      label="direction"
+      isString
+      variables={[
+        {
+          name: "row",
+          demo: (
+            <DemoDots
+              direction="row"
+              dots={[{ color: "error" }, { color: "link" }]}
+            />
+          ),
+          code: `<Flex direction="row">{children}</Flex>`,
+        },
+        {
+          name: "column",
+          demo: (
+            <DemoDots
+              direction="column"
+              dots={[{ color: "error" }, { color: "link" }]}
+            />
+          ),
+          code: `<Flex direction="column">{children}</Flex>`,
+        },
+      ]}
+    />
   ),
 }
 
@@ -201,112 +183,66 @@ export const Direction: Story = {
 export const Gap: Story = {
   name: "gap",
   render: () => (
-    <Flex direction="column" gap="large">
-      <DemoList
-        gap="smaller"
-        demos={[
-          {
-            backgroundColor: getToken("foregroundColor", "error").var,
-            borderRadius: "50%",
-            style: {
-              width: getToken("cellHeight", "smaller").var,
-              height: getToken("cellHeight", "smaller").var,
-            },
-          },
-          {
-            backgroundColor: getToken("foregroundColor", "link").var,
-            borderRadius: "50%",
-            style: {
-              width: getToken("cellHeight", "smaller").var,
-              height: getToken("cellHeight", "smaller").var,
-            },
-          },
-        ]}
-      />
-      <DemoList
-        gap="small"
-        demos={[
-          {
-            backgroundColor: getToken("foregroundColor", "error").var,
-            borderRadius: "50%",
-            style: {
-              width: getToken("cellHeight", "smaller").var,
-              height: getToken("cellHeight", "smaller").var,
-            },
-          },
-          {
-            backgroundColor: getToken("foregroundColor", "link").var,
-            borderRadius: "50%",
-            style: {
-              width: getToken("cellHeight", "smaller").var,
-              height: getToken("cellHeight", "smaller").var,
-            },
-          },
-        ]}
-      />
-      <DemoList
-        gap="base"
-        demos={[
-          {
-            backgroundColor: getToken("foregroundColor", "error").var,
-            borderRadius: "50%",
-            style: {
-              width: getToken("cellHeight", "smaller").var,
-              height: getToken("cellHeight", "smaller").var,
-            },
-          },
-          {
-            backgroundColor: getToken("foregroundColor", "link").var,
-            borderRadius: "50%",
-            style: {
-              width: getToken("cellHeight", "smaller").var,
-              height: getToken("cellHeight", "smaller").var,
-            },
-          },
-        ]}
-      />
-      <DemoList
-        gap="large"
-        demos={[
-          {
-            backgroundColor: getToken("foregroundColor", "error").var,
-            borderRadius: "50%",
-            style: {
-              width: getToken("cellHeight", "smaller").var,
-              height: getToken("cellHeight", "smaller").var,
-            },
-          },
-          {
-            backgroundColor: getToken("foregroundColor", "link").var,
-            borderRadius: "50%",
-            style: {
-              width: getToken("cellHeight", "smaller").var,
-              height: getToken("cellHeight", "smaller").var,
-            },
-          },
-        ]}
-      />
-      <DemoList
-        gap="larger"
-        demos={[
-          {
-            backgroundColor: getToken("foregroundColor", "error").var,
-            borderRadius: "50%",
-            style: {
-              width: getToken("cellHeight", "smaller").var,
-              height: getToken("cellHeight", "smaller").var,
-            },
-          },
-          {
-            backgroundColor: getToken("foregroundColor", "link").var,
-            borderRadius: "50%",
-            style: {
-              width: getToken("cellHeight", "smaller").var,
-              height: getToken("cellHeight", "smaller").var,
-            },
-          },
-        ]}
-      />
-    </Flex>
+    <VariableList
+      label="gap"
+      isString
+      variables={[
+        {
+          name: "smaller",
+          value: getToken("gap", "smaller").value,
+          demo: (
+            <DemoDots
+              gap="smaller"
+              dots={[{ color: "error" }, { color: "link" }]}
+            />
+          ),
+          code: `<Flex gap="smaller">{children}</Flex>`,
+        },
+        {
+          name: "small",
+          value: getToken("gap", "small").value,
+          demo: (
+            <DemoDots
+              gap="small"
+              dots={[{ color: "error" }, { color: "link" }]}
+            />
+          ),
+          code: `<Flex gap="small">{children}</Flex>`,
+        },
+        {
+          name: "base",
+          value: getToken("gap", "base").value,
+          demo: (
+            <DemoDots
+              gap="base"
+              dots={[{ color: "error" }, { color: "link" }]}
+            />
+          ),
+          code: `<Flex gap="base">{children}</Flex>`,
+        },
+        {
+          name: "large",
+          value: getToken("gap", "large").value,
+          demo: (
+            <DemoDots
+              gap="large"
+              dots={[{ color: "error" }, { color: "link" }]}
+            />
+          ),
+          code: `<Flex gap="large">{children}</Flex>`,
+        },
+        {
+          name: "larger",
+          value: getToken("gap", "larger").value,
+          demo: (
+            <DemoDots
+              gap="larger"
+              dots={[{ color: "error" }, { color: "link" }]}
+            />
+          ),
+          code: `<Flex gap="larger">{children}</Flex>`,
+        },
+      ]}
+    />
   ),
 }

@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import Typography from "nice-react-typography"
 import VariableList from "../../src/components/VariableList"
+import Flex from "../../../nice-react-flex"
 
 /**
  * A flexible typography component built on web standards and CSS custom properties.
@@ -20,7 +21,7 @@ const meta = {
     // Required props first
     children: {
       name: "children *",
-      description: "Text content or child elements (required)",
+      description: "Child elements (required)",
       control: "text",
       table: {
         type: { summary: "React.ReactNode" },
@@ -37,7 +38,7 @@ const meta = {
       },
     },
     antialiased: {
-      description: "Enable font antialiasing for smoother text rendering",
+      description: "Font smoothing",
       control: "boolean",
       table: {
         type: { summary: "boolean" },
@@ -54,14 +55,14 @@ const meta = {
       },
     },
     className: {
-      description: "CSS class name for styling",
+      description: "CSS classname",
       control: "text",
       table: {
         type: { summary: "string" },
       },
     },
     code: {
-      description: "Apply monospace font for code snippets",
+      description: "Enable code font",
       control: "boolean",
       table: {
         type: { summary: "boolean" },
@@ -69,15 +70,29 @@ const meta = {
       },
     },
     color: {
-      description: "Text color from nice-styles tokens",
+      description: "Text color",
       control: "select",
-      options: ["lighter", "light", "medium", "heavy", "base", "disabled", "link", "success", "warning", "error"],
+      options: [
+        "lighter",
+        "light",
+        "medium",
+        "heavy",
+        "base",
+        "disabled",
+        "link",
+        "success",
+        "warning",
+        "error",
+      ],
       table: {
-        type: { summary: '"lighter" | "light" | "medium" | "heavy" | "base" | "disabled" | "link" | "success" | "warning" | "error"' },
+        type: {
+          summary:
+            '"lighter" | "light" | "medium" | "heavy" | "base" | "disabled" | "link" | "success" | "warning" | "error"',
+        },
       },
     },
     legibilityOptimized: {
-      description: "Apply legibility optimizations (hardware acceleration, 3D transforms)",
+      description: "Legibility optimizations",
       control: "boolean",
       table: {
         type: { summary: "boolean" },
@@ -85,28 +100,33 @@ const meta = {
       },
     },
     lineHeight: {
-      description: "Line height setting (defaults based on element type)",
+      description: "Line spacing",
       control: "select",
       options: ["condensed", "base", "expanded"],
       table: {
         type: { summary: '"condensed" | "base" | "expanded"' },
-        defaultValue: { summary: "depends on element type" },
+        defaultValue: { summary: "conditional" },
       },
     },
     size: {
-      description: "Font size token or any valid CSS size value",
+      description: "Text size",
       control: "text",
       table: {
-        type: { summary: '"smaller" | "small" | "base" | "large" | "larger" | string' },
-        defaultValue: { summary: "depends on element type" },
+        type: {
+          summary: '"smaller" | "small" | "base" | "large" | "larger" | string',
+        },
+        defaultValue: { summary: "conditional" },
       },
     },
     weight: {
-      description: "Font weight token or any valid CSS weight value",
+      description: "Text thickness",
       control: "text",
       table: {
-        type: { summary: '"light" | "base" | "medium" | "semibold" | "bold" | "extrabold" | "black" | string' },
-        defaultValue: { summary: "depends on element type" },
+        type: {
+          summary:
+            '"light" | "base" | "medium" | "semibold" | "bold" | "extrabold" | "black" | string',
+        },
+        defaultValue: { summary: "conditional" },
       },
     },
   },
@@ -128,13 +148,41 @@ export const Align: Story = {
         label="align"
         isString
         variables={[
-          { name: "left", demo: <Typography align="left">{loremIpsum}</Typography> },
-          { name: "center", demo: <Typography align="center">{loremIpsum}</Typography> },
-          { name: "right", demo: <Typography align="right">{loremIpsum}</Typography> },
+          {
+            name: "left",
+            demo: (
+              <Flex direction="column" grow={1}>
+                <Typography align="left">{loremIpsum}</Typography>
+              </Flex>
+            ),
+          },
+          {
+            name: "center",
+            demo: (
+              <Flex direction="column" grow={1}>
+                <Typography align="center">{loremIpsum}</Typography>
+              </Flex>
+            ),
+          },
+          {
+            name: "right",
+            demo: (
+              <Flex direction="column" grow={1}>
+                <Typography align="right">{loremIpsum}</Typography>
+              </Flex>
+            ),
+          },
           {
             name: "justify",
-            demo: <Typography align="justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam.</Typography>,
+            demo: (
+              <Flex grow={1}>
+                <Typography align="justify">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+                  eiusmod tempor incididunt ut labore et dolore magna aliqua ut
+                  enim ad minim veniam.
+                </Typography>
+              </Flex>
+            ),
           },
         ]}
       />
@@ -152,8 +200,22 @@ export const Antialiased: Story = {
       <VariableList
         label="antialiased"
         variables={[
-          { name: "false", demo: <Typography antialiased={false} size="large">Normal rendering</Typography> },
-          { name: "true", demo: <Typography antialiased={true} size="large">Antialiased rendering</Typography> },
+          {
+            name: "false",
+            demo: (
+              <Typography antialiased={false} size="large">
+                Normal rendering
+              </Typography>
+            ),
+          },
+          {
+            name: "true",
+            demo: (
+              <Typography antialiased={true} size="large">
+                Antialiased rendering
+              </Typography>
+            ),
+          },
         ]}
       />
     )
@@ -195,19 +257,11 @@ export const Code: Story = {
         variables={[
           {
             name: "false",
-            demo: (
-              <Typography>
-                Hello world
-              </Typography>
-            ),
+            demo: <Typography>Hello world</Typography>,
           },
           {
             name: "true",
-            demo: (
-              <Typography code>
-                hello_world
-              </Typography>
-            ),
+            demo: <Typography code>hello_world</Typography>,
           },
         ]}
       />
@@ -227,16 +281,52 @@ export const Color: Story = {
         label="color"
         isString
         variables={[
-          { name: "lighter", demo: <Typography color="lighter">Lighter foreground color</Typography> },
-          { name: "light", demo: <Typography color="light">Light foreground color</Typography> },
-          { name: "medium", demo: <Typography color="medium">Medium foreground color</Typography> },
-          { name: "heavy", demo: <Typography color="heavy">Heavy foreground color</Typography> },
-          { name: "base", demo: <Typography color="base">Base foreground color</Typography> },
-          { name: "disabled", demo: <Typography color="disabled">Disabled state color</Typography> },
-          { name: "link", demo: <Typography color="link">Link color</Typography> },
-          { name: "success", demo: <Typography color="success">Success message</Typography> },
-          { name: "warning", demo: <Typography color="warning">Warning message</Typography> },
-          { name: "error", demo: <Typography color="error">Error message</Typography> },
+          {
+            name: "lighter",
+            demo: (
+              <Typography color="lighter">Lighter foreground color</Typography>
+            ),
+          },
+          {
+            name: "light",
+            demo: <Typography color="light">Light foreground color</Typography>,
+          },
+          {
+            name: "medium",
+            demo: (
+              <Typography color="medium">Medium foreground color</Typography>
+            ),
+          },
+          {
+            name: "heavy",
+            demo: <Typography color="heavy">Heavy foreground color</Typography>,
+          },
+          {
+            name: "base",
+            demo: <Typography color="base">Base foreground color</Typography>,
+          },
+          {
+            name: "disabled",
+            demo: (
+              <Typography color="disabled">Disabled state color</Typography>
+            ),
+          },
+          {
+            name: "link",
+            demo: <Typography color="link">Link color</Typography>,
+          },
+          {
+            name: "success",
+            demo: <Typography color="success">Success message</Typography>,
+          },
+          {
+            name: "warning",
+            demo: <Typography color="warning">Warning message</Typography>,
+          },
+          {
+            name: "error",
+            demo: <Typography color="error">Error message</Typography>,
+          },
         ]}
       />
     )
@@ -255,11 +345,19 @@ export const LegibilityOptimized: Story = {
         variables={[
           {
             name: "false",
-            demo: <Typography legibilityOptimized={false} size="large">Standard text rendering</Typography>,
+            demo: (
+              <Typography legibilityOptimized={false} size="large">
+                Standard text rendering
+              </Typography>
+            ),
           },
           {
             name: "true",
-            demo: <Typography legibilityOptimized={true} size="large">Optimized text rendering</Typography>,
+            demo: (
+              <Typography legibilityOptimized={true} size="large">
+                Optimized text rendering
+              </Typography>
+            ),
           },
         ]}
       />
@@ -273,16 +371,26 @@ export const LegibilityOptimized: Story = {
 export const LineHeight: Story = {
   name: "lineHeight",
   render: () => {
-    const loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+    const loremIpsum =
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
 
     return (
       <VariableList
         label="lineHeight"
         isString
         variables={[
-          { name: "condensed", demo: <Typography lineHeight="condensed">{loremIpsum}</Typography> },
-          { name: "base", demo: <Typography lineHeight="base">{loremIpsum}</Typography> },
-          { name: "expanded", demo: <Typography lineHeight="expanded">{loremIpsum}</Typography> },
+          {
+            name: "condensed",
+            demo: <Typography lineHeight="condensed">{loremIpsum}</Typography>,
+          },
+          {
+            name: "base",
+            demo: <Typography lineHeight="base">{loremIpsum}</Typography>,
+          },
+          {
+            name: "expanded",
+            demo: <Typography lineHeight="expanded">{loremIpsum}</Typography>,
+          },
         ]}
       />
     )
@@ -300,11 +408,26 @@ export const Size: Story = {
         label="size"
         isString
         variables={[
-          { name: "smaller", demo: <Typography size="smaller">Smaller size text</Typography> },
-          { name: "small", demo: <Typography size="small">Small size text</Typography> },
-          { name: "base", demo: <Typography size="base">Base size text</Typography> },
-          { name: "large", demo: <Typography size="large">Large size text</Typography> },
-          { name: "larger", demo: <Typography size="larger">Larger size text</Typography> },
+          {
+            name: "smaller",
+            demo: <Typography size="smaller">Smaller size text</Typography>,
+          },
+          {
+            name: "small",
+            demo: <Typography size="small">Small size text</Typography>,
+          },
+          {
+            name: "base",
+            demo: <Typography size="base">Base size text</Typography>,
+          },
+          {
+            name: "large",
+            demo: <Typography size="large">Large size text</Typography>,
+          },
+          {
+            name: "larger",
+            demo: <Typography size="larger">Larger size text</Typography>,
+          },
         ]}
       />
     )
@@ -322,13 +445,38 @@ export const Weight: Story = {
         label="weight"
         isString
         variables={[
-          { name: "light", demo: <Typography weight="light">Light weight text</Typography> },
-          { name: "base", demo: <Typography weight="base">Base weight text</Typography> },
-          { name: "medium", demo: <Typography weight="medium">Medium weight text</Typography> },
-          { name: "semibold", demo: <Typography weight="semibold">Semibold weight text</Typography> },
-          { name: "bold", demo: <Typography weight="bold">Bold weight text</Typography> },
-          { name: "extrabold", demo: <Typography weight="extrabold">Extrabold weight text</Typography> },
-          { name: "black", demo: <Typography weight="black">Black weight text</Typography> },
+          {
+            name: "light",
+            demo: <Typography weight="light">Light weight text</Typography>,
+          },
+          {
+            name: "base",
+            demo: <Typography weight="base">Base weight text</Typography>,
+          },
+          {
+            name: "medium",
+            demo: <Typography weight="medium">Medium weight text</Typography>,
+          },
+          {
+            name: "semibold",
+            demo: (
+              <Typography weight="semibold">Semibold weight text</Typography>
+            ),
+          },
+          {
+            name: "bold",
+            demo: <Typography weight="bold">Bold weight text</Typography>,
+          },
+          {
+            name: "extrabold",
+            demo: (
+              <Typography weight="extrabold">Extrabold weight text</Typography>
+            ),
+          },
+          {
+            name: "black",
+            demo: <Typography weight="black">Black weight text</Typography>,
+          },
         ]}
       />
     )
