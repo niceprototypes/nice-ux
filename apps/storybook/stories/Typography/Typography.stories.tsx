@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react"
+import { getToken } from "nice-styles"
 import Typography from "nice-react-typography"
 import VariableList from "../../src/components/VariableList"
 import Flex from "../../../nice-react-flex"
@@ -135,9 +136,6 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-/**
- * Typography with text alignment using the `align` prop.
- */
 export const Align: Story = {
   name: "align",
   render: () => {
@@ -190,9 +188,6 @@ export const Align: Story = {
   },
 }
 
-/**
- * Typography with antialiasing enabled.
- */
 export const Antialiased: Story = {
   name: "antialiased",
   render: () => {
@@ -222,9 +217,6 @@ export const Antialiased: Story = {
   },
 }
 
-/**
- * Typography rendered as different HTML elements using the `as` prop.
- */
 export const As: Story = {
   name: "as",
   render: () => {
@@ -245,9 +237,6 @@ export const As: Story = {
   },
 }
 
-/**
- * Typography with code styling.
- */
 export const Code: Story = {
   name: "code",
   render: () => {
@@ -269,10 +258,6 @@ export const Code: Story = {
   },
 }
 
-/**
- * Typography with colors from nice-styles using the `color` prop.
- * All available ForegroundColorType values from nice-styles tokens.
- */
 export const Color: Story = {
   name: "color",
   render: () => {
@@ -283,48 +268,58 @@ export const Color: Story = {
         variables={[
           {
             name: "lighter",
+            value: getToken("foregroundColor", "lighter").value,
             demo: (
               <Typography color="lighter">Lighter foreground color</Typography>
             ),
           },
           {
             name: "light",
+            value: getToken("foregroundColor", "light").value,
             demo: <Typography color="light">Light foreground color</Typography>,
           },
           {
             name: "medium",
+            value: getToken("foregroundColor", "medium").value,
             demo: (
               <Typography color="medium">Medium foreground color</Typography>
             ),
           },
           {
             name: "heavy",
+            value: getToken("foregroundColor", "heavy").value,
             demo: <Typography color="heavy">Heavy foreground color</Typography>,
           },
           {
             name: "base",
+            value: getToken("foregroundColor", "base").value,
             demo: <Typography color="base">Base foreground color</Typography>,
           },
           {
             name: "disabled",
+            value: getToken("foregroundColor", "disabled").value,
             demo: (
               <Typography color="disabled">Disabled state color</Typography>
             ),
           },
           {
             name: "link",
+            value: getToken("foregroundColor", "link").value,
             demo: <Typography color="link">Link color</Typography>,
           },
           {
             name: "success",
+            value: getToken("foregroundColor", "success").value,
             demo: <Typography color="success">Success message</Typography>,
           },
           {
             name: "warning",
+            value: getToken("foregroundColor", "warning").value,
             demo: <Typography color="warning">Warning message</Typography>,
           },
           {
             name: "error",
+            value: getToken("foregroundColor", "error").value,
             demo: <Typography color="error">Error message</Typography>,
           },
         ]}
@@ -333,9 +328,6 @@ export const Color: Story = {
   },
 }
 
-/**
- * Typography with legibility optimizations.
- */
 export const LegibilityOptimized: Story = {
   name: "legibilityOptimized",
   render: () => {
@@ -365,9 +357,6 @@ export const LegibilityOptimized: Story = {
   },
 }
 
-/**
- * Typography with different line heights using the `lineHeight` prop.
- */
 export const LineHeight: Story = {
   name: "lineHeight",
   render: () => {
@@ -397,9 +386,6 @@ export const LineHeight: Story = {
   },
 }
 
-/**
- * Typography with different font sizes using the `size` prop.
- */
 export const Size: Story = {
   name: "size",
   render: () => {
@@ -410,23 +396,28 @@ export const Size: Story = {
         variables={[
           {
             name: "smaller",
-            demo: <Typography size="smaller">Smaller size text</Typography>,
+            value: getToken("fontSize", "smaller").value,
+            demo: <Typography size="smaller">Smaller</Typography>,
           },
           {
             name: "small",
-            demo: <Typography size="small">Small size text</Typography>,
+            value: getToken("fontSize", "small").value,
+            demo: <Typography size="small">Small</Typography>,
           },
           {
             name: "base",
-            demo: <Typography size="base">Base size text</Typography>,
+            value: getToken("fontSize", "base").value,
+            demo: <Typography size="base">Base</Typography>,
           },
           {
             name: "large",
-            demo: <Typography size="large">Large size text</Typography>,
+            value: getToken("fontSize", "large").value,
+            demo: <Typography size="large">Large</Typography>,
           },
           {
             name: "larger",
-            demo: <Typography size="larger">Larger size text</Typography>,
+            value: getToken("fontSize", "larger").value,
+            demo: <Typography size="larger">Larger</Typography>,
           },
         ]}
       />
@@ -434,9 +425,6 @@ export const Size: Story = {
   },
 }
 
-/**
- * Typography with different font weights using the `weight` prop.
- */
 export const Weight: Story = {
   name: "weight",
   render: () => {
@@ -447,35 +435,38 @@ export const Weight: Story = {
         variables={[
           {
             name: "light",
-            demo: <Typography weight="light">Light weight text</Typography>,
+            value: getToken("fontWeight", "light").value,
+            demo: <Typography weight="light">Light</Typography>,
           },
           {
             name: "base",
-            demo: <Typography weight="base">Base weight text</Typography>,
+            value: getToken("fontWeight", "base").value,
+            demo: <Typography weight="base">Base</Typography>,
           },
           {
             name: "medium",
-            demo: <Typography weight="medium">Medium weight text</Typography>,
+            value: getToken("fontWeight", "medium").value,
+            demo: <Typography weight="medium">Medium</Typography>,
           },
           {
             name: "semibold",
-            demo: (
-              <Typography weight="semibold">Semibold weight text</Typography>
-            ),
+            value: getToken("fontWeight", "semibold").value,
+            demo: <Typography weight="semibold">Semibold</Typography>,
           },
           {
             name: "bold",
-            demo: <Typography weight="bold">Bold weight text</Typography>,
+            value: getToken("fontWeight", "bold").value,
+            demo: <Typography weight="bold">Bold</Typography>,
           },
           {
             name: "extrabold",
-            demo: (
-              <Typography weight="extrabold">Extrabold weight text</Typography>
-            ),
+            value: getToken("fontWeight", "extrabold").value,
+            demo: <Typography weight="extrabold">Extrabold</Typography>,
           },
           {
             name: "black",
-            demo: <Typography weight="black">Black weight text</Typography>,
+            value: getToken("fontWeight", "black").value,
+            demo: <Typography weight="black">Black</Typography>,
           },
         ]}
       />

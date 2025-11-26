@@ -22,10 +22,6 @@ const meta = {
     docs: {
       description: {
         component: generateDescriptionString([
-          {
-            value: "[REPO](https://github.com/niceprototypes/nice-styles)",
-            newLine: true,
-          },
           { value: "SETUP", newLine: true },
           { value: "npm i nice-styles", code: true, newLine: true },
           {
@@ -33,6 +29,7 @@ const meta = {
             code: true,
             newLine: true,
           },
+          { value: "\u2002", newLine: true },
           { value: "USAGE", newLine: true },
           { value: 'getToken("fontSize").key', code: true },
           "\u2002\u2192\u2002",
@@ -46,6 +43,16 @@ const meta = {
           { value: 'getToken("fontSize", "large").value', code: true },
           "\u2002\u2192\u2002",
           { value: '"24px"', code: true, newLine: true },
+          { value: "\u2002", newLine: true },
+          "LINKS",
+          "\u2002",
+          {
+            value: "[github](https://github.com/niceprototypes/nice-styles)",
+          },
+          "\u2002",
+          {
+            value: "[npm](https://www.npmjs.com/package/nice-styles)",
+          },
         ]),
       },
     },
@@ -107,6 +114,7 @@ const prepareAnimationDuration = () =>
               backgroundColor,
               borderRadius: "12px",
               animation: `${animationName} calc(${getToken("animationDuration", name).var} * 6) ${getToken("animationEasing").var} infinite`,
+              animationDelay: name === "base" ? getToken("animationDuration", name).var : 0,
             }}
           />
         </Flex>
@@ -286,14 +294,22 @@ const prepareFontSize = () =>
   createVariables(
     "fontSize",
     ["smaller", "small", "base", "large", "larger"],
-    variant => <Typography size={variant as any}>Sample</Typography>
+    variant => (
+      <Typography size={variant as any}>
+        {variant.charAt(0).toUpperCase() + variant.slice(1)}
+      </Typography>
+    )
   )
 
 const prepareFontWeight = () =>
   createVariables(
     "fontWeight",
     ["light", "base", "medium", "semibold", "bold", "extrabold", "black"],
-    variant => <Typography weight={variant}>Sample</Typography>
+    variant => (
+      <Typography weight={variant}>
+        {variant.charAt(0).toUpperCase() + variant.slice(1)}
+      </Typography>
+    )
   )
 
 const prepareGap = () =>
@@ -353,51 +369,93 @@ const prepareFunctions = {
   LineHeight: prepareLineHeight,
 }
 
-// Helper to create story objects - calls prepare function at render time
-const createStory = (
-  camelName: string,
-  pascalKey: keyof typeof prepareFunctions
-): Story => {
-  return {
-    name: camelName,
-    render: () => <VariableList variables={prepareFunctions[pascalKey]()} />,
-    parameters: {
-      docs: {
-        source: {
-          code: null,
-        },
-        canvas: {
-          sourceState: "none",
-        },
-      },
-    },
-  }
+const storyParameters = {
+  docs: {
+    source: { code: null },
+    canvas: { sourceState: "none" },
+  },
 }
 
-// Dynamically generate story exports
-export const AnimationDuration: Story = createStory(
-  "animationDuration",
-  "AnimationDuration"
-)
-export const AnimationEasing: Story = createStory(
-  "animationEasing",
-  "AnimationEasing"
-)
-export const BackgroundColor: Story = createStory(
-  "backgroundColor",
-  "BackgroundColor"
-)
-export const BorderColor: Story = createStory("borderColor", "BorderColor")
-export const BorderRadius: Story = createStory("borderRadius", "BorderRadius")
-export const BorderWidth: Story = createStory("borderWidth", "BorderWidth")
-export const BoxShadow: Story = createStory("boxShadow", "BoxShadow")
-export const CellHeight: Story = createStory("cellHeight", "CellHeight")
-export const ForegroundColor: Story = createStory(
-  "foregroundColor",
-  "ForegroundColor"
-)
-export const FontFamily: Story = createStory("fontFamily", "FontFamily")
-export const FontSize: Story = createStory("fontSize", "FontSize")
-export const FontWeight: Story = createStory("fontWeight", "FontWeight")
-export const Gap: Story = createStory("gap", "Gap")
-export const LineHeight: Story = createStory("lineHeight", "LineHeight")
+export const AnimationDuration: Story = {
+  name: "animationDuration",
+  render: () => <VariableList variables={prepareFunctions.AnimationDuration()} />,
+  parameters: storyParameters,
+}
+
+export const AnimationEasing: Story = {
+  name: "animationEasing",
+  render: () => <VariableList variables={prepareFunctions.AnimationEasing()} />,
+  parameters: storyParameters,
+}
+
+export const BackgroundColor: Story = {
+  name: "backgroundColor",
+  render: () => <VariableList variables={prepareFunctions.BackgroundColor()} />,
+  parameters: storyParameters,
+}
+
+export const BorderColor: Story = {
+  name: "borderColor",
+  render: () => <VariableList variables={prepareFunctions.BorderColor()} />,
+  parameters: storyParameters,
+}
+
+export const BorderRadius: Story = {
+  name: "borderRadius",
+  render: () => <VariableList variables={prepareFunctions.BorderRadius()} />,
+  parameters: storyParameters,
+}
+
+export const BorderWidth: Story = {
+  name: "borderWidth",
+  render: () => <VariableList variables={prepareFunctions.BorderWidth()} />,
+  parameters: storyParameters,
+}
+
+export const BoxShadow: Story = {
+  name: "boxShadow",
+  render: () => <VariableList variables={prepareFunctions.BoxShadow()} />,
+  parameters: storyParameters,
+}
+
+export const CellHeight: Story = {
+  name: "cellHeight",
+  render: () => <VariableList variables={prepareFunctions.CellHeight()} />,
+  parameters: storyParameters,
+}
+
+export const ForegroundColor: Story = {
+  name: "foregroundColor",
+  render: () => <VariableList variables={prepareFunctions.ForegroundColor()} />,
+  parameters: storyParameters,
+}
+
+export const FontFamily: Story = {
+  name: "fontFamily",
+  render: () => <VariableList variables={prepareFunctions.FontFamily()} />,
+  parameters: storyParameters,
+}
+
+export const FontSize: Story = {
+  name: "fontSize",
+  render: () => <VariableList variables={prepareFunctions.FontSize()} />,
+  parameters: storyParameters,
+}
+
+export const FontWeight: Story = {
+  name: "fontWeight",
+  render: () => <VariableList variables={prepareFunctions.FontWeight()} />,
+  parameters: storyParameters,
+}
+
+export const Gap: Story = {
+  name: "gap",
+  render: () => <VariableList variables={prepareFunctions.Gap()} />,
+  parameters: storyParameters,
+}
+
+export const LineHeight: Story = {
+  name: "lineHeight",
+  render: () => <VariableList variables={prepareFunctions.LineHeight()} />,
+  parameters: storyParameters,
+}

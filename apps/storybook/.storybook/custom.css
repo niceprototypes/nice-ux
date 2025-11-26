@@ -1,14 +1,56 @@
+a.sbdocs {
+  color: hsla(200, 100%, 50%, 1);
+}
+
+.sb-anchor > h3 {
+  font-family: var(--font-family-code);
+}
+
 #storybook-docs h1.sbdocs-title + div:not(.sb-anchor) {
-  margin-bottom: 4rem;
   margin-top: 3rem;
+  margin-bottom: 3.5rem;
+}
+
+#storybook-docs h1.sbdocs-title + div:not(.sb-anchor) p {
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+  color: var(--foreground-color-medium);
+  letter-spacing: 0.1rem;
+}
+
+#storybook-docs h1.sbdocs-title + div:not(.sb-anchor) strong {
+  display: inline-block;
+}
+
+#storybook-docs h1.sbdocs-title + div:not(.sb-anchor) strong code {
+  margin: 0;
+  border: 0;
+  padding: 0.5rem 0.625rem 0.575rem;
+  font-size: var(--font-size-small);
+  background-color: var(--background-color-alternate);
+  color: var(--foreground-color-heavy);
+  letter-spacing: normal;
+}
+
+#storybook-docs h1.sbdocs-title + div:not(.sb-anchor) strong:first-child > code {
+  background-color: var(--foreground-color-base);
+  color: var(--background-color-base);
+  font-weight: var(--font-weight-base);
+}
+
+#storybook-docs h1.sbdocs-title + div:not(.sb-anchor) a {
+  letter-spacing: normal;
 }
 
 #storybook-docs h1.sbdocs-title + div:not(.sb-anchor) + .sb-anchor {
   display: none;
 }
 
-a.sbdocs {
-  color: var(--foreground-color-link);
+#storybook-docs h2 {
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+  color: var(--foreground-color-medium);
+  letter-spacing: 0.1rem;
 }
 
 @keyframes slide {

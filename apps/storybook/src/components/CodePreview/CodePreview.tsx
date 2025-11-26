@@ -1,9 +1,9 @@
-import React from "react"
+import React, { useState } from "react"
+import { getToken } from "nice-styles"
 import { CodePreviewProps } from "./types"
 import { colors } from "./styles"
-import Flex from "../../../../nice-react-flex"
-import Typography from "../../../../nice-react-typography"
-import { getToken } from "../../../../nice-styles/src"
+import Flex from "nice-react-flex"
+import Typography from "nice-react-typography"
 
 /**
  * Token definition for syntax highlighting.
@@ -108,13 +108,36 @@ const patterns: Array<[RegExp, Token[]]> = [
  * //   {children}
  * // </Flex>
  */
-const CodePreview: React.FC<CodePreviewProps> = ({ code }) => {
+const CodePreview: React.FC<CodePreviewProps> = ({
+  code,
+  clipboard = true,
+}) => {
+  const [copying, setCopying] = useState(false)
+
   /**
    * Converts literal \n sequences to actual newline characters.
    * This allows code strings to specify line breaks inline.
    */
   const processNewlines = (input: string): string => {
     return input.replace(/\\n/g, "\n")
+  }
+
+  /**
+   * Strips formatting markers (+X) from code for clean clipboard copy.
+   * Converts \n to newlines and removes indentation markers.
+   */
+  const getCleanCode = (input: string): string => {
+    return input.replace(/\\n/g, "\n").replace(/^\+\d+/gm, "")
+  }
+
+  /**
+   * Copies clean code to clipboard and shows feedback.
+   */
+  const handleClick = () => {
+    if (!clipboard) return
+    navigator.clipboard.writeText(getCleanCode(code))
+    setCopying(true)
+    setTimeout(() => setCopying(false), 1000)
   }
 
   const processedCode = processNewlines(code)
@@ -217,12 +240,35 @@ const CodePreview: React.FC<CodePreviewProps> = ({ code }) => {
     <Flex
       direction="column"
       grow={1}
+      onClick={!copying && handleClick}
       style={{
         backgroundColor: colors.background,
         padding: "0.5rem 0.625rem",
         borderRadius: getToken("borderRadius", "base").var,
+        cursor: clipboard ? "pointer" : undefined,
+        position: "relative",
+        transition: "background-color 0.1s ease-in-out",
       }}
     >
+      {copying && (
+        <Flex
+          style={{
+            backgroundColor: colors.background,
+            padding: "0.5rem 0.625rem",
+            borderRadius: getToken("borderRadius", "base").var,
+            position: "absolute",
+            top: 0,
+            left: 0,
+            bottom: 0,
+            right: 0,
+            cursor: "default"
+          }}
+        >
+          <Typography code size="smaller" color="lighter">
+            <span style={{ color: colors.copying }}>Copied to clipboard</span>
+          </Typography>
+        </Flex>
+      )}
       {processedCode.split("\n").map((line, i) => (
         <Typography code size="smaller" key={i}>
           {highlightLine(line)}

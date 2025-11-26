@@ -241,40 +241,50 @@ const prepareFunctions = {
   Type: prepareType,
 }
 
-// Helper to create story objects
-const createStory = (
-  camelName: string,
-  pascalKey: keyof typeof prepareFunctions,
-  options?: { label?: string; isString?: boolean }
-): Story => ({
-  name: camelName,
+export const Basic: Story = {
+  name: "basic",
+  render: () => <VariableList variables={prepareFunctions.Basic()} />,
+}
+
+export const Direction: Story = {
+  name: "direction",
   render: () => (
     <VariableList
-      label={options?.label}
-      isString={options?.isString}
-      variables={prepareFunctions[pascalKey]()}
+      label="direction"
+      isString
+      variables={prepareFunctions.Direction()}
     />
   ),
-})
+}
 
-// Story exports
-export const Basic: Story = createStory("Basic", "Basic")
-export const Direction: Story = createStory("direction", "Direction", {
-  label: "direction",
-  isString: true,
-})
-export const Gap: Story = createStory("gap", "Gap", {
-  label: "gap",
-  isString: true,
-})
-export const Spacing: Story = createStory("spacing", "Spacing", {
-  label: "spacing",
-  isString: true,
-})
-export const Type: Story = createStory("type", "Type", {
-  label: "type",
-  isString: true,
-})
-export const Grow: Story = createStory("grow", "Grow", {
-  label: "grow",
-})
+export const Gap: Story = {
+  name: "gap",
+  render: () => (
+    <VariableList label="gap" isString variables={prepareFunctions.Gap()} />
+  ),
+}
+
+export const Spacing: Story = {
+  name: "spacing",
+  render: () => (
+    <VariableList
+      label="spacing"
+      isString
+      variables={prepareFunctions.Spacing()}
+    />
+  ),
+}
+
+export const Type: Story = {
+  name: "type",
+  render: () => (
+    <VariableList label="type" isString variables={prepareFunctions.Type()} />
+  ),
+}
+
+export const Grow: Story = {
+  name: "grow",
+  render: () => (
+    <VariableList label="grow" variables={prepareFunctions.Grow()} />
+  ),
+}
