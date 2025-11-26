@@ -150,10 +150,10 @@ const prepareBackgroundColor = () =>
         borderRadius={getToken("borderRadius", "small").var}
         style={{
           backgroundColor,
+          width: `calc(${getToken("borderRadius", "larger").var} * 8)`,
+          height: `calc(${getToken("borderRadius", "larger").var} * 2)`,
           border: `${getToken("borderWidth").var} solid ${getToken("borderColor").var}`,
           borderRadius: getToken("borderRadius", "small").var,
-          width: getToken("cellHeight", "larger").var,
-          height: getToken("cellHeight").var,
         }}
       />
     )
@@ -164,8 +164,8 @@ const prepareBorderColor = () =>
     <Demo
       style={{
         backgroundColor: "white",
-        width: "150px",
-        height: "75px",
+        width: `calc(${getToken("borderRadius", "larger").var} * 8)`,
+        height: `calc(${getToken("borderRadius", "larger").var} * 2)`,
         border: `${getToken("borderWidth").var} solid ${getToken("borderColor", variant).var}`,
         borderRadius: getToken("borderRadius", "small").var,
       }}
@@ -175,19 +175,13 @@ const prepareBorderColor = () =>
 const prepareBorderRadius = () =>
   createVariables(
     "borderRadius",
-    [
-      { name: "smaller", width: "24px", height: "24px" },
-      { name: "small", width: "48px", height: "48px" },
-      { name: "base", width: "96px", height: "96px" },
-      { name: "large", width: "240px", height: "240px" },
-      { name: "larger", width: "320px", height: "320px" },
-    ],
-    ({ name, width, height }: any) => (
+    ["smaller", "small", "base", "large", "larger"],
+    variant => (
       <Demo
         style={{
-          borderRadius: getToken("borderRadius", name).var,
-          width,
-          height,
+          borderRadius: getToken("borderRadius", variant).var,
+          width: `calc(${getToken("borderRadius", "larger").var} * 8)`,
+          height: `calc(${getToken("borderRadius", "larger").var} * 2)`,
           border: `${getToken("borderWidth").var} solid ${getToken("foregroundColor", "light").var}`,
         }}
       />
@@ -197,15 +191,12 @@ const prepareBorderRadius = () =>
 const prepareBorderWidth = () =>
   createVariables(
     "borderWidth",
-    [
-      { name: "base", width: "150px", height: "75px" },
-      { name: "large", width: "200px", height: "100px" },
-    ],
-    ({ name, width, height }: any) => (
+    [{ name: "base" }, { name: "large" }],
+    ({ name }: any) => (
       <Demo
         style={{
-          width,
-          height,
+          width: `calc(${getToken("borderRadius", "larger").var} * 8)`,
+          height: `calc(${getToken("borderRadius", "larger").var} * 2)`,
           border: `${getToken("borderWidth", name).var} solid ${getToken("foregroundColor", "light").var}`,
           borderRadius: getToken("borderRadius", "small").var,
         }}
@@ -216,19 +207,16 @@ const prepareBorderWidth = () =>
 const prepareBoxShadow = () =>
   createVariables(
     "boxShadow",
-    [
-      { name: "base", width: "60px", height: "30px" },
-      { name: "large", width: "120px", height: "60px" },
-    ],
-    ({ name, width, height }: any) => (
+    [{ name: "base" }, { name: "large" }],
+    ({ name }: any) => (
       <Demo
         backgroundColor="rgba(0, 0, 0, 0.05)"
         borderRadius={getToken("borderRadius", "small").var}
         spacing={{ all: "large" }}
         style={{
           backgroundColor: getToken("backgroundColor").var,
-          width,
-          height,
+          width: `calc((${getToken("borderRadius", "larger").var} * 8) - (${getToken("gap", "large").var} * 2))`,
+          height: `calc(${getToken("borderRadius", "larger").var} * 2)`,
           borderRadius: getToken("borderRadius", "small").var,
           boxShadow: getToken("boxShadow", name).var,
         }}
@@ -243,7 +231,7 @@ const prepareCellHeight = () =>
     variant => (
       <Demo
         style={{
-          width: getToken("cellHeight", variant).var,
+          width: `calc(${getToken("borderRadius", "larger").var} * 8)`,
           height: getToken("cellHeight", variant).var,
           border: `${getToken("borderWidth").var} solid ${getToken("foregroundColor", "light").var}`,
           borderRadius: getToken("borderRadius", "small").var,
@@ -305,11 +293,7 @@ const prepareFontWeight = () =>
   createVariables(
     "fontWeight",
     ["light", "base", "medium", "semibold", "bold", "extrabold", "black"],
-    variant => (
-      <Typography weight={variant}>
-        Sample
-      </Typography>
-    )
+    variant => <Typography weight={variant}>Sample</Typography>
   )
 
 const prepareGap = () =>

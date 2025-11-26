@@ -1,10 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import Flex from "nice-react-flex"
+import Flex, { GapSize } from "nice-react-flex"
 import { getToken } from "nice-styles"
 import VariableList from "../../src/components/VariableList"
 import DemoDots from "../../src/components/DemoDots"
-
-// Flex import needed for meta component reference
 
 /**
  * A highly flexible and responsive flexbox container component that provides
@@ -27,8 +25,8 @@ const meta = {
   argTypes: {
     // Required props first
     children: {
-      name: "children *",
-      description: "Child elements (required)",
+      name: "children",
+      description: "Child elements",
       control: "text",
       table: {
         type: { summary: "React.ReactNode" },
@@ -129,120 +127,154 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Basic: Story = {
-  render: () => (
-    <VariableList
-      variables={[
-        {
-          demo: <DemoDots dots={[{ color: "error" }, { color: "link" }]} />,
-          code: `<Flex>{children}</Flex>`,
-        },
-      ]}
-    />
-  ),
+// Prepare functions for each story
+const prepareBasic = () => [
+  {
+    name: "",
+    demo: <DemoDots dots={[{ color: "error" }, { color: "link" }]} />,
+    code: `<Flex>{children}</Flex>`,
+  },
+]
+
+const prepareDirection = () =>
+  (["row", "column"] as const).map(direction => ({
+    name: direction,
+    demo: (
+      <DemoDots
+        direction={direction}
+        dots={[{ color: "error" }, { color: "link" }]}
+      />
+    ),
+    code: `<Flex direction="${direction}">{children}</Flex>`,
+  }))
+
+const prepareGap = () =>
+  (["smaller", "small", "base", "large", "larger"] as const).map(size => ({
+    name: size,
+    value: getToken("gap", size).value,
+    demo: (
+      <DemoDots gap={size} dots={[{ color: "error" }, { color: "link" }]} />
+    ),
+    code: `<Flex gap="${size}">{children}</Flex>`,
+  }))
+
+const prepareSpacing = () =>
+  (["smaller", "small", "base", "large", "larger"] as const).map(size => ({
+    name: size,
+    value: getToken("gap", size).value,
+    demo: (
+      <Flex
+        spacing={{ sm: { all: size as GapSize } }}
+        style={{
+          border: `${getToken("borderWidth").var} solid ${getToken("borderColor").var}`,
+          borderRadius: getToken("borderRadius", "smaller").var,
+        }}
+      >
+        <DemoDots gap="smaller" dots={[{ color: "error" }, { color: "link" }]} />
+      </Flex>
+    ),
+    code: `<Flex spacing="${size}">{children}</Flex>`,
+  }))
+
+const prepareType = () =>
+  (["padding", "margin"] as const).map(type => ({
+    name: type,
+    demo: (
+      <Flex style={{
+        borderRadius: getToken("borderRadius", "smaller").var,
+        border: `${getToken("borderWidth").var} solid ${type === "margin" ? getToken("borderColor").var : getToken("borderColor", "heavy").var}`,
+      }}>
+        <Flex
+          type={type}
+          spacing={{ sm: { all: "base" as GapSize } }}
+          style={{
+            border: `${getToken("borderWidth").var} solid ${type === "margin" ? getToken("borderColor", "heavy").var : "transparent"}`,
+            borderRadius: getToken("borderRadius", "smaller").var,
+          }}
+        >
+          <DemoDots gap="smaller" dots={[{ color: "error" }, { color: "link" }]} />
+        </Flex>
+      </Flex>
+    ),
+    code: `<Flex type="${type}">{children}</Flex>`,
+  }))
+
+const prepareGrow = () =>
+  ([0, 1, 2] as const).map(grow => ({
+    name: String(grow),
+    demo: (
+      <Flex
+        style={{
+          gap: 2,
+          width: "12rem",
+        }}
+      >
+        <Flex
+          grow={grow}
+          style={{
+            minWidth: 2,
+            backgroundColor: getToken("foregroundColor", "error").var,
+            height: getToken("cellHeight", "smaller").var,
+            borderRadius: 1,
+          }}
+        />
+        <Flex
+          grow={1}
+          style={{
+            backgroundColor: getToken("foregroundColor", "link").var,
+            height: getToken("cellHeight", "smaller").var,
+            borderRadius: 1,
+          }}
+        />
+      </Flex>
+    ),
+    code: `<Flex>\n+1<Flex grow={${grow}}>{children}</Flex>\n+1<Flex grow={1}>{children}</Flex>\n</Flex>`,
+  }))
+
+// Map of prepare functions
+const prepareFunctions = {
+  Basic: prepareBasic,
+  Direction: prepareDirection,
+  Gap: prepareGap,
+  Grow: prepareGrow,
+  Spacing: prepareSpacing,
+  Type: prepareType,
 }
 
-/**
- * Flex with different direction values.
- */
-export const Direction: Story = {
-  name: "direction",
+// Helper to create story objects
+const createStory = (
+  camelName: string,
+  pascalKey: keyof typeof prepareFunctions,
+  options?: { label?: string; isString?: boolean }
+): Story => ({
+  name: camelName,
   render: () => (
     <VariableList
-      label="direction"
-      isString
-      variables={[
-        {
-          name: "row",
-          demo: (
-            <DemoDots
-              direction="row"
-              dots={[{ color: "error" }, { color: "link" }]}
-            />
-          ),
-          code: `<Flex direction="row">{children}</Flex>`,
-        },
-        {
-          name: "column",
-          demo: (
-            <DemoDots
-              direction="column"
-              dots={[{ color: "error" }, { color: "link" }]}
-            />
-          ),
-          code: `<Flex direction="column">{children}</Flex>`,
-        },
-      ]}
+      label={options?.label}
+      isString={options?.isString}
+      variables={prepareFunctions[pascalKey]()}
     />
   ),
-}
+})
 
-/**
- * Flex with different gap sizes.
- */
-export const Gap: Story = {
-  name: "gap",
-  render: () => (
-    <VariableList
-      label="gap"
-      isString
-      variables={[
-        {
-          name: "smaller",
-          value: getToken("gap", "smaller").value,
-          demo: (
-            <DemoDots
-              gap="smaller"
-              dots={[{ color: "error" }, { color: "link" }]}
-            />
-          ),
-          code: `<Flex gap="smaller">{children}</Flex>`,
-        },
-        {
-          name: "small",
-          value: getToken("gap", "small").value,
-          demo: (
-            <DemoDots
-              gap="small"
-              dots={[{ color: "error" }, { color: "link" }]}
-            />
-          ),
-          code: `<Flex gap="small">{children}</Flex>`,
-        },
-        {
-          name: "base",
-          value: getToken("gap", "base").value,
-          demo: (
-            <DemoDots
-              gap="base"
-              dots={[{ color: "error" }, { color: "link" }]}
-            />
-          ),
-          code: `<Flex gap="base">{children}</Flex>`,
-        },
-        {
-          name: "large",
-          value: getToken("gap", "large").value,
-          demo: (
-            <DemoDots
-              gap="large"
-              dots={[{ color: "error" }, { color: "link" }]}
-            />
-          ),
-          code: `<Flex gap="large">{children}</Flex>`,
-        },
-        {
-          name: "larger",
-          value: getToken("gap", "larger").value,
-          demo: (
-            <DemoDots
-              gap="larger"
-              dots={[{ color: "error" }, { color: "link" }]}
-            />
-          ),
-          code: `<Flex gap="larger">{children}</Flex>`,
-        },
-      ]}
-    />
-  ),
-}
+// Story exports
+export const Basic: Story = createStory("Basic", "Basic")
+export const Direction: Story = createStory("direction", "Direction", {
+  label: "direction",
+  isString: true,
+})
+export const Gap: Story = createStory("gap", "Gap", {
+  label: "gap",
+  isString: true,
+})
+export const Spacing: Story = createStory("spacing", "Spacing", {
+  label: "spacing",
+  isString: true,
+})
+export const Type: Story = createStory("type", "Type", {
+  label: "type",
+  isString: true,
+})
+export const Grow: Story = createStory("grow", "Grow", {
+  label: "grow",
+})

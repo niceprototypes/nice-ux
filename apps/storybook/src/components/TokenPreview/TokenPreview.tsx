@@ -16,7 +16,6 @@ const TokenPreview: React.FC<TokenPreviewProps> = ({ items }) => {
         fontFamily: "var(--font-family-code)",
         fontSize: "0.75rem",
         lineHeight: "1.5",
-        color: colors.text,
         overflow: "auto"
       }}>
         {items.map((item, index) => (
