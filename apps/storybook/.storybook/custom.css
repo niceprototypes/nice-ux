@@ -10,3 +10,45 @@
 a.sbdocs {
   color: var(--foreground-color-link);
 }
+
+@keyframes slide {
+  0% {
+    transform: translateX(0);
+  }
+  17% {
+    transform: translateX(0);
+  }
+  33% {
+    transform: translateX(96px);
+  }
+  67% {
+    transform: translateX(96px);
+  }
+  84% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideSlow {
+  0% {
+    transform: translateX(0);
+  }
+  17% {
+    transform: translateX(0);
+  }
+  33% {
+    transform: translateX(96px);
+  }
+  67% {
+    transform: translateX(96px);
+  }
+  84% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}

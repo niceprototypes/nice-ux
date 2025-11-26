@@ -32,7 +32,7 @@ const meta = {
       control: "select",
       options: ["left", "center", "right", "justify"],
       table: {
-        type: { summary: "AlignType" },
+        type: { summary: '"left" | "center" | "right" | "justify"' },
         defaultValue: { summary: "left" },
       },
     },
@@ -49,7 +49,7 @@ const meta = {
       control: "select",
       options: ["h1", "h2", "h3", "h4", "p", "span"],
       table: {
-        type: { summary: "TypographyAsType" },
+        type: { summary: '"h1" | "h2" | "h3" | "h4" | "p" | "span"' },
         defaultValue: { summary: "p" },
       },
     },
@@ -73,7 +73,7 @@ const meta = {
       control: "select",
       options: ["lighter", "light", "medium", "heavy", "base", "disabled", "link", "success", "warning", "error"],
       table: {
-        type: { summary: "ForegroundColorType" },
+        type: { summary: '"lighter" | "light" | "medium" | "heavy" | "base" | "disabled" | "link" | "success" | "warning" | "error"' },
       },
     },
     legibilityOptimized: {
@@ -89,23 +89,23 @@ const meta = {
       control: "select",
       options: ["condensed", "base", "expanded"],
       table: {
-        type: { summary: "LineHeightType" },
+        type: { summary: '"condensed" | "base" | "expanded"' },
         defaultValue: { summary: "depends on element type" },
       },
     },
     size: {
-      description: "Font size (any valid CSS size value or CSS variable)",
+      description: "Font size token or any valid CSS size value",
       control: "text",
       table: {
-        type: { summary: "string" },
+        type: { summary: '"smaller" | "small" | "base" | "large" | "larger" | string' },
         defaultValue: { summary: "depends on element type" },
       },
     },
     weight: {
-      description: "Font weight (any valid CSS weight value or CSS variable)",
+      description: "Font weight token or any valid CSS weight value",
       control: "text",
       table: {
-        type: { summary: "string" },
+        type: { summary: '"light" | "base" | "medium" | "semibold" | "bold" | "extrabold" | "black" | string' },
         defaultValue: { summary: "depends on element type" },
       },
     },
@@ -304,7 +304,7 @@ export const Size: Story = {
           { name: "small", demo: <Typography size="small">Small size text</Typography> },
           { name: "base", demo: <Typography size="base">Base size text</Typography> },
           { name: "large", demo: <Typography size="large">Large size text</Typography> },
-          { name: "larger", demo: <Typography size="larger">arger size text</Typography> },
+          { name: "larger", demo: <Typography size="larger">Larger size text</Typography> },
         ]}
       />
     )

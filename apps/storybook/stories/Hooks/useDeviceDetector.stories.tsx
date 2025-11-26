@@ -7,7 +7,7 @@ import {
 import React, { useEffect, useState } from "react"
 import Typography from "nice-react-typography"
 import { generateDescriptionString } from "../../src/utilities"
-import Flex from "../../../nice-react-flex"
+import Flex from "nice-react-flex"
 import { CodeRow } from "../../src/components/CodeRow"
 
 const Row = CodeRow
@@ -105,7 +105,7 @@ export const Debugging: Story = {
         />
         <Flex>
           <button onClick={isDebugging ? disableMobile : enableMobile}>
-            {isDebugging ? "Stop debugging" : "Debug mobile"}
+            {isDebugging ? "Disable debugging" : "Enable debugging"}
           </button>
         </Flex>
       </Flex>

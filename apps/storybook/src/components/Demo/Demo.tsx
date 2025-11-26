@@ -1,6 +1,9 @@
 import React from "react"
 import Flex from "nice-react-flex"
+import styled from "styled-components"
 import { DemoProps } from "./types"
+
+const DemoBoxDiv = styled.div``
 
 const Demo: React.FC<DemoProps> = ({
   backgroundColor,
@@ -18,9 +21,9 @@ const Demo: React.FC<DemoProps> = ({
           borderRadius,
         }}
       >
-        <Flex style={style}>
+        <DemoBoxDiv style={style}>
           {children}
-        </Flex>
+        </DemoBoxDiv>
       </Flex>
     </Flex>
   )

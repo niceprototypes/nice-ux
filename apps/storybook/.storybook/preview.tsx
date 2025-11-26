@@ -29,6 +29,11 @@ const preview: Preview = {
     docs: {
       theme: docsTheme,
     },
+    options: {
+      storySort: {
+        order: ['Styles', 'Components', 'Hooks'],
+      },
+    },
   },
 }
 

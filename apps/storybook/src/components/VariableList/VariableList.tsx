@@ -35,6 +35,7 @@ const VariableList = ({ variables, label, isString = false }: VariableListProps)
             description={variable.key}
             demo={variable.demo}
             label={label}
+            value={variable.value}
           />
         )
       })}

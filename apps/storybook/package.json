@@ -5,30 +5,38 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "storybook": "storybook dev -p 6006",
+    "storybook": "storybook dev -p 6006 --no-open",
     "build-storybook": "storybook build",
     "deploy": "npm run build-storybook && rm -rf ../nice-website-2025/public/storybook && cp -r storybook-static ../nice-website-2025/public/storybook",
-    "dev:deploy": "nodemon --watch stories --watch .storybook --ext ts,tsx,js,jsx,css,mdx --exec \"npm run deploy\""
+    "dev:deploy": "nodemon --watch stories --watch .storybook --ext ts,tsx,js,jsx,css,mdx --exec \"npm run deploy\"",
+    "dev": "concurrently \"npm run storybook\" \"npm run watch:deps\"",
+    "watch:deps": "concurrently \"npm run watch:react-flex\" \"npm run watch:react-typography\" \"npm run watch:react-styles\" \"npm run watch:react-hook-device-detector\" \"npm run watch:styles\"",
+    "watch:react-flex": "npm --prefix ../nice-react-flex run dev",
+    "watch:react-hook-device-detector": "npm --prefix ../nice-react-hook-device-detector run dev",
+    "watch:react-styles": "npm --prefix ../nice-react-styles run dev",
+    "watch:react-typography": "npm --prefix ../nice-react-typography run dev",
+    "watch:styles": "npm --prefix ../nice-styles run dev"
   },
   "dependencies": {
-    "react": "19.2.0",
-    "react-dom": "19.2.0",
-    "styled-components": "6.1.19",
     "@storybook/addon-docs": "^9.1.10",
     "@storybook/addon-links": "^9.1.10",
     "@storybook/react": "^9.1.10",
     "@storybook/react-vite": "^9.1.10",
-    "storybook": "^9.1.10",
     "nice-react-flex": "file:../nice-react-flex",
     "nice-react-hook-device-detector": "file:../nice-react-hook-device-detector",
     "nice-react-styles": "file:../nice-react-styles",
     "nice-react-typography": "file:../nice-react-typography",
-    "nice-styles": "^4.1.5"
+    "nice-styles": "file:../nice-styles",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "storybook": "^9.1.10",
+    "styled-components": "6.1.19"
   },
   "devDependencies": {
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^5.0.4",
+    "concurrently": "^9.2.1",
     "nodemon": "^3.1.0",
     "typescript": "^5.5.3",
     "vite": "^7.1.9"
