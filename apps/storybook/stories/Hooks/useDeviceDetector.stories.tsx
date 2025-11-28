@@ -19,7 +19,6 @@ const meta = {
   component: HookWrapper,
   parameters: {
     layout: "padded",
-    controls: { disable: true },
     docs: {
       description: {
         component: generateDescriptionString([

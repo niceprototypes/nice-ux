@@ -14,7 +14,6 @@ const meta = {
   component: TokensDemo,
   parameters: {
     layout: "padded",
-    controls: { disable: true },
     previewTabs: {
       canvas: { hidden: true },
     },
@@ -22,6 +21,17 @@ const meta = {
     docs: {
       description: {
         component: generateDescriptionString([
+          "LINKS",
+          "\u2002",
+          {
+            value: "[github](https://github.com/niceprototypes/nice-styles)",
+          },
+          "\u2002",
+          {
+            value: "[npm](https://www.npmjs.com/package/nice-styles)",
+            newLine: true,
+          },
+          { value: "\u2002", newLine: true },
           { value: "SETUP", newLine: true },
           { value: "npm i nice-styles", code: true, newLine: true },
           {
@@ -43,16 +53,6 @@ const meta = {
           { value: 'getToken("fontSize", "large").value', code: true },
           "\u2002\u2192\u2002",
           { value: '"24px"', code: true, newLine: true },
-          { value: "\u2002", newLine: true },
-          "LINKS",
-          "\u2002",
-          {
-            value: "[github](https://github.com/niceprototypes/nice-styles)",
-          },
-          "\u2002",
-          {
-            value: "[npm](https://www.npmjs.com/package/nice-styles)",
-          },
         ]),
       },
     },
@@ -73,11 +73,16 @@ const createVariables = <T extends string | { name: string }>(
     const itemName = typeof variant === "string" ? variant : variant.name
 
     const token = getToken(groupName as any, itemName)
+    const code =
+      itemName === "base"
+        ? `getToken("${groupName}")`
+        : `getToken("${groupName}", "${itemName}")`
     return {
       name: itemName,
       key: token.key,
       var: token.var,
       value: token.value,
+      code,
       demo: renderDemo ? renderDemo(variant as any) : undefined,
     }
   })
@@ -104,15 +109,15 @@ const prepareAnimationDuration = () =>
           style={{
             width: "120px",
             backgroundColor: getToken("backgroundColor", "alternate").var,
-            borderRadius: "12px",
+            borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2)`,
           }}
         >
           <Demo
             style={{
+              backgroundColor,
               width: getToken("cellHeight", "smaller").var,
               height: getToken("cellHeight", "smaller").var,
-              backgroundColor,
-              borderRadius: "12px",
+              borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2)`,
               animation: `${animationName} calc(${getToken("animationDuration", name).var} * 6) ${getToken("animationEasing").var} infinite`,
               animationDelay: name === "base" ? getToken("animationDuration", name).var : 0,
             }}
@@ -324,7 +329,7 @@ const prepareGap = () =>
             style: {
               width: getToken("cellHeight", "smaller").var,
               height: getToken("cellHeight", "smaller").var,
-              backgroundColor: getToken("foregroundColor", "link").var,
+              backgroundColor: getToken("foregroundColor", "error").var,
               borderRadius: "50%",
             },
           },
@@ -332,7 +337,7 @@ const prepareGap = () =>
             style: {
               width: getToken("cellHeight", "smaller").var,
               height: getToken("cellHeight", "smaller").var,
-              backgroundColor: getToken("foregroundColor", "success").var,
+              backgroundColor: getToken("foregroundColor", "link").var,
               borderRadius: "50%",
             },
           },

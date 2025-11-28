@@ -15,7 +15,10 @@ const meta = {
   component: Typography,
   parameters: {
     layout: "padded",
-    controls: { disable: true },
+    docs: {
+      source: { code: null },
+      canvas: { sourceState: "none" },
+    },
   },
   tags: ["autodocs"],
   argTypes: {

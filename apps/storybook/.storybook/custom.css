@@ -6,9 +6,46 @@ a.sbdocs {
   font-family: var(--font-family-code);
 }
 
+.docblock-argstable {
+  table-layout: fixed;
+}
+
+[aria-label="Reset controls"] {
+  display: none !important;
+}
+
+.docblock-argstable tr {
+  display: flex;
+}
+
+.docblock-argstable th:nth-child(1) {
+  padding-right: 0 !important;
+}
+
+.docblock-argstable th:nth-child(1),
+.docblock-argstable td:nth-child(1) {
+  width: 16rem !important;
+  font-family: var(--font-family-code);
+}
+
+.docblock-argstable th:nth-child(2),
+.docblock-argstable td:nth-child(2) {
+  flex-grow: 1;
+}
+
+.docblock-argstable th:nth-child(3),
+.docblock-argstable td:nth-child(3) {
+  width: 12rem !important;
+}
+
+.docblock-argstable th:nth-child(4),
+.docblock-argstable td:nth-child(4) {
+  display: none;
+}
+
 #storybook-docs h1.sbdocs-title + div:not(.sb-anchor) {
-  margin-top: 3rem;
-  margin-bottom: 3.5rem;
+  margin-top: 4rem;
+  margin-bottom: 4rem;
 }
 
 #storybook-docs h1.sbdocs-title + div:not(.sb-anchor) p {

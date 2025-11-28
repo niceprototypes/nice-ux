@@ -15,7 +15,6 @@ const meta = {
   component: Flex,
   parameters: {
     layout: "padded",
-    controls: { disable: true },
     docs: {
       source: { code: null },
       canvas: { sourceState: "none" },
@@ -163,15 +162,11 @@ const prepareSpacing = () =>
     name: size,
     value: getToken("gap", size).value,
     demo: (
-      <Flex
-        spacing={{ sm: { all: size as GapSize } }}
-        style={{
-          border: `${getToken("borderWidth").var} solid ${getToken("borderColor").var}`,
-          borderRadius: getToken("borderRadius", "smaller").var,
-        }}
-      >
-        <DemoDots gap="smaller" dots={[{ color: "error" }, { color: "link" }]} />
-      </Flex>
+      <DemoDots
+        spacing={size}
+        dots={[{ color: "error" }, { color: "link" }]}
+        bordered
+      />
     ),
     code: `<Flex spacing="${size}">{children}</Flex>`,
   }))
@@ -192,7 +187,7 @@ const prepareType = () =>
             borderRadius: getToken("borderRadius", "smaller").var,
           }}
         >
-          <DemoDots gap="smaller" dots={[{ color: "error" }, { color: "link" }]} />
+          <DemoDots dots={[{ color: "error" }, { color: "link" }]} />
         </Flex>
       </Flex>
     ),
@@ -203,19 +198,14 @@ const prepareGrow = () =>
   ([0, 1, 2] as const).map(grow => ({
     name: String(grow),
     demo: (
-      <Flex
-        style={{
-          gap: 2,
-          width: "12rem",
-        }}
-      >
+      <Flex style={{ width: "12rem" }}>
         <Flex
           grow={grow}
           style={{
             minWidth: 2,
             backgroundColor: getToken("foregroundColor", "error").var,
             height: getToken("cellHeight", "smaller").var,
-            borderRadius: 1,
+            borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2)`,
           }}
         />
         <Flex
@@ -223,12 +213,34 @@ const prepareGrow = () =>
           style={{
             backgroundColor: getToken("foregroundColor", "link").var,
             height: getToken("cellHeight", "smaller").var,
-            borderRadius: 1,
+            borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2)`,
           }}
         />
       </Flex>
     ),
     code: `<Flex>\n+1<Flex grow={${grow}}>{children}</Flex>\n+1<Flex grow={1}>{children}</Flex>\n</Flex>`,
+  }))
+
+const prepareJustifyContent = () =>
+  (
+    [
+      "flex-start",
+      "flex-end",
+      "center",
+      "space-between",
+      "space-around",
+      "space-evenly",
+    ] as const
+  ).map(justifyContent => ({
+    name: justifyContent,
+    demo: (
+      <DemoDots
+        justifyContent={justifyContent}
+        dots={[{ color: "error" }, { color: "link" }, { color: "warning" }]}
+        width="12rem"
+        bordered
+      />
+    ),
   }))
 
 // Map of prepare functions
@@ -237,6 +249,7 @@ const prepareFunctions = {
   Direction: prepareDirection,
   Gap: prepareGap,
   Grow: prepareGrow,
+  JustifyContent: prepareJustifyContent,
   Spacing: prepareSpacing,
   Type: prepareType,
 }
@@ -286,5 +299,16 @@ export const Grow: Story = {
   name: "grow",
   render: () => (
     <VariableList label="grow" variables={prepareFunctions.Grow()} />
+  ),
+}
+
+export const JustifyContent: Story = {
+  name: "justifyContent",
+  render: () => (
+    <VariableList
+      label="justifyContent"
+      isString
+      variables={prepareFunctions.JustifyContent()}
+    />
   ),
 }
