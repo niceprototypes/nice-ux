@@ -4,43 +4,30 @@ import VariableRow from "../VariableRow"
 interface VariableListProps {
   variables: Array<{
     name: string
+    description?: string
     key?: string
     var?: string
     value?: string
     demo?: React.ReactNode
     code?: string
+    default?: boolean
   }>
-  label?: string
-  isString?: boolean
 }
 
-const VariableList = ({ variables, label, isString = false }: VariableListProps) => {
+const VariableList = ({ variables }: VariableListProps) => {
   return (
     <Flex direction="column" gap="larger">
-      {variables.map((variable, index) => {
-        let formattedName = variable.name
-
-        // Only wrap in quotes or brackets if label is present
-        if (label) {
-          if (isString === true) {
-            formattedName = `"${variable.name}"`
-          } else {
-            formattedName = `{${variable.name}}`
-          }
-        }
-
-        return (
-          <VariableRow
-            key={variable.name || `variable-${index}`}
-            name={formattedName}
-            description={variable.key}
-            demo={variable.demo}
-            label={label}
-            value={variable.value}
-            code={variable.code}
-          />
-        )
-      })}
+      {variables.map((variable, index) => (
+        <VariableRow
+          key={variable.name || `variable-${index}`}
+          name={variable.name}
+          description={variable.description}
+          demo={variable.demo}
+          value={variable.value}
+          code={variable.code}
+          default={variable.default}
+        />
+      ))}
     </Flex>
   )
 }

@@ -1,6 +1,6 @@
 import React from "react"
 import Typography from "nice-react-typography"
-import { CellFlex } from "./styles"
+import { CellFlex, DefaultFlex } from "./styles"
 import { VariableRowProps } from "./types"
 import Flex from "nice-react-flex"
 import CodePreview from "../CodePreview"
@@ -9,22 +9,22 @@ const VariableRow: React.FC<VariableRowProps> = ({
   name,
   description,
   demo,
-  label,
   value,
   code,
+  default: isDefault,
 }) => {
   return (
     <Flex alignItems="center" gap="base">
-      <CellFlex direction="column" $width="33%">
-        <Flex>
-          {label && (
-            <Typography as="span" code color="lighter">
-              {label}=
-            </Typography>
-          )}
+      <CellFlex direction="column" $width="16rem">
+        <Flex alignItems="center" gap="small">
           <Typography as="span" code weight="medium">
             {name}
           </Typography>
+          {isDefault && (
+            <Typography as="span" code weight="medium" color="lighter">
+              (default)
+            </Typography>
+          )}
         </Flex>
         {description && (
           <Typography code color="lighter" size="smaller">
@@ -32,7 +32,7 @@ const VariableRow: React.FC<VariableRowProps> = ({
           </Typography>
         )}
       </CellFlex>
-      <CellFlex grow={1} alignItems="center" gap="base">
+      <CellFlex $width="18rem" grow={1} alignItems="center" gap="base">
         {demo}
         {value && (
           <Typography code as="span" color="lighter" size="smaller">
@@ -41,11 +41,11 @@ const VariableRow: React.FC<VariableRowProps> = ({
         )}
       </CellFlex>
       {code && (
-          <CellFlex $width="33%">
-            <Flex>
-              <CodePreview code={code} />
-            </Flex>
-          </CellFlex>
+        <CellFlex grow={1}>
+          <Flex>
+            <CodePreview code={code} />
+          </Flex>
+        </CellFlex>
       )}
     </Flex>
   )

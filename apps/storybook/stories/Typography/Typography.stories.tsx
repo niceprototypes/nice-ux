@@ -146,11 +146,10 @@ export const Align: Story = {
 
     return (
       <VariableList
-        label="align"
-        isString
         variables={[
           {
             name: "left",
+            description: 'align="left"',
             demo: (
               <Flex direction="column" grow={1}>
                 <Typography align="left">{loremIpsum}</Typography>
@@ -159,6 +158,7 @@ export const Align: Story = {
           },
           {
             name: "center",
+            description: 'align="center"',
             demo: (
               <Flex direction="column" grow={1}>
                 <Typography align="center">{loremIpsum}</Typography>
@@ -167,6 +167,7 @@ export const Align: Story = {
           },
           {
             name: "right",
+            description: 'align="right"',
             demo: (
               <Flex direction="column" grow={1}>
                 <Typography align="right">{loremIpsum}</Typography>
@@ -175,6 +176,7 @@ export const Align: Story = {
           },
           {
             name: "justify",
+            description: 'align="justify"',
             demo: (
               <Flex grow={1}>
                 <Typography align="justify">
@@ -196,10 +198,10 @@ export const Antialiased: Story = {
   render: () => {
     return (
       <VariableList
-        label="antialiased"
         variables={[
           {
             name: "false",
+            description: "antialiased={false}",
             demo: (
               <Typography antialiased={false} size="large">
                 Normal rendering
@@ -208,6 +210,7 @@ export const Antialiased: Story = {
           },
           {
             name: "true",
+            description: "antialiased={true}",
             demo: (
               <Typography antialiased={true} size="large">
                 Antialiased rendering
@@ -225,15 +228,13 @@ export const As: Story = {
   render: () => {
     return (
       <VariableList
-        label="as"
-        isString
         variables={[
-          { name: "h1", demo: <Typography as="h1">Heading 1</Typography> },
-          { name: "h2", demo: <Typography as="h2">Heading 2</Typography> },
-          { name: "h3", demo: <Typography as="h3">Heading 3</Typography> },
-          { name: "h4", demo: <Typography as="h4">Heading 4</Typography> },
-          { name: "p", demo: <Typography as="p">Paragraph text</Typography> },
-          { name: "span", demo: <Typography as="span">Span text</Typography> },
+          { name: "h1", description: 'as="h1"', demo: <Typography as="h1">Heading 1</Typography> },
+          { name: "h2", description: 'as="h2"', demo: <Typography as="h2">Heading 2</Typography> },
+          { name: "h3", description: 'as="h3"', demo: <Typography as="h3">Heading 3</Typography> },
+          { name: "h4", description: 'as="h4"', demo: <Typography as="h4">Heading 4</Typography> },
+          { name: "p", description: 'as="p"', demo: <Typography as="p">Paragraph text</Typography> },
+          { name: "span", description: 'as="span"', demo: <Typography as="span">Span text</Typography> },
         ]}
       />
     )
@@ -245,14 +246,15 @@ export const Code: Story = {
   render: () => {
     return (
       <VariableList
-        label="code"
         variables={[
           {
             name: "false",
+            description: "code={false}",
             demo: <Typography>Hello world</Typography>,
           },
           {
             name: "true",
+            description: "code={true}",
             demo: <Typography code>hello_world</Typography>,
           },
         ]}
@@ -266,64 +268,72 @@ export const Color: Story = {
   render: () => {
     return (
       <VariableList
-        label="color"
-        isString
         variables={[
           {
             name: "lighter",
+            description: 'color="lighter"',
             value: getToken("foregroundColor", "lighter").value,
             demo: (
-              <Typography color="lighter">Lighter foreground color</Typography>
+              <Typography color="lighter">Lighter</Typography>
             ),
           },
           {
             name: "light",
+            description: 'color="light"',
             value: getToken("foregroundColor", "light").value,
-            demo: <Typography color="light">Light foreground color</Typography>,
+            demo: <Typography color="light">Light</Typography>,
           },
           {
             name: "medium",
+            description: 'color="medium"',
             value: getToken("foregroundColor", "medium").value,
             demo: (
-              <Typography color="medium">Medium foreground color</Typography>
+              <Typography color="medium">Medium</Typography>
             ),
           },
           {
             name: "heavy",
+            description: 'color="heavy"',
             value: getToken("foregroundColor", "heavy").value,
-            demo: <Typography color="heavy">Heavy foreground color</Typography>,
+            demo: <Typography color="heavy">Heavy</Typography>,
           },
           {
             name: "base",
+            description: 'color="base"',
             value: getToken("foregroundColor", "base").value,
-            demo: <Typography color="base">Base foreground color</Typography>,
+            demo: <Typography color="base">Base</Typography>,
           },
           {
             name: "disabled",
+            description: 'color="disabled"',
             value: getToken("foregroundColor", "disabled").value,
             demo: (
-              <Typography color="disabled">Disabled state color</Typography>
+              <Typography color="disabled">Disabled</Typography>
             ),
           },
           {
             name: "link",
+            description: 'color="link"',
             value: getToken("foregroundColor", "link").value,
-            demo: <Typography color="link">Link color</Typography>,
+            demo: <Typography color="link">Link</Typography>,
           },
           {
             name: "success",
+            description: 'color="success"',
             value: getToken("foregroundColor", "success").value,
-            demo: <Typography color="success">Success message</Typography>,
+            demo: <Typography color="success">Success</Typography>,
           },
           {
             name: "warning",
+            description: 'color="warning"',
             value: getToken("foregroundColor", "warning").value,
-            demo: <Typography color="warning">Warning message</Typography>,
+            demo: <Typography color="warning">Warning</Typography>,
           },
           {
             name: "error",
+            description: 'color="error"',
             value: getToken("foregroundColor", "error").value,
-            demo: <Typography color="error">Error message</Typography>,
+            demo: <Typography color="error">Error</Typography>,
           },
         ]}
       />
@@ -336,21 +346,22 @@ export const LegibilityOptimized: Story = {
   render: () => {
     return (
       <VariableList
-        label="legibilityOptimized"
         variables={[
           {
             name: "false",
+            description: "legibilityOptimized={false}",
             demo: (
               <Typography legibilityOptimized={false} size="large">
-                Standard text rendering
+                Standard
               </Typography>
             ),
           },
           {
             name: "true",
+            description: "legibilityOptimized={true}",
             demo: (
               <Typography legibilityOptimized={true} size="large">
-                Optimized text rendering
+                Optimized
               </Typography>
             ),
           },
@@ -368,19 +379,20 @@ export const LineHeight: Story = {
 
     return (
       <VariableList
-        label="lineHeight"
-        isString
         variables={[
           {
             name: "condensed",
+            description: 'lineHeight="condensed"',
             demo: <Typography lineHeight="condensed">{loremIpsum}</Typography>,
           },
           {
             name: "base",
+            description: 'lineHeight="base"',
             demo: <Typography lineHeight="base">{loremIpsum}</Typography>,
           },
           {
             name: "expanded",
+            description: 'lineHeight="expanded"',
             demo: <Typography lineHeight="expanded">{loremIpsum}</Typography>,
           },
         ]}
@@ -394,31 +406,34 @@ export const Size: Story = {
   render: () => {
     return (
       <VariableList
-        label="size"
-        isString
         variables={[
           {
             name: "smaller",
+            description: 'size="smaller"',
             value: getToken("fontSize", "smaller").value,
             demo: <Typography size="smaller">Smaller</Typography>,
           },
           {
             name: "small",
+            description: 'size="small"',
             value: getToken("fontSize", "small").value,
             demo: <Typography size="small">Small</Typography>,
           },
           {
             name: "base",
+            description: 'size="base"',
             value: getToken("fontSize", "base").value,
             demo: <Typography size="base">Base</Typography>,
           },
           {
             name: "large",
+            description: 'size="large"',
             value: getToken("fontSize", "large").value,
             demo: <Typography size="large">Large</Typography>,
           },
           {
             name: "larger",
+            description: 'size="larger"',
             value: getToken("fontSize", "larger").value,
             demo: <Typography size="larger">Larger</Typography>,
           },
@@ -433,41 +448,46 @@ export const Weight: Story = {
   render: () => {
     return (
       <VariableList
-        label="weight"
-        isString
         variables={[
           {
             name: "light",
+            description: 'weight="light"',
             value: getToken("fontWeight", "light").value,
             demo: <Typography weight="light">Light</Typography>,
           },
           {
             name: "base",
+            description: 'weight="base"',
             value: getToken("fontWeight", "base").value,
             demo: <Typography weight="base">Base</Typography>,
           },
           {
             name: "medium",
+            description: 'weight="medium"',
             value: getToken("fontWeight", "medium").value,
             demo: <Typography weight="medium">Medium</Typography>,
           },
           {
             name: "semibold",
+            description: 'weight="semibold"',
             value: getToken("fontWeight", "semibold").value,
             demo: <Typography weight="semibold">Semibold</Typography>,
           },
           {
             name: "bold",
+            description: 'weight="bold"',
             value: getToken("fontWeight", "bold").value,
             demo: <Typography weight="bold">Bold</Typography>,
           },
           {
             name: "extrabold",
+            description: 'weight="extrabold"',
             value: getToken("fontWeight", "extrabold").value,
             demo: <Typography weight="extrabold">Extrabold</Typography>,
           },
           {
             name: "black",
+            description: 'weight="black"',
             value: getToken("fontWeight", "black").value,
             demo: <Typography weight="black">Black</Typography>,
           },

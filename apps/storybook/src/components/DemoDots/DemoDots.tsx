@@ -12,12 +12,16 @@ type JustifyContent =
   | "space-around"
   | "space-evenly"
 
+type AlignItems = "flex-start" | "flex-end" | "center" | "baseline" | "stretch"
+
 interface DemoDotsProps {
   gap?: GapSize
   direction?: "row" | "column"
   justifyContent?: JustifyContent
+  alignItems?: AlignItems
   spacing?: GapSize
   width?: string
+  height?: string
   bordered?: boolean
   dots?: DotConfig[]
   demos?: DemoProps[]
@@ -27,8 +31,10 @@ const DemoDots = ({
   gap,
   direction,
   justifyContent,
+  alignItems,
   spacing,
   width,
+  height,
   bordered,
   dots,
   demos,
@@ -37,6 +43,7 @@ const DemoDots = ({
 
   const style = {
     width,
+    height,
     ...(bordered && {
       borderRadius: getToken("borderRadius", "smaller").var,
       border: `${getToken("borderWidth").var} solid ${getToken("borderColor").var}`,
@@ -48,6 +55,7 @@ const DemoDots = ({
       gap={gap}
       direction={direction}
       justifyContent={justifyContent}
+      alignItems={alignItems}
       spacing={{ sm: { all: spacing } }}
       style={style}
     >

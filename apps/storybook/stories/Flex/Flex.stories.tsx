@@ -131,35 +131,38 @@ const prepareBasic = () => [
   {
     name: "",
     demo: <DemoDots dots={[{ color: "error" }, { color: "link" }]} />,
-    code: `<Flex>{children}</Flex>`,
+    code: `<Flex>\n+1{children}\n</Flex>`,
   },
 ]
 
 const prepareDirection = () =>
   (["row", "column"] as const).map(direction => ({
     name: direction,
+    description: `direction="${direction}"`,
     demo: (
       <DemoDots
         direction={direction}
         dots={[{ color: "error" }, { color: "link" }]}
       />
     ),
-    code: `<Flex direction="${direction}">{children}</Flex>`,
+    code: `<Flex direction="${direction}">\n+1{children}\n</Flex>`,
   }))
 
 const prepareGap = () =>
   (["smaller", "small", "base", "large", "larger"] as const).map(size => ({
     name: size,
+    description: `gap="${size}"`,
     value: getToken("gap", size).value,
     demo: (
       <DemoDots gap={size} dots={[{ color: "error" }, { color: "link" }]} />
     ),
-    code: `<Flex gap="${size}">{children}</Flex>`,
+    code: `<Flex gap="${size}">\n+1{children}\n</Flex>`,
   }))
 
 const prepareSpacing = () =>
   (["smaller", "small", "base", "large", "larger"] as const).map(size => ({
     name: size,
+    description: `spacing="${size}"`,
     value: getToken("gap", size).value,
     demo: (
       <DemoDots
@@ -168,12 +171,14 @@ const prepareSpacing = () =>
         bordered
       />
     ),
-    code: `<Flex spacing="${size}">{children}</Flex>`,
+    code: `<Flex spacing="${size}">\n+1{children}\n</Flex>`,
   }))
 
 const prepareType = () =>
   (["padding", "margin"] as const).map(type => ({
     name: type,
+    description: `type="${type}"`,
+    default: type === "padding",
     demo: (
       <Flex style={{
         borderRadius: getToken("borderRadius", "smaller").var,
@@ -191,12 +196,13 @@ const prepareType = () =>
         </Flex>
       </Flex>
     ),
-    code: `<Flex type="${type}">{children}</Flex>`,
+    code: `<Flex type="${type}">\n+1{children}\n</Flex>`,
   }))
 
 const prepareGrow = () =>
   ([0, 1, 2] as const).map(grow => ({
     name: String(grow),
+    description: `grow={${grow}}`,
     demo: (
       <Flex style={{ width: "12rem" }}>
         <Flex
@@ -218,7 +224,7 @@ const prepareGrow = () =>
         />
       </Flex>
     ),
-    code: `<Flex>\n+1<Flex grow={${grow}}>{children}</Flex>\n+1<Flex grow={1}>{children}</Flex>\n</Flex>`,
+    code: `<Flex>\n+1<Flex grow={${grow}}>\n+2{children}\n+1</Flex>\n+2<Flex grow={1}>\n+1{children}\n+1</Flex>\n</Flex>`,
   }))
 
 const prepareJustifyContent = () =>
@@ -233,6 +239,7 @@ const prepareJustifyContent = () =>
     ] as const
   ).map(justifyContent => ({
     name: justifyContent,
+    description: `justifyContent="${justifyContent}"`,
     demo: (
       <DemoDots
         justifyContent={justifyContent}
@@ -241,10 +248,34 @@ const prepareJustifyContent = () =>
         bordered
       />
     ),
+    code: `<Flex justifyContent="${justifyContent}">\n+1{children}\n</Flex>`,
   }))
+
+const prepareAlignItems = () =>
+  (["flex-start", "flex-end", "center", "baseline", "stretch"] as const).map(
+    alignItems => ({
+      name: alignItems,
+      description: `alignItems="${alignItems}"`,
+      demo: (
+        <DemoDots
+          alignItems={alignItems}
+          dots={[
+            { color: "error" },
+            { color: "link" },
+            { color: "warning" },
+          ]}
+          width="12rem"
+          height="3rem"
+          bordered
+        />
+      ),
+      code: `<Flex alignItems="${alignItems}">\n+1{children}\n</Flex>`,
+    })
+  )
 
 // Map of prepare functions
 const prepareFunctions = {
+  AlignItems: prepareAlignItems,
   Basic: prepareBasic,
   Direction: prepareDirection,
   Gap: prepareGap,
@@ -261,54 +292,35 @@ export const Basic: Story = {
 
 export const Direction: Story = {
   name: "direction",
-  render: () => (
-    <VariableList
-      label="direction"
-      isString
-      variables={prepareFunctions.Direction()}
-    />
-  ),
+  render: () => <VariableList variables={prepareFunctions.Direction()} />,
 }
 
 export const Gap: Story = {
   name: "gap",
-  render: () => (
-    <VariableList label="gap" isString variables={prepareFunctions.Gap()} />
-  ),
+  render: () => <VariableList variables={prepareFunctions.Gap()} />,
 }
 
 export const Spacing: Story = {
   name: "spacing",
-  render: () => (
-    <VariableList
-      label="spacing"
-      isString
-      variables={prepareFunctions.Spacing()}
-    />
-  ),
+  render: () => <VariableList variables={prepareFunctions.Spacing()} />,
 }
 
 export const Type: Story = {
   name: "type",
-  render: () => (
-    <VariableList label="type" isString variables={prepareFunctions.Type()} />
-  ),
+  render: () => <VariableList variables={prepareFunctions.Type()} />,
 }
 
 export const Grow: Story = {
   name: "grow",
-  render: () => (
-    <VariableList label="grow" variables={prepareFunctions.Grow()} />
-  ),
+  render: () => <VariableList variables={prepareFunctions.Grow()} />,
 }
 
 export const JustifyContent: Story = {
   name: "justifyContent",
-  render: () => (
-    <VariableList
-      label="justifyContent"
-      isString
-      variables={prepareFunctions.JustifyContent()}
-    />
-  ),
+  render: () => <VariableList variables={prepareFunctions.JustifyContent()} />,
+}
+
+export const AlignItems: Story = {
+  name: "alignItems",
+  render: () => <VariableList variables={prepareFunctions.AlignItems()} />,
 }

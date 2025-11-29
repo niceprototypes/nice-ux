@@ -63,7 +63,10 @@ a.sbdocs {
   margin: 0;
   border: 0;
   padding: 0.5rem 0.625rem 0.575rem;
-  font-size: var(--font-size-small);
+  line-height: var(--line-height-base);
+  border-radius: var(--border-radius-base);
+  font-size: var(--font-size-smaller);
+  font-weight: var(--font-weight-semibold);
   background-color: var(--background-color-alternate);
   color: var(--foreground-color-heavy);
   letter-spacing: normal;
@@ -72,7 +75,6 @@ a.sbdocs {
 #storybook-docs h1.sbdocs-title + div:not(.sb-anchor) strong:first-child > code {
   background-color: var(--foreground-color-base);
   color: var(--background-color-base);
-  font-weight: var(--font-weight-base);
 }
 
 #storybook-docs h1.sbdocs-title + div:not(.sb-anchor) a {
