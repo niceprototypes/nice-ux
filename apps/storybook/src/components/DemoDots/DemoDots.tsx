@@ -8,6 +8,7 @@ const DemoDots = ({
   direction,
   justifyContent,
   alignItems,
+  wrap,
   spacing,
   width,
   height,
@@ -21,23 +22,27 @@ const DemoDots = ({
         direction={direction}
         justifyContent={justifyContent}
         alignItems={alignItems}
+        wrap={wrap}
         spacing={{ sm: { all: spacing } }}
         style={{
           height,
           width,
+          padding: !spacing && 1,
+          gap: !gap && 1,
           ...(bordered && {
-            borderRadius: getToken("borderRadius", "smaller").var,
+            borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2)`,
             border: `${getToken("borderWidth").var} solid ${getToken("borderColor").var}`,
           }),
         }}
       >
-        {dots.map(({ color, width: dotWidth, height: dotHeight }, index) => (
+        {dots.map(({ color, width: dotWidth, height: dotHeight, grow }, index) => (
           <DemoDot
             key={index}
             backgroundColor={color}
-            borderRadius="50%"
+            borderRadius={`calc(${getToken("cellHeight", "smaller").var} / 2)`}
             width={dotWidth}
             height={dotHeight}
+            grow={grow}
           />
         ))}
       </Flex>

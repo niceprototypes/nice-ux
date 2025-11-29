@@ -5,6 +5,7 @@ export interface DotSize {
   color?: string
   width?: string
   height?: string
+  grow?: number
 }
 
 export interface DemoDotProps {
@@ -13,6 +14,7 @@ export interface DemoDotProps {
   spacing?: SpacingDefinition
   width?: string
   height?: string
+  grow?: number
   style?: React.CSSProperties
 }
 
@@ -26,11 +28,14 @@ export type JustifyContent =
 
 export type AlignItems = "flex-start" | "flex-end" | "center" | "baseline" | "stretch"
 
+export type Wrap = "nowrap" | "wrap" | "wrap-reverse"
+
 export interface DemoDotsProps {
   gap?: GapSize
   direction?: "row" | "column"
   justifyContent?: JustifyContent
   alignItems?: AlignItems
+  wrap?: Wrap
   spacing?: GapSize
   width?: string
   height?: string

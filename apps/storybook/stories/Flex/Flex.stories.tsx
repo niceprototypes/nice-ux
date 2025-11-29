@@ -582,7 +582,7 @@ const alignItemsDots = [
       {
         color: getToken("foregroundColor", "error").var,
         height: getToken("cellHeight", "small").var,
-        width: getToken("cellHeight", "small").var,
+        width: getToken("cellHeight", "smaller").var,
       },
       {
         color: getToken("foregroundColor", "warning").var,
@@ -592,7 +592,7 @@ const alignItemsDots = [
       {
         color: getToken("foregroundColor", "link").var,
         height: getToken("cellHeight").var,
-        width: getToken("cellHeight").var,
+        width: getToken("cellHeight", "smaller").var,
       },
     ],
   },
@@ -610,6 +610,99 @@ const alignItemsDots = [
       {
         color: getToken("foregroundColor", "link").var,
         width: getToken("cellHeight", "smaller").var,
+      },
+    ],
+  },
+]
+
+const wrapDots = [
+  {
+    value: "nowrap",
+    dots: [
+      {
+        color: getToken("foregroundColor", "error").var,
+        height: getToken("cellHeight", "small").var,
+        grow: 1,
+      },
+      {
+        color: getToken("foregroundColor", "warning").var,
+        height: getToken("cellHeight", "small").var,
+        grow: 1,
+      },
+      {
+        color: getToken("foregroundColor", "link").var,
+        height: getToken("cellHeight", "small").var,
+        grow: 1,
+      },
+      {
+        color: getToken("foregroundColor", "success").var,
+        height: getToken("cellHeight", "small").var,
+        grow: 1,
+      },
+      {
+        color: getToken("foregroundColor", "disabled").var,
+        height: getToken("cellHeight", "small").var,
+        grow: 1,
+      },
+    ],
+  },
+  {
+    value: "wrap",
+    dots: [
+      {
+        color: getToken("foregroundColor", "error").var,
+        height: getToken("cellHeight", "small").var,
+        width: getToken("cellHeight", "small").var,
+      },
+      {
+        color: getToken("foregroundColor", "warning").var,
+        height: getToken("cellHeight", "small").var,
+        width: getToken("cellHeight", "small").var,
+      },
+      {
+        color: getToken("foregroundColor", "link").var,
+        height: getToken("cellHeight", "small").var,
+        width: getToken("cellHeight", "small").var,
+      },
+      {
+        color: getToken("foregroundColor", "success").var,
+        height: getToken("cellHeight", "small").var,
+        width: getToken("cellHeight", "small").var,
+      },
+      {
+        color: getToken("foregroundColor", "disabled").var,
+        height: getToken("cellHeight", "small").var,
+        width: getToken("cellHeight", "small").var,
+      },
+    ],
+  },
+  {
+    value: "wrap-reverse",
+    dots: [
+      {
+        color: getToken("foregroundColor", "error").var,
+        height: getToken("cellHeight", "small").var,
+        width: getToken("cellHeight", "small").var,
+      },
+      {
+        color: getToken("foregroundColor", "warning").var,
+        height: getToken("cellHeight", "small").var,
+        width: getToken("cellHeight", "small").var,
+      },
+      {
+        color: getToken("foregroundColor", "link").var,
+        height: getToken("cellHeight", "small").var,
+        width: getToken("cellHeight", "small").var,
+      },
+      {
+        color: getToken("foregroundColor", "success").var,
+        height: getToken("cellHeight", "small").var,
+        width: getToken("cellHeight", "small").var,
+      },
+      {
+        color: getToken("foregroundColor", "disabled").var,
+        height: getToken("cellHeight", "small").var,
+        width: getToken("cellHeight", "small").var,
       },
     ],
   },
@@ -649,7 +742,7 @@ const prepareSpacing = () =>
     code: `<Flex spacing="${value}">\n+1{children}\n</Flex>`,
   }))
 
-const prepareType = () =>
+  const prepareType = () =>
   typeDots.map(({ value, dots }) => ({
     name: value,
     description: `type="${value}"`,
@@ -683,7 +776,7 @@ const prepareGrow = () =>
     name: String(grow),
     description: `grow={${grow}}`,
     demo: (
-      <Flex grow={1}>
+      <Flex grow={1} style={{ gap: 1 }}>
         <Flex
           grow={grow}
           style={{
@@ -724,8 +817,7 @@ const prepareAlignItems = () =>
       <DemoDots
         alignItems={value}
         dots={dots}
-        width="12rem"
-        height="3rem"
+        height="6rem"
         bordered
       />
     ),
@@ -733,40 +825,18 @@ const prepareAlignItems = () =>
   }))
 
 const prepareWrap = () =>
-  (["nowrap", "wrap", "wrap-reverse"] as const).map(wrap => ({
-    name: wrap,
-    description: `wrap="${wrap}"`,
-    default: wrap === "nowrap",
+  wrapDots.map(({ value, dots }) => ({
+    name: value,
+    description: `wrap="${value}"`,
     demo: (
-      <Flex direction="column">
-        <Flex
-          wrap={wrap}
-          gap="small"
-          style={{
-            width: "8rem",
-            borderRadius: getToken("borderRadius", "smaller").var,
-            border: `${getToken("borderWidth").var} solid ${getToken("borderColor").var}`,
-            padding: getToken("gap", "small").var,
-          }}
-        >
-          {[...Array(6)].map((_, i) => (
-            <Flex
-              key={i}
-              style={{
-                width: getToken("cellHeight", "smaller").var,
-                height: getToken("cellHeight", "smaller").var,
-                backgroundColor: getToken(
-                  "foregroundColor",
-                  i % 2 === 0 ? "error" : "link"
-                ).var,
-                borderRadius: "50%",
-              }}
-            />
-          ))}
-        </Flex>
-      </Flex>
+      <DemoDots
+        wrap={value}
+        dots={dots}
+        width={`calc(${getToken("cellHeight", "small").var} * 3)`}
+        bordered
+      />
     ),
-    code: `<Flex wrap="${wrap}">\n+1{children}\n</Flex>`,
+    code: `<Flex wrap="${value}">\n+1{children}\n</Flex>`,
   }))
 
 export const Basic: Story = {

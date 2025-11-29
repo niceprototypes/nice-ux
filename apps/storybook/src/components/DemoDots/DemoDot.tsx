@@ -8,9 +8,10 @@ const DemoDot = ({
   spacing,
   height = "auto",
   width = "auto",
+  grow,
   style,
 }: DemoDotProps) => (
-  <Flex spacing={spacing}>
+  <Flex grow={grow} spacing={spacing}>
     <Flex
       grow={1}
       style={{
