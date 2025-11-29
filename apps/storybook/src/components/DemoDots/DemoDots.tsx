@@ -30,7 +30,7 @@ const DemoDots = ({
           padding: !spacing && 1,
           gap: !gap && 1,
           ...(bordered && {
-            borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2)`,
+            borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2 + 2px)`,
             border: `${getToken("borderWidth").var} solid ${getToken("borderColor").var}`,
           }),
         }}

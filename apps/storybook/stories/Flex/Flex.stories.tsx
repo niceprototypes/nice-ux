@@ -708,6 +708,55 @@ const wrapDots = [
   },
 ]
 
+const growDots = [
+  {
+    value: 0,
+    dots: [
+      {
+        color: getToken("foregroundColor", "error").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+        grow: 0,
+      },
+      {
+        color: getToken("foregroundColor", "link").var,
+        height: getToken("cellHeight", "smaller").var,
+        grow: 1,
+      },
+    ],
+  },
+  {
+    value: 1,
+    dots: [
+      {
+        color: getToken("foregroundColor", "error").var,
+        height: getToken("cellHeight", "smaller").var,
+        grow: 1,
+      },
+      {
+        color: getToken("foregroundColor", "link").var,
+        height: getToken("cellHeight", "smaller").var,
+        grow: 1,
+      },
+    ],
+  },
+  {
+    value: 2,
+    dots: [
+      {
+        color: getToken("foregroundColor", "error").var,
+        height: getToken("cellHeight", "smaller").var,
+        grow: 2,
+      },
+      {
+        color: getToken("foregroundColor", "link").var,
+        height: getToken("cellHeight", "smaller").var,
+        grow: 1,
+      },
+    ],
+  },
+]
+
 // Prepare functions for each story
 const prepareBasic = () =>
   basicDots.map(({ value, dots }) => ({
@@ -751,8 +800,8 @@ const prepareSpacing = () =>
       <Flex direction="column">
         <Flex
           style={{
-            borderRadius: getToken("borderRadius", "smaller").var,
             border: `${getToken("borderWidth").var} solid ${value === "margin" ? getToken("borderColor").var : getToken("borderColor", "heavy").var}`,
+            borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2 + 2px)`,
           }}
         >
           <Flex
@@ -760,7 +809,7 @@ const prepareSpacing = () =>
             spacing={{ sm: { all: "base" as GapSize } }}
             style={{
               border: `${getToken("borderWidth").var} solid ${value === "margin" ? getToken("borderColor", "heavy").var : "transparent"}`,
-              borderRadius: getToken("borderRadius", "smaller").var,
+              borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2 + 2px)`,
             }}
           >
             <DemoDots dots={dots} />
@@ -772,31 +821,11 @@ const prepareSpacing = () =>
   }))
 
 const prepareGrow = () =>
-  ([0, 1, 2] as const).map(grow => ({
-    name: String(grow),
-    description: `grow={${grow}}`,
-    demo: (
-      <Flex grow={1} style={{ gap: 1 }}>
-        <Flex
-          grow={grow}
-          style={{
-            minWidth: 2,
-            backgroundColor: getToken("foregroundColor", "error").var,
-            height: getToken("cellHeight", "smaller").var,
-            borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2)`,
-          }}
-        />
-        <Flex
-          grow={1}
-          style={{
-            backgroundColor: getToken("foregroundColor", "link").var,
-            height: getToken("cellHeight", "smaller").var,
-            borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2)`,
-          }}
-        />
-      </Flex>
-    ),
-    code: `<Flex>\n+1<Flex grow={${grow}}>\n+2{children}\n+1</Flex>\n+2<Flex grow={1}>\n+1{children}\n+1</Flex>\n</Flex>`,
+  growDots.map(({ value, dots }) => ({
+    name: String(value),
+    description: `grow={${value}}`,
+    demo: <DemoDots bordered width="12rem" dots={dots} />,
+    code: `<Flex>\n+1<Flex grow={${value}}>\n+2{children}\n+1</Flex>\n+2<Flex grow={1}>\n+1{children}\n+1</Flex>\n</Flex>`,
   }))
 
 const prepareJustifyContent = () =>
@@ -832,7 +861,7 @@ const prepareWrap = () =>
       <DemoDots
         wrap={value}
         dots={dots}
-        width={`calc(${getToken("cellHeight", "small").var} * 3)`}
+        width={`calc(${getToken("cellHeight", "small").var} * 3 + 2px)`}
         bordered
       />
     ),
