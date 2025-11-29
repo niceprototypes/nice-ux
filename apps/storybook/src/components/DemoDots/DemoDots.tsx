@@ -1,31 +1,7 @@
-import Flex, { GapSize } from "nice-react-flex"
-import Demo from "../Demo"
-import { DemoProps } from "../Demo/types"
-import { generateDemoDots, DotConfig } from "./utilities/generateDemoDots"
-import { getToken } from "../../../../nice-styles/src"
-
-type JustifyContent =
-  | "flex-start"
-  | "flex-end"
-  | "center"
-  | "space-between"
-  | "space-around"
-  | "space-evenly"
-
-type AlignItems = "flex-start" | "flex-end" | "center" | "baseline" | "stretch"
-
-interface DemoDotsProps {
-  gap?: GapSize
-  direction?: "row" | "column"
-  justifyContent?: JustifyContent
-  alignItems?: AlignItems
-  spacing?: GapSize
-  width?: string
-  height?: string
-  bordered?: boolean
-  dots?: DotConfig[]
-  demos?: DemoProps[]
-}
+import Flex from "nice-react-flex"
+import { getToken } from "nice-styles"
+import { DemoDotsProps } from "./types"
+import DemoDot from "./DemoDot"
 
 const DemoDots = ({
   gap,
@@ -36,32 +12,35 @@ const DemoDots = ({
   width,
   height,
   bordered,
-  dots,
-  demos,
+  dots = [],
 }: DemoDotsProps) => {
-  const items = dots ? generateDemoDots(dots) : demos ?? []
-
-  const style = {
-    width,
-    height,
-    ...(bordered && {
-      borderRadius: getToken("borderRadius", "smaller").var,
-      border: `${getToken("borderWidth").var} solid ${getToken("borderColor").var}`,
-    }),
-  }
-
   return (
-    <Flex
-      gap={gap}
-      direction={direction}
-      justifyContent={justifyContent}
-      alignItems={alignItems}
-      spacing={{ sm: { all: spacing } }}
-      style={style}
-    >
-      {items.map((demoProps, index) => (
-        <Demo key={index} {...demoProps} />
-      ))}
+    <Flex direction="column">
+      <Flex
+        gap={gap}
+        direction={direction}
+        justifyContent={justifyContent}
+        alignItems={alignItems}
+        spacing={{ sm: { all: spacing } }}
+        style={{
+          height,
+          width,
+          ...(bordered && {
+            borderRadius: getToken("borderRadius", "smaller").var,
+            border: `${getToken("borderWidth").var} solid ${getToken("borderColor").var}`,
+          }),
+        }}
+      >
+        {dots.map(({ color, width: dotWidth, height: dotHeight }, index) => (
+          <DemoDot
+            key={index}
+            backgroundColor={color}
+            borderRadius="50%"
+            width={dotWidth}
+            height={dotHeight}
+          />
+        ))}
+      </Flex>
     </Flex>
   )
 }

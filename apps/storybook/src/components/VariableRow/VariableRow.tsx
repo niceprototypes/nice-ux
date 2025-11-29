@@ -14,7 +14,7 @@ const VariableRow: React.FC<VariableRowProps> = ({
   default: isDefault,
 }) => {
   return (
-    <Flex alignItems="center" gap="base">
+    <Flex gap="base">
       <CellFlex direction="column" $width="16rem">
         <Flex alignItems="center" gap="small">
           <Typography as="span" code weight="medium">
@@ -32,7 +32,7 @@ const VariableRow: React.FC<VariableRowProps> = ({
           </Typography>
         )}
       </CellFlex>
-      <CellFlex $width="18rem" grow={1} alignItems="center" gap="base">
+      <CellFlex $width="18rem" grow={1} gap="base">
         {demo}
         {value && (
           <Typography code as="span" color="lighter" size="smaller">

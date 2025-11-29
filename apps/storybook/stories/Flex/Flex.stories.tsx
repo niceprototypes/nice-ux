@@ -126,77 +126,556 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-// Prepare functions for each story
-const prepareBasic = () => [
+// Data objects for each story
+const basicDots = [
   {
-    name: "",
-    demo: <DemoDots dots={[{ color: "error" }, { color: "link" }]} />,
-    code: `<Flex>\n+1{children}\n</Flex>`,
+    value: "",
+    dots: [
+      {
+        color: getToken("foregroundColor", "error").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+      {
+        color: getToken("foregroundColor", "warning").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+    ],
   },
 ]
 
+const directionDots = [
+  {
+    value: "row",
+    dots: [
+      {
+        color: getToken("foregroundColor", "error").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+      {
+        color: getToken("foregroundColor", "warning").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+    ],
+  },
+  {
+    value: "column",
+    dots: [
+      {
+        color: getToken("foregroundColor", "error").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+      {
+        color: getToken("foregroundColor", "warning").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+    ],
+  },
+]
+
+const gapDots = [
+  {
+    value: "smaller",
+    dots: [
+      {
+        color: getToken("foregroundColor", "error").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+      {
+        color: getToken("foregroundColor", "warning").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+      {
+        color: getToken("foregroundColor", "link").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+    ],
+  },
+  {
+    value: "small",
+    dots: [
+      {
+        color: getToken("foregroundColor", "error").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+      {
+        color: getToken("foregroundColor", "warning").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+      {
+        color: getToken("foregroundColor", "link").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+    ],
+  },
+  {
+    value: "base",
+    dots: [
+      {
+        color: getToken("foregroundColor", "error").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+      {
+        color: getToken("foregroundColor", "warning").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+      {
+        color: getToken("foregroundColor", "link").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+    ],
+  },
+  {
+    value: "large",
+    dots: [
+      {
+        color: getToken("foregroundColor", "error").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+      {
+        color: getToken("foregroundColor", "warning").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+      {
+        color: getToken("foregroundColor", "link").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+    ],
+  },
+  {
+    value: "larger",
+    dots: [
+      {
+        color: getToken("foregroundColor", "error").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+      {
+        color: getToken("foregroundColor", "warning").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+      {
+        color: getToken("foregroundColor", "link").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+    ],
+  },
+]
+
+const spacingDots = [
+  {
+    value: "smaller",
+    dots: [
+      {
+        color: getToken("foregroundColor", "error").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+      {
+        color: getToken("foregroundColor", "warning").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+    ],
+  },
+  {
+    value: "small",
+    dots: [
+      {
+        color: getToken("foregroundColor", "error").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+      {
+        color: getToken("foregroundColor", "warning").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+    ],
+  },
+  {
+    value: "base",
+    dots: [
+      {
+        color: getToken("foregroundColor", "error").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+      {
+        color: getToken("foregroundColor", "warning").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+    ],
+  },
+  {
+    value: "large",
+    dots: [
+      {
+        color: getToken("foregroundColor", "error").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+      {
+        color: getToken("foregroundColor", "warning").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+    ],
+  },
+  {
+    value: "larger",
+    dots: [
+      {
+        color: getToken("foregroundColor", "error").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+      {
+        color: getToken("foregroundColor", "warning").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+    ],
+  },
+]
+
+const typeDots = [
+  {
+    value: "padding",
+    dots: [
+      {
+        color: getToken("foregroundColor", "error").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+      {
+        color: getToken("foregroundColor", "warning").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+    ],
+  },
+  {
+    value: "margin",
+    dots: [
+      {
+        color: getToken("foregroundColor", "error").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+      {
+        color: getToken("foregroundColor", "warning").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+    ],
+  },
+]
+
+const justifyContentDots = [
+  {
+    value: "flex-start",
+    dots: [
+      {
+        color: getToken("foregroundColor", "error").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+      {
+        color: getToken("foregroundColor", "warning").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+      {
+        color: getToken("foregroundColor", "link").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+    ],
+  },
+  {
+    value: "flex-end",
+    dots: [
+      {
+        color: getToken("foregroundColor", "error").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+      {
+        color: getToken("foregroundColor", "warning").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+      {
+        color: getToken("foregroundColor", "link").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+    ],
+  },
+  {
+    value: "center",
+    dots: [
+      {
+        color: getToken("foregroundColor", "error").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+      {
+        color: getToken("foregroundColor", "warning").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+      {
+        color: getToken("foregroundColor", "link").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+    ],
+  },
+  {
+    value: "space-between",
+    dots: [
+      {
+        color: getToken("foregroundColor", "error").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+      {
+        color: getToken("foregroundColor", "warning").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+      {
+        color: getToken("foregroundColor", "link").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+    ],
+  },
+  {
+    value: "space-around",
+    dots: [
+      {
+        color: getToken("foregroundColor", "error").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+      {
+        color: getToken("foregroundColor", "warning").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+      {
+        color: getToken("foregroundColor", "link").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+    ],
+  },
+  {
+    value: "space-evenly",
+    dots: [
+      {
+        color: getToken("foregroundColor", "error").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+      {
+        color: getToken("foregroundColor", "warning").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+      {
+        color: getToken("foregroundColor", "link").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+    ],
+  },
+]
+
+const alignItemsDots = [
+  {
+    value: "flex-start",
+    dots: [
+      {
+        color: getToken("foregroundColor", "error").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+      {
+        color: getToken("foregroundColor", "warning").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+      {
+        color: getToken("foregroundColor", "link").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+    ],
+  },
+  {
+    value: "flex-end",
+    dots: [
+      {
+        color: getToken("foregroundColor", "error").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+      {
+        color: getToken("foregroundColor", "warning").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+      {
+        color: getToken("foregroundColor", "link").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+    ],
+  },
+  {
+    value: "center",
+    dots: [
+      {
+        color: getToken("foregroundColor", "error").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+      {
+        color: getToken("foregroundColor", "warning").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+      {
+        color: getToken("foregroundColor", "link").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+    ],
+  },
+  {
+    value: "baseline",
+    dots: [
+      {
+        color: getToken("foregroundColor", "error").var,
+        height: getToken("cellHeight", "small").var,
+        width: getToken("cellHeight", "small").var,
+      },
+      {
+        color: getToken("foregroundColor", "warning").var,
+        height: getToken("cellHeight", "smaller").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+      {
+        color: getToken("foregroundColor", "link").var,
+        height: getToken("cellHeight").var,
+        width: getToken("cellHeight").var,
+      },
+    ],
+  },
+  {
+    value: "stretch",
+    dots: [
+      {
+        color: getToken("foregroundColor", "error").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+      {
+        color: getToken("foregroundColor", "warning").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+      {
+        color: getToken("foregroundColor", "link").var,
+        width: getToken("cellHeight", "smaller").var,
+      },
+    ],
+  },
+]
+
+// Prepare functions for each story
+const prepareBasic = () =>
+  basicDots.map(({ value, dots }) => ({
+    name: value,
+    demo: <DemoDots dots={dots} />,
+    code: `<Flex>\n+1{children}\n</Flex>`,
+  }))
+
 const prepareDirection = () =>
-  (["row", "column"] as const).map(direction => ({
-    name: direction,
-    description: `direction="${direction}"`,
-    demo: (
-      <DemoDots
-        direction={direction}
-        dots={[{ color: "error" }, { color: "link" }]}
-      />
-    ),
-    code: `<Flex direction="${direction}">\n+1{children}\n</Flex>`,
+  directionDots.map(({ value, dots }) => ({
+    name: value,
+    description: `direction="${value}"`,
+    demo: <DemoDots direction={value} dots={dots} />,
+    code: `<Flex direction="${value}">\n+1{children}\n</Flex>`,
   }))
 
 const prepareGap = () =>
-  (["smaller", "small", "base", "large", "larger"] as const).map(size => ({
-    name: size,
-    description: `gap="${size}"`,
-    value: getToken("gap", size).value,
-    demo: (
-      <DemoDots gap={size} dots={[{ color: "error" }, { color: "link" }]} />
-    ),
-    code: `<Flex gap="${size}">\n+1{children}\n</Flex>`,
+  gapDots.map(({ value, dots }) => ({
+    name: value,
+    description: `gap="${value}"`,
+    value: getToken("gap", value).value,
+    demo: <DemoDots gap={value} dots={dots} />,
+    code: `<Flex gap="${value}">\n+1{children}\n</Flex>`,
   }))
 
 const prepareSpacing = () =>
-  (["smaller", "small", "base", "large", "larger"] as const).map(size => ({
-    name: size,
-    description: `spacing="${size}"`,
-    value: getToken("gap", size).value,
-    demo: (
-      <DemoDots
-        spacing={size}
-        dots={[{ color: "error" }, { color: "link" }]}
-        bordered
-      />
-    ),
-    code: `<Flex spacing="${size}">\n+1{children}\n</Flex>`,
+  spacingDots.map(({ value, dots }) => ({
+    name: value,
+    description: `spacing="${value}"`,
+    value: getToken("gap", value).value,
+    demo: <DemoDots spacing={value} dots={dots} bordered />,
+    code: `<Flex spacing="${value}">\n+1{children}\n</Flex>`,
   }))
 
 const prepareType = () =>
-  (["padding", "margin"] as const).map(type => ({
-    name: type,
-    description: `type="${type}"`,
-    default: type === "padding",
+  typeDots.map(({ value, dots }) => ({
+    name: value,
+    description: `type="${value}"`,
+    default: value === "padding",
     demo: (
-      <Flex style={{
-        borderRadius: getToken("borderRadius", "smaller").var,
-        border: `${getToken("borderWidth").var} solid ${type === "margin" ? getToken("borderColor").var : getToken("borderColor", "heavy").var}`,
-      }}>
+      <Flex direction="column">
         <Flex
-          type={type}
-          spacing={{ sm: { all: "base" as GapSize } }}
           style={{
-            border: `${getToken("borderWidth").var} solid ${type === "margin" ? getToken("borderColor", "heavy").var : "transparent"}`,
             borderRadius: getToken("borderRadius", "smaller").var,
+            border: `${getToken("borderWidth").var} solid ${value === "margin" ? getToken("borderColor").var : getToken("borderColor", "heavy").var}`,
           }}
         >
-          <DemoDots dots={[{ color: "error" }, { color: "link" }]} />
+          <Flex
+            type={value}
+            spacing={{ sm: { all: "base" as GapSize } }}
+            style={{
+              border: `${getToken("borderWidth").var} solid ${value === "margin" ? getToken("borderColor", "heavy").var : "transparent"}`,
+              borderRadius: getToken("borderRadius", "smaller").var,
+            }}
+          >
+            <DemoDots dots={dots} />
+          </Flex>
         </Flex>
       </Flex>
     ),
-    code: `<Flex type="${type}">\n+1{children}\n</Flex>`,
+    code: `<Flex type="${value}">\n+1{children}\n</Flex>`,
   }))
 
 const prepareGrow = () =>
@@ -204,7 +683,7 @@ const prepareGrow = () =>
     name: String(grow),
     description: `grow={${grow}}`,
     demo: (
-      <Flex style={{ width: "12rem" }}>
+      <Flex grow={1}>
         <Flex
           grow={grow}
           style={{
@@ -228,99 +707,109 @@ const prepareGrow = () =>
   }))
 
 const prepareJustifyContent = () =>
-  (
-    [
-      "flex-start",
-      "flex-end",
-      "center",
-      "space-between",
-      "space-around",
-      "space-evenly",
-    ] as const
-  ).map(justifyContent => ({
-    name: justifyContent,
-    description: `justifyContent="${justifyContent}"`,
+  justifyContentDots.map(({ value, dots }) => ({
+    name: value,
+    description: `justifyContent="${value}"`,
     demo: (
-      <DemoDots
-        justifyContent={justifyContent}
-        dots={[{ color: "error" }, { color: "link" }, { color: "warning" }]}
-        width="12rem"
-        bordered
-      />
+      <DemoDots justifyContent={value} dots={dots} width="12rem" bordered />
     ),
-    code: `<Flex justifyContent="${justifyContent}">\n+1{children}\n</Flex>`,
+    code: `<Flex justifyContent="${value}">\n+1{children}\n</Flex>`,
   }))
 
 const prepareAlignItems = () =>
-  (["flex-start", "flex-end", "center", "baseline", "stretch"] as const).map(
-    alignItems => ({
-      name: alignItems,
-      description: `alignItems="${alignItems}"`,
-      demo: (
-        <DemoDots
-          alignItems={alignItems}
-          dots={[
-            { color: "error" },
-            { color: "link" },
-            { color: "warning" },
-          ]}
-          width="12rem"
-          height="3rem"
-          bordered
-        />
-      ),
-      code: `<Flex alignItems="${alignItems}">\n+1{children}\n</Flex>`,
-    })
-  )
+  alignItemsDots.map(({ value, dots }) => ({
+    name: value,
+    description: `alignItems="${value}"`,
+    demo: (
+      <DemoDots
+        alignItems={value}
+        dots={dots}
+        width="12rem"
+        height="3rem"
+        bordered
+      />
+    ),
+    code: `<Flex alignItems="${value}">\n+1{children}\n</Flex>`,
+  }))
 
-// Map of prepare functions
-const prepareFunctions = {
-  AlignItems: prepareAlignItems,
-  Basic: prepareBasic,
-  Direction: prepareDirection,
-  Gap: prepareGap,
-  Grow: prepareGrow,
-  JustifyContent: prepareJustifyContent,
-  Spacing: prepareSpacing,
-  Type: prepareType,
-}
+const prepareWrap = () =>
+  (["nowrap", "wrap", "wrap-reverse"] as const).map(wrap => ({
+    name: wrap,
+    description: `wrap="${wrap}"`,
+    default: wrap === "nowrap",
+    demo: (
+      <Flex direction="column">
+        <Flex
+          wrap={wrap}
+          gap="small"
+          style={{
+            width: "8rem",
+            borderRadius: getToken("borderRadius", "smaller").var,
+            border: `${getToken("borderWidth").var} solid ${getToken("borderColor").var}`,
+            padding: getToken("gap", "small").var,
+          }}
+        >
+          {[...Array(6)].map((_, i) => (
+            <Flex
+              key={i}
+              style={{
+                width: getToken("cellHeight", "smaller").var,
+                height: getToken("cellHeight", "smaller").var,
+                backgroundColor: getToken(
+                  "foregroundColor",
+                  i % 2 === 0 ? "error" : "link"
+                ).var,
+                borderRadius: "50%",
+              }}
+            />
+          ))}
+        </Flex>
+      </Flex>
+    ),
+    code: `<Flex wrap="${wrap}">\n+1{children}\n</Flex>`,
+  }))
 
 export const Basic: Story = {
   name: "basic",
-  render: () => <VariableList variables={prepareFunctions.Basic()} />,
+  render: () => <VariableList variables={prepareBasic()} />,
 }
 
 export const Direction: Story = {
   name: "direction",
-  render: () => <VariableList variables={prepareFunctions.Direction()} />,
+  render: () => <VariableList variables={prepareDirection()} />,
 }
 
 export const Gap: Story = {
   name: "gap",
-  render: () => <VariableList variables={prepareFunctions.Gap()} />,
+  render: () => <VariableList variables={prepareGap()} />,
 }
 
 export const Spacing: Story = {
   name: "spacing",
-  render: () => <VariableList variables={prepareFunctions.Spacing()} />,
+  render: () => <VariableList variables={prepareSpacing()} />,
 }
 
 export const Type: Story = {
   name: "type",
-  render: () => <VariableList variables={prepareFunctions.Type()} />,
+  render: () => <VariableList variables={prepareType()} />,
 }
 
 export const Grow: Story = {
   name: "grow",
-  render: () => <VariableList variables={prepareFunctions.Grow()} />,
+  render: () => <VariableList variables={prepareGrow()} />,
 }
 
 export const JustifyContent: Story = {
   name: "justifyContent",
-  render: () => <VariableList variables={prepareFunctions.JustifyContent()} />,
+  render: () => <VariableList variables={prepareJustifyContent()} />,
 }
 
 export const AlignItems: Story = {
   name: "alignItems",
-  render: () => <VariableList variables={prepareFunctions.AlignItems()} />,
+  render: () => <VariableList variables={prepareAlignItems()} />,
+}
+
+export const Wrap: Story = {
+  name: "wrap",
+  render: () => <VariableList variables={prepareWrap()} />,
 }

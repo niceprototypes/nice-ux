@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import { getToken } from "nice-styles"
 import Typography from "nice-react-typography"
-import Demo from "../../src/components/Demo"
+import DemoDot from "../../src/components/DemoDot"
 import DemoDots from "../../src/components/DemoDots"
 import VariableList from "../../src/components/VariableList"
 import { generateDescriptionString } from "../../src/utilities"
