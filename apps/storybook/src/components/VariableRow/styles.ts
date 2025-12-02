@@ -4,16 +4,11 @@ import { getToken } from "../../../../nice-styles/src"
 
 const BREAKPOINT_MD_MIN = "768px"
 
-export const DefaultFlex = styled(Flex)`
-  background-color: ${getToken("backgroundColor", "alternate").var};
-  border-radius: ${getToken("borderRadius", "small").var};
-  padding: 0.125rem 0.25rem;
-  @media (min-width: ${BREAKPOINT_MD_MIN}) {
-    width: ${props => props.$width}
-  }
-`
+interface StyledFlexProps {
+  $width?: string
+}
 
-export const CellFlex = styled(Flex)`
+export const CellFlex = styled(Flex)<StyledFlexProps>`
   @media (min-width: ${BREAKPOINT_MD_MIN}) {
     width: ${props => props.$width}
   }

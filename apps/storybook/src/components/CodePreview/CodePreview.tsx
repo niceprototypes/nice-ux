@@ -1,8 +1,6 @@
 import React, { useState } from "react"
-import { getToken } from "nice-styles"
 import { CodePreviewProps } from "./types"
-import { colors } from "./styles"
-import Flex from "nice-react-flex"
+import { ClickableDiv, CodeFlex } from "./styles"
 import CodePreviewString from "./CodePreviewString"
 import CodePreviewCopying from "./CodePreviewCopying"
 
@@ -39,29 +37,22 @@ const CodePreview: React.FC<CodePreviewProps> = ({
   }
 
   const handleClick = () => {
-    if (!clipboard) return
+    if (!clipboard || copying) return
     navigator.clipboard.writeText(getCleanCode(code))
     setCopying(true)
     setTimeout(() => setCopying(false), 1000)
   }
 
   return (
-    <Flex
-      direction="column"
-      grow={1}
-      onClick={!copying && handleClick}
-      style={{
-        backgroundColor: colors.background,
-        padding: "0.5rem 0.625rem",
-        borderRadius: getToken("borderRadius", "base").var,
-        cursor: clipboard ? "pointer" : undefined,
-        position: "relative",
-        transition: "background-color 0.1s ease-in-out",
-      }}
+    <ClickableDiv
+      onClick={clipboard ? handleClick : undefined}
+      $clickable={clipboard}
     >
-      {copying && <CodePreviewCopying />}
-      <CodePreviewString code={code} />
-    </Flex>
+      <CodeFlex direction="column">
+        {copying && <CodePreviewCopying />}
+        <CodePreviewString code={code} />
+      </CodeFlex>
+    </ClickableDiv>
   )
 }
 
