@@ -1,11 +1,5 @@
 import * as React from "react"
-import { ThemeConfig } from "./themes"
-
-/**
- * Defines the size of the button component
- * Maps to predefined CSS variable heights
- */
-export type ButtonSizeType = 1 | 2 | 3 | 4
+import type { CellHeightType, FontWeightType, BorderWidthType } from "nice-styles"
 
 /**
  * Visual status/styling variants for the button
@@ -28,17 +22,15 @@ export type ButtonStateType = "default" | "disabled" | "attention" | "success" |
  */
 export type ButtonModeType = "light" | "dark"
 
-export * from "./themes"
-
 /**
  * Main props interface for the Button component
  */
 export interface ButtonProps {
   /**
-   * Size of the button (1-4, smallest to largest)
-   * @default 3
+   * Size of the button
+   * @default "base"
    */
-  size?: ButtonSizeType
+  size?: CellHeightType
 
   /**
    * Interactive state of the button
@@ -119,18 +111,9 @@ export interface ButtonProps {
   "data-testid"?: string
 
   /**
-   * Custom border radius for all corners (e.g., "8px", "0.5rem", "50%")
-   * If not provided, defaults to pill shape (50% of button height)
+   * Custom border radius override
    */
   borderRadius?: string
-
-  /**
-   * Theme configuration overrides
-   * Allows partial overrides of the default theme values
-   * @example
-   * config={{ light: { primary: { default: { fill: "#666" } } } }}
-   */
-  config?: ThemeConfig
 
   /**
    * Whether to apply antialiased font rendering to the button text
@@ -139,19 +122,17 @@ export interface ButtonProps {
   antialiased?: boolean
 
   /**
-   * Custom background color that overrides theme styles
-   * Works alongside backgroundImage if both are provided
+   * Custom background color that overrides default styles
    */
   backgroundColor?: string
 
   /**
-   * Custom background image that overrides theme styles
-   * Works alongside backgroundColor if both are provided
+   * Custom background image
    */
   backgroundImage?: string
 
   /**
-   * Custom border color that overrides theme styles
+   * Custom border color that overrides default styles
    */
   borderColor?: string
 
@@ -162,16 +143,16 @@ export interface ButtonProps {
   condensed?: boolean
 
   /**
-   * Font weight of the button text (1-4)
-   * @default 2
+   * Font weight of the button text
+   * @default "medium"
    */
-  fontWeight?: 1 | 2 | 3 | 4
+  fontWeight?: FontWeightType
 
   /**
-   * Border width of the button (1-4)
-   * @default 1
+   * Border width of the button
+   * @default "base"
    */
-  borderWidth?: 1 | 2 | 3 | 4
+  borderWidth?: BorderWidthType
 
   /**
    * Whether the button should have a border

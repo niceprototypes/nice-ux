@@ -1,13 +1,13 @@
 import * as React from "react"
 import Icon, { IconNameType, IconSizeType } from "nice-react-icon"
-import { ButtonSizeType } from "../types"
+import type { CellHeightType } from "nice-styles"
 
 /**
  * Props for the ButtonIcon component
  */
 interface ButtonIconProps {
   /** Size of the icon (matches button size) */
-  size: ButtonSizeType
+  size: CellHeightType
   /** Icon name/identifier */
   icon?: string
   /** Icon rotation in degrees */

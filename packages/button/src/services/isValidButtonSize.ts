@@ -1,12 +1,14 @@
-import { ButtonSizeType } from "../types"
+import type { CellHeightType } from "nice-styles"
+
+const VALID_SIZES: CellHeightType[] = ["smaller", "small", "base", "large", "larger"]
 
 /**
  * Type guard for checking if a value is a valid button size
  * @param size - Value to check
  * @returns True if valid button size
  */
-const isValidButtonSize = (size: unknown): size is ButtonSizeType => {
-  return [1, 2, 3, 4].includes(size as number)
+const isValidButtonSize = (size: unknown): size is CellHeightType => {
+  return VALID_SIZES.includes(size as CellHeightType)
 }
 
 export default isValidButtonSize

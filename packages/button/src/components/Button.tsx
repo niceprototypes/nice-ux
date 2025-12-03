@@ -1,24 +1,25 @@
 import * as React from "react"
 import Typography from "nice-react-typography"
+import { getToken } from "nice-styles"
 import ButtonIcon from "./ButtonIcon"
-import { ButtonOuter, ButtonInner, ButtonText, ButtonIconPositioned } from "./Button.styles"
+import {
+  ButtonOuter,
+  ButtonOverlay,
+  ButtonInner,
+  ButtonText,
+  ButtonIconPositioned,
+} from "./Button.styles"
 import { ButtonProps } from "../types"
-import getThemeStyles from "../services/getThemeStyles"
-import mergeThemeConfig from "../services/mergeThemeConfig"
-import getCssVariable from "../services/getCssVariable"
-import { defaultThemes } from "../constants/defaultThemes"
 
 /**
- * Button component v2.0.0 - LIVE TEST CHANGE
- * A flexible and customizable React button component with built-in theming support
+ * Button component
+ * A flexible and customizable React button component
  *
  * Features:
- * - Multiple sizes (1-4)
- * - Light/dark mode support
+ * - Multiple sizes (smaller, small, base, large, larger)
  * - Various statuses (primary, secondary, etc.)
  * - States (default, disabled, attention, success, warning)
  * - Icon support with nice-react-icon
- * - Full theming capabilities
  * - Accessibility support
  * - TypeScript support
  *
@@ -42,22 +43,21 @@ const Button: React.FC<ButtonProps> = ({
   backgroundImage,
   borderColor,
   borderRadius,
-  borderWidth = 1,
+  borderWidth = "base",
   bordered = true,
   children,
   className,
   condensed = false,
-  config,
   "data-testid": testId,
   disabled = false,
-  fontWeight = 3,
+  fontWeight = "medium",
   fullWidth = false,
   icon,
   iconPosition = "right",
   iconRotation = 0,
   mode = "light",
   onClick,
-  size = 3,
+  size = "base",
   state = "default",
   status = "primary",
   type = "button",
@@ -65,14 +65,10 @@ const Button: React.FC<ButtonProps> = ({
   const hasIcon = !!icon
   const isDisabled = disabled || state === "disabled"
   const isLeft = iconPosition === "left"
+  const isSquare = hasIcon && !children
 
-  // Merge config with default themes
-  const mergedThemes = mergeThemeConfig(defaultThemes, config)
-
-  // Get the theme styles for the current mode/status/state combination
-  const actualState = isDisabled ? "disabled" : state
-  const themeStyles = getThemeStyles(mergedThemes, mode, status, actualState)
-
+  // @ts-ignore
+  // @ts-ignore
   return (
     <ButtonOuter
       $backgroundColor={backgroundColor}
@@ -84,8 +80,11 @@ const Button: React.FC<ButtonProps> = ({
       $disabled={isDisabled}
       $fullWidth={fullWidth}
       $hasIcon={hasIcon}
+      $isSquare={isSquare}
+      $mode={mode}
       $size={size}
-      $themeStyles={themeStyles}
+      $state={state}
+      $status={status}
       aria-label={ariaLabel}
       className={className}
       data-testid={testId}
@@ -93,44 +92,37 @@ const Button: React.FC<ButtonProps> = ({
       onClick={isDisabled ? undefined : onClick}
       type={type}
     >
-      {/* Left positioned icon */}
-      <ButtonIconPositioned $size={size} $isLeft={true}>
-        <ButtonIcon
-          color={themeStyles.color}
-          icon={hasIcon && isLeft ? icon : undefined}
-          iconRotation={iconRotation}
-          size={size}
-        />
-      </ButtonIconPositioned>
-      <ButtonInner
-        $borderWidth={themeStyles.borderWidth || getCssVariable("border-width", borderWidth)}
+      {/* Border overlay (positioned behind content) */}
+      <ButtonOverlay
         $bordered={bordered}
-        $size={size}
-      >
-        {/* Button text content */}
-        {children && (
+        $borderColor={borderColor}
+        $borderWidth={getToken("borderWidth", borderWidth).var}
+        $mode={mode}
+        $state={state}
+        $status={status}
+      />
+      {/* Left positioned icon */}
+      {hasIcon && isLeft && (
+        <ButtonIconPositioned $size={size} $isLeft={true}>
+          <ButtonIcon icon={icon} iconRotation={iconRotation} size={size} color="currentColor" />
+        </ButtonIconPositioned>
+      )}
+      {/* Button text content */}
+      {children && (
+        <ButtonInner $size={size}>
           <ButtonText $size={size}>
-            <Typography
-              antialiased={antialiased}
-              as="span"
-              color={themeStyles.color}
-              weight={fontWeight}
-              size={size}
-            >
+            <Typography antialiased={antialiased} as="span" weight={fontWeight} size={size}>
               {children}
             </Typography>
           </ButtonText>
-        )}
-      </ButtonInner>
+        </ButtonInner>
+      )}
       {/* Right positioned icon */}
-      <ButtonIconPositioned $size={size} $isLeft={false}>
-        <ButtonIcon
-          color={themeStyles.color}
-          icon={hasIcon && !isLeft ? icon : undefined}
-          iconRotation={iconRotation}
-          size={size}
-        />
-      </ButtonIconPositioned>
+      {hasIcon && !isLeft && (
+        <ButtonIconPositioned $size={size} $isLeft={false}>
+          <ButtonIcon icon={icon} iconRotation={iconRotation} size={size} color="currentColor" />
+        </ButtonIconPositioned>
+      )}
     </ButtonOuter>
   )
 }
