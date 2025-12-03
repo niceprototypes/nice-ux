@@ -1,9 +1,14 @@
 import type { StorybookConfig } from "@storybook/react-vite"
 import { join, dirname, resolve } from "path"
+import {
+  watchLinkedPackages,
+  getSourceAliases,
+  linkedPackageNames,
+} from "./services/watchLinkedPackages"
 
 /**
- * This function is used to resolve the absolute path of a package.
- * It is needed in projects that use Yarn PnP or are set up within a monorepo.
+ * Resolves the absolute path of a package.
+ * Needed for projects using Yarn PnP or monorepo setups.
  */
 function getAbsolutePath(value: string): string {
   return dirname(require.resolve(join(value, "package.json")))
@@ -32,10 +37,27 @@ const config: StorybookConfig = {
       'react',
       'react-dom',
     ]
+    config.resolve.preserveSymlinks = false
     config.resolve.alias = {
       ...(config.resolve.alias || {}),
       'styled-components': resolve(__dirname, '../node_modules/styled-components'),
+      ...getSourceAliases(),
     }
+    config.server = config.server || {}
+    config.server.watch = {
+      ...config.server.watch,
+      followSymlinks: true,
+    }
+    config.optimizeDeps = config.optimizeDeps || {}
+    config.optimizeDeps.exclude = [
+      ...(config.optimizeDeps.exclude || []),
+      ...linkedPackageNames,
+      'nice-react-button',
+    ]
+    config.plugins = [
+      ...(config.plugins || []),
+      watchLinkedPackages(),
+    ]
     return config
   },
   typescript: {
