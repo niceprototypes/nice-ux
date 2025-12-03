@@ -1,6 +1,6 @@
 import Flex, { GapSize } from "nice-react-flex"
 import { getToken } from "nice-styles"
-import DemoDots from "../../../src/components/DemoDots"
+import DemoDots from "../../../../src/components/DemoDots"
 
 export const typeDots = [
   {

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import Flex from "nice-react-flex"
-import VariableList from "../../src/components/VariableList"
+import VariableList from "../../../src/components/VariableList"
 import { prepareBasic } from "./stories/basic"
 import { prepareDirection } from "./stories/direction"
 import { prepareGap } from "./stories/gap"

@@ -1,5 +1,5 @@
 import { getToken } from "nice-styles"
-import DemoDots from "../../../src/components/DemoDots"
+import DemoDots from "../../../../src/components/DemoDots"
 
 export const alignItemsDots = [
   {

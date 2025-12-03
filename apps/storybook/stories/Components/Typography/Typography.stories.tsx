@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import { getToken } from "nice-styles"
+import Flex from "nice-react-flex"
 import Typography from "nice-react-typography"
-import VariableList from "../../src/components/VariableList"
-import Flex from "../../../nice-react-flex"
+import VariableList from "../../../src/components/VariableList"
 
 /**
  * A flexible typography component built on web standards and CSS custom properties.
