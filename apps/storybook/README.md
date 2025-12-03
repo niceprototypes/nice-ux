@@ -38,7 +38,7 @@ This Storybook documents the following packages:
 - **nice-react-icon** - Icon library with 30+ SVG icons
 
 ### React Hooks
-- **nice-react-hook-device-detector** - Mobile device detection
+- **nice-react-device-detector** - Mobile device detection
 
 ### Utilities
 - **nice-css-variables** - CSS design tokens
@@ -140,7 +140,7 @@ The Storybook uses these packages from npm:
     "nice-react-tile": "^2.0.6",
     "nice-react-button": "^3.2.3",
     "nice-react-icon": "^1.1.2",
-    "nice-react-hook-device-detector": "^1.1.0",
+    "nice-react-device-detector": "^1.1.0",
     "nice-css-variables": "^1.0.4"
   }
 }
@@ -162,7 +162,7 @@ nnl ../nice-react-typography
 nnl ../nice-react-tile
 nnl ../nice-react-button
 nnl ../nice-react-icon
-nnl ../nice-react-hook-device-detector
+nnl ../nice-react-device-detector
 ```
 
 3. Start watch mode in each package:

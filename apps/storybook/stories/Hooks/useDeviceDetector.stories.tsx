@@ -3,7 +3,7 @@ import {
   useDeviceDetector,
   DeviceProvider,
   useDevice,
-} from "nice-react-hook-device-detector"
+} from "nice-react-device-detector"
 import React, { useEffect, useState } from "react"
 import Typography from "nice-react-typography"
 import { generateDescriptionString } from "../../src/services"
@@ -23,7 +23,7 @@ const meta = {
       description: {
         component: generateDescriptionString([
           "Install using",
-          { value: "npm i nice-react-hook-device-detector", code: true },
+          { value: "npm i nice-react-device-detector", code: true },
           {
             value:
               "for mobile device detection with multi-layered Stylestrategy.",

@@ -1,5 +1,5 @@
 oimport type { Meta, StoryObj } from "@storybook/react"
-import { useDeviceDetector, DeviceProvider, useDevice } from "nice-react-hook-device-detector"
+import { useDeviceDetector, DeviceProvider, useDevice } from "nice-react-device-detector"
 import React, { useEffect, useState } from "react"
 import Typography from "nice-react-typography"
 import { generateDescriptionString } from "../../src/services"
@@ -95,7 +95,7 @@ const meta = {
       description: {
         component: generateDescriptionString([
           "Install using",
-          { value: "npm i nice-react-hook-device-detector", code: true },
+          { value: "npm i nice-react-device-detector", code: true },
           { value: "for mobile device detection with multi-layered strategy.", newLine: true },
           "Works with direct hook calls or Context API for optimal performance.",
         ]),

@@ -17,7 +17,7 @@ All Nice packages are installed from npm:
 - nice-react-tile ^2.0.6
 - nice-react-button ^3.2.3
 - nice-react-icon ^1.1.2
-- nice-react-hook-device-detector ^1.1.0
+- nice-react-device-detector ^1.1.0
 - nice-css-variables ^1.0.4
 
 ### 3. CSS Variables Integration
@@ -167,7 +167,7 @@ npm run build-storybook
 | nice-react-tile | 10 | ✅ Complete |
 | nice-react-button | 20 | ✅ Complete |
 | nice-react-icon | 15 | ✅ Complete |
-| nice-react-hook-device-detector | 5 | ✅ Complete |
+| nice-react-device-detector | 5 | ✅ Complete |
 | nice-css-variables | 1 doc | ✅ Complete |
 | nice-npm-link | 1 doc | ✅ Complete |
 
@@ -227,7 +227,7 @@ nice-npm-link ../nice-react-typography
 nice-npm-link ../nice-react-tile
 nice-npm-link ../nice-react-button
 nice-npm-link ../nice-react-icon
-nice-npm-link ../nice-react-hook-device-detector
+nice-npm-link ../nice-react-device-detector
 nice-npm-link ../nice-styles
 ```
 
@@ -289,7 +289,7 @@ nice-npm-link ../nice-react-typography
 nice-npm-link ../nice-react-button
 nice-npm-link ../nice-react-icon
 nice-npm-link ../nice-react-tile
-nice-npm-link ../nice-react-hook-device-detector
+nice-npm-link ../nice-react-device-detector
 nice-npm-link ../nice-styles
 
 # 2. Start watch mode ONLY for packages that need it
