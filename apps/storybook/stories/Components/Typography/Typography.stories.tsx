@@ -22,18 +22,16 @@ const meta = {
   },
   tags: ["autodocs"],
   argTypes: {
-    // Required props first
     children: {
       name: "children *",
-      description: "Child elements (required)",
+      description: "",
       control: "text",
       table: {
         type: { summary: "React.ReactNode" },
       },
     },
-    // Optional props alphabetically
     align: {
-      description: "Text alignment",
+      description: "",
       control: "select",
       options: ["left", "center", "right", "justify"],
       table: {
@@ -42,7 +40,7 @@ const meta = {
       },
     },
     antialiased: {
-      description: "Font smoothing",
+      description: "",
       control: "boolean",
       table: {
         type: { summary: "boolean" },
@@ -50,7 +48,7 @@ const meta = {
       },
     },
     as: {
-      description: "HTML element to render",
+      description: "",
       control: "select",
       options: ["h1", "h2", "h3", "h4", "p", "span"],
       table: {
@@ -59,14 +57,14 @@ const meta = {
       },
     },
     className: {
-      description: "CSS classname",
+      description: "",
       control: "text",
       table: {
         type: { summary: "string" },
       },
     },
     code: {
-      description: "Enable code font",
+      description: "",
       control: "boolean",
       table: {
         type: { summary: "boolean" },
@@ -74,7 +72,7 @@ const meta = {
       },
     },
     color: {
-      description: "Text color",
+      description: "[`Tokens.foregroundColor`](/?path=/story/styles-tokens--foreground-color)",
       control: "select",
       options: [
         "lighter",
@@ -89,14 +87,11 @@ const meta = {
         "error",
       ],
       table: {
-        type: {
-          summary:
-            '"lighter" | "light" | "medium" | "heavy" | "base" | "disabled" | "link" | "success" | "warning" | "error"',
-        },
+        type: { summary: null },
       },
     },
     legibilityOptimized: {
-      description: "Legibility optimizations",
+      description: "",
       control: "boolean",
       table: {
         type: { summary: "boolean" },
@@ -104,32 +99,27 @@ const meta = {
       },
     },
     lineHeight: {
-      description: "Line spacing",
+      description: "[`Tokens.lineHeight`](/?path=/story/styles-tokens--line-height)",
       control: "select",
       options: ["condensed", "base", "expanded"],
       table: {
-        type: { summary: '"condensed" | "base" | "expanded"' },
+        type: { summary: null },
         defaultValue: { summary: "conditional" },
       },
     },
     size: {
-      description: "Text size",
+      description: "[`Tokens.fontSize`](/?path=/story/styles-tokens--font-size)",
       control: "text",
       table: {
-        type: {
-          summary: '"smaller" | "small" | "base" | "large" | "larger" | string',
-        },
+        type: { summary: null },
         defaultValue: { summary: "conditional" },
       },
     },
     weight: {
-      description: "Text thickness",
+      description: "[`Tokens.fontWeight`](/?path=/story/styles-tokens--font-weight)",
       control: "text",
       table: {
-        type: {
-          summary:
-            '"light" | "base" | "medium" | "semibold" | "bold" | "extrabold" | "black" | string',
-        },
+        type: { summary: null },
         defaultValue: { summary: "conditional" },
       },
     },
