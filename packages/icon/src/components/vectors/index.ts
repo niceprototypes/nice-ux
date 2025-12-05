@@ -1,74 +1,30 @@
-import * as Arrow from "./Arrow"
-import * as Attention from "./Attention"
-import * as Box from "./Box"
-import * as Brush from "./Brush"
-import * as Calendar from "./Calendar"
-import * as Cancel from "./Cancel"
-import * as Carat from "./Carat"
-import * as Check from "./Check"
-import * as Cloud from "./Cloud"
-import * as Code from "./Code"
-import * as Cog from "./Cog"
-import * as Contact from "./Contact"
-import * as Content from "./Content"
-import * as Edit from "./Edit"
-import * as Link from "./Link"
-import * as Lock from "./Lock"
-import * as Menu from "./Menu"
-import * as Message from "./Message"
-import * as Pause from "./Pause"
-import * as Placeholder from "./Placeholder"
-import * as Plus from "./Plus"
-import * as Profile from "./Profile"
-import * as Puzzle from "./Puzzle"
-import * as Search from "./Search"
-import * as Shuffle from "./Shuffle"
-import * as Skip from "./Skip"
-import * as Spinner from "./Spinner"
-import * as Trash from "./Trash"
-import * as Upload from "./Upload"
-import * as X from "./X"
-
-export type IconVariant = "fill" | "stroke"
-
-const iconMap = {
-  arrow: Arrow,
-  attention: Attention,
-  box: Box,
-  brush: Brush,
-  calendar: Calendar,
-  cancel: Cancel,
-  carat: Carat,
-  check: Check,
-  cloud: Cloud,
-  code: Code,
-  cog: Cog,
-  contact: Contact,
-  content: Content,
-  edit: Edit,
-  link: Link,
-  lock: Lock,
-  menu: Menu,
-  message: Message,
-  pause: Pause,
-  placeholder: Placeholder,
-  plus: Plus,
-  profile: Profile,
-  puzzle: Puzzle,
-  search: Search,
-  shuffle: Shuffle,
-  skip: Skip,
-  spinner: Spinner,
-  trash: Trash,
-  upload: Upload,
-  x: X,
-} as const
-
-export type IconName = keyof typeof iconMap
-
-export function getIcon(name: string, variant: IconVariant = "fill"): React.FC | undefined {
-  const icon = iconMap[name as IconName]
-  if (!icon) return undefined
-
-  return variant === "stroke" ? icon.Stroke : icon.Fill
-}
+export * as Arrow from "./arrow"
+export * as Attention from "./attention"
+export * as Box from "./box"
+export * as Brush from "./brush"
+export * as Calendar from "./calendar"
+export * as Cancel from "./cancel"
+export * as Carat from "./carat"
+export * as Check from "./check"
+export * as Cloud from "./cloud"
+export * as Code from "./code"
+export * as Cog from "./cog"
+export * as Contact from "./contact"
+export * as Content from "./content"
+export * as Edit from "./edit"
+export * as Link from "./link"
+export * as Lock from "./lock"
+export * as Menu from "./menu"
+export * as Message from "./message"
+export * as Pause from "./pause"
+export * as Placeholder from "./placeholder"
+export * as Plus from "./plus"
+export * as Profile from "./profile"
+export * as Puzzle from "./puzzle"
+export * as Search from "./search"
+export * as Shuffle from "./shuffle"
+export * as Skip from "./skip"
+export * as Spinner from "./spinner"
+export * as Trash from "./trash"
+export * as Upload from "./upload"
+export * as X from "./x"
