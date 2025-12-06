@@ -65,16 +65,10 @@ export interface IconProps {
   url?: string
   /** Icon color - uses ForegroundColorType from nice-styles tokens */
   color?: ForegroundColorType
-  /** Background color for the icon container */
-  backgroundColor?: string
   /** Icon size from nice-styles fontSize tokens */
   size?: IconSizeType
   /** SVG viewBox attribute for built-in icons */
   viewBox?: string
-  /** Whether the icon should spin */
-  spinning?: boolean
-  /** Rotation angle in degrees */
-  rotation?: number
   /** Stroke width for stroke type - uses BorderWidthType from nice-styles tokens */
   strokeWidth?: BorderWidthType
   /** Additional CSS class */

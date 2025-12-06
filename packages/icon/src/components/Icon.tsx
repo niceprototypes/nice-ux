@@ -1,6 +1,6 @@
 import * as React from "react"
 import { IconProps } from "../types"
-import { IconWrapperStyled, ImageStyled, SpinnerWrapper } from "./Icon.styles"
+import { IconWrapperStyled, ImageStyled } from "./Icon.styles"
 import { getEffectiveIcon } from "../services"
 
 /**
@@ -11,8 +11,6 @@ import { getEffectiveIcon } from "../services"
  * - Custom SVG URL support
  * - Sizing via nice-styles fontSize tokens
  * - Color via nice-styles foregroundColor tokens
- * - Spinning animation
- * - Rotation support
  * - TypeScript support
  *
  * @example
@@ -34,11 +32,8 @@ const Icon: React.FC<IconProps> = ({
   type = "stroke",
   url,
   color = "base",
-  backgroundColor,
   size = "base",
   viewBox = "0 0 16 16",
-  spinning = false,
-  rotation = 0,
   strokeWidth = "base",
   className,
 }) => {
@@ -47,18 +42,14 @@ const Icon: React.FC<IconProps> = ({
   return (
     <IconWrapperStyled
       $color={color}
-      $backgroundColor={backgroundColor}
       $size={size}
-      $rotation={rotation}
       $type={type}
       $strokeWidth={strokeWidth}
       className={className}
     >
-      <SpinnerWrapper $spinning={spinning}>
-        {url
-          ? <ImageStyled src={url} alt="" />
-          : SvgIcon && <SvgIcon viewBox={viewBox} />}
-      </SpinnerWrapper>
+      {url
+        ? <ImageStyled src={url} alt="" />
+        : SvgIcon && <SvgIcon viewBox={viewBox} />}
     </IconWrapperStyled>
   )
 }

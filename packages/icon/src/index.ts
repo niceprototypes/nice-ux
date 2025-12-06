@@ -30,7 +30,6 @@ export { iconNames } from "./types"
 export {
   IconWrapperStyled,
   ImageStyled,
-  SpinnerWrapper,
 } from "./components/Icon.styles"
 
 // Service exports
