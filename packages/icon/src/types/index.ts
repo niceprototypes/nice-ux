@@ -1,9 +1,5 @@
 import type { FontSizeType, BorderWidthType, ForegroundColorType } from "nice-styles"
 
-/**
- * Icon type - fill or stroke style
- */
-export type IconType = "fill" | "stroke"
 
 /**
  * Available icon names in the icon set
@@ -59,8 +55,8 @@ export type ColorPropertyType = "color" | "background-color" | "stroke" | "borde
 export interface IconProps {
   /** Icon name from the built-in icon set */
   name: IconNameType
-  /** Icon type - fill or stroke */
-  type?: IconType
+  /** Use stroke variant (true) or fill variant (false) */
+  stroke?: boolean
   /** Custom SVG URL (overrides name) */
   url?: string
   /** Icon color - uses ForegroundColorType from nice-styles tokens */

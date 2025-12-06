@@ -1,7 +1,6 @@
 import styled, { css } from "styled-components"
 import type { FontSizeType, BorderWidthType, ForegroundColorType } from "nice-styles"
 import { getToken } from "nice-styles"
-import { IconType } from "../types"
 
 /**
  * Main icon wrapper component with all styling
@@ -11,7 +10,7 @@ export const IconWrapperStyled = styled.div.withConfig({
 })<{
   $color?: ForegroundColorType
   $size?: FontSizeType
-  $type?: IconType
+  $stroke?: boolean
   $strokeWidth?: BorderWidthType
 }>`
   width: ${({ $size = "base" }) => getToken("fontSize", $size).var};
@@ -27,8 +26,8 @@ export const IconWrapperStyled = styled.div.withConfig({
 
   svg {
     path, circle, rect, line, polyline, polygon, ellipse {
-      ${({ $type, $color = "base", $strokeWidth = "base" }) =>
-          $type === "stroke"
+      ${({ $stroke = true, $color = "base", $strokeWidth = "base" }) =>
+          $stroke
               ? css`
                 fill: none;
                 stroke: ${getToken("foregroundColor", $color).var};

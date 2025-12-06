@@ -1,13 +1,13 @@
 import * as React from "react"
 import { IconProps } from "../types"
 import { IconWrapperStyled, ImageStyled } from "./Icon.styles"
-import { getEffectiveIcon } from "../services"
+import { getIcon } from "../services"
 
 /**
  * A flexible and customizable React icon component with built-in icon set
  *
  * Features:
- * - 30+ built-in icons with fill and stroke types
+ * - 30+ built-in icons with fill and stroke variants
  * - Custom SVG URL support
  * - Sizing via nice-styles fontSize tokens
  * - Color via nice-styles foregroundColor tokens
@@ -17,19 +17,22 @@ import { getEffectiveIcon } from "../services"
  * ```tsx
  * import Icon from 'nice-react-icon'
  *
+ * // Stroke variant (default)
+ * <Icon name="arrow" />
+ *
+ * // Fill variant
+ * <Icon name="arrow" stroke={false} />
+ *
  * // Using size tokens (smaller, small, base, large, larger)
  * <Icon name="arrow" size="large" />
  *
  * // Using color tokens (base, success, error, warning, etc.)
  * <Icon name="check" color="success" />
- *
- * // Custom stroke width (base, large)
- * <Icon name="arrow" strokeWidth="large" />
  * ```
  */
 const Icon: React.FC<IconProps> = ({
   name = "placeholder",
-  type = "stroke",
+  stroke = true,
   url,
   color = "base",
   size = "base",
@@ -37,13 +40,13 @@ const Icon: React.FC<IconProps> = ({
   strokeWidth = "base",
   className,
 }) => {
-  const SvgIcon = getEffectiveIcon({ name, type })
+  const SvgIcon = getIcon(name, stroke)
 
   return (
     <IconWrapperStyled
       $color={color}
       $size={size}
-      $type={type}
+      $stroke={stroke}
       $strokeWidth={strokeWidth}
       className={className}
     >
