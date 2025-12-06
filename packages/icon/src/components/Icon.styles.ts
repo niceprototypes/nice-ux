@@ -1,7 +1,7 @@
 import styled, { keyframes, css } from "styled-components"
 import type { FontSizeType, BorderWidthType, ForegroundColorType } from "nice-styles"
 import { getToken } from "nice-styles"
-import { IconVariant } from "../types"
+import { IconType } from "../types"
 
 /**
  * Rotation animation for spinning icons
@@ -42,10 +42,8 @@ export const IconWrapperStyled = styled.div.withConfig({
   $color?: ForegroundColorType
   $backgroundColor?: string
   $size?: FontSizeType
-  $borderRadius?: number
-  $imageSize?: string
   $rotation?: number
-  $variant?: IconVariant
+  $type?: IconType
   $strokeWidth?: BorderWidthType
 }>`
   width: ${({ $size = "base" }) => getToken("fontSize", $size).var};
@@ -55,21 +53,19 @@ export const IconWrapperStyled = styled.div.withConfig({
   align-items: center;
   background-color: ${({ $backgroundColor }) =>
       $backgroundColor ? `${$backgroundColor}` : "transparent"};
-  border-radius: ${({ $borderRadius }) =>
-      $borderRadius ? `var(--border-radius-${$borderRadius})` : "0"};
   transition: background-color var(--animation-duration-1, 0.2s) var(--animation-easing-1, ease);
 
   ${({ $rotation = 0 }) => ($rotation !== 0 ? `transform: rotate(${$rotation}deg);` : "")}
 
   img, svg {
-    width: ${({ $imageSize }) => $imageSize};
-    aspect-ratio: 1;  
+    width: 100%;
+    aspect-ratio: 1;
   }
 
   svg {
-    path, circle, rect {
-      ${({ $variant, $color = "base", $strokeWidth = "base" }) =>
-          $variant === "stroke"
+    path, circle, rect, line, polyline, polygon, ellipse {
+      ${({ $type, $color = "base", $strokeWidth = "base" }) =>
+          $type === "stroke"
               ? css`
                 fill: none;
                 stroke: ${getToken("foregroundColor", $color).var};

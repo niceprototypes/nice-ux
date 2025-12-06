@@ -7,8 +7,7 @@ import { getEffectiveIcon } from "../services"
  * A flexible and customizable React icon component with built-in icon set
  *
  * Features:
- * - 30+ built-in icons with fill and stroke variants
- * - Custom React component support via renderImage
+ * - 30+ built-in icons with fill and stroke types
  * - Custom SVG URL support
  * - Sizing via nice-styles fontSize tokens
  * - Color via nice-styles foregroundColor tokens
@@ -28,53 +27,37 @@ import { getEffectiveIcon } from "../services"
  *
  * // Custom stroke width (base, large)
  * <Icon name="arrow" strokeWidth="large" />
- *
- * // Custom render function with access to imageSize
- * <Icon
- *   renderImage={(imageSize) => (
- *     <MyCustomComponent style={{ width: imageSize }} />
- *   )}
- *   size="base"
- *   imageSize="50%"
- * />
  * ```
  */
 const Icon: React.FC<IconProps> = ({
   name = "placeholder",
-  variant = "stroke",
+  type = "stroke",
   url,
-  renderImage,
   color = "base",
   backgroundColor,
   size = "base",
-  borderRadius,
-  imageSize = "100%",
   viewBox = "0 0 16 16",
   spinning = false,
   rotation = 0,
   strokeWidth = "base",
   className,
 }) => {
-  const SvgIcon = getEffectiveIcon({ name, variant })
+  const SvgIcon = getEffectiveIcon({ name, type })
 
   return (
     <IconWrapperStyled
       $color={color}
       $backgroundColor={backgroundColor}
       $size={size}
-      $borderRadius={borderRadius}
-      $imageSize={imageSize}
       $rotation={rotation}
-      $variant={variant}
+      $type={type}
       $strokeWidth={strokeWidth}
       className={className}
     >
       <SpinnerWrapper $spinning={spinning}>
-        {renderImage
-          ? renderImage(imageSize)
-          : url
-            ? <ImageStyled src={url} alt="" />
-            : SvgIcon && <SvgIcon viewBox={viewBox} />}
+        {url
+          ? <ImageStyled src={url} alt="" />
+          : SvgIcon && <SvgIcon viewBox={viewBox} />}
       </SpinnerWrapper>
     </IconWrapperStyled>
   )

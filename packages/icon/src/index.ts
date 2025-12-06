@@ -19,10 +19,12 @@ export type {
   IconProps,
   IconNameType,
   IconSizeType,
-  IconBorderRadiusType,
-  IconVariant,
+  IconType,
   ColorPropertyType,
 } from "./types"
+
+// Constant exports
+export { iconNames } from "./types"
 
 // Style exports for advanced customization
 export {

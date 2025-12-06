@@ -1,5 +1,3 @@
-<svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-  <g>
-  <path d="M3 12.6667L13 2.66669M13 12.6667L3 2.66669"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+  <path d="M.5,15.5L15.5.5M15.5,15.5L.5.5"/>
 </svg>

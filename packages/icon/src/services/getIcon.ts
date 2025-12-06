@@ -28,7 +28,7 @@ import * as Spinner from "../components/vectors/spinner"
 import * as Trash from "../components/vectors/trash"
 import * as Upload from "../components/vectors/upload"
 import * as X from "../components/vectors/x"
-import type { IconVariant } from "../types"
+import type { IconType } from "../types"
 
 const iconMap = {
   arrow: Arrow,
@@ -66,16 +66,16 @@ const iconMap = {
 export type IconName = keyof typeof iconMap
 
 /**
- * Gets an icon component by name and variant
+ * Gets an icon component by name and type
  * @param name - The icon name
- * @param variant - The icon variant (fill or stroke)
+ * @param type - The icon type (fill or stroke)
  * @returns The React component for the icon, or undefined if not found
  */
-const getIcon = (name: string, variant: IconVariant = "fill"): React.FC | undefined => {
+const getIcon = (name: string, type: IconType = "fill"): React.FC | undefined => {
   const icon = iconMap[name as IconName]
   if (!icon) return undefined
 
-  return variant === "stroke" ? icon.Stroke : icon.Fill
+  return type === "stroke" ? icon.Stroke : icon.Fill
 }
 
 export default getIcon
