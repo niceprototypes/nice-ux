@@ -1,4 +1,5 @@
 import * as React from "react"
+import type { FontSizeType, BorderWidthType, ForegroundColorType } from "nice-styles"
 
 /**
  * Icon variant - fill or stroke style
@@ -41,9 +42,9 @@ export type IconNameType =
   | "x"
 
 /**
- * Icon size type - maps to CSS variables
+ * Icon size type - uses FontSizeType from nice-styles tokens
  */
-export type IconSizeType = 1 | 2 | 3 | 4
+export type IconSizeType = FontSizeType
 
 /**
  * Border radius size type
@@ -51,54 +52,40 @@ export type IconSizeType = 1 | 2 | 3 | 4
 export type IconBorderRadiusType = 1 | 2 | 3
 
 /**
- * Status types for theming
- */
-export type StatusType =
-  | "active"
-  | "success"
-  | "error"
-  | "warning"
-  | "default"
-  | "muted"
-  | "highlighted"
-  | "primary"
-  | "secondary"
-
-/**
  * Color property types for styling
  */
-export type ColorPropertyType = "color" | "background-color" | "stroke" | "border-color"
+export type ColorPropertyType = "color" | "background-color" | "stroke" | "border-color" | "fill"
 
 /**
  * Props for the Icon component
  */
 export interface IconProps {
   /** Icon name from the built-in icon set */
-  name?: IconNameType
+  name: IconNameType
   /** Icon variant - fill or stroke */
   variant?: IconVariant
   /** Custom SVG URL (overrides name) */
   url?: string
-  /** Icon color (CSS value) */
-  color?: string
+  /** Custom render function that receives imageSize and returns a React element (overrides url and name) */
+  renderImage?: (imageSize: string) => React.ReactElement
+  /** Icon color - uses ForegroundColorType from nice-styles tokens */
+  color?: ForegroundColorType
   /** Background color for the icon container */
   backgroundColor?: string
-  /** Icon size (1-4, smallest to largest) */
+  /** Icon size from nice-styles fontSize tokens */
   size?: IconSizeType
   /** Border radius for the icon container */
   borderRadius?: IconBorderRadiusType
   /** Image size as percentage of container */
   imageSize?: string
-  /** Status for automatic color theming */
-  status?: StatusType
+  /** SVG viewBox attribute for built-in icons */
+  viewBox?: string
   /** Whether the icon should spin */
   spinning?: boolean
   /** Rotation angle in degrees */
   rotation?: number
-  /** Stroke width for stroke variant */
-  strokeWidth?: 1 | 2
-  /** Whether the icon is in active state */
-  isActive?: boolean
+  /** Stroke width for stroke variant - uses BorderWidthType from nice-styles tokens */
+  strokeWidth?: BorderWidthType
   /** Additional CSS class */
   className?: string
 }
