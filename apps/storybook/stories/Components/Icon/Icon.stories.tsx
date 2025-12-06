@@ -1,11 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import Icon from "nice-react-icon"
-import VariableList from "../../../src/components/VariableList"
-import { prepareName } from "./stories/name"
-import { prepareColor } from "./stories/color"
-import { prepareStatus } from "./stories/status"
-import { prepareSpinning } from "./stories/spinning"
-import { prepareRotation } from "./stories/rotation"
+import Icon, { iconNames } from "nice-react-icon"
+import Story from "../../../src/components/Story"
 
 /**
  * A flexible and customizable React icon component with built-in icon set.
@@ -169,26 +164,41 @@ type Story = StoryObj<typeof meta>
 
 export const Name: Story = {
   name: "name",
-  render: () => <VariableList variables={prepareName()} />,
+  render: () => (
+    <Story
+      variables={iconNames.map(name => ({
+        name,
+        description: `name="${name}"`,
+        demo: <Icon name={name} />,
+        code: `<Icon name="${name}"/>`,
+      }))}
+    />
+  ),
 }
+
+const foregroundColors = [
+  "lighter",
+  "light",
+  "medium",
+  "heavy",
+  "base",
+  "disabled",
+  "link",
+  "success",
+  "warning",
+  "error",
+] as const
 
 export const Color: Story = {
   name: "color",
-  render: () => <VariableList variables={prepareColor()} />,
+  render: () => (
+    <Story
+      variables={foregroundColors.map(color => ({
+        name: color,
+        description: `color="${color}"`,
+        demo: <Icon name="placeholder" color={color} />,
+        code: `<Icon color="${color}"/>`,
+      }))}
+    />
+  ),
 }
-
-/*
-export const Status: Story = {
-  name: "status",
-  render: () => <VariableList variables={prepareStatus()} />,
-}
-
-export const Spinning: Story = {
-  name: "spinning",
-  render: () => <VariableList variables={prepareSpinning()} />,
-}
-
-export const Rotation: Story = {
-  name: "rotation",
-  render: () => <VariableList variables={prepareRotation()} />,
-}*/

@@ -1,10 +1,11 @@
 import { getToken } from "nice-styles"
+import type { StoryVariable } from "../components/Story"
 
-export const createVariables = <T extends string | { name: string }>(
+export const createToken = <T extends string | { name: string }>(
   groupName: string,
   variants: T[],
   renderDemo?: (variant: T extends string ? string : T) => React.ReactNode
-) => {
+): StoryVariable[] => {
   return variants.map(variant => {
     const itemName = typeof variant === "string" ? variant : variant.name
 

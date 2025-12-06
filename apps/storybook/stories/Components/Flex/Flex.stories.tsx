@@ -1,15 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import Flex from "nice-react-flex"
-import VariableList from "../../../src/components/VariableList"
-import { prepareBasic } from "./stories/basic"
-import { prepareDirection } from "./stories/direction"
-import { prepareGap } from "./stories/gap"
-import { prepareSpacing } from "./stories/spacing"
-import { prepareType } from "./stories/type"
-import { prepareGrow } from "./stories/grow"
-import { prepareJustifyContent } from "./stories/justifyContent"
-import { prepareAlignItems } from "./stories/alignItems"
-import { prepareWrap } from "./stories/wrap"
+import Flex, { GapSize } from "nice-react-flex"
+import { getToken } from "nice-styles"
+import Story from "../../../src/components/Story"
+import DemoDots from "../../../src/components/DemoDots"
 
 /**
  * A highly flexible and responsive flexbox container component that provides
@@ -131,47 +124,385 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+const twoDots = [
+  {
+    color: getToken("foregroundColor", "error").var,
+    height: getToken("cellHeight", "smaller").var,
+    width: getToken("cellHeight", "smaller").var,
+  },
+  {
+    color: getToken("foregroundColor", "warning").var,
+    height: getToken("cellHeight", "smaller").var,
+    width: getToken("cellHeight", "smaller").var,
+  },
+]
+
+const threeDots = [
+  ...twoDots,
+  {
+    color: getToken("foregroundColor", "link").var,
+    height: getToken("cellHeight", "smaller").var,
+    width: getToken("cellHeight", "smaller").var,
+  },
+]
+
 export const Basic: Story = {
   name: "basic",
-  render: () => <VariableList variables={prepareBasic()} />,
+  render: () => (
+    <Story
+      variables={[
+        {
+          name: "",
+          demo: <DemoDots dots={twoDots} />,
+          code: `<Flex>\n  {children}\n</Flex>`,
+        },
+      ]}
+    />
+  ),
 }
 
 export const Direction: Story = {
   name: "direction",
-  render: () => <VariableList variables={prepareDirection()} />,
+  render: () => (
+    <Story
+      variables={["row", "column"].map(value => ({
+        name: value,
+        description: `direction="${value}"`,
+        demo: <DemoDots direction={value} dots={twoDots} />,
+        code: `<Flex direction="${value}">\n  {children}\n</Flex>`,
+      }))}
+    />
+  ),
 }
 
 export const Gap: Story = {
   name: "gap",
-  render: () => <VariableList variables={prepareGap()} />,
+  render: () => (
+    <Story
+      variables={["smaller", "small", "base", "large", "larger"].map(value => ({
+        name: value,
+        description: `gap="${value}"`,
+        value: getToken("gap", value).value,
+        demo: <DemoDots gap={value} dots={threeDots} />,
+        code: `<Flex gap="${value}">\n  {children}\n</Flex>`,
+      }))}
+    />
+  ),
 }
 
 export const Spacing: Story = {
   name: "spacing",
-  render: () => <VariableList variables={prepareSpacing()} />,
+  render: () => (
+    <Story
+      variables={["smaller", "small", "base", "large", "larger"].map(value => ({
+        name: value,
+        description: `spacing="${value}"`,
+        value: getToken("gap", value).value,
+        demo: <DemoDots spacing={value} dots={twoDots} bordered />,
+        code: `<Flex spacing="${value}">\n  {children}\n</Flex>`,
+      }))}
+    />
+  ),
 }
 
 export const Type: Story = {
   name: "type",
-  render: () => <VariableList variables={prepareType()} />,
+  render: () => (
+    <Story
+      variables={["padding", "margin"].map(value => ({
+        name: value,
+        description: `type="${value}"`,
+        default: value === "padding",
+        demo: (
+          <Flex direction="column">
+            <Flex
+              style={{
+                border: `${getToken("borderWidth").var} solid ${value === "margin" ? getToken("borderColor").var : getToken("borderColor", "heavy").var}`,
+                borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2 + 2px)`,
+              }}
+            >
+              <Flex
+                type={value}
+                spacing={{ sm: { all: "base" as GapSize } }}
+                style={{
+                  border: `${getToken("borderWidth").var} solid ${value === "margin" ? getToken("borderColor", "heavy").var : "transparent"}`,
+                  borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2 + 2px)`,
+                }}
+              >
+                <DemoDots dots={twoDots} />
+              </Flex>
+            </Flex>
+          </Flex>
+        ),
+        code: `<Flex type="${value}">\n  {children}\n</Flex>`,
+      }))}
+    />
+  ),
 }
 
 export const Grow: Story = {
   name: "grow",
-  render: () => <VariableList variables={prepareGrow()} />,
+  render: () => (
+    <Story
+      variables={[
+        {
+          name: "0",
+          description: "grow={0}",
+          demo: (
+            <DemoDots
+              bordered
+              width="12rem"
+              dots={[
+                {
+                  color: getToken("foregroundColor", "error").var,
+                  height: getToken("cellHeight", "smaller").var,
+                  width: getToken("cellHeight", "smaller").var,
+                  grow: 0,
+                },
+                {
+                  color: getToken("foregroundColor", "link").var,
+                  height: getToken("cellHeight", "smaller").var,
+                  grow: 1,
+                },
+              ]}
+            />
+          ),
+          code: `<Flex>\n  <Flex grow={0}>\n    {children}\n  </Flex>\n  <Flex grow={1}>\n    {children}\n  </Flex>\n</Flex>`,
+        },
+        {
+          name: "1",
+          description: "grow={1}",
+          demo: (
+            <DemoDots
+              bordered
+              width="12rem"
+              dots={[
+                {
+                  color: getToken("foregroundColor", "error").var,
+                  height: getToken("cellHeight", "smaller").var,
+                  grow: 1,
+                },
+                {
+                  color: getToken("foregroundColor", "link").var,
+                  height: getToken("cellHeight", "smaller").var,
+                  grow: 1,
+                },
+              ]}
+            />
+          ),
+          code: `<Flex>\n  <Flex grow={1}>\n    {children}\n  </Flex>\n  <Flex grow={1}>\n    {children}\n  </Flex>\n</Flex>`,
+        },
+        {
+          name: "2",
+          description: "grow={2}",
+          demo: (
+            <DemoDots
+              bordered
+              width="12rem"
+              dots={[
+                {
+                  color: getToken("foregroundColor", "error").var,
+                  height: getToken("cellHeight", "smaller").var,
+                  grow: 2,
+                },
+                {
+                  color: getToken("foregroundColor", "link").var,
+                  height: getToken("cellHeight", "smaller").var,
+                  grow: 1,
+                },
+              ]}
+            />
+          ),
+          code: `<Flex>\n  <Flex grow={2}>\n    {children}\n  </Flex>\n  <Flex grow={1}>\n    {children}\n  </Flex>\n</Flex>`,
+        },
+      ]}
+    />
+  ),
 }
 
 export const JustifyContent: Story = {
   name: "justifyContent",
-  render: () => <VariableList variables={prepareJustifyContent()} />,
+  render: () => (
+    <Story
+      variables={[
+        "flex-start",
+        "flex-end",
+        "center",
+        "space-between",
+        "space-around",
+        "space-evenly",
+      ].map(value => ({
+        name: value,
+        description: `justifyContent="${value}"`,
+        demo: (
+          <DemoDots justifyContent={value} dots={threeDots} width="12rem" bordered />
+        ),
+        code: `<Flex justifyContent="${value}">\n  {children}\n</Flex>`,
+      }))}
+    />
+  ),
 }
 
 export const AlignItems: Story = {
   name: "alignItems",
-  render: () => <VariableList variables={prepareAlignItems()} />,
+  render: () => (
+    <Story
+      variables={[
+        {
+          name: "flex-start",
+          description: 'alignItems="flex-start"',
+          demo: <DemoDots alignItems="flex-start" dots={threeDots} height="6rem" bordered />,
+          code: `<Flex alignItems="flex-start">\n  {children}\n</Flex>`,
+        },
+        {
+          name: "flex-end",
+          description: 'alignItems="flex-end"',
+          demo: <DemoDots alignItems="flex-end" dots={threeDots} height="6rem" bordered />,
+          code: `<Flex alignItems="flex-end">\n  {children}\n</Flex>`,
+        },
+        {
+          name: "center",
+          description: 'alignItems="center"',
+          demo: <DemoDots alignItems="center" dots={threeDots} height="6rem" bordered />,
+          code: `<Flex alignItems="center">\n  {children}\n</Flex>`,
+        },
+        {
+          name: "baseline",
+          description: 'alignItems="baseline"',
+          demo: (
+            <DemoDots
+              alignItems="baseline"
+              dots={[
+                {
+                  color: getToken("foregroundColor", "error").var,
+                  height: getToken("cellHeight", "small").var,
+                  width: getToken("cellHeight", "smaller").var,
+                },
+                {
+                  color: getToken("foregroundColor", "warning").var,
+                  height: getToken("cellHeight", "smaller").var,
+                  width: getToken("cellHeight", "smaller").var,
+                },
+                {
+                  color: getToken("foregroundColor", "link").var,
+                  height: getToken("cellHeight").var,
+                  width: getToken("cellHeight", "smaller").var,
+                },
+              ]}
+              height="6rem"
+              bordered
+            />
+          ),
+          code: `<Flex alignItems="baseline">\n  {children}\n</Flex>`,
+        },
+        {
+          name: "stretch",
+          description: 'alignItems="stretch"',
+          demo: (
+            <DemoDots
+              alignItems="stretch"
+              dots={[
+                {
+                  color: getToken("foregroundColor", "error").var,
+                  width: getToken("cellHeight", "smaller").var,
+                },
+                {
+                  color: getToken("foregroundColor", "warning").var,
+                  width: getToken("cellHeight", "smaller").var,
+                },
+                {
+                  color: getToken("foregroundColor", "link").var,
+                  width: getToken("cellHeight", "smaller").var,
+                },
+              ]}
+              height="6rem"
+              bordered
+            />
+          ),
+          code: `<Flex alignItems="stretch">\n  {children}\n</Flex>`,
+        },
+      ]}
+    />
+  ),
 }
 
 export const Wrap: Story = {
   name: "wrap",
-  render: () => <VariableList variables={prepareWrap()} />,
+  render: () => {
+    const wrapDots = [
+      {
+        color: getToken("foregroundColor", "error").var,
+        height: getToken("cellHeight", "small").var,
+        width: getToken("cellHeight", "small").var,
+      },
+      {
+        color: getToken("foregroundColor", "warning").var,
+        height: getToken("cellHeight", "small").var,
+        width: getToken("cellHeight", "small").var,
+      },
+      {
+        color: getToken("foregroundColor", "link").var,
+        height: getToken("cellHeight", "small").var,
+        width: getToken("cellHeight", "small").var,
+      },
+      {
+        color: getToken("foregroundColor", "success").var,
+        height: getToken("cellHeight", "small").var,
+        width: getToken("cellHeight", "small").var,
+      },
+      {
+        color: getToken("foregroundColor", "disabled").var,
+        height: getToken("cellHeight", "small").var,
+        width: getToken("cellHeight", "small").var,
+      },
+    ]
+
+    const nowrapDots = wrapDots.map(dot => ({ ...dot, grow: 1, width: undefined }))
+
+    return (
+      <Story
+        variables={[
+          {
+            name: "nowrap",
+            description: 'wrap="nowrap"',
+            demo: (
+              <DemoDots
+                wrap="nowrap"
+                dots={nowrapDots}
+                width={`calc(${getToken("cellHeight", "small").var} * 3 + 2px)`}
+                bordered
+              />
+            ),
+            code: `<Flex wrap="nowrap">\n  {children}\n</Flex>`,
+          },
+          {
+            name: "wrap",
+            description: 'wrap="wrap"',
+            demo: (
+              <DemoDots
+                wrap="wrap"
+                dots={wrapDots}
+                width={`calc(${getToken("cellHeight", "small").var} * 3 + 2px)`}
+                bordered
+              />
+            ),
+            code: `<Flex wrap="wrap">\n  {children}\n</Flex>`,
+          },
+          {
+            name: "wrap-reverse",
+            description: 'wrap="wrap-reverse"',
+            demo: (
+              <DemoDots
+                wrap="wrap-reverse"
+                dots={wrapDots}
+                width={`calc(${getToken("cellHeight", "small").var} * 3 + 2px)`}
+                bordered
+              />
+            ),
+            code: `<Flex wrap="wrap-reverse">\n  {children}\n</Flex>`,
+          },
+        ]}
+      />
+    )
+  },
 }

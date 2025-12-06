@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import Button from "nice-react-button"
-import VariableList from "../../../src/components/VariableList"
-import { prepareOnClick } from "./stories/onClick"
+import Story from "../../../src/components/Story"
 
 /**
  * A flexible and customizable React button component with built-in theming support.
@@ -225,5 +224,20 @@ type Story = StoryObj<typeof meta>
 
 export const OnClick: Story = {
   name: "onClick",
-  render: () => <VariableList variables={prepareOnClick()} />,
+  render: () => (
+    <Story
+      variables={[
+        {
+          name: "onClick",
+          description: "Click handler function",
+          demo: (
+            <Button onClick={() => alert("Button clicked!")}>
+              Click Me
+            </Button>
+          ),
+          code: `<Button onClick={() => console.log("clicked")}>\n  Click Me\n</Button>`,
+        },
+      ]}
+    />
+  ),
 }
