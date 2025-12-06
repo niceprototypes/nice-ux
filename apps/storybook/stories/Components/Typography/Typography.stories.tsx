@@ -372,17 +372,20 @@ export const LineHeight: Story = {
         variables={[
           {
             name: "condensed",
-            description: 'lineHeight="condensed"',
+            description: "",
+            value: getToken("lineHeight", "condensed").value,
             demo: <Typography lineHeight="condensed">{loremIpsum}</Typography>,
           },
           {
             name: "base",
-            description: 'lineHeight="base"',
+            description: "",
+            value: getToken("lineHeight", "base").value,
             demo: <Typography lineHeight="base">{loremIpsum}</Typography>,
           },
           {
             name: "expanded",
-            description: 'lineHeight="expanded"',
+            description: "",
+            value: getToken("lineHeight", "expanded").value,
             demo: <Typography lineHeight="expanded">{loremIpsum}</Typography>,
           },
         ]}

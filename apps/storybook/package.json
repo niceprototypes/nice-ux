@@ -5,6 +5,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "clean:cache": "rm -rf node_modules/.cache/storybook && lsof -ti:6006 | xargs kill -9 2>/dev/null; npm run dev",
     "storybook": "storybook dev -p 6006 --no-open",
     "build-storybook": "storybook build",
     "deploy": "npm run build-storybook && rm -rf ../nice-website-2025/public/storybook && cp -r storybook-static ../nice-website-2025/public/storybook",
@@ -34,14 +35,14 @@
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "storybook": "^9.1.10",
-    "styled-components": "6.1.19"
+    "styled-components": "6.1.19",
+    "nice-vite-symlink-watcher": "file:../nice-vite-symlink-watcher"
   },
   "devDependencies": {
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^5.0.4",
     "concurrently": "^9.2.1",
-    "nice-vite-symlink-watcher": "^0.1.0",
     "nodemon": "^3.1.0",
     "typescript": "^5.5.3",
     "vite": "^7.1.9"

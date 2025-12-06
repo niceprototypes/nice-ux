@@ -1,5 +1,5 @@
 a.sbdocs {
-  color: hsla(200, 100%, 50%, 1);
+  color: rgb(0, 156, 253);
 }
 
 .sb-anchor > h3 {
@@ -41,6 +41,18 @@ a.sbdocs {
 .docblock-argstable th:nth-child(4),
 .docblock-argstable td:nth-child(4) {
   display: none;
+}
+
+.docblock-argstable a code {
+  background-color: rgb(240, 249, 253) !important;
+  border-color: rgb(215, 239, 253) !important;
+  color: rgb(0, 156, 253) !important;
+}
+
+.docblock-argstable a:hover code {
+  background-color: rgb(2, 156, 253) !important;
+  border-color: rgb(2, 156, 253) !important;
+  color: white !important;
 }
 
 #storybook-docs h1.sbdocs-title + div:not(.sb-anchor) {

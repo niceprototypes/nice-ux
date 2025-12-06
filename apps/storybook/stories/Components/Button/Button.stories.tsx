@@ -29,14 +29,14 @@ const meta = {
   argTypes: {
     children: {
       name: "children",
-      description: "Button text content",
+      description: "",
       control: "text",
       table: {
         type: { summary: "React.ReactNode" },
       },
     },
     antialiased: {
-      description: "Whether to apply antialiased font rendering to the button text",
+      description: "",
       control: "boolean",
       table: {
         type: { summary: "boolean" },
@@ -44,51 +44,51 @@ const meta = {
       },
     },
     "aria-label": {
-      description: "ARIA label for accessibility",
+      description: "",
       control: "text",
       table: {
         type: { summary: "string" },
       },
     },
     backgroundColor: {
-      description: "Custom background color that overrides theme styles. Works alongside backgroundImage if both are provided",
+      description: "",
       control: "color",
       table: {
         type: { summary: "string" },
       },
     },
     backgroundImage: {
-      description: "Custom background image that overrides theme styles. Works alongside backgroundColor if both are provided",
+      description: "",
       control: "text",
       table: {
         type: { summary: "string" },
       },
     },
     borderColor: {
-      description: "Custom border color that overrides theme styles",
+      description: "",
       control: "color",
       table: {
         type: { summary: "string" },
       },
     },
     borderRadius: {
-      description: "Custom border radius for all corners (e.g., '8px', '0.5rem', '50%'). If not provided, defaults to pill shape (50% of button height)",
+      description: "",
       control: "text",
       table: {
         type: { summary: "string" },
       },
     },
     borderWidth: {
-      description: "Border width of the button (1-4)",
+      description: "[`Tokens.borderWidth`](/?path=/story/styles-tokens--border-width)",
       control: "select",
-      options: [1, 2, 3, 4],
+      options: ["base", "large"],
       table: {
-        type: { summary: "1 | 2 | 3 | 4" },
-        defaultValue: { summary: "1" },
+        type: { summary: null },
+        defaultValue: { summary: '"base"' },
       },
     },
     bordered: {
-      description: "Whether the button should have a border",
+      description: "",
       control: "boolean",
       table: {
         type: { summary: "boolean" },
@@ -96,35 +96,29 @@ const meta = {
       },
     },
     className: {
-      description: "Additional CSS class for custom styling",
+      description: "",
       control: "text",
       table: {
         type: { summary: "string" },
       },
     },
     condensed: {
-      description: "Whether to remove icon slots when no icons are present",
+      description: "",
       control: "boolean",
       table: {
         type: { summary: "boolean" },
         defaultValue: { summary: "false" },
       },
     },
-    config: {
-      description: "Theme configuration overrides. Allows partial overrides of the default theme values",
-      table: {
-        type: { summary: "ThemeConfig" },
-      },
-    },
     "data-testid": {
-      description: "Test ID for testing",
+      description: "",
       control: "text",
       table: {
         type: { summary: "string" },
       },
     },
     disabled: {
-      description: "Whether the button is disabled",
+      description: "",
       control: "boolean",
       table: {
         type: { summary: "boolean" },
@@ -132,16 +126,16 @@ const meta = {
       },
     },
     fontWeight: {
-      description: "Font weight of the button text (1-4)",
+      description: "[`Tokens.fontWeight`](/?path=/story/styles-tokens--font-weight)",
       control: "select",
-      options: [1, 2, 3, 4],
+      options: ["light", "base", "medium", "semibold", "bold", "extrabold", "black"],
       table: {
-        type: { summary: "1 | 2 | 3 | 4" },
-        defaultValue: { summary: "3" },
+        type: { summary: null },
+        defaultValue: { summary: '"medium"' },
       },
     },
     fullWidth: {
-      description: "Whether the button should take full width of container",
+      description: "",
       control: "boolean",
       table: {
         type: { summary: "boolean" },
@@ -149,14 +143,14 @@ const meta = {
       },
     },
     icon: {
-      description: "Icon name from nice-react-icon to display",
+      description: "",
       control: "text",
       table: {
         type: { summary: "string" },
       },
     },
     iconPosition: {
-      description: "Position of the icon relative to text",
+      description: "",
       control: "select",
       options: ["left", "right"],
       table: {
@@ -165,7 +159,7 @@ const meta = {
       },
     },
     iconRotation: {
-      description: "Rotation of the icon in degrees",
+      description: "",
       control: "number",
       table: {
         type: { summary: "number" },
@@ -173,7 +167,7 @@ const meta = {
       },
     },
     mode: {
-      description: "Theme mode for light/dark appearance",
+      description: "",
       control: "select",
       options: ["light", "dark"],
       table: {
@@ -182,22 +176,22 @@ const meta = {
       },
     },
     onClick: {
-      description: "Click handler",
+      description: "",
       table: {
         type: { summary: "() => void" },
       },
     },
     size: {
-      description: "Size of the button (1-4, smallest to largest)",
+      description: "[`Tokens.cellHeight`](/?path=/story/styles-tokens--cell-height)",
       control: "select",
-      options: [1, 2, 3, 4],
+      options: ["smaller", "small", "base", "large", "larger"],
       table: {
-        type: { summary: "1 | 2 | 3 | 4" },
-        defaultValue: { summary: "3" },
+        type: { summary: null },
+        defaultValue: { summary: '"base"' },
       },
     },
     state: {
-      description: "Interactive state of the button. Affects styling and behavior",
+      description: "",
       control: "select",
       options: ["default", "disabled", "attention", "success", "warning"],
       table: {
@@ -206,7 +200,7 @@ const meta = {
       },
     },
     status: {
-      description: "Visual status/styling variant of the button",
+      description: "",
       control: "select",
       options: ["primary", "secondary", "default", "muted", "highlighted"],
       table: {
@@ -215,7 +209,7 @@ const meta = {
       },
     },
     type: {
-      description: "HTML button type",
+      description: "",
       control: "select",
       options: ["button", "submit", "reset"],
       table: {

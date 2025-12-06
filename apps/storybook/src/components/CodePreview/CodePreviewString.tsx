@@ -50,6 +50,9 @@ const patterns: Array<[RegExp, Token[]]> = [
     ],
   ],
 
+  // Self-closing bracket: /> (with optional preceding whitespace)
+  [/^(\s*)\/>/, [[1], ["/>", colors.markup]]],
+
   // Closing bracket: >
   [/^>/, [[">", colors.markup]]],
 

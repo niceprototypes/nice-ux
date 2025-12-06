@@ -38,6 +38,6 @@ export const prepareName = () =>
   iconNames.map(name => ({
     name,
     description: `name="${name}"`,
-    demo: <Icon name={name} color={getToken("foregroundColor", "base").var} />,
-    code: `<Icon name="${name}" />`,
+    demo: <Icon name={name} color="success" />,
+    code: `<Icon name="${name}"/>`,
   }))

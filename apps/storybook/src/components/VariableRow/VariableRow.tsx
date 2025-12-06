@@ -14,7 +14,7 @@ const VariableRow: React.FC<VariableRowProps> = ({
   default: isDefault,
 }) => {
   return (
-    <Flex gap="base">
+    <Flex gap="large">
       <CellFlex direction="column" justifyContent="center" $width="16rem">
         <Flex alignItems="center" gap="small">
           <Typography as="span" code weight="medium">

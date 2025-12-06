@@ -29,18 +29,16 @@ const meta = {
   },
   tags: ["autodocs"],
   argTypes: {
-    // Required props first
     children: {
       name: "children",
-      description: "Child elements",
+      description: "",
       control: "text",
       table: {
         type: { summary: "React.ReactNode" },
       },
     },
-    // Optional props alphabetically
     alignItems: {
-      description: "Align items on cross axis",
+      description: "",
       control: "select",
       options: ["flex-start", "flex-end", "center", "baseline", "stretch"],
       table: {
@@ -51,14 +49,14 @@ const meta = {
       },
     },
     className: {
-      description: "CSS classname",
+      description: "",
       control: "text",
       table: {
         type: { summary: "string" },
       },
     },
     direction: {
-      description: "Flex direction",
+      description: "",
       control: "select",
       options: ["row", "column"],
       table: {
@@ -66,22 +64,22 @@ const meta = {
       },
     },
     gap: {
-      description: "Space between flex items using CSS gap",
+      description: "[`Tokens.gap`](/?path=/story/styles-tokens--gap)",
       control: "select",
       options: ["smaller", "small", "base", "large", "larger"],
       table: {
-        type: { summary: '"smaller" | "small" | "base" | "large" | "larger"' },
+        type: { summary: null },
       },
     },
     grow: {
-      description: "Flex grow",
+      description: "",
       control: "number",
       table: {
         type: { summary: "number" },
       },
     },
     justifyContent: {
-      description: "Align items on main axis",
+      description: "",
       control: "select",
       options: [
         "flex-start",
@@ -99,19 +97,19 @@ const meta = {
       },
     },
     spacing: {
-      description: "Padding or margin around children",
+      description: "[`Tokens.gap`](/?path=/story/styles-tokens--gap)",
       table: {
-        type: { summary: '"smaller" | "small" | "base" | "large" | "larger"' },
+        type: { summary: null },
       },
     },
     style: {
-      description: "Inline styles",
+      description: "",
       table: {
         type: { summary: "object" },
       },
     },
     type: {
-      description: "Whether spacing applies as padding or margin",
+      description: "",
       control: "select",
       options: ["padding", "margin"],
       table: {
@@ -120,7 +118,7 @@ const meta = {
       },
     },
     wrap: {
-      description: "Flex wrapping",
+      description: "",
       control: "select",
       options: ["nowrap", "wrap", "wrap-reverse"],
       table: {

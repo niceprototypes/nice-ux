@@ -33,7 +33,7 @@ const meta = {
   tags: ["autodocs"],
   argTypes: {
     name: {
-      description: "Icon name from the built-in icon set",
+      description: "",
       control: "select",
       options: [
         "arrow", "attention", "box", "brush", "calendar", "cancel", "carat",
@@ -46,7 +46,7 @@ const meta = {
       },
     },
     variant: {
-      description: "Icon variant - fill or stroke",
+      description: "",
       control: "select",
       options: ["fill", "stroke"],
       table: {
@@ -55,42 +55,43 @@ const meta = {
       },
     },
     url: {
-      description: "Custom SVG URL (overrides name)",
+      description: "",
       control: "text",
       table: {
         type: { summary: "string" },
       },
     },
     renderImage: {
-      description: "Custom render function that receives imageSize and returns a React element",
+      description: "",
       table: {
         type: { summary: "(imageSize: string) => React.ReactElement" },
       },
     },
     color: {
-      description: "Icon color (CSS value)",
+      description: "",
       control: "color",
       table: {
         type: { summary: "string" },
       },
     },
     backgroundColor: {
-      description: "Background color for the icon container",
+      description: "",
       control: "color",
       table: {
         type: { summary: "string" },
       },
     },
     size: {
-      description: "Icon size (string or number, e.g., \"64px\", \"var(--cell-height-3)\", 3)",
-      control: "text",
+      description: "[`Tokens.cellHeight`](/?path=/story/styles-tokens--cell-height)",
+      control: "select",
+      options: ["smaller", "small", "base", "large", "larger"],
       table: {
-        type: { summary: "string | number" },
-        defaultValue: { summary: '"var(--cell-height-3)"' },
+        type: { summary: null },
+        defaultValue: { summary: '"base"' },
       },
     },
     borderRadius: {
-      description: "Border radius for the icon container",
+      description: "",
       control: "select",
       options: [1, 2, 3],
       table: {
@@ -98,7 +99,7 @@ const meta = {
       },
     },
     imageSize: {
-      description: "Image size as percentage of container",
+      description: "",
       control: "text",
       table: {
         type: { summary: "string" },
@@ -106,7 +107,7 @@ const meta = {
       },
     },
     viewBox: {
-      description: "SVG viewBox attribute for built-in icons",
+      description: "",
       control: "text",
       table: {
         type: { summary: "string" },
@@ -114,15 +115,15 @@ const meta = {
       },
     },
     status: {
-      description: "Status for automatic color theming",
+      description: "",
       control: "select",
       options: ["active", "success", "error", "warning", "default", "muted", "highlighted", "primary", "secondary"],
       table: {
-        type: { summary: "StatusType" },
+        type: { summary: '"active" | "success" | "error" | "warning" | "default" | "muted" | "highlighted" | "primary" | "secondary"' },
       },
     },
     spinning: {
-      description: "Whether the icon should spin",
+      description: "",
       control: "boolean",
       table: {
         type: { summary: "boolean" },
@@ -130,7 +131,7 @@ const meta = {
       },
     },
     rotation: {
-      description: "Rotation angle in degrees",
+      description: "",
       control: "number",
       table: {
         type: { summary: "number" },
@@ -138,7 +139,7 @@ const meta = {
       },
     },
     strokeWidth: {
-      description: "Stroke width for stroke variant",
+      description: "",
       control: "number",
       table: {
         type: { summary: "number" },
@@ -146,7 +147,7 @@ const meta = {
       },
     },
     isActive: {
-      description: "Whether the icon is in active state",
+      description: "",
       control: "boolean",
       table: {
         type: { summary: "boolean" },
@@ -154,7 +155,7 @@ const meta = {
       },
     },
     className: {
-      description: "Additional CSS class",
+      description: "",
       control: "text",
       table: {
         type: { summary: "string" },

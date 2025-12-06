@@ -148,33 +148,147 @@ The Storybook uses these packages from npm:
 
 ### Local Development with Packages
 
-To develop with local versions of the packages:
+This project uses two tools to enable hot module reloading with symlinked packages:
 
-1. Install nice-npm-link:
+#### 1. nice-npm-link — Handles npm linking
+
+When you `npm link` React packages, each linked package brings its own copy of React, causing "Invalid hook call" errors. `nice-npm-link` solves this by removing React, React DOM, and styled-components from linked packages' `node_modules`.
+
 ```bash
+# Install globally (optional)
 npm install -g nice-npm-link
+
+# Link all configured Nice packages from nice-storybook directory
+npx nice-npm-link
+
+# After running npm install in any linked package, re-run:
+npx nice-npm-link
+# or to unlink first:
+npx nice-npm-link --unlink
 ```
 
-2. Link local packages:
-```bash
-nnl ../nice-react-flex
-nnl ../nice-react-typography
-nnl ../nice-react-tile
-nnl ../nice-react-button
-nnl ../nice-react-icon
-nnl ../nice-react-device-detector
+#### 2. nice-vite-symlink-watcher — Enables HMR
+
+Vite doesn't watch symlinked packages by default. The `nice-vite-symlink-watcher` plugin adds watching for linked package dist folders and enables source aliases for true HMR.
+
+The configuration is in `.storybook/main.ts`:
+
+```typescript
+import { symlinkWatcher, getSourceAliases } from "nice-vite-symlink-watcher"
+
+// All linked packages and their local paths
+const linkedPackages = {
+  "nice-react-flex": `${NICE_PACKAGES_BASE}/nice-react-flex`,
+  "nice-react-typography": `${NICE_PACKAGES_BASE}/nice-react-typography`,
+  // ... more packages
+}
+
+// Packages that can use source aliases (no special build transforms)
+// These get TRUE HMR with state preservation
+const sourceAliasablePackages = [
+  "nice-react-flex",
+  "nice-react-typography",
+  "nice-react-styles",
+  "nice-react-device-detector",
+  "nice-react-button",
+]
 ```
 
-3. Start watch mode in each package:
+#### Quick Start for Local Development
+
 ```bash
-cd ../nice-react-flex && npm run dev &
-cd ../nice-react-typography && npm run dev &
-# ... etc
+# 1. Install dependencies
+npm install
+
+# 2. Link all Nice packages
+npx nice-npm-link
+
+# 3. Start Storybook with HMR
+npm run dev
 ```
 
-4. Start Storybook - changes will hot reload:
+#### HMR Behavior by Package
+
+| Category | HMR Behavior | Packages |
+|----------|--------------|----------|
+| **Source-aliased** | True HMR — state preserved | nice-react-flex, nice-react-typography, nice-react-styles, nice-react-device-detector, nice-react-button |
+| **Dist-watched** | Full reload — automatic | nice-react-icon (uses SVGR transforms) |
+
+#### Editing Source-Aliased Packages
+
+Changes appear instantly with HMR. No build step needed.
+
 ```bash
-npm run storybook
+# Edit nice-react-flex/src/components/Flex.tsx
+# → Storybook hot-reloads immediately
+```
+
+#### Editing Dist-Watched Packages (nice-react-icon)
+
+Changes require the package's build to run first.
+
+```bash
+# Terminal 1: Start nice-react-icon in watch mode
+cd ../nice-react-icon
+npm run dev
+
+# Terminal 2: Start Storybook
+cd ../nice-storybook
+npm run dev
+
+# Edit nice-react-icon/src/...
+# → Package rebuilds → Storybook detects dist change → Full reload
+```
+
+#### Adding a New Linked Package
+
+1. Clone the package to `~/Code/`
+
+2. Add to `linkedPackages` in `.storybook/main.ts`:
+   ```typescript
+   const linkedPackages = {
+     // ...existing packages
+     "nice-react-new-package": `${NICE_PACKAGES_BASE}/nice-react-new-package`,
+   }
+   ```
+
+3. If the package doesn't use special build transforms (SVGR, PostCSS), add to `sourceAliasablePackages`:
+   ```typescript
+   const sourceAliasablePackages = [
+     // ...existing packages
+     "nice-react-new-package",
+   ]
+   ```
+
+4. Re-run linking:
+   ```bash
+   npx nice-npm-link
+   ```
+
+5. Restart Storybook
+
+#### Troubleshooting Local Development
+
+**"Invalid hook call" error**: Multiple React instances running.
+```bash
+npx nice-npm-link
+```
+
+**Changes not appearing**:
+- Source-aliased packages: Check the terminal for Vite errors
+- Dist-watched packages: Ensure `npm run dev` is running in the package directory
+
+**After npm install in a linked package**: The linking is broken.
+```bash
+npx nice-npm-link --unlink
+npm install
+npx nice-npm-link
+```
+
+**Storybook won't start**: Clear caches and restart.
+```bash
+rm -rf node_modules/.cache node_modules/.vite
+npm run dev
 ```
 
 ## 📚 Using the Documentation
