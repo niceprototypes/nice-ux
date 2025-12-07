@@ -5,6 +5,7 @@ import type { FontSizeType, BorderWidthType, ForegroundColorType } from "nice-st
  * Available icon names in the icon set
  */
 export const iconNames = [
+  "placeholder",
   "arrow",
   "attention",
   "box",
@@ -24,7 +25,6 @@ export const iconNames = [
   "menu",
   "message",
   "pause",
-  "placeholder",
   "plus",
   "profile",
   "puzzle",
@@ -55,8 +55,8 @@ export type ColorPropertyType = "color" | "background-color" | "stroke" | "borde
 export interface IconProps {
   /** Icon name from the built-in icon set */
   name: IconNameType
-  /** Use stroke variant (true) or fill variant (false) */
-  stroke?: boolean
+  /** Use outlined/fill variant (true) or stroke variant (false, default) */
+  outlined?: boolean
   /** Custom SVG URL (overrides name) */
   url?: string
   /** Icon color - uses ForegroundColorType from nice-styles tokens */
@@ -69,4 +69,6 @@ export interface IconProps {
   strokeWidth?: BorderWidthType
   /** Additional CSS class */
   className?: string
+  /** Scale stroke width with icon size (false by default) */
+  strokeScaling?: boolean
 }

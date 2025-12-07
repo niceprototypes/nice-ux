@@ -65,16 +65,16 @@ const iconMap = {
 export type IconName = keyof typeof iconMap
 
 /**
- * Gets an icon component by name and stroke mode
+ * Gets an icon component by name and outlined mode
  * @param name - The icon name
- * @param stroke - Use stroke variant (true) or fill variant (false)
+ * @param outlined - Use outlined/fill variant (true) or stroke variant (false)
  * @returns The React component for the icon, or undefined if not found
  */
-const getIcon = (name: string, stroke: boolean = true): React.FC | undefined => {
+const getIcon = (name: string, outlined: boolean = false): React.FC | undefined => {
   const icon = iconMap[name as IconName]
   if (!icon) return undefined
 
-  return stroke ? icon.Stroke : icon.Fill
+  return outlined ? icon.Fill : icon.Stroke
 }
 
 export default getIcon

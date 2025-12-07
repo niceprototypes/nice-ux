@@ -7,7 +7,7 @@ import { getIcon } from "../services"
  * A flexible and customizable React icon component with built-in icon set
  *
  * Features:
- * - 30+ built-in icons with fill and stroke variants
+ * - 30+ built-in icons with stroke and outlined variants
  * - Custom SVG URL support
  * - Sizing via nice-styles fontSize tokens
  * - Color via nice-styles foregroundColor tokens
@@ -20,8 +20,8 @@ import { getIcon } from "../services"
  * // Stroke variant (default)
  * <Icon name="arrow" />
  *
- * // Fill variant
- * <Icon name="arrow" stroke={false} />
+ * // Outlined/fill variant
+ * <Icon name="arrow" outlined />
  *
  * // Using size tokens (smaller, small, base, large, larger)
  * <Icon name="arrow" size="large" />
@@ -32,22 +32,26 @@ import { getIcon } from "../services"
  */
 const Icon: React.FC<IconProps> = ({
   name = "placeholder",
-  stroke = true,
+  outlined = false,
   url,
   color = "base",
   size = "base",
   viewBox = "0 0 16 16",
   strokeWidth = "base",
   className,
+  strokeScaling = false,
 }) => {
-  const SvgIcon = getIcon(name, stroke)
+  const SvgIcon = getIcon(name, outlined)
+  const isSpinner = name === "spinner"
 
   return (
     <IconWrapperStyled
       $color={color}
       $size={size}
-      $stroke={stroke}
+      $outlined={outlined}
       $strokeWidth={strokeWidth}
+      $strokeScaling={strokeScaling}
+      $spinning={isSpinner}
       className={className}
     >
       {url
