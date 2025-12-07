@@ -82,6 +82,28 @@ const patterns: Array<[RegExp, Token[]]> = [
     ],
   ],
 
+  // Prop with boolean value: prop={true} or prop={false}
+  [
+    /^(\s+)(\w+)=\{(true|false)\}/,
+    [
+      [1],
+      [2, colors.markup],
+      ["=", colors.markup],
+      ["{", colors.value],
+      [3, colors.value],
+      ["}", colors.value],
+    ],
+  ],
+
+  // Shorthand boolean prop: prop (without value, before > or />)
+  [
+    /^(\s+)(\w+)(?=\s*\/?>|\s+\w)/,
+    [
+      [1],
+      [2, colors.markup],
+    ],
+  ],
+
   // JS function call: functionName(
   [
     /^(\w+)\(/,

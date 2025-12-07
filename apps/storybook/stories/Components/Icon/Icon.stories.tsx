@@ -1,18 +1,17 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import Icon, { iconNames } from "nice-react-icon"
+import { Theme } from "nice-styles"
 import Story from "../../../src/components/Story"
+import Flex from "nice-react-flex"
 
 /**
  * A flexible and customizable React icon component with built-in icon set.
  *
  * Features:
  * - 30+ built-in icons with fill and stroke variants
- * - Custom React component support via renderImage
  * - Custom SVG URL support
- * - Flexible sizing (numbers map to CSS variables, strings accepted as-is)
- * - Status-based theming
- * - Spinning animation
- * - Rotation support
+ * - Sizing via nice-styles fontSize tokens
+ * - Color via nice-styles foregroundColor tokens
  * - TypeScript support
  */
 const meta = {
@@ -31,22 +30,47 @@ const meta = {
       description: "",
       control: "select",
       options: [
-        "arrow", "attention", "box", "brush", "calendar", "cancel", "carat",
-        "check", "cloud", "code", "cog", "contact", "content", "edit", "link",
-        "lock", "menu", "message", "pause", "placeholder", "plus", "profile",
-        "puzzle", "search", "shuffle", "skip", "spinner", "trash", "upload", "x"
+        "arrow",
+        "attention",
+        "box",
+        "brush",
+        "calendar",
+        "cancel",
+        "carat",
+        "check",
+        "cloud",
+        "code",
+        "cog",
+        "contact",
+        "content",
+        "edit",
+        "link",
+        "lock",
+        "menu",
+        "message",
+        "pause",
+        "placeholder",
+        "plus",
+        "profile",
+        "puzzle",
+        "search",
+        "shuffle",
+        "skip",
+        "spinner",
+        "trash",
+        "upload",
+        "x",
       ],
       table: {
         type: { summary: "IconNameType" },
       },
     },
-    variant: {
+    outlined: {
       description: "",
-      control: "select",
-      options: ["fill", "stroke"],
+      control: "boolean",
       table: {
-        type: { summary: '"fill" | "stroke"' },
-        defaultValue: { summary: '"stroke"' },
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
       },
     },
     url: {
@@ -56,49 +80,35 @@ const meta = {
         type: { summary: "string" },
       },
     },
-    renderImage: {
-      description: "",
-      table: {
-        type: { summary: "(imageSize: string) => React.ReactElement" },
-      },
-    },
     color: {
-      description: "",
-      control: "color",
-      table: {
-        type: { summary: "string" },
-      },
-    },
-    backgroundColor: {
-      description: "",
-      control: "color",
-      table: {
-        type: { summary: "string" },
-      },
-    },
-    size: {
-      description: "[`Tokens.cellHeight`](/?path=/story/styles-tokens--cell-height)",
+      description:
+        "[`Tokens.foregroundColor`](/?path=/story/styles-tokens--foreground-color)",
       control: "select",
-      options: ["smaller", "small", "base", "large", "larger"],
+      options: [
+        "lighter",
+        "light",
+        "medium",
+        "heavy",
+        "base",
+        "disabled",
+        "link",
+        "success",
+        "warning",
+        "error",
+      ],
       table: {
-        type: { summary: null },
+        type: { summary: "ForegroundColorType" },
         defaultValue: { summary: '"base"' },
       },
     },
-    borderRadius: {
-      description: "",
+    size: {
+      description:
+        "[`Tokens.fontSize`](/?path=/story/styles-tokens--font-size)",
       control: "select",
-      options: [1, 2, 3],
+      options: ["smaller", "small", "base", "large", "larger"],
       table: {
-        type: { summary: "1 | 2 | 3" },
-      },
-    },
-    imageSize: {
-      description: "",
-      control: "text",
-      table: {
-        type: { summary: "string" },
-        defaultValue: { summary: '"30%"' },
+        type: { summary: "FontSizeType" },
+        defaultValue: { summary: '"base"' },
       },
     },
     viewBox: {
@@ -109,44 +119,14 @@ const meta = {
         defaultValue: { summary: '"0 0 16 16"' },
       },
     },
-    status: {
-      description: "",
-      control: "select",
-      options: ["active", "success", "error", "warning", "default", "muted", "highlighted", "primary", "secondary"],
-      table: {
-        type: { summary: '"active" | "success" | "error" | "warning" | "default" | "muted" | "highlighted" | "primary" | "secondary"' },
-      },
-    },
-    spinning: {
-      description: "",
-      control: "boolean",
-      table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
-      },
-    },
-    rotation: {
-      description: "",
-      control: "number",
-      table: {
-        type: { summary: "number" },
-        defaultValue: { summary: "0" },
-      },
-    },
     strokeWidth: {
-      description: "",
-      control: "number",
+      description:
+        "[`Tokens.borderWidth`](/?path=/story/styles-tokens--border-width)",
+      control: "select",
+      options: ["base", "large"],
       table: {
-        type: { summary: "number" },
-        defaultValue: { summary: "1" },
-      },
-    },
-    isActive: {
-      description: "",
-      control: "boolean",
-      table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "true" },
+        type: { summary: "BorderWidthType" },
+        defaultValue: { summary: '"base"' },
       },
     },
     className: {
@@ -169,25 +149,61 @@ export const Name: Story = {
       variables={iconNames.map(name => ({
         name,
         description: `name="${name}"`,
-        demo: <Icon name={name} />,
+        demo: (
+          <Flex gap="base">
+            <Icon name={name} />
+            <Icon name={name} outlined />
+          </Flex>
+        ),
         code: `<Icon name="${name}"/>`,
       }))}
     />
   ),
 }
 
-const foregroundColors = [
-  "lighter",
-  "light",
-  "medium",
-  "heavy",
-  "base",
-  "disabled",
-  "link",
-  "success",
-  "warning",
-  "error",
-] as const
+export const Outlined: Story = {
+  name: "outlined",
+  render: () => (
+    <Story
+      variables={[
+        {
+          name: "false",
+          description: "outlined={false}",
+          demo: <Icon name="placeholder" outlined={false} />,
+          code: `<Icon name="placeholder"/>`,
+        },
+        {
+          name: "true",
+          description: "outlined={true}",
+          demo: <Icon name="placeholder" outlined={true} />,
+          code: `<Icon name="placeholder" outlined={true}/>`,
+        },
+      ]}
+    />
+  ),
+}
+
+const fontSizes = Object.keys(
+  Theme.fontSize.items
+) as (keyof typeof Theme.fontSize.items)[]
+
+export const Size: Story = {
+  name: "size",
+  render: () => (
+    <Story
+      variables={fontSizes.map(size => ({
+        name: size,
+        description: `size="${size}"`,
+        demo: <Icon name="placeholder" size={size} />,
+        code: size === "base" ? `<Icon/>` : `<Icon size="${size}"/>`,
+      }))}
+    />
+  ),
+}
+
+const foregroundColors = Object.keys(
+  Theme.foregroundColor.items
+) as (keyof typeof Theme.foregroundColor.items)[]
 
 export const Color: Story = {
   name: "color",
@@ -198,6 +214,24 @@ export const Color: Story = {
         description: `color="${color}"`,
         demo: <Icon name="placeholder" color={color} />,
         code: `<Icon color="${color}"/>`,
+      }))}
+    />
+  ),
+}
+
+const borderWidths = Object.keys(
+  Theme.borderWidth.items
+) as (keyof typeof Theme.borderWidth.items)[]
+
+export const StrokeWidth: Story = {
+  name: "strokeWidth",
+  render: () => (
+    <Story
+      variables={borderWidths.map(width => ({
+        name: width,
+        description: `strokeWidth="${width}"`,
+        demo: <Icon name="placeholder" strokeWidth={width} />,
+        code: width === "base" ? `<Icon/>` : `<Icon strokeWidth="${width}"/>`,
       }))}
     />
   ),
