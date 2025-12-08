@@ -1,22 +1,30 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import Button from "nice-react-button"
 import Story from "../../../src/components/Story"
+import { generateDescriptionString } from "../../../src/services"
 
-/**
- * A flexible and customizable React button component with built-in theming support.
- *
- * Features:
- * - Multiple sizes (smaller, small, base, large, larger)
- * - States (default, disabled, attention, success, warning)
- * - Icon support with nice-react-icon
- * - Accessibility support
- */
 const meta = {
   title: "Components/Button",
   component: Button,
   parameters: {
     layout: "padded",
     docs: {
+      description: {
+        component: generateDescriptionString("nice-react-button", {
+          setup: [
+            {
+              value: 'import Button from "nice-react-button"',
+              code: true,
+              newLine: true,
+            },
+          ],
+          usage: [
+            { value: "<Button onClick={handler}>", code: true },
+            { value: "+1{children}", code: true },
+            { value: "</Button>", code: true },
+          ],
+        }),
+      },
       source: { code: null },
       canvas: { sourceState: "none" },
     },
@@ -122,20 +130,48 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const OnClick: Story = {
-  name: "onClick",
+export const Basic: Story = {
+  name: "basic",
   render: () => (
     <Story
       variables={[
         {
           name: "onClick",
-          description: "Click handler function",
+          description: "onClick={() => void}",
           demo: (
             <Button onClick={() => alert("Button clicked!")}>
               Click Me
             </Button>
           ),
-          code: `<Button onClick={() => console.log("clicked")}>\n  Click Me\n</Button>`,
+          code: `<Button>\n+1{children}\n</Button>`,
+        },
+      ]}
+    />
+  ),
+}
+
+export const Disabled: Story = {
+  name: "disabled",
+  render: () => (
+    <Story
+      variables={[
+        {
+          name: "false",
+          description: "disabled={false}",
+          demo: (
+            <Button onClick={() => alert("Button clicked!")}>Enabled</Button>
+          ),
+          code: `<Button onClick={handler}>\n+1{children}\n</Button>`,
+        },
+        {
+          name: "true",
+          description: "disabled={true}",
+          demo: (
+            <Button onClick={() => alert("Button clicked!")} disabled>
+              Disabled
+            </Button>
+          ),
+          code: `<Button onClick={handler} disabled>\n+1{children}\n</Button>`,
         },
       ]}
     />

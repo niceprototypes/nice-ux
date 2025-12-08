@@ -104,6 +104,17 @@ const patterns: Array<[RegExp, Token[]]> = [
     ],
   ],
 
+  // Prop with expression/function value: prop={...} (captures balanced braces)
+  [
+    /^(\s+)(\w+)=(\{(?:[^{}]|\{(?:[^{}]|\{[^{}]*\})*\})*\})/,
+    [
+      [1],
+      [2, colors.markup],
+      ["=", colors.markup],
+      [3, colors.value],
+    ],
+  ],
+
   // JS function call: functionName(
   [
     /^(\w+)\(/,
@@ -193,15 +204,16 @@ const CodePreviewString: React.FC<{ code: string }> = ({ code }) => {
 
       if (matched) continue
 
+      // Fallback: consume text content (JSX text gets markup color)
       const nextSpecial = remaining.search(/[<>]|\s\w+="|\s\w+=\{|\{children}/)
       if (nextSpecial === -1) {
-        addSpan(remaining)
+        addSpan(remaining, colors.markup)
         break
       } else if (nextSpecial > 0) {
-        addSpan(remaining.slice(0, nextSpecial))
+        addSpan(remaining.slice(0, nextSpecial), colors.markup)
         consume(nextSpecial)
       } else {
-        addSpan(remaining[0])
+        addSpan(remaining[0], colors.markup)
         consume(1)
       }
     }
