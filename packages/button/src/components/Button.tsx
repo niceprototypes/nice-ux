@@ -17,7 +17,6 @@ import { ButtonProps } from "../types"
  *
  * Features:
  * - Multiple sizes (smaller, small, base, large, larger)
- * - Various statuses (primary, secondary, etc.)
  * - States (default, disabled, attention, success, warning)
  * - Icon support with nice-react-icon
  * - Accessibility support
@@ -28,7 +27,6 @@ import { ButtonProps } from "../types"
  * import Button from 'nice-react-button'
  *
  * <Button
- *   status="primary"
  *   icon="arrow"
  *   onClick={() => console.log('clicked')}
  * >
@@ -39,52 +37,29 @@ import { ButtonProps } from "../types"
 const Button: React.FC<ButtonProps> = ({
   antialiased = false,
   "aria-label": ariaLabel,
-  backgroundColor,
-  backgroundImage,
-  borderColor,
-  borderRadius,
   borderWidth = "base",
-  bordered = true,
   children,
   className,
-  condensed = false,
   "data-testid": testId,
   disabled = false,
-  fontWeight = "medium",
-  fullWidth = false,
   icon,
-  iconPosition = "right",
-  iconRotation = 0,
-  mode = "light",
   onClick,
   size = "base",
   state = "default",
-  status = "primary",
   type = "button",
 }) => {
   const hasIcon = !!icon
   const isDisabled = disabled || state === "disabled"
-  const isLeft = iconPosition === "left"
   const isSquare = hasIcon && !children
 
   // @ts-ignore
-  // @ts-ignore
   return (
     <ButtonOuter
-      $backgroundColor={backgroundColor}
-      $backgroundImage={backgroundImage}
-      $borderColor={borderColor}
-      $borderRadius={borderRadius}
-      $bordered={bordered}
-      $condensed={condensed}
       $disabled={isDisabled}
-      $fullWidth={fullWidth}
       $hasIcon={hasIcon}
       $isSquare={isSquare}
-      $mode={mode}
       $size={size}
       $state={state}
-      $status={status}
       aria-label={ariaLabel}
       className={className}
       data-testid={testId}
@@ -93,35 +68,22 @@ const Button: React.FC<ButtonProps> = ({
       type={type}
     >
       {/* Border overlay (positioned behind content) */}
-      <ButtonOverlay
-        $bordered={bordered}
-        $borderColor={borderColor}
-        $borderWidth={getToken("borderWidth", borderWidth).var}
-        $mode={mode}
-        $state={state}
-        $status={status}
-      />
+      <ButtonOverlay $borderWidth={getToken("borderWidth", borderWidth).var} $state={state} />
       {/* Left positioned icon */}
-      {hasIcon && isLeft && (
-        <ButtonIconPositioned $size={size} $isLeft={true}>
-          <ButtonIcon icon={icon} iconRotation={iconRotation} size={size} color="currentColor" />
+      {hasIcon && (
+        <ButtonIconPositioned $size={size}>
+          <ButtonIcon icon={icon} size={size} color="currentColor" />
         </ButtonIconPositioned>
       )}
       {/* Button text content */}
       {children && (
         <ButtonInner $size={size}>
           <ButtonText $size={size}>
-            <Typography antialiased={antialiased} as="span" weight={fontWeight} size={size}>
+            <Typography antialiased={antialiased} as="span" weight="medium" size={size}>
               {children}
             </Typography>
           </ButtonText>
         </ButtonInner>
-      )}
-      {/* Right positioned icon */}
-      {hasIcon && !isLeft && (
-        <ButtonIconPositioned $size={size} $isLeft={false}>
-          <ButtonIcon icon={icon} iconRotation={iconRotation} size={size} color="currentColor" />
-        </ButtonIconPositioned>
       )}
     </ButtonOuter>
   )
