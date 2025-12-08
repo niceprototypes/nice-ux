@@ -1,4 +1,4 @@
-import { ReactComponent as Fill } from "./fill.svg"
-import { ReactComponent as Stroke } from "./stroke.svg"
+import Fill from "nice-icons/content/fill.svg"
+import Stroke from "nice-icons/content/stroke.svg"
 
 export { Fill, Stroke }

@@ -26,12 +26,10 @@ export default {
   ],
   plugins: [
     peerDepsExternal(),
-    svgr({
-      exportType: 'named',
-      namedExport: 'ReactComponent',
-    }),
+    svgr(),
     resolve({
-      browser: true
+      browser: true,
+      extensions: ['.js', '.ts', '.tsx', '.svg']
     }),
     commonjs(),
     json(),

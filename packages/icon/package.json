@@ -81,6 +81,7 @@
     "npm": ">=6.0.0"
   },
   "dependencies": {
+    "nice-icons": "^1.0.0",
     "nice-styles": "file:../nice-styles"
   }
 }
