@@ -1,6 +1,6 @@
 {
   "name": "nice-react-icon",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "A flexible and customizable React icon component with built-in icon set and theming support",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
