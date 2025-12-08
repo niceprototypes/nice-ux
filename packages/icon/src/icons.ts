@@ -1,91 +1,93 @@
-import ArrowFill from "nice-icons/arrow/fill.svg"
-import ArrowStroke from "nice-icons/arrow/stroke.svg"
-import AttentionFill from "nice-icons/attention/fill.svg"
-import AttentionStroke from "nice-icons/attention/stroke.svg"
-import BoxFill from "nice-icons/box/fill.svg"
-import BoxStroke from "nice-icons/box/stroke.svg"
-import BrushFill from "nice-icons/brush/fill.svg"
-import BrushStroke from "nice-icons/brush/stroke.svg"
-import CalendarFill from "nice-icons/calendar/fill.svg"
-import CalendarStroke from "nice-icons/calendar/stroke.svg"
-import CancelFill from "nice-icons/cancel/fill.svg"
-import CancelStroke from "nice-icons/cancel/stroke.svg"
-import CaratFill from "nice-icons/carat/fill.svg"
-import CaratStroke from "nice-icons/carat/stroke.svg"
-import CheckFill from "nice-icons/check/fill.svg"
-import CheckStroke from "nice-icons/check/stroke.svg"
-import CloudFill from "nice-icons/cloud/fill.svg"
-import CloudStroke from "nice-icons/cloud/stroke.svg"
-import CodeFill from "nice-icons/code/fill.svg"
-import CodeStroke from "nice-icons/code/stroke.svg"
-import CogFill from "nice-icons/cog/fill.svg"
-import CogStroke from "nice-icons/cog/stroke.svg"
-import ContactFill from "nice-icons/contact/fill.svg"
-import ContactStroke from "nice-icons/contact/stroke.svg"
-import ContentFill from "nice-icons/content/fill.svg"
-import ContentStroke from "nice-icons/content/stroke.svg"
-import EditFill from "nice-icons/edit/fill.svg"
-import EditStroke from "nice-icons/edit/stroke.svg"
-import LinkFill from "nice-icons/link/fill.svg"
-import LinkStroke from "nice-icons/link/stroke.svg"
-import LockFill from "nice-icons/lock/fill.svg"
-import LockStroke from "nice-icons/lock/stroke.svg"
-import MenuFill from "nice-icons/menu/fill.svg"
-import MenuStroke from "nice-icons/menu/stroke.svg"
-import MessageFill from "nice-icons/message/fill.svg"
-import MessageStroke from "nice-icons/message/stroke.svg"
-import PauseFill from "nice-icons/pause/fill.svg"
-import PauseStroke from "nice-icons/pause/stroke.svg"
-import PlaceholderFill from "nice-icons/placeholder/fill.svg"
-import PlaceholderStroke from "nice-icons/placeholder/stroke.svg"
-import PlusFill from "nice-icons/plus/fill.svg"
-import PlusStroke from "nice-icons/plus/stroke.svg"
-import ProfileFill from "nice-icons/profile/fill.svg"
-import ProfileStroke from "nice-icons/profile/stroke.svg"
-import PuzzleFill from "nice-icons/puzzle/fill.svg"
-import PuzzleStroke from "nice-icons/puzzle/stroke.svg"
-import SearchFill from "nice-icons/search/fill.svg"
-import SearchStroke from "nice-icons/search/stroke.svg"
-import ShuffleFill from "nice-icons/shuffle/fill.svg"
-import ShuffleStroke from "nice-icons/shuffle/stroke.svg"
-import SkipFill from "nice-icons/skip/fill.svg"
-import SkipStroke from "nice-icons/skip/stroke.svg"
-import SpinnerFill from "nice-icons/spinner/fill.svg"
-import SpinnerStroke from "nice-icons/spinner/stroke.svg"
-import TrashFill from "nice-icons/trash/fill.svg"
-import TrashStroke from "nice-icons/trash/stroke.svg"
-import UploadFill from "nice-icons/upload/fill.svg"
-import UploadStroke from "nice-icons/upload/stroke.svg"
-import XFill from "nice-icons/x/fill.svg"
-import XStroke from "nice-icons/x/stroke.svg"
+import {
+  ArrowFillIcon,
+  ArrowStrokeIcon,
+  AttentionFillIcon,
+  AttentionStrokeIcon,
+  BoxFillIcon,
+  BoxStrokeIcon,
+  BrushFillIcon,
+  BrushStrokeIcon,
+  CalendarFillIcon,
+  CalendarStrokeIcon,
+  CancelFillIcon,
+  CancelStrokeIcon,
+  CaratFillIcon,
+  CaratStrokeIcon,
+  CheckFillIcon,
+  CheckStrokeIcon,
+  CloudFillIcon,
+  CloudStrokeIcon,
+  CodeFillIcon,
+  CodeStrokeIcon,
+  CogFillIcon,
+  CogStrokeIcon,
+  ContactFillIcon,
+  ContactStrokeIcon,
+  ContentFillIcon,
+  ContentStrokeIcon,
+  EditFillIcon,
+  EditStrokeIcon,
+  LinkFillIcon,
+  LinkStrokeIcon,
+  LockFillIcon,
+  LockStrokeIcon,
+  MenuFillIcon,
+  MenuStrokeIcon,
+  MessageFillIcon,
+  MessageStrokeIcon,
+  PauseFillIcon,
+  PauseStrokeIcon,
+  PlaceholderFillIcon,
+  PlaceholderStrokeIcon,
+  PlusFillIcon,
+  PlusStrokeIcon,
+  ProfileFillIcon,
+  ProfileStrokeIcon,
+  PuzzleFillIcon,
+  PuzzleStrokeIcon,
+  SearchFillIcon,
+  SearchStrokeIcon,
+  ShuffleFillIcon,
+  ShuffleStrokeIcon,
+  SkipFillIcon,
+  SkipStrokeIcon,
+  SpinnerFillIcon,
+  SpinnerStrokeIcon,
+  TrashFillIcon,
+  TrashStrokeIcon,
+  UploadFillIcon,
+  UploadStrokeIcon,
+  XFillIcon,
+  XStrokeIcon,
+} from "nice-icons"
 
-export const Arrow = { Fill: ArrowFill, Stroke: ArrowStroke }
-export const Attention = { Fill: AttentionFill, Stroke: AttentionStroke }
-export const Box = { Fill: BoxFill, Stroke: BoxStroke }
-export const Brush = { Fill: BrushFill, Stroke: BrushStroke }
-export const Calendar = { Fill: CalendarFill, Stroke: CalendarStroke }
-export const Cancel = { Fill: CancelFill, Stroke: CancelStroke }
-export const Carat = { Fill: CaratFill, Stroke: CaratStroke }
-export const Check = { Fill: CheckFill, Stroke: CheckStroke }
-export const Cloud = { Fill: CloudFill, Stroke: CloudStroke }
-export const Code = { Fill: CodeFill, Stroke: CodeStroke }
-export const Cog = { Fill: CogFill, Stroke: CogStroke }
-export const Contact = { Fill: ContactFill, Stroke: ContactStroke }
-export const Content = { Fill: ContentFill, Stroke: ContentStroke }
-export const Edit = { Fill: EditFill, Stroke: EditStroke }
-export const Link = { Fill: LinkFill, Stroke: LinkStroke }
-export const Lock = { Fill: LockFill, Stroke: LockStroke }
-export const Menu = { Fill: MenuFill, Stroke: MenuStroke }
-export const Message = { Fill: MessageFill, Stroke: MessageStroke }
-export const Pause = { Fill: PauseFill, Stroke: PauseStroke }
-export const Placeholder = { Fill: PlaceholderFill, Stroke: PlaceholderStroke }
-export const Plus = { Fill: PlusFill, Stroke: PlusStroke }
-export const Profile = { Fill: ProfileFill, Stroke: ProfileStroke }
-export const Puzzle = { Fill: PuzzleFill, Stroke: PuzzleStroke }
-export const Search = { Fill: SearchFill, Stroke: SearchStroke }
-export const Shuffle = { Fill: ShuffleFill, Stroke: ShuffleStroke }
-export const Skip = { Fill: SkipFill, Stroke: SkipStroke }
-export const Spinner = { Fill: SpinnerFill, Stroke: SpinnerStroke }
-export const Trash = { Fill: TrashFill, Stroke: TrashStroke }
-export const Upload = { Fill: UploadFill, Stroke: UploadStroke }
-export const X = { Fill: XFill, Stroke: XStroke }
+export const Arrow = { Fill: ArrowFillIcon, Stroke: ArrowStrokeIcon }
+export const Attention = { Fill: AttentionFillIcon, Stroke: AttentionStrokeIcon }
+export const Box = { Fill: BoxFillIcon, Stroke: BoxStrokeIcon }
+export const Brush = { Fill: BrushFillIcon, Stroke: BrushStrokeIcon }
+export const Calendar = { Fill: CalendarFillIcon, Stroke: CalendarStrokeIcon }
+export const Cancel = { Fill: CancelFillIcon, Stroke: CancelStrokeIcon }
+export const Carat = { Fill: CaratFillIcon, Stroke: CaratStrokeIcon }
+export const Check = { Fill: CheckFillIcon, Stroke: CheckStrokeIcon }
+export const Cloud = { Fill: CloudFillIcon, Stroke: CloudStrokeIcon }
+export const Code = { Fill: CodeFillIcon, Stroke: CodeStrokeIcon }
+export const Cog = { Fill: CogFillIcon, Stroke: CogStrokeIcon }
+export const Contact = { Fill: ContactFillIcon, Stroke: ContactStrokeIcon }
+export const Content = { Fill: ContentFillIcon, Stroke: ContentStrokeIcon }
+export const Edit = { Fill: EditFillIcon, Stroke: EditStrokeIcon }
+export const Link = { Fill: LinkFillIcon, Stroke: LinkStrokeIcon }
+export const Lock = { Fill: LockFillIcon, Stroke: LockStrokeIcon }
+export const Menu = { Fill: MenuFillIcon, Stroke: MenuStrokeIcon }
+export const Message = { Fill: MessageFillIcon, Stroke: MessageStrokeIcon }
+export const Pause = { Fill: PauseFillIcon, Stroke: PauseStrokeIcon }
+export const Placeholder = { Fill: PlaceholderFillIcon, Stroke: PlaceholderStrokeIcon }
+export const Plus = { Fill: PlusFillIcon, Stroke: PlusStrokeIcon }
+export const Profile = { Fill: ProfileFillIcon, Stroke: ProfileStrokeIcon }
+export const Puzzle = { Fill: PuzzleFillIcon, Stroke: PuzzleStrokeIcon }
+export const Search = { Fill: SearchFillIcon, Stroke: SearchStrokeIcon }
+export const Shuffle = { Fill: ShuffleFillIcon, Stroke: ShuffleStrokeIcon }
+export const Skip = { Fill: SkipFillIcon, Stroke: SkipStrokeIcon }
+export const Spinner = { Fill: SpinnerFillIcon, Stroke: SpinnerStrokeIcon }
+export const Trash = { Fill: TrashFillIcon, Stroke: TrashStrokeIcon }
+export const Upload = { Fill: UploadFillIcon, Stroke: UploadStrokeIcon }
+export const X = { Fill: XFillIcon, Stroke: XStrokeIcon }
