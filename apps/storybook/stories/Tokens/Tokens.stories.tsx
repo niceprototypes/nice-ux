@@ -20,18 +20,18 @@ const meta = {
     docs: {
       description: {
         component: generateDescriptionString([
-          "LINKS",
-          "\u2002",
+          "Links",
+          "\u2002\u2002\u2192\u2002\u2002",
           {
-            value: "[github](https://github.com/niceprototypes/nice-styles)",
+            value: "[Code](https://github.com/niceprototypes/nice-styles)",
           },
-          "\u2002",
+          "\u2002\u2002",
           {
-            value: "[npm](https://www.npmjs.com/package/nice-styles)",
+            value: "[Package](https://www.npmjs.com/package/nice-styles)",
             newLine: true,
           },
           { value: "\u2002", newLine: true },
-          { value: "SETUP", newLine: true },
+          { value: "Setup", newLine: true },
           { value: "npm i nice-styles", code: true, newLine: true },
           {
             value: 'import { getToken } from "nice-styles"',
@@ -39,7 +39,7 @@ const meta = {
             newLine: true,
           },
           { value: "\u2002", newLine: true },
-          { value: "USAGE", newLine: true },
+          { value: "Usage", newLine: true },
           { value: 'getToken("fontSize").key', code: true },
           "\u2002\u2192\u2002",
           { value: '"--font-size-base"', code: true, newLine: true },

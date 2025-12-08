@@ -30,6 +30,7 @@ const meta = {
       description: "",
       control: "select",
       options: [
+        "placeholder",
         "arrow",
         "attention",
         "box",
@@ -49,7 +50,6 @@ const meta = {
         "menu",
         "message",
         "pause",
-        "placeholder",
         "plus",
         "profile",
         "puzzle",
@@ -123,7 +123,7 @@ const meta = {
       description:
         "[`Tokens.borderWidth`](/?path=/story/styles-tokens--border-width)",
       control: "select",
-      options: ["base", "large"],
+      options: ["small", "base", "large"],
       table: {
         type: { summary: "BorderWidthType" },
         defaultValue: { summary: '"base"' },
@@ -134,6 +134,14 @@ const meta = {
       control: "text",
       table: {
         type: { summary: "string" },
+      },
+    },
+    strokeScaling: {
+      description: "",
+      control: "boolean",
+      table: {
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
       },
     },
   },
@@ -155,30 +163,8 @@ export const Name: Story = {
             <Icon name={name} outlined />
           </Flex>
         ),
-        code: `<Icon name="${name}"/>`,
+        code: name === "placeholder" ? `<Icon/>` : `<Icon name="${name}"/>`,
       }))}
-    />
-  ),
-}
-
-export const Outlined: Story = {
-  name: "outlined",
-  render: () => (
-    <Story
-      variables={[
-        {
-          name: "false",
-          description: "outlined={false}",
-          demo: <Icon name="placeholder" outlined={false} />,
-          code: `<Icon name="placeholder"/>`,
-        },
-        {
-          name: "true",
-          description: "outlined={true}",
-          demo: <Icon name="placeholder" outlined={true} />,
-          code: `<Icon name="placeholder" outlined={true}/>`,
-        },
-      ]}
     />
   ),
 }
@@ -194,9 +180,31 @@ export const Size: Story = {
       variables={fontSizes.map(size => ({
         name: size,
         description: `size="${size}"`,
-        demo: <Icon name="placeholder" size={size} />,
+        demo: <Icon size={size} />,
         code: size === "base" ? `<Icon/>` : `<Icon size="${size}"/>`,
       }))}
+    />
+  ),
+}
+
+export const Outlined: Story = {
+  name: "outlined",
+  render: () => (
+    <Story
+      variables={[
+        {
+          name: "false",
+          description: "outlined={false}",
+          demo: <Icon size="larger" outlined={false} />,
+          code: `<Icon size="larger"/>`,
+        },
+        {
+          name: "true",
+          description: "outlined={true}",
+          demo: <Icon size="larger" outlined={true} />,
+          code: `<Icon size="larger" outlined={true}/>`,
+        },
+      ]}
     />
   ),
 }
@@ -212,7 +220,7 @@ export const Color: Story = {
       variables={foregroundColors.map(color => ({
         name: color,
         description: `color="${color}"`,
-        demo: <Icon name="placeholder" color={color} />,
+        demo: <Icon color={color} />,
         code: `<Icon color="${color}"/>`,
       }))}
     />
@@ -230,9 +238,31 @@ export const StrokeWidth: Story = {
       variables={borderWidths.map(width => ({
         name: width,
         description: `strokeWidth="${width}"`,
-        demo: <Icon name="placeholder" strokeWidth={width} />,
+        demo: <Icon strokeWidth={width} />,
         code: width === "base" ? `<Icon/>` : `<Icon strokeWidth="${width}"/>`,
       }))}
+    />
+  ),
+}
+
+export const StrokeScaling: Story = {
+  name: "strokeScaling",
+  render: () => (
+    <Story
+      variables={[
+        {
+          name: "false",
+          description: "strokeScaling={false}",
+          demo: <Icon size="larger" strokeScaling={false} />,
+          code: `<Icon size="larger"/>`,
+        },
+        {
+          name: "true",
+          description: "strokeScaling={true}",
+          demo: <Icon size="larger" strokeScaling={true} />,
+          code: `<Icon size="larger" strokeScaling/>`,
+        },
+      ]}
     />
   ),
 }

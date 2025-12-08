@@ -12,13 +12,15 @@
     "dev:deploy": "nodemon --watch stories --watch .storybook --ext ts,tsx,js,jsx,css,mdx --exec \"npm run deploy\"",
     "dev": "concurrently \"npm run storybook\" \"npm run watch:deps\"",
     "watch:deps": "concurrently \"npm run watch:react-flex\" \"npm run watch:react-typography\" \"npm run watch:react-styles\" \"npm run watch:react-device-detector\" \"npm run watch:styles\" \"npm run watch:react-button\" \"npm run watch:react-icon\"",
-    "watch:react-flex": "npm --prefix ../nice-react-flex run dev",
+    "watch:react-button": "npm --prefix ../nice-react-button run dev",
     "watch:react-device-detector": "npm --prefix ../nice-react-device-detector run dev",
+    "watch:react-flex": "npm --prefix ../nice-react-flex run dev",
+    "watch:react-icon": "npm --prefix ../nice-react-icon run dev",
     "watch:react-styles": "npm --prefix ../nice-react-styles run dev",
     "watch:react-typography": "npm --prefix ../nice-react-typography run dev",
     "watch:styles": "npm --prefix ../nice-styles run dev",
-    "watch:react-button": "npm --prefix ../nice-react-button run dev",
-    "watch:react-icon": "npm --prefix ../nice-react-icon run dev"
+    "prepublish:react-icon": "node scripts/prepublish.js react-icon",
+    "publish:react-icon": "npm run prepublish:react-icon && npm --prefix ../nice-react-icon publish"
   },
   "dependencies": {
     "@storybook/addon-docs": "^9.1.10",
