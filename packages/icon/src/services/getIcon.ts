@@ -29,7 +29,7 @@ import {
   Trash,
   Upload,
   X,
-} from "../components/vectors"
+} from "../icons"
 
 const iconMap = {
   arrow: Arrow,
