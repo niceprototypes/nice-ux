@@ -21,16 +21,18 @@ const meta = {
     layout: "padded",
     docs: {
       description: {
-        component: generateDescriptionString([
-          "Install using",
-          { value: "npm i nice-react-device-detector", code: true },
-          {
-            value:
-              "for mobile device detection with multi-layered Stylestrategy.",
-            newLine: true,
-          },
-          "Works with direct hook calls or Context API for optimal performance.",
-        ]),
+        component: generateDescriptionString("nice-react-device-detector", {
+          setup: [
+            {
+              value: 'import { useDeviceDetector } from "nice-react-device-detector"',
+              code: true,
+              newLine: true,
+            },
+          ],
+          usage: [
+            { value: "const isMobile = useDeviceDetector()", code: true },
+          ],
+        }),
       },
     },
   },

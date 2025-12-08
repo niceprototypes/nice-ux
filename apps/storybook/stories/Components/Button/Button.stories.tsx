@@ -6,12 +6,9 @@ import Story from "../../../src/components/Story"
  * A flexible and customizable React button component with built-in theming support.
  *
  * Features:
- * - Multiple sizes (1-4)
- * - Light/dark mode support
- * - Various statuses (primary, secondary, default, muted, highlighted)
+ * - Multiple sizes (smaller, small, base, large, larger)
  * - States (default, disabled, attention, success, warning)
  * - Icon support with nice-react-icon
- * - Full theming capabilities
  * - Accessibility support
  */
 const meta = {
@@ -39,7 +36,6 @@ const meta = {
       control: "boolean",
       table: {
         type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
       },
     },
     "aria-label": {
@@ -49,49 +45,13 @@ const meta = {
         type: { summary: "string" },
       },
     },
-    backgroundColor: {
-      description: "",
-      control: "color",
-      table: {
-        type: { summary: "string" },
-      },
-    },
-    backgroundImage: {
-      description: "",
-      control: "text",
-      table: {
-        type: { summary: "string" },
-      },
-    },
-    borderColor: {
-      description: "",
-      control: "color",
-      table: {
-        type: { summary: "string" },
-      },
-    },
-    borderRadius: {
-      description: "",
-      control: "text",
-      table: {
-        type: { summary: "string" },
-      },
-    },
     borderWidth: {
       description: "[`Tokens.borderWidth`](/?path=/story/styles-tokens--border-width)",
       control: "select",
-      options: ["base", "large"],
+      options: ["small", "base", "large"],
       table: {
         type: { summary: null },
         defaultValue: { summary: '"base"' },
-      },
-    },
-    bordered: {
-      description: "",
-      control: "boolean",
-      table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "true" },
       },
     },
     className: {
@@ -99,14 +59,6 @@ const meta = {
       control: "text",
       table: {
         type: { summary: "string" },
-      },
-    },
-    condensed: {
-      description: "",
-      control: "boolean",
-      table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
       },
     },
     "data-testid": {
@@ -124,54 +76,11 @@ const meta = {
         defaultValue: { summary: "false" },
       },
     },
-    fontWeight: {
-      description: "[`Tokens.fontWeight`](/?path=/story/styles-tokens--font-weight)",
-      control: "select",
-      options: ["light", "base", "medium", "semibold", "bold", "extrabold", "black"],
-      table: {
-        type: { summary: null },
-        defaultValue: { summary: '"medium"' },
-      },
-    },
-    fullWidth: {
-      description: "",
-      control: "boolean",
-      table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
-      },
-    },
     icon: {
       description: "",
       control: "text",
       table: {
         type: { summary: "string" },
-      },
-    },
-    iconPosition: {
-      description: "",
-      control: "select",
-      options: ["left", "right"],
-      table: {
-        type: { summary: '"left" | "right"' },
-        defaultValue: { summary: '"right"' },
-      },
-    },
-    iconRotation: {
-      description: "",
-      control: "number",
-      table: {
-        type: { summary: "number" },
-        defaultValue: { summary: "0" },
-      },
-    },
-    mode: {
-      description: "",
-      control: "select",
-      options: ["light", "dark"],
-      table: {
-        type: { summary: '"light" | "dark"' },
-        defaultValue: { summary: '"light"' },
       },
     },
     onClick: {
@@ -194,17 +103,8 @@ const meta = {
       control: "select",
       options: ["default", "disabled", "attention", "success", "warning"],
       table: {
-        type: { summary: '"default" | "disabled" | "attention" | "success" | "warning"' },
+        type: { summary: "ButtonStateType" },
         defaultValue: { summary: '"default"' },
-      },
-    },
-    status: {
-      description: "",
-      control: "select",
-      options: ["primary", "secondary", "default", "muted", "highlighted"],
-      table: {
-        type: { summary: '"primary" | "secondary" | "default" | "muted" | "highlighted"' },
-        defaultValue: { summary: '"primary"' },
       },
     },
     type: {

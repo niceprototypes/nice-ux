@@ -1,0 +1,44 @@
+.docblock-argstable {
+  table-layout: fixed;
+  font-family: var(--font-family-code);
+}
+
+.docblock-argstable td > span {
+  vertical-align: middle;
+}
+
+.docblock-argstable th:nth-child(1) {
+  padding-right: 0 !important;
+}
+
+.docblock-argstable th:nth-child(1),
+.docblock-argstable td:nth-child(1) {
+  width: 16rem !important;
+  font-family: var(--font-family-code);
+}
+
+.docblock-argstable th:nth-child(2),
+.docblock-argstable td:nth-child(2) {
+  flex-grow: 1;
+}
+
+.docblock-argstable th:nth-child(3),
+.docblock-argstable td:nth-child(3) {
+  width: 12rem !important;
+}
+
+.docblock-argstable th:nth-child(4),
+.docblock-argstable td:nth-child(4) {
+  display: none;
+}
+
+.docblock-argstable a code {
+  border-color: rgb(215, 239, 253) !important;
+  color: rgb(0, 156, 253) !important;
+}
+
+.docblock-argstable a:hover code {
+  background-color: rgb(2, 156, 253) !important;
+  border-color: rgb(2, 156, 253) !important;
+  color: white !important;
+}

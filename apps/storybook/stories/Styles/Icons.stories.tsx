@@ -18,33 +18,22 @@ const meta = {
     viewMode: "docs",
     docs: {
       description: {
-        component: generateDescriptionString([
-          "Links",
-          "\u2002\u2002\u2192\u2002\u2002",
-          {
-            value: "[Component](/docs/components-icon--docs)",
-          },
-          "\u2002\u2002",
-          {
-            value: "[Code](https://github.com/niceprototypes/nice-icons)",
-          },
-          "\u2002\u2002",
-          {
-            value: "[Package](https://www.npmjs.com/package/nice-icons)",
-            newLine: true,
-          },
-          { value: "\u2002", newLine: true },
-          { value: "Setup", newLine: true },
-          { value: "npm i nice-icons", code: true, newLine: true },
-          { value: "\u2002", newLine: true },
-          { value: "Usage", newLine: true },
-          {
-            value: 'import CheckIcon from "nice-icons/check/stroke.svg"',
-            code: true,
-            newLine: true,
-          },
-          { value: '<img src={CheckIcon} alt="check"/>', code: true },
-        ]),
+        component: generateDescriptionString("nice-icons", {
+          links: ["[Component](/docs/components-icon--docs)"],
+          setup: [
+            {
+              value: 'import CheckIcon from "nice-icons/check/stroke.svg"',
+              code: true,
+            },
+            "\u2002/\u2002",
+            {
+              value: 'import { CheckStrokeIcon } from "nice-icons"',
+              code: true,
+              newLine: true,
+            },
+          ],
+          usage: [{ value: '<img src={CheckIcon} alt="check"/>', code: true }],
+        }),
       },
     },
   },

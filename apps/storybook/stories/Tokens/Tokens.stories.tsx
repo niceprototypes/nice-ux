@@ -19,40 +19,29 @@ const meta = {
     viewMode: "docs",
     docs: {
       description: {
-        component: generateDescriptionString([
-          "Links",
-          "\u2002\u2002\u2192\u2002\u2002",
-          {
-            value: "[Code](https://github.com/niceprototypes/nice-styles)",
-          },
-          "\u2002\u2002",
-          {
-            value: "[Package](https://www.npmjs.com/package/nice-styles)",
-            newLine: true,
-          },
-          { value: "\u2002", newLine: true },
-          { value: "Setup", newLine: true },
-          { value: "npm i nice-styles", code: true, newLine: true },
-          {
-            value: 'import { getToken } from "nice-styles"',
-            code: true,
-            newLine: true,
-          },
-          { value: "\u2002", newLine: true },
-          { value: "Usage", newLine: true },
-          { value: 'getToken("fontSize").key', code: true },
-          "\u2002\u2192\u2002",
-          { value: '"--font-size-base"', code: true, newLine: true },
-          { value: 'getToken("fontSize", "large").key', code: true },
-          "\u2002\u2192\u2002",
-          { value: '"--font-size-large"', code: true, newLine: true },
-          { value: 'getToken("fontSize", "large").var', code: true },
-          "\u2002\u2192\u2002",
-          { value: 'var("--font-size-large")', code: true, newLine: true },
-          { value: 'getToken("fontSize", "large").value', code: true },
-          "\u2002\u2192\u2002",
-          { value: '"24px"', code: true, newLine: true },
-        ]),
+        component: generateDescriptionString("nice-styles", {
+          setup: [
+            {
+              value: 'import { getToken } from "nice-styles"',
+              code: true,
+              newLine: true,
+            },
+          ],
+          usage: [
+            { value: 'getToken("fontSize").key', code: true },
+            "\u2002\u2192\u2002",
+            { value: '"--font-size-base"', code: true, newLine: true },
+            { value: 'getToken("fontSize", "large").key', code: true },
+            "\u2002\u2192\u2002",
+            { value: '"--font-size-large"', code: true, newLine: true },
+            { value: 'getToken("fontSize", "large").var', code: true },
+            "\u2002\u2192\u2002",
+            { value: 'var("--font-size-large")', code: true, newLine: true },
+            { value: 'getToken("fontSize", "large").value', code: true },
+            "\u2002\u2192\u2002",
+            { value: '"24px"', code: true, newLine: true },
+          ],
+        }),
       },
     },
   },
@@ -76,8 +65,14 @@ export const AnimationDuration: Story = {
       variables={createToken(
         "animationDuration",
         [
-          { name: "base", backgroundColor: getToken("foregroundColor", "error").var },
-          { name: "slow", backgroundColor: getToken("foregroundColor", "warning").var },
+          {
+            name: "base",
+            backgroundColor: getToken("foregroundColor", "error").var,
+          },
+          {
+            name: "slow",
+            backgroundColor: getToken("foregroundColor", "warning").var,
+          },
         ],
         ({ name, backgroundColor }: any) => {
           const animationName = name === "base" ? "slide" : "slideSlow"
@@ -96,7 +91,10 @@ export const AnimationDuration: Story = {
                   height: getToken("cellHeight", "smaller").var,
                   borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2)`,
                   animation: `${animationName} calc(${getToken("animationDuration", name).var} * 6) ${getToken("animationEasing").var} infinite`,
-                  animationDelay: name === "base" ? getToken("animationDuration", name).var : 0,
+                  animationDelay:
+                    name === "base"
+                      ? getToken("animationDuration", name).var
+                      : 0,
                 }}
               />
             </Flex>
@@ -144,7 +142,10 @@ export const BackgroundColor: Story = {
         "backgroundColor",
         [
           { name: "base", backgroundColor: getToken("backgroundColor").var },
-          { name: "alternate", backgroundColor: getToken("backgroundColor", "alternate").var },
+          {
+            name: "alternate",
+            backgroundColor: getToken("backgroundColor", "alternate").var,
+          },
         ],
         ({ backgroundColor }: any) => (
           <Flex
@@ -167,17 +168,21 @@ export const BorderColor: Story = {
   name: "borderColor",
   render: () => (
     <Story
-      variables={createToken("borderColor", ["base", "heavy", "heavier"], variant => (
-        <Flex
-          style={{
-            backgroundColor: "white",
-            width: getToken("cellHeight", "larger").var,
-            height: getToken("cellHeight", "larger").var,
-            border: `${getToken("borderWidth").var} solid ${getToken("borderColor", variant).var}`,
-            borderRadius: getToken("borderRadius", "small").var,
-          }}
-        />
-      ))}
+      variables={createToken(
+        "borderColor",
+        ["base", "heavy", "heavier"],
+        variant => (
+          <Flex
+            style={{
+              backgroundColor: "white",
+              width: getToken("cellHeight", "larger").var,
+              height: getToken("cellHeight", "larger").var,
+              border: `${getToken("borderWidth").var} solid ${getToken("borderColor", variant).var}`,
+              borderRadius: getToken("borderRadius", "small").var,
+            }}
+          />
+        )
+      )}
     />
   ),
   parameters: storyParameters,
@@ -413,9 +418,13 @@ export const LineHeight: Story = {
   name: "lineHeight",
   render: () => (
     <Story
-      variables={createToken("lineHeight", ["condensed", "base", "expanded"], variant => (
-        <Typography lineHeight={variant as any}>{loremIpsum}</Typography>
-      ))}
+      variables={createToken(
+        "lineHeight",
+        ["condensed", "base", "expanded"],
+        variant => (
+          <Typography lineHeight={variant as any}>{loremIpsum}</Typography>
+        )
+      )}
     />
   ),
   parameters: storyParameters,

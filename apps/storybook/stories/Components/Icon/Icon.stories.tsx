@@ -97,7 +97,7 @@ const meta = {
         "error",
       ],
       table: {
-        type: { summary: "ForegroundColorType" },
+        type: { summary: null },
         defaultValue: { summary: '"base"' },
       },
     },
@@ -107,7 +107,7 @@ const meta = {
       control: "select",
       options: ["smaller", "small", "base", "large", "larger"],
       table: {
-        type: { summary: "FontSizeType" },
+        type: { summary: null },
         defaultValue: { summary: '"base"' },
       },
     },
@@ -125,7 +125,7 @@ const meta = {
       control: "select",
       options: ["small", "base", "large"],
       table: {
-        type: { summary: "BorderWidthType" },
+        type: { summary: null },
         defaultValue: { summary: '"base"' },
       },
     },
