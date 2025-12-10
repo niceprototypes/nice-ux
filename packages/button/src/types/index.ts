@@ -1,5 +1,5 @@
 import * as React from "react"
-import type { CellHeightType, BorderWidthType } from "nice-styles"
+import { CellHeightType, BorderWidthType } from "nice-styles"
 
 /**
  * Interactive state of the button
@@ -11,6 +11,11 @@ export type ButtonStateType = "default" | "disabled" | "attention" | "success" |
  * Main props interface for the Button component
  */
 export interface ButtonProps {
+  /**
+   * Click handler
+   */
+  onClick: () => void
+
   /**
    * Size of the button
    * @default "base"
@@ -27,11 +32,6 @@ export interface ButtonProps {
    * Icon name from nice-react-icon to display
    */
   icon?: string
-
-  /**
-   * Click handler
-   */
-  onClick?: () => void
 
   /**
    * Whether the button is disabled

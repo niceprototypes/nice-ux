@@ -114,6 +114,7 @@
   },
   "dependencies": {
     "nice-react-typography": ">=4.0.0",
-    "nice-styles": "file:../nice-styles"
+    "nice-styles": "file:../nice-styles",
+    "nice-react-styles": "file:../nice-react-styles"
   }
 }

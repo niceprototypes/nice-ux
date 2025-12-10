@@ -1,14 +1,9 @@
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import { getToken } from "nice-styles"
 import type { CellHeightType, BorderRadiusType } from "nice-styles"
 import { ButtonStateType } from "../types"
-
-/**
- * Get border radius based on size
- */
-const getBorderRadius = (size: CellHeightType): string => {
-  return getToken("borderRadius", size as BorderRadiusType).var
-}
+import { generateTokens } from "nice-react-styles"
+import { ButtonTokens } from "./Button.tokens"
 
 /**
  * Overlay element for border rendering (positioned behind content)
@@ -48,6 +43,8 @@ export const ButtonOuter = styled.button.withConfig({
   $hasIcon?: boolean
   $isSquare?: boolean
 }>`
+  /* Button tokens */
+  ${generateTokens(ButtonTokens)}
   /* Reset browser button styles */
   position: relative;
   padding: ${({ $size, $hasIcon, $isSquare }) => {
@@ -72,10 +69,7 @@ export const ButtonOuter = styled.button.withConfig({
   font-weight: ${getToken("fontWeight", "base").var};
 
   /* Colors based on state */
-  background-color: ${({ $state }) => {
-    if ($state === "disabled") return getToken("backgroundColor", "alternate").var
-    return getToken("foregroundColor", "base").var
-  }};
+  background-color: var(--button-primary-base-background-color);
 
   color: ${({ $state }) => {
     if ($state === "disabled") return getToken("foregroundColor", "disabled").var
@@ -83,7 +77,7 @@ export const ButtonOuter = styled.button.withConfig({
   }};
 
   border: none;
-  border-radius: ${({ $size }) => getBorderRadius($size)};
+  border-radius: ${({ $size }) => getToken("borderRadius", $size)};
   cursor: ${({ $disabled }) => ($disabled ? "not-allowed" : "pointer")};
   text-align: center;
 
