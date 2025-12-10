@@ -5,7 +5,7 @@ import {
   ButtonOuter,
   ButtonOverlay,
   ButtonInner,
-  ButtonText,
+  ButtonContent,
   ButtonIconPositioned,
 } from "./Button.styles"
 import { ButtonProps } from "../types"
@@ -80,11 +80,11 @@ const Button: React.FC<ButtonProps> = ({
       {/* Button text content */}
       {children && (
         <ButtonInner $size={size}>
-          <ButtonText $size={size}>
-            <Typography antialiased={antialiased} as="span" weight="medium" size={size}>
+          <ButtonContent $size={size}>
+            <Typography antialiased={antialiased} weight="medium" size={size}>
               {children}
             </Typography>
-          </ButtonText>
+          </ButtonContent>
         </ButtonInner>
       )}
     </ButtonOuter>

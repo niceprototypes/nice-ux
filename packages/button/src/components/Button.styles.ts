@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import { getToken } from "nice-styles"
 import type { CellHeightType, BorderWidthType } from "nice-styles"
 import { ButtonStateType, ButtonStatusType } from "../types"
@@ -19,7 +19,7 @@ export const ButtonOverlay = styled.div<{
   bottom: 0;
   border-style: solid;
   border-width: ${({ $borderWidth }) => getToken("borderWidth", $borderWidth).var};
-  border-color: ${({ $status, $state }) => getButtonToken($status, $state, "border-color").var};
+  border-color: ${({ $status, $state }) => getButtonToken("status", $status, $state, "border-color").var};
   border-radius: inherit;
   pointer-events: none;
 `
@@ -51,11 +51,6 @@ export const ButtonOuter = styled.button.withConfig({
 
   /* Reset browser button styles */
   position: relative;
-  padding: ${({ $size, $hasIcon, $isSquare }) => {
-    if ($isSquare) return "0"
-    const height = getToken("cellHeight", $size).var
-    return `0 calc(${height}) 0 calc(${height} / 2)`
-  }};
   margin: 0;
   outline: none;
   text-decoration: none;
@@ -65,19 +60,26 @@ export const ButtonOuter = styled.button.withConfig({
 
   /* Button-specific styles */
   display: block;
-  width: ${({ $isSquare, $size }) => {
-    if ($isSquare) return getToken("cellHeight", $size).var
-    return "auto"
-  }};
-  aspect-ratio: ${({ $isSquare }) => ($isSquare ? "1" : "auto")};
+  padding: ${({ $size }) => `0 ${getToken("gap", $size).var}`};
+  width: auto;
   font-weight: ${getToken("fontWeight", "base").var};
 
+  /* Square button styles (icon-only) */
+  ${({ $isSquare, $size }) =>
+    $isSquare &&
+    css`
+      padding: 0;
+      width: ${getToken("cellHeight", $size).var};
+      aspect-ratio: 1;
+    `}
+
   /* Colors based on status and state */
-  background-color: ${({ $status, $state }) => getButtonToken($status, $state, "background-color").var};
-  color: ${({ $status, $state }) => getButtonToken($status, $state, "foreground-color").var};
+  background-color: ${({ $status, $state }) =>
+    getButtonToken("status", $status, $state, "background-color").var};
+  color: ${({ $status, $state }) => getButtonToken("status", $status, $state, "foreground-color").var};
 
   border: none;
-  border-radius: ${({ $size }) => getToken("borderRadius", $size).var};
+  border-radius: ${({ $size }) => getToken("borderRadius", "smaller").var};
   cursor: ${({ $disabled }) => ($disabled ? "not-allowed" : "pointer")};
   text-align: center;
 
@@ -88,7 +90,7 @@ export const ButtonOuter = styled.button.withConfig({
 /**
  * Text content wrapper
  */
-export const ButtonText = styled.div<{ $size: CellHeightType }>`
+export const ButtonContent = styled.div<{ $size: CellHeightType }>`
   flex: 1;
   display: flex;
   align-items: center;

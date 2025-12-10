@@ -18,4 +18,4 @@ export { default } from "./components/Button"
 export type { ButtonProps, ButtonStatusType, ButtonStateType } from "./types"
 
 // Style exports for advanced customization
-export { ButtonOuter, ButtonInner, ButtonText } from "./components/Button.styles"
+export { ButtonOuter, ButtonInner, ButtonContent } from "./components/Button.styles"
