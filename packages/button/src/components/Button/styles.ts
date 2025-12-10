@@ -1,8 +1,8 @@
 import styled, { css } from "styled-components"
 import { getToken } from "nice-styles"
 import type { CellHeightType, BorderWidthType } from "nice-styles"
-import { ButtonStateType, ButtonStatusType, ButtonBorderRadiusType } from "../types"
-import { ButtonTokens, getButtonToken } from "./Button.tokens"
+import { ButtonStateType, ButtonStatusType, ButtonBorderRadiusType } from "./types"
+import { ButtonTokens, getButtonToken } from "./services"
 
 /**
  * Overlay element for border rendering (positioned behind content)
@@ -70,7 +70,7 @@ export const ButtonOuter = styled.button.withConfig({
     $isSquare &&
     css`
       padding: 0;
-      width: ${getToken("cellHeight", $size).var};
+      width: ${getButtonToken("height", $size).var};
       aspect-ratio: 1;
     `}
 
@@ -92,11 +92,12 @@ export const ButtonOuter = styled.button.withConfig({
  * Text content wrapper
  */
 export const ButtonContent = styled.div<{ $size: CellHeightType }>`
+  ${ButtonTokens}
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: ${({ $size }) => getToken("cellHeight", $size).var};
+  height: ${({ $size }) => getButtonToken("height", $size).var};
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -106,11 +107,12 @@ export const ButtonContent = styled.div<{ $size: CellHeightType }>`
  * Positioned icon wrapper
  */
 export const ButtonIconPositioned = styled.div<{ $size: CellHeightType }>`
+  ${ButtonTokens}
   position: absolute;
   right: 0;
   top: 0;
-  width: ${({ $size }) => getToken("cellHeight", $size).var};
-  height: ${({ $size }) => getToken("cellHeight", $size).var};
+  width: ${({ $size }) => getButtonToken("height", $size).var};
+  height: ${({ $size }) => getButtonToken("height", $size).var};
   display: flex;
   align-items: center;
   justify-content: center;

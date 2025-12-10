@@ -1,18 +1,6 @@
 import * as React from "react"
 import Icon, { IconNameType, IconSizeType } from "nice-react-icon"
-import type { CellHeightType } from "nice-styles"
-
-/**
- * Props for the ButtonIcon component
- */
-interface ButtonIconProps {
-  /** Size of the icon (matches button size) */
-  size: CellHeightType
-  /** Icon name/identifier */
-  icon?: string
-  /** Icon color */
-  color?: string
-}
+import { ButtonIconProps } from "./types"
 
 /**
  * ButtonIcon component handles icon rendering within buttons
@@ -26,12 +14,7 @@ const ButtonIcon: React.FC<ButtonIconProps> = ({ size, icon, color }) => {
 
   // Render the actual icon
   return (
-    <Icon
-      name={icon as IconNameType}
-      size={size as IconSizeType}
-      color={color}
-      strokeWidth={2}
-    />
+    <Icon name={icon as IconNameType} size={size as IconSizeType} color={color} strokeWidth={2} />
   )
 }
 

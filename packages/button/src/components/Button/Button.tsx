@@ -1,14 +1,14 @@
 import * as React from "react"
 import Typography from "nice-react-typography"
-import ButtonIcon from "./ButtonIcon"
+import ButtonIcon from "../ButtonIcon"
 import {
   ButtonOuter,
   ButtonOverlay,
   ButtonInner,
   ButtonContent,
   ButtonIconPositioned,
-} from "./Button.styles"
-import { ButtonProps } from "../types"
+} from "./styles"
+import { ButtonProps } from "./types"
 
 /**
  * Button component
