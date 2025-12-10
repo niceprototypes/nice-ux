@@ -2,6 +2,9 @@ import { getToken } from "nice-styles"
 import { createComponentTokens } from "nice-react-styles"
 
 const ButtonTokenMap = {
+  "border-radius-small": getToken("borderRadius", "small").var,
+  "border-radius-base": getToken("borderRadius", "base").var,
+  "border-radius-large": getToken("borderRadius", "large").var,
   "status-primary-base-background-color": getToken("foregroundColor").var,
   "status-primary-base-border-color": getToken("foregroundColor").var,
   "status-primary-base-foreground-color": "#fff",

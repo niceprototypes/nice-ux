@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components"
 import { getToken } from "nice-styles"
 import type { CellHeightType, BorderWidthType } from "nice-styles"
-import { ButtonStateType, ButtonStatusType } from "../types"
+import { ButtonStateType, ButtonStatusType, ButtonBorderRadiusType } from "../types"
 import { ButtonTokens, getButtonToken } from "./Button.tokens"
 
 /**
@@ -39,6 +39,7 @@ export const ButtonInner = styled.div<{
 export const ButtonOuter = styled.button.withConfig({
   shouldForwardProp: (prop) => !prop.startsWith("$"),
 })<{
+  $borderRadius: ButtonBorderRadiusType
   $size: CellHeightType
   $status: ButtonStatusType
   $state: ButtonStateType
@@ -79,7 +80,7 @@ export const ButtonOuter = styled.button.withConfig({
   color: ${({ $status, $state }) => getButtonToken("status", $status, $state, "foreground-color").var};
 
   border: none;
-  border-radius: ${({ $size }) => getToken("borderRadius", "smaller").var};
+  border-radius: ${({ $borderRadius }) => getButtonToken("border-radius", $borderRadius).var};
   cursor: ${({ $disabled }) => ($disabled ? "not-allowed" : "pointer")};
   text-align: center;
 

@@ -38,6 +38,7 @@ import { ButtonProps } from "../types"
 const Button: React.FC<ButtonProps> = ({
   antialiased = false,
   "aria-label": ariaLabel,
+  borderRadius = "base",
   borderWidth = "base",
   children,
   className,
@@ -56,6 +57,7 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <ButtonOuter
+      $borderRadius={borderRadius}
       $disabled={isDisabled}
       $hasIcon={hasIcon}
       $isSquare={isSquare}

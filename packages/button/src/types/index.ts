@@ -2,6 +2,11 @@ import * as React from "react"
 import { CellHeightType, BorderWidthType } from "nice-styles"
 
 /**
+ * Border radius variants for the button
+ */
+export type ButtonBorderRadiusType = "small" | "base" | "large"
+
+/**
  * Visual status/variant of the button
  */
 export type ButtonStatusType = "primary" | "secondary"
@@ -87,4 +92,10 @@ export interface ButtonProps {
    * @default "base"
    */
   borderWidth?: BorderWidthType
+
+  /**
+   * Border radius of the button
+   * @default "base"
+   */
+  borderRadius?: ButtonBorderRadiusType
 }
