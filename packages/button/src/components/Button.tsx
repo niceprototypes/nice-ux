@@ -1,6 +1,5 @@
 import * as React from "react"
 import Typography from "nice-react-typography"
-import { getToken } from "nice-styles"
 import ButtonIcon from "./ButtonIcon"
 import {
   ButtonOuter,
@@ -17,7 +16,8 @@ import { ButtonProps } from "../types"
  *
  * Features:
  * - Multiple sizes (smaller, small, base, large, larger)
- * - States (default, disabled, attention, success, warning)
+ * - Status variants (primary, secondary)
+ * - States (base, disabled, error, success, warning)
  * - Icon support with nice-react-icon
  * - Accessibility support
  * - TypeScript support
@@ -27,6 +27,7 @@ import { ButtonProps } from "../types"
  * import Button from 'nice-react-button'
  *
  * <Button
+ *   status="primary"
  *   icon="arrow"
  *   onClick={() => console.log('clicked')}
  * >
@@ -45,14 +46,14 @@ const Button: React.FC<ButtonProps> = ({
   icon,
   onClick,
   size = "base",
-  state = "default",
+  state = "base",
+  status = "primary",
   type = "button",
 }) => {
   const hasIcon = !!icon
   const isDisabled = disabled || state === "disabled"
   const isSquare = hasIcon && !children
 
-  // @ts-ignore
   return (
     <ButtonOuter
       $disabled={isDisabled}
@@ -60,6 +61,7 @@ const Button: React.FC<ButtonProps> = ({
       $isSquare={isSquare}
       $size={size}
       $state={state}
+      $status={status}
       aria-label={ariaLabel}
       className={className}
       data-testid={testId}
@@ -68,7 +70,7 @@ const Button: React.FC<ButtonProps> = ({
       type={type}
     >
       {/* Border overlay (positioned behind content) */}
-      <ButtonOverlay $borderWidth={getToken("borderWidth", borderWidth).var} $state={state} />
+      <ButtonOverlay $borderWidth={borderWidth} $status={status} $state={state} />
       {/* Left positioned icon */}
       {hasIcon && (
         <ButtonIconPositioned $size={size}>

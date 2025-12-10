@@ -2,10 +2,15 @@ import * as React from "react"
 import { CellHeightType, BorderWidthType } from "nice-styles"
 
 /**
- * Interactive state of the button
- * Affects styling and behavior
+ * Visual status/variant of the button
  */
-export type ButtonStateType = "default" | "disabled" | "attention" | "success" | "warning"
+export type ButtonStatusType = "primary" | "secondary"
+
+/**
+ * Interactive state of the button
+ * Affects styling based on context
+ */
+export type ButtonStateType = "base" | "disabled" | "error" | "success" | "warning"
 
 /**
  * Main props interface for the Button component
@@ -17,6 +22,12 @@ export interface ButtonProps {
   onClick: () => void
 
   /**
+   * Visual status/variant of the button
+   * @default "primary"
+   */
+  status?: ButtonStatusType
+
+  /**
    * Size of the button
    * @default "base"
    */
@@ -24,7 +35,7 @@ export interface ButtonProps {
 
   /**
    * Interactive state of the button
-   * @default "default"
+   * @default "base"
    */
   state?: ButtonStateType
 
