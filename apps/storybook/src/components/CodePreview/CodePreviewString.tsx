@@ -56,9 +56,9 @@ const patterns: Array<[RegExp, Token[]]> = [
   // Closing bracket: >
   [/^>/, [[">", colors.markup]]],
 
-  // Prop with string value: prop="value"
+  // Prop with string value: prop="value" (with optional leading whitespace)
   [
-    /^(\s+)(\w+)="([^"]*)"/,
+    /^(\s*)(\w+)="([^"]*)"/,
     [
       [1],
       [2, colors.markup],
@@ -69,9 +69,9 @@ const patterns: Array<[RegExp, Token[]]> = [
     ],
   ],
 
-  // Prop with number value: prop={0}
+  // Prop with number value: prop={0} (with optional leading whitespace)
   [
-    /^(\s+)(\w+)=\{(\d+)\}/,
+    /^(\s*)(\w+)=\{(\d+)\}/,
     [
       [1],
       [2, colors.markup],
@@ -82,9 +82,9 @@ const patterns: Array<[RegExp, Token[]]> = [
     ],
   ],
 
-  // Prop with boolean value: prop={true} or prop={false}
+  // Prop with boolean value: prop={true} or prop={false} (with optional leading whitespace)
   [
-    /^(\s+)(\w+)=\{(true|false)\}/,
+    /^(\s*)(\w+)=\{(true|false)\}/,
     [
       [1],
       [2, colors.markup],
@@ -92,6 +92,17 @@ const patterns: Array<[RegExp, Token[]]> = [
       ["{", colors.value],
       [3, colors.value],
       ["}", colors.value],
+    ],
+  ],
+
+  // Prop with expression/function value: prop={...} (with optional leading whitespace)
+  [
+    /^(\s*)(\w+)=(\{(?:[^{}]|\{(?:[^{}]|\{[^{}]*\})*\})*\})/,
+    [
+      [1],
+      [2, colors.markup],
+      ["=", colors.markup],
+      [3, colors.value],
     ],
   ],
 
@@ -101,17 +112,6 @@ const patterns: Array<[RegExp, Token[]]> = [
     [
       [1],
       [2, colors.markup],
-    ],
-  ],
-
-  // Prop with expression/function value: prop={...} (captures balanced braces)
-  [
-    /^(\s+)(\w+)=(\{(?:[^{}]|\{(?:[^{}]|\{[^{}]*\})*\})*\})/,
-    [
-      [1],
-      [2, colors.markup],
-      ["=", colors.markup],
-      [3, colors.value],
     ],
   ],
 

@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import Button from "nice-react-button"
+import Flex from "nice-react-flex"
 import Story from "../../../src/components/Story"
 import { generateDescriptionString } from "../../../src/services"
 
@@ -19,9 +20,10 @@ const meta = {
             },
           ],
           usage: [
-            { value: "<Button onClick={handler}>", code: true },
-            { value: "+1{children}", code: true },
-            { value: "</Button>", code: true },
+            {
+              value: "<Button onClick={handler}>{children}</Button>",
+              code: true,
+            },
           ],
         }),
       },
@@ -39,89 +41,28 @@ const meta = {
         type: { summary: "React.ReactNode" },
       },
     },
-    antialiased: {
-      description: "",
-      control: "boolean",
-      table: {
-        type: { summary: "boolean" },
-      },
-    },
-    "aria-label": {
-      description: "",
-      control: "text",
-      table: {
-        type: { summary: "string" },
-      },
-    },
-    borderWidth: {
-      description: "[`Tokens.borderWidth`](/?path=/story/styles-tokens--border-width)",
-      control: "select",
-      options: ["small", "base", "large"],
-      table: {
-        type: { summary: null },
-        defaultValue: { summary: '"base"' },
-      },
-    },
-    className: {
-      description: "",
-      control: "text",
-      table: {
-        type: { summary: "string" },
-      },
-    },
-    "data-testid": {
-      description: "",
-      control: "text",
-      table: {
-        type: { summary: "string" },
-      },
-    },
-    disabled: {
-      description: "",
-      control: "boolean",
-      table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
-      },
-    },
-    icon: {
-      description: "",
-      control: "text",
-      table: {
-        type: { summary: "string" },
-      },
-    },
     onClick: {
       description: "",
       table: {
         type: { summary: "() => void" },
       },
     },
-    size: {
-      description: "[`Tokens.cellHeight`](/?path=/story/styles-tokens--cell-height)",
+    status: {
+      description: "",
       control: "select",
-      options: ["smaller", "small", "base", "large", "larger"],
+      options: ["primary", "secondary"],
       table: {
-        type: { summary: null },
-        defaultValue: { summary: '"base"' },
+        type: { summary: "ButtonStatusType" },
+        defaultValue: { summary: '"primary"' },
       },
     },
     state: {
       description: "",
       control: "select",
-      options: ["default", "disabled", "attention", "success", "warning"],
+      options: ["base", "disabled", "error", "success", "warning"],
       table: {
         type: { summary: "ButtonStateType" },
-        defaultValue: { summary: '"default"' },
-      },
-    },
-    type: {
-      description: "",
-      control: "select",
-      options: ["button", "submit", "reset"],
-      table: {
-        type: { summary: '"button" | "submit" | "reset"' },
-        defaultValue: { summary: '"button"' },
+        defaultValue: { summary: '"base"' },
       },
     },
   },
@@ -139,39 +80,222 @@ export const Basic: Story = {
           name: "onClick",
           description: "onClick={() => void}",
           demo: (
-            <Button onClick={() => alert("Button clicked!")}>
-              Click Me
-            </Button>
+            <Button onClick={() => alert("Button clicked!")}>Click Me</Button>
           ),
-          code: `<Button>\n+1{children}\n</Button>`,
+          code: `<Button onClick={handler}>\n+1{children}\n</Button>`,
         },
       ]}
     />
   ),
 }
 
-export const Disabled: Story = {
-  name: "disabled",
+export const Status: Story = {
+  name: "status",
   render: () => (
     <Story
       variables={[
         {
-          name: "false",
-          description: "disabled={false}",
+          name: "primary",
+          description: 'status="primary"',
+          default: true,
+          demo: <Button onClick={() => {}}>Primary</Button>,
+          code: `<Button onClick={handler}>\n+1{children}\n</Button>`,
+        },
+        {
+          name: "secondary",
+          description: 'status="secondary"',
           demo: (
-            <Button onClick={() => alert("Button clicked!")}>Enabled</Button>
+            <Button onClick={() => {}} status="secondary">
+              Secondary
+            </Button>
+          ),
+          code: `<Button\n+1onClick={handler}\n+1status="secondary"\n>\n+1{children}\n</Button>`,
+        },
+      ]}
+    />
+  ),
+}
+
+export const State: Story = {
+  name: "state",
+  render: () => (
+    <Story
+      variables={[
+        {
+          name: "base",
+          description: 'state="base"',
+          default: true,
+          demo: (
+            <Flex gap="small">
+              <Button onClick={() => {}}>Base</Button>
+              <Button status="secondary" onClick={() => {}}>
+                Base
+              </Button>
+            </Flex>
           ),
           code: `<Button onClick={handler}>\n+1{children}\n</Button>`,
         },
         {
-          name: "true",
-          description: "disabled={true}",
+          name: "disabled",
+          description: 'state="disabled"',
           demo: (
-            <Button onClick={() => alert("Button clicked!")} disabled>
-              Disabled
+            <Flex gap="small">
+              <Button onClick={() => {}} state="disabled">
+                Disabled
+              </Button>
+              <Button status="secondary" onClick={() => {}} state="disabled">
+                Disabled
+              </Button>
+            </Flex>
+          ),
+          code: `<Button\n+1onClick={handler}\n+1state="disabled"\n>\n+1{children}\n</Button>`,
+        },
+        {
+          name: "error",
+          description: 'state="error"',
+          demo: (
+            <Flex gap="small">
+              <Button onClick={() => {}} state="error">
+                Error
+              </Button>
+              <Button status="secondary" onClick={() => {}} state="error">
+                Error
+              </Button>
+            </Flex>
+          ),
+          code: `<Button\n+1onClick={handler}\n+1state="error"\n>\n+1{children}\n</Button>`,
+        },
+        {
+          name: "success",
+          description: 'state="success"',
+          demo: (
+            <Flex gap="small">
+              <Button onClick={() => {}} state="success">
+                Success
+              </Button>
+              <Button status="secondary" onClick={() => {}} state="success">
+                Success
+              </Button>
+            </Flex>
+          ),
+          code: `<Button\n+1onClick={handler}\n+1state="success"\n>\n+1{children}\n</Button>`,
+        },
+        {
+          name: "warning",
+          description: 'state="warning"',
+          demo: (
+            <Flex gap="small">
+              <Button onClick={() => {}} state="warning">
+                Warning
+              </Button>
+              <Button status="secondary" onClick={() => {}} state="warning">
+                Warning
+              </Button>
+            </Flex>
+          ),
+          code: `<Button\n+1onClick={handler}\n+1state="warning"\n>\n+1{children}\n</Button>`,
+        },
+      ]}
+    />
+  ),
+}
+
+export const Size: Story = {
+  name: "size",
+  render: () => (
+    <Story
+      variables={[
+        {
+          name: "smaller",
+          description: 'size="smaller"',
+          demo: (
+            <Button onClick={() => {}} size="smaller">
+              Smaller
             </Button>
           ),
-          code: `<Button onClick={handler} disabled>\n+1{children}\n</Button>`,
+          code: `<Button\n+1onClick={handler}\n+1size="smaller"\n>\n+1{children}\n</Button>`,
+        },
+        {
+          name: "small",
+          description: 'size="small"',
+          demo: (
+            <Button onClick={() => {}} size="small">
+              Small
+            </Button>
+          ),
+          code: `<Button\n+1onClick={handler}\n+1size="small"\n>\n+1{children}\n</Button>`,
+        },
+        {
+          name: "base",
+          description: 'size="base"',
+          default: true,
+          demo: (
+            <Button onClick={() => {}} size="base">
+              Base
+            </Button>
+          ),
+          code: `<Button onClick={handler}>\n+1{children}\n</Button>`,
+        },
+        {
+          name: "large",
+          description: 'size="large"',
+          demo: (
+            <Button onClick={() => {}} size="large">
+              Large
+            </Button>
+          ),
+          code: `<Button\n+1onClick={handler}\n+1size="large"\n>\n+1{children}\n</Button>`,
+        },
+        {
+          name: "larger",
+          description: 'size="larger"',
+          demo: (
+            <Button onClick={() => {}} size="larger">
+              Larger
+            </Button>
+          ),
+          code: `<Button\n+1onClick={handler}\n+1size="larger"\n>\n+1{children}\n</Button>`,
+        },
+      ]}
+    />
+  ),
+}
+
+export const BorderRadius: Story = {
+  name: "borderRadius",
+  render: () => (
+    <Story
+      variables={[
+        {
+          name: "small",
+          description: 'borderRadius="small"',
+          demo: (
+            <Button onClick={() => {}} borderRadius="small">
+              Small
+            </Button>
+          ),
+          code: `<Button\n+1onClick={handler}\n+1borderRadius="small"\n>\n+1{children}\n</Button>`,
+        },
+        {
+          name: "base",
+          description: 'borderRadius="base"',
+          default: true,
+          demo: (
+            <Button onClick={() => {}} borderRadius="base">
+              Base
+            </Button>
+          ),
+          code: `<Button onClick={handler}>\n+1{children}\n</Button>`,
+        },
+        {
+          name: "large",
+          description: 'borderRadius="large"',
+          demo: (
+            <Button onClick={() => {}} borderRadius="large">
+              Large
+            </Button>
+          ),
+          code: `<Button\n+1onClick={handler}\n+1borderRadius="large"\n>\n+1{children}\n</Button>`,
         },
       ]}
     />

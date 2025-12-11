@@ -2,9 +2,9 @@ import type { Meta, StoryObj } from "@storybook/react"
 import { getToken } from "nice-styles"
 import Flex, { GapSize } from "nice-react-flex"
 import Typography from "nice-react-typography"
-import Story from "../../src/components/Story"
-import DemoDots from "../../src/components/DemoDots"
-import { generateDescriptionString, createToken } from "../../src/services"
+import Story from "../../../src/components/Story"
+import DemoDots from "../../../src/components/DemoDots"
+import { generateDescriptionString, createToken } from "../../../src/services"
 
 const TokensDemo = () => <></>
 

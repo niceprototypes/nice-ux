@@ -20,7 +20,7 @@ import CodePreviewCopying from "./CodePreviewCopying"
  *
  * @example
  * // Multi-line with indentation
- * <CodePreview code={`<Flex>\\n+1{children}\\n</Flex>`} />
+ * <CodePreview code={`<Flex>{children}</Flex>`} />
  * // Renders as:
  * // <Flex>
  * //   {children}

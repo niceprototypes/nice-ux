@@ -157,12 +157,7 @@ export const Name: Story = {
       variables={iconNames.map(name => ({
         name,
         description: `name="${name}"`,
-        demo: (
-          <Flex gap="base">
-            <Icon name={name} />
-            <Icon name={name} outlined />
-          </Flex>
-        ),
+        demo: <Icon name={name} />,
         code: name === "placeholder" ? `<Icon/>` : `<Icon name="${name}"/>`,
       }))}
     />

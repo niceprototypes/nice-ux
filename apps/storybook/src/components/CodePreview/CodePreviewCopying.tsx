@@ -13,7 +13,7 @@ const CodePreviewCopying: React.FC = () => {
   return (
     <Flex
       style={{
-        backgroundColor: colors.background,
+        backgroundColor: "hsla(220, 5%, 15%, 1)",
         padding: "0.5rem 0.625rem",
         borderRadius: getToken("borderRadius", "base").var,
         position: "absolute",
@@ -22,6 +22,8 @@ const CodePreviewCopying: React.FC = () => {
         bottom: 0,
         right: 0,
         cursor: "default",
+        padding: "0.5rem 0.625rem",
+        whiteSpace: "nowrap",
       }}
     >
       <Typography code size="smaller" color="lighter">
