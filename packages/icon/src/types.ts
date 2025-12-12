@@ -1,6 +1,5 @@
 import type { FontSizeType, BorderWidthType, ForegroundColorType } from "nice-styles"
 
-
 /**
  * Available icon names in the icon set
  */

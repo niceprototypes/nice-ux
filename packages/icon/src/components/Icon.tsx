@@ -1,6 +1,6 @@
 import * as React from "react"
 import { IconProps } from "../types"
-import { IconWrapperStyled, ImageStyled } from "./Icon.styles"
+import { IconWrapperStyled, ImageStyled } from "./styles"
 import { getIcon } from "../services"
 
 /**
@@ -42,7 +42,7 @@ const Icon: React.FC<IconProps> = ({
   strokeScaling = false,
 }) => {
   const SvgIcon = getIcon(name, outlined)
-  const isSpinner = name === "spinner"
+  const spinning = name === "spinner"
 
   return (
     <IconWrapperStyled
@@ -51,7 +51,7 @@ const Icon: React.FC<IconProps> = ({
       $outlined={outlined}
       $strokeWidth={strokeWidth}
       $strokeScaling={strokeScaling}
-      $spinning={isSpinner}
+      $spinning={spinning}
       className={className}
     >
       {url

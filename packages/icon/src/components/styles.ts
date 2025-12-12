@@ -1,6 +1,7 @@
 import styled, { css, keyframes } from "styled-components"
 import type { FontSizeType, BorderWidthType, ForegroundColorType } from "nice-styles"
 import { getToken } from "nice-styles"
+import { getIconToken } from "./tokens"
 
 const spin = keyframes`
   from {
@@ -34,7 +35,7 @@ export const IconWrapperStyled = styled.div.withConfig({
     width: 100%;
     aspect-ratio: 1;
     ${({ $spinning }) => $spinning && css`
-      animation: ${spin} 750ms linear infinite;
+      animation: ${spin} ${getIconToken("spinningAnimationDuration").var} linear infinite;
     `}
   }
 
@@ -50,7 +51,7 @@ export const IconWrapperStyled = styled.div.withConfig({
               : css`
                 fill: none;
                 stroke: ${getToken("foregroundColor", $color).var};
-                stroke-width: ${getToken("borderWidth", $strokeWidth).var};
+                stroke-width: ${getIconToken("strokeWidth", $strokeWidth).var};
                 stroke-linecap: round;
                 stroke-linejoin: round;
               `}

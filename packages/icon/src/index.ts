@@ -29,7 +29,10 @@ export { iconNames } from "./types"
 export {
   IconWrapperStyled,
   ImageStyled,
-} from "./components/Icon.styles"
+} from "./components/styles"
+
+// Token exports
+export { IconStyles, IconTokenMap, getIconToken } from "./components/tokens"
 
 // Service exports
 export { getIcon } from "./services"

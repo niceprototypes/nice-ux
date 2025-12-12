@@ -102,11 +102,11 @@ export type IconName = keyof typeof iconMap
  * @param outlined - Use outlined/fill variant (true) or stroke variant (false)
  * @returns The React component for the icon, or undefined if not found
  */
-const getIcon = (name: string, outlined: boolean = false): React.FunctionComponent<React.SVGAttributes<SVGElement>> | undefined => {
+const services = (name: string, outlined: boolean = false): React.FunctionComponent<React.SVGAttributes<SVGElement>> | undefined => {
   const icon = iconMap[name as IconName]
   if (!icon) return undefined
 
   return outlined ? icon.Fill : icon.Stroke
 }
 
-export default getIcon
+export default services
