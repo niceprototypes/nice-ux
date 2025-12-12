@@ -1,13 +1,13 @@
-import type { CellHeightType } from "nice-styles"
+import type { IconNameType, IconSizeType } from "nice-react-icon"
 
 /**
  * Props for the ButtonIcon component
  */
 export interface ButtonIconProps {
   /** Size of the icon (matches button size) */
-  size: CellHeightType
+  size: IconSizeType
   /** Icon name/identifier */
-  icon?: string
+  icon: IconNameType
   /** Icon color */
   color?: string
 }

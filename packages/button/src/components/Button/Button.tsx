@@ -1,13 +1,7 @@
 import * as React from "react"
 import Typography from "nice-react-typography"
-import ButtonIcon from "../ButtonIcon"
-import {
-  ButtonOuter,
-  ButtonOverlay,
-  ButtonInner,
-  ButtonContent,
-  ButtonIconPositioned,
-} from "./styles"
+import Icon from "nice-react-icon"
+import { StyledButton } from "./styles"
 import { ButtonProps } from "./types"
 
 /**
@@ -43,7 +37,6 @@ const Button: React.FC<ButtonProps> = ({
   children,
   className,
   "data-testid": testId,
-  disabled = false,
   icon,
   onClick,
   size = "base",
@@ -51,45 +44,31 @@ const Button: React.FC<ButtonProps> = ({
   status = "primary",
   type = "button",
 }) => {
-  const hasIcon = !!icon
-  const isDisabled = disabled || state === "disabled"
-  const isSquare = hasIcon && !children
+  const disabled = state === "disabled"
+  const square = !!icon && !children
 
   return (
-    <ButtonOuter
+    <StyledButton
       $borderRadius={borderRadius}
-      $disabled={isDisabled}
-      $hasIcon={hasIcon}
-      $isSquare={isSquare}
+      $borderWidth={borderWidth}
+      $disabled={disabled}
       $size={size}
+      $square={square}
       $state={state}
       $status={status}
       aria-label={ariaLabel}
       className={className}
       data-testid={testId}
-      disabled={isDisabled}
-      onClick={isDisabled ? undefined : onClick}
+      onClick={disabled ? undefined : onClick}
       type={type}
     >
-      {/* Border overlay (positioned behind content) */}
-      <ButtonOverlay $borderWidth={borderWidth} $status={status} $state={state} />
-      {/* Left positioned icon */}
-      {hasIcon && (
-        <ButtonIconPositioned $size={size}>
-          <ButtonIcon icon={icon} size={size} color="currentColor" />
-        </ButtonIconPositioned>
-      )}
-      {/* Button text content */}
       {children && (
-        <ButtonInner $size={size}>
-          <ButtonContent $size={size}>
-            <Typography antialiased={antialiased} weight="medium" size={size}>
-              {children}
-            </Typography>
-          </ButtonContent>
-        </ButtonInner>
+        <Typography antialiased={antialiased} weight="medium" size={size}>
+          {children}
+        </Typography>
       )}
-    </ButtonOuter>
+      {!!icon && <Icon name={icon} size={size} color="lighter" />}
+    </StyledButton>
   )
 }
 

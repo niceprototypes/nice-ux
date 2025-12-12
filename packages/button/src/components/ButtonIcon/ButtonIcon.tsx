@@ -1,5 +1,5 @@
 import * as React from "react"
-import Icon, { IconNameType, IconSizeType } from "nice-react-icon"
+import Icon from "nice-react-icon"
 import { ButtonIconProps } from "./types"
 
 /**
@@ -7,15 +7,7 @@ import { ButtonIconProps } from "./types"
  * Uses nice-react-icon for consistent icon rendering
  */
 const ButtonIcon: React.FC<ButtonIconProps> = ({ size, icon, color }) => {
-  // If this is just a spacer, render icon without name
-  if (!icon) {
-    return <Icon size={size as IconSizeType} color={color} />
-  }
-
-  // Render the actual icon
-  return (
-    <Icon name={icon as IconNameType} size={size as IconSizeType} color={color} strokeWidth={2} />
-  )
+  return <Icon name={icon} size={size} color={color} />
 }
 
 export default ButtonIcon

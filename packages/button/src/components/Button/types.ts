@@ -1,5 +1,6 @@
 import * as React from "react"
 import { CellHeightType, BorderWidthType } from "nice-styles"
+import { IconNameType } from "nice-react-icon"
 
 /**
  * Border radius variants for the button
@@ -47,7 +48,7 @@ export interface ButtonProps {
   /**
    * Icon name from nice-react-icon to display
    */
-  icon?: string
+  icon?: IconNameType
 
   /**
    * Whether the button is disabled

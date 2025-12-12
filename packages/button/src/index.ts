@@ -14,6 +14,9 @@
 // Main component export
 export { default } from "./components/Button"
 
+// Style exports
+export { ButtonStyles, ButtonTokenMap, getButtonToken } from "./components/Button"
+
 // Type exports
 export type {
   ButtonProps,
