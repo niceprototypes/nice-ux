@@ -58,7 +58,7 @@ const patterns: Array<[RegExp, Token[]]> = [
 
   // Prop with string value: prop="value" (with optional leading whitespace)
   [
-    /^(\s*)(\w+)="([^"]*)"/,
+    /^(\s*)([\w-]+)="([^"]*)"/,
     [
       [1],
       [2, colors.markup],
@@ -71,7 +71,7 @@ const patterns: Array<[RegExp, Token[]]> = [
 
   // Prop with number value: prop={0} (with optional leading whitespace)
   [
-    /^(\s*)(\w+)=\{(\d+)\}/,
+    /^(\s*)([\w-]+)=\{(\d+)\}/,
     [
       [1],
       [2, colors.markup],
@@ -84,7 +84,7 @@ const patterns: Array<[RegExp, Token[]]> = [
 
   // Prop with boolean value: prop={true} or prop={false} (with optional leading whitespace)
   [
-    /^(\s*)(\w+)=\{(true|false)\}/,
+    /^(\s*)([\w-]+)=\{(true|false)\}/,
     [
       [1],
       [2, colors.markup],
@@ -97,7 +97,7 @@ const patterns: Array<[RegExp, Token[]]> = [
 
   // Prop with expression/function value: prop={...} (with optional leading whitespace)
   [
-    /^(\s*)(\w+)=(\{(?:[^{}]|\{(?:[^{}]|\{[^{}]*\})*\})*\})/,
+    /^(\s*)([\w-]+)=(\{(?:[^{}]|\{(?:[^{}]|\{[^{}]*\})*\})*\})/,
     [
       [1],
       [2, colors.markup],
@@ -108,7 +108,7 @@ const patterns: Array<[RegExp, Token[]]> = [
 
   // Shorthand boolean prop: prop (without value, before > or />)
   [
-    /^(\s+)(\w+)(?=\s*\/?>|\s+\w)/,
+    /^(\s+)([\w-]+)(?=\s*\/?>|\s+[\w-])/,
     [
       [1],
       [2, colors.markup],

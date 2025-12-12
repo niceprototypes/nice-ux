@@ -3,6 +3,8 @@ import type { Preview } from '@storybook/react'
 import { create } from 'storybook/theming'
 import { StylesProvider } from 'nice-react-styles'
 import { getToken } from 'nice-styles'
+import { IconStyles } from 'nice-react-icon'
+import { ButtonStyles } from 'nice-react-button'
 import './custom.css'
 
 const docsTheme = create({
@@ -14,7 +16,7 @@ const docsTheme = create({
 const preview: Preview = {
   decorators: [
     (Story) => (
-      <StylesProvider>
+      <StylesProvider componentStyles={[IconStyles, ButtonStyles]}>
         <Story />
       </StylesProvider>
     ),

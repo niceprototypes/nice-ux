@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from "@storybook/react"
 import Icon, { iconNames } from "nice-react-icon"
 import { Theme } from "nice-styles"
 import Story from "../../../src/components/Story"
-import Flex from "nice-react-flex"
 
 /**
  * A flexible and customizable React icon component with built-in icon set.
@@ -123,7 +122,7 @@ const meta = {
       description:
         "[`Tokens.borderWidth`](/?path=/story/styles-tokens--border-width)",
       control: "select",
-      options: ["small", "base", "large"],
+      options: ["base", "large"],
       table: {
         type: { summary: null },
         defaultValue: { summary: '"base"' },
