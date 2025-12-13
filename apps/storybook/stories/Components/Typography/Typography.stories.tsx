@@ -326,8 +326,8 @@ export const LegibilityOptimized: Story = {
           name: "false",
           description: "legibilityOptimized={false}",
           demo: (
-            <Typography legibilityOptimized={false} size="large">
-              Standard
+            <Typography legibilityOptimized={false}>
+              Legibility standard
             </Typography>
           ),
         },
@@ -335,8 +335,8 @@ export const LegibilityOptimized: Story = {
           name: "true",
           description: "legibilityOptimized={true}",
           demo: (
-            <Typography legibilityOptimized={true} size="large">
-              Optimized
+            <Typography legibilityOptimized={true}>
+              Legibility optimized
             </Typography>
           ),
         },
