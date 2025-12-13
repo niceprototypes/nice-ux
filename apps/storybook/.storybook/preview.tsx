@@ -5,6 +5,7 @@ import { StylesProvider } from 'nice-react-styles'
 import { getToken } from 'nice-styles'
 import { IconStyles } from 'nice-react-icon'
 import { ButtonStyles } from 'nice-react-button'
+import { TypographyStyles } from 'nice-react-typography'
 import './custom.css'
 
 const docsTheme = create({
@@ -16,7 +17,7 @@ const docsTheme = create({
 const preview: Preview = {
   decorators: [
     (Story) => (
-      <StylesProvider componentStyles={[IconStyles, ButtonStyles]}>
+      <StylesProvider componentStyles={[IconStyles, ButtonStyles, TypographyStyles]}>
         <Story />
       </StylesProvider>
     ),
