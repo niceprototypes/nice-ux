@@ -9,7 +9,7 @@ import { generateDescriptionString, createToken } from "../../../../src/services
 const CoreDemo = () => <></>
 
 const meta = {
-  title: "Styles/Tokens/Core",
+  title: "Styles/Tokens/getToken",
   component: CoreDemo,
   parameters: {
     layout: "padded",
