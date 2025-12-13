@@ -41,3 +41,6 @@
 export { default } from "./Typography"
 export { default as Typography } from "./Typography"
 export type { TypographyProps, AsType, AlignType } from "./types"
+
+// Token exports
+export { TypographyStyles, TypographyTokenMap, getTypographyToken } from "./tokens"
