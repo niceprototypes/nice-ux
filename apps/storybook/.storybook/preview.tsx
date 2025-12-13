@@ -35,7 +35,7 @@ const preview: Preview = {
     options: {
       storySort: {
         order: [
-          'Styles', ['Core', 'Component', 'Icons', 'Provider'],
+          'Styles', ['Tokens', ['Core', 'Component'], 'Icons', 'Provider'],
           'Components',
           'Hooks',
           'Configuration'
