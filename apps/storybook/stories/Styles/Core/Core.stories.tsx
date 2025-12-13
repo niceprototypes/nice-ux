@@ -6,11 +6,11 @@ import Story from "../../../src/components/Story"
 import DemoDots from "../../../src/components/DemoDots"
 import { generateDescriptionString, createToken } from "../../../src/services"
 
-const TokensDemo = () => <></>
+const CoreDemo = () => <></>
 
 const meta = {
-  title: "Styles/Tokens",
-  component: TokensDemo,
+  title: "Styles/Core",
+  component: CoreDemo,
   parameters: {
     layout: "padded",
     previewTabs: {

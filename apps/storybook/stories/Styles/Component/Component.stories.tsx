@@ -6,11 +6,11 @@ import { getIconToken } from "nice-react-icon"
 import { getTypographyToken } from "nice-react-typography"
 import { generateDescriptionString } from "../../../src/services"
 
-const ComponentTokensDemo = () => <></>
+const ComponentDemo = () => <></>
 
 const meta = {
-  title: "Styles/ComponentTokens",
-  component: ComponentTokensDemo,
+  title: "Styles/Component",
+  component: ComponentDemo,
   parameters: {
     layout: "padded",
     previewTabs: {
@@ -39,7 +39,7 @@ const meta = {
     },
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof ComponentTokensDemo>
+} satisfies Meta<typeof ComponentDemo>
 
 export default meta
 type Story = StoryObj<typeof meta>
