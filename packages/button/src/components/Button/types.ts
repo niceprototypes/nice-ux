@@ -24,21 +24,51 @@ export type ButtonStatusType = "primary" | "secondary"
 export type ButtonElementType = "button" | "submit" | "reset"
 
 /**
+ * Disabled state type
+ */
+export type ButtonDisabledType = boolean
+
+/**
+ * Antialiased font rendering type
+ */
+export type ButtonAntialiasedType = boolean
+
+/**
+ * Click handler type
+ */
+export type ButtonOnClickType = () => void
+
+/**
+ * CSS class name type
+ */
+export type ButtonClassNameType = string
+
+/**
+ * Aria label type
+ */
+export type ButtonAriaLabelType = string
+
+/**
+ * Test ID type
+ */
+export type ButtonTestIdType = string
+
+/**
  * Main props interface for the Button component
  */
 export interface ButtonProps {
-  onClick: () => void
+  onClick: ButtonOnClickType
   status?: ButtonStatusType
   size?: CellHeightType
   state?: ButtonStateType
   icon?: IconNameType
-  disabled?: boolean
+  disabled?: ButtonDisabledType
   children?: React.ReactNode
-  className?: string
+  className?: ButtonClassNameType
   type?: ButtonElementType
-  "aria-label"?: string
-  "data-testid"?: string
-  antialiased?: boolean
+  "aria-label"?: ButtonAriaLabelType
+  "data-testid"?: ButtonTestIdType
+  antialiased?: ButtonAntialiasedType
   borderWidth?: BorderWidthType
 
   /**
@@ -55,6 +85,12 @@ namespace ButtonTypes {
   export type State = ButtonStateType
   export type Status = ButtonStatusType
   export type Element = ButtonElementType
+  export type Disabled = ButtonDisabledType
+  export type Antialiased = ButtonAntialiasedType
+  export type OnClick = ButtonOnClickType
+  export type ClassName = ButtonClassNameType
+  export type AriaLabel = ButtonAriaLabelType
+  export type TestId = ButtonTestIdType
   export type Props = ButtonProps
 }
 
