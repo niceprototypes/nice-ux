@@ -3,32 +3,9 @@ import Typography from "nice-react-typography"
 import Icon from "nice-react-icon"
 import { StyledButton } from "./styles"
 import { ButtonProps } from "./types"
+import { isDisabled } from "../../helpers/isDisabled"
+import { isSquare } from "../../helpers/isSquare"
 
-/**
- * Button component
- * A flexible and customizable React button component
- *
- * Features:
- * - Multiple sizes (smaller, small, base, large, larger)
- * - Status variants (primary, secondary)
- * - States (base, disabled, error, success, warning)
- * - Icon support with nice-react-icon
- * - Accessibility support
- * - TypeScript support
- *
- * @example
- * ```tsx
- * import Button from 'nice-react-button'
- *
- * <Button
- *   status="primary"
- *   icon="arrow"
- *   onClick={() => console.log('clicked')}
- * >
- *   Click me
- * </Button>
- * ```
- */
 const Button: React.FC<ButtonProps> = ({
   antialiased = false,
   "aria-label": ariaLabel,
@@ -44,8 +21,8 @@ const Button: React.FC<ButtonProps> = ({
   status = "primary",
   type = "button",
 }) => {
-  const disabled = state === "disabled"
-  const square = !!icon && !children
+  const disabled = isDisabled(state)
+  const square = isSquare(icon, children)
 
   return (
     <StyledButton
@@ -67,7 +44,7 @@ const Button: React.FC<ButtonProps> = ({
           {children}
         </Typography>
       )}
-      {!!icon && <Icon name={icon} size={size} color="lighter" />}
+      {!!icon && <Icon name={icon} size={size} color="lighter" strokeWidth="large" />}
     </StyledButton>
   )
 }

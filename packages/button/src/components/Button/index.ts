@@ -1,5 +1,6 @@
 export { default } from "./Button"
-export { ButtonTokenMap, ButtonStyles, getButtonToken, getButtonStatusToken } from "./tokens"
+export { ButtonTokenMap } from "../../tokens/ButtonTokenMap"
+export { ButtonStyles, getButtonToken } from "../../tokens/getButtonToken"
 export type {
   ButtonProps,
   ButtonBorderRadiusType,

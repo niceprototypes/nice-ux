@@ -2,12 +2,9 @@ import styled from "styled-components"
 import { getToken } from "nice-styles"
 import type { CellHeightType, BorderWidthType } from "nice-styles"
 import { ButtonStateType, ButtonStatusType, ButtonBorderRadiusType } from "./types"
-import { getButtonToken, getButtonStatusToken } from "./tokens"
-import Flex, { FlexProps } from "nice-react-flex"
+import { getButtonToken } from "../../tokens/getButtonToken"
+import { capitalize } from "../../helpers/capitalize"
 
-/**
- * Main button element with all styling
- */
 export const StyledButton = styled.button.withConfig({
   shouldForwardProp: (prop) => !prop.startsWith("$"),
 })<{
@@ -32,23 +29,31 @@ export const StyledButton = styled.button.withConfig({
   display: flex;
   align-items: center;
   justify-content: center;
-  width: ${({ $square, $size }) =>
-    $square ? getButtonToken("height", $size).var : "auto"};
-  height: ${({ $size }) => getButtonToken("height", $size).var};
-  padding: ${({ $square, $size }) =>
-    $square ? "0" : `0 ${getButtonToken("spacing", $size).var}`};
+  gap: ${({ $square, $size }) => !$square && `0 ${getButtonToken("spacing", $size).var}`};
+  width: ${({ $square, $size }) => ($square ? getButtonToken("size", $size).var : "auto")};
+  height: ${({ $size }) => getButtonToken("size", $size).var};
+  padding: ${({ $square, $size }) => ($square ? "0" : `0 ${getButtonToken("spacing", $size).var}`)};
   font-weight: ${getToken("fontWeight", "base").var};
 
   /* Colors based on status and state */
   background-color: ${({ $status, $state }) =>
-    getButtonStatusToken($status, $state, "backgroundColor").var};
+    getButtonToken(
+      `status${capitalize($status)}${capitalize($state)}` as `status${Capitalize<ButtonStatusType>}${Capitalize<ButtonStateType>}`,
+      "backgroundColor"
+    ).var};
   color: ${({ $status, $state }) =>
-    getButtonStatusToken($status, $state, "foregroundColor").var};
+    getButtonToken(
+      `status${capitalize($status)}${capitalize($state)}` as `status${Capitalize<ButtonStatusType>}${Capitalize<ButtonStateType>}`,
+      "foregroundColor"
+    ).var};
 
   border-style: solid;
   border-width: ${({ $borderWidth }) => getToken("borderWidth", $borderWidth).var};
   border-color: ${({ $status, $state }) =>
-    getButtonStatusToken($status, $state, "borderColor").var};
+    getButtonToken(
+      `status${capitalize($status)}${capitalize($state)}` as `status${Capitalize<ButtonStatusType>}${Capitalize<ButtonStateType>}`,
+      "borderColor"
+    ).var};
   border-radius: ${({ $borderRadius }) => getButtonToken("borderRadius", $borderRadius).var};
   cursor: ${({ $disabled }) => ($disabled ? "not-allowed" : "pointer")};
   text-align: center;

@@ -8,90 +8,37 @@ import { IconNameType } from "nice-react-icon"
 export type ButtonBorderRadiusType = "small" | "base" | "large"
 
 /**
- * Visual status/variant of the button
- */
-export type ButtonStatusType = "primary" | "secondary"
-
-/**
  * Interactive state of the button
  * Affects styling based on context
  */
 export type ButtonStateType = "base" | "disabled" | "error" | "success" | "warning"
 
 /**
+ * Visual status/variant of the button
+ */
+export type ButtonStatusType = "primary" | "secondary"
+
+/**
+ * HTML button type attribute
+ */
+export type ButtonElementType = "button" | "submit" | "reset"
+
+/**
  * Main props interface for the Button component
  */
 export interface ButtonProps {
-  /**
-   * Click handler
-   */
   onClick: () => void
-
-  /**
-   * Visual status/variant of the button
-   * @default "primary"
-   */
   status?: ButtonStatusType
-
-  /**
-   * Size of the button
-   * @default "base"
-   */
   size?: CellHeightType
-
-  /**
-   * Interactive state of the button
-   * @default "base"
-   */
   state?: ButtonStateType
-
-  /**
-   * Icon name from nice-react-icon to display
-   */
   icon?: IconNameType
-
-  /**
-   * Whether the button is disabled
-   * @default false
-   */
   disabled?: boolean
-
-  /**
-   * Button content/text
-   */
   children?: React.ReactNode
-
-  /**
-   * Additional CSS class for custom styling
-   */
   className?: string
-
-  /**
-   * HTML button type
-   * @default "button"
-   */
-  type?: "button" | "submit" | "reset"
-
-  /**
-   * ARIA label for accessibility
-   */
+  type?: ButtonElementType
   "aria-label"?: string
-
-  /**
-   * Test ID for testing
-   */
   "data-testid"?: string
-
-  /**
-   * Whether to apply antialiased font rendering to the button text
-   * @default undefined
-   */
   antialiased?: boolean
-
-  /**
-   * Border width of the button
-   * @default "base"
-   */
   borderWidth?: BorderWidthType
 
   /**
@@ -100,3 +47,15 @@ export interface ButtonProps {
    */
   borderRadius?: ButtonBorderRadiusType
 }
+
+const ButtonTypes = {} as const
+
+namespace ButtonTypes {
+  export type BorderRadius = ButtonBorderRadiusType
+  export type State = ButtonStateType
+  export type Status = ButtonStatusType
+  export type Element = ButtonElementType
+  export type Props = ButtonProps
+}
+
+export default ButtonTypes
