@@ -1,3 +1,1 @@
-const ButtonConstants = {} as const
-
-export default ButtonConstants
+// No constants defined yet

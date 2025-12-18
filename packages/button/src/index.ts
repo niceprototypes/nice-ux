@@ -14,11 +14,8 @@
 // Main component export
 export { default } from "./components/Button"
 
-// Constants export
-export { default as ButtonConstants } from "./constants"
-
-// Style exports
-export { ButtonStyles, ButtonTokenMap, getButtonToken } from "./components/Button"
+// Token exports
+export { ButtonTokenMap, getButtonToken } from "./components/Button"
 
 // Type exports
 export type {
