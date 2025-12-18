@@ -1,73 +1,43 @@
-import type { FontSizeType, BorderWidthType, ForegroundColorType } from "nice-styles"
-
-/**
- * Available icon names in the icon set
- */
-export const iconNames = [
-  "placeholder",
-  "arrow",
-  "attention",
-  "box",
-  "brush",
-  "calendar",
-  "cancel",
-  "carat",
-  "check",
-  "cloud",
-  "code",
-  "cog",
-  "contact",
-  "content",
-  "edit",
-  "link",
-  "lock",
-  "menu",
-  "message",
-  "pause",
-  "plus",
-  "profile",
-  "puzzle",
-  "search",
-  "shuffle",
-  "skip",
-  "spinner",
-  "trash",
-  "upload",
-  "x",
-] as const
+import { IconTokenMap } from "./tokens/IconTokenMap"
+import { iconNames } from "./constants"
 
 export type IconNameType = (typeof iconNames)[number]
+export type IconSizeType = keyof typeof IconTokenMap.size.items
+export type IconColorType = keyof typeof IconTokenMap.color.items
+export type IconStrokeWidthType = keyof typeof IconTokenMap.strokeWidth.items
+export type IconColorPropertyType = "color" | "background-color" | "stroke" | "border-color" | "fill"
+export type IconOutlinedType = boolean
+export type IconUrlType = string
+export type IconViewBoxType = string
+export type IconClassNameType = string
+export type IconStrokeScalingType = boolean
 
-/**
- * Icon size type - uses FontSizeType from nice-styles tokens
- */
-export type IconSizeType = FontSizeType
-
-/**
- * Color property types for styling
- */
-export type ColorPropertyType = "color" | "background-color" | "stroke" | "border-color" | "fill"
-
-/**
- * Props for the Icon component
- */
 export interface IconProps {
-  /** Icon name from the built-in icon set */
   name: IconNameType
-  /** Use outlined/fill variant (true) or stroke variant (false, default) */
-  outlined?: boolean
-  /** Custom SVG URL (overrides name) */
-  url?: string
-  /** Icon color - uses ForegroundColorType from nice-styles tokens */
-  color?: ForegroundColorType
-  /** Icon size from nice-styles fontSize tokens */
+  outlined?: IconOutlinedType
+  url?: IconUrlType
+  color?: IconColorType
   size?: IconSizeType
-  /** SVG viewBox attribute for built-in icons */
-  viewBox?: string
-  /** Stroke width for stroke type - uses BorderWidthType from nice-styles tokens */
-  strokeWidth?: BorderWidthType
-  /** Additional CSS class */
-  className?: string
-  /** Scale stroke width with icon size (false by default) */
-  strokeScaling?: boolean
+  viewBox?: IconViewBoxType
+  strokeWidth?: IconStrokeWidthType
+  className?: IconClassNameType
+  strokeScaling?: IconStrokeScalingType
 }
+
+const IconTypes = {} as const
+
+namespace IconTypes {
+  export type Name = IconNameType
+  export type Size = IconSizeType
+  export type Color = IconColorType
+  export type StrokeWidth = IconStrokeWidthType
+  export type ColorProperty = IconColorPropertyType
+  export type Outlined = IconOutlinedType
+  export type Url = IconUrlType
+  export type ViewBox = IconViewBoxType
+  export type ClassName = IconClassNameType
+  export type StrokeScaling = IconStrokeScalingType
+  export type Props = IconProps
+}
+
+export default IconTypes

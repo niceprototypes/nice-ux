@@ -1,7 +1,8 @@
 import * as React from "react"
 import { IconProps } from "../types"
 import { IconWrapperStyled, ImageStyled } from "./styles"
-import { getIcon } from "../services"
+import { getIcon } from "../services/getIcon"
+import { isSpinning } from "../helpers/isSpinning"
 
 /**
  * A flexible and customizable React icon component with built-in icon set
@@ -42,7 +43,7 @@ const Icon: React.FC<IconProps> = ({
   strokeScaling = false,
 }) => {
   const SvgIcon = getIcon(name, outlined)
-  const spinning = name === "spinner"
+  const spinning = isSpinning(name)
 
   return (
     <IconWrapperStyled

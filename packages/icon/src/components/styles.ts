@@ -1,7 +1,6 @@
 import styled, { css, keyframes } from "styled-components"
-import type { FontSizeType, BorderWidthType, ForegroundColorType } from "nice-styles"
-import { getToken } from "nice-styles"
-import { getIconToken } from "./tokens"
+import { getIconToken } from "../tokens/getIconToken"
+import type { IconSizeType, IconColorType, IconStrokeWidthType } from "../types"
 
 const spin = keyframes`
   from {
@@ -18,14 +17,14 @@ const spin = keyframes`
 export const IconWrapperStyled = styled.div.withConfig({
   shouldForwardProp: (prop) => !String(prop).startsWith("$"),
 })<{
-  $color?: ForegroundColorType
-  $size?: FontSizeType
+  $color?: IconColorType
+  $size?: IconSizeType
   $outlined?: boolean
-  $strokeWidth?: BorderWidthType
+  $strokeWidth?: IconStrokeWidthType
   $strokeScaling?: boolean
   $spinning?: boolean
 }>`
-  width: ${({ $size = "base" }) => getToken("fontSize", $size).var};
+  width: ${({ $size = "base" }) => getIconToken("size", $size).var};
   aspect-ratio: 1;
   display: flex;
   justify-content: center;
@@ -45,12 +44,12 @@ export const IconWrapperStyled = styled.div.withConfig({
       ${({ $outlined = false, $color = "base", $strokeWidth = "base" }) =>
           $outlined
               ? css`
-                fill: ${getToken("foregroundColor", $color).var};
+                fill: ${getIconToken("color", $color).var};
                 stroke: none;
               `
               : css`
                 fill: none;
-                stroke: ${getToken("foregroundColor", $color).var};
+                stroke: ${getIconToken("color", $color).var};
                 stroke-width: ${getIconToken("strokeWidth", $strokeWidth).var};
                 stroke-linecap: round;
                 stroke-linejoin: round;

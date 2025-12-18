@@ -12,27 +12,29 @@
 
 // Main component export
 export { default } from "./components/Icon"
-export { default as Icon } from "./components/Icon"
 
 // Type exports
 export type {
   IconProps,
   IconNameType,
   IconSizeType,
-  ColorPropertyType,
+  IconColorType,
+  IconStrokeWidthType,
+  IconColorPropertyType,
+  IconOutlinedType,
+  IconUrlType,
+  IconViewBoxType,
+  IconClassNameType,
+  IconStrokeScalingType,
 } from "./types"
+export { default as IconTypes } from "./types"
 
 // Constant exports
-export { iconNames } from "./types"
-
-// Style exports for advanced customization
-export {
-  IconWrapperStyled,
-  ImageStyled,
-} from "./components/styles"
+export { iconNames } from "./constants"
 
 // Token exports
-export { IconStyles, IconTokenMap, getIconToken } from "./components/tokens"
+export { IconTokenMap } from "./tokens/IconTokenMap"
+export { getIconToken } from "./tokens/getIconToken"
 
 // Service exports
 export { getIcon } from "./services"
