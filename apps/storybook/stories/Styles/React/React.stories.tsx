@@ -4,11 +4,11 @@ import Flex from "nice-react-flex"
 import { getToken } from "nice-styles"
 import { generateDescriptionString } from "../../../src/services"
 
-const ProviderDemo = () => <></>
+const ReactDemo = () => <></>
 
 const meta = {
-  title: "Styles/Provider",
-  component: ProviderDemo,
+  title: "Styles/React",
+  component: ReactDemo,
   parameters: {
     layout: "padded",
     previewTabs: {
@@ -37,7 +37,7 @@ const meta = {
     },
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof ProviderDemo>
+} satisfies Meta<typeof ReactDemo>
 
 export default meta
 type Story = StoryObj<typeof meta>

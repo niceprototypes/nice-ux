@@ -20,16 +20,14 @@ const VariableRow: React.FC<VariableRowProps> = ({
           <Typography as="span" code weight="medium">
             {name}
           </Typography>
-          {isDefault && (
-            <DefaultFlex justifyContent="center" alignItems="center">
-              <Typography as="span" code color="lighter">
-                default
-              </Typography>
-            </DefaultFlex>
-          )}
         </Flex>
-        {description && (
-          <Typography code color="lighter" size="smaller">
+        {isDefault && (
+          <Typography code weight="medium" color="light" size="smaller">
+            default
+          </Typography>
+        )}
+        {!isDefault && description && (
+          <Typography code weight="medium" color="heavy" size="smaller">
             {description}
           </Typography>
         )}

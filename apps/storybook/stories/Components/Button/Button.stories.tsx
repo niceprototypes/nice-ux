@@ -309,7 +309,7 @@ export const Icon: Story = {
       variables={[
         {
           name: "with text",
-          description: 'icon="arrow-right"',
+          description: `icon="arrow-right"`,
           demo: (
             <Button onClick={() => {}} icon="arrow">
               Next
@@ -319,7 +319,7 @@ export const Icon: Story = {
         },
         {
           name: "icon only",
-          description: 'icon="plus" (no children)',
+          description: `icon="plus"`,
           demo: (
             <Button onClick={() => {}} icon="plus" aria-label="Add item" />
           ),
