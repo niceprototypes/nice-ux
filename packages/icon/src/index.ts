@@ -33,8 +33,7 @@ export { default as IconTypes } from "./types"
 export { iconNames } from "./constants"
 
 // Token exports
-export { IconTokenMap } from "./tokens/IconTokenMap"
-export { getIconToken } from "./tokens/getIconToken"
+export { IconStyles, IconTokenMap, getIconToken } from "./tokens"
 
 // Service exports
 export { getIcon } from "./services"

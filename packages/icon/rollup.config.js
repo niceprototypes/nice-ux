@@ -41,6 +41,8 @@ export default {
   ],
   external: [
     'react',
-    'styled-components'
+    'styled-components',
+    'nice-styles',
+    'nice-react-styles',
   ]
 };
