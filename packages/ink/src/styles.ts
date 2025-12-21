@@ -11,7 +11,7 @@ import styled, { css } from "styled-components"
 import type { ForegroundColorType, FontSizeType, FontWeightType, LineHeightType } from "nice-styles"
 import { getToken } from "nice-react-styles"
 import { AsType, AlignType } from "./types"
-import { styleAntialiasing } from "./utils"
+import { styleAntialiasing } from "./helpers/styleAntialiasing"
 
 /**
  * CSS styles for optimized text legibility

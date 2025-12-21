@@ -1,21 +1,12 @@
 /**
- * Typography Component Tokens
+ * Typography Token Map
  *
  * Component-specific design tokens for the Typography component.
- * Uses createTokens from nice-react-styles to generate CSS custom properties
- * following the pattern: --typography--{token}--{variant}
- *
- * @module tokens
- */
-
-import { createTokens } from "nice-react-styles"
-
-/**
- * Typography token definitions
- *
  * These tokens provide component-specific styling options that can be
- * overridden via CSS custom properties.
+ * overridden via CSS custom properties following the pattern:
+ * --typography--{token}--{variant}
  */
+
 export const TypographyTokenMap = {
   /**
    * Letter spacing (tracking) variants
@@ -43,8 +34,3 @@ export const TypographyTokenMap = {
     },
   },
 } as const
-
-export const {
-  GlobalStyles: TypographyStyles,
-  getComponentToken: getTypographyToken,
-} = createTokens("typography", TypographyTokenMap)

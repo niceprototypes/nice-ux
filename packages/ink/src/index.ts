@@ -38,8 +38,11 @@
  * @module nice-react-typography
  */
 
+// Main component export
 export { default } from "./Typography"
-export { default as Typography } from "./Typography"
+
+// Type exports
+export { default as TypographyTypes } from "./types"
 export type { TypographyProps, AsType, AlignType } from "./types"
 
 // Token exports

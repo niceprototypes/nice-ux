@@ -48,3 +48,16 @@ export type TypographyProps = {
   /** Font weight from nice-styles tokens */
   weight?: FontWeightType
 }
+
+/**
+ * Typography types namespace using declaration merging pattern
+ */
+const TypographyTypes = {} as const
+
+namespace TypographyTypes {
+  export type Align = AlignType
+  export type As = AsType
+  export type Props = TypographyProps
+}
+
+export default TypographyTypes
