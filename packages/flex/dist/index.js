@@ -1,5 +1,7 @@
 'use strict';
 
+Object.defineProperty(exports, '__esModule', { value: true });
+
 var React = require('react');
 var styled = require('styled-components');
 
@@ -29,6 +31,7 @@ var React__namespace = /*#__PURE__*/_interopNamespaceDefault(React);
  * These values determine when different responsive styles are applied.
  */
 /** Small breakpoint - mobile devices */
+const BREAKPOINT_SM = 480;
 /** Medium breakpoint - tablets and small desktops */
 const BREAKPOINT_MD = 980;
 /** Large breakpoint - large desktops */
@@ -66,29 +69,81 @@ const getBreakpointValue = (value, breakpoint) => {
     }
     return breakpoint === "sm" ? value : undefined;
 };
+
 /**
- * Converts a GapSize value to its corresponding CSS custom property
+ * Converts a GapSize value to its corresponding CSS value using CSS variables
  *
  * @function getGapSize
- * @param {GapSize} [size] - The gap size (0-6 or custom string)
- * @returns {string | undefined} CSS custom property string, "0" for zero values, or the string value as-is
+ * @param {GapSize} [size] - The gap size token key ("smaller", "small", "base", "large", "larger") or custom string
+ * @returns {string | undefined} CSS variable reference or the string value as-is
  *
  * @example
- * getGapSize(0) // returns "0"
- * getGapSize(3) // returns "var(--gap-size-3)"
+ * getGapSize("smaller") // returns "var(--gap-smaller)"
+ * getGapSize("base") // returns "var(--gap-base)"
  * getGapSize("2rem") // returns "2rem"
- * getGapSize("var(--custom-spacing, 8rem)") // returns "var(--custom-spacing, 8rem)"
+ * getGapSize("var(--custom-spacing)") // returns "var(--custom-spacing)"
+ * getGapSize(null) // returns undefined
  * getGapSize(undefined) // returns undefined
  */
 const getGapSize = (size) => {
-    if (size === undefined)
+    if (size === undefined || size === null)
         return undefined;
-    if (size === 0)
-        return "0";
-    if (typeof size === "string")
-        return size;
-    return `var(--gap-size-${size})`;
+    // Check if it's a valid token key
+    if (size === "smaller" || size === "small" || size === "base" || size === "large" || size === "larger") {
+        return `var(--gap-${size})`;
+    }
+    // Otherwise return the custom string as-is
+    return size;
 };
+
+/**
+ * Checks if a value is a responsive breakpoint object (has sm, md, or lg keys)
+ *
+ * @function isResponsiveObject
+ * @param {unknown} value - The value to check
+ * @returns {boolean} True if the value is an object with breakpoint keys
+ *
+ * @example
+ * isResponsiveObject({ sm: "column", md: "row" }) // true
+ * isResponsiveObject({ all: "base" }) // false
+ * isResponsiveObject("row") // false
+ * isResponsiveObject(null) // false
+ */
+const isResponsiveObject = (value) => typeof value === "object" &&
+    value !== null &&
+    ("sm" in value || "md" in value || "lg" in value);
+
+/**
+ * Extracts the SpacingDefinition for a specific breakpoint from a spacing prop
+ *
+ * @function getSpacingValue
+ * @param {SpacingProp | undefined} spacing - The spacing prop value
+ * @param {Breakpoint} breakpoint - The target breakpoint
+ * @returns {SpacingDefinition | undefined} The spacing definition for the specified breakpoint
+ *
+ * @description
+ * Handles the three possible shapes of the spacing prop:
+ * - GapSize string: Not a SpacingDefinition, returns undefined
+ * - SpacingDefinition object: Returns the object only for "sm" breakpoint
+ * - Responsive object: Returns the SpacingDefinition for the specified breakpoint
+ *
+ * @example
+ * getSpacingValue({ all: "base" }, "sm") // returns { all: "base" }
+ * getSpacingValue({ all: "base" }, "md") // returns undefined
+ * getSpacingValue({ sm: { all: "small" }, md: { all: "base" } }, "md") // returns { all: "base" }
+ * getSpacingValue("base", "sm") // returns undefined (GapSize, not SpacingDefinition)
+ */
+const getSpacingValue = (spacing, breakpoint) => {
+    if (spacing === undefined || spacing === null)
+        return undefined;
+    if (typeof spacing !== "object")
+        return undefined;
+    if (isResponsiveObject(spacing)) {
+        return spacing[breakpoint];
+    }
+    return breakpoint === "sm" ? spacing : undefined;
+};
+
 /**
  * Generates CSS spacing properties (padding or margin) from a SpacingDefinition
  *
@@ -145,6 +200,7 @@ const styleSpacing = (type, def) => {
     }
     return parts.join("\n");
 };
+
 /**
  * styleFlex Service
  *
@@ -206,7 +262,7 @@ const styleFlex = (breakpoint, props) => {
     const alignItems = getBreakpointValue(props.alignItems, breakpoint);
     const justifyContent = getBreakpointValue(props.justifyContent, breakpoint);
     const wrap = getBreakpointValue(props.wrap, breakpoint);
-    const spacing = getBreakpointValue(props.spacing, breakpoint);
+    const spacing = getSpacingValue(props.spacing, breakpoint);
     // Base flex display - only set for small breakpoint
     // Higher breakpoints inherit the flex display value
     if (breakpoint === "sm") {
@@ -343,7 +399,7 @@ const FlexStyled = styled.div.withConfig({
  */
 const BREAKPOINT_PROPS = ["gap", "direction", "grow", "wrap", "alignItems", "justifyContent"];
 /**
- * normalizeProps Service
+ * normalizeProps Helper
  *
  * Transforms component props to ensure consistent structure for styling logic.
  * Converts simple prop values into breakpoint objects to simplify downstream processing.
@@ -353,7 +409,7 @@ const BREAKPOINT_PROPS = ["gap", "direction", "grow", "wrap", "alignItems", "jus
  * @returns {FlexProps} Normalized props with consistent breakpoint structure
  *
  * @description
- * This service performs two main transformations:
+ * This helper performs two main transformations:
  *
  * 1. **Simple Value Normalization**: Converts simple prop values into breakpoint objects
  *    - Example: `gap={2}` becomes `gap={{ sm: 2 }}`
@@ -456,7 +512,7 @@ const normalizeProps = (props) => {
             normalizedProps.spacing = { sm: { all: props.spacing } };
         }
         else if (typeof props.spacing === "string") ;
-        else if (!("sm" in props.spacing || "md" in props.spacing || "lg" in props.spacing)) {
+        else if (props.spacing !== null && !("sm" in props.spacing || "md" in props.spacing || "lg" in props.spacing)) {
             // SpacingDefinition object becomes breakpoint-wrapped
             // Check if values in SpacingDefinition are numbers - if so, normalize; if strings, wrap as-is
             const spacingDef = props.spacing;
@@ -551,5 +607,20 @@ const Flex = (props) => {
     return React__namespace.createElement(FlexStyled, { ...normalizedProps }, props.children);
 };
 
-module.exports = Flex;
+// Declaration merging: const + namespace creates exportable type namespace
+const FlexTypes = {};
+
+exports.BREAKPOINT_LG = BREAKPOINT_LG;
+exports.BREAKPOINT_MD = BREAKPOINT_MD;
+exports.BREAKPOINT_SM = BREAKPOINT_SM;
+exports.FlexTypes = FlexTypes;
+exports.MEDIA_MIN_LG = MEDIA_MIN_LG;
+exports.MEDIA_MIN_MD = MEDIA_MIN_MD;
+exports.default = Flex;
+exports.getBreakpointValue = getBreakpointValue;
+exports.getGapSize = getGapSize;
+exports.getSpacingValue = getSpacingValue;
+exports.isResponsiveObject = isResponsiveObject;
+exports.styleFlex = styleFlex;
+exports.styleSpacing = styleSpacing;
 //# sourceMappingURL=index.js.map

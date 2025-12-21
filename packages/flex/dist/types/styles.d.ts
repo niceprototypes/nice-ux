@@ -1,4 +1,3 @@
-import { FlexProps } from "./types";
 /**
  * FlexStyled - Styled Component
  *
@@ -72,5 +71,5 @@ import { FlexProps } from "./types";
  *   }
  * }
  */
-export declare const FlexStyled: import("styled-components/dist/types").IStyledComponentBase<"web", import("styled-components/dist/types").Substitute<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, FlexProps>> & string;
+export declare const FlexStyled: any;
 //# sourceMappingURL=styles.d.ts.map

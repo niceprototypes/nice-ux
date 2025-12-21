@@ -1,189 +1,160 @@
 import * as React from "react";
 /**
- * GapSize Type
+ * FlexGapSizeType
  *
  * Defines the available size values for gaps and spacing throughout the component.
- * These values map to CSS custom properties (e.g., --gap-size-1, --gap-size-2, etc.)
- *
- * @type {0 | 1 | 2 | 3 | 4 | 5 | 6 | string}
+ * Uses design tokens from nice-styles that map to CSS custom properties.
  *
  * Values:
- * - 0: No gap/spacing
- * - 1-6: Incrementally larger spacing values defined by CSS variables
+ * - "smaller", "small", "base", "large", "larger": Design token keys from nice-styles gap tokens
  * - string: Custom CSS value (e.g., "2rem", "var(--custom-spacing)", "100px")
+ * - null: Explicitly disable gap/spacing (useful for responsive breakpoints)
  */
-export type GapSize = 0 | 1 | 2 | 3 | 4 | 5 | 6 | string;
+export type FlexGapSizeType = "smaller" | "small" | "base" | "large" | "larger";
 /**
- * FlexType Type
+ * FlexTypeType
  *
  * Determines whether spacing properties apply as padding or margin.
- *
- * @type {"padding" | "margin"}
  *
  * Values:
  * - "padding": Applies spacing as internal padding
  * - "margin": Applies spacing as external margin
  */
-export type FlexType = "padding" | "margin";
+export type FlexTypeType = "padding" | "margin";
 /**
- * SpacingDefinition Interface
+ * FlexBreakpointType
+ *
+ * Supported breakpoint values for responsive styling
+ */
+export type FlexBreakpointType = "sm" | "md" | "lg";
+/**
+ * FlexDirectionType
+ *
+ * Flex direction values
+ */
+export type FlexDirectionType = "row" | "column";
+/**
+ * FlexAlignItemsType
+ *
+ * Align items on cross axis
+ */
+export type FlexAlignItemsType = "flex-start" | "flex-end" | "center" | "baseline" | "stretch";
+/**
+ * FlexJustifyContentType
+ *
+ * Align items on main axis
+ */
+export type FlexJustifyContentType = "flex-start" | "flex-end" | "center" | "space-between" | "space-around" | "space-evenly";
+/**
+ * FlexWrapType
+ *
+ * Controls flex wrapping behavior
+ */
+export type FlexWrapType = "nowrap" | "wrap" | "wrap-reverse";
+/**
+ * FlexSpacingDefinitionType
  *
  * Provides granular control over spacing on all sides of the component.
  * Supports shortcuts for common patterns while allowing individual side control.
  *
- * @interface SpacingDefinition
- *
  * Properties:
- * @property {GapSize} [all] - Applies spacing to all four sides
- * @property {GapSize} [horizontal] - Applies spacing to left and right sides
- * @property {GapSize} [vertical] - Applies spacing to top and bottom sides
- * @property {GapSize} [top] - Applies spacing to top side only
- * @property {GapSize} [right] - Applies spacing to right side only
- * @property {GapSize} [bottom] - Applies spacing to bottom side only
- * @property {GapSize} [left] - Applies spacing to left side only
+ * - all: Applies spacing to all four sides
+ * - horizontal: Applies spacing to left and right sides
+ * - vertical: Applies spacing to top and bottom sides
+ * - top, right, bottom, left: Individual side control
  *
  * Priority order (highest to lowest):
  * 1. Individual sides (top, right, bottom, left)
  * 2. Axis shortcuts (horizontal, vertical)
  * 3. All sides (all)
- *
- * @example
- * // All sides with size 2
- * { all: 2 }
- *
- * @example
- * // Different horizontal and vertical spacing
- * { horizontal: 3, vertical: 1 }
- *
- * @example
- * // Custom per-side spacing
- * { top: 2, right: 3, bottom: 2, left: 1 }
  */
-export type SpacingDefinition = {
-    all?: GapSize;
-    horizontal?: GapSize;
-    vertical?: GapSize;
-    top?: GapSize;
-    right?: GapSize;
-    bottom?: GapSize;
-    left?: GapSize;
+export type FlexSpacingDefinitionType = {
+    all?: FlexGapSizeType;
+    horizontal?: FlexGapSizeType;
+    vertical?: FlexGapSizeType;
+    top?: FlexGapSizeType;
+    right?: FlexGapSizeType;
+    bottom?: FlexGapSizeType;
+    left?: FlexGapSizeType;
 };
 /**
- * FlexProps Interface
+ * FlexSpacingPropType
+ *
+ * Union type for the spacing prop, supporting three formats:
+ * - GapSize: Simple gap size applied to all sides
+ * - SpacingDefinition: Granular control per side
+ * - Responsive object: Different SpacingDefinition per breakpoint
+ */
+export type FlexSpacingPropType = FlexGapSizeType | FlexSpacingDefinitionType | {
+    sm?: FlexSpacingDefinitionType;
+    md?: FlexSpacingDefinitionType;
+    lg?: FlexSpacingDefinitionType;
+};
+/**
+ * FlexProps
  *
  * Complete prop definition for the Flex component.
  * All layout-related props support both static values and responsive breakpoint objects.
- *
- * @interface FlexProps
- *
- * Layout Properties:
- * @property {FlexType} [type="padding"] - Whether spacing applies as padding or margin
- *
- * @property [gap] - Space between flex items using CSS gap
- *   - Static: gap={2}
- *   - Responsive: gap={{ sm: 1, md: 2, lg: 3 }}
- *
- * @property [direction] - Flex direction (row/column)
- *   - Static: direction="row"
- *   - Responsive: direction={{ sm: "column", md: "row" }}
- *
- * @property [alignItems] - Align items on cross axis
- *   - Values: "flex-start" | "flex-end" | "center" | "baseline" | "stretch"
- *   - Static: alignItems="center"
- *   - Responsive: alignItems={{ sm: "flex-start", md: "center" }}
- *
- * @property [justifyContent] - Align items on main axis
- *   - Values: "flex-start" | "flex-end" | "center" | "space-between" | "space-around" | "space-evenly"
- *   - Static: justifyContent="space-between"
- *   - Responsive: justifyContent={{ sm: "center", md: "space-between" }}
- *
- * @property [grow] - Flex grow value for the container
- *   - Static: grow={1}
- *   - Responsive: grow={{ sm: 0, md: 1 }}
- *
- * @property [wrap] - Controls flex wrapping behavior
- *   - Values: "nowrap" | "wrap" | "wrap-reverse"
- *   - Static: wrap="wrap"
- *   - Responsive: wrap={{ sm: "wrap", md: "nowrap" }}
- *
- * @property [spacing] - Padding or margin spacing configuration
- *   - Simple: spacing={2} (applies to all sides at sm breakpoint)
- *   - Definition: spacing={{ all: 2, horizontal: 3 }}
- *   - Responsive: spacing={{ sm: { all: 1 }, md: { all: 2 }, lg: { all: 3 } }}
- *
- * Standard React Properties:
- * @property {React.ReactNode} children - Child elements to render inside the flex container
- * @property {React.CSSProperties} [style] - Inline styles applied to the root element
- * @property {string} [className] - CSS class name applied to the root element
- * @property {React.MouseEventHandler} [onClick] - Click event handler for the container
  *
  * Breakpoint System:
  * - sm: Small screens (mobile) - always applied as base
  * - md: Medium screens (tablet) - min-width: 980px
  * - lg: Large screens (desktop) - min-width: 1280px
- *
- * @example
- * // Simple static props
- * <Flex direction="row" gap={2} alignItems="center">
- *   {children}
- * </Flex>
- *
- * @example
- * // Fully responsive configuration
- * <Flex
- *   direction={{ sm: "column", md: "row" }}
- *   gap={{ sm: 1, md: 2, lg: 3 }}
- *   alignItems={{ sm: "stretch", md: "center" }}
- *   justifyContent="space-between"
- *   spacing={{
- *     sm: { all: 1 },
- *     md: { horizontal: 2, vertical: 1 },
- *     lg: { all: 3 }
- *   }}
- * >
- *   {children}
- * </Flex>
  */
 export type FlexProps = {
-    type?: FlexType;
-    gap?: GapSize | {
-        sm?: GapSize;
-        md?: GapSize;
-        lg?: GapSize;
+    type?: FlexTypeType;
+    gap?: FlexGapSizeType | {
+        sm?: FlexGapSizeType;
+        md?: FlexGapSizeType;
+        lg?: FlexGapSizeType;
     };
-    direction?: "row" | "column" | {
-        sm?: "row" | "column";
-        md?: "row" | "column";
-        lg?: "row" | "column";
+    direction?: FlexDirectionType | {
+        sm?: FlexDirectionType;
+        md?: FlexDirectionType;
+        lg?: FlexDirectionType;
     };
-    alignItems?: "flex-start" | "flex-end" | "center" | "baseline" | "stretch" | {
-        sm?: "flex-start" | "flex-end" | "center" | "baseline" | "stretch";
-        md?: "flex-start" | "flex-end" | "center" | "baseline" | "stretch";
-        lg?: "flex-start" | "flex-end" | "center" | "baseline" | "stretch";
+    alignItems?: FlexAlignItemsType | {
+        sm?: FlexAlignItemsType;
+        md?: FlexAlignItemsType;
+        lg?: FlexAlignItemsType;
     };
-    justifyContent?: "flex-start" | "flex-end" | "center" | "space-between" | "space-around" | "space-evenly" | {
-        sm?: "flex-start" | "flex-end" | "center" | "space-between" | "space-around" | "space-evenly";
-        md?: "flex-start" | "flex-end" | "center" | "space-between" | "space-around" | "space-evenly";
-        lg?: "flex-start" | "flex-end" | "center" | "space-between" | "space-around" | "space-evenly";
+    justifyContent?: FlexJustifyContentType | {
+        sm?: FlexJustifyContentType;
+        md?: FlexJustifyContentType;
+        lg?: FlexJustifyContentType;
     };
     grow?: number | {
         sm?: number;
         md?: number;
         lg?: number;
     };
-    wrap?: "nowrap" | "wrap" | "wrap-reverse" | {
-        sm?: "nowrap" | "wrap" | "wrap-reverse";
-        md?: "nowrap" | "wrap" | "wrap-reverse";
-        lg?: "nowrap" | "wrap" | "wrap-reverse";
+    wrap?: FlexWrapType | {
+        sm?: FlexWrapType;
+        md?: FlexWrapType;
+        lg?: FlexWrapType;
     };
-    spacing?: GapSize | SpacingDefinition | {
-        sm?: SpacingDefinition;
-        md?: SpacingDefinition;
-        lg?: SpacingDefinition;
-    };
+    spacing?: FlexSpacingPropType;
     children: React.ReactNode;
     style?: React.CSSProperties;
     className?: string;
-    onClick?: React.MouseEventHandler<HTMLDivElement>;
 };
+export type GapSize = FlexGapSizeType;
+export type FlexType = FlexTypeType;
+export type Breakpoint = FlexBreakpointType;
+export type SpacingDefinition = FlexSpacingDefinitionType;
+export type SpacingProp = FlexSpacingPropType;
+declare const FlexTypes: {};
+declare namespace FlexTypes {
+    type GapSize = FlexGapSizeType;
+    type Type = FlexTypeType;
+    type Breakpoint = FlexBreakpointType;
+    type Direction = FlexDirectionType;
+    type AlignItems = FlexAlignItemsType;
+    type JustifyContent = FlexJustifyContentType;
+    type Wrap = FlexWrapType;
+    type SpacingDefinition = FlexSpacingDefinitionType;
+    type SpacingProp = FlexSpacingPropType;
+    type Props = FlexProps;
+}
+export default FlexTypes;
 //# sourceMappingURL=types.d.ts.map

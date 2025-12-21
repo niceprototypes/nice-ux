@@ -1,9 +1,4 @@
-import { FlexProps } from "../../types";
-/**
- * Supported breakpoint values for responsive styling
- * @type {"sm" | "md" | "lg"}
- */
-type Breakpoint = "sm" | "md" | "lg";
+import { Breakpoint, FlexProps } from "../../types";
 /**
  * styleFlex Service
  *

@@ -1,2 +1,2 @@
-export { default, styleFlex } from "./styleFlex";
+export { default } from "./styleFlex";
 //# sourceMappingURL=index.d.ts.map

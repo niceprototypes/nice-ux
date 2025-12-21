@@ -63,7 +63,6 @@ import Flex from 'nice-react-flex'
 | `children` | `React.ReactNode` | Child elements |
 | `className` | `string` | CSS class name |
 | `style` | `React.CSSProperties` | Inline styles |
-| `onClick` | `React.MouseEventHandler` | Click handler |
 
 ### Responsive Values
 
