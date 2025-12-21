@@ -1,4 +1,4 @@
-import React from "react"
+import reReact from "react"
 import Typography from "nice-react-typography"
 import { CodeRowProps } from "./types"
 import Flex from "nice-react-flex"

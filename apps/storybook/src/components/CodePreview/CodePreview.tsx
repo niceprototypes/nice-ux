@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { CodePreviewProps } from "./types"
-import { ClickableDiv, CodeFlex } from "./styles"
+import { ClickableDiv, ClickableFlex } from "./styles"
 import CodePreviewString from "./CodePreviewString"
 import CodePreviewCopying from "./CodePreviewCopying"
 
@@ -48,10 +48,10 @@ const CodePreview: React.FC<CodePreviewProps> = ({
       onClick={clipboard ? handleClick : undefined}
       $clickable={clipboard}
     >
-      <CodeFlex direction="column">
+      <ClickableFlex>
         {copying && <CodePreviewCopying />}
         <CodePreviewString code={code} />
-      </CodeFlex>
+      </ClickableFlex>
     </ClickableDiv>
   )
 }

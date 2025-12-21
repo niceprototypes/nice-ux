@@ -1,0 +1,1 @@
+- include line clamp and word break as configurable props

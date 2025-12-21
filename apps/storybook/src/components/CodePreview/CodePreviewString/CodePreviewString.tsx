@@ -1,7 +1,7 @@
 import React from "react"
 import { colors } from "./styles"
 import Typography from "nice-react-typography"
-import Flex from "../../../../nice-react-flex"
+import Flex from "nice-react-flex"
 
 /**
  * Token definition for syntax highlighting.
@@ -226,11 +226,11 @@ const CodePreviewString: React.FC<{ code: string }> = ({ code }) => {
   }
 
   return (
-    <>
+    <Flex direction="column" spacing={{ all: "base" }}>
       {processedCode.split("\n").map((line, i) => (
         <Flex key={i}>{highlightLine(line, i)}</Flex>
       ))}
-    </>
+    </Flex>
   )
 }
 

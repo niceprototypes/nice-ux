@@ -154,7 +154,7 @@ export const Basic: Story = {
         {
           name: "",
           demo: <DemoDots dots={twoDots} />,
-          code: `<Flex>\n  {children}\n</Flex>`,
+          code: `<Flex>{children}</Flex>`,
         },
       ]}
     />
@@ -169,7 +169,7 @@ export const Direction: Story = {
         name: value,
         description: `direction="${value}"`,
         demo: <DemoDots direction={value} dots={twoDots} />,
-        code: `<Flex direction="${value}">\n  {children}\n</Flex>`,
+        code: `<Flex direction="${value}">\n+1{children}\n</Flex>`,
       }))}
     />
   ),
@@ -184,7 +184,7 @@ export const Gap: Story = {
         description: `gap="${value}"`,
         value: getToken("gap", value).value,
         demo: <DemoDots gap={value} dots={threeDots} />,
-        code: `<Flex gap="${value}">\n  {children}\n</Flex>`,
+        code: `<Flex gap="${value}">\n+1{children}\n</Flex>`,
       }))}
     />
   ),
@@ -199,7 +199,7 @@ export const Spacing: Story = {
         description: `spacing="${value}"`,
         value: getToken("gap", value).value,
         demo: <DemoDots spacing={value} dots={twoDots} bordered />,
-        code: `<Flex spacing="${value}">\n  {children}\n</Flex>`,
+        code: `<Flex spacing="${value}">\n+1{children}\n</Flex>`,
       }))}
     />
   ),
@@ -234,7 +234,7 @@ export const Type: Story = {
             </Flex>
           </Flex>
         ),
-        code: `<Flex type="${value}">\n  {children}\n</Flex>`,
+        code: `<Flex type="${value}">\n+1{children}\n</Flex>`,
       }))}
     />
   ),
@@ -267,7 +267,7 @@ export const Grow: Story = {
               ]}
             />
           ),
-          code: `<Flex>\n  <Flex grow={0}>\n    {children}\n  </Flex>\n  <Flex grow={1}>\n    {children}\n  </Flex>\n</Flex>`,
+          code: `<Flex>\n+1<Flex grow={0}>\n+1  {children}\n+1</Flex>\n+1<Flex grow={1}>\n+1  {children}\n+1</Flex>\n</Flex>`,
         },
         {
           name: "1",
@@ -290,7 +290,7 @@ export const Grow: Story = {
               ]}
             />
           ),
-          code: `<Flex>\n  <Flex grow={1}>\n    {children}\n  </Flex>\n  <Flex grow={1}>\n    {children}\n  </Flex>\n</Flex>`,
+          code: `<Flex>\n+1<Flex grow={1}>\n+1  {children}\n+1</Flex>\n+1<Flex grow={1}>\n+1  {children}\n+1</Flex>\n</Flex>`,
         },
         {
           name: "2",
@@ -313,7 +313,7 @@ export const Grow: Story = {
               ]}
             />
           ),
-          code: `<Flex>\n  <Flex grow={2}>\n    {children}\n  </Flex>\n  <Flex grow={1}>\n    {children}\n  </Flex>\n</Flex>`,
+          code: `<Flex>\n+1<Flex grow={2}>\n+1  {children}\n+1</Flex>\n+1<Flex grow={1}>\n+1  {children}\n+1</Flex>\n</Flex>`,
         },
       ]}
     />
@@ -337,7 +337,7 @@ export const JustifyContent: Story = {
         demo: (
           <DemoDots justifyContent={value} dots={threeDots} width="12rem" bordered />
         ),
-        code: `<Flex justifyContent="${value}">\n  {children}\n</Flex>`,
+        code: `<Flex justifyContent="${value}">\n+1{children}\n</Flex>`,
       }))}
     />
   ),
@@ -352,19 +352,19 @@ export const AlignItems: Story = {
           name: "flex-start",
           description: 'alignItems="flex-start"',
           demo: <DemoDots alignItems="flex-start" dots={threeDots} height="6rem" bordered />,
-          code: `<Flex alignItems="flex-start">\n  {children}\n</Flex>`,
+          code: `<Flex alignItems="flex-start">\n+1{children}\n</Flex>`,
         },
         {
           name: "flex-end",
           description: 'alignItems="flex-end"',
           demo: <DemoDots alignItems="flex-end" dots={threeDots} height="6rem" bordered />,
-          code: `<Flex alignItems="flex-end">\n  {children}\n</Flex>`,
+          code: `<Flex alignItems="flex-end">\n+1{children}\n</Flex>`,
         },
         {
           name: "center",
           description: 'alignItems="center"',
           demo: <DemoDots alignItems="center" dots={threeDots} height="6rem" bordered />,
-          code: `<Flex alignItems="center">\n  {children}\n</Flex>`,
+          code: `<Flex alignItems="center">\n+1{children}\n</Flex>`,
         },
         {
           name: "baseline",
@@ -393,7 +393,7 @@ export const AlignItems: Story = {
               bordered
             />
           ),
-          code: `<Flex alignItems="baseline">\n  {children}\n</Flex>`,
+          code: `<Flex alignItems="baseline">\n+1{children}\n</Flex>`,
         },
         {
           name: "stretch",
@@ -419,7 +419,7 @@ export const AlignItems: Story = {
               bordered
             />
           ),
-          code: `<Flex alignItems="stretch">\n  {children}\n</Flex>`,
+          code: `<Flex alignItems="stretch">\n+1{children}\n</Flex>`,
         },
       ]}
     />
@@ -473,7 +473,7 @@ export const Wrap: Story = {
                 bordered
               />
             ),
-            code: `<Flex wrap="nowrap">\n  {children}\n</Flex>`,
+            code: `<Flex wrap="nowrap">\n+1{children}\n</Flex>`,
           },
           {
             name: "wrap",
@@ -486,7 +486,7 @@ export const Wrap: Story = {
                 bordered
               />
             ),
-            code: `<Flex wrap="wrap">\n  {children}\n</Flex>`,
+            code: `<Flex wrap="wrap">\n+1{children}\n</Flex>`,
           },
           {
             name: "wrap-reverse",
@@ -499,7 +499,7 @@ export const Wrap: Story = {
                 bordered
               />
             ),
-            code: `<Flex wrap="wrap-reverse">\n  {children}\n</Flex>`,
+            code: `<Flex wrap="wrap-reverse">\n+1{children}\n</Flex>`,
           },
         ]}
       />
