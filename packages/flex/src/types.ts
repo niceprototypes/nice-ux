@@ -1,20 +1,23 @@
 import * as React from "react"
+import type {
+  BreakpointName,
+  GapType,
+  SpacingShorthandType,
+  SpacingDefinitionType,
+  SpacingResponsiveType,
+  SpacingType,
+} from "nice-styles"
 
 /**
  * FlexGapSizeType
  *
- * Defines the available size values for gaps and spacing throughout the component.
- * Uses design tokens from nice-styles that map to CSS custom properties.
- *
- * Values:
- * - "smaller", "small", "base", "large", "larger": Design token keys from nice-styles gap tokens
- * - string: Custom CSS value (e.g., "2rem", "var(--custom-spacing)", "100px")
- * - null: Explicitly disable gap/spacing (useful for responsive breakpoints)
+ * Re-export of GapType from nice-styles for consistency.
+ * Uses design tokens that map to CSS custom properties.
  */
-export type FlexGapSizeType = "smaller" | "small" | "base" | "large" | "larger"
+export type FlexGapSizeType = GapType
 
 /**
- * FlexTypeType
+ * FlexModeType
  *
  * Determines whether spacing properties apply as padding or margin.
  *
@@ -22,14 +25,15 @@ export type FlexGapSizeType = "smaller" | "small" | "base" | "large" | "larger"
  * - "padding": Applies spacing as internal padding
  * - "margin": Applies spacing as external margin
  */
-export type FlexTypeType = "padding" | "margin"
+export type FlexModeType = "padding" | "margin"
 
 /**
  * FlexBreakpointType
  *
- * Supported breakpoint values for responsive styling
+ * Re-export of BreakpointName from nice-styles.
+ * Supported breakpoint values: "mobile", "tablet", "desktop"
  */
-export type FlexBreakpointType = "sm" | "md" | "lg"
+export type FlexBreakpointType = BreakpointName
 
 /**
  * FlexDirectionType
@@ -60,45 +64,53 @@ export type FlexJustifyContentType = "flex-start" | "flex-end" | "center" | "spa
 export type FlexWrapType = "nowrap" | "wrap" | "wrap-reverse"
 
 /**
- * FlexSpacingDefinitionType
+ * FlexSpacingShorthandType
  *
- * Provides granular control over spacing on all sides of the component.
- * Supports shortcuts for common patterns while allowing individual side control.
+ * Re-export of SpacingShorthandType from nice-styles.
+ * CSS-like shorthand string for spacing using token names.
+ * Supports 1-4 space-separated token values following CSS padding/margin shorthand rules:
+ * - 1 value: "small" → all sides
+ * - 2 values: "small base" → top/bottom, left/right
+ * - 3 values: "small base large" → top, left/right, bottom
+ * - 4 values: "small base large smaller" → top, right, bottom, left
  *
- * Properties:
- * - all: Applies spacing to all four sides
- * - horizontal: Applies spacing to left and right sides
- * - vertical: Applies spacing to top and bottom sides
- * - top, right, bottom, left: Individual side control
- *
- * Priority order (highest to lowest):
- * 1. Individual sides (top, right, bottom, left)
- * 2. Axis shortcuts (horizontal, vertical)
- * 3. All sides (all)
+ * For custom CSS values (px, rem, etc.), use the style prop instead.
  */
-export type FlexSpacingDefinitionType = {
-  all?: FlexGapSizeType
-  horizontal?: FlexGapSizeType
-  vertical?: FlexGapSizeType
-  top?: FlexGapSizeType
-  right?: FlexGapSizeType
-  bottom?: FlexGapSizeType
-  left?: FlexGapSizeType
-}
+export type FlexSpacingShorthandType = SpacingShorthandType
 
 /**
- * FlexSpacingPropType
+ * FlexSpacingDefinitionType
  *
- * Union type for the spacing prop, supporting three formats:
- * - GapSize: Simple gap size applied to all sides
- * - SpacingDefinition: Granular control per side
- * - Responsive object: Different SpacingDefinition per breakpoint
+ * Re-export of SpacingDefinitionType from nice-styles.
+ * Provides granular control over spacing on all sides of the component.
+ * Individual side values after parsing from shorthand.
+ *
+ * Properties:
+ * - top, right, bottom, left: Individual side control with token values
  */
-export type FlexSpacingPropType = FlexGapSizeType | FlexSpacingDefinitionType | {
-  sm?: FlexSpacingDefinitionType
-  md?: FlexSpacingDefinitionType
-  lg?: FlexSpacingDefinitionType
-}
+export type FlexSpacingDefinitionType = SpacingDefinitionType
+
+/**
+ * FlexSpacingResponsiveType
+ *
+ * Re-export of SpacingResponsiveType from nice-styles.
+ * Responsive spacing configuration where each breakpoint can have:
+ * - A shorthand string (e.g., "small base")
+ * - null to explicitly disable spacing at that breakpoint
+ */
+export type FlexSpacingResponsiveType = SpacingResponsiveType
+
+/**
+ * FlexSpacingType
+ *
+ * Re-export of SpacingType from nice-styles.
+ * Union type for the spacing prop, supporting two formats:
+ * - Shorthand string: "small", "small base", etc. (applies to mobile breakpoint)
+ * - Responsive object: { mobile: "base", tablet: null, desktop: "small large" }
+ *
+ * For custom CSS values, use the style prop on Flex instead.
+ */
+export type FlexSpacingType = SpacingType
 
 /**
  * FlexProps
@@ -107,43 +119,43 @@ export type FlexSpacingPropType = FlexGapSizeType | FlexSpacingDefinitionType | 
  * All layout-related props support both static values and responsive breakpoint objects.
  *
  * Breakpoint System:
- * - sm: Small screens (mobile) - always applied as base
- * - md: Medium screens (tablet) - min-width: 980px
- * - lg: Large screens (desktop) - min-width: 1280px
+ * - mobile: Base styles, always applied
+ * - tablet: min-width query above mobile threshold
+ * - desktop: min-width query for large screens
  */
 export type FlexProps = {
-  type?: FlexTypeType
+  mode?: FlexModeType
   gap?: FlexGapSizeType | {
-    sm?: FlexGapSizeType
-    md?: FlexGapSizeType
-    lg?: FlexGapSizeType
+    mobile?: FlexGapSizeType
+    tablet?: FlexGapSizeType
+    desktop?: FlexGapSizeType
   }
   direction?: FlexDirectionType | {
-    sm?: FlexDirectionType
-    md?: FlexDirectionType
-    lg?: FlexDirectionType
+    mobile?: FlexDirectionType
+    tablet?: FlexDirectionType
+    desktop?: FlexDirectionType
   }
   alignItems?: FlexAlignItemsType | {
-    sm?: FlexAlignItemsType
-    md?: FlexAlignItemsType
-    lg?: FlexAlignItemsType
+    mobile?: FlexAlignItemsType
+    tablet?: FlexAlignItemsType
+    desktop?: FlexAlignItemsType
   }
   justifyContent?: FlexJustifyContentType | {
-    sm?: FlexJustifyContentType
-    md?: FlexJustifyContentType
-    lg?: FlexJustifyContentType
+    mobile?: FlexJustifyContentType
+    tablet?: FlexJustifyContentType
+    desktop?: FlexJustifyContentType
   }
   grow?: number | {
-    sm?: number
-    md?: number
-    lg?: number
+    mobile?: number
+    tablet?: number
+    desktop?: number
   }
   wrap?: FlexWrapType | {
-    sm?: FlexWrapType
-    md?: FlexWrapType
-    lg?: FlexWrapType
+    mobile?: FlexWrapType
+    tablet?: FlexWrapType
+    desktop?: FlexWrapType
   }
-  spacing?: FlexSpacingPropType
+  spacing?: FlexSpacingType
   children: React.ReactNode
   style?: React.CSSProperties
   className?: string
@@ -151,24 +163,28 @@ export type FlexProps = {
 
 // Legacy exports for backwards compatibility
 export type GapSize = FlexGapSizeType
-export type FlexType = FlexTypeType
+export type FlexMode = FlexModeType
 export type Breakpoint = FlexBreakpointType
 export type SpacingDefinition = FlexSpacingDefinitionType
-export type SpacingProp = FlexSpacingPropType
+export type SpacingShorthand = FlexSpacingShorthandType
+export type SpacingResponsive = FlexSpacingResponsiveType
+export type Spacing = FlexSpacingType
 
 // Declaration merging: const + namespace creates exportable type namespace
 const FlexTypes = {} as const
 
 namespace FlexTypes {
   export type GapSize = FlexGapSizeType
-  export type Type = FlexTypeType
+  export type Mode = FlexModeType
   export type Breakpoint = FlexBreakpointType
   export type Direction = FlexDirectionType
   export type AlignItems = FlexAlignItemsType
   export type JustifyContent = FlexJustifyContentType
   export type Wrap = FlexWrapType
   export type SpacingDefinition = FlexSpacingDefinitionType
-  export type SpacingProp = FlexSpacingPropType
+  export type SpacingShorthand = FlexSpacingShorthandType
+  export type SpacingResponsive = FlexSpacingResponsiveType
+  export type Spacing = FlexSpacingType
   export type Props = FlexProps
 }
 

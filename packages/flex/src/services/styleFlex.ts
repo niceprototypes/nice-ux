@@ -69,9 +69,9 @@ export const styleFlex = (breakpoint: Breakpoint, props: FlexProps): string => {
 
   const spacing = getSpacingValue(props.spacing, breakpoint)
 
-  // Base flex display - only set for small breakpoint
+  // Base flex display - only set for mobile breakpoint
   // Higher breakpoints inherit the flex display value
-  if (breakpoint === "sm") {
+  if (breakpoint === "mobile") {
     styles.push("display: flex;")
   }
 
@@ -110,7 +110,7 @@ export const styleFlex = (breakpoint: Breakpoint, props: FlexProps): string => {
 
   // Spacing (padding/margin) using the spacing helper
   if (spacing) {
-    const spacingStyles = styleSpacing(props.type || "padding", spacing)
+    const spacingStyles = styleSpacing(props.mode || "padding", spacing)
     if (spacingStyles) {
       styles.push(spacingStyles)
     }

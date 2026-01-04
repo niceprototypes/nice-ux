@@ -1,19 +1,15 @@
 import * as React from 'react';
+import { GapType, SpacingType, BreakpointName, SpacingDefinitionType, SpacingShorthandType, SpacingResponsiveType } from 'nice-styles';
 
 /**
  * FlexGapSizeType
  *
- * Defines the available size values for gaps and spacing throughout the component.
- * Uses design tokens from nice-styles that map to CSS custom properties.
- *
- * Values:
- * - "smaller", "small", "base", "large", "larger": Design token keys from nice-styles gap tokens
- * - string: Custom CSS value (e.g., "2rem", "var(--custom-spacing)", "100px")
- * - null: Explicitly disable gap/spacing (useful for responsive breakpoints)
+ * Re-export of GapType from nice-styles for consistency.
+ * Uses design tokens that map to CSS custom properties.
  */
-type FlexGapSizeType = "smaller" | "small" | "base" | "large" | "larger";
+type FlexGapSizeType = GapType;
 /**
- * FlexTypeType
+ * FlexModeType
  *
  * Determines whether spacing properties apply as padding or margin.
  *
@@ -21,13 +17,14 @@ type FlexGapSizeType = "smaller" | "small" | "base" | "large" | "larger";
  * - "padding": Applies spacing as internal padding
  * - "margin": Applies spacing as external margin
  */
-type FlexTypeType = "padding" | "margin";
+type FlexModeType = "padding" | "margin";
 /**
  * FlexBreakpointType
  *
- * Supported breakpoint values for responsive styling
+ * Re-export of BreakpointName from nice-styles.
+ * Supported breakpoint values: "mobile", "tablet", "desktop"
  */
-type FlexBreakpointType = "sm" | "md" | "lg";
+type FlexBreakpointType = BreakpointName;
 /**
  * FlexDirectionType
  *
@@ -53,44 +50,50 @@ type FlexJustifyContentType = "flex-start" | "flex-end" | "center" | "space-betw
  */
 type FlexWrapType = "nowrap" | "wrap" | "wrap-reverse";
 /**
+ * FlexSpacingShorthandType
+ *
+ * Re-export of SpacingShorthandType from nice-styles.
+ * CSS-like shorthand string for spacing using token names.
+ * Supports 1-4 space-separated token values following CSS padding/margin shorthand rules:
+ * - 1 value: "small" → all sides
+ * - 2 values: "small base" → top/bottom, left/right
+ * - 3 values: "small base large" → top, left/right, bottom
+ * - 4 values: "small base large smaller" → top, right, bottom, left
+ *
+ * For custom CSS values (px, rem, etc.), use the style prop instead.
+ */
+type FlexSpacingShorthandType = SpacingShorthandType;
+/**
  * FlexSpacingDefinitionType
  *
+ * Re-export of SpacingDefinitionType from nice-styles.
  * Provides granular control over spacing on all sides of the component.
- * Supports shortcuts for common patterns while allowing individual side control.
+ * Individual side values after parsing from shorthand.
  *
  * Properties:
- * - all: Applies spacing to all four sides
- * - horizontal: Applies spacing to left and right sides
- * - vertical: Applies spacing to top and bottom sides
- * - top, right, bottom, left: Individual side control
- *
- * Priority order (highest to lowest):
- * 1. Individual sides (top, right, bottom, left)
- * 2. Axis shortcuts (horizontal, vertical)
- * 3. All sides (all)
+ * - top, right, bottom, left: Individual side control with token values
  */
-type FlexSpacingDefinitionType = {
-    all?: FlexGapSizeType;
-    horizontal?: FlexGapSizeType;
-    vertical?: FlexGapSizeType;
-    top?: FlexGapSizeType;
-    right?: FlexGapSizeType;
-    bottom?: FlexGapSizeType;
-    left?: FlexGapSizeType;
-};
+type FlexSpacingDefinitionType = SpacingDefinitionType;
 /**
- * FlexSpacingPropType
+ * FlexSpacingResponsiveType
  *
- * Union type for the spacing prop, supporting three formats:
- * - GapSize: Simple gap size applied to all sides
- * - SpacingDefinition: Granular control per side
- * - Responsive object: Different SpacingDefinition per breakpoint
+ * Re-export of SpacingResponsiveType from nice-styles.
+ * Responsive spacing configuration where each breakpoint can have:
+ * - A shorthand string (e.g., "small base")
+ * - null to explicitly disable spacing at that breakpoint
  */
-type FlexSpacingPropType = FlexGapSizeType | FlexSpacingDefinitionType | {
-    sm?: FlexSpacingDefinitionType;
-    md?: FlexSpacingDefinitionType;
-    lg?: FlexSpacingDefinitionType;
-};
+type FlexSpacingResponsiveType = SpacingResponsiveType;
+/**
+ * FlexSpacingType
+ *
+ * Re-export of SpacingType from nice-styles.
+ * Union type for the spacing prop, supporting two formats:
+ * - Shorthand string: "small", "small base", etc. (applies to mobile breakpoint)
+ * - Responsive object: { mobile: "base", tablet: null, desktop: "small large" }
+ *
+ * For custom CSS values, use the style prop on Flex instead.
+ */
+type FlexSpacingType = SpacingType;
 /**
  * FlexProps
  *
@@ -98,63 +101,67 @@ type FlexSpacingPropType = FlexGapSizeType | FlexSpacingDefinitionType | {
  * All layout-related props support both static values and responsive breakpoint objects.
  *
  * Breakpoint System:
- * - sm: Small screens (mobile) - always applied as base
- * - md: Medium screens (tablet) - min-width: 980px
- * - lg: Large screens (desktop) - min-width: 1280px
+ * - mobile: Base styles, always applied
+ * - tablet: min-width query above mobile threshold
+ * - desktop: min-width query for large screens
  */
 type FlexProps = {
-    type?: FlexTypeType;
+    mode?: FlexModeType;
     gap?: FlexGapSizeType | {
-        sm?: FlexGapSizeType;
-        md?: FlexGapSizeType;
-        lg?: FlexGapSizeType;
+        mobile?: FlexGapSizeType;
+        tablet?: FlexGapSizeType;
+        desktop?: FlexGapSizeType;
     };
     direction?: FlexDirectionType | {
-        sm?: FlexDirectionType;
-        md?: FlexDirectionType;
-        lg?: FlexDirectionType;
+        mobile?: FlexDirectionType;
+        tablet?: FlexDirectionType;
+        desktop?: FlexDirectionType;
     };
     alignItems?: FlexAlignItemsType | {
-        sm?: FlexAlignItemsType;
-        md?: FlexAlignItemsType;
-        lg?: FlexAlignItemsType;
+        mobile?: FlexAlignItemsType;
+        tablet?: FlexAlignItemsType;
+        desktop?: FlexAlignItemsType;
     };
     justifyContent?: FlexJustifyContentType | {
-        sm?: FlexJustifyContentType;
-        md?: FlexJustifyContentType;
-        lg?: FlexJustifyContentType;
+        mobile?: FlexJustifyContentType;
+        tablet?: FlexJustifyContentType;
+        desktop?: FlexJustifyContentType;
     };
     grow?: number | {
-        sm?: number;
-        md?: number;
-        lg?: number;
+        mobile?: number;
+        tablet?: number;
+        desktop?: number;
     };
     wrap?: FlexWrapType | {
-        sm?: FlexWrapType;
-        md?: FlexWrapType;
-        lg?: FlexWrapType;
+        mobile?: FlexWrapType;
+        tablet?: FlexWrapType;
+        desktop?: FlexWrapType;
     };
-    spacing?: FlexSpacingPropType;
+    spacing?: FlexSpacingType;
     children: React.ReactNode;
     style?: React.CSSProperties;
     className?: string;
 };
 type GapSize = FlexGapSizeType;
-type FlexType = FlexTypeType;
+type FlexMode = FlexModeType;
 type Breakpoint = FlexBreakpointType;
 type SpacingDefinition = FlexSpacingDefinitionType;
-type SpacingProp = FlexSpacingPropType;
+type SpacingShorthand = FlexSpacingShorthandType;
+type SpacingResponsive = FlexSpacingResponsiveType;
+type Spacing = FlexSpacingType;
 declare const FlexTypes: {};
 declare namespace FlexTypes {
     type GapSize = FlexGapSizeType;
-    type Type = FlexTypeType;
+    type Mode = FlexModeType;
     type Breakpoint = FlexBreakpointType;
     type Direction = FlexDirectionType;
     type AlignItems = FlexAlignItemsType;
     type JustifyContent = FlexJustifyContentType;
     type Wrap = FlexWrapType;
     type SpacingDefinition = FlexSpacingDefinitionType;
-    type SpacingProp = FlexSpacingPropType;
+    type SpacingShorthand = FlexSpacingShorthandType;
+    type SpacingResponsive = FlexSpacingResponsiveType;
+    type Spacing = FlexSpacingType;
     type Props = FlexProps;
 }
 
@@ -167,7 +174,7 @@ declare namespace FlexTypes {
  * @component
  * @example
  * // Basic usage with static props
- * <Flex direction="row" gap={2} alignItems="center">
+ * <Flex direction="row" gap="base" alignItems="center">
  *   <div>Item 1</div>
  *   <div>Item 2</div>
  * </Flex>
@@ -175,8 +182,8 @@ declare namespace FlexTypes {
  * @example
  * // Responsive usage with breakpoint-based props
  * <Flex
- *   direction={{ sm: "column", md: "row" }}
- *   gap={{ sm: 1, md: 2, lg: 3 }}
+ *   direction={{ mobile: "column", tablet: "row" }}
+ *   gap={{ mobile: "small", tablet: "base", desktop: "large" }}
  *   alignItems="center"
  * >
  *   <div>Responsive Item 1</div>
@@ -184,13 +191,18 @@ declare namespace FlexTypes {
  * </Flex>
  *
  * @example
- * // Using spacing for padding/margin
+ * // Using spacing with CSS-like shorthand
+ * <Flex spacing="small base" gap="small">
+ *   <div>Padded content (top/bottom: small, left/right: base)</div>
+ * </Flex>
+ *
+ * @example
+ * // Responsive spacing with margin mode
  * <Flex
- *   type="padding"
- *   spacing={{ all: 2 }}
- *   gap={1}
+ *   mode="margin"
+ *   spacing={{ mobile: "small", tablet: "base large", desktop: "small base large smaller" }}
  * >
- *   <div>Padded content</div>
+ *   <div>Responsive margins</div>
  * </Flex>
  *
  * @param {FlexProps} props - The component props
@@ -201,14 +213,17 @@ declare namespace FlexTypes {
  * for creating responsive layouts. It supports:
  *
  * 1. **Responsive Design**: All layout props can be specified as either static values
- *    or responsive objects with sm/md/lg breakpoints
+ *    or responsive objects with mobile/tablet/desktop breakpoints
  *
  * 2. **Automatic Prop Normalization**: The component automatically normalizes props
  *    to ensure consistent behavior. Simple values are converted to breakpoint objects
- *    with the value applied to the 'sm' breakpoint.
+ *    with the value applied to the 'mobile' breakpoint.
  *
- * 3. **Spacing Management**: Supports both padding and margin with granular control
- *    over all sides (top, right, bottom, left) or shortcuts (horizontal, vertical, all)
+ * 3. **CSS-like Spacing Shorthand**: Supports 1-4 token values like CSS padding/margin:
+ *    - "small" → all sides
+ *    - "small base" → top/bottom, left/right
+ *    - "small base large" → top, left/right, bottom
+ *    - "small base large smaller" → top, right, bottom, left
  *
  * 4. **Gap Support**: Uses CSS gap property for consistent spacing between flex items
  *
@@ -221,46 +236,23 @@ declare const Flex: React.FC<FlexProps>;
 //# sourceMappingURL=Flex.d.ts.map
 
 /**
- * Breakpoint Constants
- *
- * Defines the responsive breakpoint system used throughout the Flex component.
- * These values determine when different responsive styles are applied.
- */
-/** Small breakpoint - mobile devices */
-declare const BREAKPOINT_SM = 480;
-/** Medium breakpoint - tablets and small desktops */
-declare const BREAKPOINT_MD = 980;
-/** Large breakpoint - large desktops */
-declare const BREAKPOINT_LG = 1280;
-/**
- * Media Queries
- *
- * Pre-built media query strings for responsive design.
- * These are used in styled-components to apply styles at different screen sizes.
- */
-/** Media query for medium screens and up (tablets+) */
-declare const MEDIA_MIN_MD = "@media (min-width: 980px)";
-/** Media query for large screens and up (desktops+) */
-declare const MEDIA_MIN_LG = "@media (min-width: 1280px)";
-
-/**
  * Extracts the value for a specific breakpoint from a prop that can be either
  * a simple value or a responsive object
  *
  * @function getBreakpointValue
- * @param {T | { sm?: T; md?: T; lg?: T } | undefined} value - The prop value
+ * @param {T | { mobile?: T; tablet?: T; desktop?: T } | undefined} value - The prop value
  * @param {Breakpoint} breakpoint - The target breakpoint
  * @returns {T | undefined} The value for the specified breakpoint
  *
  * @example
- * getBreakpointValue("row", "sm") // returns "row"
- * getBreakpointValue("row", "md") // returns undefined (simple values only apply at sm)
- * getBreakpointValue({ sm: "column", md: "row" }, "md") // returns "row"
+ * getBreakpointValue("row", "mobile") // returns "row"
+ * getBreakpointValue("row", "tablet") // returns undefined (simple values only apply at mobile)
+ * getBreakpointValue({ mobile: "column", tablet: "row" }, "tablet") // returns "row"
  */
 declare const getBreakpointValue: <T>(value: T | {
-    sm?: T;
-    md?: T;
-    lg?: T;
+    mobile?: T;
+    tablet?: T;
+    desktop?: T;
 } | undefined, breakpoint: Breakpoint) => T | undefined;
 
 /**
@@ -286,70 +278,66 @@ declare const getGapSize: (size?: GapSize) => string | undefined;
  * @function getSpacingValue
  * @param {SpacingProp | undefined} spacing - The spacing prop value
  * @param {Breakpoint} breakpoint - The target breakpoint
- * @returns {SpacingDefinition | undefined} The spacing definition for the specified breakpoint
+ * @returns {SpacingDefinition | null | undefined} The spacing definition for the specified breakpoint
  *
  * @description
- * Handles the three possible shapes of the spacing prop:
- * - GapSize string: Not a SpacingDefinition, returns undefined
- * - SpacingDefinition object: Returns the object only for "sm" breakpoint
- * - Responsive object: Returns the SpacingDefinition for the specified breakpoint
+ * Handles two possible shapes of the spacing prop:
+ * - Shorthand string: "small", "small base", etc. - parsed and applied to "mobile" breakpoint
+ * - Responsive object: { mobile?: string | null, tablet?: string | null, desktop?: string | null }
+ *
+ * Returns null when spacing is explicitly disabled at a breakpoint.
+ * Returns undefined when no spacing is defined for the breakpoint.
  *
  * @example
- * getSpacingValue({ all: "base" }, "sm") // returns { all: "base" }
- * getSpacingValue({ all: "base" }, "md") // returns undefined
- * getSpacingValue({ sm: { all: "small" }, md: { all: "base" } }, "md") // returns { all: "base" }
- * getSpacingValue("base", "sm") // returns undefined (GapSize, not SpacingDefinition)
+ * getSpacingValue("small", "mobile") // returns { top: "small", right: "small", bottom: "small", left: "small" }
+ * getSpacingValue("small base", "mobile") // returns { top: "small", right: "base", bottom: "small", left: "base" }
+ * getSpacingValue("small", "tablet") // returns undefined (shorthand only applies to mobile)
+ * getSpacingValue({ mobile: "base", tablet: null, desktop: "small" }, "tablet") // returns null
+ * getSpacingValue({ mobile: "base", desktop: "small large" }, "desktop") // returns { top: "small", right: "large", bottom: "small", left: "large" }
  */
-declare const getSpacingValue: (spacing: SpacingProp | undefined, breakpoint: Breakpoint) => SpacingDefinition | undefined;
+declare const getSpacingValue: (spacing: Spacing | undefined, breakpoint: Breakpoint) => SpacingDefinition | null | undefined;
 
 /**
- * Checks if a value is a responsive breakpoint object (has sm, md, or lg keys)
+ * Checks if a value is a responsive breakpoint object (has mobile, tablet, or desktop keys)
  *
  * @function isResponsiveObject
  * @param {unknown} value - The value to check
  * @returns {boolean} True if the value is an object with breakpoint keys
  *
  * @example
- * isResponsiveObject({ sm: "column", md: "row" }) // true
+ * isResponsiveObject({ mobile: "column", tablet: "row" }) // true
  * isResponsiveObject({ all: "base" }) // false
  * isResponsiveObject("row") // false
  * isResponsiveObject(null) // false
  */
 declare const isResponsiveObject: (value: unknown) => value is {
-    sm?: unknown;
-    md?: unknown;
-    lg?: unknown;
+    mobile?: unknown;
+    tablet?: unknown;
+    desktop?: unknown;
 };
 
 /**
  * Generates CSS spacing properties (padding or margin) from a SpacingDefinition
  *
  * @function styleSpacing
- * @param {"padding" | "margin"} type - Whether to generate padding or margin properties
- * @param {SpacingDefinition} [def] - Spacing configuration object
+ * @param {"padding" | "margin"} mode - Whether to generate padding or margin properties
+ * @param {SpacingDefinition} [def] - Spacing configuration object with top, right, bottom, left values
  * @returns {string} CSS property declarations separated by newlines
  *
  * @description
- * This function applies spacing values with a priority system:
- * 1. Individual sides (top, right, bottom, left) - highest priority
- * 2. Axis shortcuts (horizontal→left+right, vertical→top+bottom)
- * 3. All sides (all) - lowest priority
- *
- * The function only generates CSS for sides that have defined values,
- * allowing for partial spacing definitions.
+ * Generates CSS declarations for each side that has a defined value.
+ * The SpacingDefinition is expected to already have individual side values
+ * (parsed from shorthand by parseSpacingShorthand).
  *
  * @example
- * // Simple all-sides spacing
- * styleSpacing("padding", { all: 2 })
- * // Returns: "padding-top: var(--gap-size-2);\npadding-right: var(--gap-size-2);\n..."
+ * styleSpacing("padding", { top: "small", right: "base", bottom: "small", left: "base" })
+ * // Returns: "padding-top: var(--gap-small);\npadding-right: var(--gap-base);\n..."
  *
  * @example
- * // Mixed priority spacing
- * styleSpacing("margin", { all: 1, horizontal: 2, top: 3 })
- * // Returns: "margin-top: var(--gap-size-3);\nmargin-right: var(--gap-size-2);\n..."
- * // (top=3 overrides all=1, horizontal=2 overrides all=1 for left/right)
+ * styleSpacing("margin", { top: "large", right: "large", bottom: "large", left: "large" })
+ * // Returns: "margin-top: var(--gap-large);\nmargin-right: var(--gap-large);\n..."
  */
-declare const styleSpacing: (type: "padding" | "margin", def?: SpacingDefinition) => string;
+declare const styleSpacing: (mode: "padding" | "margin", def?: SpacingDefinition | null) => string;
 
 /**
  * styleFlex Service
@@ -405,5 +393,5 @@ declare const styleSpacing: (type: "padding" | "margin", def?: SpacingDefinition
  */
 declare const styleFlex: (breakpoint: Breakpoint, props: FlexProps) => string;
 
-export { BREAKPOINT_LG, BREAKPOINT_MD, BREAKPOINT_SM, FlexTypes, MEDIA_MIN_LG, MEDIA_MIN_MD, Flex as default, getBreakpointValue, getGapSize, getSpacingValue, isResponsiveObject, styleFlex, styleSpacing };
-export type { Breakpoint, FlexAlignItemsType, FlexBreakpointType, FlexDirectionType, FlexGapSizeType, FlexJustifyContentType, FlexProps, FlexSpacingDefinitionType, FlexSpacingPropType, FlexType, FlexTypeType, FlexWrapType, GapSize, SpacingDefinition, SpacingProp };
+export { FlexTypes, Flex as default, getBreakpointValue, getGapSize, getSpacingValue, isResponsiveObject, styleFlex, styleSpacing };
+export type { Breakpoint, FlexAlignItemsType, FlexBreakpointType, FlexDirectionType, FlexGapSizeType, FlexJustifyContentType, FlexMode, FlexModeType, FlexProps, FlexSpacingDefinitionType, FlexSpacingResponsiveType, FlexSpacingShorthandType, FlexSpacingType, FlexWrapType, GapSize, Spacing, SpacingDefinition, SpacingResponsive, SpacingShorthand };

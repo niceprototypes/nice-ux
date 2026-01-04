@@ -18,6 +18,11 @@ import { GapSize } from "../types"
 export const getGapSize = (size?: GapSize): string | undefined => {
   if (size === undefined || size === null) return undefined
 
+  // Handle "none" as zero spacing
+  if (size === "none") {
+    return "0"
+  }
+
   // Check if it's a valid token key
   if (size === "smaller" || size === "small" || size === "base" || size === "large" || size === "larger") {
     return `var(--gap-${size})`

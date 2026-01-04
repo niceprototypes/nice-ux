@@ -1,50 +1,45 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { getBreakpoint } from 'nice-styles';
 
 /**
- * Breakpoint Constants
+ * Checks if a value is a responsive breakpoint object (has mobile, tablet, or desktop keys)
  *
- * Defines the responsive breakpoint system used throughout the Flex component.
- * These values determine when different responsive styles are applied.
- */
-/** Small breakpoint - mobile devices */
-const BREAKPOINT_SM = 480;
-/** Medium breakpoint - tablets and small desktops */
-const BREAKPOINT_MD = 980;
-/** Large breakpoint - large desktops */
-const BREAKPOINT_LG = 1280;
-/**
- * Media Queries
+ * @function isResponsiveObject
+ * @param {unknown} value - The value to check
+ * @returns {boolean} True if the value is an object with breakpoint keys
  *
- * Pre-built media query strings for responsive design.
- * These are used in styled-components to apply styles at different screen sizes.
+ * @example
+ * isResponsiveObject({ mobile: "column", tablet: "row" }) // true
+ * isResponsiveObject({ all: "base" }) // false
+ * isResponsiveObject("row") // false
+ * isResponsiveObject(null) // false
  */
-/** Media query for medium screens and up (tablets+) */
-const MEDIA_MIN_MD = `@media (min-width: ${BREAKPOINT_MD}px)`;
-/** Media query for large screens and up (desktops+) */
-const MEDIA_MIN_LG = `@media (min-width: ${BREAKPOINT_LG}px)`;
+const isResponsiveObject = (value) => typeof value === "object" &&
+    value !== null &&
+    ("mobile" in value || "tablet" in value || "desktop" in value);
 
 /**
  * Extracts the value for a specific breakpoint from a prop that can be either
  * a simple value or a responsive object
  *
  * @function getBreakpointValue
- * @param {T | { sm?: T; md?: T; lg?: T } | undefined} value - The prop value
+ * @param {T | { mobile?: T; tablet?: T; desktop?: T } | undefined} value - The prop value
  * @param {Breakpoint} breakpoint - The target breakpoint
  * @returns {T | undefined} The value for the specified breakpoint
  *
  * @example
- * getBreakpointValue("row", "sm") // returns "row"
- * getBreakpointValue("row", "md") // returns undefined (simple values only apply at sm)
- * getBreakpointValue({ sm: "column", md: "row" }, "md") // returns "row"
+ * getBreakpointValue("row", "mobile") // returns "row"
+ * getBreakpointValue("row", "tablet") // returns undefined (simple values only apply at mobile)
+ * getBreakpointValue({ mobile: "column", tablet: "row" }, "tablet") // returns "row"
  */
 const getBreakpointValue = (value, breakpoint) => {
     if (value === undefined)
         return undefined;
-    if (typeof value === "object" && value !== null && ("sm" in value || "md" in value || "lg" in value)) {
+    if (isResponsiveObject(value)) {
         return value[breakpoint];
     }
-    return breakpoint === "sm" ? value : undefined;
+    return breakpoint === "mobile" ? value : undefined;
 };
 
 /**
@@ -65,6 +60,10 @@ const getBreakpointValue = (value, breakpoint) => {
 const getGapSize = (size) => {
     if (size === undefined || size === null)
         return undefined;
+    // Handle "none" as zero spacing
+    if (size === "none") {
+        return "0";
+    }
     // Check if it's a valid token key
     if (size === "smaller" || size === "small" || size === "base" || size === "large" || size === "larger") {
         return `var(--gap-${size})`;
@@ -74,21 +73,62 @@ const getGapSize = (size) => {
 };
 
 /**
- * Checks if a value is a responsive breakpoint object (has sm, md, or lg keys)
+ * Parses a CSS-like spacing shorthand string into a SpacingDefinition object.
  *
- * @function isResponsiveObject
- * @param {unknown} value - The value to check
- * @returns {boolean} True if the value is an object with breakpoint keys
+ * Follows CSS padding/margin shorthand rules:
+ * - 1 value: "small" → { top: "small", right: "small", bottom: "small", left: "small" }
+ * - 2 values: "small base" → { top: "small", right: "base", bottom: "small", left: "base" }
+ * - 3 values: "small base large" → { top: "small", right: "base", bottom: "large", left: "base" }
+ * - 4 values: "small base large smaller" → { top: "small", right: "base", bottom: "large", left: "smaller" }
  *
- * @example
- * isResponsiveObject({ sm: "column", md: "row" }) // true
- * isResponsiveObject({ all: "base" }) // false
- * isResponsiveObject("row") // false
- * isResponsiveObject(null) // false
+ * @param shorthand - The spacing shorthand string
+ * @returns SpacingDefinition with top, right, bottom, left values
  */
-const isResponsiveObject = (value) => typeof value === "object" &&
-    value !== null &&
-    ("sm" in value || "md" in value || "lg" in value);
+const parseSpacingShorthand = (shorthand) => {
+    const values = shorthand.split(" ");
+    switch (values.length) {
+        case 1:
+            // All sides same
+            return {
+                top: values[0],
+                right: values[0],
+                bottom: values[0],
+                left: values[0],
+            };
+        case 2:
+            // top/bottom, left/right
+            return {
+                top: values[0],
+                right: values[1],
+                bottom: values[0],
+                left: values[1],
+            };
+        case 3:
+            // top, left/right, bottom
+            return {
+                top: values[0],
+                right: values[1],
+                bottom: values[2],
+                left: values[1],
+            };
+        case 4:
+            // top, right, bottom, left
+            return {
+                top: values[0],
+                right: values[1],
+                bottom: values[2],
+                left: values[3],
+            };
+        default:
+            // Fallback: treat as single value
+            return {
+                top: values[0],
+                right: values[0],
+                bottom: values[0],
+                left: values[0],
+            };
+    }
+};
 
 /**
  * Extracts the SpacingDefinition for a specific breakpoint from a spacing prop
@@ -96,84 +136,85 @@ const isResponsiveObject = (value) => typeof value === "object" &&
  * @function getSpacingValue
  * @param {SpacingProp | undefined} spacing - The spacing prop value
  * @param {Breakpoint} breakpoint - The target breakpoint
- * @returns {SpacingDefinition | undefined} The spacing definition for the specified breakpoint
+ * @returns {SpacingDefinition | null | undefined} The spacing definition for the specified breakpoint
  *
  * @description
- * Handles the three possible shapes of the spacing prop:
- * - GapSize string: Not a SpacingDefinition, returns undefined
- * - SpacingDefinition object: Returns the object only for "sm" breakpoint
- * - Responsive object: Returns the SpacingDefinition for the specified breakpoint
+ * Handles two possible shapes of the spacing prop:
+ * - Shorthand string: "small", "small base", etc. - parsed and applied to "mobile" breakpoint
+ * - Responsive object: { mobile?: string | null, tablet?: string | null, desktop?: string | null }
+ *
+ * Returns null when spacing is explicitly disabled at a breakpoint.
+ * Returns undefined when no spacing is defined for the breakpoint.
  *
  * @example
- * getSpacingValue({ all: "base" }, "sm") // returns { all: "base" }
- * getSpacingValue({ all: "base" }, "md") // returns undefined
- * getSpacingValue({ sm: { all: "small" }, md: { all: "base" } }, "md") // returns { all: "base" }
- * getSpacingValue("base", "sm") // returns undefined (GapSize, not SpacingDefinition)
+ * getSpacingValue("small", "mobile") // returns { top: "small", right: "small", bottom: "small", left: "small" }
+ * getSpacingValue("small base", "mobile") // returns { top: "small", right: "base", bottom: "small", left: "base" }
+ * getSpacingValue("small", "tablet") // returns undefined (shorthand only applies to mobile)
+ * getSpacingValue({ mobile: "base", tablet: null, desktop: "small" }, "tablet") // returns null
+ * getSpacingValue({ mobile: "base", desktop: "small large" }, "desktop") // returns { top: "small", right: "large", bottom: "small", left: "large" }
  */
 const getSpacingValue = (spacing, breakpoint) => {
-    if (spacing === undefined || spacing === null)
+    if (spacing === undefined)
         return undefined;
-    if (typeof spacing !== "object")
+    // Handle shorthand string (applies to mobile only)
+    if (typeof spacing === "string") {
+        if (breakpoint === "mobile") {
+            return parseSpacingShorthand(spacing);
+        }
         return undefined;
-    if (isResponsiveObject(spacing)) {
-        return spacing[breakpoint];
     }
-    return breakpoint === "sm" ? spacing : undefined;
+    // Handle responsive object
+    if (isResponsiveObject(spacing)) {
+        const responsiveSpacing = spacing;
+        const value = responsiveSpacing[breakpoint];
+        if (value === null)
+            return null;
+        if (value === undefined)
+            return undefined;
+        if (typeof value === "string") {
+            return parseSpacingShorthand(value);
+        }
+        return undefined;
+    }
+    return undefined;
 };
 
 /**
  * Generates CSS spacing properties (padding or margin) from a SpacingDefinition
  *
  * @function styleSpacing
- * @param {"padding" | "margin"} type - Whether to generate padding or margin properties
- * @param {SpacingDefinition} [def] - Spacing configuration object
+ * @param {"padding" | "margin"} mode - Whether to generate padding or margin properties
+ * @param {SpacingDefinition} [def] - Spacing configuration object with top, right, bottom, left values
  * @returns {string} CSS property declarations separated by newlines
  *
  * @description
- * This function applies spacing values with a priority system:
- * 1. Individual sides (top, right, bottom, left) - highest priority
- * 2. Axis shortcuts (horizontal→left+right, vertical→top+bottom)
- * 3. All sides (all) - lowest priority
- *
- * The function only generates CSS for sides that have defined values,
- * allowing for partial spacing definitions.
+ * Generates CSS declarations for each side that has a defined value.
+ * The SpacingDefinition is expected to already have individual side values
+ * (parsed from shorthand by parseSpacingShorthand).
  *
  * @example
- * // Simple all-sides spacing
- * styleSpacing("padding", { all: 2 })
- * // Returns: "padding-top: var(--gap-size-2);\npadding-right: var(--gap-size-2);\n..."
+ * styleSpacing("padding", { top: "small", right: "base", bottom: "small", left: "base" })
+ * // Returns: "padding-top: var(--gap-small);\npadding-right: var(--gap-base);\n..."
  *
  * @example
- * // Mixed priority spacing
- * styleSpacing("margin", { all: 1, horizontal: 2, top: 3 })
- * // Returns: "margin-top: var(--gap-size-3);\nmargin-right: var(--gap-size-2);\n..."
- * // (top=3 overrides all=1, horizontal=2 overrides all=1 for left/right)
+ * styleSpacing("margin", { top: "large", right: "large", bottom: "large", left: "large" })
+ * // Returns: "margin-top: var(--gap-large);\nmargin-right: var(--gap-large);\n..."
  */
-const styleSpacing = (type, def) => {
-    var _a, _b, _c, _d, _e, _f, _g, _h;
+const styleSpacing = (mode, def) => {
     if (!def)
         return "";
-    const prefix = type;
-    // Apply priority system: individual > axis shortcuts > all
-    const styles = {
-        top: (_b = (_a = def.top) !== null && _a !== void 0 ? _a : def.vertical) !== null && _b !== void 0 ? _b : def.all,
-        right: (_d = (_c = def.right) !== null && _c !== void 0 ? _c : def.horizontal) !== null && _d !== void 0 ? _d : def.all,
-        bottom: (_f = (_e = def.bottom) !== null && _e !== void 0 ? _e : def.vertical) !== null && _f !== void 0 ? _f : def.all,
-        left: (_h = (_g = def.left) !== null && _g !== void 0 ? _g : def.horizontal) !== null && _h !== void 0 ? _h : def.all,
-    };
     const parts = [];
-    // Generate CSS declarations only for defined values
-    if (styles.top !== undefined) {
-        parts.push(`${prefix}-top: ${getGapSize(styles.top)};`);
+    if (def.top !== undefined) {
+        parts.push(`${mode}-top: ${getGapSize(def.top)};`);
     }
-    if (styles.right !== undefined) {
-        parts.push(`${prefix}-right: ${getGapSize(styles.right)};`);
+    if (def.right !== undefined) {
+        parts.push(`${mode}-right: ${getGapSize(def.right)};`);
     }
-    if (styles.bottom !== undefined) {
-        parts.push(`${prefix}-bottom: ${getGapSize(styles.bottom)};`);
+    if (def.bottom !== undefined) {
+        parts.push(`${mode}-bottom: ${getGapSize(def.bottom)};`);
     }
-    if (styles.left !== undefined) {
-        parts.push(`${prefix}-left: ${getGapSize(styles.left)};`);
+    if (def.left !== undefined) {
+        parts.push(`${mode}-left: ${getGapSize(def.left)};`);
     }
     return parts.join("\n");
 };
@@ -240,9 +281,9 @@ const styleFlex = (breakpoint, props) => {
     const justifyContent = getBreakpointValue(props.justifyContent, breakpoint);
     const wrap = getBreakpointValue(props.wrap, breakpoint);
     const spacing = getSpacingValue(props.spacing, breakpoint);
-    // Base flex display - only set for small breakpoint
+    // Base flex display - only set for mobile breakpoint
     // Higher breakpoints inherit the flex display value
-    if (breakpoint === "sm") {
+    if (breakpoint === "mobile") {
         styles.push("display: flex;");
     }
     // Flex direction - controls main axis direction
@@ -274,7 +315,7 @@ const styleFlex = (breakpoint, props) => {
     }
     // Spacing (padding/margin) using the spacing helper
     if (spacing) {
-        const spacingStyles = styleSpacing(props.type || "padding", spacing);
+        const spacingStyles = styleSpacing(props.mode || "padding", spacing);
         if (spacingStyles) {
             styles.push(spacingStyles);
         }
@@ -301,80 +342,42 @@ const styleFlex = (breakpoint, props) => {
  *
  * 1. **Prop Filtering**: Uses `shouldForwardProp` to prevent style-related props from
  *    being passed to the DOM, avoiding React warnings about unknown DOM properties.
- *    Filtered props: type, spacing, gap, direction, alignItems, justifyContent, grow, wrap
+ *    Filtered props: mode, spacing, gap, direction, alignItems, justifyContent, grow, wrap
  *
  * 2. **Mobile-First Responsive Design**: Applies styles in a mobile-first approach:
- *    - Base styles: Always applied (sm breakpoint)
- *    - Medium styles: Applied at 980px+ (md breakpoint)
- *    - Large styles: Applied at 1280px+ (lg breakpoint)
+ *    - Base styles: Always applied (mobile breakpoint)
+ *    - Tablet styles: Applied above mobile threshold
+ *    - Desktop styles: Applied for large screens
  *
  * 3. **Service Integration**: Delegates actual CSS generation to the styleFlex service,
  *    keeping the styled component focused on responsive breakpoint management.
  *
- * 4. **Clean Separation**: Separates styling logic from component structure, making
- *    the codebase more maintainable and testable.
- *
- * **CSS Generation Flow:**
- * 1. Component receives normalized props from normalizeProps service
- * 2. For each breakpoint (sm/md/lg), styleFlex generates appropriate CSS
- * 3. Media queries ensure styles are applied at correct screen sizes
- * 4. Higher breakpoint styles override lower ones as expected in CSS
- *
- * **Breakpoint System:**
- * - Small (sm): 0px+ - Base mobile styles, always applied
- * - Medium (md): 980px+ - Tablet and small desktop styles
- * - Large (lg): 1280px+ - Large desktop styles
- *
- * The component follows CSS cascade principles where later styles override earlier ones,
- * enabling predictable responsive behavior.
- *
  * @example
  * // Basic usage in component
- * <FlexStyled direction={{ sm: "column", md: "row" }} gap={{ sm: 1, lg: 3 }}>
+ * <FlexStyled direction={{ mobile: "column", tablet: "row" }} gap={{ mobile: "small", desktop: "large" }}>
  *   <div>Content</div>
  * </FlexStyled>
- *
- * @example
- * // Generated CSS structure
- * .FlexStyled-abc123 {
- *   // sm breakpoint styles (always applied)
- *   display: flex;
- *   flex-direction: column;
- *   gap: var(--gap-size-1);
- * }
- * @media (min-width: 980px) {
- *   .FlexStyled-abc123 {
- *     // md breakpoint styles
- *     flex-direction: row;
- *   }
- * }
- * @media (min-width: 1280px) {
- *   .FlexStyled-abc123 {
- *     // lg breakpoint styles
- *     gap: var(--gap-size-3);
- *   }
- * }
  */
 const FlexStyled = styled.div.withConfig({
-    shouldForwardProp: (prop) => !["type", "spacing", "gap", "direction", "alignItems", "justifyContent", "grow", "wrap"].includes(prop),
+    shouldForwardProp: (prop) => !["mode", "spacing", "gap", "direction", "alignItems", "justifyContent", "grow", "wrap"].includes(prop),
 }) `
-  ${(props) => styleFlex('sm', props)}
+  ${(props) => styleFlex("mobile", props)}
 
-  ${MEDIA_MIN_MD} {
-    ${(props) => styleFlex('md', props)}
+  ${getBreakpoint("tablet").query} {
+    ${(props) => styleFlex("tablet", props)}
   }
 
-  ${MEDIA_MIN_LG} {
-    ${(props) => styleFlex('lg', props)}
+  ${getBreakpoint("desktop").query} {
+    ${(props) => styleFlex("desktop", props)}
   }
 `;
 
 /**
- * List of props that accept breakpoint values
+ * List of props that accept breakpoint values.
  * These props can be specified as either simple values or breakpoint objects.
- * Note: spacing is handled separately due to its more complex structure
+ * Spacing is handled directly by getSpacingValue and doesn't need normalization.
  */
-const BREAKPOINT_PROPS = ["gap", "direction", "grow", "wrap", "alignItems", "justifyContent"];
+const breakpointProps = ["gap", "direction", "grow", "wrap", "alignItems", "justifyContent"];
 /**
  * normalizeProps Helper
  *
@@ -386,133 +389,21 @@ const BREAKPOINT_PROPS = ["gap", "direction", "grow", "wrap", "alignItems", "jus
  * @returns {FlexProps} Normalized props with consistent breakpoint structure
  *
  * @description
- * This helper performs two main transformations:
+ * Converts simple prop values into breakpoint objects:
+ * - Example: `gap="base"` becomes `gap={{ mobile: "base" }}`
+ * - Example: `direction="row"` becomes `direction={{ mobile: "row" }}`
  *
- * 1. **Simple Value Normalization**: Converts simple prop values into breakpoint objects
- *    - Example: `gap={2}` becomes `gap={{ sm: 2 }}`
- *    - Example: `direction="row"` becomes `direction={{ sm: "row" }}`
- *    - This ensures the styling logic only needs to handle one format
- *
- * 2. **Spacing Normalization**: Handles the special case of the spacing prop
- *    - Simple number: `spacing={3}` → `spacing={{ sm: { all: 3 } }}`
- *    - SpacingDefinition: `spacing={{ all: 3 }}` → `spacing={{ sm: { all: 3 } }}`
- *    - Already normalized: `spacing={{ sm: {...} }}` → unchanged
- *
- * Why this normalization is important:
- * - **Consistency**: The styling logic (styleFlex) only needs to handle one format
- * - **Simplicity**: Reduces complexity in the styled-components implementation
- * - **Flexibility**: Users can provide props in the most convenient format
- * - **Type Safety**: Maintains TypeScript type safety throughout the transformation
- *
- * @example
- * // Input: Simple values
- * normalizeProps({
- *   gap: 2,
- *   direction: "row",
- *   children: <div />
- * })
- * // Output: Breakpoint objects
- * {
- *   gap: { sm: 2 },
- *   direction: { sm: "row" },
- *   children: <div />
- * }
- *
- * @example
- * // Input: Mixed simple and responsive values
- * normalizeProps({
- *   gap: 2,
- *   direction: { sm: "column", md: "row" },
- *   spacing: { all: 3 },
- *   children: <div />
- * })
- * // Output: All values normalized to breakpoint format
- * {
- *   gap: { sm: 2 },
- *   direction: { sm: "column", md: "row" },
- *   spacing: { sm: { all: 3 } },
- *   children: <div />
- * }
+ * Note: The spacing prop is NOT normalized here. It's handled directly by
+ * getSpacingValue which parses shorthand strings at render time.
  */
 const normalizeProps = (props) => {
-    // Create a shallow copy to avoid mutating the original props
     const normalizedProps = { ...props };
-    // Process standard breakpoint props (gap, direction, grow)
-    // These props can be either simple values or breakpoint objects
-    BREAKPOINT_PROPS.forEach((propName) => {
+    breakpointProps.forEach((propName) => {
         const value = props[propName];
-        if (value !== undefined) {
-            if (typeof value !== "object") {
-                // Special handling for gap prop: only normalize numbers, not strings
-                // TODO: Remove this conditional logic once migration to string-only gap values is complete
-                if (propName === "gap") {
-                    if (typeof value === "number") {
-                        normalizedProps[propName] = { sm: value };
-                    }
-                    // If gap is a string, leave as-is (no normalization)
-                }
-                else {
-                    normalizedProps[propName] = { sm: value };
-                }
-            }
-            else if (propName === "gap") {
-                // Handle breakpoint objects for gap: normalize number values, leave strings as-is
-                // TODO: Remove this normalization logic once migration to string-only gap values is complete
-                const breakpointObj = value;
-                const normalizedBreakpoints = {};
-                let hasChanges = false;
-                Object.keys(breakpointObj).forEach((breakpoint) => {
-                    const bpValue = breakpointObj[breakpoint];
-                    if (typeof bpValue === "number") {
-                        // Normalize number to string or keep as number based on your normalization logic
-                        normalizedBreakpoints[breakpoint] = bpValue;
-                    }
-                    else {
-                        // Keep string values as-is
-                        normalizedBreakpoints[breakpoint] = bpValue;
-                        hasChanges = true;
-                    }
-                });
-                // Only update if we found string values (to preserve reference equality when possible)
-                if (hasChanges || Object.keys(normalizedBreakpoints).length > 0) {
-                    normalizedProps[propName] = normalizedBreakpoints;
-                }
-            }
+        if (value !== undefined && typeof value !== "object") {
+            normalizedProps[propName] = { mobile: value };
         }
     });
-    // Special handling for the spacing prop due to its nested structure
-    // TODO: Remove number normalization logic once migration to string-only spacing values is complete
-    if (props.spacing !== undefined) {
-        if (typeof props.spacing === "number") {
-            // Simple number becomes a SpacingDefinition at sm breakpoint
-            // spacing={3} -> spacing={{ sm: { all: 3 } }}
-            normalizedProps.spacing = { sm: { all: props.spacing } };
-        }
-        else if (typeof props.spacing === "string") ;
-        else if (props.spacing !== null && !("sm" in props.spacing || "md" in props.spacing || "lg" in props.spacing)) {
-            // SpacingDefinition object becomes breakpoint-wrapped
-            // Check if values in SpacingDefinition are numbers - if so, normalize; if strings, wrap as-is
-            const spacingDef = props.spacing;
-            const hasNumbers = Object.values(spacingDef).some(v => typeof v === "number");
-            if (hasNumbers) {
-                // spacing={{ all: 3 }} -> spacing={{ sm: { all: 3 } }}
-                normalizedProps.spacing = { sm: spacingDef };
-            }
-            // If all values are strings, leave as-is (no normalization needed)
-        }
-        else {
-            // Has breakpoint keys (sm/md/lg) - check if individual spacing values need normalization
-            // This handles cases like: spacing={{ sm: { all: 2 }, md: { all: "16px" } }}
-            const breakpointSpacing = props.spacing;
-            const normalizedSpacing = {};
-            Object.keys(breakpointSpacing).forEach((breakpoint) => {
-                const spacingDef = breakpointSpacing[breakpoint];
-                // Always include the spacing definition, whether it has numbers or strings
-                normalizedSpacing[breakpoint] = spacingDef;
-            });
-            normalizedProps.spacing = normalizedSpacing;
-        }
-    }
     return normalizedProps;
 };
 
@@ -525,7 +416,7 @@ const normalizeProps = (props) => {
  * @component
  * @example
  * // Basic usage with static props
- * <Flex direction="row" gap={2} alignItems="center">
+ * <Flex direction="row" gap="base" alignItems="center">
  *   <div>Item 1</div>
  *   <div>Item 2</div>
  * </Flex>
@@ -533,8 +424,8 @@ const normalizeProps = (props) => {
  * @example
  * // Responsive usage with breakpoint-based props
  * <Flex
- *   direction={{ sm: "column", md: "row" }}
- *   gap={{ sm: 1, md: 2, lg: 3 }}
+ *   direction={{ mobile: "column", tablet: "row" }}
+ *   gap={{ mobile: "small", tablet: "base", desktop: "large" }}
  *   alignItems="center"
  * >
  *   <div>Responsive Item 1</div>
@@ -542,13 +433,18 @@ const normalizeProps = (props) => {
  * </Flex>
  *
  * @example
- * // Using spacing for padding/margin
+ * // Using spacing with CSS-like shorthand
+ * <Flex spacing="small base" gap="small">
+ *   <div>Padded content (top/bottom: small, left/right: base)</div>
+ * </Flex>
+ *
+ * @example
+ * // Responsive spacing with margin mode
  * <Flex
- *   type="padding"
- *   spacing={{ all: 2 }}
- *   gap={1}
+ *   mode="margin"
+ *   spacing={{ mobile: "small", tablet: "base large", desktop: "small base large smaller" }}
  * >
- *   <div>Padded content</div>
+ *   <div>Responsive margins</div>
  * </Flex>
  *
  * @param {FlexProps} props - The component props
@@ -559,14 +455,17 @@ const normalizeProps = (props) => {
  * for creating responsive layouts. It supports:
  *
  * 1. **Responsive Design**: All layout props can be specified as either static values
- *    or responsive objects with sm/md/lg breakpoints
+ *    or responsive objects with mobile/tablet/desktop breakpoints
  *
  * 2. **Automatic Prop Normalization**: The component automatically normalizes props
  *    to ensure consistent behavior. Simple values are converted to breakpoint objects
- *    with the value applied to the 'sm' breakpoint.
+ *    with the value applied to the 'mobile' breakpoint.
  *
- * 3. **Spacing Management**: Supports both padding and margin with granular control
- *    over all sides (top, right, bottom, left) or shortcuts (horizontal, vertical, all)
+ * 3. **CSS-like Spacing Shorthand**: Supports 1-4 token values like CSS padding/margin:
+ *    - "small" → all sides
+ *    - "small base" → top/bottom, left/right
+ *    - "small base large" → top, left/right, bottom
+ *    - "small base large smaller" → top, right, bottom, left
  *
  * 4. **Gap Support**: Uses CSS gap property for consistent spacing between flex items
  *
@@ -587,5 +486,5 @@ const Flex = (props) => {
 // Declaration merging: const + namespace creates exportable type namespace
 const FlexTypes = {};
 
-export { BREAKPOINT_LG, BREAKPOINT_MD, BREAKPOINT_SM, FlexTypes, MEDIA_MIN_LG, MEDIA_MIN_MD, Flex as default, getBreakpointValue, getGapSize, getSpacingValue, isResponsiveObject, styleFlex, styleSpacing };
+export { FlexTypes, Flex as default, getBreakpointValue, getGapSize, getSpacingValue, isResponsiveObject, styleFlex, styleSpacing };
 //# sourceMappingURL=index.esm.js.map

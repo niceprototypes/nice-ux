@@ -63,6 +63,6 @@
   },
   "homepage": "https://github.com/niceprototypes/nice-react-flex#readme",
   "dependencies": {
-    "nice-styles": "^4.0.1"
+    "nice-styles": "file:../nice-styles"
   }
 }

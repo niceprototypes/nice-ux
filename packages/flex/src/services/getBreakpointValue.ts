@@ -1,26 +1,27 @@
 import { Breakpoint } from "../types"
+import { isResponsiveObject } from "./isResponsiveObject"
 
 /**
  * Extracts the value for a specific breakpoint from a prop that can be either
  * a simple value or a responsive object
  *
  * @function getBreakpointValue
- * @param {T | { sm?: T; md?: T; lg?: T } | undefined} value - The prop value
+ * @param {T | { mobile?: T; tablet?: T; desktop?: T } | undefined} value - The prop value
  * @param {Breakpoint} breakpoint - The target breakpoint
  * @returns {T | undefined} The value for the specified breakpoint
  *
  * @example
- * getBreakpointValue("row", "sm") // returns "row"
- * getBreakpointValue("row", "md") // returns undefined (simple values only apply at sm)
- * getBreakpointValue({ sm: "column", md: "row" }, "md") // returns "row"
+ * getBreakpointValue("row", "mobile") // returns "row"
+ * getBreakpointValue("row", "tablet") // returns undefined (simple values only apply at mobile)
+ * getBreakpointValue({ mobile: "column", tablet: "row" }, "tablet") // returns "row"
  */
 export const getBreakpointValue = <T>(
-  value: T | { sm?: T; md?: T; lg?: T } | undefined,
+  value: T | { mobile?: T; tablet?: T; desktop?: T } | undefined,
   breakpoint: Breakpoint
 ): T | undefined => {
   if (value === undefined) return undefined
-  if (typeof value === "object" && value !== null && ("sm" in value || "md" in value || "lg" in value)) {
-    return (value as { sm?: T; md?: T; lg?: T })[breakpoint]
+  if (isResponsiveObject(value)) {
+    return (value as { mobile?: T; tablet?: T; desktop?: T })[breakpoint]
   }
-  return breakpoint === "sm" ? (value as T) : undefined
+  return breakpoint === "mobile" ? (value as T) : undefined
 }

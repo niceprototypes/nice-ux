@@ -5,56 +5,39 @@ import { getGapSize } from "./getGapSize"
  * Generates CSS spacing properties (padding or margin) from a SpacingDefinition
  *
  * @function styleSpacing
- * @param {"padding" | "margin"} type - Whether to generate padding or margin properties
- * @param {SpacingDefinition} [def] - Spacing configuration object
+ * @param {"padding" | "margin"} mode - Whether to generate padding or margin properties
+ * @param {SpacingDefinition} [def] - Spacing configuration object with top, right, bottom, left values
  * @returns {string} CSS property declarations separated by newlines
  *
  * @description
- * This function applies spacing values with a priority system:
- * 1. Individual sides (top, right, bottom, left) - highest priority
- * 2. Axis shortcuts (horizontal→left+right, vertical→top+bottom)
- * 3. All sides (all) - lowest priority
- *
- * The function only generates CSS for sides that have defined values,
- * allowing for partial spacing definitions.
+ * Generates CSS declarations for each side that has a defined value.
+ * The SpacingDefinition is expected to already have individual side values
+ * (parsed from shorthand by parseSpacingShorthand).
  *
  * @example
- * // Simple all-sides spacing
- * styleSpacing("padding", { all: 2 })
- * // Returns: "padding-top: var(--gap-size-2);\npadding-right: var(--gap-size-2);\n..."
+ * styleSpacing("padding", { top: "small", right: "base", bottom: "small", left: "base" })
+ * // Returns: "padding-top: var(--gap-small);\npadding-right: var(--gap-base);\n..."
  *
  * @example
- * // Mixed priority spacing
- * styleSpacing("margin", { all: 1, horizontal: 2, top: 3 })
- * // Returns: "margin-top: var(--gap-size-3);\nmargin-right: var(--gap-size-2);\n..."
- * // (top=3 overrides all=1, horizontal=2 overrides all=1 for left/right)
+ * styleSpacing("margin", { top: "large", right: "large", bottom: "large", left: "large" })
+ * // Returns: "margin-top: var(--gap-large);\nmargin-right: var(--gap-large);\n..."
  */
-export const styleSpacing = (type: "padding" | "margin", def?: SpacingDefinition): string => {
+export const styleSpacing = (mode: "padding" | "margin", def?: SpacingDefinition | null): string => {
   if (!def) return ""
-  const prefix = type
-
-  // Apply priority system: individual > axis shortcuts > all
-  const styles = {
-    top: def.top ?? def.vertical ?? def.all,
-    right: def.right ?? def.horizontal ?? def.all,
-    bottom: def.bottom ?? def.vertical ?? def.all,
-    left: def.left ?? def.horizontal ?? def.all,
-  }
 
   const parts: string[] = []
 
-  // Generate CSS declarations only for defined values
-  if (styles.top !== undefined) {
-    parts.push(`${prefix}-top: ${getGapSize(styles.top)};`)
+  if (def.top !== undefined) {
+    parts.push(`${mode}-top: ${getGapSize(def.top)};`)
   }
-  if (styles.right !== undefined) {
-    parts.push(`${prefix}-right: ${getGapSize(styles.right)};`)
+  if (def.right !== undefined) {
+    parts.push(`${mode}-right: ${getGapSize(def.right)};`)
   }
-  if (styles.bottom !== undefined) {
-    parts.push(`${prefix}-bottom: ${getGapSize(styles.bottom)};`)
+  if (def.bottom !== undefined) {
+    parts.push(`${mode}-bottom: ${getGapSize(def.bottom)};`)
   }
-  if (styles.left !== undefined) {
-    parts.push(`${prefix}-left: ${getGapSize(styles.left)};`)
+  if (def.left !== undefined) {
+    parts.push(`${mode}-left: ${getGapSize(def.left)};`)
   }
 
   return parts.join("\n")
