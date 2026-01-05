@@ -1,2 +1,2 @@
 export { default } from "./VariableRow"
-export * from "./types"
+export * from "./VariableRow.types"

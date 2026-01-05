@@ -1,7 +1,7 @@
 import React from "react"
 import Typography from "nice-react-typography"
-import { CellFlex } from "./styles"
-import { VariableRowProps } from "./types"
+import { CellFlex } from "./VariableRow.styles"
+import { VariableRowProps } from "./VariableRow.types"
 import Flex from "nice-react-flex"
 import CodePreview from "../CodePreview"
 
@@ -19,7 +19,7 @@ const VariableRow: React.FC<VariableRowProps> = ({
         direction="column"
         justifyContent="center"
         $width="16rem"
-        spacing={{ vertical: "base" }}
+        spacing="base none"
       >
         <Flex alignItems="center" gap="small">
           <Typography as="span" code weight="medium">
@@ -41,7 +41,7 @@ const VariableRow: React.FC<VariableRowProps> = ({
         grow={1}
         alignItems="center"
         $width="18rem"
-        spacing={{ vertical: "base" }}
+        spacing="base none"
         gap="base"
       >
         {demo}
@@ -52,7 +52,7 @@ const VariableRow: React.FC<VariableRowProps> = ({
         )}
       </CellFlex>
       {code && (
-        <CellFlex alignItems="center" $width="18rem" spacing={{ all: "base" }}>
+        <CellFlex alignItems="center" $width="18rem" spacing="base none">
           <CodePreview code={code} />
         </CellFlex>
       )}

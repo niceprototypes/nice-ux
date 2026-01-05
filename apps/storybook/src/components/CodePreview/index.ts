@@ -1,2 +1,2 @@
 export { default } from "./CodePreview"
-export * from "./types"
+export * from "./CodePreview.types"

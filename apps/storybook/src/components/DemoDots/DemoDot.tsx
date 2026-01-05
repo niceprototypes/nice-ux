@@ -1,6 +1,6 @@
 import Flex from "nice-react-flex"
 import { getToken } from "nice-styles"
-import { DemoDotProps } from "./types"
+import { DemoDotProps } from "./DemoDots.types"
 
 const DemoDot = ({
   backgroundColor,

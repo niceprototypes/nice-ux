@@ -1,3 +1,3 @@
 export { default } from "./TokenPreview"
-export * from "./types"
-export { ItemKey, ItemValue } from "./styles"
+export * from "./TokenPreview.types"
+export { ItemKey, ItemValue } from "./TokenPreview.styles"

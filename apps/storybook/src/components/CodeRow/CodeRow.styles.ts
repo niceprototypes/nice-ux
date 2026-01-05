@@ -1,8 +1,8 @@
 import styled from "styled-components"
-import { MEDIA_MIN_MD } from "../../../../nice-react-flex"
+import { getBreakpoint } from "nice-styles"
 
 export const LabelWrapper = styled.div`
-  ${MEDIA_MIN_MD} {
+  ${getBreakpoint("tablet").query} {
     width: 10em;
   }
 `

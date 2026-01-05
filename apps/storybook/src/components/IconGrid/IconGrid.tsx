@@ -1,7 +1,7 @@
 import Icon from "nice-react-icon"
 import Typography from "nice-react-typography"
-import { CellFlex, RowFlex } from "./styles"
-import type { IconGridProps } from "./types"
+import { CellFlex, RowFlex } from "./IconGrid.styles"
+import type { IconGridProps } from "./IconGrid.types"
 
 const IconGrid = ({ icons }: IconGridProps) => {
   return (

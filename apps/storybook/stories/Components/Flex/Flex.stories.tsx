@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import Flex, { GapSize } from "nice-react-flex"
+import Flex from "nice-react-flex"
 import { getToken } from "nice-styles"
 import Story from "../../../src/components/Story"
 import DemoDots from "../../../src/components/DemoDots"
@@ -101,7 +101,7 @@ const meta = {
         type: { summary: "object" },
       },
     },
-    type: {
+    mode: {
       description: "",
       control: "select",
       options: ["padding", "margin"],
@@ -205,13 +205,13 @@ export const Spacing: Story = {
   ),
 }
 
-export const Type: Story = {
-  name: "type",
+export const Mode: Story = {
+  name: "mode",
   render: () => (
     <Story
       variables={["padding", "margin"].map(value => ({
         name: value,
-        description: `type="${value}"`,
+        description: `mode="${value}"`,
         default: value === "padding",
         demo: (
           <Flex direction="column">
@@ -222,8 +222,8 @@ export const Type: Story = {
               }}
             >
               <Flex
-                type={value}
-                spacing={{ sm: { all: "base" as GapSize } }}
+                mode={value as "padding" | "margin"}
+                spacing="base"
                 style={{
                   border: `${getToken("borderWidth").var} solid ${value === "margin" ? getToken("borderColor", "heavy").var : "transparent"}`,
                   borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2 + 2px)`,
@@ -234,7 +234,7 @@ export const Type: Story = {
             </Flex>
           </Flex>
         ),
-        code: `<Flex type="${value}">\n+1{children}\n</Flex>`,
+        code: `<Flex mode="${value}">\n+1{children}\n</Flex>`,
       }))}
     />
   ),

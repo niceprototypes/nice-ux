@@ -1,2 +1,2 @@
 export { default } from "./SectionHeader"
-export * from "./types"
+export * from "./SectionHeader.types"

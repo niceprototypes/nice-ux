@@ -1,6 +1,6 @@
 import Flex from "nice-react-flex"
 import VariableRow from "../VariableRow"
-import { VariableListProps } from "./types"
+import { VariableListProps } from "./VariableList.types"
 
 const VariableList = ({ variables }: VariableListProps) => {
   return (

@@ -1,7 +1,7 @@
 import React from "react"
-import { TokenPreviewProps } from "./types"
+import { TokenPreviewProps } from "./TokenPreview.types"
 import TokenPreviewItem from "./TokenPreviewItem"
-import { colors } from "../CodePreview/styles"
+import { colors } from "../CodePreview/CodePreviewString/CodePreviewString.styles"
 
 const TokenPreview: React.FC<TokenPreviewProps> = ({ items }) => {
   return (

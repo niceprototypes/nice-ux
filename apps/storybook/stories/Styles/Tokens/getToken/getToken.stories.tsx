@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import { getToken } from "nice-styles"
-import Flex, { GapSize } from "nice-react-flex"
+import Flex from "nice-react-flex"
 import Typography from "nice-react-typography"
 import VariableList from "../../../../src/components/VariableList"
 import DemoDots from "../../../../src/components/DemoDots"
@@ -213,7 +213,7 @@ export const Tokens: Story = {
             [{ name: "base" }, { name: "large" }],
             ({ name }: any) => (
               <Flex
-                spacing={{ sm: { all: "large" as GapSize } }}
+                spacing="large"
                 style={{
                   backgroundColor: getToken("backgroundColor", "alternate").var,
                   borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2)`,

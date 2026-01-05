@@ -1,5 +1,5 @@
 import React from "react"
-import { colors } from "./styles"
+import { colors } from "./CodePreviewString.styles"
 import Typography from "nice-react-typography"
 import Flex from "nice-react-flex"
 
@@ -226,7 +226,7 @@ const CodePreviewString: React.FC<{ code: string }> = ({ code }) => {
   }
 
   return (
-    <Flex direction="column" spacing={{ all: "base" }}>
+    <Flex direction="column">
       {processedCode.split("\n").map((line, i) => (
         <Flex key={i}>{highlightLine(line, i)}</Flex>
       ))}

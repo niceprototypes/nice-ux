@@ -209,11 +209,7 @@ export const Spacing: Story = {
         value: getToken("gap", value).value,
         demo: (
           <Tile
-            spacing={{
-              sm: {
-                all: value as "smaller" | "small" | "base" | "large" | "larger",
-              },
-            }}
+            spacing={value as "smaller" | "small" | "base" | "large" | "larger"}
           >
             <SampleContent />
           </Tile>
@@ -233,7 +229,7 @@ export const BreakpointLg: Story = {
           name: "1200",
           description: "breakpointLg={1200}",
           demo: (
-            <Tile breakpointLg={1200} spacing={{ sm: { all: "base" } }}>
+            <Tile breakpointLg={1200} spacing="base">
               <Typography color="medium">
                 Content constrained to 1200px max-width
               </Typography>
@@ -282,7 +278,6 @@ const SideContent = ({ label }: { label: string }) => (
     style={{
       width: "80px",
       height: "80px",
-      backgroundColor: getToken("backgroundColor", "overlay").var,
       borderRadius: getToken("borderRadius", "base").var,
     }}
     alignItems="center"
@@ -303,10 +298,7 @@ export const ContentLeft: Story = {
           name: "with left content",
           description: "contentLeft={...}",
           demo: (
-            <Tile
-              contentLeft={<SideContent label="Left" />}
-              spacing={{ sm: { all: "base" } }}
-            >
+            <Tile contentLeft={<SideContent label="Left" />} spacing="base">
               <SampleContent />
             </Tile>
           ),
@@ -326,10 +318,7 @@ export const ContentRight: Story = {
           name: "with right content",
           description: "contentRight={...}",
           demo: (
-            <Tile
-              contentRight={<SideContent label="Right" />}
-              spacing={{ sm: { all: "base" } }}
-            >
+            <Tile contentRight={<SideContent label="Right" />} spacing="base">
               <SampleContent />
             </Tile>
           ),
@@ -352,7 +341,7 @@ export const Layout: Story = {
             <Tile
               contentLeft={<SideContent label="Left" />}
               contentRight={<SideContent label="Right" />}
-              spacing={{ sm: { all: "base" } }}
+              spacing="base"
             >
               <SampleContent />
             </Tile>

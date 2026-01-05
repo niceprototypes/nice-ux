@@ -1,6 +1,6 @@
 import Flex from "nice-react-flex"
 import { getToken } from "nice-styles"
-import { DemoDotsProps } from "./types"
+import { DemoDotsProps } from "./DemoDots.types"
 import DemoDot from "./DemoDot"
 
 const DemoDots = ({
@@ -23,7 +23,7 @@ const DemoDots = ({
         justifyContent={justifyContent}
         alignItems={alignItems}
         wrap={wrap}
-        spacing={{ sm: { all: spacing } }}
+        spacing={spacing}
         style={{
           height,
           width,

@@ -1,8 +1,8 @@
 import reReact from "react"
 import Typography from "nice-react-typography"
-import { CodeRowProps } from "./types"
+import { CodeRowProps } from "./CodeRow.types"
 import Flex from "nice-react-flex"
-import { LabelWrapper } from "./styles"
+import { LabelWrapper } from "./CodeRow.styles"
 
 export const CodeRow = ({
   showIcon = false,
