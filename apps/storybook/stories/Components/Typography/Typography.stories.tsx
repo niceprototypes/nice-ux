@@ -10,7 +10,7 @@ import LineHeightStory from "./stories/LineHeight.story"
 import SizeStory from "./stories/Size.story"
 import WeightStory from "./stories/Weight.story"
 
-export default meta
+export { meta as default } from "./Typography.meta"
 type Story = StoryObj<typeof meta>
 
 export const Align: Story = {

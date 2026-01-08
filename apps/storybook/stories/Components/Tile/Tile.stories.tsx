@@ -9,7 +9,7 @@ import ContentLeftStory from "./stories/ContentLeft.story"
 import ContentRightStory from "./stories/ContentRight.story"
 import LayoutStory from "./stories/Layout.story"
 
-export default meta
+export { meta as default } from "./Tile.meta"
 type Story = StoryObj<typeof meta>
 
 export const Basic: Story = {

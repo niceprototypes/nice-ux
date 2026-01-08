@@ -7,7 +7,7 @@ import SizeStory from "./stories/Size.story"
 import BorderRadiusStory from "./stories/BorderRadius.story"
 import IconStory from "./stories/Icon.story"
 
-export default meta
+export { meta as default } from "./Button.meta"
 type Story = StoryObj<typeof meta>
 
 export const Basic: Story = {

@@ -5,7 +5,7 @@ import CurrentIndexStory from "./stories/CurrentIndex.story"
 import IsAnimatingStory from "./stories/IsAnimating.story"
 import OnAnimationCompleteStory from "./stories/OnAnimationComplete.story"
 
-export default meta
+export { meta as default } from "./Slider.meta"
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {

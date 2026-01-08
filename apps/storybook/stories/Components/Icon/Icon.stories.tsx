@@ -7,7 +7,7 @@ import ColorStory from "./stories/Color.story"
 import StrokeWidthStory from "./stories/StrokeWidth.story"
 import StrokeScalingStory from "./stories/StrokeScaling.story"
 
-export default meta
+export { meta as default } from "./Icon.meta"
 type Story = StoryObj<typeof meta>
 
 export const Name: Story = {

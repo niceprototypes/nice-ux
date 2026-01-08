@@ -10,7 +10,7 @@ import StickySectionBasicStory from "./stories/StickySectionBasic.story"
 import StickySectionLinksBasicStory from "./stories/StickySectionLinksBasic.story"
 import StickySectionLinksCustomStory from "./stories/StickySectionLinksCustom.story"
 
-export default meta
+export { meta as default } from "./Scroll.meta"
 type Story = StoryObj<typeof meta>
 
 export const UseScroll: Story = {

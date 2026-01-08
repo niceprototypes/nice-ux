@@ -10,7 +10,7 @@ import JustifyContentStory from "./stories/JustifyContent.story"
 import AlignItemsStory from "./stories/AlignItems.story"
 import WrapStory from "./stories/Wrap.story"
 
-export default meta
+export { meta as default } from "./Flex.meta"
 type Story = StoryObj<typeof meta>
 
 export const Basic: Story = {
