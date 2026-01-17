@@ -3,6 +3,7 @@ import { IconProps } from "../types"
 import { IconWrapperStyled, ImageStyled } from "./styles"
 import { getIcon } from "../services/getIcon"
 import { isSpinning } from "../helpers/isSpinning"
+import { IconStyles } from "../tokens"
 
 /**
  * A flexible and customizable React icon component with built-in icon set
@@ -46,19 +47,22 @@ const Icon: React.FC<IconProps> = ({
   const spinning = isSpinning(name)
 
   return (
-    <IconWrapperStyled
-      $color={color}
-      $size={size}
-      $outlined={outlined}
-      $strokeWidth={strokeWidth}
-      $strokeScaling={strokeScaling}
-      $spinning={spinning}
-      className={className}
-    >
-      {url
-        ? <ImageStyled src={url} alt="" />
-        : SvgIcon && <SvgIcon viewBox={viewBox} />}
-    </IconWrapperStyled>
+    <>
+      <IconStyles />
+      <IconWrapperStyled
+        $color={color}
+        $size={size}
+        $outlined={outlined}
+        $strokeWidth={strokeWidth}
+        $strokeScaling={strokeScaling}
+        $spinning={spinning}
+        className={className}
+      >
+        {url
+          ? <ImageStyled src={url} alt="" />
+          : SvgIcon && <SvgIcon viewBox={viewBox} />}
+      </IconWrapperStyled>
+    </>
   )
 }
 
