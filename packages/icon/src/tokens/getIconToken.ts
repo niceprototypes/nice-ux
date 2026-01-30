@@ -1,7 +1,3 @@
-import { createTokens } from "nice-react-styles"
-import { IconTokenMap } from "./IconTokenMap"
+import { iconTokens } from "./IconTokenMap"
 
-export const { GlobalStyles: IconStyles, getComponentToken: getIconToken } = createTokens(
-  "icon",
-  IconTokenMap
-)
+export const getIconToken = iconTokens.getToken
