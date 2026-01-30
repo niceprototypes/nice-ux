@@ -1,49 +1,37 @@
-import { getToken } from "nice-styles"
+import { createTokens, type ComponentTokens } from "nice-react-styles"
+import { getToken as getStylesToken } from "nice-styles"
 
 export const IconTokenMap = {
   size: {
-    name: "size",
-    items: {
-      smaller: getToken("fontSize", "smaller").value,
-      small: getToken("fontSize", "small").value,
-      base: getToken("fontSize", "base").value,
-      large: getToken("fontSize", "large").value,
-      larger: getToken("fontSize", "larger").value,
-    }
+    smaller: getStylesToken("fontSize", "smaller").value,
+    small: getStylesToken("fontSize", "small").value,
+    base: getStylesToken("fontSize", "base").value,
+    large: getStylesToken("fontSize", "large").value,
+    larger: getStylesToken("fontSize", "larger").value,
   },
   color: {
-    name: "color",
-    items: {
-      lighter: getToken("foregroundColor", "lighter").value,
-      light: getToken("foregroundColor", "light").value,
-      medium: getToken("foregroundColor", "medium").value,
-      heavy: getToken("foregroundColor", "heavy").value,
-      base: getToken("foregroundColor", "base").value,
-      disabled: getToken("foregroundColor", "disabled").value,
-      link: getToken("foregroundColor", "link").value,
-      success: getToken("foregroundColor", "success").value,
-      warning: getToken("foregroundColor", "warning").value,
-      error: getToken("foregroundColor", "error").value,
-    }
+    lighter: getStylesToken("foregroundColor", "lighter").value,
+    light: getStylesToken("foregroundColor", "light").value,
+    medium: getStylesToken("foregroundColor", "medium").value,
+    heavy: getStylesToken("foregroundColor", "heavy").value,
+    base: getStylesToken("foregroundColor", "base").value,
+    disabled: getStylesToken("foregroundColor", "disabled").value,
+    link: getStylesToken("foregroundColor", "link").value,
+    success: getStylesToken("foregroundColor", "success").value,
+    warning: getStylesToken("foregroundColor", "warning").value,
+    error: getStylesToken("foregroundColor", "error").value,
   },
   strokeWidth: {
-    name: "stroke-width",
-    items: {
-      small: getToken("borderWidth", "base").value,
-      base: getToken("borderWidth", "base").value,
-      large: getToken("borderWidth", "large").value,
-    }
+    small: getStylesToken("borderWidth", "base").value,
+    base: getStylesToken("borderWidth", "base").value,
+    large: getStylesToken("borderWidth", "large").value,
   },
   spinningAnimationDuration: {
-    name: "spinning-animation-duration",
-    items: {
-      base: getToken("animationDuration", "base").value,
-    }
+    base: getStylesToken("animationDuration", "base").value,
   },
   viewBox: {
-    name: "view-box",
-    items: {
-      base: "0 0 16 16",
-    }
-  }
+    base: "0 0 16 16",
+  },
 } as const
+
+export const iconTokens: ComponentTokens<typeof IconTokenMap> = createTokens(IconTokenMap, "icon")
