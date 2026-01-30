@@ -1,8 +1,17 @@
 import * as React from "react"
-import type { GapSize, SpacingDefinition } from "nice-react-flex"
+import type { FlexSpacingType } from "nice-react-flex"
+import type { AlignType, AsType } from "nice-react-typography"
+
+/**
+ * Responsive alignment type for header text
+ * Allows different alignments at different breakpoints
+ */
+export type TileHeaderAlignType =
+  | AlignType
+  | { mobile?: AlignType; tablet?: AlignType; desktop?: AlignType }
 
 export interface TileProps {
-  children: React.ReactNode
+  children?: React.ReactNode
   breakpointMd?: number
   breakpointLg?: number
   className?: string
@@ -15,9 +24,18 @@ export interface TileProps {
   fullWidth?: boolean
   contentLeft?: React.ReactNode
   contentRight?: React.ReactNode
-  spacing?: GapSize | SpacingDefinition | {
-    sm?: SpacingDefinition
-    md?: SpacingDefinition
-    lg?: SpacingDefinition
-  }
+  spacing?: FlexSpacingType
+
+  /** Title text displayed at the top of the tile */
+  title?: string
+  /** HTML element for the title (default: "h2") */
+  titleAs?: AsType
+  /** Description text displayed below the title */
+  description?: string
+  /** Alignment for title and description (default: "center") */
+  headerAlign?: TileHeaderAlignType
+  /** Color for title and description text */
+  headerColor?: string
+  /** Additional inline styles for title and description */
+  headerStyle?: React.CSSProperties
 }
