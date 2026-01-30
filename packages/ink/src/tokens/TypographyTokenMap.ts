@@ -7,30 +7,28 @@
  * --typography--{token}--{variant}
  */
 
+import { createTokens, type ComponentTokens } from "nice-react-styles"
+
 export const TypographyTokenMap = {
   /**
    * Letter spacing (tracking) variants
    * Controls the space between characters
    */
   letterSpacing: {
-    name: "letter-spacing",
-    items: {
-      tight: "-0.025em",
-      base: "0",
-      wide: "0.025em",
-      wider: "0.05em",
-    },
+    tight: "-0.025em",
+    base: "0",
+    wide: "0.025em",
+    wider: "0.05em",
   },
   /**
    * Maximum width for optimal readability
    * Based on the "45-75 characters per line" rule
    */
   maxWidth: {
-    name: "max-width",
-    items: {
-      prose: "65ch",
-      wide: "80ch",
-      full: "none",
-    },
+    prose: "65ch",
+    wide: "80ch",
+    full: "none",
   },
 } as const
+
+export const typographyTokens: ComponentTokens<typeof TypographyTokenMap> = createTokens(TypographyTokenMap, "typography")
