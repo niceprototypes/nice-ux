@@ -1,7 +1,3 @@
-import { createTokens } from "nice-react-styles"
-import { ButtonTokenMap } from "./ButtonTokenMap"
+import { buttonTokens } from "./ButtonTokenMap"
 
-export const { GlobalStyles: ButtonStyles, getComponentToken: getButtonToken } = createTokens(
-  "button",
-  ButtonTokenMap
-)
+export const getButtonToken = buttonTokens.getToken
