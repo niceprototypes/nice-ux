@@ -1,33 +1,32 @@
-import { createTokens, type ComponentTokens } from "nice-react-styles"
-import { getToken as getStylesToken } from "nice-styles"
+import { createTokens, getToken, type ComponentTokens } from "nice-react-styles"
 
 export const IconTokenMap = {
   size: {
-    smaller: getStylesToken("fontSize", "smaller").value,
-    small: getStylesToken("fontSize", "small").value,
-    base: getStylesToken("fontSize", "base").value,
-    large: getStylesToken("fontSize", "large").value,
-    larger: getStylesToken("fontSize", "larger").value,
+    smaller: getToken("fontSize", "smaller").var,
+    small: getToken("fontSize", "small").var,
+    base: getToken("fontSize", "base").var,
+    large: getToken("fontSize", "large").var,
+    larger: getToken("fontSize", "larger").var,
   },
   color: {
-    lighter: getStylesToken("foregroundColor", "lighter").value,
-    light: getStylesToken("foregroundColor", "light").value,
-    medium: getStylesToken("foregroundColor", "medium").value,
-    heavy: getStylesToken("foregroundColor", "heavy").value,
-    base: getStylesToken("foregroundColor", "base").value,
-    disabled: getStylesToken("foregroundColor", "disabled").value,
-    link: getStylesToken("foregroundColor", "link").value,
-    success: getStylesToken("foregroundColor", "success").value,
-    warning: getStylesToken("foregroundColor", "warning").value,
-    error: getStylesToken("foregroundColor", "error").value,
+    lighter: getToken("foregroundColor", "lighter").var,
+    light: getToken("foregroundColor", "light").var,
+    medium: getToken("foregroundColor", "medium").var,
+    heavy: getToken("foregroundColor", "heavy").var,
+    base: getToken("foregroundColor", "base").var,
+    disabled: getToken("foregroundColor", "disabled").var,
+    link: getToken("foregroundColor", "link").var,
+    success: getToken("foregroundColor", "success").var,
+    warning: getToken("foregroundColor", "warning").var,
+    error: getToken("foregroundColor", "error").var,
   },
   strokeWidth: {
-    small: getStylesToken("borderWidth", "base").value,
-    base: getStylesToken("borderWidth", "base").value,
-    large: getStylesToken("borderWidth", "large").value,
+    small: getToken("borderWidth", "base").var,
+    base: getToken("borderWidth", "base").var,
+    large: getToken("borderWidth", "large").var,
   },
   spinningAnimationDuration: {
-    base: getStylesToken("animationDuration", "base").value,
+    base: getToken("animationDuration", "base").var,
   },
   viewBox: {
     base: "0 0 16 16",
