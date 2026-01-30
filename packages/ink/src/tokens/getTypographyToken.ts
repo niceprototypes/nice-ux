@@ -1,7 +1,3 @@
-import { createTokens } from "nice-react-styles"
-import { TypographyTokenMap } from "./TypographyTokenMap"
+import { typographyTokens } from "./TypographyTokenMap"
 
-export const { GlobalStyles: TypographyStyles, getComponentToken: getTypographyToken } = createTokens(
-  "typography",
-  TypographyTokenMap
-)
+export const getTypographyToken = typographyTokens.getToken
