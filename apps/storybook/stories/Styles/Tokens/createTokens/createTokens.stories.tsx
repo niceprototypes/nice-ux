@@ -24,7 +24,7 @@ const meta = {
           ],
           usage: [
             {
-              value: 'const { GlobalStyles, getComponentToken } = createTokens(tokenMap, "component")',
+              value: 'const { GlobalStyles, getToken } = createTokens(tokenMap, "component")',
               code: true,
               newLine: true,
             },
