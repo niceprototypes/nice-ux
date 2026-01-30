@@ -17,14 +17,19 @@ const meta = {
         component: generateDescriptionString("nice-react-styles", {
           setup: [
             {
-              value: 'import { createTokens } from "nice-react-styles"',
+              value: 'import { createTokens, getToken } from "nice-react-styles"',
               code: true,
               newLine: true,
             },
           ],
           usage: [
             {
-              value: 'const { GlobalStyles, getToken } = createTokens(tokenMap, "component")',
+              value: 'export const { GlobalStyles } = createTokens(tokenMap)',
+              code: true,
+              newLine: true,
+            },
+            {
+              value: 'export { getToken }',
               code: true,
               newLine: true,
             },
