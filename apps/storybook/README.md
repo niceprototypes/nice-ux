@@ -167,14 +167,14 @@ npx nice-npm-link
 npx nice-npm-link --unlink
 ```
 
-#### 2. nice-vite-symlink-watcher — Enables HMR
+#### 2. nice-vite-watcher — Enables HMR
 
-Vite doesn't watch symlinked packages by default. The `nice-vite-symlink-watcher` plugin adds watching for linked package dist folders and enables source aliases for true HMR.
+Vite doesn't watch symlinked packages by default. The `nice-vite-watcher` plugin adds watching for linked package dist folders and enables source aliases for true HMR.
 
 The configuration is in `.storybook/main.ts`:
 
 ```typescript
-import { symlinkWatcher, getSourceAliases } from "nice-vite-symlink-watcher"
+import { viteWatcher, getSourceAliases } from "nice-vite-watcher"
 
 // All linked packages and their local paths
 const linkedPackages = {

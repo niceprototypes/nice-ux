@@ -1,9 +1,9 @@
 import type { StorybookConfig } from "@storybook/react-vite"
 import { join, dirname, resolve } from "path"
 import {
-  symlinkWatcher,
+  viteWatcher,
   getSourceAliases,
-} from "nice-vite-symlink-watcher"
+} from "nice-vite-watcher"
 
 /**
  * Resolves the absolute path of a package.
@@ -131,7 +131,7 @@ const config: StorybookConfig = {
     )
     config.plugins = [
       ...(config.plugins || []),
-      symlinkWatcher({
+      viteWatcher({
         packages: packagesToWatch,
         verbose: true,
       }),
