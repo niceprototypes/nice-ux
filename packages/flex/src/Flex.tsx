@@ -74,7 +74,7 @@ const Flex: React.FC<FlexProps> = (props) => {
   // Normalize props to ensure all breakpoint-capable props are in object format
   // This simplifies the styling logic by providing a consistent prop structure
   const normalizedProps = normalizeProps(props)
-  
+
   // Render the styled component with normalized props
   // Children are passed through from original props to maintain reference integrity
   return <FlexStyled {...normalizedProps}>{props.children}</FlexStyled>

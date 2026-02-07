@@ -73,8 +73,8 @@ const getBreakpointValue = (value, breakpoint) => {
  * @returns {string | undefined} CSS variable reference or the string value as-is
  *
  * @example
- * getGapSize("smaller") // returns "var(--gap-smaller)"
- * getGapSize("base") // returns "var(--gap-base)"
+ * getGapSize("smaller") // returns "var(--core--gap--smaller)"
+ * getGapSize("base") // returns "var(--core--gap--base)"
  * getGapSize("2rem") // returns "2rem"
  * getGapSize("var(--custom-spacing)") // returns "var(--custom-spacing)"
  * getGapSize(null) // returns undefined
@@ -89,7 +89,7 @@ const getGapSize = (size) => {
     }
     // Check if it's a valid token key
     if (size === "smaller" || size === "small" || size === "base" || size === "large" || size === "larger") {
-        return `var(--gap-${size})`;
+        return niceStyles.getConstant("core", "gap", size).var;
     }
     // Otherwise return the custom string as-is
     return size;
@@ -217,11 +217,11 @@ const getSpacingValue = (spacing, breakpoint) => {
  *
  * @example
  * styleSpacing("padding", { top: "small", right: "base", bottom: "small", left: "base" })
- * // Returns: "padding-top: var(--gap-small);\npadding-right: var(--gap-base);\n..."
+ * // Returns: "padding-top: var(--core--gap--small);\npadding-right: var(--core--gap--base);\n..."
  *
  * @example
  * styleSpacing("margin", { top: "large", right: "large", bottom: "large", left: "large" })
- * // Returns: "margin-top: var(--gap-large);\nmargin-right: var(--gap-large);\n..."
+ * // Returns: "margin-top: var(--core--gap--large);\nmargin-right: var(--core--gap--large);\n..."
  */
 const styleSpacing = (mode, def) => {
     if (!def)
@@ -279,20 +279,20 @@ const styleSpacing = (mode, def) => {
  * the normalizeProps service, ensuring consistent prop structure.
  *
  * @example
- * // Generate small breakpoint styles
- * const props = { direction: { sm: "column" }, gap: { sm: 2 } }
- * styleFlex("sm", props)
- * // Returns: "display: flex;\nflex-direction: column;\ngap: var(--gap-size-2);"
+ * // Generate mobile breakpoint styles
+ * const props = { direction: { mobile: "column" }, gap: { mobile: "small" } }
+ * styleFlex("mobile", props)
+ * // Returns: "display: flex;\nflex-direction: column;\ngap: var(--core--gap--small);"
  *
  * @example
- * // Generate medium breakpoint styles
+ * // Generate tablet breakpoint styles
  * const props = {
- *   direction: { sm: "column", md: "row" },
- *   gap: { sm: 1, md: 3 },
- *   spacing: { md: { horizontal: 2 } }
+ *   direction: { mobile: "column", tablet: "row" },
+ *   gap: { mobile: "small", tablet: "base" },
+ *   spacing: { tablet: "small base" }
  * }
- * styleFlex("md", props)
- * // Returns: "flex-direction: row;\ngap: var(--gap-size-3);\npadding-left: var(--gap-size-2);\npadding-right: var(--gap-size-2);"
+ * styleFlex("tablet", props)
+ * // Returns: "flex-direction: row;\ngap: var(--core--gap--base);\npadding-top: var(--core--gap--small);\npadding-right: var(--core--gap--base);..."
  */
 const styleFlex = (breakpoint, props) => {
     const styles = [];

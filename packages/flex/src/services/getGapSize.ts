@@ -1,3 +1,4 @@
+import { getConstant } from "nice-styles"
 import { GapSize } from "../types"
 
 /**
@@ -8,8 +9,8 @@ import { GapSize } from "../types"
  * @returns {string | undefined} CSS variable reference or the string value as-is
  *
  * @example
- * getGapSize("smaller") // returns "var(--gap-smaller)"
- * getGapSize("base") // returns "var(--gap-base)"
+ * getGapSize("smaller") // returns "var(--core--gap--smaller)"
+ * getGapSize("base") // returns "var(--core--gap--base)"
  * getGapSize("2rem") // returns "2rem"
  * getGapSize("var(--custom-spacing)") // returns "var(--custom-spacing)"
  * getGapSize(null) // returns undefined
@@ -25,7 +26,7 @@ export const getGapSize = (size?: GapSize): string | undefined => {
 
   // Check if it's a valid token key
   if (size === "smaller" || size === "small" || size === "base" || size === "large" || size === "larger") {
-    return `var(--gap-${size})`
+    return getConstant("core", "gap", size).var
   }
 
   // Otherwise return the custom string as-is

@@ -41,20 +41,20 @@ import { styleSpacing } from "./styleSpacing"
  * the normalizeProps service, ensuring consistent prop structure.
  *
  * @example
- * // Generate small breakpoint styles
- * const props = { direction: { sm: "column" }, gap: { sm: 2 } }
- * styleFlex("sm", props)
- * // Returns: "display: flex;\nflex-direction: column;\ngap: var(--gap-size-2);"
+ * // Generate mobile breakpoint styles
+ * const props = { direction: { mobile: "column" }, gap: { mobile: "small" } }
+ * styleFlex("mobile", props)
+ * // Returns: "display: flex;\nflex-direction: column;\ngap: var(--core--gap--small);"
  *
  * @example
- * // Generate medium breakpoint styles
+ * // Generate tablet breakpoint styles
  * const props = {
- *   direction: { sm: "column", md: "row" },
- *   gap: { sm: 1, md: 3 },
- *   spacing: { md: { horizontal: 2 } }
+ *   direction: { mobile: "column", tablet: "row" },
+ *   gap: { mobile: "small", tablet: "base" },
+ *   spacing: { tablet: "small base" }
  * }
- * styleFlex("md", props)
- * // Returns: "flex-direction: row;\ngap: var(--gap-size-3);\npadding-left: var(--gap-size-2);\npadding-right: var(--gap-size-2);"
+ * styleFlex("tablet", props)
+ * // Returns: "flex-direction: row;\ngap: var(--core--gap--base);\npadding-top: var(--core--gap--small);\npadding-right: var(--core--gap--base);..."
  */
 export const styleFlex = (breakpoint: Breakpoint, props: FlexProps): string => {
   const styles: string[] = []

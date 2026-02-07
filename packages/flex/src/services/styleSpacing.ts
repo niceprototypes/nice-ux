@@ -16,11 +16,11 @@ import { getGapSize } from "./getGapSize"
  *
  * @example
  * styleSpacing("padding", { top: "small", right: "base", bottom: "small", left: "base" })
- * // Returns: "padding-top: var(--gap-small);\npadding-right: var(--gap-base);\n..."
+ * // Returns: "padding-top: var(--core--gap--small);\npadding-right: var(--core--gap--base);\n..."
  *
  * @example
  * styleSpacing("margin", { top: "large", right: "large", bottom: "large", left: "large" })
- * // Returns: "margin-top: var(--gap-large);\nmargin-right: var(--gap-large);\n..."
+ * // Returns: "margin-top: var(--core--gap--large);\nmargin-right: var(--core--gap--large);\n..."
  */
 export const styleSpacing = (mode: "padding" | "margin", def?: SpacingDefinition | null): string => {
   if (!def) return ""
