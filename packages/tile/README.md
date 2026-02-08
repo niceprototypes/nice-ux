@@ -13,7 +13,7 @@ npm install nice-react-tile
 Make sure you have the following peer dependencies installed:
 
 ```bash
-npm install react react-dom styled-components nice-react-flex nice-react-typography
+npm install react react-dom styled-components nice-react-flex
 ```
 
 ## Usage
@@ -104,7 +104,6 @@ export default App
 | `backgroundPosition` | `string` | `"center"` | Background image position |
 | `backgroundSize` | `string` | `"cover"` | Background image size |
 | `backgroundAttachment` | `string` | `"fixed"` | Background attachment (applied only on landscape orientation) |
-| `fullWidth` | `boolean` | `false` | Force tile to take full width |
 | `title` | `string \| React.ReactNode` | - | Title to display at the top of the tile |
 | `titleAlign` | `"left" \| "center" \| "right"` | `"left"` | Alignment of the title |
 | `titleColor` | `string` | - | Color of the title text |

@@ -18,10 +18,10 @@ export interface TileProps {
   style?: React.CSSProperties
   backgroundImage?: string
   backgroundColor?: string
+  foregroundColor?: string
   backgroundPosition?: string
   backgroundSize?: string
   backgroundAttachment?: string
-  fullWidth?: boolean
   contentLeft?: React.ReactNode
   contentRight?: React.ReactNode
   spacing?: FlexSpacingType

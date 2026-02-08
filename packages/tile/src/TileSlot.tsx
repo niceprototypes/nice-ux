@@ -9,7 +9,7 @@ const TileSlot: React.FC<TileSlotProps> = ({
   children,
 }) => {
   return (
-    <Flex direction="column" gap={5}>
+    <Flex direction="column" gap="large">
       {children}
     </Flex>
   )

@@ -20,12 +20,12 @@ const TileLayout: React.FC<TileLayoutProps> = ({
   )
 
   return (
-    <Flex direction="column" gap={6}>
+    <Flex direction="column" gap="larger">
       {!!LeftRendered || !!RightRendered ? (
         <Flex
-          direction={{ sm: "column", md: "row" }}
+          direction={{ mobile: "column", tablet: "row" }}
           alignItems="center"
-          gap={5}
+          gap="large"
         >
           {LeftRendered}
           <Flex direction="column" grow={1}>
