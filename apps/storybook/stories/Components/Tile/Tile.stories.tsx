@@ -8,6 +8,8 @@ import BreakpointLgStory from "./stories/BreakpointLg.story"
 import FullWidthStory from "./stories/FullWidth.story"
 import ContentLeftStory from "./stories/ContentLeft.story"
 import ContentRightStory from "./stories/ContentRight.story"
+import TitleStory from "./stories/Title.story"
+import DescriptionStory from "./stories/Description.story"
 import LayoutStory from "./stories/Layout.story"
 
 const meta = {
@@ -49,7 +51,7 @@ const meta = {
     },
     backgroundColor: {
       description: "",
-      control: "color",
+      control: "text",
       table: {
         type: { summary: "string" },
       },
@@ -107,6 +109,51 @@ const meta = {
         defaultValue: { summary: "false" },
       },
     },
+    title: {
+      description: "",
+      control: "text",
+      table: {
+        type: { summary: "string" },
+      },
+    },
+    titleAs: {
+      description: "",
+      control: "select",
+      options: ["h1", "h2", "h3", "h4", "p", "span"],
+      table: {
+        type: { summary: "AsType" },
+        defaultValue: { summary: '"h2"' },
+      },
+    },
+    description: {
+      description: "",
+      control: "text",
+      table: {
+        type: { summary: "string" },
+      },
+    },
+    headerAlign: {
+      description: "",
+      control: "select",
+      options: ["left", "center", "right"],
+      table: {
+        type: { summary: "TileHeaderAlignType" },
+        defaultValue: { summary: '"center"' },
+      },
+    },
+    headerColor: {
+      description: "",
+      control: "text",
+      table: {
+        type: { summary: "string" },
+      },
+    },
+    headerStyle: {
+      description: "",
+      table: {
+        type: { summary: "React.CSSProperties" },
+      },
+    },
     spacing: {
       description: "[`Tokens.gap`](/?path=/story/styles-tokens--gap)",
       control: "select",
@@ -149,6 +196,16 @@ type Story = StoryObj<typeof meta>
 export const Basic: Story = {
   name: "basic",
   render: BasicStory,
+}
+
+export const Title: Story = {
+  name: "title",
+  render: TitleStory,
+}
+
+export const Description: Story = {
+  name: "description",
+  render: DescriptionStory,
 }
 
 export const BackgroundColor: Story = {
