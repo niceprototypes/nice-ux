@@ -1,5 +1,5 @@
-import { IconTokenMap } from "./tokens/IconTokenMap"
-import { iconNames } from "./constants"
+import { IconTokenMap } from "../../tokens/IconTokenMap"
+import { iconNames } from "../../constants"
 
 export type IconNameType = (typeof iconNames)[number]
 export type IconSizeType = keyof typeof IconTokenMap.size.items

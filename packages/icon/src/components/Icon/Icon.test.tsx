@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react"
 import "@testing-library/jest-dom"
 import Icon from "./Icon"
 
-jest.mock("../services/getIcon", () => ({
+jest.mock("../../services/getIcon", () => ({
   getIcon: jest.fn().mockImplementation((name: string, outlined: boolean) => {
     if (name === "unknown") return undefined
     return function MockSvg(props: React.SVGAttributes<SVGElement>) {

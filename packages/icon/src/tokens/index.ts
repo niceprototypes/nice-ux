@@ -1,2 +1,2 @@
-export { IconTokenMap } from "./IconTokenMap"
-export { IconStyles, getIconToken } from "./getIconToken"
+export { IconStyles } from "./IconStyles"
+export { getIconToken } from "./getIconToken"

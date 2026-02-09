@@ -1,6 +1,6 @@
 import styled, { css, keyframes } from "styled-components"
-import { getIconToken } from "../tokens/getIconToken"
-import type { IconSizeType, IconColorType, IconStrokeWidthType } from "../types"
+import { getIconToken } from "../../tokens/getIconToken"
+import type { IconSizeType, IconColorType, IconStrokeWidthType } from "./types"
 
 const spin = keyframes`
   from {

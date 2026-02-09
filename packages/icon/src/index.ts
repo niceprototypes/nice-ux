@@ -26,14 +26,14 @@ export type {
   IconViewBoxType,
   IconClassNameType,
   IconStrokeScalingType,
-} from "./types"
-export { default as IconTypes } from "./types"
+} from "./components/Icon"
+export { IconTypes } from "./components/Icon"
 
 // Constant exports
 export { iconNames } from "./constants"
 
 // Token exports
-export { IconStyles, IconTokenMap, getIconToken } from "./tokens"
+export { IconStyles, getIconToken } from "./tokens"
 
 // Service exports
 export { getIcon } from "./services"
