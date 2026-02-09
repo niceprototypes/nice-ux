@@ -1,7 +1,6 @@
 import * as React from "react"
 import { StyledTypography } from "./styles"
 import { TypographyProps } from "./types"
-import { TypographyStyles } from "./tokens"
 
 /**
  * Typography component for rendering text with flexible styling options.
@@ -43,31 +42,32 @@ const Typography: React.FC<TypographyProps> = ({
   className,
   code = false,
   color,
+  lineClamp,
   lineHeight,
   size,
   style,
   weight,
+  wordBreak,
 }) => {
   return (
-    <>
-      <TypographyStyles />
-      <StyledTypography
+    <StyledTypography
         $align={align}
         $antialiased={antialiased}
         $legibilityOptimized={legibilityOptimized}
         $as={as}
         $code={code}
         $color={color}
+        $lineClamp={lineClamp}
         $lineHeight={lineHeight}
         $size={size}
         $weight={weight}
+        $wordBreak={wordBreak}
         as={as}
         className={className}
         style={style}
       >
         {children}
       </StyledTypography>
-    </>
   )
 }
 
