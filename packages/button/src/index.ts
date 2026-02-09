@@ -15,7 +15,7 @@
 export { default } from "./components/Button"
 
 // Token exports
-export { ButtonStyles, ButtonTokenMap, getButtonToken } from "./tokens"
+export { ButtonStyles, getButtonToken } from "./tokens"
 
 // Type exports
 export type {

@@ -76,6 +76,12 @@ export interface ButtonProps {
    * @default "base"
    */
   borderRadius?: ButtonBorderRadiusType
+
+  /** Override background color (CSS value or var reference) */
+  backgroundColor?: string
+
+  /** Override foreground/text color (CSS value or var reference) */
+  foregroundColor?: string
 }
 
 const ButtonTypes = {} as const

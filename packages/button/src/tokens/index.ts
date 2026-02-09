@@ -1,2 +1,2 @@
-export { ButtonTokenMap } from "./ButtonTokenMap"
-export { ButtonStyles, getButtonToken } from "./getButtonToken"
+export { ButtonStyles } from "./ButtonStyles"
+export { getButtonToken } from "./getButtonToken"

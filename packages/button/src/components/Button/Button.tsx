@@ -9,11 +9,13 @@ import { isSquare } from "../../helpers/isSquare"
 const Button: React.FC<ButtonProps> = ({
   antialiased = false,
   "aria-label": ariaLabel,
+  backgroundColor,
   borderRadius = "base",
   borderWidth = "base",
   children,
   className,
   "data-testid": testId,
+  foregroundColor,
   icon,
   onClick,
   size = "base",
@@ -26,9 +28,11 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <StyledButton
+      $backgroundColor={backgroundColor}
       $borderRadius={borderRadius}
       $borderWidth={borderWidth}
       $disabled={disabled}
+      $foregroundColor={foregroundColor}
       $size={size}
       $square={square}
       $state={state}

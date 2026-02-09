@@ -93,6 +93,9 @@
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "nice-configuration": "file:../nice-configuration",
+    "nice-react-flex": "file:../nice-react-flex",
+    "nice-react-icon": "file:../nice-react-icon",
+    "nice-react-typography": "file:../nice-react-typography",
     "prettier": "^3.1.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
@@ -112,7 +115,7 @@
   },
   "dependencies": {
     "nice-react-styles": "file:../nice-react-styles",
-    "nice-react-typography": ">=4.0.0",
+    "nice-react-typography": "file:../nice-react-typography",
     "nice-styles": "file:../nice-styles"
   }
 }

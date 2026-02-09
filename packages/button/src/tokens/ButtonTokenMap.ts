@@ -1,13 +1,7 @@
-import { createTokens, getToken, type ComponentTokens } from "nice-react-styles"
+import { createTokens, mapCoreToken, getToken, type ComponentTokens } from "nice-react-styles"
 
 export const ButtonTokenMap = {
-  size: {
-    smaller: getToken("cellHeight", "smaller").var,
-    small: getToken("cellHeight", "small").var,
-    base: getToken("cellHeight").var,
-    large: getToken("cellHeight", "large").var,
-    larger: getToken("cellHeight", "larger").var,
-  },
+  size: mapCoreToken("cellHeight"),
   spacing: {
     smaller: `calc(${getToken("cellHeight", "smaller").var} / 2)`,
     small: `calc(${getToken("cellHeight", "small").var} / 2)`,
@@ -15,11 +9,7 @@ export const ButtonTokenMap = {
     large: `calc(${getToken("cellHeight", "large").var} / 2)`,
     larger: `calc(${getToken("cellHeight", "larger").var} / 2)`,
   },
-  borderRadius: {
-    small: getToken("borderRadius", "small").var,
-    base: getToken("borderRadius", "base").var,
-    large: getToken("borderRadius", "large").var,
-  },
+  borderRadius: mapCoreToken("borderRadius"),
   statusPrimaryBase: {
     backgroundColor: getToken("foregroundColor").var,
     borderColor: getToken("foregroundColor").var,

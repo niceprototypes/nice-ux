@@ -8,9 +8,11 @@ import { capitalize } from "../../helpers/capitalize"
 export const StyledButton = styled.button.withConfig({
   shouldForwardProp: (prop) => !prop.startsWith("$"),
 })<{
+  $backgroundColor?: string
   $borderRadius: ButtonBorderRadiusType
   $borderWidth: BorderWidthType
   $disabled: boolean
+  $foregroundColor?: string
   $size: CellHeightType
   $square: boolean
   $state: ButtonStateType
@@ -60,4 +62,8 @@ export const StyledButton = styled.button.withConfig({
 
   /* Smooth transitions */
   transition: all 0.15s ease-in-out;
+
+  /* Explicit overrides when provided */
+  ${({ $backgroundColor }) => $backgroundColor && `background-color: ${$backgroundColor};`}
+  ${({ $foregroundColor }) => $foregroundColor && `color: ${$foregroundColor};`}
 `
