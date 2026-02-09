@@ -1,2 +1,3 @@
-export { TypographyTokenMap } from "./TypographyTokenMap"
-export { TypographyStyles, getTypographyToken } from "./getTypographyToken"
+export { TypographyTokenMap, typographyTokens } from "./TypographyTokenMap"
+export { TypographyStyles } from "./TypographyStyles"
+export { getTypographyToken } from "./getTypographyToken"

@@ -2,27 +2,104 @@ import * as React from "react"
 import type { ForegroundColorType, FontSizeType, FontWeightType, LineHeightType } from "nice-styles"
 
 /**
- * Text alignment options
+ * TypographyAlignType
+ *
+ * Text alignment options for horizontal text positioning.
+ *
+ * Values:
+ * - "left": Align text to the left edge
+ * - "center": Center text horizontally
+ * - "right": Align text to the right edge
+ * - "justify": Stretch lines to fill the container width
  */
-export type AlignType = "left" | "center" | "right" | "justify"
+export type TypographyAlignType = "left" | "center" | "right" | "justify"
 
 /**
- * HTML element types supported by the Typography component
+ * TypographyAsType
+ *
+ * HTML element types supported by the Typography component.
+ * Determines semantic meaning and default styling.
+ *
+ * Values:
+ * - "h1" through "h4": Heading elements for document structure
+ * - "p": Paragraph element for body text
+ * - "span": Inline element for text within other elements
  */
-export type AsType = "h1" | "h2" | "h3" | "h4" | "p" | "span"
+export type TypographyAsType = "h1" | "h2" | "h3" | "h4" | "p" | "span"
 
 /**
- * Props for the Typography component
+ * TypographyColorType
+ *
+ * Re-export of ForegroundColorType from nice-styles.
+ * Text color values using design tokens.
+ */
+export type TypographyColorType = ForegroundColorType
+
+/**
+ * TypographySizeType
+ *
+ * Re-export of FontSizeType from nice-styles.
+ * Font size values using design tokens.
+ */
+export type TypographySizeType = FontSizeType
+
+/**
+ * TypographyWeightType
+ *
+ * Re-export of FontWeightType from nice-styles.
+ * Font weight values using design tokens.
+ */
+export type TypographyWeightType = FontWeightType
+
+/**
+ * TypographyLineHeightType
+ *
+ * Re-export of LineHeightType from nice-styles.
+ * Line height values using design tokens.
+ */
+export type TypographyLineHeightType = LineHeightType
+
+/**
+ * TypographyLineClampType
+ *
+ * Line clamping to truncate text after a specified number of lines.
+ * Based on CSS line-clamp property (CSS Overflow Module Level 4).
+ *
+ * Values:
+ * - "none": No line limit, display all content
+ * - number (1-∞): Maximum number of lines before truncation with ellipsis
+ */
+export type TypographyLineClampType = "none" | number
+
+/**
+ * TypographyWordBreakType
+ *
+ * Controls line break behavior for overflowing text.
+ * Based on CSS word-break property.
+ *
+ * Values:
+ * - "normal": Default word breaking rules
+ * - "break-all": Allow breaks between any two characters
+ * - "keep-all": Prevent breaks in CJK text, normal for others
+ * - "break-word": Deprecated, use overflow-wrap instead
+ */
+export type TypographyWordBreakType = "normal" | "break-all" | "keep-all" | "break-word"
+
+/**
+ * TypographyProps
+ *
+ * Complete prop definition for the Typography component.
+ * All typography-related props support design tokens from nice-styles.
  */
 export type TypographyProps = {
   /** Text alignment */
-  align?: AlignType
+  align?: TypographyAlignType
 
   /** Enable font antialiasing for smoother text rendering */
   antialiased?: boolean
 
   /** HTML element to render */
-  as?: AsType
+  as?: TypographyAsType
 
   /** Text content or child elements */
   children: React.ReactNode
@@ -33,30 +110,53 @@ export type TypographyProps = {
   /** Apply monospace font for code snippets */
   code?: boolean
 
-  /** Text color from nice-styles tokens (lighter, light, medium, heavy, base, disabled, link, success, warning, error) */
-  color?: ForegroundColorType
+  /** Text color from nice-styles tokens */
+  color?: TypographyColorType
 
   /** Apply legibility optimizations (hardware acceleration, 3D transforms) */
   legibilityOptimized?: boolean
 
+  /**
+   * Truncate text after specified number of lines with ellipsis.
+   * Set to "none" or omit to show all content.
+   */
+  lineClamp?: TypographyLineClampType
+
   /** Line height setting (defaults based on element type) */
-  lineHeight?: LineHeightType
+  lineHeight?: TypographyLineHeightType
 
   /** Font size from nice-styles tokens */
-  size?: FontSizeType
+  size?: TypographySizeType
+
+  /** Inline styles */
+  style?: React.CSSProperties
 
   /** Font weight from nice-styles tokens */
-  weight?: FontWeightType
+  weight?: TypographyWeightType
+
+  /**
+   * Controls line break behavior for overflowing text.
+   * Useful for handling long words or URLs.
+   */
+  wordBreak?: TypographyWordBreakType
 }
 
-/**
- * Typography types namespace using declaration merging pattern
- */
+// Legacy exports for backwards compatibility
+export type AlignType = TypographyAlignType
+export type AsType = TypographyAsType
+
+// Declaration merging: const + namespace creates exportable type namespace
 const TypographyTypes = {} as const
 
 namespace TypographyTypes {
-  export type Align = AlignType
-  export type As = AsType
+  export type Align = TypographyAlignType
+  export type As = TypographyAsType
+  export type Color = TypographyColorType
+  export type Size = TypographySizeType
+  export type Weight = TypographyWeightType
+  export type LineHeight = TypographyLineHeightType
+  export type LineClamp = TypographyLineClampType
+  export type WordBreak = TypographyWordBreakType
   export type Props = TypographyProps
 }
 
