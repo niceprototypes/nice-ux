@@ -3,7 +3,6 @@ import Flex from "nice-react-flex"
 import Typography, { AlignType } from "nice-react-typography"
 import { TileProps, TileHeaderAlignType } from "./types"
 import { OuterStyled, InnerStyled } from "./styles"
-import { TileStyles } from "./tokens"
 import TileLayout from "./TileLayout"
 import TileSlot from "./TileSlot"
 
@@ -81,8 +80,6 @@ const Tile: React.FC<TileProps> = ({
   )
 
   return (
-    <>
-    <TileStyles />
     <OuterStyled
       className={className}
       style={style}
@@ -114,7 +111,6 @@ const Tile: React.FC<TileProps> = ({
         )}
       </InnerStyled>
     </OuterStyled>
-    </>
   )
 }
 
