@@ -3,9 +3,9 @@
 }
 
 #storybook-docs h1.sbdocs-title + div:not(.sb-anchor) p {
-  font-size: var(--font-size-small);
-  font-weight: var(--font-weight-semibold);
-  color: var(--foreground-color-medium);
+  font-size: var(--np--font-size--small);
+  font-weight: var(--np--font-weight--semibold);
+  color: var(--np--foreground-color--medium);
 }
 
 #storybook-docs h1.sbdocs-title + div:not(.sb-anchor) strong {
@@ -16,12 +16,12 @@
   margin: 0;
   border: 0;
   padding: 0.25rem 0.5rem;
-  font-weight: var(--font-weight-bold);
-  background-color: var(--background-color-alternate);
-  color: var(--foreground-color-base);
-  line-height: var(--line-height-base);
-  border-radius: var(--border-radius-base);
-  font-size: var(--font-size-smaller);
+  font-weight: var(--np--font-weight--bold);
+  background-color: var(--np--background-color--alternate);
+  color: var(--np--foreground-color--base);
+  line-height: var(--np--line-height--base);
+  border-radius: var(--np--border-radius--base);
+  font-size: var(--np--font-size--smaller);
   letter-spacing: normal;
 }
 
@@ -34,11 +34,11 @@
 }
 
 #storybook-docs h2 {
-  font-size: var(--font-size-small);
-  font-weight: var(--font-weight-semibold);
-  color: var(--foreground-color-medium);
+  font-size: var(--np--font-size--small);
+  font-weight: var(--np--font-weight--semibold);
+  color: var(--np--foreground-color--medium);
 }
 
 #storybook-docs h3 {
-  font-family: var(--font-family-code);
+  font-family: var(--np--font-family--code);
 }

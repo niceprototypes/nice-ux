@@ -110,9 +110,9 @@ export const Breakpoints: Story = {
           gap="small"
           style={{
             padding: 16,
-            background: "var(--core--background-color--alternate)",
+            background: "var(--np--background-color--alternate)",
             borderRadius: 8,
-            fontFamily: "var(--core--font-family--code)",
+            fontFamily: "var(--np--font-family--code)",
             fontSize: 14,
           }}
         >

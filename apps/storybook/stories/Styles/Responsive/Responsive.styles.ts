@@ -4,9 +4,9 @@ import { getBreakpoint } from "nice-styles"
 
 export const BreakpointRow = styled(Flex)`
   padding: 12px 16px;
-  background: var(--core--background-color--alternate);
+  background: var(--np--background-color--alternate);
   border-radius: 8px;
-  font-family: var(--core--font-family--code);
+  font-family: var(--np--font-family--code);
 `
 
 export const Label = styled.span`
@@ -15,18 +15,18 @@ export const Label = styled.span`
 `
 
 export const Value = styled.span`
-  color: var(--core--foreground-color--link);
+  color: var(--np--foreground-color--link);
 `
 
 export const Query = styled.span`
-  color: var(--core--foreground-color--medium);
+  color: var(--np--foreground-color--medium);
   font-size: 14px;
 `
 
 export const ResponsiveBox = styled(Flex)`
   padding: 24px;
   border-radius: 8px;
-  background: var(--core--foreground-color--link);
+  background: var(--np--foreground-color--link);
   color: white;
   font-weight: 600;
   text-align: center;

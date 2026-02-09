@@ -1,6 +1,6 @@
 .docblock-argstable {
   table-layout: fixed;
-  font-family: var(--font-family-code);
+  font-family: var(--np--font-family--code);
 }
 
 .docblock-argstable td > span {
@@ -14,7 +14,7 @@
 .docblock-argstable th:nth-child(1),
 .docblock-argstable td:nth-child(1) {
   width: 16rem !important;
-  font-family: var(--font-family-code);
+  font-family: var(--np--font-family--code);
 }
 
 .docblock-argstable th:nth-child(2),

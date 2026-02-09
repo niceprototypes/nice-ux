@@ -13,7 +13,7 @@ const TokenPreview: React.FC<TokenPreviewProps> = ({ items }) => {
       border: `1px solid ${colors.border}`
     }}>
       <div style={{
-        fontFamily: "var(--font-family-code)",
+        fontFamily: "var(--np--font-family--code)",
         fontSize: "0.75rem",
         lineHeight: "1.5",
         overflow: "auto"

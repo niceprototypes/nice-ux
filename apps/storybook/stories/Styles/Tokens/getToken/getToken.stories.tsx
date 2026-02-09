@@ -30,10 +30,10 @@ const meta = {
           usage: [
             { value: 'getToken("fontSize").key', code: true },
             "\u2002\u2192\u2002",
-            { value: '"--core--font-size--base"', code: true, newLine: true },
+            { value: '"--np--font-size--base"', code: true, newLine: true },
             { value: 'getToken("fontSize", "large").var', code: true },
             "\u2002\u2192\u2002",
-            { value: '"var(--core--font-size--large)"', code: true, newLine: true },
+            { value: '"var(--np--font-size--large)"', code: true, newLine: true },
             { value: 'getToken("fontSize", "large").value', code: true },
             "\u2002\u2192\u2002",
             { value: '"24px"', code: true, newLine: true },
