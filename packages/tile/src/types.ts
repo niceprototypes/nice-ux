@@ -12,8 +12,8 @@ export type TileHeaderAlignType =
 
 export interface TileProps {
   children?: React.ReactNode
-  breakpointMd?: number
-  breakpointLg?: number
+  maxWidthTablet?: number
+  maxWidthDesktop?: number
   className?: string
   style?: React.CSSProperties
   backgroundImage?: string

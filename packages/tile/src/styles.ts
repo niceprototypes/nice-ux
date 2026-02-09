@@ -53,15 +53,15 @@ export const OuterStyled = styled(Flex).withConfig({
 export const InnerStyled = styled(Flex).withConfig({
   shouldForwardProp: (prop) => !prop.startsWith('$'),
 })<{
-  $breakpointMd?: number
-  $breakpointLg?: number
+  $maxWidthTablet?: number
+  $maxWidthDesktop?: number
 }>`
   margin: 0 auto;
   width: 100%;
 
-  ${({ $breakpointLg }) => $breakpointLg && css`
-    @media (min-width: ${$breakpointLg}px) {
-      width: ${$breakpointLg}px;
+  ${({ $maxWidthDesktop }) => $maxWidthDesktop && css`
+    @media (min-width: ${$maxWidthDesktop}px) {
+      width: ${$maxWidthDesktop}px;
     }
   `}
 `

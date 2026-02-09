@@ -20,8 +20,8 @@ const resolveHeaderAlign = (
 
 const Tile: React.FC<TileProps> = ({
   children,
-  breakpointMd,
-  breakpointLg,
+  maxWidthTablet,
+  maxWidthDesktop,
   className,
   style,
   backgroundImage,
@@ -94,8 +94,8 @@ const Tile: React.FC<TileProps> = ({
         direction="column"
         grow={1}
         spacing={spacing}
-        $breakpointMd={breakpointMd}
-        $breakpointLg={breakpointLg}
+        $maxWidthTablet={maxWidthTablet}
+        $maxWidthDesktop={maxWidthDesktop}
       >
         {TileLeft || TileRight ? (
           <TileLayout
