@@ -5,7 +5,6 @@ import { StyledButton } from "./styles"
 import { ButtonProps } from "./types"
 import { isDisabled } from "../../helpers/isDisabled"
 import { isSquare } from "../../helpers/isSquare"
-import { ButtonStyles } from "../../tokens"
 
 const Button: React.FC<ButtonProps> = ({
   antialiased = false,
@@ -26,9 +25,7 @@ const Button: React.FC<ButtonProps> = ({
   const square = isSquare(icon, children)
 
   return (
-    <>
-      <ButtonStyles />
-      <StyledButton
+    <StyledButton
       $borderRadius={borderRadius}
       $borderWidth={borderWidth}
       $disabled={disabled}
@@ -49,7 +46,6 @@ const Button: React.FC<ButtonProps> = ({
       )}
       {!!icon && <Icon name={icon} size={size} color="lighter" strokeWidth="large" />}
     </StyledButton>
-    </>
   )
 }
 
