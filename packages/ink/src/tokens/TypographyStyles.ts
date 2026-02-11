@@ -1,4 +1,8 @@
 import type { ComponentType } from "react"
-import { typographyTokens } from "./TypographyTokenMap"
 
-export const TypographyStyles: ComponentType = typographyTokens.GlobalStyles
+/**
+ * No-op component — typography CSS custom properties are now generated
+ * at build time in nice-styles dist/variables.css.
+ * Kept for backward compatibility.
+ */
+export const TypographyStyles: ComponentType = () => null
