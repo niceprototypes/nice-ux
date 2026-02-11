@@ -1,4 +1,8 @@
 import type { ComponentType } from "react"
-import { iconTokens } from "./IconTokenMap"
 
-export const IconStyles: ComponentType = iconTokens.GlobalStyles
+/**
+ * No-op component — icon CSS custom properties are now generated
+ * at build time in nice-styles dist/variables.css.
+ * Kept for backward compatibility.
+ */
+export const IconStyles: ComponentType = () => null

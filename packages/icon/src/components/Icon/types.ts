@@ -1,10 +1,10 @@
-import { IconTokenMap } from "../../tokens/IconTokenMap"
+import type { FontSizeType, ForegroundColorType } from "nice-styles"
 import { iconNames } from "../../constants"
 
 export type IconNameType = (typeof iconNames)[number]
-export type IconSizeType = keyof typeof IconTokenMap.size.items
-export type IconColorType = keyof typeof IconTokenMap.color.items
-export type IconStrokeWidthType = keyof typeof IconTokenMap.strokeWidth.items
+export type IconSizeType = FontSizeType
+export type IconColorType = ForegroundColorType
+export type IconStrokeWidthType = "small" | "base" | "large"
 export type IconColorPropertyType = "color" | "background-color" | "stroke" | "border-color" | "fill"
 export type IconOutlinedType = boolean
 export type IconUrlType = string
