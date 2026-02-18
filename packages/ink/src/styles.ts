@@ -8,7 +8,7 @@
  */
 
 import styled, { css } from "styled-components"
-import type { ForegroundColorType, FontSizeType, FontWeightType, LineHeightType } from "nice-styles"
+import type { ForegroundColorType, FontSizeType, FontWeightType, LineHeightType, ModeType } from "nice-styles"
 import { getToken } from "nice-react-styles"
 import { TypographyAsType, TypographyAlignType, TypographyLineClampType, TypographyWordBreakType } from "./types"
 import { styleAntialiasing } from "./helpers/styleAntialiasing"
@@ -38,6 +38,7 @@ export const StyledTypography = styled.p<{
   $size?: FontSizeType
   $weight?: FontWeightType
   $color?: ForegroundColorType
+  $mode?: ModeType
   $antialiased?: boolean
   $legibilityOptimized?: boolean
   $align?: TypographyAlignType
@@ -68,11 +69,11 @@ export const StyledTypography = styled.p<{
   }}
 
   /* Color */
-  ${({ $color }) => {
+  ${({ $color, $mode }) => {
     if (!$color) return ''
 
     return css`
-      color: ${getToken("foregroundColor", $color).var};
+      color: ${getToken("foregroundColor", $color, $mode).var};
     `
   }}
 

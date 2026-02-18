@@ -35,13 +35,14 @@ import { TypographyProps } from "./types"
  */
 const Typography: React.FC<TypographyProps> = ({
   align,
-  antialiased = false,
+  antialiased,
   legibilityOptimized = false,
   as = "p",
   children,
   className,
   code = false,
-  color,
+  color = "base",
+  mode,
   lineClamp,
   lineHeight,
   size,
@@ -49,14 +50,17 @@ const Typography: React.FC<TypographyProps> = ({
   weight,
   wordBreak,
 }) => {
+  const effectiveAntialiased = antialiased ?? mode === "night"
+
   return (
     <StyledTypography
         $align={align}
-        $antialiased={antialiased}
+        $antialiased={effectiveAntialiased}
         $legibilityOptimized={legibilityOptimized}
         $as={as}
         $code={code}
         $color={color}
+        $mode={mode}
         $lineClamp={lineClamp}
         $lineHeight={lineHeight}
         $size={size}
