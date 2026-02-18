@@ -3,6 +3,26 @@ import 'react';
 import Flex from 'nice-react-flex';
 import Typography from 'nice-react-typography';
 import styled, { css } from 'styled-components';
+import { getComponentToken } from 'nice-styles';
+
+/**
+ * No-op component — tile CSS custom properties are now generated
+ * at build time in nice-styles dist/variables.css.
+ * Kept for backward compatibility.
+ */
+const TileStyles = () => null;
+
+/**
+ * Get a tile component token.
+ *
+ * @param name - Token name (e.g., "backgroundColor", "foregroundColor")
+ * @param variant - Variant within token (defaults to "base")
+ * @param mode - Optional theme mode suffix
+ * @returns TokenResult with key, var, and value properties
+ */
+function getTileToken(name, variant, mode) {
+    return getComponentToken("tile", name, variant, mode);
+}
 
 const OuterStyled = styled(Flex).withConfig({
     shouldForwardProp: (prop) => !prop.startsWith('$'),
@@ -10,12 +30,21 @@ const OuterStyled = styled(Flex).withConfig({
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  ${({ $fullWidth }) => $fullWidth && css `width: 100%;`}
+  background-color: ${getTileToken("backgroundColor").var};
+  color: ${getTileToken("foregroundColor").var};
 
   ${({ $backgroundColor }) => {
     if ($backgroundColor) {
         return css `
         background-color: ${$backgroundColor};
+      `;
+    }
+}}
+
+  ${({ $foregroundColor }) => {
+    if ($foregroundColor) {
+        return css `
+        color: ${$foregroundColor};
       `;
     }
 }}
@@ -41,9 +70,15 @@ const InnerStyled = styled(Flex).withConfig({
   margin: 0 auto;
   width: 100%;
 
-  ${({ $breakpointLg }) => $breakpointLg && css `
-    @media (min-width: ${$breakpointLg}px) {
-      width: ${$breakpointLg}px;
+  ${({ $maxWidthTablet }) => $maxWidthTablet && css `
+    @media (min-width: ${$maxWidthTablet}px) {
+      width: ${$maxWidthTablet}px;
+    }
+  `}
+
+  ${({ $maxWidthDesktop }) => $maxWidthDesktop && css `
+    @media (min-width: ${$maxWidthDesktop}px) {
+      width: ${$maxWidthDesktop}px;
     }
   `}
 `;
@@ -68,16 +103,13 @@ const resolveHeaderAlign = (align) => {
         return align;
     return align.mobile || "center";
 };
-const Tile = ({ children, breakpointMd, breakpointLg, className, style, backgroundImage, backgroundColor, backgroundPosition = "center", backgroundSize = "cover", backgroundAttachment = "fixed", fullWidth = false, contentLeft: TileLeft, contentRight: TileRight, spacing, title, titleAs = "h2", description, headerAlign, headerColor, headerStyle, }) => {
+const Tile = ({ children, maxWidthTablet, maxWidthDesktop, className, style, backgroundImage, backgroundColor, foregroundColor, backgroundPosition = "center", backgroundSize = "cover", backgroundAttachment = "fixed", contentLeft: TileLeft, contentRight: TileRight, spacing, title, titleAs = "h3", description, align, mode, }) => {
     const hasHeader = title || description;
-    const resolvedAlign = resolveHeaderAlign(headerAlign);
-    const textStyle = headerColor
-        ? { color: headerColor, ...headerStyle }
-        : headerStyle;
-    const HeaderContent = hasHeader ? (jsxs(Flex, { direction: "column", gap: "small", children: [title && (jsx(Typography, { as: titleAs, size: "large", align: resolvedAlign, style: textStyle, children: title })), description && (jsx(Typography, { size: "base", align: resolvedAlign, style: textStyle, children: description }))] })) : null;
+    const resolvedAlign = resolveHeaderAlign(align);
+    const HeaderContent = hasHeader ? (jsxs(Flex, { direction: "column", gap: "base", children: [title && (jsx(Typography, { as: titleAs, size: "large", weight: "semibold", align: resolvedAlign, mode: mode, children: title })), description && (jsx(Typography, { size: "base", align: resolvedAlign, mode: mode, children: description }))] })) : null;
     const ContentWithHeader = hasHeader ? (jsxs(Flex, { direction: "column", gap: "large", children: [HeaderContent, children] })) : (children);
-    return (jsx(OuterStyled, { className: className, style: style, "$backgroundImage": backgroundImage, "$backgroundColor": backgroundColor, "$backgroundPosition": backgroundPosition, "$backgroundSize": backgroundSize, "$backgroundAttachment": backgroundAttachment, "$fullWidth": fullWidth, children: jsx(InnerStyled, { direction: "column", grow: 1, spacing: spacing, "$breakpointMd": breakpointMd, "$breakpointLg": breakpointLg, children: TileLeft || TileRight ? (jsx(TileLayout, { contentLeft: TileLeft, contentRight: TileRight, children: ContentWithHeader })) : (jsx(TileSlot, { children: ContentWithHeader })) }) }));
+    return (jsx(OuterStyled, { className: className, style: style, "$backgroundImage": backgroundImage, "$backgroundColor": backgroundColor, "$foregroundColor": foregroundColor, "$backgroundPosition": backgroundPosition, "$backgroundSize": backgroundSize, "$backgroundAttachment": backgroundAttachment, children: jsx(InnerStyled, { direction: "column", grow: 1, spacing: spacing, "$maxWidthTablet": maxWidthTablet, "$maxWidthDesktop": maxWidthDesktop, children: TileLeft || TileRight ? (jsx(TileLayout, { contentLeft: TileLeft, contentRight: TileRight, children: ContentWithHeader })) : (jsx(TileSlot, { children: ContentWithHeader })) }) }));
 };
 
-export { Tile as default };
+export { TileStyles, Tile as default, getTileToken };
 //# sourceMappingURL=index.esm.js.map

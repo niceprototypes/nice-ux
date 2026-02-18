@@ -34,26 +34,23 @@ const Tile: React.FC<TileProps> = ({
   contentRight: TileRight,
   spacing,
   title,
-  titleAs = "h2",
+  titleAs = "h3",
   description,
-  headerAlign,
-  headerColor,
-  headerStyle,
+  align,
+  mode,
 }) => {
   const hasHeader = title || description
-  const resolvedAlign = resolveHeaderAlign(headerAlign)
-  const textStyle = headerColor
-    ? { color: headerColor, ...headerStyle }
-    : headerStyle
+  const resolvedAlign = resolveHeaderAlign(align)
 
   const HeaderContent = hasHeader ? (
-    <Flex direction="column" gap="small">
+    <Flex direction="column" gap="base">
       {title && (
         <Typography
           as={titleAs}
           size="large"
+          weight="semibold"
           align={resolvedAlign}
-          style={textStyle}
+          mode={mode}
         >
           {title}
         </Typography>
@@ -62,7 +59,7 @@ const Tile: React.FC<TileProps> = ({
         <Typography
           size="base"
           align={resolvedAlign}
-          style={textStyle}
+          mode={mode}
         >
           {description}
         </Typography>

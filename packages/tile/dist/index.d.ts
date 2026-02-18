@@ -1,5 +1,7 @@
 import * as React from 'react';
+import { ComponentType } from 'react';
 import { FlexSpacingType } from 'nice-react-flex';
+import { ModeType, TokenResult } from 'nice-styles';
 import { AsType, AlignType } from 'nice-react-typography';
 
 /**
@@ -13,16 +15,16 @@ type TileHeaderAlignType = AlignType | {
 };
 interface TileProps {
     children?: React.ReactNode;
-    breakpointMd?: number;
-    breakpointLg?: number;
+    maxWidthTablet?: number;
+    maxWidthDesktop?: number;
     className?: string;
     style?: React.CSSProperties;
     backgroundImage?: string;
     backgroundColor?: string;
+    foregroundColor?: string;
     backgroundPosition?: string;
     backgroundSize?: string;
     backgroundAttachment?: string;
-    fullWidth?: boolean;
     contentLeft?: React.ReactNode;
     contentRight?: React.ReactNode;
     spacing?: FlexSpacingType;
@@ -33,15 +35,30 @@ interface TileProps {
     /** Description text displayed below the title */
     description?: string;
     /** Alignment for title and description (default: "center") */
-    headerAlign?: TileHeaderAlignType;
-    /** Color for title and description text */
-    headerColor?: string;
-    /** Additional inline styles for title and description */
-    headerStyle?: React.CSSProperties;
+    align?: TileHeaderAlignType;
+    /** Pin token resolution to a specific mode instead of responding to media query */
+    mode?: ModeType;
 }
 
 declare const Tile: React.FC<TileProps>;
 //# sourceMappingURL=Tile.d.ts.map
 
-export { Tile as default };
+/**
+ * No-op component — tile CSS custom properties are now generated
+ * at build time in nice-styles dist/variables.css.
+ * Kept for backward compatibility.
+ */
+declare const TileStyles: ComponentType;
+
+/**
+ * Get a tile component token.
+ *
+ * @param name - Token name (e.g., "backgroundColor", "foregroundColor")
+ * @param variant - Variant within token (defaults to "base")
+ * @param mode - Optional theme mode suffix
+ * @returns TokenResult with key, var, and value properties
+ */
+declare function getTileToken(name: string, variant?: string, mode?: string): TokenResult;
+
+export { TileStyles, Tile as default, getTileToken };
 export type { TileHeaderAlignType, TileProps };

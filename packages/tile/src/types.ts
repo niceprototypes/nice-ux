@@ -1,5 +1,6 @@
 import * as React from "react"
 import type { FlexSpacingType } from "nice-react-flex"
+import type { ModeType } from "nice-styles"
 import type { AlignType, AsType } from "nice-react-typography"
 
 /**
@@ -33,9 +34,7 @@ export interface TileProps {
   /** Description text displayed below the title */
   description?: string
   /** Alignment for title and description (default: "center") */
-  headerAlign?: TileHeaderAlignType
-  /** Color for title and description text */
-  headerColor?: string
-  /** Additional inline styles for title and description */
-  headerStyle?: React.CSSProperties
+  align?: TileHeaderAlignType
+  /** Pin token resolution to a specific mode instead of responding to media query */
+  mode?: ModeType
 }

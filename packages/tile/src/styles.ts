@@ -59,6 +59,12 @@ export const InnerStyled = styled(Flex).withConfig({
   margin: 0 auto;
   width: 100%;
 
+  ${({ $maxWidthTablet }) => $maxWidthTablet && css`
+    @media (min-width: ${$maxWidthTablet}px) {
+      width: ${$maxWidthTablet}px;
+    }
+  `}
+
   ${({ $maxWidthDesktop }) => $maxWidthDesktop && css`
     @media (min-width: ${$maxWidthDesktop}px) {
       width: ${$maxWidthDesktop}px;
