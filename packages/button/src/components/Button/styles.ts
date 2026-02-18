@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { getToken } from "nice-styles"
+import { getCoreToken } from "nice-styles"
 import type { CellHeightType, BorderWidthType } from "nice-styles"
 import { ButtonStateType, ButtonStatusType, ButtonBorderRadiusType } from "./types"
 import { getButtonToken } from "../../tokens/getButtonToken"
@@ -9,6 +9,7 @@ export const StyledButton = styled.button.withConfig({
   shouldForwardProp: (prop) => !prop.startsWith("$"),
 })<{
   $backgroundColor?: string
+  $backgroundImage?: string
   $borderRadius: ButtonBorderRadiusType
   $borderWidth: BorderWidthType
   $disabled: boolean
@@ -35,7 +36,7 @@ export const StyledButton = styled.button.withConfig({
   width: ${({ $square, $size }) => ($square ? getButtonToken("size", $size).var : "auto")};
   height: ${({ $size }) => getButtonToken("size", $size).var};
   padding: ${({ $square, $size }) => ($square ? "0" : `0 ${getButtonToken("spacing", $size).var}`)};
-  font-weight: ${getToken("fontWeight", "base").var};
+  font-weight: ${getCoreToken("fontWeight", "base").var};
 
   /* Colors based on status and state */
   background-color: ${({ $status, $state }) =>
@@ -50,7 +51,7 @@ export const StyledButton = styled.button.withConfig({
     ).var};
 
   border-style: solid;
-  border-width: ${({ $borderWidth }) => getToken("borderWidth", $borderWidth).var};
+  border-width: ${({ $borderWidth }) => getCoreToken("borderWidth", $borderWidth).var};
   border-color: ${({ $status, $state }) =>
     getButtonToken(
       `status${capitalize($status)}${capitalize($state)}` as `status${Capitalize<ButtonStatusType>}${Capitalize<ButtonStateType>}`,
@@ -65,5 +66,6 @@ export const StyledButton = styled.button.withConfig({
 
   /* Explicit overrides when provided */
   ${({ $backgroundColor }) => $backgroundColor && `background-color: ${$backgroundColor};`}
+  ${({ $backgroundImage }) => $backgroundImage && `background-image: ${$backgroundImage};`}
   ${({ $foregroundColor }) => $foregroundColor && `color: ${$foregroundColor};`}
 `

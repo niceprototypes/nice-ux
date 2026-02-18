@@ -1,5 +1,5 @@
 import * as React from "react"
-import { CellHeightType, BorderWidthType } from "nice-styles"
+import { CellHeightType, BorderWidthType, ModeType } from "nice-styles"
 import { IconNameType } from "nice-react-icon"
 
 /**
@@ -80,8 +80,14 @@ export interface ButtonProps {
   /** Override background color (CSS value or var reference) */
   backgroundColor?: string
 
+  /** Override background image (CSS value, gradient, or url reference). Layers on top of backgroundColor. */
+  backgroundImage?: string
+
   /** Override foreground/text color (CSS value or var reference) */
   foregroundColor?: string
+
+  /** Pin token resolution to a specific mode instead of responding to media query */
+  mode?: ModeType
 }
 
 const ButtonTypes = {} as const
@@ -97,6 +103,7 @@ namespace ButtonTypes {
   export type ClassName = ButtonClassNameType
   export type AriaLabel = ButtonAriaLabelType
   export type TestId = ButtonTestIdType
+  export type Mode = ModeType
   export type Props = ButtonProps
 }
 

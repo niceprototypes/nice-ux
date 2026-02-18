@@ -10,6 +10,7 @@ const Button: React.FC<ButtonProps> = ({
   antialiased = false,
   "aria-label": ariaLabel,
   backgroundColor,
+  backgroundImage,
   borderRadius = "base",
   borderWidth = "base",
   children,
@@ -17,6 +18,7 @@ const Button: React.FC<ButtonProps> = ({
   "data-testid": testId,
   foregroundColor,
   icon,
+  mode,
   onClick,
   size = "base",
   state = "base",
@@ -29,6 +31,7 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <StyledButton
       $backgroundColor={backgroundColor}
+      $backgroundImage={backgroundImage}
       $borderRadius={borderRadius}
       $borderWidth={borderWidth}
       $disabled={disabled}
@@ -44,7 +47,7 @@ const Button: React.FC<ButtonProps> = ({
       type={type}
     >
       {children && (
-        <Typography as="span" antialiased={antialiased} weight="medium" size={size}>
+        <Typography as="span" antialiased={antialiased} mode={mode} weight="medium" size={size}>
           {children}
         </Typography>
       )}
