@@ -1,19 +1,19 @@
 import styled from "styled-components"
 import { getCoreToken } from "nice-styles"
-import type { CellHeightType, BorderWidthType } from "nice-styles"
-import { ButtonStateType, ButtonStatusType, ButtonBorderRadiusType } from "./types"
+import type { CellHeightType, BorderWidthType, ModeType } from "nice-styles"
+import type { ButtonBorderRadiusType, ButtonStateType, ButtonStatusType } from "./types"
 import { getButtonToken } from "../../tokens/getButtonToken"
-import { capitalize } from "../../helpers/capitalize"
+import { getStatusToken } from "../../helpers/getStatusToken"
 
 export const StyledButton = styled.button.withConfig({
   shouldForwardProp: (prop) => !prop.startsWith("$"),
 })<{
-  $backgroundColor?: string
   $backgroundImage?: string
+  $borderColor?: string
   $borderRadius: ButtonBorderRadiusType
   $borderWidth: BorderWidthType
   $disabled: boolean
-  $foregroundColor?: string
+  $mode?: ModeType
   $size: CellHeightType
   $square: boolean
   $state: ButtonStateType
@@ -27,6 +27,7 @@ export const StyledButton = styled.button.withConfig({
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
+  text-align: center;
 
   /* Button-specific styles */
   display: flex;
@@ -38,34 +39,22 @@ export const StyledButton = styled.button.withConfig({
   padding: ${({ $square, $size }) => ($square ? "0" : `0 ${getButtonToken("spacing", $size).var}`)};
   font-weight: ${getCoreToken("fontWeight", "base").var};
 
-  /* Colors based on status and state */
-  background-color: ${({ $status, $state }) =>
-    getButtonToken(
-      `status${capitalize($status)}${capitalize($state)}` as `status${Capitalize<ButtonStatusType>}${Capitalize<ButtonStateType>}`,
-      "backgroundColor"
-    ).var};
-  color: ${({ $status, $state }) =>
-    getButtonToken(
-      `status${capitalize($status)}${capitalize($state)}` as `status${Capitalize<ButtonStatusType>}${Capitalize<ButtonStateType>}`,
-      "foregroundColor"
-    ).var};
+  /* Colors */
+  background-color: ${({ $status, $state, $mode }) =>
+    getStatusToken($status, $state, "backgroundColor", $mode).var};
+  color: ${({ $status, $state, $mode }) => getStatusToken($status, $state, "foregroundColor", $mode).var};
 
+  /* Border */
   border-style: solid;
   border-width: ${({ $borderWidth }) => getCoreToken("borderWidth", $borderWidth).var};
-  border-color: ${({ $status, $state }) =>
-    getButtonToken(
-      `status${capitalize($status)}${capitalize($state)}` as `status${Capitalize<ButtonStatusType>}${Capitalize<ButtonStateType>}`,
-      "borderColor"
-    ).var};
+  border-color: ${({ $status, $state, $mode }) => getStatusToken($status, $state, "borderColor", $mode).var};
   border-radius: ${({ $borderRadius }) => getButtonToken("borderRadius", $borderRadius).var};
   cursor: ${({ $disabled }) => ($disabled ? "not-allowed" : "pointer")};
-  text-align: center;
 
-  /* Smooth transitions */
+  /* Transitions */
   transition: all 0.15s ease-in-out;
 
-  /* Explicit overrides when provided */
-  ${({ $backgroundColor }) => $backgroundColor && `background-color: ${$backgroundColor};`}
+  /* Overrides */
   ${({ $backgroundImage }) => $backgroundImage && `background-image: ${$backgroundImage};`}
-  ${({ $foregroundColor }) => $foregroundColor && `color: ${$foregroundColor};`}
+  ${({ $borderColor }) => $borderColor && `border-color: ${$borderColor};`}
 `

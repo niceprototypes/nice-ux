@@ -77,14 +77,11 @@ export interface ButtonProps {
    */
   borderRadius?: ButtonBorderRadiusType
 
-  /** Override background color (CSS value or var reference) */
-  backgroundColor?: string
-
-  /** Override background image (CSS value, gradient, or url reference). Layers on top of backgroundColor. */
+  /** Override background image (CSS value, gradient, or url reference) */
   backgroundImage?: string
 
-  /** Override foreground/text color (CSS value or var reference) */
-  foregroundColor?: string
+  /** Override border color (CSS value or var reference) */
+  borderColor?: string
 
   /** Pin token resolution to a specific mode instead of responding to media query */
   mode?: ModeType
