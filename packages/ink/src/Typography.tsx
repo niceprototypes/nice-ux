@@ -41,7 +41,7 @@ const Typography: React.FC<TypographyProps> = ({
   children,
   className,
   code = false,
-  color = "base",
+  color,
   mode,
   lineClamp,
   lineHeight,

@@ -70,7 +70,7 @@ export const StyledTypography = styled.p<{
 
   /* Color */
   ${({ $color, $mode }) => {
-    if (!$color) return ''
+    if (!$color) return css`color: inherit;`
 
     return css`
       color: ${getToken("foregroundColor", $color, $mode).var};
