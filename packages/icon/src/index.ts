@@ -35,5 +35,11 @@ export { iconNames } from "./constants"
 // Token exports
 export { IconStyles, getIconToken } from "./tokens"
 
+// Type exports — vendor
+export type {
+  IconVendorType,
+  IconVendorComponentType,
+} from "./components/Icon"
+
 // Service exports
-export { getIcon } from "./services"
+export { getIcon, registerVendorResolver } from "./services"

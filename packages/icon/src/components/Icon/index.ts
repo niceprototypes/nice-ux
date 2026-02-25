@@ -11,5 +11,7 @@ export type {
   IconViewBoxType,
   IconClassNameType,
   IconStrokeScalingType,
+  IconVendorType,
+  IconVendorComponentType,
 } from "./types"
 export { default as IconTypes } from "./types"

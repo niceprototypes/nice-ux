@@ -45,10 +45,14 @@
   "peerDependencies": {
     "react": ">=19.2.0",
     "react-dom": ">=19.2.0",
-    "styled-components": ">=6.1.18"
+    "styled-components": ">=6.1.18",
+    "nice-react-icon-vendor": ">=1.0.0"
   },
   "peerDependenciesMeta": {
     "react-dom": {
+      "optional": true
+    },
+    "nice-react-icon-vendor": {
       "optional": true
     }
   },

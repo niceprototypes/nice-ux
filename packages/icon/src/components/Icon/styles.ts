@@ -25,6 +25,7 @@ export const IconWrapperStyled = styled.div.withConfig({
   $spinning?: boolean
 }>`
   width: ${({ $size = "base" }) => getIconToken("size", $size).var};
+  color: ${({ $color = "base" }) => getIconToken("color", $color).var};
   aspect-ratio: 1;
   display: flex;
   justify-content: center;

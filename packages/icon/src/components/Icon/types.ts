@@ -12,8 +12,24 @@ export type IconViewBoxType = string
 export type IconClassNameType = string
 export type IconStrokeScalingType = boolean
 
+/**
+ * IconVendorType
+ *
+ * Enables vendor icon resolution for names not found in the custom icon set.
+ * Requires nice-react-icon-vendor (or a custom resolver) to be installed and imported.
+ */
+export type IconVendorType = boolean
+
+/**
+ * IconVendorComponentType
+ *
+ * A React component to render directly inside the Icon wrapper with token styling.
+ * Bypasses both the custom icon map and the vendor resolver.
+ */
+export type IconVendorComponentType = React.ComponentType
+
 export interface IconProps {
-  name: IconNameType
+  name?: IconNameType | (string & {})
   outlined?: IconOutlinedType
   url?: IconUrlType
   color?: IconColorType
@@ -22,6 +38,10 @@ export interface IconProps {
   strokeWidth?: IconStrokeWidthType
   className?: IconClassNameType
   strokeScaling?: IconStrokeScalingType
+  /** Enable vendor icon resolution */
+  vendor?: IconVendorType
+  /** Render a custom vendor component with token styling */
+  vendorComponent?: IconVendorComponentType
 }
 
 const IconTypes = {} as const
@@ -37,6 +57,8 @@ namespace IconTypes {
   export type ViewBox = IconViewBoxType
   export type ClassName = IconClassNameType
   export type StrokeScaling = IconStrokeScalingType
+  export type Vendor = IconVendorType
+  export type VendorComponent = IconVendorComponentType
   export type Props = IconProps
 }
 

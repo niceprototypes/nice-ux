@@ -19,7 +19,7 @@ export default createConfiguration({
     typescript({
       tsconfig: './tsconfig.json',
       declaration: true,
-      declarationDir: 'dist'
+      declarationDir: 'dist/types'
     })
   ],
   // Bundle nice-icons so SVGR can transform SVGs into React components
