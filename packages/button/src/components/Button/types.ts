@@ -1,5 +1,5 @@
 import * as React from "react"
-import { CellHeightType, BorderWidthType, ModeType } from "nice-styles"
+import { CellHeightType, BorderWidthType, ModeType } from "nice-react-styles"
 import { IconNameType } from "nice-react-icon"
 
 /**

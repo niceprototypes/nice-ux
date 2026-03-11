@@ -1,7 +1,7 @@
 import * as React from "react"
 import Typography from "nice-react-typography"
 import Icon from "nice-react-icon"
-import { getInvertedMode } from "nice-styles"
+import { getInvertedMode } from "nice-react-styles"
 import { StyledButton } from "./styles"
 import { ButtonProps } from "./types"
 import { isDisabled } from "../../helpers/isDisabled"
@@ -58,7 +58,7 @@ const Button: React.FC<ButtonProps> = ({
           {children}
         </Typography>
       )}
-      {!!icon && <Icon name={icon} size={size} color="lighter" strokeWidth="large" />}
+      {!!icon && <Icon name={icon} size={size} color="lightest" strokeWidth="large" />}
     </StyledButton>
   )
 }
