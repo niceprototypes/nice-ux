@@ -1,13 +1,10 @@
-import { Theme } from "nice-styles"
+import { Theme } from "nice-react-styles"
 
 export const fontSizes = Object.keys(
-  Theme.fontSize.items
-) as (keyof typeof Theme.fontSize.items)[]
+  Theme.fontSize
+) as (keyof typeof Theme.fontSize)[]
 
 export const foregroundColors = Object.keys(
-  Theme.foregroundColor.items
-) as (keyof typeof Theme.foregroundColor.items)[]
+  Theme.foregroundColor
+) as (keyof typeof Theme.foregroundColor)[]
 
-export const borderWidths = Object.keys(
-  Theme.borderWidth.items
-) as (keyof typeof Theme.borderWidth.items)[]

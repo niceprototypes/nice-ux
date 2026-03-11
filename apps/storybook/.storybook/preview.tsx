@@ -1,14 +1,13 @@
 import React from 'react'
 import type { Preview } from '@storybook/react'
 import { create } from 'storybook/theming'
-import { StylesProvider } from 'nice-react-styles'
-import { getCoreToken } from 'nice-styles'
+import { StylesProvider, getToken } from 'nice-react-styles'
 import './custom.css'
 
 const docsTheme = create({
   base: 'light',
-  fontBase: getCoreToken("fontFamily", "base").value,
-  fontCode: getCoreToken("fontFamily", "code").value,
+  fontBase: getToken("fontFamily", "base").value,
+  fontCode: getToken("fontFamily", "code").value,
 })
 
 const preview: Preview = {
@@ -33,10 +32,10 @@ const preview: Preview = {
       storySort: {
         order: [
           'Welcome',
-          'Styles', ['Tokens', ['getToken', 'createTokens'], 'Icons', 'Provider'],
-          'Components',
-          'Hooks',
-          'Configuration', ['NpmLink', 'ViteSymlinkWatcher', 'Rollup', 'TypeScript', 'Jest']
+          'Styles', ['Responsive'],
+          'Icons',
+          'React', ['Styles', ['StylesProvider', 'getToken', 'createTokens'], 'Hooks', 'Components'],
+          'Configuration', ['Rollup', 'TypeScript', 'Jest', 'ViteWatcher', 'NPM']
         ],
       },
     },

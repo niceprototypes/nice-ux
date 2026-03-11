@@ -1,10 +1,10 @@
 import styled from "styled-components"
 import Flex from "nice-react-flex"
-import { getBreakpoint } from "nice-styles"
+import { getBreakpoint } from "nice-react-styles"
 
 export const BreakpointRow = styled(Flex)`
   padding: 12px 16px;
-  background: var(--np--background-color--alternate);
+  background: var(--np--background-color--dark);
   border-radius: 8px;
   font-family: var(--np--font-family--code);
 `
@@ -19,7 +19,7 @@ export const Value = styled.span`
 `
 
 export const Query = styled.span`
-  color: var(--np--foreground-color--medium);
+  color: var(--np--foreground-color--light);
   font-size: 14px;
 `
 

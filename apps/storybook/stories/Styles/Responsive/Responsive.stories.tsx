@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import { getBreakpoint } from "nice-styles"
+import { getBreakpoint } from "nice-react-styles"
 import Flex from "nice-react-flex"
 import Typography from "nice-react-typography"
-import { generateDescriptionString } from "../../../src/services"
 import {
   BreakpointRow,
   Label,
@@ -25,33 +24,6 @@ const meta = {
       canvas: { hidden: true },
     },
     viewMode: "docs",
-    docs: {
-      description: {
-        component: generateDescriptionString("nice-styles", {
-          setup: [
-            {
-              value: 'import { getBreakpoint } from "nice-styles"',
-              code: true,
-              newLine: true,
-            },
-          ],
-          usage: [
-            { value: 'getBreakpoint("mobile").value', code: true },
-            "\u2002\u2192\u2002",
-            { value: "440", code: true, newLine: true },
-            { value: 'getBreakpoint("mobile").query', code: true },
-            "\u2002\u2192\u2002",
-            { value: '"@media (max-width: 440px)"', code: true, newLine: true },
-            { value: 'getBreakpoint("tablet").query', code: true },
-            "\u2002\u2192\u2002",
-            { value: '"@media (min-width: 441px)"', code: true, newLine: true },
-            { value: 'getBreakpoint("desktop").query', code: true },
-            "\u2002\u2192\u2002",
-            { value: '"@media (min-width: 1280px)"', code: true, newLine: true },
-          ],
-        }),
-      },
-    },
   },
   tags: ["autodocs"],
 } satisfies Meta<typeof ResponsiveDemo>
@@ -91,7 +63,7 @@ export const Breakpoints: Story = {
 
       <section>
         <Typography as="h3">Live Demo</Typography>
-        <Typography color="medium">
+        <Typography color="light">
           Resize the browser window to see the breakpoints in action.
         </Typography>
         <Flex style={{ marginTop: 16 }}>
@@ -110,7 +82,7 @@ export const Breakpoints: Story = {
           gap="small"
           style={{
             padding: 16,
-            background: "var(--np--background-color--alternate)",
+            background: "var(--np--background-color--dark)",
             borderRadius: 8,
             fontFamily: "var(--np--font-family--code)",
             fontSize: 14,
