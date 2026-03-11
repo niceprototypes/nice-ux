@@ -1,4 +1,4 @@
-import { getComponentToken, type TokenResult } from "nice-styles"
+import { getComponentToken, type TokenResult } from "nice-react-styles"
 
 /**
  * Get a typography component token.
