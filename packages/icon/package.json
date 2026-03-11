@@ -93,7 +93,6 @@
   },
   "dependencies": {
     "nice-icons": "file:../nice-icons",
-    "nice-react-styles": "file:../nice-react-styles",
-    "nice-styles": "file:../nice-styles"
+    "nice-react-styles": "file:../nice-react-styles"
   }
 }

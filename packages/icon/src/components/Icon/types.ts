@@ -1,4 +1,4 @@
-import type { FontSizeType, ForegroundColorType } from "nice-styles"
+import type { FontSizeType, ForegroundColorType, ModeType } from "nice-react-styles"
 import { iconNames } from "../../constants"
 
 export type IconNameType = (typeof iconNames)[number]
@@ -38,6 +38,8 @@ export interface IconProps {
   strokeWidth?: IconStrokeWidthType
   className?: IconClassNameType
   strokeScaling?: IconStrokeScalingType
+  /** Force day or night mode */
+  mode?: ModeType
   /** Enable vendor icon resolution */
   vendor?: IconVendorType
   /** Render a custom vendor component with token styling */

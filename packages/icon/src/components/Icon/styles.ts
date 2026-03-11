@@ -1,6 +1,11 @@
 import styled, { css, keyframes } from "styled-components"
 import { getIconToken } from "../../tokens/getIconToken"
+import { getToken, type ModeType } from "nice-react-styles"
 import type { IconSizeType, IconColorType, IconStrokeWidthType } from "./types"
+
+// Helper — calls getToken with optional mode
+const getColorToken = (color: string, mode?: ModeType) =>
+  mode ? getToken("foregroundColor", color, mode) : getToken("foregroundColor", color)
 
 const spin = keyframes`
   from {
@@ -23,17 +28,19 @@ export const IconWrapperStyled = styled.div.withConfig({
   $strokeWidth?: IconStrokeWidthType
   $strokeScaling?: boolean
   $spinning?: boolean
+  $mode?: ModeType
 }>`
   width: ${({ $size = "base" }) => getIconToken("size", $size).var};
-  color: ${({ $color = "base" }) => getIconToken("color", $color).var};
-  aspect-ratio: 1;
+  height: ${({ $size = "base" }) => getIconToken("size", $size).var};
+  color: ${({ $color = "base", $mode }) => getColorToken($color, $mode).var};
   display: flex;
+  flex-shrink: 0;
   justify-content: center;
   align-items: center;
 
   img, svg {
     width: 100%;
-    aspect-ratio: 1;
+    height: 100%;
     ${({ $spinning }) => $spinning && css`
       animation: ${spin} ${getIconToken("spinningAnimationDuration").var} linear infinite;
     `}
@@ -42,15 +49,15 @@ export const IconWrapperStyled = styled.div.withConfig({
   svg {
     path, circle, rect, line, polyline, polygon, ellipse {
       ${({ $strokeScaling = false }) => !$strokeScaling && css`vector-effect: non-scaling-stroke;`}
-      ${({ $outlined = false, $color = "base", $strokeWidth = "base" }) =>
+      ${({ $outlined = false, $color = "base", $strokeWidth = "base", $mode }) =>
           $outlined
               ? css`
-                fill: ${getIconToken("color", $color).var};
+                fill: ${getColorToken($color, $mode).var};
                 stroke: none;
               `
               : css`
                 fill: none;
-                stroke: ${getIconToken("color", $color).var};
+                stroke: ${getColorToken($color, $mode).var};
                 stroke-width: ${getIconToken("strokeWidth", $strokeWidth).var};
                 stroke-linecap: round;
                 stroke-linejoin: round;
