@@ -1,0 +1,9 @@
+{
+  "extends": "nice-configuration/typescript/react",
+  "compilerOptions": {
+    "outDir": "dist",
+    "declarationDir": "dist/types"
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.test.tsx"]
+}
