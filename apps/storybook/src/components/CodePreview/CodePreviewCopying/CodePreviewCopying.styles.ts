@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { getToken } from "nice-styles"
+import { getToken } from "nice-react-styles"
 import Flex, { FlexProps } from "nice-react-flex"
 import Typography, { TypographyProps } from "nice-react-typography"
 

@@ -32,7 +32,7 @@ const VariableRow: React.FC<VariableRowProps> = ({
           </Typography>
         )}
         {!isDefault && description && (
-          <Typography code weight="medium" color="heavy" size="smaller">
+          <Typography code weight="medium" color="base" size="smaller">
             {description}
           </Typography>
         )}

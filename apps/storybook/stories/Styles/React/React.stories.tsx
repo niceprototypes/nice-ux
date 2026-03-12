@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import Flex from "nice-react-flex"
 import Typography from "nice-react-typography"
-import CodePreview from "../../../src/components/CodePreview"
+import CodeBlock from "../../../src/components/CodeBlock"
+
 
 const ReactDemo = () => <></>
 
@@ -37,9 +38,9 @@ export const Basic: Story = {
         Wrap your application with StylesProvider to inject nice-styles CSS
         variables and enable styled-components theming.
       </Typography>
-      <CodePreview
-        code={`<StylesProvider>\n+2{children}\n</StylesProvider>`}
-      />
+      <CodeBlock>{`<StylesProvider>
+  {children}
+</StylesProvider>`}</CodeBlock>
       <Typography color="light">
         This provides CSS custom properties on :root and makes the nice-styles
         Theme available via styled-components.

@@ -4,80 +4,24 @@ import { Meta } from '@storybook/addon-docs/blocks'
 
 # Nice Prototypes
 
-A design system built on CSS custom properties, with optional React bindings.
-Choose the integration that fits your stack.
+A modular design system. Start with what you need — adopt more when you're ready.
 
 ---
 
-## Styles
+### [Design Tokens](/docs/welcome-design-tokens--docs)
 
-**For non-React projects.** The `nice-styles` package provides a token system
-built entirely on CSS custom properties. No framework dependency, no runtime —
-just variables you reference in your stylesheets.
+No framework required. A complete token system built on CSS custom properties,
+plus a standalone icon library. Works with any stack that renders HTML.
 
-Browse the **Docs** tab on any Styles page to see available tokens, their values,
-and live previews. Each token maps to a `--np--` prefixed CSS variable that you
-can use directly in CSS, Sass, or any preprocessor.
+### [Design Patterns](/docs/welcome-design-patterns--docs)
 
-**When to use:** Any project that renders HTML. Static sites, server-rendered pages,
-vanilla JS apps, or as a shared foundation across frameworks. If you only need
-design tokens and responsive breakpoints, this is the package to install.
+React bindings for the token system — a provider, typed token API, font loading,
+and utility hooks. Brings the Nice design pattern into your React project.
 
-- [Responsive](/docs/styles-responsive--docs) — Breakpoints and media query helpers
+### [UI Components](/docs/welcome-ui-components--docs)
 
----
-
-## Icons
-
-**Standalone icon library.** The `nice-icons` package provides SVG icons as
-importable modules. Framework-agnostic — use them as `<img>` sources, inline SVG,
-or through the React `<Icon>` component.
-
-- [Browse all icons](/docs/icons--docs)
-
----
-
-## React
-
-**For React projects.** The `nice-react-styles` package wraps `nice-styles` with
-a provider, font loading, and a typed token API for use inside components.
-
-### Styles
-
-The React styles layer adds three things on top of the base CSS tokens:
-
-- **StylesProvider** — Context provider that injects CSS variables onto `:root`
-  and supplies a styled-components theme. Wrap your app root with it once.
-  [View docs](/docs/react-styles-stylesprovider--docs)
-
-- **FontLoader** — Handles async web font loading so your layout doesn't shift.
-  *(Coming soon)*
-
-- **getToken** — Typed accessor for token keys, CSS `var()` strings, and resolved
-  values. Use it in styled-components template literals or inline styles.
-  [View docs](/docs/react-styles-gettoken--docs)
-
-- **createTokens** — Registers a custom token map and returns `GlobalStyles` plus
-  a scoped `getToken`. Use it to extend the base tokens with project-specific values.
-  [View docs](/docs/react-styles-createtokens--docs)
-
-### Hooks
-
-- **useDeviceDetector** — Returns whether the current viewport is mobile.
-  [View docs](/docs/react-hooks-usedevicedetector--docs)
-
-### Components
-
-Pre-built React components that consume the token system:
-
-- [Button](/docs/react-components-button--docs)
-- [Flex](/docs/react-components-flex--docs)
-- [Icon](/docs/react-components-icon--docs)
-- [Lightbox](/docs/react-components-lightbox--docs)
-- [Scroll](/docs/react-components-scroll--docs)
-- [Slider](/docs/react-components-slider--docs)
-- [Tile](/docs/react-components-tile--docs)
-- [Typography](/docs/react-components-typography--docs)
+Pre-built React components that consume the token system out of the box.
+Styled, responsive, and composable with zero configuration.
 
 ---
 

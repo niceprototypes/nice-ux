@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import { createTokens, getToken } from "nice-react-styles"
 import Flex from "nice-react-flex"
+import CodeBlock from "../../../../src/components/CodeBlock"
 import Typography from "nice-react-typography"
-import CodePreview from "../../../../src/components/CodePreview"
+
 
 const ComponentDemo = () => <></>
 
@@ -66,13 +67,11 @@ export const OverrideExisting: Story = {
         Use an existing token key with an existing variant name to replace its value.
         Here, the base font size is changed from the default to 18px.
       </Typography>
-      <CodePreview
-        code={`createTokens({
+      <CodeBlock>{`createTokens({
   fontSize: {
     base: "18px",
   },
-})`}
-      />
+})`}</CodeBlock>
       <Flex direction="column" gap="small">
         <Flex gap="base" alignItems="center">
           <Typography code>--np--font-size--base</Typography>
@@ -95,13 +94,11 @@ export const ExtendExisting: Story = {
         Here, a "brand" variant is added to foregroundColor alongside the
         existing variants (base, light, lighter, etc).
       </Typography>
-      <CodePreview
-        code={`createTokens({
+      <CodeBlock>{`createTokens({
   foregroundColor: {
     brand: "#dc0000",
   },
-})`}
-      />
+})`}</CodeBlock>
       <Flex direction="column" gap="small">
         <Flex gap="base" alignItems="center">
           <Typography code>--np--foreground-color--brand</Typography>
@@ -130,14 +127,12 @@ export const NewToken: Story = {
         Use a token key that doesn't exist in the base system to create
         an entirely new token with its own variants.
       </Typography>
-      <CodePreview
-        code={`createTokens({
+      <CodeBlock>{`createTokens({
   headerHeight: {
     base: "64px",
     compact: "48px",
   },
-})`}
-      />
+})`}</CodeBlock>
       <Flex direction="column" gap="small">
         {[
           { key: "--np--header-height--base", value: "64px" },
@@ -167,16 +162,14 @@ export const Combined: Story = {
         new. There is no distinction between "modifying" and "creating."
         The system overloads the existing tokens transparently.
       </Typography>
-      <CodePreview
-        code={`const { GlobalStyles } = createTokens({
+      <CodeBlock>{`const { GlobalStyles } = createTokens({
   fontSize: { base: "18px" },            // override
   foregroundColor: { brand: "#dc0000" },  // extend
   headerHeight: {                         // create
     base: "64px",
     compact: "48px",
   },
-})`}
-      />
+})`}</CodeBlock>
     </Flex>
   ),
 }

@@ -5,7 +5,7 @@ const theme = create({
   base: 'light',
   brandTitle: 'Nice Components',
   brandUrl: 'https://niceprototypes.com',
-  brandImage: '/logo.svg',
+  brandImage: '/vectors/logo-storybook.svg',
   brandTarget: '_self',
 
   fontBase: '"Google Sans Flex", sans-serif',

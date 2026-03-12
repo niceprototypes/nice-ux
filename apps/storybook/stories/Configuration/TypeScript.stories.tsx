@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react"
+
 import Typography from "nice-react-typography"
 import Flex from "nice-react-flex"
-import { getToken } from "nice-react-styles"
+import CodeBlock from "../../src/components/CodeBlock"
 
 const TypeScriptDemo = () => <></>
 
@@ -28,21 +29,6 @@ const storyParameters = {
   },
 }
 
-const CodeBlock = ({ children }: { children: string }) => (
-  <Typography
-    code
-    style={{
-      display: "block",
-      backgroundColor: getToken("backgroundColor", "dark").var,
-      padding: getToken("gap", "base").var,
-      borderRadius: getToken("borderRadius", "base").var,
-      whiteSpace: "pre",
-      overflow: "auto",
-    }}
-  >
-    {children}
-  </Typography>
-)
 
 export const Base: Story = {
   name: "base",
@@ -53,8 +39,7 @@ export const Base: Story = {
       <Typography color="light">
         Extends the base TypeScript configuration for non-React packages like nice-styles.
       </Typography>
-      <CodeBlock>
-        {`// tsconfig.json
+      <CodeBlock>{`// tsconfig.json
 {
   "extends": "nice-configuration/typescript/base",
   "compilerOptions": {
@@ -63,11 +48,9 @@ export const Base: Story = {
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]
-}`}
-      </CodeBlock>
+}`}</CodeBlock>
       <Typography as="h4">Included Options</Typography>
-      <CodeBlock>
-        {`{
+      <CodeBlock>{`{
   "target": "ES2020",
   "module": "ESNext",
   "lib": ["ES2020", "DOM", "DOM.Iterable"],
@@ -80,8 +63,7 @@ export const Base: Story = {
   "forceConsistentCasingInFileNames": true,
   "isolatedModules": true,
   "resolveJsonModule": true
-}`}
-      </CodeBlock>
+}`}</CodeBlock>
     </Flex>
   ),
 }
@@ -95,8 +77,7 @@ export const React: Story = {
       <Typography color="light">
         Extends the base configuration with JSX support for React components.
       </Typography>
-      <CodeBlock>
-        {`// tsconfig.json
+      <CodeBlock>{`// tsconfig.json
 {
   "extends": "nice-configuration/typescript/react",
   "compilerOptions": {
@@ -105,14 +86,11 @@ export const React: Story = {
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]
-}`}
-      </CodeBlock>
+}`}</CodeBlock>
       <Typography as="h4">Additional Options</Typography>
-      <CodeBlock>
-        {`{
+      <CodeBlock>{`{
   "jsx": "react-jsx"
-}`}
-      </CodeBlock>
+}`}</CodeBlock>
       <Typography color="light">
         Note: Path-relative options like outDir, declarationDir, and include must be specified
         in each project as they resolve relative to the config file location.

@@ -14,12 +14,11 @@
 
 #storybook-docs h1.sbdocs-title + div:not(.sb-anchor) strong code {
   margin: 0;
+  padding: 0;
   border: 0;
-  padding: 0.25rem 0.5rem;
-  font-weight: var(--np--font-weight--bold);
-  background-color: var(--np--background-color--alternate);
-  color: var(--np--foreground-color--base);
-  line-height: var(--np--line-height--base);
+  font-weight: var(--np--font-weight--medium);
+  background-color: transparent;
+  color: var(--np--foreground-color--light);
   border-radius: var(--np--border-radius--base);
   font-size: var(--np--font-size--smaller);
   letter-spacing: normal;
@@ -29,10 +28,6 @@
   letter-spacing: normal;
 }
 
-#storybook-docs h1.sbdocs-title + div:not(.sb-anchor) + .sb-anchor {
-  display: none;
-}
-
 #storybook-docs h2 {
   font-size: var(--np--font-size--small);
   font-weight: var(--np--font-weight--semibold);
@@ -40,5 +35,7 @@
 }
 
 #storybook-docs h3 {
-  font-family: var(--np--font-family--code);
+  font-weight: var(--np--font-weight--semibold);
+  margin-top: 4rem;
+  margin-bottom: 2rem;
 }

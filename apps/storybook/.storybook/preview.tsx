@@ -31,7 +31,7 @@ const preview: Preview = {
     options: {
       storySort: {
         order: [
-          'Welcome',
+          'Welcome', ['Design Tokens', 'Design Patterns', 'UI Components'],
           'Styles', ['Responsive'],
           'Icons',
           'React', ['Styles', ['StylesProvider', 'getToken', 'createTokens'], 'Hooks', 'Components'],

@@ -1,5 +1,5 @@
 import Flex from "nice-react-flex"
-import { getToken } from "nice-styles"
+import { getToken } from "nice-react-styles"
 import { DemoDotProps } from "./DemoDots.types"
 
 const DemoDot = ({
