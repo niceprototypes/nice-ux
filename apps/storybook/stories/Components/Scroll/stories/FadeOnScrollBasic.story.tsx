@@ -1,7 +1,7 @@
 import { ScrollProvider, FadeOnScroll } from "nice-react-scroll"
 import Flex from "nice-react-flex"
 import Typography from "nice-react-typography"
-import { getToken } from "nice-styles"
+import { getToken } from "nice-react-styles"
 import Story from "../../../../src/components/Story"
 
 const FadeOnScrollBasicStory = () => (

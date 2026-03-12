@@ -1,0 +1,31 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="React/Styles" name="Docs" />
+
+# Styles
+
+```bash
+npm install nice-react-styles
+```
+
+The `nice-react-styles` package wraps `nice-styles` with a React provider,
+font loading, and a typed token API for use inside components.
+
+---
+
+### Contents
+
+- [StylesProvider](/docs/react-styles-stylesprovider--docs) — Context provider
+  that injects CSS variables onto `:root` and supplies a styled-components theme.
+  Wrap your app root with it once.
+
+- **FontLoader** — Handles async web font loading so your layout doesn't shift.
+  *(Coming soon)*
+
+- [getToken](/docs/react-styles-gettoken--docs) — Typed accessor for token keys,
+  CSS `var()` strings, and resolved values. Use it in styled-components template
+  literals or inline styles.
+
+- [createTokens](/docs/react-styles-createtokens--docs) — Registers a custom
+  token map and returns `GlobalStyles` plus a scoped `getToken`. Use it to extend
+  the base tokens with project-specific values.

@@ -11,7 +11,7 @@ import AlignItemsStory from "./stories/AlignItems.story"
 import WrapStory from "./stories/Wrap.story"
 
 const meta = {
-  title: "Components/Flex",
+  title: "React/Components/Flex",
   component: Flex,
   parameters: {
     layout: "padded",
@@ -20,7 +20,7 @@ const meta = {
       canvas: { sourceState: "none" },
     },
   },
-  tags: ["autodocs"],
+
   argTypes: {
     children: {
       name: "children",

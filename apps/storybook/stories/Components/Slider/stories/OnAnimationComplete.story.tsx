@@ -8,7 +8,7 @@ const OnAnimationCompleteStory = () => (
         name: "onAnimationComplete",
         description: "onAnimationComplete={() => {...}}",
         demo: (
-          <Typography size="small" color="medium">
+          <Typography size="small" color="light">
             Callback fired when the slide transition animation completes
             (after 300ms). Use this to reset the isAnimating state.
           </Typography>
@@ -19,7 +19,7 @@ const OnAnimationCompleteStory = () => (
         name: "chaining",
         description: "Chaining actions",
         demo: (
-          <Typography size="small" color="medium">
+          <Typography size="small" color="light">
             Perform additional actions after the animation completes, such as
             analytics tracking or auto-advance logic.
           </Typography>

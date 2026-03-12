@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import { generateDescriptionString } from "../../../src/services"
 import UseScrollStory from "./stories/UseScroll.story"
 import StickyBasicStory from "./stories/StickyBasic.story"
 import StickyOrderStory from "./stories/StickyOrder.story"
@@ -11,34 +10,15 @@ import StickySectionLinksBasicStory from "./stories/StickySectionLinksBasic.stor
 import StickySectionLinksCustomStory from "./stories/StickySectionLinksCustom.story"
 
 const meta = {
-  title: "Components/Scroll",
+  title: "React/Components/Scroll",
   parameters: {
     layout: "fullscreen",
     docs: {
-      description: {
-        component: generateDescriptionString("nice-react-scroll", {
-          setup: [
-            {
-              value:
-                'import { ScrollProvider, Sticky, FadeOnScroll } from "nice-react-scroll"',
-              code: true,
-              newLine: true,
-            },
-          ],
-          usage: [
-            {
-              value:
-                "<ScrollProvider><Sticky>{header}</Sticky></ScrollProvider>",
-              code: true,
-            },
-          ],
-        }),
-      },
       source: { code: null },
       canvas: { sourceState: "none" },
     },
   },
-  tags: ["autodocs"],
+
   argTypes: {
     order: {
       description: "Stack order for multiple sticky elements (lower = higher)",

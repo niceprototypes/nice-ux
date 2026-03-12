@@ -2,7 +2,7 @@ import { useState } from "react"
 import Slider from "nice-react-slider"
 import Flex from "nice-react-flex"
 import Typography from "nice-react-typography"
-import { getToken } from "nice-styles"
+import { getToken } from "nice-react-styles"
 
 export const SlideContent = ({
   title,
@@ -24,7 +24,7 @@ export const SlideContent = ({
     <Typography as="h2" weight="bold" size="larger">
       {title}
     </Typography>
-    <Typography color="medium">
+    <Typography color="light">
       Swipe or use navigation to change slides
     </Typography>
   </Flex>

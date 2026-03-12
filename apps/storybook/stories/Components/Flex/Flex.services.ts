@@ -1,4 +1,4 @@
-import { getToken } from "nice-styles"
+import { getToken } from "nice-react-styles"
 
 export const twoDots = [
   {

@@ -6,7 +6,6 @@ import {
 } from "nice-react-device-detector"
 import React, { useEffect, useState } from "react"
 import Typography from "nice-react-typography"
-import { generateDescriptionString } from "../../src/services"
 import Flex from "nice-react-flex"
 import { CodeRow } from "../../src/components/CodeRow"
 
@@ -15,28 +14,12 @@ const Row = CodeRow
 const HookWrapper = () => null
 
 const meta = {
-  title: "Hooks/useDeviceDetector",
+  title: "React/Hooks/useDeviceDetector",
   component: HookWrapper,
   parameters: {
     layout: "padded",
-    docs: {
-      description: {
-        component: generateDescriptionString("nice-react-device-detector", {
-          setup: [
-            {
-              value: 'import { useDeviceDetector } from "nice-react-device-detector"',
-              code: true,
-              newLine: true,
-            },
-          ],
-          usage: [
-            { value: "const isMobile = useDeviceDetector()", code: true },
-          ],
-        }),
-      },
-    },
   },
-  tags: ["autodocs"],
+
 } satisfies Meta<typeof HookWrapper>
 
 export default meta

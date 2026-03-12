@@ -1,0 +1,35 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Styles" name="Docs" />
+
+# Styles
+
+The `nice-styles` package is a token system built entirely on CSS custom
+properties. No framework dependency, no runtime — just variables you reference
+in your stylesheets.
+
+Every token maps to a `--np--` prefixed CSS variable. Use them directly in CSS,
+Sass, or any preprocessor.
+
+```css
+.card {
+  padding: var(--np--gap--large);
+  border-radius: var(--np--border-radius--base);
+  color: var(--np--foreground-color--base);
+}
+```
+
+**When to use:** Any project that renders HTML. Static sites, server-rendered
+pages, vanilla JS apps, or as a shared foundation across frameworks. If you
+only need design tokens and responsive breakpoints, this is the package to
+install.
+
+For React projects, see [React/Styles](/docs/react-styles-stylesprovider--docs)
+which wraps this package with a provider and typed accessors.
+
+---
+
+### Contents
+
+- [Responsive](/docs/styles-responsive--docs) — Breakpoints and media query
+  helpers via `getBreakpoint()`

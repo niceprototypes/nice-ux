@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import Typography from "nice-react-typography"
 import Flex from "nice-react-flex"
-import { getToken } from "nice-styles"
-import { generateDescriptionString } from "../../src/services"
+import { getToken } from "nice-react-styles"
 
 const RollupDemo = () => <></>
 
@@ -15,28 +14,8 @@ const meta = {
       canvas: { hidden: true },
     },
     viewMode: "docs",
-    docs: {
-      description: {
-        component: generateDescriptionString("nice-configuration", {
-          setup: [
-            {
-              value: 'import { createConfiguration } from "nice-configuration/rollup"',
-              code: true,
-              newLine: true,
-            },
-          ],
-          usage: [
-            {
-              value: "export default createConfiguration({ plugins: [...] })",
-              code: true,
-              newLine: true,
-            },
-          ],
-        }),
-      },
-    },
   },
-  tags: ["autodocs"],
+
 } satisfies Meta<typeof RollupDemo>
 
 export default meta
@@ -54,7 +33,7 @@ const CodeBlock = ({ children }: { children: string }) => (
     code
     style={{
       display: "block",
-      backgroundColor: getToken("backgroundColor", "alternate").var,
+      backgroundColor: getToken("backgroundColor", "dark").var,
       padding: getToken("gap", "base").var,
       borderRadius: getToken("borderRadius", "base").var,
       whiteSpace: "pre",
@@ -71,40 +50,47 @@ export const CreateConfiguration: Story = {
   render: () => (
     <Flex direction="column" gap="large">
       <Typography as="h3">createConfiguration</Typography>
-      <Typography color="medium">
+      <Typography color="light">
         Creates a complete rollup configuration with sensible defaults for nice-* packages.
-        Outputs both CJS and ESM formats with sourcemaps.
+        Outputs both CJS and ESM formats with sourcemaps. All plugins are included by default.
       </Typography>
       <CodeBlock>
         {`// rollup.config.js
-import resolve from "@rollup/plugin-node-resolve"
-import commonjs from "@rollup/plugin-commonjs"
-import typescript from "@rollup/plugin-typescript"
-import dts from "rollup-plugin-dts"
-import peerDepsExternal from "rollup-plugin-peer-deps-external"
 import { createConfiguration } from "nice-configuration/rollup"
 
+// Basic usage - uses all defaults
+export default createConfiguration()
+
+// With options
 export default createConfiguration({
-  plugins: [
-    peerDepsExternal(),
-    resolve(),
-    commonjs(),
-    typescript({ tsconfig: "./tsconfig.json" }),
-  ],
-  dtsPlugin: dts(),
+  input: "src/index.ts",
+  additionalExternals: ["lodash"],
+  bundlePackages: ["nice-icons"],
 })`}
       </CodeBlock>
       <Typography as="h4">Options</Typography>
       <CodeBlock>
         {`{
-  input?: string           // Entry point (default: "src/index.ts")
-  output?: object          // Custom output config (merged with defaults)
-  plugins: Function[]      // Required - your rollup plugins
-  additionalExternals?: string[]  // Extra packages to externalize
-  dts?: boolean            // Generate declaration bundle (default: true)
-  dtsInput?: string        // Custom dts input path
-  dtsPlugin?: Plugin       // The dts plugin instance
+  input?: string              // Entry point (default: "src/index.ts")
+  tsconfig?: string           // Path to tsconfig (default: "./tsconfig.json")
+  output?: object             // Custom output config (merged with defaults)
+  plugins?: Function[]        // Override default plugins (escape hatch)
+  additionalExternals?: string[]   // Extra packages to externalize
+  bundlePackages?: string[]   // nice-* packages to bundle instead of externalize
+  dts?: boolean               // Generate declaration bundle (default: true)
+  dtsInput?: string           // Custom dts input (default: "dist/types/index.d.ts")
 }`}
+      </CodeBlock>
+      <Typography as="h4">Default Plugins</Typography>
+      <Typography color="light">
+        The following plugins are included automatically:
+      </Typography>
+      <CodeBlock>
+        {`• rollup-plugin-peer-deps-external
+• @rollup/plugin-node-resolve (browser: true)
+• @rollup/plugin-commonjs
+• @rollup/plugin-typescript
+• rollup-plugin-dts (for declaration bundling)`}
       </CodeBlock>
     </Flex>
   ),
@@ -116,7 +102,7 @@ export const IsNiceExternal: Story = {
   render: () => (
     <Flex direction="column" gap="large">
       <Typography as="h3">isNiceExternal</Typography>
-      <Typography color="medium">
+      <Typography color="light">
         Pattern-based external detection that automatically externalizes all nice-* packages,
         React ecosystem, and styled-components. Handles subpath imports like CSS files.
       </Typography>
@@ -134,7 +120,7 @@ isNiceExternal("styled-components")     // styled-components
 isNiceExternal("lodash")                // other packages`}
       </CodeBlock>
       <Typography as="h4">Manual Usage</Typography>
-      <Typography color="medium">
+      <Typography color="light">
         If you need custom rollup config, use isNiceExternal directly:
       </Typography>
       <CodeBlock>
@@ -152,20 +138,72 @@ export default {
   ),
 }
 
+export const WatchMode: Story = {
+  name: "watchMode",
+  parameters: storyParameters,
+  render: () => (
+    <Flex direction="column" gap="large">
+      <Typography as="h3">Watch Mode Configuration</Typography>
+      <Typography color="light">
+        The configuration includes optimized watch settings that prevent file caching issues
+        during local development. This ensures changes appear immediately without delay.
+      </Typography>
+      <CodeBlock>
+        {`// Included automatically in createConfiguration()
+{
+  cache: false,  // Disable rollup internal caching
+  watch: {
+    buildDelay: 200,  // Debounce rapid changes
+    clearScreen: false,
+    chokidar: {
+      awaitWriteFinish: {
+        stabilityThreshold: 150,
+        pollInterval: 50
+      },
+      usePolling: true,
+      interval: 100
+    }
+  }
+}`}
+      </CodeBlock>
+      <Typography as="h4">Why These Settings?</Typography>
+      <Typography color="light">
+        Without these settings, rollup's watch mode can exhibit an "off by one" caching bug
+        where file changes appear one save behind. The awaitWriteFinish option ensures files
+        are fully written to disk before rollup reads them, and usePolling provides more
+        reliable file change detection on macOS.
+      </Typography>
+    </Flex>
+  ),
+}
+
 export const CreateExternals: Story = {
   name: "createExternals",
   parameters: storyParameters,
   render: () => (
     <Flex direction="column" gap="large">
       <Typography as="h3">createExternals</Typography>
-      <Typography color="medium">
-        Creates an external function with additional packages beyond the nice-* defaults.
+      <Typography color="light">
+        Creates an external function with additional packages or bundle overrides.
       </Typography>
       <CodeBlock>
         {`import { createExternals } from "nice-configuration/rollup"
 
-// Add lodash and date-fns to externals
-const external = createExternals(["lodash", "date-fns"])
+// Add extra packages to externalize
+const external = createExternals({
+  additional: ["lodash", "date-fns"],
+})
+
+// Bundle specific nice-* packages instead of externalizing
+const external = createExternals({
+  bundle: ["nice-icons"],
+})
+
+// Both options together
+const external = createExternals({
+  additional: ["lodash"],
+  bundle: ["nice-icons"],
+})
 
 export default {
   input: "src/index.ts",
@@ -174,6 +212,9 @@ export default {
   external
 }`}
       </CodeBlock>
+      <Typography color="light">
+        Note: Legacy array format is still supported for backwards compatibility.
+      </Typography>
     </Flex>
   ),
 }

@@ -1,0 +1,27 @@
+import { Meta, Stories } from '@storybook/addon-docs/blocks'
+import * as CreateTokensStories from './createTokens.stories'
+
+<Meta of={CreateTokensStories} />
+
+# createTokens
+
+```bash
+npm install nice-react-styles
+```
+
+### Setup
+
+```js
+import { createTokens, getToken } from "nice-react-styles"
+```
+
+### Usage
+
+```js
+export const { GlobalStyles } = createTokens(tokenMap)
+export { getToken }
+```
+
+---
+
+<Stories />

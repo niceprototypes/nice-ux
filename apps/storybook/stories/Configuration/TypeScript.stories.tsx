@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import Typography from "nice-react-typography"
 import Flex from "nice-react-flex"
-import { getToken } from "nice-styles"
-import { generateDescriptionString } from "../../src/services"
+import { getToken } from "nice-react-styles"
 
 const TypeScriptDemo = () => <></>
 
@@ -15,26 +14,8 @@ const meta = {
       canvas: { hidden: true },
     },
     viewMode: "docs",
-    docs: {
-      description: {
-        component: generateDescriptionString("nice-configuration", {
-          setup: [
-            {
-              value: "// tsconfig.json",
-              code: true,
-              newLine: true,
-            },
-            {
-              value: '{ "extends": "nice-configuration/typescript/react" }',
-              code: true,
-              newLine: true,
-            },
-          ],
-        }),
-      },
-    },
   },
-  tags: ["autodocs"],
+
 } satisfies Meta<typeof TypeScriptDemo>
 
 export default meta
@@ -52,7 +33,7 @@ const CodeBlock = ({ children }: { children: string }) => (
     code
     style={{
       display: "block",
-      backgroundColor: getToken("backgroundColor", "alternate").var,
+      backgroundColor: getToken("backgroundColor", "dark").var,
       padding: getToken("gap", "base").var,
       borderRadius: getToken("borderRadius", "base").var,
       whiteSpace: "pre",
@@ -69,7 +50,7 @@ export const Base: Story = {
   render: () => (
     <Flex direction="column" gap="large">
       <Typography as="h3">Base Configuration</Typography>
-      <Typography color="medium">
+      <Typography color="light">
         Extends the base TypeScript configuration for non-React packages like nice-styles.
       </Typography>
       <CodeBlock>
@@ -111,7 +92,7 @@ export const React: Story = {
   render: () => (
     <Flex direction="column" gap="large">
       <Typography as="h3">React Configuration</Typography>
-      <Typography color="medium">
+      <Typography color="light">
         Extends the base configuration with JSX support for React components.
       </Typography>
       <CodeBlock>

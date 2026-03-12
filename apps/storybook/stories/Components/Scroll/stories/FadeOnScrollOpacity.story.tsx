@@ -8,7 +8,7 @@ const FadeOnScrollOpacityStory = () => (
         name: "startOpacity",
         description: "startOpacity={0}",
         demo: (
-          <Typography size="small" color="medium">
+          <Typography size="small" color="light">
             Initial opacity value before fade in begins (default: 0)
           </Typography>
         ),
@@ -18,7 +18,7 @@ const FadeOnScrollOpacityStory = () => (
         name: "peakOpacity",
         description: "peakOpacity={1}",
         demo: (
-          <Typography size="small" color="medium">
+          <Typography size="small" color="light">
             Peak opacity value at peakPosition (default: 1)
           </Typography>
         ),
@@ -28,7 +28,7 @@ const FadeOnScrollOpacityStory = () => (
         name: "endOpacity",
         description: "endOpacity={0}",
         demo: (
-          <Typography size="small" color="medium">
+          <Typography size="small" color="light">
             Final opacity value after fade out (default: 0)
           </Typography>
         ),

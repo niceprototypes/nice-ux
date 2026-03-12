@@ -8,7 +8,7 @@ import StrokeWidthStory from "./stories/StrokeWidth.story"
 import StrokeScalingStory from "./stories/StrokeScaling.story"
 
 const meta = {
-  title: "Components/Icon",
+  title: "React/Components/Icon",
   component: Icon,
   parameters: {
     layout: "padded",
@@ -17,7 +17,7 @@ const meta = {
       canvas: { sourceState: "none" },
     },
   },
-  tags: ["autodocs"],
+
   argTypes: {
     name: {
       description: "",
@@ -78,10 +78,9 @@ const meta = {
         "[`Tokens.foregroundColor`](/?path=/story/styles-tokens--foreground-color)",
       control: "select",
       options: [
+        "lightest",
         "lighter",
         "light",
-        "medium",
-        "heavy",
         "base",
         "disabled",
         "link",
@@ -116,7 +115,7 @@ const meta = {
       description:
         "[`Tokens.borderWidth`](/?path=/story/styles-tokens--border-width)",
       control: "select",
-      options: ["base", "large"],
+      options: ["small", "base", "large"],
       table: {
         type: { summary: null },
         defaultValue: { summary: '"base"' },

@@ -1,5 +1,5 @@
 import Tile from "nice-react-tile"
-import { getToken } from "nice-styles"
+import { getToken } from "nice-react-styles"
 import Story from "../../../../src/components/Story"
 import { SampleContent } from "../Tile.services"
 

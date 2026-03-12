@@ -8,7 +8,7 @@ const IsAnimatingStory = () => (
         name: "isAnimating",
         description: "isAnimating={true}",
         demo: (
-          <Typography size="small" color="medium">
+          <Typography size="small" color="light">
             When true, the slider is in an animating state. Use this to
             prevent navigation during transitions.
           </Typography>
@@ -19,7 +19,7 @@ const IsAnimatingStory = () => (
         name: "preventing",
         description: "Preventing double-navigation",
         demo: (
-          <Typography size="small" color="medium">
+          <Typography size="small" color="light">
             Check isAnimating before allowing navigation to prevent stacking
             animations:
           </Typography>

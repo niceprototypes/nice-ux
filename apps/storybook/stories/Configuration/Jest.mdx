@@ -1,0 +1,21 @@
+import { Meta, Stories } from '@storybook/addon-docs/blocks'
+import * as JestStories from './Jest.stories'
+
+<Meta of={JestStories} />
+
+# Jest
+
+```bash
+npm install -D nice-configuration
+```
+
+### Setup
+
+```js
+// jest.config.js
+export { default } from "nice-configuration/jest/react"
+```
+
+---
+
+<Stories />

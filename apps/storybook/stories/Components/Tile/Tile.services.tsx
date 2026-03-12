@@ -1,13 +1,13 @@
 import Flex from "nice-react-flex"
 import Typography from "nice-react-typography"
-import { getToken } from "nice-styles"
+import { getToken } from "nice-react-styles"
 
 export const SampleContent = () => (
   <Flex direction="column" gap="small">
     <Typography as="h2" weight="bold">
       Section Title
     </Typography>
-    <Typography color="medium">
+    <Typography color="light">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
     </Typography>
   </Flex>
@@ -23,7 +23,7 @@ export const SideContent = ({ label }: { label: string }) => (
     alignItems="center"
     justifyContent="center"
   >
-    <Typography size="small" color="medium">
+    <Typography size="small" color="light">
       {label}
     </Typography>
   </Flex>

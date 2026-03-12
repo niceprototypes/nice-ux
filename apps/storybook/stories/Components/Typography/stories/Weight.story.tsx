@@ -1,5 +1,5 @@
 import Typography from "nice-react-typography"
-import { getToken } from "nice-styles"
+import { getToken } from "nice-react-styles"
 import Story from "../../../../src/components/Story"
 
 const WeightStory = () => (

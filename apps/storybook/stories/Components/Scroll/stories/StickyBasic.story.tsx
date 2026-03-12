@@ -8,7 +8,7 @@ const StickyBasicStory = () => (
         name: "basic",
         description: "<Sticky>",
         demo: (
-          <Typography size="small" color="medium">
+          <Typography size="small" color="light">
             Sticky headers remain fixed at the top of the viewport when
             scrolled past their original position. They automatically hide on
             scroll down and show on scroll up.

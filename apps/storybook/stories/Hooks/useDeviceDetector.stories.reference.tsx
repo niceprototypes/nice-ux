@@ -3,7 +3,7 @@ import { useDeviceDetector, DeviceProvider, useDevice } from "nice-react-device-
 import React, { useEffect, useState } from "react"
 import Typography from "nice-react-typography"
 import { generateDescriptionString } from "../../src/services"
-import { getToken } from "nice-styles"
+import { getToken } from "nice-react-styles"
 
 /**
  * # useDeviceDetector Hook (v1.1+)

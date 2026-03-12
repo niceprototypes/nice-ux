@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import Button from "nice-react-button"
-import { generateDescriptionString } from "../../../src/services"
 import BasicStory from "./stories/Basic.story"
 import StatusStory from "./stories/Status.story"
 import StateStory from "./stories/State.story"
@@ -9,33 +8,16 @@ import BorderRadiusStory from "./stories/BorderRadius.story"
 import IconStory from "./stories/Icon.story"
 
 const meta = {
-  title: "Components/Button",
+  title: "React/Components/Button",
   component: Button,
   parameters: {
     layout: "padded",
     docs: {
-      description: {
-        component: generateDescriptionString("nice-react-button", {
-          setup: [
-            {
-              value: 'import Button from "nice-react-button"',
-              code: true,
-              newLine: true,
-            },
-          ],
-          usage: [
-            {
-              value: "<Button onClick={handler}>{children}</Button>",
-              code: true,
-            },
-          ],
-        }),
-      },
       source: { code: null },
       canvas: { sourceState: "none" },
     },
   },
-  tags: ["autodocs"],
+
   argTypes: {
     children: {
       name: "children",

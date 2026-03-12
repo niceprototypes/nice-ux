@@ -1,10 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import Tile from "nice-react-tile"
-import { generateDescriptionString } from "../../../src/services"
 import BasicStory from "./stories/Basic.story"
 import BackgroundColorStory from "./stories/BackgroundColor.story"
 import SpacingStory from "./stories/Spacing.story"
-import BreakpointLgStory from "./stories/BreakpointLg.story"
+import MaxWidthDesktopStory from "./stories/MaxWidthDesktop.story"
 import FullWidthStory from "./stories/FullWidth.story"
 import ContentLeftStory from "./stories/ContentLeft.story"
 import ContentRightStory from "./stories/ContentRight.story"
@@ -13,33 +12,16 @@ import DescriptionStory from "./stories/Description.story"
 import LayoutStory from "./stories/Layout.story"
 
 const meta = {
-  title: "Components/Tile",
+  title: "React/Components/Tile",
   component: Tile,
   parameters: {
     layout: "fullscreen",
     docs: {
-      description: {
-        component: generateDescriptionString("nice-react-tile", {
-          setup: [
-            {
-              value: 'import Tile from "nice-react-tile"',
-              code: true,
-              newLine: true,
-            },
-          ],
-          usage: [
-            {
-              value: "<Tile>{children}</Tile>",
-              code: true,
-            },
-          ],
-        }),
-      },
       source: { code: null },
       canvas: { sourceState: "none" },
     },
   },
-  tags: ["autodocs"],
+
   argTypes: {
     children: {
       name: "children *",
@@ -87,14 +69,14 @@ const meta = {
         defaultValue: { summary: '"fixed"' },
       },
     },
-    breakpointMd: {
+    maxWidthTablet: {
       description: "",
       control: "number",
       table: {
         type: { summary: "number" },
       },
     },
-    breakpointLg: {
+    maxWidthDesktop: {
       description: "",
       control: "number",
       table: {
@@ -218,9 +200,9 @@ export const Spacing: Story = {
   render: SpacingStory,
 }
 
-export const BreakpointLg: Story = {
-  name: "breakpointLg",
-  render: BreakpointLgStory,
+export const MaxWidthDesktop: Story = {
+  name: "maxWidthDesktop",
+  render: MaxWidthDesktopStory,
 }
 
 export const FullWidth: Story = {

@@ -8,7 +8,7 @@ const FadeOnScrollPositionsStory = () => (
         name: "startPosition",
         description: "startPosition={30}",
         demo: (
-          <Typography size="small" color="medium">
+          <Typography size="small" color="light">
             Scroll progress % where fade in begins (default: 0)
           </Typography>
         ),
@@ -18,7 +18,7 @@ const FadeOnScrollPositionsStory = () => (
         name: "peakPosition",
         description: "peakPosition={50}",
         demo: (
-          <Typography size="small" color="medium">
+          <Typography size="small" color="light">
             Scroll progress % where peak opacity is reached (default: 50)
           </Typography>
         ),
@@ -28,7 +28,7 @@ const FadeOnScrollPositionsStory = () => (
         name: "endPosition",
         description: "endPosition={100}",
         demo: (
-          <Typography size="small" color="medium">
+          <Typography size="small" color="light">
             Scroll progress % where fade out completes (default: 100)
           </Typography>
         ),

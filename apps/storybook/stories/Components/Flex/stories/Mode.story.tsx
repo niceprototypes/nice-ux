@@ -1,5 +1,5 @@
 import Flex from "nice-react-flex"
-import { getToken } from "nice-styles"
+import { getToken } from "nice-react-styles"
 import Story from "../../../../src/components/Story"
 import DemoDots from "../../../../src/components/DemoDots"
 import { twoDots } from "../Flex.services"

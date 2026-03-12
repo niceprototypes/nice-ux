@@ -1,12 +1,14 @@
 import Icon from "nice-react-icon"
 import Story from "../../../../src/components/Story"
-import { borderWidths } from "../Icon.services"
+
+const strokeWidths = ["small", "base", "large"] as const
 
 const StrokeWidthStory = () => (
   <Story
-    variables={borderWidths.map(width => ({
+    variables={strokeWidths.map(width => ({
       name: width,
       description: `strokeWidth="${width}"`,
+      default: width === "base",
       demo: <Icon strokeWidth={width} />,
       code: width === "base" ? `<Icon/>` : `<Icon strokeWidth="${width}"/>`,
     }))}

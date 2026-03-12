@@ -1,0 +1,29 @@
+import { Meta, Stories } from '@storybook/addon-docs/blocks'
+import * as ResponsiveStories from './Responsive.stories'
+
+<Meta of={ResponsiveStories} />
+
+# Responsive
+
+```bash
+npm install nice-styles
+```
+
+### Setup
+
+```js
+import { getBreakpoint } from "nice-styles"
+```
+
+### Usage
+
+```js
+getBreakpoint("mobile").value   // → 440
+getBreakpoint("mobile").query   // → "@media (max-width: 440px)"
+getBreakpoint("tablet").query   // → "@media (min-width: 441px)"
+getBreakpoint("desktop").query  // → "@media (min-width: 1280px)"
+```
+
+---
+
+<Stories />

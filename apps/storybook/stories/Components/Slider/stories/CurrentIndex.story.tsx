@@ -1,6 +1,6 @@
 import Flex from "nice-react-flex"
 import Typography from "nice-react-typography"
-import { getToken } from "nice-styles"
+import { getToken } from "nice-react-styles"
 import Story from "../../../../src/components/Story"
 
 const CurrentIndexStory = () => (
@@ -10,7 +10,7 @@ const CurrentIndexStory = () => (
         name: "currentIndex",
         description: "currentIndex={0}",
         demo: (
-          <Typography size="small" color="medium">
+          <Typography size="small" color="light">
             Controls which slide is currently visible. Zero-indexed.
           </Typography>
         ),
@@ -21,7 +21,7 @@ const CurrentIndexStory = () => (
         description: "Navigation example",
         demo: (
           <Flex direction="column" gap="small">
-            <Typography size="small" color="medium">
+            <Typography size="small" color="light">
               Increment the index to navigate to the next slide:
             </Typography>
             <Flex gap="small">

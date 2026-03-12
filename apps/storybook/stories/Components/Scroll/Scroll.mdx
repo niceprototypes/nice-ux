@@ -1,0 +1,28 @@
+import { Meta, Stories } from '@storybook/addon-docs/blocks'
+import * as ScrollStories from './Scroll.stories'
+
+<Meta of={ScrollStories} />
+
+# Scroll
+
+```bash
+npm install nice-react-scroll
+```
+
+### Setup
+
+```jsx
+import { ScrollProvider, Sticky, FadeOnScroll } from "nice-react-scroll"
+```
+
+### Usage
+
+```jsx
+<ScrollProvider>
+  <Sticky>{header}</Sticky>
+</ScrollProvider>
+```
+
+---
+
+<Stories />

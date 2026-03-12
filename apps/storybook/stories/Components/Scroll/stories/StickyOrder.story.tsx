@@ -1,6 +1,6 @@
 import Flex from "nice-react-flex"
 import Typography from "nice-react-typography"
-import { getToken } from "nice-styles"
+import { getToken } from "nice-react-styles"
 import Story from "../../../../src/components/Story"
 
 const StickyOrderStory = () => (
@@ -11,7 +11,7 @@ const StickyOrderStory = () => (
         description: "order={0}, order={1}",
         demo: (
           <Flex direction="column" gap="small">
-            <Typography size="small" color="medium">
+            <Typography size="small" color="light">
               Multiple sticky elements stack based on their order prop. Lower
               numbers appear above higher numbers.
             </Typography>

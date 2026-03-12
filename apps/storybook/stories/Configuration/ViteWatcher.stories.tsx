@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import Typography from "nice-react-typography"
 import Flex from "nice-react-flex"
-import { getToken } from "nice-styles"
-import { generateDescriptionString } from "../../src/services"
+import { getToken } from "nice-react-styles"
 
 const ViteWatcherDemo = () => <></>
 
@@ -15,28 +14,8 @@ const meta = {
       canvas: { hidden: true },
     },
     viewMode: "docs",
-    docs: {
-      description: {
-        component: generateDescriptionString("nice-vite-watcher", {
-          setup: [
-            {
-              value: "npm install -D nice-vite-watcher",
-              code: true,
-              newLine: true,
-            },
-          ],
-          usage: [
-            {
-              value: 'import { viteWatcher } from "nice-vite-watcher"',
-              code: true,
-              newLine: true,
-            },
-          ],
-        }),
-      },
-    },
   },
-  tags: ["autodocs"],
+
 } satisfies Meta<typeof ViteWatcherDemo>
 
 export default meta
@@ -54,7 +33,7 @@ const CodeBlock = ({ children }: { children: string }) => (
     code
     style={{
       display: "block",
-      backgroundColor: getToken("backgroundColor", "alternate").var,
+      backgroundColor: getToken("backgroundColor", "dark").var,
       padding: getToken("gap", "base").var,
       borderRadius: getToken("borderRadius", "base").var,
       whiteSpace: "pre",
@@ -71,13 +50,13 @@ export const Overview: Story = {
   render: () => (
     <Flex direction="column" gap="large">
       <Typography as="h3">The Problem</Typography>
-      <Typography color="medium">
+      <Typography color="light">
         When developing with npm link or file: dependencies, Vite's dev server doesn't
         detect changes in linked packages. You're forced to restart the dev server
         every time you modify a linked package.
       </Typography>
       <Typography as="h4">The Solution</Typography>
-      <Typography color="medium">
+      <Typography color="light">
         This plugin watches the dist folder of linked packages and triggers a browser
         reload when they rebuild.
       </Typography>
@@ -93,7 +72,7 @@ Plugin detects change (debounced)
 Browser reloads`}
       </CodeBlock>
       <Typography as="h4">Vite Only</Typography>
-      <Typography color="medium">
+      <Typography color="light">
         This plugin is for Vite projects (including Storybook with Vite).
         For webpack/CRA projects, use nice-npm-link --dev --watch instead.
       </Typography>
@@ -107,7 +86,7 @@ export const BasicUsage: Story = {
   render: () => (
     <Flex direction="column" gap="large">
       <Typography as="h3">viteWatcher</Typography>
-      <Typography color="medium">
+      <Typography color="light">
         Creates the Vite plugin that watches linked package dist folders.
       </Typography>
       <CodeBlock>
@@ -146,7 +125,7 @@ export const SourceAliases: Story = {
   render: () => (
     <Flex direction="column" gap="large">
       <Typography as="h3">getSourceAliases</Typography>
-      <Typography color="medium">
+      <Typography color="light">
         Generates Vite resolve aliases pointing to package source files.
         Use this for packages without special build transforms to get true HMR
         with state preservation.
@@ -179,7 +158,7 @@ export const CombinedStrategy: Story = {
   render: () => (
     <Flex direction="column" gap="large">
       <Typography as="h3">Combining Both Approaches</Typography>
-      <Typography color="medium">
+      <Typography color="light">
         For the best experience, use source aliases for simple packages (true HMR)
         and dist watching for packages with build transforms (SVGR, PostCSS, etc.).
       </Typography>
@@ -229,7 +208,7 @@ export const StorybookIntegration: Story = {
   render: () => (
     <Flex direction="column" gap="large">
       <Typography as="h3">Storybook Integration</Typography>
-      <Typography color="medium">
+      <Typography color="light">
         Works with Storybook's Vite builder via viteFinal config.
       </Typography>
       <CodeBlock>
@@ -270,12 +249,12 @@ export const Limitations: Story = {
     <Flex direction="column" gap="large">
       <Typography as="h3">Limitations</Typography>
       <Typography as="h4">Full Page Reload</Typography>
-      <Typography color="medium">
+      <Typography color="light">
         Packages watched via dist (not source-aliased) trigger full reloads,
         not granular HMR. This resets React component state.
       </Typography>
       <Typography as="h4">Build Pipeline Delay</Typography>
-      <Typography color="medium">
+      <Typography color="light">
         You need to wait for the linked package's build to complete before
         changes appear. Run the package in watch mode for faster iteration.
       </Typography>
@@ -284,7 +263,7 @@ export const Limitations: Story = {
 npm run dev  # or npm run build --watch`}
       </CodeBlock>
       <Typography as="h4">Why Not Source Aliases for Everything?</Typography>
-      <Typography color="medium">
+      <Typography color="light">
         Source aliases bypass the package's build pipeline, which breaks packages using:
       </Typography>
       <CodeBlock>

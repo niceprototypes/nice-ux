@@ -1,12 +1,12 @@
 import Flex from "nice-react-flex"
 import Typography from "nice-react-typography"
-import { getToken } from "nice-styles"
 import { useScroll } from "nice-react-scroll"
+import { getToken } from "nice-react-styles"
 
 export const ScrollPositionDisplay = () => {
   const scrollY = useScroll()
   return (
-    <Typography size="small" color="medium">
+    <Typography size="small" color="light">
       Scroll position: {Math.round(scrollY)}px
     </Typography>
   )
@@ -25,7 +25,7 @@ export const SectionContent = ({ title, color }: { title: string; color: string 
     <Typography as="h2" weight="bold" size="larger">
       {title}
     </Typography>
-    <Typography color="medium">
+    <Typography color="light">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
       veniam, quis nostrud exercitation ullamco laboris.

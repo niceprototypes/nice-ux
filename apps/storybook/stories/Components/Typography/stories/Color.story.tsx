@@ -1,10 +1,16 @@
 import Typography from "nice-react-typography"
-import { getToken } from "nice-styles"
+import { getToken } from "nice-react-styles"
 import Story from "../../../../src/components/Story"
 
 const ColorStory = () => (
   <Story
     variables={[
+      {
+        name: "lightest",
+        description: 'color="lightest"',
+        value: getToken("foregroundColor", "lightest").value,
+        demo: <Typography color="lightest">Lightest</Typography>,
+      },
       {
         name: "lighter",
         description: 'color="lighter"',
@@ -18,22 +24,11 @@ const ColorStory = () => (
         demo: <Typography color="light">Light</Typography>,
       },
       {
-        name: "medium",
-        description: 'color="medium"',
-        value: getToken("foregroundColor", "medium").value,
-        demo: <Typography color="medium">Medium</Typography>,
-      },
-      {
-        name: "heavy",
-        description: 'color="heavy"',
-        value: getToken("foregroundColor", "heavy").value,
-        demo: <Typography color="heavy">Heavy</Typography>,
-      },
-      {
         name: "base",
         description: 'color="base"',
         value: getToken("foregroundColor", "base").value,
         demo: <Typography color="base">Base</Typography>,
+        default: true,
       },
       {
         name: "disabled",

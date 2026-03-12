@@ -11,7 +11,7 @@ const FullWidthStory = () => (
         default: true,
         demo: (
           <Tile>
-            <Typography color="medium">Default width</Typography>
+            <Typography color="light">Default width</Typography>
           </Tile>
         ),
         code: `<Tile>\n+1{children}\n</Tile>`,
@@ -21,7 +21,7 @@ const FullWidthStory = () => (
         description: "fullWidth={true}",
         demo: (
           <Tile fullWidth>
-            <Typography color="medium">Full width tile</Typography>
+            <Typography color="light">Full width tile</Typography>
           </Tile>
         ),
         code: `<Tile fullWidth>\n+1{children}\n</Tile>`,

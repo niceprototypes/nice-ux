@@ -1,38 +1,19 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import { generateDescriptionString } from "../../../src/services"
 import DefaultStory from "./stories/Default.story"
 import CurrentIndexStory from "./stories/CurrentIndex.story"
 import IsAnimatingStory from "./stories/IsAnimating.story"
 import OnAnimationCompleteStory from "./stories/OnAnimationComplete.story"
 
 const meta = {
-  title: "Components/Slider",
+  title: "React/Components/Slider",
   parameters: {
     layout: "fullscreen",
     docs: {
-      description: {
-        component: generateDescriptionString("nice-react-slider", {
-          setup: [
-            {
-              value: 'import Slider from "nice-react-slider"',
-              code: true,
-              newLine: true,
-            },
-          ],
-          usage: [
-            {
-              value:
-                "<Slider currentIndex={0}>{slides}</Slider>",
-              code: true,
-            },
-          ],
-        }),
-      },
       source: { code: null },
       canvas: { sourceState: "none" },
     },
   },
-  tags: ["autodocs"],
+
   argTypes: {
     children: {
       description: "Array of slide elements to display",

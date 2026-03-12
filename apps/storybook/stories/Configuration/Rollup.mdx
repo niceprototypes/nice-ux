@@ -1,0 +1,26 @@
+import { Meta, Stories } from '@storybook/addon-docs/blocks'
+import * as RollupStories from './Rollup.stories'
+
+<Meta of={RollupStories} />
+
+# Rollup
+
+```bash
+npm install -D nice-configuration
+```
+
+### Setup
+
+```js
+import { createConfiguration } from "nice-configuration/rollup"
+```
+
+### Usage
+
+```js
+export default createConfiguration({ plugins: [...] })
+```
+
+---
+
+<Stories />

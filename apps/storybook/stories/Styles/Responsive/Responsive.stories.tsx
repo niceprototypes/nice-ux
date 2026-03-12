@@ -25,7 +25,7 @@ const meta = {
     },
     viewMode: "docs",
   },
-  tags: ["autodocs"],
+
 } satisfies Meta<typeof ResponsiveDemo>
 
 export default meta

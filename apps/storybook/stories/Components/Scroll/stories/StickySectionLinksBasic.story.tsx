@@ -10,7 +10,7 @@ const StickySectionLinksBasicStory = () => (
         description: "<StickySectionLinks links={...}>",
         demo: (
           <Flex direction="column" gap="small">
-            <Typography size="small" color="medium">
+            <Typography size="small" color="light">
               Navigation links with automatic active section highlighting.
               Uses IntersectionObserver for efficient detection.
             </Typography>
@@ -22,10 +22,10 @@ const StickySectionLinksBasicStory = () => (
               >
                 About
               </Typography>
-              <Typography size="small" color="medium">
+              <Typography size="small" color="light">
                 Services
               </Typography>
-              <Typography size="small" color="medium">
+              <Typography size="small" color="light">
                 Contact
               </Typography>
             </Flex>

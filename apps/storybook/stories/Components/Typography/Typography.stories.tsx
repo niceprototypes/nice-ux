@@ -11,7 +11,7 @@ import SizeStory from "./stories/Size.story"
 import WeightStory from "./stories/Weight.story"
 
 const meta = {
-  title: "Components/Typography",
+  title: "React/Components/Typography",
   component: Typography,
   parameters: {
     layout: "padded",
@@ -20,7 +20,7 @@ const meta = {
       canvas: { sourceState: "none" },
     },
   },
-  tags: ["autodocs"],
+
   argTypes: {
     children: {
       name: "children *",
@@ -75,10 +75,9 @@ const meta = {
       description: "[`Tokens.foregroundColor`](/?path=/story/styles-tokens--foreground-color)",
       control: "select",
       options: [
+        "lightest",
         "lighter",
         "light",
-        "medium",
-        "heavy",
         "base",
         "disabled",
         "link",

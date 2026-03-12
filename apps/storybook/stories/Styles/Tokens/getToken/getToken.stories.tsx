@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import { getToken } from "nice-styles"
+import { getToken } from "nice-react-styles"
 import Flex from "nice-react-flex"
 import Typography from "nice-react-typography"
 import VariableList from "../../../../src/components/VariableList"
 import DemoDots from "../../../../src/components/DemoDots"
-import { generateDescriptionString, createToken } from "../../../../src/services"
+import { createToken } from "../../../../src/services"
 
 const CoreDemo = () => <></>
 
 const meta = {
-  title: "Styles/Tokens/getToken",
+  title: "React/Styles/getToken",
   component: CoreDemo,
   parameters: {
     layout: "padded",
@@ -17,32 +17,8 @@ const meta = {
       canvas: { hidden: true },
     },
     viewMode: "docs",
-    docs: {
-      description: {
-        component: generateDescriptionString("nice-styles", {
-          setup: [
-            {
-              value: 'import { getToken } from "nice-styles"',
-              code: true,
-              newLine: true,
-            },
-          ],
-          usage: [
-            { value: 'getToken("fontSize").key', code: true },
-            "\u2002\u2192\u2002",
-            { value: '"--np--font-size--base"', code: true, newLine: true },
-            { value: 'getToken("fontSize", "large").var', code: true },
-            "\u2002\u2192\u2002",
-            { value: '"var(--np--font-size--large)"', code: true, newLine: true },
-            { value: 'getToken("fontSize", "large").value', code: true },
-            "\u2002\u2192\u2002",
-            { value: '"24px"', code: true, newLine: true },
-          ],
-        }),
-      },
-    },
   },
-  tags: ["autodocs"],
+
 } satisfies Meta<typeof CoreDemo>
 
 export default meta
@@ -78,7 +54,7 @@ export const Tokens: Story = {
                 <Flex
                   style={{
                     width: "120px",
-                    backgroundColor: getToken("backgroundColor", "alternate").var,
+                    backgroundColor: getToken("backgroundColor", "dark").var,
                     borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2)`,
                   }}
                 >
@@ -105,7 +81,7 @@ export const Tokens: Story = {
           variables={createToken("animationEasing", ["base"], () => (
             <Flex
               style={{
-                backgroundColor: getToken("backgroundColor", "alternate").var,
+                backgroundColor: getToken("backgroundColor", "dark").var,
                 padding: getToken("gap").var,
                 borderRadius: getToken("borderRadius").var,
               }}
@@ -131,7 +107,7 @@ export const Tokens: Story = {
             "backgroundColor",
             [
               { name: "base", backgroundColor: getToken("backgroundColor").var },
-              { name: "alternate", backgroundColor: getToken("backgroundColor", "alternate").var },
+              { name: "dark", backgroundColor: getToken("backgroundColor", "dark").var },
             ],
             ({ backgroundColor }: any) => (
               <Flex
@@ -215,7 +191,7 @@ export const Tokens: Story = {
               <Flex
                 spacing="large"
                 style={{
-                  backgroundColor: getToken("backgroundColor", "alternate").var,
+                  backgroundColor: getToken("backgroundColor", "dark").var,
                   borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2)`,
                 }}
               >
@@ -259,7 +235,7 @@ export const Tokens: Story = {
         <VariableList
           variables={createToken(
             "foregroundColor",
-            ["lighter", "light", "medium", "heavy", "base", "disabled", "link", "success", "warning", "error"],
+            ["lightest", "lighter", "light", "base", "disabled", "link", "success", "warning", "error"],
             variant => (
               <Flex
                 style={{

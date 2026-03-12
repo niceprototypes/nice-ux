@@ -1,0 +1,28 @@
+import { Meta, Stories } from '@storybook/addon-docs/blocks'
+import * as GetTokenStories from './getToken.stories'
+
+<Meta of={GetTokenStories} />
+
+# getToken
+
+```bash
+npm install nice-react-styles
+```
+
+### Setup
+
+```js
+import { getToken } from "nice-react-styles"
+```
+
+### Usage
+
+```js
+getToken("fontSize").key            // → "--np--font-size--base"
+getToken("fontSize", "large").var   // → "var(--np--font-size--large)"
+getToken("fontSize", "large").value // → "24px"
+```
+
+---
+
+<Stories />
