@@ -10,10 +10,10 @@
     "dist"
   ],
   "scripts": {
-    "dev": "rollup -c --watch",
     "build": "rollup -c",
+    "dev": "rollup -c -w",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "npm run typecheck && npm run build",
+    "prepublishOnly": "npm run build",
     "prepare": "npm run build"
   },
   "keywords": [
