@@ -16,7 +16,7 @@ import {
 const ResponsiveDemo = () => <></>
 
 const meta = {
-  title: "Styles/Responsive",
+  title: "Tokens/Responsive",
   component: ResponsiveDemo,
   parameters: {
     layout: "padded",

@@ -5,7 +5,7 @@ import IconGrid from "../../../src/components/IconGrid"
 const IconsDemo = () => <></>
 
 const meta = {
-  title: "Icons",
+  title: "Tokens/Icons",
   component: IconsDemo,
   parameters: {
     layout: "padded",
