@@ -6,10 +6,7 @@
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "files": [
-    "dist",
-    "src",
-    "README.md",
-    "CHANGELOG.md"
+    "dist"
   ],
   "repository": {
     "type": "git",
@@ -35,19 +32,13 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "dev": "rollup -c -w",
     "build": "rollup -c",
-    "build:types": "tsc --emitDeclarationOnly",
-    "build:watch": "rollup -c -w",
+    "dev": "rollup -c -w",
     "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
-    "lint": "eslint src/**/*.{ts,tsx}",
-    "lint:fix": "eslint src/**/*.{ts,tsx} --fix",
+    "lint": "eslint src --ext .ts,.tsx",
     "typecheck": "tsc --noEmit",
-    "prepare": "npm run build",
     "prepublishOnly": "npm run build",
-    "clean": "rm -rf dist"
+    "prepare": "npm run build"
   },
   "peerDependencies": {
     "nice-react-flex": ">=2.0.0",
