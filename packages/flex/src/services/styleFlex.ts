@@ -1,4 +1,4 @@
-import { Breakpoint, FlexProps } from "../types"
+import { Breakpoint, FlexProps } from "../components/Flex/types"
 import { getBreakpointValue } from "./getBreakpointValue"
 import { getGapSize } from "./getGapSize"
 import { getSpacingValue } from "./getSpacingValue"

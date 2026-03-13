@@ -1,12 +1,4 @@
-import { FlexProps } from "../types"
-
-/**
- * List of props that accept breakpoint values.
- * These props can be specified as either simple values or breakpoint objects.
- * Spacing is handled directly by getSpacingValue and doesn't need normalization.
- */
-const breakpointProps = ["gap", "direction", "grow", "wrap", "alignItems", "justifyContent"] as const
-
+import { FlexProps } from "../types";
 /**
  * normalizeProps Helper
  *
@@ -25,15 +17,5 @@ const breakpointProps = ["gap", "direction", "grow", "wrap", "alignItems", "just
  * Note: The spacing prop is NOT normalized here. It's handled directly by
  * getSpacingValue which parses shorthand strings at render time.
  */
-export const normalizeProps = (props: FlexProps): FlexProps => {
-  const normalizedProps = { ...props }
-
-  breakpointProps.forEach((propName) => {
-    const value = props[propName as keyof FlexProps]
-    if (value !== undefined && typeof value !== "object") {
-      ;(normalizedProps as any)[propName] = { mobile: value }
-    }
-  })
-
-  return normalizedProps
-}
+export declare const normalizeProps: (props: FlexProps) => FlexProps;
+//# sourceMappingURL=normalizeProps.d.ts.map

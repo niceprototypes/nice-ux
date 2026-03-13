@@ -1,5 +1,5 @@
-import { Breakpoint, SpacingDefinition, Spacing, FlexSpacingShorthandType, FlexSpacingResponsiveType } from "../types"
-import { parseSpacingShorthand } from "../helpers/parseSpacingShorthand"
+import { Breakpoint, SpacingDefinition, Spacing, FlexSpacingShorthandType, FlexSpacingResponsiveType } from "../components/Flex/types"
+import { parseSpacingShorthand } from "../utilities/parseSpacingShorthand"
 import { isResponsiveObject } from "./isResponsiveObject"
 
 /**

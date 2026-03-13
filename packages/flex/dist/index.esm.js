@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { getConstant, getBreakpoint } from 'nice-styles';
+import { getConstant, getBreakpoint } from 'nice-react-styles';
 
 /**
  * Checks if a value is a responsive breakpoint object (has mobile, tablet, or desktop keys)
@@ -50,8 +50,8 @@ const getBreakpointValue = (value, breakpoint) => {
  * @returns {string | undefined} CSS variable reference or the string value as-is
  *
  * @example
- * getGapSize("smaller") // returns "var(--core--gap--smaller)"
- * getGapSize("base") // returns "var(--core--gap--base)"
+ * getGapSize("smaller") // returns "var(--np--gap--smaller)"
+ * getGapSize("base") // returns "var(--np--gap--base)"
  * getGapSize("2rem") // returns "2rem"
  * getGapSize("var(--custom-spacing)") // returns "var(--custom-spacing)"
  * getGapSize(null) // returns undefined
@@ -66,7 +66,7 @@ const getGapSize = (size) => {
     }
     // Check if it's a valid token key
     if (size === "smaller" || size === "small" || size === "base" || size === "large" || size === "larger") {
-        return getConstant("core", "gap", size).var;
+        return getConstant("gap", size).var;
     }
     // Otherwise return the custom string as-is
     return size;

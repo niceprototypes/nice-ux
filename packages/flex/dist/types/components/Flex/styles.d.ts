@@ -1,8 +1,3 @@
-import styled from "styled-components"
-import { getBreakpoint } from "nice-styles"
-import { FlexProps } from "./types"
-import { styleFlex } from "./services/styleFlex"
-
 /**
  * FlexStyled - Styled Component
  *
@@ -38,19 +33,5 @@ import { styleFlex } from "./services/styleFlex"
  *   <div>Content</div>
  * </FlexStyled>
  */
-export const FlexStyled = styled.div.withConfig({
-  shouldForwardProp: (prop) =>
-    !["mode", "spacing", "gap", "direction", "alignItems", "justifyContent", "grow", "wrap"].includes(
-      prop as string
-    ),
-})<FlexProps>`
-  ${(props) => styleFlex("mobile", props)}
-
-  ${getBreakpoint("tablet").query} {
-    ${(props) => styleFlex("tablet", props)}
-  }
-
-  ${getBreakpoint("desktop").query} {
-    ${(props) => styleFlex("desktop", props)}
-  }
-`
+export declare const FlexStyled: any;
+//# sourceMappingURL=styles.d.ts.map

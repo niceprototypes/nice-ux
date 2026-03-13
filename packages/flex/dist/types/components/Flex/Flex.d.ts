@@ -1,8 +1,5 @@
-import * as React from "react"
-import { FlexStyled } from "./styles"
-import { FlexProps } from "./types"
-import { normalizeProps } from "./helpers/normalizeProps"
-
+import * as React from "react";
+import { FlexProps } from "./types";
 /**
  * Flex Component
  *
@@ -70,14 +67,6 @@ import { normalizeProps } from "./helpers/normalizeProps"
  * The component uses styled-components for styling and filters out style props before
  * passing them to the DOM to avoid React warnings about unknown DOM properties.
  */
-const Flex: React.FC<FlexProps> = (props) => {
-  // Normalize props to ensure all breakpoint-capable props are in object format
-  // This simplifies the styling logic by providing a consistent prop structure
-  const normalizedProps = normalizeProps(props)
-
-  // Render the styled component with normalized props
-  // Children are passed through from original props to maintain reference integrity
-  return <FlexStyled {...normalizedProps}>{props.children}</FlexStyled>
-}
-
-export default Flex
+declare const Flex: React.FC<FlexProps>;
+export default Flex;
+//# sourceMappingURL=Flex.d.ts.map

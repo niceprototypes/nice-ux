@@ -1,4 +1,4 @@
-import { SpacingDefinition } from "../types"
+import { SpacingDefinition } from "../components/Flex/types"
 import { getGapSize } from "./getGapSize"
 
 /**

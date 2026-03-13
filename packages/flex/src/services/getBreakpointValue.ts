@@ -1,4 +1,4 @@
-import { Breakpoint } from "../types"
+import { Breakpoint } from "../components/Flex/types"
 import { isResponsiveObject } from "./isResponsiveObject"
 
 /**
