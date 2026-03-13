@@ -4,10 +4,10 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 var jsxRuntime = require('react/jsx-runtime');
 require('react');
-var Flex = require('nice-react-flex');
-var Typography = require('nice-react-typography');
 var styled = require('styled-components');
-var niceStyles = require('nice-styles');
+var Flex = require('nice-react-flex');
+var niceReactStyles = require('nice-react-styles');
+var Typography = require('nice-react-typography');
 
 /**
  * No-op component — tile CSS custom properties are now generated
@@ -25,10 +25,10 @@ const TileStyles = () => null;
  * @returns TokenResult with key, var, and value properties
  */
 function getTileToken(name, variant, mode) {
-    return niceStyles.getComponentToken("tile", name, variant, mode);
+    return niceReactStyles.getComponentToken("tile", name, variant, mode);
 }
 
-const OuterStyled = styled(Flex).withConfig({
+const OuterFlex = styled(Flex).withConfig({
     shouldForwardProp: (prop) => !prop.startsWith('$'),
 }) `
   display: flex;
@@ -68,7 +68,7 @@ const OuterStyled = styled(Flex).withConfig({
     }
 }}
 `;
-const InnerStyled = styled(Flex).withConfig({
+const InnerFlex = styled(Flex).withConfig({
     shouldForwardProp: (prop) => !prop.startsWith('$'),
 }) `
   margin: 0 auto;
@@ -87,13 +87,13 @@ const InnerStyled = styled(Flex).withConfig({
   `}
 `;
 
-const TileSlot = ({ children, }) => {
-    return (jsxRuntime.jsx(Flex, { direction: "column", gap: "large", children: children }));
+const TileContent = ({ children, contentTop, contentCenter, title, titleAs, titleSize, description, descriptionSize, align, gap, mode, }) => {
+    return (jsxRuntime.jsxs(Flex, { direction: "column", gap: gap, children: [contentTop, title && (jsxRuntime.jsx(Typography, { as: titleAs, size: titleSize, weight: "semibold", align: align, mode: mode, children: title })), contentCenter, description && (jsxRuntime.jsx(Typography, { color: "light", size: descriptionSize, align: align, mode: mode, children: description })), children] }));
 };
 
-const TileLayout = ({ children, contentLeft: LeftRendered, contentRight: RightRendered, }) => {
-    const SlotRendered = (jsxRuntime.jsx(TileSlot, { children: children }));
-    return (jsxRuntime.jsx(Flex, { direction: "column", gap: "larger", children: !!LeftRendered || !!RightRendered ? (jsxRuntime.jsxs(Flex, { direction: { mobile: "column", tablet: "row" }, alignItems: "center", gap: "large", children: [LeftRendered, jsxRuntime.jsx(Flex, { direction: "column", grow: 1, children: SlotRendered }), RightRendered] })) : SlotRendered }));
+const TileLayout = ({ children, contentTop, contentCenter, contentLeft: TileLeft, contentRight: TileRight, title, titleAs, titleSize, description, descriptionSize, align, gap, mode, }) => {
+    const content = (jsxRuntime.jsx(TileContent, { contentTop: contentTop, contentCenter: contentCenter, title: title, titleAs: titleAs, titleSize: titleSize, description: description, descriptionSize: descriptionSize, align: align, gap: gap, mode: mode, children: children }));
+    return (jsxRuntime.jsx(Flex, { direction: "column", gap: "larger", children: !!TileLeft || !!TileRight ? (jsxRuntime.jsxs(Flex, { direction: { mobile: "column", tablet: "row" }, alignItems: "center", gap: "large", children: [TileLeft, jsxRuntime.jsx(Flex, { direction: "column", grow: 1, children: content }), TileRight] })) : content }));
 };
 
 /**
@@ -107,12 +107,10 @@ const resolveHeaderAlign = (align) => {
         return align;
     return align.mobile || "center";
 };
-const Tile = ({ children, maxWidthTablet, maxWidthDesktop, className, style, backgroundImage, backgroundColor, foregroundColor, backgroundPosition = "center", backgroundSize = "cover", backgroundAttachment = "fixed", contentLeft: TileLeft, contentRight: TileRight, spacing, title, titleAs = "h3", description, align, mode, }) => {
-    const hasHeader = title || description;
+
+const Tile = ({ children, contentTop, contentCenter, contentLeft: TileLeft, contentRight: TileRight, title, titleAs = "h3", titleSize, description, descriptionSize, align, gap = "base", spacing, maxWidthTablet, maxWidthDesktop, backgroundImage, backgroundColor, backgroundPosition = "center", backgroundSize = "cover", backgroundAttachment = "fixed", foregroundColor, mode, className, style, }) => {
     const resolvedAlign = resolveHeaderAlign(align);
-    const HeaderContent = hasHeader ? (jsxRuntime.jsxs(Flex, { direction: "column", gap: "base", children: [title && (jsxRuntime.jsx(Typography, { as: titleAs, size: "large", weight: "semibold", align: resolvedAlign, mode: mode, children: title })), description && (jsxRuntime.jsx(Typography, { size: "base", align: resolvedAlign, mode: mode, children: description }))] })) : null;
-    const ContentWithHeader = hasHeader ? (jsxRuntime.jsxs(Flex, { direction: "column", gap: "large", children: [HeaderContent, children] })) : (children);
-    return (jsxRuntime.jsx(OuterStyled, { className: className, style: style, "$backgroundImage": backgroundImage, "$backgroundColor": backgroundColor, "$foregroundColor": foregroundColor, "$backgroundPosition": backgroundPosition, "$backgroundSize": backgroundSize, "$backgroundAttachment": backgroundAttachment, children: jsxRuntime.jsx(InnerStyled, { direction: "column", grow: 1, spacing: spacing, "$maxWidthTablet": maxWidthTablet, "$maxWidthDesktop": maxWidthDesktop, children: TileLeft || TileRight ? (jsxRuntime.jsx(TileLayout, { contentLeft: TileLeft, contentRight: TileRight, children: ContentWithHeader })) : (jsxRuntime.jsx(TileSlot, { children: ContentWithHeader })) }) }));
+    return (jsxRuntime.jsx(OuterFlex, { className: className, style: style, "$backgroundImage": backgroundImage, "$backgroundColor": backgroundColor, "$foregroundColor": foregroundColor, "$backgroundPosition": backgroundPosition, "$backgroundSize": backgroundSize, "$backgroundAttachment": backgroundAttachment, children: jsxRuntime.jsx(InnerFlex, { direction: "column", grow: 1, spacing: spacing, "$maxWidthTablet": maxWidthTablet, "$maxWidthDesktop": maxWidthDesktop, children: jsxRuntime.jsx(TileLayout, { contentTop: contentTop, contentCenter: contentCenter, contentLeft: TileLeft, contentRight: TileRight, title: title, titleAs: titleAs, titleSize: titleSize, description: description, descriptionSize: descriptionSize, align: resolvedAlign, gap: gap, mode: mode, children: children }) }) }));
 };
 
 exports.TileStyles = TileStyles;

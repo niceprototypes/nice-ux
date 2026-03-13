@@ -1,8 +1,8 @@
 import styled, { css } from "styled-components"
 import Flex from "nice-react-flex"
-import { getTileToken } from "./tokens"
+import { getTileToken } from "../../tokens"
 
-export const OuterStyled = styled(Flex).withConfig({
+export const OuterFlex = styled(Flex).withConfig({
   shouldForwardProp: (prop) => !prop.startsWith('$'),
 })<{
   $backgroundImage?: string
@@ -50,7 +50,7 @@ export const OuterStyled = styled(Flex).withConfig({
   }}
 `
 
-export const InnerStyled = styled(Flex).withConfig({
+export const InnerFlex = styled(Flex).withConfig({
   shouldForwardProp: (prop) => !prop.startsWith('$'),
 })<{
   $maxWidthTablet?: number

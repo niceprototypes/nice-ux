@@ -1,9 +1,9 @@
-import { jsx, jsxs } from 'react/jsx-runtime';
+import { jsxs, jsx } from 'react/jsx-runtime';
 import 'react';
-import Flex from 'nice-react-flex';
-import Typography from 'nice-react-typography';
 import styled, { css } from 'styled-components';
-import { getComponentToken } from 'nice-styles';
+import Flex from 'nice-react-flex';
+import { getComponentToken } from 'nice-react-styles';
+import Typography from 'nice-react-typography';
 
 /**
  * No-op component — tile CSS custom properties are now generated
@@ -24,7 +24,7 @@ function getTileToken(name, variant, mode) {
     return getComponentToken("tile", name, variant, mode);
 }
 
-const OuterStyled = styled(Flex).withConfig({
+const OuterFlex = styled(Flex).withConfig({
     shouldForwardProp: (prop) => !prop.startsWith('$'),
 }) `
   display: flex;
@@ -64,7 +64,7 @@ const OuterStyled = styled(Flex).withConfig({
     }
 }}
 `;
-const InnerStyled = styled(Flex).withConfig({
+const InnerFlex = styled(Flex).withConfig({
     shouldForwardProp: (prop) => !prop.startsWith('$'),
 }) `
   margin: 0 auto;
@@ -83,13 +83,13 @@ const InnerStyled = styled(Flex).withConfig({
   `}
 `;
 
-const TileSlot = ({ children, }) => {
-    return (jsx(Flex, { direction: "column", gap: "large", children: children }));
+const TileContent = ({ children, contentTop, contentCenter, title, titleAs, titleSize, description, descriptionSize, align, gap, mode, }) => {
+    return (jsxs(Flex, { direction: "column", gap: gap, children: [contentTop, title && (jsx(Typography, { as: titleAs, size: titleSize, weight: "semibold", align: align, mode: mode, children: title })), contentCenter, description && (jsx(Typography, { color: "light", size: descriptionSize, align: align, mode: mode, children: description })), children] }));
 };
 
-const TileLayout = ({ children, contentLeft: LeftRendered, contentRight: RightRendered, }) => {
-    const SlotRendered = (jsx(TileSlot, { children: children }));
-    return (jsx(Flex, { direction: "column", gap: "larger", children: !!LeftRendered || !!RightRendered ? (jsxs(Flex, { direction: { mobile: "column", tablet: "row" }, alignItems: "center", gap: "large", children: [LeftRendered, jsx(Flex, { direction: "column", grow: 1, children: SlotRendered }), RightRendered] })) : SlotRendered }));
+const TileLayout = ({ children, contentTop, contentCenter, contentLeft: TileLeft, contentRight: TileRight, title, titleAs, titleSize, description, descriptionSize, align, gap, mode, }) => {
+    const content = (jsx(TileContent, { contentTop: contentTop, contentCenter: contentCenter, title: title, titleAs: titleAs, titleSize: titleSize, description: description, descriptionSize: descriptionSize, align: align, gap: gap, mode: mode, children: children }));
+    return (jsx(Flex, { direction: "column", gap: "larger", children: !!TileLeft || !!TileRight ? (jsxs(Flex, { direction: { mobile: "column", tablet: "row" }, alignItems: "center", gap: "large", children: [TileLeft, jsx(Flex, { direction: "column", grow: 1, children: content }), TileRight] })) : content }));
 };
 
 /**
@@ -103,12 +103,10 @@ const resolveHeaderAlign = (align) => {
         return align;
     return align.mobile || "center";
 };
-const Tile = ({ children, maxWidthTablet, maxWidthDesktop, className, style, backgroundImage, backgroundColor, foregroundColor, backgroundPosition = "center", backgroundSize = "cover", backgroundAttachment = "fixed", contentLeft: TileLeft, contentRight: TileRight, spacing, title, titleAs = "h3", description, align, mode, }) => {
-    const hasHeader = title || description;
+
+const Tile = ({ children, contentTop, contentCenter, contentLeft: TileLeft, contentRight: TileRight, title, titleAs = "h3", titleSize, description, descriptionSize, align, gap = "base", spacing, maxWidthTablet, maxWidthDesktop, backgroundImage, backgroundColor, backgroundPosition = "center", backgroundSize = "cover", backgroundAttachment = "fixed", foregroundColor, mode, className, style, }) => {
     const resolvedAlign = resolveHeaderAlign(align);
-    const HeaderContent = hasHeader ? (jsxs(Flex, { direction: "column", gap: "base", children: [title && (jsx(Typography, { as: titleAs, size: "large", weight: "semibold", align: resolvedAlign, mode: mode, children: title })), description && (jsx(Typography, { size: "base", align: resolvedAlign, mode: mode, children: description }))] })) : null;
-    const ContentWithHeader = hasHeader ? (jsxs(Flex, { direction: "column", gap: "large", children: [HeaderContent, children] })) : (children);
-    return (jsx(OuterStyled, { className: className, style: style, "$backgroundImage": backgroundImage, "$backgroundColor": backgroundColor, "$foregroundColor": foregroundColor, "$backgroundPosition": backgroundPosition, "$backgroundSize": backgroundSize, "$backgroundAttachment": backgroundAttachment, children: jsx(InnerStyled, { direction: "column", grow: 1, spacing: spacing, "$maxWidthTablet": maxWidthTablet, "$maxWidthDesktop": maxWidthDesktop, children: TileLeft || TileRight ? (jsx(TileLayout, { contentLeft: TileLeft, contentRight: TileRight, children: ContentWithHeader })) : (jsx(TileSlot, { children: ContentWithHeader })) }) }));
+    return (jsx(OuterFlex, { className: className, style: style, "$backgroundImage": backgroundImage, "$backgroundColor": backgroundColor, "$foregroundColor": foregroundColor, "$backgroundPosition": backgroundPosition, "$backgroundSize": backgroundSize, "$backgroundAttachment": backgroundAttachment, children: jsx(InnerFlex, { direction: "column", grow: 1, spacing: spacing, "$maxWidthTablet": maxWidthTablet, "$maxWidthDesktop": maxWidthDesktop, children: jsx(TileLayout, { contentTop: contentTop, contentCenter: contentCenter, contentLeft: TileLeft, contentRight: TileRight, title: title, titleAs: titleAs, titleSize: titleSize, description: description, descriptionSize: descriptionSize, align: resolvedAlign, gap: gap, mode: mode, children: children }) }) }));
 };
 
 export { TileStyles, Tile as default, getTileToken };

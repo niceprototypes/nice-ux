@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ComponentType } from 'react';
 import { FlexSpacingType } from 'nice-react-flex';
-import { ModeType, TokenResult } from 'nice-styles';
+import { FontSizeType, GapType, ModeType, TokenResult } from 'nice-react-styles';
 import { AsType, AlignType } from 'nice-react-typography';
 
 /**
@@ -15,29 +15,31 @@ type TileHeaderAlignType = AlignType | {
 };
 interface TileProps {
     children?: React.ReactNode;
+    /** Content rendered above the title */
+    contentTop?: React.ReactNode;
+    /** Content rendered between the title and description */
+    contentCenter?: React.ReactNode;
+    contentLeft?: React.ReactNode;
+    contentRight?: React.ReactNode;
+    title?: React.ReactNode;
+    titleAs?: AsType;
+    titleSize?: FontSizeType;
+    description?: React.ReactNode;
+    descriptionSize?: FontSizeType;
+    align?: TileHeaderAlignType;
+    gap?: GapType;
+    spacing?: FlexSpacingType;
     maxWidthTablet?: number;
     maxWidthDesktop?: number;
-    className?: string;
-    style?: React.CSSProperties;
     backgroundImage?: string;
     backgroundColor?: string;
-    foregroundColor?: string;
     backgroundPosition?: string;
     backgroundSize?: string;
     backgroundAttachment?: string;
-    contentLeft?: React.ReactNode;
-    contentRight?: React.ReactNode;
-    spacing?: FlexSpacingType;
-    /** Title text displayed at the top of the tile */
-    title?: string;
-    /** HTML element for the title (default: "h2") */
-    titleAs?: AsType;
-    /** Description text displayed below the title */
-    description?: string;
-    /** Alignment for title and description (default: "center") */
-    align?: TileHeaderAlignType;
-    /** Pin token resolution to a specific mode instead of responding to media query */
+    foregroundColor?: string;
     mode?: ModeType;
+    className?: string;
+    style?: React.CSSProperties;
 }
 
 declare const Tile: React.FC<TileProps>;

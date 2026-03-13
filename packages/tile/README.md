@@ -95,8 +95,8 @@ export default App
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `children` | `React.ReactNode` | - | Content to be rendered inside the tile |
-| `breakpointMd` | `number` | `980` | Medium breakpoint value in pixels |
-| `breakpointLg` | `number` | `1280` | Large breakpoint value in pixels |
+| `maxWidthTablet` | `number` | `980` | Max-width constraint at tablet viewport |
+| `maxWidthDesktop` | `number` | `1280` | Max-width constraint at desktop viewport |
 | `className` | `string` | - | Custom CSS class name |
 | `style` | `React.CSSProperties` | - | Custom inline styles |
 | `backgroundImage` | `string` | - | Background image (use CSS `url()` syntax) |
@@ -118,13 +118,13 @@ The `spacing` prop accepts:
 - **SpacingDefinition**: Object with `x` and `y` properties for horizontal and vertical spacing
 - **Responsive object**: Different spacing for `sm`, `md`, and `lg` breakpoints
 
-## Custom Breakpoints
+## Custom Max-Width
 
-You can customize the breakpoints to match your design system:
+You can customize the max-width constraints to match your design system:
 
 ```tsx
-<Tile breakpointMd={768} breakpointLg={1024}>
-  <div>Content with custom breakpoints</div>
+<Tile maxWidthTablet={768} maxWidthDesktop={1024}>
+  <div>Content with custom max-width constraints</div>
 </Tile>
 ```
 
