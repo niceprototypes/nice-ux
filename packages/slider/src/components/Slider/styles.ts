@@ -1,7 +1,14 @@
-import styled from "styled-components"
-import styleHideScrollbar from "./styleHideScrollbar"
+import styled, { css } from "styled-components"
 
-export const ItemStyled = styled.div<{
+const styleHideScrollbar = css`
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`
+
+export const SliderItemStyled = styled.div<{
   $index: number
   $currentIndex: number
   $isAnimating: boolean
@@ -17,7 +24,7 @@ export const ItemStyled = styled.div<{
   transition: transform 0.3s ease-in-out;
 `
 
-export const OuterStyled = styled.div`
+export const SliderOuterStyled = styled.div`
   position: relative;
   flex: 1;
   height: 100%;

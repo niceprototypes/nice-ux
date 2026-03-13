@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
-import { ItemStyled, OuterStyled } from "./styles"
-import { SliderProps } from "./types"
+import { SliderItemStyled, SliderOuterStyled } from "./styles"
+import type { SliderProps } from "./types"
 
 const Slider: React.FC<SliderProps> = ({
   children,
@@ -18,18 +18,18 @@ const Slider: React.FC<SliderProps> = ({
   }, [isAnimating, onAnimationComplete])
 
   return (
-    <OuterStyled>
+    <SliderOuterStyled>
       {children.map((child, index) => (
-        <ItemStyled
+        <SliderItemStyled
           key={index}
           $index={index}
           $currentIndex={currentIndex}
           $isAnimating={isAnimating}
         >
           {child}
-        </ItemStyled>
+        </SliderItemStyled>
       ))}
-    </OuterStyled>
+    </SliderOuterStyled>
   )
 }
 
