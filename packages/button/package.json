@@ -1,6 +1,6 @@
 {
   "name": "nice-react-button",
-  "version": "3.2.5",
+  "version": "4.0.0",
   "description": "A flexible and customizable React button component with built-in theming support",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -50,9 +50,9 @@
     "clean": "rm -rf dist"
   },
   "peerDependencies": {
-    "nice-react-flex": ">=1.0.0",
-    "nice-react-icon": ">=2.0.0",
-    "nice-react-typography": ">=4.0.0",
+    "nice-react-flex": ">=2.0.0",
+    "nice-react-icon": ">=3.0.0",
+    "nice-react-typography": ">=5.0.0",
     "react": ">=19.2.0",
     "react-dom": ">=19.2.0",
     "styled-components": ">=6.1.18"
@@ -114,7 +114,7 @@
     "npm": ">=6.0.0"
   },
   "dependencies": {
-    "nice-react-styles": "file:../nice-react-styles",
-    "nice-react-typography": "file:../nice-react-typography"
+    "nice-react-styles": "^4.0.0",
+    "nice-react-typography": "^5.0.0"
   }
 }
