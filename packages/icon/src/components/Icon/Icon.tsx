@@ -37,6 +37,7 @@ const Icon: React.FC<IconProps> = ({
   strokeWidth = "base",
   className,
   strokeScaling = false,
+  mode,
   vendor = false,
   vendorComponent: VendorComponent,
 }) => {
@@ -52,6 +53,7 @@ const Icon: React.FC<IconProps> = ({
         $strokeWidth={strokeWidth}
         $strokeScaling={strokeScaling}
         $spinning={spinning}
+        $mode={mode}
         className={className}
       >
         <VendorComponent />
@@ -70,6 +72,7 @@ const Icon: React.FC<IconProps> = ({
         $strokeWidth={strokeWidth}
         $strokeScaling={strokeScaling}
         $spinning={spinning}
+        $mode={mode}
         className={className}
       >
         {url ? <ImageStyled src={url} alt="" /> : <SvgIcon viewBox={viewBox} />}
@@ -89,6 +92,7 @@ const Icon: React.FC<IconProps> = ({
           $strokeWidth={strokeWidth}
           $strokeScaling={strokeScaling}
           $spinning={spinning}
+          $mode={mode}
           className={className}
         >
           <VendorIcon />
@@ -107,6 +111,7 @@ const Icon: React.FC<IconProps> = ({
       $strokeWidth={strokeWidth}
       $strokeScaling={strokeScaling}
       $spinning={spinning}
+      $mode={mode}
       className={className}
     >
       {PlaceholderIcon && <PlaceholderIcon viewBox={viewBox} />}
