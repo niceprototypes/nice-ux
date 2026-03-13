@@ -6,8 +6,7 @@
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "files": [
-    "dist",
-    "README.md"
+    "dist"
   ],
   "repository": {
     "type": "git",
@@ -33,13 +32,11 @@
   "type": "module",
   "scripts": {
     "build": "rollup -c",
-    "build:watch": "rollup -c -w",
     "dev": "rollup -c -w",
     "test": "jest",
     "lint": "eslint src --ext .ts,.tsx",
     "typecheck": "tsc --noEmit",
     "prepublishOnly": "npm run build",
-    "clean": "rm -rf dist",
     "prepare": "npm run build"
   },
   "peerDependencies": {
