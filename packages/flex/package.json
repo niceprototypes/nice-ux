@@ -1,6 +1,6 @@
 {
   "name": "nice-react-flex",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "type": "module",
   "description": "A flexible and responsive Flex component for React with styled-components",
   "main": "dist/index.js",
@@ -63,6 +63,6 @@
   },
   "homepage": "https://github.com/niceprototypes/nice-react-flex#readme",
   "dependencies": {
-    "nice-react-styles": "file:../nice-react-styles"
+    "nice-react-styles": "^4.0.0"
   }
 }
