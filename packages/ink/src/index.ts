@@ -24,10 +24,9 @@
  * ```
  *
  * Available color values from nice-styles ForegroundColorType:
+ * - "lightest" - Lightest foreground color
  * - "lighter" - Very light foreground color
  * - "light" - Light foreground color
- * - "medium" - Medium foreground color
- * - "heavy" - Heavy/dark foreground color
  * - "base" - Base/default foreground color
  * - "disabled" - Disabled state color
  * - "link" - Link color
@@ -39,11 +38,11 @@
  */
 
 // Main component export
-export { default } from "./Typography"
+export { default } from "./components/Typography"
 
 // Type exports
-export { default as TypographyTypes } from "./types"
-export type { TypographyProps, TypographyModeType, AsType, AlignType } from "./types"
+export { TypographyTypes } from "./components/Typography"
+export type { TypographyProps, TypographyModeType, AsType, AlignType } from "./components/Typography"
 
 // Token exports
 export { TypographyStyles, getTypographyToken } from "./tokens"
