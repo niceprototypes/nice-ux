@@ -64,6 +64,6 @@
   },
   "homepage": "https://github.com/niceprototypes/nice-react-tile#readme",
   "dependencies": {
-    "nice-react-styles": "^4.0.0"
+    "nice-react-styles": "file:../nice-react-styles"
   }
 }
