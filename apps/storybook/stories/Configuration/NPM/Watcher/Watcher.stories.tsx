@@ -301,6 +301,52 @@ CRA/webpack recompiles`}</CodeBlock>
   ),
 }
 
+export const Publish: Story = {
+  name: "--publish",
+  parameters: storyParameters,
+  render: () => (
+    <Flex direction="column" gap="large">
+      <Typography as="h3">--publish</Typography>
+      <Typography color="light">
+        Publishes Nice ecosystem packages to npm in dependency order. Handles
+        version bumping, file: dep swapping, building, and restoring local refs.
+      </Typography>
+      <CodeBlock>{`# Publish all changed packages (interactive prompts)
+nnl --publish
+
+# Publish specific packages
+nnl --publish nice-styles,nice-react-styles
+
+# Preview what would be published
+nnl --publish --dry-run`}</CodeBlock>
+      <Typography as="h4">Workflow</Typography>
+      <CodeBlock>{`1. Scans ~/Code/nice-* for packages with changes
+2. Prompts for version bump (patch/minor/major/skip)
+3. Swaps file: deps → semver ranges
+4. Builds each package
+5. Publishes in dependency order (npm prompts for OTP)
+6. Restores file: refs for local development
+7. Commits and pushes version changes`}</CodeBlock>
+      <Typography as="h4">Publish Order</Typography>
+      <Typography color="light">
+        Packages are published bottom-to-top per dependency chain:
+      </Typography>
+      <CodeBlock>{`Tier 1: nice-styles, nice-icons, nice-configuration, nice-npm-link, nice-vite-watcher
+Tier 2: nice-react-styles
+Tier 3: nice-react-flex, nice-react-typography
+Tier 4: nice-react-icon, nice-react-tile
+Tier 5: nice-react-button
+Tier 6: nice-react-scroll, nice-react-slider, nice-react-device-detector, nice-react-lightbox`}</CodeBlock>
+      <Typography as="h4">Dry Run</Typography>
+      <Typography color="light">
+        Use --dry-run or --dry-publish to preview without making changes:
+      </Typography>
+      <CodeBlock>{`nnl --publish --dry-run
+nnl --dry-publish`}</CodeBlock>
+    </Flex>
+  ),
+}
+
 export const Troubleshooting: Story = {
   name: "troubleshooting",
   parameters: storyParameters,
