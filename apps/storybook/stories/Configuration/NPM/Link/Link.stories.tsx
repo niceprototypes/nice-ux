@@ -1,14 +1,14 @@
-import type { Meta, StoryObj } from "@storybook/react"
+import type { Meta, StoryObj } from "@storybook/react-vite"
 
 import Typography from "nice-react-typography"
 import Flex from "nice-react-flex"
 import CodeBlock from "../../../../src/components/CodeBlock"
 
-const WatcherDemo = () => <></>
+const LinkDemo = () => <></>
 
 const meta = {
-  title: "Configuration/NPM/Watcher",
-  component: WatcherDemo,
+  title: "Configuration/NPM/Link",
+  component: LinkDemo,
   parameters: {
     layout: "padded",
     previewTabs: {
@@ -17,7 +17,7 @@ const meta = {
     viewMode: "docs",
   },
 
-} satisfies Meta<typeof WatcherDemo>
+} satisfies Meta<typeof LinkDemo>
 
 export default meta
 type Story = StoryObj<typeof meta>

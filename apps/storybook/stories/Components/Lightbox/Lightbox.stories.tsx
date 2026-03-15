@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react"
+import type { Meta, StoryObj } from "@storybook/react-vite"
 import Lightbox from "nice-react-lightbox"
 import BasicStory from "./stories/Basic.story"
 import CaptionStory from "./stories/Caption.story"

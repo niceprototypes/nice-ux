@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react"
+import type { Meta, StoryObj } from "@storybook/react-vite"
 import UseScrollStory from "./stories/UseScroll.story"
 import StickyBasicStory from "./stories/StickyBasic.story"
 import StickyOrderStory from "./stories/StickyOrder.story"

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react"
+import type { Meta, StoryObj } from "@storybook/react-vite"
 import Tile from "nice-react-tile"
 import BasicStory from "./stories/Basic.story"
 import BackgroundColorStory from "./stories/BackgroundColor.story"

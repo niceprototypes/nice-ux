@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react"
+import type { Meta, StoryObj } from "@storybook/react-vite"
 
 import Typography from "nice-react-typography"
 import Flex from "nice-react-flex"
@@ -7,7 +7,7 @@ import CodeBlock from "../../src/components/CodeBlock"
 const ViteWatcherDemo = () => <></>
 
 const meta = {
-  title: "Configuration/ViteWatcher",
+  title: "Configuration/Vite/Watcher",
   component: ViteWatcherDemo,
   parameters: {
     layout: "padded",

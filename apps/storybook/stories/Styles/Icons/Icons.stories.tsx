@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react"
+import type { Meta, StoryObj } from "@storybook/react-vite"
 import { iconNames } from "nice-react-icon"
 import IconGrid from "../../../src/components/IconGrid"
 

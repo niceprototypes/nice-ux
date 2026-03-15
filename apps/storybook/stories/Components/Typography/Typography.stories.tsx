@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react"
+import type { Meta, StoryObj } from "@storybook/react-vite"
 import Typography from "nice-react-typography"
 import AlignStory from "./stories/Align.story"
 import AntialiasedStory from "./stories/Antialiased.story"

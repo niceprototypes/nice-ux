@@ -16,10 +16,9 @@
     "publish:react-icon": "npm run prepublish:react-icon && npm --prefix ../nice-react-icon publish"
   },
   "dependencies": {
-    "@storybook/addon-docs": "^9.1.10",
-    "@storybook/addon-links": "^9.1.10",
-    "@storybook/react": "^9.1.10",
-    "@storybook/react-vite": "^9.1.10",
+    "@storybook/addon-docs": "^10.2.19",
+    "@storybook/addon-links": "^10.2.19",
+    "@storybook/react-vite": "^10.2.19",
     "nice-react-button": "file:../nice-react-button",
     "nice-react-flex": "file:../nice-react-flex",
     "nice-react-device-detector": "file:../nice-react-device-detector",
@@ -34,7 +33,7 @@
     "nice-styles": "file:../nice-styles",
     "react": "19.2.0",
     "react-dom": "19.2.0",
-    "storybook": "^9.1.10",
+    "storybook": "^10.2.19",
     "styled-components": "6.1.19"
   },
   "devDependencies": {

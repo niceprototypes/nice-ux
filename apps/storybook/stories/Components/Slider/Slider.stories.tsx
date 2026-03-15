@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react"
+import type { Meta, StoryObj } from "@storybook/react-vite"
 import DefaultStory from "./stories/Default.story"
 import CurrentIndexStory from "./stories/CurrentIndex.story"
 import IsAnimatingStory from "./stories/IsAnimating.story"

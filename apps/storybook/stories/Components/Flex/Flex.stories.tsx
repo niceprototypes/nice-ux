@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react"
+import type { Meta, StoryObj } from "@storybook/react-vite"
 import Flex from "nice-react-flex"
 import BasicStory from "./stories/Basic.story"
 import DirectionStory from "./stories/Direction.story"

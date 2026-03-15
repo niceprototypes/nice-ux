@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react"
+import type { Meta, StoryObj } from "@storybook/react-vite"
 import Flex from "nice-react-flex"
 import Typography from "nice-react-typography"
 import CodeBlock from "../../../src/components/CodeBlock"

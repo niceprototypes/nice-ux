@@ -1,9 +1,16 @@
+// This file has been automatically migrated to valid ESM format by Storybook.
+import { fileURLToPath } from "node:url";
+import { createRequire } from "node:module";
 import type { StorybookConfig } from "@storybook/react-vite"
 import { join, dirname, resolve } from "path"
 import {
   viteWatcher,
   getSourceAliases,
 } from "nice-vite-watcher"
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const require = createRequire(import.meta.url);
 
 /**
  * Resolves the absolute path of a package.

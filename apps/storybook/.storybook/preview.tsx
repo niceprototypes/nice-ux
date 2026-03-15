@@ -1,5 +1,5 @@
 import React from 'react'
-import type { Preview } from '@storybook/react'
+import type { Preview } from '@storybook/react-vite'
 import { create } from 'storybook/theming'
 import { StylesProvider, getToken } from 'nice-react-styles'
 import './custom.css'
@@ -32,9 +32,9 @@ const preview: Preview = {
       storySort: {
         order: [
           'Welcome', ['Design Tokens', 'Design Patterns', 'UI Components'],
-          'Tokens', ['Responsive', 'Icons'],
-          'React', ['Styles', ['StylesProvider', 'getToken', 'createTokens'], 'Hooks', 'Components'],
-          'Configuration', ['Rollup', 'TypeScript', 'Jest', 'ViteWatcher', 'NPM']
+          'Tokens', ['Browse', 'Responsive', 'Icons'],
+          'React', ['Styles', ['StylesProvider', 'getToken', 'createTokens'], 'Components', 'Hooks'],
+          'Configuration', ['NPM', 'Vite', 'TypeScript', 'Jest', 'Rollup']
         ],
       },
     },
