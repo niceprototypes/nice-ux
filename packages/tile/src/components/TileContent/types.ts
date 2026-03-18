@@ -9,7 +9,7 @@ export interface TileContentProps {
   title?: React.ReactNode
   titleAs?: AsType
   titleSize?: FontSizeType
-  description?: React.ReactNode
+  description?: React.ReactNode | string[]
   descriptionSize?: FontSizeType
   align?: AlignType
   gap?: GapType

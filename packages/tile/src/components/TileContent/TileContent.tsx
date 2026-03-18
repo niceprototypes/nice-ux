@@ -32,14 +32,32 @@ const TileContent: React.FC<TileContentProps> = ({
       )}
       {contentCenter}
       {description && (
-        <Typography
-          color="light"
-          size={descriptionSize}
-          align={align}
-          mode={mode}
-        >
-          {description}
-        </Typography>
+        Array.isArray(description)
+          ? (
+            <Flex direction="column" gap={descriptionSize}>
+              {description.map((text, index) => (
+                <Typography
+                  key={index}
+                  color="light"
+                  size={descriptionSize}
+                  align={align}
+                  mode={mode}
+                >
+                  {text}
+                </Typography>
+              ))}
+            </Flex>
+          )
+          : (
+            <Typography
+              color="light"
+              size={descriptionSize}
+              align={align}
+              mode={mode}
+            >
+              {description}
+            </Typography>
+          )
       )}
       {children}
     </Flex>

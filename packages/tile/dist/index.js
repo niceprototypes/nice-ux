@@ -88,7 +88,9 @@ const InnerFlex = styled(Flex).withConfig({
 `;
 
 const TileContent = ({ children, contentTop, contentCenter, title, titleAs, titleSize, description, descriptionSize, align, gap, mode, }) => {
-    return (jsxRuntime.jsxs(Flex, { direction: "column", gap: gap, children: [contentTop, title && (jsxRuntime.jsx(Typography, { as: titleAs, size: titleSize, weight: "semibold", align: align, mode: mode, children: title })), contentCenter, description && (jsxRuntime.jsx(Typography, { color: "light", size: descriptionSize, align: align, mode: mode, children: description })), children] }));
+    return (jsxRuntime.jsxs(Flex, { direction: "column", gap: gap, children: [contentTop, title && (jsxRuntime.jsx(Typography, { as: titleAs, size: titleSize, weight: "semibold", align: align, mode: mode, children: title })), contentCenter, description && (Array.isArray(description)
+                ? (jsxRuntime.jsx(Flex, { direction: "column", gap: descriptionSize, children: description.map((text, index) => (jsxRuntime.jsx(Typography, { color: "light", size: descriptionSize, align: align, mode: mode, children: text }, index))) }))
+                : (jsxRuntime.jsx(Typography, { color: "light", size: descriptionSize, align: align, mode: mode, children: description }))), children] }));
 };
 
 const TileLayout = ({ children, contentTop, contentCenter, contentLeft: TileLeft, contentRight: TileRight, title, titleAs, titleSize, description, descriptionSize, align, gap, mode, }) => {

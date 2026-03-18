@@ -22,7 +22,7 @@ export interface TileProps {
     title?: React.ReactNode;
     titleAs?: AsType;
     titleSize?: FontSizeType;
-    description?: React.ReactNode;
+    description?: React.ReactNode | string[];
     descriptionSize?: FontSizeType;
     align?: TileHeaderAlignType;
     gap?: GapType;
