@@ -4,7 +4,6 @@ import Flex from "nice-react-flex"
 import CodeBlock from "../../../../src/components/CodeBlock"
 import Typography from "nice-react-typography"
 
-
 const ComponentDemo = () => <></>
 
 const { GlobalStyles } = createTokens({
@@ -33,7 +32,6 @@ const meta = {
     },
     viewMode: "docs",
   },
-
 } satisfies Meta<typeof ComponentDemo>
 
 export default meta
@@ -64,8 +62,8 @@ export const OverrideExisting: Story = {
     <Flex direction="column" gap="large">
       <GlobalStyles />
       <Typography color="light">
-        Use an existing token key with an existing variant name to replace its value.
-        Here, the base font size is changed from the default to 18px.
+        Use an existing token key with an existing variant name to replace its
+        value. Here, the base font size is changed from the default to 18px.
       </Typography>
       <CodeBlock>{`createTokens({
   fontSize: {
@@ -76,7 +74,9 @@ export const OverrideExisting: Story = {
         <Flex gap="base" alignItems="center">
           <Typography code>--np--font-size--base</Typography>
           <Typography color="light">18px</Typography>
-          <Typography color="lightest">(was {getToken("fontSize").value})</Typography>
+          <Typography color="lightest">
+            (was {getToken("fontSize").value})
+          </Typography>
         </Flex>
       </Flex>
     </Flex>
@@ -90,9 +90,9 @@ export const ExtendExisting: Story = {
     <Flex direction="column" gap="large">
       <GlobalStyles />
       <Typography color="light">
-        Use an existing token key with a new variant name to extend it.
-        Here, a "brand" variant is added to foregroundColor alongside the
-        existing variants (base, light, lighter, etc).
+        Use an existing token key with a new variant name to extend it. Here, a
+        "brand" variant is added to foregroundColor alongside the existing
+        variants (base, light, lighter, etc).
       </Typography>
       <CodeBlock>{`createTokens({
   foregroundColor: {
@@ -108,7 +108,9 @@ export const ExtendExisting: Story = {
         </Flex>
         <Flex gap="base" alignItems="center">
           <Typography code>--np--foreground-color--base</Typography>
-          <Typography color="light">{getToken("foregroundColor").value}</Typography>
+          <Typography color="light">
+            {getToken("foregroundColor").value}
+          </Typography>
           <ColorSwatch color={getToken("foregroundColor").value} />
           <Typography color="lightest">(unchanged)</Typography>
         </Flex>
@@ -124,8 +126,8 @@ export const NewToken: Story = {
     <Flex direction="column" gap="large">
       <GlobalStyles />
       <Typography color="light">
-        Use a token key that doesn't exist in the base system to create
-        an entirely new token with its own variants.
+        Use a token key that doesn't exist in the base system to create an
+        entirely new token with its own variants.
       </Typography>
       <CodeBlock>{`createTokens({
   headerHeight: {
@@ -156,11 +158,11 @@ export const Combined: Story = {
     <Flex direction="column" gap="large">
       <GlobalStyles />
       <Typography color="light">
-        All three patterns work in a single call. The token map merges
-        into the existing registry — overriding values where keys match,
-        extending where variants are new, and creating where tokens are
-        new. There is no distinction between "modifying" and "creating."
-        The system overloads the existing tokens transparently.
+        All three patterns work in a single call. The token map merges into the
+        existing registry — overriding values where keys match, extending where
+        variants are new, and creating where tokens are new. There is no
+        distinction between "modifying" and "creating." The system overloads the
+        existing tokens transparently.
       </Typography>
       <CodeBlock>{`const { GlobalStyles } = createTokens({
   fontSize: { base: "18px" },            // override

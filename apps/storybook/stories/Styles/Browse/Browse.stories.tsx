@@ -35,7 +35,7 @@ const loremIpsum =
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore."
 
 export const AllTokens: Story = {
-  name: "All Tokens",
+  name: "Browse",
   parameters: storyParameters,
   render: () => (
     <Flex direction="column" gap="larger">
