@@ -13,13 +13,14 @@ export const StyledButton = styled.button.withConfig({
   $borderRadius: ButtonBorderRadiusType
   $borderWidth: BorderWidthType
   $disabled: boolean
+  $link: boolean
   $mode?: ModeType
   $size: CellHeightType
   $square: boolean
   $state: ButtonStateType
   $status: ButtonStatusType
 }>`
-  /* Reset browser button styles */
+  /* Reset */
   position: relative;
   margin: 0;
   outline: none;
@@ -27,40 +28,50 @@ export const StyledButton = styled.button.withConfig({
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
-  text-align: center;
-
-  /* Button-specific styles */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: ${({ $square, $size }) => !$square && `0 ${getButtonToken("spacing", $size).var}`};
-  height: ${({ $size }) => getButtonToken("size", $size).var};
-  width: 100%;
-  padding: ${({ $square, $size }) => ($square ? "0" : `0 ${getButtonToken("spacing", $size).var}`)};
-  font-weight: ${getToken("fontWeight", "base").var};
-
-  /* Colors */
-  background-color: ${({ $status, $state, $mode }) =>
-    getStatusToken($status, $state, "backgroundColor", $mode).var};
-  color: ${({ $status, $state, $mode }) =>
-    getStatusToken($status, $state, "foregroundColor", $mode).var};
-
-  /* Border */
-  border-style: solid;
-  border-width: ${({ $borderWidth }) => getToken("borderWidth", $borderWidth).var};
-  border-color: ${({ $status, $state, $mode }) =>
-    getStatusToken($status, $state, "borderColor", $mode).var};
-  border-radius: ${({ $borderRadius }) => getButtonToken("borderRadius", $borderRadius).var};
   cursor: ${({ $disabled }) => ($disabled ? "not-allowed" : "pointer")};
+  
+  ${({ $disabled }) => $disabled && `-webkit-tap-highlight-color: transparent;`}
 
-  /* Transitions */
-  transition: all 0.15s ease-in-out;
+  ${({
+    $link,
+    $square,
+    $size,
+    $status,
+    $state,
+    $mode,
+    $borderWidth,
+    $borderRadius,
+    $backgroundImage,
+    $borderColor,
+    $disabled,
+  }) =>
+    !$link &&
+    `
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: ${!$square ? `0 ${getButtonToken("spacing", $size).var}` : "0"};
+    height: ${getButtonToken("size", $size).var};
+    width: 100%;
+    padding: ${$square ? "0" : `0 ${getButtonToken("spacing", $size).var}`};
+    font-weight: ${getToken("fontWeight", "base").var};
+    background-color: ${getStatusToken($status, $state, "backgroundColor", $mode).var};
+    color: ${getStatusToken($status, $state, "foregroundColor", $mode).var};
+    border-style: solid;
+    border-width: ${getToken("borderWidth", $borderWidth).var};
+    border-color: ${getStatusToken($status, $state, "borderColor", $mode).var};
+    border-radius: ${getButtonToken("borderRadius", $borderRadius).var};
+    transition: all 0.15s ease-in-out;
+    ${$backgroundImage ? `background-image: ${$backgroundImage};` : ""}
+    ${$borderColor ? `border-color: ${$borderColor};` : ""}
+  `}
 
-  /* Overrides */
-  ${({ $backgroundImage }) => $backgroundImage && `background-image: ${$backgroundImage};`}
-  ${({ $borderColor }) => $borderColor && `border-color: ${$borderColor};`}
-
-  ${getBreakpoint("tablet").query} {
-    width: ${({ $square, $size }) => ($square ? getButtonToken("size", $size).var : "auto")};
-  }
+  ${({ $link, $square, $size }) =>
+    !$link &&
+    `
+    ${getBreakpoint("tablet").query} {
+      width: ${$square ? getButtonToken("size", $size).var : "auto"};
+    }
+  `}
 `
