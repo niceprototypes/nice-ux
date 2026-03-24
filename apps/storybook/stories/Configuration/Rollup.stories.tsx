@@ -9,14 +9,10 @@ const RollupDemo = () => <></>
 const meta = {
   title: "Configuration/Rollup",
   component: RollupDemo,
+  tags: ['!dev'],
   parameters: {
     layout: "padded",
-    previewTabs: {
-      canvas: { hidden: true },
-    },
-    viewMode: "docs",
   },
-
 } satisfies Meta<typeof RollupDemo>
 
 export default meta

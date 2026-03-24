@@ -18,14 +18,10 @@ const ResponsiveDemo = () => <></>
 const meta = {
   title: "Tokens/Responsive",
   component: ResponsiveDemo,
+  tags: ['!dev'],
   parameters: {
     layout: "padded",
-    previewTabs: {
-      canvas: { hidden: true },
-    },
-    viewMode: "docs",
   },
-
 } satisfies Meta<typeof ResponsiveDemo>
 
 export default meta

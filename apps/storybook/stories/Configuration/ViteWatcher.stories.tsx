@@ -9,14 +9,10 @@ const ViteWatcherDemo = () => <></>
 const meta = {
   title: "Configuration/Vite/Watcher",
   component: ViteWatcherDemo,
+  tags: ['!dev'],
   parameters: {
     layout: "padded",
-    previewTabs: {
-      canvas: { hidden: true },
-    },
-    viewMode: "docs",
   },
-
 } satisfies Meta<typeof ViteWatcherDemo>
 
 export default meta

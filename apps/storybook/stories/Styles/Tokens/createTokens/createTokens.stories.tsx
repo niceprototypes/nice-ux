@@ -25,12 +25,9 @@ const { GlobalStyles } = createTokens({
 const meta = {
   title: "React/Styles/createTokens",
   component: ComponentDemo,
+  tags: ['!dev'],
   parameters: {
     layout: "padded",
-    previewTabs: {
-      canvas: { hidden: true },
-    },
-    viewMode: "docs",
   },
 } satisfies Meta<typeof ComponentDemo>
 

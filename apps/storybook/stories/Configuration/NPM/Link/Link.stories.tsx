@@ -9,14 +9,10 @@ const LinkDemo = () => <></>
 const meta = {
   title: "Configuration/NPM/Link",
   component: LinkDemo,
+  tags: ['!dev'],
   parameters: {
     layout: "padded",
-    previewTabs: {
-      canvas: { hidden: true },
-    },
-    viewMode: "docs",
   },
-
 } satisfies Meta<typeof LinkDemo>
 
 export default meta

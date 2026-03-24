@@ -9,14 +9,10 @@ const TypeScriptDemo = () => <></>
 const meta = {
   title: "Configuration/TypeScript",
   component: TypeScriptDemo,
+  tags: ['!dev'],
   parameters: {
     layout: "padded",
-    previewTabs: {
-      canvas: { hidden: true },
-    },
-    viewMode: "docs",
   },
-
 } satisfies Meta<typeof TypeScriptDemo>
 
 export default meta

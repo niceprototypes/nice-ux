@@ -9,14 +9,10 @@ const ReactDemo = () => <></>
 const meta = {
   title: "React/Styles/StylesProvider",
   component: ReactDemo,
+  tags: ['!dev'],
   parameters: {
     layout: "padded",
-    previewTabs: {
-      canvas: { hidden: true },
-    },
-    viewMode: "docs",
   },
-
 } satisfies Meta<typeof ReactDemo>
 
 export default meta

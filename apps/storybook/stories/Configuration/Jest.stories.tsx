@@ -9,14 +9,10 @@ const JestDemo = () => <></>
 const meta = {
   title: "Configuration/Jest",
   component: JestDemo,
+  tags: ['!dev'],
   parameters: {
     layout: "padded",
-    previewTabs: {
-      canvas: { hidden: true },
-    },
-    viewMode: "docs",
   },
-
 } satisfies Meta<typeof JestDemo>
 
 export default meta

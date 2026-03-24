@@ -11,14 +11,10 @@ const BrowseDemo = () => <></>
 const meta = {
   title: "Tokens/Browse",
   component: BrowseDemo,
+  tags: ['!dev'],
   parameters: {
     layout: "padded",
-    previewTabs: {
-      canvas: { hidden: true },
-    },
-    viewMode: "docs",
   },
-
 } satisfies Meta<typeof BrowseDemo>
 
 export default meta

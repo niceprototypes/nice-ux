@@ -7,14 +7,10 @@ const IconsDemo = () => <></>
 const meta = {
   title: "Tokens/Icons",
   component: IconsDemo,
+  tags: ['!dev'],
   parameters: {
     layout: "padded",
-    previewTabs: {
-      canvas: { hidden: true },
-    },
-    viewMode: "docs",
   },
-
 } satisfies Meta<typeof IconsDemo>
 
 export default meta

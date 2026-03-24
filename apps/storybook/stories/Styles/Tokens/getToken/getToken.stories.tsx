@@ -11,14 +11,10 @@ const CoreDemo = () => <></>
 const meta = {
   title: "React/Styles/getToken",
   component: CoreDemo,
+  tags: ['!dev'],
   parameters: {
     layout: "padded",
-    previewTabs: {
-      canvas: { hidden: true },
-    },
-    viewMode: "docs",
   },
-
 } satisfies Meta<typeof CoreDemo>
 
 export default meta
