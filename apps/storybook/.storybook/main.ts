@@ -34,6 +34,7 @@ const linkedPackages = {
   "nice-react-styles": `${NICE_PACKAGES_BASE}/nice-react-styles`,
   "nice-react-icon": `${NICE_PACKAGES_BASE}/nice-react-icon`,
   "nice-react-device-detector": `${NICE_PACKAGES_BASE}/nice-react-device-detector`,
+  "nice-react-image": `${NICE_PACKAGES_BASE}/nice-react-image`,
   "nice-react-button": `${NICE_PACKAGES_BASE}/nice-react-button`,
   "nice-styles": `${NICE_PACKAGES_BASE}/nice-styles`,
 }
@@ -54,6 +55,7 @@ const sourceAliasablePackages = [
   "nice-react-typography",
   "nice-react-styles",
   "nice-react-device-detector",
+  "nice-react-image",
   "nice-react-button",
 ]
 

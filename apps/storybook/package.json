@@ -23,6 +23,7 @@
     "nice-react-flex": "file:../nice-react-flex",
     "nice-react-device-detector": "file:../nice-react-device-detector",
     "nice-react-icon": "file:../nice-react-icon",
+    "nice-react-image": "file:../nice-react-image",
     "nice-react-lightbox": "file:../nice-react-lightbox",
     "nice-react-scroll": "file:../nice-react-scroll",
     "nice-react-slider": "file:../nice-react-slider",
