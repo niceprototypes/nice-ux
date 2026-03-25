@@ -21,43 +21,12 @@ function getAbsolutePath(value: string): string {
 }
 
 /**
- * Base path for all Nice Prototype packages
+ * Package lists from the Nice ecosystem registry (nice-npm-link/registry.json).
+ * Adding a new package to the registry automatically makes it available here.
  */
-const NICE_PACKAGES_BASE = "/Users/mohammedibrahim/Code"
-
-/**
- * Registry of all linked packages and their local paths
- */
-const linkedPackages = {
-  "nice-react-flex": `${NICE_PACKAGES_BASE}/nice-react-flex`,
-  "nice-react-typography": `${NICE_PACKAGES_BASE}/nice-react-typography`,
-  "nice-react-styles": `${NICE_PACKAGES_BASE}/nice-react-styles`,
-  "nice-react-icon": `${NICE_PACKAGES_BASE}/nice-react-icon`,
-  "nice-react-device-detector": `${NICE_PACKAGES_BASE}/nice-react-device-detector`,
-  "nice-react-image": `${NICE_PACKAGES_BASE}/nice-react-image`,
-  "nice-react-button": `${NICE_PACKAGES_BASE}/nice-react-button`,
-  "nice-styles": `${NICE_PACKAGES_BASE}/nice-styles`,
-}
-
-/**
- * Packages that can use source aliases for true HMR
- *
- * These packages don't use special build transforms (like SVGR) and can
- * be aliased directly to their source files. This provides faster HMR
- * compared to watching dist folders.
- *
- * Packages NOT in this list (like nice-react-icon) must go through their
- * build pipeline because they use transforms that aren't available in
- * Storybook's Vite config.
- */
-const sourceAliasablePackages = [
-  "nice-react-flex",
-  "nice-react-typography",
-  "nice-react-styles",
-  "nice-react-device-detector",
-  "nice-react-image",
-  "nice-react-button",
-]
+const registry = require('../../nice-npm-link/src/registry')
+const linkedPackages: Record<string, string> = registry.getLinkedPackageMap()
+const sourceAliasablePackages: string[] = registry.getSourceAliasableNames()
 
 /**
  * Storybook Configuration

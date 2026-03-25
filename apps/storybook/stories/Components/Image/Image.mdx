@@ -1,0 +1,32 @@
+import { Meta, Stories } from '@storybook/addon-docs/blocks'
+import * as ImageStories from './Image.stories'
+
+<Meta of={ImageStories} />
+
+# Image
+
+```bash
+npm install nice-react-image
+```
+
+### Setup
+
+```jsx
+import Image from "nice-react-image"
+```
+
+### Usage
+
+```jsx
+{/* Standard img element */}
+<Image src="/photo.jpg" alt="A photo" backgroundSize="cover" />
+
+{/* As a background-image div with overlay content */}
+<Image as="div" src="/hero.jpg" alt="Hero" width="100%" height="400px">
+  <h1>Overlay</h1>
+</Image>
+```
+
+---
+
+<Stories />

@@ -325,14 +325,11 @@ nnl --publish --dry-run`}</CodeBlock>
 7. Commits and pushes version changes`}</CodeBlock>
       <Typography as="h4">Publish Order</Typography>
       <Typography color="light">
-        Packages are published bottom-to-top per dependency chain:
+        Packages are published bottom-to-top per dependency chain.
+        The publish order is defined in nice-npm-link/registry.json and
+        queried via the registry service. Run nnl --publish --dry-run to
+        see the current order.
       </Typography>
-      <CodeBlock>{`Tier 1: nice-styles, nice-icons, nice-configuration, nice-npm-link, nice-vite-watcher
-Tier 2: nice-react-styles
-Tier 3: nice-react-flex, nice-react-typography
-Tier 4: nice-react-icon, nice-react-tile
-Tier 5: nice-react-button
-Tier 6: nice-react-scroll, nice-react-slider, nice-react-device-detector, nice-react-lightbox`}</CodeBlock>
       <Typography as="h4">Dry Run</Typography>
       <Typography color="light">
         Use --dry-run or --dry-publish to preview without making changes:
