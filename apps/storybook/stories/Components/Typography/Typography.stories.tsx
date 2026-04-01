@@ -7,6 +7,7 @@ import CodeStory from "./stories/Code.story"
 import ColorStory from "./stories/Color.story"
 import LegibilityOptimizedStory from "./stories/LegibilityOptimized.story"
 import LineHeightStory from "./stories/LineHeight.story"
+import ResponsiveStory from "./stories/Responsive.story"
 import SizeStory from "./stories/Size.story"
 import WeightStory from "./stories/Weight.story"
 
@@ -161,6 +162,11 @@ export const LegibilityOptimized: Story = {
 export const LineHeight: Story = {
   name: "lineHeight",
   render: LineHeightStory,
+}
+
+export const Responsive: Story = {
+  name: "responsive",
+  render: ResponsiveStory,
 }
 
 export const Size: Story = {
