@@ -1,3 +1,12 @@
 [aria-label="Reset controls"] {
   display: none !important;
 }
+
+h2:not(.sb-anchor, .sb-unstyled, .sb-unstyled h2) {
+  border-bottom: none;
+}
+
+hr:not(.sb-anchor, .sb-unstyled, .sb-unstyled hr) {
+  height: 1px;
+  margin: 4rem 0;
+}

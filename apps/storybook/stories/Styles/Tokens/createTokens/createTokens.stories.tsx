@@ -148,6 +148,117 @@ export const NewToken: Story = {
   ),
 }
 
+export const ResponsiveVariants: Story = {
+  name: "Responsive variants (breakpoints)",
+  parameters: storyParameters,
+  render: () => (
+    <Flex direction="column" gap="large">
+      <GlobalStyles />
+      <Typography color="light">
+        A variant value can be an object with breakpoint keys instead of a plain
+        string. The mobile value becomes the default, and higher breakpoints
+        override it via media queries. Static strings and breakpoint objects can
+        be mixed within the same token group.
+      </Typography>
+      <CodeBlock>{`createTokens({
+  gap: {
+    none: "0",                              // static
+    small: { mobile: "12px", desktop: "16px" },  // responsive
+    base: { mobile: "24px", desktop: "32px" },   // responsive
+  },
+})`}</CodeBlock>
+      <Flex direction="column" gap="small">
+        <Typography color="lighter" weight="semibold">
+          Generated CSS
+        </Typography>
+        <CodeBlock>{`:root {
+  --np--gap--none: 0;
+  --np--gap--small: 12px;
+  --np--gap--small--desktop: 16px;
+  --np--gap--base: 24px;
+  --np--gap--base--desktop: 32px;
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --np--gap--small: var(--np--gap--small--desktop);
+    --np--gap--base: var(--np--gap--base--desktop);
+  }
+}`}</CodeBlock>
+      </Flex>
+      <Flex direction="column" gap="small">
+        <Typography color="lighter" weight="semibold">
+          Breakpoints
+        </Typography>
+        {[
+          { name: "mobile", value: "default (no media query)" },
+          { name: "tablet", value: "@media (min-width: 441px)" },
+          { name: "desktop", value: "@media (min-width: 1280px)" },
+        ].map(({ name, value }) => (
+          <Flex key={name} gap="base" alignItems="center">
+            <Typography code>{name}</Typography>
+            <Typography color="light">{value}</Typography>
+          </Flex>
+        ))}
+      </Flex>
+    </Flex>
+  ),
+}
+
+export const ModeVariants: Story = {
+  name: "Mode-aware variants (day/night)",
+  parameters: storyParameters,
+  render: () => (
+    <Flex direction="column" gap="large">
+      <GlobalStyles />
+      <Typography color="light">
+        A variant value can be an object with mode keys instead of a plain
+        string. The day value becomes the default, and the night value is applied
+        via a prefers-color-scheme media query. Static strings and mode objects
+        can be mixed within the same token group.
+      </Typography>
+      <CodeBlock>{`createTokens({
+  headerColor: {
+    base: { day: "#000", night: "#fff" },  // mode-aware
+    accent: "#dc0000",                     // static (same in both modes)
+  },
+})`}</CodeBlock>
+      <Flex direction="column" gap="small">
+        <Typography color="lighter" weight="semibold">
+          Generated CSS
+        </Typography>
+        <CodeBlock>{`:root {
+  --np--header-color--base: #000;
+  --np--header-color--base--day: #000;
+  --np--header-color--base--night: #fff;
+  --np--header-color--accent: #dc0000;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --np--header-color--base: var(--np--header-color--base--night);
+  }
+}`}</CodeBlock>
+      </Flex>
+      <Flex direction="column" gap="small">
+        <Typography color="lighter" weight="semibold">
+          Primitives
+        </Typography>
+        <Typography color="light">
+          Day and night primitives are stable references that are never
+          reassigned by media queries. Use getToken with a mode argument to
+          access them directly.
+        </Typography>
+        <CodeBlock>{`getToken("headerColor", "base", "day")
+// → var(--np--header-color--base--day)
+
+getToken("headerColor", "base", "night")
+// → var(--np--header-color--base--night)`}</CodeBlock>
+      </Flex>
+    </Flex>
+  ),
+}
+
 export const Combined: Story = {
   name: "Putting it all together",
   parameters: storyParameters,
@@ -161,12 +272,24 @@ export const Combined: Story = {
         distinction between "modifying" and "creating." The system overloads the
         existing tokens transparently.
       </Typography>
+      <Typography color="light">
+        Variant values can be a plain string, a breakpoint object, or a mode
+        object. These formats can be mixed freely within the same token group and
+        within the same call.
+      </Typography>
       <CodeBlock>{`const { GlobalStyles } = createTokens({
   fontSize: { base: "18px" },            // override
   foregroundColor: { brand: "#dc0000" },  // extend
   headerHeight: {                         // create
     base: "64px",
     compact: "48px",
+  },
+  gap: {                                  // mixed static + responsive
+    none: "0",
+    base: { mobile: "24px", desktop: "32px" },
+  },
+  headerColor: {                          // mode-aware
+    base: { day: "#000", night: "#fff" },
   },
 })`}</CodeBlock>
     </Flex>

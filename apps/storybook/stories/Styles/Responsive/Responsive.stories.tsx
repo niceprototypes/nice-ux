@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite"
 import { getBreakpoint } from "nice-react-styles"
 import Flex from "nice-react-flex"
 import Typography from "nice-react-typography"
+import CodeBlock from "../../../src/components/CodeBlock"
 import {
   BreakpointRow,
   Label,
@@ -73,29 +74,17 @@ export const Breakpoints: Story = {
 
       <section>
         <Typography as="h3">Usage in styled-components</Typography>
-        <Flex
-          direction="column"
-          gap="small"
-          style={{
-            padding: 16,
-            background: "var(--np--background-color--dark)",
-            borderRadius: 8,
-            fontFamily: "var(--np--font-family--code)",
-            fontSize: 14,
-          }}
-        >
-          <code>{`const Box = styled.div\``}</code>
-          <code>{`  background: blue;`}</code>
-          <code></code>
-          <code>{`  \${getBreakpoint("tablet").query} {`}</code>
-          <code>{`    background: orange;`}</code>
-          <code>{`  }`}</code>
-          <code></code>
-          <code>{`  \${getBreakpoint("desktop").query} {`}</code>
-          <code>{`    background: green;`}</code>
-          <code>{`  }`}</code>
-          <code>{`\`;`}</code>
-        </Flex>
+        <CodeBlock>{`const Box = styled.div\`
+  background: blue;
+
+  \${getBreakpoint("tablet").query} {
+    background: orange;
+  }
+
+  \${getBreakpoint("desktop").query} {
+    background: green;
+  }
+\`;`}</CodeBlock>
       </section>
     </Flex>
   ),
