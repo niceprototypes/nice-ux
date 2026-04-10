@@ -4,7 +4,22 @@ import Flex from "nice-react-flex"
 import Typography from "nice-react-typography"
 import VariableList from "../../../../src/components/VariableList"
 import DemoDots from "../../../../src/components/DemoDots"
+import CodeBlock from "../../../../src/components/CodeBlock"
 import { createToken } from "../../../../src/services"
+
+// Renders a 3-line usage block showing .key, .var, .value for a token group.
+// Comments are aligned by padding the left side to the longest invocation.
+const usageBlock = (group: string, variant: string): string => {
+  const def = getToken(group as any)
+  const v = getToken(group as any, variant)
+  const lines: Array<[string, string]> = [
+    [`getToken("${group}").key`, `// → "${def.key}"`],
+    [`getToken("${group}", "${variant}").var`, `// → "${v.var}"`],
+    [`getToken("${group}", "${variant}").value`, `// → "${v.value}"`],
+  ]
+  const maxLeft = Math.max(...lines.map(([l]) => l.length))
+  return lines.map(([l, r]) => `${l.padEnd(maxLeft + 1)}${r}`).join("\n")
+}
 
 const CoreDemo = () => <></>
 
@@ -37,6 +52,7 @@ export const Tokens: Story = {
     <Flex direction="column" gap="larger">
       <section>
         <Typography as="h3">animationDuration</Typography>
+        <CodeBlock language="typescript">{usageBlock("animationDuration", "slow")}</CodeBlock>
         <VariableList
           variables={createToken(
             "animationDuration",
@@ -73,6 +89,7 @@ export const Tokens: Story = {
 
       <section>
         <Typography as="h3">animationEasing</Typography>
+        <CodeBlock language="typescript">{usageBlock("animationEasing", "base")}</CodeBlock>
         <VariableList
           variables={createToken("animationEasing", ["base"], () => (
             <Flex
@@ -98,6 +115,7 @@ export const Tokens: Story = {
 
       <section>
         <Typography as="h3">backgroundColor</Typography>
+        <CodeBlock language="typescript">{usageBlock("backgroundColor", "dark")}</CodeBlock>
         <VariableList
           variables={createToken(
             "backgroundColor",
@@ -122,6 +140,7 @@ export const Tokens: Story = {
 
       <section>
         <Typography as="h3">borderColor</Typography>
+        <CodeBlock language="typescript">{usageBlock("borderColor", "heavy")}</CodeBlock>
         <VariableList
           variables={createToken("borderColor", ["base", "heavy", "heavier"], variant => (
             <Flex
@@ -139,6 +158,7 @@ export const Tokens: Story = {
 
       <section>
         <Typography as="h3">borderRadius</Typography>
+        <CodeBlock language="typescript">{usageBlock("borderRadius", "large")}</CodeBlock>
         <VariableList
           variables={createToken(
             "borderRadius",
@@ -159,6 +179,7 @@ export const Tokens: Story = {
 
       <section>
         <Typography as="h3">borderWidth</Typography>
+        <CodeBlock language="typescript">{usageBlock("borderWidth", "large")}</CodeBlock>
         <VariableList
           variables={createToken(
             "borderWidth",
@@ -179,6 +200,7 @@ export const Tokens: Story = {
 
       <section>
         <Typography as="h3">boxShadow</Typography>
+        <CodeBlock language="typescript">{usageBlock("boxShadow", "large")}</CodeBlock>
         <VariableList
           variables={createToken(
             "boxShadow",
@@ -208,6 +230,7 @@ export const Tokens: Story = {
 
       <section>
         <Typography as="h3">cellHeight</Typography>
+        <CodeBlock language="typescript">{usageBlock("cellHeight", "large")}</CodeBlock>
         <VariableList
           variables={createToken(
             "cellHeight",
@@ -228,6 +251,7 @@ export const Tokens: Story = {
 
       <section>
         <Typography as="h3">foregroundColor</Typography>
+        <CodeBlock language="typescript">{usageBlock("foregroundColor", "link")}</CodeBlock>
         <VariableList
           variables={createToken(
             "foregroundColor",
@@ -248,6 +272,7 @@ export const Tokens: Story = {
 
       <section>
         <Typography as="h3">fontFamily</Typography>
+        <CodeBlock language="typescript">{usageBlock("fontFamily", "heading")}</CodeBlock>
         <VariableList
           variables={createToken(
             "fontFamily",
@@ -267,6 +292,7 @@ export const Tokens: Story = {
 
       <section>
         <Typography as="h3">fontSize</Typography>
+        <CodeBlock language="typescript">{usageBlock("fontSize", "large")}</CodeBlock>
         <VariableList
           variables={createToken(
             "fontSize",
@@ -282,6 +308,7 @@ export const Tokens: Story = {
 
       <section>
         <Typography as="h3">fontWeight</Typography>
+        <CodeBlock language="typescript">{usageBlock("fontWeight", "bold")}</CodeBlock>
         <VariableList
           variables={createToken(
             "fontWeight",
@@ -297,6 +324,7 @@ export const Tokens: Story = {
 
       <section>
         <Typography as="h3">gap</Typography>
+        <CodeBlock language="typescript">{usageBlock("gap", "large")}</CodeBlock>
         <VariableList
           variables={createToken(
             "gap",
@@ -324,6 +352,7 @@ export const Tokens: Story = {
 
       <section>
         <Typography as="h3">lineHeight</Typography>
+        <CodeBlock language="typescript">{usageBlock("lineHeight", "expanded")}</CodeBlock>
         <VariableList
           variables={createToken(
             "lineHeight",

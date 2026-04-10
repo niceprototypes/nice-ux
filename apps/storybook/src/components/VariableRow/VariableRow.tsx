@@ -3,7 +3,13 @@ import Typography from "nice-react-typography"
 import { CellFlex } from "./VariableRow.styles"
 import { VariableRowProps } from "./VariableRow.types"
 import Flex from "nice-react-flex"
-import CodePreview from "../CodePreview"
+import CodeBlock from "../CodeBlock"
+
+// Normalize legacy code-string syntax: literal "\n" → newline, "+N" prefix → N*2 spaces
+const normalizeCode = (input: string): string =>
+  input
+    .replace(/\\n/g, "\n")
+    .replace(/^\+(\d+)/gm, (_, n) => " ".repeat(parseInt(n, 10) * 2))
 
 const VariableRow: React.FC<VariableRowProps> = ({
   name,
@@ -53,7 +59,7 @@ const VariableRow: React.FC<VariableRowProps> = ({
       </CellFlex>
       {code && (
         <CellFlex alignItems="center" $width="18rem" spacing="base none">
-          <CodePreview code={code} />
+          <CodeBlock language="tsx" padded={false} bordered={false}>{normalizeCode(code)}</CodeBlock>
         </CellFlex>
       )}
     </Flex>

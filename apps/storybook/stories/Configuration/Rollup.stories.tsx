@@ -36,7 +36,7 @@ export const CreateConfiguration: Story = {
         Creates a complete rollup configuration with sensible defaults for nice-* packages.
         Outputs both CJS and ESM formats with sourcemaps. All plugins are included by default.
       </Typography>
-      <CodeBlock>{`// rollup.config.js
+      <CodeBlock language="typescript">{`// rollup.config.js
 import { createConfiguration } from "nice-configuration/rollup"
 
 // Basic usage - uses all defaults
@@ -49,7 +49,7 @@ export default createConfiguration({
   bundlePackages: ["nice-icons"],
 })`}</CodeBlock>
       <Typography as="h4">Options</Typography>
-      <CodeBlock>{`{
+      <CodeBlock language="typescript">{`{
   input?: string              // Entry point (default: "src/index.ts")
   tsconfig?: string           // Path to tsconfig (default: "./tsconfig.json")
   output?: object             // Custom output config (merged with defaults)
@@ -63,7 +63,7 @@ export default createConfiguration({
       <Typography color="light">
         The following plugins are included automatically:
       </Typography>
-      <CodeBlock>{`• rollup-plugin-peer-deps-external
+      <CodeBlock language="text">{`• rollup-plugin-peer-deps-external
 • @rollup/plugin-node-resolve (browser: true)
 • @rollup/plugin-commonjs
 • @rollup/plugin-typescript
@@ -82,7 +82,7 @@ export const IsNiceExternal: Story = {
         Pattern-based external detection that automatically externalizes all nice-* packages,
         React ecosystem, and styled-components. Handles subpath imports like CSS files.
       </Typography>
-      <CodeBlock>{`import { isNiceExternal } from "nice-configuration/rollup"
+      <CodeBlock language="typescript">{`import { isNiceExternal } from "nice-configuration/rollup"
 
 // Returns true for:
 isNiceExternal("nice-styles")           // nice-* packages
@@ -97,7 +97,7 @@ isNiceExternal("lodash")                // other packages`}</CodeBlock>
       <Typography color="light">
         If you need custom rollup config, use isNiceExternal directly:
       </Typography>
-      <CodeBlock>{`// rollup.config.js
+      <CodeBlock language="typescript">{`// rollup.config.js
 import { isNiceExternal } from "nice-configuration/rollup"
 
 export default {
@@ -120,7 +120,7 @@ export const WatchMode: Story = {
         The configuration includes optimized watch settings that prevent file caching issues
         during local development. This ensures changes appear immediately without delay.
       </Typography>
-      <CodeBlock>{`// Included automatically in createConfiguration()
+      <CodeBlock language="typescript">{`// Included automatically in createConfiguration()
 {
   cache: false,  // Disable rollup internal caching
   watch: {
@@ -156,7 +156,7 @@ export const CreateExternals: Story = {
       <Typography color="light">
         Creates an external function with additional packages or bundle overrides.
       </Typography>
-      <CodeBlock>{`import { createExternals } from "nice-configuration/rollup"
+      <CodeBlock language="typescript">{`import { createExternals } from "nice-configuration/rollup"
 
 // Add extra packages to externalize
 const external = createExternals({

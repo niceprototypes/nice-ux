@@ -74,7 +74,7 @@ export const Breakpoints: Story = {
 
       <section>
         <Typography as="h3">Usage in styled-components</Typography>
-        <CodeBlock>{`const Box = styled.div\`
+        <CodeBlock language="typescript">{`const Box = styled.div\`
   background: blue;
 
   \${getBreakpoint("tablet").query} {

@@ -34,7 +34,7 @@ export const Basic: Story = {
         Wrap your application with StylesProvider to inject nice-styles CSS
         variables and enable styled-components theming.
       </Typography>
-      <CodeBlock>{`<StylesProvider>
+      <CodeBlock language="tsx">{`<StylesProvider>
   {children}
 </StylesProvider>`}</CodeBlock>
       <Typography color="light">

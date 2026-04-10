@@ -42,7 +42,7 @@ export const Overview: Story = {
         This plugin watches the dist folder of linked packages and triggers a browser
         reload when they rebuild.
       </Typography>
-      <CodeBlock>{`Developer edits source
+      <CodeBlock language="text">{`Developer edits source
        ↓
 Package build runs
        ↓
@@ -69,7 +69,7 @@ export const BasicUsage: Story = {
       <Typography color="light">
         Creates the Vite plugin that watches linked package dist folders.
       </Typography>
-      <CodeBlock>{`// vite.config.ts
+      <CodeBlock language="typescript">{`// vite.config.ts
 import { defineConfig } from 'vite'
 import { viteWatcher } from 'nice-vite-watcher'
 
@@ -85,7 +85,7 @@ export default defineConfig({
   ],
 })`}</CodeBlock>
       <Typography as="h4">Options</Typography>
-      <CodeBlock>{`{
+      <CodeBlock language="typescript">{`{
   packages: Record<string, string>  // Package name → local path
   watchDir?: string                 // Subdirectory to watch (default: 'dist')
   verbose?: boolean                 // Log changes (default: false)
@@ -106,7 +106,7 @@ export const SourceAliases: Story = {
         Use this for packages without special build transforms to get true HMR
         with state preservation.
       </Typography>
-      <CodeBlock>{`import { getSourceAliases } from 'nice-vite-watcher'
+      <CodeBlock language="typescript">{`import { getSourceAliases } from 'nice-vite-watcher'
 
 const linkedPackages = {
   'nice-react-button': '/Users/me/Code/nice-react-button',
@@ -136,7 +136,7 @@ export const CombinedStrategy: Story = {
         For the best experience, use source aliases for simple packages (true HMR)
         and dist watching for packages with build transforms (SVGR, PostCSS, etc.).
       </Typography>
-      <CodeBlock>{`// vite.config.ts
+      <CodeBlock language="typescript">{`// vite.config.ts
 import { defineConfig } from 'vite'
 import { viteWatcher, getSourceAliases } from 'nice-vite-watcher'
 
@@ -164,7 +164,7 @@ export default defineConfig({
   },
 })`}</CodeBlock>
       <Typography as="h4">Strategy Comparison</Typography>
-      <CodeBlock>{`| Package Type              | Strategy        | HMR Behavior          |
+      <CodeBlock language="text">{`| Package Type              | Strategy        | HMR Behavior          |
 |---------------------------|-----------------|----------------------|
 | Simple TypeScript/React   | Source alias    | True HMR (state kept)|
 | Uses SVGR, PostCSS, etc.  | Dist watching   | Full reload          |`}</CodeBlock>
@@ -181,7 +181,7 @@ export const StorybookIntegration: Story = {
       <Typography color="light">
         Works with Storybook's Vite builder via viteFinal config.
       </Typography>
-      <CodeBlock>{`// .storybook/main.ts
+      <CodeBlock language="typescript">{`// .storybook/main.ts
 import { viteWatcher, getSourceAliases } from 'nice-vite-watcher'
 
 const linkedPackages = {
@@ -226,13 +226,13 @@ export const Limitations: Story = {
         You need to wait for the linked package's build to complete before
         changes appear. Run the package in watch mode for faster iteration.
       </Typography>
-      <CodeBlock>{`# In the linked package directory
+      <CodeBlock language="bash">{`# In the linked package directory
 npm run dev  # or npm run build --watch`}</CodeBlock>
       <Typography as="h4">Why Not Source Aliases for Everything?</Typography>
       <Typography color="light">
         Source aliases bypass the package's build pipeline, which breaks packages using:
       </Typography>
-      <CodeBlock>{`• SVGR — transforms SVG imports to React components
+      <CodeBlock language="text">{`• SVGR — transforms SVG imports to React components
 • PostCSS/Tailwind — processes CSS
 • Custom Babel plugins — transforms code
 • Asset processing — handles images, fonts`}</CodeBlock>

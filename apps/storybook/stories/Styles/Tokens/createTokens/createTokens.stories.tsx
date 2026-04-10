@@ -62,7 +62,7 @@ export const OverrideExisting: Story = {
         Use an existing token key with an existing variant name to replace its
         value. Here, the base font size is changed from the default to 18px.
       </Typography>
-      <CodeBlock>{`createTokens({
+      <CodeBlock language="typescript">{`createTokens({
   fontSize: {
     base: "18px",
   },
@@ -91,7 +91,7 @@ export const ExtendExisting: Story = {
         "brand" variant is added to foregroundColor alongside the existing
         variants (base, light, lighter, etc).
       </Typography>
-      <CodeBlock>{`createTokens({
+      <CodeBlock language="typescript">{`createTokens({
   foregroundColor: {
     brand: "#dc0000",
   },
@@ -126,7 +126,7 @@ export const NewToken: Story = {
         Use a token key that doesn't exist in the base system to create an
         entirely new token with its own variants.
       </Typography>
-      <CodeBlock>{`createTokens({
+      <CodeBlock language="typescript">{`createTokens({
   headerHeight: {
     base: "64px",
     compact: "48px",
@@ -160,7 +160,7 @@ export const ResponsiveVariants: Story = {
         override it via media queries. Static strings and breakpoint objects can
         be mixed within the same token group.
       </Typography>
-      <CodeBlock>{`createTokens({
+      <CodeBlock language="typescript">{`createTokens({
   gap: {
     none: "0",                              // static
     small: { mobile: "12px", desktop: "16px" },  // responsive
@@ -171,7 +171,7 @@ export const ResponsiveVariants: Story = {
         <Typography color="lighter" weight="semibold">
           Generated CSS
         </Typography>
-        <CodeBlock>{`:root {
+        <CodeBlock language="css">{`:root {
   --np--gap--none: 0;
   --np--gap--small: 12px;
   --np--gap--small--desktop: 16px;
@@ -217,7 +217,7 @@ export const ModeVariants: Story = {
         via a prefers-color-scheme media query. Static strings and mode objects
         can be mixed within the same token group.
       </Typography>
-      <CodeBlock>{`createTokens({
+      <CodeBlock language="typescript">{`createTokens({
   headerColor: {
     base: { day: "#000", night: "#fff" },  // mode-aware
     accent: "#dc0000",                     // static (same in both modes)
@@ -227,7 +227,7 @@ export const ModeVariants: Story = {
         <Typography color="lighter" weight="semibold">
           Generated CSS
         </Typography>
-        <CodeBlock>{`:root {
+        <CodeBlock language="css">{`:root {
   --np--header-color--base: #000;
   --np--header-color--base--day: #000;
   --np--header-color--base--night: #fff;
@@ -249,7 +249,7 @@ export const ModeVariants: Story = {
           reassigned by media queries. Use getToken with a mode argument to
           access them directly.
         </Typography>
-        <CodeBlock>{`getToken("headerColor", "base", "day")
+        <CodeBlock language="typescript">{`getToken("headerColor", "base", "day")
 // → var(--np--header-color--base--day)
 
 getToken("headerColor", "base", "night")
@@ -277,7 +277,7 @@ export const Combined: Story = {
         object. These formats can be mixed freely within the same token group and
         within the same call.
       </Typography>
-      <CodeBlock>{`const { GlobalStyles } = createTokens({
+      <CodeBlock language="typescript">{`const { GlobalStyles } = createTokens({
   fontSize: { base: "18px" },            // override
   foregroundColor: { brand: "#dc0000" },  // extend
   headerHeight: {                         // create

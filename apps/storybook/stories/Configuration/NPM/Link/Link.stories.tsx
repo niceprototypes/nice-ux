@@ -37,7 +37,7 @@ export const Overview: Story = {
         When npm installs these, each package gets its own node_modules with
         duplicate React/styled-components. This causes "Invalid hook call" errors.
       </Typography>
-      <CodeBlock>{`# The problem: duplicate React instances
+      <CodeBlock language="bash">{`# The problem: duplicate React instances
 your-app/node_modules/react           ← App's React
 nice-react-tile/node_modules/react    ← Tile's React (CONFLICT!)
 nice-react-flex/node_modules/react    ← Flex's React (CONFLICT!)
@@ -48,7 +48,7 @@ node ../nice-npm-link/nice-npm-link --clean-all`}</CodeBlock>
       <Typography color="light">
         By default, these singleton packages are removed from linked packages:
       </Typography>
-      <CodeBlock>{`• react
+      <CodeBlock language="bash">{`• react
 • react-dom
 • styled-components
 • @types/react
@@ -67,7 +67,7 @@ export const FileDependencies: Story = {
         All nice-* packages use file: references for interdependencies.
         This enables live changes to propagate through the dependency chain.
       </Typography>
-      <CodeBlock>{`// package.json pattern
+      <CodeBlock language="json">{`// package.json pattern
 {
   "dependencies": {
     "nice-styles": "file:../nice-styles",
@@ -86,7 +86,7 @@ export const FileDependencies: Story = {
       <Typography color="light">
         Always run --clean-all after npm install or modifying dependencies:
       </Typography>
-      <CodeBlock>{`node ../nice-npm-link/nice-npm-link --clean-all`}</CodeBlock>
+      <CodeBlock language="bash">{`node ../nice-npm-link/nice-npm-link --clean-all`}</CodeBlock>
     </Flex>
   ),
 }
@@ -97,7 +97,7 @@ export const BasicUsage: Story = {
   render: () => (
     <Flex direction="column" gap="large">
       <Typography as="h3">Basic Usage</Typography>
-      <CodeBlock>{`# Link a single package
+      <CodeBlock language="bash">{`# Link a single package
 npx nice-npm-link ../nice-react-button
 
 # Short alias
@@ -111,7 +111,7 @@ nnl ../nice-react-flex`}</CodeBlock>
       <Typography color="light">
         Recursively find and clean all file: linked packages in your project:
       </Typography>
-      <CodeBlock>{`# Clean all linked packages at once
+      <CodeBlock language="bash">{`# Clean all linked packages at once
 nnl --clean-all
 
 # Preview what would be cleaned
@@ -130,7 +130,7 @@ export const CleanOnly: Story = {
         Remove conflicting packages without creating a new link. Useful when packages
         are already linked via package.json file: references.
       </Typography>
-      <CodeBlock>{`# Clean a specific linked package
+      <CodeBlock language="bash">{`# Clean a specific linked package
 nnl --clean-only ../nice-react-button
 
 # Clean with custom exclusions
@@ -149,7 +149,7 @@ export const Unlink: Story = {
         Restore packages to their original npm versions. This removes file: references
         and reinstalls from the registry.
       </Typography>
-      <CodeBlock>{`# Unlink all file: dependencies
+      <CodeBlock language="bash">{`# Unlink all file: dependencies
 nnl --unlink
 
 # Preview what would be unlinked
@@ -172,13 +172,13 @@ export const CustomExclusions: Story = {
       <Typography color="light">
         Override the default list with your own packages:
       </Typography>
-      <CodeBlock>{`# Only remove React packages (skip styled-components)
+      <CodeBlock language="bash">{`# Only remove React packages (skip styled-components)
 nnl --exclude react,react-dom ../my-component`}</CodeBlock>
       <Typography as="h4">--add-exclude</Typography>
       <Typography color="light">
         Add packages to the default list:
       </Typography>
-      <CodeBlock>{`# Add Emotion packages to defaults
+      <CodeBlock language="bash">{`# Add Emotion packages to defaults
 nnl --add-exclude @emotion/react,@emotion/styled ../my-component
 
 # Add Material-UI packages
@@ -197,20 +197,20 @@ export const OtherOptions: Story = {
       <Typography color="light">
         Preview changes without making them:
       </Typography>
-      <CodeBlock>{`nnl --dry-run ../nice-react-button
+      <CodeBlock language="bash">{`nnl --dry-run ../nice-react-button
 nnl --dry-run --clean-all`}</CodeBlock>
       <Typography as="h4">--manager</Typography>
       <Typography color="light">
         Force a specific package manager (auto-detected by default):
       </Typography>
-      <CodeBlock>{`nnl --manager pnpm ../my-component
+      <CodeBlock language="bash">{`nnl --manager pnpm ../my-component
 nnl --manager yarn ../my-component
 nnl --manager npm ../my-component`}</CodeBlock>
       <Typography as="h4">--skip-peer-check</Typography>
       <Typography color="light">
         Skip automatic peerDependencies enforcement:
       </Typography>
-      <CodeBlock>{`nnl --skip-peer-check ../my-component`}</CodeBlock>
+      <CodeBlock language="bash">{`nnl --skip-peer-check ../my-component`}</CodeBlock>
     </Flex>
   ),
 }
@@ -225,7 +225,7 @@ export const DevMode: Story = {
         Runs npm run dev in all linked packages concurrently. This rebuilds
         packages automatically when their source files change.
       </Typography>
-      <CodeBlock>{`# Run dev scripts in all linked packages
+      <CodeBlock language="bash">{`# Run dev scripts in all linked packages
 nnl --dev`}</CodeBlock>
       <Typography color="light">
         Packages without a dev script are automatically skipped.
@@ -244,7 +244,7 @@ export const WatchMode: Story = {
         Watches linked package dist folders and touches a trigger file when
         changes are detected. This causes webpack/CRA to recompile.
       </Typography>
-      <CodeBlock>{`# Watch dist folders for changes
+      <CodeBlock language="bash">{`# Watch dist folders for changes
 nnl --watch
 
 # Watch a different folder (default: dist)
@@ -253,12 +253,12 @@ nnl --watch --watch-dir build`}</CodeBlock>
       <Typography color="light">
         Add the trigger file import to your entry point:
       </Typography>
-      <CodeBlock>{`// src/index.tsx
+      <CodeBlock language="typescript">{`// src/index.tsx
 import './.symlink-trigger.js';`}</CodeBlock>
       <Typography color="light">
         Add to .gitignore:
       </Typography>
-      <CodeBlock>{`.symlink-trigger.js`}</CodeBlock>
+      <CodeBlock language="bash">{`.symlink-trigger.js`}</CodeBlock>
     </Flex>
   ),
 }
@@ -273,7 +273,7 @@ export const DevWatch: Story = {
         Combines both flags: rebuilds packages on source changes AND triggers
         webpack/CRA recompilation. This is the recommended setup for CRA projects.
       </Typography>
-      <CodeBlock>{`# In package.json
+      <CodeBlock language="bash">{`# In package.json
 "scripts": {
   "watch:deps": "nnl --dev --watch"
 }
@@ -282,7 +282,7 @@ export const DevWatch: Story = {
 npm start          # Terminal 1
 npm run watch:deps # Terminal 2`}</CodeBlock>
       <Typography as="h4">How it works</Typography>
-      <CodeBlock>{`Source change in linked package
+      <CodeBlock language="bash">{`Source change in linked package
        ↓
 --dev runs rollup/tsc rebuild
        ↓
@@ -307,7 +307,7 @@ export const Publish: Story = {
         Publishes Nice ecosystem packages to npm in dependency order. Handles
         version bumping, file: dep swapping, building, and restoring local refs.
       </Typography>
-      <CodeBlock>{`# Publish all changed packages (interactive prompts)
+      <CodeBlock language="bash">{`# Publish all changed packages (interactive prompts)
 nnl --publish
 
 # Publish specific packages
@@ -316,7 +316,7 @@ nnl --publish nice-styles,nice-react-styles
 # Preview what would be published
 nnl --publish --dry-run`}</CodeBlock>
       <Typography as="h4">Workflow</Typography>
-      <CodeBlock>{`1. Scans ~/Code/nice-* for packages with changes
+      <CodeBlock language="bash">{`1. Scans ~/Code/nice-* for packages with changes
 2. Prompts for version bump (patch/minor/major/skip)
 3. Swaps file: deps → semver ranges
 4. Builds each package
@@ -334,7 +334,7 @@ nnl --publish --dry-run`}</CodeBlock>
       <Typography color="light">
         Use --dry-run or --dry-publish to preview without making changes:
       </Typography>
-      <CodeBlock>{`nnl --publish --dry-run
+      <CodeBlock language="bash">{`nnl --publish --dry-run
 nnl --dry-publish`}</CodeBlock>
     </Flex>
   ),
@@ -350,12 +350,12 @@ export const Troubleshooting: Story = {
       <Typography color="light">
         Re-run the link command to clean up duplicate React:
       </Typography>
-      <CodeBlock>{`nnl --clean-all`}</CodeBlock>
+      <CodeBlock language="bash">{`nnl --clean-all`}</CodeBlock>
       <Typography as="h4">Changes Not Appearing</Typography>
       <Typography color="light">
         Run --dev to rebuild linked packages when their source changes:
       </Typography>
-      <CodeBlock>{`# Run in a separate terminal while developing
+      <CodeBlock language="bash">{`# Run in a separate terminal while developing
 nnl --dev`}</CodeBlock>
       <Typography color="light">
         The nice-configuration rollup settings include optimized watch options that
@@ -365,13 +365,13 @@ nnl --dev`}</CodeBlock>
       <Typography color="light">
         If changes still don't appear, clear the webpack cache:
       </Typography>
-      <CodeBlock>{`rm -rf node_modules/.cache && npm start`}</CodeBlock>
+      <CodeBlock language="bash">{`rm -rf node_modules/.cache && npm start`}</CodeBlock>
       <Typography as="h4">After Installing Dependencies</Typography>
       <Typography color="light">
         When you run npm install in a linked package, conflicts return.
         Either unlink first or re-run nice-npm-link:
       </Typography>
-      <CodeBlock>{`# Option 1: Unlink before installing
+      <CodeBlock language="bash">{`# Option 1: Unlink before installing
 nnl --unlink
 cd ../nice-react-button && npm install
 cd - && nnl ../nice-react-button

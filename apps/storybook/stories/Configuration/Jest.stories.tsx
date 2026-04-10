@@ -36,10 +36,10 @@ export const ReactConfig: Story = {
         Complete Jest configuration for React components with TypeScript support.
         Uses ts-jest for native TypeScript compilation.
       </Typography>
-      <CodeBlock>{`// jest.config.js
+      <CodeBlock language="typescript">{`// jest.config.js
 export { default } from "nice-configuration/jest/react"`}</CodeBlock>
       <Typography as="h4">Included Configuration</Typography>
-      <CodeBlock>{`{
+      <CodeBlock language="typescript">{`{
   preset: "ts-jest",
   testEnvironment: "jsdom",
   moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
@@ -61,7 +61,7 @@ export { default } from "nice-configuration/jest/react"`}</CodeBlock>
       <Typography color="light">
         Install the required peer dependencies:
       </Typography>
-      <CodeBlock>{`npm install -D jest ts-jest jest-environment-jsdom @testing-library/jest-dom`}</CodeBlock>
+      <CodeBlock language="bash">{`npm install -D jest ts-jest jest-environment-jsdom @testing-library/jest-dom`}</CodeBlock>
     </Flex>
   ),
 }
@@ -76,7 +76,7 @@ export const CssMock: Story = {
         Empty module export for mocking CSS imports in Jest tests.
         Referenced by the React config's moduleNameMapper.
       </Typography>
-      <CodeBlock>{`// __mocks__/styleMock.js
+      <CodeBlock language="typescript">{`// __mocks__/styleMock.js
 module.exports = {}`}</CodeBlock>
       <Typography color="light">
         This mock is automatically configured in the React Jest config.
@@ -86,7 +86,7 @@ module.exports = {}`}</CodeBlock>
       <Typography color="light">
         You can also import the mock directly if you customize your Jest config:
       </Typography>
-      <CodeBlock>{`// jest.config.js
+      <CodeBlock language="typescript">{`// jest.config.js
 export default {
   moduleNameMapper: {
     "^.+\\\\.(css|scss)$": "nice-configuration/jest/css-mock"

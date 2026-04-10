@@ -35,7 +35,7 @@ export const Base: Story = {
       <Typography color="light">
         Extends the base TypeScript configuration for non-React packages like nice-styles.
       </Typography>
-      <CodeBlock>{`// tsconfig.json
+      <CodeBlock language="json">{`// tsconfig.json
 {
   "extends": "nice-configuration/typescript/base",
   "compilerOptions": {
@@ -46,7 +46,7 @@ export const Base: Story = {
   "exclude": ["node_modules", "dist"]
 }`}</CodeBlock>
       <Typography as="h4">Included Options</Typography>
-      <CodeBlock>{`{
+      <CodeBlock language="json">{`{
   "target": "ES2020",
   "module": "ESNext",
   "lib": ["ES2020", "DOM", "DOM.Iterable"],
@@ -73,7 +73,7 @@ export const React: Story = {
       <Typography color="light">
         Extends the base configuration with JSX support for React components.
       </Typography>
-      <CodeBlock>{`// tsconfig.json
+      <CodeBlock language="json">{`// tsconfig.json
 {
   "extends": "nice-configuration/typescript/react",
   "compilerOptions": {
@@ -84,7 +84,7 @@ export const React: Story = {
   "exclude": ["node_modules", "dist"]
 }`}</CodeBlock>
       <Typography as="h4">Additional Options</Typography>
-      <CodeBlock>{`{
+      <CodeBlock language="json">{`{
   "jsx": "react-jsx"
 }`}</CodeBlock>
       <Typography color="light">
