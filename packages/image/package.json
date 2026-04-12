@@ -1,0 +1,61 @@
+{
+  "name": "nice-react-image",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "A flexible Image component for React with styled-components, supporting img and background-image rendering modes",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build",
+    "prepare": "npm run build",
+    "generate-exports": "nice-generate-exports ."
+  },
+  "keywords": [
+    "react",
+    "image",
+    "background-image",
+    "styled-components",
+    "component"
+  ],
+  "author": "",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=19.2.0 <20.0.0",
+    "react-dom": ">=19.2.0 <20.0.0",
+    "styled-components": ">=6.1.18 <7.0.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.5",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "nice-configuration": "file:../nice-configuration",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "rollup": "^4.9.1",
+    "rollup-plugin-dts": "^6.1.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "styled-components": "6.1.19",
+    "tslib": "^2.6.2",
+    "typescript": "^5.5.0"
+  },
+  "dependencies": {
+    "nice-react-styles": "file:../nice-react-styles"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niceprototypes/nice-react-image.git"
+  },
+  "bugs": {
+    "url": "https://github.com/niceprototypes/nice-react-image/issues"
+  },
+  "homepage": "https://github.com/niceprototypes/nice-react-image#readme"
+}
