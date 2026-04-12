@@ -38,6 +38,7 @@ const Icon: React.FC<IconProps> = ({
   className,
   strokeScaling = false,
   mode,
+  style,
   vendor = false,
   vendorComponent: VendorComponent,
 }) => {
@@ -55,6 +56,7 @@ const Icon: React.FC<IconProps> = ({
         $spinning={spinning}
         $mode={mode}
         className={className}
+        style={style}
       >
         <VendorComponent />
       </IconWrapperStyled>
@@ -74,6 +76,7 @@ const Icon: React.FC<IconProps> = ({
         $spinning={spinning}
         $mode={mode}
         className={className}
+        style={style}
       >
         {url ? <ImageStyled src={url} alt="" /> : <SvgIcon viewBox={viewBox} />}
       </IconWrapperStyled>
@@ -94,6 +97,7 @@ const Icon: React.FC<IconProps> = ({
           $spinning={spinning}
           $mode={mode}
           className={className}
+          style={style}
         >
           <VendorIcon />
         </IconWrapperStyled>
@@ -113,6 +117,7 @@ const Icon: React.FC<IconProps> = ({
       $spinning={spinning}
       $mode={mode}
       className={className}
+      style={style}
     >
       {PlaceholderIcon && <PlaceholderIcon viewBox={viewBox} />}
     </IconWrapperStyled>

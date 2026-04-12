@@ -40,6 +40,8 @@ export interface IconProps {
   strokeScaling?: IconStrokeScalingType
   /** Force day or night mode */
   mode?: ModeType
+  /** Inline styles applied to the root element */
+  style?: React.CSSProperties
   /** Enable vendor icon resolution */
   vendor?: IconVendorType
   /** Render a custom vendor component with token styling */
