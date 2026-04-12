@@ -44,6 +44,8 @@ export interface LightboxProps {
   title?: LightboxTitleType
   /** Description shown below the title in the overlay */
   description?: LightboxDescriptionType
+  /** Inline styles applied to the trigger element */
+  style?: React.CSSProperties
 }
 
 const LightboxTypes = {} as const

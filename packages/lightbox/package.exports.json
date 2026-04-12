@@ -1,0 +1,7 @@
+{
+  "$schema": "../nice-configuration/src/exports/schema.json",
+  "description": "Fullscreen image lightbox with portal rendering.",
+  "default": "Lightbox",
+  "components": ["Lightbox"],
+  "tokens": ["Lightbox"]
+}

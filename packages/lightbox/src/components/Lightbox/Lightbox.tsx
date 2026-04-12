@@ -9,6 +9,7 @@ const Lightbox: React.FC<LightboxProps> = ({
   alt = "",
   title,
   description,
+  style,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -34,7 +35,7 @@ const Lightbox: React.FC<LightboxProps> = ({
 
   return (
     <>
-      <Trigger onClick={() => setIsOpen(true)}>{children}</Trigger>
+      <Trigger onClick={() => setIsOpen(true)} style={style}>{children}</Trigger>
       {isOpen &&
         createPortal(
           <Overlay onClick={close}>

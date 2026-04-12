@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { getLightboxToken } from "../../tokens"
 
 export const Trigger = styled.div`
   cursor: pointer;
@@ -10,7 +11,7 @@ export const Overlay = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 9999;
+  z-index: ${getLightboxToken("zIndex").var};
   display: flex;
   flex-direction: column;
   align-items: center;
