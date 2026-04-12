@@ -1,12 +1,6 @@
 // Re-export component
 export { default } from "./Slider"
 
-// Re-export types (both individual and namespace)
-export type {
-  SliderProps,
-  SliderChildrenType,
-  SliderCurrentIndexType,
-  SliderIsAnimatingType,
-  SliderOnAnimationCompleteType,
-} from "./types"
+// Re-export all named types from types.ts, plus the SliderTypes namespace
+export * from "./types"
 export { default as SliderTypes } from "./types"

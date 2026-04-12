@@ -28,6 +28,8 @@ export interface SliderProps {
   currentIndex?: SliderCurrentIndexType
   isAnimating?: SliderIsAnimatingType
   onAnimationComplete?: SliderOnAnimationCompleteType
+  /** Inline styles applied to the root element */
+  style?: React.CSSProperties
 }
 
 // Declaration merging: const + namespace creates exportable type namespace

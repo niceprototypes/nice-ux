@@ -7,6 +7,7 @@ const Slider: React.FC<SliderProps> = ({
   currentIndex = 0,
   isAnimating = false,
   onAnimationComplete,
+  style,
 }) => {
   useEffect(() => {
     if (isAnimating && onAnimationComplete) {
@@ -18,7 +19,7 @@ const Slider: React.FC<SliderProps> = ({
   }, [isAnimating, onAnimationComplete])
 
   return (
-    <SliderOuterStyled>
+    <SliderOuterStyled style={style}>
       {children.map((child, index) => (
         <SliderItemStyled
           key={index}
