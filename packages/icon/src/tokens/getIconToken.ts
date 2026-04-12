@@ -3,11 +3,19 @@ import { getComponentToken, type TokenResult } from "nice-react-styles"
 /**
  * Get an icon component token.
  *
- * @param name - Token name (e.g., "size", "color", "strokeWidth")
- * @param variant - Variant within token (defaults to "base")
- * @param mode - Optional theme mode suffix
- * @returns TokenResult with key, var, and value properties
+ * Flat lookup — for tokens at depth 1 (e.g., "size", "color"):
+ * ```ts
+ * getIconToken("size", "base")
+ * ```
+ *
+ * Path lookup — for nested tokens:
+ * ```ts
+ * getIconToken(["group", "variant", "parameter"])
+ * ```
  */
-export function getIconToken(name: string, variant?: string, mode?: string): TokenResult {
-  return getComponentToken("icon", name, variant, mode)
+export function getIconToken(nameOrPath: string | string[], variantOrMode?: string, mode?: string): TokenResult {
+  if (Array.isArray(nameOrPath)) {
+    return getComponentToken("icon", nameOrPath, variantOrMode)
+  }
+  return getComponentToken("icon", nameOrPath, variantOrMode, mode)
 }
