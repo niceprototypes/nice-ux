@@ -1,3 +1,3 @@
 export { default } from "./Tile";
-export type { TileProps, TileHeaderAlignType } from "./types";
+export * from "./types";
 //# sourceMappingURL=index.d.ts.map

@@ -1,0 +1,7 @@
+{
+  "$schema": "../nice-configuration/src/exports/schema.json",
+  "description": "Responsive grid layout component with header, background, and split-layout support.",
+  "default": "Tile",
+  "components": ["Tile"],
+  "tokens": ["Tile"]
+}
