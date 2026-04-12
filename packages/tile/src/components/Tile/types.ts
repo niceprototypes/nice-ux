@@ -50,3 +50,12 @@ export interface TileProps {
   className?: string
   style?: React.CSSProperties
 }
+
+const TileTypes = {} as const
+
+namespace TileTypes {
+  export type HeaderAlign = TileHeaderAlignType
+  export type Props = TileProps
+}
+
+export default TileTypes
