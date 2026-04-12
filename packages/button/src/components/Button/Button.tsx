@@ -27,10 +27,13 @@ const Button: React.FC<ButtonProps> = ({
   size = "base",
   state = "base",
   status = "primary",
+  style,
   target,
   type = "button",
 }) => {
   const [isHovered, setIsHovered] = React.useState(false)
+  const [isFocused, setIsFocused] = React.useState(false)
+  const [isPressed, setIsPressed] = React.useState(false)
   const disabled = isDisabled(state)
   const invertedMode = getInvertedMode(mode, status)
   const square = isSquare(icon, children)
@@ -59,11 +62,19 @@ const Button: React.FC<ButtonProps> = ({
         setIsHovered(false)
         onMouseLeave?.(e)
       }}
+      onFocus={() => setIsFocused(true)}
+      onBlur={() => setIsFocused(false)}
+      onPointerDown={() => setIsPressed(true)}
+      onPointerUp={() => setIsPressed(false)}
+      onPointerCancel={() => setIsPressed(false)}
       $backgroundImage={backgroundImage}
       $borderColor={borderColor}
       $borderRadius={borderRadius}
       $borderWidth={borderWidth}
       $disabled={disabled}
+      $isHovered={isHovered}
+      $isFocused={isFocused}
+      $isPressed={isPressed}
       $link={link}
       $mode={mode}
       $size={size}
@@ -74,13 +85,14 @@ const Button: React.FC<ButtonProps> = ({
       aria-label={ariaLabel}
       className={className}
       data-testid={testId}
+      style={style}
     >
       {children && (
         <Typography
           as="span"
           antialiased={antialiased}
           mode={invertedMode}
-          weight={link ? "base" : "medium"}
+          weight={link ? undefined : "medium"}
           size={size}
         >
           {children}

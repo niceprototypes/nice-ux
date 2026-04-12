@@ -121,6 +121,9 @@ export interface ButtonProps {
   /** Called when mouse leaves the button */
   onMouseLeave?: ButtonOnMouseLeaveType
 
+  /** Inline styles applied to the root element */
+  style?: React.CSSProperties
+
   /** Render as an anchor element instead of a button */
   link?: ButtonLinkType
 

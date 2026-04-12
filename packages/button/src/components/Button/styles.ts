@@ -13,6 +13,9 @@ export const StyledButton = styled.button.withConfig({
   $borderRadius: ButtonBorderRadiusType
   $borderWidth: BorderWidthType
   $disabled: boolean
+  $isHovered: boolean
+  $isFocused: boolean
+  $isPressed: boolean
   $link: boolean
   $mode?: ModeType
   $size: CellHeightType
@@ -29,8 +32,7 @@ export const StyledButton = styled.button.withConfig({
   font-size: inherit;
   line-height: inherit;
   cursor: ${({ $disabled }) => ($disabled ? "not-allowed" : "pointer")};
-  
-  ${({ $disabled }) => $disabled && `-webkit-tap-highlight-color: transparent;`}
+  -webkit-tap-highlight-color: transparent;
 
   ${({
     $link,
