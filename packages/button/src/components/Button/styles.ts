@@ -3,7 +3,7 @@ import { getBreakpoint, getToken } from "nice-react-styles"
 import type { CellHeightType, BorderWidthType, ModeType } from "nice-react-styles"
 import type { ButtonBorderRadiusType, ButtonStateType, ButtonStatusType } from "./types"
 import { getButtonToken } from "../../tokens/getButtonToken"
-import { getStatusToken } from "../../helpers/getStatusToken"
+import { getStatusToken } from "../../utilities/getStatusToken"
 
 export const StyledButton = styled.button.withConfig({
   shouldForwardProp: (prop) => !prop.startsWith("$"),

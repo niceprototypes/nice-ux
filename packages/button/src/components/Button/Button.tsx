@@ -4,8 +4,8 @@ import Icon from "nice-react-icon"
 import { getInvertedMode } from "nice-react-styles"
 import { StyledButton } from "./styles"
 import { ButtonProps } from "./types"
-import { isDisabled } from "../../helpers/isDisabled"
-import { isSquare } from "../../helpers/isSquare"
+import { isDisabled } from "../../utilities/isDisabled"
+import { isSquare } from "../../utilities/isSquare"
 
 const Button: React.FC<ButtonProps> = ({
   antialiased = false,
