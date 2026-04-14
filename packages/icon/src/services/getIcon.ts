@@ -1,4 +1,4 @@
-import { buildIconMap } from "../helpers/buildIconMap"
+import { buildIconMap } from "../utilities/buildIconMap"
 
 const iconMap = buildIconMap()
 

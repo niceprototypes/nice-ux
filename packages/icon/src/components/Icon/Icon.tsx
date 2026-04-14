@@ -3,7 +3,7 @@ import { IconProps } from "./types"
 import { IconWrapperStyled, ImageStyled } from "./styles"
 import { getIcon } from "../../services/getIcon"
 import { getVendorIcon } from "../../services/registerVendorResolver"
-import { isSpinning } from "../../helpers/isSpinning"
+import { isSpinning } from "../../utilities/isSpinning"
 
 /**
  * A flexible and customizable React icon component with built-in icon set
