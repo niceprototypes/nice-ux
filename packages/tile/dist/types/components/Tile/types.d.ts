@@ -39,4 +39,10 @@ export interface TileProps {
     className?: string;
     style?: React.CSSProperties;
 }
+declare const TileTypes: {};
+declare namespace TileTypes {
+    type HeaderAlign = TileHeaderAlignType;
+    type Props = TileProps;
+}
+export default TileTypes;
 //# sourceMappingURL=types.d.ts.map

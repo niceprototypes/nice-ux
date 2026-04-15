@@ -15,13 +15,21 @@ const TileStyles = () => null;
 /**
  * Get a tile component token.
  *
- * @param name - Token name (e.g., "backgroundColor", "foregroundColor")
- * @param variant - Variant within token (defaults to "base")
- * @param mode - Optional theme mode suffix
- * @returns TokenResult with key, var, and value properties
+ * Flat lookup — for tokens at depth 1 (e.g., "backgroundColor", "foregroundColor"):
+ * ```ts
+ * getTileToken("backgroundColor", "base")
+ * ```
+ *
+ * Path lookup — for nested tokens:
+ * ```ts
+ * getTileToken(["group", "variant", "parameter"])
+ * ```
  */
-function getTileToken(name, variant, mode) {
-    return getComponentToken("tile", name, variant, mode);
+function getTileToken(nameOrPath, variantOrMode, mode) {
+    if (Array.isArray(nameOrPath)) {
+        return getComponentToken("tile", nameOrPath, variantOrMode);
+    }
+    return getComponentToken("tile", nameOrPath, variantOrMode, mode);
 }
 
 const OuterFlex = styled(Flex).withConfig({
@@ -111,5 +119,7 @@ const Tile = ({ children, contentTop, contentCenter, contentLeft: TileLeft, cont
     return (jsx(OuterFlex, { className: className, style: style, "$backgroundImage": backgroundImage, "$backgroundColor": backgroundColor, "$foregroundColor": foregroundColor, "$backgroundPosition": backgroundPosition, "$backgroundSize": backgroundSize, "$backgroundAttachment": backgroundAttachment, children: jsx(InnerFlex, { direction: "column", grow: 1, spacing: spacing, "$maxWidthTablet": maxWidthTablet, "$maxWidthDesktop": maxWidthDesktop, children: jsx(TileLayout, { contentTop: contentTop, contentCenter: contentCenter, contentLeft: TileLeft, contentRight: TileRight, title: title, titleAs: titleAs, titleSize: titleSize, description: description, descriptionSize: descriptionSize, align: resolvedAlign, gap: gap, mode: mode, children: children }) }) }));
 };
 
-export { TileStyles, Tile as default, getTileToken };
+const TileTypes = {};
+
+export { TileStyles, TileTypes, Tile as default, getTileToken };
 //# sourceMappingURL=index.esm.js.map

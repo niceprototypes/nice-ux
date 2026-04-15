@@ -41,6 +41,11 @@ interface TileProps {
     className?: string;
     style?: React.CSSProperties;
 }
+declare const TileTypes: {};
+declare namespace TileTypes {
+    type HeaderAlign = TileHeaderAlignType;
+    type Props = TileProps;
+}
 
 declare const Tile: React.FC<TileProps>;
 //# sourceMappingURL=Tile.d.ts.map
@@ -55,12 +60,17 @@ declare const TileStyles: ComponentType;
 /**
  * Get a tile component token.
  *
- * @param name - Token name (e.g., "backgroundColor", "foregroundColor")
- * @param variant - Variant within token (defaults to "base")
- * @param mode - Optional theme mode suffix
- * @returns TokenResult with key, var, and value properties
+ * Flat lookup — for tokens at depth 1 (e.g., "backgroundColor", "foregroundColor"):
+ * ```ts
+ * getTileToken("backgroundColor", "base")
+ * ```
+ *
+ * Path lookup — for nested tokens:
+ * ```ts
+ * getTileToken(["group", "variant", "parameter"])
+ * ```
  */
-declare function getTileToken(name: string, variant?: string, mode?: string): TokenResult;
+declare function getTileToken(nameOrPath: string | string[], variantOrMode?: string, mode?: string): TokenResult;
 
-export { TileStyles, Tile as default, getTileToken };
+export { TileStyles, TileTypes, Tile as default, getTileToken };
 export type { TileHeaderAlignType, TileProps };
