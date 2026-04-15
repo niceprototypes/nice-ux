@@ -2,28 +2,10 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var React = require('react');
+var jsxRuntime = require('react/jsx-runtime');
+require('react');
 var styled = require('styled-components');
 var niceReactStyles = require('nice-react-styles');
-
-function _interopNamespaceDefault(e) {
-    var n = Object.create(null);
-    if (e) {
-        Object.keys(e).forEach(function (k) {
-            if (k !== 'default') {
-                var d = Object.getOwnPropertyDescriptor(e, k);
-                Object.defineProperty(n, k, d.get ? d : {
-                    enumerable: true,
-                    get: function () { return e[k]; }
-                });
-            }
-        });
-    }
-    n.default = e;
-    return Object.freeze(n);
-}
-
-var React__namespace = /*#__PURE__*/_interopNamespaceDefault(React);
 
 /**
  * Checks if a value is a responsive breakpoint object (has mobile, tablet, or desktop keys)
@@ -503,7 +485,7 @@ const Flex = (props) => {
     const normalizedProps = normalizeProps(props);
     // Render the styled component with normalized props
     // Children are passed through from original props to maintain reference integrity
-    return React__namespace.createElement(FlexStyled, { ...normalizedProps }, props.children);
+    return jsxRuntime.jsx(FlexStyled, { ...normalizedProps, children: props.children });
 };
 
 // Declaration merging: const + namespace creates exportable type namespace

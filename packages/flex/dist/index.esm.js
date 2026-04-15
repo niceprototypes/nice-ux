@@ -1,4 +1,5 @@
-import * as React from 'react';
+import { jsx } from 'react/jsx-runtime';
+import 'react';
 import styled from 'styled-components';
 import { getConstant, getBreakpoint } from 'nice-react-styles';
 
@@ -480,7 +481,7 @@ const Flex = (props) => {
     const normalizedProps = normalizeProps(props);
     // Render the styled component with normalized props
     // Children are passed through from original props to maintain reference integrity
-    return React.createElement(FlexStyled, { ...normalizedProps }, props.children);
+    return jsx(FlexStyled, { ...normalizedProps, children: props.children });
 };
 
 // Declaration merging: const + namespace creates exportable type namespace
