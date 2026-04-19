@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { ComponentType } from 'react';
 import { FlexSpacingType } from 'nice-react-flex';
-import { FontSizeType, GapType, ModeType, TokenResult } from 'nice-react-styles';
-import { AsType, AlignType } from 'nice-react-typography';
+import { GapType, ModeType, TokenResult } from 'nice-react-styles';
+import { TypographyProps, AsType, AlignType } from 'nice-react-typography';
+
+type TileTypographyProps = Partial<Omit<TypographyProps, "children">>;
 
 /**
  * Responsive alignment type for header text
@@ -23,9 +25,9 @@ interface TileProps {
     contentRight?: React.ReactNode;
     title?: React.ReactNode;
     titleAs?: AsType;
-    titleSize?: FontSizeType;
+    titleProps?: TileTypographyProps;
     description?: React.ReactNode | string[];
-    descriptionSize?: FontSizeType;
+    descriptionProps?: TileTypographyProps;
     align?: TileHeaderAlignType;
     gap?: GapType;
     spacing?: FlexSpacingType;
@@ -44,6 +46,7 @@ interface TileProps {
 declare const TileTypes: {};
 declare namespace TileTypes {
     type HeaderAlign = TileHeaderAlignType;
+    type Typography = TileTypographyProps;
     type Props = TileProps;
 }
 
@@ -73,4 +76,4 @@ declare const TileStyles: ComponentType;
 declare function getTileToken(nameOrPath: string | string[], variantOrMode?: string, mode?: string): TokenResult;
 
 export { TileStyles, TileTypes, Tile as default, getTileToken };
-export type { TileHeaderAlignType, TileProps };
+export type { TileHeaderAlignType, TileProps, TileTypographyProps };

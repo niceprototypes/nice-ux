@@ -95,14 +95,14 @@ const InnerFlex = styled(Flex).withConfig({
   `}
 `;
 
-const TileContent = ({ children, contentTop, contentCenter, title, titleAs, titleSize, description, descriptionSize, align, gap, mode, }) => {
-    return (jsxRuntime.jsxs(Flex, { direction: "column", gap: gap, children: [contentTop, title && (jsxRuntime.jsx(Typography, { as: titleAs, size: titleSize, weight: "semibold", align: align, mode: mode, children: title })), contentCenter, description && (Array.isArray(description)
-                ? (jsxRuntime.jsx(Flex, { direction: "column", gap: descriptionSize, children: description.map((text, index) => (jsxRuntime.jsx(Typography, { color: "light", size: descriptionSize, align: align, mode: mode, children: text }, index))) }))
-                : (jsxRuntime.jsx(Typography, { color: "light", size: descriptionSize, align: align, mode: mode, children: description }))), children] }));
+const TileContent = ({ children, contentTop, contentCenter, title, titleAs, titleProps, description, descriptionProps, align, gap, mode, }) => {
+    return (jsxRuntime.jsxs(Flex, { direction: "column", gap: gap, children: [contentTop, title && (jsxRuntime.jsx(Typography, { as: titleAs, weight: "semibold", align: align, mode: mode, ...titleProps, children: title })), contentCenter, description && (Array.isArray(description)
+                ? (jsxRuntime.jsx(Flex, { direction: "column", gap: descriptionProps?.size, children: description.map((text, index) => (jsxRuntime.jsx(Typography, { color: "light", align: align, mode: mode, ...descriptionProps, children: text }, index))) }))
+                : (jsxRuntime.jsx(Typography, { color: "light", align: align, mode: mode, ...descriptionProps, children: description }))), children] }));
 };
 
-const TileLayout = ({ children, contentTop, contentCenter, contentLeft: TileLeft, contentRight: TileRight, title, titleAs, titleSize, description, descriptionSize, align, gap, mode, }) => {
-    const content = (jsxRuntime.jsx(TileContent, { contentTop: contentTop, contentCenter: contentCenter, title: title, titleAs: titleAs, titleSize: titleSize, description: description, descriptionSize: descriptionSize, align: align, gap: gap, mode: mode, children: children }));
+const TileLayout = ({ children, contentTop, contentCenter, contentLeft: TileLeft, contentRight: TileRight, title, titleAs, titleProps, description, descriptionProps, align, gap, mode, }) => {
+    const content = (jsxRuntime.jsx(TileContent, { contentTop: contentTop, contentCenter: contentCenter, title: title, titleAs: titleAs, titleProps: titleProps, description: description, descriptionProps: descriptionProps, align: align, gap: gap, mode: mode, children: children }));
     return (jsxRuntime.jsx(Flex, { direction: "column", gap: "larger", children: !!TileLeft || !!TileRight ? (jsxRuntime.jsxs(Flex, { direction: { mobile: "column", tablet: "row" }, alignItems: "center", gap: "large", children: [TileLeft, jsxRuntime.jsx(Flex, { direction: "column", grow: 1, children: content }), TileRight] })) : content }));
 };
 
@@ -118,9 +118,9 @@ const resolveHeaderAlign = (align) => {
     return align.mobile || "center";
 };
 
-const Tile = ({ children, contentTop, contentCenter, contentLeft: TileLeft, contentRight: TileRight, title, titleAs = "h3", titleSize, description, descriptionSize, align, gap = "base", spacing, maxWidthTablet, maxWidthDesktop, backgroundImage, backgroundColor, backgroundPosition = "center", backgroundSize = "cover", backgroundAttachment = "fixed", foregroundColor, mode, className, style, }) => {
+const Tile = ({ children, contentTop, contentCenter, contentLeft: TileLeft, contentRight: TileRight, title, titleAs = "h3", titleProps, description, descriptionProps, align, gap = "base", spacing, maxWidthTablet, maxWidthDesktop, backgroundImage, backgroundColor, backgroundPosition = "center", backgroundSize = "cover", backgroundAttachment = "fixed", foregroundColor, mode, className, style, }) => {
     const resolvedAlign = resolveHeaderAlign(align);
-    return (jsxRuntime.jsx(OuterFlex, { className: className, style: style, "$backgroundImage": backgroundImage, "$backgroundColor": backgroundColor, "$foregroundColor": foregroundColor, "$backgroundPosition": backgroundPosition, "$backgroundSize": backgroundSize, "$backgroundAttachment": backgroundAttachment, children: jsxRuntime.jsx(InnerFlex, { direction: "column", grow: 1, spacing: spacing, "$maxWidthTablet": maxWidthTablet, "$maxWidthDesktop": maxWidthDesktop, children: jsxRuntime.jsx(TileLayout, { contentTop: contentTop, contentCenter: contentCenter, contentLeft: TileLeft, contentRight: TileRight, title: title, titleAs: titleAs, titleSize: titleSize, description: description, descriptionSize: descriptionSize, align: resolvedAlign, gap: gap, mode: mode, children: children }) }) }));
+    return (jsxRuntime.jsx(OuterFlex, { className: className, style: style, "$backgroundImage": backgroundImage, "$backgroundColor": backgroundColor, "$foregroundColor": foregroundColor, "$backgroundPosition": backgroundPosition, "$backgroundSize": backgroundSize, "$backgroundAttachment": backgroundAttachment, children: jsxRuntime.jsx(InnerFlex, { direction: "column", grow: 1, spacing: spacing, "$maxWidthTablet": maxWidthTablet, "$maxWidthDesktop": maxWidthDesktop, children: jsxRuntime.jsx(TileLayout, { contentTop: contentTop, contentCenter: contentCenter, contentLeft: TileLeft, contentRight: TileRight, title: title, titleAs: titleAs, titleProps: titleProps, description: description, descriptionProps: descriptionProps, align: resolvedAlign, gap: gap, mode: mode, children: children }) }) }));
 };
 
 const TileTypes = {};

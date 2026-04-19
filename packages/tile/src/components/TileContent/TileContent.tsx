@@ -9,9 +9,9 @@ const TileContent: React.FC<TileContentProps> = ({
   contentCenter,
   title,
   titleAs,
-  titleSize,
+  titleProps,
   description,
-  descriptionSize,
+  descriptionProps,
   align,
   gap,
   mode,
@@ -22,10 +22,10 @@ const TileContent: React.FC<TileContentProps> = ({
       {title && (
         <Typography
           as={titleAs}
-          size={titleSize}
           weight="semibold"
           align={align}
           mode={mode}
+          {...titleProps}
         >
           {title}
         </Typography>
@@ -34,14 +34,14 @@ const TileContent: React.FC<TileContentProps> = ({
       {description && (
         Array.isArray(description)
           ? (
-            <Flex direction="column" gap={descriptionSize}>
+            <Flex direction="column" gap={descriptionProps?.size}>
               {description.map((text, index) => (
                 <Typography
                   key={index}
                   color="light"
-                  size={descriptionSize}
                   align={align}
                   mode={mode}
+                  {...descriptionProps}
                 >
                   {text}
                 </Typography>
@@ -51,9 +51,9 @@ const TileContent: React.FC<TileContentProps> = ({
           : (
             <Typography
               color="light"
-              size={descriptionSize}
               align={align}
               mode={mode}
+              {...descriptionProps}
             >
               {description}
             </Typography>

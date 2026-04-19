@@ -12,9 +12,9 @@ const Tile: React.FC<TileProps> = ({
   contentRight: TileRight,
   title,
   titleAs = "h3",
-  titleSize,
+  titleProps,
   description,
-  descriptionSize,
+  descriptionProps,
   align,
   gap = "base",
   spacing,
@@ -57,9 +57,9 @@ const Tile: React.FC<TileProps> = ({
           contentRight={TileRight}
           title={title}
           titleAs={titleAs}
-          titleSize={titleSize}
+          titleProps={titleProps}
           description={description}
-          descriptionSize={descriptionSize}
+          descriptionProps={descriptionProps}
           align={resolvedAlign}
           gap={gap}
           mode={mode}

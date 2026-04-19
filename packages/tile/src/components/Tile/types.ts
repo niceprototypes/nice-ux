@@ -1,7 +1,10 @@
 import * as React from "react"
 import type { FlexSpacingType } from "nice-react-flex"
-import type { FontSizeType, GapType, ModeType } from "nice-react-styles"
+import type { GapType, ModeType } from "nice-react-styles"
 import type { AlignType, AsType } from "nice-react-typography"
+import type { TileTypographyProps } from "../TileContent/types"
+
+export type { TileTypographyProps }
 
 /**
  * Responsive alignment type for header text
@@ -24,9 +27,9 @@ export interface TileProps {
   // Header
   title?: React.ReactNode
   titleAs?: AsType
-  titleSize?: FontSizeType
+  titleProps?: TileTypographyProps
   description?: React.ReactNode | string[]
-  descriptionSize?: FontSizeType
+  descriptionProps?: TileTypographyProps
   align?: TileHeaderAlignType
   gap?: GapType
 
@@ -55,6 +58,7 @@ const TileTypes = {} as const
 
 namespace TileTypes {
   export type HeaderAlign = TileHeaderAlignType
+  export type Typography = TileTypographyProps
   export type Props = TileProps
 }
 

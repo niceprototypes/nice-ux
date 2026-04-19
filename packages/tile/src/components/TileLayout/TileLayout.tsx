@@ -11,9 +11,9 @@ const TileLayout: React.FC<TileLayoutProps> = ({
   contentRight: TileRight,
   title,
   titleAs,
-  titleSize,
+  titleProps,
   description,
-  descriptionSize,
+  descriptionProps,
   align,
   gap,
   mode,
@@ -24,9 +24,9 @@ const TileLayout: React.FC<TileLayoutProps> = ({
       contentCenter={contentCenter}
       title={title}
       titleAs={titleAs}
-      titleSize={titleSize}
+      titleProps={titleProps}
       description={description}
-      descriptionSize={descriptionSize}
+      descriptionProps={descriptionProps}
       align={align}
       gap={gap}
       mode={mode}
