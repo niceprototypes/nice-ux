@@ -1,0 +1,17 @@
+import { Meta, Source } from '@storybook/addon-docs/blocks'
+import { DocsRow } from '../../../src/components/DocsRow'
+import DemoDots from '../../../src/components/DemoDots'
+import { twoDots } from './Flex.services'
+
+<Meta title="React/Components/Flex/direction" />
+
+# Flex — Direction
+
+<div>
+  {["row", "column"].map(value => (
+    <DocsRow key={value} spacing="large none">
+      <DemoDots direction={value} dots={twoDots} />
+      <Source language="tsx" code={`<Flex direction="${value}">\n  {children}\n</Flex>`} />
+    </DocsRow>
+  ))}
+</div>

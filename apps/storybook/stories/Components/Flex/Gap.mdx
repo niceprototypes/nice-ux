@@ -1,0 +1,17 @@
+import { Meta, Source } from '@storybook/addon-docs/blocks'
+import { DocsRow } from '../../../src/components/DocsRow'
+import DemoDots from '../../../src/components/DemoDots'
+import { threeDots } from './Flex.services'
+
+<Meta title="React/Components/Flex/gap" />
+
+# Flex — Gap
+
+<div>
+  {["smaller", "small", "base", "large", "larger"].map(value => (
+    <DocsRow key={value} spacing="large none">
+      <DemoDots gap={value} dots={threeDots} />
+      <Source language="tsx" code={`<Flex gap="${value}">\n  {children}\n</Flex>`} />
+    </DocsRow>
+  ))}
+</div>

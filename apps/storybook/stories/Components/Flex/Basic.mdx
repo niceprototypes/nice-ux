@@ -1,0 +1,13 @@
+import { Meta, Source } from '@storybook/addon-docs/blocks'
+import { DocsRow } from '../../../src/components/DocsRow'
+import DemoDots from '../../../src/components/DemoDots'
+import { twoDots } from './Flex.services'
+
+<Meta title="React/Components/Flex/basic" />
+
+# Flex — Basic
+
+<DocsRow spacing="large none">
+  <DemoDots dots={twoDots} />
+  <Source language="tsx" code={`<Flex>{children}</Flex>`} />
+</DocsRow>

@@ -1,0 +1,12 @@
+import { Meta, Source } from '@storybook/addon-docs/blocks'
+import Button from 'nice-react-button'
+import { DocsRow } from '../../../src/components/DocsRow'
+
+<Meta title="React/Components/Button/basic" />
+
+# Button — Basic
+
+<DocsRow spacing="large none">
+  <Button onClick={() => alert("Button clicked!")}>Click Me</Button>
+  <Source language="tsx" code={`<Button onClick={handler}>\n  {children}\n</Button>`} />
+</DocsRow>

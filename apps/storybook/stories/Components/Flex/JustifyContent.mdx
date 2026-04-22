@@ -1,0 +1,17 @@
+import { Meta, Source } from '@storybook/addon-docs/blocks'
+import { DocsRow } from '../../../src/components/DocsRow'
+import DemoDots from '../../../src/components/DemoDots'
+import { threeDots } from './Flex.services'
+
+<Meta title="React/Components/Flex/justifyContent" />
+
+# Flex — JustifyContent
+
+<div>
+  {["flex-start", "flex-end", "center", "space-between", "space-around", "space-evenly"].map(value => (
+    <DocsRow key={value} spacing="large none">
+      <DemoDots justifyContent={value} dots={threeDots} width="12rem" bordered />
+      <Source language="tsx" code={`<Flex justifyContent="${value}">\n  {children}\n</Flex>`} />
+    </DocsRow>
+  ))}
+</div>

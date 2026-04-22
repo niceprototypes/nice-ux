@@ -1,0 +1,37 @@
+import { Meta, Source } from '@storybook/addon-docs/blocks'
+import Flex from 'nice-react-flex'
+import { getToken } from 'nice-react-styles'
+import { DocsRow } from '../../../src/components/DocsRow'
+import DemoDots from '../../../src/components/DemoDots'
+import { twoDots } from './Flex.services'
+
+<Meta title="React/Components/Flex/mode" />
+
+# Flex — Mode
+
+<div>
+  {["padding", "margin"].map(value => (
+    <DocsRow key={value} spacing="large none">
+      <Flex direction="column">
+        <Flex
+          style={{
+            border: `${getToken("borderWidth").var} solid ${value === "margin" ? getToken("borderColor").var : getToken("borderColor", "dark").var}`,
+            borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2 + 2px)`,
+          }}
+        >
+          <Flex
+            mode={value}
+            spacing="base"
+            style={{
+              border: `${getToken("borderWidth").var} solid ${value === "margin" ? getToken("borderColor", "dark").var : "transparent"}`,
+              borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2 + 2px)`,
+            }}
+          >
+            <DemoDots dots={twoDots} />
+          </Flex>
+        </Flex>
+      </Flex>
+      <Source language="tsx" code={`<Flex mode="${value}">\n  {children}\n</Flex>`} />
+    </DocsRow>
+  ))}
+</div>

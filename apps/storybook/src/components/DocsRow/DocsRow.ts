@@ -2,7 +2,7 @@ import styled from "styled-components"
 import Flex from "nice-react-flex"
 import { getToken } from "nice-react-styles"
 
-export const RowFlex = styled(Flex)`
+export const DocsRow = styled(Flex)`
   align-items: center;
   gap: ${getToken("gap", "larger").var};
   border-bottom: 1px solid ${getToken("borderColor", "base").var};

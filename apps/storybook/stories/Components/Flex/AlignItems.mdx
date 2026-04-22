@@ -1,0 +1,58 @@
+import { Meta, Source } from '@storybook/addon-docs/blocks'
+import { getToken } from 'nice-react-styles'
+import { DocsRow } from '../../../src/components/DocsRow'
+import DemoDots from '../../../src/components/DemoDots'
+import { threeDots } from './Flex.services'
+
+<Meta title="React/Components/Flex/alignItems" />
+
+export const baselineDots = [
+  {
+    color: getToken("foregroundColor", "error").var,
+    height: getToken("cellHeight", "small").var,
+    width: getToken("cellHeight", "smaller").var,
+  },
+  {
+    color: getToken("foregroundColor", "warning").var,
+    height: getToken("cellHeight", "smaller").var,
+    width: getToken("cellHeight", "smaller").var,
+  },
+  {
+    color: getToken("foregroundColor", "link").var,
+    height: getToken("cellHeight").var,
+    width: getToken("cellHeight", "smaller").var,
+  },
+]
+
+export const stretchDots = [
+  { color: getToken("foregroundColor", "error").var, width: getToken("cellHeight", "smaller").var },
+  { color: getToken("foregroundColor", "warning").var, width: getToken("cellHeight", "smaller").var },
+  { color: getToken("foregroundColor", "link").var, width: getToken("cellHeight", "smaller").var },
+]
+
+# Flex — AlignItems
+
+<DocsRow spacing="large none">
+  <DemoDots alignItems="flex-start" dots={threeDots} height="6rem" bordered />
+  <Source language="tsx" code={`<Flex alignItems="flex-start">\n  {children}\n</Flex>`} />
+</DocsRow>
+
+<DocsRow spacing="large none">
+  <DemoDots alignItems="flex-end" dots={threeDots} height="6rem" bordered />
+  <Source language="tsx" code={`<Flex alignItems="flex-end">\n  {children}\n</Flex>`} />
+</DocsRow>
+
+<DocsRow spacing="large none">
+  <DemoDots alignItems="center" dots={threeDots} height="6rem" bordered />
+  <Source language="tsx" code={`<Flex alignItems="center">\n  {children}\n</Flex>`} />
+</DocsRow>
+
+<DocsRow spacing="large none">
+  <DemoDots alignItems="baseline" dots={baselineDots} height="6rem" bordered />
+  <Source language="tsx" code={`<Flex alignItems="baseline">\n  {children}\n</Flex>`} />
+</DocsRow>
+
+<DocsRow spacing="large none">
+  <DemoDots alignItems="stretch" dots={stretchDots} height="6rem" bordered />
+  <Source language="tsx" code={`<Flex alignItems="stretch">\n  {children}\n</Flex>`} />
+</DocsRow>

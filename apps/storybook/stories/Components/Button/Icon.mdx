@@ -1,0 +1,17 @@
+import { Meta, Source } from '@storybook/addon-docs/blocks'
+import Button from 'nice-react-button'
+import { DocsRow } from '../../../src/components/DocsRow'
+
+<Meta title="React/Components/Button/icon" />
+
+# Button — Icon
+
+<DocsRow spacing="large none">
+  <Button onClick={() => {}} icon="arrow">Next</Button>
+  <Source language="tsx" code={`<Button\n  onClick={handler}\n  icon="arrow-right"\n>\n  {children}\n</Button>`} />
+</DocsRow>
+
+<DocsRow spacing="large none">
+  <Button onClick={() => {}} icon="plus" aria-label="Add item" />
+  <Source language="tsx" code={`<Button\n  onClick={handler}\n  icon="plus"\n  aria-label="Add item"\n/>`} />
+</DocsRow>

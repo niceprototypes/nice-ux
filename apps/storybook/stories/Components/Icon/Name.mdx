@@ -1,7 +1,6 @@
 import { Meta, Source } from '@storybook/addon-docs/blocks'
 import Icon, { iconNames } from 'nice-react-icon'
-import { RowFlex } from './Icon.styles'
-import Flex from "nice-react-flex"
+import { DocsRow } from '../../../src/components/DocsRow'
 
 <Meta title="React/Components/Icon/name" />
 
@@ -11,9 +10,9 @@ In the examples below, `size="larger"` and `strokeWidth="large"` have been set t
 
 <div>
   {iconNames.map(name => (
-    <RowFlex key={name} spacing="large none">
+    <DocsRow key={name} spacing="large none">
       <Icon name={name} size="larger" strokeWidth="large" />
         <Source language="tsx" code={name === "placeholder" ? `<Icon />` : `<Icon name="${name}" />`} />
-    </RowFlex>
+    </DocsRow>
   ))}
 </div>

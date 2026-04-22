@@ -1,0 +1,29 @@
+import { Meta, Source } from '@storybook/addon-docs/blocks'
+import Button from 'nice-react-button'
+import Flex from 'nice-react-flex'
+import { DocsRow } from '../../../src/components/DocsRow'
+
+export const states = ["base", "disabled", "error", "success", "warning"]
+
+export const stateLabel = (s) => s.charAt(0).toUpperCase() + s.slice(1)
+
+export const stateCode = (s) =>
+  s === "base"
+    ? `<Button onClick={handler}>\n  {children}\n</Button>`
+    : `<Button\n  onClick={handler}\n  state="${s}"\n>\n  {children}\n</Button>`
+
+<Meta title="React/Components/Button/state" />
+
+# Button — State
+
+<div>
+  {states.map(state => (
+    <DocsRow key={state} spacing="large none">
+      <Flex gap="small">
+        <Button onClick={() => {}} state={state === "base" ? undefined : state}>{stateLabel(state)}</Button>
+        <Button status="secondary" onClick={() => {}} state={state === "base" ? undefined : state}>{stateLabel(state)}</Button>
+      </Flex>
+      <Source language="tsx" code={stateCode(state)} />
+    </DocsRow>
+  ))}
+</div>

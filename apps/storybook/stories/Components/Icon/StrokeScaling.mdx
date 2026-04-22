@@ -1,17 +1,17 @@
 import { Meta, Source } from '@storybook/addon-docs/blocks'
 import Icon from 'nice-react-icon'
-import { RowFlex } from './Icon.styles'
+import { DocsRow } from '../../../src/components/DocsRow'
 
 <Meta title="React/Components/Icon/strokeScaling" />
 
 # Icon — StrokeScaling
 
-<RowFlex spacing="large none">
+<DocsRow spacing="large none">
   <Icon size="larger" strokeScaling={false} />
   <Source language="tsx" code={`<Icon size="larger" />`} />
-</RowFlex>
+</DocsRow>
 
-<RowFlex spacing="large none">
+<DocsRow spacing="large none">
   <Icon size="larger" strokeScaling={true} />
   <Source language="tsx" code={`<Icon size="larger" strokeScaling />`} />
-</RowFlex>
+</DocsRow>
