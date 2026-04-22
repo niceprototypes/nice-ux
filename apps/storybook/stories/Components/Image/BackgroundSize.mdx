@@ -1,0 +1,21 @@
+import { Meta, Source } from '@storybook/addon-docs/blocks'
+import Image from 'nice-react-image'
+import { DocsRow } from '../../../src/components/DocsRow'
+import { getPicsum } from '../../../src/services'
+
+export const DEMO_IMAGE = getPicsum()
+
+export const sizes = ["contain", "cover", "fill", "none", "scale-down"]
+
+<Meta title="React/Components/Image/backgroundSize" />
+
+# Image — BackgroundSize
+
+<div>
+  {sizes.map(size => (
+    <DocsRow key={size} spacing="large none">
+      <Image src={DEMO_IMAGE} alt={`${size} demo`} width="300px" height="200px" backgroundSize={size} />
+      <Source language="tsx" code={`<Image\n  src="/photo.jpg"\n  alt="Description"\n  width="300px"\n  height="200px"\n  backgroundSize="${size}"\n/>`} />
+    </DocsRow>
+  ))}
+</div>

@@ -1,0 +1,28 @@
+import { Meta, Source } from '@storybook/addon-docs/blocks'
+import Image from 'nice-react-image'
+import { DocsRow } from '../../../src/components/DocsRow'
+import { getPicsum } from '../../../src/services'
+
+export const DEMO_IMAGE = getPicsum()
+
+export const radii = ["smaller", "small", "base", "large", "larger"]
+
+<Meta title="React/Components/Image/borderRadius" />
+
+# Image — BorderRadius
+
+<div>
+  {radii.map(radius => (
+    <DocsRow key={radius} spacing="large none">
+      <Image
+        src={DEMO_IMAGE}
+        alt={`${radius} radius demo`}
+        width="200px"
+        height="150px"
+        backgroundSize="cover"
+        borderRadius={radius}
+      />
+      <Source language="tsx" code={`<Image\n  src="/photo.jpg"\n  alt="Description"\n  borderRadius="${radius}"\n/>`} />
+    </DocsRow>
+  ))}
+</div>

@@ -1,0 +1,43 @@
+import { Meta, Source } from '@storybook/addon-docs/blocks'
+import Image from 'nice-react-image'
+import Typography from 'nice-react-typography'
+import Flex from 'nice-react-flex'
+import { getToken } from 'nice-react-styles'
+import { DocsRow } from '../../../src/components/DocsRow'
+import { getPicsum } from '../../../src/services'
+
+export const DEMO_IMAGE = getPicsum()
+
+<Meta title="React/Components/Image/as" />
+
+# Image — As
+
+<DocsRow spacing="large none">
+  <Image src={DEMO_IMAGE} alt="Standard img element" width="300px" height="200px" backgroundSize="cover" />
+  <Source language="tsx" code={`<Image\n  src="/photo.jpg"\n  alt="Description"\n  width="300px"\n  height="200px"\n  backgroundSize="cover"\n/>`} />
+</DocsRow>
+
+<DocsRow spacing="large none">
+  <Image
+    as="div"
+    src={DEMO_IMAGE}
+    alt="Background image div"
+    width="300px"
+    height="200px"
+    backgroundSize="cover"
+    borderRadius="base"
+  >
+    <Flex
+      direction="column"
+      justifyContent="flex-end"
+      style={{
+        height: "100%",
+        padding: getToken("gap", "base").var,
+        background: "linear-gradient(transparent 50%, rgba(0,0,0,0.6))",
+      }}
+    >
+      <Typography color="lighter" weight="bold">Overlay content</Typography>
+    </Flex>
+  </Image>
+  <Source language="tsx" code={`<Image\n  as="div"\n  src="/hero.jpg"\n  alt="Hero banner"\n  width="300px"\n  height="200px"\n  backgroundSize="cover"\n>\n  <h1>Overlay content</h1>\n</Image>`} />
+</DocsRow>

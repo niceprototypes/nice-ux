@@ -1,0 +1,41 @@
+import { Meta, Source } from '@storybook/addon-docs/blocks'
+import Image from 'nice-react-image'
+import { DocsRow } from '../../../src/components/DocsRow'
+import { getPicsum } from '../../../src/services'
+
+export const DEMO_IMAGE = getPicsum()
+
+<Meta title="React/Components/Image/mode" />
+
+# Image — Mode
+
+Pins the `borderRadius` token resolution to a specific mode. Use this when
+the containing app is in one mode but a specific image should resolve tokens
+from another (e.g. locking an image frame to `"day"` tokens inside a night
+theme panel).
+
+<DocsRow spacing="large none">
+  <Image
+    src={DEMO_IMAGE}
+    alt="Day mode"
+    width="200px"
+    height="150px"
+    backgroundSize="cover"
+    borderRadius="base"
+    mode="day"
+  />
+  <Source language="tsx" code={`<Image\n  src="/photo.jpg"\n  alt="Description"\n  borderRadius="base"\n  mode="day"\n/>`} />
+</DocsRow>
+
+<DocsRow spacing="large none">
+  <Image
+    src={DEMO_IMAGE}
+    alt="Night mode"
+    width="200px"
+    height="150px"
+    backgroundSize="cover"
+    borderRadius="base"
+    mode="night"
+  />
+  <Source language="tsx" code={`<Image\n  src="/photo.jpg"\n  alt="Description"\n  borderRadius="base"\n  mode="night"\n/>`} />
+</DocsRow>

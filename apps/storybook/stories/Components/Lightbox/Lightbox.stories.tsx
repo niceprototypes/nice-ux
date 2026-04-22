@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import Lightbox from "nice-react-lightbox"
+import { getPicsum } from "../../../src/services"
 import BasicStory from "./stories/Basic.story"
 import CaptionStory from "./stories/Caption.story"
 
@@ -53,7 +54,7 @@ const meta = {
     },
   },
   args: {
-    imageUrl: "https://picsum.photos/id/10/800/600",
+    imageUrl: getPicsum(10),
   },
 } satisfies Meta<typeof Lightbox>
 

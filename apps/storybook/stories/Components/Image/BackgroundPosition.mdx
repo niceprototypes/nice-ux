@@ -1,0 +1,28 @@
+import { Meta, Source } from '@storybook/addon-docs/blocks'
+import Image from 'nice-react-image'
+import { DocsRow } from '../../../src/components/DocsRow'
+import { getPicsum } from '../../../src/services'
+
+export const DEMO_IMAGE = getPicsum()
+
+export const positions = ["center", "top", "bottom right"]
+
+<Meta title="React/Components/Image/backgroundPosition" />
+
+# Image — BackgroundPosition
+
+<div>
+  {positions.map(position => (
+    <DocsRow key={position} spacing="large none">
+      <Image
+        src={DEMO_IMAGE}
+        alt={`${position} demo`}
+        width="200px"
+        height="200px"
+        backgroundSize="cover"
+        backgroundPosition={position}
+      />
+      <Source language="tsx" code={`<Image\n  src="/photo.jpg"\n  alt="Description"\n  width="200px"\n  height="200px"\n  backgroundSize="cover"\n  backgroundPosition="${position}"\n/>`} />
+    </DocsRow>
+  ))}
+</div>

@@ -1,0 +1,20 @@
+import { Meta, Source } from '@storybook/addon-docs/blocks'
+import Image from 'nice-react-image'
+import { DocsRow } from '../../../src/components/DocsRow'
+import { getPicsum } from '../../../src/services'
+
+export const DEMO_IMAGE = getPicsum()
+
+<Meta title="React/Components/Image/basic" />
+
+# Image — Basic
+
+<DocsRow spacing="large none">
+  <Image src={DEMO_IMAGE} alt="Demo landscape" />
+  <Source language="tsx" code={`<Image src="/photo.jpg" alt="Description" />`} />
+</DocsRow>
+
+<DocsRow spacing="large none">
+  <Image src={DEMO_IMAGE} alt="Demo landscape" width="400px" height="300px" backgroundSize="cover" />
+  <Source language="tsx" code={`<Image\n  src="/photo.jpg"\n  alt="Description"\n  width="400px"\n  height="300px"\n  backgroundSize="cover"\n/>`} />
+</DocsRow>

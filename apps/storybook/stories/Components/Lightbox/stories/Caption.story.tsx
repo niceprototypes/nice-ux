@@ -1,8 +1,9 @@
 import Lightbox from "nice-react-lightbox"
 import Story from "../../../../src/components/Story"
+import { getPicsum } from "../../../../src/services"
 import { DemoImage } from "../Lightbox.styles"
 
-const DEMO_IMAGE = "https://picsum.photos/id/10/800/600"
+const DEMO_IMAGE = getPicsum(10)
 
 const CaptionStory = () => (
   <Story
