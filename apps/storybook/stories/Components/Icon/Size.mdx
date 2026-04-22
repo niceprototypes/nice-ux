@@ -1,0 +1,17 @@
+import { Meta, Source } from '@storybook/addon-docs/blocks'
+import Icon from 'nice-react-icon'
+import { RowFlex } from './Icon.styles'
+import { fontSizes } from './Icon.services'
+
+<Meta title="React/Components/Icon/size" />
+
+# Icon — Size
+
+<div>
+  {fontSizes.map(size => (
+    <RowFlex key={size} spacing="large none">
+      <Icon size={size} />
+      <Source language="tsx" code={size === "base" ? `<Icon />` : `<Icon size="${size}" />`} />
+    </RowFlex>
+  ))}
+</div>

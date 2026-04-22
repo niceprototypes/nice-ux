@@ -1,0 +1,17 @@
+import { Meta, Source } from '@storybook/addon-docs/blocks'
+import Icon from 'nice-react-icon'
+import { RowFlex } from './Icon.styles'
+
+<Meta title="React/Components/Icon/outlined" />
+
+# Icon — Outlined
+
+<RowFlex spacing="large none">
+  <Icon size="larger" outlined={false} />
+  <Source language="tsx" code={`<Icon size="larger" />`} />
+</RowFlex>
+
+<RowFlex spacing="large none">
+  <Icon size="larger" outlined={true} />
+  <Source language="tsx" code={`<Icon size="larger" outlined={true} />`} />
+</RowFlex>

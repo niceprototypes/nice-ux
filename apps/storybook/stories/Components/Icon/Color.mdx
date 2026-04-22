@@ -1,0 +1,17 @@
+import { Meta, Source } from '@storybook/addon-docs/blocks'
+import Icon from 'nice-react-icon'
+import { RowFlex } from './Icon.styles'
+import { foregroundColors } from './Icon.services'
+
+<Meta title="React/Components/Icon/color" />
+
+# Icon — Color
+
+<div>
+  {foregroundColors.map(color => (
+    <RowFlex key={color} spacing="large none">
+      <Icon color={color} />
+      <Source language="tsx" code={`<Icon color="${color}" />`} />
+    </RowFlex>
+  ))}
+</div>

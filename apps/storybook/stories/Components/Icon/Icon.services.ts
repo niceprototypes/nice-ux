@@ -1,10 +1,31 @@
-import { Theme } from "nice-react-styles"
+import type {
+  IconSizeType,
+  IconColorType,
+  IconStrokeWidthType,
+} from "nice-react-icon"
 
-export const fontSizes = Object.keys(
-  Theme.fontSize
-) as (keyof typeof Theme.fontSize)[]
+export const fontSizes = [
+  "smaller",
+  "small",
+  "base",
+  "large",
+  "larger",
+] as const satisfies readonly IconSizeType[]
 
-export const foregroundColors = Object.keys(
-  Theme.foregroundColor
-) as (keyof typeof Theme.foregroundColor)[]
+export const foregroundColors = [
+  "base",
+  "light",
+  "lighter",
+  "lightest",
+  "disabled",
+  "link",
+  "success",
+  "warning",
+  "error",
+] as const satisfies readonly IconColorType[]
 
+export const strokeWidths = [
+  "small",
+  "base",
+  "large",
+] as const satisfies readonly IconStrokeWidthType[]
