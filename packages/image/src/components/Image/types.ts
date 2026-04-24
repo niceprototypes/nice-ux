@@ -1,5 +1,5 @@
 import * as React from "react"
-import type { BorderRadiusType, ModeType } from "nice-react-styles"
+import type { BackgroundSizeType, BorderRadiusType, ModeType } from "nice-react-styles"
 
 /**
  * ImageAsType
@@ -43,8 +43,10 @@ export type ImageHeightType = string
 /**
  * ImageBackgroundSizeType
  *
+ * Re-export of BackgroundSizeType from nice-styles.
  * Controls how the image content fits within its container.
- * Maps to CSS background-size (div) or object-fit (img).
+ * Maps to CSS object-fit (img) or background-size (div, with runtime translation
+ * for values that CSS `background-size` doesn't accept — `fill`, `none`, `scale-down`).
  *
  * Values:
  * - "contain": Scale to fit without cropping
@@ -53,7 +55,7 @@ export type ImageHeightType = string
  * - "none": No resizing
  * - "scale-down": Use smaller of none or contain
  */
-export type ImageBackgroundSizeType = "contain" | "cover" | "fill" | "none" | "scale-down"
+export type ImageBackgroundSizeType = BackgroundSizeType
 
 /**
  * ImageBackgroundPositionType

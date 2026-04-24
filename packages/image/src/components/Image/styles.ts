@@ -13,18 +13,13 @@ import { getToken, type BorderRadiusType, type ModeType } from "nice-react-style
 import type { ImageBackgroundSizeType, ImageBackgroundPositionType } from "./types"
 
 /**
- * Maps ImageBackgroundSizeType to the equivalent CSS object-fit value.
- * "fill" maps to "fill" directly (identical in object-fit).
- * "scale-down" maps to "scale-down" directly (identical in object-fit).
- */
-function backgroundSizeToObjectFit(size: ImageBackgroundSizeType): string {
-  return size
-}
-
-/**
  * Maps ImageBackgroundSizeType to the equivalent CSS background-size value.
  * "fill" maps to "100% 100%" to stretch in both dimensions.
  * "scale-down" maps to "contain" as the closest background-size equivalent.
+ * "none" maps to "auto" (none is not valid for CSS background-size).
+ *
+ * Used for the div rendering path only; the img path resolves object-fit via
+ * the backgroundSize token directly, since CSS object-fit accepts every value.
  */
 function backgroundSizeToCss(size: ImageBackgroundSizeType): string {
   switch (size) {
@@ -32,6 +27,8 @@ function backgroundSizeToCss(size: ImageBackgroundSizeType): string {
       return "100% 100%"
     case "scale-down":
       return "contain"
+    case "none":
+      return "auto"
     default:
       return size
   }
@@ -67,11 +64,11 @@ export const StyledImg = styled.img<{
 }>`
   ${sharedStyles}
 
-  /* Object fit derived from backgroundSize */
-  ${({ $backgroundSize }) =>
+  /* Object fit from backgroundSize token */
+  ${({ $backgroundSize, $mode }) =>
     $backgroundSize &&
     css`
-      object-fit: ${backgroundSizeToObjectFit($backgroundSize)};
+      object-fit: ${getToken("backgroundSize", $backgroundSize, $mode).var};
     `}
 
   /* Object position derived from backgroundPosition */
