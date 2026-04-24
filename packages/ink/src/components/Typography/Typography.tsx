@@ -39,7 +39,7 @@ const Typography: React.FC<TypographyProps> = ({
   legibilityOptimized = false,
   as = "p",
   children,
-  className,
+  className = "sb-unstyled",
   code = false,
   color,
   mode,
