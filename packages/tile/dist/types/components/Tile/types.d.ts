@@ -1,18 +1,22 @@
 import * as React from "react";
-import type { FlexSpacingType } from "nice-react-flex";
-import type { GapType, ModeType } from "nice-react-styles";
-import type { AlignType, AsType } from "nice-react-typography";
+import type { FlexSpacingType, FlexProps } from "nice-react-flex";
+import type { ModeType } from "nice-react-styles";
 import type { TileTypographyProps } from "../TileContent/types";
 export type { TileTypographyProps };
 /**
- * Responsive alignment type for header text
- * Allows different alignments at different breakpoints
+ * TileAlignItemsType
+ *
+ * Re-export of the `alignItems` prop shape from nice-react-flex.
+ * Accepts a single value or a breakpoint object for responsive alignment.
  */
-export type TileHeaderAlignType = AlignType | {
-    mobile?: AlignType;
-    tablet?: AlignType;
-    desktop?: AlignType;
-};
+export type TileAlignItemsType = NonNullable<FlexProps["alignItems"]>;
+/**
+ * TileJustifyContentType
+ *
+ * Re-export of the `justifyContent` prop shape from nice-react-flex.
+ * Accepts a single value or a breakpoint object for responsive justification.
+ */
+export type TileJustifyContentType = NonNullable<FlexProps["justifyContent"]>;
 export interface TileProps {
     children?: React.ReactNode;
     /** Content rendered above the title */
@@ -22,15 +26,14 @@ export interface TileProps {
     contentLeft?: React.ReactNode;
     contentRight?: React.ReactNode;
     title?: React.ReactNode;
-    titleAs?: AsType;
     titleProps?: TileTypographyProps;
     description?: React.ReactNode | string[];
     descriptionProps?: TileTypographyProps;
-    align?: TileHeaderAlignType;
-    gap?: GapType;
     spacing?: FlexSpacingType;
     maxWidthTablet?: number;
     maxWidthDesktop?: number;
+    alignItems?: TileAlignItemsType;
+    justifyContent?: TileJustifyContentType;
     backgroundImage?: string;
     backgroundColor?: string;
     backgroundPosition?: string;
@@ -43,8 +46,9 @@ export interface TileProps {
 }
 declare const TileTypes: {};
 declare namespace TileTypes {
-    type HeaderAlign = TileHeaderAlignType;
     type Typography = TileTypographyProps;
+    type AlignItems = TileAlignItemsType;
+    type JustifyContent = TileJustifyContentType;
     type Props = TileProps;
 }
 export default TileTypes;

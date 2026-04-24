@@ -95,32 +95,20 @@ const InnerFlex = styled(Flex).withConfig({
   `}
 `;
 
-const TileContent = ({ children, contentTop, contentCenter, title, titleAs, titleProps, description, descriptionProps, align, gap, mode, }) => {
-    return (jsxRuntime.jsxs(Flex, { direction: "column", gap: gap, children: [contentTop, title && (jsxRuntime.jsx(Typography, { as: titleAs, weight: "semibold", align: align, mode: mode, ...titleProps, children: title })), contentCenter, description && (Array.isArray(description)
-                ? (jsxRuntime.jsx(Flex, { direction: "column", gap: descriptionProps?.size, children: description.map((text, index) => (jsxRuntime.jsx(Typography, { color: "light", align: align, mode: mode, ...descriptionProps, children: text }, index))) }))
-                : (jsxRuntime.jsx(Typography, { color: "light", align: align, mode: mode, ...descriptionProps, children: description }))), children] }));
+const TileContent = ({ children, contentTop, contentCenter, title, titleProps, description, descriptionProps, align, mode, }) => {
+    const hasContentMain = !!title || !!description || !!contentCenter;
+    return (jsxRuntime.jsxs(Flex, { direction: "column", gap: "none", children: [contentTop, hasContentMain && (jsxRuntime.jsxs(Flex, { direction: "column", children: [title && (jsxRuntime.jsx(Typography, { as: "h3", weight: "semibold", mode: mode, ...titleProps, children: title })), contentCenter, description && (Array.isArray(description)
+                        ? (jsxRuntime.jsx(Flex, { direction: "column", children: description.map((text, index) => (jsxRuntime.jsx(Typography, { color: "light", mode: mode, ...descriptionProps, children: text }, index))) }))
+                        : (jsxRuntime.jsx(Typography, { color: "light", mode: mode, ...descriptionProps, children: description })))] })), children] }));
 };
 
-const TileLayout = ({ children, contentTop, contentCenter, contentLeft: TileLeft, contentRight: TileRight, title, titleAs, titleProps, description, descriptionProps, align, gap, mode, }) => {
-    const content = (jsxRuntime.jsx(TileContent, { contentTop: contentTop, contentCenter: contentCenter, title: title, titleAs: titleAs, titleProps: titleProps, description: description, descriptionProps: descriptionProps, align: align, gap: gap, mode: mode, children: children }));
-    return (jsxRuntime.jsx(Flex, { direction: "column", gap: "larger", children: !!TileLeft || !!TileRight ? (jsxRuntime.jsxs(Flex, { direction: { mobile: "column", tablet: "row" }, alignItems: "center", gap: "large", children: [TileLeft, jsxRuntime.jsx(Flex, { direction: "column", grow: 1, children: content }), TileRight] })) : content }));
+const TileLayout = ({ children, contentTop, contentRight: TileRight, contentCenter, contentLeft: TileLeft, title, titleProps, description, descriptionProps, mode, }) => {
+    const content = (jsxRuntime.jsx(TileContent, { contentTop: contentTop, contentCenter: contentCenter, title: title, titleProps: titleProps, description: description, descriptionProps: descriptionProps, mode: mode, children: children }));
+    return (jsxRuntime.jsx(Flex, { direction: "column", gap: "larger", children: !!TileLeft || !!TileRight ? (jsxRuntime.jsxs(Flex, { direction: { mobile: "column", tablet: "row" }, gap: "large", children: [TileLeft, jsxRuntime.jsx(Flex, { direction: "column", grow: 1, children: content }), TileRight] })) : content }));
 };
 
-/**
- * Resolves responsive header alignment to a simple alignment value
- * For responsive values, returns the mobile value as the base
- */
-const resolveHeaderAlign = (align) => {
-    if (!align)
-        return "center";
-    if (typeof align === "string")
-        return align;
-    return align.mobile || "center";
-};
-
-const Tile = ({ children, contentTop, contentCenter, contentLeft: TileLeft, contentRight: TileRight, title, titleAs = "h3", titleProps, description, descriptionProps, align, gap = "base", spacing, maxWidthTablet, maxWidthDesktop, backgroundImage, backgroundColor, backgroundPosition = "center", backgroundSize = "cover", backgroundAttachment = "fixed", foregroundColor, mode, className, style, }) => {
-    const resolvedAlign = resolveHeaderAlign(align);
-    return (jsxRuntime.jsx(OuterFlex, { className: className, style: style, "$backgroundImage": backgroundImage, "$backgroundColor": backgroundColor, "$foregroundColor": foregroundColor, "$backgroundPosition": backgroundPosition, "$backgroundSize": backgroundSize, "$backgroundAttachment": backgroundAttachment, children: jsxRuntime.jsx(InnerFlex, { direction: "column", grow: 1, spacing: spacing, "$maxWidthTablet": maxWidthTablet, "$maxWidthDesktop": maxWidthDesktop, children: jsxRuntime.jsx(TileLayout, { contentTop: contentTop, contentCenter: contentCenter, contentLeft: TileLeft, contentRight: TileRight, title: title, titleAs: titleAs, titleProps: titleProps, description: description, descriptionProps: descriptionProps, align: resolvedAlign, gap: gap, mode: mode, children: children }) }) }));
+const Tile = ({ children, contentTop, contentCenter, contentLeft: TileLeft, contentRight: TileRight, title, titleProps, description, descriptionProps, spacing, maxWidthTablet, maxWidthDesktop, alignItems, justifyContent, backgroundImage, backgroundColor, backgroundPosition = "center", backgroundSize = "cover", backgroundAttachment = "fixed", foregroundColor, mode, className, style, }) => {
+    return (jsxRuntime.jsx(OuterFlex, { className: className, style: style, "$backgroundImage": backgroundImage, "$backgroundColor": backgroundColor, "$foregroundColor": foregroundColor, "$backgroundPosition": backgroundPosition, "$backgroundSize": backgroundSize, "$backgroundAttachment": backgroundAttachment, children: jsxRuntime.jsx(InnerFlex, { direction: "column", grow: 1, spacing: spacing, alignItems: alignItems, justifyContent: justifyContent, "$maxWidthTablet": maxWidthTablet, "$maxWidthDesktop": maxWidthDesktop, children: jsxRuntime.jsx(TileLayout, { contentTop: contentTop, contentCenter: contentCenter, contentLeft: TileLeft, contentRight: TileRight, title: title, titleProps: titleProps, description: description, descriptionProps: descriptionProps, mode: mode, children: children }) }) }));
 };
 
 const TileTypes = {};

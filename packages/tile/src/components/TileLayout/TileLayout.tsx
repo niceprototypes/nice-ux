@@ -6,16 +6,13 @@ import type { TileLayoutProps } from "./types"
 const TileLayout: React.FC<TileLayoutProps> = ({
   children,
   contentTop,
+  contentRight: TileRight,
   contentCenter,
   contentLeft: TileLeft,
-  contentRight: TileRight,
   title,
-  titleAs,
   titleProps,
   description,
   descriptionProps,
-  align,
-  gap,
   mode,
 }) => {
   const content = (
@@ -23,12 +20,9 @@ const TileLayout: React.FC<TileLayoutProps> = ({
       contentTop={contentTop}
       contentCenter={contentCenter}
       title={title}
-      titleAs={titleAs}
       titleProps={titleProps}
       description={description}
       descriptionProps={descriptionProps}
-      align={align}
-      gap={gap}
       mode={mode}
     >
       {children}
@@ -40,7 +34,6 @@ const TileLayout: React.FC<TileLayoutProps> = ({
       {!!TileLeft || !!TileRight ? (
         <Flex
           direction={{ mobile: "column", tablet: "row" }}
-          alignItems="center"
           gap="large"
         >
           {TileLeft}

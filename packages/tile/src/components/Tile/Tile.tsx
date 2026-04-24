@@ -2,7 +2,6 @@ import * as React from "react"
 import type { TileProps } from "./types"
 import { OuterFlex, InnerFlex } from "./styles"
 import TileLayout from "../TileLayout"
-import { resolveHeaderAlign } from "../../utilities/resolveHeaderAlign"
 
 const Tile: React.FC<TileProps> = ({
   children,
@@ -11,15 +10,14 @@ const Tile: React.FC<TileProps> = ({
   contentLeft: TileLeft,
   contentRight: TileRight,
   title,
-  titleAs = "h3",
   titleProps,
   description,
   descriptionProps,
-  align,
-  gap = "base",
   spacing,
   maxWidthTablet,
   maxWidthDesktop,
+  alignItems,
+  justifyContent,
   backgroundImage,
   backgroundColor,
   backgroundPosition = "center",
@@ -30,8 +28,6 @@ const Tile: React.FC<TileProps> = ({
   className,
   style,
 }) => {
-  const resolvedAlign = resolveHeaderAlign(align)
-
   return (
     <OuterFlex
       className={className}
@@ -47,6 +43,8 @@ const Tile: React.FC<TileProps> = ({
         direction="column"
         grow={1}
         spacing={spacing}
+        alignItems={alignItems}
+        justifyContent={justifyContent}
         $maxWidthTablet={maxWidthTablet}
         $maxWidthDesktop={maxWidthDesktop}
       >
@@ -56,12 +54,9 @@ const Tile: React.FC<TileProps> = ({
           contentLeft={TileLeft}
           contentRight={TileRight}
           title={title}
-          titleAs={titleAs}
           titleProps={titleProps}
           description={description}
           descriptionProps={descriptionProps}
-          align={resolvedAlign}
-          gap={gap}
           mode={mode}
         >
           {children}

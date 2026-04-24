@@ -8,56 +8,57 @@ const TileContent: React.FC<TileContentProps> = ({
   contentTop,
   contentCenter,
   title,
-  titleAs,
   titleProps,
   description,
   descriptionProps,
   align,
-  gap,
   mode,
 }) => {
+  const hasContentMain = !!title || !!description || !!contentCenter
+
   return (
-    <Flex direction="column" gap={gap}>
+    <Flex direction="column" gap="none">
       {contentTop}
-      {title && (
-        <Typography
-          as={titleAs}
-          weight="semibold"
-          align={align}
-          mode={mode}
-          {...titleProps}
-        >
-          {title}
-        </Typography>
-      )}
-      {contentCenter}
-      {description && (
-        Array.isArray(description)
-          ? (
-            <Flex direction="column" gap={descriptionProps?.size}>
-              {description.map((text, index) => (
+      {hasContentMain && (
+        <Flex direction="column">
+          {title && (
+            <Typography
+              as="h3"
+              weight="semibold"
+              mode={mode}
+              {...titleProps}
+            >
+              {title}
+            </Typography>
+          )}
+          {contentCenter}
+          {description && (
+            Array.isArray(description)
+              ? (
+                <Flex direction="column">
+                  {description.map((text, index) => (
+                    <Typography
+                      key={index}
+                      color="light"
+                      mode={mode}
+                      {...descriptionProps}
+                    >
+                      {text}
+                    </Typography>
+                  ))}
+                </Flex>
+              )
+              : (
                 <Typography
-                  key={index}
                   color="light"
-                  align={align}
                   mode={mode}
                   {...descriptionProps}
                 >
-                  {text}
+                  {description}
                 </Typography>
-              ))}
-            </Flex>
-          )
-          : (
-            <Typography
-              color="light"
-              align={align}
-              mode={mode}
-              {...descriptionProps}
-            >
-              {description}
-            </Typography>
-          )
+              )
+          )}
+        </Flex>
       )}
       {children}
     </Flex>

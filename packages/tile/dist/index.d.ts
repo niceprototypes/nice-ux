@@ -1,20 +1,25 @@
 import * as React from 'react';
 import { ComponentType } from 'react';
-import { FlexSpacingType } from 'nice-react-flex';
-import { GapType, ModeType, TokenResult } from 'nice-react-styles';
-import { TypographyProps, AsType, AlignType } from 'nice-react-typography';
+import { FlexSpacingType, FlexProps } from 'nice-react-flex';
+import { ModeType, TokenResult } from 'nice-react-styles';
+import { TypographyProps } from 'nice-react-typography';
 
 type TileTypographyProps = Partial<Omit<TypographyProps, "children">>;
 
 /**
- * Responsive alignment type for header text
- * Allows different alignments at different breakpoints
+ * TileAlignItemsType
+ *
+ * Re-export of the `alignItems` prop shape from nice-react-flex.
+ * Accepts a single value or a breakpoint object for responsive alignment.
  */
-type TileHeaderAlignType = AlignType | {
-    mobile?: AlignType;
-    tablet?: AlignType;
-    desktop?: AlignType;
-};
+type TileAlignItemsType = NonNullable<FlexProps["alignItems"]>;
+/**
+ * TileJustifyContentType
+ *
+ * Re-export of the `justifyContent` prop shape from nice-react-flex.
+ * Accepts a single value or a breakpoint object for responsive justification.
+ */
+type TileJustifyContentType = NonNullable<FlexProps["justifyContent"]>;
 interface TileProps {
     children?: React.ReactNode;
     /** Content rendered above the title */
@@ -24,15 +29,14 @@ interface TileProps {
     contentLeft?: React.ReactNode;
     contentRight?: React.ReactNode;
     title?: React.ReactNode;
-    titleAs?: AsType;
     titleProps?: TileTypographyProps;
     description?: React.ReactNode | string[];
     descriptionProps?: TileTypographyProps;
-    align?: TileHeaderAlignType;
-    gap?: GapType;
     spacing?: FlexSpacingType;
     maxWidthTablet?: number;
     maxWidthDesktop?: number;
+    alignItems?: TileAlignItemsType;
+    justifyContent?: TileJustifyContentType;
     backgroundImage?: string;
     backgroundColor?: string;
     backgroundPosition?: string;
@@ -45,8 +49,9 @@ interface TileProps {
 }
 declare const TileTypes: {};
 declare namespace TileTypes {
-    type HeaderAlign = TileHeaderAlignType;
     type Typography = TileTypographyProps;
+    type AlignItems = TileAlignItemsType;
+    type JustifyContent = TileJustifyContentType;
     type Props = TileProps;
 }
 
@@ -76,4 +81,4 @@ declare const TileStyles: ComponentType;
 declare function getTileToken(nameOrPath: string | string[], variantOrMode?: string, mode?: string): TokenResult;
 
 export { TileStyles, TileTypes, Tile as default, getTileToken };
-export type { TileHeaderAlignType, TileProps, TileTypographyProps };
+export type { TileAlignItemsType, TileJustifyContentType, TileProps, TileTypographyProps };
