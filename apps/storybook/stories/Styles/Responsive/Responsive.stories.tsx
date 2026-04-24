@@ -9,9 +9,9 @@ import {
   Value,
   Query,
   ResponsiveBox,
-  MobileLabel,
-  TabletLabel,
-  DesktopLabel,
+  SmallLabel,
+  MediumLabel,
+  LargeLabel,
 } from "./Responsive.styles"
 
 const ResponsiveDemo = () => <></>
@@ -43,7 +43,7 @@ export const Breakpoints: Story = {
       <section>
         <Typography as="h3">Breakpoint Values</Typography>
         <Flex direction="column" gap="small">
-          {(["mobile", "tablet", "desktop"] as const).map(name => {
+          {(["small", "medium", "large"] as const).map(name => {
             const bp = getBreakpoint(name)
             return (
               <BreakpointRow key={name} justifyContent="space-between" alignItems="center">
@@ -65,9 +65,9 @@ export const Breakpoints: Story = {
         </Typography>
         <Flex style={{ marginTop: 16 }}>
           <ResponsiveBox grow={1} justifyContent="center" alignItems="center">
-            <MobileLabel>📱 Mobile</MobileLabel>
-            <TabletLabel>💻 Tablet</TabletLabel>
-            <DesktopLabel>🖥️ Desktop</DesktopLabel>
+            <SmallLabel>📱 Small</SmallLabel>
+            <MediumLabel>💻 Medium</MediumLabel>
+            <LargeLabel>🖥️ Large</LargeLabel>
           </ResponsiveBox>
         </Flex>
       </section>
@@ -77,11 +77,11 @@ export const Breakpoints: Story = {
         <CodeBlock language="typescript">{`const Box = styled.div\`
   background: blue;
 
-  \${getBreakpoint("tablet").query} {
+  \${getBreakpoint("medium").query} {
     background: orange;
   }
 
-  \${getBreakpoint("desktop").query} {
+  \${getBreakpoint("large").query} {
     background: green;
   }
 \`;`}</CodeBlock>

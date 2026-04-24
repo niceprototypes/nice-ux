@@ -4,20 +4,20 @@ import { getToken, getSizeToken, getBreakpoint } from 'nice-react-styles'
 import { DocsRow } from '../../../src/components/DocsRow'
 import { toSource } from '../../../src/services'
 
-export const mobileLabel = `≤${getBreakpoint("mobile").value}px`
-export const desktopLabel = `≥${getBreakpoint("desktop").value}px`
+export const smallLabel = `≤${getBreakpoint("small").value}px`
+export const largeLabel = `≥${getBreakpoint("large").value}px`
 
 <Meta title="React/Components/Typography/responsive" />
 
 # Typography — Responsive
 
-<Typography color="light">Typography sizes scale automatically across breakpoints — the same <code>size</code> token resolves to different values on mobile and desktop.</Typography>
+<Typography color="light">Typography sizes scale automatically across breakpoints — the same <code>size</code> token resolves to different values at the small and large breakpoints.</Typography>
 
 <div>
   {["smaller", "small", "base", "large", "larger"].map(size => {
-    const mobile = getToken("fontSize", size).value
-    const desktop = getSizeToken("fontSize", size, "desktop").value
-    const children = `${size} — ${mobileLabel}: ${mobile}, ${desktopLabel}: ${desktop}`
+    const smallValue = getToken("fontSize", size).value
+    const largeValue = getSizeToken("fontSize", size, "large").value
+    const children = `${size} — ${smallLabel}: ${smallValue}, ${largeLabel}: ${largeValue}`
     return (
       <DocsRow key={size}>
         <Typography size={size}>{children}</Typography>

@@ -33,26 +33,26 @@ export const ResponsiveBox = styled(Flex)`
   font-size: 18px;
 `
 
-export const MobileLabel = styled.span`
+export const SmallLabel = styled.span`
   display: none;
 
-  ${getBreakpoint("mobile", true).query} {
+  ${getBreakpoint("small", true).query} {
     display: inline;
   }
 `
 
-export const TabletLabel = styled.span`
+export const MediumLabel = styled.span`
   display: none;
 
-  ${getBreakpoint("tablet", true).query} {
+  ${getBreakpoint("medium", true).query} {
     display: inline;
   }
 `
 
-export const DesktopLabel = styled.span`
+export const LargeLabel = styled.span`
   display: none;
 
-  ${getBreakpoint("desktop", true).query} {
+  ${getBreakpoint("large", true).query} {
     display: inline;
   }
 `

@@ -156,15 +156,15 @@ export const ResponsiveVariants: Story = {
       <GlobalStyles />
       <Typography color="light">
         A variant value can be an object with breakpoint keys instead of a plain
-        string. The mobile value becomes the default, and higher breakpoints
+        string. The small value becomes the default, and higher breakpoints
         override it via media queries. Static strings and breakpoint objects can
         be mixed within the same token group.
       </Typography>
       <CodeBlock language="typescript">{`createTokens({
   gap: {
     none: "0",                              // static
-    small: { mobile: "12px", desktop: "16px" },  // responsive
-    base: { mobile: "24px", desktop: "32px" },   // responsive
+    small: { small: "12px", large: "16px" },  // responsive
+    base: { small: "24px", large: "32px" },   // responsive
   },
 })`}</CodeBlock>
       <Flex direction="column" gap="small">
@@ -174,15 +174,15 @@ export const ResponsiveVariants: Story = {
         <CodeBlock language="css">{`:root {
   --np--gap--none: 0;
   --np--gap--small: 12px;
-  --np--gap--small--desktop: 16px;
+  --np--gap--small--large: 16px;
   --np--gap--base: 24px;
-  --np--gap--base--desktop: 32px;
+  --np--gap--base--large: 32px;
 }
 
 @media (min-width: 1280px) {
   :root {
-    --np--gap--small: var(--np--gap--small--desktop);
-    --np--gap--base: var(--np--gap--base--desktop);
+    --np--gap--small: var(--np--gap--small--large);
+    --np--gap--base: var(--np--gap--base--large);
   }
 }`}</CodeBlock>
       </Flex>
@@ -191,9 +191,9 @@ export const ResponsiveVariants: Story = {
           Breakpoints
         </Typography>
         {[
-          { name: "mobile", value: "default (no media query)" },
-          { name: "tablet", value: "@media (min-width: 441px)" },
-          { name: "desktop", value: "@media (min-width: 1280px)" },
+          { name: "small", value: "default (no media query)" },
+          { name: "medium", value: "@media (min-width: 641px)" },
+          { name: "large", value: "@media (min-width: 1280px)" },
         ].map(({ name, value }) => (
           <Flex key={name} gap="base" alignItems="center">
             <Typography code>{name}</Typography>
@@ -286,7 +286,7 @@ export const Combined: Story = {
   },
   gap: {                                  // mixed static + responsive
     none: "0",
-    base: { mobile: "24px", desktop: "32px" },
+    base: { small: "24px", large: "32px" },
   },
   headerColor: {                          // mode-aware
     base: { day: "#000", night: "#fff" },
