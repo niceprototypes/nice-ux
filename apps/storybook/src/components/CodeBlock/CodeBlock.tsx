@@ -135,17 +135,17 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
   return (
     <pre
       style={{
-        margin: 0,
-        padding: padded ? "16px" : "0",
-        backgroundColor: "white",
-        color: colors.text,
-        border: bordered ? "1px solid #2a2a3e" : "none",
-        borderRadius: bordered ? "6px" : "0",
-        overflow: "auto",
+        // margin: 0,
+        // padding: padded ? "16px" : "0",
+        // backgroundColor: "white",
+        // color: colors.text,
+        // border: bordered ? "1px solid #2a2a3e" : "none",
+        // borderRadius: bordered ? "6px" : "0",
+        // overflow: "auto",
         fontFamily:
           "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
-        fontSize: "13px",
-        lineHeight: 1.5,
+        // fontSize: "13px",
+        // lineHeight: 1.5,
       }}
     >
       <code

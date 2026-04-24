@@ -37,7 +37,7 @@ This Storybook documents the following packages:
 - **nice-react-button** - Feature-rich button component
 - **nice-react-icon** - Icon library with 30+ SVG icons
 
-### React Hooks
+### React Bindings
 - **nice-react-device-detector** - Mobile device detection
 
 ### Utilities
@@ -316,7 +316,7 @@ npm run dev
 - Button: http://localhost:6006/?path=/docs/components-button--docs
 - Icon: http://localhost:6006/?path=/docs/components-icon--docs
 
-### Hooks
+### Bindings
 - useDeviceDetector: http://localhost:6006/?path=/docs/hooks-usedevicedetector--docs
 
 ### Documentation

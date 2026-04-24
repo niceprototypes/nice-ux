@@ -1,5 +1,6 @@
 import { Meta, Source } from '@storybook/addon-docs/blocks'
 import Icon from 'nice-react-icon'
+import Typography from '../../../src/nice/Typography'
 import { DocsRow } from '../../../src/components/DocsRow'
 import { strokeWidths } from './Icon.services'
 
@@ -7,10 +8,12 @@ import { strokeWidths } from './Icon.services'
 
 # Icon — StrokeWidth
 
+<Typography color="light">Sets the thickness of the icon's stroke. Maps to the SVG <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/stroke-width"><code>stroke-width</code></a> attribute.</Typography>
+
 <div>
   {strokeWidths.map(width => (
-    <DocsRow key={width} spacing="large none">
-      <Icon strokeWidth={width} />
+    <DocsRow key={width}>
+      <Icon strokeWidth={width} name="message" size="larger" />
       <Source language="tsx" code={width === "base" ? `<Icon />` : `<Icon strokeWidth="${width}" />`} />
     </DocsRow>
   ))}

@@ -1,5 +1,6 @@
 import { Meta, Source } from '@storybook/addon-docs/blocks'
 import Button from 'nice-react-button'
+import Typography from '../../../src/nice/Typography'
 import { DocsRow } from '../../../src/components/DocsRow'
 
 export const sizes = ["smaller", "small", "base", "large", "larger"]
@@ -15,9 +16,11 @@ export const sizeCode = (s) =>
 
 # Button — Size
 
+<Typography color="light">Scales the button's height, padding, and font size using cell-height tokens.</Typography>
+
 <div>
   {sizes.map(size => (
-    <DocsRow key={size} spacing="large none">
+    <DocsRow key={size}>
       <Button onClick={() => {}} size={size}>{sizeLabel(size)}</Button>
       <Source language="tsx" code={sizeCode(size)} />
     </DocsRow>

@@ -1,5 +1,6 @@
 import { Meta, Source } from '@storybook/addon-docs/blocks'
 import { getToken } from 'nice-react-styles'
+import Typography from '../../../src/nice/Typography'
 import { DocsRow } from '../../../src/components/DocsRow'
 import DemoDots from '../../../src/components/DemoDots'
 import { threeDots } from './Flex.services'
@@ -32,27 +33,29 @@ export const stretchDots = [
 
 # Flex — AlignItems
 
-<DocsRow spacing="large none">
+<Typography color="light">Aligns items along the cross axis. Maps to the CSS <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/align-items"><code>align-items</code></a> property.</Typography>
+
+<DocsRow>
   <DemoDots alignItems="flex-start" dots={threeDots} height="6rem" bordered />
   <Source language="tsx" code={`<Flex alignItems="flex-start">\n  {children}\n</Flex>`} />
 </DocsRow>
 
-<DocsRow spacing="large none">
+<DocsRow>
   <DemoDots alignItems="flex-end" dots={threeDots} height="6rem" bordered />
   <Source language="tsx" code={`<Flex alignItems="flex-end">\n  {children}\n</Flex>`} />
 </DocsRow>
 
-<DocsRow spacing="large none">
+<DocsRow>
   <DemoDots alignItems="center" dots={threeDots} height="6rem" bordered />
   <Source language="tsx" code={`<Flex alignItems="center">\n  {children}\n</Flex>`} />
 </DocsRow>
 
-<DocsRow spacing="large none">
+<DocsRow>
   <DemoDots alignItems="baseline" dots={baselineDots} height="6rem" bordered />
   <Source language="tsx" code={`<Flex alignItems="baseline">\n  {children}\n</Flex>`} />
 </DocsRow>
 
-<DocsRow spacing="large none">
+<DocsRow>
   <DemoDots alignItems="stretch" dots={stretchDots} height="6rem" bordered />
   <Source language="tsx" code={`<Flex alignItems="stretch">\n  {children}\n</Flex>`} />
 </DocsRow>

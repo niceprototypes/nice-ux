@@ -1,20 +1,25 @@
 import { Meta, Source } from '@storybook/addon-docs/blocks'
 import Image from 'nice-react-image'
+import Typography from '../../../src/nice/Typography'
 import { DocsRow } from '../../../src/components/DocsRow'
-import { getPicsum } from '../../../src/services'
+import { getPicsum, toSource } from '../../../src/services'
 
-export const DEMO_IMAGE = getPicsum()
+export const DEMO_IMAGE = getPicsum(800, 600)
+export const basicProps = { src: DEMO_IMAGE, alt: "Demo landscape" }
+export const coverProps = { src: DEMO_IMAGE, alt: "Demo landscape", width: "240px", height: "320px", backgroundSize: "cover" }
 
 <Meta title="React/Components/Image/basic" />
 
 # Image — Basic
 
-<DocsRow spacing="large none">
-  <Image src={DEMO_IMAGE} alt="Demo landscape" />
-  <Source language="tsx" code={`<Image src="/photo.jpg" alt="Description" />`} />
+<Typography color="light">Default image rendering — requires a <code>src</code> and <code>alt</code>. Add <code>width</code> and <code>height</code> with <code>backgroundSize="cover"</code> to crop.</Typography>
+
+<DocsRow>
+  <Image {...basicProps} />
+  <Source language="tsx" code={toSource("Image", basicProps)} />
 </DocsRow>
 
-<DocsRow spacing="large none">
-  <Image src={DEMO_IMAGE} alt="Demo landscape" width="400px" height="300px" backgroundSize="cover" />
-  <Source language="tsx" code={`<Image\n  src="/photo.jpg"\n  alt="Description"\n  width="400px"\n  height="300px"\n  backgroundSize="cover"\n/>`} />
+<DocsRow>
+  <Image {...coverProps} />
+  <Source language="tsx" code={toSource("Image", coverProps)} />
 </DocsRow>

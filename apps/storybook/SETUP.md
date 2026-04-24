@@ -337,7 +337,7 @@ Storybook
 │   ├── Tile (10 stories)
 │   ├── Button (20 stories)
 │   └── Icon (15 stories)
-├── Hooks
+├── Bindings
 │   └── useDeviceDetector (5 stories)
 └── Documentation
     ├── CSS Variables

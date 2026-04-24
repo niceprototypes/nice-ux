@@ -1,5 +1,6 @@
 import { Meta, Source } from '@storybook/addon-docs/blocks'
 import Icon from 'nice-react-icon'
+import Typography from '../../../src/nice/Typography'
 import { DocsRow } from '../../../src/components/DocsRow'
 import { foregroundColors } from './Icon.services'
 
@@ -7,10 +8,12 @@ import { foregroundColors } from './Icon.services'
 
 # Icon — Color
 
+<Typography color="light">Sets the foreground color of the icon using foregroundColor tokens. Maps to the CSS <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/color"><code>color</code></a> property.</Typography>
+
 <div>
   {foregroundColors.map(color => (
-    <DocsRow key={color} spacing="large none">
-      <Icon color={color} />
+    <DocsRow key={color}>
+      <Icon color={color} name="message" size="larger" strokeWidth="large" />
       <Source language="tsx" code={`<Icon color="${color}" />`} />
     </DocsRow>
   ))}

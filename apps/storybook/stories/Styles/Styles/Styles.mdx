@@ -1,0 +1,305 @@
+import { Meta, Source } from '@storybook/addon-docs/blocks'
+import Flex from 'nice-react-flex'
+import { getToken } from 'nice-react-styles'
+import Typography from '../../../src/nice/Typography'
+import { DocsRow } from '../../../src/components/DocsRow'
+import DemoDots from '../../../src/components/DemoDots'
+
+export const loremIpsum =
+  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore."
+
+<Meta title="Tokens/Styles" name="Docs" />
+
+# Tokens
+
+**No framework required.** Install `nice-styles` to get a complete token system
+built on CSS custom properties. Works with any stack that renders HTML — static
+sites, server-rendered pages, vanilla JS, or as a shared foundation across
+frameworks.
+
+```bash
+npm install nice-styles
+```
+
+Use `--np--` prefixed CSS variables directly in your stylesheets. No runtime,
+no build step, no opinions about your component model.
+
+- [Responsive](/docs/tokens-responsive--docs) — Breakpoints and media query helpers
+
+---
+
+## animationDuration
+
+<div>
+  {[
+    { name: "base", backgroundColor: getToken("foregroundColor", "error").var },
+    { name: "slow", backgroundColor: getToken("foregroundColor", "warning").var },
+  ].map(({ name, backgroundColor }) => {
+    const animationName = name === "base" ? "slide" : "slideSlow"
+    return (
+      <DocsRow key={name}>
+        <Flex
+          style={{
+            width: "120px",
+            backgroundColor: getToken("backgroundColor", "dark").var,
+            borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2)`,
+          }}
+        >
+          <Flex
+            style={{
+              backgroundColor,
+              width: getToken("cellHeight", "smaller").var,
+              height: getToken("cellHeight", "smaller").var,
+              borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2)`,
+              animation: `${animationName} calc(${getToken("animationDuration", name).var} * 6) ${getToken("animationEasing").var} infinite`,
+              animationDelay: name === "base" ? getToken("animationDuration", name).var : 0,
+            }}
+          />
+        </Flex>
+        <Source language="tsx" code={`getToken("animationDuration", "${name}").var`} />
+      </DocsRow>
+    )
+  })}
+</div>
+
+## animationEasing
+
+<div>
+  {["base"].map(variant => (
+    <DocsRow key={variant}>
+      <Flex
+        style={{
+          backgroundColor: getToken("backgroundColor", "dark").var,
+          padding: getToken("gap").var,
+          borderRadius: getToken("borderRadius").var,
+        }}
+      >
+        <svg width="60" height="24" viewBox="0 0 60 24">
+          <path
+            d="M 1 23 C 30 23, 30 1, 60 1"
+            fill="none"
+            stroke={getToken("foregroundColor", "lighter").var}
+            strokeWidth={getToken("borderWidth", "large").var}
+            strokeLinecap="round"
+          />
+        </svg>
+      </Flex>
+      <Source language="tsx" code={`getToken("animationEasing", "${variant}").var`} />
+    </DocsRow>
+  ))}
+</div>
+
+## backgroundColor
+
+<div>
+  {["base", "dark"].map(variant => (
+    <DocsRow key={variant}>
+      <Flex
+        style={{
+          backgroundColor: getToken("backgroundColor", variant).var,
+          width: getToken("cellHeight", "larger").var,
+          height: getToken("cellHeight", "larger").var,
+          border: `${getToken("borderWidth").var} solid ${getToken("borderColor").var}`,
+          borderRadius: getToken("borderRadius", "small").var,
+        }}
+      />
+      <Source language="tsx" code={`getToken("backgroundColor", "${variant}").var`} />
+    </DocsRow>
+  ))}
+</div>
+
+## borderColor
+
+<div>
+  {["base", "dark", "darker"].map(variant => (
+    <DocsRow key={variant}>
+      <Flex
+        style={{
+          backgroundColor: "white",
+          width: getToken("cellHeight", "larger").var,
+          height: getToken("cellHeight", "larger").var,
+          border: `${getToken("borderWidth").var} solid ${getToken("borderColor", variant).var}`,
+          borderRadius: getToken("borderRadius", "small").var,
+        }}
+      />
+      <Source language="tsx" code={`getToken("borderColor", "${variant}").var`} />
+    </DocsRow>
+  ))}
+</div>
+
+## borderRadius
+
+<div>
+  {["smaller", "small", "base", "large", "larger"].map(variant => (
+    <DocsRow key={variant}>
+      <Flex
+        style={{
+          borderRadius: getToken("borderRadius", variant).var,
+          width: getToken("cellHeight", "larger").var,
+          height: getToken("cellHeight", "larger").var,
+          border: `${getToken("borderWidth").var} solid ${getToken("foregroundColor", "light").var}`,
+        }}
+      />
+      <Source language="tsx" code={`getToken("borderRadius", "${variant}").var`} />
+    </DocsRow>
+  ))}
+</div>
+
+## borderWidth
+
+<div>
+  {["small", "base", "large"].map(variant => (
+    <DocsRow key={variant}>
+      <Flex
+        style={{
+          width: getToken("cellHeight", "larger").var,
+          height: getToken("cellHeight", "larger").var,
+          border: `${getToken("borderWidth", variant).var} solid ${getToken("foregroundColor", "light").var}`,
+          borderRadius: getToken("borderRadius", "small").var,
+        }}
+      />
+      <Source language="tsx" code={`getToken("borderWidth", "${variant}").var`} />
+    </DocsRow>
+  ))}
+</div>
+
+## boxShadow
+
+<div>
+  {["base", "large"].map(variant => (
+    <DocsRow key={variant}>
+      <Flex
+        spacing="large"
+        style={{
+          backgroundColor: getToken("backgroundColor", "dark").var,
+          borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2)`,
+        }}
+      >
+        <Flex
+          style={{
+            backgroundColor: getToken("backgroundColor").var,
+            width: getToken("cellHeight", "larger").var,
+            height: getToken("cellHeight", "larger").var,
+            borderRadius: getToken("borderRadius", "small").var,
+            boxShadow: getToken("boxShadow", variant).var,
+          }}
+        />
+      </Flex>
+      <Source language="tsx" code={`getToken("boxShadow", "${variant}").var`} />
+    </DocsRow>
+  ))}
+</div>
+
+## cellHeight
+
+<div>
+  {["smaller", "small", "base", "large", "larger"].map(variant => (
+    <DocsRow key={variant}>
+      <Flex
+        style={{
+          width: getToken("cellHeight", "larger").var,
+          height: getToken("cellHeight", variant).var,
+          border: `${getToken("borderWidth").var} solid ${getToken("foregroundColor", "light").var}`,
+          borderRadius: getToken("cellHeight", "smaller").var,
+        }}
+      />
+      <Source language="tsx" code={`getToken("cellHeight", "${variant}").var`} />
+    </DocsRow>
+  ))}
+</div>
+
+## fontFamily
+
+<div>
+  {[
+    { name: "heading", weight: "bold", text: "Heading" },
+    { name: "base", text: "Body" },
+    { name: "code", code: true, text: "Code" },
+  ].map(({ name, weight, code, text }) => (
+    <DocsRow key={name}>
+      <Typography weight={weight} code={code}>{text}</Typography>
+      <Source language="tsx" code={`getToken("fontFamily", "${name}").var`} />
+    </DocsRow>
+  ))}
+</div>
+
+## fontSize
+
+<div>
+  {["smaller", "small", "base", "large", "larger"].map(variant => (
+    <DocsRow key={variant}>
+      <Typography size={variant}>{variant.charAt(0).toUpperCase() + variant.slice(1)}</Typography>
+      <Source language="tsx" code={`getToken("fontSize", "${variant}").var`} />
+    </DocsRow>
+  ))}
+</div>
+
+## fontWeight
+
+<div>
+  {["light", "base", "medium", "semibold", "bold", "extrabold", "black"].map(variant => (
+    <DocsRow key={variant}>
+      <Typography weight={variant}>{variant.charAt(0).toUpperCase() + variant.slice(1)}</Typography>
+      <Source language="tsx" code={`getToken("fontWeight", "${variant}").var`} />
+    </DocsRow>
+  ))}
+</div>
+
+## foregroundColor
+
+<div>
+  {["lightest", "lighter", "light", "base", "disabled", "link", "success", "warning", "error"].map(variant => (
+    <DocsRow key={variant}>
+      <Flex
+        style={{
+          width: getToken("cellHeight", "smaller").var,
+          height: getToken("cellHeight", "smaller").var,
+          backgroundColor: getToken("foregroundColor", variant).var,
+          borderRadius: "50%",
+        }}
+      />
+      <Source language="tsx" code={`getToken("foregroundColor", "${variant}").var`} />
+    </DocsRow>
+  ))}
+</div>
+
+## gap
+
+<div>
+  {["smaller", "small", "base", "large", "larger"].map(variant => (
+    <DocsRow key={variant}>
+      <DemoDots
+        gap={variant}
+        dots={[
+          { color: getToken("foregroundColor", "error").var, width: getToken("cellHeight", "smaller").var, height: getToken("cellHeight", "smaller").var },
+          { color: getToken("foregroundColor", "link").var, width: getToken("cellHeight", "smaller").var, height: getToken("cellHeight", "smaller").var },
+        ]}
+      />
+      <Source language="tsx" code={`getToken("gap", "${variant}").var`} />
+    </DocsRow>
+  ))}
+</div>
+
+## lineHeight
+
+<div>
+  {["condensed", "base", "expanded"].map(variant => (
+    <DocsRow key={variant}>
+      <Typography lineHeight={variant}>{loremIpsum}</Typography>
+      <Source language="tsx" code={`getToken("lineHeight", "${variant}").var`} />
+    </DocsRow>
+  ))}
+</div>
+
+---
+
+## Icons
+
+`nice-icons` provides SVG icons as importable modules. Use them as
+`<img>` sources, inline SVG, or pass them to any component system.
+
+```bash
+npm install nice-icons
+```
+
+- [Browse all icons](/docs/tokens-icons--docs)

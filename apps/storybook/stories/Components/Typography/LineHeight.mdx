@@ -1,0 +1,21 @@
+import { Meta, Source } from '@storybook/addon-docs/blocks'
+import Typography from '../../../src/nice/Typography'
+import { DocsRow } from '../../../src/components/DocsRow'
+import { toSource } from '../../../src/services'
+
+export const loremIpsumLong = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+
+<Meta title="React/Components/Typography/lineHeight" />
+
+# Typography — LineHeight
+
+<Typography color="light">Sets the vertical spacing between lines of text using lineHeight tokens. Maps to the CSS <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/line-height"><code>line-height</code></a> property.</Typography>
+
+<div>
+  {["condensed", "base", "expanded"].map(lineHeight => (
+    <DocsRow key={lineHeight}>
+      <Typography lineHeight={lineHeight}>{loremIpsumLong}</Typography>
+      <Source language="tsx" code={toSource("Typography", { lineHeight }, { children: loremIpsumLong })} />
+    </DocsRow>
+  ))}
+</div>

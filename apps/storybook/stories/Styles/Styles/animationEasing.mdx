@@ -1,0 +1,36 @@
+import { Meta, Source } from '@storybook/addon-docs/blocks'
+import Flex from 'nice-react-flex'
+import { getToken } from 'nice-react-styles'
+import Typography from '../../../src/nice/Typography'
+import { DocsRow } from '../../../src/components/DocsRow'
+
+<Meta title="Tokens/Styles/animationEasing" />
+
+# animationEasing
+
+<Typography>Easing curves for CSS transitions and animations.</Typography>
+
+<div>
+  {["base"].map(variant => (
+    <DocsRow key={variant}>
+      <Flex
+        style={{
+          backgroundColor: getToken("backgroundColor", "dark").var,
+          padding: getToken("gap").var,
+          borderRadius: getToken("borderRadius").var,
+        }}
+      >
+        <svg width="60" height="24" viewBox="0 0 60 24">
+          <path
+            d="M 1 23 C 30 23, 30 1, 60 1"
+            fill="none"
+            stroke={getToken("foregroundColor", "lighter").var}
+            strokeWidth={getToken("borderWidth", "large").var}
+            strokeLinecap="round"
+          />
+        </svg>
+      </Flex>
+      <Source language="tsx" code={`getToken("animationEasing", "${variant}").var`} />
+    </DocsRow>
+  ))}
+</div>

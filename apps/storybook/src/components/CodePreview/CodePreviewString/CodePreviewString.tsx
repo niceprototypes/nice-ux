@@ -1,6 +1,6 @@
 import React from "react"
 import { colors } from "./CodePreviewString.styles"
-import Typography from "nice-react-typography"
+import Typography from "../../../nice/Typography"
 import Flex from "nice-react-flex"
 
 /**

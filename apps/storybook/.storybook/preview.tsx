@@ -2,7 +2,8 @@ import React from 'react'
 import type { Preview } from '@storybook/react-vite'
 import { create } from 'storybook/theming'
 import { StylesProvider, getToken } from 'nice-react-styles'
-import './custom.css'
+import 'nice-react-icon-vendor'
+import './preview.css'
 
 const docsTheme = create({
   base: 'light',
@@ -33,7 +34,7 @@ const preview: Preview = {
         order: [
           'Welcome', ['Design Tokens', 'Design Patterns', 'UI Components'],
           'Tokens', ['Browse', 'Responsive', 'Icons'],
-          'React', ['Styles', ['StylesProvider', 'getToken', 'createTokens'], 'Components', 'Hooks'],
+          'React', ['Styles', ['StylesProvider', 'getToken', 'createTokens'], 'Components', 'Bindings'],
           'Configuration', ['NPM', 'Vite', 'TypeScript', 'Jest', 'Rollup']
         ],
       },

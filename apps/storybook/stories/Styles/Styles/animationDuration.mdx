@@ -1,0 +1,43 @@
+import { Meta, Source } from '@storybook/addon-docs/blocks'
+import Flex from 'nice-react-flex'
+import { getToken } from 'nice-react-styles'
+import Typography from '../../../src/nice/Typography'
+import { DocsRow } from '../../../src/components/DocsRow'
+
+<Meta title="Tokens/Styles/animationDuration" />
+
+# animationDuration
+
+<Typography>Timing values for CSS transitions and animations.</Typography>
+
+<div>
+  {[
+    { name: "base", backgroundColor: getToken("foregroundColor", "error").var },
+    { name: "slow", backgroundColor: getToken("foregroundColor", "warning").var },
+  ].map(({ name, backgroundColor }) => {
+    const animationName = name === "base" ? "slide" : "slideSlow"
+    return (
+      <DocsRow key={name}>
+        <Flex
+          style={{
+            width: "120px",
+            backgroundColor: getToken("backgroundColor", "dark").var,
+            borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2)`,
+          }}
+        >
+          <Flex
+            style={{
+              backgroundColor,
+              width: getToken("cellHeight", "smaller").var,
+              height: getToken("cellHeight", "smaller").var,
+              borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2)`,
+              animation: `${animationName} calc(${getToken("animationDuration", name).var} * 6) ${getToken("animationEasing").var} infinite`,
+              animationDelay: name === "base" ? getToken("animationDuration", name).var : 0,
+            }}
+          />
+        </Flex>
+        <Source language="tsx" code={`getToken("animationDuration", "${name}").var`} />
+      </DocsRow>
+    )
+  })}
+</div>

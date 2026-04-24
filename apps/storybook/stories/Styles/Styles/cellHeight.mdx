@@ -1,0 +1,27 @@
+import { Meta, Source } from '@storybook/addon-docs/blocks'
+import Flex from 'nice-react-flex'
+import { getToken } from 'nice-react-styles'
+import Typography from '../../../src/nice/Typography'
+import { DocsRow } from '../../../src/components/DocsRow'
+
+<Meta title="Tokens/Styles/cellHeight" />
+
+# cellHeight
+
+<Typography>Vertical rhythm tokens for controls, buttons, and row heights.</Typography>
+
+<div>
+  {["smaller", "small", "base", "large", "larger"].map(variant => (
+    <DocsRow key={variant}>
+      <Flex
+        style={{
+          width: getToken("cellHeight", "larger").var,
+          height: getToken("cellHeight", variant).var,
+          border: `${getToken("borderWidth").var} solid ${getToken("foregroundColor", "light").var}`,
+          borderRadius: getToken("cellHeight", "smaller").var,
+        }}
+      />
+      <Source language="tsx" code={`getToken("cellHeight", "${variant}").var`} />
+    </DocsRow>
+  ))}
+</div>

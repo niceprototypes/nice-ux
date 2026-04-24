@@ -1,5 +1,5 @@
 import React from "react"
-import Typography from "nice-react-typography"
+import Typography from "../../nice/Typography"
 import { SectionHeaderProps } from "./SectionHeader.types"
 
 const SectionHeader: React.FC<SectionHeaderProps> = ({ children }) => {

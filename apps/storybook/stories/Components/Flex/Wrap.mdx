@@ -1,5 +1,6 @@
 import { Meta, Source } from '@storybook/addon-docs/blocks'
 import { getToken } from 'nice-react-styles'
+import Typography from '../../../src/nice/Typography'
 import { DocsRow } from '../../../src/components/DocsRow'
 import DemoDots from '../../../src/components/DemoDots'
 
@@ -19,17 +20,19 @@ export const wrapWidth = `calc(${getToken("cellHeight", "small").var} * 3 + 2px)
 
 # Flex — Wrap
 
-<DocsRow spacing="large none">
+<Typography color="light">Controls whether flex items wrap onto multiple lines when they overflow. Maps to the CSS <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap"><code>flex-wrap</code></a> property.</Typography>
+
+<DocsRow>
   <DemoDots wrap="nowrap" dots={nowrapDots} width={wrapWidth} bordered />
   <Source language="tsx" code={`<Flex wrap="nowrap">\n  {children}\n</Flex>`} />
 </DocsRow>
 
-<DocsRow spacing="large none">
+<DocsRow>
   <DemoDots wrap="wrap" dots={wrapDots} width={wrapWidth} bordered />
   <Source language="tsx" code={`<Flex wrap="wrap">\n  {children}\n</Flex>`} />
 </DocsRow>
 
-<DocsRow spacing="large none">
+<DocsRow>
   <DemoDots wrap="wrap-reverse" dots={wrapDots} width={wrapWidth} bordered />
   <Source language="tsx" code={`<Flex wrap="wrap-reverse">\n  {children}\n</Flex>`} />
 </DocsRow>

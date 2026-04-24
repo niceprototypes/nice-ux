@@ -1,7 +1,7 @@
 import { useState } from "react"
 import Slider from "nice-react-slider"
 import Flex from "nice-react-flex"
-import Typography from "nice-react-typography"
+import Typography from "../../../src/nice/Typography"
 import { getToken } from "nice-react-styles"
 
 export const SlideContent = ({

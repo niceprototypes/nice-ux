@@ -1,0 +1,28 @@
+import { Meta, Source } from '@storybook/addon-docs/blocks'
+import Flex from 'nice-react-flex'
+import { getToken } from 'nice-react-styles'
+import Typography from '../../../src/nice/Typography'
+import { DocsRow } from '../../../src/components/DocsRow'
+
+<Meta title="Tokens/Styles/borderColor" />
+
+# borderColor
+
+<Typography>Stroke color tokens for outlines and dividers.</Typography>
+
+<div>
+  {["base", "dark", "darker"].map(variant => (
+    <DocsRow key={variant}>
+      <Flex
+        style={{
+          backgroundColor: "white",
+          width: getToken("cellHeight", "larger").var,
+          height: getToken("cellHeight", "larger").var,
+          border: `${getToken("borderWidth").var} solid ${getToken("borderColor", variant).var}`,
+          borderRadius: getToken("borderRadius", "small").var,
+        }}
+      />
+      <Source language="tsx" code={`getToken("borderColor", "${variant}").var`} />
+    </DocsRow>
+  ))}
+</div>

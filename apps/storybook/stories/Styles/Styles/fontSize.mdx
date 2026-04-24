@@ -1,0 +1,18 @@
+import { Meta, Source } from '@storybook/addon-docs/blocks'
+import Typography from '../../../src/nice/Typography'
+import { DocsRow } from '../../../src/components/DocsRow'
+
+<Meta title="Tokens/Styles/fontSize" />
+
+# fontSize
+
+<Typography>Text scale tokens from <code>smaller</code> to <code>larger</code>. Responsive by default — values change at the desktop breakpoint.</Typography>
+
+<div>
+  {["smaller", "small", "base", "large", "larger"].map(variant => (
+    <DocsRow key={variant}>
+      <Typography size={variant}>{variant.charAt(0).toUpperCase() + variant.slice(1)}</Typography>
+      <Source language="tsx" code={`getToken("fontSize", "${variant}").var`} />
+    </DocsRow>
+  ))}
+</div>

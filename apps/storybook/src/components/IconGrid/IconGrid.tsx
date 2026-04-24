@@ -1,5 +1,5 @@
 import Icon from "nice-react-icon"
-import Typography from "nice-react-typography"
+import Typography from "../../nice/Typography"
 import { CellFlex, RowFlex } from "./IconGrid.styles"
 import type { IconGridProps } from "./IconGrid.types"
 

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { getToken } from "nice-react-styles"
 import Flex from "nice-react-flex"
-import Typography from "nice-react-typography"
+import Typography from "../../../src/nice/Typography"
 import VariableList from "../../../src/components/VariableList"
 import DemoDots from "../../../src/components/DemoDots"
 import { createToken } from "../../../src/services"
@@ -123,7 +123,7 @@ export const AllTokens: Story = {
       <section>
         <Typography as="h3">borderColor</Typography>
         <VariableList
-          variables={createToken("borderColor", ["base", "heavy", "heavier"], variant => (
+          variables={createToken("borderColor", ["base", "dark", "darker"], variant => (
             <Flex
               style={{
                 backgroundColor: "white",

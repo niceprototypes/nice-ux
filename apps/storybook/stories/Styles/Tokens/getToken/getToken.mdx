@@ -1,9 +1,11 @@
-import { Meta, Stories } from '@storybook/addon-docs/blocks'
-import * as GetTokenStories from './getToken.stories'
+import { Meta } from '@storybook/addon-docs/blocks'
 
-<Meta of={GetTokenStories} />
+<Meta title="React/Styles/getToken" />
 
 # getToken
+
+Resolves a design token to its CSS variable key, `var()` reference, and raw value.
+See [Browse all tokens](/docs/tokens-styles--docs) for a visual reference of every token group.
 
 ```bash
 npm install nice-react-styles
@@ -22,7 +24,3 @@ getToken("fontSize").key            // → "--np--font-size--base"
 getToken("fontSize", "large").var   // → "var(--np--font-size--large)"
 getToken("fontSize", "large").value // → "24px"
 ```
-
----
-
-<Stories />

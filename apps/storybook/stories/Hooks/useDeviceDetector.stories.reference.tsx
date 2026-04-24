@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import { useDeviceDetector, DeviceProvider, useDevice } from "nice-react-device-detector"
 import React, { useEffect, useState } from "react"
-import Typography from "nice-react-typography"
+import Typography from "../../src/nice/Typography"
 import { generateDescriptionString } from "../../src/services"
 import { getToken } from "nice-react-styles"
 
@@ -87,7 +87,7 @@ const DeviceInfo = ({ isMobile }: { isMobile: boolean }) => {
 const HookWrapper = () => null
 
 const meta = {
-  title: "Hooks/useDeviceDetector",
+  title: "Bindings/useDeviceDetector",
   component: HookWrapper,
   parameters: {
     layout: "padded",

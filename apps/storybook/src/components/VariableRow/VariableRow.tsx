@@ -1,5 +1,5 @@
 import React from "react"
-import Typography from "nice-react-typography"
+import Typography from "../../nice/Typography"
 import { CellFlex } from "./VariableRow.styles"
 import { VariableRowProps } from "./VariableRow.types"
 import Flex from "nice-react-flex"

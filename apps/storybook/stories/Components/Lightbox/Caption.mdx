@@ -1,0 +1,33 @@
+import { Meta, Source } from '@storybook/addon-docs/blocks'
+import Lightbox from 'nice-react-lightbox'
+import Typography from '../../../src/nice/Typography'
+import { DocsRow } from '../../../src/components/DocsRow'
+import { getPicsum } from '../../../src/services'
+import { DemoImage } from './Lightbox.styles'
+
+export const DEMO_IMAGE = getPicsum(800, 600, 10)
+
+<Meta title="React/Components/Lightbox/caption" />
+
+# Lightbox — Caption
+
+<Typography color="light">Displays optional <code>title</code> and <code>description</code> text beneath the expanded image.</Typography>
+
+<DocsRow>
+  <Lightbox imageUrl={DEMO_IMAGE} alt="Demo landscape" title="Mountain landscape">
+    <DemoImage src={DEMO_IMAGE} alt="Click to expand" />
+  </Lightbox>
+  <Source language="tsx" code={`<Lightbox\n  imageUrl="/image.png"\n  alt="Description"\n  title="Photo title"\n>\n  <img src="/image.png" />\n</Lightbox>`} />
+</DocsRow>
+
+<DocsRow>
+  <Lightbox
+    imageUrl={DEMO_IMAGE}
+    alt="Demo landscape"
+    title="Mountain landscape"
+    description="A scenic mountain view captured at golden hour."
+  >
+    <DemoImage src={DEMO_IMAGE} alt="Click to expand" />
+  </Lightbox>
+  <Source language="tsx" code={`<Lightbox\n  imageUrl="/image.png"\n  alt="Description"\n  title="Photo title"\n  description="Caption text"\n>\n  <img src="/image.png" />\n</Lightbox>`} />
+</DocsRow>

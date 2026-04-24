@@ -1,5 +1,5 @@
 import Flex from "nice-react-flex"
-import Typography from "nice-react-typography"
+import Typography from "../../../src/nice/Typography"
 import { useScroll } from "nice-react-scroll"
 import { getToken } from "nice-react-styles"
 

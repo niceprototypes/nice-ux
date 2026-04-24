@@ -1,17 +1,20 @@
 import { Meta, Source } from '@storybook/addon-docs/blocks'
 import Button from 'nice-react-button'
+import Typography from '../../../src/nice/Typography'
 import { DocsRow } from '../../../src/components/DocsRow'
 
 <Meta title="React/Components/Button/status" />
 
 # Button — Status
 
-<DocsRow spacing="large none">
+<Typography color="light">Selects the button's visual emphasis — <code>primary</code> (default) or <code>secondary</code>.</Typography>
+
+<DocsRow>
   <Button onClick={() => {}}>Primary</Button>
   <Source language="tsx" code={`<Button onClick={handler}>\n  {children}\n</Button>`} />
 </DocsRow>
 
-<DocsRow spacing="large none">
+<DocsRow>
   <Button onClick={() => {}} status="secondary">Secondary</Button>
   <Source language="tsx" code={`<Button\n  onClick={handler}\n  status="secondary"\n>\n  {children}\n</Button>`} />
 </DocsRow>

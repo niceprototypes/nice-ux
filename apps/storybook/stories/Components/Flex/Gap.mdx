@@ -1,4 +1,5 @@
 import { Meta, Source } from '@storybook/addon-docs/blocks'
+import Typography from '../../../src/nice/Typography'
 import { DocsRow } from '../../../src/components/DocsRow'
 import DemoDots from '../../../src/components/DemoDots'
 import { threeDots } from './Flex.services'
@@ -7,9 +8,11 @@ import { threeDots } from './Flex.services'
 
 # Flex — Gap
 
+<Typography color="light">Sets the spacing between flex items using gap tokens. Maps to the CSS <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/gap"><code>gap</code></a> property.</Typography>
+
 <div>
   {["smaller", "small", "base", "large", "larger"].map(value => (
-    <DocsRow key={value} spacing="large none">
+    <DocsRow key={value}>
       <DemoDots gap={value} dots={threeDots} />
       <Source language="tsx" code={`<Flex gap="${value}">\n  {children}\n</Flex>`} />
     </DocsRow>

@@ -1,5 +1,5 @@
 import reReact from "react"
-import Typography from "nice-react-typography"
+import Typography from "../../nice/Typography"
 import { CodeRowProps } from "./CodeRow.types"
 import Flex from "nice-react-flex"
 import { LabelWrapper } from "./CodeRow.styles"

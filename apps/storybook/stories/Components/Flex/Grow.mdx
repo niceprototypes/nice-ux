@@ -1,5 +1,6 @@
 import { Meta, Source } from '@storybook/addon-docs/blocks'
 import { getToken } from 'nice-react-styles'
+import Typography from '../../../src/nice/Typography'
 import { DocsRow } from '../../../src/components/DocsRow'
 import DemoDots from '../../../src/components/DemoDots'
 
@@ -9,7 +10,9 @@ export const growCode = (a) => `<Flex>\n  <Flex grow={${a}}>\n    {children}\n  
 
 # Flex — Grow
 
-<DocsRow spacing="large none">
+<Typography color="light">Controls how much a flex item grows relative to its siblings. Maps to the CSS <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow"><code>flex-grow</code></a> property.</Typography>
+
+<DocsRow>
   <DemoDots
     bordered
     width="12rem"
@@ -21,7 +24,7 @@ export const growCode = (a) => `<Flex>\n  <Flex grow={${a}}>\n    {children}\n  
   <Source language="tsx" code={growCode(0)} />
 </DocsRow>
 
-<DocsRow spacing="large none">
+<DocsRow>
   <DemoDots
     bordered
     width="12rem"
@@ -33,7 +36,7 @@ export const growCode = (a) => `<Flex>\n  <Flex grow={${a}}>\n    {children}\n  
   <Source language="tsx" code={growCode(1)} />
 </DocsRow>
 
-<DocsRow spacing="large none">
+<DocsRow>
   <DemoDots
     bordered
     width="12rem"

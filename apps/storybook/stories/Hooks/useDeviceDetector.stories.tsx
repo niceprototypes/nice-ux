@@ -5,7 +5,7 @@ import {
   useDevice,
 } from "nice-react-device-detector"
 import React, { useEffect, useState } from "react"
-import Typography from "nice-react-typography"
+import Typography from "../../src/nice/Typography"
 import Flex from "nice-react-flex"
 import { CodeRow } from "../../src/components/CodeRow"
 
@@ -14,7 +14,7 @@ const Row = CodeRow
 const HookWrapper = () => null
 
 const meta = {
-  title: "React/Hooks/useDeviceDetector",
+  title: "React/Bindings/useDeviceDetector",
   component: HookWrapper,
   parameters: {
     layout: "padded",

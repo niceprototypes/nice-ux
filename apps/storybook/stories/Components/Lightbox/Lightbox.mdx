@@ -1,7 +1,11 @@
-import { Meta, Stories } from '@storybook/addon-docs/blocks'
-import * as LightboxStories from './Lightbox.stories'
+import { Meta } from '@storybook/addon-docs/blocks'
+import Lightbox from 'nice-react-lightbox'
+import { getPicsum } from '../../../src/services'
+import { DemoImage } from './Lightbox.styles'
 
-<Meta of={LightboxStories} />
+export const DEMO_IMAGE = getPicsum(800, 600, 10)
+
+<Meta title="React/Components/Lightbox" />
 
 # Lightbox
 
@@ -23,4 +27,6 @@ import Lightbox from "nice-react-lightbox"
 
 ---
 
-<Stories />
+<Lightbox imageUrl={DEMO_IMAGE} alt="Demo landscape">
+  <DemoImage src={DEMO_IMAGE} alt="Click to expand" />
+</Lightbox>

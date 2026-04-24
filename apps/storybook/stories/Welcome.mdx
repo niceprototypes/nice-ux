@@ -1,4 +1,7 @@
 import { Meta } from '@storybook/addon-docs/blocks'
+import Icon from 'nice-react-icon'
+import Typography from "../src/nice/Typography/index.ts"
+import Flex from "nice-react-flex"
 
 <Meta title="Welcome" />
 
@@ -8,29 +11,38 @@ A modular design system. Start with what you need — adopt more when you're rea
 
 ---
 
-### [🎨 Tokens](/docs/welcome-tokens--docs)
-
-No framework required. A complete token system built on CSS custom properties,
-plus a standalone icon library. Works with any stack that renders HTML.
-
-### [⚙️ Bindings](/docs/welcome-bindings--docs)
-
-React bindings for the token system — a provider, typed token API, font loading,
-and utility hooks. Brings the Nice design pattern into your React project.
-
-### [📱 Components](/docs/welcome-components--docs)
-
-Pre-built React components that consume the token system out of the box.
-Styled, responsive, and composable with zero configuration.
-
----
-
-## Configuration
-
-Guides for tooling setup across the Nice ecosystem:
-
-- [Rollup](/docs/configuration-rollup--docs) — Bundler configuration
-- [TypeScript](/docs/configuration-typescript--docs) — TS setup and paths
-- [Jest](/docs/configuration-jest--docs) — Test runner configuration
-- [Vite Watcher](/docs/configuration-vitewatcher--docs) — HMR with linked packages
-- [NPM Watcher](/docs/configuration-npm-watcher--docs) — File watching for npm scripts
+<Flex direction="column" gap="larger">
+  <Flex direction="column" gap="small">
+    <a href="/docs/welcome-tokens--docs">
+      <Flex gap="small">
+        <Icon name="Palette" size="larger" color="link" vendor strokeWidth="large" strokeScaling />
+        <Typography color="link" size="large" weight="semibold">Tokens</Typography>
+      </Flex>
+    </a>
+    <Typography size="base" style={{ margin: 0 }}>
+      <span><strong>A complete token system</strong> with no framework required, built on CSS custom properties, plus a standalone icon library.</span>
+    </Typography>
+  </Flex>
+  <Flex direction="column" gap="small">
+    <a href="/docs/welcome-react--docs">
+      <Flex gap="small">
+        <Icon name="Cable" size="larger" color="link" vendor strokeWidth="large" strokeScaling />
+        <Typography color="link" size="large" weight="semibold">React</Typography>
+      </Flex>
+    </a>
+    <Typography size="base" style={{ margin: 0 }}>
+      <span><strong>React bindings</strong> for the token system — a styles provider, typed token API, font loading, pre-built components, and utility hooks.</span>
+    </Typography>
+  </Flex>
+  <Flex direction="column" gap="small">
+    <a href="/docs/welcome-configuration--docs">
+      <Flex gap="small">
+        <Icon name="Settings" size="larger" color="link" vendor strokeWidth="large" strokeScaling />
+        <Typography color="link" size="large" weight="semibold">Configuration</Typography>
+      </Flex>
+    </a>
+    <Typography size="base" style={{ margin: 0 }}>
+      <span><strong>Tooling and setup guides</strong> for the Nice ecosystem — build tools, type checking, testing, and local-link workflows.</span>
+    </Typography>
+  </Flex>
+</Flex>

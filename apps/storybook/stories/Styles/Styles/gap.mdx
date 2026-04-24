@@ -1,0 +1,26 @@
+import { Meta, Source } from '@storybook/addon-docs/blocks'
+import { getToken } from 'nice-react-styles'
+import Typography from '../../../src/nice/Typography'
+import { DocsRow } from '../../../src/components/DocsRow'
+import DemoDots from '../../../src/components/DemoDots'
+
+<Meta title="Tokens/Styles/gap" />
+
+# gap
+
+<Typography>Spacing tokens for flex/grid gaps and margins between items.</Typography>
+
+<div>
+  {["smaller", "small", "base", "large", "larger"].map(variant => (
+    <DocsRow key={variant}>
+      <DemoDots
+        gap={variant}
+        dots={[
+          { color: getToken("foregroundColor", "error").var, width: getToken("cellHeight", "smaller").var, height: getToken("cellHeight", "smaller").var },
+          { color: getToken("foregroundColor", "link").var, width: getToken("cellHeight", "smaller").var, height: getToken("cellHeight", "smaller").var },
+        ]}
+      />
+      <Source language="tsx" code={`getToken("gap", "${variant}").var`} />
+    </DocsRow>
+  ))}
+</div>

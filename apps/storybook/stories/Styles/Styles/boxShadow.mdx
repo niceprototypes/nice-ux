@@ -1,0 +1,36 @@
+import { Meta, Source } from '@storybook/addon-docs/blocks'
+import Flex from 'nice-react-flex'
+import { getToken } from 'nice-react-styles'
+import Typography from '../../../src/nice/Typography'
+import { DocsRow } from '../../../src/components/DocsRow'
+
+<Meta title="Tokens/Styles/boxShadow" />
+
+# boxShadow
+
+<Typography>Elevation tokens for cards and floating surfaces.</Typography>
+
+<div>
+  {["base", "large"].map(variant => (
+    <DocsRow key={variant}>
+      <Flex
+        spacing="large"
+        style={{
+          backgroundColor: getToken("backgroundColor", "dark").var,
+          borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2)`,
+        }}
+      >
+        <Flex
+          style={{
+            backgroundColor: getToken("backgroundColor").var,
+            width: getToken("cellHeight", "larger").var,
+            height: getToken("cellHeight", "larger").var,
+            borderRadius: getToken("borderRadius", "small").var,
+            boxShadow: getToken("boxShadow", variant).var,
+          }}
+        />
+      </Flex>
+      <Source language="tsx" code={`getToken("boxShadow", "${variant}").var`} />
+    </DocsRow>
+  ))}
+</div>

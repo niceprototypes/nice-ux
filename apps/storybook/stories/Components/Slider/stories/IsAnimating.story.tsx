@@ -1,4 +1,4 @@
-import Typography from "nice-react-typography"
+import Typography from "../../../../src/nice/Typography"
 import Story from "../../../../src/components/Story"
 
 const IsAnimatingStory = () => (
