@@ -17,6 +17,7 @@ export const DocsRow = styled(Flex).attrs({ spacing: "large none" })`
     margin: 0;
     border: 0;
     border-radius: 0;
+    
     box-shadow: none;
 
     > div {
