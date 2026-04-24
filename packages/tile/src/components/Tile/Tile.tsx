@@ -14,8 +14,8 @@ const Tile: React.FC<TileProps> = ({
   description,
   descriptionProps,
   spacing,
-  maxWidthTablet,
-  maxWidthDesktop,
+  maxWidthMedium,
+  maxWidthLarge,
   alignItems,
   justifyContent,
   backgroundImage,
@@ -45,8 +45,8 @@ const Tile: React.FC<TileProps> = ({
         spacing={spacing}
         alignItems={alignItems}
         justifyContent={justifyContent}
-        $maxWidthTablet={maxWidthTablet}
-        $maxWidthDesktop={maxWidthDesktop}
+        $maxWidthMedium={maxWidthMedium}
+        $maxWidthLarge={maxWidthLarge}
       >
         <TileLayout
           contentTop={contentTop}

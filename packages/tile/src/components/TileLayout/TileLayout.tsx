@@ -33,7 +33,7 @@ const TileLayout: React.FC<TileLayoutProps> = ({
     <Flex direction="column" gap="larger">
       {!!TileLeft || !!TileRight ? (
         <Flex
-          direction={{ mobile: "column", tablet: "row" }}
+          direction={{ small: "column", medium: "row" }}
           gap="large"
         >
           {TileLeft}

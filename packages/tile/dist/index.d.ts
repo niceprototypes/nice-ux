@@ -33,8 +33,8 @@ interface TileProps {
     description?: React.ReactNode | string[];
     descriptionProps?: TileTypographyProps;
     spacing?: FlexSpacingType;
-    maxWidthTablet?: number;
-    maxWidthDesktop?: number;
+    maxWidthMedium?: number;
+    maxWidthLarge?: number;
     alignItems?: TileAlignItemsType;
     justifyContent?: TileJustifyContentType;
     backgroundImage?: string;

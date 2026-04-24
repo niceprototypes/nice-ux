@@ -53,21 +53,21 @@ export const OuterFlex = styled(Flex).withConfig({
 export const InnerFlex = styled(Flex).withConfig({
   shouldForwardProp: (prop) => !prop.startsWith('$'),
 })<{
-  $maxWidthTablet?: number
-  $maxWidthDesktop?: number
+  $maxWidthMedium?: number
+  $maxWidthLarge?: number
 }>`
   margin: 0 auto;
   width: 100%;
 
-  ${({ $maxWidthTablet }) => $maxWidthTablet && css`
-    @media (min-width: ${$maxWidthTablet}px) {
-      width: ${$maxWidthTablet}px;
+  ${({ $maxWidthMedium }) => $maxWidthMedium && css`
+    @media (min-width: ${$maxWidthMedium}px) {
+      width: ${$maxWidthMedium}px;
     }
   `}
 
-  ${({ $maxWidthDesktop }) => $maxWidthDesktop && css`
-    @media (min-width: ${$maxWidthDesktop}px) {
-      width: ${$maxWidthDesktop}px;
+  ${({ $maxWidthLarge }) => $maxWidthLarge && css`
+    @media (min-width: ${$maxWidthLarge}px) {
+      width: ${$maxWidthLarge}px;
     }
   `}
 `

@@ -78,15 +78,15 @@ const InnerFlex = styled(Flex).withConfig({
   margin: 0 auto;
   width: 100%;
 
-  ${({ $maxWidthTablet }) => $maxWidthTablet && css `
-    @media (min-width: ${$maxWidthTablet}px) {
-      width: ${$maxWidthTablet}px;
+  ${({ $maxWidthMedium }) => $maxWidthMedium && css `
+    @media (min-width: ${$maxWidthMedium}px) {
+      width: ${$maxWidthMedium}px;
     }
   `}
 
-  ${({ $maxWidthDesktop }) => $maxWidthDesktop && css `
-    @media (min-width: ${$maxWidthDesktop}px) {
-      width: ${$maxWidthDesktop}px;
+  ${({ $maxWidthLarge }) => $maxWidthLarge && css `
+    @media (min-width: ${$maxWidthLarge}px) {
+      width: ${$maxWidthLarge}px;
     }
   `}
 `;
@@ -100,11 +100,11 @@ const TileContent = ({ children, contentTop, contentCenter, title, titleProps, d
 
 const TileLayout = ({ children, contentTop, contentRight: TileRight, contentCenter, contentLeft: TileLeft, title, titleProps, description, descriptionProps, mode, }) => {
     const content = (jsx(TileContent, { contentTop: contentTop, contentCenter: contentCenter, title: title, titleProps: titleProps, description: description, descriptionProps: descriptionProps, mode: mode, children: children }));
-    return (jsx(Flex, { direction: "column", gap: "larger", children: !!TileLeft || !!TileRight ? (jsxs(Flex, { direction: { mobile: "column", tablet: "row" }, gap: "large", children: [TileLeft, jsx(Flex, { direction: "column", grow: 1, children: content }), TileRight] })) : content }));
+    return (jsx(Flex, { direction: "column", gap: "larger", children: !!TileLeft || !!TileRight ? (jsxs(Flex, { direction: { small: "column", medium: "row" }, gap: "large", children: [TileLeft, jsx(Flex, { direction: "column", grow: 1, children: content }), TileRight] })) : content }));
 };
 
-const Tile = ({ children, contentTop, contentCenter, contentLeft: TileLeft, contentRight: TileRight, title, titleProps, description, descriptionProps, spacing, maxWidthTablet, maxWidthDesktop, alignItems, justifyContent, backgroundImage, backgroundColor, backgroundPosition = "center", backgroundSize = "cover", backgroundAttachment = "fixed", foregroundColor, mode, className, style, }) => {
-    return (jsx(OuterFlex, { className: className, style: style, "$backgroundImage": backgroundImage, "$backgroundColor": backgroundColor, "$foregroundColor": foregroundColor, "$backgroundPosition": backgroundPosition, "$backgroundSize": backgroundSize, "$backgroundAttachment": backgroundAttachment, children: jsx(InnerFlex, { direction: "column", grow: 1, spacing: spacing, alignItems: alignItems, justifyContent: justifyContent, "$maxWidthTablet": maxWidthTablet, "$maxWidthDesktop": maxWidthDesktop, children: jsx(TileLayout, { contentTop: contentTop, contentCenter: contentCenter, contentLeft: TileLeft, contentRight: TileRight, title: title, titleProps: titleProps, description: description, descriptionProps: descriptionProps, mode: mode, children: children }) }) }));
+const Tile = ({ children, contentTop, contentCenter, contentLeft: TileLeft, contentRight: TileRight, title, titleProps, description, descriptionProps, spacing, maxWidthMedium, maxWidthLarge, alignItems, justifyContent, backgroundImage, backgroundColor, backgroundPosition = "center", backgroundSize = "cover", backgroundAttachment = "fixed", foregroundColor, mode, className, style, }) => {
+    return (jsx(OuterFlex, { className: className, style: style, "$backgroundImage": backgroundImage, "$backgroundColor": backgroundColor, "$foregroundColor": foregroundColor, "$backgroundPosition": backgroundPosition, "$backgroundSize": backgroundSize, "$backgroundAttachment": backgroundAttachment, children: jsx(InnerFlex, { direction: "column", grow: 1, spacing: spacing, alignItems: alignItems, justifyContent: justifyContent, "$maxWidthMedium": maxWidthMedium, "$maxWidthLarge": maxWidthLarge, children: jsx(TileLayout, { contentTop: contentTop, contentCenter: contentCenter, contentLeft: TileLeft, contentRight: TileRight, title: title, titleProps: titleProps, description: description, descriptionProps: descriptionProps, mode: mode, children: children }) }) }));
 };
 
 const TileTypes = {};

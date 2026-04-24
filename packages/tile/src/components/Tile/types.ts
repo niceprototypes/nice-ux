@@ -39,8 +39,8 @@ export interface TileProps {
 
   // Layout
   spacing?: FlexSpacingType
-  maxWidthTablet?: number
-  maxWidthDesktop?: number
+  maxWidthMedium?: number
+  maxWidthLarge?: number
   alignItems?: TileAlignItemsType
   justifyContent?: TileJustifyContentType
 
