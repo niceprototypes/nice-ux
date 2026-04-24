@@ -30,15 +30,18 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "nice-react-styles": "file:../nice-react-styles"
+    "nice-react-styles": "file:../nice-react-styles",
+    "nice-react-typography": "file:../nice-react-typography"
   },
   "peerDependencies": {
+    "nice-react-typography": ">=5.0.0",
     "react": ">=19.2.0 <20.0.0",
     "react-dom": ">=19.2.0 <20.0.0",
     "styled-components": ">=6.1.18 <7.0.0"
   },
   "devDependencies": {
     "nice-configuration": "file:../nice-configuration",
+    "nice-react-typography": "file:../nice-react-typography",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "styled-components": "6.1.19",

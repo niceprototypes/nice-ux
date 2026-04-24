@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react"
 import { createPortal } from "react-dom"
-import { Trigger, Overlay, Image, Caption, Title, Description } from "./styles"
+import Typography from "nice-react-typography"
+import { Trigger, Overlay, Image, Caption } from "./styles"
 import type { LightboxProps } from "./types"
 
 const Lightbox: React.FC<LightboxProps> = ({
@@ -42,8 +43,16 @@ const Lightbox: React.FC<LightboxProps> = ({
             <Image src={imageUrl} alt={alt} onClick={(e) => e.stopPropagation()} />
             {hasCaption && (
               <Caption onClick={(e) => e.stopPropagation()}>
-                {title && <Title>{title}</Title>}
-                {description && <Description>{description}</Description>}
+                {title && (
+                  <Typography as="h3" size="large" weight="semibold" mode="night">
+                    {title}
+                  </Typography>
+                )}
+                {description && (
+                  <Typography as="p" size="base" color="lighter" mode="night">
+                    {description}
+                  </Typography>
+                )}
               </Caption>
             )}
           </Overlay>,

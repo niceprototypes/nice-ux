@@ -30,18 +30,4 @@ export const Caption = styled.div`
   max-width: 600px;
   padding: 16px 24px;
   text-align: center;
-  color: rgba(255, 255, 255, 0.9);
-`
-
-export const Title = styled.h3`
-  margin: 0;
-  font-size: 18px;
-  font-weight: 600;
-`
-
-export const Description = styled.p`
-  margin: 8px 0 0;
-  font-size: 14px;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.7);
 `
