@@ -1,0 +1,1 @@
+major: Rename responsive-object keys on gap/direction/alignItems/justifyContent/grow/wrap from mobile/tablet/desktop to small/medium/large
