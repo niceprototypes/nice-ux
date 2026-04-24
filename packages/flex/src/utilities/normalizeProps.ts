@@ -1,4 +1,5 @@
 import { FlexProps } from "../components/Flex/types"
+import { BREAKPOINT_SMALL } from "nice-react-styles"
 
 /**
  * List of props that accept breakpoint values.
@@ -19,8 +20,8 @@ const breakpointProps = ["gap", "direction", "grow", "wrap", "alignItems", "just
  *
  * @description
  * Converts simple prop values into breakpoint objects:
- * - Example: `gap="base"` becomes `gap={{ mobile: "base" }}`
- * - Example: `direction="row"` becomes `direction={{ mobile: "row" }}`
+ * - Example: `gap="base"` becomes `gap={{ small: "base" }}`
+ * - Example: `direction="row"` becomes `direction={{ small: "row" }}`
  *
  * Note: The spacing prop is NOT normalized here. It's handled directly by
  * getSpacingValue which parses shorthand strings at render time.
@@ -31,7 +32,7 @@ export const normalizeProps = (props: FlexProps): FlexProps => {
   breakpointProps.forEach((propName) => {
     const value = props[propName as keyof FlexProps]
     if (value !== undefined && typeof value !== "object") {
-      ;(normalizedProps as any)[propName] = { mobile: value }
+      ;(normalizedProps as any)[propName] = { [BREAKPOINT_SMALL]: value }
     }
   })
 

@@ -1,4 +1,5 @@
-import { Breakpoint, FlexProps } from "../components/Flex/types";
+import { FlexProps } from "../components/Flex/types";
+import { type BreakpointName } from "nice-react-styles";
 /**
  * styleFlex Service
  *
@@ -36,20 +37,20 @@ import { Breakpoint, FlexProps } from "../components/Flex/types";
  * the normalizeProps service, ensuring consistent prop structure.
  *
  * @example
- * // Generate mobile breakpoint styles
- * const props = { direction: { mobile: "column" }, gap: { mobile: "small" } }
- * styleFlex("mobile", props)
+ * // Generate small breakpoint styles
+ * const props = { direction: { small: "column" }, gap: { small: "small" } }
+ * styleFlex(BREAKPOINT_SMALL, props)
  * // Returns: "display: flex;\nflex-direction: column;\ngap: var(--core--gap--small);"
  *
  * @example
- * // Generate tablet breakpoint styles
+ * // Generate medium breakpoint styles
  * const props = {
- *   direction: { mobile: "column", tablet: "row" },
- *   gap: { mobile: "small", tablet: "base" },
- *   spacing: { tablet: "small base" }
+ *   direction: { small: "column", medium: "row" },
+ *   gap: { small: "small", medium: "base" },
+ *   spacing: { medium: "small base" }
  * }
- * styleFlex("tablet", props)
+ * styleFlex(BREAKPOINT_MEDIUM, props)
  * // Returns: "flex-direction: row;\ngap: var(--core--gap--base);\npadding-top: var(--core--gap--small);\npadding-right: var(--core--gap--base);..."
  */
-export declare const styleFlex: (breakpoint: Breakpoint, props: FlexProps) => string;
+export declare const styleFlex: (breakpoint: BreakpointName, props: FlexProps) => string;
 //# sourceMappingURL=styleFlex.d.ts.map

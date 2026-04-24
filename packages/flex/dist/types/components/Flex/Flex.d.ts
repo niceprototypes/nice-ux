@@ -17,8 +17,8 @@ import { FlexProps } from "./types";
  * @example
  * // Responsive usage with breakpoint-based props
  * <Flex
- *   direction={{ mobile: "column", tablet: "row" }}
- *   gap={{ mobile: "small", tablet: "base", desktop: "large" }}
+ *   direction={{ small: "column", medium: "row" }}
+ *   gap={{ small: "small", medium: "base", large: "large" }}
  *   alignItems="center"
  * >
  *   <div>Responsive Item 1</div>
@@ -35,7 +35,7 @@ import { FlexProps } from "./types";
  * // Responsive spacing with margin mode
  * <Flex
  *   mode="margin"
- *   spacing={{ mobile: "small", tablet: "base large", desktop: "small base large smaller" }}
+ *   spacing={{ small: "small", medium: "base large", large: "small base large smaller" }}
  * >
  *   <div>Responsive margins</div>
  * </Flex>
@@ -48,11 +48,11 @@ import { FlexProps } from "./types";
  * for creating responsive layouts. It supports:
  *
  * 1. **Responsive Design**: All layout props can be specified as either static values
- *    or responsive objects with mobile/tablet/desktop breakpoints
+ *    or responsive objects with small/medium/large breakpoints
  *
  * 2. **Automatic Prop Normalization**: The component automatically normalizes props
  *    to ensure consistent behavior. Simple values are converted to breakpoint objects
- *    with the value applied to the 'mobile' breakpoint.
+ *    with the value applied to the 'small' breakpoint.
  *
  * 3. **CSS-like Spacing Shorthand**: Supports 1-4 token values like CSS padding/margin:
  *    - "small" → all sides

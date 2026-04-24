@@ -19,17 +19,17 @@
  *    being passed to the DOM, avoiding React warnings about unknown DOM properties.
  *    Filtered props: mode, spacing, gap, direction, alignItems, justifyContent, grow, wrap
  *
- * 2. **Mobile-First Responsive Design**: Applies styles in a mobile-first approach:
- *    - Base styles: Always applied (mobile breakpoint)
- *    - Tablet styles: Applied above mobile threshold
- *    - Desktop styles: Applied for large screens
+ * 2. **Small-First Responsive Design**: Applies styles in a small-first approach:
+ *    - Base styles: Always applied (small breakpoint)
+ *    - Medium styles: Applied above small threshold
+ *    - Large styles: Applied for large screens
  *
  * 3. **Service Integration**: Delegates actual CSS generation to the styleFlex service,
  *    keeping the styled component focused on responsive breakpoint management.
  *
  * @example
  * // Basic usage in component
- * <FlexStyled direction={{ mobile: "column", tablet: "row" }} gap={{ mobile: "small", desktop: "large" }}>
+ * <FlexStyled direction={{ small: "column", medium: "row" }} gap={{ small: "small", large: "large" }}>
  *   <div>Content</div>
  * </FlexStyled>
  */
