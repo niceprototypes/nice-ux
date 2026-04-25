@@ -13,6 +13,7 @@ const TileContent: React.FC<TileContentProps> = ({
   descriptionProps,
   align,
   mode,
+  gap,
 }) => {
   const hasContentMain = !!title || !!description || !!contentCenter
 
@@ -29,7 +30,11 @@ const TileContent: React.FC<TileContentProps> = ({
           mode={mode}
         />
       )}
-      {children}
+      {children && (
+        <Flex direction="column" spacing={gap ? `${gap} none none` : undefined}>
+          {children}
+        </Flex>
+      )}
     </Flex>
   )
 }

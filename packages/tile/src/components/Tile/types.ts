@@ -1,6 +1,6 @@
 import * as React from "react"
 import type { FlexSpacingType, FlexProps } from "nice-react-flex"
-import type { ModeType } from "nice-react-styles"
+import type { ModeType, GapType } from "nice-react-styles"
 import type { TileTypographyProps } from "../TileContent/types"
 
 export type { TileTypographyProps }
@@ -43,6 +43,8 @@ export interface TileProps {
   maxWidthLarge?: number
   alignItems?: TileAlignItemsType
   justifyContent?: TileJustifyContentType
+  /** Top spacing applied to the Flex that wraps `children` below the title/description block. */
+  gap?: GapType
 
   // Background
   backgroundImage?: string
@@ -66,6 +68,7 @@ namespace TileTypes {
   export type Typography = TileTypographyProps
   export type AlignItems = TileAlignItemsType
   export type JustifyContent = TileJustifyContentType
+  export type Gap = GapType
   export type Props = TileProps
 }
 

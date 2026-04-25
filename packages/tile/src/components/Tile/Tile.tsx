@@ -18,6 +18,7 @@ const Tile: React.FC<TileProps> = ({
   maxWidthLarge,
   alignItems,
   justifyContent,
+  gap,
   backgroundImage,
   backgroundColor,
   backgroundPosition = "center",
@@ -58,6 +59,7 @@ const Tile: React.FC<TileProps> = ({
           description={description}
           descriptionProps={descriptionProps}
           mode={mode}
+          gap={gap}
         >
           {children}
         </TileLayout>

@@ -14,21 +14,8 @@ const TileLayout: React.FC<TileLayoutProps> = ({
   description,
   descriptionProps,
   mode,
+  gap,
 }) => {
-  const content = (
-    <TileContent
-      contentTop={contentTop}
-      contentCenter={contentCenter}
-      title={title}
-      titleProps={titleProps}
-      description={description}
-      descriptionProps={descriptionProps}
-      mode={mode}
-    >
-      {children}
-    </TileContent>
-  )
-
   return (
     <Flex direction="column" gap="larger">
       {!!TileLeft || !!TileRight ? (
@@ -38,11 +25,35 @@ const TileLayout: React.FC<TileLayoutProps> = ({
         >
           {TileLeft}
           <Flex direction="column" grow={1}>
-            {content}
+            <TileContent
+              contentTop={contentTop}
+              contentCenter={contentCenter}
+              title={title}
+              titleProps={titleProps}
+              description={description}
+              descriptionProps={descriptionProps}
+              mode={mode}
+              gap={gap}
+            >
+              {children}
+            </TileContent>
           </Flex>
           {TileRight}
         </Flex>
-      ) : content}
+      ) : (
+        <TileContent
+          contentTop={contentTop}
+          contentCenter={contentCenter}
+          title={title}
+          titleProps={titleProps}
+          description={description}
+          descriptionProps={descriptionProps}
+          mode={mode}
+          gap={gap}
+        >
+          {children}
+        </TileContent>
+      )}
     </Flex>
   )
 }

@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { AlignType, TypographyProps } from "nice-react-typography";
-import type { ModeType } from "nice-react-styles";
+import type { ModeType, GapType } from "nice-react-styles";
 export type TileTypographyProps = Partial<Omit<TypographyProps, "children">>;
 export interface TileContentProps {
     children?: React.ReactNode;
@@ -12,5 +12,7 @@ export interface TileContentProps {
     descriptionProps?: TileTypographyProps;
     align?: AlignType;
     mode?: ModeType;
+    /** Top spacing applied to the Flex that wraps `children`. */
+    gap?: GapType;
 }
 //# sourceMappingURL=types.d.ts.map
