@@ -95,11 +95,20 @@ const InnerFlex = styled(Flex).withConfig({
   `}
 `;
 
+/**
+ * ContentMain
+ *
+ * Renders the Tile's primary content column — title, optional center slot,
+ * and description (string or array of strings). Extracted from TileContent
+ * so the title/description layout can be reused or swapped independently.
+ */
+const ContentMain = ({ title, titleProps, contentCenter, description, descriptionProps, mode, }) => (jsxRuntime.jsxs(Flex, { direction: "column", children: [title && (jsxRuntime.jsx(Typography, { as: "h3", weight: "semibold", mode: mode, ...titleProps, children: title })), contentCenter, description && (Array.isArray(description)
+            ? (jsxRuntime.jsx(Flex, { direction: "column", children: description.map((text, index) => (jsxRuntime.jsx(Typography, { color: "light", mode: mode, ...descriptionProps, children: text }, index))) }))
+            : (jsxRuntime.jsx(Typography, { color: "light", mode: mode, ...descriptionProps, children: description })))] }));
+
 const TileContent = ({ children, contentTop, contentCenter, title, titleProps, description, descriptionProps, align, mode, }) => {
     const hasContentMain = !!title || !!description || !!contentCenter;
-    return (jsxRuntime.jsxs(Flex, { direction: "column", gap: "none", children: [contentTop, hasContentMain && (jsxRuntime.jsxs(Flex, { direction: "column", children: [title && (jsxRuntime.jsx(Typography, { as: "h3", weight: "semibold", mode: mode, ...titleProps, children: title })), contentCenter, description && (Array.isArray(description)
-                        ? (jsxRuntime.jsx(Flex, { direction: "column", children: description.map((text, index) => (jsxRuntime.jsx(Typography, { color: "light", mode: mode, ...descriptionProps, children: text }, index))) }))
-                        : (jsxRuntime.jsx(Typography, { color: "light", mode: mode, ...descriptionProps, children: description })))] })), children] }));
+    return (jsxRuntime.jsxs(Flex, { direction: "column", gap: "none", children: [contentTop, hasContentMain && (jsxRuntime.jsx(ContentMain, { title: title, titleProps: titleProps, contentCenter: contentCenter, description: description, descriptionProps: descriptionProps, mode: mode })), children] }));
 };
 
 const TileLayout = ({ children, contentTop, contentRight: TileRight, contentCenter, contentLeft: TileLeft, title, titleProps, description, descriptionProps, mode, }) => {

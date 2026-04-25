@@ -1,6 +1,6 @@
 import * as React from "react"
 import Flex from "nice-react-flex"
-import Typography from "nice-react-typography"
+import ContentMain from "../ContentMain"
 import type { TileContentProps } from "./types"
 
 const TileContent: React.FC<TileContentProps> = ({
@@ -20,45 +20,14 @@ const TileContent: React.FC<TileContentProps> = ({
     <Flex direction="column" gap="none">
       {contentTop}
       {hasContentMain && (
-        <Flex direction="column">
-          {title && (
-            <Typography
-              as="h3"
-              weight="semibold"
-              mode={mode}
-              {...titleProps}
-            >
-              {title}
-            </Typography>
-          )}
-          {contentCenter}
-          {description && (
-            Array.isArray(description)
-              ? (
-                <Flex direction="column">
-                  {description.map((text, index) => (
-                    <Typography
-                      key={index}
-                      color="light"
-                      mode={mode}
-                      {...descriptionProps}
-                    >
-                      {text}
-                    </Typography>
-                  ))}
-                </Flex>
-              )
-              : (
-                <Typography
-                  color="light"
-                  mode={mode}
-                  {...descriptionProps}
-                >
-                  {description}
-                </Typography>
-              )
-          )}
-        </Flex>
+        <ContentMain
+          title={title}
+          titleProps={titleProps}
+          contentCenter={contentCenter}
+          description={description}
+          descriptionProps={descriptionProps}
+          mode={mode}
+        />
       )}
       {children}
     </Flex>
