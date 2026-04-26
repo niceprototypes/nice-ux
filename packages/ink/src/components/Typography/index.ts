@@ -1,6 +1,9 @@
-// Re-export component
-export { default } from "./Typography"
+import { withBreakpoints } from "nice-react-styles"
+import BaseTypography from "./Typography"
+import type { TypographyProps } from "./types"
 
-// Re-export all named types from types.ts, plus the TypographyTypes namespace
+const Typography = withBreakpoints<TypographyProps>(BaseTypography)
+
+export default Typography
 export * from "./types"
 export { default as TypographyTypes } from "./types"
