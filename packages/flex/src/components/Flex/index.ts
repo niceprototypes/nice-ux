@@ -1,6 +1,9 @@
-// Re-export component
-export { default } from "./Flex"
+import { withBreakpoints } from "nice-react-styles"
+import BaseFlex from "./Flex"
+import type { FlexProps } from "./types"
 
-// Re-export types (both individual and namespace)
+const Flex = withBreakpoints<FlexProps>(BaseFlex)
+
+export default Flex
 export { default as FlexTypes } from "./types"
 export * from "./types"

@@ -1,5 +1,7 @@
 # Flex Component
 
+> **Responsive props:** Every prop accepts per-breakpoint overrides via the `breakpoints` array. See [withBreakpoints](https://niceprototypes.com/storybook/?path=/docs/react-styles-withbreakpoints--docs).
+
 A highly flexible and responsive flexbox container component for React with styled-components. Provides comprehensive layout control with breakpoint-based responsive design and intuitive prop APIs.
 
 ## Features

@@ -1,7 +1,7 @@
+import { BREAKPOINT_SMALL, BREAKPOINT_MEDIUM, BREAKPOINT_LARGE, getConstant, getBreakpoint, withBreakpoints } from 'nice-react-styles';
 import { jsx } from 'react/jsx-runtime';
 import 'react';
 import styled from 'styled-components';
-import { BREAKPOINT_SMALL, BREAKPOINT_MEDIUM, BREAKPOINT_LARGE, getConstant, getBreakpoint } from 'nice-react-styles';
 
 /**
  * Checks if a value is a responsive breakpoint object (has small, medium, or large keys)
@@ -475,7 +475,7 @@ const normalizeProps = (props) => {
  * The component uses styled-components for styling and filters out style props before
  * passing them to the DOM to avoid React warnings about unknown DOM properties.
  */
-const Flex = (props) => {
+const Flex$1 = (props) => {
     // Normalize props to ensure all breakpoint-capable props are in object format
     // This simplifies the styling logic by providing a consistent prop structure
     const normalizedProps = normalizeProps(props);
@@ -486,6 +486,8 @@ const Flex = (props) => {
 
 // Declaration merging: const + namespace creates exportable type namespace
 const FlexTypes = {};
+
+const Flex = withBreakpoints(Flex$1);
 
 export { FlexTypes, Flex as default, getBreakpointValue, getGapSize, getSpacingValue, isResponsiveObject, styleFlex, styleSpacing };
 //# sourceMappingURL=index.esm.js.map

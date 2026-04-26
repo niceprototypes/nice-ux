@@ -2,10 +2,10 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
+var niceReactStyles = require('nice-react-styles');
 var jsxRuntime = require('react/jsx-runtime');
 require('react');
 var styled = require('styled-components');
-var niceReactStyles = require('nice-react-styles');
 
 /**
  * Checks if a value is a responsive breakpoint object (has small, medium, or large keys)
@@ -479,7 +479,7 @@ const normalizeProps = (props) => {
  * The component uses styled-components for styling and filters out style props before
  * passing them to the DOM to avoid React warnings about unknown DOM properties.
  */
-const Flex = (props) => {
+const Flex$1 = (props) => {
     // Normalize props to ensure all breakpoint-capable props are in object format
     // This simplifies the styling logic by providing a consistent prop structure
     const normalizedProps = normalizeProps(props);
@@ -490,6 +490,8 @@ const Flex = (props) => {
 
 // Declaration merging: const + namespace creates exportable type namespace
 const FlexTypes = {};
+
+const Flex = niceReactStyles.withBreakpoints(Flex$1);
 
 exports.FlexTypes = FlexTypes;
 exports.default = Flex;
