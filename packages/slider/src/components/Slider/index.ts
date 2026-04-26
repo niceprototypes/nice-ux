@@ -1,6 +1,9 @@
-// Re-export component
-export { default } from "./Slider"
+import { withBreakpoints } from "nice-react-styles"
+import BaseSlider from "./Slider"
+import type { SliderProps } from "./types"
 
-// Re-export all named types from types.ts, plus the SliderTypes namespace
+const Slider = withBreakpoints<SliderProps>(BaseSlider)
+
+export default Slider
 export * from "./types"
 export { default as SliderTypes } from "./types"
