@@ -1,5 +1,7 @@
 # nice-react-button
 
+> **Responsive props:** Every prop accepts per-breakpoint overrides via the `breakpoints` array. See [withBreakpoints](https://niceprototypes.com/storybook/?path=/docs/react-styles-withbreakpoints--docs).
+
 A flexible and customizable React button component with built-in theming support, designed to work seamlessly with the nice-react ecosystem.
 
 > **⚠️ Storybook Notice**: Storybook has been temporarily removed due to React 19 compatibility issues. The Storybook configuration is preserved in the `storybook-preserve` branch and will be restored when Storybook officially supports React 19.
