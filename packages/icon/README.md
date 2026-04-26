@@ -1,5 +1,7 @@
 # nice-react-icon
 
+> **Responsive props:** Every prop accepts per-breakpoint overrides via the `breakpoints` array. See [withBreakpoints](https://niceprototypes.com/storybook/?path=/docs/react-styles-withbreakpoints--docs).
+
 A flexible and customizable React icon component with built-in icon set and theming support.
 
 ## Features
