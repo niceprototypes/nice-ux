@@ -1,0 +1,150 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="React/Styles/withBreakpoints" />
+
+# withBreakpoints
+
+`withBreakpoints` wraps a React component with a generic `breakpoints` prop that
+accepts an array of `{ min, max, props }` overrides. At render time, any entry
+whose min/max range covers the current viewport breakpoint has its `props`
+merged over the base props. Later matching entries cumulatively override earlier
+ones.
+
+```bash
+npm install nice-react-styles
+```
+
+### Setup
+
+```ts
+import { withBreakpoints } from "nice-react-styles"
+
+const ResponsiveComponent = withBreakpoints<MyProps>(MyComponent)
+```
+
+Most consumers never call `withBreakpoints` directly — every visual
+`nice-react-*` component is exported pre-wrapped, so the `breakpoints` prop is
+already there.
+
+---
+
+## The `breakpoints` prop
+
+Every wrapped component accepts an optional `breakpoints` array. Each entry
+selects a viewport range with `min` and/or `max` and supplies a `props` object
+that overrides the base props within that range.
+
+```tsx
+<Tile
+  spacing="base"
+  titleProps={{ size: "large", align: "center" }}
+  breakpoints={[
+    { min: "medium", max: "medium", props: { spacing: "large base" } },
+    { min: "large", props: { spacing: "larger base", maxWidthLarge: 1200 } },
+  ]}
+>
+  ...
+</Tile>
+```
+
+### Entry shape
+
+| Field | Type | Purpose |
+|------|------|---------|
+| `min` | `BreakpointName?` | Inclusive lower bound. Entry activates when current viewport ≥ this name. |
+| `max` | `BreakpointName?` | Inclusive upper bound. Entry activates when current viewport ≤ this name. |
+| `props` | `Partial<P>?` | Prop overrides applied when the entry matches. |
+
+`BreakpointName` is `"small" | "medium" | "large"`. **At least one of `min` or
+`max` must be provided** — the HOC throws at runtime if both are missing.
+
+| Bounds | Meaning |
+|--------|---------|
+| `{ min: "medium" }` | Medium and up (medium, large) |
+| `{ max: "medium" }` | Up to medium (small, medium) |
+| `{ min: "medium", max: "medium" }` | Medium only |
+| `{ min: "small", max: "large" }` | All viewports — useful for unconditional overrides |
+
+---
+
+## Merge semantics
+
+Matching entries are applied **cumulatively** in array order — later wins on a
+field collision. Plain-object props merge **one level deep** so partial
+overrides preserve sibling keys.
+
+| Prop kind | Behavior |
+|---|---|
+| Plain config object (`titleProps`, `descriptionProps`, `style`, …) | One-level merge — sibling keys preserved |
+| Primitive (`spacing`, `gap`, `maxWidthLarge`, `boolean`, `number`, `string`) | Replace |
+| React element (`children`, `contentLeft`, `contentRight`, …) | Replace as a unit |
+| Array (`description: string[]`, etc.) | Replace as a unit |
+| Function (handlers, refs) | Replace |
+
+Concretely:
+
+```tsx
+<Tile
+  titleProps={{ size: "larger", align: "center" }}
+  breakpoints={[
+    { min: "medium", props: { titleProps: { size: "larger" } } },
+  ]}
+/>
+// effective titleProps at medium+: { size: "larger", align: "center" }
+// `align` is preserved because titleProps is a plain object.
+```
+
+---
+
+## When to reach for `breakpoints` vs. Flex's responsive shape
+
+`Flex` accepts responsive shapes natively on `gap`, `direction`, `alignItems`,
+`justifyContent`, `grow`, `wrap`:
+
+```tsx
+<Flex direction={{ small: "column", medium: "row" }} />
+```
+
+That's CSS-only — generates per-breakpoint media queries inside the styled
+component. No JS subscription. Use it whenever you can.
+
+`withBreakpoints` is JS-driven — it subscribes to `window.innerWidth` and
+re-renders the component when the breakpoint changes. Use it when:
+
+- The prop you need to vary isn't a CSS prop (e.g. `contentLeft`, `children`,
+  `onClick`, a slot prop)
+- The prop type doesn't accept Flex's responsive shape
+- You want to override several props at once with a single entry
+
+For pure layout (gap, direction, spacing, …) prefer Flex's responsive shape —
+it's lighter and works at the styled-components layer.
+
+---
+
+## How it works under the hood
+
+1. `useBreakpoint()` reads `window.innerWidth` via `useSyncExternalStore` and
+   returns one of `"small"` / `"medium"` / `"large"`.
+2. The wrapped component re-renders on viewport-cross.
+3. The HOC walks the `breakpoints` array, picks matching entries, and folds
+   their `props` into the base props with a one-level deep merge.
+4. The final merged props are passed to the underlying component.
+
+SSR snapshot is `"small"` (small-first); on hydration, the client snapshot
+takes over and re-renders if the viewport is wider.
+
+---
+
+## Pre-wrapped components
+
+These components ship with `withBreakpoints` already applied — just use the
+`breakpoints` prop directly:
+
+- [Button](/docs/react-components-button--docs)
+- [Flex](/docs/react-components-flex--docs)
+- [Icon](/docs/react-components-icon--docs)
+- [Image](/docs/react-components-image--docs)
+- [Lightbox](/docs/react-components-lightbox--docs)
+- [Slider](/docs/react-components-slider--docs)
+- [Tile](/docs/react-components-tile--docs)
+- [Typography](/docs/react-components-typography--docs)
