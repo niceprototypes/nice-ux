@@ -1,6 +1,9 @@
-// Re-export component
-export { default } from "./Image"
+import { withBreakpoints } from "nice-react-styles"
+import BaseImage from "./Image"
+import type { ImageProps } from "./types"
 
-// Re-export all named types from types.ts, plus the ImageTypes namespace
+const Image = withBreakpoints<ImageProps>(BaseImage)
+
+export default Image
 export * from "./types"
 export { default as ImageTypes } from "./types"
