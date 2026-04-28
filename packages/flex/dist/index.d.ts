@@ -144,7 +144,7 @@ type FlexProps = {
 };
 type GapSize = FlexGapSizeType;
 type FlexMode = FlexModeType;
-type Breakpoint$1 = FlexBreakpointType;
+type Breakpoint = FlexBreakpointType;
 type SpacingDefinition = FlexSpacingDefinitionType;
 type SpacingShorthand = FlexSpacingShorthandType;
 type SpacingResponsive = FlexSpacingResponsiveType;
@@ -327,4 +327,4 @@ declare const styleSpacing: (mode: "padding" | "margin", def?: SpacingDefinition
 declare const styleFlex: (breakpoint: BreakpointName, props: FlexProps) => string;
 
 export { FlexTypes, Flex as default, getBreakpointValue, getGapSize, getSpacingValue, isResponsiveObject, styleFlex, styleSpacing };
-export type { Breakpoint$1 as Breakpoint, FlexAlignItemsType, FlexBreakpointType, FlexDirectionType, FlexGapSizeType, FlexJustifyContentType, FlexMode, FlexModeType, FlexProps, FlexSpacingDefinitionType, FlexSpacingResponsiveType, FlexSpacingShorthandType, FlexSpacingType, FlexWrapType, GapSize, Spacing, SpacingDefinition, SpacingResponsive, SpacingShorthand };
+export type { Breakpoint, FlexAlignItemsType, FlexBreakpointType, FlexDirectionType, FlexGapSizeType, FlexJustifyContentType, FlexMode, FlexModeType, FlexProps, FlexSpacingDefinitionType, FlexSpacingResponsiveType, FlexSpacingShorthandType, FlexSpacingType, FlexWrapType, GapSize, Spacing, SpacingDefinition, SpacingResponsive, SpacingShorthand };
