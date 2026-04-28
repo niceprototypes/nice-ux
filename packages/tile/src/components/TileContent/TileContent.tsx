@@ -18,7 +18,7 @@ const TileContent: React.FC<TileContentProps> = ({
   const hasContentMain = !!title || !!description || !!contentCenter
 
   return (
-    <Flex direction="column" gap="none">
+    <Flex direction="column">
       {contentTop}
       {hasContentMain && (
         <ContentMain

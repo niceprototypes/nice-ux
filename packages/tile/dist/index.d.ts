@@ -1,7 +1,8 @@
-import * as React from 'react';
-import { ComponentType } from 'react';
-import { FlexSpacingType, FlexProps } from 'nice-react-flex';
+import * as nice_react_styles from 'nice-react-styles';
 import { GapType, ModeType, TokenResult } from 'nice-react-styles';
+import * as React$1 from 'react';
+import { ComponentType } from 'react';
+import { FlexProps, FlexSpacingType } from 'nice-react-flex';
 import { TypographyProps } from 'nice-react-typography';
 
 type TileTypographyProps = Partial<Omit<TypographyProps, "children">>;
@@ -21,16 +22,16 @@ type TileAlignItemsType = NonNullable<FlexProps["alignItems"]>;
  */
 type TileJustifyContentType = NonNullable<FlexProps["justifyContent"]>;
 interface TileProps {
-    children?: React.ReactNode;
+    children?: React$1.ReactNode;
     /** Content rendered above the title */
-    contentTop?: React.ReactNode;
+    contentTop?: React$1.ReactNode;
     /** Content rendered between the title and description */
-    contentCenter?: React.ReactNode;
-    contentLeft?: React.ReactNode;
-    contentRight?: React.ReactNode;
-    title?: React.ReactNode;
+    contentCenter?: React$1.ReactNode;
+    contentLeft?: React$1.ReactNode;
+    contentRight?: React$1.ReactNode;
+    title?: React$1.ReactNode;
     titleProps?: TileTypographyProps;
-    description?: React.ReactNode | string[];
+    description?: React$1.ReactNode | string[];
     descriptionProps?: TileTypographyProps;
     spacing?: FlexSpacingType;
     maxWidthMedium?: number;
@@ -47,7 +48,7 @@ interface TileProps {
     foregroundColor?: string;
     mode?: ModeType;
     className?: string;
-    style?: React.CSSProperties;
+    style?: React$1.CSSProperties;
 }
 declare const TileTypes: {};
 declare namespace TileTypes {
@@ -58,8 +59,8 @@ declare namespace TileTypes {
     type Props = TileProps;
 }
 
-declare const Tile: React.FC<TileProps>;
-//# sourceMappingURL=Tile.d.ts.map
+declare const Tile: React.FC<nice_react_styles.WithBreakpointsProps<P>>;
+//# sourceMappingURL=index.d.ts.map
 
 /**
  * No-op component — tile CSS custom properties are now generated

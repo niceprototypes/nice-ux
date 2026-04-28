@@ -18,7 +18,7 @@ const ContentMain: React.FC<ContentMainProps> = ({
   descriptionProps,
   mode,
 }) => (
-  <Flex direction="column" gap={descriptionProps.size}>
+  <Flex direction="column">
     {title && (
       <Typography
         as="h3"
