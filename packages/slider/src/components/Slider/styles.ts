@@ -1,12 +1,6 @@
-import styled, { css } from "styled-components"
-
-const styleHideScrollbar = css`
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-`
+import { getToken } from "nice-react-styles"
+import styled from "styled-components"
+import { styleHideScrollbar } from "../../utilities/styleHideScrollbar"
 
 export const SliderItemStyled = styled.div<{
   $index: number
@@ -21,7 +15,7 @@ export const SliderItemStyled = styled.div<{
   overflow-y: auto;
   ${styleHideScrollbar}
   transform: translateY(${(props) => (props.$index - props.$currentIndex) * 100}%);
-  transition: transform 0.3s ease-in-out;
+  transition: transform ${getToken("animationDuration", "base").var} ${getToken("animationEasing", "base").var};
 `
 
 export const SliderOuterStyled = styled.div`

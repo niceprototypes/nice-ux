@@ -1,5 +1,5 @@
 {
-  "$schema": "../nice-configuration/src/exports/schema.json",
+  "$schema": "../configuration/src/exports/schema.json",
   "description": "Animated vertical slider component.",
   "default": "Slider",
   "components": ["Slider"]

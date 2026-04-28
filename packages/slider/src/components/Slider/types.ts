@@ -1,32 +1,51 @@
 import * as React from "react"
 
 /**
- * Children slides for the slider
+ * SliderChildrenType
+ *
+ * Array of slide elements to render. Each entry becomes one positioned
+ * slide; the active slide is selected by `currentIndex`.
  */
 export type SliderChildrenType = React.ReactNode[]
 
 /**
- * Current slide index
+ * SliderCurrentIndexType
+ *
+ * Zero-based index of the currently active slide. Driving this value
+ * up or down triggers the slide transition.
  */
 export type SliderCurrentIndexType = number
 
 /**
- * Whether the slider is currently animating
+ * SliderIsAnimatingType
+ *
+ * Whether a slide transition is in progress. While true, the component
+ * schedules an `onAnimationComplete` callback once the CSS transition
+ * window elapses.
  */
 export type SliderIsAnimatingType = boolean
 
 /**
- * Callback when animation completes
+ * SliderOnAnimationCompleteType
+ *
+ * Callback fired after the slide transition finishes. The duration is
+ * driven by the `animationDuration.base` token from nice-styles.
  */
 export type SliderOnAnimationCompleteType = () => void
 
 /**
- * Props for Slider component
+ * SliderProps
+ *
+ * Complete prop definition for the Slider component.
  */
 export interface SliderProps {
+  /** Slide elements to render */
   children: SliderChildrenType
+  /** Active slide index (zero-based) */
   currentIndex?: SliderCurrentIndexType
+  /** Whether a transition is currently in progress */
   isAnimating?: SliderIsAnimatingType
+  /** Fired after the transition window elapses */
   onAnimationComplete?: SliderOnAnimationCompleteType
   /** Inline styles applied to the root element */
   style?: React.CSSProperties
