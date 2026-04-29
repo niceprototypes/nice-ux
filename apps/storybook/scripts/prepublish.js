@@ -5,11 +5,11 @@
  * @description Pre-publish validation script for Nice Prototypes ecosystem packages.
  *
  * This script validates that a Nice package is ready for npm publication by:
- * 1. Verifying the package directory exists at ~/Code/nice-{packageName}
+ * 1. Verifying the package directory exists at ~/nice/{packageName}
  * 2. Checking for git changes (uncommitted changes or unpushed commits)
  *    - If no changes exist, exits early to avoid unnecessary npm/build operations
  * 3. Checking that no `file:` protocol references exist in package.json dependencies
- *    (these are used during local development via nice-npm-link but break for consumers)
+ *    (these are used during local development via nice-toolkit but break for consumers)
  * 4. Running `npm install` to ensure dependencies resolve correctly
  * 5. Running `npm run build` to verify the package compiles without errors
  *
@@ -27,7 +27,7 @@
  *   0 - Package is ready for publishing OR no changes to publish
  *   1 - Validation failed (missing directory, file: refs found, install/build error)
  *
- * @note Run this AFTER unlinking local packages with `npx nice-npm-link --unlink`
+ * @note Run this AFTER unlinking local packages with `npx nice-toolkit --unlink`
  *       to ensure the package.json has proper npm version references.
  */
 
@@ -47,7 +47,7 @@ if (!packageName) {
 }
 
 /** @type {string} Absolute path to the target package directory */
-const packageDir = join(homedir(), 'Code', `nice-${packageName}`)
+const packageDir = join(homedir(), 'nice', packageName)
 
 // Validate package directory exists
 if (!existsSync(packageDir)) {
@@ -129,7 +129,7 @@ const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf-8'))
 /**
  * Scans a dependency object for `file:` protocol references.
  *
- * During local development, nice-npm-link rewrites dependencies to use
+ * During local development, nice-toolkit rewrites dependencies to use
  * `file:` paths for seamless cross-package development. These references
  * must be reverted to proper npm semver versions before publishing,
  * otherwise consumers will get broken packages that reference non-existent

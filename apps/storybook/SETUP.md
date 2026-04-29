@@ -169,7 +169,7 @@ npm run build-storybook
 | nice-react-icon | 15 | ✅ Complete |
 | nice-react-device-detector | 5 | ✅ Complete |
 | nice-css-variables | 1 doc | ✅ Complete |
-| nice-npm-link | 1 doc | ✅ Complete |
+| nice-toolkit | 1 doc | ✅ Complete |
 
 **Total: 75+ stories/examples**
 
@@ -213,29 +213,29 @@ The documentation includes:
 
 ### For Local Development
 
-#### Using nice-npm-link for Symlinking
+#### Using nice-toolkit for Symlinking
 
-`nice-npm-link` creates symlinks to local packages for development, allowing changes to be reflected in real-time.
+`nice-toolkit` creates symlinks to local packages for development, allowing changes to be reflected in real-time.
 
 ```bash
-# Install nice-npm-link globally
-npm install -g nice-npm-link
+# Install nice-toolkit globally
+npm install -g nice-toolkit
 
 # Link packages from your local filesystem
-nice-npm-link ../nice-react-flex
-nice-npm-link ../nice-react-typography
-nice-npm-link ../nice-react-tile
-nice-npm-link ../nice-react-button
-nice-npm-link ../nice-react-icon
-nice-npm-link ../nice-react-device-detector
-nice-npm-link ../nice-styles
+nice-toolkit ../nice-react-flex
+nice-toolkit ../nice-react-typography
+nice-toolkit ../nice-react-tile
+nice-toolkit ../nice-react-button
+nice-toolkit ../nice-react-icon
+nice-toolkit ../nice-react-device-detector
+nice-toolkit ../nice-styles
 ```
 
 This creates symlinks in `node_modules/` pointing to your local package directories using the `file:` protocol in package.json.
 
 #### Understanding Symlinks vs npm link
 
-**Symlinks (what nice-npm-link creates):**
+**Symlinks (what nice-toolkit creates):**
 - Uses `file:` protocol: `"nice-react-typography": "file:../nice-react-typography"`
 - Creates direct filesystem link to the package directory
 - Vite/Storybook can watch and hot-reload source files directly
@@ -284,13 +284,13 @@ This is necessary because:
 
 ```bash
 # 1. Link all packages
-nice-npm-link ../nice-react-flex
-nice-npm-link ../nice-react-typography
-nice-npm-link ../nice-react-button
-nice-npm-link ../nice-react-icon
-nice-npm-link ../nice-react-tile
-nice-npm-link ../nice-react-device-detector
-nice-npm-link ../nice-styles
+nice-toolkit ../nice-react-flex
+nice-toolkit ../nice-react-typography
+nice-toolkit ../nice-react-button
+nice-toolkit ../nice-react-icon
+nice-toolkit ../nice-react-tile
+nice-toolkit ../nice-react-device-detector
+nice-toolkit ../nice-styles
 
 # 2. Start watch mode ONLY for packages that need it
 cd ../nice-styles
@@ -341,7 +341,7 @@ Storybook
 │   └── useDeviceDetector (5 stories)
 └── Documentation
     ├── CSS Variables
-    └── nice-npm-link
+    └── nice-toolkit
 ```
 
 ## 🔧 Configuration Details

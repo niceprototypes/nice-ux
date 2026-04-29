@@ -54,7 +54,7 @@ Browser reloads`}</CodeBlock>
       <Typography as="h4">Vite Only</Typography>
       <Typography color="light">
         This plugin is for Vite projects (including Storybook with Vite).
-        For webpack/CRA projects, use nice-npm-link --dev --watch instead.
+        For webpack/CRA projects, use nice-toolkit --dev --watch instead.
       </Typography>
     </Flex>
   ),
@@ -185,7 +185,7 @@ export const StorybookIntegration: Story = {
 import { viteWatcher, getSourceAliases } from 'nice-vite-watcher'
 
 const linkedPackages = {
-  'nice-react-button': '../nice-react-button',
+  'nice-react-button': '../react-button',
 }
 
 const config: StorybookConfig = {

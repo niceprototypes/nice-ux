@@ -42,7 +42,7 @@ This Storybook documents the following packages:
 
 ### Utilities
 - **nice-css-variables** - CSS design tokens
-- **nice-npm-link** - Enhanced npm linking tool
+- **nice-toolkit** - Workspace CLI for linking, scaffolding, dev/watch, and orchestrated publishing of nice-* packages
 
 ## 📖 Documentation Structure
 
@@ -56,7 +56,7 @@ stories/
 ├── Icon.stories.tsx              # Icon component examples
 ├── useDeviceDetector.stories.tsx # Device detector hook examples
 ├── CSSVariables.mdx              # CSS variables documentation
-└── NpmLink.mdx                   # nice-npm-link documentation
+└── NpmLink.mdx                   # nice-toolkit documentation
 ```
 
 ## 🎨 Features
@@ -150,21 +150,21 @@ The Storybook uses these packages from npm:
 
 This project uses two tools to enable hot module reloading with symlinked packages:
 
-#### 1. nice-npm-link — Handles npm linking
+#### 1. nice-toolkit — Handles npm linking
 
-When you `npm link` React packages, each linked package brings its own copy of React, causing "Invalid hook call" errors. `nice-npm-link` solves this by removing React, React DOM, and styled-components from linked packages' `node_modules`.
+When you `npm link` React packages, each linked package brings its own copy of React, causing "Invalid hook call" errors. `nice-toolkit` solves this by removing React, React DOM, and styled-components from linked packages' `node_modules`.
 
 ```bash
 # Install globally (optional)
-npm install -g nice-npm-link
+npm install -g nice-toolkit
 
 # Link all configured Nice packages from nice-storybook directory
-npx nice-npm-link
+npx nice-toolkit
 
 # After running npm install in any linked package, re-run:
-npx nice-npm-link
+npx nice-toolkit
 # or to unlink first:
-npx nice-npm-link --unlink
+npx nice-toolkit --unlink
 ```
 
 #### 2. nice-vite-watcher — Enables HMR
@@ -201,7 +201,7 @@ const sourceAliasablePackages = [
 npm install
 
 # 2. Link all Nice packages
-npx nice-npm-link
+npx nice-toolkit
 
 # 3. Start Storybook with HMR
 npm run dev
@@ -262,7 +262,7 @@ npm run dev
 
 4. Re-run linking:
    ```bash
-   npx nice-npm-link
+   npx nice-toolkit
    ```
 
 5. Restart Storybook
@@ -271,7 +271,7 @@ npm run dev
 
 **"Invalid hook call" error**: Multiple React instances running.
 ```bash
-npx nice-npm-link
+npx nice-toolkit
 ```
 
 **Changes not appearing**:
@@ -280,9 +280,9 @@ npx nice-npm-link
 
 **After npm install in a linked package**: The linking is broken.
 ```bash
-npx nice-npm-link --unlink
+npx nice-toolkit --unlink
 npm install
-npx nice-npm-link
+npx nice-toolkit
 ```
 
 **Storybook won't start**: Clear caches and restart.
@@ -321,7 +321,7 @@ npm run dev
 
 ### Documentation
 - CSS Variables: http://localhost:6006/?path=/docs/documentation-css-variables--docs
-- npm-link: http://localhost:6006/?path=/docs/documentation-nice-npm-link--docs
+- toolkit: http://localhost:6006/?path=/docs/documentation-nice-toolkit--docs
 
 ## 🚢 Deployment
 

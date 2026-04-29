@@ -34,8 +34,8 @@ const preview: Preview = {
         order: [
           'Welcome', ['Design Tokens', 'Design Patterns', 'UI Components'],
           'Tokens', ['Browse', 'Responsive', 'Icons'],
+          'Configuration', ['NPM', 'Vite', 'TypeScript', 'Jest', 'Rollup'],
           'React', ['Styles', ['StylesProvider', 'getToken', 'createTokens'], 'Components', 'Bindings'],
-          'Configuration', ['NPM', 'Vite', 'TypeScript', 'Jest', 'Rollup']
         ],
       },
     },

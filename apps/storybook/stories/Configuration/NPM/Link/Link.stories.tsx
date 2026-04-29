@@ -31,7 +31,7 @@ export const Overview: Story = {
   parameters: storyParameters,
   render: () => (
     <Flex direction="column" gap="large">
-      <Typography as="h3">Why nice-npm-link?</Typography>
+      <Typography as="h3">Why nice-toolkit?</Typography>
       <Typography color="light">
         Nice ecosystem packages use file: references for local development.
         When npm installs these, each package gets its own node_modules with
@@ -43,7 +43,7 @@ nice-react-tile/node_modules/react    ← Tile's React (CONFLICT!)
 nice-react-flex/node_modules/react    ← Flex's React (CONFLICT!)
 
 # The solution: clean all linked packages
-node ../nice-npm-link/nice-npm-link --clean-all`}</CodeBlock>
+node ../toolkit/nice-toolkit --clean-all`}</CodeBlock>
       <Typography as="h4">What It Removes</Typography>
       <Typography color="light">
         By default, these singleton packages are removed from linked packages:
@@ -70,23 +70,23 @@ export const FileDependencies: Story = {
       <CodeBlock language="json">{`// package.json pattern
 {
   "dependencies": {
-    "nice-styles": "file:../nice-styles",
-    "nice-react-styles": "file:../nice-react-styles"
+    "nice-styles": "file:../styles",
+    "nice-react-styles": "file:../react-styles"
   },
   "peerDependencies": {
     "nice-react-flex": ">=1.0.0",
     "react": ">=19.2.0"
   },
   "devDependencies": {
-    "nice-configuration": "file:../nice-configuration",
-    "nice-react-flex": "file:../nice-react-flex"
+    "nice-configuration": "file:../configuration",
+    "nice-react-flex": "file:../react-flex"
   }
 }`}</CodeBlock>
       <Typography as="h4">After Any Dependency Change</Typography>
       <Typography color="light">
         Always run --clean-all after npm install or modifying dependencies:
       </Typography>
-      <CodeBlock language="bash">{`node ../nice-npm-link/nice-npm-link --clean-all`}</CodeBlock>
+      <CodeBlock language="bash">{`node ../toolkit/nice-toolkit --clean-all`}</CodeBlock>
     </Flex>
   ),
 }
@@ -98,24 +98,24 @@ export const BasicUsage: Story = {
     <Flex direction="column" gap="large">
       <Typography as="h3">Basic Usage</Typography>
       <CodeBlock language="bash">{`# Link a single package
-npx nice-npm-link ../nice-react-button
+npx nice-toolkit ../react-button
 
 # Short alias
-nnl ../nice-react-button
+ntk ../react-button
 
 # Link multiple packages
-nnl ../nice-react-button
-nnl ../nice-react-icon
-nnl ../nice-react-flex`}</CodeBlock>
+ntk ../react-button
+ntk ../react-icon
+ntk ../react-flex`}</CodeBlock>
       <Typography as="h4">Clean All Linked Packages</Typography>
       <Typography color="light">
         Recursively find and clean all file: linked packages in your project:
       </Typography>
       <CodeBlock language="bash">{`# Clean all linked packages at once
-nnl --clean-all
+ntk --clean-all
 
 # Preview what would be cleaned
-nnl --clean-all --dry-run`}</CodeBlock>
+ntk --clean-all --dry-run`}</CodeBlock>
     </Flex>
   ),
 }
@@ -131,10 +131,10 @@ export const CleanOnly: Story = {
         are already linked via package.json file: references.
       </Typography>
       <CodeBlock language="bash">{`# Clean a specific linked package
-nnl --clean-only ../nice-react-button
+ntk --clean-only ../react-button
 
 # Clean with custom exclusions
-nnl --clean-only --add-exclude @emotion/react ../nice-react-button`}</CodeBlock>
+ntk --clean-only --add-exclude @emotion/react ../react-button`}</CodeBlock>
     </Flex>
   ),
 }
@@ -150,13 +150,13 @@ export const Unlink: Story = {
         and reinstalls from the registry.
       </Typography>
       <CodeBlock language="bash">{`# Unlink all file: dependencies
-nnl --unlink
+ntk --unlink
 
 # Preview what would be unlinked
-nnl --unlink --dry-run`}</CodeBlock>
+ntk --unlink --dry-run`}</CodeBlock>
       <Typography color="light">
         Note: Run this before npm install in linked packages, or re-run
-        nice-npm-link after installing dependencies in linked packages.
+        nice-toolkit after installing dependencies in linked packages.
       </Typography>
     </Flex>
   ),
@@ -173,16 +173,16 @@ export const CustomExclusions: Story = {
         Override the default list with your own packages:
       </Typography>
       <CodeBlock language="bash">{`# Only remove React packages (skip styled-components)
-nnl --exclude react,react-dom ../my-component`}</CodeBlock>
+ntk --exclude react,react-dom ../my-component`}</CodeBlock>
       <Typography as="h4">--add-exclude</Typography>
       <Typography color="light">
         Add packages to the default list:
       </Typography>
       <CodeBlock language="bash">{`# Add Emotion packages to defaults
-nnl --add-exclude @emotion/react,@emotion/styled ../my-component
+ntk --add-exclude @emotion/react,@emotion/styled ../my-component
 
 # Add Material-UI packages
-nnl --add-exclude @mui/material,@mui/icons-material ../my-component`}</CodeBlock>
+ntk --add-exclude @mui/material,@mui/icons-material ../my-component`}</CodeBlock>
     </Flex>
   ),
 }
@@ -197,20 +197,20 @@ export const OtherOptions: Story = {
       <Typography color="light">
         Preview changes without making them:
       </Typography>
-      <CodeBlock language="bash">{`nnl --dry-run ../nice-react-button
-nnl --dry-run --clean-all`}</CodeBlock>
+      <CodeBlock language="bash">{`ntk --dry-run ../react-button
+ntk --dry-run --clean-all`}</CodeBlock>
       <Typography as="h4">--manager</Typography>
       <Typography color="light">
         Force a specific package manager (auto-detected by default):
       </Typography>
-      <CodeBlock language="bash">{`nnl --manager pnpm ../my-component
-nnl --manager yarn ../my-component
-nnl --manager npm ../my-component`}</CodeBlock>
+      <CodeBlock language="bash">{`ntk --manager pnpm ../my-component
+ntk --manager yarn ../my-component
+ntk --manager npm ../my-component`}</CodeBlock>
       <Typography as="h4">--skip-peer-check</Typography>
       <Typography color="light">
         Skip automatic peerDependencies enforcement:
       </Typography>
-      <CodeBlock language="bash">{`nnl --skip-peer-check ../my-component`}</CodeBlock>
+      <CodeBlock language="bash">{`ntk --skip-peer-check ../my-component`}</CodeBlock>
     </Flex>
   ),
 }
@@ -226,7 +226,7 @@ export const DevMode: Story = {
         packages automatically when their source files change.
       </Typography>
       <CodeBlock language="bash">{`# Run dev scripts in all linked packages
-nnl --dev`}</CodeBlock>
+ntk --dev`}</CodeBlock>
       <Typography color="light">
         Packages without a dev script are automatically skipped.
       </Typography>
@@ -245,10 +245,10 @@ export const WatchMode: Story = {
         changes are detected. This causes webpack/CRA to recompile.
       </Typography>
       <CodeBlock language="bash">{`# Watch dist folders for changes
-nnl --watch
+ntk --watch
 
 # Watch a different folder (default: dist)
-nnl --watch --watch-dir build`}</CodeBlock>
+ntk --watch --watch-dir build`}</CodeBlock>
       <Typography as="h4">Setup for CRA/webpack</Typography>
       <Typography color="light">
         Add the trigger file import to your entry point:
@@ -275,7 +275,7 @@ export const DevWatch: Story = {
       </Typography>
       <CodeBlock language="bash">{`# In package.json
 "scripts": {
-  "watch:deps": "nnl --dev --watch"
+  "watch:deps": "ntk --dev --watch"
 }
 
 # Run alongside your dev server
@@ -308,13 +308,13 @@ export const Publish: Story = {
         version bumping, file: dep swapping, building, and restoring local refs.
       </Typography>
       <CodeBlock language="bash">{`# Publish all changed packages (interactive prompts)
-nnl --publish
+ntk --publish
 
 # Publish specific packages
-nnl --publish nice-styles,nice-react-styles
+ntk --publish nice-styles,nice-react-styles
 
 # Preview what would be published
-nnl --publish --dry-run`}</CodeBlock>
+ntk --publish --dry-run`}</CodeBlock>
       <Typography as="h4">Workflow</Typography>
       <CodeBlock language="bash">{`1. Scans ~/Code/nice-* for packages with changes
 2. Prompts for version bump (patch/minor/major/skip)
@@ -326,16 +326,16 @@ nnl --publish --dry-run`}</CodeBlock>
       <Typography as="h4">Publish Order</Typography>
       <Typography color="light">
         Packages are published bottom-to-top per dependency chain.
-        The publish order is defined in nice-npm-link/registry.json and
-        queried via the registry service. Run nnl --publish --dry-run to
+        The publish order is defined in nice-toolkit/registry.json and
+        queried via the registry service. Run ntk --publish --dry-run to
         see the current order.
       </Typography>
       <Typography as="h4">Dry Run</Typography>
       <Typography color="light">
         Use --dry-run or --dry-publish to preview without making changes:
       </Typography>
-      <CodeBlock language="bash">{`nnl --publish --dry-run
-nnl --dry-publish`}</CodeBlock>
+      <CodeBlock language="bash">{`ntk --publish --dry-run
+ntk --dry-publish`}</CodeBlock>
     </Flex>
   ),
 }
@@ -350,13 +350,13 @@ export const Troubleshooting: Story = {
       <Typography color="light">
         Re-run the link command to clean up duplicate React:
       </Typography>
-      <CodeBlock language="bash">{`nnl --clean-all`}</CodeBlock>
+      <CodeBlock language="bash">{`ntk --clean-all`}</CodeBlock>
       <Typography as="h4">Changes Not Appearing</Typography>
       <Typography color="light">
         Run --dev to rebuild linked packages when their source changes:
       </Typography>
       <CodeBlock language="bash">{`# Run in a separate terminal while developing
-nnl --dev`}</CodeBlock>
+ntk --dev`}</CodeBlock>
       <Typography color="light">
         The nice-configuration rollup settings include optimized watch options that
         prevent file caching issues. Changes should appear immediately.
@@ -369,16 +369,16 @@ nnl --dev`}</CodeBlock>
       <Typography as="h4">After Installing Dependencies</Typography>
       <Typography color="light">
         When you run npm install in a linked package, conflicts return.
-        Either unlink first or re-run nice-npm-link:
+        Either unlink first or re-run nice-toolkit:
       </Typography>
       <CodeBlock language="bash">{`# Option 1: Unlink before installing
-nnl --unlink
-cd ../nice-react-button && npm install
-cd - && nnl ../nice-react-button
+ntk --unlink
+cd ../react-button && npm install
+cd - && ntk ../react-button
 
 # Option 2: Re-clean after installing
-cd ../nice-react-button && npm install
-cd - && nnl --clean-all`}</CodeBlock>
+cd ../react-button && npm install
+cd - && ntk --clean-all`}</CodeBlock>
     </Flex>
   ),
 }

@@ -21,10 +21,10 @@ function getAbsolutePath(value: string): string {
 }
 
 /**
- * Package lists from the Nice ecosystem registry (nice-npm-link/registry.json).
+ * Package lists from the Nice ecosystem registry (nice-toolkit/registry.json).
  * Adding a new package to the registry automatically makes it available here.
  */
-const registry = require('../../nice-npm-link/src/registry')
+const registry = require('../../toolkit/src/registry')
 const linkedPackages: Record<string, string> = registry.getLinkedPackageMap()
 const sourceAliasablePackages: string[] = registry.getSourceAliasableNames()
 
@@ -72,6 +72,7 @@ const config: StorybookConfig = {
       'styled-components',
       'react',
       'react-dom',
+      'nice-react-icon',
     ]
 
     // Required for Vite to resolve the real paths of symlinked packages
