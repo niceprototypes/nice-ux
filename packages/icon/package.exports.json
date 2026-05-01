@@ -1,5 +1,5 @@
 {
-  "$schema": "../nice-configuration/src/exports/schema.json",
+  "$schema": "../configuration/src/exports/schema.json",
   "description": "Flexible icon component with 30+ built-in icons and custom SVG support.",
   "default": "Icon",
   "components": ["Icon"],
