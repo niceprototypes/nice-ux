@@ -1,6 +1,6 @@
 {
   "name": "nice-react-image",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "type": "module",
   "description": "A flexible Image component for React with styled-components, supporting img and background-image rendering modes",
   "main": "dist/index.js",
