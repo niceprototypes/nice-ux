@@ -15,11 +15,15 @@ import { FlexProps } from "./types";
  * </Flex>
  *
  * @example
- * // Responsive usage with breakpoint-based props
+ * // Responsive usage via the breakpoints array
  * <Flex
- *   direction={{ small: "column", medium: "row" }}
- *   gap={{ small: "small", medium: "base", large: "large" }}
+ *   direction="column"
+ *   gap="small"
  *   alignItems="center"
+ *   breakpoints={[
+ *     { min: "medium", props: { direction: "row", gap: "base" } },
+ *     { min: "large", props: { gap: "large" } },
+ *   ]}
  * >
  *   <div>Responsive Item 1</div>
  *   <div>Responsive Item 2</div>
@@ -35,7 +39,11 @@ import { FlexProps } from "./types";
  * // Responsive spacing with margin mode
  * <Flex
  *   mode="margin"
- *   spacing={{ small: "small", medium: "base large", large: "small base large smaller" }}
+ *   spacing="small"
+ *   breakpoints={[
+ *     { min: "medium", props: { spacing: "base large" } },
+ *     { min: "large", props: { spacing: "small base large smaller" } },
+ *   ]}
  * >
  *   <div>Responsive margins</div>
  * </Flex>

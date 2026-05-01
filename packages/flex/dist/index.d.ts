@@ -1,5 +1,5 @@
-import { GapType, SpacingType, SpacingDefinitionType, BreakpointName, SpacingShorthandType, SpacingResponsiveType } from 'nice-react-styles';
 import * as React from 'react';
+import { BreakpointName, GapType, Breakpoints, SpacingType, SpacingDefinitionType, SpacingResponsiveType, SpacingShorthandType, WithBreakpointsProps } from 'nice-react-styles';
 
 /**
  * FlexGapSizeType
@@ -107,36 +107,12 @@ type FlexSpacingType = SpacingType;
  */
 type FlexProps = {
     mode?: FlexModeType;
-    gap?: FlexGapSizeType | {
-        small?: FlexGapSizeType;
-        medium?: FlexGapSizeType;
-        large?: FlexGapSizeType;
-    };
-    direction?: FlexDirectionType | {
-        small?: FlexDirectionType;
-        medium?: FlexDirectionType;
-        large?: FlexDirectionType;
-    };
-    alignItems?: FlexAlignItemsType | {
-        small?: FlexAlignItemsType;
-        medium?: FlexAlignItemsType;
-        large?: FlexAlignItemsType;
-    };
-    justifyContent?: FlexJustifyContentType | {
-        small?: FlexJustifyContentType;
-        medium?: FlexJustifyContentType;
-        large?: FlexJustifyContentType;
-    };
-    grow?: number | {
-        small?: number;
-        medium?: number;
-        large?: number;
-    };
-    wrap?: FlexWrapType | {
-        small?: FlexWrapType;
-        medium?: FlexWrapType;
-        large?: FlexWrapType;
-    };
+    gap?: Breakpoints<FlexGapSizeType>;
+    direction?: Breakpoints<FlexDirectionType>;
+    alignItems?: Breakpoints<FlexAlignItemsType>;
+    justifyContent?: Breakpoints<FlexJustifyContentType>;
+    grow?: Breakpoints<number>;
+    wrap?: Breakpoints<FlexWrapType>;
     spacing?: FlexSpacingType;
     children: React.ReactNode;
     style?: React.CSSProperties;
@@ -165,8 +141,7 @@ declare namespace FlexTypes {
     type Props = FlexProps;
 }
 
-declare const Flex: any;
-//# sourceMappingURL=index.d.ts.map
+declare const Flex: React.FC<WithBreakpointsProps<FlexProps>>;
 
 /**
  * Extracts the value for a specific breakpoint from a prop that can be either

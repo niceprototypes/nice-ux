@@ -423,11 +423,15 @@ const normalizeProps = (props) => {
  * </Flex>
  *
  * @example
- * // Responsive usage with breakpoint-based props
+ * // Responsive usage via the breakpoints array
  * <Flex
- *   direction={{ small: "column", medium: "row" }}
- *   gap={{ small: "small", medium: "base", large: "large" }}
+ *   direction="column"
+ *   gap="small"
  *   alignItems="center"
+ *   breakpoints={[
+ *     { min: "medium", props: { direction: "row", gap: "base" } },
+ *     { min: "large", props: { gap: "large" } },
+ *   ]}
  * >
  *   <div>Responsive Item 1</div>
  *   <div>Responsive Item 2</div>
@@ -443,7 +447,11 @@ const normalizeProps = (props) => {
  * // Responsive spacing with margin mode
  * <Flex
  *   mode="margin"
- *   spacing={{ small: "small", medium: "base large", large: "small base large smaller" }}
+ *   spacing="small"
+ *   breakpoints={[
+ *     { min: "medium", props: { spacing: "base large" } },
+ *     { min: "large", props: { spacing: "small base large smaller" } },
+ *   ]}
  * >
  *   <div>Responsive margins</div>
  * </Flex>
@@ -487,6 +495,9 @@ const Flex$1 = (props) => {
 // Declaration merging: const + namespace creates exportable type namespace
 const FlexTypes = {};
 
+// Explicit return-type annotation — without it, TS declaration emit collapses
+// the wrapped const to `any` (or to an unbound generic), which erases the
+// `breakpoints` prop on consumers.
 const Flex = withBreakpoints(Flex$1);
 
 export { FlexTypes, Flex as default, getBreakpointValue, getGapSize, getSpacingValue, isResponsiveObject, styleFlex, styleSpacing };
