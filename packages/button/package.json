@@ -84,10 +84,10 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
-    "nice-configuration": "file:../nice-configuration",
-    "nice-react-flex": "file:../nice-react-flex",
-    "nice-react-icon": "file:../nice-react-icon",
-    "nice-react-typography": "file:../nice-react-typography",
+    "nice-configuration": "file:../configuration",
+    "nice-react-flex": "file:../react-flex",
+    "nice-react-icon": "file:../react-icon",
+    "nice-react-typography": "file:../react-typography",
     "prettier": "^3.1.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
@@ -96,7 +96,7 @@
     "styled-components": "^6.1.19",
     "ts-jest": "^29.4.6",
     "tslib": "^2.6.0",
-    "typescript": "^5.5.0"
+    "typescript": "^6.0.3"
   },
   "publishConfig": {
     "access": "public"
@@ -106,7 +106,7 @@
     "npm": ">=6.0.0"
   },
   "dependencies": {
-    "nice-react-styles": "file:../nice-react-styles",
-    "nice-react-typography": "file:../nice-react-typography"
+    "nice-react-styles": "file:../react-styles",
+    "nice-react-typography": ">=5.0.0"
   }
 }

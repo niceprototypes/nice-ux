@@ -1,5 +1,5 @@
 {
-  "$schema": "../nice-configuration/src/exports/schema.json",
+  "$schema": "../configuration/src/exports/schema.json",
   "description": "Accessible, themable button component with status variants and icon support.",
   "default": "Button",
   "components": ["Button"],
