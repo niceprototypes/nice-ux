@@ -9,5 +9,7 @@
   "trailingComma": "es5",
   "bracketSpacing": true,
   "jsxSingleQuote": false,
-  "endOfLine": "lf"
+  "endOfLine": "lf",
+  "objectWrap": "preserve",
+  "singleAttributePerLine": true
 }
