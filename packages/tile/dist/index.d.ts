@@ -1,11 +1,29 @@
-import * as nice_react_styles from 'nice-react-styles';
-import { GapType, ModeType, TokenResult } from 'nice-react-styles';
-import * as React$1 from 'react';
+import * as React from 'react';
 import { ComponentType } from 'react';
+import { Breakpoints, GapType, ModeType, WithBreakpointsProps, TokenResult } from 'nice-react-styles';
 import { FlexProps, FlexSpacingType } from 'nice-react-flex';
 import { TypographyProps } from 'nice-react-typography';
 
 type TileTypographyProps = Partial<Omit<TypographyProps, "children">>;
+
+/**
+ * TileMaxWidthValueType
+ *
+ * Per-breakpoint max-width value. A number caps the inner column at that
+ * pixel value; "none" disables the cap and lets the column fill its
+ * container.
+ */
+type TileMaxWidthValueType = number | "none";
+/**
+ * TileMaxWidthType
+ *
+ * Responsive max-width control for the inner content column.
+ *
+ * Accepts either a bare value applied at every breakpoint, or a breakpoint
+ * object specifying per-breakpoint values. Any breakpoint omitted from the
+ * object falls back to "none" (no cap).
+ */
+type TileMaxWidthType = Breakpoints<TileMaxWidthValueType>;
 
 /**
  * TileAlignItemsType
@@ -22,20 +40,27 @@ type TileAlignItemsType = NonNullable<FlexProps["alignItems"]>;
  */
 type TileJustifyContentType = NonNullable<FlexProps["justifyContent"]>;
 interface TileProps {
-    children?: React$1.ReactNode;
+    children?: React.ReactNode;
     /** Content rendered above the title */
-    contentTop?: React$1.ReactNode;
+    contentTop?: React.ReactNode;
     /** Content rendered between the title and description */
-    contentCenter?: React$1.ReactNode;
-    contentLeft?: React$1.ReactNode;
-    contentRight?: React$1.ReactNode;
-    title?: React$1.ReactNode;
+    contentCenter?: React.ReactNode;
+    contentLeft?: React.ReactNode;
+    contentRight?: React.ReactNode;
+    title?: React.ReactNode;
     titleProps?: TileTypographyProps;
-    description?: React$1.ReactNode | string[];
+    description?: React.ReactNode | string[];
     descriptionProps?: TileTypographyProps;
     spacing?: FlexSpacingType;
-    maxWidthMedium?: number;
-    maxWidthLarge?: number;
+    /**
+     * Max-width of the inner content column.
+     *
+     * - Bare value (`number` or `"none"`) applies at every breakpoint.
+     * - Breakpoint object (`{ small, medium, large }`) provides per-breakpoint
+     *   values; omitted breakpoints fall back to `"none"` (no cap).
+     * - `"none"` removes any cap, letting the column fill its container.
+     */
+    maxWidth?: TileMaxWidthType;
     alignItems?: TileAlignItemsType;
     justifyContent?: TileJustifyContentType;
     /** Top spacing applied to the Flex that wraps `children` below the title/description block. */
@@ -48,7 +73,7 @@ interface TileProps {
     foregroundColor?: string;
     mode?: ModeType;
     className?: string;
-    style?: React$1.CSSProperties;
+    style?: React.CSSProperties;
 }
 declare const TileTypes: {};
 declare namespace TileTypes {
@@ -56,11 +81,12 @@ declare namespace TileTypes {
     type AlignItems = TileAlignItemsType;
     type JustifyContent = TileJustifyContentType;
     type Gap = GapType;
+    type MaxWidth = TileMaxWidthType;
+    type MaxWidthValue = TileMaxWidthValueType;
     type Props = TileProps;
 }
 
-declare const Tile: React.FC<nice_react_styles.WithBreakpointsProps<P>>;
-//# sourceMappingURL=index.d.ts.map
+declare const Tile: React.FC<WithBreakpointsProps<TileProps>>;
 
 /**
  * No-op component — tile CSS custom properties are now generated
@@ -85,4 +111,4 @@ declare const TileStyles: ComponentType;
 declare function getTileToken(nameOrPath: string | string[], variantOrMode?: string, mode?: string): TokenResult;
 
 export { TileStyles, TileTypes, Tile as default, getTileToken };
-export type { TileAlignItemsType, TileJustifyContentType, TileProps, TileTypographyProps };
+export type { TileAlignItemsType, TileJustifyContentType, TileMaxWidthType, TileMaxWidthValueType, TileProps, TileTypographyProps };

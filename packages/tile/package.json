@@ -37,7 +37,6 @@
     "styled-components": ">=6.1.18"
   },
   "devDependencies": {
-    "nice-configuration": "file:../nice-configuration",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
@@ -45,8 +44,9 @@
     "eslint": "^8.44.0",
     "eslint-plugin-react": "^7.32.2",
     "jest": "^29.5.0",
-    "nice-react-flex": "file:../nice-react-flex",
-    "nice-react-typography": "file:../nice-react-typography",
+    "nice-configuration": "file:../configuration",
+    "nice-react-flex": "file:../react-flex",
+    "nice-react-typography": "file:../react-typography",
     "react": "^19.2.0",
     "react-is": "^19.2.0",
     "rollup": "^4.9.1",
@@ -54,7 +54,7 @@
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "styled-components": "^6.1.19",
     "tslib": "^2.6.2",
-    "typescript": "^5.5.0"
+    "typescript": "^6.0.3"
   },
   "repository": {
     "type": "git",
@@ -65,6 +65,6 @@
   },
   "homepage": "https://github.com/niceprototypes/nice-react-tile#readme",
   "dependencies": {
-    "nice-react-styles": "file:../nice-react-styles"
+    "nice-react-styles": "file:../react-styles"
   }
 }

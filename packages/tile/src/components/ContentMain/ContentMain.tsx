@@ -11,14 +11,15 @@ import type { ContentMainProps } from "./types"
  * so the title/description layout can be reused or swapped independently.
  */
 const ContentMain: React.FC<ContentMainProps> = ({
-  title,
-  titleProps,
   contentCenter,
   description,
   descriptionProps,
+  gap,
   mode,
+  title,
+  titleProps,
 }) => (
-  <Flex direction="column">
+  <Flex direction="column" gap={gap} style={{ width: "100%" }}>
     {title && (
       <Typography
         as="h3"

@@ -74,19 +74,24 @@ export default App
 ### With Custom Spacing
 
 ```tsx
-<Tile spacing="lg">
+<Tile spacing="large">
   <div>Content with large spacing between children</div>
 </Tile>
 
-// Or with responsive spacing
+// CSS-like shorthand: top/bottom, left/right
+<Tile spacing="small base">
+  <div>Vertical spacing of "small", horizontal of "base"</div>
+</Tile>
+
+// Responsive: per-breakpoint shorthand string (or null to disable)
 <Tile
   spacing={{
-    sm: { x: 'sm', y: 'md' },
-    md: { x: 'md', y: 'lg' },
-    lg: { x: 'lg', y: 'xl' }
+    small: "small base",
+    medium: "base large",
+    large: "large larger"
   }}
 >
-  <div>Content with responsive spacing</div>
+  <div>Spacing changes per breakpoint</div>
 </Tile>
 ```
 
@@ -113,10 +118,9 @@ export default App
 
 ### Spacing Types
 
-The `spacing` prop accepts:
-- **GapSize**: Simple string values like `"sm"`, `"md"`, `"lg"`, `"xl"`
-- **SpacingDefinition**: Object with `x` and `y` properties for horizontal and vertical spacing
-- **Responsive object**: Different spacing for `sm`, `md`, and `lg` breakpoints
+The `spacing` prop re-exports `FlexSpacingType` from `nice-react-flex` and accepts:
+- **Shorthand string**: 1–4 space-separated `gap` token names following CSS padding/margin shorthand rules — `"small"`, `"small base"`, `"small base large smaller"`. Token names: `none`, `smaller`, `small`, `base`, `large`, `larger`.
+- **Responsive object**: per-breakpoint shorthand string, or `null` to disable at that breakpoint. Breakpoint keys: `small`, `medium`, `large` — e.g. `{ small: "base", medium: null, large: "small large" }`.
 
 ## Custom Max-Width
 

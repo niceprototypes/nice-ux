@@ -11,14 +11,15 @@ const TileContent: React.FC<TileContentProps> = ({
   titleProps,
   description,
   descriptionProps,
-  align,
   mode,
   gap,
+  alignItems,
+  justifyContent,
 }) => {
   const hasContentMain = !!title || !!description || !!contentCenter
 
   return (
-    <Flex direction="column">
+    <Flex direction="column" grow={1} gap={gap} alignItems={alignItems} justifyContent={justifyContent}>
       {contentTop}
       {hasContentMain && (
         <ContentMain
@@ -28,13 +29,10 @@ const TileContent: React.FC<TileContentProps> = ({
           description={description}
           descriptionProps={descriptionProps}
           mode={mode}
+          gap={gap}
         />
       )}
-      {children && (
-        <Flex direction="column" spacing={gap ? `${gap} none none` : undefined}>
-          {children}
-        </Flex>
-      )}
+      {children}
     </Flex>
   )
 }

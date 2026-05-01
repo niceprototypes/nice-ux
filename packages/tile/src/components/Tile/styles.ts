@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components"
 import Flex from "nice-react-flex"
-import { getTileToken } from "../../tokens"
+import { getToken } from "nice-react-styles"
 
 export const OuterFlex = styled(Flex).withConfig({
   shouldForwardProp: (prop) => !prop.startsWith('$'),
@@ -11,12 +11,13 @@ export const OuterFlex = styled(Flex).withConfig({
   $backgroundPosition?: string
   $backgroundSize?: string
   $backgroundAttachment?: string
+  $mode?: string
 }>`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  background-color: ${getTileToken("backgroundColor").var};
-  color: ${getTileToken("foregroundColor").var};
+  background-color: ${({ $mode }) => getToken("backgroundColor", "base", $mode).var};
+  color: ${({ $mode }) => getToken("foregroundColor", "base", $mode).var};
 
   ${({ $backgroundColor }) => {
     if ($backgroundColor) {
@@ -48,26 +49,4 @@ export const OuterFlex = styled(Flex).withConfig({
       `
     }
   }}
-`
-
-export const InnerFlex = styled(Flex).withConfig({
-  shouldForwardProp: (prop) => !prop.startsWith('$'),
-})<{
-  $maxWidthMedium?: number
-  $maxWidthLarge?: number
-}>`
-  margin: 0 auto;
-  width: 100%;
-
-  ${({ $maxWidthMedium }) => $maxWidthMedium && css`
-    @media (min-width: ${$maxWidthMedium}px) {
-      width: ${$maxWidthMedium}px;
-    }
-  `}
-
-  ${({ $maxWidthLarge }) => $maxWidthLarge && css`
-    @media (min-width: ${$maxWidthLarge}px) {
-      width: ${$maxWidthLarge}px;
-    }
-  `}
 `

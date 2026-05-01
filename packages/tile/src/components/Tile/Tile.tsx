@@ -1,69 +1,63 @@
 import * as React from "react"
 import type { TileProps } from "./types"
-import { OuterFlex, InnerFlex } from "./styles"
+import { OuterFlex } from "./styles"
 import TileLayout from "../TileLayout"
 
 const Tile: React.FC<TileProps> = ({
+  alignItems,
+  backgroundAttachment = "fixed",
+  backgroundColor,
+  backgroundImage,
+  backgroundPosition = "center",
+  backgroundSize = "cover",
   children,
-  contentTop,
+  className,
   contentCenter,
   contentLeft: TileLeft,
   contentRight: TileRight,
-  title,
-  titleProps,
+  contentTop,
   description,
   descriptionProps,
-  spacing,
-  maxWidthMedium,
-  maxWidthLarge,
-  alignItems,
-  justifyContent,
-  gap,
-  backgroundImage,
-  backgroundColor,
-  backgroundPosition = "center",
-  backgroundSize = "cover",
-  backgroundAttachment = "fixed",
   foregroundColor,
+  gap,
+  justifyContent,
+  maxWidth,
   mode,
-  className,
+  spacing,
   style,
+  title,
+  titleProps,
 }) => {
   return (
     <OuterFlex
-      className={className}
-      style={style}
-      $backgroundImage={backgroundImage}
+      $backgroundAttachment={backgroundAttachment}
       $backgroundColor={backgroundColor}
-      $foregroundColor={foregroundColor}
+      $backgroundImage={backgroundImage}
       $backgroundPosition={backgroundPosition}
       $backgroundSize={backgroundSize}
-      $backgroundAttachment={backgroundAttachment}
+      $foregroundColor={foregroundColor}
+      $mode={mode}
+      className={className}
+      style={style}
     >
-      <InnerFlex
-        direction="column"
-        grow={1}
-        spacing={spacing}
+      <TileLayout
         alignItems={alignItems}
+        contentCenter={contentCenter}
+        contentLeft={TileLeft}
+        contentRight={TileRight}
+        contentTop={contentTop}
+        description={description}
+        descriptionProps={descriptionProps}
+        gap={gap}
         justifyContent={justifyContent}
-        $maxWidthMedium={maxWidthMedium}
-        $maxWidthLarge={maxWidthLarge}
+        maxWidth={maxWidth}
+        mode={mode}
+        spacing={spacing}
+        title={title}
+        titleProps={titleProps}
       >
-        <TileLayout
-          contentTop={contentTop}
-          contentCenter={contentCenter}
-          contentLeft={TileLeft}
-          contentRight={TileRight}
-          title={title}
-          titleProps={titleProps}
-          description={description}
-          descriptionProps={descriptionProps}
-          mode={mode}
-          gap={gap}
-        >
-          {children}
-        </TileLayout>
-      </InnerFlex>
+        {children}
+      </TileLayout>
     </OuterFlex>
   )
 }
