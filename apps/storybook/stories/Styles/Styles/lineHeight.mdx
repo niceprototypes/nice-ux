@@ -1,6 +1,6 @@
-import { Meta, Source } from '@storybook/addon-docs/blocks'
-import Typography from '../../../src/nice/Typography'
-import { DocsRow } from '../../../src/components/DocsRow'
+import { Meta, Source } from "@storybook/addon-docs/blocks"
+import Typography from "../../../src/nice/Typography"
+import { DocsRow } from "../../../src/components/DocsRow"
 
 export const loremIpsum =
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore."
@@ -9,13 +9,19 @@ export const loremIpsum =
 
 # lineHeight
 
-<Typography>Vertical spacing tokens between lines of text — <code>condensed</code>, <code>base</code>, <code>expanded</code>.</Typography>
+<Typography>
+  Vertical spacing tokens between lines of text — <code>condensed</code>,{" "}
+  <code>base</code>, <code>expanded</code>.
+</Typography>
 
 <div>
   {["condensed", "base", "expanded"].map(variant => (
     <DocsRow key={variant}>
       <Typography lineHeight={variant}>{loremIpsum}</Typography>
-      <Source language="tsx" code={`getToken("lineHeight", "${variant}").var`} />
+      <Source
+        language="tsx"
+        code={`getToken("lineHeight", "${variant}").var`}
+      />
     </DocsRow>
   ))}
 </div>

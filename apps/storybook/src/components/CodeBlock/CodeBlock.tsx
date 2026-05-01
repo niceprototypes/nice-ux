@@ -21,10 +21,39 @@ const colors = {
 }
 
 const KEYWORDS = new Set([
-  "const", "let", "var", "function", "return", "if", "else", "for", "while",
-  "true", "false", "null", "undefined", "import", "export", "from", "default",
-  "new", "class", "extends", "this", "async", "await", "try", "catch", "throw",
-  "typeof", "instanceof", "in", "of", "as", "type", "interface",
+  "const",
+  "let",
+  "var",
+  "function",
+  "return",
+  "if",
+  "else",
+  "for",
+  "while",
+  "true",
+  "false",
+  "null",
+  "undefined",
+  "import",
+  "export",
+  "from",
+  "default",
+  "new",
+  "class",
+  "extends",
+  "this",
+  "async",
+  "await",
+  "try",
+  "catch",
+  "throw",
+  "typeof",
+  "instanceof",
+  "in",
+  "of",
+  "as",
+  "type",
+  "interface",
 ])
 
 // Tokenize a single line into colored spans. Patterns are evaluated in order;
@@ -37,7 +66,10 @@ const tokenize = (line: string): React.ReactNode[] => {
 
   const push = (text: string, color: string) => {
     out.push(
-      <span key={key++} style={{ color }}>
+      <span
+        key={key++}
+        style={{ color }}
+      >
         {text}
       </span>
     )

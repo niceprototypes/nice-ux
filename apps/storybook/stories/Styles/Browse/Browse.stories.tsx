@@ -11,7 +11,7 @@ const BrowseDemo = () => <></>
 const meta = {
   title: "Tokens/Browse",
   component: BrowseDemo,
-  tags: ['!dev'],
+  tags: ["!dev"],
   parameters: {
     layout: "padded",
   },
@@ -34,15 +34,24 @@ export const AllTokens: Story = {
   name: "Browse",
   parameters: storyParameters,
   render: () => (
-    <Flex direction="column" gap="larger">
+    <Flex
+      direction="column"
+      gap="larger"
+    >
       <section>
         <Typography as="h3">animationDuration</Typography>
         <VariableList
           variables={createToken(
             "animationDuration",
             [
-              { name: "base", backgroundColor: getToken("foregroundColor", "error").var },
-              { name: "slow", backgroundColor: getToken("foregroundColor", "warning").var },
+              {
+                name: "base",
+                backgroundColor: getToken("foregroundColor", "error").var,
+              },
+              {
+                name: "slow",
+                backgroundColor: getToken("foregroundColor", "warning").var,
+              },
             ],
             ({ name, backgroundColor }: any) => {
               const animationName = name === "base" ? "slide" : "slideSlow"
@@ -61,7 +70,10 @@ export const AllTokens: Story = {
                       height: getToken("cellHeight", "smaller").var,
                       borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2)`,
                       animation: `${animationName} calc(${getToken("animationDuration", name).var} * 6) ${getToken("animationEasing").var} infinite`,
-                      animationDelay: name === "base" ? getToken("animationDuration", name).var : 0,
+                      animationDelay:
+                        name === "base"
+                          ? getToken("animationDuration", name).var
+                          : 0,
                     }}
                   />
                 </Flex>
@@ -82,7 +94,11 @@ export const AllTokens: Story = {
                 borderRadius: getToken("borderRadius").var,
               }}
             >
-              <svg width="60" height="24" viewBox="0 0 60 24">
+              <svg
+                width="60"
+                height="24"
+                viewBox="0 0 60 24"
+              >
                 <path
                   d="M 1 23 C 30 23, 30 1, 60 1"
                   fill="none"
@@ -102,8 +118,14 @@ export const AllTokens: Story = {
           variables={createToken(
             "backgroundColor",
             [
-              { name: "base", backgroundColor: getToken("backgroundColor").var },
-              { name: "dark", backgroundColor: getToken("backgroundColor", "dark").var },
+              {
+                name: "base",
+                backgroundColor: getToken("backgroundColor").var,
+              },
+              {
+                name: "dark",
+                backgroundColor: getToken("backgroundColor", "dark").var,
+              },
             ],
             ({ backgroundColor }: any) => (
               <Flex
@@ -123,17 +145,21 @@ export const AllTokens: Story = {
       <section>
         <Typography as="h3">borderColor</Typography>
         <VariableList
-          variables={createToken("borderColor", ["base", "dark", "darker"], variant => (
-            <Flex
-              style={{
-                backgroundColor: "white",
-                width: getToken("cellHeight", "larger").var,
-                height: getToken("cellHeight", "larger").var,
-                border: `${getToken("borderWidth").var} solid ${getToken("borderColor", variant).var}`,
-                borderRadius: getToken("borderRadius", "small").var,
-              }}
-            />
-          ))}
+          variables={createToken(
+            "borderColor",
+            ["base", "dark", "darker"],
+            variant => (
+              <Flex
+                style={{
+                  backgroundColor: "white",
+                  width: getToken("cellHeight", "larger").var,
+                  height: getToken("cellHeight", "larger").var,
+                  border: `${getToken("borderWidth").var} solid ${getToken("borderColor", variant).var}`,
+                  borderRadius: getToken("borderRadius", "small").var,
+                }}
+              />
+            )
+          )}
         />
       </section>
 
@@ -231,7 +257,17 @@ export const AllTokens: Story = {
         <VariableList
           variables={createToken(
             "foregroundColor",
-            ["lightest", "lighter", "light", "base", "disabled", "link", "success", "warning", "error"],
+            [
+              "lightest",
+              "lighter",
+              "light",
+              "base",
+              "disabled",
+              "link",
+              "success",
+              "warning",
+              "error",
+            ],
             variant => (
               <Flex
                 style={{
@@ -257,7 +293,10 @@ export const AllTokens: Story = {
               { name: "code", code: true, text: "Code" },
             ],
             ({ weight, code, text }: any) => (
-              <Typography weight={weight} code={code}>
+              <Typography
+                weight={weight}
+                code={code}
+              >
                 {text}
               </Typography>
             )
@@ -285,7 +324,15 @@ export const AllTokens: Story = {
         <VariableList
           variables={createToken(
             "fontWeight",
-            ["light", "base", "medium", "semibold", "bold", "extrabold", "black"],
+            [
+              "light",
+              "base",
+              "medium",
+              "semibold",
+              "bold",
+              "extrabold",
+              "black",
+            ],
             variant => (
               <Typography weight={variant}>
                 {variant.charAt(0).toUpperCase() + variant.slice(1)}
@@ -328,7 +375,9 @@ export const AllTokens: Story = {
           variables={createToken(
             "lineHeight",
             ["condensed", "base", "expanded"],
-            variant => <Typography lineHeight={variant as any}>{loremIpsum}</Typography>
+            variant => (
+              <Typography lineHeight={variant as any}>{loremIpsum}</Typography>
+            )
           )}
         />
       </section>

@@ -8,7 +8,10 @@ const StickySectionLinksCustomStory = () => (
         name: "renderLink",
         description: "renderLink={...}",
         demo: (
-          <Typography size="small" color="light">
+          <Typography
+            size="small"
+            color="light"
+          >
             Custom renderer for individual link items with isActive state
           </Typography>
         ),
@@ -18,7 +21,10 @@ const StickySectionLinksCustomStory = () => (
         name: "renderWrapper",
         description: "renderWrapper={...}",
         demo: (
-          <Typography size="small" color="light">
+          <Typography
+            size="small"
+            color="light"
+          >
             Custom renderer for the wrapper container
           </Typography>
         ),

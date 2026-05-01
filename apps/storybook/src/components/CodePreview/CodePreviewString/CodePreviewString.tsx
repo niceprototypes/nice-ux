@@ -98,22 +98,11 @@ const patterns: Array<[RegExp, Token[]]> = [
   // Prop with expression/function value: prop={...} (with optional leading whitespace)
   [
     /^(\s*)([\w-]+)=(\{(?:[^{}]|\{(?:[^{}]|\{[^{}]*\})*\})*\})/,
-    [
-      [1],
-      [2, colors.markup],
-      ["=", colors.markup],
-      [3, colors.value],
-    ],
+    [[1], [2, colors.markup], ["=", colors.markup], [3, colors.value]],
   ],
 
   // Shorthand boolean prop: prop (without value, before > or />)
-  [
-    /^(\s+)([\w-]+)(?=\s*\/?>|\s+[\w-])/,
-    [
-      [1],
-      [2, colors.markup],
-    ],
-  ],
+  [/^(\s+)([\w-]+)(?=\s*\/?>|\s+[\w-])/, [[1], [2, colors.markup]]],
 
   // JS function call: functionName(
   [
@@ -162,7 +151,10 @@ const CodePreviewString: React.FC<{ code: string }> = ({ code }) => {
 
     const addSpan = (text: string, color?: string) => {
       parts.push(
-        <span key={key++} style={color ? { color } : undefined}>
+        <span
+          key={key++}
+          style={color ? { color } : undefined}
+        >
           {text}
         </span>
       )
@@ -219,7 +211,11 @@ const CodePreviewString: React.FC<{ code: string }> = ({ code }) => {
     }
 
     return (
-      <Typography code size="smaller" key={lineIndex}>
+      <Typography
+        code
+        size="smaller"
+        key={lineIndex}
+      >
         {parts}
       </Typography>
     )

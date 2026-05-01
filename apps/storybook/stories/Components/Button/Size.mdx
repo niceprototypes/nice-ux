@@ -1,13 +1,13 @@
-import { Meta, Source } from '@storybook/addon-docs/blocks'
-import Button from 'nice-react-button'
-import Typography from '../../../src/nice/Typography'
-import { DocsRow } from '../../../src/components/DocsRow'
+import { Meta, Source } from "@storybook/addon-docs/blocks"
+import Button from "nice-react-button"
+import Typography from "../../../src/nice/Typography"
+import { DocsRow } from "../../../src/components/DocsRow"
 
 export const sizes = ["smaller", "small", "base", "large", "larger"]
 
-export const sizeLabel = (s) => s.charAt(0).toUpperCase() + s.slice(1)
+export const sizeLabel = s => s.charAt(0).toUpperCase() + s.slice(1)
 
-export const sizeCode = (s) =>
+export const sizeCode = s =>
   s === "base"
     ? `<Button onClick={handler}>\n  {children}\n</Button>`
     : `<Button\n  onClick={handler}\n  size="${s}"\n>\n  {children}\n</Button>`
@@ -16,13 +16,23 @@ export const sizeCode = (s) =>
 
 # Button — Size
 
-<Typography color="light">Scales the button's height, padding, and font size using cell-height tokens.</Typography>
+<Typography color="light">
+  Scales the button's height, padding, and font size using cell-height tokens.
+</Typography>
 
 <div>
   {sizes.map(size => (
     <DocsRow key={size}>
-      <Button onClick={() => {}} size={size}>{sizeLabel(size)}</Button>
-      <Source language="tsx" code={sizeCode(size)} />
+      <Button
+        onClick={() => {}}
+        size={size}
+      >
+        {sizeLabel(size)}
+      </Button>
+      <Source
+        language="tsx"
+        code={sizeCode(size)}
+      />
     </DocsRow>
   ))}
 </div>

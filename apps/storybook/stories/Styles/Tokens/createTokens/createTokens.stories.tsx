@@ -25,7 +25,7 @@ const { GlobalStyles } = createTokens({
 const meta = {
   title: "React/Styles/createTokens",
   component: ComponentDemo,
-  tags: ['!dev'],
+  tags: ["!dev"],
   parameters: {
     layout: "padded",
   },
@@ -56,7 +56,10 @@ export const OverrideExisting: Story = {
   name: "Overriding an existing variant",
   parameters: storyParameters,
   render: () => (
-    <Flex direction="column" gap="large">
+    <Flex
+      direction="column"
+      gap="large"
+    >
       <GlobalStyles />
       <Typography color="light">
         Use an existing token key with an existing variant name to replace its
@@ -67,8 +70,14 @@ export const OverrideExisting: Story = {
     base: "18px",
   },
 })`}</CodeBlock>
-      <Flex direction="column" gap="small">
-        <Flex gap="base" alignItems="center">
+      <Flex
+        direction="column"
+        gap="small"
+      >
+        <Flex
+          gap="base"
+          alignItems="center"
+        >
           <Typography code>--np--font-size--base</Typography>
           <Typography color="light">18px</Typography>
           <Typography color="lightest">
@@ -84,7 +93,10 @@ export const ExtendExisting: Story = {
   name: "Assigning a variant to an existing token",
   parameters: storyParameters,
   render: () => (
-    <Flex direction="column" gap="large">
+    <Flex
+      direction="column"
+      gap="large"
+    >
       <GlobalStyles />
       <Typography color="light">
         Use an existing token key with a new variant name to extend it. Here, a
@@ -96,14 +108,23 @@ export const ExtendExisting: Story = {
     brand: "#dc0000",
   },
 })`}</CodeBlock>
-      <Flex direction="column" gap="small">
-        <Flex gap="base" alignItems="center">
+      <Flex
+        direction="column"
+        gap="small"
+      >
+        <Flex
+          gap="base"
+          alignItems="center"
+        >
           <Typography code>--np--foreground-color--brand</Typography>
           <Typography color="light">#dc0000</Typography>
           <ColorSwatch color="#dc0000" />
           <Typography color="lightest">(new)</Typography>
         </Flex>
-        <Flex gap="base" alignItems="center">
+        <Flex
+          gap="base"
+          alignItems="center"
+        >
           <Typography code>--np--foreground-color--base</Typography>
           <Typography color="light">
             {getToken("foregroundColor").value}
@@ -120,7 +141,10 @@ export const NewToken: Story = {
   name: "Creating a new token",
   parameters: storyParameters,
   render: () => (
-    <Flex direction="column" gap="large">
+    <Flex
+      direction="column"
+      gap="large"
+    >
       <GlobalStyles />
       <Typography color="light">
         Use a token key that doesn't exist in the base system to create an
@@ -132,12 +156,19 @@ export const NewToken: Story = {
     compact: "48px",
   },
 })`}</CodeBlock>
-      <Flex direction="column" gap="small">
+      <Flex
+        direction="column"
+        gap="small"
+      >
         {[
           { key: "--np--header-height--base", value: "64px" },
           { key: "--np--header-height--compact", value: "48px" },
         ].map(({ key, value }) => (
-          <Flex key={key} gap="base" alignItems="center">
+          <Flex
+            key={key}
+            gap="base"
+            alignItems="center"
+          >
             <Typography code>{key}</Typography>
             <Typography color="light">{value}</Typography>
             <Typography color="lightest">(new)</Typography>
@@ -152,7 +183,10 @@ export const ResponsiveVariants: Story = {
   name: "Responsive variants (breakpoints)",
   parameters: storyParameters,
   render: () => (
-    <Flex direction="column" gap="large">
+    <Flex
+      direction="column"
+      gap="large"
+    >
       <GlobalStyles />
       <Typography color="light">
         A variant value can be an object with breakpoint keys instead of a plain
@@ -167,8 +201,14 @@ export const ResponsiveVariants: Story = {
     base: { small: "24px", large: "32px" },   // responsive
   },
 })`}</CodeBlock>
-      <Flex direction="column" gap="small">
-        <Typography color="lighter" weight="semibold">
+      <Flex
+        direction="column"
+        gap="small"
+      >
+        <Typography
+          color="lighter"
+          weight="semibold"
+        >
           Generated CSS
         </Typography>
         <CodeBlock language="css">{`:root {
@@ -186,8 +226,14 @@ export const ResponsiveVariants: Story = {
   }
 }`}</CodeBlock>
       </Flex>
-      <Flex direction="column" gap="small">
-        <Typography color="lighter" weight="semibold">
+      <Flex
+        direction="column"
+        gap="small"
+      >
+        <Typography
+          color="lighter"
+          weight="semibold"
+        >
           Breakpoints
         </Typography>
         {[
@@ -195,7 +241,11 @@ export const ResponsiveVariants: Story = {
           { name: "medium", value: "@media (min-width: 641px)" },
           { name: "large", value: "@media (min-width: 1280px)" },
         ].map(({ name, value }) => (
-          <Flex key={name} gap="base" alignItems="center">
+          <Flex
+            key={name}
+            gap="base"
+            alignItems="center"
+          >
             <Typography code>{name}</Typography>
             <Typography color="light">{value}</Typography>
           </Flex>
@@ -209,13 +259,16 @@ export const ModeVariants: Story = {
   name: "Mode-aware variants (day/night)",
   parameters: storyParameters,
   render: () => (
-    <Flex direction="column" gap="large">
+    <Flex
+      direction="column"
+      gap="large"
+    >
       <GlobalStyles />
       <Typography color="light">
         A variant value can be an object with mode keys instead of a plain
-        string. The day value becomes the default, and the night value is applied
-        via a prefers-color-scheme media query. Static strings and mode objects
-        can be mixed within the same token group.
+        string. The day value becomes the default, and the night value is
+        applied via a prefers-color-scheme media query. Static strings and mode
+        objects can be mixed within the same token group.
       </Typography>
       <CodeBlock language="typescript">{`createTokens({
   headerColor: {
@@ -223,8 +276,14 @@ export const ModeVariants: Story = {
     accent: "#dc0000",                     // static (same in both modes)
   },
 })`}</CodeBlock>
-      <Flex direction="column" gap="small">
-        <Typography color="lighter" weight="semibold">
+      <Flex
+        direction="column"
+        gap="small"
+      >
+        <Typography
+          color="lighter"
+          weight="semibold"
+        >
           Generated CSS
         </Typography>
         <CodeBlock language="css">{`:root {
@@ -240,8 +299,14 @@ export const ModeVariants: Story = {
   }
 }`}</CodeBlock>
       </Flex>
-      <Flex direction="column" gap="small">
-        <Typography color="lighter" weight="semibold">
+      <Flex
+        direction="column"
+        gap="small"
+      >
+        <Typography
+          color="lighter"
+          weight="semibold"
+        >
           Primitives
         </Typography>
         <Typography color="light">
@@ -263,7 +328,10 @@ export const Combined: Story = {
   name: "Putting it all together",
   parameters: storyParameters,
   render: () => (
-    <Flex direction="column" gap="large">
+    <Flex
+      direction="column"
+      gap="large"
+    >
       <GlobalStyles />
       <Typography color="light">
         All three patterns work in a single call. The token map merges into the
@@ -274,8 +342,8 @@ export const Combined: Story = {
       </Typography>
       <Typography color="light">
         Variant values can be a plain string, a breakpoint object, or a mode
-        object. These formats can be mixed freely within the same token group and
-        within the same call.
+        object. These formats can be mixed freely within the same token group
+        and within the same call.
       </Typography>
       <CodeBlock language="typescript">{`const { GlobalStyles } = createTokens({
   fontSize: { base: "18px" },            // override

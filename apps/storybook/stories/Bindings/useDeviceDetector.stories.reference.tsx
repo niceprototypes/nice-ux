@@ -1,5 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import { useDeviceDetector, DeviceProvider, useDevice } from "nice-react-device-detector"
+import {
+  useDeviceDetector,
+  DeviceProvider,
+  useDevice,
+} from "nice-react-device-detector"
 import React, { useEffect, useState } from "react"
 import Typography from "../../src/nice/Typography"
 import { generateDescriptionString } from "../../src/services"
@@ -64,10 +68,21 @@ const DeviceInfo = ({ isMobile }: { isMobile: boolean }) => {
   return (
     <div>
       <div style={{ marginBottom: getToken("gap", "base") }}>
-        <Typography weight="medium" as="span">Status: </Typography>
+        <Typography
+          weight="medium"
+          as="span"
+        >
+          Status:{" "}
+        </Typography>
         <Typography as="span">{isMobile ? "Mobile" : "Desktop"}</Typography>
       </div>
-      <div style={{ display: "flex", flexDirection: "column", gap: getToken("gap", "small") }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: getToken("gap", "small"),
+        }}
+      >
         <Typography>Window Width: {windowWidth}px</Typography>
         <Typography>Threshold: ≤ 480px</Typography>
         <Typography>
@@ -96,7 +111,10 @@ const meta = {
         component: generateDescriptionString([
           "Install using",
           { value: "npm i nice-react-device-detector", code: true },
-          { value: "for mobile device detection with multi-layered strategy.", newLine: true },
+          {
+            value: "for mobile device detection with multi-layered strategy.",
+            newLine: true,
+          },
           "Works with direct hook calls or Context API for optimal performance.",
         ]),
       },
@@ -199,8 +217,8 @@ export const ConditionalStyling: Story = {
           Responsive Styling
         </h3>
         <p style={{ color: "#4b5563", lineHeight: "1.6" }}>
-          This component adapts its padding ({isMobile ? "12px" : "32px"}),
-          font size ({isMobile ? "14px" : "16px"}), and max width (
+          This component adapts its padding ({isMobile ? "12px" : "32px"}), font
+          size ({isMobile ? "14px" : "16px"}), and max width (
           {isMobile ? "100%" : "600px"}) based on the detected device type.
         </p>
         <div
@@ -253,8 +271,8 @@ export const UsingContextProvider: Story = {
           }}
         >
           <p style={{ margin: 0, fontSize: "14px", color: "#4b5563" }}>
-            Both components use useDevice() hook but detection happens only
-            once at the Provider level.
+            Both components use useDevice() hook but detection happens only once
+            at the Provider level.
           </p>
         </div>
       )
@@ -442,7 +460,7 @@ export const ResponsiveDemo: Story = {
     const [resizeCount, setResizeCount] = useState(0)
 
     useEffect(() => {
-      const handleResize = () => setResizeCount((c) => c + 1)
+      const handleResize = () => setResizeCount(c => c + 1)
       window.addEventListener("resize", handleResize)
       return () => window.removeEventListener("resize", handleResize)
     }, [])
@@ -509,7 +527,9 @@ export const ResponsiveDemo: Story = {
           }}
         >
           <h4 style={{ marginTop: 0, color: "#1e40af" }}>💡 Testing Tips:</h4>
-          <ul style={{ marginBottom: 0, paddingLeft: "20px", color: "#1e3a8a" }}>
+          <ul
+            style={{ marginBottom: 0, paddingLeft: "20px", color: "#1e3a8a" }}
+          >
             <li>Open Chrome DevTools (F12)</li>
             <li>Toggle device toolbar (Ctrl+Shift+M / Cmd+Shift+M)</li>
             <li>Select a mobile device from the dropdown</li>
@@ -568,10 +588,10 @@ export const FeatureToggling: Story = {
       },
     ]
 
-    const activeFeatures = features.filter((f) =>
+    const activeFeatures = features.filter(f =>
       isMobile ? f.mobile : f.desktop
     )
-    const inactiveFeatures = features.filter((f) =>
+    const inactiveFeatures = features.filter(f =>
       isMobile ? !f.mobile : !f.desktop
     )
 
@@ -589,7 +609,7 @@ export const FeatureToggling: Story = {
             ✨ Active Features ({isMobile ? "Mobile" : "Desktop"})
           </h3>
           <div style={{ display: "grid", gap: "8px" }}>
-            {activeFeatures.map((feature) => (
+            {activeFeatures.map(feature => (
               <div
                 key={feature.name}
                 style={{
@@ -634,7 +654,7 @@ export const FeatureToggling: Story = {
             🚫 Disabled Features
           </h3>
           <div style={{ display: "grid", gap: "8px" }}>
-            {inactiveFeatures.map((feature) => (
+            {inactiveFeatures.map(feature => (
               <div
                 key={feature.name}
                 style={{
@@ -744,7 +764,8 @@ export const NavigationExample: Story = {
                   >
                     {item}
                   </div>
-                ))}x
+                ))}
+                x
               </div>
             )}
 
@@ -780,7 +801,7 @@ export const NavigationExample: Story = {
                 🖥️ MyApp
               </div>
               <div style={{ display: "flex", gap: "32px" }}>
-                {navItems.map((item) => (
+                {navItems.map(item => (
                   <div
                     key={item}
                     style={{
@@ -884,7 +905,13 @@ export const PerformanceComparison: Story = {
           </p>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "16px",
+          }}
+        >
           <div>
             <h4
               style={{
@@ -909,7 +936,8 @@ export const PerformanceComparison: Story = {
             >
               <strong>Event Listeners:</strong> 3
               <br />
-              <strong>Note:</strong> Each component creates its own detection instance
+              <strong>Note:</strong> Each component creates its own detection
+              instance
             </div>
           </div>
 
@@ -939,7 +967,8 @@ export const PerformanceComparison: Story = {
             >
               <strong>Event Listeners:</strong> 1
               <br />
-              <strong>Note:</strong> All components share a single detection instance
+              <strong>Note:</strong> All components share a single detection
+              instance
             </div>
           </div>
         </div>

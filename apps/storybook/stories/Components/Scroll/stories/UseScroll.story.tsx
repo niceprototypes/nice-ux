@@ -21,7 +21,10 @@ const UseScrollStory = () => (
               }}
             >
               <ScrollPositionDisplay />
-              <Typography size="smaller" color="light">
+              <Typography
+                size="smaller"
+                color="light"
+              >
                 Scroll the page to see the value update
               </Typography>
             </Flex>

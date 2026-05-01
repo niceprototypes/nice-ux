@@ -27,18 +27,35 @@ const VariableRow: React.FC<VariableRowProps> = ({
         $width="16rem"
         spacing="base none"
       >
-        <Flex alignItems="center" gap="small">
-          <Typography as="span" code weight="medium">
+        <Flex
+          alignItems="center"
+          gap="small"
+        >
+          <Typography
+            as="span"
+            code
+            weight="medium"
+          >
             {name}
           </Typography>
         </Flex>
         {isDefault && (
-          <Typography code weight="medium" color="light" size="smaller">
+          <Typography
+            code
+            weight="medium"
+            color="light"
+            size="smaller"
+          >
             default
           </Typography>
         )}
         {!isDefault && description && (
-          <Typography code weight="medium" color="base" size="smaller">
+          <Typography
+            code
+            weight="medium"
+            color="base"
+            size="smaller"
+          >
             {description}
           </Typography>
         )}
@@ -52,14 +69,29 @@ const VariableRow: React.FC<VariableRowProps> = ({
       >
         {demo}
         {value && (
-          <Typography code as="span" color="lighter" size="smaller">
+          <Typography
+            code
+            as="span"
+            color="lighter"
+            size="smaller"
+          >
             {value}
           </Typography>
         )}
       </CellFlex>
       {code && (
-        <CellFlex alignItems="center" $width="18rem" spacing="base none">
-          <CodeBlock language="tsx" padded={false} bordered={false}>{normalizeCode(code)}</CodeBlock>
+        <CellFlex
+          alignItems="center"
+          $width="18rem"
+          spacing="base none"
+        >
+          <CodeBlock
+            language="tsx"
+            padded={false}
+            bordered={false}
+          >
+            {normalizeCode(code)}
+          </CodeBlock>
         </CellFlex>
       )}
     </Flex>

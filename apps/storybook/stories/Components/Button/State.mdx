@@ -1,14 +1,14 @@
-import { Meta, Source } from '@storybook/addon-docs/blocks'
-import Button from 'nice-react-button'
-import Flex from 'nice-react-flex'
-import Typography from '../../../src/nice/Typography'
-import { DocsRow } from '../../../src/components/DocsRow'
+import { Meta, Source } from "@storybook/addon-docs/blocks"
+import Button from "nice-react-button"
+import Flex from "nice-react-flex"
+import Typography from "../../../src/nice/Typography"
+import { DocsRow } from "../../../src/components/DocsRow"
 
 export const states = ["base", "disabled", "error", "success", "warning"]
 
-export const stateLabel = (s) => s.charAt(0).toUpperCase() + s.slice(1)
+export const stateLabel = s => s.charAt(0).toUpperCase() + s.slice(1)
 
-export const stateCode = (s) =>
+export const stateCode = s =>
   s === "base"
     ? `<Button onClick={handler}>\n  {children}\n</Button>`
     : `<Button\n  onClick={handler}\n  state="${s}"\n>\n  {children}\n</Button>`
@@ -17,16 +17,33 @@ export const stateCode = (s) =>
 
 # Button — State
 
-<Typography color="light">Applies a semantic state style to the button (<code>disabled</code>, <code>error</code>, <code>success</code>, or <code>warning</code>).</Typography>
+<Typography color="light">
+  Applies a semantic state style to the button (<code>disabled</code>,{" "}
+  <code>error</code>, <code>success</code>, or <code>warning</code>).
+</Typography>
 
 <div>
   {states.map(state => (
     <DocsRow key={state}>
       <Flex gap="small">
-        <Button onClick={() => {}} state={state === "base" ? undefined : state}>{stateLabel(state)}</Button>
-        <Button status="secondary" onClick={() => {}} state={state === "base" ? undefined : state}>{stateLabel(state)}</Button>
+        <Button
+          onClick={() => {}}
+          state={state === "base" ? undefined : state}
+        >
+          {stateLabel(state)}
+        </Button>
+        <Button
+          status="secondary"
+          onClick={() => {}}
+          state={state === "base" ? undefined : state}
+        >
+          {stateLabel(state)}
+        </Button>
       </Flex>
-      <Source language="tsx" code={stateCode(state)} />
+      <Source
+        language="tsx"
+        code={stateCode(state)}
+      />
     </DocsRow>
   ))}
 </div>

@@ -1,7 +1,7 @@
-import { Meta } from '@storybook/addon-docs/blocks'
-import Lightbox from 'nice-react-lightbox'
-import { getPicsum } from '../../../src/services'
-import { DemoImage } from './Lightbox.styles'
+import { Meta } from "@storybook/addon-docs/blocks"
+import Lightbox from "nice-react-lightbox"
+import { getPicsum } from "../../../src/services"
+import { DemoImage } from "./Lightbox.styles"
 
 export const DEMO_IMAGE = getPicsum(800, 600, 10)
 
@@ -22,11 +22,22 @@ import Lightbox from "nice-react-lightbox"
 ### Usage
 
 ```jsx
-<Lightbox imageUrl="/image.png" alt="Description">{children}</Lightbox>
+<Lightbox
+  imageUrl="/image.png"
+  alt="Description"
+>
+  {children}
+</Lightbox>
 ```
 
 ---
 
-<Lightbox imageUrl={DEMO_IMAGE} alt="Demo landscape">
-  <DemoImage src={DEMO_IMAGE} alt="Click to expand" />
+<Lightbox
+  imageUrl={DEMO_IMAGE}
+  alt="Demo landscape"
+>
+  <DemoImage
+    src={DEMO_IMAGE}
+    alt="Click to expand"
+  />
 </Lightbox>

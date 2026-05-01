@@ -9,7 +9,7 @@ const ViteWatcherDemo = () => <></>
 const meta = {
   title: "Configuration/Vite/Watcher",
   component: ViteWatcherDemo,
-  tags: ['!dev'],
+  tags: ["!dev"],
   parameters: {
     layout: "padded",
   },
@@ -25,22 +25,24 @@ const storyParameters = {
   },
 }
 
-
 export const Overview: Story = {
   name: "overview",
   parameters: storyParameters,
   render: () => (
-    <Flex direction="column" gap="large">
+    <Flex
+      direction="column"
+      gap="large"
+    >
       <Typography as="h3">The Problem</Typography>
       <Typography color="light">
-        When developing with npm link or file: dependencies, Vite's dev server doesn't
-        detect changes in linked packages. You're forced to restart the dev server
-        every time you modify a linked package.
+        When developing with npm link or file: dependencies, Vite's dev server
+        doesn't detect changes in linked packages. You're forced to restart the
+        dev server every time you modify a linked package.
       </Typography>
       <Typography as="h4">The Solution</Typography>
       <Typography color="light">
-        This plugin watches the dist folder of linked packages and triggers a browser
-        reload when they rebuild.
+        This plugin watches the dist folder of linked packages and triggers a
+        browser reload when they rebuild.
       </Typography>
       <CodeBlock language="text">{`Developer edits source
        ↓
@@ -53,8 +55,8 @@ Plugin detects change (debounced)
 Browser reloads`}</CodeBlock>
       <Typography as="h4">Vite Only</Typography>
       <Typography color="light">
-        This plugin is for Vite projects (including Storybook with Vite).
-        For webpack/CRA projects, use nice-toolkit --dev --watch instead.
+        This plugin is for Vite projects (including Storybook with Vite). For
+        webpack/CRA projects, use nice-toolkit --dev --watch instead.
       </Typography>
     </Flex>
   ),
@@ -64,7 +66,10 @@ export const BasicUsage: Story = {
   name: "viteWatcher",
   parameters: storyParameters,
   render: () => (
-    <Flex direction="column" gap="large">
+    <Flex
+      direction="column"
+      gap="large"
+    >
       <Typography as="h3">viteWatcher</Typography>
       <Typography color="light">
         Creates the Vite plugin that watches linked package dist folders.
@@ -99,12 +104,15 @@ export const SourceAliases: Story = {
   name: "getSourceAliases",
   parameters: storyParameters,
   render: () => (
-    <Flex direction="column" gap="large">
+    <Flex
+      direction="column"
+      gap="large"
+    >
       <Typography as="h3">getSourceAliases</Typography>
       <Typography color="light">
-        Generates Vite resolve aliases pointing to package source files.
-        Use this for packages without special build transforms to get true HMR
-        with state preservation.
+        Generates Vite resolve aliases pointing to package source files. Use
+        this for packages without special build transforms to get true HMR with
+        state preservation.
       </Typography>
       <CodeBlock language="typescript">{`import { getSourceAliases } from 'nice-vite-watcher'
 
@@ -130,11 +138,15 @@ export const CombinedStrategy: Story = {
   name: "combined strategy",
   parameters: storyParameters,
   render: () => (
-    <Flex direction="column" gap="large">
+    <Flex
+      direction="column"
+      gap="large"
+    >
       <Typography as="h3">Combining Both Approaches</Typography>
       <Typography color="light">
-        For the best experience, use source aliases for simple packages (true HMR)
-        and dist watching for packages with build transforms (SVGR, PostCSS, etc.).
+        For the best experience, use source aliases for simple packages (true
+        HMR) and dist watching for packages with build transforms (SVGR,
+        PostCSS, etc.).
       </Typography>
       <CodeBlock language="typescript">{`// vite.config.ts
 import { defineConfig } from 'vite'
@@ -176,7 +188,10 @@ export const StorybookIntegration: Story = {
   name: "storybook integration",
   parameters: storyParameters,
   render: () => (
-    <Flex direction="column" gap="large">
+    <Flex
+      direction="column"
+      gap="large"
+    >
       <Typography as="h3">Storybook Integration</Typography>
       <Typography color="light">
         Works with Storybook's Vite builder via viteFinal config.
@@ -214,12 +229,15 @@ export const Limitations: Story = {
   name: "limitations",
   parameters: storyParameters,
   render: () => (
-    <Flex direction="column" gap="large">
+    <Flex
+      direction="column"
+      gap="large"
+    >
       <Typography as="h3">Limitations</Typography>
       <Typography as="h4">Full Page Reload</Typography>
       <Typography color="light">
-        Packages watched via dist (not source-aliased) trigger full reloads,
-        not granular HMR. This resets React component state.
+        Packages watched via dist (not source-aliased) trigger full reloads, not
+        granular HMR. This resets React component state.
       </Typography>
       <Typography as="h4">Build Pipeline Delay</Typography>
       <Typography color="light">
@@ -230,7 +248,8 @@ export const Limitations: Story = {
 npm run dev  # or npm run build --watch`}</CodeBlock>
       <Typography as="h4">Why Not Source Aliases for Everything?</Typography>
       <Typography color="light">
-        Source aliases bypass the package's build pipeline, which breaks packages using:
+        Source aliases bypass the package's build pipeline, which breaks
+        packages using:
       </Typography>
       <CodeBlock language="text">{`• SVGR — transforms SVG imports to React components
 • PostCSS/Tailwind — processes CSS

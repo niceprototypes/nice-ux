@@ -19,7 +19,6 @@ const meta = {
   parameters: {
     layout: "padded",
   },
-
 } satisfies Meta<typeof HookWrapper>
 
 export default meta
@@ -81,7 +80,10 @@ export const Debugging: Story = {
     }
 
     return (
-      <Flex direction="column" gap="large">
+      <Flex
+        direction="column"
+        gap="large"
+      >
         <Row
           isMobile={isMobile}
           label="debugging"
@@ -113,15 +115,24 @@ export const Responsive: Story = {
     }, [])
 
     return (
-      <Flex direction="column" gap="base">
+      <Flex
+        direction="column"
+        gap="base"
+      >
         <Row
           showIcon
           isMobile={isMobile}
           label="device"
           description={isMobile ? "mobile" : "desktop"}
         />
-        <Row label="window width" description={`${windowWidth}px`} />
-        <Row label="resize events" description={String(resizeCount)} />
+        <Row
+          label="window width"
+          description={`${windowWidth}px`}
+        />
+        <Row
+          label="resize events"
+          description={String(resizeCount)}
+        />
       </Flex>
     )
   },

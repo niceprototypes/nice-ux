@@ -1,19 +1,38 @@
-import { Meta, Source } from '@storybook/addon-docs/blocks'
-import Typography from '../../../src/nice/Typography'
-import { DocsRow } from '../../../src/components/DocsRow'
-import { toSource } from '../../../src/services'
+import { Meta, Source } from "@storybook/addon-docs/blocks"
+import Typography from "../../../src/nice/Typography"
+import { DocsRow } from "../../../src/components/DocsRow"
+import { toSource } from "../../../src/services"
 
 <Meta title="React/Components/Typography/color" />
 
 # Typography — Color
 
-<Typography color="light">Sets the text color using foregroundColor tokens. Maps to the CSS <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/color"><code>color</code></a> property.</Typography>
+<Typography color="light">
+  Sets the text color using foregroundColor tokens. Maps to the CSS{" "}
+  <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/color">
+    <code>color</code>
+  </a>{" "}
+  property.
+</Typography>
 
 <div>
-  {["lightest", "lighter", "light", "base", "disabled", "link", "success", "warning", "error"].map(color => (
+  {[
+    "lightest",
+    "lighter",
+    "light",
+    "base",
+    "disabled",
+    "link",
+    "success",
+    "warning",
+    "error",
+  ].map(color => (
     <DocsRow key={color}>
       <Typography color={color}>{color}</Typography>
-      <Source language="tsx" code={toSource("Typography", { color }, { children: color })} />
+      <Source
+        language="tsx"
+        code={toSource("Typography", { color }, { children: color })}
+      />
     </DocsRow>
   ))}
 </div>

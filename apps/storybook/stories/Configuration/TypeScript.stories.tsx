@@ -9,7 +9,7 @@ const TypeScriptDemo = () => <></>
 const meta = {
   title: "Configuration/TypeScript",
   component: TypeScriptDemo,
-  tags: ['!dev'],
+  tags: ["!dev"],
   parameters: {
     layout: "padded",
   },
@@ -25,15 +25,18 @@ const storyParameters = {
   },
 }
 
-
 export const Base: Story = {
   name: "base",
   parameters: storyParameters,
   render: () => (
-    <Flex direction="column" gap="large">
+    <Flex
+      direction="column"
+      gap="large"
+    >
       <Typography as="h3">Base Configuration</Typography>
       <Typography color="light">
-        Extends the base TypeScript configuration for non-React packages like nice-styles.
+        Extends the base TypeScript configuration for non-React packages like
+        nice-styles.
       </Typography>
       <CodeBlock language="json">{`// tsconfig.json
 {
@@ -68,7 +71,10 @@ export const React: Story = {
   name: "react",
   parameters: storyParameters,
   render: () => (
-    <Flex direction="column" gap="large">
+    <Flex
+      direction="column"
+      gap="large"
+    >
       <Typography as="h3">React Configuration</Typography>
       <Typography color="light">
         Extends the base configuration with JSX support for React components.
@@ -88,8 +94,9 @@ export const React: Story = {
   "jsx": "react-jsx"
 }`}</CodeBlock>
       <Typography color="light">
-        Note: Path-relative options like outDir, declarationDir, and include must be specified
-        in each project as they resolve relative to the config file location.
+        Note: Path-relative options like outDir, declarationDir, and include
+        must be specified in each project as they resolve relative to the config
+        file location.
       </Typography>
     </Flex>
   ),

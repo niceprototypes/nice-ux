@@ -1,19 +1,25 @@
-import { Meta, Source } from '@storybook/addon-docs/blocks'
-import Typography from '../../../src/nice/Typography'
-import { DocsRow } from '../../../src/components/DocsRow'
-import { toSource } from '../../../src/services'
+import { Meta, Source } from "@storybook/addon-docs/blocks"
+import Typography from "../../../src/nice/Typography"
+import { DocsRow } from "../../../src/components/DocsRow"
+import { toSource } from "../../../src/services"
 
 <Meta title="React/Components/Typography/as" />
 
 # Typography — As
 
-<Typography color="light">Renders the text using a specific HTML element, with sensible size and weight defaults per tag.</Typography>
+<Typography color="light">
+  Renders the text using a specific HTML element, with sensible size and weight
+  defaults per tag.
+</Typography>
 
 <div>
   {["h1", "h2", "h3", "h4", "p", "span"].map(as => (
     <DocsRow key={as}>
       <Typography as={as}>{as}</Typography>
-      <Source language="tsx" code={toSource("Typography", { as }, { children: as })} />
+      <Source
+        language="tsx"
+        code={toSource("Typography", { as }, { children: as })}
+      />
     </DocsRow>
   ))}
 </div>

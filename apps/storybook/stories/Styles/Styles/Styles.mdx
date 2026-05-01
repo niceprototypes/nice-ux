@@ -1,14 +1,17 @@
-import { Meta, Source } from '@storybook/addon-docs/blocks'
-import Flex from 'nice-react-flex'
-import { getToken } from 'nice-react-styles'
-import Typography from '../../../src/nice/Typography'
-import { DocsRow } from '../../../src/components/DocsRow'
-import DemoDots from '../../../src/components/DemoDots'
+import { Meta, Source } from "@storybook/addon-docs/blocks"
+import Flex from "nice-react-flex"
+import { getToken } from "nice-react-styles"
+import Typography from "../../../src/nice/Typography"
+import { DocsRow } from "../../../src/components/DocsRow"
+import DemoDots from "../../../src/components/DemoDots"
 
 export const loremIpsum =
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore."
 
-<Meta title="Tokens/Styles" name="Docs" />
+<Meta
+  title="Tokens/Styles"
+  name="Docs"
+/>
 
 # Tokens
 
@@ -33,7 +36,10 @@ no build step, no opinions about your component model.
 <div>
   {[
     { name: "base", backgroundColor: getToken("foregroundColor", "error").var },
-    { name: "slow", backgroundColor: getToken("foregroundColor", "warning").var },
+    {
+      name: "slow",
+      backgroundColor: getToken("foregroundColor", "warning").var,
+    },
   ].map(({ name, backgroundColor }) => {
     const animationName = name === "base" ? "slide" : "slideSlow"
     return (
@@ -52,11 +58,15 @@ no build step, no opinions about your component model.
               height: getToken("cellHeight", "smaller").var,
               borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2)`,
               animation: `${animationName} calc(${getToken("animationDuration", name).var} * 6) ${getToken("animationEasing").var} infinite`,
-              animationDelay: name === "base" ? getToken("animationDuration", name).var : 0,
+              animationDelay:
+                name === "base" ? getToken("animationDuration", name).var : 0,
             }}
           />
         </Flex>
-        <Source language="tsx" code={`getToken("animationDuration", "${name}").var`} />
+        <Source
+          language="tsx"
+          code={`getToken("animationDuration", "${name}").var`}
+        />
       </DocsRow>
     )
   })}
@@ -74,7 +84,11 @@ no build step, no opinions about your component model.
           borderRadius: getToken("borderRadius").var,
         }}
       >
-        <svg width="60" height="24" viewBox="0 0 60 24">
+        <svg
+          width="60"
+          height="24"
+          viewBox="0 0 60 24"
+        >
           <path
             d="M 1 23 C 30 23, 30 1, 60 1"
             fill="none"
@@ -84,7 +98,10 @@ no build step, no opinions about your component model.
           />
         </svg>
       </Flex>
-      <Source language="tsx" code={`getToken("animationEasing", "${variant}").var`} />
+      <Source
+        language="tsx"
+        code={`getToken("animationEasing", "${variant}").var`}
+      />
     </DocsRow>
   ))}
 </div>
@@ -103,7 +120,10 @@ no build step, no opinions about your component model.
           borderRadius: getToken("borderRadius", "small").var,
         }}
       />
-      <Source language="tsx" code={`getToken("backgroundColor", "${variant}").var`} />
+      <Source
+        language="tsx"
+        code={`getToken("backgroundColor", "${variant}").var`}
+      />
     </DocsRow>
   ))}
 </div>
@@ -122,7 +142,10 @@ no build step, no opinions about your component model.
           borderRadius: getToken("borderRadius", "small").var,
         }}
       />
-      <Source language="tsx" code={`getToken("borderColor", "${variant}").var`} />
+      <Source
+        language="tsx"
+        code={`getToken("borderColor", "${variant}").var`}
+      />
     </DocsRow>
   ))}
 </div>
@@ -140,7 +163,10 @@ no build step, no opinions about your component model.
           border: `${getToken("borderWidth").var} solid ${getToken("foregroundColor", "light").var}`,
         }}
       />
-      <Source language="tsx" code={`getToken("borderRadius", "${variant}").var`} />
+      <Source
+        language="tsx"
+        code={`getToken("borderRadius", "${variant}").var`}
+      />
     </DocsRow>
   ))}
 </div>
@@ -158,7 +184,10 @@ no build step, no opinions about your component model.
           borderRadius: getToken("borderRadius", "small").var,
         }}
       />
-      <Source language="tsx" code={`getToken("borderWidth", "${variant}").var`} />
+      <Source
+        language="tsx"
+        code={`getToken("borderWidth", "${variant}").var`}
+      />
     </DocsRow>
   ))}
 </div>
@@ -185,7 +214,10 @@ no build step, no opinions about your component model.
           }}
         />
       </Flex>
-      <Source language="tsx" code={`getToken("boxShadow", "${variant}").var`} />
+      <Source
+        language="tsx"
+        code={`getToken("boxShadow", "${variant}").var`}
+      />
     </DocsRow>
   ))}
 </div>
@@ -203,7 +235,10 @@ no build step, no opinions about your component model.
           borderRadius: getToken("cellHeight", "smaller").var,
         }}
       />
-      <Source language="tsx" code={`getToken("cellHeight", "${variant}").var`} />
+      <Source
+        language="tsx"
+        code={`getToken("cellHeight", "${variant}").var`}
+      />
     </DocsRow>
   ))}
 </div>
@@ -217,8 +252,16 @@ no build step, no opinions about your component model.
     { name: "code", code: true, text: "Code" },
   ].map(({ name, weight, code, text }) => (
     <DocsRow key={name}>
-      <Typography weight={weight} code={code}>{text}</Typography>
-      <Source language="tsx" code={`getToken("fontFamily", "${name}").var`} />
+      <Typography
+        weight={weight}
+        code={code}
+      >
+        {text}
+      </Typography>
+      <Source
+        language="tsx"
+        code={`getToken("fontFamily", "${name}").var`}
+      />
     </DocsRow>
   ))}
 </div>
@@ -228,8 +271,13 @@ no build step, no opinions about your component model.
 <div>
   {["smaller", "small", "base", "large", "larger"].map(variant => (
     <DocsRow key={variant}>
-      <Typography size={variant}>{variant.charAt(0).toUpperCase() + variant.slice(1)}</Typography>
-      <Source language="tsx" code={`getToken("fontSize", "${variant}").var`} />
+      <Typography size={variant}>
+        {variant.charAt(0).toUpperCase() + variant.slice(1)}
+      </Typography>
+      <Source
+        language="tsx"
+        code={`getToken("fontSize", "${variant}").var`}
+      />
     </DocsRow>
   ))}
 </div>
@@ -237,18 +285,35 @@ no build step, no opinions about your component model.
 ## fontWeight
 
 <div>
-  {["light", "base", "medium", "semibold", "bold", "extrabold", "black"].map(variant => (
-    <DocsRow key={variant}>
-      <Typography weight={variant}>{variant.charAt(0).toUpperCase() + variant.slice(1)}</Typography>
-      <Source language="tsx" code={`getToken("fontWeight", "${variant}").var`} />
-    </DocsRow>
-  ))}
+  {["light", "base", "medium", "semibold", "bold", "extrabold", "black"].map(
+    variant => (
+      <DocsRow key={variant}>
+        <Typography weight={variant}>
+          {variant.charAt(0).toUpperCase() + variant.slice(1)}
+        </Typography>
+        <Source
+          language="tsx"
+          code={`getToken("fontWeight", "${variant}").var`}
+        />
+      </DocsRow>
+    )
+  )}
 </div>
 
 ## foregroundColor
 
 <div>
-  {["lightest", "lighter", "light", "base", "disabled", "link", "success", "warning", "error"].map(variant => (
+  {[
+    "lightest",
+    "lighter",
+    "light",
+    "base",
+    "disabled",
+    "link",
+    "success",
+    "warning",
+    "error",
+  ].map(variant => (
     <DocsRow key={variant}>
       <Flex
         style={{
@@ -258,7 +323,10 @@ no build step, no opinions about your component model.
           borderRadius: "50%",
         }}
       />
-      <Source language="tsx" code={`getToken("foregroundColor", "${variant}").var`} />
+      <Source
+        language="tsx"
+        code={`getToken("foregroundColor", "${variant}").var`}
+      />
     </DocsRow>
   ))}
 </div>
@@ -271,11 +339,22 @@ no build step, no opinions about your component model.
       <DemoDots
         gap={variant}
         dots={[
-          { color: getToken("foregroundColor", "error").var, width: getToken("cellHeight", "smaller").var, height: getToken("cellHeight", "smaller").var },
-          { color: getToken("foregroundColor", "link").var, width: getToken("cellHeight", "smaller").var, height: getToken("cellHeight", "smaller").var },
+          {
+            color: getToken("foregroundColor", "error").var,
+            width: getToken("cellHeight", "smaller").var,
+            height: getToken("cellHeight", "smaller").var,
+          },
+          {
+            color: getToken("foregroundColor", "link").var,
+            width: getToken("cellHeight", "smaller").var,
+            height: getToken("cellHeight", "smaller").var,
+          },
         ]}
       />
-      <Source language="tsx" code={`getToken("gap", "${variant}").var`} />
+      <Source
+        language="tsx"
+        code={`getToken("gap", "${variant}").var`}
+      />
     </DocsRow>
   ))}
 </div>
@@ -286,7 +365,10 @@ no build step, no opinions about your component model.
   {["condensed", "base", "expanded"].map(variant => (
     <DocsRow key={variant}>
       <Typography lineHeight={variant}>{loremIpsum}</Typography>
-      <Source language="tsx" code={`getToken("lineHeight", "${variant}").var`} />
+      <Source
+        language="tsx"
+        code={`getToken("lineHeight", "${variant}").var`}
+      />
     </DocsRow>
   ))}
 </div>

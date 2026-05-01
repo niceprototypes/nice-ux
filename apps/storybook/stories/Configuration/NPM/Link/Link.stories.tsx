@@ -9,7 +9,7 @@ const LinkDemo = () => <></>
 const meta = {
   title: "Configuration/NPM/Link",
   component: LinkDemo,
-  tags: ['!dev'],
+  tags: ["!dev"],
   parameters: {
     layout: "padded",
   },
@@ -25,17 +25,20 @@ const storyParameters = {
   },
 }
 
-
 export const Overview: Story = {
   name: "overview",
   parameters: storyParameters,
   render: () => (
-    <Flex direction="column" gap="large">
+    <Flex
+      direction="column"
+      gap="large"
+    >
       <Typography as="h3">Why nice-toolkit?</Typography>
       <Typography color="light">
-        Nice ecosystem packages use file: references for local development.
-        When npm installs these, each package gets its own node_modules with
-        duplicate React/styled-components. This causes "Invalid hook call" errors.
+        Nice ecosystem packages use file: references for local development. When
+        npm installs these, each package gets its own node_modules with
+        duplicate React/styled-components. This causes "Invalid hook call"
+        errors.
       </Typography>
       <CodeBlock language="bash">{`# The problem: duplicate React instances
 your-app/node_modules/react           ← App's React
@@ -61,11 +64,14 @@ export const FileDependencies: Story = {
   name: "file: dependencies",
   parameters: storyParameters,
   render: () => (
-    <Flex direction="column" gap="large">
+    <Flex
+      direction="column"
+      gap="large"
+    >
       <Typography as="h3">Local Development Setup</Typography>
       <Typography color="light">
-        All nice-* packages use file: references for interdependencies.
-        This enables live changes to propagate through the dependency chain.
+        All nice-* packages use file: references for interdependencies. This
+        enables live changes to propagate through the dependency chain.
       </Typography>
       <CodeBlock language="json">{`// package.json pattern
 {
@@ -95,7 +101,10 @@ export const BasicUsage: Story = {
   name: "basic usage",
   parameters: storyParameters,
   render: () => (
-    <Flex direction="column" gap="large">
+    <Flex
+      direction="column"
+      gap="large"
+    >
       <Typography as="h3">Basic Usage</Typography>
       <CodeBlock language="bash">{`# Link a single package
 npx nice-toolkit ../react-button
@@ -124,11 +133,14 @@ export const CleanOnly: Story = {
   name: "--clean-only",
   parameters: storyParameters,
   render: () => (
-    <Flex direction="column" gap="large">
+    <Flex
+      direction="column"
+      gap="large"
+    >
       <Typography as="h3">--clean-only</Typography>
       <Typography color="light">
-        Remove conflicting packages without creating a new link. Useful when packages
-        are already linked via package.json file: references.
+        Remove conflicting packages without creating a new link. Useful when
+        packages are already linked via package.json file: references.
       </Typography>
       <CodeBlock language="bash">{`# Clean a specific linked package
 ntk --clean-only ../react-button
@@ -143,11 +155,14 @@ export const Unlink: Story = {
   name: "--unlink",
   parameters: storyParameters,
   render: () => (
-    <Flex direction="column" gap="large">
+    <Flex
+      direction="column"
+      gap="large"
+    >
       <Typography as="h3">--unlink</Typography>
       <Typography color="light">
-        Restore packages to their original npm versions. This removes file: references
-        and reinstalls from the registry.
+        Restore packages to their original npm versions. This removes file:
+        references and reinstalls from the registry.
       </Typography>
       <CodeBlock language="bash">{`# Unlink all file: dependencies
 ntk --unlink
@@ -166,7 +181,10 @@ export const CustomExclusions: Story = {
   name: "--exclude / --add-exclude",
   parameters: storyParameters,
   render: () => (
-    <Flex direction="column" gap="large">
+    <Flex
+      direction="column"
+      gap="large"
+    >
       <Typography as="h3">Custom Package Exclusions</Typography>
       <Typography as="h4">--exclude</Typography>
       <Typography color="light">
@@ -175,9 +193,7 @@ export const CustomExclusions: Story = {
       <CodeBlock language="bash">{`# Only remove React packages (skip styled-components)
 ntk --exclude react,react-dom ../my-component`}</CodeBlock>
       <Typography as="h4">--add-exclude</Typography>
-      <Typography color="light">
-        Add packages to the default list:
-      </Typography>
+      <Typography color="light">Add packages to the default list:</Typography>
       <CodeBlock language="bash">{`# Add Emotion packages to defaults
 ntk --add-exclude @emotion/react,@emotion/styled ../my-component
 
@@ -191,7 +207,10 @@ export const OtherOptions: Story = {
   name: "other options",
   parameters: storyParameters,
   render: () => (
-    <Flex direction="column" gap="large">
+    <Flex
+      direction="column"
+      gap="large"
+    >
       <Typography as="h3">Other Options</Typography>
       <Typography as="h4">--dry-run</Typography>
       <Typography color="light">
@@ -219,7 +238,10 @@ export const DevMode: Story = {
   name: "--dev",
   parameters: storyParameters,
   render: () => (
-    <Flex direction="column" gap="large">
+    <Flex
+      direction="column"
+      gap="large"
+    >
       <Typography as="h3">--dev</Typography>
       <Typography color="light">
         Runs npm run dev in all linked packages concurrently. This rebuilds
@@ -238,7 +260,10 @@ export const WatchMode: Story = {
   name: "--watch",
   parameters: storyParameters,
   render: () => (
-    <Flex direction="column" gap="large">
+    <Flex
+      direction="column"
+      gap="large"
+    >
       <Typography as="h3">--watch</Typography>
       <Typography color="light">
         Watches linked package dist folders and touches a trigger file when
@@ -255,9 +280,7 @@ ntk --watch --watch-dir build`}</CodeBlock>
       </Typography>
       <CodeBlock language="typescript">{`// src/index.tsx
 import './.symlink-trigger.js';`}</CodeBlock>
-      <Typography color="light">
-        Add to .gitignore:
-      </Typography>
+      <Typography color="light">Add to .gitignore:</Typography>
       <CodeBlock language="bash">{`.symlink-trigger.js`}</CodeBlock>
     </Flex>
   ),
@@ -267,11 +290,15 @@ export const DevWatch: Story = {
   name: "--dev --watch",
   parameters: storyParameters,
   render: () => (
-    <Flex direction="column" gap="large">
+    <Flex
+      direction="column"
+      gap="large"
+    >
       <Typography as="h3">--dev --watch (Recommended)</Typography>
       <Typography color="light">
         Combines both flags: rebuilds packages on source changes AND triggers
-        webpack/CRA recompilation. This is the recommended setup for CRA projects.
+        webpack/CRA recompilation. This is the recommended setup for CRA
+        projects.
       </Typography>
       <CodeBlock language="bash">{`# In package.json
 "scripts": {
@@ -301,7 +328,10 @@ export const Publish: Story = {
   name: "--publish",
   parameters: storyParameters,
   render: () => (
-    <Flex direction="column" gap="large">
+    <Flex
+      direction="column"
+      gap="large"
+    >
       <Typography as="h3">--publish</Typography>
       <Typography color="light">
         Publishes Nice ecosystem packages to npm in dependency order. Handles
@@ -325,10 +355,9 @@ ntk --publish --dry-run`}</CodeBlock>
 7. Commits and pushes version changes`}</CodeBlock>
       <Typography as="h4">Publish Order</Typography>
       <Typography color="light">
-        Packages are published bottom-to-top per dependency chain.
-        The publish order is defined in nice-toolkit/registry.json and
-        queried via the registry service. Run ntk --publish --dry-run to
-        see the current order.
+        Packages are published bottom-to-top per dependency chain. The publish
+        order is defined in nice-toolkit/registry.json and queried via the
+        registry service. Run ntk --publish --dry-run to see the current order.
       </Typography>
       <Typography as="h4">Dry Run</Typography>
       <Typography color="light">
@@ -344,7 +373,10 @@ export const Troubleshooting: Story = {
   name: "troubleshooting",
   parameters: storyParameters,
   render: () => (
-    <Flex direction="column" gap="large">
+    <Flex
+      direction="column"
+      gap="large"
+    >
       <Typography as="h3">Troubleshooting</Typography>
       <Typography as="h4">Invalid Hook Call Error</Typography>
       <Typography color="light">
@@ -358,8 +390,8 @@ export const Troubleshooting: Story = {
       <CodeBlock language="bash">{`# Run in a separate terminal while developing
 ntk --dev`}</CodeBlock>
       <Typography color="light">
-        The nice-configuration rollup settings include optimized watch options that
-        prevent file caching issues. Changes should appear immediately.
+        The nice-configuration rollup settings include optimized watch options
+        that prevent file caching issues. Changes should appear immediately.
       </Typography>
       <Typography as="h4">Clear CRA Cache</Typography>
       <Typography color="light">
@@ -368,8 +400,8 @@ ntk --dev`}</CodeBlock>
       <CodeBlock language="bash">{`rm -rf node_modules/.cache && npm start`}</CodeBlock>
       <Typography as="h4">After Installing Dependencies</Typography>
       <Typography color="light">
-        When you run npm install in a linked package, conflicts return.
-        Either unlink first or re-run nice-toolkit:
+        When you run npm install in a linked package, conflicts return. Either
+        unlink first or re-run nice-toolkit:
       </Typography>
       <CodeBlock language="bash">{`# Option 1: Unlink before installing
 ntk --unlink

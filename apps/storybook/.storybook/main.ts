@@ -1,16 +1,13 @@
 // This file has been automatically migrated to valid ESM format by Storybook.
-import { fileURLToPath } from "node:url";
-import { createRequire } from "node:module";
+import { fileURLToPath } from "node:url"
+import { createRequire } from "node:module"
 import type { StorybookConfig } from "@storybook/react-vite"
 import { join, dirname, resolve } from "path"
-import {
-  viteWatcher,
-  getSourceAliases,
-} from "nice-vite-watcher"
+import { viteWatcher, getSourceAliases } from "nice-vite-watcher"
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const require = createRequire(import.meta.url);
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+const require = createRequire(import.meta.url)
 
 /**
  * Resolves the absolute path of a package.
@@ -24,7 +21,7 @@ function getAbsolutePath(value: string): string {
  * Package lists from the Nice ecosystem registry (nice-toolkit/registry.json).
  * Adding a new package to the registry automatically makes it available here.
  */
-const registry = require('../../toolkit/src/registry')
+const registry = require("../../toolkit/src/registry")
 const linkedPackages: Record<string, string> = registry.getLinkedPackageMap()
 const sourceAliasablePackages: string[] = registry.getSourceAliasableNames()
 
@@ -53,15 +50,15 @@ const config: StorybookConfig = {
   ],
   addons: [
     getAbsolutePath("@storybook/addon-links"),
-    getAbsolutePath("@storybook/addon-docs")
+    getAbsolutePath("@storybook/addon-docs"),
   ],
-  staticDirs: ['../public'],
+  staticDirs: ["../public"],
   framework: {
     name: getAbsolutePath("@storybook/react-vite"),
     options: {},
   },
   docs: {},
-  viteFinal: async (config) => {
+  viteFinal: async config => {
     config.resolve = config.resolve || {}
 
     // Dedupe ensures a single instance of these packages across all
@@ -69,10 +66,10 @@ const config: StorybookConfig = {
     // context mismatches when Nice packages have their own copies.
     config.resolve.dedupe = [
       ...(config.resolve.dedupe || []),
-      'styled-components',
-      'react',
-      'react-dom',
-      'nice-react-icon',
+      "styled-components",
+      "react",
+      "react-dom",
+      "nice-react-icon",
     ]
 
     // Required for Vite to resolve the real paths of symlinked packages
@@ -81,7 +78,10 @@ const config: StorybookConfig = {
     config.resolve.alias = {
       ...(config.resolve.alias || {}),
       // Force styled-components to use Storybook's copy (see dedupe above)
-      'styled-components': resolve(__dirname, '../node_modules/styled-components'),
+      "styled-components": resolve(
+        __dirname,
+        "../node_modules/styled-components"
+      ),
       // Map source-aliasable packages directly to their src/index.ts
       ...getSourceAliases(linkedPackages, sourceAliasablePackages),
     }
@@ -124,7 +124,7 @@ const config: StorybookConfig = {
     reactDocgenTypescriptOptions: {
       shouldExtractLiteralValuesFromEnum: true,
       // Filter out props inherited from node_modules (e.g., HTMLAttributes)
-      propFilter: (prop) => {
+      propFilter: prop => {
         if (prop.parent) {
           return !prop.parent.fileName.includes("node_modules")
         }

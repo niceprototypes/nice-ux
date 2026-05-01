@@ -1,17 +1,30 @@
-import { Meta, Source } from '@storybook/addon-docs/blocks'
-import Flex from 'nice-react-flex'
-import { getToken } from 'nice-react-styles'
-import Typography from '../../../src/nice/Typography'
-import { DocsRow } from '../../../src/components/DocsRow'
+import { Meta, Source } from "@storybook/addon-docs/blocks"
+import Flex from "nice-react-flex"
+import { getToken } from "nice-react-styles"
+import Typography from "../../../src/nice/Typography"
+import { DocsRow } from "../../../src/components/DocsRow"
 
 <Meta title="Tokens/Styles/foregroundColor" />
 
 # foregroundColor
 
-<Typography>Text and icon color tokens, including semantic states (<code>success</code>, <code>warning</code>, <code>error</code>).</Typography>
+<Typography>
+  Text and icon color tokens, including semantic states (<code>success</code>,{" "}
+  <code>warning</code>, <code>error</code>).
+</Typography>
 
 <div>
-  {["lightest", "lighter", "light", "base", "disabled", "link", "success", "warning", "error"].map(variant => (
+  {[
+    "lightest",
+    "lighter",
+    "light",
+    "base",
+    "disabled",
+    "link",
+    "success",
+    "warning",
+    "error",
+  ].map(variant => (
     <DocsRow key={variant}>
       <Flex
         style={{
@@ -21,7 +34,10 @@ import { DocsRow } from '../../../src/components/DocsRow'
           borderRadius: "50%",
         }}
       />
-      <Source language="tsx" code={`getToken("foregroundColor", "${variant}").var`} />
+      <Source
+        language="tsx"
+        code={`getToken("foregroundColor", "${variant}").var`}
+      />
     </DocsRow>
   ))}
 </div>

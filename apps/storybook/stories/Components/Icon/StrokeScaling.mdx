@@ -1,20 +1,41 @@
-import { Meta, Source } from '@storybook/addon-docs/blocks'
-import Icon from 'nice-react-icon'
-import Typography from '../../../src/nice/Typography'
-import { DocsRow } from '../../../src/components/DocsRow'
+import { Meta, Source } from "@storybook/addon-docs/blocks"
+import Icon from "nice-react-icon"
+import Typography from "../../../src/nice/Typography"
+import { DocsRow } from "../../../src/components/DocsRow"
 
 <Meta title="React/Components/Icon/strokeScaling" />
 
 # Icon — StrokeScaling
 
-<Typography color="light">Controls whether the stroke thickness scales with the icon size. Maps to the SVG <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/vector-effect"><code>vector-effect</code></a> attribute (<code>non-scaling-stroke</code>).</Typography>
+<Typography color="light">
+  Controls whether the stroke thickness scales with the icon size. Maps to the
+  SVG{" "}
+  <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/vector-effect">
+    <code>vector-effect</code>
+  </a>{" "}
+  attribute (<code>non-scaling-stroke</code>).
+</Typography>
 
 <DocsRow>
-  <Icon name="message" size="larger" strokeScaling={false} />
-  <Source language="tsx" code={`<Icon size="larger" />`} />
+  <Icon
+    name="message"
+    size="larger"
+    strokeScaling={false}
+  />
+  <Source
+    language="tsx"
+    code={`<Icon size="larger" />`}
+  />
 </DocsRow>
 
 <DocsRow>
-  <Icon name="message" size="larger" strokeScaling={true} />
-  <Source language="tsx" code={`<Icon size="larger" strokeScaling={true} />`} />
+  <Icon
+    name="message"
+    size="larger"
+    strokeScaling={true}
+  />
+  <Source
+    language="tsx"
+    code={`<Icon size="larger" strokeScaling={true} />`}
+  />
 </DocsRow>

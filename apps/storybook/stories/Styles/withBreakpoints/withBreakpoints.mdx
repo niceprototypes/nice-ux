@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/addon-docs/blocks'
+import { Meta } from "@storybook/addon-docs/blocks"
 
 <Meta title="React/Styles/withBreakpoints" />
 
@@ -49,21 +49,21 @@ that overrides the base props within that range.
 
 ### Entry shape
 
-| Field | Type | Purpose |
-|------|------|---------|
-| `min` | `BreakpointName?` | Inclusive lower bound. Entry activates when current viewport ≥ this name. |
-| `max` | `BreakpointName?` | Inclusive upper bound. Entry activates when current viewport ≤ this name. |
-| `props` | `Partial<P>?` | Prop overrides applied when the entry matches. |
+| Field   | Type              | Purpose                                                                   |
+| ------- | ----------------- | ------------------------------------------------------------------------- |
+| `min`   | `BreakpointName?` | Inclusive lower bound. Entry activates when current viewport ≥ this name. |
+| `max`   | `BreakpointName?` | Inclusive upper bound. Entry activates when current viewport ≤ this name. |
+| `props` | `Partial<P>?`     | Prop overrides applied when the entry matches.                            |
 
 `BreakpointName` is `"small" | "medium" | "large"`. **At least one of `min` or
 `max` must be provided** — the HOC throws at runtime if both are missing.
 
-| Bounds | Meaning |
-|--------|---------|
-| `{ min: "medium" }` | Medium and up (medium, large) |
-| `{ max: "medium" }` | Up to medium (small, medium) |
-| `{ min: "medium", max: "medium" }` | Medium only |
-| `{ min: "small", max: "large" }` | All viewports — useful for unconditional overrides |
+| Bounds                             | Meaning                                            |
+| ---------------------------------- | -------------------------------------------------- |
+| `{ min: "medium" }`                | Medium and up (medium, large)                      |
+| `{ max: "medium" }`                | Up to medium (small, medium)                       |
+| `{ min: "medium", max: "medium" }` | Medium only                                        |
+| `{ min: "small", max: "large" }`   | All viewports — useful for unconditional overrides |
 
 ---
 
@@ -73,22 +73,20 @@ Matching entries are applied **cumulatively** in array order — later wins on a
 field collision. Plain-object props merge **one level deep** so partial
 overrides preserve sibling keys.
 
-| Prop kind | Behavior |
-|---|---|
-| Plain config object (`titleProps`, `descriptionProps`, `style`, …) | One-level merge — sibling keys preserved |
-| Primitive (`spacing`, `gap`, `maxWidthLarge`, `boolean`, `number`, `string`) | Replace |
-| React element (`children`, `contentLeft`, `contentRight`, …) | Replace as a unit |
-| Array (`description: string[]`, etc.) | Replace as a unit |
-| Function (handlers, refs) | Replace |
+| Prop kind                                                                    | Behavior                                 |
+| ---------------------------------------------------------------------------- | ---------------------------------------- |
+| Plain config object (`titleProps`, `descriptionProps`, `style`, …)           | One-level merge — sibling keys preserved |
+| Primitive (`spacing`, `gap`, `maxWidthLarge`, `boolean`, `number`, `string`) | Replace                                  |
+| React element (`children`, `contentLeft`, `contentRight`, …)                 | Replace as a unit                        |
+| Array (`description: string[]`, etc.)                                        | Replace as a unit                        |
+| Function (handlers, refs)                                                    | Replace                                  |
 
 Concretely:
 
 ```tsx
 <Tile
   titleProps={{ size: "larger", align: "center" }}
-  breakpoints={[
-    { min: "medium", props: { titleProps: { size: "larger" } } },
-  ]}
+  breakpoints={[{ min: "medium", props: { titleProps: { size: "larger" } } }]}
 />
 // effective titleProps at medium+: { size: "larger", align: "center" }
 // `align` is preserved because titleProps is a plain object.

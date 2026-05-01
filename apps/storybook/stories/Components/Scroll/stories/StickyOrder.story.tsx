@@ -10,8 +10,14 @@ const StickyOrderStory = () => (
         name: "stacking",
         description: "order={0}, order={1}",
         demo: (
-          <Flex direction="column" gap="small">
-            <Typography size="small" color="light">
+          <Flex
+            direction="column"
+            gap="small"
+          >
+            <Typography
+              size="small"
+              color="light"
+            >
               Multiple sticky elements stack based on their order prop. Lower
               numbers appear above higher numbers.
             </Typography>
@@ -23,7 +29,10 @@ const StickyOrderStory = () => (
                   borderRadius: getToken("borderRadius", "small").var,
                 }}
               >
-                <Typography size="smaller" color="lighter">
+                <Typography
+                  size="smaller"
+                  color="lighter"
+                >
                   order=0
                 </Typography>
               </Flex>
@@ -34,7 +43,10 @@ const StickyOrderStory = () => (
                   borderRadius: getToken("borderRadius", "small").var,
                 }}
               >
-                <Typography size="smaller" color="lighter">
+                <Typography
+                  size="smaller"
+                  color="lighter"
+                >
                   order=1
                 </Typography>
               </Flex>

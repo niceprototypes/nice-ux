@@ -21,7 +21,11 @@ export const SlideContent = ({
       padding: getToken("gap", "large").var,
     }}
   >
-    <Typography as="h2" weight="bold" size="larger">
+    <Typography
+      as="h2"
+      weight="bold"
+      size="larger"
+    >
       {title}
     </Typography>
     <Typography color="light">
@@ -48,17 +52,28 @@ export const InteractiveSlider = () => {
   }
 
   return (
-    <Flex direction="column" gap="base" style={{ height: "300px" }}>
+    <Flex
+      direction="column"
+      gap="base"
+      style={{ height: "300px" }}
+    >
       <Slider
         currentIndex={currentIndex}
         isAnimating={isAnimating}
         onAnimationComplete={() => setIsAnimating(false)}
       >
         {slides.map((slide, index) => (
-          <SlideContent key={index} title={slide.title} color={slide.color} />
+          <SlideContent
+            key={index}
+            title={slide.title}
+            color={slide.color}
+          />
         ))}
       </Slider>
-      <Flex gap="small" justify="center">
+      <Flex
+        gap="small"
+        justify="center"
+      >
         {slides.map((_, index) => (
           <Flex
             key={index}

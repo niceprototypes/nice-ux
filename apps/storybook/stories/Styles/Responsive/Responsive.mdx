@@ -1,7 +1,38 @@
-import { Meta, Stories } from '@storybook/addon-docs/blocks'
-import * as ResponsiveStories from './Responsive.stories'
+import { Meta, Source } from "@storybook/addon-docs/blocks"
+import Flex from "nice-react-flex"
+import Typography from "../../../src/nice/Typography"
+import { DocsRow } from "../../../src/components/DocsRow"
 
-<Meta of={ResponsiveStories} />
+export const breakpoints = [
+  { name: "small", query: "@media (max-width: 640px)" },
+  { name: "medium", query: "@media (min-width: 641px)" },
+  { name: "large", query: "@media (min-width: 1280px)" },
+]
+
+export const labels = [
+  {
+    name: "small",
+    emoji: "📱",
+    text: "Small",
+    breakpoints: [{ max: "small", props: { color: undefined } }],
+  },
+  {
+    name: "medium",
+    emoji: "💻",
+    text: "Medium",
+    breakpoints: [
+      { min: "medium", max: "medium", props: { color: undefined } },
+    ],
+  },
+  {
+    name: "large",
+    emoji: "🖥️",
+    text: "Large",
+    breakpoints: [{ min: "large", props: { color: undefined } }],
+  },
+]
+
+<Meta title="Tokens/Responsive" />
 
 # Responsive
 
@@ -12,18 +43,72 @@ npm install nice-styles
 ### Setup
 
 ```js
-import { getBreakpoint } from "nice-styles"
+import { getBreakpoint } from "nice-react-styles"
 ```
 
 ### Usage
 
 ```js
-getBreakpoint("small").value   // → 640
-getBreakpoint("small").query   // → "@media (max-width: 640px)"
-getBreakpoint("medium").query  // → "@media (min-width: 641px)"
-getBreakpoint("large").query   // → "@media (min-width: 1280px)"
+getBreakpoint("small").value // → 640
+getBreakpoint("small").query // → "@media (max-width: 640px)"
+getBreakpoint("medium").query // → "@media (min-width: 641px)"
+getBreakpoint("large").query // → "@media (min-width: 1280px)"
 ```
 
 ---
 
-<Stories />
+## Breakpoint values
+
+<div>
+  {breakpoints.map(({ name, query }) => (
+    <DocsRow key={name}>
+      <Typography>{name}</Typography>
+      <Source
+        language="css"
+        code={query}
+      />
+    </DocsRow>
+  ))}
+</div>
+
+---
+
+## Live demo
+
+<Typography color="light">
+  Resize the browser window to see the breakpoints in action — the active
+  breakpoint is highlighted.
+</Typography>
+
+<Flex
+  direction={{ small: "column", medium: "row" }}
+  gap="small"
+>
+  {labels.map(({ name, emoji, text, breakpoints }) => (
+    <Typography
+      key={name}
+      color="lighter"
+      breakpoints={breakpoints}
+    >
+      {emoji} {text}
+    </Typography>
+  ))}
+</Flex>
+
+---
+
+## Usage in styled-components
+
+```typescript
+const Box = styled.div`
+  background: blue;
+
+  ${getBreakpoint("medium").query} {
+    background: orange;
+  }
+
+  ${getBreakpoint("large").query} {
+    background: green;
+  }
+`
+```

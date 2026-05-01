@@ -1,8 +1,8 @@
-import { Meta, Source } from '@storybook/addon-docs/blocks'
-import Flex from 'nice-react-flex'
-import { getToken } from 'nice-react-styles'
-import Typography from '../../../src/nice/Typography'
-import { DocsRow } from '../../../src/components/DocsRow'
+import { Meta, Source } from "@storybook/addon-docs/blocks"
+import Flex from "nice-react-flex"
+import { getToken } from "nice-react-styles"
+import Typography from "../../../src/nice/Typography"
+import { DocsRow } from "../../../src/components/DocsRow"
 
 <Meta title="Tokens/Styles/borderWidth" />
 
@@ -21,7 +21,10 @@ import { DocsRow } from '../../../src/components/DocsRow'
           borderRadius: getToken("borderRadius", "small").var,
         }}
       />
-      <Source language="tsx" code={`getToken("borderWidth", "${variant}").var`} />
+      <Source
+        language="tsx"
+        code={`getToken("borderWidth", "${variant}").var`}
+      />
     </DocsRow>
   ))}
 </div>

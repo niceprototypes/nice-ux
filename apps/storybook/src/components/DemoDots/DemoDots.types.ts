@@ -26,7 +26,12 @@ export type JustifyContent =
   | "space-around"
   | "space-evenly"
 
-export type AlignItems = "flex-start" | "flex-end" | "center" | "baseline" | "stretch"
+export type AlignItems =
+  | "flex-start"
+  | "flex-end"
+  | "center"
+  | "baseline"
+  | "stretch"
 
 export type Wrap = "nowrap" | "wrap" | "wrap-reverse"
 

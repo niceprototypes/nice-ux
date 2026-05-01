@@ -5,11 +5,29 @@ import type { IconGridProps } from "./IconGrid.types"
 
 const IconGrid = ({ icons }: IconGridProps) => {
   return (
-    <RowFlex gap="base" wrap="wrap" justifyContent="center">
+    <RowFlex
+      gap="base"
+      wrap="wrap"
+      justifyContent="center"
+    >
       {icons.map(({ name }) => (
-        <CellFlex key={name} gap="base" direction="column" alignItems="center">
-          <Icon name={name} size="larger" strokeWidth="large" />
-          <Typography code size="small">{name}</Typography>
+        <CellFlex
+          key={name}
+          gap="base"
+          direction="column"
+          alignItems="center"
+        >
+          <Icon
+            name={name}
+            size="larger"
+            strokeWidth="large"
+          />
+          <Typography
+            code
+            size="small"
+          >
+            {name}
+          </Typography>
         </CellFlex>
       ))}
     </RowFlex>

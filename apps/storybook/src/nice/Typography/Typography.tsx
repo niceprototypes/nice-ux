@@ -13,7 +13,14 @@ const Typography: React.FC<Props> = ({
   const finalClassName = unstyled
     ? ["sb-unstyled", className].filter(Boolean).join(" ")
     : className
-  return <NiceTypography color={color} size={size} {...props} className={finalClassName} />
+  return (
+    <NiceTypography
+      color={color}
+      size={size}
+      {...props}
+      className={finalClassName}
+    />
+  )
 }
 
 export default Typography

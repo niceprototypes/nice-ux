@@ -1,20 +1,38 @@
-import { Meta, Source } from '@storybook/addon-docs/blocks'
-import Button from 'nice-react-button'
-import Typography from '../../../src/nice/Typography'
-import { DocsRow } from '../../../src/components/DocsRow'
+import { Meta, Source } from "@storybook/addon-docs/blocks"
+import Button from "nice-react-button"
+import Typography from "../../../src/nice/Typography"
+import { DocsRow } from "../../../src/components/DocsRow"
 
 <Meta title="React/Components/Button/icon" />
 
 # Button — Icon
 
-<Typography color="light">Renders a <code>nice-react-icon</code> alongside the button label, or as the sole content when no children are provided.</Typography>
+<Typography color="light">
+  Renders a <code>nice-react-icon</code> alongside the button label, or as the
+  sole content when no children are provided.
+</Typography>
 
 <DocsRow>
-  <Button onClick={() => {}} icon="arrow">Next</Button>
-  <Source language="tsx" code={`<Button\n  onClick={handler}\n  icon="arrow-right"\n>\n  {children}\n</Button>`} />
+  <Button
+    onClick={() => {}}
+    icon="arrow"
+  >
+    Next
+  </Button>
+  <Source
+    language="tsx"
+    code={`<Button\n  onClick={handler}\n  icon="arrow-right"\n>\n  {children}\n</Button>`}
+  />
 </DocsRow>
 
 <DocsRow>
-  <Button onClick={() => {}} icon="plus" aria-label="Add item" />
-  <Source language="tsx" code={`<Button\n  onClick={handler}\n  icon="plus"\n  aria-label="Add item"\n/>`} />
+  <Button
+    onClick={() => {}}
+    icon="plus"
+    aria-label="Add item"
+  />
+  <Source
+    language="tsx"
+    code={`<Button\n  onClick={handler}\n  icon="plus"\n  aria-label="Add item"\n/>`}
+  />
 </DocsRow>

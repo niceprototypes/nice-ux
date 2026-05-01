@@ -35,16 +35,18 @@ const DemoDots = ({
           }),
         }}
       >
-        {dots.map(({ color, width: dotWidth, height: dotHeight, grow }, index) => (
-          <DemoDot
-            key={index}
-            backgroundColor={color}
-            borderRadius={`calc(${getToken("cellHeight", "smaller").var} / 2)`}
-            width={dotWidth}
-            height={dotHeight}
-            grow={grow}
-          />
-        ))}
+        {dots.map(
+          ({ color, width: dotWidth, height: dotHeight, grow }, index) => (
+            <DemoDot
+              key={index}
+              backgroundColor={color}
+              borderRadius={`calc(${getToken("cellHeight", "smaller").var} / 2)`}
+              width={dotWidth}
+              height={dotHeight}
+              grow={grow}
+            />
+          )
+        )}
       </Flex>
     </Flex>
   )

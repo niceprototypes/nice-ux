@@ -31,23 +31,23 @@
  *       to ensure the package.json has proper npm version references.
  */
 
-import { readFileSync, existsSync } from 'fs'
-import { execSync } from 'child_process'
-import { join } from 'path'
-import { homedir } from 'os'
+import { readFileSync, existsSync } from "fs"
+import { execSync } from "child_process"
+import { join } from "path"
+import { homedir } from "os"
 
 /** @type {string|undefined} Package name from CLI argument (without 'nice-' prefix) */
 const packageName = process.argv[2]
 
 if (!packageName) {
-  console.error('Error: Package name required')
-  console.error('Usage: node scripts/prepublish.js <package-name>')
-  console.error('Example: node scripts/prepublish.js react-icon')
+  console.error("Error: Package name required")
+  console.error("Usage: node scripts/prepublish.js <package-name>")
+  console.error("Example: node scripts/prepublish.js react-icon")
   process.exit(1)
 }
 
 /** @type {string} Absolute path to the target package directory */
-const packageDir = join(homedir(), 'nice', packageName)
+const packageDir = join(homedir(), "nice", packageName)
 
 // Validate package directory exists
 if (!existsSync(packageDir)) {
@@ -56,7 +56,7 @@ if (!existsSync(packageDir)) {
 }
 
 /** @type {string} Absolute path to the package's package.json */
-const packageJsonPath = join(packageDir, 'package.json')
+const packageJsonPath = join(packageDir, "package.json")
 
 // Validate package.json exists
 if (!existsSync(packageJsonPath)) {
@@ -75,9 +75,9 @@ console.log(`Checking nice-${packageName} for publish readiness...`)
 const hasGitChanges = () => {
   try {
     // Check for uncommitted changes (staged or unstaged)
-    const status = execSync('git status --porcelain', {
+    const status = execSync("git status --porcelain", {
       cwd: packageDir,
-      encoding: 'utf-8',
+      encoding: "utf-8",
     }).trim()
 
     if (status.length > 0) {
@@ -86,9 +86,9 @@ const hasGitChanges = () => {
 
     // Check for unpushed commits by comparing local HEAD to remote tracking branch
     try {
-      const unpushed = execSync('git log @{u}..HEAD --oneline', {
+      const unpushed = execSync("git log @{u}..HEAD --oneline", {
         cwd: packageDir,
-        encoding: 'utf-8',
+        encoding: "utf-8",
       }).trim()
 
       return unpushed.length > 0
@@ -96,11 +96,14 @@ const hasGitChanges = () => {
       // No upstream branch configured - check if there are any local commits
       // that haven't been pushed by comparing to origin/main or origin/master
       try {
-        const unpushedMain = execSync('git log origin/main..HEAD --oneline 2>/dev/null || git log origin/master..HEAD --oneline 2>/dev/null', {
-          cwd: packageDir,
-          encoding: 'utf-8',
-          shell: true,
-        }).trim()
+        const unpushedMain = execSync(
+          "git log origin/main..HEAD --oneline 2>/dev/null || git log origin/master..HEAD --oneline 2>/dev/null",
+          {
+            cwd: packageDir,
+            encoding: "utf-8",
+            shell: true,
+          }
+        ).trim()
 
         return unpushedMain.length > 0
       } catch {
@@ -117,14 +120,14 @@ const hasGitChanges = () => {
 // Skip validation if no git changes exist
 if (!hasGitChanges()) {
   console.log(`\nNo git changes detected in nice-${packageName}.`)
-  console.log('Skipping publish validation - nothing to publish.')
+  console.log("Skipping publish validation - nothing to publish.")
   process.exit(0)
 }
 
-console.log('Git changes detected, proceeding with validation...\n')
+console.log("Git changes detected, proceeding with validation...\n")
 
 /** @type {Object} Parsed package.json contents */
-const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf-8'))
+const packageJson = JSON.parse(readFileSync(packageJsonPath, "utf-8"))
 
 /**
  * Scans a dependency object for `file:` protocol references.
@@ -143,7 +146,7 @@ const checkForFileRefs = (deps, depType) => {
   if (!deps) return []
   const fileRefs = []
   for (const [name, version] of Object.entries(deps)) {
-    if (typeof version === 'string' && version.startsWith('file:')) {
+    if (typeof version === "string" && version.startsWith("file:")) {
       fileRefs.push({ name, version, depType })
     }
   }
@@ -155,39 +158,41 @@ const checkForFileRefs = (deps, depType) => {
  * Aggregated list of all file: references found across all dependency types
  */
 const fileRefs = [
-  ...checkForFileRefs(packageJson.dependencies, 'dependencies'),
-  ...checkForFileRefs(packageJson.devDependencies, 'devDependencies'),
-  ...checkForFileRefs(packageJson.peerDependencies, 'peerDependencies'),
+  ...checkForFileRefs(packageJson.dependencies, "dependencies"),
+  ...checkForFileRefs(packageJson.devDependencies, "devDependencies"),
+  ...checkForFileRefs(packageJson.peerDependencies, "peerDependencies"),
 ]
 
 // Fail if any file: references are found - these break published packages
 if (fileRefs.length > 0) {
-  console.error('\nError: Found file: references in package.json')
-  console.error('These must be changed to proper npm versions before publishing:\n')
+  console.error("\nError: Found file: references in package.json")
+  console.error(
+    "These must be changed to proper npm versions before publishing:\n"
+  )
   for (const ref of fileRefs) {
     console.error(`  ${ref.depType}: "${ref.name}": "${ref.version}"`)
   }
-  console.error('\nPublishing with file: references will break for consumers.')
+  console.error("\nPublishing with file: references will break for consumers.")
   process.exit(1)
 }
 
-console.log('No file: references found.')
+console.log("No file: references found.")
 
 // Run npm install to verify dependencies resolve from npm registry
 console.log(`\nRunning npm install in ${packageDir}...`)
 try {
-  execSync('npm install', { cwd: packageDir, stdio: 'inherit' })
+  execSync("npm install", { cwd: packageDir, stdio: "inherit" })
 } catch (error) {
-  console.error('Error: npm install failed')
+  console.error("Error: npm install failed")
   process.exit(1)
 }
 
 // Run build to verify the package compiles successfully
 console.log(`\nRunning npm run build in ${packageDir}...`)
 try {
-  execSync('npm run build', { cwd: packageDir, stdio: 'inherit' })
+  execSync("npm run build", { cwd: packageDir, stdio: "inherit" })
 } catch (error) {
-  console.error('Error: npm run build failed')
+  console.error("Error: npm run build failed")
   process.exit(1)
 }
 

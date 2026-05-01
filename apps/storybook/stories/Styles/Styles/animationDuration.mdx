@@ -1,8 +1,8 @@
-import { Meta, Source } from '@storybook/addon-docs/blocks'
-import Flex from 'nice-react-flex'
-import { getToken } from 'nice-react-styles'
-import Typography from '../../../src/nice/Typography'
-import { DocsRow } from '../../../src/components/DocsRow'
+import { Meta, Source } from "@storybook/addon-docs/blocks"
+import Flex from "nice-react-flex"
+import { getToken } from "nice-react-styles"
+import Typography from "../../../src/nice/Typography"
+import { DocsRow } from "../../../src/components/DocsRow"
 
 <Meta title="Tokens/Styles/animationDuration" />
 
@@ -13,7 +13,10 @@ import { DocsRow } from '../../../src/components/DocsRow'
 <div>
   {[
     { name: "base", backgroundColor: getToken("foregroundColor", "error").var },
-    { name: "slow", backgroundColor: getToken("foregroundColor", "warning").var },
+    {
+      name: "slow",
+      backgroundColor: getToken("foregroundColor", "warning").var,
+    },
   ].map(({ name, backgroundColor }) => {
     const animationName = name === "base" ? "slide" : "slideSlow"
     return (
@@ -32,11 +35,15 @@ import { DocsRow } from '../../../src/components/DocsRow'
               height: getToken("cellHeight", "smaller").var,
               borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2)`,
               animation: `${animationName} calc(${getToken("animationDuration", name).var} * 6) ${getToken("animationEasing").var} infinite`,
-              animationDelay: name === "base" ? getToken("animationDuration", name).var : 0,
+              animationDelay:
+                name === "base" ? getToken("animationDuration", name).var : 0,
             }}
           />
         </Flex>
-        <Source language="tsx" code={`getToken("animationDuration", "${name}").var`} />
+        <Source
+          language="tsx"
+          code={`getToken("animationDuration", "${name}").var`}
+        />
       </DocsRow>
     )
   })}

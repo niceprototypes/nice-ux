@@ -38,7 +38,8 @@ const meta = {
       },
     },
     onAnimationComplete: {
-      description: "Callback fired when slide transition animation completes (after 300ms)",
+      description:
+        "Callback fired when slide transition animation completes (after 300ms)",
       table: {
         type: { summary: "() => void" },
       },

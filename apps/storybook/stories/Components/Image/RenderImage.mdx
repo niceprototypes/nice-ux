@@ -1,10 +1,13 @@
-import { Meta, Source } from '@storybook/addon-docs/blocks'
-import Image from 'nice-react-image'
-import Typography from '../../../src/nice/Typography'
-import { DocsRow } from '../../../src/components/DocsRow'
-import { getPicsum, toSource } from '../../../src/services'
+import { Meta, Source } from "@storybook/addon-docs/blocks"
+import Image from "nice-react-image"
+import Typography from "../../../src/nice/Typography"
+import { DocsRow } from "../../../src/components/DocsRow"
+import { getPicsum, toSource } from "../../../src/services"
 
-export const imageProps = { src: getPicsum(800, 600), alt: "Custom picture element" }
+export const imageProps = {
+  src: getPicsum(800, 600),
+  alt: "Custom picture element",
+}
 
 export const renderImageExpr = `(src, alt) => (
   <picture>
@@ -17,17 +20,38 @@ export const renderImageExpr = `(src, alt) => (
 
 # Image — RenderImage
 
-<Typography color="light">Escape hatch: replace the default <code>&lt;img&gt;</code> / <code>&lt;div&gt;</code> rendering with a custom element. Useful for delegating to a framework-specific image component (e.g. <code>next/image</code>, a CDN loader, or a responsive <code>&lt;picture&gt;</code> element). Width, height, backgroundSize, borderRadius, and other style props are ignored when <code>renderImage</code> is provided.</Typography>
+<Typography color="light">
+  Escape hatch: replace the default <code>&lt;img&gt;</code> /{" "}
+  <code>&lt;div&gt;</code> rendering with a custom element. Useful for
+  delegating to a framework-specific image component (e.g.{" "}
+  <code>next/image</code>, a CDN loader, or a responsive{" "}
+  <code>&lt;picture&gt;</code> element). Width, height, backgroundSize,
+  borderRadius, and other style props are ignored when <code>renderImage</code>{" "}
+  is provided.
+</Typography>
 
 <DocsRow>
   <Image
     {...imageProps}
     renderImage={(src, alt) => (
       <picture>
-        <source srcSet={src} type="image/jpeg" />
-        <img src={src} alt={alt} width={240} style={{ border: "2px dashed currentColor", padding: 4 }} />
+        <source
+          srcSet={src}
+          type="image/jpeg"
+        />
+        <img
+          src={src}
+          alt={alt}
+          width={240}
+          style={{ border: "2px dashed currentColor", padding: 4 }}
+        />
       </picture>
     )}
   />
-  <Source language="tsx" code={toSource("Image", imageProps, { raw: { renderImage: renderImageExpr } })} />
+  <Source
+    language="tsx"
+    code={toSource("Image", imageProps, {
+      raw: { renderImage: renderImageExpr },
+    })}
+  />
 </DocsRow>

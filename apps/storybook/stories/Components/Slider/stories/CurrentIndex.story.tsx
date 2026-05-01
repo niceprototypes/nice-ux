@@ -10,7 +10,10 @@ const CurrentIndexStory = () => (
         name: "currentIndex",
         description: "currentIndex={0}",
         demo: (
-          <Typography size="small" color="light">
+          <Typography
+            size="small"
+            color="light"
+          >
             Controls which slide is currently visible. Zero-indexed.
           </Typography>
         ),
@@ -20,8 +23,14 @@ const CurrentIndexStory = () => (
         name: "navigation",
         description: "Navigation example",
         demo: (
-          <Flex direction="column" gap="small">
-            <Typography size="small" color="light">
+          <Flex
+            direction="column"
+            gap="small"
+          >
+            <Typography
+              size="small"
+              color="light"
+            >
               Increment the index to navigate to the next slide:
             </Typography>
             <Flex gap="small">

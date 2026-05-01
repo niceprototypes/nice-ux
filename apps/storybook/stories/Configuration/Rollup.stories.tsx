@@ -9,7 +9,7 @@ const RollupDemo = () => <></>
 const meta = {
   title: "Configuration/Rollup",
   component: RollupDemo,
-  tags: ['!dev'],
+  tags: ["!dev"],
   parameters: {
     layout: "padded",
   },
@@ -25,16 +25,19 @@ const storyParameters = {
   },
 }
 
-
 export const CreateConfiguration: Story = {
   name: "createConfiguration",
   parameters: storyParameters,
   render: () => (
-    <Flex direction="column" gap="large">
+    <Flex
+      direction="column"
+      gap="large"
+    >
       <Typography as="h3">createConfiguration</Typography>
       <Typography color="light">
-        Creates a complete rollup configuration with sensible defaults for nice-* packages.
-        Outputs both CJS and ESM formats with sourcemaps. All plugins are included by default.
+        Creates a complete rollup configuration with sensible defaults for
+        nice-* packages. Outputs both CJS and ESM formats with sourcemaps. All
+        plugins are included by default.
       </Typography>
       <CodeBlock language="typescript">{`// rollup.config.js
 import { createConfiguration } from "nice-configuration/rollup"
@@ -76,11 +79,15 @@ export const IsNiceExternal: Story = {
   name: "isNiceExternal",
   parameters: storyParameters,
   render: () => (
-    <Flex direction="column" gap="large">
+    <Flex
+      direction="column"
+      gap="large"
+    >
       <Typography as="h3">isNiceExternal</Typography>
       <Typography color="light">
-        Pattern-based external detection that automatically externalizes all nice-* packages,
-        React ecosystem, and styled-components. Handles subpath imports like CSS files.
+        Pattern-based external detection that automatically externalizes all
+        nice-* packages, React ecosystem, and styled-components. Handles subpath
+        imports like CSS files.
       </Typography>
       <CodeBlock language="typescript">{`import { isNiceExternal } from "nice-configuration/rollup"
 
@@ -114,11 +121,15 @@ export const WatchMode: Story = {
   name: "watchMode",
   parameters: storyParameters,
   render: () => (
-    <Flex direction="column" gap="large">
+    <Flex
+      direction="column"
+      gap="large"
+    >
       <Typography as="h3">Watch Mode Configuration</Typography>
       <Typography color="light">
-        The configuration includes optimized watch settings that prevent file caching issues
-        during local development. This ensures changes appear immediately without delay.
+        The configuration includes optimized watch settings that prevent file
+        caching issues during local development. This ensures changes appear
+        immediately without delay.
       </Typography>
       <CodeBlock language="typescript">{`// Included automatically in createConfiguration()
 {
@@ -138,10 +149,11 @@ export const WatchMode: Story = {
 }`}</CodeBlock>
       <Typography as="h4">Why These Settings?</Typography>
       <Typography color="light">
-        Without these settings, rollup's watch mode can exhibit an "off by one" caching bug
-        where file changes appear one save behind. The awaitWriteFinish option ensures files
-        are fully written to disk before rollup reads them, and usePolling provides more
-        reliable file change detection on macOS.
+        Without these settings, rollup's watch mode can exhibit an "off by one"
+        caching bug where file changes appear one save behind. The
+        awaitWriteFinish option ensures files are fully written to disk before
+        rollup reads them, and usePolling provides more reliable file change
+        detection on macOS.
       </Typography>
     </Flex>
   ),
@@ -151,10 +163,14 @@ export const CreateExternals: Story = {
   name: "createExternals",
   parameters: storyParameters,
   render: () => (
-    <Flex direction="column" gap="large">
+    <Flex
+      direction="column"
+      gap="large"
+    >
       <Typography as="h3">createExternals</Typography>
       <Typography color="light">
-        Creates an external function with additional packages or bundle overrides.
+        Creates an external function with additional packages or bundle
+        overrides.
       </Typography>
       <CodeBlock language="typescript">{`import { createExternals } from "nice-configuration/rollup"
 
@@ -181,7 +197,8 @@ export default {
   external
 }`}</CodeBlock>
       <Typography color="light">
-        Note: Legacy array format is still supported for backwards compatibility.
+        Note: Legacy array format is still supported for backwards
+        compatibility.
       </Typography>
     </Flex>
   ),

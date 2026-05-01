@@ -11,7 +11,10 @@ const DemoDot = ({
   grow,
   style,
 }: DemoDotProps) => (
-  <Flex grow={grow} spacing={spacing}>
+  <Flex
+    grow={grow}
+    spacing={spacing}
+  >
     <Flex
       grow={1}
       style={{

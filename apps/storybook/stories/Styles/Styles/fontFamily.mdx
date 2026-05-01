@@ -1,12 +1,14 @@
-import { Meta, Source } from '@storybook/addon-docs/blocks'
-import Typography from '../../../src/nice/Typography'
-import { DocsRow } from '../../../src/components/DocsRow'
+import { Meta, Source } from "@storybook/addon-docs/blocks"
+import Typography from "../../../src/nice/Typography"
+import { DocsRow } from "../../../src/components/DocsRow"
 
 <Meta title="Tokens/Styles/fontFamily" />
 
 # fontFamily
 
-<Typography>Typeface tokens for headings, body text, and monospace code.</Typography>
+<Typography>
+  Typeface tokens for headings, body text, and monospace code.
+</Typography>
 
 <div>
   {[
@@ -15,8 +17,16 @@ import { DocsRow } from '../../../src/components/DocsRow'
     { name: "code", code: true, text: "Code" },
   ].map(({ name, weight, code, text }) => (
     <DocsRow key={name}>
-      <Typography weight={weight} code={code}>{text}</Typography>
-      <Source language="tsx" code={`getToken("fontFamily", "${name}").var`} />
+      <Typography
+        weight={weight}
+        code={code}
+      >
+        {text}
+      </Typography>
+      <Source
+        language="tsx"
+        code={`getToken("fontFamily", "${name}").var`}
+      />
     </DocsRow>
   ))}
 </div>

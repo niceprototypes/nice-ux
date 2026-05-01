@@ -7,7 +7,7 @@ const IconsDemo = () => <></>
 const meta = {
   title: "Tokens/Icons",
   component: IconsDemo,
-  tags: ['!dev'],
+  tags: ["!dev"],
   parameters: {
     layout: "padded",
   },

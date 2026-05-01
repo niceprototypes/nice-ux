@@ -31,19 +31,28 @@ export const toSource = (
     return hasChildren ? `<${tag}>\n  ${children}\n</${tag}>` : `<${tag} />`
   }
 
-  const isMultiLine = propStrs.length > 2 || propStrs.some(s => s.includes("\n"))
+  const isMultiLine =
+    propStrs.length > 2 || propStrs.some(s => s.includes("\n"))
 
   if (!isMultiLine && !hasChildren) {
     return `<${tag} ${propStrs.join(" ")} />`
   }
 
   const indentedProps = propStrs
-    .map(s => s.split("\n").map((l, i) => (i === 0 ? `  ${l}` : `  ${l}`)).join("\n"))
+    .map(s =>
+      s
+        .split("\n")
+        .map((l, i) => (i === 0 ? `  ${l}` : `  ${l}`))
+        .join("\n")
+    )
     .join("\n")
 
   const openProps = `<${tag}\n${indentedProps}`
   if (hasChildren) {
-    const indented = children.split("\n").map(l => `  ${l}`).join("\n")
+    const indented = children
+      .split("\n")
+      .map(l => `  ${l}`)
+      .join("\n")
     return `${openProps}\n>\n${indented}\n</${tag}>`
   }
   return `${openProps}\n/>`

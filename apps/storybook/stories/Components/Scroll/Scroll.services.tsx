@@ -6,13 +6,22 @@ import { getToken } from "nice-react-styles"
 export const ScrollPositionDisplay = () => {
   const scrollY = useScroll()
   return (
-    <Typography size="small" color="light">
+    <Typography
+      size="small"
+      color="light"
+    >
       Scroll position: {Math.round(scrollY)}px
     </Typography>
   )
 }
 
-export const SectionContent = ({ title, color }: { title: string; color: string }) => (
+export const SectionContent = ({
+  title,
+  color,
+}: {
+  title: string
+  color: string
+}) => (
   <Flex
     direction="column"
     gap="base"
@@ -22,7 +31,11 @@ export const SectionContent = ({ title, color }: { title: string; color: string 
       backgroundColor: color,
     }}
   >
-    <Typography as="h2" weight="bold" size="larger">
+    <Typography
+      as="h2"
+      weight="bold"
+      size="larger"
+    >
       {title}
     </Typography>
     <Typography color="light">

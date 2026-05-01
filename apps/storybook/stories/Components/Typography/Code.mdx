@@ -1,20 +1,32 @@
-import { Meta, Source } from '@storybook/addon-docs/blocks'
-import Typography from '../../../src/nice/Typography'
-import { DocsRow } from '../../../src/components/DocsRow'
-import { toSource } from '../../../src/services'
+import { Meta, Source } from "@storybook/addon-docs/blocks"
+import Typography from "../../../src/nice/Typography"
+import { DocsRow } from "../../../src/components/DocsRow"
+import { toSource } from "../../../src/services"
 
 <Meta title="React/Components/Typography/code" />
 
 # Typography — Code
 
-<Typography color="light">Switches the font family to the monospace code font. Maps to the CSS <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-family"><code>font-family</code></a> property.</Typography>
+<Typography color="light">
+  Switches the font family to the monospace code font. Maps to the CSS{" "}
+  <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-family">
+    <code>font-family</code>
+  </a>{" "}
+  property.
+</Typography>
 
 <DocsRow>
   <Typography>Hello world</Typography>
-  <Source language="tsx" code={toSource("Typography", {}, { children: "Hello world" })} />
+  <Source
+    language="tsx"
+    code={toSource("Typography", {}, { children: "Hello world" })}
+  />
 </DocsRow>
 
 <DocsRow>
   <Typography code>hello_world</Typography>
-  <Source language="tsx" code={toSource("Typography", { code: true }, { children: "hello_world" })} />
+  <Source
+    language="tsx"
+    code={toSource("Typography", { code: true }, { children: "hello_world" })}
+  />
 </DocsRow>

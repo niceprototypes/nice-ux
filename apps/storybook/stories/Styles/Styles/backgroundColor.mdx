@@ -1,14 +1,16 @@
-import { Meta, Source } from '@storybook/addon-docs/blocks'
-import Flex from 'nice-react-flex'
-import { getToken } from 'nice-react-styles'
-import Typography from '../../../src/nice/Typography'
-import { DocsRow } from '../../../src/components/DocsRow'
+import { Meta, Source } from "@storybook/addon-docs/blocks"
+import Flex from "nice-react-flex"
+import { getToken } from "nice-react-styles"
+import Typography from "../../../src/nice/Typography"
+import { DocsRow } from "../../../src/components/DocsRow"
 
 <Meta title="Tokens/Styles/backgroundColor" />
 
 # backgroundColor
 
-<Typography>Surface color tokens for page and container backgrounds.</Typography>
+<Typography>
+  Surface color tokens for page and container backgrounds.
+</Typography>
 
 <div>
   {["base", "dark"].map(variant => (
@@ -22,7 +24,10 @@ import { DocsRow } from '../../../src/components/DocsRow'
           borderRadius: getToken("borderRadius", "small").var,
         }}
       />
-      <Source language="tsx" code={`getToken("backgroundColor", "${variant}").var`} />
+      <Source
+        language="tsx"
+        code={`getToken("backgroundColor", "${variant}").var`}
+      />
     </DocsRow>
   ))}
 </div>

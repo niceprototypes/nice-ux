@@ -1,14 +1,20 @@
-import { Meta, Source } from '@storybook/addon-docs/blocks'
-import Image from 'nice-react-image'
-import Typography from '../../../src/nice/Typography'
-import { DocsRow } from '../../../src/components/DocsRow'
-import { getPicsum, toSource } from '../../../src/services'
+import { Meta, Source } from "@storybook/addon-docs/blocks"
+import Image from "nice-react-image"
+import Typography from "../../../src/nice/Typography"
+import { DocsRow } from "../../../src/components/DocsRow"
+import { getPicsum, toSource } from "../../../src/services"
 
 <Meta title="React/Components/Image/backgroundSize" />
 
 # Image — BackgroundSize
 
-<Typography color="light">Controls how the image fits within its container. Maps to the CSS <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-size"><code>background-size</code></a> property.</Typography>
+<Typography color="light">
+  Controls how the image fits within its container. Maps to the CSS{" "}
+  <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-size">
+    <code>background-size</code>
+  </a>{" "}
+  property.
+</Typography>
 
 <div>
   {["contain", "cover", "fill", "none", "scale-down"].map(size => {
@@ -22,7 +28,10 @@ import { getPicsum, toSource } from '../../../src/services'
     return (
       <DocsRow key={size}>
         <Image {...props} />
-        <Source language="tsx" code={toSource("Image", props)} />
+        <Source
+          language="tsx"
+          code={toSource("Image", props)}
+        />
       </DocsRow>
     )
   })}

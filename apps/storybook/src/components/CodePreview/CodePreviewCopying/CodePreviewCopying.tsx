@@ -1,5 +1,9 @@
 import React from "react"
-import { colors, CopyingFlex, StyledTypography } from "./CodePreviewCopying.styles"
+import {
+  colors,
+  CopyingFlex,
+  StyledTypography,
+} from "./CodePreviewCopying.styles"
 
 /**
  * CodePreviewCopying Component
@@ -9,7 +13,11 @@ import { colors, CopyingFlex, StyledTypography } from "./CodePreviewCopying.styl
 const CodePreviewCopying: React.FC = () => {
   return (
     <CopyingFlex spacing="base">
-      <StyledTypography code size="smaller" color="lighter">
+      <StyledTypography
+        code
+        size="smaller"
+        color="lighter"
+      >
         <span style={{ color: colors.copying }}>✓ Copied to clipboard</span>
       </StyledTypography>
     </CopyingFlex>

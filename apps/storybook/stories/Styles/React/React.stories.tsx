@@ -3,13 +3,12 @@ import Flex from "nice-react-flex"
 import Typography from "../../../src/nice/Typography"
 import CodeBlock from "../../../src/components/CodeBlock"
 
-
 const ReactDemo = () => <></>
 
 const meta = {
   title: "React/Styles/StylesProvider",
   component: ReactDemo,
-  tags: ['!dev'],
+  tags: ["!dev"],
   parameters: {
     layout: "padded",
   },
@@ -29,7 +28,10 @@ export const Basic: Story = {
   name: "Basic",
   parameters: storyParameters,
   render: () => (
-    <Flex direction="column" gap="large">
+    <Flex
+      direction="column"
+      gap="large"
+    >
       <Typography color="light">
         Wrap your application with StylesProvider to inject nice-styles CSS
         variables and enable styled-components theming.

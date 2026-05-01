@@ -14,15 +14,28 @@ export const CodeRow = ({
     isMobile !== undefined ? (isMobile ? "true" : "false") : undefined
 
   return (
-    <Flex alignItems="center" gap="base">
+    <Flex
+      alignItems="center"
+      gap="base"
+    >
       <LabelWrapper>
-        <Typography code as="span">
+        <Typography
+          code
+          as="span"
+        >
           {label}
         </Typography>
       </LabelWrapper>
-      <Flex alignItems="center" gap="smaller">
+      <Flex
+        alignItems="center"
+        gap="smaller"
+      >
         {showIcon && (isMobile ? "📱" : "💻")}
-        <Typography code as="span" weight="bold">
+        <Typography
+          code
+          as="span"
+          weight="bold"
+        >
           {description ?? defaultDescription}
         </Typography>
       </Flex>

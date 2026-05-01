@@ -13,7 +13,11 @@ const SubsectionHeader: React.FC<SubsectionHeaderProps> = ({ children }) => {
         paddingTop: "8px",
       }}
     >
-      <Typography as="h4" size="0.875rem" weight="500">
+      <Typography
+        as="h4"
+        size="0.875rem"
+        weight="500"
+      >
         {children}
       </Typography>
     </div>

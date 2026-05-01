@@ -8,7 +8,10 @@ const StickySectionBasicStory = () => (
         name: "basic",
         description: '<StickySection id="...">',
         demo: (
-          <Typography size="small" color="light">
+          <Typography
+            size="small"
+            color="light"
+          >
             Wraps content with a semantic section element and ID for use with
             StickySectionLinks navigation.
           </Typography>
@@ -19,7 +22,10 @@ const StickySectionBasicStory = () => (
         name: "as",
         description: 'as="div"',
         demo: (
-          <Typography size="small" color="light">
+          <Typography
+            size="small"
+            color="light"
+          >
             Render as a different HTML element type (default: section)
           </Typography>
         ),
@@ -29,7 +35,10 @@ const StickySectionBasicStory = () => (
         name: "render",
         description: "render={...}",
         demo: (
-          <Typography size="small" color="light">
+          <Typography
+            size="small"
+            color="light"
+          >
             Custom render function for full control over the wrapper element
           </Typography>
         ),

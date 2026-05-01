@@ -1,13 +1,13 @@
-import { Meta, Source } from '@storybook/addon-docs/blocks'
-import Button from 'nice-react-button'
-import Typography from '../../../src/nice/Typography'
-import { DocsRow } from '../../../src/components/DocsRow'
+import { Meta, Source } from "@storybook/addon-docs/blocks"
+import Button from "nice-react-button"
+import Typography from "../../../src/nice/Typography"
+import { DocsRow } from "../../../src/components/DocsRow"
 
 export const radii = ["small", "base", "large"]
 
-export const radiusLabel = (r) => r.charAt(0).toUpperCase() + r.slice(1)
+export const radiusLabel = r => r.charAt(0).toUpperCase() + r.slice(1)
 
-export const radiusCode = (r) =>
+export const radiusCode = r =>
   r === "base"
     ? `<Button onClick={handler}>\n  {children}\n</Button>`
     : `<Button\n  onClick={handler}\n  borderRadius="${r}"\n>\n  {children}\n</Button>`
@@ -16,13 +16,27 @@ export const radiusCode = (r) =>
 
 # Button — BorderRadius
 
-<Typography color="light">Controls the corner rounding of the button. Maps to the CSS <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius"><code>border-radius</code></a> property.</Typography>
+<Typography color="light">
+  Controls the corner rounding of the button. Maps to the CSS{" "}
+  <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius">
+    <code>border-radius</code>
+  </a>{" "}
+  property.
+</Typography>
 
 <div>
   {radii.map(radius => (
     <DocsRow key={radius}>
-      <Button onClick={() => {}} borderRadius={radius}>{radiusLabel(radius)}</Button>
-      <Source language="tsx" code={radiusCode(radius)} />
+      <Button
+        onClick={() => {}}
+        borderRadius={radius}
+      >
+        {radiusLabel(radius)}
+      </Button>
+      <Source
+        language="tsx"
+        code={radiusCode(radius)}
+      />
     </DocsRow>
   ))}
 </div>

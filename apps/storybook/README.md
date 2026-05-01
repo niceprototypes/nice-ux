@@ -31,6 +31,7 @@ The static build will be created in `storybook-static/` directory.
 This Storybook documents the following packages:
 
 ### React Components
+
 - **nice-react-flex** - Responsive flexbox container
 - **nice-react-typography** - Semantic typography component
 - **nice-react-tile** - Full-width container with backgrounds
@@ -38,11 +39,13 @@ This Storybook documents the following packages:
 - **nice-react-icon** - Icon library with 30+ SVG icons
 
 ### React Bindings
+
 - **nice-react-device-detector** - Mobile device detection
 
 ### Utilities
+
 - **nice-css-variables** - CSS design tokens
-- **nice-toolkit** - Workspace CLI for linking, scaffolding, dev/watch, and orchestrated publishing of nice-* packages
+- **nice-toolkit** - Workspace CLI for linking, scaffolding, dev/watch, and orchestrated publishing of nice-\* packages
 
 ## 📖 Documentation Structure
 
@@ -117,7 +120,7 @@ export const Default: Story = {
 Create `.mdx` files for standalone documentation:
 
 ```mdx
-import { Meta } from '@storybook/blocks'
+import { Meta } from "@storybook/blocks"
 
 <Meta title="Documentation/YourTopic" />
 
@@ -209,10 +212,10 @@ npm run dev
 
 #### HMR Behavior by Package
 
-| Category | HMR Behavior | Packages |
-|----------|--------------|----------|
+| Category           | HMR Behavior               | Packages                                                                                                 |
+| ------------------ | -------------------------- | -------------------------------------------------------------------------------------------------------- |
 | **Source-aliased** | True HMR — state preserved | nice-react-flex, nice-react-typography, nice-react-styles, nice-react-device-detector, nice-react-button |
-| **Dist-watched** | Full reload — automatic | nice-react-icon (uses SVGR transforms) |
+| **Dist-watched**   | Full reload — automatic    | nice-react-icon (uses SVGR transforms)                                                                   |
 
 #### Editing Source-Aliased Packages
 
@@ -245,6 +248,7 @@ npm run dev
 1. Clone the package to `~/Code/`
 
 2. Add to `linkedPackages` in `.storybook/main.ts`:
+
    ```typescript
    const linkedPackages = {
      // ...existing packages
@@ -253,6 +257,7 @@ npm run dev
    ```
 
 3. If the package doesn't use special build transforms (SVGR, PostCSS), add to `sourceAliasablePackages`:
+
    ```typescript
    const sourceAliasablePackages = [
      // ...existing packages
@@ -261,6 +266,7 @@ npm run dev
    ```
 
 4. Re-run linking:
+
    ```bash
    npx nice-toolkit
    ```
@@ -270,15 +276,18 @@ npm run dev
 #### Troubleshooting Local Development
 
 **"Invalid hook call" error**: Multiple React instances running.
+
 ```bash
 npx nice-toolkit
 ```
 
 **Changes not appearing**:
+
 - Source-aliased packages: Check the terminal for Vite errors
 - Dist-watched packages: Ensure `npm run dev` is running in the package directory
 
 **After npm install in a linked package**: The linking is broken.
+
 ```bash
 npx nice-toolkit --unlink
 npm install
@@ -286,6 +295,7 @@ npx nice-toolkit
 ```
 
 **Storybook won't start**: Clear caches and restart.
+
 ```bash
 rm -rf node_modules/.cache node_modules/.vite
 npm run dev
@@ -310,6 +320,7 @@ npm run dev
 ## 🎯 Viewing Specific Stories
 
 ### Components
+
 - Flex: http://localhost:6006/?path=/docs/components-flex--docs
 - Typography: http://localhost:6006/?path=/docs/components-typography--docs
 - Tile: http://localhost:6006/?path=/docs/components-tile--docs
@@ -317,9 +328,11 @@ npm run dev
 - Icon: http://localhost:6006/?path=/docs/components-icon--docs
 
 ### Bindings
+
 - useDeviceDetector: http://localhost:6006/?path=/docs/hooks-usedevicedetector--docs
 
 ### Documentation
+
 - CSS Variables: http://localhost:6006/?path=/docs/documentation-css-variables--docs
 - toolkit: http://localhost:6006/?path=/docs/documentation-nice-toolkit--docs
 

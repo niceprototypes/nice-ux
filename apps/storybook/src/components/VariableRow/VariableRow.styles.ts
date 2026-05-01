@@ -7,7 +7,6 @@ interface StyledFlexProps {
   $width?: string
 }
 
-
 export const CellFlex = styled(Flex)<StyledFlexProps>`
   @media (min-width: ${BREAKPOINT_MD_MIN}) {
     width: ${props => props.$width};

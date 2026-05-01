@@ -9,7 +9,7 @@ const JestDemo = () => <></>
 const meta = {
   title: "Configuration/Jest",
   component: JestDemo,
-  tags: ['!dev'],
+  tags: ["!dev"],
   parameters: {
     layout: "padded",
   },
@@ -25,16 +25,18 @@ const storyParameters = {
   },
 }
 
-
 export const ReactConfig: Story = {
   name: "react",
   parameters: storyParameters,
   render: () => (
-    <Flex direction="column" gap="large">
+    <Flex
+      direction="column"
+      gap="large"
+    >
       <Typography as="h3">React Jest Configuration</Typography>
       <Typography color="light">
-        Complete Jest configuration for React components with TypeScript support.
-        Uses ts-jest for native TypeScript compilation.
+        Complete Jest configuration for React components with TypeScript
+        support. Uses ts-jest for native TypeScript compilation.
       </Typography>
       <CodeBlock language="typescript">{`// jest.config.js
 export { default } from "nice-configuration/jest/react"`}</CodeBlock>
@@ -70,17 +72,20 @@ export const CssMock: Story = {
   name: "css-mock",
   parameters: storyParameters,
   render: () => (
-    <Flex direction="column" gap="large">
+    <Flex
+      direction="column"
+      gap="large"
+    >
       <Typography as="h3">CSS Mock</Typography>
       <Typography color="light">
-        Empty module export for mocking CSS imports in Jest tests.
-        Referenced by the React config's moduleNameMapper.
+        Empty module export for mocking CSS imports in Jest tests. Referenced by
+        the React config's moduleNameMapper.
       </Typography>
       <CodeBlock language="typescript">{`// __mocks__/styleMock.js
 module.exports = {}`}</CodeBlock>
       <Typography color="light">
-        This mock is automatically configured in the React Jest config.
-        Create the file at __mocks__/styleMock.js in your project root.
+        This mock is automatically configured in the React Jest config. Create
+        the file at __mocks__/styleMock.js in your project root.
       </Typography>
       <Typography as="h4">Alternative: Direct Import</Typography>
       <Typography color="light">

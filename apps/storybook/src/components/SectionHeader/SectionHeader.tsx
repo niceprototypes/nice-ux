@@ -11,7 +11,11 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({ children }) => {
         paddingBottom: "8px",
       }}
     >
-      <Typography as="h3" size="1rem" weight="600">
+      <Typography
+        as="h3"
+        size="1rem"
+        weight="600"
+      >
         {children}
       </Typography>
     </div>

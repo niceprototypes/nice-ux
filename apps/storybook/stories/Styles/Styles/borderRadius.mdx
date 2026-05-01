@@ -1,14 +1,16 @@
-import { Meta, Source } from '@storybook/addon-docs/blocks'
-import Flex from 'nice-react-flex'
-import { getToken } from 'nice-react-styles'
-import Typography from '../../../src/nice/Typography'
-import { DocsRow } from '../../../src/components/DocsRow'
+import { Meta, Source } from "@storybook/addon-docs/blocks"
+import Flex from "nice-react-flex"
+import { getToken } from "nice-react-styles"
+import Typography from "../../../src/nice/Typography"
+import { DocsRow } from "../../../src/components/DocsRow"
 
 <Meta title="Tokens/Styles/borderRadius" />
 
 # borderRadius
 
-<Typography>Corner rounding tokens from <code>smaller</code> to <code>larger</code>.</Typography>
+<Typography>
+  Corner rounding tokens from <code>smaller</code> to <code>larger</code>.
+</Typography>
 
 <div>
   {["smaller", "small", "base", "large", "larger"].map(variant => (
@@ -21,7 +23,10 @@ import { DocsRow } from '../../../src/components/DocsRow'
           border: `${getToken("borderWidth").var} solid ${getToken("foregroundColor", "light").var}`,
         }}
       />
-      <Source language="tsx" code={`getToken("borderRadius", "${variant}").var`} />
+      <Source
+        language="tsx"
+        code={`getToken("borderRadius", "${variant}").var`}
+      />
     </DocsRow>
   ))}
 </div>

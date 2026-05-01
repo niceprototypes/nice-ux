@@ -1,16 +1,19 @@
-import { Meta, Source } from '@storybook/addon-docs/blocks'
-import Flex from 'nice-react-flex'
-import { getToken } from 'nice-react-styles'
-import Typography from '../../../src/nice/Typography'
-import { DocsRow } from '../../../src/components/DocsRow'
-import DemoDots from '../../../src/components/DemoDots'
-import { twoDots } from './Flex.services'
+import { Meta, Source } from "@storybook/addon-docs/blocks"
+import Flex from "nice-react-flex"
+import { getToken } from "nice-react-styles"
+import Typography from "../../../src/nice/Typography"
+import { DocsRow } from "../../../src/components/DocsRow"
+import DemoDots from "../../../src/components/DemoDots"
+import { twoDots } from "./Flex.services"
 
 <Meta title="React/Components/Flex/mode" />
 
 # Flex — Mode
 
-<Typography color="light">Switches the spacing prop between applying inner <code>padding</code> or outer <code>margin</code>.</Typography>
+<Typography color="light">
+  Switches the spacing prop between applying inner <code>padding</code> or outer{" "}
+  <code>margin</code>.
+</Typography>
 
 <div>
   {["padding", "margin"].map(value => (
@@ -34,7 +37,10 @@ import { twoDots } from './Flex.services'
           </Flex>
         </Flex>
       </Flex>
-      <Source language="tsx" code={`<Flex mode="${value}">\n  {children}\n</Flex>`} />
+      <Source
+        language="tsx"
+        code={`<Flex mode="${value}">\n  {children}\n</Flex>`}
+      />
     </DocsRow>
   ))}
 </div>

@@ -5,7 +5,7 @@ import { getToken } from "nice-react-styles"
 export const DocsRow = styled(Flex).attrs({ spacing: "large none" })`
   align-items: center;
   gap: ${getToken("gap", "larger").var};
-  
+
   &:not(:last-child) {
     border-bottom: 1px solid ${getToken("borderColor", "base").var};
   }
@@ -17,7 +17,7 @@ export const DocsRow = styled(Flex).attrs({ spacing: "large none" })`
     margin: 0;
     border: 0;
     border-radius: 0;
-    
+
     box-shadow: none;
 
     > div {
