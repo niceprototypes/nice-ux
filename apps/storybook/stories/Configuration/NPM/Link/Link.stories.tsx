@@ -7,7 +7,7 @@ import CodeBlock from "../../../../src/components/CodeBlock"
 const LinkDemo = () => <></>
 
 const meta = {
-  title: "Configuration/NPM/Link",
+  title: "Configuration/Toolkit",
   component: LinkDemo,
   tags: ["!dev"],
   parameters: {

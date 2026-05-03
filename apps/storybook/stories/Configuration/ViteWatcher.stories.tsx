@@ -7,7 +7,7 @@ import CodeBlock from "../../src/components/CodeBlock"
 const ViteWatcherDemo = () => <></>
 
 const meta = {
-  title: "Configuration/Vite/Watcher",
+  title: "Configuration/ViteWatcher",
   component: ViteWatcherDemo,
   tags: ["!dev"],
   parameters: {

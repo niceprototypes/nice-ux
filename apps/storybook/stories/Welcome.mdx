@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import Icon from "nice-react-icon"
 import Typography from "../src/nice/Typography/index.ts"
 import Flex from "nice-react-flex"
+import WelcomeLink from "./WelcomeLink.tsx"
 
 <Meta title="Welcome" />
 
@@ -15,76 +15,29 @@ A modular design system. Start with what you need — adopt more when you're rea
   direction="column"
   gap="larger"
 >
-  <Flex
-    direction="column"
-    gap="small"
-  >
-    <a
+  <Flex direction="column">
+    <WelcomeLink
       href="/storybook/?path=/docs/welcome-tokens--docs"
-      target="_top"
+      iconName="Palette"
     >
-      <Flex
-        alignItems="center"
-        gap="small"
-      >
-        <Icon
-          name="Palette"
-          size="large"
-          color="link"
-          vendor
-          strokeWidth="large"
-          strokeScaling
-        />
-        <Typography
-          color="link"
-          size="large"
-          weight="semibold"
-          style={{ fontSize: "1.25em" }}
-        >
-          Tokens
-        </Typography>
-      </Flex>
-    </a>
-    <Typography
-      size="base"
-      style={{ margin: 0 }}
-    >
+      <span>Tokens</span>
+    </WelcomeLink>
+    <Typography size="base">
       <span>
         <strong>A complete token system</strong> with no framework required,
         built on CSS custom properties, plus a standalone icon library.
       </span>
     </Typography>
   </Flex>
-  <Flex
-    direction="column"
-    gap="small"
-  >
-    <a
+  <Flex direction="column">
+    <WelcomeLink
       href="/storybook/?path=/docs/welcome-configuration--docs"
-      target="_top"
+      iconName="Settings"
     >
-      <Flex
-        alignItems="center"
-        gap="small"
-      >
-        <Icon
-          name="Settings"
-          size="large"
-          color="link"
-          vendor
-          strokeWidth="large"
-          strokeScaling
-        />
-        <Typography
-          color="link"
-          size="large"
-          weight="semibold"
-        >
-          Configuration
-        </Typography>
-      </Flex>
-    </a>
+      <span>Configuration</span>
+    </WelcomeLink>
     <Typography
+      as="span"
       size="base"
       style={{ margin: 0 }}
     >
@@ -94,35 +47,13 @@ A modular design system. Start with what you need — adopt more when you're rea
       </span>
     </Typography>
   </Flex>
-  <Flex
-    direction="column"
-    gap="small"
-  >
-    <a
+  <Flex direction="column">
+    <WelcomeLink
       href="/storybook/?path=/docs/welcome-react--docs"
-      target="_top"
+      iconName="Cable"
     >
-      <Flex
-        alignItems="center"
-        gap="small"
-      >
-        <Icon
-          name="Cable"
-          size="large"
-          color="link"
-          vendor
-          strokeWidth="large"
-          strokeScaling
-        />
-        <Typography
-          color="link"
-          size="large"
-          weight="semibold"
-        >
-          React
-        </Typography>
-      </Flex>
-    </a>
+      <span>React</span>
+    </WelcomeLink>
     <Typography
       size="base"
       style={{ margin: 0 }}

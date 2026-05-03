@@ -35,7 +35,7 @@ const preview: Preview = {
           "Welcome",
           ["Tokens", "Configuration", "React"],
           "Tokens",
-          ["Browse", "Responsive", "Icons"],
+          ["Styles", "Icons", "Responsive"],
           "Configuration",
           ["NPM", "Vite", "TypeScript", "Jest", "Rollup"],
           "React",
