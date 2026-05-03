@@ -1,0 +1,31 @@
+import { Meta, Source } from "@storybook/addon-docs/blocks"
+import Tile from "nice-react-tile"
+import Typography from "../../../../src/nice/Typography"
+import { DocsRow } from "../../../../src/components/DocsRow"
+
+<Meta title="React/Components/Tile/maxWidthLarge" />
+
+# Tile — MaxWidthLarge
+
+<Typography color="light">
+  Caps the tile's content width at the large breakpoint. Maps to the CSS{" "}
+  <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/max-width">
+    <code>max-width</code>
+  </a>{" "}
+  property.
+</Typography>
+
+<DocsRow>
+  <Tile
+    maxWidthLarge={1200}
+    spacing="base"
+  >
+    <Typography color="light">
+      Content constrained to 1200px max-width
+    </Typography>
+  </Tile>
+  <Source
+    language="tsx"
+    code={`<Tile maxWidthLarge={1200} />`}
+  />
+</DocsRow>

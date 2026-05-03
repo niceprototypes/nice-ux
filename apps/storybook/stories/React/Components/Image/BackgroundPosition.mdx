@@ -1,0 +1,39 @@
+import { Meta, Source } from "@storybook/addon-docs/blocks"
+import Image from "nice-react-image"
+import Typography from "../../../../src/nice/Typography"
+import { DocsRow } from "../../../../src/components/DocsRow"
+import { getPicsum, toSource } from "../../../../src/services"
+
+<Meta title="React/Components/Image/backgroundPosition" />
+
+# Image — BackgroundPosition
+
+<Typography color="light">
+  Positions the image within its container when cropped. Maps to the CSS{" "}
+  <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-position">
+    <code>background-position</code>
+  </a>{" "}
+  property.
+</Typography>
+
+<div>
+  {["center", "top", "bottom right"].map(position => {
+    const props = {
+      src: getPicsum(800, 600, 69),
+      alt: `${position} demo`,
+      width: "240px",
+      height: "320px",
+      backgroundSize: "cover",
+      backgroundPosition: position,
+    }
+    return (
+      <DocsRow key={position}>
+        <Image {...props} />
+        <Source
+          language="tsx"
+          code={toSource("Image", props)}
+        />
+      </DocsRow>
+    )
+  })}
+</div>

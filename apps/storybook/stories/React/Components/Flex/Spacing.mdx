@@ -1,0 +1,33 @@
+import { Meta, Source } from "@storybook/addon-docs/blocks"
+import Typography from "../../../../src/nice/Typography"
+import { DocsRow } from "../../../../src/components/DocsRow"
+import DemoDots from "../../../../src/components/DemoDots"
+import { twoDots } from "./Flex.services"
+
+<Meta title="React/Components/Flex/spacing" />
+
+# Flex — Spacing
+
+<Typography color="light">
+  Applies inner spacing to the flex container using gap tokens. Maps to the CSS{" "}
+  <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/padding">
+    <code>padding</code>
+  </a>{" "}
+  property.
+</Typography>
+
+<div>
+  {["smaller", "small", "base", "large", "larger"].map(value => (
+    <DocsRow key={value}>
+      <DemoDots
+        spacing={value}
+        dots={twoDots}
+        bordered
+      />
+      <Source
+        language="tsx"
+        code={`<Flex spacing="${value}">\n  {children}\n</Flex>`}
+      />
+    </DocsRow>
+  ))}
+</div>

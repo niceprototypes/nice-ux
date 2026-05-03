@@ -1,0 +1,34 @@
+import { Meta, Source } from "@storybook/addon-docs/blocks"
+import Icon, { iconNames } from "nice-react-icon"
+import Typography from "../../../../src/nice/Typography"
+import { DocsRow } from "../../../../src/components/DocsRow"
+
+<Meta title="React/Components/Icon/name" />
+
+# Icon — Name
+
+<Typography color="light">
+  Selects which built-in icon to render from the <code>nice-icons</code>{" "}
+  library.
+</Typography>
+
+<Typography color="light">
+  In the examples below, <code>size="larger"</code> and{" "}
+  <code>strokeWidth="large"</code> have been set to make the icons more visible.
+</Typography>
+
+<div>
+  {iconNames.map(name => (
+    <DocsRow key={name}>
+      <Icon
+        name={name}
+        size="larger"
+        strokeWidth="large"
+      />
+      <Source
+        language="tsx"
+        code={name === "placeholder" ? `<Icon />` : `<Icon name="${name}" />`}
+      />
+    </DocsRow>
+  ))}
+</div>

@@ -1,0 +1,39 @@
+import { Meta, Source } from "@storybook/addon-docs/blocks"
+import Image from "nice-react-image"
+import Typography from "../../../../src/nice/Typography"
+import { DocsRow } from "../../../../src/components/DocsRow"
+import { getPicsum, toSource } from "../../../../src/services"
+
+<Meta title="React/Components/Image/borderRadius" />
+
+# Image — BorderRadius
+
+<Typography color="light">
+  Rounds the image's corners using borderRadius tokens. Maps to the CSS{" "}
+  <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius">
+    <code>border-radius</code>
+  </a>{" "}
+  property.
+</Typography>
+
+<div>
+  {["smaller", "small", "base", "large", "larger"].map(radius => {
+    const props = {
+      src: getPicsum(800, 600),
+      alt: `${radius} radius demo`,
+      width: "240px",
+      height: "320px",
+      backgroundSize: "cover",
+      borderRadius: radius,
+    }
+    return (
+      <DocsRow key={radius}>
+        <Image {...props} />
+        <Source
+          language="tsx"
+          code={toSource("Image", props)}
+        />
+      </DocsRow>
+    )
+  })}
+</div>

@@ -1,0 +1,30 @@
+import { Meta, Source } from "@storybook/addon-docs/blocks"
+import Typography from "../../../../src/nice/Typography"
+import { DocsRow } from "../../../../src/components/DocsRow"
+import { toSource } from "../../../../src/services"
+
+<Meta title="React/Components/Typography/weight" />
+
+# Typography — Weight
+
+<Typography color="light">
+  Sets the font thickness using fontWeight tokens. Maps to the CSS{" "}
+  <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight">
+    <code>font-weight</code>
+  </a>{" "}
+  property.
+</Typography>
+
+<div>
+  {["light", "base", "medium", "semibold", "bold", "extrabold", "black"].map(
+    weight => (
+      <DocsRow key={weight}>
+        <Typography weight={weight}>{weight}</Typography>
+        <Source
+          language="tsx"
+          code={toSource("Typography", { weight }, { children: weight })}
+        />
+      </DocsRow>
+    )
+  )}
+</div>

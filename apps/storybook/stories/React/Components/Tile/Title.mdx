@@ -1,0 +1,116 @@
+import { Meta, Source } from "@storybook/addon-docs/blocks"
+import Tile from "nice-react-tile"
+import Typography from "../../../../src/nice/Typography"
+import { DocsRow } from "../../../../src/components/DocsRow"
+
+<Meta title="React/Components/Tile/title" />
+
+# Tile — Title
+
+<Typography color="light">
+  Renders a primary heading at the top of the tile. Additional Typography props
+  can be forwarded via <code>titleProps</code>.
+</Typography>
+
+<DocsRow>
+  <Tile title="Title" />
+  <Source
+    language="tsx"
+    code={`<Tile title="Title" />`}
+  />
+</DocsRow>
+
+## titleProps
+
+Forwarded to the title's `Typography`. Any prop from `TypographyProps` (except `children`) can be passed.
+
+### titleProps.as
+
+<DocsRow>
+  <Tile
+    title="Title"
+    titleProps={{ as: "h1" }}
+  />
+  <Source
+    language="tsx"
+    code={`<Tile\n  title="Title"\n  titleProps={{ as: "h1" }}\n/>`}
+  />
+</DocsRow>
+
+### titleProps.color
+
+<DocsRow>
+  <Tile
+    title="Title"
+    titleProps={{ color: "link" }}
+  />
+  <Source
+    language="tsx"
+    code={`<Tile\n  title="Title"\n  titleProps={{ color: "link" }}\n/>`}
+  />
+</DocsRow>
+
+### titleProps.size
+
+<DocsRow>
+  <Tile
+    title="Title"
+    titleProps={{ size: "larger" }}
+  />
+  <Source
+    language="tsx"
+    code={`<Tile\n  title="Title"\n  titleProps={{ size: "larger" }}\n/>`}
+  />
+</DocsRow>
+
+### titleProps.weight
+
+<DocsRow>
+  <Tile
+    title="Title"
+    titleProps={{ weight: "light" }}
+  />
+  <Source
+    language="tsx"
+    code={`<Tile\n  title="Title"\n  titleProps={{ weight: "light" }}\n/>`}
+  />
+</DocsRow>
+
+### titleProps.align
+
+<DocsRow>
+  <Tile
+    title="Title"
+    titleProps={{ align: "center" }}
+  />
+  <Source
+    language="tsx"
+    code={`<Tile\n  title="Title"\n  titleProps={{ align: "center" }}\n/>`}
+  />
+</DocsRow>
+
+### titleProps.code
+
+<DocsRow>
+  <Tile
+    title="Title"
+    titleProps={{ code: true }}
+  />
+  <Source
+    language="tsx"
+    code={`<Tile\n  title="Title"\n  titleProps={{ code: true }}\n/>`}
+  />
+</DocsRow>
+
+### titleProps.lineHeight
+
+<DocsRow>
+  <Tile
+    title="Title"
+    titleProps={{ lineHeight: "expanded" }}
+  />
+  <Source
+    language="tsx"
+    code={`<Tile\n  title="Title"\n  titleProps={{ lineHeight: "expanded" }}\n/>`}
+  />
+</DocsRow>
