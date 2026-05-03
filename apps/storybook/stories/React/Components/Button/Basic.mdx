@@ -1,4 +1,4 @@
-import { Meta, Source } from "@storybook/addon-docs/blocks"
+import { Meta } from "@storybook/addon-docs/blocks"
 import Button from "nice-react-button"
 import Typography from "../../../../src/nice/Typography"
 import { DocsRow } from "../../../../src/components/DocsRow"
@@ -11,10 +11,10 @@ import { DocsRow } from "../../../../src/components/DocsRow"
   Default button rendering with an <code>onClick</code> handler and child label.
 </Typography>
 
-<DocsRow>
-  <Button onClick={() => alert("Button clicked!")}>Click Me</Button>
-  <Source
-    language="tsx"
-    code={`<Button onClick={handler}>\n  {children}\n</Button>`}
-  />
-</DocsRow>
+<DocsRow
+  previewCell={
+    <Button onClick={() => alert("Button clicked!")}>Click Me</Button>
+  }
+  language="tsx"
+  code={`<Button onClick={handler}>\n  {children}\n</Button>`}
+/>

@@ -1,4 +1,4 @@
-import { Meta, Source } from "@storybook/addon-docs/blocks"
+import { Meta } from "@storybook/addon-docs/blocks"
 import { getToken } from "nice-react-styles"
 import Typography from "../../../../src/nice/Typography"
 import { DocsRow } from "../../../../src/components/DocsRow"
@@ -19,72 +19,72 @@ export const growCode = a =>
   property.
 </Typography>
 
-<DocsRow>
-  <DemoDots
-    bordered
-    width="12rem"
-    dots={[
-      {
-        color: getToken("foregroundColor", "error").var,
-        height: getToken("cellHeight", "smaller").var,
-        width: getToken("cellHeight", "smaller").var,
-        grow: 0,
-      },
-      {
-        color: getToken("foregroundColor", "link").var,
-        height: getToken("cellHeight", "smaller").var,
-        grow: 1,
-      },
-    ]}
-  />
-  <Source
-    language="tsx"
-    code={growCode(0)}
-  />
-</DocsRow>
+<DocsRow
+  previewCell={
+    <DemoDots
+      bordered
+      width="12rem"
+      dots={[
+        {
+          color: getToken("foregroundColor", "error").var,
+          height: getToken("cellHeight", "smaller").var,
+          width: getToken("cellHeight", "smaller").var,
+          grow: 0,
+        },
+        {
+          color: getToken("foregroundColor", "link").var,
+          height: getToken("cellHeight", "smaller").var,
+          grow: 1,
+        },
+      ]}
+    />
+  }
+  language="tsx"
+  code={growCode(0)}
+/>
 
-<DocsRow>
-  <DemoDots
-    bordered
-    width="12rem"
-    dots={[
-      {
-        color: getToken("foregroundColor", "error").var,
-        height: getToken("cellHeight", "smaller").var,
-        grow: 1,
-      },
-      {
-        color: getToken("foregroundColor", "link").var,
-        height: getToken("cellHeight", "smaller").var,
-        grow: 1,
-      },
-    ]}
-  />
-  <Source
-    language="tsx"
-    code={growCode(1)}
-  />
-</DocsRow>
+<DocsRow
+  previewCell={
+    <DemoDots
+      bordered
+      width="12rem"
+      dots={[
+        {
+          color: getToken("foregroundColor", "error").var,
+          height: getToken("cellHeight", "smaller").var,
+          grow: 1,
+        },
+        {
+          color: getToken("foregroundColor", "link").var,
+          height: getToken("cellHeight", "smaller").var,
+          grow: 1,
+        },
+      ]}
+    />
+  }
+  language="tsx"
+  code={growCode(1)}
+/>
 
-<DocsRow>
-  <DemoDots
-    bordered
-    width="12rem"
-    dots={[
-      {
-        color: getToken("foregroundColor", "error").var,
-        height: getToken("cellHeight", "smaller").var,
-        grow: 2,
-      },
-      {
-        color: getToken("foregroundColor", "link").var,
-        height: getToken("cellHeight", "smaller").var,
-        grow: 1,
-      },
-    ]}
-  />
-  <Source
-    language="tsx"
-    code={growCode(2)}
-  />
-</DocsRow>
+<DocsRow
+  previewCell={
+    <DemoDots
+      bordered
+      width="12rem"
+      dots={[
+        {
+          color: getToken("foregroundColor", "error").var,
+          height: getToken("cellHeight", "smaller").var,
+          grow: 2,
+        },
+        {
+          color: getToken("foregroundColor", "link").var,
+          height: getToken("cellHeight", "smaller").var,
+          grow: 1,
+        },
+      ]}
+    />
+  }
+  language="tsx"
+  code={growCode(2)}
+/>

@@ -1,4 +1,4 @@
-import { Meta, Source } from "@storybook/addon-docs/blocks"
+import { Meta } from "@storybook/addon-docs/blocks"
 import Flex from "nice-react-flex"
 import { getToken } from "nice-react-styles"
 import Typography from "../../../src/nice/Typography"
@@ -12,28 +12,28 @@ import { DocsRow } from "../../../src/components/DocsRow"
 
 <div>
   {["base", "large"].map(variant => (
-    <DocsRow key={variant}>
-      <Flex
-        spacing="large"
-        style={{
-          backgroundColor: getToken("backgroundColor", "dark").var,
-          borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2)`,
-        }}
-      >
+    <DocsRow
+      previewCell={
         <Flex
+          spacing="large"
           style={{
-            backgroundColor: getToken("backgroundColor").var,
-            width: getToken("cellHeight", "larger").var,
-            height: getToken("cellHeight", "larger").var,
-            borderRadius: getToken("borderRadius", "small").var,
-            boxShadow: getToken("boxShadow", variant).var,
+            backgroundColor: getToken("backgroundColor", "dark").var,
+            borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2)`,
           }}
-        />
-      </Flex>
-      <Source
-        language="tsx"
-        code={`getToken("boxShadow", "${variant}").var`}
-      />
-    </DocsRow>
+        >
+          <Flex
+            style={{
+              backgroundColor: getToken("backgroundColor").var,
+              width: getToken("cellHeight", "larger").var,
+              height: getToken("cellHeight", "larger").var,
+              borderRadius: getToken("borderRadius", "small").var,
+              boxShadow: getToken("boxShadow", variant).var,
+            }}
+          />
+        </Flex>
+      }
+      language="tsx"
+      code={`getToken("boxShadow", "${variant}").var`}
+    />
   ))}
 </div>

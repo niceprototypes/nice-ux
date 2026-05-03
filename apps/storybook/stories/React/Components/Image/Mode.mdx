@@ -1,4 +1,4 @@
-import { Meta, Source } from "@storybook/addon-docs/blocks"
+import { Meta } from "@storybook/addon-docs/blocks"
 import Image from "nice-react-image"
 import Typography from "../../../../src/nice/Typography"
 import { DocsRow } from "../../../../src/components/DocsRow"
@@ -25,18 +25,18 @@ export const nightProps = { ...baseProps, alt: "Night mode", mode: "night" }
   tokens inside a night theme panel).
 </Typography>
 
-<DocsRow>
-  <Image {...dayProps} />
-  <Source
-    language="tsx"
-    code={toSource("Image", dayProps)}
-  />
-</DocsRow>
+<DocsRow
+  previewCell={
+    <Image {...dayProps} />
+  }
+  language="tsx"
+  code={toSource("Image", dayProps)}
+/>
 
-<DocsRow>
-  <Image {...nightProps} />
-  <Source
-    language="tsx"
-    code={toSource("Image", nightProps)}
-  />
-</DocsRow>
+<DocsRow
+  previewCell={
+    <Image {...nightProps} />
+  }
+  language="tsx"
+  code={toSource("Image", nightProps)}
+/>

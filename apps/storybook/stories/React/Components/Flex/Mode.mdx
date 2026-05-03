@@ -1,4 +1,4 @@
-import { Meta, Source } from "@storybook/addon-docs/blocks"
+import { Meta } from "@storybook/addon-docs/blocks"
 import Flex from "nice-react-flex"
 import { getToken } from "nice-react-styles"
 import Typography from "../../../../src/nice/Typography"
@@ -17,30 +17,30 @@ import { twoDots } from "./Flex.services"
 
 <div>
   {["padding", "margin"].map(value => (
-    <DocsRow key={value}>
-      <Flex direction="column">
-        <Flex
-          style={{
-            border: `${getToken("borderWidth").var} solid ${value === "margin" ? getToken("borderColor").var : getToken("borderColor", "dark").var}`,
-            borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2 + 2px)`,
-          }}
-        >
+    <DocsRow
+      previewCell={
+        <Flex direction="column">
           <Flex
-            mode={value}
-            spacing="base"
             style={{
-              border: `${getToken("borderWidth").var} solid ${value === "margin" ? getToken("borderColor", "dark").var : "transparent"}`,
+              border: `${getToken("borderWidth").var} solid ${value === "margin" ? getToken("borderColor").var : getToken("borderColor", "dark").var}`,
               borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2 + 2px)`,
             }}
           >
-            <DemoDots dots={twoDots} />
+            <Flex
+              mode={value}
+              spacing="base"
+              style={{
+                border: `${getToken("borderWidth").var} solid ${value === "margin" ? getToken("borderColor", "dark").var : "transparent"}`,
+                borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2 + 2px)`,
+              }}
+            >
+              <DemoDots dots={twoDots} />
+            </Flex>
           </Flex>
         </Flex>
-      </Flex>
-      <Source
-        language="tsx"
-        code={`<Flex mode="${value}">\n  {children}\n</Flex>`}
-      />
-    </DocsRow>
+      }
+      language="tsx"
+      code={`<Flex mode="${value}">\n  {children}\n</Flex>`}
+    />
   ))}
 </div>

@@ -1,4 +1,4 @@
-import { Meta, Source } from "@storybook/addon-docs/blocks"
+import { Meta } from "@storybook/addon-docs/blocks"
 import Typography from "../../../../src/nice/Typography"
 import { DocsRow } from "../../../../src/components/DocsRow"
 import { toSource } from "../../../../src/services"
@@ -15,18 +15,18 @@ import { toSource } from "../../../../src/services"
   property.
 </Typography>
 
-<DocsRow>
-  <Typography>Hello world</Typography>
-  <Source
-    language="tsx"
-    code={toSource("Typography", {}, { children: "Hello world" })}
-  />
-</DocsRow>
+<DocsRow
+  previewCell={
+    <Typography>Hello world</Typography>
+  }
+  language="tsx"
+  code={toSource("Typography", {}, { children: "Hello world" })}
+/>
 
-<DocsRow>
-  <Typography code>hello_world</Typography>
-  <Source
-    language="tsx"
-    code={toSource("Typography", { code: true }, { children: "hello_world" })}
-  />
-</DocsRow>
+<DocsRow
+  previewCell={
+    <Typography code>hello_world</Typography>
+  }
+  language="tsx"
+  code={toSource("Typography", { code: true }, { children: "hello_world" })}
+/>

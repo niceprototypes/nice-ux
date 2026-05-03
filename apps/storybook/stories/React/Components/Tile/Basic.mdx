@@ -1,4 +1,4 @@
-import { Meta, Source } from "@storybook/addon-docs/blocks"
+import { Meta } from "@storybook/addon-docs/blocks"
 import Tile from "nice-react-tile"
 import Typography from "../../../../src/nice/Typography"
 import { DocsRow } from "../../../../src/components/DocsRow"
@@ -11,10 +11,10 @@ import { DocsRow } from "../../../../src/components/DocsRow"
   Default tile container with built-in spacing and max-width constraints.
 </Typography>
 
-<DocsRow>
-  <Tile />
-  <Source
-    language="tsx"
-    code={`<Tile />`}
-  />
-</DocsRow>
+<DocsRow
+  previewCell={
+    <Tile />
+  }
+  language="tsx"
+  code={`<Tile />`}
+/>

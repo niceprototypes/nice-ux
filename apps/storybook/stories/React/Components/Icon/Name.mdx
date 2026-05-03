@@ -1,4 +1,4 @@
-import { Meta, Source } from "@storybook/addon-docs/blocks"
+import { Meta } from "@storybook/addon-docs/blocks"
 import Icon, { iconNames } from "nice-react-icon"
 import Typography from "../../../../src/nice/Typography"
 import { DocsRow } from "../../../../src/components/DocsRow"
@@ -19,16 +19,16 @@ import { DocsRow } from "../../../../src/components/DocsRow"
 
 <div>
   {iconNames.map(name => (
-    <DocsRow key={name}>
-      <Icon
-        name={name}
-        size="larger"
-        strokeWidth="large"
-      />
-      <Source
-        language="tsx"
-        code={name === "placeholder" ? `<Icon />` : `<Icon name="${name}" />`}
-      />
-    </DocsRow>
+    <DocsRow
+      previewCell={
+        <Icon
+          name={name}
+          size="larger"
+          strokeWidth="large"
+        />
+      }
+      language="tsx"
+      code={name === "placeholder" ? `<Icon />` : `<Icon name="${name}" />`}
+    />
   ))}
 </div>

@@ -1,4 +1,4 @@
-import { Meta, Source } from "@storybook/addon-docs/blocks"
+import { Meta } from "@storybook/addon-docs/blocks"
 import Typography from "../../../../src/nice/Typography"
 import { DocsRow } from "../../../../src/components/DocsRow"
 import { toSource } from "../../../../src/services"
@@ -14,12 +14,12 @@ import { toSource } from "../../../../src/services"
 
 <div>
   {["h1", "h2", "h3", "h4", "p", "span"].map(as => (
-    <DocsRow key={as}>
-      <Typography as={as}>{as}</Typography>
-      <Source
-        language="tsx"
-        code={toSource("Typography", { as }, { children: as })}
-      />
-    </DocsRow>
+    <DocsRow
+      previewCell={
+        <Typography as={as}>{as}</Typography>
+      }
+      language="tsx"
+      code={toSource("Typography", { as }, { children: as })}
+    />
   ))}
 </div>

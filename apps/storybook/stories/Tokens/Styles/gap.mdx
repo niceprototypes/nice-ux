@@ -1,4 +1,4 @@
-import { Meta, Source } from "@storybook/addon-docs/blocks"
+import { Meta } from "@storybook/addon-docs/blocks"
 import { getToken } from "nice-react-styles"
 import Typography from "../../../src/nice/Typography"
 import { DocsRow } from "../../../src/components/DocsRow"
@@ -14,26 +14,26 @@ import DemoDots from "../../../src/components/DemoDots"
 
 <div>
   {["smaller", "small", "base", "large", "larger"].map(variant => (
-    <DocsRow key={variant}>
-      <DemoDots
-        gap={variant}
-        dots={[
-          {
-            color: getToken("foregroundColor", "error").var,
-            width: getToken("cellHeight", "smaller").var,
-            height: getToken("cellHeight", "smaller").var,
-          },
-          {
-            color: getToken("foregroundColor", "link").var,
-            width: getToken("cellHeight", "smaller").var,
-            height: getToken("cellHeight", "smaller").var,
-          },
-        ]}
-      />
-      <Source
-        language="tsx"
-        code={`getToken("gap", "${variant}").var`}
-      />
-    </DocsRow>
+    <DocsRow
+      previewCell={
+        <DemoDots
+          gap={variant}
+          dots={[
+            {
+              color: getToken("foregroundColor", "error").var,
+              width: getToken("cellHeight", "smaller").var,
+              height: getToken("cellHeight", "smaller").var,
+            },
+            {
+              color: getToken("foregroundColor", "link").var,
+              width: getToken("cellHeight", "smaller").var,
+              height: getToken("cellHeight", "smaller").var,
+            },
+          ]}
+        />
+      }
+      language="tsx"
+      code={`getToken("gap", "${variant}").var`}
+    />
   ))}
 </div>

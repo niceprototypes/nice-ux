@@ -1,4 +1,4 @@
-import { Meta, Source } from "@storybook/addon-docs/blocks"
+import { Meta } from "@storybook/addon-docs/blocks"
 import Tile from "nice-react-tile"
 import Image from "nice-react-image"
 import Typography from "../../../../src/nice/Typography"
@@ -14,34 +14,34 @@ import { getPicsum } from "../../../../src/services"
   layout.
 </Typography>
 
-<DocsRow>
-  <Tile
-    title="Title"
-    description="Description"
-    contentLeft={
-      <Image
-        src={getPicsum(800, 600, 10)}
-        alt="Demo content"
-        width="80px"
-        height="80px"
-        backgroundSize="cover"
-        borderRadius="base"
-      />
-    }
-    contentRight={
-      <Image
-        src={getPicsum(800, 600, 20)}
-        alt="Demo content"
-        width="80px"
-        height="80px"
-        backgroundSize="cover"
-        borderRadius="base"
-      />
-    }
-    spacing="base"
-  />
-  <Source
-    language="tsx"
-    code={`<Tile\n  title="Title"\n  description="Description"\n  contentLeft={left}\n  contentRight={right}\n/>`}
-  />
-</DocsRow>
+<DocsRow
+  previewCell={
+    <Tile
+      title="Title"
+      description="Description"
+      contentLeft={
+        <Image
+          src={getPicsum(800, 600, 10)}
+          alt="Demo content"
+          width="80px"
+          height="80px"
+          backgroundSize="cover"
+          borderRadius="base"
+        />
+      }
+      contentRight={
+        <Image
+          src={getPicsum(800, 600, 20)}
+          alt="Demo content"
+          width="80px"
+          height="80px"
+          backgroundSize="cover"
+          borderRadius="base"
+        />
+      }
+      spacing="base"
+    />
+  }
+  language="tsx"
+  code={`<Tile\n  title="Title"\n  description="Description"\n  contentLeft={left}\n  contentRight={right}\n/>`}
+/>

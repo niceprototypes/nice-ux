@@ -1,4 +1,4 @@
-import { Meta, Source } from "@storybook/addon-docs/blocks"
+import { Meta } from "@storybook/addon-docs/blocks"
 import Image from "nice-react-image"
 import Typography from "../../../../src/nice/Typography"
 import Flex from "nice-react-flex"
@@ -19,50 +19,51 @@ export const DEMO_IMAGE_2 = getPicsum(800, 600, 622)
   overlaying children on top.
 </Typography>
 
-<DocsRow>
-  <Image
-    src={DEMO_IMAGE_1}
-    alt="Standard img element"
-    backgroundSize="cover"
-  />
-  <Source
-    language="tsx"
-    code={toSource("Image", {
+<DocsRow
+  previewCell={
+    <Image
+      src={DEMO_IMAGE_1}
+      alt="Standard img element"
+      backgroundSize="cover"
+    />
+  }
+  language="tsx"
+  code={toSource("Image", {
       src: DEMO_IMAGE_1,
     })}
-  />
-</DocsRow>
+/>
 
-<DocsRow>
-  <Image
-    as="div"
-    src={DEMO_IMAGE_2}
-    alt="Background image div"
-    backgroundSize="cover"
-    borderRadius="base"
-  >
-    <Flex
-      direction="column"
-      justifyContent="flex-end"
+<DocsRow
+  previewCell={
+    <Image
+      as="div"
+      src={DEMO_IMAGE_2}
+      alt="Background image div"
+      backgroundSize="cover"
+      borderRadius="base"
     >
-      <Tile
-        backgroundColor="transparent"
-        spacing="large"
+      <Flex
+        direction="column"
+        justifyContent="flex-end"
       >
-        <Typography
-          mode="night"
-          color="base"
-          align="center"
-          weight="bold"
+        <Tile
+          backgroundColor="transparent"
+          spacing="large"
         >
-          Overlay content
-        </Typography>
-      </Tile>
-    </Flex>
-  </Image>
-  <Source
-    language="tsx"
-    code={toSource(
+          <Typography
+            mode="night"
+            color="base"
+            align="center"
+            weight="bold"
+          >
+            Overlay content
+          </Typography>
+        </Tile>
+      </Flex>
+    </Image>
+  }
+  language="tsx"
+  code={toSource(
       "Image",
       {
         as: "div",
@@ -71,5 +72,4 @@ export const DEMO_IMAGE_2 = getPicsum(800, 600, 622)
       },
       { children: "<h1>Overlay content</h1>" }
     )}
-  />
-</DocsRow>
+/>

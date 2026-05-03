@@ -1,4 +1,4 @@
-import { Meta, Source } from "@storybook/addon-docs/blocks"
+import { Meta } from "@storybook/addon-docs/blocks"
 import Tile from "nice-react-tile"
 import Typography from "../../../../src/nice/Typography"
 import { DocsRow } from "../../../../src/components/DocsRow"
@@ -15,10 +15,10 @@ import { DocsRow } from "../../../../src/components/DocsRow"
   property.
 </Typography>
 
-<DocsRow>
-  <Tile backgroundColor="lavender" />
-  <Source
-    language="tsx"
-    code={`<Tile backgroundColor={color} />`}
-  />
-</DocsRow>
+<DocsRow
+  previewCell={
+    <Tile backgroundColor="lavender" />
+  }
+  language="tsx"
+  code={`<Tile backgroundColor={color} />`}
+/>

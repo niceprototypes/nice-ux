@@ -1,4 +1,4 @@
-import { Meta, Source } from "@storybook/addon-docs/blocks"
+import { Meta } from "@storybook/addon-docs/blocks"
 import Flex from "nice-react-flex"
 import { getToken } from "nice-react-styles"
 import Typography from "../../../src/nice/Typography"
@@ -43,31 +43,31 @@ no build step, no opinions about your component model.
   ].map(({ name, backgroundColor }) => {
     const animationName = name === "base" ? "slide" : "slideSlow"
     return (
-      <DocsRow key={name}>
-        <Flex
-          style={{
-            width: "120px",
-            backgroundColor: getToken("backgroundColor", "dark").var,
-            borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2)`,
-          }}
-        >
+      <DocsRow
+        previewCell={
           <Flex
             style={{
-              backgroundColor,
-              width: getToken("cellHeight", "smaller").var,
-              height: getToken("cellHeight", "smaller").var,
+              width: "120px",
+              backgroundColor: getToken("backgroundColor", "dark").var,
               borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2)`,
-              animation: `${animationName} calc(${getToken("animationDuration", name).var} * 6) ${getToken("animationEasing").var} infinite`,
-              animationDelay:
-                name === "base" ? getToken("animationDuration", name).var : 0,
             }}
-          />
-        </Flex>
-        <Source
-          language="tsx"
-          code={`getToken("animationDuration", "${name}").var`}
-        />
-      </DocsRow>
+          >
+            <Flex
+              style={{
+                backgroundColor,
+                width: getToken("cellHeight", "smaller").var,
+                height: getToken("cellHeight", "smaller").var,
+                borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2)`,
+                animation: `${animationName} calc(${getToken("animationDuration", name).var} * 6) ${getToken("animationEasing").var} infinite`,
+                animationDelay:
+                  name === "base" ? getToken("animationDuration", name).var : 0,
+              }}
+            />
+          </Flex>
+        }
+        language="tsx"
+        code={`getToken("animationDuration", "${name}").var`}
+      />
     )
   })}
 </div>
@@ -76,33 +76,33 @@ no build step, no opinions about your component model.
 
 <div>
   {["base"].map(variant => (
-    <DocsRow key={variant}>
-      <Flex
-        style={{
-          backgroundColor: getToken("backgroundColor", "dark").var,
-          padding: getToken("gap").var,
-          borderRadius: getToken("borderRadius").var,
-        }}
-      >
-        <svg
-          width="60"
-          height="24"
-          viewBox="0 0 60 24"
+    <DocsRow
+      previewCell={
+        <Flex
+          style={{
+            backgroundColor: getToken("backgroundColor", "dark").var,
+            padding: getToken("gap").var,
+            borderRadius: getToken("borderRadius").var,
+          }}
         >
-          <path
-            d="M 1 23 C 30 23, 30 1, 60 1"
-            fill="none"
-            stroke={getToken("foregroundColor", "lighter").var}
-            strokeWidth={getToken("borderWidth", "large").var}
-            strokeLinecap="round"
-          />
-        </svg>
-      </Flex>
-      <Source
-        language="tsx"
-        code={`getToken("animationEasing", "${variant}").var`}
-      />
-    </DocsRow>
+          <svg
+            width="60"
+            height="24"
+            viewBox="0 0 60 24"
+          >
+            <path
+              d="M 1 23 C 30 23, 30 1, 60 1"
+              fill="none"
+              stroke={getToken("foregroundColor", "lighter").var}
+              strokeWidth={getToken("borderWidth", "large").var}
+              strokeLinecap="round"
+            />
+          </svg>
+        </Flex>
+      }
+      language="tsx"
+      code={`getToken("animationEasing", "${variant}").var`}
+    />
   ))}
 </div>
 
@@ -110,21 +110,21 @@ no build step, no opinions about your component model.
 
 <div>
   {["base", "dark"].map(variant => (
-    <DocsRow key={variant}>
-      <Flex
-        style={{
-          backgroundColor: getToken("backgroundColor", variant).var,
-          width: getToken("cellHeight", "larger").var,
-          height: getToken("cellHeight", "larger").var,
-          border: `${getToken("borderWidth").var} solid ${getToken("borderColor").var}`,
-          borderRadius: getToken("borderRadius", "small").var,
-        }}
-      />
-      <Source
-        language="tsx"
-        code={`getToken("backgroundColor", "${variant}").var`}
-      />
-    </DocsRow>
+    <DocsRow
+      previewCell={
+        <Flex
+          style={{
+            backgroundColor: getToken("backgroundColor", variant).var,
+            width: getToken("cellHeight", "larger").var,
+            height: getToken("cellHeight", "larger").var,
+            border: `${getToken("borderWidth").var} solid ${getToken("borderColor").var}`,
+            borderRadius: getToken("borderRadius", "small").var,
+          }}
+        />
+      }
+      language="tsx"
+      code={`getToken("backgroundColor", "${variant}").var`}
+    />
   ))}
 </div>
 
@@ -132,21 +132,21 @@ no build step, no opinions about your component model.
 
 <div>
   {["base", "dark", "darker"].map(variant => (
-    <DocsRow key={variant}>
-      <Flex
-        style={{
-          backgroundColor: "white",
-          width: getToken("cellHeight", "larger").var,
-          height: getToken("cellHeight", "larger").var,
-          border: `${getToken("borderWidth").var} solid ${getToken("borderColor", variant).var}`,
-          borderRadius: getToken("borderRadius", "small").var,
-        }}
-      />
-      <Source
-        language="tsx"
-        code={`getToken("borderColor", "${variant}").var`}
-      />
-    </DocsRow>
+    <DocsRow
+      previewCell={
+        <Flex
+          style={{
+            backgroundColor: "white",
+            width: getToken("cellHeight", "larger").var,
+            height: getToken("cellHeight", "larger").var,
+            border: `${getToken("borderWidth").var} solid ${getToken("borderColor", variant).var}`,
+            borderRadius: getToken("borderRadius", "small").var,
+          }}
+        />
+      }
+      language="tsx"
+      code={`getToken("borderColor", "${variant}").var`}
+    />
   ))}
 </div>
 
@@ -154,20 +154,20 @@ no build step, no opinions about your component model.
 
 <div>
   {["smaller", "small", "base", "large", "larger"].map(variant => (
-    <DocsRow key={variant}>
-      <Flex
-        style={{
-          borderRadius: getToken("borderRadius", variant).var,
-          width: getToken("cellHeight", "larger").var,
-          height: getToken("cellHeight", "larger").var,
-          border: `${getToken("borderWidth").var} solid ${getToken("foregroundColor", "light").var}`,
-        }}
-      />
-      <Source
-        language="tsx"
-        code={`getToken("borderRadius", "${variant}").var`}
-      />
-    </DocsRow>
+    <DocsRow
+      previewCell={
+        <Flex
+          style={{
+            borderRadius: getToken("borderRadius", variant).var,
+            width: getToken("cellHeight", "larger").var,
+            height: getToken("cellHeight", "larger").var,
+            border: `${getToken("borderWidth").var} solid ${getToken("foregroundColor", "light").var}`,
+          }}
+        />
+      }
+      language="tsx"
+      code={`getToken("borderRadius", "${variant}").var`}
+    />
   ))}
 </div>
 
@@ -175,20 +175,20 @@ no build step, no opinions about your component model.
 
 <div>
   {["small", "base", "large"].map(variant => (
-    <DocsRow key={variant}>
-      <Flex
-        style={{
-          width: getToken("cellHeight", "larger").var,
-          height: getToken("cellHeight", "larger").var,
-          border: `${getToken("borderWidth", variant).var} solid ${getToken("foregroundColor", "light").var}`,
-          borderRadius: getToken("borderRadius", "small").var,
-        }}
-      />
-      <Source
-        language="tsx"
-        code={`getToken("borderWidth", "${variant}").var`}
-      />
-    </DocsRow>
+    <DocsRow
+      previewCell={
+        <Flex
+          style={{
+            width: getToken("cellHeight", "larger").var,
+            height: getToken("cellHeight", "larger").var,
+            border: `${getToken("borderWidth", variant).var} solid ${getToken("foregroundColor", "light").var}`,
+            borderRadius: getToken("borderRadius", "small").var,
+          }}
+        />
+      }
+      language="tsx"
+      code={`getToken("borderWidth", "${variant}").var`}
+    />
   ))}
 </div>
 
@@ -196,29 +196,29 @@ no build step, no opinions about your component model.
 
 <div>
   {["base", "large"].map(variant => (
-    <DocsRow key={variant}>
-      <Flex
-        spacing="large"
-        style={{
-          backgroundColor: getToken("backgroundColor", "dark").var,
-          borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2)`,
-        }}
-      >
+    <DocsRow
+      previewCell={
         <Flex
+          spacing="large"
           style={{
-            backgroundColor: getToken("backgroundColor").var,
-            width: getToken("cellHeight", "larger").var,
-            height: getToken("cellHeight", "larger").var,
-            borderRadius: getToken("borderRadius", "small").var,
-            boxShadow: getToken("boxShadow", variant).var,
+            backgroundColor: getToken("backgroundColor", "dark").var,
+            borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2)`,
           }}
-        />
-      </Flex>
-      <Source
-        language="tsx"
-        code={`getToken("boxShadow", "${variant}").var`}
-      />
-    </DocsRow>
+        >
+          <Flex
+            style={{
+              backgroundColor: getToken("backgroundColor").var,
+              width: getToken("cellHeight", "larger").var,
+              height: getToken("cellHeight", "larger").var,
+              borderRadius: getToken("borderRadius", "small").var,
+              boxShadow: getToken("boxShadow", variant).var,
+            }}
+          />
+        </Flex>
+      }
+      language="tsx"
+      code={`getToken("boxShadow", "${variant}").var`}
+    />
   ))}
 </div>
 
@@ -226,20 +226,20 @@ no build step, no opinions about your component model.
 
 <div>
   {["smaller", "small", "base", "large", "larger"].map(variant => (
-    <DocsRow key={variant}>
-      <Flex
-        style={{
-          width: getToken("cellHeight", "larger").var,
-          height: getToken("cellHeight", variant).var,
-          border: `${getToken("borderWidth").var} solid ${getToken("foregroundColor", "light").var}`,
-          borderRadius: getToken("cellHeight", "smaller").var,
-        }}
-      />
-      <Source
-        language="tsx"
-        code={`getToken("cellHeight", "${variant}").var`}
-      />
-    </DocsRow>
+    <DocsRow
+      previewCell={
+        <Flex
+          style={{
+            width: getToken("cellHeight", "larger").var,
+            height: getToken("cellHeight", variant).var,
+            border: `${getToken("borderWidth").var} solid ${getToken("foregroundColor", "light").var}`,
+            borderRadius: getToken("cellHeight", "smaller").var,
+          }}
+        />
+      }
+      language="tsx"
+      code={`getToken("cellHeight", "${variant}").var`}
+    />
   ))}
 </div>
 
@@ -251,18 +251,18 @@ no build step, no opinions about your component model.
     { name: "base", text: "Body" },
     { name: "code", code: true, text: "Code" },
   ].map(({ name, weight, code, text }) => (
-    <DocsRow key={name}>
-      <Typography
-        weight={weight}
-        code={code}
-      >
-        {text}
-      </Typography>
-      <Source
-        language="tsx"
-        code={`getToken("fontFamily", "${name}").var`}
-      />
-    </DocsRow>
+    <DocsRow
+      previewCell={
+        <Typography
+          weight={weight}
+          code={code}
+        >
+          {text}
+        </Typography>
+      }
+      language="tsx"
+      code={`getToken("fontFamily", "${name}").var`}
+    />
   ))}
 </div>
 
@@ -270,15 +270,15 @@ no build step, no opinions about your component model.
 
 <div>
   {["smaller", "small", "base", "large", "larger"].map(variant => (
-    <DocsRow key={variant}>
-      <Typography size={variant}>
-        {variant.charAt(0).toUpperCase() + variant.slice(1)}
-      </Typography>
-      <Source
-        language="tsx"
-        code={`getToken("fontSize", "${variant}").var`}
-      />
-    </DocsRow>
+    <DocsRow
+      previewCell={
+        <Typography size={variant}>
+          {variant.charAt(0).toUpperCase() + variant.slice(1)}
+        </Typography>
+      }
+      language="tsx"
+      code={`getToken("fontSize", "${variant}").var`}
+    />
   ))}
 </div>
 
@@ -287,15 +287,15 @@ no build step, no opinions about your component model.
 <div>
   {["light", "base", "medium", "semibold", "bold", "extrabold", "black"].map(
     variant => (
-      <DocsRow key={variant}>
-        <Typography weight={variant}>
-          {variant.charAt(0).toUpperCase() + variant.slice(1)}
-        </Typography>
-        <Source
-          language="tsx"
-          code={`getToken("fontWeight", "${variant}").var`}
-        />
-      </DocsRow>
+      <DocsRow
+        previewCell={
+          <Typography weight={variant}>
+            {variant.charAt(0).toUpperCase() + variant.slice(1)}
+          </Typography>
+        }
+        language="tsx"
+        code={`getToken("fontWeight", "${variant}").var`}
+      />
     )
   )}
 </div>
@@ -314,20 +314,20 @@ no build step, no opinions about your component model.
     "warning",
     "error",
   ].map(variant => (
-    <DocsRow key={variant}>
-      <Flex
-        style={{
-          width: getToken("cellHeight", "smaller").var,
-          height: getToken("cellHeight", "smaller").var,
-          backgroundColor: getToken("foregroundColor", variant).var,
-          borderRadius: "50%",
-        }}
-      />
-      <Source
-        language="tsx"
-        code={`getToken("foregroundColor", "${variant}").var`}
-      />
-    </DocsRow>
+    <DocsRow
+      previewCell={
+        <Flex
+          style={{
+            width: getToken("cellHeight", "smaller").var,
+            height: getToken("cellHeight", "smaller").var,
+            backgroundColor: getToken("foregroundColor", variant).var,
+            borderRadius: "50%",
+          }}
+        />
+      }
+      language="tsx"
+      code={`getToken("foregroundColor", "${variant}").var`}
+    />
   ))}
 </div>
 
@@ -335,27 +335,27 @@ no build step, no opinions about your component model.
 
 <div>
   {["smaller", "small", "base", "large", "larger"].map(variant => (
-    <DocsRow key={variant}>
-      <DemoDots
-        gap={variant}
-        dots={[
-          {
-            color: getToken("foregroundColor", "error").var,
-            width: getToken("cellHeight", "smaller").var,
-            height: getToken("cellHeight", "smaller").var,
-          },
-          {
-            color: getToken("foregroundColor", "link").var,
-            width: getToken("cellHeight", "smaller").var,
-            height: getToken("cellHeight", "smaller").var,
-          },
-        ]}
-      />
-      <Source
-        language="tsx"
-        code={`getToken("gap", "${variant}").var`}
-      />
-    </DocsRow>
+    <DocsRow
+      previewCell={
+        <DemoDots
+          gap={variant}
+          dots={[
+            {
+              color: getToken("foregroundColor", "error").var,
+              width: getToken("cellHeight", "smaller").var,
+              height: getToken("cellHeight", "smaller").var,
+            },
+            {
+              color: getToken("foregroundColor", "link").var,
+              width: getToken("cellHeight", "smaller").var,
+              height: getToken("cellHeight", "smaller").var,
+            },
+          ]}
+        />
+      }
+      language="tsx"
+      code={`getToken("gap", "${variant}").var`}
+    />
   ))}
 </div>
 
@@ -363,13 +363,13 @@ no build step, no opinions about your component model.
 
 <div>
   {["condensed", "base", "expanded"].map(variant => (
-    <DocsRow key={variant}>
-      <Typography lineHeight={variant}>{loremIpsum}</Typography>
-      <Source
-        language="tsx"
-        code={`getToken("lineHeight", "${variant}").var`}
-      />
-    </DocsRow>
+    <DocsRow
+      previewCell={
+        <Typography lineHeight={variant}>{loremIpsum}</Typography>
+      }
+      language="tsx"
+      code={`getToken("lineHeight", "${variant}").var`}
+    />
   ))}
 </div>
 

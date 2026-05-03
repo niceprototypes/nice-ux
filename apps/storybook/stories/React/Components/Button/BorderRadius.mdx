@@ -1,4 +1,4 @@
-import { Meta, Source } from "@storybook/addon-docs/blocks"
+import { Meta } from "@storybook/addon-docs/blocks"
 import Button from "nice-react-button"
 import Typography from "../../../../src/nice/Typography"
 import { DocsRow } from "../../../../src/components/DocsRow"
@@ -26,17 +26,17 @@ export const radiusCode = r =>
 
 <div>
   {radii.map(radius => (
-    <DocsRow key={radius}>
-      <Button
-        onClick={() => {}}
-        borderRadius={radius}
-      >
-        {radiusLabel(radius)}
-      </Button>
-      <Source
-        language="tsx"
-        code={radiusCode(radius)}
-      />
-    </DocsRow>
+    <DocsRow
+      previewCell={
+        <Button
+          onClick={() => {}}
+          borderRadius={radius}
+        >
+          {radiusLabel(radius)}
+        </Button>
+      }
+      language="tsx"
+      code={radiusCode(radius)}
+    />
   ))}
 </div>

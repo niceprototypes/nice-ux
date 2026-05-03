@@ -1,4 +1,4 @@
-import { Meta, Source } from "@storybook/addon-docs/blocks"
+import { Meta } from "@storybook/addon-docs/blocks"
 import Flex from "nice-react-flex"
 import { getToken } from "nice-react-styles"
 import Typography from "../../../src/nice/Typography"
@@ -14,19 +14,19 @@ import { DocsRow } from "../../../src/components/DocsRow"
 
 <div>
   {["smaller", "small", "base", "large", "larger"].map(variant => (
-    <DocsRow key={variant}>
-      <Flex
-        style={{
-          borderRadius: getToken("borderRadius", variant).var,
-          width: getToken("cellHeight", "larger").var,
-          height: getToken("cellHeight", "larger").var,
-          border: `${getToken("borderWidth").var} solid ${getToken("foregroundColor", "light").var}`,
-        }}
-      />
-      <Source
-        language="tsx"
-        code={`getToken("borderRadius", "${variant}").var`}
-      />
-    </DocsRow>
+    <DocsRow
+      previewCell={
+        <Flex
+          style={{
+            borderRadius: getToken("borderRadius", variant).var,
+            width: getToken("cellHeight", "larger").var,
+            height: getToken("cellHeight", "larger").var,
+            border: `${getToken("borderWidth").var} solid ${getToken("foregroundColor", "light").var}`,
+          }}
+        />
+      }
+      language="tsx"
+      code={`getToken("borderRadius", "${variant}").var`}
+    />
   ))}
 </div>

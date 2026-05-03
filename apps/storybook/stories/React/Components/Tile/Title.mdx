@@ -1,4 +1,4 @@
-import { Meta, Source } from "@storybook/addon-docs/blocks"
+import { Meta } from "@storybook/addon-docs/blocks"
 import Tile from "nice-react-tile"
 import Typography from "../../../../src/nice/Typography"
 import { DocsRow } from "../../../../src/components/DocsRow"
@@ -12,13 +12,13 @@ import { DocsRow } from "../../../../src/components/DocsRow"
   can be forwarded via <code>titleProps</code>.
 </Typography>
 
-<DocsRow>
-  <Tile title="Title" />
-  <Source
-    language="tsx"
-    code={`<Tile title="Title" />`}
-  />
-</DocsRow>
+<DocsRow
+  previewCell={
+    <Tile title="Title" />
+  }
+  language="tsx"
+  code={`<Tile title="Title" />`}
+/>
 
 ## titleProps
 
@@ -26,91 +26,91 @@ Forwarded to the title's `Typography`. Any prop from `TypographyProps` (except `
 
 ### titleProps.as
 
-<DocsRow>
-  <Tile
-    title="Title"
-    titleProps={{ as: "h1" }}
-  />
-  <Source
-    language="tsx"
-    code={`<Tile\n  title="Title"\n  titleProps={{ as: "h1" }}\n/>`}
-  />
-</DocsRow>
+<DocsRow
+  previewCell={
+    <Tile
+      title="Title"
+      titleProps={{ as: "h1" }}
+    />
+  }
+  language="tsx"
+  code={`<Tile\n  title="Title"\n  titleProps={{ as: "h1" }}\n/>`}
+/>
 
 ### titleProps.color
 
-<DocsRow>
-  <Tile
-    title="Title"
-    titleProps={{ color: "link" }}
-  />
-  <Source
-    language="tsx"
-    code={`<Tile\n  title="Title"\n  titleProps={{ color: "link" }}\n/>`}
-  />
-</DocsRow>
+<DocsRow
+  previewCell={
+    <Tile
+      title="Title"
+      titleProps={{ color: "link" }}
+    />
+  }
+  language="tsx"
+  code={`<Tile\n  title="Title"\n  titleProps={{ color: "link" }}\n/>`}
+/>
 
 ### titleProps.size
 
-<DocsRow>
-  <Tile
-    title="Title"
-    titleProps={{ size: "larger" }}
-  />
-  <Source
-    language="tsx"
-    code={`<Tile\n  title="Title"\n  titleProps={{ size: "larger" }}\n/>`}
-  />
-</DocsRow>
+<DocsRow
+  previewCell={
+    <Tile
+      title="Title"
+      titleProps={{ size: "larger" }}
+    />
+  }
+  language="tsx"
+  code={`<Tile\n  title="Title"\n  titleProps={{ size: "larger" }}\n/>`}
+/>
 
 ### titleProps.weight
 
-<DocsRow>
-  <Tile
-    title="Title"
-    titleProps={{ weight: "light" }}
-  />
-  <Source
-    language="tsx"
-    code={`<Tile\n  title="Title"\n  titleProps={{ weight: "light" }}\n/>`}
-  />
-</DocsRow>
+<DocsRow
+  previewCell={
+    <Tile
+      title="Title"
+      titleProps={{ weight: "light" }}
+    />
+  }
+  language="tsx"
+  code={`<Tile\n  title="Title"\n  titleProps={{ weight: "light" }}\n/>`}
+/>
 
 ### titleProps.align
 
-<DocsRow>
-  <Tile
-    title="Title"
-    titleProps={{ align: "center" }}
-  />
-  <Source
-    language="tsx"
-    code={`<Tile\n  title="Title"\n  titleProps={{ align: "center" }}\n/>`}
-  />
-</DocsRow>
+<DocsRow
+  previewCell={
+    <Tile
+      title="Title"
+      titleProps={{ align: "center" }}
+    />
+  }
+  language="tsx"
+  code={`<Tile\n  title="Title"\n  titleProps={{ align: "center" }}\n/>`}
+/>
 
 ### titleProps.code
 
-<DocsRow>
-  <Tile
-    title="Title"
-    titleProps={{ code: true }}
-  />
-  <Source
-    language="tsx"
-    code={`<Tile\n  title="Title"\n  titleProps={{ code: true }}\n/>`}
-  />
-</DocsRow>
+<DocsRow
+  previewCell={
+    <Tile
+      title="Title"
+      titleProps={{ code: true }}
+    />
+  }
+  language="tsx"
+  code={`<Tile\n  title="Title"\n  titleProps={{ code: true }}\n/>`}
+/>
 
 ### titleProps.lineHeight
 
-<DocsRow>
-  <Tile
-    title="Title"
-    titleProps={{ lineHeight: "expanded" }}
-  />
-  <Source
-    language="tsx"
-    code={`<Tile\n  title="Title"\n  titleProps={{ lineHeight: "expanded" }}\n/>`}
-  />
-</DocsRow>
+<DocsRow
+  previewCell={
+    <Tile
+      title="Title"
+      titleProps={{ lineHeight: "expanded" }}
+    />
+  }
+  language="tsx"
+  code={`<Tile\n  title="Title"\n  titleProps={{ lineHeight: "expanded" }}\n/>`}
+/>

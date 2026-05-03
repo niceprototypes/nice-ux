@@ -1,8 +1,10 @@
+import * as React from "react"
 import styled from "styled-components"
 import Flex from "nice-react-flex"
 import { getToken } from "nice-react-styles"
+import { Source } from "@storybook/addon-docs/blocks"
 
-export const DocsRow = styled(Flex).attrs({ spacing: "large none" })`
+const Row = styled(Flex).attrs({ spacing: "large none" })`
   align-items: center;
   gap: ${getToken("gap", "larger").var};
 
@@ -47,3 +49,22 @@ export const DocsRow = styled(Flex).attrs({ spacing: "large none" })`
     }
   }
 `
+
+export type DocsRowLanguage = "tsx" | "css"
+
+export interface DocsRowProps {
+  previewCell: React.ReactNode
+  code: string
+  language?: DocsRowLanguage
+}
+
+export const DocsRow = ({
+  previewCell,
+  code,
+  language = "tsx",
+}: DocsRowProps) => (
+  <Row>
+    {previewCell}
+    <Source language={language} code={code} />
+  </Row>
+)

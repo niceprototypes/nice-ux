@@ -1,4 +1,4 @@
-import { Meta, Source } from "@storybook/addon-docs/blocks"
+import { Meta } from "@storybook/addon-docs/blocks"
 import Button from "nice-react-button"
 import Typography from "../../../../src/nice/Typography"
 import { DocsRow } from "../../../../src/components/DocsRow"
@@ -12,27 +12,27 @@ import { DocsRow } from "../../../../src/components/DocsRow"
   sole content when no children are provided.
 </Typography>
 
-<DocsRow>
-  <Button
-    onClick={() => {}}
-    icon="arrow"
-  >
-    Next
-  </Button>
-  <Source
-    language="tsx"
-    code={`<Button\n  onClick={handler}\n  icon="arrow-right"\n>\n  {children}\n</Button>`}
-  />
-</DocsRow>
+<DocsRow
+  previewCell={
+    <Button
+      onClick={() => {}}
+      icon="arrow"
+    >
+      Next
+    </Button>
+  }
+  language="tsx"
+  code={`<Button\n  onClick={handler}\n  icon="arrow-right"\n>\n  {children}\n</Button>`}
+/>
 
-<DocsRow>
-  <Button
-    onClick={() => {}}
-    icon="plus"
-    aria-label="Add item"
-  />
-  <Source
-    language="tsx"
-    code={`<Button\n  onClick={handler}\n  icon="plus"\n  aria-label="Add item"\n/>`}
-  />
-</DocsRow>
+<DocsRow
+  previewCell={
+    <Button
+      onClick={() => {}}
+      icon="plus"
+      aria-label="Add item"
+    />
+  }
+  language="tsx"
+  code={`<Button\n  onClick={handler}\n  icon="plus"\n  aria-label="Add item"\n/>`}
+/>

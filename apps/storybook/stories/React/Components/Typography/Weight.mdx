@@ -1,4 +1,4 @@
-import { Meta, Source } from "@storybook/addon-docs/blocks"
+import { Meta } from "@storybook/addon-docs/blocks"
 import Typography from "../../../../src/nice/Typography"
 import { DocsRow } from "../../../../src/components/DocsRow"
 import { toSource } from "../../../../src/services"
@@ -18,13 +18,13 @@ import { toSource } from "../../../../src/services"
 <div>
   {["light", "base", "medium", "semibold", "bold", "extrabold", "black"].map(
     weight => (
-      <DocsRow key={weight}>
-        <Typography weight={weight}>{weight}</Typography>
-        <Source
-          language="tsx"
-          code={toSource("Typography", { weight }, { children: weight })}
-        />
-      </DocsRow>
+      <DocsRow
+        previewCell={
+          <Typography weight={weight}>{weight}</Typography>
+        }
+        language="tsx"
+        code={toSource("Typography", { weight }, { children: weight })}
+      />
     )
   )}
 </div>

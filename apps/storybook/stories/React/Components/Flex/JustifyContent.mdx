@@ -1,4 +1,4 @@
-import { Meta, Source } from "@storybook/addon-docs/blocks"
+import { Meta } from "@storybook/addon-docs/blocks"
 import Typography from "../../../../src/nice/Typography"
 import { DocsRow } from "../../../../src/components/DocsRow"
 import DemoDots from "../../../../src/components/DemoDots"
@@ -25,17 +25,17 @@ import { threeDots } from "./Flex.services"
     "space-around",
     "space-evenly",
   ].map(value => (
-    <DocsRow key={value}>
-      <DemoDots
-        justifyContent={value}
-        dots={threeDots}
-        width="12rem"
-        bordered
-      />
-      <Source
-        language="tsx"
-        code={`<Flex justifyContent="${value}">\n  {children}\n</Flex>`}
-      />
-    </DocsRow>
+    <DocsRow
+      previewCell={
+        <DemoDots
+          justifyContent={value}
+          dots={threeDots}
+          width="12rem"
+          bordered
+        />
+      }
+      language="tsx"
+      code={`<Flex justifyContent="${value}">\n  {children}\n</Flex>`}
+    />
   ))}
 </div>

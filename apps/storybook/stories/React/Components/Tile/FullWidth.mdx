@@ -1,4 +1,4 @@
-import { Meta, Source } from "@storybook/addon-docs/blocks"
+import { Meta } from "@storybook/addon-docs/blocks"
 import Tile from "nice-react-tile"
 import Typography from "../../../../src/nice/Typography"
 import { DocsRow } from "../../../../src/components/DocsRow"
@@ -12,22 +12,22 @@ import { DocsRow } from "../../../../src/components/DocsRow"
   max-width.
 </Typography>
 
-<DocsRow>
-  <Tile>
-    <Typography color="light">Default width</Typography>
-  </Tile>
-  <Source
-    language="tsx"
-    code={`<Tile />`}
-  />
-</DocsRow>
+<DocsRow
+  previewCell={
+    <Tile>
+      <Typography color="light">Default width</Typography>
+    </Tile>
+  }
+  language="tsx"
+  code={`<Tile />`}
+/>
 
-<DocsRow>
-  <Tile fullWidth>
-    <Typography color="light">Full width tile</Typography>
-  </Tile>
-  <Source
-    language="tsx"
-    code={`<Tile fullWidth />`}
-  />
-</DocsRow>
+<DocsRow
+  previewCell={
+    <Tile fullWidth>
+      <Typography color="light">Full width tile</Typography>
+    </Tile>
+  }
+  language="tsx"
+  code={`<Tile fullWidth />`}
+/>
