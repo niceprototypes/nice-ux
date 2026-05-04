@@ -55,6 +55,38 @@ const ColorSwatch = ({ color }: { color: string }) => (
 export const OverrideExisting: Story = {
   name: "Overriding an existing variant",
   parameters: storyParameters,
+  /*render: () => (
+    <Flex
+      direction="column"
+      gap="large"
+    >
+      <GlobalStyles />
+      <Typography color="light">
+        Use an existing token key with an existing variant name to replace its
+        value. Here, the base font size is changed from the default to 18px.
+      </Typography>
+      <CodeBlock language="typescript">{`createTokens({
+  fontSize: {
+    base: "18px",
+  },
+})`}</CodeBlock>
+      <Flex
+        direction="column"
+        gap="small"
+      >
+        <Flex
+          gap="base"
+          alignItems="center"
+        >
+          <Typography code>--np--font-size--base</Typography>
+          <Typography color="light">18px</Typography>
+          <Typography color="lightest">
+            (was {getToken("fontSize").value})
+          </Typography>
+        </Flex>
+      </Flex>
+    </Flex>
+  ),*/
   render: () => (
     <Flex
       direction="column"
