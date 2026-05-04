@@ -1,7 +1,6 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import Typography from "../src/nice/Typography/index.ts"
 import Flex from "nice-react-flex"
-import WelcomeLink from "./WelcomeLink.tsx"
+import Intro from "../src/components/Intro"
 
 <Meta title="Welcome" />
 
@@ -15,54 +14,25 @@ A modular design system. Start with what you need — adopt more when you're rea
   direction="column"
   gap="larger"
 >
-  <Flex direction="column">
-    <WelcomeLink
-      href="/storybook/?path=/docs/welcome-tokens--docs"
-      iconName="Palette"
-    >
-      <span>Tokens</span>
-    </WelcomeLink>
-    <Typography size="base">
-      <span>
-        <strong>A complete token system</strong> with no framework required,
-        built on CSS custom properties, plus a standalone icon library.
-      </span>
-    </Typography>
-  </Flex>
-  <Flex direction="column">
-    <WelcomeLink
-      href="/storybook/?path=/docs/welcome-configuration--docs"
-      iconName="Settings"
-    >
-      <span>Configuration</span>
-    </WelcomeLink>
-    <Typography
-      as="span"
-      size="base"
-      style={{ margin: 0 }}
-    >
-      <span>
-        <strong>Tooling and setup guides</strong> for the Nice ecosystem — build
-        tools, type checking, testing, and local-link workflows.
-      </span>
-    </Typography>
-  </Flex>
-  <Flex direction="column">
-    <WelcomeLink
-      href="/storybook/?path=/docs/welcome-react--docs"
-      iconName="Cable"
-    >
-      <span>React</span>
-    </WelcomeLink>
-    <Typography
-      size="base"
-      style={{ margin: 0 }}
-    >
-      <span>
-        <strong>React bindings</strong> for the token system — a styles
-        provider, typed token API, font loading, pre-built components, and
-        utility hooks.
-      </span>
-    </Typography>
-  </Flex>
+  <Intro
+    href="/storybook/?path=/docs/welcome-tokens--docs"
+    iconName="Palette"
+    title="Tokens"
+  >
+    <strong>A complete token system</strong> with no framework required, built on CSS custom properties and a standalone icon library.
+  </Intro>
+  <Intro
+    href="/storybook/?path=/docs/welcome-react--docs"
+    iconName="Cable"
+    title="React"
+  >
+    <strong>React features</strong> for the token system including provider, typed token API, responsive UI components, and bindings.
+  </Intro>
+  <Intro
+    href="/storybook/?path=/docs/welcome-configuration--docs"
+    iconName="Settings"
+    title="Configuration"
+  >
+    <strong>Tooling and support</strong> for the Nice ecosystem including build tools, type checking, testing, and local workflows.
+  </Intro>
 </Flex>

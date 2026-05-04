@@ -33,11 +33,9 @@ const preview: Preview = {
       storySort: {
         order: [
           "Welcome",
-          ["Tokens", "Configuration", "React"],
+          ["Tokens", "React", "Configuration"],
           "Tokens",
           ["Styles", "Icons", "Responsive"],
-          "Configuration",
-          ["NPM", "Vite", "TypeScript", "Jest", "Rollup"],
           "React",
           [
             "Styles",
@@ -45,6 +43,8 @@ const preview: Preview = {
             "Components",
             "Bindings",
           ],
+          "Configuration",
+          ["NPM", "Vite", "TypeScript", "Jest", "Rollup"],
         ],
       },
     },

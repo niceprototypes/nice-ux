@@ -1,8 +1,9 @@
 import * as React from "react"
 import styled from "styled-components"
 import Flex from "nice-react-flex"
-import { getToken } from "nice-react-styles"
+import { getToken, withBreakpoints } from "nice-react-styles"
 import { Source } from "@storybook/addon-docs/blocks"
+import { PreviewWrapper } from "./DocsRow.styles"
 
 const Row = styled(Flex).attrs({ spacing: "large none" })`
   align-items: center;
@@ -56,15 +57,24 @@ export interface DocsRowProps {
   previewCell: React.ReactNode
   code: string
   language?: DocsRowLanguage
+  previewCellWidth?: string
 }
 
-export const DocsRow = ({
+const BaseDocsRow = ({
   previewCell,
   code,
   language = "tsx",
+  previewCellWidth,
 }: DocsRowProps) => (
   <Row>
-    {previewCell}
-    <Source language={language} code={code} />
+    <PreviewWrapper $width={previewCellWidth}>{previewCell}</PreviewWrapper>
+    <Source
+      language={language}
+      code={code}
+    />
   </Row>
 )
+
+export const DocsRow = withBreakpoints<DocsRowProps>(BaseDocsRow, [
+  { min: "medium", props: { previewCellWidth: "45%" } },
+])
