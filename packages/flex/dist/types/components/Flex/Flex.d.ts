@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FlexProps } from "./types";
+import { FlexProps } from "./Flex.types";
 /**
  * Flex Component
  *

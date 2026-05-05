@@ -1,4 +1,4 @@
-import { FlexProps } from "../components/Flex/types"
+import { FlexProps } from "../components/Flex/Flex.types"
 import { BREAKPOINT_SMALL } from "nice-react-styles"
 
 /**

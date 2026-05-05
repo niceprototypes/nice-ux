@@ -1,4 +1,4 @@
-import { SpacingDefinition } from "../components/Flex/types";
+import { SpacingDefinition } from "../components/Flex/Flex.types";
 /**
  * Generates CSS spacing properties (padding or margin) from a SpacingDefinition
  *

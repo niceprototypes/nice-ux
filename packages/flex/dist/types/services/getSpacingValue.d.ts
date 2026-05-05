@@ -1,4 +1,4 @@
-import { SpacingDefinition, Spacing } from "../components/Flex/types";
+import { SpacingDefinition, Spacing } from "../components/Flex/Flex.types";
 import { type BreakpointName } from "nice-react-styles";
 /**
  * Extracts the SpacingDefinition for a specific breakpoint from a spacing prop

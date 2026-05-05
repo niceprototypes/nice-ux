@@ -1,6 +1,6 @@
 import * as React from "react"
-import { FlexStyled } from "./styles"
-import { FlexProps } from "./types"
+import { FlexStyled } from "./Flex.styles"
+import { FlexProps } from "./Flex.types"
 import { normalizeProps } from "../../utilities/normalizeProps"
 
 /**

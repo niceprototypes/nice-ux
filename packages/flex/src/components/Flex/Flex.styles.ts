@@ -5,7 +5,7 @@ import {
   BREAKPOINT_MEDIUM,
   BREAKPOINT_LARGE,
 } from "nice-react-styles"
-import { FlexProps } from "./types"
+import { FlexProps } from "./Flex.types"
 import { styleFlex } from "../../services/styleFlex"
 
 /**

@@ -1,4 +1,4 @@
-import { SpacingDefinition, Spacing, FlexSpacingShorthandType, FlexSpacingResponsiveType } from "../components/Flex/types"
+import { SpacingDefinition, Spacing, FlexSpacingShorthandType, FlexSpacingResponsiveType } from "../components/Flex/Flex.types"
 import { BREAKPOINT_SMALL, type BreakpointName } from "nice-react-styles"
 import { parseSpacingShorthand } from "../utilities/parseSpacingShorthand"
 import { isResponsiveObject } from "./isResponsiveObject"

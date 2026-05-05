@@ -1,5 +1,5 @@
 import { getConstant } from "nice-react-styles"
-import { GapSize } from "../components/Flex/types"
+import { GapSize } from "../components/Flex/Flex.types"
 
 /**
  * Converts a GapSize value to its corresponding CSS value using CSS variables

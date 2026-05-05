@@ -1,4 +1,4 @@
-import { FlexGapSizeType, FlexSpacingDefinitionType, FlexSpacingShorthandType } from "../components/Flex/types"
+import { FlexGapSizeType, FlexSpacingDefinitionType, FlexSpacingShorthandType } from "../components/Flex/Flex.types"
 
 /**
  * Parses a CSS-like spacing shorthand string into a SpacingDefinition object.
