@@ -1,6 +1,6 @@
 import * as React from "react"
-import { IconProps } from "./types"
-import { IconWrapperStyled, ImageStyled } from "./styles"
+import { IconProps } from "./Icon.types"
+import { IconWrapperStyled, ImageStyled } from "./Icon.styles"
 import { getIcon } from "../../services/getIcon"
 import { getVendorIcon } from "../../services/registerVendorResolver"
 import { isSpinning } from "../../utilities/isSpinning"

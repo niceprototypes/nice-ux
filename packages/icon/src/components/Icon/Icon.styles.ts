@@ -1,7 +1,7 @@
 import styled, { css, keyframes } from "styled-components"
 import { getIconToken } from "../../tokens/getIconToken"
 import { getToken, type ModeType } from "nice-react-styles"
-import type { IconSizeType, IconColorType, IconStrokeWidthType } from "./types"
+import type { IconSizeType, IconColorType, IconStrokeWidthType } from "./Icon.types"
 
 // Helper — calls getToken with optional mode
 const getColorToken = (color: string, mode?: ModeType) =>

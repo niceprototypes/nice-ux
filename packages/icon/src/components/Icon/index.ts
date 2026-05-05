@@ -1,9 +1,9 @@
 import { withBreakpoints } from "nice-react-styles"
 import BaseIcon from "./Icon"
-import type { IconProps } from "./types"
+import type { IconProps } from "./Icon.types"
 
 const Icon = withBreakpoints<IconProps>(BaseIcon)
 
 export default Icon
-export * from "./types"
-export { default as IconTypes } from "./types"
+export * from "./Icon.types"
+export { default as IconTypes } from "./Icon.types"
