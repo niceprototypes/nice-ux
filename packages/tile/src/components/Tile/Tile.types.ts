@@ -1,7 +1,7 @@
 import * as React from "react"
 import type { FlexSpacingType, FlexProps } from "nice-react-flex"
 import type { Breakpoints, ModeType, GapType } from "nice-react-styles"
-import type { TileTypographyProps } from "../TileContent/types"
+import type { TileTypographyProps } from "../TileContent/TileContent.types"
 
 /**
  * TileMaxWidthValueType

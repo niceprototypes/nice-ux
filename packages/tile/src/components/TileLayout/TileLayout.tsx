@@ -1,8 +1,8 @@
 import * as React from "react"
 import Flex from "nice-react-flex"
 import TileContent from "../TileContent"
-import type { TileLayoutProps } from "./types"
-import { OuterFlex } from "./styles"
+import type { TileLayoutProps } from "./TileLayout.types"
+import { OuterFlex } from "./TileLayout.styles"
 
 const TileLayout: React.FC<TileLayoutProps> = ({
   children,

@@ -1,6 +1,6 @@
 import * as React from "react"
 import type { ModeType, GapType } from "nice-react-styles"
-import type { TileTypographyProps } from "../TileContent/types"
+import type { TileTypographyProps } from "../TileContent/TileContent.types"
 
 export interface ContentMainProps {
   title?: React.ReactNode

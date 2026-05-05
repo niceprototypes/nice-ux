@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components"
 import Flex from "nice-react-flex"
 import { getBreakpoint } from "nice-react-styles"
-import type { TileMaxWidthType, TileMaxWidthValueType } from "../Tile/types"
+import type { TileMaxWidthType, TileMaxWidthValueType } from "../Tile/Tile.types"
 
 const renderMaxWidthValue = (value: TileMaxWidthValueType) =>
   value === "none" ? css`max-width: none;` : css`max-width: ${value}px;`

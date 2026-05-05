@@ -1,7 +1,7 @@
 import * as React from "react"
 import Flex from "nice-react-flex"
 import ContentMain from "../ContentMain"
-import type { TileContentProps } from "./types"
+import type { TileContentProps } from "./TileContent.types"
 
 const TileContent: React.FC<TileContentProps> = ({
   children,

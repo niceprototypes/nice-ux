@@ -1,6 +1,6 @@
 import * as React from "react"
-import type { TileProps } from "./types"
-import { OuterFlex } from "./styles"
+import type { TileProps } from "./Tile.types"
+import { OuterFlex } from "./Tile.styles"
 import TileLayout from "../TileLayout"
 
 const Tile: React.FC<TileProps> = ({
