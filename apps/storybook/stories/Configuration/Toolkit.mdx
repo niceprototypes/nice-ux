@@ -1,0 +1,356 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta
+  title="Configuration/Toolkit"
+  name="Docs"
+/>
+
+# Toolkit
+
+```bash
+npm install -g nice-toolkit
+```
+
+### Usage
+
+```bash
+npx nice-toolkit ../nice-react-button
+```
+
+---
+
+## Why nice-toolkit?
+
+Nice ecosystem packages use `file:` references for local development. When npm installs these, each package gets its own `node_modules` with duplicate React/styled-components. This causes "Invalid hook call" errors.
+
+```bash
+# The problem: duplicate React instances
+your-app/node_modules/react           ← App's React
+nice-react-tile/node_modules/react    ← Tile's React (CONFLICT!)
+nice-react-flex/node_modules/react    ← Flex's React (CONFLICT!)
+
+# The solution: clean all linked packages
+node ../toolkit/nice-toolkit --clean-all
+```
+
+#### What It Removes
+
+By default, these singleton packages are removed from linked packages:
+
+```bash
+• react
+• react-dom
+• styled-components
+• @types/react
+• @types/react-dom
+```
+
+---
+
+## file: Dependencies
+
+All nice-* packages use `file:` references for interdependencies. This enables live changes to propagate through the dependency chain.
+
+```json
+// package.json pattern
+{
+  "dependencies": {
+    "nice-styles": "file:../styles",
+    "nice-react-styles": "file:../react-styles"
+  },
+  "peerDependencies": {
+    "nice-react-flex": ">=1.0.0",
+    "react": ">=19.2.0"
+  },
+  "devDependencies": {
+    "nice-configuration": "file:../configuration",
+    "nice-react-flex": "file:../react-flex"
+  }
+}
+```
+
+#### After Any Dependency Change
+
+Always run `--clean-all` after `npm install` or modifying dependencies:
+
+```bash
+node ../toolkit/nice-toolkit --clean-all
+```
+
+---
+
+## Basic Usage
+
+```bash
+# Link a single package
+npx nice-toolkit ../react-button
+
+# Short alias
+ntk ../react-button
+
+# Link multiple packages
+ntk ../react-button
+ntk ../react-icon
+ntk ../react-flex
+```
+
+#### Clean All Linked Packages
+
+Recursively find and clean all `file:` linked packages in your project:
+
+```bash
+# Clean all linked packages at once
+ntk --clean-all
+
+# Preview what would be cleaned
+ntk --clean-all --dry-run
+```
+
+---
+
+## --clean-only
+
+Remove conflicting packages without creating a new link. Useful when packages are already linked via `package.json` `file:` references.
+
+```bash
+# Clean a specific linked package
+ntk --clean-only ../react-button
+
+# Clean with custom exclusions
+ntk --clean-only --add-exclude @emotion/react ../react-button
+```
+
+---
+
+## --unlink
+
+Restore packages to their original npm versions. This removes `file:` references and reinstalls from the registry.
+
+```bash
+# Unlink all file: dependencies
+ntk --unlink
+
+# Preview what would be unlinked
+ntk --unlink --dry-run
+```
+
+Note: Run this before `npm install` in linked packages, or re-run nice-toolkit after installing dependencies in linked packages.
+
+---
+
+## --exclude / --add-exclude
+
+#### --exclude
+
+Override the default list with your own packages:
+
+```bash
+# Only remove React packages (skip styled-components)
+ntk --exclude react,react-dom ../my-component
+```
+
+#### --add-exclude
+
+Add packages to the default list:
+
+```bash
+# Add Emotion packages to defaults
+ntk --add-exclude @emotion/react,@emotion/styled ../my-component
+
+# Add Material-UI packages
+ntk --add-exclude @mui/material,@mui/icons-material ../my-component
+```
+
+---
+
+## Other Options
+
+#### --dry-run
+
+Preview changes without making them:
+
+```bash
+ntk --dry-run ../react-button
+ntk --dry-run --clean-all
+```
+
+#### --manager
+
+Force a specific package manager (auto-detected by default):
+
+```bash
+ntk --manager pnpm ../my-component
+ntk --manager yarn ../my-component
+ntk --manager npm ../my-component
+```
+
+#### --skip-peer-check
+
+Skip automatic peerDependencies enforcement:
+
+```bash
+ntk --skip-peer-check ../my-component
+```
+
+---
+
+## --dev
+
+Runs `npm run dev` in all linked packages concurrently. This rebuilds packages automatically when their source files change.
+
+```bash
+# Run dev scripts in all linked packages
+ntk --dev
+```
+
+Packages without a dev script are automatically skipped.
+
+---
+
+## --watch
+
+Watches linked package dist folders and touches a trigger file when changes are detected. This causes webpack/CRA to recompile.
+
+```bash
+# Watch dist folders for changes
+ntk --watch
+
+# Watch a different folder (default: dist)
+ntk --watch --watch-dir build
+```
+
+#### Setup for CRA/webpack
+
+Add the trigger file import to your entry point:
+
+```typescript
+// src/index.tsx
+import './.symlink-trigger.js';
+```
+
+Add to `.gitignore`:
+
+```bash
+.symlink-trigger.js
+```
+
+---
+
+## --dev --watch (Recommended)
+
+Combines both flags: rebuilds packages on source changes AND triggers webpack/CRA recompilation. This is the recommended setup for CRA projects.
+
+```bash
+# In package.json
+"scripts": {
+  "watch:deps": "ntk --dev --watch"
+}
+
+# Run alongside your dev server
+npm start          # Terminal 1
+npm run watch:deps # Terminal 2
+```
+
+#### How it works
+
+```bash
+Source change in linked package
+       ↓
+--dev runs rollup/tsc rebuild
+       ↓
+dist/ files update
+       ↓
+--watch detects change
+       ↓
+Touches .symlink-trigger.js
+       ↓
+CRA/webpack recompiles
+```
+
+---
+
+## --publish
+
+Publishes Nice ecosystem packages to npm in dependency order. Handles version bumping, `file:` dep swapping, building, and restoring local refs.
+
+```bash
+# Publish all changed packages (interactive prompts)
+ntk --publish
+
+# Publish specific packages
+ntk --publish nice-styles,nice-react-styles
+
+# Preview what would be published
+ntk --publish --dry-run
+```
+
+#### Workflow
+
+```bash
+1. Scans ~/Code/nice-* for packages with changes
+2. Prompts for version bump (patch/minor/major/skip)
+3. Swaps file: deps → semver ranges
+4. Builds each package
+5. Publishes in dependency order (npm prompts for OTP)
+6. Restores file: refs for local development
+7. Commits and pushes version changes
+```
+
+#### Publish Order
+
+Packages are published bottom-to-top per dependency chain. The publish order is defined in `nice-toolkit/registry.json` and queried via the registry service. Run `ntk --publish --dry-run` to see the current order.
+
+#### Dry Run
+
+Use `--dry-run` or `--dry-publish` to preview without making changes:
+
+```bash
+ntk --publish --dry-run
+ntk --dry-publish
+```
+
+---
+
+## Troubleshooting
+
+#### Invalid Hook Call Error
+
+Re-run the link command to clean up duplicate React:
+
+```bash
+ntk --clean-all
+```
+
+#### Changes Not Appearing
+
+Run `--dev` to rebuild linked packages when their source changes:
+
+```bash
+# Run in a separate terminal while developing
+ntk --dev
+```
+
+The `nice-configuration` rollup settings include optimized watch options that prevent file caching issues. Changes should appear immediately.
+
+#### Clear CRA Cache
+
+If changes still don't appear, clear the webpack cache:
+
+```bash
+rm -rf node_modules/.cache && npm start
+```
+
+#### After Installing Dependencies
+
+When you run `npm install` in a linked package, conflicts return. Either unlink first or re-run nice-toolkit:
+
+```bash
+# Option 1: Unlink before installing
+ntk --unlink
+cd ../react-button && npm install
+cd - && ntk ../react-button
+
+# Option 2: Re-clean after installing
+cd ../react-button && npm install
+cd - && ntk --clean-all
+```

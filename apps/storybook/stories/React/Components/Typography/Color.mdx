@@ -1,5 +1,6 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import Typography from "../../../../src/nice/Typography"
+import StoryDescription from "../../../../src/components/StoryDescription"
 import { DocsRow } from "../../../../src/components/DocsRow"
 import { toSource } from "../../../../src/services"
 
@@ -7,13 +8,9 @@ import { toSource } from "../../../../src/services"
 
 # Typography — Color
 
-<Typography color="light">
-  Sets the text color using foregroundColor tokens. Maps to the CSS{" "}
-  <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/color">
-    <code>color</code>
-  </a>{" "}
-  property.
-</Typography>
+<StoryDescription property="color">
+  Sets the text color using foregroundColor tokens.
+</StoryDescription>
 
 <div>
   {[

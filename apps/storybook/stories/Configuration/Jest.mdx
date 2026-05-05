@@ -1,7 +1,9 @@
-import { Meta, Stories } from "@storybook/addon-docs/blocks"
-import * as JestStories from "./Jest.stories"
+import { Meta } from "@storybook/addon-docs/blocks"
 
-<Meta of={JestStories} />
+<Meta
+  title="Configuration/Jest"
+  name="Docs"
+/>
 
 # Jest
 
@@ -18,4 +20,68 @@ export { default } from "nice-configuration/jest/react"
 
 ---
 
-<Stories />
+## React Jest Configuration
+
+Complete Jest configuration for React components with TypeScript support. Uses ts-jest for native TypeScript compilation.
+
+```typescript
+// jest.config.js
+export { default } from "nice-configuration/jest/react"
+```
+
+#### Included Configuration
+
+```typescript
+{
+  preset: "ts-jest",
+  testEnvironment: "jsdom",
+  moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
+  testMatch: ["**/*.test.ts", "**/*.test.tsx"],
+  transform: {
+    "^.+\\.(ts|tsx|js|jsx)$": ["ts-jest", { useESM: true }]
+  },
+  transformIgnorePatterns: [
+    "node_modules/(?!(nice-[^/]+)/)"
+  ],
+  extensionsToTreatAsEsm: [".ts", ".tsx"],
+  moduleNameMapper: {
+    "^(\\.{1,2}/.*)\\.js$": "$1",
+    "^.+\\.(css|less|scss|sass)$": "<rootDir>/__mocks__/styleMock.js"
+  },
+  setupFilesAfterEnv: ["@testing-library/jest-dom"]
+}
+```
+
+#### Peer Dependencies
+
+Install the required peer dependencies:
+
+```bash
+npm install -D jest ts-jest jest-environment-jsdom @testing-library/jest-dom
+```
+
+---
+
+## CSS Mock
+
+Empty module export for mocking CSS imports in Jest tests. Referenced by the React config's moduleNameMapper.
+
+```typescript
+// __mocks__/styleMock.js
+module.exports = {}
+```
+
+This mock is automatically configured in the React Jest config. Create the file at `__mocks__/styleMock.js` in your project root.
+
+#### Alternative: Direct Import
+
+You can also import the mock directly if you customize your Jest config:
+
+```typescript
+// jest.config.js
+export default {
+  moduleNameMapper: {
+    "^.+\\.(css|scss)$": "nice-configuration/jest/css-mock"
+  }
+}
+```

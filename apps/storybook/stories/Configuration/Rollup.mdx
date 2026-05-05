@@ -1,7 +1,9 @@
-import { Meta, Stories } from "@storybook/addon-docs/blocks"
-import * as RollupStories from "./Rollup.stories"
+import { Meta } from "@storybook/addon-docs/blocks"
 
-<Meta of={RollupStories} />
+<Meta
+  title="Configuration/Rollup"
+  name="Docs"
+/>
 
 # Rollup
 
@@ -23,4 +25,148 @@ export default createConfiguration({ plugins: [...] })
 
 ---
 
-<Stories />
+## createConfiguration
+
+Creates a complete rollup configuration with sensible defaults for nice-* packages. Outputs both CJS and ESM formats with sourcemaps. All plugins are included by default.
+
+```typescript
+// rollup.config.js
+import { createConfiguration } from "nice-configuration/rollup"
+
+// Basic usage - uses all defaults
+export default createConfiguration()
+
+// With options
+export default createConfiguration({
+  input: "src/index.ts",
+  additionalExternals: ["lodash"],
+  bundlePackages: ["nice-icons"],
+})
+```
+
+#### Options
+
+```typescript
+{
+  input?: string              // Entry point (default: "src/index.ts")
+  tsconfig?: string           // Path to tsconfig (default: "./tsconfig.json")
+  output?: object             // Custom output config (merged with defaults)
+  plugins?: Function[]        // Override default plugins (escape hatch)
+  additionalExternals?: string[]   // Extra packages to externalize
+  bundlePackages?: string[]   // nice-* packages to bundle instead of externalize
+  dts?: boolean               // Generate declaration bundle (default: true)
+  dtsInput?: string           // Custom dts input (default: "dist/types/index.d.ts")
+}
+```
+
+#### Default Plugins
+
+The following plugins are included automatically:
+
+```text
+• rollup-plugin-peer-deps-external
+• @rollup/plugin-node-resolve (browser: true)
+• @rollup/plugin-commonjs
+• @rollup/plugin-typescript
+• rollup-plugin-dts (for declaration bundling)
+```
+
+---
+
+## isNiceExternal
+
+Pattern-based external detection that automatically externalizes all nice-* packages, React ecosystem, and styled-components. Handles subpath imports like CSS files.
+
+```typescript
+import { isNiceExternal } from "nice-configuration/rollup"
+
+// Returns true for:
+isNiceExternal("nice-styles")           // nice-* packages
+isNiceExternal("nice-styles/variables.css")  // subpath imports
+isNiceExternal("react")                 // React
+isNiceExternal("react-dom")             // React DOM
+isNiceExternal("styled-components")     // styled-components
+
+// Returns false for:
+isNiceExternal("lodash")                // other packages
+```
+
+#### Manual Usage
+
+If you need custom rollup config, use `isNiceExternal` directly:
+
+```typescript
+// rollup.config.js
+import { isNiceExternal } from "nice-configuration/rollup"
+
+export default {
+  input: "src/index.ts",
+  output: [...],
+  plugins: [...],
+  external: isNiceExternal
+}
+```
+
+---
+
+## Watch Mode Configuration
+
+The configuration includes optimized watch settings that prevent file caching issues during local development. This ensures changes appear immediately without delay.
+
+```typescript
+// Included automatically in createConfiguration()
+{
+  cache: false,  // Disable rollup internal caching
+  watch: {
+    buildDelay: 200,  // Debounce rapid changes
+    clearScreen: false,
+    chokidar: {
+      awaitWriteFinish: {
+        stabilityThreshold: 150,
+        pollInterval: 50
+      },
+      usePolling: true,
+      interval: 100
+    }
+  }
+}
+```
+
+#### Why These Settings?
+
+Without these settings, rollup's watch mode can exhibit an "off by one" caching bug where file changes appear one save behind. The `awaitWriteFinish` option ensures files are fully written to disk before rollup reads them, and `usePolling` provides more reliable file change detection on macOS.
+
+---
+
+## createExternals
+
+Creates an external function with additional packages or bundle overrides.
+
+```typescript
+import { createExternals } from "nice-configuration/rollup"
+
+// Add extra packages to externalize
+const external = createExternals({
+  additional: ["lodash", "date-fns"],
+})
+
+// Bundle specific nice-* packages instead of externalizing
+const external = createExternals({
+  bundle: ["nice-icons"],
+})
+
+// Both options together
+const external = createExternals({
+  additional: ["lodash"],
+  bundle: ["nice-icons"],
+})
+
+export default {
+  input: "src/index.ts",
+  output: [...],
+  plugins: [...],
+  external
+}
+```
+
+Note: Legacy array format is still supported for backwards compatibility.

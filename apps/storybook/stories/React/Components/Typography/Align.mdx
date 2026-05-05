@@ -1,6 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import Flex from "nice-react-flex"
 import Typography from "../../../../src/nice/Typography"
+import StoryDescription from "../../../../src/components/StoryDescription"
 import { DocsRow } from "../../../../src/components/DocsRow"
 import { toSource } from "../../../../src/services"
 
@@ -10,13 +11,9 @@ export const loremIpsum = "Lorem ipsum dolor sit amet"
 
 # Typography — Align
 
-<Typography color="light">
-  Aligns text horizontally within its container. Maps to the CSS{" "}
-  <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/text-align">
-    <code>text-align</code>
-  </a>{" "}
-  property.
-</Typography>
+<StoryDescription property="text-align">
+  Aligns text horizontally within its container.
+</StoryDescription>
 
 <div>
   {["left", "center", "right", "justify"].map(align => (

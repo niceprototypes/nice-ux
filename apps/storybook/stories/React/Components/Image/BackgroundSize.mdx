@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import Image from "nice-react-image"
-import Typography from "../../../../src/nice/Typography"
+import StoryDescription from "../../../../src/components/StoryDescription"
 import { DocsRow } from "../../../../src/components/DocsRow"
 import { getPicsum, toSource } from "../../../../src/services"
 
@@ -8,13 +8,9 @@ import { getPicsum, toSource } from "../../../../src/services"
 
 # Image — BackgroundSize
 
-<Typography color="light">
-  Controls how the image fits within its container. Maps to the CSS{" "}
-  <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-size">
-    <code>background-size</code>
-  </a>{" "}
-  property.
-</Typography>
+<StoryDescription property="background-size">
+  Controls how the image fits within its container.
+</StoryDescription>
 
 <div>
   {["contain", "cover", "fill", "none", "scale-down"].map(size => {

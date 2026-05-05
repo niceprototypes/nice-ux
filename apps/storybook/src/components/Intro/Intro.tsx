@@ -14,7 +14,7 @@ type Props = {
 const Intro: React.FC<Props> = ({ href, iconName, title, children }) => (
   <Flex direction="column">
     <AnchorStyled href={href}>
-      <Flex alignItems="center" gap="smaller">
+      <Flex alignItems="center" gap="small">
         <Icon
           name={iconName}
           size="large"
@@ -33,7 +33,7 @@ const Intro: React.FC<Props> = ({ href, iconName, title, children }) => (
         </Typography>
       </Flex>
     </AnchorStyled>
-    <Typography size="base">{children}</Typography>
+    <Typography as="span" size="base">{children}</Typography>
   </Flex>
 )
 

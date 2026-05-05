@@ -1,5 +1,6 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import Typography from "../../../../src/nice/Typography"
+import StoryDescription from "../../../../src/components/StoryDescription"
 import { DocsRow } from "../../../../src/components/DocsRow"
 import { toSource } from "../../../../src/services"
 
@@ -7,14 +8,10 @@ import { toSource } from "../../../../src/services"
 
 # Typography — LegibilityOptimized
 
-<Typography color="light">
+<StoryDescription property="text-rendering">
   Applies <code>text-rendering: optimizeLegibility</code> for improved kerning
-  and ligatures. Maps to the CSS{" "}
-  <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/text-rendering">
-    <code>text-rendering</code>
-  </a>{" "}
-  property.
-</Typography>
+  and ligatures.
+</StoryDescription>
 
 <DocsRow
   previewCell={

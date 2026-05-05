@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { getToken } from "nice-react-styles"
-import Typography from "../../../../src/nice/Typography"
+import StoryDescription from "../../../../src/components/StoryDescription"
 import { DocsRow } from "../../../../src/components/DocsRow"
 import DemoDots from "../../../../src/components/DemoDots"
 
@@ -11,13 +11,9 @@ export const growCode = a =>
 
 # Flex — Grow
 
-<Typography color="light">
-  Controls how much a flex item grows relative to its siblings. Maps to the CSS{" "}
-  <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow">
-    <code>flex-grow</code>
-  </a>{" "}
-  property.
-</Typography>
+<StoryDescription property="flex-grow">
+  Controls how much a flex item grows relative to its siblings.
+</StoryDescription>
 
 <DocsRow
   previewCell={

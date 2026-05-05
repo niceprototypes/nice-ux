@@ -1,5 +1,6 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import Typography from "../../../../src/nice/Typography"
+import StoryDescription from "../../../../src/components/StoryDescription"
 import { DocsRow } from "../../../../src/components/DocsRow"
 import { toSource } from "../../../../src/services"
 
@@ -10,14 +11,9 @@ export const loremIpsumLong =
 
 # Typography — LineHeight
 
-<Typography color="light">
-  Sets the vertical spacing between lines of text using lineHeight tokens. Maps
-  to the CSS{" "}
-  <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/line-height">
-    <code>line-height</code>
-  </a>{" "}
-  property.
-</Typography>
+<StoryDescription property="line-height">
+  Sets the vertical spacing between lines of text using lineHeight tokens.
+</StoryDescription>
 
 <div>
   {["condensed", "base", "expanded"].map(lineHeight => (

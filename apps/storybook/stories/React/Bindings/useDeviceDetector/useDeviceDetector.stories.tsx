@@ -5,9 +5,9 @@ import {
   useDevice,
 } from "nice-react-device-detector"
 import React, { useEffect, useState } from "react"
-import Typography from "../../../src/nice/Typography"
+import Typography from "../../../../src/nice/Typography"
 import Flex from "nice-react-flex"
-import { CodeRow } from "../../../src/components/CodeRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 
 const Row = CodeRow
 

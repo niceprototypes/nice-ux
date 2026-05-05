@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { getToken } from "nice-react-styles"
-import Typography from "../../../../src/nice/Typography"
+import StoryDescription from "../../../../src/components/StoryDescription"
 import { DocsRow } from "../../../../src/components/DocsRow"
 import DemoDots from "../../../../src/components/DemoDots"
 import { threeDots } from "./Flex.services"
@@ -42,13 +42,9 @@ export const stretchDots = [
 
 # Flex — AlignItems
 
-<Typography color="light">
-  Aligns items along the cross axis. Maps to the CSS{" "}
-  <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/align-items">
-    <code>align-items</code>
-  </a>{" "}
-  property.
-</Typography>
+<StoryDescription property="align-items">
+  Aligns items along the cross axis.
+</StoryDescription>
 
 <DocsRow
   previewCell={

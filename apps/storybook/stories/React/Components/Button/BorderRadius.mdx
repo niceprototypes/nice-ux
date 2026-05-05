@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import Button from "nice-react-button"
-import Typography from "../../../../src/nice/Typography"
+import StoryDescription from "../../../../src/components/StoryDescription"
 import { DocsRow } from "../../../../src/components/DocsRow"
 
 export const radii = ["small", "base", "large"]
@@ -16,13 +16,9 @@ export const radiusCode = r =>
 
 # Button — BorderRadius
 
-<Typography color="light">
-  Controls the corner rounding of the button. Maps to the CSS{" "}
-  <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius">
-    <code>border-radius</code>
-  </a>{" "}
-  property.
-</Typography>
+<StoryDescription property="border-radius">
+  Controls the corner rounding of the button.
+</StoryDescription>
 
 <div>
   {radii.map(radius => (

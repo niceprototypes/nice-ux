@@ -10,10 +10,7 @@
     "format:check": "prettier --check .",
     "storybook": "storybook dev -p 6006 --no-open",
     "build": "storybook build",
-    "build:deploy": "npm run build && rm -rf ../website/public/storybook && cp -r storybook-static ../website/public/storybook",
-    "deploy": "npm run build && firebase deploy --only hosting",
     "dev": "concurrently \"npm run storybook\" \"node ../toolkit/nice-toolkit --dev\"",
-    "dev:deploy": "nodemon --watch stories --watch .storybook --ext ts,tsx,js,jsx,css,mdx --exec \"npm run deploy\"",
     "prepublish:react-icon": "node scripts/prepublish.js react-icon",
     "publish:react-icon": "npm run prepublish:react-icon && npm --prefix ../react-icon publish"
   },

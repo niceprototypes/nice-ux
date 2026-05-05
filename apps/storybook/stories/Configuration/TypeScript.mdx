@@ -1,7 +1,9 @@
-import { Meta, Stories } from "@storybook/addon-docs/blocks"
-import * as TypeScriptStories from "./TypeScript.stories"
+import { Meta } from "@storybook/addon-docs/blocks"
 
-<Meta of={TypeScriptStories} />
+<Meta
+  title="Configuration/TypeScript"
+  name="Docs"
+/>
 
 # TypeScript
 
@@ -18,4 +20,67 @@ npm install -D nice-configuration
 
 ---
 
-<Stories />
+## Base Configuration
+
+Extends the base TypeScript configuration for non-React packages like nice-styles.
+
+```json
+// tsconfig.json
+{
+  "extends": "nice-configuration/typescript/base",
+  "compilerOptions": {
+    "outDir": "dist/esm",
+    "declarationDir": "dist/esm/types"
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}
+```
+
+#### Included Options
+
+```json
+{
+  "target": "ES2020",
+  "module": "ESNext",
+  "lib": ["ES2020", "DOM", "DOM.Iterable"],
+  "moduleResolution": "bundler",
+  "declaration": true,
+  "declarationMap": true,
+  "strict": true,
+  "esModuleInterop": true,
+  "skipLibCheck": true,
+  "forceConsistentCasingInFileNames": true,
+  "isolatedModules": true,
+  "resolveJsonModule": true
+}
+```
+
+---
+
+## React Configuration
+
+Extends the base configuration with JSX support for React components.
+
+```json
+// tsconfig.json
+{
+  "extends": "nice-configuration/typescript/react",
+  "compilerOptions": {
+    "outDir": "dist/esm",
+    "declarationDir": "dist/esm/types"
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}
+```
+
+#### Additional Options
+
+```json
+{
+  "jsx": "react-jsx"
+}
+```
+
+Note: Path-relative options like `outDir`, `declarationDir`, and `include` must be specified in each project as they resolve relative to the config file location.

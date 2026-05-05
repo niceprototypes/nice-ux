@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import Flex from "nice-react-flex"
-import Typography from "../../../src/nice/Typography"
-import { DocsRow } from "../../../src/components/DocsRow"
+import Typography from "../../src/nice/Typography"
+import { DocsRow } from "../../src/components/DocsRow"
 
 export const breakpoints = [
   { name: "small", query: "@media (max-width: 640px)" },
@@ -62,6 +62,7 @@ getBreakpoint("large").query // → "@media (min-width: 1280px)"
 <div>
   {breakpoints.map(({ name, query }) => (
     <DocsRow
+      key={name}
       previewCell={
         <Typography>{name}</Typography>
       }
