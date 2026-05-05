@@ -1,7 +1,7 @@
 import { getToken } from "nice-react-styles"
 import React, { useEffect } from "react"
-import { SliderItemStyled, SliderOuterStyled } from "./styles"
-import type { SliderProps } from "./types"
+import { SliderItemStyled, SliderOuterStyled } from "./Slider.styles"
+import type { SliderProps } from "./Slider.types"
 
 // Single source of truth — CSS transition reads the same token via .var
 const animationDurationMs = parseInt(getToken("animationDuration", "base").value, 10)
