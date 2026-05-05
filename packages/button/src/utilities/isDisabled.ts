@@ -1,4 +1,4 @@
-import type { ButtonStateType } from "../components/Button/types"
+import type { ButtonStateType } from "../components/Button/Button.types"
 
 /**
  * Determines if the button is disabled based on state

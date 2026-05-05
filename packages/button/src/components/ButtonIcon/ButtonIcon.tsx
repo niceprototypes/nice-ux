@@ -1,6 +1,6 @@
 import * as React from "react"
 import Icon from "nice-react-icon"
-import { ButtonIconProps } from "./types"
+import { ButtonIconProps } from "./ButtonIcon.types"
 
 /**
  * ButtonIcon component handles icon rendering within buttons

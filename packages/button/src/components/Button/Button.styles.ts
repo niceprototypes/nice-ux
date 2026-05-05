@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { getBreakpoint, getToken, BREAKPOINT_MEDIUM } from "nice-react-styles"
 import type { CellHeightType, BorderWidthType, ModeType } from "nice-react-styles"
-import type { ButtonBorderRadiusType, ButtonStateType, ButtonStatusType } from "./types"
+import type { ButtonBorderRadiusType, ButtonStateType, ButtonStatusType } from "./Button.types"
 import { getButtonToken } from "../../tokens/getButtonToken"
 import { getStatusToken } from "../../utilities/getStatusToken"
 

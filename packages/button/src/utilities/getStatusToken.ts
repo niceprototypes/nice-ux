@@ -1,5 +1,5 @@
 import type { TokenResult } from "nice-react-styles"
-import type { ButtonStatusType, ButtonStateType } from "../components/Button/types"
+import type { ButtonStatusType, ButtonStateType } from "../components/Button/Button.types"
 import { getButtonToken } from "../tokens/getButtonToken"
 
 type StatusTokenParameter = "backgroundColor" | "foregroundColor" | "borderColor"
