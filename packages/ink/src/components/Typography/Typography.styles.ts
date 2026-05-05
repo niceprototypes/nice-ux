@@ -9,7 +9,7 @@
 
 import styled, { css } from "styled-components"
 import { getToken, type ForegroundColorType, type FontSizeType, type FontWeightType, type LineHeightType, type ModeType } from "nice-react-styles"
-import { TypographyAsType, TypographyAlignType, TypographyLineClampType, TypographyWordBreakType } from "./types"
+import { TypographyAsType, TypographyAlignType, TypographyLineClampType, TypographyWordBreakType } from "./Typography.types"
 import { styleAntialiasing } from "../../utilities/styleAntialiasing"
 
 /**

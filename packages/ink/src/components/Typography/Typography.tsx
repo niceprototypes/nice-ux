@@ -1,6 +1,6 @@
 import * as React from "react"
-import { StyledTypography } from "./styles"
-import { TypographyProps } from "./types"
+import { StyledTypography } from "./Typography.styles"
+import { TypographyProps } from "./Typography.types"
 
 /**
  * Typography component for rendering text with flexible styling options.
