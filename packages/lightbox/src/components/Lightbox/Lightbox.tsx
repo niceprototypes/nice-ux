@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react"
 import { createPortal } from "react-dom"
 import Typography from "nice-react-typography"
-import { Trigger, Overlay, Image, Caption } from "./styles"
-import type { LightboxProps } from "./types"
+import { Trigger, Overlay, Image, Caption } from "./Lightbox.styles"
+import type { LightboxProps } from "./Lightbox.types"
 
 const Lightbox: React.FC<LightboxProps> = ({
   children,
