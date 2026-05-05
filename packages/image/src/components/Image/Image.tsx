@@ -1,6 +1,6 @@
 import * as React from "react"
-import { StyledImg, StyledBackgroundImage } from "./styles"
-import type { ImageProps } from "./types"
+import { StyledImg, StyledBackgroundImage } from "./Image.styles"
+import type { ImageProps } from "./Image.types"
 
 /**
  * Image component for rendering images as either a standard img element

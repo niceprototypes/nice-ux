@@ -10,7 +10,7 @@
 
 import styled, { css } from "styled-components"
 import { getToken, type BorderRadiusType, type ModeType } from "nice-react-styles"
-import type { ImageBackgroundSizeType, ImageBackgroundPositionType } from "./types"
+import type { ImageBackgroundSizeType, ImageBackgroundPositionType } from "./Image.types"
 
 /**
  * Maps ImageBackgroundSizeType to the equivalent CSS background-size value.
