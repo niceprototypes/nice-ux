@@ -25,6 +25,7 @@
     "nice-react-icon": "file:../react-icon",
     "nice-react-icon-vendor": "file:../react-icon-vendor",
     "nice-react-image": "file:../react-image",
+    "nice-react-input": "file:../react-input",
     "nice-react-lightbox": "file:../react-lightbox",
     "nice-react-scroll": "file:../react-scroll",
     "nice-react-slider": "file:../react-slider",
@@ -45,6 +46,7 @@
     "concurrently": "^9.2.1",
     "nodemon": "^3.1.0",
     "prettier": "^3.5.0",
+    "remark-gfm": "^4.0.1",
     "typescript": "^6.0.3",
     "vite": "^7.1.9"
   }

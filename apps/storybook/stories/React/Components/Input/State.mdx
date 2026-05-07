@@ -1,0 +1,48 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import Input from "nice-react-input"
+import Flex from "nice-react-flex"
+import Typography from "../../../../src/nice/Typography"
+import { DocsRow } from "../../../../src/components/DocsRow"
+
+export const states = ["base", "disabled", "error", "success", "warning"]
+
+export const stateLabel = (s) => s.charAt(0).toUpperCase() + s.slice(1)
+
+export const stateCode = (s) =>
+  s === "base"
+    ? `<Input\n  placeholder="Base"\n  onChange={handler}\n/>`
+    : `<Input\n  state="${s}"\n  placeholder="${stateLabel(s)}"\n  onChange={handler}\n/>`
+
+<Meta title="React/Components/Input/state" />
+
+# Input — State
+
+<Typography color="light">
+  Applies a semantic state style to the input (<code>disabled</code>,{" "}
+  <code>error</code>, <code>success</code>, or <code>warning</code>). The
+  <code>disabled</code> state also disables the underlying input element.
+</Typography>
+
+<div>
+  {states.map((state) => (
+    <DocsRow
+      previewCell={
+        <Flex gap="small" direction="column">
+          <Input
+            placeholder={stateLabel(state)}
+            state={state === "base" ? undefined : state}
+            onChange={() => {}}
+          />
+          <Input
+            status="secondary"
+            placeholder={stateLabel(state)}
+            state={state === "base" ? undefined : state}
+            onChange={() => {}}
+          />
+        </Flex>
+      }
+      language="tsx"
+      code={stateCode(state)}
+    />
+  ))}
+</div>

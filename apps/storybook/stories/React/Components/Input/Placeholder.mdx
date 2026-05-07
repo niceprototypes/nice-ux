@@ -1,0 +1,25 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import Input from "nice-react-input"
+import Typography from "../../../../src/nice/Typography"
+import { DocsRow } from "../../../../src/components/DocsRow"
+
+<Meta title="React/Components/Input/placeholder" />
+
+# Input — Placeholder
+
+<Typography color="light">
+  Hint text shown when the input is empty. The placeholder color is driven
+  by the input's status/state token matrix and dims further in the
+  <code>disabled</code> state.
+</Typography>
+
+<DocsRow
+  previewCell={
+    <Input
+      placeholder="name@example.com"
+      onChange={() => {}}
+    />
+  }
+  language="tsx"
+  code={`<Input\n  placeholder="name@example.com"\n  onChange={handler}\n/>`}
+/>
