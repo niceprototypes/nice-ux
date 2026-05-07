@@ -1,1 +1,0 @@
-[2026-05-07 01:30] major: Migrate breakpoint names to phone/tablet/laptop in TileLayout media queries and the maxWidth responsive object; README updated
