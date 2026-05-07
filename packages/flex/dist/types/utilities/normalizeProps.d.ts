@@ -11,8 +11,8 @@ import { FlexProps } from "../components/Flex/Flex.types";
  *
  * @description
  * Converts simple prop values into breakpoint objects:
- * - Example: `gap="base"` becomes `gap={{ small: "base" }}`
- * - Example: `direction="row"` becomes `direction={{ small: "row" }}`
+ * - Example: `gap="base"` becomes `gap={{ phone: "base" }}`
+ * - Example: `direction="row"` becomes `direction={{ phone: "row" }}`
  *
  * Note: The spacing prop is NOT normalized here. It's handled directly by
  * getSpacingValue which parses shorthand strings at render time.

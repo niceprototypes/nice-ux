@@ -7,20 +7,20 @@ import { type BreakpointName } from "nice-react-styles";
  * This is the core styling logic that transforms component props into CSS declarations.
  *
  * @function styleFlex
- * @param {Breakpoint} breakpoint - The breakpoint to generate styles for (sm/md/lg)
+ * @param {Breakpoint} breakpoint - The breakpoint to generate styles for (phone/tablet/laptop/desktop)
  * @param {FlexProps} props - The normalized Flex component props
  * @returns {string} CSS declarations separated by newlines
  *
  * @description
  * This service handles the generation of all CSS properties for the Flex component:
  *
- * **Base Display**: Sets `display: flex` only for the 'sm' breakpoint to establish
+ * **Base Display**: Sets `display: flex` only for the 'phone' breakpoint to establish
  * the flexbox context. Higher breakpoints inherit this display value.
  *
  * **Responsive Value Extraction**: For each CSS property, the function extracts
  * the appropriate value based on whether the prop is a simple value or breakpoint object:
  * - Object props: Use the value for the current breakpoint
- * - Simple props: Only use for 'sm' breakpoint (since props are normalized)
+ * - Simple props: Only use for 'phone' breakpoint (since props are normalized)
  *
  * **CSS Property Generation**: Generates standard CSS flexbox properties:
  * - `flex-direction`: Controls layout direction (row/column)
@@ -37,19 +37,19 @@ import { type BreakpointName } from "nice-react-styles";
  * the normalizeProps service, ensuring consistent prop structure.
  *
  * @example
- * // Generate small breakpoint styles
- * const props = { direction: { small: "column" }, gap: { small: "small" } }
- * styleFlex(BREAKPOINT_SMALL, props)
+ * // Generate phone breakpoint styles
+ * const props = { direction: { phone: "column" }, gap: { phone: "small" } }
+ * styleFlex(BREAKPOINT_PHONE, props)
  * // Returns: "display: flex;\nflex-direction: column;\ngap: var(--core--gap--small);"
  *
  * @example
- * // Generate medium breakpoint styles
+ * // Generate tablet breakpoint styles
  * const props = {
- *   direction: { small: "column", medium: "row" },
- *   gap: { small: "small", medium: "base" },
- *   spacing: { medium: "small base" }
+ *   direction: { phone: "column", tablet: "row" },
+ *   gap: { phone: "small", tablet: "base" },
+ *   spacing: { tablet: "small base" }
  * }
- * styleFlex(BREAKPOINT_MEDIUM, props)
+ * styleFlex(BREAKPOINT_TABLET, props)
  * // Returns: "flex-direction: row;\ngap: var(--core--gap--base);\npadding-top: var(--core--gap--small);\npadding-right: var(--core--gap--base);..."
  */
 export declare const styleFlex: (breakpoint: BreakpointName, props: FlexProps) => string;

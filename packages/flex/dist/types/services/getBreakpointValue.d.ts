@@ -4,18 +4,19 @@ import { type BreakpointName } from "nice-react-styles";
  * a simple value or a responsive object
  *
  * @function getBreakpointValue
- * @param {T | { small?: T; medium?: T; large?: T } | undefined} value - The prop value
+ * @param {T | { phone?: T; tablet?: T; laptop?: T; desktop?: T } | undefined} value - The prop value
  * @param {BreakpointName} breakpoint - The target breakpoint
  * @returns {T | undefined} The value for the specified breakpoint
  *
  * @example
- * getBreakpointValue("row", BREAKPOINT_SMALL) // returns "row"
- * getBreakpointValue("row", BREAKPOINT_MEDIUM) // returns undefined (simple values only apply at small)
- * getBreakpointValue({ small: "column", medium: "row" }, BREAKPOINT_MEDIUM) // returns "row"
+ * getBreakpointValue("row", BREAKPOINT_PHONE) // returns "row"
+ * getBreakpointValue("row", BREAKPOINT_TABLET) // returns undefined (simple values only apply at phone)
+ * getBreakpointValue({ phone: "column", tablet: "row" }, BREAKPOINT_TABLET) // returns "row"
  */
 export declare const getBreakpointValue: <T>(value: T | {
-    small?: T;
-    medium?: T;
-    large?: T;
+    phone?: T;
+    tablet?: T;
+    laptop?: T;
+    desktop?: T;
 } | undefined, breakpoint: BreakpointName) => T | undefined;
 //# sourceMappingURL=getBreakpointValue.d.ts.map

@@ -1,38 +1,41 @@
-import { BREAKPOINT_SMALL, BREAKPOINT_MEDIUM, BREAKPOINT_LARGE, getConstant, getBreakpoint, withBreakpoints } from 'nice-react-styles';
+import { BREAKPOINT_PHONE, BREAKPOINT_TABLET, BREAKPOINT_LAPTOP, BREAKPOINT_DESKTOP, getConstant, getBreakpoint, withBreakpoints } from 'nice-react-styles';
 import { jsx } from 'react/jsx-runtime';
 import 'react';
 import styled from 'styled-components';
 
 /**
- * Checks if a value is a responsive breakpoint object (has small, medium, or large keys)
+ * Checks if a value is a responsive breakpoint object (has phone, tablet, laptop, or desktop keys)
  *
  * @function isResponsiveObject
  * @param {unknown} value - The value to check
  * @returns {boolean} True if the value is an object with breakpoint keys
  *
  * @example
- * isResponsiveObject({ small: "column", medium: "row" }) // true
+ * isResponsiveObject({ phone: "column", tablet: "row" }) // true
  * isResponsiveObject({ all: "base" }) // false
  * isResponsiveObject("row") // false
  * isResponsiveObject(null) // false
  */
 const isResponsiveObject = (value) => typeof value === "object" &&
     value !== null &&
-    (BREAKPOINT_SMALL in value || BREAKPOINT_MEDIUM in value || BREAKPOINT_LARGE in value);
+    (BREAKPOINT_PHONE in value ||
+        BREAKPOINT_TABLET in value ||
+        BREAKPOINT_LAPTOP in value ||
+        BREAKPOINT_DESKTOP in value);
 
 /**
  * Extracts the value for a specific breakpoint from a prop that can be either
  * a simple value or a responsive object
  *
  * @function getBreakpointValue
- * @param {T | { small?: T; medium?: T; large?: T } | undefined} value - The prop value
+ * @param {T | { phone?: T; tablet?: T; laptop?: T; desktop?: T } | undefined} value - The prop value
  * @param {BreakpointName} breakpoint - The target breakpoint
  * @returns {T | undefined} The value for the specified breakpoint
  *
  * @example
- * getBreakpointValue("row", BREAKPOINT_SMALL) // returns "row"
- * getBreakpointValue("row", BREAKPOINT_MEDIUM) // returns undefined (simple values only apply at small)
- * getBreakpointValue({ small: "column", medium: "row" }, BREAKPOINT_MEDIUM) // returns "row"
+ * getBreakpointValue("row", BREAKPOINT_PHONE) // returns "row"
+ * getBreakpointValue("row", BREAKPOINT_TABLET) // returns undefined (simple values only apply at phone)
+ * getBreakpointValue({ phone: "column", tablet: "row" }, BREAKPOINT_TABLET) // returns "row"
  */
 const getBreakpointValue = (value, breakpoint) => {
     if (value === undefined)
@@ -40,7 +43,7 @@ const getBreakpointValue = (value, breakpoint) => {
     if (isResponsiveObject(value)) {
         return value[breakpoint];
     }
-    return breakpoint === BREAKPOINT_SMALL ? value : undefined;
+    return breakpoint === BREAKPOINT_PHONE ? value : undefined;
 };
 
 /**
@@ -141,25 +144,25 @@ const parseSpacingShorthand = (shorthand) => {
  *
  * @description
  * Handles two possible shapes of the spacing prop:
- * - Shorthand string: "small", "small base", etc. - parsed and applied to "small" breakpoint
- * - Responsive object: { small?: string | null, medium?: string | null, large?: string | null }
+ * - Shorthand string: "small", "small base", etc. - parsed and applied to "phone" breakpoint
+ * - Responsive object: { phone?: string | null, tablet?: string | null, laptop?: string | null, desktop?: string | null }
  *
  * Returns null when spacing is explicitly disabled at a breakpoint.
  * Returns undefined when no spacing is defined for the breakpoint.
  *
  * @example
- * getSpacingValue("small", BREAKPOINT_SMALL) // returns { top: "small", right: "small", bottom: "small", left: "small" }
- * getSpacingValue("small base", BREAKPOINT_SMALL) // returns { top: "small", right: "base", bottom: "small", left: "base" }
- * getSpacingValue("small", BREAKPOINT_MEDIUM) // returns undefined (shorthand only applies to small)
- * getSpacingValue({ small: "base", medium: null, large: "small" }, BREAKPOINT_MEDIUM) // returns null
- * getSpacingValue({ small: "base", large: "small large" }, BREAKPOINT_LARGE) // returns { top: "small", right: "large", bottom: "small", left: "large" }
+ * getSpacingValue("small", BREAKPOINT_PHONE) // returns { top: "small", right: "small", bottom: "small", left: "small" }
+ * getSpacingValue("small base", BREAKPOINT_PHONE) // returns { top: "small", right: "base", bottom: "small", left: "base" }
+ * getSpacingValue("small", BREAKPOINT_TABLET) // returns undefined (shorthand only applies to phone)
+ * getSpacingValue({ phone: "base", tablet: null, laptop: "small" }, BREAKPOINT_TABLET) // returns null
+ * getSpacingValue({ phone: "base", laptop: "small large" }, BREAKPOINT_LAPTOP) // returns { top: "small", right: "large", bottom: "small", left: "large" }
  */
 const getSpacingValue = (spacing, breakpoint) => {
     if (spacing === undefined)
         return undefined;
-    // Handle shorthand string (applies to small only)
+    // Handle shorthand string (applies to phone only)
     if (typeof spacing === "string") {
-        if (breakpoint === BREAKPOINT_SMALL) {
+        if (breakpoint === BREAKPOINT_PHONE) {
             return parseSpacingShorthand(spacing);
         }
         return undefined;
@@ -227,20 +230,20 @@ const styleSpacing = (mode, def) => {
  * This is the core styling logic that transforms component props into CSS declarations.
  *
  * @function styleFlex
- * @param {Breakpoint} breakpoint - The breakpoint to generate styles for (sm/md/lg)
+ * @param {Breakpoint} breakpoint - The breakpoint to generate styles for (phone/tablet/laptop/desktop)
  * @param {FlexProps} props - The normalized Flex component props
  * @returns {string} CSS declarations separated by newlines
  *
  * @description
  * This service handles the generation of all CSS properties for the Flex component:
  *
- * **Base Display**: Sets `display: flex` only for the 'sm' breakpoint to establish
+ * **Base Display**: Sets `display: flex` only for the 'phone' breakpoint to establish
  * the flexbox context. Higher breakpoints inherit this display value.
  *
  * **Responsive Value Extraction**: For each CSS property, the function extracts
  * the appropriate value based on whether the prop is a simple value or breakpoint object:
  * - Object props: Use the value for the current breakpoint
- * - Simple props: Only use for 'sm' breakpoint (since props are normalized)
+ * - Simple props: Only use for 'phone' breakpoint (since props are normalized)
  *
  * **CSS Property Generation**: Generates standard CSS flexbox properties:
  * - `flex-direction`: Controls layout direction (row/column)
@@ -257,19 +260,19 @@ const styleSpacing = (mode, def) => {
  * the normalizeProps service, ensuring consistent prop structure.
  *
  * @example
- * // Generate small breakpoint styles
- * const props = { direction: { small: "column" }, gap: { small: "small" } }
- * styleFlex(BREAKPOINT_SMALL, props)
+ * // Generate phone breakpoint styles
+ * const props = { direction: { phone: "column" }, gap: { phone: "small" } }
+ * styleFlex(BREAKPOINT_PHONE, props)
  * // Returns: "display: flex;\nflex-direction: column;\ngap: var(--core--gap--small);"
  *
  * @example
- * // Generate medium breakpoint styles
+ * // Generate tablet breakpoint styles
  * const props = {
- *   direction: { small: "column", medium: "row" },
- *   gap: { small: "small", medium: "base" },
- *   spacing: { medium: "small base" }
+ *   direction: { phone: "column", tablet: "row" },
+ *   gap: { phone: "small", tablet: "base" },
+ *   spacing: { tablet: "small base" }
  * }
- * styleFlex(BREAKPOINT_MEDIUM, props)
+ * styleFlex(BREAKPOINT_TABLET, props)
  * // Returns: "flex-direction: row;\ngap: var(--core--gap--base);\npadding-top: var(--core--gap--small);\npadding-right: var(--core--gap--base);..."
  */
 const styleFlex = (breakpoint, props) => {
@@ -282,9 +285,9 @@ const styleFlex = (breakpoint, props) => {
     const justifyContent = getBreakpointValue(props.justifyContent, breakpoint);
     const wrap = getBreakpointValue(props.wrap, breakpoint);
     const spacing = getSpacingValue(props.spacing, breakpoint);
-    // Base flex display - only set for small breakpoint
+    // Base flex display - only set for phone breakpoint
     // Higher breakpoints inherit the flex display value
-    if (breakpoint === BREAKPOINT_SMALL) {
+    if (breakpoint === BREAKPOINT_PHONE) {
         styles.push("display: flex;");
     }
     // Flex direction - controls main axis direction
@@ -345,31 +348,36 @@ const styleFlex = (breakpoint, props) => {
  *    being passed to the DOM, avoiding React warnings about unknown DOM properties.
  *    Filtered props: mode, spacing, gap, direction, alignItems, justifyContent, grow, wrap
  *
- * 2. **Small-First Responsive Design**: Applies styles in a small-first approach:
- *    - Base styles: Always applied (small breakpoint)
- *    - Medium styles: Applied above small threshold
- *    - Large styles: Applied for large screens
+ * 2. **Phone-First Responsive Design**: Applies styles in a phone-first approach:
+ *    - Base styles: Always applied (phone breakpoint)
+ *    - Tablet styles: Applied above phone threshold
+ *    - Laptop styles: Applied for laptop screens
+ *    - Desktop styles: Applied for desktop screens
  *
  * 3. **Service Integration**: Delegates actual CSS generation to the styleFlex service,
  *    keeping the styled component focused on responsive breakpoint management.
  *
  * @example
  * // Basic usage in component
- * <FlexStyled direction={{ small: "column", medium: "row" }} gap={{ small: "small", large: "large" }}>
+ * <FlexStyled direction={{ phone: "column", tablet: "row" }} gap={{ phone: "small", laptop: "large" }}>
  *   <div>Content</div>
  * </FlexStyled>
  */
 const FlexStyled = styled.div.withConfig({
     shouldForwardProp: (prop) => !["mode", "spacing", "gap", "direction", "alignItems", "justifyContent", "grow", "wrap"].includes(prop),
 }) `
-  ${(props) => styleFlex(BREAKPOINT_SMALL, props)}
+  ${(props) => styleFlex(BREAKPOINT_PHONE, props)}
 
-  ${getBreakpoint(BREAKPOINT_MEDIUM).query} {
-    ${(props) => styleFlex(BREAKPOINT_MEDIUM, props)}
+  ${getBreakpoint(BREAKPOINT_TABLET).query} {
+    ${(props) => styleFlex(BREAKPOINT_TABLET, props)}
   }
 
-  ${getBreakpoint(BREAKPOINT_LARGE).query} {
-    ${(props) => styleFlex(BREAKPOINT_LARGE, props)}
+  ${getBreakpoint(BREAKPOINT_LAPTOP).query} {
+    ${(props) => styleFlex(BREAKPOINT_LAPTOP, props)}
+  }
+
+  ${getBreakpoint(BREAKPOINT_DESKTOP).query} {
+    ${(props) => styleFlex(BREAKPOINT_DESKTOP, props)}
   }
 `;
 
@@ -391,8 +399,8 @@ const breakpointProps = ["gap", "direction", "grow", "wrap", "alignItems", "just
  *
  * @description
  * Converts simple prop values into breakpoint objects:
- * - Example: `gap="base"` becomes `gap={{ small: "base" }}`
- * - Example: `direction="row"` becomes `direction={{ small: "row" }}`
+ * - Example: `gap="base"` becomes `gap={{ phone: "base" }}`
+ * - Example: `direction="row"` becomes `direction={{ phone: "row" }}`
  *
  * Note: The spacing prop is NOT normalized here. It's handled directly by
  * getSpacingValue which parses shorthand strings at render time.
@@ -402,7 +410,7 @@ const normalizeProps = (props) => {
     breakpointProps.forEach((propName) => {
         const value = props[propName];
         if (value !== undefined && typeof value !== "object") {
-            normalizedProps[propName] = { [BREAKPOINT_SMALL]: value };
+            normalizedProps[propName] = { [BREAKPOINT_PHONE]: value };
         }
     });
     return normalizedProps;
@@ -423,15 +431,15 @@ const normalizeProps = (props) => {
  * </Flex>
  *
  * @example
- * // Responsive usage via the breakpoints array
+ * // Responsive usage via the breakpoints object
  * <Flex
  *   direction="column"
  *   gap="small"
  *   alignItems="center"
- *   breakpoints={[
- *     { min: "medium", props: { direction: "row", gap: "base" } },
- *     { min: "large", props: { gap: "large" } },
- *   ]}
+ *   breakpoints={{
+ *     "tablet+": { direction: "row", gap: "base" },
+ *     "laptop+": { gap: "large" },
+ *   }}
  * >
  *   <div>Responsive Item 1</div>
  *   <div>Responsive Item 2</div>
@@ -448,10 +456,10 @@ const normalizeProps = (props) => {
  * <Flex
  *   mode="margin"
  *   spacing="small"
- *   breakpoints={[
- *     { min: "medium", props: { spacing: "base large" } },
- *     { min: "large", props: { spacing: "small base large smaller" } },
- *   ]}
+ *   breakpoints={{
+ *     "tablet+": { spacing: "base large" },
+ *     "laptop+": { spacing: "small base large smaller" },
+ *   }}
  * >
  *   <div>Responsive margins</div>
  * </Flex>
@@ -464,11 +472,11 @@ const normalizeProps = (props) => {
  * for creating responsive layouts. It supports:
  *
  * 1. **Responsive Design**: All layout props can be specified as either static values
- *    or responsive objects with small/medium/large breakpoints
+ *    or responsive objects with phone/tablet/laptop/desktop breakpoints
  *
  * 2. **Automatic Prop Normalization**: The component automatically normalizes props
  *    to ensure consistent behavior. Simple values are converted to breakpoint objects
- *    with the value applied to the 'small' breakpoint.
+ *    with the value applied to the 'phone' breakpoint.
  *
  * 3. **CSS-like Spacing Shorthand**: Supports 1-4 token values like CSS padding/margin:
  *    - "small" → all sides
