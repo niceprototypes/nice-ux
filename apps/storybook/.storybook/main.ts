@@ -20,8 +20,13 @@ function getAbsolutePath(value: string): string {
 /**
  * Package lists from the Nice ecosystem registry (nice-toolkit/registry.json).
  * Adding a new package to the registry automatically makes it available here.
+ *
+ * Imported through the package boundary (`nice-toolkit/registry`) rather
+ * than reaching into `toolkit/src/`. Toolkit's package.json `exports`
+ * field declares this subpath; internal layout changes there don't break
+ * this import.
  */
-const registry = require("../../toolkit/src/registry")
+const registry = require("nice-toolkit/registry")
 const linkedPackages: Record<string, string> = registry.getLinkedPackageMap()
 const sourceAliasablePackages: string[] = registry.getSourceAliasableNames()
 

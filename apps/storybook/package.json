@@ -33,6 +33,7 @@
     "nice-react-tile": "file:../react-tile",
     "nice-react-typography": "file:../react-typography",
     "nice-styles": "file:../styles",
+    "nice-toolkit": "file:../toolkit",
     "nice-vite-watcher": "file:../vite-watcher",
     "react": "19.2.0",
     "react-dom": "19.2.0",
