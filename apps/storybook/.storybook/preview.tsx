@@ -34,6 +34,8 @@ const preview: Preview = {
         order: [
           "Welcome",
           ["Tokens", "React", "Configuration"],
+          "Getting started",
+          ["Basic"],
           "Tokens",
           ["Styles", "Icons", "Responsive"],
           "React",
