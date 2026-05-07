@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { getBreakpoint, getToken, BREAKPOINT_MEDIUM } from "nice-react-styles"
+import { getBreakpoint, getToken, BREAKPOINT_TABLET } from "nice-react-styles"
 import type { CellHeightType, BorderWidthType, ModeType } from "nice-react-styles"
 import type { ButtonBorderRadiusType, ButtonStateType, ButtonStatusType } from "./Button.types"
 import { getButtonToken } from "../../tokens/getButtonToken"
@@ -72,7 +72,7 @@ export const StyledButton = styled.button.withConfig({
   ${({ $link, $square, $size }) =>
     !$link &&
     `
-    ${getBreakpoint(BREAKPOINT_MEDIUM).query} {
+    ${getBreakpoint(BREAKPOINT_TABLET).query} {
       width: ${$square ? getButtonToken("size", $size).var : "auto"};
     }
   `}
