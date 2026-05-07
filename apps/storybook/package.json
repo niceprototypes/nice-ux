@@ -5,7 +5,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "clean:cache": "rm -rf node_modules/.cache/storybook && lsof -ti:6006 | xargs kill -9 2>/dev/null; npm run dev",
+    "clean:cache": "node scripts/clean-cache.js && npm run dev",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "storybook": "storybook dev -p 6006 --no-open",
