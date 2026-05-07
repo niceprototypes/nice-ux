@@ -18,15 +18,15 @@ import { normalizeProps } from "../../utilities/normalizeProps"
  * </Flex>
  *
  * @example
- * // Responsive usage via the breakpoints array
+ * // Responsive usage via the breakpoints object
  * <Flex
  *   direction="column"
  *   gap="small"
  *   alignItems="center"
- *   breakpoints={[
- *     { min: "medium", props: { direction: "row", gap: "base" } },
- *     { min: "large", props: { gap: "large" } },
- *   ]}
+ *   breakpoints={{
+ *     "tablet+": { direction: "row", gap: "base" },
+ *     "laptop+": { gap: "large" },
+ *   }}
  * >
  *   <div>Responsive Item 1</div>
  *   <div>Responsive Item 2</div>
@@ -43,10 +43,10 @@ import { normalizeProps } from "../../utilities/normalizeProps"
  * <Flex
  *   mode="margin"
  *   spacing="small"
- *   breakpoints={[
- *     { min: "medium", props: { spacing: "base large" } },
- *     { min: "large", props: { spacing: "small base large smaller" } },
- *   ]}
+ *   breakpoints={{
+ *     "tablet+": { spacing: "base large" },
+ *     "laptop+": { spacing: "small base large smaller" },
+ *   }}
  * >
  *   <div>Responsive margins</div>
  * </Flex>
@@ -59,11 +59,11 @@ import { normalizeProps } from "../../utilities/normalizeProps"
  * for creating responsive layouts. It supports:
  *
  * 1. **Responsive Design**: All layout props can be specified as either static values
- *    or responsive objects with small/medium/large breakpoints
+ *    or responsive objects with phone/tablet/laptop/desktop breakpoints
  *
  * 2. **Automatic Prop Normalization**: The component automatically normalizes props
  *    to ensure consistent behavior. Simple values are converted to breakpoint objects
- *    with the value applied to the 'small' breakpoint.
+ *    with the value applied to the 'phone' breakpoint.
  *
  * 3. **CSS-like Spacing Shorthand**: Supports 1-4 token values like CSS padding/margin:
  *    - "small" → all sides

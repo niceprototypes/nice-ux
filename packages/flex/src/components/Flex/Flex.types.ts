@@ -32,7 +32,7 @@ export type FlexModeType = "padding" | "margin"
  * FlexBreakpointType
  *
  * Re-export of BreakpointName from nice-styles.
- * Supported breakpoint values: "small", "medium", "large"
+ * Supported breakpoint values: "phone", "tablet", "laptop", "desktop"
  */
 export type FlexBreakpointType = BreakpointName
 
@@ -106,8 +106,8 @@ export type FlexSpacingResponsiveType = SpacingResponsiveType
  *
  * Re-export of SpacingType from nice-styles.
  * Union type for the spacing prop, supporting two formats:
- * - Shorthand string: "small", "small base", etc. (applies to small breakpoint)
- * - Responsive object: { small: "base", medium: null, large: "small large" }
+ * - Shorthand string: "small", "small base", etc. (applies to phone breakpoint)
+ * - Responsive object: { phone: "base", tablet: null, laptop: "small large" }
  *
  * For custom CSS values, use the style prop on Flex instead.
  */
@@ -120,9 +120,10 @@ export type FlexSpacingType = SpacingType
  * All layout-related props support both static values and responsive breakpoint objects.
  *
  * Breakpoint System:
- * - small: Base styles, always applied
- * - medium: min-width query above small threshold
- * - large: min-width query for large screens
+ * - phone: Base styles, always applied
+ * - tablet: min-width query above phone threshold
+ * - laptop: min-width query for laptop screens
+ * - desktop: min-width query for desktop screens
  */
 export type FlexProps = {
   mode?: FlexModeType

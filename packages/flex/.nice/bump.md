@@ -1,0 +1,1 @@
+[2026-05-07 01:30] major: Adopt phone/tablet/laptop/desktop breakpoint names; styleFlex emits the new desktop media query

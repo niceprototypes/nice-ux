@@ -1,4 +1,4 @@
-import { BREAKPOINT_SMALL, type BreakpointName } from "nice-react-styles"
+import { BREAKPOINT_PHONE, type BreakpointName } from "nice-react-styles"
 import { isResponsiveObject } from "./isResponsiveObject"
 
 /**
@@ -6,22 +6,22 @@ import { isResponsiveObject } from "./isResponsiveObject"
  * a simple value or a responsive object
  *
  * @function getBreakpointValue
- * @param {T | { small?: T; medium?: T; large?: T } | undefined} value - The prop value
+ * @param {T | { phone?: T; tablet?: T; laptop?: T; desktop?: T } | undefined} value - The prop value
  * @param {BreakpointName} breakpoint - The target breakpoint
  * @returns {T | undefined} The value for the specified breakpoint
  *
  * @example
- * getBreakpointValue("row", BREAKPOINT_SMALL) // returns "row"
- * getBreakpointValue("row", BREAKPOINT_MEDIUM) // returns undefined (simple values only apply at small)
- * getBreakpointValue({ small: "column", medium: "row" }, BREAKPOINT_MEDIUM) // returns "row"
+ * getBreakpointValue("row", BREAKPOINT_PHONE) // returns "row"
+ * getBreakpointValue("row", BREAKPOINT_TABLET) // returns undefined (simple values only apply at phone)
+ * getBreakpointValue({ phone: "column", tablet: "row" }, BREAKPOINT_TABLET) // returns "row"
  */
 export const getBreakpointValue = <T>(
-  value: T | { small?: T; medium?: T; large?: T } | undefined,
+  value: T | { phone?: T; tablet?: T; laptop?: T; desktop?: T } | undefined,
   breakpoint: BreakpointName
 ): T | undefined => {
   if (value === undefined) return undefined
   if (isResponsiveObject(value)) {
-    return (value as { small?: T; medium?: T; large?: T })[breakpoint]
+    return (value as { phone?: T; tablet?: T; laptop?: T; desktop?: T })[breakpoint]
   }
-  return breakpoint === BREAKPOINT_SMALL ? (value as T) : undefined
+  return breakpoint === BREAKPOINT_PHONE ? (value as T) : undefined
 }

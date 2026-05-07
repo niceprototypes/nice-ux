@@ -1,9 +1,10 @@
 import styled from "styled-components"
 import {
   getBreakpoint,
-  BREAKPOINT_SMALL,
-  BREAKPOINT_MEDIUM,
-  BREAKPOINT_LARGE,
+  BREAKPOINT_PHONE,
+  BREAKPOINT_TABLET,
+  BREAKPOINT_LAPTOP,
+  BREAKPOINT_DESKTOP,
 } from "nice-react-styles"
 import { FlexProps } from "./Flex.types"
 import { styleFlex } from "../../services/styleFlex"
@@ -29,17 +30,18 @@ import { styleFlex } from "../../services/styleFlex"
  *    being passed to the DOM, avoiding React warnings about unknown DOM properties.
  *    Filtered props: mode, spacing, gap, direction, alignItems, justifyContent, grow, wrap
  *
- * 2. **Small-First Responsive Design**: Applies styles in a small-first approach:
- *    - Base styles: Always applied (small breakpoint)
- *    - Medium styles: Applied above small threshold
- *    - Large styles: Applied for large screens
+ * 2. **Phone-First Responsive Design**: Applies styles in a phone-first approach:
+ *    - Base styles: Always applied (phone breakpoint)
+ *    - Tablet styles: Applied above phone threshold
+ *    - Laptop styles: Applied for laptop screens
+ *    - Desktop styles: Applied for desktop screens
  *
  * 3. **Service Integration**: Delegates actual CSS generation to the styleFlex service,
  *    keeping the styled component focused on responsive breakpoint management.
  *
  * @example
  * // Basic usage in component
- * <FlexStyled direction={{ small: "column", medium: "row" }} gap={{ small: "small", large: "large" }}>
+ * <FlexStyled direction={{ phone: "column", tablet: "row" }} gap={{ phone: "small", laptop: "large" }}>
  *   <div>Content</div>
  * </FlexStyled>
  */
@@ -49,13 +51,17 @@ export const FlexStyled = styled.div.withConfig({
       prop as string
     ),
 })<FlexProps>`
-  ${(props) => styleFlex(BREAKPOINT_SMALL, props)}
+  ${(props) => styleFlex(BREAKPOINT_PHONE, props)}
 
-  ${getBreakpoint(BREAKPOINT_MEDIUM).query} {
-    ${(props) => styleFlex(BREAKPOINT_MEDIUM, props)}
+  ${getBreakpoint(BREAKPOINT_TABLET).query} {
+    ${(props) => styleFlex(BREAKPOINT_TABLET, props)}
   }
 
-  ${getBreakpoint(BREAKPOINT_LARGE).query} {
-    ${(props) => styleFlex(BREAKPOINT_LARGE, props)}
+  ${getBreakpoint(BREAKPOINT_LAPTOP).query} {
+    ${(props) => styleFlex(BREAKPOINT_LAPTOP, props)}
+  }
+
+  ${getBreakpoint(BREAKPOINT_DESKTOP).query} {
+    ${(props) => styleFlex(BREAKPOINT_DESKTOP, props)}
   }
 `
