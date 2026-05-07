@@ -63,7 +63,7 @@ export interface TileProps {
    * Max-width of the inner content column.
    *
    * - Bare value (`number` or `"none"`) applies at every breakpoint.
-   * - Breakpoint object (`{ small, medium, large }`) provides per-breakpoint
+   * - Breakpoint object (`{ phone, tablet, laptop }`) provides per-breakpoint
    *   values; omitted breakpoints fall back to `"none"` (no cap).
    * - `"none"` removes any cap, letting the column fill its container.
    */

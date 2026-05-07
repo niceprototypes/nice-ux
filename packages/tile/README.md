@@ -120,7 +120,7 @@ export default App
 
 The `spacing` prop re-exports `FlexSpacingType` from `nice-react-flex` and accepts:
 - **Shorthand string**: 1–4 space-separated `gap` token names following CSS padding/margin shorthand rules — `"small"`, `"small base"`, `"small base large smaller"`. Token names: `none`, `smaller`, `small`, `base`, `large`, `larger`.
-- **Responsive object**: per-breakpoint shorthand string, or `null` to disable at that breakpoint. Breakpoint keys: `small`, `medium`, `large` — e.g. `{ small: "base", medium: null, large: "small large" }`.
+- **Responsive object**: per-breakpoint shorthand string, or `null` to disable at that breakpoint. Breakpoint keys: `small`, `medium`, `large` — e.g. `{ phone: "base", tablet: null, laptop: "small large" }`.
 
 ## Custom Max-Width
 
@@ -143,7 +143,7 @@ The `title` prop can accept either a string or a custom React component, giving 
 ## Default Behavior
 
 - Content is full-width on mobile and tablet
-- At the large breakpoint (1280px by default), content is constrained to the breakpoint width and centered
+- At the laptop breakpoint (1280px by default), content is constrained to the breakpoint width and centered
 - Uses flexbox layout with `direction="column"` and `grow={1}`
 - Background images use `fixed` attachment only on landscape orientation for better mobile performance
 

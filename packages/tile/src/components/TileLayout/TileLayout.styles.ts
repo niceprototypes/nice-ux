@@ -20,14 +20,14 @@ const renderResponsiveMaxWidth = ($maxWidth: TileMaxWidthType | undefined) => {
     ${small !== undefined ? renderMaxWidthValue(small) : null}
     ${medium !== undefined
       ? css`
-          ${getBreakpoint("medium").query} {
+          ${getBreakpoint("tablet").query} {
             ${renderMaxWidthValue(medium)}
           }
         `
       : null}
     ${large !== undefined
       ? css`
-          ${getBreakpoint("large").query} {
+          ${getBreakpoint("laptop").query} {
             ${renderMaxWidthValue(large)}
           }
         `

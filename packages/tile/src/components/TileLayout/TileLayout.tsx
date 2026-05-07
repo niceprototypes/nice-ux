@@ -30,14 +30,11 @@ const TileLayout: React.FC<TileLayoutProps> = ({
       justifyContent={justifyContent}
       gap={gap}
       $maxWidth={maxWidth}
-      breakpoints={[
-        {
-          min: "large",
-          props: {
+      breakpoints={{
+        "laptop+": {
             direction: "row",
           },
-        },
-      ]}
+      }}
     >
       {!!TileLeft || !!TileRight ? (
         <>
