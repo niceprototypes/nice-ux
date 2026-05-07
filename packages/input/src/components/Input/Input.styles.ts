@@ -45,6 +45,7 @@ export const StyledInput = styled.input.withConfig({
     width: 100%;
     height: ${getInputToken("size", $size).var};
     padding: 0 ${getInputToken("spacing", $size).var};
+    font-family: ${getToken("fontFamily", $size).var};
     font-size: ${getToken("fontSize", $size).var};
     font-weight: ${getToken("fontWeight", "base").var};
     background-color: ${getStatusToken($status, $state, "backgroundColor", $mode).var};
