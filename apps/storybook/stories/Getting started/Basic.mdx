@@ -1,5 +1,120 @@
-import { Meta } from "@storybook/addon-docs/blocks"
+import { Meta, Source } from "@storybook/addon-docs/blocks"
+import Flex from "nice-react-flex"
+import Typography from "../../src/nice/Typography"
+import { ArticleWidget, overrideStyle } from "./Basic.services"
 
 <Meta title="Getting started/Basic" />
 
 # Basic
+
+<Typography>
+  The Nice ecosystem starts with <strong>tokens</strong> — named CSS variables
+  for the values that compose a UI: colors, sizes, spacing, radii, weights.
+  Build components against tokens (not hardcoded values) and you can transform
+  the look of an entire system by swapping a handful of values. No component
+  code is touched.
+</Typography>
+
+---
+
+## 1. Build the widget against tokens
+
+A small article card. Every visual value comes from <code>getToken()</code>:
+spacing, background, border, radius. The text inside uses
+<code>Typography</code>, which is itself token-driven.
+
+<Source
+  language="tsx"
+  code={`import styled from "styled-components"
+import { getToken } from "nice-react-styles"
+import Typography from "nice-react-typography"
+
+const Card = styled.div\`
+  display: flex;
+  flex-direction: column;
+  gap: \${getToken("gap", "small").var};
+  padding: \${getToken("gap", "large").var};
+  background: \${getToken("backgroundColor", "alternate").var};
+  border: 1px solid \${getToken("borderColor").var};
+  border-radius: \${getToken("borderRadius", "base").var};
+\`
+
+export const ArticleWidget = () => (
+  <Card>
+    <Kicker>Design</Kicker>
+    <Typography as="h2" size="larger" weight="bold" color="base">
+      How to build a token system
+    </Typography>
+    <Typography size="base" color="light">
+      A walkthrough of the patterns that hold a UI together when small
+      visual decisions need to scale across an entire system.
+    </Typography>
+    <Byline>Matt Stevens · 5 min read</Byline>
+  </Card>
+)`}
+/>
+
+---
+
+## 2. Render it with the default tokens
+
+This is what the widget looks like with the tokens that ship with
+<code>nice-styles</code>.
+
+<div style={{ maxWidth: "420px" }}>
+  <ArticleWidget />
+</div>
+
+---
+
+## 3. Override the tokens for one subtree
+
+CSS custom properties cascade. Setting them on a wrapper element redefines
+the tokens for that subtree only — descendants resolve the new values
+automatically. No re-render, no prop plumbing, no fork of the component.
+
+<Source
+  language="tsx"
+  code={`<div style={{
+  "--np--font-size--larger": "32px",
+  "--np--foreground-color--base": "#1a1a1a",
+  "--np--foreground-color--medium": "#dc2626",
+  "--np--background-color--alternate": "#fef3c7",
+  "--np--border-radius--base": "0px",
+  "--np--border-color--base": "#1a1a1a",
+}}>
+  <ArticleWidget />
+</div>`}
+/>
+
+---
+
+## 4. Before & after
+
+Same component. Same JSX. The right card sits inside the override wrapper
+above; everything else is identical.
+
+<Flex
+  direction="column"
+  gap="large"
+  breakpoints={{ "tablet+": { direction: "row", alignItems: "stretch" } }}
+>
+  <Flex direction="column" gap="small" style={{ flex: 1 }}>
+    <Typography size="smaller" color="lighter">Before — default tokens</Typography>
+    <ArticleWidget />
+  </Flex>
+  <Flex direction="column" gap="small" style={{ flex: 1 }}>
+    <Typography size="smaller" color="lighter">After — overridden tokens</Typography>
+    <div style={overrideStyle}>
+      <ArticleWidget />
+    </div>
+  </Flex>
+</Flex>
+
+---
+
+<Typography color="medium">
+  This is the smallest useful demonstration of the Nice ecosystem. Tokens are
+  the foundation. Everything else — components, themes, responsive behavior,
+  dark mode — composes on top of them.
+</Typography>
