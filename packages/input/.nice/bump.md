@@ -1,0 +1,1 @@
+[2026-05-06 17:06] minor: Initial nice-react-input package — text-style input wrapping native <input> with status/state/size/borderRadius variants
