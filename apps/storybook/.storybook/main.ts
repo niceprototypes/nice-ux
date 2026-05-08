@@ -4,6 +4,7 @@ import { createRequire } from "node:module"
 import type { StorybookConfig } from "@storybook/react-vite"
 import { join, dirname, resolve } from "path"
 import { viteWatcher, getSourceAliases } from "nice-vite-watcher"
+import remarkGfm from "remark-gfm"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -55,7 +56,16 @@ const config: StorybookConfig = {
   ],
   addons: [
     getAbsolutePath("@storybook/addon-links"),
-    getAbsolutePath("@storybook/addon-docs"),
+    {
+      name: getAbsolutePath("@storybook/addon-docs"),
+      options: {
+        mdxPluginOptions: {
+          mdxCompileOptions: {
+            remarkPlugins: [remarkGfm],
+          },
+        },
+      },
+    },
   ],
   staticDirs: ["../public"],
   framework: {

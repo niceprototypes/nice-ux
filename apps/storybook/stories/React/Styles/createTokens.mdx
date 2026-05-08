@@ -85,14 +85,14 @@ createTokens({
 
 ## Responsive variants (breakpoints)
 
-A variant value can be an object with breakpoint keys instead of a plain string. The `small` value becomes the default, and higher breakpoints override it via media queries. Static strings and breakpoint objects can be mixed within the same token group.
+A variant value can be an object with breakpoint keys instead of a plain string. The `phone` value becomes the default, and higher breakpoints override it via media queries. Static strings and breakpoint objects can be mixed within the same token group.
 
 ```typescript
 createTokens({
   gap: {
     none: "0",                                // static
-    small: { small: "12px", large: "16px" },  // responsive
-    base: { small: "24px", large: "32px" },   // responsive
+    small: { phone: "12px", laptop: "16px" }, // responsive
+    base: { phone: "24px", laptop: "32px" },  // responsive
   },
 })
 ```
@@ -103,15 +103,15 @@ createTokens({
 :root {
   --np--gap--none: 0;
   --np--gap--small: 12px;
-  --np--gap--small--large: 16px;
+  --np--gap--small--laptop: 16px;
   --np--gap--base: 24px;
-  --np--gap--base--large: 32px;
+  --np--gap--base--laptop: 32px;
 }
 
 @media (min-width: 1280px) {
   :root {
-    --np--gap--small: var(--np--gap--small--large);
-    --np--gap--base: var(--np--gap--base--large);
+    --np--gap--small: var(--np--gap--small--laptop);
+    --np--gap--base: var(--np--gap--base--laptop);
   }
 }
 ```
@@ -120,9 +120,10 @@ createTokens({
 
 | Name | Query |
 |---|---|
-| `small` | default (no media query) |
-| `medium` | `@media (min-width: 641px)` |
-| `large` | `@media (min-width: 1280px)` |
+| `phone` | default (no media query) |
+| `tablet` | `@media (min-width: 641px)` |
+| `laptop` | `@media (min-width: 1280px)` |
+| `desktop` | `@media (min-width: 1720px)` |
 
 ---
 
@@ -186,10 +187,39 @@ const { GlobalStyles } = createTokens({
   },
   gap: {                                   // mixed static + responsive
     none: "0",
-    base: { small: "24px", large: "32px" },
+    base: { phone: "24px", laptop: "32px" },
   },
   headerColor: {                           // mode-aware
     base: { day: "#000", night: "#fff" },
   },
 })
+```
+
+#### Generated CSS
+
+```css
+:root {
+  --np--font-size--base: 18px;
+  --np--foreground-color--brand: #dc0000;
+  --np--header-height--base: 64px;
+  --np--header-height--compact: 48px;
+  --np--gap--none: 0;
+  --np--gap--base: 24px;
+  --np--gap--base--laptop: 32px;
+  --np--header-color--base: #000;
+  --np--header-color--base--day: #000;
+  --np--header-color--base--night: #fff;
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --np--gap--base: var(--np--gap--base--laptop);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --np--header-color--base: var(--np--header-color--base--night);
+  }
+}
 ```

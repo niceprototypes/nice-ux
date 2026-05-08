@@ -34,7 +34,6 @@ const Card = styled.div\`
   flex-direction: column;
   gap: \${getToken("gap", "small").var};
   padding: \${getToken("gap", "large").var};
-  background: \${getToken("backgroundColor", "alternate").var};
   border: 1px solid \${getToken("borderColor").var};
   border-radius: \${getToken("borderRadius", "base").var};
 \`
@@ -78,7 +77,6 @@ automatically. No re-render, no prop plumbing, no fork of the component.
   code={`<div style={{
   "--np--font-size--larger": "32px",
   "--np--foreground-color--base": "#1a1a1a",
-  "--np--foreground-color--medium": "#dc2626",
   "--np--background-color--alternate": "#fef3c7",
   "--np--border-radius--base": "0px",
   "--np--border-color--base": "#1a1a1a",
@@ -113,7 +111,7 @@ above; everything else is identical.
 
 ---
 
-<Typography color="medium">
+<Typography>
   This is the smallest useful demonstration of the Nice ecosystem. Tokens are
   the foundation. Everything else — components, themes, responsive behavior,
   dark mode — composes on top of them.

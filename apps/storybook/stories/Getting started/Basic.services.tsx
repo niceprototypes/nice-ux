@@ -8,7 +8,6 @@ const Card = styled.div`
   flex-direction: column;
   gap: ${getToken("gap", "small").var};
   padding: ${getToken("gap", "large").var};
-  background: ${getToken("backgroundColor", "alternate").var};
   border: 1px solid ${getToken("borderColor").var};
   border-radius: ${getToken("borderRadius", "base").var};
 `
@@ -16,7 +15,6 @@ const Card = styled.div`
 const Kicker = styled(Typography).attrs({ size: "smaller", weight: "bold" })`
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: ${getToken("foregroundColor", "medium").var};
 `
 
 const Byline = styled(Typography).attrs({ size: "smaller" })`
@@ -43,7 +41,6 @@ export const ArticleWidget: React.FC = () => (
 export const overrideStyle = {
   "--np--font-size--larger": "32px",
   "--np--foreground-color--base": "#1a1a1a",
-  "--np--foreground-color--medium": "#dc2626",
   "--np--background-color--alternate": "#fef3c7",
   "--np--border-radius--base": "0px",
   "--np--border-color--base": "#1a1a1a",

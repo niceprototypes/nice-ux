@@ -4,31 +4,36 @@ import Typography from "../../src/nice/Typography"
 import { DocsRow } from "../../src/components/DocsRow"
 
 export const breakpoints = [
-  { name: "small", query: "@media (max-width: 640px)" },
-  { name: "medium", query: "@media (min-width: 641px)" },
-  { name: "large", query: "@media (min-width: 1280px)" },
+  { name: "phone", query: "@media (max-width: 640px)" },
+  { name: "tablet", query: "@media (min-width: 641px)" },
+  { name: "laptop", query: "@media (min-width: 1280px)" },
+  { name: "desktop", query: "@media (min-width: 1720px)" },
 ]
 
 export const labels = [
   {
-    name: "small",
+    name: "phone",
     emoji: "📱",
-    text: "Small",
-    breakpoints: [{ max: "small", props: { color: undefined } }],
+    text: "Phone",
+    breakpoints: { "phone-": { color: undefined } },
   },
   {
-    name: "medium",
+    name: "tablet",
     emoji: "💻",
-    text: "Medium",
-    breakpoints: [
-      { min: "medium", max: "medium", props: { color: undefined } },
-    ],
+    text: "Tablet",
+    breakpoints: { tablet: { color: undefined } },
   },
   {
-    name: "large",
+    name: "laptop",
     emoji: "🖥️",
-    text: "Large",
-    breakpoints: [{ min: "large", props: { color: undefined } }],
+    text: "Laptop",
+    breakpoints: { laptop: { color: undefined } },
+  },
+  {
+    name: "desktop",
+    emoji: "🖼️",
+    text: "Desktop",
+    breakpoints: { "desktop+": { color: undefined } },
   },
 ]
 
@@ -49,10 +54,11 @@ import { getBreakpoint } from "nice-styles"
 ### Usage
 
 ```js
-getBreakpoint("small").value // → 640
-getBreakpoint("small").query // → "@media (max-width: 640px)"
-getBreakpoint("medium").query // → "@media (min-width: 641px)"
-getBreakpoint("large").query // → "@media (min-width: 1280px)"
+getBreakpoint("phone").value   // → 640
+getBreakpoint("phone").query   // → "@media (max-width: 640px)"
+getBreakpoint("tablet").query  // → "@media (min-width: 641px)"
+getBreakpoint("laptop").query  // → "@media (min-width: 1280px)"
+getBreakpoint("desktop").query // → "@media (min-width: 1720px)"
 ```
 
 ---
@@ -82,7 +88,7 @@ getBreakpoint("large").query // → "@media (min-width: 1280px)"
 </Typography>
 
 <Flex
-  direction={{ small: "column", medium: "row" }}
+  direction={{ phone: "column", tablet: "row" }}
   gap="small"
 >
   {labels.map(({ name, emoji, text, breakpoints }) => (
@@ -104,12 +110,16 @@ getBreakpoint("large").query // → "@media (min-width: 1280px)"
 const Box = styled.div`
   background: blue;
 
-  ${getBreakpoint("medium").query} {
+  ${getBreakpoint("tablet").query} {
     background: orange;
   }
 
-  ${getBreakpoint("large").query} {
+  ${getBreakpoint("laptop").query} {
     background: green;
+  }
+
+  ${getBreakpoint("desktop").query} {
+    background: purple;
   }
 `
 ```

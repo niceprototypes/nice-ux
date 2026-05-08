@@ -1,64 +1,8 @@
-import * as React from "react"
-import styled from "styled-components"
 import Flex from "nice-react-flex"
-import { getToken, withBreakpoints } from "nice-react-styles"
+import { withBreakpoints } from "nice-react-styles"
 import { Source } from "@storybook/addon-docs/blocks"
-import { PreviewWrapper } from "./DocsRow.styles"
-
-const Row = styled(Flex).attrs({ spacing: "large none" })`
-  align-items: center;
-  gap: ${getToken("gap", "larger").var};
-
-  &:not(:last-child) {
-    border-bottom: 1px solid ${getToken("borderColor", "base").var};
-  }
-
-  .docblock-source {
-    display: flex;
-    flex-grow: 1;
-    align-items: center;
-    margin: 0;
-    border: 0;
-    border-radius: 0;
-
-    box-shadow: none;
-
-    > div {
-      position: relative;
-    }
-
-    pre {
-      padding: 0 !important;
-    }
-
-    button {
-      margin: 0;
-      padding: ${getToken("gap", "small").var} ${getToken("gap").var};
-      border-radius: ${getToken("borderRadius", "small").var} !important;
-      border: 1px solid ${getToken("borderColor").var};
-
-      &:hover,
-      &:focus {
-        border-color: ${getToken("borderColor", "darker").var};
-      }
-
-      &:focus {
-        box-shadow: none;
-        background-color: ${getToken("borderColor", "darker").var} !important;
-        color: ${getToken("foregroundColor", "base", "night").var} !important;
-      }
-    }
-  }
-`
-
-export type DocsRowLanguage = "tsx" | "css"
-
-export interface DocsRowProps {
-  previewCell: React.ReactNode
-  code: string
-  language?: DocsRowLanguage
-  previewCellWidth?: string
-}
+import { PreviewWrapper, RowFlex } from "./DocsRow.styles"
+import { DocsRowProps } from "./DocsRow.types"
 
 const BaseDocsRow = ({
   previewCell,
@@ -66,15 +10,33 @@ const BaseDocsRow = ({
   language = "tsx",
   previewCellWidth,
 }: DocsRowProps) => (
-  <Row>
-    <PreviewWrapper $width={previewCellWidth}>{previewCell}</PreviewWrapper>
+  <RowFlex
+    direction="column"
+    gap="large"
+    breakpoints={{
+      "tablet+": {
+          direction: "row",
+          alignItems: "center",
+        },
+    }}
+  >
+    <Flex
+      style={{ width: previewCellWidth }}
+      breakpoints={{
+        "tablet+": {
+            previewCellWidth: "45%",
+          },
+      }}
+    >
+      {previewCell}
+    </Flex>
     <Source
       language={language}
       code={code}
     />
-  </Row>
+  </RowFlex>
 )
 
 export const DocsRow = withBreakpoints<DocsRowProps>(BaseDocsRow, [
-  { min: "medium", props: { previewCellWidth: "45%" } },
+  { min: "tablet", props: { previewCellWidth: "45%" } },
 ])

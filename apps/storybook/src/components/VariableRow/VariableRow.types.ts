@@ -5,4 +5,5 @@ export interface VariableRowProps {
   value?: string
   code?: string
   default?: boolean
+  firstColumnWidth?: string
 }

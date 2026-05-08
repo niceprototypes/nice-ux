@@ -1,13 +1,24 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import Flex from "nice-react-flex"
 import Intro from "../src/components/Intro"
+import Typography from "../src/nice/Typography"
+import Icon from "nice-react-icon"
+
+export const Check = (props) => (
+  <Flex justifyContent="center">
+    <Icon size="smaller" name="check" strokeWidth="large" strokeScaling {...props} />
+  </Flex>
+)
 
 <Meta title="Welcome" />
 
-# Nice UI
-###### by Nice Prototypes
-
----
+<Flex alignItems="center" gap="base" spacing="none none larger">
+  <img src="https://niceprototypes.com/vectors/icon.svg" alt="Nice Prototypes" width="64px" />
+  <Flex direction="column">
+    <Typography as="h1" color="base" size="larger">Nice UI</Typography>
+    <Typography weight="bold" color="lighter">by Nice Prototypes</Typography>
+  </Flex>
+</Flex>
 
 <Flex
   direction="column"
@@ -25,7 +36,7 @@ import Intro from "../src/components/Intro"
     iconName="Cable"
     title="React"
   >
-    <strong>React features</strong> for the token system including provider, typed token API, responsive UI components, and bindings.
+    <strong>React.js features</strong> for the token system including provider, typed token API, responsive UI components, and bindings.
   </Intro>
   <Intro
     href="/storybook/?path=/docs/welcome-configuration--docs"
@@ -35,3 +46,142 @@ import Intro from "../src/components/Intro"
     <strong>Tooling and support</strong> for the Nice ecosystem including build tools, type checking, testing, and local workflows.
   </Intro>
 </Flex>
+
+---
+
+# Why Nice UI?
+
+Nice UI represents a deliberate **rejection of overbuilt, enterprise-focused design systems** in favor of:
+
+- clarity
+- composability
+- production-realistic UI architecture
+
+Where major systems like Material UI, Ant Design, and Fluent UI optimize for **scale, coverage, and configurability,** Nice UI optimizes for:
+
+- directness of implementation
+- predictable composition
+- low abstraction cost
+- design decisions that survive real production environments
+
+This is not a lighter version of those systems. It is **a different philosophy** of system design.
+
+---
+
+## Core industry problem
+
+Most large design systems converge on the same failure modes:
+
+| Failure mode | Industry example |
+|-------------|--------------------|
+| Over-abstraction | MUI + Ant Design rely heavily on prop matrices and variants |
+| Variant explosion | Button APIs with many permutations |
+| Theming complexity | Deep token layers in systems like Carbon / Fluent |
+| Design–dev drift | Separation between Figma and code systems |
+| Rigid composition | Monolithic components instead of primitives |
+
+---
+
+## What exists today
+
+Nice UI already demonstrates:
+
+- Composable component structure (not variant-heavy)
+- Minimal API surfaces
+- Visually consistent system without deep token overhead
+- Storybook-first visibility (component truth lives in code)
+- Production-aligned UI patterns (cards, forms, layout blocks)
+
+---
+
+## Feature comparison
+
+|  | Nice UI | Material UI | Ant Design | Chakra UI | Radix UI |
+|----------------|--------|------------|------------|------------|------------|
+| Composition-first (no reliance on variant explosion) | <Check /> |   |   |   | <Check /> |
+| Minimal prop surface per component | <Check /> |   |   |   | <Check /> |
+| Flat token model (low semantic layering) | <Check /> |   |   |   | <Check /> |
+| Storybook as primary system surface | <Check /> | <Check /> | <Check /> | <Check /> |   |
+| Production-realistic component patterns | <Check /> | <Check /> | <Check /> | <Check /> |   |
+| Low abstraction cost (maps closely to DOM) | <Check /> |   |   |   | <Check /> |
+| Neutral visual system (not branded like Material/Ant) | <Check /> |   |   | <Check /> | <Check /> |
+| Consistency without heavy theming APIs | <Check /> |   |   |   | <Check /> |
+
+---
+
+## What this means
+
+<br/><br/>
+
+### 1. Elimination of variant explosion
+
+Instead of large variant systems, Nice UI uses direct composition and minimal APIs, resulting in fewer edge cases and a simpler mental model.
+
+<br/>
+
+### 2. Reduction of abstraction overhead
+
+Enterprise systems introduce theme providers and token resolution layers. Nice UI removes those layers, resulting in predictable rendering and easier debugging.
+
+<br/>
+
+### 3. Alignment with real production UI
+
+Nice UI reflects real SaaS UI patterns rather than demo-oriented abstractions, resulting in less translation from system to product.
+
+<br/>
+
+### 4. Controlled system surface area
+
+Nice UI enforces constraint instead of flexibility overload, resulting in more consistent outputs and reduced misuse.
+
+<br/>
+
+### 5. Neutral visual layer
+
+Unlike Material UI or Ant Design, Nice UI does not impose a strong visual identity, resulting in easier integration into different products.
+
+---
+
+## Strategic advantage
+
+Nice UI sits in a category of **high-signal, low-noise design systems**. Where MUI competes on completeness, Ant on enterprise coverage, and Radix on primitives, Nice UI competes on coherent system design with minimal overhead.
+
+---
+
+## Why this matters now
+
+The industry is shifting toward:
+- smaller teams
+- faster iteration
+- AI-assisted development
+
+In that environment, **systems that minimize abstraction** outperform those that maximize flexibility
+
+---
+
+## What's coming
+
+Our roadmap is set to reinforce Nice UI's core philosophy:
+
+- Expanded component coverage (forms, data tables, navigation, feedback)
+- Cross-framework parity (Vue, Svelte, Web Components)
+- React Native implementation for shared design across web and mobile
+- Figma plugin for two-way token and component sync
+- Motion and interaction primitives
+- CLI scaffolder for one-command project setup
+
+---
+
+## Bottom line
+
+Nice UI competes on **clarity, composability, and directness.** It directly addresses:
+- over-abstraction
+- variant explosion
+- design–development mismatch
+
+---
+
+## Who made this?
+
+Nice UI is built and maintained by [Nice Prototypes](https://niceprototypes.com), a zero-to-one design and development agency focused on helping startups get started.

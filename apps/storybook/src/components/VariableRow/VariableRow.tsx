@@ -18,13 +18,14 @@ const VariableRow: React.FC<VariableRowProps> = ({
   value,
   code,
   default: isDefault,
+  firstColumnWidth = "16rem",
 }) => {
   return (
     <Flex gap="large">
-      <CellFlex
+      <Flex
         direction="column"
         justifyContent="center"
-        $width="16rem"
+        $width={firstColumnWidth}
         spacing="base none"
       >
         <Flex
@@ -59,8 +60,8 @@ const VariableRow: React.FC<VariableRowProps> = ({
             {description}
           </Typography>
         )}
-      </CellFlex>
-      <CellFlex
+      </Flex>
+      <Flex
         grow={1}
         alignItems="center"
         $width="18rem"
@@ -78,11 +79,10 @@ const VariableRow: React.FC<VariableRowProps> = ({
             {value}
           </Typography>
         )}
-      </CellFlex>
+      </Flex>
       {code && (
-        <CellFlex
+        <Flex
           alignItems="center"
-          $width="18rem"
           spacing="base none"
         >
           <CodeBlock
@@ -92,7 +92,7 @@ const VariableRow: React.FC<VariableRowProps> = ({
           >
             {normalizeCode(code)}
           </CodeBlock>
-        </CellFlex>
+        </Flex>
       )}
     </Flex>
   )

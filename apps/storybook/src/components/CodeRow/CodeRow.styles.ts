@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { getBreakpoint } from "nice-react-styles"
 
 export const LabelWrapper = styled.div`
-  ${getBreakpoint("medium").query} {
+  ${getBreakpoint("tablet").query} {
     width: 10em;
   }
 `

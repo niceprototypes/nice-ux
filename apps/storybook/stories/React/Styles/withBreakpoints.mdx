@@ -4,11 +4,11 @@ import { Meta } from "@storybook/addon-docs/blocks"
 
 # withBreakpoints
 
-`withBreakpoints` wraps a React component with a generic `breakpoints` prop that
-accepts an array of `{ min, max, props }` overrides. At render time, any entry
-whose min/max range covers the current viewport breakpoint has its `props`
-merged over the base props. Later matching entries cumulatively override earlier
-ones.
+`withBreakpoints` wraps a React component with a generic `breakpoints` prop
+that accepts an object keyed by breakpoint name (with optional `+`/`-` range
+modifiers). At render time, every key whose range covers the current viewport
+has its overrides merged over the base props. **Range keys (`+`/`-`) merge
+first; the bare exact key merges last and wins on conflict.**
 
 ```bash
 npm install nice-react-styles
@@ -30,65 +30,72 @@ already there.
 
 ## The `breakpoints` prop
 
-Every wrapped component accepts an optional `breakpoints` array. Each entry
-selects a viewport range with `min` and/or `max` and supplies a `props` object
-that overrides the base props within that range.
+Every wrapped component accepts an optional `breakpoints` object. Keys are
+breakpoint names (`phone`, `tablet`, `laptop`, `desktop`) with an optional
+`+` or `-` suffix that turns a single name into a range. Values are partial
+prop overrides applied when the key's range covers the current viewport.
 
 ```tsx
 <Tile
-  spacing="base"
   titleProps={{ size: "large", align: "center" }}
-  breakpoints={[
-    { min: "medium", max: "medium", props: { spacing: "large base" } },
-    { min: "large", props: { spacing: "larger base", maxWidthLarge: 1200 } },
-  ]}
+  breakpoints={{
+    tablet: { spacing: "large base" },
+    "laptop+": { spacing: "larger base", maxWidthLarge: 1200 },
+  }}
 >
   ...
 </Tile>
 ```
 
-### Entry shape
+### Key shape
 
-| Field   | Type              | Purpose                                                                   |
-| ------- | ----------------- | ------------------------------------------------------------------------- |
-| `min`   | `BreakpointName?` | Inclusive lower bound. Entry activates when current viewport ≥ this name. |
-| `max`   | `BreakpointName?` | Inclusive upper bound. Entry activates when current viewport ≤ this name. |
-| `props` | `Partial<P>?`     | Prop overrides applied when the entry matches.                            |
+| Key form        | Matches                                                  |
+| --------------- | -------------------------------------------------------- |
+| `"phone"`       | Phone only (current viewport === phone)                  |
+| `"tablet"`      | Tablet only                                              |
+| `"laptop"`      | Laptop only                                              |
+| `"desktop"`     | Desktop only                                             |
+| `"phone+"`      | Phone, tablet, laptop, desktop (everything)              |
+| `"tablet+"`     | Tablet, laptop, desktop                                  |
+| `"laptop+"`     | Laptop, desktop                                          |
+| `"desktop+"`    | Desktop (same as bare `"desktop"`)                       |
+| `"phone-"`      | Phone (same as bare `"phone"`)                           |
+| `"tablet-"`     | Phone, tablet                                            |
+| `"laptop-"`     | Phone, tablet, laptop                                    |
+| `"desktop-"`    | Phone, tablet, laptop, desktop (everything)              |
 
-`BreakpointName` is `"small" | "medium" | "large"`. **At least one of `min` or
-`max` must be provided** — the HOC throws at runtime if both are missing.
-
-| Bounds                             | Meaning                                            |
-| ---------------------------------- | -------------------------------------------------- |
-| `{ min: "medium" }`                | Medium and up (medium, large)                      |
-| `{ max: "medium" }`                | Up to medium (small, medium)                       |
-| `{ min: "medium", max: "medium" }` | Medium only                                        |
-| `{ min: "small", max: "large" }`   | All viewports — useful for unconditional overrides |
+`BreakpointName` is `"phone" | "tablet" | "laptop" | "desktop"`. Order, smallest
+to largest: phone < tablet < laptop < desktop.
 
 ---
 
 ## Merge semantics
 
-Matching entries are applied **cumulatively** in array order — later wins on a
-field collision. Plain-object props merge **one level deep** so partial
-overrides preserve sibling keys.
+Multiple keys may match a single viewport (e.g. `"tablet"`, `"tablet+"`, and
+`"tablet-"` all match at tablet width). Specificity rule: **range keys (`+`/`-`)
+apply first in object insertion order; the bare exact key applies last and
+wins on conflict.** This mirrors CSS specificity intuition — the most specific
+match supersedes broader ones.
 
-| Prop kind                                                                    | Behavior                                 |
-| ---------------------------------------------------------------------------- | ---------------------------------------- |
-| Plain config object (`titleProps`, `descriptionProps`, `style`, …)           | One-level merge — sibling keys preserved |
-| Primitive (`spacing`, `gap`, `maxWidthLarge`, `boolean`, `number`, `string`) | Replace                                  |
-| React element (`children`, `contentLeft`, `contentRight`, …)                 | Replace as a unit                        |
-| Array (`description: string[]`, etc.)                                        | Replace as a unit                        |
-| Function (handlers, refs)                                                    | Replace                                  |
+Plain-object props merge **one level deep** so partial overrides preserve
+sibling keys.
+
+| Prop kind           | Examples                                  | Behavior                                 |
+| ------------------- | ----------------------------------------- | ---------------------------------------- |
+| Plain config object | `titleProps`, `descriptionProps`, `style` | One-level merge — sibling keys preserved |
+| Primitive           | `string`, `number`, `boolean`             | Replace                                  |
+| React element       | `children`, `contentLeft`, `contentRight` | Replace as a unit                        |
+| Array               | `string[]`, `number[]`                    | Replace as a unit                        |
+| Function            | event handlers, refs                      | Replace                                  |
 
 Concretely:
 
 ```tsx
 <Tile
   titleProps={{ size: "larger", align: "center" }}
-  breakpoints={[{ min: "medium", props: { titleProps: { size: "larger" } } }]}
+  breakpoints={{ "tablet+": { titleProps: { size: "larger" } } }}
 />
-// effective titleProps at medium+: { size: "larger", align: "center" }
+// effective titleProps at tablet+: { size: "larger", align: "center" }
 // `align` is preserved because titleProps is a plain object.
 ```
 
@@ -100,7 +107,7 @@ Concretely:
 `justifyContent`, `grow`, `wrap`:
 
 ```tsx
-<Flex direction={{ small: "column", medium: "row" }} />
+<Flex direction={{ phone: "column", tablet: "row" }} />
 ```
 
 That's CSS-only — generates per-breakpoint media queries inside the styled
@@ -122,13 +129,14 @@ it's lighter and works at the styled-components layer.
 ## How it works under the hood
 
 1. `useBreakpoint()` reads `window.innerWidth` via `useSyncExternalStore` and
-   returns one of `"small"` / `"medium"` / `"large"`.
+   returns one of `"phone"` / `"tablet"` / `"laptop"` / `"desktop"`.
 2. The wrapped component re-renders on viewport-cross.
-3. The HOC walks the `breakpoints` array, picks matching entries, and folds
-   their `props` into the base props with a one-level deep merge.
+3. The HOC walks the `breakpoints` object, picks matching keys, and folds
+   their overrides into the base props with a one-level deep merge — range
+   keys first, exact keys last.
 4. The final merged props are passed to the underlying component.
 
-SSR snapshot is `"small"` (small-first); on hydration, the client snapshot
+SSR snapshot is `"phone"` (phone-first); on hydration, the client snapshot
 takes over and re-renders if the viewport is wider.
 
 ---
