@@ -15,8 +15,8 @@ const OuterFlex$1 = styled(Flex).withConfig({
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  background-color: ${({ $mode }) => niceReactStyles.getToken("backgroundColor", "base", $mode).var};
-  color: ${({ $mode }) => niceReactStyles.getToken("foregroundColor", "base", $mode).var};
+  background-color: ${({ $mode }) => niceReactStyles.getReactToken("backgroundColor", "base", $mode).var};
+  color: ${({ $mode }) => niceReactStyles.getReactToken("foregroundColor", "base", $mode).var};
 
   ${({ $backgroundColor }) => {
     if ($backgroundColor) {
