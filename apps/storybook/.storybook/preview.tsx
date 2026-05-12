@@ -1,14 +1,14 @@
 import React from "react"
 import type { Preview } from "@storybook/react-vite"
 import { create } from "storybook/theming"
-import { StylesProvider, getToken } from "nice-react-styles"
+import { StylesProvider, getReactToken } from "nice-react-styles"
 import "nice-react-icon-vendor"
 import "./preview.css"
 
 const docsTheme = create({
   base: "light",
-  fontBase: getToken("fontFamily", "base").value,
-  fontCode: getToken("fontFamily", "code").value,
+  fontBase: getReactToken("fontFamily", "base").value,
+  fontCode: getReactToken("fontFamily", "code").value,
 })
 
 const preview: Preview = {
@@ -41,7 +41,7 @@ const preview: Preview = {
           "React",
           [
             "Styles",
-            ["StylesProvider", "getToken", "createTokens"],
+            ["StylesProvider", "getReactToken", "createTokens"],
             "Components",
             "Bindings",
           ],

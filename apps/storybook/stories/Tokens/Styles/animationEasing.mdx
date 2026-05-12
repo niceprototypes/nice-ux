@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import Flex from "nice-react-flex"
-import { getToken } from "nice-react-styles"
+import { getReactToken } from "nice-react-styles"
 import Typography from "../../../src/nice/Typography"
 import { DocsRow } from "../../../src/components/DocsRow"
 
@@ -16,9 +16,9 @@ import { DocsRow } from "../../../src/components/DocsRow"
       previewCell={
         <Flex
           style={{
-            backgroundColor: getToken("backgroundColor", "dark").var,
-            padding: getToken("gap").var,
-            borderRadius: getToken("borderRadius").var,
+            backgroundColor: getReactToken("backgroundColor", "dark").var,
+            padding: getReactToken("gap").var,
+            borderRadius: getReactToken("borderRadius").var,
           }}
         >
           <svg
@@ -29,15 +29,15 @@ import { DocsRow } from "../../../src/components/DocsRow"
             <path
               d="M 1 23 C 30 23, 30 1, 60 1"
               fill="none"
-              stroke={getToken("foregroundColor", "lighter").var}
-              strokeWidth={getToken("borderWidth", "large").var}
+              stroke={getReactToken("foregroundColor", "lighter").var}
+              strokeWidth={getReactToken("borderWidth", "large").var}
               strokeLinecap="round"
             />
           </svg>
         </Flex>
       }
       language="tsx"
-      code={`getToken("animationEasing", "${variant}").var`}
+      code={`getReactToken("animationEasing", "${variant}").var`}
     />
   ))}
 </div>

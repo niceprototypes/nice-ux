@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { getToken } from "nice-react-styles"
+import { getReactToken } from "nice-react-styles"
 import Flex from "nice-react-flex"
 
 export const ClickableDiv = styled.div<{ $clickable: boolean }>`

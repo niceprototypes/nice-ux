@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import Flex from "nice-react-flex"
-import { getBreakpoint, getToken } from "nice-react-styles"
+import { getBreakpoint, getReactToken } from "nice-react-styles"
 
 export const PreviewWrapper = styled.div<{ $width?: string }>`
   ${({ $width }) => ($width ? `width: ${$width};` : "")}
@@ -9,20 +9,20 @@ export const PreviewWrapper = styled.div<{ $width?: string }>`
 export const RowFlex = styled(Flex).attrs({ spacing: "large none" })`
 
   &:not(:last-child) {
-    border-bottom: 1px solid ${getToken("borderColor", "base").var};
+    border-bottom: 1px solid ${getReactToken("borderColor", "base").var};
   }
 
   .docblock-source {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    gap: ${getToken("gap", "large").var};
-    padding-top: ${getToken("gap", "large").var};
+    gap: ${getReactToken("gap", "large").var};
+    padding-top: ${getReactToken("gap", "large").var};
     align-items: flex-start;
     justify-content: center;
     margin: 0;
     border: 0;
-    border-top: 1px solid ${getToken("borderColor").var};
+    border-top: 1px solid ${getReactToken("borderColor").var};
     border-radius: 0;
     box-shadow: none;
     width: 100%;
@@ -38,7 +38,7 @@ export const RowFlex = styled(Flex).attrs({ spacing: "large none" })`
         button {
           width: 100%;
           justify-content: center;
-          padding: ${getToken("gap", "base").var};
+          padding: ${getReactToken("gap", "base").var};
           font-size: inherit;
         }
       }
@@ -50,19 +50,19 @@ export const RowFlex = styled(Flex).attrs({ spacing: "large none" })`
 
     button {
       margin: 0;
-      padding: ${getToken("gap", "small").var} ${getToken("gap").var};
-      border-radius: ${getToken("borderRadius", "small").var} !important;
-      border: 1px solid ${getToken("borderColor").var};
+      padding: ${getReactToken("gap", "small").var} ${getReactToken("gap").var};
+      border-radius: ${getReactToken("borderRadius", "small").var} !important;
+      border: 1px solid ${getReactToken("borderColor").var};
 
       &:hover,
       &:focus {
-        border-color: ${getToken("borderColor", "darker").var};
+        border-color: ${getReactToken("borderColor", "darker").var};
       }
 
       &:focus {
         box-shadow: none;
-        background-color: ${getToken("borderColor", "darker").var} !important;
-        color: ${getToken("foregroundColor", "base", "night").var} !important;
+        background-color: ${getReactToken("borderColor", "darker").var} !important;
+        color: ${getReactToken("foregroundColor", "base", "night").var} !important;
       }
     }
   }

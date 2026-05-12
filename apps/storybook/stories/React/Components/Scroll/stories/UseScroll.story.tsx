@@ -1,7 +1,7 @@
 import { ScrollProvider } from "nice-react-scroll"
 import Flex from "nice-react-flex"
 import Typography from "../../../../../src/nice/Typography"
-import { getToken } from "nice-react-styles"
+import { getReactToken } from "nice-react-styles"
 import Story from "../../../../../src/components/Story"
 import { ScrollPositionDisplay } from "../Scroll.services"
 
@@ -16,8 +16,8 @@ const UseScrollStory = () => (
             <Flex
               direction="column"
               style={{
-                padding: getToken("gap", "base").var,
-                borderRadius: getToken("borderRadius", "base").var,
+                padding: getReactToken("gap", "base").var,
+                borderRadius: getReactToken("borderRadius", "base").var,
               }}
             >
               <ScrollPositionDisplay />

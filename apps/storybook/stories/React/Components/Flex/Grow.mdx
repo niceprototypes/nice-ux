@@ -1,5 +1,5 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import { getToken } from "nice-react-styles"
+import { getReactToken } from "nice-react-styles"
 import StoryDescription from "../../../../src/components/StoryDescription"
 import { DocsRow } from "../../../../src/components/DocsRow"
 import DemoDots from "../../../../src/components/DemoDots"
@@ -22,14 +22,14 @@ export const growCode = a =>
       width="12rem"
       dots={[
         {
-          color: getToken("foregroundColor", "error").var,
-          height: getToken("cellHeight", "smaller").var,
-          width: getToken("cellHeight", "smaller").var,
+          color: getReactToken("foregroundColor", "error").var,
+          height: getReactToken("cellHeight", "smaller").var,
+          width: getReactToken("cellHeight", "smaller").var,
           grow: 0,
         },
         {
-          color: getToken("foregroundColor", "link").var,
-          height: getToken("cellHeight", "smaller").var,
+          color: getReactToken("foregroundColor", "link").var,
+          height: getReactToken("cellHeight", "smaller").var,
           grow: 1,
         },
       ]}
@@ -46,13 +46,13 @@ export const growCode = a =>
       width="12rem"
       dots={[
         {
-          color: getToken("foregroundColor", "error").var,
-          height: getToken("cellHeight", "smaller").var,
+          color: getReactToken("foregroundColor", "error").var,
+          height: getReactToken("cellHeight", "smaller").var,
           grow: 1,
         },
         {
-          color: getToken("foregroundColor", "link").var,
-          height: getToken("cellHeight", "smaller").var,
+          color: getReactToken("foregroundColor", "link").var,
+          height: getReactToken("cellHeight", "smaller").var,
           grow: 1,
         },
       ]}
@@ -69,13 +69,13 @@ export const growCode = a =>
       width="12rem"
       dots={[
         {
-          color: getToken("foregroundColor", "error").var,
-          height: getToken("cellHeight", "smaller").var,
+          color: getReactToken("foregroundColor", "error").var,
+          height: getReactToken("cellHeight", "smaller").var,
           grow: 2,
         },
         {
-          color: getToken("foregroundColor", "link").var,
-          height: getToken("cellHeight", "smaller").var,
+          color: getReactToken("foregroundColor", "link").var,
+          height: getReactToken("cellHeight", "smaller").var,
           grow: 1,
         },
       ]}

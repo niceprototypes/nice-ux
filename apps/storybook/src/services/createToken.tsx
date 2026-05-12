@@ -1,4 +1,4 @@
-import { getToken } from "nice-react-styles"
+import { getReactToken } from "nice-react-styles"
 import type { StoryVariable } from "../components/Story"
 
 export const createToken = <T extends string | { name: string }>(
@@ -9,7 +9,7 @@ export const createToken = <T extends string | { name: string }>(
   return variants.map(variant => {
     const itemName = typeof variant === "string" ? variant : variant.name
 
-    const token = getToken(groupName as any, itemName)
+    const token = getReactToken(groupName as any, itemName)
     return {
       name: itemName,
       key: token.key,

@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import Flex from "nice-react-flex"
-import { getToken } from "nice-react-styles"
+import { getReactToken } from "nice-react-styles"
 import Typography from "../../../src/nice/Typography"
 import { DocsRow } from "../../../src/components/DocsRow"
 
@@ -12,10 +12,10 @@ import { DocsRow } from "../../../src/components/DocsRow"
 
 <div>
   {[
-    { name: "base", backgroundColor: getToken("foregroundColor", "error").var },
+    { name: "base", backgroundColor: getReactToken("foregroundColor", "error").var },
     {
       name: "slow",
-      backgroundColor: getToken("foregroundColor", "warning").var,
+      backgroundColor: getReactToken("foregroundColor", "warning").var,
     },
   ].map(({ name, backgroundColor }) => {
     const animationName = name === "base" ? "slide" : "slideSlow"
@@ -25,25 +25,25 @@ import { DocsRow } from "../../../src/components/DocsRow"
           <Flex
             style={{
               width: "120px",
-              backgroundColor: getToken("backgroundColor", "dark").var,
-              borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2)`,
+              backgroundColor: getReactToken("backgroundColor", "dark").var,
+              borderRadius: `calc(${getReactToken("cellHeight", "smaller").var} / 2)`,
             }}
           >
             <Flex
               style={{
                 backgroundColor,
-                width: getToken("cellHeight", "smaller").var,
-                height: getToken("cellHeight", "smaller").var,
-                borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2)`,
-                animation: `${animationName} calc(${getToken("animationDuration", name).var} * 6) ${getToken("animationEasing").var} infinite`,
+                width: getReactToken("cellHeight", "smaller").var,
+                height: getReactToken("cellHeight", "smaller").var,
+                borderRadius: `calc(${getReactToken("cellHeight", "smaller").var} / 2)`,
+                animation: `${animationName} calc(${getReactToken("animationDuration", name).var} * 6) ${getReactToken("animationEasing").var} infinite`,
                 animationDelay:
-                  name === "base" ? getToken("animationDuration", name).var : 0,
+                  name === "base" ? getReactToken("animationDuration", name).var : 0,
               }}
             />
           </Flex>
         }
         language="tsx"
-        code={`getToken("animationDuration", "${name}").var`}
+        code={`getReactToken("animationDuration", "${name}").var`}
       />
     )
   })}

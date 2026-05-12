@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import Flex from "nice-react-flex"
-import { getToken } from "nice-react-styles"
+import { getReactToken } from "nice-react-styles"
 import Typography from "../../../src/nice/Typography"
 import { DocsRow } from "../../../src/components/DocsRow"
 import DemoDots from "../../../src/components/DemoDots"
@@ -33,10 +33,10 @@ no build step, no opinions about your component model.
 
 <div>
   {[
-    { name: "base", backgroundColor: getToken("foregroundColor", "error").var },
+    { name: "base", backgroundColor: getReactToken("foregroundColor", "error").var },
     {
       name: "slow",
-      backgroundColor: getToken("foregroundColor", "warning").var,
+      backgroundColor: getReactToken("foregroundColor", "warning").var,
     },
   ].map(({ name, backgroundColor }) => {
     const animationName = name === "base" ? "slide" : "slideSlow"
@@ -46,25 +46,25 @@ no build step, no opinions about your component model.
           <Flex
             style={{
               width: "120px",
-              backgroundColor: getToken("backgroundColor", "dark").var,
-              borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2)`,
+              backgroundColor: getReactToken("backgroundColor", "dark").var,
+              borderRadius: `calc(${getReactToken("cellHeight", "smaller").var} / 2)`,
             }}
           >
             <Flex
               style={{
                 backgroundColor,
-                width: getToken("cellHeight", "smaller").var,
-                height: getToken("cellHeight", "smaller").var,
-                borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2)`,
-                animation: `${animationName} calc(${getToken("animationDuration", name).var} * 6) ${getToken("animationEasing").var} infinite`,
+                width: getReactToken("cellHeight", "smaller").var,
+                height: getReactToken("cellHeight", "smaller").var,
+                borderRadius: `calc(${getReactToken("cellHeight", "smaller").var} / 2)`,
+                animation: `${animationName} calc(${getReactToken("animationDuration", name).var} * 6) ${getReactToken("animationEasing").var} infinite`,
                 animationDelay:
-                  name === "base" ? getToken("animationDuration", name).var : 0,
+                  name === "base" ? getReactToken("animationDuration", name).var : 0,
               }}
             />
           </Flex>
         }
         language="tsx"
-        code={`getToken("animationDuration", "${name}").var`}
+        code={`getReactToken("animationDuration", "${name}").var`}
       />
     )
   })}
@@ -78,9 +78,9 @@ no build step, no opinions about your component model.
       previewCell={
         <Flex
           style={{
-            backgroundColor: getToken("backgroundColor", "dark").var,
-            padding: getToken("gap").var,
-            borderRadius: getToken("borderRadius").var,
+            backgroundColor: getReactToken("backgroundColor", "dark").var,
+            padding: getReactToken("gap").var,
+            borderRadius: getReactToken("borderRadius").var,
           }}
         >
           <svg
@@ -91,15 +91,15 @@ no build step, no opinions about your component model.
             <path
               d="M 1 23 C 30 23, 30 1, 60 1"
               fill="none"
-              stroke={getToken("foregroundColor", "lighter").var}
-              strokeWidth={getToken("borderWidth", "large").var}
+              stroke={getReactToken("foregroundColor", "lighter").var}
+              strokeWidth={getReactToken("borderWidth", "large").var}
               strokeLinecap="round"
             />
           </svg>
         </Flex>
       }
       language="tsx"
-      code={`getToken("animationEasing", "${variant}").var`}
+      code={`getReactToken("animationEasing", "${variant}").var`}
     />
   ))}
 </div>
@@ -112,16 +112,16 @@ no build step, no opinions about your component model.
       previewCell={
         <Flex
           style={{
-            backgroundColor: getToken("backgroundColor", variant).var,
-            width: getToken("cellHeight", "larger").var,
-            height: getToken("cellHeight", "larger").var,
-            border: `${getToken("borderWidth").var} solid ${getToken("borderColor").var}`,
-            borderRadius: getToken("borderRadius", "small").var,
+            backgroundColor: getReactToken("backgroundColor", variant).var,
+            width: getReactToken("cellHeight", "larger").var,
+            height: getReactToken("cellHeight", "larger").var,
+            border: `${getReactToken("borderWidth").var} solid ${getReactToken("borderColor").var}`,
+            borderRadius: getReactToken("borderRadius", "small").var,
           }}
         />
       }
       language="tsx"
-      code={`getToken("backgroundColor", "${variant}").var`}
+      code={`getReactToken("backgroundColor", "${variant}").var`}
     />
   ))}
 </div>
@@ -135,15 +135,15 @@ no build step, no opinions about your component model.
         <Flex
           style={{
             backgroundColor: "white",
-            width: getToken("cellHeight", "larger").var,
-            height: getToken("cellHeight", "larger").var,
-            border: `${getToken("borderWidth").var} solid ${getToken("borderColor", variant).var}`,
-            borderRadius: getToken("borderRadius", "small").var,
+            width: getReactToken("cellHeight", "larger").var,
+            height: getReactToken("cellHeight", "larger").var,
+            border: `${getReactToken("borderWidth").var} solid ${getReactToken("borderColor", variant).var}`,
+            borderRadius: getReactToken("borderRadius", "small").var,
           }}
         />
       }
       language="tsx"
-      code={`getToken("borderColor", "${variant}").var`}
+      code={`getReactToken("borderColor", "${variant}").var`}
     />
   ))}
 </div>
@@ -156,15 +156,15 @@ no build step, no opinions about your component model.
       previewCell={
         <Flex
           style={{
-            borderRadius: getToken("borderRadius", variant).var,
-            width: getToken("cellHeight", "larger").var,
-            height: getToken("cellHeight", "larger").var,
-            border: `${getToken("borderWidth").var} solid ${getToken("foregroundColor", "light").var}`,
+            borderRadius: getReactToken("borderRadius", variant).var,
+            width: getReactToken("cellHeight", "larger").var,
+            height: getReactToken("cellHeight", "larger").var,
+            border: `${getReactToken("borderWidth").var} solid ${getReactToken("foregroundColor", "light").var}`,
           }}
         />
       }
       language="tsx"
-      code={`getToken("borderRadius", "${variant}").var`}
+      code={`getReactToken("borderRadius", "${variant}").var`}
     />
   ))}
 </div>
@@ -177,15 +177,15 @@ no build step, no opinions about your component model.
       previewCell={
         <Flex
           style={{
-            width: getToken("cellHeight", "larger").var,
-            height: getToken("cellHeight", "larger").var,
-            border: `${getToken("borderWidth", variant).var} solid ${getToken("foregroundColor", "light").var}`,
-            borderRadius: getToken("borderRadius", "small").var,
+            width: getReactToken("cellHeight", "larger").var,
+            height: getReactToken("cellHeight", "larger").var,
+            border: `${getReactToken("borderWidth", variant).var} solid ${getReactToken("foregroundColor", "light").var}`,
+            borderRadius: getReactToken("borderRadius", "small").var,
           }}
         />
       }
       language="tsx"
-      code={`getToken("borderWidth", "${variant}").var`}
+      code={`getReactToken("borderWidth", "${variant}").var`}
     />
   ))}
 </div>
@@ -199,23 +199,23 @@ no build step, no opinions about your component model.
         <Flex
           spacing="large"
           style={{
-            backgroundColor: getToken("backgroundColor", "dark").var,
-            borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2)`,
+            backgroundColor: getReactToken("backgroundColor", "dark").var,
+            borderRadius: `calc(${getReactToken("cellHeight", "smaller").var} / 2)`,
           }}
         >
           <Flex
             style={{
-              backgroundColor: getToken("backgroundColor").var,
-              width: getToken("cellHeight", "larger").var,
-              height: getToken("cellHeight", "larger").var,
-              borderRadius: getToken("borderRadius", "small").var,
-              boxShadow: getToken("boxShadow", variant).var,
+              backgroundColor: getReactToken("backgroundColor").var,
+              width: getReactToken("cellHeight", "larger").var,
+              height: getReactToken("cellHeight", "larger").var,
+              borderRadius: getReactToken("borderRadius", "small").var,
+              boxShadow: getReactToken("boxShadow", variant).var,
             }}
           />
         </Flex>
       }
       language="tsx"
-      code={`getToken("boxShadow", "${variant}").var`}
+      code={`getReactToken("boxShadow", "${variant}").var`}
     />
   ))}
 </div>
@@ -228,15 +228,15 @@ no build step, no opinions about your component model.
       previewCell={
         <Flex
           style={{
-            width: getToken("cellHeight", "larger").var,
-            height: getToken("cellHeight", variant).var,
-            border: `${getToken("borderWidth").var} solid ${getToken("foregroundColor", "light").var}`,
-            borderRadius: getToken("cellHeight", "smaller").var,
+            width: getReactToken("cellHeight", "larger").var,
+            height: getReactToken("cellHeight", variant).var,
+            border: `${getReactToken("borderWidth").var} solid ${getReactToken("foregroundColor", "light").var}`,
+            borderRadius: getReactToken("cellHeight", "smaller").var,
           }}
         />
       }
       language="tsx"
-      code={`getToken("cellHeight", "${variant}").var`}
+      code={`getReactToken("cellHeight", "${variant}").var`}
     />
   ))}
 </div>
@@ -259,7 +259,7 @@ no build step, no opinions about your component model.
         </Typography>
       }
       language="tsx"
-      code={`getToken("fontFamily", "${name}").var`}
+      code={`getReactToken("fontFamily", "${name}").var`}
     />
   ))}
 </div>
@@ -275,7 +275,7 @@ no build step, no opinions about your component model.
         </Typography>
       }
       language="tsx"
-      code={`getToken("fontSize", "${variant}").var`}
+      code={`getReactToken("fontSize", "${variant}").var`}
     />
   ))}
 </div>
@@ -292,7 +292,7 @@ no build step, no opinions about your component model.
           </Typography>
         }
         language="tsx"
-        code={`getToken("fontWeight", "${variant}").var`}
+        code={`getReactToken("fontWeight", "${variant}").var`}
       />
     )
   )}
@@ -316,15 +316,15 @@ no build step, no opinions about your component model.
       previewCell={
         <Flex
           style={{
-            width: getToken("cellHeight", "smaller").var,
-            height: getToken("cellHeight", "smaller").var,
-            backgroundColor: getToken("foregroundColor", variant).var,
+            width: getReactToken("cellHeight", "smaller").var,
+            height: getReactToken("cellHeight", "smaller").var,
+            backgroundColor: getReactToken("foregroundColor", variant).var,
             borderRadius: "50%",
           }}
         />
       }
       language="tsx"
-      code={`getToken("foregroundColor", "${variant}").var`}
+      code={`getReactToken("foregroundColor", "${variant}").var`}
     />
   ))}
 </div>
@@ -339,20 +339,20 @@ no build step, no opinions about your component model.
           gap={variant}
           dots={[
             {
-              color: getToken("foregroundColor", "error").var,
-              width: getToken("cellHeight", "smaller").var,
-              height: getToken("cellHeight", "smaller").var,
+              color: getReactToken("foregroundColor", "error").var,
+              width: getReactToken("cellHeight", "smaller").var,
+              height: getReactToken("cellHeight", "smaller").var,
             },
             {
-              color: getToken("foregroundColor", "link").var,
-              width: getToken("cellHeight", "smaller").var,
-              height: getToken("cellHeight", "smaller").var,
+              color: getReactToken("foregroundColor", "link").var,
+              width: getReactToken("cellHeight", "smaller").var,
+              height: getReactToken("cellHeight", "smaller").var,
             },
           ]}
         />
       }
       language="tsx"
-      code={`getToken("gap", "${variant}").var`}
+      code={`getReactToken("gap", "${variant}").var`}
     />
   ))}
 </div>
@@ -366,7 +366,7 @@ no build step, no opinions about your component model.
         <Typography lineHeight={variant}>{loremIpsum}</Typography>
       }
       language="tsx"
-      code={`getToken("lineHeight", "${variant}").var`}
+      code={`getReactToken("lineHeight", "${variant}").var`}
     />
   ))}
 </div>

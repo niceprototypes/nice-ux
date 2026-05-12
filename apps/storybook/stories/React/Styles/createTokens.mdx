@@ -14,14 +14,14 @@ npm install nice-react-styles
 ### Setup
 
 ```js
-import { createTokens, getToken } from "nice-react-styles"
+import { createTokens, getReactToken } from "nice-react-styles"
 ```
 
 ### Usage
 
 ```js
 export const { GlobalStyles } = createTokens(tokenMap)
-export { getToken }
+export { getReactToken }
 ```
 
 ---
@@ -159,13 +159,13 @@ createTokens({
 
 #### Primitives
 
-Day and night primitives are stable references that are never reassigned by media queries. Use `getToken` with a mode argument to access them directly.
+Day and night primitives are stable references that are never reassigned by media queries. Use `getReactToken` with a mode argument to access them directly.
 
 ```typescript
-getToken("headerColor", "base", "day")
+getReactToken("headerColor", "base", "day")
 // → var(--np--header-color--base--day)
 
-getToken("headerColor", "base", "night")
+getReactToken("headerColor", "base", "night")
 // → var(--np--header-color--base--night)
 ```
 

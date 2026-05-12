@@ -1,5 +1,5 @@
 import Flex from "nice-react-flex"
-import { getToken } from "nice-react-styles"
+import { getReactToken } from "nice-react-styles"
 import { DemoDotsProps } from "./DemoDots.types"
 import DemoDot from "./DemoDot"
 
@@ -30,8 +30,8 @@ const DemoDots = ({
           padding: !spacing && 1,
           gap: !gap && 1,
           ...(bordered && {
-            borderRadius: `calc(${getToken("cellHeight", "smaller").var} / 2 + 2px)`,
-            border: `${getToken("borderWidth").var} solid ${getToken("borderColor").var}`,
+            borderRadius: `calc(${getReactToken("cellHeight", "smaller").var} / 2 + 2px)`,
+            border: `${getReactToken("borderWidth").var} solid ${getReactToken("borderColor").var}`,
           }),
         }}
       >
@@ -40,7 +40,7 @@ const DemoDots = ({
             <DemoDot
               key={index}
               backgroundColor={color}
-              borderRadius={`calc(${getToken("cellHeight", "smaller").var} / 2)`}
+              borderRadius={`calc(${getReactToken("cellHeight", "smaller").var} / 2)`}
               width={dotWidth}
               height={dotHeight}
               grow={grow}

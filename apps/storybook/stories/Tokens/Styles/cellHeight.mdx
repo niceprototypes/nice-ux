@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import Flex from "nice-react-flex"
-import { getToken } from "nice-react-styles"
+import { getReactToken } from "nice-react-styles"
 import Typography from "../../../src/nice/Typography"
 import { DocsRow } from "../../../src/components/DocsRow"
 
@@ -18,15 +18,15 @@ import { DocsRow } from "../../../src/components/DocsRow"
       previewCell={
         <Flex
           style={{
-            width: getToken("cellHeight", "larger").var,
-            height: getToken("cellHeight", variant).var,
-            border: `${getToken("borderWidth").var} solid ${getToken("foregroundColor", "light").var}`,
-            borderRadius: getToken("cellHeight", "smaller").var,
+            width: getReactToken("cellHeight", "larger").var,
+            height: getReactToken("cellHeight", variant).var,
+            border: `${getReactToken("borderWidth").var} solid ${getReactToken("foregroundColor", "light").var}`,
+            borderRadius: getReactToken("cellHeight", "smaller").var,
           }}
         />
       }
       language="tsx"
-      code={`getToken("cellHeight", "${variant}").var`}
+      code={`getReactToken("cellHeight", "${variant}").var`}
     />
   ))}
 </div>

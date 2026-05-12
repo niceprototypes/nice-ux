@@ -2,7 +2,7 @@ import { useState } from "react"
 import Slider from "nice-react-slider"
 import Flex from "nice-react-flex"
 import Typography from "../../../../src/nice/Typography"
-import { getToken } from "nice-react-styles"
+import { getReactToken } from "nice-react-styles"
 
 export const SlideContent = ({
   title,
@@ -18,7 +18,7 @@ export const SlideContent = ({
     style={{
       height: "100%",
       backgroundColor: color,
-      padding: getToken("gap", "large").var,
+      padding: getReactToken("gap", "large").var,
     }}
   >
     <Typography
@@ -39,9 +39,9 @@ export const InteractiveSlider = () => {
   const [isAnimating, setIsAnimating] = useState(false)
 
   const slides = [
-    { title: "Slide 1", color: getToken("foregroundColor", "error").var },
-    { title: "Slide 2", color: getToken("foregroundColor", "warning").var },
-    { title: "Slide 3", color: getToken("foregroundColor", "success").var },
+    { title: "Slide 1", color: getReactToken("foregroundColor", "error").var },
+    { title: "Slide 2", color: getReactToken("foregroundColor", "warning").var },
+    { title: "Slide 3", color: getReactToken("foregroundColor", "success").var },
   ]
 
   const goToSlide = (index: number) => {

@@ -1,5 +1,5 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import { getToken } from "nice-react-styles"
+import { getReactToken } from "nice-react-styles"
 import Typography from "../../../src/nice/Typography"
 import { DocsRow } from "../../../src/components/DocsRow"
 import DemoDots from "../../../src/components/DemoDots"
@@ -20,20 +20,20 @@ import DemoDots from "../../../src/components/DemoDots"
           gap={variant}
           dots={[
             {
-              color: getToken("foregroundColor", "error").var,
-              width: getToken("cellHeight", "smaller").var,
-              height: getToken("cellHeight", "smaller").var,
+              color: getReactToken("foregroundColor", "error").var,
+              width: getReactToken("cellHeight", "smaller").var,
+              height: getReactToken("cellHeight", "smaller").var,
             },
             {
-              color: getToken("foregroundColor", "link").var,
-              width: getToken("cellHeight", "smaller").var,
-              height: getToken("cellHeight", "smaller").var,
+              color: getReactToken("foregroundColor", "link").var,
+              width: getReactToken("cellHeight", "smaller").var,
+              height: getReactToken("cellHeight", "smaller").var,
             },
           ]}
         />
       }
       language="tsx"
-      code={`getToken("gap", "${variant}").var`}
+      code={`getReactToken("gap", "${variant}").var`}
     />
   ))}
 </div>

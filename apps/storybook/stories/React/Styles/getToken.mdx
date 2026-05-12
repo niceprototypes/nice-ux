@@ -1,8 +1,8 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 
-<Meta title="React/Styles/getToken" />
+<Meta title="React/Styles/getReactToken" />
 
-# getToken
+# getReactToken
 
 Resolves a design token to its CSS variable key, `var()` reference, and raw value.
 See [Browse all tokens](/docs/tokens-styles--docs) for a visual reference of every token group.
@@ -14,13 +14,13 @@ npm install nice-react-styles
 ### Setup
 
 ```js
-import { getToken } from "nice-react-styles"
+import { getReactToken } from "nice-react-styles"
 ```
 
 ### Usage
 
 ```js
-getToken("fontSize").key // → "--np--font-size--base"
-getToken("fontSize", "large").var // → "var(--np--font-size--large)"
-getToken("fontSize", "large").value // → "24px"
+getReactToken("fontSize").key // → "--np--font-size--base"
+getReactToken("fontSize", "large").var // → "var(--np--font-size--large)"
+getReactToken("fontSize", "large").value // → "24px"
 ```
