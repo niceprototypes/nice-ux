@@ -1,0 +1,6 @@
+{
+  "$schema": "../configuration/src/exports/schema.json",
+  "components": [
+    "Head"
+  ]
+}
