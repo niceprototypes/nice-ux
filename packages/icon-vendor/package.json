@@ -33,11 +33,11 @@
   },
   "homepage": "https://github.com/niceprototypes/nice-react-icon-vendor#readme",
   "peerDependencies": {
-    "lucide-react": ">=0.545.0",
     "nice-react-icon": ">=2.0.0",
     "react": ">=19.2.0"
   },
   "dependencies": {
+    "lucide-react": "^0.545.0",
     "nice-configuration": "file:../configuration"
   },
   "devDependencies": {
