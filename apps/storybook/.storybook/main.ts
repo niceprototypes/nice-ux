@@ -108,6 +108,16 @@ const config: StorybookConfig = {
       followSymlinks: true,
     }
 
+    // Allow Vite to serve files from the workspace root (~/nice) and below.
+    // Without this, imports that resolve to files outside storybook/ — e.g.
+    // nice-styles/dist/errors.json reached via a symlinked nice-react-styles —
+    // get blocked with HTTP 403.
+    config.server.fs = config.server.fs || {}
+    config.server.fs.allow = [
+      ...(config.server.fs.allow || []),
+      resolve(__dirname, "../.."),
+    ]
+
     // Exclude linked packages from pre-bundling. Vite's optimizer would
     // otherwise cache stale versions and ignore live changes.
     config.optimizeDeps = config.optimizeDeps || {}
