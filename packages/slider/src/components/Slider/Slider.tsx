@@ -1,10 +1,10 @@
-import { getReactToken } from "nice-react-styles"
+import { getReactTokenValue } from "nice-react-styles"
 import React, { useEffect } from "react"
 import { SliderItemStyled, SliderOuterStyled } from "./Slider.styles"
 import type { SliderProps } from "./Slider.types"
 
-// Single source of truth — CSS transition reads the same token via .var
-const animationDurationMs = parseInt(getReactToken("animationDuration", "base").value, 10)
+// Single source of truth — CSS transition reads the same token via getReactToken(...).var
+const animationDurationMs = parseInt(getReactTokenValue("animationDuration", "base"), 10)
 
 const Slider: React.FC<SliderProps> = ({
   children,
