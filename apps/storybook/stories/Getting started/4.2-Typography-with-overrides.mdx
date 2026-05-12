@@ -1,0 +1,53 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta
+  title="Getting started/4 · Components/4.2 · Typography with overrides"
+  name="Docs"
+/>
+
+# Typography with overrides
+
+Same JSX as the previous page. Every visual change comes from the token map.
+
+### Override tokens
+
+```tsx
+// tokens.ts
+import { createTokens } from "nice-react-styles"
+
+export const { GlobalStyles } = createTokens({
+  // Re-color text
+  foregroundColor: {
+    base: "#1a1a1a",
+    medium: "#4a5568",
+  },
+
+  // Swap font family
+  fontFamily: {
+    base: "'Inter', sans-serif",
+    heading: "'Playfair Display', serif",
+  },
+
+  // Responsive font sizes
+  fontSize: {
+    base:   { phone: "16px", laptop: "18px" },
+    larger: { phone: "32px", laptop: "44px", desktop: "56px" },
+  },
+} as const)
+```
+
+### Mount
+
+```tsx
+import { StylesProvider } from "nice-react-styles"
+import Typography from "nice-react-typography"
+import { GlobalStyles } from "./tokens"
+
+<StylesProvider googleFonts="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap">
+  <GlobalStyles />
+  <Typography as="h1" size="larger" weight="bold">
+    Heading scales with viewport
+  </Typography>
+  <Typography>Body copy uses Inter.</Typography>
+</StylesProvider>
+```

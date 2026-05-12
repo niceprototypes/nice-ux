@@ -1,0 +1,46 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta
+  title="Getting started/3 · React setters/3.3 · Custom fonts"
+  name="Docs"
+/>
+
+# Styles + fonts
+
+Static overrides and custom token groups. No responsive values yet.
+
+### Define overrides
+
+```tsx
+// tokens.ts
+import { createTokens } from "nice-react-styles"
+
+export const { GlobalStyles } = createTokens({
+  // Override core token variants
+  fontSize: { base: "18px", larger: "44px" },
+
+  // Add a custom token group
+  brandColor: { primary: "#dc0000", secondary: "#1a1a1a" },
+} as const)
+```
+
+### Mount
+
+```tsx
+import { StylesProvider } from "nice-react-styles"
+import { GlobalStyles } from "./tokens"
+
+<StylesProvider loadFonts>
+  <GlobalStyles />
+  <App />
+</StylesProvider>
+```
+
+### Read overridden + custom tokens
+
+```tsx
+import { getReactToken } from "nice-react-styles"
+
+getReactToken("fontSize", "base").var      // var(--np--font-size--base)  → 18px
+getReactToken("brandColor", "primary").var // var(--np--brand-color--primary) → #dc0000
+```

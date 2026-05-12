@@ -1,0 +1,39 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta
+  title="Getting started/2 · React getters/2.1 · Simple"
+  name="Docs"
+/>
+
+# Styles only
+
+No fonts, no responsive overrides. Just `StylesProvider` + `getReactToken`.
+
+### Wrap the app
+
+```tsx
+import { StylesProvider } from "nice-react-styles"
+
+export default function App() {
+  return (
+    <StylesProvider>
+      <Page />
+    </StylesProvider>
+  )
+}
+```
+
+### Read tokens in styled-components
+
+```tsx
+import styled from "styled-components"
+import { getReactToken } from "nice-react-styles"
+
+const Card = styled.div`
+  padding: ${getReactToken("gap", "base").var};
+  background: ${getReactToken("backgroundColor", "alternate").var};
+  border-radius: ${getReactToken("borderRadius", "base").var};
+`
+```
+
+`getReactToken(group, variant)` returns `{ key, var, value }`. Use `.var` inside CSS.

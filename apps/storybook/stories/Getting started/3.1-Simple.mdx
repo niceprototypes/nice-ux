@@ -1,0 +1,35 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta
+  title="Getting started/3 · React setters/3.1 · Simple"
+  name="Docs"
+/>
+
+# 4. React setters
+
+Override core tokens and register custom token groups via `createTokens()`.
+Returns a `GlobalStyles` component that injects the resulting CSS variables.
+
+```tsx
+import { createTokens } from "nice-react-styles"
+
+export const { GlobalStyles } = createTokens({ /* token map */ } as const)
+```
+
+Mount `GlobalStyles` once, inside `StylesProvider`:
+
+```tsx
+<StylesProvider loadFonts>
+  <GlobalStyles />
+  <App />
+</StylesProvider>
+```
+
+---
+
+### Contents
+
+- [Styles + fonts](/docs/getting-started-4-react-setters-styles-fonts--docs)
+  — static overrides + custom groups, no responsive
+- [Styles + fonts + responsive](/docs/getting-started-4-react-setters-styles-fonts-responsive--docs)
+  — breakpoint and mode-aware variant values

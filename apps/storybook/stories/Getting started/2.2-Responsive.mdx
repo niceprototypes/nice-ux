@@ -1,0 +1,44 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta
+  title="Getting started/2 · React getters/2.2 · Responsive"
+  name="Docs"
+/>
+
+# Styles + responsive
+
+The same `getReactToken().var` resolves to a different value at each breakpoint.
+The media query lives in `nice-styles/variables.css` — the component reads
+one var.
+
+### Auto-responsive token
+
+```tsx
+import styled from "styled-components"
+import { getReactToken } from "nice-react-styles"
+
+const Heading = styled.h1`
+  font-size: ${getReactToken("fontSize", "larger").var};
+`
+```
+
+The CSS variable behind `fontSize.larger` is reassigned by media queries in
+`variables.css`. No per-breakpoint code in the component.
+
+### Custom media query via `getBreakpoint`
+
+```tsx
+import styled from "styled-components"
+import { getBreakpoint, getReactToken } from "nice-react-styles"
+
+const Wrapper = styled.div`
+  padding: ${getReactToken("gap", "base").var};
+
+  @media ${getBreakpoint("laptop").query} {
+    padding: ${getReactToken("gap", "large").var};
+  }
+`
+```
+
+`getBreakpoint(name)` returns `{ value, query }` — pass `query` directly to
+`@media`.
