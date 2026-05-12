@@ -223,6 +223,39 @@ const styleSpacing = (mode, def) => {
     return parts.join("\n");
 };
 
+// Phone establishes the flex context; larger breakpoints inherit it
+function pushDisplayStyles(styles) {
+    styles.push("display: flex;");
+}
+function pushDirectionStyles(styles, direction) {
+    styles.push(`flex-direction: ${direction};`);
+}
+function pushAlignItemsStyles(styles, alignItems) {
+    styles.push(`align-items: ${alignItems};`);
+}
+function pushJustifyContentStyles(styles, justifyContent) {
+    styles.push(`justify-content: ${justifyContent};`);
+}
+// flex-basis: 0 pairs with grow so items size from grow ratios, not content
+function pushGrowStyles(styles, grow) {
+    styles.push(`flex-grow: ${grow};`);
+    styles.push("flex-basis: 0;");
+}
+function pushWrapStyles(styles, wrap) {
+    styles.push(`flex-wrap: ${wrap};`);
+}
+function pushGapStyles(styles, gap) {
+    const gapValue = getGapSize(gap);
+    if (gapValue) {
+        styles.push(`gap: ${gapValue};`);
+    }
+}
+function pushSpacingStyles(styles, mode, spacing) {
+    const spacingStyles = styleSpacing(mode || "padding", spacing);
+    if (spacingStyles) {
+        styles.push(spacingStyles);
+    }
+}
 /**
  * styleFlex Service
  *
@@ -277,7 +310,6 @@ const styleSpacing = (mode, def) => {
  */
 const styleFlex = (breakpoint, props) => {
     const styles = [];
-    // Extract values for this specific breakpoint using the helper function
     const direction = getBreakpointValue(props.direction, breakpoint);
     const gap = getBreakpointValue(props.gap, breakpoint);
     const grow = getBreakpointValue(props.grow, breakpoint);
@@ -285,45 +317,22 @@ const styleFlex = (breakpoint, props) => {
     const justifyContent = getBreakpointValue(props.justifyContent, breakpoint);
     const wrap = getBreakpointValue(props.wrap, breakpoint);
     const spacing = getSpacingValue(props.spacing, breakpoint);
-    // Base flex display - only set for phone breakpoint
-    // Higher breakpoints inherit the flex display value
-    if (breakpoint === BREAKPOINT_PHONE) {
-        styles.push("display: flex;");
-    }
-    // Flex direction - controls main axis direction
-    if (direction) {
-        styles.push(`flex-direction: ${direction};`);
-    }
-    // Alignment properties
-    if (alignItems) {
-        styles.push(`align-items: ${alignItems};`);
-    }
-    if (justifyContent) {
-        styles.push(`justify-content: ${justifyContent};`);
-    }
-    // Flex growth - when grow is set, also set flex-basis to 0 for proper behavior
-    if (grow !== undefined) {
-        styles.push(`flex-grow: ${grow};`);
-        styles.push("flex-basis: 0;");
-    }
-    // Flex wrap - controls whether items wrap to new lines
-    if (wrap) {
-        styles.push(`flex-wrap: ${wrap};`);
-    }
-    // Gap between flex items using CSS Grid gap property
-    if (gap !== undefined) {
-        const gapValue = getGapSize(gap);
-        if (gapValue) {
-            styles.push(`gap: ${gapValue};`);
-        }
-    }
-    // Spacing (padding/margin) using the spacing helper
-    if (spacing) {
-        const spacingStyles = styleSpacing(props.mode || "padding", spacing);
-        if (spacingStyles) {
-            styles.push(spacingStyles);
-        }
-    }
+    if (breakpoint === BREAKPOINT_PHONE)
+        pushDisplayStyles(styles);
+    if (direction)
+        pushDirectionStyles(styles, direction);
+    if (alignItems)
+        pushAlignItemsStyles(styles, alignItems);
+    if (justifyContent)
+        pushJustifyContentStyles(styles, justifyContent);
+    if (grow !== undefined)
+        pushGrowStyles(styles, grow);
+    if (wrap)
+        pushWrapStyles(styles, wrap);
+    if (gap !== undefined)
+        pushGapStyles(styles, gap);
+    if (spacing)
+        pushSpacingStyles(styles, props.mode, spacing);
     return styles.join("\n");
 };
 
