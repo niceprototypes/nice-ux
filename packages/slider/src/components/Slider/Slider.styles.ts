@@ -1,6 +1,13 @@
 import { getReactToken } from "nice-react-styles"
-import styled from "styled-components"
-import { styleHideScrollbar } from "../../utilities/styleHideScrollbar"
+import styled, { css } from "styled-components"
+
+const styleHideScrollbar = css`
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`
 
 export const SliderItemStyled = styled.div<{
   $index: number
