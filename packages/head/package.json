@@ -24,6 +24,14 @@
   ],
   "author": "",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niceprototypes/nice-react-head.git"
+  },
+  "bugs": {
+    "url": "https://github.com/niceprototypes/nice-react-head/issues"
+  },
+  "homepage": "https://github.com/niceprototypes/nice-react-head#readme",
   "peerDependencies": {
     "react": ">=19.2.0 <20.0.0"
   },
