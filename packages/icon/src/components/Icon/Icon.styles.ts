@@ -1,11 +1,11 @@
 import styled, { css, keyframes } from "styled-components"
 import { getIconToken } from "../../tokens/getIconToken"
-import { getToken, type ModeType } from "nice-react-styles"
+import { getReactToken, type ModeType } from "nice-react-styles"
 import type { IconSizeType, IconColorType, IconStrokeWidthType } from "./Icon.types"
 
-// Helper — calls getToken with optional mode
+// Helper — calls getReactToken with optional mode
 const getColorToken = (color: string, mode?: ModeType) =>
-  mode ? getToken("foregroundColor", color, mode) : getToken("foregroundColor", color)
+  mode ? getReactToken("foregroundColor", color, mode) : getReactToken("foregroundColor", color)
 
 const spin = keyframes`
   from {
