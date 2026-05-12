@@ -1,10 +1,16 @@
 import * as React from "react"
 import { StyledImg, StyledBackgroundImage } from "./Image.styles"
 import type { ImageProps } from "./Image.types"
+import { getVendorImage } from "../../services/registerVendorResolver"
 
 /**
  * Image component for rendering images as either a standard img element
  * or a div with background-image styling.
+ *
+ * Two-tier source resolution:
+ * 1. Direct src — the URL is used as-is
+ * 2. Vendor src — requires the `vendor` flag and a registered resolver
+ *    (e.g. nice-react-image-vendor); src/width/height are routed through it
  *
  * @example
  * ```tsx
@@ -21,6 +27,9 @@ import type { ImageProps } from "./Image.types"
  *
  * // With border radius token
  * <Image src="/avatar.jpg" alt="User avatar" borderRadius="base" />
+ *
+ * // Vendor src — requires nice-react-image-vendor
+ * <Image vendor src="10" width="800px" height="600px" alt="Vendor image" />
  * ```
  */
 const Image: React.FC<ImageProps> = ({
@@ -34,20 +43,24 @@ const Image: React.FC<ImageProps> = ({
   borderRadius,
   mode,
   renderImage,
+  vendor = false,
   className,
   style,
   children,
 }) => {
+  // Vendor src — route through the registered resolver; fall back to the raw src if no resolver returned a URL
+  const resolvedSrc = vendor ? (getVendorImage({ src, width, height }) ?? src) : src
+
   // Custom render: delegate entirely to consumer
   if (renderImage) {
-    return <>{renderImage(src, alt)}</>
+    return <>{renderImage(resolvedSrc ?? "", alt)}</>
   }
 
   // Div mode: render background-image container
   if (as === "div") {
     return (
       <StyledBackgroundImage
-        $src={src}
+        $src={resolvedSrc ?? ""}
         $width={width}
         $height={height}
         $backgroundSize={backgroundSize}
@@ -67,7 +80,7 @@ const Image: React.FC<ImageProps> = ({
   // Default: render standard img element
   return (
     <StyledImg
-      src={src}
+      src={resolvedSrc}
       alt={alt}
       $width={width}
       $height={height}

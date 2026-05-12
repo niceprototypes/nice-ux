@@ -1,6 +1,6 @@
 {
   "name": "nice-react-image",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "type": "module",
   "description": "A flexible Image component for React with styled-components, supporting img and background-image rendering modes",
   "main": "dist/index.js",
@@ -26,9 +26,15 @@
   "author": "",
   "license": "MIT",
   "peerDependencies": {
+    "nice-react-image-vendor": ">=1.0.0",
     "react": ">=19.2.0 <20.0.0",
     "react-dom": ">=19.2.0 <20.0.0",
     "styled-components": ">=6.1.18 <7.0.0"
+  },
+  "peerDependenciesMeta": {
+    "nice-react-image-vendor": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.7",

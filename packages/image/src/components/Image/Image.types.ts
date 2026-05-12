@@ -92,6 +92,15 @@ export type ImageModeType = ModeType
 export type ImageRenderImageType = (src: string, alt: string) => React.ReactNode
 
 /**
+ * ImageVendorType
+ *
+ * Enables vendor image resolution — props are routed through the registered
+ * vendor resolver to produce the concrete URL. Requires nice-react-image-vendor
+ * (or a custom resolver) to be installed and imported.
+ */
+export type ImageVendorType = boolean
+
+/**
  * ImageProps
  *
  * Complete prop definition for the Image component.
@@ -100,8 +109,8 @@ export type ImageProps = {
   /** Rendering mode: standard img element or div with background-image */
   as?: ImageAsType
 
-  /** Image source URL */
-  src: ImageSrcType
+  /** Image source URL — optional when vendor is true (vendor resolver may generate it) */
+  src?: ImageSrcType
 
   /** Alternative text for accessibility (required for img, used as aria-label for div) */
   alt: ImageAltType
@@ -127,6 +136,9 @@ export type ImageProps = {
   /** Custom render function that replaces the default image rendering */
   renderImage?: ImageRenderImageType
 
+  /** Route src/width/height through the registered vendor resolver */
+  vendor?: ImageVendorType
+
   /** CSS class name for styling */
   className?: string
 
@@ -151,6 +163,7 @@ namespace ImageTypes {
   export type BorderRadius = ImageBorderRadiusType
   export type Mode = ImageModeType
   export type RenderImage = ImageRenderImageType
+  export type Vendor = ImageVendorType
   export type Props = ImageProps
 }
 
