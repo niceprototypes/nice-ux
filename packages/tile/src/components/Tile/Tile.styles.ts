@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components"
 import Flex from "nice-react-flex"
-import { getToken } from "nice-react-styles"
+import { getReactToken } from "nice-react-styles"
 
 export const OuterFlex = styled(Flex).withConfig({
   shouldForwardProp: (prop) => !prop.startsWith('$'),
@@ -16,8 +16,8 @@ export const OuterFlex = styled(Flex).withConfig({
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  background-color: ${({ $mode }) => getToken("backgroundColor", "base", $mode).var};
-  color: ${({ $mode }) => getToken("foregroundColor", "base", $mode).var};
+  background-color: ${({ $mode }) => getReactToken("backgroundColor", "base", $mode).var};
+  color: ${({ $mode }) => getReactToken("foregroundColor", "base", $mode).var};
 
   ${({ $backgroundColor }) => {
     if ($backgroundColor) {
