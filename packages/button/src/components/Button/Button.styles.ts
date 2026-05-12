@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { getBreakpoint, getToken, BREAKPOINT_TABLET } from "nice-react-styles"
+import { getBreakpoint, getReactToken, BREAKPOINT_TABLET } from "nice-react-styles"
 import type { CellHeightType, BorderWidthType, ModeType } from "nice-react-styles"
 import type { ButtonBorderRadiusType, ButtonStateType, ButtonStatusType } from "./Button.types"
 import { getButtonToken } from "../../tokens/getButtonToken"
@@ -57,11 +57,11 @@ export const StyledButton = styled.button.withConfig({
     height: ${getButtonToken("size", $size).var};
     width: 100%;
     padding: ${$square ? "0" : `0 ${getButtonToken("spacing", $size).var}`};
-    font-weight: ${getToken("fontWeight", "base").var};
+    font-weight: ${getReactToken("fontWeight", "base").var};
     background-color: ${getStatusToken($status, $state, "backgroundColor", $mode).var};
     color: ${getStatusToken($status, $state, "foregroundColor", $mode).var};
     border-style: solid;
-    border-width: ${getToken("borderWidth", $borderWidth).var};
+    border-width: ${getReactToken("borderWidth", $borderWidth).var};
     border-color: ${getStatusToken($status, $state, "borderColor", $mode).var};
     border-radius: ${getButtonToken("borderRadius", $borderRadius).var};
     transition: all 0.15s ease-in-out;
