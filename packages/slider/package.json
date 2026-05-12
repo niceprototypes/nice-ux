@@ -16,7 +16,6 @@
     "lint": "eslint src --ext .ts,.tsx",
     "typecheck": "tsc --noEmit",
     "prepublishOnly": "npm run build",
-    "prepare": "npm run build",
     "generate-exports": "nice-generate-exports ."
   },
   "keywords": [
