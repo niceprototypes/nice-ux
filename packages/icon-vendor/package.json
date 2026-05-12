@@ -1,6 +1,6 @@
 {
   "name": "nice-react-icon-vendor",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Vendor icon resolver for nice-react-icon — wraps Lucide icons behind a vendor-agnostic API",
   "type": "module",
   "main": "dist/index.js",
