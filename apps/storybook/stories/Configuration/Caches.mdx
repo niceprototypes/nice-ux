@@ -1,0 +1,160 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta
+  title="Configuration/Caches"
+  name="Docs"
+/>
+
+# Caches
+
+Eight cache layers can hold stale state in a Nice workspace. Four tools clear them. None of the tools overlap. This page maps which tool clears which layer and gives workflow recipes for the common "something is stale" symptoms.
+
+---
+
+## The eight layers
+
+| # | Layer | Path | Cleared by |
+|---|---|---|---|
+| 1 | Global npm cache | `~/.npm/_cacache` | `npm cache clean --force` |
+| 2 | Consumer `node_modules` + lockfile | `<consumer>/node_modules`, `<consumer>/package-lock.json` | `rm -rf node_modules package-lock.json && npm install` (or `website` `npm run clean`) |
+| 3 | Build-tool on-disk caches (webpack, Vite, …)¹ | `<consumer>/node_modules/{.cache, .vite, …}` | `ntk --clean-caches` |
+| 3 | Storybook Vite cache subset | `storybook/node_modules/.cache/storybook` | `npm run clean:cache` (inside storybook) |
+| 4 | Linked package singleton conflicts | `<linked-pkg>/node_modules/{react,styled-components,…}` | `ntk --clean-all` |
+| 5 | nice-* package dists | `<nice-pkg>/dist/` | each package's `npm run build`, or `ntk --build-all` |
+| 6 | Generated source (nice-styles only) | `nice-styles/src/generated/` | `nice-styles`'s `npm run build` (runs `clean.ts` first) |
+| 7 | Dev-server in-memory module graph | RAM in webpack-dev-server / Vite | restart the dev server |
+| 8 | Browser module cache | RAM in the browser tab | hard reload (Cmd+Shift+R) |
+
+Layers 1–6 are on-disk and tool-clearable. Layers 7 and 8 are runtime and require process / tab actions.
+
+¹ `ntk --clean-caches` currently knows about `node_modules/.cache` (webpack) and `node_modules/.vite` (Vite). Other framework caches — e.g. Next.js `.next/cache`, Remix `build/`, Astro `dist/`, Parcel `.parcel-cache` — are **not** covered until their path is added to `CACHE_DIRS` in `toolkit/src/linking/cache-cleaner.js`. Adding a new framework to the workspace requires that single edit.
+
+---
+
+## The three `ntk` operations
+
+`ntk --clean-caches`, `--clean-all`, and `--build-all` are the workspace-level toolkit operations. They do not overlap. Each addresses a distinct layer at a distinct location. Mistaking one for another produces silent failure.
+
+### Distinct targets
+
+```bash
+ntk --clean-caches    →    <consumer>/node_modules/{.cache, .vite}        (layer 3)
+ntk --clean-all       →    <linked-pkg>/node_modules/<singleton>           (layer 4)
+ntk --build-all       →    <linked-pkg>/dist/                              (layer 5)
+```
+
+Different directories. Different layers. The targets do not overlap. The names are similar; the operations are not.
+
+### Side-by-side
+
+| Command | What it does | What it does **not** do |
+|---|---|---|
+| `ntk --clean-caches` | Wipes webpack `.cache` and Vite `.vite` from every consumer's `node_modules` | Doesn't rebuild anything. Doesn't touch linked packages. Doesn't restart dev servers. Doesn't reinstall. |
+| `ntk --clean-all` | Removes duplicate `react` / `react-dom` / `styled-components` / etc. from every linked nice-* package's `node_modules` | Doesn't rebuild any dist. Doesn't touch consumer caches. Doesn't reinstall. |
+| `ntk --build-all` | Walks registry tier order, runs `npm run build` in every linked nice-* package | Doesn't clear any cache. Doesn't touch consumer `node_modules`. Doesn't restart dev servers. |
+
+### How they combine
+
+For the common "everything is stale and I don't know what" reset, the three are chained in this order:
+
+```bash
+ntk --clean-caches    # invalidate consumer build-tool analysis (layer 3)
+ntk --clean-all       # resolve any singleton drift in linked packages (layer 4)
+ntk --build-all       # rebuild every linked package's dist in tier order (layer 5)
+```
+
+Then restart any running dev server (layer 7) and hard-reload the browser tab (layer 8).
+
+**Order matters:**
+
+- **`--clean-caches` first** so the consumer's build-tool analysis is invalidated before the new dist appears; otherwise webpack/Vite serve the rebuilt dist through a stale module graph.
+- **`--clean-all` before `--build-all`** so singleton cleanup doesn't run *after* a build that expected the singletons in place.
+- **`--build-all` last** because it produces the artifact every later step reads.
+
+---
+
+## What the three `ntk` operations do **not** touch
+
+These belong to other tools — deliberately, because they are framework- or consumer-specific:
+
+| Concern | Tool | Owned by |
+|---|---|---|
+| Consumer `node_modules` reinstall (layer 2) | `npm install` per consumer, or `website`'s `npm run clean` | the consumer |
+| Global npm cache (layer 1) | `npm cache clean --force` | npm itself |
+| Storybook's port-6006 binding | `npm run clean:cache` inside storybook | storybook's own scripts (Vite-specific quirk) |
+| Running dev-server process (layer 7) | manual restart | the user |
+| Browser tab module cache (layer 8) | manual hard reload | the user |
+
+---
+
+## Workflow recipes
+
+#### Dev server is serving stale code after I edited a linked package
+
+```bash
+ntk --clean-caches
+```
+
+Then refresh the browser (hard reload if needed).
+
+#### "Invalid hook call" or styled-components context mismatch
+
+```bash
+ntk --clean-all
+```
+
+This is the classic duplicate-React-instance error. See the [Toolkit](/docs/configuration-toolkit--docs) page for the underlying cause.
+
+#### Consumer reports a missing export from a foundation package after a refactor
+
+```bash
+ntk --build-all
+```
+
+The consumer is reading an older `dist/` than the source now produces. Rebuild every linked package in tier order.
+
+#### Fresh clone of the workspace
+
+```bash
+# In each consumer (website, storybook, website-viveka, …)
+npm install
+
+# Once, anywhere in the workspace
+ntk --build-all
+```
+
+The `prepare` hook no longer rebuilds linked packages on consumer installs (see `manifest/.nice/reports/npm-install-breaks-consumers.md`). New clones must build dists explicitly.
+
+#### Storybook is stuck or port 6006 is occupied
+
+```bash
+# Inside storybook/
+npm run clean:cache
+```
+
+Wipes `node_modules/.cache/storybook`, kills any process holding port 6006, restarts the dev server. The port-kill is Vite-specific and stays in storybook's own script — it is deliberately **not** in `ntk --clean-caches`, which only touches on-disk caches and never touches running processes.
+
+#### Nuclear: I don't know what's wrong
+
+```bash
+ntk --clean-caches
+ntk --clean-all
+ntk --build-all
+```
+
+Restart every running dev server. Hard-reload every open browser tab.
+
+If that doesn't fix it, escalate to a per-consumer reinstall (`rm -rf node_modules package-lock.json && npm install`) before reaching for `npm cache clean --force` — the global npm cache is almost never the cause.
+
+---
+
+## Why four tools and not one
+
+The four mechanisms (`ntk --clean-caches`, `ntk --clean-all`, `ntk --build-all`, `storybook clean:cache`) cover distinct concerns that do not share a common interface:
+
+- The first three are workspace-wide tier-aware operations and live in `ntk` where the registry is.
+- `clean:cache` in storybook is Vite-specific port-handling that webpack-dev-server does not need.
+
+Forcing all four behind a single verb would either over-fire (kill ports that don't need killing) or under-fire (miss tool-specific quirks). The current shape scales — each new framework that joins the workspace adds at most one new entry to `ntk`'s cache directory list, plus whatever framework-specific scripts the consumer needs in its own `scripts/`.
+
+If a 5th independent cache-cleaning mechanism appears in the workspace, that is the signal to revisit the topology, not the signal to collapse what already exists.
