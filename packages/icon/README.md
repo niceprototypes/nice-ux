@@ -63,6 +63,24 @@ function App() {
 | `isActive` | `boolean` | `true` | Whether icon is in active state |
 | `className` | `string` | - | Additional CSS class |
 
+## Vendor Icons
+
+Names not in the built-in set can be resolved through `nice-react-icon-vendor`, an optional peer package that registers a resolver as a side effect of being imported.
+
+```tsx
+// Once, at the app entry
+import "nice-react-icon-vendor"
+
+// Anywhere
+<Icon name="TrendingDown" vendor />
+```
+
+### Why a separate peer package
+
+The vendor peer package is part of Nice's commitment to remaining as agnostic as possible from third-party libraries. The host component (`nice-react-icon`) never imports the third-party icon set directly; it exposes a `vendor` flag and a `registerVendorResolver` hook, and the peer package is the only place a concrete vendor (currently Lucide) is referenced. This reserves the right to swap, supplement, or remove the third-party dependency later without touching the host component or any consumer call site.
+
+The same pattern applies to `nice-react-image` / `nice-react-image-vendor`.
+
 ## Available Icons
 
 The following icons are available in both `fill` and `stroke` variants:
