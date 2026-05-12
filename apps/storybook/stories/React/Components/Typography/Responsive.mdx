@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import Typography from "../../../../src/nice/Typography"
-import { getReactToken, getSizeToken, getBreakpoint } from "nice-react-styles"
+import { getReactTokenValue, getSizeToken, getBreakpoint } from "nice-react-styles"
 import { DocsRow } from "../../../../src/components/DocsRow"
 import { toSource } from "../../../../src/services"
 
@@ -19,7 +19,7 @@ export const largeLabel = `≥${getBreakpoint("laptop").value}px`
 
 <div>
   {["smaller", "small", "base", "large", "larger"].map(size => {
-    const smallValue = getReactToken("fontSize", size).value
+    const smallValue = getReactTokenValue("fontSize", size)
     const largeValue = getSizeToken("fontSize", size, "large").value
     const children = `${size} — ${smallLabel}: ${smallValue}, ${largeLabel}: ${largeValue}`
     return (

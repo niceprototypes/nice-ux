@@ -4,7 +4,12 @@ import { Meta } from "@storybook/addon-docs/blocks"
 
 # getReactToken
 
-Resolves a design token to its CSS variable key, `var()` reference, and raw value.
+Resolves a design token. Three sibling functions return the three accessor forms:
+
+- `getReactToken(name, variant?, mode?)` — the `var(...)` reference (the common case).
+- `getReactTokenKey(name, variant?, mode?)` — the bare CSS variable name (no `var(...)` wrapper).
+- `getReactTokenValue(name, variant?, mode?)` — the raw underlying value (e.g. `"16px"`, an hsla color, a font-family string).
+
 See [Browse all tokens](/docs/tokens-styles--docs) for a visual reference of every token group.
 
 ```bash
@@ -14,13 +19,15 @@ npm install nice-react-styles
 ### Setup
 
 ```js
-import { getReactToken } from "nice-react-styles"
+import { getReactToken, getReactTokenKey, getReactTokenValue } from "nice-react-styles"
 ```
 
 ### Usage
 
 ```js
-getReactToken("fontSize").key // → "--np--font-size--base"
-getReactToken("fontSize", "large").var // → "var(--np--font-size--large)"
-getReactToken("fontSize", "large").value // → "24px"
+getReactTokenKey("fontSize")            // → "--np--font-size--base"
+getReactToken("fontSize", "large").var  // → "var(--np--font-size--large)"
+getReactTokenValue("fontSize", "large") // → "24px"
 ```
+
+Reach for `getReactTokenValue` when CSS needs the literal underlying value, not the `var(...)` reference — `parseInt` on a duration, a font-family string passed to a chart library, etc. Reach for `getReactTokenKey` when emitting raw `@property` or `--custom: var(...)` declarations.
