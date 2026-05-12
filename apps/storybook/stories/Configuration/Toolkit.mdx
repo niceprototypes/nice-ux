@@ -94,9 +94,39 @@ ntk ../react-icon
 ntk ../react-flex
 ```
 
-#### Clean All Linked Packages
+---
 
-Recursively find and clean all `file:` linked packages in your project:
+## Workspace operations (triad)
+
+Three non-overlapping commands target the workspace-level concerns. Each addresses a distinct layer at a distinct location. Full topology and recipes in [Caches](/docs/configuration-caches--docs).
+
+```bash
+ntk --clean-caches    # consumer caches + dev-server processes  (layer 3 + 7)
+ntk --clean-all       # singleton conflicts in linked packages   (layer 4)
+ntk --build-all       # rebuild every linked package's dist       (layer 5)
+```
+
+For the "everything is stale" reset: `ntk --clean-caches && ntk --clean-all && ntk --build-all`, then restart any dev server.
+
+### --clean-caches
+
+Kills any process bound to a dev-server port (discovered from each consumer's `.env` `PORT=` entries and `package.json` `-p` / `--port` flags), then wipes `node_modules/.cache` and `node_modules/.vite` across every consumer in the workspace.
+
+```bash
+ntk --clean-caches
+
+# Preview what would be killed and wiped
+ntk --clean-caches --dry-run
+
+# Skip the port-kill phase (CI / scripted contexts)
+ntk --clean-caches --no-kill
+```
+
+The port-kill exists because a running dev server holds an in-memory module graph and repopulates its on-disk cache on the next request — wiping cache without killing the server is a no-op against the observable symptom.
+
+### --clean-all
+
+Recursively find and clean singletons (react, styled-components, etc.) from all `file:` linked packages' `node_modules`. This is the fix for "Invalid hook call" and styled-components context mismatches.
 
 ```bash
 # Clean all linked packages at once
@@ -104,6 +134,19 @@ ntk --clean-all
 
 # Preview what would be cleaned
 ntk --clean-all --dry-run
+```
+
+### --build-all
+
+Walks the registry in tier order (foundation → context → utility → feature → application) and runs `npm run build` in every linked nice-* package that defines a build script. Replaces the `prepare` hook that was removed from package.json files (see `manifest/.nice/reports/npm-install-breaks-consumers.md`).
+
+Use after a fresh clone, after `--clean-all`, or after a foundation-package refactor.
+
+```bash
+ntk --build-all
+
+# Preview without running builds
+ntk --build-all --dry-run
 ```
 
 ---
