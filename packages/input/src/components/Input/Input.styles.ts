@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components"
-import { getToken } from "nice-react-styles"
+import { getReactToken } from "nice-react-styles"
 import type { CellHeightType, BorderWidthType, ModeType } from "nice-react-styles"
 import type { InputBorderRadiusType, InputStateType, InputStatusType } from "./Input.types"
 import { getInputToken } from "../../tokens/getInputToken"
@@ -45,13 +45,13 @@ export const StyledInput = styled.input.withConfig({
     width: 100%;
     height: ${getInputToken("size", $size).var};
     padding: 0 ${getInputToken("spacing", $size).var};
-    font-family: ${getToken("fontFamily", $size).var};
-    font-size: ${getToken("fontSize", $size).var};
-    font-weight: ${getToken("fontWeight", "base").var};
+    font-family: ${getReactToken("fontFamily", $size).var};
+    font-size: ${getReactToken("fontSize", $size).var};
+    font-weight: ${getReactToken("fontWeight", "base").var};
     background-color: ${getStatusToken($status, $state, "backgroundColor", $mode).var};
     color: ${getStatusToken($status, $state, "foregroundColor", $mode).var};
     border-style: solid;
-    border-width: ${getToken("borderWidth", $borderWidth).var};
+    border-width: ${getReactToken("borderWidth", $borderWidth).var};
     border-color: ${getStatusToken($status, $state, "borderColor", $mode).var};
     border-radius: ${getInputToken("borderRadius", $borderRadius).var};
     transition: border-color 0.15s ease-in-out, background-color 0.15s ease-in-out;
@@ -65,7 +65,7 @@ export const StyledInput = styled.input.withConfig({
     }
 
     &:focus {
-      border-color: ${getToken("foregroundColor", "base").var};
+      border-color: ${getReactToken("foregroundColor", "base").var};
     }
 
     &:disabled {
