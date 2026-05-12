@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react"
 import { createPortal } from "react-dom"
-import Typography from "nice-react-typography"
-import { Trigger, Overlay, Image, Caption } from "./Lightbox.styles"
+import LightboxCaption from "../LightboxCaption"
+import { Trigger, Overlay, Image } from "./Lightbox.styles"
 import type { LightboxProps } from "./Lightbox.types"
 
 const Lightbox: React.FC<LightboxProps> = ({
@@ -32,8 +32,6 @@ const Lightbox: React.FC<LightboxProps> = ({
     }
   }, [isOpen, close])
 
-  const hasCaption = title || description
-
   return (
     <>
       <Trigger onClick={() => setIsOpen(true)} style={style}>{children}</Trigger>
@@ -41,20 +39,7 @@ const Lightbox: React.FC<LightboxProps> = ({
         createPortal(
           <Overlay onClick={close}>
             <Image src={imageUrl} alt={alt} onClick={(e) => e.stopPropagation()} />
-            {hasCaption && (
-              <Caption onClick={(e) => e.stopPropagation()}>
-                {title && (
-                  <Typography as="h3" size="large" weight="semibold" mode="night">
-                    {title}
-                  </Typography>
-                )}
-                {description && (
-                  <Typography as="p" size="base" color="lighter" mode="night">
-                    {description}
-                  </Typography>
-                )}
-              </Caption>
-            )}
+            <LightboxCaption title={title} description={description} />
           </Overlay>,
           document.body
         )}

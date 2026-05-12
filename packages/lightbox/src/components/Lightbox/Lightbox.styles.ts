@@ -25,9 +25,3 @@ export const Image = styled.img`
   max-height: 80vh;
   object-fit: contain;
 `
-
-export const Caption = styled.div`
-  max-width: 600px;
-  padding: 16px 24px;
-  text-align: center;
-`
