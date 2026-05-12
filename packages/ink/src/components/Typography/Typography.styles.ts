@@ -8,7 +8,7 @@
  */
 
 import styled, { css } from "styled-components"
-import { getToken, type ForegroundColorType, type FontSizeType, type FontWeightType, type LineHeightType, type ModeType } from "nice-react-styles"
+import { getReactToken, type ForegroundColorType, type FontSizeType, type FontWeightType, type LineHeightType, type ModeType } from "nice-react-styles"
 import { TypographyAsType, TypographyAlignType, TypographyLineClampType, TypographyWordBreakType } from "./Typography.types"
 import { styleAntialiasing } from "../../utilities/styleAntialiasing"
 
@@ -52,18 +52,18 @@ export const StyledTypography = styled.p<{
   ${({ $as, $code }) => {
     if ($code) {
       return css`
-        font-family: ${getToken("fontFamily", "code").var};
+        font-family: ${getReactToken("fontFamily", "code").var};
       `
     }
 
     if ($as === "h1" || $as === "h2" || $as === "h3" || $as === "h4") {
       return css`
-        font-family: ${getToken("fontFamily", "heading").var};
+        font-family: ${getReactToken("fontFamily", "heading").var};
       `
     }
 
     return css`
-      font-family: ${getToken("fontFamily", "base").var};
+      font-family: ${getReactToken("fontFamily", "base").var};
     `
   }}
 
@@ -72,7 +72,7 @@ export const StyledTypography = styled.p<{
     if (!$color) return css`color: inherit;`
 
     return css`
-      color: ${getToken("foregroundColor", $color, $mode).var};
+      color: ${getReactToken("foregroundColor", $color, $mode).var};
     `
   }}
 
@@ -101,7 +101,7 @@ export const StyledTypography = styled.p<{
     }
 
     return css`
-      font-size: ${getToken("fontSize", effectiveFontSize).var};
+      font-size: ${getReactToken("fontSize", effectiveFontSize).var};
     `
   }}
 
@@ -109,14 +109,14 @@ export const StyledTypography = styled.p<{
   ${({ $as, $weight }) => {
     if ($weight) {
       return css`
-        font-weight: ${getToken("fontWeight", $weight).var};
+        font-weight: ${getReactToken("fontWeight", $weight).var};
       `
     }
 
     // Default weights for headings
     if ($as === "h1" || $as === "h2" || $as === "h3") {
       return css`
-        font-weight: ${getToken("fontWeight", "bold").var};
+        font-weight: ${getReactToken("fontWeight", "bold").var};
       `
     }
   }}
@@ -141,7 +141,7 @@ export const StyledTypography = styled.p<{
       (($as === "h1" || $as === "h2" || $as === "h3" || $as === "h4") ? "condensed" : "base")
 
     return css`
-      line-height: ${getToken("lineHeight", effectiveLineHeight).var};
+      line-height: ${getReactToken("lineHeight", effectiveLineHeight).var};
     `
   }}
 
