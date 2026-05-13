@@ -1,0 +1,28 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta
+  title="Getting started/1 · Tokens/1.5 · Utility classes"
+  name="Docs"
+/>
+
+# Utility classes
+
+Wrap each variant of a token group in a class. The class name carries the
+intent; the value comes from the token.
+
+```css
+@import "nice-styles/variables.css";
+
+.padding-smaller { padding: var(--np--gap--smaller); }
+.padding-small   { padding: var(--np--gap--small); }
+.padding-base    { padding: var(--np--gap--base); }
+.padding-large   { padding: var(--np--gap--large); }
+.padding-larger  { padding: var(--np--gap--larger); }
+```
+
+```html
+<div class="padding-base">…</div>
+```
+
+Same shape works for any token group — `gap`, `borderRadius`, `cellHeight`,
+`fontSize`, etc.

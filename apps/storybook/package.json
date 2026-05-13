@@ -25,6 +25,7 @@
     "nice-react-icon": "file:../react-icon",
     "nice-react-icon-vendor": "file:../react-icon-vendor",
     "nice-react-image": "file:../react-image",
+    "nice-react-image-vendor": "file:../react-image-vendor",
     "nice-react-input": "file:../react-input",
     "nice-react-lightbox": "file:../react-lightbox",
     "nice-react-scroll": "file:../react-scroll",

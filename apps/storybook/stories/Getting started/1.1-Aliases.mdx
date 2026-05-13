@@ -1,0 +1,26 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta
+  title="Getting started/1 · Tokens/1.1 · Simple"
+  name="Docs"
+/>
+
+# Simple tokens
+
+Static design tokens. No breakpoints, no React. Map Nice tokens to your own
+semantic names at `:root`. Every consumer of the alias inherits the underlying
+token's responsive and mode-aware behavior for free.
+
+```css
+@import "nice-styles/variables.css";
+
+:root {
+  --success: var(--np--foreground-color--success);
+  --warning: var(--np--foreground-color--warning);
+  --error:   var(--np--foreground-color--error);
+  --link:    var(--np--foreground-color--link);
+}
+
+.toast--success { color: var(--success); }
+.toast--error   { color: var(--error); }
+```

@@ -3,7 +3,10 @@ import Flex from "nice-react-flex"
 import { getBreakpoint, getReactToken } from "nice-react-styles"
 
 export const PreviewWrapper = styled.div<{ $width?: string }>`
-  ${({ $width }) => ($width ? `width: ${$width};` : "")}
+  ${({ $width }) =>
+    $width
+      ? `width: ${$width};`
+      : `${getBreakpoint("tablet")} { width: 45%; }`}
 `
 
 export const RowFlex = styled(Flex).attrs({ spacing: "large none" })`
@@ -67,7 +70,7 @@ export const RowFlex = styled(Flex).attrs({ spacing: "large none" })`
     }
   }
 
-  ${getBreakpoint("tablet").query} {
+  ${getBreakpoint("tablet")} {
     .docblock-source {
       flex-direction: row;
       border-top: 0;

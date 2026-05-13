@@ -3,7 +3,6 @@ import Tile from "nice-react-tile"
 import Image from "nice-react-image"
 import Typography from "../../../../src/nice/Typography"
 import { DocsRow } from "../../../../src/components/DocsRow"
-import { getPicsum } from "../../../../src/services"
 
 <Meta title="React/Components/Tile/contentLeft" />
 
@@ -21,7 +20,8 @@ import { getPicsum } from "../../../../src/services"
       description="Description"
       contentLeft={
         <Image
-          src={getPicsum(800, 600, 10)}
+          vendor
+          src="10"
           alt="Demo content"
           width="80px"
           height="80px"

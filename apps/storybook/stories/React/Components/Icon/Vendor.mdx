@@ -1,0 +1,74 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import Icon from "nice-react-icon"
+import Typography from "../../../../src/nice/Typography"
+import { DocsRow } from "../../../../src/components/DocsRow"
+
+<Meta title="React/Components/Icon/vendor" />
+
+# Icon — --vendor
+
+<Typography color="light">
+  Routes a name through the registered vendor resolver instead of the built-in
+  icon set. Pairs with <code>nice-react-icon-vendor</code>, an optional peer
+  package that registers a resolver as a side effect of being imported.
+</Typography>
+
+### Why a separate vendor package
+
+Vendor packages are containers for convenient, stable third-party plugins
+that provide **media, not logic** — concrete icon sets and image sources.
+Encapsulating them outside the system keeps the host component
+(<code>nice-react-icon</code>) agnostic of any specific third-party
+dependency, while still letting that third party conveniently address a
+real need — in this case, iconography.
+
+The host exposes a <code>vendor</code> flag and a
+<code>registerVendorResolver</code> hook. The peer package is the only
+place a concrete vendor (currently Lucide) is referenced. Swapping,
+supplementing, or removing the third-party dependency later requires no
+changes to the host component or to any consumer call site.
+
+The same pattern applies to <code>nice-react-image</code> /
+<code>nice-react-image-vendor</code> for photography.
+
+### Setup
+
+Import the vendor package once at the application entry point. The import
+has a side effect: it registers the resolver with
+<code>nice-react-icon</code>.
+
+```tsx
+// app entry
+import "nice-react-icon-vendor"
+```
+
+### Usage
+
+Any name not found in the built-in set is then resolved through the
+vendor. Built-in names always win — the vendor is a fallback, not an
+override.
+
+<DocsRow
+  previewCell={
+    <Icon
+      vendor
+      name="TrendingDown"
+      size="larger"
+    />
+  }
+  language="tsx"
+  code={`<Icon vendor name="TrendingDown" />`}
+/>
+
+<DocsRow
+  previewCell={
+    <Icon
+      vendor
+      name="Sparkles"
+      size="larger"
+      color="link"
+    />
+  }
+  language="tsx"
+  code={`<Icon vendor name="Sparkles" color="link" />`}
+/>

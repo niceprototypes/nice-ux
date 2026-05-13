@@ -2,12 +2,11 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import Image from "nice-react-image"
 import Typography from "../../../../src/nice/Typography"
 import { DocsRow } from "../../../../src/components/DocsRow"
-import { getPicsum, toSource } from "../../../../src/services"
+import { toSource } from "../../../../src/services"
 
-export const DEMO_IMAGE = getPicsum(800, 600)
-export const basicProps = { src: DEMO_IMAGE, alt: "Demo landscape" }
+export const basicProps = { vendor: true, alt: "Demo landscape" }
 export const coverProps = {
-  src: DEMO_IMAGE,
+  vendor: true,
   alt: "Demo landscape",
   width: "240px",
   height: "320px",

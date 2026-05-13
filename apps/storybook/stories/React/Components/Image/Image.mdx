@@ -1,6 +1,5 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import Image from "nice-react-image"
-import { getPicsum } from "../../../../src/services"
 
 <Meta title="React/Components/Image" />
 
@@ -45,6 +44,8 @@ import Image from "nice-react-image"
 ---
 
 <Image
-  src={getPicsum(800, 600)}
+  vendor
   alt="Demo landscape"
+  width="800px"
+  height="600px"
 />

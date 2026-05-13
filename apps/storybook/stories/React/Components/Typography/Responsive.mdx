@@ -1,11 +1,11 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import Typography from "../../../../src/nice/Typography"
-import { getReactTokenValue, getSizeToken, getBreakpoint } from "nice-react-styles"
+import { getReactTokenValue, getSizeToken, getBreakpointValue } from "nice-react-styles"
 import { DocsRow } from "../../../../src/components/DocsRow"
 import { toSource } from "../../../../src/services"
 
-export const smallLabel = `≤${getBreakpoint("phone").value}px`
-export const largeLabel = `≥${getBreakpoint("laptop").value}px`
+export const smallLabel = `≤${getBreakpointValue("phone")}px`
+export const largeLabel = `≥${getBreakpointValue("laptop")}px`
 
 <Meta title="React/Components/Typography/responsive" />
 

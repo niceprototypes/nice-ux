@@ -2,7 +2,7 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import Image from "nice-react-image"
 import StoryDescription from "../../../../src/components/StoryDescription"
 import { DocsRow } from "../../../../src/components/DocsRow"
-import { getPicsum, toSource } from "../../../../src/services"
+import { toSource } from "../../../../src/services"
 
 <Meta title="React/Components/Image/backgroundPosition" />
 
@@ -15,7 +15,8 @@ import { getPicsum, toSource } from "../../../../src/services"
 <div>
   {["center", "top", "bottom right"].map(position => {
     const props = {
-      src: getPicsum(800, 600, 69),
+      vendor: true,
+      src: "69",
       alt: `${position} demo`,
       width: "240px",
       height: "320px",

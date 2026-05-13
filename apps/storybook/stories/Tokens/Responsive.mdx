@@ -48,17 +48,17 @@ npm install nice-styles
 ### Setup
 
 ```js
-import { getBreakpoint } from "nice-styles"
+import { getBreakpoint, getBreakpointValue } from "nice-styles"
 ```
 
 ### Usage
 
 ```js
-getBreakpoint("phone").value   // → 640
-getBreakpoint("phone").query   // → "@media (max-width: 640px)"
-getBreakpoint("tablet").query  // → "@media (min-width: 641px)"
-getBreakpoint("laptop").query  // → "@media (min-width: 1280px)"
-getBreakpoint("desktop").query // → "@media (min-width: 1720px)"
+getBreakpointValue("phone")   // → 640
+getBreakpoint("phone")   // → "@media (max-width: 640px)"
+getBreakpoint("tablet")  // → "@media (min-width: 641px)"
+getBreakpoint("laptop")  // → "@media (min-width: 1280px)"
+getBreakpoint("desktop") // → "@media (min-width: 1720px)"
 ```
 
 ---
@@ -110,15 +110,15 @@ getBreakpoint("desktop").query // → "@media (min-width: 1720px)"
 const Box = styled.div`
   background: blue;
 
-  ${getBreakpoint("tablet").query} {
+  ${getBreakpoint("tablet")} {
     background: orange;
   }
 
-  ${getBreakpoint("laptop").query} {
+  ${getBreakpoint("laptop")} {
     background: green;
   }
 
-  ${getBreakpoint("desktop").query} {
+  ${getBreakpoint("desktop")} {
     background: purple;
   }
 `

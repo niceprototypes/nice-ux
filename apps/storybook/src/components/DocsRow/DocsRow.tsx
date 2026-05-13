@@ -20,16 +20,9 @@ const BaseDocsRow = ({
         },
     }}
   >
-    <Flex
-      style={{ width: previewCellWidth }}
-      breakpoints={{
-        "tablet+": {
-            previewCellWidth: "45%",
-          },
-      }}
-    >
-      {previewCell}
-    </Flex>
+    <PreviewWrapper $width={previewCellWidth}>
+      <Flex>{previewCell}</Flex>
+    </PreviewWrapper>
     <Source
       language={language}
       code={code}

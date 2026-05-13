@@ -1,0 +1,26 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta
+  title="Getting started/1 · Tokens/1.3 · Breakpoints"
+  name="Docs"
+/>
+
+# Breakpoint-pinned tokens
+
+Size tokens emit different values depending on the active viewport. The
+reference is identical to any other token — the switching happens behind the
+variable.
+
+The same pin-to-a-mode pattern from `1.2` works for size:
+
+```css
+@import "nice-styles/variables.css";
+
+.card--phone-only   { font-size: var(--np--font-size--base--phone); }
+.card--laptop-only  { font-size: var(--np--font-size--base--laptop); }
+.card--desktop-only { font-size: var(--np--font-size--base--desktop); }
+```
+
+Stable `--phone` / `--tablet` / `--laptop` / `--desktop` primitives are
+emitted alongside the auto-switching semantic variable — reference them
+when a value should stay fixed regardless of viewport.

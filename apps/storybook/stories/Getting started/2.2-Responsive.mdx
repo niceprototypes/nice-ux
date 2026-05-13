@@ -34,11 +34,12 @@ import { getBreakpoint, getReactToken } from "nice-react-styles"
 const Wrapper = styled.div`
   padding: ${getReactToken("gap", "base").var};
 
-  @media ${getBreakpoint("laptop").query} {
+  ${getBreakpoint("laptop")} {
     padding: ${getReactToken("gap", "large").var};
   }
 `
 ```
 
-`getBreakpoint(name)` returns `{ value, query }` — pass `query` directly to
-`@media`.
+`getBreakpoint(name)` returns the `@media` query string directly (including
+the `@media` prefix) — interpolate it as-is. Use `getBreakpointValue(name)`
+when you need the raw pixel number instead.

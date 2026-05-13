@@ -1,6 +1,5 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import Input from "nice-react-input"
-import Flex from "nice-react-flex"
 import Typography from "../../../../src/nice/Typography"
 import { DocsRow } from "../../../../src/components/DocsRow"
 
@@ -26,20 +25,13 @@ export const stateCode = (s) =>
 <div>
   {states.map((state) => (
     <DocsRow
+      key={state}
       previewCell={
-        <Flex gap="small" direction="column">
-          <Input
-            placeholder={stateLabel(state)}
-            state={state === "base" ? undefined : state}
-            onChange={() => {}}
-          />
-          <Input
-            status="secondary"
-            placeholder={stateLabel(state)}
-            state={state === "base" ? undefined : state}
-            onChange={() => {}}
-          />
-        </Flex>
+        <Input
+          placeholder={stateLabel(state)}
+          state={state === "base" ? undefined : state}
+          onChange={() => {}}
+        />
       }
       language="tsx"
       code={stateCode(state)}
