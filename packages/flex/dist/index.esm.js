@@ -336,6 +336,14 @@ const styleFlex = (breakpoint, props) => {
     return styles.join("\n");
 };
 
+// Allowlist: only forward props that are valid on a <div>. Drops Flex's
+// own layout props plus any unknown prop a consumer or HOC merges in via
+// `breakpoints`, so nothing leaks to the underlying element.
+const ALLOWED_DOM_PROPS = new Set(["style", "className", "id", "role", "title", "tabIndex", "children"]);
+const isForwardable = (prop) => ALLOWED_DOM_PROPS.has(prop) ||
+    prop.startsWith("data-") ||
+    prop.startsWith("aria-") ||
+    (prop.startsWith("on") && prop.length > 2 && prop[2] === prop[2].toUpperCase());
 /**
  * FlexStyled - Styled Component
  *
@@ -373,19 +381,19 @@ const styleFlex = (breakpoint, props) => {
  * </FlexStyled>
  */
 const FlexStyled = styled.div.withConfig({
-    shouldForwardProp: (prop) => !["mode", "spacing", "gap", "direction", "alignItems", "justifyContent", "grow", "wrap"].includes(prop),
+    shouldForwardProp: (prop) => isForwardable(prop),
 }) `
   ${(props) => styleFlex(BREAKPOINT_PHONE, props)}
 
-  ${getBreakpoint(BREAKPOINT_TABLET).query} {
+  ${getBreakpoint(BREAKPOINT_TABLET)} {
     ${(props) => styleFlex(BREAKPOINT_TABLET, props)}
   }
 
-  ${getBreakpoint(BREAKPOINT_LAPTOP).query} {
+  ${getBreakpoint(BREAKPOINT_LAPTOP)} {
     ${(props) => styleFlex(BREAKPOINT_LAPTOP, props)}
   }
 
-  ${getBreakpoint(BREAKPOINT_DESKTOP).query} {
+  ${getBreakpoint(BREAKPOINT_DESKTOP)} {
     ${(props) => styleFlex(BREAKPOINT_DESKTOP, props)}
   }
 `;
