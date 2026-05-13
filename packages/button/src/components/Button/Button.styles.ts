@@ -72,7 +72,7 @@ export const StyledButton = styled.button.withConfig({
   ${({ $link, $square, $size }) =>
     !$link &&
     `
-    ${getBreakpoint(BREAKPOINT_TABLET).query} {
+    ${getBreakpoint(BREAKPOINT_TABLET)} {
       width: ${$square ? getButtonToken("size", $size).var : "auto"};
     }
   `}
