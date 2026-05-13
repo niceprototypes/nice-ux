@@ -80,14 +80,14 @@ const renderResponsiveMaxWidth = ($maxWidth) => {
     ${small !== undefined ? renderMaxWidthValue(small) : null}
     ${medium !== undefined
         ? styled.css `
-          ${niceReactStyles.getBreakpoint("tablet").query} {
+          ${niceReactStyles.getBreakpoint("tablet")} {
             ${renderMaxWidthValue(medium)}
           }
         `
         : null}
     ${large !== undefined
         ? styled.css `
-          ${niceReactStyles.getBreakpoint("laptop").query} {
+          ${niceReactStyles.getBreakpoint("laptop")} {
             ${renderMaxWidthValue(large)}
           }
         `

@@ -76,14 +76,14 @@ const renderResponsiveMaxWidth = ($maxWidth) => {
     ${small !== undefined ? renderMaxWidthValue(small) : null}
     ${medium !== undefined
         ? css `
-          ${getBreakpoint("tablet").query} {
+          ${getBreakpoint("tablet")} {
             ${renderMaxWidthValue(medium)}
           }
         `
         : null}
     ${large !== undefined
         ? css `
-          ${getBreakpoint("laptop").query} {
+          ${getBreakpoint("laptop")} {
             ${renderMaxWidthValue(large)}
           }
         `
