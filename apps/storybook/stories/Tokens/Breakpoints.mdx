@@ -1,0 +1,35 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta
+  title="Tokens/Breakpoints"
+  name="Docs"
+/>
+
+# Breakpoints
+
+Pixel thresholds for responsive `@media` queries.
+
+---
+
+## Defaults
+
+| Name | Query shape | Pixels |
+|:-----|:------|:-----------:|
+| `phone` | `@media (max-width: 640px)` | `<= 640` |
+| `tablet` | `@media (min-width: 641px)` | `641-1279` |
+| `laptop` | `@media (min-width: 1280px)` | `1280-1719` |
+| `desktop` | `@media (min-width: 1720px)` | `>= 1720` |
+
+---
+
+## Overriding the defaults
+
+Two ways to set breakpoints, both via `nice-react-styles`:
+
+- **`createTokens({ breakpoints })`** — declarative, co-located with the rest
+  of your `AppTokenMap`. Applied at module load.
+- **`setBreakpoints(...)`** — imperative, callable any time after initial
+  load.
+
+See [React/Styles/setBreakpoints](/docs/react-styles-setbreakpoints--docs)
+for both paths.

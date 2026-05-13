@@ -1,0 +1,39 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta
+  title="React/Styles/setBreakpoints"
+  name="Docs"
+/>
+
+# setBreakpoints
+
+Imperative override of the pixel thresholds behind `@media` queries. `BREAKPOINTS`
+is mutated in memory and a `<style data-nice-breakpoints>` element is injected
+into `<head>` with the re-emitted `@media` cascade. Cascade order means the
+injected stylesheet overrides the build-time literals from `variables.css`.
+
+For the default thresholds, see
+[Tokens/Breakpoints](/docs/tokens-breakpoints--docs). For the declarative
+form via `createTokens`, see
+[React/Styles/createTokens](/docs/react-styles-createtokens--docs).
+
+---
+
+## Usage
+
+```ts
+import { setBreakpoints } from "nice-react-styles"
+
+setBreakpoints({
+  laptop: 1100,
+  desktop: 1800,
+})
+```
+
+Accepts `Partial<BreakpointValues>` — omitted keys are preserved.
+
+Reach for this directly when thresholds need to change after initial load —
+a settings toggle, an A/B test, a unit test. For static per-app config that
+belongs with the rest of your design tokens, use
+[`createTokens({ breakpoints })`](/docs/react-styles-createtokens--docs)
+instead.

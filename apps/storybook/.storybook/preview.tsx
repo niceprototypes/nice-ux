@@ -50,11 +50,11 @@ const preview: Preview = {
             "4 · Components",
           ],
           "Tokens",
-          ["Styles", "Icons", "Responsive"],
+          ["Styles", "Icons", "Responsive", "Breakpoints"],
           "React",
           [
             "Styles",
-            ["StylesProvider", "getReactToken", "createTokens"],
+            ["StylesProvider", "getReactToken", "createTokens", "setBreakpoints"],
             "Components",
             "Bindings",
           ],
