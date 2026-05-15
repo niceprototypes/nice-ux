@@ -18,15 +18,15 @@ import { DocsRow } from "../../../src/components/DocsRow"
       previewCell={
         <Flex
           style={{
-            borderRadius: getReactToken("borderRadius", variant).var,
-            width: getReactToken("cellHeight", "larger").var,
-            height: getReactToken("cellHeight", "larger").var,
-            border: `${getReactToken("borderWidth").var} solid ${getReactToken("foregroundColor", "light").var}`,
+            borderRadius: getReactToken("borderRadius", variant),
+            width: getReactToken("cellHeight", "larger"),
+            height: getReactToken("cellHeight", "larger"),
+            border: `${getReactToken("borderWidth")} solid ${getReactToken("foregroundColor", "light")}`,
           }}
         />
       }
       language="tsx"
-      code={`getReactToken("borderRadius", "${variant}").var`}
+      code={`getReactToken("borderRadius", "${variant}")`}
     />
   ))}
 </div>

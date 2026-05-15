@@ -9,7 +9,7 @@ export const colors = {
 
 export const CopyingFlex = styled(Flex)<FlexProps>`
   background-color: hsla(220, 5%, 15%, 1);
-  border-radius: ${getReactToken("borderRadius", "base").var};
+  border-radius: ${getReactToken("borderRadius", "base")};
   position: absolute;
   top: 0;
   left: 0;

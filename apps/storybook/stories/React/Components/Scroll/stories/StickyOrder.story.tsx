@@ -24,9 +24,9 @@ const StickyOrderStory = () => (
             <Flex gap="small">
               <Flex
                 style={{
-                  padding: `${getReactToken("gap", "smaller").var} ${getReactToken("gap", "small").var}`,
-                  backgroundColor: getReactToken("foregroundColor", "error").var,
-                  borderRadius: getReactToken("borderRadius", "small").var,
+                  padding: `${getReactToken("gap", "smaller")} ${getReactToken("gap", "small")}`,
+                  backgroundColor: getReactToken("foregroundColor", "error"),
+                  borderRadius: getReactToken("borderRadius", "small"),
                 }}
               >
                 <Typography
@@ -38,9 +38,9 @@ const StickyOrderStory = () => (
               </Flex>
               <Flex
                 style={{
-                  padding: `${getReactToken("gap", "smaller").var} ${getReactToken("gap", "small").var}`,
-                  backgroundColor: getReactToken("foregroundColor", "warning").var,
-                  borderRadius: getReactToken("borderRadius", "small").var,
+                  padding: `${getReactToken("gap", "smaller")} ${getReactToken("gap", "small")}`,
+                  backgroundColor: getReactToken("foregroundColor", "warning"),
+                  borderRadius: getReactToken("borderRadius", "small"),
                 }}
               >
                 <Typography

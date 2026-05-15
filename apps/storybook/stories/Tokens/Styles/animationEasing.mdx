@@ -16,9 +16,9 @@ import { DocsRow } from "../../../src/components/DocsRow"
       previewCell={
         <Flex
           style={{
-            backgroundColor: getReactToken("backgroundColor", "dark").var,
-            padding: getReactToken("gap").var,
-            borderRadius: getReactToken("borderRadius").var,
+            backgroundColor: getReactToken("backgroundColor", "dark"),
+            padding: getReactToken("gap"),
+            borderRadius: getReactToken("borderRadius"),
           }}
         >
           <svg
@@ -29,15 +29,15 @@ import { DocsRow } from "../../../src/components/DocsRow"
             <path
               d="M 1 23 C 30 23, 30 1, 60 1"
               fill="none"
-              stroke={getReactToken("foregroundColor", "lighter").var}
-              strokeWidth={getReactToken("borderWidth", "large").var}
+              stroke={getReactToken("foregroundColor", "lighter")}
+              strokeWidth={getReactToken("borderWidth", "large")}
               strokeLinecap="round"
             />
           </svg>
         </Flex>
       }
       language="tsx"
-      code={`getReactToken("animationEasing", "${variant}").var`}
+      code={`getReactToken("animationEasing", "${variant}")`}
     />
   ))}
 </div>

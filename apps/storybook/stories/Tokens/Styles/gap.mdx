@@ -20,20 +20,20 @@ import DemoDots from "../../../src/components/DemoDots"
           gap={variant}
           dots={[
             {
-              color: getReactToken("foregroundColor", "error").var,
-              width: getReactToken("cellHeight", "smaller").var,
-              height: getReactToken("cellHeight", "smaller").var,
+              color: getReactToken("foregroundColor", "error"),
+              width: getReactToken("cellHeight", "smaller"),
+              height: getReactToken("cellHeight", "smaller"),
             },
             {
-              color: getReactToken("foregroundColor", "link").var,
-              width: getReactToken("cellHeight", "smaller").var,
-              height: getReactToken("cellHeight", "smaller").var,
+              color: getReactToken("foregroundColor", "link"),
+              width: getReactToken("cellHeight", "smaller"),
+              height: getReactToken("cellHeight", "smaller"),
             },
           ]}
         />
       }
       language="tsx"
-      code={`getReactToken("gap", "${variant}").var`}
+      code={`getReactToken("gap", "${variant}")`}
     />
   ))}
 </div>

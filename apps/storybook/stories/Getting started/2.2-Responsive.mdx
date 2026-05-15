@@ -7,7 +7,7 @@ import { Meta } from "@storybook/addon-docs/blocks"
 
 # Styles + responsive
 
-The same `getReactToken().var` resolves to a different value at each breakpoint.
+The same `getReactToken()` resolves to a different value at each breakpoint.
 The media query lives in `nice-styles/variables.css` — the component reads
 one var.
 
@@ -18,7 +18,7 @@ import styled from "styled-components"
 import { getReactToken } from "nice-react-styles"
 
 const Heading = styled.h1`
-  font-size: ${getReactToken("fontSize", "larger").var};
+  font-size: ${getReactToken("fontSize", "larger")};
 `
 ```
 
@@ -32,10 +32,10 @@ import styled from "styled-components"
 import { getBreakpoint, getReactToken } from "nice-react-styles"
 
 const Wrapper = styled.div`
-  padding: ${getReactToken("gap", "base").var};
+  padding: ${getReactToken("gap", "base")};
 
   ${getBreakpoint("laptop")} {
-    padding: ${getReactToken("gap", "large").var};
+    padding: ${getReactToken("gap", "large")};
   }
 `
 ```

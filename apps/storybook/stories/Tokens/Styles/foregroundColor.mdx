@@ -29,15 +29,15 @@ import { DocsRow } from "../../../src/components/DocsRow"
       previewCell={
         <Flex
           style={{
-            width: getReactToken("cellHeight", "smaller").var,
-            height: getReactToken("cellHeight", "smaller").var,
-            backgroundColor: getReactToken("foregroundColor", variant).var,
+            width: getReactToken("cellHeight", "smaller"),
+            height: getReactToken("cellHeight", "smaller"),
+            backgroundColor: getReactToken("foregroundColor", variant),
             borderRadius: "50%",
           }}
         />
       }
       language="tsx"
-      code={`getReactToken("foregroundColor", "${variant}").var`}
+      code={`getReactToken("foregroundColor", "${variant}")`}
     />
   ))}
 </div>

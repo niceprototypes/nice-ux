@@ -22,15 +22,15 @@ import { twoDots } from "./Flex.services"
         <Flex direction="column">
           <Flex
             style={{
-              border: `${getReactToken("borderWidth").var} solid ${value === "margin" ? getReactToken("borderColor").var : getReactToken("borderColor", "dark").var}`,
-              borderRadius: `calc(${getReactToken("cellHeight", "smaller").var} / 2 + 2px)`,
+              border: `${getReactToken("borderWidth")} solid ${value === "margin" ? getReactToken("borderColor") : getReactToken("borderColor", "dark")}`,
+              borderRadius: `calc(${getReactToken("cellHeight", "smaller")} / 2 + 2px)`,
             }}
           >
             <Flex
               mode={value}
               style={{
-                border: `${getReactToken("borderWidth").var} solid ${value === "margin" ? getReactToken("borderColor", "dark").var : "transparent"}`,
-                borderRadius: `calc(${getReactToken("cellHeight", "smaller").var} / 2 + 2px)`,
+                border: `${getReactToken("borderWidth")} solid ${value === "margin" ? getReactToken("borderColor", "dark") : "transparent"}`,
+                borderRadius: `calc(${getReactToken("cellHeight", "smaller")} / 2 + 2px)`,
               }}
             >
               <DemoDots dots={twoDots} />

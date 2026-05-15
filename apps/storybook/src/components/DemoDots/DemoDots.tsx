@@ -30,8 +30,8 @@ const DemoDots = ({
           padding: !spacing && 1,
           gap: !gap && 1,
           ...(bordered && {
-            borderRadius: `calc(${getReactToken("cellHeight", "smaller").var} / 2 + 2px)`,
-            border: `${getReactToken("borderWidth").var} solid ${getReactToken("borderColor").var}`,
+            borderRadius: `calc(${getReactToken("cellHeight", "smaller")} / 2 + 2px)`,
+            border: `${getReactToken("borderWidth")} solid ${getReactToken("borderColor")}`,
           }),
         }}
       >
@@ -40,7 +40,7 @@ const DemoDots = ({
             <DemoDot
               key={index}
               backgroundColor={color}
-              borderRadius={`calc(${getReactToken("cellHeight", "smaller").var} / 2)`}
+              borderRadius={`calc(${getReactToken("cellHeight", "smaller")} / 2)`}
               width={dotWidth}
               height={dotHeight}
               grow={grow}

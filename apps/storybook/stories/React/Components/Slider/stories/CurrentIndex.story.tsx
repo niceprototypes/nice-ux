@@ -36,16 +36,16 @@ const CurrentIndexStory = () => (
             <Flex gap="small">
               <Flex
                 style={{
-                  padding: `${getReactToken("gap", "smaller").var} ${getReactToken("gap", "small").var}`,
-                  borderRadius: getReactToken("borderRadius", "small").var,
+                  padding: `${getReactToken("gap", "smaller")} ${getReactToken("gap", "small")}`,
+                  borderRadius: getReactToken("borderRadius", "small"),
                 }}
               >
                 <Typography size="smaller">Previous: index - 1</Typography>
               </Flex>
               <Flex
                 style={{
-                  padding: `${getReactToken("gap", "smaller").var} ${getReactToken("gap", "small").var}`,
-                  borderRadius: getReactToken("borderRadius", "small").var,
+                  padding: `${getReactToken("gap", "smaller")} ${getReactToken("gap", "small")}`,
+                  borderRadius: getReactToken("borderRadius", "small"),
                 }}
               >
                 <Typography size="smaller">Next: index + 1</Typography>

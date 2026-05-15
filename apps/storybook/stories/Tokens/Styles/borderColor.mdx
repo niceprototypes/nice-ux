@@ -17,15 +17,15 @@ import { DocsRow } from "../../../src/components/DocsRow"
         <Flex
           style={{
             backgroundColor: "white",
-            width: getReactToken("cellHeight", "larger").var,
-            height: getReactToken("cellHeight", "larger").var,
-            border: `${getReactToken("borderWidth").var} solid ${getReactToken("borderColor", variant).var}`,
-            borderRadius: getReactToken("borderRadius", "small").var,
+            width: getReactToken("cellHeight", "larger"),
+            height: getReactToken("cellHeight", "larger"),
+            border: `${getReactToken("borderWidth")} solid ${getReactToken("borderColor", variant)}`,
+            borderRadius: getReactToken("borderRadius", "small"),
           }}
         />
       }
       language="tsx"
-      code={`getReactToken("borderColor", "${variant}").var`}
+      code={`getReactToken("borderColor", "${variant}")`}
     />
   ))}
 </div>

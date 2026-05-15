@@ -12,10 +12,10 @@ import { DocsRow } from "../../../src/components/DocsRow"
 
 <div>
   {[
-    { name: "base", backgroundColor: getReactToken("foregroundColor", "error").var },
+    { name: "base", backgroundColor: getReactToken("foregroundColor", "error") },
     {
       name: "slow",
-      backgroundColor: getReactToken("foregroundColor", "warning").var,
+      backgroundColor: getReactToken("foregroundColor", "warning"),
     },
   ].map(({ name, backgroundColor }) => {
     const animationName = name === "base" ? "slide" : "slideSlow"
@@ -25,25 +25,25 @@ import { DocsRow } from "../../../src/components/DocsRow"
           <Flex
             style={{
               width: "120px",
-              backgroundColor: getReactToken("backgroundColor", "dark").var,
-              borderRadius: `calc(${getReactToken("cellHeight", "smaller").var} / 2)`,
+              backgroundColor: getReactToken("backgroundColor", "dark"),
+              borderRadius: `calc(${getReactToken("cellHeight", "smaller")} / 2)`,
             }}
           >
             <Flex
               style={{
                 backgroundColor,
-                width: getReactToken("cellHeight", "smaller").var,
-                height: getReactToken("cellHeight", "smaller").var,
-                borderRadius: `calc(${getReactToken("cellHeight", "smaller").var} / 2)`,
-                animation: `${animationName} calc(${getReactToken("animationDuration", name).var} * 6) ${getReactToken("animationEasing").var} infinite`,
+                width: getReactToken("cellHeight", "smaller"),
+                height: getReactToken("cellHeight", "smaller"),
+                borderRadius: `calc(${getReactToken("cellHeight", "smaller")} / 2)`,
+                animation: `${animationName} calc(${getReactToken("animationDuration", name)} * 6) ${getReactToken("animationEasing")} infinite`,
                 animationDelay:
-                  name === "base" ? getReactToken("animationDuration", name).var : 0,
+                  name === "base" ? getReactToken("animationDuration", name) : 0,
               }}
             />
           </Flex>
         }
         language="tsx"
-        code={`getReactToken("animationDuration", "${name}").var`}
+        code={`getReactToken("animationDuration", "${name}")`}
       />
     )
   })}

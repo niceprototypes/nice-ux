@@ -12,20 +12,20 @@ export const PreviewWrapper = styled.div<{ $width?: string }>`
 export const RowFlex = styled(Flex).attrs({ spacing: "large none" })`
 
   &:not(:last-child) {
-    border-bottom: 1px solid ${getReactToken("borderColor", "base").var};
+    border-bottom: 1px solid ${getReactToken("borderColor", "base")};
   }
 
   .docblock-source {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    gap: ${getReactToken("gap", "large").var};
-    padding-top: ${getReactToken("gap", "large").var};
+    gap: ${getReactToken("gap", "large")};
+    padding-top: ${getReactToken("gap", "large")};
     align-items: flex-start;
     justify-content: center;
     margin: 0;
     border: 0;
-    border-top: 1px solid ${getReactToken("borderColor").var};
+    border-top: 1px solid ${getReactToken("borderColor")};
     border-radius: 0;
     box-shadow: none;
     width: 100%;
@@ -41,7 +41,7 @@ export const RowFlex = styled(Flex).attrs({ spacing: "large none" })`
         button {
           width: 100%;
           justify-content: center;
-          padding: ${getReactToken("gap", "base").var};
+          padding: ${getReactToken("gap", "base")};
           font-size: inherit;
         }
       }
@@ -53,19 +53,19 @@ export const RowFlex = styled(Flex).attrs({ spacing: "large none" })`
 
     button {
       margin: 0;
-      padding: ${getReactToken("gap", "small").var} ${getReactToken("gap").var};
-      border-radius: ${getReactToken("borderRadius", "small").var} !important;
-      border: 1px solid ${getReactToken("borderColor").var};
+      padding: ${getReactToken("gap", "small")} ${getReactToken("gap")};
+      border-radius: ${getReactToken("borderRadius", "small")} !important;
+      border: 1px solid ${getReactToken("borderColor")};
 
       &:hover,
       &:focus {
-        border-color: ${getReactToken("borderColor", "darker").var};
+        border-color: ${getReactToken("borderColor", "darker")};
       }
 
       &:focus {
         box-shadow: none;
-        background-color: ${getReactToken("borderColor", "darker").var} !important;
-        color: ${getReactToken("foregroundColor", "base", "night").var} !important;
+        background-color: ${getReactToken("borderColor", "darker")} !important;
+        color: ${getReactToken("foregroundColor", "base", "night")} !important;
       }
     }
   }

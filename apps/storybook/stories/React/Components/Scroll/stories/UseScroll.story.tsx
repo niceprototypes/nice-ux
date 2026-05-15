@@ -16,8 +16,8 @@ const UseScrollStory = () => (
             <Flex
               direction="column"
               style={{
-                padding: getReactToken("gap", "base").var,
-                borderRadius: getReactToken("borderRadius", "base").var,
+                padding: getReactToken("gap", "base"),
+                borderRadius: getReactToken("borderRadius", "base"),
               }}
             >
               <ScrollPositionDisplay />

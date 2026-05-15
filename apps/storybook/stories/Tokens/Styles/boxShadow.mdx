@@ -17,23 +17,23 @@ import { DocsRow } from "../../../src/components/DocsRow"
         <Flex
           spacing="large"
           style={{
-            backgroundColor: getReactToken("backgroundColor", "dark").var,
-            borderRadius: `calc(${getReactToken("cellHeight", "smaller").var} / 2)`,
+            backgroundColor: getReactToken("backgroundColor", "dark"),
+            borderRadius: `calc(${getReactToken("cellHeight", "smaller")} / 2)`,
           }}
         >
           <Flex
             style={{
-              backgroundColor: getReactToken("backgroundColor").var,
-              width: getReactToken("cellHeight", "larger").var,
-              height: getReactToken("cellHeight", "larger").var,
-              borderRadius: getReactToken("borderRadius", "small").var,
-              boxShadow: getReactToken("boxShadow", variant).var,
+              backgroundColor: getReactToken("backgroundColor"),
+              width: getReactToken("cellHeight", "larger"),
+              height: getReactToken("cellHeight", "larger"),
+              borderRadius: getReactToken("borderRadius", "small"),
+              boxShadow: getReactToken("boxShadow", variant),
             }}
           />
         </Flex>
       }
       language="tsx"
-      code={`getReactToken("boxShadow", "${variant}").var`}
+      code={`getReactToken("boxShadow", "${variant}")`}
     />
   ))}
 </div>

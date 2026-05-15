@@ -26,7 +26,7 @@ export const SectionContent = ({
     direction="column"
     gap="base"
     style={{
-      padding: getReactToken("gap", "large").var,
+      padding: getReactToken("gap", "large"),
       minHeight: "50vh",
       backgroundColor: color,
     }}
