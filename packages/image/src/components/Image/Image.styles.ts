@@ -50,7 +50,7 @@ const sharedStyles = css<{
   ${({ $borderRadius, $mode }) =>
     $borderRadius &&
     css`
-      border-radius: ${getReactToken("borderRadius", $borderRadius, $mode).var};
+      border-radius: ${getReactToken("borderRadius", $borderRadius, $mode)};
     `}
 `
 
@@ -68,7 +68,7 @@ export const StyledImg = styled.img<{
   ${({ $backgroundSize, $mode }) =>
     $backgroundSize &&
     css`
-      object-fit: ${getReactToken("backgroundSize", $backgroundSize, $mode).var};
+      object-fit: ${getReactToken("backgroundSize", $backgroundSize, $mode)};
     `}
 
   /* Object position derived from backgroundPosition */
