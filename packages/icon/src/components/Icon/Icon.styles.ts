@@ -30,9 +30,9 @@ export const IconWrapperStyled = styled.div.withConfig({
   $spinning?: boolean
   $mode?: ModeType
 }>`
-  width: ${({ $size = "base" }) => getIconToken("size", $size).var};
-  height: ${({ $size = "base" }) => getIconToken("size", $size).var};
-  color: ${({ $color = "base", $mode }) => getColorToken($color, $mode).var};
+  width: ${({ $size = "base" }) => getIconToken("size", $size)};
+  height: ${({ $size = "base" }) => getIconToken("size", $size)};
+  color: ${({ $color = "base", $mode }) => getColorToken($color, $mode)};
   display: flex;
   flex-shrink: 0;
   justify-content: center;
@@ -42,7 +42,7 @@ export const IconWrapperStyled = styled.div.withConfig({
     width: 100%;
     height: 100%;
     ${({ $spinning }) => $spinning && css`
-      animation: ${spin} ${getIconToken("spinningAnimationDuration").var} linear infinite;
+      animation: ${spin} ${getIconToken("spinningAnimationDuration")} linear infinite;
     `}
   }
 
@@ -52,13 +52,13 @@ export const IconWrapperStyled = styled.div.withConfig({
       ${({ $outlined = false, $color = "base", $strokeWidth = "base", $mode }) =>
           $outlined
               ? css`
-                fill: ${getColorToken($color, $mode).var};
+                fill: ${getColorToken($color, $mode)};
                 stroke: none;
               `
               : css`
                 fill: none;
-                stroke: ${getColorToken($color, $mode).var};
-                stroke-width: ${getIconToken("strokeWidth", $strokeWidth).var};
+                stroke: ${getColorToken($color, $mode)};
+                stroke-width: ${getIconToken("strokeWidth", $strokeWidth)};
                 stroke-linecap: round;
                 stroke-linejoin: round;
               `}

@@ -1,21 +1,29 @@
-import { getComponentToken, type TokenResult } from "nice-react-styles"
+import {
+  getComponentToken,
+  getComponentTokenKey,
+  getComponentTokenValue,
+} from "nice-react-styles"
 
-/**
- * Get an icon component token.
- *
- * Flat lookup — for tokens at depth 1 (e.g., "size", "color"):
- * ```ts
- * getIconToken("size", "base")
- * ```
- *
- * Path lookup — for nested tokens:
- * ```ts
- * getIconToken(["group", "variant", "parameter"])
- * ```
- */
-export function getIconToken(nameOrPath: string | string[], variantOrMode?: string, mode?: string): TokenResult {
+/** Returns the `var(--np--icon--…)` reference. */
+export function getIconToken(nameOrPath: string | string[], variantOrMode?: string, mode?: string): string {
   if (Array.isArray(nameOrPath)) {
     return getComponentToken("icon", nameOrPath, variantOrMode)
   }
   return getComponentToken("icon", nameOrPath, variantOrMode, mode)
+}
+
+/** Returns the bare CSS variable name. */
+export function getIconTokenKey(nameOrPath: string | string[], variantOrMode?: string, mode?: string): string {
+  if (Array.isArray(nameOrPath)) {
+    return getComponentTokenKey("icon", nameOrPath, variantOrMode)
+  }
+  return getComponentTokenKey("icon", nameOrPath, variantOrMode, mode)
+}
+
+/** Returns the raw underlying value. */
+export function getIconTokenValue(nameOrPath: string | string[], variantOrMode?: string, mode?: string): string {
+  if (Array.isArray(nameOrPath)) {
+    return getComponentTokenValue("icon", nameOrPath, variantOrMode)
+  }
+  return getComponentTokenValue("icon", nameOrPath, variantOrMode, mode)
 }
