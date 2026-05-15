@@ -38,18 +38,18 @@ const isHeading = ($as: TypographyAsType): boolean =>
 const getFontFamily = ({ $as, $code }: { $as: TypographyAsType; $code?: boolean }) => {
   if ($code) {
     return css`
-      font-family: ${getReactToken("fontFamily", "code").var};
+      font-family: ${getReactToken("fontFamily", "code")};
     `
   }
 
   if (isHeading($as)) {
     return css`
-      font-family: ${getReactToken("fontFamily", "heading").var};
+      font-family: ${getReactToken("fontFamily", "heading")};
     `
   }
 
   return css`
-    font-family: ${getReactToken("fontFamily", "base").var};
+    font-family: ${getReactToken("fontFamily", "base")};
   `
 }
 
@@ -57,7 +57,7 @@ const getColor = ({ $color, $mode }: { $color?: ForegroundColorType; $mode?: Mod
   if (!$color) return css`color: inherit;`
 
   return css`
-    color: ${getReactToken("foregroundColor", $color, $mode).var};
+    color: ${getReactToken("foregroundColor", $color, $mode)};
   `
 }
 
@@ -84,21 +84,21 @@ const getFontSize = ({ $as, $size }: { $as: TypographyAsType; $size?: FontSizeTy
   }
 
   return css`
-    font-size: ${getReactToken("fontSize", effectiveFontSize).var};
+    font-size: ${getReactToken("fontSize", effectiveFontSize)};
   `
 }
 
 const getFontWeight = ({ $as, $weight }: { $as: TypographyAsType; $weight?: FontWeightType }) => {
   if ($weight) {
     return css`
-      font-weight: ${getReactToken("fontWeight", $weight).var};
+      font-weight: ${getReactToken("fontWeight", $weight)};
     `
   }
 
   // Default weights for headings
   if ($as === "h1" || $as === "h2" || $as === "h3") {
     return css`
-      font-weight: ${getReactToken("fontWeight", "bold").var};
+      font-weight: ${getReactToken("fontWeight", "bold")};
     `
   }
 
@@ -118,7 +118,7 @@ const getLineHeight = ({ $lineHeight, $as }: { $lineHeight?: LineHeightType; $as
   const effectiveLineHeight = $lineHeight || (isHeading($as) ? "condensed" : "base")
 
   return css`
-    line-height: ${getReactToken("lineHeight", effectiveLineHeight).var};
+    line-height: ${getReactToken("lineHeight", effectiveLineHeight)};
   `
 }
 
