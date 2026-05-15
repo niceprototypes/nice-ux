@@ -1,1 +1,1 @@
-[2026-05-14] patch: Drop .var from token getter callers; track nice-react-styles 11.0.0 (getReactToken returns string).
+[2026-05-14 12:00] patch: Drop .var from token getter callers; track nice-react-styles 9.0.0 (getReactToken returns string).
