@@ -1,4 +1,3 @@
-import type { TokenResult } from "nice-react-styles"
 import type { InputStatusType, InputStateType } from "../components/Input/Input.types"
 import { getInputToken } from "../tokens/getInputToken"
 
@@ -11,12 +10,14 @@ type StatusTokenParameter = "backgroundColor" | "foregroundColor" | "borderColor
  *   → --np--input--status--{status}--{state}--{parameter}
  *
  * When `mode` is provided, the mode suffix is appended to the CSS variable.
+ *
+ * @returns The `var(--np--input--…)` reference string.
  */
 export function getStatusToken(
   status: InputStatusType,
   state: InputStateType,
   parameter: StatusTokenParameter,
   mode?: string
-): TokenResult {
+): string {
   return getInputToken(["status", status, state, parameter], mode)
 }

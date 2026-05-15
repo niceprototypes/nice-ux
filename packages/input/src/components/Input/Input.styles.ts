@@ -43,27 +43,27 @@ export const StyledInput = styled.input.withConfig({
     display: block;
     box-sizing: border-box;
     width: 100%;
-    height: ${getInputToken("size", $size).var};
-    padding: 0 ${getInputToken("spacing", $size).var};
-    font-weight: ${getReactToken("fontWeight", "base").var};
-    background-color: ${getStatusToken($status, $state, "backgroundColor", $mode).var};
-    color: ${getStatusToken($status, $state, "foregroundColor", $mode).var};
+    height: ${getInputToken("size", $size)};
+    padding: 0 ${getInputToken("spacing", $size)};
+    font-weight: ${getReactToken("fontWeight", "base")};
+    background-color: ${getStatusToken($status, $state, "backgroundColor", $mode)};
+    color: ${getStatusToken($status, $state, "foregroundColor", $mode)};
     border-style: solid;
-    border-width: ${getReactToken("borderWidth", $borderWidth).var};
-    border-color: ${getStatusToken($status, $state, "borderColor", $mode).var};
-    border-radius: ${getInputToken("borderRadius", $borderRadius).var};
+    border-width: ${getReactToken("borderWidth", $borderWidth)};
+    border-color: ${getStatusToken($status, $state, "borderColor", $mode)};
+    border-radius: ${getInputToken("borderRadius", $borderRadius)};
     transition: border-color 0.15s ease-in-out, background-color 0.15s ease-in-out;
     cursor: ${$disabled ? "not-allowed" : "text"};
     ${$backgroundColor ? `background-color: ${$backgroundColor};` : ""}
     ${$borderColor ? `border-color: ${$borderColor};` : ""}
 
     &::placeholder {
-      color: ${getStatusToken($status, $state, "placeholderColor", $mode).var};
+      color: ${getStatusToken($status, $state, "placeholderColor", $mode)};
       opacity: 1;
     }
 
     &:focus {
-      border-color: ${getReactToken("foregroundColor", "base").var};
+      border-color: ${getReactToken("foregroundColor", "base")};
     }
 
     &:disabled {
