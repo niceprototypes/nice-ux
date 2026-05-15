@@ -1,4 +1,3 @@
-import type { TokenResult } from "nice-react-styles"
 import type { ButtonStatusType, ButtonStateType } from "../components/Button/Button.types"
 import { getButtonToken } from "../tokens/getButtonToken"
 
@@ -12,12 +11,14 @@ type StatusTokenParameter = "backgroundColor" | "foregroundColor" | "borderColor
  *
  * When `mode` is provided, the mode suffix is appended to the CSS variable
  * (e.g. --np--button--status--secondary--base--border-color--night).
+ *
+ * @returns The `var(--np--button--…)` reference string.
  */
 export function getStatusToken(
   status: ButtonStatusType,
   state: ButtonStateType,
   parameter: StatusTokenParameter,
   mode?: string
-): TokenResult {
+): string {
   return getButtonToken(["status", status, state, parameter], mode)
 }

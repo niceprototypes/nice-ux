@@ -53,17 +53,17 @@ export const StyledButton = styled.button.withConfig({
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: ${!$square ? `0 ${getButtonToken("spacing", $size).var}` : "0"};
-    height: ${getButtonToken("size", $size).var};
+    gap: ${!$square ? `0 ${getButtonToken("spacing", $size)}` : "0"};
+    height: ${getButtonToken("size", $size)};
     width: 100%;
-    padding: ${$square ? "0" : `0 ${getButtonToken("spacing", $size).var}`};
-    font-weight: ${getReactToken("fontWeight", "base").var};
-    background-color: ${getStatusToken($status, $state, "backgroundColor", $mode).var};
-    color: ${getStatusToken($status, $state, "foregroundColor", $mode).var};
+    padding: ${$square ? "0" : `0 ${getButtonToken("spacing", $size)}`};
+    font-weight: ${getReactToken("fontWeight", "base")};
+    background-color: ${getStatusToken($status, $state, "backgroundColor", $mode)};
+    color: ${getStatusToken($status, $state, "foregroundColor", $mode)};
     border-style: solid;
-    border-width: ${getReactToken("borderWidth", $borderWidth).var};
-    border-color: ${getStatusToken($status, $state, "borderColor", $mode).var};
-    border-radius: ${getButtonToken("borderRadius", $borderRadius).var};
+    border-width: ${getReactToken("borderWidth", $borderWidth)};
+    border-color: ${getStatusToken($status, $state, "borderColor", $mode)};
+    border-radius: ${getButtonToken("borderRadius", $borderRadius)};
     transition: all 0.15s ease-in-out;
     ${$backgroundImage ? `background-image: ${$backgroundImage};` : ""}
     ${$borderColor ? `border-color: ${$borderColor};` : ""}
@@ -73,7 +73,7 @@ export const StyledButton = styled.button.withConfig({
     !$link &&
     `
     ${getBreakpoint(BREAKPOINT_TABLET)} {
-      width: ${$square ? getButtonToken("size", $size).var : "auto"};
+      width: ${$square ? getButtonToken("size", $size) : "auto"};
     }
   `}
 `
