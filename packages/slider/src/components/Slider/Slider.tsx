@@ -3,7 +3,7 @@ import React, { useEffect } from "react"
 import { SliderItemStyled, SliderOuterStyled } from "./Slider.styles"
 import type { SliderProps } from "./Slider.types"
 
-// Single source of truth — CSS transition reads the same token via getReactToken(...).var
+// Single source of truth — CSS transition reads the same token via getReactToken(...)
 const animationDurationMs = parseInt(getReactTokenValue("animationDuration", "base"), 10)
 
 const Slider: React.FC<SliderProps> = ({
