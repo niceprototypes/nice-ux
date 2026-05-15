@@ -11,8 +11,8 @@ const OuterFlex$1 = styled(Flex).withConfig({
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  background-color: ${({ $mode }) => getReactToken("backgroundColor", "base", $mode).var};
-  color: ${({ $mode }) => getReactToken("foregroundColor", "base", $mode).var};
+  background-color: ${({ $mode }) => getReactToken("backgroundColor", "base", $mode)};
+  color: ${({ $mode }) => getReactToken("foregroundColor", "base", $mode)};
 
   ${({ $backgroundColor }) => {
     if ($backgroundColor) {
@@ -125,19 +125,7 @@ const Tile = withBreakpoints(Tile$1);
  */
 const TileStyles = () => null;
 
-/**
- * Get a tile component token.
- *
- * Flat lookup — for tokens at depth 1 (e.g., "backgroundColor", "foregroundColor"):
- * ```ts
- * getTileToken("backgroundColor", "base")
- * ```
- *
- * Path lookup — for nested tokens:
- * ```ts
- * getTileToken(["group", "variant", "parameter"])
- * ```
- */
+/** Returns the `var(--np--tile--…)` reference. */
 function getTileToken(nameOrPath, variantOrMode, mode) {
     if (Array.isArray(nameOrPath)) {
         return getComponentToken("tile", nameOrPath, variantOrMode);

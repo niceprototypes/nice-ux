@@ -1,16 +1,7 @@
-import { type TokenResult } from "nice-react-styles";
-/**
- * Get a tile component token.
- *
- * Flat lookup — for tokens at depth 1 (e.g., "backgroundColor", "foregroundColor"):
- * ```ts
- * getTileToken("backgroundColor", "base")
- * ```
- *
- * Path lookup — for nested tokens:
- * ```ts
- * getTileToken(["group", "variant", "parameter"])
- * ```
- */
-export declare function getTileToken(nameOrPath: string | string[], variantOrMode?: string, mode?: string): TokenResult;
+/** Returns the `var(--np--tile--…)` reference. */
+export declare function getTileToken(nameOrPath: string | string[], variantOrMode?: string, mode?: string): string;
+/** Returns the bare CSS variable name. */
+export declare function getTileTokenKey(nameOrPath: string | string[], variantOrMode?: string, mode?: string): string;
+/** Returns the raw underlying value. */
+export declare function getTileTokenValue(nameOrPath: string | string[], variantOrMode?: string, mode?: string): string;
 //# sourceMappingURL=getTileToken.d.ts.map

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ComponentType } from 'react';
-import { Breakpoints, GapType, ModeType, WithBreakpointsProps, TokenResult } from 'nice-react-styles';
+import { Breakpoints, GapType, ModeType, WithBreakpointsProps } from 'nice-react-styles';
 import { FlexProps, FlexSpacingType } from 'nice-react-flex';
 import { TypographyProps } from 'nice-react-typography';
 
@@ -95,20 +95,8 @@ declare const Tile: React.FC<WithBreakpointsProps<TileProps>>;
  */
 declare const TileStyles: ComponentType;
 
-/**
- * Get a tile component token.
- *
- * Flat lookup — for tokens at depth 1 (e.g., "backgroundColor", "foregroundColor"):
- * ```ts
- * getTileToken("backgroundColor", "base")
- * ```
- *
- * Path lookup — for nested tokens:
- * ```ts
- * getTileToken(["group", "variant", "parameter"])
- * ```
- */
-declare function getTileToken(nameOrPath: string | string[], variantOrMode?: string, mode?: string): TokenResult;
+/** Returns the `var(--np--tile--…)` reference. */
+declare function getTileToken(nameOrPath: string | string[], variantOrMode?: string, mode?: string): string;
 
 export { TileStyles, TileTypes, Tile as default, getTileToken };
 export type { TileAlignItemsType, TileJustifyContentType, TileMaxWidthType, TileMaxWidthValueType, TileProps, TileTypographyProps };
