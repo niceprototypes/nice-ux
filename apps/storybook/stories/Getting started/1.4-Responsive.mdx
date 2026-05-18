@@ -7,27 +7,15 @@ import { Meta } from "@storybook/addon-docs/blocks"
 
 # Responsive
 
-The unsuffixed semantic variable auto-switches across breakpoints — no
-consumer `@media` needed. Nice's `variables.css` already contains the
-`@media (min-width: …)` rules that reassign the semantic var to the matching
-`--{breakpoint}` primitive at each threshold:
+```bash
+npm install nice-styles
+```
 
 ```css
 .heading {
-  /* Auto-resolves per viewport — 14px on phone+tablet, 16px on laptop+desktop */
   font-size: var(--np--font-size--base);
 }
 ```
-
-The examples below are the contrast — they're for when you *don't* want
-auto-switching. Use them to pin a value to one viewport, or to wrap a
-non-`fontSize` rule in a Nice-aligned `@media` block.
-
-### Example 1 · Use a breakpoint-pinned token
-
-Some token groups (e.g. `fontSize`, `cellHeight`) emit a stable primitive for
-each viewport. Reference the desktop primitive directly to pin a value to the
-desktop viewport.
 
 ```css
 @import "nice-styles/variables.css";
@@ -38,13 +26,6 @@ desktop viewport.
   }
 }
 ```
-
----
-
-### Example 2 · Same rule using `getBreakpoint`
-
-Same as Example 1, but the `@media` line comes from `getBreakpoint("desktop")`
-instead of being hardcoded.
 
 ```js
 import { getBreakpoint } from "nice-styles"

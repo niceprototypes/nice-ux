@@ -1,6 +1,6 @@
 import Flex from "nice-react-flex"
 import Typography from "../../../../../src/nice/Typography"
-import { getReactToken } from "nice-react-styles"
+import { getToken } from "nice-react-styles"
 import Story from "../../../../../src/components/Story"
 
 const CurrentIndexStory = () => (
@@ -36,16 +36,16 @@ const CurrentIndexStory = () => (
             <Flex gap="small">
               <Flex
                 style={{
-                  padding: `${getReactToken("gap", "smaller")} ${getReactToken("gap", "small")}`,
-                  borderRadius: getReactToken("borderRadius", "small"),
+                  padding: `${getToken("gap", "smaller")} ${getToken("gap", "small")}`,
+                  borderRadius: getToken("borderRadius", "small"),
                 }}
               >
                 <Typography size="smaller">Previous: index - 1</Typography>
               </Flex>
               <Flex
                 style={{
-                  padding: `${getReactToken("gap", "smaller")} ${getReactToken("gap", "small")}`,
-                  borderRadius: getReactToken("borderRadius", "small"),
+                  padding: `${getToken("gap", "smaller")} ${getToken("gap", "small")}`,
+                  borderRadius: getToken("borderRadius", "small"),
                 }}
               >
                 <Typography size="smaller">Next: index + 1</Typography>

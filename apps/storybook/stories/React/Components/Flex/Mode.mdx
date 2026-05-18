@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import Flex from "nice-react-flex"
-import { getReactToken } from "nice-react-styles"
+import { getToken } from "nice-react-styles"
 import Typography from "../../../../src/nice/Typography"
 import { DocsRow } from "../../../../src/components/DocsRow"
 import DemoDots from "../../../../src/components/DemoDots"
@@ -22,15 +22,15 @@ import { twoDots } from "./Flex.services"
         <Flex direction="column">
           <Flex
             style={{
-              border: `${getReactToken("borderWidth")} solid ${value === "margin" ? getReactToken("borderColor") : getReactToken("borderColor", "dark")}`,
-              borderRadius: `calc(${getReactToken("cellHeight", "smaller")} / 2 + 2px)`,
+              border: `${getToken("borderWidth")} solid ${value === "margin" ? getToken("borderColor") : getToken("borderColor", "dark")}`,
+              borderRadius: `calc(${getToken("cellHeight", "smaller")} / 2 + 2px)`,
             }}
           >
             <Flex
               mode={value}
               style={{
-                border: `${getReactToken("borderWidth")} solid ${value === "margin" ? getReactToken("borderColor", "dark") : "transparent"}`,
-                borderRadius: `calc(${getReactToken("cellHeight", "smaller")} / 2 + 2px)`,
+                border: `${getToken("borderWidth")} solid ${value === "margin" ? getToken("borderColor", "dark") : "transparent"}`,
+                borderRadius: `calc(${getToken("cellHeight", "smaller")} / 2 + 2px)`,
               }}
             >
               <DemoDots dots={twoDots} />

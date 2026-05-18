@@ -7,39 +7,28 @@ import { Meta } from "@storybook/addon-docs/blocks"
 
 # Styles + responsive
 
-The same `getReactToken()` resolves to a different value at each breakpoint.
-The media query lives in `nice-styles/variables.css` — the component reads
-one var.
-
-### Auto-responsive token
+```bash
+npm install nice-react-styles styled-components
+```
 
 ```tsx
 import styled from "styled-components"
-import { getReactToken } from "nice-react-styles"
+import { getToken } from "nice-react-styles"
 
 const Heading = styled.h1`
-  font-size: ${getReactToken("fontSize", "larger")};
+  font-size: ${getToken("fontSize", "larger")};
 `
 ```
 
-The CSS variable behind `fontSize.larger` is reassigned by media queries in
-`variables.css`. No per-breakpoint code in the component.
-
-### Custom media query via `getBreakpoint`
-
 ```tsx
 import styled from "styled-components"
-import { getBreakpoint, getReactToken } from "nice-react-styles"
+import { getBreakpoint, getToken } from "nice-react-styles"
 
 const Wrapper = styled.div`
-  padding: ${getReactToken("gap", "base")};
+  padding: ${getToken("gap", "base")};
 
   ${getBreakpoint("laptop")} {
-    padding: ${getReactToken("gap", "large")};
+    padding: ${getToken("gap", "large")};
   }
 `
 ```
-
-`getBreakpoint(name)` returns the `@media` query string directly (including
-the `@media` prefix) — interpolate it as-is. Use `getBreakpointValue(name)`
-when you need the raw pixel number instead.

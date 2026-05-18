@@ -1,7 +1,7 @@
 import { ScrollProvider, FadeOnScroll } from "nice-react-scroll"
 import Flex from "nice-react-flex"
 import Typography from "../../../../../src/nice/Typography"
-import { getReactToken } from "nice-react-styles"
+import { getToken } from "nice-react-styles"
 import Story from "../../../../../src/components/Story"
 
 const FadeOnScrollBasicStory = () => (
@@ -22,8 +22,8 @@ const FadeOnScrollBasicStory = () => (
             >
               <Flex
                 style={{
-                  padding: getReactToken("gap", "base"),
-                  borderRadius: getReactToken("borderRadius", "base"),
+                  padding: getToken("gap", "base"),
+                  borderRadius: getToken("borderRadius", "base"),
                 }}
               >
                 <Typography>

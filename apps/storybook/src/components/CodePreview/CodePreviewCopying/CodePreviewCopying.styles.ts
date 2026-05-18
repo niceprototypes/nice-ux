@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { getReactToken } from "nice-react-styles"
+import { getToken } from "nice-react-styles"
 import Flex, { FlexProps } from "nice-react-flex"
 import Typography, { TypographyProps } from "../../../nice/Typography"
 
@@ -9,7 +9,7 @@ export const colors = {
 
 export const CopyingFlex = styled(Flex)<FlexProps>`
   background-color: hsla(220, 5%, 15%, 1);
-  border-radius: ${getReactToken("borderRadius", "base")};
+  border-radius: ${getToken("borderRadius", "base")};
   position: absolute;
   top: 0;
   left: 0;

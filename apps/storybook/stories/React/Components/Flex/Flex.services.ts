@@ -1,23 +1,23 @@
-import { getReactToken } from "nice-react-styles"
+import { getToken } from "nice-react-styles"
 
 export const twoDots = [
   {
-    color: getReactToken("foregroundColor", "error"),
-    height: getReactToken("cellHeight", "smaller"),
-    width: getReactToken("cellHeight", "smaller"),
+    color: getToken("foregroundColor", "error"),
+    height: getToken("cellHeight", "smaller"),
+    width: getToken("cellHeight", "smaller"),
   },
   {
-    color: getReactToken("foregroundColor", "warning"),
-    height: getReactToken("cellHeight", "smaller"),
-    width: getReactToken("cellHeight", "smaller"),
+    color: getToken("foregroundColor", "warning"),
+    height: getToken("cellHeight", "smaller"),
+    width: getToken("cellHeight", "smaller"),
   },
 ]
 
 export const threeDots = [
   ...twoDots,
   {
-    color: getReactToken("foregroundColor", "link"),
-    height: getReactToken("cellHeight", "smaller"),
-    width: getReactToken("cellHeight", "smaller"),
+    color: getToken("foregroundColor", "link"),
+    height: getToken("cellHeight", "smaller"),
+    width: getToken("cellHeight", "smaller"),
   },
 ]

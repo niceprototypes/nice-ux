@@ -7,9 +7,9 @@ import { Meta } from "@storybook/addon-docs/blocks"
 
 # Typography
 
-First component consumer. Default tokens, no overrides.
-
-### Mount
+```bash
+npm install nice-react-styles nice-react-typography
+```
 
 ```tsx
 import { StylesProvider } from "nice-react-styles"
@@ -24,12 +24,3 @@ import Typography from "nice-react-typography"
   </Typography>
 </StylesProvider>
 ```
-
-### Token-driven props
-
-| Prop      | Token group         |
-|-----------|---------------------|
-| `size`    | `fontSize`          |
-| `color`   | `foregroundColor`   |
-| `weight`  | `fontWeight`        |
-| `as`      | `h1` / `h2` / `h3` / `h4` / `p` / `span` |

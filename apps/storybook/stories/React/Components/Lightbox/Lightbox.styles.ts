@@ -1,8 +1,8 @@
 import styled from "styled-components"
-import { getReactToken } from "nice-react-styles"
+import { getToken } from "nice-react-styles"
 
 export const DemoImage = styled.img`
   width: 200px;
-  border-radius: ${getReactToken("borderRadius", "base")};
+  border-radius: ${getToken("borderRadius", "base")};
   cursor: pointer;
 `

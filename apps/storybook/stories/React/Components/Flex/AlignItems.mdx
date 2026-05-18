@@ -1,5 +1,5 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import { getReactToken } from "nice-react-styles"
+import { getToken } from "nice-react-styles"
 import StoryDescription from "../../../../src/components/StoryDescription"
 import { DocsRow } from "../../../../src/components/DocsRow"
 import DemoDots from "../../../../src/components/DemoDots"
@@ -9,34 +9,34 @@ import { threeDots } from "./Flex.services"
 
 export const baselineDots = [
   {
-    color: getReactToken("foregroundColor", "error"),
-    height: getReactToken("cellHeight", "small"),
-    width: getReactToken("cellHeight", "smaller"),
+    color: getToken("foregroundColor", "error"),
+    height: getToken("cellHeight", "small"),
+    width: getToken("cellHeight", "smaller"),
   },
   {
-    color: getReactToken("foregroundColor", "warning"),
-    height: getReactToken("cellHeight", "smaller"),
-    width: getReactToken("cellHeight", "smaller"),
+    color: getToken("foregroundColor", "warning"),
+    height: getToken("cellHeight", "smaller"),
+    width: getToken("cellHeight", "smaller"),
   },
   {
-    color: getReactToken("foregroundColor", "link"),
-    height: getReactToken("cellHeight"),
-    width: getReactToken("cellHeight", "smaller"),
+    color: getToken("foregroundColor", "link"),
+    height: getToken("cellHeight"),
+    width: getToken("cellHeight", "smaller"),
   },
 ]
 
 export const stretchDots = [
   {
-    color: getReactToken("foregroundColor", "error"),
-    width: getReactToken("cellHeight", "smaller"),
+    color: getToken("foregroundColor", "error"),
+    width: getToken("cellHeight", "smaller"),
   },
   {
-    color: getReactToken("foregroundColor", "warning"),
-    width: getReactToken("cellHeight", "smaller"),
+    color: getToken("foregroundColor", "warning"),
+    width: getToken("cellHeight", "smaller"),
   },
   {
-    color: getReactToken("foregroundColor", "link"),
-    width: getReactToken("cellHeight", "smaller"),
+    color: getToken("foregroundColor", "link"),
+    width: getToken("cellHeight", "smaller"),
   },
 ]
 

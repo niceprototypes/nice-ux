@@ -1,4 +1,4 @@
-import { getReactToken, getReactTokenKey, getReactTokenValue } from "nice-react-styles"
+import { getToken, getTokenKey, getTokenValue } from "nice-react-styles"
 import type { StoryVariable } from "../components/Story"
 
 export const createToken = <T extends string | { name: string }>(
@@ -11,9 +11,9 @@ export const createToken = <T extends string | { name: string }>(
 
     return {
       name: itemName,
-      key: getReactTokenKey(groupName as any, itemName),
-      var: getReactToken(groupName as any, itemName),
-      value: getReactTokenValue(groupName as any, itemName),
+      key: getTokenKey(groupName as any, itemName),
+      var: getToken(groupName as any, itemName),
+      value: getTokenValue(groupName as any, itemName),
       demo: renderDemo ? renderDemo(variant as any) : undefined,
     }
   })

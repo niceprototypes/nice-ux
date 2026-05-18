@@ -7,9 +7,9 @@ import { Meta } from "@storybook/addon-docs/blocks"
 
 # Typography with overrides
 
-Same JSX as the previous page. Every visual change comes from the token map.
-
-### Override tokens
+```bash
+npm install nice-react-styles nice-react-typography
+```
 
 ```tsx
 // tokens.ts
@@ -35,8 +35,6 @@ export const { GlobalStyles } = createTokens({
   },
 } as const)
 ```
-
-### Mount
 
 ```tsx
 import { StylesProvider } from "nice-react-styles"

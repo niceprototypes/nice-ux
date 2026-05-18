@@ -1,5 +1,5 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import { getReactToken } from "nice-react-styles"
+import { getToken } from "nice-react-styles"
 import StoryDescription from "../../../../src/components/StoryDescription"
 import { DocsRow } from "../../../../src/components/DocsRow"
 import DemoDots from "../../../../src/components/DemoDots"
@@ -22,14 +22,14 @@ export const growCode = a =>
       width="12rem"
       dots={[
         {
-          color: getReactToken("foregroundColor", "error"),
-          height: getReactToken("cellHeight", "smaller"),
-          width: getReactToken("cellHeight", "smaller"),
+          color: getToken("foregroundColor", "error"),
+          height: getToken("cellHeight", "smaller"),
+          width: getToken("cellHeight", "smaller"),
           grow: 0,
         },
         {
-          color: getReactToken("foregroundColor", "link"),
-          height: getReactToken("cellHeight", "smaller"),
+          color: getToken("foregroundColor", "link"),
+          height: getToken("cellHeight", "smaller"),
           grow: 1,
         },
       ]}
@@ -46,13 +46,13 @@ export const growCode = a =>
       width="12rem"
       dots={[
         {
-          color: getReactToken("foregroundColor", "error"),
-          height: getReactToken("cellHeight", "smaller"),
+          color: getToken("foregroundColor", "error"),
+          height: getToken("cellHeight", "smaller"),
           grow: 1,
         },
         {
-          color: getReactToken("foregroundColor", "link"),
-          height: getReactToken("cellHeight", "smaller"),
+          color: getToken("foregroundColor", "link"),
+          height: getToken("cellHeight", "smaller"),
           grow: 1,
         },
       ]}
@@ -69,13 +69,13 @@ export const growCode = a =>
       width="12rem"
       dots={[
         {
-          color: getReactToken("foregroundColor", "error"),
-          height: getReactToken("cellHeight", "smaller"),
+          color: getToken("foregroundColor", "error"),
+          height: getToken("cellHeight", "smaller"),
           grow: 2,
         },
         {
-          color: getReactToken("foregroundColor", "link"),
-          height: getReactToken("cellHeight", "smaller"),
+          color: getToken("foregroundColor", "link"),
+          height: getToken("cellHeight", "smaller"),
           grow: 1,
         },
       ]}

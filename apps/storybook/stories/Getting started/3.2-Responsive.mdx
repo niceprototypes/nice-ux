@@ -7,19 +7,9 @@ import { Meta } from "@storybook/addon-docs/blocks"
 
 # Styles + fonts + responsive
 
-A variant value can be a static string, a breakpoint object, or a mode object.
-Detected automatically by `createTokens()`.
-
-| Format       | Trigger key | Example                                  |
-|--------------|-------------|------------------------------------------|
-| Static       | (string)    | `"16px"`                                 |
-| Breakpoints  | `phone`     | `{ phone: "16px", laptop: "24px" }`      |
-| Modes        | `day`       | `{ day: "#000", night: "#fff" }`         |
-
-Detection order: breakpoint → mode → static. If an object has both `phone`
-and `day`, breakpoint wins.
-
-### Mixed example
+```bash
+npm install nice-react-styles
+```
 
 ```tsx
 import { createTokens } from "nice-react-styles"
@@ -39,8 +29,6 @@ export const { GlobalStyles } = createTokens({
 } as const)
 ```
 
-### Generated CSS (sketch)
-
 ```css
 :root {
   --np--gap--base: 16px;                              /* phone default */
@@ -58,6 +46,3 @@ export const { GlobalStyles } = createTokens({
   :root { --np--brand-color--primary: var(--np--brand-color--primary--night); }
 }
 ```
-
-The `--day` and `--night` primitives are stable — they are never reassigned
-by media queries.

@@ -1,6 +1,6 @@
 import Flex from "nice-react-flex"
 import Typography from "../../../../../src/nice/Typography"
-import { getReactToken } from "nice-react-styles"
+import { getToken } from "nice-react-styles"
 import Story from "../../../../../src/components/Story"
 
 const StickyOrderStory = () => (
@@ -24,9 +24,9 @@ const StickyOrderStory = () => (
             <Flex gap="small">
               <Flex
                 style={{
-                  padding: `${getReactToken("gap", "smaller")} ${getReactToken("gap", "small")}`,
-                  backgroundColor: getReactToken("foregroundColor", "error"),
-                  borderRadius: getReactToken("borderRadius", "small"),
+                  padding: `${getToken("gap", "smaller")} ${getToken("gap", "small")}`,
+                  backgroundColor: getToken("foregroundColor", "error"),
+                  borderRadius: getToken("borderRadius", "small"),
                 }}
               >
                 <Typography
@@ -38,9 +38,9 @@ const StickyOrderStory = () => (
               </Flex>
               <Flex
                 style={{
-                  padding: `${getReactToken("gap", "smaller")} ${getReactToken("gap", "small")}`,
-                  backgroundColor: getReactToken("foregroundColor", "warning"),
-                  borderRadius: getReactToken("borderRadius", "small"),
+                  padding: `${getToken("gap", "smaller")} ${getToken("gap", "small")}`,
+                  backgroundColor: getToken("foregroundColor", "warning"),
+                  borderRadius: getToken("borderRadius", "small"),
                 }}
               >
                 <Typography

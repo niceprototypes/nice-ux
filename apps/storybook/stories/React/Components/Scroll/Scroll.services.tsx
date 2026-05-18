@@ -1,7 +1,7 @@
 import Flex from "nice-react-flex"
 import Typography from "../../../../src/nice/Typography"
 import { useScroll } from "nice-react-scroll"
-import { getReactToken } from "nice-react-styles"
+import { getToken } from "nice-react-styles"
 
 export const ScrollPositionDisplay = () => {
   const scrollY = useScroll()
@@ -26,7 +26,7 @@ export const SectionContent = ({
     direction="column"
     gap="base"
     style={{
-      padding: getReactToken("gap", "large"),
+      padding: getToken("gap", "large"),
       minHeight: "50vh",
       backgroundColor: color,
     }}

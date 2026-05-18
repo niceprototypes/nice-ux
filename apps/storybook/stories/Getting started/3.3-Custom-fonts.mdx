@@ -7,9 +7,9 @@ import { Meta } from "@storybook/addon-docs/blocks"
 
 # Styles + fonts
 
-Static overrides and custom token groups. No responsive values yet.
-
-### Define overrides
+```bash
+npm install nice-react-styles
+```
 
 ```tsx
 // tokens.ts
@@ -24,8 +24,6 @@ export const { GlobalStyles } = createTokens({
 } as const)
 ```
 
-### Mount
-
 ```tsx
 import { StylesProvider } from "nice-react-styles"
 import { GlobalStyles } from "./tokens"
@@ -36,11 +34,9 @@ import { GlobalStyles } from "./tokens"
 </StylesProvider>
 ```
 
-### Read overridden + custom tokens
-
 ```tsx
-import { getReactToken } from "nice-react-styles"
+import { getToken } from "nice-react-styles"
 
-getReactToken("fontSize", "base")      // var(--np--font-size--base)  → 18px
-getReactToken("brandColor", "primary") // var(--np--brand-color--primary) → #dc0000
+getToken("fontSize", "base")      // var(--np--font-size--base)  → 18px
+getToken("brandColor", "primary") // var(--np--brand-color--primary) → #dc0000
 ```

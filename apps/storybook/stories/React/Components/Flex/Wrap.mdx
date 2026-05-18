@@ -1,5 +1,5 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import { getReactToken } from "nice-react-styles"
+import { getToken } from "nice-react-styles"
 import StoryDescription from "../../../../src/components/StoryDescription"
 import { DocsRow } from "../../../../src/components/DocsRow"
 import DemoDots from "../../../../src/components/DemoDots"
@@ -8,29 +8,29 @@ import DemoDots from "../../../../src/components/DemoDots"
 
 export const wrapDots = [
   {
-    color: getReactToken("foregroundColor", "error"),
-    height: getReactToken("cellHeight", "small"),
-    width: getReactToken("cellHeight", "small"),
+    color: getToken("foregroundColor", "error"),
+    height: getToken("cellHeight", "small"),
+    width: getToken("cellHeight", "small"),
   },
   {
-    color: getReactToken("foregroundColor", "warning"),
-    height: getReactToken("cellHeight", "small"),
-    width: getReactToken("cellHeight", "small"),
+    color: getToken("foregroundColor", "warning"),
+    height: getToken("cellHeight", "small"),
+    width: getToken("cellHeight", "small"),
   },
   {
-    color: getReactToken("foregroundColor", "link"),
-    height: getReactToken("cellHeight", "small"),
-    width: getReactToken("cellHeight", "small"),
+    color: getToken("foregroundColor", "link"),
+    height: getToken("cellHeight", "small"),
+    width: getToken("cellHeight", "small"),
   },
   {
-    color: getReactToken("foregroundColor", "success"),
-    height: getReactToken("cellHeight", "small"),
-    width: getReactToken("cellHeight", "small"),
+    color: getToken("foregroundColor", "success"),
+    height: getToken("cellHeight", "small"),
+    width: getToken("cellHeight", "small"),
   },
   {
-    color: getReactToken("foregroundColor", "disabled"),
-    height: getReactToken("cellHeight", "small"),
-    width: getReactToken("cellHeight", "small"),
+    color: getToken("foregroundColor", "disabled"),
+    height: getToken("cellHeight", "small"),
+    width: getToken("cellHeight", "small"),
   },
 ]
 
@@ -40,7 +40,7 @@ export const nowrapDots = wrapDots.map(dot => ({
   width: undefined,
 }))
 
-export const wrapWidth = `calc(${getReactToken("cellHeight", "small")} * 3 + 2px)`
+export const wrapWidth = `calc(${getToken("cellHeight", "small")} * 3 + 2px)`
 
 # Flex — Wrap
 

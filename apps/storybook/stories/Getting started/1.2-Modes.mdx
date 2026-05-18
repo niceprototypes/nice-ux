@@ -7,31 +7,25 @@ import { Meta } from "@storybook/addon-docs/blocks"
 
 # Mode-pinned tokens
 
-Every color variant emits two stable primitives — `--day` and `--night` —
-that are never reassigned. Alias them when you need a fixed mode that
-ignores the user's OS preference.
+```bash
+npm install nice-styles
+```
 
 ```css
 @import "nice-styles/variables.css";
 
 :root {
-  /* Day-pinned — stays light even in dark mode */
-  --success-day: var(--np--foreground-color--success--day);
-  --warning-day: var(--np--foreground-color--warning--day);
-  --error-day:   var(--np--foreground-color--error--day);
-  --link-day:    var(--np--foreground-color--link--day);
+  --success-day:   var(--np--foreground-color--success--day);
+  --warning-day:   var(--np--foreground-color--warning--day);
+  --error-day:     var(--np--foreground-color--error--day);
+  --link-day:      var(--np--foreground-color--link--day);
 
-  /* Night-pinned — stays dark even in light mode */
   --success-night: var(--np--foreground-color--success--night);
   --warning-night: var(--np--foreground-color--warning--night);
   --error-night:   var(--np--foreground-color--error--night);
   --link-night:    var(--np--foreground-color--link--night);
 }
 
-.toast--success      { color: var(--success); }        /* auto-switches */
-.toast--success.dark { color: var(--success-night); }  /* always night */
+.toast--success      { color: var(--success); }
+.toast--success.dark { color: var(--success-night); }
 ```
-
-Auto-switching ships with `variables.css` — the unsuffixed alias follows the
-user's OS preference automatically. The `*-day` and `*-night` siblings are for
-when you need to pin a value regardless of OS preference.
