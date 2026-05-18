@@ -22,15 +22,16 @@ font loading, and a typed token API for use inside components.
   that injects CSS variables onto `:root` and supplies a styled-components theme.
   Wrap your app root with it once.
 
-- **FontLoader** — Handles async web font loading so your layout doesn't shift.
-  _(Coming soon)_
+- [FontLoader](/docs/react-styles-fontloader--docs) — Handles async web font
+  loading so your layout doesn't shift. Used internally by `StylesProvider`
+  via the `loadFonts` and `googleFonts` props.
 
-- [getReactToken](/docs/react-styles-gettoken--docs) — Typed accessor for token keys,
+- [getToken](/docs/react-styles-gettoken--docs) — Typed accessor for token keys,
   CSS `var()` strings, and resolved values. Use it in styled-components template
   literals or inline styles.
 
 - [createTokens](/docs/react-styles-createtokens--docs) — Registers a custom
-  token map and returns `GlobalStyles` plus a scoped `getReactToken`. Use it to extend
+  token map and returns `GlobalStyles` plus a scoped `getToken`. Use it to extend
   the base tokens with project-specific values.
 
 - [setBreakpoints](/docs/react-styles-setbreakpoints--docs) — Overrides the

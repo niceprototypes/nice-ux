@@ -1,0 +1,72 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta
+  title="React/Styles/FontLoader"
+  name="Docs"
+/>
+
+# FontLoader
+
+```bash
+npm install nice-react-styles
+```
+
+### Setup
+
+```jsx
+import { FontLoader } from "nice-react-styles"
+```
+
+### Usage
+
+```jsx
+<FontLoader links={links} />
+```
+
+---
+
+## What it does
+
+`FontLoader` renders `<link>` elements into the document head for async web font loading. It applies the standard preconnect + stylesheet pattern so layout doesn't shift while the font downloads.
+
+It is used internally by [StylesProvider](/docs/react-styles-stylesprovider--docs) when the `loadFonts` or `googleFonts` prop is set — most apps will not import `FontLoader` directly.
+
+## Direct usage
+
+Pass an array of link descriptors. Each entry is rendered as a `<link>` with the given attributes.
+
+```tsx
+import { FontLoader } from "nice-react-styles"
+
+const links = [
+  { rel: "preconnect", href: "https://fonts.googleapis.com" },
+  { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+  { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" },
+]
+
+<FontLoader links={links} />
+```
+
+## Via StylesProvider
+
+The common path. `loadFonts` loads the nice-styles defaults (Google Sans Flex + Roboto Mono):
+
+```tsx
+<StylesProvider loadFonts>
+  <App />
+</StylesProvider>
+```
+
+A custom Google Fonts URL string:
+
+```tsx
+<StylesProvider googleFonts="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
+  <App />
+</StylesProvider>
+```
+
+## Props
+
+| Prop    | Type                | Description                                              |
+|---------|---------------------|----------------------------------------------------------|
+| `links` | `LinkAttributes[]`  | Array of `{ rel, href, crossOrigin?, media? }` entries — each rendered as a `<link>` element. |
