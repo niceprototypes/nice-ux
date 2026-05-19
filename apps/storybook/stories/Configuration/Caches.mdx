@@ -18,7 +18,7 @@ Eight cache layers can hold stale state in a Nice workspace. Three workspace-lev
 | 1 | Global npm cache | `~/.npm/_cacache` | `npm cache clean --force` |
 | 2 | Consumer `node_modules` + lockfile | `<consumer>/node_modules`, `<consumer>/package-lock.json` | `rm -rf node_modules package-lock.json && npm install` (or `website` `npm run clean`) |
 | 3 | Build-tool on-disk caches (webpack, Vite, …)¹ | `<consumer>/node_modules/{.cache, .vite, …}` | `ntk --clean-caches` |
-| 4 | Linked package singleton conflicts | `<linked-pkg>/node_modules/{react,styled-components,…}` | `ntk --clean-all` |
+| 4 | Linked package singleton conflicts | `<linked-pkg>/node_modules/{react,styled-components,…}` | `ntk --dedupe` |
 | 5 | nice-* package dists | `<nice-pkg>/dist/` | each package's `npm run build`, or `ntk --build-all` |
 | 6 | Generated source (nice-styles only) | `nice-styles/src/generated/` | `nice-styles`'s `npm run build` (runs `clean.ts` first) |
 | 7 | Dev-server process (in-memory module graph + held port) | running webpack-dev-server / Vite | `ntk --clean-caches` kills processes on declared ports; manual restart after |
@@ -30,13 +30,13 @@ Eight cache layers can hold stale state in a Nice workspace. Three workspace-lev
 
 ## The three `ntk` operations
 
-`ntk --clean-caches`, `--clean-all`, and `--build-all` are the workspace-level toolkit operations. They do not overlap. Each addresses a distinct layer at a distinct location. Mistaking one for another produces silent failure.
+`ntk --clean-caches`, `--dedupe`, and `--build-all` are the workspace-level toolkit operations. They do not overlap. Each addresses a distinct layer at a distinct location. Mistaking one for another produces silent failure.
 
 ### Distinct targets
 
 ```bash
 ntk --clean-caches    →    <consumer>/node_modules/{.cache, .vite} + processes on declared ports    (layers 3 + 7)
-ntk --clean-all       →    <linked-pkg>/node_modules/<singleton>                                     (layer 4)
+ntk --dedupe       →    <linked-pkg>/node_modules/<singleton>                                     (layer 4)
 ntk --build-all       →    <linked-pkg>/dist/                                                        (layer 5)
 ```
 
@@ -45,7 +45,7 @@ ntk --build-all       →    <linked-pkg>/dist/                                 
 | Command | What it does | What it does **not** do |
 |---|---|---|
 | `ntk --clean-caches` | Discovers each consumer's dev-server ports (parses `.env` `PORT=` entries and `package.json` script `-p`/`--port` flags), kills any process bound to those ports, then wipes webpack `.cache` and Vite `.vite` from every consumer's `node_modules` | Doesn't rebuild anything. Doesn't touch linked package internals. Doesn't reinstall. Doesn't restart killed servers. |
-| `ntk --clean-all` | Removes duplicate `react` / `react-dom` / `styled-components` / etc. from every linked nice-* package's `node_modules` | Doesn't rebuild any dist. Doesn't touch consumer caches. Doesn't reinstall. |
+| `ntk --dedupe` | Removes duplicate `react` / `react-dom` / `styled-components` / etc. from every linked nice-* package's `node_modules` | Doesn't rebuild any dist. Doesn't touch consumer caches. Doesn't reinstall. |
 | `ntk --build-all` | Walks registry tier order, runs `npm run build` in every linked nice-* package | Doesn't clear any cache. Doesn't touch consumer `node_modules`. Doesn't restart dev servers. |
 
 The port-kill in `ntk --clean-caches` exists because a running dev server holds an in-memory module graph and repopulates its on-disk cache the moment it's wiped. Wiping cache without killing the server is a no-op against the observable symptom. Use `--no-kill` to wipe caches only (e.g. CI environments).
@@ -56,7 +56,7 @@ For the "everything is stale" reset, the three are chained in this order:
 
 ```bash
 ntk --clean-caches    # kill dev servers + invalidate layer 3
-ntk --clean-all       # resolve layer 4 singleton drift
+ntk --dedupe       # resolve layer 4 singleton drift
 ntk --build-all       # rebuild layer 5 in tier order
 ```
 
@@ -65,7 +65,7 @@ Then restart any dev server (`npm run dev` in each consumer) and hard-reload the
 **Order matters:**
 
 - **`--clean-caches` first** so the consumer's dev server is killed and its build-tool analysis is invalidated before the new dist appears.
-- **`--clean-all` before `--build-all`** so singleton cleanup doesn't run *after* a build that expected the singletons in place.
+- **`--dedupe` before `--build-all`** so singleton cleanup doesn't run *after* a build that expected the singletons in place.
 - **`--build-all` last** because it produces the artifact every later step reads.
 
 ---
@@ -96,7 +96,7 @@ Then restart the dev server (`npm run dev` inside the consumer) and hard-reload 
 #### "Invalid hook call" or styled-components context mismatch
 
 ```bash
-ntk --clean-all
+ntk --dedupe
 ```
 
 The classic duplicate-React-instance error. See [Toolkit](/docs/configuration-toolkit--docs) for the underlying cause.
@@ -125,7 +125,7 @@ The `prepare` hook no longer rebuilds linked packages on consumer installs (see 
 
 ```bash
 ntk --clean-caches
-ntk --clean-all
+ntk --dedupe
 ntk --build-all
 ```
 

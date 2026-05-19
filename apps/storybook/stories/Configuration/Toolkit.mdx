@@ -30,7 +30,7 @@ nice-react-tile/node_modules/react    ← Tile's React (CONFLICT!)
 nice-react-flex/node_modules/react    ← Flex's React (CONFLICT!)
 
 # The solution: clean all linked packages
-node ../toolkit/nice-toolkit --clean-all
+node ../toolkit/nice-toolkit --dedupe
 ```
 
 #### What It Removes
@@ -71,10 +71,10 @@ All nice-* packages use `file:` references for interdependencies. This enables l
 
 #### After Any Dependency Change
 
-Always run `--clean-all` after `npm install` or modifying dependencies:
+Always run `--dedupe` after `npm install` or modifying dependencies:
 
 ```bash
-node ../toolkit/nice-toolkit --clean-all
+node ../toolkit/nice-toolkit --dedupe
 ```
 
 ---
@@ -102,11 +102,11 @@ Three non-overlapping commands target the workspace-level concerns. Each address
 
 ```bash
 ntk --clean-caches    # consumer caches + dev-server processes  (layer 3 + 7)
-ntk --clean-all       # singleton conflicts in linked packages   (layer 4)
+ntk --dedupe       # singleton conflicts in linked packages   (layer 4)
 ntk --build-all       # rebuild every linked package's dist       (layer 5)
 ```
 
-For the "everything is stale" reset: `ntk --clean-caches && ntk --clean-all && ntk --build-all`, then restart any dev server.
+For the "everything is stale" reset: `ntk --clean-caches && ntk --dedupe && ntk --build-all`, then restart any dev server.
 
 ### --clean-caches
 
@@ -124,23 +124,23 @@ ntk --clean-caches --no-kill
 
 The port-kill exists because a running dev server holds an in-memory module graph and repopulates its on-disk cache on the next request — wiping cache without killing the server is a no-op against the observable symptom.
 
-### --clean-all
+### --dedupe
 
 Recursively find and clean singletons (react, styled-components, etc.) from all `file:` linked packages' `node_modules`. This is the fix for "Invalid hook call" and styled-components context mismatches.
 
 ```bash
 # Clean all linked packages at once
-ntk --clean-all
+ntk --dedupe
 
 # Preview what would be cleaned
-ntk --clean-all --dry-run
+ntk --dedupe --dry-run
 ```
 
 ### --build-all
 
 Walks the registry in tier order (foundation → context → utility → feature → application) and runs `npm run build` in every linked nice-* package that defines a build script. Replaces the `prepare` hook that was removed from package.json files (see `manifest/.nice/reports/npm-install-breaks-consumers.md`).
 
-Use after a fresh clone, after `--clean-all`, or after a foundation-package refactor.
+Use after a fresh clone, after `--dedupe`, or after a foundation-package refactor.
 
 ```bash
 ntk --build-all
@@ -214,7 +214,7 @@ Preview changes without making them:
 
 ```bash
 ntk --dry-run ../react-button
-ntk --dry-run --clean-all
+ntk --dry-run --dedupe
 ```
 
 #### --manager
@@ -361,7 +361,7 @@ ntk --dry-publish
 Re-run the link command to clean up duplicate React:
 
 ```bash
-ntk --clean-all
+ntk --dedupe
 ```
 
 #### Changes Not Appearing
@@ -395,5 +395,5 @@ cd - && ntk ../react-button
 
 # Option 2: Re-clean after installing
 cd ../react-button && npm install
-cd - && ntk --clean-all
+cd - && ntk --dedupe
 ```

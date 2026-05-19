@@ -289,7 +289,7 @@ npm run watch  # Runs: tsc --watch & node scripts/generate-css.ts --watch
 
 This is necessary because:
 
-1. nice-styles exports generated files (`variables.css`), not source
+1. nice-styles exports generated files (`tokens.css`), not source
 2. The build script transforms TypeScript objects → CSS custom properties
 3. Vite can't automatically run custom build scripts
 
