@@ -1,0 +1,1 @@
+[2026-05-19 12:00] patch: Update consumer call sites to the unified getToken from nice-react-styles (was getReactToken). Internal-only rename — Button's public props are unchanged. Comments updated to reference nice-styles' renamed CSS artifact (tokens.css).
