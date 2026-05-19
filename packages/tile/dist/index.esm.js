@@ -1,4 +1,4 @@
-import { getReactToken, getBreakpoint, withBreakpoints, getComponentToken } from 'nice-react-styles';
+import { getToken, getBreakpoint, withBreakpoints, getComponentToken } from 'nice-react-styles';
 import { jsxs, jsx, Fragment } from 'react/jsx-runtime';
 import 'react';
 import styled, { css } from 'styled-components';
@@ -11,8 +11,8 @@ const OuterFlex$1 = styled(Flex).withConfig({
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  background-color: ${({ $mode }) => getReactToken("backgroundColor", "base", $mode)};
-  color: ${({ $mode }) => getReactToken("foregroundColor", "base", $mode)};
+  background-color: ${({ $mode }) => getToken("backgroundColor", "base", $mode)};
+  color: ${({ $mode }) => getToken("foregroundColor", "base", $mode)};
 
   ${({ $backgroundColor }) => {
     if ($backgroundColor) {
