@@ -9,7 +9,7 @@
  */
 
 import styled, { css } from "styled-components"
-import { getReactToken, type BorderRadiusType, type ModeType } from "nice-react-styles"
+import { getToken, type BorderRadiusType, type ModeType } from "nice-react-styles"
 import type { ImageBackgroundSizeType, ImageBackgroundPositionType } from "./Image.types"
 
 /**
@@ -50,7 +50,7 @@ const sharedStyles = css<{
   ${({ $borderRadius, $mode }) =>
     $borderRadius &&
     css`
-      border-radius: ${getReactToken("borderRadius", $borderRadius, $mode)};
+      border-radius: ${getToken("borderRadius", $borderRadius, $mode)};
     `}
 `
 
@@ -68,7 +68,7 @@ export const StyledImg = styled.img<{
   ${({ $backgroundSize, $mode }) =>
     $backgroundSize &&
     css`
-      object-fit: ${getReactToken("backgroundSize", $backgroundSize, $mode)};
+      object-fit: ${getToken("backgroundSize", $backgroundSize, $mode)};
     `}
 
   /* Object position derived from backgroundPosition */
