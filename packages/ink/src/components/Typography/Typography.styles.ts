@@ -8,7 +8,7 @@
  */
 
 import styled, { css } from "styled-components"
-import { getReactToken, type ForegroundColorType, type FontSizeType, type FontWeightType, type LineHeightType, type ModeType } from "nice-react-styles"
+import { getToken, type ForegroundColorType, type FontSizeType, type FontWeightType, type LineHeightType, type ModeType } from "nice-react-styles"
 import { TypographyAsType, TypographyAlignType, TypographyLineClampType, TypographyWordBreakType } from "./Typography.types"
 import { styleAntialiasing } from "../../utilities/styleAntialiasing"
 
@@ -38,18 +38,18 @@ const isHeading = ($as: TypographyAsType): boolean =>
 const getFontFamily = ({ $as, $code }: { $as: TypographyAsType; $code?: boolean }) => {
   if ($code) {
     return css`
-      font-family: ${getReactToken("fontFamily", "code")};
+      font-family: ${getToken("fontFamily", "code")};
     `
   }
 
   if (isHeading($as)) {
     return css`
-      font-family: ${getReactToken("fontFamily", "heading")};
+      font-family: ${getToken("fontFamily", "heading")};
     `
   }
 
   return css`
-    font-family: ${getReactToken("fontFamily", "base")};
+    font-family: ${getToken("fontFamily", "base")};
   `
 }
 
@@ -57,7 +57,7 @@ const getColor = ({ $color, $mode }: { $color?: ForegroundColorType; $mode?: Mod
   if (!$color) return css`color: inherit;`
 
   return css`
-    color: ${getReactToken("foregroundColor", $color, $mode)};
+    color: ${getToken("foregroundColor", $color, $mode)};
   `
 }
 
@@ -84,21 +84,21 @@ const getFontSize = ({ $as, $size }: { $as: TypographyAsType; $size?: FontSizeTy
   }
 
   return css`
-    font-size: ${getReactToken("fontSize", effectiveFontSize)};
+    font-size: ${getToken("fontSize", effectiveFontSize)};
   `
 }
 
 const getFontWeight = ({ $as, $weight }: { $as: TypographyAsType; $weight?: FontWeightType }) => {
   if ($weight) {
     return css`
-      font-weight: ${getReactToken("fontWeight", $weight)};
+      font-weight: ${getToken("fontWeight", $weight)};
     `
   }
 
   // Default weights for headings
   if ($as === "h1" || $as === "h2" || $as === "h3") {
     return css`
-      font-weight: ${getReactToken("fontWeight", "bold")};
+      font-weight: ${getToken("fontWeight", "bold")};
     `
   }
 
@@ -118,7 +118,7 @@ const getLineHeight = ({ $lineHeight, $as }: { $lineHeight?: LineHeightType; $as
   const effectiveLineHeight = $lineHeight || (isHeading($as) ? "condensed" : "base")
 
   return css`
-    line-height: ${getReactToken("lineHeight", effectiveLineHeight)};
+    line-height: ${getToken("lineHeight", effectiveLineHeight)};
   `
 }
 
