@@ -26,7 +26,7 @@ export const getGapSize = (size?: GapSize): string | undefined => {
 
   // Check if it's a valid token key
   if (size === "smaller" || size === "small" || size === "base" || size === "large" || size === "larger") {
-    return getConstant("gap", size).var
+    return getConstant("gap", size)
   }
 
   // Otherwise return the custom string as-is
