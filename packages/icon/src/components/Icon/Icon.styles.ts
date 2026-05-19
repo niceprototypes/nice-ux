@@ -1,11 +1,7 @@
 import styled, { css, keyframes } from "styled-components"
 import { getIconToken } from "../../tokens/getIconToken"
-import { getReactToken, type ModeType } from "nice-react-styles"
+import { getToken, type ModeType } from "nice-react-styles"
 import type { IconSizeType, IconColorType, IconStrokeWidthType } from "./Icon.types"
-
-// Helper — calls getReactToken with optional mode
-const getColorToken = (color: string, mode?: ModeType) =>
-  mode ? getReactToken("foregroundColor", color, mode) : getReactToken("foregroundColor", color)
 
 const spin = keyframes`
   from {
@@ -32,7 +28,7 @@ export const IconWrapperStyled = styled.div.withConfig({
 }>`
   width: ${({ $size = "base" }) => getIconToken("size", $size)};
   height: ${({ $size = "base" }) => getIconToken("size", $size)};
-  color: ${({ $color = "base", $mode }) => getColorToken($color, $mode)};
+  color: ${({ $color = "base", $mode }) => getToken("foregroundColor", $color, $mode)};
   display: flex;
   flex-shrink: 0;
   justify-content: center;
@@ -52,12 +48,12 @@ export const IconWrapperStyled = styled.div.withConfig({
       ${({ $outlined = false, $color = "base", $strokeWidth = "base", $mode }) =>
           $outlined
               ? css`
-                fill: ${getColorToken($color, $mode)};
+                fill: ${getToken("foregroundColor", $color, $mode)};
                 stroke: none;
               `
               : css`
                 fill: none;
-                stroke: ${getColorToken($color, $mode)};
+                stroke: ${getToken("foregroundColor", $color, $mode)};
                 stroke-width: ${getIconToken("strokeWidth", $strokeWidth)};
                 stroke-linecap: round;
                 stroke-linejoin: round;
