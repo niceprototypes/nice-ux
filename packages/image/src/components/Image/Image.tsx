@@ -1,4 +1,5 @@
 import * as React from "react"
+import { Mode } from "nice-react-styles"
 import { StyledImg, StyledBackgroundImage } from "./Image.styles"
 import type { ImageProps } from "./Image.types"
 import { getVendorImage } from "../../services/registerVendorResolver"
@@ -41,6 +42,9 @@ const Image: React.FC<ImageProps> = ({
   backgroundSize,
   backgroundPosition,
   borderRadius,
+  bordered,
+  borderWidth,
+  borderColor,
   mode,
   renderImage,
   vendor = false,
@@ -50,15 +54,16 @@ const Image: React.FC<ImageProps> = ({
 }) => {
   // Vendor src — route through the registered resolver; fall back to the raw src if no resolver returned a URL
   const resolvedSrc = vendor ? (getVendorImage({ src, width, height }) ?? src) : src
+  const withMode = (el: React.ReactElement) => (mode ? <Mode name={mode}>{el}</Mode> : el)
 
   // Custom render: delegate entirely to consumer
   if (renderImage) {
-    return <>{renderImage(resolvedSrc ?? "", alt)}</>
+    return withMode(<>{renderImage(resolvedSrc ?? "", alt)}</>)
   }
 
   // Div mode: render background-image container
   if (as === "div") {
-    return (
+    return withMode(
       <StyledBackgroundImage
         $src={resolvedSrc ?? ""}
         $width={width}
@@ -66,7 +71,9 @@ const Image: React.FC<ImageProps> = ({
         $backgroundSize={backgroundSize}
         $backgroundPosition={backgroundPosition}
         $borderRadius={borderRadius}
-        $mode={mode}
+        $bordered={bordered}
+        $borderWidth={borderWidth}
+        $borderColor={borderColor}
         className={className}
         style={style}
         role="img"
@@ -78,7 +85,7 @@ const Image: React.FC<ImageProps> = ({
   }
 
   // Default: render standard img element
-  return (
+  return withMode(
     <StyledImg
       src={resolvedSrc}
       alt={alt}
@@ -87,7 +94,9 @@ const Image: React.FC<ImageProps> = ({
       $backgroundSize={backgroundSize}
       $backgroundPosition={backgroundPosition}
       $borderRadius={borderRadius}
-      $mode={mode}
+      $bordered={bordered}
+      $borderWidth={borderWidth}
+      $borderColor={borderColor}
       className={className}
       style={style}
     />

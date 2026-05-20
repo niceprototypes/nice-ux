@@ -9,7 +9,7 @@
  */
 
 import styled, { css } from "styled-components"
-import { getToken, type BorderRadiusType, type ModeType } from "nice-react-styles"
+import { getToken, type BorderRadiusType, type BorderWidthType, type BorderColorType } from "nice-react-styles"
 import type { ImageBackgroundSizeType, ImageBackgroundPositionType } from "./Image.types"
 
 /**
@@ -38,7 +38,9 @@ const sharedStyles = css<{
   $width?: string
   $height?: string
   $borderRadius?: BorderRadiusType
-  $mode?: ModeType
+  $bordered?: boolean
+  $borderWidth?: BorderWidthType
+  $borderColor?: BorderColorType
 }>`
   display: block;
 
@@ -47,10 +49,17 @@ const sharedStyles = css<{
   ${({ $height }) => $height && css`height: ${$height};`}
 
   /* Border radius from design tokens */
-  ${({ $borderRadius, $mode }) =>
+  ${({ $borderRadius }) =>
     $borderRadius &&
     css`
-      border-radius: ${getToken("borderRadius", $borderRadius, $mode)};
+      border-radius: ${getToken("borderRadius", $borderRadius)};
+    `}
+
+  /* Border from design tokens (gated by $bordered) */
+  ${({ $bordered, $borderWidth = "base", $borderColor = "base" }) =>
+    $bordered &&
+    css`
+      border: ${getToken("borderWidth", $borderWidth)} solid ${getToken("borderColor", $borderColor)};
     `}
 `
 
@@ -60,15 +69,17 @@ export const StyledImg = styled.img<{
   $backgroundSize?: ImageBackgroundSizeType
   $backgroundPosition?: ImageBackgroundPositionType
   $borderRadius?: BorderRadiusType
-  $mode?: ModeType
+  $bordered?: boolean
+  $borderWidth?: BorderWidthType
+  $borderColor?: BorderColorType
 }>`
   ${sharedStyles}
 
   /* Object fit from backgroundSize token */
-  ${({ $backgroundSize, $mode }) =>
+  ${({ $backgroundSize }) =>
     $backgroundSize &&
     css`
-      object-fit: ${getToken("backgroundSize", $backgroundSize, $mode)};
+      object-fit: ${getToken("backgroundSize", $backgroundSize)};
     `}
 
   /* Object position derived from backgroundPosition */
@@ -86,7 +97,9 @@ export const StyledBackgroundImage = styled.div<{
   $backgroundSize?: ImageBackgroundSizeType
   $backgroundPosition?: ImageBackgroundPositionType
   $borderRadius?: BorderRadiusType
-  $mode?: ModeType
+  $bordered?: boolean
+  $borderWidth?: BorderWidthType
+  $borderColor?: BorderColorType
 }>`
   ${sharedStyles}
 

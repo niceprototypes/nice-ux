@@ -1,5 +1,5 @@
 import * as React from "react"
-import type { BackgroundSizeType, BorderRadiusType, ModeType } from "nice-react-styles"
+import type { BackgroundSizeType, BorderRadiusType, BorderWidthType, BorderColorType, ModeType } from "nice-react-styles"
 
 /**
  * ImageAsType
@@ -75,6 +75,30 @@ export type ImageBackgroundPositionType = string
 export type ImageBorderRadiusType = BorderRadiusType
 
 /**
+ * ImageBorderedType
+ *
+ * Toggles a border around the image. When true, the border is rendered
+ * using `borderWidth` and `borderColor` tokens (both default to "base").
+ */
+export type ImageBorderedType = boolean
+
+/**
+ * ImageBorderWidthType
+ *
+ * Re-export of BorderWidthType from nice-styles.
+ * Border width values using design tokens. Applied when `bordered` is true.
+ */
+export type ImageBorderWidthType = BorderWidthType
+
+/**
+ * ImageBorderColorType
+ *
+ * Re-export of BorderColorType from nice-styles.
+ * Border color values using design tokens. Applied when `bordered` is true.
+ */
+export type ImageBorderColorType = BorderColorType
+
+/**
  * ImageModeType
  *
  * Re-export of ModeType from nice-styles.
@@ -130,6 +154,15 @@ export type ImageProps = {
   /** Border radius from nice-styles tokens */
   borderRadius?: ImageBorderRadiusType
 
+  /** Render a border around the image (uses borderWidth/borderColor tokens) */
+  bordered?: ImageBorderedType
+
+  /** Border width token (only applied when bordered is true) */
+  borderWidth?: ImageBorderWidthType
+
+  /** Border color token (only applied when bordered is true) */
+  borderColor?: ImageBorderColorType
+
   /** Pin token resolution to a specific mode */
   mode?: ImageModeType
 
@@ -161,6 +194,9 @@ namespace ImageTypes {
   export type BackgroundSize = ImageBackgroundSizeType
   export type BackgroundPosition = ImageBackgroundPositionType
   export type BorderRadius = ImageBorderRadiusType
+  export type Bordered = ImageBorderedType
+  export type BorderWidth = ImageBorderWidthType
+  export type BorderColor = ImageBorderColorType
   export type Mode = ImageModeType
   export type RenderImage = ImageRenderImageType
   export type Vendor = ImageVendorType
