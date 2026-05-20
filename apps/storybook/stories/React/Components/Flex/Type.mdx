@@ -6,9 +6,9 @@ import { DocsRow } from "../../../../src/components/DocsRow"
 import DemoDots from "../../../../src/components/DemoDots"
 import { twoDots } from "./Flex.services"
 
-<Meta title="React/Components/Flex/mode" />
+<Meta title="React/Components/Flex/type" />
 
-# Flex — Mode
+# Flex — Type
 
 <Typography color="light">
   Switches the spacing prop between applying inner <code>padding</code> or outer{" "}
@@ -27,7 +27,7 @@ import { twoDots } from "./Flex.services"
             }}
           >
             <Flex
-              mode={value}
+              type={value}
               style={{
                 border: `${getToken("borderWidth")} solid ${value === "margin" ? getToken("borderColor", "dark") : "transparent"}`,
                 borderRadius: `calc(${getToken("cellHeight", "smaller")} / 2 + 2px)`,
@@ -39,7 +39,7 @@ import { twoDots } from "./Flex.services"
         </Flex>
       }
       language="tsx"
-      code={`<Flex mode="${value}">\n  {children}\n</Flex>`}
+      code={`<Flex type="${value}">\n  {children}\n</Flex>`}
     />
   ))}
 </div>
