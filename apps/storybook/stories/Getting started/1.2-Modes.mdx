@@ -5,27 +5,57 @@ import { Meta } from "@storybook/addon-docs/blocks"
   name="Docs"
 />
 
-# Mode-pinned tokens
+# Modes
+
+By default, the design system follows the OS preference via
+`@media (prefers-color-scheme: dark)`. Semantic mode vars resolve to day
+values normally and to night values when the OS is in dark mode.
 
 ```bash
 npm install nice-styles
 ```
 
+## Pin via `data-theme`
+
+`tokens.css` emits `[data-theme="day"]` and `[data-theme="night"]` rules
+that override the OS-preference cascade. Pin the whole page:
+
+```html
+<html data-theme="day">…</html>
+```
+
+Or pin a subtree by setting the attribute on any element:
+
+```html
+<section data-theme="night">…</section>
+```
+
+All descendants — nice components, raw markup, third-party widgets that read
+`var(--np--…)` — inherit the pin.
+
+## Pin via the `Mode` React component
+
+Same mechanism, React-idiomatic API. Renders `<div data-theme={name}
+style={{display:contents}}>` so it's layout-invisible.
+
+```tsx
+import { Mode } from "nice-react-styles"
+
+<Mode name="day">
+  {children}
+</Mode>
+```
+
+See [React/Styles/Mode](/docs/react-styles-mode--docs) for the full surface.
+
+## Pin a specific value (escape hatch)
+
+Each mode primitive is a stable CSS variable that's never reassigned by any
+cascade — useful when you want an absolute night/day reference inside a
+region pinned to the opposite.
+
 ```css
 @import "nice-styles/tokens.css";
 
-:root {
-  --success-day:   var(--np--foreground-color--success--day);
-  --warning-day:   var(--np--foreground-color--warning--day);
-  --error-day:     var(--np--foreground-color--error--day);
-  --link-day:      var(--np--foreground-color--link--day);
-
-  --success-night: var(--np--foreground-color--success--night);
-  --warning-night: var(--np--foreground-color--warning--night);
-  --error-night:   var(--np--foreground-color--error--night);
-  --link-night:    var(--np--foreground-color--link--night);
-}
-
-.toast--success      { color: var(--success); }
-.toast--success.dark { color: var(--success-night); }
+.toast--success-night { color: var(--np--foreground-color--success--night); }
 ```

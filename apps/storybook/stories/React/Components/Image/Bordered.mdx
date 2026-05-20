@@ -1,0 +1,35 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import Image from "nice-react-image"
+import StoryDescription from "../../../../src/components/StoryDescription"
+import { DocsRow } from "../../../../src/components/DocsRow"
+import { toSource } from "../../../../src/services"
+
+<Meta title="React/Components/Image/bordered" />
+
+# Image — Bordered
+
+<StoryDescription property="border">
+  Renders a border around the image using <code>borderWidth</code> and
+  <code>borderColor</code> tokens. Both default to <code>"base"</code> when
+  <code>bordered</code> is true.
+</StoryDescription>
+
+<div>
+  {[false, true].map(bordered => {
+    const props = {
+      vendor: true,
+      alt: `bordered=${bordered}`,
+      width: "240px",
+      height: "320px",
+      backgroundSize: "cover",
+      bordered,
+    }
+    return (
+      <DocsRow
+        previewCell={<Image {...props} />}
+        language="tsx"
+        code={toSource("Image", props)}
+      />
+    )
+  })}
+</div>

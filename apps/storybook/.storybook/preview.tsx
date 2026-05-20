@@ -1,7 +1,7 @@
 import React from "react"
 import type { Preview } from "@storybook/react-vite"
 import { create } from "storybook/theming"
-import { StylesProvider, getTokenValue } from "nice-react-styles"
+import { StylesProvider, Mode, getTokenValue } from "nice-react-styles"
 import "nice-react-icon-vendor"
 import "nice-react-image-vendor"
 import "../src/nice/tokens"
@@ -17,7 +17,9 @@ const preview: Preview = {
   decorators: [
     Story => (
       <StylesProvider>
-        <Story />
+        <Mode name="day">
+          <Story />
+        </Mode>
       </StylesProvider>
     ),
   ],
@@ -55,7 +57,7 @@ const preview: Preview = {
           "React",
           [
             "Styles",
-            ["StylesProvider", "FontLoader", "getToken", "createTokens", "setBreakpoints"],
+            ["StylesProvider", "FontLoader", "Mode", "getToken", "createTokens", "setBreakpoints"],
             "Components",
             "Bindings",
           ],

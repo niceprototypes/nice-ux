@@ -1,0 +1,127 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta
+  title="React/Styles/Mode"
+  name="Docs"
+/>
+
+# Mode
+
+Pins a subtree to a specific design-system mode (`day` / `night` / consumer-defined).
+Renders a layout-invisible `<div data-theme={name} style={{ display: "contents" }}>`
+that intercepts the cascading `[data-theme]` rules in `nice-styles/tokens.css`.
+All descendants — nice components, raw markup, third-party widgets that consume
+`var(--np--…)` — pick up the pin.
+
+```bash
+npm install nice-react-styles
+```
+
+### Setup
+
+```tsx
+import { Mode } from "nice-react-styles"
+```
+
+### Usage
+
+```tsx
+<Mode name="day">
+  {children}
+</Mode>
+```
+
+---
+
+## Default — follow the browser
+
+When no `Mode` wrapper is present, semantic mode vars resolve via the
+`@media (prefers-color-scheme: dark)` cascade in `tokens.css`. The page
+follows the OS preference.
+
+```tsx
+<App />   {/* mode follows prefers-color-scheme */}
+```
+
+---
+
+## Pin a subtree
+
+Wrap any region to pin its mode independently of OS preference. Children of
+the wrapper inherit the pin through the CSS variable cascade.
+
+```tsx
+<Mode name="day">
+  <Typography>day text</Typography>
+  <Icon name="check" />        {/* also pinned to day */}
+  <div>raw markup also pins</div>
+</Mode>
+```
+
+---
+
+## Pin the entire app
+
+Set `data-theme` on `<html>` once at boot. No JS framework needed — the same
+mechanism the `Mode` component uses.
+
+```tsx
+document.documentElement.setAttribute("data-theme", "day")
+```
+
+This storybook does exactly that in `.storybook/preview.tsx` to pin docs
+rendering to day mode regardless of OS preference.
+
+---
+
+## Nested pins
+
+Inner `Mode` wrappers override outer ones — the cascade resolves to the
+nearest `[data-theme]` ancestor.
+
+```tsx
+<Mode name="day">
+  <Typography>day text</Typography>
+  <Mode name="night">
+    <Typography>night text inside a day region</Typography>
+  </Mode>
+</Mode>
+```
+
+The component-level `mode` prop on Typography, Tile, Button, Icon, Image, and
+Input is implemented in terms of `Mode` — setting `<Tile mode="night">` is
+equivalent to wrapping Tile in `<Mode name="night">`.
+
+---
+
+## When `mode` is explicit
+
+Children that set their own `mode` prop pin themselves and override any
+ancestor `Mode` wrapper. Useful when one element inside a pinned region needs
+the opposite mode (a "night" inset inside a day-pinned page, etc.).
+
+```tsx
+<Mode name="day">
+  <Tile>            {/* day */}
+    <Typography>day text</Typography>
+    <Typography mode="night">night text</Typography>
+  </Tile>
+</Mode>
+```
+
+---
+
+## How it works
+
+`tokens.css` emits two pin blocks at the end of the stylesheet:
+
+```css
+[data-theme="day"]   { color-scheme: light; --np--foreground-color--base: var(--np--foreground-color--base--day); /* … */ }
+[data-theme="night"] { color-scheme: dark;  --np--foreground-color--base: var(--np--foreground-color--base--night); /* … */ }
+```
+
+The attribute selector outranks the `@media (prefers-color-scheme: dark)`
+rule, so the pin wins over OS preference. Stable mode primitives
+(`--np--…--day` / `--np--…--night`) are never reassigned — components that
+emit direct primitive references (rare; usually only for inverted-mode
+escape hatches) bypass the cascade entirely.
