@@ -1,4 +1,5 @@
 import * as React from "react"
+import { Mode } from "nice-react-styles"
 import type { TileProps } from "./Tile.types"
 import { OuterFlex } from "./Tile.styles"
 import TileLayout from "../TileLayout"
@@ -28,7 +29,7 @@ const Tile: React.FC<TileProps> = ({
   title,
   titleProps,
 }) => {
-  return (
+  const tile = (
     <OuterFlex
       $backgroundAttachment={backgroundAttachment}
       $backgroundColor={backgroundColor}
@@ -36,7 +37,6 @@ const Tile: React.FC<TileProps> = ({
       $backgroundPosition={backgroundPosition}
       $backgroundSize={backgroundSize}
       $foregroundColor={foregroundColor}
-      $mode={mode}
       className={className}
       style={style}
     >
@@ -51,7 +51,6 @@ const Tile: React.FC<TileProps> = ({
         gap={gap}
         justifyContent={justifyContent}
         maxWidth={maxWidth}
-        mode={mode}
         spacing={spacing}
         title={title}
         titleProps={titleProps}
@@ -60,6 +59,8 @@ const Tile: React.FC<TileProps> = ({
       </TileLayout>
     </OuterFlex>
   )
+
+  return mode ? <Mode name={mode}>{tile}</Mode> : tile
 }
 
 export default Tile

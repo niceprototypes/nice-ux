@@ -15,8 +15,8 @@ const OuterFlex$1 = styled(Flex).withConfig({
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  background-color: ${({ $mode }) => niceReactStyles.getToken("backgroundColor", "base", $mode)};
-  color: ${({ $mode }) => niceReactStyles.getToken("foregroundColor", "base", $mode)};
+  background-color: ${niceReactStyles.getToken("backgroundColor", "base")};
+  color: ${niceReactStyles.getToken("foregroundColor", "base")};
 
   ${({ $backgroundColor }) => {
     if ($backgroundColor) {
@@ -112,7 +112,8 @@ const TileLayout = ({ children, contentTop, contentRight: TileRight, contentCent
 };
 
 const Tile$1 = ({ alignItems, backgroundAttachment = "fixed", backgroundColor, backgroundImage, backgroundPosition = "center", backgroundSize = "cover", children, className, contentCenter, contentLeft: TileLeft, contentRight: TileRight, contentTop, description, descriptionProps, foregroundColor, gap, justifyContent, maxWidth, mode, spacing, style, title, titleProps, }) => {
-    return (jsxRuntime.jsx(OuterFlex$1, { "$backgroundAttachment": backgroundAttachment, "$backgroundColor": backgroundColor, "$backgroundImage": backgroundImage, "$backgroundPosition": backgroundPosition, "$backgroundSize": backgroundSize, "$foregroundColor": foregroundColor, "$mode": mode, className: className, style: style, children: jsxRuntime.jsx(TileLayout, { alignItems: alignItems, contentCenter: contentCenter, contentLeft: TileLeft, contentRight: TileRight, contentTop: contentTop, description: description, descriptionProps: descriptionProps, gap: gap, justifyContent: justifyContent, maxWidth: maxWidth, mode: mode, spacing: spacing, title: title, titleProps: titleProps, children: children }) }));
+    const tile = (jsxRuntime.jsx(OuterFlex$1, { "$backgroundAttachment": backgroundAttachment, "$backgroundColor": backgroundColor, "$backgroundImage": backgroundImage, "$backgroundPosition": backgroundPosition, "$backgroundSize": backgroundSize, "$foregroundColor": foregroundColor, className: className, style: style, children: jsxRuntime.jsx(TileLayout, { alignItems: alignItems, contentCenter: contentCenter, contentLeft: TileLeft, contentRight: TileRight, contentTop: contentTop, description: description, descriptionProps: descriptionProps, gap: gap, justifyContent: justifyContent, maxWidth: maxWidth, spacing: spacing, title: title, titleProps: titleProps, children: children }) }));
+    return mode ? jsxRuntime.jsx(niceReactStyles.Mode, { name: mode, children: tile }) : tile;
 };
 
 const TileTypes = {};
@@ -124,7 +125,7 @@ const Tile = niceReactStyles.withBreakpoints(Tile$1);
 
 /**
  * No-op component — tile CSS custom properties are now generated
- * at build time in nice-styles dist/variables.css.
+ * at build time in nice-styles dist/tokens.css.
  * Kept for backward compatibility.
  */
 const TileStyles = () => null;

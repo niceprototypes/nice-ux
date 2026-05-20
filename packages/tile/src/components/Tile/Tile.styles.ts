@@ -11,13 +11,12 @@ export const OuterFlex = styled(Flex).withConfig({
   $backgroundPosition?: string
   $backgroundSize?: string
   $backgroundAttachment?: string
-  $mode?: string
 }>`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  background-color: ${({ $mode }) => getToken("backgroundColor", "base", $mode)};
-  color: ${({ $mode }) => getToken("foregroundColor", "base", $mode)};
+  background-color: ${getToken("backgroundColor", "base")};
+  color: ${getToken("foregroundColor", "base")};
 
   ${({ $backgroundColor }) => {
     if ($backgroundColor) {
