@@ -62,15 +62,73 @@ the wrapper inherit the pin through the CSS variable cascade.
 
 ## Pin the entire app
 
-Set `data-theme` on `<html>` once at boot. No JS framework needed — the same
-mechanism the `Mode` component uses.
+In a standard React app, wrap the body of your tree in `<Mode>` directly
+inside `StylesProvider`. Every descendant inherits the pin.
 
 ```tsx
-document.documentElement.setAttribute("data-theme", "day")
+// App.tsx
+<StylesProvider>
+  <Mode name="day">
+    <Router>
+      <Routes>…</Routes>
+    </Router>
+  </Mode>
+</StylesProvider>
 ```
 
-This storybook does exactly that in `.storybook/preview.tsx` to pin docs
-rendering to day mode regardless of OS preference.
+### Pinning Storybook
+
+Storybook's preview iframe has two rendering paths — **canvas** (a single
+story) and **docs** (an MDX page with embedded `<Story>` blocks plus prose).
+A standard decorator only reaches the Story subtree; MDX prose around it
+does not. To pin everything, wrap at both layers:
+
+```tsx
+// .storybook/preview.tsx
+import { DocsContainer } from "@storybook/addon-docs/blocks"
+import { StylesProvider, Mode } from "nice-react-styles"
+
+const preview: Preview = {
+  decorators: [
+    Story => (
+      <StylesProvider>
+        <Mode name="day">
+          <Story />
+        </Mode>
+      </StylesProvider>
+    ),
+  ],
+  parameters: {
+    docs: {
+      container: ({ children, context }) => (
+        <DocsContainer context={context}>
+          <Mode name="day">{children}</Mode>
+        </DocsContainer>
+      ),
+    },
+  },
+}
+```
+
+- **`decorators`** covers canvas view and `<Story>` blocks inside docs.
+- **`docs.container`** covers MDX prose, headings, paragraphs — anything
+  rendered outside a Story block on a docs page.
+
+This storybook uses exactly that recipe in `.storybook/preview.tsx`. Note:
+storybook's own UI chrome (the sidebar and toolbar) is rendered in a
+separate **manager** iframe themed via the storybook `create({ base })`
+API and is independent of nice tokens. Pinning nice mode affects only the
+preview iframe.
+
+### Fallback for unusual hosts
+
+If you don't have a React entry point you can wrap (e.g. you're integrating
+nice tokens into a non-React codebase), set the attribute on `<html>`
+directly. Same mechanism the `Mode` component uses.
+
+```ts
+document.documentElement.setAttribute("data-theme", "day")
+```
 
 ---
 

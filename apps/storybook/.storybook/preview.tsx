@@ -1,6 +1,7 @@
 import React from "react"
 import type { Preview } from "@storybook/react-vite"
 import { create } from "storybook/theming"
+import { DocsContainer } from "@storybook/addon-docs/blocks"
 import { StylesProvider, Mode, getTokenValue } from "nice-react-styles"
 import "nice-react-icon-vendor"
 import "nice-react-image-vendor"
@@ -32,6 +33,15 @@ const preview: Preview = {
     },
     docs: {
       theme: docsTheme,
+      // Wraps the entire docs page (MDX prose + embedded Story blocks) in
+      // Mode. The Story decorator above only wraps Story subtrees, so MDX
+      // content rendered outside <Story> needs this container-level wrap
+      // to inherit the data-theme cascade.
+      container: ({ children, context }: { children: React.ReactNode; context: any }) => (
+        <DocsContainer context={context}>
+          <Mode name="day">{children}</Mode>
+        </DocsContainer>
+      ),
     },
     options: {
       storySort: {
