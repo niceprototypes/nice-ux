@@ -1,4 +1,5 @@
 import * as React from "react"
+import { Mode } from "nice-react-styles"
 import { StyledInput } from "./Input.styles"
 import { InputProps } from "./Input.types"
 import { isDisabled } from "../../utilities/isDisabled"
@@ -38,7 +39,7 @@ const Input: React.FC<InputProps> = ({
   const [isFocused, setIsFocused] = React.useState(false)
   const disabled = isDisabled(state)
 
-  return (
+  const input = (
     <StyledInput
       $backgroundColor={backgroundColor}
       $borderColor={borderColor}
@@ -46,7 +47,6 @@ const Input: React.FC<InputProps> = ({
       $borderWidth={borderWidth}
       $disabled={disabled}
       $isFocused={isFocused}
-      $mode={mode}
       $size={size}
       $state={state}
       $status={status}
@@ -83,6 +83,8 @@ const Input: React.FC<InputProps> = ({
       value={value}
     />
   )
+
+  return mode ? <Mode name={mode}>{input}</Mode> : input
 }
 
 export default Input

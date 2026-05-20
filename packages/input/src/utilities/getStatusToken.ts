@@ -9,15 +9,17 @@ type StatusTokenParameter = "backgroundColor" | "foregroundColor" | "borderColor
  * Path-based lookup: ["status", status, state, parameter]
  *   → --np--input--status--{status}--{state}--{parameter}
  *
- * When `mode` is provided, the mode suffix is appended to the CSS variable.
+ * Returns the semantic var; mode-awareness happens via cascade — when the
+ * input (or an ancestor) sets data-theme on the DOM, the matching
+ * [data-theme] rule in tokens.css reassigns the semantic var to the
+ * day/night primitive.
  *
  * @returns The `var(--np--input--…)` reference string.
  */
 export function getStatusToken(
   status: InputStatusType,
   state: InputStateType,
-  parameter: StatusTokenParameter,
-  mode?: string
+  parameter: StatusTokenParameter
 ): string {
-  return getInputToken(["status", status, state, parameter], mode)
+  return getInputToken(["status", status, state, parameter])
 }

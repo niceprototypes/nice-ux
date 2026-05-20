@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components"
 import { getToken } from "nice-react-styles"
-import type { CellHeightType, BorderWidthType, ModeType } from "nice-react-styles"
+import type { CellHeightType, BorderWidthType } from "nice-react-styles"
 import type { InputBorderRadiusType, InputStateType, InputStatusType } from "./Input.types"
 import { getInputToken } from "../../tokens/getInputToken"
 import { getStatusToken } from "../../utilities/getStatusToken"
@@ -14,7 +14,6 @@ export const StyledInput = styled.input.withConfig({
   $borderWidth: BorderWidthType
   $disabled: boolean
   $isFocused: boolean
-  $mode?: ModeType
   $size: CellHeightType
   $state: InputStateType
   $status: InputStatusType
@@ -33,7 +32,6 @@ export const StyledInput = styled.input.withConfig({
     $size,
     $status,
     $state,
-    $mode,
     $borderWidth,
     $borderRadius,
     $backgroundColor,
@@ -46,11 +44,11 @@ export const StyledInput = styled.input.withConfig({
     height: ${getInputToken("size", $size)};
     padding: 0 ${getInputToken("spacing", $size)};
     font-weight: ${getToken("fontWeight", "base")};
-    background-color: ${getStatusToken($status, $state, "backgroundColor", $mode)};
-    color: ${getStatusToken($status, $state, "foregroundColor", $mode)};
+    background-color: ${getStatusToken($status, $state, "backgroundColor")};
+    color: ${getStatusToken($status, $state, "foregroundColor")};
     border-style: solid;
     border-width: ${getToken("borderWidth", $borderWidth)};
-    border-color: ${getStatusToken($status, $state, "borderColor", $mode)};
+    border-color: ${getStatusToken($status, $state, "borderColor")};
     border-radius: ${getInputToken("borderRadius", $borderRadius)};
     transition: border-color 0.15s ease-in-out, background-color 0.15s ease-in-out;
     cursor: ${$disabled ? "not-allowed" : "text"};
@@ -58,7 +56,7 @@ export const StyledInput = styled.input.withConfig({
     ${$borderColor ? `border-color: ${$borderColor};` : ""}
 
     &::placeholder {
-      color: ${getStatusToken($status, $state, "placeholderColor", $mode)};
+      color: ${getStatusToken($status, $state, "placeholderColor")};
       opacity: 1;
     }
 
