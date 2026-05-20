@@ -1,6 +1,6 @@
 import styled, { css, keyframes } from "styled-components"
 import { getIconToken } from "../../tokens/getIconToken"
-import { getToken, type ModeType } from "nice-react-styles"
+import { getToken } from "nice-react-styles"
 import type { IconSizeType, IconColorType, IconStrokeWidthType } from "./Icon.types"
 
 const spin = keyframes`
@@ -24,11 +24,10 @@ export const IconWrapperStyled = styled.div.withConfig({
   $strokeWidth?: IconStrokeWidthType
   $strokeScaling?: boolean
   $spinning?: boolean
-  $mode?: ModeType
 }>`
   width: ${({ $size = "base" }) => getIconToken("size", $size)};
   height: ${({ $size = "base" }) => getIconToken("size", $size)};
-  color: ${({ $color = "base", $mode }) => getToken("foregroundColor", $color, $mode)};
+  color: ${({ $color = "base" }) => getToken("foregroundColor", $color)};
   display: flex;
   flex-shrink: 0;
   justify-content: center;
@@ -45,15 +44,15 @@ export const IconWrapperStyled = styled.div.withConfig({
   svg {
     path, circle, rect, line, polyline, polygon, ellipse {
       ${({ $strokeScaling = false }) => !$strokeScaling && css`vector-effect: non-scaling-stroke;`}
-      ${({ $outlined = false, $color = "base", $strokeWidth = "base", $mode }) =>
+      ${({ $outlined = false, $color = "base", $strokeWidth = "base" }) =>
           $outlined
               ? css`
-                fill: ${getToken("foregroundColor", $color, $mode)};
+                fill: ${getToken("foregroundColor", $color)};
                 stroke: none;
               `
               : css`
                 fill: none;
-                stroke: ${getToken("foregroundColor", $color, $mode)};
+                stroke: ${getToken("foregroundColor", $color)};
                 stroke-width: ${getIconToken("strokeWidth", $strokeWidth)};
                 stroke-linecap: round;
                 stroke-linejoin: round;

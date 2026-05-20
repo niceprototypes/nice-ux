@@ -1,4 +1,5 @@
 import * as React from "react"
+import { Mode } from "nice-react-styles"
 import { IconProps } from "./Icon.types"
 import { IconWrapperStyled, ImageStyled } from "./Icon.styles"
 import { getIcon } from "../../services/getIcon"
@@ -43,10 +44,11 @@ const Icon: React.FC<IconProps> = ({
   vendorComponent: VendorComponent,
 }) => {
   const spinning = isSpinning(name)
+  const withMode = (el: React.ReactElement) => (mode ? <Mode name={mode}>{el}</Mode> : el)
 
   // Tier 3: direct vendor component — bypass all resolution, apply token styling
   if (VendorComponent) {
-    return (
+    return withMode(
       <IconWrapperStyled
         $color={color}
         $size={size}
@@ -54,7 +56,6 @@ const Icon: React.FC<IconProps> = ({
         $strokeWidth={strokeWidth}
         $strokeScaling={strokeScaling}
         $spinning={spinning}
-        $mode={mode}
         className={className}
         style={style}
       >
@@ -66,7 +67,7 @@ const Icon: React.FC<IconProps> = ({
   // Tier 1: custom icon — check internal map first
   const SvgIcon = getIcon(name, outlined)
   if (SvgIcon) {
-    return (
+    return withMode(
       <IconWrapperStyled
         $color={color}
         $size={size}
@@ -74,7 +75,6 @@ const Icon: React.FC<IconProps> = ({
         $strokeWidth={strokeWidth}
         $strokeScaling={strokeScaling}
         $spinning={spinning}
-        $mode={mode}
         className={className}
         style={style}
       >
@@ -87,7 +87,7 @@ const Icon: React.FC<IconProps> = ({
   if (vendor) {
     const VendorIcon = getVendorIcon(name)
     if (VendorIcon) {
-      return (
+      return withMode(
         <IconWrapperStyled
           $color={color}
           $size={size}
@@ -95,7 +95,6 @@ const Icon: React.FC<IconProps> = ({
           $strokeWidth={strokeWidth}
           $strokeScaling={strokeScaling}
           $spinning={spinning}
-          $mode={mode}
           className={className}
           style={style}
         >
@@ -107,7 +106,7 @@ const Icon: React.FC<IconProps> = ({
 
   // Fallback: render placeholder — name not found in custom or vendor sets
   const PlaceholderIcon = getIcon("placeholder", outlined)
-  return (
+  return withMode(
     <IconWrapperStyled
       $color={color}
       $size={size}
@@ -115,7 +114,6 @@ const Icon: React.FC<IconProps> = ({
       $strokeWidth={strokeWidth}
       $strokeScaling={strokeScaling}
       $spinning={spinning}
-      $mode={mode}
       className={className}
       style={style}
     >

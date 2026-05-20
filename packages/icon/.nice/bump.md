@@ -1,1 +1,2 @@
+[2026-05-20 15:08] major: `mode` prop now wraps Icon in `<Mode name={mode}>` instead of pinning the styled-component to that mode in isolation. IconWrapperStyled no longer threads `$mode`; foregroundColor token resolves via cascade.
 [2026-05-19 12:00] patch: Update consumer call sites to the unified getToken from nice-react-styles (was getReactToken). Internal-only rename — Icon's public props are unchanged. Comments updated to reference nice-styles' renamed CSS artifact (tokens.css).
