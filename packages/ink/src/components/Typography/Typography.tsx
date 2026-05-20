@@ -1,4 +1,5 @@
 import * as React from "react"
+import { Mode } from "nice-react-styles"
 import { StyledTypography } from "./Typography.styles"
 import { TypographyProps } from "./Typography.types"
 
@@ -52,27 +53,28 @@ const Typography: React.FC<TypographyProps> = ({
 }) => {
   const effectiveAntialiased = antialiased ?? mode === "night"
 
-  return (
+  const element = (
     <StyledTypography
-        $align={align}
-        $antialiased={effectiveAntialiased}
-        $legibilityOptimized={legibilityOptimized}
-        $as={as}
-        $code={code}
-        $color={color}
-        $mode={mode}
-        $lineClamp={lineClamp}
-        $lineHeight={lineHeight}
-        $size={size}
-        $weight={weight}
-        $wordBreak={wordBreak}
-        as={as}
-        className={className}
-        style={style}
-      >
-        {children}
-      </StyledTypography>
+      $align={align}
+      $antialiased={effectiveAntialiased}
+      $legibilityOptimized={legibilityOptimized}
+      $as={as}
+      $code={code}
+      $color={color}
+      $lineClamp={lineClamp}
+      $lineHeight={lineHeight}
+      $size={size}
+      $weight={weight}
+      $wordBreak={wordBreak}
+      as={as}
+      className={className}
+      style={style}
+    >
+      {children}
+    </StyledTypography>
   )
+
+  return mode ? <Mode name={mode}>{element}</Mode> : element
 }
 
 export default Typography

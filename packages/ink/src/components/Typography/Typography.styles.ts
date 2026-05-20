@@ -8,7 +8,7 @@
  */
 
 import styled, { css } from "styled-components"
-import { getToken, type ForegroundColorType, type FontSizeType, type FontWeightType, type LineHeightType, type ModeType } from "nice-react-styles"
+import { getToken, type ForegroundColorType, type FontSizeType, type FontWeightType, type LineHeightType } from "nice-react-styles"
 import { TypographyAsType, TypographyAlignType, TypographyLineClampType, TypographyWordBreakType } from "./Typography.types"
 import { styleAntialiasing } from "../../utilities/styleAntialiasing"
 
@@ -53,11 +53,11 @@ const getFontFamily = ({ $as, $code }: { $as: TypographyAsType; $code?: boolean 
   `
 }
 
-const getColor = ({ $color, $mode }: { $color?: ForegroundColorType; $mode?: ModeType }) => {
+const getColor = ({ $color }: { $color?: ForegroundColorType }) => {
   if (!$color) return css`color: inherit;`
 
   return css`
-    color: ${getToken("foregroundColor", $color, $mode)};
+    color: ${getToken("foregroundColor", $color)};
   `
 }
 
@@ -146,7 +146,6 @@ export const StyledTypography = styled.p<{
   $size?: FontSizeType
   $weight?: FontWeightType
   $color?: ForegroundColorType
-  $mode?: ModeType
   $antialiased?: boolean
   $legibilityOptimized?: boolean
   $align?: TypographyAlignType
