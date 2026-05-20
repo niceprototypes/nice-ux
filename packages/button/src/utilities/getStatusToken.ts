@@ -9,16 +9,16 @@ type StatusTokenParameter = "backgroundColor" | "foregroundColor" | "borderColor
  * Uses path-based lookup to walk the nested token tree:
  * ["status", status, state, parameter] → --np--button--status--{status}--{state}--{parameter}
  *
- * When `mode` is provided, the mode suffix is appended to the CSS variable
- * (e.g. --np--button--status--secondary--base--border-color--night).
+ * The returned semantic var is mode-aware via cascade — when the button (or
+ * an ancestor) sets data-theme on the DOM, the matching [data-theme] rule
+ * in tokens.css reassigns the semantic var to the day/night primitive.
  *
  * @returns The `var(--np--button--…)` reference string.
  */
 export function getStatusToken(
   status: ButtonStatusType,
   state: ButtonStateType,
-  parameter: StatusTokenParameter,
-  mode?: string
+  parameter: StatusTokenParameter
 ): string {
-  return getButtonToken(["status", status, state, parameter], mode)
+  return getButtonToken(["status", status, state, parameter])
 }

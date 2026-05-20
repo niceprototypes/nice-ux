@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { getBreakpoint, getToken, BREAKPOINT_TABLET } from "nice-react-styles"
-import type { CellHeightType, BorderWidthType, ModeType } from "nice-react-styles"
+import type { CellHeightType, BorderWidthType } from "nice-react-styles"
 import type { ButtonBorderRadiusType, ButtonStateType, ButtonStatusType } from "./Button.types"
 import { getButtonToken } from "../../tokens/getButtonToken"
 import { getStatusToken } from "../../utilities/getStatusToken"
@@ -17,7 +17,6 @@ export const StyledButton = styled.button.withConfig({
   $isFocused: boolean
   $isPressed: boolean
   $link: boolean
-  $mode?: ModeType
   $size: CellHeightType
   $square: boolean
   $state: ButtonStateType
@@ -40,7 +39,6 @@ export const StyledButton = styled.button.withConfig({
     $size,
     $status,
     $state,
-    $mode,
     $borderWidth,
     $borderRadius,
     $backgroundImage,
@@ -58,11 +56,11 @@ export const StyledButton = styled.button.withConfig({
     width: 100%;
     padding: ${$square ? "0" : `0 ${getButtonToken("spacing", $size)}`};
     font-weight: ${getToken("fontWeight", "base")};
-    background-color: ${getStatusToken($status, $state, "backgroundColor", $mode)};
-    color: ${getStatusToken($status, $state, "foregroundColor", $mode)};
+    background-color: ${getStatusToken($status, $state, "backgroundColor")};
+    color: ${getStatusToken($status, $state, "foregroundColor")};
     border-style: solid;
     border-width: ${getToken("borderWidth", $borderWidth)};
-    border-color: ${getStatusToken($status, $state, "borderColor", $mode)};
+    border-color: ${getStatusToken($status, $state, "borderColor")};
     border-radius: ${getButtonToken("borderRadius", $borderRadius)};
     transition: all 0.15s ease-in-out;
     ${$backgroundImage ? `background-image: ${$backgroundImage};` : ""}

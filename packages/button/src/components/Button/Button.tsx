@@ -1,7 +1,7 @@
 import * as React from "react"
 import Typography from "nice-react-typography"
 import Icon from "nice-react-icon"
-import { getInvertedMode } from "nice-react-styles"
+import { getInvertedMode, Mode } from "nice-react-styles"
 import { StyledButton } from "./Button.styles"
 import { ButtonProps } from "./Button.types"
 import { isDisabled } from "../../utilities/isDisabled"
@@ -52,7 +52,7 @@ const Button: React.FC<ButtonProps> = ({
         type,
       }
 
-  return (
+  const button = (
     <StyledButton
       onMouseEnter={(e) => {
         setIsHovered(true)
@@ -76,7 +76,6 @@ const Button: React.FC<ButtonProps> = ({
       $isFocused={isFocused}
       $isPressed={isPressed}
       $link={link}
-      $mode={mode}
       $size={size}
       $square={square}
       $state={state}
@@ -101,6 +100,8 @@ const Button: React.FC<ButtonProps> = ({
       {!!icon && <Icon name={icon} size={size} color="lightest" strokeWidth="large" />}
     </StyledButton>
   )
+
+  return mode ? <Mode name={mode}>{button}</Mode> : button
 }
 
 export default Button
