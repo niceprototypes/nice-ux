@@ -1,6 +1,6 @@
 import {
   FlexProps,
-  FlexModeType,
+  FlexTypeType,
   FlexDirectionType,
   FlexAlignItemsType,
   FlexJustifyContentType,
@@ -50,10 +50,10 @@ function pushGapStyles(styles: string[], gap: FlexGapSizeType): void {
 
 function pushSpacingStyles(
   styles: string[],
-  mode: FlexModeType | undefined,
+  type: FlexTypeType | undefined,
   spacing: SpacingDefinition
 ): void {
-  const spacingStyles = styleSpacing(mode || "padding", spacing)
+  const spacingStyles = styleSpacing(type || "padding", spacing)
   if (spacingStyles) {
     styles.push(spacingStyles)
   }
@@ -129,7 +129,7 @@ export const styleFlex = (breakpoint: BreakpointName, props: FlexProps): string 
   if (grow !== undefined) pushGrowStyles(styles, grow)
   if (wrap) pushWrapStyles(styles, wrap)
   if (gap !== undefined) pushGapStyles(styles, gap)
-  if (spacing) pushSpacingStyles(styles, props.mode, spacing)
+  if (spacing) pushSpacingStyles(styles, props.type, spacing)
 
   return styles.join("\n")
 }

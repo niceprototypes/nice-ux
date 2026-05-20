@@ -3,7 +3,7 @@ import { SpacingDefinition } from "../components/Flex/Flex.types";
  * Generates CSS spacing properties (padding or margin) from a SpacingDefinition
  *
  * @function styleSpacing
- * @param {"padding" | "margin"} mode - Whether to generate padding or margin properties
+ * @param {"padding" | "margin"} type - Whether to generate padding or margin properties
  * @param {SpacingDefinition} [def] - Spacing configuration object with top, right, bottom, left values
  * @returns {string} CSS property declarations separated by newlines
  *
@@ -20,5 +20,5 @@ import { SpacingDefinition } from "../components/Flex/Flex.types";
  * styleSpacing("margin", { top: "large", right: "large", bottom: "large", left: "large" })
  * // Returns: "margin-top: var(--core--gap--large);\nmargin-right: var(--core--gap--large);\n..."
  */
-export declare const styleSpacing: (mode: "padding" | "margin", def?: SpacingDefinition | null) => string;
+export declare const styleSpacing: (type: "padding" | "margin", def?: SpacingDefinition | null) => string;
 //# sourceMappingURL=styleSpacing.d.ts.map

@@ -36,9 +36,9 @@ import { FlexProps } from "./Flex.types";
  * </Flex>
  *
  * @example
- * // Responsive spacing with margin mode
+ * // Responsive spacing with margin type
  * <Flex
- *   mode="margin"
+ *   type="margin"
  *   spacing="small"
  *   breakpoints={{
  *     "tablet+": { spacing: "base large" },

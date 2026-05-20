@@ -9,7 +9,7 @@ import { BreakpointName, GapType, Breakpoints, SpacingType, SpacingDefinitionTyp
  */
 type FlexGapSizeType = GapType;
 /**
- * FlexModeType
+ * FlexTypeType
  *
  * Determines whether spacing properties apply as padding or margin.
  *
@@ -17,7 +17,7 @@ type FlexGapSizeType = GapType;
  * - "padding": Applies spacing as internal padding
  * - "margin": Applies spacing as external margin
  */
-type FlexModeType = "padding" | "margin";
+type FlexTypeType = "padding" | "margin";
 /**
  * FlexBreakpointType
  *
@@ -107,7 +107,8 @@ type FlexSpacingType = SpacingType;
  * - desktop: min-width query for desktop screens
  */
 type FlexProps = {
-    mode?: FlexModeType;
+    /** Whether spacing applies as padding or margin */
+    type?: FlexTypeType;
     gap?: Breakpoints<FlexGapSizeType>;
     direction?: Breakpoints<FlexDirectionType>;
     alignItems?: Breakpoints<FlexAlignItemsType>;
@@ -120,7 +121,6 @@ type FlexProps = {
     className?: string;
 };
 type GapSize = FlexGapSizeType;
-type FlexMode = FlexModeType;
 type Breakpoint = FlexBreakpointType;
 type SpacingDefinition = FlexSpacingDefinitionType;
 type SpacingShorthand = FlexSpacingShorthandType;
@@ -129,7 +129,7 @@ type Spacing = FlexSpacingType;
 declare const FlexTypes: {};
 declare namespace FlexTypes {
     type GapSize = FlexGapSizeType;
-    type Mode = FlexModeType;
+    type Type = FlexTypeType;
     type Breakpoint = FlexBreakpointType;
     type Direction = FlexDirectionType;
     type AlignItems = FlexAlignItemsType;
@@ -231,7 +231,7 @@ declare const isResponsiveObject: (value: unknown) => value is {
  * Generates CSS spacing properties (padding or margin) from a SpacingDefinition
  *
  * @function styleSpacing
- * @param {"padding" | "margin"} mode - Whether to generate padding or margin properties
+ * @param {"padding" | "margin"} type - Whether to generate padding or margin properties
  * @param {SpacingDefinition} [def] - Spacing configuration object with top, right, bottom, left values
  * @returns {string} CSS property declarations separated by newlines
  *
@@ -248,7 +248,7 @@ declare const isResponsiveObject: (value: unknown) => value is {
  * styleSpacing("margin", { top: "large", right: "large", bottom: "large", left: "large" })
  * // Returns: "margin-top: var(--core--gap--large);\nmargin-right: var(--core--gap--large);\n..."
  */
-declare const styleSpacing: (mode: "padding" | "margin", def?: SpacingDefinition | null) => string;
+declare const styleSpacing: (type: "padding" | "margin", def?: SpacingDefinition | null) => string;
 
 /**
  * styleFlex Service
@@ -305,4 +305,4 @@ declare const styleSpacing: (mode: "padding" | "margin", def?: SpacingDefinition
 declare const styleFlex: (breakpoint: BreakpointName, props: FlexProps) => string;
 
 export { FlexTypes, Flex as default, getBreakpointValue, getGapSize, getSpacingValue, isResponsiveObject, styleFlex, styleSpacing };
-export type { Breakpoint, FlexAlignItemsType, FlexBreakpointType, FlexDirectionType, FlexGapSizeType, FlexJustifyContentType, FlexMode, FlexModeType, FlexProps, FlexSpacingDefinitionType, FlexSpacingResponsiveType, FlexSpacingShorthandType, FlexSpacingType, FlexWrapType, GapSize, Spacing, SpacingDefinition, SpacingResponsive, SpacingShorthand };
+export type { Breakpoint, FlexAlignItemsType, FlexBreakpointType, FlexDirectionType, FlexGapSizeType, FlexJustifyContentType, FlexProps, FlexSpacingDefinitionType, FlexSpacingResponsiveType, FlexSpacingShorthandType, FlexSpacingType, FlexTypeType, FlexWrapType, GapSize, Spacing, SpacingDefinition, SpacingResponsive, SpacingShorthand };

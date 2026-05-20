@@ -187,7 +187,7 @@ const getSpacingValue = (spacing, breakpoint) => {
  * Generates CSS spacing properties (padding or margin) from a SpacingDefinition
  *
  * @function styleSpacing
- * @param {"padding" | "margin"} mode - Whether to generate padding or margin properties
+ * @param {"padding" | "margin"} type - Whether to generate padding or margin properties
  * @param {SpacingDefinition} [def] - Spacing configuration object with top, right, bottom, left values
  * @returns {string} CSS property declarations separated by newlines
  *
@@ -204,21 +204,21 @@ const getSpacingValue = (spacing, breakpoint) => {
  * styleSpacing("margin", { top: "large", right: "large", bottom: "large", left: "large" })
  * // Returns: "margin-top: var(--core--gap--large);\nmargin-right: var(--core--gap--large);\n..."
  */
-const styleSpacing = (mode, def) => {
+const styleSpacing = (type, def) => {
     if (!def)
         return "";
     const parts = [];
     if (def.top !== undefined) {
-        parts.push(`${mode}-top: ${getGapSize(def.top)};`);
+        parts.push(`${type}-top: ${getGapSize(def.top)};`);
     }
     if (def.right !== undefined) {
-        parts.push(`${mode}-right: ${getGapSize(def.right)};`);
+        parts.push(`${type}-right: ${getGapSize(def.right)};`);
     }
     if (def.bottom !== undefined) {
-        parts.push(`${mode}-bottom: ${getGapSize(def.bottom)};`);
+        parts.push(`${type}-bottom: ${getGapSize(def.bottom)};`);
     }
     if (def.left !== undefined) {
-        parts.push(`${mode}-left: ${getGapSize(def.left)};`);
+        parts.push(`${type}-left: ${getGapSize(def.left)};`);
     }
     return parts.join("\n");
 };
@@ -250,8 +250,8 @@ function pushGapStyles(styles, gap) {
         styles.push(`gap: ${gapValue};`);
     }
 }
-function pushSpacingStyles(styles, mode, spacing) {
-    const spacingStyles = styleSpacing(mode || "padding", spacing);
+function pushSpacingStyles(styles, type, spacing) {
+    const spacingStyles = styleSpacing(type || "padding", spacing);
     if (spacingStyles) {
         styles.push(spacingStyles);
     }
@@ -332,7 +332,7 @@ const styleFlex = (breakpoint, props) => {
     if (gap !== undefined)
         pushGapStyles(styles, gap);
     if (spacing)
-        pushSpacingStyles(styles, props.mode, spacing);
+        pushSpacingStyles(styles, props.type, spacing);
     return styles.join("\n");
 };
 
@@ -469,9 +469,9 @@ const normalizeProps = (props) => {
  * </Flex>
  *
  * @example
- * // Responsive spacing with margin mode
+ * // Responsive spacing with margin type
  * <Flex
- *   mode="margin"
+ *   type="margin"
  *   spacing="small"
  *   breakpoints={{
  *     "tablet+": { spacing: "base large" },

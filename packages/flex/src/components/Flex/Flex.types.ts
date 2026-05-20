@@ -18,7 +18,7 @@ import type {
 export type FlexGapSizeType = GapType
 
 /**
- * FlexModeType
+ * FlexTypeType
  *
  * Determines whether spacing properties apply as padding or margin.
  *
@@ -26,7 +26,7 @@ export type FlexGapSizeType = GapType
  * - "padding": Applies spacing as internal padding
  * - "margin": Applies spacing as external margin
  */
-export type FlexModeType = "padding" | "margin"
+export type FlexTypeType = "padding" | "margin"
 
 /**
  * FlexBreakpointType
@@ -126,7 +126,8 @@ export type FlexSpacingType = SpacingType
  * - desktop: min-width query for desktop screens
  */
 export type FlexProps = {
-  mode?: FlexModeType
+  /** Whether spacing applies as padding or margin */
+  type?: FlexTypeType
   gap?: Breakpoints<FlexGapSizeType>
   direction?: Breakpoints<FlexDirectionType>
   alignItems?: Breakpoints<FlexAlignItemsType>
@@ -141,7 +142,6 @@ export type FlexProps = {
 
 // Legacy exports for backwards compatibility
 export type GapSize = FlexGapSizeType
-export type FlexMode = FlexModeType
 export type Breakpoint = FlexBreakpointType
 export type SpacingDefinition = FlexSpacingDefinitionType
 export type SpacingShorthand = FlexSpacingShorthandType
@@ -153,7 +153,7 @@ const FlexTypes = {} as const
 
 namespace FlexTypes {
   export type GapSize = FlexGapSizeType
-  export type Mode = FlexModeType
+  export type Type = FlexTypeType
   export type Breakpoint = FlexBreakpointType
   export type Direction = FlexDirectionType
   export type AlignItems = FlexAlignItemsType

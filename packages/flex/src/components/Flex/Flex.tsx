@@ -39,9 +39,9 @@ import { normalizeProps } from "../../utilities/normalizeProps"
  * </Flex>
  *
  * @example
- * // Responsive spacing with margin mode
+ * // Responsive spacing with margin type
  * <Flex
- *   mode="margin"
+ *   type="margin"
  *   spacing="small"
  *   breakpoints={{
  *     "tablet+": { spacing: "base large" },

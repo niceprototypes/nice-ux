@@ -5,7 +5,7 @@ import { getGapSize } from "./getGapSize"
  * Generates CSS spacing properties (padding or margin) from a SpacingDefinition
  *
  * @function styleSpacing
- * @param {"padding" | "margin"} mode - Whether to generate padding or margin properties
+ * @param {"padding" | "margin"} type - Whether to generate padding or margin properties
  * @param {SpacingDefinition} [def] - Spacing configuration object with top, right, bottom, left values
  * @returns {string} CSS property declarations separated by newlines
  *
@@ -22,22 +22,22 @@ import { getGapSize } from "./getGapSize"
  * styleSpacing("margin", { top: "large", right: "large", bottom: "large", left: "large" })
  * // Returns: "margin-top: var(--core--gap--large);\nmargin-right: var(--core--gap--large);\n..."
  */
-export const styleSpacing = (mode: "padding" | "margin", def?: SpacingDefinition | null): string => {
+export const styleSpacing = (type: "padding" | "margin", def?: SpacingDefinition | null): string => {
   if (!def) return ""
 
   const parts: string[] = []
 
   if (def.top !== undefined) {
-    parts.push(`${mode}-top: ${getGapSize(def.top)};`)
+    parts.push(`${type}-top: ${getGapSize(def.top)};`)
   }
   if (def.right !== undefined) {
-    parts.push(`${mode}-right: ${getGapSize(def.right)};`)
+    parts.push(`${type}-right: ${getGapSize(def.right)};`)
   }
   if (def.bottom !== undefined) {
-    parts.push(`${mode}-bottom: ${getGapSize(def.bottom)};`)
+    parts.push(`${type}-bottom: ${getGapSize(def.bottom)};`)
   }
   if (def.left !== undefined) {
-    parts.push(`${mode}-left: ${getGapSize(def.left)};`)
+    parts.push(`${type}-left: ${getGapSize(def.left)};`)
   }
 
   return parts.join("\n")
