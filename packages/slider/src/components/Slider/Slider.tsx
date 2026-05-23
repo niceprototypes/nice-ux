@@ -1,13 +1,14 @@
-import { getReactTokenValue } from "nice-react-styles"
+import { getTokenValue } from "nice-react-styles"
 import React, { useEffect } from "react"
 import { SliderItemStyled, SliderOuterStyled } from "./Slider.styles"
 import type { SliderProps } from "./Slider.types"
 
-// Single source of truth — CSS transition reads the same token via getReactToken(...)
-const animationDurationMs = parseInt(getReactTokenValue("animationDuration", "base"), 10)
+// Single source of truth — CSS transition reads the same token via getToken(...)
+const animationDurationMs = parseInt(getTokenValue("animationDuration", "base"), 10)
 
 const Slider: React.FC<SliderProps> = ({
   children,
+  className,
   currentIndex = 0,
   isAnimating = false,
   onAnimationComplete,
@@ -24,7 +25,7 @@ const Slider: React.FC<SliderProps> = ({
   }, [isAnimating, onAnimationComplete])
 
   return (
-    <SliderOuterStyled style={style}>
+    <SliderOuterStyled className={className} style={style}>
       {children.map((child, index) => (
         <SliderItemStyled
           key={index}

@@ -47,6 +47,8 @@ export interface SliderProps {
   isAnimating?: SliderIsAnimatingType
   /** Fired after the transition window elapses */
   onAnimationComplete?: SliderOnAnimationCompleteType
+  /** CSS class name applied to the root element */
+  className?: string
   /** Inline styles applied to the root element */
   style?: React.CSSProperties
 }

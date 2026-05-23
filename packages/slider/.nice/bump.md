@@ -1,0 +1,1 @@
+[2026-05-19 12:00] patch: Update consumer call sites to the unified getToken / getTokenValue from nice-react-styles (was getReactToken / getReactTokenValue). Internal-only rename — Slider's public props are unchanged.

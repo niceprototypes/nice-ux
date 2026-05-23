@@ -1,4 +1,4 @@
-import { getReactToken } from "nice-react-styles"
+import { getToken } from "nice-react-styles"
 import styled, { css } from "styled-components"
 
 const styleHideScrollbar = css`
@@ -22,7 +22,7 @@ export const SliderItemStyled = styled.div<{
   overflow-y: auto;
   ${styleHideScrollbar}
   transform: translateY(${(props) => (props.$index - props.$currentIndex) * 100}%);
-  transition: transform ${getReactToken("animationDuration", "base")} ${getReactToken("animationEasing", "base")};
+  transition: transform ${getToken("animationDuration", "base")} ${getToken("animationEasing", "base")};
 `
 
 export const SliderOuterStyled = styled.div`
