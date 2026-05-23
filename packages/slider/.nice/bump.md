@@ -1,1 +1,2 @@
+[2026-05-22 18:36] minor: Add className prop to Slider. Forwarded to the SliderOuterStyled root alongside style. Brings Slider into compliance with the workspace-wide className standard for visual components.
 [2026-05-19 12:00] patch: Update consumer call sites to the unified getToken / getTokenValue from nice-react-styles (was getReactToken / getReactTokenValue). Internal-only rename — Slider's public props are unchanged.
