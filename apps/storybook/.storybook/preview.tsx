@@ -18,7 +18,7 @@ const preview: Preview = {
   decorators: [
     Story => (
       <StylesProvider>
-        <Mode name="day">
+        <Mode name="day" className="nice-storybook">
           <Story />
         </Mode>
       </StylesProvider>
@@ -39,7 +39,7 @@ const preview: Preview = {
       // to inherit the data-theme cascade.
       container: ({ children, context }: { children: React.ReactNode; context: any }) => (
         <DocsContainer context={context}>
-          <Mode name="day">{children}</Mode>
+          <Mode name="day" className="nice-storybook">{children}</Mode>
         </DocsContainer>
       ),
     },
