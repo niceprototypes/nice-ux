@@ -1,0 +1,1 @@
+[2026-05-22 18:36] minor: Add className prop to Lightbox + LightboxCaption. Forwarded to the rendered Trigger (Lightbox) and Wrapper (LightboxCaption) elements alongside style. Brings both components into compliance with the workspace-wide className standard for visual components.

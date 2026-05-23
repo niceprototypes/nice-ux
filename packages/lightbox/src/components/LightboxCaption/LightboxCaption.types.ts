@@ -29,6 +29,8 @@ export interface LightboxCaptionProps {
   title?: LightboxCaptionTitleType
   /** Description shown below the title */
   description?: LightboxCaptionDescriptionType
+  /** CSS class name applied to the wrapper */
+  className?: string
 }
 
 const LightboxCaptionTypes = {} as const

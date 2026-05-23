@@ -6,11 +6,12 @@ import type { LightboxCaptionProps } from "./LightboxCaption.types"
 const LightboxCaption: React.FC<LightboxCaptionProps> = ({
   title,
   description,
+  className,
 }) => {
   if (!title && !description) return null
 
   return (
-    <Wrapper onClick={(e) => e.stopPropagation()}>
+    <Wrapper className={className} onClick={(e) => e.stopPropagation()}>
       {title && (
         <Typography as="h3" size="large" weight="semibold" mode="night">
           {title}
