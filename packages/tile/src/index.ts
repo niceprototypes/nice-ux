@@ -5,4 +5,4 @@
 
 export { default } from "./components/Tile"
 export * from "./components/Tile"
-export { TileStyles, getTileToken } from "./tokens"
+export { getTileToken } from "./tokens"
