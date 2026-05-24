@@ -1,5 +1,5 @@
 import * as React from "react"
-import type { ForegroundColorType, FontSizeType, FontWeightType, LineHeightType, ModeType } from "nice-react-styles"
+import type { ColorType, FontSizeType, FontWeightType, LineHeightType, ModeType } from "nice-react-styles"
 
 /**
  * TypographyAlignType
@@ -30,10 +30,10 @@ export type TypographyAsType = "h1" | "h2" | "h3" | "h4" | "p" | "span"
 /**
  * TypographyColorType
  *
- * Re-export of ForegroundColorType from nice-styles.
+ * Re-export of ColorType from nice-styles.
  * Text color values using design tokens.
  */
-export type TypographyColorType = ForegroundColorType
+export type TypographyColorType = ColorType
 
 /**
  * TypographySizeType
