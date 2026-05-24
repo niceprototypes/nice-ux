@@ -1,1 +1,2 @@
+[2026-05-23 20:07] patch: Drop unused `rollup-plugin-peer-deps-external` devDependency — externalization is now handled by `nice-configuration/rollup`'s built-in peerDependencies reader. No build-output change.
 [2026-05-22 18:36] minor: Add className prop to Lightbox + LightboxCaption. Forwarded to the rendered Trigger (Lightbox) and Wrapper (LightboxCaption) elements alongside style. Brings both components into compliance with the workspace-wide className standard for visual components.
