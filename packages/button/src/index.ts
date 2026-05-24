@@ -5,4 +5,4 @@
 
 export { default } from "./components/Button"
 export * from "./components/Button"
-export { ButtonStyles, getButtonToken } from "./tokens"
+export { getButtonToken } from "./tokens"
