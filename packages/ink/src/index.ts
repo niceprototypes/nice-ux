@@ -5,4 +5,4 @@
 
 export { default } from "./components/Typography"
 export * from "./components/Typography"
-export { TypographyStyles, getTypographyToken } from "./tokens"
+export { getTypographyToken } from "./tokens"
