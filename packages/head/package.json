@@ -1,6 +1,6 @@
 {
   "name": "nice-react-head",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "description": "Minimal head-element wrapper relying on React 19 automatic hoisting.",
   "main": "dist/index.js",
@@ -14,7 +14,8 @@
     "dev": "rollup -c -w",
     "typecheck": "tsc --noEmit",
     "generate-exports": "nice-generate-exports .",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "prepare": "npm run build"
   },
   "keywords": [
     "react",
@@ -46,5 +47,6 @@
     "rollup-plugin-dts": "^6.1.0",
     "tslib": "^2.6.2",
     "typescript": "^5.5.0"
-  }
+  },
+  "dependencies": {}
 }
