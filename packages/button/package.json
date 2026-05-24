@@ -1,6 +1,6 @@
 {
   "name": "nice-react-button",
-  "version": "6.0.0",
+  "version": "7.0.0",
   "description": "A flexible and customizable React button component with built-in theming support",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -38,7 +38,8 @@
     "lint": "eslint src --ext .ts,.tsx",
     "typecheck": "tsc --noEmit",
     "prepublishOnly": "npm run build",
-    "generate-exports": "nice-generate-exports ."
+    "generate-exports": "nice-generate-exports .",
+    "prepare": "npm run build"
   },
   "peerDependencies": {
     "nice-react-flex": ">=2.0.0",
