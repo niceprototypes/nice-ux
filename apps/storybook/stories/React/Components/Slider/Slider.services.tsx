@@ -39,9 +39,9 @@ export const InteractiveSlider = () => {
   const [isAnimating, setIsAnimating] = useState(false)
 
   const slides = [
-    { title: "Slide 1", color: getToken("foregroundColor", "error") },
-    { title: "Slide 2", color: getToken("foregroundColor", "warning") },
-    { title: "Slide 3", color: getToken("foregroundColor", "success") },
+    { title: "Slide 1", color: getToken("color", "error") },
+    { title: "Slide 2", color: getToken("color", "warning") },
+    { title: "Slide 3", color: getToken("color", "success") },
   ]
 
   const goToSlide = (index: number) => {

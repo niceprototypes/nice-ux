@@ -35,9 +35,15 @@ import { Mode } from "nice-react-styles"
 
 ## Default — follow the browser
 
-When no `Mode` wrapper is present, semantic mode vars resolve via the
-`@media (prefers-color-scheme: dark)` cascade in `tokens.css`. The page
-follows the OS preference.
+When no `Mode` wrapper is present, the design system matches whatever
+color mode the browser reports as the user's preference. That preference
+usually mirrors the operating system setting, but the browser can
+override it (browser settings, DevTools, or extensions like Dark Reader).
+Each color variable (e.g. `--np--color--base`) holds its light
+value by default and automatically swaps to its dark counterpart when
+the browser reports dark. The swap is handled by the standard CSS rule
+`@media (prefers-color-scheme: dark)`, already wired into every color
+variable in `tokens.css` — you don't have to write it yourself.
 
 ```tsx
 <App />   {/* mode follows prefers-color-scheme */}
@@ -174,8 +180,8 @@ the opposite mode (a "night" inset inside a day-pinned page, etc.).
 `tokens.css` emits two pin blocks at the end of the stylesheet:
 
 ```css
-[data-theme="day"]   { color-scheme: light; --np--foreground-color--base: var(--np--foreground-color--base--day); /* … */ }
-[data-theme="night"] { color-scheme: dark;  --np--foreground-color--base: var(--np--foreground-color--base--night); /* … */ }
+[data-theme="day"]   { color-scheme: light; --np--color--base: var(--np--color--base--day); /* … */ }
+[data-theme="night"] { color-scheme: dark;  --np--color--base: var(--np--color--base--night); /* … */ }
 ```
 
 The attribute selector outranks the `@media (prefers-color-scheme: dark)`

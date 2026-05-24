@@ -12,7 +12,7 @@ export const fontSizes = [
   "larger",
 ] as const satisfies readonly IconSizeType[]
 
-export const foregroundColors = [
+export const colors = [
   "base",
   "light",
   "lighter",

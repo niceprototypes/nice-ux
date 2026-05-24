@@ -101,25 +101,25 @@ ntk ../react-flex
 Three non-overlapping commands target the workspace-level concerns. Each addresses a distinct layer at a distinct location. Full topology and recipes in [Caches](/docs/configuration-caches--docs).
 
 ```bash
-ntk --clean-caches    # consumer caches + dev-server processes  (layer 3 + 7)
+ntk --clean    # consumer caches + dev-server processes  (layer 3 + 7)
 ntk --dedupe       # singleton conflicts in linked packages   (layer 4)
 ntk --build-all       # rebuild every linked package's dist       (layer 5)
 ```
 
-For the "everything is stale" reset: `ntk --clean-caches && ntk --dedupe && ntk --build-all`, then restart any dev server.
+For the "everything is stale" reset: `ntk --reset`, then restart any dev server. This chains `--build-all → --dedupe → --clean` in the correct order. See [`--reset`](#-reset) below.
 
-### --clean-caches
+### --clean
 
 Kills any process bound to a dev-server port (discovered from each consumer's `.env` `PORT=` entries and `package.json` `-p` / `--port` flags), then wipes `node_modules/.cache` and `node_modules/.vite` across every consumer in the workspace.
 
 ```bash
-ntk --clean-caches
+ntk --clean
 
 # Preview what would be killed and wiped
-ntk --clean-caches --dry-run
+ntk --clean --dry-run
 
 # Skip the port-kill phase (CI / scripted contexts)
-ntk --clean-caches --no-kill
+ntk --clean --no-kill
 ```
 
 The port-kill exists because a running dev server holds an in-memory module graph and repopulates its on-disk cache on the next request — wiping cache without killing the server is a no-op against the observable symptom.
@@ -149,18 +149,31 @@ ntk --build-all
 ntk --build-all --dry-run
 ```
 
+### --reset
+
+Chains the workspace triad in the correct order: `--build-all → --dedupe → --clean`. Use after any refactor that touches a foundation package (token renames, type narrowing in `nice-styles`, etc.). The order matters — rebuilds first so the new dists exist; dedupe second so any duplicate singletons that crept in during the build cascade are removed; clean last so dev-server caches are flushed and processes are killed before the next restart.
+
+```bash
+ntk --reset
+
+# Preview the full sequence without running it
+ntk --reset --dry-run
+```
+
+Exit code reflects `--build-all`'s result: non-zero if any package failed to build. `--dedupe` and `--clean` always run regardless, since their effects are useful even on partial builds.
+
 ---
 
-## --clean-only
+## --dedupe
 
 Remove conflicting packages without creating a new link. Useful when packages are already linked via `package.json` `file:` references.
 
 ```bash
 # Clean a specific linked package
-ntk --clean-only ../react-button
+ntk --dedupe ../react-button
 
 # Clean with custom exclusions
-ntk --clean-only --add-exclude @emotion/react ../react-button
+ntk --dedupe --add-exclude @emotion/react ../react-button
 ```
 
 ---

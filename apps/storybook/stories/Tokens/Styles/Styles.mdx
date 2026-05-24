@@ -33,10 +33,10 @@ no build step, no opinions about your component model.
 
 <div>
   {[
-    { name: "base", backgroundColor: getToken("foregroundColor", "error") },
+    { name: "base", backgroundColor: getToken("color", "error") },
     {
       name: "slow",
-      backgroundColor: getToken("foregroundColor", "warning"),
+      backgroundColor: getToken("color", "warning"),
     },
   ].map(({ name, backgroundColor }) => {
     const animationName = name === "base" ? "slide" : "slideSlow"
@@ -91,7 +91,7 @@ no build step, no opinions about your component model.
             <path
               d="M 1 23 C 30 23, 30 1, 60 1"
               fill="none"
-              stroke={getToken("foregroundColor", "lighter")}
+              stroke={getToken("color", "lighter")}
               strokeWidth={getToken("borderWidth", "large")}
               strokeLinecap="round"
             />
@@ -159,7 +159,7 @@ no build step, no opinions about your component model.
             borderRadius: getToken("borderRadius", variant),
             width: getToken("cellHeight", "larger"),
             height: getToken("cellHeight", "larger"),
-            border: `${getToken("borderWidth")} solid ${getToken("foregroundColor", "light")}`,
+            border: `${getToken("borderWidth")} solid ${getToken("color", "light")}`,
           }}
         />
       }
@@ -179,7 +179,7 @@ no build step, no opinions about your component model.
           style={{
             width: getToken("cellHeight", "larger"),
             height: getToken("cellHeight", "larger"),
-            border: `${getToken("borderWidth", variant)} solid ${getToken("foregroundColor", "light")}`,
+            border: `${getToken("borderWidth", variant)} solid ${getToken("color", "light")}`,
             borderRadius: getToken("borderRadius", "small"),
           }}
         />
@@ -230,7 +230,7 @@ no build step, no opinions about your component model.
           style={{
             width: getToken("cellHeight", "larger"),
             height: getToken("cellHeight", variant),
-            border: `${getToken("borderWidth")} solid ${getToken("foregroundColor", "light")}`,
+            border: `${getToken("borderWidth")} solid ${getToken("color", "light")}`,
             borderRadius: getToken("cellHeight", "smaller"),
           }}
         />
@@ -298,7 +298,7 @@ no build step, no opinions about your component model.
   )}
 </div>
 
-## foregroundColor
+## color
 
 <div>
   {[
@@ -318,13 +318,13 @@ no build step, no opinions about your component model.
           style={{
             width: getToken("cellHeight", "smaller"),
             height: getToken("cellHeight", "smaller"),
-            backgroundColor: getToken("foregroundColor", variant),
+            backgroundColor: getToken("color", variant),
             borderRadius: "50%",
           }}
         />
       }
       language="tsx"
-      code={`getToken("foregroundColor", "${variant}")`}
+      code={`getToken("color", "${variant}")`}
     />
   ))}
 </div>
@@ -339,12 +339,12 @@ no build step, no opinions about your component model.
           gap={variant}
           dots={[
             {
-              color: getToken("foregroundColor", "error"),
+              color: getToken("color", "error"),
               width: getToken("cellHeight", "smaller"),
               height: getToken("cellHeight", "smaller"),
             },
             {
-              color: getToken("foregroundColor", "link"),
+              color: getToken("color", "link"),
               width: getToken("cellHeight", "smaller"),
               height: getToken("cellHeight", "smaller"),
             },

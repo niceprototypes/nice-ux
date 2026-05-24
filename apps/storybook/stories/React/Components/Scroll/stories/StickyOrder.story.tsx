@@ -25,7 +25,7 @@ const StickyOrderStory = () => (
               <Flex
                 style={{
                   padding: `${getToken("gap", "smaller")} ${getToken("gap", "small")}`,
-                  backgroundColor: getToken("foregroundColor", "error"),
+                  backgroundColor: getToken("color", "error"),
                   borderRadius: getToken("borderRadius", "small"),
                 }}
               >
@@ -39,7 +39,7 @@ const StickyOrderStory = () => (
               <Flex
                 style={{
                   padding: `${getToken("gap", "smaller")} ${getToken("gap", "small")}`,
-                  backgroundColor: getToken("foregroundColor", "warning"),
+                  backgroundColor: getToken("color", "warning"),
                   borderRadius: getToken("borderRadius", "small"),
                 }}
               >

@@ -46,11 +46,11 @@ createTokens({
 
 ## Assigning a variant to an existing token
 
-Use an existing token key with a new variant name to extend it. Here, a `brand` variant is added to `foregroundColor` alongside the existing variants (`base`, `light`, `lighter`, etc.).
+Use an existing token key with a new variant name to extend it. Here, a `brand` variant is added to `color` alongside the existing variants (`base`, `light`, `lighter`, etc.).
 
 ```typescript
 createTokens({
-  foregroundColor: {
+  color: {
     brand: "#dc0000",
   },
 })
@@ -58,8 +58,8 @@ createTokens({
 
 | CSS variable | Value | Status |
 |---|---|---|
-| `--np--foreground-color--brand` | `#dc0000` | new |
-| `--np--foreground-color--base` | (default) | unchanged |
+| `--np--color--brand` | `#dc0000` | new |
+| `--np--color--base` | (default) | unchanged |
 
 ---
 
@@ -180,7 +180,7 @@ Variant values can be a plain string, a breakpoint object, or a mode object. The
 ```typescript
 const { GlobalStyles } = createTokens({
   fontSize: { base: "18px" },              // override
-  foregroundColor: { brand: "#dc0000" },   // extend
+  color: { brand: "#dc0000" },   // extend
   headerHeight: {                          // create
     base: "64px",
     compact: "48px",
@@ -200,7 +200,7 @@ const { GlobalStyles } = createTokens({
 ```css
 :root {
   --np--font-size--base: 18px;
-  --np--foreground-color--brand: #dc0000;
+  --np--color--brand: #dc0000;
   --np--header-height--base: 64px;
   --np--header-height--compact: 48px;
   --np--gap--none: 0;

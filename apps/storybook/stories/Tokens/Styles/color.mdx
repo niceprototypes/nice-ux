@@ -4,9 +4,9 @@ import { getToken } from "nice-react-styles"
 import Typography from "../../../src/nice/Typography"
 import { DocsRow } from "../../../src/components/DocsRow"
 
-<Meta title="Tokens/Styles/foregroundColor" />
+<Meta title="Tokens/Styles/color" />
 
-# foregroundColor
+# color
 
 <Typography>
   Text and icon color tokens, including semantic states (<code>success</code>,{" "}
@@ -31,13 +31,13 @@ import { DocsRow } from "../../../src/components/DocsRow"
           style={{
             width: getToken("cellHeight", "smaller"),
             height: getToken("cellHeight", "smaller"),
-            backgroundColor: getToken("foregroundColor", variant),
+            backgroundColor: getToken("color", variant),
             borderRadius: "50%",
           }}
         />
       }
       language="tsx"
-      code={`getToken("foregroundColor", "${variant}")`}
+      code={`getToken("color", "${variant}")`}
     />
   ))}
 </div>

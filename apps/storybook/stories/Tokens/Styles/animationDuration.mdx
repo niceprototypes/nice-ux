@@ -12,10 +12,10 @@ import { DocsRow } from "../../../src/components/DocsRow"
 
 <div>
   {[
-    { name: "base", backgroundColor: getToken("foregroundColor", "error") },
+    { name: "base", backgroundColor: getToken("color", "error") },
     {
       name: "slow",
-      backgroundColor: getToken("foregroundColor", "warning"),
+      backgroundColor: getToken("color", "warning"),
     },
   ].map(({ name, backgroundColor }) => {
     const animationName = name === "base" ? "slide" : "slideSlow"

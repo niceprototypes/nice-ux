@@ -2,18 +2,18 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import Icon from "nice-react-icon"
 import StoryDescription from "../../../../src/components/StoryDescription"
 import { DocsRow } from "../../../../src/components/DocsRow"
-import { foregroundColors } from "./Icon.services"
+import { colors } from "./Icon.services"
 
 <Meta title="React/Components/Icon/color" />
 
 # Icon — Color
 
 <StoryDescription property="color">
-  Sets the foreground color of the icon using foregroundColor tokens.
+  Sets the color of the icon using color tokens.
 </StoryDescription>
 
 <div>
-  {foregroundColors.map(color => (
+  {colors.map(color => (
     <DocsRow
       previewCell={
         <Icon

@@ -65,7 +65,7 @@ export const RowFlex = styled(Flex).attrs({ spacing: "large none" })`
       &:focus {
         box-shadow: none;
         background-color: ${getToken("borderColor", "darker")} !important;
-        color: ${getToken("foregroundColor", "base", "night")} !important;
+        color: ${getToken("color", "base", "night")} !important;
       }
     }
   }
