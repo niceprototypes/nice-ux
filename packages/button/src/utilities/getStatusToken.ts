@@ -1,7 +1,7 @@
 import type { ButtonStatusType, ButtonStateType } from "../components/Button/Button.types"
 import { getButtonToken } from "../tokens/getButtonToken"
 
-type StatusTokenParameter = "backgroundColor" | "foregroundColor" | "borderColor"
+type StatusTokenParameter = "backgroundColor" | "color" | "borderColor"
 
 /**
  * Resolve a button color token from the status/state composition matrix.

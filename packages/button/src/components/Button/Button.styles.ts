@@ -57,7 +57,7 @@ export const StyledButton = styled.button.withConfig({
     padding: ${$square ? "0" : `0 ${getButtonToken("spacing", $size)}`};
     font-weight: ${getToken("fontWeight", "base")};
     background-color: ${getStatusToken($status, $state, "backgroundColor")};
-    color: ${getStatusToken($status, $state, "foregroundColor")};
+    color: ${getStatusToken($status, $state, "color")};
     border-style: solid;
     border-width: ${getToken("borderWidth", $borderWidth)};
     border-color: ${getStatusToken($status, $state, "borderColor")};

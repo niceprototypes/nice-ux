@@ -1,0 +1,1 @@
+[2026-05-24 06:30] patch: Internal rename — `getStatusToken` parameter union member `"foregroundColor"` renamed to `"color"` (matches nice-styles@major component-token key rename). Resolves status/state colors through the renamed `--np--button--status--*--color` CSS vars. No public Button API change.
