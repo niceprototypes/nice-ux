@@ -119,13 +119,6 @@ const TileTypes = {};
 // `breakpoints` prop on consumers.
 const Tile = withBreakpoints(Tile$1);
 
-/**
- * No-op component — tile CSS custom properties are now generated
- * at build time in nice-styles dist/tokens.css.
- * Kept for backward compatibility.
- */
-const TileStyles = () => null;
-
 /** Returns the `var(--np--tile--…)` reference. */
 function getTileToken(nameOrPath, variantOrMode, mode) {
     if (Array.isArray(nameOrPath)) {
@@ -134,5 +127,5 @@ function getTileToken(nameOrPath, variantOrMode, mode) {
     return getComponentToken("tile", nameOrPath, variantOrMode, mode);
 }
 
-export { TileStyles, TileTypes, Tile as default, getTileToken };
+export { TileTypes, Tile as default, getTileToken };
 //# sourceMappingURL=index.esm.js.map

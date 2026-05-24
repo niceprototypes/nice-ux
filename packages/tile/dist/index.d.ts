@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { ComponentType } from 'react';
 import { BackgroundColorType, BackgroundSizeType, ForegroundColorType, Breakpoints, GapType, ModeType, WithBreakpointsProps } from 'nice-react-styles';
 import { FlexProps, FlexSpacingType } from 'nice-react-flex';
 import { TypographyProps } from 'nice-react-typography';
@@ -116,15 +115,8 @@ declare namespace TileTypes {
 
 declare const Tile: React.FC<WithBreakpointsProps<TileProps>>;
 
-/**
- * No-op component — tile CSS custom properties are now generated
- * at build time in nice-styles dist/tokens.css.
- * Kept for backward compatibility.
- */
-declare const TileStyles: ComponentType;
-
 /** Returns the `var(--np--tile--…)` reference. */
 declare function getTileToken(nameOrPath: string | string[], variantOrMode?: string, mode?: string): string;
 
-export { TileStyles, TileTypes, Tile as default, getTileToken };
+export { TileTypes, Tile as default, getTileToken };
 export type { TileAlignItemsType, TileBackgroundColorType, TileBackgroundSizeType, TileForegroundColorType, TileJustifyContentType, TileMaxWidthType, TileMaxWidthValueType, TileProps, TileTypographyProps };
