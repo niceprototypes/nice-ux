@@ -5,4 +5,4 @@
 
 export { default } from "./components/Lightbox"
 export * from "./components/Lightbox"
-export { LightboxStyles, getLightboxToken } from "./tokens"
+export { getLightboxToken } from "./tokens"
