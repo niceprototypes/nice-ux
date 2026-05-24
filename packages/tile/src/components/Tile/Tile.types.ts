@@ -6,7 +6,7 @@ import type {
   GapType,
   BackgroundColorType,
   BackgroundSizeType,
-  ForegroundColorType,
+  ColorType,
 } from "nice-react-styles"
 import type { TileTypographyProps } from "../TileContent/TileContent.types"
 
@@ -28,12 +28,12 @@ export type TileBackgroundColorType = BackgroundColorType
 export type TileBackgroundSizeType = BackgroundSizeType
 
 /**
- * TileForegroundColorType
+ * TileColorType
  *
- * @token Re-export of ForegroundColorType from nice-styles. Token-bound —
+ * @token Re-export of ColorType from nice-styles. Token-bound —
  * raw CSS color strings are not accepted.
  */
-export type TileForegroundColorType = ForegroundColorType
+export type TileColorType = ColorType
 
 /**
  * TileMaxWidthValueType
@@ -114,9 +114,9 @@ export interface TileProps {
   backgroundSize?: TileBackgroundSizeType
   backgroundAttachment?: string
 
-  // Foreground
-  /** @token Token-bound — accepts ForegroundColorType variants only. */
-  foregroundColor?: TileForegroundColorType
+  // Color
+  /** @token Token-bound — accepts ColorType variants only. */
+  color?: TileColorType
   mode?: ModeType
 
   // HTML
@@ -135,7 +135,7 @@ namespace TileTypes {
   export type MaxWidthValue = TileMaxWidthValueType
   export type BackgroundColor = TileBackgroundColorType
   export type BackgroundSize = TileBackgroundSizeType
-  export type ForegroundColor = TileForegroundColorType
+  export type Color = TileColorType
   export type Props = TileProps
 }
 

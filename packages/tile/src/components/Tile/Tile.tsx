@@ -19,7 +19,7 @@ const Tile: React.FC<TileProps> = ({
   contentTop,
   description,
   descriptionProps,
-  foregroundColor,
+  color,
   gap,
   justifyContent,
   maxWidth,
@@ -36,7 +36,7 @@ const Tile: React.FC<TileProps> = ({
       $backgroundImage={backgroundImage}
       $backgroundPosition={backgroundPosition}
       $backgroundSize={backgroundSize}
-      $foregroundColor={foregroundColor}
+      $color={color}
       className={className}
       style={style}
     >

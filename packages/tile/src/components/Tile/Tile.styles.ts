@@ -4,7 +4,7 @@ import { getToken } from "nice-react-styles"
 import type {
   BackgroundColorType,
   BackgroundSizeType,
-  ForegroundColorType,
+  ColorType,
 } from "nice-react-styles"
 
 export const OuterFlex = styled(Flex).withConfig({
@@ -12,7 +12,7 @@ export const OuterFlex = styled(Flex).withConfig({
 })<{
   $backgroundImage?: string
   $backgroundColor?: BackgroundColorType
-  $foregroundColor?: ForegroundColorType
+  $color?: ColorType
   $backgroundPosition?: string
   $backgroundSize?: BackgroundSizeType
   $backgroundAttachment?: string
@@ -21,7 +21,7 @@ export const OuterFlex = styled(Flex).withConfig({
   flex-direction: column;
   flex-grow: 1;
   background-color: ${getToken("backgroundColor", "base")};
-  color: ${getToken("foregroundColor", "base")};
+  color: ${getToken("color", "base")};
 
   ${({ $backgroundColor }) => {
     if ($backgroundColor) {
@@ -31,10 +31,10 @@ export const OuterFlex = styled(Flex).withConfig({
     }
   }}
 
-  ${({ $foregroundColor }) => {
-    if ($foregroundColor) {
+  ${({ $color }) => {
+    if ($color) {
       return css`
-        color: ${getToken("foregroundColor", $foregroundColor)};
+        color: ${getToken("color", $color)};
       `
     }
   }}
