@@ -1,3 +1,4 @@
+[2026-05-23 21:05] patch: Remove broken `lint: eslint` script (no .eslintrc). Test kept (jest.config.js exists). Priority 1.5 normalization.
 [2026-05-23 20:07] patch: Drop unused `rollup-plugin-peer-deps-external` devDependency — externalization is now handled by `nice-configuration/rollup`'s built-in peerDependencies reader. No build-output change.
 [2026-05-20 15:08] major: `mode` prop now wraps Icon in `<Mode name={mode}>` instead of pinning the styled-component to that mode in isolation. IconWrapperStyled no longer threads `$mode`; foregroundColor token resolves via cascade.
 [2026-05-19 12:00] patch: Update consumer call sites to the unified getToken from nice-react-styles (was getReactToken). Internal-only rename — Icon's public props are unchanged. Comments updated to reference nice-styles' renamed CSS artifact (tokens.css).
