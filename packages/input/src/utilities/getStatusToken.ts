@@ -1,7 +1,7 @@
 import type { InputStatusType, InputStateType } from "../components/Input/Input.types"
 import { getInputToken } from "../tokens/getInputToken"
 
-type StatusTokenParameter = "backgroundColor" | "foregroundColor" | "borderColor" | "placeholderColor"
+type StatusTokenParameter = "backgroundColor" | "color" | "borderColor" | "placeholderColor"
 
 /**
  * Resolve an input color token from the status/state composition matrix.

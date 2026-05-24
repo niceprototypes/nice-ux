@@ -45,7 +45,7 @@ export const StyledInput = styled.input.withConfig({
     padding: 0 ${getInputToken("spacing", $size)};
     font-weight: ${getToken("fontWeight", "base")};
     background-color: ${getStatusToken($status, $state, "backgroundColor")};
-    color: ${getStatusToken($status, $state, "foregroundColor")};
+    color: ${getStatusToken($status, $state, "color")};
     border-style: solid;
     border-width: ${getToken("borderWidth", $borderWidth)};
     border-color: ${getStatusToken($status, $state, "borderColor")};
@@ -61,7 +61,7 @@ export const StyledInput = styled.input.withConfig({
     }
 
     &:focus {
-      border-color: ${getToken("foregroundColor", "base")};
+      border-color: ${getToken("color", "base")};
     }
 
     &:disabled {
