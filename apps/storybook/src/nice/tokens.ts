@@ -14,5 +14,4 @@ const AppTokenMap = {
   },
 } as const
 
-const appTokens = createTokens(AppTokenMap)
-export const AppStyles = appTokens.GlobalStyles
+createTokens(AppTokenMap)
