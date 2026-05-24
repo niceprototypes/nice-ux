@@ -1,1 +1,0 @@
-[2026-05-24 06:30] patch: Internal rename — `getToken("foregroundColor", ...)` call sites use the renamed token group key `"color"` (mirrors nice-styles@major). `TypographyColorType` continues to alias the renamed `ColorType`. Public `color` prop unchanged.
