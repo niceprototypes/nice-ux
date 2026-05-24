@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { getBreakpoint, getToken, BREAKPOINT_TABLET } from "nice-react-styles"
-import type { CellHeightType, BorderWidthType } from "nice-react-styles"
+import type { CellHeightType, BorderWidthType, BorderColorType } from "nice-react-styles"
 import type { ButtonBorderRadiusType, ButtonStateType, ButtonStatusType } from "./Button.types"
 import { getButtonToken } from "../../tokens/getButtonToken"
 import { getStatusToken } from "../../utilities/getStatusToken"
@@ -9,7 +9,7 @@ export const StyledButton = styled.button.withConfig({
   shouldForwardProp: (prop) => !prop.startsWith("$"),
 })<{
   $backgroundImage?: string
-  $borderColor?: string
+  $borderColor?: BorderColorType
   $borderRadius: ButtonBorderRadiusType
   $borderWidth: BorderWidthType
   $disabled: boolean
@@ -64,7 +64,7 @@ export const StyledButton = styled.button.withConfig({
     border-radius: ${getButtonToken("borderRadius", $borderRadius)};
     transition: all 0.15s ease-in-out;
     ${$backgroundImage ? `background-image: ${$backgroundImage};` : ""}
-    ${$borderColor ? `border-color: ${$borderColor};` : ""}
+    ${$borderColor ? `border-color: ${getToken("borderColor", $borderColor)};` : ""}
   `}
 
   ${({ $link, $square, $size }) =>

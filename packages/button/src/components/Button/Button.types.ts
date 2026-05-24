@@ -1,11 +1,19 @@
 import * as React from "react"
-import { CellHeightType, BorderWidthType, ModeType } from "nice-react-styles"
+import { CellHeightType, BorderWidthType, BorderColorType, ModeType } from "nice-react-styles"
 import { IconNameType } from "nice-react-icon"
 
 /**
  * Border radius variants for the button
  */
 export type ButtonBorderRadiusType = "small" | "base" | "large"
+
+/**
+ * ButtonBorderColorType
+ *
+ * @token Re-export of BorderColorType from nice-styles. Token-bound —
+ * raw CSS color strings are not accepted.
+ */
+export type ButtonBorderColorType = BorderColorType
 
 /**
  * Interactive state of the button
@@ -109,8 +117,8 @@ export interface ButtonProps {
   /** Override background image (CSS value, gradient, or url reference) */
   backgroundImage?: string
 
-  /** Override border color (CSS value or var reference) */
-  borderColor?: string
+  /** @token Token-bound — accepts BorderColorType variants only. */
+  borderColor?: ButtonBorderColorType
 
   /** Pin token resolution to a specific mode instead of responding to media query */
   mode?: ModeType
@@ -138,6 +146,7 @@ const ButtonTypes = {} as const
 
 namespace ButtonTypes {
   export type BorderRadius = ButtonBorderRadiusType
+  export type BorderColor = ButtonBorderColorType
   export type State = ButtonStateType
   export type Status = ButtonStatusType
   export type Element = ButtonElementType
