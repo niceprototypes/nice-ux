@@ -5,6 +5,6 @@
 
 export { default } from "./components/Icon"
 export * from "./components/Icon"
-export { IconStyles, getIconToken } from "./tokens"
+export { getIconToken } from "./tokens"
 export { iconNames } from "./constants"
 export { getIcon, registerVendorResolver } from "./services"
