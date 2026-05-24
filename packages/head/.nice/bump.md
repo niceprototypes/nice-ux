@@ -1,0 +1,1 @@
+[2026-05-23 20:07] patch: Drop unused `rollup-plugin-peer-deps-external` devDependency — externalization is now handled by `nice-configuration/rollup`'s built-in peerDependencies reader. No build-output change.
