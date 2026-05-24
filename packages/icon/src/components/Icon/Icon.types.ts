@@ -1,9 +1,9 @@
-import type { FontSizeType, ForegroundColorType, ModeType } from "nice-react-styles"
+import type { FontSizeType, ColorType, ModeType } from "nice-react-styles"
 import { iconNames } from "../../constants"
 
 export type IconNameType = (typeof iconNames)[number]
 export type IconSizeType = FontSizeType
-export type IconColorType = ForegroundColorType
+export type IconColorType = ColorType
 export type IconStrokeWidthType = "small" | "base" | "large"
 export type IconColorPropertyType = "color" | "background-color" | "stroke" | "border-color" | "fill"
 export type IconOutlinedType = boolean
