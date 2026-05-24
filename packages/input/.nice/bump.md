@@ -1,1 +1,0 @@
-[2026-05-24 06:30] patch: Internal rename — `getStatusToken` parameter union member `"foregroundColor"` renamed to `"color"`; `getToken("foregroundColor", "base")` → `getToken("color", "base")` (mirrors nice-styles@major). No public Input API change.
