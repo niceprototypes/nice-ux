@@ -1,6 +1,6 @@
 {
   "name": "nice-react-typography",
-  "version": "6.0.0",
+  "version": "7.0.0",
   "type": "module",
   "description": "A flexible and customizable Typography component for React with styled-components",
   "main": "dist/index.js",
@@ -14,7 +14,8 @@
     "dev": "rollup -c -w",
     "typecheck": "tsc --noEmit",
     "prepublishOnly": "npm run build",
-    "generate-exports": "nice-generate-exports ."
+    "generate-exports": "nice-generate-exports .",
+    "prepare": "npm run build"
   },
   "keywords": [
     "react",
