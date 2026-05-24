@@ -1,6 +1,6 @@
 {
   "name": "nice-react-slider",
-  "version": "0.5.0",
+  "version": "0.5.3",
   "description": "A smooth, animated vertical slider component for React",
   "type": "module",
   "main": "dist/index.js",
@@ -14,7 +14,8 @@
     "dev": "rollup -c -w",
     "typecheck": "tsc --noEmit",
     "prepublishOnly": "npm run build",
-    "generate-exports": "nice-generate-exports ."
+    "generate-exports": "nice-generate-exports .",
+    "prepare": "npm run build"
   },
   "keywords": [
     "react",
@@ -38,7 +39,7 @@
     "styled-components": ">=6.1.18"
   },
   "dependencies": {
-    "nice-react-styles": "file:../react-styles"
+    "nice-react-styles": "^12.0.0"
   },
   "devDependencies": {
     "@types/react": "^19.0.0",
@@ -48,7 +49,7 @@
     "eslint": "^8.44.0",
     "eslint-plugin-react": "^7.32.2",
     "jest": "^29.5.0",
-    "nice-configuration": "file:../configuration",
+    "nice-configuration": "^1.1.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "rollup": "^4.9.1",
