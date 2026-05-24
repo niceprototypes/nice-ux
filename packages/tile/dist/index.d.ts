@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { BackgroundColorType, BackgroundSizeType, ForegroundColorType, Breakpoints, GapType, ModeType, WithBreakpointsProps } from 'nice-react-styles';
+import { BackgroundColorType, BackgroundSizeType, ColorType, Breakpoints, GapType, ModeType, WithBreakpointsProps } from 'nice-react-styles';
 import { FlexProps, FlexSpacingType } from 'nice-react-flex';
 import { TypographyProps } from 'nice-react-typography';
 
@@ -21,12 +21,12 @@ type TileBackgroundColorType = BackgroundColorType;
  */
 type TileBackgroundSizeType = BackgroundSizeType;
 /**
- * TileForegroundColorType
+ * TileColorType
  *
- * @token Re-export of ForegroundColorType from nice-styles. Token-bound —
+ * @token Re-export of ColorType from nice-styles. Token-bound —
  * raw CSS color strings are not accepted.
  */
-type TileForegroundColorType = ForegroundColorType;
+type TileColorType = ColorType;
 /**
  * TileMaxWidthValueType
  *
@@ -93,8 +93,8 @@ interface TileProps {
     /** @token Token-bound — accepts BackgroundSizeType variants only. */
     backgroundSize?: TileBackgroundSizeType;
     backgroundAttachment?: string;
-    /** @token Token-bound — accepts ForegroundColorType variants only. */
-    foregroundColor?: TileForegroundColorType;
+    /** @token Token-bound — accepts ColorType variants only. */
+    color?: TileColorType;
     mode?: ModeType;
     className?: string;
     style?: React.CSSProperties;
@@ -109,7 +109,7 @@ declare namespace TileTypes {
     type MaxWidthValue = TileMaxWidthValueType;
     type BackgroundColor = TileBackgroundColorType;
     type BackgroundSize = TileBackgroundSizeType;
-    type ForegroundColor = TileForegroundColorType;
+    type Color = TileColorType;
     type Props = TileProps;
 }
 
@@ -119,4 +119,4 @@ declare const Tile: React.FC<WithBreakpointsProps<TileProps>>;
 declare function getTileToken(nameOrPath: string | string[], variantOrMode?: string, mode?: string): string;
 
 export { TileTypes, Tile as default, getTileToken };
-export type { TileAlignItemsType, TileBackgroundColorType, TileBackgroundSizeType, TileForegroundColorType, TileJustifyContentType, TileMaxWidthType, TileMaxWidthValueType, TileProps, TileTypographyProps };
+export type { TileAlignItemsType, TileBackgroundColorType, TileBackgroundSizeType, TileColorType, TileJustifyContentType, TileMaxWidthType, TileMaxWidthValueType, TileProps, TileTypographyProps };

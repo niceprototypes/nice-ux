@@ -12,7 +12,7 @@ const OuterFlex$1 = styled(Flex).withConfig({
   flex-direction: column;
   flex-grow: 1;
   background-color: ${getToken("backgroundColor", "base")};
-  color: ${getToken("foregroundColor", "base")};
+  color: ${getToken("color", "base")};
 
   ${({ $backgroundColor }) => {
     if ($backgroundColor) {
@@ -22,10 +22,10 @@ const OuterFlex$1 = styled(Flex).withConfig({
     }
 }}
 
-  ${({ $foregroundColor }) => {
-    if ($foregroundColor) {
+  ${({ $color }) => {
+    if ($color) {
         return css `
-        color: ${getToken("foregroundColor", $foregroundColor)};
+        color: ${getToken("color", $color)};
       `;
     }
 }}
@@ -107,8 +107,8 @@ const TileLayout = ({ children, contentTop, contentRight: TileRight, contentCent
         }, children: !!TileLeft || !!TileRight ? (jsxs(Fragment, { children: [TileLeft, jsx(TileContent, { gap: gap, contentTop: contentTop, contentCenter: contentCenter, title: title, titleProps: titleProps, description: description, descriptionProps: descriptionProps, mode: mode, alignItems: alignItems, justifyContent: justifyContent, children: children }), TileRight] })) : (jsx(TileContent, { contentTop: contentTop, contentCenter: contentCenter, title: title, titleProps: titleProps, description: description, descriptionProps: descriptionProps, mode: mode, gap: gap, alignItems: alignItems, justifyContent: justifyContent, children: children })) }));
 };
 
-const Tile$1 = ({ alignItems, backgroundAttachment = "fixed", backgroundColor, backgroundImage, backgroundPosition = "center", backgroundSize = "cover", children, className, contentCenter, contentLeft: TileLeft, contentRight: TileRight, contentTop, description, descriptionProps, foregroundColor, gap, justifyContent, maxWidth, mode, spacing, style, title, titleProps, }) => {
-    const tile = (jsx(OuterFlex$1, { "$backgroundAttachment": backgroundAttachment, "$backgroundColor": backgroundColor, "$backgroundImage": backgroundImage, "$backgroundPosition": backgroundPosition, "$backgroundSize": backgroundSize, "$foregroundColor": foregroundColor, className: className, style: style, children: jsx(TileLayout, { alignItems: alignItems, contentCenter: contentCenter, contentLeft: TileLeft, contentRight: TileRight, contentTop: contentTop, description: description, descriptionProps: descriptionProps, gap: gap, justifyContent: justifyContent, maxWidth: maxWidth, spacing: spacing, title: title, titleProps: titleProps, children: children }) }));
+const Tile$1 = ({ alignItems, backgroundAttachment = "fixed", backgroundColor, backgroundImage, backgroundPosition = "center", backgroundSize = "cover", children, className, contentCenter, contentLeft: TileLeft, contentRight: TileRight, contentTop, description, descriptionProps, color, gap, justifyContent, maxWidth, mode, spacing, style, title, titleProps, }) => {
+    const tile = (jsx(OuterFlex$1, { "$backgroundAttachment": backgroundAttachment, "$backgroundColor": backgroundColor, "$backgroundImage": backgroundImage, "$backgroundPosition": backgroundPosition, "$backgroundSize": backgroundSize, "$color": color, className: className, style: style, children: jsx(TileLayout, { alignItems: alignItems, contentCenter: contentCenter, contentLeft: TileLeft, contentRight: TileRight, contentTop: contentTop, description: description, descriptionProps: descriptionProps, gap: gap, justifyContent: justifyContent, maxWidth: maxWidth, spacing: spacing, title: title, titleProps: titleProps, children: children }) }));
     return mode ? jsx(Mode, { name: mode, children: tile }) : tile;
 };
 

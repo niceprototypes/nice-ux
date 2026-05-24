@@ -16,7 +16,7 @@ const OuterFlex$1 = styled(Flex).withConfig({
   flex-direction: column;
   flex-grow: 1;
   background-color: ${niceReactStyles.getToken("backgroundColor", "base")};
-  color: ${niceReactStyles.getToken("foregroundColor", "base")};
+  color: ${niceReactStyles.getToken("color", "base")};
 
   ${({ $backgroundColor }) => {
     if ($backgroundColor) {
@@ -26,10 +26,10 @@ const OuterFlex$1 = styled(Flex).withConfig({
     }
 }}
 
-  ${({ $foregroundColor }) => {
-    if ($foregroundColor) {
+  ${({ $color }) => {
+    if ($color) {
         return styled.css `
-        color: ${niceReactStyles.getToken("foregroundColor", $foregroundColor)};
+        color: ${niceReactStyles.getToken("color", $color)};
       `;
     }
 }}
@@ -111,8 +111,8 @@ const TileLayout = ({ children, contentTop, contentRight: TileRight, contentCent
         }, children: !!TileLeft || !!TileRight ? (jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [TileLeft, jsxRuntime.jsx(TileContent, { gap: gap, contentTop: contentTop, contentCenter: contentCenter, title: title, titleProps: titleProps, description: description, descriptionProps: descriptionProps, mode: mode, alignItems: alignItems, justifyContent: justifyContent, children: children }), TileRight] })) : (jsxRuntime.jsx(TileContent, { contentTop: contentTop, contentCenter: contentCenter, title: title, titleProps: titleProps, description: description, descriptionProps: descriptionProps, mode: mode, gap: gap, alignItems: alignItems, justifyContent: justifyContent, children: children })) }));
 };
 
-const Tile$1 = ({ alignItems, backgroundAttachment = "fixed", backgroundColor, backgroundImage, backgroundPosition = "center", backgroundSize = "cover", children, className, contentCenter, contentLeft: TileLeft, contentRight: TileRight, contentTop, description, descriptionProps, foregroundColor, gap, justifyContent, maxWidth, mode, spacing, style, title, titleProps, }) => {
-    const tile = (jsxRuntime.jsx(OuterFlex$1, { "$backgroundAttachment": backgroundAttachment, "$backgroundColor": backgroundColor, "$backgroundImage": backgroundImage, "$backgroundPosition": backgroundPosition, "$backgroundSize": backgroundSize, "$foregroundColor": foregroundColor, className: className, style: style, children: jsxRuntime.jsx(TileLayout, { alignItems: alignItems, contentCenter: contentCenter, contentLeft: TileLeft, contentRight: TileRight, contentTop: contentTop, description: description, descriptionProps: descriptionProps, gap: gap, justifyContent: justifyContent, maxWidth: maxWidth, spacing: spacing, title: title, titleProps: titleProps, children: children }) }));
+const Tile$1 = ({ alignItems, backgroundAttachment = "fixed", backgroundColor, backgroundImage, backgroundPosition = "center", backgroundSize = "cover", children, className, contentCenter, contentLeft: TileLeft, contentRight: TileRight, contentTop, description, descriptionProps, color, gap, justifyContent, maxWidth, mode, spacing, style, title, titleProps, }) => {
+    const tile = (jsxRuntime.jsx(OuterFlex$1, { "$backgroundAttachment": backgroundAttachment, "$backgroundColor": backgroundColor, "$backgroundImage": backgroundImage, "$backgroundPosition": backgroundPosition, "$backgroundSize": backgroundSize, "$color": color, className: className, style: style, children: jsxRuntime.jsx(TileLayout, { alignItems: alignItems, contentCenter: contentCenter, contentLeft: TileLeft, contentRight: TileRight, contentTop: contentTop, description: description, descriptionProps: descriptionProps, gap: gap, justifyContent: justifyContent, maxWidth: maxWidth, spacing: spacing, title: title, titleProps: titleProps, children: children }) }));
     return mode ? jsxRuntime.jsx(niceReactStyles.Mode, { name: mode, children: tile }) : tile;
 };
 
