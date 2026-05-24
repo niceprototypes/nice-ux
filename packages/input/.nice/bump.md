@@ -1,2 +1,3 @@
+[2026-05-23 20:07] patch: Drop unused `rollup-plugin-peer-deps-external` devDependency — externalization is now handled by `nice-configuration/rollup`'s built-in peerDependencies reader. No build-output change.
 [2026-05-20 15:08] major: `mode` prop now wraps Input in `<Mode name={mode}>` instead of pinning the styled-component to that mode in isolation. getStatusToken signature simplified — third `mode` argument removed; status/state/placeholder colors resolve via cascade.
 [2026-05-19 12:00] patch: Update consumer call sites to the unified getToken from nice-react-styles (was getReactToken). Internal-only rename — Input's public props are unchanged. Comments updated to reference nice-styles' renamed CSS artifact (tokens.css).
