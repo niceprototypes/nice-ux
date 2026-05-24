@@ -21,7 +21,7 @@ const OuterFlex$1 = styled(Flex).withConfig({
   ${({ $backgroundColor }) => {
     if ($backgroundColor) {
         return styled.css `
-        background-color: ${$backgroundColor};
+        background-color: ${niceReactStyles.getToken("backgroundColor", $backgroundColor)};
       `;
     }
 }}
@@ -29,7 +29,7 @@ const OuterFlex$1 = styled(Flex).withConfig({
   ${({ $foregroundColor }) => {
     if ($foregroundColor) {
         return styled.css `
-        color: ${$foregroundColor};
+        color: ${niceReactStyles.getToken("foregroundColor", $foregroundColor)};
       `;
     }
 }}
@@ -38,7 +38,7 @@ const OuterFlex$1 = styled(Flex).withConfig({
     if ($backgroundImage) {
         return styled.css `
         background-image: ${$backgroundImage};
-        background-size: ${$backgroundSize || "cover"};
+        background-size: ${$backgroundSize ? niceReactStyles.getToken("backgroundSize", $backgroundSize) : "cover"};
         background-position: ${$backgroundPosition || "center"};
         background-repeat: no-repeat;
 

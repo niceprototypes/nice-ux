@@ -1,11 +1,33 @@
 import * as React from 'react';
 import { ComponentType } from 'react';
-import { Breakpoints, GapType, ModeType, WithBreakpointsProps } from 'nice-react-styles';
+import { BackgroundColorType, BackgroundSizeType, ForegroundColorType, Breakpoints, GapType, ModeType, WithBreakpointsProps } from 'nice-react-styles';
 import { FlexProps, FlexSpacingType } from 'nice-react-flex';
 import { TypographyProps } from 'nice-react-typography';
 
 type TileTypographyProps = Partial<Omit<TypographyProps, "children">>;
 
+/**
+ * TileBackgroundColorType
+ *
+ * @token Re-export of BackgroundColorType from nice-styles. Token-bound —
+ * raw CSS color strings are not accepted. Use `backgroundImage` for
+ * gradients or image URLs.
+ */
+type TileBackgroundColorType = BackgroundColorType;
+/**
+ * TileBackgroundSizeType
+ *
+ * @token Re-export of BackgroundSizeType from nice-styles. Token-bound —
+ * raw CSS background-size strings are not accepted.
+ */
+type TileBackgroundSizeType = BackgroundSizeType;
+/**
+ * TileForegroundColorType
+ *
+ * @token Re-export of ForegroundColorType from nice-styles. Token-bound —
+ * raw CSS color strings are not accepted.
+ */
+type TileForegroundColorType = ForegroundColorType;
 /**
  * TileMaxWidthValueType
  *
@@ -66,11 +88,14 @@ interface TileProps {
     /** Top spacing applied to the Flex that wraps `children` below the title/description block. */
     gap?: GapType;
     backgroundImage?: string;
-    backgroundColor?: string;
+    /** @token Token-bound — accepts BackgroundColorType variants only. */
+    backgroundColor?: TileBackgroundColorType;
     backgroundPosition?: string;
-    backgroundSize?: string;
+    /** @token Token-bound — accepts BackgroundSizeType variants only. */
+    backgroundSize?: TileBackgroundSizeType;
     backgroundAttachment?: string;
-    foregroundColor?: string;
+    /** @token Token-bound — accepts ForegroundColorType variants only. */
+    foregroundColor?: TileForegroundColorType;
     mode?: ModeType;
     className?: string;
     style?: React.CSSProperties;
@@ -83,6 +108,9 @@ declare namespace TileTypes {
     type Gap = GapType;
     type MaxWidth = TileMaxWidthType;
     type MaxWidthValue = TileMaxWidthValueType;
+    type BackgroundColor = TileBackgroundColorType;
+    type BackgroundSize = TileBackgroundSizeType;
+    type ForegroundColor = TileForegroundColorType;
     type Props = TileProps;
 }
 
@@ -99,4 +127,4 @@ declare const TileStyles: ComponentType;
 declare function getTileToken(nameOrPath: string | string[], variantOrMode?: string, mode?: string): string;
 
 export { TileStyles, TileTypes, Tile as default, getTileToken };
-export type { TileAlignItemsType, TileJustifyContentType, TileMaxWidthType, TileMaxWidthValueType, TileProps, TileTypographyProps };
+export type { TileAlignItemsType, TileBackgroundColorType, TileBackgroundSizeType, TileForegroundColorType, TileJustifyContentType, TileMaxWidthType, TileMaxWidthValueType, TileProps, TileTypographyProps };

@@ -1,7 +1,39 @@
 import * as React from "react"
 import type { FlexSpacingType, FlexProps } from "nice-react-flex"
-import type { Breakpoints, ModeType, GapType } from "nice-react-styles"
+import type {
+  Breakpoints,
+  ModeType,
+  GapType,
+  BackgroundColorType,
+  BackgroundSizeType,
+  ForegroundColorType,
+} from "nice-react-styles"
 import type { TileTypographyProps } from "../TileContent/TileContent.types"
+
+/**
+ * TileBackgroundColorType
+ *
+ * @token Re-export of BackgroundColorType from nice-styles. Token-bound —
+ * raw CSS color strings are not accepted. Use `backgroundImage` for
+ * gradients or image URLs.
+ */
+export type TileBackgroundColorType = BackgroundColorType
+
+/**
+ * TileBackgroundSizeType
+ *
+ * @token Re-export of BackgroundSizeType from nice-styles. Token-bound —
+ * raw CSS background-size strings are not accepted.
+ */
+export type TileBackgroundSizeType = BackgroundSizeType
+
+/**
+ * TileForegroundColorType
+ *
+ * @token Re-export of ForegroundColorType from nice-styles. Token-bound —
+ * raw CSS color strings are not accepted.
+ */
+export type TileForegroundColorType = ForegroundColorType
 
 /**
  * TileMaxWidthValueType
@@ -75,13 +107,16 @@ export interface TileProps {
 
   // Background
   backgroundImage?: string
-  backgroundColor?: string
+  /** @token Token-bound — accepts BackgroundColorType variants only. */
+  backgroundColor?: TileBackgroundColorType
   backgroundPosition?: string
-  backgroundSize?: string
+  /** @token Token-bound — accepts BackgroundSizeType variants only. */
+  backgroundSize?: TileBackgroundSizeType
   backgroundAttachment?: string
 
   // Foreground
-  foregroundColor?: string
+  /** @token Token-bound — accepts ForegroundColorType variants only. */
+  foregroundColor?: TileForegroundColorType
   mode?: ModeType
 
   // HTML
@@ -98,6 +133,9 @@ namespace TileTypes {
   export type Gap = GapType
   export type MaxWidth = TileMaxWidthType
   export type MaxWidthValue = TileMaxWidthValueType
+  export type BackgroundColor = TileBackgroundColorType
+  export type BackgroundSize = TileBackgroundSizeType
+  export type ForegroundColor = TileForegroundColorType
   export type Props = TileProps
 }
 

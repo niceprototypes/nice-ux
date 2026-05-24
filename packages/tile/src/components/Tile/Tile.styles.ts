@@ -1,15 +1,20 @@
 import styled, { css } from "styled-components"
 import Flex from "nice-react-flex"
 import { getToken } from "nice-react-styles"
+import type {
+  BackgroundColorType,
+  BackgroundSizeType,
+  ForegroundColorType,
+} from "nice-react-styles"
 
 export const OuterFlex = styled(Flex).withConfig({
   shouldForwardProp: (prop) => !prop.startsWith('$'),
 })<{
   $backgroundImage?: string
-  $backgroundColor?: string
-  $foregroundColor?: string
+  $backgroundColor?: BackgroundColorType
+  $foregroundColor?: ForegroundColorType
   $backgroundPosition?: string
-  $backgroundSize?: string
+  $backgroundSize?: BackgroundSizeType
   $backgroundAttachment?: string
 }>`
   display: flex;
@@ -21,7 +26,7 @@ export const OuterFlex = styled(Flex).withConfig({
   ${({ $backgroundColor }) => {
     if ($backgroundColor) {
       return css`
-        background-color: ${$backgroundColor};
+        background-color: ${getToken("backgroundColor", $backgroundColor)};
       `
     }
   }}
@@ -29,7 +34,7 @@ export const OuterFlex = styled(Flex).withConfig({
   ${({ $foregroundColor }) => {
     if ($foregroundColor) {
       return css`
-        color: ${$foregroundColor};
+        color: ${getToken("foregroundColor", $foregroundColor)};
       `
     }
   }}
@@ -38,7 +43,7 @@ export const OuterFlex = styled(Flex).withConfig({
     if ($backgroundImage) {
       return css`
         background-image: ${$backgroundImage};
-        background-size: ${$backgroundSize || "cover"};
+        background-size: ${$backgroundSize ? getToken("backgroundSize", $backgroundSize) : "cover"};
         background-position: ${$backgroundPosition || "center"};
         background-repeat: no-repeat;
 
