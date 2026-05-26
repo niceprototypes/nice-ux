@@ -1,0 +1,71 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import Install from "../../src/components/Install"
+
+<Meta
+  title="Getting started/1 · Tokens/1.1 · Simple"
+  name="Docs"
+/>
+
+# Simple tokens
+
+The most direct way to use nice-styles: install, import the stylesheet, reference the CSS variables. No build step, no JS runtime.
+
+<Install package="styles" />
+
+## 2. Import stylesheet
+
+```css
+@import "nice-styles/tokens.css";
+```
+
+Every nice-styles token is now available as a CSS custom property on `:root`, namespaced under `--np--`.
+
+## 3. Use Nice tokens
+
+```css
+.message {
+  color: var(--np--color--base);
+
+  &.success {
+    color: var(--np--color--success);
+  }
+
+  &.error {
+    color: var(--np--color--error);
+  }
+}
+```
+
+## 4. Create aliases (optional)
+
+The `--np--…` namespace is verbose by design — it makes the source of every token unambiguous when nice-styles tokens sit alongside other custom properties. For a local stylesheet you often want shorter names. Alias them in `:root` once, then reference your shorter names everywhere else.
+
+```css
+@import "nice-styles/tokens.css";
+
+:root {
+  --color--base:    var(--np--color--base);
+  --color--success: var(--np--color--success);
+  --color--error:   var(--np--color--error);
+}
+
+.message {
+  color: var(--color--base);
+
+  &.success {
+    color: var(--color--success);
+  }
+
+  &.error {
+    color: var(--color--error);
+  }
+}
+```
+
+Identical behavior — the alias resolves through CSS at use time, so automatic mode swap and breakpoint suffixes still cascade through. Only the names at the call sites change.
+
+Keeping the segment structure (`--color--success` rather than `--success`) preserves the source's grouping. When you later add `--font-size--base`, `--gap--base`, `--border-radius--base`, every prefix tells you what kind of token it is. Flat aliases (`--success`, `--base`) lose that information and start colliding the moment you alias two groups.
+
+---
+
+Modes swap automatically (see [1.2 Modes](/?path=/docs/getting-started-1-tokens-1-2-modes--docs)), breakpoints are exposed as suffixed variants like `--np--font-size--base--laptop` (see [1.3 Breakpoints](/?path=/docs/getting-started-1-tokens-1-3-breakpoints--docs)).

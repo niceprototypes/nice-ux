@@ -2,6 +2,7 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import Image from "nice-react-image"
 import Flex from "nice-react-flex"
 import Icon from "nice-react-icon"
+import Install from "../../src/components/Install"
 
 export const Check = (props) => (
   <Flex justifyContent="center">
@@ -18,55 +19,7 @@ export const Check = (props) => (
 
 <Image className="nice-ui" bordered borderRadius="base" src="/rasters/dark-mode.png" alt="Dark mode" />
 
-### Why are modes important?
-
-If your user's OS or browser is set to dark mode, and your site is bright, your user may feel that your app is not worth browsing in low-light settings, and may decide to return later.
-
-### How do other design systems handle modes?
-
-Most major React UI libraries treat dark mode as a single binary toggle managed at the provider level. Nice handles it as a cascade through pure CSS, accepts custom mode names, and exposes a `mode` prop on each visual component.
-
-| Capability | Nice UI | Tailwind | Material UI | Ant Design | Chakra UI | Radix UI |
-|---|:---:|:---:|:---:|:---:|:---:|:---:|
-| Follows the browser's color preference by default | <Check /> | <Check /> |   |   |   |   |
-| Pin a section to a mode without wrapping React components | <Check /> | <Check /> |   |   |   |   |
-| Set mode directly on a component (e.g. `<Button mode="night">`) | <Check /> |   |   |   |   |   |
-| Children inherit their ancestor's mode automatically | <Check /> | <Check /> | <Check /> | <Check /> | <Check /> | <Check /> |
-| Switch mode at runtime without re-rendering React | <Check /> | <Check /> | <Check /> |   |   |   |
-| Define custom modes beyond light/dark | <Check /> | <Check /> |   |   |   |   |
-| Define each color once; both modes derive from it | <Check /> |   |   | <Check /> |   |   |
-
-Blank cells include partials:
-
-- **Material UI** — subtree pinning works at the CSS level via `colorSchemeSelector`, but docs only scope it through a top-level `ThemeProvider`.
-- **Ant Design** — runtime swap re-renders the provider unless CSS variables are opted in via `cssVar`; custom modes require writing a full algorithm function.
-- **Chakra UI** — semantic tokens accept `_light` / `_dark` conditions, but custom condition names aren't documented as a public API.
-- **Radix UI** — class-based switching (`.light` / `.dark`) is supported but the docs frame it as `next-themes` integration glue rather than a first-class CSS-only feature.
-- **Tailwind** — `dark:` variant matches `prefers-color-scheme` out of the box, but each utility still needs a `dark:` prefix per usage; `@theme` doesn't auto-emit dark variants.
-
-### How does the design system pick a mode by default?
-
-By default, the design system matches whatever color mode the browser
-reports as the user's preference. That preference usually mirrors the
-operating system setting, but the browser can override it (browser
-settings, DevTools, or extensions like Dark Reader).
-
-### What does that mean for color variables?
-
-Each color variable
-(e.g. `--np--color--base`) holds its light value by default
-and automatically swaps to its dark counterpart when the browser
-reports dark.
-
-### Where does the swap actually happen?
-
-The swap is handled by the standard CSS rule
-`@media (prefers-color-scheme: dark)` which is already wired into every color
-variable in `tokens.css` — you don't have to write it yourself.
-
-```bash
-npm install nice-styles
-```
+<Install package="styles" />
 
 ## Pin via `data-theme`
 
@@ -112,3 +65,44 @@ region pinned to the opposite.
 
 .toast--success-night { color: var(--np--color--success--night); }
 ```
+
+---
+
+## More about modes
+
+### Why are modes important?
+
+If your user's OS or browser is set to dark mode, and your site is bright, your user may feel that your app is not worth browsing in low-light settings, and may decide to return later.
+
+### How do other design systems handle modes?
+
+Most major React UI libraries treat dark mode as a single binary toggle managed at the provider level. Nice handles it as a cascade through pure CSS, accepts custom mode names, and exposes a `mode` prop on each visual component.
+
+| Capability | Nice UI | Tailwind | Material UI | Ant Design | Chakra UI | Radix UI |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|
+| Configure mode directly on a component | <Check /> |   |   |   |   |   |
+| Pin section to mode without React wrapper | <Check /> | <Check /> |   |   |   |   |
+| Colors defined once (mode colors derived)  | <Check /> |   |   | <Check /> |   |   |
+| Linked by defaukt to user's OS/browser settings | <Check /> | <Check /> |   |   |   |   |
+| Switch mode at runtime without re-rendering | <Check /> | <Check /> | <Check /> |   |   |   |
+| Define custom modes (beyond light/dark) | <Check /> | <Check /> |   |   |   |   |
+
+### How does the design system pick a mode by default?
+
+By default, the design system matches whatever color mode the browser
+reports as the user's preference. That preference usually mirrors the
+operating system setting, but the browser can override it (browser
+settings, DevTools, or extensions like Dark Reader).
+
+### What does that mean for color variables?
+
+Each color variable
+(e.g. `--np--color--base`) holds its light value by default
+and automatically swaps to its dark counterpart when the browser
+reports dark.
+
+### Where does the swap actually happen?
+
+The swap is handled by the standard CSS rule
+`@media (prefers-color-scheme: dark)` which is already wired into every color
+variable in `tokens.css` — you don't have to write it yourself.

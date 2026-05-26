@@ -1,47 +1,40 @@
 import React from "react"
 import type { Preview } from "@storybook/react-vite"
-import { create } from "storybook/theming"
-import { DocsContainer } from "@storybook/addon-docs/blocks"
-import { StylesProvider, Mode, getTokenValue } from "nice-react-styles"
+import { themes } from "storybook/theming"
+import { addons } from "storybook/preview-api"
+import { DARK_MODE_EVENT_NAME } from "storybook-dark-mode"
+import { StylesProvider } from "nice-react-styles"
 import "nice-react-icon-vendor"
 import "nice-react-image-vendor"
 import "../src/nice/tokens"
 import "./preview.css"
 
-const docsTheme = create({
-  base: "light",
-  fontBase: getTokenValue("fontFamily", "base"),
-  fontCode: getTokenValue("fontFamily", "code"),
+// Mirror storybook-dark-mode's state into <html data-theme="night|day"> so
+// nice-styles' [data-theme] cascade applies to canvas, MDX docs prose, and
+// any nice-* component dropped directly into MDX. The addon itself only
+// knows light/dark — we translate to nice's day/night here.
+addons.getChannel().on(DARK_MODE_EVENT_NAME, (isDark: boolean) => {
+  document.documentElement.setAttribute("data-theme", isDark ? "night" : "day")
 })
 
 const preview: Preview = {
   decorators: [
     Story => (
       <StylesProvider>
-        <Mode name="day" className="nice-storybook">
-          <Story />
-        </Mode>
+        <Story />
       </StylesProvider>
     ),
   ],
   parameters: {
+    darkMode: {
+      dark: themes.dark,
+      light: themes.normal,
+    },
     controls: {
       matchers: {
         color: /(background|color)$/i,
         date: /Date$/i,
       },
-    },
-    docs: {
-      theme: docsTheme,
-      // Wraps the entire docs page (MDX prose + embedded Story blocks) in
-      // Mode. The Story decorator above only wraps Story subtrees, so MDX
-      // content rendered outside <Story> needs this container-level wrap
-      // to inherit the data-theme cascade.
-      container: ({ children, context }: { children: React.ReactNode; context: any }) => (
-        <DocsContainer context={context}>
-          <Mode name="day" className="nice-storybook">{children}</Mode>
-        </DocsContainer>
-      ),
     },
     options: {
       storySort: {
@@ -55,8 +48,9 @@ const preview: Preview = {
               "1.1 · Simple",
               "1.2 · Modes",
               "1.3 · Breakpoints",
-              "1.4 · Responsive",
-              "1.5 · Utility classes",
+              "1.4 · Fonts",
+              "1.5 · Responsive",
+              "1.6 · Utility classes",
             ],
             "2 · React getters",
             "3 · React setters",
