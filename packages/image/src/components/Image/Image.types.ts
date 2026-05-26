@@ -67,6 +67,15 @@ export type ImageBackgroundSizeType = BackgroundSizeType
 export type ImageBackgroundPositionType = string
 
 /**
+ * ImageAspectRatioType
+ *
+ * Aspect ratio of the image. Accepts any valid CSS aspect-ratio value
+ * (e.g. "16/9", "1", "4 / 3"). Applied via the CSS `aspect-ratio` property
+ * to both `as="img"` and `as="div"` rendering paths.
+ */
+export type ImageAspectRatioType = string
+
+/**
  * ImageBorderRadiusType
  *
  * Re-export of BorderRadiusType from nice-styles.
@@ -145,6 +154,9 @@ export type ImageProps = {
   /** Height of the image container */
   height?: ImageHeightType
 
+  /** Aspect ratio of the image container (CSS aspect-ratio value, e.g. "16/9") */
+  aspectRatio?: ImageAspectRatioType
+
   /** How the image fits within its container */
   backgroundSize?: ImageBackgroundSizeType
 
@@ -191,6 +203,7 @@ namespace ImageTypes {
   export type Alt = ImageAltType
   export type Width = ImageWidthType
   export type Height = ImageHeightType
+  export type AspectRatio = ImageAspectRatioType
   export type BackgroundSize = ImageBackgroundSizeType
   export type BackgroundPosition = ImageBackgroundPositionType
   export type BorderRadius = ImageBorderRadiusType

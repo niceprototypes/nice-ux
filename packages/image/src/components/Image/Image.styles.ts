@@ -37,6 +37,7 @@ function backgroundSizeToCss(size: ImageBackgroundSizeType): string {
 const sharedStyles = css<{
   $width?: string
   $height?: string
+  $aspectRatio?: string
   $borderRadius?: BorderRadiusType
   $bordered?: boolean
   $borderWidth?: BorderWidthType
@@ -47,6 +48,7 @@ const sharedStyles = css<{
   /* Dimensions */
   ${({ $width }) => $width && css`width: ${$width};`}
   ${({ $height }) => $height && css`height: ${$height};`}
+  ${({ $aspectRatio }) => $aspectRatio && css`aspect-ratio: ${$aspectRatio};`}
 
   /* Border radius from design tokens */
   ${({ $borderRadius }) =>
@@ -66,6 +68,7 @@ const sharedStyles = css<{
 export const StyledImg = styled.img<{
   $width?: string
   $height?: string
+  $aspectRatio?: string
   $backgroundSize?: ImageBackgroundSizeType
   $backgroundPosition?: ImageBackgroundPositionType
   $borderRadius?: BorderRadiusType
@@ -94,6 +97,7 @@ export const StyledBackgroundImage = styled.div<{
   $src: string
   $width?: string
   $height?: string
+  $aspectRatio?: string
   $backgroundSize?: ImageBackgroundSizeType
   $backgroundPosition?: ImageBackgroundPositionType
   $borderRadius?: BorderRadiusType

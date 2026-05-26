@@ -39,6 +39,7 @@ const Image: React.FC<ImageProps> = ({
   alt,
   width,
   height,
+  aspectRatio,
   backgroundSize,
   backgroundPosition,
   borderRadius,
@@ -68,6 +69,7 @@ const Image: React.FC<ImageProps> = ({
         $src={resolvedSrc ?? ""}
         $width={width}
         $height={height}
+        $aspectRatio={aspectRatio}
         $backgroundSize={backgroundSize}
         $backgroundPosition={backgroundPosition}
         $borderRadius={borderRadius}
@@ -91,6 +93,7 @@ const Image: React.FC<ImageProps> = ({
       alt={alt}
       $width={width}
       $height={height}
+      $aspectRatio={aspectRatio}
       $backgroundSize={backgroundSize}
       $backgroundPosition={backgroundPosition}
       $borderRadius={borderRadius}
