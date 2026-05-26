@@ -1,4 +1,4 @@
-import { FlexSpacingDefinitionType, FlexSpacingShorthandType } from "../components/Flex/Flex.types";
+import { FlexSpacingDefinitionType, FlexSpacingType } from "../components/Flex/Flex.types";
 /**
  * Parses a CSS-like spacing shorthand string into a SpacingDefinition object.
  *
@@ -11,5 +11,5 @@ import { FlexSpacingDefinitionType, FlexSpacingShorthandType } from "../componen
  * @param shorthand - The spacing shorthand string
  * @returns SpacingDefinition with top, right, bottom, left values
  */
-export declare const parseSpacingShorthand: (shorthand: FlexSpacingShorthandType) => FlexSpacingDefinitionType;
+export declare const parseSpacingShorthand: (shorthand: FlexSpacingType) => FlexSpacingDefinitionType;
 //# sourceMappingURL=parseSpacingShorthand.d.ts.map

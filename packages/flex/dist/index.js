@@ -8,46 +8,22 @@ require('react');
 var styled = require('styled-components');
 
 /**
- * Checks if a value is a responsive breakpoint object (has phone, tablet, laptop, or desktop keys)
+ * Extracts the value for a specific breakpoint from a normalized prop.
  *
- * @function isResponsiveObject
- * @param {unknown} value - The value to check
- * @returns {boolean} True if the value is an object with breakpoint keys
- *
- * @example
- * isResponsiveObject({ phone: "column", tablet: "row" }) // true
- * isResponsiveObject({ all: "base" }) // false
- * isResponsiveObject("row") // false
- * isResponsiveObject(null) // false
- */
-const isResponsiveObject = (value) => typeof value === "object" &&
-    value !== null &&
-    (niceReactStyles.BREAKPOINT_PHONE in value ||
-        niceReactStyles.BREAKPOINT_TABLET in value ||
-        niceReactStyles.BREAKPOINT_LAPTOP in value ||
-        niceReactStyles.BREAKPOINT_DESKTOP in value);
-
-/**
- * Extracts the value for a specific breakpoint from a prop that can be either
- * a simple value or a responsive object
- *
- * @function getBreakpointValue
- * @param {T | { phone?: T; tablet?: T; laptop?: T; desktop?: T } | undefined} value - The prop value
- * @param {BreakpointName} breakpoint - The target breakpoint
- * @returns {T | undefined} The value for the specified breakpoint
+ * After `normalizeProps`, every per-breakpoint prop is wrapped into a phone-
+ * keyed object (`{ phone: value }`). Tablet/laptop/desktop overrides are
+ * folded in by the `withBreakpoints` HOC before `styleFlex` runs, so this
+ * function simply returns the per-breakpoint value or undefined.
  *
  * @example
- * getBreakpointValue("row", BREAKPOINT_PHONE) // returns "row"
- * getBreakpointValue("row", BREAKPOINT_TABLET) // returns undefined (simple values only apply at phone)
- * getBreakpointValue({ phone: "column", tablet: "row" }, BREAKPOINT_TABLET) // returns "row"
+ * getBreakpointValue({ phone: "row" }, "phone")   // → "row"
+ * getBreakpointValue({ phone: "row" }, "tablet")  // → undefined
+ * getBreakpointValue({ phone: "column", tablet: "row" }, "tablet") // → "row"
  */
 const getBreakpointValue = (value, breakpoint) => {
     if (value === undefined)
         return undefined;
-    if (isResponsiveObject(value)) {
-        return value[breakpoint];
-    }
-    return breakpoint === niceReactStyles.BREAKPOINT_PHONE ? value : undefined;
+    return value[breakpoint];
 };
 
 /**
@@ -139,52 +115,34 @@ const parseSpacingShorthand = (shorthand) => {
 };
 
 /**
- * Extracts the SpacingDefinition for a specific breakpoint from a spacing prop
+ * Resolves the SpacingDefinition for a specific breakpoint from a shorthand
+ * string prop.
  *
- * @function getSpacingValue
- * @param {SpacingProp | undefined} spacing - The spacing prop value
- * @param {BreakpointName} breakpoint - The target breakpoint
- * @returns {SpacingDefinition | null | undefined} The spacing definition for the specified breakpoint
- *
- * @description
- * Handles two possible shapes of the spacing prop:
- * - Shorthand string: "small", "small base", etc. - parsed and applied to "phone" breakpoint
- * - Responsive object: { phone?: string | null, tablet?: string | null, laptop?: string | null, desktop?: string | null }
- *
- * Returns null when spacing is explicitly disabled at a breakpoint.
- * Returns undefined when no spacing is defined for the breakpoint.
+ * Spacing is consumed as a single scalar shorthand string (e.g. `"small"`,
+ * `"small base"`). The shorthand is parsed and applied at the phone
+ * breakpoint; tablet/laptop/desktop overrides flow in through the
+ * `breakpoints` prop, which the `withBreakpoints` HOC folds into each
+ * breakpoint's props before this function runs.
  *
  * @example
- * getSpacingValue("small", BREAKPOINT_PHONE) // returns { top: "small", right: "small", bottom: "small", left: "small" }
- * getSpacingValue("small base", BREAKPOINT_PHONE) // returns { top: "small", right: "base", bottom: "small", left: "base" }
- * getSpacingValue("small", BREAKPOINT_TABLET) // returns undefined (shorthand only applies to phone)
- * getSpacingValue({ phone: "base", tablet: null, laptop: "small" }, BREAKPOINT_TABLET) // returns null
- * getSpacingValue({ phone: "base", laptop: "small large" }, BREAKPOINT_LAPTOP) // returns { top: "small", right: "large", bottom: "small", left: "large" }
+ * getSpacingValue("small", "phone")
+ * // → { top: "small", right: "small", bottom: "small", left: "small" }
+ *
+ * @example
+ * getSpacingValue("small base", "phone")
+ * // → { top: "small", right: "base", bottom: "small", left: "base" }
+ *
+ * @example
+ * getSpacingValue("small", "tablet")
+ * // → undefined (no spacing rule emitted at non-phone breakpoints unless
+ * //   the HOC merged a tablet override from the `breakpoints` prop)
  */
 const getSpacingValue = (spacing, breakpoint) => {
     if (spacing === undefined)
         return undefined;
-    // Handle shorthand string (applies to phone only)
-    if (typeof spacing === "string") {
-        if (breakpoint === niceReactStyles.BREAKPOINT_PHONE) {
-            return parseSpacingShorthand(spacing);
-        }
+    if (breakpoint !== niceReactStyles.BREAKPOINT_PHONE)
         return undefined;
-    }
-    // Handle responsive object
-    if (isResponsiveObject(spacing)) {
-        const responsiveSpacing = spacing;
-        const value = responsiveSpacing[breakpoint];
-        if (value === null)
-            return null;
-        if (value === undefined)
-            return undefined;
-        if (typeof value === "string") {
-            return parseSpacingShorthand(value);
-        }
-        return undefined;
-    }
-    return undefined;
+    return parseSpacingShorthand(spacing);
 };
 
 /**
@@ -245,6 +203,9 @@ function pushGrowStyles(styles, grow) {
     styles.push(`flex-grow: ${grow};`);
     styles.push("flex-basis: 0;");
 }
+function pushShrinkStyles(styles, shrink) {
+    styles.push(`flex-shrink: ${shrink};`);
+}
 function pushWrapStyles(styles, wrap) {
     styles.push(`flex-wrap: ${wrap};`);
 }
@@ -296,6 +257,12 @@ function pushSpacingStyles(styles, type, spacing) {
  * The function is designed to work with props that have been processed by
  * the normalizeProps service, ensuring consistent prop structure.
  *
+ * Examples below show the POST-normalizeProps shape (every per-breakpoint
+ * prop is a `{ phone, tablet, laptop, desktop }` object). Consumer-facing
+ * `<Flex>` props are scalar; responsive overrides flow in through the
+ * `breakpoints` prop, which the `withBreakpoints` HOC folds into each
+ * breakpoint's props before this function runs.
+ *
  * @example
  * // Generate phone breakpoint styles
  * const props = { direction: { phone: "column" }, gap: { phone: "small" } }
@@ -317,6 +284,7 @@ const styleFlex = (breakpoint, props) => {
     const direction = getBreakpointValue(props.direction, breakpoint);
     const gap = getBreakpointValue(props.gap, breakpoint);
     const grow = getBreakpointValue(props.grow, breakpoint);
+    const shrink = getBreakpointValue(props.shrink, breakpoint);
     const alignItems = getBreakpointValue(props.alignItems, breakpoint);
     const justifyContent = getBreakpointValue(props.justifyContent, breakpoint);
     const wrap = getBreakpointValue(props.wrap, breakpoint);
@@ -331,6 +299,8 @@ const styleFlex = (breakpoint, props) => {
         pushJustifyContentStyles(styles, justifyContent);
     if (grow !== undefined)
         pushGrowStyles(styles, grow);
+    if (shrink !== undefined)
+        pushShrinkStyles(styles, shrink);
     if (wrap)
         pushWrapStyles(styles, wrap);
     if (gap !== undefined)
@@ -378,8 +348,12 @@ const isForwardable = (prop) => ALLOWED_DOM_PROPS.has(prop) ||
  * 3. **Service Integration**: Delegates actual CSS generation to the styleFlex service,
  *    keeping the styled component focused on responsive breakpoint management.
  *
+ * `FlexStyled` is internal — it receives the post-`normalizeProps` shape,
+ * not the consumer-facing scalar shape. Public usage of `<Flex>` is
+ * scalar; responsive overrides flow in through the `breakpoints` prop.
+ *
  * @example
- * // Basic usage in component
+ * // Internal usage (post-normalize)
  * <FlexStyled direction={{ phone: "column", tablet: "row" }} gap={{ phone: "small", laptop: "large" }}>
  *   <div>Content</div>
  * </FlexStyled>
@@ -403,34 +377,30 @@ const FlexStyled = styled.div.withConfig({
 `;
 
 /**
- * List of props that accept breakpoint values.
- * These props can be specified as either simple values or breakpoint objects.
- * Spacing is handled directly by getSpacingValue and doesn't need normalization.
+ * Per-breakpoint props that get wrapped into phone-keyed objects so the
+ * downstream styling pipeline can iterate breakpoints uniformly. Spacing
+ * is handled separately by `getSpacingValue`, which parses shorthand at
+ * render time without going through this normalization step.
  */
-const breakpointProps = ["gap", "direction", "grow", "wrap", "alignItems", "justifyContent"];
+const breakpointProps = ["gap", "direction", "grow", "shrink", "wrap", "alignItems", "justifyContent"];
 /**
- * normalizeProps Helper
+ * normalizeProps
  *
- * Transforms component props to ensure consistent structure for styling logic.
- * Converts simple prop values into breakpoint objects to simplify downstream processing.
+ * Wraps every scalar per-breakpoint prop into a `{ phone: value }` object
+ * so `styleFlex` can call `getBreakpointValue(prop, breakpoint)` uniformly
+ * regardless of which breakpoint it's emitting CSS for. Tablet/laptop/
+ * desktop overrides flow through the `breakpoints` prop merged in by the
+ * `withBreakpoints` HOC, not through this function.
  *
- * @function normalizeProps
- * @param {FlexProps} props - The raw props passed to the Flex component
- * @returns {FlexProps} Normalized props with consistent breakpoint structure
- *
- * @description
- * Converts simple prop values into breakpoint objects:
- * - Example: `gap="base"` becomes `gap={{ phone: "base" }}`
- * - Example: `direction="row"` becomes `direction={{ phone: "row" }}`
- *
- * Note: The spacing prop is NOT normalized here. It's handled directly by
- * getSpacingValue which parses shorthand strings at render time.
+ * @example
+ * normalizeProps({ gap: "base", direction: "row" })
+ * // → { gap: { phone: "base" }, direction: { phone: "row" } }
  */
 const normalizeProps = (props) => {
     const normalizedProps = { ...props };
     breakpointProps.forEach((propName) => {
         const value = props[propName];
-        if (value !== undefined && typeof value !== "object") {
+        if (value !== undefined) {
             normalizedProps[propName] = { [niceReactStyles.BREAKPOINT_PHONE]: value };
         }
     });
@@ -534,7 +504,6 @@ exports.default = Flex;
 exports.getBreakpointValue = getBreakpointValue;
 exports.getGapSize = getGapSize;
 exports.getSpacingValue = getSpacingValue;
-exports.isResponsiveObject = isResponsiveObject;
 exports.styleFlex = styleFlex;
 exports.styleSpacing = styleSpacing;
 //# sourceMappingURL=index.js.map

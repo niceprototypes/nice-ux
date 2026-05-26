@@ -1,59 +1,35 @@
-import { SpacingDefinition, Spacing, FlexSpacingShorthandType, FlexSpacingResponsiveType } from "../components/Flex/Flex.types"
+import { SpacingDefinition, FlexSpacingType } from "../components/Flex/Flex.types"
 import { BREAKPOINT_PHONE, type BreakpointName } from "nice-react-styles"
 import { parseSpacingShorthand } from "../utilities/parseSpacingShorthand"
-import { isResponsiveObject } from "./isResponsiveObject"
 
 /**
- * Extracts the SpacingDefinition for a specific breakpoint from a spacing prop
+ * Resolves the SpacingDefinition for a specific breakpoint from a shorthand
+ * string prop.
  *
- * @function getSpacingValue
- * @param {SpacingProp | undefined} spacing - The spacing prop value
- * @param {BreakpointName} breakpoint - The target breakpoint
- * @returns {SpacingDefinition | null | undefined} The spacing definition for the specified breakpoint
- *
- * @description
- * Handles two possible shapes of the spacing prop:
- * - Shorthand string: "small", "small base", etc. - parsed and applied to "phone" breakpoint
- * - Responsive object: { phone?: string | null, tablet?: string | null, laptop?: string | null, desktop?: string | null }
- *
- * Returns null when spacing is explicitly disabled at a breakpoint.
- * Returns undefined when no spacing is defined for the breakpoint.
+ * Spacing is consumed as a single scalar shorthand string (e.g. `"small"`,
+ * `"small base"`). The shorthand is parsed and applied at the phone
+ * breakpoint; tablet/laptop/desktop overrides flow in through the
+ * `breakpoints` prop, which the `withBreakpoints` HOC folds into each
+ * breakpoint's props before this function runs.
  *
  * @example
- * getSpacingValue("small", BREAKPOINT_PHONE) // returns { top: "small", right: "small", bottom: "small", left: "small" }
- * getSpacingValue("small base", BREAKPOINT_PHONE) // returns { top: "small", right: "base", bottom: "small", left: "base" }
- * getSpacingValue("small", BREAKPOINT_TABLET) // returns undefined (shorthand only applies to phone)
- * getSpacingValue({ phone: "base", tablet: null, laptop: "small" }, BREAKPOINT_TABLET) // returns null
- * getSpacingValue({ phone: "base", laptop: "small large" }, BREAKPOINT_LAPTOP) // returns { top: "small", right: "large", bottom: "small", left: "large" }
+ * getSpacingValue("small", "phone")
+ * // → { top: "small", right: "small", bottom: "small", left: "small" }
+ *
+ * @example
+ * getSpacingValue("small base", "phone")
+ * // → { top: "small", right: "base", bottom: "small", left: "base" }
+ *
+ * @example
+ * getSpacingValue("small", "tablet")
+ * // → undefined (no spacing rule emitted at non-phone breakpoints unless
+ * //   the HOC merged a tablet override from the `breakpoints` prop)
  */
 export const getSpacingValue = (
-  spacing: Spacing | undefined,
+  spacing: FlexSpacingType | undefined,
   breakpoint: BreakpointName
-): SpacingDefinition | null | undefined => {
+): SpacingDefinition | undefined => {
   if (spacing === undefined) return undefined
-
-  // Handle shorthand string (applies to phone only)
-  if (typeof spacing === "string") {
-    if (breakpoint === BREAKPOINT_PHONE) {
-      return parseSpacingShorthand(spacing as FlexSpacingShorthandType)
-    }
-    return undefined
-  }
-
-  // Handle responsive object
-  if (isResponsiveObject(spacing)) {
-    const responsiveSpacing = spacing as FlexSpacingResponsiveType
-    const value = responsiveSpacing[breakpoint]
-
-    if (value === null) return null
-    if (value === undefined) return undefined
-
-    if (typeof value === "string") {
-      return parseSpacingShorthand(value as FlexSpacingShorthandType)
-    }
-
-    return undefined
-  }
-
-  return undefined
+  if (breakpoint !== BREAKPOINT_PHONE) return undefined
+  return parseSpacingShorthand(spacing)
 }

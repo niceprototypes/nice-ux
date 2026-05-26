@@ -1,12 +1,9 @@
 import * as React from "react"
 import type {
-  Breakpoints,
   BreakpointName,
   GapType,
   SpacingShorthandType,
   SpacingDefinitionType,
-  SpacingResponsiveType,
-  SpacingType,
 } from "nice-react-styles"
 
 /**
@@ -65,19 +62,19 @@ export type FlexJustifyContentType = "flex-start" | "flex-end" | "center" | "spa
 export type FlexWrapType = "nowrap" | "wrap" | "wrap-reverse"
 
 /**
- * FlexSpacingShorthandType
+ * FlexSpacingType
  *
- * Re-export of SpacingShorthandType from nice-styles.
- * CSS-like shorthand string for spacing using token names.
- * Supports 1-4 space-separated token values following CSS padding/margin shorthand rules:
+ * CSS-like shorthand string for spacing using token names. Supports 1-4
+ * space-separated token values following CSS padding/margin shorthand rules:
  * - 1 value: "small" → all sides
  * - 2 values: "small base" → top/bottom, left/right
  * - 3 values: "small base large" → top, left/right, bottom
  * - 4 values: "small base large smaller" → top, right, bottom, left
  *
- * For custom CSS values (px, rem, etc.), use the style prop instead.
+ * For per-breakpoint overrides, use the wrapper's `breakpoints` prop. For
+ * custom CSS values (px, rem, etc.), use the `style` prop instead.
  */
-export type FlexSpacingShorthandType = SpacingShorthandType
+export type FlexSpacingType = SpacingShorthandType
 
 /**
  * FlexSpacingDefinitionType
@@ -90,28 +87,6 @@ export type FlexSpacingShorthandType = SpacingShorthandType
  * - top, right, bottom, left: Individual side control with token values
  */
 export type FlexSpacingDefinitionType = SpacingDefinitionType
-
-/**
- * FlexSpacingResponsiveType
- *
- * Re-export of SpacingResponsiveType from nice-styles.
- * Responsive spacing configuration where each breakpoint can have:
- * - A shorthand string (e.g., "small base")
- * - null to explicitly disable spacing at that breakpoint
- */
-export type FlexSpacingResponsiveType = SpacingResponsiveType
-
-/**
- * FlexSpacingType
- *
- * Re-export of SpacingType from nice-styles.
- * Union type for the spacing prop, supporting two formats:
- * - Shorthand string: "small", "small base", etc. (applies to phone breakpoint)
- * - Responsive object: { phone: "base", tablet: null, laptop: "small large" }
- *
- * For custom CSS values, use the style prop on Flex instead.
- */
-export type FlexSpacingType = SpacingType
 
 /**
  * FlexProps
@@ -128,12 +103,13 @@ export type FlexSpacingType = SpacingType
 export type FlexProps = {
   /** Whether spacing applies as padding or margin */
   type?: FlexTypeType
-  gap?: Breakpoints<FlexGapSizeType>
-  direction?: Breakpoints<FlexDirectionType>
-  alignItems?: Breakpoints<FlexAlignItemsType>
-  justifyContent?: Breakpoints<FlexJustifyContentType>
-  grow?: Breakpoints<number>
-  wrap?: Breakpoints<FlexWrapType>
+  gap?: FlexGapSizeType
+  direction?: FlexDirectionType
+  alignItems?: FlexAlignItemsType
+  justifyContent?: FlexJustifyContentType
+  grow?: number
+  shrink?: number
+  wrap?: FlexWrapType
   spacing?: FlexSpacingType
   children: React.ReactNode
   style?: React.CSSProperties
@@ -144,8 +120,6 @@ export type FlexProps = {
 export type GapSize = FlexGapSizeType
 export type Breakpoint = FlexBreakpointType
 export type SpacingDefinition = FlexSpacingDefinitionType
-export type SpacingShorthand = FlexSpacingShorthandType
-export type SpacingResponsive = FlexSpacingResponsiveType
 export type Spacing = FlexSpacingType
 
 // Declaration merging: const + namespace creates exportable type namespace
@@ -160,8 +134,6 @@ namespace FlexTypes {
   export type JustifyContent = FlexJustifyContentType
   export type Wrap = FlexWrapType
   export type SpacingDefinition = FlexSpacingDefinitionType
-  export type SpacingShorthand = FlexSpacingShorthandType
-  export type SpacingResponsive = FlexSpacingResponsiveType
   export type Spacing = FlexSpacingType
   export type Props = FlexProps
 }

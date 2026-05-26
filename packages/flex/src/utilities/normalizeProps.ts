@@ -2,36 +2,32 @@ import { FlexProps } from "../components/Flex/Flex.types"
 import { BREAKPOINT_PHONE } from "nice-react-styles"
 
 /**
- * List of props that accept breakpoint values.
- * These props can be specified as either simple values or breakpoint objects.
- * Spacing is handled directly by getSpacingValue and doesn't need normalization.
+ * Per-breakpoint props that get wrapped into phone-keyed objects so the
+ * downstream styling pipeline can iterate breakpoints uniformly. Spacing
+ * is handled separately by `getSpacingValue`, which parses shorthand at
+ * render time without going through this normalization step.
  */
-const breakpointProps = ["gap", "direction", "grow", "wrap", "alignItems", "justifyContent"] as const
+const breakpointProps = ["gap", "direction", "grow", "shrink", "wrap", "alignItems", "justifyContent"] as const
 
 /**
- * normalizeProps Helper
+ * normalizeProps
  *
- * Transforms component props to ensure consistent structure for styling logic.
- * Converts simple prop values into breakpoint objects to simplify downstream processing.
+ * Wraps every scalar per-breakpoint prop into a `{ phone: value }` object
+ * so `styleFlex` can call `getBreakpointValue(prop, breakpoint)` uniformly
+ * regardless of which breakpoint it's emitting CSS for. Tablet/laptop/
+ * desktop overrides flow through the `breakpoints` prop merged in by the
+ * `withBreakpoints` HOC, not through this function.
  *
- * @function normalizeProps
- * @param {FlexProps} props - The raw props passed to the Flex component
- * @returns {FlexProps} Normalized props with consistent breakpoint structure
- *
- * @description
- * Converts simple prop values into breakpoint objects:
- * - Example: `gap="base"` becomes `gap={{ phone: "base" }}`
- * - Example: `direction="row"` becomes `direction={{ phone: "row" }}`
- *
- * Note: The spacing prop is NOT normalized here. It's handled directly by
- * getSpacingValue which parses shorthand strings at render time.
+ * @example
+ * normalizeProps({ gap: "base", direction: "row" })
+ * // → { gap: { phone: "base" }, direction: { phone: "row" } }
  */
 export const normalizeProps = (props: FlexProps): FlexProps => {
   const normalizedProps = { ...props }
 
   breakpointProps.forEach((propName) => {
     const value = props[propName as keyof FlexProps]
-    if (value !== undefined && typeof value !== "object") {
+    if (value !== undefined) {
       ;(normalizedProps as any)[propName] = { [BREAKPOINT_PHONE]: value }
     }
   })

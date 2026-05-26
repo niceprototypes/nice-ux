@@ -1,1 +1,1 @@
-{"version":3,"file":"parseSpacingShorthand.d.ts","sourceRoot":"","sources":["../../../src/utilities/parseSpacingShorthand.ts"],"names":[],"mappings":"AAAA,OAAO,EAAmB,yBAAyB,EAAE,wBAAwB,EAAE,MAAM,+BAA+B,CAAA;AAEpH;;;;;;;;;;;GAWG;AACH,eAAO,MAAM,qBAAqB,GAAI,WAAW,wBAAwB,KAAG,yBA6C3E,CAAA"}
+{"version":3,"file":"parseSpacingShorthand.d.ts","sourceRoot":"","sources":["../../../src/utilities/parseSpacingShorthand.ts"],"names":[],"mappings":"AAAA,OAAO,EAAmB,yBAAyB,EAAE,eAAe,EAAE,MAAM,+BAA+B,CAAA;AAE3G;;;;;;;;;;;GAWG;AACH,eAAO,MAAM,qBAAqB,GAAI,WAAW,eAAe,KAAG,yBA6ClE,CAAA"}

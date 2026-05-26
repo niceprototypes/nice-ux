@@ -1,4 +1,4 @@
-import { FlexGapSizeType, FlexSpacingDefinitionType, FlexSpacingShorthandType } from "../components/Flex/Flex.types"
+import { FlexGapSizeType, FlexSpacingDefinitionType, FlexSpacingType } from "../components/Flex/Flex.types"
 
 /**
  * Parses a CSS-like spacing shorthand string into a SpacingDefinition object.
@@ -12,7 +12,7 @@ import { FlexGapSizeType, FlexSpacingDefinitionType, FlexSpacingShorthandType } 
  * @param shorthand - The spacing shorthand string
  * @returns SpacingDefinition with top, right, bottom, left values
  */
-export const parseSpacingShorthand = (shorthand: FlexSpacingShorthandType): FlexSpacingDefinitionType => {
+export const parseSpacingShorthand = (shorthand: FlexSpacingType): FlexSpacingDefinitionType => {
   const values = shorthand.split(" ") as FlexGapSizeType[]
 
   switch (values.length) {

@@ -36,6 +36,12 @@ import { type BreakpointName } from "nice-react-styles";
  * The function is designed to work with props that have been processed by
  * the normalizeProps service, ensuring consistent prop structure.
  *
+ * Examples below show the POST-normalizeProps shape (every per-breakpoint
+ * prop is a `{ phone, tablet, laptop, desktop }` object). Consumer-facing
+ * `<Flex>` props are scalar; responsive overrides flow in through the
+ * `breakpoints` prop, which the `withBreakpoints` HOC folds into each
+ * breakpoint's props before this function runs.
+ *
  * @example
  * // Generate phone breakpoint styles
  * const props = { direction: { phone: "column" }, gap: { phone: "small" } }

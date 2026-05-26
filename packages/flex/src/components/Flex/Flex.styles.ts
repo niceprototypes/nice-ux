@@ -49,8 +49,12 @@ const isForwardable = (prop: string): boolean =>
  * 3. **Service Integration**: Delegates actual CSS generation to the styleFlex service,
  *    keeping the styled component focused on responsive breakpoint management.
  *
+ * `FlexStyled` is internal — it receives the post-`normalizeProps` shape,
+ * not the consumer-facing scalar shape. Public usage of `<Flex>` is
+ * scalar; responsive overrides flow in through the `breakpoints` prop.
+ *
  * @example
- * // Basic usage in component
+ * // Internal usage (post-normalize)
  * <FlexStyled direction={{ phone: "column", tablet: "row" }} gap={{ phone: "small", laptop: "large" }}>
  *   <div>Content</div>
  * </FlexStyled>

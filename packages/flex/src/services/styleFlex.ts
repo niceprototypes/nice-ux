@@ -37,6 +37,10 @@ function pushGrowStyles(styles: string[], grow: number): void {
   styles.push("flex-basis: 0;")
 }
 
+function pushShrinkStyles(styles: string[], shrink: number): void {
+  styles.push(`flex-shrink: ${shrink};`)
+}
+
 function pushWrapStyles(styles: string[], wrap: FlexWrapType): void {
   styles.push(`flex-wrap: ${wrap};`)
 }
@@ -95,6 +99,12 @@ function pushSpacingStyles(
  * The function is designed to work with props that have been processed by
  * the normalizeProps service, ensuring consistent prop structure.
  *
+ * Examples below show the POST-normalizeProps shape (every per-breakpoint
+ * prop is a `{ phone, tablet, laptop, desktop }` object). Consumer-facing
+ * `<Flex>` props are scalar; responsive overrides flow in through the
+ * `breakpoints` prop, which the `withBreakpoints` HOC folds into each
+ * breakpoint's props before this function runs.
+ *
  * @example
  * // Generate phone breakpoint styles
  * const props = { direction: { phone: "column" }, gap: { phone: "small" } }
@@ -117,6 +127,7 @@ export const styleFlex = (breakpoint: BreakpointName, props: FlexProps): string 
   const direction = getBreakpointValue(props.direction, breakpoint)
   const gap = getBreakpointValue(props.gap, breakpoint)
   const grow = getBreakpointValue(props.grow, breakpoint)
+  const shrink = getBreakpointValue(props.shrink, breakpoint)
   const alignItems = getBreakpointValue(props.alignItems, breakpoint)
   const justifyContent = getBreakpointValue(props.justifyContent, breakpoint)
   const wrap = getBreakpointValue(props.wrap, breakpoint)
@@ -127,6 +138,7 @@ export const styleFlex = (breakpoint: BreakpointName, props: FlexProps): string 
   if (alignItems) pushAlignItemsStyles(styles, alignItems)
   if (justifyContent) pushJustifyContentStyles(styles, justifyContent)
   if (grow !== undefined) pushGrowStyles(styles, grow)
+  if (shrink !== undefined) pushShrinkStyles(styles, shrink)
   if (wrap) pushWrapStyles(styles, wrap)
   if (gap !== undefined) pushGapStyles(styles, gap)
   if (spacing) pushSpacingStyles(styles, props.type, spacing)

@@ -1,19 +1,18 @@
 import { type BreakpointName } from "nice-react-styles";
 /**
- * Extracts the value for a specific breakpoint from a prop that can be either
- * a simple value or a responsive object
+ * Extracts the value for a specific breakpoint from a normalized prop.
  *
- * @function getBreakpointValue
- * @param {T | { phone?: T; tablet?: T; laptop?: T; desktop?: T } | undefined} value - The prop value
- * @param {BreakpointName} breakpoint - The target breakpoint
- * @returns {T | undefined} The value for the specified breakpoint
+ * After `normalizeProps`, every per-breakpoint prop is wrapped into a phone-
+ * keyed object (`{ phone: value }`). Tablet/laptop/desktop overrides are
+ * folded in by the `withBreakpoints` HOC before `styleFlex` runs, so this
+ * function simply returns the per-breakpoint value or undefined.
  *
  * @example
- * getBreakpointValue("row", BREAKPOINT_PHONE) // returns "row"
- * getBreakpointValue("row", BREAKPOINT_TABLET) // returns undefined (simple values only apply at phone)
- * getBreakpointValue({ phone: "column", tablet: "row" }, BREAKPOINT_TABLET) // returns "row"
+ * getBreakpointValue({ phone: "row" }, "phone")   // → "row"
+ * getBreakpointValue({ phone: "row" }, "tablet")  // → undefined
+ * getBreakpointValue({ phone: "column", tablet: "row" }, "tablet") // → "row"
  */
-export declare const getBreakpointValue: <T>(value: T | {
+export declare const getBreakpointValue: <T>(value: {
     phone?: T;
     tablet?: T;
     laptop?: T;

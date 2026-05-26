@@ -5,4 +5,4 @@
 
 export { default } from "./components/Flex"
 export * from "./components/Flex"
-export { getBreakpointValue, getGapSize, getSpacingValue, isResponsiveObject, styleSpacing, styleFlex } from "./services"
+export { getBreakpointValue, getGapSize, getSpacingValue, styleSpacing, styleFlex } from "./services"

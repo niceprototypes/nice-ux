@@ -1,21 +1,16 @@
 import { FlexProps } from "../components/Flex/Flex.types";
 /**
- * normalizeProps Helper
+ * normalizeProps
  *
- * Transforms component props to ensure consistent structure for styling logic.
- * Converts simple prop values into breakpoint objects to simplify downstream processing.
+ * Wraps every scalar per-breakpoint prop into a `{ phone: value }` object
+ * so `styleFlex` can call `getBreakpointValue(prop, breakpoint)` uniformly
+ * regardless of which breakpoint it's emitting CSS for. Tablet/laptop/
+ * desktop overrides flow through the `breakpoints` prop merged in by the
+ * `withBreakpoints` HOC, not through this function.
  *
- * @function normalizeProps
- * @param {FlexProps} props - The raw props passed to the Flex component
- * @returns {FlexProps} Normalized props with consistent breakpoint structure
- *
- * @description
- * Converts simple prop values into breakpoint objects:
- * - Example: `gap="base"` becomes `gap={{ phone: "base" }}`
- * - Example: `direction="row"` becomes `direction={{ phone: "row" }}`
- *
- * Note: The spacing prop is NOT normalized here. It's handled directly by
- * getSpacingValue which parses shorthand strings at render time.
+ * @example
+ * normalizeProps({ gap: "base", direction: "row" })
+ * // → { gap: { phone: "base" }, direction: { phone: "row" } }
  */
 export declare const normalizeProps: (props: FlexProps) => FlexProps;
 //# sourceMappingURL=normalizeProps.d.ts.map
