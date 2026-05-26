@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { BackgroundColorType, BackgroundSizeType, ColorType, Breakpoints, GapType, ModeType, WithBreakpointsProps } from 'nice-react-styles';
+import { BackgroundColorType, BackgroundSizeType, ColorType, GapType, ModeType, WithBreakpointsProps } from 'nice-react-styles';
 import { FlexProps, FlexSpacingType } from 'nice-react-flex';
 import { TypographyProps } from 'nice-react-typography';
 
@@ -38,13 +38,13 @@ type TileMaxWidthValueType = number | "none";
 /**
  * TileMaxWidthType
  *
- * Responsive max-width control for the inner content column.
+ * Max-width control for the inner content column. Pass a number to cap at
+ * that pixel value, or `"none"` to let the column fill its container.
  *
- * Accepts either a bare value applied at every breakpoint, or a breakpoint
- * object specifying per-breakpoint values. Any breakpoint omitted from the
- * object falls back to "none" (no cap).
+ * Use the wrapper's `breakpoints` prop to vary per breakpoint:
+ * `breakpoints={{ "laptop+": { maxWidth: 980 } }}`.
  */
-type TileMaxWidthType = Breakpoints<TileMaxWidthValueType>;
+type TileMaxWidthType = TileMaxWidthValueType;
 
 /**
  * TileAlignItemsType
