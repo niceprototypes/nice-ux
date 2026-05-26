@@ -1,9 +1,4 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import Lightbox from "nice-react-lightbox"
-import { resolveVendorImage } from "nice-react-image-vendor"
-import { DemoImage } from "./Lightbox.styles"
-
-export const DEMO_IMAGE = resolveVendorImage({ src: "10", width: "800px", height: "600px" })
 
 <Meta title="React/Components/Lightbox" />
 
@@ -29,15 +24,3 @@ import Lightbox from "nice-react-lightbox"
   {children}
 </Lightbox>
 ```
-
----
-
-<Lightbox
-  imageUrl={DEMO_IMAGE}
-  alt="Demo landscape"
->
-  <DemoImage
-    src={DEMO_IMAGE}
-    alt="Click to expand"
-  />
-</Lightbox>
