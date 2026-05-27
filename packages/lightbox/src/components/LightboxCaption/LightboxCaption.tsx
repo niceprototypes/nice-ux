@@ -13,12 +13,12 @@ const LightboxCaption: React.FC<LightboxCaptionProps> = ({
   return (
     <Wrapper className={className} onClick={(e) => e.stopPropagation()}>
       {title && (
-        <Typography as="h3" size="large" weight="semibold" mode="night">
+        <Typography as="h3" size="large" weight="semibold" theme="night">
           {title}
         </Typography>
       )}
       {description && (
-        <Typography as="p" size="base" color="lighter" mode="night">
+        <Typography as="p" size="base" color="lighter" theme="night">
           {description}
         </Typography>
       )}
