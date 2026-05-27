@@ -1,4 +1,4 @@
-import type { FontSizeType, ColorType, ModeType } from "nice-react-styles"
+import type { FontSizeType, ColorType, ThemeType } from "nice-react-styles"
 import { iconNames } from "../../constants"
 
 export type IconNameType = (typeof iconNames)[number]
@@ -38,8 +38,8 @@ export interface IconProps {
   strokeWidth?: IconStrokeWidthType
   className?: IconClassNameType
   strokeScaling?: IconStrokeScalingType
-  /** Force day or night mode */
-  mode?: ModeType
+  /** Force day or night theme */
+  theme?: ThemeType
   /** Inline styles applied to the root element */
   style?: React.CSSProperties
   /** Enable vendor icon resolution */
