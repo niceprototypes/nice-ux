@@ -1,5 +1,5 @@
 import * as React from "react"
-import { CellHeightType, BorderWidthType, ModeType } from "nice-react-styles"
+import { CellHeightType, BorderWidthType, ThemeType } from "nice-react-styles"
 
 /**
  * InputBorderRadiusType
@@ -285,8 +285,8 @@ export interface InputProps {
    */
   borderWidth?: BorderWidthType
 
-  /** Pin token resolution to a specific mode instead of responding to media query */
-  mode?: ModeType
+  /** Pin token resolution to a specific theme instead of responding to media query */
+  theme?: ThemeType
 
   /** Override background color (CSS value or var reference) */
   backgroundColor?: string
@@ -338,7 +338,7 @@ namespace InputTypes {
   export type AriaLabel = InputAriaLabelType
   export type AriaDescribedBy = InputAriaDescribedByType
   export type TestId = InputTestIdType
-  export type Mode = ModeType
+  export type Theme = ThemeType
   export type Props = InputProps
 }
 

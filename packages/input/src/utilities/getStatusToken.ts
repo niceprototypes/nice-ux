@@ -9,7 +9,7 @@ type StatusTokenParameter = "backgroundColor" | "color" | "borderColor" | "place
  * Path-based lookup: ["status", status, state, parameter]
  *   → --np--input--status--{status}--{state}--{parameter}
  *
- * Returns the semantic var; mode-awareness happens via cascade — when the
+ * Returns the semantic var; theme-awareness happens via cascade — when the
  * input (or an ancestor) sets data-theme on the DOM, the matching
  * [data-theme] rule in tokens.css reassigns the semantic var to the
  * day/night primitive.

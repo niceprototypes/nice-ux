@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Mode } from "nice-react-styles"
+import { Theme } from "nice-react-styles"
 import { StyledInput } from "./Input.styles"
 import { InputProps } from "./Input.types"
 import { isDisabled } from "../../utilities/isDisabled"
@@ -19,7 +19,7 @@ const Input: React.FC<InputProps> = ({
   id,
   maxLength,
   minLength,
-  mode,
+  theme,
   name,
   onBlur,
   onChange,
@@ -84,7 +84,7 @@ const Input: React.FC<InputProps> = ({
     />
   )
 
-  return mode ? <Mode name={mode}>{input}</Mode> : input
+  return theme ? <Theme name={theme}>{input}</Theme> : input
 }
 
 export default Input
