@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Mode } from "nice-react-styles"
+import { Theme } from "nice-react-styles"
 import { StyledImg, StyledBackgroundImage } from "./Image.styles"
 import type { ImageProps } from "./Image.types"
 import { getVendorImage } from "../../services/registerVendorResolver"
@@ -46,7 +46,7 @@ const Image: React.FC<ImageProps> = ({
   bordered,
   borderWidth,
   borderColor,
-  mode,
+  theme,
   renderImage,
   vendor = false,
   className,
@@ -55,16 +55,16 @@ const Image: React.FC<ImageProps> = ({
 }) => {
   // Vendor src — route through the registered resolver; fall back to the raw src if no resolver returned a URL
   const resolvedSrc = vendor ? (getVendorImage({ src, width, height }) ?? src) : src
-  const withMode = (el: React.ReactElement) => (mode ? <Mode name={mode}>{el}</Mode> : el)
+  const withTheme = (el: React.ReactElement) => (theme ? <Theme name={theme}>{el}</Theme> : el)
 
   // Custom render: delegate entirely to consumer
   if (renderImage) {
-    return withMode(<>{renderImage(resolvedSrc ?? "", alt)}</>)
+    return withTheme(<>{renderImage(resolvedSrc ?? "", alt)}</>)
   }
 
   // Div mode: render background-image container
   if (as === "div") {
-    return withMode(
+    return withTheme(
       <StyledBackgroundImage
         $src={resolvedSrc ?? ""}
         $width={width}
@@ -87,7 +87,7 @@ const Image: React.FC<ImageProps> = ({
   }
 
   // Default: render standard img element
-  return withMode(
+  return withTheme(
     <StyledImg
       src={resolvedSrc}
       alt={alt}

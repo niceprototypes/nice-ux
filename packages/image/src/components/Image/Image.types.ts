@@ -1,5 +1,5 @@
 import * as React from "react"
-import type { BackgroundSizeType, BorderRadiusType, BorderWidthType, BorderColorType, ModeType } from "nice-react-styles"
+import type { BackgroundSizeType, BorderRadiusType, BorderWidthType, BorderColorType, ThemeType } from "nice-react-styles"
 
 /**
  * ImageAsType
@@ -108,13 +108,13 @@ export type ImageBorderWidthType = BorderWidthType
 export type ImageBorderColorType = BorderColorType
 
 /**
- * ImageModeType
+ * ImageThemeType
  *
- * Re-export of ModeType from nice-styles.
- * Pin token resolution to a specific mode.
- * Extensible for consumer-defined custom modes.
+ * Re-export of ThemeType from nice-styles.
+ * Pin token resolution to a specific theme.
+ * Extensible for consumer-defined custom themes.
  */
-export type ImageModeType = ModeType
+export type ImageThemeType = ThemeType
 
 /**
  * ImageRenderImageType
@@ -175,8 +175,8 @@ export type ImageProps = {
   /** Border color token (only applied when bordered is true) */
   borderColor?: ImageBorderColorType
 
-  /** Pin token resolution to a specific mode */
-  mode?: ImageModeType
+  /** Pin token resolution to a specific theme */
+  theme?: ImageThemeType
 
   /** Custom render function that replaces the default image rendering */
   renderImage?: ImageRenderImageType
@@ -210,7 +210,7 @@ namespace ImageTypes {
   export type Bordered = ImageBorderedType
   export type BorderWidth = ImageBorderWidthType
   export type BorderColor = ImageBorderColorType
-  export type Mode = ImageModeType
+  export type Theme = ImageThemeType
   export type RenderImage = ImageRenderImageType
   export type Vendor = ImageVendorType
   export type Props = ImageProps
