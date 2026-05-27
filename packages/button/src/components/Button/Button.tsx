@@ -1,7 +1,7 @@
 import * as React from "react"
 import Typography from "nice-react-typography"
 import Icon from "nice-react-icon"
-import { getInvertedMode, Mode } from "nice-react-styles"
+import { Theme } from "nice-react-styles"
 import { StyledButton } from "./Button.styles"
 import { ButtonProps } from "./Button.types"
 import { isDisabled } from "../../utilities/isDisabled"
@@ -20,7 +20,7 @@ const Button: React.FC<ButtonProps> = ({
   href,
   icon,
   link = false,
-  mode,
+  theme,
   onClick,
   onMouseEnter,
   onMouseLeave,
@@ -35,7 +35,10 @@ const Button: React.FC<ButtonProps> = ({
   const [isFocused, setIsFocused] = React.useState(false)
   const [isPressed, setIsPressed] = React.useState(false)
   const disabled = isDisabled(state)
-  const invertedMode = getInvertedMode(mode, status)
+  // getInvertedMode(theme, status) was a no-op when status was defined (always
+  // returned the original theme). Button always passes status (default "primary"),
+  // so the call collapsed to passing theme through unchanged.
+  const invertedTheme = theme
   const square = isSquare(icon, children)
 
   const elementProps = link
@@ -90,7 +93,7 @@ const Button: React.FC<ButtonProps> = ({
         <Typography
           as="span"
           antialiased={antialiased}
-          mode={invertedMode}
+          theme={invertedTheme}
           weight={link ? undefined : "medium"}
           size={size}
         >
@@ -101,7 +104,7 @@ const Button: React.FC<ButtonProps> = ({
     </StyledButton>
   )
 
-  return mode ? <Mode name={mode}>{button}</Mode> : button
+  return theme ? <Theme name={theme}>{button}</Theme> : button
 }
 
 export default Button

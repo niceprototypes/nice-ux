@@ -1,5 +1,5 @@
 import * as React from "react"
-import { CellHeightType, BorderWidthType, BorderColorType, ModeType } from "nice-react-styles"
+import { CellHeightType, BorderWidthType, BorderColorType, ThemeType } from "nice-react-styles"
 import { IconNameType } from "nice-react-icon"
 
 /**
@@ -120,8 +120,8 @@ export interface ButtonProps {
   /** @token Token-bound — accepts BorderColorType variants only. */
   borderColor?: ButtonBorderColorType
 
-  /** Pin token resolution to a specific mode instead of responding to media query */
-  mode?: ModeType
+  /** Pin token resolution to a specific theme instead of responding to media query */
+  theme?: ThemeType
 
   /** Called when mouse enters the button */
   onMouseEnter?: ButtonOnMouseEnterType
@@ -161,7 +161,7 @@ namespace ButtonTypes {
   export type ClassName = ButtonClassNameType
   export type AriaLabel = ButtonAriaLabelType
   export type TestId = ButtonTestIdType
-  export type Mode = ModeType
+  export type Theme = ThemeType
   export type Props = ButtonProps
 }
 

@@ -9,7 +9,7 @@ type StatusTokenParameter = "backgroundColor" | "color" | "borderColor"
  * Uses path-based lookup to walk the nested token tree:
  * ["status", status, state, parameter] → --np--button--status--{status}--{state}--{parameter}
  *
- * The returned semantic var is mode-aware via cascade — when the button (or
+ * The returned semantic var is theme-aware via cascade — when the button (or
  * an ancestor) sets data-theme on the DOM, the matching [data-theme] rule
  * in tokens.css reassigns the semantic var to the day/night primitive.
  *
