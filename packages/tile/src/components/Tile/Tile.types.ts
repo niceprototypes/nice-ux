@@ -1,7 +1,7 @@
 import * as React from "react"
 import type { FlexSpacingType, FlexProps } from "nice-react-flex"
 import type {
-  ModeType,
+  ThemeType,
   GapType,
   BackgroundColorType,
   BackgroundSizeType,
@@ -116,7 +116,7 @@ export interface TileProps {
   // Color
   /** @token Token-bound — accepts ColorType variants only. */
   color?: TileColorType
-  mode?: ModeType
+  theme?: ThemeType
 
   // HTML
   className?: string

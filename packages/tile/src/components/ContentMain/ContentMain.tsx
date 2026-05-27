@@ -15,7 +15,7 @@ const ContentMain: React.FC<ContentMainProps> = ({
   description,
   descriptionProps,
   gap,
-  mode,
+  theme,
   title,
   titleProps,
 }) => (
@@ -24,7 +24,7 @@ const ContentMain: React.FC<ContentMainProps> = ({
       <Typography
         as="h3"
         weight="semibold"
-        mode={mode}
+        theme={theme}
         {...titleProps}
       >
         {title}
@@ -39,7 +39,7 @@ const ContentMain: React.FC<ContentMainProps> = ({
               <Typography
                 key={index}
                 color="light"
-                mode={mode}
+                theme={theme}
                 {...descriptionProps}
               >
                 {text}
@@ -50,7 +50,7 @@ const ContentMain: React.FC<ContentMainProps> = ({
         : (
           <Typography
             color="light"
-            mode={mode}
+            theme={theme}
             {...descriptionProps}
           >
             {description}

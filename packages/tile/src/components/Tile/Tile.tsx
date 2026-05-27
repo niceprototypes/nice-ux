@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Mode } from "nice-react-styles"
+import { Theme } from "nice-react-styles"
 import type { TileProps } from "./Tile.types"
 import { OuterFlex } from "./Tile.styles"
 import TileLayout from "../TileLayout"
@@ -23,7 +23,7 @@ const Tile: React.FC<TileProps> = ({
   gap,
   justifyContent,
   maxWidth,
-  mode,
+  theme,
   spacing,
   style,
   title,
@@ -60,7 +60,7 @@ const Tile: React.FC<TileProps> = ({
     </OuterFlex>
   )
 
-  return mode ? <Mode name={mode}>{tile}</Mode> : tile
+  return theme ? <Theme name={theme}>{tile}</Theme> : tile
 }
 
 export default Tile

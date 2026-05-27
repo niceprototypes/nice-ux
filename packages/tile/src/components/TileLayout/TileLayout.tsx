@@ -14,7 +14,7 @@ const TileLayout: React.FC<TileLayoutProps> = ({
   titleProps,
   description,
   descriptionProps,
-  mode,
+  theme,
   gap,
   spacing,
   maxWidth,
@@ -47,7 +47,7 @@ const TileLayout: React.FC<TileLayoutProps> = ({
             titleProps={titleProps}
             description={description}
             descriptionProps={descriptionProps}
-            mode={mode}
+            theme={theme}
             alignItems={alignItems}
             justifyContent={justifyContent}
           >
@@ -63,7 +63,7 @@ const TileLayout: React.FC<TileLayoutProps> = ({
           titleProps={titleProps}
           description={description}
           descriptionProps={descriptionProps}
-          mode={mode}
+          theme={theme}
           gap={gap}
           alignItems={alignItems}
           justifyContent={justifyContent}

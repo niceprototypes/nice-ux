@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { BackgroundColorType, BackgroundSizeType, ColorType, GapType, ModeType, WithBreakpointsProps } from 'nice-react-styles';
+import { BackgroundColorType, BackgroundSizeType, ColorType, GapType, ThemeType, WithBreakpointsProps } from 'nice-react-styles';
 import { FlexProps, FlexSpacingType } from 'nice-react-flex';
 import { TypographyProps } from 'nice-react-typography';
 
@@ -95,7 +95,7 @@ interface TileProps {
     backgroundAttachment?: string;
     /** @token Token-bound — accepts ColorType variants only. */
     color?: TileColorType;
-    mode?: ModeType;
+    theme?: ThemeType;
     className?: string;
     style?: React.CSSProperties;
 }
@@ -116,7 +116,7 @@ declare namespace TileTypes {
 declare const Tile: React.FC<WithBreakpointsProps<TileProps>>;
 
 /** Returns the `var(--np--tile--…)` reference. */
-declare function getTileToken(nameOrPath: string | string[], variantOrMode?: string, mode?: string): string;
+declare function getTileToken(nameOrPath: string | string[], variantOrTheme?: string, theme?: string): string;
 
 export { TileTypes, Tile as default, getTileToken };
 export type { TileAlignItemsType, TileBackgroundColorType, TileBackgroundSizeType, TileColorType, TileJustifyContentType, TileMaxWidthType, TileMaxWidthValueType, TileProps, TileTypographyProps };

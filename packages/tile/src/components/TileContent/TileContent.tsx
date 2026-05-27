@@ -11,7 +11,7 @@ const TileContent: React.FC<TileContentProps> = ({
   titleProps,
   description,
   descriptionProps,
-  mode,
+  theme,
   gap,
   alignItems,
   justifyContent,
@@ -28,7 +28,7 @@ const TileContent: React.FC<TileContentProps> = ({
           contentCenter={contentCenter}
           description={description}
           descriptionProps={descriptionProps}
-          mode={mode}
+          theme={theme}
           gap={gap}
         />
       )}

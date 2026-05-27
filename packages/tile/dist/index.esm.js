@@ -1,4 +1,4 @@
-import { getToken, getBreakpoint, Mode, withBreakpoints, getComponentToken } from 'nice-react-styles';
+import { getToken, getBreakpoint, Theme, withBreakpoints, getComponentToken } from 'nice-react-styles';
 import { jsxs, jsx, Fragment } from 'react/jsx-runtime';
 import 'react';
 import styled, { css } from 'styled-components';
@@ -53,13 +53,13 @@ const OuterFlex$1 = styled(Flex).withConfig({
  * and description (string or array of strings). Extracted from TileContent
  * so the title/description layout can be reused or swapped independently.
  */
-const ContentMain = ({ contentCenter, description, descriptionProps, gap, mode, title, titleProps, }) => (jsxs(Flex, { direction: "column", gap: gap, style: { width: "100%" }, children: [title && (jsx(Typography, { as: "h3", weight: "semibold", mode: mode, ...titleProps, children: title })), contentCenter, description && (Array.isArray(description)
-            ? (jsx(Flex, { direction: "column", children: description.map((text, index) => (jsx(Typography, { color: "light", mode: mode, ...descriptionProps, children: text }, index))) }))
-            : (jsx(Typography, { color: "light", mode: mode, ...descriptionProps, children: description })))] }));
+const ContentMain = ({ contentCenter, description, descriptionProps, gap, theme, title, titleProps, }) => (jsxs(Flex, { direction: "column", gap: gap, style: { width: "100%" }, children: [title && (jsx(Typography, { as: "h3", weight: "semibold", theme: theme, ...titleProps, children: title })), contentCenter, description && (Array.isArray(description)
+            ? (jsx(Flex, { direction: "column", children: description.map((text, index) => (jsx(Typography, { color: "light", theme: theme, ...descriptionProps, children: text }, index))) }))
+            : (jsx(Typography, { color: "light", theme: theme, ...descriptionProps, children: description })))] }));
 
-const TileContent = ({ children, contentTop, contentCenter, title, titleProps, description, descriptionProps, mode, gap, alignItems, justifyContent, }) => {
+const TileContent = ({ children, contentTop, contentCenter, title, titleProps, description, descriptionProps, theme, gap, alignItems, justifyContent, }) => {
     const hasContentMain = !!title || !!description || !!contentCenter;
-    return (jsxs(Flex, { direction: "column", grow: 1, gap: gap, alignItems: alignItems, justifyContent: justifyContent, children: [contentTop, hasContentMain && (jsx(ContentMain, { title: title, titleProps: titleProps, contentCenter: contentCenter, description: description, descriptionProps: descriptionProps, mode: mode, gap: gap })), children] }));
+    return (jsxs(Flex, { direction: "column", grow: 1, gap: gap, alignItems: alignItems, justifyContent: justifyContent, children: [contentTop, hasContentMain && (jsx(ContentMain, { title: title, titleProps: titleProps, contentCenter: contentCenter, description: description, descriptionProps: descriptionProps, theme: theme, gap: gap })), children] }));
 };
 
 const renderMaxWidthValue = (value) => value === "none" ? css `max-width: none;` : css `max-width: ${value}px;`;
@@ -99,17 +99,17 @@ const OuterFlex = styled(Flex).withConfig({
   ${({ $maxWidth }) => renderResponsiveMaxWidth($maxWidth)}
 `;
 
-const TileLayout = ({ children, contentTop, contentRight: TileRight, contentCenter, contentLeft: TileLeft, title, titleProps, description, descriptionProps, mode, gap, spacing, maxWidth, alignItems, justifyContent, }) => {
+const TileLayout = ({ children, contentTop, contentRight: TileRight, contentCenter, contentLeft: TileLeft, title, titleProps, description, descriptionProps, theme, gap, spacing, maxWidth, alignItems, justifyContent, }) => {
     return (jsx(OuterFlex, { direction: "column", grow: 1, spacing: spacing, alignItems: alignItems, justifyContent: justifyContent, gap: gap, "$maxWidth": maxWidth, breakpoints: {
             "laptop+": {
                 direction: "row",
             },
-        }, children: !!TileLeft || !!TileRight ? (jsxs(Fragment, { children: [TileLeft, jsx(TileContent, { gap: gap, contentTop: contentTop, contentCenter: contentCenter, title: title, titleProps: titleProps, description: description, descriptionProps: descriptionProps, mode: mode, alignItems: alignItems, justifyContent: justifyContent, children: children }), TileRight] })) : (jsx(TileContent, { contentTop: contentTop, contentCenter: contentCenter, title: title, titleProps: titleProps, description: description, descriptionProps: descriptionProps, mode: mode, gap: gap, alignItems: alignItems, justifyContent: justifyContent, children: children })) }));
+        }, children: !!TileLeft || !!TileRight ? (jsxs(Fragment, { children: [TileLeft, jsx(TileContent, { gap: gap, contentTop: contentTop, contentCenter: contentCenter, title: title, titleProps: titleProps, description: description, descriptionProps: descriptionProps, theme: theme, alignItems: alignItems, justifyContent: justifyContent, children: children }), TileRight] })) : (jsx(TileContent, { contentTop: contentTop, contentCenter: contentCenter, title: title, titleProps: titleProps, description: description, descriptionProps: descriptionProps, theme: theme, gap: gap, alignItems: alignItems, justifyContent: justifyContent, children: children })) }));
 };
 
-const Tile$1 = ({ alignItems, backgroundAttachment = "fixed", backgroundColor, backgroundImage, backgroundPosition = "center", backgroundSize = "cover", children, className, contentCenter, contentLeft: TileLeft, contentRight: TileRight, contentTop, description, descriptionProps, color, gap, justifyContent, maxWidth, mode, spacing, style, title, titleProps, }) => {
+const Tile$1 = ({ alignItems, backgroundAttachment = "fixed", backgroundColor, backgroundImage, backgroundPosition = "center", backgroundSize = "cover", children, className, contentCenter, contentLeft: TileLeft, contentRight: TileRight, contentTop, description, descriptionProps, color, gap, justifyContent, maxWidth, theme, spacing, style, title, titleProps, }) => {
     const tile = (jsx(OuterFlex$1, { "$backgroundAttachment": backgroundAttachment, "$backgroundColor": backgroundColor, "$backgroundImage": backgroundImage, "$backgroundPosition": backgroundPosition, "$backgroundSize": backgroundSize, "$color": color, className: className, style: style, children: jsx(TileLayout, { alignItems: alignItems, contentCenter: contentCenter, contentLeft: TileLeft, contentRight: TileRight, contentTop: contentTop, description: description, descriptionProps: descriptionProps, gap: gap, justifyContent: justifyContent, maxWidth: maxWidth, spacing: spacing, title: title, titleProps: titleProps, children: children }) }));
-    return mode ? jsx(Mode, { name: mode, children: tile }) : tile;
+    return theme ? jsx(Theme, { name: theme, children: tile }) : tile;
 };
 
 const TileTypes = {};
@@ -120,11 +120,11 @@ const TileTypes = {};
 const Tile = withBreakpoints(Tile$1);
 
 /** Returns the `var(--np--tile--…)` reference. */
-function getTileToken(nameOrPath, variantOrMode, mode) {
+function getTileToken(nameOrPath, variantOrTheme, theme) {
     if (Array.isArray(nameOrPath)) {
-        return getComponentToken("tile", nameOrPath, variantOrMode);
+        return getComponentToken("tile", nameOrPath, variantOrTheme);
     }
-    return getComponentToken("tile", nameOrPath, variantOrMode, mode);
+    return getComponentToken("tile", nameOrPath, variantOrTheme, theme);
 }
 
 export { TileTypes, Tile as default, getTileToken };

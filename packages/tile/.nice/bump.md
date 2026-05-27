@@ -1,7 +1,10 @@
-[2026-05-26 03:00] major: Scalarize `TileMaxWidthType`; spacing prop tightens via `nice-react-flex@major`.
+[2026-05-27 00:15] major: Rename mode prop → theme prop across Tile, TileContent, ContentMain, TileLayout; consume renamed Theme component and ThemeType from nice-react-styles.
 
-- `TileMaxWidthType = Breakpoints<TileMaxWidthValueType>` → `TileMaxWidthType = TileMaxWidthValueType` (scalar `number | "none"`). For per-breakpoint max-width, use the wrapper's `breakpoints` prop: `breakpoints={{ "laptop+": { maxWidth: 980 } }}`.
-- Dropped `Breakpoints` import from `nice-react-styles` (no longer used).
-- Tile's `spacing` prop transitively tightens because `FlexSpacingType` (re-exported from nice-react-flex) is now the scalar shorthand. Pass `spacing="small base"` directly; responsive overrides flow through `breakpoints`.
+- TileProps.mode?: ModeType → theme?: ThemeType
+- ContentMainProps.mode?: ModeType → theme?: ThemeType
+- TileContentProps.mode?: ModeType → theme?: ThemeType
+- Tile.tsx: Mode import → Theme import; <Mode name={mode}> wrap → <Theme name={theme}>
+- ContentMain.tsx / TileContent.tsx / TileLayout.tsx: mode destructure → theme; mode={mode} pass-through → theme={theme}
+- getTileToken / getTileTokenKey / getTileTokenValue: variantOrMode/mode parameters → variantOrTheme/theme
 
-Consumers passing `maxWidth={{ phone, laptop }}` or `spacing={{ phone, tablet }}` shapes will get TypeScript errors and must move those responsive overrides to the `breakpoints` prop.
+Consumer migration: every Tile/TileContent/ContentMain call site passing mode={…} must rename to theme={…}.
