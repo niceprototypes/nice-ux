@@ -1,5 +1,5 @@
 import * as React from "react"
-import type { ColorType, FontSizeType, FontWeightType, LineHeightType, ModeType } from "nice-react-styles"
+import type { ColorType, FontSizeType, FontWeightType, LineHeightType, ThemeType } from "nice-react-styles"
 
 /**
  * TypographyAlignType
@@ -60,18 +60,18 @@ export type TypographyWeightType = FontWeightType
 export type TypographyLineHeightType = LineHeightType
 
 /**
- * TypographyModeType
+ * TypographyThemeType
  *
- * Re-export of ModeType from nice-styles.
- * Pin token resolution to a specific mode instead of responding to media query.
+ * Re-export of ThemeType from nice-styles.
+ * Pin token resolution to a specific theme instead of responding to media query.
  *
  * Built-in values:
- * - "day": Force day/light mode tokens
- * - "night": Force night/dark mode tokens
+ * - "day": Force day/light theme tokens
+ * - "night": Force night/dark theme tokens
  *
- * Consumers may define additional custom modes.
+ * Consumers may define additional custom themes.
  */
-export type TypographyModeType = ModeType
+export type TypographyThemeType = ThemeType
 
 /**
  * TypographyLineClampType
@@ -127,8 +127,8 @@ export type TypographyProps = {
   /** Text color from nice-styles tokens */
   color?: TypographyColorType
 
-  /** Pin token resolution to a specific mode instead of responding to media query */
-  mode?: TypographyModeType
+  /** Pin token resolution to a specific theme instead of responding to media query */
+  theme?: TypographyThemeType
 
   /** Apply legibility optimizations (hardware acceleration, 3D transforms) */
   legibilityOptimized?: boolean
@@ -173,7 +173,7 @@ namespace TypographyTypes {
   export type Weight = TypographyWeightType
   export type LineHeight = TypographyLineHeightType
   export type LineClamp = TypographyLineClampType
-  export type Mode = TypographyModeType
+  export type Theme = TypographyThemeType
   export type WordBreak = TypographyWordBreakType
   export type Props = TypographyProps
 }

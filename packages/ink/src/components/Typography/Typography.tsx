@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Mode } from "nice-react-styles"
+import { Theme } from "nice-react-styles"
 import { StyledTypography } from "./Typography.styles"
 import { TypographyProps } from "./Typography.types"
 
@@ -43,7 +43,7 @@ const Typography: React.FC<TypographyProps> = ({
   className = "sb-unstyled",
   code = false,
   color,
-  mode,
+  theme,
   lineClamp,
   lineHeight,
   size,
@@ -51,7 +51,7 @@ const Typography: React.FC<TypographyProps> = ({
   weight,
   wordBreak,
 }) => {
-  const effectiveAntialiased = antialiased ?? mode === "night"
+  const effectiveAntialiased = antialiased ?? theme === "night"
 
   const element = (
     <StyledTypography
@@ -74,7 +74,7 @@ const Typography: React.FC<TypographyProps> = ({
     </StyledTypography>
   )
 
-  return mode ? <Mode name={mode}>{element}</Mode> : element
+  return theme ? <Theme name={theme}>{element}</Theme> : element
 }
 
 export default Typography
