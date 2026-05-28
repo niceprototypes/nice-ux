@@ -2,11 +2,13 @@ import styled from "styled-components"
 import Flex from "nice-react-flex"
 import { getBreakpoint, getToken } from "nice-react-styles"
 
-export const PreviewWrapper = styled.div<{ $width?: string }>`
-  ${({ $width }) =>
-    $width
-      ? `width: ${$width};`
-      : `${getBreakpoint("tablet")} { width: 45%; }`}
+export const PreviewWrapper = styled.div<{ $width?: string; $fullWidth?: boolean }>`
+  ${({ $fullWidth, $width }) =>
+    $fullWidth
+      ? `width: 100%;`
+      : $width
+        ? `width: ${$width};`
+        : `${getBreakpoint("tablet")} { width: 45%; }`}
 `
 
 export const RowFlex = styled(Flex).attrs({ spacing: "large none" })`

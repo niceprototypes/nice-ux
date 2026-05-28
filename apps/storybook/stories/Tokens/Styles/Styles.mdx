@@ -42,6 +42,7 @@ no build step, no opinions about your component model.
     const animationName = name === "base" ? "slide" : "slideSlow"
     return (
       <DocsRow
+        key={name}
         previewCell={
           <Flex
             style={{
@@ -75,6 +76,7 @@ no build step, no opinions about your component model.
 <div>
   {["base"].map(variant => (
     <DocsRow
+      key={variant}
       previewCell={
         <Flex
           style={{
@@ -109,6 +111,7 @@ no build step, no opinions about your component model.
 <div>
   {["base", "dark"].map(variant => (
     <DocsRow
+      key={variant}
       previewCell={
         <Flex
           style={{
@@ -131,6 +134,7 @@ no build step, no opinions about your component model.
 <div>
   {["base", "dark", "darker"].map(variant => (
     <DocsRow
+      key={variant}
       previewCell={
         <Flex
           style={{
@@ -153,6 +157,7 @@ no build step, no opinions about your component model.
 <div>
   {["smaller", "small", "base", "large", "larger"].map(variant => (
     <DocsRow
+      key={variant}
       previewCell={
         <Flex
           style={{
@@ -174,6 +179,7 @@ no build step, no opinions about your component model.
 <div>
   {["small", "base", "large"].map(variant => (
     <DocsRow
+      key={variant}
       previewCell={
         <Flex
           style={{
@@ -195,6 +201,7 @@ no build step, no opinions about your component model.
 <div>
   {["base", "large"].map(variant => (
     <DocsRow
+      key={variant}
       previewCell={
         <Flex
           spacing="large"
@@ -225,6 +232,7 @@ no build step, no opinions about your component model.
 <div>
   {["smaller", "small", "base", "large", "larger"].map(variant => (
     <DocsRow
+      key={variant}
       previewCell={
         <Flex
           style={{
@@ -250,6 +258,7 @@ no build step, no opinions about your component model.
     { name: "code", code: true, text: "Code" },
   ].map(({ name, weight, code, text }) => (
     <DocsRow
+      key={name}
       previewCell={
         <Typography
           weight={weight}
@@ -269,6 +278,7 @@ no build step, no opinions about your component model.
 <div>
   {["smaller", "small", "base", "large", "larger"].map(variant => (
     <DocsRow
+      key={variant}
       previewCell={
         <Typography size={variant}>
           {variant.charAt(0).toUpperCase() + variant.slice(1)}
@@ -286,6 +296,7 @@ no build step, no opinions about your component model.
   {["light", "base", "medium", "semibold", "bold", "extrabold", "black"].map(
     variant => (
       <DocsRow
+        key={variant}
         previewCell={
           <Typography weight={variant}>
             {variant.charAt(0).toUpperCase() + variant.slice(1)}
@@ -313,6 +324,7 @@ no build step, no opinions about your component model.
     "error",
   ].map(variant => (
     <DocsRow
+      key={variant}
       previewCell={
         <Flex
           style={{
@@ -334,6 +346,7 @@ no build step, no opinions about your component model.
 <div>
   {["smaller", "small", "base", "large", "larger"].map(variant => (
     <DocsRow
+      key={variant}
       previewCell={
         <DemoDots
           gap={variant}
@@ -362,6 +375,7 @@ no build step, no opinions about your component model.
 <div>
   {["condensed", "base", "expanded"].map(variant => (
     <DocsRow
+      key={variant}
       previewCell={
         <Typography lineHeight={variant}>{loremIpsum}</Typography>
       }

@@ -34,6 +34,7 @@ export const typeCode = (t) =>
 <div>
   {types.map((t) => (
     <DocsRow
+      key={t}
       previewCell={
         <Input
           type={t}

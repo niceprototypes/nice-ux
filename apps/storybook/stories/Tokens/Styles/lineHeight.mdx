@@ -17,6 +17,7 @@ export const loremIpsum =
 <div>
   {["condensed", "base", "expanded"].map(variant => (
     <DocsRow
+      key={variant}
       previewCell={
         <Typography lineHeight={variant}>{loremIpsum}</Typography>
       }

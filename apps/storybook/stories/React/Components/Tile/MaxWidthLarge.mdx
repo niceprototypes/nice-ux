@@ -13,9 +13,12 @@ import { DocsRow } from "../../../../src/components/DocsRow"
 </StoryDescription>
 
 <DocsRow
+  fullWidth
   previewCell={
     <Tile
       maxWidthLarge={1200}
+      title="Title"
+      description="Content constrained to 1200px max-width"
     >
       <Typography color="light">
         Content constrained to 1200px max-width
@@ -23,5 +26,5 @@ import { DocsRow } from "../../../../src/components/DocsRow"
     </Tile>
   }
   language="tsx"
-  code={`<Tile maxWidthLarge={1200} />`}
+  code={`<Tile maxWidthLarge={1200} title="Title" description="Content constrained to 1200px max-width" />`}
 />

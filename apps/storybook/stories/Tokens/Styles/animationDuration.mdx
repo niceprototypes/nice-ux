@@ -21,6 +21,7 @@ import { DocsRow } from "../../../src/components/DocsRow"
     const animationName = name === "base" ? "slide" : "slideSlow"
     return (
       <DocsRow
+        key={name}
         previewCell={
           <Flex
             style={{

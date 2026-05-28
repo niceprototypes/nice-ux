@@ -10,7 +10,7 @@ interface InstallProps {
 
 const Install: React.FC<InstallProps> = ({ package: pkg, step = 1 }) => (
   <>
-    <h2>{step}. Install</h2>
+    <h3>{step}. Install</h3>
     <Source language="bash" code={`npm install nice-${pkg}`} />
   </>
 )

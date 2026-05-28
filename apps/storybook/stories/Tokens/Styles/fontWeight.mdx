@@ -15,6 +15,7 @@ import { DocsRow } from "../../../src/components/DocsRow"
   {["light", "base", "medium", "semibold", "bold", "extrabold", "black"].map(
     variant => (
       <DocsRow
+        key={variant}
         previewCell={
           <Typography weight={variant}>
             {variant.charAt(0).toUpperCase() + variant.slice(1)}

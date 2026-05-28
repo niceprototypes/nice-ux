@@ -18,6 +18,7 @@ export const loremIpsum = "Lorem ipsum dolor sit amet"
 <div>
   {["left", "center", "right", "justify"].map(align => (
     <DocsRow
+      key={align}
       previewCell={
         <Flex
           direction="column"

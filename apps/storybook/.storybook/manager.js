@@ -2,8 +2,9 @@ import { addons } from "storybook/manager-api"
 import { create } from "storybook/theming"
 import "./manager.css"
 
+const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
 const theme = create({
-  base: "light",
+  base: prefersDark ? "dark" : "light",
   brandTitle: "Nice Components",
   brandUrl: "https://niceprototypes.com",
   brandImage: "https://niceprototypes.com/vectors/logo.svg",

@@ -16,9 +16,11 @@ import { toSource } from "../../../../src/services"
 
 <div>
   {["base", "dark"].map(variant => {
-    const props = { backgroundColor: variant }
+    const props = { backgroundColor: variant, title: "Title", description: "Description" }
     return (
       <DocsRow
+        fullWidth
+        key={variant}
         previewCell={<Tile {...props} />}
         language="tsx"
         code={toSource("Tile", props)}

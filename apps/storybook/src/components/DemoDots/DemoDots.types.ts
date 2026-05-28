@@ -1,4 +1,4 @@
-import type { FlexGapSizeType, FlexSpacingShorthandType } from "nice-react-flex"
+import type { FlexGapSizeType, FlexSpacingType } from "nice-react-flex"
 
 export interface DotSize {
   name?: string
@@ -11,7 +11,7 @@ export interface DotSize {
 export interface DemoDotProps {
   backgroundColor?: string
   borderRadius?: string
-  spacing?: FlexSpacingShorthandType
+  spacing?: FlexSpacingType
   width?: string
   height?: string
   grow?: number
@@ -41,7 +41,7 @@ export interface DemoDotsProps {
   justifyContent?: JustifyContent
   alignItems?: AlignItems
   wrap?: Wrap
-  spacing?: FlexSpacingShorthandType
+  spacing?: FlexSpacingType
   width?: string
   height?: string
   bordered?: boolean

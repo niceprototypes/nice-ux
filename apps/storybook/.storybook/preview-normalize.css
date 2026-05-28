@@ -12,7 +12,6 @@ h2:not(.sb-anchor, .sb-unstyled, .sb-unstyled h2) {
 
 hr:not(.sb-anchor, .sb-unstyled, .sb-unstyled hr) {
   height: 1px;
-  margin: 4rem 0;
 }
 
 strong, th {

@@ -26,6 +26,7 @@ import { toSource } from "../../../../src/services"
     }
     return (
       <DocsRow
+        key={borderColor}
         previewCell={<Image {...props} />}
         language="tsx"
         code={toSource("Image", props)}

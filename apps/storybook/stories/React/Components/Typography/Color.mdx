@@ -25,6 +25,7 @@ import { toSource } from "../../../../src/services"
     "error",
   ].map(color => (
     <DocsRow
+      key={color}
       previewCell={
         <Typography color={color}>{color}</Typography>
       }

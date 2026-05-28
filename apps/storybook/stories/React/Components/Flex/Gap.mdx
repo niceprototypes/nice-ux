@@ -16,6 +16,7 @@ import { threeDots } from "./Flex.services"
 <div>
   {["smaller", "small", "base", "large", "larger"].map(value => (
     <DocsRow
+      key={value}
       previewCell={
         <DemoDots
           gap={value}

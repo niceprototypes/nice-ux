@@ -15,6 +15,7 @@ import { toSource } from "../../../../src/services"
 <div>
   {["h1", "h2", "h3", "h4", "p", "span"].map(as => (
     <DocsRow
+      key={as}
       previewCell={
         <Typography as={as}>{as}</Typography>
       }

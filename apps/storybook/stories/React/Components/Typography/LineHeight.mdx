@@ -18,6 +18,7 @@ export const loremIpsumLong =
 <div>
   {["condensed", "base", "expanded"].map(lineHeight => (
     <DocsRow
+      key={lineHeight}
       previewCell={
         <Typography lineHeight={lineHeight}>{loremIpsumLong}</Typography>
       }

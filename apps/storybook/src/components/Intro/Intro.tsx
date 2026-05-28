@@ -16,6 +16,7 @@ const Intro: React.FC<Props> = ({ href, iconName, title, children }) => (
     <TitleAnchor href={href}>
       <Flex alignItems="center" gap="small">
         <Icon
+          theme="day"
           name={iconName}
           size="larger"
           color="link"

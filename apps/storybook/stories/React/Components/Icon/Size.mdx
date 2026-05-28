@@ -15,6 +15,7 @@ import { fontSizes } from "./Icon.services"
 <div>
   {fontSizes.map(size => (
     <DocsRow
+      key={size}
       previewCell={
         <Icon
           size={size}

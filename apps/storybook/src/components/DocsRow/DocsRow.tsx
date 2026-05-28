@@ -9,27 +9,61 @@ const BaseDocsRow = ({
   code,
   language = "tsx",
   previewCellWidth,
-}: DocsRowProps) => (
-  <RowFlex
-    direction="column"
-    gap="large"
-    breakpoints={{
-      "tablet+": {
-          direction: "row",
-          alignItems: "center",
-        },
-    }}
-  >
-    <PreviewWrapper $width={previewCellWidth}>
-      <Flex>{previewCell}</Flex>
-    </PreviewWrapper>
+  fullWidth = false,
+}: DocsRowProps) => {
+  const sourceBlock = (
     <Source
       language={language}
       code={code}
     />
-  </RowFlex>
-)
+  )
+
+  if (fullWidth) {
+    return (
+      <>
+        <PreviewWrapper $fullWidth>
+          <Flex>{previewCell}</Flex>
+        </PreviewWrapper>
+        <RowFlex
+          direction="column"
+          gap="large"
+          breakpoints={{
+            "tablet+": {
+              direction: "row",
+              alignItems: "center",
+            },
+          }}
+        >
+          {sourceBlock}
+        </RowFlex>
+      </>
+    )
+  }
+
+  return (
+    <RowFlex
+      direction="column"
+      gap="large"
+      breakpoints={{
+        "tablet+": {
+          direction: "row",
+          alignItems: "center",
+        },
+      }}
+    >
+      <PreviewWrapper $width={previewCellWidth}>
+        <Flex>{previewCell}</Flex>
+      </PreviewWrapper>
+      {sourceBlock}
+    </RowFlex>
+  )
+}
 
 export const DocsRow = withBreakpoints<DocsRowProps>(BaseDocsRow, [
-  { min: "tablet", props: { previewCellWidth: "45%" } },
+  {
+    min: "tablet",
+    props: {
+      previewCellWidth: "45%",
+    },
+  },
 ])

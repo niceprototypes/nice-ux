@@ -20,6 +20,7 @@ import { DocsRow } from "../../../../src/components/DocsRow"
 <div>
   {iconNames.map(name => (
     <DocsRow
+      key={name}
       previewCell={
         <Icon
           name={name}

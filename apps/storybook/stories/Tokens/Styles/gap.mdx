@@ -15,6 +15,7 @@ import DemoDots from "../../../src/components/DemoDots"
 <div>
   {["smaller", "small", "base", "large", "larger"].map(variant => (
     <DocsRow
+      key={variant}
       previewCell={
         <DemoDots
           gap={variant}

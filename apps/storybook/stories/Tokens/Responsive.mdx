@@ -88,8 +88,9 @@ getBreakpoint("desktop") // → "@media (min-width: 1720px)"
 </Typography>
 
 <Flex
-  direction={{ phone: "column", tablet: "row" }}
+  direction="column"
   gap="small"
+  breakpoints={{ "tablet+": { direction: "row" } }}
 >
   {labels.map(({ name, emoji, text, breakpoints }) => (
     <Typography

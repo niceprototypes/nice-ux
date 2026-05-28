@@ -13,11 +13,12 @@ import { DocsRow } from "../../../../src/components/DocsRow"
 </Typography>
 
 <DocsRow
+  fullWidth
   previewCell={
-    <Tile title="Title" />
+    <Tile title="Title" description="Description" />
   }
   language="tsx"
-  code={`<Tile title="Title" />`}
+  code={`<Tile title="Title" description="Description" />`}
 />
 
 ## titleProps
@@ -27,90 +28,104 @@ Forwarded to the title's `Typography`. Any prop from `TypographyProps` (except `
 ### titleProps.as
 
 <DocsRow
+  fullWidth
   previewCell={
     <Tile
       title="Title"
+      description="Description"
       titleProps={{ as: "h1" }}
     />
   }
   language="tsx"
-  code={`<Tile\n  title="Title"\n  titleProps={{ as: "h1" }}\n/>`}
+  code={`<Tile\n  title="Title"\n  description="Description"\n  titleProps={{ as: "h1" }}\n/>`}
 />
 
 ### titleProps.color
 
 <DocsRow
+  fullWidth
   previewCell={
     <Tile
       title="Title"
+      description="Description"
       titleProps={{ color: "link" }}
     />
   }
   language="tsx"
-  code={`<Tile\n  title="Title"\n  titleProps={{ color: "link" }}\n/>`}
+  code={`<Tile\n  title="Title"\n  description="Description"\n  titleProps={{ color: "link" }}\n/>`}
 />
 
 ### titleProps.size
 
 <DocsRow
+  fullWidth
   previewCell={
     <Tile
       title="Title"
+      description="Description"
       titleProps={{ size: "larger" }}
     />
   }
   language="tsx"
-  code={`<Tile\n  title="Title"\n  titleProps={{ size: "larger" }}\n/>`}
+  code={`<Tile\n  title="Title"\n  description="Description"\n  titleProps={{ size: "larger" }}\n/>`}
 />
 
 ### titleProps.weight
 
 <DocsRow
+  fullWidth
   previewCell={
     <Tile
       title="Title"
+      description="Description"
       titleProps={{ weight: "light" }}
     />
   }
   language="tsx"
-  code={`<Tile\n  title="Title"\n  titleProps={{ weight: "light" }}\n/>`}
+  code={`<Tile\n  title="Title"\n  description="Description"\n  titleProps={{ weight: "light" }}\n/>`}
 />
 
 ### titleProps.align
 
 <DocsRow
+  fullWidth
   previewCell={
     <Tile
       title="Title"
+      description="Description"
       titleProps={{ align: "center" }}
     />
   }
   language="tsx"
-  code={`<Tile\n  title="Title"\n  titleProps={{ align: "center" }}\n/>`}
+  code={`<Tile\n  title="Title"\n  description="Description"\n  titleProps={{ align: "center" }}\n/>`}
 />
 
 ### titleProps.code
 
 <DocsRow
+  fullWidth
   previewCell={
     <Tile
       title="Title"
+      description="Description"
       titleProps={{ code: true }}
     />
   }
   language="tsx"
-  code={`<Tile\n  title="Title"\n  titleProps={{ code: true }}\n/>`}
+  code={`<Tile\n  title="Title"\n  description="Description"\n  titleProps={{ code: true }}\n/>`}
 />
 
 ### titleProps.lineHeight
 
 <DocsRow
+  fullWidth
   previewCell={
     <Tile
       title="Title"
+      description="Description"
       titleProps={{ lineHeight: "expanded" }}
     />
   }
   language="tsx"
-  code={`<Tile\n  title="Title"\n  titleProps={{ lineHeight: "expanded" }}\n/>`}
+  code={`<Tile\n  title="Title"\n  description="Description"\n  titleProps={{ lineHeight: "expanded" }}\n/>`}
 />

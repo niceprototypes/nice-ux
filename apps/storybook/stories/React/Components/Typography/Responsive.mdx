@@ -24,6 +24,7 @@ export const largeLabel = `≥${getBreakpointValue("laptop")}px`
     const children = `${size} — ${smallLabel}: ${smallValue}, ${largeLabel}: ${largeValue}`
     return (
       <DocsRow
+        key={size}
         previewCell={
           <Typography size={size}>{children}</Typography>
         }

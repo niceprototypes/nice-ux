@@ -1,0 +1,41 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta
+  title="Getting started/1 · Design tokens/1.4 · Fonts"
+  name="Docs"
+/>
+
+# Fonts
+
+```bash
+npm install nice-react-styles
+```
+
+Load any Google Fonts URL via the `googleFonts` prop on `StylesProvider`:
+
+```tsx
+import { StylesProvider } from "nice-react-styles"
+
+<StylesProvider googleFonts="https://fonts.googleapis.com/css2?family=Domine:wght@600&display=swap">
+  <App />
+</StylesProvider>
+```
+
+Then point the `fontFamily` token at the loaded family. `createTokens` merges partial overrides into the core registry, so untouched variants (`base`, `code`) keep their defaults:
+
+```ts
+import { createTokens } from "nice-react-styles"
+
+createTokens({
+  fontFamily: {
+    heading: "'Domine', Georgia, serif",
+  },
+})
+```
+
+Import the tokens module from your app entry for the side effect:
+
+```tsx
+// App.tsx
+import "./nice/tokens"
+```

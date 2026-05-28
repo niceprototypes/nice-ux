@@ -25,6 +25,7 @@ export const stateCode = s =>
 <div>
   {states.map(state => (
     <DocsRow
+      key={state}
       previewCell={
         <Flex gap="small">
           <Button

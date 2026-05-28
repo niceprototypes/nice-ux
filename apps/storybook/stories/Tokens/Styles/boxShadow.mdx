@@ -13,6 +13,7 @@ import { DocsRow } from "../../../src/components/DocsRow"
 <div>
   {["base", "large"].map(variant => (
     <DocsRow
+      key={variant}
       previewCell={
         <Flex
           spacing="large"

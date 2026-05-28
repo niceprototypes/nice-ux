@@ -43,10 +43,10 @@ const preview: Preview = {
           ["Tokens", "React", "Configuration"],
           "Getting started",
           [
-            "1 · Tokens",
+            "1 · Design tokens",
             [
               "1.1 · Simple",
-              "1.2 · Modes",
+              "1.2 · Themes",
               "1.3 · Breakpoints",
               "1.4 · Fonts",
               "1.5 · Responsive",
@@ -61,7 +61,7 @@ const preview: Preview = {
           "React",
           [
             "Styles",
-            ["StylesProvider", "FontLoader", "Mode", "getToken", "createTokens", "setBreakpoints"],
+            ["StylesProvider", "FontLoader", "Theme", "getToken", "createTokens", "setBreakpoints"],
             "Components",
             "Bindings",
           ],

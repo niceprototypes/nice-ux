@@ -16,12 +16,13 @@ export const spacings = ["smaller", "small", "base", "large", "larger"]
 <div>
   {spacings.map(value => (
     <DocsRow
+      fullWidth
       key={value}
       previewCell={
-        <Tile spacing={value} />
+        <Tile spacing={value} title="Title" description="Description" />
       }
       language="tsx"
-      code={`<Tile spacing="${value}" />`}
+      code={`<Tile spacing="${value}" title="Title" description="Description" />`}
     />
   ))}
 </div>

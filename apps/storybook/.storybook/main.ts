@@ -30,6 +30,7 @@ function getAbsolutePath(value: string): string {
 const registry = require("nice-toolkit/registry")
 const linkedPackages: Record<string, string> = registry.getLinkedPackageMap()
 const sourceAliasablePackages: string[] = registry.getSourceAliasableNames()
+const allNicePackages: string[] = registry.getPackageNames()
 
 /**
  * Storybook Configuration
@@ -66,6 +67,7 @@ const config: StorybookConfig = {
         },
       },
     },
+    "storybook-dark-mode",
   ],
   staticDirs: ["../public"],
   framework: {
@@ -118,12 +120,16 @@ const config: StorybookConfig = {
       resolve(__dirname, "../.."),
     ]
 
-    // Exclude linked packages from pre-bundling. Vite's optimizer would
-    // otherwise cache stale versions and ignore live changes.
+    // Exclude every nice-* package — direct or transitive — from Vite's
+    // optimizer. Pre-bundling caches a snapshot of exports; when a foundation
+    // package (e.g. nice-styles) gains or renames an export, transitive
+    // consumers see "module X does not provide export Y" until the cache is
+    // wiped. Sourcing the exclude list from the registry means adding a new
+    // nice-* package automatically excludes it — no per-consumer drift.
     config.optimizeDeps = config.optimizeDeps || {}
     config.optimizeDeps.exclude = [
       ...(config.optimizeDeps.exclude || []),
-      ...Object.keys(linkedPackages),
+      ...allNicePackages,
     ]
 
     // Only watch dist/ for packages that aren't source-aliased.

@@ -15,6 +15,7 @@ import { colors } from "./Icon.services"
 <div>
   {colors.map(color => (
     <DocsRow
+      key={color}
       previewCell={
         <Icon
           color={color}

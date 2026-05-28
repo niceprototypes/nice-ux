@@ -11,17 +11,17 @@ export const Check = (props) => (
 )
 
 <Meta
-  title="Getting started/1 · Tokens/1.2 · Modes"
+  title="Getting started/1 · Design tokens/1.2 · Themes"
   name="Docs"
 />
 
-# Modes
+# Themes
 
-<Image className="nice-ui" bordered borderRadius="base" src="/rasters/dark-mode.png" alt="Dark mode" />
+<Image className="nice-ui" bordered borderRadius="base" src="/rasters/dark-theme.png" alt="Dark theme" />
+
+## Pinning theme with HTML
 
 <Install package="styles" />
-
-## Pin via `data-theme`
 
 `tokens.css` emits `[data-theme="day"]` and `[data-theme="night"]` rules
 that override the OS-preference cascade. Pin the whole page:
@@ -39,24 +39,24 @@ Or pin a subtree by setting the attribute on any element:
 All descendants — nice components, raw markup, third-party widgets that read
 `var(--np--…)` — inherit the pin.
 
-## Pin via the `Mode` React component
+## Pin via the `Theme` React component
 
 Same mechanism, React-idiomatic API. Renders `<div data-theme={name}
 style={{display:contents}}>` so it's layout-invisible.
 
 ```tsx
-import { Mode } from "nice-react-styles"
+import { Theme } from "nice-react-styles"
 
-<Mode name="day">
+<Theme name="day">
   {children}
-</Mode>
+</Theme>
 ```
 
-See [React/Styles/Mode](/docs/react-styles-mode--docs) for the full surface.
+See [React/Styles/Theme](/docs/react-styles-theme--docs) for the full surface.
 
 ## Pin a specific value (escape hatch)
 
-Each mode primitive is a stable CSS variable that's never reassigned by any
+Each theme primitive is a stable CSS variable that's never reassigned by any
 cascade — useful when you want an absolute night/day reference inside a
 region pinned to the opposite.
 
@@ -68,26 +68,26 @@ region pinned to the opposite.
 
 ---
 
-## More about modes
+## More about themes
 
-### Why are modes important?
+### Why are themes important?
 
 If your user's OS or browser is set to dark mode, and your site is bright, your user may feel that your app is not worth browsing in low-light settings, and may decide to return later.
 
-### How do other design systems handle modes?
+### How do other design systems handle themes?
 
-Most major React UI libraries treat dark mode as a single binary toggle managed at the provider level. Nice handles it as a cascade through pure CSS, accepts custom mode names, and exposes a `mode` prop on each visual component.
+Most major React UI libraries treat dark mode as a single binary toggle managed at the provider level. Nice handles it as a cascade through pure CSS, accepts custom theme names, and exposes a `theme` prop on each visual component.
 
 | Capability | Nice UI | Tailwind | Material UI | Ant Design | Chakra UI | Radix UI |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|
-| Configure mode directly on a component | <Check /> |   |   |   |   |   |
-| Pin section to mode without React wrapper | <Check /> | <Check /> |   |   |   |   |
-| Colors defined once (mode colors derived)  | <Check /> |   |   | <Check /> |   |   |
+| Configure theme directly on a component | <Check /> |   |   |   |   |   |
+| Pin section to theme without React wrapper | <Check /> | <Check /> |   |   |   |   |
+| Colors defined once (theme colors derived)  | <Check /> |   |   | <Check /> |   |   |
 | Linked by defaukt to user's OS/browser settings | <Check /> | <Check /> |   |   |   |   |
-| Switch mode at runtime without re-rendering | <Check /> | <Check /> | <Check /> |   |   |   |
-| Define custom modes (beyond light/dark) | <Check /> | <Check /> |   |   |   |   |
+| Switch theme at runtime without re-rendering | <Check /> | <Check /> | <Check /> |   |   |   |
+| Define custom themes (beyond light/dark) | <Check /> | <Check /> |   |   |   |   |
 
-### How does the design system pick a mode by default?
+### How does the design system pick a theme by default?
 
 By default, the design system matches whatever color mode the browser
 reports as the user's preference. That preference usually mirrors the

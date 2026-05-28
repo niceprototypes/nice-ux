@@ -12,9 +12,10 @@ import { DocsRow } from "../../../../src/components/DocsRow"
 </Typography>
 
 <DocsRow
+  fullWidth
   previewCell={
-    <Tile />
+    <Tile title="Title" description="Description" />
   }
   language="tsx"
-  code={`<Tile />`}
+  code={`<Tile title="Title" description="Description" />`}
 />

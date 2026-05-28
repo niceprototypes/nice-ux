@@ -18,6 +18,7 @@ import { strokeWidths } from "./Icon.services"
 <div>
   {strokeWidths.map(width => (
     <DocsRow
+      key={width}
       previewCell={
         <Icon
           strokeWidth={width}

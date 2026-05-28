@@ -13,21 +13,23 @@ import { DocsRow } from "../../../../src/components/DocsRow"
 </Typography>
 
 <DocsRow
+  fullWidth
   previewCell={
-    <Tile>
+    <Tile title="Title" description="Default width">
       <Typography color="light">Default width</Typography>
     </Tile>
   }
   language="tsx"
-  code={`<Tile />`}
+  code={`<Tile title="Title" description="Default width" />`}
 />
 
 <DocsRow
+  fullWidth
   previewCell={
-    <Tile fullWidth>
+    <Tile fullWidth title="Title" description="Full width tile">
       <Typography color="light">Full width tile</Typography>
     </Tile>
   }
   language="tsx"
-  code={`<Tile fullWidth />`}
+  code={`<Tile fullWidth title="Title" description="Full width tile" />`}
 />

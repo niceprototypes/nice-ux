@@ -1,0 +1,75 @@
+.sbdocs {
+  &.sbdocs-wrapper {
+    background: var(--np--background-color--base);
+  }
+
+  &.sbdocs-content,
+  &.sbdocs-content :where(
+  h1:not(.sb-anchor, .sb-unstyled, .sb-unstyled h1),
+  h2:not(.sb-anchor, .sb-unstyled, .sb-unstyled h2),
+  h3:not(.sb-anchor, .sb-unstyled, .sb-unstyled h3),
+  h4:not(.sb-anchor, .sb-unstyled, .sb-unstyled h4),
+  h5:not(.sb-anchor, .sb-unstyled, .sb-unstyled h5),
+  h6:not(.sb-anchor, .sb-unstyled, .sb-unstyled h6),
+  p, li, td, th, code, blockquote
+) {
+    color: inherit;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  li,
+  th,
+  td {
+    font-family: var(--np--font-family--base);
+    /*font-family: 'Operator Mono', 'Fira Code Retina', 'Fira Code', 'FiraCode-Retina', 'Andale Mono', 'Lucida Console', Consolas, Monaco, monospace;*/
+  }
+
+  p,
+  li,
+  th,
+  td {
+    font-size: var(--np--font-size--base);
+  }
+
+  h1,
+  hr,
+  table,
+  img.nice-ui {
+    margin-top: var(--np--gap--larger);
+    margin-bottom: var(--np--gap--larger);
+  }
+
+  h2,
+  h3 {
+    margin-top: var(--np--gap--larger);
+    margin-bottom: var(--np--gap--base);
+  }
+
+  p {
+    margin-top: var(--np--gap--base);
+    margin-bottom: var(--np--gap--base);
+  }
+
+  hr,
+  th,
+  td {
+    border-color: var(--np--border-color--base);
+  }
+
+  &.sbdocs-content {
+    :where(p:not(.sb-anchor, .sb-unstyled, .sb-unstyled p)) code,
+    :where(table:not(.sb-anchor, .sb-unstyled, .sb-unstyled table)) tr:nth-of-type(2n) {
+      background: var(--np--background-color--dark);
+    }
+
+    :where(p:not(.sb-anchor, .sb-unstyled, .sb-unstyled p)) code {
+      border-color: var(--np--border-color--base);
+    }
+  }
+}

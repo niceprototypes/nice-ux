@@ -15,6 +15,7 @@ import { toSource } from "../../../../src/services"
 <div>
   {["smaller", "small", "base", "large", "larger"].map(size => (
     <DocsRow
+      key={size}
       previewCell={
         <Typography size={size}>{size}</Typography>
       }

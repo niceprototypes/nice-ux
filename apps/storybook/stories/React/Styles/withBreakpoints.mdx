@@ -101,28 +101,28 @@ Concretely:
 
 ---
 
-## When to reach for `breakpoints` vs. Flex's responsive shape
+## Use the `breakpoints` prop, not per-prop responsive shape
 
-`Flex` accepts responsive shapes natively on `gap`, `direction`, `alignItems`,
-`justifyContent`, `grow`, `wrap`:
+Every prop on a `withBreakpoints`-wrapped component is scalar — `gap`,
+`direction`, `alignItems`, `justifyContent`, `grow`, `wrap`, etc. all
+accept a single value, not a `{ phone, tablet, laptop }` object. Per-prop
+responsive shape is no longer supported; all responsive overrides go
+through the single `breakpoints` prop:
 
 ```tsx
-<Flex direction={{ phone: "column", tablet: "row" }} />
+<Flex
+  direction="column"
+  gap="smaller"
+  breakpoints={{
+    "tablet+": { direction: "row", gap: "small" },
+  }}
+/>
 ```
 
-That's CSS-only — generates per-breakpoint media queries inside the styled
-component. No JS subscription. Use it whenever you can.
-
-`withBreakpoints` is JS-driven — it subscribes to `window.innerWidth` and
-re-renders the component when the breakpoint changes. Use it when:
-
-- The prop you need to vary isn't a CSS prop (e.g. `contentLeft`, `children`,
-  `onClick`, a slot prop)
-- The prop type doesn't accept Flex's responsive shape
-- You want to override several props at once with a single entry
-
-For pure layout (gap, direction, spacing, …) prefer Flex's responsive shape —
-it's lighter and works at the styled-components layer.
+One canonical place for responsive behavior, one place to read, one place
+to override. Multiple props that change at the same breakpoint compose
+into a single object entry instead of being spread across each prop's
+shape.
 
 ---
 

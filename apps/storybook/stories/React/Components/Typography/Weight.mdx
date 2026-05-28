@@ -16,6 +16,7 @@ import { toSource } from "../../../../src/services"
   {["light", "base", "medium", "semibold", "bold", "extrabold", "black"].map(
     weight => (
       <DocsRow
+        key={weight}
         previewCell={
           <Typography weight={weight}>{weight}</Typography>
         }

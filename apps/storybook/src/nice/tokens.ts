@@ -6,12 +6,6 @@ import { createTokens } from "nice-react-styles"
  * Imported by `.storybook/preview.tsx` for the side effect — `createTokens`
  * registers the overrides and injects the CSS at module load.
  */
-const AppTokenMap = {
-  backgroundColor: {
-    dark: {
-      day: "#f3f3f3",
-    },
-  },
-} as const
+const AppTokenMap = {} as const
 
 createTokens(AppTokenMap)

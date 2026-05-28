@@ -15,6 +15,7 @@ import { twoDots } from "./Flex.services"
 <div>
   {["row", "column"].map(value => (
     <DocsRow
+      key={value}
       previewCell={
         <DemoDots
           direction={value}

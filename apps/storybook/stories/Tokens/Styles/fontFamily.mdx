@@ -17,6 +17,7 @@ import { DocsRow } from "../../../src/components/DocsRow"
     { name: "code", code: true, text: "Code" },
   ].map(({ name, weight, code, text }) => (
     <DocsRow
+      key={name}
       previewCell={
         <Typography
           weight={weight}

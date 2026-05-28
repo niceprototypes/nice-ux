@@ -1,0 +1,22 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import StoryDescription from "../../../../src/components/StoryDescription"
+import { DocsRow } from "../../../../src/components/DocsRow"
+import Typography from "../../../../src/nice/Typography"
+
+<Meta title="React/Components/Slider/isAnimating" />
+
+# Slider — isAnimating
+
+<StoryDescription property="isAnimating">
+  Whether a slide transition is currently in flight. Gate navigation behind this flag to prevent stacking animations.
+</StoryDescription>
+
+<DocsRow
+  previewCell={
+    <Typography color="light">
+      Set <code>isAnimating</code> to <code>true</code> before changing <code>currentIndex</code>; reset it from <code>onAnimationComplete</code>.
+    </Typography>
+  }
+  language="tsx"
+  code={`const goToSlide = (index) => {\n  if (!isAnimating) {\n    setIsAnimating(true)\n    setCurrentIndex(index)\n  }\n}`}
+/>
