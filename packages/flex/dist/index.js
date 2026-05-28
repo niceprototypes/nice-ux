@@ -337,7 +337,7 @@ const isForwardable = (prop) => ALLOWED_DOM_PROPS.has(prop) ||
  *
  * 1. **Prop Filtering**: Uses `shouldForwardProp` to prevent style-related props from
  *    being passed to the DOM, avoiding React warnings about unknown DOM properties.
- *    Filtered props: mode, spacing, gap, direction, alignItems, justifyContent, grow, wrap
+ *    Filtered props: spacing, gap, direction, alignItems, justifyContent, grow, shrink, wrap
  *
  * 2. **Phone-First Responsive Design**: Applies styles in a phone-first approach:
  *    - Base styles: Always applied (phone breakpoint)
