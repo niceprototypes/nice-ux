@@ -100,7 +100,15 @@ const Button: React.FC<ButtonProps> = ({
           {children}
         </Typography>
       )}
-      {!!icon && <Icon name={icon} size={size} color="lightest" strokeWidth="large" />}
+      {!!icon && (
+        <Icon
+          name={icon}
+          size={size}
+          color="lightest"
+          strokeWidth="large"
+          theme={invertedTheme}
+        />
+      )}
     </StyledButton>
   )
 
