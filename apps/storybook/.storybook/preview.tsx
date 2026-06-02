@@ -4,6 +4,7 @@ import { themes } from "storybook/theming"
 import { addons } from "storybook/preview-api"
 import { DARK_MODE_EVENT_NAME } from "storybook-dark-mode"
 import { StylesProvider } from "nice-react-styles"
+import { ShikiPre } from "../src/components/ShikiCode"
 import "nice-react-icon-vendor"
 import "nice-react-image-vendor"
 import "../src/nice/tokens"
@@ -26,6 +27,13 @@ const preview: Preview = {
     ),
   ],
   parameters: {
+    docs: {
+      // Render fenced code in MDX prose through Shiki instead of Storybook's
+      // <Source>, so prose snippets match DocsRow's day/night theming.
+      components: {
+        pre: ShikiPre,
+      },
+    },
     darkMode: {
       dark: themes.dark,
       light: themes.normal,
@@ -40,7 +48,7 @@ const preview: Preview = {
       storySort: {
         order: [
           "Welcome",
-          ["Tokens", "React", "Configuration"],
+          ["Tokens", "React", "Configuration", "Why"],
           "Getting started",
           [
             "1 · Design tokens",
