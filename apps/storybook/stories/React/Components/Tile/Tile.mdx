@@ -1,6 +1,10 @@
-import { Meta } from "@storybook/addon-docs/blocks"
+import { Meta, Canvas, Controls } from "@storybook/addon-docs/blocks"
+import Tile from "nice-react-tile"
+import Typography from "../../../../src/nice/Typography"
+import { DocsRow } from "../../../../src/components/DocsRow"
+import * as TileStories from "./Tile.stories"
 
-<Meta title="React/Components/Tile" />
+<Meta of={TileStories} />
 
 # Tile
 
@@ -19,3 +23,35 @@ import Tile from "nice-react-tile"
 ```jsx
 <Tile title="Title" description="Description">{children}</Tile>
 ```
+
+---
+
+## Basic
+
+<Typography color="light">
+  Default tile container with built-in spacing and max-width constraints.
+</Typography>
+
+<DocsRow
+  fullWidth
+  previewCell={
+    <Tile title="Title" description="Description" />
+  }
+  language="tsx"
+  code={`<Tile title="Title" description="Description" />`}
+/>
+
+---
+
+## Playground
+
+<Typography color="light">
+  Interactive controls for `title` / `description` and their tokenized{" "}
+  `titleProps` / `descriptionProps`. Each Typography sub-prop is a dropdown of
+  live design-token values — adjust them to preview combinations in the canvas
+  above. Controls are grouped by the object prop they compose into.
+</Typography>
+
+<Canvas of={TileStories.Playground} />
+
+<Controls of={TileStories.Playground} />

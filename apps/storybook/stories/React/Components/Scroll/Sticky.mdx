@@ -1,0 +1,25 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import Typography from "../../../../src/nice/Typography"
+import { DocsRow } from "../../../../src/components/DocsRow"
+
+<Meta title="React/Components/Scroll/Sticky" />
+
+# Scroll — Sticky
+
+<Typography color="light">
+  Sticky headers remain fixed at the top of the viewport when scrolled past
+  their original position. They automatically hide on scroll down and show on
+  scroll up.
+</Typography>
+
+<DocsRow
+  fullWidth
+  previewCell={
+    <Typography size="small" color="light">
+      Wrap any header with <code>&lt;Sticky&gt;</code> inside a
+      <code>StickyProvider</code> to enable the hide-on-scroll-down behavior.
+    </Typography>
+  }
+  language="tsx"
+  code={`<ScrollProvider>\n  <StickyProvider>\n    <Sticky order={0}>\n      <Header />\n    </Sticky>\n  </StickyProvider>\n</ScrollProvider>`}
+/>

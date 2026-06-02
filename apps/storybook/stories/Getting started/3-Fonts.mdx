@@ -1,0 +1,114 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import Install from "../../src/components/Install"
+
+<Meta
+  title="Getting started/3 · Fonts"
+  name="Docs"
+/>
+
+# Fonts (React)
+
+The nice-styles `fontFamily` tokens default to Google Sans Flex (base + heading) and Roboto Mono (code). `StylesProvider` can load web fonts from **Google Fonts** or **Adobe Fonts** (Typekit) — or both at once. To switch a typeface, load the font and remap the matching `fontFamily` variant; the rest keep their defaults.
+
+## Loading the default fonts
+
+The quickest path: pass `loadFonts` and `StylesProvider` injects the default Nice typefaces (Google Sans Flex + Roboto Mono) — no URL needed.
+
+```tsx
+import { StylesProvider } from "nice-react-styles"
+
+<StylesProvider loadFonts>
+  <App />
+</StylesProvider>
+```
+
+## Loading a Google Font
+
+<Install package="react-styles" />
+
+`StylesProvider` accepts a `googleFonts` prop. Any standard Google Fonts URL injects the corresponding `<link>` into the document head:
+
+```tsx
+import { StylesProvider } from "nice-react-styles"
+
+<StylesProvider googleFonts="https://fonts.googleapis.com/css2?family=Domine:wght@600&display=swap">
+  <App />
+</StylesProvider>
+```
+
+## Loading an Adobe Fonts kit
+
+`StylesProvider` accepts an `adobeFonts` prop for an Adobe Fonts (Typekit) web project. Unlike Google Fonts there are no axes to parse — the kit stylesheet carries every `@font-face` rule itself — so the prop only needs the kit reference. Pass a bare kit id:
+
+```tsx
+import { StylesProvider } from "nice-react-styles"
+
+<StylesProvider adobeFonts="abc1def">
+  <App />
+</StylesProvider>
+```
+
+The full kit stylesheet URL works too — the id is pulled from it:
+
+```tsx
+<StylesProvider adobeFonts="https://use.typekit.net/abc1def.css">
+  <App />
+</StylesProvider>
+```
+
+`StylesProvider` injects the `use.typekit.net` preconnects and the kit stylesheet `<link>` into the document head.
+
+### Combining providers
+
+`adobeFonts` loads independently of `loadFonts` and `googleFonts`, so a Google body font and an Adobe display font can run side by side:
+
+```tsx
+<StylesProvider
+  googleFonts="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+  adobeFonts="abc1def"
+>
+  <App />
+</StylesProvider>
+```
+
+## Remapping a fontFamily variant
+
+Loading a font only fetches the files — your components still read the `fontFamily` tokens. Call `createTokens` with the variant you want to point at the loaded family. Partial overrides merge into the existing registry, so untouched variants (`base`, `code`) keep their nice-styles defaults:
+
+```ts
+import { createTokens } from "nice-react-styles"
+
+createTokens({
+  fontFamily: {
+    heading: "'Domine', Georgia, serif",
+  },
+})
+```
+
+The family name is whatever the loaded stylesheet declares in its `@font-face` rules — the `family=` segment of a Google Fonts URL, or the family name assigned by your Adobe Fonts kit:
+
+```ts
+createTokens({
+  fontFamily: {
+    // Family name as declared by the Adobe kit's @font-face rules
+    heading: "'adobe-garamond-pro', Georgia, serif",
+  },
+})
+```
+
+## Wiring into your app
+
+Import the tokens module from your app entry once, for the side effect:
+
+```tsx
+// App.tsx
+import "./nice/tokens"
+```
+
+Every call site of `getToken("fontFamily", "heading")` now resolves to your loaded font:
+
+```tsx
+import { getToken } from "nice-react-styles"
+
+getToken("fontFamily", "heading") // var(--np--font-family--heading) → 'Domine', Georgia, serif
+```

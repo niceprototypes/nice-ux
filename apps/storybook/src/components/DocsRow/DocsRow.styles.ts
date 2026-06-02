@@ -14,7 +14,7 @@ export const PreviewWrapper = styled.div<{ $width?: string; $fullWidth?: boolean
 export const RowFlex = styled(Flex).attrs({ spacing: "large none" })`
 
   &:not(:last-child) {
-    border-bottom: 1px solid ${getToken("borderColor", "base")};
+    border-bottom: 1px solid ${getToken("borderColor")};
   }
 
   .docblock-source {
@@ -43,7 +43,7 @@ export const RowFlex = styled(Flex).attrs({ spacing: "large none" })`
         button {
           width: 100%;
           justify-content: center;
-          padding: ${getToken("gap", "base")};
+          padding: ${getToken("gap")};
           font-size: inherit;
         }
       }

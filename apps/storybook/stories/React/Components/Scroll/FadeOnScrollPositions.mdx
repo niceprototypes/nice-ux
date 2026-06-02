@@ -1,0 +1,51 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import Typography from "../../../../src/nice/Typography"
+import { DocsRow } from "../../../../src/components/DocsRow"
+
+<Meta title="React/Components/Scroll/FadeOnScroll positions" />
+
+# Scroll — FadeOnScroll positions
+
+<Typography color="light">
+  Three position props define the scroll-progress curve at which fade in
+  begins, peaks, and ends.
+</Typography>
+
+### startPosition
+
+<DocsRow
+  fullWidth
+  previewCell={
+    <Typography size="small" color="light">
+      Scroll progress % where fade in begins (default: 0)
+    </Typography>
+  }
+  language="tsx"
+  code={`<FadeOnScroll startPosition={30}>`}
+/>
+
+### peakPosition
+
+<DocsRow
+  fullWidth
+  previewCell={
+    <Typography size="small" color="light">
+      Scroll progress % where peak opacity is reached (default: 50)
+    </Typography>
+  }
+  language="tsx"
+  code={`<FadeOnScroll peakPosition={50}>`}
+/>
+
+### endPosition
+
+<DocsRow
+  fullWidth
+  previewCell={
+    <Typography size="small" color="light">
+      Scroll progress % where fade out completes (default: 100)
+    </Typography>
+  }
+  language="tsx"
+  code={`<FadeOnScroll endPosition={100}>`}
+/>

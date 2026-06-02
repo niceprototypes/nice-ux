@@ -1,6 +1,6 @@
 import Flex from "nice-react-flex"
 import { withBreakpoints } from "nice-react-styles"
-import { Source } from "@storybook/addon-docs/blocks"
+import { ShikiCode } from "../ShikiCode"
 import { PreviewWrapper, RowFlex } from "./DocsRow.styles"
 import { DocsRowProps } from "./DocsRow.types"
 
@@ -12,9 +12,9 @@ const BaseDocsRow = ({
   fullWidth = false,
 }: DocsRowProps) => {
   const sourceBlock = (
-    <Source
-      language={language}
+    <ShikiCode
       code={code}
+      language={language}
     />
   )
 

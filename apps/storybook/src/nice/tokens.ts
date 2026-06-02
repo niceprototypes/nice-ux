@@ -6,6 +6,14 @@ import { createTokens } from "nice-react-styles"
  * Imported by `.storybook/preview.tsx` for the side effect — `createTokens`
  * registers the overrides and injects the CSS at module load.
  */
-const AppTokenMap = {} as const
+const AppTokenMap = {
+  fontSize: {
+    larger: "24px",
+    large: "20px",
+  },
+  gap: {
+    smaller: "8px",
+  },
+} as const
 
 createTokens(AppTokenMap)

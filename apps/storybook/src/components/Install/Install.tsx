@@ -1,5 +1,5 @@
 import React from "react"
-import { Source } from "@storybook/addon-docs/blocks"
+import { ShikiCode } from "../ShikiCode"
 
 interface InstallProps {
   /** Bare package suffix — renders as `nice-{package}`. E.g. `package="styles"` → `nice-styles`. */
@@ -11,7 +11,7 @@ interface InstallProps {
 const Install: React.FC<InstallProps> = ({ package: pkg, step = 1 }) => (
   <>
     <h3>{step}. Install</h3>
-    <Source language="bash" code={`npm install nice-${pkg}`} />
+    <ShikiCode language="bash" code={`npm i nice-${pkg}`} />
   </>
 )
 

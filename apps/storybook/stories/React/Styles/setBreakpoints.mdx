@@ -25,12 +25,15 @@ form via `createTokens`, see
 import { setBreakpoints } from "nice-react-styles"
 
 setBreakpoints({
+  tablet: 700,
   laptop: 1100,
   desktop: 1800,
 })
 ```
 
-Accepts `Partial<BreakpointValues>` — omitted keys are preserved.
+Accepts `Partial<BreakpointValues>` — any subset of the editable floors
+`tablet` / `laptop` / `desktop`; omitted keys are preserved. `phone` is the
+implicit mobile-first base and is not settable — its ceiling tracks `tablet`.
 
 Reach for this directly when thresholds need to change after initial load —
 a settings toggle, an A/B test, a unit test. For static per-app config that

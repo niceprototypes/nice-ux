@@ -1,0 +1,38 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import Flex from "nice-react-flex"
+import Typography from "../../../../src/nice/Typography"
+import { DocsRow } from "../../../../src/components/DocsRow"
+
+<Meta title="React/Components/Scroll/StickySectionLinks" />
+
+# Scroll — StickySectionLinks
+
+<Typography color="light">
+  Navigation links with automatic active section highlighting. Uses{" "}
+  <code>IntersectionObserver</code> for efficient detection.
+</Typography>
+
+<DocsRow
+  fullWidth
+  previewCell={
+    <Flex direction="column" gap="small">
+      <Typography size="small" color="light">
+        Navigation links with automatic active section highlighting. Uses
+        IntersectionObserver for efficient detection.
+      </Typography>
+      <Flex gap="base">
+        <Typography size="small" color="link" style={{ textDecoration: "underline" }}>
+          About
+        </Typography>
+        <Typography size="small" color="light">
+          Services
+        </Typography>
+        <Typography size="small" color="light">
+          Contact
+        </Typography>
+      </Flex>
+    </Flex>
+  }
+  language="tsx"
+  code={`<StickySectionLinks\n  links={[\n    { href: "#about", label: "About" },\n    { href: "#services", label: "Services" },\n  ]}\n/>`}
+/>

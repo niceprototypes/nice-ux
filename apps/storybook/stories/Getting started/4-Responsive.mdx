@@ -1,0 +1,130 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import Install from "../../src/components/Install"
+
+<Meta
+  title="Getting started/4 · Responsive"
+  name="Docs"
+/>
+
+# Responsive
+
+For viewport-aware token groups (today: `fontSize`), `tokens.css` emits a semantic variable plus per-breakpoint primitives. The semantic variable swaps automatically via `@media` rules — `--np--font-size--base` is the phone value by default and gets reassigned to its laptop / desktop value at the relevant `min-width`. The primitives are stable references you can target directly when you need an absolute pin to one breakpoint regardless of the current viewport.
+
+## Default semantic token
+
+<Install package="styles" />
+
+Read the semantic variable directly. The reassignment cascade is already in place — your declaration follows the viewport with no extra work:
+
+```css
+.heading {
+  font-size: var(--np--font-size--base);
+}
+```
+
+## Manual media query
+
+When you want a different size at a specific breakpoint than the default cascade gives you, target the breakpoint primitive inside your own media query:
+
+```css
+@import "nice-styles/tokens.css";
+
+@media (min-width: 1720px) {
+  .heading {
+    font-size: var(--np--font-size--base--desktop);
+  }
+}
+```
+
+## `getBreakpoint` in JS
+
+For CSS-in-JS or runtime CSS strings, `getBreakpoint` returns the matching `@media (min-width: …)` literal sourced from the same threshold table the build uses, so JS and CSS stay in sync:
+
+```js
+import { getBreakpoint } from "nice-styles"
+
+const css = `
+  ${getBreakpoint("desktop")} {
+    .heading {
+      font-size: var(--np--font-size--base--desktop);
+    }
+  }
+`
+```
+
+## Per-breakpoint primitives
+
+Each size token has four sibling primitives — `--phone`, `--tablet`, `--laptop`, `--desktop` — that hold the value for that breakpoint and are never reassigned by any cascade. Pin to one when you want a fixed reference regardless of which viewport the user is on — for example, sizing a thumbnail relative to the desktop type scale even on a phone:
+
+```css
+@import "nice-styles/tokens.css";
+
+.card--phone-only   { font-size: var(--np--font-size--base--phone); }
+.card--laptop-only  { font-size: var(--np--font-size--base--laptop); }
+.card--desktop-only { font-size: var(--np--font-size--base--desktop); }
+```
+
+## Responsive in styled-components
+
+The same `getBreakpoint` literal drops straight into a styled-component, paired with `getToken` for the values — JS and CSS stay on one threshold table:
+
+```bash
+npm install nice-react-styles styled-components
+```
+
+```tsx
+import styled from "styled-components"
+import { getBreakpoint, getToken } from "nice-react-styles"
+
+const Wrapper = styled.div`
+  padding: ${getToken("gap")};
+
+  ${getBreakpoint("laptop")} {
+    padding: ${getToken("gap", "large")};
+  }
+`
+```
+
+## Responsive tokens with `createTokens`
+
+To make your own tokens viewport-aware, pass a breakpoint object (`{ phone, laptop, … }`) as a variant value to `createTokens`. It emits a phone-first default plus the per-breakpoint reassignment cascade — the same shape `tokens.css` ships for the built-in tokens. Breakpoint, theme, and static values can be mixed in one call. `createTokens` injects the generated CSS as a side effect; call it once at module load:
+
+```bash
+npm install nice-react-styles
+```
+
+```tsx
+import { createTokens } from "nice-react-styles"
+
+createTokens({
+  gap: {
+    none: "0",                                     // static
+    base: { phone: "16px", laptop: "24px" },       // breakpoint
+  },
+  fontSize: {
+    larger: { phone: "28px", laptop: "40px", desktop: "48px" },
+  },
+  brandColor: {
+    primary: { day: "#dc0000", night: "#ff5050" }, // theme
+    accent:  "#1a1a1a",                            // static
+  },
+} as const)
+```
+
+```css
+:root {
+  --np--gap--base: 16px;                              /* phone default */
+  --np--gap--base--laptop: 24px;
+  --np--brand-color--primary--day: #dc0000;
+  --np--brand-color--primary--night: #ff5050;
+  --np--brand-color--primary: var(--np--brand-color--primary--day);
+}
+
+@media (min-width: 1280px) {
+  :root { --np--gap--base: var(--np--gap--base--laptop); }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root { --np--brand-color--primary: var(--np--brand-color--primary--night); }
+}
+```

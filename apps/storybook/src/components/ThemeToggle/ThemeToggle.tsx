@@ -5,7 +5,7 @@ import {
   UPDATE_DARK_MODE_EVENT_NAME,
 } from "storybook-dark-mode"
 import Icon from "nice-react-icon"
-import { Fab } from "./ThemeToggle.styles"
+import { ThemeButton } from "./ThemeToggle.styles"
 
 export const ThemeToggle = () => {
   const [isDark, setIsDark] = useState(
@@ -20,7 +20,7 @@ export const ThemeToggle = () => {
   }, [])
 
   return (
-    <Fab
+    <ThemeButton
       type="button"
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
       onClick={() => addons.getChannel().emit(UPDATE_DARK_MODE_EVENT_NAME)}
@@ -30,6 +30,6 @@ export const ThemeToggle = () => {
         size="larger"
         vendor
       />
-    </Fab>
+    </ThemeButton>
   )
 }

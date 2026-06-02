@@ -42,6 +42,11 @@
     "styled-components": "6.1.19"
   },
   "devDependencies": {
+    "@shikijs/core": "^4.1.0",
+    "@shikijs/engine-javascript": "^4.1.0",
+    "@shikijs/langs": "^4.1.0",
+    "@shikijs/rehype": "^4.1.0",
+    "@shikijs/themes": "^4.1.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^5.0.4",

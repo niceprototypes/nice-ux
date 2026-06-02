@@ -1,0 +1,52 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import Flex from "nice-react-flex"
+import { getToken } from "nice-react-styles"
+import Typography from "../../../../src/nice/Typography"
+import { DocsRow } from "../../../../src/components/DocsRow"
+
+<Meta title="React/Components/Scroll/Sticky order" />
+
+# Scroll — Sticky order
+
+<Typography color="light">
+  Multiple sticky elements stack based on their <code>order</code> prop. Lower
+  numbers appear above higher numbers.
+</Typography>
+
+<DocsRow
+  fullWidth
+  previewCell={
+    <Flex direction="column" gap="small">
+      <Typography size="small" color="light">
+        Multiple sticky elements stack based on their order prop. Lower numbers
+        appear above higher numbers.
+      </Typography>
+      <Flex gap="small">
+        <Flex
+          style={{
+            padding: `${getToken("gap", "smaller")} ${getToken("gap", "small")}`,
+            backgroundColor: getToken("color", "error"),
+            borderRadius: getToken("borderRadius", "small"),
+          }}
+        >
+          <Typography size="smaller" color="lighter">
+            order=0
+          </Typography>
+        </Flex>
+        <Flex
+          style={{
+            padding: `${getToken("gap", "smaller")} ${getToken("gap", "small")}`,
+            backgroundColor: getToken("color", "warning"),
+            borderRadius: getToken("borderRadius", "small"),
+          }}
+        >
+          <Typography size="smaller" color="lighter">
+            order=1
+          </Typography>
+        </Flex>
+      </Flex>
+    </Flex>
+  }
+  language="tsx"
+  code={`<Sticky order={0}><Header /></Sticky>\n<Sticky order={1}><Subheader /></Sticky>`}
+/>

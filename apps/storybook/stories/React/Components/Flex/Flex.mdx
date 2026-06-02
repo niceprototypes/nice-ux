@@ -1,4 +1,8 @@
 import { Meta } from "@storybook/addon-docs/blocks"
+import Typography from "../../../../src/nice/Typography"
+import { DocsRow } from "../../../../src/components/DocsRow"
+import DemoDots from "../../../../src/components/DemoDots"
+import { twoDots } from "./Flex.services"
 
 <Meta title="React/Components/Flex" />
 
@@ -24,3 +28,19 @@ import Flex from "nice-react-flex"
   {children}
 </Flex>
 ```
+
+---
+
+## Basic
+
+<Typography color="light">
+  Default flex container — renders children in an inline row with no gap.
+</Typography>
+
+<DocsRow
+  previewCell={
+    <DemoDots dots={twoDots} />
+  }
+  language="tsx"
+  code={`<Flex>{children}</Flex>`}
+/>

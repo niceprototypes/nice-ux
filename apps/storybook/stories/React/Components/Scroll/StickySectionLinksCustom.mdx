@@ -1,0 +1,38 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import Typography from "../../../../src/nice/Typography"
+import { DocsRow } from "../../../../src/components/DocsRow"
+
+<Meta title="React/Components/Scroll/StickySectionLinks custom" />
+
+# Scroll — StickySectionLinks custom
+
+<Typography color="light">
+  Override the default rendering of individual links or the wrapping container
+  via render props.
+</Typography>
+
+### renderLink
+
+<DocsRow
+  fullWidth
+  previewCell={
+    <Typography size="small" color="light">
+      Custom renderer for individual link items with isActive state
+    </Typography>
+  }
+  language="tsx"
+  code={`<StickySectionLinks\n  links={links}\n  renderLink={(link, isActive) => (\n    <Button variant={isActive ? "primary" : "ghost"}>\n      {link.label}\n    </Button>\n  )}\n/>`}
+/>
+
+### renderWrapper
+
+<DocsRow
+  fullWidth
+  previewCell={
+    <Typography size="small" color="light">
+      Custom renderer for the wrapper container
+    </Typography>
+  }
+  language="tsx"
+  code={`<StickySectionLinks\n  links={links}\n  renderWrapper={(children) => (\n    <nav className="custom-nav">{children}</nav>\n  )}\n/>`}
+/>

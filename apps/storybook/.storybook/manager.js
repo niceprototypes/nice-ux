@@ -7,7 +7,7 @@ const theme = create({
   base: prefersDark ? "dark" : "light",
   brandTitle: "Nice Components",
   brandUrl: "https://niceprototypes.com",
-  brandImage: "https://niceprototypes.com/vectors/logo.svg",
+  brandImage: "https://niceprototypes.com/vectors/logo-storybook.svg",
   brandTarget: "_self",
 
   fontBase: '"Google Sans Flex", sans-serif',

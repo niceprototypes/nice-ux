@@ -1,4 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
+import Input from "nice-react-input"
+import Typography from "../../../../src/nice/Typography"
+import { DocsRow } from "../../../../src/components/DocsRow"
 
 <Meta title="React/Components/Input" />
 
@@ -19,3 +22,23 @@ import Input from "nice-react-input"
 ```jsx
 <Input value={value} onChange={setValue} placeholder="Email" />
 ```
+
+---
+
+## Basic
+
+<Typography color="light">
+  Default input rendering with a <code>placeholder</code> and an{" "}
+  <code>onChange</code> handler that receives the new string value.
+</Typography>
+
+<DocsRow
+  previewCell={
+    <Input
+      placeholder="Email"
+      onChange={() => {}}
+    />
+  }
+  language="tsx"
+  code={`<Input\n  placeholder="Email"\n  onChange={(value) => setValue(value)}\n/>`}
+/>

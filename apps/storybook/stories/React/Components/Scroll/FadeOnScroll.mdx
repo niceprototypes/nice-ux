@@ -1,0 +1,42 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { ScrollProvider, FadeOnScroll } from "nice-react-scroll"
+import Flex from "nice-react-flex"
+import { getToken } from "nice-react-styles"
+import Typography from "../../../../src/nice/Typography"
+import { DocsRow } from "../../../../src/components/DocsRow"
+
+<Meta title="React/Components/Scroll/FadeOnScroll" />
+
+# Scroll — FadeOnScroll
+
+<Typography color="light">
+  Fades children in and out as the user scrolls, driven by configurable
+  position and opacity curves.
+</Typography>
+
+<DocsRow
+  fullWidth
+  previewCell={
+    <ScrollProvider>
+      <FadeOnScroll
+        startPosition={0}
+        peakPosition={50}
+        endPosition={100}
+        startOpacity={0.3}
+        peakOpacity={1}
+        endOpacity={0.3}
+      >
+        <Flex
+          style={{
+            padding: getToken("gap"),
+            borderRadius: getToken("borderRadius"),
+          }}
+        >
+          <Typography>This element fades in and out as you scroll</Typography>
+        </Flex>
+      </FadeOnScroll>
+    </ScrollProvider>
+  }
+  language="tsx"
+  code={`<FadeOnScroll\n  startPosition={0}\n  peakPosition={50}\n  endPosition={100}\n>\n  {children}\n</FadeOnScroll>`}
+/>

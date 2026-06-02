@@ -34,9 +34,9 @@
   p,
   li,
   th,
-  td {
+  td,
+  a {
     font-family: var(--np--font-family--base);
-    /*font-family: 'Operator Mono', 'Fira Code Retina', 'Fira Code', 'FiraCode-Retina', 'Andale Mono', 'Lucida Console', Consolas, Monaco, monospace;*/
   }
 
   p,
@@ -56,13 +56,19 @@
 
   > h2,
   > h3 {
-    margin-top: var(--np--gap--larger);
-    margin-bottom: var(--np--gap--base);
+    margin-top: var(--np--gap--larger) !important;
+    margin-bottom: var(--np--gap--large) !important;
   }
 
+  > blockquote,
   > p {
     margin-top: var(--np--gap--base);
     margin-bottom: var(--np--gap--base);
+  }
+
+  > hr {
+    margin-top: calc(var(--np--gap--larger) * 1.5);
+    margin-bottom: calc(var(--np--gap--larger) * 1.25);
   }
 
   hr,
@@ -71,12 +77,24 @@
     border-color: var(--np--border-color--base);
   }
 
-  a {
-    color: var(--np--color--link);
+  strong {
+    font-weight: 600;
+  }
+
+  blockquote {
+    p {
+      color: var(--np--color--lighter) !important;
+    }
   }
 
   h2:not(.sb-anchor, .sb-unstyled, .sb-unstyled h2) {
     border-bottom: none;
+  }
+
+  .sbdocs-a {
+    color: var(--np--color--link);
+    font-weight: 500;
+    text-decoration: none;
   }
 
   &.sbdocs-content {

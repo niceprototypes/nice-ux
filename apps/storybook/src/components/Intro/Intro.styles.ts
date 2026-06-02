@@ -1,19 +1,14 @@
 import styled from "styled-components"
+import { getToken } from "nice-styles"
 
-export const TitleAnchor = styled.a.attrs({
-  target: "_top",
-})`
-  line-height: inherit !important;
-  text-decoration: none !important;
-  span {
-    color: inherit;
+export const IntroDiv = styled.div`
+  display: block;
+  cursor: pointer;
+  border: 1px solid ${getToken("borderColor")};
+  border-radius: ${getToken("borderRadius")};
+  box-shadow: ${getToken("boxShadow")};
+  
+  &:hover {
+    border: 1px solid ${getToken("color", "link")};
   }
-`
-
-export const DescriptionAnchor = styled.a.attrs({
-  target: "_top",
-})`
-  color: inherit !important;
-  line-height: inherit !important;
-  text-decoration: none !important;
 `

@@ -8,7 +8,7 @@ export const Check = (props) => (
   </Flex>
 )
 
-<Meta title="Welcome/Why" />
+<Meta title="Welcome/Why Nice UI?" />
 
 # Why Nice UI?
 
@@ -72,31 +72,21 @@ Nice UI already demonstrates:
 
 ## What this means
 
-<br/>
-
 ### 1. Elimination of variant explosion
 
 Instead of large variant systems, Nice UI uses direct composition and minimal APIs, resulting in fewer edge cases and a simpler mental model.
-
-<br/>
 
 ### 2. Reduction of abstraction overhead
 
 Enterprise systems introduce theme providers and token resolution layers. Nice UI removes those layers, resulting in predictable rendering and easier debugging.
 
-<br/>
-
 ### 3. Alignment with real production UI
 
 Nice UI reflects real SaaS UI patterns rather than demo-oriented abstractions, resulting in less translation from system to product.
 
-<br/>
-
 ### 4. Controlled system surface area
 
 Nice UI enforces constraint instead of flexibility overload, resulting in more consistent outputs and reduced misuse.
-
-<br/>
 
 ### 5. Neutral visual layer
 
@@ -140,6 +130,47 @@ Nice UI competes on **clarity, composability, and directness.** It directly addr
 - over-abstraction
 - variant explosion
 - design–development mismatch
+
+---
+
+## More about themes
+
+### Why are themes important?
+
+If your user's OS or browser is set to dark mode, and your site is bright, your user may feel that your app is not worth browsing in low-light settings, and may decide to return later.
+
+### How do other design systems handle themes?
+
+Most major React UI libraries treat dark mode as a single binary toggle managed at the provider level. Nice handles it as a cascade through pure CSS, accepts custom theme names, and exposes a `theme` prop on each visual component.
+
+| Capability | Nice UI | Tailwind | Material UI | Ant Design | Chakra UI | Radix UI |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|
+| Configure theme directly on a component | <Check /> |   |   |   |   |   |
+| Pin section to theme without React wrapper | <Check /> | <Check /> |   |   |   |   |
+| Colors defined once (theme colors derived)  | <Check /> |   |   | <Check /> |   |   |
+| Linked by defaukt to user's OS/browser settings | <Check /> | <Check /> |   |   |   |   |
+| Switch theme at runtime without re-rendering | <Check /> | <Check /> | <Check /> |   |   |   |
+| Define custom themes (beyond light/dark) | <Check /> | <Check /> |   |   |   |   |
+
+### How does the design system pick a theme by default?
+
+By default, the design system matches whatever color mode the browser
+reports as the user's preference. That preference usually mirrors the
+operating system setting, but the browser can override it (browser
+settings, DevTools, or extensions like Dark Reader).
+
+### What does that mean for color variables?
+
+Each color variable
+(e.g. `--np--color--base`) holds its light value by default
+and automatically swaps to its dark counterpart when the browser
+reports dark.
+
+### Where does the swap actually happen?
+
+The swap is handled by the standard CSS rule
+`@media (prefers-color-scheme: dark)` which is already wired into every color
+variable in `tokens.css` — you don't have to write it yourself.
 
 ---
 

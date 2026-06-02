@@ -47,7 +47,7 @@ no build step, no opinions about your component model.
           <Flex
             style={{
               width: "120px",
-              backgroundColor: getToken("backgroundColor", "dark", "day"),
+              backgroundColor: getToken("backgroundColor", "dark"),
               borderRadius: `calc(${getToken("cellHeight", "smaller")} / 2)`,
             }}
           >
@@ -138,7 +138,7 @@ no build step, no opinions about your component model.
       previewCell={
         <Flex
           style={{
-            backgroundColor: "white",
+            backgroundColor: getToken("backgroundColor"),
             width: getToken("cellHeight", "larger"),
             height: getToken("cellHeight", "larger"),
             border: `${getToken("borderWidth")} solid ${getToken("borderColor", variant)}`,
