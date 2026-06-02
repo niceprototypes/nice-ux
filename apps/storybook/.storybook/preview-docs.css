@@ -1,19 +1,28 @@
 .sbdocs {
-  &.sbdocs-wrapper {
-    background: var(--np--background-color--base);
-  }
 
   &.sbdocs-content,
   &.sbdocs-content :where(
-  h1:not(.sb-anchor, .sb-unstyled, .sb-unstyled h1),
-  h2:not(.sb-anchor, .sb-unstyled, .sb-unstyled h2),
-  h3:not(.sb-anchor, .sb-unstyled, .sb-unstyled h3),
-  h4:not(.sb-anchor, .sb-unstyled, .sb-unstyled h4),
-  h5:not(.sb-anchor, .sb-unstyled, .sb-unstyled h5),
-  h6:not(.sb-anchor, .sb-unstyled, .sb-unstyled h6),
-  p, li, td, th, code, blockquote
-) {
+    h1:not(.sb-anchor, .sb-unstyled, .sb-unstyled h1),
+    h2:not(.sb-anchor, .sb-unstyled, .sb-unstyled h2),
+    h3:not(.sb-anchor, .sb-unstyled, .sb-unstyled h3),
+    h4:not(.sb-anchor, .sb-unstyled, .sb-unstyled h4),
+    h5:not(.sb-anchor, .sb-unstyled, .sb-unstyled h5),
+    h6:not(.sb-anchor, .sb-unstyled, .sb-unstyled h6),
+    p, li, td, th, code, blockquote
+  ) {
     color: inherit;
+  }
+
+  &.sbdocs-content {
+    max-width: 980px;
+  }
+
+  &.sbdocs-preview {
+    background-color: var(--np--background-color--dark);
+  }
+
+  &.sbdocs-wrapper {
+    background-color: var(--np--background-color--base);
   }
 
   h1,
@@ -37,21 +46,21 @@
     font-size: var(--np--font-size--base);
   }
 
-  h1,
-  hr,
-  table,
-  img.nice-ui {
+  > h1,
+  > hr,
+  > table,
+  > img.nice-ui {
     margin-top: var(--np--gap--larger);
     margin-bottom: var(--np--gap--larger);
   }
 
-  h2,
-  h3 {
+  > h2,
+  > h3 {
     margin-top: var(--np--gap--larger);
     margin-bottom: var(--np--gap--base);
   }
 
-  p {
+  > p {
     margin-top: var(--np--gap--base);
     margin-bottom: var(--np--gap--base);
   }
@@ -62,14 +71,30 @@
     border-color: var(--np--border-color--base);
   }
 
+  a {
+    color: var(--np--color--link);
+  }
+
+  h2:not(.sb-anchor, .sb-unstyled, .sb-unstyled h2) {
+    border-bottom: none;
+  }
+
   &.sbdocs-content {
     :where(p:not(.sb-anchor, .sb-unstyled, .sb-unstyled p)) code,
     :where(table:not(.sb-anchor, .sb-unstyled, .sb-unstyled table)) tr:nth-of-type(2n) {
-      background: var(--np--background-color--dark);
+      background-color: var(--np--background-color--dark);
     }
 
     :where(p:not(.sb-anchor, .sb-unstyled, .sb-unstyled p)) code {
       border-color: var(--np--border-color--base);
     }
+
+    :where(li:not(.sb-anchor, .sb-unstyled, .sb-unstyled li)) code {
+      background-color: var(--np--background-color--dark);
+    }
+
+    /*:where(div:not(.sb-anchor, .sb-unstyled, .sb-unstyled div)) {
+      margin: var(--np--gap--large) 0;
+    }*/
   }
 }
