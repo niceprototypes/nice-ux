@@ -1,6 +1,6 @@
 {
   "name": "nice-react-slider",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "description": "A smooth, animated vertical slider component for React",
   "type": "module",
   "main": "dist/index.js",
