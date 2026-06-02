@@ -3,8 +3,10 @@ import type { Preview } from "@storybook/react-vite"
 import { themes } from "storybook/theming"
 import { addons } from "storybook/preview-api"
 import { DARK_MODE_EVENT_NAME } from "storybook-dark-mode"
+import { DocsContainer } from "@storybook/addon-docs/blocks"
 import { StylesProvider } from "nice-react-styles"
 import { ShikiPre } from "../src/components/ShikiCode"
+import { ThemeToggle } from "../src/components/ThemeToggle"
 import "nice-react-icon-vendor"
 import "nice-react-image-vendor"
 import "../src/nice/tokens"
@@ -23,6 +25,7 @@ const preview: Preview = {
     Story => (
       <StylesProvider>
         <Story />
+        <ThemeToggle />
       </StylesProvider>
     ),
   ],
@@ -33,6 +36,14 @@ const preview: Preview = {
       components: {
         pre: ShikiPre,
       },
+      // Wrap docs pages so ThemeToggle floats above MDX prose too — the
+      // global decorator only fires for embedded <Story> renderings.
+      container: ({ children, context }) => (
+        <DocsContainer context={context}>
+          {children}
+          <ThemeToggle />
+        </DocsContainer>
+      ),
     },
     darkMode: {
       dark: themes.dark,
@@ -48,7 +59,7 @@ const preview: Preview = {
       storySort: {
         order: [
           "Welcome",
-          ["Tokens", "React", "Configuration", "Why"],
+          ["Tokens", "React", "Configuration", "Why Nice UI?"],
           "Getting started",
           [
             "1 · Design tokens",
