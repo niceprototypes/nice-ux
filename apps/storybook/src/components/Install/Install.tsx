@@ -6,11 +6,13 @@ interface InstallProps {
   package: string
   /** Step number for the heading. Defaults to 1. */
   step?: number
+  /** Whether to render the "{step}. Install" heading. Defaults to true. */
+  showTitle?: boolean
 }
 
-const Install: React.FC<InstallProps> = ({ package: pkg, step = 1 }) => (
+const Install: React.FC<InstallProps> = ({ package: pkg, step = 1, showTitle = true }) => (
   <>
-    <h3>{step}. Install</h3>
+    {showTitle && <h3>{step}. Install</h3>}
     <ShikiCode language="bash" code={`npm i nice-${pkg}`} />
   </>
 )

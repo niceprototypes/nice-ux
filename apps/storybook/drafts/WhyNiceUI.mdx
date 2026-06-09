@@ -2,13 +2,28 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import Flex from "nice-react-flex"
 import Icon from "nice-react-icon"
 
-export const Check = (props) => (
+export const Check = props => (
   <Flex justifyContent="center">
-    <Icon size="smaller" name="check" strokeWidth="large" strokeScaling {...props} />
+    <Icon
+      size="smaller"
+      name="check"
+      strokeWidth="large"
+      strokeScaling
+      {...props}
+    />
   </Flex>
 )
 
-<Meta title="Welcome/Why Nice UI?" />
+{/*
+  SILOED — intentionally not registered.
+
+  This file lives outside the Storybook stories glob
+  (.storybook/main.ts → "../stories/**/*.mdx"), so Storybook does not load,
+  build, or show it. To re-activate, move it into stories/ (e.g.
+  stories/Getting started/) and it will appear under the title below.
+*/}
+
+<Meta title="Getting started/Why Nice UI?" />
 
 # Why Nice UI?
 
@@ -33,13 +48,13 @@ This is not a lighter version of those systems. It is **a different philosophy**
 
 Most large design systems converge on the same failure modes:
 
-| Failure mode | Industry example |
-|-------------|--------------------|
-| Over-abstraction | MUI + Ant Design rely heavily on prop matrices and variants |
-| Variant explosion | Button APIs with many permutations |
-| Theming complexity | Deep token layers in systems like Carbon / Fluent |
-| Design–dev drift | Separation between Figma and code systems |
-| Rigid composition | Monolithic components instead of primitives |
+| Failure mode       | Industry example                                            |
+| ------------------ | ----------------------------------------------------------- |
+| Over-abstraction   | MUI + Ant Design rely heavily on prop matrices and variants |
+| Variant explosion  | Button APIs with many permutations                          |
+| Theming complexity | Deep token layers in systems like Carbon / Fluent           |
+| Design–dev drift   | Separation between Figma and code systems                   |
+| Rigid composition  | Monolithic components instead of primitives                 |
 
 ---
 
@@ -57,16 +72,16 @@ Nice UI already demonstrates:
 
 ## Feature comparison
 
-|  | Nice UI | Material UI | Ant Design | Chakra UI | Radix UI |
-|----------------|--------|------------|------------|------------|------------|
-| Composition-first (no reliance on variant explosion) | <Check /> |   |   |   | <Check /> |
-| Minimal prop surface per component | <Check /> |   |   |   | <Check /> |
-| Flat token model (low semantic layering) | <Check /> |   |   |   | <Check /> |
-| Storybook as primary system surface | <Check /> | <Check /> | <Check /> | <Check /> |   |
-| Production-realistic component patterns | <Check /> | <Check /> | <Check /> | <Check /> |   |
-| Low abstraction cost (maps closely to DOM) | <Check /> |   |   |   | <Check /> |
-| Neutral visual system (not branded like Material/Ant) | <Check /> |   |   | <Check /> | <Check /> |
-| Consistency without heavy theming APIs | <Check /> |   |   |   | <Check /> |
+|                                                       | Nice UI   | Material UI | Ant Design | Chakra UI | Radix UI  |
+| ----------------------------------------------------- | --------- | ----------- | ---------- | --------- | --------- |
+| Composition-first (no reliance on variant explosion)  | <Check /> |             |            |           | <Check /> |
+| Minimal prop surface per component                    | <Check /> |             |            |           | <Check /> |
+| Flat token model (low semantic layering)              | <Check /> |             |            |           | <Check /> |
+| Storybook as primary system surface                   | <Check /> | <Check />   | <Check />  | <Check /> |           |
+| Production-realistic component patterns               | <Check /> | <Check />   | <Check />  | <Check /> |           |
+| Low abstraction cost (maps closely to DOM)            | <Check /> |             |            |           | <Check /> |
+| Neutral visual system (not branded like Material/Ant) | <Check /> |             |            | <Check /> | <Check /> |
+| Consistency without heavy theming APIs                | <Check /> |             |            |           | <Check /> |
 
 ---
 
@@ -103,6 +118,7 @@ Nice UI sits in a category of **high-signal, low-noise design systems**. Where M
 ## Why this matters now
 
 The industry is shifting toward:
+
 - smaller teams
 - faster iteration
 - AI-assisted development
@@ -127,6 +143,7 @@ Our roadmap is set to reinforce Nice UI's core philosophy:
 ## Bottom line
 
 Nice UI competes on **clarity, composability, and directness.** It directly addresses:
+
 - over-abstraction
 - variant explosion
 - design–development mismatch
@@ -143,14 +160,14 @@ If your user's OS or browser is set to dark mode, and your site is bright, your 
 
 Most major React UI libraries treat dark mode as a single binary toggle managed at the provider level. Nice handles it as a cascade through pure CSS, accepts custom theme names, and exposes a `theme` prop on each visual component.
 
-| Capability | Nice UI | Tailwind | Material UI | Ant Design | Chakra UI | Radix UI |
-|---|:---:|:---:|:---:|:---:|:---:|:---:|
-| Configure theme directly on a component | <Check /> |   |   |   |   |   |
-| Pin section to theme without React wrapper | <Check /> | <Check /> |   |   |   |   |
-| Colors defined once (theme colors derived)  | <Check /> |   |   | <Check /> |   |   |
-| Linked by defaukt to user's OS/browser settings | <Check /> | <Check /> |   |   |   |   |
-| Switch theme at runtime without re-rendering | <Check /> | <Check /> | <Check /> |   |   |   |
-| Define custom themes (beyond light/dark) | <Check /> | <Check /> |   |   |   |   |
+| Capability                                      |  Nice UI  | Tailwind  | Material UI | Ant Design | Chakra UI | Radix UI |
+| ----------------------------------------------- | :-------: | :-------: | :---------: | :--------: | :-------: | :------: |
+| Configure theme directly on a component         | <Check /> |           |             |            |           |          |
+| Pin section to theme without React wrapper      | <Check /> | <Check /> |             |            |           |          |
+| Colors defined once (theme colors derived)      | <Check /> |           |             | <Check />  |           |          |
+| Linked by defaukt to user's OS/browser settings | <Check /> | <Check /> |             |            |           |          |
+| Switch theme at runtime without re-rendering    | <Check /> | <Check /> |  <Check />  |            |           |          |
+| Define custom themes (beyond light/dark)        | <Check /> | <Check /> |             |            |           |          |
 
 ### How does the design system pick a theme by default?
 

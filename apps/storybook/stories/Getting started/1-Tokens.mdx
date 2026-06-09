@@ -1,15 +1,16 @@
 import { Meta } from "@storybook/addon-docs/blocks"
+import DocsTitle from "../../src/components/DocsTitle"
 import Install from "../../src/components/Install"
+import NewLines from "../../src/components/NewLines"
 
 <Meta
   title="Getting started/1 · Tokens"
   name="Docs"
 />
 
-# Tokens
+<DocsTitle title="Tokens" />
 
-
-## A. Direct use
+## Direct use
 
 The most direct way to use nice-styles: install, import the stylesheet, reference the CSS variables. No build step, no JS runtime.
 
@@ -35,7 +36,7 @@ The most direct way to use nice-styles: install, import the stylesheet, referenc
 
 ---
 
-## B. Local aliases
+## Local aliases
 
 You may choose to alias the Nice UI tokens you need, and use your aliases everywhere else.
 
@@ -69,103 +70,151 @@ You may choose to alias the Nice UI tokens you need, and use your aliases everyw
 
 ---
 
-## C. React getters
-
-<Install package="styles" />
+## JavaScript
 
 #### JS only
 
-Outside React, import `getToken` from `nice-styles` directly and load `tokens.css` so the `--np--*` custom properties exist on `:root`. `getToken` returns a `var(--np--…)` reference, so the value stays live under the theme and breakpoint cascades:
+Use the `getToken` function and CSS variables provided by `nice-styles` for vanilla JS:
 
 ```js
 import { getToken } from "nice-styles"
 import "nice-styles/tokens.css"
 
-const card = document.querySelector(".card")
+// Create HTML element
+const card = document.createElement("div")
 
-card.style.padding = getToken("gap")
-card.style.backgroundColor = getToken("backgroundColor", "alternate")
-card.style.borderRadius = getToken("borderRadius")
+// Apply token values
+card.style.padding = getToken("gap", "large")
+card.style.backgroundColor = getToken("backgroundColor")
+card.style.borderRadius = getToken("borderRadius", "small")
+
+// Append element to DOM
+document.body.append(card)
 ```
+
+<NewLines count={1} />
 
 #### React only
 
-In React, wrap the tree in `StylesProvider` (it loads `tokens.css` for you) and pass `getToken` references straight into the `style` prop — no styled-components required:
+Create and style a React component with tokens:
 
 ```tsx
-import { StylesProvider, getToken } from "nice-react-styles"
+import { getToken } from "nice-react-styles"
+
+export default function Card({ children }) {
+  return (
+    <div
+      style={{
+        padding: getToken("gap", "large"),
+        backgroundColor: getToken("backgroundColor"),
+        borderRadius: getToken("borderRadius", "small"),
+      }}
+    >
+      {children}
+    </div>
+  )
+}
+```
+
+Render the React component inside `StylesProvider`:
+
+```tsx
+import { StylesProvider } from "nice-react-styles"
 
 export default function App() {
   return (
     <StylesProvider>
-      <div
-        className="card"
-        style={{
-          padding: getToken("gap"),
-          backgroundColor: getToken("backgroundColor", "alternate"),
-          borderRadius: getToken("borderRadius"),
-        }}
-      >
-        …
-      </div>
+      <Card>…</Card>
     </StylesProvider>
   )
 }
 ```
 
+<NewLines count={1} />
+
 #### React + Styled Components
 
+Create and style a Styled Component with tokens:
+
 ```tsx
-import styled from "styled-components"
 import { getToken } from "nice-react-styles"
-import { StylesProvider } from "nice-react-styles"
+
+const Card = styled.div`
+  padding: ${getToken("gap", "large")};
+  background-color: ${getToken("backgroundColor")};
+  border-radius: ${getToken("borderRadius", "small")};
+`
+```
+
+Render the Styled Component inside `StylesProvider`:
+
+```tsx
+import { StylesProvider, getToken } from "nice-react-styles"
+import styled from "styled-components"
 
 export default function App() {
   return (
     <StylesProvider>
       <Page>
-        <Card/>
+        <Card>…</Card>
       </Page>
     </StylesProvider>
   )
 }
-
-const Card = styled.div`
-  padding: ${getToken("gap")};
-  background-color: ${getToken("backgroundColor", "alternate")};
-  border-radius: ${getToken("borderRadius")};
-`
 ```
 
 ---
 
-## D. React setters
+## Setting tokens
 
-To change token values or add your own, call `createTokens` once at module load for its side effect, then import that module from your app entry.
+### 1. Call the setter function
+
+Call `setTokens` once on module load:
 
 ```ts
-// nice/tokens.ts
-import { createTokens } from "nice-react-styles"
+// tokens.ts
+import { setTokens } from "nice-react-styles"
 
-createTokens({
-  fontSize: { base: "18px", larger: "44px" },
-  brandColor: { primary: "#dc0000", secondary: "#1a1a1a" },
+setTokens({
+  // Static token
+  fontSize: {
+    base: "18px",
+    larger: "48px",
+    jumbo: "96px", // Custom key
+  },
+  // Custom token
+  brandColor: {
+    primary: "#dc0000",
+    secondary: "#1a1a1a",
+  },
 } as const)
 ```
 
+<NewLines/>
+
+### 2. Wrap subtree with provider
+
+`App` can now consume the tokens:
+
 ```tsx
-// App entry — import once for the side effect
-import "./nice/tokens"
 import { StylesProvider } from "nice-react-styles"
+import "./tokens.ts"
 
 <StylesProvider>
   <App />
 </StylesProvider>
 ```
 
+<NewLines/>
+
+### 3. Access new tokens
+
+New tokens can be accessed by the getter function:
+
 ```tsx
 import { getToken } from "nice-react-styles"
 
-getToken("fontSize", "base")      // var(--np--font-size--base)  → 18px
-getToken("brandColor", "primary") // var(--np--brand-color--primary) → #dc0000
+getToken("fontSize", "larger")       // var(--np--font-size--larger)    → 48px
+getToken("fontSize", "jumbo")       // var(--np--font-size--jumbo)      → 96px
+getToken("brandColor", "primary")   // var(--np--brand-color--primary)  → #dc0000
 ```

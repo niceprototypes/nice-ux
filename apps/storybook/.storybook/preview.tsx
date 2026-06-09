@@ -58,23 +58,23 @@ const preview: Preview = {
     options: {
       storySort: {
         order: [
-          "Welcome",
-          ["Tokens", "React", "Configuration", "Why Nice UI?"],
           "Getting started",
           [
+            "Welcome",
             "1 · Tokens",
             "2 · Themes",
             "3 · Fonts",
             "4 · Responsive",
-            "5 · Utility classes",
+            "5 · Icons",
+            "6 · setTokens",
             "Final",
           ],
           "Tokens",
-          ["Styles", "Icons", "Responsive", "Breakpoints"],
+          ["Styles", "Responsive", "Breakpoints"],
           "React",
           [
             "Styles",
-            ["StylesProvider", "FontLoader", "Theme", "getToken", "createTokens", "setBreakpoints"],
+            ["StylesProvider", "FontLoader", "Theme", "getToken", "setTokens", "setBreakpoints"],
             "Components",
             "Bindings",
           ],

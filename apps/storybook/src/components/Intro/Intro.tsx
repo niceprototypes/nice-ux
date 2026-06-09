@@ -48,7 +48,7 @@ const Intro: React.FC<Props> = ({ storyId, iconName, title, children }) => {
             {title}
           </Typography>
         </Flex>
-        <Typography as="span" size="small">
+        <Typography>
           {children}
         </Typography>
       </Flex>

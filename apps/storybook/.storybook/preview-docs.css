@@ -57,7 +57,7 @@
   > h2,
   > h3 {
     margin-top: var(--np--gap--larger) !important;
-    margin-bottom: var(--np--gap--large) !important;
+    margin-bottom: var(--np--gap--larger) !important;
   }
 
   > blockquote,

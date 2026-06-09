@@ -1,11 +1,12 @@
 import { Meta } from "@storybook/addon-docs/blocks"
+import DocsTitle from "../../../src/components/DocsTitle"
 
 <Meta
   title="React/Styles/setBreakpoints"
   name="Docs"
 />
 
-# setBreakpoints
+<DocsTitle title="setBreakpoints" />
 
 Imperative override of the pixel thresholds behind `@media` queries. `BREAKPOINTS`
 is mutated in memory and a `<style data-nice-breakpoints>` element is injected
@@ -14,8 +15,8 @@ injected stylesheet overrides the build-time literals from `tokens.css`.
 
 For the default thresholds, see
 [Tokens/Breakpoints](/docs/tokens-breakpoints--docs). For the declarative
-form via `createTokens`, see
-[React/Styles/createTokens](/docs/react-styles-createtokens--docs).
+form via `setTokens`, see
+[React/Styles/setTokens](/docs/react-styles-settokens--docs).
 
 ---
 
@@ -38,5 +39,5 @@ implicit mobile-first base and is not settable — its ceiling tracks `tablet`.
 Reach for this directly when thresholds need to change after initial load —
 a settings toggle, an A/B test, a unit test. For static per-app config that
 belongs with the rest of your design tokens, use
-[`createTokens({ breakpoints })`](/docs/react-styles-createtokens--docs)
+[`setTokens({ breakpoints })`](/docs/react-styles-settokens--docs)
 instead.

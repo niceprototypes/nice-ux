@@ -1,13 +1,15 @@
 import { Meta } from "@storybook/addon-docs/blocks"
+import DocsTitle from "../../src/components/DocsTitle"
 import Image from "nice-react-image"
 import Install from "../../src/components/Install"
+import NewLines from "../../src/components/NewLines/index.ts"
 
 <Meta
   title="Getting started/2 · Themes"
   name="Docs"
 />
 
-# Themes
+<DocsTitle title="Themes" />
 
 ## Pinning a theme with HTML
 
@@ -21,10 +23,31 @@ You can pin the theme to a whole page via the `html` element:
 <html data-theme="day">…</html>
 ```
 
-Or pin to an element by setting the attribute on any element:
+Or pin to an element by setting the attribute:
 
 ```html
 <section data-theme="night">…</section>
+```
+
+### 3. Use semantic tokens
+
+Semantic tokens within the pinned element are reassigned to the pinned theme value:
+
+```html
+<section>
+  <p style="color: var(--np--color--base)">
+    Pinned to browser
+  </p>
+</section>
+
+<section data-theme="night">
+  <p style="color: var(--np--color--base)">
+    Pinned to night
+  </p>
+  <p style="color: var(--np--color--base--day)">
+    Pinned to day
+  </p>
+</section>
 ```
 
 ---
@@ -46,7 +69,9 @@ body.night-mode {
 
 ## Pinning a theme with React
 
-All Nice components have a `theme` prop you can use for pinning:
+### `theme` prop
+
+For pinning any Nice component:
 
 ```tsx
 import Typography from "nice-react-typography"
@@ -54,7 +79,11 @@ import Typography from "nice-react-typography"
 <Typography theme="night">Night mode</Typography>
 ```
 
-Also, the `Theme` component from `nice-react-styles` is used for subtrees:
+<NewLines/>
+
+### `Theme` component
+
+For pinning React subtrees:
 
 ```tsx
 import { Theme } from "nice-react-styles"
@@ -63,6 +92,10 @@ import { Theme } from "nice-react-styles"
   {children}
 </Theme>
 ```
+
+<NewLines/>
+
+### Nesting
 
 Additionally, you can nest pinned components within a pinned `Theme`:
 

@@ -1,13 +1,14 @@
 import { Meta } from "@storybook/addon-docs/blocks"
+import DocsTitle from "../../src/components/DocsTitle"
 
 <Meta
   title="Getting started/Final"
   name="Docs"
 />
 
-# Final
+<DocsTitle title="Final" />
 
-Everything from the previous pages in one place: register token overrides (colors, fonts, responsive sizes) with `createTokens`, load a web font, wrap the app in `StylesProvider`, and render components.
+Everything from the previous pages in one place: register token overrides (colors, fonts, responsive sizes) with `setTokens`, load a web font, wrap the app in `StylesProvider`, and render components.
 
 ```bash
 npm install nice-react-styles nice-react-typography styled-components
@@ -15,13 +16,13 @@ npm install nice-react-styles nice-react-typography styled-components
 
 ## 1. Define your tokens
 
-`createTokens` runs once at module load for its side effect — overriding core variants and registering any custom groups. Static, responsive (`{ phone, laptop, … }`), and theme (`{ day, night }`) values can be mixed freely.
+`setTokens` runs once at module load for its side effect — overriding core variants and registering any custom groups. Static, responsive (`{ phone, laptop, … }`), and theme (`{ day, night }`) values can be mixed freely.
 
 ```ts
 // nice/tokens.ts
-import { createTokens } from "nice-react-styles"
+import { setTokens } from "nice-react-styles"
 
-createTokens({
+setTokens({
   // Re-color text
   color: {
     base: "#1a1a1a",

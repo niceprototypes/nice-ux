@@ -1,11 +1,12 @@
 import { Meta } from "@storybook/addon-docs/blocks"
+import DocsTitle from "../../src/components/DocsTitle"
 
 <Meta
   title="React"
   name="Docs"
 />
 
-# React
+<DocsTitle title="React" />
 
 React bindings for the Nice design system. These packages wrap `nice-styles`
 with providers, hooks, and pre-built components.
@@ -23,7 +24,7 @@ token API on top of the base CSS tokens.
   (used internally by `StylesProvider`)
 - [getToken](/docs/react-styles-gettoken--docs) — Typed accessor for token keys,
   CSS `var()` strings, and resolved values
-- [createTokens](/docs/react-styles-createtokens--docs) — Register a custom token
+- [setTokens](/docs/react-styles-settokens--docs) — Register a custom token
   map and get back `GlobalStyles` plus a scoped `getToken`
 
 ### Bindings

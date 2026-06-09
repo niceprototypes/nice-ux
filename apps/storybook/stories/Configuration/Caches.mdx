@@ -1,11 +1,12 @@
 import { Meta } from "@storybook/addon-docs/blocks"
+import DocsTitle from "../../src/components/DocsTitle"
 
 <Meta
   title="Configuration/Caches"
   name="Docs"
 />
 
-# Caches
+<DocsTitle title="Caches" />
 
 Eight cache layers can hold stale state in a Nice workspace. Three workspace-level `ntk` operations clear most of them; the rest belong to other owners (the consumer's `npm install`, npm itself, the user's browser). This page maps which tool clears which layer and gives workflow recipes for the common "something is stale" symptoms.
 

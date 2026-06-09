@@ -1,0 +1,51 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import DocsTitle from "../../src/components/DocsTitle"
+import Icon, { iconNames } from "nice-react-icon"
+import Flex from "nice-react-flex"
+import IconGrid from "../../src/components/IconGrid"
+import NewLines from "../../src/components/NewLines/index.ts"
+
+<Meta
+  title="Getting started/5 · Icons"
+  name="Docs"
+/>
+
+<DocsTitle title="Icons" />
+
+[Icon component](/docs/react-components-icon--docs)
+
+```bash
+npm install nice-icons
+```
+
+Standalone SVG icon library. Framework-agnostic — use them as `<img>` sources,
+inline SVG, or through the React [Icon component](/docs/react-components-icon--docs).
+
+## Standalone (any framework)
+
+```jsx
+import CheckIcon from "nice-icons/check/stroke.svg"
+
+<img
+  src={CheckIcon}
+  alt="check"
+/>
+```
+
+## React
+
+```bash
+npm install nice-react-icon
+```
+
+```tsx
+import Icon from "nice-react-icon"
+
+<Icon name="check" size="large" />
+```
+
+## Browse
+
+<NewLines count={2} />
+
+<IconGrid icons={iconNames.map(name => ({ name }))} />

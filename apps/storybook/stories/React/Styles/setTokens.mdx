@@ -1,11 +1,12 @@
 import { Meta } from "@storybook/addon-docs/blocks"
+import DocsTitle from "../../../src/components/DocsTitle"
 
 <Meta
-  title="React/Styles/createTokens"
+  title="React/Styles/setTokens"
   name="Docs"
 />
 
-# createTokens
+<DocsTitle title="setTokens" />
 
 ```bash
 npm install nice-react-styles
@@ -14,13 +15,13 @@ npm install nice-react-styles
 ### Setup
 
 ```js
-import { createTokens, getToken } from "nice-react-styles"
+import { setTokens, getToken } from "nice-react-styles"
 ```
 
 ### Usage
 
 ```js
-export const { GlobalStyles } = createTokens(tokenMap)
+export const { GlobalStyles } = setTokens(tokenMap)
 export { getToken }
 ```
 
@@ -31,7 +32,7 @@ export { getToken }
 Use an existing token key with an existing variant name to replace its value. Here, the base font size is changed from the default to `18px`.
 
 ```typescript
-createTokens({
+setTokens({
   fontSize: {
     base: "18px",
   },
@@ -49,7 +50,7 @@ createTokens({
 Use an existing token key with a new variant name to extend it. Here, a `brand` variant is added to `color` alongside the existing variants (`base`, `light`, `lighter`, etc.).
 
 ```typescript
-createTokens({
+setTokens({
   color: {
     brand: "#dc0000",
   },
@@ -68,7 +69,7 @@ createTokens({
 Use a token key that doesn't exist in the base system to create an entirely new token with its own variants.
 
 ```typescript
-createTokens({
+setTokens({
   headerHeight: {
     base: "64px",
     compact: "48px",
@@ -88,7 +89,7 @@ createTokens({
 A variant value can be an object with breakpoint keys instead of a plain string. The `phone` value becomes the default, and higher breakpoints override it via media queries. Static strings and breakpoint objects can be mixed within the same token group.
 
 ```typescript
-createTokens({
+setTokens({
   gap: {
     none: "0",                                // static
     small: { phone: "12px", laptop: "16px" }, // responsive
@@ -132,7 +133,7 @@ createTokens({
 A variant value can be an object with mode keys instead of a plain string. The `day` value becomes the default, and the `night` value is applied via a `prefers-color-scheme` media query. Static strings and mode objects can be mixed within the same token group.
 
 ```typescript
-createTokens({
+setTokens({
   headerColor: {
     base: { day: "#000", night: "#fff" },  // mode-aware
     accent: "#dc0000",                     // static (same in both modes)
@@ -178,7 +179,7 @@ All three patterns work in a single call. The token map merges into the existing
 Variant values can be a plain string, a breakpoint object, or a mode object. These formats can be mixed freely within the same token group and within the same call.
 
 ```typescript
-const { GlobalStyles } = createTokens({
+const { GlobalStyles } = setTokens({
   fontSize: { base: "18px" },              // override
   color: { brand: "#dc0000" },   // extend
   headerHeight: {                          // create
