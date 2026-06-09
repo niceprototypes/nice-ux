@@ -6,8 +6,8 @@ type StatusTokenParameter = "backgroundColor" | "color" | "borderColor" | "place
 /**
  * Resolve an input color token from the status/state composition matrix.
  *
- * Path-based lookup: ["status", status, state, parameter]
- *   → --np--input--status--{status}--{state}--{parameter}
+ * Path-based lookup: ["status", status, parameter, state]
+ *   → --np--input--status--{status}--{parameter}--{state}
  *
  * Returns the semantic var; theme-awareness happens via cascade — when the
  * input (or an ancestor) sets data-theme on the DOM, the matching
@@ -21,5 +21,5 @@ export function getStatusToken(
   state: InputStateType,
   parameter: StatusTokenParameter
 ): string {
-  return getInputToken(["status", status, state, parameter])
+  return getInputToken(["status", status, parameter, state])
 }
