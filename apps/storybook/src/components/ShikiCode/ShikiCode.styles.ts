@@ -9,6 +9,8 @@ import { getToken } from "nice-react-styles"
  * set the code font from the token.
  */
 export const ShikiDiv = styled.div`
+  position: relative;
+  flex-grow: 1;
   margin: ${getToken("gap", "large")} 0 !important;
   padding: ${getToken("gap")};
   border: 1px solid ${getToken("borderColor")};

@@ -9,6 +9,8 @@ import json from "@shikijs/langs/json"
 import themeLight from "@shikijs/themes/min-light"
 import themeDark from "@shikijs/themes/min-dark"
 import { ShikiDiv } from "./ShikiCode.styles"
+import { LangPill } from "./LangPill"
+import Flex from "nice-react-flex"
 
 const themeNameLight = "min-light"
 const themeNameDark = "min-dark"
@@ -48,15 +50,22 @@ interface ShikiCodeProps {
 
 /** Render a code string as Shiki dual-theme HTML. Use anywhere code is shown. */
 export const ShikiCode: React.FC<ShikiCodeProps> = ({ code, language }) => (
-  <ShikiDiv
-    dangerouslySetInnerHTML={{
-      __html: highlighter.codeToHtml(code.replace(/\n$/, ""), {
-        lang: resolveLang(language),
-        themes: { light: themeNameLight, dark: themeNameDark },
-        defaultColor: false,
-      }),
-    }}
-  />
+  <ShikiDiv>
+    <Flex gap="large">
+      <Flex grow={1}>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: highlighter.codeToHtml(code.replace(/\n$/, ""), {
+              lang: resolveLang(language),
+              themes: { light: themeNameLight, dark: themeNameDark },
+              defaultColor: false,
+            }),
+          }}
+        />
+      </Flex>
+      <LangPill language={language} />
+    </Flex>
+  </ShikiDiv>
 )
 
 /**
