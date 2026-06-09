@@ -14,7 +14,7 @@ import {
  *
  * Path lookup — for nested tokens (e.g., status variants):
  * ```ts
- * getButtonToken(["status", "primary", "base", "backgroundColor"])
+ * getButtonToken(["status", "primary", "backgroundColor", "base"])
  * ```
  *
  * Three sibling functions return the three accessor forms.

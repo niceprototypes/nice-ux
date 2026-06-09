@@ -7,7 +7,7 @@ type StatusTokenParameter = "backgroundColor" | "color" | "borderColor"
  * Resolve a button color token from the status/state composition matrix.
  *
  * Uses path-based lookup to walk the nested token tree:
- * ["status", status, state, parameter] → --np--button--status--{status}--{state}--{parameter}
+ * ["status", status, parameter, state] → --np--button--status--{status}--{parameter}--{state}
  *
  * The returned semantic var is theme-aware via cascade — when the button (or
  * an ancestor) sets data-theme on the DOM, the matching [data-theme] rule
@@ -20,5 +20,5 @@ export function getStatusToken(
   state: ButtonStateType,
   parameter: StatusTokenParameter
 ): string {
-  return getButtonToken(["status", status, state, parameter])
+  return getButtonToken(["status", status, parameter, state])
 }
