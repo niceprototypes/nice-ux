@@ -19,7 +19,7 @@ import { isSpinning } from "../../utilities/isSpinning"
  * import Icon from 'nice-react-icon'
  *
  * // Custom icon (tier 1)
- * <Icon name="arrow" />
+ * <Icon name="arrow-right" />
  *
  * // Vendor icon (tier 2) — requires nice-react-icon-vendor
  * <Icon name="TrendingDown" vendor />

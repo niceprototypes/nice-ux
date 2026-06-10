@@ -8,8 +8,14 @@ declare module "nice-icons" {
   import * as React from "react"
   type SvgComponent = React.FunctionComponent<React.SVGAttributes<SVGElement>>
 
-  export const ArrowStrokeIcon: SvgComponent
-  export const ArrowFillIcon: SvgComponent
+  export const ArrowTopStrokeIcon: SvgComponent
+  export const ArrowTopFillIcon: SvgComponent
+  export const ArrowRightStrokeIcon: SvgComponent
+  export const ArrowRightFillIcon: SvgComponent
+  export const ArrowBottomStrokeIcon: SvgComponent
+  export const ArrowBottomFillIcon: SvgComponent
+  export const ArrowLeftStrokeIcon: SvgComponent
+  export const ArrowLeftFillIcon: SvgComponent
   export const AttentionStrokeIcon: SvgComponent
   export const AttentionFillIcon: SvgComponent
   export const BoxStrokeIcon: SvgComponent
@@ -20,8 +26,14 @@ declare module "nice-icons" {
   export const CalendarFillIcon: SvgComponent
   export const CancelStrokeIcon: SvgComponent
   export const CancelFillIcon: SvgComponent
-  export const CaratStrokeIcon: SvgComponent
-  export const CaratFillIcon: SvgComponent
+  export const CaratTopStrokeIcon: SvgComponent
+  export const CaratTopFillIcon: SvgComponent
+  export const CaratRightStrokeIcon: SvgComponent
+  export const CaratRightFillIcon: SvgComponent
+  export const CaratBottomStrokeIcon: SvgComponent
+  export const CaratBottomFillIcon: SvgComponent
+  export const CaratLeftStrokeIcon: SvgComponent
+  export const CaratLeftFillIcon: SvgComponent
   export const CheckStrokeIcon: SvgComponent
   export const CheckFillIcon: SvgComponent
   export const CloudStrokeIcon: SvgComponent

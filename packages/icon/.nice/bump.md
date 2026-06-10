@@ -1,0 +1,1 @@
+[2026-06-10 14:58] major: Replace arrow/carat icon names with directional variants — arrow-top/right/bottom/left, carat-top/right/bottom/left. IconNameType no longer includes "arrow"/"carat". Also fixes buildIconMap to resolve hyphenated names (kebab → PascalCase)

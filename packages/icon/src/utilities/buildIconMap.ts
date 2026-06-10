@@ -1,6 +1,16 @@
 import * as Icons from "nice-icons"
 import { iconNames } from "../constants"
-import { capitalize } from "./capitalize"
+
+/**
+ * Convert a kebab-case icon name to the PascalCase used by nice-icons exports.
+ * Matches nice-icons' own `toPascalCase`: "arrow-top" → "ArrowTop", "check" → "Check".
+ */
+function toPascalCase(name: string): string {
+  return name
+    .split("-")
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join("")
+}
 
 type IconComponent = React.FunctionComponent<React.SVGAttributes<SVGElement>>
 
@@ -16,7 +26,7 @@ export function buildIconMap(): Record<string, IconVariants> {
   const map: Record<string, IconVariants> = {}
 
   for (const name of iconNames) {
-    const pascalName = capitalize(name)
+    const pascalName = toPascalCase(name)
     const fillKey = `${pascalName}FillIcon` as keyof typeof Icons
     const strokeKey = `${pascalName}StrokeIcon` as keyof typeof Icons
 

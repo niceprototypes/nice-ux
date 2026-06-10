@@ -27,14 +27,14 @@ describe("Icon", () => {
   })
 
   it("renders an outlined icon when outlined prop is true", () => {
-    render(<Icon name="arrow" outlined />)
+    render(<Icon name="arrow-right" outlined />)
     const svg = screen.getByTestId("svg-icon")
     expect(svg).toHaveAttribute("data-outlined", "true")
   })
 
   it("renders with different icon names", () => {
-    const icons = ["arrow", "check", "x", "search", "cog"] as const
-    const { rerender } = render(<Icon name="arrow" />)
+    const icons = ["arrow-right", "check", "x", "search", "cog"] as const
+    const { rerender } = render(<Icon name="arrow-right" />)
 
     icons.forEach((iconName) => {
       rerender(<Icon name={iconName} />)
