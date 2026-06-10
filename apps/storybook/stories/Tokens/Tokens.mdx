@@ -1,5 +1,13 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import DocsTitle from "../../src/components/DocsTitle"
+import Flex from "nice-react-flex"
+import { getToken } from "nice-react-styles"
+import Typography from "../../src/nice/Typography"
+import { DocsRow } from "../../src/components/DocsRow"
+import DemoDots from "../../src/components/DemoDots"
+
+export const loremIpsum =
+  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore."
 
 <Meta
   title="Tokens"
@@ -8,39 +16,371 @@ import DocsTitle from "../../src/components/DocsTitle"
 
 <DocsTitle title="Tokens" />
 
-The `nice-styles` package is a token system built entirely on CSS custom
-properties. No framework dependency, no runtime — just variables you reference
-in your stylesheets.
+## animationDuration
 
-Every token maps to a `--np--` prefixed CSS variable. Use them directly in CSS,
-Sass, or any preprocessor.
+<div>
+  {[
+    { name: "base", backgroundColor: getToken("color", "error") },
+    {
+      name: "slow",
+      backgroundColor: getToken("color", "warning"),
+    },
+  ].map(({ name, backgroundColor }) => {
+    const animationName = name === "base" ? "slide" : "slideSlow"
+    return (
+      <DocsRow
+        key={name}
+        previewCell={
+          <Flex
+            style={{
+              width: "120px",
+              backgroundColor: getToken("backgroundColor", "dark"),
+              borderRadius: `calc(${getToken("cellHeight", "smaller")} / 2)`,
+            }}
+          >
+            <Flex
+              style={{
+                backgroundColor,
+                width: getToken("cellHeight", "smaller"),
+                height: getToken("cellHeight", "smaller"),
+                borderRadius: `calc(${getToken("cellHeight", "smaller")} / 2)`,
+                animation: `${animationName} calc(${getToken("animationDuration", name)} * 6) ${getToken("animationEasing")} infinite`,
+                animationDelay:
+                  name === "base" ? getToken("animationDuration", name) : 0,
+              }}
+            />
+          </Flex>
+        }
+        language="tsx"
+        code={`getToken("animationDuration", "${name}")`}
+      />
+    )
+  })}
+</div>
 
-```css
-.card {
-  padding: var(--np--gap--large);
-  border-radius: var(--np--border-radius--base);
-  color: var(--np--color--base);
-}
-```
+## animationEasing
 
-**When to use:** Any project that renders HTML. Static sites, server-rendered
-pages, vanilla JS apps, or as a shared foundation across frameworks. If you
-only need design tokens and responsive breakpoints, this is the package to
-install.
+<div>
+  {["base"].map(variant => (
+    <DocsRow
+      key={variant}
+      previewCell={
+        <Flex
+          style={{
+            backgroundColor: getToken("backgroundColor", "dark"),
+            padding: getToken("gap"),
+            borderRadius: getToken("borderRadius"),
+          }}
+        >
+          <svg
+            width="60"
+            height="24"
+            viewBox="0 0 60 24"
+          >
+            <path
+              d="M 1 23 C 30 23, 30 1, 60 1"
+              fill="none"
+              stroke={getToken("color", "lighter")}
+              strokeWidth={getToken("borderWidth", "large")}
+              strokeLinecap="round"
+            />
+          </svg>
+        </Flex>
+      }
+      language="tsx"
+      code={`getToken("animationEasing", "${variant}")`}
+    />
+  ))}
+</div>
 
-For React projects, see [React/Styles](/docs/react-styles-stylesprovider--docs)
-which wraps this package with a provider and typed accessors.
+## backgroundColor
+
+<div>
+  {["base", "dark"].map(variant => (
+    <DocsRow
+      key={variant}
+      previewCell={
+        <Flex
+          style={{
+            backgroundColor: getToken("backgroundColor", variant),
+            width: getToken("cellHeight", "larger"),
+            height: getToken("cellHeight", "larger"),
+            border: `${getToken("borderWidth")} solid ${getToken("borderColor")}`,
+            borderRadius: getToken("borderRadius", "small"),
+          }}
+        />
+      }
+      language="tsx"
+      code={`getToken("backgroundColor", "${variant}")`}
+    />
+  ))}
+</div>
+
+## borderColor
+
+<div>
+  {["base", "dark", "darker"].map(variant => (
+    <DocsRow
+      key={variant}
+      previewCell={
+        <Flex
+          style={{
+            backgroundColor: getToken("backgroundColor"),
+            width: getToken("cellHeight", "larger"),
+            height: getToken("cellHeight", "larger"),
+            border: `${getToken("borderWidth")} solid ${getToken("borderColor", variant)}`,
+            borderRadius: getToken("borderRadius", "small"),
+          }}
+        />
+      }
+      language="tsx"
+      code={`getToken("borderColor", "${variant}")`}
+    />
+  ))}
+</div>
+
+## borderRadius
+
+<div>
+  {["smaller", "small", "base", "large", "larger"].map(variant => (
+    <DocsRow
+      key={variant}
+      previewCell={
+        <Flex
+          style={{
+            borderRadius: getToken("borderRadius", variant),
+            width: getToken("cellHeight", "larger"),
+            height: getToken("cellHeight", "larger"),
+            border: `${getToken("borderWidth")} solid ${getToken("color", "light")}`,
+          }}
+        />
+      }
+      language="tsx"
+      code={`getToken("borderRadius", "${variant}")`}
+    />
+  ))}
+</div>
+
+## borderWidth
+
+<div>
+  {["small", "base", "large"].map(variant => (
+    <DocsRow
+      key={variant}
+      previewCell={
+        <Flex
+          style={{
+            width: getToken("cellHeight", "larger"),
+            height: getToken("cellHeight", "larger"),
+            border: `${getToken("borderWidth", variant)} solid ${getToken("color", "light")}`,
+            borderRadius: getToken("borderRadius", "small"),
+          }}
+        />
+      }
+      language="tsx"
+      code={`getToken("borderWidth", "${variant}")`}
+    />
+  ))}
+</div>
+
+## boxShadow
+
+<div>
+  {["base", "large"].map(variant => (
+    <DocsRow
+      key={variant}
+      previewCell={
+        <Flex
+          spacing="large"
+          style={{
+            backgroundColor: getToken("backgroundColor", "dark"),
+            borderRadius: `calc(${getToken("cellHeight", "smaller")} / 2)`,
+          }}
+        >
+          <Flex
+            style={{
+              backgroundColor: getToken("backgroundColor"),
+              width: getToken("cellHeight", "larger"),
+              height: getToken("cellHeight", "larger"),
+              borderRadius: getToken("borderRadius", "small"),
+              boxShadow: getToken("boxShadow", variant),
+            }}
+          />
+        </Flex>
+      }
+      language="tsx"
+      code={`getToken("boxShadow", "${variant}")`}
+    />
+  ))}
+</div>
+
+## cellHeight
+
+<div>
+  {["smaller", "small", "base", "large", "larger"].map(variant => (
+    <DocsRow
+      key={variant}
+      previewCell={
+        <Flex
+          style={{
+            width: getToken("cellHeight", "larger"),
+            height: getToken("cellHeight", variant),
+            border: `${getToken("borderWidth")} solid ${getToken("color", "light")}`,
+            borderRadius: getToken("cellHeight", "smaller"),
+          }}
+        />
+      }
+      language="tsx"
+      code={`getToken("cellHeight", "${variant}")`}
+    />
+  ))}
+</div>
+
+## fontFamily
+
+<div>
+  {[
+    { name: "heading", weight: "bold", text: "Heading" },
+    { name: "base", text: "Body" },
+    { name: "code", code: true, text: "Code" },
+  ].map(({ name, weight, code, text }) => (
+    <DocsRow
+      key={name}
+      previewCell={
+        <Typography
+          weight={weight}
+          code={code}
+        >
+          {text}
+        </Typography>
+      }
+      language="tsx"
+      code={`getToken("fontFamily", "${name}")`}
+    />
+  ))}
+</div>
+
+## fontSize
+
+<div>
+  {["smaller", "small", "base", "large", "larger"].map(variant => (
+    <DocsRow
+      key={variant}
+      previewCell={
+        <Typography size={variant}>
+          {variant.charAt(0).toUpperCase() + variant.slice(1)}
+        </Typography>
+      }
+      language="tsx"
+      code={`getToken("fontSize", "${variant}")`}
+    />
+  ))}
+</div>
+
+## fontWeight
+
+<div>
+  {["light", "base", "medium", "semibold", "bold", "extrabold", "black"].map(
+    variant => (
+      <DocsRow
+        key={variant}
+        previewCell={
+          <Typography weight={variant}>
+            {variant.charAt(0).toUpperCase() + variant.slice(1)}
+          </Typography>
+        }
+        language="tsx"
+        code={`getToken("fontWeight", "${variant}")`}
+      />
+    )
+  )}
+</div>
+
+## color
+
+<div>
+  {[
+    "lightest",
+    "lighter",
+    "light",
+    "base",
+    "disabled",
+    "link",
+    "success",
+    "warning",
+    "error",
+  ].map(variant => (
+    <DocsRow
+      key={variant}
+      previewCell={
+        <Flex
+          style={{
+            width: getToken("cellHeight", "smaller"),
+            height: getToken("cellHeight", "smaller"),
+            backgroundColor: getToken("color", variant),
+            borderRadius: "50%",
+          }}
+        />
+      }
+      language="tsx"
+      code={`getToken("color", "${variant}")`}
+    />
+  ))}
+</div>
+
+## gap
+
+<div>
+  {["smaller", "small", "base", "large", "larger"].map(variant => (
+    <DocsRow
+      key={variant}
+      previewCell={
+        <DemoDots
+          gap={variant}
+          dots={[
+            {
+              color: getToken("color", "error"),
+              width: getToken("cellHeight", "smaller"),
+              height: getToken("cellHeight", "smaller"),
+            },
+            {
+              color: getToken("color", "link"),
+              width: getToken("cellHeight", "smaller"),
+              height: getToken("cellHeight", "smaller"),
+            },
+          ]}
+        />
+      }
+      language="tsx"
+      code={`getToken("gap", "${variant}")`}
+    />
+  ))}
+</div>
+
+## lineHeight
+
+<div>
+  {["condensed", "base", "expanded"].map(variant => (
+    <DocsRow
+      key={variant}
+      previewCell={
+        <Typography lineHeight={variant}>{loremIpsum}</Typography>
+      }
+      language="tsx"
+      code={`getToken("lineHeight", "${variant}")`}
+    />
+  ))}
+</div>
 
 ---
 
-### Contents
+## Icons
 
-- [Styles](/docs/tokens-styles--docs) — Every design token (colors, typography,
-  spacing, elevation, animation) as `--np--*` CSS custom properties
-- [Icons](/docs/getting-started-5-·-icons--docs) — SVG icon library shipped as React
-  components with stroke and fill variants
-- [Responsive](/docs/tokens-responsive--docs) — Breakpoints and media query
-  helpers via `getBreakpoint()`
-- [Breakpoints](/docs/tokens-breakpoints--docs) — Pixel thresholds behind
-  `@media` queries; build-time `breakpoints.json` source and runtime
-  `setBreakpoints` override
+`nice-icons` provides SVG icons as importable modules. Use them as
+`<img>` sources, inline SVG, or pass them to any component system.
+
+```bash
+npm install nice-icons
+```
+
+- [Browse all icons](/docs/getting-started-6-·-icons--docs)

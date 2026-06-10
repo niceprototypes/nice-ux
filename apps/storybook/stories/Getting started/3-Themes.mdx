@@ -1,11 +1,11 @@
 import { Meta } from "@storybook/addon-docs/blocks"
+import DocsNav from "../../src/components/DocsNav"
 import DocsTitle from "../../src/components/DocsTitle"
-import Image from "nice-react-image"
 import Install from "../../src/components/Install"
 import NewLines from "../../src/components/NewLines/index.ts"
 
 <Meta
-  title="Getting started/2 · Themes"
+  title="Getting started/3 · Themes"
   name="Docs"
 />
 
@@ -14,6 +14,8 @@ import NewLines from "../../src/components/NewLines/index.ts"
 ## Pinning a theme with HTML
 
 <Install package="styles" />
+
+<NewLines/>
 
 ### 2. Pin the theme
 
@@ -28,6 +30,8 @@ Or pin to an element by setting the attribute:
 ```html
 <section data-theme="night">…</section>
 ```
+
+<NewLines/>
 
 ### 3. Use semantic tokens
 
@@ -121,3 +125,5 @@ import { Theme } from "nice-react-styles"
   </Tile>
 </Theme>
 ```
+
+<DocsNav />

@@ -1,4 +1,5 @@
 import { Meta } from "@storybook/addon-docs/blocks"
+import DocsNav from "../../src/components/DocsNav"
 import DocsTitle from "../../src/components/DocsTitle"
 import Install from "../../src/components/Install"
 import ResponsiveDemo, {
@@ -7,21 +8,17 @@ import ResponsiveDemo, {
 import NewLines from "../../src/components/NewLines/index.ts"
 
 <Meta
-  title="Getting started/4 · Responsive"
+  title="Getting started/5 · Responsive"
   name="Docs"
 />
 
 <DocsTitle title="Responsive" />
 
-## Simple
+## Direct
 
-<Install package="styles" />
+<Install package="styles" showTitle={false} />
 
-[//]: # "Read the semantic variable directly. The reassignment cascade is already in place — your declaration follows the viewport with no extra work:"
-
-### 2. Import and use
-
-#### CSS only
+### CSS only
 
 ```css
 @import "nice-styles/tokens.css";
@@ -37,9 +34,7 @@ import NewLines from "../../src/components/NewLines/index.ts"
 }
 ```
 
-<NewLines />
-
-#### JS + CSS
+### JS + CSS
 
 [//]: # "For CSS-in-JS or runtime CSS strings, `getBreakpoint` returns the matching `@media (min-width: …)` literal sourced from the same threshold table the build uses, so JS and CSS stay in sync:"
 
@@ -78,6 +73,17 @@ const Wrapper = styled.div`
 
 ---
 
+## Defaults
+
+| Name | Query shape | Pixels |
+|:-----|:------|:-----------:|
+| `phone` | `@media (max-width: 640px)` | `<= 640` |
+| `tablet` | `@media (min-width: 641px)` | `641-1279` |
+| `laptop` | `@media (min-width: 1280px)` | `1280-1719` |
+| `desktop` | `@media (min-width: 1720px)` | `>= 1720` |
+
+---
+
 ## Live demo
 
 <ResponsiveDemo>
@@ -102,3 +108,5 @@ const Wrapper = styled.div`
     text="Desktop"
   />
 </ResponsiveDemo>
+
+<DocsNav />

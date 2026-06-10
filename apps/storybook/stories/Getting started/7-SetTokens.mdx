@@ -1,8 +1,9 @@
 import { Meta } from "@storybook/addon-docs/blocks"
+import DocsNav from "../../src/components/DocsNav"
 import DocsTitle from "../../src/components/DocsTitle"
 
 <Meta
-  title="Getting started/6 · setTokens"
+  title="Getting started/7 · setTokens"
   name="Docs"
 />
 
@@ -44,8 +45,8 @@ setTokens({
   fontSize: {
     // Responsive object (static)
     base: {
-      // Responsive tokens (static)
-      tablet: "16px",
+      // Responsive tokens (static) — phone is the required base
+      phone: "16px",
       laptop: "24px",
       desktop: "32px",
     },
@@ -63,3 +64,5 @@ setTokens({
   },
 } as const)
 ```
+
+<DocsNav />

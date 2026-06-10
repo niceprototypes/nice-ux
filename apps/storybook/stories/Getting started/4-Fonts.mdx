@@ -1,24 +1,38 @@
 import { Meta } from "@storybook/addon-docs/blocks"
+import DocsNav from "../../src/components/DocsNav"
 import DocsTitle from "../../src/components/DocsTitle"
 import Install from "../../src/components/Install"
 import NewLines from "../../src/components/NewLines/index.ts"
 
 <Meta
-  title="Getting started/3 · Fonts"
+  title="Getting started/4 · Fonts"
   name="Docs"
 />
 
-<DocsTitle title="Fonts (React)" />
+<DocsTitle title="Fonts" />
 
 [//]: # "The nice-styles `fontFamily` tokens default to Google Sans Flex (base + heading) and Roboto Mono (code). `StylesProvider` can load web fonts from **Google Fonts** or **Adobe Fonts** (Typekit) — or both at once. To switch a typeface, load the font and remap the matching `fontFamily` variant; the rest keep their defaults."
 
-## Loading external fonts
+## JS only
 
-<Install package="react-styles" />
+<Install package="styles" showTitle={false} />
 
-<NewLines />
+```ts
+import { setFonts } from "nice-styles"
 
-### 2. Wrap subtree with provider
+setFonts({
+  googleFonts: "https://fonts.googleapis.com/…",
+  adobeFonts: "https://use.typekit.net/…",
+})
+```
+
+---
+
+## React
+
+<Install package="react-styles" showTitle={false} />
+
+### Get fonts
 
 #### Google Fonts
 
@@ -31,8 +45,6 @@ import { StylesProvider } from "nice-react-styles"
   <App />
 </StylesProvider>
 ```
-
-<NewLines />
 
 #### Adobe Fonts
 
@@ -50,7 +62,7 @@ import { StylesProvider } from "nice-react-styles"
 
 <NewLines />
 
-### 3. Change fonts
+### Set fonts
 
 Call `setTokens` once on module load:
 
@@ -59,10 +71,9 @@ import { setTokens } from "nice-react-styles"
 
 setTokens({
   fontFamily: {
-    base: "'Inter', sans-serif",
-    heading: "'Lora', serif",
+    base: "'Open Sans', sans-serif",
   },
 })
 ```
 
-Here `base` and `heading` switch to the loaded fonts while `code` keeps its default. Call `setTokens` once at module load (e.g. `src/nice/tokens.ts`) and import that file for its side effect — every component that uses `fontFamily` tokens now renders with the new typeface.
+<DocsNav />

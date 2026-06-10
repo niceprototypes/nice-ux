@@ -46,18 +46,26 @@
     font-size: var(--np--font-size--base);
   }
 
-  > h1,
-  > hr,
-  > table,
-  > img.nice-ui {
-    margin-top: var(--np--gap--larger);
-    margin-bottom: var(--np--gap--larger);
+  > hr {
+    margin-top: calc(var(--np--gap--larger) * 2) !important;
+    margin-bottom: calc(var(--np--gap--larger) * 1.5) !important;
   }
 
-  > h2,
-  > h3 {
+  > h2 {
+    margin-top: calc(var(--np--gap--larger) * 1.5) !important;
+    margin-bottom: calc(var(--np--gap--larger) * 1.5) !important;
+  }
+
+  > h1,
+  > table,
+  > img.nice-ui {
     margin-top: var(--np--gap--larger) !important;
     margin-bottom: var(--np--gap--larger) !important;
+  }
+
+  > h3 {
+    margin-top: var(--np--gap--larger) !important;
+    margin-bottom: var(--np--gap--large) !important;
   }
 
   > blockquote,
