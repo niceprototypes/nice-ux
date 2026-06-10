@@ -1,21 +1,20 @@
 import Icon from "nice-react-icon"
 import Typography from "../../nice/Typography"
-import { CellFlex } from "./IconGrid.styles"
 import type { IconGridProps } from "./IconGrid.types"
 import Flex from "nice-react-flex"
 
 const IconGrid = ({ icons }: IconGridProps) => {
   return (
     <Flex
-      gap="base"
+      direction="column"
+      gap="large"
       wrap="wrap"
       justifyContent="center"
     >
       {icons.map(({ name }) => (
-        <CellFlex
+        <Flex
           key={name}
           gap="base"
-          direction="column"
           alignItems="center"
         >
           <Icon
@@ -25,12 +24,10 @@ const IconGrid = ({ icons }: IconGridProps) => {
           />
           <Typography
             code
-            size="small"
-            weight="medium"
           >
             {name}
           </Typography>
-        </CellFlex>
+        </Flex>
       ))}
     </Flex>
   )
