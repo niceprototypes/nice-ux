@@ -19,14 +19,14 @@ const IconExample: React.FC = () => {
         <h3>Icons with Text</h3>
         <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
           <Button
-            icon="arrow"
+            icon="arrow-right"
             iconPosition="right"
             onClick={handleClick}
           >
             Next
           </Button>
           <Button
-            icon="arrow"
+            icon="arrow-right"
             iconPosition="left"
             iconRotation={180}
             onClick={handleClick}
@@ -81,28 +81,28 @@ const IconExample: React.FC = () => {
         <h3>Icon Rotations</h3>
         <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
           <Button
-            icon="arrow"
+            icon="arrow-right"
             iconRotation={0}
             onClick={handleClick}
           >
             Right
           </Button>
           <Button
-            icon="arrow"
+            icon="arrow-right"
             iconRotation={90}
             onClick={handleClick}
           >
             Down
           </Button>
           <Button
-            icon="arrow"
+            icon="arrow-right"
             iconRotation={180}
             onClick={handleClick}
           >
             Left
           </Button>
           <Button
-            icon="arrow"
+            icon="arrow-right"
             iconRotation={270}
             onClick={handleClick}
           >

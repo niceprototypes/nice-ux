@@ -31,7 +31,7 @@ describe("Button", () => {
   })
 
   it("renders button with both text and icon", () => {
-    render(<Button onClick={mockOnClick} icon="arrow">Next</Button>)
+    render(<Button onClick={mockOnClick} icon="arrow-right">Next</Button>)
     expect(screen.getByRole("button")).toHaveTextContent("Next")
     expect(screen.getByTestId("icon")).toBeInTheDocument()
   })
