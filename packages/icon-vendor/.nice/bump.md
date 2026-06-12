@@ -1,0 +1,1 @@
+[2026-06-12 19:21] patch: Cache resolved Lucide vendor icons by name so each keeps a stable component identity — prevents the <svg> remounting on re-render, which dropped native click events mid-press

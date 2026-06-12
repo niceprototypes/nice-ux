@@ -21,7 +21,17 @@ import type { VendorIconNodeType } from "../components/VendorIcon"
  *
  * @param name - Lucide icon name in PascalCase.
  */
+// Cache bound components by name so each Lucide icon keeps a stable component
+// identity across calls. Without this, every resolve returns a fresh function,
+// so a re-render (e.g. a button's onPointerDown) remounts the <svg> mid-press
+// and the native click event — which needs pointerdown/up on the same node —
+// never fires.
+const boundCache = new Map<string, React.ComponentType>()
+
 export function resolveVendorIcon(name: string): React.ComponentType | null {
+  const cached = boundCache.get(name)
+  if (cached) return cached
+
   const iconNode = (icons as Record<string, VendorIconNodeType | undefined>)[name]
   if (!iconNode) return null
 
@@ -29,5 +39,6 @@ export function resolveVendorIcon(name: string): React.ComponentType | null {
     React.createElement(VendorIcon, { ...props, iconNode })
   Bound.displayName = name
 
+  boundCache.set(name, Bound)
   return Bound
 }
