@@ -1,6 +1,6 @@
 # nice-react-tile
 
-A responsive Tile component for React with styled-components, providing flexible layout with customizable breakpoints, background styling, and advanced layout features.
+A responsive content Tile for React + styled-components. Renders an optional title and description over a token-aware background, centers and width-caps its inner content column, supports split (sidebar) layouts, and exposes every prop per-breakpoint via the `breakpoints` prop.
 
 ## Installation
 
@@ -8,9 +8,7 @@ A responsive Tile component for React with styled-components, providing flexible
 npm install nice-react-tile
 ```
 
-## Peer Dependencies
-
-Make sure you have the following peer dependencies installed:
+### Peer dependencies
 
 ```bash
 npm install react react-dom styled-components nice-react-flex
@@ -18,134 +16,170 @@ npm install react react-dom styled-components nice-react-flex
 
 ## Usage
 
-### Basic Usage
+### Basic
 
 ```tsx
-import React from 'react'
-import Tile from 'nice-react-tile'
+import Tile from "nice-react-tile"
 
 const App = () => (
-  <Tile>
-    <h2>Your Content Here</h2>
-    <p>This tile will automatically center and constrain width at large breakpoints.</p>
+  <Tile
+    title="Welcome"
+    description="A centered tile constrained to a max-width content column."
+  >
+    <p>Your content here</p>
   </Tile>
 )
-
-export default App
 ```
 
-### With Title and Background
-
-```tsx
-<Tile
-  title="Welcome"
-  titleAlign="center"
-  backgroundColor="#f5f5f5"
->
-  <p>Content with a title and background color</p>
-</Tile>
-```
-
-### With Background Image
-
-```tsx
-<Tile
-  backgroundImage="url('/path/to/image.jpg')"
-  backgroundPosition="center"
-  backgroundSize="cover"
-  backgroundAttachment="fixed"
->
-  <div>Content with background image</div>
-</Tile>
-```
-
-### With Split Layout
+`title` and `description` render through `nice-react-typography`. Forward Typography props with `titleProps` / `descriptionProps`:
 
 ```tsx
 <Tile
   title="Dashboard"
-  contentLeft={<div>Left sidebar content</div>}
-  contentRight={<div>Right sidebar content</div>}
->
-  <div>Main content area</div>
-</Tile>
+  titleProps={{ as: "h2", size: "larger", align: "center" }}
+  description={["First paragraph.", "Second paragraph."]}
+  descriptionProps={{ color: "light" }}
+/>
 ```
 
-### With Custom Spacing
+`description` accepts a string array — each entry becomes its own paragraph.
+
+### Background image
 
 ```tsx
-<Tile spacing="large">
-  <div>Content with large spacing between children</div>
-</Tile>
-
-// CSS-like shorthand: top/bottom, left/right
-<Tile spacing="small base">
-  <div>Vertical spacing of "small", horizontal of "base"</div>
-</Tile>
-
-// Responsive: per-breakpoint shorthand string (or null to disable)
 <Tile
-  spacing={{
-    small: "small base",
-    medium: "base large",
-    large: "large larger"
-  }}
+  backgroundImage={'url("/rasters/home-hero.png")'}
+  backgroundPosition="center"
+  minHeight="80vh"
 >
-  <div>Spacing changes per breakpoint</div>
+  <h1>Hero heading</h1>
 </Tile>
 ```
+
+`backgroundImage` is emitted directly as the CSS `background-image` value — pass a full `url(...)` or gradient string. `backgroundSize` defaults to `cover`, `backgroundPosition` to `center`, and `backgroundAttachment` to `fixed` (applied only in landscape orientation, for mobile performance).
+
+### Token-bound color
+
+`backgroundColor`, `backgroundSize`, and `color` accept **nice-styles token variant names only** — not raw CSS. For a raw color or gradient, use `backgroundImage`.
+
+```tsx
+<Tile backgroundColor="dark" color="light" title="Token-driven surface" />
+```
+
+### Split layout
+
+Providing `contentLeft` and/or `contentRight` produces a row layout (image-beside-content), stacking on phone and going to a row at `laptop+`:
+
+```tsx
+<Tile
+  contentLeft={<img src="/product.png" alt="Product" />}
+  title="Product name"
+  description="Specs beside the image at laptop and up."
+/>
+```
+
+### Theme pinning
+
+`theme` pins the subtree to a nice-styles theme by wrapping output in `<Theme>`. Descendants inherit it via the `[data-theme]` cascade.
+
+```tsx
+<Tile theme="night" backgroundImage={'url("/hero.png")'} title="Dark hero" />
+```
+
+### Responsive — `breakpoints`
+
+The component is wrapped with `withBreakpoints`, so **any** prop can be overridden per breakpoint. Keys are `"{breakpoint}+"` (the breakpoint and up):
+
+```tsx
+<Tile
+  maxWidth="none"
+  minHeight="80vh"
+  breakpoints={{
+    "tablet+": { minHeight: "800px" },
+    "laptop+": { maxWidth: "980px" },
+  }}
+/>
+```
+
+### Spacing
+
+`spacing` re-exports `FlexSpacingType` from `nice-react-flex` — a CSS-shorthand string of `gap` token names (1–4 values: top/right/bottom/left), or a per-breakpoint object.
+
+```tsx
+<Tile spacing="larger base" />          // vertical "larger", horizontal "base"
+<Tile spacing={{ phone: "base", laptop: "larger" }} />
+```
+
+Gap token names: `none`, `smaller`, `small`, `base`, `large`, `larger`.
 
 ## Props
 
+### Content
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `children` | `React.ReactNode` | Main content, below the title/description block |
+| `title` | `React.ReactNode` | Title, rendered via Typography |
+| `titleProps` | `TileTypographyProps` | Typography props for the title (`Partial<Omit<TypographyProps, "children">>`) |
+| `description` | `React.ReactNode \| string[]` | Description; a string array renders one paragraph per entry |
+| `descriptionProps` | `TileTypographyProps` | Typography props for the description |
+| `contentTop` | `React.ReactNode` | Slot above the title |
+| `contentCenter` | `React.ReactNode` | Slot between title and description |
+| `contentLeft` | `React.ReactNode` | Left slot — triggers split (row) layout |
+| `contentRight` | `React.ReactNode` | Right slot — triggers split (row) layout |
+
+### Layout
+
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `children` | `React.ReactNode` | - | Content to be rendered inside the tile |
-| `maxWidthTablet` | `number` | `980` | Max-width constraint at tablet viewport |
-| `maxWidthDesktop` | `number` | `1280` | Max-width constraint at desktop viewport |
-| `className` | `string` | - | Custom CSS class name |
-| `style` | `React.CSSProperties` | - | Custom inline styles |
-| `backgroundImage` | `string` | - | Background image (use CSS `url()` syntax) |
-| `backgroundColor` | `string` | - | Background color |
-| `backgroundPosition` | `string` | `"center"` | Background image position |
-| `backgroundSize` | `string` | `"cover"` | Background image size |
-| `backgroundAttachment` | `string` | `"fixed"` | Background attachment (applied only on landscape orientation) |
-| `title` | `string \| React.ReactNode` | - | Title to display at the top of the tile |
-| `titleAlign` | `"left" \| "center" \| "right"` | `"left"` | Alignment of the title |
-| `titleColor` | `string` | - | Color of the title text |
-| `contentLeft` | `React.ReactNode` | - | Content for left sidebar (creates split layout) |
-| `contentRight` | `React.ReactNode` | - | Content for right sidebar (creates split layout) |
-| `spacing` | `GapSize \| SpacingDefinition \| object` | - | Spacing between child elements (from nice-react-flex) |
+| `maxWidth` | `TileMaxWidthType` (`string`) | — | Max-width of the **inner content column**, as a CSS length (`"980px"`) or `"none"` to fill the container |
+| `minWidth` | `TileMinWidthType` (`string`) | — | Min-width of the **outer tile box** (`"320px"`) |
+| `minHeight` | `TileMinHeightType` (`string`) | — | Min-height of the **outer tile box** (`"80vh"`) — the surface that carries `backgroundImage` |
+| `maxHeight` | `TileMaxHeightType` (`string`) | — | Max-height of the **outer tile box** (`"100vh"`) |
+| `spacing` | `FlexSpacingType` | — | Padding shorthand (gap token names) or per-breakpoint object |
+| `gap` | `GapType` | — | Top spacing on the Flex wrapping `children` below the title/description block |
+| `alignItems` | `TileAlignItemsType` | — | Flex `align-items` (single value or breakpoint object) |
+| `justifyContent` | `TileJustifyContentType` | — | Flex `justify-content` (single value or breakpoint object) |
 
-### Spacing Types
+> `maxWidth` constrains the centered inner content column. `minWidth` / `minHeight` / `maxHeight` constrain the outer tile box. This split is deliberate — heights and the box min-width describe the tile surface; `maxWidth` describes the readable content column inside it.
 
-The `spacing` prop re-exports `FlexSpacingType` from `nice-react-flex` and accepts:
-- **Shorthand string**: 1–4 space-separated `gap` token names following CSS padding/margin shorthand rules — `"small"`, `"small base"`, `"small base large smaller"`. Token names: `none`, `smaller`, `small`, `base`, `large`, `larger`.
-- **Responsive object**: per-breakpoint shorthand string, or `null` to disable at that breakpoint. Breakpoint keys: `small`, `medium`, `large` — e.g. `{ phone: "base", tablet: null, laptop: "small large" }`.
+### Background & color
 
-## Custom Max-Width
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `backgroundImage` | `string` | — | Emitted directly as `background-image` — pass `url(...)` or a gradient |
+| `backgroundColor` | `TileBackgroundColorType` | — | **Token-bound** — nice-styles `BackgroundColorType` variant only |
+| `backgroundPosition` | `string` | `"center"` | CSS `background-position` |
+| `backgroundSize` | `TileBackgroundSizeType` | `"cover"` | **Token-bound** — nice-styles `BackgroundSizeType` variant only |
+| `backgroundAttachment` | `string` | `"fixed"` | CSS `background-attachment`, applied only in landscape orientation |
+| `color` | `TileColorType` | — | **Token-bound** — nice-styles `ColorType` variant only |
+| `theme` | `ThemeType` | — | Pins the subtree to a theme (`"day"` / `"night"` / custom) via `<Theme>` |
 
-You can customize the max-width constraints to match your design system:
+### HTML
 
-```tsx
-<Tile maxWidthTablet={768} maxWidthDesktop={1024}>
-  <div>Content with custom max-width constraints</div>
-</Tile>
+| Prop | Type | Description |
+|------|------|-------------|
+| `className` | `string` | Class on the outer tile box |
+| `style` | `React.CSSProperties` | Inline styles on the outer tile box |
+| `breakpoints` | `Partial<TileProps>` per `"{breakpoint}+"` key | Per-breakpoint overrides for any prop (via `withBreakpoints`) |
+
+## Exports
+
+```ts
+import Tile, { getTileToken, TileTypes } from "nice-react-tile"
+import type { TileProps, TileMaxWidthType, TileMinHeightType } from "nice-react-tile"
 ```
 
-## Layout Features
+- **`default`** — the `Tile` component.
+- **`getTileToken`** — accessor for `tile`-prefixed component tokens (thin wrapper over `getComponentToken`).
+- **`TileTypes`** — namespace re-export of every prop type (`TileTypes.Props`, `TileTypes.MaxWidth`, `TileTypes.MinHeight`, …); individual types are also exported by name.
 
-### Split Layout
-When `contentLeft` or `contentRight` props are provided, the tile automatically creates a three-column layout with sidebars and main content area.
+## Default behavior
 
-### Title Display
-The `title` prop can accept either a string or a custom React component, giving you full control over the title appearance.
-
-## Default Behavior
-
-- Content is full-width on mobile and tablet
-- At the laptop breakpoint (1280px by default), content is constrained to the breakpoint width and centered
-- Uses flexbox layout with `direction="column"` and `grow={1}`
-- Background images use `fixed` attachment only on landscape orientation for better mobile performance
+- Inner content column is full-width up to `maxWidth`, then centered (`margin: 0 auto`).
+- Split layout (`contentLeft` / `contentRight`) stacks on phone and becomes a row at `laptop+`.
+- Background images use `fixed` attachment only in landscape orientation.
+- Outer box defaults to `backgroundColor`/`color` base tokens unless overridden.
 
 ## License
 

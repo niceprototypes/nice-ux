@@ -16,12 +16,19 @@ export const OuterFlex = styled(Flex).withConfig({
   $backgroundPosition?: string
   $backgroundSize?: BackgroundSizeType
   $backgroundAttachment?: string
+  $minWidth?: string
+  $minHeight?: string
+  $maxHeight?: string
 }>`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   background-color: ${getToken("backgroundColor", "base")};
   color: ${getToken("color", "base")};
+
+  ${({ $minWidth }) => $minWidth && css`min-width: ${$minWidth};`}
+  ${({ $minHeight }) => $minHeight && css`min-height: ${$minHeight};`}
+  ${({ $maxHeight }) => $maxHeight && css`max-height: ${$maxHeight};`}
 
   ${({ $backgroundColor }) => {
     if ($backgroundColor) {

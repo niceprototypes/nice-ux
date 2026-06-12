@@ -37,22 +37,48 @@ export type TileColorType = ColorType
 /**
  * TileMaxWidthValueType
  *
- * Per-breakpoint max-width value. A number caps the inner column at that
- * pixel value; "none" disables the cap and lets the column fill its
- * container.
+ * Max-width value for the inner content column. A CSS length string (e.g.
+ * `"980px"`, `"60rem"`) caps the column at that width; `"none"` disables the
+ * cap and lets the column fill its container.
  */
-export type TileMaxWidthValueType = number | "none"
+export type TileMaxWidthValueType = string
 
 /**
  * TileMaxWidthType
  *
- * Max-width control for the inner content column. Pass a number to cap at
- * that pixel value, or `"none"` to let the column fill its container.
+ * Max-width control for the inner content column. Pass a CSS length string
+ * (e.g. `"980px"`) to cap the column, or `"none"` to let it fill its
+ * container.
  *
  * Use the wrapper's `breakpoints` prop to vary per breakpoint:
- * `breakpoints={{ "laptop+": { maxWidth: 980 } }}`.
+ * `breakpoints={{ "laptop+": { maxWidth: "980px" } }}`.
  */
 export type TileMaxWidthType = TileMaxWidthValueType
+
+/**
+ * TileMinWidthType
+ *
+ * Minimum width of the tile box, as a CSS length string (e.g. `"320px"`).
+ * Applies to the outer tile box — note `maxWidth` instead constrains the
+ * inner centered content column.
+ */
+export type TileMinWidthType = string
+
+/**
+ * TileMinHeightType
+ *
+ * Minimum height of the tile box, as a CSS length string (e.g. `"80vh"`).
+ * Applies to the outer tile box (the surface that carries `backgroundImage`).
+ */
+export type TileMinHeightType = string
+
+/**
+ * TileMaxHeightType
+ *
+ * Maximum height of the tile box, as a CSS length string (e.g. `"100vh"`).
+ * Applies to the outer tile box.
+ */
+export type TileMaxHeightType = string
 
 export type { TileTypographyProps }
 
@@ -99,6 +125,12 @@ export interface TileProps {
    * - `"none"` removes any cap, letting the column fill its container.
    */
   maxWidth?: TileMaxWidthType
+  /** Minimum width of the outer tile box, as a CSS length string (e.g. `"320px"`). */
+  minWidth?: TileMinWidthType
+  /** Minimum height of the outer tile box, as a CSS length string (e.g. `"80vh"`). */
+  minHeight?: TileMinHeightType
+  /** Maximum height of the outer tile box, as a CSS length string (e.g. `"100vh"`). */
+  maxHeight?: TileMaxHeightType
   alignItems?: TileAlignItemsType
   justifyContent?: TileJustifyContentType
   /** Top spacing applied to the Flex that wraps `children` below the title/description block. */
@@ -132,6 +164,9 @@ namespace TileTypes {
   export type Gap = GapType
   export type MaxWidth = TileMaxWidthType
   export type MaxWidthValue = TileMaxWidthValueType
+  export type MinWidth = TileMinWidthType
+  export type MinHeight = TileMinHeightType
+  export type MaxHeight = TileMaxHeightType
   export type BackgroundColor = TileBackgroundColorType
   export type BackgroundSize = TileBackgroundSizeType
   export type Color = TileColorType

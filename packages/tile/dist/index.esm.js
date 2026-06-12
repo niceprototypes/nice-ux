@@ -1,4 +1,4 @@
-import { getToken, getBreakpoint, Theme, withBreakpoints, getComponentToken } from 'nice-react-styles';
+import { getToken, Theme, withBreakpoints, getComponentToken } from 'nice-react-styles';
 import { jsxs, jsx, Fragment } from 'react/jsx-runtime';
 import 'react';
 import styled, { css } from 'styled-components';
@@ -13,6 +13,10 @@ const OuterFlex$1 = styled(Flex).withConfig({
   flex-grow: 1;
   background-color: ${getToken("backgroundColor", "base")};
   color: ${getToken("color", "base")};
+
+  ${({ $minWidth }) => $minWidth && css `min-width: ${$minWidth};`}
+  ${({ $minHeight }) => $minHeight && css `min-height: ${$minHeight};`}
+  ${({ $maxHeight }) => $maxHeight && css `max-height: ${$maxHeight};`}
 
   ${({ $backgroundColor }) => {
     if ($backgroundColor) {
@@ -62,41 +66,16 @@ const TileContent = ({ children, contentTop, contentCenter, title, titleProps, d
     return (jsxs(Flex, { direction: "column", grow: 1, gap: gap, alignItems: alignItems, justifyContent: justifyContent, children: [contentTop, hasContentMain && (jsx(ContentMain, { title: title, titleProps: titleProps, contentCenter: contentCenter, description: description, descriptionProps: descriptionProps, theme: theme, gap: gap })), children] }));
 };
 
-const renderMaxWidthValue = (value) => value === "none" ? css `max-width: none;` : css `max-width: ${value}px;`;
-const renderResponsiveMaxWidth = ($maxWidth) => {
-    if ($maxWidth === undefined)
-        return null;
-    // Bare value applies at every breakpoint
-    if (typeof $maxWidth === "number" || $maxWidth === "none") {
-        return renderMaxWidthValue($maxWidth);
-    }
-    // Per-breakpoint object: small is base, medium/large emit media queries
-    const { small, medium, large } = $maxWidth;
-    return css `
-    ${small !== undefined ? renderMaxWidthValue(small) : null}
-    ${medium !== undefined
-        ? css `
-          ${getBreakpoint("tablet")} {
-            ${renderMaxWidthValue(medium)}
-          }
-        `
-        : null}
-    ${large !== undefined
-        ? css `
-          ${getBreakpoint("laptop")} {
-            ${renderMaxWidthValue(large)}
-          }
-        `
-        : null}
-  `;
-};
 const OuterFlex = styled(Flex).withConfig({
     shouldForwardProp: (prop) => !prop.startsWith('$'),
 }) `
   margin: 0 auto;
   width: 100%;
 
-  ${({ $maxWidth }) => renderResponsiveMaxWidth($maxWidth)}
+  ${({ $maxWidth }) => 
+// $maxWidth is a full CSS length ("980px") or "none" — both valid as-is.
+// Per-breakpoint variation is handled by the withBreakpoints wrapper.
+$maxWidth && css `max-width: ${$maxWidth};`}
 `;
 
 const TileLayout = ({ children, contentTop, contentRight: TileRight, contentCenter, contentLeft: TileLeft, title, titleProps, description, descriptionProps, theme, gap, spacing, maxWidth, alignItems, justifyContent, }) => {
@@ -107,8 +86,8 @@ const TileLayout = ({ children, contentTop, contentRight: TileRight, contentCent
         }, children: !!TileLeft || !!TileRight ? (jsxs(Fragment, { children: [TileLeft, jsx(TileContent, { gap: gap, contentTop: contentTop, contentCenter: contentCenter, title: title, titleProps: titleProps, description: description, descriptionProps: descriptionProps, theme: theme, alignItems: alignItems, justifyContent: justifyContent, children: children }), TileRight] })) : (jsx(TileContent, { contentTop: contentTop, contentCenter: contentCenter, title: title, titleProps: titleProps, description: description, descriptionProps: descriptionProps, theme: theme, gap: gap, alignItems: alignItems, justifyContent: justifyContent, children: children })) }));
 };
 
-const Tile$1 = ({ alignItems, backgroundAttachment = "fixed", backgroundColor, backgroundImage, backgroundPosition = "center", backgroundSize = "cover", children, className, contentCenter, contentLeft: TileLeft, contentRight: TileRight, contentTop, description, descriptionProps, color, gap, justifyContent, maxWidth, theme, spacing, style, title, titleProps, }) => {
-    const tile = (jsx(OuterFlex$1, { "$backgroundAttachment": backgroundAttachment, "$backgroundColor": backgroundColor, "$backgroundImage": backgroundImage, "$backgroundPosition": backgroundPosition, "$backgroundSize": backgroundSize, "$color": color, className: className, style: style, children: jsx(TileLayout, { alignItems: alignItems, contentCenter: contentCenter, contentLeft: TileLeft, contentRight: TileRight, contentTop: contentTop, description: description, descriptionProps: descriptionProps, gap: gap, justifyContent: justifyContent, maxWidth: maxWidth, spacing: spacing, title: title, titleProps: titleProps, children: children }) }));
+const Tile$1 = ({ alignItems, backgroundAttachment = "fixed", backgroundColor, backgroundImage, backgroundPosition = "center", backgroundSize = "cover", children, className, contentCenter, contentLeft: TileLeft, contentRight: TileRight, contentTop, description, descriptionProps, color, gap, justifyContent, maxWidth, minWidth, minHeight, maxHeight, theme, spacing, style, title, titleProps, }) => {
+    const tile = (jsx(OuterFlex$1, { "$backgroundAttachment": backgroundAttachment, "$backgroundColor": backgroundColor, "$backgroundImage": backgroundImage, "$backgroundPosition": backgroundPosition, "$backgroundSize": backgroundSize, "$color": color, "$minWidth": minWidth, "$minHeight": minHeight, "$maxHeight": maxHeight, className: className, style: style, children: jsx(TileLayout, { alignItems: alignItems, contentCenter: contentCenter, contentLeft: TileLeft, contentRight: TileRight, contentTop: contentTop, description: description, descriptionProps: descriptionProps, gap: gap, justifyContent: justifyContent, maxWidth: maxWidth, spacing: spacing, title: title, titleProps: titleProps, children: children }) }));
     return theme ? jsx(Theme, { name: theme, children: tile }) : tile;
 };
 
