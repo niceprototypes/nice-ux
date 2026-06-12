@@ -13,6 +13,11 @@
     color: inherit;
   }
 
+  &.sbdocs-content :where(a:not(.sb-anchor, .sb-unstyled, .sb-unstyled a)) {
+    color: var(--np--color--link);
+    text-decoration: inherit;
+  }
+
   /* Prose (non-code) follows the nice base font token — overridden to Avenir Next in src/nice/tokens.ts */
   &.sbdocs-content :where(h1, h2, h3, h4, h5, h6, p, li, td, th, blockquote) {
     font-family: var(--np--font-family--base);

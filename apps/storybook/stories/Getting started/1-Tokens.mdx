@@ -4,6 +4,7 @@ import Install from "../../src/components/Install"
 import NewLines from "../../src/components/NewLines"
 import Button from "nice-react-button"
 import { linkTo } from "@storybook/addon-links"
+import Plain from "../../src/components/Plain"
 
 <Meta
   title="Getting started/1 · Tokens"
@@ -16,15 +17,15 @@ import { linkTo } from "@storybook/addon-links"
 
 If all you need is some style, and have **no time budget** to integrate with a new library, you can still **upgrade your UI today** by using our design tokens to fill the gaps in your project.
 
-<Button link onClick={linkTo("Tokens", "Docs")} icon="arrow-right">
-  Browse all tokens
+<Button weight="semibold" link onClick={linkTo("Tokens", "Docs")} icon="arrow-right">
+  <Plain>Browse all tokens</Plain>
 </Button>
 
-<NewLines />
+<NewLines count={3} />
 
 ### Direct
 
-Import the stylesheet and reference the token s:
+Import the stylesheet and reference the tokens:
 
 <Install
   package="styles"
