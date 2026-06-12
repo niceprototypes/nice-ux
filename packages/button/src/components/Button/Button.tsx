@@ -19,6 +19,7 @@ const Button: React.FC<ButtonProps> = ({
   "data-testid": testId,
   href,
   icon,
+  iconVendor = false,
   link = false,
   theme,
   onClick,
@@ -30,6 +31,7 @@ const Button: React.FC<ButtonProps> = ({
   style,
   target,
   type = "button",
+  weight,
 }) => {
   const [isHovered, setIsHovered] = React.useState(false)
   const [isFocused, setIsFocused] = React.useState(false)
@@ -94,7 +96,7 @@ const Button: React.FC<ButtonProps> = ({
           as="span"
           antialiased={antialiased}
           theme={invertedTheme}
-          weight={link ? undefined : "medium"}
+          weight={weight ?? (link ? undefined : "medium")}
           size={size}
         >
           {children}
@@ -103,8 +105,9 @@ const Button: React.FC<ButtonProps> = ({
       {!!icon && (
         <Icon
           name={icon}
+          vendor={iconVendor}
           size={size}
-          color="lightest"
+          color={link ? "link" : "lightest"}
           strokeWidth="large"
           theme={invertedTheme}
         />

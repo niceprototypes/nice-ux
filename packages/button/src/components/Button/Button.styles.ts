@@ -25,11 +25,15 @@ export const StyledButton = styled.button.withConfig({
   /* Reset */
   position: relative;
   margin: 0;
-  outline: none;
-  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
+  outline: none;
+  text-align: center;
+  text-decoration: none;
   cursor: ${({ $disabled }) => ($disabled ? "not-allowed" : "pointer")};
   -webkit-tap-highlight-color: transparent;
 
@@ -47,11 +51,7 @@ export const StyledButton = styled.button.withConfig({
   }) =>
     !$link &&
     `
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: ${!$square ? `0 ${getButtonToken("spacing", $size)}` : "0"};
+    gap: ${$square ? "0" : `0 ${getButtonToken("spacing", $size)}`};
     height: ${getButtonToken("size", $size)};
     width: 100%;
     padding: ${$square ? "0" : `0 ${getButtonToken("spacing", $size)}`};
@@ -73,5 +73,12 @@ export const StyledButton = styled.button.withConfig({
     ${getBreakpoint(BREAKPOINT_TABLET)} {
       width: ${$square ? getButtonToken("size", $size) : "auto"};
     }
+  `}
+
+  ${({ $link }) =>
+    $link &&
+    `
+    color: ${getToken("color", "link")};
+    gap: ${getToken("gap", "small")};
   `}
 `

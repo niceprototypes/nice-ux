@@ -1,5 +1,5 @@
 import * as React from "react"
-import { CellHeightType, BorderWidthType, BorderColorType, ThemeType } from "nice-react-styles"
+import { CellHeightType, BorderWidthType, BorderColorType, FontWeightType, ThemeType } from "nice-react-styles"
 import { IconNameType } from "nice-react-icon"
 
 /**
@@ -27,6 +27,14 @@ export type ButtonStateType = "base" | "disabled" | "error" | "success" | "warni
 export type ButtonStatusType = "primary" | "secondary"
 
 /**
+ * ButtonWeightType
+ *
+ * Re-export of FontWeightType from nice-styles.
+ * Font weight of the button label, forwarded to the underlying Typography.
+ */
+export type ButtonWeightType = FontWeightType
+
+/**
  * HTML button type attribute
  */
 export type ButtonElementType = "button" | "submit" | "reset"
@@ -40,6 +48,11 @@ export type ButtonDisabledType = boolean
  * Antialiased font rendering type
  */
 export type ButtonAntialiasedType = boolean
+
+/**
+ * Whether the button's icon resolves through the vendor icon set
+ */
+export type ButtonIconVendorType = boolean
 
 /**
  * Whether the button renders as an anchor element
@@ -99,6 +112,10 @@ export interface ButtonProps {
   size?: CellHeightType
   state?: ButtonStateType
   icon?: IconNameType
+  /** Resolve the icon through the vendor icon set (passed to Icon's `vendor` prop) */
+  iconVendor?: ButtonIconVendorType
+  /** Font weight of the label, forwarded to the underlying Typography */
+  weight?: ButtonWeightType
   disabled?: ButtonDisabledType
   children?: React.ReactNode
   className?: ButtonClassNameType
@@ -149,9 +166,11 @@ namespace ButtonTypes {
   export type BorderColor = ButtonBorderColorType
   export type State = ButtonStateType
   export type Status = ButtonStatusType
+  export type Weight = ButtonWeightType
   export type Element = ButtonElementType
   export type Disabled = ButtonDisabledType
   export type Antialiased = ButtonAntialiasedType
+  export type IconVendor = ButtonIconVendorType
   export type OnClick = ButtonOnClickType
   export type OnMouseEnter = ButtonOnMouseEnterType
   export type OnMouseLeave = ButtonOnMouseLeaveType
