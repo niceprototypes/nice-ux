@@ -1,12 +1,12 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../src/components/DocsTitle"
+import { StoryHeader } from "../../src/components/Story"
 
 <Meta
   title="React"
   name="Docs"
 />
 
-<DocsTitle title="React" />
+<StoryHeader title="React" />
 
 React bindings for the Nice design system. These packages wrap `nice-styles`
 with providers, hooks, and pre-built components.
@@ -18,8 +18,6 @@ with providers, hooks, and pre-built components.
 The `nice-react-styles` package adds a provider, font loading, and a typed
 token API on top of the base CSS tokens.
 
-- [StylesProvider](/docs/react-styles-stylesprovider--docs) — Context provider
-  that injects CSS variables onto `:root` and supplies a styled-components theme
 - [FontLoader](/docs/react-styles-fontloader--docs) — Async web font loading
   (used internally by `StylesProvider`)
 - [getToken](/docs/react-styles-gettoken--docs) — Typed accessor for token keys,
@@ -36,11 +34,12 @@ token API on top of the base CSS tokens.
 
 Pre-built components that consume the token system:
 
-- [Button](/docs/react-components-button--docs)
-- [Flex](/docs/react-components-flex--docs)
-- [Icon](/docs/react-components-icon--docs)
-- [Lightbox](/docs/react-components-lightbox--docs)
-- [Scroll](/docs/react-components-scroll--docs)
-- [Slider](/docs/react-components-slider--docs)
-- [Tile](/docs/react-components-tile--docs)
-- [Typography](/docs/react-components-typography--docs)
+- [Button](/docs/components-button--docs)
+- [Flex](/docs/components-flex--docs)
+- [Icon](/docs/components-icon--docs)
+- [Lightbox](/docs/components-lightbox--docs)
+- [Scroll](/docs/components-scroll--docs)
+- [Slider](/docs/components-slider--docs)
+- [Tile](/docs/components-tile--docs)
+- [Typography](/docs/components-typography--docs)
+

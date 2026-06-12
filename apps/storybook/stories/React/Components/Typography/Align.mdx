@@ -1,16 +1,16 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Flex from "nice-react-flex"
 import Typography from "../../../../src/nice/Typography"
 import StoryDescription from "../../../../src/components/StoryDescription"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 import { toSource } from "../../../../src/services"
 
 export const loremIpsum = "Lorem ipsum dolor sit amet"
 
-<Meta title="React/Components/Typography/align" />
+<Meta title="Components/Typography/align" />
 
-<DocsTitle title="Typography — Align" />
+<StoryHeader title="align" />
 
 <StoryDescription property="text-align">
   Aligns text horizontally within its container.
@@ -18,7 +18,7 @@ export const loremIpsum = "Lorem ipsum dolor sit amet"
 
 <div>
   {["left", "center", "right", "justify"].map(align => (
-    <DocsRow
+    <CodeRow
       key={align}
       previewCell={
         <Flex
@@ -33,3 +33,4 @@ export const loremIpsum = "Lorem ipsum dolor sit amet"
     />
   ))}
 </div>
+

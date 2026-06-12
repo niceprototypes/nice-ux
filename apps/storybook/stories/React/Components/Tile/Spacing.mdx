@@ -1,14 +1,14 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Tile from "nice-react-tile"
 import StoryDescription from "../../../../src/components/StoryDescription"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 
 export const spacings = ["smaller", "small", "base", "large", "larger"]
 
-<Meta title="React/Components/Tile/spacing" />
+<Meta title="Components/Tile/spacing" />
 
-<DocsTitle title="Tile — Spacing" />
+<StoryHeader title="spacing" />
 
 <StoryDescription property="padding">
   Sets the tile's inner padding using gap tokens.
@@ -16,7 +16,7 @@ export const spacings = ["smaller", "small", "base", "large", "larger"]
 
 <div>
   {spacings.map(value => (
-    <DocsRow
+    <CodeRow
       fullWidth
       key={value}
       previewCell={
@@ -27,3 +27,4 @@ export const spacings = ["smaller", "small", "base", "large", "larger"]
     />
   ))}
 </div>
+

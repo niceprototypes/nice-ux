@@ -1,19 +1,19 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../src/components/DocsTitle"
+import { StoryHeader } from "../../src/components/Story"
 import Flex from "nice-react-flex"
 import { getToken } from "nice-react-styles"
 import Typography from "../../src/nice/Typography"
-import { DocsRow } from "../../src/components/DocsRow"
+import { CodeRow } from "../../src/components/CodeRow"
 
 <Meta title="Tokens/animationEasing" />
 
-<DocsTitle title="animationEasing" />
+<StoryHeader title="animationEasing" />
 
 <Typography>Easing curves for CSS transitions and animations.</Typography>
 
 <div>
   {["base"].map(variant => (
-    <DocsRow
+    <CodeRow
       key={variant}
       previewCell={
         <Flex
@@ -39,7 +39,8 @@ import { DocsRow } from "../../src/components/DocsRow"
         </Flex>
       }
       language="tsx"
-      code={`getToken("animationEasing", "${variant}")`}
+      code={[`var(--np--animation-easing${variant === "base" ? "" : `--${variant}`})`, `getToken("animationEasing", "${variant}")`]}
     />
   ))}
 </div>
+

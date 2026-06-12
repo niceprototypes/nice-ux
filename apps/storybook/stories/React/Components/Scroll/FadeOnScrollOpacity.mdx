@@ -1,11 +1,11 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Typography from "../../../../src/nice/Typography"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 
-<Meta title="React/Components/Scroll/FadeOnScroll opacity" />
+<Meta title="Components/Scroll/FadeOnScroll opacity" />
 
-<DocsTitle title="Scroll — FadeOnScroll opacity" />
+<StoryHeader title="FadeOnScroll opacity" />
 
 <Typography color="light">
   Three opacity props define the value at the start, peak, and end of the
@@ -14,7 +14,7 @@ import { DocsRow } from "../../../../src/components/DocsRow"
 
 ### startOpacity
 
-<DocsRow
+<CodeRow
   fullWidth
   previewCell={
     <Typography size="small" color="light">
@@ -27,7 +27,7 @@ import { DocsRow } from "../../../../src/components/DocsRow"
 
 ### peakOpacity
 
-<DocsRow
+<CodeRow
   fullWidth
   previewCell={
     <Typography size="small" color="light">
@@ -40,7 +40,7 @@ import { DocsRow } from "../../../../src/components/DocsRow"
 
 ### endOpacity
 
-<DocsRow
+<CodeRow
   fullWidth
   previewCell={
     <Typography size="small" color="light">
@@ -50,3 +50,4 @@ import { DocsRow } from "../../../../src/components/DocsRow"
   language="tsx"
   code={`<FadeOnScroll endOpacity={0}>`}
 />
+

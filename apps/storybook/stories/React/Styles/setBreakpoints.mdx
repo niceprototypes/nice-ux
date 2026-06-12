@@ -1,12 +1,12 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../src/components/Story"
 
 <Meta
   title="React/Styles/setBreakpoints"
   name="Docs"
 />
 
-<DocsTitle title="setBreakpoints" />
+<StoryHeader title="setBreakpoints" />
 
 Imperative override of the pixel thresholds behind `@media` queries. `BREAKPOINTS`
 is mutated in memory and a `<style data-nice-breakpoints>` element is injected
@@ -39,3 +39,4 @@ a settings toggle, an A/B test, a unit test. For static per-app config that
 belongs with the rest of your design tokens, use
 [`setTokens({ breakpoints })`](/docs/react-styles-settokens--docs)
 instead.
+

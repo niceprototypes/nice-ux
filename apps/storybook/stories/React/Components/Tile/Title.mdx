@@ -1,19 +1,19 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Tile from "nice-react-tile"
 import Typography from "../../../../src/nice/Typography"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 
-<Meta title="React/Components/Tile/title" />
+<Meta title="Components/Tile/title" />
 
-<DocsTitle title="Tile — Title" />
+<StoryHeader title="title" />
 
 <Typography color="light">
   Renders a primary heading at the top of the tile. Additional Typography props
   can be forwarded via <code>titleProps</code>.
 </Typography>
 
-<DocsRow
+<CodeRow
   fullWidth
   previewCell={
     <Tile title="Title" description="Description" />
@@ -28,7 +28,7 @@ Forwarded to the title's `Typography`. Any prop from `TypographyProps` (except `
 
 ### titleProps.as
 
-<DocsRow
+<CodeRow
   fullWidth
   previewCell={
     <Tile
@@ -43,7 +43,7 @@ Forwarded to the title's `Typography`. Any prop from `TypographyProps` (except `
 
 ### titleProps.color
 
-<DocsRow
+<CodeRow
   fullWidth
   previewCell={
     <Tile
@@ -58,7 +58,7 @@ Forwarded to the title's `Typography`. Any prop from `TypographyProps` (except `
 
 ### titleProps.size
 
-<DocsRow
+<CodeRow
   fullWidth
   previewCell={
     <Tile
@@ -73,7 +73,7 @@ Forwarded to the title's `Typography`. Any prop from `TypographyProps` (except `
 
 ### titleProps.weight
 
-<DocsRow
+<CodeRow
   fullWidth
   previewCell={
     <Tile
@@ -88,7 +88,7 @@ Forwarded to the title's `Typography`. Any prop from `TypographyProps` (except `
 
 ### titleProps.align
 
-<DocsRow
+<CodeRow
   fullWidth
   previewCell={
     <Tile
@@ -103,7 +103,7 @@ Forwarded to the title's `Typography`. Any prop from `TypographyProps` (except `
 
 ### titleProps.code
 
-<DocsRow
+<CodeRow
   fullWidth
   previewCell={
     <Tile
@@ -118,7 +118,7 @@ Forwarded to the title's `Typography`. Any prop from `TypographyProps` (except `
 
 ### titleProps.lineHeight
 
-<DocsRow
+<CodeRow
   fullWidth
   previewCell={
     <Tile
@@ -130,3 +130,4 @@ Forwarded to the title's `Typography`. Any prop from `TypographyProps` (except `
   language="tsx"
   code={`<Tile\n  title="Title"\n  description="Description"\n  titleProps={{ lineHeight: "expanded" }}\n/>`}
 />
+

@@ -1,20 +1,20 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Typography from "../../../../src/nice/Typography"
 import StoryDescription from "../../../../src/components/StoryDescription"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 import { toSource } from "../../../../src/services"
 
-<Meta title="React/Components/Typography/legibilityOptimized" />
+<Meta title="Components/Typography/legibilityOptimized" />
 
-<DocsTitle title="Typography — LegibilityOptimized" />
+<StoryHeader title="legibilityOptimized" />
 
 <StoryDescription property="text-rendering">
   Applies <code>text-rendering: optimizeLegibility</code> for improved kerning
   and ligatures.
 </StoryDescription>
 
-<DocsRow
+<CodeRow
   previewCell={
     <Typography>Legibility standard</Typography>
   }
@@ -22,7 +22,7 @@ import { toSource } from "../../../../src/services"
   code={toSource("Typography", {}, { children: "Legibility standard" })}
 />
 
-<DocsRow
+<CodeRow
   previewCell={
     <Typography legibilityOptimized>Legibility optimized</Typography>
   }
@@ -33,3 +33,4 @@ import { toSource } from "../../../../src/services"
       { children: "Legibility optimized" }
     )}
 />
+

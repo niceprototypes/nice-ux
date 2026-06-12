@@ -1,12 +1,12 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../src/components/DocsTitle"
+import { StoryHeader } from "../../src/components/Story"
 
 <Meta
   title="Configuration/Caches"
   name="Docs"
 />
 
-<DocsTitle title="Caches" />
+<StoryHeader title="Caches" />
 
 Eight cache layers can hold stale state in a Nice workspace. Three workspace-level `ntk` operations clear most of them; the rest belong to other owners (the consumer's `npm install`, npm itself, the user's browser). This page maps which tool clears which layer and gives workflow recipes for the common "something is stale" symptoms.
 
@@ -139,3 +139,4 @@ If that doesn't fix it, escalate to a per-consumer reinstall (`rm -rf node_modul
 ## Why three `ntk` operations and not one
 
 Each addresses a distinct concern with a distinct target directory and a distinct trigger symptom. A single umbrella verb would have to either over-fire (touch directories the symptom doesn't need) or under-fire (miss the directory the symptom does need). The three verbs are exhaustive for the workspace-level operations they cover and orthogonal to one another. Concerns outside the triad — consumer `node_modules` reinstall, global npm cache, browser hard reload — are owned by other tools and intentionally not pulled in.
+

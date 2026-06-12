@@ -1,13 +1,13 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Image from "nice-react-image"
 import Typography from "../../../../src/nice/Typography"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 import { toSource } from "../../../../src/services"
 
-<Meta title="React/Components/Image/vendor" />
+<Meta title="Components/Image/vendor" />
 
-<DocsTitle title="Image — --vendor" />
+<StoryHeader title="vendor" />
 
 <Typography color="light">
   Routes <code>src</code> / <code>width</code> / <code>height</code> through
@@ -55,7 +55,7 @@ vendor's identifier (a <code>picsum</code> id) rather than a URL. Omit
 <code>width</code> and <code>height</code> are forwarded to the resolver
 as the requested asset size.
 
-<DocsRow
+<CodeRow
   previewCell={
     <Image
       vendor
@@ -77,7 +77,7 @@ as the requested asset size.
     })}
 />
 
-<DocsRow
+<CodeRow
   previewCell={
     <Image
       vendor
@@ -112,3 +112,4 @@ import { resolveVendorImage } from "nice-react-image-vendor"
 const url = resolveVendorImage({ src: "10", width: "800px", height: "600px" })
 // → "https://picsum.photos/id/10/800/600"
 ```
+

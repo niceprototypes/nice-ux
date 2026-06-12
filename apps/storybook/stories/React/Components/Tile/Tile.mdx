@@ -1,13 +1,13 @@
 import { Meta, Canvas, Controls } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Tile from "nice-react-tile"
 import Typography from "../../../../src/nice/Typography"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 import * as TileStories from "./Tile.stories"
 
 <Meta of={TileStories} />
 
-<DocsTitle title="Tile" />
+<StoryHeader title="Tile" />
 
 ```bash
 npm install nice-react-tile
@@ -33,7 +33,7 @@ import Tile from "nice-react-tile"
   Default tile container with built-in spacing and max-width constraints.
 </Typography>
 
-<DocsRow
+<CodeRow
   fullWidth
   previewCell={
     <Tile title="Title" description="Description" />
@@ -56,3 +56,4 @@ import Tile from "nice-react-tile"
 <Canvas of={TileStories.Playground} />
 
 <Controls of={TileStories.Playground} />
+

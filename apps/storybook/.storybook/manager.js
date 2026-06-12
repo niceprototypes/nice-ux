@@ -10,7 +10,8 @@ const theme = create({
   brandImage: "https://niceprototypes.com/vectors/logo-storybook.svg",
   brandTarget: "_self",
 
-  fontBase: '"Google Sans Flex", sans-serif',
+  fontBase:
+    "Avenir Next, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
   fontCode: '"Roboto Mono", "Courier New", serif',
 })
 

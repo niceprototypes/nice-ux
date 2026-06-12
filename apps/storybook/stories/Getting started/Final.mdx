@@ -1,13 +1,12 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsNav from "../../src/components/DocsNav"
-import DocsTitle from "../../src/components/DocsTitle"
+import { StoryHeader } from "../../src/components/Story"
 
 <Meta
   title="Getting started/Final"
   name="Docs"
 />
 
-<DocsTitle title="Final" />
+<StoryHeader title="Final" />
 
 Everything from the previous pages in one place: register token overrides (colors, fonts, responsive sizes) with `setTokens`, load a web font, wrap the app in `StylesProvider`, and render components.
 
@@ -63,4 +62,3 @@ import Typography from "nice-react-typography"
 
 The full stack: tokens overridden, fonts loaded, components themed — no `GlobalStyles` component needed; the CSS is injected when `nice/tokens` is imported.
 
-<DocsNav />

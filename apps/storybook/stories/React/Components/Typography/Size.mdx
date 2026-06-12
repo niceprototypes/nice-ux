@@ -1,13 +1,13 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Typography from "../../../../src/nice/Typography"
 import StoryDescription from "../../../../src/components/StoryDescription"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 import { toSource } from "../../../../src/services"
 
-<Meta title="React/Components/Typography/size" />
+<Meta title="Components/Typography/size" />
 
-<DocsTitle title="Typography — Size" />
+<StoryHeader title="size" />
 
 <StoryDescription property="font-size">
   Sets the font size using fontSize tokens.
@@ -15,7 +15,7 @@ import { toSource } from "../../../../src/services"
 
 <div>
   {["smaller", "small", "base", "large", "larger"].map(size => (
-    <DocsRow
+    <CodeRow
       key={size}
       previewCell={
         <Typography size={size}>{size}</Typography>
@@ -25,3 +25,4 @@ import { toSource } from "../../../../src/services"
     />
   ))}
 </div>
+

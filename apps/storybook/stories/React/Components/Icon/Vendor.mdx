@@ -1,12 +1,12 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Icon from "nice-react-icon"
 import Typography from "../../../../src/nice/Typography"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 
-<Meta title="React/Components/Icon/vendor" />
+<Meta title="Components/Icon/vendor" />
 
-<DocsTitle title="Icon — --vendor" />
+<StoryHeader title="vendor" />
 
 <Typography color="light">
   Routes a name through the registered vendor resolver instead of the built-in
@@ -49,7 +49,7 @@ Any name not found in the built-in set is then resolved through the
 vendor. Built-in names always win — the vendor is a fallback, not an
 override.
 
-<DocsRow
+<CodeRow
   previewCell={
     <Icon
       vendor
@@ -61,7 +61,7 @@ override.
   code={`<Icon vendor name="TrendingDown" />`}
 />
 
-<DocsRow
+<CodeRow
   previewCell={
     <Icon
       vendor
@@ -73,3 +73,4 @@ override.
   language="tsx"
   code={`<Icon vendor name="Sparkles" color="link" />`}
 />
+

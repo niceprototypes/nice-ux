@@ -1,19 +1,19 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Button from "nice-react-button"
 import Typography from "../../../../src/nice/Typography"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 
-<Meta title="React/Components/Button/status" />
+<Meta title="Components/Button/status" />
 
-<DocsTitle title="Button — Status" />
+<StoryHeader title="status" />
 
 <Typography color="light">
   Selects the button's visual emphasis — <code>primary</code> (default) or{" "}
   <code>secondary</code>.
 </Typography>
 
-<DocsRow
+<CodeRow
   previewCell={
     <Button onClick={() => {}}>Primary</Button>
   }
@@ -21,7 +21,7 @@ import { DocsRow } from "../../../../src/components/DocsRow"
   code={`<Button onClick={handler}>\n  {children}\n</Button>`}
 />
 
-<DocsRow
+<CodeRow
   previewCell={
     <Button
       onClick={() => {}}
@@ -33,3 +33,4 @@ import { DocsRow } from "../../../../src/components/DocsRow"
   language="tsx"
   code={`<Button\n  onClick={handler}\n  status="secondary"\n>\n  {children}\n</Button>`}
 />
+

@@ -1,11 +1,11 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Typography from "../../../../src/nice/Typography"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 
-<Meta title="React/Components/Scroll/StickySection" />
+<Meta title="Components/Scroll/StickySection" />
 
-<DocsTitle title="Scroll — StickySection" />
+<StoryHeader title="StickySection" />
 
 <Typography color="light">
   Wraps content with a semantic section element and ID for use with{" "}
@@ -14,7 +14,7 @@ import { DocsRow } from "../../../../src/components/DocsRow"
 
 ### Basic
 
-<DocsRow
+<CodeRow
   fullWidth
   previewCell={
     <Typography size="small" color="light">
@@ -28,7 +28,7 @@ import { DocsRow } from "../../../../src/components/DocsRow"
 
 ### as
 
-<DocsRow
+<CodeRow
   fullWidth
   previewCell={
     <Typography size="small" color="light">
@@ -41,7 +41,7 @@ import { DocsRow } from "../../../../src/components/DocsRow"
 
 ### render
 
-<DocsRow
+<CodeRow
   fullWidth
   previewCell={
     <Typography size="small" color="light">
@@ -51,3 +51,4 @@ import { DocsRow } from "../../../../src/components/DocsRow"
   language="tsx"
   code={`<StickySection\n  id="custom"\n  render={({ id, children }) => (\n    <article id={id}>{children}</article>\n  )}\n>`}
 />
+

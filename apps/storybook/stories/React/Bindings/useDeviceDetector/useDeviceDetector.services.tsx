@@ -5,16 +5,13 @@ import {
   useDevice,
 } from "nice-react-device-detector"
 import Flex from "nice-react-flex"
-import { CodeRow } from "../../../../src/components/CodeRow"
-
-// Basic — read the hook's boolean directly
-export const BasicUsageDemo = () => <CodeRow isMobile={useDeviceDetector()} />
+import { DeviceRow } from "./DeviceRow"
 
 // Conditional — branch the rendered output on the detected device type
 export const ConditionalRenderingDemo = () => {
   const isMobile = useDeviceDetector()
   return (
-    <CodeRow
+    <DeviceRow
       showIcon
       isMobile={isMobile}
       label="device"
@@ -28,7 +25,7 @@ export const ContextProviderDemo = () => {
   const Consumer = () => {
     const { isMobile } = useDevice()
     return (
-      <CodeRow
+      <DeviceRow
         showIcon
         isMobile={isMobile}
         label="device"
@@ -64,7 +61,7 @@ export const DebuggingDemo = () => {
       direction="column"
       gap="large"
     >
-      <CodeRow
+      <DeviceRow
         isMobile={isMobile}
         label="debugging"
         description={isDebugging ? "true" : "false"}
@@ -98,17 +95,17 @@ export const ResponsiveDemo = () => {
       direction="column"
       gap="base"
     >
-      <CodeRow
+      <DeviceRow
         showIcon
         isMobile={isMobile}
         label="device"
         description={isMobile ? "mobile" : "desktop"}
       />
-      <CodeRow
+      <DeviceRow
         label="window width"
         description={`${windowWidth}px`}
       />
-      <CodeRow
+      <DeviceRow
         label="resize events"
         description={String(resizeCount)}
       />

@@ -1,12 +1,12 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Icon from "nice-react-icon"
 import StoryDescription from "../../../../src/components/StoryDescription"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 
-<Meta title="React/Components/Icon/strokeScaling" />
+<Meta title="Components/Icon/strokeScaling" />
 
-<DocsTitle title="Icon — StrokeScaling" />
+<StoryHeader title="strokeScaling" />
 
 <StoryDescription
   kind="svg"
@@ -16,7 +16,7 @@ import { DocsRow } from "../../../../src/components/DocsRow"
   Controls whether the stroke thickness scales with the icon size.
 </StoryDescription>
 
-<DocsRow
+<CodeRow
   previewCell={
     <Icon
       name="message"
@@ -28,7 +28,7 @@ import { DocsRow } from "../../../../src/components/DocsRow"
   code={`<Icon size="larger" />`}
 />
 
-<DocsRow
+<CodeRow
   previewCell={
     <Icon
       name="message"
@@ -39,3 +39,4 @@ import { DocsRow } from "../../../../src/components/DocsRow"
   language="tsx"
   code={`<Icon size="larger" strokeScaling={true} />`}
 />
+

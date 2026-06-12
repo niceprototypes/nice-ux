@@ -1,19 +1,19 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Button from "nice-react-button"
-import Typography from "../../../../src/nice/Typography"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import Typography from "nice-react-typography"
+import { CodeRow } from "../../../../src/components/CodeRow"
 
-<Meta title="React/Components/Button/icon" />
+<Meta title="Components/Button/icon" />
 
-<DocsTitle title="Button — Icon" />
+<StoryHeader title="icon" />
 
-<Typography color="light">
+<Typography as="span" color="light">
   Renders a <code>nice-react-icon</code> alongside the button label, or as the
   sole content when no children are provided.
 </Typography>
 
-<DocsRow
+<CodeRow
   previewCell={
     <Button
       onClick={() => {}}
@@ -26,7 +26,7 @@ import { DocsRow } from "../../../../src/components/DocsRow"
   code={`<Button\n  onClick={handler}\n  icon="arrow-right"\n>\n  {children}\n</Button>`}
 />
 
-<DocsRow
+<CodeRow
   previewCell={
     <Button
       onClick={() => {}}
@@ -37,3 +37,4 @@ import { DocsRow } from "../../../../src/components/DocsRow"
   language="tsx"
   code={`<Button\n  onClick={handler}\n  icon="plus"\n  aria-label="Add item"\n/>`}
 />
+

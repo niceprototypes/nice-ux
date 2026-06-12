@@ -1,12 +1,12 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../src/components/Story"
 
 <Meta
-  title="React/Bindings"
+  title="Bindings"
   name="Docs"
 />
 
-<DocsTitle title="Bindings" />
+<StoryHeader title="Bindings" />
 
 React hooks for the Nice ecosystem. Each hook is published within
 its relevant package.
@@ -15,6 +15,7 @@ its relevant package.
 
 ### Contents
 
-- [useDeviceDetector](/docs/react-bindings-usedevicedetector--docs) — Returns
+- [useDeviceDetector](/docs/bindings-usedevicedetector--docs) — Returns
   whether the current viewport is mobile. Supports context via `DeviceProvider`
   and localStorage debugging overrides.
+

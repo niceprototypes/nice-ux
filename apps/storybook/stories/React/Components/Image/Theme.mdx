@@ -1,8 +1,8 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Image from "nice-react-image"
 import Typography from "../../../../src/nice/Typography"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 import { toSource } from "../../../../src/services"
 
 export const baseProps = {
@@ -15,9 +15,9 @@ export const baseProps = {
 export const dayProps = { ...baseProps, alt: "Day theme", theme: "day" }
 export const nightProps = { ...baseProps, alt: "Night theme", theme: "night" }
 
-<Meta title="React/Components/Image/theme" />
+<Meta title="Components/Image/theme" />
 
-<DocsTitle title="Image — Theme" />
+<StoryHeader title="theme" />
 
 <Typography color="light">
   Pins the <code>borderRadius</code> token resolution to a specific theme. Use
@@ -26,7 +26,7 @@ export const nightProps = { ...baseProps, alt: "Night theme", theme: "night" }
   tokens inside a night theme panel).
 </Typography>
 
-<DocsRow
+<CodeRow
   previewCell={
     <Image {...dayProps} />
   }
@@ -34,10 +34,11 @@ export const nightProps = { ...baseProps, alt: "Night theme", theme: "night" }
   code={toSource("Image", dayProps)}
 />
 
-<DocsRow
+<CodeRow
   previewCell={
     <Image {...nightProps} />
   }
   language="tsx"
   code={toSource("Image", nightProps)}
 />
+

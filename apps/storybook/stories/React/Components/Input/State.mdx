@@ -1,8 +1,8 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Input from "nice-react-input"
 import Typography from "../../../../src/nice/Typography"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 
 export const states = ["base", "disabled", "error", "success", "warning"]
 
@@ -13,9 +13,9 @@ export const stateCode = (s) =>
     ? `<Input\n  placeholder="Base"\n  onChange={handler}\n/>`
     : `<Input\n  state="${s}"\n  placeholder="${stateLabel(s)}"\n  onChange={handler}\n/>`
 
-<Meta title="React/Components/Input/state" />
+<Meta title="Components/Input/state" />
 
-<DocsTitle title="Input — State" />
+<StoryHeader title="state" />
 
 <Typography color="light">
   Applies a semantic state style to the input (<code>disabled</code>,{" "}
@@ -25,7 +25,7 @@ export const stateCode = (s) =>
 
 <div>
   {states.map((state) => (
-    <DocsRow
+    <CodeRow
       key={state}
       previewCell={
         <Input
@@ -39,3 +39,4 @@ export const stateCode = (s) =>
     />
   ))}
 </div>
+

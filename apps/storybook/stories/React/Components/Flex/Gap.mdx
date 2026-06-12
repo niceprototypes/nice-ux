@@ -1,14 +1,14 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 
 import StoryDescription from "../../../../src/components/StoryDescription"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 import DemoDots from "../../../../src/components/DemoDots"
 import { threeDots } from "./Flex.services"
 
-<Meta title="React/Components/Flex/gap" />
+<Meta title="Components/Flex/gap" />
 
-<DocsTitle title="Flex — Gap" />
+<StoryHeader title="gap" />
 
 <StoryDescription property="gap">
   Sets the spacing between flex items using gap tokens.
@@ -16,7 +16,7 @@ import { threeDots } from "./Flex.services"
 
 <div>
   {["smaller", "small", "base", "large", "larger"].map(value => (
-    <DocsRow
+    <CodeRow
       key={value}
       previewCell={
         <DemoDots
@@ -29,3 +29,4 @@ import { threeDots } from "./Flex.services"
     />
   ))}
 </div>
+

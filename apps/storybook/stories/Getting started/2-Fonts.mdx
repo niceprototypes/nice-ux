@@ -1,0 +1,129 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import Install from "../../src/components/Install"
+import NewLines from "../../src/components/NewLines/index.ts"
+
+<Meta
+  title="Getting started/2 · Fonts"
+  name="Docs"
+/>
+
+<StoryHeader title="Fonts" />
+
+## JS only
+
+Use the `injectFonts` function to inject preconnects and stylesheets for your font family.
+
+<NewLines />
+
+<Install package="styles" />
+
+<NewLines />
+
+### Custom fonts
+
+```ts
+import { injectFonts } from "nice-styles"
+
+injectFonts({
+  links: [
+    { rel: "preconnect", href: "https://cdn.example.com" },
+    { rel: "stylesheet", href: "https://cdn.example.com/font.css" },
+  ],
+})
+```
+
+<NewLines />
+
+### Google
+
+```ts
+import { injectFonts } from "nice-styles"
+
+injectFonts({ googleFonts: "https://fonts.googleapis.com/…" })
+```
+
+> `fonts.googleapis.com` `fonts.gstatic.com` preconnects and stylesheet injected into `<head>`
+
+<NewLines />
+
+### Adobe
+
+```ts
+import { injectFonts } from "nice-styles"
+
+injectFonts({ adobeFonts: "https://use.typekit.net/…" })
+```
+
+> `use.typekit.net` preconnects and stylesheet injected into `<head>`
+
+---
+
+## React
+
+<NewLines />
+
+### 1. Set tokens
+
+Call `setTokens` once on module load, from its own `tokens.ts`:
+
+<Install package="react-styles" />
+
+```tsx
+// tokens.ts
+
+import { setTokens } from "nice-react-styles"
+
+setTokens({
+  fontFamily: {
+    base: "'Google Sans', sans-serif",
+  },
+})
+```
+
+<NewLines />
+
+### 2. Get fonts
+
+Use props on `StylesProvider` to inject and control fonts for your React project:
+
+#### Custom
+
+```tsx
+import { StylesProvider } from "nice-react-styles"
+import App from "./App"
+import "./tokens" // runs setTokens once on load
+
+<StylesProvider
+  links={[
+    { rel: "preconnect", href: "https://cdn.example.com" },
+    { rel: "stylesheet", href: "https://cdn.example.com/font.css" },
+  ]}
+>
+  <App />
+</StylesProvider>
+```
+
+#### Google
+
+```tsx
+import { StylesProvider } from "nice-react-styles"
+import App from "./App"
+import "./tokens" // runs setTokens once on load
+
+<StylesProvider googleFonts="https://fonts.googleapis.com/…">
+  <App />
+</StylesProvider>
+```
+
+#### Adobe
+
+```tsx
+import { StylesProvider } from "nice-react-styles"
+import App from "./App"
+import "./tokens" // runs setTokens once on load
+
+<StylesProvider adobeFonts="https://use.typekit.net/…">
+  <App />
+</StylesProvider>
+```

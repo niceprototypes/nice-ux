@@ -1,16 +1,16 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Typography from "../../../../src/nice/Typography"
 import StoryDescription from "../../../../src/components/StoryDescription"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 import { toSource } from "../../../../src/services"
 
 export const loremIpsumLong =
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
 
-<Meta title="React/Components/Typography/lineHeight" />
+<Meta title="Components/Typography/lineHeight" />
 
-<DocsTitle title="Typography — LineHeight" />
+<StoryHeader title="lineHeight" />
 
 <StoryDescription property="line-height">
   Sets the vertical spacing between lines of text using lineHeight tokens.
@@ -18,7 +18,7 @@ export const loremIpsumLong =
 
 <div>
   {["condensed", "base", "expanded"].map(lineHeight => (
-    <DocsRow
+    <CodeRow
       key={lineHeight}
       previewCell={
         <Typography lineHeight={lineHeight}>{loremIpsumLong}</Typography>
@@ -32,3 +32,4 @@ export const loremIpsumLong =
     />
   ))}
 </div>
+

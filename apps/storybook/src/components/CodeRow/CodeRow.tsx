@@ -1,43 +1,67 @@
-import Typography from "../../nice/Typography"
-import { CodeRowProps } from "./CodeRow.types"
 import Flex from "nice-react-flex"
-import { LabelWrapper } from "./CodeRow.styles"
+import { withBreakpoints } from "nice-react-styles"
+import { CodeBlock } from "../CodeBlock"
+import { PreviewWrapper, RowFlex } from "./CodeRow.styles"
+import { CodeRowProps } from "./CodeRow.types"
 
-export const CodeRow = ({
-  showIcon = false,
-  isMobile,
-  label = "mobile",
-  description,
+const BaseCodeRow = ({
+  previewCell,
+  code,
+  language = "tsx",
+  previewCellWidth,
+  fullWidth = false,
 }: CodeRowProps) => {
-  const defaultDescription =
-    isMobile !== undefined ? (isMobile ? "true" : "false") : undefined
+  const sourceBlock = (Array.isArray(code) ? code : [code]).map((snippet, index) => (
+    <CodeBlock
+      key={index}
+      code={snippet}
+      language={language}
+    />
+  ))
+
+  if (fullWidth) {
+    return (
+      <>
+        <PreviewWrapper $fullWidth>
+          <Flex>{previewCell}</Flex>
+        </PreviewWrapper>
+        <RowFlex
+          direction="column"
+          gap="large"
+          breakpoints={{
+            "tablet+": {
+              direction: "row",
+              alignItems: "center",
+            },
+          }}
+        >
+          {sourceBlock}
+        </RowFlex>
+      </>
+    )
+  }
 
   return (
-    <Flex
-      alignItems="center"
-      gap="base"
+    <RowFlex
+      direction="column"
+      gap="large"
+      breakpoints={{
+        "tablet+": {
+          direction: "row",
+          alignItems: "center",
+        },
+      }}
     >
-      <LabelWrapper>
-        <Typography
-          code
-          as="span"
-        >
-          {label}
-        </Typography>
-      </LabelWrapper>
-      <Flex
-        alignItems="center"
-        gap="smaller"
-      >
-        {showIcon && (isMobile ? "📱" : "💻")}
-        <Typography
-          code
-          as="span"
-          weight="bold"
-        >
-          {description ?? defaultDescription}
-        </Typography>
-      </Flex>
-    </Flex>
+      <PreviewWrapper $width={previewCellWidth}>
+        <Flex>{previewCell}</Flex>
+      </PreviewWrapper>
+      {sourceBlock}
+    </RowFlex>
   )
 }
+
+export const CodeRow = withBreakpoints<CodeRowProps>(BaseCodeRow, {
+  "tablet+": {
+    previewCellWidth: "45%",
+  },
+})

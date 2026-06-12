@@ -1,12 +1,12 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Input from "nice-react-input"
 import Typography from "../../../../src/nice/Typography"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 
-<Meta title="React/Components/Input/status" />
+<Meta title="Components/Input/status" />
 
-<DocsTitle title="Input — Status" />
+<StoryHeader title="status" />
 
 <Typography color="light">
   Selects the input's visual emphasis — <code>primary</code> (default,
@@ -14,7 +14,7 @@ import { DocsRow } from "../../../../src/components/DocsRow"
   alternate background).
 </Typography>
 
-<DocsRow
+<CodeRow
   previewCell={
     <Input
       placeholder="Primary"
@@ -25,7 +25,7 @@ import { DocsRow } from "../../../../src/components/DocsRow"
   code={`<Input\n  placeholder="Primary"\n  onChange={handler}\n/>`}
 />
 
-<DocsRow
+<CodeRow
   previewCell={
     <Input
       status="secondary"
@@ -36,3 +36,4 @@ import { DocsRow } from "../../../../src/components/DocsRow"
   language="tsx"
   code={`<Input\n  status="secondary"\n  placeholder="Secondary"\n  onChange={handler}\n/>`}
 />
+

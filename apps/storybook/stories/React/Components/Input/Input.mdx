@@ -1,12 +1,12 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Input from "nice-react-input"
 import Typography from "../../../../src/nice/Typography"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 
-<Meta title="React/Components/Input" />
+<Meta title="Components/Input" />
 
-<DocsTitle title="Input" />
+<StoryHeader title="Input" />
 
 ```bash
 npm install nice-react-input
@@ -33,7 +33,7 @@ import Input from "nice-react-input"
   <code>onChange</code> handler that receives the new string value.
 </Typography>
 
-<DocsRow
+<CodeRow
   previewCell={
     <Input
       placeholder="Email"
@@ -43,3 +43,4 @@ import Input from "nice-react-input"
   language="tsx"
   code={`<Input\n  placeholder="Email"\n  onChange={(value) => setValue(value)}\n/>`}
 />
+

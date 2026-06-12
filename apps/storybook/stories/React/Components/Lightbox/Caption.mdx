@@ -1,23 +1,23 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Lightbox from "nice-react-lightbox"
 import Typography from "../../../../src/nice/Typography"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 import { resolveVendorImage } from "nice-react-image-vendor"
 import { DemoImage } from "./Lightbox.styles"
 
 export const DEMO_IMAGE = resolveVendorImage({ src: "10", width: "800px", height: "600px" })
 
-<Meta title="React/Components/Lightbox/caption" />
+<Meta title="Components/Lightbox/caption" />
 
-<DocsTitle title="Lightbox — Caption" />
+<StoryHeader title="caption" />
 
 <Typography color="light">
   Displays optional <code>title</code> and <code>description</code> text beneath
   the expanded image.
 </Typography>
 
-<DocsRow
+<CodeRow
   previewCell={
     <Lightbox
       imageUrl={DEMO_IMAGE}
@@ -34,7 +34,7 @@ export const DEMO_IMAGE = resolveVendorImage({ src: "10", width: "800px", height
   code={`<Lightbox\n  imageUrl="/image.png"\n  alt="Description"\n  title="Photo title"\n>\n  <img src="/image.png" />\n</Lightbox>`}
 />
 
-<DocsRow
+<CodeRow
   previewCell={
     <Lightbox
       imageUrl={DEMO_IMAGE}
@@ -51,3 +51,4 @@ export const DEMO_IMAGE = resolveVendorImage({ src: "10", width: "800px", height
   language="tsx"
   code={`<Lightbox\n  imageUrl="/image.png"\n  alt="Description"\n  title="Photo title"\n  description="Caption text"\n>\n  <img src="/image.png" />\n</Lightbox>`}
 />
+

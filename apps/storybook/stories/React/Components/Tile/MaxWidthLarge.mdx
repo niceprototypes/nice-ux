@@ -1,19 +1,19 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Tile from "nice-react-tile"
 import Typography from "../../../../src/nice/Typography"
 import StoryDescription from "../../../../src/components/StoryDescription"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 
-<Meta title="React/Components/Tile/maxWidthLarge" />
+<Meta title="Components/Tile/maxWidthLarge" />
 
-<DocsTitle title="Tile — MaxWidthLarge" />
+<StoryHeader title="maxWidthLarge" />
 
 <StoryDescription property="max-width">
   Caps the tile's content width at the laptop breakpoint.
 </StoryDescription>
 
-<DocsRow
+<CodeRow
   fullWidth
   previewCell={
     <Tile
@@ -29,3 +29,4 @@ import { DocsRow } from "../../../../src/components/DocsRow"
   language="tsx"
   code={`<Tile maxWidthLarge={1200} title="Title" description="Content constrained to 1200px max-width" />`}
 />
+

@@ -1,12 +1,12 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../src/components/DocsTitle"
+import { StoryHeader } from "../../src/components/Story"
 
 <Meta
   title="Configuration/TypeScript"
   name="Docs"
 />
 
-<DocsTitle title="TypeScript" />
+<StoryHeader title="TypeScript" />
 
 ```bash
 npm install -D nice-configuration
@@ -85,3 +85,4 @@ Extends the base configuration with JSX support for React components.
 ```
 
 Note: Path-relative options like `outDir`, `declarationDir`, and `include` must be specified in each project as they resolve relative to the config file location.
+

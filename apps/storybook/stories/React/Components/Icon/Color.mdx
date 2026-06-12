@@ -1,13 +1,13 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Icon from "nice-react-icon"
 import StoryDescription from "../../../../src/components/StoryDescription"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 import { colors } from "./Icon.services"
 
-<Meta title="React/Components/Icon/color" />
+<Meta title="Components/Icon/color" />
 
-<DocsTitle title="Icon — Color" />
+<StoryHeader title="color" />
 
 <StoryDescription property="color">
   Sets the color of the icon using color tokens.
@@ -15,7 +15,7 @@ import { colors } from "./Icon.services"
 
 <div>
   {colors.map(color => (
-    <DocsRow
+    <CodeRow
       key={color}
       previewCell={
         <Icon
@@ -30,3 +30,4 @@ import { colors } from "./Icon.services"
     />
   ))}
 </div>
+

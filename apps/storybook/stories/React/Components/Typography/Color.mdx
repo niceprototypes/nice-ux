@@ -1,13 +1,13 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Typography from "../../../../src/nice/Typography"
 import StoryDescription from "../../../../src/components/StoryDescription"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 import { toSource } from "../../../../src/services"
 
-<Meta title="React/Components/Typography/color" />
+<Meta title="Components/Typography/color" />
 
-<DocsTitle title="Typography — Color" />
+<StoryHeader title="color" />
 
 <StoryDescription property="color">
   Sets the text color using color tokens.
@@ -25,7 +25,7 @@ import { toSource } from "../../../../src/services"
     "warning",
     "error",
   ].map(color => (
-    <DocsRow
+    <CodeRow
       key={color}
       previewCell={
         <Typography color={color}>{color}</Typography>
@@ -35,3 +35,4 @@ import { toSource } from "../../../../src/services"
     />
   ))}
 </div>
+

@@ -1,12 +1,12 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Typography from "../../../../src/nice/Typography"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 import { toSource } from "../../../../src/services"
 
-<Meta title="React/Components/Typography/as" />
+<Meta title="Components/Typography/as" />
 
-<DocsTitle title="Typography — As" />
+<StoryHeader title="as" />
 
 <Typography color="light">
   Renders the text using a specific HTML element, with sensible size and weight
@@ -15,7 +15,7 @@ import { toSource } from "../../../../src/services"
 
 <div>
   {["h1", "h2", "h3", "h4", "p", "span"].map(as => (
-    <DocsRow
+    <CodeRow
       key={as}
       previewCell={
         <Typography as={as}>{as}</Typography>
@@ -25,3 +25,4 @@ import { toSource } from "../../../../src/services"
     />
   ))}
 </div>
+

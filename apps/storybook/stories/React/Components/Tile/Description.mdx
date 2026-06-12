@@ -1,18 +1,18 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Tile from "nice-react-tile"
 import Typography from "../../../../src/nice/Typography"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 
-<Meta title="React/Components/Tile/description" />
+<Meta title="Components/Tile/description" />
 
-<DocsTitle title="Tile — Description" />
+<StoryHeader title="description" />
 
 <Typography color="light">
   Renders a secondary line of text beneath the title.
 </Typography>
 
-<DocsRow
+<CodeRow
   fullWidth
   previewCell={
     <Tile
@@ -23,3 +23,4 @@ import { DocsRow } from "../../../../src/components/DocsRow"
   language="tsx"
   code={`<Tile\n  title="Title"\n  description="Description"\n/>`}
 />
+

@@ -1,8 +1,8 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Input from "nice-react-input"
 import Typography from "../../../../src/nice/Typography"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 
 export const types = ["text", "email", "password", "number", "search", "tel", "url"]
 
@@ -21,9 +21,9 @@ export const typeCode = (t) =>
     ? `<Input\n  placeholder="Plain text"\n  onChange={handler}\n/>`
     : `<Input\n  type="${t}"\n  placeholder="${typeLabel[t]}"\n  onChange={handler}\n/>`
 
-<Meta title="React/Components/Input/type" />
+<Meta title="Components/Input/type" />
 
-<DocsTitle title="Input — Type" />
+<StoryHeader title="type" />
 
 <Typography color="light">
   Sets the underlying HTML <code>type</code> attribute. MVP supports text-style
@@ -34,7 +34,7 @@ export const typeCode = (t) =>
 
 <div>
   {types.map((t) => (
-    <DocsRow
+    <CodeRow
       key={t}
       previewCell={
         <Input
@@ -48,3 +48,4 @@ export const typeCode = (t) =>
     />
   ))}
 </div>
+

@@ -1,12 +1,12 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../src/components/DocsTitle"
+import { StoryHeader } from "../../src/components/Story"
 
 <Meta
   title="Configuration/ViteWatcher"
   name="Docs"
 />
 
-<DocsTitle title="Vite Watcher" />
+<StoryHeader title="ViteWatcher" />
 
 ```bash
 npm install -D nice-vite-watcher
@@ -210,3 +210,4 @@ Source aliases bypass the package's build pipeline, which breaks packages using:
 • Custom Babel plugins — transforms code
 • Asset processing — handles images, fonts
 ```
+

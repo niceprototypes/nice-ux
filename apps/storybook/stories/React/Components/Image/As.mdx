@@ -1,15 +1,15 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Image from "nice-react-image"
 import Typography from "../../../../src/nice/Typography"
 import Flex from "nice-react-flex"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 import { toSource } from "../../../../src/services"
 import Tile from "nice-react-tile"
 
-<Meta title="React/Components/Image/as" />
+<Meta title="Components/Image/as" />
 
-<DocsTitle title="Image — As" />
+<StoryHeader title="as" />
 
 <Typography color="light">
   Renders the image as either an <code>&lt;img&gt;</code> element (default) or a{" "}
@@ -17,7 +17,7 @@ import Tile from "nice-react-tile"
   overlaying children on top.
 </Typography>
 
-<DocsRow
+<CodeRow
   previewCell={
     <Image
       vendor
@@ -35,7 +35,7 @@ import Tile from "nice-react-tile"
     })}
 />
 
-<DocsRow
+<CodeRow
   previewCell={
     <Image
       vendor
@@ -78,3 +78,4 @@ import Tile from "nice-react-tile"
       { children: "<h1>Overlay content</h1>" }
     )}
 />
+

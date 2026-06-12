@@ -1,13 +1,13 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Typography from "../../../../src/nice/Typography"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 import DemoDots from "../../../../src/components/DemoDots"
 import { twoDots } from "./Flex.services"
 
-<Meta title="React/Components/Flex" />
+<Meta title="Components/Flex" />
 
-<DocsTitle title="Flex" />
+<StoryHeader title="Flex" />
 
 ```bash
 npm install nice-react-flex
@@ -38,10 +38,11 @@ import Flex from "nice-react-flex"
   Default flex container — renders children in an inline row with no gap.
 </Typography>
 
-<DocsRow
+<CodeRow
   previewCell={
     <DemoDots dots={twoDots} />
   }
   language="tsx"
   code={`<Flex>{children}</Flex>`}
 />
+

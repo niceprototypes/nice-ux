@@ -1,12 +1,12 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../src/components/Story"
 
 <Meta
   title="React/Styles"
   name="Docs"
 />
 
-<DocsTitle title="Styles" />
+<StoryHeader title="Styles" />
 
 ```bash
 npm install nice-react-styles
@@ -18,10 +18,6 @@ font loading, and a typed token API for use inside components.
 ---
 
 ### Contents
-
-- [StylesProvider](/docs/react-styles-stylesprovider--docs) — Context provider
-  that injects CSS variables onto `:root` and supplies a styled-components theme.
-  Wrap your app root with it once.
 
 - [FontLoader](/docs/react-styles-fontloader--docs) — Handles async web font
   loading so your layout doesn't shift. Used internally by `StylesProvider`
@@ -38,3 +34,4 @@ font loading, and a typed token API for use inside components.
 - [setBreakpoints](/docs/react-styles-setbreakpoints--docs) — Overrides the
   pixel thresholds behind `@media` queries. Build-time via `breakpoints.json`
   or runtime via `setBreakpoints` / `setTokens({ breakpoints })`.
+

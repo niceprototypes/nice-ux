@@ -1,8 +1,8 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Image from "nice-react-image"
 import Typography from "../../../../src/nice/Typography"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 import { toSource } from "../../../../src/services"
 
 export const basicProps = { vendor: true, alt: "Demo landscape" }
@@ -14,9 +14,9 @@ export const coverProps = {
   backgroundSize: "cover",
 }
 
-<Meta title="React/Components/Image" />
+<Meta title="Components/Image" />
 
-<DocsTitle title="Image" />
+<StoryHeader title="Image" />
 
 ```bash
 npm install nice-react-image
@@ -64,7 +64,7 @@ import Image from "nice-react-image"
   <code>backgroundSize="cover"</code> to crop.
 </Typography>
 
-<DocsRow
+<CodeRow
   previewCell={
     <Image {...basicProps} />
   }
@@ -72,10 +72,11 @@ import Image from "nice-react-image"
   code={toSource("Image", basicProps)}
 />
 
-<DocsRow
+<CodeRow
   previewCell={
     <Image {...coverProps} />
   }
   language="tsx"
   code={toSource("Image", coverProps)}
 />
+

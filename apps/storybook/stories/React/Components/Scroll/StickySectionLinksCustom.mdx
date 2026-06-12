@@ -1,11 +1,11 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Typography from "../../../../src/nice/Typography"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 
-<Meta title="React/Components/Scroll/StickySectionLinks custom" />
+<Meta title="Components/Scroll/StickySectionLinks custom" />
 
-<DocsTitle title="Scroll — StickySectionLinks custom" />
+<StoryHeader title="StickySectionLinks custom" />
 
 <Typography color="light">
   Override the default rendering of individual links or the wrapping container
@@ -14,7 +14,7 @@ import { DocsRow } from "../../../../src/components/DocsRow"
 
 ### renderLink
 
-<DocsRow
+<CodeRow
   fullWidth
   previewCell={
     <Typography size="small" color="light">
@@ -27,7 +27,7 @@ import { DocsRow } from "../../../../src/components/DocsRow"
 
 ### renderWrapper
 
-<DocsRow
+<CodeRow
   fullWidth
   previewCell={
     <Typography size="small" color="light">
@@ -37,3 +37,4 @@ import { DocsRow } from "../../../../src/components/DocsRow"
   language="tsx"
   code={`<StickySectionLinks\n  links={links}\n  renderWrapper={(children) => (\n    <nav className="custom-nav">{children}</nav>\n  )}\n/>`}
 />
+

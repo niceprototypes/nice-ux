@@ -1,0 +1,49 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import Icon, { iconNames } from "nice-react-icon"
+import Flex from "nice-react-flex"
+import IconGrid from "../../src/components/IconGrid"
+import NewLines from "../../src/components/NewLines/index.ts"
+
+<Meta
+  title="Getting started/3 · Icons"
+  name="Docs"
+/>
+
+<StoryHeader title="Icons" />
+
+## Standalone
+
+```bash
+npm install nice-icons
+```
+
+```jsx
+import CheckIcon from "nice-icons/check/stroke.svg"
+
+<img
+  src={CheckIcon}
+  alt="check"
+/>
+```
+
+---
+
+## React
+
+```bash
+npm install nice-react-icon
+```
+
+```tsx
+import Icon from "nice-react-icon"
+
+<Icon name="check" size="large" />
+```
+
+---
+
+## Browse
+
+<IconGrid icons={iconNames.map(name => ({ name }))} />
+

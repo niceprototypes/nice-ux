@@ -1,9 +1,9 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../src/components/DocsTitle"
+import { StoryHeader } from "../../src/components/Story"
 import Flex from "nice-react-flex"
 import { getToken } from "nice-react-styles"
 import Typography from "../../src/nice/Typography"
-import { DocsRow } from "../../src/components/DocsRow"
+import { CodeRow } from "../../src/components/CodeRow"
 import DemoDots from "../../src/components/DemoDots"
 
 export const loremIpsum =
@@ -14,7 +14,7 @@ export const loremIpsum =
   name="Docs"
 />
 
-<DocsTitle title="Tokens" />
+<StoryHeader title="Tokens" />
 
 ## animationDuration
 
@@ -28,7 +28,7 @@ export const loremIpsum =
   ].map(({ name, backgroundColor }) => {
     const animationName = name === "base" ? "slide" : "slideSlow"
     return (
-      <DocsRow
+      <CodeRow
         key={name}
         previewCell={
           <Flex
@@ -52,7 +52,7 @@ export const loremIpsum =
           </Flex>
         }
         language="tsx"
-        code={`getToken("animationDuration", "${name}")`}
+        code={[`var(--np--animation-duration${name === "base" ? "" : `--${name}`})`, `getToken("animationDuration", "${name}")`]}
       />
     )
   })}
@@ -62,7 +62,7 @@ export const loremIpsum =
 
 <div>
   {["base"].map(variant => (
-    <DocsRow
+    <CodeRow
       key={variant}
       previewCell={
         <Flex
@@ -88,7 +88,7 @@ export const loremIpsum =
         </Flex>
       }
       language="tsx"
-      code={`getToken("animationEasing", "${variant}")`}
+      code={[`var(--np--animation-easing${variant === "base" ? "" : `--${variant}`})`, `getToken("animationEasing", "${variant}")`]}
     />
   ))}
 </div>
@@ -97,7 +97,7 @@ export const loremIpsum =
 
 <div>
   {["base", "dark"].map(variant => (
-    <DocsRow
+    <CodeRow
       key={variant}
       previewCell={
         <Flex
@@ -111,7 +111,7 @@ export const loremIpsum =
         />
       }
       language="tsx"
-      code={`getToken("backgroundColor", "${variant}")`}
+      code={[`var(--np--background-color${variant === "base" ? "" : `--${variant}`})`, `getToken("backgroundColor", "${variant}")`]}
     />
   ))}
 </div>
@@ -120,7 +120,7 @@ export const loremIpsum =
 
 <div>
   {["base", "dark", "darker"].map(variant => (
-    <DocsRow
+    <CodeRow
       key={variant}
       previewCell={
         <Flex
@@ -134,7 +134,7 @@ export const loremIpsum =
         />
       }
       language="tsx"
-      code={`getToken("borderColor", "${variant}")`}
+      code={[`var(--np--border-color${variant === "base" ? "" : `--${variant}`})`, `getToken("borderColor", "${variant}")`]}
     />
   ))}
 </div>
@@ -143,7 +143,7 @@ export const loremIpsum =
 
 <div>
   {["smaller", "small", "base", "large", "larger"].map(variant => (
-    <DocsRow
+    <CodeRow
       key={variant}
       previewCell={
         <Flex
@@ -156,7 +156,7 @@ export const loremIpsum =
         />
       }
       language="tsx"
-      code={`getToken("borderRadius", "${variant}")`}
+      code={[`var(--np--border-radius${variant === "base" ? "" : `--${variant}`})`, `getToken("borderRadius", "${variant}")`]}
     />
   ))}
 </div>
@@ -165,7 +165,7 @@ export const loremIpsum =
 
 <div>
   {["small", "base", "large"].map(variant => (
-    <DocsRow
+    <CodeRow
       key={variant}
       previewCell={
         <Flex
@@ -178,7 +178,7 @@ export const loremIpsum =
         />
       }
       language="tsx"
-      code={`getToken("borderWidth", "${variant}")`}
+      code={[`var(--np--border-width${variant === "base" ? "" : `--${variant}`})`, `getToken("borderWidth", "${variant}")`]}
     />
   ))}
 </div>
@@ -187,7 +187,7 @@ export const loremIpsum =
 
 <div>
   {["base", "large"].map(variant => (
-    <DocsRow
+    <CodeRow
       key={variant}
       previewCell={
         <Flex
@@ -209,7 +209,7 @@ export const loremIpsum =
         </Flex>
       }
       language="tsx"
-      code={`getToken("boxShadow", "${variant}")`}
+      code={[`var(--np--box-shadow${variant === "base" ? "" : `--${variant}`})`, `getToken("boxShadow", "${variant}")`]}
     />
   ))}
 </div>
@@ -218,7 +218,7 @@ export const loremIpsum =
 
 <div>
   {["smaller", "small", "base", "large", "larger"].map(variant => (
-    <DocsRow
+    <CodeRow
       key={variant}
       previewCell={
         <Flex
@@ -231,7 +231,7 @@ export const loremIpsum =
         />
       }
       language="tsx"
-      code={`getToken("cellHeight", "${variant}")`}
+      code={[`var(--np--cell-height${variant === "base" ? "" : `--${variant}`})`, `getToken("cellHeight", "${variant}")`]}
     />
   ))}
 </div>
@@ -244,7 +244,7 @@ export const loremIpsum =
     { name: "base", text: "Body" },
     { name: "code", code: true, text: "Code" },
   ].map(({ name, weight, code, text }) => (
-    <DocsRow
+    <CodeRow
       key={name}
       previewCell={
         <Typography
@@ -255,7 +255,7 @@ export const loremIpsum =
         </Typography>
       }
       language="tsx"
-      code={`getToken("fontFamily", "${name}")`}
+      code={[`var(--np--font-family${name === "base" ? "" : `--${name}`})`, `getToken("fontFamily", "${name}")`]}
     />
   ))}
 </div>
@@ -264,7 +264,7 @@ export const loremIpsum =
 
 <div>
   {["smaller", "small", "base", "large", "larger"].map(variant => (
-    <DocsRow
+    <CodeRow
       key={variant}
       previewCell={
         <Typography size={variant}>
@@ -272,7 +272,7 @@ export const loremIpsum =
         </Typography>
       }
       language="tsx"
-      code={`getToken("fontSize", "${variant}")`}
+      code={[`var(--np--font-size${variant === "base" ? "" : `--${variant}`})`, `getToken("fontSize", "${variant}")`]}
     />
   ))}
 </div>
@@ -282,7 +282,7 @@ export const loremIpsum =
 <div>
   {["light", "base", "medium", "semibold", "bold", "extrabold", "black"].map(
     variant => (
-      <DocsRow
+      <CodeRow
         key={variant}
         previewCell={
           <Typography weight={variant}>
@@ -290,7 +290,7 @@ export const loremIpsum =
           </Typography>
         }
         language="tsx"
-        code={`getToken("fontWeight", "${variant}")`}
+        code={[`var(--np--font-weight${variant === "base" ? "" : `--${variant}`})`, `getToken("fontWeight", "${variant}")`]}
       />
     )
   )}
@@ -310,7 +310,7 @@ export const loremIpsum =
     "warning",
     "error",
   ].map(variant => (
-    <DocsRow
+    <CodeRow
       key={variant}
       previewCell={
         <Flex
@@ -323,7 +323,7 @@ export const loremIpsum =
         />
       }
       language="tsx"
-      code={`getToken("color", "${variant}")`}
+      code={[`var(--np--color${variant === "base" ? "" : `--${variant}`})`, `getToken("color", "${variant}")`]}
     />
   ))}
 </div>
@@ -332,7 +332,7 @@ export const loremIpsum =
 
 <div>
   {["smaller", "small", "base", "large", "larger"].map(variant => (
-    <DocsRow
+    <CodeRow
       key={variant}
       previewCell={
         <DemoDots
@@ -352,7 +352,7 @@ export const loremIpsum =
         />
       }
       language="tsx"
-      code={`getToken("gap", "${variant}")`}
+      code={[`var(--np--gap${variant === "base" ? "" : `--${variant}`})`, `getToken("gap", "${variant}")`]}
     />
   ))}
 </div>
@@ -361,13 +361,13 @@ export const loremIpsum =
 
 <div>
   {["condensed", "base", "expanded"].map(variant => (
-    <DocsRow
+    <CodeRow
       key={variant}
       previewCell={
         <Typography lineHeight={variant}>{loremIpsum}</Typography>
       }
       language="tsx"
-      code={`getToken("lineHeight", "${variant}")`}
+      code={[`var(--np--line-height${variant === "base" ? "" : `--${variant}`})`, `getToken("lineHeight", "${variant}")`]}
     />
   ))}
 </div>
@@ -383,4 +383,5 @@ export const loremIpsum =
 npm install nice-icons
 ```
 
-- [Browse all icons](/docs/getting-started-6-·-icons--docs)
+- [Browse all icons](/docs/getting-started-3-·-icons--docs)
+

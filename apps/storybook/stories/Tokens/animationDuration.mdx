@@ -1,13 +1,13 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../src/components/DocsTitle"
+import { StoryHeader } from "../../src/components/Story"
 import Flex from "nice-react-flex"
 import { getToken } from "nice-react-styles"
 import Typography from "../../src/nice/Typography"
-import { DocsRow } from "../../src/components/DocsRow"
+import { CodeRow } from "../../src/components/CodeRow"
 
 <Meta title="Tokens/animationDuration" />
 
-<DocsTitle title="animationDuration" />
+<StoryHeader title="animationDuration" />
 
 <Typography>Timing values for CSS transitions and animations.</Typography>
 
@@ -21,7 +21,7 @@ import { DocsRow } from "../../src/components/DocsRow"
   ].map(({ name, backgroundColor }) => {
     const animationName = name === "base" ? "slide" : "slideSlow"
     return (
-      <DocsRow
+      <CodeRow
         key={name}
         previewCell={
           <Flex
@@ -45,8 +45,9 @@ import { DocsRow } from "../../src/components/DocsRow"
           </Flex>
         }
         language="tsx"
-        code={`getToken("animationDuration", "${name}")`}
+        code={[`var(--np--animation-duration${name === "base" ? "" : `--${name}`})`, `getToken("animationDuration", "${name}")`]}
       />
     )
   })}
 </div>
+

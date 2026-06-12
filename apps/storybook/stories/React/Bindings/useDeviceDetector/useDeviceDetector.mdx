@@ -1,18 +1,19 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Typography from "../../../../src/nice/Typography"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
+import { useDeviceDetector } from "nice-react-device-detector"
+import { DeviceRow } from "./DeviceRow"
 import {
-  BasicUsageDemo,
   ConditionalRenderingDemo,
   ContextProviderDemo,
   DebuggingDemo,
   ResponsiveDemo,
 } from "./useDeviceDetector.services"
 
-<Meta title="React/Bindings/useDeviceDetector" />
+<Meta title="Bindings/useDeviceDetector" />
 
-<DocsTitle title="useDeviceDetector" />
+<StoryHeader title="useDeviceDetector" />
 
 ```bash
 npm install nice-react-device-detector
@@ -38,8 +39,8 @@ const isMobile = useDeviceDetector()
   Returns a boolean for whether the current viewport is a mobile device.
 </Typography>
 
-<DocsRow
-  previewCell={<BasicUsageDemo />}
+<CodeRow
+  previewCell={<DeviceRow isMobile={useDeviceDetector()} />}
   language="tsx"
   code={`const isMobile = useDeviceDetector()`}
 />
@@ -50,7 +51,7 @@ const isMobile = useDeviceDetector()
   Branch the rendered output on the detected device type.
 </Typography>
 
-<DocsRow
+<CodeRow
   previewCell={<ConditionalRenderingDemo />}
   language="tsx"
   code={`const isMobile = useDeviceDetector()\nreturn isMobile ? <MobileNav /> : <DesktopNav />`}
@@ -63,7 +64,7 @@ const isMobile = useDeviceDetector()
   <code>useDevice</code> — detection runs once instead of per consumer.
 </Typography>
 
-<DocsRow
+<CodeRow
   previewCell={<ContextProviderDemo />}
   language="tsx"
   code={`<DeviceProvider>\n  <App />\n</DeviceProvider>\n\n// inside any descendant\nconst { isMobile } = useDevice()`}
@@ -77,7 +78,7 @@ const isMobile = useDeviceDetector()
   the real viewport.
 </Typography>
 
-<DocsRow
+<CodeRow
   previewCell={<DebuggingDemo />}
   language="tsx"
   code={`localStorage.setItem("debug-mobile", "true")\nwindow.location.reload()`}
@@ -90,8 +91,9 @@ const isMobile = useDeviceDetector()
   the window to watch the values update.
 </Typography>
 
-<DocsRow
+<CodeRow
   previewCell={<ResponsiveDemo />}
   language="tsx"
   code={`const isMobile = useDeviceDetector()\n// re-renders whenever the viewport crosses the breakpoint`}
 />
+

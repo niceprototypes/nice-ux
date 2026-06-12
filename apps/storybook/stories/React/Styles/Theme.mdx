@@ -1,12 +1,12 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../src/components/Story"
 
 <Meta
   title="React/Styles/Theme"
   name="Docs"
 />
 
-<DocsTitle title="Theme" />
+<StoryHeader title="Theme" />
 
 Pins a subtree to a specific design-system theme (`day` / `night` / consumer-defined).
 Renders a layout-invisible `<div data-theme={name} style={{ display: "contents" }}>`
@@ -190,3 +190,4 @@ rule, so the pin wins over OS preference. Stable theme primitives
 (`--np--…--day` / `--np--…--night`) are never reassigned — components that
 emit direct primitive references (rare; usually only for inverted-theme
 escape hatches) bypass the cascade entirely.
+

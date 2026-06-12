@@ -1,14 +1,14 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../src/components/DocsTitle"
+import { StoryHeader } from "../../src/components/Story"
 import Typography from "../../src/nice/Typography"
-import { DocsRow } from "../../src/components/DocsRow"
+import { CodeRow } from "../../src/components/CodeRow"
 
 export const loremIpsum =
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore."
 
 <Meta title="Tokens/lineHeight" />
 
-<DocsTitle title="lineHeight" />
+<StoryHeader title="lineHeight" />
 
 <Typography>
   Vertical spacing tokens between lines of text — <code>condensed</code>,{" "}
@@ -17,13 +17,14 @@ export const loremIpsum =
 
 <div>
   {["condensed", "base", "expanded"].map(variant => (
-    <DocsRow
+    <CodeRow
       key={variant}
       previewCell={
         <Typography lineHeight={variant}>{loremIpsum}</Typography>
       }
       language="tsx"
-      code={`getToken("lineHeight", "${variant}")`}
+      code={[`var(--np--line-height${variant === "base" ? "" : `--${variant}`})`, `getToken("lineHeight", "${variant}")`]}
     />
   ))}
 </div>
+

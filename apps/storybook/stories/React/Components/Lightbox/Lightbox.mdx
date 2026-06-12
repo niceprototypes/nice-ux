@@ -1,16 +1,16 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Lightbox from "nice-react-lightbox"
 import Typography from "../../../../src/nice/Typography"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 import { resolveVendorImage } from "nice-react-image-vendor"
 import { DemoImage } from "./Lightbox.styles"
 
 export const DEMO_IMAGE = resolveVendorImage({ src: "10", width: "800px", height: "600px" })
 
-<Meta title="React/Components/Lightbox" />
+<Meta title="Components/Lightbox" />
 
-<DocsTitle title="Lightbox" />
+<StoryHeader title="Lightbox" />
 
 ```bash
 npm install nice-react-lightbox
@@ -41,7 +41,7 @@ import Lightbox from "nice-react-lightbox"
   Wraps a thumbnail that expands into a fullscreen overlay when clicked.
 </Typography>
 
-<DocsRow
+<CodeRow
   previewCell={
     <Lightbox
       imageUrl={DEMO_IMAGE}
@@ -56,3 +56,4 @@ import Lightbox from "nice-react-lightbox"
   language="tsx"
   code={`<Lightbox imageUrl="/image.png" alt="Description">\n  <img src="/image.png" alt="Thumbnail" />\n</Lightbox>`}
 />
+

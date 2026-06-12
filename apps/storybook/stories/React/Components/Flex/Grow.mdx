@@ -1,22 +1,22 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import { getToken } from "nice-react-styles"
 import StoryDescription from "../../../../src/components/StoryDescription"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 import DemoDots from "../../../../src/components/DemoDots"
 
-<Meta title="React/Components/Flex/grow" />
+<Meta title="Components/Flex/grow" />
 
 export const growCode = a =>
   `<Flex>\n  <Flex grow={${a}}>\n    {children}\n  </Flex>\n  <Flex grow={1}>\n    {children}\n  </Flex>\n</Flex>`
 
-<DocsTitle title="Flex — Grow" />
+<StoryHeader title="grow" />
 
 <StoryDescription property="flex-grow">
   Controls how much a flex item grows relative to its siblings.
 </StoryDescription>
 
-<DocsRow
+<CodeRow
   previewCell={
     <DemoDots
       bordered
@@ -40,7 +40,7 @@ export const growCode = a =>
   code={growCode(0)}
 />
 
-<DocsRow
+<CodeRow
   previewCell={
     <DemoDots
       bordered
@@ -63,7 +63,7 @@ export const growCode = a =>
   code={growCode(1)}
 />
 
-<DocsRow
+<CodeRow
   previewCell={
     <DemoDots
       bordered
@@ -85,3 +85,4 @@ export const growCode = a =>
   language="tsx"
   code={growCode(2)}
 />
+

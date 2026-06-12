@@ -1,12 +1,12 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Icon, { iconNames } from "nice-react-icon"
 import Typography from "../../../../src/nice/Typography"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 
-<Meta title="React/Components/Icon/name" />
+<Meta title="Components/Icon/name" />
 
-<DocsTitle title="Icon — Name" />
+<StoryHeader title="name" />
 
 <Typography color="light">
   Selects which built-in icon to render from the <code>nice-icons</code>{" "}
@@ -20,7 +20,7 @@ import { DocsRow } from "../../../../src/components/DocsRow"
 
 <div>
   {iconNames.map(name => (
-    <DocsRow
+    <CodeRow
       key={name}
       previewCell={
         <Icon
@@ -34,3 +34,4 @@ import { DocsRow } from "../../../../src/components/DocsRow"
     />
   ))}
 </div>
+

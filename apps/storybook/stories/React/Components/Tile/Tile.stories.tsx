@@ -55,7 +55,7 @@ interface PlaygroundArgs {
 }
 
 const meta = {
-  title: "React/Components/Tile",
+  title: "Components/Tile",
   component: Tile,
   parameters: {
     layout: "padded",

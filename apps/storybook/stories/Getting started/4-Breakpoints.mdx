@@ -1,0 +1,110 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import Install from "../../src/components/Install"
+import ResponsiveDemo, {
+  ResponsiveDemoItem,
+} from "../../src/components/ResponsiveDemo"
+import NewLines from "../../src/components/NewLines/index.ts"
+
+<Meta
+  title="Getting started/4 · Breakpoints"
+  name="Docs"
+/>
+
+<StoryHeader title="Breakpoints" />
+
+## Direct
+
+<Install package="styles" />
+
+### CSS only
+
+```css
+@import "nice-styles/tokens.css";
+
+.card--phone-only {
+  font-size: var(--np--font-size--base--phone);
+}
+.card--laptop-only {
+  font-size: var(--np--font-size--base--laptop);
+}
+.card--desktop-only {
+  font-size: var(--np--font-size--base--desktop);
+}
+```
+
+### JS + CSS
+
+[//]: # "For CSS-in-JS or runtime CSS strings, `getBreakpoint` returns the matching `@media (min-width: …)` literal sourced from the same threshold table the build uses, so JS and CSS stay in sync:"
+
+```js
+import { getBreakpoint } from "nice-styles"
+
+const css = `${getBreakpoint("desktop")} {
+  .heading {
+    font-size: var(--np--font-size--base--desktop);
+  }
+}`
+```
+
+---
+
+## Styled Components
+
+[//]: # "The same `getBreakpoint` literal drops straight into a styled-component, paired with `getToken` for the values — JS and CSS stay on one threshold table:"
+
+```bash
+npm install nice-react-styles styled-components
+```
+
+```tsx
+import styled from "styled-components"
+import { getBreakpoint, getToken } from "nice-react-styles"
+
+const Wrapper = styled.div`
+  padding: ${getToken("gap")};
+
+  ${getBreakpoint("laptop")} {
+    padding: ${getToken("gap", "large")};
+  }
+`
+```
+
+---
+
+## Defaults
+
+| Name | Query shape | Pixels |
+|:-----|:------|:-----------:|
+| `phone` | `@media (max-width: 640px)` | `<= 640` |
+| `tablet` | `@media (min-width: 641px)` | `641-1279` |
+| `laptop` | `@media (min-width: 1280px)` | `1280-1719` |
+| `desktop` | `@media (min-width: 1720px)` | `>= 1720` |
+
+---
+
+## Live demo
+
+<ResponsiveDemo>
+  <ResponsiveDemoItem
+    breakpoint="phone"
+    emoji="📱"
+    text="Phone"
+  />
+  <ResponsiveDemoItem
+    breakpoint="tablet"
+    emoji="💻"
+    text="Tablet"
+  />
+  <ResponsiveDemoItem
+    breakpoint="laptop"
+    emoji="🖥️"
+    text="Laptop"
+  />
+  <ResponsiveDemoItem
+    breakpoint="desktop"
+    emoji="🖼️"
+    text="Desktop"
+  />
+</ResponsiveDemo>
+

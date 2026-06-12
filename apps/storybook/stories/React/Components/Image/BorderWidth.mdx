@@ -1,13 +1,13 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Image from "nice-react-image"
 import StoryDescription from "../../../../src/components/StoryDescription"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 import { toSource } from "../../../../src/services"
 
-<Meta title="React/Components/Image/borderWidth" />
+<Meta title="Components/Image/borderWidth" />
 
-<DocsTitle title="Image — BorderWidth" />
+<StoryHeader title="borderWidth" />
 
 <StoryDescription property="border-width">
   Sets the border thickness using <code>borderWidth</code> tokens. Only
@@ -26,7 +26,7 @@ import { toSource } from "../../../../src/services"
       borderWidth,
     }
     return (
-      <DocsRow
+      <CodeRow
         key={borderWidth}
         previewCell={<Image {...props} />}
         language="tsx"
@@ -35,3 +35,4 @@ import { toSource } from "../../../../src/services"
     )
   })}
 </div>
+

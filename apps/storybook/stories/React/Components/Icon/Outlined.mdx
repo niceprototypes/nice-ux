@@ -1,18 +1,18 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Icon from "nice-react-icon"
 import Typography from "../../../../src/nice/Typography"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 
-<Meta title="React/Components/Icon/outlined" />
+<Meta title="Components/Icon/outlined" />
 
-<DocsTitle title="Icon — Outlined" />
+<StoryHeader title="outlined" />
 
 <Typography color="light">
   Toggles between the stroke-only (outlined) and filled variants of the icon.
 </Typography>
 
-<DocsRow
+<CodeRow
   previewCell={
     <Icon
       size="larger"
@@ -24,7 +24,7 @@ import { DocsRow } from "../../../../src/components/DocsRow"
   code={`<Icon size="larger" />`}
 />
 
-<DocsRow
+<CodeRow
   previewCell={
     <Icon
       size="larger"
@@ -35,3 +35,4 @@ import { DocsRow } from "../../../../src/components/DocsRow"
   language="tsx"
   code={`<Icon size="larger" outlined={true} />`}
 />
+

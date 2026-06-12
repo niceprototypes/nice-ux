@@ -1,12 +1,12 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../src/components/DocsTitle"
+import { StoryHeader } from "../../src/components/Story"
 
 <Meta
   title="Configuration/Toolkit"
   name="Docs"
 />
 
-<DocsTitle title="Toolkit" />
+<StoryHeader title="Toolkit" />
 
 ```bash
 npm install -g nice-toolkit
@@ -411,3 +411,4 @@ cd - && ntk ../react-button
 cd ../react-button && npm install
 cd - && ntk --dedupe
 ```
+

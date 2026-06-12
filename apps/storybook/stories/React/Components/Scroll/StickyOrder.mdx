@@ -1,20 +1,20 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Flex from "nice-react-flex"
 import { getToken } from "nice-react-styles"
 import Typography from "../../../../src/nice/Typography"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 
-<Meta title="React/Components/Scroll/Sticky order" />
+<Meta title="Components/Scroll/Sticky order" />
 
-<DocsTitle title="Scroll — Sticky order" />
+<StoryHeader title="Sticky order" />
 
 <Typography color="light">
   Multiple sticky elements stack based on their <code>order</code> prop. Lower
   numbers appear above higher numbers.
 </Typography>
 
-<DocsRow
+<CodeRow
   fullWidth
   previewCell={
     <Flex direction="column" gap="small">
@@ -51,3 +51,4 @@ import { DocsRow } from "../../../../src/components/DocsRow"
   language="tsx"
   code={`<Sticky order={0}><Header /></Sticky>\n<Sticky order={1}><Subheader /></Sticky>`}
 />
+

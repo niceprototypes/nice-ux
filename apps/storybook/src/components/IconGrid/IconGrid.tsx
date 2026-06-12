@@ -7,7 +7,7 @@ const IconGrid = ({ icons }: IconGridProps) => {
   return (
     <Flex
       direction="column"
-      gap="large"
+      gap="larger"
       wrap="wrap"
       justifyContent="center"
     >
@@ -18,15 +18,11 @@ const IconGrid = ({ icons }: IconGridProps) => {
           alignItems="center"
         >
           <Icon
+            strokeScaling={true}
             name={name}
             size="larger"
-            strokeWidth="large"
           />
-          <Typography
-            code
-          >
-            {name}
-          </Typography>
+          <Typography code weight="medium">{name}</Typography>
         </Flex>
       ))}
     </Flex>

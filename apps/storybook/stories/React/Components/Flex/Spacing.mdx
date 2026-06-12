@@ -1,13 +1,13 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import StoryDescription from "../../../../src/components/StoryDescription"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 import DemoDots from "../../../../src/components/DemoDots"
 import { twoDots } from "./Flex.services"
 
-<Meta title="React/Components/Flex/spacing" />
+<Meta title="Components/Flex/spacing" />
 
-<DocsTitle title="Flex — Spacing" />
+<StoryHeader title="spacing" />
 
 <StoryDescription property="padding">
   Applies inner spacing to the flex container using gap tokens.
@@ -15,7 +15,7 @@ import { twoDots } from "./Flex.services"
 
 <div>
   {["smaller", "small", "base", "large", "larger"].map(value => (
-    <DocsRow
+    <CodeRow
       key={value}
       previewCell={
         <DemoDots
@@ -29,3 +29,4 @@ import { twoDots } from "./Flex.services"
     />
   ))}
 </div>
+

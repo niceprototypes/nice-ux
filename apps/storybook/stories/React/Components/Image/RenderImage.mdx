@@ -1,8 +1,8 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Image from "nice-react-image"
 import Typography from "../../../../src/nice/Typography"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 import { toSource } from "../../../../src/services"
 
 export const imageProps = {
@@ -17,9 +17,9 @@ export const renderImageExpr = `(src, alt) => (
   </picture>
 )`
 
-<Meta title="React/Components/Image/renderImage" />
+<Meta title="Components/Image/renderImage" />
 
-<DocsTitle title="Image — RenderImage" />
+<StoryHeader title="renderImage" />
 
 <Typography color="light">
   Escape hatch: replace the default <code>&lt;img&gt;</code> /{" "}
@@ -31,7 +31,7 @@ export const renderImageExpr = `(src, alt) => (
   is provided.
 </Typography>
 
-<DocsRow
+<CodeRow
   previewCell={
     <Image
       {...imageProps}
@@ -56,3 +56,4 @@ export const renderImageExpr = `(src, alt) => (
       raw: { renderImage: renderImageExpr },
     })}
 />
+

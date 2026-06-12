@@ -1,13 +1,13 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Tile from "nice-react-tile"
 import StoryDescription from "../../../../src/components/StoryDescription"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 import { toSource } from "../../../../src/services"
 
-<Meta title="React/Components/Tile/backgroundColor" />
+<Meta title="Components/Tile/backgroundColor" />
 
-<DocsTitle title="Tile — BackgroundColor" />
+<StoryHeader title="backgroundColor" />
 
 <StoryDescription property="background-color">
   Sets the tile's background color from <code>BackgroundColorType</code>
@@ -19,7 +19,7 @@ import { toSource } from "../../../../src/services"
   {["base", "dark"].map(variant => {
     const props = { backgroundColor: variant, title: "Title", description: "Description" }
     return (
-      <DocsRow
+      <CodeRow
         fullWidth
         key={variant}
         previewCell={<Tile {...props} />}
@@ -29,3 +29,4 @@ import { toSource } from "../../../../src/services"
     )
   })}
 </div>
+

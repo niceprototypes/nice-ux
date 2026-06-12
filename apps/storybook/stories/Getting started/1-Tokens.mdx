@@ -1,0 +1,189 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import Install from "../../src/components/Install"
+import NewLines from "../../src/components/NewLines"
+import Button from "nice-react-button"
+import { linkTo } from "@storybook/addon-links"
+
+<Meta
+  title="Getting started/1 · Tokens"
+  name="Docs"
+/>
+
+<StoryHeader title="Tokens" />
+
+## CSS only
+
+If all you need is some style, and have **no time budget** to integrate with a new library, you can still **upgrade your UI today** by using our design tokens to fill the gaps in your project.
+
+<Button link onClick={linkTo("Tokens", "Docs")} icon="arrow-right">
+  Browse all tokens
+</Button>
+
+<NewLines />
+
+### Direct
+
+Import the stylesheet and reference the token s:
+
+<Install
+  package="styles"
+/>
+
+```css
+@import "nice-styles/tokens.css";
+
+.message {
+  color: var(--np--color);
+}
+.message.success {
+  color: var(--np--color--success);
+}
+.message.error {
+  color: var(--np--color--error);
+}
+```
+
+<NewLines />
+
+### Local aliases
+
+You may choose to alias the Nice UI tokens you need, and use your aliases everywhere else:
+
+<Install
+  package="styles"
+/>
+
+```css
+@import "nice-styles/tokens.css";
+
+:root {
+  --color: var(--np--color);
+  --color--success: var(--np--color--success);
+  --color--error: var(--np--color--error);
+}
+
+.message {
+  color: var(--color);
+}
+.message.success {
+  color: var(--color--success);
+}
+.message.error {
+  color: var(--color--error);
+}
+```
+
+---
+
+## JavaScript
+
+### JS only
+
+Use the `getToken` function and CSS variables provided by `nice-styles` for vanilla JS:
+
+<Install
+  package="styles"
+/>
+
+```js
+import { getToken } from "nice-styles"
+import "nice-styles/tokens.css"
+
+// Create HTML element
+const card = document.createElement("div")
+
+// Apply token values
+card.style.padding = getToken("gap", "large")
+card.style.backgroundColor = getToken("backgroundColor")
+card.style.borderRadius = getToken("borderRadius", "small")
+
+// Append element to DOM
+document.body.append(card)
+```
+
+<NewLines />
+
+### React only
+
+Create and style a React component with tokens:
+
+<Install
+  package="react-styles"
+/>
+
+```tsx
+import { getToken } from "nice-react-styles"
+
+export default function Card({ children }) {
+  return (
+    <div
+      style={{
+        padding: getToken("gap", "large"),
+        backgroundColor: getToken("backgroundColor"),
+        borderRadius: getToken("borderRadius", "small"),
+      }}
+    >
+      {children}
+    </div>
+  )
+}
+```
+
+Then, render the React component inside `StylesProvider`:
+
+```tsx
+import { StylesProvider } from "nice-react-styles"
+
+export default function App() {
+  return (
+    <StylesProvider>
+      <Card>…</Card>
+    </StylesProvider>
+  )
+}
+```
+
+<NewLines />
+
+### React + Styled Components
+
+Create and style a Styled Component with tokens:
+
+<Install
+  package="react-styles styled-components"
+/>
+
+```tsx
+// Card.tsx
+
+import { getToken } from "nice-react-styles"
+import styled from "styled-components"
+
+const Card = styled.div`
+  padding: ${getToken("gap", "large")};
+  background-color: ${getToken("backgroundColor")};
+  border-radius: ${getToken("borderRadius", "small")};
+`
+
+export default Card
+```
+
+Render the Styled Component inside `StylesProvider`:
+
+```tsx
+import { StylesProvider } from "nice-react-styles"
+import styled from "styled-components"
+import Card from "./Card"
+
+export default function App() {
+  return (
+    <StylesProvider>
+      <Page>
+        <Card>…</Card>
+      </Page>
+    </StylesProvider>
+  )
+}
+```
+

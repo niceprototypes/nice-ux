@@ -1,12 +1,12 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Button from "nice-react-button"
 import Typography from "../../../../src/nice/Typography"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 
-<Meta title="React/Components/Button" />
+<Meta title="Components/Button" />
 
-<DocsTitle title="Button" />
+<StoryHeader title="Button" />
 
 ```bash
 npm install nice-react-button
@@ -32,10 +32,11 @@ import Button from "nice-react-button"
   Default button rendering with an <code>onClick</code> handler and child label.
 </Typography>
 
-<DocsRow
+<CodeRow
   previewCell={
     <Button onClick={() => alert("Button clicked!")}>Click Me</Button>
   }
   language="tsx"
   code={`<Button onClick={handler}>\n  {children}\n</Button>`}
 />
+

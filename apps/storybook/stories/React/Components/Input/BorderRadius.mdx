@@ -1,8 +1,8 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Input from "nice-react-input"
 import StoryDescription from "../../../../src/components/StoryDescription"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 
 export const radii = ["small", "base", "large"]
 
@@ -13,9 +13,9 @@ export const radiusCode = (r) =>
     ? `<Input\n  placeholder="Base"\n  onChange={handler}\n/>`
     : `<Input\n  borderRadius="${r}"\n  placeholder="${radiusLabel(r)}"\n  onChange={handler}\n/>`
 
-<Meta title="React/Components/Input/borderRadius" />
+<Meta title="Components/Input/borderRadius" />
 
-<DocsTitle title="Input — BorderRadius" />
+<StoryHeader title="borderRadius" />
 
 <StoryDescription property="border-radius">
   Controls the corner rounding of the input.
@@ -23,7 +23,7 @@ export const radiusCode = (r) =>
 
 <div>
   {radii.map((radius) => (
-    <DocsRow
+    <CodeRow
       key={radius}
       previewCell={
         <Input
@@ -37,3 +37,4 @@ export const radiusCode = (r) =>
     />
   ))}
 </div>
+

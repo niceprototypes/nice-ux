@@ -1,9 +1,9 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../src/components/Story"
 
 <Meta title="React/Styles/getToken" />
 
-<DocsTitle title="getToken" />
+<StoryHeader title="getToken" />
 
 Resolves a design token. Three sibling functions return the three accessor forms:
 
@@ -32,3 +32,4 @@ getTokenValue("fontSize", "large") // → "24px"
 ```
 
 Reach for `getTokenValue` when CSS needs the literal underlying value, not the `var(...)` reference — `parseInt` on a duration, a font-family string passed to a chart library, etc. Reach for `getTokenKey` when emitting raw `@property` or `--custom: var(...)` declarations.
+

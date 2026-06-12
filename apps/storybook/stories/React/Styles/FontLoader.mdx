@@ -1,12 +1,12 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../src/components/Story"
 
 <Meta
   title="React/Styles/FontLoader"
   name="Docs"
 />
 
-<DocsTitle title="FontLoader" />
+<StoryHeader title="FontLoader" />
 
 ```bash
 npm install nice-react-styles
@@ -30,7 +30,7 @@ import { FontLoader } from "nice-react-styles"
 
 `FontLoader` renders `<link>` elements into the document head for async web font loading. It applies the standard preconnect + stylesheet pattern so layout doesn't shift while the font downloads.
 
-It is used internally by [StylesProvider](/docs/react-styles-stylesprovider--docs) when the `googleFonts` or `adobeFonts` prop is set — most apps will not import `FontLoader` directly.
+It is used internally by `StylesProvider` when the `googleFonts` or `adobeFonts` prop is set — most apps will not import `FontLoader` directly.
 
 ## Direct usage
 
@@ -71,3 +71,4 @@ A custom Google Fonts URL string:
 | Prop    | Type                | Description                                              |
 |---------|---------------------|----------------------------------------------------------|
 | `links` | `LinkAttributes[]`  | Array of `{ rel, href, crossOrigin?, media? }` entries — each rendered as a `<link>` element. |
+

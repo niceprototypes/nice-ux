@@ -1,20 +1,20 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Tile from "nice-react-tile"
 import Image from "nice-react-image"
 import Typography from "../../../../src/nice/Typography"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 
-<Meta title="React/Components/Tile/contentLeft" />
+<Meta title="Components/Tile/contentLeft" />
 
-<DocsTitle title="Tile — ContentLeft" />
+<StoryHeader title="contentLeft" />
 
 <Typography color="light">
   Renders custom content in the tile's left column — typically used for avatars
   or thumbnails.
 </Typography>
 
-<DocsRow
+<CodeRow
   fullWidth
   previewCell={
     <Tile
@@ -36,3 +36,4 @@ import { DocsRow } from "../../../../src/components/DocsRow"
   language="tsx"
   code={`<Tile\n  title="Title"\n  description="Description"\n  contentLeft={image}\n/>`}
 />
+

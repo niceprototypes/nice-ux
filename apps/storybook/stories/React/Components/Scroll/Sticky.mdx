@@ -1,11 +1,11 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Typography from "../../../../src/nice/Typography"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 
-<Meta title="React/Components/Scroll/Sticky" />
+<Meta title="Components/Scroll/Sticky" />
 
-<DocsTitle title="Scroll — Sticky" />
+<StoryHeader title="Sticky" />
 
 <Typography color="light">
   Sticky headers remain fixed at the top of the viewport when scrolled past
@@ -13,7 +13,7 @@ import { DocsRow } from "../../../../src/components/DocsRow"
   scroll up.
 </Typography>
 
-<DocsRow
+<CodeRow
   fullWidth
   previewCell={
     <Typography size="small" color="light">
@@ -24,3 +24,4 @@ import { DocsRow } from "../../../../src/components/DocsRow"
   language="tsx"
   code={`<ScrollProvider>\n  <StickyProvider>\n    <Sticky order={0}>\n      <Header />\n    </Sticky>\n  </StickyProvider>\n</ScrollProvider>`}
 />
+

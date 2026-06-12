@@ -1,9 +1,9 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import DocsTitle from "../../../../src/components/DocsTitle"
+import { StoryHeader } from "../../../../src/components/Story"
 import Button from "nice-react-button"
 import Flex from "nice-react-flex"
 import Typography from "../../../../src/nice/Typography"
-import { DocsRow } from "../../../../src/components/DocsRow"
+import { CodeRow } from "../../../../src/components/CodeRow"
 
 export const states = ["base", "disabled", "error", "success", "warning"]
 
@@ -14,9 +14,9 @@ export const stateCode = s =>
     ? `<Button onClick={handler}>\n  {children}\n</Button>`
     : `<Button\n  onClick={handler}\n  state="${s}"\n>\n  {children}\n</Button>`
 
-<Meta title="React/Components/Button/state" />
+<Meta title="Components/Button/state" />
 
-<DocsTitle title="Button — State" />
+<StoryHeader title="state" />
 
 <Typography color="light">
   Applies a semantic state style to the button (<code>disabled</code>,{" "}
@@ -25,7 +25,7 @@ export const stateCode = s =>
 
 <div>
   {states.map(state => (
-    <DocsRow
+    <CodeRow
       key={state}
       previewCell={
         <Flex gap="small">
@@ -49,3 +49,4 @@ export const stateCode = s =>
     />
   ))}
 </div>
+

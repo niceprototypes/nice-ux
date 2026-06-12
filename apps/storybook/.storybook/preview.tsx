@@ -5,8 +5,8 @@ import { addons } from "storybook/preview-api"
 import { DARK_MODE_EVENT_NAME } from "storybook-dark-mode"
 import { DocsContainer } from "@storybook/addon-docs/blocks"
 import { StylesProvider } from "nice-react-styles"
-import { ShikiPre } from "../src/components/ShikiCode"
-import { ThemeToggle } from "../src/components/ThemeToggle"
+import { ShikiPre } from "../src/components/CodeBlock"
+import { StoryFooter } from "../src/components/Story"
 import "nice-react-icon-vendor"
 import "nice-react-image-vendor"
 import "../src/nice/tokens"
@@ -25,23 +25,23 @@ const preview: Preview = {
     Story => (
       <StylesProvider>
         <Story />
-        <ThemeToggle />
+        <StoryFooter />
       </StylesProvider>
     ),
   ],
   parameters: {
     docs: {
       // Render fenced code in MDX prose through Shiki instead of Storybook's
-      // <Source>, so prose snippets match DocsRow's day/night theming.
+      // <Source>, so prose snippets match CodeRow's day/night theming.
       components: {
         pre: ShikiPre,
       },
-      // Wrap docs pages so ThemeToggle floats above MDX prose too — the
-      // global decorator only fires for embedded <Story> renderings.
+      // Wrap docs pages so the StoryFooter control bar floats above MDX prose
+      // too — the global decorator only fires for embedded <Story> renderings.
       container: ({ children, context }) => (
         <DocsContainer context={context}>
           {children}
-          <ThemeToggle />
+          <StoryFooter />
         </DocsContainer>
       ),
     },
@@ -61,22 +61,21 @@ const preview: Preview = {
           "Getting started",
           [
             "Welcome",
-            "1 · Get tokens",
-            "2 · Set tokens",
-            "3 · Themes",
-            "4 · Fonts",
-            "5 · Responsive",
-            "6 · Icons",
-            "7 · setTokens",
+            "1 · Tokens",
+            "2 · Fonts",
+            "3 · Icons",
+            "4 · Breakpoints",
+            "5 · Themes",
+            "6 · Advanced",
             "Final",
           ],
           "Tokens",
+          "Components",
+          "Bindings",
           "React",
           [
             "Styles",
-            ["StylesProvider", "FontLoader", "Theme", "getToken", "setTokens", "setBreakpoints"],
-            "Components",
-            "Bindings",
+            ["FontLoader", "Theme", "getToken", "setTokens", "setBreakpoints"],
           ],
           "Configuration",
           ["NPM", "Vite", "TypeScript", "Jest", "Rollup"],
