@@ -40,7 +40,7 @@ const BaseCodeRow = ({
   // Leading name cell — reserved for column alignment when the row belongs to
   // a named table; only the first row of that table carries the text.
   const nameCell = nameColumn ? (
-    <NameWrapper>{name ? <Typography weight="bold">{name}</Typography> : null}</NameWrapper>
+    <NameWrapper>{name ? <Typography code weight="medium" size="small">{name}</Typography> : null}</NameWrapper>
   ) : null
 
   // Columns laid out inside the row Flex, left-to-right. In fullWidth mode the

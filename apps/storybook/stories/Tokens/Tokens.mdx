@@ -1,7 +1,6 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
-import { TokensCodeTable } from "./TokensCodeTable"
-import { tokenTableList } from "./tokenTables"
+import { TokensDocs } from "./tables"
 
 <Meta
   title="Tokens"
@@ -10,15 +9,6 @@ import { tokenTableList } from "./tokenTables"
 
 <style>{`.sbdocs.sbdocs-content { max-width: 100%; }`}</style>
 
-<StoryHeader title="Tokens" />
+<StoryHeader title="Tokens" line={false} />
 
-{/* Header row + every token table, all driven by the shared tokenTables config
-    so the Docs page and the standalone Tokens/<group> stories never drift. */}
-<TokensCodeTable columnHeaders={[null, null, "CSS", "JS", "Value"]} />
-
-{tokenTableList.map(({ description, ...table }) => (
-  <TokensCodeTable
-    key={table.name}
-    {...table}
-  />
-))}
+<TokensDocs />

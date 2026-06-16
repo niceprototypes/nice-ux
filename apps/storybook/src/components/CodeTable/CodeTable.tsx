@@ -43,7 +43,7 @@ const BaseCodeTable = ({ name, columnWidths, columnHeaders, fontSize, fontWeight
           key={index}
           $width={columnWidths?.[index] ?? undefined}
         >
-          {label ? <Typography>{label}</Typography> : null}
+          {label ? <Typography code>{label}</Typography> : null}
         </Column>
       ))}
     </RowFlex>

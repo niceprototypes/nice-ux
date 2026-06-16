@@ -6,10 +6,10 @@
     transform: translateX(0);
   }
   33% {
-    transform: translateX(96px);
+    transform: translateX(240px);
   }
   67% {
-    transform: translateX(96px);
+    transform: translateX(240px);
   }
   84% {
     transform: translateX(0);
@@ -27,10 +27,10 @@
     transform: translateX(0);
   }
   33% {
-    transform: translateX(96px);
+    transform: translateX(240px);
   }
   67% {
-    transform: translateX(96px);
+    transform: translateX(240px);
   }
   84% {
     transform: translateX(0);

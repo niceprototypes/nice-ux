@@ -1,6 +1,71 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import { TokenStory } from "./tokenTables"
+import { TokenStory } from "./tables"
+import Flex from "nice-react-flex"
+import Typography from "../../src/nice/Typography"
+import { getHSLA, getToken } from "nice-react-styles"
+import { CodeBlock } from "../../src/components/CodeBlock"
 
 <Meta title="Tokens/color" />
 
 <TokenStory name="color" />
+
+{/* Live getHSLA demo — each swatch's background is the actual getHSLA() return,
+    so the page can never drift from the function's behavior. */}
+export const hslaExamples = [
+  {
+    label: "Original",
+    call: `getHSLA({ module: "color", token: "error" })`,
+    options: { module: "color", token: "error" },
+  },
+  {
+    label: "Lighter, softer fill",
+    call: `getHSLA({\n  module: "color",\n  token: "error",\n  values: [0, -40, 25, 0],\n})`,
+    options: { module: "color", token: "error", values: [0, -40, 25, 0] },
+  },
+  {
+    label: "Faded (alpha −0.7)",
+    call: `getHSLA({\n  module: "color",\n  token: "error",\n  values: [0, 0, 0, -0.7],\n})`,
+    options: { module: "color", token: "error", values: [0, 0, 0, -0.7] },
+  },
+  {
+    label: "Night, darkened",
+    call: `getHSLA({\n  module: "color",\n  token: "error",\n  theme: "night",\n  values: [0, 0, -45, 0],\n})`,
+    options: { module: "color", token: "error", theme: "night", values: [0, 0, -45, 0] },
+  },
+]
+
+## getHSLA
+
+<Typography>
+  <code>getHSLA</code> reads a token's <code>hsla</code> value for a given theme,
+  then adds per-channel <code>[hue, saturation, lightness, alpha]</code> deltas —
+  clamping each channel to its range (hue 0–360, saturation/lightness 0–100,
+  alpha 0–1) with a console warning on clamp. It's the same hue-preserving
+  technique used to derive the light (day) and dark (night) state background fills.
+</Typography>
+
+<Flex spacing="large" style={{ flexWrap: "wrap", alignItems: "stretch" }}>
+  {hslaExamples.map(({ label, call, options }) => {
+    const result = getHSLA(options)
+    return (
+      <Flex
+        key={label}
+        direction="column"
+        spacing="small"
+        style={{ width: "240px" }}
+      >
+        <Flex
+          style={{
+            height: getToken("cellHeight", "larger"),
+            backgroundColor: result,
+            border: `${getToken("borderWidth")} solid ${getToken("borderColor")}`,
+            borderRadius: getToken("borderRadius"),
+          }}
+        />
+        <Typography weight="medium">{label}</Typography>
+        <Typography code color="light">{result}</Typography>
+        <CodeBlock language="tsx" code={call} />
+      </Flex>
+    )
+  })}
+</Flex>

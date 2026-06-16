@@ -30,7 +30,7 @@ const Intro: React.FC<Props> = ({ storyId, iconName, title, children }) => {
       }}
     >
       <Flex direction="column" gap="base" spacing="large">
-        <Flex alignItems="center" gap="smaller">
+        <Flex alignItems="center" gap="small">
           <Icon
             name={iconName}
             size="larger"
@@ -43,7 +43,7 @@ const Intro: React.FC<Props> = ({ storyId, iconName, title, children }) => {
             as="h3"
             color="link"
             size="large"
-            weight="medium"
+            weight="semibold"
           >
             {title}
           </Typography>

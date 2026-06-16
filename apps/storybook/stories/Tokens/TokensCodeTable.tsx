@@ -16,7 +16,16 @@ type TokensCodeTableProps = {
   variants?: ReadonlyArray<TokenVariant>
   /** Returns the bespoke preview cell for a row, given its variant item. */
   preview?: (item: TokenVariant) => React.ReactNode
+  /**
+   * Show the leading name column. When false the `name` group still drives the
+   * CSS/JS/Value cells — only the redundant label column is dropped, and the
+   * column widths/headers shift left one slot to stay aligned. @default true
+   */
+  showName?: boolean
 } & Omit<React.ComponentProps<typeof CodeTable>, "name" | "children">
+
+// Default column widths for [name, preview, CSS]; JS/Value size to content.
+const COLUMN_WIDTHS = ["12em", "16em", "20em"]
 
 // camelCase token group → kebab CSS segment (fontSize → font-size).
 const camelToKebab = (group: string): string =>
@@ -45,26 +54,41 @@ const variantKey = (item: TokenVariant): string => (typeof item === "string" ? i
  * The page's column widths and value-cell font are preset here; pass the same
  * props to override per table.
  */
-export const TokensCodeTable = ({ name, variants, preview, ...rest }: TokensCodeTableProps) => (
-  <CodeTable
-    name={name}
-    fontWeight="medium"
-    fontSize="small"
-    columnWidths={["12em", "16em", "20em"]}
-    {...rest}
-  >
-    {variants?.map((item) => {
-      const variant = variantKey(item)
-      return (
-        <CodeRow
-          key={variant}
-          inline
-          language="tsx"
-          previewCell={preview?.(item)}
-          code={tokenCode(name ?? "", variant)}
-          value={getTokenValue(name ?? "", variant)}
-        />
-      )
-    })}
-  </CodeTable>
-)
+export const TokensCodeTable = ({
+  name,
+  variants,
+  preview,
+  showName = true,
+  columnWidths = COLUMN_WIDTHS,
+  columnHeaders,
+  ...rest
+}: TokensCodeTableProps) => {
+  // Hiding the name column shifts every column left, so drop the leading
+  // width/header slot (column 0) too to keep the rest aligned.
+  const widths = showName ? columnWidths : columnWidths.slice(1)
+  const headers = showName ? columnHeaders : columnHeaders?.slice(1)
+  return (
+    <CodeTable
+      name={showName ? name : undefined}
+      fontWeight="medium"
+      fontSize="small"
+      columnWidths={widths}
+      columnHeaders={headers}
+      {...rest}
+    >
+      {variants?.map((item) => {
+        const variant = variantKey(item)
+        return (
+          <CodeRow
+            key={variant}
+            inline
+            language="tsx"
+            previewCell={preview?.(item)}
+            code={tokenCode(name ?? "", variant)}
+            value={getTokenValue(name ?? "", variant)}
+          />
+        )
+      })}
+    </CodeTable>
+  )
+}
