@@ -1,33 +1,6 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import { StoryHeader } from "../../src/components/Story"
-import Flex from "nice-react-flex"
-import { getToken } from "nice-react-styles"
-import Typography from "../../src/nice/Typography"
-import { CodeRow } from "../../src/components/CodeRow"
+import { TokenStory } from "./tokenTables"
 
 <Meta title="Tokens/borderWidth" />
 
-<StoryHeader title="borderWidth" />
-
-<Typography>Stroke thickness tokens for borders and dividers.</Typography>
-
-<div>
-  {["small", "base", "large"].map(variant => (
-    <CodeRow
-      key={variant}
-      previewCell={
-        <Flex
-          style={{
-            width: getToken("cellHeight", "larger"),
-            height: getToken("cellHeight", "larger"),
-            border: `${getToken("borderWidth", variant)} solid ${getToken("color", "light")}`,
-            borderRadius: getToken("borderRadius", "small"),
-          }}
-        />
-      }
-      language="tsx"
-      code={[`var(--np--border-width${variant === "base" ? "" : `--${variant}`})`, `getToken("borderWidth", "${variant}")`]}
-    />
-  ))}
-</div>
-
+<TokenStory name="borderWidth" />

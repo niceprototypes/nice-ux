@@ -1,31 +1,6 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import { StoryHeader } from "../../src/components/Story"
-import Typography from "../../src/nice/Typography"
-import { CodeRow } from "../../src/components/CodeRow"
+import { TokenStory } from "./tokenTables"
 
 <Meta title="Tokens/fontWeight" />
 
-<StoryHeader title="fontWeight" />
-
-<Typography>
-  Font thickness tokens from <code>light</code> (300) to <code>black</code>{" "}
-  (900).
-</Typography>
-
-<div>
-  {["light", "base", "medium", "semibold", "bold", "extrabold", "black"].map(
-    variant => (
-      <CodeRow
-        key={variant}
-        previewCell={
-          <Typography weight={variant}>
-            {variant.charAt(0).toUpperCase() + variant.slice(1)}
-          </Typography>
-        }
-        language="tsx"
-        code={[`var(--np--font-weight${variant === "base" ? "" : `--${variant}`})`, `getToken("fontWeight", "${variant}")`]}
-      />
-    )
-  )}
-</div>
-
+<TokenStory name="fontWeight" />

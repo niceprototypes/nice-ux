@@ -1,35 +1,6 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import { StoryHeader } from "../../src/components/Story"
-import Flex from "nice-react-flex"
-import { getToken } from "nice-react-styles"
-import Typography from "../../src/nice/Typography"
-import { CodeRow } from "../../src/components/CodeRow"
+import { TokenStory } from "./tokenTables"
 
 <Meta title="Tokens/cellHeight" />
 
-<StoryHeader title="cellHeight" />
-
-<Typography>
-  Vertical rhythm tokens for controls, buttons, and row heights.
-</Typography>
-
-<div>
-  {["smaller", "small", "base", "large", "larger"].map(variant => (
-    <CodeRow
-      key={variant}
-      previewCell={
-        <Flex
-          style={{
-            width: getToken("cellHeight", "larger"),
-            height: getToken("cellHeight", variant),
-            border: `${getToken("borderWidth")} solid ${getToken("color", "light")}`,
-            borderRadius: getToken("cellHeight", "smaller"),
-          }}
-        />
-      }
-      language="tsx"
-      code={[`var(--np--cell-height${variant === "base" ? "" : `--${variant}`})`, `getToken("cellHeight", "${variant}")`]}
-    />
-  ))}
-</div>
-
+<TokenStory name="cellHeight" />

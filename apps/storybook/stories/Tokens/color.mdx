@@ -1,46 +1,6 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import { StoryHeader } from "../../src/components/Story"
-import Flex from "nice-react-flex"
-import { getToken } from "nice-react-styles"
-import Typography from "../../src/nice/Typography"
-import { CodeRow } from "../../src/components/CodeRow"
+import { TokenStory } from "./tokenTables"
 
 <Meta title="Tokens/color" />
 
-<StoryHeader title="color" />
-
-<Typography>
-  Text and icon color tokens, including semantic states (<code>success</code>,{" "}
-  <code>warning</code>, <code>error</code>).
-</Typography>
-
-<div>
-  {[
-    "lightest",
-    "lighter",
-    "light",
-    "base",
-    "disabled",
-    "link",
-    "success",
-    "warning",
-    "error",
-  ].map(variant => (
-    <CodeRow
-      key={variant}
-      previewCell={
-        <Flex
-          style={{
-            width: getToken("cellHeight", "smaller"),
-            height: getToken("cellHeight", "smaller"),
-            backgroundColor: getToken("color", variant),
-            borderRadius: "50%",
-          }}
-        />
-      }
-      language="tsx"
-      code={[`var(--np--color${variant === "base" ? "" : `--${variant}`})`, `getToken("color", "${variant}")`]}
-    />
-  ))}
-</div>
-
+<TokenStory name="color" />

@@ -53,6 +53,11 @@ interface CodeBlockProps {
    * via `navigator.clipboard.writeText`.
    */
   copyOnClick?: boolean
+  /**
+   * Strip the card chrome — margin, padding, border, border-radius, and
+   * box-shadow — so the code sits flush inline. @default false
+   */
+  inline?: boolean
 }
 
 /** Render a code string as Shiki dual-theme HTML. Use anywhere code is shown. */
@@ -61,6 +66,7 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
   language,
   showLabel = true,
   copyOnClick = true,
+  inline = false,
 }) => {
   const handleClick = copyOnClick
     ? () => {
@@ -72,6 +78,7 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
     <CodeBlockDiv
       onClick={handleClick}
       $clickable={copyOnClick}
+      $inline={inline}
     >
       <Flex gap="large">
         <Flex grow={1}>
@@ -85,7 +92,7 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
             }}
           />
         </Flex>
-        {showLabel && <CodeLabel language={language} />}
+        {showLabel && !inline && <CodeLabel language={language} />}
       </Flex>
     </CodeBlockDiv>
   )

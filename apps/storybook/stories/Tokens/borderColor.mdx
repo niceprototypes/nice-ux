@@ -1,34 +1,6 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import { StoryHeader } from "../../src/components/Story"
-import Flex from "nice-react-flex"
-import { getToken } from "nice-react-styles"
-import Typography from "../../src/nice/Typography"
-import { CodeRow } from "../../src/components/CodeRow"
+import { TokenStory } from "./tokenTables"
 
 <Meta title="Tokens/borderColor" />
 
-<StoryHeader title="borderColor" />
-
-<Typography>Stroke color tokens for outlines and dividers.</Typography>
-
-<div>
-  {["base", "dark", "darker"].map(variant => (
-    <CodeRow
-      key={variant}
-      previewCell={
-        <Flex
-          style={{
-            backgroundColor: getToken("backgroundColor"),
-            width: getToken("cellHeight", "larger"),
-            height: getToken("cellHeight", "larger"),
-            border: `${getToken("borderWidth")} solid ${getToken("borderColor", variant)}`,
-            borderRadius: getToken("borderRadius", "small"),
-          }}
-        />
-      }
-      language="tsx"
-      code={[`var(--np--border-color${variant === "base" ? "" : `--${variant}`})`, `getToken("borderColor", "${variant}")`]}
-    />
-  ))}
-</div>
-
+<TokenStory name="borderColor" />

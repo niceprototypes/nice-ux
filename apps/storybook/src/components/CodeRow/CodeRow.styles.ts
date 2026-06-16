@@ -2,21 +2,44 @@ import styled from "styled-components"
 import Flex from "nice-react-flex"
 import { getBreakpoint, getToken } from "nice-react-styles"
 
-export const PreviewWrapper = styled.div<{ $width?: string; $fullWidth?: boolean }>`
-  ${({ $fullWidth, $width }) =>
-    $fullWidth
-      ? `width: 100%;`
-      : $width
-        ? `width: ${$width};`
-        : `${getBreakpoint("tablet")} { width: 45%; }`}
+export const PreviewWrapper = styled.div<{ $fullWidth?: boolean }>`
+  ${({ $fullWidth }) => $fullWidth && `width: 100%;`}
 `
 
-export const RowFlex = styled(Flex).attrs({ spacing: "large none" })`
+// Leading "name" cell. Always rendered (possibly empty) when the row belongs
+// to a named CodeTable, so every row's columns line up.
+export const NameWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`
 
-  &:not(:last-child) {
-    border-bottom: 1px solid ${getToken("borderColor")};
+// Wraps each row column. Without a width it inherits RowFlex's equal-flex
+// sizing (`> * { flex: 1 1 0 }`); with one, it pins the column to that width —
+// but only at tablet+, where the row is horizontal. On phone the row stacks
+// (flex-direction: column), so a flex-basis would set height, not width; the
+// media-query gate keeps the override off the stacked layout. `&&` doubles the
+// class specificity so the pin beats RowFlex's `> *` rule regardless of source
+// order. The inner cell fills the column via `> * { width: 100% }`.
+export const Column = styled.div<{ $width?: string | null }>`
+  min-width: 0;
+
+  > * {
+    width: 100%;
   }
 
+  ${getBreakpoint("tablet")} {
+    ${({ $width }) =>
+      $width &&
+      `
+      && {
+        flex: 0 0 ${$width};
+        width: ${$width};
+      }
+    `}
+  }
+`
+
+export const RowFlex = styled(Flex).attrs({ spacing: "small none" })`
   .docblock-source {
     display: flex;
     flex-direction: column;
@@ -73,6 +96,12 @@ export const RowFlex = styled(Flex).attrs({ spacing: "large none" })`
   }
 
   ${getBreakpoint("tablet")} {
+    /* Equal-width cells: preview + each code block share the row evenly */
+    > * {
+      flex: 1 1 0;
+      min-width: 0;
+    }
+
     .docblock-source {
       flex-direction: row;
       border-top: 0;

@@ -8,15 +8,16 @@ import { getToken } from "nice-react-styles"
  * color inline; these rules pick which one applies on the [data-theme] pin and
  * set the code font from the token.
  */
-export const CodeBlockDiv = styled.div<{ $clickable?: boolean }>`
+export const CodeBlockDiv = styled.div<{ $clickable?: boolean; $inline?: boolean }>`
   position: relative;
   ${({ $clickable }) => $clickable && `cursor: pointer;`}
   flex-grow: 1;
-  margin: ${getToken("gap", "large")} 0 !important;
-  padding: ${getToken("gap")};
-  border: 1px solid ${getToken("borderColor")};
-  border-radius: ${getToken("borderRadius")};
-  box-shadow: ${getToken("boxShadow")};
+  /* inline: strip the card chrome — margin, padding, border, radius, shadow */
+  margin: ${({ $inline }) => ($inline ? "0" : `${getToken("gap", "large")} 0`)} !important;
+  padding: ${({ $inline }) => ($inline ? "0" : getToken("gap"))};
+  border: ${({ $inline }) => ($inline ? "none" : `1px solid ${getToken("borderColor")}`)};
+  border-radius: ${({ $inline }) => ($inline ? "0" : getToken("borderRadius"))};
+  box-shadow: ${({ $inline }) => ($inline ? "none" : getToken("boxShadow"))};
 
   .shiki {
     .line {

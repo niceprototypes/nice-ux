@@ -1,35 +1,6 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import { StoryHeader } from "../../src/components/Story"
-import Typography from "../../src/nice/Typography"
-import { CodeRow } from "../../src/components/CodeRow"
+import { TokenStory } from "./tokenTables"
 
 <Meta title="Tokens/fontFamily" />
 
-<StoryHeader title="fontFamily" />
-
-<Typography>
-  Typeface tokens for headings, body text, and monospace code.
-</Typography>
-
-<div>
-  {[
-    { name: "heading", weight: "bold", text: "Heading" },
-    { name: "base", text: "Body" },
-    { name: "code", code: true, text: "Code" },
-  ].map(({ name, weight, code, text }) => (
-    <CodeRow
-      key={name}
-      previewCell={
-        <Typography
-          weight={weight}
-          code={code}
-        >
-          {text}
-        </Typography>
-      }
-      language="tsx"
-      code={[`var(--np--font-family${name === "base" ? "" : `--${name}`})`, `getToken("fontFamily", "${name}")`]}
-    />
-  ))}
-</div>
-
+<TokenStory name="fontFamily" />

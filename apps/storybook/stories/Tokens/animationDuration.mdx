@@ -1,53 +1,6 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import { StoryHeader } from "../../src/components/Story"
-import Flex from "nice-react-flex"
-import { getToken } from "nice-react-styles"
-import Typography from "../../src/nice/Typography"
-import { CodeRow } from "../../src/components/CodeRow"
+import { TokenStory } from "./tokenTables"
 
 <Meta title="Tokens/animationDuration" />
 
-<StoryHeader title="animationDuration" />
-
-<Typography>Timing values for CSS transitions and animations.</Typography>
-
-<div>
-  {[
-    { name: "base", backgroundColor: getToken("color", "error") },
-    {
-      name: "slow",
-      backgroundColor: getToken("color", "warning"),
-    },
-  ].map(({ name, backgroundColor }) => {
-    const animationName = name === "base" ? "slide" : "slideSlow"
-    return (
-      <CodeRow
-        key={name}
-        previewCell={
-          <Flex
-            style={{
-              width: "120px",
-              backgroundColor: getToken("backgroundColor", "dark"),
-              borderRadius: `calc(${getToken("cellHeight", "smaller")} / 2)`,
-            }}
-          >
-            <Flex
-              style={{
-                backgroundColor,
-                width: getToken("cellHeight", "smaller"),
-                height: getToken("cellHeight", "smaller"),
-                borderRadius: `calc(${getToken("cellHeight", "smaller")} / 2)`,
-                animation: `${animationName} calc(${getToken("animationDuration", name)} * 6) ${getToken("animationEasing")} infinite`,
-                animationDelay:
-                  name === "base" ? getToken("animationDuration", name) : 0,
-              }}
-            />
-          </Flex>
-        }
-        language="tsx"
-        code={[`var(--np--animation-duration${name === "base" ? "" : `--${name}`})`, `getToken("animationDuration", "${name}")`]}
-      />
-    )
-  })}
-</div>
-
+<TokenStory name="animationDuration" />

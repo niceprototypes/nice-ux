@@ -16,9 +16,6 @@ const AppTokenMap = {
     larger: "24px",
     large: "20px",
   },
-  gap: {
-    smaller: "8px",
-  },
   icon: {
     size: {
       base: "14px",
