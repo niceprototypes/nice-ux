@@ -55,16 +55,16 @@ export const StyledButton = styled.button.withConfig({
     height: ${getButtonToken("size", $size)};
     width: 100%;
     padding: ${$square ? "0" : `0 ${getButtonToken("spacing", $size)}`};
-    font-weight: ${getToken("fontWeight", "base")};
+    font-weight: ${getToken("fontWeight", { variant: "base" })};
     background-color: ${getStatusToken($status, $state, "backgroundColor")};
     color: ${getStatusToken($status, $state, "color")};
     border-style: solid;
-    border-width: ${getToken("borderWidth", $borderWidth)};
+    border-width: ${getToken("borderWidth", { variant: $borderWidth })};
     border-color: ${getStatusToken($status, $state, "borderColor")};
     border-radius: ${getButtonToken("borderRadius", $borderRadius)};
     transition: all 0.15s ease-in-out;
     ${$backgroundImage ? `background-image: ${$backgroundImage};` : ""}
-    ${$borderColor ? `border-color: ${getToken("borderColor", $borderColor)};` : ""}
+    ${$borderColor ? `border-color: ${getToken("borderColor", { variant: $borderColor })};` : ""}
   `}
 
   ${({ $link, $square, $size }) =>
@@ -78,7 +78,7 @@ export const StyledButton = styled.button.withConfig({
   ${({ $link }) =>
     $link &&
     `
-    color: ${getToken("color", "link")};
-    gap: ${getToken("gap", "small")};
+    color: ${getToken("color", { variant: "link" })};
+    gap: ${getToken("gap", { variant: "small" })};
   `}
 `
