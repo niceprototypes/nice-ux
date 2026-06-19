@@ -11,8 +11,8 @@ const OuterFlex$1 = styled(Flex).withConfig({
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  background-color: ${getToken("backgroundColor", "base")};
-  color: ${getToken("color", "base")};
+  background-color: ${getToken("backgroundColor", { variant: "base" })};
+  color: ${getToken("color", { variant: "base" })};
 
   ${({ $minWidth }) => $minWidth && css `min-width: ${$minWidth};`}
   ${({ $minHeight }) => $minHeight && css `min-height: ${$minHeight};`}
@@ -21,7 +21,7 @@ const OuterFlex$1 = styled(Flex).withConfig({
   ${({ $backgroundColor }) => {
     if ($backgroundColor) {
         return css `
-        background-color: ${getToken("backgroundColor", $backgroundColor)};
+        background-color: ${getToken("backgroundColor", { variant: $backgroundColor })};
       `;
     }
 }}
@@ -29,7 +29,7 @@ const OuterFlex$1 = styled(Flex).withConfig({
   ${({ $color }) => {
     if ($color) {
         return css `
-        color: ${getToken("color", $color)};
+        color: ${getToken("color", { variant: $color })};
       `;
     }
 }}
@@ -38,7 +38,7 @@ const OuterFlex$1 = styled(Flex).withConfig({
     if ($backgroundImage) {
         return css `
         background-image: ${$backgroundImage};
-        background-size: ${$backgroundSize ? getToken("backgroundSize", $backgroundSize) : "cover"};
+        background-size: ${$backgroundSize ? getToken("backgroundSize", { variant: $backgroundSize }) : "cover"};
         background-position: ${$backgroundPosition || "center"};
         background-repeat: no-repeat;
 
@@ -101,9 +101,9 @@ const Tile = withBreakpoints(Tile$1);
 /** Returns the `var(--np--tile--…)` reference. */
 function getTileToken(nameOrPath, variantOrTheme, theme) {
     if (Array.isArray(nameOrPath)) {
-        return getComponentToken("tile", nameOrPath, variantOrTheme);
+        return getComponentToken("tile", { token: nameOrPath, mode: variantOrTheme });
     }
-    return getComponentToken("tile", nameOrPath, variantOrTheme, theme);
+    return getComponentToken("tile", { token: nameOrPath, variant: variantOrTheme, mode: theme });
 }
 
 export { TileTypes, Tile as default, getTileToken };
