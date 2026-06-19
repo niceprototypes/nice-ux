@@ -38,18 +38,18 @@ const isHeading = ($as: TypographyAsType): boolean =>
 const getFontFamily = ({ $as, $code }: { $as: TypographyAsType; $code?: boolean }) => {
   if ($code) {
     return css`
-      font-family: ${getToken("fontFamily", "code")};
+      font-family: ${getToken("fontFamily", { variant: "code" })};
     `
   }
 
   if (isHeading($as)) {
     return css`
-      font-family: ${getToken("fontFamily", "heading")};
+      font-family: ${getToken("fontFamily", { variant: "heading" })};
     `
   }
 
   return css`
-    font-family: ${getToken("fontFamily", "base")};
+    font-family: ${getToken("fontFamily", { variant: "base" })};
   `
 }
 
@@ -57,7 +57,7 @@ const getColor = ({ $color }: { $color?: ColorType }) => {
   if (!$color) return css`color: inherit;`
 
   return css`
-    color: ${getToken("color", $color)};
+    color: ${getToken("color", { variant: $color })};
   `
 }
 
@@ -84,21 +84,21 @@ const getFontSize = ({ $as, $size }: { $as: TypographyAsType; $size?: FontSizeTy
   }
 
   return css`
-    font-size: ${getToken("fontSize", effectiveFontSize)};
+    font-size: ${getToken("fontSize", { variant: effectiveFontSize })};
   `
 }
 
 const getFontWeight = ({ $as, $weight }: { $as: TypographyAsType; $weight?: FontWeightType }) => {
   if ($weight) {
     return css`
-      font-weight: ${getToken("fontWeight", $weight)};
+      font-weight: ${getToken("fontWeight", { variant: $weight })};
     `
   }
 
   // Default weights for headings
   if ($as === "h1" || $as === "h2" || $as === "h3") {
     return css`
-      font-weight: ${getToken("fontWeight", "bold")};
+      font-weight: ${getToken("fontWeight", { variant: "bold" })};
     `
   }
 
@@ -118,7 +118,7 @@ const getLineHeight = ({ $lineHeight, $as }: { $lineHeight?: LineHeightType; $as
   const effectiveLineHeight = $lineHeight || (isHeading($as) ? "condensed" : "base")
 
   return css`
-    line-height: ${getToken("lineHeight", effectiveLineHeight)};
+    line-height: ${getToken("lineHeight", { variant: effectiveLineHeight })};
   `
 }
 
