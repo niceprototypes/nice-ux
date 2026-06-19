@@ -4,6 +4,7 @@ import Flex from "nice-react-flex"
 import Typography from "../../src/nice/Typography"
 import { getHSLA, getToken } from "nice-react-styles"
 import { CodeBlock } from "../../src/components/CodeBlock"
+import { RowFlex, Column } from "../../src/components/CodeRow/CodeRow.styles"
 
 <Meta title="Tokens/color" />
 
@@ -19,7 +20,7 @@ export const hslaExamples = [
   },
   {
     label: "Lighter, softer fill",
-    call: `getHSLA({\n  module: "color",\n  token: "error",\n  values: [0, -40, 25, 0],\n})`,
+    call: `getHSLA({ module: "color", token: "error", values: [0, -40, 25, 0] })`,
     options: { module: "color", token: "error", values: [0, -40, 25, 0] },
   },
   {
@@ -44,28 +45,57 @@ export const hslaExamples = [
   technique used to derive the light (day) and dark (night) state background fills.
 </Typography>
 
-<Flex spacing="large" style={{ flexWrap: "wrap", alignItems: "stretch" }}>
+{/* Custom row layout using CodeRow's own RowFlex/Column primitives so the
+    example label can be its own second column — pinned to 20em, matching the
+    token table above (preview 16em, value 20em), so the two tables' columns
+    align. CodeRow can't do this: its only plain-text cells are the leading
+    name and trailing value, never column 2. */}
+export const hslaWidths = ["16em", "20em"]
+
+export const HslaRow = ({ children }) => (
+  <RowFlex
+    direction="column"
+    gap="large"
+    breakpoints={{ "tablet+": { direction: "row", alignItems: "center" } }}
+  >
+    {children}
+  </RowFlex>
+)
+
+<Flex direction="column" spacing="small none">
+  <HslaRow>
+    {[null, null, "getHSLA()", "Value"].map((header, index) => (
+      <Column key={index} $width={hslaWidths[index] ?? null}>
+        {header ? <Typography code>{header}</Typography> : null}
+      </Column>
+    ))}
+  </HslaRow>
   {hslaExamples.map(({ label, call, options }) => {
     const result = getHSLA(options)
     return (
-      <Flex
-        key={label}
-        direction="column"
-        spacing="small"
-        style={{ width: "240px" }}
-      >
-        <Flex
-          style={{
-            height: getToken("cellHeight", "larger"),
-            backgroundColor: result,
-            border: `${getToken("borderWidth")} solid ${getToken("borderColor")}`,
-            borderRadius: getToken("borderRadius"),
-          }}
-        />
-        <Typography weight="medium">{label}</Typography>
-        <Typography code color="light">{result}</Typography>
-        <CodeBlock language="tsx" code={call} />
-      </Flex>
+      <HslaRow key={label}>
+        <Column $width="16em">
+          <Flex>
+            <Flex
+              style={{
+                width: getToken("cellHeight", "smaller"),
+                height: getToken("cellHeight", "smaller"),
+                backgroundColor: result,
+                borderRadius: "50%",
+              }}
+            />
+          </Flex>
+        </Column>
+        <Column $width="20em">
+          <Typography size="small" weight="medium">{label}</Typography>
+        </Column>
+        <Column>
+          <CodeBlock code={call} language="tsx" inline />
+        </Column>
+        <Column>
+          <Typography code size="small" weight="medium">{result}</Typography>
+        </Column>
+      </HslaRow>
     )
   })}
 </Flex>

@@ -8,6 +8,7 @@
     "clean:cache": "node ../toolkit/nice-toolkit --clean-caches",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "prestorybook": "node -e \"const fs=require('fs');for(const d of ['node_modules/.cache','node_modules/.vite'])fs.rmSync(d,{recursive:true,force:true})\"",
     "storybook": "storybook dev -p 6006 --no-open",
     "build": "storybook build",
     "dev": "concurrently \"npm run storybook\" \"node ../toolkit/nice-toolkit --dev\"",

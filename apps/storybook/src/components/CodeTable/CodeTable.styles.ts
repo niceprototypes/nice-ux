@@ -4,5 +4,5 @@ import Flex from "nice-react-flex"
 
 // Outer wrapper for a vertical set of CodeRow instances.
 export const TableFlex = styled(Flex)`
-  border-top: 1px solid ${getToken("borderColor")};
+  border-bottom: 1px solid ${getToken("borderColor")};
 `

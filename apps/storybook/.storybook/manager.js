@@ -11,7 +11,7 @@ const theme = create({
   brandTarget: "_self",
 
   fontBase:
-    "Avenir Next, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
+    "'Avenir Next', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif",
   fontCode: '"Roboto Mono", "Courier New", serif',
 })
 

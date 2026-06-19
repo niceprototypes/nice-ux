@@ -14,6 +14,7 @@ export const animationEasing = {
   ],
   preview: ({ path }) => (
     <Flex
+      grow={1}
       spacing="small"
       style={{
         backgroundColor: getToken("backgroundColor", "dark"),
@@ -22,9 +23,8 @@ export const animationEasing = {
       }}
     >
       <svg
-        width="120"
-        height="48"
         viewBox="0 0 60 24"
+        style={{ aspectRatio: "120 / 48", width: "100%" }}
       >
         <path
           d={path}

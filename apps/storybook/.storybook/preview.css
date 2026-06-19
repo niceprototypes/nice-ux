@@ -1,3 +1,14 @@
 @import "preview-keyframes.css";
 @import "preview-docs.css";
 @import "preview-docblock.css";
+
+/* Day mode: turn off the font smoothing Storybook hardcodes via its docs/global
+   resets (e.g. `:where(div…) { -webkit-font-smoothing: antialiased }`) so
+   light-theme text renders at full weight — matching the manager. Keyed on the
+   [data-theme] pin preview.tsx mirrors from storybook-dark-mode; night keeps
+   `antialiased`. `*` + `!important` beats Storybook's per-element resets. */
+[data-theme="day"],
+[data-theme="day"] * {
+  -webkit-font-smoothing: auto !important;
+  -moz-osx-font-smoothing: auto !important;
+}

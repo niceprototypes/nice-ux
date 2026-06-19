@@ -8,9 +8,8 @@ import { setTokens } from "nice-react-styles"
  */
 const AppTokenMap = {
   fontFamily: {
-    base: "Avenir Next, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
-    heading:
-      "Avenir Next, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
+    base: "'Avenir Next', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif",
+    heading: "'Avenir Next', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif",
   },
   fontSize: {
     larger: "24px",

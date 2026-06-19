@@ -23,7 +23,7 @@ addons.getChannel().on(DARK_MODE_EVENT_NAME, (isDark: boolean) => {
 const preview: Preview = {
   decorators: [
     Story => (
-      <StylesProvider>
+      <StylesProvider links={[{ rel: "stylesheet", href: "/fonts/avenir.css" }]}>
         <Story />
         <StoryFooter />
       </StylesProvider>
