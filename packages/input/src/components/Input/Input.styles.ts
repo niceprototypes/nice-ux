@@ -43,11 +43,11 @@ export const StyledInput = styled.input.withConfig({
     width: 100%;
     height: ${getInputToken("size", $size)};
     padding: 0 ${getInputToken("spacing", $size)};
-    font-weight: ${getToken("fontWeight", "base")};
+    font-weight: ${getToken("fontWeight", { variant: "base" })};
     background-color: ${getStatusToken($status, $state, "backgroundColor")};
     color: ${getStatusToken($status, $state, "color")};
     border-style: solid;
-    border-width: ${getToken("borderWidth", $borderWidth)};
+    border-width: ${getToken("borderWidth", { variant: $borderWidth })};
     border-color: ${getStatusToken($status, $state, "borderColor")};
     border-radius: ${getInputToken("borderRadius", $borderRadius)};
     transition: border-color 0.15s ease-in-out, background-color 0.15s ease-in-out;
@@ -61,7 +61,7 @@ export const StyledInput = styled.input.withConfig({
     }
 
     &:focus {
-      border-color: ${getToken("color", "base")};
+      border-color: ${getToken("color", { variant: "base" })};
     }
 
     &:disabled {
