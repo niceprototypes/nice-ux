@@ -14,10 +14,10 @@ export const borderRadius = {
     <Flex
       grow={1}
       style={{
-        backgroundColor: getToken("backgroundColor", "dark"),
-        height: getToken("cellHeight", variant),
+        backgroundColor: getToken("backgroundColor", { variant: "dark" }),
+        height: getToken("cellHeight", { variant }),
         border:`1px solid ${getToken("borderColor")}`,
-        borderRadius: getToken("borderRadius", variant),
+        borderRadius: getToken("borderRadius", { variant }),
       }}
     />
   ),

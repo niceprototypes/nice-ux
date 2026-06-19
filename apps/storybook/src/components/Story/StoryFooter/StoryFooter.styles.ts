@@ -11,7 +11,7 @@ export const FooterFlex = styled(Flex).attrs({
   gap: "small",
 })`
   position: fixed;
-  bottom: ${getToken("gap", "large")};
-  right: ${getToken("gap", "large")};
+  bottom: ${getToken("gap", { variant: "large" })};
+  right: ${getToken("gap", { variant: "large" })};
   z-index: 9999;
 `

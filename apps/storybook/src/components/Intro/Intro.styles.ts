@@ -9,6 +9,6 @@ export const IntroDiv = styled.div`
   box-shadow: ${getToken("boxShadow")};
   
   &:hover {
-    border: 1px solid ${getToken("color", "link")};
+    border: 1px solid ${getToken("color", { variant: "link" })};
   }
 `

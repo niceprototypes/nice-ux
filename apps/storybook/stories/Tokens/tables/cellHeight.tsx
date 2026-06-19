@@ -11,10 +11,10 @@ export const cellHeight = {
       grow={1}
       direction="column"
       style={{
-        backgroundColor: getToken("backgroundColor", "dark"),
-        height: getToken("cellHeight", variant),
+        backgroundColor: getToken("backgroundColor", { variant: "dark" }),
+        height: getToken("cellHeight", { variant }),
         border:`1px solid ${getToken("borderColor")}`,
-        borderRadius: getToken("borderRadius", "small"),
+        borderRadius: getToken("borderRadius", { variant: "small" }),
       }}
     />
   ),

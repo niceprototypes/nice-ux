@@ -85,7 +85,7 @@ export const TokensCodeTable = ({
             language="tsx"
             previewCell={preview?.(item)}
             code={tokenCode(name ?? "", variant)}
-            value={getTokenValue(name ?? "", variant)}
+            value={getTokenValue(name ?? "", { variant })}
           />
         )
       })}

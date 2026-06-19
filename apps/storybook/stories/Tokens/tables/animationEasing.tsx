@@ -17,9 +17,9 @@ export const animationEasing = {
       grow={1}
       spacing="small"
       style={{
-        backgroundColor: getToken("backgroundColor", "dark"),
+        backgroundColor: getToken("backgroundColor", { variant: "dark" }),
         border:`1px solid ${getToken("borderColor")}`,
-        borderRadius: getToken("borderRadius", "small"),
+        borderRadius: getToken("borderRadius", { variant: "small" }),
       }}
     >
       <svg
@@ -29,7 +29,7 @@ export const animationEasing = {
         <path
           d={path}
           fill="none"
-          stroke={getToken("color", "lighter")}
+          stroke={getToken("color", { variant: "lighter" })}
           strokeLinecap="round"
         />
       </svg>

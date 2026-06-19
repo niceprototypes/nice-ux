@@ -15,12 +15,12 @@ import { RowFlex, Column } from "../../src/components/CodeRow/CodeRow.styles"
 export const hslaExamples = [
   {
     label: "Original",
-    call: `getHSLA({ module: "color", token: "error" })`,
+    call: `getHSLA({\n  module: "color",\n  token: "error",\n})`,
     options: { module: "color", token: "error" },
   },
   {
     label: "Lighter, softer fill",
-    call: `getHSLA({ module: "color", token: "error", values: [0, -40, 25, 0] })`,
+    call: `getHSLA({\n  module: "color",\n  token: "error",\n  values: [0, -40, 25, 0] })`,
     options: { module: "color", token: "error", values: [0, -40, 25, 0] },
   },
   {
@@ -36,14 +36,6 @@ export const hslaExamples = [
 ]
 
 ## getHSLA
-
-<Typography>
-  <code>getHSLA</code> reads a token's <code>hsla</code> value for a given theme,
-  then adds per-channel <code>[hue, saturation, lightness, alpha]</code> deltas —
-  clamping each channel to its range (hue 0–360, saturation/lightness 0–100,
-  alpha 0–1) with a console warning on clamp. It's the same hue-preserving
-  technique used to derive the light (day) and dark (night) state background fills.
-</Typography>
 
 {/* Custom row layout using CodeRow's own RowFlex/Column primitives so the
     example label can be its own second column — pinned to 20em, matching the
@@ -64,7 +56,7 @@ export const HslaRow = ({ children }) => (
 
 <Flex direction="column" spacing="small none">
   <HslaRow>
-    {[null, null, "getHSLA()", "Value"].map((header, index) => (
+    {[null, null, null, "Value"].map((header, index) => (
       <Column key={index} $width={hslaWidths[index] ?? null}>
         {header ? <Typography code>{header}</Typography> : null}
       </Column>
@@ -78,8 +70,8 @@ export const HslaRow = ({ children }) => (
           <Flex>
             <Flex
               style={{
-                width: getToken("cellHeight", "smaller"),
-                height: getToken("cellHeight", "smaller"),
+                width: getToken("cellHeight", { variant: "smaller" }),
+                height: getToken("cellHeight", { variant: "smaller" }),
                 backgroundColor: result,
                 borderRadius: "50%",
               }}

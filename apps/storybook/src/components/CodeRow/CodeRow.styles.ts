@@ -44,8 +44,8 @@ export const RowFlex = styled(Flex).attrs({ spacing: "small none" })`
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    gap: ${getToken("gap", "large")};
-    padding-top: ${getToken("gap", "large")};
+    gap: ${getToken("gap", { variant: "large" })};
+    padding-top: ${getToken("gap", { variant: "large" })};
     align-items: flex-start;
     justify-content: center;
     margin: 0;
@@ -78,19 +78,19 @@ export const RowFlex = styled(Flex).attrs({ spacing: "small none" })`
 
     button {
       margin: 0;
-      padding: ${getToken("gap", "small")} ${getToken("gap")};
-      border-radius: ${getToken("borderRadius", "small")} !important;
+      padding: ${getToken("gap", { variant: "small" })} ${getToken("gap")};
+      border-radius: ${getToken("borderRadius", { variant: "small" })} !important;
       border: 1px solid ${getToken("borderColor")};
 
       &:hover,
       &:focus {
-        border-color: ${getToken("borderColor", "darker")};
+        border-color: ${getToken("borderColor", { variant: "darker" })};
       }
 
       &:focus {
         box-shadow: none;
-        background-color: ${getToken("borderColor", "darker")} !important;
-        color: ${getToken("color", "base", "night")} !important;
+        background-color: ${getToken("borderColor", { variant: "darker" })} !important;
+        color: ${getToken("color", { variant: "base", theme: "night" })} !important;
       }
     }
   }

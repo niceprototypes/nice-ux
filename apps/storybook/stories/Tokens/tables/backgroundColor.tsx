@@ -10,8 +10,8 @@ export const backgroundColor = {
     <Flex
       grow={1}
       style={{
-        backgroundColor: getToken("backgroundColor", variant),
-        height: getToken("cellHeight", "large"),
+        backgroundColor: getToken("backgroundColor", { variant }),
+        height: getToken("cellHeight", { variant: "large" }),
         border: `1px solid ${variant === "base" ? getToken("borderColor") : 0}`,
         borderRadius: getToken("borderRadius"),
       }}

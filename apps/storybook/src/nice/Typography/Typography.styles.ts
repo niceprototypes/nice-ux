@@ -4,9 +4,9 @@ import { getToken } from "nice-react-styles"
 
 export const StyledTypography = styled(NiceTypography)<TypographyProps>`
   a {
-    color: ${getToken("color", "link")};
+    color: ${getToken("color", { variant: "link" })};
   }
   code {
-    font-family: ${getToken("fontFamily", "code")};
+    font-family: ${getToken("fontFamily", { variant: "code" })};
   }
 `

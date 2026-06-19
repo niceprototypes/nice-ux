@@ -10,34 +10,34 @@ import { threeDots } from "./Flex.services"
 
 export const baselineDots = [
   {
-    color: getToken("color", "error"),
-    height: getToken("cellHeight", "small"),
-    width: getToken("cellHeight", "smaller"),
+    color: getToken("color", { variant: "error" }),
+    height: getToken("cellHeight", { variant: "small" }),
+    width: getToken("cellHeight", { variant: "smaller" }),
   },
   {
-    color: getToken("color", "warning"),
-    height: getToken("cellHeight", "smaller"),
-    width: getToken("cellHeight", "smaller"),
+    color: getToken("color", { variant: "warning" }),
+    height: getToken("cellHeight", { variant: "smaller" }),
+    width: getToken("cellHeight", { variant: "smaller" }),
   },
   {
-    color: getToken("color", "link"),
+    color: getToken("color", { variant: "link" }),
     height: getToken("cellHeight"),
-    width: getToken("cellHeight", "smaller"),
+    width: getToken("cellHeight", { variant: "smaller" }),
   },
 ]
 
 export const stretchDots = [
   {
-    color: getToken("color", "error"),
-    width: getToken("cellHeight", "smaller"),
+    color: getToken("color", { variant: "error" }),
+    width: getToken("cellHeight", { variant: "smaller" }),
   },
   {
-    color: getToken("color", "warning"),
-    width: getToken("cellHeight", "smaller"),
+    color: getToken("color", { variant: "warning" }),
+    width: getToken("cellHeight", { variant: "smaller" }),
   },
   {
-    color: getToken("color", "link"),
-    width: getToken("cellHeight", "smaller"),
+    color: getToken("color", { variant: "link" }),
+    width: getToken("cellHeight", { variant: "smaller" }),
   },
 ]
 

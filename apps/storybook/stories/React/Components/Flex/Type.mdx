@@ -25,16 +25,16 @@ import { twoDots } from "./Flex.services"
           <Flex
             spacing="small"
             style={{
-              border: `${getToken("borderWidth")} solid ${value === "margin" ? getToken("borderColor") : getToken("borderColor", "dark")}`,
-              borderRadius: `calc(${getToken("cellHeight", "smaller")} / 2 + 2px)`,
+              border: `${getToken("borderWidth")} solid ${value === "margin" ? getToken("borderColor") : getToken("borderColor", { variant: "dark" })}`,
+              borderRadius: `calc(${getToken("cellHeight", { variant: "smaller" })} / 2 + 2px)`,
             }}
           >
             <Flex
               spacing="small"
               type={value}
               style={{
-                border: `${getToken("borderWidth")} solid ${value === "margin" ? getToken("borderColor", "dark") : "transparent"}`,
-                borderRadius: `calc(${getToken("cellHeight", "smaller")} / 2 + 2px)`,
+                border: `${getToken("borderWidth")} solid ${value === "margin" ? getToken("borderColor", { variant: "dark" }) : "transparent"}`,
+                borderRadius: `calc(${getToken("cellHeight", { variant: "smaller" })} / 2 + 2px)`,
               }}
             >
               <DemoDots dots={twoDots} />

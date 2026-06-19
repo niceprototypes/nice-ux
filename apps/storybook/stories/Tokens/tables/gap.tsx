@@ -11,14 +11,14 @@ export const gap = {
       gap={variant}
       dots={[
         {
-          color: getToken("color", "error"),
-          width: getToken("cellHeight", "smaller"),
-          height: getToken("cellHeight", "smaller"),
+          color: getToken("color", { variant: "error" }),
+          width: getToken("cellHeight", { variant: "smaller" }),
+          height: getToken("cellHeight", { variant: "smaller" }),
         },
         {
-          color: getToken("color", "link"),
-          width: getToken("cellHeight", "smaller"),
-          height: getToken("cellHeight", "smaller"),
+          color: getToken("color", { variant: "link" }),
+          width: getToken("cellHeight", { variant: "smaller" }),
+          height: getToken("cellHeight", { variant: "smaller" }),
         },
       ]}
     />

@@ -13,7 +13,7 @@ export const CodeBlockDiv = styled.div<{ $clickable?: boolean; $inline?: boolean
   ${({ $clickable }) => $clickable && `cursor: pointer;`}
   flex-grow: 1;
   /* inline: strip the card chrome — margin, padding, border, radius, shadow */
-  margin: ${({ $inline }) => ($inline ? "0" : `${getToken("gap", "large")} 0`)} !important;
+  margin: ${({ $inline }) => ($inline ? "0" : `${getToken("gap", { variant: "large" })} 0`)} !important;
   padding: ${({ $inline }) => ($inline ? "0" : getToken("gap"))};
   border: ${({ $inline }) => ($inline ? "none" : `1px solid ${getToken("borderColor")}`)};
   border-radius: ${({ $inline }) => ($inline ? "0" : getToken("borderRadius"))};
@@ -23,10 +23,10 @@ export const CodeBlockDiv = styled.div<{ $clickable?: boolean; $inline?: boolean
     .line {
       span {
         color: var(--shiki-light);
-        font-family: ${getToken("fontFamily", "code")};
-        font-size: ${getToken("fontSize", "small")};
-        font-weight: ${getToken("fontWeight", "medium")};
-        line-height: ${getToken("lineHeight", "expanded")};
+        font-family: ${getToken("fontFamily", { variant: "code" })};
+        font-size: ${getToken("fontSize", { variant: "small" })};
+        font-weight: ${getToken("fontWeight", { variant: "medium" })};
+        line-height: ${getToken("lineHeight", { variant: "expanded" })};
         letter-spacing: -0.01em;
       }
     }

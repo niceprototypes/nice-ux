@@ -8,19 +8,19 @@ const activeQuery = (breakpoint: BreakpointName) =>
   getBreakpoint(breakpoint, breakpoint === "tablet" || breakpoint === "laptop")
 
 export const ItemDiv = styled.div<{ $breakpoint: BreakpointName }>`
-  padding: ${getToken("gap", "small")} ${getToken("gap", "base")};
-  border: ${getToken("borderWidth")} solid ${getToken("borderColor", "base")};
+  padding: ${getToken("gap", { variant: "small" })} ${getToken("gap", { variant: "base" })};
+  border: ${getToken("borderWidth")} solid ${getToken("borderColor", { variant: "base" })};
   border-radius: ${getToken("borderRadius")};
-  color: ${getToken("color", "lighter")};
-  font-weight: ${getToken("fontWeight", "base")};
+  color: ${getToken("color", { variant: "lighter" })};
+  font-weight: ${getToken("fontWeight", { variant: "base" })};
   white-space: nowrap;
 
   /* Active band — darker border, bold, full-strength text when this item's breakpoint is the current viewport */
   ${({ $breakpoint }) => `
     ${activeQuery($breakpoint)} {
-      border-color: ${getToken("borderColor", "dark")};
-      color: ${getToken("color", "base")};
-      font-weight: ${getToken("fontWeight", "bold")};
+      border-color: ${getToken("borderColor", { variant: "dark" })};
+      color: ${getToken("color", { variant: "base" })};
+      font-weight: ${getToken("fontWeight", { variant: "bold" })};
     }
   `}
 `

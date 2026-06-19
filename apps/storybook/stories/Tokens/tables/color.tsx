@@ -14,9 +14,9 @@ export const color = {
   preview: (variant) => (
     <Flex
       style={{
-        width: getToken("cellHeight", "smaller"),
-        height: getToken("cellHeight", "smaller"),
-        backgroundColor: getToken("color", variant),
+        width: getToken("cellHeight", { variant: "smaller" }),
+        height: getToken("cellHeight", { variant: "smaller" }),
+        backgroundColor: getToken("color", { variant }),
         borderRadius: "50%",
       }}
     />

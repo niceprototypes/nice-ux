@@ -11,18 +11,18 @@ export const boxShadow = {
       grow={1}
       spacing="large"
       style={{
-        backgroundColor: getToken("backgroundColor", "dark"),
+        backgroundColor: getToken("backgroundColor", { variant: "dark" }),
         border:`1px solid ${getToken("borderColor")}`,
-        borderRadius: getToken("borderRadius", "small"),
+        borderRadius: getToken("borderRadius", { variant: "small" }),
       }}
     >
       <Flex
         grow={1}
         style={{
           backgroundColor: getToken("backgroundColor"),
-          height: getToken("cellHeight", "large"),
-          borderRadius: getToken("borderRadius", "small"),
-          boxShadow: getToken("boxShadow", variant),
+          height: getToken("cellHeight", { variant: "large" }),
+          borderRadius: getToken("borderRadius", { variant: "small" }),
+          boxShadow: getToken("boxShadow", { variant }),
         }}
       />
     </Flex>

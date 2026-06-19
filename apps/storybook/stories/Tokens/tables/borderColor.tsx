@@ -12,7 +12,7 @@ export const borderColor = {
       style={{
         backgroundColor: getToken("backgroundColor"),
         height: 0,
-        borderBottom:`1px solid ${getToken("borderColor", variant)}`,
+        borderBottom:`1px solid ${getToken("borderColor", { variant })}`,
         borderRadius: getToken("borderRadius"),
       }}
     />

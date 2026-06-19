@@ -12,19 +12,19 @@ export const animationDuration = {
       <Flex
         grow={1}
         style={{
-          backgroundColor: getToken("backgroundColor", "dark"),
+          backgroundColor: getToken("backgroundColor", { variant: "dark" }),
           border:`1px solid ${getToken("borderColor")}`,
-          borderRadius: `calc(${getToken("cellHeight", "smaller")} / 2)`,
+          borderRadius: `calc(${getToken("cellHeight", { variant: "smaller" })} / 2)`,
         }}
       >
         <Flex
           style={{
-            backgroundColor: getToken("color", "lighter"),
+            backgroundColor: getToken("color", { variant: "lighter" }),
             width: "16px",
             height: "16px",
-            borderRadius: `calc(${getToken("cellHeight", "smaller")} / 2)`,
-            animation: `${animationName} calc(${getToken("animationDuration", variant)} * 6) ${getToken("animationEasing")} infinite`,
-            animationDelay: variant === "base" ? getToken("animationDuration", variant) : 0,
+            borderRadius: `calc(${getToken("cellHeight", { variant: "smaller" })} / 2)`,
+            animation: `${animationName} calc(${getToken("animationDuration", { variant })} * 6) ${getToken("animationEasing")} infinite`,
+            animationDelay: variant === "base" ? getToken("animationDuration", { variant }) : 0,
           }}
         />
       </Flex>

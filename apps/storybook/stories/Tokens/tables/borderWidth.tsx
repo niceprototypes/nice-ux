@@ -11,7 +11,7 @@ export const borderWidth = {
       grow={1}
       style={{
         height: 0,
-        borderBottom: `${getToken("borderWidth", variant)} solid ${getToken("color", "light")}`,
+        borderBottom: `${getToken("borderWidth", { variant })} solid ${getToken("color", { variant: "light" })}`,
         borderRadius: getToken("borderRadius"),
       }}
     />

@@ -162,9 +162,9 @@ import { getToken } from "nice-react-styles"
 import styled from "styled-components"
 
 const Card = styled.div`
-  padding: ${getToken("gap", "large")};
+  padding: ${getToken("gap", { variant: "large" })};
   background-color: ${getToken("backgroundColor")};
-  border-radius: ${getToken("borderRadius", "small")};
+  border-radius: ${getToken("borderRadius", { variant: "small" })};
 `
 
 export default Card

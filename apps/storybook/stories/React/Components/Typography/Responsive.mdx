@@ -20,8 +20,8 @@ export const largeLabel = `≥${getBreakpointValue("laptop")}px`
 
 <div>
   {["smaller", "small", "base", "large", "larger"].map(size => {
-    const smallValue = getTokenValue("fontSize", size)
-    const largeValue = getBreakpointTokenValue("fontSize", size, "large")
+    const smallValue = getTokenValue("fontSize", { variant: size })
+    const largeValue = getBreakpointTokenValue("fontSize", { variant: size, breakpoint: "large" })
     const children = `${size} — ${smallLabel}: ${smallValue}, ${largeLabel}: ${largeValue}`
     return (
       <CodeRow

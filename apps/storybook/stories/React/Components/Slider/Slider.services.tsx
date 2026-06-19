@@ -18,7 +18,7 @@ export const SlideContent = ({
     style={{
       height: "100%",
       backgroundColor: color,
-      padding: getToken("gap", "large"),
+      padding: getToken("gap", { variant: "large" }),
     }}
   >
     <Typography
@@ -39,9 +39,9 @@ export const InteractiveSlider = () => {
   const [isAnimating, setIsAnimating] = useState(false)
 
   const slides = [
-    { title: "Slide 1", color: getToken("color", "error") },
-    { title: "Slide 2", color: getToken("color", "warning") },
-    { title: "Slide 3", color: getToken("color", "success") },
+    { title: "Slide 1", color: getToken("color", { variant: "error" }) },
+    { title: "Slide 2", color: getToken("color", { variant: "warning" }) },
+    { title: "Slide 3", color: getToken("color", { variant: "success" }) },
   ]
 
   const goToSlide = (index: number) => {
