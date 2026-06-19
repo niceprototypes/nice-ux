@@ -1,1 +1,2 @@
 [2026-06-10 14:58] major: Replace arrow/carat icon names with directional variants — arrow-top/right/bottom/left, carat-top/right/bottom/left. IconNameType no longer includes "arrow"/"carat". Also fixes buildIconMap to resolve hyphenated names (kebab → PascalCase)
+[2026-06-19 19:44] patch: Migrate getToken-family calls to the options-object signature (nice-styles major). Internal refactor — rendered output unchanged; rebuild required for dependents.
