@@ -22,7 +22,7 @@ export const SliderItemStyled = styled.div<{
   overflow-y: auto;
   ${styleHideScrollbar}
   transform: translateY(${(props) => (props.$index - props.$currentIndex) * 100}%);
-  transition: transform ${getToken("animationDuration", "base")} ${getToken("animationEasing", "base")};
+  transition: transform ${getToken("animationDuration", { variant: "base" })} ${getToken("animationEasing", { variant: "base" })};
 `
 
 export const SliderOuterStyled = styled.div`

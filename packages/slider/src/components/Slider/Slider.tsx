@@ -4,7 +4,7 @@ import { SliderItemStyled, SliderOuterStyled } from "./Slider.styles"
 import type { SliderProps } from "./Slider.types"
 
 // Single source of truth — CSS transition reads the same token via getToken(...)
-const animationDurationMs = parseInt(getTokenValue("animationDuration", "base"), 10)
+const animationDurationMs = parseInt(getTokenValue("animationDuration", { variant: "base" }), 10)
 
 const Slider: React.FC<SliderProps> = ({
   children,
