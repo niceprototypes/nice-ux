@@ -160,13 +160,13 @@ setTokens({
 
 #### Primitives
 
-Day and night primitives are stable references that are never reassigned by media queries. Use `getToken` with a mode argument to access them directly.
+Day and night primitives are stable references that are never reassigned by media queries. Use `getToken` with a `theme` option to access them directly.
 
 ```typescript
-getToken("headerColor", "base", "day")
+getToken("headerColor", { variant: "base", theme: "day" })
 // → var(--np--header-color--base--day)
 
-getToken("headerColor", "base", "night")
+getToken("headerColor", { variant: "base", theme: "night" })
 // → var(--np--header-color--base--night)
 ```
 
