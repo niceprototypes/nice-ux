@@ -38,7 +38,7 @@ const camelToKebab = (group: string): string =>
  */
 const tokenCode = (group: string, variant: string): [string, string] => {
   const suffix = variant === "base" ? "" : `--${variant}`
-  const arg = variant === "base" ? "" : `, "${variant}"`
+  const arg = variant === "base" ? "" : `, { variant: "${variant}" }`
   return [`var(--np--${camelToKebab(group)}${suffix})`, `getToken("${group}"${arg})`]
 }
 

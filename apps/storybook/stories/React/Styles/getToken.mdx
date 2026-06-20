@@ -5,11 +5,15 @@ import { StoryHeader } from "../../../src/components/Story"
 
 <StoryHeader title="getToken" />
 
-Resolves a design token. Three sibling functions return the three accessor forms:
+Resolves a design token. The token name is the only positional argument;
+`variant` / `theme` / `inverse` go in an options object (all optional;
+`variant` defaults `"base"`). Three sibling functions return the three accessor forms:
 
-- `getToken(name, variant?, mode?)` — the `var(...)` reference (the common case).
-- `getTokenKey(name, variant?, mode?)` — the bare CSS variable name (no `var(...)` wrapper).
-- `getTokenValue(name, variant?, mode?)` — the raw underlying value (e.g. `"16px"`, an hsla color, a font-family string).
+- `getToken(name, options?)` — the `var(...)` reference (the common case).
+- `getTokenKey(name, options?)` — the bare CSS variable name (no `var(...)` wrapper).
+- `getTokenValue(name, options?)` — the raw underlying value (e.g. `"16px"`, an hsla color, a font-family string).
+
+`options`: `{ variant?: string; theme?: string; inverse?: boolean }`. `inverse: true` resolves the matching `…Inverse` module (`color` / `backgroundColor` only).
 
 See [Browse all tokens](/docs/tokens--docs) for a visual reference of every token group.
 
@@ -26,9 +30,11 @@ import { getToken, getTokenKey, getTokenValue } from "nice-react-styles"
 ### Usage
 
 ```js
-getTokenKey("fontSize")            // → "--np--font-size--base"
-getToken("fontSize", "large")  // → "var(--np--font-size--large)"
-getTokenValue("fontSize", "large") // → "24px"
+getTokenKey("fontSize")                          // → "--np--font-size--base"
+getToken("fontSize", { variant: "large" })       // → "var(--np--font-size--large)"
+getTokenValue("fontSize", { variant: "large" })  // → "24px"
+getToken("color", { variant: "base", theme: "night" })  // → "var(--np--color--base--night)"
+getToken("backgroundColor", { inverse: true })          // → "var(--np--background-color-inverse--base)"
 ```
 
 Reach for `getTokenValue` when CSS needs the literal underlying value, not the `var(...)` reference — `parseInt` on a duration, a font-family string passed to a chart library, etc. Reach for `getTokenKey` when emitting raw `@property` or `--custom: var(...)` declarations.

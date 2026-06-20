@@ -95,9 +95,9 @@ import "nice-styles/tokens.css"
 const card = document.createElement("div")
 
 // Apply token values
-card.style.padding = getToken("gap", "large")
+card.style.padding = getToken("gap", { variant: "large" })
 card.style.backgroundColor = getToken("backgroundColor")
-card.style.borderRadius = getToken("borderRadius", "small")
+card.style.borderRadius = getToken("borderRadius", { variant: "small" })
 
 // Append element to DOM
 document.body.append(card)
@@ -120,9 +120,9 @@ export default function Card({ children }) {
   return (
     <div
       style={{
-        padding: getToken("gap", "large"),
+        padding: getToken("gap", { variant: "large" }),
         backgroundColor: getToken("backgroundColor"),
-        borderRadius: getToken("borderRadius", "small"),
+        borderRadius: getToken("borderRadius", { variant: "small" }),
       }}
     >
       {children}

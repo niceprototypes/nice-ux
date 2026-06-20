@@ -65,9 +65,9 @@ New tokens can be accessed by the getter function:
 
 import { getToken } from "nice-react-styles"
 
-getToken("fontSize", "larger") // var(--np--font-size--larger)    → 48px
-getToken("fontSize", "jumbo") // var(--np--font-size--jumbo)      → 96px
-getToken("brandColor", "primary") // var(--np--brand-color--primary)  → #dc0000
+getToken("fontSize", { variant: "larger" }) // var(--np--font-size--larger)   → 48px
+getToken("fontSize", { variant: "jumbo" })  // var(--np--font-size--jumbo)    → 96px
+getToken("brandColor", { variant: "primary" }) // var(--np--brand-color--primary) → #dc0000
 ```
 
 ---
