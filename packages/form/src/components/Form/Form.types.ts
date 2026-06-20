@@ -1,0 +1,170 @@
+import * as React from "react"
+import type { GapType, ThemeType } from "nice-react-styles"
+
+/**
+ * FormGapType
+ *
+ * Re-export of GapType from nice-styles.
+ * Vertical spacing between the form's direct children, using design tokens.
+ *
+ * Values:
+ * - "none": No spacing
+ * - "smaller" | "small" | "base" | "large" | "larger": Token-scaled spacing
+ */
+export type FormGapType = GapType
+
+/**
+ * FormOnSubmitType
+ *
+ * Submit handler. Receives the underlying form event. By default the
+ * component calls `event.preventDefault()` before invoking this — see
+ * FormPreventDefaultType.
+ */
+export type FormOnSubmitType = (event: React.FormEvent<HTMLFormElement>) => void
+
+/**
+ * FormPreventDefaultType
+ *
+ * Whether to call `event.preventDefault()` on submit before invoking
+ * onSubmit. Defaults to true (single-page-app behavior — suppress native
+ * navigation). Set false to allow a native form submission.
+ */
+export type FormPreventDefaultType = boolean
+
+/**
+ * FormNoValidateType
+ *
+ * Whether to disable native browser validation on submit.
+ */
+export type FormNoValidateType = boolean
+
+/**
+ * FormAutoCompleteType
+ *
+ * Browser autocomplete hint for the whole form.
+ *
+ * Values:
+ * - "on": Allow the browser to autocomplete fields
+ * - "off": Disable autocomplete for fields
+ */
+export type FormAutoCompleteType = "on" | "off"
+
+/**
+ * FormNameType
+ *
+ * Form name attribute.
+ */
+export type FormNameType = string
+
+/**
+ * FormIdType
+ *
+ * DOM id attribute.
+ */
+export type FormIdType = string
+
+/**
+ * FormClassNameType
+ *
+ * CSS class name applied to the root form element.
+ */
+export type FormClassNameType = string
+
+/**
+ * FormAriaLabelType
+ *
+ * Accessible label for the form when no visible label is associated.
+ */
+export type FormAriaLabelType = string
+
+/**
+ * FormAriaDescribedByType
+ *
+ * Id reference to descriptive text for the form.
+ */
+export type FormAriaDescribedByType = string
+
+/**
+ * FormTestIdType
+ *
+ * Test selector.
+ */
+export type FormTestIdType = string
+
+/**
+ * FormProps
+ *
+ * Complete prop definition for the Form component. A stateless layout
+ * container: it renders a semantic `<form>`, stacks its children vertically
+ * with token-based spacing, and forwards the submit event. It owns no field
+ * state — the consumer manages values.
+ */
+export interface FormProps {
+  /** Form fields and other content, stacked vertically */
+  children: React.ReactNode
+
+  /**
+   * Vertical spacing between direct children
+   * @default "base"
+   */
+  gap?: FormGapType
+
+  /** Submit handler — receives the form event (default-prevented unless preventDefault is false) */
+  onSubmit?: FormOnSubmitType
+
+  /**
+   * Call event.preventDefault() on submit before invoking onSubmit
+   * @default true
+   */
+  preventDefault?: FormPreventDefaultType
+
+  /** Disable native browser validation */
+  noValidate?: FormNoValidateType
+
+  /** Browser autocomplete hint */
+  autoComplete?: FormAutoCompleteType
+
+  /** Form name attribute */
+  name?: FormNameType
+
+  /** DOM id attribute */
+  id?: FormIdType
+
+  /** Pin token resolution to a specific theme instead of responding to media query */
+  theme?: ThemeType
+
+  /** CSS class name applied to the root form element */
+  className?: FormClassNameType
+
+  /** Inline styles applied to the root form element */
+  style?: React.CSSProperties
+
+  /** Accessible label when no visible label is associated */
+  "aria-label"?: FormAriaLabelType
+
+  /** Id reference to descriptive text */
+  "aria-describedby"?: FormAriaDescribedByType
+
+  /** Test selector */
+  "data-testid"?: FormTestIdType
+}
+
+const FormTypes = {} as const
+
+namespace FormTypes {
+  export type Gap = FormGapType
+  export type OnSubmit = FormOnSubmitType
+  export type PreventDefault = FormPreventDefaultType
+  export type NoValidate = FormNoValidateType
+  export type AutoComplete = FormAutoCompleteType
+  export type Name = FormNameType
+  export type Id = FormIdType
+  export type ClassName = FormClassNameType
+  export type AriaLabel = FormAriaLabelType
+  export type AriaDescribedBy = FormAriaDescribedByType
+  export type TestId = FormTestIdType
+  export type Theme = ThemeType
+  export type Props = FormProps
+}
+
+export default FormTypes
