@@ -1,0 +1,1 @@
+export { resolveVendorImage } from "./resolveVendorImage"

@@ -1,0 +1,1 @@
+[2026-06-02 14:27] patch: Rebuild for upstream nice-styles breakpoint change (via nice-react-image); no API change in this package
