@@ -23,8 +23,8 @@ export const OuterFlex = styled(Flex).withConfig({
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  background-color: ${getToken("backgroundColor", { variant: "base" })};
-  color: ${getToken("color", { variant: "base" })};
+  background-color: ${getToken("backgroundColor", "base")};
+  color: ${getToken("color", "base")};
 
   ${({ $minWidth }) => $minWidth && css`min-width: ${$minWidth};`}
   ${({ $minHeight }) => $minHeight && css`min-height: ${$minHeight};`}
@@ -33,7 +33,7 @@ export const OuterFlex = styled(Flex).withConfig({
   ${({ $backgroundColor }) => {
     if ($backgroundColor) {
       return css`
-        background-color: ${getToken("backgroundColor", { variant: $backgroundColor })};
+        background-color: ${getToken("backgroundColor", $backgroundColor)};
       `
     }
   }}
@@ -41,7 +41,7 @@ export const OuterFlex = styled(Flex).withConfig({
   ${({ $color }) => {
     if ($color) {
       return css`
-        color: ${getToken("color", { variant: $color })};
+        color: ${getToken("color", $color)};
       `
     }
   }}
@@ -50,7 +50,7 @@ export const OuterFlex = styled(Flex).withConfig({
     if ($backgroundImage) {
       return css`
         background-image: ${$backgroundImage};
-        background-size: ${$backgroundSize ? getToken("backgroundSize", { variant: $backgroundSize }) : "cover"};
+        background-size: ${$backgroundSize ? getToken("backgroundSize", $backgroundSize) : "cover"};
         background-position: ${$backgroundPosition || "center"};
         background-repeat: no-repeat;
 
