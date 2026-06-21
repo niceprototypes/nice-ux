@@ -27,7 +27,7 @@ export const IconWrapperStyled = styled.div.withConfig({
 }>`
   width: ${({ $size = "base" }) => getIconToken("size", $size)};
   height: ${({ $size = "base" }) => getIconToken("size", $size)};
-  color: ${({ $color = "base" }) => getToken("color", { variant: $color })};
+  color: ${({ $color = "base" }) => getToken("color", $color)};
   display: flex;
   flex-shrink: 0;
   justify-content: center;
@@ -47,12 +47,12 @@ export const IconWrapperStyled = styled.div.withConfig({
       ${({ $outlined = false, $color = "base", $strokeWidth = "base" }) =>
           $outlined
               ? css`
-                fill: ${getToken("color", { variant: $color })};
+                fill: ${getToken("color", $color)};
                 stroke: none;
               `
               : css`
                 fill: none;
-                stroke: ${getToken("color", { variant: $color })};
+                stroke: ${getToken("color", $color)};
                 stroke-width: ${getIconToken("strokeWidth", $strokeWidth)};
                 stroke-linecap: round;
                 stroke-linejoin: round;
