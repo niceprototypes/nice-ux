@@ -16,5 +16,5 @@ export const StyledForm = styled.form<{ $gap: GapType }>`
   flex-direction: column;
 
   /* Token-based vertical rhythm between fields */
-  gap: ${({ $gap }) => getToken("gap", { variant: $gap })};
+  gap: ${({ $gap }) => getToken("gap", $gap)};
 `
