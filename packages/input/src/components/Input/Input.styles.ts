@@ -47,7 +47,7 @@ export const StyledInput = styled.input.withConfig({
     background-color: ${getStatusToken($status, $state, "backgroundColor")};
     color: ${getStatusToken($status, $state, "color")};
     border-style: solid;
-    border-width: ${getToken("borderWidth", $borderWidth)};
+    border-width: ${getInputToken("borderWidth", $borderWidth)};
     border-color: ${getStatusToken($status, $state, "borderColor")};
     border-radius: ${getInputToken("borderRadius", $borderRadius)};
     transition: border-color 0.15s ease-in-out, background-color 0.15s ease-in-out;
