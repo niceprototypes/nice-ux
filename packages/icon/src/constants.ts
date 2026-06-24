@@ -22,6 +22,7 @@ export const iconNames = [
   "cog",
   "contact",
   "content",
+  "copy",
   "edit",
   "link",
   "lock",
