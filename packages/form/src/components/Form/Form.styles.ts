@@ -9,12 +9,13 @@
  */
 
 import styled from "styled-components"
-import { getToken, type GapType } from "nice-react-styles"
+import { type GapType } from "nice-react-styles"
+import { getFormToken } from "../../tokens/getFormToken"
 
 export const StyledForm = styled.form<{ $gap: GapType }>`
   display: flex;
   flex-direction: column;
 
   /* Token-based vertical rhythm between fields */
-  gap: ${({ $gap }) => getToken("gap", $gap)};
+  gap: ${({ $gap }) => getFormToken("gap", $gap)};
 `

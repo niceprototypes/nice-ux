@@ -5,3 +5,4 @@
 
 export { default } from "./components/Form"
 export * from "./components/Form"
+export { getFormToken } from "./tokens"
