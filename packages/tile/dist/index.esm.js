@@ -1,9 +1,17 @@
-import { getToken, Theme, withBreakpoints, getComponentToken } from 'nice-react-styles';
+import { getComponentToken, getToken, Theme, withBreakpoints } from 'nice-react-styles';
 import { jsxs, jsx, Fragment } from 'react/jsx-runtime';
 import 'react';
 import styled, { css } from 'styled-components';
 import Flex from 'nice-react-flex';
 import Typography from 'nice-react-typography';
+
+/** Returns the `var(--np--tile--…)` reference. */
+function getTileToken(nameOrPath, variantOrTheme, theme) {
+    if (Array.isArray(nameOrPath)) {
+        return getComponentToken("tile", { token: nameOrPath, mode: variantOrTheme });
+    }
+    return getComponentToken("tile", { token: nameOrPath, variant: variantOrTheme, mode: theme });
+}
 
 const OuterFlex$1 = styled(Flex).withConfig({
     shouldForwardProp: (prop) => !prop.startsWith('$'),
@@ -21,7 +29,7 @@ const OuterFlex$1 = styled(Flex).withConfig({
   ${({ $backgroundColor }) => {
     if ($backgroundColor) {
         return css `
-        background-color: ${getToken("backgroundColor", $backgroundColor)};
+        background-color: ${getTileToken("backgroundColor", $backgroundColor)};
       `;
     }
 }}
@@ -29,7 +37,7 @@ const OuterFlex$1 = styled(Flex).withConfig({
   ${({ $color }) => {
     if ($color) {
         return css `
-        color: ${getToken("color", $color)};
+        color: ${getTileToken("color", $color)};
       `;
     }
 }}
@@ -38,7 +46,7 @@ const OuterFlex$1 = styled(Flex).withConfig({
     if ($backgroundImage) {
         return css `
         background-image: ${$backgroundImage};
-        background-size: ${$backgroundSize ? getToken("backgroundSize", $backgroundSize) : "cover"};
+        background-size: ${$backgroundSize ? getTileToken("backgroundSize", $backgroundSize) : "cover"};
         background-position: ${$backgroundPosition || "center"};
         background-repeat: no-repeat;
 
@@ -97,14 +105,6 @@ const TileTypes = {};
 // an unbound generic `<P>` in dist or collapse to `any`, erasing the
 // `breakpoints` prop on consumers.
 const Tile = withBreakpoints(Tile$1);
-
-/** Returns the `var(--np--tile--…)` reference. */
-function getTileToken(nameOrPath, variantOrTheme, theme) {
-    if (Array.isArray(nameOrPath)) {
-        return getComponentToken("tile", { token: nameOrPath, mode: variantOrTheme });
-    }
-    return getComponentToken("tile", { token: nameOrPath, variant: variantOrTheme, mode: theme });
-}
 
 export { TileTypes, Tile as default, getTileToken };
 //# sourceMappingURL=index.esm.js.map

@@ -9,6 +9,14 @@ var styled = require('styled-components');
 var Flex = require('nice-react-flex');
 var Typography = require('nice-react-typography');
 
+/** Returns the `var(--np--tile--…)` reference. */
+function getTileToken(nameOrPath, variantOrTheme, theme) {
+    if (Array.isArray(nameOrPath)) {
+        return niceReactStyles.getComponentToken("tile", { token: nameOrPath, mode: variantOrTheme });
+    }
+    return niceReactStyles.getComponentToken("tile", { token: nameOrPath, variant: variantOrTheme, mode: theme });
+}
+
 const OuterFlex$1 = styled(Flex).withConfig({
     shouldForwardProp: (prop) => !prop.startsWith('$'),
 }) `
@@ -25,7 +33,7 @@ const OuterFlex$1 = styled(Flex).withConfig({
   ${({ $backgroundColor }) => {
     if ($backgroundColor) {
         return styled.css `
-        background-color: ${niceReactStyles.getToken("backgroundColor", $backgroundColor)};
+        background-color: ${getTileToken("backgroundColor", $backgroundColor)};
       `;
     }
 }}
@@ -33,7 +41,7 @@ const OuterFlex$1 = styled(Flex).withConfig({
   ${({ $color }) => {
     if ($color) {
         return styled.css `
-        color: ${niceReactStyles.getToken("color", $color)};
+        color: ${getTileToken("color", $color)};
       `;
     }
 }}
@@ -42,7 +50,7 @@ const OuterFlex$1 = styled(Flex).withConfig({
     if ($backgroundImage) {
         return styled.css `
         background-image: ${$backgroundImage};
-        background-size: ${$backgroundSize ? niceReactStyles.getToken("backgroundSize", $backgroundSize) : "cover"};
+        background-size: ${$backgroundSize ? getTileToken("backgroundSize", $backgroundSize) : "cover"};
         background-position: ${$backgroundPosition || "center"};
         background-repeat: no-repeat;
 
@@ -101,14 +109,6 @@ const TileTypes = {};
 // an unbound generic `<P>` in dist or collapse to `any`, erasing the
 // `breakpoints` prop on consumers.
 const Tile = niceReactStyles.withBreakpoints(Tile$1);
-
-/** Returns the `var(--np--tile--…)` reference. */
-function getTileToken(nameOrPath, variantOrTheme, theme) {
-    if (Array.isArray(nameOrPath)) {
-        return niceReactStyles.getComponentToken("tile", { token: nameOrPath, mode: variantOrTheme });
-    }
-    return niceReactStyles.getComponentToken("tile", { token: nameOrPath, variant: variantOrTheme, mode: theme });
-}
 
 exports.TileTypes = TileTypes;
 exports.default = Tile;
