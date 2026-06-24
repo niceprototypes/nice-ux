@@ -59,12 +59,12 @@ export const StyledButton = styled.button.withConfig({
     background-color: ${getStatusToken($status, $state, "backgroundColor")};
     color: ${getStatusToken($status, $state, "color")};
     border-style: solid;
-    border-width: ${getToken("borderWidth", $borderWidth)};
+    border-width: ${getButtonToken("borderWidth", $borderWidth)};
     border-color: ${getStatusToken($status, $state, "borderColor")};
     border-radius: ${getButtonToken("borderRadius", $borderRadius)};
     transition: all 0.15s ease-in-out;
     ${$backgroundImage ? `background-image: ${$backgroundImage};` : ""}
-    ${$borderColor ? `border-color: ${getToken("borderColor", $borderColor)};` : ""}
+    ${$borderColor ? `border-color: ${getButtonToken("borderColor", $borderColor)};` : ""}
   `}
 
   ${({ $link, $square, $size }) =>
