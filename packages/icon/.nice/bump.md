@@ -1,2 +1,5 @@
 [2026-06-10 14:58] major: Replace arrow/carat icon names with directional variants — arrow-top/right/bottom/left, carat-top/right/bottom/left. IconNameType no longer includes "arrow"/"carat". Also fixes buildIconMap to resolve hyphenated names (kebab → PascalCase)
 [2026-06-19 19:44] patch: Migrate getToken-family calls to the options-object signature (nice-styles major). Internal refactor — rendered output unchanged; rebuild required for dependents.
+[2026-06-21 21:06] patch: Drive color from the icon component token (getIconToken("color")) instead of the core color token, overridable per-subtree via --np--icon--color. Rendered output unchanged at defaults
+[2026-06-22 15:52] patch: Drive the spinner animation from the renamed icon animationDuration token (getIconToken("animationDuration")). Rendered output unchanged; rebuild required for the nice-styles token rename
+[2026-06-22 17:36] minor: Add "copy" to the icon set — <Icon name="copy" /> now renders. Adds "copy" to iconNames (extends IconNameType); resolved automatically via buildIconMap from nice-icons CopyStroke/CopyFill

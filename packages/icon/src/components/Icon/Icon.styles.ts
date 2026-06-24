@@ -1,6 +1,5 @@
 import styled, { css, keyframes } from "styled-components"
 import { getIconToken } from "../../tokens/getIconToken"
-import { getToken } from "nice-react-styles"
 import type { IconSizeType, IconColorType, IconStrokeWidthType } from "./Icon.types"
 
 const spin = keyframes`
@@ -27,7 +26,7 @@ export const IconWrapperStyled = styled.div.withConfig({
 }>`
   width: ${({ $size = "base" }) => getIconToken("size", $size)};
   height: ${({ $size = "base" }) => getIconToken("size", $size)};
-  color: ${({ $color = "base" }) => getToken("color", $color)};
+  color: ${({ $color = "base" }) => getIconToken("color", $color)};
   display: flex;
   flex-shrink: 0;
   justify-content: center;
@@ -37,7 +36,7 @@ export const IconWrapperStyled = styled.div.withConfig({
     width: 100%;
     height: 100%;
     ${({ $spinning }) => $spinning && css`
-      animation: ${spin} ${getIconToken("spinningAnimationDuration")} linear infinite;
+      animation: ${spin} ${getIconToken("animationDuration")} linear infinite;
     `}
   }
 
@@ -47,12 +46,12 @@ export const IconWrapperStyled = styled.div.withConfig({
       ${({ $outlined = false, $color = "base", $strokeWidth = "base" }) =>
           $outlined
               ? css`
-                fill: ${getToken("color", $color)};
+                fill: ${getIconToken("color", $color)};
                 stroke: none;
               `
               : css`
                 fill: none;
-                stroke: ${getToken("color", $color)};
+                stroke: ${getIconToken("color", $color)};
                 stroke-width: ${getIconToken("strokeWidth", $strokeWidth)};
                 stroke-linecap: round;
                 stroke-linejoin: round;
