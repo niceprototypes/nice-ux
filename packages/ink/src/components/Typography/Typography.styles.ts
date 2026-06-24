@@ -9,6 +9,7 @@
 
 import styled, { css } from "styled-components"
 import { getToken, type ColorType, type FontSizeType, type FontWeightType, type LineHeightType } from "nice-react-styles"
+import { getTypographyToken } from "../../tokens/getTypographyToken"
 import { TypographyAsType, TypographyAlignType, TypographyLineClampType, TypographyWordBreakType } from "./Typography.types"
 import { styleAntialiasing } from "../../utilities/styleAntialiasing"
 
@@ -57,7 +58,7 @@ const getColor = ({ $color }: { $color?: ColorType }) => {
   if (!$color) return css`color: inherit;`
 
   return css`
-    color: ${getToken("color", $color)};
+    color: ${getTypographyToken("color", $color)};
   `
 }
 
@@ -91,7 +92,7 @@ const getFontSize = ({ $as, $size }: { $as: TypographyAsType; $size?: FontSizeTy
 const getFontWeight = ({ $as, $weight }: { $as: TypographyAsType; $weight?: FontWeightType }) => {
   if ($weight) {
     return css`
-      font-weight: ${getToken("fontWeight", $weight)};
+      font-weight: ${getTypographyToken("fontWeight", $weight)};
     `
   }
 
