@@ -150,7 +150,7 @@ declare const getBreakpointValue: <T>(value: {
  *
  * @example
  * getGapSize("smaller") // returns "var(--np--gap--smaller)"
- * getGapSize("base") // returns "var(--np--gap--base)"
+ * getGapSize("base") // returns "var(--np--gap)"
  * getGapSize("2rem") // returns "2rem"
  * getGapSize("var(--custom-spacing)") // returns "var(--custom-spacing)"
  * getGapSize(null) // returns undefined
@@ -198,7 +198,7 @@ declare const getSpacingValue: (spacing: FlexSpacingType | undefined, breakpoint
  *
  * @example
  * styleSpacing("padding", { top: "small", right: "base", bottom: "small", left: "base" })
- * // Returns: "padding-top: var(--core--gap--small);\npadding-right: var(--core--gap--base);\n..."
+ * // Returns: "padding-top: var(--core--gap--small);\npadding-right: var(--core--gap);\n..."
  *
  * @example
  * styleSpacing("margin", { top: "large", right: "large", bottom: "large", left: "large" })
@@ -262,7 +262,7 @@ declare const styleSpacing: (type: "padding" | "margin", def?: SpacingDefinition
  *   spacing: { tablet: "small base" }
  * }
  * styleFlex(BREAKPOINT_TABLET, props)
- * // Returns: "flex-direction: row;\ngap: var(--core--gap--base);\npadding-top: var(--core--gap--small);\npadding-right: var(--core--gap--base);..."
+ * // Returns: "flex-direction: row;\ngap: var(--core--gap);\npadding-top: var(--core--gap--small);\npadding-right: var(--core--gap);..."
  */
 declare const styleFlex: (breakpoint: BreakpointName, props: FlexProps) => string;
 

@@ -14,7 +14,7 @@ import { SpacingDefinition } from "../components/Flex/Flex.types";
  *
  * @example
  * styleSpacing("padding", { top: "small", right: "base", bottom: "small", left: "base" })
- * // Returns: "padding-top: var(--core--gap--small);\npadding-right: var(--core--gap--base);\n..."
+ * // Returns: "padding-top: var(--core--gap--small);\npadding-right: var(--core--gap);\n..."
  *
  * @example
  * styleSpacing("margin", { top: "large", right: "large", bottom: "large", left: "large" })

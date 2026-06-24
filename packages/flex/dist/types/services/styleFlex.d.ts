@@ -56,7 +56,7 @@ import { type BreakpointName } from "nice-react-styles";
  *   spacing: { tablet: "small base" }
  * }
  * styleFlex(BREAKPOINT_TABLET, props)
- * // Returns: "flex-direction: row;\ngap: var(--core--gap--base);\npadding-top: var(--core--gap--small);\npadding-right: var(--core--gap--base);..."
+ * // Returns: "flex-direction: row;\ngap: var(--core--gap);\npadding-top: var(--core--gap--small);\npadding-right: var(--core--gap);..."
  */
 export declare const styleFlex: (breakpoint: BreakpointName, props: FlexProps) => string;
 //# sourceMappingURL=styleFlex.d.ts.map
