@@ -36,15 +36,17 @@ export const typeCode = (t) =>
   {types.map((t) => (
     <CodeRow
       key={t}
-      previewCell={
-        <Input
+      cells={[
+          <Input
           type={t}
           placeholder={typeLabel[t]}
           onChange={() => {}}
-        />
-      }
+        />,
+          typeCode(t),
+        ]}
+        columns={[null, { shiki: true }]}
       language="tsx"
-      code={typeCode(t)}
+      
     />
   ))}
 </div>

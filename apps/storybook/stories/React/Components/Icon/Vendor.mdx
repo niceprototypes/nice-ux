@@ -50,27 +50,31 @@ vendor. Built-in names always win — the vendor is a fallback, not an
 override.
 
 <CodeRow
-  previewCell={
-    <Icon
+  cells={[
+          <Icon
       vendor
       name="TrendingDown"
       size="larger"
-    />
-  }
+    />,
+          `<Icon vendor name="TrendingDown" />`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Icon vendor name="TrendingDown" />`}
+  
 />
 
 <CodeRow
-  previewCell={
-    <Icon
+  cells={[
+          <Icon
       vendor
       name="Sparkles"
       size="larger"
       color="link"
-    />
-  }
+    />,
+          `<Icon vendor name="Sparkles" color="link" />`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Icon vendor name="Sparkles" color="link" />`}
+  
 />
 

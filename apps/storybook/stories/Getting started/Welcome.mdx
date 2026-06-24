@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import Flex from "nice-react-flex"
-import Intro from "../../src/components/Intro"
+import WelcomeLink from "../../src/components/WelcomeLink"
 import Typography from "../../src/nice/Typography"
 import NewLines from "../../src/components/NewLines/index.ts"
 
@@ -13,11 +13,13 @@ import NewLines from "../../src/components/NewLines/index.ts"
   alignItems="center"
   gap="base"
 >
-  <img
-    src="https://niceprototypes.com/vectors/icon.svg"
-    alt="Nice Prototypes"
-    width="64px"
-  />
+  <Flex direction="column">
+    <img
+      src="https://niceprototypes.com/vectors/icon.svg"
+      alt="Nice Prototypes"
+      width="64px"
+    />
+  </Flex>
   <Flex direction="column">
     <Typography
       lineHeight="condensed"
@@ -43,40 +45,39 @@ import NewLines from "../../src/components/NewLines/index.ts"
   direction="column"
   gap="base"
 >
-  <Intro
+  <WelcomeLink
     storyId="getting-started-1-·-tokens--docs"
     iconName="Palette"
     title="Tokens"
   >
-    <strong>A complete token system</strong> with no framework required.
-  </Intro>
-  <Intro
+    <span><strong>A complete token system</strong> with no framework required.</span>
+  </WelcomeLink>
+  <WelcomeLink
     storyId="getting-started-2-·-fonts--docs"
     iconName="Type"
     title="Fonts"
   >
-    <strong>Easy font loading</strong> with Google and Adobe Typekit support.
-  </Intro>
-  <Intro
+    <span><strong>Easy font loading</strong> with Google and Adobe Typekit support.</span>
+  </WelcomeLink>
+  <WelcomeLink
     storyId="getting-started-3-·-icons--docs"
     iconName="LayoutGrid"
     title="Icons"
   >
-    <strong>A standalone SVG icon set</strong> usable as raw SVG or the React
-    Icon component.
-  </Intro>
-  <Intro
+    <span><strong>A standalone SVG icon set</strong> usable as raw SVG or the React Icon component.</span>
+  </WelcomeLink>
+  <WelcomeLink
     storyId="getting-started-4-·-breakpoints--docs"
     iconName="MonitorSmartphone"
     title="Breakpoints"
   >
-    <strong>Viewport features</strong> for total control at any breakpoint.
-  </Intro>
-  <Intro
+    <span><strong>Viewport features</strong> for total control at any breakpoint.</span>
+  </WelcomeLink>
+  <WelcomeLink
     storyId="getting-started-5-·-themes--docs"
     iconName="SunMoon"
     title="Themes"
   >
-    <strong>Day and night</strong> mode control, as well as custom theming.
-  </Intro>
+    <span><strong>Day and night</strong> mode control, as well as custom theming.</span>
+  </WelcomeLink>
 </Flex>

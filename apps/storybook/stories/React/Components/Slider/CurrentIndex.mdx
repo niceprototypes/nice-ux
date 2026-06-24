@@ -13,12 +13,14 @@ import Typography from "../../../../src/nice/Typography"
 </StoryDescription>
 
 <CodeRow
-  previewCell={
-    <Typography color="light">
+  cells={[
+          <Typography color="light">
       Increment or decrement <code>currentIndex</code> to navigate between slides.
-    </Typography>
-  }
+    </Typography>,
+          `<Slider currentIndex={0}>{slides}</Slider>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Slider currentIndex={0}>{slides}</Slider>`}
+  
 />
 

@@ -15,23 +15,27 @@ import { CodeRow } from "../../../../src/components/CodeRow"
 
 <CodeRow
   fullWidth
-  previewCell={
-    <Tile title="Title" description="Default width">
+  cells={[
+          <Tile title="Title" description="Default width">
       <Typography color="light">Default width</Typography>
-    </Tile>
-  }
+    </Tile>,
+          `<Tile title="Title" description="Default width" />`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Tile title="Title" description="Default width" />`}
+  
 />
 
 <CodeRow
   fullWidth
-  previewCell={
-    <Tile fullWidth title="Title" description="Full width tile">
+  cells={[
+          <Tile fullWidth title="Title" description="Full width tile">
       <Typography color="light">Full width tile</Typography>
-    </Tile>
-  }
+    </Tile>,
+          `<Tile fullWidth title="Title" description="Full width tile" />`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Tile fullWidth title="Title" description="Full width tile" />`}
+  
 />
 

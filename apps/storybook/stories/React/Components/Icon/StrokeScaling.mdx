@@ -17,26 +17,30 @@ import { CodeRow } from "../../../../src/components/CodeRow"
 </StoryDescription>
 
 <CodeRow
-  previewCell={
-    <Icon
+  cells={[
+          <Icon
       name="message"
       size="larger"
       strokeScaling={false}
-    />
-  }
+    />,
+          `<Icon size="larger" />`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Icon size="larger" />`}
+  
 />
 
 <CodeRow
-  previewCell={
-    <Icon
+  cells={[
+          <Icon
       name="message"
       size="larger"
       strokeScaling={true}
-    />
-  }
+    />,
+          `<Icon size="larger" strokeScaling={true} />`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Icon size="larger" strokeScaling={true} />`}
+  
 />
 

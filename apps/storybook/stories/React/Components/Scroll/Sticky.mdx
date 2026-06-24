@@ -15,13 +15,15 @@ import { CodeRow } from "../../../../src/components/CodeRow"
 
 <CodeRow
   fullWidth
-  previewCell={
-    <Typography size="small" color="light">
+  cells={[
+          <Typography size="small" color="light">
       Wrap any header with <code>&lt;Sticky&gt;</code> inside a
       <code>StickyProvider</code> to enable the hide-on-scroll-down behavior.
-    </Typography>
-  }
+    </Typography>,
+          `<ScrollProvider>\n  <StickyProvider>\n    <Sticky order={0}>\n      <Header />\n    </Sticky>\n  </StickyProvider>\n</ScrollProvider>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<ScrollProvider>\n  <StickyProvider>\n    <Sticky order={0}>\n      <Header />\n    </Sticky>\n  </StickyProvider>\n</ScrollProvider>`}
+  
 />
 

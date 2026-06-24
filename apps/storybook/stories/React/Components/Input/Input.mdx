@@ -34,13 +34,15 @@ import Input from "nice-react-input"
 </Typography>
 
 <CodeRow
-  previewCell={
-    <Input
+  cells={[
+          <Input
       placeholder="Email"
       onChange={() => {}}
-    />
-  }
+    />,
+          `<Input\n  placeholder="Email"\n  onChange={(value) => setValue(value)}\n/>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Input\n  placeholder="Email"\n  onChange={(value) => setValue(value)}\n/>`}
+  
 />
 

@@ -16,38 +16,44 @@ import { CodeRow } from "../../../../src/components/CodeRow"
 
 <CodeRow
   fullWidth
-  previewCell={
-    <Typography size="small" color="light">
+  cells={[
+          <Typography size="small" color="light">
       Scroll progress % where fade in begins (default: 0)
-    </Typography>
-  }
+    </Typography>,
+          `<FadeOnScroll startPosition={30}>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<FadeOnScroll startPosition={30}>`}
+  
 />
 
 ### peakPosition
 
 <CodeRow
   fullWidth
-  previewCell={
-    <Typography size="small" color="light">
+  cells={[
+          <Typography size="small" color="light">
       Scroll progress % where peak opacity is reached (default: 50)
-    </Typography>
-  }
+    </Typography>,
+          `<FadeOnScroll peakPosition={50}>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<FadeOnScroll peakPosition={50}>`}
+  
 />
 
 ### endPosition
 
 <CodeRow
   fullWidth
-  previewCell={
-    <Typography size="small" color="light">
+  cells={[
+          <Typography size="small" color="light">
       Scroll progress % where fade out completes (default: 100)
-    </Typography>
-  }
+    </Typography>,
+          `<FadeOnScroll endPosition={100}>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<FadeOnScroll endPosition={100}>`}
+  
 />
 

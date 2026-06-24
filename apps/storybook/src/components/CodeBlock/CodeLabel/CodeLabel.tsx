@@ -1,7 +1,7 @@
 import { Pill } from "./CodeLabel.styles"
 import { LANG_LABELS } from "./CodeLabel.constants"
 import type { CodeLabelProps } from "./CodeLabel.types"
-import Typography from "nice-react-typography"
+import Typography from "../../../nice/Typography"
 
 /** Language badge for a code block. Renders nothing when no language is given. */
 export const CodeLabel = ({ language }: CodeLabelProps) => {

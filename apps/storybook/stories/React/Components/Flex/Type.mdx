@@ -20,30 +20,32 @@ import { twoDots } from "./Flex.services"
   {["padding", "margin"].map(value => (
     <CodeRow
       key={value}
-      previewCell={
-        <Flex direction="column">
+      cells={[
+          <Flex direction="column">
           <Flex
             spacing="small"
             style={{
-              border: `${getToken("borderWidth")} solid ${value === "margin" ? getToken("borderColor") : getToken("borderColor", { variant: "dark" })}`,
-              borderRadius: `calc(${getToken("cellHeight", { variant: "smaller" })} / 2 + 2px)`,
+              border: `${getToken("borderWidth")} solid ${value === "margin" ? getToken("borderColor") : getToken("borderColor", "dark")}`,
+              borderRadius: `calc(${getToken("cellHeight", "smaller")} / 2 + 2px)`,
             }}
           >
             <Flex
               spacing="small"
               type={value}
               style={{
-                border: `${getToken("borderWidth")} solid ${value === "margin" ? getToken("borderColor", { variant: "dark" }) : "transparent"}`,
-                borderRadius: `calc(${getToken("cellHeight", { variant: "smaller" })} / 2 + 2px)`,
+                border: `${getToken("borderWidth")} solid ${value === "margin" ? getToken("borderColor", "dark") : "transparent"}`,
+                borderRadius: `calc(${getToken("cellHeight", "smaller")} / 2 + 2px)`,
               }}
             >
               <DemoDots dots={twoDots} />
             </Flex>
           </Flex>
-        </Flex>
-      }
+        </Flex>,
+          `<Flex type="${value}">\n  {children}\n</Flex>`,
+        ]}
+        columns={[null, { shiki: true }]}
       language="tsx"
-      code={`<Flex type="${value}">\n  {children}\n</Flex>`}
+      
     />
   ))}
 </div>

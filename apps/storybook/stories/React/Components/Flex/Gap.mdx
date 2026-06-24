@@ -18,14 +18,16 @@ import { threeDots } from "./Flex.services"
   {["smaller", "small", "base", "large", "larger"].map(value => (
     <CodeRow
       key={value}
-      previewCell={
-        <DemoDots
+      cells={[
+          <DemoDots
           gap={value}
           dots={threeDots}
-        />
-      }
+        />,
+          `<Flex gap="${value}">\n  {children}\n</Flex>`,
+        ]}
+        columns={[null, { shiki: true }]}
       language="tsx"
-      code={`<Flex gap="${value}">\n  {children}\n</Flex>`}
+      
     />
   ))}
 </div>

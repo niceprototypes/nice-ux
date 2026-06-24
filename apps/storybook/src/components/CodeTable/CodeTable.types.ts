@@ -1,5 +1,4 @@
 import * as React from "react"
-import type { FontSizeType, FontWeightType } from "nice-react-styles"
 import { ColumnWidth } from "../CodeRow/CodeRow.types"
 
 /**
@@ -34,16 +33,6 @@ export interface CodeTableProps {
    * `[null, null, "CSS", "JS"]` labels only the two code columns.
    */
   columnHeaders?: ColumnHeader[]
-  /**
-   * Font size for every row's value cell, forwarded to that cell's Typography
-   * (its `size`). Applies to the value column only.
-   */
-  fontSize?: FontSizeType
-  /**
-   * Font weight for every row's value cell, forwarded to that cell's
-   * Typography (its `weight`). Applies to the value column only.
-   */
-  fontWeight?: FontWeightType
   /** CodeRow instances. Optional — a header-only table (just `columnHeaders`)
    * has no rows. */
   children?: React.ReactNode

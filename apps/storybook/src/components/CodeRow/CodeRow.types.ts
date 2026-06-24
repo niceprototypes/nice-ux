@@ -1,5 +1,5 @@
 import * as React from "react"
-import type { FontSizeType, FontWeightType } from "nice-react-styles"
+import type { ColorType, FontSizeType } from "nice-react-styles"
 
 export type CodeRowLanguage = "tsx" | "css"
 
@@ -10,28 +10,69 @@ export type CodeRowLanguage = "tsx" | "css"
  */
 export type ColumnWidth = string | null
 
-export interface CodeRowProps {
-  previewCell: React.ReactNode
+/**
+ * Per-cell rendering options, matched to `cells` by index. The row is
+ * structural — these options tell it how to render a given cell. `shiki` makes
+ * it a syntax-highlighted code block; the rest style a plain (non-`shiki`)
+ * cell's Typography.
+ */
+export interface CodeColumn {
   /**
-   * Source for the row's code cell(s). A single string renders one cell; an
-   * array renders one cell per entry, laid out left-to-right in row order
-   * (e.g. `[cssVar, getTokenCall]` shows the CSS variable before the accessor).
+   * Render this cell as a Shiki syntax-highlighted code block (the cell must be
+   * a code string). When false/omitted the cell renders as-is. @default false
    */
-  code: string | string[]
+  shiki?: boolean
+  /**
+   * Render a non-`shiki` cell's text in the monospace code font (Typography
+   * `code`). @default false
+   */
+  code?: boolean
+  /**
+   * Font size applied to a non-`shiki` cell's Typography. @default none
+   */
+  size?: FontSizeType
+  /**
+   * Apply this Nice text color to a non-`shiki` cell's Typography. A Typography
+   * cell receives it directly; a plain string cell is wrapped in a styled
+   * `<Typography>`. No effect on `shiki` cells. @default none
+   */
+  color?: ColorType
+  /**
+   * Make a non-`shiki` cell with a string value click-to-copy — clicking copies
+   * the string to the clipboard, the same affordance a `shiki` CodeBlock has.
+   * No effect on `shiki` cells (already copyable) or non-string cells.
+   * @default false
+   */
+  clickToCopy?: boolean
+}
+
+export interface CodeRowProps {
+  /**
+   * The row's cells, left-to-right. A cell whose `columns` entry sets
+   * `shiki: true` is a code string rendered in a CodeBlock; every other cell is
+   * an arbitrary node rendered as-is (a rendered component, a Flex pairing an
+   * example with a label, a value, …), optionally styled via its column's
+   * `code` / `size` / `color`.
+   */
+  cells: React.ReactNode[]
+  /**
+   * Options for each cell, matched by index (`columns[i]` describes `cells[i]`).
+   * A `null` (or missing) entry means a plain, non-code cell.
+   */
+  columns?: (CodeColumn | null)[]
+  /** Language for code cells. @default "tsx" */
   language?: CodeRowLanguage
   /**
-   * When true, the previewCell renders outside (just before) the row Flex
-   * and takes full width, while the row Flex continues to lay out the
-   * remaining cells (currently the code source). Useful for previews that
-   * need to span the full container — e.g. Tile demos that lose their
-   * visible footprint when constrained to the default 45% column.
-   */
-  fullWidth?: boolean
-  /**
-   * Render the code cell(s) inline — strips the CodeBlock card chrome (margin,
+   * Render code cells inline — strips the CodeBlock card chrome (margin,
    * padding, border, border-radius, box-shadow). @default false
    */
   inline?: boolean
+  /**
+   * Hoist the first cell out above the row at full width, while the row lays
+   * out the remaining cells. Useful for previews that need to span the full
+   * container — e.g. Tile demos. @default false
+   */
+  fullWidth?: boolean
   /**
    * Text for the leading "name" cell (index 0). Rendered only when
    * `nameColumn` is true. Within a CodeTable, only the first row receives a
@@ -39,34 +80,23 @@ export interface CodeRowProps {
    */
   name?: string
   /**
-   * Reserve the leading name cell (index 0) even when `name` is empty, so a
-   * set of sibling rows keep their columns aligned. CodeTable sets this on
-   * every row when the table has a `name`. @default false
+   * Reserve the leading name cell (index 0) even when `name` is empty, so a set
+   * of sibling rows keep their columns aligned. CodeTable sets this on every
+   * row when the table has a `name`. @default false
    */
   nameColumn?: boolean
   /**
-   * Per-column CSS widths applied positionally to the row's columns at tablet+
-   * (where the row lays out horizontally). Passed down by CodeTable; entry `i`
-   * sets the width of column `i`, a `null`/omitted entry leaves that column at
-   * its default equal-flex width, and entries beyond the column count are
-   * ignored. Column order matches render order: [name cell?, preview, …code
-   * cells, value?] (the preview is not a row column in `fullWidth` mode).
+   * Per-column CSS widths applied positionally over the row's columns at
+   * tablet+ (where the row lays out horizontally). Column order is
+   * [name cell?, ...cells]; entry `i` sets that column's width, a `null`/omitted
+   * entry leaves it at the default equal-flex width. The hoisted first cell in
+   * `fullWidth` mode is not a row column.
    */
   columnWidths?: ColumnWidth[]
   /**
-   * Optional trailing cell for a plain value, rendered as the last column in a
-   * `<Typography code>` (the code font, no Shiki highlighting). Use for token
-   * values that should read as text, not a syntax-highlighted code block.
+   * Paint the row as the active/highlighted one (background-color: yellow).
+   * Set by a module table when a `parseTokenVarLink` deep link targets this
+   * row's variant. @default false
    */
-  value?: React.ReactNode
-  /**
-   * Font size for the trailing value cell's Typography (maps to its `size`).
-   * Passed down by CodeTable; no effect without `value`.
-   */
-  fontSize?: FontSizeType
-  /**
-   * Font weight for the trailing value cell's Typography (maps to its
-   * `weight`). Passed down by CodeTable; no effect without `value`.
-   */
-  fontWeight?: FontWeightType
+  highlighted?: boolean
 }

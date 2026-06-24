@@ -9,29 +9,29 @@ import DemoDots from "../../../../src/components/DemoDots"
 
 export const wrapDots = [
   {
-    color: getToken("color", { variant: "error" }),
-    height: getToken("cellHeight", { variant: "small" }),
-    width: getToken("cellHeight", { variant: "small" }),
+    color: getToken("color", "error"),
+    height: getToken("cellHeight", "small"),
+    width: getToken("cellHeight", "small"),
   },
   {
-    color: getToken("color", { variant: "warning" }),
-    height: getToken("cellHeight", { variant: "small" }),
-    width: getToken("cellHeight", { variant: "small" }),
+    color: getToken("color", "warning"),
+    height: getToken("cellHeight", "small"),
+    width: getToken("cellHeight", "small"),
   },
   {
-    color: getToken("color", { variant: "link" }),
-    height: getToken("cellHeight", { variant: "small" }),
-    width: getToken("cellHeight", { variant: "small" }),
+    color: getToken("color", "link"),
+    height: getToken("cellHeight", "small"),
+    width: getToken("cellHeight", "small"),
   },
   {
-    color: getToken("color", { variant: "success" }),
-    height: getToken("cellHeight", { variant: "small" }),
-    width: getToken("cellHeight", { variant: "small" }),
+    color: getToken("color", "success"),
+    height: getToken("cellHeight", "small"),
+    width: getToken("cellHeight", "small"),
   },
   {
-    color: getToken("color", { variant: "disabled" }),
-    height: getToken("cellHeight", { variant: "small" }),
-    width: getToken("cellHeight", { variant: "small" }),
+    color: getToken("color", "disabled"),
+    height: getToken("cellHeight", "small"),
+    width: getToken("cellHeight", "small"),
   },
 ]
 
@@ -41,7 +41,7 @@ export const nowrapDots = wrapDots.map(dot => ({
   width: undefined,
 }))
 
-export const wrapWidth = `calc(${getToken("cellHeight", { variant: "small" })} * 3 + 2px)`
+export const wrapWidth = `calc(${getToken("cellHeight", "small")} * 3 + 2px)`
 
 <StoryHeader title="wrap" />
 
@@ -50,41 +50,47 @@ export const wrapWidth = `calc(${getToken("cellHeight", { variant: "small" })} *
 </StoryDescription>
 
 <CodeRow
-  previewCell={
-    <DemoDots
+  cells={[
+          <DemoDots
       wrap="nowrap"
       dots={nowrapDots}
       width={wrapWidth}
       bordered
-    />
-  }
+    />,
+          `<Flex wrap="nowrap">\n  {children}\n</Flex>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Flex wrap="nowrap">\n  {children}\n</Flex>`}
+  
 />
 
 <CodeRow
-  previewCell={
-    <DemoDots
+  cells={[
+          <DemoDots
       wrap="wrap"
       dots={wrapDots}
       width={wrapWidth}
       bordered
-    />
-  }
+    />,
+          `<Flex wrap="wrap">\n  {children}\n</Flex>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Flex wrap="wrap">\n  {children}\n</Flex>`}
+  
 />
 
 <CodeRow
-  previewCell={
-    <DemoDots
+  cells={[
+          <DemoDots
       wrap="wrap-reverse"
       dots={wrapDots}
       width={wrapWidth}
       bordered
-    />
-  }
+    />,
+          `<Flex wrap="wrap-reverse">\n  {children}\n</Flex>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Flex wrap="wrap-reverse">\n  {children}\n</Flex>`}
+  
 />
 

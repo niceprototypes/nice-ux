@@ -15,22 +15,26 @@ import { toSource } from "../../../../src/services"
 </StoryDescription>
 
 <CodeRow
-  previewCell={
-    <Typography>Legibility standard</Typography>
-  }
+  cells={[
+          <Typography>Legibility standard</Typography>,
+          toSource("Typography", {}, { children: "Legibility standard" }),
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={toSource("Typography", {}, { children: "Legibility standard" })}
+  
 />
 
 <CodeRow
-  previewCell={
-    <Typography legibilityOptimized>Legibility optimized</Typography>
-  }
-  language="tsx"
-  code={toSource(
+  cells={[
+          <Typography legibilityOptimized>Legibility optimized</Typography>,
+          toSource(
       "Typography",
       { legibilityOptimized: true },
       { children: "Legibility optimized" }
-    )}
+    ),
+        ]}
+        columns={[null, { shiki: true }]}
+  language="tsx"
+  
 />
 

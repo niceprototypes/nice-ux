@@ -17,7 +17,8 @@ const AppTokenMap = {
   },
   icon: {
     size: {
-      base: "14px",
+      smaller: "12px",
+      base: "11px",
       larger: "32px"
     }
   },

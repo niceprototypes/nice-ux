@@ -1,0 +1,14 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../src/components/Story"
+import { ComponentTokensTable } from "./ComponentTokensTable"
+
+<Meta title="Tokens/Components/Button" />
+
+<style>{`.sbdocs.sbdocs-content { max-width: 100%; }`}</style>
+
+<StoryHeader
+  title="Button"
+  description="Component-level tokens for Button — which are initialized to core tokens and which are literal string values."
+/>
+
+<ComponentTokensTable prefix="button" />

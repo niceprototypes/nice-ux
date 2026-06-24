@@ -18,26 +18,28 @@ import Tile from "nice-react-tile"
 </Typography>
 
 <CodeRow
-  previewCell={
-    <Image
+  cells={[
+          <Image
       vendor
       src="622"
       alt="Standard img element"
       width="240px"
       height="320px"
       backgroundSize="cover"
-    />
-  }
-  language="tsx"
-  code={toSource("Image", {
+    />,
+          toSource("Image", {
       vendor: true,
       src: "622",
-    })}
+    }),
+        ]}
+        columns={[null, { shiki: true }]}
+  language="tsx"
+  
 />
 
 <CodeRow
-  previewCell={
-    <Image
+  cells={[
+          <Image
       vendor
       as="div"
       src="622"
@@ -64,10 +66,8 @@ import Tile from "nice-react-tile"
           </Typography>
         </Tile>
       </Flex>
-    </Image>
-  }
-  language="tsx"
-  code={toSource(
+    </Image>,
+          toSource(
       "Image",
       {
         vendor: true,
@@ -76,6 +76,10 @@ import Tile from "nice-react-tile"
         borderRadius: "base",
       },
       { children: "<h1>Overlay content</h1>" }
-    )}
+    ),
+        ]}
+        columns={[null, { shiki: true }]}
+  language="tsx"
+  
 />
 

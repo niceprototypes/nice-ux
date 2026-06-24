@@ -1,9 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
-import Icon, { iconNames } from "nice-react-icon"
-import Flex from "nice-react-flex"
-import IconGrid from "../../src/components/IconGrid"
-import NewLines from "../../src/components/NewLines/index.ts"
+import { IconsCodeTable } from "../../src/components/IconsCodeTable"
+import Callout from "../../src/components/Callout/index.ts"
 
 <Meta
   title="Getting started/3 · Icons"
@@ -14,22 +12,34 @@ import NewLines from "../../src/components/NewLines/index.ts"
 
 ## Standalone
 
+Access all **stroke and fill variants** of all icons via the `nice-icons` package:
+
 ```bash
 npm install nice-icons
 ```
 
-```jsx
-import CheckIcon from "nice-icons/check/stroke.svg"
+### Stroke
 
-<img
-  src={CheckIcon}
-  alt="check"
-/>
+```jsx
+import CheckStrokeIcon from "nice-icons/check/stroke.svg"
+
+<img src={CheckStrokeIcon} />
+```
+
+
+### Fill
+
+```jsx
+import CheckFillIcon from "nice-icons/check/fill.svg"
+
+<img src={CheckFillIcon} />
 ```
 
 ---
 
 ## React
+
+The Icon component allows you to **easily configure icon properties** without any CSS code:
 
 ```bash
 npm install nice-react-icon
@@ -38,12 +48,28 @@ npm install nice-react-icon
 ```tsx
 import Icon from "nice-react-icon"
 
-<Icon name="check" size="large" />
+<Icon
+  name="check"
+  size="large"
+  color="link"
+  strokeWidth="base"
+  strokeScaling
+  outlined
+  theme="day"
+  viewBox="0 0 24 24"
+  vendor
+  url="https://example.com/icon.svg"
+  vendorComponent={CustomIcon}
+  className="my-icon"
+  style={{ opacity: 0.8 }}
+/>
 ```
+
+<Callout type="hint">See the [Component](/docs/components-icon--docs) page for full documentation.</Callout>
 
 ---
 
 ## Browse
 
-<IconGrid icons={iconNames.map(name => ({ name }))} />
+<IconsCodeTable codeHeader="getIcon" code={(name) => `getIcon("${name}")`} codeWidth="16em" />
 

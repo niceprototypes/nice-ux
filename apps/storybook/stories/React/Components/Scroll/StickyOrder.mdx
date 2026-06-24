@@ -16,8 +16,8 @@ import { CodeRow } from "../../../../src/components/CodeRow"
 
 <CodeRow
   fullWidth
-  previewCell={
-    <Flex direction="column" gap="small">
+  cells={[
+          <Flex direction="column" gap="small">
       <Typography size="small" color="light">
         Multiple sticky elements stack based on their order prop. Lower numbers
         appear above higher numbers.
@@ -25,9 +25,9 @@ import { CodeRow } from "../../../../src/components/CodeRow"
       <Flex gap="small">
         <Flex
           style={{
-            padding: `${getToken("gap", { variant: "smaller" })} ${getToken("gap", { variant: "small" })}`,
-            backgroundColor: getToken("color", { variant: "error" }),
-            borderRadius: getToken("borderRadius", { variant: "small" }),
+            padding: `${getToken("gap", "smaller")} ${getToken("gap", "small")}`,
+            backgroundColor: getToken("color", "error"),
+            borderRadius: getToken("borderRadius", "small"),
           }}
         >
           <Typography size="smaller" color="lighter">
@@ -36,9 +36,9 @@ import { CodeRow } from "../../../../src/components/CodeRow"
         </Flex>
         <Flex
           style={{
-            padding: `${getToken("gap", { variant: "smaller" })} ${getToken("gap", { variant: "small" })}`,
-            backgroundColor: getToken("color", { variant: "warning" }),
-            borderRadius: getToken("borderRadius", { variant: "small" }),
+            padding: `${getToken("gap", "smaller")} ${getToken("gap", "small")}`,
+            backgroundColor: getToken("color", "warning"),
+            borderRadius: getToken("borderRadius", "small"),
           }}
         >
           <Typography size="smaller" color="lighter">
@@ -46,9 +46,11 @@ import { CodeRow } from "../../../../src/components/CodeRow"
           </Typography>
         </Flex>
       </Flex>
-    </Flex>
-  }
+    </Flex>,
+          `<Sticky order={0}><Header /></Sticky>\n<Sticky order={1}><Subheader /></Sticky>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Sticky order={0}><Header /></Sticky>\n<Sticky order={1}><Subheader /></Sticky>`}
+  
 />
 

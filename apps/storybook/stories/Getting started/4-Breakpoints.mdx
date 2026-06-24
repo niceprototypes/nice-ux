@@ -1,9 +1,11 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
-import Install from "../../src/components/Install"
 import ResponsiveDemo, {
   ResponsiveDemoItem,
 } from "../../src/components/ResponsiveDemo"
+import { CodeRow } from "../../src/components/CodeRow"
+import { CodeTable } from "../../src/components/CodeTable"
+import Callout from "../../src/components/Callout"
 import NewLines from "../../src/components/NewLines/index.ts"
 
 <Meta
@@ -13,43 +15,53 @@ import NewLines from "../../src/components/NewLines/index.ts"
 
 <StoryHeader title="Breakpoints" />
 
-## Direct
+## Get breakpoints
 
-<Install package="styles" />
+Configure your design for **different screen sizes and ranges** by tweaking breakpoint variants for tokens and components, or by using `getBreakpoint` in your style code.
 
-### CSS only
+<NewLines />
+
+### Use breakpoints directly
+
+<NewLines />
+
+#### CSS only
 
 ```css
 @import "nice-styles/tokens.css";
 
-.card--phone-only {
-  font-size: var(--np--font-size--base--phone);
+.phone-only {
+  font-size: var(--np--font-size--phone);
 }
-.card--laptop-only {
-  font-size: var(--np--font-size--base--laptop);
+.laptop-only {
+  font-size: var(--np--font-size--laptop);
 }
-.card--desktop-only {
-  font-size: var(--np--font-size--base--desktop);
+.desktop-only {
+  font-size: var(--np--font-size--desktop);
 }
 ```
 
-### JS + CSS
+<NewLines />
+
+#### JS + CSS
 
 [//]: # "For CSS-in-JS or runtime CSS strings, `getBreakpoint` returns the matching `@media (min-width: …)` literal sourced from the same threshold table the build uses, so JS and CSS stay in sync:"
 
 ```js
-import { getBreakpoint } from "nice-styles"
+import { getBreakpoint, getToken } from "nice-styles"
 
 const css = `${getBreakpoint("desktop")} {
-  .heading {
-    font-size: var(--np--font-size--base--desktop);
+  h1 {
+    font-size: ${getToken("fontSize", "larger")};
   }
 }`
 ```
 
----
+<Callout type="learning">Calling `getToken` inside of an instance of `getBreakpoint` will automatically resolve to the correct breakpoint variant.</Callout>
 
-## Styled Components
+<NewLines />
+
+### Styled Components
 
 [//]: # "The same `getBreakpoint` literal drops straight into a styled-component, paired with `getToken` for the values — JS and CSS stay on one threshold table:"
 
@@ -65,21 +77,108 @@ const Wrapper = styled.div`
   padding: ${getToken("gap")};
 
   ${getBreakpoint("laptop")} {
-    padding: ${getToken("gap", { variant: "large" })};
+    padding: ${getToken("gap", "large")};
   }
 `
 ```
 
 ---
 
+## Set breakpoints
+
+Imperative override of the pixel thresholds behind `@media` queries. `BREAKPOINTS`
+is mutated in memory and a `<style data-nice-breakpoints>` element is injected
+into `<head>` with the re-emitted `@media` cascade. Cascade order means the
+injected stylesheet overrides the build-time literals from `tokens.css`.
+
+For the declarative form via `setTokens`, see
+[React/setTokens](/docs/react-settokens--docs).
+
+### Usage
+
+```ts
+import { setBreakpoints } from "nice-react-styles"
+
+setBreakpoints({
+  tablet: 700,
+  laptop: 1100,
+  desktop: 1800,
+})
+```
+
+Accepts `Partial<BreakpointValues>` — any subset of the editable floors
+`tablet` / `laptop` / `desktop`; omitted keys are preserved. `phone` is the
+implicit mobile-first base and is not settable — its ceiling tracks `tablet`.
+
+Reach for this directly when thresholds need to change after initial load —
+a settings toggle, an A/B test, a unit test. For static per-app config that
+belongs with the rest of your design tokens, use
+[`setTokens({ breakpoints })`](/docs/react-settokens--docs)
+instead.
+
+---
+
 ## Defaults
 
-| Name | Query shape | Pixels |
-|:-----|:------|:-----------:|
-| `phone` | `@media (max-width: 640px)` | `<= 640` |
-| `tablet` | `@media (min-width: 641px)` | `641-1279` |
-| `laptop` | `@media (min-width: 1280px)` | `1280-1719` |
-| `desktop` | `@media (min-width: 1720px)` | `>= 1720` |
+Keys used in `breakpoints` maps and `$breakpoints` objects. A bare name matches
+that band **exactly**; `+` extends it **up** (that breakpoint and larger), `-`
+extends it **down** (that breakpoint and smaller).
+
+<CodeTable
+  columnWidths={["5em", "29em"]}
+  columnHeaders={[null, "Query", "Range"]}
+>
+  <CodeRow
+    inline
+    language="css"
+    cells={["phone", "@media (max-width: 640px)", "<= 640"]}
+    columns={[null, { shiki: true }, { code: true, size: "small" }]}
+  />
+  <CodeRow
+    inline
+    language="css"
+    cells={["tablet", "@media (min-width: 641px) and (max-width: 1279px)", "641-1279"]}
+    columns={[null, { shiki: true }, { code: true, size: "small" }]}
+  />
+  <CodeRow
+    inline
+    language="css"
+    cells={["laptop", "@media (min-width: 1280px) and (max-width: 1719px)", "1280-1719"]}
+    columns={[null, { shiki: true }, { code: true, size: "small" }]}
+  />
+  <CodeRow
+    inline
+    language="css"
+    cells={["desktop", "@media (min-width: 1720px)", ">= 1720"]}
+    columns={[null, { shiki: true }, { code: true, size: "small" }]}
+  />
+  <CodeRow
+    inline
+    language="css"
+    cells={["tablet+", "@media (min-width: 641px)", ">= 641"]}
+    columns={[null, { shiki: true }, { code: true, size: "small" }]}
+  />
+  <CodeRow
+    inline
+    language="css"
+    cells={["laptop+", "@media (min-width: 1280px)", ">= 1280"]}
+    columns={[null, { shiki: true }, { code: true, size: "small" }]}
+  />
+  <CodeRow
+    inline
+    language="css"
+    cells={["tablet-", "@media (max-width: 1279px)", "<= 1279"]}
+    columns={[null, { shiki: true }, { code: true, size: "small" }]}
+  />
+  <CodeRow
+    inline
+    language="css"
+    cells={["laptop-", "@media (max-width: 1719px)", "<= 1719"]}
+    columns={[null, { shiki: true }, { code: true, size: "small" }]}
+  />
+</CodeTable>
+
+<Callout type="hint">`phone+` and `desktop-` span every width — applied at `:root` with no `@media`. `phone-` ≡ `phone` and `desktop+` ≡ `desktop`.</Callout>
 
 ---
 
@@ -108,3 +207,4 @@ const Wrapper = styled.div`
   />
 </ResponsiveDemo>
 
+<Callout type="hint">Zoom your browser to simulate different screen sizes.</Callout>

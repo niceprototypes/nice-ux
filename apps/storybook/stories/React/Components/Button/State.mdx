@@ -27,8 +27,8 @@ export const stateCode = s =>
   {states.map(state => (
     <CodeRow
       key={state}
-      previewCell={
-        <Flex gap="small">
+      cells={[
+          <Flex gap="small">
           <Button
             onClick={() => {}}
             state={state === "base" ? undefined : state}
@@ -42,10 +42,12 @@ export const stateCode = s =>
           >
             {stateLabel(state)}
           </Button>
-        </Flex>
-      }
+        </Flex>,
+          stateCode(state),
+        ]}
+        columns={[null, { shiki: true }]}
       language="tsx"
-      code={stateCode(state)}
+      
     />
   ))}
 </div>

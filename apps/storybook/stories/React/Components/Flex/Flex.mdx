@@ -39,10 +39,12 @@ import Flex from "nice-react-flex"
 </Typography>
 
 <CodeRow
-  previewCell={
-    <DemoDots dots={twoDots} />
-  }
+  cells={[
+          <DemoDots dots={twoDots} />,
+          `<Flex>{children}</Flex>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Flex>{children}</Flex>`}
+  
 />
 

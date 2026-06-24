@@ -20,16 +20,18 @@ export const loremIpsum = "Lorem ipsum dolor sit amet"
   {["left", "center", "right", "justify"].map(align => (
     <CodeRow
       key={align}
-      previewCell={
-        <Flex
+      cells={[
+          <Flex
           direction="column"
           grow={1}
         >
           <Typography align={align}>{loremIpsum}</Typography>
-        </Flex>
-      }
+        </Flex>,
+          toSource("Typography", { align }, { children: loremIpsum }),
+        ]}
+        columns={[null, { shiki: true }]}
       language="tsx"
-      code={toSource("Typography", { align }, { children: loremIpsum })}
+      
     />
   ))}
 </div>

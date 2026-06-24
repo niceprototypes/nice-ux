@@ -14,23 +14,27 @@ import { CodeRow } from "../../../../src/components/CodeRow"
 </Typography>
 
 <CodeRow
-  previewCell={
-    <Button onClick={() => {}}>Primary</Button>
-  }
+  cells={[
+          <Button onClick={() => {}}>Primary</Button>,
+          `<Button onClick={handler}>\n  {children}\n</Button>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Button onClick={handler}>\n  {children}\n</Button>`}
+  
 />
 
 <CodeRow
-  previewCell={
-    <Button
+  cells={[
+          <Button
       onClick={() => {}}
       status="secondary"
     >
       Secondary
-    </Button>
-  }
+    </Button>,
+          `<Button\n  onClick={handler}\n  status="secondary"\n>\n  {children}\n</Button>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Button\n  onClick={handler}\n  status="secondary"\n>\n  {children}\n</Button>`}
+  
 />
 

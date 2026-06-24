@@ -27,11 +27,13 @@ import { toSource } from "../../../../src/services"
   ].map(color => (
     <CodeRow
       key={color}
-      previewCell={
-        <Typography color={color}>{color}</Typography>
-      }
+      cells={[
+          <Typography color={color}>{color}</Typography>,
+          toSource("Typography", { color }, { children: color }),
+        ]}
+        columns={[null, { shiki: true }]}
       language="tsx"
-      code={toSource("Typography", { color }, { children: color })}
+      
     />
   ))}
 </div>

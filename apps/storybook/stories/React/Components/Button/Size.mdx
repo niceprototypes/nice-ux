@@ -25,16 +25,18 @@ export const sizeCode = s =>
   {sizes.map(size => (
     <CodeRow
       key={size}
-      previewCell={
-        <Button
+      cells={[
+          <Button
           onClick={() => {}}
           size={size}
         >
           {sizeLabel(size)}
-        </Button>
-      }
+        </Button>,
+          sizeCode(size),
+        ]}
+        columns={[null, { shiki: true }]}
       language="tsx"
-      code={sizeCode(size)}
+      
     />
   ))}
 </div>

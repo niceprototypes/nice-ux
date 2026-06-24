@@ -17,11 +17,13 @@ import { toSource } from "../../../../src/services"
   {["h1", "h2", "h3", "h4", "p", "span"].map(as => (
     <CodeRow
       key={as}
-      previewCell={
-        <Typography as={as}>{as}</Typography>
-      }
+      cells={[
+          <Typography as={as}>{as}</Typography>,
+          toSource("Typography", { as }, { children: as }),
+        ]}
+        columns={[null, { shiki: true }]}
       language="tsx"
-      code={toSource("Typography", { as }, { children: as })}
+      
     />
   ))}
 </div>

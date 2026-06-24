@@ -17,72 +17,78 @@ export const growCode = a =>
 </StoryDescription>
 
 <CodeRow
-  previewCell={
-    <DemoDots
+  cells={[
+          <DemoDots
       bordered
       width="12rem"
       dots={[
         {
-          color: getToken("color", { variant: "error" }),
-          height: getToken("cellHeight", { variant: "smaller" }),
-          width: getToken("cellHeight", { variant: "smaller" }),
+          color: getToken("color", "error"),
+          height: getToken("cellHeight", "smaller"),
+          width: getToken("cellHeight", "smaller"),
           grow: 0,
         },
         {
-          color: getToken("color", { variant: "link" }),
-          height: getToken("cellHeight", { variant: "smaller" }),
+          color: getToken("color", "link"),
+          height: getToken("cellHeight", "smaller"),
           grow: 1,
         },
       ]}
-    />
-  }
+    />,
+          growCode(0),
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={growCode(0)}
+  
 />
 
 <CodeRow
-  previewCell={
-    <DemoDots
+  cells={[
+          <DemoDots
       bordered
       width="12rem"
       dots={[
         {
-          color: getToken("color", { variant: "error" }),
-          height: getToken("cellHeight", { variant: "smaller" }),
+          color: getToken("color", "error"),
+          height: getToken("cellHeight", "smaller"),
           grow: 1,
         },
         {
-          color: getToken("color", { variant: "link" }),
-          height: getToken("cellHeight", { variant: "smaller" }),
+          color: getToken("color", "link"),
+          height: getToken("cellHeight", "smaller"),
           grow: 1,
         },
       ]}
-    />
-  }
+    />,
+          growCode(1),
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={growCode(1)}
+  
 />
 
 <CodeRow
-  previewCell={
-    <DemoDots
+  cells={[
+          <DemoDots
       bordered
       width="12rem"
       dots={[
         {
-          color: getToken("color", { variant: "error" }),
-          height: getToken("cellHeight", { variant: "smaller" }),
+          color: getToken("color", "error"),
+          height: getToken("cellHeight", "smaller"),
           grow: 2,
         },
         {
-          color: getToken("color", { variant: "link" }),
-          height: getToken("cellHeight", { variant: "smaller" }),
+          color: getToken("color", "link"),
+          height: getToken("cellHeight", "smaller"),
           grow: 1,
         },
       ]}
-    />
-  }
+    />,
+          growCode(2),
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={growCode(2)}
+  
 />
 

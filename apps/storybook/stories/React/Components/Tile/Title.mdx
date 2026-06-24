@@ -15,11 +15,13 @@ import { CodeRow } from "../../../../src/components/CodeRow"
 
 <CodeRow
   fullWidth
-  previewCell={
-    <Tile title="Title" description="Description" />
-  }
+  cells={[
+          <Tile title="Title" description="Description" />,
+          `<Tile title="Title" description="Description" />`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Tile title="Title" description="Description" />`}
+  
 />
 
 ## titleProps
@@ -30,104 +32,118 @@ Forwarded to the title's `Typography`. Any prop from `TypographyProps` (except `
 
 <CodeRow
   fullWidth
-  previewCell={
-    <Tile
+  cells={[
+          <Tile
       title="Title"
       description="Description"
       titleProps={{ as: "h1" }}
-    />
-  }
+    />,
+          `<Tile\n  title="Title"\n  description="Description"\n  titleProps={{ as: "h1" }}\n/>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Tile\n  title="Title"\n  description="Description"\n  titleProps={{ as: "h1" }}\n/>`}
+  
 />
 
 ### titleProps.color
 
 <CodeRow
   fullWidth
-  previewCell={
-    <Tile
+  cells={[
+          <Tile
       title="Title"
       description="Description"
       titleProps={{ color: "link" }}
-    />
-  }
+    />,
+          `<Tile\n  title="Title"\n  description="Description"\n  titleProps={{ color: "link" }}\n/>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Tile\n  title="Title"\n  description="Description"\n  titleProps={{ color: "link" }}\n/>`}
+  
 />
 
 ### titleProps.size
 
 <CodeRow
   fullWidth
-  previewCell={
-    <Tile
+  cells={[
+          <Tile
       title="Title"
       description="Description"
       titleProps={{ size: "larger" }}
-    />
-  }
+    />,
+          `<Tile\n  title="Title"\n  description="Description"\n  titleProps={{ size: "larger" }}\n/>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Tile\n  title="Title"\n  description="Description"\n  titleProps={{ size: "larger" }}\n/>`}
+  
 />
 
 ### titleProps.weight
 
 <CodeRow
   fullWidth
-  previewCell={
-    <Tile
+  cells={[
+          <Tile
       title="Title"
       description="Description"
       titleProps={{ weight: "light" }}
-    />
-  }
+    />,
+          `<Tile\n  title="Title"\n  description="Description"\n  titleProps={{ weight: "light" }}\n/>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Tile\n  title="Title"\n  description="Description"\n  titleProps={{ weight: "light" }}\n/>`}
+  
 />
 
 ### titleProps.align
 
 <CodeRow
   fullWidth
-  previewCell={
-    <Tile
+  cells={[
+          <Tile
       title="Title"
       description="Description"
       titleProps={{ align: "center" }}
-    />
-  }
+    />,
+          `<Tile\n  title="Title"\n  description="Description"\n  titleProps={{ align: "center" }}\n/>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Tile\n  title="Title"\n  description="Description"\n  titleProps={{ align: "center" }}\n/>`}
+  
 />
 
 ### titleProps.code
 
 <CodeRow
   fullWidth
-  previewCell={
-    <Tile
+  cells={[
+          <Tile
       title="Title"
       description="Description"
-      titleProps={{ code: true }}
-    />
-  }
+      titleProps={{ shiki: true }}
+    />,
+          `<Tile\n  title="Title"\n  description="Description"\n  titleProps={{ shiki: true }}\n/>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Tile\n  title="Title"\n  description="Description"\n  titleProps={{ code: true }}\n/>`}
+  
 />
 
 ### titleProps.lineHeight
 
 <CodeRow
   fullWidth
-  previewCell={
-    <Tile
+  cells={[
+          <Tile
       title="Title"
       description="Description"
       titleProps={{ lineHeight: "expanded" }}
-    />
-  }
+    />,
+          `<Tile\n  title="Title"\n  description="Description"\n  titleProps={{ lineHeight: "expanded" }}\n/>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Tile\n  title="Title"\n  description="Description"\n  titleProps={{ lineHeight: "expanded" }}\n/>`}
+  
 />
 

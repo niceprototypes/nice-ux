@@ -15,31 +15,35 @@ import { toSource } from "../../../../src/services"
 </Typography>
 
 <CodeRow
-  previewCell={
-    <Typography size="large">Normal rendering</Typography>
-  }
-  language="tsx"
-  code={toSource(
+  cells={[
+          <Typography size="large">Normal rendering</Typography>,
+          toSource(
       "Typography",
       { size: "large" },
       { children: "Normal rendering" }
-    )}
+    ),
+        ]}
+        columns={[null, { shiki: true }]}
+  language="tsx"
+  
 />
 
 <CodeRow
-  previewCell={
-    <Typography
+  cells={[
+          <Typography
       antialiased
       size="large"
     >
       Antialiased rendering
-    </Typography>
-  }
-  language="tsx"
-  code={toSource(
+    </Typography>,
+          toSource(
       "Typography",
       { antialiased: true, size: "large" },
       { children: "Antialiased rendering" }
-    )}
+    ),
+        ]}
+        columns={[null, { shiki: true }]}
+  language="tsx"
+  
 />
 

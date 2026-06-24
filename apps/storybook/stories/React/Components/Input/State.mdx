@@ -27,15 +27,17 @@ export const stateCode = (s) =>
   {states.map((state) => (
     <CodeRow
       key={state}
-      previewCell={
-        <Input
+      cells={[
+          <Input
           placeholder={stateLabel(state)}
           state={state === "base" ? undefined : state}
           onChange={() => {}}
-        />
-      }
+        />,
+          stateCode(state),
+        ]}
+        columns={[null, { shiki: true }]}
       language="tsx"
-      code={stateCode(state)}
+      
     />
   ))}
 </div>

@@ -25,15 +25,17 @@ export const radiusCode = (r) =>
   {radii.map((radius) => (
     <CodeRow
       key={radius}
-      previewCell={
-        <Input
+      cells={[
+          <Input
           borderRadius={radius}
           placeholder={radiusLabel(radius)}
           onChange={() => {}}
-        />
-      }
+        />,
+          radiusCode(radius),
+        ]}
+        columns={[null, { shiki: true }]}
       language="tsx"
-      code={radiusCode(radius)}
+      
     />
   ))}
 </div>

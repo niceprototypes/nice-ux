@@ -15,25 +15,29 @@ import { CodeRow } from "../../../../src/components/CodeRow"
 </Typography>
 
 <CodeRow
-  previewCell={
-    <Input
+  cells={[
+          <Input
       placeholder="Primary"
       onChange={() => {}}
-    />
-  }
+    />,
+          `<Input\n  placeholder="Primary"\n  onChange={handler}\n/>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Input\n  placeholder="Primary"\n  onChange={handler}\n/>`}
+  
 />
 
 <CodeRow
-  previewCell={
-    <Input
+  cells={[
+          <Input
       status="secondary"
       placeholder="Secondary"
       onChange={() => {}}
-    />
-  }
+    />,
+          `<Input\n  status="secondary"\n  placeholder="Secondary"\n  onChange={handler}\n/>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Input\n  status="secondary"\n  placeholder="Secondary"\n  onChange={handler}\n/>`}
+  
 />
 

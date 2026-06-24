@@ -27,18 +27,22 @@ export const nightProps = { ...baseProps, alt: "Night theme", theme: "night" }
 </Typography>
 
 <CodeRow
-  previewCell={
-    <Image {...dayProps} />
-  }
+  cells={[
+          <Image {...dayProps} />,
+          toSource("Image", dayProps),
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={toSource("Image", dayProps)}
+  
 />
 
 <CodeRow
-  previewCell={
-    <Image {...nightProps} />
-  }
+  cells={[
+          <Image {...nightProps} />,
+          toSource("Image", nightProps),
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={toSource("Image", nightProps)}
+  
 />
 

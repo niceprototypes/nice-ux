@@ -16,25 +16,29 @@ import { CodeRow } from "../../../../src/components/CodeRow"
 
 <CodeRow
   fullWidth
-  previewCell={
-    <Typography size="small" color="light">
+  cells={[
+          <Typography size="small" color="light">
       Custom renderer for individual link items with isActive state
-    </Typography>
-  }
+    </Typography>,
+          `<StickySectionLinks\n  links={links}\n  renderLink={(link, isActive) => (\n    <Button variant={isActive ? "primary" : "ghost"}>\n      {link.label}\n    </Button>\n  )}\n/>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<StickySectionLinks\n  links={links}\n  renderLink={(link, isActive) => (\n    <Button variant={isActive ? "primary" : "ghost"}>\n      {link.label}\n    </Button>\n  )}\n/>`}
+  
 />
 
 ### renderWrapper
 
 <CodeRow
   fullWidth
-  previewCell={
-    <Typography size="small" color="light">
+  cells={[
+          <Typography size="small" color="light">
       Custom renderer for the wrapper container
-    </Typography>
-  }
+    </Typography>,
+          `<StickySectionLinks\n  links={links}\n  renderWrapper={(children) => (\n    <nav className="custom-nav">{children}</nav>\n  )}\n/>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<StickySectionLinks\n  links={links}\n  renderWrapper={(children) => (\n    <nav className="custom-nav">{children}</nav>\n  )}\n/>`}
+  
 />
 

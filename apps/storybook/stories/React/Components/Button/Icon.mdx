@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Button from "nice-react-button"
-import Typography from "nice-react-typography"
+import Typography from "../../../../src/nice/Typography"
 import { CodeRow } from "../../../../src/components/CodeRow"
 
 <Meta title="Components/Button/icon" />
@@ -14,27 +14,30 @@ import { CodeRow } from "../../../../src/components/CodeRow"
 </Typography>
 
 <CodeRow
-  previewCell={
-    <Button
+  cells={[
+          <Button
       onClick={() => {}}
       icon="arrow-right"
     >
       Next
-    </Button>
-  }
+    </Button>,
+          `<Button\n  onClick={handler}\n  icon="arrow-right"\n>\n  {children}\n</Button>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Button\n  onClick={handler}\n  icon="arrow-right"\n>\n  {children}\n</Button>`}
+  
 />
 
 <CodeRow
-  previewCell={
-    <Button
+  cells={[
+          <Button
       onClick={() => {}}
       icon="plus"
       aria-label="Add item"
-    />
-  }
+    />,
+          `<Button\n  onClick={handler}\n  icon="plus"\n  aria-label="Add item"\n/>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Button\n  onClick={handler}\n  icon="plus"\n  aria-label="Add item"\n/>`}
+  
 />
-

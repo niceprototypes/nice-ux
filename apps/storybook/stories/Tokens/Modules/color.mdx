@@ -1,0 +1,68 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { TokenStory } from "./tables"
+import Flex from "nice-react-flex"
+import { getHSLA, getToken } from "nice-react-styles"
+import { CodeRow } from "../../../src/components/CodeRow"
+import { CodeTable } from "../../../src/components/CodeTable"
+
+<Meta title="Tokens/Modules/color" />
+
+<TokenStory name="color" />
+
+{/* Live getHSLA demo — each swatch's background is the actual getHSLA() return,
+    so the page can never drift from the function's behavior. */}
+export const hslaExamples = [
+  {
+    label: "Original",
+    call: `getHSLA({\n  module: "color",\n  token: "error",\n})`,
+    options: { module: "color", token: "error" },
+  },
+  {
+    label: `"Faded"`,
+    call: `getHSLA({\n  module: "color",\n  token: "error",\n  values: [0, -20, 20, -0.2],\n})`,
+    options: { module: "color", token: "error", values: [0, -20, 20, -0.2] },
+  },
+  {
+    label: `"Exposed"`,
+    call: `getHSLA({\n  module: "color",\n  token: "error",\n  values: [0, 0, 20, 0],\n})`,
+    options: { module: "color", token: "error", values: [0, 0, 20, 0] },
+  },
+  {
+    label: `"Tinted"`,
+    call: `getHSLA({\n  module: "color",\n  token: "error",\n  theme: "night",\n  values: [0, -20, -20, 0],\n})`,
+    options: { module: "color", token: "error", theme: "night", values: [0, -20, -20, 0] },
+  },
+]
+
+---
+
+## getHSLA
+
+<CodeTable
+  columnWidths={["16em", "20em"]}
+>
+  {hslaExamples.map(({ label, call, options }) => {
+    const result = getHSLA(options)
+    return (
+      <CodeRow
+        key={label}
+        inline
+        language="tsx"
+        cells={[
+          <Flex
+            style={{
+              width: getToken("cellHeight", "smaller"),
+              height: getToken("cellHeight", "smaller"),
+              backgroundColor: result,
+              borderRadius: "50%",
+            }}
+          />,
+          label,
+          call,
+          result,
+        ]}
+        columns={["4em", { size: "small" }, { shiki: true }, { code: true, size: "small", color: "lighter" }]}
+      />
+    )
+  })}
+</CodeTable>

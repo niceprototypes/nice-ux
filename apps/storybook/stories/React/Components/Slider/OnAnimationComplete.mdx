@@ -13,12 +13,14 @@ import Typography from "../../../../src/nice/Typography"
 </StoryDescription>
 
 <CodeRow
-  previewCell={
-    <Typography color="light">
+  cells={[
+          <Typography color="light">
       Reset <code>isAnimating</code> from the callback so the next navigation gate opens.
-    </Typography>
-  }
+    </Typography>,
+          `onAnimationComplete={() => {\n  setIsAnimating(false)\n  trackSlideView(currentIndex)\n}}`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`onAnimationComplete={() => {\n  setIsAnimating(false)\n  trackSlideView(currentIndex)\n}}`}
+  
 />
 

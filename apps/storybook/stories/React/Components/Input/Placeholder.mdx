@@ -15,13 +15,15 @@ import { CodeRow } from "../../../../src/components/CodeRow"
 </Typography>
 
 <CodeRow
-  previewCell={
-    <Input
+  cells={[
+          <Input
       placeholder="name@example.com"
       onChange={() => {}}
-    />
-  }
+    />,
+          `<Input\n  placeholder="name@example.com"\n  onChange={handler}\n/>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Input\n  placeholder="name@example.com"\n  onChange={handler}\n/>`}
+  
 />
 

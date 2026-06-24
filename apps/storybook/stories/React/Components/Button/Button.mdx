@@ -33,10 +33,12 @@ import Button from "nice-react-button"
 </Typography>
 
 <CodeRow
-  previewCell={
-    <Button onClick={() => alert("Button clicked!")}>Click Me</Button>
-  }
+  cells={[
+          <Button onClick={() => alert("Button clicked!")}>Click Me</Button>,
+          `<Button onClick={handler}>\n  {children}\n</Button>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Button onClick={handler}>\n  {children}\n</Button>`}
+  
 />
 

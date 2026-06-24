@@ -14,18 +14,22 @@ import { toSource } from "../../../../src/services"
 </StoryDescription>
 
 <CodeRow
-  previewCell={
-    <Typography>Hello world</Typography>
-  }
+  cells={[
+          <Typography>Hello world</Typography>,
+          toSource("Typography", {}, { children: "Hello world" }),
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={toSource("Typography", {}, { children: "Hello world" })}
+  
 />
 
 <CodeRow
-  previewCell={
-    <Typography code>hello_world</Typography>
-  }
+  cells={[
+          <Typography code>hello_world</Typography>,
+          toSource("Typography", { shiki: true }, { children: "hello_world" }),
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={toSource("Typography", { code: true }, { children: "hello_world" })}
+  
 />
 

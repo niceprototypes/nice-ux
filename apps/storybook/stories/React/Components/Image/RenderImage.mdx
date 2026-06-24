@@ -32,8 +32,8 @@ export const renderImageExpr = `(src, alt) => (
 </Typography>
 
 <CodeRow
-  previewCell={
-    <Image
+  cells={[
+          <Image
       {...imageProps}
       renderImage={(src, alt) => (
         <picture>
@@ -49,11 +49,13 @@ export const renderImageExpr = `(src, alt) => (
           />
         </picture>
       )}
-    />
-  }
-  language="tsx"
-  code={toSource("Image", imageProps, {
+    />,
+          toSource("Image", imageProps, {
       raw: { renderImage: renderImageExpr },
-    })}
+    }),
+        ]}
+        columns={[null, { shiki: true }]}
+  language="tsx"
+  
 />
 

@@ -1,0 +1,77 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../src/components/Story"
+
+<Meta
+  title="React/Bindings/useTheme"
+  name="Docs"
+/>
+
+<StoryHeader title="useTheme" />
+
+The theme sibling of [`useDevice`](/docs/react-bindings-usedevice--docs). Reads the
+theme state published by `StylesProvider` and returns `{ theme }` — a theme name
+(`"day"`, `"night"`, or a custom theme), not a boolean, so more themes can be
+added without a breaking signature change. When `StylesProvider` is given
+`detectTheme`, it detects the OS color-scheme preference
+(`prefers-color-scheme: dark`) once and shares it through context — so any
+descendant reads one shared `theme` instead of wiring its own `matchMedia`.
+
+---
+
+## Enable detection on the provider
+
+```tsx
+import { StylesProvider } from "nice-react-styles"
+
+<StylesProvider detectTheme>
+  <App />
+</StylesProvider>
+```
+
+`detectTheme` defaults to `false`. When off, no detection runs and no listener is
+registered — `useTheme()` returns `{ theme: DEFAULT_THEME }` (`"day"`).
+
+## Read it anywhere below
+
+`useTheme()` returns the theme **name**. When a component only cares whether it's
+dark, derive a local `isNight` from it — it's a one-liner, and not every consumer
+needs it, so the hook stays name-based:
+
+```tsx
+import { useTheme } from "nice-react-styles"
+
+function Logo() {
+  const { theme } = useTheme()
+  const isNight = theme === "night"
+
+  // append "-dark" to the asset when the night theme is active
+  return <img src={`/logo${isNight ? "-dark" : ""}.svg`} alt="Logo" />
+}
+```
+
+Keeping `isNight` local rather than baking it into the hook means branching on
+`theme` survives adding more themes later, while dark-only consumers still get a
+clean boolean.
+
+Same shape and ergonomics as `useDevice` — both come from `StylesProvider`, so a
+component can read device and theme from one place:
+
+```tsx
+const { isMobile } = useDevice()
+const { theme } = useTheme()
+```
+
+---
+
+## What it reflects
+
+`theme` follows the **system color-scheme preference** (and the default
+cascade) — it is the reactive equivalent of mapping
+`window.matchMedia("(prefers-color-scheme: dark)").matches` to `"night"` /
+`"day"`.
+
+It does **not** reflect an explicit [`<Theme>`](/docs/react-theme--docs)
+pin you apply yourself — pinning is a deliberate override (the theme equivalent
+of forcing a device state). To force a specific theme on a subtree, use
+`<Theme name="night">`; to react to a per-element effective theme including
+pins, read the cascade directly (`getComputedStyle`).

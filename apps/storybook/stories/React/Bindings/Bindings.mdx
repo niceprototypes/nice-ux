@@ -2,7 +2,7 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../src/components/Story"
 
 <Meta
-  title="Bindings"
+  title="React/Bindings"
   name="Docs"
 />
 
@@ -15,7 +15,15 @@ its relevant package.
 
 ### Contents
 
-- [useDeviceDetector](/docs/bindings-usedevicedetector--docs) — Returns
+- [useDeviceDetector](/docs/react-bindings-usedevicedetector--docs) — Returns
   whether the current viewport is mobile. Supports context via `DeviceProvider`
-  and localStorage debugging overrides.
+  and localStorage debugging overrides. From `nice-react-device-detector`.
+
+- [useDevice](/docs/react-bindings-usedevice--docs) — Reads the shared
+  `{ isMobile }` published by `StylesProvider` when given `detectDevice`. One
+  detection instance for the whole tree. From `nice-react-styles`.
+
+- [useTheme](/docs/react-bindings-usetheme--docs) — Reads the shared `{ theme }`
+  published by `StylesProvider` when given `detectTheme`, following the OS
+  color-scheme preference. From `nice-react-styles`.
 

@@ -17,16 +17,18 @@ import { colors } from "./Icon.services"
   {colors.map(color => (
     <CodeRow
       key={color}
-      previewCell={
-        <Icon
+      cells={[
+          <Icon
           color={color}
           name="message"
           size="larger"
           strokeWidth="large"
-        />
-      }
+        />,
+          `<Icon color="${color}" />`,
+        ]}
+        columns={[null, { shiki: true }]}
       language="tsx"
-      code={`<Icon color="${color}" />`}
+      
     />
   ))}
 </div>

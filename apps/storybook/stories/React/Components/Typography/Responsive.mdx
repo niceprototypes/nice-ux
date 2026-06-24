@@ -26,11 +26,13 @@ export const largeLabel = `≥${getBreakpointValue("laptop")}px`
     return (
       <CodeRow
         key={size}
-        previewCell={
-          <Typography size={size}>{children}</Typography>
-        }
+        cells={[
+          <Typography size={size}>{children}</Typography>,
+          toSource("Typography", { size }, { children }),
+        ]}
+        columns={[null, { shiki: true }]}
         language="tsx"
-        code={toSource("Typography", { size }, { children })}
+        
       />
     )
   })}

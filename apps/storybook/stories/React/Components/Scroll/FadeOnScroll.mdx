@@ -17,8 +17,8 @@ import { CodeRow } from "../../../../src/components/CodeRow"
 
 <CodeRow
   fullWidth
-  previewCell={
-    <ScrollProvider>
+  cells={[
+          <ScrollProvider>
       <FadeOnScroll
         startPosition={0}
         peakPosition={50}
@@ -36,9 +36,11 @@ import { CodeRow } from "../../../../src/components/CodeRow"
           <Typography>This element fades in and out as you scroll</Typography>
         </Flex>
       </FadeOnScroll>
-    </ScrollProvider>
-  }
+    </ScrollProvider>,
+          `<FadeOnScroll\n  startPosition={0}\n  peakPosition={50}\n  endPosition={100}\n>\n  {children}\n</FadeOnScroll>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<FadeOnScroll\n  startPosition={0}\n  peakPosition={50}\n  endPosition={100}\n>\n  {children}\n</FadeOnScroll>`}
+  
 />
 

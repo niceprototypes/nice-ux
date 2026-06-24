@@ -19,11 +19,13 @@ export const spacings = ["smaller", "small", "base", "large", "larger"]
     <CodeRow
       fullWidth
       key={value}
-      previewCell={
-        <Tile spacing={value} title="Title" description="Description" />
-      }
+      cells={[
+          <Tile spacing={value} title="Title" description="Description" />,
+          `<Tile spacing="${value}" title="Title" description="Description" />`,
+        ]}
+        columns={[null, { shiki: true }]}
       language="tsx"
-      code={`<Tile spacing="${value}" title="Title" description="Description" />`}
+      
     />
   ))}
 </div>

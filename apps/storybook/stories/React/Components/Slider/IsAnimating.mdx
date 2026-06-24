@@ -13,12 +13,14 @@ import Typography from "../../../../src/nice/Typography"
 </StoryDescription>
 
 <CodeRow
-  previewCell={
-    <Typography color="light">
+  cells={[
+          <Typography color="light">
       Set <code>isAnimating</code> to <code>true</code> before changing <code>currentIndex</code>; reset it from <code>onAnimationComplete</code>.
-    </Typography>
-  }
+    </Typography>,
+          `const goToSlide = (index) => {\n  if (!isAnimating) {\n    setIsAnimating(true)\n    setCurrentIndex(index)\n  }\n}`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`const goToSlide = (index) => {\n  if (!isAnimating) {\n    setIsAnimating(true)\n    setCurrentIndex(index)\n  }\n}`}
+  
 />
 

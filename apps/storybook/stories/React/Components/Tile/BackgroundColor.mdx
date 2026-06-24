@@ -22,9 +22,13 @@ import { toSource } from "../../../../src/services"
       <CodeRow
         fullWidth
         key={variant}
-        previewCell={<Tile {...props} />}
+        cells={[
+          <Tile {...props} />,
+          toSource("Tile", props),
+        ]}
+        columns={[null, { shiki: true }]}
         language="tsx"
-        code={toSource("Tile", props)}
+        
       />
     )
   })}

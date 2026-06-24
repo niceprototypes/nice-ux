@@ -17,14 +17,16 @@ import { fontSizes } from "./Icon.services"
   {fontSizes.map(size => (
     <CodeRow
       key={size}
-      previewCell={
-        <Icon
+      cells={[
+          <Icon
           size={size}
           name="message"
-        />
-      }
+        />,
+          size === "base" ? `<Icon />` : `<Icon size="${size}" />`,
+        ]}
+        columns={[null, { shiki: true }]}
       language="tsx"
-      code={size === "base" ? `<Icon />` : `<Icon size="${size}" />`}
+      
     />
   ))}
 </div>

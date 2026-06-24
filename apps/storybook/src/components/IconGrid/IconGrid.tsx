@@ -22,7 +22,7 @@ const IconGrid = ({ icons }: IconGridProps) => {
             name={name}
             size="larger"
           />
-          <Typography code weight="medium">{name}</Typography>
+          <Typography code>{name}</Typography>
         </Flex>
       ))}
     </Flex>

@@ -15,8 +15,8 @@ import { CodeRow } from "../../../../src/components/CodeRow"
 
 <CodeRow
   fullWidth
-  previewCell={
-    <Tile
+  cells={[
+          <Tile
       maxWidthLarge={1200}
       title="Title"
       description="Content constrained to 1200px max-width"
@@ -24,9 +24,11 @@ import { CodeRow } from "../../../../src/components/CodeRow"
       <Typography color="light">
         Content constrained to 1200px max-width
       </Typography>
-    </Tile>
-  }
+    </Tile>,
+          `<Tile maxWidthLarge={1200} title="Title" description="Content constrained to 1200px max-width" />`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Tile maxWidthLarge={1200} title="Title" description="Content constrained to 1200px max-width" />`}
+  
 />
 

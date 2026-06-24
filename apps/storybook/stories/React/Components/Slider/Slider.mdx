@@ -33,8 +33,12 @@ import Slider from "nice-react-slider"
 </Typography>
 
 <CodeRow
-  previewCell={<InteractiveSlider />}
+  cells={[
+          <InteractiveSlider />,
+          `const [currentIndex, setCurrentIndex] = useState(0)\nconst [isAnimating, setIsAnimating] = useState(false)\n\n<Slider\n  currentIndex={currentIndex}\n  isAnimating={isAnimating}\n  onAnimationComplete={() => setIsAnimating(false)}\n>\n  {slides}\n</Slider>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`const [currentIndex, setCurrentIndex] = useState(0)\nconst [isAnimating, setIsAnimating] = useState(false)\n\n<Slider\n  currentIndex={currentIndex}\n  isAnimating={isAnimating}\n  onAnimationComplete={() => setIsAnimating(false)}\n>\n  {slides}\n</Slider>`}
+  
 />
 

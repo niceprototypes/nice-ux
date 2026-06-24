@@ -18,11 +18,13 @@ import { toSource } from "../../../../src/services"
     weight => (
       <CodeRow
         key={weight}
-        previewCell={
-          <Typography weight={weight}>{weight}</Typography>
-        }
+        cells={[
+          <Typography weight={weight}>{weight}</Typography>,
+          toSource("Typography", { weight }, { children: weight }),
+        ]}
+        columns={[null, { shiki: true }]}
         language="tsx"
-        code={toSource("Typography", { weight }, { children: weight })}
+        
       />
     )
   )}

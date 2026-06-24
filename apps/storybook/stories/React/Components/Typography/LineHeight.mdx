@@ -20,15 +20,17 @@ export const loremIpsumLong =
   {["condensed", "base", "expanded"].map(lineHeight => (
     <CodeRow
       key={lineHeight}
-      previewCell={
-        <Typography lineHeight={lineHeight}>{loremIpsumLong}</Typography>
-      }
-      language="tsx"
-      code={toSource(
+      cells={[
+          <Typography lineHeight={lineHeight}>{loremIpsumLong}</Typography>,
+          toSource(
           "Typography",
           { lineHeight },
           { children: loremIpsumLong }
-        )}
+        ),
+        ]}
+        columns={[null, { shiki: true }]}
+      language="tsx"
+      
     />
   ))}
 </div>

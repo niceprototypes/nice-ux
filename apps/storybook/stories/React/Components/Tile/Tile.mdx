@@ -35,11 +35,13 @@ import Tile from "nice-react-tile"
 
 <CodeRow
   fullWidth
-  previewCell={
-    <Tile title="Title" description="Description" />
-  }
+  cells={[
+          <Tile title="Title" description="Description" />,
+          `<Tile title="Title" description="Description" />`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Tile title="Title" description="Description" />`}
+  
 />
 
 ---

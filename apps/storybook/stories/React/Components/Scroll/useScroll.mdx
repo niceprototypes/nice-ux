@@ -18,8 +18,8 @@ import { ScrollPositionDisplay } from "./Scroll.services"
 
 <CodeRow
   fullWidth
-  previewCell={
-    <ScrollProvider>
+  cells={[
+          <ScrollProvider>
       <Flex
         direction="column"
         style={{
@@ -32,9 +32,11 @@ import { ScrollPositionDisplay } from "./Scroll.services"
           Scroll the page to see the value update
         </Typography>
       </Flex>
-    </ScrollProvider>
-  }
+    </ScrollProvider>,
+          `const scrollY = useScroll()\nreturn <div>Scrolled: {scrollY}px</div>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`const scrollY = useScroll()\nreturn <div>Scrolled: {scrollY}px</div>`}
+  
 />
 

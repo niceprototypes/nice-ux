@@ -2,9 +2,9 @@ import * as React from "react"
 import { withBreakpoints } from "nice-react-styles"
 import Typography from "../../nice/Typography"
 import { CodeRowProps } from "../CodeRow/CodeRow.types"
-import { Column, RowFlex } from "../CodeRow/CodeRow.styles"
-import { TableFlex } from "./CodeTable.styles"
+import { Column, RowFlex } from "../CodeGrid"
 import { CodeTableProps } from "./CodeTable.types"
+import Flex from "nice-react-flex"
 
 /**
  * A vertical set of CodeRow instances. When `name` is set, the table renders
@@ -20,7 +20,7 @@ import { CodeTableProps } from "./CodeTable.types"
  * same `RowFlex`/`Column` layout and `columnWidths` as the data rows so the
  * header lines up with the columns beneath it.
  */
-const BaseCodeTable = ({ name, columnWidths, columnHeaders, fontSize, fontWeight, children }: CodeTableProps) => {
+const BaseCodeTable = ({ name, columnWidths, columnHeaders, children }: CodeTableProps) => {
   // Filter to real elements so stray MDX whitespace between rows is ignored.
   const rows = React.Children.toArray(children).filter(React.isValidElement)
 
@@ -43,14 +43,14 @@ const BaseCodeTable = ({ name, columnWidths, columnHeaders, fontSize, fontWeight
           key={index}
           $width={columnWidths?.[index] ?? undefined}
         >
-          {label ? <Typography code>{label}</Typography> : null}
+          {label ? <Typography code size="small" color="lighter">{label}</Typography> : null}
         </Column>
       ))}
     </RowFlex>
   ) : null
 
   return (
-    <TableFlex direction="column" spacing="small none">
+    <Flex direction="column">
       {header}
       {rows.map((row, index) =>
         React.cloneElement(row as React.ReactElement<CodeRowProps>, {
@@ -60,12 +60,9 @@ const BaseCodeTable = ({ name, columnWidths, columnHeaders, fontSize, fontWeight
           name: index === 0 ? name : undefined,
           // Same widths on every row keep the table's columns aligned.
           columnWidths,
-          // Value-cell Typography styling, applied uniformly across rows.
-          fontSize,
-          fontWeight,
         })
       )}
-    </TableFlex>
+    </Flex>
   )
 }
 

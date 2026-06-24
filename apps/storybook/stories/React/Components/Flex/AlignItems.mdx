@@ -10,34 +10,34 @@ import { threeDots } from "./Flex.services"
 
 export const baselineDots = [
   {
-    color: getToken("color", { variant: "error" }),
-    height: getToken("cellHeight", { variant: "small" }),
-    width: getToken("cellHeight", { variant: "smaller" }),
+    color: getToken("color", "error"),
+    height: getToken("cellHeight", "small"),
+    width: getToken("cellHeight", "smaller"),
   },
   {
-    color: getToken("color", { variant: "warning" }),
-    height: getToken("cellHeight", { variant: "smaller" }),
-    width: getToken("cellHeight", { variant: "smaller" }),
+    color: getToken("color", "warning"),
+    height: getToken("cellHeight", "smaller"),
+    width: getToken("cellHeight", "smaller"),
   },
   {
-    color: getToken("color", { variant: "link" }),
+    color: getToken("color", "link"),
     height: getToken("cellHeight"),
-    width: getToken("cellHeight", { variant: "smaller" }),
+    width: getToken("cellHeight", "smaller"),
   },
 ]
 
 export const stretchDots = [
   {
-    color: getToken("color", { variant: "error" }),
-    width: getToken("cellHeight", { variant: "smaller" }),
+    color: getToken("color", "error"),
+    width: getToken("cellHeight", "smaller"),
   },
   {
-    color: getToken("color", { variant: "warning" }),
-    width: getToken("cellHeight", { variant: "smaller" }),
+    color: getToken("color", "warning"),
+    width: getToken("cellHeight", "smaller"),
   },
   {
-    color: getToken("color", { variant: "link" }),
-    width: getToken("cellHeight", { variant: "smaller" }),
+    color: getToken("color", "link"),
+    width: getToken("cellHeight", "smaller"),
   },
 ]
 
@@ -48,67 +48,77 @@ export const stretchDots = [
 </StoryDescription>
 
 <CodeRow
-  previewCell={
-    <DemoDots
+  cells={[
+          <DemoDots
       alignItems="flex-start"
       dots={threeDots}
       height="6rem"
       bordered
-    />
-  }
+    />,
+          `<Flex alignItems="flex-start">\n  {children}\n</Flex>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Flex alignItems="flex-start">\n  {children}\n</Flex>`}
+  
 />
 
 <CodeRow
-  previewCell={
-    <DemoDots
+  cells={[
+          <DemoDots
       alignItems="flex-end"
       dots={threeDots}
       height="6rem"
       bordered
-    />
-  }
+    />,
+          `<Flex alignItems="flex-end">\n  {children}\n</Flex>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Flex alignItems="flex-end">\n  {children}\n</Flex>`}
+  
 />
 
 <CodeRow
-  previewCell={
-    <DemoDots
+  cells={[
+          <DemoDots
       alignItems="center"
       dots={threeDots}
       height="6rem"
       bordered
-    />
-  }
+    />,
+          `<Flex alignItems="center">\n  {children}\n</Flex>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Flex alignItems="center">\n  {children}\n</Flex>`}
+  
 />
 
 <CodeRow
-  previewCell={
-    <DemoDots
+  cells={[
+          <DemoDots
       alignItems="baseline"
       dots={baselineDots}
       height="6rem"
       bordered
-    />
-  }
+    />,
+          `<Flex alignItems="baseline">\n  {children}\n</Flex>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Flex alignItems="baseline">\n  {children}\n</Flex>`}
+  
 />
 
 <CodeRow
-  previewCell={
-    <DemoDots
+  cells={[
+          <DemoDots
       alignItems="stretch"
       dots={stretchDots}
       height="6rem"
       bordered
-    />
-  }
+    />,
+          `<Flex alignItems="stretch">\n  {children}\n</Flex>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Flex alignItems="stretch">\n  {children}\n</Flex>`}
+  
 />
 

@@ -56,30 +56,32 @@ vendor's identifier (a <code>picsum</code> id) rather than a URL. Omit
 as the requested asset size.
 
 <CodeRow
-  previewCell={
-    <Image
+  cells={[
+          <Image
       vendor
       alt="Random vendor image"
       width="240px"
       height="160px"
       backgroundSize="cover"
       borderRadius="base"
-    />
-  }
-  language="tsx"
-  code={toSource("Image", {
+    />,
+          toSource("Image", {
       vendor: true,
       alt: "Random vendor image",
       width: "240px",
       height: "160px",
       backgroundSize: "cover",
       borderRadius: "base",
-    })}
+    }),
+        ]}
+        columns={[null, { shiki: true }]}
+  language="tsx"
+  
 />
 
 <CodeRow
-  previewCell={
-    <Image
+  cells={[
+          <Image
       vendor
       src="10"
       alt="Vendor image, fixed id"
@@ -87,10 +89,8 @@ as the requested asset size.
       height="160px"
       backgroundSize="cover"
       borderRadius="base"
-    />
-  }
-  language="tsx"
-  code={toSource("Image", {
+    />,
+          toSource("Image", {
       vendor: true,
       src: "10",
       alt: "Vendor image, fixed id",
@@ -98,7 +98,11 @@ as the requested asset size.
       height: "160px",
       backgroundSize: "cover",
       borderRadius: "base",
-    })}
+    }),
+        ]}
+        columns={[null, { shiki: true }]}
+  language="tsx"
+  
 />
 
 ### Direct URL access

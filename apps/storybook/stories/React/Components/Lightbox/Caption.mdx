@@ -18,8 +18,8 @@ export const DEMO_IMAGE = resolveVendorImage({ src: "10", width: "800px", height
 </Typography>
 
 <CodeRow
-  previewCell={
-    <Lightbox
+  cells={[
+          <Lightbox
       imageUrl={DEMO_IMAGE}
       alt="Demo landscape"
       title="Mountain landscape"
@@ -28,15 +28,17 @@ export const DEMO_IMAGE = resolveVendorImage({ src: "10", width: "800px", height
         src={DEMO_IMAGE}
         alt="Click to expand"
       />
-    </Lightbox>
-  }
+    </Lightbox>,
+          `<Lightbox\n  imageUrl="/image.png"\n  alt="Description"\n  title="Photo title"\n>\n  <img src="/image.png" />\n</Lightbox>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Lightbox\n  imageUrl="/image.png"\n  alt="Description"\n  title="Photo title"\n>\n  <img src="/image.png" />\n</Lightbox>`}
+  
 />
 
 <CodeRow
-  previewCell={
-    <Lightbox
+  cells={[
+          <Lightbox
       imageUrl={DEMO_IMAGE}
       alt="Demo landscape"
       title="Mountain landscape"
@@ -46,9 +48,11 @@ export const DEMO_IMAGE = resolveVendorImage({ src: "10", width: "800px", height
         src={DEMO_IMAGE}
         alt="Click to expand"
       />
-    </Lightbox>
-  }
+    </Lightbox>,
+          `<Lightbox\n  imageUrl="/image.png"\n  alt="Description"\n  title="Photo title"\n  description="Caption text"\n>\n  <img src="/image.png" />\n</Lightbox>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Lightbox\n  imageUrl="/image.png"\n  alt="Description"\n  title="Photo title"\n  description="Caption text"\n>\n  <img src="/image.png" />\n</Lightbox>`}
+  
 />
 

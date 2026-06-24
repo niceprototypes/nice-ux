@@ -7,11 +7,12 @@ import { DeviceRow } from "./DeviceRow"
 import {
   ConditionalRenderingDemo,
   ContextProviderDemo,
+  StylesProviderDeviceDemo,
   DebuggingDemo,
   ResponsiveDemo,
 } from "./useDeviceDetector.services"
 
-<Meta title="Bindings/useDeviceDetector" />
+<Meta title="React/Bindings/useDeviceDetector" />
 
 <StoryHeader title="useDeviceDetector" />
 
@@ -19,15 +20,9 @@ import {
 npm install nice-react-device-detector
 ```
 
-### Setup
-
 ```js
 import { useDeviceDetector } from "nice-react-device-detector"
-```
 
-### Usage
-
-```js
 const isMobile = useDeviceDetector()
 ```
 
@@ -40,9 +35,13 @@ const isMobile = useDeviceDetector()
 </Typography>
 
 <CodeRow
-  previewCell={<DeviceRow isMobile={useDeviceDetector()} />}
+  cells={[
+          <DeviceRow isMobile={useDeviceDetector()} />,
+          `const isMobile = useDeviceDetector()`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`const isMobile = useDeviceDetector()`}
+  
 />
 
 ## Conditional rendering
@@ -52,9 +51,13 @@ const isMobile = useDeviceDetector()
 </Typography>
 
 <CodeRow
-  previewCell={<ConditionalRenderingDemo />}
+  cells={[
+          <ConditionalRenderingDemo />,
+          `const isMobile = useDeviceDetector()\nreturn isMobile ? <MobileNav /> : <DesktopNav />`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`const isMobile = useDeviceDetector()\nreturn isMobile ? <MobileNav /> : <DesktopNav />`}
+  
 />
 
 ## Context provider
@@ -65,9 +68,31 @@ const isMobile = useDeviceDetector()
 </Typography>
 
 <CodeRow
-  previewCell={<ContextProviderDemo />}
+  cells={[
+          <ContextProviderDemo />,
+          `<DeviceProvider>\n  <App />\n</DeviceProvider>\n\n// inside any descendant\nconst { isMobile } = useDevice()`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<DeviceProvider>\n  <App />\n</DeviceProvider>\n\n// inside any descendant\nconst { isMobile } = useDevice()`}
+  
+/>
+
+## Inside StylesProvider
+
+<Typography color="light">
+  If the app already renders inside <code>StylesProvider</code>, skip the separate
+  provider: pass <code>detectDevice</code> and read the shared value with{" "}
+  <code>useDevice</code> from <code>nice-react-styles</code> — one listener, no
+  extra provider. See <a href="/docs/react-bindings-usedevice--docs">React/Bindings/useDevice</a>.
+</Typography>
+
+<CodeRow
+  cells={[
+          <StylesProviderDeviceDemo />,
+          `import { StylesProvider, useDevice } from "nice-react-styles"\n\n<StylesProvider detectDevice>\n  <App />\n</StylesProvider>\n\n// inside any descendant\nconst { isMobile } = useDevice()`,
+        ]}
+        columns={[null, { shiki: true }]}
+  language="tsx"
 />
 
 ## Debugging
@@ -79,9 +104,13 @@ const isMobile = useDeviceDetector()
 </Typography>
 
 <CodeRow
-  previewCell={<DebuggingDemo />}
+  cells={[
+          <DebuggingDemo />,
+          `localStorage.setItem("debug-mobile", "true")\nwindow.location.reload()`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`localStorage.setItem("debug-mobile", "true")\nwindow.location.reload()`}
+  
 />
 
 ## Responsive
@@ -92,8 +121,11 @@ const isMobile = useDeviceDetector()
 </Typography>
 
 <CodeRow
-  previewCell={<ResponsiveDemo />}
+  cells={[
+          <ResponsiveDemo />,
+          `const isMobile = useDeviceDetector()\n// re-renders whenever the viewport crosses the breakpoint`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`const isMobile = useDeviceDetector()\n// re-renders whenever the viewport crosses the breakpoint`}
+  
 />
-

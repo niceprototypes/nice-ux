@@ -42,8 +42,8 @@ import Lightbox from "nice-react-lightbox"
 </Typography>
 
 <CodeRow
-  previewCell={
-    <Lightbox
+  cells={[
+          <Lightbox
       imageUrl={DEMO_IMAGE}
       alt="Demo landscape"
     >
@@ -51,9 +51,11 @@ import Lightbox from "nice-react-lightbox"
         src={DEMO_IMAGE}
         alt="Click to expand"
       />
-    </Lightbox>
-  }
+    </Lightbox>,
+          `<Lightbox imageUrl="/image.png" alt="Description">\n  <img src="/image.png" alt="Thumbnail" />\n</Lightbox>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Lightbox imageUrl="/image.png" alt="Description">\n  <img src="/image.png" alt="Thumbnail" />\n</Lightbox>`}
+  
 />
 

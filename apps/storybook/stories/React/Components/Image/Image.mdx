@@ -34,7 +34,7 @@ import Image from "nice-react-image"
 {
   /* Standard img element */
 }
-;<Image
+<Image
   src="/photo.jpg"
   alt="A photo"
   backgroundSize="cover"
@@ -43,7 +43,7 @@ import Image from "nice-react-image"
 {
   /* As a background-image div with overlay content */
 }
-;<Image
+<Image
   as="div"
   src="/hero.jpg"
   alt="Hero"
@@ -65,18 +65,22 @@ import Image from "nice-react-image"
 </Typography>
 
 <CodeRow
-  previewCell={
-    <Image {...basicProps} />
-  }
+  cells={[
+          <Image {...basicProps} />,
+          toSource("Image", basicProps),
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={toSource("Image", basicProps)}
+  
 />
 
 <CodeRow
-  previewCell={
-    <Image {...coverProps} />
-  }
+  cells={[
+          <Image {...coverProps} />,
+          toSource("Image", coverProps),
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={toSource("Image", coverProps)}
+  
 />
 

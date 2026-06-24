@@ -1,0 +1,158 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+
+<Meta title="React/withBreakpoints" />
+
+<StoryHeader title="withBreakpoints" />
+
+`withBreakpoints` wraps a React component with a generic `breakpoints` prop
+that accepts an object keyed by breakpoint name (with optional `+`/`-` range
+modifiers). At render time, every key whose range covers the current viewport
+has its overrides merged over the base props. **Range keys (`+`/`-`) merge
+first; the bare exact key merges last and wins on conflict.**
+
+```bash
+npm install nice-react-styles
+```
+
+### Setup
+
+```ts
+import { withBreakpoints } from "nice-react-styles"
+
+const ResponsiveComponent = withBreakpoints<MyProps>(MyComponent)
+```
+
+Most consumers never call `withBreakpoints` directly — every visual
+`nice-react-*` component is exported pre-wrapped, so the `breakpoints` prop is
+already there.
+
+---
+
+## The `breakpoints` prop
+
+Every wrapped component accepts an optional `breakpoints` object. Keys are
+breakpoint names (`phone`, `tablet`, `laptop`, `desktop`) with an optional
+`+` or `-` suffix that turns a single name into a range. Values are partial
+prop overrides applied when the key's range covers the current viewport.
+
+```tsx
+<Tile
+  titleProps={{ size: "large", align: "center" }}
+  breakpoints={{
+    tablet: { spacing: "large base" },
+    "laptop+": { spacing: "larger base", maxWidthLarge: 1200 },
+  }}
+>
+  ...
+</Tile>
+```
+
+### Key shape
+
+| Key form        | Matches                                                  |
+| --------------- | -------------------------------------------------------- |
+| `"phone"`       | Phone only (current viewport === phone)                  |
+| `"tablet"`      | Tablet only                                              |
+| `"laptop"`      | Laptop only                                              |
+| `"desktop"`     | Desktop only                                             |
+| `"phone+"`      | Phone, tablet, laptop, desktop (everything)              |
+| `"tablet+"`     | Tablet, laptop, desktop                                  |
+| `"laptop+"`     | Laptop, desktop                                          |
+| `"desktop+"`    | Desktop (same as bare `"desktop"`)                       |
+| `"phone-"`      | Phone (same as bare `"phone"`)                           |
+| `"tablet-"`     | Phone, tablet                                            |
+| `"laptop-"`     | Phone, tablet, laptop                                    |
+| `"desktop-"`    | Phone, tablet, laptop, desktop (everything)              |
+
+`BreakpointName` is `"phone" | "tablet" | "laptop" | "desktop"`. Order, smallest
+to largest: phone < tablet < laptop < desktop.
+
+---
+
+## Merge semantics
+
+Multiple keys may match a single viewport (e.g. `"tablet"`, `"tablet+"`, and
+`"tablet-"` all match at tablet width). Specificity rule: **range keys (`+`/`-`)
+apply first in object insertion order; the bare exact key applies last and
+wins on conflict.** This mirrors CSS specificity intuition — the most specific
+match supersedes broader ones.
+
+Plain-object props merge **one level deep** so partial overrides preserve
+sibling keys.
+
+| Prop kind           | Examples                                  | Behavior                                 |
+| ------------------- | ----------------------------------------- | ---------------------------------------- |
+| Plain config object | `titleProps`, `descriptionProps`, `style` | One-level merge — sibling keys preserved |
+| Primitive           | `string`, `number`, `boolean`             | Replace                                  |
+| React element       | `children`, `contentLeft`, `contentRight` | Replace as a unit                        |
+| Array               | `string[]`, `number[]`                    | Replace as a unit                        |
+| Function            | event handlers, refs                      | Replace                                  |
+
+Concretely:
+
+```tsx
+<Tile
+  titleProps={{ size: "larger", align: "center" }}
+  breakpoints={{ "tablet+": { titleProps: { size: "larger" } } }}
+/>
+// effective titleProps at tablet+: { size: "larger", align: "center" }
+// `align` is preserved because titleProps is a plain object.
+```
+
+---
+
+## Use the `breakpoints` prop, not per-prop responsive shape
+
+Every prop on a `withBreakpoints`-wrapped component is scalar — `gap`,
+`direction`, `alignItems`, `justifyContent`, `grow`, `wrap`, etc. all
+accept a single value, not a `{ phone, tablet, laptop }` object. Per-prop
+responsive shape is no longer supported; all responsive overrides go
+through the single `breakpoints` prop:
+
+```tsx
+<Flex
+  direction="column"
+  gap="smaller"
+  breakpoints={{
+    "tablet+": { direction: "row", gap: "small" },
+  }}
+/>
+```
+
+One canonical place for responsive behavior, one place to read, one place
+to override. Multiple props that change at the same breakpoint compose
+into a single object entry instead of being spread across each prop's
+shape.
+
+---
+
+## How it works under the hood
+
+1. `useBreakpoint()` reads `window.innerWidth` via `useSyncExternalStore` and
+   returns one of `"phone"` / `"tablet"` / `"laptop"` / `"desktop"`.
+2. The wrapped component re-renders on viewport-cross.
+3. The HOC walks the `breakpoints` object, picks matching keys, and folds
+   their overrides into the base props with a one-level deep merge — range
+   keys first, exact keys last.
+4. The final merged props are passed to the underlying component.
+
+SSR snapshot is `"phone"` (phone-first); on hydration, the client snapshot
+takes over and re-renders if the viewport is wider.
+
+---
+
+## Pre-wrapped components
+
+These components ship with `withBreakpoints` already applied — just use the
+`breakpoints` prop directly:
+
+- [Button](/docs/components-button--docs)
+- [Flex](/docs/components-flex--docs)
+- [Icon](/docs/components-icon--docs)
+- [Image](/docs/components-image--docs)
+- [Lightbox](/docs/components-lightbox--docs)
+- [Slider](/docs/components-slider--docs)
+- [Tile](/docs/components-tile--docs)
+- [Typography](/docs/components-typography--docs)
+

@@ -16,8 +16,8 @@ import { CodeRow } from "../../../../src/components/CodeRow"
 
 <CodeRow
   fullWidth
-  previewCell={
-    <Tile
+  cells={[
+          <Tile
       title="Title"
       description="Description"
       contentLeft={
@@ -42,9 +42,11 @@ import { CodeRow } from "../../../../src/components/CodeRow"
           borderRadius="base"
         />
       }
-    />
-  }
+    />,
+          `<Tile\n  title="Title"\n  description="Description"\n  contentLeft={left}\n  contentRight={right}\n/>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Tile\n  title="Title"\n  description="Description"\n  contentLeft={left}\n  contentRight={right}\n/>`}
+  
 />
 

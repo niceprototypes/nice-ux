@@ -8,8 +8,9 @@ import html from "@shikijs/langs/html"
 import json from "@shikijs/langs/json"
 import themeLight from "@shikijs/themes/min-light"
 import themeDark from "@shikijs/themes/min-dark"
-import { CodeBlockDiv } from "./CodeBlock.styles"
+import { CodeBlockDiv, CodeScroll } from "./CodeBlock.styles"
 import { CodeLabel } from "./CodeLabel"
+import { copyToClipboard } from "../../services/copyToClipboard"
 import Flex from "nice-react-flex"
 
 const themeNameLight = "min-light"
@@ -68,11 +69,7 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
   copyOnClick = true,
   inline = false,
 }) => {
-  const handleClick = copyOnClick
-    ? () => {
-        navigator.clipboard.writeText(code.replace(/\n$/, ""))
-      }
-    : undefined
+  const handleClick = copyOnClick ? () => copyToClipboard(code) : undefined
 
   return (
     <CodeBlockDiv
@@ -80,7 +77,7 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
       $clickable={copyOnClick}
       $inline={inline}
     >
-      <Flex gap="large">
+      <CodeScroll gap="large">
         <Flex grow={1}>
           <div
             dangerouslySetInnerHTML={{
@@ -92,8 +89,8 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
             }}
           />
         </Flex>
-        {showLabel && !inline && <CodeLabel language={language} />}
-      </Flex>
+      </CodeScroll>
+      {showLabel && !inline && <CodeLabel language={language} />}
     </CodeBlockDiv>
   )
 }

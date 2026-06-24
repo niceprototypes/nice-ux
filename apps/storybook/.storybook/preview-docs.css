@@ -20,11 +20,12 @@
 
   /* Prose (non-code) follows the nice base font token — overridden to Avenir Next in src/nice/tokens.ts */
   &.sbdocs-content :where(h1, h2, h3, h4, h5, h6, p, li, td, th, blockquote) {
-    font-family: var(--np--font-family--base);
+    font-family: var(--np--font-family);
   }
 
   &.sbdocs-content {
-    max-width: 980px;
+    max-width: 720px;
+    margin-right: auto;
   }
 
   &.sbdocs-preview {
@@ -32,14 +33,15 @@
   }
 
   &.sbdocs-wrapper {
-    background-color: var(--np--background-color--base);
+    background-color: var(--np--background-color);
+    padding: var(--np--gap--larger);
   }
 
   p,
   li,
   th,
   td {
-    font-size: var(--np--font-size--base);
+    font-size: var(--np--font-size);
   }
 
   > hr {
@@ -73,7 +75,7 @@
   hr,
   th,
   td {
-    border-color: var(--np--border-color--base);
+    border-color: var(--np--border-color);
   }
 
   strong {
@@ -103,7 +105,7 @@
     }
 
     :where(p:not(.sb-anchor, .sb-unstyled, .sb-unstyled p)) code {
-      border-color: var(--np--border-color--base);
+      border-color: var(--np--border-color);
     }
 
     :where(li:not(.sb-anchor, .sb-unstyled, .sb-unstyled li)) code {

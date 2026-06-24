@@ -20,15 +20,17 @@ import { strokeWidths } from "./Icon.services"
   {strokeWidths.map(width => (
     <CodeRow
       key={width}
-      previewCell={
-        <Icon
+      cells={[
+          <Icon
           strokeWidth={width}
           name="message"
           size="larger"
-        />
-      }
+        />,
+          width === "base" ? `<Icon />` : `<Icon strokeWidth="${width}" />`,
+        ]}
+        columns={[null, { shiki: true }]}
       language="tsx"
-      code={width === "base" ? `<Icon />` : `<Icon strokeWidth="${width}" />`}
+      
     />
   ))}
 </div>

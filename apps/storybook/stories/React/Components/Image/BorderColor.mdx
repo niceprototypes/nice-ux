@@ -28,9 +28,13 @@ import { toSource } from "../../../../src/services"
     return (
       <CodeRow
         key={borderColor}
-        previewCell={<Image {...props} />}
+        cells={[
+          <Image {...props} />,
+          toSource("Image", props),
+        ]}
+        columns={[null, { shiki: true }]}
         language="tsx"
-        code={toSource("Image", props)}
+        
       />
     )
   })}

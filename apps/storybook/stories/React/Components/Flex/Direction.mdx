@@ -17,14 +17,16 @@ import { twoDots } from "./Flex.services"
   {["row", "column"].map(value => (
     <CodeRow
       key={value}
-      previewCell={
-        <DemoDots
+      cells={[
+          <DemoDots
           direction={value}
           dots={twoDots}
-        />
-      }
+        />,
+          `<Flex direction="${value}">\n  {children}\n</Flex>`,
+        ]}
+        columns={[null, { shiki: true }]}
       language="tsx"
-      code={`<Flex direction="${value}">\n  {children}\n</Flex>`}
+      
     />
   ))}
 </div>

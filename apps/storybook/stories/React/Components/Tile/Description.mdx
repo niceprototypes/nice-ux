@@ -14,13 +14,15 @@ import { CodeRow } from "../../../../src/components/CodeRow"
 
 <CodeRow
   fullWidth
-  previewCell={
-    <Tile
+  cells={[
+          <Tile
       title="Title"
       description="Description"
-    />
-  }
+    />,
+          `<Tile\n  title="Title"\n  description="Description"\n/>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Tile\n  title="Title"\n  description="Description"\n/>`}
+  
 />
 

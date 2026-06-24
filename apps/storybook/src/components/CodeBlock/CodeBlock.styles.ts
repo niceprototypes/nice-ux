@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import Flex from "nice-react-flex"
 import { getToken } from "nice-react-styles"
 
 /**
@@ -13,7 +14,7 @@ export const CodeBlockDiv = styled.div<{ $clickable?: boolean; $inline?: boolean
   ${({ $clickable }) => $clickable && `cursor: pointer;`}
   flex-grow: 1;
   /* inline: strip the card chrome — margin, padding, border, radius, shadow */
-  margin: ${({ $inline }) => ($inline ? "0" : `${getToken("gap", { variant: "large" })} 0`)} !important;
+  margin: ${({ $inline }) => ($inline ? "0" : `${getToken("gap", "large")} 0`)} !important;
   padding: ${({ $inline }) => ($inline ? "0" : getToken("gap"))};
   border: ${({ $inline }) => ($inline ? "none" : `1px solid ${getToken("borderColor")}`)};
   border-radius: ${({ $inline }) => ($inline ? "0" : getToken("borderRadius"))};
@@ -23,10 +24,9 @@ export const CodeBlockDiv = styled.div<{ $clickable?: boolean; $inline?: boolean
     .line {
       span {
         color: var(--shiki-light);
-        font-family: ${getToken("fontFamily", { variant: "code" })};
-        font-size: ${getToken("fontSize", { variant: "small" })};
-        font-weight: ${getToken("fontWeight", { variant: "medium" })};
-        line-height: ${getToken("lineHeight", { variant: "expanded" })};
+        font-family: ${getToken("fontFamily", "code")};
+        font-size: ${getToken("fontSize", "small")};
+        line-height: ${getToken("lineHeight", "expanded")};
         letter-spacing: -0.01em;
       }
     }
@@ -39,4 +39,12 @@ export const CodeBlockDiv = styled.div<{ $clickable?: boolean; $inline?: boolean
       }
     }
   }
+`
+
+/** Horizontal scroll container for long code lines, with the scrollbar hidden. */
+export const CodeScroll = styled(Flex)`
+  max-width: 100%;
+  overflow-x: auto;
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox, Safari 18.2+, Chromium 121+ */
 `

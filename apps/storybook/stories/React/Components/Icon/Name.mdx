@@ -22,15 +22,17 @@ import { CodeRow } from "../../../../src/components/CodeRow"
   {iconNames.map(name => (
     <CodeRow
       key={name}
-      previewCell={
-        <Icon
+      cells={[
+          <Icon
           name={name}
           size="larger"
           strokeWidth="large"
-        />
-      }
+        />,
+          name === "placeholder" ? `<Icon />` : `<Icon name="${name}" />`,
+        ]}
+        columns={[null, { shiki: true }]}
       language="tsx"
-      code={name === "placeholder" ? `<Icon />` : `<Icon name="${name}" />`}
+      
     />
   ))}
 </div>

@@ -15,8 +15,8 @@ import { CodeRow } from "../../../../src/components/CodeRow"
 
 <CodeRow
   fullWidth
-  previewCell={
-    <Flex direction="column" gap="small">
+  cells={[
+          <Flex direction="column" gap="small">
       <Typography size="small" color="light">
         Navigation links with automatic active section highlighting. Uses
         IntersectionObserver for efficient detection.
@@ -32,9 +32,11 @@ import { CodeRow } from "../../../../src/components/CodeRow"
           Contact
         </Typography>
       </Flex>
-    </Flex>
-  }
+    </Flex>,
+          `<StickySectionLinks\n  links={[\n    { href: "#about", label: "About" },\n    { href: "#services", label: "Services" },\n  ]}\n/>`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<StickySectionLinks\n  links={[\n    { href: "#about", label: "About" },\n    { href: "#services", label: "Services" },\n  ]}\n/>`}
+  
 />
 

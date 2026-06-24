@@ -25,15 +25,17 @@ export const sizeCode = (s) =>
   {sizes.map((size) => (
     <CodeRow
       key={size}
-      previewCell={
-        <Input
+      cells={[
+          <Input
           size={size}
           placeholder={sizeLabel(size)}
           onChange={() => {}}
-        />
-      }
+        />,
+          sizeCode(size),
+        ]}
+        columns={[null, { shiki: true }]}
       language="tsx"
-      code={sizeCode(size)}
+      
     />
   ))}
 </div>

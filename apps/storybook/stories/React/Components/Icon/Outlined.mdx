@@ -13,26 +13,30 @@ import { CodeRow } from "../../../../src/components/CodeRow"
 </Typography>
 
 <CodeRow
-  previewCell={
-    <Icon
+  cells={[
+          <Icon
       size="larger"
       outlined={false}
       name="message"
-    />
-  }
+    />,
+          `<Icon size="larger" />`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Icon size="larger" />`}
+  
 />
 
 <CodeRow
-  previewCell={
-    <Icon
+  cells={[
+          <Icon
       size="larger"
       outlined={true}
       name="message"
-    />
-  }
+    />,
+          `<Icon size="larger" outlined={true} />`,
+        ]}
+        columns={[null, { shiki: true }]}
   language="tsx"
-  code={`<Icon size="larger" outlined={true} />`}
+  
 />
 

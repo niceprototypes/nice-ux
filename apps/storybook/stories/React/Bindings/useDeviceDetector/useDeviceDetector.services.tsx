@@ -5,6 +5,8 @@ import {
   useDevice,
 } from "nice-react-device-detector"
 import Flex from "nice-react-flex"
+import Button from "nice-react-button"
+import { StylesProvider, useDevice as useStylesDevice } from "nice-react-styles"
 import { DeviceRow } from "./DeviceRow"
 
 // Conditional — branch the rendered output on the detected device type
@@ -41,6 +43,29 @@ export const ContextProviderDemo = () => {
   )
 }
 
+// StylesProvider — detectDevice folds detection into the existing provider; a
+// descendant reads the shared result via useDevice from nice-react-styles (its
+// own context, distinct from the DeviceProvider one above)
+export const StylesProviderDeviceDemo = () => {
+  const Consumer = () => {
+    const { isMobile } = useStylesDevice()
+    return (
+      <DeviceRow
+        showIcon
+        isMobile={isMobile}
+        label="device"
+        description={isMobile ? "mobile" : "desktop"}
+      />
+    )
+  }
+
+  return (
+    <StylesProvider detectDevice>
+      <Consumer />
+    </StylesProvider>
+  )
+}
+
 // Debugging — a "debug-mobile" localStorage entry forces mobile detection
 export const DebuggingDemo = () => {
   const isMobile = useDeviceDetector()
@@ -67,9 +92,9 @@ export const DebuggingDemo = () => {
         description={isDebugging ? "true" : "false"}
       />
       <Flex>
-        <button onClick={isDebugging ? disableMobile : enableMobile}>
+        <Button onClick={isDebugging ? disableMobile : enableMobile}>
           {isDebugging ? "Disable debugging" : "Enable debugging"}
-        </button>
+        </Button>
       </Flex>
     </Flex>
   )

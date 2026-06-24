@@ -24,16 +24,18 @@ import { threeDots } from "./Flex.services"
   ].map(value => (
     <CodeRow
       key={value}
-      previewCell={
-        <DemoDots
+      cells={[
+          <DemoDots
           justifyContent={value}
           dots={threeDots}
           width="12rem"
           bordered
-        />
-      }
+        />,
+          `<Flex justifyContent="${value}">\n  {children}\n</Flex>`,
+        ]}
+        columns={[null, { shiki: true }]}
       language="tsx"
-      code={`<Flex justifyContent="${value}">\n  {children}\n</Flex>`}
+      
     />
   ))}
 </div>
