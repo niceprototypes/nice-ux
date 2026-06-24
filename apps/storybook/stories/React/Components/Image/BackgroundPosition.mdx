@@ -2,7 +2,7 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Image from "nice-react-image"
 import StoryDescription from "../../../../src/components/StoryDescription"
-import { CodeRow } from "../../../../src/components/CodeRow"
+import { DataTable, DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import { toSource } from "../../../../src/services"
 
 <Meta title="Components/Image/backgroundPosition" />
@@ -13,8 +13,10 @@ import { toSource } from "../../../../src/services"
   Positions the image within its container when cropped.
 </StoryDescription>
 
-<div>
-  {["center", "top", "bottom right"].map(position => {
+<DataTable
+  showHeader={false}
+  columns={DEMO_CODE_COLUMNS}
+  rows={["center", "top", "bottom right"].map(position => {
     const props = {
       vendor: true,
       src: "69",
@@ -24,18 +26,13 @@ import { toSource } from "../../../../src/services"
       backgroundSize: "cover",
       backgroundPosition: position,
     }
-    return (
-      <CodeRow
-        key={position}
-        cells={[
-          <Image {...props} />,
-          toSource("Image", props),
-        ]}
-        columns={[null, { shiki: true }]}
-        language="tsx"
-        
-      />
-    )
+    return {
+      id: String(position),
+      values: [
+        <Image {...props} />,
+        toSource("Image", props),
+      ],
+    }
   })}
-</div>
+/>
 

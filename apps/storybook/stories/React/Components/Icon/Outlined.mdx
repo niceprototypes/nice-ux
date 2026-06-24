@@ -2,7 +2,8 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Icon from "nice-react-icon"
 import Typography from "../../../../src/nice/Typography"
-import { CodeRow } from "../../../../src/components/CodeRow"
+import { DataRow } from "../../../../src/components/DataRow"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 
 <Meta title="Components/Icon/outlined" />
 
@@ -12,8 +13,9 @@ import { CodeRow } from "../../../../src/components/CodeRow"
   Toggles between the stroke-only (outlined) and filled variants of the icon.
 </Typography>
 
-<CodeRow
-  cells={[
+<DataRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <Icon
       size="larger"
       outlined={false}
@@ -21,13 +23,11 @@ import { CodeRow } from "../../../../src/components/CodeRow"
     />,
           `<Icon size="larger" />`,
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 
-<CodeRow
-  cells={[
+<DataRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <Icon
       size="larger"
       outlined={true}
@@ -35,8 +35,5 @@ import { CodeRow } from "../../../../src/components/CodeRow"
     />,
           `<Icon size="larger" outlined={true} />`,
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 

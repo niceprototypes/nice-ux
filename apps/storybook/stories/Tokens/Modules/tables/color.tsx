@@ -7,10 +7,10 @@ export const color = {
   description: (
     <>
       Text and icon color tokens, including semantic states (<code>success</code>,{" "}
-      <code>warning</code>, <code>error</code>).
+      <code>highlight</code>, <code>warning</code>, <code>error</code>).
     </>
   ),
-  variants: ["lightest", "lighter", "light", "base", "disabled", "link", "success", "warning", "error"],
+  variants: ["lightest", "lighter", "light", "base", "disabled", "link", "success", "highlight", "warning", "error"],
   preview: (variant) => (
     <Flex
       style={{

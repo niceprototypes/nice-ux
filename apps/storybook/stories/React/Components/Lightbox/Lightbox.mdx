@@ -2,7 +2,8 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Lightbox from "nice-react-lightbox"
 import Typography from "../../../../src/nice/Typography"
-import { CodeRow } from "../../../../src/components/CodeRow"
+import { DataRow } from "../../../../src/components/DataRow"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import { resolveVendorImage } from "nice-react-image-vendor"
 import { DemoImage } from "./Lightbox.styles"
 
@@ -41,8 +42,9 @@ import Lightbox from "nice-react-lightbox"
   Wraps a thumbnail that expands into a fullscreen overlay when clicked.
 </Typography>
 
-<CodeRow
-  cells={[
+<DataRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <Lightbox
       imageUrl={DEMO_IMAGE}
       alt="Demo landscape"
@@ -54,8 +56,5 @@ import Lightbox from "nice-react-lightbox"
     </Lightbox>,
           `<Lightbox imageUrl="/image.png" alt="Description">\n  <img src="/image.png" alt="Thumbnail" />\n</Lightbox>`,
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 

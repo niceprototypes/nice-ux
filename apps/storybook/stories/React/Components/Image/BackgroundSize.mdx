@@ -2,7 +2,7 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Image from "nice-react-image"
 import StoryDescription from "../../../../src/components/StoryDescription"
-import { CodeRow } from "../../../../src/components/CodeRow"
+import { DataTable, DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import { toSource } from "../../../../src/services"
 
 <Meta title="Components/Image/backgroundSize" />
@@ -13,8 +13,10 @@ import { toSource } from "../../../../src/services"
   Controls how the image fits within its container.
 </StoryDescription>
 
-<div>
-  {["contain", "cover", "fill", "none", "scale-down"].map(size => {
+<DataTable
+  showHeader={false}
+  columns={DEMO_CODE_COLUMNS}
+  rows={["contain", "cover", "fill", "none", "scale-down"].map(size => {
     const props = {
       vendor: true,
       src: "75",
@@ -23,18 +25,13 @@ import { toSource } from "../../../../src/services"
       height: "320px",
       backgroundSize: size,
     }
-    return (
-      <CodeRow
-        key={size}
-        cells={[
-          <Image {...props} />,
-          toSource("Image", props),
-        ]}
-        columns={[null, { shiki: true }]}
-        language="tsx"
-        
-      />
-    )
+    return {
+      id: String(size),
+      values: [
+        <Image {...props} />,
+        toSource("Image", props),
+      ],
+    }
   })}
-</div>
+/>
 

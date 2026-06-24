@@ -2,7 +2,7 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Typography from "../../../../src/nice/Typography"
 import StoryDescription from "../../../../src/components/StoryDescription"
-import { CodeRow } from "../../../../src/components/CodeRow"
+import { DataTable, DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import { toSource } from "../../../../src/services"
 
 export const loremIpsumLong =
@@ -16,22 +16,19 @@ export const loremIpsumLong =
   Sets the vertical spacing between lines of text using lineHeight tokens.
 </StoryDescription>
 
-<div>
-  {["condensed", "base", "expanded"].map(lineHeight => (
-    <CodeRow
-      key={lineHeight}
-      cells={[
+<DataTable
+  showHeader={false}
+  columns={DEMO_CODE_COLUMNS}
+  rows={["condensed", "base", "expanded"].map(lineHeight => ({
+    id: String(lineHeight),
+    values: [
           <Typography lineHeight={lineHeight}>{loremIpsumLong}</Typography>,
           toSource(
           "Typography",
           { lineHeight },
           { children: loremIpsumLong }
         ),
-        ]}
-        columns={[null, { shiki: true }]}
-      language="tsx"
-      
-    />
-  ))}
-</div>
+        ],
+  }))}
+/>
 

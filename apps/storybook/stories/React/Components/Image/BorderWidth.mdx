@@ -2,7 +2,7 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Image from "nice-react-image"
 import StoryDescription from "../../../../src/components/StoryDescription"
-import { CodeRow } from "../../../../src/components/CodeRow"
+import { DataTable, DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import { toSource } from "../../../../src/services"
 
 <Meta title="Components/Image/borderWidth" />
@@ -14,8 +14,10 @@ import { toSource } from "../../../../src/services"
   applied when <code>bordered</code> is true.
 </StoryDescription>
 
-<div>
-  {["base", "large"].map(borderWidth => {
+<DataTable
+  showHeader={false}
+  columns={DEMO_CODE_COLUMNS}
+  rows={["base", "large"].map(borderWidth => {
     const props = {
       vendor: true,
       alt: `${borderWidth} border width`,
@@ -25,18 +27,13 @@ import { toSource } from "../../../../src/services"
       bordered: true,
       borderWidth,
     }
-    return (
-      <CodeRow
-        key={borderWidth}
-        cells={[
-          <Image {...props} />,
-          toSource("Image", props),
-        ]}
-        columns={[null, { shiki: true }]}
-        language="tsx"
-        
-      />
-    )
+    return {
+      id: String(borderWidth),
+      values: [
+        <Image {...props} />,
+        toSource("Image", props),
+      ],
+    }
   })}
-</div>
+/>
 

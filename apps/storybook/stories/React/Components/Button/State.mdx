@@ -3,7 +3,7 @@ import { StoryHeader } from "../../../../src/components/Story"
 import Button from "nice-react-button"
 import Flex from "nice-react-flex"
 import Typography from "../../../../src/nice/Typography"
-import { CodeRow } from "../../../../src/components/CodeRow"
+import { DataTable, DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 
 export const states = ["base", "disabled", "error", "success", "warning"]
 
@@ -23,11 +23,12 @@ export const stateCode = s =>
   <code>error</code>, <code>success</code>, or <code>warning</code>).
 </Typography>
 
-<div>
-  {states.map(state => (
-    <CodeRow
-      key={state}
-      cells={[
+<DataTable
+  showHeader={false}
+  columns={DEMO_CODE_COLUMNS}
+  rows={states.map(state => ({
+    id: String(state),
+    values: [
           <Flex gap="small">
           <Button
             onClick={() => {}}
@@ -44,11 +45,7 @@ export const stateCode = s =>
           </Button>
         </Flex>,
           stateCode(state),
-        ]}
-        columns={[null, { shiki: true }]}
-      language="tsx"
-      
-    />
-  ))}
-</div>
+        ],
+  }))}
+/>
 

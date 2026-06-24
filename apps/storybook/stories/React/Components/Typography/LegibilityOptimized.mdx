@@ -2,7 +2,8 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Typography from "../../../../src/nice/Typography"
 import StoryDescription from "../../../../src/components/StoryDescription"
-import { CodeRow } from "../../../../src/components/CodeRow"
+import { DataRow } from "../../../../src/components/DataRow"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import { toSource } from "../../../../src/services"
 
 <Meta title="Components/Typography/legibilityOptimized" />
@@ -14,18 +15,17 @@ import { toSource } from "../../../../src/services"
   and ligatures.
 </StoryDescription>
 
-<CodeRow
-  cells={[
+<DataRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <Typography>Legibility standard</Typography>,
           toSource("Typography", {}, { children: "Legibility standard" }),
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 
-<CodeRow
-  cells={[
+<DataRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <Typography legibilityOptimized>Legibility optimized</Typography>,
           toSource(
       "Typography",
@@ -33,8 +33,5 @@ import { toSource } from "../../../../src/services"
       { children: "Legibility optimized" }
     ),
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 

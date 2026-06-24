@@ -1,7 +1,8 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Typography from "../../../../src/nice/Typography"
-import { CodeRow } from "../../../../src/components/CodeRow"
+import { DataRow } from "../../../../src/components/DataRow"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 
 <Meta title="Components/Scroll/Sticky" />
 
@@ -13,17 +14,15 @@ import { CodeRow } from "../../../../src/components/CodeRow"
   scroll up.
 </Typography>
 
-<CodeRow
+<DataRow
   fullWidth
-  cells={[
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <Typography size="small" color="light">
       Wrap any header with <code>&lt;Sticky&gt;</code> inside a
       <code>StickyProvider</code> to enable the hide-on-scroll-down behavior.
     </Typography>,
           `<ScrollProvider>\n  <StickyProvider>\n    <Sticky order={0}>\n      <Header />\n    </Sticky>\n  </StickyProvider>\n</ScrollProvider>`,
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 

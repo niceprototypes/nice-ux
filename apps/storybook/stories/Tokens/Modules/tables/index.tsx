@@ -1,5 +1,5 @@
 import { StoryHeader } from "../../../../src/components/Story"
-import { TokensCodeTable } from "../../../../src/components/TokensCodeTable"
+import { TokensDataTable, TokensDataTableSet } from "../../../../src/components/TokensDataTable"
 import type { TokenTable } from "../TokenTable.types"
 
 import { animationDuration } from "./animationDuration"
@@ -53,9 +53,9 @@ export const tokenTableList: TokenTable[] = Object.values(tokenTables)
 
 /**
  * Renders one token group as a standalone story — the story header, its
- * description, and the shared TokensCodeTable, including the CSS/JS/Value header
- * row. Driven by the same config as the Docs page, so a story and its Docs row
- * can never disagree.
+ * description, and the shared TokensDataTable (column headers, no name column).
+ * Driven by the same config as the Docs page, so a story and its Docs row can
+ * never disagree.
  */
 export const TokenStory = ({ name }: { name: keyof typeof tokenTables }) => {
   const { description, ...table } = tokenTables[name]
@@ -65,28 +65,14 @@ export const TokenStory = ({ name }: { name: keyof typeof tokenTables }) => {
           container, not the default 980px docs measure. */}
       <style>{`.sbdocs.sbdocs-content { max-width: 100%; }`}</style>
       <StoryHeader title={table.name} description={description} />
-      <TokensCodeTable
-        columnHeaders={[null, null, "CSS", "JS", "Value"]}
-        showName={false}
-        {...table}
-      />
+      <TokensDataTable showName={false} {...table} />
     </>
   )
 }
 
 /**
- * The full Tokens/Docs body — a standalone header row above every token table.
- * Lives here (not inlined in the MDX) so the Docs page stays declarative and
- * shares the same configs as the standalone stories.
+ * The full Tokens/Docs body — every token group as one aligned table-of-tables
+ * under a single shared header. Lives here (not inlined in the MDX) so the Docs
+ * page stays declarative and shares the same configs as the standalone stories.
  */
-export const TokensDocs = () => (
-  <>
-    <TokensCodeTable columnHeaders={[null, null, "CSS", "JS", "Value"]} />
-    {tokenTableList.map(({ description, ...table }) => (
-      <TokensCodeTable
-        key={table.name}
-        {...table}
-      />
-    ))}
-  </>
-)
+export const TokensDocs = () => <TokensDataTableSet groups={tokenTableList} />

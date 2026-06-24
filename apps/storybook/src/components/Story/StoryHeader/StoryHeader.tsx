@@ -21,7 +21,6 @@ const StoryHeader: React.FC<StoryHeaderProps> = ({ title, description, children 
     <h1>{title}</h1>
     {description ? <Typography>{description}</Typography> : null}
     {children}
-    <hr />
   </Flex>
 )
 

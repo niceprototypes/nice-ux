@@ -1,7 +1,8 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Typography from "../../../../src/nice/Typography"
-import { CodeRow } from "../../../../src/components/CodeRow"
+import { DataRow } from "../../../../src/components/DataRow"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import DemoDots from "../../../../src/components/DemoDots"
 import { twoDots } from "./Flex.services"
 
@@ -38,13 +39,11 @@ import Flex from "nice-react-flex"
   Default flex container — renders children in an inline row with no gap.
 </Typography>
 
-<CodeRow
-  cells={[
+<DataRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <DemoDots dots={twoDots} />,
           `<Flex>{children}</Flex>`,
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 

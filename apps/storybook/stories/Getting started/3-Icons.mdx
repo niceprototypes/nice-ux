@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
-import { IconsCodeTable } from "../../src/components/IconsCodeTable"
+import { IconsDataTable } from "../../src/components/IconsDataTable"
 import Callout from "../../src/components/Callout/index.ts"
 
 <Meta
@@ -69,7 +69,30 @@ import Icon from "nice-react-icon"
 
 ---
 
+## getIcon
+
+When you need the **raw SVG component** rather than the styled `Icon` — to drop
+into your own markup, pass to a third-party API, or render outside React's token
+context — `getIcon` resolves an icon name to its underlying component:
+
+```tsx
+import { getIcon } from "nice-react-icon"
+
+const CheckIcon = getIcon("check")          // stroke variant (default)
+const CheckFill = getIcon("check", true)    // outlined → fill variant
+
+<CheckIcon />
+```
+
+Returns the icon's React component, or `undefined` when the name isn't in the
+set. The second argument picks the variant: `false` (default) for stroke,
+`true` for fill.
+
+<Callout type="hint">Every icon name accepted by `getIcon` and the `Icon` component is listed below.</Callout>
+
+---
+
 ## Browse
 
-<IconsCodeTable codeHeader="getIcon" code={(name) => `getIcon("${name}")`} codeWidth="16em" />
+<IconsDataTable codeHeader="getIcon" code={(name) => `getIcon("${name}")`} codeWidth="16em" />
 

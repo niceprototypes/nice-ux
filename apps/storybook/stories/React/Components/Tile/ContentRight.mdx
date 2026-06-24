@@ -3,7 +3,8 @@ import { StoryHeader } from "../../../../src/components/Story"
 import Tile from "nice-react-tile"
 import Image from "nice-react-image"
 import Typography from "../../../../src/nice/Typography"
-import { CodeRow } from "../../../../src/components/CodeRow"
+import { DataRow } from "../../../../src/components/DataRow"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 
 <Meta title="Components/Tile/contentRight" />
 
@@ -14,9 +15,10 @@ import { CodeRow } from "../../../../src/components/CodeRow"
   or secondary media.
 </Typography>
 
-<CodeRow
+<DataRow
   fullWidth
-  cells={[
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <Tile
       title="Title"
       description="Description"
@@ -34,8 +36,5 @@ import { CodeRow } from "../../../../src/components/CodeRow"
     />,
           `<Tile\n  title="Title"\n  description="Description"\n  contentRight={image}\n/>`,
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 

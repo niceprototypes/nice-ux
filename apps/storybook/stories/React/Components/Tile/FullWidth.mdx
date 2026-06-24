@@ -2,7 +2,8 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Tile from "nice-react-tile"
 import Typography from "../../../../src/nice/Typography"
-import { CodeRow } from "../../../../src/components/CodeRow"
+import { DataRow } from "../../../../src/components/DataRow"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 
 <Meta title="Components/Tile/fullWidth" />
 
@@ -13,29 +14,25 @@ import { CodeRow } from "../../../../src/components/CodeRow"
   max-width.
 </Typography>
 
-<CodeRow
+<DataRow
   fullWidth
-  cells={[
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <Tile title="Title" description="Default width">
       <Typography color="light">Default width</Typography>
     </Tile>,
           `<Tile title="Title" description="Default width" />`,
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 
-<CodeRow
+<DataRow
   fullWidth
-  cells={[
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <Tile fullWidth title="Title" description="Full width tile">
       <Typography color="light">Full width tile</Typography>
     </Tile>,
           `<Tile fullWidth title="Title" description="Full width tile" />`,
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 

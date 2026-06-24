@@ -3,7 +3,7 @@ import { StoryHeader } from "../../../../src/components/Story"
 import Flex from "nice-react-flex"
 import Typography from "../../../../src/nice/Typography"
 import StoryDescription from "../../../../src/components/StoryDescription"
-import { CodeRow } from "../../../../src/components/CodeRow"
+import { DataTable, DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import { toSource } from "../../../../src/services"
 
 export const loremIpsum = "Lorem ipsum dolor sit amet"
@@ -16,11 +16,12 @@ export const loremIpsum = "Lorem ipsum dolor sit amet"
   Aligns text horizontally within its container.
 </StoryDescription>
 
-<div>
-  {["left", "center", "right", "justify"].map(align => (
-    <CodeRow
-      key={align}
-      cells={[
+<DataTable
+  showHeader={false}
+  columns={DEMO_CODE_COLUMNS}
+  rows={["left", "center", "right", "justify"].map(align => ({
+    id: String(align),
+    values: [
           <Flex
           direction="column"
           grow={1}
@@ -28,11 +29,7 @@ export const loremIpsum = "Lorem ipsum dolor sit amet"
           <Typography align={align}>{loremIpsum}</Typography>
         </Flex>,
           toSource("Typography", { align }, { children: loremIpsum }),
-        ]}
-        columns={[null, { shiki: true }]}
-      language="tsx"
-      
-    />
-  ))}
-</div>
+        ],
+  }))}
+/>
 

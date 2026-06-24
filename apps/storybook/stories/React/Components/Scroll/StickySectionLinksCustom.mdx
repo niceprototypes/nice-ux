@@ -1,7 +1,8 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Typography from "../../../../src/nice/Typography"
-import { CodeRow } from "../../../../src/components/CodeRow"
+import { DataRow } from "../../../../src/components/DataRow"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 
 <Meta title="Components/Scroll/StickySectionLinks custom" />
 
@@ -14,31 +15,27 @@ import { CodeRow } from "../../../../src/components/CodeRow"
 
 ### renderLink
 
-<CodeRow
+<DataRow
   fullWidth
-  cells={[
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <Typography size="small" color="light">
       Custom renderer for individual link items with isActive state
     </Typography>,
           `<StickySectionLinks\n  links={links}\n  renderLink={(link, isActive) => (\n    <Button variant={isActive ? "primary" : "ghost"}>\n      {link.label}\n    </Button>\n  )}\n/>`,
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 
 ### renderWrapper
 
-<CodeRow
+<DataRow
   fullWidth
-  cells={[
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <Typography size="small" color="light">
       Custom renderer for the wrapper container
     </Typography>,
           `<StickySectionLinks\n  links={links}\n  renderWrapper={(children) => (\n    <nav className="custom-nav">{children}</nav>\n  )}\n/>`,
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 

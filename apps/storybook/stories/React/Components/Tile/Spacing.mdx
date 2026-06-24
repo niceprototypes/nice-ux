@@ -2,7 +2,7 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Tile from "nice-react-tile"
 import StoryDescription from "../../../../src/components/StoryDescription"
-import { CodeRow } from "../../../../src/components/CodeRow"
+import { DataTable, DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 
 export const spacings = ["smaller", "small", "base", "large", "larger"]
 
@@ -14,19 +14,16 @@ export const spacings = ["smaller", "small", "base", "large", "larger"]
   Sets the tile's inner padding using gap tokens.
 </StoryDescription>
 
-<div>
-  {spacings.map(value => (
-    <CodeRow
-      fullWidth
-      key={value}
-      cells={[
-          <Tile spacing={value} title="Title" description="Description" />,
-          `<Tile spacing="${value}" title="Title" description="Description" />`,
-        ]}
-        columns={[null, { shiki: true }]}
-      language="tsx"
-      
-    />
-  ))}
-</div>
+<DataTable
+  showHeader={false}
+  columns={DEMO_CODE_COLUMNS}
+  rows={spacings.map(value => ({
+    id: value,
+    fullWidth: true,
+    values: [
+      <Tile spacing={value} title="Title" description="Description" />,
+      `<Tile spacing="${value}" title="Title" description="Description" />`,
+    ],
+  }))}
+/>
 

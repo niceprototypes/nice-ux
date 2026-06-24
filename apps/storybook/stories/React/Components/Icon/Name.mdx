@@ -2,7 +2,7 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Icon, { iconNames } from "nice-react-icon"
 import Typography from "../../../../src/nice/Typography"
-import { CodeRow } from "../../../../src/components/CodeRow"
+import { DataTable, DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 
 <Meta title="Components/Icon/name" />
 
@@ -18,22 +18,19 @@ import { CodeRow } from "../../../../src/components/CodeRow"
   <code>strokeWidth="large"</code> have been set to make the icons more visible.
 </Typography>
 
-<div>
-  {iconNames.map(name => (
-    <CodeRow
-      key={name}
-      cells={[
-          <Icon
-          name={name}
-          size="larger"
-          strokeWidth="large"
-        />,
-          name === "placeholder" ? `<Icon />` : `<Icon name="${name}" />`,
-        ]}
-        columns={[null, { shiki: true }]}
-      language="tsx"
-      
-    />
-  ))}
-</div>
+<DataTable
+  showHeader={false}
+  columns={DEMO_CODE_COLUMNS}
+  rows={iconNames.map(name => ({
+    id: String(name),
+    values: [
+      <Icon
+        name={name}
+        size="larger"
+        strokeWidth="large"
+      />,
+      name === "placeholder" ? `<Icon />` : `<Icon name="${name}" />`,
+    ],
+  }))}
+/>
 

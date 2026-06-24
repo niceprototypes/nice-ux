@@ -2,7 +2,7 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 
 import StoryDescription from "../../../../src/components/StoryDescription"
-import { CodeRow } from "../../../../src/components/CodeRow"
+import { DataTable, DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import DemoDots from "../../../../src/components/DemoDots"
 import { threeDots } from "./Flex.services"
 
@@ -14,21 +14,18 @@ import { threeDots } from "./Flex.services"
   Sets the spacing between flex items using gap tokens.
 </StoryDescription>
 
-<div>
-  {["smaller", "small", "base", "large", "larger"].map(value => (
-    <CodeRow
-      key={value}
-      cells={[
+<DataTable
+  showHeader={false}
+  columns={DEMO_CODE_COLUMNS}
+  rows={["smaller", "small", "base", "large", "larger"].map(value => ({
+    id: String(value),
+    values: [
           <DemoDots
           gap={value}
           dots={threeDots}
         />,
           `<Flex gap="${value}">\n  {children}\n</Flex>`,
-        ]}
-        columns={[null, { shiki: true }]}
-      language="tsx"
-      
-    />
-  ))}
-</div>
+        ],
+  }))}
+/>
 

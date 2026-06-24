@@ -2,7 +2,7 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Input from "nice-react-input"
 import Typography from "../../../../src/nice/Typography"
-import { CodeRow } from "../../../../src/components/CodeRow"
+import { DataTable, DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 
 export const types = ["text", "email", "password", "number", "search", "tel", "url"]
 
@@ -32,22 +32,19 @@ export const typeCode = (t) =>
   <code>url</code>.
 </Typography>
 
-<div>
-  {types.map((t) => (
-    <CodeRow
-      key={t}
-      cells={[
-          <Input
-          type={t}
-          placeholder={typeLabel[t]}
-          onChange={() => {}}
-        />,
-          typeCode(t),
-        ]}
-        columns={[null, { shiki: true }]}
-      language="tsx"
-      
-    />
-  ))}
-</div>
+<DataTable
+  showHeader={false}
+  columns={DEMO_CODE_COLUMNS}
+  rows={types.map((t) => ({
+    id: t,
+    values: [
+      <Input
+        type={t}
+        placeholder={typeLabel[t]}
+        onChange={() => {}}
+      />,
+      typeCode(t),
+    ],
+  }))}
+/>
 

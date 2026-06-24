@@ -1,7 +1,8 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Typography from "../../../../src/nice/Typography"
-import { CodeRow } from "../../../../src/components/CodeRow"
+import { DataRow } from "../../../../src/components/DataRow"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 
 <Meta title="Components/Scroll/FadeOnScroll opacity" />
 
@@ -14,46 +15,40 @@ import { CodeRow } from "../../../../src/components/CodeRow"
 
 ### startOpacity
 
-<CodeRow
+<DataRow
   fullWidth
-  cells={[
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <Typography size="small" color="light">
       Initial opacity value before fade in begins (default: 0)
     </Typography>,
           `<FadeOnScroll startOpacity={0}>`,
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 
 ### peakOpacity
 
-<CodeRow
+<DataRow
   fullWidth
-  cells={[
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <Typography size="small" color="light">
       Peak opacity value at peakPosition (default: 1)
     </Typography>,
           `<FadeOnScroll peakOpacity={1}>`,
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 
 ### endOpacity
 
-<CodeRow
+<DataRow
   fullWidth
-  cells={[
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <Typography size="small" color="light">
       Final opacity value after fade out (default: 0)
     </Typography>,
           `<FadeOnScroll endOpacity={0}>`,
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 

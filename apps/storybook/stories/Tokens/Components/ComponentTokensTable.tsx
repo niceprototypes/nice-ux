@@ -1,9 +1,9 @@
 import * as React from "react"
-import { CodeRow } from "../../../src/components/CodeRow"
-import { CodeTable } from "../../../src/components/CodeTable"
+import { DataTableSet } from "../../../src/components/DataTableSet"
+import type { DataColumn } from "../../../src/components/DataTable"
 import Typography from "../../../src/nice/Typography"
-import { getToken } from "nice-react-styles"
 import { parseTokenVarLink, HIGHLIGHT_KEY } from "../../../src/services"
+import { TokenVarLink } from "./ComponentTokensTable.styles"
 import { getComponentTokenGroups, type ComponentPrefixWithTokens } from "./componentTokens"
 
 interface ComponentTokensTableProps {
@@ -25,7 +25,7 @@ const VarNameLink = ({ reference }: { reference: string }) => {
   return (
     <>
       var(
-      <a
+      <TokenVarLink
         href={link.href}
         target="_top"
         onClick={() => {
@@ -35,10 +35,9 @@ const VarNameLink = ({ reference }: { reference: string }) => {
             /* sessionStorage unavailable */
           }
         }}
-        style={{ color: getToken("color", "link"), textDecoration: "none" }}
       >
         {reference.slice("var(".length, -1)}
-      </a>
+      </TokenVarLink>
       )
     </>
   )
@@ -65,46 +64,31 @@ const renderValue = (value: string) => {
   return nodes.length ? <>{nodes}</> : value
 }
 
-// [group, Variable, Value]. Variable/Value are equal-flex (null) so they split
-// the remaining width evenly and stay aligned across the header + group tables.
-const COLUMN_WIDTHS = ["10em", "36em", null]
+// The data columns (the leading group-name column, width 10em, is prepended by
+// DataTableSet). Variable is pinned; Value is equal-flex.
+const COLUMNS: DataColumn[] = [
+  { key: "variable", header: "Variable", width: "36em", render: "node" },
+  { key: "value", header: "Value", render: "node" },
+]
 
 /**
- * Renders one component's token tree as grouped reference tables — one
- * `CodeTable` per top-level token group, under a single shared header. Each row
+ * Renders one component's token tree as an aligned table-of-tables — one named
+ * sub-table per top-level token group, under a single shared header. Each row
  * documents a component CSS variable in the Variable column and the value it is
- * initialized to in the Value column — a core `var(--np--…)` reference or a
- * literal string — grouped by its top-level token group.
+ * initialized to in the Value column — a core `var(--np--…)` reference (whose
+ * inner name deep-links to its Modules story) or a literal string.
  */
 export const ComponentTokensTable = ({ prefix }: ComponentTokensTableProps) => {
-  const groups = getComponentTokenGroups(prefix)
+  const tables = getComponentTokenGroups(prefix).map((group) => ({
+    name: group.name,
+    rows: group.rows.map((row) => ({
+      id: row.cssVar,
+      values: [
+        <Typography code size="small">{row.cssVar}</Typography>,
+        <Typography code size="small">{renderValue(row.value)}</Typography>,
+      ],
+    })),
+  }))
 
-  return (
-    <>
-      {/* Header once at the top — the group tables below are headerless, so the
-          column labels render a single time rather than per group. */}
-      <CodeTable
-        columnWidths={COLUMN_WIDTHS}
-        columnHeaders={[null, "Variable", "Value"]}
-      />
-      {groups.map((group) => (
-        <CodeTable
-          key={group.name}
-          name={group.name}
-          columnWidths={COLUMN_WIDTHS}
-        >
-          {group.rows.map((row) => (
-            <CodeRow
-              key={row.cssVar}
-              inline
-              cells={[
-                <Typography code size="small">{row.cssVar}</Typography>,
-                <Typography code size="small">{renderValue(row.value)}</Typography>,
-              ]}
-            />
-          ))}
-        </CodeTable>
-      ))}
-    </>
-  )
+  return <DataTableSet columns={COLUMNS} tables={tables} nameWidth="10em" inline />
 }

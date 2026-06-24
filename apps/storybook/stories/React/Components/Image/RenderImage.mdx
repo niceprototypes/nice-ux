@@ -2,7 +2,8 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Image from "nice-react-image"
 import Typography from "../../../../src/nice/Typography"
-import { CodeRow } from "../../../../src/components/CodeRow"
+import { DataRow } from "../../../../src/components/DataRow"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import { toSource } from "../../../../src/services"
 
 export const imageProps = {
@@ -31,8 +32,9 @@ export const renderImageExpr = `(src, alt) => (
   is provided.
 </Typography>
 
-<CodeRow
-  cells={[
+<DataRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <Image
       {...imageProps}
       renderImage={(src, alt) => (
@@ -54,8 +56,5 @@ export const renderImageExpr = `(src, alt) => (
       raw: { renderImage: renderImageExpr },
     }),
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 

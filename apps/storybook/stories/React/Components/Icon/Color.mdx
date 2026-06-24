@@ -2,7 +2,7 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Icon from "nice-react-icon"
 import StoryDescription from "../../../../src/components/StoryDescription"
-import { CodeRow } from "../../../../src/components/CodeRow"
+import { DataTable, DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import { colors } from "./Icon.services"
 
 <Meta title="Components/Icon/color" />
@@ -13,23 +13,20 @@ import { colors } from "./Icon.services"
   Sets the color of the icon using color tokens.
 </StoryDescription>
 
-<div>
-  {colors.map(color => (
-    <CodeRow
-      key={color}
-      cells={[
-          <Icon
-          color={color}
-          name="message"
-          size="larger"
-          strokeWidth="large"
-        />,
-          `<Icon color="${color}" />`,
-        ]}
-        columns={[null, { shiki: true }]}
-      language="tsx"
-      
-    />
-  ))}
-</div>
+<DataTable
+  showHeader={false}
+  columns={DEMO_CODE_COLUMNS}
+  rows={colors.map(color => ({
+    id: String(color),
+    values: [
+      <Icon
+        color={color}
+        name="message"
+        size="larger"
+        strokeWidth="large"
+      />,
+      `<Icon color="${color}" />`,
+    ],
+  }))}
+/>
 

@@ -2,7 +2,8 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Tile from "nice-react-tile"
 import Typography from "../../../../src/nice/Typography"
-import { CodeRow } from "../../../../src/components/CodeRow"
+import { DataRow } from "../../../../src/components/DataRow"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 
 <Meta title="Components/Tile/title" />
 
@@ -13,15 +14,13 @@ import { CodeRow } from "../../../../src/components/CodeRow"
   can be forwarded via <code>titleProps</code>.
 </Typography>
 
-<CodeRow
+<DataRow
   fullWidth
-  cells={[
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <Tile title="Title" description="Description" />,
           `<Tile title="Title" description="Description" />`,
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 
 ## titleProps
@@ -30,9 +29,10 @@ Forwarded to the title's `Typography`. Any prop from `TypographyProps` (except `
 
 ### titleProps.as
 
-<CodeRow
+<DataRow
   fullWidth
-  cells={[
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <Tile
       title="Title"
       description="Description"
@@ -40,16 +40,14 @@ Forwarded to the title's `Typography`. Any prop from `TypographyProps` (except `
     />,
           `<Tile\n  title="Title"\n  description="Description"\n  titleProps={{ as: "h1" }}\n/>`,
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 
 ### titleProps.color
 
-<CodeRow
+<DataRow
   fullWidth
-  cells={[
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <Tile
       title="Title"
       description="Description"
@@ -57,16 +55,14 @@ Forwarded to the title's `Typography`. Any prop from `TypographyProps` (except `
     />,
           `<Tile\n  title="Title"\n  description="Description"\n  titleProps={{ color: "link" }}\n/>`,
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 
 ### titleProps.size
 
-<CodeRow
+<DataRow
   fullWidth
-  cells={[
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <Tile
       title="Title"
       description="Description"
@@ -74,16 +70,14 @@ Forwarded to the title's `Typography`. Any prop from `TypographyProps` (except `
     />,
           `<Tile\n  title="Title"\n  description="Description"\n  titleProps={{ size: "larger" }}\n/>`,
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 
 ### titleProps.weight
 
-<CodeRow
+<DataRow
   fullWidth
-  cells={[
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <Tile
       title="Title"
       description="Description"
@@ -91,16 +85,14 @@ Forwarded to the title's `Typography`. Any prop from `TypographyProps` (except `
     />,
           `<Tile\n  title="Title"\n  description="Description"\n  titleProps={{ weight: "light" }}\n/>`,
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 
 ### titleProps.align
 
-<CodeRow
+<DataRow
   fullWidth
-  cells={[
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <Tile
       title="Title"
       description="Description"
@@ -108,16 +100,14 @@ Forwarded to the title's `Typography`. Any prop from `TypographyProps` (except `
     />,
           `<Tile\n  title="Title"\n  description="Description"\n  titleProps={{ align: "center" }}\n/>`,
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 
 ### titleProps.code
 
-<CodeRow
+<DataRow
   fullWidth
-  cells={[
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <Tile
       title="Title"
       description="Description"
@@ -125,16 +115,14 @@ Forwarded to the title's `Typography`. Any prop from `TypographyProps` (except `
     />,
           `<Tile\n  title="Title"\n  description="Description"\n  titleProps={{ shiki: true }}\n/>`,
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 
 ### titleProps.lineHeight
 
-<CodeRow
+<DataRow
   fullWidth
-  cells={[
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <Tile
       title="Title"
       description="Description"
@@ -142,8 +130,5 @@ Forwarded to the title's `Typography`. Any prop from `TypographyProps` (except `
     />,
           `<Tile\n  title="Title"\n  description="Description"\n  titleProps={{ lineHeight: "expanded" }}\n/>`,
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 

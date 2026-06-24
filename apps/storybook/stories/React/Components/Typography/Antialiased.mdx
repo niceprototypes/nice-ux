@@ -1,7 +1,8 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Typography from "../../../../src/nice/Typography"
-import { CodeRow } from "../../../../src/components/CodeRow"
+import { DataRow } from "../../../../src/components/DataRow"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import { toSource } from "../../../../src/services"
 
 <Meta title="Components/Typography/antialiased" />
@@ -14,8 +15,9 @@ import { toSource } from "../../../../src/services"
   on high-density displays.
 </Typography>
 
-<CodeRow
-  cells={[
+<DataRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <Typography size="large">Normal rendering</Typography>,
           toSource(
       "Typography",
@@ -23,13 +25,11 @@ import { toSource } from "../../../../src/services"
       { children: "Normal rendering" }
     ),
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 
-<CodeRow
-  cells={[
+<DataRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <Typography
       antialiased
       size="large"
@@ -42,8 +42,5 @@ import { toSource } from "../../../../src/services"
       { children: "Antialiased rendering" }
     ),
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 

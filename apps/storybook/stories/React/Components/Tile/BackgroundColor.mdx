@@ -2,7 +2,7 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Tile from "nice-react-tile"
 import StoryDescription from "../../../../src/components/StoryDescription"
-import { CodeRow } from "../../../../src/components/CodeRow"
+import { DataTable, DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import { toSource } from "../../../../src/services"
 
 <Meta title="Components/Tile/backgroundColor" />
@@ -15,22 +15,19 @@ import { toSource } from "../../../../src/services"
   <code>backgroundImage</code> for gradients or image URLs.
 </StoryDescription>
 
-<div>
-  {["base", "dark"].map(variant => {
+<DataTable
+  showHeader={false}
+  columns={DEMO_CODE_COLUMNS}
+  rows={["base", "dark"].map(variant => {
     const props = { backgroundColor: variant, title: "Title", description: "Description" }
-    return (
-      <CodeRow
-        fullWidth
-        key={variant}
-        cells={[
-          <Tile {...props} />,
-          toSource("Tile", props),
-        ]}
-        columns={[null, { shiki: true }]}
-        language="tsx"
-        
-      />
-    )
+    return {
+      id: String(variant),
+      values: [
+        <Tile {...props} />,
+        toSource("Tile", props),
+      ],
+      fullWidth: true,
+    }
   })}
-</div>
+/>
 

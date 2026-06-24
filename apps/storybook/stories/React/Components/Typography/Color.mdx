@@ -2,7 +2,7 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Typography from "../../../../src/nice/Typography"
 import StoryDescription from "../../../../src/components/StoryDescription"
-import { CodeRow } from "../../../../src/components/CodeRow"
+import { DataTable, DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import { toSource } from "../../../../src/services"
 
 <Meta title="Components/Typography/color" />
@@ -13,8 +13,10 @@ import { toSource } from "../../../../src/services"
   Sets the text color using color tokens.
 </StoryDescription>
 
-<div>
-  {[
+<DataTable
+  showHeader={false}
+  columns={DEMO_CODE_COLUMNS}
+  rows={[
     "lightest",
     "lighter",
     "light",
@@ -24,17 +26,12 @@ import { toSource } from "../../../../src/services"
     "success",
     "warning",
     "error",
-  ].map(color => (
-    <CodeRow
-      key={color}
-      cells={[
+  ].map(color => ({
+    id: String(color),
+    values: [
           <Typography color={color}>{color}</Typography>,
           toSource("Typography", { color }, { children: color }),
-        ]}
-        columns={[null, { shiki: true }]}
-      language="tsx"
-      
-    />
-  ))}
-</div>
+        ],
+  }))}
+/>
 

@@ -2,7 +2,8 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Flex from "nice-react-flex"
 import Typography from "../../../../src/nice/Typography"
-import { CodeRow } from "../../../../src/components/CodeRow"
+import { DataRow } from "../../../../src/components/DataRow"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 
 <Meta title="Components/Scroll/StickySectionLinks" />
 
@@ -13,9 +14,10 @@ import { CodeRow } from "../../../../src/components/CodeRow"
   <code>IntersectionObserver</code> for efficient detection.
 </Typography>
 
-<CodeRow
+<DataRow
   fullWidth
-  cells={[
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <Flex direction="column" gap="small">
       <Typography size="small" color="light">
         Navigation links with automatic active section highlighting. Uses
@@ -35,8 +37,5 @@ import { CodeRow } from "../../../../src/components/CodeRow"
     </Flex>,
           `<StickySectionLinks\n  links={[\n    { href: "#about", label: "About" },\n    { href: "#services", label: "Services" },\n  ]}\n/>`,
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 

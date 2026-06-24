@@ -58,12 +58,15 @@ Semantic tokens within the pinned element are reassigned to the pinned theme val
 
 ```html
 <section>
-  <p style="color: var(--np--color)">Pinned to browser</p>
+  <p style="color: var(--np--color)">Pinned to browser theme</p>
 </section>
 
 <section data-theme="night">
-  <p style="color: var(--np--color)">Pinned to night</p>
-  <p style="color: var(--np--color--day)">Pinned to day</p>
+  <p style="color: var(--np--color)">Inherits night theme</p>
+</section>
+
+<section data-theme="night">
+  <p style="color: var(--np--color--day)">Pinned to day theme</p>
 </section>
 ```
 
@@ -120,8 +123,11 @@ Additionally, you can nest pinned components within a pinned `Theme`:
 import { Theme } from "nice-react-styles"
 
 <Theme name="day">
-  <Typography>Day mode</Typography>
-  <Typography theme="night">Night mode</Typography>
+  <Typography>Inherits day theme</Typography>
+</Theme>
+
+<Theme name="day">
+  <Typography theme="night">Pinned to night theme</Typography>
 </Theme>
 ```
 
@@ -131,10 +137,12 @@ Or even within other pinned components:
 import { Theme } from "nice-react-styles"
 
 <Theme name="night">
-  <Typography>Night</Typography>
+  <Typography>Inherits night theme</Typography>
   <Tile theme="day">
-    <Typography>Day</Typography>
-    <Typography theme="night">Night</Typography>
+    <Typography>Inherits day theme</Typography>
+  </Tile>
+  <Tile theme="day">
+    <Typography theme="night">Pinned to night theme</Typography>
   </Tile>
 </Theme>
 ```

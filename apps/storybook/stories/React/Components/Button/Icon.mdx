@@ -2,7 +2,8 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Button from "nice-react-button"
 import Typography from "../../../../src/nice/Typography"
-import { CodeRow } from "../../../../src/components/CodeRow"
+import { DataRow } from "../../../../src/components/DataRow"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 
 <Meta title="Components/Button/icon" />
 
@@ -13,8 +14,9 @@ import { CodeRow } from "../../../../src/components/CodeRow"
   sole content when no children are provided.
 </Typography>
 
-<CodeRow
-  cells={[
+<DataRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <Button
       onClick={() => {}}
       icon="arrow-right"
@@ -23,13 +25,11 @@ import { CodeRow } from "../../../../src/components/CodeRow"
     </Button>,
           `<Button\n  onClick={handler}\n  icon="arrow-right"\n>\n  {children}\n</Button>`,
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 
-<CodeRow
-  cells={[
+<DataRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <Button
       onClick={() => {}}
       icon="plus"
@@ -37,7 +37,4 @@ import { CodeRow } from "../../../../src/components/CodeRow"
     />,
           `<Button\n  onClick={handler}\n  icon="plus"\n  aria-label="Add item"\n/>`,
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />

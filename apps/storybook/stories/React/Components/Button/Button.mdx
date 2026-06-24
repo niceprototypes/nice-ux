@@ -2,7 +2,8 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Button from "nice-react-button"
 import Typography from "../../../../src/nice/Typography"
-import { CodeRow } from "../../../../src/components/CodeRow"
+import { DataRow } from "../../../../src/components/DataRow"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 
 <Meta title="Components/Button" />
 
@@ -32,13 +33,11 @@ import Button from "nice-react-button"
   Default button rendering with an <code>onClick</code> handler and child label.
 </Typography>
 
-<CodeRow
-  cells={[
+<DataRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <Button onClick={() => alert("Button clicked!")}>Click Me</Button>,
           `<Button onClick={handler}>\n  {children}\n</Button>`,
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 

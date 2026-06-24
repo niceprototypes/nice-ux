@@ -2,7 +2,8 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Lightbox from "nice-react-lightbox"
 import Typography from "../../../../src/nice/Typography"
-import { CodeRow } from "../../../../src/components/CodeRow"
+import { DataRow } from "../../../../src/components/DataRow"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import { resolveVendorImage } from "nice-react-image-vendor"
 import { DemoImage } from "./Lightbox.styles"
 
@@ -17,8 +18,9 @@ export const DEMO_IMAGE = resolveVendorImage({ src: "10", width: "800px", height
   the expanded image.
 </Typography>
 
-<CodeRow
-  cells={[
+<DataRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <Lightbox
       imageUrl={DEMO_IMAGE}
       alt="Demo landscape"
@@ -31,13 +33,11 @@ export const DEMO_IMAGE = resolveVendorImage({ src: "10", width: "800px", height
     </Lightbox>,
           `<Lightbox\n  imageUrl="/image.png"\n  alt="Description"\n  title="Photo title"\n>\n  <img src="/image.png" />\n</Lightbox>`,
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 
-<CodeRow
-  cells={[
+<DataRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <Lightbox
       imageUrl={DEMO_IMAGE}
       alt="Demo landscape"
@@ -51,8 +51,5 @@ export const DEMO_IMAGE = resolveVendorImage({ src: "10", width: "800px", height
     </Lightbox>,
           `<Lightbox\n  imageUrl="/image.png"\n  alt="Description"\n  title="Photo title"\n  description="Caption text"\n>\n  <img src="/image.png" />\n</Lightbox>`,
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 

@@ -1,7 +1,8 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Typography from "../../../../src/nice/Typography"
-import { CodeRow } from "../../../../src/components/CodeRow"
+import { DataRow } from "../../../../src/components/DataRow"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import { InteractiveSlider } from "./Slider.services"
 
 <Meta title="Components/Slider" />
@@ -32,13 +33,11 @@ import Slider from "nice-react-slider"
   Animated vertical slider with controlled current index and transition state.
 </Typography>
 
-<CodeRow
-  cells={[
+<DataRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <InteractiveSlider />,
           `const [currentIndex, setCurrentIndex] = useState(0)\nconst [isAnimating, setIsAnimating] = useState(false)\n\n<Slider\n  currentIndex={currentIndex}\n  isAnimating={isAnimating}\n  onAnimationComplete={() => setIsAnimating(false)}\n>\n  {slides}\n</Slider>`,
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 

@@ -1,5 +1,5 @@
 import * as React from "react"
-import type { TokenVariant } from "../../../src/components/TokensCodeTable"
+import type { TokenVariant } from "../../../src/components/TokensDataTable"
 
 export interface TokenTable {
   /** camelCase token group — the table's name column and the story title. */

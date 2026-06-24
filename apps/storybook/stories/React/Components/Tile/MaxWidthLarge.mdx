@@ -3,7 +3,8 @@ import { StoryHeader } from "../../../../src/components/Story"
 import Tile from "nice-react-tile"
 import Typography from "../../../../src/nice/Typography"
 import StoryDescription from "../../../../src/components/StoryDescription"
-import { CodeRow } from "../../../../src/components/CodeRow"
+import { DataRow } from "../../../../src/components/DataRow"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 
 <Meta title="Components/Tile/maxWidthLarge" />
 
@@ -13,10 +14,11 @@ import { CodeRow } from "../../../../src/components/CodeRow"
   Caps the tile's content width at the laptop breakpoint.
 </StoryDescription>
 
-<CodeRow
+<DataRow
   fullWidth
-  cells={[
-          <Tile
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+    <Tile
       maxWidthLarge={1200}
       title="Title"
       description="Content constrained to 1200px max-width"
@@ -25,10 +27,7 @@ import { CodeRow } from "../../../../src/components/CodeRow"
         Content constrained to 1200px max-width
       </Typography>
     </Tile>,
-          `<Tile maxWidthLarge={1200} title="Title" description="Content constrained to 1200px max-width" />`,
-        ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
+    `<Tile maxWidthLarge={1200} title="Title" description="Content constrained to 1200px max-width" />`,
+  ]}
 />
 

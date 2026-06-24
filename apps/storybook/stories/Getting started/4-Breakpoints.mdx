@@ -3,8 +3,7 @@ import { StoryHeader } from "../../src/components/Story"
 import ResponsiveDemo, {
   ResponsiveDemoItem,
 } from "../../src/components/ResponsiveDemo"
-import { CodeRow } from "../../src/components/CodeRow"
-import { CodeTable } from "../../src/components/CodeTable"
+import { DataTable } from "../../src/components/DataTable"
 import Callout from "../../src/components/Callout"
 import NewLines from "../../src/components/NewLines/index.ts"
 
@@ -124,59 +123,24 @@ Keys used in `breakpoints` maps and `$breakpoints` objects. A bare name matches
 that band **exactly**; `+` extends it **up** (that breakpoint and larger), `-`
 extends it **down** (that breakpoint and smaller).
 
-<CodeTable
-  columnWidths={["5em", "29em"]}
-  columnHeaders={[null, "Query", "Range"]}
->
-  <CodeRow
-    inline
-    language="css"
-    cells={["phone", "@media (max-width: 640px)", "<= 640"]}
-    columns={[null, { shiki: true }, { code: true, size: "small" }]}
-  />
-  <CodeRow
-    inline
-    language="css"
-    cells={["tablet", "@media (min-width: 641px) and (max-width: 1279px)", "641-1279"]}
-    columns={[null, { shiki: true }, { code: true, size: "small" }]}
-  />
-  <CodeRow
-    inline
-    language="css"
-    cells={["laptop", "@media (min-width: 1280px) and (max-width: 1719px)", "1280-1719"]}
-    columns={[null, { shiki: true }, { code: true, size: "small" }]}
-  />
-  <CodeRow
-    inline
-    language="css"
-    cells={["desktop", "@media (min-width: 1720px)", ">= 1720"]}
-    columns={[null, { shiki: true }, { code: true, size: "small" }]}
-  />
-  <CodeRow
-    inline
-    language="css"
-    cells={["tablet+", "@media (min-width: 641px)", ">= 641"]}
-    columns={[null, { shiki: true }, { code: true, size: "small" }]}
-  />
-  <CodeRow
-    inline
-    language="css"
-    cells={["laptop+", "@media (min-width: 1280px)", ">= 1280"]}
-    columns={[null, { shiki: true }, { code: true, size: "small" }]}
-  />
-  <CodeRow
-    inline
-    language="css"
-    cells={["tablet-", "@media (max-width: 1279px)", "<= 1279"]}
-    columns={[null, { shiki: true }, { code: true, size: "small" }]}
-  />
-  <CodeRow
-    inline
-    language="css"
-    cells={["laptop-", "@media (max-width: 1719px)", "<= 1719"]}
-    columns={[null, { shiki: true }, { code: true, size: "small" }]}
-  />
-</CodeTable>
+<DataTable
+  inline
+  columns={[
+    { key: "name", header: null, width: "5em", render: "node" },
+    { key: "query", header: "Query", width: "29em", render: "shiki", language: "css" },
+    { key: "range", header: "Range", render: "text", code: true, size: "small" },
+  ]}
+  rows={[
+    { id: "phone", values: ["phone", "@media (max-width: 640px)", "<= 640"] },
+    { id: "tablet", values: ["tablet", "@media (min-width: 641px) and (max-width: 1279px)", "641-1279"] },
+    { id: "laptop", values: ["laptop", "@media (min-width: 1280px) and (max-width: 1719px)", "1280-1719"] },
+    { id: "desktop", values: ["desktop", "@media (min-width: 1720px)", ">= 1720"] },
+    { id: "tablet+", values: ["tablet+", "@media (min-width: 641px)", ">= 641"] },
+    { id: "laptop+", values: ["laptop+", "@media (min-width: 1280px)", ">= 1280"] },
+    { id: "tablet-", values: ["tablet-", "@media (max-width: 1279px)", "<= 1279"] },
+    { id: "laptop-", values: ["laptop-", "@media (max-width: 1719px)", "<= 1719"] },
+  ]}
+/>
 
 <Callout type="hint">`phone+` and `desktop-` span every width — applied at `:root` with no `@media`. `phone-` ≡ `phone` and `desktop+` ≡ `desktop`.</Callout>
 

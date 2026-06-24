@@ -3,7 +3,7 @@ import { StoryHeader } from "../../../../src/components/Story"
 import Flex from "nice-react-flex"
 import { getToken } from "nice-react-styles"
 import Typography from "../../../../src/nice/Typography"
-import { CodeRow } from "../../../../src/components/CodeRow"
+import { DataTable, DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import DemoDots from "../../../../src/components/DemoDots"
 import { twoDots } from "./Flex.services"
 
@@ -16,11 +16,12 @@ import { twoDots } from "./Flex.services"
   <code>margin</code>.
 </Typography>
 
-<div>
-  {["padding", "margin"].map(value => (
-    <CodeRow
-      key={value}
-      cells={[
+<DataTable
+  showHeader={false}
+  columns={DEMO_CODE_COLUMNS}
+  rows={["padding", "margin"].map(value => ({
+    id: String(value),
+    values: [
           <Flex direction="column">
           <Flex
             spacing="small"
@@ -42,11 +43,7 @@ import { twoDots } from "./Flex.services"
           </Flex>
         </Flex>,
           `<Flex type="${value}">\n  {children}\n</Flex>`,
-        ]}
-        columns={[null, { shiki: true }]}
-      language="tsx"
-      
-    />
-  ))}
-</div>
+        ],
+  }))}
+/>
 

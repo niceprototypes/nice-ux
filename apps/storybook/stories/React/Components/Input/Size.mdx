@@ -2,7 +2,7 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Input from "nice-react-input"
 import Typography from "../../../../src/nice/Typography"
-import { CodeRow } from "../../../../src/components/CodeRow"
+import { DataTable, DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 
 export const sizes = ["smaller", "small", "base", "large", "larger"]
 
@@ -21,22 +21,19 @@ export const sizeCode = (s) =>
   Scales the input's height, padding, and font size using cell-height tokens.
 </Typography>
 
-<div>
-  {sizes.map((size) => (
-    <CodeRow
-      key={size}
-      cells={[
-          <Input
-          size={size}
-          placeholder={sizeLabel(size)}
-          onChange={() => {}}
-        />,
-          sizeCode(size),
-        ]}
-        columns={[null, { shiki: true }]}
-      language="tsx"
-      
-    />
-  ))}
-</div>
+<DataTable
+  showHeader={false}
+  columns={DEMO_CODE_COLUMNS}
+  rows={sizes.map((size) => ({
+    id: size,
+    values: [
+      <Input
+        size={size}
+        placeholder={sizeLabel(size)}
+        onChange={() => {}}
+      />,
+      sizeCode(size),
+    ],
+  }))}
+/>
 

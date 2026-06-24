@@ -33,6 +33,7 @@
     "nice-react-slider": "file:../react-slider",
     "nice-react-styles": "file:../react-styles",
     "nice-react-tile": "file:../react-tile",
+    "nice-react-tooltip": "file:../react-tooltip",
     "nice-react-typography": "file:../react-typography",
     "nice-styles": "file:../styles",
     "nice-toolkit": "file:../toolkit",

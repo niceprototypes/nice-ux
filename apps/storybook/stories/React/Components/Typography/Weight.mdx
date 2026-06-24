@@ -2,7 +2,7 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Typography from "../../../../src/nice/Typography"
 import StoryDescription from "../../../../src/components/StoryDescription"
-import { CodeRow } from "../../../../src/components/CodeRow"
+import { DataTable, DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import { toSource } from "../../../../src/services"
 
 <Meta title="Components/Typography/weight" />
@@ -13,20 +13,17 @@ import { toSource } from "../../../../src/services"
   Sets the font thickness using fontWeight tokens.
 </StoryDescription>
 
-<div>
-  {["light", "base", "medium", "semibold", "bold", "extrabold", "black"].map(
-    weight => (
-      <CodeRow
-        key={weight}
-        cells={[
-          <Typography weight={weight}>{weight}</Typography>,
-          toSource("Typography", { weight }, { children: weight }),
-        ]}
-        columns={[null, { shiki: true }]}
-        language="tsx"
-        
-      />
-    )
+<DataTable
+  showHeader={false}
+  columns={DEMO_CODE_COLUMNS}
+  rows={["light", "base", "medium", "semibold", "bold", "extrabold", "black"].map(
+    weight => ({
+      id: weight,
+      values: [
+        <Typography weight={weight}>{weight}</Typography>,
+        toSource("Typography", { weight }, { children: weight }),
+      ],
+    })
   )}
-</div>
+/>
 

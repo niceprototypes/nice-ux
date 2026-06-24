@@ -1,7 +1,8 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Typography from "../../../../src/nice/Typography"
-import { CodeRow } from "../../../../src/components/CodeRow"
+import { DataRow } from "../../../../src/components/DataRow"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 
 <Meta title="Components/Scroll/StickySection" />
 
@@ -14,47 +15,41 @@ import { CodeRow } from "../../../../src/components/CodeRow"
 
 ### Basic
 
-<CodeRow
+<DataRow
   fullWidth
-  cells={[
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <Typography size="small" color="light">
       Wraps content with a semantic section element and ID for use with
       StickySectionLinks navigation.
     </Typography>,
           `<StickySection id="about">\n  <h2>About Us</h2>\n  <p>Content...</p>\n</StickySection>`,
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 
 ### as
 
-<CodeRow
+<DataRow
   fullWidth
-  cells={[
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <Typography size="small" color="light">
       Render as a different HTML element type (default: section)
     </Typography>,
           `<StickySection id="hero" as="div">`,
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 
 ### render
 
-<CodeRow
+<DataRow
   fullWidth
-  cells={[
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <Typography size="small" color="light">
       Custom render function for full control over the wrapper element
     </Typography>,
           `<StickySection\n  id="custom"\n  render={({ id, children }) => (\n    <article id={id}>{children}</article>\n  )}\n>`,
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 

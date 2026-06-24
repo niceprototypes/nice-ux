@@ -2,7 +2,8 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Image from "nice-react-image"
 import Typography from "../../../../src/nice/Typography"
-import { CodeRow } from "../../../../src/components/CodeRow"
+import { DataRow } from "../../../../src/components/DataRow"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import { toSource } from "../../../../src/services"
 
 <Meta title="Components/Image/vendor" />
@@ -55,8 +56,9 @@ vendor's identifier (a <code>picsum</code> id) rather than a URL. Omit
 <code>width</code> and <code>height</code> are forwarded to the resolver
 as the requested asset size.
 
-<CodeRow
-  cells={[
+<DataRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <Image
       vendor
       alt="Random vendor image"
@@ -74,13 +76,11 @@ as the requested asset size.
       borderRadius: "base",
     }),
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 
-<CodeRow
-  cells={[
+<DataRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <Image
       vendor
       src="10"
@@ -100,9 +100,6 @@ as the requested asset size.
       borderRadius: "base",
     }),
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 
 ### Direct URL access

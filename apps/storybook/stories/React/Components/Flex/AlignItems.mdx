@@ -2,7 +2,8 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import { getToken } from "nice-react-styles"
 import StoryDescription from "../../../../src/components/StoryDescription"
-import { CodeRow } from "../../../../src/components/CodeRow"
+import { DataRow } from "../../../../src/components/DataRow"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import DemoDots from "../../../../src/components/DemoDots"
 import { threeDots } from "./Flex.services"
 
@@ -47,8 +48,9 @@ export const stretchDots = [
   Aligns items along the cross axis.
 </StoryDescription>
 
-<CodeRow
-  cells={[
+<DataRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <DemoDots
       alignItems="flex-start"
       dots={threeDots}
@@ -57,13 +59,11 @@ export const stretchDots = [
     />,
           `<Flex alignItems="flex-start">\n  {children}\n</Flex>`,
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 
-<CodeRow
-  cells={[
+<DataRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <DemoDots
       alignItems="flex-end"
       dots={threeDots}
@@ -72,13 +72,11 @@ export const stretchDots = [
     />,
           `<Flex alignItems="flex-end">\n  {children}\n</Flex>`,
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 
-<CodeRow
-  cells={[
+<DataRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <DemoDots
       alignItems="center"
       dots={threeDots}
@@ -87,13 +85,11 @@ export const stretchDots = [
     />,
           `<Flex alignItems="center">\n  {children}\n</Flex>`,
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 
-<CodeRow
-  cells={[
+<DataRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <DemoDots
       alignItems="baseline"
       dots={baselineDots}
@@ -102,13 +98,11 @@ export const stretchDots = [
     />,
           `<Flex alignItems="baseline">\n  {children}\n</Flex>`,
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 
-<CodeRow
-  cells={[
+<DataRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <DemoDots
       alignItems="stretch"
       dots={stretchDots}
@@ -117,8 +111,5 @@ export const stretchDots = [
     />,
           `<Flex alignItems="stretch">\n  {children}\n</Flex>`,
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 

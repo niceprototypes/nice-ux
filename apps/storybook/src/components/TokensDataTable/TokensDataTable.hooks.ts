@@ -9,8 +9,7 @@ import { HIGHLIGHT_KEY } from "../../services"
  */
 export function useNiceTheme(): "day" | "night" {
   const read = (): "day" | "night" =>
-    typeof document !== "undefined" &&
-    document.documentElement.getAttribute("data-theme") === "night"
+    typeof document !== "undefined" && document.documentElement.getAttribute("data-theme") === "night"
       ? "night"
       : "day"
   const [theme, setTheme] = React.useState<"day" | "night">(read)
@@ -24,18 +23,25 @@ export function useNiceTheme(): "day" | "night" {
   return theme
 }
 
+/** The deep-link highlight target a `parseTokenVarLink` click stashed. */
+export interface HighlightedToken {
+  group: string
+  variant: string
+}
+
 /**
- * Reads the deep-link highlight target — the variant a `parseTokenVarLink` link
- * pointed at — for this table's group, from sessionStorage only. A var-link
- * writes the key on click and the destination reads + clears it here, so the
- * highlight fires exactly once on arrival. The URL param is deliberately NOT
- * read: Storybook keeps query params across `navigate()` calls, so a stale
- * `np-token` would stick and re-highlight an unrelated row on later visits.
+ * Reads the deep-link highlight target a `parseTokenVarLink` link stashed in
+ * sessionStorage, as `{ group, variant }`, then clears it — so the highlight
+ * fires exactly once on arrival. Unlike the old per-group hook this returns the
+ * whole token, so an aggregated set can highlight the matching row in whichever
+ * sub-table owns the group. The URL param is deliberately NOT read: Storybook
+ * keeps query params across `navigate()` calls, so a stale `np-token` would
+ * stick and re-highlight an unrelated row later.
  */
-export function useHighlightedVariant(group: string): string | null {
-  const [variant, setVariant] = React.useState<string | null>(null)
+export function useHighlightedToken(): HighlightedToken | null {
+  const [token, setToken] = React.useState<HighlightedToken | null>(null)
   React.useEffect(() => {
-    if (typeof window === "undefined" || !group) return
+    if (typeof window === "undefined") return
     let raw: string | null = null
     try {
       raw = sessionStorage.getItem(HIGHLIGHT_KEY)
@@ -44,8 +50,8 @@ export function useHighlightedVariant(group: string): string | null {
       raw = null
     }
     if (!raw) return
-    const [g, v] = raw.split("--")
-    if (g === group) setVariant(v ?? "base")
-  }, [group])
-  return variant
+    const [group, variant] = raw.split("--")
+    if (group) setToken({ group, variant: variant ?? "base" })
+  }, [])
+  return token
 }

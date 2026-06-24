@@ -4,7 +4,8 @@ import { ScrollProvider, FadeOnScroll } from "nice-react-scroll"
 import Flex from "nice-react-flex"
 import { getToken } from "nice-react-styles"
 import Typography from "../../../../src/nice/Typography"
-import { CodeRow } from "../../../../src/components/CodeRow"
+import { DataRow } from "../../../../src/components/DataRow"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 
 <Meta title="Components/Scroll/FadeOnScroll" />
 
@@ -15,9 +16,10 @@ import { CodeRow } from "../../../../src/components/CodeRow"
   position and opacity curves.
 </Typography>
 
-<CodeRow
+<DataRow
   fullWidth
-  cells={[
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <ScrollProvider>
       <FadeOnScroll
         startPosition={0}
@@ -39,8 +41,5 @@ import { CodeRow } from "../../../../src/components/CodeRow"
     </ScrollProvider>,
           `<FadeOnScroll\n  startPosition={0}\n  peakPosition={50}\n  endPosition={100}\n>\n  {children}\n</FadeOnScroll>`,
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 

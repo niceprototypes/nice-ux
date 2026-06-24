@@ -2,7 +2,8 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import { getToken } from "nice-react-styles"
 import StoryDescription from "../../../../src/components/StoryDescription"
-import { CodeRow } from "../../../../src/components/CodeRow"
+import { DataRow } from "../../../../src/components/DataRow"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import DemoDots from "../../../../src/components/DemoDots"
 
 <Meta title="Components/Flex/wrap" />
@@ -49,8 +50,9 @@ export const wrapWidth = `calc(${getToken("cellHeight", "small")} * 3 + 2px)`
   Controls whether flex items wrap onto multiple lines when they overflow.
 </StoryDescription>
 
-<CodeRow
-  cells={[
+<DataRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <DemoDots
       wrap="nowrap"
       dots={nowrapDots}
@@ -59,13 +61,11 @@ export const wrapWidth = `calc(${getToken("cellHeight", "small")} * 3 + 2px)`
     />,
           `<Flex wrap="nowrap">\n  {children}\n</Flex>`,
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 
-<CodeRow
-  cells={[
+<DataRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <DemoDots
       wrap="wrap"
       dots={wrapDots}
@@ -74,13 +74,11 @@ export const wrapWidth = `calc(${getToken("cellHeight", "small")} * 3 + 2px)`
     />,
           `<Flex wrap="wrap">\n  {children}\n</Flex>`,
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 
-<CodeRow
-  cells={[
+<DataRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
           <DemoDots
       wrap="wrap-reverse"
       dots={wrapDots}
@@ -89,8 +87,5 @@ export const wrapWidth = `calc(${getToken("cellHeight", "small")} * 3 + 2px)`
     />,
           `<Flex wrap="wrap-reverse">\n  {children}\n</Flex>`,
         ]}
-        columns={[null, { shiki: true }]}
-  language="tsx"
-  
 />
 

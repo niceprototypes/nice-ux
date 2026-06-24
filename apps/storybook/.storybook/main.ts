@@ -54,6 +54,10 @@ const config: StorybookConfig = {
   stories: [
     "../stories/**/*.mdx",
     "../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)",
+    // Hidden until ready — excluded from the sidebar, not deleted. The story
+    // files stay on disk; remove these negations to re-show Slider / Scroll.
+    "!../stories/React/Components/Slider/**",
+    "!../stories/React/Components/Scroll/**",
   ],
   addons: [
     getAbsolutePath("@storybook/addon-links"),
