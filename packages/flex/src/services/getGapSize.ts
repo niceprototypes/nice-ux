@@ -10,7 +10,7 @@ import { GapSize } from "../components/Flex/Flex.types"
  *
  * @example
  * getGapSize("smaller") // returns "var(--np--gap--smaller)"
- * getGapSize("base") // returns "var(--np--gap--base)"
+ * getGapSize("base") // returns "var(--np--gap)"
  * getGapSize("2rem") // returns "2rem"
  * getGapSize("var(--custom-spacing)") // returns "var(--custom-spacing)"
  * getGapSize(null) // returns undefined

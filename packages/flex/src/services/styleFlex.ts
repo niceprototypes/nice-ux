@@ -119,7 +119,7 @@ function pushSpacingStyles(
  *   spacing: { tablet: "small base" }
  * }
  * styleFlex(BREAKPOINT_TABLET, props)
- * // Returns: "flex-direction: row;\ngap: var(--core--gap--base);\npadding-top: var(--core--gap--small);\npadding-right: var(--core--gap--base);..."
+ * // Returns: "flex-direction: row;\ngap: var(--core--gap);\npadding-top: var(--core--gap--small);\npadding-right: var(--core--gap);..."
  */
 export const styleFlex = (breakpoint: BreakpointName, props: FlexProps): string => {
   const styles: string[] = []
