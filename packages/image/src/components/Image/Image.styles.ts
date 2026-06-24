@@ -9,7 +9,8 @@
  */
 
 import styled, { css } from "styled-components"
-import { getToken, type BorderRadiusType, type BorderWidthType, type BorderColorType } from "nice-react-styles"
+import { type BorderRadiusType, type BorderWidthType, type BorderColorType } from "nice-react-styles"
+import { getImageToken } from "../../tokens/getImageToken"
 import type { ImageBackgroundSizeType, ImageBackgroundPositionType } from "./Image.types"
 
 /**
@@ -54,14 +55,14 @@ const sharedStyles = css<{
   ${({ $borderRadius }) =>
     $borderRadius &&
     css`
-      border-radius: ${getToken("borderRadius", $borderRadius)};
+      border-radius: ${getImageToken("borderRadius", $borderRadius)};
     `}
 
   /* Border from design tokens (gated by $bordered) */
   ${({ $bordered, $borderWidth = "base", $borderColor = "base" }) =>
     $bordered &&
     css`
-      border: ${getToken("borderWidth", $borderWidth)} solid ${getToken("borderColor", $borderColor)};
+      border: ${getImageToken("borderWidth", $borderWidth)} solid ${getImageToken("borderColor", $borderColor)};
     `}
 `
 
@@ -82,7 +83,7 @@ export const StyledImg = styled.img<{
   ${({ $backgroundSize }) =>
     $backgroundSize &&
     css`
-      object-fit: ${getToken("backgroundSize", $backgroundSize)};
+      object-fit: ${getImageToken("backgroundSize", $backgroundSize)};
     `}
 
   /* Object position derived from backgroundPosition */
