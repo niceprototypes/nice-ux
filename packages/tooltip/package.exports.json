@@ -1,0 +1,6 @@
+{
+  "$schema": "../configuration/src/exports/schema.json",
+  "description": "Tooltip component for nice-react using inverse design tokens.",
+  "default": "Tooltip",
+  "components": ["Tooltip"]
+}
