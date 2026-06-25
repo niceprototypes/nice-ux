@@ -1,34 +1,53 @@
+import styled, { keyframes } from "styled-components"
 import { getToken } from "nice-react-styles"
 import Flex from "nice-react-flex"
 import type { TokenTable } from "../TokenTable.types"
+
+// The dot's diameter — shared between the element size and the slide distance so
+// the dot stays flush inside the right edge regardless of container width.
+const DOT_SIZE = "4px"
+
+// Slide the dot to the right and back, pausing at each end. The travel distance
+// is the container's own width (100cqw, set by container-type on the track
+// below) minus the dot's width — so it adapts to any cell width instead of a
+// hard-coded pixel value. Lives here, its sole consumer, not a global sheet.
+const slide = keyframes`
+  0%, 17% { transform: translateX(0); }
+  33%, 67% { transform: translateX(calc(100cqw - ${DOT_SIZE})); }
+  84%, 100% { transform: translateX(0); }
+`
+
+// The animated dot. Duration scales with the variant's animationDuration token
+// (×6 so the motion reads at a glance); base alone is delayed by one duration so
+// the three rows visibly stagger.
+const Dot = styled.div<{ $variant: string }>`
+  width: ${DOT_SIZE};
+  height: ${DOT_SIZE};
+  border-radius: 50%;
+  background-color: ${getToken("color", "light")};
+  animation: ${slide} calc(${({ $variant }) => getToken("animationDuration", $variant)} * 6)
+    ${getToken("animationEasing")} infinite;
+  animation-delay: ${({ $variant }) => ($variant === "base" ? getToken("animationDuration", $variant) : "0s")};
+`
+
+// The bordered track. `container-type: inline-size` makes it the query container
+// the dot's 100cqw resolves against (its content box, i.e. the area inside the
+// padding) — the exact span the dot should travel.
+const Track = styled(Flex)`
+  container-type: inline-size;
+  background-color: ${getToken("backgroundColor", "dark")};
+  border: 1px solid ${getToken("borderColor")};
+  border-radius: 8px;
+  padding: ${getToken("gap", "smaller")};
+`
 
 export const animationDuration = {
   name: "animationDuration",
   description: "Timing values for CSS transitions and animations.",
   variants: ["fast", "base", "slow"],
-  preview: (variant) => {
-    const animationName = variant === "base" ? "slide" : "slideSlow"
-    return (
-      <Flex
-        grow={1}
-        style={{
-          backgroundColor: getToken("backgroundColor", "dark"),
-          border:`1px solid ${getToken("borderColor")}`,
-          borderRadius: "8px",
-          padding: getToken("gap", "smaller"),
-        }}
-      >
-        <Flex
-          style={{
-            backgroundColor: getToken("color", "light"),
-            width: "4px",
-            height: "4px",
-            borderRadius: "50%",
-            animation: `${animationName} calc(${getToken("animationDuration", variant)} * 6) ${getToken("animationEasing")} infinite`,
-            animationDelay: variant === "base" ? getToken("animationDuration", variant) : 0,
-          }}
-        />
-      </Flex>
-    )
-  },
+  preview: (variant) => (
+    <Track grow={1}>
+      <Dot $variant={variant} />
+    </Track>
+  ),
 } satisfies TokenTable
