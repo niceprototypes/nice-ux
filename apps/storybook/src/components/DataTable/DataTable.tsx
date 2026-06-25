@@ -41,7 +41,7 @@ const BaseDataTable = ({
   const cols = name !== undefined ? [nameColumn(nameWidth), ...columns] : columns
 
   return (
-    <Flex direction="column">
+    <Flex direction="column" spacing="large none">
       {showHeader ? <DataTableHeader columns={cols} /> : null}
       {rows.map((row, index) => (
         <DataRow

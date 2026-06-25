@@ -1,59 +1,145 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
+import Callout from "../../src/components/Callout"
+import Typography from "../../src/nice/Typography/index.ts"
+import NewLines from "../../src/components/NewLines/index.ts"
 
 <Meta
   title="Getting started/Kitchen sink"
   name="Docs"
 />
 
-<StoryHeader title="Kitchen sink" />
+<StoryHeader
+  title="Kitchen sink"
+  description="Every step shown so far, demonstrated in one example."
+/>
 
-```tsx
+## 1. `tokens.ts`
+
+```ts
+// tokens.ts — imported once, for its side effect, at the app entry
+
 import { setTokens } from "nice-react-styles"
 
 setTokens({
-  // STATIC MODULES
-
-  // Basic module
+  // Fonts
   fontFamily: {
-    // Static tokens
-    base: "Open Sans",
-    code: "Roboto Mono",
-    // Custom tokens
-    promo: "Billboard Sans Pro",
-    numbers: "Calculator Mono",
+    base: "Inter",              // Default override
+    code: "Roboto Mono",        // Default override
+    promo: "Playfair Display",  // Custom token
   },
 
-  // Themed module
-  backgroundColor: {
-    // Theme objects (static)
-    base: {
-      // Theme tokens (static)
-      day: "#fff",
-      night: "#000",
-    },
+  // Breakpoints
+  breakpoints: {
+    tablet: 700,
+    laptop: 1100,
+    desktop: 1800,
   },
 
-  // Responsive module
+  // Responsive
   fontSize: {
-    // Responsive object (static)
-    base: {
-      // Responsive tokens (static) — phone is the required base
-      phone: "16px",
-      laptop: "24px",
-      desktop: "32px",
-    },
+    base: { phone: "16px", laptop: "18px", desktop: "20px" },
+    larger: { phone: "32px", laptop: "44px", desktop: "56px" },
   },
 
-  // CUSTOM MODULES
+  // Themes
+  backgroundColor: {
+    base: { day: "#ffffff", night: "#0b0b0c" },
+  },
+  color: {
+    base: { day: "#0b0b0c", night: "#f4f4f5" },
+  },
 
+  // Custom module
   brandColor: {
-    // Custom keys
-    primary: {
-      // Theme tokens (static)
-      day: "#dc0000",
-      night: "#ff5050",
-    },
+    primary: { day: "#dc0000", night: "#ff5050" },
+    onBrand: "#ffffff", // static within the same custom module
   },
 } as const)
 ```
+
+<Callout type="hint">Static, responsive, themed, and custom tokens — plus breakpoint thresholds — all live in one `setTokens` call. Detection is by shape: a `phone` key makes a value responsive, a `day` key makes it themed.</Callout>
+
+---
+
+## 2. `App.tsx` — load the fonts, provide the system
+
+Import `tokens.ts` once so `setTokens` runs on load, then wrap the app in
+`StylesProvider`. The provider loads the font families named in `fontFamily`
+(here via Google Fonts) and supplies the token system to every nice component.
+
+```tsx
+// App.tsx
+
+import { StylesProvider } from "nice-react-styles"
+import "./tokens" // runs setTokens once, on load
+import Page from "./Page"
+
+export default function App() {
+  return (
+    <StylesProvider googleFonts="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700&family=Roboto+Mono&display=swap">
+      <Page />
+    </StylesProvider>
+  )
+}
+```
+
+<Callout type="hint">`StylesProvider` also accepts `adobeFonts` and a raw `links` array — use whichever matches your font host. The component is pinned to the browser's day/night preference by default.</Callout>
+
+---
+
+## 3. `Page.tsx` — consume tokens, breakpoints, and themes
+
+Everything set in step 1 is now reachable through `getToken`. `getBreakpoint`
+emits the matching `@media` literal, and a `getToken` call inside it resolves to
+that breakpoint's variant automatically. Themed tokens flip with the OS
+preference; wrap a subtree in `Theme` (or set a component's `theme` prop) to pin
+it.
+
+```tsx
+// Page.tsx
+
+import styled from "styled-components"
+import { getToken, getBreakpoint, Theme } from "nice-react-styles"
+import Typography from "nice-react-typography"
+import Icon from "nice-react-icon"
+
+// Semantic tokens (no theme suffix) flip automatically; the responsive
+// fontSize resolves per breakpoint via getBreakpoint.
+const Card = styled.div`
+  padding: ${getToken("gap", "large")};
+  background-color: ${getToken("backgroundColor")};
+  color: ${getToken("color")};
+  border-radius: ${getToken("borderRadius", "base")};
+  font-family: ${getToken("fontFamily", "base")};
+
+  ${getBreakpoint("laptop")} {
+    padding: ${getToken("gap", "larger")};
+  }
+`
+
+export default function Page() {
+  return (
+    <Card>
+      <Typography as="h1" size="larger" style={{ fontFamily: getToken("fontFamily", "promo") }}>
+        Ready to ship
+      </Typography>
+
+      <Typography style={{ color: getToken("brandColor", "primary") }}>
+        <Icon name="check" color="success" /> Tokens, fonts, breakpoints, and themes — wired.
+      </Typography>
+
+      {/* Pin a subtree to night regardless of the OS preference. */}
+      <Theme name="night">
+        <Card>
+          <Typography>Always dark — pinned with Theme.</Typography>
+        </Card>
+      </Theme>
+    </Card>
+  )
+}
+```
+
+<Callout type="learning">A `getToken` call placed inside a `getBreakpoint` block resolves to that breakpoint's variant automatically — your JS and CSS stay on one threshold table.</Callout>
+
+<Callout type="hint">Semantic tokens like `getToken("color")` already flip day/night on their own. Reach for `Theme`, a component's `theme` prop, or `data-theme` only when you need to *pin* a region against the OS preference.</Callout>

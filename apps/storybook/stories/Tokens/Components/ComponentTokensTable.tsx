@@ -1,6 +1,7 @@
 import * as React from "react"
 import { DataTableSet } from "../../../src/components/DataTableSet"
 import type { DataColumn } from "../../../src/components/DataTable"
+import { tokenNameCell } from "../../../src/components/TokensDataTable"
 import Typography from "../../../src/nice/Typography"
 import { parseTokenVarLink, HIGHLIGHT_KEY } from "../../../src/services"
 import { TokenVarLink } from "./ComponentTokensTable.styles"
@@ -65,8 +66,9 @@ const renderValue = (value: string) => {
 }
 
 // The data columns (the leading group-name column, width 10em, is prepended by
-// DataTableSet). Variable is pinned; Value is equal-flex.
+// DataTableSet). Token name and Variable are pinned; Value is equal-flex.
 const COLUMNS: DataColumn[] = [
+  { key: "tokenName", header: "Token name", width: "14em", render: "node" },
   { key: "variable", header: "Variable", width: "36em", render: "node" },
   { key: "value", header: "Value", render: "node" },
 ]
@@ -84,6 +86,7 @@ export const ComponentTokensTable = ({ prefix }: ComponentTokensTableProps) => {
     rows: group.rows.map((row) => ({
       id: row.cssVar,
       values: [
+        tokenNameCell(row.variant, row.path[row.path.length - 1] === "base"),
         <Typography code size="small">{row.cssVar}</Typography>,
         <Typography code size="small">{renderValue(row.value)}</Typography>,
       ],

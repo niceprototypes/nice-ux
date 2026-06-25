@@ -1,0 +1,36 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../../src/components/Story"
+import Tooltip from "nice-react-tooltip"
+import Button from "nice-react-button"
+import Typography from "../../../../src/nice/Typography"
+import { DataRow } from "../../../../src/components/DataRow"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+
+<Meta title="Components/Tooltip/trigger" />
+
+<StoryHeader title="trigger" />
+
+<Typography color="light">
+  How the tooltip activates. <code>"hover"</code> (default) shows it while the
+  pointer is over the trigger; <code>"click"</code> toggles it open and closed.
+</Typography>
+
+<DataRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+    <Tooltip content="Shown on hover" trigger="hover">
+      <Button>Hover</Button>
+    </Tooltip>,
+    `<Tooltip content="…" trigger="hover">\n  <Button>Hover</Button>\n</Tooltip>`,
+  ]}
+/>
+
+<DataRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+    <Tooltip content="Toggled on click" trigger="click">
+      <Button>Click</Button>
+    </Tooltip>,
+    `<Tooltip content="…" trigger="click">\n  <Button>Click</Button>\n</Tooltip>`,
+  ]}
+/>

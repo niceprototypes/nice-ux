@@ -11,8 +11,8 @@ export const borderColor = {
       grow={1}
       style={{
         backgroundColor: getToken("backgroundColor"),
-        height: 0,
-        borderBottom:`1px solid ${getToken("borderColor", variant)}`,
+        height: getToken("cellHeight", "larger"),
+        border:`1px solid ${getToken("borderColor", variant)}`,
         borderRadius: getToken("borderRadius"),
       }}
     />

@@ -1,0 +1,49 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../../src/components/Story"
+import Tooltip from "nice-react-tooltip"
+import Button from "nice-react-button"
+import Typography from "../../../../src/nice/Typography"
+import { DataRow } from "../../../../src/components/DataRow"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+
+<Meta title="Components/Tooltip" />
+
+<StoryHeader title="Tooltip" />
+
+```bash
+npm install nice-react-tooltip
+```
+
+### Setup
+
+```jsx
+import Tooltip from "nice-react-tooltip"
+```
+
+### Usage
+
+```jsx
+<Tooltip content="Copy to clipboard">
+  <Button>Hover me</Button>
+</Tooltip>
+```
+
+---
+
+## Basic
+
+<Typography color="light">
+  Wraps any element as the trigger and shows an inverse-themed bubble on hover.
+  The bubble renders in a portal, so it is never clipped by a scrolling or
+  overflow-hidden ancestor.
+</Typography>
+
+<DataRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+    <Tooltip content="Copy to clipboard">
+      <Button>Hover me</Button>
+    </Tooltip>,
+    `<Tooltip content="Copy to clipboard">\n  <Button>Hover me</Button>\n</Tooltip>`,
+  ]}
+/>

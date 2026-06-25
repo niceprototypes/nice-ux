@@ -7,4 +7,8 @@ import { getToken } from "nice-react-styles"
 export const TokenVarLink = styled.a`
   color: ${getToken("color", "link")};
   text-decoration: none;
+  
+  &:hover {
+    text-decoration: underline;
+  }
 `

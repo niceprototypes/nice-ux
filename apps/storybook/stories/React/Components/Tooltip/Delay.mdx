@@ -1,0 +1,38 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../../src/components/Story"
+import Tooltip from "nice-react-tooltip"
+import Button from "nice-react-button"
+import Typography from "../../../../src/nice/Typography"
+import { DataRow } from "../../../../src/components/DataRow"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+
+<Meta title="Components/Tooltip/delay" />
+
+<StoryHeader title="delay" />
+
+<Typography color="light">
+  <code>delayShow</code> defers rendering after the tooltip is activated;{" "}
+  <code>delayHide</code> defers unrendering after the trigger ends. Both are in
+  milliseconds and default to <code>0</code>. A pending delay is cancelled if the
+  opposite event fires first, so a brief pass never flashes the tooltip.
+</Typography>
+
+<DataRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+    <Tooltip content="Appears after 600ms" delayShow={500}>
+      <Button>delayShow 600</Button>
+    </Tooltip>,
+    `<Tooltip content="…" delayShow={500}>\n  <Button>Hover</Button>\n</Tooltip>`,
+  ]}
+/>
+
+<DataRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+    <Tooltip content="Lingers 600ms after leave" delayHide={600}>
+      <Button>delayHide 600</Button>
+    </Tooltip>,
+    `<Tooltip content="…" delayHide={600}>\n  <Button>Hover</Button>\n</Tooltip>`,
+  ]}
+/>
