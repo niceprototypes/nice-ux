@@ -3,3 +3,4 @@
 [2026-06-21 21:06] patch: Drive color from the icon component token (getIconToken("color")) instead of the core color token, overridable per-subtree via --np--icon--color. Rendered output unchanged at defaults
 [2026-06-22 15:52] patch: Drive the spinner animation from the renamed icon animationDuration token (getIconToken("animationDuration")). Rendered output unchanged; rebuild required for the nice-styles token rename
 [2026-06-22 17:36] minor: Add "copy" to the icon set — <Icon name="copy" /> now renders. Adds "copy" to iconNames (extends IconNameType); resolved automatically via buildIconMap from nice-icons CopyStroke/CopyFill
+[2026-06-24 21:26] minor: Add "download" to the icon set — <Icon name="download" /> now renders. Adds "download" to iconNames (extends IconNameType); resolved automatically via buildIconMap from nice-icons DownloadStroke/DownloadFill

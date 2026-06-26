@@ -48,6 +48,8 @@ declare module "nice-icons" {
   export const ContentFillIcon: SvgComponent
   export const CopyStrokeIcon: SvgComponent
   export const CopyFillIcon: SvgComponent
+  export const DownloadStrokeIcon: SvgComponent
+  export const DownloadFillIcon: SvgComponent
   export const EditStrokeIcon: SvgComponent
   export const EditFillIcon: SvgComponent
   export const LinkStrokeIcon: SvgComponent

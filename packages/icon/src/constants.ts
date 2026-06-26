@@ -23,6 +23,7 @@ export const iconNames = [
   "contact",
   "content",
   "copy",
+  "download",
   "edit",
   "link",
   "lock",
