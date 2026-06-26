@@ -14,11 +14,16 @@ export const CodeBlockDiv = styled.div<{ $clickable?: boolean; $inline?: boolean
   ${({ $clickable }) => $clickable && `cursor: pointer;`}
   flex-grow: 1;
   /* inline: strip the card chrome — margin, padding, border, radius, shadow */
-  margin: ${({ $inline }) => ($inline ? "0" : `${getToken("gap", "large")} 0`)} !important;
   padding: ${({ $inline }) => ($inline ? "0" : getToken("gap"))};
   border: ${({ $inline }) => ($inline ? "none" : `1px solid ${getToken("borderColor")}`)};
   border-radius: ${({ $inline }) => ($inline ? "0" : getToken("borderRadius"))};
   box-shadow: ${({ $inline }) => ($inline ? "none" : getToken("boxShadow"))};
+
+  /* Same affordance as Getting Started/Welcome's link cards: when the block is
+     clickable (copyOnClick) and has card chrome, the border becomes link-colored
+     on hover to imply it's interactive. inline blocks have no border to recolor. */
+  ${({ $clickable, $inline }) =>
+    $clickable && !$inline && `&:hover { border-color: ${getToken("color", "link")}; }`}
 
   .shiki {
     .line {

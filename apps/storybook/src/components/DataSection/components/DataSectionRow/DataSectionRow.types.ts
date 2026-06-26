@@ -1,7 +1,7 @@
 import * as React from "react"
-import type { DataColumn } from "../DataTables/DataTables.types"
+import type { DataColumn } from "../DataSection/DataSection.types"
 
-export interface DataTablesRowProps {
+export interface DataSectionRowProps {
   /** Column definitions — render policy and widths. */
   columns: DataColumn[]
   /** Cell values, index-aligned to `columns`. */

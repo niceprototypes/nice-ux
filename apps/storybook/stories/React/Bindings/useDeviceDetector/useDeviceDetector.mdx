@@ -1,8 +1,8 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Typography from "../../../../src/nice/Typography"
-import { DataTablesRow } from "../../../../src/components/DataTables"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTables"
+import { DataSectionRow } from "../../../../src/components/DataSection"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataSection"
 import { useDeviceDetector } from "nice-react-device-detector"
 import { DeviceRow } from "./DeviceRow"
 import {
@@ -35,7 +35,7 @@ const isMobile = useDeviceDetector()
   Returns a boolean for whether the current viewport is a mobile device.
 </Typography>
 
-<DataTablesRow
+<DataSectionRow
   columns={DEMO_CODE_COLUMNS}
   values={[
           <DeviceRow isMobile={useDeviceDetector()} />,
@@ -49,7 +49,7 @@ const isMobile = useDeviceDetector()
   Branch the rendered output on the detected device type.
 </Typography>
 
-<DataTablesRow
+<DataSectionRow
   columns={DEMO_CODE_COLUMNS}
   values={[
           <ConditionalRenderingDemo />,
@@ -64,7 +64,7 @@ const isMobile = useDeviceDetector()
   <code>useDevice</code> — detection runs once instead of per consumer.
 </Typography>
 
-<DataTablesRow
+<DataSectionRow
   columns={DEMO_CODE_COLUMNS}
   values={[
           <ContextProviderDemo />,
@@ -81,7 +81,7 @@ const isMobile = useDeviceDetector()
   extra provider. See <a href="/docs/react-bindings-usedevice--docs">React/Bindings/useDevice</a>.
 </Typography>
 
-<DataTablesRow
+<DataSectionRow
   columns={DEMO_CODE_COLUMNS}
   values={[
           <StylesProviderDeviceDemo />,
@@ -97,7 +97,7 @@ const isMobile = useDeviceDetector()
   the real viewport.
 </Typography>
 
-<DataTablesRow
+<DataSectionRow
   columns={DEMO_CODE_COLUMNS}
   values={[
           <DebuggingDemo />,
@@ -112,7 +112,7 @@ const isMobile = useDeviceDetector()
   the window to watch the values update.
 </Typography>
 
-<DataTablesRow
+<DataSectionRow
   columns={DEMO_CODE_COLUMNS}
   values={[
           <ResponsiveDemo />,

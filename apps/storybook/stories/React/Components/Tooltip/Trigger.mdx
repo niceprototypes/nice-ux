@@ -3,8 +3,8 @@ import { StoryHeader } from "../../../../src/components/Story"
 import Tooltip from "nice-react-tooltip"
 import Button from "nice-react-button"
 import Typography from "../../../../src/nice/Typography"
-import { DataTablesRow } from "../../../../src/components/DataTables"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTables"
+import { DataSectionRow } from "../../../../src/components/DataSection"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataSection"
 
 <Meta title="Components/Tooltip/trigger" />
 
@@ -15,7 +15,7 @@ import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTables"
   pointer is over the trigger; <code>"click"</code> toggles it open and closed.
 </Typography>
 
-<DataTablesRow
+<DataSectionRow
   columns={DEMO_CODE_COLUMNS}
   values={[
     <Tooltip content="Shown on hover" trigger="hover">
@@ -25,7 +25,7 @@ import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTables"
   ]}
 />
 
-<DataTablesRow
+<DataSectionRow
   columns={DEMO_CODE_COLUMNS}
   values={[
     <Tooltip content="Toggled on click" trigger="click">

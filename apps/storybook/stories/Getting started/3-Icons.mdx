@@ -2,6 +2,11 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
 import { IconsDataTable } from "../../src/components/IconsDataTable"
 import Callout from "../../src/components/Callout/index.ts"
+import { CodeBlock } from "../../src/components/CodeBlock"
+import Flex from "nice-react-flex"
+import { IconPreview } from "./3-Icons.styles"
+import NewLines from "../../src/components/NewLines/index.ts"
+import Install from "../../src/components/Install/index.ts"
 
 <Meta
   title="Getting started/3 · Icons"
@@ -14,26 +19,27 @@ import Callout from "../../src/components/Callout/index.ts"
 
 Access all **stroke and fill variants** of all icons via the `nice-icons` package:
 
-```bash
-npm install nice-icons
-```
+<Install package="icons" />
 
-### Stroke
+<NewLines count={2} />
 
-```jsx
-import CheckStrokeIcon from "nice-icons/check/stroke.svg"
+<Flex direction="column">
+  <h3>Stroke</h3>
+  <Flex direction="column" gap="larger" alignItems="center" breakpoints={{ "tablet+": { direction: "row" } }}>
+  <CodeBlock language="jsx" code={`import CheckStrokeIcon from "nice-icons/check/stroke.svg"\n\n<CheckStrokeIcon />`} />
+  <IconPreview name="check" />
+  </Flex>
+</Flex>
 
-<img src={CheckStrokeIcon} />
-```
+<NewLines count={2} />
 
-
-### Fill
-
-```jsx
-import CheckFillIcon from "nice-icons/check/fill.svg"
-
-<img src={CheckFillIcon} />
-```
+<Flex direction="column">
+  <h3>Fill</h3>
+  <Flex direction="column" gap="larger" alignItems="center" breakpoints={{ "tablet+": { direction: "row" } }}>
+  <CodeBlock language="jsx" code={`import CheckFillIcon from "nice-icons/check/fill.svg"\n\n<CheckFillIcon />`} />
+  <IconPreview name="check" outlined />
+  </Flex>
+</Flex>
 
 ---
 
@@ -41,13 +47,9 @@ import CheckFillIcon from "nice-icons/check/fill.svg"
 
 The Icon component allows you to **easily configure icon properties** without any CSS code:
 
-```bash
-npm install nice-react-icon
-```
+<Install package="react-icon" />
 
 ```tsx
-import Icon from "nice-react-icon"
-
 <Icon
   name="check"
   size="large"
@@ -65,15 +67,15 @@ import Icon from "nice-react-icon"
 />
 ```
 
-<Callout type="hint">See the [Component](/docs/components-icon--docs) page for full documentation.</Callout>
+<Callout type="hint">
+  See the [Component](/docs/components-icon--docs) page for full documentation.
+</Callout>
 
 ---
 
 ## getIcon
 
-When you need the **raw SVG component** rather than the styled `Icon` — to drop
-into your own markup, pass to a third-party API, or render outside React's token
-context — `getIcon` resolves an icon name to its underlying component:
+Access raw SVG files for a React project:
 
 ```tsx
 import { getIcon } from "nice-react-icon"
@@ -88,11 +90,17 @@ Returns the icon's React component, or `undefined` when the name isn't in the
 set. The second argument picks the variant: `false` (default) for stroke,
 `true` for fill.
 
-<Callout type="hint">Every icon name accepted by `getIcon` and the `Icon` component is listed below.</Callout>
+<Callout type="hint">
+  Every icon name accepted by `getIcon` and the `Icon` component is listed
+  below.
+</Callout>
 
 ---
 
 ## Browse
 
-<IconsDataTable codeHeader="getIcon" code={(name) => `getIcon("${name}")`} codeWidth="16em" />
-
+<IconsDataTable
+  codeHeader="getIcon"
+  code={name => `getIcon("${name}")`}
+  codeWidth="16em"
+/>

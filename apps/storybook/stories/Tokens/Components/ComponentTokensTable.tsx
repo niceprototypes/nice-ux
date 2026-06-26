@@ -1,9 +1,9 @@
 import * as React from "react"
 import { getTokenValue } from "nice-react-styles"
 import Tooltip from "nice-react-tooltip"
-import { DataTables } from "../../../src/components/DataTables"
-import type { DataTable } from "../../../src/components/DataTables"
-import type { DataColumn } from "../../../src/components/DataTables"
+import { DataSection } from "../../../src/components/DataSection"
+import type { DataTable } from "../../../src/components/DataSection"
+import type { DataColumn } from "../../../src/components/DataSection"
 import { TokenName } from "../../../src/components/TokenTables"
 import Typography from "../../../src/nice/Typography"
 import { parseTokenVarLink, HIGHLIGHT_KEY } from "../../../src/services"
@@ -147,5 +147,5 @@ export const ComponentTokensTable = ({ prefix, nested = false }: ComponentTokens
 
   // Docs: one cluster (component name h2 → groups h3). Substory: groups flat (h2).
   const tables = nested ? [{ name: componentLabel(prefix), tables: groups }] : groups
-  return <DataTables columns={COLUMNS} tables={tables} inline />
+  return <DataSection columns={COLUMNS} tables={tables} inline />
 }

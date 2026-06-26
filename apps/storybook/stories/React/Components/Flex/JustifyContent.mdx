@@ -1,8 +1,8 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import StoryDescription from "../../../../src/components/StoryDescription"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTables"
-import { DataTables } from "../../../../src/components/DataTables"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataSection"
+import { DataSection } from "../../../../src/components/DataSection"
 import DemoDots from "../../../../src/components/DemoDots"
 import { threeDots } from "./Flex.services"
 
@@ -14,7 +14,7 @@ import { threeDots } from "./Flex.services"
   Distributes items along the main axis.
 </StoryDescription>
 
-<DataTables
+<DataSection
   showHeader={false}
   columns={DEMO_CODE_COLUMNS}
   tables={[{ rows: [

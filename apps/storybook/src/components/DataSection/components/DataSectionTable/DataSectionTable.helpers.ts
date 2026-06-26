@@ -1,5 +1,5 @@
 import type { FontSizeType, FontWeightType } from "nice-react-styles"
-import type { DataTable } from "../DataTables/DataTables.types"
+import type { DataTable } from "../DataSection/DataSection.types"
 
 /** Heading elements a table title can render as. */
 export type TableHeadingAs = "h1" | "h2" | "h3" | "h4" | "p" | "span"
@@ -26,7 +26,7 @@ export const tableHeadingProps = (as: TableHeadingAs): TableHeadingStyle => {
     case "h2":
       return { size: "larger", weight: "semibold", code: true }
     case "h3":
-      return { size: "large", weight: "semibold", code: true }
+      return { size: "base", weight: "semibold", code: true }
     case "h4":
       return { size: "small", code: true }
     default:

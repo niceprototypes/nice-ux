@@ -3,8 +3,8 @@ import { StoryHeader } from "../../../../src/components/Story"
 import Flex from "nice-react-flex"
 import { getToken } from "nice-react-styles"
 import Typography from "../../../../src/nice/Typography"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTables"
-import { DataTables } from "../../../../src/components/DataTables"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataSection"
+import { DataSection } from "../../../../src/components/DataSection"
 import DemoDots from "../../../../src/components/DemoDots"
 import { twoDots } from "./Flex.services"
 
@@ -17,7 +17,7 @@ import { twoDots } from "./Flex.services"
   <code>margin</code>.
 </Typography>
 
-<DataTables
+<DataSection
   showHeader={false}
   columns={DEMO_CODE_COLUMNS}
   tables={[{ rows: ["padding", "margin"].map(value => ({

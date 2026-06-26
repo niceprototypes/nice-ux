@@ -4,12 +4,12 @@ import type { CodeLabelProps } from "./CodeLabel.types"
 import Typography from "../../../nice/Typography"
 
 /** Language badge for a code block. Renders nothing when no language is given. */
-export const CodeLabel = ({ language }: CodeLabelProps) => {
+export const CodeLabel = ({ language, fit = false }: CodeLabelProps) => {
   const key = (language ?? "").toLowerCase()
   // No language on the fence — nothing meaningful to badge.
   if (!key) return null
   return (
-    <Pill>
+    <Pill $fit={fit}>
       <Typography
         as="span"
         size="smaller"

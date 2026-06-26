@@ -59,6 +59,12 @@ interface CodeBlockProps {
    * box-shadow — so the code sits flush inline. @default false
    */
   inline?: boolean
+  /**
+   * Shrink the card to its content — `display: flex; align-items: center;
+   * width: max-content` on the bordered wrapper — so it sits inline beside other
+   * content rather than filling the row. @default false
+   */
+  fit?: boolean
 }
 
 /** Render a code string as Shiki dual-theme HTML. Use anywhere code is shown. */
@@ -68,15 +74,12 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
   showLabel = true,
   copyOnClick = true,
   inline = false,
+  fit = false,
 }) => {
   const handleClick = copyOnClick ? () => copyToClipboard(code) : undefined
 
-  return (
-    <CodeBlockDiv
-      onClick={handleClick}
-      $clickable={copyOnClick}
-      $inline={inline}
-    >
+  const body = (
+    <>
       <CodeScroll gap="large">
         <Flex grow={1}>
           <div
@@ -90,9 +93,29 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
           />
         </Flex>
       </CodeScroll>
-      {showLabel && !inline && <CodeLabel language={language} />}
+      {showLabel && !inline && <CodeLabel language={language} fit={fit} />}
+    </>
+  )
+
+  const card = (
+    <CodeBlockDiv
+      onClick={handleClick}
+      $clickable={copyOnClick}
+      $inline={inline}
+    >
+      {/* fit: lay the code + label in a centered row via Flex (no card CSS). */}
+      {fit ? (
+        <Flex alignItems="center" gap="base">
+          {body}
+        </Flex>
+      ) : (
+        body
+      )}
     </CodeBlockDiv>
   )
+
+  // fit: shrink the card to its content via the Flex `fit` prop (width: max-content).
+  return fit ? <Flex fit>{card}</Flex> : card
 }
 
 /**

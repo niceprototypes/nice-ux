@@ -39,11 +39,6 @@
     font-size: var(--np--font-size);
   }
 
-  > hr {
-    margin-top: calc(var(--np--gap--larger) * 1.75) !important;
-    margin-bottom: calc(var(--np--gap--larger) * 1.75) !important;
-  }
-
   > h2 {
     margin-top: calc(var(--np--gap--larger) * 1.5) !important;
     margin-bottom: var(--np--gap--large) !important;
@@ -62,9 +57,10 @@
     margin-bottom: var(--np--gap--large) !important;
   }
 
-  > hr {
+  hr {
     margin-top: calc(var(--np--gap--larger) * 1.5);
     margin-bottom: calc(var(--np--gap--larger) * 1.25);
+    width: 100%;
   }
 
   hr,

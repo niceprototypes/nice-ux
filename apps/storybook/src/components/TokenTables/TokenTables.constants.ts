@@ -1,4 +1,4 @@
-import type { DataColumn } from "../DataTables"
+import type { DataColumn } from "../DataSection"
 
 /**
  * The data columns of a module-token table, in order: the token (variant) name,

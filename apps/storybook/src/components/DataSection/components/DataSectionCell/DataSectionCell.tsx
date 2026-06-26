@@ -2,8 +2,8 @@ import * as React from "react"
 import Typography from "../../../../nice/Typography"
 import { CodeBlock } from "../../../CodeBlock"
 import { ClickToCopy } from "../../../ClickToCopy"
-import { withCopyTooltip } from "./DataTablesCell.helpers"
-import type { DataTablesCellProps } from "./DataTablesCell.types"
+import { withCopyTooltip } from "./DataSectionCell.helpers"
+import type { DataSectionCellProps } from "./DataSectionCell.types"
 
 /**
  * One cell, rendered per its column's policy:
@@ -12,7 +12,7 @@ import type { DataTablesCellProps } from "./DataTablesCell.types"
  *   on a string value copies on click with the same tooltip.
  * - `"node"` (default): the value rendered as-is.
  */
-export const DataTablesCell: React.FC<DataTablesCellProps> = ({ column, value, inline = false }) => {
+export const DataSectionCell: React.FC<DataSectionCellProps> = ({ column, value, inline = false }) => {
   if (column.render === "shiki") {
     return withCopyTooltip(<CodeBlock code={String(value)} language={column.language ?? "tsx"} inline={inline} />)
   }

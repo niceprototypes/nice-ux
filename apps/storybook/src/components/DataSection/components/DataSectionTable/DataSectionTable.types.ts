@@ -1,6 +1,6 @@
-  import type { DataColumn, DataTable } from "../DataTables/DataTables.types"
+  import type { DataColumn, DataTable } from "../DataSection/DataSection.types"
 
-export interface DataTablesTableProps {
+export interface DataSectionTableProps {
   /** The table node — an optional `name`, and `rows` and/or nested `tables`. */
   table: DataTable
   /** Columns shared by this table and its nested tables. */

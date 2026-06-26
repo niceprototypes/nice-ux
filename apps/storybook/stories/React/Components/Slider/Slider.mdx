@@ -1,8 +1,8 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Typography from "../../../../src/nice/Typography"
-import { DataTablesRow } from "../../../../src/components/DataTables"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTables"
+import { DataSectionRow } from "../../../../src/components/DataSection"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataSection"
 import { InteractiveSlider } from "./Slider.services"
 
 <Meta title="Components/Slider" />
@@ -33,7 +33,7 @@ import Slider from "nice-react-slider"
   Animated vertical slider with controlled current index and transition state.
 </Typography>
 
-<DataTablesRow
+<DataSectionRow
   columns={DEMO_CODE_COLUMNS}
   values={[
           <InteractiveSlider />,

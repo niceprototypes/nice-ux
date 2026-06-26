@@ -2,8 +2,8 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Typography from "../../../../src/nice/Typography"
 import { getTokenValue, getBreakpointTokenValue, getBreakpointValue } from "nice-react-styles"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTables"
-import { DataTables } from "../../../../src/components/DataTables"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataSection"
+import { DataSection } from "../../../../src/components/DataSection"
 import { toSource } from "../../../../src/services"
 
 export const smallLabel = `≤${getBreakpointValue("phone")}px`
@@ -19,7 +19,7 @@ export const largeLabel = `≥${getBreakpointValue("laptop")}px`
   breakpoints.
 </Typography>
 
-<DataTables
+<DataSection
   showHeader={false}
   columns={DEMO_CODE_COLUMNS}
   tables={[{ rows: ["smaller", "small", "base", "large", "larger"].map(size => {

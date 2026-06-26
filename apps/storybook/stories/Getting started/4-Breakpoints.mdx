@@ -3,7 +3,7 @@ import { StoryHeader } from "../../src/components/Story"
 import ResponsiveDemo, {
   ResponsiveDemoItem,
 } from "../../src/components/ResponsiveDemo"
-import { DataTables } from "../../src/components/DataTables"
+import { DataSection } from "../../src/components/DataSection"
 import Callout from "../../src/components/Callout"
 import NewLines from "../../src/components/NewLines/index.ts"
 
@@ -90,8 +90,12 @@ is mutated in memory and a `<style data-nice-breakpoints>` element is injected
 into `<head>` with the re-emitted `@media` cascade. Cascade order means the
 injected stylesheet overrides the build-time literals from `tokens.css`.
 
-For the declarative form via `setTokens`, see
-[React/setTokens](/docs/react-settokens--docs).
+There are two ways in: call `setBreakpoints` directly, or pass a top-level
+`breakpoints` key to [`setTokens`](/docs/react-settokens--docs). `setTokens`
+forwards **only** that key to `setBreakpoints` (splitting it out before token CSS
+is emitted, so the new thresholds apply to the same pass); every other key
+becomes a flat or component token. `setTokens` with no `breakpoints` key never
+touches breakpoints.
 
 ### Usage
 
@@ -123,7 +127,7 @@ Keys used in `breakpoints` maps and `$breakpoints` objects. A bare name matches
 that band **exactly**; `+` extends it **up** (that breakpoint and larger), `-`
 extends it **down** (that breakpoint and smaller).
 
-<DataTables
+<DataSection
   inline
   columns={[
     { key: "name", header: null, width: "5em", render: "node" },

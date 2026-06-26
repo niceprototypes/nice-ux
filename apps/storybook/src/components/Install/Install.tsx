@@ -7,7 +7,7 @@ interface InstallProps {
 }
 
 const Install: React.FC<InstallProps> = ({ package: pkg }) => (
-  <CodeBlock language="bash" code={`npm i nice-${pkg}`} />
+  <CodeBlock fit language="bash" code={`npm i nice-${pkg}`} />
 )
 
 export default Install

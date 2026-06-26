@@ -58,7 +58,7 @@ export interface DataTable {
   tables?: DataTable[]
 }
 
-export interface DataTablesProps {
+export interface DataSectionProps {
   /** Column definitions shared by every table — render policy, headers, widths. */
   columns: DataColumn[]
   /** The tables, in render order. A single table is just a one-element array. */

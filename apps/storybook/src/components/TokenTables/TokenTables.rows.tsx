@@ -2,7 +2,7 @@ import * as React from "react"
 import { getTokenValue } from "nice-react-styles"
 import { TokenName } from "./TokenName"
 import { tokenCode } from "./TokenTables.tokenCode"
-import type { DataTable, DataRowItem } from "../DataTables"
+import type { DataTable, DataRowItem } from "../DataSection"
 import type { TokenGroupConfig, TokenVariant } from "./TokenTables.types"
 import type { HighlightedToken } from "./TokenTables.hooks"
 

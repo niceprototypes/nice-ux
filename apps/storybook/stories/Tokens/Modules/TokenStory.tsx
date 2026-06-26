@@ -1,5 +1,5 @@
 import { StoryHeader } from "../../../src/components/Story"
-import { DataTables } from "../../../src/components/DataTables"
+import { DataSection } from "../../../src/components/DataSection"
 import {
   TOKEN_COLUMNS,
   buildTokenRows,
@@ -12,7 +12,7 @@ import { tokenTables } from "./tables"
  * One token group as a standalone story — the story header, its description, and
  * the group's table (column headers, no leading name). Reads the runtime theme +
  * deep-link highlight, builds the rows, and renders a single-section
- * `DataTables`. Driven by the same `tokenTables` config as the Docs page, so a
+ * `DataSection`. Driven by the same `tokenTables` config as the Docs page, so a
  * story and its Docs row can never disagree.
  */
 export const TokenStory = ({ name }: { name: keyof typeof tokenTables }) => {
@@ -26,7 +26,7 @@ export const TokenStory = ({ name }: { name: keyof typeof tokenTables }) => {
           container, not the default 980px docs measure. */}
       <style>{`.sbdocs.sbdocs-content { max-width: 100%; }`}</style>
       <StoryHeader title={group.name} description={group.description} />
-      <DataTables columns={TOKEN_COLUMNS} tables={[{ rows }]} inline />
+      <DataSection columns={TOKEN_COLUMNS} tables={[{ rows }]} inline />
     </>
   )
 }

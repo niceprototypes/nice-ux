@@ -1,4 +1,4 @@
-import type { DataColumn } from "./DataTables.types"
+import type { DataColumn } from "./DataSection.types"
 
 /**
  * Common column presets for story tables. The overwhelmingly common shape is a

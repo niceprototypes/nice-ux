@@ -7,7 +7,7 @@ import { getToken } from "nice-react-styles"
  * Uses semantic tokens only (background/border/color), so it inverts on the
  * [data-theme="night"] pin via the cascade — no per-mode override needed.
  */
-export const Pill = styled.span`
+export const Pill = styled.span<{ $fit?: boolean }>`
   position: absolute;
   padding: 0 ${getToken("gap", "smaller")};
   top: ${getToken("gap")};
@@ -17,4 +17,6 @@ export const Pill = styled.span`
   text-transform: uppercase;
   user-select: none;
   pointer-events: none;
+  /* fit: the card is content-sized, so the pill sits in flow rather than pinned. */
+  ${({ $fit }) => $fit && `position: static; top: auto; right: auto;`}
 `

@@ -2,8 +2,8 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Icon from "nice-react-icon"
 import StoryDescription from "../../../../src/components/StoryDescription"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTables"
-import { DataTables } from "../../../../src/components/DataTables"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataSection"
+import { DataSection } from "../../../../src/components/DataSection"
 import { colors } from "./Icon.services"
 
 <Meta title="Components/Icon/color" />
@@ -14,7 +14,7 @@ import { colors } from "./Icon.services"
   Sets the color of the icon using color tokens.
 </StoryDescription>
 
-<DataTables
+<DataSection
   showHeader={false}
   columns={DEMO_CODE_COLUMNS}
   tables={[{ rows: colors.map(color => ({

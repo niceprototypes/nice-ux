@@ -12,21 +12,14 @@ const colorsCluster: TokenTablesSectionConfig = {
 }
 
 /**
- * The full Tokens/Docs body. Each module is its own table under an `h2` title
- * (`animationEasing`, `gap`, …); the four color modules collapse into one
- * "Colors" `h2` cluster (each an `h3` sub-table) placed where the first color
- * module falls in source order. Pure config → `TokenTables` does the rendering.
+ * The full Tokens/Docs body. The four color modules collapse into one "Colors"
+ * `h2` cluster (each an `h3` sub-table) pinned to the top; every other module
+ * follows as its own `h2` table. Pure config → `TokenTables` does the rendering.
  */
 export const TokensDocs = () => {
-  const sections: TokenTablesSectionConfig[] = []
-  let clusterPlaced = false
+  const sections: TokenTablesSectionConfig[] = [colorsCluster]
   for (const group of tokenTableList) {
-    if ((COLOR_GROUP_NAMES as readonly string[]).includes(group.name)) {
-      if (clusterPlaced) continue
-      clusterPlaced = true
-      sections.push(colorsCluster)
-      continue
-    }
+    if ((COLOR_GROUP_NAMES as readonly string[]).includes(group.name)) continue
     sections.push({ group })
   }
 

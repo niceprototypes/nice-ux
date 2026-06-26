@@ -2,8 +2,8 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Lightbox from "nice-react-lightbox"
 import Typography from "../../../../src/nice/Typography"
-import { DataTablesRow } from "../../../../src/components/DataTables"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTables"
+import { DataSectionRow } from "../../../../src/components/DataSection"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataSection"
 import { resolveVendorImage } from "nice-react-image-vendor"
 import { DemoImage } from "./Lightbox.styles"
 
@@ -18,7 +18,7 @@ export const DEMO_IMAGE = resolveVendorImage({ src: "10", width: "800px", height
   the expanded image.
 </Typography>
 
-<DataTablesRow
+<DataSectionRow
   columns={DEMO_CODE_COLUMNS}
   values={[
           <Lightbox
@@ -35,7 +35,7 @@ export const DEMO_IMAGE = resolveVendorImage({ src: "10", width: "800px", height
         ]}
 />
 
-<DataTablesRow
+<DataSectionRow
   columns={DEMO_CODE_COLUMNS}
   values={[
           <Lightbox
