@@ -45,6 +45,11 @@ function pushWrapStyles(styles: string[], wrap: FlexWrapType): void {
   styles.push(`flex-wrap: ${wrap};`)
 }
 
+// fit: shrink the container to its content width.
+function pushFitStyles(styles: string[]): void {
+  styles.push("width: max-content;")
+}
+
 function pushGapStyles(styles: string[], gap: FlexGapSizeType): void {
   const gapValue = getGapSize(gap)
   if (gapValue) {
@@ -131,6 +136,7 @@ export const styleFlex = (breakpoint: BreakpointName, props: FlexProps): string 
   const alignItems = getBreakpointValue(props.alignItems, breakpoint)
   const justifyContent = getBreakpointValue(props.justifyContent, breakpoint)
   const wrap = getBreakpointValue(props.wrap, breakpoint)
+  const fit = getBreakpointValue(props.fit, breakpoint)
   const spacing = getSpacingValue(props.spacing, breakpoint)
 
   if (breakpoint === BREAKPOINT_PHONE) pushDisplayStyles(styles)
@@ -140,6 +146,7 @@ export const styleFlex = (breakpoint: BreakpointName, props: FlexProps): string 
   if (grow !== undefined) pushGrowStyles(styles, grow)
   if (shrink !== undefined) pushShrinkStyles(styles, shrink)
   if (wrap) pushWrapStyles(styles, wrap)
+  if (fit) pushFitStyles(styles)
   if (gap !== undefined) pushGapStyles(styles, gap)
   if (spacing) pushSpacingStyles(styles, props.type, spacing)
 

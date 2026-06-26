@@ -7,7 +7,7 @@ import { BREAKPOINT_PHONE } from "nice-react-styles"
  * is handled separately by `getSpacingValue`, which parses shorthand at
  * render time without going through this normalization step.
  */
-const breakpointProps = ["gap", "direction", "grow", "shrink", "wrap", "alignItems", "justifyContent"] as const
+const breakpointProps = ["gap", "direction", "grow", "shrink", "wrap", "fit", "alignItems", "justifyContent"] as const
 
 /**
  * normalizeProps

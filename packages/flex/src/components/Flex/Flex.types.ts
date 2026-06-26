@@ -110,6 +110,8 @@ export type FlexProps = {
   grow?: number
   shrink?: number
   wrap?: FlexWrapType
+  /** Shrink the container to its content via `width: max-content`. @default false */
+  fit?: boolean
   spacing?: FlexSpacingType
   children: React.ReactNode
   style?: React.CSSProperties

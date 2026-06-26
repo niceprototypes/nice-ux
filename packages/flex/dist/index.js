@@ -209,6 +209,10 @@ function pushShrinkStyles(styles, shrink) {
 function pushWrapStyles(styles, wrap) {
     styles.push(`flex-wrap: ${wrap};`);
 }
+// fit: shrink the container to its content width.
+function pushFitStyles(styles) {
+    styles.push("width: max-content;");
+}
 function pushGapStyles(styles, gap) {
     const gapValue = getGapSize(gap);
     if (gapValue) {
@@ -288,6 +292,7 @@ const styleFlex = (breakpoint, props) => {
     const alignItems = getBreakpointValue(props.alignItems, breakpoint);
     const justifyContent = getBreakpointValue(props.justifyContent, breakpoint);
     const wrap = getBreakpointValue(props.wrap, breakpoint);
+    const fit = getBreakpointValue(props.fit, breakpoint);
     const spacing = getSpacingValue(props.spacing, breakpoint);
     if (breakpoint === niceReactStyles.BREAKPOINT_PHONE)
         pushDisplayStyles(styles);
@@ -303,6 +308,8 @@ const styleFlex = (breakpoint, props) => {
         pushShrinkStyles(styles, shrink);
     if (wrap)
         pushWrapStyles(styles, wrap);
+    if (fit)
+        pushFitStyles(styles);
     if (gap !== undefined)
         pushGapStyles(styles, gap);
     if (spacing)
@@ -382,7 +389,7 @@ const FlexStyled = styled.div.withConfig({
  * is handled separately by `getSpacingValue`, which parses shorthand at
  * render time without going through this normalization step.
  */
-const breakpointProps = ["gap", "direction", "grow", "shrink", "wrap", "alignItems", "justifyContent"];
+const breakpointProps = ["gap", "direction", "grow", "shrink", "wrap", "fit", "alignItems", "justifyContent"];
 /**
  * normalizeProps
  *
