@@ -1,48 +1,7 @@
 import * as React from "react"
-import { createHighlighterCoreSync } from "@shikijs/core"
-import { createJavaScriptRegexEngine } from "@shikijs/engine-javascript"
-import tsx from "@shikijs/langs/tsx"
-import css from "@shikijs/langs/css"
-import bash from "@shikijs/langs/bash"
-import html from "@shikijs/langs/html"
-import json from "@shikijs/langs/json"
-import themeLight from "@shikijs/themes/min-light"
-import themeDark from "@shikijs/themes/min-dark"
-import { CodeBlockDiv, CodeScroll } from "./CodeBlock.styles"
-import { CodeLabel } from "./CodeLabel"
+import { CodeBlockDiv } from "./CodeBlock.styles"
+import { CodeBlockBody } from "./CodeBlockBody"
 import { copyToClipboard } from "../../services/copyToClipboard"
-import Flex from "nice-react-flex"
-
-const themeNameLight = "min-light"
-const themeNameDark = "min-dark"
-
-// One sync singleton for every block. defaultColor:false emits the shared
-// --shiki-light/--shiki-dark vars that preview-docs.css flips on the
-// [data-theme="night"] pin. tsx covers JS/TS/JSX.
-const highlighter = createHighlighterCoreSync({
-  engine: createJavaScriptRegexEngine({ forgiving: true }),
-  themes: [themeLight, themeDark],
-  langs: [tsx, css, bash, html, json],
-})
-
-const ALIASES: Record<string, string> = {
-  tsx: "tsx",
-  ts: "tsx",
-  typescript: "tsx",
-  jsx: "tsx",
-  js: "tsx",
-  javascript: "tsx",
-  css: "css",
-  bash: "bash",
-  sh: "bash",
-  shell: "bash",
-  html: "html",
-  xml: "html",
-  json: "json",
-}
-
-const resolveLang = (language?: string): string =>
-  ALIASES[(language ?? "").toLowerCase()] ?? "text"
 
 interface CodeBlockProps {
   code: string
@@ -79,43 +38,28 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
   const handleClick = copyOnClick ? () => copyToClipboard(code) : undefined
 
   const body = (
-    <>
-      <CodeScroll gap="large">
-        <Flex grow={1}>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: highlighter.codeToHtml(code.replace(/\n$/, ""), {
-                lang: resolveLang(language),
-                themes: { light: themeNameLight, dark: themeNameDark },
-                defaultColor: false,
-              }),
-            }}
-          />
-        </Flex>
-      </CodeScroll>
-      {showLabel && !inline && <CodeLabel language={language} fit={fit} />}
-    </>
+    <CodeBlockBody
+      code={code}
+      language={language}
+      showLabel={showLabel}
+      inline={inline}
+      fit={fit}
+    />
   )
 
-  const card = (
+  // fit: a single stable element — CodeBlockDiv lays out the code + label in a
+  // centered, content-sized row via CSS ($fit), so the DOM shape never changes
+  // between fit and non-fit.
+  return (
     <CodeBlockDiv
       onClick={handleClick}
       $clickable={copyOnClick}
       $inline={inline}
+      $fit={fit}
     >
-      {/* fit: lay the code + label in a centered row via Flex (no card CSS). */}
-      {fit ? (
-        <Flex alignItems="center" gap="base">
-          {body}
-        </Flex>
-      ) : (
-        body
-      )}
+      {body}
     </CodeBlockDiv>
   )
-
-  // fit: shrink the card to its content via the Flex `fit` prop (width: max-content).
-  return fit ? <Flex fit>{card}</Flex> : card
 }
 
 /**

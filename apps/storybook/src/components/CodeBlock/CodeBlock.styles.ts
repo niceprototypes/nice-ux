@@ -10,7 +10,7 @@ import { Pill } from "./CodeLabel/CodeLabel.styles"
  * color inline; these rules pick which one applies on the [data-theme] pin and
  * set the code font from the token.
  */
-export const CodeBlockDiv = styled.div<{ $clickable?: boolean; $inline?: boolean }>`
+export const CodeBlockDiv = styled.div<{ $clickable?: boolean; $inline?: boolean; $fit?: boolean }>`
   position: relative;
   ${({ $clickable }) => $clickable && `cursor: pointer;`}
   flex-grow: 1;
@@ -19,6 +19,22 @@ export const CodeBlockDiv = styled.div<{ $clickable?: boolean; $inline?: boolean
   border: ${({ $inline }) => ($inline ? "none" : `1px solid ${getToken("borderColor")}`)};
   border-radius: ${({ $inline }) => ($inline ? "0" : getToken("borderRadius"))};
   box-shadow: ${({ $inline }) => ($inline ? "none" : getToken("boxShadow"))};
+
+  /* fit: size the card to its content and lay the code + label out in a centered
+     row. Replaces the former outer (<Flex fit>) and inner (<Flex alignItems gap>)
+     wrappers — both were plain CSS, so they live on the card itself now. */
+  ${({ $fit }) =>
+    $fit &&
+    `display: flex;
+    align-items: center;
+    gap: ${getToken("gap")};
+    width: max-content;
+    flex-grow: 0;`}
+
+  /* Stacked code blocks: space consecutive cards so they don't butt together. */
+  &:not(:last-of-type) {
+    margin-bottom: ${getToken("gap", "large")} !important;
+  }
 
   /* Same affordance as Getting Started/Welcome's link cards: when the block is
      clickable (copyOnClick) and has card chrome, the border and the language
