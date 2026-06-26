@@ -8,7 +8,6 @@ const COLOR_GROUP_NAMES = ["color", "backgroundColor", "borderColor", "brandColo
 /** The "Colors" cluster — the four color modules as h3 sub-tables under one h2. */
 const colorsCluster: TokenTablesSectionConfig = {
   name: "Colors",
-  titleAs: "h2",
   groups: COLOR_GROUP_NAMES.map(name => tokenTables[name]),
 }
 
@@ -28,7 +27,7 @@ export const TokensDocs = () => {
       sections.push(colorsCluster)
       continue
     }
-    sections.push({ group, titleAs: "h2" })
+    sections.push({ group })
   }
 
   return <TokenTables sections={sections} />

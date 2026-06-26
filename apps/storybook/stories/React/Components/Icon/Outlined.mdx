@@ -2,8 +2,8 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Icon from "nice-react-icon"
 import Typography from "../../../../src/nice/Typography"
-import { DataRow } from "../../../../src/components/DataRow"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+import { DataTablesRow } from "../../../../src/components/DataTables"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTables"
 
 <Meta title="Components/Icon/outlined" />
 
@@ -13,7 +13,7 @@ import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
   Toggles between the stroke-only (outlined) and filled variants of the icon.
 </Typography>
 
-<DataRow
+<DataTablesRow
   columns={DEMO_CODE_COLUMNS}
   values={[
           <Icon
@@ -25,7 +25,7 @@ import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
         ]}
 />
 
-<DataRow
+<DataTablesRow
   columns={DEMO_CODE_COLUMNS}
   values={[
           <Icon

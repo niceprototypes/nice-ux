@@ -2,7 +2,7 @@ import Icon, { iconNames } from "nice-react-icon"
 import Flex from "nice-react-flex"
 import { CodeBlock } from "../CodeBlock"
 import { DataTables } from "../DataTables"
-import type { DataColumn } from "../DataTable"
+import type { DataColumn } from "../DataTables"
 import type { IconsDataTableProps } from "./IconsDataTable.types"
 
 /**

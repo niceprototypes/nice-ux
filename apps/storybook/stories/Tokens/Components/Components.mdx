@@ -1,8 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../src/components/Story"
-import Typography from "../../../src/nice/Typography"
 import { ComponentTokensTable } from "./ComponentTokensTable"
-import { componentPrefixesWithTokens, componentLabel } from "./componentTokens"
+import { componentPrefixesWithTokens } from "./componentTokens"
 
 <Meta
   title="Tokens/Components"
@@ -17,10 +16,5 @@ import { componentPrefixesWithTokens, componentLabel } from "./componentTokens"
 />
 
 {componentPrefixesWithTokens.map((prefix) => (
-  <section key={prefix}>
-    <Typography as="h2" weight="bold" size="large" style={{ marginTop: "2em" }}>
-      {componentLabel(prefix)}
-    </Typography>
-    <ComponentTokensTable prefix={prefix} />
-  </section>
+  <ComponentTokensTable key={prefix} prefix={prefix} nested />
 ))}

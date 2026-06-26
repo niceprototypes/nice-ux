@@ -2,8 +2,8 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Input from "nice-react-input"
 import Typography from "../../../../src/nice/Typography"
-import { DataRow } from "../../../../src/components/DataRow"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+import { DataTablesRow } from "../../../../src/components/DataTables"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTables"
 
 <Meta title="Components/Input" />
 
@@ -34,7 +34,7 @@ import Input from "nice-react-input"
   <code>onChange</code> handler that receives the new string value.
 </Typography>
 
-<DataRow
+<DataTablesRow
   columns={DEMO_CODE_COLUMNS}
   values={[
           <Input

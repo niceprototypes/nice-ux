@@ -2,20 +2,10 @@ import styled from "styled-components"
 import Flex from "nice-react-flex"
 import { getBreakpoint, getToken } from "nice-react-styles"
 
-/**
- * Shared responsive grid primitives for the Data* table system. `RowFlex` is the
- * row container; `Column` is a cell within it. Both `DataRow` (each data row) and
- * `DataTable` (its header row) compose from them, so they live in this neutral
- * styles module rather than inside either component's own styles.
- */
-
 // Wraps each row column. Without a width it inherits RowFlex's equal-flex sizing
-// (`> * { flex: 1 1 0 }`); with one, it pins the column to that width — but only
-// at tablet+, where the row is horizontal. On phone the row stacks
-// (flex-direction: column), so a flex-basis would set height, not width; the
-// media-query gate keeps the override off the stacked layout. `&&` doubles the
-// class specificity so the pin beats RowFlex's `> *` rule regardless of source
-// order. The inner cell fills the column via `> * { width: 100% }`.
+// (`> * { flex: 1 1 0 }`); with one, it pins the column to that width at tablet+,
+// where the row is horizontal. `&&` doubles class specificity so the pin beats
+// RowFlex's `> *` rule; the inner cell fills the column via `> * { width: 100% }`.
 export const Column = styled.div<{ $width?: string | null }>`
   min-width: 0;
 
@@ -36,10 +26,9 @@ export const Column = styled.div<{ $width?: string | null }>`
 `
 
 export const RowFlex = styled(Flex).attrs({ spacing: "base none" })<{ $highlighted?: boolean }>`
-  /* spacing="base none" sets the vertical rim (padding top/bottom). The
-     horizontal rim is a base inline padding that the highlight background fills;
-     an equal negative inline margin pulls the row back so its content stays
-     aligned with the surrounding (unpadded) rows. */
+  /* Vertical rim from spacing="base none"; a base inline padding rim + an equal
+     negative inline margin so a highlighted row bleeds into the gutter while its
+     content stays aligned with the surrounding rows. */
   padding-inline: ${getToken("gap", "larger")} !important;
   margin-inline: calc(-1 * ${getToken("gap", "larger")}) !important;
   ${({ $highlighted }) => $highlighted && `background-color: ${getToken("backgroundColor", "highlight")};`}
@@ -100,7 +89,6 @@ export const RowFlex = styled(Flex).attrs({ spacing: "base none" })<{ $highlight
   }
 
   ${getBreakpoint("tablet")} {
-    /* Equal-width cells: preview + each code block share the row evenly */
     > * {
       flex: 1 1 0;
       min-width: 0;

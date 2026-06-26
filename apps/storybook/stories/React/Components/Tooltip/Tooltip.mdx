@@ -3,8 +3,8 @@ import { StoryHeader } from "../../../../src/components/Story"
 import Tooltip from "nice-react-tooltip"
 import Button from "nice-react-button"
 import Typography from "../../../../src/nice/Typography"
-import { DataRow } from "../../../../src/components/DataRow"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+import { DataTablesRow } from "../../../../src/components/DataTables"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTables"
 
 <Meta title="Components/Tooltip" />
 
@@ -38,7 +38,7 @@ import Tooltip from "nice-react-tooltip"
   overflow-hidden ancestor.
 </Typography>
 
-<DataRow
+<DataTablesRow
   columns={DEMO_CODE_COLUMNS}
   values={[
     <Tooltip content="Copy to clipboard">

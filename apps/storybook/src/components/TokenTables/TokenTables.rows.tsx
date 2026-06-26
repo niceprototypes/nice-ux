@@ -2,8 +2,7 @@ import * as React from "react"
 import { getTokenValue } from "nice-react-styles"
 import { TokenName } from "./TokenName"
 import { tokenCode } from "./TokenTables.tokenCode"
-import type { DataLeafSection, DataTablesTitleAs } from "../DataTables"
-import type { DataRowItem } from "../DataTable"
+import type { DataTable, DataRowItem } from "../DataTables"
 import type { TokenGroupConfig, TokenVariant } from "./TokenTables.types"
 import type { HighlightedToken } from "./TokenTables.hooks"
 
@@ -44,20 +43,17 @@ export function buildTokenRows(
 }
 
 /**
- * Build one token group as a `DataTables` leaf section — its rows plus an
- * optional `name`/`titleAs` heading. The single bridge from a token config to
- * the generic renderer, shared by every token table surface.
+ * Build one token group as a `DataTable` node — its `name` heading and `rows`.
+ * The single bridge from a token config to the generic renderer.
  */
-export function buildTokenSection(
+export function buildTokenTable(
   group: TokenGroupConfig,
   isNight: boolean,
   highlight: HighlightedToken | null,
-  opts?: { name?: React.ReactNode; titleAs?: DataTablesTitleAs }
-): DataLeafSection {
+  name?: React.ReactNode
+): DataTable {
   return {
-    id: group.name,
-    name: opts?.name ?? group.name,
-    titleAs: opts?.titleAs,
+    name: name ?? group.name,
     rows: buildTokenRows(group.name, group.variants, group.preview, isNight, highlight),
   }
 }

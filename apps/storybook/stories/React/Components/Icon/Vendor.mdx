@@ -2,8 +2,8 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Icon from "nice-react-icon"
 import Typography from "../../../../src/nice/Typography"
-import { DataRow } from "../../../../src/components/DataRow"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+import { DataTablesRow } from "../../../../src/components/DataTables"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTables"
 
 <Meta title="Components/Icon/vendor" />
 
@@ -50,7 +50,7 @@ Any name not found in the built-in set is then resolved through the
 vendor. Built-in names always win — the vendor is a fallback, not an
 override.
 
-<DataRow
+<DataTablesRow
   columns={DEMO_CODE_COLUMNS}
   values={[
           <Icon
@@ -62,7 +62,7 @@ override.
         ]}
 />
 
-<DataRow
+<DataTablesRow
   columns={DEMO_CODE_COLUMNS}
   values={[
           <Icon

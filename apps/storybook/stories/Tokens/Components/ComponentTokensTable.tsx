@@ -2,16 +2,22 @@ import * as React from "react"
 import { getTokenValue } from "nice-react-styles"
 import Tooltip from "nice-react-tooltip"
 import { DataTables } from "../../../src/components/DataTables"
-import type { DataClusterSection } from "../../../src/components/DataTables"
-import type { DataColumn } from "../../../src/components/DataTable"
+import type { DataTable } from "../../../src/components/DataTables"
+import type { DataColumn } from "../../../src/components/DataTables"
 import { TokenName } from "../../../src/components/TokenTables"
 import Typography from "../../../src/nice/Typography"
 import { parseTokenVarLink, HIGHLIGHT_KEY } from "../../../src/services"
 import { TokenVarLink } from "./ComponentTokensTable.styles"
-import { getComponentTokenGroups, type ComponentPrefixWithTokens, type ComponentTokenRow } from "./componentTokens"
+import { getComponentTokenGroups, componentLabel, type ComponentPrefixWithTokens, type ComponentTokenRow } from "./componentTokens"
 
 interface ComponentTokensTableProps {
   prefix: ComponentPrefixWithTokens
+  /**
+   * Docs page: wrap the groups under the component name (`h2`) so they nest as
+   * `h3`, mirroring the Modules "Colors" cluster. Substory pages leave it off —
+   * the groups render flat as `h2` under the page's own `StoryHeader`.
+   */
+  nested?: boolean
 }
 
 // Matches one `var(--np--…)` reference anywhere in a value — including those
@@ -87,10 +93,10 @@ const renderValue = (value: string) => {
   return nodes.length ? <>{nodes}</> : value
 }
 
-// The data columns (the leading group-name column, width 10em, is prepended by
-// DataTableSet). Token name and Variable are pinned; Value is equal-flex.
+// The data columns of each component-group table. The group name is the section
+// heading (not a column). Token name and Variable are pinned; Value is equal-flex.
 const COLUMNS: DataColumn[] = [
-  { key: "tokenName", header: "Token name", width: "20cem", render: "node" },
+  { key: "tokenName", header: "Token name", width: "20em", render: "node" },
   { key: "variable", header: "Variable", width: "36em", render: "node" },
   { key: "value", header: "Value", render: "node" },
 ]
@@ -108,50 +114,38 @@ const rowCells = (label: string, row: ComponentTokenRow) => ({
 })
 
 /**
- * Renders one component's token tree. Most groups render as an aligned
- * table-of-tables (one named sub-table per top-level group, shared header). The
+ * Renders one component's token tree using the same nesting pattern as
+ * Tokens/Modules: the component is an `h2` cluster (e.g. "Button") whose token
+ * groups (size, spacing, borderColor, …) are `h3` sub-tables under it. The
  * `status` group nests one level deeper —
  * `status / variant / property / state` (e.g. `status.primary.backgroundColor.base`) —
- * so it is split into one table per property type (backgroundColor, borderColor,
- * color) under a `status` heading, each scannable on its own. Every row documents
- * a component CSS variable and the value it is initialized to (a core
+ * so it is itself an `h3` cluster of one `h4` sub-table per property type
+ * (backgroundColor, borderColor, color), each scannable on its own. Every row
+ * documents a component CSS variable and the value it is initialized to (a core
  * `var(--np--…)` reference that deep-links to its Modules story, or a literal).
  */
-export const ComponentTokensTable = ({ prefix }: ComponentTokensTableProps) => {
-  const groups = getComponentTokenGroups(prefix)
-  const statusGroup = groups.find((group) => group.name === "status")
-  const setGroups = groups.filter((group) => group.name !== "status")
+export const ComponentTokensTable = ({ prefix, nested = false }: ComponentTokensTableProps) => {
+  const groups: DataTable[] = getComponentTokenGroups(prefix).map((group) => {
+    if (group.name !== "status") {
+      return { name: group.name, rows: group.rows.map((row) => rowCells(row.variant, row)) }
+    }
+    // status splits into one sub-table per property type (path[2]); its token
+    // name drops to `variant.state` (e.g. primary.base) since the type heads it.
+    return {
+      name: "status",
+      tables: Array.from(
+        group.rows.reduce((byType, row) => {
+          const type = row.path[2] ?? "—"
+          return byType.set(type, [...(byType.get(type) ?? []), row])
+        }, new Map<string, ComponentTokenRow[]>())
+      ).map(([type, rows]) => ({
+        name: type,
+        rows: rows.map((row) => rowCells(`${row.path[1]}.${row.path[row.path.length - 1]}`, row)),
+      })),
+    }
+  })
 
-  // Non-status groups → the aligned set (group name in the leading column).
-  const setTables = setGroups.map((group) => ({
-    name: group.name,
-    rows: group.rows.map((row) => rowCells(row.variant, row)),
-  }))
-
-  // status → an h3 "status" cluster of one h4 sub-table per property type
-  // (path[2]); within each, the token name drops to `variant.state` (e.g.
-  // primary.base) since the type is the heading. The h4 level derives from the
-  // cluster (one below h3); children carry no explicit titleAs.
-  const statusCluster: DataClusterSection | null = statusGroup
-    ? {
-        name: "status",
-        titleAs: "h3",
-        sections: Array.from(
-          statusGroup.rows.reduce((byType, row) => {
-            const type = row.path[2] ?? "—"
-            return byType.set(type, [...(byType.get(type) ?? []), row])
-          }, new Map<string, ComponentTokenRow[]>())
-        ).map(([type, rows]) => ({
-          name: type,
-          rows: rows.map((row) => rowCells(`${row.path[1]}.${row.path[row.path.length - 1]}`, row)),
-        })),
-      }
-    : null
-
-  return (
-    <>
-      <DataTables columns={COLUMNS} tables={setTables} inline />
-      {statusCluster ? <DataTables layout="sectioned" columns={COLUMNS} tables={[statusCluster]} inline /> : null}
-    </>
-  )
+  // Docs: one cluster (component name h2 → groups h3). Substory: groups flat (h2).
+  const tables = nested ? [{ name: componentLabel(prefix), tables: groups }] : groups
+  return <DataTables columns={COLUMNS} tables={tables} inline />
 }

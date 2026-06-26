@@ -1,0 +1,1 @@
+export { DataTablesTable } from "./DataTablesTable"

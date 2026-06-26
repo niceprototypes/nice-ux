@@ -3,8 +3,8 @@ import { StoryHeader } from "../../../../src/components/Story"
 import Image from "nice-react-image"
 import Typography from "../../../../src/nice/Typography"
 import Flex from "nice-react-flex"
-import { DataRow } from "../../../../src/components/DataRow"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+import { DataTablesRow } from "../../../../src/components/DataTables"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTables"
 import { toSource } from "../../../../src/services"
 import Tile from "nice-react-tile"
 
@@ -18,7 +18,7 @@ import Tile from "nice-react-tile"
   overlaying children on top.
 </Typography>
 
-<DataRow
+<DataTablesRow
   columns={DEMO_CODE_COLUMNS}
   values={[
           <Image
@@ -36,7 +36,7 @@ import Tile from "nice-react-tile"
         ]}
 />
 
-<DataRow
+<DataTablesRow
   columns={DEMO_CODE_COLUMNS}
   values={[
           <Image
