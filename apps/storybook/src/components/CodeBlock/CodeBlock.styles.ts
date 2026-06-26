@@ -15,6 +15,7 @@ export const CodeBlockDiv = styled.div<{ $clickable?: boolean; $inline?: boolean
   ${({ $clickable }) => $clickable && `cursor: pointer;`}
   flex-grow: 1;
   /* inline: strip the card chrome — margin, padding, border, radius, shadow */
+  margin-top: ${getToken("gap", "base")} !important;
   padding: ${({ $inline }) => ($inline ? "0" : getToken("gap"))};
   border: ${({ $inline }) => ($inline ? "none" : `1px solid ${getToken("borderColor")}`)};
   border-radius: ${({ $inline }) => ($inline ? "0" : getToken("borderRadius"))};
@@ -30,11 +31,6 @@ export const CodeBlockDiv = styled.div<{ $clickable?: boolean; $inline?: boolean
     gap: ${getToken("gap")};
     width: max-content;
     flex-grow: 0;`}
-
-  /* Stacked code blocks: space consecutive cards so they don't butt together. */
-  &:not(:last-of-type) {
-    margin-bottom: ${getToken("gap", "large")} !important;
-  }
 
   /* Same affordance as Getting Started/Welcome's link cards: when the block is
      clickable (copyOnClick) and has card chrome, the border and the language

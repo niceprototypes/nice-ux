@@ -1,5 +1,6 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
+import Install from "../../src/components/Install"
 
 <Meta
   title="React/Theme"
@@ -14,9 +15,7 @@ that intercepts the cascading `[data-theme]` rules in `nice-styles/tokens.css`.
 All descendants — nice components, raw markup, third-party widgets that consume
 `var(--np--…)` — pick up the pin.
 
-```bash
-npm install nice-react-styles
-```
+<Install package="react-styles" />
 
 ### Setup
 

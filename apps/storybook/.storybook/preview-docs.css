@@ -1,4 +1,5 @@
 .sbdocs {
+  font-family: var(--np--font-family);
 
   &.sbdocs-content,
   &.sbdocs-content :where(
@@ -10,7 +11,25 @@
     h6:not(.sb-anchor, .sb-unstyled, .sb-unstyled h6),
     p, li, td, th, code, blockquote
   ) {
+    font-size: var(--np--font-size--small);
     color: inherit;
+  }
+
+  &.sbdocs-content,
+  &.sbdocs-content :where(
+    h1:not(.sb-anchor, .sb-unstyled, .sb-unstyled h1),
+    h2:not(.sb-anchor, .sb-unstyled, .sb-unstyled h2),
+    h3:not(.sb-anchor, .sb-unstyled, .sb-unstyled h3),
+    h4:not(.sb-anchor, .sb-unstyled, .sb-unstyled h4),
+    h5:not(.sb-anchor, .sb-unstyled, .sb-unstyled h5),
+    h6:not(.sb-anchor, .sb-unstyled, .sb-unstyled h6),
+    p, li, td, th
+  ) {
+    font-family: inherit;
+  }
+
+  code, blockquote {
+    font-family: var(--np--font-family--code);
   }
 
   &.sbdocs-content :where(a:not(.sb-anchor, .sb-unstyled, .sb-unstyled a)) {
@@ -41,7 +60,7 @@
 
   > h2 {
     margin-top: calc(var(--np--gap--larger) * 1.5) !important;
-    margin-bottom: var(--np--gap--large) !important;
+    margin-bottom: calc(var(--np--gap--large) * 1.5) !important;
   }
 
   > h3,
@@ -94,16 +113,13 @@
 
   &.sbdocs-content {
     :where(p:not(.sb-anchor, .sb-unstyled, .sb-unstyled p)) code,
-    :where(table:not(.sb-anchor, .sb-unstyled, .sb-unstyled table)) tr:nth-of-type(2n) {
+    :where(table:not(.sb-anchor, .sb-unstyled, .sb-unstyled table)) tr:nth-of-type(2n),
+    :where(li:not(.sb-anchor, .sb-unstyled, .sb-unstyled li)) code {
       background-color: var(--np--background-color--dark);
     }
 
     :where(p:not(.sb-anchor, .sb-unstyled, .sb-unstyled p)) code {
       border-color: var(--np--border-color);
-    }
-
-    :where(li:not(.sb-anchor, .sb-unstyled, .sb-unstyled li)) code {
-      background-color: var(--np--background-color--dark);
     }
 
     /*:where(div:not(.sb-anchor, .sb-unstyled, .sb-unstyled div)) {

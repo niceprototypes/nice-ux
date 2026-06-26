@@ -5,6 +5,7 @@ import { DataSectionRow } from "../../../../src/components/DataSection"
 import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataSection"
 import { useDeviceDetector } from "nice-react-device-detector"
 import { DeviceRow } from "./DeviceRow"
+import Install from "../../../../src/components/Install"
 import {
   ConditionalRenderingDemo,
   ContextProviderDemo,
@@ -17,9 +18,7 @@ import {
 
 <StoryHeader title="useDeviceDetector" />
 
-```bash
-npm install nice-react-device-detector
-```
+<Install package="react-device-detector" />
 
 ```js
 import { useDeviceDetector } from "nice-react-device-detector"

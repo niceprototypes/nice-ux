@@ -6,6 +6,7 @@ import { DataSectionRow } from "../../../../src/components/DataSection"
 import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataSection"
 import { resolveVendorImage } from "nice-react-image-vendor"
 import { DemoImage } from "./Lightbox.styles"
+import Install from "../../../../src/components/Install"
 
 export const DEMO_IMAGE = resolveVendorImage({ src: "10", width: "800px", height: "600px" })
 
@@ -13,9 +14,7 @@ export const DEMO_IMAGE = resolveVendorImage({ src: "10", width: "800px", height
 
 <StoryHeader title="Lightbox" />
 
-```bash
-npm install nice-react-lightbox
-```
+<Install package="react-lightbox" />
 
 ### Setup
 
