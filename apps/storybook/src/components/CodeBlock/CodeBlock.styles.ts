@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import Flex from "nice-react-flex"
 import { getToken } from "nice-react-styles"
+import { Pill } from "./CodeLabel/CodeLabel.styles"
 
 /**
  * Wrapper for Shiki-rendered code.
@@ -20,10 +21,19 @@ export const CodeBlockDiv = styled.div<{ $clickable?: boolean; $inline?: boolean
   box-shadow: ${({ $inline }) => ($inline ? "none" : getToken("boxShadow"))};
 
   /* Same affordance as Getting Started/Welcome's link cards: when the block is
-     clickable (copyOnClick) and has card chrome, the border becomes link-colored
-     on hover to imply it's interactive. inline blocks have no border to recolor. */
+     clickable (copyOnClick) and has card chrome, the border and the language
+     label (default lightest) both become link-colored on hover to imply it's
+     interactive. inline blocks have no border/label to recolor. The label's
+     color is set on its inner Typography, so override that element directly. */
   ${({ $clickable, $inline }) =>
-    $clickable && !$inline && `&:hover { border-color: ${getToken("color", "link")}; }`}
+    $clickable &&
+    !$inline &&
+    `&:hover {
+      border-color: ${getToken("color", "link")};
+    }
+    &:hover ${Pill} * {
+      color: ${getToken("color", "link")};
+    }`}
 
   .shiki {
     .line {
