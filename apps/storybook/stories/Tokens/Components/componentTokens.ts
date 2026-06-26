@@ -18,7 +18,7 @@ type ComponentTokenNode = string | { [key: string]: ComponentTokenNode }
 export interface ComponentTokenRow {
   /** Full path from the top-level group to the leaf (e.g. `["status","primary","backgroundColor","base"]`). */
   path: string[]
-  /** Human label for the row — the sub-path beneath the group, joined (e.g. `primary / backgroundColor / base`). */
+  /** Human label for the row beneath its group (e.g. `dark`, or `borderColor: primary.base` for status tokens). */
   variant: string
   /** The component CSS variable this leaf defines (e.g. `--np--button--size`). */
   cssVar: string
@@ -56,6 +56,23 @@ function collectLeaves(node: ComponentTokenNode, prefixPath: string[], out: Arra
 }
 
 /**
+ * The row's display name beneath its group. Simple groups nest one level
+ * (`[property, state]`), so the name is just the state (`base`, `dark`). The
+ * `status` group nests three (`[type, property, state]`) and renders as
+ * `property: type.state` (e.g. `borderColor: primary.base`) — surfacing the
+ * property, which the `status` group name itself doesn't convey. A bare group
+ * leaf falls back to the group name.
+ */
+function formatComponentVariant(path: string[]): string {
+  const sub = path.slice(1)
+  if (sub.length === 3) {
+    const [type, property, state] = sub
+    return `${property}: ${type}.${state}`
+  }
+  return sub.join(" / ") || path[0]
+}
+
+/**
  * The token groups for one component, in source order. Each group carries its
  * leaf rows with the resolved CSS variable, the value it is initialized to, and
  * whether that value references a core token.
@@ -73,7 +90,7 @@ export function getComponentTokenGroups(prefix: ComponentPrefixWithTokens): Comp
       name: groupName,
       rows: leaves.map(({ path, value }) => ({
         path,
-        variant: path.slice(1).join(" / ") || path[0],
+        variant: formatComponentVariant(path),
         cssVar: getComponentTokenKey(prefix, { token: path }),
         value,
         isCoreToken: CORE_TOKEN_REFERENCE.test(value),

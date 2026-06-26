@@ -13,10 +13,10 @@ interface DataTableHeaderProps {
 }
 
 /**
- * The header row for a `DataTable` / `DataTableSet` — one labelled `Column` per
+ * The header row for a `DataTable` / `DataTables` — one labelled `Column` per
  * column, in the same `RowFlex` layout and widths as the data rows so labels sit
  * above their columns. A subcomponent of `DataTable`: it is only used by
- * `DataTable` and `DataTableSet`, never by a story directly.
+ * `DataTable` and `DataTables`, never by a story directly.
  */
 export const DataTableHeader = ({ columns }: DataTableHeaderProps) => (
   <RowFlex

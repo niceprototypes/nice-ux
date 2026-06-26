@@ -1,4 +1,5 @@
 import * as React from "react"
+import type { DataTablesTitleAs } from "../DataTables"
 
 /**
  * A row's variant: a bare variant name, or an object carrying the `variant`
@@ -16,17 +17,17 @@ export interface TokenGroupConfig {
   preview: (item: TokenVariant) => React.ReactNode
 }
 
-export interface TokensDataTableProps {
-  /** camelCase token group; drives the CSS/JS/Value cells and the name column. */
-  name: string
-  /** Variant names, or objects with a `variant` key. */
-  variants: ReadonlyArray<TokenVariant>
-  /** Returns the bespoke preview cell for a row, given its variant item. */
-  preview?: (item: TokenVariant) => React.ReactNode
-  /**
-   * Show the leading name column (the group label). When false the table renders
-   * with column headers and no name column — the standalone per-group story form.
-   * @default true
-   */
-  showName?: boolean
+/**
+ * One section of a `TokenTables` set:
+ * - a **leaf** — a single token group under its own heading, or
+ * - a **cluster** — several token groups grouped under one `name` heading, each
+ *   rendered as a sub-table one heading level below.
+ */
+export type TokenTablesSectionConfig =
+  | { group: TokenGroupConfig; titleAs?: DataTablesTitleAs }
+  | { name: React.ReactNode; titleAs?: DataTablesTitleAs; groups: TokenGroupConfig[] }
+
+export interface TokenTablesProps {
+  /** The sections, in render order. */
+  sections: TokenTablesSectionConfig[]
 }

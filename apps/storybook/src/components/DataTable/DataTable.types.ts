@@ -69,7 +69,7 @@ export interface DataRowItem {
 /** One (sub)table: an optional section name and its rows. */
 export interface DataTableSpec {
   /** Section name shown in the leading name column (first row only). */
-  name?: string
+  name?: React.ReactNode
   /** The table's rows. */
   rows: DataRowItem[]
 }
@@ -81,8 +81,4 @@ export interface DataTableProps extends DataTableSpec {
   inline?: boolean
   /** Render the header row from `columns[].header`. @default true */
   showHeader?: boolean
-  /**
-   * Width of the leading name column when `name` is set. @default "12em"
-   */
-  nameWidth?: string
 }

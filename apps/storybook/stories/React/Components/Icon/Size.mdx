@@ -2,7 +2,8 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Icon from "nice-react-icon"
 import StoryDescription from "../../../../src/components/StoryDescription"
-import { DataTable, DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+import { DataTables } from "../../../../src/components/DataTables"
 import { fontSizes } from "./Icon.services"
 
 <Meta title="Components/Icon/size" />
@@ -13,10 +14,10 @@ import { fontSizes } from "./Icon.services"
   Sets the dimensional size of the icon using fontSize tokens.
 </StoryDescription>
 
-<DataTable
+<DataTables
   showHeader={false}
   columns={DEMO_CODE_COLUMNS}
-  rows={fontSizes.map(size => ({
+  tables={[{ rows: fontSizes.map(size => ({
     id: String(size),
     values: [
       <Icon
@@ -25,6 +26,6 @@ import { fontSizes } from "./Icon.services"
       />,
       size === "base" ? `<Icon />` : `<Icon size="${size}" />`,
     ],
-  }))}
+  })) }]}
 />
 

@@ -4,19 +4,10 @@ import Flex from "nice-react-flex"
 import Typography from "../../nice/Typography"
 import { DataRow } from "../DataRow"
 import { DataTableHeader } from "./DataTableHeader"
-import type { DataColumn, DataTableProps } from "./DataTable.types"
+import type { DataTableProps } from "./DataTable.types"
 
-const DEFAULT_NAME_WIDTH = "12em"
-
-/**
- * The leading name column prepended to a named table. It is a structural column
- * (no header); only the first row carries the section name, so the rest of the
- * rows keep their data columns aligned beneath it.
- */
-const nameColumn = (width: string): DataColumn => ({ key: "__name__", header: null, width, render: "node" })
-
-/** The first-row name cell — a pre-styled element passed through as a `node`. */
-const nameCell = (name: string): React.ReactNode => (
+/** The section name, rendered above the rows (not as a leading column). */
+const nameCell = (name: React.ReactNode): React.ReactNode => (
   <Typography code size="small" weight="semibold">
     {name}
   </Typography>
@@ -24,10 +15,11 @@ const nameCell = (name: string): React.ReactNode => (
 
 /**
  * Renders a table from data: an optional header row built from `columns[].header`,
- * then one `DataRow` per `rows` entry. When `name` is set, a leading name column
- * is prepended and the section name shows on the first row only (the rest get an
- * empty leading cell so columns stay aligned). This is the data-first
- * replacement for the old `CodeTable`, which cloned JSX `CodeRow` children.
+ * then one `DataRow` per `rows` entry. When `name` is set, it is rendered in its
+ * own row *above* the table (the whole thing wrapped in a column) rather than as
+ * a leading name column — so the name doesn't reserve a full column of width and
+ * leave whitespace down every row. This is the data-first replacement for the
+ * old `CodeTable`, which cloned JSX `CodeRow` children.
  */
 const BaseDataTable = ({
   name,
@@ -35,25 +27,30 @@ const BaseDataTable = ({
   columns,
   inline = false,
   showHeader = true,
-  nameWidth = DEFAULT_NAME_WIDTH,
 }: DataTableProps) => {
-  // Prepend a structural name column when the table is named.
-  const cols = name !== undefined ? [nameColumn(nameWidth), ...columns] : columns
-
-  return (
+  const table = (
     <Flex direction="column" spacing="large none">
-      {showHeader ? <DataTableHeader columns={cols} /> : null}
-      {rows.map((row, index) => (
+      {showHeader ? <DataTableHeader columns={columns} /> : null}
+      {rows.map(row => (
         <DataRow
           key={row.id}
-          columns={cols}
-          // Named table → prepend the name cell on the first row, an empty cell on the rest.
-          values={name !== undefined ? [index === 0 ? nameCell(name) : null, ...row.values] : row.values}
+          columns={columns}
+          values={row.values}
           inline={inline}
           highlighted={row.highlighted}
           fullWidth={row.fullWidth}
         />
       ))}
+    </Flex>
+  )
+
+  // Unnamed → just the table. Named → the name in its own Flex above the table,
+  // both wrapped in a column so the name sits over the rows at full width.
+  if (name == null) return table
+  return (
+    <Flex direction="column">
+      <Flex>{nameCell(name)}</Flex>
+      {table}
     </Flex>
   )
 }

@@ -1,7 +1,7 @@
 import Icon, { iconNames } from "nice-react-icon"
 import Flex from "nice-react-flex"
 import { CodeBlock } from "../CodeBlock"
-import { DataTable } from "../DataTable"
+import { DataTables } from "../DataTables"
 import type { DataColumn } from "../DataTable"
 import type { IconsDataTableProps } from "./IconsDataTable.types"
 
@@ -30,5 +30,5 @@ export const IconsDataTable = ({ codeHeader, code, codeWidth = "20em" }: IconsDa
     ],
   }))
 
-  return <DataTable columns={columns} rows={rows} inline />
+  return <DataTables columns={columns} tables={[{ rows }]} inline />
 }

@@ -40,9 +40,8 @@ export const RowFlex = styled(Flex).attrs({ spacing: "base none" })<{ $highlight
      horizontal rim is a base inline padding that the highlight background fills;
      an equal negative inline margin pulls the row back so its content stays
      aligned with the surrounding (unpadded) rows. */
-  padding-inline: ${getToken("gap")} !important;
-  margin-inline: calc(-1 * ${getToken("gap")}) !important;
-  border-radius: ${getToken("borderRadius")};
+  padding-inline: ${getToken("gap", "larger")} !important;
+  margin-inline: calc(-1 * ${getToken("gap", "larger")}) !important;
   ${({ $highlighted }) => $highlighted && `background-color: ${getToken("backgroundColor", "highlight")};`}
 
   .docblock-source {

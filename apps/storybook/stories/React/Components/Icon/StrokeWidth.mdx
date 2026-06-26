@@ -2,7 +2,8 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Icon from "nice-react-icon"
 import StoryDescription from "../../../../src/components/StoryDescription"
-import { DataTable, DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+import { DataTables } from "../../../../src/components/DataTables"
 import { strokeWidths } from "./Icon.services"
 
 <Meta title="Components/Icon/strokeWidth" />
@@ -16,10 +17,10 @@ import { strokeWidths } from "./Icon.services"
   Sets the thickness of the icon's stroke.
 </StoryDescription>
 
-<DataTable
+<DataTables
   showHeader={false}
   columns={DEMO_CODE_COLUMNS}
-  rows={strokeWidths.map(width => ({
+  tables={[{ rows: strokeWidths.map(width => ({
     id: String(width),
     values: [
       <Icon
@@ -29,6 +30,6 @@ import { strokeWidths } from "./Icon.services"
       />,
       width === "base" ? `<Icon />` : `<Icon strokeWidth="${width}" />`,
     ],
-  }))}
+  })) }]}
 />
 

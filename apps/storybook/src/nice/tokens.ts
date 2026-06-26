@@ -10,6 +10,11 @@ const AppTokenMap = {
   fontFamily: {
     base: "'Avenir Next', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif",
     heading: "'Avenir Next', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif",
+    // Custom font-family token — a distinctive serif used to demo a custom
+    // fontFamily variant (e.g. the color table previews). Emits
+    // --np--font-family--demo. Crimson Pro is loaded from Google Fonts via
+    // StylesProvider in .storybook/preview.tsx.
+    demo: "'Crimson Pro', serif",
   },
   fontSize: {
     larger: "24px",

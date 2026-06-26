@@ -1,5 +1,5 @@
 import { getToken } from "nice-react-styles"
-import Flex from "nice-react-flex"
+import PreviewCell from "../../../../src/components/PreviewCell"
 import type { TokenTable } from "../TokenTable.types"
 
 export const cellHeight = {
@@ -7,15 +7,11 @@ export const cellHeight = {
   description: "Vertical rhythm tokens for controls, buttons, and row heights.",
   variants: ["smaller", "small", "base", "large", "larger"],
   preview: (variant) => (
-    <Flex
-      grow={1}
-      direction="column"
-      style={{
-        backgroundColor: getToken("backgroundColor", "dark"),
-        height: getToken("cellHeight", variant),
-        border:`1px solid ${getToken("borderColor")}`,
-        borderRadius: getToken("borderRadius", "small"),
-      }}
+    <PreviewCell
+      backgroundColor={getToken("backgroundColor", "dark")}
+      borderColor={getToken("borderColor")}
+      height={getToken("cellHeight", variant)}
+      borderRadius={getToken("borderRadius", "small")}
     />
   ),
 } satisfies TokenTable

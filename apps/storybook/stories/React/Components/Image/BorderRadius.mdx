@@ -2,7 +2,8 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Image from "nice-react-image"
 import StoryDescription from "../../../../src/components/StoryDescription"
-import { DataTable, DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+import { DataTables } from "../../../../src/components/DataTables"
 import { toSource } from "../../../../src/services"
 
 <Meta title="Components/Image/borderRadius" />
@@ -13,10 +14,10 @@ import { toSource } from "../../../../src/services"
   Rounds the image's corners using borderRadius tokens.
 </StoryDescription>
 
-<DataTable
+<DataTables
   showHeader={false}
   columns={DEMO_CODE_COLUMNS}
-  rows={["smaller", "small", "base", "large", "larger"].map(radius => {
+  tables={[{ rows: ["smaller", "small", "base", "large", "larger"].map(radius => {
     const props = {
       vendor: true,
       alt: `${radius} radius demo`,
@@ -32,6 +33,6 @@ import { toSource } from "../../../../src/services"
         toSource("Image", props),
       ],
     }
-  })}
+  }) }]}
 />
 

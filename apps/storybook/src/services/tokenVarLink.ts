@@ -7,14 +7,17 @@
  * primitive) is not a module root and returns `null`, so it stays a plain code
  * cell.
  *
- * The module stories are titled `Tokens/Modules/{group}`, whose Storybook id is
- * the title lowercased with separators dropped (`backgroundColor` →
- * `tokens-modules-backgroundcolor`). The href uses Storybook's manager-route
- * form (`/?path=/docs/{id}--docs`) — a raw `/docs/…` anchor 404s, since only
+ * Most module stories are titled `Tokens/Modules/{group}`, whose Storybook id is
+ * the title lowercased with separators dropped (`fontSize` →
+ * `tokens-modules-fontsize`). The color family (`color` / `backgroundColor` /
+ * `borderColor`) is the exception — those share one `color` story as `## `
+ * sections, so their links target `tokens-modules-colors--docs#{section}` (see
+ * `COLOR_PAGE_SECTIONS`). The href uses Storybook's manager-route form
+ * (`/?path=/docs/{id}--docs`) — a raw `/docs/…` anchor 404s, since only
  * MDX-rendered links get rewritten — and the anchor navigates with
  * `target="_top"` (it lives inside the preview iframe). The highlight target is
- * carried solely by sessionStorage (written on click, see CodeRow) — NOT a URL
- * param, because Storybook keeps query params across navigations, so a stale
+ * carried solely by sessionStorage (written on click) — NOT a URL param,
+ * because Storybook keeps query params across navigations, so a stale
  * `np-token` would stick and re-highlight an unrelated row later.
  */
 export interface TokenVarLink {
@@ -34,6 +37,19 @@ export interface TokenVarLink {
 /** sessionStorage key the link writes on click and the module table reads. */
 export const HIGHLIGHT_KEY = "np-token"
 
+/**
+ * The color-family groups share one Modules story (`Colors`), each rendered as an
+ * `## ` section there. Maps the camelCase group → that section's heading-anchor
+ * slug so a link scrolls to the right section. Must track the section headings in
+ * `stories/Tokens/Modules/Colors.mdx`.
+ */
+const COLOR_PAGE_SECTIONS: Record<string, string> = {
+  color: "color",
+  backgroundColor: "background-color",
+  borderColor: "border-color",
+  brandColor: "brand-color",
+}
+
 export function parseTokenVarLink(value: string): TokenVarLink | null {
   const match = /^var\(--np--(.+)\)$/.exec(value.trim())
   if (!match) return null
@@ -48,8 +64,13 @@ export function parseTokenVarLink(value: string): TokenVarLink | null {
   // compares directly against the table name.
   const group = segments[0].replace(/-([a-z])/g, (_, c: string) => c.toUpperCase())
   const variant = segments[1] ?? "base"
-  const storyId = `tokens-modules-${group.toLowerCase()}`
   const token = `${group}--${variant}`
 
-  return { group, variant, token, href: `/?path=/docs/${storyId}--docs` }
+  // Color-family groups live as sections on the shared `Colors` story; everything
+  // else is its own `tokens-modules-{group}` story.
+  const section = COLOR_PAGE_SECTIONS[group]
+  const storyId = section ? "tokens-modules-colors" : `tokens-modules-${group.toLowerCase()}`
+  const hash = section ? `#${section}` : ""
+
+  return { group, variant, token, href: `/?path=/docs/${storyId}--docs${hash}` }
 }

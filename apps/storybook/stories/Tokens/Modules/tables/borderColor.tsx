@@ -1,5 +1,5 @@
 import { getToken } from "nice-react-styles"
-import Flex from "nice-react-flex"
+import PreviewCell from "../../../../src/components/PreviewCell"
 import type { TokenTable } from "../TokenTable.types"
 
 export const borderColor = {
@@ -7,14 +7,10 @@ export const borderColor = {
   description: "Stroke color tokens for outlines and dividers, including semantic status borders (success, highlight, warning, error, link) tuned to stand out against their backgroundColor fills.",
   variants: ["base", "dark", "darker", "success", "highlight", "warning", "error", "link"],
   preview: (variant) => (
-    <Flex
-      grow={1}
-      style={{
-        backgroundColor: getToken("backgroundColor"),
-        height: getToken("cellHeight", "larger"),
-        border:`1px solid ${getToken("borderColor", variant)}`,
-        borderRadius: getToken("borderRadius"),
-      }}
+    <PreviewCell
+      backgroundColor={getToken("backgroundColor")}
+      borderColor={getToken("borderColor", variant)}
+      height={getToken("cellHeight", "larger")}
     />
   ),
 } satisfies TokenTable

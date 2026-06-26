@@ -1,12 +1,28 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import { TokenStory } from "./tables"
+import { StoryHeader } from "../../../src/components/Story"
+import { TokenTables } from "../../../src/components/TokenTables"
+import { tokenTables } from "./tables"
 import Flex from "nice-react-flex"
 import { getHSLA, getToken } from "nice-react-styles"
-import { DataTable } from "../../../src/components/DataTable"
+import { DataTables } from "../../../src/components/DataTables"
 
-<Meta title="Tokens/Modules/color" />
+<Meta title="Tokens/Modules/Colors" />
 
-<TokenStory name="color" />
+{/* The colors page is multi-column — let it use the full docs width. */}
+<style>{`.sbdocs.sbdocs-content { max-width: 100%; }`}</style>
+
+<StoryHeader title="Colors" description="Text, background, and border color tokens. Each section is its own module; deep links from component tokens land on the matching section." />
+
+<TokenTables
+  sections={[
+    { group: tokenTables.color, titleAs: "h2" },
+    { group: tokenTables.backgroundColor, titleAs: "h2" },
+    { group: tokenTables.borderColor, titleAs: "h2" },
+    { group: tokenTables.brandColor, titleAs: "h2" },
+  ]}
+/>
+
+---
 
 {/* Live getHSLA demo — each swatch's background is the actual getHSLA() return,
     so the page can never drift from the function's behavior. */}
@@ -33,11 +49,9 @@ export const hslaExamples = [
   },
 ]
 
----
-
 ## getHSLA
 
-<DataTable
+<DataTables
   inline
   showHeader={false}
   columns={[
@@ -46,7 +60,7 @@ export const hslaExamples = [
     { key: "call", render: "shiki", language: "tsx" },
     { key: "result", render: "text", code: true, size: "small", color: "lighter" },
   ]}
-  rows={hslaExamples.map(({ label, call, options }) => {
+  tables={[{ rows: hslaExamples.map(({ label, call, options }) => {
     const result = getHSLA(options)
     return {
       id: label,
@@ -64,5 +78,5 @@ export const hslaExamples = [
         result,
       ],
     }
-  })}
+  }) }]}
 />

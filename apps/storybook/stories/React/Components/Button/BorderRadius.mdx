@@ -2,7 +2,8 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Button from "nice-react-button"
 import StoryDescription from "../../../../src/components/StoryDescription"
-import { DataTable, DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+import { DataTables } from "../../../../src/components/DataTables"
 
 export const radii = ["small", "base", "large"]
 
@@ -21,10 +22,10 @@ export const radiusCode = r =>
   Controls the corner rounding of the button.
 </StoryDescription>
 
-<DataTable
+<DataTables
   showHeader={false}
   columns={DEMO_CODE_COLUMNS}
-  rows={radii.map(radius => ({
+  tables={[{ rows: radii.map(radius => ({
     id: String(radius),
     values: [
           <Button
@@ -35,6 +36,6 @@ export const radiusCode = r =>
         </Button>,
           radiusCode(radius),
         ],
-  }))}
+  })) }]}
 />
 

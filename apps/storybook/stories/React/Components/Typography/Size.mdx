@@ -2,7 +2,8 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Typography from "../../../../src/nice/Typography"
 import StoryDescription from "../../../../src/components/StoryDescription"
-import { DataTable, DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+import { DataTables } from "../../../../src/components/DataTables"
 import { toSource } from "../../../../src/services"
 
 <Meta title="Components/Typography/size" />
@@ -13,15 +14,15 @@ import { toSource } from "../../../../src/services"
   Sets the font size using fontSize tokens.
 </StoryDescription>
 
-<DataTable
+<DataTables
   showHeader={false}
   columns={DEMO_CODE_COLUMNS}
-  rows={["smaller", "small", "base", "large", "larger"].map(size => ({
+  tables={[{ rows: ["smaller", "small", "base", "large", "larger"].map(size => ({
     id: String(size),
     values: [
           <Typography size={size}>{size}</Typography>,
           toSource("Typography", { size }, { children: size }),
         ],
-  }))}
+  })) }]}
 />
 
