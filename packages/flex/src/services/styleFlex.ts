@@ -14,9 +14,10 @@ import { getGapSize } from "./getGapSize"
 import { getSpacingValue } from "./getSpacingValue"
 import { styleSpacing } from "./styleSpacing"
 
-// Phone establishes the flex context; larger breakpoints inherit it
-function pushDisplayStyles(styles: string[]): void {
-  styles.push("display: flex;")
+// Phone establishes the flex context; larger breakpoints inherit it. `inline`
+// switches it to an inline-level flex container (`display: inline-flex`).
+function pushDisplayStyles(styles: string[], inline: boolean | undefined): void {
+  styles.push(`display: ${inline ? "inline-flex" : "flex"};`)
 }
 
 function pushDirectionStyles(styles: string[], direction: FlexDirectionType): void {
@@ -137,9 +138,12 @@ export const styleFlex = (breakpoint: BreakpointName, props: FlexProps): string 
   const justifyContent = getBreakpointValue(props.justifyContent, breakpoint)
   const wrap = getBreakpointValue(props.wrap, breakpoint)
   const fit = getBreakpointValue(props.fit, breakpoint)
+  const inline = getBreakpointValue(props.inline, breakpoint)
   const spacing = getSpacingValue(props.spacing, breakpoint)
 
-  if (breakpoint === BREAKPOINT_PHONE) pushDisplayStyles(styles)
+  // Display is set at phone (cascades upward) and re-emitted at any breakpoint
+  // that explicitly toggles `inline`, so it can switch flex ↔ inline-flex.
+  if (breakpoint === BREAKPOINT_PHONE || inline !== undefined) pushDisplayStyles(styles, inline)
   if (direction) pushDirectionStyles(styles, direction)
   if (alignItems) pushAlignItemsStyles(styles, alignItems)
   if (justifyContent) pushJustifyContentStyles(styles, justifyContent)

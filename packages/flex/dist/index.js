@@ -185,9 +185,10 @@ const styleSpacing = (type, def) => {
     return parts.join("\n");
 };
 
-// Phone establishes the flex context; larger breakpoints inherit it
-function pushDisplayStyles(styles) {
-    styles.push("display: flex;");
+// Phone establishes the flex context; larger breakpoints inherit it. `inline`
+// switches it to an inline-level flex container (`display: inline-flex`).
+function pushDisplayStyles(styles, inline) {
+    styles.push(`display: ${inline ? "inline-flex" : "flex"};`);
 }
 function pushDirectionStyles(styles, direction) {
     styles.push(`flex-direction: ${direction};`);
@@ -293,9 +294,12 @@ const styleFlex = (breakpoint, props) => {
     const justifyContent = getBreakpointValue(props.justifyContent, breakpoint);
     const wrap = getBreakpointValue(props.wrap, breakpoint);
     const fit = getBreakpointValue(props.fit, breakpoint);
+    const inline = getBreakpointValue(props.inline, breakpoint);
     const spacing = getSpacingValue(props.spacing, breakpoint);
-    if (breakpoint === niceReactStyles.BREAKPOINT_PHONE)
-        pushDisplayStyles(styles);
+    // Display is set at phone (cascades upward) and re-emitted at any breakpoint
+    // that explicitly toggles `inline`, so it can switch flex ↔ inline-flex.
+    if (breakpoint === niceReactStyles.BREAKPOINT_PHONE || inline !== undefined)
+        pushDisplayStyles(styles, inline);
     if (direction)
         pushDirectionStyles(styles, direction);
     if (alignItems)
@@ -370,15 +374,15 @@ const FlexStyled = styled.div.withConfig({
 }) `
   ${(props) => styleFlex(niceReactStyles.BREAKPOINT_PHONE, props)}
 
-  ${niceReactStyles.getBreakpoint(niceReactStyles.BREAKPOINT_TABLET)} {
+  ${niceReactStyles.getBreakpoint(`${niceReactStyles.BREAKPOINT_TABLET}+`)} {
     ${(props) => styleFlex(niceReactStyles.BREAKPOINT_TABLET, props)}
   }
 
-  ${niceReactStyles.getBreakpoint(niceReactStyles.BREAKPOINT_LAPTOP)} {
+  ${niceReactStyles.getBreakpoint(`${niceReactStyles.BREAKPOINT_LAPTOP}+`)} {
     ${(props) => styleFlex(niceReactStyles.BREAKPOINT_LAPTOP, props)}
   }
 
-  ${niceReactStyles.getBreakpoint(niceReactStyles.BREAKPOINT_DESKTOP)} {
+  ${niceReactStyles.getBreakpoint(`${niceReactStyles.BREAKPOINT_DESKTOP}+`)} {
     ${(props) => styleFlex(niceReactStyles.BREAKPOINT_DESKTOP, props)}
   }
 `;
@@ -389,7 +393,7 @@ const FlexStyled = styled.div.withConfig({
  * is handled separately by `getSpacingValue`, which parses shorthand at
  * render time without going through this normalization step.
  */
-const breakpointProps = ["gap", "direction", "grow", "shrink", "wrap", "fit", "alignItems", "justifyContent"];
+const breakpointProps = ["gap", "direction", "grow", "shrink", "wrap", "fit", "inline", "alignItems", "justifyContent"];
 /**
  * normalizeProps
  *

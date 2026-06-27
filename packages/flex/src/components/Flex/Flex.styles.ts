@@ -64,15 +64,15 @@ export const FlexStyled = styled.div.withConfig({
 })<FlexProps>`
   ${(props) => styleFlex(BREAKPOINT_PHONE, props)}
 
-  ${getBreakpoint(BREAKPOINT_TABLET)} {
+  ${getBreakpoint(`${BREAKPOINT_TABLET}+`)} {
     ${(props) => styleFlex(BREAKPOINT_TABLET, props)}
   }
 
-  ${getBreakpoint(BREAKPOINT_LAPTOP)} {
+  ${getBreakpoint(`${BREAKPOINT_LAPTOP}+`)} {
     ${(props) => styleFlex(BREAKPOINT_LAPTOP, props)}
   }
 
-  ${getBreakpoint(BREAKPOINT_DESKTOP)} {
+  ${getBreakpoint(`${BREAKPOINT_DESKTOP}+`)} {
     ${(props) => styleFlex(BREAKPOINT_DESKTOP, props)}
   }
 `

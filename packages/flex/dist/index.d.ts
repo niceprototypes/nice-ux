@@ -98,6 +98,8 @@ type FlexProps = {
     wrap?: FlexWrapType;
     /** Shrink the container to its content via `width: max-content`. @default false */
     fit?: boolean;
+    /** Render as an inline-level flex container (`display: inline-flex`). @default false */
+    inline?: boolean;
     spacing?: FlexSpacingType;
     children: React.ReactNode;
     style?: React.CSSProperties;
