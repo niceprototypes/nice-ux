@@ -3,3 +3,4 @@
 [2026-06-12 16:37] minor: Add a weight prop that sets the button label's font weight, forwarded to Typography.
 [2026-06-19 19:44] patch: Migrate getToken-family calls to the options-object signature (nice-styles major). Internal refactor — rendered output unchanged; rebuild required for dependents.
 [2026-06-21 21:06] patch: Drive border-width and border-color from button component tokens (getButtonToken) instead of the core tokens, so they can be overridden per-subtree via --np--button--border-*. Rendered output unchanged at defaults
+[2026-06-27 16:05] patch: Migrate the getBreakpoint call to the new nice-styles +/- key grammar (getBreakpoint(`${BREAKPOINT_TABLET}+`)). Internal — rendered output unchanged.
