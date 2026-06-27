@@ -1,4 +1,5 @@
 import * as React from "react"
+import { type GapType } from "nice-react-styles"
 import { CodeBlockDiv } from "./CodeBlock.styles"
 import { CodeBlockBody } from "./CodeBlockBody"
 import { copyToClipboard } from "../../services/copyToClipboard"
@@ -24,6 +25,12 @@ interface CodeBlockProps {
    * content rather than filling the row. @default false
    */
   fit?: boolean
+  /**
+   * Top/bottom margin, as a `gap` token variant. Use `"none"` for blocks
+   * embedded in a layout that owns its own spacing (e.g. DataTable cells).
+   * @default "large"
+   */
+  margin?: GapType
 }
 
 /** Render a code string as Shiki dual-theme HTML. Use anywhere code is shown. */
@@ -34,30 +41,23 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
   copyOnClick = true,
   inline = false,
   fit = false,
+  margin = "large",
 }) => {
-  const handleClick = copyOnClick ? () => copyToClipboard(code) : undefined
-
-  const body = (
-    <CodeBlockBody
-      code={code}
-      language={language}
-      showLabel={showLabel}
-      inline={inline}
-      fit={fit}
-    />
-  )
-
-  // fit: a single stable element — CodeBlockDiv lays out the code + label in a
-  // centered, content-sized row via CSS ($fit), so the DOM shape never changes
-  // between fit and non-fit.
   return (
     <CodeBlockDiv
-      onClick={handleClick}
+      onClick={copyOnClick ? () => copyToClipboard(code) : undefined}
       $clickable={copyOnClick}
       $inline={inline}
       $fit={fit}
+      $margin={margin}
     >
-      {body}
+      <CodeBlockBody
+        code={code}
+        language={language}
+        showLabel={showLabel}
+        inline={inline}
+        fit={fit}
+      />
     </CodeBlockDiv>
   )
 }

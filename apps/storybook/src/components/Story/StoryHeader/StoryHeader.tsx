@@ -1,6 +1,6 @@
 import * as React from "react"
 import Typography from "../../../nice/Typography"
-import Flex from "nice-react-flex"
+import { HeaderFlex } from "./StoryHeader.styles"
 
 interface StoryHeaderProps {
   /** The page title text rendered as the `<h1>`. */
@@ -17,11 +17,11 @@ interface StoryHeaderProps {
  * of every docs page.
  */
 const StoryHeader: React.FC<StoryHeaderProps> = ({ title, description, children }) => (
-  <Flex direction="column" gap="base" spacing="large none">
-    <h1>{title}</h1>
+  <HeaderFlex spacing="none none larger">
+    <Typography as="h1" size="large" weight="base" color="lighter">{title}</Typography>
     {description ? <Typography>{description}</Typography> : null}
     {children}
-  </Flex>
+  </HeaderFlex>
 )
 
 export default StoryHeader

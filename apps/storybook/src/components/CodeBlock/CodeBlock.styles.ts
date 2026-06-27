@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import Flex from "nice-react-flex"
-import { getToken } from "nice-react-styles"
+import { getToken, type GapType } from "nice-react-styles"
 import { Pill } from "./CodeLabel/CodeLabel.styles"
 
 /**
@@ -10,13 +10,13 @@ import { Pill } from "./CodeLabel/CodeLabel.styles"
  * color inline; these rules pick which one applies on the [data-theme] pin and
  * set the code font from the token.
  */
-export const CodeBlockDiv = styled.div<{ $clickable?: boolean; $inline?: boolean; $fit?: boolean }>`
+export const CodeBlockDiv = styled.div<{ $clickable?: boolean; $inline?: boolean; $fit?: boolean; $margin?: GapType }>`
   position: relative;
   ${({ $clickable }) => $clickable && `cursor: pointer;`}
   flex-grow: 1;
   /* inline: strip the card chrome — margin, padding, border, radius, shadow */
-  margin-top: ${getToken("gap", "base")} !important;
-  padding: ${({ $inline }) => ($inline ? "0" : getToken("gap"))};
+  padding: ${({ $inline }) => ($inline ? "0" : `${getToken("gap")} 5em ${getToken("gap")} ${getToken("gap")}`)};
+  margin: ${({ $margin }) => getToken("gap", $margin ?? "large")} 0 !important;
   border: ${({ $inline }) => ($inline ? "none" : `1px solid ${getToken("borderColor")}`)};
   border-radius: ${({ $inline }) => ($inline ? "0" : getToken("borderRadius"))};
   box-shadow: ${({ $inline }) => ($inline ? "none" : getToken("boxShadow"))};
