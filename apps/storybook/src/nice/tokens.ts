@@ -17,8 +17,8 @@ const AppTokenMap = {
     demo: "'Crimson Pro', serif",
   },
   fontSize: {
-    larger: "24px",
-    large: "20px",
+    larger: "32px",
+    large: "22px",
   },
   icon: {
     size: {
@@ -27,6 +27,14 @@ const AppTokenMap = {
       base: "11px",
       larger: "32px"
     }
+  },
+  color: {
+    // Storybook-local night overrides for the muted text colors. `day` keeps the
+    // canonical module value (no day change); edit `night` to adjust how `light`
+    // and `lighter` render under the dark theme. Emits
+    // --np--color--light--night / --np--color--lighter--night.
+    light: { day: "hsla(210, 5%, 25%, 1)", night: "hsla(210, 5%, 95%, 0.85)" },
+    lighter: { day: "hsla(210, 5%, 50%, 1)", night: "hsla(210, 5%, 95%, 0.55)" },
   },
 } as const
 

@@ -13,7 +13,7 @@ export const Column = styled.div<{ $width?: string | null }>`
     width: 100%;
   }
 
-  ${getBreakpoint("tablet")} {
+  ${getBreakpoint("tablet+")} {
     ${({ $width }) =>
       $width &&
       `
@@ -88,7 +88,7 @@ export const RowFlex = styled(Flex).attrs({ spacing: "base none" })<{ $highlight
     }
   }
 
-  ${getBreakpoint("tablet")} {
+  ${getBreakpoint("tablet+")} {
     > * {
       flex: 1 1 0;
       min-width: 0;

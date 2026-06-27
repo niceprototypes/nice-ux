@@ -1,11 +1,10 @@
 import styled from "styled-components"
 import { getBreakpoint, getToken, type BreakpointName } from "nice-react-styles"
 
-// The media query for the band in which this item is the active viewport.
-// Tablet and laptop are bounded (exact) so adjacent bands never light up
-// together; phone (max-width) and desktop (min-width) are open-ended.
-const activeQuery = (breakpoint: BreakpointName) =>
-  getBreakpoint(breakpoint, breakpoint === "tablet" || breakpoint === "laptop")
+// The media query for the band in which this item is the active viewport. A
+// bare key is the exact band, so adjacent bands never light up together: phone
+// resolves to max-width, tablet/laptop to bounded bands, desktop to min-width.
+const activeQuery = (breakpoint: BreakpointName) => getBreakpoint(breakpoint)
 
 export const ItemDiv = styled.div<{ $breakpoint: BreakpointName }>`
   opacity: 0.5;

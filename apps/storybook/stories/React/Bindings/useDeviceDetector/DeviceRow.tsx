@@ -4,7 +4,7 @@ import Flex from "nice-react-flex"
 import Typography from "../../../../src/nice/Typography"
 
 const LabelWrapper = styled.div`
-  ${getBreakpoint("tablet")} {
+  ${getBreakpoint("tablet+")} {
     width: 10em;
   }
 `

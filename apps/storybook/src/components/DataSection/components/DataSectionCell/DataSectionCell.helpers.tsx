@@ -1,11 +1,15 @@
 import * as React from "react"
-import Tooltip from "nice-react-tooltip"
+import Icon from "nice-react-icon"
+import { CopyAffordance } from "./DataSectionCell.styles"
 
-const COPY_TOOLTIP = "Copy to clipboard"
-
-/** Wrap a copyable node with the hover "Copy to clipboard" tooltip. */
-export const withCopyTooltip = (node: React.ReactNode): React.ReactElement => (
-  <Tooltip content={COPY_TOOLTIP} trigger="hover" delayShow={500}>
+/**
+ * Wrap a copyable node with an inline copy icon (color "lightest") that turns
+ * link-colored on hover — the click-to-copy affordance. The wrapped node keeps
+ * its own click-to-copy handler; the icon is the visual cue.
+ */
+export const withCopyAffordance = (node: React.ReactNode): React.ReactElement => (
+  <CopyAffordance>
     {node}
-  </Tooltip>
+    <Icon name="copy" size="smaller" color="lightest" />
+  </CopyAffordance>
 )

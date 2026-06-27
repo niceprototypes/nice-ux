@@ -21,7 +21,7 @@ export const IconsDataTable = ({ codeHeader, code, codeWidth = "20em" }: IconsDa
   const rows = iconNames.map(name => ({
     id: name,
     values: [
-      <Flex direction="row" alignItems="center" gap="small">
+      <Flex direction="row" alignItems="center" gap="base">
         <Icon strokeScaling name={name} size="large" />
         {/* Clickable code chip — copies the icon name, matching the code column. */}
         <CodeBlock code={name} language="tsx" inline />

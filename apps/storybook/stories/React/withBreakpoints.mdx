@@ -52,16 +52,14 @@ prop overrides applied when the key's range covers the current viewport.
 | Key form        | Matches                                                  |
 | --------------- | -------------------------------------------------------- |
 | `"phone"`       | Phone only (current viewport === phone)                  |
-| `"tablet"`      | Tablet only                                              |
-| `"laptop"`      | Laptop only                                              |
-| `"desktop"`     | Desktop only                                             |
 | `"phone+"`      | Phone, tablet, laptop, desktop (everything)              |
-| `"tablet+"`     | Tablet, laptop, desktop                                  |
-| `"laptop+"`     | Laptop, desktop                                          |
-| `"desktop+"`    | Desktop (same as bare `"desktop"`)                       |
-| `"phone-"`      | Phone (same as bare `"phone"`)                           |
 | `"tablet-"`     | Phone, tablet                                            |
+| `"tablet"`      | Tablet only                                              |
+| `"tablet+"`     | Tablet, laptop, desktop                                  |
 | `"laptop-"`     | Phone, tablet, laptop                                    |
+| `"laptop"`      | Laptop only                                              |
+| `"laptop+"`     | Laptop, desktop                                          |
+| `"desktop"`     | Desktop only                                             |
 | `"desktop-"`    | Phone, tablet, laptop, desktop (everything)              |
 
 `BreakpointName` is `"phone" | "tablet" | "laptop" | "desktop"`. Order, smallest

@@ -40,7 +40,7 @@ const WelcomeLink: React.FC<Props> = ({ storyId, iconName, title, children }) =>
           <Typography
             as="h3"
             color="link"
-            size="larger"
+            size="large"
             weight="medium"
           >
             {title}
