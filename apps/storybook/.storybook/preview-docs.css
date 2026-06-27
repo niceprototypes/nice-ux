@@ -1,46 +1,22 @@
+/**
+ * Storybook docs (autodocs) overrides.
+ *
+ * Restyles the `.sbdocs` MDX/autodocs surface with nice-styles tokens. Every
+ * rule is scoped under `.sbdocs` and uses `:where(... :not(.sb-anchor,
+ * .sb-unstyled, .sb-unstyled <tag>))` so Storybook's own anchors and
+ * opt-out `.sb-unstyled` regions keep their native styling.
+ *
+ * Sections:
+ *   1. Root + containers   — the .sbdocs surface and its layout variants
+ *   2. Content typography  — inherited color/font, links, inline code
+ *   3. Vertical rhythm     — top-level heading/block spacing
+ *   4. Element styling      — borders, emphasis, blockquote, headings, anchors
+ */
+
 .sbdocs {
   font-family: var(--np--font-family);
 
-  &.sbdocs-content,
-  &.sbdocs-content :where(
-    h1:not(.sb-anchor, .sb-unstyled, .sb-unstyled h1),
-    h2:not(.sb-anchor, .sb-unstyled, .sb-unstyled h2),
-    h3:not(.sb-anchor, .sb-unstyled, .sb-unstyled h3),
-    h4:not(.sb-anchor, .sb-unstyled, .sb-unstyled h4),
-    h5:not(.sb-anchor, .sb-unstyled, .sb-unstyled h5),
-    h6:not(.sb-anchor, .sb-unstyled, .sb-unstyled h6),
-    p, li, td, th, code, blockquote
-  ) {
-    font-size: var(--np--font-size--small);
-    color: inherit;
-  }
-
-  &.sbdocs-content,
-  &.sbdocs-content :where(
-    h1:not(.sb-anchor, .sb-unstyled, .sb-unstyled h1),
-    h2:not(.sb-anchor, .sb-unstyled, .sb-unstyled h2),
-    h3:not(.sb-anchor, .sb-unstyled, .sb-unstyled h3),
-    h4:not(.sb-anchor, .sb-unstyled, .sb-unstyled h4),
-    h5:not(.sb-anchor, .sb-unstyled, .sb-unstyled h5),
-    h6:not(.sb-anchor, .sb-unstyled, .sb-unstyled h6),
-    p, li, td, th
-  ) {
-    font-family: inherit;
-  }
-
-  code, blockquote {
-    font-family: var(--np--font-family--code);
-  }
-
-  &.sbdocs-content :where(a:not(.sb-anchor, .sb-unstyled, .sb-unstyled a)) {
-    color: var(--np--color--link);
-    text-decoration: inherit;
-  }
-
-  &.sbdocs-content {
-    max-width: 720px;
-    margin-right: auto;
-  }
+  /* ── 1. Root + containers ─────────────────────────────────────────── */
 
   &.sbdocs-preview {
     background-color: var(--np--background-color--dark);
@@ -51,6 +27,66 @@
     padding: var(--np--gap--larger);
   }
 
+  /* ── 2. Content typography ────────────────────────────────────────── */
+
+  &.sbdocs-content {
+    max-width: 720px;
+    margin-right: auto;
+
+    /* Inherit text color into headings and text-level elements */
+    &,
+    & :where(
+      h1:not(.sb-anchor, .sb-unstyled, .sb-unstyled h1),
+      h2:not(.sb-anchor, .sb-unstyled, .sb-unstyled h2),
+      h3:not(.sb-anchor, .sb-unstyled, .sb-unstyled h3),
+      h4:not(.sb-anchor, .sb-unstyled, .sb-unstyled h4),
+      h5:not(.sb-anchor, .sb-unstyled, .sb-unstyled h5),
+      h6:not(.sb-anchor, .sb-unstyled, .sb-unstyled h6),
+      p, li, td, th, code, blockquote
+    ) {
+      color: inherit;
+    }
+
+    /* Inherit the token font-family into headings and text (not code) */
+    &,
+    & :where(
+      h1:not(.sb-anchor, .sb-unstyled, .sb-unstyled h1),
+      h2:not(.sb-anchor, .sb-unstyled, .sb-unstyled h2),
+      h3:not(.sb-anchor, .sb-unstyled, .sb-unstyled h3),
+      h4:not(.sb-anchor, .sb-unstyled, .sb-unstyled h4),
+      h5:not(.sb-anchor, .sb-unstyled, .sb-unstyled h5),
+      h6:not(.sb-anchor, .sb-unstyled, .sb-unstyled h6),
+      p, li, td, th
+    ) {
+      font-family: inherit;
+    }
+
+    /* Links use the token link color, decoration unchanged */
+    & :where(a:not(.sb-anchor, .sb-unstyled, .sb-unstyled a)) {
+      color: var(--np--color--link);
+      text-decoration: inherit;
+    }
+
+    /* Inline code in paragraphs — monospace, base size */
+    & :where(p:not(.sb-anchor, .sb-unstyled, .sb-unstyled p)) code {
+      font-family: var(--np--font-family--code);
+      font-size: var(--np--font-size--small);
+    }
+
+    /* Inline code + zebra table rows — tinted surface */
+    :where(p:not(.sb-anchor, .sb-unstyled, .sb-unstyled p)) code,
+    :where(table:not(.sb-anchor, .sb-unstyled, .sb-unstyled table)) tr:nth-of-type(2n),
+    :where(li:not(.sb-anchor, .sb-unstyled, .sb-unstyled li)) code {
+      background-color: var(--np--background-color--dark);
+    }
+
+    /* Inline code border */
+    :where(p:not(.sb-anchor, .sb-unstyled, .sb-unstyled p)) code {
+      border-color: var(--np--border-color);
+    }
+  }
+
+  /* Base size for text-level elements */
   p,
   li,
   th,
@@ -58,9 +94,13 @@
     font-size: var(--np--font-size);
   }
 
+  /* ── 3. Vertical rhythm (top-level blocks) ────────────────────────── */
+
   > h2 {
     margin-top: calc(var(--np--gap--larger) * 1.5) !important;
-    margin-bottom: calc(var(--np--gap--large) * 1.5) !important;
+    margin-bottom: var(--np--gap--large) !important;
+    font-size: var(--np--font-size--larger);
+    font-weight: var(--np--font-weight--semibold);
   }
 
   > h3,
@@ -78,9 +118,11 @@
 
   hr {
     margin-top: calc(var(--np--gap--larger) * 1.5);
-    margin-bottom: calc(var(--np--gap--larger) * 1.25);
+    margin-bottom: calc(var(--np--gap--larger) * 1.5);
     width: 100%;
   }
+
+  /* ── 4. Element styling ───────────────────────────────────────────── */
 
   hr,
   th,
@@ -92,12 +134,11 @@
     font-weight: 600;
   }
 
-  blockquote {
-    p {
-      color: var(--np--color--lighter) !important;
-    }
+  blockquote p {
+    color: var(--np--color--lighter) !important;
   }
 
+  /* Drop Storybook's default underline rule on h2 */
   h2:not(.sb-anchor, .sb-unstyled, .sb-unstyled h2) {
     border-bottom: none;
   }
@@ -109,21 +150,5 @@
     &:hover {
       text-decoration: underline;
     }
-  }
-
-  &.sbdocs-content {
-    :where(p:not(.sb-anchor, .sb-unstyled, .sb-unstyled p)) code,
-    :where(table:not(.sb-anchor, .sb-unstyled, .sb-unstyled table)) tr:nth-of-type(2n),
-    :where(li:not(.sb-anchor, .sb-unstyled, .sb-unstyled li)) code {
-      background-color: var(--np--background-color--dark);
-    }
-
-    :where(p:not(.sb-anchor, .sb-unstyled, .sb-unstyled p)) code {
-      border-color: var(--np--border-color);
-    }
-
-    /*:where(div:not(.sb-anchor, .sb-unstyled, .sb-unstyled div)) {
-      margin: var(--np--gap--large) 0;
-    }*/
   }
 }

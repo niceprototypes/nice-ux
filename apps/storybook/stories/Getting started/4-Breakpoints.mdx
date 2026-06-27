@@ -5,7 +5,7 @@ import ResponsiveDemo, {
 } from "../../src/components/ResponsiveDemo"
 import { DataSection } from "../../src/components/DataSection"
 import Callout from "../../src/components/Callout"
-import NewLines from "../../src/components/NewLines/index.ts"
+import Install from "../../src/components/Install"
 
 <Meta
   title="Getting started/4 · Breakpoints"
@@ -18,13 +18,7 @@ import NewLines from "../../src/components/NewLines/index.ts"
 
 Configure your design for **different screen sizes and ranges** by tweaking breakpoint variants for tokens and components, or by using `getBreakpoint` in your style code.
 
-<NewLines />
-
-### Use breakpoints directly
-
-<NewLines />
-
-#### CSS only
+### CSS only
 
 ```css
 @import "nice-styles/tokens.css";
@@ -40,33 +34,33 @@ Configure your design for **different screen sizes and ranges** by tweaking brea
 }
 ```
 
-<NewLines />
-
-#### JS + CSS
+### JS + CSS
 
 [//]: # "For CSS-in-JS or runtime CSS strings, `getBreakpoint` returns the matching `@media (min-width: …)` literal sourced from the same threshold table the build uses, so JS and CSS stay in sync:"
 
 ```js
 import { getBreakpoint, getToken } from "nice-styles"
 
-const css = `${getBreakpoint("desktop")} {
+const css = `${getBreakpoint("tablet+")} {
   h1 {
     font-size: ${getToken("fontSize", "larger")};
   }
 }`
 ```
 
-<Callout type="learning">Calling `getToken` inside of an instance of `getBreakpoint` will automatically resolve to the correct breakpoint variant.</Callout>
-
-<NewLines />
+<Callout type="learning">
+  Calling `getToken` inside of an instance of `getBreakpoint` will automatically
+  resolve to the correct breakpoint variant.
+</Callout>
 
 ### Styled Components
 
 [//]: # "The same `getBreakpoint` literal drops straight into a styled-component, paired with `getToken` for the values — JS and CSS stay on one threshold table:"
 
-```bash
-npm install nice-react-styles styled-components
-```
+<Install
+  package="react-styles"
+  with="styled-components"
+/>
 
 ```tsx
 import styled from "styled-components"
@@ -75,7 +69,7 @@ import { getBreakpoint, getToken } from "nice-react-styles"
 const Wrapper = styled.div`
   padding: ${getToken("gap")};
 
-  ${getBreakpoint("laptop")} {
+  ${getBreakpoint("laptop+")} {
     padding: ${getToken("gap", "large")};
   }
 `
@@ -85,19 +79,9 @@ const Wrapper = styled.div`
 
 ## Set breakpoints
 
-Imperative override of the pixel thresholds behind `@media` queries. `BREAKPOINTS`
-is mutated in memory and a `<style data-nice-breakpoints>` element is injected
-into `<head>` with the re-emitted `@media` cascade. Cascade order means the
-injected stylesheet overrides the build-time literals from `tokens.css`.
+### via `setBreakpoints`
 
-There are two ways in: call `setBreakpoints` directly, or pass a top-level
-`breakpoints` key to [`setTokens`](/docs/react-settokens--docs). `setTokens`
-forwards **only** that key to `setBreakpoints` (splitting it out before token CSS
-is emitted, so the new thresholds apply to the same pass); every other key
-becomes a flat or component token. `setTokens` with no `breakpoints` key never
-touches breakpoints.
-
-### Usage
+To set breakpoints when you don't need to set other tokens:
 
 ```ts
 import { setBreakpoints } from "nice-react-styles"
@@ -109,48 +93,118 @@ setBreakpoints({
 })
 ```
 
-Accepts `Partial<BreakpointValues>` — any subset of the editable floors
-`tablet` / `laptop` / `desktop`; omitted keys are preserved. `phone` is the
-implicit mobile-first base and is not settable — its ceiling tracks `tablet`.
+### via `setTokens`
 
-Reach for this directly when thresholds need to change after initial load —
-a settings toggle, an A/B test, a unit test. For static per-app config that
-belongs with the rest of your design tokens, use
-[`setTokens({ breakpoints })`](/docs/react-settokens--docs)
-instead.
+To set breakpoints alongside other updated tokens:
+
+```ts
+import { setTokens } from "nice-react-styles"
+
+setTokens({
+  breakpoints: {
+    tablet: 700,
+    laptop: 1100,
+    desktop: 1800,
+  },
+  fontSize: {
+    base: {
+      phone: "14px",
+      tablet: "15px",
+      "laptop+": "16px",
+    },
+  },
+})
+```
+
+<Callout type="learning">
+  The new breakpoints are used in generating the new responsive tokens, such as the `fontSize` token module in the example above, found in the same object.
+</Callout>
 
 ---
 
-## Defaults
-
-Keys used in `breakpoints` maps and `$breakpoints` objects. A bare name matches
-that band **exactly**; `+` extends it **up** (that breakpoint and larger), `-`
-extends it **down** (that breakpoint and smaller).
+## Media queries
 
 <DataSection
   inline
   columns={[
-    { key: "name", header: null, width: "5em", render: "node" },
-    { key: "query", header: "Query", width: "29em", render: "shiki", language: "css" },
-    { key: "range", header: "Range", render: "text", code: true, size: "small" },
+    {
+      key: "name",
+      code: true,
+      header: null,
+      width: "5em",
+      render: "text",
+      size: "small",
+      clickToCopy: true,
+    },
+    {
+      key: "query",
+      header: "Query",
+      width: "29em",
+      render: "shiki",
+      language: "css",
+      clickToCopy: false,
+    },
+    {
+      key: "range",
+      header: "Range",
+      render: "text",
+      code: true,
+      size: "small",
+    },
   ]}
-  tables={[{ rows: [
-    { id: "phone", values: ["phone", "@media (max-width: 640px)", "<= 640"] },
-    { id: "tablet", values: ["tablet", "@media (min-width: 641px) and (max-width: 1279px)", "641-1279"] },
-    { id: "laptop", values: ["laptop", "@media (min-width: 1280px) and (max-width: 1719px)", "1280-1719"] },
-    { id: "desktop", values: ["desktop", "@media (min-width: 1720px)", ">= 1720"] },
-    { id: "tablet+", values: ["tablet+", "@media (min-width: 641px)", ">= 641"] },
-    { id: "laptop+", values: ["laptop+", "@media (min-width: 1280px)", ">= 1280"] },
-    { id: "tablet-", values: ["tablet-", "@media (max-width: 1279px)", "<= 1279"] },
-    { id: "laptop-", values: ["laptop-", "@media (max-width: 1719px)", "<= 1719"] },
-  ] }]}
+  tables={[
+    {
+      rows: [
+        {
+          id: "phone",
+          values: ["phone", "@media (max-width: 640px)", "<= 640"],
+        },
+        {
+          id: "tablet",
+          values: [
+            "tablet",
+            "@media (min-width: 641px) and (max-width: 1279px)",
+            "641-1279",
+          ],
+        },
+        {
+          id: "laptop",
+          values: [
+            "laptop",
+            "@media (min-width: 1280px) and (max-width: 1719px)",
+            "1280-1719",
+          ],
+        },
+        {
+          id: "desktop",
+          values: ["desktop", "@media (min-width: 1720px)", ">= 1720"],
+        },
+        {
+          id: "tablet+",
+          values: ["tablet+", "@media (min-width: 641px)", ">= 641"],
+        },
+        {
+          id: "laptop+",
+          values: ["laptop+", "@media (min-width: 1280px)", ">= 1280"],
+        },
+        {
+          id: "tablet-",
+          values: ["tablet-", "@media (max-width: 1279px)", "<= 1279"],
+        },
+        {
+          id: "laptop-",
+          values: ["laptop-", "@media (max-width: 1719px)", "<= 1719"],
+        },
+      ],
+    },
+  ]}
 />
-
-<Callout type="hint">`phone+` and `desktop-` span every width — applied at `:root` with no `@media`. `phone-` ≡ `phone` and `desktop+` ≡ `desktop`.</Callout>
 
 ---
 
 ## Live demo
+
+Zoom your browser to simulate different screen sizes.
 
 <ResponsiveDemo>
   <ResponsiveDemoItem
@@ -174,5 +228,3 @@ extends it **down** (that breakpoint and smaller).
     text="Desktop"
   />
 </ResponsiveDemo>
-
-<Callout type="hint">Zoom your browser to simulate different screen sizes.</Callout>
