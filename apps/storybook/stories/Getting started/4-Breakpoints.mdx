@@ -6,6 +6,7 @@ import ResponsiveDemo, {
 import { DataSection } from "../../src/components/DataSection"
 import Callout from "../../src/components/Callout"
 import Install from "../../src/components/Install"
+import NewLines from "../../src/components/NewLines/index.ts"
 
 <Meta
   title="Getting started/4 · Breakpoints"
@@ -34,6 +35,8 @@ Configure your design for **different screen sizes and ranges** by tweaking brea
 }
 ```
 
+<NewLines />
+
 ### JS + CSS
 
 [//]: # "For CSS-in-JS or runtime CSS strings, `getBreakpoint` returns the matching `@media (min-width: …)` literal sourced from the same threshold table the build uses, so JS and CSS stay in sync:"
@@ -52,6 +55,8 @@ const css = `${getBreakpoint("tablet+")} {
   Calling `getToken` inside of an instance of `getBreakpoint` will automatically
   resolve to the correct breakpoint variant.
 </Callout>
+
+<NewLines />
 
 ### Styled Components
 
@@ -92,6 +97,8 @@ setBreakpoints({
   desktop: 1800,
 })
 ```
+
+<NewLines />
 
 ### via `setTokens`
 

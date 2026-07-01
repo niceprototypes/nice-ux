@@ -17,8 +17,8 @@ interface StoryHeaderProps {
  * of every docs page.
  */
 const StoryHeader: React.FC<StoryHeaderProps> = ({ title, description, children }) => (
-  <HeaderFlex spacing="none none larger">
-    <Typography as="h1" size="large" weight="base" color="lighter">{title}</Typography>
+  <HeaderFlex spacing="none none larger" gap="small">
+    <Typography as="h1" size="large" weight="semibold" color="light">{title}</Typography>
     {description ? <Typography>{description}</Typography> : null}
     {children}
   </HeaderFlex>

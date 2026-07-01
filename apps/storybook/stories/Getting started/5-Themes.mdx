@@ -1,5 +1,6 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
+import { CodeBlock } from "../../src/components/CodeBlock"
 import Image from "nice-react-image"
 import Install from "../../src/components/Install"
 import NewLines from "../../src/components/NewLines/index.ts"
@@ -26,9 +27,18 @@ By default, Nice UI components are pinned to your browser settings, meaning that
 
 ---
 
-## Pinning to a theme with HTML
+## reset.css
 
-<NewLines />
+<Install package="styles" />
+
+```css
+@import "nice-styles/tokens.css";
+@import "nice-styles/reset.css";
+```
+
+---
+
+## Pinning to a theme with HTML
 
 ### 1. Wrap HTML subtree
 
@@ -38,17 +48,11 @@ By default, Nice UI components are pinned to your browser settings, meaning that
 
 You can pin the theme to a whole page via the `html` element:
 
-```html
-<html data-theme="day">
-  …
-</html>
-```
+<CodeBlock inline language="html" code={`<html data-theme="day">…</html>`} />
 
 Or pin to an element by setting the attribute:
 
-```html
-<section data-theme="night">…</section>
-```
+<CodeBlock inline language="html" code={`<section data-theme="night">…</section>`} />
 
 <NewLines />
 
@@ -88,8 +92,6 @@ body.night-mode {
 ---
 
 ## Pinning with React
-
-<NewLines />
 
 ### `theme` prop
 

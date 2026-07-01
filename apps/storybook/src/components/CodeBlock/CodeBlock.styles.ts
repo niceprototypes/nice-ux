@@ -15,8 +15,7 @@ export const CodeBlockDiv = styled.div<{ $clickable?: boolean; $inline?: boolean
   ${({ $clickable }) => $clickable && `cursor: pointer;`}
   flex-grow: 1;
   /* inline: strip the card chrome — margin, padding, border, radius, shadow */
-  padding: ${({ $inline }) => ($inline ? "0" : `${getToken("gap")} 5em ${getToken("gap")} ${getToken("gap")}`)};
-  margin: ${({ $margin }) => getToken("gap", $margin ?? "large")} 0 !important;
+  padding: ${({ $inline }) => ($inline ? "0" : getToken("gap"))};
   border: ${({ $inline }) => ($inline ? "none" : `1px solid ${getToken("borderColor")}`)};
   border-radius: ${({ $inline }) => ($inline ? "0" : getToken("borderRadius"))};
   box-shadow: ${({ $inline }) => ($inline ? "none" : getToken("boxShadow"))};

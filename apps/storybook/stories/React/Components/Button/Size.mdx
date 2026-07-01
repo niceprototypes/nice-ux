@@ -1,41 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import { StoryHeader } from "../../../../src/components/Story"
-import Button from "nice-react-button"
-import Typography from "../../../../src/nice/Typography"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataSection"
-import { DataSection } from "../../../../src/components/DataSection"
-
-export const sizes = ["smaller", "small", "base", "large", "larger"]
-
-export const sizeLabel = s => s.charAt(0).toUpperCase() + s.slice(1)
-
-export const sizeCode = s =>
-  s === "base"
-    ? `<Button onClick={handler}>\n  {children}\n</Button>`
-    : `<Button\n  onClick={handler}\n  size="${s}"\n>\n  {children}\n</Button>`
+import { ComponentExampleStory } from "../../../../src/components/ComponentExamples"
+import { buttonExamples } from "./examples"
 
 <Meta title="Components/Button/size" />
 
-<StoryHeader title="size" />
-
-<Typography color="light">
-  Scales the button's height, padding, and font size using cell-height tokens.
-</Typography>
-
-<DataSection
-  showHeader={false}
-  columns={DEMO_CODE_COLUMNS}
-  tables={[{ rows: sizes.map(size => ({
-    id: String(size),
-    values: [
-          <Button
-          onClick={() => {}}
-          size={size}
-        >
-          {sizeLabel(size)}
-        </Button>,
-          sizeCode(size),
-        ],
-  })) }]}
-/>
-
+<ComponentExampleStory example={buttonExamples.size} />

@@ -21,7 +21,6 @@
     "@storybook/react-vite": "^10.2.19",
     "lucide-react": "^0.545.0",
     "nice-react-button": "file:../react-button",
-    "nice-react-device-detector": "file:../react-device-detector",
     "nice-react-flex": "file:../react-flex",
     "nice-react-icon": "file:../react-icon",
     "nice-react-icon-vendor": "file:../react-icon-vendor",

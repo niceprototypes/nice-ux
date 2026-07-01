@@ -30,7 +30,6 @@
   /* ── 2. Content typography ────────────────────────────────────────── */
 
   &.sbdocs-content {
-    max-width: 720px;
     margin-right: auto;
 
     /* Inherit text color into headings and text-level elements */
@@ -96,11 +95,15 @@
 
   /* ── 3. Vertical rhythm (top-level blocks) ────────────────────────── */
 
+  > h2,
+  > h3 {
+    font-weight: var(--np--font-weight--semibold);
+  }
+
   > h2 {
     margin-top: calc(var(--np--gap--larger) * 1.5) !important;
     margin-bottom: var(--np--gap--large) !important;
     font-size: var(--np--font-size--larger);
-    font-weight: var(--np--font-weight--semibold);
   }
 
   > h3,

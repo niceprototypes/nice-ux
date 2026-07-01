@@ -8,7 +8,6 @@ import { getToken } from "nice-react-styles"
  * [data-theme="night"] pin via the cascade — no per-mode override needed.
  */
 export const Pill = styled.span<{ $fit?: boolean }>`
-  position: absolute;
   padding: 0 ${getToken("gap", "smaller")};
   top: ${getToken("gap")};
   background-color: ${getToken("backgroundColor")};

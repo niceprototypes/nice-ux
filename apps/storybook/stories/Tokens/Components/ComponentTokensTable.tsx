@@ -94,11 +94,11 @@ const renderValue = (value: string) => {
 }
 
 // The data columns of each component-group table. The group name is the section
-// heading (not a column). Token name and Variable are pinned; Value is equal-flex.
+// heading (not a column). Token name and Variable are pinned; Default is equal-flex.
 const COLUMNS: DataColumn[] = [
   { key: "tokenName", header: "Token name", width: "20em", render: "node" },
   { key: "variable", header: "Variable", width: "36em", render: "node" },
-  { key: "value", header: "Value", render: "node" },
+  { key: "value", header: "Default", render: "node" },
 ]
 
 // Build the [tokenName, variable, value] cells for one component-token row.

@@ -18,10 +18,13 @@ export const DataSectionTable = ({
   showHeader = true,
 }: DataSectionTableProps) => {
   const level = LEVELS[Math.min(depth, 2)]
+  const isH2 = level === "h2"
+  const isH3 = level === "h3"
+
   return (
     <Flex direction="column">
       {table.name != null ? (
-        <Flex spacing={level === "h2" ? "base none larger" : "small none"}>
+        <Flex direction="column" spacing={isH2 ? "none none larger" : isH3 ? "large none" : undefined}>
           <Typography
             as={level}
             {...tableHeadingProps(level)}
@@ -30,33 +33,33 @@ export const DataSectionTable = ({
           </Typography>
         </Flex>
       ) : null}
-      {table.rows ? (
-        <Flex
-          direction="column"
-          spacing="base none"
-        >
-          {showHeader ? <DataSectionHeader columns={columns} /> : null}
-          {table.rows.map(item => (
-            <DataSectionRow
-              key={item.id}
-              columns={columns}
-              values={item.values}
-              inline={inline}
-              highlighted={item.highlighted}
-            />
-          ))}
-        </Flex>
-      ) : null}
-      {table.tables?.map((child, index) => (
-        <DataSectionTable
-          key={tableKey(child, index)}
-          table={child}
-          columns={columns}
-          depth={depth + 1}
-          inline={inline}
-          showHeader={showHeader}
-        />
-      ))}
+      <Flex direction="column" spacing="none none larger">
+        {table.rows ? (
+          <Flex direction="column">
+            {showHeader ? <DataSectionHeader columns={columns} /> : null}
+            {table.rows.map(item => (
+              <DataSectionRow
+                key={item.id}
+                columns={columns}
+                values={item.values}
+                inline={inline}
+                highlighted={item.highlighted}
+              />
+            ))}
+          </Flex>
+        ) : null}
+        {table.tables?.map((child, index) => (
+          <DataSectionTable
+            key={tableKey(child, index)}
+            table={child}
+            columns={columns}
+            depth={depth + 1}
+            inline={inline}
+            showHeader={showHeader}
+          />
+        ))}
+      </Flex>
+      {isH2 && <hr />}
     </Flex>
   )
 }

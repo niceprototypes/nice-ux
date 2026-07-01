@@ -1,37 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import { StoryHeader } from "../../../../src/components/Story"
-import Button from "nice-react-button"
-import Typography from "../../../../src/nice/Typography"
-import { DataSectionRow } from "../../../../src/components/DataSection"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataSection"
+import { ComponentExampleStory } from "../../../../src/components/ComponentExamples"
+import { buttonExamples } from "./examples"
 
 <Meta title="Components/Button/status" />
 
-<StoryHeader title="status" />
-
-<Typography color="light">
-  Selects the button's visual emphasis — <code>primary</code> (default) or{" "}
-  <code>secondary</code>.
-</Typography>
-
-<DataSectionRow
-  columns={DEMO_CODE_COLUMNS}
-  values={[
-          <Button onClick={() => {}}>Primary</Button>,
-          `<Button onClick={handler}>\n  {children}\n</Button>`,
-        ]}
-/>
-
-<DataSectionRow
-  columns={DEMO_CODE_COLUMNS}
-  values={[
-          <Button
-      onClick={() => {}}
-      status="secondary"
-    >
-      Secondary
-    </Button>,
-          `<Button\n  onClick={handler}\n  status="secondary"\n>\n  {children}\n</Button>`,
-        ]}
-/>
-
+<ComponentExampleStory example={buttonExamples.status} />

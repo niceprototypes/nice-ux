@@ -26,9 +26,9 @@ export const tableHeadingProps = (as: TableHeadingAs): TableHeadingStyle => {
     case "h2":
       return { size: "larger", weight: "semibold", code: true }
     case "h3":
-      return { size: "base", weight: "semibold", code: true }
+      return { size: "large", weight: "semibold", code: true }
     case "h4":
-      return { size: "small", code: true }
+      return { size: "base", code: true }
     default:
       return {}
   }

@@ -8,11 +8,11 @@ import { StoryHeader } from "../../../src/components/Story"
 
 <StoryHeader title="useDevice" />
 
-Reads the device state published by `StylesProvider`. Returns `{ isMobile }`.
-When `StylesProvider` is given `detectDevice`, it runs detection once (via
-`nice-react-device-detector`) and shares the result through context — so any
-descendant reads one shared value instead of wiring a separate `DeviceProvider`
-or calling `useDeviceDetector` per component.
+Reads the mobile state published by `StylesProvider`. Returns `{ isMobile }`.
+When `StylesProvider` is given `detectDevice`, it runs detection once and shares
+the result through context — so every descendant reads one shared value, with no
+separate provider to wire and no per-component detection. This is the only
+device binding; detection lives inside `nice-react-styles`.
 
 ---
 
@@ -45,13 +45,11 @@ No prop drilling — every component under the `StylesProvider` reads the same
 
 ---
 
-## When to use which
+## What detection checks
 
-| You want… | Use |
-|-----------|-----|
-| One shared `isMobile` for components under `StylesProvider` | `detectDevice` + `useDevice` |
-| Device detection without (or outside) `StylesProvider` | [`useDeviceDetector` / `DeviceProvider`](/docs/react-bindings-usedevicedetector--docs) |
-
-Folding detection into `StylesProvider` costs nothing over a standalone
-`DeviceProvider` — it's the same single listener — and removes one provider from
-the tree. Prefer it when the app already renders inside `StylesProvider`.
+`detectDevice` runs detection once and keeps it current on resize / orientation /
+DevTools-emulation changes — a single shared listener for the whole tree. A
+viewport is mobile when the user-agent matches a known mobile identifier, **or**
+the device has touch and a viewport ≤ 640px (the phone band). Debug overrides
+force mobile on: `?mobile=true` in the URL, or
+`localStorage.setItem("debug-mobile", "true")`.

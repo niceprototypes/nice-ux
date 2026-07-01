@@ -13,7 +13,7 @@ import type { DataSectionProps } from "./DataSection.types"
  * `DataSectionTable`; a rule separates the top-level entries.
  */
 export const DataSection = ({ columns, tables, inline = false, showHeader = true }: DataSectionProps) => (
-  <Flex direction="column">
+  <Flex direction="column" spacing="larger none">
     {tables.map((table, index) => (
       <React.Fragment key={tableKey(table, index)}>
         <DataSectionTable table={table} columns={columns} inline={inline} showHeader={showHeader} />

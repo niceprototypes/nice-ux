@@ -8,22 +8,25 @@ import { StoryHeader } from "../../../src/components/Story"
 
 <StoryHeader title="Bindings" />
 
-React hooks for the Nice ecosystem. Each hook is published within
-its relevant package.
+React hooks exposed by `nice-react-styles`. Both read state that
+`StylesProvider` publishes through context — one shared instance for the whole
+tree, no separate provider to wire.
 
 ---
 
 ### Contents
 
-- [useDeviceDetector](/docs/react-bindings-usedevicedetector--docs) — Returns
-  whether the current viewport is mobile. Supports context via `DeviceProvider`
-  and localStorage debugging overrides. From `nice-react-device-detector`.
+- [useBreakpoint](/docs/react-bindings-usebreakpoint--docs) — Returns the current
+  viewport breakpoint name (`"phone"` / `"tablet"` / `"laptop"` / `"desktop"`)
+  and re-renders on band changes. Needs no `StylesProvider`. For swapping
+  component trees; prefer CSS / the `breakpoints` prop for styling.
 
 - [useDevice](/docs/react-bindings-usedevice--docs) — Reads the shared
   `{ isMobile }` published by `StylesProvider` when given `detectDevice`. One
-  detection instance for the whole tree. From `nice-react-styles`.
+  mobile-detection instance for the whole tree (user-agent + touch + viewport,
+  with `?mobile=true` / localStorage debug overrides).
 
 - [useTheme](/docs/react-bindings-usetheme--docs) — Reads the shared `{ theme }`
   published by `StylesProvider` when given `detectTheme`, following the OS
-  color-scheme preference. From `nice-react-styles`.
+  color-scheme preference.
 

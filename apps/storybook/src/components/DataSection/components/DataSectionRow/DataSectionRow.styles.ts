@@ -9,10 +9,6 @@ import { getBreakpoint, getToken } from "nice-react-styles"
 export const Column = styled.div<{ $width?: string | null }>`
   min-width: 0;
 
-  > * {
-    width: 100%;
-  }
-
   ${getBreakpoint("tablet+")} {
     ${({ $width }) =>
       $width &&

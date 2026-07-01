@@ -1,52 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import { StoryHeader } from "../../../../src/components/Story"
-import Button from "nice-react-button"
-import Flex from "nice-react-flex"
-import Typography from "../../../../src/nice/Typography"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataSection"
-import { DataSection } from "../../../../src/components/DataSection"
-
-export const states = ["base", "disabled", "error", "success", "warning"]
-
-export const stateLabel = s => s.charAt(0).toUpperCase() + s.slice(1)
-
-export const stateCode = s =>
-  s === "base"
-    ? `<Button onClick={handler}>\n  {children}\n</Button>`
-    : `<Button\n  onClick={handler}\n  state="${s}"\n>\n  {children}\n</Button>`
+import { ComponentExampleStory } from "../../../../src/components/ComponentExamples"
+import { buttonExamples } from "./examples"
 
 <Meta title="Components/Button/state" />
 
-<StoryHeader title="state" />
-
-<Typography color="light">
-  Applies a semantic state style to the button (<code>disabled</code>,{" "}
-  <code>error</code>, <code>success</code>, or <code>warning</code>).
-</Typography>
-
-<DataSection
-  showHeader={false}
-  columns={DEMO_CODE_COLUMNS}
-  tables={[{ rows: states.map(state => ({
-    id: String(state),
-    values: [
-          <Flex gap="small">
-          <Button
-            onClick={() => {}}
-            state={state === "base" ? undefined : state}
-          >
-            {stateLabel(state)}
-          </Button>
-          <Button
-            status="secondary"
-            onClick={() => {}}
-            state={state === "base" ? undefined : state}
-          >
-            {stateLabel(state)}
-          </Button>
-        </Flex>,
-          stateCode(state),
-        ],
-  })) }]}
-/>
-
+<ComponentExampleStory example={buttonExamples.state} />

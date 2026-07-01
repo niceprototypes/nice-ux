@@ -1,41 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import { StoryHeader } from "../../../../src/components/Story"
-import Button from "nice-react-button"
-import StoryDescription from "../../../../src/components/StoryDescription"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataSection"
-import { DataSection } from "../../../../src/components/DataSection"
-
-export const radii = ["small", "base", "large"]
-
-export const radiusLabel = r => r.charAt(0).toUpperCase() + r.slice(1)
-
-export const radiusCode = r =>
-  r === "base"
-    ? `<Button onClick={handler}>\n  {children}\n</Button>`
-    : `<Button\n  onClick={handler}\n  borderRadius="${r}"\n>\n  {children}\n</Button>`
+import { ComponentExampleStory } from "../../../../src/components/ComponentExamples"
+import { buttonExamples } from "./examples"
 
 <Meta title="Components/Button/borderRadius" />
 
-<StoryHeader title="borderRadius" />
-
-<StoryDescription property="border-radius">
-  Controls the corner rounding of the button.
-</StoryDescription>
-
-<DataSection
-  showHeader={false}
-  columns={DEMO_CODE_COLUMNS}
-  tables={[{ rows: radii.map(radius => ({
-    id: String(radius),
-    values: [
-          <Button
-          onClick={() => {}}
-          borderRadius={radius}
-        >
-          {radiusLabel(radius)}
-        </Button>,
-          radiusCode(radius),
-        ],
-  })) }]}
-/>
-
+<ComponentExampleStory example={buttonExamples.borderRadius} />

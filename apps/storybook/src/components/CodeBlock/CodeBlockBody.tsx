@@ -69,8 +69,8 @@ export const CodeBlockBody: React.FC<CodeBlockBodyProps> = ({
   inline,
   fit,
 }) => (
-  <>
-    <CodeScroll gap="large">
+  <Flex gap="base">
+    <CodeScroll gap="large" grow={1}>
       {/* fit: shrink to content (width: max-content); otherwise fill the row. */}
       <Flex fit={fit} grow={fit ? undefined : 1}>
         <div
@@ -85,5 +85,5 @@ export const CodeBlockBody: React.FC<CodeBlockBodyProps> = ({
       </Flex>
     </CodeScroll>
     {showLabel && !inline && <CodeLabel language={language} fit={fit} />}
-  </>
+  </Flex>
 )

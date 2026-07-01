@@ -28,6 +28,8 @@ Import the stylesheet and reference the tokens:
   package="styles"
 />
 
+<NewLines />
+
 ```css
 @import "nice-styles/tokens.css";
 
@@ -43,6 +45,8 @@ Import the stylesheet and reference the tokens:
   }
 }
 ```
+
+<NewLines />
 
 ### Create local aliases
 
@@ -88,6 +92,8 @@ Use the `getToken` function and CSS variables provided by `nice-styles` for vani
   package="styles"
 />
 
+<NewLines />
+
 ```js
 import { getToken } from "nice-styles"
 import "nice-styles/tokens.css"
@@ -103,6 +109,8 @@ card.style.borderRadius = getToken("borderRadius", "small")
 // Append element to DOM
 document.body.append(card)
 ```
+
+<NewLines />
 
 ### React only
 
@@ -135,6 +143,8 @@ Then, render the React component inside `StylesProvider`:
 ```tsx
 import { StylesProvider } from "nice-react-styles"
 
+<NewLines />
+
 export default function App() {
   return (
     <StylesProvider>
@@ -144,6 +154,8 @@ export default function App() {
 }
 ```
 
+<NewLines />
+
 ### React + Styled Components
 
 Create and style a Styled Component with tokens:
@@ -152,6 +164,8 @@ Create and style a Styled Component with tokens:
   package="react-styles"
   with="styled-components"
 />
+
+<NewLines />
 
 ```tsx
 // Card.tsx
@@ -206,6 +220,8 @@ import "../App"
 </StylesProvider>
 ```
 
+<NewLines />
+
 ### 2. Call the setter function
 
 Call `setTokens` once on module load:
@@ -228,6 +244,8 @@ setTokens({
 ```
 
 <Callout type="hint">Modules and tokens can be modified (static) or created (custom) in the same object.</Callout>
+
+<NewLines />
 
 ### 3. Access new tokens
 

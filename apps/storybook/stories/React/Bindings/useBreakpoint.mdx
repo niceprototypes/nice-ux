@@ -1,0 +1,70 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../src/components/Story"
+
+<Meta
+  title="React/Bindings/useBreakpoint"
+  name="Docs"
+/>
+
+<StoryHeader title="useBreakpoint" />
+
+Returns the current viewport breakpoint name — `"phone"`, `"tablet"`, `"laptop"`,
+or `"desktop"` — and re-renders the component when the viewport crosses a band.
+Reads `window.innerWidth` directly via `useSyncExternalStore`, so it needs **no
+`StylesProvider`** (unlike `useDevice` / `useTheme`).
+
+---
+
+## Usage
+
+```tsx
+import { useBreakpoint } from "nice-react-styles"
+
+function Gallery() {
+  const bp = useBreakpoint()
+  return bp === "phone" ? <Carousel /> : <Grid />
+}
+```
+
+`BreakpointName` is `"phone" | "tablet" | "laptop" | "desktop"`, smallest to
+largest. The breakpoint constants are exported too:
+
+```tsx
+import { useBreakpoint, BREAKPOINT_DESKTOP } from "nice-react-styles"
+
+const bp = useBreakpoint()
+const wide = bp === BREAKPOINT_DESKTOP
+```
+
+---
+
+## Prefer CSS for styling — reach for this only to swap trees
+
+`useBreakpoint` runs in JS, so it carries costs the CSS layer doesn't:
+
+- **SSR snapshot is `"phone"`** (phone-first). The server renders the phone
+  branch; the client re-renders on hydration if the viewport is wider — a
+  potential flash for non-phone branches.
+- JS-gated content isn't in the initial HTML.
+- The subtree re-renders on every viewport cross.
+
+So it's the **escape hatch** for cases CSS can't express — swapping component
+**identity / behavior** (a carousel vs a grid, different event wiring), or
+**avoiding mounting** an expensive subtree on the wrong band (CSS `display: none`
+still mounts it and runs its effects). For purely visual differences, prefer the
+CSS layer:
+
+| Need | Use |
+|---|---|
+| Responsive styling on a nice component | the `breakpoints` prop (`withBreakpoints`) |
+| Responsive token value | breakpoint variants in `setTokens` |
+| A media query in CSS-in-JS | `getBreakpoint("tablet+")` |
+| Swap component trees / avoid mounting | **`useBreakpoint`** |
+
+---
+
+## SSR
+
+The server snapshot is always `"phone"`. If the server rendered at a larger
+breakpoint, the component re-renders on hydration once the client snapshot takes
+over. No `window` access happens during SSR.

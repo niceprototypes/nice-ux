@@ -1,10 +1,8 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
-import Button from "nice-react-button"
-import Typography from "../../../../src/nice/Typography"
-import { DataSectionRow } from "../../../../src/components/DataSection"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataSection"
 import Install from "../../../../src/components/Install"
+import { ComponentExamples } from "../../../../src/components/ComponentExamples"
+import { buttonExampleList } from "./examples"
 
 <Meta title="Components/Button" />
 
@@ -26,17 +24,4 @@ import Button from "nice-react-button"
 
 ---
 
-## Basic
-
-<Typography color="light">
-  Default button rendering with an <code>onClick</code> handler and child label.
-</Typography>
-
-<DataSectionRow
-  columns={DEMO_CODE_COLUMNS}
-  values={[
-          <Button onClick={() => alert("Button clicked!")}>Click Me</Button>,
-          `<Button onClick={handler}>\n  {children}\n</Button>`,
-        ]}
-/>
-
+<ComponentExamples examples={buttonExampleList} />

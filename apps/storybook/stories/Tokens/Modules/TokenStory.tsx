@@ -24,7 +24,6 @@ export const TokenStory = ({ name }: { name: keyof typeof tokenTables }) => {
     <>
       {/* Match the Tokens/Docs page width — the multi-column table needs the full
           container, not the default 980px docs measure. */}
-      <style>{`.sbdocs.sbdocs-content { max-width: 100%; }`}</style>
       <StoryHeader title={group.name} description={group.description} />
       <DataSection columns={TOKEN_COLUMNS} tables={[{ rows }]} inline />
     </>
