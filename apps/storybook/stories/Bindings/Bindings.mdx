@@ -1,8 +1,8 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import { StoryHeader } from "../../../src/components/Story"
+import { StoryHeader } from "../../src/components/Story"
 
 <Meta
-  title="React/Bindings"
+  title="Bindings"
   name="Docs"
 />
 
@@ -16,17 +16,17 @@ tree, no separate provider to wire.
 
 ### Contents
 
-- [useBreakpoint](/docs/react-bindings-usebreakpoint--docs) — Returns the current
+- [useBreakpoint](/docs/bindings-usebreakpoint--docs) — Returns the current
   viewport breakpoint name (`"phone"` / `"tablet"` / `"laptop"` / `"desktop"`)
   and re-renders on band changes. Needs no `StylesProvider`. For swapping
   component trees; prefer CSS / the `breakpoints` prop for styling.
 
-- [useDevice](/docs/react-bindings-usedevice--docs) — Reads the shared
+- [useDevice](/docs/bindings-usedevice--docs) — Reads the shared
   `{ isMobile }` published by `StylesProvider` when given `detectDevice`. One
   mobile-detection instance for the whole tree (user-agent + touch + viewport,
   with `?mobile=true` / localStorage debug overrides).
 
-- [useTheme](/docs/react-bindings-usetheme--docs) — Reads the shared `{ theme }`
+- [useTheme](/docs/bindings-usetheme--docs) — Reads the shared `{ theme }`
   published by `StylesProvider` when given `detectTheme`, following the OS
   color-scheme preference.
 

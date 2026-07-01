@@ -1,14 +1,14 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import { StoryHeader } from "../../../src/components/Story"
+import { StoryHeader } from "../../src/components/Story"
 
 <Meta
-  title="React/Bindings/useTheme"
+  title="Bindings/useTheme"
   name="Docs"
 />
 
 <StoryHeader title="useTheme" />
 
-The theme sibling of [`useDevice`](/docs/react-bindings-usedevice--docs). Reads the
+The theme sibling of [`useDevice`](/docs/bindings-usedevice--docs). Reads the
 theme state published by `StylesProvider` and returns `{ theme }` — a theme name
 (`"day"`, `"night"`, or a custom theme), not a boolean, so more themes can be
 added without a breaking signature change. When `StylesProvider` is given

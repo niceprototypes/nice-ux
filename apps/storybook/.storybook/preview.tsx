@@ -38,7 +38,7 @@ const preview: Preview = {
       },
       // Wrap docs pages so the StoryFooter control bar floats above MDX prose
       // too — the global decorator only fires for embedded <Story> renderings.
-      container: ({ children, context }) => (
+      container: ({ children, context }: React.ComponentProps<typeof DocsContainer>) => (
         <DocsContainer context={context}>
           {children}
           <StoryFooter />
@@ -71,11 +71,8 @@ const preview: Preview = {
           "Tokens",
           ["Modules", "Components"],
           "Components",
-          "React",
-          [
-            "Bindings",
-            ["useBreakpoint", "useDevice", "useTheme"],
-          ],
+          "Bindings",
+          ["useBreakpoint", "useDevice", "useTheme"],
           "Configuration",
           ["NPM", "Vite", "TypeScript", "Jest", "Rollup"],
         ],
