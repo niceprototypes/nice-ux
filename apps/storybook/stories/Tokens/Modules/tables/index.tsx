@@ -17,6 +17,7 @@ import { color } from "./color"
 import { gap } from "./gap"
 import { letterSpacing } from "./letterSpacing"
 import { lineHeight } from "./lineHeight"
+import { zIndex } from "./zIndex"
 
 export type { TokenTable } from "../TokenTable.types"
 
@@ -44,6 +45,7 @@ export const tokenTables = {
   gap,
   letterSpacing,
   lineHeight,
+  zIndex,
 } satisfies Record<string, TokenTable>
 
 /** Tables in Docs-page order. */
