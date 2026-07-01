@@ -3,6 +3,7 @@ export { DataSectionTable } from "./components/DataSectionTable"
 export { DataSectionHeader } from "./components/DataSectionHeader"
 export { DataSectionRow } from "./components/DataSectionRow"
 export { DataSectionCell } from "./components/DataSectionCell"
+export { withCopyAffordance } from "./components/DataSectionCell/DataSectionCell.helpers"
 export { tableHeadingProps } from "./components/DataSectionTable/DataSectionTable.helpers"
 export type { TableHeadingAs } from "./components/DataSectionTable/DataSectionTable.helpers"
 export {

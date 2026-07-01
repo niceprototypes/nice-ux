@@ -1,2 +1,2 @@
 export { IconsDataTable } from "./IconsDataTable"
-export type { IconsDataTableProps } from "./IconsDataTable.types"
+export type { IconsDataTableProps, IconsDataTableColumn } from "./IconsDataTable.types"

@@ -21,7 +21,7 @@ Access all **stroke and fill variants** of all icons via the `nice-icons` packag
 
 <Install package="icons" />
 
-<NewLines count={3} />
+<NewLines count={2} />
 
 <Flex direction="column">
   <h3>Stroke</h3>
@@ -31,7 +31,7 @@ Access all **stroke and fill variants** of all icons via the `nice-icons` packag
   </Flex>
 </Flex>
 
-<NewLines count={3} />
+<NewLines count={2} />
 
 <Flex direction="column">
   <h3>Fill</h3>
@@ -48,6 +48,8 @@ Access all **stroke and fill variants** of all icons via the `nice-icons` packag
 The Icon component allows you to **easily configure icon properties** without any CSS code:
 
 <Install package="react-icon" />
+
+<NewLines />
 
 ```tsx
 <Icon
@@ -86,21 +88,13 @@ const CheckFill = getIcon("check", true)    // outlined → fill variant
 <CheckIcon />
 ```
 
-Returns the icon's React component, or `undefined` when the name isn't in the
-set. The second argument picks the variant: `false` (default) for stroke,
-`true` for fill.
-
-<Callout type="hint">
-  Every icon name accepted by `getIcon` and the `Icon` component is listed
-  below.
-</Callout>
-
 ---
 
 ## Browse
 
 <IconsDataTable
-  codeHeader="getIcon"
-  code={name => `getIcon("${name}")`}
-  codeWidth="16em"
+  codeColumns={[
+    { header: "JS", code: name => `getIcon("${name}")`, width: "16em" },
+    { header: "React", code: name => `<Icon name="${name}" />`, width: "16em" },
+  ]}
 />
