@@ -58,9 +58,9 @@ import { FlexProps } from "./Flex.types";
  * 1. **Responsive Design**: All layout props can be specified as either static values
  *    or responsive objects with phone/tablet/laptop/desktop breakpoints
  *
- * 2. **Automatic Prop Normalization**: The component automatically normalizes props
- *    to ensure consistent behavior. Simple values are converted to breakpoint objects
- *    with the value applied to the 'phone' breakpoint.
+ * 2. **Responsive Overrides via HOC**: Responsive behavior is provided by the
+ *    `withBreakpoints` HOC (applied in `index.ts`), which resolves the
+ *    `breakpoints` prop to flat props for the active viewport before render.
  *
  * 3. **CSS-like Spacing Shorthand**: Supports 1-4 token values like CSS padding/margin:
  *    - "small" → all sides

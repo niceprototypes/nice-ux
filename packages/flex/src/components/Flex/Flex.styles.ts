@@ -1,11 +1,4 @@
 import styled from "styled-components"
-import {
-  getBreakpoint,
-  BREAKPOINT_PHONE,
-  BREAKPOINT_TABLET,
-  BREAKPOINT_LAPTOP,
-  BREAKPOINT_DESKTOP,
-} from "nice-react-styles"
 import { FlexProps } from "./Flex.types"
 import { styleFlex } from "../../services/styleFlex"
 
@@ -40,39 +33,21 @@ const isForwardable = (prop: string): boolean =>
  *    being passed to the DOM, avoiding React warnings about unknown DOM properties.
  *    Filtered props: spacing, gap, direction, alignItems, justifyContent, grow, shrink, wrap
  *
- * 2. **Phone-First Responsive Design**: Applies styles in a phone-first approach:
- *    - Base styles: Always applied (phone breakpoint)
- *    - Tablet styles: Applied above phone threshold
- *    - Laptop styles: Applied for laptop screens
- *    - Desktop styles: Applied for desktop screens
+ * 2. **Service Integration**: Delegates CSS generation to the `styleFlex`
+ *    service, emitting a single style block from the resolved props.
  *
- * 3. **Service Integration**: Delegates actual CSS generation to the styleFlex service,
- *    keeping the styled component focused on responsive breakpoint management.
- *
- * `FlexStyled` is internal — it receives the post-`normalizeProps` shape,
- * not the consumer-facing scalar shape. Public usage of `<Flex>` is
- * scalar; responsive overrides flow in through the `breakpoints` prop.
+ * `FlexStyled` is internal and receives flat scalar props. Responsive
+ * overrides flow in through the `breakpoints` prop, which the
+ * `withBreakpoints` HOC resolves to flat props for the active viewport
+ * before this component renders.
  *
  * @example
- * // Internal usage (post-normalize)
- * <FlexStyled direction={{ phone: "column", tablet: "row" }} gap={{ phone: "small", laptop: "large" }}>
+ * <FlexStyled direction="column" gap="small">
  *   <div>Content</div>
  * </FlexStyled>
  */
 export const FlexStyled = styled.div.withConfig({
   shouldForwardProp: (prop) => isForwardable(prop as string),
 })<FlexProps>`
-  ${(props) => styleFlex(BREAKPOINT_PHONE, props)}
-
-  ${getBreakpoint(`${BREAKPOINT_TABLET}+`)} {
-    ${(props) => styleFlex(BREAKPOINT_TABLET, props)}
-  }
-
-  ${getBreakpoint(`${BREAKPOINT_LAPTOP}+`)} {
-    ${(props) => styleFlex(BREAKPOINT_LAPTOP, props)}
-  }
-
-  ${getBreakpoint(`${BREAKPOINT_DESKTOP}+`)} {
-    ${(props) => styleFlex(BREAKPOINT_DESKTOP, props)}
-  }
+  ${(props) => styleFlex(props)}
 `

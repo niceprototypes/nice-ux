@@ -126,26 +126,6 @@ declare namespace FlexTypes {
 declare const Flex: React.FC<WithBreakpointsProps<FlexProps>>;
 
 /**
- * Extracts the value for a specific breakpoint from a normalized prop.
- *
- * After `normalizeProps`, every per-breakpoint prop is wrapped into a phone-
- * keyed object (`{ phone: value }`). Tablet/laptop/desktop overrides are
- * folded in by the `withBreakpoints` HOC before `styleFlex` runs, so this
- * function simply returns the per-breakpoint value or undefined.
- *
- * @example
- * getBreakpointValue({ phone: "row" }, "phone")   // → "row"
- * getBreakpointValue({ phone: "row" }, "tablet")  // → undefined
- * getBreakpointValue({ phone: "column", tablet: "row" }, "tablet") // → "row"
- */
-declare const getBreakpointValue: <T>(value: {
-    phone?: T;
-    tablet?: T;
-    laptop?: T;
-    desktop?: T;
-} | undefined, breakpoint: BreakpointName) => T | undefined;
-
-/**
  * Converts a GapSize value to its corresponding CSS value using CSS variables
  *
  * @function getGapSize
@@ -163,29 +143,20 @@ declare const getBreakpointValue: <T>(value: {
 declare const getGapSize: (size?: GapSize) => string | undefined;
 
 /**
- * Resolves the SpacingDefinition for a specific breakpoint from a shorthand
- * string prop.
- *
- * Spacing is consumed as a single scalar shorthand string (e.g. `"small"`,
- * `"small base"`). The shorthand is parsed and applied at the phone
- * breakpoint; tablet/laptop/desktop overrides flow in through the
- * `breakpoints` prop, which the `withBreakpoints` HOC folds into each
- * breakpoint's props before this function runs.
+ * Resolves a SpacingDefinition from a shorthand string prop (e.g. `"small"`,
+ * `"small base"`), or undefined when no spacing is set. Responsive overrides
+ * flow in through the `breakpoints` prop, which the `withBreakpoints` HOC
+ * resolves to flat props before this runs.
  *
  * @example
- * getSpacingValue("small", "phone")
+ * getSpacingValue("small")
  * // → { top: "small", right: "small", bottom: "small", left: "small" }
  *
  * @example
- * getSpacingValue("small base", "phone")
+ * getSpacingValue("small base")
  * // → { top: "small", right: "base", bottom: "small", left: "base" }
- *
- * @example
- * getSpacingValue("small", "tablet")
- * // → undefined (no spacing rule emitted at non-phone breakpoints unless
- * //   the HOC merged a tablet override from the `breakpoints` prop)
  */
-declare const getSpacingValue: (spacing: FlexSpacingType | undefined, breakpoint: BreakpointName) => SpacingDefinition | undefined;
+declare const getSpacingValue: (spacing: FlexSpacingType | undefined) => SpacingDefinition | undefined;
 
 /**
  * Generates CSS spacing properties (padding or margin) from a SpacingDefinition
@@ -213,62 +184,23 @@ declare const styleSpacing: (type: "padding" | "margin", def?: SpacingDefinition
 /**
  * styleFlex Service
  *
- * Generates CSS styling for a specific breakpoint based on normalized Flex component props.
- * This is the core styling logic that transforms component props into CSS declarations.
+ * Generates the CSS declarations for a Flex container from its already
+ * viewport-resolved props.
+ *
+ * Responsive behavior is handled upstream by the `withBreakpoints` HOC: it
+ * resolves the `breakpoints` prop to flat scalar props for the active
+ * breakpoint (re-rendering on viewport change) before this runs. So this
+ * emits a single, breakpoint-agnostic style block — no `@media` fan-out.
  *
  * @function styleFlex
- * @param {Breakpoint} breakpoint - The breakpoint to generate styles for (phone/tablet/laptop/desktop)
- * @param {FlexProps} props - The normalized Flex component props
+ * @param {FlexProps} props - The resolved Flex component props
  * @returns {string} CSS declarations separated by newlines
  *
- * @description
- * This service handles the generation of all CSS properties for the Flex component:
- *
- * **Base Display**: Sets `display: flex` only for the 'phone' breakpoint to establish
- * the flexbox context. Higher breakpoints inherit this display value.
- *
- * **Responsive Value Extraction**: For each CSS property, the function extracts
- * the appropriate value based on whether the prop is a simple value or breakpoint object:
- * - Object props: Use the value for the current breakpoint
- * - Simple props: Only use for 'phone' breakpoint (since props are normalized)
- *
- * **CSS Property Generation**: Generates standard CSS flexbox properties:
- * - `flex-direction`: Controls layout direction (row/column)
- * - `align-items`: Aligns items on the cross axis
- * - `justify-content`: Aligns items on the main axis
- * - `flex-grow` & `flex-basis`: Controls item growth behavior
- * - `flex-wrap`: Controls whether items wrap to new lines
- * - `gap`: Sets space between flex items using CSS Grid gap
- *
- * **Spacing Integration**: Uses the styleSpacing helper to generate padding
- * or margin properties with full side-by-side control.
- *
- * The function is designed to work with props that have been processed by
- * the normalizeProps service, ensuring consistent prop structure.
- *
- * Examples below show the POST-normalizeProps shape (every per-breakpoint
- * prop is a `{ phone, tablet, laptop, desktop }` object). Consumer-facing
- * `<Flex>` props are scalar; responsive overrides flow in through the
- * `breakpoints` prop, which the `withBreakpoints` HOC folds into each
- * breakpoint's props before this function runs.
- *
  * @example
- * // Generate phone breakpoint styles
- * const props = { direction: { phone: "column" }, gap: { phone: "small" } }
- * styleFlex(BREAKPOINT_PHONE, props)
+ * styleFlex({ direction: "column", gap: "small" })
  * // Returns: "display: flex;\nflex-direction: column;\ngap: var(--core--gap--small);"
- *
- * @example
- * // Generate tablet breakpoint styles
- * const props = {
- *   direction: { phone: "column", tablet: "row" },
- *   gap: { phone: "small", tablet: "base" },
- *   spacing: { tablet: "small base" }
- * }
- * styleFlex(BREAKPOINT_TABLET, props)
- * // Returns: "flex-direction: row;\ngap: var(--core--gap);\npadding-top: var(--core--gap--small);\npadding-right: var(--core--gap);..."
  */
-declare const styleFlex: (breakpoint: BreakpointName, props: FlexProps) => string;
+declare const styleFlex: (props: FlexProps) => string;
 
-export { FlexTypes, Flex as default, getBreakpointValue, getGapSize, getSpacingValue, styleFlex, styleSpacing };
+export { FlexTypes, Flex as default, getGapSize, getSpacingValue, styleFlex, styleSpacing };
 export type { Breakpoint, FlexAlignItemsType, FlexBreakpointType, FlexDirectionType, FlexGapSizeType, FlexJustifyContentType, FlexProps, FlexSpacingDefinitionType, FlexSpacingType, FlexTypeType, FlexWrapType, GapSize, Spacing, SpacingDefinition };

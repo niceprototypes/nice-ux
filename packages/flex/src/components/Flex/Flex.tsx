@@ -1,7 +1,6 @@
 import * as React from "react"
 import { FlexStyled } from "./Flex.styles"
 import { FlexProps } from "./Flex.types"
-import { normalizeProps } from "../../utilities/normalizeProps"
 
 /**
  * Flex Component
@@ -61,9 +60,9 @@ import { normalizeProps } from "../../utilities/normalizeProps"
  * 1. **Responsive Design**: All layout props can be specified as either static values
  *    or responsive objects with phone/tablet/laptop/desktop breakpoints
  *
- * 2. **Automatic Prop Normalization**: The component automatically normalizes props
- *    to ensure consistent behavior. Simple values are converted to breakpoint objects
- *    with the value applied to the 'phone' breakpoint.
+ * 2. **Responsive Overrides via HOC**: Responsive behavior is provided by the
+ *    `withBreakpoints` HOC (applied in `index.ts`), which resolves the
+ *    `breakpoints` prop to flat props for the active viewport before render.
  *
  * 3. **CSS-like Spacing Shorthand**: Supports 1-4 token values like CSS padding/margin:
  *    - "small" → all sides
@@ -79,13 +78,7 @@ import { normalizeProps } from "../../utilities/normalizeProps"
  * passing them to the DOM to avoid React warnings about unknown DOM properties.
  */
 const Flex: React.FC<FlexProps> = (props) => {
-  // Normalize props to ensure all breakpoint-capable props are in object format
-  // This simplifies the styling logic by providing a consistent prop structure
-  const normalizedProps = normalizeProps(props)
-
-  // Render the styled component with normalized props
-  // Children are passed through from original props to maintain reference integrity
-  return <FlexStyled {...normalizedProps}>{props.children}</FlexStyled>
+  return <FlexStyled {...props}>{props.children}</FlexStyled>
 }
 
 export default Flex

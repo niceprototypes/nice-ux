@@ -1,4 +1,3 @@
-export { getBreakpointValue } from "./getBreakpointValue"
 export { getGapSize } from "./getGapSize"
 export { getSpacingValue } from "./getSpacingValue"
 export { styleSpacing } from "./styleSpacing"

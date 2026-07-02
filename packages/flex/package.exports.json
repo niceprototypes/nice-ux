@@ -3,5 +3,5 @@
   "description": "Responsive flexbox layout component with breakpoint-aware spacing.",
   "default": "Flex",
   "components": ["Flex"],
-  "services": ["getBreakpointValue", "getGapSize", "getSpacingValue", "styleSpacing", "styleFlex"]
+  "services": ["getGapSize", "getSpacingValue", "styleSpacing", "styleFlex"]
 }
