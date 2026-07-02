@@ -42,8 +42,11 @@ const Icon: React.FC<IconProps> = ({
   style,
   vendor = false,
   vendorComponent: VendorComponent,
+  animation,
+  animationDuration = "base",
 }) => {
-  const spinning = isSpinning(name)
+  // Back-compat: `spinner` still auto-spins when no explicit animation is set.
+  const resolvedAnimation = animation ?? (isSpinning(name) ? "spin" : undefined)
   const withTheme = (el: React.ReactElement) => (theme ? <Theme name={theme}>{el}</Theme> : el)
 
   // Tier 3: direct vendor component — bypass all resolution, apply token styling
@@ -55,7 +58,8 @@ const Icon: React.FC<IconProps> = ({
         $outlined={outlined}
         $strokeWidth={strokeWidth}
         $strokeScaling={strokeScaling}
-        $spinning={spinning}
+        $animation={resolvedAnimation}
+        $animationDuration={animationDuration}
         className={className}
         style={style}
       >
@@ -74,7 +78,8 @@ const Icon: React.FC<IconProps> = ({
         $outlined={outlined}
         $strokeWidth={strokeWidth}
         $strokeScaling={strokeScaling}
-        $spinning={spinning}
+        $animation={resolvedAnimation}
+        $animationDuration={animationDuration}
         className={className}
         style={style}
       >
@@ -94,7 +99,8 @@ const Icon: React.FC<IconProps> = ({
           $outlined={outlined}
           $strokeWidth={strokeWidth}
           $strokeScaling={strokeScaling}
-          $spinning={spinning}
+          $animation={resolvedAnimation}
+          $animationDuration={animationDuration}
           className={className}
           style={style}
         >
@@ -113,7 +119,8 @@ const Icon: React.FC<IconProps> = ({
       $outlined={outlined}
       $strokeWidth={strokeWidth}
       $strokeScaling={strokeScaling}
-      $spinning={spinning}
+      $animation={resolvedAnimation}
+      $animationDuration={animationDuration}
       className={className}
       style={style}
     >

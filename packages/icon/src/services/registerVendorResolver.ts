@@ -1,3 +1,4 @@
+import type * as React from "react"
 import type { VendorResolverType } from "./registerVendorResolver.types"
 
 let resolver: VendorResolverType = null

@@ -1,3 +1,4 @@
+import type * as React from "react"
 import type { FontSizeType, ColorType, ThemeType } from "nice-react-styles"
 import { iconNames } from "../../constants"
 
@@ -11,6 +12,23 @@ export type IconUrlType = string
 export type IconViewBoxType = string
 export type IconClassNameType = string
 export type IconStrokeScalingType = boolean
+
+/**
+ * IconAnimationType
+ *
+ * Named animation to apply to the icon. Prepared for future animations
+ * (e.g. "bounce"); presently the only valid value is "spin".
+ */
+export type IconAnimationType = "spin"
+
+/**
+ * IconAnimationDurationType
+ *
+ * Icon animation speed. Maps to the `--np--icon--animation-duration--*`
+ * tokens, which run one step slower than base element durations
+ * (fast 240ms / base 480ms / slow 960ms).
+ */
+export type IconAnimationDurationType = "fast" | "base" | "slow"
 
 /**
  * IconVendorType
@@ -46,6 +64,10 @@ export interface IconProps {
   vendor?: IconVendorType
   /** Render a custom vendor component with token styling */
   vendorComponent?: IconVendorComponentType
+  /** Named animation to apply (currently only "spin") */
+  animation?: IconAnimationType
+  /** Animation speed — icon duration token variant (default "base") */
+  animationDuration?: IconAnimationDurationType
 }
 
 const IconTypes = {} as const
@@ -63,6 +85,8 @@ namespace IconTypes {
   export type StrokeScaling = IconStrokeScalingType
   export type Vendor = IconVendorType
   export type VendorComponent = IconVendorComponentType
+  export type Animation = IconAnimationType
+  export type AnimationDuration = IconAnimationDurationType
   export type Props = IconProps
 }
 

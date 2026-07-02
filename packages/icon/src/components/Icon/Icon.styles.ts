@@ -1,6 +1,12 @@
 import styled, { css, keyframes } from "styled-components"
 import { getIconToken } from "../../tokens/getIconToken"
-import type { IconSizeType, IconColorType, IconStrokeWidthType } from "./Icon.types"
+import type {
+  IconSizeType,
+  IconColorType,
+  IconStrokeWidthType,
+  IconAnimationType,
+  IconAnimationDurationType,
+} from "./Icon.types"
 
 const spin = keyframes`
   from {
@@ -22,7 +28,8 @@ export const IconWrapperStyled = styled.div.withConfig({
   $outlined?: boolean
   $strokeWidth?: IconStrokeWidthType
   $strokeScaling?: boolean
-  $spinning?: boolean
+  $animation?: IconAnimationType
+  $animationDuration?: IconAnimationDurationType
 }>`
   width: ${({ $size = "base" }) => getIconToken("size", $size)};
   height: ${({ $size = "base" }) => getIconToken("size", $size)};
@@ -35,8 +42,8 @@ export const IconWrapperStyled = styled.div.withConfig({
   img, svg {
     width: 100%;
     height: 100%;
-    ${({ $spinning }) => $spinning && css`
-      animation: ${spin} ${getIconToken("animationDuration")} linear infinite;
+    ${({ $animation, $animationDuration = "base" }) => $animation === "spin" && css`
+      animation: ${spin} ${getIconToken("animationDuration", $animationDuration)} linear infinite;
     `}
   }
 

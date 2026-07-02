@@ -1,3 +1,4 @@
+import type * as React from "react"
 import * as Icons from "nice-icons"
 import { iconNames } from "../constants"
 
