@@ -62,7 +62,6 @@ const StoryFooter: React.FC<StoryFooterProps> = ({ currentId }) => {
         <Button
           aria-label={`Go back to ${back.label}`}
           onClick={() => navigate({ storyId: back.id })}
-          status="secondary"
           icon="arrow-left"
         />
       )}
@@ -70,14 +69,12 @@ const StoryFooter: React.FC<StoryFooterProps> = ({ currentId }) => {
         <Button
           aria-label={`Continue to ${next.label}`}
           onClick={() => navigate({ storyId: next.id })}
-          status="secondary"
           icon="arrow-right"
         />
       )}
       <Button
         aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
         onClick={() => addons.getChannel().emit(UPDATE_DARK_MODE_EVENT_NAME)}
-        status="secondary"
         icon={isDark ? "Sun" : "Moon"}
         iconVendor
       />

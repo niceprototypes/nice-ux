@@ -17,7 +17,7 @@ export const state = {
         {cap(variant)}
       </Button>
       <Button
-        status="secondary"
+        status="primary"
         onClick={() => {}}
         state={variant === "base" ? undefined : variant}
       >
@@ -27,6 +27,6 @@ export const state = {
   ),
   code: (variant) =>
     variant === "base"
-      ? `<Button>\n  {children}\n</Button>`
-      : `<Button state="${variant}">\n  {children}\n</Button>`,
+      ? `<Button />`
+      : `<Button state="${variant}" />`,
 } satisfies ComponentExample
