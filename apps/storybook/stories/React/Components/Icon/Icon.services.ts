@@ -2,6 +2,7 @@ import type {
   IconSizeType,
   IconColorType,
   IconStrokeWidthType,
+  IconAnimationDurationType,
 } from "nice-react-icon"
 
 export const fontSizes = [
@@ -29,3 +30,9 @@ export const strokeWidths = [
   "base",
   "large",
 ] as const satisfies readonly IconStrokeWidthType[]
+
+export const animationDurations = [
+  "fast",
+  "base",
+  "slow",
+] as const satisfies readonly IconAnimationDurationType[]

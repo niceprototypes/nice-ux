@@ -1,0 +1,31 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../../src/components/Story"
+import Icon from "nice-react-icon"
+import StoryDescription from "../../../../src/components/StoryDescription"
+import { DataSectionRow } from "../../../../src/components/DataSection"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataSection"
+
+<Meta title="Components/Icon/animation" />
+
+<StoryHeader title="animation" />
+
+<StoryDescription
+  kind="css"
+  property="animation"
+>
+  Applies a named animation to the icon. Currently the only value is
+  <code>spin</code>; more (e.g. <code>bounce</code>) will follow. When
+  omitted, <code>name="spinner"</code> still spins by default.
+</StoryDescription>
+
+<DataSectionRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+          <Icon
+      name="settings"
+      size="larger"
+      animation="spin"
+    />,
+          `<Icon name="settings" animation="spin" />`,
+        ]}
+/>
