@@ -1,19 +1,20 @@
 import * as React from "react"
 import { StoryHeader } from "../Story"
-import { DataSection } from "../DataSection"
+import { DataSection, withCopyAffordance } from "../DataSection"
+import { ClickToCopy } from "../ClickToCopy"
 import { TokenName } from "../TokenTables"
 import type { DataColumn, DataRowItem, DataTable } from "../DataSection"
 import type { ComponentExample, ExampleVariant } from "./ComponentExamples.types"
 
 /**
- * Columns for a component-example table — the name / example / React-code subset
- * of the token columns (TOKEN_COLUMNS' tokenName, preview, and jsCall), minus the
- * CSS-var and resolved-value columns that only tokens have. Name leads here even
- * though the token tables lead with the preview.
+ * Columns for a component-example table — the example / name / React-code subset
+ * of the token columns (TOKEN_COLUMNS' preview, tokenName, and jsCall), minus the
+ * CSS-var and resolved-value columns that only tokens have. The example (preview)
+ * leads, matching the token tables' preview-first order.
  */
 export const EXAMPLE_COLUMNS: DataColumn[] = [
-  { key: "name", header: "Name", width: "8em", render: "node" },
   { key: "example", header: null, width: "16em", render: "node" },
+  { key: "name", header: "Name", width: "8em", render: "node" },
   { key: "code", header: "React", render: "shiki", language: "tsx" },
 ]
 
@@ -23,7 +24,7 @@ export const variantKey = (item: ExampleVariant): string =>
 
 /**
  * Build the data rows for one example facet. Each row's `values` are
- * index-aligned to EXAMPLE_COLUMNS: [name, example, code]. The default variant
+ * index-aligned to EXAMPLE_COLUMNS: [example, name, code]. The default variant
  * (config `default`, else `"base"`) gets the check + "Default" flag via
  * `TokenName`, matching the token tables.
  */
@@ -34,8 +35,15 @@ export function buildExampleRows(example: ComponentExample): DataRowItem[] {
     return {
       id: variant,
       values: [
-        <TokenName variant={variant} isDefault={variant === defaultVariant} />,
         example.preview(item),
+        // Name cell copies the variant string on click, with the hover copy icon —
+        // the affordance DataSectionCell gives text/shiki cells, applied here since
+        // this is a node cell (TokenName carries the "Default" flag).
+        withCopyAffordance(
+          <ClickToCopy text={variant}>
+            <TokenName variant={variant} isDefault={variant === defaultVariant} />
+          </ClickToCopy>
+        ),
         example.code(item),
       ],
     }

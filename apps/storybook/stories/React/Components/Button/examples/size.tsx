@@ -16,6 +16,6 @@ export const size = {
   ),
   code: (variant) =>
     variant === "base"
-      ? `<Button>\n  {children}\n</Button>`
-      : `<Button size="${variant}">\n  {children}\n</Button>`,
+      ? `<Button />`
+      : `<Button size="${variant}" />`,
 } satisfies ComponentExample

@@ -9,6 +9,7 @@ import Typography from "../../../src/nice/Typography"
 import { parseTokenVarLink, HIGHLIGHT_KEY } from "../../../src/services"
 import { TokenVarLink } from "./ComponentTokensTable.styles"
 import { getComponentTokenGroups, componentLabel, type ComponentPrefixWithTokens, type ComponentTokenRow } from "./componentTokens"
+import { componentExample } from "./componentExamples"
 
 interface ComponentTokensTableProps {
   prefix: ComponentPrefixWithTokens
@@ -94,19 +95,25 @@ const renderValue = (value: string) => {
 }
 
 // The data columns of each component-group table. The group name is the section
-// heading (not a column). Token name and Variable are pinned; Default is equal-flex.
+// heading (not a column). Example mirrors the Tokens/Modules preview column (a
+// live component with only this token varied); Token name and Variable are
+// pinned; Default is equal-flex.
 const COLUMNS: DataColumn[] = [
+  { key: "example", header: null, width: "16em", render: "node" },
   { key: "tokenName", header: "Token name", width: "20em", render: "node" },
   { key: "variable", header: "Variable", width: "36em", render: "node" },
   { key: "value", header: "Default", render: "node" },
 ]
 
-// Build the [tokenName, variable, value] cells for one component-token row.
-// `label` is the displayed token name — a split table passes a shortened label
-// (the redundant property segment dropped, since it becomes the table title).
-const rowCells = (label: string, row: ComponentTokenRow) => ({
+// Build the [example, tokenName, variable, value] cells for one component-token
+// row. `label` is the displayed token name — a split table passes a shortened
+// label (the redundant property segment dropped, since it becomes the table
+// title). The example renders `prefix`'s component with only this row's token
+// varied (or nothing, for groups with no matching prop).
+const rowCells = (prefix: ComponentPrefixWithTokens, label: string, row: ComponentTokenRow) => ({
   id: row.cssVar,
   values: [
+    componentExample(prefix, row.path),
     <TokenName variant={label} isDefault={row.path[row.path.length - 1] === "base"} />,
     <Typography code size="small">{row.cssVar}</Typography>,
     <Typography code size="small">{renderValue(row.value)}</Typography>,
@@ -127,7 +134,7 @@ const rowCells = (label: string, row: ComponentTokenRow) => ({
 export const ComponentTokensTable = ({ prefix, nested = false }: ComponentTokensTableProps) => {
   const groups: DataTable[] = getComponentTokenGroups(prefix).map((group) => {
     if (group.name !== "status") {
-      return { name: group.name, rows: group.rows.map((row) => rowCells(row.variant, row)) }
+      return { name: group.name, rows: group.rows.map((row) => rowCells(prefix, row.variant, row)) }
     }
     // status splits into one sub-table per property type (path[2]); its token
     // name drops to `variant.state` (e.g. primary.base) since the type heads it.
@@ -140,7 +147,7 @@ export const ComponentTokensTable = ({ prefix, nested = false }: ComponentTokens
         }, new Map<string, ComponentTokenRow[]>())
       ).map(([type, rows]) => ({
         name: type,
-        rows: rows.map((row) => rowCells(`${row.path[1]}.${row.path[row.path.length - 1]}`, row)),
+        rows: rows.map((row) => rowCells(prefix, `${row.path[1]}.${row.path[row.path.length - 1]}`, row)),
       })),
     }
   })

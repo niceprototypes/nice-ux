@@ -22,12 +22,14 @@ interface TokenNameProps {
  */
 export const TokenName: React.FC<TokenNameProps> = ({ variant, isDefault = variant === "base" }) =>
   isDefault ? (
-    <Tooltip delayShow={500} content="Default">
-      <Flex direction="row" alignItems="center">
+    <Flex direction="row" alignItems="center">
+      {/* Tooltip scoped to the check icon only — hovering the variant name should
+          not surface the "Default" tooltip. */}
+      <Tooltip delayShow={500} content="Default">
         <Icon name="check" size="smaller" color="lighter" />
-        <Typography code size="small" color="lighter">&nbsp;{variant}</Typography>
-      </Flex>
-    </Tooltip>
+      </Tooltip>
+      <Typography code size="small" color="lighter">&nbsp;{variant}</Typography>
+    </Flex>
   ) : (
     <Typography code size="small">{variant}</Typography>
   )

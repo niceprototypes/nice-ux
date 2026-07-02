@@ -1,32 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import { StoryHeader } from "../../../../src/components/Story"
-import StoryDescription from "../../../../src/components/StoryDescription"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataSection"
-import { DataSection } from "../../../../src/components/DataSection"
-import DemoDots from "../../../../src/components/DemoDots"
-import { twoDots } from "./Flex.services"
+import { ComponentExampleStory } from "../../../../src/components/ComponentExamples"
+import { flexExamples } from "./examples"
 
 <Meta title="Components/Flex/spacing" />
 
-<StoryHeader title="spacing" />
-
-<StoryDescription property="padding">
-  Applies inner spacing to the flex container using gap tokens.
-</StoryDescription>
-
-<DataSection
-  showHeader={false}
-  columns={DEMO_CODE_COLUMNS}
-  tables={[{ rows: ["smaller", "small", "base", "large", "larger"].map(value => ({
-    id: String(value),
-    values: [
-          <DemoDots
-          spacing={value}
-          dots={twoDots}
-          bordered
-        />,
-          `<Flex spacing="${value}">\n  {children}\n</Flex>`,
-        ],
-  })) }]}
-/>
-
+<ComponentExampleStory example={flexExamples.spacing} />

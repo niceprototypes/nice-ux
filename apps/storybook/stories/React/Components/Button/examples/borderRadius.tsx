@@ -15,6 +15,6 @@ export const borderRadius = {
   ),
   code: (variant) =>
     variant === "base"
-      ? `<Button>\n  {children}\n</Button>`
-      : `<Button borderRadius="${variant}">\n  {children}\n</Button>`,
+      ? `<Button />`
+      : `<Button borderRadius="${variant}" />`,
 } satisfies ComponentExample

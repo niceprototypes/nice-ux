@@ -22,6 +22,6 @@ export const icon = {
     ),
   code: (item) =>
     item.children
-      ? `<Button icon="${item.icon}">\n  {children}\n</Button>`
+      ? `<Button icon="${item.icon}" />`
       : `<Button icon="${item.icon}" aria-label="${item.ariaLabel}" />`,
 } satisfies ComponentExample

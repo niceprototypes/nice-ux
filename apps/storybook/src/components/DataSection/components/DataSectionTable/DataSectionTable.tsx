@@ -21,9 +21,14 @@ export const DataSectionTable = ({
   const isH2 = level === "h2"
   const isH3 = level === "h3"
 
+  // A leaf table (renders a header row) shows its own title inside the header's
+  // first cell; a set/cluster table keeps its title as a standalone heading.
+  const titleInHeader = table.rows != null && showHeader && table.name != null
+  const showHeading = table.name != null && !titleInHeader
+
   return (
     <Flex direction="column">
-      {table.name != null ? (
+      {showHeading ? (
         <Flex direction="column" spacing={isH2 ? "none none larger" : isH3 ? "large none" : undefined}>
           <Typography
             as={level}
@@ -36,7 +41,7 @@ export const DataSectionTable = ({
       <Flex direction="column" spacing="none none larger">
         {table.rows ? (
           <Flex direction="column">
-            {showHeader ? <DataSectionHeader columns={columns} /> : null}
+            {showHeader ? <DataSectionHeader columns={columns} title={titleInHeader ? table.name : undefined} /> : null}
             {table.rows.map(item => (
               <DataSectionRow
                 key={item.id}

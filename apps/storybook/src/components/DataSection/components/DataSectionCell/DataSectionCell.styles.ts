@@ -24,31 +24,15 @@ export const CopyAffordance = styled(Flex).attrs({
     min-width: 0;
   }
 
-  /* The copy icon is stroke-drawn (outlined=false), so recolor its stroke. */
+  /* Only the trailing copy icon fades in on hover. Scope to the last child so a
+     wrapped node's own svg (e.g. TokenName's "Default" check) is never hidden. */
   ${getBreakpoint("tablet+")} {
-
-    svg {
-      path,
-      circle,
-      rect,
-      line,
-      polyline,
-      polygon,
-      ellipse {
-        opacity: 0;
-      }
+    > *:last-child {
+      opacity: 0;
     }
-    
-    &:hover svg {
-      path,
-      circle,
-      rect,
-      line,
-      polyline,
-      polygon,
-      ellipse {
-        opacity: 1;
-      }
+
+    &:hover > *:last-child {
+      opacity: 1;
     }
   }
 `

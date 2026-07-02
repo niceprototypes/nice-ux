@@ -1,50 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import { StoryHeader } from "../../../../src/components/Story"
-import Flex from "nice-react-flex"
-import { getToken } from "nice-react-styles"
-import Typography from "../../../../src/nice/Typography"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataSection"
-import { DataSection } from "../../../../src/components/DataSection"
-import DemoDots from "../../../../src/components/DemoDots"
-import { twoDots } from "./Flex.services"
+import { ComponentExampleStory } from "../../../../src/components/ComponentExamples"
+import { flexExamples } from "./examples"
 
 <Meta title="Components/Flex/type" />
 
-<StoryHeader title="type" />
-
-<Typography color="light">
-  Switches the spacing prop between applying inner <code>padding</code> or outer{" "}
-  <code>margin</code>.
-</Typography>
-
-<DataSection
-  showHeader={false}
-  columns={DEMO_CODE_COLUMNS}
-  tables={[{ rows: ["padding", "margin"].map(value => ({
-    id: String(value),
-    values: [
-          <Flex direction="column">
-          <Flex
-            spacing="small"
-            style={{
-              border: `${getToken("borderWidth")} solid ${value === "margin" ? getToken("borderColor") : getToken("borderColor", "dark")}`,
-              borderRadius: `calc(${getToken("cellHeight", "smaller")} / 2 + 2px)`,
-            }}
-          >
-            <Flex
-              spacing="small"
-              type={value}
-              style={{
-                border: `${getToken("borderWidth")} solid ${value === "margin" ? getToken("borderColor", "dark") : "transparent"}`,
-                borderRadius: `calc(${getToken("cellHeight", "smaller")} / 2 + 2px)`,
-              }}
-            >
-              <DemoDots dots={twoDots} />
-            </Flex>
-          </Flex>
-        </Flex>,
-          `<Flex type="${value}">\n  {children}\n</Flex>`,
-        ],
-  })) }]}
-/>
-
+<ComponentExampleStory example={flexExamples.type} />

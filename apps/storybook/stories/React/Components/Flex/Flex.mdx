@@ -1,11 +1,8 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
-import Typography from "../../../../src/nice/Typography"
-import { DataSectionRow } from "../../../../src/components/DataSection"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataSection"
-import DemoDots from "../../../../src/components/DemoDots"
-import { twoDots } from "./Flex.services"
 import Install from "../../../../src/components/Install"
+import { ComponentExamples } from "../../../../src/components/ComponentExamples"
+import { flexExampleList } from "./examples"
 
 <Meta title="Components/Flex" />
 
@@ -32,17 +29,4 @@ import Flex from "nice-react-flex"
 
 ---
 
-## Basic
-
-<Typography color="light">
-  Default flex container — renders children in an inline row with no gap.
-</Typography>
-
-<DataSectionRow
-  columns={DEMO_CODE_COLUMNS}
-  values={[
-          <DemoDots dots={twoDots} />,
-          `<Flex>{children}</Flex>`,
-        ]}
-/>
-
+<ComponentExamples examples={flexExampleList} />
