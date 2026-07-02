@@ -5,7 +5,7 @@ import { IconNameType } from "nice-react-icon"
 /**
  * Border radius variants for the button
  */
-export type ButtonBorderRadiusType = "small" | "base" | "large"
+export type ButtonBorderRadiusType = "none" | "small" | "base" | "large" | "rounded"
 
 /**
  * ButtonBorderColorType
@@ -22,9 +22,10 @@ export type ButtonBorderColorType = BorderColorType
 export type ButtonStateType = "base" | "disabled" | "error" | "success" | "warning"
 
 /**
- * Visual status/variant of the button
+ * Visual status/variant of the button. `base` is the default (formerly
+ * `secondary`); `primary` must be passed explicitly for the filled/emphasis look.
  */
-export type ButtonStatusType = "primary" | "secondary"
+export type ButtonStatusType = "base" | "primary"
 
 /**
  * ButtonWeightType

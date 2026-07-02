@@ -27,7 +27,7 @@ const Button: React.FC<ButtonProps> = ({
   onMouseLeave,
   size = "base",
   state = "base",
-  status = "primary",
+  status = "base",
   style,
   target,
   type = "button",
@@ -38,7 +38,7 @@ const Button: React.FC<ButtonProps> = ({
   const [isPressed, setIsPressed] = React.useState(false)
   const disabled = isDisabled(state)
   // getInvertedMode(theme, status) was a no-op when status was defined (always
-  // returned the original theme). Button always passes status (default "primary"),
+  // returned the original theme). Button always passes status (default "base"),
   // so the call collapsed to passing theme through unchanged.
   const invertedTheme = theme
   const square = isSquare(icon, children)

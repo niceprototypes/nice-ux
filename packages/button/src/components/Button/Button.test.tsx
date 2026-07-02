@@ -75,7 +75,7 @@ describe("Button", () => {
     const { rerender } = render(<Button onClick={mockOnClick} status="primary">Primary</Button>)
     expect(screen.getByRole("button")).toBeInTheDocument()
 
-    rerender(<Button onClick={mockOnClick} status="secondary">Secondary</Button>)
+    rerender(<Button onClick={mockOnClick} status="base">Base</Button>)
     expect(screen.getByRole("button")).toBeInTheDocument()
   })
 
