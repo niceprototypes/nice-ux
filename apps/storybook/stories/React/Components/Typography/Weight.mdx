@@ -2,8 +2,8 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Typography from "../../../../src/nice/Typography"
 import StoryDescription from "../../../../src/components/StoryDescription"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataSection"
-import { DataSection } from "../../../../src/components/DataSection"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+import { DataTable } from "../../../../src/components/DataTable"
 import { toSource } from "../../../../src/services"
 
 <Meta title="Components/Typography/weight" />
@@ -14,7 +14,7 @@ import { toSource } from "../../../../src/services"
   Sets the font thickness using fontWeight tokens.
 </StoryDescription>
 
-<DataSection
+<DataTable
   showHeader={false}
   columns={DEMO_CODE_COLUMNS}
   tables={[{ rows: ["light", "base", "medium", "semibold", "bold", "extrabold", "black"].map(

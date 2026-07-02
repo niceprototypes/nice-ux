@@ -2,8 +2,8 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Input from "nice-react-input"
 import Typography from "../../../../src/nice/Typography"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataSection"
-import { DataSection } from "../../../../src/components/DataSection"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+import { DataTable } from "../../../../src/components/DataTable"
 
 export const states = ["base", "disabled", "error", "success", "warning"]
 
@@ -24,7 +24,7 @@ export const stateCode = (s) =>
   <code>disabled</code> state also disables the underlying input element.
 </Typography>
 
-<DataSection
+<DataTable
   showHeader={false}
   columns={DEMO_CODE_COLUMNS}
   tables={[{ rows: states.map((state) => ({

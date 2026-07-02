@@ -150,6 +150,19 @@ ntk --build-all
 ntk --build-all --dry-run
 ```
 
+### --build-icons
+
+The targeted subset of `--build-all` for an icon-asset change. Rebuilds `nice-icons` and every package that transitively depends on it — today `nice-react-icon`, `nice-react-icon-vendor`, and `nice-react-button` — in tier order, skipping the rest of the workspace. The affected set is resolved from the same reverse `file:`-dependency graph `--publish` uses, so it stays in sync with the publish cascade.
+
+Use after editing an SVG in `nice-icons` (or anything else that only changes the icon chain) when a full `--build-all` is more than you need.
+
+```bash
+ntk --build-icons
+
+# Preview the resolved build set without running builds
+ntk --build-icons --dry-run
+```
+
 ### --reset
 
 Chains the workspace triad in the correct order: `--build-all → --dedupe → --clean`. Use after any refactor that touches a foundation package (token renames, type narrowing in `nice-styles`, etc.). The order matters — rebuilds first so the new dists exist; dedupe second so any duplicate singletons that crept in during the build cascade are removed; clean last so dev-server caches are flushed and processes are killed before the next restart.

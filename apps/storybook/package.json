@@ -5,7 +5,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "clean:cache": "node ../toolkit/nice-toolkit --clean-caches",
+    "clean:cache": "node ../toolkit/nice-toolkit --clean",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "prestorybook": "node -e \"const fs=require('fs');for(const d of ['node_modules/.cache','node_modules/.vite'])fs.rmSync(d,{recursive:true,force:true})\"",
@@ -20,6 +20,7 @@
     "@storybook/addon-links": "^10.2.19",
     "@storybook/react-vite": "^10.2.19",
     "lucide-react": "^0.545.0",
+    "nice-icons": "file:../icons",
     "nice-react-button": "file:../react-button",
     "nice-react-flex": "file:../react-flex",
     "nice-react-icon": "file:../react-icon",

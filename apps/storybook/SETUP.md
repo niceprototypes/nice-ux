@@ -20,7 +20,6 @@ All Nice packages are installed from npm:
 - nice-react-tile ^2.0.6
 - nice-react-button ^3.2.3
 - nice-react-icon ^1.1.2
-- nice-react-device-detector ^1.1.0
 - nice-css-variables ^1.0.4
 
 ### 3. CSS Variables Integration
@@ -89,15 +88,6 @@ All Nice packages are installed from npm:
    - Custom SVG support
    - Use cases
 
-#### Hook Stories
-
-6. **useDeviceDetector.stories.tsx** - 5 stories covering:
-   - Basic device detection
-   - Debug mode
-   - Responsive layouts
-   - Code examples
-   - Detection criteria
-
 #### Documentation Pages
 
 7. **CSSVariables.mdx** - Complete documentation of:
@@ -138,7 +128,6 @@ niceprototypes-storybook/
 │   ├── Tile.stories.tsx     ✅ 10 stories
 │   ├── Button.stories.tsx   ✅ 20 stories
 │   ├── Icon.stories.tsx     ✅ 15 stories
-│   ├── useDeviceDetector.stories.tsx ✅ 5 stories
 │   ├── CSSVariables.mdx     ✅ Documentation
 │   └── NpmLink.mdx          ✅ Documentation
 ├── package.json             ✅ All dependencies
@@ -181,7 +170,6 @@ npm run build-storybook
 | nice-react-tile            | 10      | ✅ Complete |
 | nice-react-button          | 20      | ✅ Complete |
 | nice-react-icon            | 15      | ✅ Complete |
-| nice-react-device-detector | 5       | ✅ Complete |
 | nice-css-variables         | 1 doc   | ✅ Complete |
 | nice-toolkit               | 1 doc   | ✅ Complete |
 
@@ -245,7 +233,6 @@ nice-toolkit ../nice-react-typography
 nice-toolkit ../nice-react-tile
 nice-toolkit ../nice-react-button
 nice-toolkit ../nice-react-icon
-nice-toolkit ../nice-react-device-detector
 nice-toolkit ../nice-styles
 ```
 
@@ -314,7 +301,6 @@ nice-toolkit ../nice-react-typography
 nice-toolkit ../nice-react-button
 nice-toolkit ../nice-react-icon
 nice-toolkit ../nice-react-tile
-nice-toolkit ../nice-react-device-detector
 nice-toolkit ../nice-styles
 
 # 2. Start watch mode ONLY for packages that need it
@@ -364,8 +350,6 @@ Storybook
 │   ├── Tile (10 stories)
 │   ├── Button (20 stories)
 │   └── Icon (15 stories)
-├── Bindings
-│   └── useDeviceDetector (5 stories)
 └── Documentation
     ├── CSS Variables
     └── nice-toolkit

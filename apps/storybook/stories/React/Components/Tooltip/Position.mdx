@@ -3,8 +3,8 @@ import { StoryHeader } from "../../../../src/components/Story"
 import Tooltip from "nice-react-tooltip"
 import Button from "nice-react-button"
 import Typography from "../../../../src/nice/Typography"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataSection"
-import { DataSection } from "../../../../src/components/DataSection"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+import { DataTable } from "../../../../src/components/DataTable"
 
 <Meta title="Components/Tooltip/position" />
 
@@ -14,7 +14,7 @@ import { DataSection } from "../../../../src/components/DataSection"
   Side of the trigger the bubble is placed on. Default <code>"top"</code>.
 </Typography>
 
-<DataSection
+<DataTable
   showHeader={false}
   columns={DEMO_CODE_COLUMNS}
   tables={[{ rows: ["top", "bottom", "left", "right"].map(position => ({

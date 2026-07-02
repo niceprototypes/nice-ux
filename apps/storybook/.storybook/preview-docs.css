@@ -31,9 +31,9 @@
 
   &.sbdocs-content {
     margin-right: auto;
+    max-width: 100%;
 
     /* Inherit text color into headings and text-level elements */
-    &,
     & :where(
       h1:not(.sb-anchor, .sb-unstyled, .sb-unstyled h1),
       h2:not(.sb-anchor, .sb-unstyled, .sb-unstyled h2),
@@ -44,10 +44,10 @@
       p, li, td, th, code, blockquote
     ) {
       color: inherit;
+      max-width: 720px;
     }
 
     /* Inherit the token font-family into headings and text (not code) */
-    &,
     & :where(
       h1:not(.sb-anchor, .sb-unstyled, .sb-unstyled h1),
       h2:not(.sb-anchor, .sb-unstyled, .sb-unstyled h2),
@@ -96,7 +96,10 @@
   /* ── 3. Vertical rhythm (top-level blocks) ────────────────────────── */
 
   > h2,
-  > h3 {
+  > h3,
+  > h4,
+  > h5,
+  > h6 {
     font-weight: var(--np--font-weight--semibold);
   }
 

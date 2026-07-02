@@ -1,10 +1,10 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../src/components/Story"
-import { TokenTables } from "../../../src/components/TokenTables"
+import { ModuleTokenTable } from "../../../src/components/DataTable/tables/ModuleTokenTable"
 import { tokenTables } from "./tables"
-import Flex from "nice-react-flex"
+import PreviewCell from "../../../src/components/PreviewCell"
 import { getHSLA, getToken } from "nice-react-styles"
-import { DataSection } from "../../../src/components/DataSection"
+import { DataTable } from "../../../src/components/DataTable"
 
 <Meta title="Tokens/Modules/Colors" />
 
@@ -13,7 +13,7 @@ import { DataSection } from "../../../src/components/DataSection"
 
 <StoryHeader title="Colors" description="Text, background, and border color tokens. Each section is its own module; deep links from component tokens land on the matching section." />
 
-<TokenTables
+<ModuleTokenTable
   sections={[
     { group: tokenTables.color },
     { group: tokenTables.backgroundColor },
@@ -51,27 +51,23 @@ export const hslaExamples = [
 
 ## getHSLA
 
-<DataSection
+<DataTable
   inline
-  showHeader={false}
   columns={[
-    { key: "swatch", render: "node", width: "16em" },
-    { key: "label", render: "text", size: "small", width: "20em" },
-    { key: "call", render: "shiki", language: "tsx" },
-    { key: "result", render: "text", code: true, size: "small", color: "lighter" },
+    { key: "swatch", header: null, width: "12em", render: "node" },
+    { key: "label", header: "Description", width: "8em", render: "text", size: "small" },
+    { key: "call", header: "JS", render: "shiki", language: "tsx" },
+    { key: "result", header: "Result", render: "text", code: true, size: "small", color: "lighter", clickToCopy: true },
   ]}
   tables={[{ rows: hslaExamples.map(({ label, call, options }) => {
     const result = getHSLA(options)
     return {
       id: label,
       values: [
-        <Flex
-          style={{
-            width: getToken("cellHeight", "smaller"),
-            height: getToken("cellHeight", "smaller"),
-            backgroundColor: result,
-            borderRadius: "50%",
-          }}
+        <PreviewCell
+          backgroundColor={result}
+          height={getToken("cellHeight", "large")}
+          borderRadius={getToken("borderRadius", "small")}
         />,
         label,
         call,

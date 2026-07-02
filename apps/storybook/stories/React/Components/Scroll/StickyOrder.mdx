@@ -3,8 +3,8 @@ import { StoryHeader } from "../../../../src/components/Story"
 import Flex from "nice-react-flex"
 import { getToken } from "nice-react-styles"
 import Typography from "../../../../src/nice/Typography"
-import { DataSectionRow } from "../../../../src/components/DataSection"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataSection"
+import { DataTableRow } from "../../../../src/components/DataTable"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 
 <Meta title="Components/Scroll/Sticky order" />
 
@@ -15,7 +15,7 @@ import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataSection"
   numbers appear above higher numbers.
 </Typography>
 
-<DataSectionRow
+<DataTableRow
   fullWidth
   columns={DEMO_CODE_COLUMNS}
   values={[

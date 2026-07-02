@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
-import { IconsDataTable } from "../../src/components/IconsDataTable"
+import { IconTable } from "../../src/components/DataTable/tables/IconTable"
 import Callout from "../../src/components/Callout/index.ts"
 import { CodeBlock } from "../../src/components/CodeBlock"
 import Flex from "nice-react-flex"
@@ -92,7 +92,7 @@ const CheckFill = getIcon("check", true)    // outlined → fill variant
 
 ## Browse
 
-<IconsDataTable
+<IconTable
   codeColumns={[
     { header: "JS", code: name => `getIcon("${name}")`, width: "16em" },
     { header: "React", code: name => `<Icon name="${name}" />`, width: "16em" },

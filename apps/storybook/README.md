@@ -38,10 +38,6 @@ This Storybook documents the following packages:
 - **nice-react-button** - Feature-rich button component
 - **nice-react-icon** - Icon library with 30+ SVG icons
 
-### React Bindings
-
-- **nice-react-device-detector** - Mobile device detection
-
 ### Utilities
 
 - **nice-css-variables** - CSS design tokens
@@ -57,7 +53,6 @@ stories/
 ├── Tile.stories.tsx              # Tile component examples
 ├── Button.stories.tsx            # Button component examples
 ├── Icon.stories.tsx              # Icon component examples
-├── useDeviceDetector.stories.tsx # Device detector hook examples
 ├── CSSVariables.mdx              # CSS variables documentation
 └── NpmLink.mdx                   # nice-toolkit documentation
 ```
@@ -143,7 +138,6 @@ The Storybook uses these packages from npm:
     "nice-react-tile": "^2.0.6",
     "nice-react-button": "^3.2.3",
     "nice-react-icon": "^1.1.2",
-    "nice-react-device-detector": "^1.1.0",
     "nice-css-variables": "^1.0.4"
   }
 }
@@ -192,7 +186,6 @@ const sourceAliasablePackages = [
   "nice-react-flex",
   "nice-react-typography",
   "nice-react-styles",
-  "nice-react-device-detector",
   "nice-react-button",
 ]
 ```
@@ -214,7 +207,7 @@ npm run dev
 
 | Category           | HMR Behavior               | Packages                                                                                                 |
 | ------------------ | -------------------------- | -------------------------------------------------------------------------------------------------------- |
-| **Source-aliased** | True HMR — state preserved | nice-react-flex, nice-react-typography, nice-react-styles, nice-react-device-detector, nice-react-button |
+| **Source-aliased** | True HMR — state preserved | nice-react-flex, nice-react-typography, nice-react-styles, nice-react-button |
 | **Dist-watched**   | Full reload — automatic    | nice-react-icon (uses SVGR transforms)                                                                   |
 
 #### Editing Source-Aliased Packages
@@ -326,10 +319,6 @@ npm run dev
 - Tile: http://localhost:6006/?path=/docs/components-tile--docs
 - Button: http://localhost:6006/?path=/docs/components-button--docs
 - Icon: http://localhost:6006/?path=/docs/components-icon--docs
-
-### Bindings
-
-- useDeviceDetector: http://localhost:6006/?path=/docs/hooks-usedevicedetector--docs
 
 ### Documentation
 

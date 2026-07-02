@@ -1,7 +1,6 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../src/components/Story"
-import { ComponentTokensTable } from "./ComponentTokensTable"
-import { componentPrefixesWithTokens } from "./componentTokens"
+import { ComponentTokenTable, componentPrefixesWithTokens } from "../../../src/components/DataTable/tables/ComponentTokenTable"
 
 <Meta
   title="Tokens/Components"
@@ -16,5 +15,5 @@ import { componentPrefixesWithTokens } from "./componentTokens"
 />
 
 {componentPrefixesWithTokens.map((prefix) => (
-  <ComponentTokensTable key={prefix} prefix={prefix} nested />
+  <ComponentTokenTable key={prefix} prefix={prefix} nested />
 ))}

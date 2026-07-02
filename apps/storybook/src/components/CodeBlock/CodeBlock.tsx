@@ -40,7 +40,7 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
   showLabel = true,
   copyOnClick = true,
   inline = false,
-  fit = false,
+  fit = true,
   margin = "large",
 }) => {
   return (

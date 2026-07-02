@@ -2,8 +2,8 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Lightbox from "nice-react-lightbox"
 import Typography from "../../../../src/nice/Typography"
-import { DataSectionRow } from "../../../../src/components/DataSection"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataSection"
+import { DataTableRow } from "../../../../src/components/DataTable"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import { resolveVendorImage } from "nice-react-image-vendor"
 import { DemoImage } from "./Lightbox.styles"
 import Install from "../../../../src/components/Install"
@@ -41,7 +41,7 @@ import Lightbox from "nice-react-lightbox"
   Wraps a thumbnail that expands into a fullscreen overlay when clicked.
 </Typography>
 
-<DataSectionRow
+<DataTableRow
   columns={DEMO_CODE_COLUMNS}
   values={[
           <Lightbox

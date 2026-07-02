@@ -4,8 +4,8 @@ import { ScrollProvider } from "nice-react-scroll"
 import Flex from "nice-react-flex"
 import { getToken } from "nice-react-styles"
 import Typography from "../../../../src/nice/Typography"
-import { DataSectionRow } from "../../../../src/components/DataSection"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataSection"
+import { DataTableRow } from "../../../../src/components/DataTable"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import { ScrollPositionDisplay } from "./Scroll.services"
 
 <Meta title="Components/Scroll/useScroll" />
@@ -17,7 +17,7 @@ import { ScrollPositionDisplay } from "./Scroll.services"
   event via the shared <code>ScrollProvider</code>'s RAF batch.
 </Typography>
 
-<DataSectionRow
+<DataTableRow
   fullWidth
   columns={DEMO_CODE_COLUMNS}
   values={[

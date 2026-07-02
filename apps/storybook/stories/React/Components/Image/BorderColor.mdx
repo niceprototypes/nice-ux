@@ -2,8 +2,8 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Image from "nice-react-image"
 import StoryDescription from "../../../../src/components/StoryDescription"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataSection"
-import { DataSection } from "../../../../src/components/DataSection"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+import { DataTable } from "../../../../src/components/DataTable"
 import { toSource } from "../../../../src/services"
 
 <Meta title="Components/Image/borderColor" />
@@ -15,7 +15,7 @@ import { toSource } from "../../../../src/services"
   when <code>bordered</code> is true.
 </StoryDescription>
 
-<DataSection
+<DataTable
   showHeader={false}
   columns={DEMO_CODE_COLUMNS}
   tables={[{ rows: ["base", "dark", "darker"].map(borderColor => {

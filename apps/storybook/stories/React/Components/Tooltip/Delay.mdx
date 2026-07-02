@@ -3,8 +3,8 @@ import { StoryHeader } from "../../../../src/components/Story"
 import Tooltip from "nice-react-tooltip"
 import Button from "nice-react-button"
 import Typography from "../../../../src/nice/Typography"
-import { DataSectionRow } from "../../../../src/components/DataSection"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataSection"
+import { DataTableRow } from "../../../../src/components/DataTable"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 
 <Meta title="Components/Tooltip/delay" />
 
@@ -17,7 +17,7 @@ import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataSection"
   opposite event fires first, so a brief pass never flashes the tooltip.
 </Typography>
 
-<DataSectionRow
+<DataTableRow
   columns={DEMO_CODE_COLUMNS}
   values={[
     <Tooltip content="Appears after 600ms" delayShow={500}>
@@ -27,7 +27,7 @@ import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataSection"
   ]}
 />
 
-<DataSectionRow
+<DataTableRow
   columns={DEMO_CODE_COLUMNS}
   values={[
     <Tooltip content="Lingers 600ms after leave" delayHide={600}>

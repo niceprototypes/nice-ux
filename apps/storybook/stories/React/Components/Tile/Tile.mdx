@@ -2,8 +2,8 @@ import { Meta, Canvas, Controls } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Tile from "nice-react-tile"
 import Typography from "../../../../src/nice/Typography"
-import { DataSectionRow } from "../../../../src/components/DataSection"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataSection"
+import { DataTableRow } from "../../../../src/components/DataTable"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import * as TileStories from "./Tile.stories"
 import Install from "../../../../src/components/Install"
 
@@ -33,7 +33,7 @@ import Tile from "nice-react-tile"
   Default tile container with built-in spacing and max-width constraints.
 </Typography>
 
-<DataSectionRow
+<DataTableRow
   fullWidth
   columns={DEMO_CODE_COLUMNS}
   values={[
