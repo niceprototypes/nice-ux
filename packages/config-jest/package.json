@@ -1,0 +1,51 @@
+{
+  "name": "nice-config-jest",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Shared Jest configuration for the nice-* ecosystem",
+  "exports": {
+    "./react": "./src/react.js",
+    "./css-mock": "./src/css-mock.js"
+  },
+  "files": [
+    "src"
+  ],
+  "keywords": [
+    "nice",
+    "configuration",
+    "jest"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niceprototypes/nice-config-jest.git"
+  },
+  "bugs": {
+    "url": "https://github.com/niceprototypes/nice-config-jest/issues"
+  },
+  "homepage": "https://github.com/niceprototypes/nice-config-jest#readme",
+  "peerDependencies": {
+    "@testing-library/jest-dom": ">=6.0.0",
+    "jest": ">=29.0.0",
+    "jest-environment-jsdom": ">=29.0.0",
+    "ts-jest": ">=29.0.0",
+    "typescript": ">=6.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@testing-library/jest-dom": {
+      "optional": true
+    },
+    "jest": {
+      "optional": true
+    },
+    "jest-environment-jsdom": {
+      "optional": true
+    },
+    "ts-jest": {
+      "optional": true
+    },
+    "typescript": {
+      "optional": true
+    }
+  }
+}
