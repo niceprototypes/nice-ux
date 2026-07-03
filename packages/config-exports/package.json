@@ -1,0 +1,40 @@
+{
+  "name": "nice-config-exports",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Package export generator (nice-generate-exports) for the nice-* ecosystem",
+  "bin": {
+    "nice-generate-exports": "./dist/cli.js"
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./schema.json": "./src/schema.json"
+  },
+  "files": [
+    "dist",
+    "src/schema.json"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "nice",
+    "configuration",
+    "exports",
+    "codegen"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niceprototypes/nice-config-exports.git"
+  },
+  "bugs": {
+    "url": "https://github.com/niceprototypes/nice-config-exports/issues"
+  },
+  "homepage": "https://github.com/niceprototypes/nice-config-exports#readme",
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "typescript": "^6.0.0"
+  }
+}
