@@ -13,9 +13,11 @@ import type { DataTableRowsProps } from "./DataTableRows.types"
 export const DataTableRows = ({
   table,
   columns,
+  columnWidths,
   depth = 0,
-  inline = false,
   showHeader = true,
+  rowLines = true,
+  showLines = true,
 }: DataTableRowsProps) => {
   const level = LEVELS[Math.min(depth, 2)]
   const isH2 = level === "h2"
@@ -38,17 +40,19 @@ export const DataTableRows = ({
           </Typography>
         </Flex>
       ) : null}
-      <Flex direction="column" spacing="none none larger">
+      <Flex direction="column">
         {table.rows ? (
           <Flex direction="column">
-            {showHeader ? <DataTableHeader columns={columns} title={titleInHeader ? table.name : undefined} /> : null}
+            {showHeader ? <DataTableHeader columns={columns} columnWidths={columnWidths} title={titleInHeader ? table.name : undefined} /> : null}
             {table.rows.map(item => (
               <DataTableRow
                 key={item.id}
                 columns={columns}
+                columnWidths={columnWidths}
                 values={item.values}
-                inline={inline}
                 highlighted={item.highlighted}
+                rowLines={rowLines}
+                showLines={showLines}
               />
             ))}
           </Flex>
@@ -58,13 +62,14 @@ export const DataTableRows = ({
             key={tableKey(child, index)}
             table={child}
             columns={columns}
+            columnWidths={columnWidths}
             depth={depth + 1}
-            inline={inline}
             showHeader={showHeader}
+            rowLines={rowLines}
+            showLines={showLines}
           />
         ))}
       </Flex>
-      {isH2 && <hr />}
     </Flex>
   )
 }

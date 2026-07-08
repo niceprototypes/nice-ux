@@ -1,0 +1,62 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import HorizontalRule from "../../src/components/HorizontalRule"
+
+<Meta
+  title="Toolkit/2. Dedupe"
+  name="Docs"
+/>
+
+<StoryHeader title="Dedupe" />
+
+Remove duplicate singleton packages (react, styled-components, etc.) from linked
+packages' `node_modules`. This is the fix for **"Invalid hook call"** and
+styled-components context mismatches — both caused by more than one copy of a
+singleton being loaded at runtime.
+
+```bash
+# Recurse across every file: linked package
+ntk --dedupe
+
+# Scope to one package
+ntk --dedupe ../react-button
+
+# Preview without deleting anything
+ntk --dedupe --dry-run
+```
+
+<HorizontalRule />
+
+## What it removes
+
+By default these are stripped from each linked package so the app's copy is the
+only one loaded:
+
+```bash
+• react
+• react-dom
+• styled-components
+• @types/react
+• @types/react-dom
+```
+
+Override or extend the set per run with `--exclude` / `--add-exclude` (see
+[Linking](/docs/toolkit-1-linking--docs)).
+
+<HorizontalRule />
+
+## When to run it
+
+- After `npm install` inside a linked package (install re-adds the duplicates).
+- After changing any `package.json` dependencies.
+- Any time you hit "Invalid hook call" or a styled-components theme/context
+  mismatch while developing against linked packages.
+
+```bash
+# Typical sequence after touching a linked package's deps
+npm install
+ntk --dedupe
+```
+
+`--dedupe` is also the second step of the workspace triad and of `--reset` — see
+[Reset & Caches](/docs/toolkit-5-reset-caches--docs).

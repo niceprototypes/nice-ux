@@ -7,12 +7,14 @@ import type { DataTableCellProps } from "./DataTableCell.types"
 
 /**
  * One cell, rendered per its column's policy:
- * - `"shiki"`: a Shiki CodeBlock that copies on click (with an inline copy icon).
+ * - `"shiki"`: a Shiki CodeBlock that copies on click (with an inline copy
+ *   icon). Table code is always `inline` — a card would break the cell grid —
+ *   so there is no block option here.
  * - `"text"`: a `<Typography>` styled by `code`/`size`/`color`; `clickToCopy`
  *   on a string value copies on click with the same copy-icon affordance.
  * - `"node"` (default): the value rendered as-is.
  */
-export const DataTableCell: React.FC<DataTableCellProps> = ({ column, value, inline = false }) => {
+export const DataTableCell: React.FC<DataTableCellProps> = ({ column, value }) => {
   if (column.render === "shiki") {
     // clickToCopy gates both the copy handler (and its pointer cursor, via
     // CodeBlock's copyOnClick) and the copy-icon affordance. Defaults on.
@@ -21,7 +23,7 @@ export const DataTableCell: React.FC<DataTableCellProps> = ({ column, value, inl
       <CodeBlock
         code={String(value)}
         language={column.language ?? "tsx"}
-        inline={inline}
+        inline
         margin="none"
         copyOnClick={copy}
       />

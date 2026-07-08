@@ -5,11 +5,11 @@ import { DataTableCell } from "../DataTableCell/DataTableCell"
 import type { DataTableRowProps } from "./DataTableRow.types"
 
 /** One row — a responsive `RowFlex` with a `Column` per value, each a `DataTableCell`. */
-const BaseDataTableRow = ({ columns, values, inline = false, highlighted = false }: DataTableRowProps) => (
-  <RowFlex $highlighted={highlighted} direction="column" gap="large" breakpoints={ROW_BREAKPOINTS}>
+const BaseDataTableRow = ({ columns, columnWidths, values, highlighted = false, rowLines = true, showLines = true }: DataTableRowProps) => (
+  <RowFlex $highlighted={highlighted} $rowLines={rowLines} $showLines={showLines} direction="column" gap="large" breakpoints={ROW_BREAKPOINTS}>
     {columns.map((column, index) => (
-      <ColumnFlex key={column.key ?? index} $width={column.width ?? undefined}>
-        <DataTableCell column={column} value={values[index]} inline={inline} />
+      <ColumnFlex key={column.key ?? index} $width={columnWidths?.[index] ?? undefined}>
+        <DataTableCell column={column} value={values[index]} />
       </ColumnFlex>
     ))}
   </RowFlex>

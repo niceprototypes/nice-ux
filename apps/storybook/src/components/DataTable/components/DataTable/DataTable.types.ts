@@ -13,8 +13,6 @@ export interface DataColumn {
   key: string
   /** Header label; `null`/omitted renders an empty header cell (e.g. a preview). */
   header?: React.ReactNode | null
-  /** Fixed CSS width at tablet+; `null`/omitted leaves the column equal-flex. */
-  width?: string | null
   /**
    * - `"node"` (default): the value is a ReactNode, rendered as-is.
    * - `"shiki"`: the value is a code string, rendered in a Shiki CodeBlock.
@@ -63,8 +61,18 @@ export interface DataTableProps {
   columns: DataColumn[]
   /** The tables, in render order. A single table is just a one-element array. */
   tables: DataTableConfig[]
-  /** Strip CodeBlock card chrome on `shiki` cells. @default false */
-  inline?: boolean
+  /**
+   * Fixed CSS widths (at tablet+) index-aligned to `columns`; `null`/omitted/short
+   * leaves a column equal-flex.
+   */
+  columnWidths?: (string | null)[]
   /** Render the column header row above each table. @default true */
   showHeader?: boolean
+  /** Divide non-heading rows with a `border-top` (1px solid `borderColor` base). @default true */
+  rowLines?: boolean
+  /**
+   * When false, remove each row's top border and top padding (keeping the bottom
+   * padding), collapsing rows flush against each other. @default true
+   */
+  showLines?: boolean
 }

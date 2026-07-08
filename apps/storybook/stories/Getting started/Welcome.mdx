@@ -2,7 +2,7 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import Flex from "nice-react-flex"
 import WelcomeLink from "../../src/components/WelcomeLink"
 import Typography from "../../src/nice/Typography"
-import NewLines from "../../src/components/NewLines/index.ts"
+import NewLines from "../../src/components/NewLines"
 
 <Meta
   title="Getting started/Welcome"
@@ -46,35 +46,42 @@ import NewLines from "../../src/components/NewLines/index.ts"
   gap="base"
 >
   <WelcomeLink
-    storyId="getting-started-1-·-tokens--docs"
+    storyId="getting-started-1-·-reset--docs"
+    iconName="Eraser"
+    title="Reset"
+  >
+    <span><strong>A token-driven CSS reset</strong> that normalizes defaults across browsers.</span>
+  </WelcomeLink>
+  <WelcomeLink
+    storyId="getting-started-2-·-tokens--docs"
     iconName="Palette"
     title="Tokens"
   >
     <span><strong>A complete token system</strong> with no framework required.</span>
   </WelcomeLink>
   <WelcomeLink
-    storyId="getting-started-2-·-fonts--docs"
+    storyId="getting-started-3-·-fonts--docs"
     iconName="Type"
     title="Fonts"
   >
     <span><strong>Easy font loading</strong> with Google and Adobe Typekit support.</span>
   </WelcomeLink>
   <WelcomeLink
-    storyId="getting-started-3-·-icons--docs"
+    storyId="getting-started-4-·-icons--docs"
     iconName="LayoutGrid"
     title="Icons"
   >
     <span><strong>A standalone SVG icon set</strong> usable as raw SVG or the React Icon component.</span>
   </WelcomeLink>
   <WelcomeLink
-    storyId="getting-started-4-·-breakpoints--docs"
+    storyId="getting-started-5-·-breakpoints--docs"
     iconName="MonitorSmartphone"
     title="Breakpoints"
   >
     <span><strong>Viewport features</strong> for total control at any breakpoint.</span>
   </WelcomeLink>
   <WelcomeLink
-    storyId="getting-started-5-·-themes--docs"
+    storyId="getting-started-6-·-themes--docs"
     iconName="SunMoon"
     title="Themes"
   >

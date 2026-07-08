@@ -1,5 +1,6 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
+import HorizontalRule from "../../src/components/HorizontalRule"
 
 <Meta
   title="Bindings/useDevice"
@@ -14,7 +15,7 @@ the result through context — so every descendant reads one shared value, with 
 separate provider to wire and no per-component detection. This is the only
 device binding; detection lives inside `nice-react-styles`.
 
----
+<HorizontalRule />
 
 ## Enable detection on the provider
 
@@ -43,7 +44,7 @@ function Nav() {
 No prop drilling — every component under the `StylesProvider` reads the same
 `isMobile` directly.
 
----
+<HorizontalRule />
 
 ## What detection checks
 

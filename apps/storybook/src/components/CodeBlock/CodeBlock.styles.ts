@@ -19,6 +19,7 @@ export const CodeBlockDiv = styled.div<{ $clickable?: boolean; $inline?: boolean
   border: ${({ $inline }) => ($inline ? "none" : `1px solid ${getToken("borderColor")}`)};
   border-radius: ${({ $inline }) => ($inline ? "0" : getToken("borderRadius"))};
   box-shadow: ${({ $inline }) => ($inline ? "none" : getToken("boxShadow"))};
+  max-width: 720px;
 
   /* fit: size the card to its content and lay the code + label out in a centered
      row. Replaces the former outer (<Flex fit>) and inner (<Flex alignItems gap>)

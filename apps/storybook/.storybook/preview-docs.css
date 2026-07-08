@@ -1,17 +1,4 @@
-/**
- * Storybook docs (autodocs) overrides.
- *
- * Restyles the `.sbdocs` MDX/autodocs surface with nice-styles tokens. Every
- * rule is scoped under `.sbdocs` and uses `:where(... :not(.sb-anchor,
- * .sb-unstyled, .sb-unstyled <tag>))` so Storybook's own anchors and
- * opt-out `.sb-unstyled` regions keep their native styling.
- *
- * Sections:
- *   1. Root + containers   — the .sbdocs surface and its layout variants
- *   2. Content typography  — inherited color/font, links, inline code
- *   3. Vertical rhythm     — top-level heading/block spacing
- *   4. Element styling      — borders, emphasis, blockquote, headings, anchors
- */
+/* Storybook docs (autodocs) overrides — restyle the .sbdocs surface with nice-styles tokens. */
 
 .sbdocs {
   font-family: var(--np--font-family);
@@ -33,7 +20,22 @@
     margin-right: auto;
     max-width: 100%;
 
-    /* Inherit text color into headings and text-level elements */
+    & :where(p:not(.sb-anchor, .sb-unstyled, .sb-unstyled p)) {
+      margin: 0;
+    }
+
+    & :where(
+      h1:not(.sb-anchor, .sb-unstyled, .sb-unstyled h1),
+      h2:not(.sb-anchor, .sb-unstyled, .sb-unstyled h2),
+      h3:not(.sb-anchor, .sb-unstyled, .sb-unstyled h3),
+      h4:not(.sb-anchor, .sb-unstyled, .sb-unstyled h4),
+      h5:not(.sb-anchor, .sb-unstyled, .sb-unstyled h5),
+      h6:not(.sb-anchor, .sb-unstyled, .sb-unstyled h6),
+      p, li, td, th, code, blockquote, img, span
+    ) {
+      max-width: 720px;
+    }
+
     & :where(
       h1:not(.sb-anchor, .sb-unstyled, .sb-unstyled h1),
       h2:not(.sb-anchor, .sb-unstyled, .sb-unstyled h2),
@@ -44,10 +46,8 @@
       p, li, td, th, code, blockquote
     ) {
       color: inherit;
-      max-width: 720px;
     }
 
-    /* Inherit the token font-family into headings and text (not code) */
     & :where(
       h1:not(.sb-anchor, .sb-unstyled, .sb-unstyled h1),
       h2:not(.sb-anchor, .sb-unstyled, .sb-unstyled h2),
@@ -55,37 +55,17 @@
       h4:not(.sb-anchor, .sb-unstyled, .sb-unstyled h4),
       h5:not(.sb-anchor, .sb-unstyled, .sb-unstyled h5),
       h6:not(.sb-anchor, .sb-unstyled, .sb-unstyled h6),
-      p, li, td, th
+      p, li, td, th, blockquote
     ) {
       font-family: inherit;
     }
 
-    /* Links use the token link color, decoration unchanged */
     & :where(a:not(.sb-anchor, .sb-unstyled, .sb-unstyled a)) {
       color: var(--np--color--link);
       text-decoration: inherit;
     }
-
-    /* Inline code in paragraphs — monospace, base size */
-    & :where(p:not(.sb-anchor, .sb-unstyled, .sb-unstyled p)) code {
-      font-family: var(--np--font-family--code);
-      font-size: var(--np--font-size--small);
-    }
-
-    /* Inline code + zebra table rows — tinted surface */
-    :where(p:not(.sb-anchor, .sb-unstyled, .sb-unstyled p)) code,
-    :where(table:not(.sb-anchor, .sb-unstyled, .sb-unstyled table)) tr:nth-of-type(2n),
-    :where(li:not(.sb-anchor, .sb-unstyled, .sb-unstyled li)) code {
-      background-color: var(--np--background-color--dark);
-    }
-
-    /* Inline code border */
-    :where(p:not(.sb-anchor, .sb-unstyled, .sb-unstyled p)) code {
-      border-color: var(--np--border-color);
-    }
   }
 
-  /* Base size for text-level elements */
   p,
   li,
   th,
@@ -128,6 +108,13 @@
     width: 100%;
   }
 
+  code {
+    font-family: var(--np--font-family--code);
+    font-size: var(--np--font-size--small);
+    background-color: var(--np--background-color--dark);
+    border-color: var(--np--border-color);
+  }
+
   /* ── 4. Element styling ───────────────────────────────────────────── */
 
   hr,
@@ -144,7 +131,6 @@
     color: var(--np--color--lighter) !important;
   }
 
-  /* Drop Storybook's default underline rule on h2 */
   h2:not(.sb-anchor, .sb-unstyled, .sb-unstyled h2) {
     border-bottom: none;
   }

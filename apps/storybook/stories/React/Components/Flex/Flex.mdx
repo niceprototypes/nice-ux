@@ -3,10 +3,16 @@ import { StoryHeader } from "../../../../src/components/Story"
 import Install from "../../../../src/components/Install"
 import { ComponentTable } from "../../../../src/components/DataTable/tables/ComponentTable"
 import { flexExampleList } from "./examples"
+import HorizontalRule from "../../../../src/components/HorizontalRule"
 
 <Meta title="Components/Flex" />
 
-<StoryHeader title="Flex" />
+<StoryHeader
+  title="Flex"
+  repositories={[
+    { name: "nice-react-flex", icon: "github", url: "https://github.com/niceprototypes/nice-react-flex" },
+  ]}
+/>
 
 <Install package="react-flex" />
 
@@ -27,6 +33,6 @@ import Flex from "nice-react-flex"
 </Flex>
 ```
 
----
+<HorizontalRule />
 
 <ComponentTable examples={flexExampleList} />

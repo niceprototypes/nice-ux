@@ -1,0 +1,75 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import HorizontalRule from "../../src/components/HorizontalRule"
+
+<Meta
+  title="Toolkit/1. Linking"
+  name="Docs"
+/>
+
+<StoryHeader title="Linking" />
+
+Link a Nice package into the current project via a `file:` reference, then strip
+its duplicate singletons in one step.
+
+```bash
+# Link a single package (long form)
+npx nice-toolkit ../react-button
+
+# Short alias
+ntk ../react-button
+
+# Link several — one call each
+ntk ../react-button
+ntk ../react-icon
+ntk ../react-flex
+```
+
+Linking rewrites the dependency to `file:../react-button` and runs a dedupe pass
+on the linked package so its `node_modules` doesn't shadow the app's React /
+styled-components.
+
+<HorizontalRule />
+
+## `--unlink`
+
+Restore every `file:` reference to its original npm version and reinstall from
+the registry.
+
+```bash
+ntk --unlink
+
+# Preview what would be unlinked
+ntk --unlink --dry-run
+```
+
+Run `--unlink` before `npm install` inside a linked package (or re-run `ntk`
+afterward) — a fresh install reintroduces the singleton duplicates that linking
+removed.
+
+<HorizontalRule />
+
+## `--exclude` / `--add-exclude`
+
+The default singleton set removed from linked packages is `react`, `react-dom`,
+`styled-components`, `@types/react`, `@types/react-dom`.
+
+```bash
+# Replace the default set entirely
+ntk --exclude react,react-dom ../my-component
+
+# Extend the default set
+ntk --add-exclude @emotion/react,@emotion/styled ../my-component
+```
+
+<HorizontalRule />
+
+## `--manager` / `--skip-peer-check`
+
+```bash
+# Force a package manager (auto-detected from the lockfile by default)
+ntk --manager pnpm ../my-component
+
+# Skip auto-moving react / react-dom into peerDependencies
+ntk --skip-peer-check ../my-component
+```

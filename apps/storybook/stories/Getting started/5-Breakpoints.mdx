@@ -1,15 +1,14 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
-import ResponsiveDemo, {
-  ResponsiveDemoItem,
-} from "../../src/components/ResponsiveDemo"
+import ResponsiveDemo from "../../src/components/ResponsiveDemo"
+import HorizontalRule from "../../src/components/HorizontalRule"
 import { DataTable } from "../../src/components/DataTable"
 import Callout from "../../src/components/Callout"
 import Install from "../../src/components/Install"
-import NewLines from "../../src/components/NewLines/index.ts"
+import NewLines from "../../src/components/NewLines"
 
 <Meta
-  title="Getting started/4 · Breakpoints"
+  title="Getting started/5 · Breakpoints"
   name="Docs"
 />
 
@@ -67,6 +66,8 @@ const css = `${getBreakpoint("tablet+")} {
   with="styled-components"
 />
 
+<NewLines />
+
 ```tsx
 import styled from "styled-components"
 import { getBreakpoint, getToken } from "nice-react-styles"
@@ -80,7 +81,7 @@ const Wrapper = styled.div`
 `
 ```
 
----
+<HorizontalRule />
 
 ## Set breakpoints
 
@@ -127,7 +128,7 @@ setTokens({
   The new breakpoints are used in generating the new responsive tokens, such as the `fontSize` token module in the example above, found in the same object.
 </Callout>
 
----
+<HorizontalRule />
 
 ## Media queries
 
@@ -207,31 +208,17 @@ setTokens({
   ]}
 />
 
----
+<HorizontalRule />
 
 ## Live demo
 
 Zoom your browser to simulate different screen sizes.
 
-<ResponsiveDemo>
-  <ResponsiveDemoItem
-    breakpoint="phone"
-    emoji="📱"
-    text="Phone"
-  />
-  <ResponsiveDemoItem
-    breakpoint="tablet"
-    emoji="💻"
-    text="Tablet"
-  />
-  <ResponsiveDemoItem
-    breakpoint="laptop"
-    emoji="🖥️"
-    text="Laptop"
-  />
-  <ResponsiveDemoItem
-    breakpoint="desktop"
-    emoji="🖼️"
-    text="Desktop"
-  />
-</ResponsiveDemo>
+<ResponsiveDemo
+  items={[
+    { breakpoint: "phone", emoji: "📱", text: "Phone" },
+    { breakpoint: "tablet", emoji: "💻", text: "Tablet" },
+    { breakpoint: "laptop", emoji: "🖥️", text: "Laptop" },
+    { breakpoint: "desktop", emoji: "🖼️", text: "Desktop" },
+  ]}
+/>

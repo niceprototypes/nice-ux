@@ -21,12 +21,19 @@ export const ColumnFlex = styled(Flex)<{ $width?: string | null }>`
   }
 `
 
-export const RowFlex = styled(Flex).attrs({ spacing: "base none" })<{ $highlighted?: boolean }>`
+// `$showLines={false}` removes the top border and the top padding (keeping the
+// bottom padding), collapsing rows against each other.
+export const RowFlex = styled(Flex).attrs({ spacing: "base none" })<{ $highlighted?: boolean; $rowLines?: boolean; $showLines?: boolean }>`
   /* Vertical rim from spacing="base none"; a base inline padding rim + an equal
      negative inline margin so a highlighted row bleeds into the gutter while its
      content stays aligned with the surrounding rows. */
   padding-inline: ${getToken("gap", "larger")} !important;
   margin-inline: calc(-1 * ${getToken("gap", "larger")}) !important;
+  /* rowLines: a divider above each non-heading row (also under the column
+     header); suppressed entirely when showLines is off. */
+  ${({ $rowLines, $showLines = true }) => $rowLines && $showLines && `border-top: 1px solid ${getToken("borderColor")};`}
+  /* showLines off: strip the top padding, leaving only the bottom rim. */
+  ${({ $showLines = true }) => !$showLines && `padding-block-start: 0 !important;`}
   ${({ $highlighted }) => $highlighted && `background-color: ${getToken("backgroundColor", "highlight")};`}
 
   .docblock-source {

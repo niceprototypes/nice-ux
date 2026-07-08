@@ -6,9 +6,12 @@ import type { DataColumn } from "../../../DataTable"
  * and the resolved value (monospace, click-to-copy).
  */
 export const TOKEN_COLUMNS: DataColumn[] = [
-  { key: "preview", header: null, width: "12em", render: "node" },
-  { key: "tokenName", header: "Token name", width: "8em", render: "node" },
-  { key: "css", header: "CSS", width: "20em", render: "shiki", language: "tsx" },
+  { key: "preview", header: null, render: "node" },
+  { key: "tokenName", header: "Token name", render: "node" },
+  { key: "css", header: "CSS", render: "shiki", language: "tsx" },
   { key: "js", header: "JS", render: "shiki", language: "tsx" },
   { key: "value", header: "Default", render: "text", code: true, size: "small", color: "lighter", clickToCopy: true },
 ]
+
+/** Fixed widths, index-aligned to {@link TOKEN_COLUMNS}; `null` leaves a column equal-flex. */
+export const TOKEN_COLUMN_WIDTHS: (string | null)[] = ["12em", "8em", "20em", null, null]

@@ -7,9 +7,6 @@ import { DataTable, withCopyAffordance } from "../../../DataTable"
 import type { DataColumn, DataTableConfig } from "../../../DataTable"
 import type { IconTableColumn, IconTableProps } from "./IconTable.types"
 
-/** Title-case a category key for its subtable heading ("brands" → "Brands"). */
-const titleCase = (s: string) => s.charAt(0).toUpperCase() + s.slice(1)
-
 /**
  * One row per icon name, index-aligned to the columns: the rendered Icon
  * (unlabeled example cell), the name as a flush click-to-copy code chip, then
@@ -39,23 +36,25 @@ const buildRows = (names: readonly string[], codeColumns: IconTableColumn[]) =>
  */
 export const IconTable = ({ codeColumns }: IconTableProps) => {
   const columns: DataColumn[] = [
-    { key: "preview", header: null, width: "6em", render: "node" },
-    { key: "name", header: "Name", width: "12em", render: "node" },
+    { key: "preview", header: null, render: "node" },
+    { key: "name", header: "Name", render: "node" },
     ...codeColumns.map(
       (column, index): DataColumn => ({
         key: `code-${index}`,
         header: column.header,
-        width: column.width ?? "20em",
         render: "shiki",
         language: "tsx",
       })
     ),
   ]
 
+  // Widths index-aligned to `columns`: preview, name, then each code column.
+  const columnWidths: (string | null)[] = ["6em", "12em", ...codeColumns.map(column => column.width ?? "20em")]
+
   const tables: DataTableConfig[] = Object.entries(iconCategories).map(([category, names]) => ({
-    name: titleCase(category),
+    name: category,
     rows: buildRows(names, codeColumns),
   }))
 
-  return <DataTable columns={columns} tables={tables} inline />
+  return <DataTable columns={columns} columnWidths={columnWidths} tables={tables} />
 }

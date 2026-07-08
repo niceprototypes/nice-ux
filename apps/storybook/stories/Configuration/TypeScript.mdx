@@ -1,6 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
 import Install from "../../src/components/Install"
+import HorizontalRule from "../../src/components/HorizontalRule"
 
 <Meta
   title="Configuration/TypeScript"
@@ -15,10 +16,10 @@ import Install from "../../src/components/Install"
 
 ```json
 // tsconfig.json
-{ "extends": "nice-configuration/typescript/react" }
+{ "extends": "nice-config-typescript/react" }
 ```
 
----
+<HorizontalRule />
 
 ## Base Configuration
 
@@ -27,7 +28,7 @@ Extends the base TypeScript configuration for non-React packages like nice-style
 ```json
 // tsconfig.json
 {
-  "extends": "nice-configuration/typescript/base",
+  "extends": "nice-config-typescript/base",
   "compilerOptions": {
     "outDir": "dist/esm",
     "declarationDir": "dist/esm/types"
@@ -56,7 +57,7 @@ Extends the base TypeScript configuration for non-React packages like nice-style
 }
 ```
 
----
+<HorizontalRule />
 
 ## React Configuration
 
@@ -65,7 +66,7 @@ Extends the base configuration with JSX support for React components.
 ```json
 // tsconfig.json
 {
-  "extends": "nice-configuration/typescript/react",
+  "extends": "nice-config-typescript/react",
   "compilerOptions": {
     "outDir": "dist/esm",
     "declarationDir": "dist/esm/types"

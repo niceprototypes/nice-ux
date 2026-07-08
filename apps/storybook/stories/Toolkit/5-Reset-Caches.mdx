@@ -1,0 +1,69 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import HorizontalRule from "../../src/components/HorizontalRule"
+
+<Meta
+  title="Toolkit/5. Reset & Caches"
+  name="Docs"
+/>
+
+<StoryHeader title="Reset & Caches" />
+
+The workspace triad — three commands targeting three distinct, non-overlapping
+layers — plus `--reset`, which chains them for the "everything is stale" case.
+Full cache topology and recipes live in
+[Configuration → Caches](/docs/configuration-caches--docs).
+
+```bash
+ntk --clean       # consumer caches + dev-server processes
+ntk --dedupe      # singleton conflicts in linked packages
+ntk --build-all   # rebuild every linked package's dist
+```
+
+<HorizontalRule />
+
+## `--clean`
+
+Kills any process bound to a dev-server port (discovered from each consumer's
+`.env` `PORT=` entries and `package.json` `-p` / `--port` flags), then wipes
+`node_modules/.cache` and `node_modules/.vite` across every consumer.
+
+```bash
+ntk --clean
+
+# Preview
+ntk --clean --dry-run
+
+# Skip the port-kill phase (CI / scripted contexts)
+ntk --clean --no-kill
+```
+
+The port-kill matters because a running dev server holds an in-memory module
+graph and repopulates its on-disk cache on the next request — wiping the cache
+without stopping the server is a no-op against the symptom.
+
+<HorizontalRule />
+
+## `--reset`
+
+Chains the triad in the order that matters: `--build-all → --dedupe → --clean`.
+
+```bash
+ntk --reset
+
+# Preview the whole sequence
+ntk --reset --dry-run
+```
+
+- **build first** so the new dists exist,
+- **dedupe second** so any duplicate singletons that crept in during the build
+  cascade are removed,
+- **clean last** so dev-server caches are flushed and processes killed before
+  the next restart.
+
+`--reset` also **stops any running `ntk --dev`/`--watch` first** — those write
+the same dists the rebuild does, so leaving them running would race. Exit code
+reflects `--build-all`'s result; `--dedupe` and `--clean` run regardless.
+
+Use `--reset` after any refactor that touches a foundation package (token
+renames, type narrowing in `nice-styles`, etc.), then restart your dev server.

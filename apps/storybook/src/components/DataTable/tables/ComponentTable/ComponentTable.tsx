@@ -13,10 +13,13 @@ import type { ComponentExample, ExampleVariant } from "./ComponentTable.types"
  * leads, matching the token tables' preview-first order.
  */
 export const EXAMPLE_COLUMNS: DataColumn[] = [
-  { key: "example", header: null, width: "16em", render: "node" },
-  { key: "name", header: "Name", width: "8em", render: "node" },
+  { key: "example", header: null, render: "node" },
+  { key: "name", header: "Name", render: "node" },
   { key: "code", header: "React", render: "shiki", language: "tsx" },
 ]
+
+/** Fixed widths, index-aligned to {@link EXAMPLE_COLUMNS}; `null` leaves a column equal-flex. */
+export const EXAMPLE_COLUMN_WIDTHS: (string | null)[] = ["16em", "8em", null]
 
 /** The variant string of an item — the item itself, or its `variant` field. */
 export const variantKey = (item: ExampleVariant): string =>
@@ -63,7 +66,7 @@ export const ComponentExampleStory = ({ example }: { example: ComponentExample }
   <>
     {/* Match the combined Docs width — the code column needs the full container. */}
     <StoryHeader title={example.name} description={example.description} />
-    <DataTable columns={EXAMPLE_COLUMNS} tables={[{ rows: buildExampleRows(example) }]} inline />
+    <DataTable columns={EXAMPLE_COLUMNS} columnWidths={EXAMPLE_COLUMN_WIDTHS} tables={[{ rows: buildExampleRows(example) }]} />
   </>
 )
 
@@ -73,5 +76,5 @@ export const ComponentExampleStory = ({ example }: { example: ComponentExample }
  * rows); the array is handed to a single `DataTable`.
  */
 export const ComponentTable = ({ examples }: { examples: ComponentExample[] }) => (
-  <DataTable columns={EXAMPLE_COLUMNS} tables={examples.map(buildExampleTable)} inline />
+  <DataTable columns={EXAMPLE_COLUMNS} columnWidths={EXAMPLE_COLUMN_WIDTHS} tables={examples.map(buildExampleTable)} />
 )

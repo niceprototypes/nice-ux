@@ -6,10 +6,16 @@ import Typography from "../../../../src/nice/Typography"
 import { DataTableRow } from "../../../../src/components/DataTable"
 import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import Install from "../../../../src/components/Install"
+import HorizontalRule from "../../../../src/components/HorizontalRule"
 
 <Meta title="Components/Tooltip" />
 
-<StoryHeader title="Tooltip" />
+<StoryHeader
+  title="Tooltip"
+  repositories={[
+    { name: "nice-react-tooltip", icon: "github", url: "https://github.com/niceprototypes/nice-react-tooltip" },
+  ]}
+/>
 
 <Install package="react-tooltip" />
 
@@ -27,7 +33,7 @@ import Tooltip from "nice-react-tooltip"
 </Tooltip>
 ```
 
----
+<HorizontalRule />
 
 ## Basic
 

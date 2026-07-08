@@ -7,12 +7,18 @@ import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import { resolveVendorImage } from "nice-react-image-vendor"
 import { DemoImage } from "./Lightbox.styles"
 import Install from "../../../../src/components/Install"
+import HorizontalRule from "../../../../src/components/HorizontalRule"
 
 export const DEMO_IMAGE = resolveVendorImage({ src: "10", width: "800px", height: "600px" })
 
 <Meta title="Components/Lightbox" />
 
-<StoryHeader title="Lightbox" />
+<StoryHeader
+  title="Lightbox"
+  repositories={[
+    { name: "nice-react-lightbox", icon: "github", url: "https://github.com/niceprototypes/nice-react-lightbox" },
+  ]}
+/>
 
 <Install package="react-lightbox" />
 
@@ -33,7 +39,7 @@ import Lightbox from "nice-react-lightbox"
 </Lightbox>
 ```
 
----
+<HorizontalRule />
 
 ## Basic
 

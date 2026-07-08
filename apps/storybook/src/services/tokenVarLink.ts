@@ -1,24 +1,37 @@
+import { componentTokensData } from "nice-react-styles"
+
 /**
- * Turn a CSS-variable cell value into a deep link to its module token story.
+ * Turn a CSS-variable cell value into a deep link to its token story.
  *
- * A "root var" is a reference to a module-level token — the shorthand base
- * form `var(--np--{group})` or `var(--np--{group}--{variant})`. Anything with
- * more `--` segments (a component-to-component reference, or a theme / inverse
- * primitive) is not a module root and returns `null`, so it stays a plain code
- * cell.
+ * Two reference shapes resolve to a link; anything else returns `null` and stays
+ * a plain code cell.
  *
- * Most module stories are titled `Tokens/Modules/{group}`, whose Storybook id is
- * the title lowercased with separators dropped (`fontSize` →
- * `tokens-modules-fontsize`). The color family (`color` / `backgroundColor` /
- * `borderColor`) is the exception — those share one `color` story as `## `
- * sections, so their links target `tokens-modules-colors--docs#{section}` (see
- * `COLOR_PAGE_SECTIONS`). The href uses Storybook's manager-route form
- * (`/?path=/docs/{id}--docs`) — a raw `/docs/…` anchor 404s, since only
- * MDX-rendered links get rewritten — and the anchor navigates with
- * `target="_top"` (it lives inside the preview iframe). The highlight target is
- * carried solely by sessionStorage (written on click) — NOT a URL param,
- * because Storybook keeps query params across navigations, so a stale
- * `np-token` would stick and re-highlight an unrelated row later.
+ * 1. **Component reference** — `var(--np--{prefix}--…)` where `{prefix}` is a
+ *    component that ships tokens (`button`, `icon`, …, keyed in
+ *    `componentTokensData`). Links to that component's token story
+ *    `tokens-components-{prefix}--docs`, at any segment depth (`--np--button--size`,
+ *    `--np--button--status--primary--background-color`). Checked first, because a
+ *    two-segment component base like `--np--button--size` is shape-identical to a
+ *    module `{group}--{variant}` and would otherwise misroute to a
+ *    `tokens-modules-button` story that does not exist.
+ * 2. **Module root** — the shorthand base `var(--np--{group})` or
+ *    `var(--np--{group}--{variant})` (at most two segments). Links to the module
+ *    story `Tokens/Modules/{group}`, whose Storybook id is the title lowercased
+ *    with separators dropped (`fontSize` → `tokens-modules-fontsize`). The color
+ *    family (`color` / `backgroundColor` / `borderColor`) is the exception —
+ *    those share one `Colors` story as `## ` sections, so their links target
+ *    `tokens-modules-colors--docs#{section}` (see `COLOR_PAGE_SECTIONS`).
+ *
+ * A non-component reference with more than two `--` segments (a theme / inverse
+ * primitive) is not a module root and returns `null`.
+ *
+ * The href uses Storybook's manager-route form (`/?path=/docs/{id}--docs`) — a
+ * raw `/docs/…` anchor 404s, since only MDX-rendered links get rewritten — and
+ * the anchor navigates with `target="_top"` (it lives inside the preview
+ * iframe). The highlight target is carried solely by sessionStorage (written on
+ * click) — NOT a URL param, because Storybook keeps query params across
+ * navigations, so a stale `np-token` would stick and re-highlight an unrelated
+ * row later.
  */
 export interface TokenVarLink {
   /**
@@ -57,12 +70,29 @@ export function parseTokenVarLink(value: string): TokenVarLink | null {
   // Segments are double-dash separated; compound group names keep single dashes
   // (`background-color`), so splitting on `--` cleanly yields [group, variant?].
   const segments = match[1].split("--")
-  if (segments.length > 2) return null // component token or theme primitive — not a module root
 
-  // The var carries the kebab group (`background-color`); the module table's
-  // `name` is camelCase (`backgroundColor`). Camelize so the highlight key
-  // compares directly against the table name.
+  // The var carries the kebab first segment (`background-color`); the module
+  // table's `name` and the component prefixes are camelCase (`backgroundColor`,
+  // `button`). Camelize so both comparisons are apples-to-apples.
   const group = segments[0].replace(/-([a-z])/g, (_, c: string) => c.toUpperCase())
+
+  // Component reference: first segment is a component that ships tokens. Route to
+  // its component-token story regardless of depth, before the module-root guard
+  // below — a two-segment component base (`button--size`) is shape-identical to a
+  // module `{group}--{variant}` and would otherwise 404 on a nonexistent
+  // `tokens-modules-button` story.
+  if (Object.prototype.hasOwnProperty.call(componentTokensData, group)) {
+    const variant = segments.slice(1).join("--") || "base"
+    return {
+      group,
+      variant,
+      token: `${group}--${variant}`,
+      href: `/?path=/docs/tokens-components-${group.toLowerCase()}--docs`,
+    }
+  }
+
+  if (segments.length > 2) return null // theme / inverse primitive — not a module root
+
   const variant = segments[1] ?? "base"
   const token = `${group}--${variant}`
 

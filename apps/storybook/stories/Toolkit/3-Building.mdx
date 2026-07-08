@@ -1,0 +1,89 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import HorizontalRule from "../../src/components/HorizontalRule"
+
+<Meta
+  title="Toolkit/3. Building"
+  name="Docs"
+/>
+
+<StoryHeader title="Building" />
+
+One-shot builds of linked package dists, in registry tier order. Use these when
+you are **not** running the live watcher (see
+[Dev & Watch](/docs/toolkit-4-dev-watch--docs)).
+
+<HorizontalRule />
+
+## `--build-all`
+
+Walks the registry tier order (foundation → context → utility → feature →
+application) and runs `npm run build` in every linked nice-* package that
+defines a build script.
+
+```bash
+ntk --build-all
+
+# Preview without running builds
+ntk --build-all --dry-run
+```
+
+Use after a fresh clone, after `--dedupe`, or after any foundation-package
+refactor.
+
+<HorizontalRule />
+
+## `--build-icons`
+
+The targeted subset of `--build-all` for an icon change. Rebuilds `nice-icons`
+and everything that transitively depends on it — today `nice-react-icon`,
+`nice-react-icon-vendor`, and `nice-react-button` — resolved from the same
+reverse `file:`-dependency graph `--publish` uses, so it stays in sync with the
+publish cascade. On success it then runs [`--vite`](#-vite) so a dev server
+picks up the rebuilt dist.
+
+```bash
+ntk --build-icons
+
+# Preview the resolved build set
+ntk --build-icons --dry-run
+```
+
+#### Dev-watcher auto-stop
+
+`--build-icons` and a running `ntk --dev`/`--watch` both rebuild the **same**
+dist folders, and every rollup build wipes `dist/` first — so run together they
+race (transient `Could not resolve entry module "dist/types/index.d.ts"` errors
+and reloads against half-written output). So `--build-icons` **stops** any
+running dev/watch first — the same reflex as the `--vite` port-kill — then
+builds, and reminds you to restart it:
+
+```
+Stopping dev/watch process 2259
+✓ Icons rebuilt. Restart `ntk --dev --watch` to resume hot-reloading.
+```
+
+- Stop is SIGTERM, then SIGKILL for any straggler.
+- Pass **`--no-kill`** to leave the watcher running and build anyway (you own the
+  dist race).
+
+<HorizontalRule />
+
+## `--vite`
+
+Refresh Vite's optimized-deps cache and bounce running dev servers so a rebuilt
+linked dist is actually re-bundled. Runs automatically at the end of
+`--build-icons`; run it standalone after any out-of-band rebuild.
+
+```bash
+ntk --vite
+
+# Skip the port-kill phase (wipe caches only)
+ntk --vite --no-kill
+```
+
+Why it's needed: a dev server (Storybook, CRA) holds a transformed copy of a
+linked package's dist. Rewriting that dist on disk doesn't invalidate the
+server's copy on its own — `--vite` wipes the `.vite` cache and kills the
+dev-server port so the next start reads the fresh dist. See
+[Troubleshooting → icons not updating](/docs/toolkit-7-troubleshooting--docs).

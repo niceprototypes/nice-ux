@@ -1,6 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
 import Install from "../../src/components/Install"
+import HorizontalRule from "../../src/components/HorizontalRule"
 
 <Meta
   title="Configuration/Rollup"
@@ -14,7 +15,7 @@ import Install from "../../src/components/Install"
 ### Setup
 
 ```js
-import { createConfiguration } from "nice-configuration/rollup"
+import { createConfiguration } from "nice-config-rollup"
 ```
 
 ### Usage
@@ -23,7 +24,7 @@ import { createConfiguration } from "nice-configuration/rollup"
 export default createConfiguration({ plugins: [...] })
 ```
 
----
+<HorizontalRule />
 
 ## createConfiguration
 
@@ -31,7 +32,7 @@ Creates a complete rollup configuration with sensible defaults for nice-* packag
 
 ```typescript
 // rollup.config.js
-import { createConfiguration } from "nice-configuration/rollup"
+import { createConfiguration } from "nice-config-rollup"
 
 // Basic usage - uses all defaults
 export default createConfiguration()
@@ -71,14 +72,14 @@ The following plugins are included automatically:
 • rollup-plugin-dts (for declaration bundling)
 ```
 
----
+<HorizontalRule />
 
 ## isNiceExternal
 
 Pattern-based external detection that automatically externalizes all nice-* packages, React ecosystem, and styled-components. Handles subpath imports like CSS files.
 
 ```typescript
-import { isNiceExternal } from "nice-configuration/rollup"
+import { isNiceExternal } from "nice-config-rollup"
 
 // Returns true for:
 isNiceExternal("nice-styles")           // nice-* packages
@@ -97,7 +98,7 @@ If you need custom rollup config, use `isNiceExternal` directly:
 
 ```typescript
 // rollup.config.js
-import { isNiceExternal } from "nice-configuration/rollup"
+import { isNiceExternal } from "nice-config-rollup"
 
 export default {
   input: "src/index.ts",
@@ -107,7 +108,7 @@ export default {
 }
 ```
 
----
+<HorizontalRule />
 
 ## Watch Mode Configuration
 
@@ -136,14 +137,14 @@ The configuration includes optimized watch settings that prevent file caching is
 
 Without these settings, rollup's watch mode can exhibit an "off by one" caching bug where file changes appear one save behind. The `awaitWriteFinish` option ensures files are fully written to disk before rollup reads them, and `usePolling` provides more reliable file change detection on macOS.
 
----
+<HorizontalRule />
 
 ## createExternals
 
 Creates an external function with additional packages or bundle overrides.
 
 ```typescript
-import { createExternals } from "nice-configuration/rollup"
+import { createExternals } from "nice-config-rollup"
 
 // Add extra packages to externalize
 const external = createExternals({

@@ -7,6 +7,7 @@ export const WelcomeLinkDiv = styled.div`
   border: 1px solid ${getToken("borderColor")};
   border-radius: ${getToken("borderRadius")};
   box-shadow: ${getToken("boxShadow")};
+  max-width: 720px;
 
   &:hover {
     border: 1px solid ${getToken("color", "link")};

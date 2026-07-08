@@ -6,6 +6,7 @@ import { DataTableRow } from "../../../../src/components/DataTable"
 import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import { toSource } from "../../../../src/services"
 import Install from "../../../../src/components/Install"
+import HorizontalRule from "../../../../src/components/HorizontalRule"
 
 export const basicProps = { vendor: true, alt: "Demo landscape" }
 export const coverProps = {
@@ -18,7 +19,13 @@ export const coverProps = {
 
 <Meta title="Components/Image" />
 
-<StoryHeader title="Image" />
+<StoryHeader
+  title="Image"
+  repositories={[
+    { name: "nice-react-image", icon: "github", url: "https://github.com/niceprototypes/nice-react-image" },
+    { name: "nice-react-image-vendor", icon: "github", url: "https://github.com/niceprototypes/nice-react-image-vendor", status: "peer" },
+  ]}
+/>
 
 <Install package="react-image" />
 
@@ -54,7 +61,7 @@ import Image from "nice-react-image"
 </Image>
 ```
 
----
+<HorizontalRule />
 
 ## Basic
 

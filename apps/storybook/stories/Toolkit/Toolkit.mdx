@@ -1,0 +1,64 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import HorizontalRule from "../../src/components/HorizontalRule"
+
+<Meta
+  title="Toolkit"
+  name="Docs"
+/>
+
+<StoryHeader title="Toolkit" />
+
+`nice-toolkit` is the CLI that manages local development across the Nice
+ecosystem — linking packages, resolving singleton conflicts, rebuilding dists,
+and publishing. Two bin names resolve to the same script: `nice-toolkit` (long
+form) and `ntk` (short alias).
+
+```bash
+npm install -g nice-toolkit
+```
+
+<HorizontalRule />
+
+## Why it exists
+
+Nice packages depend on each other through `file:` references so local changes
+propagate without a publish. The cost is that each linked package installs its
+own copy of React / styled-components, and multiple React instances throw
+"Invalid hook call". `ntk --dedupe` removes those duplicate singletons; the rest
+of the commands cover the build, cache, and publish lifecycle that `file:`
+linking introduces.
+
+```bash
+# The problem — duplicate singletons in each linked package
+your-app/node_modules/react
+nice-react-tile/node_modules/react     ← duplicate (conflict)
+nice-react-flex/node_modules/react     ← duplicate (conflict)
+
+# The fix — strip singletons from every linked package
+ntk --dedupe
+```
+
+<HorizontalRule />
+
+## Command map
+
+| Area | Commands | Page |
+|------|----------|------|
+| Link / restore packages | `ntk <path>`, `--unlink`, `--exclude`, `--add-exclude` | [Linking](/docs/toolkit-1-linking--docs) |
+| Remove singleton conflicts | `--dedupe [path]` | [Dedupe](/docs/toolkit-2-dedupe--docs) |
+| Rebuild dists | `--build-all`, `--build-icons`, `--vite` | [Building](/docs/toolkit-3-building--docs) |
+| Live rebuild + reload | `--dev`, `--watch`, `--dev --watch` | [Dev & Watch](/docs/toolkit-4-dev-watch--docs) |
+| Cache / full recovery | `--clean`, `--reset` | [Reset & Caches](/docs/toolkit-5-reset-caches--docs) |
+| Release | `--bump`, `--publish`, `--no-npm` | [Publishing](/docs/toolkit-6-publishing--docs) |
+| Fixing common errors | — | [Troubleshooting](/docs/toolkit-7-troubleshooting--docs) |
+
+<HorizontalRule />
+
+## Conventions used on these pages
+
+- **`--dry-run`** works on every mutating command — it prints what would happen
+  and changes nothing. Reach for it first when unsure.
+- Commands act on the packages in `nice-toolkit/registry.json`. A package
+  missing from the registry is invisible to `ntk`.
+- Paths are relative to the workspace root (`~/nice`), e.g. `ntk ../react-button`.

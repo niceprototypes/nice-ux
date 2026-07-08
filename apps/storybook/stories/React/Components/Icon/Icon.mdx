@@ -5,7 +5,13 @@ import Install from "../../../../src/components/Install"
 
 <Meta title="Components/Icon" />
 
-<StoryHeader title="Icon" />
+<StoryHeader
+  title="Icon"
+  repositories={[
+    { name: "nice-react-icon", icon: "github", url: "https://github.com/niceprototypes/nice-react-icon" },
+    { name: "nice-react-icon-vendor", icon: "github", url: "https://github.com/niceprototypes/nice-react-icon-vendor", status: "peer" },
+  ]}
+/>
 
 <Install package="react-icon" />
 

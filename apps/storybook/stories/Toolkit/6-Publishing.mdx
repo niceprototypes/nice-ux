@@ -1,0 +1,83 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import HorizontalRule from "../../src/components/HorizontalRule"
+
+<Meta
+  title="Toolkit/6. Publishing"
+  name="Docs"
+/>
+
+<StoryHeader title="Publishing" />
+
+Publishing is driven by per-package bump intent. Each publishable package records
+what changed in `.nice/bump.md`; `--publish` reads those entries to recommend
+version bumps, then builds and publishes the affected packages in dependency
+order.
+
+<HorizontalRule />
+
+## `--bump` — record intent
+
+Append one entry to the current package's `.nice/bump.md`. Commit it alongside
+the change it describes.
+
+```bash
+ntk --bump minor "Add useBreakpoint hook"
+ntk --bump major "Rename breakpoint identifiers small/medium/large to phone/tablet/laptop"
+ntk --bump patch "Fix icon stroke width regression"
+```
+
+Each entry is `[<timestamp>] <level>: <message>`. The message doubles as the git
+commit subject (drop the `level:` prefix in the commit). Write it for a consumer
+reading release notes, not as a diff summary. Direct-editing `.nice/bump.md` is
+equivalent to `--bump`.
+
+<HorizontalRule />
+
+## `--publish`
+
+Publishes changed packages to npm, resolving the full dependency cascade.
+
+```bash
+# Publish all changed packages (interactive)
+ntk --publish
+
+# Publish specific packages (dependents auto-resolved)
+ntk --publish nice-styles,nice-react-styles
+
+# Preview without changing anything
+ntk --publish --dry-run
+```
+
+#### What it does
+
+```bash
+1. Resolves affected packages via the reverse file:-dependency graph
+2. Reads each .nice/bump.md → recommends a bump level per changed package
+   (dependents are auto-patched)
+3. Swaps file: deps → semver ranges
+4. Builds every affected package in dependency order (no OTP needed)
+5. Publishes in rapid succession — prompts once for an npm OTP, re-prompts
+   only if it expires mid-run
+6. Restores file: refs for local development
+7. Clears the consumed .nice/bump.md files, commits the version bump, pushes
+```
+
+Publish order comes from `nice-toolkit/registry.json` (bottom-to-top per the
+dependency chain). Run `ntk --publish --dry-run` to see the current order and the
+recommended bumps.
+
+<HorizontalRule />
+
+## `--no-npm` / `--dry-publish`
+
+```bash
+# Bump, build, commit, push — but skip the npm publish step
+ntk --publish --no-npm
+
+# Preview the full plan without changing anything
+ntk --dry-publish
+```
+
+`--no-npm` is useful to verify the pipeline, or to push version bumps and let CI
+handle the actual npm publish.

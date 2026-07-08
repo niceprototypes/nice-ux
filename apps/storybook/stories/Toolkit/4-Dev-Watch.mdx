@@ -1,0 +1,102 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import HorizontalRule from "../../src/components/HorizontalRule"
+
+<Meta
+  title="Toolkit/4. Dev & Watch"
+  name="Docs"
+/>
+
+<StoryHeader title="Dev & Watch" />
+
+Keep linked packages rebuilding — and consumers reloading — as you edit their
+source. Two flags, usually run together.
+
+<HorizontalRule />
+
+## `--dev`
+
+Runs `npm run dev` (the package's rollup/gen watcher) in every linked package
+concurrently, rebuilding each on source change. Packages without a `dev` script
+are skipped.
+
+```bash
+ntk --dev
+```
+
+<HorizontalRule />
+
+## `--watch`
+
+Watches each linked package's `dist/` folder and touches a trigger file when a
+build lands, which makes webpack/CRA recompile.
+
+```bash
+ntk --watch
+
+# Watch a different folder (default: dist)
+ntk --watch --watch-dir build
+```
+
+#### CRA / webpack setup
+
+Import the trigger file from your entry point and git-ignore it:
+
+```typescript
+// src/index.tsx
+import './.symlink-trigger.js'
+```
+
+```bash
+# .gitignore
+.symlink-trigger.js
+```
+
+Vite projects (Storybook, Vite apps) use `nice-vite-watcher` instead of the
+trigger file — the plugin watches linked dists directly.
+
+<HorizontalRule />
+
+## `--dev --watch` (recommended)
+
+Combines both: rebuild on source change **and** trigger the consumer to reload.
+
+```bash
+# package.json
+"scripts": {
+  "watch:deps": "ntk --dev --watch"
+}
+```
+
+```bash
+npm start          # Terminal 1 — your dev server
+npm run watch:deps # Terminal 2 — the rebuild + reload loop
+```
+
+#### Flow
+
+```bash
+Source change in a linked package
+       ↓
+--dev runs the package's rollup/gen rebuild
+       ↓
+dist/ updates
+       ↓
+--watch detects the dist change → touches .symlink-trigger.js
+       ↓
+CRA / webpack recompiles  (Vite: nice-vite-watcher reloads)
+```
+
+<HorizontalRule />
+
+## Don't run a one-shot build alongside it
+
+`--dev --watch` writes the same dist files a `--build-all` / `--build-icons`
+pass does. Running both at once races on `dist/`. `--build-icons` guards against
+this by prompting to stop the watcher first (see
+[Building](/docs/toolkit-3-building--docs)); `--reset` stops it automatically.
+
+> Editing an icon while `--dev --watch` runs rebuilds `nice-react-icon`'s dist
+> correctly, but a Vite dev server (Storybook) may keep serving its cached copy
+> until bounced — see
+> [Troubleshooting → icons not updating](/docs/toolkit-7-troubleshooting--docs).

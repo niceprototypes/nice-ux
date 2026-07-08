@@ -5,10 +5,16 @@ import Typography from "../../../../src/nice/Typography"
 import { DataTableRow } from "../../../../src/components/DataTable"
 import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import Install from "../../../../src/components/Install"
+import HorizontalRule from "../../../../src/components/HorizontalRule"
 
 <Meta title="Components/Input" />
 
-<StoryHeader title="Input" />
+<StoryHeader
+  title="Input"
+  repositories={[
+    { name: "nice-react-input", icon: "github", url: "https://github.com/niceprototypes/nice-react-input" },
+  ]}
+/>
 
 <Install package="react-input" />
 
@@ -24,7 +30,7 @@ import Input from "nice-react-input"
 <Input value={value} onChange={setValue} placeholder="Email" />
 ```
 
----
+<HorizontalRule />
 
 ## Basic
 

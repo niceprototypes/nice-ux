@@ -49,3 +49,6 @@ coverage/
 .env.development.local
 .env.test.local
 .env.production.local
+# Generated token stories (see scripts/generate-token-stories.mjs)
+stories/Tokens/Components/generated/
+stories/Tokens/Modules/generated/

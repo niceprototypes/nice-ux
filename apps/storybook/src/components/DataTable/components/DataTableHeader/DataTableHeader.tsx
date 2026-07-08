@@ -5,10 +5,10 @@ import { ROW_BREAKPOINTS } from "../DataTableRow/DataTableRow.helpers"
 import type { DataTableHeaderProps } from "./DataTableHeader.types"
 
 /** The column-header row — one labelled `Column` per column, in the same widths as the data rows. */
-const BaseDataTableHeader = ({ columns, title }: DataTableHeaderProps) => (
+const BaseDataTableHeader = ({ columns, columnWidths, title }: DataTableHeaderProps) => (
   <RowFlex direction="column" gap="large" breakpoints={ROW_BREAKPOINTS}>
     {columns.map((column, index) => (
-      <ColumnFlex key={column.key ?? index} $width={column.width ?? undefined}>
+      <ColumnFlex key={column.key ?? index} $width={columnWidths?.[index] ?? undefined}>
         {index === 0 && title != null ? (
           <Typography code size="small" weight="semibold" color="base">{title}</Typography>
         ) : column.header == null ? null : typeof column.header === "string" ? (

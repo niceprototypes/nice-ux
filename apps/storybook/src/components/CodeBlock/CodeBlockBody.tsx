@@ -69,7 +69,7 @@ export const CodeBlockBody: React.FC<CodeBlockBodyProps> = ({
   inline,
   fit,
 }) => (
-  <Flex gap="base">
+  <Flex gap="base" style={{ width: "100%" }}>
     <CodeScroll gap="large" grow={1}>
       {/* fit: shrink to content (width: max-content); otherwise fill the row. */}
       <Flex fit={fit} grow={fit ? undefined : 1}>

@@ -1,5 +1,6 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
+import HorizontalRule from "../../src/components/HorizontalRule"
 
 <Meta
   title="Configuration/Caches"
@@ -10,7 +11,7 @@ import { StoryHeader } from "../../src/components/Story"
 
 Eight cache layers can hold stale state in a Nice workspace. Three workspace-level `ntk` operations clear most of them; the rest belong to other owners (the consumer's `npm install`, npm itself, the user's browser). This page maps which tool clears which layer and gives workflow recipes for the common "something is stale" symptoms.
 
----
+<HorizontalRule />
 
 ## The eight layers
 
@@ -27,7 +28,7 @@ Eight cache layers can hold stale state in a Nice workspace. Three workspace-lev
 
 ¹ `ntk --clean` currently knows about `node_modules/.cache` (webpack) and `node_modules/.vite` (Vite). Other framework caches — Next.js `.next/cache`, Remix `build/`, Astro `dist/`, Parcel `.parcel-cache` — are **not** covered until their path is added to `CACHE_DIRS` in `toolkit/src/linking/cache-cleaner.js`. Adding a new framework to the workspace requires that single edit.
 
----
+<HorizontalRule />
 
 ## The three `ntk` operations
 
@@ -69,7 +70,7 @@ Then restart any dev server (`npm run dev` in each consumer) and hard-reload the
 - **`--dedupe` before `--build-all`** so singleton cleanup doesn't run *after* a build that expected the singletons in place.
 - **`--build-all` last** because it produces the artifact every later step reads.
 
----
+<HorizontalRule />
 
 ## What the three `ntk` operations do **not** touch
 
@@ -82,7 +83,7 @@ These belong to other owners:
 | Restarting a killed dev server (after `--clean`) | `npm run dev` (or equivalent) in each consumer | the user |
 | Browser tab module cache (layer 8) | hard reload | the user |
 
----
+<HorizontalRule />
 
 ## Workflow recipes
 
@@ -100,7 +101,7 @@ Then restart the dev server (`npm run dev` inside the consumer) and hard-reload 
 ntk --dedupe
 ```
 
-The classic duplicate-React-instance error. See [Toolkit](/docs/configuration-toolkit--docs) for the underlying cause.
+The classic duplicate-React-instance error. See [Toolkit → Dedupe](/docs/toolkit-2-dedupe--docs) for the underlying cause.
 
 #### Consumer reports a missing export from a foundation package after a refactor
 
@@ -134,7 +135,7 @@ Restart every dev server. Hard-reload every open browser tab.
 
 If that doesn't fix it, escalate to a per-consumer reinstall (`rm -rf node_modules package-lock.json && npm install`) before reaching for `npm cache clean --force` — the global npm cache is almost never the cause.
 
----
+<HorizontalRule />
 
 ## Why three `ntk` operations and not one
 

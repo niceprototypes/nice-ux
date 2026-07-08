@@ -1,8 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
 import Callout from "../../src/components/Callout"
-import Typography from "../../src/nice/Typography/index.ts"
-import NewLines from "../../src/components/NewLines/index.ts"
+import HorizontalRule from "../../src/components/HorizontalRule"
 
 <Meta
   title="Getting started/Kitchen sink"
@@ -60,7 +59,7 @@ setTokens({
 
 <Callout type="hint">Static, responsive, themed, and custom tokens — plus breakpoint thresholds — all live in one `setTokens` call. Detection is by shape: a `phone` key makes a value responsive, a `day` key makes it themed.</Callout>
 
----
+<HorizontalRule />
 
 ## 2. `App.tsx` — load the fonts, provide the system
 
@@ -86,7 +85,7 @@ export default function App() {
 
 <Callout type="hint">`StylesProvider` also accepts `adobeFonts` and a raw `links` array — use whichever matches your font host. The component is pinned to the browser's day/night preference by default.</Callout>
 
----
+<HorizontalRule />
 
 ## 3. `Page.tsx` — consume tokens, breakpoints, and themes
 

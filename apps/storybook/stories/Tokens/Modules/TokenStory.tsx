@@ -2,6 +2,7 @@ import { StoryHeader } from "../../../src/components/Story"
 import { DataTable } from "../../../src/components/DataTable"
 import {
   TOKEN_COLUMNS,
+  TOKEN_COLUMN_WIDTHS,
   buildTokenRows,
   useNiceTheme,
   useHighlightedToken,
@@ -25,7 +26,7 @@ export const TokenStory = ({ name }: { name: keyof typeof tokenTables }) => {
       {/* Match the Tokens/Docs page width — the multi-column table needs the full
           container, not the default 980px docs measure. */}
       <StoryHeader title={group.name} description={group.description} />
-      <DataTable columns={TOKEN_COLUMNS} tables={[{ rows }]} inline />
+      <DataTable columns={TOKEN_COLUMNS} columnWidths={TOKEN_COLUMN_WIDTHS} tables={[{ rows }]} />
     </>
   )
 }

@@ -5,10 +5,16 @@ import { DataTableRow } from "../../../../src/components/DataTable"
 import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import { InteractiveSlider } from "./Slider.services"
 import Install from "../../../../src/components/Install"
+import HorizontalRule from "../../../../src/components/HorizontalRule"
 
 <Meta title="Components/Slider" />
 
-<StoryHeader title="Slider" />
+<StoryHeader
+  title="Slider"
+  repositories={[
+    { name: "nice-react-slider", icon: "github", url: "https://github.com/niceprototypes/nice-react-slider" },
+  ]}
+/>
 
 <Install package="react-slider" />
 
@@ -24,7 +30,7 @@ import Slider from "nice-react-slider"
 <Slider currentIndex={0}>{slides}</Slider>
 ```
 
----
+<HorizontalRule />
 
 ## Basic
 

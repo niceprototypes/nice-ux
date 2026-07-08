@@ -1,6 +1,6 @@
 import { DataTable } from "../../../DataTable"
 import type { DataTableConfig } from "../../../DataTable"
-import { COMPONENT_TOKEN_COLUMNS } from "./ComponentTokenTable.constants"
+import { COMPONENT_TOKEN_COLUMNS, COMPONENT_TOKEN_COLUMN_WIDTHS } from "./ComponentTokenTable.constants"
 import { buildGroupTable } from "./ComponentTokenTable.rows"
 import { getComponentTokenGroups, componentLabel } from "./ComponentTokenTable.tokens"
 import type { ComponentTokenTableProps } from "./ComponentTokenTable.types"
@@ -16,5 +16,5 @@ export const ComponentTokenTable = ({ prefix, nested = false }: ComponentTokenTa
 
   // Docs: one h2 cluster (component → groups). Substory: groups flat.
   const tables = nested ? [{ name: componentLabel(prefix), tables: groups }] : groups
-  return <DataTable columns={COMPONENT_TOKEN_COLUMNS} tables={tables} inline />
+  return <DataTable columns={COMPONENT_TOKEN_COLUMNS} columnWidths={COMPONENT_TOKEN_COLUMN_WIDTHS} tables={tables} />
 }

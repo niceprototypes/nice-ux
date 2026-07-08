@@ -6,10 +6,16 @@ import { DataTableRow } from "../../../../src/components/DataTable"
 import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import * as TileStories from "./Tile.stories"
 import Install from "../../../../src/components/Install"
+import HorizontalRule from "../../../../src/components/HorizontalRule"
 
 <Meta of={TileStories} />
 
-<StoryHeader title="Tile" />
+<StoryHeader
+  title="Tile"
+  repositories={[
+    { name: "nice-react-tile", icon: "github", url: "https://github.com/niceprototypes/nice-react-tile" },
+  ]}
+/>
 
 <Install package="react-tile" />
 
@@ -25,7 +31,7 @@ import Tile from "nice-react-tile"
 <Tile title="Title" description="Description">{children}</Tile>
 ```
 
----
+<HorizontalRule />
 
 ## Basic
 
@@ -42,7 +48,7 @@ import Tile from "nice-react-tile"
   ]}
 />
 
----
+<HorizontalRule />
 
 ## Playground
 

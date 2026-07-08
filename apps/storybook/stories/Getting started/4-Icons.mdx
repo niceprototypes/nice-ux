@@ -1,15 +1,16 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
 import { IconTable } from "../../src/components/DataTable/tables/IconTable"
-import Callout from "../../src/components/Callout/index.ts"
+import Callout from "../../src/components/Callout"
 import { CodeBlock } from "../../src/components/CodeBlock"
 import Flex from "nice-react-flex"
-import { IconPreview } from "./3-Icons.styles"
-import NewLines from "../../src/components/NewLines/index.ts"
-import Install from "../../src/components/Install/index.ts"
+import { IconPreview } from "./4-Icons.styles"
+import NewLines from "../../src/components/NewLines"
+import Install from "../../src/components/Install"
+import HorizontalRule from "../../src/components/HorizontalRule"
 
 <Meta
-  title="Getting started/3 · Icons"
+  title="Getting started/4 · Icons"
   name="Docs"
 />
 
@@ -41,7 +42,7 @@ Access all **stroke and fill variants** of all icons via the `nice-icons` packag
   </Flex>
 </Flex>
 
----
+<HorizontalRule />
 
 ## React
 
@@ -73,7 +74,7 @@ The Icon component allows you to **easily configure icon properties** without an
   See the [Component](/docs/components-icon--docs) page for full documentation.
 </Callout>
 
----
+<HorizontalRule />
 
 ## getIcon
 
@@ -88,7 +89,7 @@ const CheckFill = getIcon("check", true)    // outlined → fill variant
 <CheckIcon />
 ```
 
----
+<HorizontalRule />
 
 ## Browse
 

@@ -19,11 +19,12 @@ export const sequences: StoryFooterItem[][] = [
   // final item.
   [
     { id: "getting-started-welcome--docs", label: "Welcome" },
-    { id: "getting-started-1-·-tokens--docs", label: "Tokens" },
-    { id: "getting-started-2-·-fonts--docs", label: "Fonts" },
-    { id: "getting-started-3-·-icons--docs", label: "Icons" },
-    { id: "getting-started-4-·-breakpoints--docs", label: "Breakpoints" },
-    { id: "getting-started-5-·-themes--docs", label: "Themes" },
+    { id: "getting-started-1-·-reset--docs", label: "Reset" },
+    { id: "getting-started-2-·-tokens--docs", label: "Tokens" },
+    { id: "getting-started-3-·-fonts--docs", label: "Fonts" },
+    { id: "getting-started-4-·-icons--docs", label: "Icons" },
+    { id: "getting-started-5-·-breakpoints--docs", label: "Breakpoints" },
+    { id: "getting-started-6-·-themes--docs", label: "Themes" },
     { id: "getting-started-kitchen-sink--docs", label: "Kitchen sink" },
   ],
   // Tokens / Modules — the token reference pages. Landing page first, then each
@@ -48,7 +49,6 @@ export const sequences: StoryFooterItem[][] = [
   [
     { id: "tokens-components--docs", label: "Components" },
     { id: "tokens-components-button--docs", label: "Button" },
-    { id: "tokens-components-form--docs", label: "Form" },
     { id: "tokens-components-icon--docs", label: "Icon" },
     { id: "tokens-components-image--docs", label: "Image" },
     { id: "tokens-components-input--docs", label: "Input" },

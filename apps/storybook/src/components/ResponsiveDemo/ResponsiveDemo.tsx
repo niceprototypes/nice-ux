@@ -1,14 +1,19 @@
 import * as React from "react"
 import Flex from "nice-react-flex"
+import { ItemDiv } from "./ResponsiveDemo.styles"
 import type { ResponsiveDemoProps } from "./ResponsiveDemo.types"
 
-const ResponsiveDemo: React.FC<ResponsiveDemoProps> = ({ children }) => (
+const ResponsiveDemo: React.FC<ResponsiveDemoProps> = ({ items }) => (
   <Flex
     direction="column"
     gap="small"
     breakpoints={{ "tablet+": { direction: "row" } }}
   >
-    {children}
+    {items.map(({ breakpoint, emoji, text }) => (
+      <ItemDiv key={breakpoint} $breakpoint={breakpoint}>
+        {emoji} {text}
+      </ItemDiv>
+    ))}
   </Flex>
 )
 

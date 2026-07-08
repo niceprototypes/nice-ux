@@ -3,12 +3,13 @@ import { StoryHeader } from "../../src/components/Story"
 import { CodeBlock } from "../../src/components/CodeBlock"
 import Image from "nice-react-image"
 import Install from "../../src/components/Install"
-import NewLines from "../../src/components/NewLines/index.ts"
+import NewLines from "../../src/components/NewLines"
 import Typography from "../../src/nice/Typography"
 import Flex from "nice-react-flex"
+import HorizontalRule from "../../src/components/HorizontalRule"
 
 <Meta
-  title="Getting started/5 · Themes"
+  title="Getting started/6 · Themes"
   name="Docs"
 />
 
@@ -25,7 +26,7 @@ import Flex from "nice-react-flex"
 
 By default, Nice UI components are pinned to your browser settings, meaning that **they will switch themes automatically** between day and night depending on your browser or OS.
 
----
+<HorizontalRule />
 
 ## reset.css
 
@@ -36,7 +37,7 @@ By default, Nice UI components are pinned to your browser settings, meaning that
 @import "nice-styles/reset.css";
 ```
 
----
+<HorizontalRule />
 
 ## Pinning to a theme with HTML
 
@@ -74,7 +75,7 @@ Semantic tokens within the pinned element are reassigned to the pinned theme val
 </section>
 ```
 
----
+<HorizontalRule />
 
 ## Pinning with CSS
 
@@ -89,7 +90,7 @@ body.night-mode {
 }
 ```
 
----
+<HorizontalRule />
 
 ## Pinning with React
 

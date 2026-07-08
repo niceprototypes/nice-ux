@@ -19,12 +19,12 @@ interface TableHeadingStyle {
 
 /**
  * House Typography styling per heading level. All levels are monospace (`code`);
- * h2 is larger + semibold, h3 large + semibold, h4 small (regular weight).
+ * h2 is large + semibold, h3 large + semibold, h4 small (regular weight).
  */
 export const tableHeadingProps = (as: TableHeadingAs): TableHeadingStyle => {
   switch (as) {
     case "h2":
-      return { size: "larger", weight: "semibold", code: true }
+      return { size: "large", weight: "semibold", code: true }
     case "h3":
       return { size: "large", weight: "semibold", code: true }
     case "h4":
