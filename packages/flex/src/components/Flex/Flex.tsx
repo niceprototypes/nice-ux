@@ -32,19 +32,18 @@ import { FlexProps } from "./Flex.types"
  * </Flex>
  *
  * @example
- * // Using spacing with CSS-like shorthand
- * <Flex spacing="small base" gap="small">
+ * // Padding with CSS-like shorthand
+ * <Flex padding="small base" gap="small">
  *   <div>Padded content (top/bottom: small, left/right: base)</div>
  * </Flex>
  *
  * @example
- * // Responsive spacing with margin type
+ * // Responsive margin
  * <Flex
- *   type="margin"
- *   spacing="small"
+ *   margin="small"
  *   breakpoints={{
- *     "tablet+": { spacing: "base large" },
- *     "laptop+": { spacing: "small base large smaller" },
+ *     "tablet+": { margin: "base large" },
+ *     "laptop+": { margin: "small base large smaller" },
  *   }}
  * >
  *   <div>Responsive margins</div>

@@ -87,26 +87,36 @@ All layout props accept either simple values or responsive objects:
 - **md** (Medium): 980px+ - Tablet and small desktop  
 - **lg** (Large): 1280px+ - Large desktop
 
-## Spacing System
+## Padding & Margin
 
-The spacing prop provides flexible control over padding and margin:
-
-### Basic Spacing
+`padding` and `margin` each take a CSS-like shorthand of gap tokens — 1–4
+space-separated values following the same rules as CSS `padding`/`margin`. They are
+independent and can be combined.
 
 ```jsx
-// Simple number - applies to all sides at sm breakpoint
-<Flex spacing={2}>Content</Flex>
+// All sides
+<Flex padding="base">Content</Flex>
 
-// SpacingDefinition object
-<Flex spacing={{ all: 2, horizontal: 3 }}>Content</Flex>
+// top/bottom · left/right
+<Flex padding="small base">Content</Flex>
 
-// Responsive spacing
-<Flex spacing={{
-  sm: { all: 1 },
-  md: { horizontal: 2, vertical: 1 },
-  lg: { all: 3 }
-}}>Content</Flex>
+// top · left/right · bottom
+<Flex margin="large none base">Content</Flex>
+
+// Padding and margin together
+<Flex padding="base" margin="none none large">Content</Flex>
+
+// Per-breakpoint via the breakpoints prop
+<Flex padding="small" breakpoints={{ "tablet+": { padding: "base large" } }}>Content</Flex>
 ```
+
+> **Deprecated:** the `spacing` prop and its `type` (`"padding" | "margin"`) companion
+> still work but are deprecated. `spacing` maps to `padding`, or to `margin` when
+> `type="margin"`; explicit `padding` / `margin` take precedence. Migrate
+> `spacing="…"` → `padding="…"`, and `type="margin" spacing="…"` → `margin="…"`.
+
+> **Note:** the tables below describe an older object-based spacing API and are
+> out of date pending the README-standardization pass.
 
 ### Spacing Properties
 

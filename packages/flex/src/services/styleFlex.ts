@@ -1,21 +1,22 @@
+import { getConstant } from "nice-react-styles"
 import {
   FlexProps,
-  FlexTypeType,
   FlexDirectionType,
   FlexAlignItemsType,
   FlexJustifyContentType,
   FlexWrapType,
   FlexGapSizeType,
+  FlexHeightType,
   SpacingDefinition,
 } from "../components/Flex/Flex.types"
 import { getGapSize } from "./getGapSize"
 import { getSpacingValue } from "./getSpacingValue"
 import { styleSpacing } from "./styleSpacing"
 
-// Phone establishes the flex context; larger breakpoints inherit it. `inline`
+// Phone establishes the flex context; larger breakpoints inherit it. `inlined`
 // switches it to an inline-level flex container (`display: inline-flex`).
-function pushDisplayStyles(styles: string[], inline: boolean | undefined): void {
-  styles.push(`display: ${inline ? "inline-flex" : "flex"};`)
+function pushDisplayStyles(styles: string[], inlined: boolean | undefined): void {
+  styles.push(`display: ${inlined ? "inline-flex" : "flex"};`)
 }
 
 function pushDirectionStyles(styles: string[], direction: FlexDirectionType): void {
@@ -56,12 +57,17 @@ function pushGapStyles(styles: string[], gap: FlexGapSizeType): void {
   }
 }
 
+// Fix the container height to a cell-height token variant (--np--cell-height--…).
+function pushHeightStyles(styles: string[], height: FlexHeightType): void {
+  styles.push(`height: ${getConstant("cellHeight", height)};`)
+}
+
 function pushSpacingStyles(
   styles: string[],
-  type: FlexTypeType | undefined,
+  type: "padding" | "margin",
   spacing: SpacingDefinition
 ): void {
-  const spacingStyles = styleSpacing(type || "padding", spacing)
+  const spacingStyles = styleSpacing(type, spacing)
   if (spacingStyles) {
     styles.push(spacingStyles)
   }
@@ -89,10 +95,11 @@ function pushSpacingStyles(
 export const styleFlex = (props: FlexProps): string => {
   const styles: string[] = []
 
-  const { direction, gap, grow, shrink, alignItems, justifyContent, wrap, fit, inline, spacing, type } = props
-  const spacingDefinition = getSpacingValue(spacing)
+  const { direction, gap, grow, shrink, alignItems, justifyContent, wrap, fit, inlined, padding, margin, height } = props
+  const paddingDefinition = getSpacingValue(padding)
+  const marginDefinition = getSpacingValue(margin)
 
-  pushDisplayStyles(styles, inline)
+  pushDisplayStyles(styles, inlined)
   if (direction) pushDirectionStyles(styles, direction)
   if (alignItems) pushAlignItemsStyles(styles, alignItems)
   if (justifyContent) pushJustifyContentStyles(styles, justifyContent)
@@ -101,7 +108,9 @@ export const styleFlex = (props: FlexProps): string => {
   if (wrap) pushWrapStyles(styles, wrap)
   if (fit) pushFitStyles(styles)
   if (gap !== undefined) pushGapStyles(styles, gap)
-  if (spacingDefinition) pushSpacingStyles(styles, type, spacingDefinition)
+  if (height) pushHeightStyles(styles, height)
+  if (paddingDefinition) pushSpacingStyles(styles, "padding", paddingDefinition)
+  if (marginDefinition) pushSpacingStyles(styles, "margin", marginDefinition)
 
   return styles.join("\n")
 }

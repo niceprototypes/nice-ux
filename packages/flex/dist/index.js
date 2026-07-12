@@ -4,7 +4,6 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 var niceReactStyles = require('nice-react-styles');
 var jsxRuntime = require('react/jsx-runtime');
-require('react');
 var styled = require('styled-components');
 
 /**
@@ -155,10 +154,10 @@ const styleSpacing = (type, def) => {
     return parts.join("\n");
 };
 
-// Phone establishes the flex context; larger breakpoints inherit it. `inline`
+// Phone establishes the flex context; larger breakpoints inherit it. `inlined`
 // switches it to an inline-level flex container (`display: inline-flex`).
-function pushDisplayStyles(styles, inline) {
-    styles.push(`display: ${inline ? "inline-flex" : "flex"};`);
+function pushDisplayStyles(styles, inlined) {
+    styles.push(`display: ${inlined ? "inline-flex" : "flex"};`);
 }
 function pushDirectionStyles(styles, direction) {
     styles.push(`flex-direction: ${direction};`);
@@ -190,8 +189,12 @@ function pushGapStyles(styles, gap) {
         styles.push(`gap: ${gapValue};`);
     }
 }
+// Fix the container height to a cell-height token variant (--np--cell-height--…).
+function pushHeightStyles(styles, height) {
+    styles.push(`height: ${niceReactStyles.getConstant("cellHeight", height)};`);
+}
 function pushSpacingStyles(styles, type, spacing) {
-    const spacingStyles = styleSpacing(type || "padding", spacing);
+    const spacingStyles = styleSpacing(type, spacing);
     if (spacingStyles) {
         styles.push(spacingStyles);
     }
@@ -217,9 +220,10 @@ function pushSpacingStyles(styles, type, spacing) {
  */
 const styleFlex = (props) => {
     const styles = [];
-    const { direction, gap, grow, shrink, alignItems, justifyContent, wrap, fit, inline, spacing, type } = props;
-    const spacingDefinition = getSpacingValue(spacing);
-    pushDisplayStyles(styles, inline);
+    const { direction, gap, grow, shrink, alignItems, justifyContent, wrap, fit, inlined, padding, margin, height } = props;
+    const paddingDefinition = getSpacingValue(padding);
+    const marginDefinition = getSpacingValue(margin);
+    pushDisplayStyles(styles, inlined);
     if (direction)
         pushDirectionStyles(styles, direction);
     if (alignItems)
@@ -236,8 +240,12 @@ const styleFlex = (props) => {
         pushFitStyles(styles);
     if (gap !== undefined)
         pushGapStyles(styles, gap);
-    if (spacingDefinition)
-        pushSpacingStyles(styles, type, spacingDefinition);
+    if (height)
+        pushHeightStyles(styles, height);
+    if (paddingDefinition)
+        pushSpacingStyles(styles, "padding", paddingDefinition);
+    if (marginDefinition)
+        pushSpacingStyles(styles, "margin", marginDefinition);
     return styles.join("\n");
 };
 
@@ -268,7 +276,7 @@ const isForwardable = (prop) => ALLOWED_DOM_PROPS.has(prop) ||
  *
  * 1. **Prop Filtering**: Uses `shouldForwardProp` to prevent style-related props from
  *    being passed to the DOM, avoiding React warnings about unknown DOM properties.
- *    Filtered props: spacing, gap, direction, alignItems, justifyContent, grow, shrink, wrap
+ *    Filtered props: padding, margin, gap, direction, alignItems, justifyContent, grow, shrink, wrap
  *
  * 2. **Service Integration**: Delegates CSS generation to the `styleFlex`
  *    service, emitting a single style block from the resolved props.
@@ -319,19 +327,18 @@ const FlexStyled = styled.div.withConfig({
  * </Flex>
  *
  * @example
- * // Using spacing with CSS-like shorthand
- * <Flex spacing="small base" gap="small">
+ * // Padding with CSS-like shorthand
+ * <Flex padding="small base" gap="small">
  *   <div>Padded content (top/bottom: small, left/right: base)</div>
  * </Flex>
  *
  * @example
- * // Responsive spacing with margin type
+ * // Responsive margin
  * <Flex
- *   type="margin"
- *   spacing="small"
+ *   margin="small"
  *   breakpoints={{
- *     "tablet+": { spacing: "base large" },
- *     "laptop+": { spacing: "small base large smaller" },
+ *     "tablet+": { margin: "base large" },
+ *     "laptop+": { margin: "small base large smaller" },
  *   }}
  * >
  *   <div>Responsive margins</div>

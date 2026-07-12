@@ -2,6 +2,7 @@ import * as React from "react"
 import type {
   BreakpointName,
   GapType,
+  CellHeightType,
   SpacingShorthandType,
   SpacingDefinitionType,
 } from "nice-react-styles"
@@ -15,15 +16,12 @@ import type {
 export type FlexGapSizeType = GapType
 
 /**
- * FlexTypeType
+ * FlexHeightType
  *
- * Determines whether spacing properties apply as padding or margin.
- *
- * Values:
- * - "padding": Applies spacing as internal padding
- * - "margin": Applies spacing as external margin
+ * Re-export of CellHeightType from nice-styles. Fixes the flex container's
+ * height to a cell-height token variant — resolves to `--np--cell-height--{variant}`.
  */
-export type FlexTypeType = "padding" | "margin"
+export type FlexHeightType = CellHeightType
 
 /**
  * FlexBreakpointType
@@ -101,8 +99,6 @@ export type FlexSpacingDefinitionType = SpacingDefinitionType
  * - desktop: min-width query for desktop screens
  */
 export type FlexProps = {
-  /** Whether spacing applies as padding or margin */
-  type?: FlexTypeType
   gap?: FlexGapSizeType
   direction?: FlexDirectionType
   alignItems?: FlexAlignItemsType
@@ -113,8 +109,13 @@ export type FlexProps = {
   /** Shrink the container to its content via `width: max-content`. @default false */
   fit?: boolean
   /** Render as an inline-level flex container (`display: inline-flex`). @default false */
-  inline?: boolean
-  spacing?: FlexSpacingType
+  inlined?: boolean
+  /** Internal padding as a CSS-like shorthand of gap tokens (1–4 values). */
+  padding?: FlexSpacingType
+  /** External margin as a CSS-like shorthand of gap tokens (1–4 values). */
+  margin?: FlexSpacingType
+  /** Fix the container height to a cell-height token (`--np--cell-height--{variant}`). */
+  height?: FlexHeightType
   children: React.ReactNode
   style?: React.CSSProperties
   className?: string
@@ -131,7 +132,7 @@ const FlexTypes = {} as const
 
 namespace FlexTypes {
   export type GapSize = FlexGapSizeType
-  export type Type = FlexTypeType
+  export type Height = FlexHeightType
   export type Breakpoint = FlexBreakpointType
   export type Direction = FlexDirectionType
   export type AlignItems = FlexAlignItemsType

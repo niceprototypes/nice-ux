@@ -31,7 +31,7 @@ const isForwardable = (prop: string): boolean =>
  *
  * 1. **Prop Filtering**: Uses `shouldForwardProp` to prevent style-related props from
  *    being passed to the DOM, avoiding React warnings about unknown DOM properties.
- *    Filtered props: spacing, gap, direction, alignItems, justifyContent, grow, shrink, wrap
+ *    Filtered props: padding, margin, gap, direction, alignItems, justifyContent, grow, shrink, wrap
  *
  * 2. **Service Integration**: Delegates CSS generation to the `styleFlex`
  *    service, emitting a single style block from the resolved props.
