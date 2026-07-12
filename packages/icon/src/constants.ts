@@ -1,43 +1,11 @@
 /**
- * Available icon names in the icon set
+ * Available icon names and their variants — re-exported from nice-icons, the
+ * single source of truth. nice-icons' generated `index.d.ts` types `iconNames` as
+ * a readonly literal tuple, so `(typeof iconNames)[number]` (Icon.types.ts →
+ * IconNameType) stays the exact name union. `iconVariants` maps each name to the
+ * variant stems it ships (`base` always present, plus any of `fill`, `3d`, …), so
+ * buildIconMap/resolveIconComponent can resolve variants without importing every SVG module.
+ * Do not maintain separate lists here; add icons by dropping folders into
+ * nice-icons and rebuilding it.
  */
-export const iconNames = [
-  "placeholder",
-  "arrow-top",
-  "arrow-right",
-  "arrow-bottom",
-  "arrow-left",
-  "attention",
-  "box",
-  "brush",
-  "calendar",
-  "cancel",
-  "carat-top",
-  "carat-right",
-  "carat-bottom",
-  "carat-left",
-  "check",
-  "cloud",
-  "code",
-  "cog",
-  "contact",
-  "content",
-  "copy",
-  "download",
-  "edit",
-  "link",
-  "lock",
-  "menu",
-  "message",
-  "pause",
-  "plus",
-  "profile",
-  "puzzle",
-  "search",
-  "shuffle",
-  "skip",
-  "spinner",
-  "trash",
-  "upload",
-  "x",
-] as const
+export { iconNames, iconVariants } from "nice-icons"

@@ -4,6 +4,7 @@ import type {
   IconSizeType,
   IconColorType,
   IconStrokeWidthType,
+  IconVariantType,
   IconAnimationType,
   IconAnimationDurationType,
 } from "./Icon.types"
@@ -25,7 +26,7 @@ export const IconWrapperStyled = styled.div.withConfig({
 })<{
   $color?: IconColorType
   $size?: IconSizeType
-  $outlined?: boolean
+  $variant?: IconVariantType
   $strokeWidth?: IconStrokeWidthType
   $strokeScaling?: boolean
   $animation?: IconAnimationType
@@ -50,19 +51,23 @@ export const IconWrapperStyled = styled.div.withConfig({
   svg {
     path, circle, rect, line, polyline, polygon, ellipse {
       ${({ $strokeScaling = false }) => !$strokeScaling && css`vector-effect: non-scaling-stroke;`}
-      ${({ $outlined = false, $color = "base", $strokeWidth = "base" }) =>
-          $outlined
-              ? css`
-                fill: ${getIconToken("color", $color)};
-                stroke: none;
-              `
-              : css`
-                fill: none;
-                stroke: ${getIconToken("color", $color)};
-                stroke-width: ${getIconToken("strokeWidth", $strokeWidth)};
-                stroke-linecap: round;
-                stroke-linejoin: round;
-              `}
+      ${({ $variant = "base", $color = "base", $strokeWidth = "base" }) => {
+          if ($variant === "fill")
+            return css`
+              fill: ${getIconToken("color", $color)};
+              stroke: none;
+            `
+          if ($variant === "base")
+            return css`
+              fill: none;
+              stroke: ${getIconToken("color", $color)};
+              stroke-width: ${getIconToken("strokeWidth", $strokeWidth)};
+              stroke-linecap: round;
+              stroke-linejoin: round;
+            `
+          // Custom variants (e.g. "3d") keep the fill/stroke authored in the SVG.
+          return ""
+        }}
     }
   }
 `

@@ -3,15 +3,15 @@ import { render, screen } from "@testing-library/react"
 import "@testing-library/jest-dom"
 import Icon from "./Icon"
 
-jest.mock("../../services/getIcon", () => ({
-  getIcon: jest.fn().mockImplementation((name: string, outlined: boolean) => {
+jest.mock("../../utilities/resolveIconComponent", () => ({
+  resolveIconComponent: jest.fn().mockImplementation((name: string, variant: string = "base") => {
     if (name === "unknown") return undefined
     return function MockSvg(props: React.SVGAttributes<SVGElement>) {
       return React.createElement("svg", {
         ...props,
         "data-testid": "svg-icon",
         "data-name": name,
-        "data-outlined": outlined ? "true" : "false",
+        "data-variant": variant,
       })
     }
   }),
@@ -23,13 +23,25 @@ describe("Icon", () => {
     const svg = screen.getByTestId("svg-icon")
     expect(svg).toBeInTheDocument()
     expect(svg).toHaveAttribute("data-name", "check")
-    expect(svg).toHaveAttribute("data-outlined", "false")
+    expect(svg).toHaveAttribute("data-variant", "base")
   })
 
-  it("renders an outlined icon when outlined prop is true", () => {
+  it("renders the requested variant", () => {
+    render(<Icon name="arrow-right" variant="fill" />)
+    const svg = screen.getByTestId("svg-icon")
+    expect(svg).toHaveAttribute("data-variant", "fill")
+  })
+
+  it("maps deprecated outlined prop to the fill variant", () => {
     render(<Icon name="arrow-right" outlined />)
     const svg = screen.getByTestId("svg-icon")
-    expect(svg).toHaveAttribute("data-outlined", "true")
+    expect(svg).toHaveAttribute("data-variant", "fill")
+  })
+
+  it("prefers an explicit variant over deprecated outlined", () => {
+    render(<Icon name="arrow-right" variant="base" outlined />)
+    const svg = screen.getByTestId("svg-icon")
+    expect(svg).toHaveAttribute("data-variant", "base")
   })
 
   it("renders with different icon names", () => {

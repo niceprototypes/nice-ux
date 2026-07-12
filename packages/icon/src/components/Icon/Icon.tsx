@@ -2,7 +2,7 @@ import * as React from "react"
 import { Theme } from "nice-react-styles"
 import { IconProps } from "./Icon.types"
 import { IconWrapperStyled, ImageStyled } from "./Icon.styles"
-import { getIcon } from "../../services/getIcon"
+import { resolveIconComponent } from "../../utilities/resolveIconComponent"
 import { getVendorIcon } from "../../services/registerVendorResolver"
 import { isSpinning } from "../../utilities/isSpinning"
 
@@ -30,6 +30,7 @@ import { isSpinning } from "../../utilities/isSpinning"
  */
 const Icon: React.FC<IconProps> = ({
   name = "placeholder",
+  variant,
   outlined = false,
   url,
   color = "base",
@@ -47,6 +48,9 @@ const Icon: React.FC<IconProps> = ({
 }) => {
   // Back-compat: `spinner` still auto-spins when no explicit animation is set.
   const resolvedAnimation = animation ?? (isSpinning(name) ? "spin" : undefined)
+  // Back-compat: deprecated `outlined` maps to the `fill` variant; an explicit
+  // `variant` always takes precedence.
+  const resolvedVariant = variant ?? (outlined ? "fill" : "base")
   const withTheme = (el: React.ReactElement) => (theme ? <Theme name={theme}>{el}</Theme> : el)
 
   // Tier 3: direct vendor component — bypass all resolution, apply token styling
@@ -55,7 +59,7 @@ const Icon: React.FC<IconProps> = ({
       <IconWrapperStyled
         $color={color}
         $size={size}
-        $outlined={outlined}
+        $variant={resolvedVariant}
         $strokeWidth={strokeWidth}
         $strokeScaling={strokeScaling}
         $animation={resolvedAnimation}
@@ -69,13 +73,13 @@ const Icon: React.FC<IconProps> = ({
   }
 
   // Tier 1: custom icon — check internal map first
-  const SvgIcon = getIcon(name, outlined)
+  const SvgIcon = resolveIconComponent(name, resolvedVariant)
   if (SvgIcon) {
     return withTheme(
       <IconWrapperStyled
         $color={color}
         $size={size}
-        $outlined={outlined}
+        $variant={resolvedVariant}
         $strokeWidth={strokeWidth}
         $strokeScaling={strokeScaling}
         $animation={resolvedAnimation}
@@ -96,7 +100,7 @@ const Icon: React.FC<IconProps> = ({
         <IconWrapperStyled
           $color={color}
           $size={size}
-          $outlined={outlined}
+          $variant={resolvedVariant}
           $strokeWidth={strokeWidth}
           $strokeScaling={strokeScaling}
           $animation={resolvedAnimation}
@@ -111,12 +115,12 @@ const Icon: React.FC<IconProps> = ({
   }
 
   // Fallback: render placeholder — name not found in custom or vendor sets
-  const PlaceholderIcon = getIcon("placeholder", outlined)
+  const PlaceholderIcon = resolveIconComponent("placeholder", resolvedVariant)
   return withTheme(
     <IconWrapperStyled
       $color={color}
       $size={size}
-      $outlined={outlined}
+      $variant={resolvedVariant}
       $strokeWidth={strokeWidth}
       $strokeScaling={strokeScaling}
       $animation={resolvedAnimation}

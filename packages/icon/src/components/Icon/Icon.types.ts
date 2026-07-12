@@ -8,6 +8,17 @@ export type IconColorType = ColorType
 export type IconStrokeWidthType = "small" | "base" | "large"
 export type IconColorPropertyType = "color" | "background-color" | "stroke" | "border-color" | "fill"
 export type IconOutlinedType = boolean
+
+/**
+ * IconVariantType
+ *
+ * The icon variant to render — a variant stem an icon ships in nice-icons.
+ * "base" is the default (outline in currentColor); "fill" is the filled version;
+ * icons may add more (e.g. "3d"). Open string so project-specific variants are
+ * accepted: an unknown variant is validated at runtime — the resolver renders "base"
+ * and warns instead of failing.
+ */
+export type IconVariantType = "base" | "fill" | (string & {})
 export type IconUrlType = string
 export type IconViewBoxType = string
 export type IconClassNameType = string
@@ -48,6 +59,12 @@ export type IconVendorComponentType = React.ComponentType
 
 export interface IconProps {
   name?: IconNameType | (string & {})
+  /** Variant to render — "base" (default outline), "fill", or any variant the icon ships */
+  variant?: IconVariantType
+  /**
+   * @deprecated Use `variant` instead. `outlined` maps to `variant="fill"` (true)
+   * or `variant="base"` (false); an explicit `variant` always takes precedence.
+   */
   outlined?: IconOutlinedType
   url?: IconUrlType
   color?: IconColorType
@@ -78,6 +95,7 @@ namespace IconTypes {
   export type Color = IconColorType
   export type StrokeWidth = IconStrokeWidthType
   export type ColorProperty = IconColorPropertyType
+  export type Variant = IconVariantType
   export type Outlined = IconOutlinedType
   export type Url = IconUrlType
   export type ViewBox = IconViewBoxType
