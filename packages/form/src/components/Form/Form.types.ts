@@ -1,17 +1,5 @@
 import * as React from "react"
-import type { GapType, ThemeType } from "nice-react-styles"
-
-/**
- * FormGapType
- *
- * Re-export of GapType from nice-styles.
- * Vertical spacing between the form's direct children, using design tokens.
- *
- * Values:
- * - "none": No spacing
- * - "smaller" | "small" | "base" | "large" | "larger": Token-scaled spacing
- */
-export type FormGapType = GapType
+import type { ThemeType } from "nice-react-styles"
 
 /**
  * FormOnSubmitType
@@ -95,19 +83,14 @@ export type FormTestIdType = string
  * FormProps
  *
  * Complete prop definition for the Form component. A stateless layout
- * container: it renders a semantic `<form>`, stacks its children vertically
- * with token-based spacing, and forwards the submit event. It owns no field
- * state — the consumer manages values.
+ * container: it renders a semantic `<form>`, stacks its children vertically,
+ * and forwards the submit event. It owns no field state — the consumer manages
+ * values. Form applies no spacing between children; wrap them in a `Flex` if you
+ * want a gap.
  */
 export interface FormProps {
   /** Form fields and other content, stacked vertically */
   children: React.ReactNode
-
-  /**
-   * Vertical spacing between direct children
-   * @default "base"
-   */
-  gap?: FormGapType
 
   /** Submit handler — receives the form event (default-prevented unless preventDefault is false) */
   onSubmit?: FormOnSubmitType
@@ -152,7 +135,6 @@ export interface FormProps {
 const FormTypes = {} as const
 
 namespace FormTypes {
-  export type Gap = FormGapType
   export type OnSubmit = FormOnSubmitType
   export type PreventDefault = FormPreventDefaultType
   export type NoValidate = FormNoValidateType

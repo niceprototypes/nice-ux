@@ -1,8 +1,9 @@
 # nice-react-form
 
 Stateless form container for the Nice ecosystem. Renders a semantic `<form>`,
-stacks its children vertically with token-based spacing, and forwards the
-submit event. It owns no field state — you manage values yourself (for example
+stacks its children vertically, and forwards the submit event. It applies no
+spacing of its own — wrap children in a [`Flex`](https://github.com/niceprototypes/nice-react-flex)
+if you want a gap. It owns no field state — you manage values yourself (for example
 via [nice-react-input](https://github.com/niceprototypes/nice-react-input)'s
 controlled `value` / `onChange`).
 
@@ -25,7 +26,7 @@ function ContactForm() {
   const [name, setName] = React.useState("")
 
   return (
-    <Form gap="large" onSubmit={() => console.log({ email, name })}>
+    <Form onSubmit={() => console.log({ email, name })}>
       <Input value={email} onChange={setEmail} type="email" placeholder="Email" />
       <Input value={name} onChange={setName} placeholder="Name" />
       <Button type="submit">Save</Button>
@@ -39,7 +40,6 @@ function ContactForm() {
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `children` | `React.ReactNode` | — | Fields and content, stacked vertically |
-| `gap` | `GapType` | `"base"` | Vertical spacing between direct children |
 | `onSubmit` | `(event) => void` | — | Submit handler (event is default-prevented unless `preventDefault` is false) |
 | `preventDefault` | `boolean` | `true` | Call `event.preventDefault()` before `onSubmit` |
 | `noValidate` | `boolean` | — | Disable native browser validation |

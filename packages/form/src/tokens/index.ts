@@ -1,1 +1,0 @@
-export { getFormToken } from "./getFormToken"

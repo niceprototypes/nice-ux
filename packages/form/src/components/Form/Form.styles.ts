@@ -1,21 +1,16 @@
 /**
  * Styled Components for Form
  *
- * Renders the semantic `<form>` root and lays out its direct children as a
- * vertical flex stack. Spacing is driven by the `gap` design token so field
- * rhythm matches the rest of the Nice system.
+ * Renders the semantic `<form>` root and stacks its direct children in a
+ * vertical column. Form applies no spacing of its own — wrap children in a
+ * `Flex` if you want a gap.
  *
  * @module styles
  */
 
 import styled from "styled-components"
-import { type GapType } from "nice-react-styles"
-import { getFormToken } from "../../tokens/getFormToken"
 
-export const StyledForm = styled.form<{ $gap: GapType }>`
+export const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
-
-  /* Token-based vertical rhythm between fields */
-  gap: ${({ $gap }) => getFormToken("gap", $gap)};
 `

@@ -6,14 +6,14 @@ import { FormProps } from "./Form.types"
 /**
  * Form component — a stateless layout container for form fields.
  *
- * Renders a semantic `<form>`, stacks its children vertically with
- * token-based spacing, and forwards the submit event. It owns no field
- * state; the consumer manages values (e.g. via nice-react-input's
- * controlled `value` / `onChange`).
+ * Renders a semantic `<form>`, stacks its children vertically, and forwards
+ * the submit event. It owns no field state; the consumer manages values (e.g.
+ * via nice-react-input's controlled `value` / `onChange`). Form applies no
+ * spacing — wrap children in a `Flex` if you want a gap.
  *
  * @example
  * ```tsx
- * <Form gap="large" onSubmit={() => save(values)}>
+ * <Form onSubmit={() => save(values)}>
  *   <Input value={email} onChange={setEmail} placeholder="Email" />
  *   <Input value={name} onChange={setName} placeholder="Name" />
  *   <Button type="submit">Save</Button>
@@ -27,7 +27,6 @@ const Form: React.FC<FormProps> = ({
   children,
   className,
   "data-testid": testId,
-  gap = "base",
   id,
   name,
   noValidate,
@@ -44,7 +43,6 @@ const Form: React.FC<FormProps> = ({
 
   const form = (
     <StyledForm
-      $gap={gap}
       aria-describedby={ariaDescribedBy}
       aria-label={ariaLabel}
       autoComplete={autoComplete}

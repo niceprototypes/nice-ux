@@ -1,7 +1,6 @@
 {
-  "$schema": "../configuration/src/exports/schema.json",
-  "description": "Stateless form container for nice-react with token-based field spacing.",
+  "$schema": "../config-exports/src/schema.json",
+  "description": "Stateless form container for nice-react.",
   "default": "Form",
-  "components": ["Form"],
-  "tokens": ["Form"]
+  "components": ["Form"]
 }
