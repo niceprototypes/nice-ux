@@ -1,6 +1,6 @@
 {
   "name": "nice-react-input",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Accessible, themable input component with status variants matching the Nice design system",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
