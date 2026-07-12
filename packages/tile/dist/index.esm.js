@@ -1,6 +1,5 @@
 import { getComponentToken, getToken, Theme, withBreakpoints } from 'nice-react-styles';
 import { jsxs, jsx, Fragment } from 'react/jsx-runtime';
-import 'react';
 import styled, { css } from 'styled-components';
 import Flex from 'nice-react-flex';
 import Typography from 'nice-react-typography';
@@ -87,7 +86,7 @@ $maxWidth && css `max-width: ${$maxWidth};`}
 `;
 
 const TileLayout = ({ children, contentTop, contentRight: TileRight, contentCenter, contentLeft: TileLeft, title, titleProps, description, descriptionProps, theme, gap, spacing, maxWidth, alignItems, justifyContent, }) => {
-    return (jsx(OuterFlex, { direction: "column", grow: 1, spacing: spacing, alignItems: alignItems, justifyContent: justifyContent, gap: gap, "$maxWidth": maxWidth, breakpoints: {
+    return (jsx(OuterFlex, { direction: "column", grow: 1, padding: spacing, alignItems: alignItems, justifyContent: justifyContent, gap: gap, "$maxWidth": maxWidth, breakpoints: {
             "laptop+": {
                 direction: "row",
             },

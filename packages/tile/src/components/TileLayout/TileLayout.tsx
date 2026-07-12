@@ -25,7 +25,7 @@ const TileLayout: React.FC<TileLayoutProps> = ({
     <OuterFlex
       direction="column"
       grow={1}
-      spacing={spacing}
+      padding={spacing}
       alignItems={alignItems}
       justifyContent={justifyContent}
       gap={gap}

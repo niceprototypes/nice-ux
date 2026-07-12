@@ -4,7 +4,6 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 var niceReactStyles = require('nice-react-styles');
 var jsxRuntime = require('react/jsx-runtime');
-require('react');
 var styled = require('styled-components');
 var Flex = require('nice-react-flex');
 var Typography = require('nice-react-typography');
@@ -91,7 +90,7 @@ $maxWidth && styled.css `max-width: ${$maxWidth};`}
 `;
 
 const TileLayout = ({ children, contentTop, contentRight: TileRight, contentCenter, contentLeft: TileLeft, title, titleProps, description, descriptionProps, theme, gap, spacing, maxWidth, alignItems, justifyContent, }) => {
-    return (jsxRuntime.jsx(OuterFlex, { direction: "column", grow: 1, spacing: spacing, alignItems: alignItems, justifyContent: justifyContent, gap: gap, "$maxWidth": maxWidth, breakpoints: {
+    return (jsxRuntime.jsx(OuterFlex, { direction: "column", grow: 1, padding: spacing, alignItems: alignItems, justifyContent: justifyContent, gap: gap, "$maxWidth": maxWidth, breakpoints: {
             "laptop+": {
                 direction: "row",
             },
