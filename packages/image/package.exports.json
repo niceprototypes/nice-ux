@@ -1,5 +1,5 @@
 {
-  "$schema": "../configuration/src/exports/schema.json",
+  "$schema": "../config-exports/src/schema.json",
   "description": "Flexible image component supporting img elements and background-image divs.",
   "default": "Image",
   "components": ["Image"],
