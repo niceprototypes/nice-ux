@@ -16,7 +16,8 @@
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "prepare": "npm run build"
   },
   "keywords": [
     "nice",
@@ -36,5 +37,7 @@
   "devDependencies": {
     "@types/node": "^25.6.0",
     "typescript": "^6.0.0"
-  }
+  },
+  "peerDependencies": {},
+  "dependencies": {}
 }
