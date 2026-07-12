@@ -37,12 +37,14 @@
     "react": ">=19.2.0 <20.0.0"
   },
   "devDependencies": {
-    "nice-configuration": "file:../configuration",
-    "react": "19.2.0",
-    "@types/react": "^19.0.0",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-typescript": "^11.1.5",
+    "@types/react": "^19.0.0",
+    "nice-config-exports": "file:../config-exports",
+    "nice-config-rollup": "file:../config-rollup",
+    "nice-config-typescript": "file:../config-typescript",
+    "react": "19.2.0",
     "rollup": "^4.9.1",
     "rollup-plugin-dts": "^6.1.0",
     "tslib": "^2.6.2",
