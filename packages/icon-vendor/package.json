@@ -38,11 +38,12 @@
     "react": ">=19.2.0"
   },
   "dependencies": {
-    "lucide": "^1.16.0",
-    "nice-configuration": "file:../configuration"
+    "lucide": "^1.16.0"
   },
   "devDependencies": {
     "@types/react": "^19.2.7",
+    "nice-config-rollup": "file:../config-rollup",
+    "nice-config-typescript": "file:../config-typescript",
     "nice-react-icon": "file:../react-icon",
     "react": "^19.2.0",
     "rollup": "^4.3.0",
