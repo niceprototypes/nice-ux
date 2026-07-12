@@ -5,6 +5,16 @@ import { ClickToCopy } from "../../../ClickToCopy"
 import { withCopyAffordance } from "./DataTableCell.helpers"
 import type { DataTableCellProps } from "./DataTableCell.types"
 
+/** Best-effort text content of a rendered node — the clipboard string for a
+ * copyable `node` cell (e.g. the token name inside a `<Typography>`). */
+const nodeText = (node: React.ReactNode): string => {
+  if (node == null || typeof node === "boolean") return ""
+  if (typeof node === "string" || typeof node === "number") return String(node)
+  if (Array.isArray(node)) return node.map(nodeText).join("")
+  if (React.isValidElement(node)) return nodeText((node.props as { children?: React.ReactNode }).children)
+  return ""
+}
+
 /**
  * One cell, rendered per its column's policy:
  * - `"shiki"`: a Shiki CodeBlock that copies on click (with an inline copy
@@ -23,7 +33,7 @@ export const DataTableCell: React.FC<DataTableCellProps> = ({ column, value }) =
       <CodeBlock
         code={String(value)}
         language={column.language ?? "tsx"}
-        inline
+        inlined
         margin="none"
         copyOnClick={copy}
       />
@@ -46,5 +56,9 @@ export const DataTableCell: React.FC<DataTableCellProps> = ({ column, value }) =
     return column.clickToCopy && typeof value === "string" ? withCopyAffordance(<ClickToCopy text={value}>{styled}</ClickToCopy>) : styled
   }
 
-  return <>{value}</>
+  // node (default): rendered as-is, or wrapped in the copy affordance when the
+  // column opts in — the clipboard string is the node's text content.
+  return column.clickToCopy
+    ? withCopyAffordance(<ClickToCopy text={nodeText(value).trim()}>{value}</ClickToCopy>)
+    : <>{value}</>
 }

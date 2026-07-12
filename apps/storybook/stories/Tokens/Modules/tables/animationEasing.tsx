@@ -31,7 +31,7 @@ export const animationEasing = {
   preview: ({ path }) => (
     <Flex
       grow={1}
-      spacing="smaller"
+      padding="smaller"
       style={{
         backgroundColor: getToken("backgroundColor", "dark"),
         border:`1px solid ${getToken("borderColor")}`,

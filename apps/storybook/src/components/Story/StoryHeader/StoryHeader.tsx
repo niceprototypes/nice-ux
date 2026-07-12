@@ -11,7 +11,7 @@ import type { StoryHeaderProps } from "./StoryHeader.types"
  * a horizontal rule. Inserted at the top of every docs page.
  */
 const StoryHeader: React.FC<StoryHeaderProps> = ({ title, description, repositories, children }) => (
-  <HeaderFlex spacing="none none larger" gap="small">
+  <HeaderFlex gap="small" padding="base none">
     <Typography as="h1" size="large" weight="semibold" color="light">{title}</Typography>
     {description ? <Typography>{description}</Typography> : null}
     {repositories?.length ? (

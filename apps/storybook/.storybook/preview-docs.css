@@ -3,18 +3,9 @@
 .sbdocs {
   font-family: var(--np--font-family);
 
-  /* ── 1. Root + containers ─────────────────────────────────────────── */
-
-  &.sbdocs-preview {
-    background-color: var(--np--background-color--dark);
-  }
-
   &.sbdocs-wrapper {
-    background-color: var(--np--background-color);
-    padding: var(--np--gap--larger);
+    padding: 0 var(--np--gap--larger) var(--np--gap--larger);
   }
-
-  /* ── 2. Content typography ────────────────────────────────────────── */
 
   &.sbdocs-content {
     margin-right: auto;
@@ -111,6 +102,9 @@
   code {
     font-family: var(--np--font-family--code);
     font-size: var(--np--font-size--small);
+  }
+
+  code:not(pre.shiki code) {
     background-color: var(--np--background-color--dark);
     border-color: var(--np--border-color);
   }

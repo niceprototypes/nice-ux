@@ -16,18 +16,29 @@ import HorizontalRule from "../../src/components/HorizontalRule"
 
 <StoryHeader title="Icons" />
 
+## Browse
+
+<IconTable
+  codeColumns={[
+    { header: "JS", code: name => `getIcon("${name}")`, width: "16em" },
+    { header: "React", code: name => `<Icon name="${name}" />`, width: "16em" },
+  ]}
+/>
+
+<HorizontalRule />
+
 ## Standalone
 
-Access all **stroke and fill variants** of all icons via the `nice-icons` package:
+Access all **base and fill variants** of all icons via the `nice-icons` package:
 
 <Install package="icons" />
 
 <NewLines count={2} />
 
 <Flex direction="column">
-  <h3>Stroke</h3>
+  <h3>Base</h3>
   <Flex direction="column" gap="larger" alignItems="center" breakpoints={{ "tablet+": { direction: "row" } }}>
-  <CodeBlock language="jsx" code={`import CheckStrokeIcon from "nice-icons/check/stroke.svg"\n\n<CheckStrokeIcon />`} />
+  <CodeBlock language="jsx" code={`import CheckBaseIcon from "nice-icons/check/base.svg"\n\n<CheckBaseIcon />`} />
   <IconPreview name="check" />
   </Flex>
 </Flex>
@@ -38,7 +49,7 @@ Access all **stroke and fill variants** of all icons via the `nice-icons` packag
   <h3>Fill</h3>
   <Flex direction="column" gap="larger" alignItems="center" breakpoints={{ "tablet+": { direction: "row" } }}>
   <CodeBlock language="jsx" code={`import CheckFillIcon from "nice-icons/check/fill.svg"\n\n<CheckFillIcon />`} />
-  <IconPreview name="check" outlined />
+  <IconPreview name="check" variant="fill" />
   </Flex>
 </Flex>
 
@@ -59,7 +70,7 @@ The Icon component allows you to **easily configure icon properties** without an
   color="link"
   strokeWidth="base"
   strokeScaling
-  outlined
+  variant="fill"
   theme="day"
   viewBox="0 0 24 24"
   vendor
@@ -78,24 +89,17 @@ The Icon component allows you to **easily configure icon properties** without an
 
 ## getIcon
 
-Access raw SVG files for a React project:
+The vanilla-JS counterpart to `<Icon>` — returns an icon's **SVG markup as a
+string**, ready to inject without writing HTML or JSX. Styled from the same
+`icon` tokens as the component (size, color, stroke width).
 
-```tsx
-import { getIcon } from "nice-react-icon"
+```js
+import { getIcon } from "nice-icons/get-icon"
 
-const CheckIcon = getIcon("check")          // stroke variant (default)
-const CheckFill = getIcon("check", true)    // outlined → fill variant
+getIcon("check")                                             // base variant (default)
+getIcon("check", "fill")                                     // fill variant
+getIcon("check", "base", { size: "large", color: "link" })  // configured
 
-<CheckIcon />
+// Inject anywhere:
+document.querySelector("#slot").innerHTML = getIcon("check")
 ```
-
-<HorizontalRule />
-
-## Browse
-
-<IconTable
-  codeColumns={[
-    { header: "JS", code: name => `getIcon("${name}")`, width: "16em" },
-    { header: "React", code: name => `<Icon name="${name}" />`, width: "16em" },
-  ]}
-/>

@@ -1,7 +1,9 @@
 import Icon from "nice-react-icon"
-// Categories are internal organization only (never needed to call an icon) —
-// read from nice-icons' data-only catalog, not the consumer-facing icon API.
-import { iconCategories } from "nice-icons/catalog"
+// Icons are a single flat, uniquely-named set — read the names from nice-icons'
+// data-only catalog (no SVG imports). To present grouped subtables, define a
+// manual `{ groupName: names[] }` map here and iterate it instead; nice-icons no
+// longer ships categories (grouping is intentionally maintained by hand).
+import { iconNames } from "nice-icons/catalog"
 import { CodeBlock } from "../../../CodeBlock"
 import { DataTable, withCopyAffordance } from "../../../DataTable"
 import type { DataColumn, DataTableConfig } from "../../../DataTable"
@@ -21,7 +23,7 @@ const buildRows = (names: readonly string[], codeColumns: IconTableColumn[]) =>
       // Wrapped in the same copy affordance the shiki cells get, so the name
       // cell shows the hover copy icon too (node cells skip the cell-level
       // wrapper DataTableCell applies to shiki/text columns).
-      withCopyAffordance(<CodeBlock code={name} language="tsx" inline />),
+      withCopyAffordance(<CodeBlock code={name} language="tsx" inlined />),
       ...codeColumns.map(column => column.code(name)),
     ],
   }))
@@ -29,10 +31,10 @@ const buildRows = (names: readonly string[], codeColumns: IconTableColumn[]) =>
 /**
  * The icon reference table, data-first. The table owns structure (columns,
  * headers, layout); the caller supplies each code column's header and snippet
- * builder. Icons are grouped into one subtable per `iconCategories` entry
- * (base, brands) via DataTable's nested-tables feature — each renders its own
- * heading and header row. `iconNames`/`iconCategories` come from nice-icons, so
- * new icons and categories flow in with no change here.
+ * builder. Icons are a single flat set — one row per `iconNames` entry, rendered
+ * as one table. `iconNames` comes from nice-icons, so new icons flow in with no
+ * change here. To present grouped subtables, iterate a manual `{ group: names[] }`
+ * map (defined here) into `tables` instead.
  */
 export const IconTable = ({ codeColumns }: IconTableProps) => {
   const columns: DataColumn[] = [
@@ -51,10 +53,12 @@ export const IconTable = ({ codeColumns }: IconTableProps) => {
   // Widths index-aligned to `columns`: preview, name, then each code column.
   const columnWidths: (string | null)[] = ["6em", "12em", ...codeColumns.map(column => column.width ?? "20em")]
 
-  const tables: DataTableConfig[] = Object.entries(iconCategories).map(([category, names]) => ({
-    name: category,
-    rows: buildRows(names, codeColumns),
-  }))
+  const tables: DataTableConfig[] = [
+    {
+      name: "icons",
+      rows: buildRows(iconNames, codeColumns),
+    },
+  ]
 
   return <DataTable columns={columns} columnWidths={columnWidths} tables={tables} />
 }

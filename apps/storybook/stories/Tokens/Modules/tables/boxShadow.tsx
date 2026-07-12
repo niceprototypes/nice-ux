@@ -9,7 +9,7 @@ export const boxShadow = {
   preview: (variant) => (
     <Flex
       grow={1}
-      spacing="large"
+      padding="large"
       style={{
         backgroundColor: getToken("backgroundColor", "dark"),
         border:`1px solid ${getToken("borderColor")}`,

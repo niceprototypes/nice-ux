@@ -1,4 +1,3 @@
-import * as React from "react"
 import Button from "nice-react-button"
 import type { ComponentExample } from "./examples.types"
 
@@ -9,19 +8,19 @@ export const icon = {
   description:
     "Renders a nice-react-icon alongside the button label, or as the sole content when no children are provided.",
   variants: [
-    { variant: "label", icon: "arrow-right", children: "Next" },
-    { variant: "iconOnly", icon: "plus", ariaLabel: "Add item" },
+    { variant: "label", iconRight: "arrow-right", children: "Next" },
+    { variant: "iconOnly", iconRight: "plus", ariaLabel: "Add item" },
   ],
   preview: (item) =>
     item.children ? (
-      <Button onClick={() => {}} icon={item.icon}>
+      <Button onClick={() => {}} iconRight={item.iconRight}>
         {item.children}
       </Button>
     ) : (
-      <Button onClick={() => {}} icon={item.icon} aria-label={item.ariaLabel} />
+      <Button onClick={() => {}} iconRight={item.iconRight} aria-label={item.ariaLabel} />
     ),
   code: (item) =>
     item.children
-      ? `<Button icon="${item.icon}" />`
-      : `<Button icon="${item.icon}" aria-label="${item.ariaLabel}" />`,
+      ? `<Button iconRight="${item.iconRight}" />`
+      : `<Button iconRight="${item.iconRight}" aria-label="${item.ariaLabel}" />`,
 } satisfies ComponentExample

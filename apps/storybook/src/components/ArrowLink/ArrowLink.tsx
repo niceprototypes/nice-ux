@@ -22,7 +22,7 @@ interface ArrowLinkProps {
  * label in.
  */
 const ArrowLink: React.FC<ArrowLinkProps> = ({ storyId, children }) => (
-  <Button link weight="semibold" icon="arrow-right" onClick={() => navigate({ storyId })}>
+  <Button anchor weight="semibold" iconRight="arrow-right" onClick={() => navigate({ storyId })}>
     <Plain>{children}</Plain>
   </Button>
 )

@@ -1,4 +1,3 @@
-import * as React from "react"
 import Button from "nice-react-button"
 import type { ComponentExample } from "./examples.types"
 

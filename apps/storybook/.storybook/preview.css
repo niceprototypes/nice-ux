@@ -1,5 +1,7 @@
-/* Reset first — the baseline the nice docs overrides build on top of. */
+@import "nice-styles/tokens.css";
 @import "nice-styles/reset.css";
+
+@import "preview-reset.css";
 @import "preview-docs.css";
 @import "preview-docblock.css";
 
@@ -12,4 +14,8 @@
 [data-theme="day"] * {
   -webkit-font-smoothing: auto !important;
   -moz-osx-font-smoothing: auto !important;
+}
+
+.sb-errordisplay_main {
+  border-color: var(--np--color--error) !important;
 }

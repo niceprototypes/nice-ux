@@ -5,8 +5,7 @@ import { direction } from "./direction"
 import { gap } from "./gap"
 import { grow } from "./grow"
 import { justifyContent } from "./justifyContent"
-import { spacing } from "./spacing"
-import { typeExample } from "./type"
+import { padding } from "./padding"
 import { wrap } from "./wrap"
 
 export type { ComponentExample, ExampleVariant } from "./examples.types"
@@ -24,12 +23,11 @@ export type { ComponentExample, ExampleVariant } from "./examples.types"
 export const flexExamples = {
   direction: direction,
   gap,
-  spacing,
+  padding,
   alignItems,
   justifyContent,
   grow,
   wrap,
-  type: typeExample,
 } satisfies Record<string, ComponentExample>
 
 /** Facets in Docs-page order. */

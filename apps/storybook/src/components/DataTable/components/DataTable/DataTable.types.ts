@@ -26,7 +26,11 @@ export interface DataColumn {
   size?: FontSizeType
   /** (`text`) Nice text color. */
   color?: ColorType
-  /** (`text`/string `shiki`) clicking the cell copies its string value. */
+  /**
+   * Clicking the cell copies to the clipboard, with the hover copy-icon
+   * affordance. `text`/string `shiki` copy the string value; `node` copies the
+   * cell's text content. `shiki` defaults on; `text`/`node` default off.
+   */
   clickToCopy?: boolean
   /** (`shiki`) syntax-highlight language. @default "tsx" */
   language?: DataLanguage

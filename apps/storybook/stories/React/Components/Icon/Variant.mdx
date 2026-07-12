@@ -5,12 +5,14 @@ import Typography from "../../../../src/nice/Typography"
 import { DataTableRow } from "../../../../src/components/DataTable"
 import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 
-<Meta title="Components/Icon/outlined" />
+<Meta title="Components/Icon/variant" />
 
-<StoryHeader title="outlined" />
+<StoryHeader title="variant" />
 
 <Typography color="light">
-  Toggles between the stroke-only (outlined) and filled variants of the icon.
+  Selects which variant of the icon to render — <code>base</code> (the default
+  outline) or <code>fill</code> (the filled version). Icons may ship additional
+  variants; requesting one an icon does not have falls back to <code>base</code>.
 </Typography>
 
 <DataTableRow
@@ -18,7 +20,7 @@ import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
   values={[
           <Icon
       size="larger"
-      outlined={false}
+      variant="base"
       name="message"
     />,
           `<Icon size="larger" />`,
@@ -30,10 +32,9 @@ import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
   values={[
           <Icon
       size="larger"
-      outlined={true}
+      variant="fill"
       name="message"
     />,
-          `<Icon size="larger" outlined={true} />`,
+          `<Icon size="larger" variant="fill" />`,
         ]}
 />
-

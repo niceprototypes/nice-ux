@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import Flex from "nice-react-flex"
 import { getToken, type GapType } from "nice-react-styles"
-import { Pill } from "./CodeLabel/CodeLabel.styles"
+import { LabelFlex } from "./CodeBlockLabel/CodeBlockLabel.styles"
 
 /**
  * Wrapper for Shiki-rendered code.
@@ -10,16 +10,16 @@ import { Pill } from "./CodeLabel/CodeLabel.styles"
  * color inline; these rules pick which one applies on the [data-theme] pin and
  * set the code font from the token.
  */
-export const CodeBlockDiv = styled.div<{ $clickable?: boolean; $inline?: boolean; $fit?: boolean; $margin?: GapType }>`
+export const CodeBlockDiv = styled.div<{ $clickable?: boolean; $inlined?: boolean; $fit?: boolean; $margin?: GapType }>`
   position: relative;
+  background-color: ${({ $inlined }) => ($inlined ? "transparent" : getToken("backgroundColor"))};
   ${({ $clickable }) => $clickable && `cursor: pointer;`}
   flex-grow: 1;
-  /* inline: strip the card chrome — margin, padding, border, radius, shadow */
-  padding: ${({ $inline }) => ($inline ? "0" : getToken("gap"))};
-  border: ${({ $inline }) => ($inline ? "none" : `1px solid ${getToken("borderColor")}`)};
-  border-radius: ${({ $inline }) => ($inline ? "0" : getToken("borderRadius"))};
-  box-shadow: ${({ $inline }) => ($inline ? "none" : getToken("boxShadow"))};
+  border: ${({ $inlined }) => ($inlined ? "none" : `1px solid ${getToken("borderColor")}`)};
+  border-radius: ${({ $inlined }) => ($inlined ? "0" : getToken("borderRadius"))};
+  box-shadow: ${({ $inlined }) => ($inlined ? "none" : getToken("boxShadow"))};
   max-width: 720px;
+  overflow: hidden;
 
   /* fit: size the card to its content and lay the code + label out in a centered
      row. Replaces the former outer (<Flex fit>) and inner (<Flex alignItems gap>)
@@ -37,13 +37,13 @@ export const CodeBlockDiv = styled.div<{ $clickable?: boolean; $inline?: boolean
      label (default lightest) both become link-colored on hover to imply it's
      interactive. inline blocks have no border/label to recolor. The label's
      color is set on its inner Typography, so override that element directly. */
-  ${({ $clickable, $inline }) =>
+  ${({ $clickable, $inlined }) =>
     $clickable &&
-    !$inline &&
+    !$inlined &&
     `&:hover {
       border-color: ${getToken("color", "link")};
     }
-    &:hover ${Pill} * {
+    &:hover ${LabelFlex} * {
       color: ${getToken("color", "link")};
     }`}
 
@@ -68,8 +68,14 @@ export const CodeBlockDiv = styled.div<{ $clickable?: boolean; $inline?: boolean
   }
 `
 
-/** Horizontal scroll container for long code lines, with the scrollbar hidden. */
-export const CodeScroll = styled(Flex)`
+/**
+ * Horizontal scroll container for long code lines, with the scrollbar hidden.
+ * Padding applies only to card (non-inlined) blocks; inlined blocks sit flush.
+ */
+export const ScrollDiv = styled(Flex).attrs<{ $inlined?: boolean }>(({ $inlined }) => ({
+  padding: $inlined ? undefined : "base",
+}))`
+  padding-right: 5em;
   max-width: 100%;
   overflow-x: auto;
   -ms-overflow-style: none; /* Internet Explorer 10+ */

@@ -27,7 +27,7 @@ const WelcomeLink: React.FC<Props> = ({ storyId, iconName, title, children }) =>
         }
       }}
     >
-      <Flex direction="column" gap="base" spacing="large">
+      <Flex direction="column" gap="base" padding="large">
         <Flex alignItems="center" gap="small">
           <Icon
             name={iconName}

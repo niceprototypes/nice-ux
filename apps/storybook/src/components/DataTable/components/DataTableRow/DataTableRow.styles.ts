@@ -21,10 +21,22 @@ export const ColumnFlex = styled(Flex)<{ $width?: string | null }>`
   }
 `
 
+// Clips a row/header's horizontal bleed. RowFlex pads its cells with an inline
+// padding rim plus an equal *negative* inline margin (keeps content aligned while a
+// highlight bleeds into the gutter) — but the negative margin makes the row wider
+// than its container, which triggers page-level horizontal scrolling. This shared
+// column wrapper clips that bleed to the table's width, so the alignment trick
+// survives without scrolling the viewport. Both DataTableRow and DataTableHeader
+// wrap their RowFlex in it.
+export const RowClip = styled(Flex).attrs({ direction: "column" })`
+  max-width: 100%;
+  overflow-x: hidden;
+`
+
 // `$showLines={false}` removes the top border and the top padding (keeping the
 // bottom padding), collapsing rows against each other.
-export const RowFlex = styled(Flex).attrs({ spacing: "base none" })<{ $highlighted?: boolean; $rowLines?: boolean; $showLines?: boolean }>`
-  /* Vertical rim from spacing="base none"; a base inline padding rim + an equal
+export const RowFlex = styled(Flex)<{ $highlighted?: boolean; $rowLines?: boolean; $showLines?: boolean }>`
+  /* Vertical rim from padding="base none"; a base inline padding rim + an equal
      negative inline margin so a highlighted row bleeds into the gutter while its
      content stays aligned with the surrounding rows. */
   padding-inline: ${getToken("gap", "larger")} !important;

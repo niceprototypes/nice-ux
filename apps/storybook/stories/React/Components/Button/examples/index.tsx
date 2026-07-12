@@ -1,9 +1,9 @@
 import type { ComponentExample } from "./examples.types"
 
 import { borderRadius } from "./borderRadius"
+import { filled } from "./filled"
 import { icon } from "./icon"
 import { size } from "./size"
-import { state } from "./state"
 import { status } from "./status"
 
 export type { ComponentExample, ExampleVariant } from "./examples.types"
@@ -18,9 +18,9 @@ export type { ComponentExample, ExampleVariant } from "./examples.types"
  * examples and token tables share the same config → render pipeline.
  */
 export const buttonExamples = {
-  status,
+  filled,
   size,
-  state,
+  status,
   borderRadius,
   icon,
 } satisfies Record<string, ComponentExample>

@@ -31,7 +31,7 @@ export const DataTableRows = ({
   return (
     <Flex direction="column">
       {showHeading ? (
-        <Flex direction="column" spacing={isH2 ? "none none larger" : isH3 ? "large none" : undefined}>
+        <Flex direction="column" padding={isH2 ? "none none larger" : isH3 ? "large none" : undefined}>
           <Typography
             as={level}
             {...tableHeadingProps(level)}

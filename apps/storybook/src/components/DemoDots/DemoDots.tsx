@@ -23,7 +23,7 @@ const DemoDots = ({
         justifyContent={justifyContent}
         alignItems={alignItems}
         wrap={wrap}
-        spacing={spacing}
+        padding={spacing}
         style={{
           height,
           width,

@@ -6,8 +6,8 @@ import type { DataColumn } from "../../../DataTable"
  */
 export const COMPONENT_TOKEN_COLUMNS: DataColumn[] = [
   { key: "example", header: null, render: "node" },
-  { key: "tokenName", header: "Token name", render: "node" },
-  { key: "variable", header: "Variable", render: "node" },
+  { key: "tokenName", header: "Token name", render: "node", clickToCopy: true },
+  { key: "variable", header: "Variable", render: "node", clickToCopy: true },
   { key: "value", header: "Default", render: "node" },
 ]
 

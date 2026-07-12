@@ -1,13 +1,14 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
 import HorizontalRule from "../../src/components/HorizontalRule"
-import TokenSummary from "../../src/components/TokenSummary"
+import ResetProperties from "../../src/components/ResetProperties"
 import ResetDemo from "../../src/components/ResetDemo"
 import { resolveVendorImage } from "nice-react-image-vendor"
 import tokensCss from "nice-styles/tokens.css?raw"
 import resetCss from "nice-styles/reset.css?raw"
 import spacingCss from "nice-styles/reset.spacing.css?raw"
 import colorsCss from "nice-styles/reset.colors.css?raw"
+import bordersCss from "nice-styles/reset.borders.css?raw"
 import responsiveCss from "nice-styles/reset.responsive.css?raw"
 
 <Meta
@@ -40,6 +41,7 @@ export const pageHtml = `
 <h1>Chase the northern lights with a guide who knows the sky</h1>
 <img src="${bannerSrc}" alt="Aurora expedition banner (1200×400)" />
 <p>Aurora runs small-group night expeditions above the Arctic Circle. Pick a plan, tell us where to reach you, and we'll <a href="#">send your itinerary</a>.</p>
+<blockquote>The sky did things I didn't know it could do — worth every freezing minute.</blockquote>
 <table>
   <thead><tr><th>Plan</th><th>Nights</th><th>Price</th></tr></thead>
   <tbody>
@@ -49,16 +51,12 @@ export const pageHtml = `
   </tbody>
 </table>
 <form>
-  <table>
-    <tbody>
-      <tr>
-        <td><input type="text" placeholder="First name" /></td>
-        <td><input type="text" placeholder="Last name" /></td>
-      </tr>
-      <tr><td colspan="2"><input type="tel" placeholder="Phone" /></td></tr>
-      <tr><td colspan="2"><input type="email" placeholder="Email" /></td></tr>
-    </tbody>
-  </table>
+  <ul>
+    <li><input type="text" placeholder="First name" /></li>
+    <li><input type="text" placeholder="Last name" /></li>
+    <li><input type="tel" placeholder="Phone" /></li>
+    <li><input type="email" placeholder="Email" /></li>
+  </ul>
   <button type="button">Sign up</button>
 </form>
 `
@@ -67,20 +65,22 @@ export const layer = {
   reset: { file: "reset.css", css: resetCss },
   spacing: { file: "reset.spacing.css", css: spacingCss },
   colors: { file: "reset.colors.css", css: colorsCss },
+  borders: { file: "reset.borders.css", css: bordersCss },
   responsive: { file: "reset.responsive.css", css: responsiveCss },
 }
 
 export const resetExamples = [
-  { label: "Standard CSS", title: "Without reset", layers: [] },
-  { label: "Reset", title: "With reset", layers: [layer.reset] },
-  { label: "Reset + Spacing", title: "reset + spacing", layers: [layer.reset, layer.spacing] },
-  { label: "Reset + Colors", title: "reset + spacing + colors", layers: [layer.reset, layer.spacing, layer.colors] },
-  { label: "Mobile @ 390px", title: "mobile full stack", mobile: true, layers: [layer.reset, layer.spacing, layer.colors, layer.responsive] },
+  { label: "Standard CSS", layers: [] },
+  { label: "Reset", layers: [layer.reset] },
+  { label: "Reset + Spacing", layers: [layer.reset, layer.spacing] },
+  { label: "Reset + Spacing + Colors", layers: [layer.reset, layer.spacing, layer.colors] },
+  { label: "Reset + Spacing + Colors + Borders", layers: [layer.reset, layer.spacing, layer.colors, layer.borders] },
+  { label: "Reset + Responsive", mobile: true, layers: [layer.reset, layer.spacing, layer.colors, layer.borders, layer.responsive] },
 ]
 
-<ResetDemo pageHtml={pageHtml} tokensCss={tokensCss} examples={resetExamples} />
+## Examples
 
-<HorizontalRule />
+<ResetDemo pageHtml={pageHtml} tokensCss={tokensCss} examples={resetExamples} />
 
 ## Reset properties
 
@@ -103,4 +103,4 @@ export const resetSummary = [
   { token: "codeFont", description: "Renders inline code in the design system's monospace typeface.", elements: ["code"] },
 ]
 
-<TokenSummary items={resetSummary} />
+<ResetProperties items={resetSummary} />

@@ -1,0 +1,6 @@
+/* Background color reset */
+.sb-show-main,
+.sbdocs-wrapper {
+  background: none !important;
+  background-color: transparent !important;
+}

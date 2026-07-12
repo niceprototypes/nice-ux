@@ -1,24 +1,7 @@
 @import "nice-styles/tokens.css";
+@import "nice-styles/reset.css";
 
 @import "manager-reset.css";
+@import "manager-background.css";
 @import "manager-sidebar.css";
 @import "manager-toolbar.css";
-
-/* Storybook sets the manager <body> font from a static global (its default
-   "Nunito Sans" stack), not from the theme fontBase — override it here. */
-body {
-  font-family: "Avenir Next", -apple-system, BlinkMacSystemFont, "Roboto",
-    sans-serif !important;
-}
-
-/* Day mode only: turn off Storybook's default font smoothing so light-theme
-   text renders at full weight. Night keeps Storybook's `antialiased` default.
-   storybook-dark-mode toggles `light`/`dark` on the manager <body>
-   (classTarget: 'body'), so key off `light` to track the actual theme toggle.
-   Storybook applies `-webkit-font-smoothing` per element via its theme reset,
-   so `*` + `!important` is needed to override. */
-body.light,
-body.light * {
-  -webkit-font-smoothing: auto !important;
-  -moz-osx-font-smoothing: auto !important;
-}

@@ -12,9 +12,9 @@ export interface ResetLayer {
 
 /** One demo frame: the page rendered under a given stack of reset layers. */
 export interface ResetExample {
-  /** Accessible iframe title — must be unique. */
-  title: string
-  /** Heading above the frame (e.g. "Standard CSS", "Reset + Colors"). */
+  /** Human name for the frame (e.g. "Standard CSS", "Mobile @ 390px"). Shown as
+   * the heading only when no layers are applied; otherwise the frame is titled by
+   * its layer filenames. Also the iframe's accessible title, so keep it unique. */
   label: string
   /** Render at mobile width (390px) instead of the desktop frame. */
   mobile?: boolean
@@ -41,21 +41,26 @@ const frame = (pageHtml: string, css: string): string =>
  * `layers`; the composed `srcDoc` (tokens + those layers) and the import table's
  * file list are both derived here, so the story only declares intent.
  */
-const ResetDemo: React.FC<ResetDemoProps> = ({ pageHtml, tokensCss, examples }) => (
-  <Flex direction="column">
-    {examples.map(example => {
+const ResetDemo: React.FC<ResetDemoProps> = ({
+  pageHtml,
+  tokensCss,
+  examples,
+}) => (
+  <Flex direction="column" gap="larger">
+    {examples.map((example, index) => {
       const layers = example.layers ?? []
-      const css = layers.length ? [tokensCss, ...layers.map(layer => layer.css)].join("\n") : ""
+      const css = layers.length
+        ? [tokensCss, ...layers.map(layer => layer.css)].join("\n")
+        : ""
       return (
-        <React.Fragment key={example.title}>
+        <React.Fragment key={example.label}>
           <ResetDemoItem
             label={example.label}
-            title={example.title}
             mobile={example.mobile}
             files={layers.map(layer => layer.file)}
             srcDoc={frame(pageHtml, css)}
           />
-          <hr/>
+          {index < examples.length - 1 && <hr/>}
         </React.Fragment>
       )
     })}

@@ -1,2 +1,45 @@
-#storybook-sidebar-region {
+
+
+.sidebar-item[data-nodetype="group"] > *:first-child > *:first-child > svg[viewBox="0 0 14 14"] use,
+.sidebar-item[data-nodetype="document"] > *:first-child > *:first-child > svg[viewBox="0 0 14 14"] use,
+.sidebar-item[data-nodetype="story"] > *:first-child > *:first-child > svg[viewBox="0 0 14 14"] use {
+  display: none;
+}
+
+.sidebar-item[data-nodetype="group"] > *:first-child > *:first-child > svg[viewBox="0 0 14 14"],
+.sidebar-item[data-nodetype="document"] > *:first-child > *:first-child > svg[viewBox="0 0 14 14"],
+.sidebar-item[data-nodetype="story"] > *:first-child > *:first-child > svg[viewBox="0 0 14 14"] {
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+.sidebar-item[data-nodetype="group"] > *:first-child > *:first-child > svg[viewBox="0 0 14 14"] {
+  background-color: var(--np--color--link);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%20%3Cstyle%3E.no-fill%7Bfill%3Anone%7D.stroke%7Bstroke%3AcurrentColor%3Bstroke-width%3A1px%3Bstroke-linecap%3Around%3Bstroke-linejoin%3Around%7D%3C%2Fstyle%3E%20%3Cpath%20class%3D%22no-fill%20stroke%22%20d%3D%22M%200%200%20L%20-10.459%200%20C%20-10.981%200%20-11.419%200.392%20-11.477%200.911%20L%20-12.273%208.287%20C%20-12.341%208.893%20-11.866%209.424%20-11.255%209.424%20L%20-5.83%209.424%20C%20-5.515%209.424%20-5.218%209.28%20-5.024%209.032%20L%20-4.65%208.177%20C%20-4.455%207.93%20-4.158%207.785%20-3.844%207.785%20L%200.797%207.785%20C%201.407%207.785%201.78%207.254%201.712%206.648%20L%201.018%200.911%20C%200.96%200.392%200.522%200%200%200%20Z%22%20transform%3D%22matrix(1%2C0%2C0%2C-1%2C13.2798%2C14.15)%22%2F%3E%20%3Cpath%20class%3D%22no-fill%20stroke%22%20d%3D%22M%200%200%20L%200%201.738%20C%20-0.061%202.345%200.369%202.876%200.922%202.876%20L%205.722%202.876%20C%206.175%202.876%206.542%202.509%206.542%202.057%20L%206.542%202.057%20C%206.542%201.604%206.909%201.237%207.361%201.237%20L%2011.479%201.237%20C%2012.033%201.237%2012.37%200.706%2012.309%200.099%20L%2012.309%20-1.642%22%20transform%3D%22matrix(1%2C0%2C0%2C-1%2C1.8345%2C4.7259)%22%2F%3E%20%3C%2Fsvg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%20%3Cstyle%3E.no-fill%7Bfill%3Anone%7D.stroke%7Bstroke%3AcurrentColor%3Bstroke-width%3A1px%3Bstroke-linecap%3Around%3Bstroke-linejoin%3Around%7D%3C%2Fstyle%3E%20%3Cpath%20class%3D%22no-fill%20stroke%22%20d%3D%22M%200%200%20L%20-10.459%200%20C%20-10.981%200%20-11.419%200.392%20-11.477%200.911%20L%20-12.273%208.287%20C%20-12.341%208.893%20-11.866%209.424%20-11.255%209.424%20L%20-5.83%209.424%20C%20-5.515%209.424%20-5.218%209.28%20-5.024%209.032%20L%20-4.65%208.177%20C%20-4.455%207.93%20-4.158%207.785%20-3.844%207.785%20L%200.797%207.785%20C%201.407%207.785%201.78%207.254%201.712%206.648%20L%201.018%200.911%20C%200.96%200.392%200.522%200%200%200%20Z%22%20transform%3D%22matrix(1%2C0%2C0%2C-1%2C13.2798%2C14.15)%22%2F%3E%20%3Cpath%20class%3D%22no-fill%20stroke%22%20d%3D%22M%200%200%20L%200%201.738%20C%20-0.061%202.345%200.369%202.876%200.922%202.876%20L%205.722%202.876%20C%206.175%202.876%206.542%202.509%206.542%202.057%20L%206.542%202.057%20C%206.542%201.604%206.909%201.237%207.361%201.237%20L%2011.479%201.237%20C%2012.033%201.237%2012.37%200.706%2012.309%200.099%20L%2012.309%20-1.642%22%20transform%3D%22matrix(1%2C0%2C0%2C-1%2C1.8345%2C4.7259)%22%2F%3E%20%3C%2Fsvg%3E");
+}
+
+.sidebar-item[data-nodetype="group"] > *:first-child {
+  color: var(--np--color--link);
+}
+
+.sidebar-item[data-nodetype="document"] > *:first-child > *:first-child > svg[viewBox="0 0 14 14"],
+.sidebar-item[data-nodetype="story"] > *:first-child > *:first-child > svg[viewBox="0 0 14 14"] {
+  background-color: var(--np--color);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%20%3Cstyle%3E.no-fill%7Bfill%3Anone%7D.stroke%7Bstroke%3AcurrentColor%3Bstroke-width%3A1px%3Bstroke-linecap%3Around%3Bstroke-linejoin%3Around%7D%3C%2Fstyle%3E%20%3Cpath%20class%3D%22no-fill%20stroke%22%20d%3D%22M%200%200%20L%20-9.061%200%20C%20-9.613%200%20-10.061%200.448%20-10.061%201%20L%20-10.061%2013%20C%20-10.061%2013.552%20-9.613%2014%20-9.061%2014%20L%20-4.53%2014%20L%20-4.53%208.47%20L%201%208.47%20L%201%201%20C%201%200.448%200.552%200%200%200%20Z%22%20transform%3D%22matrix(1%2C0%2C0%2C-1%2C12.5305%2C14.9596)%22%2F%3E%20%3Cpath%20class%3D%22no-fill%20stroke%22%20d%3D%22M%200%200%20L%205.53%20-5.53%22%20transform%3D%22matrix(1%2C0%2C0%2C-1%2C8%2C0.9596)%22%2F%3E%20%3Cpath%20class%3D%22no-fill%20stroke%22%20d%3D%22M%200%200%20L%205.061%200%22%20transform%3D%22matrix(1%2C0%2C0%2C-1%2C5.4696%2C11.9748)%22%2F%3E%20%3Cpath%20class%3D%22no-fill%20stroke%22%20d%3D%22M%200%200%20L%205.061%200%22%20transform%3D%22matrix(1%2C0%2C0%2C-1%2C5.4696%2C9.4748)%22%2F%3E%20%3C%2Fsvg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%20%3Cstyle%3E.no-fill%7Bfill%3Anone%7D.stroke%7Bstroke%3AcurrentColor%3Bstroke-width%3A1px%3Bstroke-linecap%3Around%3Bstroke-linejoin%3Around%7D%3C%2Fstyle%3E%20%3Cpath%20class%3D%22no-fill%20stroke%22%20d%3D%22M%200%200%20L%20-9.061%200%20C%20-9.613%200%20-10.061%200.448%20-10.061%201%20L%20-10.061%2013%20C%20-10.061%2013.552%20-9.613%2014%20-9.061%2014%20L%20-4.53%2014%20L%20-4.53%208.47%20L%201%208.47%20L%201%201%20C%201%200.448%200.552%200%200%200%20Z%22%20transform%3D%22matrix(1%2C0%2C0%2C-1%2C12.5305%2C14.9596)%22%2F%3E%20%3Cpath%20class%3D%22no-fill%20stroke%22%20d%3D%22M%200%200%20L%205.53%20-5.53%22%20transform%3D%22matrix(1%2C0%2C0%2C-1%2C8%2C0.9596)%22%2F%3E%20%3Cpath%20class%3D%22no-fill%20stroke%22%20d%3D%22M%200%200%20L%205.061%200%22%20transform%3D%22matrix(1%2C0%2C0%2C-1%2C5.4696%2C11.9748)%22%2F%3E%20%3Cpath%20class%3D%22no-fill%20stroke%22%20d%3D%22M%200%200%20L%205.061%200%22%20transform%3D%22matrix(1%2C0%2C0%2C-1%2C5.4696%2C9.4748)%22%2F%3E%20%3C%2Fsvg%3E");
+}
+
+.sidebar-item > a {
+  align-items: center;
+
+  > div {
+    margin: 0;
+    width: var(--np--icon--size--small);
+    height: var(--np--icon--size--small);
+  }
 }

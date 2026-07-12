@@ -2,16 +2,28 @@ import styled from "styled-components"
 import Flex from "nice-react-flex"
 import { getToken } from "nice-react-styles"
 
-/**
- * Fixed bottom-right control bar — the flex wrapper holding the back/next nav
- * and the theme toggle in one row.
- */
 export const FooterFlex = styled(Flex).attrs({
-  alignItems: "center",
-  gap: "small",
+  gap: "larger",
+  padding: "base larger",
+  justifyContent: "space-evenly",
 })`
   position: fixed;
-  bottom: ${getToken("gap", "large")};
-  right: ${getToken("gap", "large")};
+  left: 0;
+  bottom: 0;
+  right: 0;
   z-index: 9999;
+  background-color: ${getToken("backgroundColor")};
+`
+
+export const FooterSubFlex = styled(Flex).attrs({
+  gap: "large",
+  grow: 1,
+})`
+  a {
+    color: ${getToken("color", "lighter")} !important;
+    
+    &:hover {
+      color: ${getToken("color")} !important;
+    }
+  }
 `

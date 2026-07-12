@@ -13,7 +13,7 @@ const DemoDot = ({
 }: DemoDotProps) => (
   <Flex
     grow={grow}
-    spacing={spacing}
+    padding={spacing}
   >
     <Flex
       grow={1}

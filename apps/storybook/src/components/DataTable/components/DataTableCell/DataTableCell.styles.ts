@@ -3,13 +3,13 @@ import Flex from "nice-react-flex"
 import { getBreakpoint } from "nice-react-styles"
 
 /**
- * Copyable-cell affordance: an inline-flex row (via Flex's `inline` prop) holding
+ * Copyable-cell affordance: an inline-flex row (via Flex's `inlined` prop) holding
  * the value beside a small copy icon (rendered in the "lightest" color). Hovering
  * recolors the stroke-drawn icon to the link color to signal the click-to-copy
  * action — replaces the former hover "Copy to clipboard" tooltip.
  */
 export const CopyAffordance = styled(Flex).attrs({
-  inline: true,
+  inlined: true,
   alignItems: "center",
   gap: "small",
 })`
