@@ -16,6 +16,8 @@ const OFFSET = 8
  * `delayShow` / `delayHide` defer the render / unrender so brief passes don't
  * flash the tooltip. The bubble renders in a portal at `<body>` with
  * `position: fixed`, so it is never clipped by an overflow-scrolling ancestor.
+ * `anchor` chooses what the bubble positions against: the trigger's rect
+ * (default) or the pointer position captured at activation (`"cursor"`).
  *
  * @example
  * ```tsx
@@ -27,6 +29,11 @@ const OFFSET = 8
  * <Tooltip content="Details" trigger="click" position="bottom">
  *   <Icon name="info" />
  * </Tooltip>
+ *
+ * // Anchored to where the pointer entered, not the trigger box
+ * <Tooltip content="At the cursor" anchor="cursor">
+ *   <span>Hover anywhere on me</span>
+ * </Tooltip>
  * ```
  */
 const Tooltip: React.FC<TooltipProps> = ({
@@ -34,6 +41,7 @@ const Tooltip: React.FC<TooltipProps> = ({
   children,
   trigger = "hover",
   position = "top",
+  anchor = "trigger",
   delayShow = 0,
   delayHide = 0,
   className,
@@ -41,6 +49,10 @@ const Tooltip: React.FC<TooltipProps> = ({
   const triggerRef = React.useRef<HTMLSpanElement>(null)
   const showTimer = React.useRef<number | undefined>(undefined)
   const hideTimer = React.useRef<number | undefined>(undefined)
+  // Pointer position captured synchronously at activation, for anchor="cursor".
+  // Stored in a ref so the deferred (delayShow) read isn't stale and doesn't
+  // depend on event pooling.
+  const cursor = React.useRef<{ x: number; y: number } | null>(null)
   const [visible, setVisible] = React.useState(false)
   const [coords, setCoords] = React.useState<{ top: number; left: number }>({ top: 0, left: 0 })
 
@@ -49,9 +61,30 @@ const Tooltip: React.FC<TooltipProps> = ({
     window.clearTimeout(hideTimer.current)
   }
 
-  // Anchor the bubble to the trigger's current rect. The bubble is then offset
-  // onto the chosen side by `transformFor()` (it owns the centering translate).
+  // Anchor the bubble to the trigger's current rect, or to the pointer position
+  // captured at activation when anchor="cursor". The bubble is then offset onto
+  // the chosen side by `transformFor()` (it owns the centering translate). Both
+  // anchors yield viewport coordinates, matching the bubble's position: fixed.
   const computeCoords = () => {
+    // Cursor anchor: clientX/clientY rode in on the activating event — no
+    // measurement, no reflow. Place the OFFSET on the chosen side of the point.
+    if (anchor === "cursor" && cursor.current) {
+      const { x, y } = cursor.current
+      switch (position) {
+        case "bottom":
+          setCoords({ top: y + OFFSET, left: x })
+          break
+        case "left":
+          setCoords({ top: y, left: x - OFFSET })
+          break
+        case "right":
+          setCoords({ top: y, left: x + OFFSET })
+          break
+        default: // top
+          setCoords({ top: y - OFFSET, left: x })
+      }
+      return
+    }
     const el = triggerRef.current
     if (!el) return
     const r = el.getBoundingClientRect()
@@ -71,7 +104,10 @@ const Tooltip: React.FC<TooltipProps> = ({
   }
 
   // Show after delayShow; measure first so the bubble appears already placed.
-  const show = () => {
+  // Capture the pointer position synchronously (before the timeout) for the
+  // cursor anchor — the event's clientX/clientY are only valid right now.
+  const show = (e?: React.MouseEvent) => {
+    if (e) cursor.current = { x: e.clientX, y: e.clientY }
     clearTimers()
     showTimer.current = window.setTimeout(() => {
       computeCoords()
@@ -106,7 +142,7 @@ const Tooltip: React.FC<TooltipProps> = ({
   // Hover trigger: show on enter, hide on leave. Click trigger: toggle.
   const handlers =
     trigger === "click"
-      ? { onClick: () => (visible ? hide() : show()) }
+      ? { onClick: (e: React.MouseEvent) => (visible ? hide() : show(e)) }
       : { onMouseEnter: show, onMouseLeave: hide }
 
   return (

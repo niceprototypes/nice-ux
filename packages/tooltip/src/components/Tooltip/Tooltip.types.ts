@@ -22,6 +22,20 @@ export type TooltipTriggerType = "hover" | "click"
 export type TooltipPositionType = "top" | "bottom" | "left" | "right"
 
 /**
+ * TooltipAnchorType
+ *
+ * What the bubble is positioned against.
+ *
+ * Values:
+ * - "trigger" (default): anchored to the trigger element's bounding rect
+ * - "cursor": anchored to the pointer position captured at activation. The
+ *   coordinates ride in on the activating mouse event — no extra listener or
+ *   measurement — so there is no added DOM cost (it also skips the trigger's
+ *   getBoundingClientRect reflow). One-shot: it does not follow the cursor.
+ */
+export type TooltipAnchorType = "trigger" | "cursor"
+
+/**
  * TooltipContentType
  *
  * The tooltip's content — text or arbitrary markup shown in the bubble.
@@ -56,6 +70,11 @@ export interface TooltipProps {
   trigger?: TooltipTriggerType
   /** Side of the trigger the bubble is placed on. @default "top" */
   position?: TooltipPositionType
+  /**
+   * What the bubble is anchored to: the trigger's rect, or the pointer position
+   * captured at activation. @default "trigger"
+   */
+  anchor?: TooltipAnchorType
   /** Delay in ms before the tooltip is rendered. @default 0 */
   delayShow?: TooltipDelayType
   /** Delay in ms before the tooltip is unrendered. @default 0 */
@@ -70,6 +89,7 @@ const TooltipTypes = {} as const
 namespace TooltipTypes {
   export type Trigger = TooltipTriggerType
   export type Position = TooltipPositionType
+  export type Anchor = TooltipAnchorType
   export type Content = TooltipContentType
   export type Delay = TooltipDelayType
   export type ClassName = TooltipClassNameType
