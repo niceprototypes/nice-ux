@@ -1,6 +1,6 @@
 {
   "name": "nice-react-lightbox",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "type": "module",
   "description": "A fullscreen image lightbox component for React with styled-components",
   "main": "dist/index.js",
