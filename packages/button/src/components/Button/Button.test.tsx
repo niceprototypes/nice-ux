@@ -26,14 +26,36 @@ describe("Button", () => {
   })
 
   it("renders button with icon only", () => {
-    render(<Button onClick={mockOnClick} icon="check" aria-label="Confirm" />)
+    render(<Button onClick={mockOnClick} iconRight="check" aria-label="Confirm" />)
     expect(screen.getByTestId("icon")).toHaveTextContent("check")
   })
 
   it("renders button with both text and icon", () => {
-    render(<Button onClick={mockOnClick} icon="arrow-right">Next</Button>)
+    render(<Button onClick={mockOnClick} iconRight="arrow-right">Next</Button>)
     expect(screen.getByRole("button")).toHaveTextContent("Next")
     expect(screen.getByTestId("icon")).toBeInTheDocument()
+  })
+
+  it("renders iconRight", () => {
+    render(<Button onClick={mockOnClick} iconRight="arrow-right">Next</Button>)
+    expect(screen.getByTestId("icon")).toHaveTextContent("arrow-right")
+  })
+
+  it("renders iconLeft", () => {
+    render(<Button onClick={mockOnClick} iconLeft="arrow-left">Back</Button>)
+    expect(screen.getByTestId("icon")).toHaveTextContent("arrow-left")
+  })
+
+  it("renders iconLeft before the label and iconRight after it", () => {
+    render(
+      <Button onClick={mockOnClick} iconLeft="arrow-left" iconRight="arrow-right">
+        Both
+      </Button>
+    )
+    const icons = screen.getAllByTestId("icon")
+    expect(icons).toHaveLength(2)
+    expect(icons[0]).toHaveTextContent("arrow-left")
+    expect(icons[1]).toHaveTextContent("arrow-right")
   })
 
   it("calls onClick when clicked", () => {
@@ -42,8 +64,8 @@ describe("Button", () => {
     expect(mockOnClick).toHaveBeenCalledTimes(1)
   })
 
-  it("does not call onClick when state is disabled", () => {
-    render(<Button onClick={mockOnClick} state="disabled">Disabled</Button>)
+  it("does not call onClick when status is disabled", () => {
+    render(<Button onClick={mockOnClick} status="disabled">Disabled</Button>)
     fireEvent.click(screen.getByRole("button"))
     expect(mockOnClick).not.toHaveBeenCalled()
   })
@@ -71,20 +93,20 @@ describe("Button", () => {
     expect(screen.getByRole("button")).toBeInTheDocument()
   })
 
-  it("renders with different statuses", () => {
-    const { rerender } = render(<Button onClick={mockOnClick} status="primary">Primary</Button>)
+  it("renders filled and outline", () => {
+    const { rerender } = render(<Button onClick={mockOnClick} filled>Filled</Button>)
     expect(screen.getByRole("button")).toBeInTheDocument()
 
-    rerender(<Button onClick={mockOnClick} status="base">Base</Button>)
+    rerender(<Button onClick={mockOnClick}>Outline</Button>)
     expect(screen.getByRole("button")).toBeInTheDocument()
   })
 
-  it("renders with different states", () => {
-    const states = ["base", "disabled", "error", "success", "warning"] as const
-    const { rerender } = render(<Button onClick={mockOnClick} state="base">Base</Button>)
+  it("renders with different statuses", () => {
+    const statuses = ["base", "disabled", "error", "success", "warning"] as const
+    const { rerender } = render(<Button onClick={mockOnClick} status="base">Base</Button>)
 
-    states.forEach((state) => {
-      rerender(<Button onClick={mockOnClick} state={state}>{state}</Button>)
+    statuses.forEach((status) => {
+      rerender(<Button onClick={mockOnClick} status={status}>{status}</Button>)
       expect(screen.getByRole("button")).toBeInTheDocument()
     })
   })

@@ -12,9 +12,9 @@ import {
  * getButtonToken("size", "base")
  * ```
  *
- * Path lookup — for nested tokens (e.g., status variants):
+ * Path lookup — for nested tokens (e.g., the icon color layer):
  * ```ts
- * getButtonToken(["status", "primary", "backgroundColor", "base"])
+ * getButtonToken(["icon", "color", "base"])
  * ```
  *
  * Three sibling functions return the three accessor forms.

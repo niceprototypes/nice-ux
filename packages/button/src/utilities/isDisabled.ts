@@ -1,8 +1,8 @@
-import type { ButtonStateType } from "../components/Button/Button.types"
+import type { ButtonStatusType } from "../components/Button/Button.types"
 
 /**
- * Determines if the button is disabled based on state
+ * Determines if the button is disabled based on status
  */
-export function isDisabled(state: ButtonStateType): boolean {
-  return state === "disabled"
+export function isDisabled(status: ButtonStatusType): boolean {
+  return status === "disabled"
 }

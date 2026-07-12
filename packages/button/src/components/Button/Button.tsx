@@ -1,8 +1,9 @@
 import * as React from "react"
 import Typography from "nice-react-typography"
 import Icon from "nice-react-icon"
+import type { IconNameType } from "nice-react-icon"
 import { Theme } from "nice-react-styles"
-import { StyledButton } from "./Button.styles"
+import { StyledButton, ButtonContent } from "./Button.styles"
 import { ButtonProps } from "./Button.types"
 import { isDisabled } from "../../utilities/isDisabled"
 import { isSquare } from "../../utilities/isSquare"
@@ -10,6 +11,7 @@ import { isSquare } from "../../utilities/isSquare"
 const Button: React.FC<ButtonProps> = ({
   antialiased = false,
   "aria-label": ariaLabel,
+  as,
   backgroundImage,
   borderColor,
   borderRadius = "base",
@@ -17,16 +19,17 @@ const Button: React.FC<ButtonProps> = ({
   children,
   className,
   "data-testid": testId,
+  filled = false,
   href,
-  icon,
+  iconLeft,
+  iconRight,
   iconVendor = false,
-  link = false,
   theme,
   onClick,
   onMouseEnter,
   onMouseLeave,
   size = "base",
-  state = "base",
+  padding,
   status = "base",
   style,
   target,
@@ -36,14 +39,23 @@ const Button: React.FC<ButtonProps> = ({
   const [isHovered, setIsHovered] = React.useState(false)
   const [isFocused, setIsFocused] = React.useState(false)
   const [isPressed, setIsPressed] = React.useState(false)
-  const disabled = isDisabled(state)
-  // getInvertedMode(theme, status) was a no-op when status was defined (always
-  // returned the original theme). Button always passes status (default "base"),
-  // so the call collapsed to passing theme through unchanged.
+  const disabled = isDisabled(status)
+  // Passed through unchanged to the label/icon; retained as a seam for a future
+  // inverted-theme derivation.
   const invertedTheme = theme
-  const square = isSquare(icon, children)
+  const square = isSquare(iconLeft, iconRight, children)
+  // Square (icon-only) buttons keep their fixed 1:1 box — padding overrides don't
+  // apply. Otherwise the shorthand flows to the inner ButtonContent flex, and
+  // StyledButton drops its default horizontal padding when this is set.
+  const contentPadding = square ? undefined : padding
+  // as="a" renders an HTML anchor and forces the inlined (chrome-stripped, inline)
+  // layout, so the button flows in text like a link.
+  const anchor = as === "a"
+  const inlined = anchor
 
-  const elementProps = link
+  // Anchor vs button element attributes. As an anchor, href/target/rel apply and
+  // a disabled state suppresses navigation; as a button, the native type applies.
+  const elementProps = anchor
     ? {
         as: "a" as const,
         href: disabled ? undefined : href,
@@ -53,9 +65,24 @@ const Button: React.FC<ButtonProps> = ({
         onClick: disabled ? (e: React.MouseEvent) => e.preventDefault() : onClick,
       }
     : {
-        onClick: disabled ? undefined : onClick,
         type,
+        onClick: disabled ? undefined : onClick,
       }
+
+  const renderIcon = (name: IconNameType) => (
+    <Icon
+      name={name}
+      vendor={iconVendor}
+      // Both "base" props resolve through --np--icon--size / --np--icon--color,
+      // which StyledButton reassigns to the button-scoped --np--button--icon--size
+      // / --np--button--icon--color. So by default the icon tracks the button's
+      // size and color, and either token can be overridden to resize/recolor button
+      // icons without touching the global icon tokens.
+      size="base"
+      color="base"
+      theme={invertedTheme}
+    />
+  )
 
   const button = (
     <StyledButton
@@ -80,10 +107,11 @@ const Button: React.FC<ButtonProps> = ({
       $isHovered={isHovered}
       $isFocused={isFocused}
       $isPressed={isPressed}
-      $link={link}
+      $filled={filled}
+      $inlined={inlined}
       $size={size}
+      $hasPadding={contentPadding !== undefined}
       $square={square}
-      $state={state}
       $status={status}
       {...elementProps}
       aria-label={ariaLabel}
@@ -91,27 +119,29 @@ const Button: React.FC<ButtonProps> = ({
       data-testid={testId}
       style={style}
     >
-      {children && (
-        <Typography
-          as="span"
-          antialiased={antialiased}
-          theme={invertedTheme}
-          weight={weight ?? (link ? undefined : "medium")}
-          size={size}
-        >
-          {children}
-        </Typography>
-      )}
-      {!!icon && (
-        <Icon
-          name={icon}
-          vendor={iconVendor}
-          size={size}
-          color={link ? "link" : "lightest"}
-          strokeWidth="large"
-          theme={invertedTheme}
-        />
-      )}
+      <ButtonContent
+        direction="row"
+        alignItems="center"
+        justifyContent="center"
+        inlined
+        padding={contentPadding}
+        $size={size}
+        $square={square}
+      >
+        {!!iconLeft && renderIcon(iconLeft)}
+        {children && (
+          <Typography
+            as="span"
+            antialiased={antialiased}
+            theme={invertedTheme}
+            weight={weight ?? (inlined ? undefined : "medium")}
+            size={size}
+          >
+            {children}
+          </Typography>
+        )}
+        {!!iconRight && renderIcon(iconRight)}
+      </ButtonContent>
     </StyledButton>
   )
 
