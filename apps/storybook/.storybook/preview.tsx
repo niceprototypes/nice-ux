@@ -5,6 +5,7 @@ import { addons } from "storybook/preview-api"
 import { DARK_MODE_EVENT_NAME } from "storybook-dark-mode"
 import { DocsContainer } from "@storybook/addon-docs/blocks"
 import { StylesProvider } from "nice-react-styles"
+import { applyTheme } from "nice-styles"
 import { ShikiPre } from "../src/components/CodeBlock"
 import { StoryFooter } from "../src/components/Story"
 import "nice-react-icon-vendor"
@@ -17,7 +18,7 @@ import "./preview.css"
 // any nice-* component dropped directly into MDX. The addon itself only
 // knows light/dark — we translate to nice's day/night here.
 addons.getChannel().on(DARK_MODE_EVENT_NAME, (isDark: boolean) => {
-  document.documentElement.setAttribute("data-theme", isDark ? "night" : "day")
+  applyTheme(isDark ? "night" : "day")
 })
 
 const preview: Preview = {

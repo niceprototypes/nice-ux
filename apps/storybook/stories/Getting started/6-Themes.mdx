@@ -92,6 +92,21 @@ body.night-mode {
 
 <HorizontalRule />
 
+## Switching at runtime
+
+The `applyTheme` service writes `data-theme` — the same attribute as HTML pinning — on the document root (or any element), so a theme toggle can drive nice's day/night cascade dynamically.
+
+<Install package="styles" />
+
+```tsx
+import { applyTheme } from "nice-styles"
+
+applyTheme("night")           // whole document → night
+applyTheme("day", element)    // a specific element → day
+```
+
+<HorizontalRule />
+
 ## Pinning with React
 
 ### `theme` prop

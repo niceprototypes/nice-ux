@@ -1,5 +1,7 @@
 import { addons } from "storybook/manager-api"
 import { create } from "storybook/theming"
+import { DARK_MODE_EVENT_NAME } from "storybook-dark-mode"
+import { applyTheme } from "nice-styles"
 import {
   TOGGLE_NAV_EVENT,
   NAV_STATE_EVENT,
@@ -22,6 +24,19 @@ const theme = create({
 
 addons.setConfig({
   theme,
+})
+
+// Mirror storybook-dark-mode into the manager's <html data-theme="night|day"> so
+// nice-styles' [data-theme] cascade themes the manager chrome (sidebar/toolbar) —
+// the manager-side equivalent of the bridge preview.tsx runs for the canvas.
+// nice-styles keys theming on [data-theme], not the addon's body.light/.dark, so
+// without this the sidebar's nice tokens never flip on toggle. Seed from the OS
+// preference, then follow the toggle over the channel.
+const syncTheme = (isDark) => applyTheme(isDark ? "night" : "day")
+syncTheme(prefersDark)
+
+addons.register("nice/theme-sync", () => {
+  addons.getChannel().on(DARK_MODE_EVENT_NAME, syncTheme)
 })
 
 // Bridge the preview-side StoryFooter's sidebar toggle to the manager. The footer

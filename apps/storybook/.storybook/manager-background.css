@@ -2,7 +2,8 @@
 .sidebar-container,
 .sb-bar,
 main[role="main"],
-main[role="main"] > div:has(> [role="progressbar"]),
+main[role="main"] > div:has([role="progressbar"]),
+main[role="main"] > div > div:has([role="progressbar"]),
 #storybook-preview-iframe {
   background: none !important;
   background-color: transparent !important;
