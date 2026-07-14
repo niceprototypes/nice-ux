@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Install from "../../../../src/components/Install"
-import { ComponentTable } from "../../../../src/components/DataTable/tables/ComponentTable"
+import { ComponentDemoTable } from "../../../../src/dataTables/components/demos/Components"
 import { buttonExampleList } from "./examples"
 import NewLines from "../../../../src/components/NewLines"
 import HorizontalRule from "../../../../src/components/HorizontalRule"
@@ -10,8 +10,8 @@ import HorizontalRule from "../../../../src/components/HorizontalRule"
 
 <StoryHeader
   title="Button"
-  repositories={[
-    { name: "nice-react-button", icon: "github", url: "https://github.com/niceprototypes/nice-react-button" },
+  repos={[
+    { name: "nice-react-button", url: "https://github.com/niceprototypes/nice-react-button", license: "MIT" },
   ]}
 />
 
@@ -29,4 +29,4 @@ import Button from "nice-react-button"
 
 <NewLines count={3} />
 
-<ComponentTable examples={buttonExampleList} />
+<ComponentDemoTable examples={buttonExampleList} />

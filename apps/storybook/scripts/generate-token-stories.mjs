@@ -64,7 +64,7 @@ for (const prefix of componentPrefixes) {
     path.join(componentsOut, `${Name}.mdx`),
     `import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
-import { ComponentTokenTable } from "../../../../src/components/DataTable/tables/ComponentTokenTable"
+import { ComponentTokenTable } from "../../../../src/dataTables/components/tokens/Components"
 
 <Meta title="Tokens/Components/${Name}" />
 

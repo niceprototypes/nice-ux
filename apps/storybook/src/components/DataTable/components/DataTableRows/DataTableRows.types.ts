@@ -1,4 +1,5 @@
-  import type { DataColumn, DataTableConfig } from "../DataTable/DataTable.types"
+  import type { GapType } from "nice-react-styles"
+import type { DataColumn, DataTableConfig } from "../DataTable/DataTable.types"
 
 export interface DataTableRowsProps {
   /** The table node — an optional `name`, and `rows` and/or nested `tables`. */
@@ -15,4 +16,6 @@ export interface DataTableRowsProps {
   rowLines?: boolean
   /** Remove each row's top border and top padding when false. @default true */
   showLines?: boolean
+  /** Vertical padding on each row's outermost Flex, as the `${rowSpacing} none` gap shorthand. */
+  rowSpacing?: GapType
 }

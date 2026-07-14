@@ -92,11 +92,9 @@ const StoryFooter: React.FC<StoryFooterProps> = ({ currentId }) => {
           {navLabel}
         </Button>
       </FooterSubFlex>
-      <FooterSubFlex justifyContent="center">
+      <FooterSubFlex>
         {back && (
           <Flex
-            justifyContent={next ? "flex-end" : "center"}
-            style={{ width: "100%" }}
           >
             <Button
               as="a"
@@ -110,8 +108,6 @@ const StoryFooter: React.FC<StoryFooterProps> = ({ currentId }) => {
         )}
         {next && (
           <Flex
-            justifyContent={back ? "flex-start" : "center"}
-            style={{ width: "100%" }}
           >
             <Button
               as="a"
@@ -124,7 +120,7 @@ const StoryFooter: React.FC<StoryFooterProps> = ({ currentId }) => {
           </Flex>
         )}
       </FooterSubFlex>
-      <FooterSubFlex justifyContent="flex-end">
+      <FooterSubFlex>
         <Button
           as="a"
           aria-label={themeLabel}

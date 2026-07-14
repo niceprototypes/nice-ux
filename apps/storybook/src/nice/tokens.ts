@@ -7,6 +7,12 @@ import { setTokens } from "nice-react-styles"
  * registers the overrides and injects the CSS at module load.
  */
 const AppTokenMap = {
+  backgroundColor: {
+    dark: {
+      day: "hsla(212, 10%, 100%, 1)",
+      night: "hsla(212, 10%, 15%, 1)",
+    }
+  },
   fontFamily: {
     base: "'Avenir Next', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif",
     heading:
@@ -14,7 +20,7 @@ const AppTokenMap = {
     demo: "'Crimson Pro', serif",
   },
   fontSize: {
-    // larger: "32px",
+    larger: "32px",
     // large: "22px",
   },
   icon: {

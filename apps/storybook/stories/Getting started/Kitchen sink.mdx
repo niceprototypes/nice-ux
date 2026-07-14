@@ -65,6 +65,7 @@ import {
 } from "nice-react-styles"
 import styled from "styled-components"
 import Typography from "nice-react-typography"
+import Button from "nice-react-button"
 
 setTokens({
   fontFamily: {
@@ -94,6 +95,11 @@ export default function App() {
     <StylesProvider googleFonts="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap">
       <Card>
         <Typography as="h1" size="larger">Responsive & branded</Typography>
+
+        {/* An interactive component inherits the same tokens — no extra styling. */}
+        <Button status="success" filled iconRight="arrow-right">
+          Get started
+        </Button>
       </Card>
     </StylesProvider>
   )
@@ -124,6 +130,7 @@ import {
 import styled from "styled-components"
 import Typography from "nice-react-typography"
 import Icon from "nice-react-icon"
+import Flex from "nice-react-flex"
 
 setTokens({
   // Fonts
@@ -179,20 +186,23 @@ export default function App() {
   return (
     <StylesProvider googleFonts="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700&family=Roboto+Mono&display=swap">
       <Card>
-        <Typography as="h1" size="larger" style={{ fontFamily: getToken("fontFamily", "promo") }}>
-          Ready to ship
-        </Typography>
+        {/* Flex lays the section out with gap tokens — no bespoke CSS. */}
+        <Flex direction="column" gap="large">
+          <Typography as="h1" size="larger" style={{ fontFamily: getToken("fontFamily", "promo") }}>
+            Ready to ship
+          </Typography>
 
-        <Typography style={{ color: getToken("brandColor", "primary") }}>
-          <Icon name="check" color="success" /> Tokens, fonts, breakpoints, and themes — wired.
-        </Typography>
+          <Typography style={{ color: getToken("brandColor", "primary") }}>
+            <Icon name="check" color="success" /> Tokens, fonts, breakpoints, and themes — wired.
+          </Typography>
 
-        {/* Pin a subtree to night regardless of the OS preference. */}
-        <Theme name="night">
-          <Card>
-            <Typography>Always dark — pinned with Theme.</Typography>
-          </Card>
-        </Theme>
+          {/* Pin a subtree to night regardless of the OS preference. */}
+          <Theme name="night">
+            <Card>
+              <Typography>Always dark — pinned with Theme.</Typography>
+            </Card>
+          </Theme>
+        </Flex>
       </Card>
     </StylesProvider>
   )

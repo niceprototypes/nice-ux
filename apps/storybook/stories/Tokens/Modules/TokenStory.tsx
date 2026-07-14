@@ -6,7 +6,7 @@ import {
   buildTokenRows,
   useNiceTheme,
   useHighlightedToken,
-} from "../../../src/components/DataTable/tables/ModuleTokenTable"
+} from "../../../src/dataTables/components/tokens/Modules"
 import { tokenTables } from "./tables"
 
 /**

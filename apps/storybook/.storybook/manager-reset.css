@@ -1,9 +1,13 @@
 /* Storybook sets the manager <body> font from a static global (its default
    "Nunito Sans" stack), not from the theme fontBase — override it here. */
 html[data-theme] body {
-  background-color: var(--np--background-color--dark);
+  background-color: hsla(212, 10%, 100%, 1);
   font-family: "Avenir Next", -apple-system, BlinkMacSystemFont, "Roboto",
   sans-serif !important;
+}
+
+html[data-theme="night"] body {
+  background-color: hsla(212, 10%, 15%, 1);
 }
 
 /* Day mode only: turn off Storybook's default font smoothing so light-theme

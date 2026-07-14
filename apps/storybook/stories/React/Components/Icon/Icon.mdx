@@ -1,15 +1,15 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
-import { IconTable } from "../../../../src/components/DataTable/tables/IconTable"
+import { IconDemoTable } from "../../../../src/dataTables/components/demos/Icons"
 import Install from "../../../../src/components/Install"
 
 <Meta title="Components/Icon" />
 
 <StoryHeader
   title="Icon"
-  repositories={[
-    { name: "nice-react-icon", icon: "github", url: "https://github.com/niceprototypes/nice-react-icon" },
-    { name: "nice-react-icon-vendor", icon: "github", url: "https://github.com/niceprototypes/nice-react-icon-vendor", status: "peer" },
+  repos={[
+    { name: "nice-react-icon", url: "https://github.com/niceprototypes/nice-react-icon", license: "MIT" },
+    { name: "nice-react-icon-vendor", url: "https://github.com/niceprototypes/nice-react-icon-vendor", license: "MIT", status: "peer" },
   ]}
 />
 
@@ -32,5 +32,5 @@ import Icon from "nice-react-icon"
 
 ### Browse
 
-<IconTable codeColumns={[{ header: "Icon", code: (name) => `<Icon name="${name}" />` }]} />
+<IconDemoTable codeColumns={[{ header: "Icon", code: (name) => `<Icon name="${name}" />` }]} />
 

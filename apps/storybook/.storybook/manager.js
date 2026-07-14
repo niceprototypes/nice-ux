@@ -6,6 +6,7 @@ import {
   TOGGLE_NAV_EVENT,
   NAV_STATE_EVENT,
   REQUEST_NAV_STATE_EVENT,
+  OPEN_IN_EDITOR_EVENT,
 } from "../src/components/Story/StoryFooter/StoryFooter.events"
 import "./manager.css"
 
@@ -54,4 +55,12 @@ addons.register("nice/story-footer", (api) => {
     channel.emit(NAV_STATE_EVENT, next)
   })
   channel.on(REQUEST_NAV_STATE_EVENT, emitState)
+
+  // Open the current story/docs source in the local editor. Only the manager
+  // knows the file (importPath); the dev server does the actual opening, so this
+  // is a no-op in a static (built) Storybook.
+  channel.on(OPEN_IN_EDITOR_EVENT, () => {
+    const file = api.getCurrentStoryData()?.importPath
+    if (file) api.openInEditor({ file })
+  })
 })

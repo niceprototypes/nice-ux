@@ -1,7 +1,9 @@
+import { Fragment } from "react"
 import Flex from "nice-react-flex"
 import Typography from "../../../../nice/Typography"
 import { DataTableHeader } from "../DataTableHeader/DataTableHeader"
 import { DataTableRow } from "../DataTableRow/DataTableRow"
+import { RowDivider } from "../DataTableRow/DataTableRow.styles"
 import { LEVELS, tableKey, tableHeadingProps } from "./DataTableRows.helpers"
 import type { DataTableRowsProps } from "./DataTableRows.types"
 
@@ -18,6 +20,7 @@ export const DataTableRows = ({
   showHeader = true,
   rowLines = true,
   showLines = true,
+  rowSpacing,
 }: DataTableRowsProps) => {
   const level = LEVELS[Math.min(depth, 2)]
   const isH2 = level === "h2"
@@ -43,17 +46,20 @@ export const DataTableRows = ({
       <Flex direction="column">
         {table.rows ? (
           <Flex direction="column">
-            {showHeader ? <DataTableHeader columns={columns} columnWidths={columnWidths} title={titleInHeader ? table.name : undefined} /> : null}
-            {table.rows.map(item => (
-              <DataTableRow
-                key={item.id}
-                columns={columns}
-                columnWidths={columnWidths}
-                values={item.values}
-                highlighted={item.highlighted}
-                rowLines={rowLines}
-                showLines={showLines}
-              />
+            {showHeader ? <DataTableHeader columns={columns} columnWidths={columnWidths} title={titleInHeader ? table.name : undefined} rowSpacing={rowSpacing} /> : null}
+            {table.rows.map((item, index) => (
+              <Fragment key={item.id}>
+                {/* Divider between rows (and under the header); never after the last. */}
+                {rowLines && showLines && (index > 0 || showHeader) ? <RowDivider /> : null}
+                <DataTableRow
+                  columns={columns}
+                  columnWidths={columnWidths}
+                  values={item.values}
+                  highlighted={item.highlighted}
+                  showLines={showLines}
+                  rowSpacing={rowSpacing}
+                />
+              </Fragment>
             ))}
           </Flex>
         ) : null}
@@ -67,6 +73,7 @@ export const DataTableRows = ({
             showHeader={showHeader}
             rowLines={rowLines}
             showLines={showLines}
+            rowSpacing={rowSpacing}
           />
         ))}
       </Flex>

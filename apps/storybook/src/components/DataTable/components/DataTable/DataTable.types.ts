@@ -1,5 +1,5 @@
 import * as React from "react"
-import type { ColorType, FontSizeType } from "nice-react-styles"
+import type { ColorType, FontSizeType, GapType } from "nice-react-styles"
 
 /** Language for a `shiki`-rendered column. */
 export type DataLanguage = "tsx" | "css"
@@ -79,4 +79,10 @@ export interface DataTableProps {
    * padding), collapsing rows flush against each other. @default true
    */
   showLines?: boolean
+  /**
+   * Vertical padding on each row's outermost Flex, applied as the gap-token
+   * shorthand `${rowSpacing} none` (vertical only; horizontal stays flush).
+   * Omitted leaves rows with no extra vertical padding.
+   */
+  rowSpacing?: GapType
 }
