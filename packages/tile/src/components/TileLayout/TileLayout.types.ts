@@ -10,7 +10,7 @@ import type {
 export interface TileLayoutProps extends TileContentProps {
   contentLeft?: React.ReactNode
   contentRight?: React.ReactNode
-  spacing?: FlexSpacingType
+  padding?: FlexSpacingType
   maxWidth?: TileMaxWidthType
   alignItems?: TileAlignItemsType
   justifyContent?: TileJustifyContentType

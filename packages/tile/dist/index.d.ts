@@ -95,7 +95,8 @@ interface TileProps {
     titleProps?: TileTypographyProps;
     description?: React.ReactNode | string[];
     descriptionProps?: TileTypographyProps;
-    spacing?: FlexSpacingType;
+    /** Inner padding of the tile, as a CSS-like gap-token shorthand (1–4 values). */
+    padding?: FlexSpacingType;
     /**
      * Max-width of the inner content column.
      *

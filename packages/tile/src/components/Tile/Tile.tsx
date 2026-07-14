@@ -27,7 +27,7 @@ const Tile: React.FC<TileProps> = ({
   minHeight,
   maxHeight,
   theme,
-  spacing,
+  padding,
   style,
   title,
   titleProps,
@@ -57,7 +57,7 @@ const Tile: React.FC<TileProps> = ({
         gap={gap}
         justifyContent={justifyContent}
         maxWidth={maxWidth}
-        spacing={spacing}
+        padding={padding}
         title={title}
         titleProps={titleProps}
       >

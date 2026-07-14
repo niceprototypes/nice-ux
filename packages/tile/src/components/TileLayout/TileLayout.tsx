@@ -16,7 +16,7 @@ const TileLayout: React.FC<TileLayoutProps> = ({
   descriptionProps,
   theme,
   gap,
-  spacing,
+  padding,
   maxWidth,
   alignItems,
   justifyContent,
@@ -25,15 +25,15 @@ const TileLayout: React.FC<TileLayoutProps> = ({
     <OuterFlex
       direction="column"
       grow={1}
-      padding={spacing}
+      padding={padding}
       alignItems={alignItems}
       justifyContent={justifyContent}
       gap={gap}
       $maxWidth={maxWidth}
       breakpoints={{
         "laptop+": {
-            direction: "row",
-          },
+          direction: "row",
+        },
       }}
     >
       {!!TileLeft || !!TileRight ? (
