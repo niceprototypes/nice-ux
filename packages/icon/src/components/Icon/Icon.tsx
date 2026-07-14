@@ -29,7 +29,7 @@ import { isSpinning } from "../../utilities/isSpinning"
  * ```
  */
 const Icon: React.FC<IconProps> = ({
-  name = "placeholder",
+  name = "circle",
   variant,
   outlined = false,
   url,
@@ -114,8 +114,8 @@ const Icon: React.FC<IconProps> = ({
     }
   }
 
-  // Fallback: render placeholder — name not found in custom or vendor sets
-  const PlaceholderIcon = resolveIconComponent("placeholder", resolvedVariant)
+  // Fallback: render the circle — name not found in custom or vendor sets
+  const FallbackIcon = resolveIconComponent("circle", resolvedVariant)
   return withTheme(
     <IconWrapperStyled
       $color={color}
@@ -128,7 +128,7 @@ const Icon: React.FC<IconProps> = ({
       className={className}
       style={style}
     >
-      {PlaceholderIcon && <PlaceholderIcon viewBox={viewBox} />}
+      {FallbackIcon && <FallbackIcon viewBox={viewBox} />}
     </IconWrapperStyled>
   )
 }

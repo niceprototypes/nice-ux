@@ -55,7 +55,7 @@ describe("Icon", () => {
   })
 
   it("renders image when url prop is provided", () => {
-    const { container } = render(<Icon name="placeholder" url="https://example.com/icon.svg" />)
+    const { container } = render(<Icon name="circle" url="https://example.com/icon.svg" />)
     const img = container.querySelector("img")
     expect(img).toHaveAttribute("src", "https://example.com/icon.svg")
   })

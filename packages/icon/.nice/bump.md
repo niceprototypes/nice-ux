@@ -1,0 +1,1 @@
+[2026-07-13 18:10] major: Track nice-icons' `placeholder` -> `circle` rename. The default `name` (bare `<Icon />`) and the not-found fallback now resolve `circle` instead of `placeholder` — same glyph, renamed. `name="placeholder"` is no longer a valid IconNameType; use `name="circle"`. Requires nice-icons with the `circle` icon.
