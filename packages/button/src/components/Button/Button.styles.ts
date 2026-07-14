@@ -112,10 +112,13 @@ export const StyledButton = styled.button.withConfig({
      size-derived padding is emitted (the block above is skipped) — leaving an
      inline-flex, content-width, link-colored anchor that flows in text. The
      icon/label + any padding prop still render via ButtonContent. */
-  ${({ $inlined }) =>
+  ${({ $inlined, $size = "base" }) =>
     $inlined &&
     `
     width: auto;
+    /* Size the anchor element itself (not just the label span) so its em-box and
+       inline flow track $size — the same fontSize scale the label reads. */
+    font-size: ${getToken("fontSize", $size)};
     color: ${getToken("color", "link")};
   `}
 `
