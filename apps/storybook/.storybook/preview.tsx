@@ -7,7 +7,7 @@ import { DocsContainer } from "@storybook/addon-docs/blocks"
 import { StylesProvider } from "nice-react-styles"
 import { applyTheme } from "nice-styles"
 import { ShikiPre } from "../src/components/CodeBlock"
-import { StoryFooter } from "../src/components/Story"
+import { StoryNavigation } from "../src/components/Story"
 import "nice-react-icon-vendor"
 import "nice-react-image-vendor"
 import "../src/nice/tokens"
@@ -26,7 +26,7 @@ const preview: Preview = {
     Story => (
       <StylesProvider links={[{ rel: "stylesheet", href: "/fonts/avenir.css" }]}>
         <Story />
-        <StoryFooter />
+        <StoryNavigation />
       </StylesProvider>
     ),
   ],
@@ -37,12 +37,12 @@ const preview: Preview = {
       components: {
         pre: ShikiPre,
       },
-      // Wrap docs pages so the StoryFooter control bar floats above MDX prose
+      // Wrap docs pages so the StoryNavigation control bar floats above MDX prose
       // too — the global decorator only fires for embedded <Story> renderings.
       container: ({ children, context }: React.ComponentProps<typeof DocsContainer>) => (
         <DocsContainer context={context}>
           {children}
-          <StoryFooter />
+          <StoryNavigation />
         </DocsContainer>
       ),
     },

@@ -2,15 +2,16 @@ import styled from "styled-components"
 import Flex from "nice-react-flex"
 import { getToken } from "nice-react-styles"
 
-export const FooterFlex = styled(Flex).attrs({
+export const NavigationFlex = styled(Flex).attrs({
   justifyContent: "flex-end",
   gap: "larger",
   padding: "large larger",
 })`
   position: fixed;
-  bottom: 0;
-  right: 0;
+  top: 0;
+  left: 0;
   z-index: 9999;
+  overflow: hidden;
 
   /* Feathered backdrop: a token-colored screen behind the bar. It's pushed past
      the left/right/bottom viewport edges and blurred, so those edges bleed
@@ -19,7 +20,7 @@ export const FooterFlex = styled(Flex).attrs({
   &::before {
     content: "";
     position: absolute;
-    top: 0;
+    top: -100px;
     left: 0;
     right: 0;
     bottom: 0;
@@ -29,7 +30,7 @@ export const FooterFlex = styled(Flex).attrs({
   }
 `
 
-export const FooterSubFlex = styled(Flex).attrs({
+export const NavigationSubFlex = styled(Flex).attrs({
   gap: "large",
 })`
   a {

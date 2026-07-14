@@ -1,4 +1,4 @@
-export interface StoryFooterItem {
+export interface StoryNavigationItem {
   /** Story id to navigate to (the `--docs` id from the page's Meta title). */
   id: string
   /** Short label shown after "Go back to" / "Continue to". */
@@ -6,7 +6,7 @@ export interface StoryFooterItem {
 }
 
 /**
- * Ordered navigable sequences. StoryFooter finds the current page in one of
+ * Ordered navigable sequences. StoryNavigation finds the current page in one of
  * these and renders back/next buttons to its neighbours. A page that isn't in
  * any sequence renders no nav. Add more sequences here as needed.
  *
@@ -14,7 +14,7 @@ export interface StoryFooterItem {
  * `storySort`). The `id`s use the `·`-preserving slug Storybook generates from
  * the page's `<Meta title>` (e.g. "Getting started/1 · Tokens").
  */
-export const sequences: StoryFooterItem[][] = [
+export const sequences: StoryNavigationItem[][] = [
   // Getting started — the guided tutorial flow. Kitchen sink is the unnumbered
   // final item.
   [

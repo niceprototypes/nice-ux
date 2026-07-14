@@ -7,7 +7,7 @@ import {
   NAV_STATE_EVENT,
   REQUEST_NAV_STATE_EVENT,
   OPEN_IN_EDITOR_EVENT,
-} from "../src/components/Story/StoryFooter/StoryFooter.events"
+} from "../src/components/Story/StoryNavigation/StoryNavigation.events"
 import "./manager.css"
 
 const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -40,16 +40,16 @@ addons.register("nice/theme-sync", () => {
   addons.getChannel().on(DARK_MODE_EVENT_NAME, syncTheme)
 })
 
-// Bridge the preview-side StoryFooter's sidebar toggle to the manager. The footer
+// Bridge the preview-side StoryNavigation's sidebar toggle to the manager. The navigation bar
 // runs in the preview iframe and can't touch the manager-owned sidebar directly,
 // so it drives it over the addons channel.
-addons.register("nice/story-footer", (api) => {
+addons.register("nice/story-navigation", (api) => {
   const channel = addons.getChannel()
   const emitState = () => channel.emit(NAV_STATE_EVENT, api.getIsNavShown())
 
   channel.on(TOGGLE_NAV_EVENT, () => {
     // Emit the intended next state (getIsNavShown may not reflect the toggle
-    // synchronously), so the footer's icon flips deterministically.
+    // synchronously), so the navigation bar's icon flips deterministically.
     const next = !api.getIsNavShown()
     api.toggleNav()
     channel.emit(NAV_STATE_EVENT, next)

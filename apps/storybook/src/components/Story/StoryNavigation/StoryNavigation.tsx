@@ -6,18 +6,18 @@ import {
   UPDATE_DARK_MODE_EVENT_NAME,
 } from "storybook-dark-mode"
 import { navigate } from "@storybook/addon-links"
-import { FooterSubFlex, FooterFlex } from "./StoryFooter.styles"
-import { sequences, type StoryFooterItem } from "./StoryFooter.order"
+import { NavigationSubFlex, NavigationFlex } from "./StoryNavigation.styles"
+import { sequences, type StoryNavigationItem } from "./StoryNavigation.order"
 import {
   TOGGLE_NAV_EVENT,
   NAV_STATE_EVENT,
   REQUEST_NAV_STATE_EVENT,
   OPEN_IN_EDITOR_EVENT,
-} from "./StoryFooter.events"
+} from "./StoryNavigation.events"
 import Button from "nice-react-button"
 import Flex from "nice-react-flex"
 
-interface StoryFooterProps {
+interface StoryNavigationProps {
   /** Override the current story id; defaults to the `id` URL query param. */
   currentId?: string
 }
@@ -35,8 +35,8 @@ function resolveCurrentId(currentId?: string): string | null {
 
 /** Find the back/next neighbours of `id` within whichever sequence contains it. */
 function neighbours(id: string): {
-  back?: StoryFooterItem
-  next?: StoryFooterItem
+  back?: StoryNavigationItem
+  next?: StoryNavigationItem
 } {
   for (const seq of sequences) {
     const i = seq.findIndex(item => item.id === id)
@@ -48,12 +48,12 @@ function neighbours(id: string): {
 /**
  * Fixed bottom-right control bar of storybook actions: a sidebar (nav) toggle
  * that expands/collapses Storybook's menu via the manager (see
- * `StoryFooter.events.ts`), the dark-mode toggle, and back/next story navigation
+ * `StoryNavigation.events.ts`), the dark-mode toggle, and back/next story navigation
  * (shown only when the current page belongs to a navigable sequence in
- * `StoryFooter.order.ts`). Rendered globally from preview.tsx, so it's on every
+ * `StoryNavigation.order.ts`). Rendered globally from preview.tsx, so it's on every
  * docs page.
  */
-const StoryFooter: React.FC<StoryFooterProps> = ({ currentId }) => {
+const StoryNavigation: React.FC<StoryNavigationProps> = ({ currentId }) => {
   const [isDark, setIsDark] = useState(
     typeof document !== "undefined" &&
       document.documentElement.getAttribute("data-theme") === "night"
@@ -82,8 +82,8 @@ const StoryFooter: React.FC<StoryFooterProps> = ({ currentId }) => {
   const navLabel = isNavShown ? "Collapse menu" : "Expand menu"
 
   return (
-    <FooterFlex>
-      <FooterSubFlex>
+    <NavigationFlex>
+      <NavigationSubFlex>
         <Button
           as="a"
           aria-label={navLabel}
@@ -100,8 +100,8 @@ const StoryFooter: React.FC<StoryFooterProps> = ({ currentId }) => {
         >
           Open in editor
         </Button>
-      </FooterSubFlex>
-      <FooterSubFlex>
+      </NavigationSubFlex>
+      <NavigationSubFlex>
         {back && (
           <Flex
           >
@@ -128,9 +128,10 @@ const StoryFooter: React.FC<StoryFooterProps> = ({ currentId }) => {
             </Button>
           </Flex>
         )}
-      </FooterSubFlex>
-      <FooterSubFlex>
+      </NavigationSubFlex>
+      <NavigationSubFlex>
         <Button
+          size="smaller"
           as="a"
           aria-label={themeLabel}
           onClick={() => addons.getChannel().emit(UPDATE_DARK_MODE_EVENT_NAME)}
@@ -139,9 +140,9 @@ const StoryFooter: React.FC<StoryFooterProps> = ({ currentId }) => {
         >
           {themeLabel}
         </Button>
-      </FooterSubFlex>
-    </FooterFlex>
+      </NavigationSubFlex>
+    </NavigationFlex>
   )
 }
 
-export default StoryFooter
+export default StoryNavigation
