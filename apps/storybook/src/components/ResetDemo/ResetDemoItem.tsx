@@ -64,6 +64,7 @@ const ResetDemoItem: React.FC<ResetDemoItemProps> = ({
         showLines={false}
         columns={importColumns}
         columnWidths={["32em", "22em"]}
+        rowSpacing="none"
         tables={[
           {
             rows: [

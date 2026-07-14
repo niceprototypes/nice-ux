@@ -12,6 +12,7 @@ import {
   TOGGLE_NAV_EVENT,
   NAV_STATE_EVENT,
   REQUEST_NAV_STATE_EVENT,
+  OPEN_IN_EDITOR_EVENT,
 } from "./StoryFooter.events"
 import Button from "nice-react-button"
 import Flex from "nice-react-flex"
@@ -90,6 +91,14 @@ const StoryFooter: React.FC<StoryFooterProps> = ({ currentId }) => {
           iconLeft={isNavShown ? "collapse" : "expand"}
         >
           {navLabel}
+        </Button>
+        <Button
+          as="a"
+          aria-label="Open in editor"
+          onClick={() => addons.getChannel().emit(OPEN_IN_EDITOR_EVENT)}
+          iconLeft="code"
+        >
+          Open in editor
         </Button>
       </FooterSubFlex>
       <FooterSubFlex>

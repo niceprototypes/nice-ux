@@ -1,6 +1,5 @@
 /* Background color reset */
 .sidebar-container,
-.sb-bar,
 main[role="main"],
 main[role="main"] > div:has([role="progressbar"]),
 main[role="main"] > div > div:has([role="progressbar"]),

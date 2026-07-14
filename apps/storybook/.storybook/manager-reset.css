@@ -33,8 +33,9 @@ body.light * {
   -ms-overflow-style: none;
 }
 
+.sb-bar,
 [data-radix-scroll-area-viewport]::-webkit-scrollbar {
-  display: none;
+  display: none !important;
 }
 
 [data-state="visible"] {
