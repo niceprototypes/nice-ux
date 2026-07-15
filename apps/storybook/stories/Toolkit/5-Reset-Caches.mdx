@@ -15,9 +15,9 @@ Full cache topology and recipes live in
 [Configuration → Caches](/docs/configuration-caches--docs).
 
 ```bash
-ntk --clean       # consumer caches + dev-server processes
-ntk --dedupe      # singleton conflicts in linked packages
-ntk --build-all   # rebuild every linked package's dist
+nicely --clean       # consumer caches + dev-server processes
+nicely --dedupe      # singleton conflicts in linked packages
+nicely --build-all   # rebuild every linked package's dist
 ```
 
 <HorizontalRule />
@@ -29,13 +29,13 @@ Kills any process bound to a dev-server port (discovered from each consumer's
 `node_modules/.cache` and `node_modules/.vite` across every consumer.
 
 ```bash
-ntk --clean
+nicely --clean
 
 # Preview
-ntk --clean --dry-run
+nicely --clean --dry-run
 
 # Skip the port-kill phase (CI / scripted contexts)
-ntk --clean --no-kill
+nicely --clean --no-kill
 ```
 
 The port-kill matters because a running dev server holds an in-memory module
@@ -49,10 +49,10 @@ without stopping the server is a no-op against the symptom.
 Chains the triad in the order that matters: `--build-all → --dedupe → --clean`.
 
 ```bash
-ntk --reset
+nicely --reset
 
 # Preview the whole sequence
-ntk --reset --dry-run
+nicely --reset --dry-run
 ```
 
 - **build first** so the new dists exist,
@@ -61,7 +61,7 @@ ntk --reset --dry-run
 - **clean last** so dev-server caches are flushed and processes killed before
   the next restart.
 
-`--reset` also **stops any running `ntk --dev`/`--watch` first** — those write
+`--reset` also **stops any running `nicely --dev`/`--watch` first** — those write
 the same dists the rebuild does, so leaving them running would race. Exit code
 reflects `--build-all`'s result; `--dedupe` and `--clean` run regardless.
 

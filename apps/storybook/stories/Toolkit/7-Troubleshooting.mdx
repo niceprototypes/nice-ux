@@ -15,7 +15,7 @@ More than one copy of React (or styled-components) is loaded. Strip the
 duplicates from linked packages:
 
 ```bash
-ntk --dedupe
+nicely --dedupe
 ```
 
 <HorizontalRule />
@@ -26,21 +26,21 @@ Make sure the rebuild loop is running so a linked package's dist updates on
 change:
 
 ```bash
-ntk --dev --watch   # separate terminal, alongside your dev server
+nicely --dev --watch   # separate terminal, alongside your dev server
 ```
 
 If a change still doesn't show, the dev server is holding a stale cache — bounce
 it:
 
 ```bash
-ntk --vite          # wipes .vite + kills the dev-server port; restart after
+nicely --vite          # wipes .vite + kills the dev-server port; restart after
 ```
 
 <HorizontalRule />
 
 ## Icon (SVG) edits not updating
 
-Editing an SVG **does** rebuild the icon chain under `ntk --dev --watch` —
+Editing an SVG **does** rebuild the icon chain under `nicely --dev --watch` —
 `nice-icons` regenerates its index and `nice-react-icon`'s dist is rebuilt. The
 snag is on the dev-server side: `nice-react-icon` is consumed from **dist** (it
 can't be source-aliased because of SVGR), and a Vite dev server such as
@@ -50,11 +50,11 @@ So the fix is to refresh the dev server, not to rebuild again:
 
 ```bash
 # The rebuilt dist already exists — just make the server re-read it
-ntk --vite
+nicely --vite
 # then restart the dev server (Storybook, etc.)
 ```
 
-Only reach for `ntk --build-icons` when `nice-react-icon`'s dist is actually
+Only reach for `nicely --build-icons` when `nice-react-icon`'s dist is actually
 stale (e.g. you edited icons while no watcher was running). Do **not** run
 `--build-icons` while `--dev --watch` is live — they rebuild the same dist and
 race; `--build-icons` will prompt you to stop the watcher first.
@@ -68,13 +68,13 @@ re-dedupe after:
 
 ```bash
 # Option 1 — unlink before installing
-ntk --unlink
+nicely --unlink
 cd ../react-button && npm install
-cd - && ntk ../react-button
+cd - && nicely ../react-button
 
 # Option 2 — re-dedupe after installing
 cd ../react-button && npm install
-cd - && ntk --dedupe
+cd - && nicely --dedupe
 ```
 
 <HorizontalRule />
@@ -82,5 +82,5 @@ cd - && ntk --dedupe
 ## Everything is stale after a foundation refactor
 
 ```bash
-ntk --reset   # --build-all → --dedupe → --clean, then restart the dev server
+nicely --reset   # --build-all → --dedupe → --clean, then restart the dev server
 ```

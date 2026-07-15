@@ -22,10 +22,10 @@ application) and runs `npm run build` in every linked nice-* package that
 defines a build script.
 
 ```bash
-ntk --build-all
+nicely --build-all
 
 # Preview without running builds
-ntk --build-all --dry-run
+nicely --build-all --dry-run
 ```
 
 Use after a fresh clone, after `--dedupe`, or after any foundation-package
@@ -43,15 +43,15 @@ publish cascade. On success it then runs [`--vite`](#-vite) so a dev server
 picks up the rebuilt dist.
 
 ```bash
-ntk --build-icons
+nicely --build-icons
 
 # Preview the resolved build set
-ntk --build-icons --dry-run
+nicely --build-icons --dry-run
 ```
 
 #### Dev-watcher auto-stop
 
-`--build-icons` and a running `ntk --dev`/`--watch` both rebuild the **same**
+`--build-icons` and a running `nicely --dev`/`--watch` both rebuild the **same**
 dist folders, and every rollup build wipes `dist/` first — so run together they
 race (transient `Could not resolve entry module "dist/types/index.d.ts"` errors
 and reloads against half-written output). So `--build-icons` **stops** any
@@ -60,7 +60,7 @@ builds, and reminds you to restart it:
 
 ```
 Stopping dev/watch process 2259
-✓ Icons rebuilt. Restart `ntk --dev --watch` to resume hot-reloading.
+✓ Icons rebuilt. Restart `nicely --dev --watch` to resume hot-reloading.
 ```
 
 - Stop is SIGTERM, then SIGKILL for any straggler.
@@ -76,10 +76,10 @@ linked dist is actually re-bundled. Runs automatically at the end of
 `--build-icons`; run it standalone after any out-of-band rebuild.
 
 ```bash
-ntk --vite
+nicely --vite
 
 # Skip the port-kill phase (wipe caches only)
-ntk --vite --no-kill
+nicely --vite --no-kill
 ```
 
 Why it's needed: a dev server (Storybook, CRA) holds a transformed copy of a

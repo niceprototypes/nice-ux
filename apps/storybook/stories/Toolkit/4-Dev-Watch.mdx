@@ -21,7 +21,7 @@ concurrently, rebuilding each on source change. Packages without a `dev` script
 are skipped.
 
 ```bash
-ntk --dev
+nicely --dev
 ```
 
 <HorizontalRule />
@@ -32,10 +32,10 @@ Watches each linked package's `dist/` folder and touches a trigger file when a
 build lands, which makes webpack/CRA recompile.
 
 ```bash
-ntk --watch
+nicely --watch
 
 # Watch a different folder (default: dist)
-ntk --watch --watch-dir build
+nicely --watch --watch-dir build
 ```
 
 #### CRA / webpack setup
@@ -64,7 +64,7 @@ Combines both: rebuild on source change **and** trigger the consumer to reload.
 ```bash
 # package.json
 "scripts": {
-  "watch:deps": "ntk --dev --watch"
+  "watch:deps": "nicely --dev --watch"
 }
 ```
 

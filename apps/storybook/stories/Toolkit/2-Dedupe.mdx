@@ -16,13 +16,13 @@ singleton being loaded at runtime.
 
 ```bash
 # Recurse across every file: linked package
-ntk --dedupe
+nicely --dedupe
 
 # Scope to one package
-ntk --dedupe ../react-button
+nicely --dedupe ../react-button
 
 # Preview without deleting anything
-ntk --dedupe --dry-run
+nicely --dedupe --dry-run
 ```
 
 <HorizontalRule />
@@ -55,7 +55,7 @@ Override or extend the set per run with `--exclude` / `--add-exclude` (see
 ```bash
 # Typical sequence after touching a linked package's deps
 npm install
-ntk --dedupe
+nicely --dedupe
 ```
 
 `--dedupe` is also the second step of the workspace triad and of `--reset` — see

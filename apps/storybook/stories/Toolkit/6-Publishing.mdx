@@ -22,9 +22,9 @@ Append one entry to the current package's `.nice/bump.md`. Commit it alongside
 the change it describes.
 
 ```bash
-ntk --bump minor "Add useBreakpoint hook"
-ntk --bump major "Rename breakpoint identifiers small/medium/large to phone/tablet/laptop"
-ntk --bump patch "Fix icon stroke width regression"
+nicely --bump minor "Add useBreakpoint hook"
+nicely --bump major "Rename breakpoint identifiers small/medium/large to phone/tablet/laptop"
+nicely --bump patch "Fix icon stroke width regression"
 ```
 
 Each entry is `[<timestamp>] <level>: <message>`. The message doubles as the git
@@ -40,13 +40,13 @@ Publishes changed packages to npm, resolving the full dependency cascade.
 
 ```bash
 # Publish all changed packages (interactive)
-ntk --publish
+nicely --publish
 
 # Publish specific packages (dependents auto-resolved)
-ntk --publish nice-styles,nice-react-styles
+nicely --publish nice-styles,nice-react-styles
 
 # Preview without changing anything
-ntk --publish --dry-run
+nicely --publish --dry-run
 ```
 
 #### What it does
@@ -64,7 +64,7 @@ ntk --publish --dry-run
 ```
 
 Publish order comes from `nice-toolkit/registry.json` (bottom-to-top per the
-dependency chain). Run `ntk --publish --dry-run` to see the current order and the
+dependency chain). Run `nicely --publish --dry-run` to see the current order and the
 recommended bumps.
 
 <HorizontalRule />
@@ -73,10 +73,10 @@ recommended bumps.
 
 ```bash
 # Bump, build, commit, push — but skip the npm publish step
-ntk --publish --no-npm
+nicely --publish --no-npm
 
 # Preview the full plan without changing anything
-ntk --dry-publish
+nicely --dry-publish
 ```
 
 `--no-npm` is useful to verify the pipeline, or to push version bumps and let CI

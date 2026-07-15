@@ -17,12 +17,12 @@ its duplicate singletons in one step.
 npx nice-toolkit ../react-button
 
 # Short alias
-ntk ../react-button
+nicely ../react-button
 
 # Link several — one call each
-ntk ../react-button
-ntk ../react-icon
-ntk ../react-flex
+nicely ../react-button
+nicely ../react-icon
+nicely ../react-flex
 ```
 
 Linking rewrites the dependency to `file:../react-button` and runs a dedupe pass
@@ -37,13 +37,13 @@ Restore every `file:` reference to its original npm version and reinstall from
 the registry.
 
 ```bash
-ntk --unlink
+nicely --unlink
 
 # Preview what would be unlinked
-ntk --unlink --dry-run
+nicely --unlink --dry-run
 ```
 
-Run `--unlink` before `npm install` inside a linked package (or re-run `ntk`
+Run `--unlink` before `npm install` inside a linked package (or re-run `nicely`
 afterward) — a fresh install reintroduces the singleton duplicates that linking
 removed.
 
@@ -56,10 +56,10 @@ The default singleton set removed from linked packages is `react`, `react-dom`,
 
 ```bash
 # Replace the default set entirely
-ntk --exclude react,react-dom ../my-component
+nicely --exclude react,react-dom ../my-component
 
 # Extend the default set
-ntk --add-exclude @emotion/react,@emotion/styled ../my-component
+nicely --add-exclude @emotion/react,@emotion/styled ../my-component
 ```
 
 <HorizontalRule />
@@ -68,8 +68,8 @@ ntk --add-exclude @emotion/react,@emotion/styled ../my-component
 
 ```bash
 # Force a package manager (auto-detected from the lockfile by default)
-ntk --manager pnpm ../my-component
+nicely --manager pnpm ../my-component
 
 # Skip auto-moving react / react-dom into peerDependencies
-ntk --skip-peer-check ../my-component
+nicely --skip-peer-check ../my-component
 ```
