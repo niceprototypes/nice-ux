@@ -6,7 +6,7 @@ import {
   UPDATE_DARK_MODE_EVENT_NAME,
 } from "storybook-dark-mode"
 import { navigate } from "@storybook/addon-links"
-import { NavigationSubFlex, NavigationFlex } from "./StoryNavigation.styles"
+import { NavigationFlex } from "./StoryNavigation.styles"
 import { sequences, type StoryNavigationItem } from "./StoryNavigation.order"
 import {
   TOGGLE_NAV_EVENT,
@@ -14,8 +14,7 @@ import {
   REQUEST_NAV_STATE_EVENT,
   OPEN_IN_EDITOR_EVENT,
 } from "./StoryNavigation.events"
-import Button from "nice-react-button"
-import Flex from "nice-react-flex"
+import StoryNavigationLink from "./StoryNavigationLink"
 
 interface StoryNavigationProps {
   /** Override the current story id; defaults to the `id` URL query param. */
@@ -83,64 +82,36 @@ const StoryNavigation: React.FC<StoryNavigationProps> = ({ currentId }) => {
 
   return (
     <NavigationFlex>
-      <NavigationSubFlex>
-        <Button
-          as="a"
-          aria-label={navLabel}
-          onClick={() => addons.getChannel().emit(TOGGLE_NAV_EVENT)}
-          iconLeft={isNavShown ? "collapse" : "expand"}
-        >
-          {navLabel}
-        </Button>
-        <Button
-          as="a"
-          aria-label="Open in editor"
-          onClick={() => addons.getChannel().emit(OPEN_IN_EDITOR_EVENT)}
-          iconLeft="code"
-        >
-          Open in editor
-        </Button>
-      </NavigationSubFlex>
-      <NavigationSubFlex>
-        {back && (
-          <Flex
-          >
-            <Button
-              as="a"
-              aria-label={backLabel}
-              onClick={() => navigate({ storyId: back.id })}
-              iconLeft="arrow-left"
-            >
-              {backLabel}
-            </Button>
-          </Flex>
-        )}
-        {next && (
-          <Flex
-          >
-            <Button
-              as="a"
-              aria-label={nextLabel}
-              onClick={() => navigate({ storyId: next.id })}
-              iconRight="arrow-right"
-            >
-              {nextLabel}
-            </Button>
-          </Flex>
-        )}
-      </NavigationSubFlex>
-      <NavigationSubFlex>
-        <Button
-          size="smaller"
-          as="a"
-          aria-label={themeLabel}
-          onClick={() => addons.getChannel().emit(UPDATE_DARK_MODE_EVENT_NAME)}
-          iconLeft={isDark ? "sun" : "moon"}
-          iconVendor
-        >
-          {themeLabel}
-        </Button>
-      </NavigationSubFlex>
+      <StoryNavigationLink
+        label={navLabel}
+        onClick={() => addons.getChannel().emit(TOGGLE_NAV_EVENT)}
+        iconLeft={isNavShown ? "collapse" : "expand"}
+      />
+      <StoryNavigationLink
+        label="Open in editor"
+        onClick={() => addons.getChannel().emit(OPEN_IN_EDITOR_EVENT)}
+        iconLeft="code"
+      />
+      {back && (
+        <StoryNavigationLink
+          label={backLabel}
+          onClick={() => navigate({ storyId: back.id })}
+          iconLeft="arrow-left"
+        />
+      )}
+      {next && (
+        <StoryNavigationLink
+          label={nextLabel}
+          onClick={() => navigate({ storyId: next.id })}
+          iconRight="arrow-right"
+        />
+      )}
+      <StoryNavigationLink
+        label={themeLabel}
+        onClick={() => addons.getChannel().emit(UPDATE_DARK_MODE_EVENT_NAME)}
+        iconLeft={isDark ? "sun" : "moon"}
+        iconVendor
+      />
     </NavigationFlex>
   )
 }

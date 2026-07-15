@@ -74,6 +74,10 @@ const config: StorybookConfig = {
     "storybook-dark-mode",
   ],
   staticDirs: ["../public"],
+  core: {
+    // Suppress the "Learn what's new in Storybook" toast on every launch.
+    disableWhatsNewNotifications: true,
+  },
   framework: {
     name: getAbsolutePath("@storybook/react-vite"),
     options: {},

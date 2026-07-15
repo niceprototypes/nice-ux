@@ -8,6 +8,7 @@ import { buttonSize } from "./buttonSize"
 import { buttonStatus } from "./buttonStatus"
 import { buttonBorderRadius } from "./buttonBorderRadius"
 import { buttonIcon } from "./buttonIcon"
+import { buttonAs } from "./buttonAs"
 import { flexDirection } from "./flexDirection"
 import { flexGap } from "./flexGap"
 import { flexPadding } from "./flexPadding"
@@ -22,6 +23,7 @@ export {
   buttonStatus,
   buttonBorderRadius,
   buttonIcon,
+  buttonAs,
   flexDirection,
   flexGap,
   flexPadding,
@@ -38,6 +40,7 @@ export const buttonExamples = {
   status: buttonStatus,
   borderRadius: buttonBorderRadius,
   icon: buttonIcon,
+  as: buttonAs,
 } satisfies Record<string, ComponentExample>
 
 /** Button facets in Docs-page order. */

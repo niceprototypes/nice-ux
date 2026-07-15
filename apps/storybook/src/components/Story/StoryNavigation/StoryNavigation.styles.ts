@@ -1,10 +1,10 @@
 import styled from "styled-components"
 import Flex from "nice-react-flex"
-import { getToken } from "nice-react-styles"
+import { getHSLA } from "nice-react-styles"
 
 export const NavigationFlex = styled(Flex).attrs({
   justifyContent: "flex-end",
-  gap: "larger",
+  gap: "large",
   padding: "large larger",
 })`
   position: fixed;
@@ -24,21 +24,8 @@ export const NavigationFlex = styled(Flex).attrs({
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: ${getToken("backgroundColor")};
+    background-color: ${getHSLA({ module: "backgroundColor", values: [null, null, null, 0.98] })};
     filter: blur(8px);
     z-index: -1;
-  }
-`
-
-export const NavigationSubFlex = styled(Flex).attrs({
-  gap: "large",
-})`
-  a {
-    position: relative;
-    color: ${getToken("color", "lighter")} !important;
-    
-    &:hover {
-      color: ${getToken("color")} !important;
-    }
   }
 `
