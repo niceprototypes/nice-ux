@@ -70,11 +70,24 @@ export type ButtonAntialiasedType = boolean
 export type ButtonIconVendorType = boolean
 
 /**
- * Element the button renders as. Only "a" for now — renders an HTML anchor
- * (instead of `<button>`) and forces the inlined, chrome-stripped layout so the
- * result flows inline like a link.
+ * Whether the button renders with the inlined, chrome-stripped layout (no
+ * border/fill/height/size-derived padding, link color) so it flows inline like
+ * a link. Independent of `as`: defaults to `true` when `as="a"` and `false`
+ * otherwise, but can be set explicitly to inline a `div` or give an anchor the
+ * full button chrome.
  */
-export type ButtonAsType = "a"
+export type ButtonInlinedType = boolean
+
+/**
+ * Element the button renders as, instead of the native `<button>`:
+ * - `"a"`: an HTML anchor — forces the inlined, chrome-stripped layout so it
+ *   flows inline like a link (`href`/`target` apply).
+ * - `"div"`: a clickable `<div>`, full button chrome by default, with button
+ *   semantics added back — `role="button"`, `tabindex`, and Enter/Space
+ *   activation (a bare `<div>` has none of these natively). Pass `inlined` to
+ *   strip the chrome and render it link-like.
+ */
+export type ButtonAsType = "a" | "div"
 
 /**
  * URL destination when rendered as an anchor (`as="a"`)
@@ -148,6 +161,13 @@ export interface ButtonProps {
   iconRight?: IconNameType
   /** Resolve the icon(s) through the vendor icon set (passed to Icon's `vendor` prop) */
   iconVendor?: ButtonIconVendorType
+
+  /**
+   * Render with the inlined, chrome-stripped, link-like layout regardless of
+   * element. Defaults to `true` when `as="a"`, `false` otherwise — set it
+   * explicitly to inline a `div` or give an anchor the full button chrome.
+   */
+  inlined?: ButtonInlinedType
   /** Font weight of the label, forwarded to the underlying Typography */
   weight?: ButtonWeightType
   disabled?: ButtonDisabledType
@@ -184,9 +204,12 @@ export interface ButtonProps {
   style?: React.CSSProperties
 
   /**
-   * Render as a different element. Only `"a"` for now: renders an HTML anchor
-   * and forces the inlined, chrome-stripped layout (no border/fill/height/padding,
-   * link color) so it flows inline like a link.
+   * Render as a different element instead of `<button>`. `"a"` renders an HTML
+   * anchor, inlined by default (no border/fill/height/padding, link color) so it
+   * flows inline like a link. `"div"` renders a clickable `<div>` with full
+   * button chrome and button semantics (`role="button"`, tabindex, Enter/Space
+   * activation). The inlined layout is controlled by `inlined`, which defaults
+   * from this but can be set explicitly on either element.
    */
   as?: ButtonAsType
 
@@ -210,6 +233,7 @@ namespace ButtonTypes {
   export type Disabled = ButtonDisabledType
   export type Antialiased = ButtonAntialiasedType
   export type IconVendor = ButtonIconVendorType
+  export type Inlined = ButtonInlinedType
   export type OnClick = ButtonOnClickType
   export type OnMouseEnter = ButtonOnMouseEnterType
   export type OnMouseLeave = ButtonOnMouseLeaveType

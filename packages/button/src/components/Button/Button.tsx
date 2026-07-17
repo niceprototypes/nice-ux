@@ -24,6 +24,7 @@ const Button: React.FC<ButtonProps> = ({
   iconLeft,
   iconRight,
   iconVendor = false,
+  inlined: inlinedProp,
   theme,
   onClick,
   onMouseEnter,
@@ -48,13 +49,26 @@ const Button: React.FC<ButtonProps> = ({
   // apply. Otherwise the shorthand flows to the inner ButtonContent flex, and
   // StyledButton drops its default horizontal padding when this is set.
   const contentPadding = square ? undefined : padding
-  // as="a" renders an HTML anchor and forces the inlined (chrome-stripped, inline)
-  // layout, so the button flows in text like a link.
+  // as="a" renders an HTML anchor; as="div" renders a <div> that needs button
+  // semantics added back. The inlined (chrome-stripped, link-like) layout is
+  // controlled independently by the `inlined` prop, which defaults to true for
+  // an anchor and false otherwise — so as="div" inlined renders a link-like div.
   const anchor = as === "a"
-  const inlined = anchor
+  const clickableDiv = as === "div"
+  const inlined = inlinedProp ?? anchor
 
-  // Anchor vs button element attributes. As an anchor, href/target/rel apply and
-  // a disabled state suppresses navigation; as a button, the native type applies.
+  // A <div> has no native button behaviour: Enter/Space don't fire a click, so
+  // wire them up here (Space is prevented from scrolling the page).
+  const onDivKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault()
+      onClick?.()
+    }
+  }
+
+  // Element attributes per `as`. Anchor: href/target/rel, disabled suppresses
+  // navigation. Clickable div: button-equivalent a11y (role, tabindex, keyboard
+  // activation). Plain button: the native type.
   const elementProps = anchor
     ? {
         as: "a" as const,
@@ -63,6 +77,15 @@ const Button: React.FC<ButtonProps> = ({
         rel: target === "_blank" ? "noopener noreferrer" : undefined,
         "aria-disabled": disabled || undefined,
         onClick: disabled ? (e: React.MouseEvent) => e.preventDefault() : onClick,
+      }
+    : clickableDiv
+    ? {
+        as: "div" as const,
+        role: "button" as const,
+        tabIndex: disabled ? -1 : 0,
+        "aria-disabled": disabled || undefined,
+        onClick: disabled ? undefined : onClick,
+        onKeyDown: disabled ? undefined : onDivKeyDown,
       }
     : {
         type,
