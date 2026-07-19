@@ -1,16 +1,19 @@
 import styled from "styled-components"
 import Flex from "nice-react-flex"
-import { getHSLA } from "nice-react-styles"
+import { getToken } from "nice-react-styles"
 
-export const NavigationFlex = styled(Flex).attrs({
-  justifyContent: "flex-end",
+export const OuterFlex = styled(Flex).attrs({
+  alignItems: "center",
+  justifyContent: "space-between",
   gap: "large",
-  padding: "large larger",
+  padding: "none larger",
 })`
   position: fixed;
   top: 0;
+  right: 0;
   left: 0;
-  z-index: 9999;
+  height: ${getToken("cellHeight", "larger")};
+  z-index: ${getToken("zIndex", "higher")};
   overflow: hidden;
 
   /* Feathered backdrop: a token-colored screen behind the bar. It's pushed past
@@ -24,8 +27,15 @@ export const NavigationFlex = styled(Flex).attrs({
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: ${getHSLA({ module: "backgroundColor", values: [null, null, null, 0.98] })};
+    /* Keep the token var() (so it flips day/night via the [data-theme] cascade)
+       and just drop the alpha to 0.98 — relative-color syntax, not getHSLA, which
+       would bake a static day-mode color. */
+    background-color: hsl(from ${getToken("backgroundColor")} h s l / 0.98);
     filter: blur(8px);
     z-index: -1;
   }
+`
+
+export const SpacerDiv = styled.div`
+  height: ${getToken("cellHeight", "larger")};
 `
