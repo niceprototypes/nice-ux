@@ -1,8 +1,8 @@
 {
-  "name": "nice-react-typography",
-  "version": "8.0.2",
+  "name": "nice-react-ink",
+  "version": "8.0.3",
   "type": "module",
-  "description": "A flexible and customizable Typography component for React with styled-components",
+  "description": "A flexible and customizable Ink component for React with styled-components",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
@@ -19,7 +19,7 @@
   },
   "keywords": [
     "react",
-    "typography",
+    "ink",
     "text",
     "styled-components",
     "responsive",
@@ -56,12 +56,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/niceprototypes/nice-react-typography.git"
+    "url": "git+https://github.com/niceprototypes/nice-react-ink.git"
   },
   "bugs": {
-    "url": "https://github.com/niceprototypes/nice-react-typography/issues"
+    "url": "https://github.com/niceprototypes/nice-react-ink/issues"
   },
-  "homepage": "https://github.com/niceprototypes/nice-react-typography#readme",
+  "homepage": "https://github.com/niceprototypes/nice-react-ink#readme",
   "dependencies": {
     "nice-react-styles": "file:../react-styles"
   }

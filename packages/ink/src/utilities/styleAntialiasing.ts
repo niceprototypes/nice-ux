@@ -4,10 +4,10 @@
  * Applies font smoothing optimizations across different browsers:
  * - `-webkit-font-smoothing: antialiased` - Makes text smoother on WebKit browsers (Safari, Chrome)
  * - `-moz-osx-font-smoothing: grayscale` - Enables grayscale antialiasing on Firefox for macOS
- * - `text-rendering: optimizeLegibility` - Enables kerning and ligatures for better typography
+ * - `text-rendering: optimizeLegibility` - Enables kerning and ligatures for better type rendering
  *
  * @remarks
- * Use the `antialiased` prop on Typography component to enable these styles.
+ * Use the `antialiased` prop on Ink component to enable these styles.
  * Best for light text on dark backgrounds.
  */
 

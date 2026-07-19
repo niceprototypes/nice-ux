@@ -1,1 +1,1 @@
-export { getTypographyToken } from "./getTypographyToken"
+export { getInkToken } from "./getInkToken"

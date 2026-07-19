@@ -2,7 +2,7 @@ import * as React from "react"
 import type { ColorType, FontSizeType, FontWeightType, LineHeightType, ThemeType } from "nice-react-styles"
 
 /**
- * TypographyAlignType
+ * InkAlignType
  *
  * Text alignment options for horizontal text positioning.
  *
@@ -12,12 +12,12 @@ import type { ColorType, FontSizeType, FontWeightType, LineHeightType, ThemeType
  * - "right": Align text to the right edge
  * - "justify": Stretch lines to fill the container width
  */
-export type TypographyAlignType = "left" | "center" | "right" | "justify"
+export type InkAlignType = "left" | "center" | "right" | "justify"
 
 /**
- * TypographyAsType
+ * InkAsType
  *
- * HTML element types supported by the Typography component.
+ * HTML element types supported by the Ink component.
  * Determines semantic meaning and default styling.
  *
  * Values:
@@ -25,42 +25,42 @@ export type TypographyAlignType = "left" | "center" | "right" | "justify"
  * - "p": Paragraph element for body text
  * - "span": Inline element for text within other elements
  */
-export type TypographyAsType = "h1" | "h2" | "h3" | "h4" | "p" | "span"
+export type InkAsType = "h1" | "h2" | "h3" | "h4" | "p" | "span"
 
 /**
- * TypographyColorType
+ * InkColorType
  *
  * Re-export of ColorType from nice-styles.
  * Text color values using design tokens.
  */
-export type TypographyColorType = ColorType
+export type InkColorType = ColorType
 
 /**
- * TypographySizeType
+ * InkSizeType
  *
  * Re-export of FontSizeType from nice-styles.
  * Font size values using design tokens.
  */
-export type TypographySizeType = FontSizeType
+export type InkSizeType = FontSizeType
 
 /**
- * TypographyWeightType
+ * InkWeightType
  *
  * Re-export of FontWeightType from nice-styles.
  * Font weight values using design tokens.
  */
-export type TypographyWeightType = FontWeightType
+export type InkWeightType = FontWeightType
 
 /**
- * TypographyLineHeightType
+ * InkLineHeightType
  *
  * Re-export of LineHeightType from nice-styles.
  * Line height values using design tokens.
  */
-export type TypographyLineHeightType = LineHeightType
+export type InkLineHeightType = LineHeightType
 
 /**
- * TypographyThemeType
+ * InkThemeType
  *
  * Re-export of ThemeType from nice-styles.
  * Pin token resolution to a specific theme instead of responding to media query.
@@ -71,10 +71,10 @@ export type TypographyLineHeightType = LineHeightType
  *
  * Consumers may define additional custom themes.
  */
-export type TypographyThemeType = ThemeType
+export type InkThemeType = ThemeType
 
 /**
- * TypographyLineClampType
+ * InkLineClampType
  *
  * Line clamping to truncate text after a specified number of lines.
  * Based on CSS line-clamp property (CSS Overflow Module Level 4).
@@ -83,10 +83,10 @@ export type TypographyThemeType = ThemeType
  * - "none": No line limit, display all content
  * - number (1-∞): Maximum number of lines before truncation with ellipsis
  */
-export type TypographyLineClampType = "none" | number
+export type InkLineClampType = "none" | number
 
 /**
- * TypographyWordBreakType
+ * InkWordBreakType
  *
  * Controls line break behavior for overflowing text.
  * Based on CSS word-break property.
@@ -97,23 +97,23 @@ export type TypographyLineClampType = "none" | number
  * - "keep-all": Prevent breaks in CJK text, normal for others
  * - "break-word": Deprecated, use overflow-wrap instead
  */
-export type TypographyWordBreakType = "normal" | "break-all" | "keep-all" | "break-word"
+export type InkWordBreakType = "normal" | "break-all" | "keep-all" | "break-word"
 
 /**
- * TypographyProps
+ * InkProps
  *
- * Complete prop definition for the Typography component.
- * All typography-related props support design tokens from nice-styles.
+ * Complete prop definition for the Ink component.
+ * All Ink-related props support design tokens from nice-styles.
  */
-export type TypographyProps = {
+export type InkProps = {
   /** Text alignment */
-  align?: TypographyAlignType
+  align?: InkAlignType
 
   /** Enable font antialiasing for smoother text rendering */
   antialiased?: boolean
 
   /** HTML element to render */
-  as?: TypographyAsType
+  as?: InkAsType
 
   /** Text content or child elements */
   children: React.ReactNode
@@ -125,10 +125,10 @@ export type TypographyProps = {
   code?: boolean
 
   /** Text color from nice-styles tokens */
-  color?: TypographyColorType
+  color?: InkColorType
 
   /** Pin token resolution to a specific theme instead of responding to media query */
-  theme?: TypographyThemeType
+  theme?: InkThemeType
 
   /** Apply legibility optimizations (hardware acceleration, 3D transforms) */
   legibilityOptimized?: boolean
@@ -137,45 +137,45 @@ export type TypographyProps = {
    * Truncate text after specified number of lines with ellipsis.
    * Set to "none" or omit to show all content.
    */
-  lineClamp?: TypographyLineClampType
+  lineClamp?: InkLineClampType
 
   /** Line height setting (defaults based on element type) */
-  lineHeight?: TypographyLineHeightType
+  lineHeight?: InkLineHeightType
 
   /** Font size from nice-styles tokens */
-  size?: TypographySizeType
+  size?: InkSizeType
 
   /** Inline styles */
   style?: React.CSSProperties
 
   /** Font weight from nice-styles tokens */
-  weight?: TypographyWeightType
+  weight?: InkWeightType
 
   /**
    * Controls line break behavior for overflowing text.
    * Useful for handling long words or URLs.
    */
-  wordBreak?: TypographyWordBreakType
+  wordBreak?: InkWordBreakType
 }
 
 // Legacy exports for backwards compatibility
-export type AlignType = TypographyAlignType
-export type AsType = TypographyAsType
+export type AlignType = InkAlignType
+export type AsType = InkAsType
 
 // Declaration merging: const + namespace creates exportable type namespace
-const TypographyTypes = {} as const
+const InkTypes = {} as const
 
-namespace TypographyTypes {
-  export type Align = TypographyAlignType
-  export type As = TypographyAsType
-  export type Color = TypographyColorType
-  export type Size = TypographySizeType
-  export type Weight = TypographyWeightType
-  export type LineHeight = TypographyLineHeightType
-  export type LineClamp = TypographyLineClampType
-  export type Theme = TypographyThemeType
-  export type WordBreak = TypographyWordBreakType
-  export type Props = TypographyProps
+namespace InkTypes {
+  export type Align = InkAlignType
+  export type As = InkAsType
+  export type Color = InkColorType
+  export type Size = InkSizeType
+  export type Weight = InkWeightType
+  export type LineHeight = InkLineHeightType
+  export type LineClamp = InkLineClampType
+  export type Theme = InkThemeType
+  export type WordBreak = InkWordBreakType
+  export type Props = InkProps
 }
 
-export default TypographyTypes
+export default InkTypes

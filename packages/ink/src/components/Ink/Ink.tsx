@@ -1,40 +1,40 @@
 import * as React from "react"
 import { Theme } from "nice-react-styles"
-import { StyledTypography } from "./Typography.styles"
-import { TypographyProps } from "./Typography.types"
+import { StyledInk } from "./Ink.styles"
+import { InkProps } from "./Ink.types"
 
 /**
- * Typography component for rendering text with flexible styling options.
+ * Ink component for rendering text with flexible styling options.
  *
  * Provides comprehensive text styling control with semantic HTML elements,
  * CSS custom properties, and accessibility features. Font families are inlined
- * from nice-styles design tokens for consistent typography across applications.
+ * from nice-styles design tokens for consistent text styling across applications.
  *
  * @example
  * ```tsx
  * // Simple heading
- * <Typography as="h1">Main Heading</Typography>
+ * <Ink as="h1">Main Heading</Ink>
  *
  * // Custom size from nice-styles tokens
- * <Typography size="large">Large text</Typography>
+ * <Ink size="large">Large text</Ink>
  *
  * // Success message with semantic color
- * <Typography color="success">Operation completed successfully</Typography>
+ * <Ink color="success">Operation completed successfully</Ink>
  *
  * // Error message
- * <Typography color="error">Something went wrong</Typography>
+ * <Ink color="error">Something went wrong</Ink>
  *
  * // Link styling
- * <Typography color="link">Click here</Typography>
+ * <Ink color="link">Click here</Ink>
  *
  * // Code snippet with monospace font
- * <Typography code>const greeting = "Hello, World!"</Typography>
+ * <Ink code>const greeting = "Hello, World!"</Ink>
  *
  * // Custom line height
- * <Typography lineHeight="expanded">Highly readable text</Typography>
+ * <Ink lineHeight="expanded">Highly readable text</Ink>
  * ```
  */
-const Typography: React.FC<TypographyProps> = ({
+const Ink: React.FC<InkProps> = ({
   align,
   antialiased,
   legibilityOptimized = false,
@@ -54,7 +54,7 @@ const Typography: React.FC<TypographyProps> = ({
   const effectiveAntialiased = antialiased ?? theme === "night"
 
   const element = (
-    <StyledTypography
+    <StyledInk
       $align={align}
       $antialiased={effectiveAntialiased}
       $legibilityOptimized={legibilityOptimized}
@@ -71,10 +71,10 @@ const Typography: React.FC<TypographyProps> = ({
       style={style}
     >
       {children}
-    </StyledTypography>
+    </StyledInk>
   )
 
   return theme ? <Theme name={theme}>{element}</Theme> : element
 }
 
-export default Typography
+export default Ink

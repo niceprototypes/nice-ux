@@ -10,8 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - **Refactored CSS fallback handling**: Split CSS variables and fallback values into separate props
-  - `$size` now defaults to `var(--typography-size-default)` with `$sizeFallback` defaulting to `1rem`
-  - `$weight` now defaults to `var(--typography-weight-default)` with `$weightFallback` defaulting to `normal`
+  - `$size` now defaults to `var(--ink-size-default)` with `$sizeFallback` defaulting to `1rem`
+  - `$weight` now defaults to `var(--ink-weight-default)` with `$weightFallback` defaulting to `normal`
   - `$fontFamily` now defaults to `var(--font-family-heading)` with `$fontFamilyFallback` defaulting to `inherit`
   - CSS now outputs both the variable and fallback as separate declarations for better browser compatibility
 
@@ -111,9 +111,9 @@ import { CONTENT_COLOR_SUCCESS, FONT_SIZE_3 } from 'nice-styles'
 ### Added
 
 - New CSS custom properties for flexible theming:
-  - `--typography-size-default`: Default font size (fallback: `1rem`)
-  - `--typography-weight-default`: Default font weight (fallback: `normal`)
-  - `--typography-weight-heading`: Heading weight for h1, h2, h3 (fallback: `600`)
+  - `--ink-size-default`: Default font size (fallback: `1rem`)
+  - `--ink-weight-default`: Default font weight (fallback: `normal`)
+  - `--ink-weight-heading`: Heading weight for h1, h2, h3 (fallback: `600`)
 
 - New exported types:
   - `AlignType`: Text alignment options
@@ -126,7 +126,7 @@ import { CONTENT_COLOR_SUCCESS, FONT_SIZE_3 } from 'nice-styles'
 
 - Alphabetized all type definitions and props for better organization
 - Updated `StatusType` to be alphabetically ordered
-- Enhanced heading weight defaults to use `var(--typography-weight-heading, 600)`
+- Enhanced heading weight defaults to use `var(--ink-weight-heading, 600)`
 - Improved TypeScript type consistency across the codebase
 
 ### Migration Guide
@@ -136,31 +136,31 @@ To migrate from v1.x to v2.0:
 1. Update `size` prop values from numbers to strings:
    ```tsx
    // Before (v1.x)
-   <Typography size={3}>Text</Typography>
+   <Ink size={3}>Text</Ink>
 
    // After (v2.0)
-   <Typography size="1rem">Text</Typography>
+   <Ink size="1rem">Text</Ink>
    // or use CSS variables
-   <Typography size="var(--text-base)">Text</Typography>
+   <Ink size="var(--text-base)">Text</Ink>
    ```
 
 2. Update `weight` prop values from numbers to strings:
    ```tsx
    // Before (v1.x)
-   <Typography weight={500}>Text</Typography>
+   <Ink weight={500}>Text</Ink>
 
    // After (v2.0)
-   <Typography weight="500">Text</Typography>
+   <Ink weight="500">Text</Ink>
    // or use CSS variables
-   <Typography weight="var(--font-medium)">Text</Typography>
+   <Ink weight="var(--font-medium)">Text</Ink>
    ```
 
 3. Define required CSS custom properties in your application:
    ```css
    :root {
-     --typography-size-default: 1rem;
-     --typography-weight-default: normal;
-     --typography-weight-heading: 600;
+     --ink-size-default: 1rem;
+     --ink-weight-default: normal;
+     --ink-weight-heading: 600;
      --line-height-default: 1.5;
      --line-height-condensed: 1.25;
    }
@@ -194,7 +194,7 @@ To migrate from v1.x to v2.0:
 ## [1.3.0] - Previous Release
 
 ### Added
-- Enhanced typography features
+- Enhanced ink features
 
 ## [1.2.0] - Previous Release
 
@@ -209,7 +209,7 @@ To migrate from v1.x to v2.0:
 ## [1.0.0] - Initial Release
 
 ### Added
-- Initial release with core typography features
+- Initial release with core ink features
 - Semantic HTML element support (h1-h4, p, span)
 - Size and weight system with CSS variables
 - Status-based colors

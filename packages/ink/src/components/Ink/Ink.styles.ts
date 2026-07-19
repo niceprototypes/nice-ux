@@ -1,7 +1,7 @@
 /**
- * Styled Components for Typography
+ * Styled Components for Ink
  *
- * This module contains the styled-components implementation for the Typography component.
+ * This module contains the styled-components implementation for the Ink component.
  * It handles dynamic styling based on props and provides fallback values for CSS custom properties.
  *
  * @module styles
@@ -9,8 +9,8 @@
 
 import styled, { css } from "styled-components"
 import { getToken, type ColorType, type FontSizeType, type FontWeightType, type LineHeightType } from "nice-react-styles"
-import { getTypographyToken } from "../../tokens/getTypographyToken"
-import { TypographyAsType, TypographyAlignType, TypographyLineClampType, TypographyWordBreakType } from "./Typography.types"
+import { getInkToken } from "../../tokens/getInkToken"
+import { InkAsType, InkAlignType, InkLineClampType, InkWordBreakType } from "./Ink.types"
 import { styleAntialiasing } from "../../utilities/styleAntialiasing"
 
 /**
@@ -33,10 +33,10 @@ export const styleOptimizedLegibility = css`
   will-change: transform;
 `
 
-const isHeading = ($as: TypographyAsType): boolean =>
+const isHeading = ($as: InkAsType): boolean =>
   $as === "h1" || $as === "h2" || $as === "h3" || $as === "h4"
 
-const getFontFamily = ({ $as, $code }: { $as: TypographyAsType; $code?: boolean }) => {
+const getFontFamily = ({ $as, $code }: { $as: InkAsType; $code?: boolean }) => {
   if ($code) {
     return css`
       font-family: ${getToken("fontFamily", "code")};
@@ -58,11 +58,11 @@ const getColor = ({ $color }: { $color?: ColorType }) => {
   if (!$color) return css`color: inherit;`
 
   return css`
-    color: ${getTypographyToken("color", $color)};
+    color: ${getInkToken("color", $color)};
   `
 }
 
-const getFontSize = ({ $as, $size }: { $as: TypographyAsType; $size?: FontSizeType }) => {
+const getFontSize = ({ $as, $size }: { $as: InkAsType; $size?: FontSizeType }) => {
   let effectiveFontSize: FontSizeType
 
   if ($size) {
@@ -89,10 +89,10 @@ const getFontSize = ({ $as, $size }: { $as: TypographyAsType; $size?: FontSizeTy
   `
 }
 
-const getFontWeight = ({ $as, $weight }: { $as: TypographyAsType; $weight?: FontWeightType }) => {
+const getFontWeight = ({ $as, $weight }: { $as: InkAsType; $weight?: FontWeightType }) => {
   if ($weight) {
     return css`
-      font-weight: ${getTypographyToken("fontWeight", $weight)};
+      font-weight: ${getInkToken("fontWeight", $weight)};
     `
   }
 
@@ -106,7 +106,7 @@ const getFontWeight = ({ $as, $weight }: { $as: TypographyAsType; $weight?: Font
   return undefined
 }
 
-const getTextAlign = ({ $align }: { $align?: TypographyAlignType }) => {
+const getTextAlign = ({ $align }: { $align?: InkAlignType }) => {
   if (!$align) return undefined
 
   return css`
@@ -114,7 +114,7 @@ const getTextAlign = ({ $align }: { $align?: TypographyAlignType }) => {
   `
 }
 
-const getLineHeight = ({ $lineHeight, $as }: { $lineHeight?: LineHeightType; $as: TypographyAsType }) => {
+const getLineHeight = ({ $lineHeight, $as }: { $lineHeight?: LineHeightType; $as: InkAsType }) => {
   // Use provided line height or determine default
   const effectiveLineHeight = $lineHeight || (isHeading($as) ? "condensed" : "base")
 
@@ -123,7 +123,7 @@ const getLineHeight = ({ $lineHeight, $as }: { $lineHeight?: LineHeightType; $as
   `
 }
 
-const getLineClamp = ({ $lineClamp }: { $lineClamp?: TypographyLineClampType }) => {
+const getLineClamp = ({ $lineClamp }: { $lineClamp?: InkLineClampType }) => {
   if (!$lineClamp || $lineClamp === "none") return undefined
 
   return css`
@@ -134,7 +134,7 @@ const getLineClamp = ({ $lineClamp }: { $lineClamp?: TypographyLineClampType }) 
   `
 }
 
-const getWordBreak = ({ $wordBreak }: { $wordBreak?: TypographyWordBreakType }) => {
+const getWordBreak = ({ $wordBreak }: { $wordBreak?: InkWordBreakType }) => {
   if (!$wordBreak) return undefined
 
   return css`
@@ -142,17 +142,17 @@ const getWordBreak = ({ $wordBreak }: { $wordBreak?: TypographyWordBreakType }) 
   `
 }
 
-export const StyledTypography = styled.p<{
-  $as: TypographyAsType
+export const StyledInk = styled.p<{
+  $as: InkAsType
   $size?: FontSizeType
   $weight?: FontWeightType
   $color?: ColorType
   $antialiased?: boolean
   $legibilityOptimized?: boolean
-  $align?: TypographyAlignType
+  $align?: InkAlignType
   $lineHeight?: LineHeightType
-  $lineClamp?: TypographyLineClampType
-  $wordBreak?: TypographyWordBreakType
+  $lineClamp?: InkLineClampType
+  $wordBreak?: InkWordBreakType
   $code?: boolean
 }>`
   margin: 0;
