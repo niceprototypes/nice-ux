@@ -5,7 +5,7 @@ import type { TooltipProps } from "./Tooltip.types"
 
 // Explicit return-type annotation — without it, TS declaration emit can leave an
 // unbound generic `<P>` in dist or collapse to `any`, erasing the `breakpoints`
-// prop on consumers. Mirrors the standard bearer (nice-react-typography).
+// prop on consumers. Mirrors the standard bearer (nice-react-ink).
 const Tooltip: React.FC<WithBreakpointsProps<TooltipProps>> = withBreakpoints<TooltipProps>(BaseTooltip)
 
 export default Tooltip
