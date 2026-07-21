@@ -1,6 +1,6 @@
 {
   "name": "nice-config-exports",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "description": "Package export generator (nice-generate-exports) for the nice-* ecosystem",
   "bin": {

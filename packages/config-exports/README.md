@@ -17,9 +17,9 @@ Point `package.exports.json` at the schema:
 {
   "$schema": "../config-exports/src/schema.json",
   "description": "…",
-  "default": "Typography",
-  "components": ["Typography"],
-  "tokens": ["Typography"]
+  "default": "Ink",
+  "components": ["Ink"],
+  "tokens": ["Ink"]
 }
 ```
 
