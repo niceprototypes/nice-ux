@@ -4,6 +4,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 var niceReactStyles = require('nice-react-styles');
 var jsxRuntime = require('react/jsx-runtime');
+require('react');
 var styled = require('styled-components');
 
 /**

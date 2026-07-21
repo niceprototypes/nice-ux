@@ -1,5 +1,6 @@
 import { getConstant, withBreakpoints } from 'nice-react-styles';
 import { jsx } from 'react/jsx-runtime';
+import 'react';
 import styled from 'styled-components';
 
 /**
