@@ -1,5 +1,5 @@
 import React from "react"
-import Typography from "nice-react-typography"
+import Ink from "nice-react-ink"
 import { Wrapper } from "./LightboxCaption.styles"
 import type { LightboxCaptionProps } from "./LightboxCaption.types"
 
@@ -13,14 +13,14 @@ const LightboxCaption: React.FC<LightboxCaptionProps> = ({
   return (
     <Wrapper className={className} onClick={(e) => e.stopPropagation()}>
       {title && (
-        <Typography as="h3" size="large" weight="semibold" theme="night">
+        <Ink as="h3" size="large" weight="semibold" theme="night">
           {title}
-        </Typography>
+        </Ink>
       )}
       {description && (
-        <Typography as="p" size="base" color="lighter" theme="night">
+        <Ink as="p" size="base" color="lighter" theme="night">
           {description}
-        </Typography>
+        </Ink>
       )}
     </Wrapper>
   )

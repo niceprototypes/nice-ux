@@ -1,6 +1,6 @@
 {
   "name": "nice-react-lightbox",
-  "version": "2.0.3",
+  "version": "3.0.0",
   "type": "module",
   "description": "A fullscreen image lightbox component for React with styled-components",
   "main": "dist/index.js",
@@ -29,10 +29,10 @@
   "license": "MIT",
   "dependencies": {
     "nice-react-styles": "file:../react-styles",
-    "nice-react-typography": "file:../react-typography"
+    "nice-react-ink": "file:../react-ink"
   },
   "peerDependencies": {
-    "nice-react-typography": ">=5.0.0",
+    "nice-react-ink": ">=5.0.0",
     "react": ">=19.2.0 <20.0.0",
     "react-dom": ">=19.2.0 <20.0.0",
     "styled-components": ">=6.1.18 <7.0.0"
@@ -48,7 +48,7 @@
     "nice-config-exports": "file:../config-exports",
     "nice-config-rollup": "file:../config-rollup",
     "nice-config-typescript": "file:../config-typescript",
-    "nice-react-typography": "file:../react-typography",
+    "nice-react-ink": "file:../react-ink",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "rollup": "^4.9.1",
