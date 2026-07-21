@@ -1,7 +1,7 @@
 {
   "name": "nice-react-tile",
   "type": "module",
-  "version": "13.0.0",
+  "version": "14.0.0",
   "description": "A responsive Tile component for React with styled-components",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -30,7 +30,7 @@
   "license": "MIT",
   "peerDependencies": {
     "nice-react-flex": ">=2.0.0",
-    "nice-react-typography": ">=5.0.0",
+    "nice-react-ink": ">=5.0.0",
     "react": ">=19.2.0",
     "react-dom": ">=19.2.0",
     "styled-components": ">=6.1.18"
@@ -52,7 +52,7 @@
     "nice-config-rollup": "file:../config-rollup",
     "nice-config-typescript": "file:../config-typescript",
     "nice-react-flex": "file:../react-flex",
-    "nice-react-typography": "file:../react-typography",
+    "nice-react-ink": "file:../react-ink",
     "prettier": "^3.0.0",
     "react": "^19.2.0",
     "react-is": "^19.2.0",

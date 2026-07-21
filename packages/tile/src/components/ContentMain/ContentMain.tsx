@@ -1,6 +1,6 @@
 import * as React from "react"
 import Flex from "nice-react-flex"
-import Typography from "nice-react-typography"
+import Ink from "nice-react-ink"
 import type { ContentMainProps } from "./ContentMain.types"
 
 /**
@@ -21,14 +21,14 @@ const ContentMain: React.FC<ContentMainProps> = ({
 }) => (
   <Flex direction="column" gap={gap} style={{ width: "100%" }}>
     {title && (
-      <Typography
+      <Ink
         as="h3"
         weight="semibold"
         theme={theme}
         {...titleProps}
       >
         {title}
-      </Typography>
+      </Ink>
     )}
     {contentCenter}
     {description && (
@@ -36,25 +36,25 @@ const ContentMain: React.FC<ContentMainProps> = ({
         ? (
           <Flex direction="column">
             {description.map((text, index) => (
-              <Typography
+              <Ink
                 key={index}
                 color="light"
                 theme={theme}
                 {...descriptionProps}
               >
                 {text}
-              </Typography>
+              </Ink>
             ))}
           </Flex>
         )
         : (
-          <Typography
+          <Ink
             color="light"
             theme={theme}
             {...descriptionProps}
           >
             {description}
-          </Typography>
+          </Ink>
         )
     )}
   </Flex>

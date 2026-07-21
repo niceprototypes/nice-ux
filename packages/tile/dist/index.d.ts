@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { BackgroundColorType, BackgroundSizeType, ColorType, GapType, ThemeType, WithBreakpointsProps } from 'nice-react-styles';
 import { FlexProps, FlexSpacingType } from 'nice-react-flex';
-import { TypographyProps } from 'nice-react-typography';
+import { InkProps } from 'nice-react-ink';
 
-type TileTypographyProps = Partial<Omit<TypographyProps, "children">>;
+type TileInkProps = Partial<Omit<InkProps, "children">>;
 
 /**
  * TileBackgroundColorType
@@ -92,9 +92,9 @@ interface TileProps {
     contentLeft?: React.ReactNode;
     contentRight?: React.ReactNode;
     title?: React.ReactNode;
-    titleProps?: TileTypographyProps;
+    titleProps?: TileInkProps;
     description?: React.ReactNode | string[];
-    descriptionProps?: TileTypographyProps;
+    descriptionProps?: TileInkProps;
     /** Inner padding of the tile, as a CSS-like gap-token shorthand (1–4 values). */
     padding?: FlexSpacingType;
     /**
@@ -131,7 +131,7 @@ interface TileProps {
 }
 declare const TileTypes: {};
 declare namespace TileTypes {
-    type Typography = TileTypographyProps;
+    type Ink = TileInkProps;
     type AlignItems = TileAlignItemsType;
     type JustifyContent = TileJustifyContentType;
     type Gap = GapType;
@@ -152,4 +152,4 @@ declare const Tile: React.FC<WithBreakpointsProps<TileProps>>;
 declare function getTileToken(nameOrPath: string | string[], variantOrTheme?: string, theme?: string): string;
 
 export { TileTypes, Tile as default, getTileToken };
-export type { TileAlignItemsType, TileBackgroundColorType, TileBackgroundSizeType, TileColorType, TileJustifyContentType, TileMaxHeightType, TileMaxWidthType, TileMaxWidthValueType, TileMinHeightType, TileMinWidthType, TileProps, TileTypographyProps };
+export type { TileAlignItemsType, TileBackgroundColorType, TileBackgroundSizeType, TileColorType, TileInkProps, TileJustifyContentType, TileMaxHeightType, TileMaxWidthType, TileMaxWidthValueType, TileMinHeightType, TileMinWidthType, TileProps };

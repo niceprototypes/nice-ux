@@ -4,9 +4,10 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 var niceReactStyles = require('nice-react-styles');
 var jsxRuntime = require('react/jsx-runtime');
+require('react');
 var styled = require('styled-components');
 var Flex = require('nice-react-flex');
-var Typography = require('nice-react-typography');
+var Ink = require('nice-react-ink');
 
 /** Returns the `var(--np--tile--…)` reference. */
 function getTileToken(nameOrPath, variantOrTheme, theme) {
@@ -68,9 +69,9 @@ const OuterFlex$1 = styled(Flex).withConfig({
  * and description (string or array of strings). Extracted from TileContent
  * so the title/description layout can be reused or swapped independently.
  */
-const ContentMain = ({ contentCenter, description, descriptionProps, gap, theme, title, titleProps, }) => (jsxRuntime.jsxs(Flex, { direction: "column", gap: gap, style: { width: "100%" }, children: [title && (jsxRuntime.jsx(Typography, { as: "h3", weight: "semibold", theme: theme, ...titleProps, children: title })), contentCenter, description && (Array.isArray(description)
-            ? (jsxRuntime.jsx(Flex, { direction: "column", children: description.map((text, index) => (jsxRuntime.jsx(Typography, { color: "light", theme: theme, ...descriptionProps, children: text }, index))) }))
-            : (jsxRuntime.jsx(Typography, { color: "light", theme: theme, ...descriptionProps, children: description })))] }));
+const ContentMain = ({ contentCenter, description, descriptionProps, gap, theme, title, titleProps, }) => (jsxRuntime.jsxs(Flex, { direction: "column", gap: gap, style: { width: "100%" }, children: [title && (jsxRuntime.jsx(Ink, { as: "h3", weight: "semibold", theme: theme, ...titleProps, children: title })), contentCenter, description && (Array.isArray(description)
+            ? (jsxRuntime.jsx(Flex, { direction: "column", children: description.map((text, index) => (jsxRuntime.jsx(Ink, { color: "light", theme: theme, ...descriptionProps, children: text }, index))) }))
+            : (jsxRuntime.jsx(Ink, { color: "light", theme: theme, ...descriptionProps, children: description })))] }));
 
 const TileContent = ({ children, contentTop, contentCenter, title, titleProps, description, descriptionProps, theme, gap, alignItems, justifyContent, }) => {
     const hasContentMain = !!title || !!description || !!contentCenter;

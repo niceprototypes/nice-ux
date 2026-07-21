@@ -7,7 +7,7 @@ import type {
   BackgroundSizeType,
   ColorType,
 } from "nice-react-styles"
-import type { TileTypographyProps } from "../TileContent/TileContent.types"
+import type { TileInkProps } from "../TileContent/TileContent.types"
 
 /**
  * TileBackgroundColorType
@@ -80,7 +80,7 @@ export type TileMinHeightType = string
  */
 export type TileMaxHeightType = string
 
-export type { TileTypographyProps }
+export type { TileInkProps }
 
 /**
  * TileAlignItemsType
@@ -110,9 +110,9 @@ export interface TileProps {
 
   // Header
   title?: React.ReactNode
-  titleProps?: TileTypographyProps
+  titleProps?: TileInkProps
   description?: React.ReactNode | string[]
-  descriptionProps?: TileTypographyProps
+  descriptionProps?: TileInkProps
 
   // Layout
   /** Inner padding of the tile, as a CSS-like gap-token shorthand (1–4 values). */
@@ -159,7 +159,7 @@ export interface TileProps {
 const TileTypes = {} as const
 
 namespace TileTypes {
-  export type Typography = TileTypographyProps
+  export type Ink = TileInkProps
   export type AlignItems = TileAlignItemsType
   export type JustifyContent = TileJustifyContentType
   export type Gap = GapType

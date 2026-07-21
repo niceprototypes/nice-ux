@@ -1,18 +1,18 @@
 import * as React from "react"
-import type { AlignType, TypographyProps } from "nice-react-typography"
+import type { AlignType, InkProps } from "nice-react-ink"
 import type { FlexProps } from "nice-react-flex"
 import type { ThemeType, GapType } from "nice-react-styles"
 
-export type TileTypographyProps = Partial<Omit<TypographyProps, "children">>
+export type TileInkProps = Partial<Omit<InkProps, "children">>
 
 export interface TileContentProps {
   children?: React.ReactNode
   contentTop?: React.ReactNode
   contentCenter?: React.ReactNode
   title?: React.ReactNode
-  titleProps?: TileTypographyProps
+  titleProps?: TileInkProps
   description?: React.ReactNode | string[]
-  descriptionProps?: TileTypographyProps
+  descriptionProps?: TileInkProps
   align?: AlignType
   theme?: ThemeType
   /** Top spacing applied to the Flex that wraps `children`. */

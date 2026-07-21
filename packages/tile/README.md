@@ -31,7 +31,7 @@ const App = () => (
 )
 ```
 
-`title` and `description` render through `nice-react-typography`. Forward Typography props with `titleProps` / `descriptionProps`:
+`title` and `description` render through `nice-react-ink`. Forward Ink props with `titleProps` / `descriptionProps`:
 
 ```tsx
 <Tile
@@ -119,10 +119,10 @@ Gap token names: `none`, `smaller`, `small`, `base`, `large`, `larger`.
 | Prop | Type | Description |
 |------|------|-------------|
 | `children` | `React.ReactNode` | Main content, below the title/description block |
-| `title` | `React.ReactNode` | Title, rendered via Typography |
-| `titleProps` | `TileTypographyProps` | Typography props for the title (`Partial<Omit<TypographyProps, "children">>`) |
+| `title` | `React.ReactNode` | Title, rendered via Ink |
+| `titleProps` | `TileInkProps` | Ink props for the title (`Partial<Omit<InkProps, "children">>`) |
 | `description` | `React.ReactNode \| string[]` | Description; a string array renders one paragraph per entry |
-| `descriptionProps` | `TileTypographyProps` | Typography props for the description |
+| `descriptionProps` | `TileInkProps` | Ink props for the description |
 | `contentTop` | `React.ReactNode` | Slot above the title |
 | `contentCenter` | `React.ReactNode` | Slot between title and description |
 | `contentLeft` | `React.ReactNode` | Left slot — triggers split (row) layout |

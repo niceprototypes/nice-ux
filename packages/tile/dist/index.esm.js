@@ -1,8 +1,9 @@
 import { getComponentToken, getToken, Theme, withBreakpoints } from 'nice-react-styles';
 import { jsxs, jsx, Fragment } from 'react/jsx-runtime';
+import 'react';
 import styled, { css } from 'styled-components';
 import Flex from 'nice-react-flex';
-import Typography from 'nice-react-typography';
+import Ink from 'nice-react-ink';
 
 /** Returns the `var(--np--tile--…)` reference. */
 function getTileToken(nameOrPath, variantOrTheme, theme) {
@@ -64,9 +65,9 @@ const OuterFlex$1 = styled(Flex).withConfig({
  * and description (string or array of strings). Extracted from TileContent
  * so the title/description layout can be reused or swapped independently.
  */
-const ContentMain = ({ contentCenter, description, descriptionProps, gap, theme, title, titleProps, }) => (jsxs(Flex, { direction: "column", gap: gap, style: { width: "100%" }, children: [title && (jsx(Typography, { as: "h3", weight: "semibold", theme: theme, ...titleProps, children: title })), contentCenter, description && (Array.isArray(description)
-            ? (jsx(Flex, { direction: "column", children: description.map((text, index) => (jsx(Typography, { color: "light", theme: theme, ...descriptionProps, children: text }, index))) }))
-            : (jsx(Typography, { color: "light", theme: theme, ...descriptionProps, children: description })))] }));
+const ContentMain = ({ contentCenter, description, descriptionProps, gap, theme, title, titleProps, }) => (jsxs(Flex, { direction: "column", gap: gap, style: { width: "100%" }, children: [title && (jsx(Ink, { as: "h3", weight: "semibold", theme: theme, ...titleProps, children: title })), contentCenter, description && (Array.isArray(description)
+            ? (jsx(Flex, { direction: "column", children: description.map((text, index) => (jsx(Ink, { color: "light", theme: theme, ...descriptionProps, children: text }, index))) }))
+            : (jsx(Ink, { color: "light", theme: theme, ...descriptionProps, children: description })))] }));
 
 const TileContent = ({ children, contentTop, contentCenter, title, titleProps, description, descriptionProps, theme, gap, alignItems, justifyContent, }) => {
     const hasContentMain = !!title || !!description || !!contentCenter;
