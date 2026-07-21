@@ -1,0 +1,69 @@
+{
+  "name": "nice-react-code",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "A syntax-highlighted code block component for React using Shiki dual-theme output and nice design tokens",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build",
+    "generate-exports": "nice-generate-exports .",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "react",
+    "code",
+    "syntax-highlighting",
+    "shiki",
+    "styled-components",
+    "component"
+  ],
+  "author": "",
+  "license": "MIT",
+  "peerDependencies": {
+    "nice-react-flex": ">=2.0.0",
+    "react": ">=19.2.0 <20.0.0",
+    "react-dom": ">=19.2.0 <20.0.0",
+    "styled-components": ">=6.1.18 <7.0.0"
+  },
+  "dependencies": {
+    "@shikijs/core": "^4.1.0",
+    "@shikijs/engine-javascript": "^4.1.0",
+    "@shikijs/langs": "^4.1.0",
+    "@shikijs/themes": "^4.1.0",
+    "nice-react-styles": "file:../react-styles"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.5",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "nice-config-exports": "file:../config-exports",
+    "nice-config-rollup": "file:../config-rollup",
+    "nice-config-typescript": "file:../config-typescript",
+    "nice-react-flex": "file:../react-flex",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "rollup": "^4.9.1",
+    "rollup-plugin-dts": "^6.1.0",
+    "styled-components": "6.1.19",
+    "tslib": "^2.6.2",
+    "typescript": "^6.0.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niceprototypes/nice-react-code.git"
+  },
+  "bugs": {
+    "url": "https://github.com/niceprototypes/nice-react-code/issues"
+  },
+  "homepage": "https://github.com/niceprototypes/nice-react-code#readme"
+}

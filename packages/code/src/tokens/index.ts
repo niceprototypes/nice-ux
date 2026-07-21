@@ -1,0 +1,1 @@
+export { getCodeToken } from "./getCodeToken"
