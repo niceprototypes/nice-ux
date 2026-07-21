@@ -1,5 +1,5 @@
 import * as React from "react"
-import Typography from "nice-react-typography"
+import Ink from "nice-react-ink"
 import Icon from "nice-react-icon"
 import type { IconNameType } from "nice-react-icon"
 import { Theme } from "nice-react-styles"
@@ -153,7 +153,7 @@ const Button: React.FC<ButtonProps> = ({
       >
         {!!iconLeft && renderIcon(iconLeft)}
         {children && (
-          <Typography
+          <Ink
             as="span"
             antialiased={antialiased}
             theme={invertedTheme}
@@ -161,7 +161,7 @@ const Button: React.FC<ButtonProps> = ({
             size={size}
           >
             {children}
-          </Typography>
+          </Ink>
         )}
         {!!iconRight && renderIcon(iconRight)}
       </ButtonContent>

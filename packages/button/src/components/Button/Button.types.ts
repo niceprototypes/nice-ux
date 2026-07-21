@@ -45,7 +45,7 @@ export type ButtonFilledType = boolean
  * ButtonWeightType
  *
  * Re-export of FontWeightType from nice-styles.
- * Font weight of the button label, forwarded to the underlying Typography.
+ * Font weight of the button label, forwarded to the underlying Ink.
  */
 export type ButtonWeightType = FontWeightType
 
@@ -168,7 +168,7 @@ export interface ButtonProps {
    * explicitly to inline a `div` or give an anchor the full button chrome.
    */
   inlined?: ButtonInlinedType
-  /** Font weight of the label, forwarded to the underlying Typography */
+  /** Font weight of the label, forwarded to the underlying Ink */
   weight?: ButtonWeightType
   disabled?: ButtonDisabledType
   children?: React.ReactNode

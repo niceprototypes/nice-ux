@@ -29,7 +29,7 @@ npm install nice-react-button
 Make sure you have the following peer dependencies installed:
 
 ```bash
-npm install react react-dom styled-components nice-react-typography nice-react-flex
+npm install react react-dom styled-components nice-react-ink nice-react-flex
 ```
 
 ## Quick Start
