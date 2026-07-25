@@ -1,0 +1,46 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../../src/components/Story"
+import Ink from "../../../../src/nice/Ink"
+import { DataTableRow } from "../../../../src/components/DataTable"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+import { toSource } from "../../../../src/services"
+
+<Meta title="Components/Ink/antialiased" />
+
+<StoryHeader title="antialiased" />
+
+<Ink color="light">
+  Applies browser font-smoothing (
+  <code>-webkit-font-smoothing: antialiased</code>) for crisper text rendering
+  on high-density displays.
+</Ink>
+
+<DataTableRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+          <Ink size="large">Normal rendering</Ink>,
+          toSource(
+      "Ink",
+      { size: "large" },
+      { children: "Normal rendering" }
+    ),
+        ]}
+/>
+
+<DataTableRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+          <Ink
+      antialiased
+      size="large"
+    >
+      Antialiased rendering
+    </Ink>,
+          toSource(
+      "Ink",
+      { antialiased: true, size: "large" },
+      { children: "Antialiased rendering" }
+    ),
+        ]}
+/>
+

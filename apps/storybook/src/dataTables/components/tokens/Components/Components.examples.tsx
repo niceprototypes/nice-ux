@@ -4,7 +4,7 @@ import Icon from "nice-react-icon"
 import Input from "nice-react-input"
 import Image from "nice-react-image"
 import Tile from "nice-react-tile"
-import Typography from "nice-react-typography"
+import Ink from "nice-react-ink"
 import { getComponentToken } from "nice-react-styles"
 import OverrideExample from "../../../../components/OverrideExample"
 import type { ComponentPrefixWithTokens, Overrides, ExampleConfig, OverrideConfig } from "./Components.types"
@@ -66,9 +66,9 @@ const CONFIGS: Partial<Record<ComponentPrefixWithTokens, ExampleConfig>> = {
     props: { backgroundColor: "backgroundColor", color: "color" },
     render: o => <Tile title="Title" description="Description" {...(o as any)} />,
   },
-  typography: {
+  ink: {
     props: { fontSize: "size", fontWeight: "weight", lineHeight: "lineHeight", color: "color" },
-    render: o => <Typography {...(o as any)}>Text</Typography>,
+    render: o => <Ink {...(o as any)}>Text</Ink>,
   },
 }
 

@@ -1,4 +1,4 @@
-import Typography from "../../../../nice/Typography"
+import Ink from "../../../../nice/Ink"
 import type { TokenTable } from "./types"
 
 export const fontSize = {
@@ -11,8 +11,8 @@ export const fontSize = {
   ),
   variants: ["smaller", "small", "base", "large", "larger"],
   preview: (variant) => (
-    <Typography size={variant}>
+    <Ink size={variant}>
       {variant.charAt(0).toUpperCase() + variant.slice(1)}
-    </Typography>
+    </Ink>
   ),
 } satisfies TokenTable

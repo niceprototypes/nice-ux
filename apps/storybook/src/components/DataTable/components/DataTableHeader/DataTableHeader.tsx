@@ -1,5 +1,5 @@
 import { withBreakpoints } from "nice-react-styles"
-import Typography from "../../../../nice/Typography"
+import Ink from "../../../../nice/Ink"
 import { RowClip, RowFlex, ColumnFlex } from "../DataTableRow/DataTableRow.styles"
 import { ROW_BREAKPOINTS } from "../DataTableRow/DataTableRow.helpers"
 import type { DataTableHeaderProps } from "./DataTableHeader.types"
@@ -11,9 +11,9 @@ const BaseDataTableHeader = ({ columns, columnWidths, title, rowSpacing }: DataT
       {columns.map((column, index) => (
         <ColumnFlex key={column.key ?? index} $width={columnWidths?.[index] ?? undefined}>
           {index === 0 && title != null ? (
-            <Typography code size="small" weight="semibold" color="base">{title}</Typography>
+            <Ink code size="small" weight="semibold" color="base">{title}</Ink>
           ) : column.header == null ? null : typeof column.header === "string" ? (
-            <Typography code size="small" color="lightest">{column.header}</Typography>
+            <Ink code size="small" color="lightest">{column.header}</Ink>
           ) : (
             column.header
           )}

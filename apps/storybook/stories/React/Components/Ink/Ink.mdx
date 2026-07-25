@@ -1,0 +1,32 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../../src/components/Story"
+import Install from "../../../../src/components/Install"
+
+<Meta title="Components/Ink" />
+
+<StoryHeader
+  title="Ink"
+  repos={[
+    { name: "nice-react-ink", url: "https://github.com/niceprototypes/nice-react-ink", license: "MIT" },
+  ]}
+/>
+
+<Install package="react-ink" />
+
+### Setup
+
+```jsx
+import Ink from "nice-react-ink"
+```
+
+### Usage
+
+```jsx
+<Ink
+  size="large"
+  weight="bold"
+>
+  {children}
+</Ink>
+```
+

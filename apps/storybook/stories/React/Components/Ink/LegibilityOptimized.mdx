@@ -1,0 +1,37 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../../src/components/Story"
+import Ink from "../../../../src/nice/Ink"
+import StoryDescription from "../../../../src/components/StoryDescription"
+import { DataTableRow } from "../../../../src/components/DataTable"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+import { toSource } from "../../../../src/services"
+
+<Meta title="Components/Ink/legibilityOptimized" />
+
+<StoryHeader title="legibilityOptimized" />
+
+<StoryDescription property="text-rendering">
+  Applies <code>text-rendering: optimizeLegibility</code> for improved kerning
+  and ligatures.
+</StoryDescription>
+
+<DataTableRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+          <Ink>Legibility standard</Ink>,
+          toSource("Ink", {}, { children: "Legibility standard" }),
+        ]}
+/>
+
+<DataTableRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+          <Ink legibilityOptimized>Legibility optimized</Ink>,
+          toSource(
+      "Ink",
+      { legibilityOptimized: true },
+      { children: "Legibility optimized" }
+    ),
+        ]}
+/>
+

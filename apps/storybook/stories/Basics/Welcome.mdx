@@ -1,0 +1,60 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import Flex from "nice-react-flex"
+import WelcomeLink from "../../src/components/WelcomeLink"
+import Ink from "../../src/nice/Ink"
+import NewLines from "../../src/components/NewLines"
+
+<Meta
+  title="Basics/Welcome"
+  name="Docs"
+/>
+
+<NewLines count={3}/>
+
+<Flex
+  direction="column"
+  gap="base"
+>
+  <WelcomeLink
+    storyId="basics-reset--docs"
+    iconName="Eraser"
+    title="Reset"
+  >
+    <span><strong>A token-driven CSS reset</strong> that normalizes defaults across browsers.</span>
+  </WelcomeLink>
+  <WelcomeLink
+    storyId="basics-tokens--docs"
+    iconName="Palette"
+    title="Tokens"
+  >
+    <span><strong>A complete token system</strong> with no framework required.</span>
+  </WelcomeLink>
+  <WelcomeLink
+    storyId="basics-fonts--docs"
+    iconName="Type"
+    title="Fonts"
+  >
+    <span><strong>Easy font loading</strong> with Google and Adobe Typekit support.</span>
+  </WelcomeLink>
+  <WelcomeLink
+    storyId="basics-icons--docs"
+    iconName="LayoutGrid"
+    title="Icons"
+  >
+    <span><strong>A standalone SVG icon set</strong> usable as raw SVG or the React Icon component.</span>
+  </WelcomeLink>
+  <WelcomeLink
+    storyId="basics-breakpoints--docs"
+    iconName="MonitorSmartphone"
+    title="Breakpoints"
+  >
+    <span><strong>Viewport features</strong> for total control at any breakpoint.</span>
+  </WelcomeLink>
+  <WelcomeLink
+    storyId="basics-themes--docs"
+    iconName="SunMoon"
+    title="Themes"
+  >
+    <span><strong>Day and night</strong> mode control, as well as custom theming.</span>
+  </WelcomeLink>
+</Flex>

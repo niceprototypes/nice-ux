@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Flex from "nice-react-flex"
-import Typography from "../../../../src/nice/Typography"
+import Ink from "../../../../src/nice/Ink"
 import { DataTableRow } from "../../../../src/components/DataTable"
 import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 
@@ -9,30 +9,30 @@ import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 
 <StoryHeader title="StickySectionLinks" />
 
-<Typography color="light">
+<Ink color="light">
   Navigation links with automatic active section highlighting. Uses{" "}
   <code>IntersectionObserver</code> for efficient detection.
-</Typography>
+</Ink>
 
 <DataTableRow
   fullWidth
   columns={DEMO_CODE_COLUMNS}
   values={[
           <Flex direction="column" gap="small">
-      <Typography size="small" color="light">
+      <Ink size="small" color="light">
         Navigation links with automatic active section highlighting. Uses
         IntersectionObserver for efficient detection.
-      </Typography>
+      </Ink>
       <Flex gap="base">
-        <Typography size="small" color="link" style={{ textDecoration: "underline" }}>
+        <Ink size="small" color="link" style={{ textDecoration: "underline" }}>
           About
-        </Typography>
-        <Typography size="small" color="light">
+        </Ink>
+        <Ink size="small" color="light">
           Services
-        </Typography>
-        <Typography size="small" color="light">
+        </Ink>
+        <Ink size="small" color="light">
           Contact
-        </Typography>
+        </Ink>
       </Flex>
     </Flex>,
           `<StickySectionLinks\n  links={[\n    { href: "#about", label: "About" },\n    { href: "#services", label: "Services" },\n  ]}\n/>`,

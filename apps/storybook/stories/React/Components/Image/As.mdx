@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Image from "nice-react-image"
-import Typography from "../../../../src/nice/Typography"
+import Ink from "../../../../src/nice/Ink"
 import Flex from "nice-react-flex"
 import { DataTableRow } from "../../../../src/components/DataTable"
 import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
@@ -12,11 +12,11 @@ import Tile from "nice-react-tile"
 
 <StoryHeader title="as" />
 
-<Typography color="light">
+<Ink color="light">
   Renders the image as either an <code>&lt;img&gt;</code> element (default) or a{" "}
   <code>&lt;div&gt;</code> with a background image — the latter allows
   overlaying children on top.
-</Typography>
+</Ink>
 
 <DataTableRow
   columns={DEMO_CODE_COLUMNS}
@@ -56,14 +56,14 @@ import Tile from "nice-react-tile"
         <Tile
           spacing="large"
         >
-          <Typography
+          <Ink
             mode="night"
             color="base"
             align="center"
             weight="bold"
           >
             Overlay content
-          </Typography>
+          </Ink>
         </Tile>
       </Flex>
     </Image>,

@@ -8,7 +8,9 @@ import { getToken } from "nice-react-styles"
  * on hover. Targets `[role="button"]` because each control renders as a clickable
  * `<div>` (`as="div" inlined`), not an anchor.
  */
-export const LinkFlex = styled(Flex)`
+export const LinkFlex = styled(Flex).attrs({
+  direction: "column",
+})`
   [role="button"] {
     position: relative;
     color: ${getToken("color", "lighter")} !important;

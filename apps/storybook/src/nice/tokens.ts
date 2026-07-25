@@ -20,7 +20,7 @@ const AppTokenMap = {
     demo: "'Crimson Pro', serif",
   },
   fontSize: {
-    larger: "32px",
+    larger: "40px",
     // large: "22px",
   },
   icon: {

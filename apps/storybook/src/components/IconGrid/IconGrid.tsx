@@ -1,5 +1,5 @@
 import Icon from "nice-react-icon"
-import Typography from "../../nice/Typography"
+import Ink from "../../nice/Ink"
 import type { IconGridProps } from "./IconGrid.types"
 import Flex from "nice-react-flex"
 
@@ -22,7 +22,7 @@ const IconGrid = ({ icons }: IconGridProps) => {
             name={name}
             size="larger"
           />
-          <Typography code>{name}</Typography>
+          <Ink code>{name}</Ink>
         </Flex>
       ))}
     </Flex>

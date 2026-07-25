@@ -1,6 +1,6 @@
 import { getToken } from "nice-react-styles"
 import Flex from "nice-react-flex"
-import Typography from "../../../../nice/Typography"
+import Ink from "../../../../nice/Ink"
 import type { TokenTable } from "./types"
 
 export const letterSpacing = {
@@ -13,10 +13,10 @@ export const letterSpacing = {
   ),
   variants: ["tight", "base", "wide", "wider"],
   // letter-spacing is inherited, so set it on the wrapper and let it cascade to
-  // the Typography text.
+  // the Ink text.
   preview: (variant) => (
     <Flex style={{ letterSpacing: getToken("letterSpacing", variant) }}>
-      <Typography>Letterspacing</Typography>
+      <Ink>Letterspacing</Ink>
     </Flex>
   ),
 } satisfies TokenTable

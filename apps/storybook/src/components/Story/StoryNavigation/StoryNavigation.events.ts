@@ -19,3 +19,24 @@ export const TOGGLE_NAV_EVENT = "nice/story-navigation/toggle-nav"
 export const NAV_STATE_EVENT = "nice/story-navigation/nav-state"
 export const REQUEST_NAV_STATE_EVENT = "nice/story-navigation/request-nav-state"
 export const OPEN_IN_EDITOR_EVENT = "nice/story-navigation/open-in-editor"
+
+/**
+ * The settings menu (a preview-side replica of Storybook's built-in gear menu)
+ * rides the same bridge: the preview emits NAV_ACTION_EVENT with an action name,
+ * and the manager addon maps it to the matching manager `api` call
+ * (toggleToolbar, togglePanel, jumpToStory/Component, collapseAll,
+ * changeSettingsTab). See `.storybook/manager.js`.
+ */
+export const NAV_ACTION_EVENT = "nice/story-navigation/action"
+
+/** Actions the settings menu can dispatch across the channel. */
+export type NavAction =
+  | "about"
+  | "shortcuts"
+  | "toggle-toolbar"
+  | "toggle-panel"
+  | "prev-component"
+  | "next-component"
+  | "prev-story"
+  | "next-story"
+  | "collapse-all"

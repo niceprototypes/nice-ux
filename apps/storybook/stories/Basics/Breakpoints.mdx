@@ -1,0 +1,224 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import ResponsiveDemo from "../../src/components/ResponsiveDemo"
+import HorizontalRule from "../../src/components/HorizontalRule"
+import { DataTable } from "../../src/components/DataTable"
+import Callout from "../../src/components/Callout"
+import Install from "../../src/components/Install"
+import NewLines from "../../src/components/NewLines"
+
+<Meta
+  title="Basics/Breakpoints"
+  name="Docs"
+/>
+
+<StoryHeader title="Breakpoints" />
+
+## Get breakpoints
+
+Configure your design for **different screen sizes and ranges** by tweaking breakpoint variants for tokens and components, or by using `getBreakpoint` in your style code.
+
+### CSS only
+
+```css
+@import "nice-styles/tokens.css";
+
+.phone-only {
+  font-size: var(--np--font-size--phone);
+}
+.laptop-only {
+  font-size: var(--np--font-size--laptop);
+}
+.desktop-only {
+  font-size: var(--np--font-size--desktop);
+}
+```
+
+<NewLines />
+
+### JS + CSS
+
+[//]: # "For CSS-in-JS or runtime CSS strings, `getBreakpoint` returns the matching `@media (min-width: …)` literal sourced from the same threshold table the build uses, so JS and CSS stay in sync:"
+
+```js
+import { getBreakpoint, getToken } from "nice-styles"
+
+const css = `${getBreakpoint("tablet+")} {
+  h1 {
+    font-size: ${getToken("fontSize", "larger")};
+  }
+}`
+```
+
+<Callout type="learning">
+  Calling `getToken` inside of an instance of `getBreakpoint` will automatically
+  resolve to the correct breakpoint variant.
+</Callout>
+
+<NewLines />
+
+### Styled Components
+
+[//]: # "The same `getBreakpoint` literal drops straight into a styled-component, paired with `getToken` for the values — JS and CSS stay on one threshold table:"
+
+<Install
+  package="react-styles"
+  with="styled-components"
+/>
+
+<NewLines />
+
+```tsx
+import styled from "styled-components"
+import { getBreakpoint, getToken } from "nice-react-styles"
+
+const Wrapper = styled.div`
+  padding: ${getToken("gap")};
+
+  ${getBreakpoint("laptop+")} {
+    padding: ${getToken("gap", "large")};
+  }
+`
+```
+
+<HorizontalRule />
+
+## Set breakpoints
+
+### via `setBreakpoints`
+
+To set breakpoints when you don't need to set other tokens:
+
+```ts
+import { setBreakpoints } from "nice-react-styles"
+
+setBreakpoints({
+  tablet: 700,
+  laptop: 1100,
+  desktop: 1800,
+})
+```
+
+<NewLines />
+
+### via `setTokens`
+
+To set breakpoints alongside other updated tokens:
+
+```ts
+import { setTokens } from "nice-react-styles"
+
+setTokens({
+  breakpoints: {
+    tablet: 700,
+    laptop: 1100,
+    desktop: 1800,
+  },
+  fontSize: {
+    base: {
+      phone: "14px",
+      tablet: "15px",
+      "laptop+": "16px",
+    },
+  },
+})
+```
+
+<Callout type="learning">
+  The new breakpoints are used in generating the new responsive tokens, such as the `fontSize` token module in the example above, found in the same object.
+</Callout>
+
+<HorizontalRule />
+
+## Media queries
+
+<DataTable
+  inline
+  columns={[
+    {
+      key: "name",
+      code: true,
+      header: null,
+      width: "5em",
+      render: "text",
+      size: "small",
+      clickToCopy: true,
+    },
+    {
+      key: "query",
+      header: "Query",
+      width: "29em",
+      render: "shiki",
+      language: "css",
+      clickToCopy: false,
+    },
+    {
+      key: "range",
+      header: "Range",
+      render: "text",
+      code: true,
+      size: "small",
+    },
+  ]}
+  tables={[
+    {
+      rows: [
+        {
+          id: "phone",
+          values: ["phone", "@media (max-width: 640px)", "<= 640"],
+        },
+        {
+          id: "tablet",
+          values: [
+            "tablet",
+            "@media (min-width: 641px) and (max-width: 1279px)",
+            "641-1279",
+          ],
+        },
+        {
+          id: "laptop",
+          values: [
+            "laptop",
+            "@media (min-width: 1280px) and (max-width: 1719px)",
+            "1280-1719",
+          ],
+        },
+        {
+          id: "desktop",
+          values: ["desktop", "@media (min-width: 1720px)", ">= 1720"],
+        },
+        {
+          id: "tablet+",
+          values: ["tablet+", "@media (min-width: 641px)", ">= 641"],
+        },
+        {
+          id: "laptop+",
+          values: ["laptop+", "@media (min-width: 1280px)", ">= 1280"],
+        },
+        {
+          id: "tablet-",
+          values: ["tablet-", "@media (max-width: 1279px)", "<= 1279"],
+        },
+        {
+          id: "laptop-",
+          values: ["laptop-", "@media (max-width: 1719px)", "<= 1719"],
+        },
+      ],
+    },
+  ]}
+/>
+
+<HorizontalRule />
+
+## Live demo
+
+Zoom your browser to simulate different screen sizes.
+
+<ResponsiveDemo
+  items={[
+    { breakpoint: "phone", emoji: "📱", text: "Phone" },
+    { breakpoint: "tablet", emoji: "💻", text: "Tablet" },
+    { breakpoint: "laptop", emoji: "🖥️", text: "Laptop" },
+    { breakpoint: "desktop", emoji: "🖼️", text: "Desktop" },
+  ]}
+/>

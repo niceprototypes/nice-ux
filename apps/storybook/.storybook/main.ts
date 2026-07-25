@@ -149,10 +149,14 @@ const config: StorybookConfig = {
     )
     config.plugins = [
       ...(config.plugins || []),
+      // nice-vite-watcher's types resolve against its own vite ^5 devDependency,
+      // so its Plugin type nominally differs from storybook's vite 7 PluginOption.
+      // The versions are runtime-compatible (vite-watcher declares `vite >=4.0.0`
+      // as a peer), so cast to storybook's plugin element type to bridge the leak.
       viteWatcher({
         packages: packagesToWatch,
         verbose: true,
-      }),
+      }) as NonNullable<typeof config.plugins>[number],
     ]
 
     return config

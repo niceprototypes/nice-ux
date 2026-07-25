@@ -1,0 +1,145 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import { IconDemoTable } from "../../src/dataTables/components/demos/Icons"
+import { iconNames } from "nice-icons/catalog"
+import Callout from "../../src/components/Callout"
+import Code from "nice-react-code"
+import Flex from "nice-react-flex"
+import { IconPreview } from "./Icons.styles"
+import NewLines from "../../src/components/NewLines"
+import Install from "../../src/components/Install"
+import HorizontalRule from "../../src/components/HorizontalRule"
+
+<Meta
+  title="Basics/Icons"
+  name="Docs"
+/>
+
+<StoryHeader title="Icons" />
+
+## Get icons
+
+### Standalone
+<Install package="icons"/>
+
+### React
+<Install package="react-icon"/>
+
+---
+
+### Browse {iconNames.length} icons
+
+<IconDemoTable
+  codeColumns={[
+    { header: "JS", code: name => `getIcon("${name}")`, width: "16em" },
+    { header: "React", code: name => `<Icon name="${name}" />`, width: "16em" },
+  ]}
+/>
+
+<HorizontalRule />
+
+## Standalone
+
+Access all **base and fill variants** of all icons via the `nice-icons` package:
+
+<Install package="icons" />
+
+<NewLines count={2} />
+
+<Flex direction="column">
+  <h3>Base</h3>
+  <Flex direction="column" gap="larger" alignItems="center" breakpoints={{ "tablet+": { direction: "row" } }}>
+  <Code language="jsx" code={`import CheckBaseIcon from "nice-icons/check/base.svg"\n\n<CheckBaseIcon />`} />
+  <IconPreview name="check" />
+  </Flex>
+</Flex>
+
+<NewLines count={2} />
+
+<Flex direction="column">
+  <h3>Fill</h3>
+  <Flex direction="column" gap="larger" alignItems="center" breakpoints={{ "tablet+": { direction: "row" } }}>
+  <Code language="jsx" code={`import CheckFillIcon from "nice-icons/check/fill.svg"\n\n<CheckFillIcon />`} />
+  <IconPreview name="check" variant="fill" />
+  </Flex>
+</Flex>
+
+<HorizontalRule />
+
+## React
+
+The Icon component allows you to **easily configure icon properties** without any CSS code:
+
+<Install package="react-icon" />
+
+<NewLines />
+
+```tsx
+<Icon
+  name="check"
+  size="large"
+  color="link"
+  strokeWidth="base"
+  strokeScaling
+  variant="fill"
+  theme="day"
+  viewBox="0 0 24 24"
+  vendor
+  url="https://example.com/icon.svg"
+  vendorComponent={CustomIcon}
+  className="my-icon"
+  style={{ opacity: 0.8 }}
+/>
+```
+
+<Callout type="hint">
+  See the [Component](/docs/components-icon--docs) page for full documentation.
+</Callout>
+
+<HorizontalRule />
+
+## getIcon
+
+The vanilla-JS counterpart to `<Icon>` — returns an icon's **SVG markup as a
+string**, ready to inject without writing HTML or JSX. Styled from the same
+`icon` tokens as the component (size, color, stroke width).
+
+```js
+import { getIcon } from "nice-icons"
+
+getIcon("check")                                             // base variant (default)
+getIcon("check", "fill")                                     // fill variant
+getIcon("check", "base", { size: "large", color: "link" })  // configured
+
+// Inject anywhere:
+document.querySelector("#slot").innerHTML = getIcon("check")
+```
+
+<HorizontalRule />
+
+## getIconEncoded
+
+An icon's SVG as a **base64 data-URI** — the encoded counterpart to `getIcon`.
+The color is **baked in** (`base` = black, `night` = white), so it renders
+standalone with no CSS cascade: drop it straight into an `<img src>`, a CSS
+`url()` / `background-image`, or a `mask-image`.
+
+```js
+import { getIconEncoded } from "nice-icons"
+
+getIconEncoded("check")                              // base variant, base theme (#000)
+getIconEncoded("check", "fill")                      // fill variant
+getIconEncoded("check", "base", { theme: "night" })  // white glyph (#fff)
+
+// → "data:image/svg+xml;base64,PHN2Zy…"
+
+// Use directly as an image or CSS asset:
+element.style.maskImage = `url("${getIconEncoded("check")}")`
+```
+
+The sibling `getIconEncodedKey` returns the **bare base64 payload** (no
+`data:image/svg+xml;base64,` prefix) for when you compose the data-URI yourself.
+The full set is also available as a raw map at `nice-icons/base64` — per-icon
+`base64.json`, keyed name → variant → theme.
+
+<Callout type="hint">`getIcon` resolves color from `icon` tokens and flips with the theme cascade; an **encoded** icon has its color baked in, so pass `theme: "night"` for a white glyph. Ideal for `mask-image` (where the fill comes from `background-color`) and static `<img>` use, where no CSS cascade reaches the SVG.</Callout>

@@ -3,7 +3,7 @@ import { StoryHeader } from "../../../../src/components/Story"
 import StoryDescription from "../../../../src/components/StoryDescription"
 import { DataTableRow } from "../../../../src/components/DataTable"
 import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
-import Typography from "../../../../src/nice/Typography"
+import Ink from "../../../../src/nice/Ink"
 
 <Meta title="Components/Slider/isAnimating" />
 
@@ -16,9 +16,9 @@ import Typography from "../../../../src/nice/Typography"
 <DataTableRow
   columns={DEMO_CODE_COLUMNS}
   values={[
-          <Typography color="light">
+          <Ink color="light">
       Set <code>isAnimating</code> to <code>true</code> before changing <code>currentIndex</code>; reset it from <code>onAnimationComplete</code>.
-    </Typography>,
+    </Ink>,
           `const goToSlide = (index) => {\n  if (!isAnimating) {\n    setIsAnimating(true)\n    setCurrentIndex(index)\n  }\n}`,
         ]}
 />

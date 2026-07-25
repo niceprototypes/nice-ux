@@ -2,7 +2,7 @@ import * as React from "react"
 import Flex from "nice-react-flex"
 import Icon from "nice-react-icon"
 import Tooltip from "nice-react-tooltip"
-import Typography from "../../nice/Typography"
+import Ink from "../../nice/Ink"
 
 interface TokenNameProps {
   /** The token variant name shown in the first column. */
@@ -28,8 +28,8 @@ export const TokenName: React.FC<TokenNameProps> = ({ variant, isDefault = varia
       <Tooltip delayShow={500} content="Default">
         <Icon name="check" size="smaller" color="lighter" />
       </Tooltip>
-      <Typography code size="small" color="lighter">&nbsp;{variant}</Typography>
+      <Ink code size="small" color="lighter">&nbsp;{variant}</Ink>
     </Flex>
   ) : (
-    <Typography code size="small">{variant}</Typography>
+    <Ink code size="small">{variant}</Ink>
   )

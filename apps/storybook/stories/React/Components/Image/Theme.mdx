@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Image from "nice-react-image"
-import Typography from "../../../../src/nice/Typography"
+import Ink from "../../../../src/nice/Ink"
 import { DataTableRow } from "../../../../src/components/DataTable"
 import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import { toSource } from "../../../../src/services"
@@ -20,12 +20,12 @@ export const nightProps = { ...baseProps, alt: "Night theme", theme: "night" }
 
 <StoryHeader title="theme" />
 
-<Typography color="light">
+<Ink color="light">
   Pins the <code>borderRadius</code> token resolution to a specific theme. Use
   this when the containing app is in one theme but a specific image should
   resolve tokens from another (e.g. locking an image frame to <code>"day"</code>{" "}
   tokens inside a night theme panel).
-</Typography>
+</Ink>
 
 <DataTableRow
   columns={DEMO_CODE_COLUMNS}

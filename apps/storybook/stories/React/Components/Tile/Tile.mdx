@@ -1,7 +1,7 @@
 import { Meta, Canvas, Controls } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Tile from "nice-react-tile"
-import Typography from "../../../../src/nice/Typography"
+import Ink from "../../../../src/nice/Ink"
 import { DataTableRow } from "../../../../src/components/DataTable"
 import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import * as TileStories from "./Tile.stories"
@@ -35,9 +35,9 @@ import Tile from "nice-react-tile"
 
 ## Basic
 
-<Typography color="light">
+<Ink color="light">
   Default tile container with built-in spacing and max-width constraints.
-</Typography>
+</Ink>
 
 <DataTableRow
   fullWidth
@@ -52,12 +52,12 @@ import Tile from "nice-react-tile"
 
 ## Playground
 
-<Typography color="light">
+<Ink color="light">
   Interactive controls for `title` / `description` and their tokenized{" "}
-  `titleProps` / `descriptionProps`. Each Typography sub-prop is a dropdown of
+  `titleProps` / `descriptionProps`. Each Ink sub-prop is a dropdown of
   live design-token values — adjust them to preview combinations in the canvas
   above. Controls are grouped by the object prop they compose into.
-</Typography>
+</Ink>
 
 <Canvas of={TileStories.Playground} />
 

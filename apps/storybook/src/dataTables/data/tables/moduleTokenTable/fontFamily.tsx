@@ -1,4 +1,4 @@
-import Typography from "../../../../nice/Typography"
+import Ink from "../../../../nice/Ink"
 import type { TokenTable } from "./types"
 
 export const fontFamily = {
@@ -10,8 +10,8 @@ export const fontFamily = {
     { variant: "code", code: true, text: "Code" },
   ],
   preview: ({ weight, code, text }) => (
-    <Typography weight={weight} code={code}>
+    <Ink weight={weight} code={code}>
       {text}
-    </Typography>
+    </Ink>
   ),
 } satisfies TokenTable

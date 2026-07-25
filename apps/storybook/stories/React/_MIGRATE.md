@@ -2,7 +2,7 @@
 
 This folder (`stories/React/*.mdx`) predates the docs refactor. The 6 top-level
 pages (`React`, `getToken`, `setTokens`, `Theme`, `FontLoader`, `withBreakpoints`)
-were deleted; everything already covered by `Getting started/*` was dropped as
+were deleted; everything already covered by `Basics/*` was dropped as
 redundant. What remains below is the **non-redundant** content, grouped by topic,
 each with a suggested destination. This `.md` is not picked up by Storybook
 (glob is `*.mdx`), so it won't render — it's a migration scratchpad.
@@ -13,7 +13,7 @@ each with a suggested destination. This `.md` is not picked up by Storybook
 
 ## getToken — sibling accessors, options object, inverse
 
-> Suggested home: `Getting started/1 · Tokens` (or a dedicated Tokens API page).
+> Suggested home: `Basics/1 · Tokens` (or a dedicated Tokens API page).
 > Redundant part already covered there: basic `getToken(name, variant)`.
 
 Three sibling functions return the three accessor forms:
@@ -44,7 +44,7 @@ library, etc. Reach for `getTokenKey` when emitting raw `@property` or
 
 ## setTokens — generated CSS output + day/night primitives
 
-> Suggested home: split across `Getting started/1 · Tokens` (override/extend/create),
+> Suggested home: split across `Basics/1 · Tokens` (override/extend/create),
 > `4 · Breakpoints` (responsive), `5 · Themes` (mode-aware).
 > Redundant part already covered: the basic override/create call shape.
 > Novel and worth keeping: the **generated CSS** each pattern emits, and the
@@ -119,7 +119,7 @@ getToken("headerColor", "base", { theme: "night" }) // → var(--np--header-colo
 
 ## Theme — Storybook pinning recipe + how it works
 
-> Suggested home: `Getting started/5 · Themes` (as an advanced/internals section).
+> Suggested home: `Basics/5 · Themes` (as an advanced/internals section).
 > Redundant part already covered there: HTML/CSS/React `theme` prop, `Theme`
 > component, nesting.
 > Novel and worth keeping: the implementation detail, the Storybook recipe, the
@@ -185,7 +185,7 @@ document.documentElement.setAttribute("data-theme", "day")
 
 The attribute selector outranks `@media (prefers-color-scheme: dark)`, so a pin
 wins over OS preference. Stable theme primitives (`--np--…--day` / `--np--…--night`)
-are never reassigned. The component-level `theme` prop (Typography, Tile, Button,
+are never reassigned. The component-level `theme` prop (Ink, Tile, Button,
 Icon, Image, Input) is implemented in terms of `Theme` — `<Tile theme="night">`
 ≡ wrapping Tile in `<Theme name="night">`.
 
@@ -193,7 +193,7 @@ Icon, Image, Input) is implemented in terms of `Theme` — `<Tile theme="night">
 
 ## FontLoader — the component (vs injectFonts)
 
-> Suggested home: `Getting started/2 · Fonts` (an aside; most apps use
+> Suggested home: `Basics/2 · Fonts` (an aside; most apps use
 > `StylesProvider` props or `injectFonts`, already documented there).
 > Novel: the `FontLoader` component itself.
 
@@ -222,7 +222,7 @@ const links = [
 
 ## withBreakpoints — HOC merge semantics + internals
 
-> Suggested home: `Getting started/4 · Breakpoints`.
+> Suggested home: `Basics/4 · Breakpoints`.
 > Redundant part already covered there: the key-shape table
 > (`tablet`/`tablet+`/`tablet-` → which viewports match).
 > Novel and worth keeping: the HOC, merge semantics, deep-merge rules, the

@@ -1,0 +1,112 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import Callout from "../../src/components/Callout"
+
+<Meta
+  title="Scenarios/Hard"
+  name="Docs"
+/>
+
+<StoryHeader
+  title="Hard"
+  description="Everything at once — static, responsive, themed, and custom tokens, plus a pinned subtree."
+/>
+
+Everything at once: static, responsive, themed, and custom tokens; multiple
+font families; and a subtree pinned to `night` regardless of the OS preference.
+Detection is by shape — a `phone` key makes a value responsive, a `day` key
+makes it themed.
+
+```tsx
+// App.tsx
+
+import {
+  StylesProvider,
+  setTokens,
+  getToken,
+  getBreakpoint,
+  Theme,
+} from "nice-react-styles"
+import styled from "styled-components"
+import Ink from "nice-react-ink"
+import Icon from "nice-react-icon"
+import Flex from "nice-react-flex"
+
+setTokens({
+  // Fonts
+  fontFamily: {
+    base: "Inter",              // Default override
+    code: "Roboto Mono",        // Default override
+    promo: "Playfair Display",  // Custom token
+  },
+
+  // Breakpoints
+  breakpoints: {
+    tablet: 700,
+    laptop: 1100,
+    desktop: 1800,
+  },
+
+  // Responsive
+  fontSize: {
+    base: { phone: "16px", laptop: "18px", desktop: "20px" },
+    larger: { phone: "32px", laptop: "44px", desktop: "56px" },
+  },
+
+  // Themes
+  backgroundColor: {
+    base: { day: "#ffffff", night: "#0b0b0c" },
+  },
+  color: {
+    base: { day: "#0b0b0c", night: "#f4f4f5" },
+  },
+
+  // Custom module
+  brandColor: {
+    primary: { day: "#dc0000", night: "#ff5050" },
+    onBrand: "#ffffff", // static within the same custom module
+  },
+} as const)
+
+// Semantic tokens (no theme suffix) flip automatically; the responsive
+// fontSize resolves per breakpoint via getBreakpoint.
+const Card = styled.div`
+  padding: ${getToken("gap", "large")};
+  background-color: ${getToken("backgroundColor")};
+  color: ${getToken("color")};
+  border-radius: ${getToken("borderRadius", "base")};
+  font-family: ${getToken("fontFamily", "base")};
+
+  ${getBreakpoint("laptop+")} {
+    padding: ${getToken("gap", "larger")};
+  }
+`
+
+export default function App() {
+  return (
+    <StylesProvider googleFonts="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700&family=Roboto+Mono&display=swap">
+      <Card>
+        {/* Flex lays the section out with gap tokens — no bespoke CSS. */}
+        <Flex direction="column" gap="large">
+          <Ink as="h1" size="larger" style={{ fontFamily: getToken("fontFamily", "promo") }}>
+            Ready to ship
+          </Ink>
+
+          <Ink style={{ color: getToken("brandColor", "primary") }}>
+            <Icon name="check" color="success" /> Tokens, fonts, breakpoints, and themes — wired.
+          </Ink>
+
+          {/* Pin a subtree to night regardless of the OS preference. */}
+          <Theme name="night">
+            <Card>
+              <Ink>Always dark — pinned with Theme.</Ink>
+            </Card>
+          </Theme>
+        </Flex>
+      </Card>
+    </StylesProvider>
+  )
+}
+```
+
+<Callout type="hint">Semantic tokens like `getToken("color")` already flip day/night on their own. Reach for `Theme`, a component's `theme` prop, or `data-theme` only when you need to *pin* a region against the OS preference.</Callout>

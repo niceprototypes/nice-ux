@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Image from "nice-react-image"
-import Typography from "../../../../src/nice/Typography"
+import Ink from "../../../../src/nice/Ink"
 import { DataTableRow } from "../../../../src/components/DataTable"
 import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import { toSource } from "../../../../src/services"
@@ -65,11 +65,11 @@ import Image from "nice-react-image"
 
 ## Basic
 
-<Typography color="light">
+<Ink color="light">
   Default image rendering — requires a <code>src</code> and <code>alt</code>.
   Add <code>width</code> and <code>height</code> with{" "}
   <code>backgroundSize="cover"</code> to crop.
-</Typography>
+</Ink>
 
 <DataTableRow
   columns={DEMO_CODE_COLUMNS}

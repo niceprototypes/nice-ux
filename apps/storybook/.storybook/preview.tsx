@@ -6,7 +6,7 @@ import { DARK_MODE_EVENT_NAME } from "storybook-dark-mode"
 import { DocsContainer } from "@storybook/addon-docs/blocks"
 import { StylesProvider } from "nice-react-styles"
 import { applyTheme } from "nice-styles"
-import { ShikiPre } from "../src/components/CodeBlock"
+import { ShikiPre } from "../src/components/ShikiPre"
 import { StoryNavigation } from "../src/components/Story"
 import "nice-react-icon-vendor"
 import "nice-react-image-vendor"
@@ -25,8 +25,9 @@ const preview: Preview = {
   decorators: [
     Story => (
       <StylesProvider links={[{ rel: "stylesheet", href: "/fonts/avenir.css" }]}>
-        <Story />
         <StoryNavigation />
+
+        <Story />
       </StylesProvider>
     ),
   ],
@@ -41,12 +42,16 @@ const preview: Preview = {
       // too — the global decorator only fires for embedded <Story> renderings.
       container: ({ children, context }: React.ComponentProps<typeof DocsContainer>) => (
         <DocsContainer context={context}>
-          {children}
           <StoryNavigation />
+          {children}
         </DocsContainer>
       ),
     },
     darkMode: {
+      // Default to light regardless of the OS color-scheme. When `current` is
+      // set, storybook-dark-mode stops following prefers-color-scheme; the
+      // toggle still works and the user's choice persists.
+      current: "light",
       dark: themes.dark,
       light: themes.normal,
     },
@@ -59,17 +64,18 @@ const preview: Preview = {
     options: {
       storySort: {
         order: [
-          "Getting started",
+          "Basics",
           [
             "Welcome",
-            "1 · Reset",
-            "2 · Tokens",
-            "3 · Fonts",
-            "4 · Icons",
-            "5 · Breakpoints",
-            "6 · Themes",
-            "Kitchen sink",
+            "Reset",
+            "Tokens",
+            "Fonts",
+            "Icons",
+            "Breakpoints",
+            "Themes",
           ],
+          "Scenarios",
+          ["Easy", "Medium", "Hard"],
           "Tokens",
           ["Modules", "Components"],
           "Components",

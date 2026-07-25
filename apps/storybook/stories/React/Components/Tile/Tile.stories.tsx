@@ -5,20 +5,20 @@ import type {
   FontWeightType,
   LineHeightType,
 } from "nice-react-styles"
-import type { TypographyAlignType, TypographyAsType } from "nice-react-typography"
+import type { InkAlignType, InkAsType } from "nice-react-ink"
 import Tile from "nice-react-tile"
 
 /**
  * Token option lists for the Playground controls.
  *
  * `satisfies readonly <Union>[]` pins each array to the live token union from
- * nice-styles / nice-react-typography — if a token is renamed or removed there,
+ * nice-styles / nice-react-ink — if a token is renamed or removed there,
  * this file fails to compile rather than silently shipping a dead control value.
- * Sourced from nice-styles/src/generated/types.ts and Typography.types.ts; do
+ * Sourced from nice-styles/src/generated/types.ts and Ink.types.ts; do
  * not hand-edit the values without re-reading those sources.
  */
-const AS_OPTIONS = ["h1", "h2", "h3", "h4", "p", "span"] as const satisfies readonly TypographyAsType[]
-const ALIGN_OPTIONS = ["left", "center", "right", "justify"] as const satisfies readonly TypographyAlignType[]
+const AS_OPTIONS = ["h1", "h2", "h3", "h4", "p", "span"] as const satisfies readonly InkAsType[]
+const ALIGN_OPTIONS = ["left", "center", "right", "justify"] as const satisfies readonly InkAlignType[]
 const COLOR_OPTIONS = ["base", "light", "lighter", "lightest", "disabled", "link", "success", "warning", "error"] as const satisfies readonly ColorType[]
 const SIZE_OPTIONS = ["smaller", "small", "base", "large", "larger"] as const satisfies readonly FontSizeType[]
 const WEIGHT_OPTIONS = ["light", "base", "medium", "semibold", "bold", "extrabold", "black"] as const satisfies readonly FontWeightType[]
@@ -29,7 +29,7 @@ const LINE_HEIGHT_OPTIONS = ["single", "condensed", "base", "expanded"] as const
  *
  * Synthetic, flattened args for the Tile Playground. The nested object props
  * `titleProps` / `descriptionProps` are exploded into one scalar arg per
- * Typography field so each gets its own typed dropdown control, then
+ * Ink field so each gets its own typed dropdown control, then
  * recomposed back into the objects in `render`. Add a new field here +
  * matching argType + render line to expose a new sub-prop control.
  */
@@ -37,19 +37,19 @@ interface PlaygroundArgs {
   title: string
   description: string
 
-  titleAs: TypographyAsType
+  titleAs: InkAsType
   titleColor: ColorType
   titleSize: FontSizeType
   titleWeight: FontWeightType
-  titleAlign: TypographyAlignType
+  titleAlign: InkAlignType
   titleLineHeight: LineHeightType
   titleCode: boolean
 
-  descriptionAs: TypographyAsType
+  descriptionAs: InkAsType
   descriptionColor: ColorType
   descriptionSize: FontSizeType
   descriptionWeight: FontWeightType
-  descriptionAlign: TypographyAlignType
+  descriptionAlign: InkAlignType
   descriptionLineHeight: LineHeightType
   descriptionCode: boolean
 }

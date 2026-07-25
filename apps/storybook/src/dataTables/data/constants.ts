@@ -19,6 +19,6 @@ export const loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing el
 /**
  * The local custom fontFamily token (set in src/nice/tokens.ts) →
  * var(--np--font-family--demo). Built with getConstant since "demo" isn't part
- * of the generated FontFamilyType, and Typography has no font-family prop.
+ * of the generated FontFamilyType, and Ink has no font-family prop.
  */
 export const demoFont = getConstant("fontFamily", "demo")

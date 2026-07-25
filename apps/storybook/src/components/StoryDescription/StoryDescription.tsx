@@ -1,5 +1,5 @@
 import React from "react"
-import Typography from "../../nice/Typography"
+import Ink from "../../nice/Ink"
 
 type StoryDescriptionKind = "css" | "svg"
 
@@ -33,10 +33,10 @@ const StoryDescription: React.FC<StoryDescriptionProps> = ({
   )
   const { kind: kindLabel, suffix } = label[kind]
   return (
-    <Typography color="light">
+    <Ink color="light">
       {children} Maps to the {kindLabel} {Link} {suffix}
       {note ? <> ({note})</> : null}.
-    </Typography>
+    </Ink>
   )
 }
 

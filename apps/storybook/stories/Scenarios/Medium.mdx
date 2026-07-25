@@ -1,0 +1,72 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import Callout from "../../src/components/Callout"
+
+<Meta
+  title="Scenarios/Medium"
+  name="Docs"
+/>
+
+<StoryHeader
+  title="Medium"
+  description="Overrides, a provider-loaded font, and responsive tokens."
+/>
+
+Override defaults with `setTokens`, load a font family through the provider, and
+go responsive. A `phone` key makes a value responsive; `getBreakpoint` emits the
+matching `@media` literal, and a `getToken` inside it resolves to that
+breakpoint's variant automatically.
+
+```tsx
+// App.tsx
+
+import {
+  StylesProvider,
+  setTokens,
+  getToken,
+  getBreakpoint,
+} from "nice-react-styles"
+import styled from "styled-components"
+import Ink from "nice-react-ink"
+import Button from "nice-react-button"
+
+setTokens({
+  fontFamily: {
+    base: "Inter", // Default override
+  },
+  breakpoints: {
+    tablet: 700,
+    laptop: 1100,
+  },
+  fontSize: {
+    base: { phone: "16px", laptop: "18px" },
+    larger: { phone: "32px", laptop: "44px" },
+  },
+} as const)
+
+const Card = styled.div`
+  padding: ${getToken("gap", "large")};
+  font-family: ${getToken("fontFamily", "base")};
+
+  ${getBreakpoint("laptop+")} {
+    padding: ${getToken("gap", "larger")};
+  }
+`
+
+export default function App() {
+  return (
+    <StylesProvider googleFonts="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap">
+      <Card>
+        <Ink as="h1" size="larger">Responsive & branded</Ink>
+
+        {/* An interactive component inherits the same tokens — no extra styling. */}
+        <Button status="success" filled iconRight="arrow-right">
+          Get started
+        </Button>
+      </Card>
+    </StylesProvider>
+  )
+}
+```
+
+<Callout type="learning">A `getToken` call placed inside a `getBreakpoint` block resolves to that breakpoint's variant automatically — your JS and CSS stay on one threshold table.</Callout>

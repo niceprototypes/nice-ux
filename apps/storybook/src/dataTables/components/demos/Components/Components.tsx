@@ -1,4 +1,3 @@
-import * as React from "react"
 import { StoryHeader } from "../../../../components/Story"
 import { DataTable, withCopyAffordance } from "../../../../components/DataTable"
 import { ClickToCopy } from "../../../../components/ClickToCopy"

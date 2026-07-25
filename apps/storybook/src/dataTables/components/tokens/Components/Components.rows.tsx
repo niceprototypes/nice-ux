@@ -1,5 +1,5 @@
 import * as React from "react"
-import Typography from "../../../../nice/Typography"
+import Ink from "../../../../nice/Ink"
 import { TokenName } from "../../../utilities"
 import type { DataTableConfig } from "../../../../components/DataTable"
 import { VAR_REFERENCE } from "./Components.constants"
@@ -31,8 +31,8 @@ const rowCells = (prefix: ComponentPrefixWithTokens, label: string, row: Compone
   values: [
     componentExample(prefix, row.path),
     <TokenName variant={label} isDefault={row.path[row.path.length - 1] === "base"} />,
-    <Typography code size="small">{row.cssVar}</Typography>,
-    <Typography code size="small">{renderValue(row.value)}</Typography>,
+    <Ink code size="small">{row.cssVar}</Ink>,
+    <Ink code size="small">{renderValue(row.value)}</Ink>,
   ],
 })
 

@@ -10,7 +10,7 @@ interface ClickToCopyProps {
 
 /**
  * Wraps any node so clicking it copies `text` to the clipboard — the same
- * affordance a shiki CodeBlock gives, reusable on Typography cells and the like.
+ * affordance a shiki CodeBlock gives, reusable on Ink cells and the like.
  */
 export const ClickToCopy: React.FC<ClickToCopyProps> = ({ text, children }) => (
   <ClickToCopyWrapper onClick={() => copyToClipboard(text)}>{children}</ClickToCopyWrapper>

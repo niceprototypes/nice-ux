@@ -33,7 +33,7 @@ This Storybook documents the following packages:
 ### React Components
 
 - **nice-react-flex** - Responsive flexbox container
-- **nice-react-typography** - Semantic typography component
+- **nice-react-ink** - Semantic ink component
 - **nice-react-tile** - Full-width container with backgrounds
 - **nice-react-button** - Feature-rich button component
 - **nice-react-icon** - Icon library with 30+ SVG icons
@@ -49,7 +49,7 @@ This Storybook documents the following packages:
 stories/
 ├── Introduction.mdx              # Welcome page and overview
 ├── Flex.stories.tsx              # Flex component examples
-├── Typography.stories.tsx        # Typography component examples
+├── Ink.stories.tsx        # Ink component examples
 ├── Tile.stories.tsx              # Tile component examples
 ├── Button.stories.tsx            # Button component examples
 ├── Icon.stories.tsx              # Icon component examples
@@ -134,7 +134,7 @@ The Storybook uses these packages from npm:
 {
   "dependencies": {
     "nice-react-flex": "^1.0.3",
-    "nice-react-typography": "^1.3.3",
+    "nice-react-ink": "^1.3.3",
     "nice-react-tile": "^2.0.6",
     "nice-react-button": "^3.2.3",
     "nice-react-icon": "^1.1.2",
@@ -176,7 +176,7 @@ import { viteWatcher, getSourceAliases } from "nice-vite-watcher"
 // All linked packages and their local paths
 const linkedPackages = {
   "nice-react-flex": `${NICE_PACKAGES_BASE}/nice-react-flex`,
-  "nice-react-typography": `${NICE_PACKAGES_BASE}/nice-react-typography`,
+  "nice-react-ink": `${NICE_PACKAGES_BASE}/nice-react-ink`,
   // ... more packages
 }
 
@@ -184,7 +184,7 @@ const linkedPackages = {
 // These get TRUE HMR with state preservation
 const sourceAliasablePackages = [
   "nice-react-flex",
-  "nice-react-typography",
+  "nice-react-ink",
   "nice-react-styles",
   "nice-react-button",
 ]
@@ -207,7 +207,7 @@ npm run dev
 
 | Category           | HMR Behavior               | Packages                                                                                                 |
 | ------------------ | -------------------------- | -------------------------------------------------------------------------------------------------------- |
-| **Source-aliased** | True HMR — state preserved | nice-react-flex, nice-react-typography, nice-react-styles, nice-react-button |
+| **Source-aliased** | True HMR — state preserved | nice-react-flex, nice-react-ink, nice-react-styles, nice-react-button |
 | **Dist-watched**   | Full reload — automatic    | nice-react-icon (uses SVGR transforms)                                                                   |
 
 #### Editing Source-Aliased Packages
@@ -315,7 +315,7 @@ npm run dev
 ### Components
 
 - Flex: http://localhost:6006/?path=/docs/components-flex--docs
-- Typography: http://localhost:6006/?path=/docs/components-typography--docs
+- Ink: http://localhost:6006/?path=/docs/components-ink--docs
 - Tile: http://localhost:6006/?path=/docs/components-tile--docs
 - Button: http://localhost:6006/?path=/docs/components-button--docs
 - Icon: http://localhost:6006/?path=/docs/components-icon--docs

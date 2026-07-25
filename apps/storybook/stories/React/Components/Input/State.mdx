@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Input from "nice-react-input"
-import Typography from "../../../../src/nice/Typography"
+import Ink from "../../../../src/nice/Ink"
 import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import { DataTable } from "../../../../src/components/DataTable"
 
@@ -18,11 +18,11 @@ export const stateCode = (s) =>
 
 <StoryHeader title="state" />
 
-<Typography color="light">
+<Ink color="light">
   Applies a semantic state style to the input (<code>disabled</code>,{" "}
   <code>error</code>, <code>success</code>, or <code>warning</code>). The
   <code>disabled</code> state also disables the underlying input element.
-</Typography>
+</Ink>
 
 <DataTable
   showHeader={false}

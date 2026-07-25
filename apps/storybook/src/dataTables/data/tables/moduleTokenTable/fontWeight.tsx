@@ -1,4 +1,4 @@
-import Typography from "../../../../nice/Typography"
+import Ink from "../../../../nice/Ink"
 import type { TokenTable } from "./types"
 
 export const fontWeight = {
@@ -10,8 +10,8 @@ export const fontWeight = {
   ),
   variants: ["light", "base", "medium", "semibold", "bold", "extrabold", "black"],
   preview: (variant) => (
-    <Typography weight={variant}>
+    <Ink weight={variant}>
       {variant.charAt(0).toUpperCase() + variant.slice(1)}
-    </Typography>
+    </Ink>
   ),
 } satisfies TokenTable

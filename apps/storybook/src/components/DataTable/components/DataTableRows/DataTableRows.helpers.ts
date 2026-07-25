@@ -18,7 +18,7 @@ interface TableHeadingStyle {
 }
 
 /**
- * House Typography styling per heading level. All levels are monospace (`code`);
+ * House Ink styling per heading level. All levels are monospace (`code`);
  * h2 is large + semibold, h3 large + semibold, h4 small (regular weight).
  */
 export const tableHeadingProps = (as: TableHeadingAs): TableHeadingStyle => {

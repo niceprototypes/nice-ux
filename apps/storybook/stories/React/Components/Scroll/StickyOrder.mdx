@@ -2,7 +2,7 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Flex from "nice-react-flex"
 import { getToken } from "nice-react-styles"
-import Typography from "../../../../src/nice/Typography"
+import Ink from "../../../../src/nice/Ink"
 import { DataTableRow } from "../../../../src/components/DataTable"
 import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 
@@ -10,20 +10,20 @@ import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 
 <StoryHeader title="Sticky order" />
 
-<Typography color="light">
+<Ink color="light">
   Multiple sticky elements stack based on their <code>order</code> prop. Lower
   numbers appear above higher numbers.
-</Typography>
+</Ink>
 
 <DataTableRow
   fullWidth
   columns={DEMO_CODE_COLUMNS}
   values={[
           <Flex direction="column" gap="small">
-      <Typography size="small" color="light">
+      <Ink size="small" color="light">
         Multiple sticky elements stack based on their order prop. Lower numbers
         appear above higher numbers.
-      </Typography>
+      </Ink>
       <Flex gap="small">
         <Flex
           style={{
@@ -32,9 +32,9 @@ import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
             borderRadius: getToken("borderRadius", "small"),
           }}
         >
-          <Typography size="smaller" color="lighter">
+          <Ink size="smaller" color="lighter">
             order=0
-          </Typography>
+          </Ink>
         </Flex>
         <Flex
           style={{
@@ -43,9 +43,9 @@ import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
             borderRadius: getToken("borderRadius", "small"),
           }}
         >
-          <Typography size="smaller" color="lighter">
+          <Ink size="smaller" color="lighter">
             order=1
-          </Typography>
+          </Ink>
         </Flex>
       </Flex>
     </Flex>,

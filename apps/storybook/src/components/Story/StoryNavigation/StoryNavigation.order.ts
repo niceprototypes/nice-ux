@@ -12,20 +12,22 @@ export interface StoryNavigationItem {
  *
  * Keep each sequence in sidebar order (mirror `.storybook/preview.tsx`
  * `storySort`). The `id`s use the `·`-preserving slug Storybook generates from
- * the page's `<Meta title>` (e.g. "Getting started/1 · Tokens").
+ * the page's `<Meta title>` (e.g. "Basics/Tokens").
  */
 export const sequences: StoryNavigationItem[][] = [
-  // Getting started — the guided tutorial flow. Kitchen sink is the unnumbered
-  // final item.
+  // Basics — the guided tutorial flow, continuing into the Scenarios
+  // section (the culminating easy/medium/hard examples).
   [
-    { id: "getting-started-welcome--docs", label: "Welcome" },
-    { id: "getting-started-1-·-reset--docs", label: "Reset" },
-    { id: "getting-started-2-·-tokens--docs", label: "Tokens" },
-    { id: "getting-started-3-·-fonts--docs", label: "Fonts" },
-    { id: "getting-started-4-·-icons--docs", label: "Icons" },
-    { id: "getting-started-5-·-breakpoints--docs", label: "Breakpoints" },
-    { id: "getting-started-6-·-themes--docs", label: "Themes" },
-    { id: "getting-started-kitchen-sink--docs", label: "Kitchen sink" },
+    { id: "basics-welcome--docs", label: "Welcome" },
+    { id: "basics-reset--docs", label: "Reset" },
+    { id: "basics-tokens--docs", label: "Tokens" },
+    { id: "basics-fonts--docs", label: "Fonts" },
+    { id: "basics-icons--docs", label: "Icons" },
+    { id: "basics-breakpoints--docs", label: "Breakpoints" },
+    { id: "basics-themes--docs", label: "Themes" },
+    { id: "scenarios-easy--docs", label: "Easy" },
+    { id: "scenarios-medium--docs", label: "Medium" },
+    { id: "scenarios-hard--docs", label: "Hard" },
   ],
   // Tokens / Modules — the token reference pages. Landing page first, then each
   // token group in sidebar order (alphabetical, mirroring the Modules sidebar).
@@ -54,6 +56,6 @@ export const sequences: StoryNavigationItem[][] = [
     { id: "tokens-components-input--docs", label: "Input" },
     { id: "tokens-components-lightbox--docs", label: "Lightbox" },
     { id: "tokens-components-tile--docs", label: "Tile" },
-    { id: "tokens-components-typography--docs", label: "Typography" },
+    { id: "tokens-components-ink--docs", label: "Ink" },
   ],
 ]

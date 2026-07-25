@@ -1,6 +1,6 @@
 import { Fragment } from "react"
 import Flex from "nice-react-flex"
-import Typography from "../../../../nice/Typography"
+import Ink from "../../../../nice/Ink"
 import { DataTableHeader } from "../DataTableHeader/DataTableHeader"
 import { DataTableRow } from "../DataTableRow/DataTableRow"
 import { RowDivider } from "../DataTableRow/DataTableRow.styles"
@@ -35,12 +35,12 @@ export const DataTableRows = ({
     <Flex direction="column">
       {showHeading ? (
         <Flex direction="column" padding={isH2 ? "none none larger" : isH3 ? "large none" : undefined}>
-          <Typography
+          <Ink
             as={level}
             {...tableHeadingProps(level)}
           >
             {table.name}
-          </Typography>
+          </Ink>
         </Flex>
       ) : null}
       <Flex direction="column">

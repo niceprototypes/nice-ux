@@ -1,0 +1,167 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import Code from "nice-react-code"
+import Image from "nice-react-image"
+import Install from "../../src/components/Install"
+import NewLines from "../../src/components/NewLines"
+import Ink from "../../src/nice/Ink"
+import Flex from "nice-react-flex"
+import HorizontalRule from "../../src/components/HorizontalRule"
+
+<Meta
+  title="Basics/Themes"
+  name="Docs"
+/>
+
+<StoryHeader title="Themes" />
+
+<Image
+  bordered
+  borderRadius="base"
+  src="/rasters/dark-theme.png"
+  alt="Website appearance theme picker — Automatic, Light, and Dark options"
+/>
+
+<NewLines />
+
+By default, Nice UI components are pinned to your browser settings, meaning that **they will switch themes automatically** between day and night depending on your browser or OS.
+
+<HorizontalRule />
+
+## reset.css
+
+<Install package="styles" />
+
+```css
+@import "nice-styles/tokens.css";
+@import "nice-styles/reset.css";
+```
+
+<HorizontalRule />
+
+## Pinning to a theme with HTML
+
+### 1. Wrap HTML subtree
+
+<Install
+  package="styles"
+/>
+
+You can pin the theme to a whole page via the `html` element:
+
+<Code inlined language="html" code={`<html data-theme="day">…</html>`} />
+
+Or pin to an element by setting the attribute:
+
+<Code inlined language="html" code={`<section data-theme="night">…</section>`} />
+
+<NewLines />
+
+### 2. Use semantic tokens
+
+Semantic tokens within the pinned element are reassigned to the pinned theme value:
+
+```html
+<section>
+  <p style="color: var(--np--color)">Pinned to browser theme</p>
+</section>
+
+<section data-theme="night">
+  <p style="color: var(--np--color)">Inherits night theme</p>
+</section>
+
+<section data-theme="night">
+  <p style="color: var(--np--color--day)">Pinned to day theme</p>
+</section>
+```
+
+<HorizontalRule />
+
+## Pinning with CSS
+
+Use the CSS tokens to pin the theme to a selector:
+
+```css
+@import "nice-styles/tokens.css";
+
+body.night-mode {
+  background-color: var(--np--background-color--night);
+  color: var(--np--color--night);
+}
+```
+
+<HorizontalRule />
+
+## Switching at runtime
+
+The `applyTheme` service writes `data-theme` — the same attribute as HTML pinning — on the document root (or any element), so a theme toggle can drive nice's day/night cascade dynamically.
+
+<Install package="styles" />
+
+```tsx
+import { applyTheme } from "nice-styles"
+
+applyTheme("night")           // whole document → night
+applyTheme("day", element)    // a specific element → day
+```
+
+<HorizontalRule />
+
+## Pinning with React
+
+### `theme` prop
+
+For pinning any Nice component:
+
+```tsx
+import Ink from "nice-react-ink"
+
+<Ink theme="night">Night mode</Ink>
+```
+
+<NewLines />
+
+### `Theme` component
+
+For pinning React subtrees:
+
+```tsx
+import { Theme } from "nice-react-styles"
+
+<Theme name="day">{children}</Theme>
+```
+
+<NewLines />
+
+### Nesting
+
+Additionally, you can nest pinned components within a pinned `Theme`:
+
+```tsx
+import { Theme } from "nice-react-styles"
+
+<Theme name="day">
+  <Ink>Inherits day theme</Ink>
+</Theme>
+
+<Theme name="day">
+  <Ink theme="night">Pinned to night theme</Ink>
+</Theme>
+```
+
+Or even within other pinned components:
+
+```tsx
+import { Theme } from "nice-react-styles"
+
+<Theme name="night">
+  <Ink>Inherits night theme</Ink>
+  <Tile theme="day">
+    <Ink>Inherits day theme</Ink>
+  </Tile>
+  <Tile theme="day">
+    <Ink theme="night">Pinned to night theme</Ink>
+  </Tile>
+</Theme>
+```
+

@@ -1,7 +1,7 @@
 import { useState } from "react"
 import Slider from "nice-react-slider"
 import Flex from "nice-react-flex"
-import Typography from "../../../../src/nice/Typography"
+import Ink from "../../../../src/nice/Ink"
 import { getToken } from "nice-react-styles"
 
 export const SlideContent = ({
@@ -21,16 +21,16 @@ export const SlideContent = ({
       padding: getToken("gap", "large"),
     }}
   >
-    <Typography
+    <Ink
       as="h2"
       weight="bold"
       size="larger"
     >
       {title}
-    </Typography>
-    <Typography color="light">
+    </Ink>
+    <Ink color="light">
       Swipe or use navigation to change slides
-    </Typography>
+    </Ink>
   </Flex>
 )
 

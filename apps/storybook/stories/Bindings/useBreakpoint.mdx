@@ -58,8 +58,10 @@ CSS layer:
 | Need | Use |
 |---|---|
 | Responsive styling on a nice component | the `breakpoints` prop (`withBreakpoints`) |
-| Responsive token value | breakpoint variants in `setTokens` |
+| Responsive token value | breakpoint variants in `setTokens` (some tokens flip per breakpoint in `nice-styles/tokens.css`) |
+| Hide/show at a breakpoint in plain CSS | `nice-styles/breakpoints.css` utilities (`.np-hide-tablet-up`) |
 | A media query in CSS-in-JS | `getBreakpoint("tablet+")` |
+| Your own `@media` in a plain CSS file | `nice-styles/breakpoints.custom-media.css` + `postcss-custom-media` (opt-in) |
 | Swap component trees / avoid mounting | **`useBreakpoint`** |
 
 <HorizontalRule />

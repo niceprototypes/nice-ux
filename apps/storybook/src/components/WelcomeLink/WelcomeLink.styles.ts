@@ -11,5 +11,13 @@ export const WelcomeLinkDiv = styled.div`
 
   &:hover {
     border: 1px solid ${getToken("color", "link")};
+    
+    h3 {
+      color: ${getToken("color", "link")};
+    }
+    
+    svg * {
+      stroke: ${getToken("color", "link")};
+    }
   }
 `

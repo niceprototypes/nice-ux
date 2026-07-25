@@ -1,6 +1,7 @@
 import * as React from "react"
 import Flex from "nice-react-flex"
 import ResetDemoItem from "./ResetDemoItem"
+import NewLines from "../NewLines"
 
 /** One reset stylesheet loaded into a demo frame. */
 export interface ResetLayer {
@@ -16,6 +17,8 @@ export interface ResetExample {
    * the heading only when no layers are applied; otherwise the frame is titled by
    * its layer filenames. Also the iframe's accessible title, so keep it unique. */
   label: string
+  /** Optional explanatory text shown beneath the heading (may carry inline `code`). */
+  description?: React.ReactNode
   /** Render at mobile width (390px) instead of the desktop frame. */
   mobile?: boolean
   /** Reset stylesheets loaded, in order; empty/omitted renders raw browser defaults. */
@@ -46,7 +49,7 @@ const ResetDemo: React.FC<ResetDemoProps> = ({
   tokensCss,
   examples,
 }) => (
-  <Flex direction="column" gap="larger">
+  <Flex direction="column">
     {examples.map((example, index) => {
       const layers = example.layers ?? []
       const css = layers.length
@@ -56,11 +59,12 @@ const ResetDemo: React.FC<ResetDemoProps> = ({
         <React.Fragment key={example.label}>
           <ResetDemoItem
             label={example.label}
+            description={example.description}
             mobile={example.mobile}
             files={layers.map(layer => layer.file)}
             srcDoc={frame(pageHtml, css)}
           />
-          {index < examples.length - 1 && <hr/>}
+          {index < examples.length - 1 && <hr />}
         </React.Fragment>
       )
     })}

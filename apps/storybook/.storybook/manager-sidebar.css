@@ -1,50 +1,133 @@
+/* Containers */
+
 .sidebar-container > div:first-of-type > div:first-of-type > div:first-of-type > div:first-of-type {
   padding: 0;
 }
 
-.sidebar-header {
-  padding: var(--np--gap--large) var(--np--gap--larger) !important;
+/* Header */
 
+.sidebar-header {
   > div:nth-child(2) {
-    padding: 0;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 0 var(--np--gap);;
+    height: var(--np--cell-height--large);
+    margin-right: 0;
+
+    a {
+      padding: 0;
+    }
+
+    img {
+      height: var(--np--cell-height--small);
+    }
+  }
+
+  [aria-label="Settings"] {
+    display: none;
   }
 }
 
-.sidebar-item,
+/* Search */
+
+[role="search"] {
+  padding-left: var(--np--gap);
+}
+
+/* Subheading */
+
 .sidebar-subheading {
+  margin-bottom: var(--np--gap--smaller);
+}
+
+/* Items */
+
+[data-nodetype="group"],
+[data-nodetype="document"] {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+
   > [tabindex] {
+    height: var(--np--cell-height--small);
     align-items: center;
     font-size: var(--np--font-size--small);
     font-weight: var(--np--font-weight--medium);
-    padding: var(--np--gap--small);
+    padding: 0 var(--np--gap) 0 calc(calc((var(--np--font-size) + var(--np--gap--small)) * 2) + var(--np--gap));
+    gap: var(--np--gap--small);
+    color: var(--np--color);
+
+    svg {
+      background-color: var(--np--color);
+      width: var(--np--font-size);
+      height: var(--np--font-size);
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      mask-position: center;
+      -webkit-mask-size: contain;
+      mask-size: contain;
+
+      use {
+        display: none;
+      }
+    }
 
     &:not(:first-child) {
       display: none !important;
     }
   }
+
+  /* Top-level */
+  &:not([data-parent-id]) {
+    > [tabindex] {
+      padding-left: var(--np--gap);
+    }
+  }
+
+  &[data-parent-id="basics"],
+  &[data-parent-id="scenarios"],
+  &[data-parent-id="tokens"],
+  &[data-parent-id="components"],
+  &[data-parent-id="bindings"],
+  &[data-parent-id="configuration"],
+  &[data-parent-id="toolkit"] {
+    > [tabindex] {
+      padding-left: calc(var(--np--font-size) + var(--np--gap--small) + var(--np--gap));
+    }
+  }
+
+  &[data-selected="true"] {
+    background-color: transparent !important;
+
+    > [tabindex] {
+      color: var(--np--color--link);
+
+      > div:first-child > svg {
+        background-color: var(--np--color--link);
+      }
+    }
+  }
+
+  &:hover {
+    background-color: transparent !important;
+
+    [tabindex] {
+      color: var(--np--color--link);
+    }
+  }
 }
 
-.sidebar-item {
+/* With carats */
+
+[data-nodetype="group"] {
   > [tabindex] {
-    color: var(--np--color);
+    font-weight: var(--np--font-weight--medium);
 
-    > div {
-      margin: 0;
+    > div:first-child {
+      gap: 0;
 
-      > svg {
-        width: 18px;
-        height: 18px;
-        background-color: var(--np--color);
-        -webkit-mask-repeat: no-repeat;
-        mask-repeat: no-repeat;
-        -webkit-mask-position: center;
-        mask-position: center;
-        -webkit-mask-size: contain;
-        mask-size: contain;
-
-        use {
-          display: none;
-        }
+      > div:first-child {
+        display: none;
       }
     }
   }
@@ -53,41 +136,20 @@
   &:focus {
     background-color: transparent !important;
   }
+}
 
-  &[data-nodetype="group"] > button[tabindex] > div > svg {
-    -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiI+CiAgPHN0eWxlPi5uby1maWxse2ZpbGw6bm9uZX0uc3Ryb2tle3N0cm9rZTojMDAwO3N0cm9rZS13aWR0aDoxLjVweDtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbGluZWpvaW46cm91bmR9PC9zdHlsZT4KICA8cGF0aCBjbGFzcz0ibm8tZmlsbCBzdHJva2UiIGQ9Ik0gMCAwIEwgLTEwLjQ1OSAwIEMgLTEwLjk4MSAwIC0xMS40MTkgMC4zOTIgLTExLjQ3NyAwLjkxMSBMIC0xMi4yNzMgOC4yODcgQyAtMTIuMzQxIDguODkzIC0xMS44NjYgOS40MjQgLTExLjI1NSA5LjQyNCBMIC01LjgzIDkuNDI0IEMgLTUuNTE1IDkuNDI0IC01LjIxOCA5LjI4IC01LjAyNCA5LjAzMiBMIC00LjY1IDguMTc3IEMgLTQuNDU1IDcuOTMgLTQuMTU4IDcuNzg1IC0zLjg0NCA3Ljc4NSBMIDAuNzk3IDcuNzg1IEMgMS40MDcgNy43ODUgMS43OCA3LjI1NCAxLjcxMiA2LjY0OCBMIDEuMDE4IDAuOTExIEMgMC45NiAwLjM5MiAwLjUyMiAwIDAgMCBaIiB0cmFuc2Zvcm09Im1hdHJpeCgxLDAsMCwtMSwxMy4yNzk4LDE0LjE1KSIvPgogIDxwYXRoIGNsYXNzPSJuby1maWxsIHN0cm9rZSIgZD0iTSAwIDAgTCAwIDEuNzM4IEMgLTAuMDYxIDIuMzQ1IDAuMzY5IDIuODc2IDAuOTIyIDIuODc2IEwgNS43MjIgMi44NzYgQyA2LjE3NSAyLjg3NiA2LjU0MiAyLjUwOSA2LjU0MiAyLjA1NyBMIDYuNTQyIDIuMDU3IEMgNi41NDIgMS42MDQgNi45MDkgMS4yMzcgNy4zNjEgMS4yMzcgTCAxMS40NzkgMS4yMzcgQyAxMi4wMzMgMS4yMzcgMTIuMzcgMC43MDYgMTIuMzA5IDAuMDk5IEwgMTIuMzA5IC0xLjY0MiIgdHJhbnNmb3JtPSJtYXRyaXgoMSwwLDAsLTEsMS44MzQ1LDQuNzI1OSkiLz4KPC9zdmc+");
-    mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiI+CiAgPHN0eWxlPi5uby1maWxse2ZpbGw6bm9uZX0uc3Ryb2tle3N0cm9rZTojMDAwO3N0cm9rZS13aWR0aDoxLjVweDtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbGluZWpvaW46cm91bmR9PC9zdHlsZT4KICA8cGF0aCBjbGFzcz0ibm8tZmlsbCBzdHJva2UiIGQ9Ik0gMCAwIEwgLTEwLjQ1OSAwIEMgLTEwLjk4MSAwIC0xMS40MTkgMC4zOTIgLTExLjQ3NyAwLjkxMSBMIC0xMi4yNzMgOC4yODcgQyAtMTIuMzQxIDguODkzIC0xMS44NjYgOS40MjQgLTExLjI1NSA5LjQyNCBMIC01LjgzIDkuNDI0IEMgLTUuNTE1IDkuNDI0IC01LjIxOCA5LjI4IC01LjAyNCA5LjAzMiBMIC00LjY1IDguMTc3IEMgLTQuNDU1IDcuOTMgLTQuMTU4IDcuNzg1IC0zLjg0NCA3Ljc4NSBMIDAuNzk3IDcuNzg1IEMgMS40MDcgNy43ODUgMS43OCA3LjI1NCAxLjcxMiA2LjY0OCBMIDEuMDE4IDAuOTExIEMgMC45NiAwLjM5MiAwLjUyMiAwIDAgMCBaIiB0cmFuc2Zvcm09Im1hdHJpeCgxLDAsMCwtMSwxMy4yNzk4LDE0LjE1KSIvPgogIDxwYXRoIGNsYXNzPSJuby1maWxsIHN0cm9rZSIgZD0iTSAwIDAgTCAwIDEuNzM4IEMgLTAuMDYxIDIuMzQ1IDAuMzY5IDIuODc2IDAuOTIyIDIuODc2IEwgNS43MjIgMi44NzYgQyA2LjE3NSAyLjg3NiA2LjU0MiAyLjUwOSA2LjU0MiAyLjA1NyBMIDYuNTQyIDIuMDU3IEMgNi41NDIgMS42MDQgNi45MDkgMS4yMzcgNy4zNjEgMS4yMzcgTCAxMS40NzkgMS4yMzcgQyAxMi4wMzMgMS4yMzcgMTIuMzcgMC43MDYgMTIuMzA5IDAuMDk5IEwgMTIuMzA5IC0xLjY0MiIgdHJhbnNmb3JtPSJtYXRyaXgoMSwwLDAsLTEsMS44MzQ1LDQuNzI1OSkiLz4KPC9zdmc+");
-  }
+/* Group */
 
-  &[data-nodetype="document"] > [tabindex] > div > svg,
-  &[data-nodetype="story"] > [tabindex] > div > svg {
-    -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiI+CiAgPHN0eWxlPi5uby1maWxse2ZpbGw6bm9uZX0uc3Ryb2tle3N0cm9rZTojMDAwO3N0cm9rZS13aWR0aDoxLjVweDtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbGluZWpvaW46cm91bmR9PC9zdHlsZT4KICA8cGF0aCBjbGFzcz0ibm8tZmlsbCBzdHJva2UiIGQ9Ik0gMCAwIEwgMCAtNC40NjggTCA0LjQ4IC00LjQ2OCIgdHJhbnNmb3JtPSJtYXRyaXgoMSwwLDAsLTEsOC41MTk1LDEpIi8+CiAgPHBhdGggY2xhc3M9Im5vLWZpbGwgc3Ryb2tlIiBkPSJNIDAgMCBMIC01LjAyIDAgQyAtNS4yOTYgMCAtNS41MiAtMC4yMjQgLTUuNTIgLTAuNSBMIC01LjUyIC0xMy41IEMgLTUuNTIgLTEzLjc3NiAtNS4yOTYgLTE0IC01LjAyIC0xNCBMIDMuOTggLTE0IEMgNC4yNTcgLTE0IDQuNDggLTEzLjc3NiA0LjQ4IC0xMy41IEwgNC40OCAtNC40NjggTCAwIDAgWiIgdHJhbnNmb3JtPSJtYXRyaXgoMSwwLDAsLTEsOC41MTk1LDEpIi8+Cjwvc3ZnPg==");
-    mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiI+CiAgPHN0eWxlPi5uby1maWxse2ZpbGw6bm9uZX0uc3Ryb2tle3N0cm9rZTojMDAwO3N0cm9rZS13aWR0aDoxLjVweDtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbGluZWpvaW46cm91bmR9PC9zdHlsZT4KICA8cGF0aCBjbGFzcz0ibm8tZmlsbCBzdHJva2UiIGQ9Ik0gMCAwIEwgMCAtNC40NjggTCA0LjQ4IC00LjQ2OCIgdHJhbnNmb3JtPSJtYXRyaXgoMSwwLDAsLTEsOC41MTk1LDEpIi8+CiAgPHBhdGggY2xhc3M9Im5vLWZpbGwgc3Ryb2tlIiBkPSJNIDAgMCBMIC01LjAyIDAgQyAtNS4yOTYgMCAtNS41MiAtMC4yMjQgLTUuNTIgLTAuNSBMIC01LjUyIC0xMy41IEMgLTUuNTIgLTEzLjc3NiAtNS4yOTYgLTE0IC01LjAyIC0xNCBMIDMuOTggLTE0IEMgNC4yNTcgLTE0IDQuNDggLTEzLjc3NiA0LjQ4IC0xMy41IEwgNC40OCAtNC40NjggTCAwIDAgWiIgdHJhbnNmb3JtPSJtYXRyaXgoMSwwLDAsLTEsOC41MTk1LDEpIi8+Cjwvc3ZnPg==");
-  }
+[data-nodetype="group"] {
 
-  &[data-selected="true"] {
-    background-color: var(--np--background-color--inverse) !important;
-
-    > [tabindex] {
-      color: var(--np--color--inverse);
-
-      > div > svg {
-        background-color: var(--np--color--inverse);
-      }
-    }
+  > [tabindex] {
   }
 }
 
-.sidebar-subheading {
-  > [tabindex] {
-    color: var(--np--color--lighter);
-    letter-spacing: normal;
-    text-transform: none;
+/* Document */
 
-    &:hover,
-    &:focus {
-      color: var(--np--color);
-      background-color: inherit;
-    }
+[data-nodetype="document"] {
+  > [tabindex] {
+    font-weight: var(--np--font-weight);
   }
 }

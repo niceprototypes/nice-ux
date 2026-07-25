@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Tile from "nice-react-tile"
-import Typography from "../../../../src/nice/Typography"
+import Ink from "../../../../src/nice/Ink"
 import { DataTableRow } from "../../../../src/components/DataTable"
 import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 
@@ -9,10 +9,10 @@ import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 
 <StoryHeader title="title" />
 
-<Typography color="light">
-  Renders a primary heading at the top of the tile. Additional Typography props
+<Ink color="light">
+  Renders a primary heading at the top of the tile. Additional Ink props
   can be forwarded via <code>titleProps</code>.
-</Typography>
+</Ink>
 
 <DataTableRow
   fullWidth
@@ -25,7 +25,7 @@ import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 
 ## titleProps
 
-Forwarded to the title's `Typography`. Any prop from `TypographyProps` (except `children`) can be passed.
+Forwarded to the title's `Ink`. Any prop from `InkProps` (except `children`) can be passed.
 
 ### titleProps.as
 

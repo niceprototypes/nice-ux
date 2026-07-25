@@ -1,0 +1,38 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../../src/components/Story"
+import Ink from "../../../../src/nice/Ink"
+import StoryDescription from "../../../../src/components/StoryDescription"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+import { DataTable } from "../../../../src/components/DataTable"
+import { toSource } from "../../../../src/services"
+
+<Meta title="Components/Ink/color" />
+
+<StoryHeader title="color" />
+
+<StoryDescription property="color">
+  Sets the text color using color tokens.
+</StoryDescription>
+
+<DataTable
+  showHeader={false}
+  columns={DEMO_CODE_COLUMNS}
+  tables={[{ rows: [
+    "lightest",
+    "lighter",
+    "light",
+    "base",
+    "disabled",
+    "link",
+    "success",
+    "warning",
+    "error",
+  ].map(color => ({
+    id: String(color),
+    values: [
+          <Ink color={color}>{color}</Ink>,
+          toSource("Ink", { color }, { children: color }),
+        ],
+  })) }]}
+/>
+

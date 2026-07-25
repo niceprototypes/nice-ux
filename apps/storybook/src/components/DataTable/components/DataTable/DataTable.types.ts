@@ -16,13 +16,13 @@ export interface DataColumn {
   /**
    * - `"node"` (default): the value is a ReactNode, rendered as-is.
    * - `"shiki"`: the value is a code string, rendered in a Shiki CodeBlock.
-   * - `"text"`: the value is wrapped in a `<Typography>` styled by `code`/`size`/`color`.
+   * - `"text"`: the value is wrapped in a `<Ink>` styled by `code`/`size`/`color`.
    * @default "node"
    */
   render?: DataColumnRender
   /** (`text`) render in the monospace code font. */
   code?: boolean
-  /** (`text`) Typography font size. */
+  /** (`text`) Ink font size. */
   size?: FontSizeType
   /** (`text`) Nice text color. */
   color?: ColorType

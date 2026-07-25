@@ -2,7 +2,7 @@ import * as React from "react"
 import { navigate } from "@storybook/addon-links"
 import Icon from "nice-react-icon"
 import Flex from "nice-react-flex"
-import Typography from "../../nice/Typography"
+import Ink from "../../nice/Ink"
 import { WelcomeLinkDiv } from "./WelcomeLink.styles"
 
 type Props = {
@@ -32,23 +32,21 @@ const WelcomeLink: React.FC<Props> = ({ storyId, iconName, title, children }) =>
           <Icon
             name={iconName}
             size="larger"
-            color="link"
             vendor
             strokeWidth="large"
             strokeScaling
           />
-          <Typography
+          <Ink
             as="h3"
-            color="link"
             size="large"
             weight="medium"
           >
             {title}
-          </Typography>
+          </Ink>
         </Flex>
-        <Typography>
+        <Ink>
           {children}
-        </Typography>
+        </Ink>
       </Flex>
     </WelcomeLinkDiv>
   )

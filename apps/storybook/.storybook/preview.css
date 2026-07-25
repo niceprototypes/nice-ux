@@ -5,9 +5,24 @@
 @import "preview-docs.css";
 @import "preview-docblock.css";
 
+/* Named breakpoint queries are available in PREVIEW CSS — no @import needed.
+   postcss.config.js injects nice-styles' @custom-media aliases (via
+   @csstools/postcss-global-data) and resolves them, so the floors track
+   styles/src/tokens/breakpoints.json:
+
+     @media (--np--tablet--up) { ... }    →  min-width: 641px
+     @media (--np--laptop--up) { ... }    →  min-width: 1280px
+     @media (--np--phone)      { ... }    →  max-width: 640px
+
+   Aliases: --np--{phone,tablet,laptop,desktop} (exact band),
+   --np--{tablet,laptop,desktop}--up, --np--{phone,tablet,laptop}--down.
+
+   Manager CSS (manager-sidebar.css) canNOT use these — the manager is bundled
+   by esbuild with no PostCSS, so it uses literal-px media queries instead. */
+
 /* Day mode: turn off the font smoothing Storybook hardcodes via its docs/global
    resets (e.g. `:where(div…) { -webkit-font-smoothing: antialiased }`) so
-   light-theme text renders at full weight — matching the manager. Keyed on the
+   light-theme text renders at full weight — im matching the manager. Keyed on the
    [data-theme] pin preview.tsx mirrors from storybook-dark-mode; night keeps
    `antialiased`. `*` + `!important` beats Storybook's per-element resets. */
 [data-theme="day"],

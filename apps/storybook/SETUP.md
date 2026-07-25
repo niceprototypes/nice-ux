@@ -16,7 +16,7 @@ This document summarizes the Storybook configuration for the Nice React componen
 All Nice packages are installed from npm:
 
 - nice-react-flex ^1.0.3
-- nice-react-typography ^1.3.3
+- nice-react-ink ^1.3.3
 - nice-react-tile ^2.0.6
 - nice-react-button ^3.2.3
 - nice-react-icon ^1.1.2
@@ -40,7 +40,7 @@ All Nice packages are installed from npm:
    - Flex grow and wrap
    - Complex nested layouts
 
-2. **Typography.stories.tsx** - 13 stories covering:
+2. **Ink.stories.tsx** - 13 stories covering:
 
    - All heading levels
    - Font sizes and weights
@@ -124,7 +124,7 @@ niceprototypes-storybook/
 ├── stories/
 │   ├── Introduction.mdx     ✅ Welcome page
 │   ├── Flex.stories.tsx     ✅ 12 stories
-│   ├── Typography.stories.tsx ✅ 13 stories
+│   ├── Ink.stories.tsx ✅ 13 stories
 │   ├── Tile.stories.tsx     ✅ 10 stories
 │   ├── Button.stories.tsx   ✅ 20 stories
 │   ├── Icon.stories.tsx     ✅ 15 stories
@@ -166,7 +166,7 @@ npm run build-storybook
 | Package                    | Stories | Coverage    |
 | -------------------------- | ------- | ----------- |
 | nice-react-flex            | 12      | ✅ Complete |
-| nice-react-typography      | 13      | ✅ Complete |
+| nice-react-ink      | 13      | ✅ Complete |
 | nice-react-tile            | 10      | ✅ Complete |
 | nice-react-button          | 20      | ✅ Complete |
 | nice-react-icon            | 15      | ✅ Complete |
@@ -229,7 +229,7 @@ npm install -g nice-toolkit
 
 # Link packages from your local filesystem
 nice-toolkit ../nice-react-flex
-nice-toolkit ../nice-react-typography
+nice-toolkit ../nice-react-ink
 nice-toolkit ../nice-react-tile
 nice-toolkit ../nice-react-button
 nice-toolkit ../nice-react-icon
@@ -242,7 +242,7 @@ This creates symlinks in `node_modules/` pointing to your local package director
 
 **Symlinks (what nice-toolkit creates):**
 
-- Uses `file:` protocol: `"nice-react-typography": "file:../nice-react-typography"`
+- Uses `file:` protocol: `"nice-react-ink": "file:../nice-react-ink"`
 - Creates direct filesystem link to the package directory
 - Vite/Storybook can watch and hot-reload source files directly
 - No build step needed for most packages (Vite compiles on-the-fly)
@@ -256,7 +256,7 @@ This creates symlinks in `node_modules/` pointing to your local package director
 
 #### When Do You Need Watch Mode?
 
-**React Components (nice-react-typography, nice-react-button, etc.):**
+**React Components (nice-react-ink, nice-react-button, etc.):**
 
 - **NO watch mode needed** - Vite automatically watches and compiles `.tsx` files from the symlinked `src/` directory
 - Changes appear instantly with hot module replacement
@@ -297,7 +297,7 @@ This is necessary because:
 ```bash
 # 1. Link all packages
 nice-toolkit ../nice-react-flex
-nice-toolkit ../nice-react-typography
+nice-toolkit ../nice-react-ink
 nice-toolkit ../nice-react-button
 nice-toolkit ../nice-react-icon
 nice-toolkit ../nice-react-tile
@@ -346,7 +346,7 @@ Storybook
 ├── Introduction (Welcome page)
 ├── Components
 │   ├── Flex (12 stories)
-│   ├── Typography (13 stories)
+│   ├── Ink (13 stories)
 │   ├── Tile (10 stories)
 │   ├── Button (20 stories)
 │   └── Icon (15 stories)

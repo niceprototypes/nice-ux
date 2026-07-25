@@ -1,14 +1,14 @@
-import Typography from "../../../../src/nice/Typography"
+import Ink from "../../../../src/nice/Ink"
 import { useScroll } from "nice-react-scroll"
 
 export const ScrollPositionDisplay = () => {
   const scrollY = useScroll()
   return (
-    <Typography
+    <Ink
       size="small"
       color="light"
     >
       Scroll position: {Math.round(scrollY)}px
-    </Typography>
+    </Ink>
   )
 }

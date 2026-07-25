@@ -1,6 +1,7 @@
 import * as React from "react"
 import Flex from "nice-react-flex"
-import Typography from "../../nice/Typography"
+import Code from "nice-react-code"
+import Ink from "../../nice/Ink"
 import { withCopyAffordance } from "../DataTable"
 import { ClickToCopy } from "../ClickToCopy"
 
@@ -23,16 +24,22 @@ const ResetPropertiesItem: React.FC<ResetPropertiesItemProps> = ({ token, descri
   <Flex direction="column">
     {withCopyAffordance(
       <ClickToCopy text={token}>
-        <Typography as="h3" code>{token}</Typography>
+        <Ink as="h3" code>{token}</Ink>
       </ClickToCopy>
     )}
-    {description != null && <Typography as="span">{description}</Typography>}
+    {description != null && <Ink as="span">{description}</Ink>}
     <Flex wrap="wrap">
       {elements.map(element => (
         <React.Fragment key={element}>
           {withCopyAffordance(
             <ClickToCopy text={element}>
-              <code>{element}</code>
+              <Code
+                code={element}
+                language="css"
+                inlined
+                margin="none"
+                showLabel={false}
+              />
             </ClickToCopy>
           )}
         </React.Fragment>

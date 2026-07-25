@@ -1,4 +1,4 @@
-import Typography from "../../../../nice/Typography"
+import Ink from "../../../../nice/Ink"
 import { loremIpsum } from "../../constants"
 import type { TokenTable } from "./types"
 
@@ -12,6 +12,6 @@ export const lineHeight = {
   ),
   variants: ["single", "condensed", "base", "expanded"],
   preview: (variant) => (
-    <Typography lineHeight={variant}>{loremIpsum}</Typography>
+    <Ink lineHeight={variant}>{loremIpsum}</Ink>
   ),
 } satisfies TokenTable

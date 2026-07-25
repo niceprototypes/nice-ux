@@ -1,5 +1,5 @@
 import React from "react"
-import { CodeBlock } from "../CodeBlock"
+import Code from "nice-react-code"
 
 interface InstallProps {
   /** Bare package suffix — renders as `nice-{package}`. E.g. `package="styles"` → `nice-styles`. */
@@ -17,7 +17,7 @@ interface InstallProps {
 }
 
 const Install: React.FC<InstallProps> = ({ package: pkg, with: peers, dev = false, inlined = false }) => (
-  <CodeBlock
+  <Code
     fit
     inlined={inlined}
     language="bash"
