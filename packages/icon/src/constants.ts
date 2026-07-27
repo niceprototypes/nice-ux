@@ -9,3 +9,12 @@
  * nice-icons and rebuilding it.
  */
 export { iconNames, iconVariants } from "nice-icons"
+
+/**
+ * Available illustration names and their variants — re-exported from nice-icons'
+ * parallel illustration surface (fixed-color art, distinct from the monochrome
+ * icon set). `illustrationNames` is a readonly literal tuple, so
+ * `(typeof illustrationNames)[number]` (Illustration.types.ts → IllustrationNameType)
+ * stays the exact name union. Most illustrations ship only `base`.
+ */
+export { illustrationNames, illustrationVariants } from "nice-icons"
