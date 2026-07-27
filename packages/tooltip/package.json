@@ -1,6 +1,6 @@
 {
   "name": "nice-react-tooltip",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "description": "A tooltip component for React that wraps any element and renders an inverse-themed bubble on hover or click",
   "main": "dist/index.js",
@@ -39,6 +39,7 @@
     "styled-components": ">=6.1.18 <7.0.0"
   },
   "dependencies": {
+    "nice-icons": "file:../icons",
     "nice-react-styles": "file:../react-styles"
   },
   "devDependencies": {
