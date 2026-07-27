@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import Flex from "nice-react-flex"
 import { getBreakpoint, getToken, BREAKPOINT_TABLET } from "nice-react-styles"
-import type { CellHeightType, BorderWidthType, BorderColorType } from "nice-react-styles"
+import type { SizeType, BorderWidthType, BorderColorType } from "nice-react-styles"
 import type { ButtonBorderRadiusType, ButtonStatusType } from "./Button.types"
 import { getButtonToken } from "../../tokens/getButtonToken"
 
@@ -16,7 +16,7 @@ export const StyledButton = styled.button.withConfig({
   $isHovered: boolean
   $isFocused: boolean
   $isPressed: boolean
-  $size: CellHeightType
+  $size: SizeType
   $hasPadding: boolean
   $square: boolean
   $status: ButtonStatusType
@@ -131,7 +131,7 @@ export const StyledButton = styled.button.withConfig({
  * (icon-only) buttons collapse the gap to zero.
  */
 export const ButtonContent = styled(Flex)<{
-  $size: CellHeightType
+  $size: SizeType
   $square: boolean
 }>`
   gap: ${({ $square, $size }) => ($square ? "0" : `0 calc(${getToken("fontSize", $size)} / 2)`)};

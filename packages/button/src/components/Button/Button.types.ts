@@ -1,5 +1,5 @@
 import * as React from "react"
-import { CellHeightType, BorderWidthType, BorderColorType, FontWeightType, ThemeType } from "nice-react-styles"
+import { SizeType, BorderWidthType, BorderColorType, FontWeightType, ThemeType } from "nice-react-styles"
 import { IconNameType } from "nice-react-icon"
 import type { FlexSpacingType } from "nice-react-flex"
 
@@ -145,7 +145,7 @@ export interface ButtonProps {
    * @default false
    */
   filled?: ButtonFilledType
-  size?: CellHeightType
+  size?: SizeType
 
   /**
    * Internal padding of the content, as a CSS-like shorthand of gap tokens (1–4
