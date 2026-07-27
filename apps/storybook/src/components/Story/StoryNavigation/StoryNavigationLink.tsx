@@ -1,6 +1,6 @@
 import * as React from "react"
 import type { IconNameType } from "nice-react-icon"
-import type { CellHeightType } from "nice-react-styles"
+import type { SizeType } from "nice-react-styles"
 import Button from "nice-react-button"
 import { LinkFlex } from "./StoryNavigationLink.styles"
 
@@ -16,7 +16,7 @@ interface StoryNavigationLinkProps {
   /** Resolve the icon through the vendor icon set. */
   iconVendor?: boolean
   /** Button size; defaults to "small". */
-  size?: CellHeightType
+  size?: SizeType
 }
 
 /**

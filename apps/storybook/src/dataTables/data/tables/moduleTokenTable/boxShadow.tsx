@@ -20,7 +20,7 @@ export const boxShadow = {
         grow={1}
         style={{
           backgroundColor: getToken("backgroundColor"),
-          height: getToken("cellHeight", "large"),
+          height: getToken("size", "large"),
           borderRadius: getToken("borderRadius", "small"),
           boxShadow: getToken("boxShadow", variant),
         }}

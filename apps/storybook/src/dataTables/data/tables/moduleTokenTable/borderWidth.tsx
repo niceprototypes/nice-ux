@@ -10,7 +10,7 @@ export const borderWidth = {
   // around the whole shape; "none" renders as no border.
   preview: (variant) => (
     <PreviewCell
-      height={getToken("cellHeight", "large")}
+      height={getToken("size", "large")}
       borderColor={getToken("color", "light")}
       borderWidth={getToken("borderWidth", variant)}
     />

@@ -16,7 +16,7 @@ export const zIndex = {
       style={{
         position: "relative",
         width: "72px",
-        height: getToken("cellHeight", "large"),
+        height: getToken("size", "large"),
       }}
     >
       <div
@@ -24,8 +24,8 @@ export const zIndex = {
           position: "absolute",
           top: "0",
           left: "0",
-          width: getToken("cellHeight", "base"),
-          height: getToken("cellHeight", "base"),
+          width: getToken("size", "base"),
+          height: getToken("size", "base"),
           zIndex: REFERENCE_Z,
           backgroundColor: getToken("backgroundColor", "dark"),
           border: `1px solid ${getToken("borderColor")}`,
@@ -37,8 +37,8 @@ export const zIndex = {
           position: "absolute",
           top: getToken("gap", "small"),
           left: getToken("gap", "large"),
-          width: getToken("cellHeight", "base"),
-          height: getToken("cellHeight", "base"),
+          width: getToken("size", "base"),
+          height: getToken("size", "base"),
           zIndex: getToken("zIndex", variant),
           backgroundColor: getToken("color", "link"),
           borderRadius: getToken("borderRadius", "small"),

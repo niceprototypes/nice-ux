@@ -9,7 +9,7 @@ export const brandColor = {
   preview: (variant) => (
     <PreviewCell
       backgroundColor={getToken("brandColor", variant)}
-      height={getToken("cellHeight", "large")}
+      height={getToken("size", "large")}
       borderRadius={getToken("borderRadius", "small")}
     />
   ),

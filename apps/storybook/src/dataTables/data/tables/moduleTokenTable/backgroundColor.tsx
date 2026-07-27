@@ -12,7 +12,7 @@ export const backgroundColor = {
     <PreviewCell
       backgroundColor={getToken("backgroundColor", variant)}
       borderColor={variant === "base" || variant === "dark" ? getToken("borderColor") : getToken("borderColor", variant)}
-      height={getToken("cellHeight", "large")}
+      height={getToken("size", "large")}
       borderRadius={getToken("borderRadius", "small")}
     />
   ),

@@ -11,7 +11,6 @@ import { borderRadius } from "./borderRadius"
 import { borderWidth } from "./borderWidth"
 import { boxShadow } from "./boxShadow"
 import { brandColor } from "./brandColor"
-import { cellHeight } from "./cellHeight"
 import { fontFamily } from "./fontFamily"
 import { fontSize } from "./fontSize"
 import { fontWeight } from "./fontWeight"
@@ -19,6 +18,7 @@ import { color } from "./color"
 import { gap } from "./gap"
 import { letterSpacing } from "./letterSpacing"
 import { lineHeight } from "./lineHeight"
+import { size } from "./size"
 import { zIndex } from "./zIndex"
 
 export type { TokenTable } from "./types"
@@ -32,7 +32,6 @@ export {
   borderWidth,
   boxShadow,
   brandColor,
-  cellHeight,
   fontFamily,
   fontSize,
   fontWeight,
@@ -40,6 +39,7 @@ export {
   gap,
   letterSpacing,
   lineHeight,
+  size,
   zIndex,
 }
 
@@ -54,7 +54,6 @@ export const tokenTables = {
   borderWidth,
   boxShadow,
   brandColor,
-  cellHeight,
   fontFamily,
   fontSize,
   fontWeight,
@@ -62,6 +61,7 @@ export const tokenTables = {
   gap,
   letterSpacing,
   lineHeight,
+  size,
   zIndex,
 } satisfies Record<string, TokenTable>
 

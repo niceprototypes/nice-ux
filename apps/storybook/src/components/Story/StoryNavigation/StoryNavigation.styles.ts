@@ -12,7 +12,7 @@ export const OuterFlex = styled(Flex).attrs({
   top: 0;
   right: 0;
   left: 0;
-  height: ${getToken("cellHeight", "larger")};
+  height: ${getToken("size", "larger")};
   z-index: ${getToken("zIndex", "higher")};
   overflow: hidden;
 
@@ -37,5 +37,5 @@ export const OuterFlex = styled(Flex).attrs({
 `
 
 export const SpacerDiv = styled.div`
-  height: ${getToken("cellHeight", "larger")};
+  height: ${getToken("size", "larger")};
 `

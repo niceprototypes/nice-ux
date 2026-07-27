@@ -48,25 +48,14 @@ addons.setConfig({
   },
 })
 
-const caratIcon = getIconEncoded("carat-right")
 const folderClosedIcon = getIconEncoded("folder-closed")
 const folderOpenIcon = getIconEncoded("folder-open")
-const fileIcon = getIconEncoded("file")
+const stepIcon = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDMyIDMyIj4KICA8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMzAuNi4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogMi4xLjQgQnVpbGQgMTA5KSAgLS0+CiAgPGRlZnM+CiAgICA8c3R5bGU+CiAgICAgIC5zdDAsIC5zdDEgewogICAgICAgIGZpbGw6IG5vbmU7CiAgICAgICAgc3Ryb2tlOiAjMDAwOwogICAgICAgIHN0cm9rZS1taXRlcmxpbWl0OiAxMDsKICAgICAgICBzdHJva2Utd2lkdGg6IDEuNXB4OwogICAgICB9CgogICAgICAuc3QxIHsKICAgICAgICBzdHJva2UtbGluZWNhcDogcm91bmQ7CiAgICAgIH0KICAgIDwvc3R5bGU+CiAgPC9kZWZzPgogIDxsaW5lIGNsYXNzPSJzdDAiIHgxPSIxNiIgeTE9IjMyIiB4Mj0iMTYiLz4KICA8bGluZSBjbGFzcz0ic3QxIiB4MT0iMTYiIHkxPSIxNiIgeDI9IjMxIiB5Mj0iMTYiLz4KPC9zdmc+"
+const stepEndIcon = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDMyIDMyIj4KICA8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMzAuNi4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogMi4xLjQgQnVpbGQgMTA5KSAgLS0+CiAgPGRlZnM+CiAgICA8c3R5bGU+CiAgICAgIC5zdDAgewogICAgICAgIGZpbGw6IG5vbmU7CiAgICAgICAgc3Ryb2tlOiAjMDAwOwogICAgICAgIHN0cm9rZS1saW5lY2FwOiByb3VuZDsKICAgICAgICBzdHJva2UtbWl0ZXJsaW1pdDogMTA7CiAgICAgICAgc3Ryb2tlLXdpZHRoOiAxLjVweDsKICAgICAgfQogICAgPC9zdHlsZT4KICA8L2RlZnM+CiAgPHBvbHlsaW5lIGNsYXNzPSJzdDAiIHBvaW50cz0iMTYgMCAxNiAxNiAzMSAxNiIvPgo8L3N2Zz4="
 
 const sidebarGlyphStyle = document.createElement("style")
 sidebarGlyphStyle.textContent = `
-  [data-nodetype="root"],
   [data-nodetype="group"] {
-     > [tabindex] > div:first-child {
-      transform: none;
-
-      > svg * {
-        display: none;
-      }
-    }
-
-    /* Folder glyph tracks the node's expansion: aria-expanded="true" on the row
-       button shows the open folder, "false" shows the closed one. */
     > [tabindex][aria-expanded="true"] > div:first-child > svg {
       -webkit-mask-image: url("${folderOpenIcon}");
       mask-image: url("${folderOpenIcon}");
@@ -78,11 +67,54 @@ sidebarGlyphStyle.textContent = `
     }
   }
   
-  [data-nodetype="document"] > [tabindex] > div:first-child {
-    display: none;
+  [data-nodetype="group"] {
+    > [tabindex] > div:first-child > div:first-child > svg {
+      -webkit-mask-image: url("${stepIcon}");
+      mask-image: url("${stepIcon}");
+    }
+
+    &:not(:has(+ [data-nodetype="group"])) > [tabindex] > div:first-child > div:first-child > svg {
+      -webkit-mask-image: url("${stepEndIcon}");
+      mask-image: url("${stepEndIcon}");
+    }
+  }
+  
+  [data-nodetype="document"] {
+    > [tabindex] > div:first-child > svg {
+      -webkit-mask-image: url("${stepIcon}");
+      mask-image: url("${stepIcon}");
+    }
+
+    &:not(:has(+ [data-nodetype="document"])) > [tabindex] > div:first-child > svg {
+      -webkit-mask-image: url("${stepEndIcon}");
+      mask-image: url("${stepEndIcon}");
+    }
   }
 `
 document.head.appendChild(sidebarGlyphStyle)
+
+// Tag each sidebar item with its full label path (e.g. data-path="Components/Lightbox/Caption").
+// The tree is a flat, depth-first list where each item names its parent via
+// data-parent-id; walk that chain up (item-id → element) collecting the visible
+// labels. Re-runs whenever the tree re-renders (expand/collapse/navigate); the
+// observer watches childList only, so our own attribute writes don't re-trigger it.
+const tagSidebarPaths = () => {
+  const items = [...document.querySelectorAll(".sidebar-item")]
+  const byId = new Map(items.map(el => [el.getAttribute("data-item-id"), el]))
+
+  for (const item of items) {
+    let count = 0
+
+    for (let cur = item; cur; cur = byId.get(cur.getAttribute("data-parent-id"))) {
+      const hasLabel = !!(cur.firstElementChild?.textContent ?? "").trim()
+      if (hasLabel) count += 1
+    }
+
+    item.setAttribute("data-path-depth", String(Math.max(0, count)))
+  }
+}
+new MutationObserver(tagSidebarPaths).observe(document.body, { childList: true, subtree: true })
+tagSidebarPaths()
 
 // Mirror storybook-dark-mode into the manager's <html data-theme="night|day"> so
 // nice-styles' [data-theme] cascade themes the manager chrome (sidebar/toolbar) —

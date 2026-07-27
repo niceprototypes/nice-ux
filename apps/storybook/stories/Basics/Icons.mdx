@@ -1,7 +1,9 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
 import { IconDemoTable } from "../../src/dataTables/components/demos/Icons"
+import { IllustrationDemoTable } from "../../src/dataTables/components/demos/Illustrations"
 import { iconNames } from "nice-icons/catalog"
+import { illustrationNames } from "nice-icons/illustration-catalog"
 import Callout from "../../src/components/Callout"
 import Code from "nice-react-code"
 import Flex from "nice-react-flex"
@@ -33,6 +35,19 @@ import HorizontalRule from "../../src/components/HorizontalRule"
   codeColumns={[
     { header: "JS", code: name => `getIcon("${name}")`, width: "16em" },
     { header: "React", code: name => `<Icon name="${name}" />`, width: "16em" },
+  ]}
+/>
+
+### Browse {illustrationNames.length} illustrations
+
+Illustrations are fixed-color art — a surface parallel to icons. They keep their
+authored colors (never recolored via tokens) and each ships a base64 version.
+
+<IllustrationDemoTable
+  codeColumns={[
+    { header: "JS", code: name => `getIllustration("${name}")`, width: "16em" },
+    { header: "React", code: name => `<Illustration name="${name}" />`, width: "16em" },
+    { header: "Base64", code: name => `getIllustrationEncoded("${name}")`, width: "18em" },
   ]}
 />
 

@@ -38,13 +38,13 @@ export const sequences: StoryNavigationItem[][] = [
     { id: "tokens-modules-borderradius--docs", label: "borderRadius" },
     { id: "tokens-modules-borderwidth--docs", label: "borderWidth" },
     { id: "tokens-modules-boxshadow--docs", label: "boxShadow" },
-    { id: "tokens-modules-cellheight--docs", label: "cellHeight" },
     { id: "tokens-modules-colors--docs", label: "Colors" },
     { id: "tokens-modules-fontfamily--docs", label: "fontFamily" },
     { id: "tokens-modules-fontsize--docs", label: "fontSize" },
     { id: "tokens-modules-fontweight--docs", label: "fontWeight" },
     { id: "tokens-modules-gap--docs", label: "gap" },
     { id: "tokens-modules-lineheight--docs", label: "lineHeight" },
+    { id: "tokens-modules-size--docs", label: "size" },
   ],
   // Tokens / Components — component-level token reference, one page per
   // component that ships tokens, in sidebar order (alphabetical).

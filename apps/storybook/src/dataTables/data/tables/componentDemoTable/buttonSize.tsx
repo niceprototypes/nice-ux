@@ -5,7 +5,7 @@ import type { ComponentExample } from "../../../components/demos/Components"
 export const buttonSize = {
   name: "size",
   description:
-    "Scales the button's height, padding, and font size using cell-height tokens.",
+    "Scales the button's height, padding, and font size using size tokens.",
   variants: ["smaller", "small", "base", "large", "larger"],
   preview: (variant) => (
     <Button onClick={() => {}} size={variant}>

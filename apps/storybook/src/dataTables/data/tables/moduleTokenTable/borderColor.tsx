@@ -10,7 +10,7 @@ export const borderColor = {
     <PreviewCell
       backgroundColor={getToken("backgroundColor")}
       borderColor={getToken("borderColor", variant)}
-      height={getToken("cellHeight", "larger")}
+      height={getToken("size", "larger")}
     />
   ),
 } satisfies TokenTable
