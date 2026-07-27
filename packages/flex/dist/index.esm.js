@@ -186,9 +186,9 @@ function pushGapStyles(styles, gap) {
         styles.push(`gap: ${gapValue};`);
     }
 }
-// Fix the container height to a cell-height token variant (--np--cell-height--…).
+// Fix the container height to a size token variant (--np--size--…).
 function pushHeightStyles(styles, height) {
-    styles.push(`height: ${getConstant("cellHeight", height)};`);
+    styles.push(`height: ${getConstant("size", height)};`);
 }
 function pushSpacingStyles(styles, type, spacing) {
     const spacingStyles = styleSpacing(type, spacing);

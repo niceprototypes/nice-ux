@@ -57,9 +57,9 @@ function pushGapStyles(styles: string[], gap: FlexGapSizeType): void {
   }
 }
 
-// Fix the container height to a cell-height token variant (--np--cell-height--…).
+// Fix the container height to a size token variant (--np--size--…).
 function pushHeightStyles(styles: string[], height: FlexHeightType): void {
-  styles.push(`height: ${getConstant("cellHeight", height)};`)
+  styles.push(`height: ${getConstant("size", height)};`)
 }
 
 function pushSpacingStyles(

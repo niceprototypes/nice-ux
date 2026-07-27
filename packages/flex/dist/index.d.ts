@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { BreakpointName, GapType, CellHeightType, SpacingShorthandType, SpacingDefinitionType, WithBreakpointsProps } from 'nice-react-styles';
+import { BreakpointName, GapType, SizeType, SpacingShorthandType, SpacingDefinitionType, WithBreakpointsProps } from 'nice-react-styles';
 
 /**
  * FlexGapSizeType
@@ -11,10 +11,10 @@ type FlexGapSizeType = GapType;
 /**
  * FlexHeightType
  *
- * Re-export of CellHeightType from nice-styles. Fixes the flex container's
- * height to a cell-height token variant — resolves to `--np--cell-height--{variant}`.
+ * Re-export of SizeType from nice-styles. Fixes the flex container's
+ * height to a size token variant — resolves to `--np--size--{variant}`.
  */
-type FlexHeightType = CellHeightType;
+type FlexHeightType = SizeType;
 /**
  * FlexBreakpointType
  *
@@ -99,7 +99,7 @@ type FlexProps = {
     padding?: FlexSpacingType;
     /** External margin as a CSS-like shorthand of gap tokens (1–4 values). */
     margin?: FlexSpacingType;
-    /** Fix the container height to a cell-height token (`--np--cell-height--{variant}`). */
+    /** Fix the container height to a size token (`--np--size--{variant}`). */
     height?: FlexHeightType;
     children: React.ReactNode;
     style?: React.CSSProperties;
