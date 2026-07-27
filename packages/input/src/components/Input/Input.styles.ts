@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components"
 import { getToken } from "nice-react-styles"
-import type { CellHeightType, BorderWidthType } from "nice-react-styles"
+import type { SizeType, BorderWidthType } from "nice-react-styles"
 import type { InputBorderRadiusType, InputStateType, InputStatusType } from "./Input.types"
 import { getInputToken } from "../../tokens/getInputToken"
 import { getStatusToken } from "../../utilities/getStatusToken"
@@ -14,7 +14,7 @@ export const StyledInput = styled.input.withConfig({
   $borderWidth: BorderWidthType
   $disabled: boolean
   $isFocused: boolean
-  $size: CellHeightType
+  $size: SizeType
   $state: InputStateType
   $status: InputStatusType
 }>`

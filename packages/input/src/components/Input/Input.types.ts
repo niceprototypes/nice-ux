@@ -1,5 +1,5 @@
 import * as React from "react"
-import { CellHeightType, BorderWidthType, ThemeType } from "nice-react-styles"
+import { SizeType, BorderWidthType, ThemeType } from "nice-react-styles"
 
 /**
  * InputBorderRadiusType
@@ -264,8 +264,8 @@ export interface InputProps {
    */
   status?: InputStatusType
 
-  /** Size variant — uses CellHeightType from nice-styles */
-  size?: CellHeightType
+  /** Size variant — uses SizeType from nice-styles */
+  size?: SizeType
 
   /**
    * Interactive state
