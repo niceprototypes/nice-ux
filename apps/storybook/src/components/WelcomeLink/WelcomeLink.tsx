@@ -27,15 +27,15 @@ const WelcomeLink: React.FC<Props> = ({ storyId, iconName, title, children }) =>
         }
       }}
     >
-      <Flex direction="column" gap="base" padding="large">
-        <Flex alignItems="center" gap="small">
-          <Icon
-            name={iconName}
-            size="larger"
-            vendor
-            strokeWidth="large"
-            strokeScaling
-          />
+      <Flex gap="large" padding="large">
+        <Icon
+          name={iconName}
+          size="larger"
+          vendor
+          strokeWidth="large"
+          strokeScaling
+        />
+        <Flex direction="column" gap="smaller">
           <Ink
             as="h3"
             size="large"
@@ -43,10 +43,10 @@ const WelcomeLink: React.FC<Props> = ({ storyId, iconName, title, children }) =>
           >
             {title}
           </Ink>
+          <Ink>
+            {children}
+          </Ink>
         </Flex>
-        <Ink>
-          {children}
-        </Ink>
       </Flex>
     </WelcomeLinkDiv>
   )

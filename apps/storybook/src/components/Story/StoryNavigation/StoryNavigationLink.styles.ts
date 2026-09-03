@@ -14,6 +14,7 @@ export const LinkFlex = styled(Flex).attrs({
   [role="button"] {
     position: relative;
     color: ${getToken("color", "lighter")} !important;
+    height: ${getToken("size", "small")};
 
     &:hover {
       color: ${getToken("color")} !important;

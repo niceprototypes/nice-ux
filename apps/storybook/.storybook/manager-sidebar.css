@@ -2,50 +2,41 @@
 
 :root {
   --icon--gap: 0.5em;
-  --story--icon--size: 32px;
-  --tree--icon--size: var(--np--icon--size);
+  --branch--icon--size: 32px;
+  --folder--icon--size: var(--np--icon--size);
 
-  --icon--gutter--0: calc(calc(var(--story--icon--size) - var(--tree--icon--size)) / 2);
+  --gutter--1: calc(calc(var(--branch--icon--size) - var(--folder--icon--size)) / -2);
 
-  --icon--gutter--1: calc(icon--gutter--0 + var(--story--icon--size) + var(--icon--gap));
-
-  --icon--gutter--2: calc(icon--gutter--1 + var(--tree--icon--size) + var(--icon--gap) + var(--story--icon--size) + var(--icon--gap));
+  --gutter--2: calc(var(--gutter--1) + calc(var(--branch--icon--size) / 2) + var(--icon--gap) + calc(var(--folder--icon--size) / 2));
 }
 
 /* Containers */
 
-.sidebar-container > div:first-of-type > div:first-of-type > div:first-of-type > div:first-of-type {
-  padding: 0;
-}
+.sidebar-container {
+  padding-left: var(--np--gap--large);
 
-.sidebar-item {
-  background-color: transparent !important;
-
-  &[data-path-depth="0"] {
-    padding-left: var(--icon--gutter--0);
-  }
-
-  &[data-path-depth="1"] {
-    padding-left: var(--icon--gutter--1);
-  }
-
-  &[data-path-depth="2"] {
-    padding-left: var(--icon--gutter--2);
+  [data-radix-scroll-area-content] > div {
+    gap: 0;
+    padding: 0;
   }
 }
 
 /* Header */
 
 .sidebar-header {
+  padding: 0 !important;
+
   > div:nth-child(2) {
     flex-direction: column;
-    justify-content: flex-start;
-    padding: 0 var(--np--gap);
-    height: var(--np--size--large);
+    align-items: flex-start;
+    padding: var(--np--gap--large) 0;
     margin-right: 0;
 
     a {
+      margin: 0;
       padding: 0;
+      border: 0;
+      border-radius: 0;
     }
 
     img {
@@ -58,75 +49,106 @@
   }
 }
 
-/* Search */
+/* Search — the field is hidden here and its shortcut is unbound in manager.js, so
+   there is no way left to reach it. Storybook 10 has no config flag for this; the
+   only stable hook on the search bar is its role, the surrounding classes being
+   emotion-generated. */
 
-[role="search"] {
-  padding-left: var(--np--gap);
-}
-
-/* Subheading */
-
-.sidebar-subheading {
-  margin-bottom: var(--np--gap--smaller);
+.sidebar-container [role="search"] {
+  display: none;
 }
 
 /* Items */
 
-[data-nodetype="group"],
-[data-nodetype="document"] {
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
+.sidebar-item {
+  background-color: transparent !important;
 
-  > [tabindex] {
-    height: var(--np--size--small);
-    align-items: center;
-    font-size: var(--np--font-size--small);
-    font-weight: var(--np--font-weight--medium);
-    padding: 0;
-    gap: var(--np--gap--smaller);
-    color: var(--np--color);
+  &[data-nodetype="group"],
+  &[data-nodetype="document"] {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
 
-    svg {
-      width: var(--tree--icon--size);
-      height: var(--tree--icon--size);
-      -webkit-mask-repeat: no-repeat;
-      mask-repeat: no-repeat;
-      -webkit-mask-position: center;
-      mask-position: center;
-      -webkit-mask-size: contain;
-      mask-size: contain;
+    > [tabindex] {
+      height: var(--np--size--small);
+      align-items: center;
+      font-size: var(--np--font-size--small);
+      font-weight: var(--np--font-weight--medium);
+      padding: 0;
+      gap: var(--icon--gap);
+      color: var(--np--color);
 
-      * {
-        display: none;
+      svg {
+        width: var(--folder--icon--size);
+        height: var(--folder--icon--size);
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+
+        * {
+          display: none;
+        }
       }
     }
   }
 
-  &[data-selected="true"] {
-    > [tabindex] {
-      color: var(--np--color--link);
+  /* Branch icons */
 
-      > div:first-child > svg {
-        background-color: var(--np--color--link);
-      }
-    }
-  }
-
-  &:hover {
-    > [tabindex] {
-      color: var(--np--color--link);
-    }
-  }
-}
-
-/* With carats */
-
-[data-nodetype="group"] {
-  > [tabindex] {
-    font-weight: var(--np--font-weight--medium);
-
+  &[data-nodetype="group"] > [tabindex] > div:first-child,
+  &[data-nodetype="document"] > [tabindex] {
     > div:first-child {
-      gap: var(--np--gap--smaller);
+      position: relative;
+      width: var(--branch--icon--size);
+      height: var(--branch--icon--size);
+
+      > svg {
+        width: var(--branch--icon--size);
+        height: var(--branch--icon--size);
+        background-color: var(--np--border-color);
+      }
+
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 100%;
+      }
+
+      &::before {
+        background-color: var(--np--border-color);
+        transform: translate(-150%, -50%);
+      }
+    }
+  }
+
+  &[data-nodetype="group"][data-before-selected="true"] > [tabindex] > div:first-child,
+  &[data-nodetype="group"][data-selected="true"] > [tabindex] > div:first-child,
+  &[data-nodetype="document"][data-before-selected="true"] > [tabindex],
+  &[data-nodetype="document"][data-selected="true"] > [tabindex] {
+    > div:first-child::after {
+      background-color: var(--np--color--link);
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  &[data-path-depth="2"][data-selected="false"][data-selected-group-item="false"][data-nodetype="group"][data-before-selected="true"] > [tabindex] > div:first-child,
+  &[data-path-depth="2"][data-selected="false"][data-selected-group-item="false"][data-nodetype="group"][data-selected="true"] > [tabindex] > div:first-child,
+  &[data-path-depth="2"][data-selected="false"][data-selected-group-item="false"][data-nodetype="document"][data-before-selected="true"] > [tabindex],
+  &[data-path-depth="2"][data-selected="false"][data-selected-group-item="false"][data-nodetype="document"][data-selected="true"] > [tabindex] {
+    > div:first-child::after {
+      transform: translate(-150%, -50%);
+    }
+  }
+
+  &[data-nodetype="group"] {
+    > [tabindex] > div:first-child {
+      gap: var(--icon--gap);
+      margin-top: 0;
 
       > svg {
         background-color: var(--np--color);
@@ -136,47 +158,80 @@
         width: auto;
         height: auto;
         transform: none;
-
-        > svg {
-          width: var(--story--icon--size);
-          height: var(--story--icon--size);
-          background-color: var(--np--border-color);
-        }
       }
     }
 
-    &:hover {
+    &:hover,
+    &:focus {
+      background-color: transparent !important;
+    }
+
+    &:not([data-parent-id]) {
+      > [tabindex] > div:first-child > div:first-child {
+        display: none;
+      }
+    }
+  }
+
+  &[data-nodetype="document"] {
+    > [tabindex] > div:first-child {
+      margin-top: 0;
+    }
+
+    > button:last-child {
+      display: none;
+    }
+  }
+
+  &[data-selected="true"],
+  &[data-selected-group="true"] {
+    > [tabindex] {
+      color: var(--np--color--link);
+      font-weight: var(--np--font-weight--semibold);
+
       > div:first-child > svg {
         background-color: var(--np--color--link);
       }
     }
   }
 
-  &:hover,
-  &:focus {
-    background-color: transparent !important;
+  &[data-path-depth="0"] {
+    margin-left: 0;
   }
 
-  &:not([data-parent-id]) {
-    > [tabindex] > div:first-child > div:first-child {
-      display: none;
-    }
+  &[data-path-depth="1"] {
+    margin-left: var(--gutter--1);
+  }
+
+  &[data-path-depth="2"] {
+    padding-left: var(--gutter--2);
   }
 }
 
-/* Document */
+.sidebar-container[data-has-selected="true"] {
+  .sidebar-item[data-selected="false"][data-selected-group="false"] {
+    &[data-nodetype="group"],
+    &[data-nodetype="document"] {
+      > [tabindex] {
+        color: var(--np--color--lighter);
 
-[data-nodetype="document"] {
-  > [tabindex] {
-    font-weight: var(--np--font-weight);
+        &:hover {
+          color: var(--np--color);
+        }
+      }
+    }
 
-    > div:first-child {
-      margin-top: 0;
+    &[data-nodetype="group"] {
+      > [tabindex] {
+        > div:first-child > svg {
+          background-color: var(--np--color--lighter);
+        }
 
-      > svg {
-        width: var(--story--icon--size);
-        height: var(--story--icon--size);
-        background-color: var(--np--border-color);
+        &:hover {
+          > div:first-child > svg {
+            background-color: var(--np--color);
+          }
+        }
       }
     }
   }

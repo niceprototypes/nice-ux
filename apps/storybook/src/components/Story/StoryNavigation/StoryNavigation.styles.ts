@@ -12,7 +12,7 @@ export const OuterFlex = styled(Flex).attrs({
   top: 0;
   right: 0;
   left: 0;
-  height: ${getToken("size", "larger")};
+  padding: ${getToken("gap", "large")} 0;
   z-index: ${getToken("zIndex", "higher")};
   overflow: hidden;
 
@@ -24,18 +24,18 @@ export const OuterFlex = styled(Flex).attrs({
     content: "";
     position: absolute;
     top: -100px;
-    left: 0;
-    right: 0;
+    left: -8px;
+    right: -8px;
     bottom: 0;
     /* Keep the token var() (so it flips day/night via the [data-theme] cascade)
        and just drop the alpha to 0.98 — relative-color syntax, not getHSLA, which
        would bake a static day-mode color. */
-    background-color: hsl(from ${getToken("backgroundColor")} h s l / 0.98);
+    background-color: ${getToken("backgroundColor")};
     filter: blur(8px);
     z-index: -1;
   }
 `
 
 export const SpacerDiv = styled.div`
-  height: ${getToken("size", "larger")};
+  height: calc(${getToken("gap", "large")} * 2 + ${getToken("size", "small")} );
 `

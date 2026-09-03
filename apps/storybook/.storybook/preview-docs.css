@@ -4,7 +4,7 @@
   font-family: var(--np--font-family);
 
   &.sbdocs-wrapper {
-    padding: 0 var(--np--gap--larger) var(--np--gap--larger);
+    padding: 0 0 var(--np--gap--larger);
     background: none;
   }
 

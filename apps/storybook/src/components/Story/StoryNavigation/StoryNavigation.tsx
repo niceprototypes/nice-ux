@@ -111,7 +111,7 @@ const StoryNavigation: React.FC<StoryNavigationProps> = ({
   return (
     <>
       <OuterFlex>
-        <Flex gap="large">
+        <Flex gap="large" alignItems="center">
           {back && (
             <StoryNavigationLink
               label={back?.label}
@@ -132,7 +132,7 @@ const StoryNavigation: React.FC<StoryNavigationProps> = ({
             />
           )}
         </Flex>
-        <Flex gap="large">
+        <Flex gap="large" alignItems="center">
           <StoryNavigationLink
             label={isNavShown ? "Collapse menu" : "Expand menu"}
             onClick={() => addons.getChannel().emit(TOGGLE_NAV_EVENT)}
