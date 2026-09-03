@@ -24,7 +24,7 @@ interface TableHeadingStyle {
 export const tableHeadingProps = (as: TableHeadingAs): TableHeadingStyle => {
   switch (as) {
     case "h2":
-      return { size: "large", weight: "semibold", code: true }
+      return { size: "large", weight: "semibold" }
     case "h3":
       return { size: "large", weight: "semibold", code: true }
     case "h4":

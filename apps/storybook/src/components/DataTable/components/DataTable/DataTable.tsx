@@ -13,7 +13,7 @@ import type { DataTableProps } from "./DataTable.types"
  * `DataTableRows`; a rule separates the top-level entries.
  */
 export const DataTable = ({ columns, tables, columnWidths, showHeader = true, rowLines = true, showLines = true, rowSpacing = "base" }: DataTableProps) => (
-  <Flex direction="column">
+  <Flex direction="column" gap="larger">
     {tables.map((table, index) => (
       <React.Fragment key={tableKey(table, index)}>
         <DataTableRows table={table} columns={columns} columnWidths={columnWidths} showHeader={showHeader} rowLines={rowLines} showLines={showLines} rowSpacing={rowSpacing} />

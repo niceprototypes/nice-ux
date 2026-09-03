@@ -51,11 +51,12 @@ export const sequences: StoryNavigationItem[][] = [
   [
     { id: "tokens-components--docs", label: "Components" },
     { id: "tokens-components-button--docs", label: "Button" },
+    { id: "tokens-components-code--docs", label: "Code" },
     { id: "tokens-components-icon--docs", label: "Icon" },
     { id: "tokens-components-image--docs", label: "Image" },
+    { id: "tokens-components-ink--docs", label: "Ink" },
     { id: "tokens-components-input--docs", label: "Input" },
     { id: "tokens-components-lightbox--docs", label: "Lightbox" },
     { id: "tokens-components-tile--docs", label: "Tile" },
-    { id: "tokens-components-ink--docs", label: "Ink" },
   ],
 ]
