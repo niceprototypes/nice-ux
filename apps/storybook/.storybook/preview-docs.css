@@ -2,6 +2,7 @@
 
 .sbdocs {
   font-family: var(--np--font-family);
+  padding-left: var(--np--gap--larger);
 
   &.sbdocs-wrapper {
     padding: 0 0 var(--np--gap--larger);

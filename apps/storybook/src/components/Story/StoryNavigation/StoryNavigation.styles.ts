@@ -6,7 +6,7 @@ export const OuterFlex = styled(Flex).attrs({
   alignItems: "center",
   justifyContent: "space-between",
   gap: "large",
-  padding: "large large large none",
+  padding: "large large large larger",
 })`
   position: fixed;
   top: 0;

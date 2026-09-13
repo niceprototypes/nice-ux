@@ -1,12 +1,14 @@
 import * as React from "react"
 import Flex from "nice-react-flex"
+import { getToken } from "nice-react-styles"
 import Ink from "../../nice/Ink"
 import Code from "nice-react-code"
 
 /** Shared iframe chrome; width/height/radius differ per desktop vs mobile. */
 const frameChrome = {
-  border: "1px solid rgba(128,128,128,0.4)",
-  background: "#fff",
+  border: `1px solid ${getToken("borderColor")}`,
+  borderRadius: getToken("borderRadius"),
+  background: getToken("backgroundColor"),
 }
 const frameStyle = { ...frameChrome, width: 800, height: 600 }
 const frameStyleMobile = { ...frameChrome, width: 390, height: 800 }
@@ -85,8 +87,8 @@ export interface ResetDemoItemProps {
  * `code` chips — e.g. `reset.css` `reset.spacing.css` — falling back to `label`
  * when no layers are applied), an optional description, three headed import
  * CodeBlocks — HTML `<link>`, CSS `@import`, JS `import` — each listing every
- * loaded CSS file as a line, and an `<iframe>` rendering the composed HTML
- * document at desktop or mobile width.
+ * loaded CSS file as a line, and a "Demo"-headed `<iframe>` rendering the
+ * composed HTML document at desktop or mobile width.
  */
 const ResetDemoItem: React.FC<ResetDemoItemProps> = ({
   label,
@@ -121,11 +123,16 @@ const ResetDemoItem: React.FC<ResetDemoItemProps> = ({
         ))}
       </Flex>
     ) : null}
-    <ThemedFrame
-      title={label}
-      srcDoc={srcDoc}
-      style={mobile ? frameStyleMobile : frameStyle}
-    />
+    <Flex direction="column" gap="small">
+      <Ink as="h4" size="base" weight="semibold">
+        Demo
+      </Ink>
+      <ThemedFrame
+        title={label}
+        srcDoc={srcDoc}
+        style={mobile ? frameStyleMobile : frameStyle}
+      />
+    </Flex>
   </Flex>
 )
 

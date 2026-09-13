@@ -37,6 +37,7 @@ const WelcomeLink: React.FC<Props> = ({ storyId, iconName, title, children }) =>
         />
         <Flex direction="column" gap="smaller">
           <Ink
+            color="base"
             as="h3"
             size="large"
             weight="medium"
