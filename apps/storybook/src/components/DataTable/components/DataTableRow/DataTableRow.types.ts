@@ -11,8 +11,8 @@ export interface DataTableRowProps {
   values: React.ReactNode[]
   /** Paint the row highlighted (deep-link arrival). @default false */
   highlighted?: boolean
-  /** Remove the top padding when false (keeping the bottom padding). @default true */
-  showLines?: boolean
+  /** Drop the row's top padding, keeping the bottom rim. @default false */
+  condensed?: boolean
   /** Vertical padding on the row's outermost Flex, applied as the `${rowSpacing} none` gap shorthand. */
   rowSpacing?: GapType
 }

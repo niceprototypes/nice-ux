@@ -116,7 +116,9 @@
 
   code:not(pre.shiki code) {
     background-color: var(--np--background-color--dark);
-    border-color: var(--np--border-color);
+    border: none;
+    margin: 0;
+    padding: 0;
   }
 
   /* ── 4. Element styling ───────────────────────────────────────────── */

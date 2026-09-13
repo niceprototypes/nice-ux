@@ -18,23 +18,26 @@ export const DataTableRows = ({
   columnWidths,
   depth = 0,
   showHeader = true,
-  rowLines = true,
-  showLines = true,
+  showLines = false,
+  condensed = false,
   rowSpacing,
 }: DataTableRowsProps) => {
   const level = LEVELS[Math.min(depth, 2)]
   const isH2 = level === "h2"
   const isH3 = level === "h3"
 
-  // A leaf table (renders a header row) shows its own title inside the header's
-  // first cell; a set/cluster table keeps its title as a standalone heading.
-  const titleInHeader = table.rows != null && showHeader && table.name != null
+  // A NESTED leaf table (one that renders a header row) folds its own title into
+  // the header's first cell, so a cluster reads as one table of labelled parts. A
+  // top-level table keeps its title as a standalone heading — cluster or not —
+  // otherwise consecutive top-level tables render with no heading between them and
+  // read as continuations of whichever one last had a real heading.
+  const titleInHeader = depth > 0 && table.rows != null && showHeader && table.name != null
   const showHeading = table.name != null && !titleInHeader
 
   return (
     <Flex direction="column">
       {showHeading ? (
-        <Flex direction="column" padding={isH2 ? "none none larger" : isH3 ? "large none" : undefined}>
+        <Flex direction="column" padding={isH2 ? "larger none" : isH3 ? "large none" : undefined}>
           <Ink
             as={level}
             {...tableHeadingProps(level)}
@@ -43,20 +46,20 @@ export const DataTableRows = ({
           </Ink>
         </Flex>
       ) : null}
-      <Flex direction="column">
+      <Flex direction="column" gap="larger">
         {table.rows ? (
           <Flex direction="column">
             {showHeader ? <DataTableHeader columns={columns} columnWidths={columnWidths} title={titleInHeader ? table.name : undefined} rowSpacing={rowSpacing} /> : null}
             {table.rows.map((item, index) => (
               <Fragment key={item.id}>
                 {/* Divider between rows (and under the header); never after the last. */}
-                {rowLines && showLines && (index > 0 || showHeader) ? <RowDivider /> : null}
+                {showLines && (index > 0 || showHeader) ? <RowDivider /> : null}
                 <DataTableRow
                   columns={columns}
                   columnWidths={columnWidths}
                   values={item.values}
                   highlighted={item.highlighted}
-                  showLines={showLines}
+                  condensed={condensed}
                   rowSpacing={rowSpacing}
                 />
               </Fragment>
@@ -71,8 +74,8 @@ export const DataTableRows = ({
             columnWidths={columnWidths}
             depth={depth + 1}
             showHeader={showHeader}
-            rowLines={rowLines}
             showLines={showLines}
+            condensed={condensed}
             rowSpacing={rowSpacing}
           />
         ))}

@@ -6,13 +6,12 @@ export const OuterFlex = styled(Flex).attrs({
   alignItems: "center",
   justifyContent: "space-between",
   gap: "large",
-  padding: "none larger",
+  padding: "large large large none",
 })`
   position: fixed;
   top: 0;
   right: 0;
   left: 0;
-  padding: ${getToken("gap", "large")} 0;
   z-index: ${getToken("zIndex", "higher")};
   overflow: hidden;
 

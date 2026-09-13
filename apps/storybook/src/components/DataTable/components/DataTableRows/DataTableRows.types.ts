@@ -12,10 +12,10 @@ export interface DataTableRowsProps {
   depth?: number
   /** Render the column-header row above the rows. @default true */
   showHeader?: boolean
-  /** Divide non-heading rows with a `border-top` (1px solid `borderColor` base). @default true */
-  rowLines?: boolean
-  /** Remove each row's top border and top padding when false. @default true */
+  /** Draw a divider between consecutive rows, and under the column header. @default false */
   showLines?: boolean
+  /** Collapse rows flush by dropping each row's top padding. @default false */
+  condensed?: boolean
   /** Vertical padding on each row's outermost Flex, as the `${rowSpacing} none` gap shorthand. */
   rowSpacing?: GapType
 }

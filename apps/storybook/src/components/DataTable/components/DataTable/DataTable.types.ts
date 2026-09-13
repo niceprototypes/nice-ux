@@ -72,13 +72,16 @@ export interface DataTableProps {
   columnWidths?: (string | null)[]
   /** Render the column header row above each table. @default true */
   showHeader?: boolean
-  /** Divide non-heading rows with a `border-top` (1px solid `borderColor` base). @default true */
-  rowLines?: boolean
   /**
-   * When false, remove each row's top border and top padding (keeping the bottom
-   * padding), collapsing rows flush against each other. @default true
+   * Draw a divider between consecutive rows, and under the column header. Never
+   * after the last row. @default false
    */
   showLines?: boolean
+  /**
+   * Collapse rows flush against each other by dropping each row's top padding and
+   * keeping only the bottom rim. Independent of `showLines`. @default false
+   */
+  condensed?: boolean
   /**
    * Vertical padding on each row's outermost Flex, applied as the gap-token
    * shorthand `${rowSpacing} none` (vertical only; horizontal stays flush).

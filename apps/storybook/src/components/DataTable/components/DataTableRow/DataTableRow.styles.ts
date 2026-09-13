@@ -35,21 +35,21 @@ export const RowClip = styled(Flex).attrs({ direction: "column" })`
 
 // The row divider — an <hr> rendered by DataTableRows between consecutive rows
 // (and under the column header), never after the last row. Replaces the old
-// per-row border-top; the render site gates it on `rowLines`/`showLines`.
+// per-row border-top; the render site gates it on `showLines`.
 export const RowDivider = styled.hr`
   margin: 0 !important;
 `
 
-// `$showLines={false}` removes the top border and the top padding (keeping the
-// bottom padding), collapsing rows against each other.
-export const RowFlex = styled(Flex)<{ $highlighted?: boolean; $showLines?: boolean }>`
+// `$condensed` removes the top padding (keeping the bottom padding), collapsing
+// rows against each other. The dividers are a separate concern — see `showLines`.
+export const RowFlex = styled(Flex)<{ $highlighted?: boolean; $condensed?: boolean }>`
   /* Vertical rim from padding="base none"; a base inline padding rim + an equal
      negative inline margin so a highlighted row bleeds into the gutter while its
      content stays aligned with the surrounding rows. */
   padding-inline: ${getToken("gap", "larger")} !important;
   margin-inline: calc(-1 * ${getToken("gap", "larger")}) !important;
-  /* showLines off: strip the top padding, leaving only the bottom rim. */
-  ${({ $showLines = true }) => !$showLines && `padding-block-start: 0 !important;`}
+  /* condensed: strip the top padding, leaving only the bottom rim. */
+  ${({ $condensed }) => $condensed && `padding-block-start: 0 !important;`}
   ${({ $highlighted }) => $highlighted && `background-color: ${getToken("backgroundColor", "highlight")};`}
 
   .docblock-source {

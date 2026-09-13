@@ -41,7 +41,7 @@ const frame = (pageHtml: string, css: string): string =>
 /**
  * A vertical stack of reset demo frames — the same page rendered under a
  * progressively larger stack of reset stylesheets. Each example declares its
- * `layers`; the composed `srcDoc` (tokens + those layers) and the import table's
+ * `layers`; the composed `srcDoc` (tokens + those layers) and the import blocks'
  * file list are both derived here, so the story only declares intent.
  */
 const ResetDemo: React.FC<ResetDemoProps> = ({
@@ -64,7 +64,7 @@ const ResetDemo: React.FC<ResetDemoProps> = ({
             files={layers.map(layer => layer.file)}
             srcDoc={frame(pageHtml, css)}
           />
-          {index < examples.length - 1 && <hr />}
+          {index < examples.length - 1 && <NewLines count={3} />}
         </React.Fragment>
       )
     })}
