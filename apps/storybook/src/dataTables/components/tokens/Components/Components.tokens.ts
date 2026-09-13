@@ -3,7 +3,7 @@ import { CORE_TOKEN_REFERENCE } from "./Components.constants"
 import type { ComponentTokenGroup, ComponentTokenNode, ComponentPrefixWithTokens } from "./Components.types"
 
 /**
- * Component-level token reference data for the Tokens/Components stories.
+ * Component-level token reference data for each Components/{Name}/Tokens page.
  *
  * Reads straight from `componentTokensData` — the generated JSON each component
  * package ships in `styles/src/tokens/components/{prefix}.json` — and turns it

@@ -29,34 +29,21 @@ export const sequences: StoryNavigationItem[][] = [
     { id: "scenarios-medium--docs", label: "Medium" },
     { id: "scenarios-hard--docs", label: "Hard" },
   ],
-  // Tokens / Modules — the token reference pages. Landing page first, then each
-  // token group in sidebar order (alphabetical, mirroring the Modules sidebar).
+  // Tokens — the token reference pages. Landing page first, then each token
+  // group in sidebar order (alphabetical, mirroring the Tokens sidebar).
   [
-    { id: "tokens-modules--docs", label: "Modules" },
-    { id: "tokens-modules-animationduration--docs", label: "animationDuration" },
-    { id: "tokens-modules-animationeasing--docs", label: "animationEasing" },
-    { id: "tokens-modules-borderradius--docs", label: "borderRadius" },
-    { id: "tokens-modules-borderwidth--docs", label: "borderWidth" },
-    { id: "tokens-modules-boxshadow--docs", label: "boxShadow" },
-    { id: "tokens-modules-colors--docs", label: "Colors" },
-    { id: "tokens-modules-fontfamily--docs", label: "fontFamily" },
-    { id: "tokens-modules-fontsize--docs", label: "fontSize" },
-    { id: "tokens-modules-fontweight--docs", label: "fontWeight" },
-    { id: "tokens-modules-gap--docs", label: "gap" },
-    { id: "tokens-modules-lineheight--docs", label: "lineHeight" },
-    { id: "tokens-modules-size--docs", label: "size" },
-  ],
-  // Tokens / Components — component-level token reference, one page per
-  // component that ships tokens, in sidebar order (alphabetical).
-  [
-    { id: "tokens-components--docs", label: "Components" },
-    { id: "tokens-components-button--docs", label: "Button" },
-    { id: "tokens-components-code--docs", label: "Code" },
-    { id: "tokens-components-icon--docs", label: "Icon" },
-    { id: "tokens-components-image--docs", label: "Image" },
-    { id: "tokens-components-ink--docs", label: "Ink" },
-    { id: "tokens-components-input--docs", label: "Input" },
-    { id: "tokens-components-lightbox--docs", label: "Lightbox" },
-    { id: "tokens-components-tile--docs", label: "Tile" },
+    { id: "tokens--docs", label: "Tokens" },
+    { id: "tokens-animationduration--docs", label: "animationDuration" },
+    { id: "tokens-animationeasing--docs", label: "animationEasing" },
+    { id: "tokens-borderradius--docs", label: "borderRadius" },
+    { id: "tokens-borderwidth--docs", label: "borderWidth" },
+    { id: "tokens-boxshadow--docs", label: "boxShadow" },
+    { id: "tokens-colors--docs", label: "Colors" },
+    { id: "tokens-fontfamily--docs", label: "fontFamily" },
+    { id: "tokens-fontsize--docs", label: "fontSize" },
+    { id: "tokens-fontweight--docs", label: "fontWeight" },
+    { id: "tokens-gap--docs", label: "gap" },
+    { id: "tokens-lineheight--docs", label: "lineHeight" },
+    { id: "tokens-size--docs", label: "size" },
   ],
 ]

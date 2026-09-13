@@ -10,8 +10,9 @@ import OverrideExample from "../../../../components/OverrideExample"
 import type { ComponentPrefixWithTokens, Overrides, ExampleConfig, OverrideConfig } from "./Components.types"
 
 /**
- * Live-component examples for the Tokens/Components tables — the analogue of the
- * bespoke preview cell in Tokens/Modules. Each row shows a minimal instance of
+ * Live-component examples for the component token tables (each
+ * Components/{Name}/Tokens page) — the analogue of the
+ * bespoke preview cell in the Tokens pages. Each row shows a minimal instance of
  * the real component with ONLY the row's token varied.
  *
  * Two paths produce a cell:

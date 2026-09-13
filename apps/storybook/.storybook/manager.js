@@ -179,7 +179,7 @@ const tagSidebarPaths = () => {
   const selectedGroupId = selectedIndex === -1 ? null : items[selectedIndex].getAttribute("data-parent-id")
 
   // data-selected-group: "true" on just the ancestor GROUPS on the path to the
-  // selection (Tokens, Tokens/Modules) — these render as selected, whereas a mere
+  // selection (Components, Components/Button) — these render as selected, whereas a mere
   // before-selected sibling (Button) does not. Storybook owns data-selected on the
   // active leaf; overloading it here would fight its state and loop the observer,
   // so the path folders carry their own attribute. Ancestry is a prefix test, not a

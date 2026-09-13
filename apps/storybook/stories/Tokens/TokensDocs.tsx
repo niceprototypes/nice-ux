@@ -1,5 +1,5 @@
-import { ModuleTokenTable } from "../../../src/dataTables/components/tokens/Modules"
-import type { ModuleTokenTableSectionConfig } from "../../../src/dataTables/components/tokens/Modules"
+import { ModuleTokenTable } from "../../src/dataTables/components/tokens/Modules"
+import type { ModuleTokenTableSectionConfig } from "../../src/dataTables/components/tokens/Modules"
 import { tokenTables, tokenTableList } from "./tables"
 
 /** Color modules grouped under the "Colors" cluster, color first. */

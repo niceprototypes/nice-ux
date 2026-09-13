@@ -29,7 +29,7 @@ import HorizontalRule from "../../src/components/HorizontalRule"
 
 ---
 
-### Browse {iconNames.length} icons
+### {iconNames.length} icons
 
 <IconDemoTable
   codeColumns={[
@@ -38,18 +38,26 @@ import HorizontalRule from "../../src/components/HorizontalRule"
   ]}
 />
 
-### Browse {illustrationNames.length} illustrations
-
-Illustrations are fixed-color art — a surface parallel to icons. They keep their
-authored colors (never recolored via tokens) and each ships a base64 version.
+### {illustrationNames.length} illustrations
 
 <IllustrationDemoTable
   codeColumns={[
     { header: "JS", code: name => `getIllustration("${name}")`, width: "16em" },
     { header: "React", code: name => `<Illustration name="${name}" />`, width: "16em" },
-    { header: "Base64", code: name => `getIllustrationEncoded("${name}")`, width: "18em" },
   ]}
 />
+
+<HorizontalRule />
+
+## Base64
+
+Import icons directly into CSS, or whenever SVG is not available, with the encoded string option:
+
+```js
+import { getIconEncoded } from "nice-icons"
+
+getIconEncoded("check")
+```
 
 <HorizontalRule />
 

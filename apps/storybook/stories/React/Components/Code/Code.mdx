@@ -1,0 +1,26 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../../src/components/Story"
+import Install from "../../../../src/components/Install"
+
+<Meta title="Components/Code" />
+
+<StoryHeader
+  title="Code"
+  repos={[
+    { name: "nice-react-code", url: "https://github.com/niceprototypes/nice-react-code", license: "MIT" },
+  ]}
+/>
+
+<Install package="react-code" />
+
+### Setup
+
+```jsx
+import Code from "nice-react-code"
+```
+
+### Usage
+
+```jsx
+<Code code={source} language="tsx" />
+```

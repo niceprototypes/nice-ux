@@ -1,12 +1,12 @@
-import { StoryHeader } from "../../../src/components/Story"
-import { DataTable } from "../../../src/components/DataTable"
+import { StoryHeader } from "../../src/components/Story"
+import { DataTable } from "../../src/components/DataTable"
 import {
   TOKEN_COLUMNS,
   TOKEN_COLUMN_WIDTHS,
   buildTokenRows,
   useNiceTheme,
   useHighlightedToken,
-} from "../../../src/dataTables/components/tokens/Modules"
+} from "../../src/dataTables/components/tokens/Modules"
 import { tokenTables } from "./tables"
 
 /**

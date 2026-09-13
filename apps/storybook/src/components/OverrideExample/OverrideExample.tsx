@@ -20,7 +20,7 @@ export interface OverrideExampleProps {
 
 /**
  * Renders a live nice component with a demo-only inline style override, so
- * Tokens/Components can illustrate component tokens that have **no dedicated
+ * the component token tables can illustrate tokens that have **no dedicated
  * prop** (Button/Input `spacing`, Form `gap`, …). Those tokens can't be varied
  * through a prop, so the example cell would otherwise be blank; this forces the
  * token's value onto the CSS property it drives, strictly to visualize the

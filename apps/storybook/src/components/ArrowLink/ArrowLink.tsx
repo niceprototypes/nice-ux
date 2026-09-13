@@ -5,7 +5,7 @@ import Plain from "../Plain"
 
 interface ArrowLinkProps {
   /**
-   * Target Storybook story/docs id — e.g. "tokens-modules--docs". Navigated via
+   * Target Storybook story/docs id — e.g. "tokens--docs". Navigated via
    * addon-links so it routes through the manager. (A raw `href` would 404: the
    * real route is `/?path=/docs/…`, and the link renders inside the docs iframe.)
    */

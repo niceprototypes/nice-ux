@@ -7,7 +7,7 @@ import { cap } from "../../../utilities"
 import type { ComponentTokenTableProps } from "./Components.types"
 
 /**
- * One component's token tree, mirroring Tokens/Modules nesting: the component is
+ * One component's token tree, mirroring the Tokens pages' nesting: the component is
  * an h2 cluster whose groups (size, spacing, …) are h3 sub-tables, `status`
  * splitting one level deeper. Each row documents a component CSS variable and its
  * initial value — a core `var(--np--…)` deep-link or a literal.

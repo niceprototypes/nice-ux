@@ -1,13 +1,13 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import { StoryHeader } from "../../../src/components/Story"
-import { ModuleTokenTable, TOKEN_COLUMN_WIDTHS } from "../../../src/dataTables/components/tokens/Modules"
+import { StoryHeader } from "../../src/components/Story"
+import { ModuleTokenTable, TOKEN_COLUMN_WIDTHS } from "../../src/dataTables/components/tokens/Modules"
 import { tokenTables } from "./tables"
-import PreviewCell from "../../../src/components/PreviewCell"
+import PreviewCell from "../../src/components/PreviewCell"
 import { getHSLA, getToken } from "nice-react-styles"
-import { DataTable } from "../../../src/components/DataTable"
-import HorizontalRule from "../../../src/components/HorizontalRule"
+import { DataTable } from "../../src/components/DataTable"
+import HorizontalRule from "../../src/components/HorizontalRule"
 
-<Meta title="Tokens/Modules/Colors" />
+<Meta title="Tokens/Colors" />
 
 {/* The colors page is multi-column — let it use the full docs width. */}
 <style>{`.sbdocs.sbdocs-content { max-width: 100%; }`}</style>
