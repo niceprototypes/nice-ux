@@ -1,4 +1,5 @@
-import { LabelFlex, LabelText } from "./CodeLabel.styles"
+import Ink from "nice-react-ink"
+import { LabelFlex } from "./CodeLabel.styles"
 import { LANG_LABELS } from "./CodeLabel.constants"
 import type { CodeLabelProps } from "./CodeLabel.types"
 
@@ -9,7 +10,7 @@ export const CodeLabel = ({ language }: CodeLabelProps) => {
   if (!key) return null
   return (
     <LabelFlex>
-      <LabelText>{LANG_LABELS[key] ?? key.toUpperCase()}</LabelText>
+      <Ink as="span" code color="lightest">{LANG_LABELS[key] ?? key.toUpperCase()}</Ink>
     </LabelFlex>
   )
 }
