@@ -20,7 +20,7 @@ export const TriggerWrapper = styled.span<{ $clickable: boolean }>`
  * chip in day mode, light in night) and flips automatically with the cascade.
  */
 const caratIcon = getIconEncoded("carat-right")
-const folderIcon = getIconEncoded("folder")
+const folderIcon = getIconEncoded("folder-open")
 const fileIcon = getIconEncoded("file")
 export const Bubble = styled.div`
   position: fixed;
