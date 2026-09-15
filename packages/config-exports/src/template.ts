@@ -36,15 +36,6 @@ export function generateIndexContent(config: ExportsConfig): string {
     lines.push(`export * from "./components/${component}"`)
   }
 
-  // Token exports — all from ./tokens (the tokens/index.ts re-exports per-component wrappers)
-  const tokens = config.tokens ?? []
-  if (tokens.length > 0) {
-    const tokenExports = tokens
-      .map(name => `get${name}Token`)
-      .join(", ")
-    lines.push(`export { ${tokenExports} } from "./tokens"`)
-  }
-
   // Constant exports
   const constants = config.constants ?? []
   if (constants.length > 0) {

@@ -53,17 +53,10 @@ export function validateConfig(raw, configPath) {
         defaultExport = obj.default;
     }
     // Optional arrays
-    const tokens = asStringArray(obj.tokens, "tokens", configPath);
     const services = asStringArray(obj.services, "services", configPath);
     const constants = asStringArray(obj.constants, "constants", configPath);
-    // Validate tokens is a subset of components
-    for (const token of tokens) {
-        if (!components.includes(token)) {
-            fail(configPath, `"tokens" entry "${token}" is not listed in "components"`);
-        }
-    }
     // Warn about unknown keys
-    const knownKeys = new Set(["$schema", "description", "default", "components", "tokens", "services", "constants"]);
+    const knownKeys = new Set(["$schema", "description", "default", "components", "services", "constants"]);
     for (const key of Object.keys(obj)) {
         if (!knownKeys.has(key)) {
             fail(configPath, `unknown field "${key}"`);
@@ -73,7 +66,6 @@ export function validateConfig(raw, configPath) {
         ...(description !== undefined && { description }),
         ...(defaultExport !== undefined && { default: defaultExport }),
         components,
-        tokens,
         services,
         constants,
     };

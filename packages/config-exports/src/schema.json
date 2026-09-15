@@ -22,11 +22,6 @@
       "items": { "type": "string" },
       "description": "Component names. Generator emits `export * from \"./components/{Name}\"` for each."
     },
-    "tokens": {
-      "type": "array",
-      "items": { "type": "string" },
-      "description": "Subset of components that have token wrappers. Emits `{Name}Styles, get{Name}Token` from ./tokens."
-    },
     "services": {
       "type": "array",
       "items": { "type": "string" },

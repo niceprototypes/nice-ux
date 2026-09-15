@@ -3,7 +3,6 @@ export interface ExportsConfig {
     description?: string;
     default?: string;
     components: string[];
-    tokens?: string[];
     services?: string[];
     constants?: string[];
 }
