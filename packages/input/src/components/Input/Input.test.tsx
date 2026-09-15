@@ -1,5 +1,6 @@
 import React from "react"
 import { render, screen, fireEvent } from "@testing-library/react"
+import userEvent from "@testing-library/user-event"
 import "@testing-library/jest-dom"
 import Input from "./Input"
 
@@ -32,11 +33,14 @@ describe("Input", () => {
     expect(screen.getByRole("textbox")).toHaveValue("hello")
   })
 
-  it("does not fire onChange when state is disabled", () => {
-    render(<Input aria-label="name" state="disabled" onChange={mockOnChange} />)
+  it("does not fire onChange when status is disabled", async () => {
+    // userEvent types like a real user, which a disabled input blocks.
+    // fireEvent.change dispatches directly and reaches onChange regardless.
+    const user = userEvent.setup()
+    render(<Input aria-label="name" status="disabled" onChange={mockOnChange} />)
     const el = screen.getByRole("textbox") as HTMLInputElement
     expect(el).toBeDisabled()
-    fireEvent.change(el, { target: { value: "x" } })
+    await user.type(el, "x")
     expect(mockOnChange).not.toHaveBeenCalled()
   })
 
@@ -72,21 +76,21 @@ describe("Input", () => {
   })
 
   it("renders with different statuses", () => {
-    const { rerender } = render(<Input aria-label="x" status="primary" />)
-    expect(screen.getByRole("textbox")).toBeInTheDocument()
+    const statuses = ["base", "disabled", "error", "success", "warning"] as const
+    const { rerender } = render(<Input aria-label="x" status="base" />)
 
-    rerender(<Input aria-label="x" status="secondary" />)
-    expect(screen.getByRole("textbox")).toBeInTheDocument()
-  })
-
-  it("renders with different states", () => {
-    const states = ["base", "disabled", "error", "success", "warning"] as const
-    const { rerender } = render(<Input aria-label="x" state="base" />)
-
-    states.forEach((state) => {
-      rerender(<Input aria-label="x" state={state} />)
+    statuses.forEach((status) => {
+      rerender(<Input aria-label="x" status={status} />)
       expect(screen.getByLabelText("x")).toBeInTheDocument()
     })
+  })
+
+  it("renders filled", () => {
+    const { rerender } = render(<Input aria-label="x" filled />)
+    expect(screen.getByRole("textbox")).toBeInTheDocument()
+
+    rerender(<Input aria-label="x" filled status="error" />)
+    expect(screen.getByRole("textbox")).toBeInTheDocument()
   })
 
   it("forwards readOnly", () => {

@@ -7,36 +7,37 @@ import { SizeType, BorderWidthType, ThemeType } from "nice-react-styles"
  * Border radius variants for the input.
  *
  * Values:
- * - "small": Subtle rounded corners
+ * - "none": Square corners
+ * - "smaller" / "small": Subtle rounded corners
  * - "base": Default rounded corners
- * - "large": More pronounced rounded corners
+ * - "large" / "larger": More pronounced rounded corners
  */
-export type InputBorderRadiusType = "small" | "base" | "large"
+export type InputBorderRadiusType = "none" | "smaller" | "small" | "base" | "large" | "larger"
 
 /**
- * InputStateType
+ * InputStatusType
  *
- * Interactive state of the input. Affects styling based on context.
+ * Interactive status of the input (semantic variant). Maps 1:1 to the core
+ * `color` / `borderColor` variants. Named `status` because `state` collides with
+ * React's component-state convention.
  *
  * Values:
- * - "base": Default state
+ * - "base": Default status
  * - "disabled": Non-interactive, dimmed
  * - "error": Validation error
  * - "success": Validation success
  * - "warning": Validation warning
  */
-export type InputStateType = "base" | "disabled" | "error" | "success" | "warning"
+export type InputStatusType = "base" | "disabled" | "error" | "success" | "warning"
 
 /**
- * InputStatusType
+ * InputFilledType
  *
- * Visual status/variant of the input.
- *
- * Values:
- * - "primary": Outlined input on a base background (default form input look)
- * - "secondary": Filled input on an alternate background (no border)
+ * Whether the input renders filled. When true, the input sits on the dark
+ * background variant with no border (status-colored border for error / success /
+ * warning); when false (default) it is an outline on the base background.
  */
-export type InputStatusType = "primary" | "secondary"
+export type InputFilledType = boolean
 
 /**
  * InputElementType
@@ -259,19 +260,19 @@ export interface InputProps {
   pattern?: InputPatternType
 
   /**
-   * Visual status/variant
-   * @default "primary"
+   * Interactive status (semantic variant)
+   * @default "base"
    */
   status?: InputStatusType
 
+  /**
+   * Render filled instead of outlined
+   * @default false
+   */
+  filled?: InputFilledType
+
   /** Size variant — uses SizeType from nice-styles */
   size?: SizeType
-
-  /**
-   * Interactive state
-   * @default "base"
-   */
-  state?: InputStateType
 
   /**
    * Border radius
@@ -314,8 +315,8 @@ const InputTypes = {} as const
 
 namespace InputTypes {
   export type BorderRadius = InputBorderRadiusType
-  export type State = InputStateType
   export type Status = InputStatusType
+  export type Filled = InputFilledType
   export type Element = InputElementType
   export type Disabled = InputDisabledType
   export type ReadOnly = InputReadOnlyType

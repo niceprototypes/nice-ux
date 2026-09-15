@@ -16,6 +16,7 @@ const Input: React.FC<InputProps> = ({
   className,
   "data-testid": testId,
   defaultValue,
+  filled = false,
   id,
   maxLength,
   minLength,
@@ -30,14 +31,13 @@ const Input: React.FC<InputProps> = ({
   readOnly = false,
   required = false,
   size = "base",
-  state = "base",
-  status = "primary",
+  status = "base",
   style,
   type = "text",
   value,
 }) => {
   const [isFocused, setIsFocused] = React.useState(false)
-  const disabled = isDisabled(state)
+  const disabled = isDisabled(status)
 
   const input = (
     <StyledInput
@@ -46,9 +46,9 @@ const Input: React.FC<InputProps> = ({
       $borderRadius={borderRadius}
       $borderWidth={borderWidth}
       $disabled={disabled}
+      $filled={filled}
       $isFocused={isFocused}
       $size={size}
-      $state={state}
       $status={status}
       aria-describedby={ariaDescribedBy}
       aria-label={ariaLabel}

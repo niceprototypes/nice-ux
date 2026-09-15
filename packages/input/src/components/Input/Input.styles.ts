@@ -1,9 +1,19 @@
 import styled, { css } from "styled-components"
 import { getToken } from "nice-react-styles"
 import type { SizeType, BorderWidthType } from "nice-react-styles"
-import type { InputBorderRadiusType, InputStateType, InputStatusType } from "./Input.types"
-import { getInputToken } from "../../tokens/getInputToken"
-import { getStatusToken } from "../../utilities/getStatusToken"
+import type { InputBorderRadiusType, InputStatusType } from "./Input.types"
+
+/**
+ * Border color: status name maps 1:1 to a core --np--border-color variant.
+ * Outline inputs fall back to the base border when disabled; filled inputs have
+ * no border unless the status is semantic (error / success / warning).
+ */
+function getBorderColor(status: InputStatusType, filled: boolean): string {
+  if (status === "base" || status === "disabled") {
+    return filled ? "transparent" : getToken("borderColor", "base")
+  }
+  return getToken("borderColor", status)
+}
 
 export const StyledInput = styled.input.withConfig({
   shouldForwardProp: (prop) => !prop.startsWith("$"),
@@ -13,9 +23,9 @@ export const StyledInput = styled.input.withConfig({
   $borderRadius: InputBorderRadiusType
   $borderWidth: BorderWidthType
   $disabled: boolean
+  $filled: boolean
   $isFocused: boolean
   $size: SizeType
-  $state: InputStateType
   $status: InputStatusType
 }>`
   /* Reset */
@@ -31,7 +41,7 @@ export const StyledInput = styled.input.withConfig({
   ${({
     $size,
     $status,
-    $state,
+    $filled,
     $borderWidth,
     $borderRadius,
     $backgroundColor,
@@ -41,22 +51,22 @@ export const StyledInput = styled.input.withConfig({
     display: block;
     box-sizing: border-box;
     width: 100%;
-    height: ${getInputToken("size", $size)};
-    padding: 0 ${getInputToken("spacing", $size)};
+    height: ${getToken("size", $size, { prefix: "input" })};
+    padding: 0 ${getToken("spacing", $size, { prefix: "input" })};
     font-weight: ${getToken("fontWeight", "base")};
-    background-color: ${getStatusToken($status, $state, "backgroundColor")};
-    color: ${getStatusToken($status, $state, "color")};
+    background-color: ${getToken("backgroundColor", $filled ? "dark" : "base")};
+    color: ${getToken("color", $disabled ? "disabled" : "base")};
     border-style: solid;
-    border-width: ${getInputToken("borderWidth", $borderWidth)};
-    border-color: ${getStatusToken($status, $state, "borderColor")};
-    border-radius: ${getInputToken("borderRadius", $borderRadius)};
+    border-width: ${getToken("borderWidth", $borderWidth, { prefix: "input" })};
+    border-color: ${getBorderColor($status, $filled)};
+    border-radius: ${getToken("borderRadius", $borderRadius, { prefix: "input" })};
     transition: border-color 0.15s ease-in-out, background-color 0.15s ease-in-out;
     cursor: ${$disabled ? "not-allowed" : "text"};
     ${$backgroundColor ? `background-color: ${$backgroundColor};` : ""}
     ${$borderColor ? `border-color: ${$borderColor};` : ""}
 
     &::placeholder {
-      color: ${getStatusToken($status, $state, "placeholderColor")};
+      color: ${getToken("color", $disabled ? "disabled" : "lighter")};
       opacity: 1;
     }
 

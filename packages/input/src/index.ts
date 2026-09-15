@@ -5,4 +5,3 @@
 
 export { default } from "./components/Input"
 export * from "./components/Input"
-export { getInputToken } from "./tokens"

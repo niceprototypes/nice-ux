@@ -2,6 +2,5 @@
   "$schema": "../config-exports/src/schema.json",
   "description": "Accessible, themable input component with status variants matching the Nice design system.",
   "default": "Input",
-  "components": ["Input"],
-  "tokens": ["Input"]
+  "components": ["Input"]
 }
