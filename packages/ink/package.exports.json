@@ -2,6 +2,5 @@
   "$schema": "../config-exports/src/schema.json",
   "description": "Semantic ink component for nice-react with full token support.",
   "default": "Ink",
-  "components": ["Ink"],
-  "tokens": ["Ink"]
+  "components": ["Ink"]
 }

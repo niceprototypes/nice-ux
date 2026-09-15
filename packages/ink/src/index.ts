@@ -5,4 +5,3 @@
 
 export { default } from "./components/Ink"
 export * from "./components/Ink"
-export { getInkToken } from "./tokens"

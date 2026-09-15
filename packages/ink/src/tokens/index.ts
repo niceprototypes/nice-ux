@@ -1,1 +1,0 @@
-export { getInkToken } from "./getInkToken"
