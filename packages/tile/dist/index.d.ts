@@ -148,8 +148,5 @@ declare namespace TileTypes {
 
 declare const Tile: React.FC<WithBreakpointsProps<TileProps>>;
 
-/** Returns the `var(--np--tile--…)` reference. */
-declare function getTileToken(nameOrPath: string | string[], variantOrTheme?: string, theme?: string): string;
-
-export { TileTypes, Tile as default, getTileToken };
+export { TileTypes, Tile as default };
 export type { TileAlignItemsType, TileBackgroundColorType, TileBackgroundSizeType, TileColorType, TileInkProps, TileJustifyContentType, TileMaxHeightType, TileMaxWidthType, TileMaxWidthValueType, TileMinHeightType, TileMinWidthType, TileProps };

@@ -1,1 +1,0 @@
-export { getTileToken } from "./getTileToken"

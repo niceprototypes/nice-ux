@@ -5,4 +5,3 @@
 
 export { default } from "./components/Tile"
 export * from "./components/Tile"
-export { getTileToken } from "./tokens"

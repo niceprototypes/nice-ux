@@ -1,7 +1,6 @@
 import styled, { css } from "styled-components"
 import Flex from "nice-react-flex"
 import { getToken } from "nice-react-styles"
-import { getTileToken } from "../../tokens/getTileToken"
 import type {
   BackgroundColorType,
   BackgroundSizeType,
@@ -34,7 +33,7 @@ export const OuterFlex = styled(Flex).withConfig({
   ${({ $backgroundColor }) => {
     if ($backgroundColor) {
       return css`
-        background-color: ${getTileToken("backgroundColor", $backgroundColor)};
+        background-color: ${getToken("backgroundColor", $backgroundColor, { prefix: "tile" })};
       `
     }
   }}
@@ -42,7 +41,7 @@ export const OuterFlex = styled(Flex).withConfig({
   ${({ $color }) => {
     if ($color) {
       return css`
-        color: ${getTileToken("color", $color)};
+        color: ${getToken("color", $color, { prefix: "tile" })};
       `
     }
   }}
@@ -51,7 +50,7 @@ export const OuterFlex = styled(Flex).withConfig({
     if ($backgroundImage) {
       return css`
         background-image: ${$backgroundImage};
-        background-size: ${$backgroundSize ? getTileToken("backgroundSize", $backgroundSize) : "cover"};
+        background-size: ${$backgroundSize ? getToken("backgroundSize", $backgroundSize, { prefix: "tile" }) : "cover"};
         background-position: ${$backgroundPosition || "center"};
         background-repeat: no-repeat;
 

@@ -1,17 +1,8 @@
-import { getComponentToken, getToken, Theme, withBreakpoints } from 'nice-react-styles';
+import { getToken, Theme, withBreakpoints } from 'nice-react-styles';
 import { jsxs, jsx, Fragment } from 'react/jsx-runtime';
-import 'react';
 import styled, { css } from 'styled-components';
 import Flex from 'nice-react-flex';
 import Ink from 'nice-react-ink';
-
-/** Returns the `var(--np--tile--…)` reference. */
-function getTileToken(nameOrPath, variantOrTheme, theme) {
-    if (Array.isArray(nameOrPath)) {
-        return getComponentToken("tile", { token: nameOrPath, mode: variantOrTheme });
-    }
-    return getComponentToken("tile", { token: nameOrPath, variant: variantOrTheme, mode: theme });
-}
 
 const OuterFlex$1 = styled(Flex).withConfig({
     shouldForwardProp: (prop) => !prop.startsWith('$'),
@@ -29,7 +20,7 @@ const OuterFlex$1 = styled(Flex).withConfig({
   ${({ $backgroundColor }) => {
     if ($backgroundColor) {
         return css `
-        background-color: ${getTileToken("backgroundColor", $backgroundColor)};
+        background-color: ${getToken("backgroundColor", $backgroundColor, { prefix: "tile" })};
       `;
     }
 }}
@@ -37,7 +28,7 @@ const OuterFlex$1 = styled(Flex).withConfig({
   ${({ $color }) => {
     if ($color) {
         return css `
-        color: ${getTileToken("color", $color)};
+        color: ${getToken("color", $color, { prefix: "tile" })};
       `;
     }
 }}
@@ -46,7 +37,7 @@ const OuterFlex$1 = styled(Flex).withConfig({
     if ($backgroundImage) {
         return css `
         background-image: ${$backgroundImage};
-        background-size: ${$backgroundSize ? getTileToken("backgroundSize", $backgroundSize) : "cover"};
+        background-size: ${$backgroundSize ? getToken("backgroundSize", $backgroundSize, { prefix: "tile" }) : "cover"};
         background-position: ${$backgroundPosition || "center"};
         background-repeat: no-repeat;
 
@@ -106,5 +97,5 @@ const TileTypes = {};
 // `breakpoints` prop on consumers.
 const Tile = withBreakpoints(Tile$1);
 
-export { TileTypes, Tile as default, getTileToken };
+export { TileTypes, Tile as default };
 //# sourceMappingURL=index.esm.js.map

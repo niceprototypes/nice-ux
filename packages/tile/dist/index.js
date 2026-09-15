@@ -4,18 +4,9 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 var niceReactStyles = require('nice-react-styles');
 var jsxRuntime = require('react/jsx-runtime');
-require('react');
 var styled = require('styled-components');
 var Flex = require('nice-react-flex');
 var Ink = require('nice-react-ink');
-
-/** Returns the `var(--np--tile--…)` reference. */
-function getTileToken(nameOrPath, variantOrTheme, theme) {
-    if (Array.isArray(nameOrPath)) {
-        return niceReactStyles.getComponentToken("tile", { token: nameOrPath, mode: variantOrTheme });
-    }
-    return niceReactStyles.getComponentToken("tile", { token: nameOrPath, variant: variantOrTheme, mode: theme });
-}
 
 const OuterFlex$1 = styled(Flex).withConfig({
     shouldForwardProp: (prop) => !prop.startsWith('$'),
@@ -33,7 +24,7 @@ const OuterFlex$1 = styled(Flex).withConfig({
   ${({ $backgroundColor }) => {
     if ($backgroundColor) {
         return styled.css `
-        background-color: ${getTileToken("backgroundColor", $backgroundColor)};
+        background-color: ${niceReactStyles.getToken("backgroundColor", $backgroundColor, { prefix: "tile" })};
       `;
     }
 }}
@@ -41,7 +32,7 @@ const OuterFlex$1 = styled(Flex).withConfig({
   ${({ $color }) => {
     if ($color) {
         return styled.css `
-        color: ${getTileToken("color", $color)};
+        color: ${niceReactStyles.getToken("color", $color, { prefix: "tile" })};
       `;
     }
 }}
@@ -50,7 +41,7 @@ const OuterFlex$1 = styled(Flex).withConfig({
     if ($backgroundImage) {
         return styled.css `
         background-image: ${$backgroundImage};
-        background-size: ${$backgroundSize ? getTileToken("backgroundSize", $backgroundSize) : "cover"};
+        background-size: ${$backgroundSize ? niceReactStyles.getToken("backgroundSize", $backgroundSize, { prefix: "tile" }) : "cover"};
         background-position: ${$backgroundPosition || "center"};
         background-repeat: no-repeat;
 
@@ -112,5 +103,4 @@ const Tile = niceReactStyles.withBreakpoints(Tile$1);
 
 exports.TileTypes = TileTypes;
 exports.default = Tile;
-exports.getTileToken = getTileToken;
 //# sourceMappingURL=index.js.map
