@@ -1,5 +1,5 @@
 import styled, { css, keyframes } from "styled-components"
-import { getIconToken } from "../../tokens/getIconToken"
+import { getToken } from "nice-react-styles"
 import type {
   IconSizeType,
   IconAnimationType,
@@ -28,8 +28,8 @@ export const IllustrationWrapperStyled = styled.div.withConfig({
   $animation?: IconAnimationType
   $animationDuration?: IconAnimationDurationType
 }>`
-  width: ${({ $size = "base" }) => getIconToken("size", $size)};
-  height: ${({ $size = "base" }) => getIconToken("size", $size)};
+  width: ${({ $size = "base" }) => getToken("size", $size, { prefix: "icon" })};
+  height: ${({ $size = "base" }) => getToken("size", $size, { prefix: "icon" })};
   display: flex;
   flex-shrink: 0;
   justify-content: center;
@@ -39,7 +39,7 @@ export const IllustrationWrapperStyled = styled.div.withConfig({
     width: 100%;
     height: 100%;
     ${({ $animation, $animationDuration = "base" }) => $animation === "spin" && css`
-      animation: ${spin} ${getIconToken("animationDuration", $animationDuration)} linear infinite;
+      animation: ${spin} ${getToken("animationDuration", $animationDuration, { prefix: "icon" })} linear infinite;
     `}
   }
 `

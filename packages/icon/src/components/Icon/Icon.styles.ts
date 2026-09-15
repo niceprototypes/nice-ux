@@ -1,5 +1,5 @@
 import styled, { css, keyframes } from "styled-components"
-import { getIconToken } from "../../tokens/getIconToken"
+import { getToken } from "nice-react-styles"
 import type {
   IconSizeType,
   IconColorType,
@@ -32,9 +32,9 @@ export const IconWrapperStyled = styled.div.withConfig({
   $animation?: IconAnimationType
   $animationDuration?: IconAnimationDurationType
 }>`
-  width: ${({ $size = "base" }) => getIconToken("size", $size)};
-  height: ${({ $size = "base" }) => getIconToken("size", $size)};
-  color: ${({ $color = "base" }) => getIconToken("color", $color)};
+  width: ${({ $size = "base" }) => getToken("size", $size, { prefix: "icon" })};
+  height: ${({ $size = "base" }) => getToken("size", $size, { prefix: "icon" })};
+  color: ${({ $color = "base" }) => getToken("color", $color, { prefix: "icon" })};
   display: flex;
   flex-shrink: 0;
   justify-content: center;
@@ -44,7 +44,7 @@ export const IconWrapperStyled = styled.div.withConfig({
     width: 100%;
     height: 100%;
     ${({ $animation, $animationDuration = "base" }) => $animation === "spin" && css`
-      animation: ${spin} ${getIconToken("animationDuration", $animationDuration)} linear infinite;
+      animation: ${spin} ${getToken("animationDuration", $animationDuration, { prefix: "icon" })} linear infinite;
     `}
   }
 
@@ -54,14 +54,14 @@ export const IconWrapperStyled = styled.div.withConfig({
       ${({ $variant = "base", $color = "base", $strokeWidth = "base" }) => {
           if ($variant === "fill")
             return css`
-              fill: ${getIconToken("color", $color)};
+              fill: ${getToken("color", $color, { prefix: "icon" })};
               stroke: none;
             `
           if ($variant === "base")
             return css`
               fill: none;
-              stroke: ${getIconToken("color", $color)};
-              stroke-width: ${getIconToken("strokeWidth", $strokeWidth)};
+              stroke: ${getToken("color", $color, { prefix: "icon" })};
+              stroke-width: ${getToken("strokeWidth", $strokeWidth, { prefix: "icon" })};
               stroke-linecap: round;
               stroke-linejoin: round;
             `

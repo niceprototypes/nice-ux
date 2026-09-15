@@ -1,1 +1,0 @@
-export { getIconToken } from "./getIconToken"
