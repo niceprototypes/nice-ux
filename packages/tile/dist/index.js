@@ -8,7 +8,13 @@ var styled = require('styled-components');
 var Flex = require('nice-react-flex');
 var Ink = require('nice-react-ink');
 
-const OuterFlex$1 = styled(Flex).withConfig({
+function _interopDefault (e) { return e && e.__esModule ? e : { default: e }; }
+
+var styled__default = /*#__PURE__*/_interopDefault(styled);
+var Flex__default = /*#__PURE__*/_interopDefault(Flex);
+var Ink__default = /*#__PURE__*/_interopDefault(Ink);
+
+const OuterFlex$1 = styled__default.default(Flex__default.default).withConfig({
     shouldForwardProp: (prop) => !prop.startsWith('$'),
 }) `
   display: flex;
@@ -60,16 +66,16 @@ const OuterFlex$1 = styled(Flex).withConfig({
  * and description (string or array of strings). Extracted from TileContent
  * so the title/description layout can be reused or swapped independently.
  */
-const ContentMain = ({ contentCenter, description, descriptionProps, gap, theme, title, titleProps, }) => (jsxRuntime.jsxs(Flex, { direction: "column", gap: gap, style: { width: "100%" }, children: [title && (jsxRuntime.jsx(Ink, { as: "h3", weight: "semibold", theme: theme, ...titleProps, children: title })), contentCenter, description && (Array.isArray(description)
-            ? (jsxRuntime.jsx(Flex, { direction: "column", children: description.map((text, index) => (jsxRuntime.jsx(Ink, { color: "light", theme: theme, ...descriptionProps, children: text }, index))) }))
-            : (jsxRuntime.jsx(Ink, { color: "light", theme: theme, ...descriptionProps, children: description })))] }));
+const ContentMain = ({ contentCenter, description, descriptionProps, gap, theme, title, titleProps, }) => (jsxRuntime.jsxs(Flex__default.default, { direction: "column", gap: gap, style: { width: "100%" }, children: [title && (jsxRuntime.jsx(Ink__default.default, { as: "h3", weight: "semibold", theme: theme, ...titleProps, children: title })), contentCenter, description && (Array.isArray(description)
+            ? (jsxRuntime.jsx(Flex__default.default, { direction: "column", children: description.map((text, index) => (jsxRuntime.jsx(Ink__default.default, { color: "light", theme: theme, ...descriptionProps, children: text }, index))) }))
+            : (jsxRuntime.jsx(Ink__default.default, { color: "light", theme: theme, ...descriptionProps, children: description })))] }));
 
 const TileContent = ({ children, contentTop, contentCenter, title, titleProps, description, descriptionProps, theme, gap, alignItems, justifyContent, }) => {
     const hasContentMain = !!title || !!description || !!contentCenter;
-    return (jsxRuntime.jsxs(Flex, { direction: "column", grow: 1, gap: gap, alignItems: alignItems, justifyContent: justifyContent, children: [contentTop, hasContentMain && (jsxRuntime.jsx(ContentMain, { title: title, titleProps: titleProps, contentCenter: contentCenter, description: description, descriptionProps: descriptionProps, theme: theme, gap: gap })), children] }));
+    return (jsxRuntime.jsxs(Flex__default.default, { direction: "column", grow: 1, gap: gap, alignItems: alignItems, justifyContent: justifyContent, children: [contentTop, hasContentMain && (jsxRuntime.jsx(ContentMain, { title: title, titleProps: titleProps, contentCenter: contentCenter, description: description, descriptionProps: descriptionProps, theme: theme, gap: gap })), children] }));
 };
 
-const OuterFlex = styled(Flex).withConfig({
+const OuterFlex = styled__default.default(Flex__default.default).withConfig({
     shouldForwardProp: (prop) => !prop.startsWith('$'),
 }) `
   margin: 0 auto;
