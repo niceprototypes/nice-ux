@@ -65,9 +65,9 @@ describe("Icon", () => {
     expect(container.firstChild).toHaveClass("custom-icon")
   })
 
-  it("renders nothing when icon is not found", () => {
+  it("renders the circle fallback when icon is not found", () => {
     render(<Icon name={"unknown" as "check"} />)
-    expect(screen.queryByTestId("svg-icon")).not.toBeInTheDocument()
+    expect(screen.getByTestId("svg-icon")).toHaveAttribute("data-name", "circle")
   })
 
   it("renders spinner icon with spinning animation class", () => {
