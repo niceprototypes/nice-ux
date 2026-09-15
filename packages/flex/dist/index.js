@@ -4,8 +4,11 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 var niceReactStyles = require('nice-react-styles');
 var jsxRuntime = require('react/jsx-runtime');
-require('react');
 var styled = require('styled-components');
+
+function _interopDefault (e) { return e && e.__esModule ? e : { default: e }; }
+
+var styled__default = /*#__PURE__*/_interopDefault(styled);
 
 /**
  * Converts a GapSize value to its corresponding CSS value using CSS variables
@@ -292,7 +295,7 @@ const isForwardable = (prop) => ALLOWED_DOM_PROPS.has(prop) ||
  *   <div>Content</div>
  * </FlexStyled>
  */
-const FlexStyled = styled.div.withConfig({
+const FlexStyled = styled__default.default.div.withConfig({
     shouldForwardProp: (prop) => isForwardable(prop),
 }) `
   ${(props) => styleFlex(props)}
