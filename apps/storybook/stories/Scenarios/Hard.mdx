@@ -26,21 +26,20 @@ import {
   getToken,
   getBreakpoint,
   Theme,
-  setBreakpoints,
 } from "nice-react-styles"
 import styled from "styled-components"
 import Ink from "nice-react-ink"
 import Icon from "nice-react-icon"
 import Flex from "nice-react-flex"
 
-// Breakpoints
-setBreakpoints({
-  tablet: 700,
-  laptop: 1100,
-  desktop: 1800,
-})
-
 setTokens({
+  // Breakpoints
+  breakpoints: {
+    tablet: 700,
+    laptop: 1100,
+    desktop: 1800,
+  },
+
   // Fonts
   fontFamily: {
     base: "Inter",              // Default override

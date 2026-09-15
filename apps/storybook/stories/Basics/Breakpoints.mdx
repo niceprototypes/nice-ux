@@ -85,15 +85,17 @@ const Wrapper = styled.div`
 
 ## Set breakpoints
 
-Set breakpoint thresholds with `setBreakpoints`. Call it before `setTokens` so responsive tokens use the new thresholds:
+Set breakpoint thresholds with the `breakpoints` key of `setTokens`. They apply before the rest of the map, so responsive tokens in the same call use the new thresholds:
 
 ```ts
-import { setBreakpoints } from "nice-react-styles"
+import { setTokens } from "nice-react-styles"
 
-setBreakpoints({
-  tablet: 700,
-  laptop: 1100,
-  desktop: 1800,
+setTokens({
+  breakpoints: {
+    tablet: 700,
+    laptop: 1100,
+    desktop: 1800,
+  },
 })
 ```
 
