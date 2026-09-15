@@ -5,5 +5,4 @@
 
 export { default } from "./components/Image"
 export * from "./components/Image"
-export { getImageToken } from "./tokens"
 export { registerVendorResolver } from "./services"
