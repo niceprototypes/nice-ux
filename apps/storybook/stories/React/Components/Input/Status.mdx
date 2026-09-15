@@ -2,39 +2,41 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Input from "nice-react-input"
 import Ink from "../../../../src/nice/Ink"
-import { DataTableRow } from "../../../../src/components/DataTable"
 import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+import { DataTable } from "../../../../src/components/DataTable"
+
+export const statuses = ["base", "disabled", "error", "success", "warning"]
+
+export const statusLabel = (s) => s.charAt(0).toUpperCase() + s.slice(1)
+
+export const statusCode = (s) =>
+  s === "base"
+    ? `<Input\n  placeholder="Base"\n  onChange={handler}\n/>`
+    : `<Input\n  status="${s}"\n  placeholder="${statusLabel(s)}"\n  onChange={handler}\n/>`
 
 <Meta title="Components/Input/status" />
 
 <StoryHeader title="status" />
 
 <Ink color="light">
-  Selects the input's visual emphasis — <code>primary</code> (default,
-  outlined on a base background) or <code>secondary</code> (filled on an
-  alternate background).
+  Applies a semantic status style to the input (<code>disabled</code>,{" "}
+  <code>error</code>, <code>success</code>, or <code>warning</code>). The
+  <code>disabled</code> status also disables the underlying input element.
 </Ink>
 
-<DataTableRow
+<DataTable
+  showHeader={false}
   columns={DEMO_CODE_COLUMNS}
-  values={[
-          <Input
-      placeholder="Primary"
-      onChange={() => {}}
-    />,
-          `<Input\n  placeholder="Primary"\n  onChange={handler}\n/>`,
-        ]}
-/>
-
-<DataTableRow
-  columns={DEMO_CODE_COLUMNS}
-  values={[
-          <Input
-      status="secondary"
-      placeholder="Secondary"
-      onChange={() => {}}
-    />,
-          `<Input\n  status="secondary"\n  placeholder="Secondary"\n  onChange={handler}\n/>`,
-        ]}
+  tables={[{ rows: statuses.map((status) => ({
+    id: status,
+    values: [
+      <Input
+        placeholder={statusLabel(status)}
+        status={status === "base" ? undefined : status}
+        onChange={() => {}}
+      />,
+      statusCode(status),
+    ],
+  })) }]}
 />
 

@@ -1,6 +1,6 @@
 import * as React from "react"
 import Ink from "../../../../nice/Ink"
-import Code from "nice-react-code"
+import Code from "../../../../nice/Code"
 import { ClickToCopy } from "../../../ClickToCopy"
 import { withCopyAffordance } from "./DataTableCell.helpers"
 import type { DataTableCellProps } from "./DataTableCell.types"

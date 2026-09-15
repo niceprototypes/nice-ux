@@ -1,5 +1,5 @@
 import * as React from "react"
-import { getTokenValue } from "nice-react-styles"
+import { getToken } from "nice-react-styles"
 import { TokenName, variantKey } from "../../../utilities"
 import { tokenCode } from "./Modules.tokenCode"
 import type { DataTableConfig, DataRowItem } from "../../../../components/DataTable"
@@ -17,6 +17,15 @@ import type { HighlightedToken } from "./Modules.hooks"
  * theme-reactive only when its night value differs from day; non-themed tokens
  * keep their base form in both modes.
  */
+/** Pristine night value, or the day value for tokens with no night value (getToken throws on those). */
+function nightValueOf(group: string, variant: string, dayValue: string): string {
+  try {
+    return getToken(group, variant, { theme: "night", pristine: true, as: "value" })
+  } catch {
+    return dayValue
+  }
+}
+
 export function buildTokenRows(
   group: string,
   variants: ReadonlyArray<TokenVariant>,
@@ -26,8 +35,8 @@ export function buildTokenRows(
 ): DataRowItem[] {
   return variants.map(item => {
     const variant = variantKey(item)
-    const dayValue = getTokenValue(group, { variant, pristine: true })
-    const nightValue = getTokenValue(group, { variant, theme: "night", pristine: true })
+    const dayValue = getToken(group, variant, { pristine: true, as: "value" })
+    const nightValue = nightValueOf(group, variant, dayValue)
     const themed = nightValue !== dayValue
     const theme = isNight && themed ? "night" : undefined
     const { cssVar, jsCall } = tokenCode(group, variant, theme)

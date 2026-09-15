@@ -3,10 +3,16 @@ import Flex from "nice-react-flex"
 import { getToken } from "nice-react-styles"
 
 export const OuterFlex = styled(Flex).attrs({
-  alignItems: "center",
+  gap: "smaller",
+  padding: "base",
+  direction: "row",
   justifyContent: "space-between",
-  gap: "large",
-  padding: "large large large larger",
+  breakpoints: {
+    "laptop+": {
+      gap: "large",
+      padding: "large large large larger",
+    },
+  },
 })`
   position: fixed;
   top: 0;
@@ -27,7 +33,7 @@ export const OuterFlex = styled(Flex).attrs({
     right: -8px;
     bottom: 0;
     /* Keep the token var() (so it flips day/night via the [data-theme] cascade)
-       and just drop the alpha to 0.98 — relative-color syntax, not getHSLA, which
+       and just drop the alpha to 0.98 — relative-color syntax, not transformColor, which
        would bake a static day-mode color. */
     background-color: ${getToken("backgroundColor")};
     filter: blur(8px);

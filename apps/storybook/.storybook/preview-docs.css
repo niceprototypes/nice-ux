@@ -3,14 +3,10 @@
 .sbdocs {
   font-family: var(--np--font-family);
 
-  &.sbdocs-wrapper {
-    padding: 0 0 var(--np--gap--larger) var(--np--gap--larger);
-    background: none;
-  }
-
   &.sbdocs-content {
     margin-right: auto;
     max-width: 100%;
+    padding: var(--np--gap);
 
     & :where(div:not(.sb-anchor, .sb-unstyled, .sb-unstyled div)) {
       font-family: inherit;
@@ -59,6 +55,15 @@
     & :where(a:not(.sb-anchor, .sb-unstyled, .sb-unstyled a)) {
       color: var(--np--color--link);
       text-decoration: inherit;
+    }
+  }
+
+  &.sbdocs-wrapper {
+    padding: 0;
+    background: none;
+
+    @media (--np--tablet--up) {
+      padding: 0 0 var(--np--gap--larger) var(--np--gap--larger);
     }
   }
 

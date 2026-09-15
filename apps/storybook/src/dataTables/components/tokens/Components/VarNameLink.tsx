@@ -1,5 +1,5 @@
 import * as React from "react"
-import { getTokenValue } from "nice-react-styles"
+import { getToken } from "nice-react-styles"
 import Tooltip from "nice-react-tooltip"
 import { parseTokenVarLink, HIGHLIGHT_KEY } from "../../../../services"
 import { TokenVarLink } from "./Components.styles"
@@ -36,11 +36,11 @@ export const VarNameLink = ({ reference }: VarNameLinkProps) => {
   )
 
   // Preview the canonical (pristine) default. parseTokenVarLink reports theme
-  // primitives / undefined variants as the variant, which getTokenValue rejects
-  // — so guard and drop the preview rather than crash the row.
+  // primitives / undefined variants as the variant, which getToken rejects —
+  // so guard and drop the preview rather than crash the row.
   let value: string | null = null
   try {
-    value = String(getTokenValue(link.group, { variant: link.variant, pristine: true }))
+    value = getToken(link.group, link.variant, { pristine: true, as: "value" })
   } catch {
     value = null
   }

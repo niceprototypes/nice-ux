@@ -110,8 +110,24 @@ const StoryNavigation: React.FC<StoryNavigationProps> = ({
 
   return (
     <>
-      <OuterFlex>
-        <Flex gap="large" alignItems="center">
+      <OuterFlex
+        direction="column"
+        breakpoints={{
+          "tablet+": {
+            direction: "row",
+          },
+        }}
+      >
+        <Flex
+          gap="base"
+          alignItems="center"
+          breakpoints={{
+            "laptop+": {
+              justifyContent: "center",
+              gap: "large",
+            },
+          }}
+        >
           {back && (
             <StoryNavigationLink
               label={back?.label}
@@ -120,7 +136,11 @@ const StoryNavigation: React.FC<StoryNavigationProps> = ({
             />
           )}
           {currentName && (
-            <Ink size="small" weight="medium" color="lightest">
+            <Ink
+              size="small"
+              weight="medium"
+              color="lightest"
+            >
               {currentName}
             </Ink>
           )}
@@ -132,7 +152,16 @@ const StoryNavigation: React.FC<StoryNavigationProps> = ({
             />
           )}
         </Flex>
-        <Flex gap="large" alignItems="center">
+        <Flex
+          alignItems="center"
+          gap="base"
+          breakpoints={{
+            "laptop+": {
+              justifyContent: "center",
+              gap: "large",
+            },
+          }}
+        >
           <StoryNavigationLink
             label={isNavShown ? "Collapse menu" : "Expand menu"}
             onClick={() => addons.getChannel().emit(TOGGLE_NAV_EVENT)}
@@ -145,7 +174,9 @@ const StoryNavigation: React.FC<StoryNavigationProps> = ({
           />
           <StoryNavigationLink
             label={`Switch to ${otherTheme} mode`}
-            onClick={() => addons.getChannel().emit(UPDATE_DARK_MODE_EVENT_NAME)}
+            onClick={() =>
+              addons.getChannel().emit(UPDATE_DARK_MODE_EVENT_NAME)
+            }
             iconLeft={otherTheme === "day" ? "sun" : "moon"}
             iconVendor
           />

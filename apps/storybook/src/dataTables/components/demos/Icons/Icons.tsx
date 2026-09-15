@@ -4,7 +4,7 @@ import Icon from "nice-react-icon"
 // manual `{ groupName: names[] }` map here and iterate it instead; nice-icons no
 // longer ships categories (grouping is intentionally maintained by hand).
 import { iconNames } from "nice-icons/catalog"
-import Code from "nice-react-code"
+import Code from "../../../../nice/Code"
 import { DataTable, withCopyAffordance } from "../../../../components/DataTable"
 import type { DataColumn, DataTableConfig } from "../../../../components/DataTable"
 import { ClickHint } from "../../../../components/ClickHint"

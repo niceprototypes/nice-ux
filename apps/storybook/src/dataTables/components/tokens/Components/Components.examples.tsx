@@ -5,7 +5,7 @@ import Input from "nice-react-input"
 import Image from "nice-react-image"
 import Tile from "nice-react-tile"
 import Ink from "nice-react-ink"
-import { getComponentToken } from "nice-react-styles"
+import { getToken } from "nice-react-styles"
 import OverrideExample from "../../../../components/OverrideExample"
 import type { ComponentPrefixWithTokens, Overrides, ExampleConfig, OverrideConfig } from "./Components.types"
 
@@ -118,13 +118,12 @@ export function componentExample(
   }
 
   // 2. Style-override path: a token with no prop — force its resolved value onto
-  //    the CSS property it drives. getComponentToken resolves `base` (unsuffixed)
-  //    correctly and throws on unknown variants, but path comes from real token
-  //    data so every variant here is valid.
+  //    the CSS property it drives. getToken resolves `base` (unsuffixed) correctly,
+  //    and path comes from real token data so every variant here is registered.
   const override = OVERRIDES[prefix]
   const buildCss = override?.css[path[0]]
   if (override && buildCss) {
-    return override.render(buildCss(getComponentToken(prefix, { token: path[0], variant })))
+    return override.render(buildCss(getToken(path[0], variant, { prefix })))
   }
 
   return null

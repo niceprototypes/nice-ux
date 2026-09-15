@@ -3,7 +3,7 @@ import { StoryHeader } from "../../src/components/Story"
 import { ModuleTokenTable, TOKEN_COLUMN_WIDTHS } from "../../src/dataTables/components/tokens/Modules"
 import { tokenTables } from "./tables"
 import PreviewCell from "../../src/components/PreviewCell"
-import { getHSLA, getToken } from "nice-react-styles"
+import { transformColor, getToken } from "nice-react-styles"
 import { DataTable } from "../../src/components/DataTable"
 import HorizontalRule from "../../src/components/HorizontalRule"
 
@@ -25,36 +25,36 @@ import HorizontalRule from "../../src/components/HorizontalRule"
 
 <HorizontalRule />
 
-{/* Live getHSLA demo — each swatch's background is the actual getHSLA() return,
+{/* Live transformColor demo — each swatch's background is the actual transformColor() return,
     so the page can never drift from the function's behavior. */}
 export const hslaExamples = [
   {
     label: "Original",
-    call: `getHSLA("color", undefined, {\n  token: "error",\n})`,
+    call: `transformColor("color", undefined, {\n  token: "error",\n})`,
     args: ["color", undefined, { token: "error" }],
   },
   {
     label: `"Faded"`,
-    call: `getHSLA("color", undefined, {\n  token: "error",\n  values: ["+0", "-20", "+20", "-0.2"],\n})`,
+    call: `transformColor("color", undefined, {\n  token: "error",\n  values: ["+0", "-20", "+20", "-0.2"],\n})`,
     args: ["color", undefined, { token: "error", values: ["+0", "-20", "+20", "-0.2"] }],
   },
   {
     label: `"Exposed"`,
-    call: `getHSLA("color", undefined, {\n  token: "error",\n  values: ["+0", "+0", "+20", "+0"],\n})`,
+    call: `transformColor("color", undefined, {\n  token: "error",\n  values: ["+0", "+0", "+20", "+0"],\n})`,
     args: ["color", undefined, { token: "error", values: ["+0", "+0", "+20", "+0"] }],
   },
   {
     label: `"Tinted"`,
-    call: `getHSLA("color", "night", {\n  token: "error",\n  values: ["+0", "-20", "-20", "+0"],\n})`,
+    call: `transformColor("color", "night", {\n  token: "error",\n  values: ["+0", "-20", "-20", "+0"],\n})`,
     args: ["color", "night", { token: "error", values: ["+0", "-20", "-20", "+0"] }],
   },
 ]
 
-## getHSLA
+## transformColor
 
 {/* Columns mirror the module tables above one-for-one so the two line up, which
     is also why columnWidths is their constant rather than a local copy. The CSS
-    column is deliberately empty: getHSLA returns a static hsla() string, not a
+    column is deliberately empty: transformColor returns a static hsla() string, not a
     var(), so there is no CSS-variable form of these calls to show. */}
 <DataTable
   inline
@@ -67,7 +67,7 @@ export const hslaExamples = [
   ]}
   columnWidths={TOKEN_COLUMN_WIDTHS}
   tables={[{ rows: hslaExamples.map(({ label, call, args }) => {
-    const result = getHSLA(...args)
+    const result = transformColor(...args)
     return {
       id: label,
       values: [

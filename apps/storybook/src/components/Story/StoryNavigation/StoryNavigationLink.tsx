@@ -2,7 +2,7 @@ import * as React from "react"
 import type { IconNameType } from "nice-react-icon"
 import type { SizeType } from "nice-react-styles"
 import Button from "nice-react-button"
-import { LinkFlex } from "./StoryNavigationLink.styles"
+import { LinkFlex, Label } from "./StoryNavigationLink.styles"
 
 interface StoryNavigationLinkProps {
   /** Accessible label and visible text, e.g. "Return to Tokens". */
@@ -46,7 +46,7 @@ const StoryNavigationLink: React.FC<StoryNavigationLinkProps> = ({
       iconRight={iconRight}
       iconVendor={iconVendor}
     >
-      {label}
+      <Label as="span">{label}</Label>
     </Button>
   </LinkFlex>
 )

@@ -1,5 +1,5 @@
 import React from "react"
-import Code from "nice-react-code"
+import Code from "../../nice/Code"
 
 interface InstallProps {
   /** Bare package suffix — renders as `nice-{package}`. E.g. `package="styles"` → `nice-styles`. */

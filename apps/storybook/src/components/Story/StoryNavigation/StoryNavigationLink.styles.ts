@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import Flex from "nice-react-flex"
-import { getToken } from "nice-react-styles"
+import Ink from "nice-react-ink"
+import { getToken, getBreakpoint } from "nice-react-styles"
 
 /**
  * Wrapper for a single StoryNavigation control. Overrides the inlined Button's
@@ -11,6 +12,8 @@ import { getToken } from "nice-react-styles"
 export const LinkFlex = styled(Flex).attrs({
   direction: "column",
 })`
+  flex-shrink: 0;
+  
   [role="button"] {
     position: relative;
     color: ${getToken("color", "lighter")} !important;
@@ -19,5 +22,18 @@ export const LinkFlex = styled(Flex).attrs({
     &:hover {
       color: ${getToken("color")} !important;
     }
+  }
+`
+
+/**
+ * The link's text label, rendered as an Ink `<span>`. Hidden by default so the
+ * icon alone represents the control on narrow viewports, and revealed from
+ * laptop up (`getBreakpoint("laptop+")`) where the bar has horizontal room.
+ */
+export const Label = styled(Ink)`
+  display: none;
+
+  ${getBreakpoint("laptop+")} {
+    display: inline;
   }
 `

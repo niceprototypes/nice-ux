@@ -85,9 +85,7 @@ const Wrapper = styled.div`
 
 ## Set breakpoints
 
-### via `setBreakpoints`
-
-To set breakpoints when you don't need to set other tokens:
+Set breakpoint thresholds with `setBreakpoints`. Call it before `setTokens` so responsive tokens use the new thresholds:
 
 ```ts
 import { setBreakpoints } from "nice-react-styles"
@@ -98,35 +96,6 @@ setBreakpoints({
   desktop: 1800,
 })
 ```
-
-<NewLines />
-
-### via `setTokens`
-
-To set breakpoints alongside other updated tokens:
-
-```ts
-import { setTokens } from "nice-react-styles"
-
-setTokens({
-  breakpoints: {
-    tablet: 700,
-    laptop: 1100,
-    desktop: 1800,
-  },
-  fontSize: {
-    base: {
-      phone: "14px",
-      tablet: "15px",
-      "laptop+": "16px",
-    },
-  },
-})
-```
-
-<Callout type="learning">
-  The new breakpoints are used in generating the new responsive tokens, such as the `fontSize` token module in the example above, found in the same object.
-</Callout>
 
 <HorizontalRule />
 

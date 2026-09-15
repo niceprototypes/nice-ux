@@ -23,6 +23,14 @@ const AppTokenMap = {
     larger: "40px",
     // large: "22px",
   },
+  // Content width cap: full width below laptop, 720px from laptop up.
+  contentMaxWidth: {
+    base: {
+      phone: "100%",
+      tablet: "100%",
+      "laptop+": "720px",
+    },
+  },
   icon: {
     size: {
       // smaller: "12px",

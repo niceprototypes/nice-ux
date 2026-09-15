@@ -12,9 +12,12 @@
 
 /* Containers */
 
-.sidebar-container [data-radix-scroll-area-content] > div {
-  gap: 0;
-  padding: 0;
+.sidebar-container {
+  padding-left: var(--np--gap--large);
+  [data-radix-scroll-area-content] > div {
+    gap: 0;
+    padding: 0;
+  }
 }
 
 /* Header */

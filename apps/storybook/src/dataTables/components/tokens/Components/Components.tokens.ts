@@ -1,4 +1,4 @@
-import { componentTokensData, getComponentTokenKey } from "nice-react-styles"
+import { componentTokensData, getToken } from "nice-react-styles"
 import { CORE_TOKEN_REFERENCE } from "./Components.constants"
 import type { ComponentTokenGroup, ComponentTokenNode, ComponentPrefixWithTokens } from "./Components.types"
 
@@ -60,7 +60,7 @@ export function getComponentTokenGroups(prefix: ComponentPrefixWithTokens): Comp
       rows: leaves.map(({ path, value }) => ({
         path,
         variant: formatComponentVariant(path),
-        cssVar: getComponentTokenKey(prefix, { token: path }),
+        cssVar: getToken(path.slice(0, -1), path[path.length - 1], { prefix, as: "key" }),
         value,
         isCoreToken: CORE_TOKEN_REFERENCE.test(value),
       })),

@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Ink from "../../../../src/nice/Ink"
-import { getTokenValue, getBreakpointTokenValue, getBreakpointValue } from "nice-react-styles"
+import { getToken, getBreakpointValue } from "nice-react-styles"
 import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import { DataTable } from "../../../../src/components/DataTable"
 import { toSource } from "../../../../src/services"
@@ -23,8 +23,8 @@ export const largeLabel = `≥${getBreakpointValue("laptop")}px`
   showHeader={false}
   columns={DEMO_CODE_COLUMNS}
   tables={[{ rows: ["smaller", "small", "base", "large", "larger"].map(size => {
-    const smallValue = getTokenValue("fontSize", { variant: size })
-    const largeValue = getBreakpointTokenValue("fontSize", { variant: size, breakpoint: "large" })
+    const smallValue = getToken("fontSize", size, { as: "value" })
+    const largeValue = getToken("fontSize", size, { breakpoint: "laptop", as: "value" })
     const children = `${size} — ${smallLabel}: ${smallValue}, ${largeLabel}: ${largeValue}`
     return {
         id: String(size),

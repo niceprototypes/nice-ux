@@ -4,7 +4,7 @@ import { Illustration } from "nice-react-icon"
 // imports). Unlike icons, illustrations are never recolored — the preview renders
 // them at their authored colors.
 import { illustrationNames } from "nice-icons/illustration-catalog"
-import Code from "nice-react-code"
+import Code from "../../../../nice/Code"
 import { DataTable, withCopyAffordance } from "../../../../components/DataTable"
 import type { DataColumn, DataTableConfig } from "../../../../components/DataTable"
 import { ClickHint } from "../../../../components/ClickHint"

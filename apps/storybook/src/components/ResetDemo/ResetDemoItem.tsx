@@ -2,7 +2,7 @@ import * as React from "react"
 import Flex from "nice-react-flex"
 import { getToken } from "nice-react-styles"
 import Ink from "../../nice/Ink"
-import Code from "nice-react-code"
+import Code from "../../nice/Code"
 
 /** Shared iframe chrome; width/height/radius differ per desktop vs mobile. */
 const frameChrome = {
@@ -10,7 +10,7 @@ const frameChrome = {
   borderRadius: getToken("borderRadius"),
   background: getToken("backgroundColor"),
 }
-const frameStyle = { ...frameChrome, width: 800, height: 600 }
+const frameStyle = { ...frameChrome, width: 800, height: 600, maxWidth: getToken("contentMaxWidth") }
 const frameStyleMobile = { ...frameChrome, width: 390, height: 800 }
 
 /**
