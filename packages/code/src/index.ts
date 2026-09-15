@@ -5,4 +5,3 @@
 
 export { default } from "./components/Code"
 export * from "./components/Code"
-export { getCodeToken } from "./tokens"

@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import Flex from "nice-react-flex"
-import { getCodeToken } from "../../tokens/getCodeToken"
+import { getToken } from "nice-react-styles"
 import { LabelFlex } from "../CodeLabel/CodeLabel.styles"
 import type { CodeMarginType } from "./Code.types"
 
@@ -13,12 +13,12 @@ import type { CodeMarginType } from "./Code.types"
  */
 export const CodeDiv = styled.div<{ $clickable?: boolean; $inlined?: boolean; $fit?: boolean; $margin?: CodeMarginType }>`
   position: relative;
-  background-color: ${({ $inlined }) => ($inlined ? "transparent" : getCodeToken("backgroundColor", "base"))};
+  background-color: ${({ $inlined }) => ($inlined ? "transparent" : getToken("backgroundColor", "base", { prefix: "code" }))};
   ${({ $clickable }) => $clickable && `cursor: pointer;`}
   flex-grow: 1;
-  border: ${({ $inlined }) => ($inlined ? "none" : `1px solid ${getCodeToken("borderColor", "base")}`)};
-  border-radius: ${({ $inlined }) => ($inlined ? "0" : getCodeToken("borderRadius", "base"))};
-  box-shadow: ${({ $inlined }) => ($inlined ? "none" : getCodeToken("boxShadow", "base"))};
+  border: ${({ $inlined }) => ($inlined ? "none" : `1px solid ${getToken("borderColor", "base", { prefix: "code" })}`)};
+  border-radius: ${({ $inlined }) => ($inlined ? "0" : getToken("borderRadius", "base", { prefix: "code" }))};
+  box-shadow: ${({ $inlined }) => ($inlined ? "none" : getToken("boxShadow", "base", { prefix: "code" }))};
   max-width: 720px;
   overflow: hidden;
 
@@ -27,7 +27,7 @@ export const CodeDiv = styled.div<{ $clickable?: boolean; $inlined?: boolean; $f
     $fit &&
     `display: flex;
     align-items: center;
-    gap: ${getCodeToken("gap", "base")};
+    gap: ${getToken("gap", "base", { prefix: "code" })};
     width: max-content;
     flex-grow: 0;`}
 
@@ -37,19 +37,19 @@ export const CodeDiv = styled.div<{ $clickable?: boolean; $inlined?: boolean; $f
     $clickable &&
     !$inlined &&
     `&:hover {
-      border-color: ${getCodeToken("color", "link")};
+      border-color: ${getToken("color", "link", { prefix: "code" })};
     }
     &:hover ${LabelFlex} * {
-      color: ${getCodeToken("color", "link")};
+      color: ${getToken("color", "link", { prefix: "code" })};
     }`}
 
   .shiki {
     .line {
       span {
         color: var(--shiki-light);
-        font-family: ${getCodeToken("fontFamily", "code")};
-        font-size: ${getCodeToken("fontSize", "small")};
-        line-height: ${getCodeToken("lineHeight", "expanded")};
+        font-family: ${getToken("fontFamily", "code", { prefix: "code" })};
+        font-size: ${getToken("fontSize", "small", { prefix: "code" })};
+        line-height: ${getToken("lineHeight", "expanded", { prefix: "code" })};
         letter-spacing: -0.01em;
       }
     }
