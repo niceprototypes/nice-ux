@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { getLightboxToken } from "../../tokens"
+import { getToken } from "nice-react-styles"
 
 export const Trigger = styled.div`
   cursor: pointer;
@@ -11,7 +11,7 @@ export const Overlay = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: ${getLightboxToken("zIndex")};
+  z-index: ${getToken("zIndex", "base", { prefix: "lightbox" })};
   display: flex;
   flex-direction: column;
   align-items: center;
