@@ -18,8 +18,8 @@ export const backgroundSize = {
       <Image
         as="div"
         vendor
-        width={960}
-        height={1280}
+        width="960"
+        height="1280"
         src="12"
         alt={`background-size ${variant}`}
         backgroundSize={variant}

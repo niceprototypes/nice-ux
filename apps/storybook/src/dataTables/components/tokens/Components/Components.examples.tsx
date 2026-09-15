@@ -7,7 +7,7 @@ import Tile from "nice-react-tile"
 import Ink from "nice-react-ink"
 import { getToken } from "nice-react-styles"
 import OverrideExample from "../../../../components/OverrideExample"
-import type { ComponentPrefixWithTokens, Overrides, ExampleConfig, OverrideConfig } from "./Components.types"
+import type { ComponentPrefixWithTokens, ExampleConfig, OverrideConfig } from "./Components.types"
 
 /**
  * Live-component examples for the component token tables (each
@@ -97,21 +97,7 @@ export function componentExample(
 
   const config = CONFIGS[prefix]
 
-  // 1a. Status path: the token nests [type, property, state], so BOTH the status
-  //     type (path[1]) and the interactive state (path[3]) must drive the example
-  //     — applying only `status` leaves every state row at its base color, hiding
-  //     the error/success/warning colors the row documents. `base` type / `base`
-  //     state map to the component default (no prop). Requires a component that
-  //     exposes both a `status` and a `state` prop (Button, Input).
-  if (config && path[0] === "status" && path.length === 4) {
-    const [, type, , state] = path
-    const props: Overrides = {}
-    if (type !== "base") props.status = type
-    if (state !== "base") props.state = state
-    return config.render(props)
-  }
-
-  // 1b. Dedicated-prop path: vary the token via its matching scalar prop.
+  // 1. Dedicated-prop path: vary the token via its matching scalar prop.
   const prop = config?.props[path[0]]
   if (config && prop) {
     return variant === "base" ? config.render({}) : config.render({ [prop]: variant })
