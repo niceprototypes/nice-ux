@@ -11,7 +11,7 @@ export const Overlay = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: ${getToken("zIndex", "base", { prefix: "lightbox" })};
+  z-index: ${getToken("lightbox.zIndex:base")};
   display: flex;
   flex-direction: column;
   align-items: center;
