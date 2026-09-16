@@ -28,8 +28,8 @@ export const IllustrationWrapperStyled = styled.div.withConfig({
   $animation?: IconAnimationType
   $animationDuration?: IconAnimationDurationType
 }>`
-  width: ${({ $size = "base" }) => getToken("size", $size, { prefix: "icon" })};
-  height: ${({ $size = "base" }) => getToken("size", $size, { prefix: "icon" })};
+  width: ${({ $size = "base" }) => getToken(`icon.size:${$size}`)};
+  height: ${({ $size = "base" }) => getToken(`icon.size:${$size}`)};
   display: flex;
   flex-shrink: 0;
   justify-content: center;
@@ -39,7 +39,7 @@ export const IllustrationWrapperStyled = styled.div.withConfig({
     width: 100%;
     height: 100%;
     ${({ $animation, $animationDuration = "base" }) => $animation === "spin" && css`
-      animation: ${spin} ${getToken("animationDuration", $animationDuration, { prefix: "icon" })} linear infinite;
+      animation: ${spin} ${getToken(`icon.animationDuration:${$animationDuration}`)} linear infinite;
     `}
   }
 `

@@ -1,5 +1,5 @@
 import type * as React from "react"
-import type { FontSizeType, ColorType, ThemeType } from "nice-react-styles"
+import type { ColorTokenProp, FontSizeType, ColorType, ThemeType } from "nice-react-styles"
 import { iconNames } from "../../constants"
 
 export type IconNameType = (typeof iconNames)[number]
@@ -67,7 +67,7 @@ export interface IconProps {
    */
   outlined?: IconOutlinedType
   url?: IconUrlType
-  color?: IconColorType
+  color?: ColorTokenProp<IconColorType>
   size?: IconSizeType
   viewBox?: IconViewBoxType
   strokeWidth?: IconStrokeWidthType

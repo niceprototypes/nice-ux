@@ -1,5 +1,5 @@
 import styled, { css, keyframes } from "styled-components"
-import { getToken } from "nice-react-styles"
+import { getToken, resolveColorProp, type ColorTokenProp } from "nice-react-styles"
 import type {
   IconSizeType,
   IconColorType,
@@ -24,7 +24,7 @@ const spin = keyframes`
 export const IconWrapperStyled = styled.div.withConfig({
   shouldForwardProp: (prop) => !String(prop).startsWith("$"),
 })<{
-  $color?: IconColorType
+  $color?: ColorTokenProp<IconColorType>
   $size?: IconSizeType
   $variant?: IconVariantType
   $strokeWidth?: IconStrokeWidthType
@@ -32,9 +32,9 @@ export const IconWrapperStyled = styled.div.withConfig({
   $animation?: IconAnimationType
   $animationDuration?: IconAnimationDurationType
 }>`
-  width: ${({ $size = "base" }) => getToken("size", $size, { prefix: "icon" })};
-  height: ${({ $size = "base" }) => getToken("size", $size, { prefix: "icon" })};
-  color: ${({ $color = "base" }) => getToken("color", $color, { prefix: "icon" })};
+  width: ${({ $size = "base" }) => getToken(`icon.size:${$size}`)};
+  height: ${({ $size = "base" }) => getToken(`icon.size:${$size}`)};
+  color: ${({ $color = "base" }) => resolveColorProp("icon", "color", $color)};
   display: flex;
   flex-shrink: 0;
   justify-content: center;
@@ -44,7 +44,7 @@ export const IconWrapperStyled = styled.div.withConfig({
     width: 100%;
     height: 100%;
     ${({ $animation, $animationDuration = "base" }) => $animation === "spin" && css`
-      animation: ${spin} ${getToken("animationDuration", $animationDuration, { prefix: "icon" })} linear infinite;
+      animation: ${spin} ${getToken(`icon.animationDuration:${$animationDuration}`)} linear infinite;
     `}
   }
 
@@ -54,14 +54,14 @@ export const IconWrapperStyled = styled.div.withConfig({
       ${({ $variant = "base", $color = "base", $strokeWidth = "base" }) => {
           if ($variant === "fill")
             return css`
-              fill: ${getToken("color", $color, { prefix: "icon" })};
+              fill: ${resolveColorProp("icon", "color", $color)};
               stroke: none;
             `
           if ($variant === "base")
             return css`
               fill: none;
-              stroke: ${getToken("color", $color, { prefix: "icon" })};
-              stroke-width: ${getToken("strokeWidth", $strokeWidth, { prefix: "icon" })};
+              stroke: ${resolveColorProp("icon", "color", $color)};
+              stroke-width: ${getToken(`icon.strokeWidth:${$strokeWidth}`)};
               stroke-linecap: round;
               stroke-linejoin: round;
             `
