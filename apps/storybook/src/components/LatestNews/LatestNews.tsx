@@ -20,7 +20,7 @@ interface NewsSection {
 
 const SECTIONS: NewsSection[] = [
   {
-    title: "Any color can be tuned per channel from a prop",
+    title: "Tell agents how to tune your colors",
     items: [
       <>
         Any color prop takes a token name or a{" "}
@@ -29,49 +29,19 @@ const SECTIONS: NewsSection[] = [
           size="small"
           color="light"
           antialiased
+          style={{ fontSize: "0.9em", margin: "0.1em", letterSpacing: "-1%" }}
         >
           {"{ name, transform }"}
         </Ink>{" "}
         object
       </>,
-      <>
-        <Ink
-          code
-          size="small"
-          color="light"
-          antialiased
-        >
-          transform
-        </Ink>{" "}
-        adjusts hue, saturation, lightness and alpha per channel — relative
-        (+10, -0.15) or absolute
-      </>,
-      <>
-        The same channel vocabulary works in{" "}
-        <Ink
-          code
-          size="small"
-          color="light"
-          antialiased
-        >
-          getToken
-        </Ink>
-        ,{" "}
-        <Ink
-          code
-          size="small"
-          color="light"
-          antialiased
-        >
-          transformColor
-        </Ink>{" "}
-        and every color prop
-      </>,
-      "AI tunes a semantic token instead of inventing a hex, so colors stay valid, type-checked and theme-correct",
+      "Adjust any HSLA channel, using relative or absolute values",
+      "The same channel vocabulary works everywhere a color is read or set",
+      "AI may now tweak semantic HSLA-based color tokens, instead of inventing new hex colors (always valid, type-checked and theme-correct)",
     ],
   },
   {
-    title: "Every design token now reads through one getter",
+    title: "Agents can now access every token and breakpoint from one place",
     items: [
       "Color, spacing, type, component, theme and responsive all in one getter",
       <>
@@ -81,6 +51,7 @@ const SECTIONS: NewsSection[] = [
           size="small"
           color="light"
           antialiased
+          style={{ fontSize: "0.9em", margin: "0.1em", letterSpacing: "-1%" }}
         >
           listTokens()
         </Ink>{" "}
@@ -94,8 +65,6 @@ const SECTIONS: NewsSection[] = [
 
 const OuterFlex = styled(Flex).attrs({
   direction: "column",
-  gap: "base",
-  padding: "large",
 })`
   max-width: ${getToken("contentMaxWidth")};
   background-color: ${getToken("backgroundColor", "success")};
@@ -107,11 +76,16 @@ const OuterFlex = styled(Flex).attrs({
     flex-direction: column;
     gap: ${getToken("gap", "small")};
     margin: 0;
-    padding-left: calc(${getToken("icon.size:large")} + ${getToken("gap")});
+    padding-left: calc(${getToken("icon.size:large")} + ${getToken("gap", "large")});
     list-style-type: none;
   }
 
   li {
+    margin: 0;
+  }
+
+  hr {
+    border-color: ${getToken("borderColor", "success")};
     margin: 0;
   }
 `
@@ -138,48 +112,53 @@ const LatestNews: React.FC = () => (
       // Static list authored in order, so the index is a stable identity.
       <React.Fragment key={sectionIndex}>
         <Flex
+          direction="column"
           gap="base"
-          alignItems="center"
+          padding="large"
         >
-          <Icon
-            name="nice-heart"
-            size="large"
-            color={NEWS_COLOR}
-          />
-          <Ink
-            as="h3"
-            weight="medium"
-            color={NEWS_COLOR}
+          <Flex
+            gap="large"
+            alignItems="center"
           >
-            {section.title}
-          </Ink>
-        </Flex>
+            <Icon
+              name="nice-heart"
+              size="large"
+              color={NEWS_COLOR}
+            />
+            <Ink
+              as="h3"
+              weight="medium"
+              color={NEWS_COLOR}
+            >
+              {section.title}
+            </Ink>
+          </Flex>
 
-        <Flex>
-          <ul>
-            {section.items.map((item, index) => (
-              // A node cannot be a key, and the list is static, so the index is the identity
-              <li key={index}>
-                <Flex gap="small">
-                  <MarkerInk
-                    weight="black"
-                    color={NEWS_COLOR}
-                  >
-                    □
-                  </MarkerInk>
-                  <Ink
-                    size="small"
-                    weight="medium"
-                    color="light"
-                    antialiased
-                  >
-                    {item}
-                  </Ink>
-                </Flex>
-              </li>
-            ))}
-          </ul>
+          <Flex>
+            <ul>
+              {section.items.map((item, index) => (
+                // A node cannot be a key, and the list is static, so the index is the identity
+                <li key={index}>
+                  <Flex gap="small">
+                    <MarkerInk
+                      weight="black"
+                      color={NEWS_COLOR}
+                    >
+                      □
+                    </MarkerInk>
+                    <Ink
+                      size="small"
+                      color="light"
+                    >
+                      {item}
+                    </Ink>
+                  </Flex>
+                </li>
+              ))}
+            </ul>
+          </Flex>
         </Flex>
+        {sectionIndex < SECTIONS.length - 1 && <hr />}
       </React.Fragment>
     ))}
   </OuterFlex>
