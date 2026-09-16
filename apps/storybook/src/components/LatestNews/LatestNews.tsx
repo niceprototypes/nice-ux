@@ -5,40 +5,93 @@ import Ink from "../../nice/Ink"
 import styled from "styled-components"
 import { getToken } from "nice-styles"
 
-/** Headline shown beside the lightning icon. */
-const HEADLINE = "Every design token now reads through one getter"
-
 /**
- * Bulletin points under the headline, in display order.
+ * A bulletin section — a headline and the points beneath it. Sections stack in
+ * display order, each marked by the same icon, so announcing a new change is a
+ * new entry in {@link SECTIONS} rather than markup in the MDX page.
  *
- * Nodes rather than strings, so a point can set part of itself in code —
- * `<Ink code>` for an API name, for instance.
+ * Items are nodes rather than strings, so a point can set part of itself in
+ * code — `<Ink code>` for an API name, for instance.
  */
-const ITEMS: React.ReactNode[] = [
-  "Color, spacing, type, component, theme and responsive all in one getter",
-  <>
-    New companion call{" "}
-    <Ink
-      code
-      size="small"
-      color="light"
-      antialiased
-    >
-      listTokens()
-    </Ink>{" "}
-    which lists available tokens
-  </>,
-  "Media query breakpoints are set in the same way as style tokens",
-  "Changing a breakpoint updates every media query at once (JS and CSS stay synced)",
+interface NewsSection {
+  title: string
+  items: React.ReactNode[]
+}
+
+const SECTIONS: NewsSection[] = [
+  {
+    title: "Any color can be tuned per channel from a prop",
+    items: [
+      <>
+        Any color prop takes a token name or a{" "}
+        <Ink
+          code
+          size="small"
+          color="light"
+          antialiased
+        >
+          {"{ name, transform }"}
+        </Ink>{" "}
+        object
+      </>,
+      <>
+        <Ink
+          code
+          size="small"
+          color="light"
+          antialiased
+        >
+          transform
+        </Ink>{" "}
+        adjusts hue, saturation, lightness and alpha per channel — relative
+        (+10, -0.15) or absolute
+      </>,
+      <>
+        The same channel vocabulary works in{" "}
+        <Ink
+          code
+          size="small"
+          color="light"
+          antialiased
+        >
+          getToken
+        </Ink>
+        ,{" "}
+        <Ink
+          code
+          size="small"
+          color="light"
+          antialiased
+        >
+          transformColor
+        </Ink>{" "}
+        and every color prop
+      </>,
+      "AI tunes a semantic token instead of inventing a hex, so colors stay valid, type-checked and theme-correct",
+    ],
+  },
+  {
+    title: "Every design token now reads through one getter",
+    items: [
+      "Color, spacing, type, component, theme and responsive all in one getter",
+      <>
+        New companion call{" "}
+        <Ink
+          code
+          size="small"
+          color="light"
+          antialiased
+        >
+          listTokens()
+        </Ink>{" "}
+        which lists available tokens
+      </>,
+      "Media query breakpoints are set in the same way as style tokens",
+      "Changing a breakpoint updates every media query at once (JS and CSS stay synced)",
+    ],
+  },
 ]
 
-/**
- * The bulletin block at the top of the Welcome page — a lightning-marked
- * headline and the points beneath it.
- *
- * Content lives in {@link HEADLINE} and {@link ITEMS}, so announcing the next
- * change is an edit here rather than markup in the MDX page.
- */
 const OuterFlex = styled(Flex).attrs({
   direction: "column",
   gap: "base",
@@ -63,7 +116,7 @@ const OuterFlex = styled(Flex).attrs({
   }
 `
 
-/** Darkened highlight, shared by the lightning icon and the list markers. */
+/** Darkened highlight, shared by the icon and the list markers. */
 const NEWS_COLOR = {
   name: "success",
   transform: [null, null, 40, null],
@@ -74,51 +127,61 @@ const MarkerInk = styled(Ink)`
   padding-top: 0.6em;
 `
 
+/**
+ * The bulletin block at the top of the Welcome page — each section a
+ * headline marked by the shared icon, with its points beneath it. Content
+ * lives in {@link SECTIONS}.
+ */
 const LatestNews: React.FC = () => (
   <OuterFlex>
-    <Flex
-      gap="base"
-      alignItems="center"
-    >
-      <Icon
-        name="nice-heart"
-        size="large"
-        color={NEWS_COLOR}
-      />
-      <Ink
-        as="h3"
-        weight="medium"
-        color={NEWS_COLOR}
-      >
-        {HEADLINE}
-      </Ink>
-    </Flex>
+    {SECTIONS.map((section, sectionIndex) => (
+      // Static list authored in order, so the index is a stable identity.
+      <React.Fragment key={sectionIndex}>
+        <Flex
+          gap="base"
+          alignItems="center"
+        >
+          <Icon
+            name="nice-heart"
+            size="large"
+            color={NEWS_COLOR}
+          />
+          <Ink
+            as="h3"
+            weight="medium"
+            color={NEWS_COLOR}
+          >
+            {section.title}
+          </Ink>
+        </Flex>
 
-    <Flex>
-      <ul>
-        {ITEMS.map((item, index) => (
-          // A node cannot be a key, and the list is static, so the index is the identity
-          <li key={index}>
-            <Flex gap="small">
-              <MarkerInk
-                weight="black"
-                color={NEWS_COLOR}
-              >
-                □
-              </MarkerInk>
-              <Ink
-                size="small"
-                weight="medium"
-                color="light"
-                antialiased
-              >
-                {item}
-              </Ink>
-            </Flex>
-          </li>
-        ))}
-      </ul>
-    </Flex>
+        <Flex>
+          <ul>
+            {section.items.map((item, index) => (
+              // A node cannot be a key, and the list is static, so the index is the identity
+              <li key={index}>
+                <Flex gap="small">
+                  <MarkerInk
+                    weight="black"
+                    color={NEWS_COLOR}
+                  >
+                    □
+                  </MarkerInk>
+                  <Ink
+                    size="small"
+                    weight="medium"
+                    color="light"
+                    antialiased
+                  >
+                    {item}
+                  </Ink>
+                </Flex>
+              </li>
+            ))}
+          </ul>
+        </Flex>
+      </React.Fragment>
+    ))}
   </OuterFlex>
 )
 
