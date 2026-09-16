@@ -30,7 +30,7 @@ const OuterFlex$1 = styled__default.default(Flex__default.default).withConfig({
   ${({ $backgroundColor }) => {
     if ($backgroundColor) {
         return styled.css `
-        background-color: ${niceReactStyles.getToken("backgroundColor", $backgroundColor, { prefix: "tile" })};
+        background-color: ${niceReactStyles.getToken(`tile.backgroundColor:${$backgroundColor}`)};
       `;
     }
 }}
@@ -38,7 +38,7 @@ const OuterFlex$1 = styled__default.default(Flex__default.default).withConfig({
   ${({ $color }) => {
     if ($color) {
         return styled.css `
-        color: ${niceReactStyles.getToken("color", $color, { prefix: "tile" })};
+        color: ${niceReactStyles.getToken(`tile.color:${$color}`)};
       `;
     }
 }}
@@ -47,7 +47,7 @@ const OuterFlex$1 = styled__default.default(Flex__default.default).withConfig({
     if ($backgroundImage) {
         return styled.css `
         background-image: ${$backgroundImage};
-        background-size: ${$backgroundSize ? niceReactStyles.getToken("backgroundSize", $backgroundSize, { prefix: "tile" }) : "cover"};
+        background-size: ${$backgroundSize ? niceReactStyles.getToken(`tile.backgroundSize:${$backgroundSize}`) : "cover"};
         background-position: ${$backgroundPosition || "center"};
         background-repeat: no-repeat;
 

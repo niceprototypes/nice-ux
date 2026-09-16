@@ -33,7 +33,7 @@ export const OuterFlex = styled(Flex).withConfig({
   ${({ $backgroundColor }) => {
     if ($backgroundColor) {
       return css`
-        background-color: ${getToken("backgroundColor", $backgroundColor, { prefix: "tile" })};
+        background-color: ${getToken(`tile.backgroundColor:${$backgroundColor}`)};
       `
     }
   }}
@@ -41,7 +41,7 @@ export const OuterFlex = styled(Flex).withConfig({
   ${({ $color }) => {
     if ($color) {
       return css`
-        color: ${getToken("color", $color, { prefix: "tile" })};
+        color: ${getToken(`tile.color:${$color}`)};
       `
     }
   }}
@@ -50,7 +50,7 @@ export const OuterFlex = styled(Flex).withConfig({
     if ($backgroundImage) {
       return css`
         background-image: ${$backgroundImage};
-        background-size: ${$backgroundSize ? getToken("backgroundSize", $backgroundSize, { prefix: "tile" }) : "cover"};
+        background-size: ${$backgroundSize ? getToken(`tile.backgroundSize:${$backgroundSize}`) : "cover"};
         background-position: ${$backgroundPosition || "center"};
         background-repeat: no-repeat;
 
