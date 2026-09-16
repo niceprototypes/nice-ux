@@ -28,13 +28,13 @@ export interface OverrideExampleProps {
  *
  * Mechanism: the override is forwarded as the component's `style` prop, which
  * beats its styled-components class rules by specificity. Build the value with
- * `getToken(token, variant, { prefix })` rather than hand-writing the
+ * `getToken("{prefix}.{token}:{variant}")` rather than hand-writing the
  * `var(--np--…)` name, so `base` (which is unsuffixed) resolves correctly.
  *
  * @example
  * <OverrideExample
  *   component={Button}
- *   componentStyles={{ padding: `0 ${getToken("spacing", "large", { prefix: "button" })}` }}
+ *   componentStyles={{ padding: `0 ${getToken("button.spacing:large")}` }}
  * >
  *   Button
  * </OverrideExample>

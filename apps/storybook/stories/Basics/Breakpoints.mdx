@@ -6,17 +6,36 @@ import { DataTable } from "../../src/components/DataTable"
 import Callout from "../../src/components/Callout"
 import Install from "../../src/components/Install"
 import NewLines from "../../src/components/NewLines"
+import Ink from "../../src/nice/Ink"
 
 <Meta
   title="Basics/Breakpoints"
   name="Docs"
 />
 
-<StoryHeader title="Breakpoints" />
-
-## Get breakpoints
-
-Configure your design for **different screen sizes and ranges** by tweaking breakpoint variants for tokens and components, or by using `getBreakpoint` in your style code.
+<StoryHeader
+  title="Breakpoints"
+  heading="Get breakpoints"
+  headingDescription={
+    <>
+      Configure your design for{" "}
+      <Ink
+        as="span"
+        weight="semibold"
+      >
+        different screen sizes and ranges
+      </Ink>{" "}
+      by tweaking breakpoint variants for tokens and components, or by using{" "}
+      <Ink
+        as="span"
+        code
+      >
+        getBreakpoint
+      </Ink>{" "}
+      in your style code.
+    </>
+  }
+/>
 
 ### CSS only
 
@@ -85,19 +104,38 @@ const Wrapper = styled.div`
 
 ## Set breakpoints
 
-Set breakpoint thresholds with the `breakpoints` key of `setTokens`. They apply before the rest of the map, so responsive tokens in the same call use the new thresholds:
+Thresholds are the pixel floors each breakpoint starts at. Set them with the `breakpoints` key of `setTokens`, alongside your tokens. Thresholds apply first, so responsive values in the same call use the new ones:
 
 ```ts
 import { setTokens } from "nice-react-styles"
 
 setTokens({
-  breakpoints: {
-    tablet: 700,
-    laptop: 1100,
-    desktop: 1800,
-  },
+  breakpoints: { laptop: 1100 },
+  gap: { base: { phone: "12px", "laptop+": "20px" } },
 })
 ```
+
+<NewLines />
+
+### Breakpoints only
+
+If a call sets nothing but thresholds, `setBreakpoints` is the shortcut:
+
+```ts
+import { setBreakpoints } from "nice-react-styles"
+
+setBreakpoints({
+  tablet: 700,
+  laptop: 1100,
+  desktop: 1800,
+})
+```
+
+<Callout type="hint">`setBreakpoints(values)` is exactly `setTokens({ breakpoints: values })`. Already calling `setTokens`? Add the `breakpoints` key and skip the helper — one call, one source of truth.</Callout>
+
+<NewLines />
+
+Both forms take any subset of `tablet`, `laptop`, and `desktop`; `phone` is the base below the first floor and cannot be set. Values must be positive and ascending, or the call throws. Setting a threshold moves every `@media` block that uses it — generated tokens, component overrides, and the values of earlier `setTokens` calls — so `getBreakpoint`, `useBreakpoint`, and the CSS stay on one table.
 
 <HorizontalRule />
 

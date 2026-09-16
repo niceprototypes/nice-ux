@@ -3,16 +3,15 @@ import { navigate } from "@storybook/addon-links"
 import Icon from "nice-react-icon"
 import Flex from "nice-react-flex"
 import Ink from "../../nice/Ink"
-import { WelcomeLinkDiv } from "./WelcomeLink.styles"
+import { ArrowIcon, WelcomeLinkDiv } from "./WelcomeLink.styles"
+import type { WelcomeLinkProps } from "./WelcomeLink.types"
 
-type Props = {
-  storyId: string
-  iconName: string
-  title: string
-  children: React.ReactNode
-}
-
-const WelcomeLink: React.FC<Props> = ({ storyId, iconName, title, children }) => {
+const WelcomeLink: React.FC<WelcomeLinkProps> = ({
+  storyId,
+  iconName,
+  title,
+  children,
+}) => {
   const go = () => navigate({ storyId })
 
   return (
@@ -27,7 +26,10 @@ const WelcomeLink: React.FC<Props> = ({ storyId, iconName, title, children }) =>
         }
       }}
     >
-      <Flex gap="large" padding="large">
+      <Flex
+        gap="large"
+        padding="large"
+      >
         <Icon
           name={iconName}
           size="larger"
@@ -35,18 +37,26 @@ const WelcomeLink: React.FC<Props> = ({ storyId, iconName, title, children }) =>
           strokeWidth="large"
           strokeScaling
         />
-        <Flex direction="column" gap="smaller">
-          <Ink
-            color="base"
-            as="h3"
-            size="large"
-            weight="medium"
+        <Flex
+          grow={1}
+          alignItems="center"
+        >
+          <Flex
+            grow={1}
+            direction="column"
+            gap="smaller"
           >
-            {title}
-          </Ink>
-          <Ink>
-            {children}
-          </Ink>
+            <Ink
+              color="base"
+              as="h3"
+              size="large"
+              weight="medium"
+            >
+              {title}
+            </Ink>
+            <Ink>{children}</Ink>
+          </Flex>
+          <ArrowIcon name="arrow-right" />
         </Flex>
       </Flex>
     </WelcomeLinkDiv>

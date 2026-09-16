@@ -12,7 +12,7 @@ import { getToken } from "nice-react-styles"
  * this module) before `src/nice/tokens` registers `contentMaxWidth`.
  */
 export const CodeFlex = styled(Flex)`
-  max-width: ${() => getToken("contentMaxWidth")};
+  max-width: ${getToken("contentMaxWidth")};
   min-width: 0;
 
   & > * {

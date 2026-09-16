@@ -1,13 +1,19 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import Flex from "nice-react-flex"
 import WelcomeLink from "../../src/components/WelcomeLink"
-import Ink from "../../src/nice/Ink"
-import NewLines from "../../src/components/NewLines"
+import LatestNews from "../../src/components/LatestNews"
+import NewLines from "../../src/components/NewLines/index.ts"
 
 <Meta
   title="Basics/Welcome"
   name="Docs"
 />
+
+<NewLines />
+
+<LatestNews />
+
+<NewLines count={3} />
 
 <Flex
   direction="column"
@@ -18,41 +24,41 @@ import NewLines from "../../src/components/NewLines"
     iconName="Eraser"
     title="Reset"
   >
-    <span>Sensible, configurable style defaults</span>
+    <span>Sensible, configurable, token-driven style defaults for all</span>
   </WelcomeLink>
   <WelcomeLink
     storyId="basics-tokens--docs"
     iconName="Palette"
     title="Tokens"
   >
-    <span>Relentlessly semantic token matrix</span>
+    <span>Relentlessly semantic token matrix all in a single getter</span>
   </WelcomeLink>
   <WelcomeLink
     storyId="basics-fonts--docs"
     iconName="Type"
     title="Fonts"
   >
-    <span>Drop-in Google and Adobe fonts</span>
+    <span>Drop-in Google and Adobe fonts, or swap in your own fonts</span>
   </WelcomeLink>
   <WelcomeLink
     storyId="basics-icons--docs"
     iconName="LayoutGrid"
     title="Icons"
   >
-    <span>SVG + JS + React + Base64</span>
+    <span>Your favorite format, outlined or filled, and a Base64 option</span>
   </WelcomeLink>
   <WelcomeLink
     storyId="basics-breakpoints--docs"
     iconName="MonitorSmartphone"
     title="Breakpoints"
   >
-    <span>Total control at any viewport</span>
+    <span>Total control at any viewport, set once, UI follows forever</span>
   </WelcomeLink>
   <WelcomeLink
     storyId="basics-themes--docs"
     iconName="SunMoon"
     title="Themes"
   >
-    <span>Day, night, and custom themes</span>
+    <span>Day, night, and custom themes, for widgets or your entire UI</span>
   </WelcomeLink>
 </Flex>

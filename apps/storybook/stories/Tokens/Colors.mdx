@@ -30,32 +30,50 @@ import HorizontalRule from "../../src/components/HorizontalRule"
 export const hslaExamples = [
   {
     label: "Original",
-    call: `transformColor("color", undefined, {\n  token: "error",\n})`,
-    args: ["color", undefined, { token: "error" }],
+    call: `transformColor("color", {\n  token: "error",\n})`,
+    args: ["color", { token: "error" }],
   },
   {
     label: `"Faded"`,
-    call: `transformColor("color", undefined, {\n  token: "error",\n  values: ["+0", "-20", "+20", "-0.2"],\n})`,
-    args: ["color", undefined, { token: "error", values: ["+0", "-20", "+20", "-0.2"] }],
+    call: `transformColor("color", {\n  token: "error",\n  values: ["+0", "-20", "+20", "-0.2"],\n})`,
+    args: ["color", { token: "error", values: ["+0", "-20", "+20", "-0.2"] }],
   },
   {
     label: `"Exposed"`,
-    call: `transformColor("color", undefined, {\n  token: "error",\n  values: ["+0", "+0", "+20", "+0"],\n})`,
-    args: ["color", undefined, { token: "error", values: ["+0", "+0", "+20", "+0"] }],
+    call: `transformColor("color", {\n  token: "error",\n  values: ["+0", "+0", "+20", "+0"],\n})`,
+    args: ["color", { token: "error", values: ["+0", "+0", "+20", "+0"] }],
   },
   {
     label: `"Tinted"`,
-    call: `transformColor("color", "night", {\n  token: "error",\n  values: ["+0", "-20", "-20", "+0"],\n})`,
-    args: ["color", "night", { token: "error", values: ["+0", "-20", "-20", "+0"] }],
+    call: `transformColor("color", {\n  token: "error",\n  theme: "night",\n  values: ["+0", "-20", "-20", "+0"],\n})`,
+    args: ["color", { token: "error", theme: "night", values: ["+0", "-20", "-20", "+0"] }],
+  },
+  {
+    label: `"Halved"`,
+    call: `transformColor("color", {\n  token: "error",\n  values: [null, null, "*0.5", null],\n})`,
+    args: ["color", { token: "error", values: [null, null, "*0.5", null] }],
   },
 ]
 
 ## transformColor
 
+These adjust a colour's channels and return a static `hsla()` — the value is
+computed once, so it does not follow day and night. For a colour that keeps
+following the theme, pass the same channels to `getToken`:
+
+```tsx
+getToken("color:error", { transform: [null, null, "*0.5", null] })
+// hsl(from var(--np--color--error) h s calc(l * 0.5))
+```
+
+Channels are `[hue, saturation, lightness, alpha]`. A number sets the channel,
+`"+30"` and `"-30"` shift it, `"*0.5"` scales it, and `null` leaves it alone.
+
 {/* Columns mirror the module tables above one-for-one so the two line up, which
     is also why columnWidths is their constant rather than a local copy. The CSS
-    column is deliberately empty: transformColor returns a static hsla() string, not a
-    var(), so there is no CSS-variable form of these calls to show. */}
+    column stays empty here: these rows are transformColor calls, which return a
+    static hsla() rather than a var(). The live form is getToken's transform,
+    shown above. */}
 <DataTable
   inline
   columns={[

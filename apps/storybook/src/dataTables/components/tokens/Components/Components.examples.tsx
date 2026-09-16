@@ -109,7 +109,7 @@ export function componentExample(
   const override = OVERRIDES[prefix]
   const buildCss = override?.css[path[0]]
   if (override && buildCss) {
-    return override.render(buildCss(getToken(path[0], variant, { prefix })))
+    return override.render(buildCss(getToken(`${prefix}.${path[0]}:${variant}`)))
   }
 
   return null

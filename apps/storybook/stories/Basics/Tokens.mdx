@@ -5,17 +5,36 @@ import NewLines from "../../src/components/NewLines"
 import ArrowLink from "../../src/components/ArrowLink"
 import Callout from "../../src/components/Callout"
 import HorizontalRule from "../../src/components/HorizontalRule"
+import Ink from "../../src/nice/Ink"
 
 <Meta
   title="Basics/Tokens"
   name="Docs"
 />
 
-<StoryHeader title="Tokens" />
-
-## CSS only
-
-If all you need is some style, and you have **no time budget** to integrate with a new library, you can still **upgrade your UI today** by using our design tokens to fill the gaps in your project.
+<StoryHeader
+  title="Tokens"
+  heading="CSS only"
+  headingDescription={
+    <>
+      If all you need is some style, and you have{" "}
+      <Ink
+        as="span"
+        weight="semibold"
+      >
+        no time budget
+      </Ink>{" "}
+      to integrate with a new library, you can still{" "}
+      <Ink
+        as="span"
+        weight="semibold"
+      >
+        upgrade your UI today
+      </Ink>{" "}
+      by using our design tokens to fill the gaps in your project.
+    </>
+  }
+/>
 
 <ArrowLink storyId="tokens--docs">Browse CSS tokens</ArrowLink>
 
@@ -259,14 +278,49 @@ New tokens can be accessed by the getter function:
 ```tsx
 import { getToken } from "nice-react-styles"
 
-const Card = (
+const Card = ({ children }) => (
   <div
     style={{
-      font-size: getToken("fontSize", "jumbo"),
+      fontSize: getToken("fontSize", "jumbo"),
       color: getToken("accentColor", "primary"),
     }}
   >
     {children}
   </div>
 )
+```
+
+<HorizontalRule />
+
+## Transform a color
+
+Adjust a token's channels without leaving the token system. The result is still
+a token underneath, so it keeps following day and night:
+
+```tsx
+import { getToken } from "nice-react-styles"
+
+getToken("color:highlight", { transform: [null, null, 40, null] })
+// hsl(from var(--np--color--highlight) h s 40)
+```
+
+Channels are `[hue, saturation, lightness, alpha]`:
+
+| Entry | Does |
+| --- | --- |
+| `null` | leaves the channel alone |
+| `40` | sets it |
+| `"+10"` / `"-10"` | shifts it |
+| `"*0.5"` | scales it |
+
+<Callout type="hint">Scaling travels better than shifting. A shift sized for the day value can run off the end of the scale at night, where the same token is already dark.</Callout>
+
+<NewLines />
+
+Components take the same object on their color props:
+
+```tsx
+<Ink color={{ name: "highlight", transform: [null, null, 40, null] }}>
+  Darkened highlight
+</Ink>
 ```

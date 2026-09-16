@@ -7,12 +7,11 @@ import HorizontalRule from "../../src/components/HorizontalRule"
   name="Docs"
 />
 
-<StoryHeader title="Troubleshooting" />
-
-## "Invalid hook call"
-
-More than one copy of React (or styled-components) is loaded. Strip the
-duplicates from linked packages:
+<StoryHeader
+  title="Troubleshooting"
+  heading={`"Invalid hook call"`}
+  headingDescription="More than one copy of React (or styled-components) is loaded. Strip the duplicates from linked packages:"
+/>
 
 ```bash
 nicely --dedupe

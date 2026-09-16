@@ -76,7 +76,6 @@ const StoryNavigation: React.FC<StoryNavigationProps> = ({
   name,
   theme,
 }) => {
-  console.log(theme)
   // storybook-dark-mode only knows light/dark; the `data-theme` attribute
   // mirrored onto <html> in preview.tsx is the day/night equivalent.
   const [detectedTheme, setDetectedTheme] = useState<ThemeType>(() =>

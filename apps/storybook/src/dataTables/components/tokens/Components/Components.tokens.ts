@@ -60,7 +60,7 @@ export function getComponentTokenGroups(prefix: ComponentPrefixWithTokens): Comp
       rows: leaves.map(({ path, value }) => ({
         path,
         variant: formatComponentVariant(path),
-        cssVar: getToken(path.slice(0, -1), path[path.length - 1], { prefix, as: "key" }),
+        cssVar: getToken(`${prefix}.${path.join(".")}`, { as: "key" }),
         value,
         isCoreToken: CORE_TOKEN_REFERENCE.test(value),
       })),
