@@ -51,15 +51,15 @@ export const StyledInput = styled.input.withConfig({
     display: block;
     box-sizing: border-box;
     width: 100%;
-    height: ${getToken("size", $size, { prefix: "input" })};
-    padding: 0 ${getToken("spacing", $size, { prefix: "input" })};
+    height: ${getToken(`input.size:${$size}`)};
+    padding: 0 ${getToken(`input.spacing:${$size}`)};
     font-weight: ${getToken("fontWeight", "base")};
     background-color: ${getToken("backgroundColor", $filled ? "dark" : "base")};
     color: ${getToken("color", $disabled ? "disabled" : "base")};
     border-style: solid;
-    border-width: ${getToken("borderWidth", $borderWidth, { prefix: "input" })};
+    border-width: ${getToken(`input.borderWidth:${$borderWidth}`)};
     border-color: ${getBorderColor($status, $filled)};
-    border-radius: ${getToken("borderRadius", $borderRadius, { prefix: "input" })};
+    border-radius: ${getToken(`input.borderRadius:${$borderRadius}`)};
     transition: border-color 0.15s ease-in-out, background-color 0.15s ease-in-out;
     cursor: ${$disabled ? "not-allowed" : "text"};
     ${$backgroundColor ? `background-color: ${$backgroundColor};` : ""}
