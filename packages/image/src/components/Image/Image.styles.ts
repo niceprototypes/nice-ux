@@ -54,14 +54,14 @@ const sharedStyles = css<{
   ${({ $borderRadius }) =>
     $borderRadius &&
     css`
-      border-radius: ${getToken("borderRadius", $borderRadius, { prefix: "image" })};
+      border-radius: ${getToken(`image.borderRadius:${$borderRadius}`)};
     `}
 
   /* Border from design tokens (gated by $bordered) */
   ${({ $bordered, $borderWidth = "base", $borderColor = "base" }) =>
     $bordered &&
     css`
-      border: ${getToken("borderWidth", $borderWidth, { prefix: "image" })} solid ${getToken("borderColor", $borderColor, { prefix: "image" })};
+      border: ${getToken(`image.borderWidth:${$borderWidth}`)} solid ${getToken(`image.borderColor:${$borderColor}`)};
     `}
 `
 
@@ -82,7 +82,7 @@ export const StyledImg = styled.img<{
   ${({ $backgroundSize }) =>
     $backgroundSize &&
     css`
-      object-fit: ${getToken("backgroundSize", $backgroundSize, { prefix: "image" })};
+      object-fit: ${getToken(`image.backgroundSize:${$backgroundSize}`)};
     `}
 
   /* Object position derived from backgroundPosition */
