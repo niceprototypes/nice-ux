@@ -13,12 +13,12 @@ import type { CodeMarginType } from "./Code.types"
  */
 export const CodeDiv = styled.div<{ $clickable?: boolean; $inlined?: boolean; $fit?: boolean; $margin?: CodeMarginType }>`
   position: relative;
-  background-color: ${({ $inlined }) => ($inlined ? "transparent" : getToken("backgroundColor", "base", { prefix: "code" }))};
+  background-color: ${({ $inlined }) => ($inlined ? "transparent" : getToken("code.backgroundColor:base"))};
   ${({ $clickable }) => $clickable && `cursor: pointer;`}
   flex-grow: 1;
-  border: ${({ $inlined }) => ($inlined ? "none" : `1px solid ${getToken("borderColor", "base", { prefix: "code" })}`)};
-  border-radius: ${({ $inlined }) => ($inlined ? "0" : getToken("borderRadius", "base", { prefix: "code" }))};
-  box-shadow: ${({ $inlined }) => ($inlined ? "none" : getToken("boxShadow", "base", { prefix: "code" }))};
+  border: ${({ $inlined }) => ($inlined ? "none" : `1px solid ${getToken("code.borderColor:base")}`)};
+  border-radius: ${({ $inlined }) => ($inlined ? "0" : getToken("code.borderRadius:base"))};
+  box-shadow: ${({ $inlined }) => ($inlined ? "none" : getToken("code.boxShadow:base"))};
   max-width: 720px;
   overflow: hidden;
 
@@ -27,7 +27,7 @@ export const CodeDiv = styled.div<{ $clickable?: boolean; $inlined?: boolean; $f
     $fit &&
     `display: flex;
     align-items: center;
-    gap: ${getToken("gap", "base", { prefix: "code" })};
+    gap: ${getToken("code.gap:base")};
     width: max-content;
     flex-grow: 0;`}
 
@@ -37,19 +37,19 @@ export const CodeDiv = styled.div<{ $clickable?: boolean; $inlined?: boolean; $f
     $clickable &&
     !$inlined &&
     `&:hover {
-      border-color: ${getToken("color", "link", { prefix: "code" })};
+      border-color: ${getToken("code.color:link")};
     }
     &:hover ${LabelFlex} * {
-      color: ${getToken("color", "link", { prefix: "code" })};
+      color: ${getToken("code.color:link")};
     }`}
 
   .shiki {
     .line {
       span {
         color: var(--shiki-light);
-        font-family: ${getToken("fontFamily", "code", { prefix: "code" })};
-        font-size: ${getToken("fontSize", "small", { prefix: "code" })};
-        line-height: ${getToken("lineHeight", "expanded", { prefix: "code" })};
+        font-family: ${getToken("code.fontFamily:code")};
+        font-size: ${getToken("code.fontSize:small")};
+        line-height: ${getToken("code.lineHeight:expanded")};
         letter-spacing: -0.01em;
       }
     }
