@@ -8,7 +8,7 @@
  */
 
 import styled, { css } from "styled-components"
-import { getToken, type ColorType, type FontSizeType, type FontWeightType, type LineHeightType } from "nice-react-styles"
+import { getToken, resolveColorProp, type ColorTokenProp, type ColorType, type FontSizeType, type FontWeightType, type LineHeightType } from "nice-react-styles"
 import { InkAsType, InkAlignType, InkLineClampType, InkWordBreakType } from "./Ink.types"
 import { styleAntialiasing } from "../../utilities/styleAntialiasing"
 
@@ -53,11 +53,11 @@ const getFontFamily = ({ $as, $code }: { $as: InkAsType; $code?: boolean }) => {
   `
 }
 
-const getColor = ({ $color }: { $color?: ColorType }) => {
+const getColor = ({ $color }: { $color?: ColorTokenProp<ColorType> }) => {
   if (!$color) return css`color: inherit;`
 
   return css`
-    color: ${getToken("color", $color, { prefix: "ink" })};
+    color: ${resolveColorProp("ink", "color", $color)};
   `
 }
 
@@ -91,7 +91,7 @@ const getFontSize = ({ $as, $size }: { $as: InkAsType; $size?: FontSizeType }) =
 const getFontWeight = ({ $as, $weight }: { $as: InkAsType; $weight?: FontWeightType }) => {
   if ($weight) {
     return css`
-      font-weight: ${getToken("fontWeight", $weight, { prefix: "ink" })};
+      font-weight: ${getToken(`ink.fontWeight:${$weight}`)};
     `
   }
 
@@ -145,7 +145,7 @@ export const StyledInk = styled.p<{
   $as: InkAsType
   $size?: FontSizeType
   $weight?: FontWeightType
-  $color?: ColorType
+  $color?: ColorTokenProp<ColorType>
   $antialiased?: boolean
   $legibilityOptimized?: boolean
   $align?: InkAlignType

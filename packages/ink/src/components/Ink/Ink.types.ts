@@ -1,5 +1,5 @@
 import * as React from "react"
-import type { ColorType, FontSizeType, FontWeightType, LineHeightType, ThemeType } from "nice-react-styles"
+import type { ColorTokenProp, ColorType, FontSizeType, FontWeightType, LineHeightType, ThemeType } from "nice-react-styles"
 
 /**
  * InkAlignType
@@ -124,8 +124,11 @@ export type InkProps = {
   /** Apply monospace font for code snippets */
   code?: boolean
 
-  /** Text color from nice-styles tokens */
-  color?: InkColorType
+  /**
+   * Text color from nice-styles tokens. Either the variant name, or an object
+   * adding effects: `{ name: "highlight", transform: [null, null, 40, null] }`.
+   */
+  color?: ColorTokenProp<InkColorType>
 
   /** Pin token resolution to a specific theme instead of responding to media query */
   theme?: InkThemeType
