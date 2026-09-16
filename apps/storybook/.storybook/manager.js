@@ -48,6 +48,21 @@ addons.setConfig({
   },
 })
 
+// Prefix the browser tab title with "Nice UI / ". Storybook rewrites
+// document.title on every navigation (its "{story} ⋅ Storybook" format has no
+// prefix config), so watch the <title> element and re-apply the prefix whenever
+// it changes. The startsWith guard makes the observer's own write a no-op, so it
+// doesn't loop.
+const TITLE_PREFIX = "Nice UI / "
+const applyTitlePrefix = () => {
+  if (!document.title.startsWith(TITLE_PREFIX)) {
+    document.title = `${TITLE_PREFIX}${document.title}`
+  }
+}
+const titleEl = document.querySelector("title")
+if (titleEl) new MutationObserver(applyTitlePrefix).observe(titleEl, { childList: true })
+applyTitlePrefix()
+
 const folderIcon = getIconEncoded("folder-closed")
 const middleBranchIcon = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDMyIDMyIj4KICA8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMzAuNi4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogMi4xLjQgQnVpbGQgMTA5KSAgLS0+CiAgPGRlZnM+CiAgICA8c3R5bGU+CiAgICAgIC5zdDAsIC5zdDEgewogICAgICAgIGZpbGw6IG5vbmU7CiAgICAgICAgc3Ryb2tlOiAjMDAwOwogICAgICAgIHN0cm9rZS1taXRlcmxpbWl0OiAxMDsKICAgICAgICBzdHJva2Utd2lkdGg6IDEuNXB4OwogICAgICB9CgogICAgICAuc3QxIHsKICAgICAgICBzdHJva2UtbGluZWNhcDogcm91bmQ7CiAgICAgIH0KICAgIDwvc3R5bGU+CiAgPC9kZWZzPgogIDxsaW5lIGNsYXNzPSJzdDAiIHgxPSIxNiIgeTE9IjMyIiB4Mj0iMTYiLz4KICA8bGluZSBjbGFzcz0ic3QxIiB4MT0iMTYiIHkxPSIxNiIgeDI9IjMxIiB5Mj0iMTYiLz4KPC9zdmc+"
 const lastBranchIcon = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDMyIDMyIj4KICA8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMzAuNi4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogMi4xLjQgQnVpbGQgMTA5KSAgLS0+CiAgPGRlZnM+CiAgICA8c3R5bGU+CiAgICAgIC5zdDAgewogICAgICAgIGZpbGw6IG5vbmU7CiAgICAgICAgc3Ryb2tlOiAjMDAwOwogICAgICAgIHN0cm9rZS1saW5lY2FwOiByb3VuZDsKICAgICAgICBzdHJva2UtbWl0ZXJsaW1pdDogMTA7CiAgICAgICAgc3Ryb2tlLXdpZHRoOiAxLjVweDsKICAgICAgfQogICAgPC9zdHlsZT4KICA8L2RlZnM+CiAgPHBvbHlsaW5lIGNsYXNzPSJzdDAiIHBvaW50cz0iMTYgMCAxNiAxNiAzMSAxNiIvPgo8L3N2Zz4="
