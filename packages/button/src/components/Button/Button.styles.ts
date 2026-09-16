@@ -43,7 +43,7 @@ export const StyledButton = styled.button.withConfig({
      color across every status/theme, and overriding --np--button--icon--color
      recolors button icons without touching the global --np--icon--color (which all
      other icons read). */
-  --np--icon--color: ${getToken(["icon", "color"], "base", { prefix: "button" })};
+  --np--icon--color: ${getToken("button.icon.color:base")};
 
   /* Icon size flows through the same button-scoped layer: the icon is pinned to
      its "base" size (so it reads --np--icon--size), which is reassigned here to
@@ -54,7 +54,7 @@ export const StyledButton = styled.button.withConfig({
      touching the global --np--icon--size (which all other icons read). Defaulting
      the token to the --np--font-size scale rather than var(--np--icon--size) avoids
      a custom-property cycle, since --np--icon--size is the var we reassign. */
-  ${({ $size = "base" }) => `--np--icon--size: ${getToken(["icon", "size"], $size, { prefix: "button" })};`}
+  ${({ $size = "base" }) => `--np--icon--size: ${getToken(`button.icon.size:${$size}`)};`}
 
   ${({
     $inlined,
@@ -74,14 +74,14 @@ export const StyledButton = styled.button.withConfig({
     /* Element-scoped resolved height. Reassigned per $size on this element, so a
        calc() over it reads the live chosen height instead of the frozen :root
        token value (which is always base — substitution resolves at :root). */
-    --np--button--height: ${getToken("size", $size, { prefix: "button" })};
+    --np--button--height: ${getToken(`button.size:${$size}`)};
     /* The content gap lives on the inner ButtonContent flex. Default horizontal
        padding is size-derived (--np--button--spacing); when a padding prop is set
        it moves to the flex (see ButtonContent) and the button switches to
        min-height so non-zero vertical padding can grow it past the base height. */
     ${$hasPadding ? "min-height" : "height"}: var(--np--button--height);
     width: 100%;
-    padding: ${$square || $hasPadding ? "0" : `0 ${getToken("spacing", $size, { prefix: "button" })}`};
+    padding: ${$square || $hasPadding ? "0" : `0 ${getToken(`button.spacing:${$size}`)}`};
     font-weight: ${getToken("fontWeight", "base")};
     /* Colors derive from the status's semantic color (status name maps 1:1 to a
        --np--color variant). When filled, that color fills the background and
@@ -91,19 +91,19 @@ export const StyledButton = styled.button.withConfig({
     background-color: ${$filled ? getToken("color", $status) : "transparent"};
     color: ${$filled ? getToken("color", "base", { inverse: true }) : getToken("color", $status)};
     border-style: solid;
-    border-width: ${getToken("borderWidth", $borderWidth, { prefix: "button" })};
+    border-width: ${getToken(`button.borderWidth:${$borderWidth}`)};
     border-color: ${getToken("borderColor", $status === "disabled" ? "base" : $status)};
-    border-radius: ${$borderRadius === "rounded" ? "calc(var(--np--button--height) / 2)" : getToken("borderRadius", $borderRadius, { prefix: "button" })};
+    border-radius: ${$borderRadius === "rounded" ? "calc(var(--np--button--height) / 2)" : getToken(`button.borderRadius:${$borderRadius}`)};
     transition: all 0.15s ease-in-out;
     ${$backgroundImage ? `background-image: ${$backgroundImage};` : ""}
-    ${$borderColor ? `border-color: ${getToken("borderColor", $borderColor, { prefix: "button" })};` : ""}
+    ${$borderColor ? `border-color: ${getToken(`button.borderColor:${$borderColor}`)};` : ""}
   `}
 
   ${({ $inlined, $square, $size }) =>
     !$inlined &&
     `
     ${getBreakpoint(`${BREAKPOINT_TABLET}+`)} {
-      width: ${$square ? getToken("size", $size, { prefix: "button" }) : "auto"};
+      width: ${$square ? getToken(`button.size:${$size}`) : "auto"};
     }
   `}
 
