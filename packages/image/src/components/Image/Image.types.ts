@@ -1,5 +1,5 @@
 import * as React from "react"
-import type { BackgroundSizeType, BorderRadiusType, BorderWidthType, BorderColorType, ThemeType } from "nice-react-styles"
+import type { BackgroundSizeType, BorderRadiusType, BorderWidthType, BorderColorType, ColorTokenProp, ThemeType } from "nice-react-styles"
 
 /**
  * ImageAsType
@@ -173,7 +173,7 @@ export type ImageProps = {
   borderWidth?: ImageBorderWidthType
 
   /** Border color token (only applied when bordered is true) */
-  borderColor?: ImageBorderColorType
+  borderColor?: ColorTokenProp<ImageBorderColorType>
 
   /** Pin token resolution to a specific theme */
   theme?: ImageThemeType

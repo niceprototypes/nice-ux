@@ -9,7 +9,7 @@
  */
 
 import styled, { css } from "styled-components"
-import { getToken, type BorderRadiusType, type BorderWidthType, type BorderColorType } from "nice-react-styles"
+import { getToken, resolveColorProp, type BorderRadiusType, type BorderWidthType, type BorderColorType, type ColorTokenProp } from "nice-react-styles"
 import type { ImageBackgroundSizeType, ImageBackgroundPositionType } from "./Image.types"
 
 /**
@@ -61,7 +61,7 @@ const sharedStyles = css<{
   ${({ $bordered, $borderWidth = "base", $borderColor = "base" }) =>
     $bordered &&
     css`
-      border: ${getToken(`image.borderWidth:${$borderWidth}`)} solid ${getToken(`image.borderColor:${$borderColor}`)};
+      border: ${getToken(`image.borderWidth:${$borderWidth}`)} solid ${resolveColorProp("image", "borderColor", $borderColor)};
     `}
 `
 
