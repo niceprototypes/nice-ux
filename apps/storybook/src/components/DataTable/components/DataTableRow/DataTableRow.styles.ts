@@ -96,12 +96,12 @@ export const RowFlex = styled(Flex)<{ $highlighted?: boolean; $condensed?: boole
 
       &:hover,
       &:focus {
-        border-color: ${getToken("borderColor", "darker")};
+        border-color: ${getToken("borderColor", "stronger")};
       }
 
       &:focus {
         box-shadow: none;
-        background-color: ${getToken("borderColor", "darker")} !important;
+        background-color: ${getToken("borderColor", "stronger")} !important;
         color: ${getToken("color", "base", { theme: "night" })} !important;
       }
     }

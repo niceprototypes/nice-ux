@@ -8,7 +8,7 @@ export const size = {
   variants: ["smaller", "small", "base", "large", "larger"],
   preview: (variant) => (
     <PreviewCell
-      backgroundColor={getToken("backgroundColor", "dark")}
+      backgroundColor={getToken("backgroundColor", "raised")}
       borderColor={getToken("borderColor")}
       height={getToken("size", variant)}
       borderRadius={getToken("borderRadius", "small")}

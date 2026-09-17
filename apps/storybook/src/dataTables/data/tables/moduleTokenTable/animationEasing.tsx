@@ -18,7 +18,7 @@ export const animationEasing = {
       grow={1}
       padding="smaller"
       style={{
-        backgroundColor: getToken("backgroundColor", "dark"),
+        backgroundColor: getToken("backgroundColor", "raised"),
         border: `1px solid ${getToken("borderColor")}`,
         borderRadius: getToken("borderRadius", "small"),
       }}

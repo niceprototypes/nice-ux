@@ -33,7 +33,7 @@ export const Dot = styled.div<{ $variant: string }>`
 // padding) — the exact span the dot should travel.
 export const Track = styled(Flex)`
   container-type: inline-size;
-  background-color: ${getToken("backgroundColor", "dark")};
+  background-color: ${getToken("backgroundColor", "raised")};
   border: 1px solid ${getToken("borderColor")};
   border-radius: 8px;
   padding: ${getToken("gap", "smaller")};

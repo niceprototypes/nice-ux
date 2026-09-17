@@ -27,7 +27,7 @@ export const zIndex = {
           width: getToken("size", "base"),
           height: getToken("size", "base"),
           zIndex: REFERENCE_Z,
-          backgroundColor: getToken("backgroundColor", "dark"),
+          backgroundColor: getToken("backgroundColor", "raised"),
           border: `1px solid ${getToken("borderColor")}`,
           borderRadius: getToken("borderRadius", "small"),
         }}

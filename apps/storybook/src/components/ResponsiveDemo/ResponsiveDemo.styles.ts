@@ -18,7 +18,7 @@ export const ItemDiv = styled.div<{ $breakpoint: BreakpointName }>`
   ${({ $breakpoint }) => `
     ${activeQuery($breakpoint)} {
       opacity: 1;
-      border-color: ${getToken("borderColor", "dark")};
+      border-color: ${getToken("borderColor", "strong")};
       color: ${getToken("color")};
     }
   `}

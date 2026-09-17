@@ -11,7 +11,7 @@ export const boxShadow = {
       grow={1}
       padding="large"
       style={{
-        backgroundColor: getToken("backgroundColor", "dark"),
+        backgroundColor: getToken("backgroundColor", "raised"),
         border: `1px solid ${getToken("borderColor")}`,
         borderRadius: getToken("borderRadius", "small"),
       }}
