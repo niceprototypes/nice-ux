@@ -15,12 +15,27 @@ import { getToken } from "nice-styles"
  */
 interface NewsSection {
   title: string
+  /** Publish time (ms since epoch); rendered as a relative "X ago" stamp under the title. */
+  date: number
   items: React.ReactNode[]
+}
+
+const HOUR_MS = 60 * 60 * 1000
+const DAY_MS = 24 * HOUR_MS
+
+/** Relative "X ago" label for a past timestamp, measured against `Date.now()`. */
+function timeAgo(timestamp: number): string {
+  const elapsed = Date.now() - timestamp
+  const hours = Math.round(elapsed / HOUR_MS)
+  if (hours < 24) return `${hours} hour${hours === 1 ? "" : "s"} ago`
+  const days = Math.round(elapsed / DAY_MS)
+  return `${days} day${days === 1 ? "" : "s"} ago`
 }
 
 const SECTIONS: NewsSection[] = [
   {
-    title: "Tell agents how to tune your colors",
+    title: "You can now have agents tune your colors quickly and safely",
+    date: Date.now() - 11 * HOUR_MS,
     items: [
       <>
         Any color prop takes a token name or a{" "}
@@ -42,6 +57,7 @@ const SECTIONS: NewsSection[] = [
   },
   {
     title: "Agents can now access every token and breakpoint from one place",
+    date: Date.now() - 3 * DAY_MS,
     items: [
       "Color, spacing, type, component, theme and responsive all in one getter",
       <>
@@ -76,7 +92,9 @@ const OuterFlex = styled(Flex).attrs({
     flex-direction: column;
     gap: ${getToken("gap", "small")};
     margin: 0;
-    padding-left: calc(${getToken("icon.size:large")} + ${getToken("gap", "large")});
+    padding-left: calc(
+      ${getToken("icon.size:larger")} + ${getToken("gap", "large")}
+    );
     list-style-type: none;
   }
 
@@ -101,6 +119,10 @@ const MarkerInk = styled(Ink)`
   padding-top: 0.6em;
 `
 
+const TimestampInk = styled(Ink)`
+  padding-top: 0.1em;
+`
+
 /**
  * The bulletin block at the top of the Welcome page — each section a
  * headline marked by the shared icon, with its points beneath it. Content
@@ -118,20 +140,31 @@ const LatestNews: React.FC = () => (
         >
           <Flex
             gap="large"
-            alignItems="center"
           >
             <Icon
               name="nice-heart"
-              size="large"
+              size="larger"
               color={NEWS_COLOR}
             />
-            <Ink
-              as="h3"
-              weight="medium"
-              color={NEWS_COLOR}
+            <Flex
+              grow={1}
+              direction="column"
             >
-              {section.title}
-            </Ink>
+              <Ink
+                as="h3"
+                weight="medium"
+                color={NEWS_COLOR}
+              >
+                {section.title}
+              </Ink>
+              <TimestampInk
+                size="smaller"
+                lineHeight="condensed"
+                color={NEWS_COLOR}
+              >
+                {timeAgo(section.date)}
+              </TimestampInk>
+            </Flex>
           </Flex>
 
           <Flex>
