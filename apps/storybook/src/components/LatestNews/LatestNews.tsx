@@ -114,13 +114,16 @@ const NEWS_COLOR = {
   transform: [null, null, 40, null],
 } as const
 
-const MarkerInk = styled(Ink)`
-  font-size: 0.5em;
-  padding-top: 0.6em;
-`
-
 const TimestampInk = styled(Ink)`
   padding-top: 0.1em;
+`
+
+/** Wrapper that vertically centers a list marker icon against the first text line. */
+const MarkerFlex = styled(Flex).attrs({
+  alignItems: "center",
+})`
+  height: ${getToken("size", "smaller")};
+  transform: translateY(-0.1em);
 `
 
 /**
@@ -173,12 +176,14 @@ const LatestNews: React.FC = () => (
                 // A node cannot be a key, and the list is static, so the index is the identity
                 <li key={index}>
                   <Flex gap="small">
-                    <MarkerInk
-                      weight="black"
-                      color={NEWS_COLOR}
-                    >
-                      □
-                    </MarkerInk>
+                    <MarkerFlex>
+                      <Icon
+                        name="plus"
+                        size="smaller"
+                        strokeScaling
+                        color={NEWS_COLOR}
+                      />
+                    </MarkerFlex>
                     <Ink
                       size="small"
                       color="light"
