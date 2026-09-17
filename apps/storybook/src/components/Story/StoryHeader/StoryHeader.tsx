@@ -1,8 +1,7 @@
 import * as React from "react"
 import Flex from "nice-react-flex"
-import Icon from "nice-react-icon"
 import Ink from "../../../nice/Ink"
-import { RepoLink, StatusPill, LicenseTag } from "./StoryHeader.styles"
+import RepoLink from "../../RepoLink"
 import type { StoryHeaderProps } from "./StoryHeader.types"
 import NewLines from "../../NewLines"
 
@@ -47,19 +46,8 @@ const StoryHeader: React.FC<StoryHeaderProps> = ({
           {repos.map(repo => (
             <RepoLink
               key={repo.url}
-              href={repo.url}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Icon
-                name="github"
-                size="base"
-                color="link"
-              />
-              {repo.name}
-              {repo.status ? <StatusPill>{repo.status}</StatusPill> : null}
-              <LicenseTag>{repo.license}</LicenseTag>
-            </RepoLink>
+              repo={repo}
+            />
           ))}
         </Flex>
       ) : null}

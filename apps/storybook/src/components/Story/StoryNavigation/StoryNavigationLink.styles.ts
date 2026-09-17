@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import Flex from "nice-react-flex"
-import Ink from "nice-react-ink"
+import Ink from "../../../nice/Ink"
 import { getToken, getBreakpoint } from "nice-react-styles"
 
 /**

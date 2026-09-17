@@ -4,7 +4,7 @@ import Icon from "nice-react-icon"
 import Input from "nice-react-input"
 import Image from "nice-react-image"
 import Tile from "nice-react-tile"
-import Ink from "nice-react-ink"
+import Ink from "../../../../nice/Ink"
 import { getToken } from "nice-react-styles"
 import OverrideExample from "../../../../components/OverrideExample"
 import type { ComponentPrefixWithTokens, ExampleConfig, OverrideConfig } from "./Components.types"
@@ -61,7 +61,7 @@ const CONFIGS: Partial<Record<ComponentPrefixWithTokens, ExampleConfig>> = {
       borderColor: "borderColor",
       backgroundSize: "backgroundSize",
     },
-    render: o => <Image src="/rasters/og-image.png" alt="" width="64px" height="64px" bordered {...(o as any)} />,
+    render: o => <Image src="https://niceprototypes.com/ui/rasters/og-image.png" alt="" width="64px" height="64px" bordered {...(o as any)} />,
   },
   tile: {
     props: { backgroundColor: "backgroundColor", color: "color" },

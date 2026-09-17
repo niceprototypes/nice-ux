@@ -1,11 +1,13 @@
 import styled from "styled-components"
 import { getToken } from "nice-react-styles"
+import Ink from "../../nice/Ink"
+import Flex from "nice-react-flex"
 
 /**
- * A single repo link — the brand icon plus the package name, recoloring to the
+ * The link itself — the brand icon plus the package name, recoloring to the
  * link token on hover so it reads as interactive.
  */
-export const RepoLink = styled.a`
+export const Anchor = styled.a`
   display: inline-flex;
   align-items: center;
   gap: ${getToken("gap", "small")};
@@ -32,10 +34,12 @@ export const StatusPill = styled.span`
   text-transform: lowercase;
 `
 
-/** The SPDX license label (e.g. `MIT`) shown after a repo's name — muted, plain. */
-export const LicenseTag = styled.span`
-  font-family: ${getToken("fontFamily", "code")};
-  font-size: ${getToken("fontSize", "smaller")};
-  line-height: 1;
-  color: ${getToken("color", "lighter")};
+export const LicenseFlex = styled(Flex)`
+  background-color: ${getToken("backgroundColor", "light",  { inverse: true })};
+  border-radius: ${getToken("borderRadius", "small")};
+`
+
+export const LicenseInk = styled(Ink)`
+  display: block;
+  color: ${getToken("color", { inverse: true })};
 `
