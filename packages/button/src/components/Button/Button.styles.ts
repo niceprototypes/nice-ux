@@ -84,15 +84,18 @@ export const StyledButton = styled.button.withConfig({
     padding: ${$square || $hasPadding ? "0" : `0 ${getToken(`button.spacing:${$size}`)}`};
     font-weight: ${getToken("fontWeight", "base")};
     /* Colors derive from the status's semantic color (status name maps 1:1 to a
-       --np--color variant). When filled, that color fills the background and
-       border and the label/icon flip to --np--color--inverse; otherwise it is an
-       outline — transparent fill, status-colored border and label. Both are
-       theme-aware via the core tokens' cascade, so no per-theme overrides here. */
+       --np--color variant). When filled, that color fills the background AND the
+       border — a filled button is one solid shape, so a paler --np--border-color
+       tint would read as a seam around it — and the label/icon flip to
+       --np--color--inverse. Otherwise it is an outline: transparent fill, with the
+       border coming from --np--border-color, whose tints are built to sit quietly
+       beside content rather than carry it. Both are theme-aware via the core
+       tokens' cascade, so no per-theme overrides here. */
     background-color: ${$filled ? getToken("color", $status) : "transparent"};
     color: ${$filled ? getToken("color", "base", { inverse: true }) : getToken("color", $status)};
     border-style: solid;
     border-width: ${getToken(`button.borderWidth:${$borderWidth}`)};
-    border-color: ${getToken("borderColor", $status === "disabled" ? "base" : $status)};
+    border-color: ${$filled ? getToken("color", $status) : getToken("borderColor", $status === "disabled" ? "base" : $status)};
     border-radius: ${$borderRadius === "rounded" ? "calc(var(--np--button--height) / 2)" : getToken(`button.borderRadius:${$borderRadius}`)};
     transition: all 0.15s ease-in-out;
     ${$backgroundImage ? `background-image: ${$backgroundImage};` : ""}

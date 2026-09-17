@@ -1,3 +1,4 @@
 [2026-09-14 22:30] major: Remove getButtonToken export and src/tokens wrappers — component tokens are read with getToken(name, variant, { prefix: "button" }) from nice-react-styles
 [2026-09-16 15:11] patch: getToken call sites migrated to the token address form
 [2026-09-17 14:34] minor: borderColor accepts the object form — { name, transform } for channel-adjusted colours, resolved through resolveColorProp
+[2026-09-17 15:48] patch: Filled status buttons now take their border from the fill colour. The block comment already documented this ('that color fills the background and border'), but border-color read from the borderColor group unconditionally, so a filled success button drew a saturated green fill inside a pale hsla(146, 55%, 88%) separator tint — a visible seam around what should be one solid shape. Unfilled buttons are unchanged and keep the borderColor tints, including the disabled base fallback.
