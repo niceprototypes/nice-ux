@@ -64,7 +64,7 @@ const ResetDemo: React.FC<ResetDemoProps> = ({
             files={layers.map(layer => layer.file)}
             srcDoc={frame(pageHtml, css)}
           />
-          {index < examples.length - 1 && <NewLines count={3} />}
+          {index < examples.length - 1 && <hr />}
         </React.Fragment>
       )
     })}
