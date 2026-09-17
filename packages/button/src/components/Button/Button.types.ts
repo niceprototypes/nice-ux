@@ -1,5 +1,5 @@
 import * as React from "react"
-import { SizeType, BorderWidthType, BorderColorType, FontWeightType, ThemeType } from "nice-react-styles"
+import { SizeType, BorderWidthType, BorderColorType, ColorTokenProp, FontWeightType, ThemeType } from "nice-react-styles"
 import { IconNameType } from "nice-react-icon"
 import type { FlexSpacingType } from "nice-react-flex"
 
@@ -189,7 +189,7 @@ export interface ButtonProps {
   backgroundImage?: string
 
   /** @token Token-bound — accepts BorderColorType variants only. */
-  borderColor?: ButtonBorderColorType
+  borderColor?: ColorTokenProp<ButtonBorderColorType>
 
   /** Pin token resolution to a specific theme instead of responding to media query */
   theme?: ThemeType

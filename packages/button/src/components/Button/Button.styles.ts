@@ -1,14 +1,14 @@
 import styled from "styled-components"
 import Flex from "nice-react-flex"
-import { getBreakpoint, getToken, BREAKPOINT_TABLET } from "nice-react-styles"
-import type { SizeType, BorderWidthType, BorderColorType } from "nice-react-styles"
+import { getBreakpoint, getToken, resolveColorProp, BREAKPOINT_TABLET } from "nice-react-styles"
+import type { SizeType, BorderWidthType, BorderColorType, ColorTokenProp } from "nice-react-styles"
 import type { ButtonBorderRadiusType, ButtonStatusType } from "./Button.types"
 
 export const StyledButton = styled.button.withConfig({
   shouldForwardProp: (prop) => !prop.startsWith("$"),
 })<{
   $backgroundImage?: string
-  $borderColor?: BorderColorType
+  $borderColor?: ColorTokenProp<BorderColorType>
   $borderRadius: ButtonBorderRadiusType
   $borderWidth: BorderWidthType
   $disabled: boolean
@@ -96,7 +96,7 @@ export const StyledButton = styled.button.withConfig({
     border-radius: ${$borderRadius === "rounded" ? "calc(var(--np--button--height) / 2)" : getToken(`button.borderRadius:${$borderRadius}`)};
     transition: all 0.15s ease-in-out;
     ${$backgroundImage ? `background-image: ${$backgroundImage};` : ""}
-    ${$borderColor ? `border-color: ${getToken(`button.borderColor:${$borderColor}`)};` : ""}
+    ${$borderColor ? `border-color: ${resolveColorProp("button", "borderColor", $borderColor)};` : ""}
   `}
 
   ${({ $inlined, $square, $size }) =>
