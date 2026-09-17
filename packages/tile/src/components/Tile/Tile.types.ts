@@ -5,6 +5,7 @@ import type {
   GapType,
   BackgroundColorType,
   BackgroundSizeType,
+  ColorTokenProp,
   ColorType,
 } from "nice-react-styles"
 import type { TileInkProps } from "../TileContent/TileContent.types"
@@ -140,7 +141,7 @@ export interface TileProps {
   // Background
   backgroundImage?: string
   /** @token Token-bound — accepts BackgroundColorType variants only. */
-  backgroundColor?: TileBackgroundColorType
+  backgroundColor?: ColorTokenProp<TileBackgroundColorType>
   backgroundPosition?: string
   /** @token Token-bound — accepts BackgroundSizeType variants only. */
   backgroundSize?: TileBackgroundSizeType
@@ -148,7 +149,7 @@ export interface TileProps {
 
   // Color
   /** @token Token-bound — accepts ColorType variants only. */
-  color?: TileColorType
+  color?: ColorTokenProp<TileColorType>
   theme?: ThemeType
 
   // HTML

@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components"
 import Flex from "nice-react-flex"
-import { getToken } from "nice-react-styles"
+import { getToken, resolveColorProp, type ColorTokenProp } from "nice-react-styles"
 import type {
   BackgroundColorType,
   BackgroundSizeType,
@@ -11,8 +11,8 @@ export const OuterFlex = styled(Flex).withConfig({
   shouldForwardProp: (prop) => !prop.startsWith('$'),
 })<{
   $backgroundImage?: string
-  $backgroundColor?: BackgroundColorType
-  $color?: ColorType
+  $backgroundColor?: ColorTokenProp<BackgroundColorType>
+  $color?: ColorTokenProp<ColorType>
   $backgroundPosition?: string
   $backgroundSize?: BackgroundSizeType
   $backgroundAttachment?: string
@@ -33,7 +33,7 @@ export const OuterFlex = styled(Flex).withConfig({
   ${({ $backgroundColor }) => {
     if ($backgroundColor) {
       return css`
-        background-color: ${getToken(`tile.backgroundColor:${$backgroundColor}`)};
+        background-color: ${resolveColorProp("tile", "backgroundColor", $backgroundColor)};
       `
     }
   }}
@@ -41,7 +41,7 @@ export const OuterFlex = styled(Flex).withConfig({
   ${({ $color }) => {
     if ($color) {
       return css`
-        color: ${getToken(`tile.color:${$color}`)};
+        color: ${resolveColorProp("tile", "color", $color)};
       `
     }
   }}

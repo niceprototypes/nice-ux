@@ -1,4 +1,4 @@
-import { getToken, Theme, withBreakpoints } from 'nice-react-styles';
+import { getToken, resolveColorProp, Theme, withBreakpoints } from 'nice-react-styles';
 import { jsxs, jsx, Fragment } from 'react/jsx-runtime';
 import styled, { css } from 'styled-components';
 import Flex from 'nice-react-flex';
@@ -20,7 +20,7 @@ const OuterFlex$1 = styled(Flex).withConfig({
   ${({ $backgroundColor }) => {
     if ($backgroundColor) {
         return css `
-        background-color: ${getToken(`tile.backgroundColor:${$backgroundColor}`)};
+        background-color: ${resolveColorProp("tile", "backgroundColor", $backgroundColor)};
       `;
     }
 }}
@@ -28,7 +28,7 @@ const OuterFlex$1 = styled(Flex).withConfig({
   ${({ $color }) => {
     if ($color) {
         return css `
-        color: ${getToken(`tile.color:${$color}`)};
+        color: ${resolveColorProp("tile", "color", $color)};
       `;
     }
 }}

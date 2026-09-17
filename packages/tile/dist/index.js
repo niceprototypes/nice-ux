@@ -30,7 +30,7 @@ const OuterFlex$1 = styled__default.default(Flex__default.default).withConfig({
   ${({ $backgroundColor }) => {
     if ($backgroundColor) {
         return styled.css `
-        background-color: ${niceReactStyles.getToken(`tile.backgroundColor:${$backgroundColor}`)};
+        background-color: ${niceReactStyles.resolveColorProp("tile", "backgroundColor", $backgroundColor)};
       `;
     }
 }}
@@ -38,7 +38,7 @@ const OuterFlex$1 = styled__default.default(Flex__default.default).withConfig({
   ${({ $color }) => {
     if ($color) {
         return styled.css `
-        color: ${niceReactStyles.getToken(`tile.color:${$color}`)};
+        color: ${niceReactStyles.resolveColorProp("tile", "color", $color)};
       `;
     }
 }}

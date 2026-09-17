@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { BackgroundColorType, BackgroundSizeType, ColorType, GapType, ThemeType, WithBreakpointsProps } from 'nice-react-styles';
+import { BackgroundColorType, BackgroundSizeType, ColorType, GapType, ColorTokenProp, ThemeType, WithBreakpointsProps } from 'nice-react-styles';
 import { FlexProps, FlexSpacingType } from 'nice-react-flex';
 import { InkProps } from 'nice-react-ink';
 
@@ -118,13 +118,13 @@ interface TileProps {
     gap?: GapType;
     backgroundImage?: string;
     /** @token Token-bound — accepts BackgroundColorType variants only. */
-    backgroundColor?: TileBackgroundColorType;
+    backgroundColor?: ColorTokenProp<TileBackgroundColorType>;
     backgroundPosition?: string;
     /** @token Token-bound — accepts BackgroundSizeType variants only. */
     backgroundSize?: TileBackgroundSizeType;
     backgroundAttachment?: string;
     /** @token Token-bound — accepts ColorType variants only. */
-    color?: TileColorType;
+    color?: ColorTokenProp<TileColorType>;
     theme?: ThemeType;
     className?: string;
     style?: React.CSSProperties;
