@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import Flex from "nice-react-flex"
-import { getBreakpoint, getToken, resolveColorProp, BREAKPOINT_TABLET } from "nice-react-styles"
+import { getToken, resolveColorProp } from "nice-react-styles"
 import type { SizeType, BorderWidthType, BorderColorType, ColorTokenProp } from "nice-react-styles"
 import type { ButtonBorderRadiusType, ButtonStatusType } from "./Button.types"
 
@@ -80,7 +80,7 @@ export const StyledButton = styled.button.withConfig({
        it moves to the flex (see ButtonContent) and the button switches to
        min-height so non-zero vertical padding can grow it past the base height. */
     ${$hasPadding ? "min-height" : "height"}: var(--np--button--height);
-    width: 100%;
+    width: ${$square ? getToken(`button.size:${$size}`) : "auto"};
     padding: ${$square || $hasPadding ? "0" : `0 ${getToken(`button.spacing:${$size}`)}`};
     font-weight: ${getToken("fontWeight", "base")};
     /* Colors derive from the status's semantic color (status name maps 1:1 to a
@@ -100,14 +100,6 @@ export const StyledButton = styled.button.withConfig({
     transition: all 0.15s ease-in-out;
     ${$backgroundImage ? `background-image: ${$backgroundImage};` : ""}
     ${$borderColor ? `border-color: ${resolveColorProp("button", "borderColor", $borderColor)};` : ""}
-  `}
-
-  ${({ $inlined, $square, $size }) =>
-    !$inlined &&
-    `
-    ${getBreakpoint(`${BREAKPOINT_TABLET}+`)} {
-      width: ${$square ? getToken(`button.size:${$size}`) : "auto"};
-    }
   `}
 
   /* Inlined (as="a"): strip the button chrome — no fill, border, height, or
