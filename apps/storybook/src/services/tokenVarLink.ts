@@ -17,10 +17,9 @@ import { componentTokensData } from "nice-react-styles"
  * 2. **Module root** — the shorthand base `var(--np--{group})` or
  *    `var(--np--{group}--{variant})` (at most two segments). Links to the module
  *    story `Tokens/{group}`, whose Storybook id is the title lowercased
- *    with separators dropped (`fontSize` → `tokens-fontsize`). The color
- *    family (`color` / `backgroundColor` / `borderColor`) is the exception —
- *    those share one `Colors` story as `## ` sections, so their links target
- *    `tokens-colors--docs#{section}` (see `COLOR_PAGE_SECTIONS`).
+ *    with separators dropped (`fontSize` → `tokens-fontsize`). Groups that live
+ *    in a sidebar folder carry its segment too (`tokens-colors-bordercolor`) —
+ *    see `TOKEN_PAGE_FOLDERS`.
  *
  * A non-component reference with more than two `--` segments (a theme / inverse
  * primitive) is not a module root and returns `null`.
@@ -51,16 +50,33 @@ export interface TokenVarLink {
 export const HIGHLIGHT_KEY = "np-token"
 
 /**
- * The color-family groups share one Modules story (`Colors`), each rendered as an
- * `## ` section there. Maps the camelCase group → that section's heading-anchor
- * slug so a link scrolls to the right section. Must track the section headings in
- * `stories/Tokens/Colors.mdx`.
+ * Groups that render inside a sidebar folder, so their story id carries the
+ * folder segment (`Tokens/Colors/borderColor` → `tokens-colors-bordercolor`).
+ * Mirrors FOLDERS in scripts/generate-token-stories.mjs, which writes the titles.
  */
-const COLOR_PAGE_SECTIONS: Record<string, string> = {
-  color: "color",
-  backgroundColor: "background-color",
-  borderColor: "border-color",
-  brandColor: "brand-color",
+const TOKEN_PAGE_FOLDERS: Record<string, string> = {
+  color: "colors",
+  backgroundColor: "colors",
+  borderColor: "colors",
+  brandColor: "colors",
+  fontFamily: "fonts",
+  fontSize: "fonts",
+  fontWeight: "fonts",
+  letterSpacing: "fonts",
+  lineHeight: "fonts",
+  borderRadius: "borders",
+  borderWidth: "borders",
+  animationDuration: "animation",
+  animationEasing: "animation",
+  backgroundSize: "sizes",
+  gap: "sizes",
+  size: "sizes",
+}
+
+/** The story id a module group's reference page lives at. */
+function moduleStoryId(group: string): string {
+  const folder = TOKEN_PAGE_FOLDERS[group]
+  return folder ? `tokens-${folder}-${group.toLowerCase()}` : `tokens-${group.toLowerCase()}`
 }
 
 export function parseTokenVarLink(value: string): TokenVarLink | null {
@@ -96,11 +112,5 @@ export function parseTokenVarLink(value: string): TokenVarLink | null {
   const variant = segments[1] ?? "base"
   const token = `${group}--${variant}`
 
-  // Color-family groups live as sections on the shared `Colors` story; everything
-  // else is its own `tokens-{group}` story.
-  const section = COLOR_PAGE_SECTIONS[group]
-  const storyId = section ? "tokens-colors" : `tokens-${group.toLowerCase()}`
-  const hash = section ? `#${section}` : ""
-
-  return { group, variant, token, href: `/?path=/docs/${storyId}--docs${hash}` }
+  return { group, variant, token, href: `/?path=/docs/${moduleStoryId(group)}--docs` }
 }

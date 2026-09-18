@@ -1,29 +1,16 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
-import { ModuleTokenTable, TOKEN_COLUMN_WIDTHS } from "../../src/dataTables/components/tokens/Modules"
-import { tokenTables } from "./tables"
+import { TOKEN_COLUMN_WIDTHS } from "../../src/dataTables/components/tokens/Modules"
 import PreviewCell from "../../src/components/PreviewCell"
 import { transformColor, getToken } from "nice-react-styles"
 import { DataTable } from "../../src/components/DataTable"
-import HorizontalRule from "../../src/components/HorizontalRule"
 
-<Meta title="Tokens/Colors" />
+<Meta title="Tokens/Colors/transformColor" />
 
-{/* The colors page is multi-column — let it use the full docs width. */}
+{/* Multi-column like the token tables — let it use the full docs width. */}
 <style>{`.sbdocs.sbdocs-content { max-width: 100%; }`}</style>
 
-<StoryHeader title="Colors" description="Text, background, and border color tokens. Each section is its own module; deep links from component tokens land on the matching section." />
-
-<ModuleTokenTable
-  sections={[
-    { group: tokenTables.color },
-    { group: tokenTables.backgroundColor },
-    { group: tokenTables.borderColor },
-    { group: tokenTables.brandColor },
-  ]}
-/>
-
-<HorizontalRule />
+<StoryHeader title="transformColor" description="Adjust a colour token's HSLA channels and get a static hsla() back. For a colour that keeps following the theme, pass the same channels to getToken's transform instead." />
 
 {/* Live transformColor demo — each swatch's background is the actual transformColor() return,
     so the page can never drift from the function's behavior. */}
@@ -54,8 +41,6 @@ export const hslaExamples = [
     args: ["color", { token: "error", values: [null, null, "*0.5", null] }],
   },
 ]
-
-## transformColor
 
 These adjust a colour's channels and return a static `hsla()` — the value is
 computed once, so it does not follow day and night. For a colour that keeps

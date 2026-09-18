@@ -77,6 +77,11 @@ const preview: Preview = {
           "Scenarios",
           ["Easy", "Medium", "Hard"],
           "Tokens",
+          // Docs first, then the grouped folders, then every flat token page.
+          // Docs, then the grouped folders alphabetically, then the flat pages.
+          // Colors pins transformColor last: it is the only hand-authored page in
+          // that folder, so without it the load order decides where it lands.
+          ["Docs", "Animation", "Borders", "Colors", ["*", "transformColor"], "Fonts", "Sizes", "*"],
           "Components",
           ["*", ["Docs", "Tokens", "*"]],
           "Bindings",

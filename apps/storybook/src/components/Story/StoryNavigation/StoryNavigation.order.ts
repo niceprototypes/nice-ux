@@ -29,21 +29,30 @@ export const sequences: StoryNavigationItem[][] = [
     { id: "scenarios-medium--docs", label: "Medium" },
     { id: "scenarios-hard--docs", label: "Hard" },
   ],
-  // Tokens — the token reference pages. Landing page first, then each token
-  // group in sidebar order (alphabetical, mirroring the Tokens sidebar).
+  // Tokens — the token reference pages. Landing page first, then the grouped
+  // folders alphabetically, then the flat pages — mirroring the `storySort`
+  // order in `.storybook/preview.tsx`, which pins Docs and the folders ahead of
+  // the wildcard.
   [
     { id: "tokens--docs", label: "Tokens" },
-    { id: "tokens-animationduration--docs", label: "animationDuration" },
-    { id: "tokens-animationeasing--docs", label: "animationEasing" },
-    { id: "tokens-borderradius--docs", label: "borderRadius" },
-    { id: "tokens-borderwidth--docs", label: "borderWidth" },
+    { id: "tokens-animation-animationduration--docs", label: "animationDuration" },
+    { id: "tokens-animation-animationeasing--docs", label: "animationEasing" },
+    { id: "tokens-borders-borderradius--docs", label: "borderRadius" },
+    { id: "tokens-borders-borderwidth--docs", label: "borderWidth" },
+    { id: "tokens-colors-backgroundcolor--docs", label: "backgroundColor" },
+    { id: "tokens-colors-bordercolor--docs", label: "borderColor" },
+    { id: "tokens-colors-brandcolor--docs", label: "brandColor" },
+    { id: "tokens-colors-color--docs", label: "color" },
+    { id: "tokens-colors-transformcolor--docs", label: "transformColor" },
+    { id: "tokens-fonts-fontfamily--docs", label: "fontFamily" },
+    { id: "tokens-fonts-fontsize--docs", label: "fontSize" },
+    { id: "tokens-fonts-fontweight--docs", label: "fontWeight" },
+    { id: "tokens-fonts-letterspacing--docs", label: "letterSpacing" },
+    { id: "tokens-fonts-lineheight--docs", label: "lineHeight" },
+    { id: "tokens-sizes-backgroundsize--docs", label: "backgroundSize" },
+    { id: "tokens-sizes-gap--docs", label: "gap" },
+    { id: "tokens-sizes-size--docs", label: "size" },
     { id: "tokens-boxshadow--docs", label: "boxShadow" },
-    { id: "tokens-colors--docs", label: "Colors" },
-    { id: "tokens-fontfamily--docs", label: "fontFamily" },
-    { id: "tokens-fontsize--docs", label: "fontSize" },
-    { id: "tokens-fontweight--docs", label: "fontWeight" },
-    { id: "tokens-gap--docs", label: "gap" },
-    { id: "tokens-lineheight--docs", label: "lineHeight" },
-    { id: "tokens-size--docs", label: "size" },
+    { id: "tokens-zindex--docs", label: "zIndex" },
   ],
 ]
