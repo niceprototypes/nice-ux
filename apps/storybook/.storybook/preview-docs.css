@@ -119,7 +119,6 @@
   }
 
   code:not(pre.shiki code) {
-    background-color: var(--np--background-color--raised);
     border: none;
     margin: 0;
     padding: 0;
