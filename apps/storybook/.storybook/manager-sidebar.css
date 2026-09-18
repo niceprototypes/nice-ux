@@ -135,10 +135,23 @@
     }
   }
 
+  /* Keep a depth-2 marker in the outer gutter, so the line runs straight past a
+     folder instead of jogging inward through its contents. Two cases need it:
+
+     1. A row that is not one of the selection's peers (data-selected-group-item
+        is false) — it only renders above the selection, so it is on the line's
+        way, not on its path.
+     2. Any depth-2 row when the selection sits at depth 1. That selection's
+        immediate group is the depth-0 section, so the group's run covers the
+        whole section and sweeps every depth-2 row in every sibling folder into
+        data-selected-group-item — which is exactly what case 1 excludes. A row
+        cannot tell this from being a true peer of a depth-2 selection, since the
+        difference is the selection's own depth; manager.js publishes that as
+        data-selected-depth on the container. */
   &[data-path-depth="2"][data-selected="false"][data-selected-group-item="false"][data-nodetype="group"][data-before-selected="true"] > [tabindex] > div:first-child,
-  &[data-path-depth="2"][data-selected="false"][data-selected-group-item="false"][data-nodetype="group"][data-selected="true"] > [tabindex] > div:first-child,
   &[data-path-depth="2"][data-selected="false"][data-selected-group-item="false"][data-nodetype="document"][data-before-selected="true"] > [tabindex],
-  &[data-path-depth="2"][data-selected="false"][data-selected-group-item="false"][data-nodetype="document"][data-selected="true"] > [tabindex] {
+  .sidebar-container[data-selected-depth="1"] &[data-path-depth="2"][data-selected="false"][data-nodetype="group"] > [tabindex] > div:first-child,
+  .sidebar-container[data-selected-depth="1"] &[data-path-depth="2"][data-selected="false"][data-nodetype="document"] > [tabindex] {
     > div:first-child::after {
       transform: translate(-150%, -50%);
     }

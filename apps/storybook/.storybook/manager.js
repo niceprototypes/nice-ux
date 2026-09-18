@@ -193,6 +193,17 @@ const tagSidebarPaths = () => {
   const selectedIndex = items.findIndex(el => el.getAttribute("data-selected") === "true")
   const selectedGroupId = selectedIndex === -1 ? null : items[selectedIndex].getAttribute("data-parent-id")
 
+  // data-selected-depth: on .sidebar-container — how deep the open story sits. No
+  // row can know this, and the branch line needs it: a row DEEPER than the
+  // selection is never on the path to it, so its marker belongs in the outer
+  // gutter. Rows cannot tell that case apart on their own, because a depth-1
+  // selection makes its "group" the depth-0 section, which sweeps every depth-2
+  // row in unrelated folders into data-selected-group-item.
+  container?.setAttribute(
+    "data-selected-depth",
+    selectedIndex === -1 ? "" : String(depths[selectedIndex]),
+  )
+
   // data-selected-group: "true" on just the ancestor GROUPS on the path to the
   // selection (Components, Components/Button) — these render as selected, whereas a mere
   // before-selected sibling (Button) does not. Storybook owns data-selected on the
