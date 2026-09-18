@@ -3,56 +3,15 @@ import Flex from "nice-react-flex"
 import { getToken } from "nice-react-styles"
 import Ink from "../../nice/Ink"
 import Code from "../../nice/Code"
+import ThemedFrame from "../ThemedFrame"
 
 /** Shared iframe chrome; width/height/radius differ per desktop vs mobile. */
 const frameChrome = {
-  border: `1px solid ${getToken("borderColor")}`,
   borderRadius: getToken("borderRadius"),
   background: getToken("backgroundColor"),
 }
 const frameStyle = { ...frameChrome, width: 800, height: 600, maxWidth: getToken("contentMaxWidth") }
 const frameStyleMobile = { ...frameChrome, width: 390, height: 800 }
-
-/**
- * An `<iframe srcDoc>` whose own `<html>` mirrors the parent document's
- * `data-theme`. A srcDoc iframe is a separate document, so it never inherits the
- * `data-theme` the Storybook toggle sets on the parent root — inside it only
- * tokens.css's `@media (prefers-color-scheme)` fires, so it tracks the OS, not
- * the toggle. Copying the parent attribute in lets tokens.css's `[data-theme]`
- * rules win over the media query, so the frame follows the toggle. The reset's
- * `color-scheme: light dark` still hands native controls + scrollbars to the OS,
- * so it's pinned to a single scheme inline (inline beats the `:root` rule) to
- * match. Re-applied on mount, on toggle (a `data-theme` MutationObserver), and
- * on every (re)load.
- */
-const ThemedFrame: React.FC<React.IframeHTMLAttributes<HTMLIFrameElement>> = (props) => {
-  const ref = React.useRef<HTMLIFrameElement>(null)
-
-  const applyTheme = React.useCallback(() => {
-    const root = ref.current?.contentDocument?.documentElement
-    if (!root) return
-    const theme = document.documentElement.getAttribute("data-theme")
-    if (theme) {
-      root.setAttribute("data-theme", theme)
-      root.style.colorScheme = theme === "night" ? "dark" : "light"
-    } else {
-      root.removeAttribute("data-theme")
-      root.style.removeProperty("color-scheme")
-    }
-  }, [])
-
-  React.useEffect(() => {
-    applyTheme()
-    const observer = new MutationObserver(applyTheme)
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["data-theme"],
-    })
-    return () => observer.disconnect()
-  }, [applyTheme])
-
-  return <iframe ref={ref} {...props} onLoad={applyTheme} />
-}
 
 const htmlImport = (file: string) =>
   `<link rel="stylesheet" href="nice-styles/${file}">`
