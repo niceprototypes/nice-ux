@@ -80,7 +80,7 @@ const ThemedFrame: React.FC<ThemedFrameProps> = ({ toggleLabel = "Click to scrol
         </ThemedFrameFlex>
       ) : (
         <ThemedFrameToggle onClick={() => setScrollable(true)}>
-          <Flex gap="base">
+          <Flex gap="base" alignItems="center">
             <LockClosedIcon name="lock-down" size="larger" strokeWidth="large" color={{ name: "base", inverse: true }} />
             <LockOpenIcon name="lock-up" size="larger" strokeWidth="large" color={{ name: "base", inverse: true }} />
             <Ink size="large" color={{ name: "base", inverse: true }}>
