@@ -1,7 +1,15 @@
 import * as React from "react"
 import Icon from "nice-react-icon"
 import Ink from "../../nice/Ink"
-import { FrameDiv, FrameIframe, FrameScrollDiv, ThemedFrameButton, ThemedFrameToggle } from "./ThemedFrame.styles"
+import {
+  FrameDiv,
+  FrameIframe,
+  FrameScrollDiv,
+  LockClosedIcon,
+  LockOpenIcon,
+  ThemedFrameFlex,
+  ThemedFrameToggle,
+} from "./ThemedFrame.styles"
 import type { ThemedFrameProps } from "./ThemedFrame.types"
 import Flex from "nice-react-flex"
 
@@ -59,17 +67,22 @@ const ThemedFrame: React.FC<ThemedFrameProps> = ({ toggleLabel = "Click to scrol
         <FrameIframe ref={ref} {...props} onLoad={applyTheme} />
       </FrameScrollDiv>
       {scrollable ? (
-        <ThemedFrameButton
-          type="button"
+        <ThemedFrameFlex
+          role="button"
+          tabIndex={0}
           aria-label="Lock frame"
-          iconLeft="lock-down"
-          size="smaller"
           onClick={() => setScrollable(false)}
-        />
+          onKeyDown={event => {
+            if (event.key === "Enter" || event.key === " ") setScrollable(false)
+          }}
+        >
+          <Icon name="lock-down" size="small" />
+        </ThemedFrameFlex>
       ) : (
         <ThemedFrameToggle onClick={() => setScrollable(true)}>
-          <Flex gap="small">
-            <Icon name="lock-up" size="larger" strokeWidth="large" color={{ name: "base", inverse: true }} />
+          <Flex gap="base">
+            <LockClosedIcon name="lock-down" size="larger" strokeWidth="large" color={{ name: "base", inverse: true }} />
+            <LockOpenIcon name="lock-up" size="larger" strokeWidth="large" color={{ name: "base", inverse: true }} />
             <Ink size="large" color={{ name: "base", inverse: true }}>
               {toggleLabel}
             </Ink>

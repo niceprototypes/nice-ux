@@ -1,6 +1,7 @@
 import styled from "styled-components"
-import Button from "nice-react-button"
-import { getToken } from "nice-react-styles"
+import Flex from "nice-react-flex"
+import Icon from "nice-react-icon"
+import { getBreakpoint, getToken } from "nice-react-styles"
 
 /**
  * Positioning context for the overlay and the lock button.
@@ -17,7 +18,9 @@ export const FrameDiv = styled.div<{ $scrollable?: boolean }>`
   position: relative;
   width: fit-content;
   max-width: 100%;
-  border: 1px solid ${({ $scrollable }) => ($scrollable ? getToken("borderColor") : "transparent")};
+  border: 1px solid
+    ${({ $scrollable }) =>
+      $scrollable ? getToken("borderColor") : "transparent"};
   border-radius: ${getToken("borderRadius")};
 `
 
@@ -41,6 +44,21 @@ export const FrameIframe = styled.iframe`
 `
 
 /**
+ * The overlay's lock state: closed at rest, open on hover, so the padlock
+ * previews what clicking does rather than describing what it currently is. Both
+ * render and one is hidden — a CSS swap, so there is no hover state in React.
+ * Declared above ThemedFrameToggle because it targets them as component
+ * selectors.
+ */
+export const LockClosedIcon = styled(Icon)`
+  display: block;
+`
+
+export const LockOpenIcon = styled(Icon)`
+  display: none;
+`
+
+/**
  * Full-bleed click target over the frame. The backdrop filter blurs the demo
  * underneath, so the frame reads as inert rather than as content the reader is
  * failing to interact with, and the label sits legibly on top of it.
@@ -57,22 +75,63 @@ export const ThemedFrameToggle = styled.div`
   gap: ${getToken("gap", "smaller")};
   cursor: pointer;
   border-radius: inherit;
+
+  &:hover {
+    ${LockClosedIcon} {
+      display: none;
+    }
+
+    ${LockOpenIcon} {
+      display: block;
+    }
+  }
+
+  /* Touch has no hover, so the padlock would sit closed with no way to reach the
+     open state. Show it open below tablet instead. */
+  ${getBreakpoint("phone")} {
+    ${LockClosedIcon} {
+      display: none;
+    }
+
+    ${LockOpenIcon} {
+      display: block;
+    }
+  }
+
   backdrop-filter: blur(8px);
-  background-color: ${getToken("backgroundColor", "raised", { inverse: true, transform: [null, null, null, 0.375] })};
+  background-color: ${getToken("backgroundColor", "raised", {
+    inverse: true,
+    transform: [null, null, null, 0.375],
+  })};
 `
 
 /**
- * Locks the frame again once it is live. Sits in the top-right corner, over
- * the frame rather than beside it, so it costs no layout. Only positioning and a
- * surface are set here — Button owns its border, radius, sizing and states, and
- * renders square on its own from an icon with no children.
+ * Locks the frame again once it is live. Sits in the top-right corner, over the
+ * frame rather than beside it, so it costs no layout. A Flex rather than a
+ * Button: it is frame chrome, not a form action, and it carries only an icon.
+ * The role/tabIndex given in ThemedFrame keep it reachable by keyboard.
  */
-export const ThemedFrameButton = styled(Button)`
+export const ThemedFrameFlex = styled(Flex).attrs({
+  alignItems: "center",
+  padding: "small",
+  justifyContent: "center",
+})`
   position: absolute;
-  top: ${getToken("gap", "small")};
-  right: ${getToken("gap", "small")};
-  /* The frame shows through an unfilled Button, so it gets an opaque surface and
-     a shadow to lift it off the demo underneath. */
+  top: ${getToken("gap")};
+  right: ${getToken("gap")};
+  border: 1px solid ${getToken("borderColor")};
+  border-radius: ${getToken("borderRadius", "small")};
+  /* The frame shows through otherwise, so it gets an opaque surface and a shadow
+     to lift it off the demo underneath. */
   background-color: ${getToken("backgroundColor")};
   box-shadow: ${getToken("boxShadow")};
+  color: ${getToken("color", "light")};
+  cursor: pointer;
+  border-radius: 50%;
+
+  &:hover,
+  &:focus-visible {
+    border-color: ${getToken("borderColor", "strong")};
+    color: ${getToken("color")};
+  }
 `
