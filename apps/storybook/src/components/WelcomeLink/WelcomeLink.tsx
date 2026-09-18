@@ -33,13 +33,12 @@ const WelcomeLink: React.FC<WelcomeLinkProps> = ({
         <Icon
           name={iconName}
           size="larger"
-          vendor
-          strokeWidth="large"
           strokeScaling
         />
         <Flex
           grow={1}
           alignItems="center"
+          gap="large"
         >
           <Flex
             grow={1}
@@ -50,7 +49,7 @@ const WelcomeLink: React.FC<WelcomeLinkProps> = ({
               color="base"
               as="h3"
               size="large"
-              weight="medium"
+              weight="semibold"
             >
               {title}
             </Ink>

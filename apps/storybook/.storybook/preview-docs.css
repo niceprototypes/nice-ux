@@ -115,7 +115,12 @@
 
   code {
     font-family: var(--np--font-family--code);
-    font-size: var(--np--font-size--small);
+
+    /* `small` only where there is room. Preview CSS runs through PostCSS, so it
+       can use the @custom-media alias rather than a literal floor. */
+    @media (--np--laptop--up) {
+      font-size: var(--np--font-size--small);
+    }
   }
 
   code:not(pre.shiki code) {

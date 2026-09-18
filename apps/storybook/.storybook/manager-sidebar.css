@@ -13,7 +13,8 @@
 /* Containers */
 
 .sidebar-container {
-  padding-left: var(--np--gap--large);
+  padding: 0 var(--np--gap) 0 var(--np--gap--large);
+
   [data-radix-scroll-area-content] > div {
     gap: 0;
     padding: 0;
@@ -70,7 +71,6 @@
     > [tabindex] {
       height: var(--np--size--small);
       align-items: center;
-      font-size: var(--np--font-size--small);
       font-weight: var(--np--font-weight--medium);
       padding: 0;
       gap: var(--icon--gap);

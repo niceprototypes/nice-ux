@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { getToken } from "nice-react-styles"
+import { getBreakpoint, getToken } from "nice-react-styles"
 
 export const SettingsAnchor = styled.div`
   display: inline-flex;
@@ -40,7 +40,6 @@ export const SettingsItem = styled.button`
   cursor: pointer;
   color: ${getToken("color", "light")};
   font-family: ${getToken("fontFamily")};
-  font-size: ${getToken("fontSize", "small")};
   line-height: 1.4;
 
   &:hover {
@@ -51,7 +50,15 @@ export const SettingsItem = styled.button`
   kbd {
     flex-shrink: 0;
     font-family: ${getToken("fontFamily", "code")};
-    font-size: ${getToken("fontSize", "smaller")};
+    font-size: ${getToken("fontSize", "small")};
     color: ${getToken("color", "lighter")};
+  }
+
+  ${getBreakpoint("laptop+")} {
+    font-size: ${getToken("fontSize", "small")};
+
+    kbd {
+      font-size: ${getToken("fontSize", "smaller")};
+    }
   }
 `

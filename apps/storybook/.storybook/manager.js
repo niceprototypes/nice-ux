@@ -2,7 +2,7 @@
 import { addons } from "storybook/manager-api"
 import { create } from "storybook/theming"
 import { DARK_MODE_EVENT_NAME } from "storybook-dark-mode"
-import { applyTheme } from "nice-styles"
+import { applyTheme, getBreakpoint } from "nice-styles"
 import { getIconEncoded } from "nice-icons/get-icon-encoded"
 import {
   TOGGLE_NAV_EVENT,
@@ -64,6 +64,7 @@ if (titleEl) new MutationObserver(applyTitlePrefix).observe(titleEl, { childList
 applyTitlePrefix()
 
 const folderIcon = getIconEncoded("folder-closed")
+const closeIcon = getIconEncoded("x")
 const middleBranchIcon = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDMyIDMyIj4KICA8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMzAuNi4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogMi4xLjQgQnVpbGQgMTA5KSAgLS0+CiAgPGRlZnM+CiAgICA8c3R5bGU+CiAgICAgIC5zdDAsIC5zdDEgewogICAgICAgIGZpbGw6IG5vbmU7CiAgICAgICAgc3Ryb2tlOiAjMDAwOwogICAgICAgIHN0cm9rZS1taXRlcmxpbWl0OiAxMDsKICAgICAgICBzdHJva2Utd2lkdGg6IDEuNXB4OwogICAgICB9CgogICAgICAuc3QxIHsKICAgICAgICBzdHJva2UtbGluZWNhcDogcm91bmQ7CiAgICAgIH0KICAgIDwvc3R5bGU+CiAgPC9kZWZzPgogIDxsaW5lIGNsYXNzPSJzdDAiIHgxPSIxNiIgeTE9IjMyIiB4Mj0iMTYiLz4KICA8bGluZSBjbGFzcz0ic3QxIiB4MT0iMTYiIHkxPSIxNiIgeDI9IjMxIiB5Mj0iMTYiLz4KPC9zdmc+"
 const lastBranchIcon = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDMyIDMyIj4KICA8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMzAuNi4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogMi4xLjQgQnVpbGQgMTA5KSAgLS0+CiAgPGRlZnM+CiAgICA8c3R5bGU+CiAgICAgIC5zdDAgewogICAgICAgIGZpbGw6IG5vbmU7CiAgICAgICAgc3Ryb2tlOiAjMDAwOwogICAgICAgIHN0cm9rZS1saW5lY2FwOiByb3VuZDsKICAgICAgICBzdHJva2UtbWl0ZXJsaW1pdDogMTA7CiAgICAgICAgc3Ryb2tlLXdpZHRoOiAxLjVweDsKICAgICAgfQogICAgPC9zdHlsZT4KICA8L2RlZnM+CiAgPHBvbHlsaW5lIGNsYXNzPSJzdDAiIHBvaW50cz0iMTYgMCAxNiAxNiAzMSAxNiIvPgo8L3N2Zz4="
 const outerBranchIcon = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDMyIDMyIj4KICA8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMzAuNi4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogMi4xLjQgQnVpbGQgMTA5KSAgLS0+CiAgPGRlZnM+CiAgICA8c3R5bGU+CiAgICAgIC5zdDAgewogICAgICAgIGZpbGw6IG5vbmU7CiAgICAgICAgc3Ryb2tlOiAjMDAwOwogICAgICAgIHN0cm9rZS1taXRlcmxpbWl0OiAxMDsKICAgICAgICBzdHJva2Utd2lkdGg6IDEuNXB4OwogICAgICB9CiAgICA8L3N0eWxlPgogIDwvZGVmcz4KICA8bGluZSBjbGFzcz0ic3QwIiB4MT0iMTYiIHgyPSIxNiIgeTI9IjMyIi8+Cjwvc3ZnPg=="
@@ -127,6 +128,46 @@ sidebarGlyphStyle.textContent = `
         -webkit-mask-image: url("${folderIcon}");
         mask-image: url("${folderIcon}");
       }
+    }
+  }
+
+  button[aria-label="Close menu"] {
+    width: var(--np--size);
+    height: var(--np--size);
+
+    > svg {
+      width: var(--np--icon--size--large);
+      height: var(--np--icon--size--large);
+      -webkit-mask-image: url("${closeIcon}");
+      mask-image: url("${closeIcon}");
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      mask-position: center;
+      -webkit-mask-size: contain;
+      mask-size: contain;
+      background-color: currentColor;
+
+      > * {
+        display: none;
+      }
+    }
+  }
+
+  ${getBreakpoint("laptop+")} {
+    .sidebar-container {
+      padding-right: 0;
+    }
+
+    .sidebar-item[data-nodetype="group"] > [tabindex],
+    .sidebar-item[data-nodetype="document"] > [tabindex] {
+      font-size: var(--np--font-size--small);
+    }
+  }
+
+  ${getBreakpoint("phone")} {
+    a[aria-label="About Storybook"] {
+      display: none;
     }
   }
 `
@@ -347,6 +388,11 @@ addons.register("nice/story-navigation", (api) => {
     "prev-story": () => api.jumpToStory(-1),
     "next-story": () => api.jumpToStory(1),
     "collapse-all": () => api.collapseAll(),
+    // No api call opens the mobile menu — its state lives in the mobile layout
+    // context — so click the bar's own button. Keyed on aria-controls rather than
+    // the label, which is prose and could be reworded.
+    "toggle-mobile-menu": () =>
+      document.querySelector('[aria-controls="storybook-mobile-menu"]')?.click(),
   }
   channel.on(NAV_ACTION_EVENT, (action) => ACTIONS[action]?.())
 })

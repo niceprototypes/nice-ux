@@ -26,6 +26,9 @@ export const OPEN_IN_EDITOR_EVENT = "nice/story-navigation/open-in-editor"
  * and the manager addon maps it to the matching manager `api` call
  * (toggleToolbar, togglePanel, jumpToStory/Component, collapseAll,
  * changeSettingsTab). See `.storybook/manager.js`.
+ *
+ * `toggle-mobile-menu` is the exception: Storybook exposes no api call for the
+ * mobile menu, so the manager clicks its own bar button instead.
  */
 export const NAV_ACTION_EVENT = "nice/story-navigation/action"
 
@@ -40,3 +43,4 @@ export type NavAction =
   | "prev-story"
   | "next-story"
   | "collapse-all"
+  | "toggle-mobile-menu"
