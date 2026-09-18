@@ -1,6 +1,7 @@
 import * as React from "react"
-import Flex from "nice-react-flex"
 import { getToken } from "nice-react-styles"
+import type { FlexAlignItemsType, FlexJustifyContentType } from "nice-react-flex"
+import { CellFlex } from "./PreviewCell.styles"
 
 export interface PreviewCellProps {
   /** Fill color — any CSS color / token value. Omit for no fill. */
@@ -17,6 +18,10 @@ export interface PreviewCellProps {
   width?: string
   /** Stretch to fill the cell's width. @default true */
   grow?: boolean
+  /** Cross-axis alignment of the cell's content (the cell is a row flex). */
+  alignItems?: FlexAlignItemsType
+  /** Main-axis alignment of the cell's content — the horizontal one. */
+  justifyContent?: FlexJustifyContentType
   /** Demo content laid out inside the cell (e.g. a boxShadow surface). */
   children?: React.ReactNode
   /** Escape hatch for one-off style overrides. */
@@ -40,22 +45,25 @@ const PreviewCell = ({
   height,
   width,
   grow = true,
+  alignItems,
+  justifyContent,
   children,
   style,
 }: PreviewCellProps) => (
-  <Flex
+  <CellFlex
     grow={grow ? 1 : undefined}
-    style={{
-      backgroundColor,
-      height,
-      width,
-      border: borderColor ? `${borderWidth} solid ${borderColor}` : undefined,
-      borderRadius,
-      ...style,
-    }}
+    alignItems={alignItems}
+    justifyContent={justifyContent}
+    $backgroundColor={backgroundColor}
+    $borderColor={borderColor}
+    $borderWidth={borderWidth}
+    $borderRadius={borderRadius}
+    $height={height}
+    $width={width}
+    style={style}
   >
     {children}
-  </Flex>
+  </CellFlex>
 )
 
 export default PreviewCell

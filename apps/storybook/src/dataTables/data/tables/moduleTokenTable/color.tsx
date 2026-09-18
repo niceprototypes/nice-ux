@@ -1,8 +1,7 @@
 import { getToken } from "nice-react-styles"
-import Ink from "../../../../nice/Ink"
 import PreviewCell from "../../../../components/PreviewCell"
 import ThemeSplit from "../../../../components/ThemeSplit"
-import { demoFont } from "../../constants"
+import { ColorSample } from "../../styles"
 import type { TokenTable } from "./types"
 
 export const color = {
@@ -14,30 +13,23 @@ export const color = {
     </>
   ),
   variants: ["lightest", "lighter", "light", "base", "disabled", "link", "success", "highlight", "warning", "error"],
-  // Each token's name, rendered in the demo font and the token's own color, so
-  // the name reads in the color while demonstrating the custom fontFamily. The
-  // color comes from the color *module* (via getToken) applied as an inline
-  // style — not Ink's `color` prop, which resolves through the ink
-  // component tokens and would throw on module-only variants like `highlight`.
-  //
-  // Split day | night, both pinned. Text colour alone is not enough: a
-  // night-pinned colour on a day-lit cell is near-white on near-white, so each
-  // half carries its own pinned surface behind the sample.
+  // One swatch, rendered under both themes by ThemeSplit. The reads are
+  // unpinned: each half is a real nested theme, so the cascade resolves them.
+  // The surface is pinned alongside the sample because a colour alone is not
+  // legible — night text on a day-lit cell is near-white on near-white.
   preview: (variant) => (
-    <ThemeSplit
-      render={theme => (
-        <PreviewCell
-          backgroundColor={getToken("backgroundColor", "base", { theme })}
-          borderColor={getToken("borderColor", "base", { theme })}
-          height={getToken("size", "large")}
-          borderRadius={getToken("borderRadius", "small")}
-          style={{ alignItems: "center", justifyContent: "center" }}
-        >
-          <Ink style={{ color: getToken("color", variant, { theme }), fontFamily: demoFont }}>
-            {variant.charAt(0).toUpperCase() + variant.slice(1)}
-          </Ink>
-        </PreviewCell>
-      )}
-    />
+    <ThemeSplit>
+      <PreviewCell
+        backgroundColor={getToken("backgroundColor", "base")}
+        height={getToken("size", "large")}
+        borderRadius={getToken("borderRadius", "small")}
+        alignItems="center"
+        justifyContent="flex-start"
+      >
+        <ColorSample size="large" $color={getToken("color", variant)}>
+          {variant.charAt(0).toUpperCase() + variant.slice(1)}
+        </ColorSample>
+      </PreviewCell>
+    </ThemeSplit>
   ),
 } satisfies TokenTable

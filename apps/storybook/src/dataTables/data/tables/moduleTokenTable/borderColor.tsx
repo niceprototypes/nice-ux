@@ -7,17 +7,15 @@ export const borderColor = {
   name: "borderColor",
   description: "Stroke color tokens for outlines and dividers. subtle recedes into the surface, strong and stronger advance from it, and the semantic statuses (success, highlight, warning, error, link) are tuned to stand out against their backgroundColor fills.",
   variants: ["base", "subtle", "strong", "stronger", "success", "highlight", "warning", "error", "link"],
-  // Split day | night, both pinned. The fill is pinned too, so each stroke is
-  // judged against the surface it actually sits on in that theme.
+  // The stroke colour shown as a fill, so it reads directly rather than as a
+  // hairline. One swatch under both themes; the cascade resolves each half.
   preview: (variant) => (
-    <ThemeSplit
-      render={theme => (
-        <PreviewCell
-          backgroundColor={getToken("backgroundColor", "base", { theme })}
-          borderColor={getToken("borderColor", variant, { theme })}
-          height={getToken("size", "large")}
-        />
-      )}
-    />
+    <ThemeSplit>
+      <PreviewCell
+        backgroundColor={getToken("borderColor", variant)}
+        height={getToken("size", "large")}
+        borderRadius={getToken("borderRadius", "small")}
+      />
+    </ThemeSplit>
   ),
 } satisfies TokenTable

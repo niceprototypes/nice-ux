@@ -14,4 +14,4 @@ export const TOKEN_COLUMNS: DataColumn[] = [
 ]
 
 /** Fixed widths, index-aligned to {@link TOKEN_COLUMNS}; `null` leaves a column equal-flex. */
-export const TOKEN_COLUMN_WIDTHS: (string | null)[] = ["12em", "8em", "20em", null, null]
+export const TOKEN_COLUMN_WIDTHS: (string | null)[] = ["24em", "8em", "20em", null, null]

@@ -1,7 +1,8 @@
 import styled, { keyframes } from "styled-components"
 import { getToken } from "nice-react-styles"
 import Flex from "nice-react-flex"
-import { DOT_SIZE } from "./constants"
+import Ink from "../../nice/Ink"
+import { DOT_SIZE, demoFont } from "./constants"
 
 // ─── animationDuration ────────────────────────────────────────────────────────
 
@@ -54,4 +55,18 @@ export const EasingPath = styled.path`
   stroke-linecap: round;
   stroke-width: 2px;
   vector-effect: non-scaling-stroke;
+`
+
+// ─── color ────────────────────────────────────────────────────────────────────
+
+// The sample inside a colour row's split cell: the variant name set in the demo
+// font and painted with the token itself. The colour comes from the colour
+// *module* rather than Ink's `color` prop, which resolves through the ink
+// component tokens and would throw on module-only variants like `highlight`.
+//
+// Font smoothing is handled by the cell (`PreviewCell`'s `night` prop), since it
+// is inherited and applies to anything a night cell contains.
+export const ColorSample = styled(Ink)<{ $color: string }>`
+  color: ${({ $color }) => $color};
+  font-family: ${demoFont};
 `
