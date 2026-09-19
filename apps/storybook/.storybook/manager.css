@@ -1,6 +1,4 @@
+/* The Nice token + reset sheets the manager chrome reads. The sidebar, chrome
+   reset and background styling are injected by nice-storybook-theme. */
 @import "nice-styles/tokens.css";
 @import "nice-styles/reset.css";
-
-@import "manager-reset.css";
-@import "manager-background.css";
-@import "manager-sidebar.css";

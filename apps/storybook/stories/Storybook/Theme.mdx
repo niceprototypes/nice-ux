@@ -1,0 +1,65 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import HorizontalRule from "../../src/components/HorizontalRule"
+import Install from "../../src/components/Install"
+
+<Meta
+  title="Storybook/Theme"
+  name="Docs"
+/>
+
+<StoryHeader
+  title="Theme"
+  description="Restyles Storybook's manager sidebar with Nice tokens — folder and branch-connector glyphs, depth- and selection-aware tree lines, collapsible sections, and a hidden search."
+  repos={[
+    { name: "nice-storybook-theme", url: "https://github.com/niceprototypes/nice-storybook-theme", license: "MIT" },
+  ]}
+/>
+
+<Install package="storybook-theme" dev />
+
+<HorizontalRule />
+
+### Setup
+
+```ts
+// .storybook/main.ts
+const config = {
+  addons: [
+    "storybook-dark-mode",
+    "nice-storybook-theme",
+  ],
+}
+
+export default config
+```
+
+Peers: `storybook` ≥ 10 and `storybook-dark-mode` ≥ 5. The manager must already
+expose the Nice `--np--*` custom properties — the addon styles the tree with
+them but does not inject the token sheet itself, so the theme and branding stay
+yours.
+
+### What it draws
+
+The tree's connector lines and folder glyphs are masked SVGs painted with token
+colors, so they flip with day / night rather than shipping two icon sets. Lines
+are aware of both depth and selection: a branch on the path to the open story
+reads as active, and one merely above it does not.
+
+### How it knows the shape
+
+CSS cannot see tree structure — the sidebar is a flat list of rows, each naming
+its parent. `tagSidebarPaths` walks that list and stamps derived attributes on
+every row: its depth, whether it ends a branch, whether it is an ancestor of the
+selection, and whether it sits inside the selection's group. The stylesheet then
+selects on those attributes.
+
+It re-runs on tree re-renders and on selection changes, and its own writes are
+outside the observed attribute set, so it does not retrigger itself.
+
+### Caveat
+
+The styling depends on Storybook's **private** sidebar DOM — `.sidebar-item`,
+`data-nodetype`, and the element shapes inside each row — verified against
+Storybook 10. A Storybook internal change can require an update here, which is
+the trade for restyling a surface Storybook does not expose.

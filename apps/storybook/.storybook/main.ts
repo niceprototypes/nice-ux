@@ -72,6 +72,9 @@ const config: StorybookConfig = {
       },
     },
     "storybook-dark-mode",
+    // Both load their own manager (and, for navigation, preview) entries.
+    "nice-storybook-navigation",
+    "nice-storybook-theme",
   ],
   staticDirs: ["../public"],
   core: {

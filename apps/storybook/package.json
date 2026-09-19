@@ -38,6 +38,8 @@
     "nice-react-styles": "file:../react-styles",
     "nice-react-tile": "file:../react-tile",
     "nice-react-tooltip": "file:../react-tooltip",
+    "nice-storybook-navigation": "file:../storybook-navigation",
+    "nice-storybook-theme": "file:../storybook-theme",
     "nice-styles": "file:../styles",
     "nice-toolkit": "file:../toolkit",
     "nice-vite-watcher": "file:../vite-watcher",

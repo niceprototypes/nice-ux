@@ -1,20 +1,14 @@
-export interface StoryNavigationItem {
-  /** Story id to navigate to (the `--docs` id from the page's Meta title). */
-  id: string
-  /** Short label shown after "Go back to" / "Continue to". */
-  label: string
-}
+import type { StoryNavigationSequence } from "nice-storybook-navigation"
 
 /**
- * Ordered navigable sequences. StoryNavigation finds the current page in one of
- * these and renders back/next buttons to its neighbours. A page that isn't in
- * any sequence renders no nav. Add more sequences here as needed.
+ * Ordered navigable sequences for the navigation bar. The addon ships none —
+ * the ids are this project's own story ids — so they are supplied through the
+ * `storyNavigation` parameter in `preview.tsx`.
  *
- * Keep each sequence in sidebar order (mirror `.storybook/preview.tsx`
- * `storySort`). The `id`s use the `·`-preserving slug Storybook generates from
- * the page's `<Meta title>` (e.g. "Basics/Tokens").
+ * Keep each sequence in sidebar order (mirror `preview.tsx` `storySort`). The
+ * ids use the slug Storybook generates from each page's `<Meta title>`.
  */
-export const sequences: StoryNavigationItem[][] = [
+export const storyNavigationSequences: StoryNavigationSequence[] = [
   // Basics — the guided tutorial flow, continuing into the Scenarios
   // section (the culminating easy/medium/hard examples).
   [
