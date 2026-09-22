@@ -15,7 +15,10 @@ import { getToken } from "nice-styles"
  */
 interface NewsSection {
   title: string
-  /** Publish time (ms since epoch); rendered as a relative "X ago" stamp under the title. */
+  /**
+   * When the item was actually added (a fixed real date, ms since epoch) — not an
+   * offset from now, so the "X ago" stamp below the title grows as time passes.
+   */
   date: number
   items: React.ReactNode[]
 }
@@ -27,6 +30,7 @@ const DAY_MS = 24 * HOUR_MS
 function timeAgo(timestamp: number): string {
   const elapsed = Date.now() - timestamp
   const hours = Math.round(elapsed / HOUR_MS)
+  if (hours < 1) return "just now"
   if (hours < 24) return `${hours} hour${hours === 1 ? "" : "s"} ago`
   const days = Math.round(elapsed / DAY_MS)
   return `${days} day${days === 1 ? "" : "s"} ago`
@@ -34,8 +38,20 @@ function timeAgo(timestamp: number): string {
 
 const SECTIONS: NewsSection[] = [
   {
+    title: "Manifest is now public and ready for teams to use",
+    // Added 2026-09-22 — the manifest published for public use.
+    date: new Date("2026-09-22T18:41:00-04:00").getTime(),
+    items: [
+      "One shared rulebook every AI assistant follows. Work stays consistent, no guessing.",
+      "Predictable, repeatable results across the product. Less backtracking, fewer surprises.",
+      "Onboard teammates and agents. Get up to speed quickly with minimal effort.",
+      "Accessible and readable. Partners, managers, and new hires can get informed quick.",
+    ],
+  },
+  {
     title: "You can now have agents tune your colors quickly and safely",
-    date: Date.now() - 11 * HOUR_MS,
+    // Added 2026-09-16 in 994b2cc ("add colors section").
+    date: new Date("2026-09-16T17:48:00-04:00").getTime(),
     items: [
       <>
         Any color prop takes a token name or a{" "}
@@ -55,9 +71,12 @@ const SECTIONS: NewsSection[] = [
       "AI may now tweak semantic HSLA-based color tokens, instead of inventing new hex colors (always valid, type-checked and theme-correct)",
     ],
   },
+  /*
+   * Commented out 2026-09-22 — the earliest item, rolled off as newer news was added above.
   {
     title: "Agents can now access every token and breakpoint from one place",
-    date: Date.now() - 3 * DAY_MS,
+    // The panel's original item, added 2026-09-16 in 07ec01c.
+    date: new Date("2026-09-16T17:33:00-04:00").getTime(),
     items: [
       "Color, spacing, type, component, theme and responsive all in one getter",
       <>
@@ -77,6 +96,7 @@ const SECTIONS: NewsSection[] = [
       "Changing a breakpoint updates every media query at once (JS and CSS stay synced)",
     ],
   },
+  */
 ]
 
 const OuterFlex = styled(Flex).attrs({
