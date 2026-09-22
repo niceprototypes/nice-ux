@@ -54,7 +54,7 @@ export const StyledInput = styled.input.withConfig({
     height: ${getToken(`input.size:${$size}`)};
     padding: 0 ${getToken(`input.spacing:${$size}`)};
     font-weight: ${getToken("fontWeight", "base")};
-    background-color: ${getToken("backgroundColor", $filled ? "dark" : "base")};
+    background-color: ${getToken("backgroundColor", $filled ? "raised" : "base")};
     color: ${getToken("color", $disabled ? "disabled" : "base")};
     border-style: solid;
     border-width: ${getToken(`input.borderWidth:${$borderWidth}`)};

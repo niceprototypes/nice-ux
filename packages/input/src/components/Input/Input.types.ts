@@ -33,7 +33,7 @@ export type InputStatusType = "base" | "disabled" | "error" | "success" | "warni
 /**
  * InputFilledType
  *
- * Whether the input renders filled. When true, the input sits on the dark
+ * Whether the input renders filled. When true, the input sits on the raised
  * background variant with no border (status-colored border for error / success /
  * warning); when false (default) it is an outline on the base background.
  */
