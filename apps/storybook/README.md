@@ -40,8 +40,8 @@ This Storybook documents the following packages:
 
 ### Utilities
 
-- **nice-css-variables** - CSS design tokens
-- **nice-toolkit** - Workspace CLI for linking, scaffolding, dev/watch, and orchestrated publishing of nice-\* packages
+- **nice-styles** - CSS design tokens
+- **nice-toolkit** - CLI for linking, scaffolding, dev/watch, and orchestrated publishing of nice-\* packages
 
 ## 📖 Documentation Structure
 
