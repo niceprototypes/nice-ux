@@ -1,11 +1,12 @@
 import * as React from "react"
 import Button from "nice-react-button"
+import styled from "styled-components"
 import Icon from "nice-react-icon"
 import Input from "nice-react-input"
 import Image from "nice-react-image"
 import Tile from "nice-react-tile"
 import Ink from "../../../../nice/Ink"
-import { getToken } from "nice-react-styles"
+import { getToken, type SizeType } from "nice-react-styles"
 import OverrideExample from "../../../../components/OverrideExample"
 import type { ComponentPrefixWithTokens, ExampleConfig, OverrideConfig } from "./Components.types"
 
@@ -82,6 +83,12 @@ const OVERRIDES: Partial<Record<ComponentPrefixWithTokens, OverrideConfig>> = {
   },
 }
 
+/** Button pinned to a fixed width so the `status` column reads as a uniform swatch
+ * set, not ragged label-width buttons. Button has no width prop, so it's set here. */
+const StatusButton = styled(Button)`
+  width: 10em;
+`
+
 /**
  * The example cell for one component-token row: a minimal component instance with
  * only the row's token varied. Dedicated-prop tokens vary via their prop;
@@ -94,6 +101,21 @@ export function componentExample(
 ): React.ReactNode | null {
   const variant = path[1]
   if (variant === undefined) return null
+
+  // Button's `icon.size` rows have no scalar prop: demo each with an icon-only
+  // button — a plus glyph in a square (isSquare: one icon, no label) button,
+  // `borderRadius="rounded"` giving a 1:1 circle with the glyph centered — sized
+  // by the button `size`, so the column reads as an increasing-size progression.
+  // Only `icon.size` (not `icon.color`, a different axis) gets the demo.
+  if (prefix === "button" && path[0] === "icon" && path[1] === "size") {
+    return <Button iconLeft="plus" borderRadius="rounded" size={path[2] as SizeType} />
+  }
+
+  // Button `status` rows render at a fixed 10em width (via styled(Button), no
+  // width prop) so the status column is a uniform set. path[1] is the status type.
+  if (prefix === "button" && path[0] === "status") {
+    return <StatusButton status={path[1] as any}>Button</StatusButton>
+  }
 
   const config = CONFIGS[prefix]
 

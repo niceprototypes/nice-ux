@@ -55,14 +55,37 @@ const groupStatusByType = (rows: ComponentTokenRow[]): Map<string, ComponentToke
  * (e.g. `primary.base`) since the property type heads the sub-table.
  */
 export const buildGroupTable = (prefix: ComponentPrefixWithTokens, group: ComponentTokenGroup): DataTableConfig => {
-  if (group.name !== "status") {
-    return { name: group.name, rows: group.rows.map((row) => rowCells(prefix, row.variant, row)) }
+  if (group.name === "status") {
+    return {
+      name: "status",
+      tables: Array.from(groupStatusByType(group.rows), ([type, rows]) => ({
+        name: type,
+        rows: rows.map((row) => rowCells(prefix, `${row.path[1]}.${row.path[row.path.length - 1]}`, row)),
+      })),
+    }
   }
-  return {
-    name: "status",
-    tables: Array.from(groupStatusByType(group.rows), ([type, rows]) => ({
-      name: type,
-      rows: rows.map((row) => rowCells(prefix, `${row.path[1]}.${row.path[row.path.length - 1]}`, row)),
-    })),
+
+  // A group whose children are themselves subgroups (e.g. `icon` → color, size)
+  // splits into one sub-table per subgroup — detected by a leaf carrying a
+  // subgroup segment (path deeper than `[group, variant]`). Otherwise the flat
+  // group mixes unrelated axes in one list and shows a `base` default per
+  // subgroup; splitting gives each subgroup its own single default, like every
+  // other group. Rows are named by the remaining segments, since the subgroup
+  // heads the sub-table.
+  if (group.rows.some((row) => row.path.length > 2)) {
+    const bySubgroup = new Map<string, ComponentTokenRow[]>()
+    for (const row of group.rows) {
+      const sub = row.path[1]
+      bySubgroup.set(sub, [...(bySubgroup.get(sub) ?? []), row])
+    }
+    return {
+      name: group.name,
+      tables: Array.from(bySubgroup, ([sub, rows]) => ({
+        name: sub,
+        rows: rows.map((row) => rowCells(prefix, row.path.slice(2).join(" / "), row)),
+      })),
+    }
   }
+
+  return { name: group.name, rows: group.rows.map((row) => rowCells(prefix, row.variant, row)) }
 }
