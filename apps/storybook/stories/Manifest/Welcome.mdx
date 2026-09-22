@@ -19,7 +19,7 @@ import NewLines from "../../src/components/NewLines"
   ]}
 />
 
-The **Nice Manifest** lives beside the code at `~/nice/manifest`. Every pattern, convention, and piece of logic an AI instance needs to work on a `nice-*` package is documented there — if it is not in the manifest, an AI instance will not know it exists.
+The **Nice Manifest** is its own repository, cloned alongside the packages it documents. Every pattern, convention, and piece of logic an AI instance needs to work on any `nice-*` package is documented there — if it is not in the manifest, an AI instance will not know it exists.
 
 <HorizontalRule />
 
@@ -100,8 +100,10 @@ The manifest is organized by phase of work. `discipline/` is the always-on Core;
 
 ## Principles
 
-**The token system is the origin pattern.** The token generation system in `nice-styles` — token JSON to generated data, types, and CSS, to runtime getters and setters — is where the ecosystem starts. Every other package builds on it. A package that cannot reach logic it needs through the token system is a showstopper: stop, report the gap, fix the token system first.
+**Decentralized by design.** Every `nice-*` package is its own repository, versioned, published, and consumable on its own. There is no monorepo and no single codebase — a package depends on its foundations through npm like any other consumer would. Work is scoped to one repository at a time, and a change that appears to need edits across several is a signal to look at the dependency boundary between them.
 
-**Alignment.** The `nice-*` packages are one system that publishes under separate names for distribution only. Anything shared — TypeScript version, build config, lint rules — belongs in a foundation package, used by every consumer at the same version. Divergence is a defect to fix.
+**The token system is the origin pattern.** The token generation system in `nice-styles` — token JSON to generated data, types, and CSS, to runtime getters and setters — is the foundation the rest depend on. A package that cannot reach logic it needs through the token system is a showstopper: stop, report the gap, fix the token system first.
+
+**Alignment.** Independence is structural; consistency is deliberate. Anything shared — TypeScript version, build config, lint rules — belongs in a foundation package, consumed by every repository at the same version rather than copied into each. Divergence is a defect to fix.
 
 <Callout type="hint">Artifacts have fixed homes: an audit report goes to `manifest/.reports/audit/{slug}.md`, a research report to `manifest/.reports/research/{slug}.md`, and a per-package change record to that package's `.nice/bump.md`.</Callout>
