@@ -1,0 +1,27 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import Callout from "../../src/components/Callout"
+
+<Meta
+  title="Manifest/Discipline"
+  name="Docs"
+/>
+
+<StoryHeader
+  title="Discipline"
+  description="Behavioral rules for AI instances working in the ecosystem — the meta-rules that govern how any work is done, in any phase."
+/>
+
+These are not phase-of-work guides like Read or Edit. They are the always-on **Core**: loaded on every "read the manifest" and applied to all work, always. When a rule in another folder conflicts with a rule here, the discipline rule wins.
+
+| File | Contents |
+|------|----------|
+| `responsiveness.md` | Never go unresponsive. No foreground subagents (`run_in_background: true` always); don't delegate small/mechanical work; emit progress every ~3 tool calls; match effort to task size. |
+| `grounding.md` | Never present a guess as fact. Verify before claiming; tag every factual claim `[verified]` / `[inferred]` / `[guess]`; never invent a typed or enumerated value (read the registry). |
+| `refactor-safety.md` | Every save must compile — both directions. **Adding:** define the referent fully before any consumer references it. **Removing:** delete every reference before the import or definition. State the edit order before the first edit. The manifest's most-violated rule. |
+| `offboarding.md` | Before finishing a unit of work, reconcile every new discrepancy your change opened between the manifest and the project. The per-change, self-reviewed subset of the audit. |
+| `scope.md` | Do exactly what was asked. No unrequested rewrites, abstractions, extra components, or adjacent "improvements". An incidental mention is context, not a request. |
+| `communication.md` | No sycophancy, fake-human tone, lecturing, or unsolicited caveats and next-steps. Announce long or hanging ops. Match answer length to the question. |
+| `stale-first.md` | Before investigating "broken" code, rule out stale state — browser tab, dev server, un-rebuilt package — especially right after your own rename. The biggest token sink. |
+
+<Callout type="learning">Discipline cuts across every phase (read, edit, build, publish). It is loaded first and applied always, which is why it lives outside the phase folders and outranks them on conflict.</Callout>

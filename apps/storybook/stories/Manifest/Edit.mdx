@@ -1,0 +1,26 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import Callout from "../../src/components/Callout"
+
+<Meta
+  title="Manifest/Edit"
+  name="Docs"
+/>
+
+<StoryHeader
+  title="Edit"
+  description="Standards for creating new assets in the Nice ecosystem."
+/>
+
+Files here are topic references: load the one your task or the root index points to. Before editing any package, read every source file in it and trace the import chain from the entry point — duplicate and dead files exist, and editing the wrong copy fails silently.
+
+| File | Contents |
+|------|----------|
+| `component.md` | Component package structure, types, tokens. |
+| `comments.md` | Inline code comment standards for AI readability. |
+| `generators.md` | Generators and emitters: pipeline shape, structure rules, documentation standard, `node:test` snapshot tests. |
+| `storybook.md` | Story file patterns for nice-storybook. |
+| `session-log.md` | **Deprecated.** Session logs are now per-package `.nice/bump.md` files; this file records what moved and keeps the mistake-reporting format. |
+| build config | **Moved** to its single-home topic — `topics/build-config.md` (config packages, rollup/tsconfig/jest standards, deviation audit). |
+
+<Callout type="learning">The services folder of a package holds functions available to any consumer; the utilities folder holds functions meant for internal use only.</Callout>

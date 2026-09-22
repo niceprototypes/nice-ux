@@ -11,11 +11,13 @@ const WelcomeLink: React.FC<WelcomeLinkProps> = ({
   iconName,
   title,
   children,
+  stripped,
 }) => {
   const go = () => navigate({ storyId })
 
   return (
     <WelcomeLinkDiv
+      $stripped={stripped}
       role="link"
       tabIndex={0}
       onClick={go}
@@ -27,8 +29,8 @@ const WelcomeLink: React.FC<WelcomeLinkProps> = ({
       }}
     >
       <Flex
-        gap="large"
-        padding="large"
+        gap={stripped ? "base" : "large"}
+        padding={stripped ? "none" : "large"}
       >
         <Icon
           name={iconName}

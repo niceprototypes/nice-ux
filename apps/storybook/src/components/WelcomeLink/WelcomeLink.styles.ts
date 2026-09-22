@@ -16,12 +16,12 @@ export const ArrowIcon = styled(Icon)`
   }
 `
 
-export const WelcomeLinkDiv = styled.div`
+export const WelcomeLinkDiv = styled.div<{ $stripped?: boolean }>`
   display: block;
   cursor: pointer;
-  border: 1px solid ${getToken("borderColor")};
+  border: ${({ $stripped }) => ($stripped ? "0" : `1px solid ${getToken("borderColor")}`)};
   border-radius: ${getToken("borderRadius")};
-  box-shadow: ${getToken("boxShadow")};
+  box-shadow: ${({ $stripped }) => ($stripped ? "none" : getToken("boxShadow"))};
   max-width: ${getToken("contentMaxWidth")};
 
   h3 {
@@ -29,7 +29,7 @@ export const WelcomeLinkDiv = styled.div`
   }
 
   &:hover {
-    border: 1px solid ${getToken("color", "link")};
+    border: ${({ $stripped }) => ($stripped ? "0" : `1px solid ${getToken("color", "link")}`)};
     color: ${getToken("color", "link")};
     
     h3, span {

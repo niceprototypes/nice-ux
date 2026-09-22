@@ -1,0 +1,107 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import Flex from "nice-react-flex"
+import { StoryHeader } from "../../src/components/Story"
+import Callout from "../../src/components/Callout"
+import WelcomeLink from "../../src/components/WelcomeLink"
+import HorizontalRule from "../../src/components/HorizontalRule"
+import NewLines from "../../src/components/NewLines"
+
+<Meta
+  title="Manifest/Welcome"
+  name="Docs"
+/>
+
+<StoryHeader
+  title="Manifest"
+  description="The context manifest for AI assistants working on the Nice ecosystem."
+  repos={[
+    { name: "nice-manifest", url: "https://github.com/niceprototypes/nice-manifest", license: "MIT" },
+  ]}
+/>
+
+The **Nice Manifest** lives beside the code at `~/nice/manifest`. Every pattern, convention, and piece of logic an AI instance needs to work on a `nice-*` package is documented there — if it is not in the manifest, an AI instance will not know it exists.
+
+<HorizontalRule />
+
+## Load model
+
+"Read the manifest" does not mean read all 40+ files. It loads the always-on **Core**, then lazy-loads a topic body only when the task touches it.
+
+| Layer | Loads | When |
+| --- | --- | --- |
+| **Core** | all of `discipline/` + the root `README.md` index | always |
+| **Topics** | the `read/` `edit/` `build/` `publish/` `topics/` files | on demand |
+
+<Callout type="learning">An agent cannot load a topic it does not know exists. The root README's File Tree names every file and its purpose, so the right doc is always discoverable from the Core.</Callout>
+
+<HorizontalRule />
+
+## The folders
+
+The manifest is organized by phase of work. `discipline/` is the always-on Core; the rest load when the task points to them.
+
+<NewLines />
+
+<Flex
+  direction="column"
+  gap="larger"
+>
+  <WelcomeLink
+    stripped
+    storyId="manifest-discipline--docs"
+    iconName="lock-up"
+    title="Discipline"
+  >
+    <span>Always-on behavioral rules that govern how any work is done</span>
+  </WelcomeLink>
+  <WelcomeLink
+    stripped
+    storyId="manifest-read--docs"
+    iconName="folder-open"
+    title="Read"
+  >
+    <span>Understanding the existing structure before changing it</span>
+  </WelcomeLink>
+  <WelcomeLink
+    stripped
+    storyId="manifest-edit--docs"
+    iconName="code"
+    title="Edit"
+  >
+    <span>Standards for creating new assets in the ecosystem</span>
+  </WelcomeLink>
+  <WelcomeLink
+    stripped
+    storyId="manifest-build--docs"
+    iconName="laptop"
+    title="Build"
+  >
+    <span>Local development, linking, and rebuild processes</span>
+  </WelcomeLink>
+  <WelcomeLink
+    stripped
+    storyId="manifest-publish--docs"
+    iconName="npm"
+    title="Publish"
+  >
+    <span>Committing, version bumping, and releasing to npm</span>
+  </WelcomeLink>
+  <WelcomeLink
+    stripped
+    storyId="manifest-topics--docs"
+    iconName="lightbulb"
+    title="Topics"
+  >
+    <span>Single-home reference topics that cross the phase folders</span>
+  </WelcomeLink>
+</Flex>
+
+<HorizontalRule />
+
+## Principles
+
+**The token system is the origin pattern.** The token generation system in `nice-styles` — token JSON to generated data, types, and CSS, to runtime getters and setters — is where the ecosystem starts. Every other package builds on it. A package that cannot reach logic it needs through the token system is a showstopper: stop, report the gap, fix the token system first.
+
+**Alignment.** The `nice-*` packages are one system that publishes under separate names for distribution only. Anything shared — TypeScript version, build config, lint rules — belongs in a foundation package, used by every consumer at the same version. Divergence is a defect to fix.
+
+<Callout type="hint">Artifacts have fixed homes: an audit report goes to `manifest/.reports/audit/{slug}.md`, a research report to `manifest/.reports/research/{slug}.md`, and a per-package change record to that package's `.nice/bump.md`.</Callout>

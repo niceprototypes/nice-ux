@@ -10,4 +10,10 @@ export interface WelcomeLinkProps {
   title: string
   /** Supporting line under the heading. */
   children: React.ReactNode
+  /**
+   * Stripped variant: no border, box-shadow, or outer padding, and a `base`
+   * icon↔content gap, so the row sits flush with surrounding text instead of
+   * reading as a raised card. Defaults to the bordered card.
+   */
+  stripped?: boolean
 }

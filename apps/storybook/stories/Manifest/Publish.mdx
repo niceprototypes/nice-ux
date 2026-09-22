@@ -1,0 +1,23 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import Callout from "../../src/components/Callout"
+
+<Meta
+  title="Manifest/Publish"
+  name="Docs"
+/>
+
+<StoryHeader
+  title="Publish"
+  description="Committing, version bumping, and releasing nice-* packages to npm."
+/>
+
+Files here are topic references: load the one your task or the root index points to. Each publishable package keeps its own `.nice/bump.md` — both the version-bump intent for `nicely --publish` and the durable per-change record, written in the same commit.
+
+| File | Contents |
+|------|----------|
+| `git.md` | Commit format, branching, the `nicely --commit` workflow. |
+| `npm.md` | Version bumping, publish order, peer deps. |
+| `bump-intent.md` | The `.nice/bump.md` per-package bump-intent workflow, `✓` marker, and how `--commit` relates to `--publish`. |
+
+<Callout type="hint">Publish nice-* packages with `nicely publish`, never `npm publish` directly — the workflow handles the version cascade across consumers.</Callout>

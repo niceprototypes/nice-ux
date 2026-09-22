@@ -1,0 +1,25 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import Callout from "../../src/components/Callout"
+
+<Meta
+  title="Manifest/Read"
+  name="Docs"
+/>
+
+<StoryHeader
+  title="Read"
+  description="Understanding the Nice ecosystem's existing structure — the phase before any change."
+/>
+
+Files here are topic references: load the one your task or the root index points to, not all of them.
+
+| File | Contents |
+|------|----------|
+| `inheritance.md` | Package hierarchy, dependency graph, layered system design. |
+| `audit.md` | The audits — architecture (manifest ↔ architecture ↔ stories) and full (architecture + all consumers) — their trigger phrases and scope, plus known manifest gaps. |
+| `projects/storybook.md` | nice-storybook structure and scripts. |
+| `projects/website.md` | nice-website-2025 structure and scripts. |
+| `styles/tokens.md` | Token naming conventions and `getToken` usage. |
+
+<Callout type="hint">The package layers, deps flowing down: Application (storybook, website) → Feature (react-button) → Utility (flex, ink, tile, icon) → Context (react-styles) → Foundation (styles, icons, configuration).</Callout>
