@@ -1,6 +1,7 @@
 import React from "react"
 import { render, screen, fireEvent } from "@testing-library/react"
 import "@testing-library/jest-dom"
+import { getToken } from "nice-react-styles"
 import Button from "./Button"
 import ResponsiveButton from "."
 import type { ButtonRefType } from "./Button.types"
@@ -175,4 +176,23 @@ describe("Button", () => {
     })
   })
 
+  describe("focus indicator", () => {
+    const injectedCss = () =>
+      Array.from(document.querySelectorAll("style"))
+        .map((tag) => tag.textContent ?? "")
+        .join("")
+
+    it("keeps outline: none for non-keyboard focus", () => {
+      render(<Button onClick={mockOnClick}>Label</Button>)
+      expect(injectedCss()).toContain("outline:none;")
+    })
+
+    it("emits a token-driven :focus-visible outline", () => {
+      render(<Button onClick={mockOnClick}>Label</Button>)
+      expect(injectedCss()).toContain(
+        `:focus-visible{outline:${getToken("borderWidth:large")} solid ${getToken("color:link")};` +
+          `outline-offset:${getToken("gap:smaller")};}`
+      )
+    })
+  })
 })

@@ -32,6 +32,16 @@ export const StyledButton = styled.button.withConfig({
   font-size: inherit;
   line-height: inherit;
   outline: none;
+
+  /* Keyboard focus indicator. Pointer focus keeps outline: none (above);
+     :focus-visible only matches when the browser decides focus should be shown,
+     e.g. Tab navigation. Drawn as an outline (not a border) so it adds no layout
+     and sits outside the button's own border at every status and fill. */
+  &:focus-visible {
+    outline: ${getToken("borderWidth:large")} solid ${getToken("color:link")};
+    outline-offset: ${getToken("gap:smaller")};
+  }
+
   text-align: center;
   text-decoration: none;
   cursor: ${({ $disabled }) => ($disabled ? "not-allowed" : "pointer")};

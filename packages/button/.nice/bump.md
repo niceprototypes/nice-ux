@@ -5,3 +5,4 @@
 [2026-09-18 12:23] minor: Buttons are content-width at every breakpoint. width: 100% was set unconditionally and only relaxed to auto in a tablet+ block, so every button spanned its container below 641px — including square icon-only buttons, which had no label to justify the width. The tablet+ override is removed along with the getBreakpoint import it needed. BREAKING for any layout that relied on mobile buttons filling their container; those now need an explicit width.
 [2026-09-18 16:36] patch: Filled buttons take a transparent border instead of repeating the fill colour. The background paints to the border box, so the fill already shows through a transparent border — the second colour lookup was redundant.
 [2026-09-24 17:59] minor: Accept a ref on Button, forwarded to the rendered button, anchor, or div root
+[2026-09-24 17:59] patch: Show a token-driven keyboard focus outline on Button via :focus-visible
