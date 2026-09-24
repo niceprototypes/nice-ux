@@ -1,0 +1,6 @@
+{
+  "$schema": "../config-exports/src/schema.json",
+  "description": "Native select rendered through nice-react-input's field chrome with options, placeholder and a chevron.",
+  "default": "Select",
+  "components": ["Select"]
+}
