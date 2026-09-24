@@ -89,7 +89,9 @@ const preview: Preview = {
           // that folder, so without it the load order decides where it lands.
           ["Docs", "Animation", "Borders", "Colors", ["*", "transformColor"], "Fonts", "Sizes", "*"],
           "Components",
-          ["*", ["Docs", "Tokens", "*"]],
+          // Grouped folders first, then the flat component pages — as in Tokens.
+          // Each component (inside Forms or flat) orders Docs, Tokens, then props.
+          ["Forms", ["*", ["Docs", "Tokens", "*"]], "*", ["Docs", "Tokens", "*"]],
           "Bindings",
           ["useBreakpoint", "useDevice", "useTheme"],
           "Storybook",

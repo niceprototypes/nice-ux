@@ -317,7 +317,8 @@ npm run dev
 - Flex: http://localhost:6006/?path=/docs/components-flex--docs
 - Ink: http://localhost:6006/?path=/docs/components-ink--docs
 - Tile: http://localhost:6006/?path=/docs/components-tile--docs
-- Button: http://localhost:6006/?path=/docs/components-button--docs
+- Button: http://localhost:6006/?path=/docs/components-forms-button--docs
+- Input: http://localhost:6006/?path=/docs/components-forms-input--docs
 - Icon: http://localhost:6006/?path=/docs/components-icon--docs
 
 ### Documentation
