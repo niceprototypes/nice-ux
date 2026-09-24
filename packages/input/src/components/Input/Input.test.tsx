@@ -3,6 +3,7 @@ import { render, screen, fireEvent } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import "@testing-library/jest-dom"
 import { getToken } from "nice-react-styles"
+import { Field } from "nice-react-field"
 import Input from "./Input"
 import type { InputProps } from "./Input.types"
 
@@ -365,6 +366,125 @@ describe("Input", () => {
         { "aria-label": "z", borderColor: "red" },
       ]
       expect(props).toHaveLength(2)
+    })
+  })
+
+  describe("inside a Field", () => {
+    it("is labelled by the Field label (label targets the control id)", () => {
+      render(
+        <Field label="Email">
+          <Input />
+        </Field>
+      )
+      const control = screen.getByRole("textbox", { name: "Email" })
+      expect(control.id).not.toBe("")
+      expect(screen.getByText("Email").closest("label")).toHaveAttribute(
+        "for",
+        control.id
+      )
+    })
+
+    it("keeps an explicit id over the Field id", () => {
+      // The Field then warns that no element carries its id — expected here.
+      const warnSpy = jest.spyOn(console, "warn").mockImplementation(() => {})
+      render(
+        <Field
+          label="Email"
+          id="field-id"
+        >
+          <Input id="own-id" />
+        </Field>
+      )
+      expect(screen.getByRole("textbox")).toHaveAttribute("id", "own-id")
+      expect(warnSpy).toHaveBeenCalledWith(
+        expect.stringContaining('no element inside this Field has id "field-id"')
+      )
+      warnSpy.mockRestore()
+    })
+
+    it("orders aria-describedby as [description, error, consumer]", () => {
+      render(
+        <Field
+          label="Email"
+          id="email"
+          description="We never share it."
+          error="Required"
+          invalid
+        >
+          <Input aria-describedby="hint" />
+        </Field>
+      )
+      expect(screen.getByRole("textbox")).toHaveAttribute(
+        "aria-describedby",
+        "email-description email-error hint"
+      )
+    })
+
+    it("sets aria-invalid only when the Field is invalid, never \"false\"", () => {
+      const { rerender, container } = render(
+        <Field label="Email">
+          <Input />
+        </Field>
+      )
+      expect(screen.getByRole("textbox")).not.toHaveAttribute("aria-invalid")
+      rerender(
+        <Field
+          label="Email"
+          invalid
+        >
+          <Input />
+        </Field>
+      )
+      expect(screen.getByRole("textbox")).toHaveAttribute(
+        "aria-invalid",
+        "true"
+      )
+      rerender(
+        <Field
+          label="Email"
+          invalid={false}
+        >
+          <Input status="error" />
+        </Field>
+      )
+      expect(screen.getByRole("textbox")).not.toHaveAttribute("aria-invalid")
+      expect(container.querySelector('[aria-invalid="false"]')).toBeNull()
+    })
+
+    it("is required when the Field is required", () => {
+      render(
+        <Field
+          label="Email"
+          required
+        >
+          <Input />
+        </Field>
+      )
+      expect(screen.getByRole("textbox")).toBeRequired()
+    })
+  })
+
+  describe("outside a Field", () => {
+    it("renders no id, aria-describedby or aria-invalid unless passed", () => {
+      render(<Input aria-label="x" />)
+      const control = screen.getByRole("textbox")
+      expect(control).not.toHaveAttribute("id")
+      expect(control).not.toHaveAttribute("aria-describedby")
+      expect(control).not.toHaveAttribute("aria-invalid")
+      expect(control).not.toBeRequired()
+    })
+
+    it("passes id and aria-describedby through unchanged", () => {
+      render(
+        <Input
+          aria-label="x"
+          id="own"
+          aria-describedby="a b"
+        />
+      )
+      const control = screen.getByRole("textbox")
+      expect(control).toHaveAttribute("id", "own")
+      expect(control).toHaveAttribute("aria-describedby", "a b")
     })
   })
 

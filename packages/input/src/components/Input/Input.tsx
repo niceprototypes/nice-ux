@@ -1,5 +1,6 @@
 import * as React from "react"
 import { Theme } from "nice-react-styles"
+import { mergeDescribedBy, useField } from "nice-react-field"
 import { StyledControl, StyledField } from "./Input.styles"
 import { InputProps } from "./Input.types"
 import { isDisabled } from "../../utilities/isDisabled"
@@ -49,6 +50,9 @@ const Input: React.FC<InputProps> = ({
   width = "full",
 }) => {
   const disabled = isDisabled(status)
+  // Enclosing Field wiring (null outside a Field): id for the label, the
+  // description/error ids, invalid and required.
+  const fieldContext = useField()
 
   // Attributes that only exist on one element. `type` is an <input> attribute;
   // `rows` a <textarea> one; `pattern` does not apply to <select>/<textarea>.
@@ -89,7 +93,12 @@ const Input: React.FC<InputProps> = ({
         // runtime by `as`, and InputProps narrows `ref` per branch, so the
         // union is narrowed to the base element here (same as Button).
         ref={ref as React.Ref<HTMLInputElement>}
-        aria-describedby={ariaDescribedBy}
+        aria-describedby={mergeDescribedBy(
+          fieldContext?.describedBy,
+          ariaDescribedBy
+        )}
+        // Only ever "true" — never render aria-invalid="false"
+        aria-invalid={fieldContext?.invalid ? true : undefined}
         aria-label={ariaLabel}
         autoComplete={autoComplete}
         autoFocus={autoFocus}
@@ -98,7 +107,7 @@ const Input: React.FC<InputProps> = ({
         dir={dir}
         disabled={disabled}
         enterKeyHint={enterKeyHint}
-        id={id}
+        id={id ?? fieldContext?.id}
         inputMode={inputMode}
         maxLength={maxLength}
         minLength={minLength}
@@ -111,7 +120,7 @@ const Input: React.FC<InputProps> = ({
         onKeyDown={onKeyDown}
         placeholder={placeholder}
         readOnly={readOnly}
-        required={required}
+        required={required || fieldContext?.required}
         spellCheck={spellCheck}
         value={value}
       >

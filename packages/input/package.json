@@ -86,6 +86,7 @@
     "npm": ">=6.0.0"
   },
   "dependencies": {
+    "nice-react-field": "file:../react-field",
     "nice-react-styles": "file:../react-styles"
   },
   "prettier": "nice-config-prettier"
