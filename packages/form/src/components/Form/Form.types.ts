@@ -29,13 +29,16 @@ export type FormNoValidateType = boolean
 /**
  * FormAutoCompleteType
  *
- * Browser autocomplete hint for the whole form.
+ * Browser autocomplete hint for the whole form, following the WHATWG autofill
+ * grammar (a space-separated token sequence), so any string is accepted.
  *
  * Values:
  * - "on": Allow the browser to autocomplete fields
  * - "off": Disable autocomplete for fields
+ * - token sequences: section and field tokens, e.g. "section-billing"
+ *   or "shipping street-address"
  */
-export type FormAutoCompleteType = "on" | "off"
+export type FormAutoCompleteType = string
 
 /**
  * FormNameType
