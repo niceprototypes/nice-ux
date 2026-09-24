@@ -10,7 +10,7 @@ import { DataTable } from "../../src/components/DataTable"
 {/* Multi-column like the token tables — let it use the full docs width. */}
 <style>{`.sbdocs.sbdocs-content { max-width: 100%; }`}</style>
 
-<StoryHeader title="transformColor" description="Adjust a colour token's HSLA channels and get a static hsla() back. For a colour that keeps following the theme, pass the same channels to getToken's transform instead." />
+<StoryHeader title="transformColor" description="Adjust a colour token's HSLA channels and get a relative colour back — hsl(from var(…) …) — that keeps following the theme." />
 
 {/* Live transformColor demo — each swatch's background is the actual transformColor() return,
     so the page can never drift from the function's behavior. */}
@@ -42,9 +42,9 @@ export const hslaExamples = [
   },
 ]
 
-These adjust a colour's channels and return a static `hsla()` — the value is
-computed once, so it does not follow day and night. For a colour that keeps
-following the theme, pass the same channels to `getToken`:
+These adjust a colour's channels and return CSS relative colour syntax over the
+token's variable, so the result keeps following day and night. It is the same
+expression `getToken` returns for a `transform`:
 
 ```tsx
 getToken("color:error", { transform: [null, null, "*0.5", null] })
@@ -56,9 +56,8 @@ Channels are `[hue, saturation, lightness, alpha]`. A number sets the channel,
 
 {/* Columns mirror the module tables above one-for-one so the two line up, which
     is also why columnWidths is their constant rather than a local copy. The CSS
-    column stays empty here: these rows are transformColor calls, which return a
-    static hsla() rather than a var(). The live form is getToken's transform,
-    shown above. */}
+    column stays empty here: these rows are transformColor calls, whose relative
+    colour expression is shown in the Result column. */}
 <DataTable
   inline
   columns={[

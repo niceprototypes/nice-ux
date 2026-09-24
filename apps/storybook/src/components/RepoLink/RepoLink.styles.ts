@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { getBreakpoint, getToken } from "nice-react-styles"
+import { getBreakpoint, getToken, transformColor } from "nice-react-styles"
 import Ink from "../../nice/Ink"
 import Flex from "nice-react-flex"
 
@@ -14,7 +14,8 @@ export const Anchor = styled.a`
   text-decoration: none;
   color: ${getToken("color", "light")};
   font-family: ${getToken("fontFamily", "code")};
-  transition: color ${getToken("animationDuration")} ${getToken("animationEasing")};
+  transition: color ${getToken("animationDuration")}
+    ${getToken("animationEasing")};
 
   &:hover {
     color: ${getToken("color", "link")};
@@ -42,11 +43,10 @@ export const StatusPill = styled.span`
 `
 
 export const LicenseFlex = styled(Flex)`
-  background-color: ${getToken("backgroundColor", "base", { inverse: true })};
   border-radius: ${getToken("borderRadius", "small")};
+  border: 1px solid ${getToken("borderColor")};
 `
 
 export const LicenseInk = styled(Ink)`
   display: block;
-  color: ${getToken("color", { inverse: true })};
 `
