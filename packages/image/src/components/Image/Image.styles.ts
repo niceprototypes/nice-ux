@@ -41,7 +41,7 @@ const sharedStyles = css<{
   $borderRadius?: BorderRadiusType
   $bordered?: boolean
   $borderWidth?: BorderWidthType
-  $borderColor?: BorderColorType
+  $borderColor?: ColorTokenProp<BorderColorType>
 }>`
   display: block;
 
@@ -74,7 +74,7 @@ export const StyledImg = styled.img<{
   $borderRadius?: BorderRadiusType
   $bordered?: boolean
   $borderWidth?: BorderWidthType
-  $borderColor?: BorderColorType
+  $borderColor?: ColorTokenProp<BorderColorType>
 }>`
   ${sharedStyles}
 
@@ -103,7 +103,7 @@ export const StyledBackgroundImage = styled.div<{
   $borderRadius?: BorderRadiusType
   $bordered?: boolean
   $borderWidth?: BorderWidthType
-  $borderColor?: BorderColorType
+  $borderColor?: ColorTokenProp<BorderColorType>
 }>`
   ${sharedStyles}
 
