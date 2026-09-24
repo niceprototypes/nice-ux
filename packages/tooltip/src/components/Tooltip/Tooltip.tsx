@@ -1,7 +1,8 @@
 import * as React from "react"
 import { createPortal } from "react-dom"
+import { computeAnchorPosition, type PopoverCoordinatesType } from "nice-react-popover"
 import { TriggerWrapper, Bubble } from "./Tooltip.styles"
-import { TooltipPositionType, TooltipProps } from "./Tooltip.types"
+import { TooltipProps } from "./Tooltip.types"
 
 // Gap in px between the trigger and the bubble. A plain constant (not a token)
 // because positioning runs in JS off getBoundingClientRect, where a CSS var
@@ -54,7 +55,7 @@ const Tooltip: React.FC<TooltipProps> = ({
   // depend on event pooling.
   const cursor = React.useRef<{ x: number; y: number } | null>(null)
   const [visible, setVisible] = React.useState(false)
-  const [coords, setCoords] = React.useState<{ top: number; left: number }>({ top: 0, left: 0 })
+  const [coords, setCoords] = React.useState<PopoverCoordinatesType>({ top: 0, left: 0, transform: "none" })
 
   const clearTimers = () => {
     window.clearTimeout(showTimer.current)
@@ -62,45 +63,20 @@ const Tooltip: React.FC<TooltipProps> = ({
   }
 
   // Anchor the bubble to the trigger's current rect, or to the pointer position
-  // captured at activation when anchor="cursor". The bubble is then offset onto
-  // the chosen side by `transformFor()` (it owns the centering translate). Both
+  // captured at activation when anchor="cursor", via nice-react-popover's
+  // `computeAnchorPosition` centered on the cross axis. It returns the anchor
+  // point plus the translate that places the bubble's edge against it. Both
   // anchors yield viewport coordinates, matching the bubble's position: fixed.
   const computeCoords = () => {
     // Cursor anchor: clientX/clientY rode in on the activating event — no
-    // measurement, no reflow. Place the OFFSET on the chosen side of the point.
+    // measurement, no reflow. Passed as a point (a zero-size anchor).
     if (anchor === "cursor" && cursor.current) {
-      const { x, y } = cursor.current
-      switch (position) {
-        case "bottom":
-          setCoords({ top: y + OFFSET, left: x })
-          break
-        case "left":
-          setCoords({ top: y, left: x - OFFSET })
-          break
-        case "right":
-          setCoords({ top: y, left: x + OFFSET })
-          break
-        default: // top
-          setCoords({ top: y - OFFSET, left: x })
-      }
+      setCoords(computeAnchorPosition(cursor.current, position, "center", OFFSET))
       return
     }
     const el = triggerRef.current
     if (!el) return
-    const r = el.getBoundingClientRect()
-    switch (position) {
-      case "bottom":
-        setCoords({ top: r.bottom + OFFSET, left: r.left + r.width / 2 })
-        break
-      case "left":
-        setCoords({ top: r.top + r.height / 2, left: r.left - OFFSET })
-        break
-      case "right":
-        setCoords({ top: r.top + r.height / 2, left: r.right + OFFSET })
-        break
-      default: // top
-        setCoords({ top: r.top - OFFSET, left: r.left + r.width / 2 })
-    }
+    setCoords(computeAnchorPosition(el.getBoundingClientRect(), position, "center", OFFSET))
   }
 
   // Show after delayShow; measure first so the bubble appears already placed.
@@ -124,21 +100,6 @@ const Tooltip: React.FC<TooltipProps> = ({
   // Clear any pending timer on unmount so a deferred show/hide can't fire late.
   React.useEffect(() => clearTimers, [])
 
-  // The translate that places the bubble's edge against the trigger, centered on
-  // the cross axis, given the anchor point computed above.
-  const transformFor = (pos: TooltipPositionType): string => {
-    switch (pos) {
-      case "bottom":
-        return "translate(-50%, 0)"
-      case "left":
-        return "translate(-100%, -50%)"
-      case "right":
-        return "translate(0, -50%)"
-      default: // top
-        return "translate(-50%, -100%)"
-    }
-  }
-
   // Hover trigger: show on enter, hide on leave. Click trigger: toggle.
   const handlers =
     trigger === "click"
@@ -152,7 +113,7 @@ const Tooltip: React.FC<TooltipProps> = ({
       </TriggerWrapper>
       {visible && typeof document !== "undefined"
         ? createPortal(
-            <Bubble style={{ top: coords.top, left: coords.left, transform: transformFor(position) }}>{content}</Bubble>,
+            <Bubble style={{ top: coords.top, left: coords.left, transform: coords.transform }}>{content}</Bubble>,
             document.body
           )
         : null}
