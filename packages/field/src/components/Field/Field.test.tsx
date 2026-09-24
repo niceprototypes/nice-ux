@@ -91,24 +91,45 @@ describe("Field", () => {
     expect(seen[seen.length - 1]).toBe("a-error")
   })
 
-  it("renders the error container only with an error, as a polite live region", () => {
+  it("keeps the polite error region mounted and empty without an error, unreferenced by describedBy", () => {
+    const { container } = render(
+      <Field label="Email" id="email">
+        <Control />
+      </Field>
+    )
+    const region = container.querySelector("#email-error")
+    expect(region).not.toBeNull()
+    expect(region).toHaveAttribute("aria-live", "polite")
+    expect(region).toBeEmptyDOMElement()
+    expect(screen.getByRole("textbox")).not.toHaveAttribute("aria-describedby")
+  })
+
+  it("fills the same live region node when an error arrives, and empties it when cleared", () => {
     const { container, rerender } = render(
       <Field label="Email" id="email">
         <Control />
       </Field>
     )
-    expect(container.querySelector("#email-error")).toBeNull()
-    expect(container.querySelector("[aria-live]")).toBeNull()
+    const region = container.querySelector("#email-error")
 
     rerender(
       <Field label="Email" id="email" error="Required">
         <Control />
       </Field>
     )
-    const error = container.querySelector("#email-error")
-    expect(error).not.toBeNull()
-    expect(error).toHaveAttribute("aria-live", "polite")
-    expect(error).toHaveTextContent("Required")
+    expect(container.querySelector("#email-error")).toBe(region)
+    expect(region).toHaveAttribute("aria-live", "polite")
+    expect(region).toHaveTextContent("Required")
+    expect(screen.getByRole("textbox")).toHaveAttribute("aria-describedby", "email-error")
+
+    rerender(
+      <Field label="Email" id="email">
+        <Control />
+      </Field>
+    )
+    expect(container.querySelector("#email-error")).toBe(region)
+    expect(region).toBeEmptyDOMElement()
+    expect(screen.getByRole("textbox")).not.toHaveAttribute("aria-describedby")
   })
 
   it("exposes invalid only when the invalid prop is true, never aria-invalid=false", () => {

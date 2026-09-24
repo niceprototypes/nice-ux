@@ -21,8 +21,8 @@ export type FieldDescriptionType = React.ReactNode
  * FieldErrorType
  *
  * Error message rendered below the description in a polite live region.
- * The error container is rendered only while this is present; its id then
- * follows the description id in `describedBy`.
+ * The region is always mounted and empty without an error; its id follows
+ * the description id in `describedBy` only while this is present.
  */
 export type FieldErrorType = React.ReactNode
 
@@ -76,7 +76,7 @@ export type FieldThemeType = ThemeType
  * - `id`: control id; the control must render it as its `id`
  * - `labelId`: id of the `<label>` element
  * - `descriptionId`: id of the description element, when a description is rendered
- * - `errorId`: id of the error element, when an error is rendered
+ * - `errorId`: id of the error region, only while an error is present
  * - `describedBy`: `[descriptionId, errorId]` (present ones) joined by a space;
  *   pass it with the control's own ids to `mergeDescribedBy`
  * - `invalid`: true only when the Field's `invalid` prop is true
@@ -102,7 +102,7 @@ export interface FieldProps {
   label: FieldLabelType
   /** Helper text below the control */
   description?: FieldDescriptionType
-  /** Error message; the polite error region renders only while present */
+  /** Error message; shown in the always-mounted polite error region */
   error?: FieldErrorType
   /** Marks the control invalid (`aria-invalid="true"` via context) */
   invalid?: FieldInvalidType

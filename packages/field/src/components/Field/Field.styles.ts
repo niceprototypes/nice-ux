@@ -22,7 +22,14 @@ export const StyledFieldDescription = styled.div`
   margin-block-start: ${getToken("field.gap:description")};
 `
 
-/** Error container; a polite live region carrying the error id. */
+/**
+ * Error container; an always-mounted polite live region carrying the error id.
+ * Empty (no error) it has no content and drops its margin, so it takes no space.
+ */
 export const StyledFieldError = styled.div`
   margin-block-start: ${getToken("field.gap:error")};
+
+  &:empty {
+    margin-block-start: 0;
+  }
 `

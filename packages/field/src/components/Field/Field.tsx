@@ -11,9 +11,11 @@ import { isDevelopment } from "../../utilities/isDevelopment"
  *
  * Wires a label, optional description and optional error to one control.
  * Renders a native `<label htmlFor={id}>`, then the control, then the
- * description, then (only while `error` is present) a polite live region
- * holding the error. The control reads its id and ARIA wiring from
- * `useField()`.
+ * description, then an always-mounted polite live region that holds the
+ * error while `error` is present. The region is mounted before any error so
+ * screen readers observe it and announce the error when it is inserted; empty,
+ * it takes no space. Its id joins `describedBy` only while an error is present.
+ * The control reads its id and ARIA wiring from `useField()`.
  *
  * In non-production builds, a warning is logged once if no element inside
  * the Field carries the control id after mount — the child did not apply it,
@@ -102,13 +104,13 @@ const Field: React.FC<FieldProps> = ({
             </Ink>
           </StyledFieldDescription>
         ) : null}
-        {hasError ? (
-          <StyledFieldError id={errorId} aria-live="polite">
+        <StyledFieldError id={`${controlId}-error`} aria-live="polite">
+          {hasError ? (
             <Ink as="span" color="error">
               {error}
             </Ink>
-          </StyledFieldError>
-        ) : null}
+          ) : null}
+        </StyledFieldError>
       </StyledField>
     </FieldContext.Provider>
   )

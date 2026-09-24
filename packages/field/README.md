@@ -28,15 +28,16 @@ Multi-component package: named exports only, no default.
 
 ## Field
 
-Renders a native `<label htmlFor={id}>`, the control, the description, and —
-only while `error` is present — a polite live region (`aria-live="polite"`)
-holding the error.
+Renders a native `<label htmlFor={id}>`, the control, the description, and an
+always-mounted polite live region (`aria-live="polite"`) that holds the error
+while `error` is present. Empty, the region takes no space, and its id joins
+`describedBy` only while an error is present.
 
 | Prop | Type | Notes |
 |---|---|---|
 | `label` | `ReactNode` | Required. Rendered in the native `<label>` |
 | `description` | `ReactNode` | Helper text below the control |
-| `error` | `ReactNode` | Error message; container renders only while present |
+| `error` | `ReactNode` | Error message; shown in the always-mounted polite region |
 | `invalid` | `boolean` | Control emits `aria-invalid="true"` only when true |
 | `required` | `boolean` | Control emits native `required`. No asterisk is rendered |
 | `optionalLabel` | `ReactNode` | Rendered after the label when `required` is false |
