@@ -1,0 +1,71 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../../src/components/Story"
+import Select from "nice-react-select"
+import { Field } from "nice-react-field"
+import Ink from "../../../../src/nice/Ink"
+import { DataTableRow } from "../../../../src/components/DataTable"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+
+<Meta title="Components/Forms/Select/inside Field" />
+
+<StoryHeader title="inside Field" />
+
+<Ink color="light">
+  Inside a <code>Field</code>, the select takes the Field's id (so the label's{" "}
+  <code>htmlFor</code> names it), merges the description and error ids into{" "}
+  <code>aria-describedby</code>, sets <code>aria-invalid="true"</code> only
+  when the Field is <code>invalid</code>, and is <code>required</code> when the
+  Field is. Select inherits this wiring from Input; no <code>aria-label</code>{" "}
+  is needed.
+</Ink>
+
+<DataTableRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+    <Field
+      label="Country"
+      description="Used for shipping and tax."
+      required
+    >
+      <Select
+        name="country"
+        placeholder="Choose a country"
+        options={[
+          { value: "nl", label: "Netherlands" },
+          { value: "eg", label: "Egypt" },
+          { value: "us", label: "United States" },
+        ]}
+        onChange={() => {}}
+      />
+    </Field>,
+    `<Field\n  label="Country"\n  description="Used for shipping and tax."\n  required\n>\n  <Select\n    name="country"\n    placeholder="Choose a country"\n    options={countries}\n    onChange={handler}\n  />\n</Field>`,
+  ]}
+/>
+
+<DataTableRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+    <Field
+      label="Country"
+      error="Choose a country to continue."
+      invalid
+    >
+      <Select
+        name="country"
+        status="error"
+        placeholder="Choose a country"
+        options={[
+          { value: "nl", label: "Netherlands" },
+          { value: "eg", label: "Egypt" },
+        ]}
+        onChange={() => {}}
+      />
+    </Field>,
+    `<Field\n  label="Country"\n  error="Choose a country to continue."\n  invalid\n>\n  <Select\n    name="country"\n    status="error"\n    placeholder="Choose a country"\n    options={countries}\n    onChange={handler}\n  />\n</Field>`,
+  ]}
+/>
+
+<Ink color="light">
+  <code>invalid</code> on the Field sets the accessible state only; the
+  visual <code>status="error"</code> is set on the control.
+</Ink>

@@ -1,0 +1,52 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../../src/components/Story"
+import Input from "nice-react-input"
+import Ink from "../../../../src/nice/Ink"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+import { DataTable } from "../../../../src/components/DataTable"
+
+export const widths = ["2", "3", "4", "5", "10", "20", "full"]
+
+export const widthPlaceholder = {
+  "2": "12",
+  "3": "123",
+  "4": "1234",
+  "5": "12345",
+  "10": "0123456789",
+  "20": "Street and number",
+  full: "Full width",
+}
+
+export const widthCode = (w) =>
+  w === "full"
+    ? `<Input\n  placeholder="${widthPlaceholder[w]}"\n  onChange={handler}\n/>`
+    : `<Input\n  width="${w}"\n  placeholder="${widthPlaceholder[w]}"\n  onChange={handler}\n/>`
+
+<Meta title="Components/Forms/Input/width" />
+
+<StoryHeader title="width" />
+
+<Ink color="light">
+  Width of the field chrome from the <code>input.width</code> token scale.
+  Numeric variants hold that many characters at every <code>size</code> (the
+  size's inline padding and border are added to the character count), so the
+  width reads as a hint of the expected answer length. <code>full</code>{" "}
+  (default) fills the container.
+</Ink>
+
+<DataTable
+  showHeader={false}
+  columns={DEMO_CODE_COLUMNS}
+  tables={[{ rows: widths.map((w) => ({
+    id: w,
+    values: [
+      <Input
+        width={w}
+        aria-label={`Width ${w}`}
+        placeholder={widthPlaceholder[w]}
+        onChange={() => {}}
+      />,
+      widthCode(w),
+    ],
+  })) }]}
+/>

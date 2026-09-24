@@ -1,0 +1,34 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../../src/components/Story"
+import { Calendar } from "nice-react-calendar"
+import Ink from "../../../../src/nice/Ink"
+import { DataTableRow } from "../../../../src/components/DataTable"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+
+export const isWeekend = (iso) => {
+  const day = new Date(`${iso}T00:00:00Z`).getUTCDay()
+  return day === 0 || day === 6
+}
+
+<Meta title="Components/Forms/Calendar/isDateDisabled" />
+
+<StoryHeader title="isDateDisabled" />
+
+<Ink color="light">
+  Called with each day's ISO string; return <code>true</code> to make the day
+  unselectable. Disabled days render dimmed and carry{" "}
+  <code>aria-disabled</code>, but stay focusable so arrow keys move across them.
+  Combines with <code>min</code> / <code>max</code>.
+</Ink>
+
+<DataTableRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+    <Calendar
+      aria-label="Business day"
+      defaultValue="2026-09-24"
+      isDateDisabled={isWeekend}
+    />,
+    `// ISO string in, boolean out. Parse at UTC midnight so\n// the weekday does not shift with the time zone.\nconst isWeekend = (iso) => {\n  const day = new Date(\`\${iso}T00:00:00Z\`).getUTCDay()\n  return day === 0 || day === 6\n}\n\n<Calendar\n  aria-label="Business day"\n  defaultValue="2026-09-24"\n  isDateDisabled={isWeekend}\n/>`,
+  ]}
+/>

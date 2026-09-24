@@ -1,0 +1,69 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../../src/components/Story"
+import { Field } from "nice-react-field"
+import Input from "nice-react-input"
+import Ink from "../../../../src/nice/Ink"
+import { DataTableRow } from "../../../../src/components/DataTable"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+import Install from "../../../../src/components/Install"
+import HorizontalRule from "../../../../src/components/HorizontalRule"
+
+<Meta title="Components/Forms/Field" />
+
+<StoryHeader title="Field" />
+
+<Install package="react-field" />
+
+### Setup
+
+```jsx
+import { Field, Fieldset, useField, mergeDescribedBy } from "nice-react-field"
+```
+
+<Ink color="light">
+  Multi-component package: named exports only, no default export.
+</Ink>
+
+### Usage
+
+```jsx
+<Field label="Email" description="We never share it." error={error} invalid={!!error}>
+  <Input type="email" value={email} onChange={setEmail} />
+</Field>
+```
+
+<HorizontalRule />
+
+## Basic
+
+<Ink color="light">
+  Field renders a native <code>&lt;label&gt;</code>, the control, an optional
+  description, and an always-mounted polite live region for the error. It
+  publishes the wiring through context (<code>useField()</code>); the control
+  applies it. Input — and everything built on it (Select, DateField) — reads
+  the context: it takes the Field's <code>id</code>, merges the description and
+  error ids into <code>aria-describedby</code> in the order{" "}
+  <code>[description, error, own]</code>, sets <code>aria-invalid="true"</code>{" "}
+  only when the Field is <code>invalid</code>, and becomes{" "}
+  <code>required</code> when the Field is.
+</Ink>
+
+<DataTableRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+    <Field label="Email">
+      <Input
+        type="email"
+        placeholder="name@example.com"
+        onChange={() => {}}
+      />
+    </Field>,
+    `<Field label="Email">\n  <Input\n    type="email"\n    placeholder="name@example.com"\n    onChange={handler}\n  />\n</Field>`,
+  ]}
+/>
+
+<Ink color="light">
+  The control id defaults to <code>useId()</code>; pass <code>id</code> to fix
+  it. In development, Field warns in the console when no element inside it
+  carries the id — the silent failure where the label names nothing.
+</Ink>

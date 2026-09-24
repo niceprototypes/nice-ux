@@ -50,3 +50,59 @@ import Input from "nice-react-input"
         ]}
 />
 
+<HorizontalRule />
+
+## Structure
+
+<Ink color="light">
+  Input renders a wrapper element (the field chrome: border, radius,
+  background, padding, focus ring) around <code>start</code> → native control →{" "}
+  <code>end</code>. <code>className</code> and <code>style</code> apply to the
+  wrapper. <code>ref</code>, <code>id</code>, <code>name</code>,{" "}
+  <code>aria-*</code>, <code>data-testid</code> and every native attribute
+  apply to the native control, which remains the focus target.
+</Ink>
+
+```jsx
+<Input className="wrapper-class" ref={controlRef} aria-label="Email" />
+// <div class="… wrapper-class">
+//   <input aria-label="Email" … />  ← controlRef.current
+// </div>
+```
+
+## Colour props
+
+<Ink color="light">
+  <code>backgroundColor</code> and <code>borderColor</code> take token
+  variants, not CSS colour strings: a <code>BackgroundColorType</code> /{" "}
+  <code>BorderColorType</code> name, or an object{" "}
+  <code>{"{ name, theme?, breakpoint?, inverse?, transform? }"}</code>. They
+  resolve through the <code>input.backgroundColor</code> /{" "}
+  <code>input.borderColor</code> component groups.
+</Ink>
+
+<DataTableRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+    <Input
+      backgroundColor="raised"
+      borderColor="link"
+      aria-label="Token colours"
+      placeholder="raised / link"
+      onChange={() => {}}
+    />,
+    `<Input\n  backgroundColor="raised"\n  borderColor="link"\n  placeholder="raised / link"\n  onChange={handler}\n/>`,
+  ]}
+/>
+
+## Keyboard focus
+
+<Ink color="light">
+  The native control has no outline of its own. When anything inside the
+  chrome has <code>:focus-visible</code> (keyboard focus on the control or on a
+  button in a slot), the wrapper draws an outline ring from the{" "}
+  <code>input.focusRing</code> tokens; the outline adds no layout. Pointer
+  focus changes only the border colour. Press Tab into the demos on this page
+  to see the ring.
+</Ink>
+

@@ -1,0 +1,52 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../../src/components/Story"
+import { Field, Fieldset } from "nice-react-field"
+import Input from "nice-react-input"
+import Ink from "../../../../src/nice/Ink"
+import { DataTableRow } from "../../../../src/components/DataTable"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+
+<Meta title="Components/Forms/Field/Fieldset" />
+
+<StoryHeader title="Fieldset" />
+
+<Ink color="light">
+  Groups related controls under a native <code>&lt;fieldset&gt;</code>. The{" "}
+  <code>legend</code> (required) renders in a native{" "}
+  <code>&lt;legend&gt;</code> and names the group; an optional{" "}
+  <code>description</code> follows it and is referenced by the fieldset's{" "}
+  <code>aria-describedby</code>. <code>disabled</code> is the native attribute:
+  it disables every form control inside; the controls' visual{" "}
+  <code>status</code> is unchanged.
+</Ink>
+
+<DataTableRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+    <Fieldset
+      legend="Shipping address"
+      description="Where the order is delivered."
+    >
+      <Field label="Street and number">
+        <Input
+          autoComplete="street-address"
+          onChange={() => {}}
+        />
+      </Field>
+      <Field label="Postcode">
+        <Input
+          width="10"
+          autoComplete="postal-code"
+          onChange={() => {}}
+        />
+      </Field>
+      <Field label="City">
+        <Input
+          autoComplete="address-level2"
+          onChange={() => {}}
+        />
+      </Field>
+    </Fieldset>,
+    `<Fieldset\n  legend="Shipping address"\n  description="Where the order is delivered."\n>\n  <Field label="Street and number">\n    <Input autoComplete="street-address" />\n  </Field>\n  <Field label="Postcode">\n    <Input width="10" autoComplete="postal-code" />\n  </Field>\n  <Field label="City">\n    <Input autoComplete="address-level2" />\n  </Field>\n</Fieldset>`,
+  ]}
+/>

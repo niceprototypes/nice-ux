@@ -1,0 +1,58 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { useState } from "react"
+import { StoryHeader } from "../../../../src/components/Story"
+import { Calendar } from "nice-react-calendar"
+import Ink from "../../../../src/nice/Ink"
+import { DataTableRow } from "../../../../src/components/DataTable"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+
+export const ControlledCalendar = () => {
+  const [value, setValue] = useState(null)
+  return (
+    <div>
+      <Calendar
+        aria-label="Appointment"
+        value={value}
+        onChange={setValue}
+      />
+      <Ink color="light">
+        value: <code>{JSON.stringify(value)}</code>
+      </Ink>
+    </div>
+  )
+}
+
+<Meta title="Components/Forms/Calendar/value" />
+
+<StoryHeader title="value" />
+
+<Ink color="light">
+  Selected date as an ISO <code>YYYY-MM-DD</code> string, or{" "}
+  <code>null</code> for no selection. Passing <code>value</code> makes the
+  calendar controlled; <code>onChange</code> receives the ISO string of the
+  chosen day. Use <code>defaultValue</code> for an uncontrolled calendar. When
+  a controlled value moves to another month, the grid follows it.
+</Ink>
+
+## Controlled, empty
+
+<DataTableRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+    <ControlledCalendar />,
+    `const [value, setValue] = useState(null)\n\n<Calendar\n  aria-label="Appointment"\n  value={value}\n  onChange={setValue}\n/>`,
+  ]}
+/>
+
+## Uncontrolled
+
+<DataTableRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+    <Calendar
+      aria-label="Start date"
+      defaultValue="2026-12-31"
+    />,
+    `<Calendar\n  aria-label="Start date"\n  defaultValue="2026-12-31"\n/>`,
+  ]}
+/>

@@ -1,0 +1,88 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { useState } from "react"
+import { StoryHeader } from "../../../../src/components/Story"
+import { Field, useField, mergeDescribedBy } from "nice-react-field"
+import Ink from "../../../../src/nice/Ink"
+import { DataTableRow } from "../../../../src/components/DataTable"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+
+export const VolumeSlider = ({ "aria-describedby": ownDescribedBy, value, onChange }) => {
+  const field = useField()
+  return (
+    <input
+      type="range"
+      min={0}
+      max={100}
+      value={value}
+      onChange={(event) => onChange(Number(event.target.value))}
+      id={field?.id}
+      aria-describedby={mergeDescribedBy(field?.describedBy, ownDescribedBy)}
+      aria-invalid={field?.invalid ? true : undefined}
+      required={field?.required}
+    />
+  )
+}
+
+export const VolumeDemo = () => {
+  const [volume, setVolume] = useState(40)
+  return (
+    <div>
+      <Field
+        label="Volume"
+        description="Applies to every device."
+      >
+        <VolumeSlider
+          value={volume}
+          onChange={setVolume}
+          aria-describedby="volume-hint"
+        />
+      </Field>
+      <Ink color="light">
+        <span id="volume-hint">{volume}%</span>
+      </Ink>
+    </div>
+  )
+}
+
+<Meta title="Components/Forms/Field/useField" />
+
+<StoryHeader title="useField" />
+
+<Ink color="light">
+  <code>useField()</code> returns the enclosing Field's wiring, or{" "}
+  <code>null</code> outside a Field:{" "}
+  <code>{"{ id, labelId, descriptionId?, errorId?, describedBy?, invalid, required }"}</code>.
+  Input already consumes it; a custom control must apply it itself:
+</Ink>
+
+| Context value | Control renders |
+|---------------|-----------------|
+| `id` | its own `id` (the label's `htmlFor` points at it) |
+| `describedBy` | `aria-describedby={mergeDescribedBy(field.describedBy, ownDescribedBy)}` |
+| `invalid` | `aria-invalid="true"` only when true — never `"false"` |
+| `required` | native `required` |
+
+## mergeDescribedBy
+
+<Ink color="light">
+  <code>mergeDescribedBy(fieldDescribedBy, consumer)</code> joins two
+  space-separated id lists in the order{" "}
+  <code>[description, error, consumer]</code>, drops empty entries, keeps the
+  first occurrence of each id, and returns <code>undefined</code> when the
+  result is empty, so no empty attribute is rendered.
+</Ink>
+
+```js
+mergeDescribedBy("f-desc f-err", "hint f-desc") // "f-desc f-err hint"
+mergeDescribedBy(undefined, undefined)          // undefined
+```
+
+## Custom control
+
+<DataTableRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+    <VolumeDemo />,
+    `const VolumeSlider = ({ "aria-describedby": own, value, onChange }) => {\n  const field = useField()\n  return (\n    <input\n      type="range"\n      value={value}\n      onChange={(event) => onChange(Number(event.target.value))}\n      id={field?.id}\n      aria-describedby={mergeDescribedBy(field?.describedBy, own)}\n      aria-invalid={field?.invalid ? true : undefined}\n      required={field?.required}\n    />\n  )\n}\n\n<Field label="Volume" description="Applies to every device.">\n  <VolumeSlider\n    value={volume}\n    onChange={setVolume}\n    aria-describedby="volume-hint"\n  />\n</Field>`,
+  ]}
+/>

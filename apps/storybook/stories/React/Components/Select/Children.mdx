@@ -1,0 +1,37 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../../src/components/Story"
+import Select from "nice-react-select"
+import Ink from "../../../../src/nice/Ink"
+import { DataTableRow } from "../../../../src/components/DataTable"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+
+<Meta title="Components/Forms/Select/children" />
+
+<StoryHeader title="children" />
+
+<Ink color="light">
+  Native <code>&lt;option&gt;</code> / <code>&lt;optgroup&gt;</code> elements.
+  Use children for groups or any option markup the <code>options</code> array
+  does not express. When both are given, <code>children</code> wins.
+</Ink>
+
+<DataTableRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+    <Select
+      aria-label="Time zone"
+      defaultValue="Europe/Amsterdam"
+      onChange={() => {}}
+    >
+      <optgroup label="Europe">
+        <option value="Europe/Amsterdam">Amsterdam</option>
+        <option value="Europe/Berlin">Berlin</option>
+      </optgroup>
+      <optgroup label="Africa">
+        <option value="Africa/Cairo">Cairo</option>
+        <option value="Africa/Lagos">Lagos</option>
+      </optgroup>
+    </Select>,
+    `<Select\n  aria-label="Time zone"\n  defaultValue="Europe/Amsterdam"\n  onChange={handler}\n>\n  <optgroup label="Europe">\n    <option value="Europe/Amsterdam">Amsterdam</option>\n    <option value="Europe/Berlin">Berlin</option>\n  </optgroup>\n  <optgroup label="Africa">\n    <option value="Africa/Cairo">Cairo</option>\n    <option value="Africa/Lagos">Lagos</option>\n  </optgroup>\n</Select>`,
+  ]}
+/>

@@ -1,0 +1,45 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../../src/components/Story"
+import Select from "nice-react-select"
+import Ink from "../../../../src/nice/Ink"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+import { DataTable } from "../../../../src/components/DataTable"
+
+export const sizes = ["smaller", "small", "base", "large", "larger"]
+
+export const sizeLabel = (s) => s.charAt(0).toUpperCase() + s.slice(1)
+
+export const sizeCode = (s) =>
+  s === "base"
+    ? `<Select\n  placeholder="Base"\n  options={options}\n  onChange={handler}\n/>`
+    : `<Select\n  size="${s}"\n  placeholder="${sizeLabel(s)}"\n  options={options}\n  onChange={handler}\n/>`
+
+<Meta title="Components/Forms/Select/size" />
+
+<StoryHeader title="size" />
+
+<Ink color="light">
+  Sizes the field chrome (through Input) and the chevron (from the{" "}
+  <code>select.chevron.size</code> token).
+</Ink>
+
+<DataTable
+  showHeader={false}
+  columns={DEMO_CODE_COLUMNS}
+  tables={[{ rows: sizes.map((size) => ({
+    id: size,
+    values: [
+      <Select
+        size={size}
+        aria-label={sizeLabel(size)}
+        placeholder={sizeLabel(size)}
+        options={[
+          { value: "a", label: "Option A" },
+          { value: "b", label: "Option B" },
+        ]}
+        onChange={() => {}}
+      />,
+      sizeCode(size),
+    ],
+  })) }]}
+/>
