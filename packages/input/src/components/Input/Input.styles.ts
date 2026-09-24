@@ -1,8 +1,10 @@
 import styled, { css } from "styled-components"
-import { getToken } from "nice-react-styles"
-import type { SizeType, BorderWidthType } from "nice-react-styles"
+import { getToken, resolveColorProp } from "nice-react-styles"
+import type { SizeType, BorderWidthType, ColorTokenProp } from "nice-react-styles"
 import type {
   InputAsType,
+  InputBackgroundColorType,
+  InputBorderColorType,
   InputBorderRadiusType,
   InputStatusType,
   InputWidthType,
@@ -103,8 +105,8 @@ export const StyledField = styled.div.withConfig({
   shouldForwardProp: prop => !prop.startsWith("$"),
 })<{
   $as: InputAsType
-  $backgroundColor?: string
-  $borderColor?: string
+  $backgroundColor?: ColorTokenProp<InputBackgroundColorType>
+  $borderColor?: ColorTokenProp<InputBorderColorType>
   $borderRadius: InputBorderRadiusType
   $borderWidth: BorderWidthType
   $disabled: boolean
@@ -155,8 +157,12 @@ export const StyledField = styled.div.withConfig({
       border-color 0.15s ease-in-out,
       background-color 0.15s ease-in-out;
     cursor: ${$disabled ? "not-allowed" : "text"};
-    ${$backgroundColor ? `background-color: ${$backgroundColor};` : ""}
-    ${$borderColor ? `border-color: ${$borderColor};` : ""}
+    ${$backgroundColor
+      ? `background-color: ${resolveColorProp("input", "backgroundColor", $backgroundColor)};`
+      : ""}
+    ${$borderColor
+      ? `border-color: ${resolveColorProp("input", "borderColor", $borderColor)};`
+      : ""}
 
     &:has(> ${StyledControl}:focus) {
       border-color: ${getToken("color", "base")};

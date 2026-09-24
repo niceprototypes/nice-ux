@@ -4,6 +4,7 @@ import userEvent from "@testing-library/user-event"
 import "@testing-library/jest-dom"
 import { getToken } from "nice-react-styles"
 import Input from "./Input"
+import type { InputProps } from "./Input.types"
 
 /** CSS text of every styled-components rule that targets one of `el`'s classes. */
 function cssFor(el: Element): string {
@@ -256,6 +257,70 @@ describe("Input", () => {
     expect(cssFor(screen.getByRole("textbox").parentElement!)).toContain(
       `width:${getToken("input.width:10")}`
     )
+  })
+
+  describe("colour props", () => {
+    it("resolves a backgroundColor variant to the input component var on the wrapper", () => {
+      render(
+        <Input
+          aria-label="x"
+          backgroundColor="highlight"
+        />
+      )
+      const wrapper = screen.getByRole("textbox").parentElement!
+      expect(getToken("input.backgroundColor:highlight")).toBe(
+        "var(--np--input--background-color--highlight)"
+      )
+      expect(cssFor(wrapper)).toContain(
+        `background-color:${getToken("input.backgroundColor:highlight")}`
+      )
+    })
+
+    it("resolves a borderColor variant to the input component var on the wrapper", () => {
+      render(
+        <Input
+          aria-label="x"
+          borderColor="error"
+        />
+      )
+      const wrapper = screen.getByRole("textbox").parentElement!
+      expect(getToken("input.borderColor:error")).toBe(
+        "var(--np--input--border-color--error)"
+      )
+      expect(cssFor(wrapper)).toContain(
+        `border-color:${getToken("input.borderColor:error")}`
+      )
+    })
+
+    it("resolves the effect object form (inverse) like Button", () => {
+      render(
+        <Input
+          aria-label="x"
+          backgroundColor={{ name: "raised", inverse: true }}
+          borderColor={{ name: "strong", inverse: true }}
+        />
+      )
+      const css = cssFor(screen.getByRole("textbox").parentElement!)
+      expect(css).toContain(
+        `background-color:${getToken("input.backgroundColor:raised", { inverse: true })}`
+      )
+      expect(css).toContain(
+        `border-color:${getToken("input.borderColor:strong", { inverse: true })}`
+      )
+      expect(css).toContain("var(--np--input--background-color--raised--inverse)")
+      expect(css).toContain("var(--np--input--border-color--strong--inverse)")
+    })
+
+    it("rejects raw CSS strings (compile-time)", () => {
+      // Type-only: not rendered, so getToken never looks the raw string up.
+      const props: InputProps[] = [
+        // @ts-expect-error — raw colour strings are not token variants
+        { "aria-label": "y", backgroundColor: "#f00" },
+        // @ts-expect-error — raw colour strings are not token variants
+        { "aria-label": "z", borderColor: "red" },
+      ]
+      expect(props).toHaveLength(2)
+    })
   })
 
   it("applies the font-size floor token to the control", () => {

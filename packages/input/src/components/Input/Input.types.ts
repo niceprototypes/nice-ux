@@ -1,5 +1,37 @@
 import * as React from "react"
-import { SizeType, BorderWidthType, ThemeType } from "nice-react-styles"
+import {
+  SizeType,
+  BorderWidthType,
+  ThemeType,
+  BackgroundColorType,
+  BorderColorType,
+  ColorTokenProp,
+} from "nice-react-styles"
+
+/**
+ * InputBackgroundColorType
+ *
+ * @token Re-export of BackgroundColorType from nice-styles. Token-bound —
+ * raw CSS color strings are not accepted. Resolved through the
+ * `input.backgroundColor` component group.
+ *
+ * Values:
+ * - "base", "raised", "success", "highlight", "warning", "error", "link"
+ */
+export type InputBackgroundColorType = BackgroundColorType
+
+/**
+ * InputBorderColorType
+ *
+ * @token Re-export of BorderColorType from nice-styles. Token-bound —
+ * raw CSS color strings are not accepted. Resolved through the
+ * `input.borderColor` component group.
+ *
+ * Values:
+ * - "base", "subtle", "strong", "stronger", "success", "highlight",
+ *   "warning", "error", "link"
+ */
+export type InputBorderColorType = BorderColorType
 
 /**
  * InputBorderRadiusType
@@ -462,11 +494,19 @@ export interface InputBaseProps {
   /** Pin token resolution to a specific theme instead of responding to media query */
   theme?: ThemeType
 
-  /** Override background color (CSS value or var reference) */
-  backgroundColor?: string
+  /**
+   * @token Override background color — a BackgroundColorType variant or
+   * `{ name, theme?, breakpoint?, inverse?, transform? }`, resolved through
+   * `input.backgroundColor`. Raw CSS color strings are not accepted.
+   */
+  backgroundColor?: ColorTokenProp<InputBackgroundColorType>
 
-  /** Override border color (CSS value or var reference) */
-  borderColor?: string
+  /**
+   * @token Override border color — a BorderColorType variant or
+   * `{ name, theme?, breakpoint?, inverse?, transform? }`, resolved through
+   * `input.borderColor`. Raw CSS color strings are not accepted.
+   */
+  borderColor?: ColorTokenProp<InputBorderColorType>
 
   /**
    * Content before the native control, inside the chrome (inline-start side)
@@ -603,6 +643,8 @@ namespace InputTypes {
   export type AriaDescribedBy = InputAriaDescribedByType
   export type TestId = InputTestIdType
   export type Theme = ThemeType
+  export type BackgroundColor = InputBackgroundColorType
+  export type BorderColor = InputBorderColorType
   export type ControlElement = InputControlElementType
   export type As = InputAsType
   export type Ref = InputRefType
