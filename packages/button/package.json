@@ -38,8 +38,7 @@
     "lint": "eslint src --ext .ts,.tsx",
     "typecheck": "tsc --noEmit",
     "prepublishOnly": "npm run build",
-    "generate-exports": "nice-generate-exports .",
-    "prepare": "npm run build"
+    "generate-exports": "nice-generate-exports ."
   },
   "peerDependencies": {
     "nice-react-flex": ">=2.0.0",
