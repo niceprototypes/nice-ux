@@ -32,6 +32,7 @@ const Form: React.FC<FormProps> = ({
   noValidate,
   onSubmit,
   preventDefault = true,
+  ref,
   style,
   theme,
 }) => {
@@ -52,6 +53,7 @@ const Form: React.FC<FormProps> = ({
       name={name}
       noValidate={noValidate}
       onSubmit={handleSubmit}
+      ref={ref}
       style={style}
     >
       {children}

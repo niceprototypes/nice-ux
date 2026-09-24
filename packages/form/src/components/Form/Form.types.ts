@@ -83,6 +83,14 @@ export type FormAriaDescribedByType = string
 export type FormTestIdType = string
 
 /**
+ * FormRefType
+ *
+ * Ref forwarded to the native `<form>` element. React 19 passes `ref` as a
+ * plain prop to function components, so no forwardRef wrapper is involved.
+ */
+export type FormRefType = React.Ref<HTMLFormElement>
+
+/**
  * FormProps
  *
  * Complete prop definition for the Form component. A stateless layout
@@ -133,6 +141,9 @@ export interface FormProps {
 
   /** Test selector */
   "data-testid"?: FormTestIdType
+
+  /** Ref to the native `<form>` element */
+  ref?: FormRefType
 }
 
 const FormTypes = {} as const
@@ -148,6 +159,7 @@ namespace FormTypes {
   export type AriaLabel = FormAriaLabelType
   export type AriaDescribedBy = FormAriaDescribedByType
   export type TestId = FormTestIdType
+  export type Ref = FormRefType
   export type Theme = ThemeType
   export type Props = FormProps
 }
