@@ -3,3 +3,4 @@
 [2026-09-14 22:30] major: Remove getInputToken export and src/tokens wrappers — component tokens are read with getToken(name, variant, { prefix: "input" }) from nice-react-styles
 [2026-09-16 15:11] patch: getToken call sites migrated to the token address form
 [2026-09-24 17:41] patch: Paint filled inputs on the raised background token
+[2026-09-24 18:41] major: Render Input as field chrome around an input/select/textarea — wrapper owns border, background, width and focus ring; className/style move to the wrapper; add ref, as, start/end slots, width, rows, inputMode, enterKeyHint, spellCheck, dir, dirName; 16px font floor

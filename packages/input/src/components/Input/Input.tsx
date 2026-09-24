@@ -1,23 +1,30 @@
 import * as React from "react"
 import { Theme } from "nice-react-styles"
-import { StyledInput } from "./Input.styles"
+import { StyledControl, StyledField } from "./Input.styles"
 import { InputProps } from "./Input.types"
 import { isDisabled } from "../../utilities/isDisabled"
 
 const Input: React.FC<InputProps> = ({
   "aria-describedby": ariaDescribedBy,
   "aria-label": ariaLabel,
+  as = "input",
   autoComplete,
   autoFocus = false,
   backgroundColor,
   borderColor,
   borderRadius = "base",
   borderWidth = "base",
+  children,
   className,
   "data-testid": testId,
   defaultValue,
+  dir,
+  dirName,
+  end,
+  enterKeyHint,
   filled = false,
   id,
+  inputMode,
   maxLength,
   minLength,
   theme,
@@ -29,62 +36,92 @@ const Input: React.FC<InputProps> = ({
   pattern,
   placeholder,
   readOnly = false,
+  ref,
   required = false,
+  rows,
   size = "base",
+  spellCheck,
+  start,
   status = "base",
   style,
   type = "text",
   value,
+  width = "full",
 }) => {
-  const [isFocused, setIsFocused] = React.useState(false)
   const disabled = isDisabled(status)
 
-  const input = (
-    <StyledInput
+  // Attributes that only exist on one element. `type` is an <input> attribute;
+  // `rows` a <textarea> one; `pattern` does not apply to <select>/<textarea>.
+  // React 19 has no camelCase mapping for `dirname`, so it is passed lowercase
+  // (a camelCase `dirName` renders verbatim and triggers an unknown-prop warning).
+  const elementProps =
+    as === "input" ? { type, pattern } : as === "textarea" ? { rows } : {}
+  const dirNameAttribute =
+    dirName === undefined
+      ? {}
+      : ({ dirname: dirName } as Record<string, string>)
+
+  const field = (
+    <StyledField
+      $as={as}
       $backgroundColor={backgroundColor}
       $borderColor={borderColor}
       $borderRadius={borderRadius}
       $borderWidth={borderWidth}
       $disabled={disabled}
       $filled={filled}
-      $isFocused={isFocused}
       $size={size}
       $status={status}
-      aria-describedby={ariaDescribedBy}
-      aria-label={ariaLabel}
-      autoComplete={autoComplete}
-      autoFocus={autoFocus}
+      $width={width}
       className={className}
-      data-testid={testId}
-      defaultValue={defaultValue}
-      disabled={disabled}
-      id={id}
-      maxLength={maxLength}
-      minLength={minLength}
-      name={name}
-      onBlur={(event) => {
-        setIsFocused(false)
-        onBlur?.(event)
-      }}
-      onChange={(event) => {
-        onChange?.(event.target.value, event)
-      }}
-      onFocus={(event) => {
-        setIsFocused(true)
-        onFocus?.(event)
-      }}
-      onKeyDown={onKeyDown}
-      pattern={pattern}
-      placeholder={placeholder}
-      readOnly={readOnly}
-      required={required}
       style={style}
-      type={type}
-      value={value}
-    />
+    >
+      {start}
+      <StyledControl
+        as={as}
+        $as={as}
+        $disabled={disabled}
+        $rows={rows}
+        $size={size}
+        {...elementProps}
+        {...dirNameAttribute}
+        // StyledControl is typed as <input>; the rendered element is chosen at
+        // runtime by `as`, and InputProps narrows `ref` per branch, so the
+        // union is narrowed to the base element here (same as Button).
+        ref={ref as React.Ref<HTMLInputElement>}
+        aria-describedby={ariaDescribedBy}
+        aria-label={ariaLabel}
+        autoComplete={autoComplete}
+        autoFocus={autoFocus}
+        data-testid={testId}
+        defaultValue={defaultValue}
+        dir={dir}
+        disabled={disabled}
+        enterKeyHint={enterKeyHint}
+        id={id}
+        inputMode={inputMode}
+        maxLength={maxLength}
+        minLength={minLength}
+        name={name}
+        onBlur={onBlur}
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+          onChange?.(event.target.value, event)
+        }}
+        onFocus={onFocus}
+        onKeyDown={onKeyDown}
+        placeholder={placeholder}
+        readOnly={readOnly}
+        required={required}
+        spellCheck={spellCheck}
+        value={value}
+      >
+        {as === "select" ? children : undefined}
+      </StyledControl>
+      {end}
+    </StyledField>
   )
 
-  return theme ? <Theme name={theme}>{input}</Theme> : input
+  return theme ? <Theme name={theme}>{field}</Theme> : field
 }
 
 export default Input

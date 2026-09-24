@@ -1,7 +1,12 @@
 import styled, { css } from "styled-components"
 import { getToken } from "nice-react-styles"
 import type { SizeType, BorderWidthType } from "nice-react-styles"
-import type { InputBorderRadiusType, InputStatusType } from "./Input.types"
+import type {
+  InputAsType,
+  InputBorderRadiusType,
+  InputStatusType,
+  InputWidthType,
+} from "./Input.types"
 
 /**
  * Border color: status name maps 1:1 to a core --np--border-color variant.
@@ -15,63 +20,66 @@ function getBorderColor(status: InputStatusType, filled: boolean): string {
   return getToken("borderColor", status)
 }
 
-export const StyledInput = styled.input.withConfig({
-  shouldForwardProp: (prop) => !prop.startsWith("$"),
+/**
+ * Native control inside the field chrome. Transparent and borderless — the
+ * wrapper (StyledField) owns every visual of the field — and it grows to fill
+ * the space between the start / end slots. Rendered as input, select or
+ * textarea via styled-components' `as`.
+ */
+export const StyledControl = styled.input.withConfig({
+  shouldForwardProp: prop => !prop.startsWith("$"),
 })<{
-  $backgroundColor?: string
-  $borderColor?: string
-  $borderRadius: InputBorderRadiusType
-  $borderWidth: BorderWidthType
+  $as: InputAsType
   $disabled: boolean
-  $filled: boolean
-  $isFocused: boolean
+  $rows?: number
   $size: SizeType
-  $status: InputStatusType
 }>`
   /* Reset */
   margin: 0;
+  padding: 0;
+  border: 0;
   outline: none;
+  background: transparent;
+  box-sizing: border-box;
   font-family: inherit;
-  font-size: inherit;
-  line-height: 1;
+  /* Font floor: max(16px, core font size) — below 16px mobile browsers zoom on focus */
+  font-size: ${getToken("input.fontSize:base")};
   -webkit-tap-highlight-color: transparent;
   appearance: none;
   -webkit-appearance: none;
 
-  ${({
-    $size,
-    $status,
-    $filled,
-    $borderWidth,
-    $borderRadius,
-    $backgroundColor,
-    $borderColor,
-    $disabled,
-  }) => css`
-    display: block;
-    box-sizing: border-box;
-    width: 100%;
-    height: ${getToken(`input.size:${$size}`)};
-    padding: 0 ${getToken(`input.spacing:${$size}`)};
+  ${({ $as, $disabled, $rows, $size }) => css`
+    flex: 1 1 0;
+    min-inline-size: 0;
+    align-self: stretch;
     font-weight: ${getToken("fontWeight", "base")};
-    background-color: ${getToken("backgroundColor", $filled ? "raised" : "base")};
     color: ${getToken("color", $disabled ? "disabled" : "base")};
-    border-style: solid;
-    border-width: ${getToken(`input.borderWidth:${$borderWidth}`)};
-    border-color: ${getBorderColor($status, $filled)};
-    border-radius: ${getToken(`input.borderRadius:${$borderRadius}`)};
-    transition: border-color 0.15s ease-in-out, background-color 0.15s ease-in-out;
-    cursor: ${$disabled ? "not-allowed" : "text"};
-    ${$backgroundColor ? `background-color: ${$backgroundColor};` : ""}
-    ${$borderColor ? `border-color: ${$borderColor};` : ""}
+    cursor: ${$disabled
+      ? "not-allowed"
+      : $as === "select"
+        ? "pointer"
+        : "text"};
+
+    ${$as === "textarea"
+      ? css`
+          /* Grows with content; the first line sits where a single-line input's
+             text would (vertically centred in the size token), and min-block-size
+             keeps at least $rows lines (HTML default 2) so it never collapses. */
+          field-sizing: content;
+          resize: vertical;
+          line-height: ${getToken("lineHeight", "base")};
+          padding-block: calc((${getToken(`input.size:${$size}`)} - 1lh) / 2);
+          min-block-size: calc(
+            ${$rows ?? 2} * 1lh + ${getToken(`input.size:${$size}`)} - 1lh
+          );
+        `
+      : css`
+          line-height: 1;
+        `}
 
     &::placeholder {
       color: ${getToken("color", $disabled ? "disabled" : "lighter")};
       opacity: 1;
-    }
-
-    &:focus {
-      border-color: ${getToken("color", "base")};
     }
 
     &:disabled {
@@ -81,6 +89,86 @@ export const StyledInput = styled.input.withConfig({
     &::-webkit-search-cancel-button,
     &::-webkit-search-decoration {
       -webkit-appearance: none;
+    }
+  `}
+`
+
+/**
+ * Field chrome: the root element. Owns height, padding, border, radius,
+ * background, status border colour, width and the focus ring, and lays out
+ * start slot → native control → end slot on the inline axis (flex row + gap,
+ * so the order mirrors under RTL with no physical left/right).
+ */
+export const StyledField = styled.div.withConfig({
+  shouldForwardProp: prop => !prop.startsWith("$"),
+})<{
+  $as: InputAsType
+  $backgroundColor?: string
+  $borderColor?: string
+  $borderRadius: InputBorderRadiusType
+  $borderWidth: BorderWidthType
+  $disabled: boolean
+  $filled: boolean
+  $size: SizeType
+  $status: InputStatusType
+  $width: InputWidthType
+}>`
+  ${({
+    $as,
+    $size,
+    $status,
+    $filled,
+    $borderWidth,
+    $borderRadius,
+    $backgroundColor,
+    $borderColor,
+    $disabled,
+    $width,
+  }) => css`
+    display: flex;
+    flex-direction: row;
+    align-items: ${$as === "textarea" ? "flex-start" : "center"};
+    gap: ${getToken("gap", "small")};
+    box-sizing: border-box;
+    /* The width token is ch-based; ch resolves against this font size, so it
+       matches the control's floored font size. */
+    font-size: ${getToken("input.fontSize:base")};
+    width: ${getToken(`input.width:${$width}`)};
+    ${$as === "textarea"
+      ? css`
+          min-block-size: ${getToken(`input.size:${$size}`)};
+        `
+      : css`
+          block-size: ${getToken(`input.size:${$size}`)};
+        `}
+    padding-block: 0;
+    padding-inline: ${getToken(`input.spacing:${$size}`)};
+    background-color: ${getToken(
+      "backgroundColor",
+      $filled ? "raised" : "base"
+    )};
+    border-style: solid;
+    border-width: ${getToken(`input.borderWidth:${$borderWidth}`)};
+    border-color: ${getBorderColor($status, $filled)};
+    border-radius: ${getToken(`input.borderRadius:${$borderRadius}`)};
+    transition:
+      border-color 0.15s ease-in-out,
+      background-color 0.15s ease-in-out;
+    cursor: ${$disabled ? "not-allowed" : "text"};
+    ${$backgroundColor ? `background-color: ${$backgroundColor};` : ""}
+    ${$borderColor ? `border-color: ${$borderColor};` : ""}
+
+    &:has(> ${StyledControl}:focus) {
+      border-color: ${getToken("color", "base")};
+    }
+
+    /* Keyboard focus ring. The native control keeps outline: none; the ring is
+       drawn on the chrome whenever something inside it has :focus-visible, as
+       an outline so it adds no layout — the same look as Button. */
+    &:has(:focus-visible) {
+      outline: ${getToken("input.focusRing.width:base")} solid
+        ${getToken("input.focusRing.color:base")};
+      outline-offset: ${getToken("input.focusRing.offset:base")};
     }
   `}
 `
