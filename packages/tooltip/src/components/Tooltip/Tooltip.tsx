@@ -55,6 +55,8 @@ const Tooltip: React.FC<TooltipProps> = ({
   // depend on event pooling.
   const cursor = React.useRef<{ x: number; y: number } | null>(null)
   const [visible, setVisible] = React.useState(false)
+  // Links the trigger to the bubble via aria-describedby while it is shown.
+  const bubbleId = React.useId()
   const [coords, setCoords] = React.useState<PopoverCoordinatesType>({ top: 0, left: 0, transform: "none" })
 
   const clearTimers = () => {
@@ -108,12 +110,24 @@ const Tooltip: React.FC<TooltipProps> = ({
 
   return (
     <>
-      <TriggerWrapper ref={triggerRef} className={className} $clickable={trigger === "click"} {...handlers}>
+      <TriggerWrapper
+        ref={triggerRef}
+        className={className}
+        aria-describedby={visible ? bubbleId : undefined}
+        $clickable={trigger === "click"}
+        {...handlers}
+      >
         {children}
       </TriggerWrapper>
       {visible && typeof document !== "undefined"
         ? createPortal(
-            <Bubble style={{ top: coords.top, left: coords.left, transform: coords.transform }}>{content}</Bubble>,
+            <Bubble
+              id={bubbleId}
+              role="tooltip"
+              style={{ top: coords.top, left: coords.left, transform: coords.transform }}
+            >
+              {content}
+            </Bubble>,
             document.body
           )
         : null}

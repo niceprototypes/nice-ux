@@ -177,6 +177,28 @@ describe("Tooltip", () => {
     })
   })
 
+  describe("aria", () => {
+    it("gives the bubble role tooltip", () => {
+      renderTooltip()
+      activate("hover")
+      expect(screen.getByRole("tooltip")).toHaveTextContent("tip")
+    })
+
+    it("links trigger to bubble with aria-describedby only while visible", () => {
+      renderTooltip()
+      expect(triggerEl()).not.toHaveAttribute("aria-describedby")
+      activate("hover")
+      const tooltip = screen.getByRole("tooltip")
+      expect(tooltip.id).not.toBe("")
+      expect(triggerEl()).toHaveAttribute("aria-describedby", tooltip.id)
+      fireEvent.mouseLeave(triggerEl())
+      act(() => {
+        jest.advanceTimersByTime(0)
+      })
+      expect(triggerEl()).not.toHaveAttribute("aria-describedby")
+    })
+  })
+
   it("applies className to the trigger wrapper", () => {
     renderTooltip({ className: "custom" })
     expect(triggerEl()).toHaveClass("custom")
