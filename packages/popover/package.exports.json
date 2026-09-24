@@ -1,0 +1,7 @@
+{
+  "$schema": "../config-exports/src/schema.json",
+  "description": "Popover component for nice-react: a portal-positioned surface anchored to an element.",
+  "default": "Popover",
+  "components": ["Popover"],
+  "services": ["computeAnchorPosition"]
+}
