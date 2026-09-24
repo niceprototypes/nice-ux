@@ -1,0 +1,1 @@
+export { mergeDescribedBy } from "./mergeDescribedBy"
