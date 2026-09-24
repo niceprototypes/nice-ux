@@ -15,8 +15,7 @@
     "test": "jest",
     "typecheck": "tsc --noEmit",
     "prepublishOnly": "npm run build",
-    "generate-exports": "nice-generate-exports .",
-    "prepare": "npm run build"
+    "generate-exports": "nice-generate-exports ."
   },
   "keywords": [
     "react",
