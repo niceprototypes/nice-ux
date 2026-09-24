@@ -13,7 +13,6 @@ export const StyledButton = styled.button.withConfig({
   $borderWidth: BorderWidthType
   $disabled: boolean
   $isHovered: boolean
-  $isFocused: boolean
   $isPressed: boolean
   $size: SizeType
   $hasPadding: boolean

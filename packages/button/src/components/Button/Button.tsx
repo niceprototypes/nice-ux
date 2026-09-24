@@ -44,7 +44,6 @@ const Button: React.FC<ButtonProps> = ({
   weight,
 }) => {
   const [isHovered, setIsHovered] = React.useState(false)
-  const [isFocused, setIsFocused] = React.useState(false)
   const [isPressed, setIsPressed] = React.useState(false)
   // Disabled when either the `disabled` prop or `status="disabled"` asks for it.
   const disabled = disabledProp || isDisabled(status)
@@ -130,8 +129,6 @@ const Button: React.FC<ButtonProps> = ({
         setIsHovered(false)
         onMouseLeave?.(e)
       }}
-      onFocus={() => setIsFocused(true)}
-      onBlur={() => setIsFocused(false)}
       onPointerDown={() => setIsPressed(true)}
       onPointerUp={() => setIsPressed(false)}
       onPointerCancel={() => setIsPressed(false)}
@@ -141,7 +138,6 @@ const Button: React.FC<ButtonProps> = ({
       $borderWidth={borderWidth}
       $disabled={disabled}
       $isHovered={isHovered}
-      $isFocused={isFocused}
       $isPressed={isPressed}
       $filled={filled}
       $inlined={inlined}
