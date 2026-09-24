@@ -36,8 +36,7 @@
     "test": "jest",
     "typecheck": "tsc --noEmit",
     "prepublishOnly": "npm run build",
-    "generate-exports": "nice-generate-exports .",
-    "prepare": "npm run build"
+    "generate-exports": "nice-generate-exports ."
   },
   "peerDependencies": {
     "nice-react-icon-vendor": ">=1.0.0",
@@ -92,6 +91,7 @@
   },
   "dependencies": {
     "nice-icons": "file:../icons",
-    "nice-react-styles": "file:../react-styles"
+    "nice-react-styles": "file:../react-styles",
+    "nice-styles": "file:../styles"
   }
 }
