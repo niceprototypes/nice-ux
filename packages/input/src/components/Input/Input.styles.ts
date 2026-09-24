@@ -23,6 +23,21 @@ function getBorderColor(status: InputStatusType, filled: boolean): string {
 }
 
 /**
+ * Wrapper width. `input.width` numeric variants hold the content width only
+ * (`Nch`), so the chrome adds its own size-specific inline padding and border
+ * on both sides. `full` (100%) is used as-is.
+ */
+function getWidth(
+  width: InputWidthType,
+  size: SizeType,
+  borderWidth: BorderWidthType
+): string {
+  const content = getToken(`input.width:${width}`)
+  if (width === "full") return content
+  return `calc(${content} + 2 * ${getToken(`input.spacing:${size}`)} + 2 * ${getToken(`input.borderWidth:${borderWidth}`)})`
+}
+
+/**
  * Native control inside the field chrome. Transparent and borderless — the
  * wrapper (StyledField) owns every visual of the field — and it grows to fill
  * the space between the start / end slots. Rendered as input, select or
@@ -132,10 +147,10 @@ export const StyledField = styled.div.withConfig({
     align-items: ${$as === "textarea" ? "flex-start" : "center"};
     gap: ${getToken("gap", "small")};
     box-sizing: border-box;
-    /* The width token is ch-based; ch resolves against this font size, so it
-       matches the control's floored font size. */
+    /* The width token's content part is ch-based; ch resolves against this
+       font size, so it matches the control's floored font size. */
     font-size: ${getToken("input.fontSize:base")};
-    width: ${getToken(`input.width:${$width}`)};
+    width: ${getWidth($width, $size, $borderWidth)};
     ${$as === "textarea"
       ? css`
           min-block-size: ${getToken(`input.size:${$size}`)};

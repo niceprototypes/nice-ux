@@ -243,20 +243,65 @@ describe("Input", () => {
     expect(children[2]).not.toHaveAttribute("aria-hidden")
   })
 
-  it("applies the width token on the wrapper (default full)", () => {
-    const { rerender } = render(<Input aria-label="x" />)
-    expect(cssFor(screen.getByRole("textbox").parentElement!)).toContain(
-      `width:${getToken("input.width:full")}`
+  describe("width", () => {
+    const numericWidths = ["2", "3", "4", "5", "10", "20"] as const
+    const sizes = ["smaller", "small", "base", "large", "larger"] as const
+
+    /** The wrapper's own `width:` declaration (not border-width etc.). */
+    function wrapperWidth(): string | undefined {
+      const css = cssFor(screen.getByRole("textbox").parentElement!)
+      return css.match(/[;{]width:([^;}]*)/)?.[1]
+    }
+
+    it("uses the full token as-is by default", () => {
+      render(<Input aria-label="x" />)
+      expect(getToken("input.width:full", { as: "value" })).toBe("100%")
+      expect(wrapperWidth()).toBe(getToken("input.width:full"))
+    })
+
+    it("uses the full token as-is at every size", () => {
+      const { rerender } = render(<Input aria-label="x" />)
+      sizes.forEach(size => {
+        rerender(
+          <Input
+            aria-label="x"
+            width="full"
+            size={size}
+          />
+        )
+        expect(wrapperWidth()).toBe(getToken("input.width:full"))
+      })
+    })
+
+    it.each(numericWidths.flatMap(width => sizes.map(size => [width, size])))(
+      "adds size padding and border to the %sch content width at size %s",
+      (width, size) => {
+        render(
+          <Input
+            aria-label="x"
+            width={width as (typeof numericWidths)[number]}
+            size={size as (typeof sizes)[number]}
+          />
+        )
+        expect(wrapperWidth()).toBe(
+          `calc(${getToken(`input.width:${width as (typeof numericWidths)[number]}`)} + 2 * ${getToken(`input.spacing:${size as (typeof sizes)[number]}`)} + 2 * ${getToken("input.borderWidth:base")})`
+        )
+      }
     )
-    rerender(
-      <Input
-        aria-label="x"
-        width="10"
-      />
-    )
-    expect(cssFor(screen.getByRole("textbox").parentElement!)).toContain(
-      `width:${getToken("input.width:10")}`
-    )
+
+    it("uses the borderWidth prop's token in the calc", () => {
+      render(
+        <Input
+          aria-label="x"
+          width="10"
+          size="large"
+          borderWidth="small"
+        />
+      )
+      expect(wrapperWidth()).toBe(
+        `calc(${getToken("input.width:10")} + 2 * ${getToken("input.spacing:large")} + 2 * ${getToken("input.borderWidth:small")})`
+      )
+    })
   })
 
   describe("colour props", () => {
