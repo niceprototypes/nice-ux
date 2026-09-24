@@ -1,5 +1,5 @@
 import styled, { keyframes } from "styled-components"
-import { getToken } from "nice-react-styles"
+import { getToken, type AnimationDurationType } from "nice-react-styles"
 import Flex from "nice-react-flex"
 import Ink from "../../nice/Ink"
 import { DOT_SIZE, demoFont } from "./constants"
@@ -19,7 +19,7 @@ export const slide = keyframes`
 // The animated dot. Duration scales with the variant's animationDuration token
 // (×6 so the motion reads at a glance); base alone is delayed by one duration so
 // the three rows visibly stagger.
-export const Dot = styled.div<{ $variant: string }>`
+export const Dot = styled.div<{ $variant: AnimationDurationType }>`
   width: ${DOT_SIZE};
   height: ${DOT_SIZE};
   border-radius: 50%;

@@ -3,5 +3,5 @@
  * variant object. Shared by the token tables and the component demo tables,
  * which use the same `string | { variant }` row shape.
  */
-export const variantKey = (item: string | { variant: string }): string =>
+export const variantKey = <V extends string>(item: V | { variant: V }): V =>
   typeof item === "string" ? item : item.variant

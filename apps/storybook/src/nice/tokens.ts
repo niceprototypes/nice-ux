@@ -1,3 +1,4 @@
+/// <reference path="./customTokens.d.ts" />
 import { setTokens } from "nice-react-styles"
 
 /**

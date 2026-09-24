@@ -42,7 +42,7 @@ export const StatusPill = styled.span`
 `
 
 export const LicenseFlex = styled(Flex)`
-  background-color: ${getToken("backgroundColor", "light",  { inverse: true })};
+  background-color: ${getToken("backgroundColor", "base", { inverse: true })};
   border-radius: ${getToken("borderRadius", "small")};
 `
 

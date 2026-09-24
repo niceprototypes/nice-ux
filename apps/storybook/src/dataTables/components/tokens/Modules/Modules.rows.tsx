@@ -1,5 +1,6 @@
 import * as React from "react"
 import { getToken } from "nice-react-styles"
+import type { TokenGroup, TokenVariants } from "nice-styles"
 import { TokenName, variantKey } from "../../../utilities"
 import { tokenCode } from "./Modules.tokenCode"
 import type { DataTableConfig, DataRowItem } from "../../../../components/DataTable"
@@ -18,7 +19,7 @@ import type { HighlightedToken } from "./Modules.hooks"
  * keep their base form in both modes.
  */
 /** Pristine night value, or the day value for tokens with no night value (getToken throws on those). */
-function nightValueOf(group: string, variant: string, dayValue: string): string {
+function nightValueOf(group: TokenGroup, variant: TokenVariants[TokenGroup], dayValue: string): string {
   try {
     return getToken(group, variant, { theme: "night", pristine: true, as: "value" })
   } catch {
@@ -27,7 +28,7 @@ function nightValueOf(group: string, variant: string, dayValue: string): string 
 }
 
 export function buildTokenRows(
-  group: string,
+  group: TokenGroup,
   variants: ReadonlyArray<TokenVariant>,
   preview: ((item: TokenVariant) => React.ReactNode) | undefined,
   isNight: boolean,

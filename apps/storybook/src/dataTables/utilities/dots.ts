@@ -1,4 +1,4 @@
-import { getToken } from "nice-react-styles"
+import { getToken, type ColorType } from "nice-react-styles"
 
 /** Two equal dots — the row/column direction and padding demos. */
 export const twoDots = [
@@ -45,7 +45,8 @@ export const growDots = (factor: number) => [
 
 // wrap ─ five equal squares in a track ~3 wide: they wrap to new lines when
 // wrapping is on. The nowrap set instead grows to share one line (no width, grow 1).
-const wrapDots = ["error", "warning", "link", "success", "disabled"].map((color) => ({
+const wrapColors: ReadonlyArray<ColorType> = ["error", "warning", "link", "success", "disabled"]
+const wrapDots = wrapColors.map((color) => ({
   color: getToken("color", color),
   height: getToken("size", "small"),
   width: getToken("size", "small"),
