@@ -2,6 +2,8 @@ import React from "react"
 import { render, screen, fireEvent } from "@testing-library/react"
 import "@testing-library/jest-dom"
 import Button from "./Button"
+import ResponsiveButton from "."
+import type { ButtonRefType } from "./Button.types"
 
 jest.mock("nice-react-ink", () => ({
   __esModule: true,
@@ -132,4 +134,45 @@ describe("Button", () => {
     rerender(<Button onClick={mockOnClick} type="reset">Reset</Button>)
     expect(screen.getByRole("button")).toHaveAttribute("type", "reset")
   })
+
+  describe("ref", () => {
+    const cases = [
+      { as: undefined, element: HTMLButtonElement, tag: "BUTTON" },
+      { as: "a" as const, element: HTMLAnchorElement, tag: "A" },
+      { as: "div" as const, element: HTMLDivElement, tag: "DIV" },
+    ]
+
+    it.each(cases)("forwards ref to the root element (as=$as)", ({ as, element, tag }) => {
+      const ref = React.createRef<HTMLButtonElement | HTMLAnchorElement | HTMLDivElement>()
+      render(
+        <Button onClick={mockOnClick} as={as} href="#" ref={ref} data-testid="root">
+          Label
+        </Button>
+      )
+      expect(ref.current).toBeInstanceOf(element)
+      expect(ref.current?.tagName).toBe(tag)
+      expect(ref.current).toBe(screen.getByTestId("root"))
+    })
+
+    it.each(cases)("forwards ref through withBreakpoints (as=$as)", ({ as, element }) => {
+      const ref = React.createRef<HTMLButtonElement | HTMLAnchorElement | HTMLDivElement>()
+      render(
+        <ResponsiveButton onClick={mockOnClick} as={as} href="#" ref={ref} data-testid="root">
+          Label
+        </ResponsiveButton>
+      )
+      expect(ref.current).toBeInstanceOf(element)
+      expect(ref.current).toBe(screen.getByTestId("root"))
+    })
+
+    it("calls a callback ref with the element", () => {
+      let node: HTMLElement | null = null
+      const ref: ButtonRefType = (el) => {
+        node = el
+      }
+      render(<Button onClick={mockOnClick} ref={ref}>Label</Button>)
+      expect(node).toBe(screen.getByRole("button"))
+    })
+  })
+
 })

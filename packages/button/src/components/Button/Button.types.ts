@@ -90,6 +90,18 @@ export type ButtonInlinedType = boolean
 export type ButtonAsType = "a" | "div"
 
 /**
+ * ButtonRefType
+ *
+ * Ref forwarded to the rendered root element. React 19 passes `ref` as a plain
+ * prop to function components, so no forwardRef wrapper is involved. The
+ * element depends on `as`:
+ * - omitted: `HTMLButtonElement`
+ * - `"a"`: `HTMLAnchorElement`
+ * - `"div"`: `HTMLDivElement`
+ */
+export type ButtonRefType = React.Ref<HTMLButtonElement | HTMLAnchorElement | HTMLDivElement>
+
+/**
  * URL destination when rendered as an anchor (`as="a"`)
  */
 export type ButtonHrefType = string
@@ -213,6 +225,12 @@ export interface ButtonProps {
    */
   as?: ButtonAsType
 
+  /**
+   * Ref to the rendered root element: `<button>` by default, `<a>` when
+   * `as="a"`, `<div>` when `as="div"`.
+   */
+  ref?: ButtonRefType
+
   /** URL destination when `as="a"` */
   href?: ButtonHrefType
 
@@ -238,6 +256,7 @@ namespace ButtonTypes {
   export type OnMouseEnter = ButtonOnMouseEnterType
   export type OnMouseLeave = ButtonOnMouseLeaveType
   export type As = ButtonAsType
+  export type Ref = ButtonRefType
   export type Href = ButtonHrefType
   export type Target = ButtonTargetType
   export type ClassName = ButtonClassNameType

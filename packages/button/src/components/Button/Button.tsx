@@ -31,6 +31,7 @@ const Button: React.FC<ButtonProps> = ({
   onMouseLeave,
   size = "base",
   padding,
+  ref,
   status = "base",
   style,
   target,
@@ -137,6 +138,10 @@ const Button: React.FC<ButtonProps> = ({
       $square={square}
       $status={status}
       {...elementProps}
+      // StyledButton's polymorphic overloads type `ref` for one element at a time;
+      // the rendered element is chosen at runtime by `as` (button / a / div), so
+      // the public ButtonRefType union is narrowed to the base element here.
+      ref={ref as React.Ref<HTMLButtonElement>}
       aria-label={ariaLabel}
       className={className}
       data-testid={testId}
