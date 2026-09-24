@@ -70,9 +70,13 @@ const { top, left, transform } = computeAnchorPosition(el.getBoundingClientRect(
   is recomputed on scroll (capture) and resize while open.
 - **Focus.** Focus is not trapped. On close, focus returns to the anchor if it
   was inside the popover.
-- **Tokens.** Surface uses core tokens: `backgroundColor:raised`, `color:base`,
-  `borderRadius:base`, `boxShadow:base`, `zIndex:higher`. The anchor offset is a
-  fixed 8px until the `popover.offset` token lands in nice-styles.
+- **Tokens.** Radius, shadow, stacking and max height use the `popover.*`
+  component tokens (`popover.borderRadius`, `popover.boxShadow`,
+  `popover.zIndex`, `popover.maxHeight`); content taller than the max height
+  scrolls. Colours use core `backgroundColor:raised` / `color:base`.
+- **Offset.** The anchor gap is read from `popover.offset` as a raw value and
+  parsed as px, because positioning runs in JS. A non-px value — including the
+  seed alias `var(--np--gap--small)` — falls back to 8px.
 
 ## License
 

@@ -4,12 +4,7 @@ import { Theme } from "nice-react-styles"
 import { StyledPopover } from "./Popover.styles"
 import type { PopoverCoordinatesType, PopoverProps } from "./Popover.types"
 import { computeAnchorPosition } from "../../services/computeAnchorPosition"
-
-// Gap in px between the anchor and the popover. A plain constant for now:
-// positioning runs in JS off getBoundingClientRect, where a CSS var can't be
-// read directly. To be replaced by the forthcoming `popover.offset` token in
-// nice-styles (src/tokens/components/popover.json).
-const OFFSET = 8
+import { getPopoverOffset } from "../../utilities/getPopoverOffset"
 
 // Hydration-safe client check: false during server render and hydration, true
 // on client renders. Keeps createPortal / document access off the server.
@@ -78,10 +73,12 @@ const Popover: React.FC<PopoverProps> = ({
   // Position: measure before paint on open, then on scroll (capture) / resize.
   React.useLayoutEffect(() => {
     if (!open) return
+    // Gap in px from the `popover.offset` token, read once per open.
+    const offset = getPopoverOffset()
     const update = () => {
       const anchor = anchorRef.current
       if (!anchor) return
-      setCoords(computeAnchorPosition(anchor.getBoundingClientRect(), position, align, OFFSET))
+      setCoords(computeAnchorPosition(anchor.getBoundingClientRect(), position, align, offset))
     }
     update()
     window.addEventListener("scroll", update, true)

@@ -4,6 +4,7 @@ import "@testing-library/jest-dom"
 import Popover from "./Popover"
 import WrappedPopover from "./index"
 import { computeAnchorPosition } from "../../services/computeAnchorPosition"
+import { POPOVER_OFFSET_FALLBACK } from "../../utilities/getPopoverOffset"
 import type { PopoverProps } from "./Popover.types"
 
 const ANCHOR_RECT = { top: 100, left: 40, right: 140, bottom: 130, width: 100, height: 30, x: 40, y: 100 }
@@ -133,7 +134,7 @@ describe("Popover", () => {
 
   it("applies position styles from computeAnchorPosition (defaults bottom / start)", () => {
     render(<Harness aria-label="menu" />)
-    const expected = computeAnchorPosition(ANCHOR_RECT, "bottom", "start", 8)
+    const expected = computeAnchorPosition(ANCHOR_RECT, "bottom", "start", POPOVER_OFFSET_FALLBACK)
     const popover = screen.getByRole("dialog")
     expect(popover.style.top).toBe(`${expected.top}px`)
     expect(popover.style.left).toBe(`${expected.left}px`)
@@ -142,7 +143,7 @@ describe("Popover", () => {
 
   it("applies position styles for a given position and align", () => {
     render(<Harness aria-label="menu" position="right" align="center" />)
-    const expected = computeAnchorPosition(ANCHOR_RECT, "right", "center", 8)
+    const expected = computeAnchorPosition(ANCHOR_RECT, "right", "center", POPOVER_OFFSET_FALLBACK)
     const popover = screen.getByRole("dialog")
     expect(popover.style.top).toBe(`${expected.top}px`)
     expect(popover.style.left).toBe(`${expected.left}px`)
