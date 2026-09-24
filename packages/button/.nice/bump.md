@@ -6,3 +6,4 @@
 [2026-09-18 16:36] patch: Filled buttons take a transparent border instead of repeating the fill colour. The background paints to the border box, so the fill already shows through a transparent border — the second colour lookup was redundant.
 [2026-09-24 17:59] minor: Accept a ref on Button, forwarded to the rendered button, anchor, or div root
 [2026-09-24 17:59] patch: Show a token-driven keyboard focus outline on Button via :focus-visible
+[2026-09-24 19:44] patch: Disable Button natively when disabled or status="disabled": the <button> gets the disabled attribute, anchors and divs get aria-disabled with tabIndex -1, and the disabled prop takes the disabled colouring

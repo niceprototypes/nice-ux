@@ -19,6 +19,7 @@ const Button: React.FC<ButtonProps> = ({
   children,
   className,
   "data-testid": testId,
+  disabled: disabledProp = false,
   filled = false,
   href,
   iconLeft,
@@ -41,7 +42,10 @@ const Button: React.FC<ButtonProps> = ({
   const [isHovered, setIsHovered] = React.useState(false)
   const [isFocused, setIsFocused] = React.useState(false)
   const [isPressed, setIsPressed] = React.useState(false)
-  const disabled = isDisabled(status)
+  // Disabled when either the `disabled` prop or `status="disabled"` asks for it.
+  const disabled = disabledProp || isDisabled(status)
+  // A disabled button takes the disabled colouring whichever way it was disabled.
+  const effectiveStatus = disabled ? "disabled" : status
   // Passed through unchanged to the label/icon; retained as a seam for a future
   // inverted-theme derivation.
   const invertedTheme = theme
@@ -68,8 +72,10 @@ const Button: React.FC<ButtonProps> = ({
   }
 
   // Element attributes per `as`. Anchor: href/target/rel, disabled suppresses
-  // navigation. Clickable div: button-equivalent a11y (role, tabindex, keyboard
-  // activation). Plain button: the native type.
+  // navigation and removes it from the tab order. Clickable div: button-equivalent
+  // a11y (role, tabindex, keyboard activation). Plain button: the native type, and
+  // the native `disabled` attribute so it leaves the tab order and is announced
+  // as disabled.
   const elementProps = anchor
     ? {
         as: "a" as const,
@@ -77,6 +83,7 @@ const Button: React.FC<ButtonProps> = ({
         target,
         rel: target === "_blank" ? "noopener noreferrer" : undefined,
         "aria-disabled": disabled || undefined,
+        tabIndex: disabled ? -1 : undefined,
         onClick: disabled ? (e: React.MouseEvent) => e.preventDefault() : onClick,
       }
     : clickableDiv
@@ -90,6 +97,7 @@ const Button: React.FC<ButtonProps> = ({
       }
     : {
         type,
+        disabled,
         onClick: disabled ? undefined : onClick,
       }
 
@@ -136,7 +144,7 @@ const Button: React.FC<ButtonProps> = ({
       $size={size}
       $hasPadding={contentPadding !== undefined}
       $square={square}
-      $status={status}
+      $status={effectiveStatus}
       {...elementProps}
       // StyledButton's polymorphic overloads type `ref` for one element at a time;
       // the rendered element is chosen at runtime by `as` (button / a / div), so

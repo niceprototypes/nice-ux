@@ -136,6 +136,63 @@ describe("Button", () => {
     expect(screen.getByRole("button")).toHaveAttribute("type", "reset")
   })
 
+  describe("disabled", () => {
+    const triggers = [
+      { label: "disabled prop", props: { disabled: true } },
+      { label: 'status="disabled"', props: { status: "disabled" as const } },
+    ]
+
+    it.each(triggers)("as=button: sets native disabled and blocks onClick ($label)", ({ props }) => {
+      render(<Button onClick={mockOnClick} {...props}>Label</Button>)
+      const button = screen.getByRole("button")
+      expect(button).toBeDisabled()
+      fireEvent.click(button)
+      expect(mockOnClick).not.toHaveBeenCalled()
+    })
+
+    it.each(triggers)("as=a: aria-disabled, no href, tabIndex -1, no onClick ($label)", ({ props }) => {
+      render(
+        <Button onClick={mockOnClick} as="a" href="/next" data-testid="root" {...props}>
+          Label
+        </Button>
+      )
+      const anchor = screen.getByTestId("root")
+      expect(anchor).toHaveAttribute("aria-disabled", "true")
+      expect(anchor).not.toHaveAttribute("href")
+      expect(anchor).toHaveAttribute("tabindex", "-1")
+      fireEvent.click(anchor)
+      expect(mockOnClick).not.toHaveBeenCalled()
+    })
+
+    it.each(triggers)("as=div: aria-disabled, tabIndex -1, no onClick or key activation ($label)", ({ props }) => {
+      render(<Button onClick={mockOnClick} as="div" {...props}>Label</Button>)
+      const div = screen.getByRole("button")
+      expect(div).toHaveAttribute("aria-disabled", "true")
+      expect(div).toHaveAttribute("tabindex", "-1")
+      expect(div).not.toHaveAttribute("disabled")
+      fireEvent.click(div)
+      fireEvent.keyDown(div, { key: "Enter" })
+      expect(mockOnClick).not.toHaveBeenCalled()
+    })
+
+    it("stays enabled and focusable when not disabled", () => {
+      render(<Button onClick={mockOnClick} as="a" href="/next" data-testid="root">Label</Button>)
+      expect(screen.getByTestId("root")).toHaveAttribute("href", "/next")
+      expect(screen.getByTestId("root")).not.toHaveAttribute("tabindex")
+    })
+
+    it("applies the status=\"disabled\" styling when only the disabled prop is set", () => {
+      const { rerender } = render(<Button onClick={mockOnClick} status="disabled">Label</Button>)
+      const statusClass = screen.getByRole("button").className
+      rerender(<Button onClick={mockOnClick} disabled>Label</Button>)
+      const propClass = screen.getByRole("button").className
+      rerender(<Button onClick={mockOnClick}>Label</Button>)
+      const baseClass = screen.getByRole("button").className
+      expect(propClass).toBe(statusClass)
+      expect(propClass).not.toBe(baseClass)
+    })
+  })
+
   describe("ref", () => {
     const cases = [
       { as: undefined, element: HTMLButtonElement, tag: "BUTTON" },
