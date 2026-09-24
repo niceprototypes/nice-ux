@@ -77,7 +77,8 @@ export type PopoverOpenType = boolean
  * PopoverOnOpenChangeType
  *
  * Called when the popover requests a change of its open state. v1 only
- * requests `false` (Escape, pointerdown outside popover and anchor).
+ * requests `false` (Escape, pointerdown outside popover, anchor and
+ * `ignoreOutsideRefs`).
  */
 export type PopoverOnOpenChangeType = (open: boolean) => void
 
@@ -88,6 +89,16 @@ export type PopoverOnOpenChangeType = (open: boolean) => void
  * outside-pointerdown dismissal, and receives focus back on close.
  */
 export type PopoverAnchorRefType = React.RefObject<HTMLElement | null>
+
+/**
+ * PopoverIgnoreOutsideRefsType
+ *
+ * Refs to elements that do not count as "outside" for pointerdown dismissal,
+ * in addition to the popover and the anchor. Use it for a trigger that sits
+ * beside the anchor (e.g. a date field's calendar button), so pressing it does
+ * not dismiss the popover before the trigger's own toggle runs.
+ */
+export type PopoverIgnoreOutsideRefsType = ReadonlyArray<React.RefObject<HTMLElement | null>>
 
 /**
  * PopoverRoleType
@@ -127,10 +138,12 @@ export type PopoverClassNameType = string
 export interface PopoverProps {
   /** Whether the popover is rendered. */
   open: PopoverOpenType
-  /** Called with `false` on Escape or pointerdown outside the popover and anchor. */
+  /** Called with `false` on Escape or pointerdown outside the popover, anchor and `ignoreOutsideRefs`. */
   onOpenChange?: PopoverOnOpenChangeType
   /** Element the popover is positioned against. */
   anchorRef: PopoverAnchorRefType
+  /** Elements where a pointerdown does not dismiss the popover (besides the popover and anchor). */
+  ignoreOutsideRefs?: PopoverIgnoreOutsideRefsType
   /** Side of the anchor the popover is placed on. @default "bottom" */
   position?: PopoverPositionType
   /** Alignment along the anchor's cross axis. @default "start" */
@@ -167,6 +180,7 @@ namespace PopoverTypes {
   export type Open = PopoverOpenType
   export type OnOpenChange = PopoverOnOpenChangeType
   export type AnchorRef = PopoverAnchorRefType
+  export type IgnoreOutsideRefs = PopoverIgnoreOutsideRefsType
   export type Role = PopoverRoleType
   export type Ref = PopoverRefType
   export type Theme = PopoverThemeType

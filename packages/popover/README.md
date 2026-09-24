@@ -40,8 +40,9 @@ const Menu = () => {
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `open` | `boolean` | — | Whether the popover is rendered (required, controlled). |
-| `onOpenChange` | `(open: boolean) => void` | — | Called with `false` on Escape or pointerdown outside the popover and anchor. |
+| `onOpenChange` | `(open: boolean) => void` | — | Called with `false` on Escape or pointerdown outside the popover, anchor and `ignoreOutsideRefs`. |
 | `anchorRef` | `RefObject<HTMLElement \| null>` | — | Element the popover is positioned against (required). |
+| `ignoreOutsideRefs` | `ReadonlyArray<RefObject<HTMLElement \| null>>` | — | Elements where a pointerdown does not dismiss the popover, e.g. a trigger beside the anchor. |
 | `position` | `"top" \| "bottom" \| "left" \| "right"` | `"bottom"` | Side of the anchor. |
 | `align` | `"start" \| "center" \| "end"` | `"start"` | Cross-axis alignment against the anchor (physical: start = left / top). |
 | `role` | `AriaRole` | `"dialog"` | ARIA role of the popover element. |
@@ -68,6 +69,17 @@ const { top, left, transform } = computeAnchorPosition(el.getBoundingClientRect(
 - **Portal rendering.** The popover renders at `<body>` with `position: fixed`,
   so it is never clipped by a scrolling or `overflow: hidden` ancestor. Position
   is recomputed on scroll (capture) and resize while open.
+- **Outside dismiss.** A pointerdown outside the popover and the anchor calls
+  `onOpenChange(false)`. A trigger that sits beside the anchor (e.g. a date
+  field's calendar button) would dismiss the popover on pointerdown and then
+  reopen it with its own toggle on click. Pass it in `ignoreOutsideRefs` so its
+  pointerdown is ignored and the toggle alone decides:
+
+  ```tsx
+  <Popover open={open} onOpenChange={setOpen} anchorRef={fieldRef} ignoreOutsideRefs={[calendarButtonRef]}>
+  ```
+
+  The array may be written inline; the latest value is read on each pointerdown.
 - **Focus.** Focus is not trapped. On close, focus returns to the anchor if it
   was inside the popover.
 - **Tokens.** Radius, shadow, stacking and max height use the `popover.*`

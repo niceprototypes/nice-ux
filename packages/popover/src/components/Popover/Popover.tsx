@@ -19,8 +19,8 @@ const getServerSnapshot = () => false
  * at `<body>` with `position: fixed`, placed by `computeAnchorPosition` on
  * `position`'s side of the anchor with `align` on the cross axis. Coordinates
  * are recomputed on window scroll (capture phase, so nested scrollers count)
- * and resize. Escape, or a pointerdown outside both the popover and the
- * anchor, calls `onOpenChange(false)`. On close, focus returns to the anchor
+ * and resize. Escape, or a pointerdown outside the popover, the anchor and
+ * every `ignoreOutsideRefs` element, calls `onOpenChange(false)`. On close, focus returns to the anchor
  * if it was inside the popover. Focus is not trapped.
  *
  * @example
@@ -38,6 +38,7 @@ const Popover: React.FC<PopoverProps> = ({
   open,
   onOpenChange,
   anchorRef,
+  ignoreOutsideRefs,
   position = "bottom",
   align = "start",
   children,
@@ -58,6 +59,14 @@ const Popover: React.FC<PopoverProps> = ({
   const onOpenChangeRef = React.useRef(onOpenChange)
   React.useEffect(() => {
     onOpenChangeRef.current = onOpenChange
+  })
+
+  // Latest ignoreOutsideRefs, read the same way: an inline array is a new value
+  // every render, and re-running the dismiss effect would fire its focus-return
+  // cleanup.
+  const ignoreOutsideRefsRef = React.useRef(ignoreOutsideRefs)
+  React.useEffect(() => {
+    ignoreOutsideRefsRef.current = ignoreOutsideRefs
   })
 
   // Forward the popover element to both the internal ref and the consumer's ref.
@@ -106,6 +115,7 @@ const Popover: React.FC<PopoverProps> = ({
       if (!target) return
       if (popoverRef.current?.contains(target)) return
       if (anchorRef.current?.contains(target)) return
+      if (ignoreOutsideRefsRef.current?.some((ignored) => ignored.current?.contains(target))) return
       onOpenChangeRef.current?.(false)
     }
     const onFocusIn = (event: FocusEvent) => {

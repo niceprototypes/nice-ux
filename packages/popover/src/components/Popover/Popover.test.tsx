@@ -96,6 +96,50 @@ describe("Popover", () => {
     expect(onOpenChange).not.toHaveBeenCalled()
   })
 
+  describe("ignoreOutsideRefs", () => {
+    const IgnoreHarness: React.FC<{ onOpenChange: (open: boolean) => void }> = ({ onOpenChange }) => {
+      const anchorRef = React.useRef<HTMLInputElement>(null)
+      const triggerRef = React.useRef<HTMLButtonElement>(null)
+      return (
+        <>
+          <input ref={anchorRef} aria-label="date" />
+          <button ref={triggerRef}>
+            <span>calendar</span>
+          </button>
+          <button>outside</button>
+          {/* Inline array: a new value every render, read through a latest-value ref. */}
+          <Popover open anchorRef={anchorRef} ignoreOutsideRefs={[triggerRef]} onOpenChange={onOpenChange} aria-label="menu">
+            <button>inside</button>
+          </Popover>
+        </>
+      )
+    }
+
+    it("does not dismiss on pointerdown inside an ignored element", () => {
+      const onOpenChange = jest.fn()
+      render(<IgnoreHarness onOpenChange={onOpenChange} />)
+      fireEvent.pointerDown(screen.getByText("calendar"))
+      fireEvent.pointerDown(screen.getByRole("button", { name: "calendar" }))
+      expect(onOpenChange).not.toHaveBeenCalled()
+    })
+
+    it("still dismisses on pointerdown elsewhere", () => {
+      const onOpenChange = jest.fn()
+      render(<IgnoreHarness onOpenChange={onOpenChange} />)
+      fireEvent.pointerDown(screen.getByText("outside"))
+      expect(onOpenChange).toHaveBeenCalledWith(false)
+    })
+
+    it("does not re-run the dismiss effect when an inline array changes identity", () => {
+      const onOpenChange = jest.fn()
+      const add = jest.spyOn(document, "addEventListener")
+      const { rerender } = render(<IgnoreHarness onOpenChange={onOpenChange} />)
+      rerender(<IgnoreHarness onOpenChange={onOpenChange} />)
+      expect(add.mock.calls.filter(([type]) => type === "pointerdown")).toHaveLength(1)
+      add.mockRestore()
+    })
+  })
+
   it("returns focus to the anchor on close when focus was inside", () => {
     render(<Harness aria-label="menu" />)
     act(() => screen.getByText("inside").focus())
