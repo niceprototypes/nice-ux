@@ -141,6 +141,44 @@ export type ButtonClassNameType = string
 export type ButtonAriaLabelType = string
 
 /**
+ * ButtonAriaExpandedType
+ *
+ * React's `aria-expanded` attribute type. Whether the element this button
+ * controls (e.g. a popover or menu) is currently expanded.
+ */
+export type ButtonAriaExpandedType = React.AriaAttributes["aria-expanded"]
+
+/**
+ * ButtonAriaHasPopupType
+ *
+ * React's `aria-haspopup` attribute type. The kind of popup the button opens.
+ *
+ * Values:
+ * - boolean / "true" / "false"
+ * - "menu" | "listbox" | "tree" | "grid" | "dialog"
+ */
+export type ButtonAriaHasPopupType = React.AriaAttributes["aria-haspopup"]
+
+/**
+ * ButtonAriaControlsType
+ *
+ * React's `aria-controls` attribute type. Id(s) of the element(s) the button
+ * controls.
+ */
+export type ButtonAriaControlsType = React.AriaAttributes["aria-controls"]
+
+/**
+ * ButtonAriaPressedType
+ *
+ * React's `aria-pressed` attribute type. Pressed state of a toggle button.
+ *
+ * Values:
+ * - boolean / "true" / "false"
+ * - "mixed"
+ */
+export type ButtonAriaPressedType = React.AriaAttributes["aria-pressed"]
+
+/**
  * Test ID type
  */
 export type ButtonTestIdType = string
@@ -187,6 +225,14 @@ export interface ButtonProps {
   className?: ButtonClassNameType
   type?: ButtonElementType
   "aria-label"?: ButtonAriaLabelType
+  /** Forwarded to the root element */
+  "aria-expanded"?: ButtonAriaExpandedType
+  /** Forwarded to the root element */
+  "aria-haspopup"?: ButtonAriaHasPopupType
+  /** Forwarded to the root element */
+  "aria-controls"?: ButtonAriaControlsType
+  /** Forwarded to the root element */
+  "aria-pressed"?: ButtonAriaPressedType
   "data-testid"?: ButtonTestIdType
   antialiased?: ButtonAntialiasedType
   borderWidth?: BorderWidthType
@@ -261,6 +307,10 @@ namespace ButtonTypes {
   export type Target = ButtonTargetType
   export type ClassName = ButtonClassNameType
   export type AriaLabel = ButtonAriaLabelType
+  export type AriaExpanded = ButtonAriaExpandedType
+  export type AriaHasPopup = ButtonAriaHasPopupType
+  export type AriaControls = ButtonAriaControlsType
+  export type AriaPressed = ButtonAriaPressedType
   export type TestId = ButtonTestIdType
   export type Theme = ThemeType
   export type Props = ButtonProps

@@ -193,6 +193,39 @@ describe("Button", () => {
     })
   })
 
+  describe("aria attributes", () => {
+    it.each([undefined, "a" as const, "div" as const])("forwards aria-expanded/haspopup/controls/pressed (as=%s)", (as) => {
+      render(
+        <Button
+          onClick={mockOnClick}
+          as={as}
+          href="#"
+          data-testid="root"
+          aria-expanded
+          aria-haspopup="dialog"
+          aria-controls="popover-1"
+          aria-pressed="mixed"
+        >
+          Label
+        </Button>
+      )
+      const root = screen.getByTestId("root")
+      expect(root).toHaveAttribute("aria-expanded", "true")
+      expect(root).toHaveAttribute("aria-haspopup", "dialog")
+      expect(root).toHaveAttribute("aria-controls", "popover-1")
+      expect(root).toHaveAttribute("aria-pressed", "mixed")
+    })
+
+    it("forwards aria-expanded={false} and omits unset attributes", () => {
+      render(<Button onClick={mockOnClick} aria-expanded={false}>Label</Button>)
+      const button = screen.getByRole("button")
+      expect(button).toHaveAttribute("aria-expanded", "false")
+      expect(button).not.toHaveAttribute("aria-haspopup")
+      expect(button).not.toHaveAttribute("aria-controls")
+      expect(button).not.toHaveAttribute("aria-pressed")
+    })
+  })
+
   describe("ref", () => {
     const cases = [
       { as: undefined, element: HTMLButtonElement, tag: "BUTTON" },

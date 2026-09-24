@@ -10,7 +10,11 @@ import { isSquare } from "../../utilities/isSquare"
 
 const Button: React.FC<ButtonProps> = ({
   antialiased = false,
+  "aria-controls": ariaControls,
+  "aria-expanded": ariaExpanded,
+  "aria-haspopup": ariaHasPopup,
   "aria-label": ariaLabel,
+  "aria-pressed": ariaPressed,
   as,
   backgroundImage,
   borderColor,
@@ -151,6 +155,10 @@ const Button: React.FC<ButtonProps> = ({
       // the public ButtonRefType union is narrowed to the base element here.
       ref={ref as React.Ref<HTMLButtonElement>}
       aria-label={ariaLabel}
+      aria-expanded={ariaExpanded}
+      aria-haspopup={ariaHasPopup}
+      aria-controls={ariaControls}
+      aria-pressed={ariaPressed}
       className={className}
       data-testid={testId}
       style={style}
