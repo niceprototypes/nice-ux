@@ -120,14 +120,14 @@ export type ButtonOnClickType = () => void
  * Mouse enter handler type
  */
 export type ButtonOnMouseEnterType = (
-  e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
+  e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement | HTMLDivElement>
 ) => void
 
 /**
  * Mouse leave handler type
  */
 export type ButtonOnMouseLeaveType = (
-  e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
+  e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement | HTMLDivElement>
 ) => void
 
 /**
