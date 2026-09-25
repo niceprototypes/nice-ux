@@ -29,8 +29,9 @@
   "author": "",
   "license": "MIT",
   "peerDependencies": {
-    "nice-react-flex": ">=2.0.0",
-    "nice-react-ink": ">=5.0.0",
+    "nice-react-flex": "^7.0.1",
+    "nice-react-ink": "^8.0.3",
+    "nice-react-styles": "^15.0.1",
     "react": ">=19.2.0",
     "react-dom": ">=19.2.0",
     "styled-components": ">=6.1.18"
@@ -53,6 +54,7 @@
     "nice-config-typescript": "file:../config-typescript",
     "nice-react-flex": "file:../react-flex",
     "nice-react-ink": "file:../react-ink",
+    "nice-react-styles": "file:../react-styles",
     "prettier": "^3.0.0",
     "react": "^19.2.0",
     "react-is": "^19.2.0",
@@ -70,8 +72,5 @@
     "url": "https://github.com/niceprototypes/nice-react-tile/issues"
   },
   "homepage": "https://github.com/niceprototypes/nice-react-tile#readme",
-  "dependencies": {
-    "nice-react-styles": "file:../react-styles"
-  },
   "prettier": "nice-config-prettier"
 }
