@@ -1,0 +1,64 @@
+{
+  "name": "nice-storybook-spinner",
+  "version": "0.1.0",
+  "description": "Storybook addon: replaces Storybook's boot and preview loaders with the Nice spinner, painted at document start in the resolved theme.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./preset": {
+      "types": "./dist/preset.d.ts",
+      "import": "./dist/preset.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "generate": "node scripts/generateSpinner.mjs",
+    "prebuild": "npm run generate",
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test test/*.test.mjs",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "storybook",
+    "storybook-addons",
+    "loader",
+    "spinner",
+    "nice",
+    "design-system"
+  ],
+  "author": "Nice Prototypes",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/niceprototypes/nice-storybook-spinner"
+  },
+  "bugs": {
+    "url": "https://github.com/niceprototypes/nice-storybook-spinner/issues"
+  },
+  "homepage": "https://github.com/niceprototypes/nice-storybook-spinner#readme",
+  "peerDependencies": {
+    "storybook": ">=10.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "esbuild": "^0.28.2",
+    "nice-react-icon": "file:../react-icon",
+    "nice-styles": "file:../styles",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "styled-components": "^6.1.19",
+    "tsup": "^8.0.0",
+    "typescript": "^6.0.3"
+  }
+}

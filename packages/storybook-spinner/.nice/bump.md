@@ -1,0 +1,1 @@
+[2026-09-25 18:51] minor: Add nice-storybook-spinner: a Storybook preset that paints the Nice spinner at document start in the manager and replaces the preview's native loaders, with hold and timeout options
