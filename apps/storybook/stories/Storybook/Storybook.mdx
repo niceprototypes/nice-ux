@@ -9,17 +9,24 @@ import HorizontalRule from "../../src/components/HorizontalRule"
 
 <StoryHeader title="Storybook" />
 
-The two addons that give this Storybook its shape. They are separate packages on
-purpose: one renders in the **preview iframe**, the other restyles the
-**manager**, and Storybook keeps those two worlds apart. Either works without
-the other.
+The three addons that give this Storybook its shape. They are separate packages
+on purpose: Theme restyles the **manager**, Navigation renders in the
+**preview iframe**, and Spinner covers the loading states of both — Storybook
+keeps those worlds apart. Each works without the others.
 
-This site uses both — the bar above every page comes from Navigation, and the
-sidebar tree comes from Theme.
+This site uses all three — the sidebar tree comes from Theme, the bar above
+every page comes from Navigation, and the spinner shown while a page loads
+comes from Spinner.
 
 <HorizontalRule />
 
 ### Contents
+
+- [Theme](/docs/storybook-theme--docs) — The manager side: a token-styled
+  sidebar tree with folder and branch-connector glyphs, depth- and
+  selection-aware lines, collapsible sections, and a hidden search. It stamps
+  derived `data-*` attributes on the tree so the stylesheet can read structure
+  CSS alone cannot see.
 
 - [Navigation](/docs/storybook-navigation--docs) — The preview-side bar: back /
   next links across sequences you define, a sidebar toggle, a dark-mode toggle,
@@ -27,8 +34,8 @@ sidebar tree comes from Theme.
   cross the addons channel to a small manager entry, because the preview cannot
   call the manager `api` directly.
 
-- [Theme](/docs/storybook-theme--docs) — The manager side: a token-styled
-  sidebar tree with folder and branch-connector glyphs, depth- and
-  selection-aware lines, collapsible sections, and a hidden search. It stamps
-  derived `data-*` attributes on the tree so the stylesheet can read structure
-  CSS alone cannot see.
+- [Spinner](/docs/storybook-spinner--docs) — Both sides of loading: a boot
+  overlay painted at document start in the manager, in the theme the user last
+  chose, and removed once the first page has rendered; and a preview spinner
+  that replaces Storybook's native loaders during navigation. A preset, so it
+  has no manager or preview entry.

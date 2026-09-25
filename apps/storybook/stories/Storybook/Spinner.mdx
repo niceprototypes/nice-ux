@@ -1,0 +1,114 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import HorizontalRule from "../../src/components/HorizontalRule"
+import Install from "../../src/components/Install"
+
+<Meta
+  title="Storybook/Spinner"
+  name="Docs"
+/>
+
+<StoryHeader
+  title="Spinner"
+  description="Replaces Storybook's loading states with the Nice spinner — a boot overlay painted at document start in the manager, and a preview spinner in place of Storybook's native loaders."
+  repos={[
+    { name: "nice-storybook-spinner", url: "https://github.com/niceprototypes/nice-storybook-spinner", license: "MIT" },
+  ]}
+/>
+
+<Install package="storybook-spinner" dev />
+
+<HorizontalRule />
+
+### Setup
+
+Add it to `addons` — it is a preset, so there is no manager or preview entry to
+register:
+
+```ts
+// .storybook/main.ts
+const config = {
+  addons: [
+    "storybook-dark-mode",
+    "nice-storybook-spinner",
+  ],
+}
+
+export default config
+```
+
+To pass options, use the object form of the entry:
+
+```ts
+addons: [
+  { name: "nice-storybook-spinner", options: { hold: false, timeout: 8000 } },
+]
+```
+
+Peer: `storybook` ≥ 10. The spinner is the real `<Icon name="spinner" />` from
+`nice-react-icon`, rendered to static markup when the addon is built, with its
+size, stroke, duration and day / night colors taken from `nice-styles` tokens at
+the same time — so the published package has no dependencies.
+
+### Options
+
+| Option    | Type      | Default | Description |
+|-----------|-----------|---------|-------------|
+| `hold`    | `boolean` | `false` | Keep the boot overlay up for good. |
+| `timeout` | `number`  | `8000`  | Remove the boot overlay after this many ms, whatever the readiness signals say. |
+
+A `timeout` that is not a finite, non-negative number falls back to `8000`.
+
+### Hold for styling
+
+To keep the boot overlay on screen while styling it, use any of these — the
+first one present wins:
+
+1. Query parameter: `?nsbHold=1` (or `true`) holds, `?nsbHold=0` (or `false`)
+   releases.
+2. localStorage: `localStorage.setItem("nice-storybook-spinner:hold", "true")`
+   holds, `"false"` releases.
+3. The preset option `hold: true`.
+
+A held overlay ignores every removal path, the timeout included. Clear the key
+or load with `?nsbHold=0` to release it.
+
+`window.__NSB` is a read-only debug view of the overlay: `{ theme, hold,
+removed }`, where `removed` names the signal that took it down and is empty
+while it is up.
+
+### How it works
+
+The addon is a preset with two hooks. Both put their markup first in the head,
+so it runs before any other head content is fetched or parsed.
+
+**`managerHead`** inlines the boot overlay script. It resolves the theme
+synchronously from storybook-dark-mode's localStorage store
+(`sb-addon-themes-3`) — the stored mode when the user chose it explicitly,
+otherwise day — so the overlay's first paint is already in the right theme. It
+then mounts the overlay on `<html>` before `<body>` exists.
+
+The overlay comes down once the page behind it is ready: after
+`storyRendered` or `docsRendered`, then `document.fonts.ready` (capped at 1s),
+then two animation frames, so the first frame without the overlay is a rendered
+page. On `storyErrored`, `storyThrewException` or `storyMissing` it is removed
+immediately, so Storybook's error display is never covered. After `timeout` ms
+it is removed regardless.
+
+**`previewHead`** handles navigation inside the preview iframe. A permanent
+stylesheet hides Storybook's native loaders — the grey docs skeleton
+(`.sb-preparing-docs`) and the story spinner (`.sb-preparing-story`) — and
+shows `#nsb-preview-spinner` exactly when Storybook would show its own loader.
+A script mounts that spinner as the first child of `<body>` as soon as `<body>`
+exists, themed like the overlay and following storybook-dark-mode's
+`DARK_MODE` event afterwards.
+
+The preview head also carries the boot overlay script, which acts only when
+`iframe.html` is opened on its own. `.sb-nopreview` and `.sb-errordisplay` are
+never touched.
+
+### Accessibility
+
+Both spinners carry `role="progressbar"` and `aria-busy="true"`, labelled
+"Loading Storybook" (boot overlay) and "Loading story" (preview). Under
+`prefers-reduced-motion: reduce` the rotation slows to one turn every 2s.

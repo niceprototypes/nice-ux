@@ -95,7 +95,7 @@ const preview: Preview = {
           "Bindings",
           ["useBreakpoint", "useDevice", "useTheme"],
           "Storybook",
-          ["Navigation", "Theme"],
+          ["Docs", "Theme", "Navigation", "Spinner"],
           "Configuration",
           ["NPM", "Vite", "TypeScript", "Jest", "Rollup"],
           "Toolkit",
