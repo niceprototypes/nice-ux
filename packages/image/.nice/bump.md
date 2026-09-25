@@ -2,3 +2,4 @@
 [2026-09-16 15:11] patch: getToken call sites migrated to the token address form
 [2026-09-17 14:34] minor: borderColor accepts the object form — { name, transform } for channel-adjusted colours, resolved through resolveColorProp
 [2026-09-24 18:59] patch: Accept colour objects for the Image borderColor prop in styled rendering
+[2026-09-25 19:12] patch: Declare nice-* runtime packages as peer dependencies with a file: devDependency for local builds
