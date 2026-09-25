@@ -25,6 +25,7 @@ const Button: React.FC<ButtonProps> = ({
   "data-testid": testId,
   disabled: disabledProp = false,
   filled = false,
+  grow,
   href,
   iconLeft,
   iconRight,
@@ -140,6 +141,7 @@ const Button: React.FC<ButtonProps> = ({
       $isHovered={isHovered}
       $isPressed={isPressed}
       $filled={filled}
+      $grow={grow}
       $inlined={inlined}
       $size={size}
       $hasPadding={contentPadding !== undefined}

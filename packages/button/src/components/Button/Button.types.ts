@@ -50,6 +50,17 @@ export type ButtonFilledType = boolean
 export type ButtonWeightType = FontWeightType
 
 /**
+ * ButtonGrowType
+ *
+ * Flex grow factor of the button's root element, mirroring nice-react-flex's
+ * `grow` prop: emits `flex-grow: {value}` paired with `flex-basis: 0`, so
+ * sibling buttons in a flex container size from their grow ratios rather than
+ * their label widths (equal values render equal widths). Only takes effect when
+ * the parent is a flex container. The label and icons stay centred.
+ */
+export type ButtonGrowType = number
+
+/**
  * HTML button type attribute
  */
 export type ButtonElementType = "button" | "submit" | "reset"
@@ -204,6 +215,13 @@ export interface ButtonProps {
    * grow the button beyond its base height.
    */
   padding?: ButtonPaddingType
+
+  /**
+   * Flex grow factor of the root element (`flex-grow` + `flex-basis: 0`, as
+   * nice-react-flex `grow`). Applies to every `as`; needs a flex-container
+   * parent. Unset emits no flex-grow.
+   */
+  grow?: ButtonGrowType
   status?: ButtonStatusType
   /** Icon rendered before the label (left side) */
   iconLeft?: IconNameType
@@ -290,6 +308,7 @@ namespace ButtonTypes {
   export type BorderRadius = ButtonBorderRadiusType
   export type BorderColor = ButtonBorderColorType
   export type Padding = ButtonPaddingType
+  export type Grow = ButtonGrowType
   export type Status = ButtonStatusType
   export type Filled = ButtonFilledType
   export type Weight = ButtonWeightType

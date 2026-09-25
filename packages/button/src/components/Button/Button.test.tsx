@@ -266,6 +266,19 @@ describe("Button", () => {
     })
   })
 
+  describe("grow", () => {
+    it.each([undefined, "a" as const, "div" as const])("grow={1} sets flex-grow: 1 and flex-basis: 0 on the root (as=%s)", (as) => {
+      render(<Button onClick={mockOnClick} as={as} href="#" data-testid="root" grow={1}>Label</Button>)
+      const root = screen.getByTestId("root")
+      expect(root).toHaveStyle({ flexGrow: "1", flexBasis: "0" })
+    })
+
+    it("emits no flex-grow when grow is omitted", () => {
+      render(<Button onClick={mockOnClick} data-testid="root">Label</Button>)
+      expect(getComputedStyle(screen.getByTestId("root")).flexGrow).toBe("")
+    })
+  })
+
   describe("focus indicator", () => {
     const injectedCss = () =>
       Array.from(document.querySelectorAll("style"))

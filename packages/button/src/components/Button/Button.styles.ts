@@ -2,7 +2,7 @@ import styled from "styled-components"
 import Flex from "nice-react-flex"
 import { getToken, resolveColorProp } from "nice-react-styles"
 import type { SizeType, BorderWidthType, BorderColorType, ColorTokenProp } from "nice-react-styles"
-import type { ButtonBorderRadiusType, ButtonStatusType } from "./Button.types"
+import type { ButtonBorderRadiusType, ButtonGrowType, ButtonStatusType } from "./Button.types"
 
 export const StyledButton = styled.button.withConfig({
   shouldForwardProp: (prop) => !prop.startsWith("$"),
@@ -19,6 +19,7 @@ export const StyledButton = styled.button.withConfig({
   $square: boolean
   $status: ButtonStatusType
   $filled: boolean
+  $grow?: ButtonGrowType
   $inlined: boolean
 }>`
   /* Reset */
@@ -125,6 +126,13 @@ export const StyledButton = styled.button.withConfig({
     font-size: ${getToken("fontSize", $size)};
     color: ${getToken("color", "link")};
   `}
+
+  /* Grow: mirrors nice-react-flex's grow (flex-grow paired with flex-basis: 0),
+     so equal-grow siblings in a flex parent share its width by ratio rather than
+     by label width. Emitted for every as= element and outside the inlined branch. The
+     label/icons stay centred: this element is inline-flex with
+     justify-content: center, and ButtonContent is an inline-flex child. */
+  ${({ $grow }) => ($grow !== undefined ? `flex-grow: ${$grow}; flex-basis: 0;` : "")}
 `
 
 /**

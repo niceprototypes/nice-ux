@@ -9,3 +9,4 @@
 [2026-09-24 19:44] patch: Disable Button natively when disabled or status="disabled": the <button> gets the disabled attribute, anchors and divs get aria-disabled with tabIndex -1, and the disabled prop takes the disabled colouring
 [2026-09-24 19:44] patch: Type onMouseEnter and onMouseLeave events for the div root rendered by as="div"
 [2026-09-24 19:45] minor: Accept aria-expanded, aria-haspopup, aria-controls, and aria-pressed on Button, forwarded to the root element
+[2026-09-25 18:41] minor: Add a grow prop to Button that sets flex-grow on the root
