@@ -34,11 +34,9 @@
   },
   "homepage": "https://github.com/niceprototypes/nice-react-slider#readme",
   "peerDependencies": {
+    "nice-react-styles": "^15.0.1",
     "react": ">=19.2.0",
     "styled-components": ">=6.1.18"
-  },
-  "dependencies": {
-    "nice-react-styles": "file:../react-styles"
   },
   "devDependencies": {
     "@types/react": "^19.0.0",
@@ -51,6 +49,7 @@
     "nice-config-exports": "file:../config-exports",
     "nice-config-rollup": "file:../config-rollup",
     "nice-config-typescript": "file:../config-typescript",
+    "nice-react-styles": "file:../react-styles",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "rollup": "^4.9.1",
