@@ -39,7 +39,9 @@
     "generate-exports": "nice-generate-exports ."
   },
   "peerDependencies": {
-    "nice-react-icon-vendor": ">=1.0.0",
+    "nice-react-icon-vendor": "^2.0.5",
+    "nice-react-styles": "^15.0.1",
+    "nice-styles": "^17.1.0",
     "react": ">=19.2.0",
     "react-dom": ">=19.2.0",
     "styled-components": ">=6.1.18"
@@ -74,6 +76,9 @@
     "nice-config-jest": "file:../config-jest",
     "nice-config-rollup": "file:../config-rollup",
     "nice-config-typescript": "file:../config-typescript",
+    "nice-icons": "file:../icons",
+    "nice-react-styles": "file:../react-styles",
+    "nice-styles": "file:../styles",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "rollup": "^4.3.0",
@@ -88,10 +93,5 @@
   "engines": {
     "node": ">=14.0.0",
     "npm": ">=6.0.0"
-  },
-  "dependencies": {
-    "nice-icons": "file:../icons",
-    "nice-react-styles": "file:../react-styles",
-    "nice-styles": "file:../styles"
   }
 }
