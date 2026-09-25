@@ -1,10 +1,10 @@
 import * as React from "react"
 import Ink from "nice-react-ink"
-import Icon from "nice-react-icon"
-import type { IconNameType } from "nice-react-icon"
 import { Theme } from "nice-react-styles"
 import { StyledButton, ButtonContent } from "./Button.styles"
 import { ButtonProps } from "./Button.types"
+import { getButtonElementProps } from "./Button.helpers"
+import ButtonIcon from "../ButtonIcon"
 import { isDisabled } from "../../utilities/isDisabled"
 import { isSquare } from "../../utilities/isSquare"
 
@@ -63,72 +63,26 @@ const Button: React.FC<ButtonProps> = ({
   // controlled independently by the `inlined` prop, which defaults to true for
   // an anchor and false otherwise — so as="div" inlined renders a link-like div.
   const anchor = as === "a"
-  const clickableDiv = as === "div"
   const inlined = inlinedProp ?? anchor
 
-  // A <div> has no native button behaviour: Enter/Space don't fire a click, so
-  // wire them up here (Space is prevented from scrolling the page).
-  const onDivKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault()
-      onClick?.()
-    }
-  }
-
-  // Element attributes per `as`. Anchor: href/target/rel, disabled suppresses
-  // navigation and removes it from the tab order. Clickable div: button-equivalent
-  // a11y (role, tabindex, keyboard activation). Plain button: the native type, and
-  // the native `disabled` attribute so it leaves the tab order and is announced
-  // as disabled.
-  const elementProps = anchor
-    ? {
-        as: "a" as const,
-        href: disabled ? undefined : href,
-        target,
-        rel: target === "_blank" ? "noopener noreferrer" : undefined,
-        "aria-disabled": disabled || undefined,
-        tabIndex: disabled ? -1 : undefined,
-        onClick: disabled ? (e: React.MouseEvent) => e.preventDefault() : onClick,
-      }
-    : clickableDiv
-    ? {
-        as: "div" as const,
-        role: "button" as const,
-        tabIndex: disabled ? -1 : 0,
-        "aria-disabled": disabled || undefined,
-        onClick: disabled ? undefined : onClick,
-        onKeyDown: disabled ? undefined : onDivKeyDown,
-      }
-    : {
-        type,
-        disabled,
-        onClick: disabled ? undefined : onClick,
-      }
-
-  const renderIcon = (name: IconNameType) => (
-    <Icon
-      name={name}
-      vendor={iconVendor}
-      // Both "base" props resolve through --np--icon--size / --np--icon--color,
-      // which StyledButton reassigns to the button-scoped --np--button--icon--size
-      // / --np--button--icon--color. So by default the icon tracks the button's
-      // size and color, and either token can be overridden to resize/recolor button
-      // icons without touching the global icon tokens.
-      size="base"
-      color="base"
-      theme={invertedTheme}
-    />
-  )
+  const elementProps = getButtonElementProps({
+    as,
+    disabled,
+    href,
+    onClick,
+    target,
+    type,
+  })
 
   const button = (
     <StyledButton
-      onMouseEnter={(e) => {
+      onMouseEnter={event => {
         setIsHovered(true)
-        onMouseEnter?.(e)
+        onMouseEnter?.(event)
       }}
-      onMouseLeave={(e) => {
+      onMouseLeave={event => {
         setIsHovered(false)
-        onMouseLeave?.(e)
+        onMouseLeave?.(event)
       }}
       onPointerDown={() => setIsPressed(true)}
       onPointerUp={() => setIsPressed(false)}
@@ -170,7 +124,13 @@ const Button: React.FC<ButtonProps> = ({
         $size={size}
         $square={square}
       >
-        {!!iconLeft && renderIcon(iconLeft)}
+        {!!iconLeft && (
+          <ButtonIcon
+            name={iconLeft}
+            vendor={iconVendor}
+            theme={invertedTheme}
+          />
+        )}
         {children && (
           <Ink
             as="span"
@@ -182,7 +142,13 @@ const Button: React.FC<ButtonProps> = ({
             {children}
           </Ink>
         )}
-        {!!iconRight && renderIcon(iconRight)}
+        {!!iconRight && (
+          <ButtonIcon
+            name={iconRight}
+            vendor={iconVendor}
+            theme={invertedTheme}
+          />
+        )}
       </ButtonContent>
     </StyledButton>
   )
