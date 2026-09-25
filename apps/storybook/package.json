@@ -39,6 +39,7 @@
     "nice-react-tile": "file:../react-tile",
     "nice-react-tooltip": "file:../react-tooltip",
     "nice-storybook-navigation": "file:../storybook-navigation",
+    "nice-storybook-spinner": "file:../storybook-spinner",
     "nice-storybook-theme": "file:../storybook-theme",
     "nice-styles": "file:../styles",
     "nice-toolkit": "file:../toolkit",

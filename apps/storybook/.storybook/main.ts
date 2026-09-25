@@ -75,6 +75,8 @@ const config: StorybookConfig = {
     // Both load their own manager (and, for navigation, preview) entries.
     "nice-storybook-navigation",
     "nice-storybook-theme",
+    // Preset: the boot overlay (managerHead) and the preview loader replacement (previewHead).
+    "nice-storybook-spinner",
   ],
   staticDirs: ["../public"],
   core: {
