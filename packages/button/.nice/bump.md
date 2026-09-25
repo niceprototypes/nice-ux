@@ -11,3 +11,4 @@
 [2026-09-24 19:45] minor: Accept aria-expanded, aria-haspopup, aria-controls, and aria-pressed on Button, forwarded to the root element
 [2026-09-25 18:41] minor: Add a grow prop to Button that sets flex-grow on the root
 [2026-09-25 18:59] patch: Move element attribute logic into Button.helpers and icon rendering into an internal ButtonIcon component
+[2026-09-25 19:12] patch: Declare nice-* runtime packages as peer dependencies with a file: devDependency for local builds

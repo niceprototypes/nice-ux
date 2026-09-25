@@ -41,9 +41,10 @@
     "generate-exports": "nice-generate-exports ."
   },
   "peerDependencies": {
-    "nice-react-flex": ">=2.0.0",
-    "nice-react-icon": ">=3.0.0",
-    "nice-react-ink": ">=5.0.0",
+    "nice-react-flex": "^7.0.1",
+    "nice-react-icon": "^8.0.3",
+    "nice-react-ink": "^8.0.3",
+    "nice-react-styles": "^15.0.1",
     "react": ">=19.2.0",
     "react-dom": ">=19.2.0",
     "styled-components": ">=6.1.18"
@@ -92,6 +93,7 @@
     "nice-react-flex": "file:../react-flex",
     "nice-react-icon": "file:../react-icon",
     "nice-react-ink": "file:../react-ink",
+    "nice-react-styles": "file:../react-styles",
     "prettier": "^3.1.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
@@ -107,10 +109,6 @@
   "engines": {
     "node": ">=14.0.0",
     "npm": ">=6.0.0"
-  },
-  "dependencies": {
-    "nice-react-styles": "file:../react-styles",
-    "nice-react-ink": "file:../react-ink"
   },
   "prettier": "nice-config-prettier"
 }
