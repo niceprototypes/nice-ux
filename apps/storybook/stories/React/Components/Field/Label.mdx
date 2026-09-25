@@ -1,30 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import { StoryHeader } from "../../../../src/components/Story"
-import { Field } from "nice-react-field"
-import Input from "nice-react-input"
-import Ink from "../../../../src/nice/Ink"
-import { DataTableRow } from "../../../../src/components/DataTable"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+import { ComponentExampleStory } from "../../../../src/dataTables/components/demos/Components"
+import { fieldExamples } from "./examples"
 
 <Meta title="Components/Forms/Field/label" />
 
-<StoryHeader title="label" />
-
-<Ink color="light">
-  Required. Visible label content, rendered inside a native{" "}
-  <code>{`<label htmlFor={id}>`}</code>, so it is the control's accessible
-  name and clicking it focuses the control.
-</Ink>
-
-<DataTableRow
-  columns={DEMO_CODE_COLUMNS}
-  values={[
-    <Field label="Full name">
-      <Input
-        autoComplete="name"
-        onChange={() => {}}
-      />
-    </Field>,
-    `<Field label="Full name">\n  <Input\n    autoComplete="name"\n    onChange={handler}\n  />\n</Field>`,
-  ]}
-/>
+<ComponentExampleStory example={fieldExamples.label} />

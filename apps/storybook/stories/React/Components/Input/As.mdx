@@ -1,67 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import { StoryHeader } from "../../../../src/components/Story"
-import Input from "nice-react-input"
-import Ink from "../../../../src/nice/Ink"
-import { DataTableRow } from "../../../../src/components/DataTable"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+import { ComponentExampleStory } from "../../../../src/dataTables/components/demos/Components"
+import { inputExamples } from "./examples"
 
 <Meta title="Components/Forms/Input/as" />
 
-<StoryHeader title="as" />
-
-<Ink color="light">
-  Selects the native control rendered inside the field chrome:{" "}
-  <code>input</code> (default), <code>select</code> or <code>textarea</code>.
-  All three share the same wrapper (height, padding, border, radius,
-  background, focus ring). <code>ref</code> points at the native control, and
-  its element type follows <code>as</code>.
-</Ink>
-
-<DataTableRow
-  columns={DEMO_CODE_COLUMNS}
-  values={[
-    <Input
-      placeholder="Single line"
-      onChange={() => {}}
-    />,
-    `<Input\n  placeholder="Single line"\n  onChange={handler}\n/>`,
-  ]}
-/>
-
-<DataTableRow
-  columns={DEMO_CODE_COLUMNS}
-  values={[
-    <Input
-      as="select"
-      defaultValue="nl"
-      aria-label="Country"
-      onChange={() => {}}
-    >
-      <option value="nl">Netherlands</option>
-      <option value="eg">Egypt</option>
-      <option value="us">United States</option>
-    </Input>,
-    `<Input\n  as="select"\n  aria-label="Country"\n  onChange={handler}\n>\n  <option value="nl">Netherlands</option>\n  <option value="eg">Egypt</option>\n  <option value="us">United States</option>\n</Input>`,
-  ]}
-/>
-
-<DataTableRow
-  columns={DEMO_CODE_COLUMNS}
-  values={[
-    <Input
-      as="textarea"
-      rows={3}
-      placeholder="Multiple lines — grows with content"
-      onChange={() => {}}
-    />,
-    `<Input\n  as="textarea"\n  rows={3}\n  placeholder="Multiple lines"\n  onChange={handler}\n/>`,
-  ]}
-/>
-
-<Ink color="light">
-  <code>type</code> and <code>pattern</code> apply to <code>as="input"</code>{" "}
-  only; <code>rows</code> to <code>as="textarea"</code> (a minimum — the
-  textarea grows past it); <code>children</code> to <code>as="select"</code>.
-  For a select with options, a placeholder and a chevron, use{" "}
-  <code>nice-react-select</code>.
-</Ink>
+<ComponentExampleStory example={inputExamples.as} />

@@ -1,46 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import { StoryHeader } from "../../../../src/components/Story"
-import Input from "nice-react-input"
-import Icon from "nice-react-icon"
-import Ink from "../../../../src/nice/Ink"
-import { DataTableRow } from "../../../../src/components/DataTable"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+import { ComponentExampleStory } from "../../../../src/dataTables/components/demos/Components"
+import { inputExamples } from "./examples"
 
 <Meta title="Components/Forms/Input/start" />
 
-<StoryHeader title="start" />
-
-<Ink color="light">
-  Content rendered inside the field chrome before the native control, on the
-  inline-start side (left in LTR, right in RTL). Input does not add{" "}
-  <code>aria-hidden</code>: mark decorative content hidden yourself, and keep
-  interactive content (a button) reachable with its own accessible name.
-</Ink>
-
-<DataTableRow
-  columns={DEMO_CODE_COLUMNS}
-  values={[
-    <Input
-      type="search"
-      aria-label="Search"
-      placeholder="Search"
-      start={<span aria-hidden="true"><Icon name="search" /></span>}
-      onChange={() => {}}
-    />,
-    `<Input\n  type="search"\n  aria-label="Search"\n  placeholder="Search"\n  start={\n    <span aria-hidden="true">\n      <Icon name="search" />\n    </span>\n  }\n  onChange={handler}\n/>`,
-  ]}
-/>
-
-<DataTableRow
-  columns={DEMO_CODE_COLUMNS}
-  values={[
-    <Input
-      type="email"
-      aria-label="Email"
-      placeholder="name@example.com"
-      start={<span aria-hidden="true"><Icon name="mail" /></span>}
-      onChange={() => {}}
-    />,
-    `<Input\n  type="email"\n  aria-label="Email"\n  placeholder="name@example.com"\n  start={\n    <span aria-hidden="true">\n      <Icon name="mail" />\n    </span>\n  }\n  onChange={handler}\n/>`,
-  ]}
-/>
+<ComponentExampleStory example={inputExamples.start} />

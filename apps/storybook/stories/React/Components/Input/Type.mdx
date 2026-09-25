@@ -1,51 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import { StoryHeader } from "../../../../src/components/Story"
-import Input from "nice-react-input"
-import Ink from "../../../../src/nice/Ink"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
-import { DataTable } from "../../../../src/components/DataTable"
-
-export const types = ["text", "email", "password", "number", "search", "tel", "url"]
-
-export const typeLabel = {
-  text: "Plain text",
-  email: "name@example.com",
-  password: "secret",
-  number: "42",
-  search: "Search…",
-  tel: "+1 555 0100",
-  url: "https://example.com",
-}
-
-export const typeCode = (t) =>
-  t === "text"
-    ? `<Input\n  placeholder="Plain text"\n  onChange={handler}\n/>`
-    : `<Input\n  type="${t}"\n  placeholder="${typeLabel[t]}"\n  onChange={handler}\n/>`
+import { ComponentExampleStory } from "../../../../src/dataTables/components/demos/Components"
+import { inputExamples } from "./examples"
 
 <Meta title="Components/Forms/Input/type" />
 
-<StoryHeader title="type" />
-
-<Ink color="light">
-  Sets the underlying HTML <code>type</code> attribute. MVP supports text-style
-  inputs only: <code>text</code>, <code>email</code>, <code>password</code>,{" "}
-  <code>number</code>, <code>search</code>, <code>tel</code>, and{" "}
-  <code>url</code>.
-</Ink>
-
-<DataTable
-  showHeader={false}
-  columns={DEMO_CODE_COLUMNS}
-  tables={[{ rows: types.map((t) => ({
-    id: t,
-    values: [
-      <Input
-        type={t}
-        placeholder={typeLabel[t]}
-        onChange={() => {}}
-      />,
-      typeCode(t),
-    ],
-  })) }]}
-/>
-
+<ComponentExampleStory example={inputExamples.type} />

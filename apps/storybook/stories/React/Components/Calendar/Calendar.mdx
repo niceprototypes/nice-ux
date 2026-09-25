@@ -1,83 +1,76 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import { useState } from "react"
 import { StoryHeader } from "../../../../src/components/Story"
-import { Calendar } from "nice-react-calendar"
-import Ink from "../../../../src/nice/Ink"
-import { DataTableRow } from "../../../../src/components/DataTable"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import Install from "../../../../src/components/Install"
-import HorizontalRule from "../../../../src/components/HorizontalRule"
-
-export const BasicCalendar = () => {
-  const [value, setValue] = useState("2026-09-24")
-  return (
-    <div>
-      <Calendar
-        aria-label="Delivery date"
-        value={value}
-        onChange={setValue}
-      />
-      <Ink color="light">
-        value: <code>{JSON.stringify(value)}</code>
-      </Ink>
-    </div>
-  )
-}
+import { ComponentDemoTable } from "../../../../src/dataTables/components/demos/Components"
+import { calendarExampleList } from "./examples"
+import NewLines from "../../../../src/components/NewLines"
+import Callout from "../../../../src/components/Callout"
 
 <Meta title="Components/Forms/Calendar" />
 
-<StoryHeader title="Calendar" />
+<StoryHeader
+  title="Calendar"
+  description="A month grid for picking one date, with locale week start and RTL-aware keyboard navigation. Dates are ISO strings."
+/>
+
+<NewLines count={3} />
 
 <Install package="react-calendar" />
 
-### Setup
+<NewLines />
 
 ```jsx
-import { Calendar, DateField } from "nice-react-calendar"
-```
+import { Calendar } from "nice-react-calendar"
 
-<Ink color="light">
-  Multi-component package: named exports only, no default export.
-</Ink>
-
-### Usage
-
-```jsx
 <Calendar value={date} onChange={setDate} aria-label="Delivery date" />
 ```
 
-<HorizontalRule />
+<NewLines count={3} />
 
-## ISO-string contract
+<ComponentDemoTable examples={calendarExampleList} />
 
-<Ink color="light">
-  Dates cross the API only as ISO 8601 <code>YYYY-MM-DD</code> strings (e.g.{" "}
-  <code>"2026-09-24"</code>). <code>value</code>, <code>defaultValue</code>,{" "}
-  <code>min</code>, <code>max</code>, the <code>onChange</code> argument and
-  the <code>isDateDisabled</code> argument are all ISO strings; a JS{" "}
-  <code>Date</code> is never accepted or returned. <code>null</code> means no
-  selection. Invalid strings count as no selection. v1 interprets and displays
-  dates in the Gregorian calendar, with UTC-based arithmetic, so no time zone
-  shifts a date.
-</Ink>
+<NewLines count={3} />
 
-## Basic
+## Guide
 
-<DataTableRow
-  columns={DEMO_CODE_COLUMNS}
-  values={[
-    <BasicCalendar />,
-    `const [value, setValue] = useState("2026-09-24")\n\n<Calendar\n  aria-label="Delivery date"\n  value={value}\n  onChange={setValue}\n/>`,
-  ]}
-/>
+`nice-react-calendar` has named exports only (`Calendar`, `DateField`), no
+default export.
 
-## Keyboard
+Dates cross the API only as ISO 8601 `YYYY-MM-DD` strings. `value`,
+`defaultValue`, `min`, `max`, the `onChange` argument and the `isDateDisabled`
+argument are all ISO strings, and `null` means no selection. A JS `Date` is
+never accepted or returned; an invalid string counts as no selection. v1 uses
+the Gregorian calendar with UTC arithmetic, so no time zone shifts a date.
 
-<Ink color="light">
-  The month grid follows the ARIA grid pattern with a roving tabindex: one day
-  is tabbable — the selected day, else today, else the first enabled day of the
-  visible month.
-</Ink>
+```jsx
+const [date, setDate] = useState("2026-09-24")
+
+<Calendar value={date} onChange={setDate} min="2026-09-01" />
+// onChange("2026-09-25")
+```
+
+The first column comes from the locale: `Intl.Locale` week info where the
+engine provides it, else a region table (Sunday for regions such as US,
+Saturday for regions such as EG, otherwise Monday). `firstDayOfWeek` (0 Sunday … 6 Saturday) overrides it, and
+Home / End follow the resolved start.
+
+Direction comes from `useLocale()` in `nice-react-styles`: the `dir` / `locale`
+of the nearest `StylesProvider`, else the document's `dir` / `lang`. In RTL,
+ArrowRight moves to the previous day and ArrowLeft to the next, following the
+visual order, and the month carets swap. The `locale` prop changes labels and
+week start, not key direction; the grid mirrors inside a `dir="rtl"` ancestor.
+
+```jsx
+<div dir="rtl">
+  <StylesProvider locale="ar-EG">
+    <Calendar aria-label="التاريخ" />
+  </StylesProvider>
+</div>
+```
+
+The grid follows the ARIA grid pattern with a roving tabindex: one day is
+tabbable — the selected day, else today, else the first enabled day of the
+visible month.
 
 | Key | Action |
 |-----|--------|
@@ -88,22 +81,8 @@ import { Calendar, DateField } from "nice-react-calendar"
 | Shift + PageDown / PageUp | Same day next / previous year |
 | Enter / Space | Select the focused day |
 
-<Ink color="light">
-  Moving focus off the visible month changes the month. Focus stops at{" "}
-  <code>min</code> and <code>max</code>. Disabled days stay focusable (
-  <code>aria-disabled</code>) so the arrows move across them.
-</Ink>
+Moving focus off the visible month changes the month. Focus stops at `min` and
+`max`. Disabled days stay focusable (`aria-disabled`), so the arrows move
+across them.
 
-## RTL
-
-<Ink color="light">
-  Direction comes from <code>useLocale()</code> in{" "}
-  <code>nice-react-styles</code>: the <code>dir</code> / <code>locale</code>{" "}
-  props of the nearest <code>StylesProvider</code>, else the document's{" "}
-  <code>dir</code> / <code>lang</code>. In RTL, ArrowRight moves to the
-  previous day and ArrowLeft to the next (following the visual order), and the
-  month-navigation carets swap. The <code>locale</code> prop alone changes
-  labels and week start, not key direction; the grid's visual mirroring comes
-  from a <code>dir="rtl"</code> ancestor. See the <code>locale</code> page for
-  an <code>ar-EG</code> example.
-</Ink>
+<Callout type="hint">Pass and store ISO `YYYY-MM-DD` strings — Calendar never accepts or returns a `Date`.</Callout>

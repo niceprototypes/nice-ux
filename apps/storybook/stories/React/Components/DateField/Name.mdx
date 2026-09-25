@@ -1,51 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import { useState } from "react"
-import { StoryHeader } from "../../../../src/components/Story"
-import { DateField } from "nice-react-calendar"
-import Button from "nice-react-button"
-import Ink from "../../../../src/nice/Ink"
-import { DataTableRow } from "../../../../src/components/DataTable"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
-
-export const FormDataDemo = () => {
-  const [submitted, setSubmitted] = useState(null)
-  return (
-    <form
-      onSubmit={(event) => {
-        event.preventDefault()
-        setSubmitted(Object.fromEntries(new FormData(event.currentTarget)))
-      }}
-    >
-      <DateField
-        name="start"
-        aria-label="Start date"
-        defaultValue="2026-09-24"
-        width="20"
-      />
-      <Button type="submit">Submit</Button>
-      <Ink color="light">
-        FormData: <code>{submitted ? JSON.stringify(submitted) : "—"}</code>
-      </Ink>
-    </form>
-  )
-}
+import { ComponentExampleStory } from "../../../../src/dataTables/components/demos/Components"
+import { dateFieldExamples } from "./examples"
 
 <Meta title="Components/Forms/DateField/name" />
 
-<StoryHeader title="name" />
-
-<Ink color="light">
-  Form field name. It is placed on a hidden{" "}
-  <code>{`<input type="hidden">`}</code> whose value is the ISO date (or{" "}
-  <code>""</code> when empty), so native <code>FormData</code> and form
-  submission receive <code>YYYY-MM-DD</code>, not the locale-formatted text in
-  the visible field. The visible input has no <code>name</code>.
-</Ink>
-
-<DataTableRow
-  columns={DEMO_CODE_COLUMNS}
-  values={[
-    <FormDataDemo />,
-    `<form onSubmit={handleSubmit}>\n  <DateField\n    name="start"\n    aria-label="Start date"\n    defaultValue="2026-09-24"\n  />\n  <Button type="submit">Submit</Button>\n</form>\n\n// new FormData(form).get("start") → "2026-09-24"`,
-  ]}
-/>
+<ComponentExampleStory example={dateFieldExamples.name} />

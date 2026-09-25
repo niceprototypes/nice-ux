@@ -1,47 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import { StoryHeader } from "../../../../src/components/Story"
-import Select from "nice-react-select"
-import Ink from "../../../../src/nice/Ink"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
-import { DataTable } from "../../../../src/components/DataTable"
-
-export const statuses = ["base", "disabled", "error", "success", "warning"]
-
-export const statusLabel = (s) => s.charAt(0).toUpperCase() + s.slice(1)
-
-export const statusCode = (s) =>
-  s === "base"
-    ? `<Select\n  placeholder="Base"\n  options={options}\n  onChange={handler}\n/>`
-    : `<Select\n  status="${s}"\n  placeholder="${statusLabel(s)}"\n  options={options}\n  onChange={handler}\n/>`
+import { ComponentExampleStory } from "../../../../src/dataTables/components/demos/Components"
+import { selectExamples } from "./examples"
 
 <Meta title="Components/Forms/Select/status" />
 
-<StoryHeader title="status" />
-
-<Ink color="light">
-  Passed through to Input: the same semantic chrome styles (
-  <code>disabled</code>, <code>error</code>, <code>success</code>,{" "}
-  <code>warning</code>). <code>disabled</code> also disables the native select
-  and dims the chevron with the disabled text colour.
-</Ink>
-
-<DataTable
-  showHeader={false}
-  columns={DEMO_CODE_COLUMNS}
-  tables={[{ rows: statuses.map((status) => ({
-    id: status,
-    values: [
-      <Select
-        status={status === "base" ? undefined : status}
-        aria-label={statusLabel(status)}
-        placeholder={statusLabel(status)}
-        options={[
-          { value: "a", label: "Option A" },
-          { value: "b", label: "Option B" },
-        ]}
-        onChange={() => {}}
-      />,
-      statusCode(status),
-    ],
-  })) }]}
-/>
+<ComponentExampleStory example={selectExamples.status} />

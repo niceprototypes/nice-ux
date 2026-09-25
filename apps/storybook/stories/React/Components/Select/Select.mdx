@@ -1,27 +1,27 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
-import Select from "nice-react-select"
-import Ink from "../../../../src/nice/Ink"
-import { DataTableRow } from "../../../../src/components/DataTable"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import Install from "../../../../src/components/Install"
-import HorizontalRule from "../../../../src/components/HorizontalRule"
+import { ComponentDemoTable } from "../../../../src/dataTables/components/demos/Components"
+import { selectExampleList } from "./examples"
+import NewLines from "../../../../src/components/NewLines"
+import Callout from "../../../../src/components/Callout"
 
 <Meta title="Components/Forms/Select" />
 
-<StoryHeader title="Select" />
+<StoryHeader
+  title="Select"
+  description="A single-value select in Input's field chrome: a WAI-ARIA select-only combobox by default, or the platform select with native."
+/>
+
+<NewLines count={3} />
 
 <Install package="react-select" />
 
-### Setup
+<NewLines />
 
 ```jsx
 import Select from "nice-react-select"
-```
 
-### Usage
-
-```jsx
 <Select
   aria-label="Country"
   placeholder="Choose a country"
@@ -34,35 +34,71 @@ import Select from "nice-react-select"
 />
 ```
 
-<HorizontalRule />
+<NewLines count={3} />
 
-## Basic
+<ComponentDemoTable examples={selectExampleList} />
 
-<Ink color="light">
-  A native <code>&lt;select&gt;</code> rendered through Input's field chrome (
-  <code>{`<Input as="select">`}</code>) with a decorative chevron in the{" "}
-  <code>end</code> slot. Every Input prop of the <code>as="select"</code>{" "}
-  branch passes through unchanged (<code>ref</code>, <code>onChange</code>,{" "}
-  <code>status</code>, <code>filled</code>, <code>width</code>,{" "}
-  <code>className</code>, <code>theme</code>, …) except <code>as</code> and{" "}
-  <code>end</code>. v1 is native only: no custom listbox and no{" "}
-  <code>multiple</code>. <code>onChange</code> receives the selected option's{" "}
-  <code>value</code> string.
-</Ink>
+<NewLines count={3} />
 
-<DataTableRow
-  columns={DEMO_CODE_COLUMNS}
-  values={[
-    <Select
-      aria-label="Country"
-      placeholder="Choose a country"
-      options={[
-        { value: "nl", label: "Netherlands" },
-        { value: "eg", label: "Egypt" },
-        { value: "us", label: "United States" },
-      ]}
-      onChange={() => {}}
-    />,
-    `<Select\n  aria-label="Country"\n  placeholder="Choose a country"\n  options={[\n    { value: "nl", label: "Netherlands" },\n    { value: "eg", label: "Egypt" },\n    { value: "us", label: "United States" },\n  ]}\n  onChange={handler}\n/>`,
-  ]}
-/>
+## Guide
+
+By default Select is a WAI-ARIA select-only combobox: Input rendered read-only
+with `role="combobox"`, opening a Popover that holds a `role="listbox"` List.
+DOM focus stays on the combobox and the active option is exposed with
+`aria-activedescendant`. Set `native` to render the platform `<select>` instead.
+Both modes are single-value (no `multiple`), render the chevron in Input's `end`
+slot, and call `onChange(value, event)`. The combobox calls it only when the
+value changes.
+
+`SelectProps` is discriminated on `native`, so `ref` is typed for the element
+rendered: the combobox `HTMLInputElement`, or the `HTMLSelectElement`. Every
+other Input prop passes through (`status`, `filled`, `width`, `className`,
+`theme`, `id`, …).
+
+```jsx
+<Select options={options} />          // combobox (default)
+<Select native options={options} />   // platform <select>
+```
+
+Combobox keyboard, with focus on the control:
+
+| Key | Closed | Open |
+|-----|--------|------|
+| ArrowDown / ArrowUp | Open on the selected option (else the first enabled) | Next / previous enabled option, no wrap |
+| Alt + ArrowUp | — | Select the active option and close |
+| Enter / Space | Open | Select the active option and close |
+| Home / End | Open on the first / last enabled option | First / last enabled option |
+| PageUp / PageDown | — | 10 options up / down |
+| Escape | — | Close without changing the value |
+| Tab | Focus moves | Select the active option, close, focus moves |
+| Printable characters | Open on the first match | Move to the matching option |
+
+Typeahead matches option text by prefix, case-insensitive; characters typed
+within 500 ms form one search, and Space inside a search is part of it.
+Disabled options are skipped. Blur, or a pointer press outside, closes without
+changing the value.
+
+The combobox has no `name`. `name` goes on a hidden input that carries the
+value, so `FormData` and native form posts work. Native mode submits like any
+`<select>`.
+
+```jsx
+<form>
+  <Select name="country" options={countries} />
+</form>
+
+// new FormData(form).get("country") → "nl"
+```
+
+`required` (or a Field's `required`) is rendered on the read-only combobox, so
+assistive technology announces it, but browsers do not run constraint
+validation on read-only or hidden inputs: the form submits with an empty value.
+Validate in your submit handler and show the error through Field, or use
+`native`.
+
+Options carry `start` and `end` content (an icon, a badge) that renders before
+and after the label in the listbox. A native `<option>` renders text only, so
+the slots are ignored with `native`. The trigger shows, and typeahead matches,
+the label when it is a string or number, otherwise the value.
+
+<Callout type="hint">The combobox does not validate `required` natively — validate on submit, or use `native`.</Callout>

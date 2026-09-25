@@ -1,108 +1,76 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
-import Input from "nice-react-input"
-import Ink from "../../../../src/nice/Ink"
-import { DataTableRow } from "../../../../src/components/DataTable"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import Install from "../../../../src/components/Install"
-import HorizontalRule from "../../../../src/components/HorizontalRule"
+import { ComponentDemoTable } from "../../../../src/dataTables/components/demos/Components"
+import { inputExampleList } from "./examples"
+import NewLines from "../../../../src/components/NewLines"
+import Callout from "../../../../src/components/Callout"
 
 <Meta title="Components/Forms/Input" />
 
 <StoryHeader
   title="Input"
+  description="A text input, select or textarea inside token-driven field chrome, with start / end slots and Field integration."
   repos={[
     { name: "nice-react-input", url: "https://github.com/niceprototypes/nice-react-input", license: "MIT" },
   ]}
 />
 
+<NewLines count={3} />
+
 <Install package="react-input" />
 
-### Setup
+<NewLines />
 
 ```jsx
 import Input from "nice-react-input"
-```
 
-### Usage
-
-```jsx
 <Input value={value} onChange={setValue} placeholder="Email" />
 ```
 
-<HorizontalRule />
+<NewLines count={3} />
 
-## Basic
+<ComponentDemoTable examples={inputExampleList} />
 
-<Ink color="light">
-  Default input rendering with a <code>placeholder</code> and an{" "}
-  <code>onChange</code> handler that receives the new string value.
-</Ink>
+<NewLines count={3} />
 
-<DataTableRow
-  columns={DEMO_CODE_COLUMNS}
-  values={[
-          <Input
-      placeholder="Email"
-      onChange={() => {}}
-    />,
-          `<Input\n  placeholder="Email"\n  onChange={(value) => setValue(value)}\n/>`,
-        ]}
-/>
+## Guide
 
-<HorizontalRule />
-
-## Structure
-
-<Ink color="light">
-  Input renders a wrapper element (the field chrome: border, radius,
-  background, padding, focus ring) around <code>start</code> → native control →{" "}
-  <code>end</code>. <code>className</code> and <code>style</code> apply to the
-  wrapper. <code>ref</code>, <code>id</code>, <code>name</code>,{" "}
-  <code>aria-*</code>, <code>data-testid</code> and every native attribute
-  apply to the native control, which remains the focus target.
-</Ink>
+Input renders a wrapper, the field chrome (border, radius, background, padding,
+focus ring), around `start`, the native control and `end`. `className` and
+`style` apply to the wrapper. `ref`, `id`, `name`, `aria-*`, `data-testid` and
+every native attribute apply to the native control, which stays the focus
+target. `onChange` receives the new string value, then the event.
 
 ```jsx
 <Input className="wrapper-class" ref={controlRef} aria-label="Email" />
+
 // <div class="… wrapper-class">
-//   <input aria-label="Email" … />  ← controlRef.current
+//   <input aria-label="Email" … />   ← controlRef.current
 // </div>
 ```
 
-## Colour props
+`backgroundColor` and `borderColor` take token variants, not CSS colour
+strings: a `BackgroundColorType` / `BorderColorType` name, or an object
+`{ name, theme?, breakpoint?, inverse?, transform? }`. They resolve through the
+`input.backgroundColor` and `input.borderColor` component groups.
 
-<Ink color="light">
-  <code>backgroundColor</code> and <code>borderColor</code> take token
-  variants, not CSS colour strings: a <code>BackgroundColorType</code> /{" "}
-  <code>BorderColorType</code> name, or an object{" "}
-  <code>{"{ name, theme?, breakpoint?, inverse?, transform? }"}</code>. They
-  resolve through the <code>input.backgroundColor</code> /{" "}
-  <code>input.borderColor</code> component groups.
-</Ink>
+```jsx
+<Input backgroundColor="raised" borderColor="link" />
+```
 
-<DataTableRow
-  columns={DEMO_CODE_COLUMNS}
-  values={[
-    <Input
-      backgroundColor="raised"
-      borderColor="link"
-      aria-label="Token colours"
-      placeholder="raised / link"
-      onChange={() => {}}
-    />,
-    `<Input\n  backgroundColor="raised"\n  borderColor="link"\n  placeholder="raised / link"\n  onChange={handler}\n/>`,
-  ]}
-/>
+The native control draws no outline. When anything inside the chrome has
+`:focus-visible` (the control, or a button in a slot), the wrapper draws an
+outline ring from the `input.focusRing` tokens; it adds no layout. Pointer
+focus changes only the border colour.
 
-## Keyboard focus
+`start` and `end` sit inside the chrome on the inline-start and inline-end
+sides, so they mirror in RTL. Input adds no `aria-hidden`: wrap decorative
+icons in `aria-hidden="true"`, and give interactive content such as a clear
+button its own `aria-label`.
 
-<Ink color="light">
-  The native control has no outline of its own. When anything inside the
-  chrome has <code>:focus-visible</code> (keyboard focus on the control or on a
-  button in a slot), the wrapper draws an outline ring from the{" "}
-  <code>input.focusRing</code> tokens; the outline adds no layout. Pointer
-  focus changes only the border colour. Press Tab into the demos on this page
-  to see the ring.
-</Ink>
+`width` sizes the chrome from the `input.width` scale. Numeric variants hold
+that many characters at every `size`, so the width hints at the expected
+answer length. `full` (default) fills the container.
 
+<Callout type="hint">`className` and `style` style the wrapper; `ref`, `id` and `aria-*` go to the native control.</Callout>

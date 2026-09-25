@@ -1,69 +1,90 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
-import { Field } from "nice-react-field"
-import Input from "nice-react-input"
-import Ink from "../../../../src/nice/Ink"
-import { DataTableRow } from "../../../../src/components/DataTable"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import Install from "../../../../src/components/Install"
-import HorizontalRule from "../../../../src/components/HorizontalRule"
+import { ComponentDemoTable } from "../../../../src/dataTables/components/demos/Components"
+import { fieldExampleList } from "./examples"
+import NewLines from "../../../../src/components/NewLines"
+import Callout from "../../../../src/components/Callout"
 
 <Meta title="Components/Forms/Field" />
 
-<StoryHeader title="Field" />
+<StoryHeader
+  title="Field"
+  description="Wires a label, description and error to one control through context. Fieldset groups Fields under a legend."
+/>
+
+<NewLines count={3} />
 
 <Install package="react-field" />
 
-### Setup
+<NewLines />
 
 ```jsx
 import { Field, Fieldset, useField, mergeDescribedBy } from "nice-react-field"
-```
 
-<Ink color="light">
-  Multi-component package: named exports only, no default export.
-</Ink>
-
-### Usage
-
-```jsx
 <Field label="Email" description="We never share it." error={error} invalid={!!error}>
   <Input type="email" value={email} onChange={setEmail} />
 </Field>
 ```
 
-<HorizontalRule />
+<NewLines count={3} />
 
-## Basic
+<ComponentDemoTable examples={fieldExampleList} />
 
-<Ink color="light">
-  Field renders a native <code>&lt;label&gt;</code>, the control, an optional
-  description, and an always-mounted polite live region for the error. It
-  publishes the wiring through context (<code>useField()</code>); the control
-  applies it. Input — and everything built on it (Select, DateField) — reads
-  the context: it takes the Field's <code>id</code>, merges the description and
-  error ids into <code>aria-describedby</code> in the order{" "}
-  <code>[description, error, own]</code>, sets <code>aria-invalid="true"</code>{" "}
-  only when the Field is <code>invalid</code>, and becomes{" "}
-  <code>required</code> when the Field is.
-</Ink>
+<NewLines count={3} />
 
-<DataTableRow
-  columns={DEMO_CODE_COLUMNS}
-  values={[
-    <Field label="Email">
-      <Input
-        type="email"
-        placeholder="name@example.com"
-        onChange={() => {}}
-      />
-    </Field>,
-    `<Field label="Email">\n  <Input\n    type="email"\n    placeholder="name@example.com"\n    onChange={handler}\n  />\n</Field>`,
-  ]}
+## Guide
+
+`nice-react-field` has named exports only, no default export.
+
+Field renders a native `<label>`, the control, an optional description and an
+always-mounted polite live region for the error. It publishes the wiring
+through context; the control applies it. Input, and everything built on it
+(Select, DateField), already does:
+
+- `id` — the control takes the Field's id, so the label's `htmlFor` names it.
+  It defaults to `useId()`; pass `id` to fix it.
+- `aria-describedby` — ordered `[description, error, own]`. The error id is
+  present only while there is an error.
+- `aria-invalid="true"` — only while the Field is `invalid`, never `"false"`.
+  It changes no style; set `status="error"` on the control.
+- `required` — native `required` on the control. The label renders no
+  asterisk; mark the other fields with `optionalLabel` instead.
+
+In development, Field warns in the console when no element inside it carries
+the id — the silent failure where the label names nothing.
+
+`Fieldset` groups related controls under a native `<fieldset>`. `legend` is
+required and names the group; `description` follows it and is referenced by
+the fieldset's `aria-describedby`. `disabled` is the native attribute and
+disables every control inside.
+
+```jsx
+<Fieldset legend="Shipping address" description="Where the order is delivered.">
+  <Field label="Street and number"><Input /></Field>
+  <Field label="Postcode"><Input width="10" /></Field>
+</Fieldset>
+```
+
+A custom control reads the wiring with `useField()`, which returns
+`{ id, labelId, descriptionId?, errorId?, describedBy?, invalid, required }`,
+or `null` outside a Field. `mergeDescribedBy(fieldDescribedBy, own)` joins the
+two id lists in order, drops empty entries, keeps the first occurrence of each
+id, and returns `undefined` when nothing is left, so no empty attribute
+renders.
+
+```jsx
+const field = useField()
+
+<input
+  id={field?.id}
+  aria-describedby={mergeDescribedBy(field?.describedBy, ownDescribedBy)}
+  aria-invalid={field?.invalid ? true : undefined}
+  required={field?.required}
 />
 
-<Ink color="light">
-  The control id defaults to <code>useId()</code>; pass <code>id</code> to fix
-  it. In development, Field warns in the console when no element inside it
-  carries the id — the silent failure where the label names nothing.
-</Ink>
+mergeDescribedBy("f-desc f-err", "hint f-desc") // "f-desc f-err hint"
+mergeDescribedBy(undefined, undefined)          // undefined
+```
+
+<Callout type="hint">Field only publishes the wiring — the control must apply `id`, `aria-describedby`, `aria-invalid` and `required`. Input does this for you.</Callout>

@@ -1,53 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import { StoryHeader } from "../../../../src/components/Story"
-import { DateField } from "nice-react-calendar"
-import { Field } from "nice-react-field"
-import Ink from "../../../../src/nice/Ink"
-import { DataTableRow } from "../../../../src/components/DataTable"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+import { ComponentExampleStory } from "../../../../src/dataTables/components/demos/Components"
+import { dateFieldExamples } from "./examples"
 
 <Meta title="Components/Forms/DateField/inside Field" />
 
-<StoryHeader title="inside Field" />
-
-<Ink color="light">
-  DateField renders through Input, so inside a <code>Field</code> the visible
-  input takes the Field's id, label, description and error wiring, and{" "}
-  <code>required</code>. No <code>aria-label</code> is needed.
-</Ink>
-
-<DataTableRow
-  columns={DEMO_CODE_COLUMNS}
-  values={[
-    <Field
-      label="Start date"
-      description="The first day of the booking."
-    >
-      <DateField
-        name="start"
-        min="2026-09-01"
-        width="20"
-      />
-    </Field>,
-    `<Field\n  label="Start date"\n  description="The first day of the booking."\n>\n  <DateField\n    name="start"\n    min="2026-09-01"\n    width="20"\n  />\n</Field>`,
-  ]}
-/>
-
-<DataTableRow
-  columns={DEMO_CODE_COLUMNS}
-  values={[
-    <Field
-      label="Start date"
-      error="Choose a start date."
-      invalid
-      required
-    >
-      <DateField
-        name="start"
-        status="error"
-        width="20"
-      />
-    </Field>,
-    `<Field\n  label="Start date"\n  error="Choose a start date."\n  invalid\n  required\n>\n  <DateField\n    name="start"\n    status="error"\n    width="20"\n  />\n</Field>`,
-  ]}
-/>
+<ComponentExampleStory example={dateFieldExamples.insideField} />

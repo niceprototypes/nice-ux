@@ -1,28 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import { StoryHeader } from "../../../../src/components/Story"
-import Input from "nice-react-input"
-import Ink from "../../../../src/nice/Ink"
-import { DataTableRow } from "../../../../src/components/DataTable"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+import { ComponentExampleStory } from "../../../../src/dataTables/components/demos/Components"
+import { inputExamples } from "./examples"
 
 <Meta title="Components/Forms/Input/placeholder" />
 
-<StoryHeader title="placeholder" />
-
-<Ink color="light">
-  Hint text shown when the input is empty. The placeholder color is driven
-  by the input's status/state token matrix and dims further in the
-  <code>disabled</code> state.
-</Ink>
-
-<DataTableRow
-  columns={DEMO_CODE_COLUMNS}
-  values={[
-          <Input
-      placeholder="name@example.com"
-      onChange={() => {}}
-    />,
-          `<Input\n  placeholder="name@example.com"\n  onChange={handler}\n/>`,
-        ]}
-/>
-
+<ComponentExampleStory example={inputExamples.placeholder} />

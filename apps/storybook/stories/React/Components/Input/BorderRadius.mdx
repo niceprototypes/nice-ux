@@ -1,34 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import { StoryHeader } from "../../../../src/components/Story"
-import Input from "nice-react-input"
-import StoryDescription from "../../../../src/components/StoryDescription"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
-import { DataTable } from "../../../../src/components/DataTable"
-
-export const radii = ["none", "smaller", "small", "base", "large", "larger"]
-
-export const radiusLabel = (r) => r.charAt(0).toUpperCase() + r.slice(1)
-
-export const radiusCode = (r) =>
-  r === "base"
-    ? `<Input\n  placeholder="Base"\n  onChange={handler}\n/>`
-    : `<Input\n  borderRadius="${r}"\n  placeholder="${radiusLabel(r)}"\n  onChange={handler}\n/>`
+import { ComponentExampleStory } from "../../../../src/dataTables/components/demos/Components"
+import { inputExamples } from "./examples"
 
 <Meta title="Components/Forms/Input/borderRadius" />
 
-<StoryHeader title="borderRadius" />
-
-<StoryDescription property="border-radius">
-  Controls the corner rounding of the input.
-</StoryDescription>
-
-<DataTable showHeader={false} columns={DEMO_CODE_COLUMNS}
-  tables={[{ rows: radii.map((radius) => ({ id: String(radius), values: [
-          <Input
-          borderRadius={radius}
-          placeholder={radiusLabel(radius)}
-          onChange={() => {}}
-        />,
-          radiusCode(radius),
-        ] })) }]} />
-
+<ComponentExampleStory example={inputExamples.borderRadius} />

@@ -1,101 +1,75 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import { useState } from "react"
 import { StoryHeader } from "../../../../src/components/Story"
-import { DateField } from "nice-react-calendar"
-import Ink from "../../../../src/nice/Ink"
-import { DataTableRow } from "../../../../src/components/DataTable"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import Install from "../../../../src/components/Install"
-import HorizontalRule from "../../../../src/components/HorizontalRule"
-
-export const PickerDemo = () => {
-  const [value, setValue] = useState(null)
-  return (
-    <div>
-      <DateField
-        aria-label="Start date"
-        value={value}
-        onChange={setValue}
-        width="20"
-      />
-      <Ink color="light">
-        value: <code>{JSON.stringify(value)}</code>
-      </Ink>
-    </div>
-  )
-}
+import { ComponentDemoTable } from "../../../../src/dataTables/components/demos/Components"
+import { dateFieldExampleList } from "./examples"
+import NewLines from "../../../../src/components/NewLines"
+import Callout from "../../../../src/components/Callout"
 
 <Meta title="Components/Forms/DateField" />
 
-<StoryHeader title="DateField" />
+<StoryHeader
+  title="DateField"
+  description="A read-only date field built on Input that opens a Calendar in a popover. Values are ISO strings, submitted through a hidden input."
+/>
+
+<NewLines count={3} />
 
 <Install package="react-calendar" />
 
-### Setup
+<NewLines />
 
 ```jsx
 import { DateField } from "nice-react-calendar"
-```
 
-### Usage
-
-```jsx
 <DateField name="start" value={start} onChange={setStart} aria-label="Start date" />
 ```
 
-<HorizontalRule />
+<NewLines count={3} />
 
-## ISO-string contract
+<ComponentDemoTable examples={dateFieldExampleList} />
 
-<Ink color="light">
-  Same contract as <code>Calendar</code>: <code>value</code>,{" "}
-  <code>defaultValue</code>, <code>min</code>, <code>max</code> and the{" "}
-  <code>onChange</code> argument are ISO <code>YYYY-MM-DD</code> strings;{" "}
-  <code>null</code> means empty; a JS <code>Date</code> is never accepted or
-  returned. <code>onChange</code> is typed <code>string | null</code>; v1 only
-  ever passes a date string.
-</Ink>
+<NewLines count={3} />
 
-## Picker
+## Guide
 
-<Ink color="light">
-  v1 is picker-only. The visible Input is read-only and shows the value
-  formatted with <code>Intl.DateTimeFormat(locale, {"{ dateStyle: \"medium\" }"})</code>.
-  The calendar button in Input's <code>end</code> slot (accessible name
-  "Choose date") opens a popover anchored to the field, and focus moves to the
-  calendar's tabbable day. Selecting a day sets the value and closes the
-  popover; Escape or a pointer press outside closes it. Focus returns to the
-  field. Typed or segmented entry is not supported yet.
-</Ink>
+DateField v1 is picker-only. The visible Input is read-only and shows the
+value formatted with `Intl.DateTimeFormat(locale, { dateStyle: "medium" })`.
+The calendar button in Input's `end` slot (accessible name "Choose date")
+opens a popover anchored to the field and moves focus to the calendar's
+tabbable day. Selecting a day sets the value and closes the popover; Escape or
+a pointer press outside closes it, and focus returns to the field. Typed or
+segmented entry is not supported yet.
 
-<DataTableRow
-  columns={DEMO_CODE_COLUMNS}
-  values={[
-    <PickerDemo />,
-    `const [value, setValue] = useState(null)\n\n<DateField\n  aria-label="Start date"\n  value={value}\n  onChange={setValue}\n  width="20"\n/>`,
-  ]}
-/>
+It uses Calendar's ISO contract: `value`, `defaultValue`, `min`, `max` and the
+`onChange` argument are `YYYY-MM-DD` strings, and `null` means empty.
+`onChange` is typed `string | null`; v1 only ever passes a date string. `min`,
+`max`, `isDateDisabled` and `locale` are passed to the Calendar, and
+`status="disabled"` disables the calendar button.
 
-<Ink color="light">
-  Every Input prop passes through except <code>as</code>, <code>type</code>,{" "}
-  <code>end</code>, <code>value</code>, <code>defaultValue</code>,{" "}
-  <code>onChange</code> and <code>name</code>, which DateField owns.{" "}
-  <code>min</code>, <code>max</code>, <code>isDateDisabled</code> and{" "}
-  <code>locale</code> are passed to the Calendar. <code>status="disabled"</code>{" "}
-  disables the calendar button.
-</Ink>
+Every other Input prop passes through, except `as`, `type`, `end`, `value`,
+`defaultValue`, `onChange` and `name`, which DateField owns. `name` is placed
+on a hidden input whose value is the ISO date (or `""` when empty); the visible
+input has no `name`.
 
-<DataTableRow
-  columns={DEMO_CODE_COLUMNS}
-  values={[
-    <DateField
-      aria-label="Booking date"
-      defaultValue="2026-09-24"
-      min="2026-09-01"
-      max="2026-10-31"
-      locale="de-DE"
-      width="20"
-    />,
-    `<DateField\n  aria-label="Booking date"\n  defaultValue="2026-09-24"\n  min="2026-09-01"\n  max="2026-10-31"\n  locale="de-DE"\n  width="20"\n/>`,
-  ]}
-/>
+```jsx
+<form onSubmit={handleSubmit}>
+  <DateField name="start" defaultValue="2026-09-24" />
+</form>
+
+// new FormData(form).get("start") → "2026-09-24", not "Sep 24, 2026"
+```
+
+DateField renders through Input, so inside a `Field` the visible input takes
+the Field's id, label, description and error wiring, `aria-invalid` and
+`required` with no extra props. As with Select's combobox, the read-only input
+and the hidden input are not validated natively: check `required` in your
+submit handler and report it through the Field's `error`.
+
+```jsx
+<Field label="Start date" error={error} invalid={!!error} required>
+  <DateField name="start" status={error ? "error" : "base"} />
+</Field>
+```
+
+<Callout type="hint">Forms receive the ISO date from the hidden input — never the locale-formatted text in the field.</Callout>

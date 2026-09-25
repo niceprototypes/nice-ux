@@ -1,35 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import { StoryHeader } from "../../../../src/components/Story"
-import Select from "nice-react-select"
-import Ink from "../../../../src/nice/Ink"
-import { DataTableRow } from "../../../../src/components/DataTable"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+import { ComponentExampleStory } from "../../../../src/dataTables/components/demos/Components"
+import { selectExamples } from "./examples"
 
 <Meta title="Components/Forms/Select/options" />
 
-<StoryHeader title="options" />
-
-<Ink color="light">
-  Array of <code>{"{ value, label, disabled? }"}</code> rendered as native{" "}
-  <code>&lt;option&gt;</code> elements in array order. A native option renders
-  text only, so <code>label</code> should be a string or number. A{" "}
-  <code>disabled</code> option is listed but cannot be chosen. Ignored when{" "}
-  <code>children</code> is given.
-</Ink>
-
-<DataTableRow
-  columns={DEMO_CODE_COLUMNS}
-  values={[
-    <Select
-      aria-label="Plan"
-      defaultValue="team"
-      options={[
-        { value: "free", label: "Free" },
-        { value: "team", label: "Team" },
-        { value: "enterprise", label: "Enterprise (contact sales)", disabled: true },
-      ]}
-      onChange={() => {}}
-    />,
-    `<Select\n  aria-label="Plan"\n  defaultValue="team"\n  options={[\n    { value: "free", label: "Free" },\n    { value: "team", label: "Team" },\n    {\n      value: "enterprise",\n      label: "Enterprise (contact sales)",\n      disabled: true,\n    },\n  ]}\n  onChange={handler}\n/>`,
-  ]}
-/>
+<ComponentExampleStory example={selectExamples.options} />

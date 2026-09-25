@@ -1,52 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import { StoryHeader } from "../../../../src/components/Story"
-import Input from "nice-react-input"
-import Ink from "../../../../src/nice/Ink"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
-import { DataTable } from "../../../../src/components/DataTable"
-
-export const modes = ["none", "text", "tel", "url", "email", "numeric", "decimal", "search"]
-
-export const modePlaceholder = {
-  none: "No virtual keyboard",
-  text: "Standard keyboard",
-  tel: "Telephone keypad",
-  url: "URL keyboard",
-  email: "Email keyboard",
-  numeric: "Digits 0–9",
-  decimal: "Digits and separator",
-  search: "Search keyboard",
-}
-
-export const modeCode = (m) =>
-  `<Input\n  inputMode="${m}"\n  placeholder="${modePlaceholder[m]}"\n  onChange={handler}\n/>`
+import { ComponentExampleStory } from "../../../../src/dataTables/components/demos/Components"
+import { inputExamples } from "./examples"
 
 <Meta title="Components/Forms/Input/inputMode" />
 
-<StoryHeader title="inputMode" />
-
-<Ink color="light">
-  Virtual-keyboard hint, rendered as the HTML <code>inputmode</code> attribute.
-  It changes which on-screen keyboard a touch device shows; it does not
-  validate or restrict the value. Use it with <code>type="text"</code> for
-  numbers that are not quantities (codes, card numbers) instead of{" "}
-  <code>type="number"</code>. Open this page on a phone or tablet to see the
-  effect; desktop browsers ignore it.
-</Ink>
-
-<DataTable
-  showHeader={false}
-  columns={DEMO_CODE_COLUMNS}
-  tables={[{ rows: modes.map((m) => ({
-    id: m,
-    values: [
-      <Input
-        inputMode={m}
-        aria-label={`inputMode ${m}`}
-        placeholder={modePlaceholder[m]}
-        onChange={() => {}}
-      />,
-      modeCode(m),
-    ],
-  })) }]}
-/>
+<ComponentExampleStory example={inputExamples.inputMode} />

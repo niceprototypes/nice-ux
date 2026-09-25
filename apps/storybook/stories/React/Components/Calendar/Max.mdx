@@ -1,28 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import { StoryHeader } from "../../../../src/components/Story"
-import { Calendar } from "nice-react-calendar"
-import Ink from "../../../../src/nice/Ink"
-import { DataTableRow } from "../../../../src/components/DataTable"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+import { ComponentExampleStory } from "../../../../src/dataTables/components/demos/Components"
+import { calendarExamples } from "./examples"
 
 <Meta title="Components/Forms/Calendar/max" />
 
-<StoryHeader title="max" />
-
-<Ink color="light">
-  Latest selectable ISO date, inclusive. Later days render disabled, keyboard
-  focus stops at <code>max</code>, and the next-month button is disabled when
-  every day of the next month is after it.
-</Ink>
-
-<DataTableRow
-  columns={DEMO_CODE_COLUMNS}
-  values={[
-    <Calendar
-      aria-label="Check-out"
-      defaultValue="2026-09-10"
-      max="2026-09-20"
-    />,
-    `<Calendar\n  aria-label="Check-out"\n  defaultValue="2026-09-10"\n  max="2026-09-20"\n/>`,
-  ]}
-/>
+<ComponentExampleStory example={calendarExamples.max} />

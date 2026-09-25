@@ -1,72 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import { useState } from "react"
-import { StoryHeader } from "../../../../src/components/Story"
-import Input from "nice-react-input"
-import Button from "nice-react-button"
-import Icon from "nice-react-icon"
-import Ink from "../../../../src/nice/Ink"
-import { DataTableRow } from "../../../../src/components/DataTable"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
-
-export const ClearableInput = () => {
-  const [value, setValue] = useState("Amsterdam")
-  return (
-    <Input
-      aria-label="City"
-      value={value}
-      onChange={setValue}
-      end={
-        value ? (
-          <Button
-            iconLeft="x"
-            size="smaller"
-            aria-label="Clear city"
-            onClick={() => setValue("")}
-          />
-        ) : null
-      }
-    />
-  )
-}
+import { ComponentExampleStory } from "../../../../src/dataTables/components/demos/Components"
+import { inputExamples } from "./examples"
 
 <Meta title="Components/Forms/Input/end" />
 
-<StoryHeader title="end" />
-
-<Ink color="light">
-  Content rendered inside the field chrome after the native control, on the
-  inline-end side (right in LTR, left in RTL). Same accessibility rule as{" "}
-  <code>start</code>: decorative content is hidden by the consumer, interactive
-  content carries its own accessible name.
-</Ink>
-
-## Interactive: clear button
-
-<Ink color="light">
-  A button in the slot stays in the tab order after the native control. Give it
-  an <code>aria-label</code> that names what it clears; an icon alone has no
-  accessible name.
-</Ink>
-
-<DataTableRow
-  columns={DEMO_CODE_COLUMNS}
-  values={[
-    <ClearableInput />,
-    `<Input\n  aria-label="City"\n  value={value}\n  onChange={setValue}\n  end={\n    value ? (\n      <Button\n        iconLeft="x"\n        size="smaller"\n        aria-label="Clear city"\n        onClick={() => setValue("")}\n      />\n    ) : null\n  }\n/>`,
-  ]}
-/>
-
-## Decorative
-
-<DataTableRow
-  columns={DEMO_CODE_COLUMNS}
-  values={[
-    <Input
-      aria-label="Website"
-      placeholder="example.com"
-      end={<span aria-hidden="true"><Icon name="link" /></span>}
-      onChange={() => {}}
-    />,
-    `<Input\n  aria-label="Website"\n  placeholder="example.com"\n  end={\n    <span aria-hidden="true">\n      <Icon name="link" />\n    </span>\n  }\n  onChange={handler}\n/>`,
-  ]}
-/>
+<ComponentExampleStory example={inputExamples.end} />

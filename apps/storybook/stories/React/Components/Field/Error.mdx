@@ -1,52 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import { useState } from "react"
-import { StoryHeader } from "../../../../src/components/Story"
-import { Field } from "nice-react-field"
-import Input from "nice-react-input"
-import Ink from "../../../../src/nice/Ink"
-import { DataTableRow } from "../../../../src/components/DataTable"
-import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
-
-export const ValidatedEmail = () => {
-  const [value, setValue] = useState("")
-  const [error, setError] = useState(undefined)
-  const validate = () =>
-    setError(value.includes("@") ? undefined : "Enter an email address with an @.")
-  return (
-    <Field
-      label="Email"
-      description="Validated when you leave the field."
-      error={error}
-      invalid={!!error}
-    >
-      <Input
-        type="email"
-        value={value}
-        status={error ? "error" : "base"}
-        onChange={setValue}
-        onBlur={validate}
-      />
-    </Field>
-  )
-}
+import { ComponentExampleStory } from "../../../../src/dataTables/components/demos/Components"
+import { fieldExamples } from "./examples"
 
 <Meta title="Components/Forms/Field/error" />
 
-<StoryHeader title="error" />
-
-<Ink color="light">
-  Error message, rendered below the description inside a polite live region
-  (<code>aria-live="polite"</code>). The region stays mounted and empty without
-  an error, so screen readers announce the message when it appears. While an
-  error is present its id follows the description id in{" "}
-  <code>aria-describedby</code>. Pair it with <code>invalid</code>; set both
-  after a validation attempt, not on a pristine field.
-</Ink>
-
-<DataTableRow
-  columns={DEMO_CODE_COLUMNS}
-  values={[
-    <ValidatedEmail />,
-    `const validate = () =>\n  setError(value.includes("@") ? undefined : "Enter an email address with an @.")\n\n<Field\n  label="Email"\n  description="Validated when you leave the field."\n  error={error}\n  invalid={!!error}\n>\n  <Input\n    type="email"\n    value={value}\n    status={error ? "error" : "base"}\n    onChange={setValue}\n    onBlur={validate}\n  />\n</Field>`,
-  ]}
-/>
+<ComponentExampleStory example={fieldExamples.error} />
