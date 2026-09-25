@@ -26,12 +26,9 @@
   ],
   "author": "",
   "license": "MIT",
-  "dependencies": {
-    "nice-react-styles": "file:../react-styles",
-    "nice-react-ink": "file:../react-ink"
-  },
   "peerDependencies": {
-    "nice-react-ink": ">=5.0.0",
+    "nice-react-ink": "^8.0.3",
+    "nice-react-styles": "^15.0.1",
     "react": ">=19.2.0 <20.0.0",
     "react-dom": ">=19.2.0 <20.0.0",
     "styled-components": ">=6.1.18 <7.0.0"
@@ -48,6 +45,7 @@
     "nice-config-rollup": "file:../config-rollup",
     "nice-config-typescript": "file:../config-typescript",
     "nice-react-ink": "file:../react-ink",
+    "nice-react-styles": "file:../react-styles",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "rollup": "^4.9.1",
