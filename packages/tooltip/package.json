@@ -34,14 +34,12 @@
   },
   "homepage": "https://github.com/niceprototypes/nice-react-tooltip#readme",
   "peerDependencies": {
+    "nice-icons": "^4.0.0",
+    "nice-react-popover": "^0.1.0",
+    "nice-react-styles": "^15.0.1",
     "react": ">=19.2.0 <20.0.0",
     "react-dom": ">=19.2.0 <20.0.0",
     "styled-components": ">=6.1.18 <7.0.0"
-  },
-  "dependencies": {
-    "nice-icons": "file:../icons",
-    "nice-react-popover": "file:../react-popover",
-    "nice-react-styles": "file:../react-styles"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.7",
@@ -58,6 +56,9 @@
     "nice-config-jest": "file:../config-jest",
     "nice-config-rollup": "file:../config-rollup",
     "nice-config-typescript": "file:../config-typescript",
+    "nice-icons": "file:../icons",
+    "nice-react-popover": "file:../react-popover",
+    "nice-react-styles": "file:../react-styles",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "rollup": "^4.9.1",
