@@ -46,6 +46,7 @@ describe("Select", () => {
   it("renders options in order with disabled", () => {
     render(
       <Select
+        native
         aria-label="fruit"
         options={fruit}
       />
@@ -60,7 +61,7 @@ describe("Select", () => {
 
   it("renders native option / optgroup children", () => {
     render(
-      <Select aria-label="fruit">
+      <Select native aria-label="fruit">
         <optgroup label="Stone">
           <option value="p">Peach</option>
         </optgroup>
@@ -77,6 +78,7 @@ describe("Select", () => {
   it("prefers children over options when both are given", () => {
     render(
       <Select
+        native
         aria-label="fruit"
         options={fruit}
       >
@@ -92,6 +94,7 @@ describe("Select", () => {
     it("renders a first disabled, hidden, empty option that is selected initially", () => {
       render(
         <Select
+          native
           aria-label="fruit"
           options={fruit}
           placeholder="Pick a fruit"
@@ -111,6 +114,7 @@ describe("Select", () => {
     it("keeps a given defaultValue over the placeholder", () => {
       render(
         <Select
+          native
           aria-label="fruit"
           options={fruit}
           placeholder="Pick a fruit"
@@ -123,6 +127,7 @@ describe("Select", () => {
     it("renders no placeholder option when placeholder is not set", () => {
       render(
         <Select
+          native
           aria-label="fruit"
           options={fruit}
         />
@@ -139,6 +144,7 @@ describe("Select", () => {
       const [value, setValue] = React.useState("a")
       return (
         <Select
+          native
           aria-label="fruit"
           options={fruit}
           value={value}
@@ -163,6 +169,7 @@ describe("Select", () => {
     const ref = React.createRef<HTMLSelectElement>()
     render(
       <Select
+        native
         aria-label="fruit"
         options={fruit}
         ref={ref}
@@ -175,6 +182,7 @@ describe("Select", () => {
   it("renders an aria-hidden, pointer-transparent chevron icon in the end slot", () => {
     render(
       <Select
+        native
         aria-label="fruit"
         options={fruit}
       />
@@ -189,10 +197,11 @@ describe("Select", () => {
 
   it("sizes the chevron from select.chevron.size at the select's size", () => {
     const sizes = ["smaller", "small", "base", "large", "larger"] as const
-    const { rerender } = render(<Select aria-label="fruit" />)
+    const { rerender } = render(<Select native aria-label="fruit" />)
     sizes.forEach(size => {
       rerender(
         <Select
+          native
           aria-label="fruit"
           size={size}
         />
@@ -207,10 +216,11 @@ describe("Select", () => {
   })
 
   it("dims the chevron with the disabled colour when status is disabled", () => {
-    const { rerender } = render(<Select aria-label="fruit" />)
+    const { rerender } = render(<Select native aria-label="fruit" />)
     expect(screen.getByTestId("icon")).toHaveAttribute("data-color", "base")
     rerender(
       <Select
+        native
         aria-label="fruit"
         status="disabled"
       />
@@ -225,6 +235,7 @@ describe("Select", () => {
   it("applies className to Input's wrapper, not the native select", () => {
     render(
       <Select
+        native
         aria-label="fruit"
         className="custom"
       />
@@ -236,7 +247,7 @@ describe("Select", () => {
 
   it("does not accept multiple (compile-time)", () => {
     // @ts-expect-error — v1 is single-value only
-    render(<Select aria-label="m" multiple />)
+    render(<Select native aria-label="m" multiple />)
     expect(screen.getByRole("combobox")).not.toHaveAttribute("multiple")
   })
 
@@ -244,7 +255,7 @@ describe("Select", () => {
     it("is labelled by the Field label (label targets the select)", () => {
       render(
         <Field label="Fruit">
-          <Select options={fruit} />
+          <Select native options={fruit} />
         </Field>
       )
       const select = screen.getByRole("combobox", { name: "Fruit" })
@@ -266,6 +277,7 @@ describe("Select", () => {
           required
         >
           <Select
+            native
             options={fruit}
             aria-describedby="hint"
           />

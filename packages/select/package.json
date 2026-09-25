@@ -2,7 +2,7 @@
   "name": "nice-react-select",
   "version": "0.1.0",
   "type": "module",
-  "description": "Native select for React, rendered through nice-react-input's field chrome with options, placeholder and a chevron",
+  "description": "Select for React: a WAI-ARIA select-only combobox through nice-react-input's field chrome by default, or the native select with the native prop",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
@@ -35,6 +35,8 @@
   "dependencies": {
     "nice-react-icon": "file:../react-icon",
     "nice-react-input": "file:../react-input",
+    "nice-react-list": "file:../react-list",
+    "nice-react-popover": "file:../react-popover",
     "nice-react-styles": "file:../react-styles"
   },
   "devDependencies": {
