@@ -150,7 +150,9 @@ export type InputDefaultValueType = string
 /**
  * InputPlaceholderType
  *
- * Placeholder text shown when the input is empty.
+ * Placeholder text shown when the input is empty. Rendered on `<input>` and
+ * `<textarea>` only — `placeholder` is not a valid `<select>` attribute, so it
+ * is omitted for `as="select"` (use a leading empty `<option>` instead).
  */
 export type InputPlaceholderType = string
 
@@ -505,7 +507,7 @@ export interface InputBaseProps {
   /** Key-down handler */
   onKeyDown?: InputOnKeyDownType
 
-  /** Placeholder text shown when the input is empty */
+  /** Placeholder text shown when the input is empty — not emitted for `as="select"` */
   placeholder?: InputPlaceholderType
 
   /** Form field name attribute */

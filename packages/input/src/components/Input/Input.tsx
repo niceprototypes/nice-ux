@@ -132,7 +132,8 @@ const Input: React.FC<InputProps> = ({
         }}
         onFocus={onFocus}
         onKeyDown={onKeyDown}
-        placeholder={placeholder}
+        // `placeholder` is not a valid <select> attribute — omitted for as="select"
+        placeholder={as === "select" ? undefined : placeholder}
         readOnly={readOnly}
         required={required || fieldContext?.required}
         spellCheck={spellCheck}

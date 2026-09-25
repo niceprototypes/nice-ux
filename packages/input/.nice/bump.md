@@ -8,3 +8,4 @@
 [2026-09-24 19:02] patch: Input width 2–20 adds the size-specific inline padding and border to the content-only input.width token, so the field holds that many characters at every size; full stays 100%
 [2026-09-24 19:04] minor: Input reads the enclosing Field through useField: the native control takes the Field id (unless id is passed), merges the Field description/error ids ahead of its own aria-describedby, sets aria-invalid="true" only when the Field is invalid, and is required when the Field is; adds the nice-react-field dependency
 [2026-09-24 20:04] minor: Accept role, aria-expanded, aria-controls, aria-activedescendant, aria-haspopup and aria-autocomplete on Input's native control
+[2026-09-24 20:04] patch: Do not emit placeholder on the native select

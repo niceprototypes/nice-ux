@@ -160,6 +160,42 @@ describe("Input", () => {
       expect(select).not.toHaveAttribute("type")
     })
 
+    it("does not emit placeholder on a select, but does on input and textarea", () => {
+      const { rerender } = render(
+        <Input
+          as="select"
+          aria-label="fruit"
+          placeholder="Pick one"
+        >
+          <option value="a">Apple</option>
+        </Input>
+      )
+      expect(screen.getByRole("combobox")).not.toHaveAttribute("placeholder")
+
+      rerender(
+        <Input
+          as="textarea"
+          aria-label="fruit"
+          placeholder="Pick one"
+        />
+      )
+      expect(screen.getByRole("textbox")).toHaveAttribute(
+        "placeholder",
+        "Pick one"
+      )
+
+      rerender(
+        <Input
+          aria-label="fruit"
+          placeholder="Pick one"
+        />
+      )
+      expect(screen.getByRole("textbox")).toHaveAttribute(
+        "placeholder",
+        "Pick one"
+      )
+    })
+
     it("types ref and element-only props per as (compile-time)", () => {
       const selectRef = React.createRef<HTMLSelectElement>()
       // @ts-expect-error — a <select> ref is not accepted for the default <input>
