@@ -10,11 +10,11 @@ export const buttonStatus = {
   variants: ["base", "disabled", "error", "success", "warning"],
   // Shown outline and filled; base renders with no status prop.
   preview: (variant) => (
-    <Flex gap="small">
-      <Button onClick={() => {}} status={variant === "base" ? undefined : variant}>
+    <Flex gap="small" grow={1}>
+      <Button grow={1} onClick={() => {}} status={variant === "base" ? undefined : variant}>
         {cap(variant)}
       </Button>
-      <Button filled onClick={() => {}} status={variant === "base" ? undefined : variant}>
+      <Button filled grow={1} onClick={() => {}} status={variant === "base" ? undefined : variant}>
         {cap(variant)}
       </Button>
     </Flex>
