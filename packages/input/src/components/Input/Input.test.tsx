@@ -531,6 +531,126 @@ describe("Input", () => {
     errorSpy.mockRestore()
   })
 
+  describe("combobox attributes", () => {
+    const comboboxProps = {
+      role: "combobox",
+      "aria-expanded": true,
+      "aria-controls": "fruit-listbox",
+      "aria-activedescendant": "fruit-option-2",
+      "aria-haspopup": "listbox",
+      "aria-autocomplete": "none",
+    } as const
+
+    it("forwards role and each combobox aria attribute to the native control", () => {
+      render(
+        <Input
+          aria-label="fruit"
+          readOnly
+          {...comboboxProps}
+        />
+      )
+      const control = screen.getByRole("combobox", { name: "fruit" })
+      expect(control.tagName).toBe("INPUT")
+      expect(control).toHaveAttribute("role", "combobox")
+      expect(control).toHaveAttribute("aria-expanded", "true")
+      expect(control).toHaveAttribute("aria-controls", "fruit-listbox")
+      expect(control).toHaveAttribute("aria-activedescendant", "fruit-option-2")
+      expect(control).toHaveAttribute("aria-haspopup", "listbox")
+      expect(control).toHaveAttribute("aria-autocomplete", "none")
+    })
+
+    it("does not put them on the wrapper", () => {
+      render(
+        <Input
+          aria-label="fruit"
+          readOnly
+          {...comboboxProps}
+        />
+      )
+      const wrapper = screen.getByRole("combobox").parentElement as HTMLElement
+      ;[
+        "role",
+        "aria-expanded",
+        "aria-controls",
+        "aria-activedescendant",
+        "aria-haspopup",
+        "aria-autocomplete",
+      ].forEach(attribute => {
+        expect(wrapper).not.toHaveAttribute(attribute)
+      })
+    })
+
+    it("renders none of them unless passed", () => {
+      render(<Input aria-label="x" />)
+      const control = screen.getByRole("textbox")
+      ;[
+        "role",
+        "aria-expanded",
+        "aria-controls",
+        "aria-activedescendant",
+        "aria-haspopup",
+        "aria-autocomplete",
+      ].forEach(attribute => {
+        expect(control).not.toHaveAttribute(attribute)
+      })
+    })
+
+    it("renders aria-expanded=\"false\" when closed", () => {
+      render(
+        <Input
+          aria-label="fruit"
+          readOnly
+          {...comboboxProps}
+          aria-expanded={false}
+        />
+      )
+      expect(screen.getByRole("combobox")).toHaveAttribute(
+        "aria-expanded",
+        "false"
+      )
+    })
+
+    it("leaves Field id, aria-describedby, aria-invalid and required wiring unchanged", () => {
+      render(
+        <Field
+          label="Fruit"
+          id="fruit"
+          description="Pick one."
+          error="Required"
+          invalid
+          required
+        >
+          <Input
+            readOnly
+            aria-describedby="hint"
+            {...comboboxProps}
+          />
+        </Field>
+      )
+      const control = screen.getByRole("combobox", { name: "Fruit" })
+      expect(control).toHaveAttribute("id", "fruit")
+      expect(control).toHaveAttribute(
+        "aria-describedby",
+        "fruit-description fruit-error hint"
+      )
+      expect(control).toHaveAttribute("aria-invalid", "true")
+      expect(control).toBeRequired()
+      expect(control).toHaveAttribute("aria-controls", "fruit-listbox")
+      expect(control).toHaveAttribute("aria-expanded", "true")
+    })
+
+    it("restricts role to text-like control roles (compile-time)", () => {
+      const props: InputProps[] = [
+        { "aria-label": "a", role: "searchbox" },
+        { "aria-label": "b", role: "spinbutton" },
+        { "aria-label": "c", role: "textbox" },
+        // @ts-expect-error — "button" is not a text-like control role
+        { "aria-label": "d", role: "button" },
+      ]
+      expect(props).toHaveLength(4)
+    })
+  })
+
   it("applies data-testid", () => {
     render(<Input data-testid="email-input" />)
     expect(screen.getByTestId("email-input")).toBeInTheDocument()

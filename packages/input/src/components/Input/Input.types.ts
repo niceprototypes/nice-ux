@@ -404,6 +404,77 @@ export type InputAriaLabelType = string
 export type InputAriaDescribedByType = string
 
 /**
+ * InputRoleType
+ *
+ * ARIA role for the native control (HTML `role`). Restricted to the roles an
+ * `<input>` / `<textarea>` / `<select>` that still behaves as a text-like value
+ * control may legitimately take (ARIA in HTML): any other role (e.g. "button",
+ * "listbox", "presentation") would misrepresent a focusable form control whose
+ * value is edited or chosen in place. "combobox" is the one Select uses for the
+ * WAI-ARIA select-only combobox (`<Input as="input" readOnly role="combobox">`).
+ * Subset of React's `AriaRole`.
+ *
+ * Values:
+ * - "combobox": Control that pops up a listbox / grid / tree / dialog of choices
+ * - "searchbox": Text control for search queries
+ * - "spinbutton": Control whose value steps through a numeric range
+ * - "textbox": Free-form text control (the implicit role of a text input)
+ */
+export type InputRoleType = Extract<
+  React.AriaRole,
+  "combobox" | "searchbox" | "spinbutton" | "textbox"
+>
+
+/**
+ * InputAriaExpandedType
+ *
+ * Whether the popup the control owns or controls is open (`aria-expanded`).
+ * React's `aria-expanded` attribute type.
+ */
+export type InputAriaExpandedType = React.AriaAttributes["aria-expanded"]
+
+/**
+ * InputAriaControlsType
+ *
+ * Id reference(s) to the element(s) the control controls, e.g. a combobox's
+ * listbox (`aria-controls`). React's `aria-controls` attribute type.
+ */
+export type InputAriaControlsType = React.AriaAttributes["aria-controls"]
+
+/**
+ * InputAriaActiveDescendantType
+ *
+ * Id of the currently active descendant (e.g. the highlighted option of a
+ * combobox's listbox) while DOM focus stays on the control
+ * (`aria-activedescendant`). React's `aria-activedescendant` attribute type.
+ */
+export type InputAriaActiveDescendantType =
+  React.AriaAttributes["aria-activedescendant"]
+
+/**
+ * InputAriaHasPopupType
+ *
+ * Kind of popup the control opens (`aria-haspopup`). React's `aria-haspopup`
+ * attribute type.
+ *
+ * Values:
+ * - true / "true" (menu), false / "false", "menu", "listbox", "tree", "grid", "dialog"
+ */
+export type InputAriaHasPopupType = React.AriaAttributes["aria-haspopup"]
+
+/**
+ * InputAriaAutocompleteType
+ *
+ * How typed input drives suggestions in the popup (`aria-autocomplete`).
+ * React's `aria-autocomplete` attribute type.
+ *
+ * Values:
+ * - "none", "inline", "list", "both"
+ */
+export type InputAriaAutocompleteType =
+  React.AriaAttributes["aria-autocomplete"]
+
+/**
  * InputTestIdType
  *
  * Test selector.
@@ -551,6 +622,24 @@ export interface InputBaseProps {
   /** Id reference to descriptive text */
   "aria-describedby"?: InputAriaDescribedByType
 
+  /** ARIA role of the native control — text-like control roles only */
+  role?: InputRoleType
+
+  /** Whether the controlled popup is open (native control) */
+  "aria-expanded"?: InputAriaExpandedType
+
+  /** Id(s) of the element(s) the native control controls */
+  "aria-controls"?: InputAriaControlsType
+
+  /** Id of the active descendant while focus stays on the native control */
+  "aria-activedescendant"?: InputAriaActiveDescendantType
+
+  /** Kind of popup the native control opens */
+  "aria-haspopup"?: InputAriaHasPopupType
+
+  /** How typed input drives the popup's suggestions */
+  "aria-autocomplete"?: InputAriaAutocompleteType
+
   /** Test selector */
   "data-testid"?: InputTestIdType
 }
@@ -641,6 +730,12 @@ namespace InputTypes {
   export type ClassName = InputClassNameType
   export type AriaLabel = InputAriaLabelType
   export type AriaDescribedBy = InputAriaDescribedByType
+  export type Role = InputRoleType
+  export type AriaExpanded = InputAriaExpandedType
+  export type AriaControls = InputAriaControlsType
+  export type AriaActiveDescendant = InputAriaActiveDescendantType
+  export type AriaHasPopup = InputAriaHasPopupType
+  export type AriaAutocomplete = InputAriaAutocompleteType
   export type TestId = InputTestIdType
   export type Theme = ThemeType
   export type BackgroundColor = InputBackgroundColorType

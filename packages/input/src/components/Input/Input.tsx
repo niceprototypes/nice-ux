@@ -6,7 +6,12 @@ import { InputProps } from "./Input.types"
 import { isDisabled } from "../../utilities/isDisabled"
 
 const Input: React.FC<InputProps> = ({
+  "aria-activedescendant": ariaActiveDescendant,
+  "aria-autocomplete": ariaAutocomplete,
+  "aria-controls": ariaControls,
   "aria-describedby": ariaDescribedBy,
+  "aria-expanded": ariaExpanded,
+  "aria-haspopup": ariaHasPopup,
   "aria-label": ariaLabel,
   as = "input",
   autoComplete,
@@ -39,6 +44,7 @@ const Input: React.FC<InputProps> = ({
   readOnly = false,
   ref,
   required = false,
+  role,
   rows,
   size = "base",
   spellCheck,
@@ -93,6 +99,14 @@ const Input: React.FC<InputProps> = ({
         // runtime by `as`, and InputProps narrows `ref` per branch, so the
         // union is narrowed to the base element here (same as Button).
         ref={ref as React.Ref<HTMLInputElement>}
+        // Combobox / popup semantics live on the native control (never the
+        // wrapper) so Select can render a select-only combobox through Input.
+        role={role}
+        aria-activedescendant={ariaActiveDescendant}
+        aria-autocomplete={ariaAutocomplete}
+        aria-controls={ariaControls}
+        aria-expanded={ariaExpanded}
+        aria-haspopup={ariaHasPopup}
         aria-describedby={mergeDescribedBy(
           fieldContext?.describedBy,
           ariaDescribedBy
