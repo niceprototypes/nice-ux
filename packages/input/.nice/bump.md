@@ -9,3 +9,4 @@
 [2026-09-24 19:04] minor: Input reads the enclosing Field through useField: the native control takes the Field id (unless id is passed), merges the Field description/error ids ahead of its own aria-describedby, sets aria-invalid="true" only when the Field is invalid, and is required when the Field is; adds the nice-react-field dependency
 [2026-09-24 20:04] minor: Accept role, aria-expanded, aria-controls, aria-activedescendant, aria-haspopup and aria-autocomplete on Input's native control
 [2026-09-24 20:04] patch: Do not emit placeholder on the native select
+[2026-09-25 19:12] patch: Declare nice-* runtime packages as peer dependencies with a file: devDependency for local builds
