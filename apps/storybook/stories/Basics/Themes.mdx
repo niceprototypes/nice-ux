@@ -6,7 +6,7 @@ import Install from "../../src/components/Install"
 import NewLines from "../../src/components/NewLines"
 import Ink from "../../src/nice/Ink"
 import Flex from "nice-react-flex"
-import HorizontalRule from "../../src/components/HorizontalRule"
+import Line from "../../src/components/Line"
 
 <Meta
   title="Basics/Themes"
@@ -26,7 +26,7 @@ import HorizontalRule from "../../src/components/HorizontalRule"
 
 By default, Nice UI components are pinned to your browser settings, meaning that **they will switch themes automatically** between day and night depending on your browser or OS.
 
-<HorizontalRule />
+<Line />
 
 ## reset.css
 
@@ -37,7 +37,7 @@ By default, Nice UI components are pinned to your browser settings, meaning that
 @import "nice-styles/reset.css";
 ```
 
-<HorizontalRule />
+<Line />
 
 ## Pinning to a theme with HTML
 
@@ -75,7 +75,7 @@ Semantic tokens within the pinned element are reassigned to the pinned theme val
 </section>
 ```
 
-<HorizontalRule />
+<Line />
 
 ## Pinning with CSS
 
@@ -90,7 +90,7 @@ body.night-mode {
 }
 ```
 
-<HorizontalRule />
+<Line />
 
 ## Switching at runtime
 
@@ -105,11 +105,11 @@ applyTheme("night")           // whole document → night
 applyTheme("day", element)    // a specific element → day
 ```
 
-<HorizontalRule />
+<Line />
 
 ## Pinning with React
 
-### `theme` prop
+### <Code code="theme" language="tsx" inlined /> prop
 
 For pinning any Nice component:
 
@@ -121,7 +121,7 @@ import Ink from "nice-react-ink"
 
 <NewLines />
 
-### `Theme` component
+### <Code code="Theme" language="tsx" inlined /> component
 
 For pinning React subtrees:
 

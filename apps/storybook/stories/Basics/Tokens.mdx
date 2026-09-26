@@ -4,7 +4,7 @@ import Install from "../../src/components/Install"
 import NewLines from "../../src/components/NewLines"
 import ArrowLink from "../../src/components/ArrowLink"
 import Callout from "../../src/components/Callout"
-import HorizontalRule from "../../src/components/HorizontalRule"
+import Line from "../../src/components/Line"
 import Ink from "../../src/nice/Ink"
 
 <Meta
@@ -14,27 +14,27 @@ import Ink from "../../src/nice/Ink"
 
 <StoryHeader
   title="Tokens"
-  heading="CSS only"
-  headingDescription={
-    <>
-      If all you need is some style, and you have{" "}
-      <Ink
-        as="span"
-        weight="semibold"
-      >
-        no time budget
-      </Ink>{" "}
-      to integrate with a new library, you can still{" "}
-      <Ink
-        as="span"
-        weight="semibold"
-      >
-        upgrade your UI today
-      </Ink>{" "}
-      by using our design tokens to fill the gaps in your project.
-    </>
-  }
 />
+
+<Ink as="h2">CSS only</Ink>
+
+<Ink>
+  If all you need is some style, and you have{" "}
+  <Ink
+    as="span"
+    weight="semibold"
+  >
+    no time budget
+  </Ink>{" "}
+  to integrate with a new library, you can still{" "}
+  <Ink
+    as="span"
+    weight="semibold"
+  >
+    upgrade your UI today
+  </Ink>{" "}
+  by using our design tokens to fill the gaps in your project.
+</Ink>
 
 <ArrowLink storyId="tokens--docs">Browse CSS tokens</ArrowLink>
 
@@ -47,8 +47,6 @@ Import the stylesheet and reference the tokens:
 <Install
   package="styles"
 />
-
-<NewLines />
 
 ```css
 @import "nice-styles/tokens.css";
@@ -76,8 +74,6 @@ You may choose to alias the Nice UI tokens you need, and use your aliases everyw
   package="styles"
 />
 
-<NewLines />
-
 ```css
 @import "nice-styles/tokens.css";
 
@@ -100,7 +96,7 @@ You may choose to alias the Nice UI tokens you need, and use your aliases everyw
 }
 ```
 
-<HorizontalRule />
+<Line />
 
 ## JavaScript
 
@@ -113,8 +109,6 @@ Use the `getToken` function and CSS variables provided by `nice-styles` for vani
 <Install
   package="styles"
 />
-
-<NewLines />
 
 ```js
 import { getToken } from "nice-styles"
@@ -141,8 +135,6 @@ Create and style a React component with tokens:
 <Install
   package="react-styles"
 />
-
-<NewLines />
 
 ```tsx
 import { getToken } from "nice-react-styles"
@@ -189,8 +181,6 @@ Create and style a Styled Component with tokens:
   with="styled-components"
 />
 
-<NewLines />
-
 ```tsx
 // Card.tsx
 
@@ -224,7 +214,7 @@ export default function App() {
 }
 ```
 
-<HorizontalRule />
+<Line />
 
 ## Set tokens
 
@@ -290,7 +280,7 @@ const Card = ({ children }) => (
 )
 ```
 
-<HorizontalRule />
+<Line />
 
 ## Transform a color
 

@@ -10,7 +10,7 @@ const frameChrome = {
   borderRadius: getToken("borderRadius"),
   background: getToken("backgroundColor"),
 }
-const frameStyle = { ...frameChrome, width: 800, height: 600, maxWidth: getToken("contentMaxWidth") }
+const frameStyle = { ...frameChrome, width: 800, height: 600, maxWidth: "100%" }
 const frameStyleMobile = { ...frameChrome, width: 390, height: 800 }
 
 const htmlImport = (file: string) =>

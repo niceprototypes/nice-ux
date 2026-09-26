@@ -10,14 +10,12 @@ import NewLines from "../../NewLines"
  * paragraph, an optional row of `repos` links, then any `children`, then a
  * horizontal rule. Inserted at the top of every docs page.
  *
- * A page whose body opened with a `##` line and its paragraph passes them as
- * `heading` / `headingDescription` instead, so the whole block is one element.
+ * A page's first section heading is not part of the header: render it as an
+ * `<Ink as="h2">` directly after `<StoryHeader />`.
  */
 const StoryHeader: React.FC<StoryHeaderProps> = ({
   title,
   description,
-  heading,
-  headingDescription,
   repos,
   children,
 }) => (
@@ -25,17 +23,8 @@ const StoryHeader: React.FC<StoryHeaderProps> = ({
     <Flex
       direction="column"
       gap="base"
-      padding="larger none"
-      margin="none none larger"
     >
-      <Ink
-        as="h1"
-        size="larger"
-        weight="semibold"
-        color="light"
-      >
-        {title}
-      </Ink>
+      <Ink as="h1">{title}</Ink>
       {description ? <Ink>{description}</Ink> : null}
       {repos?.length ? (
         <Flex
@@ -54,25 +43,6 @@ const StoryHeader: React.FC<StoryHeaderProps> = ({
       {children}
     </Flex>
     <NewLines />
-    {/* The page's first section, in the same order it had as MDX body content.
-        Rendered with Ink, like the title above, rather than as raw headings the
-        docs stylesheet would style. */}
-    {heading ? (
-      <Flex
-        direction="column"
-        gap="base"
-        margin="larger none large"
-      >
-        <Ink
-          as="h2"
-          size="larger"
-          weight="semibold"
-        >
-          {heading}
-        </Ink>
-        {headingDescription ? <Ink as="p">{headingDescription}</Ink> : null}
-      </Flex>
-    ) : null}
   </>
 )
 

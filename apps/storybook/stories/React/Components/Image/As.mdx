@@ -7,7 +7,6 @@ import { DataTableRow } from "../../../../src/components/DataTable"
 import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import { toSource } from "../../../../src/services"
 import Tile from "nice-react-tile"
-import { getToken } from "nice-react-styles"
 
 <Meta title="Components/Image/as" />
 
@@ -49,7 +48,7 @@ import { getToken } from "nice-react-styles"
       height="600px"
       backgroundSize="cover"
       borderRadius="base"
-      style={{ maxWidth: getToken("contentMaxWidth") }}
+      style={{ maxWidth: "100%" }}
     >
       <Flex
         direction="column"

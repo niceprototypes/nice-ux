@@ -8,9 +8,8 @@ import Callout from "../../src/components/Callout"
 import Code from "../../src/nice/Code"
 import Flex from "nice-react-flex"
 import { IconPreview } from "./Icons.styles"
-import NewLines from "../../src/components/NewLines"
 import Install from "../../src/components/Install"
-import HorizontalRule from "../../src/components/HorizontalRule"
+import Line from "../../src/components/Line"
 
 <Meta
   title="Basics/Icons"
@@ -25,7 +24,7 @@ import HorizontalRule from "../../src/components/HorizontalRule"
 ### React
 <Install package="react-icon"/>
 
----
+<Line />
 
 ### {iconNames.length} icons
 
@@ -45,7 +44,7 @@ import HorizontalRule from "../../src/components/HorizontalRule"
   ]}
 />
 
-<HorizontalRule />
+<Line />
 
 ## Strings
 
@@ -85,15 +84,13 @@ getIconEncoded("check", "base", { theme: "night" })  // white glyph (#fff)
 element.style.maskImage = `url("${getIconEncoded("check")}")`
 ```
 
-<HorizontalRule />
+<Line />
 
 ## React
 
 The Icon component allows you to **easily configure icon properties** without any CSS code:
 
 <Install package="react-icon" />
-
-<NewLines />
 
 ```tsx
 <Icon

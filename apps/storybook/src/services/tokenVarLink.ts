@@ -1,4 +1,5 @@
 import { componentTokensData } from "nice-react-styles"
+import { tokenPageId } from "../data"
 
 /**
  * Turn a CSS-variable cell value into a deep link to its token story.
@@ -19,7 +20,7 @@ import { componentTokensData } from "nice-react-styles"
  *    story `Tokens/{group}`, whose Storybook id is the title lowercased
  *    with separators dropped (`fontSize` → `tokens-fontsize`). Groups that live
  *    in a sidebar folder carry its segment too (`tokens-colors-bordercolor`) —
- *    see `TOKEN_PAGE_FOLDERS`.
+ *    the id comes from the page's place in `src/data/storybook.json`.
  *
  * A non-component reference with more than two `--` segments (a theme / inverse
  * primitive) is not a module root and returns `null`.
@@ -48,36 +49,6 @@ export interface TokenVarLink {
 
 /** sessionStorage key the link writes on click and the module table reads. */
 export const HIGHLIGHT_KEY = "np-token"
-
-/**
- * Groups that render inside a sidebar folder, so their story id carries the
- * folder segment (`Tokens/Colors/borderColor` → `tokens-colors-bordercolor`).
- * Mirrors FOLDERS in scripts/generate-token-stories.mjs, which writes the titles.
- */
-const TOKEN_PAGE_FOLDERS: Record<string, string> = {
-  color: "colors",
-  backgroundColor: "colors",
-  borderColor: "colors",
-  brandColor: "colors",
-  fontFamily: "fonts",
-  fontSize: "fonts",
-  fontWeight: "fonts",
-  letterSpacing: "fonts",
-  lineHeight: "fonts",
-  borderRadius: "borders",
-  borderWidth: "borders",
-  animationDuration: "animation",
-  animationEasing: "animation",
-  backgroundSize: "sizes",
-  gap: "sizes",
-  size: "sizes",
-}
-
-/** The story id a module group's reference page lives at. */
-function moduleStoryId(group: string): string {
-  const folder = TOKEN_PAGE_FOLDERS[group]
-  return folder ? `tokens-${folder}-${group.toLowerCase()}` : `tokens-${group.toLowerCase()}`
-}
 
 export function parseTokenVarLink(value: string): TokenVarLink | null {
   const match = /^var\(--np--(.+)\)$/.exec(value.trim())
@@ -112,5 +83,8 @@ export function parseTokenVarLink(value: string): TokenVarLink | null {
   const variant = segments[1] ?? "base"
   const token = `${group}--${variant}`
 
-  return { group, variant, token, href: `/?path=/docs/${moduleStoryId(group)}--docs` }
+  const pageId = tokenPageId(group)
+  if (!pageId) return null // no page documents this group
+
+  return { group, variant, token, href: `/?path=/docs/${pageId}--docs` }
 }

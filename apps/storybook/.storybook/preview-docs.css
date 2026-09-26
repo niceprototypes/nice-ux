@@ -3,6 +3,32 @@
 .sbdocs {
   font-family: var(--np--font-family);
 
+  a {
+    text-decoration: none;
+  }
+
+  &.sbdocs-content {
+    margin-right: auto;
+    max-width: 100%;
+  }
+
+  &.sbdocs-wrapper {
+    padding: 0;
+    background: none;
+  }
+
+  @media (min-width: 641px) {
+    padding: 0 0 var(--np--gap--larger) var(--np--gap--larger);
+  }
+}
+
+
+/*
+!* Storybook docs (autodocs) overrides — restyle the .sbdocs surface with nice-styles tokens. *!
+
+.sbdocs {
+  font-family: var(--np--font-family);
+
   &.sbdocs-content {
     margin-right: auto;
     max-width: 100%;
@@ -73,7 +99,7 @@
     font-size: var(--np--font-size);
   }
 
-  /* ── 3. Vertical rhythm (top-level blocks) ────────────────────────── */
+  !* ── 3. Vertical rhythm (top-level blocks) ────────────────────────── *!
 
   > h2,
   > h3,
@@ -116,8 +142,8 @@
   code {
     font-family: var(--np--font-family--code);
 
-    /* `small` only where there is room. Preview CSS runs through PostCSS, so it
-       can use the @custom-media alias rather than a literal floor. */
+    !* `small` only where there is room. Preview CSS runs through PostCSS, so it
+       can use the @custom-media alias rather than a literal floor. *!
     @media (--np--laptop--up) {
       font-size: var(--np--font-size--small);
     }
@@ -129,7 +155,7 @@
     padding: 0;
   }
 
-  /* ── 4. Element styling ───────────────────────────────────────────── */
+  !* ── 4. Element styling ───────────────────────────────────────────── *!
 
   hr,
   th,
@@ -158,3 +184,4 @@
     }
   }
 }
+*/

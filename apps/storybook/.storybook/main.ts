@@ -100,6 +100,9 @@ const config: StorybookConfig = {
       "react",
       "react-dom",
       "nice-react-icon",
+      // One token registry and one token stylesheet map: separate instances each
+      // rewrite the shared <style data-nice-tokens> and erase the others' CSS.
+      "nice-styles",
     ]
 
     // Required for Vite to resolve the real paths of symlinked packages

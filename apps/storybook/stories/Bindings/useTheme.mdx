@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
-import HorizontalRule from "../../src/components/HorizontalRule"
+import Line from "../../src/components/Line"
 
 <Meta
   title="Bindings/useTheme"
@@ -17,7 +17,7 @@ added without a breaking signature change. When `StylesProvider` is given
 (`prefers-color-scheme: dark`) once and shares it through context — so any
 descendant reads one shared `theme` instead of wiring its own `matchMedia`.
 
-<HorizontalRule />
+<Line />
 
 ## Enable detection on the provider
 
@@ -62,7 +62,7 @@ const { isMobile } = useDevice()
 const { theme } = useTheme()
 ```
 
-<HorizontalRule />
+<Line />
 
 ## What it reflects
 

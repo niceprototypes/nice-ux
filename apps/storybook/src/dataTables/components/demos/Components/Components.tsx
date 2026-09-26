@@ -2,27 +2,13 @@ import { StoryHeader } from "../../../../components/Story"
 import { DataTable, withCopyAffordance } from "../../../../components/DataTable"
 import { ClickToCopy } from "../../../../components/ClickToCopy"
 import { TokenName, variantKey } from "../../../utilities"
-import type { DataColumn, DataRowItem, DataTableConfig } from "../../../../components/DataTable"
+import type { DataRowItem, DataTableConfig } from "../../../../components/DataTable"
 import type { ComponentExample } from "./Components.types"
-
-/**
- * Columns for a component-example table — the example / name / React-code subset
- * of the token columns (TOKEN_COLUMNS' preview, tokenName, and jsCall), minus the
- * CSS-var and resolved-value columns that only tokens have. The example (preview)
- * leads, matching the token tables' preview-first order.
- */
-export const EXAMPLE_COLUMNS: DataColumn[] = [
-  { key: "example", header: null, render: "node" },
-  { key: "name", header: "Name", render: "node" },
-  { key: "code", header: "React", render: "shiki", language: "tsx" },
-]
-
-/** Fixed widths, index-aligned to {@link EXAMPLE_COLUMNS}; `null` leaves a column equal-flex. */
-export const EXAMPLE_COLUMN_WIDTHS: (string | null)[] = ["16em", "8em", null]
+import { getColumns } from "../../../../data"
 
 /**
  * Build the data rows for one example facet. Each row's `values` are
- * index-aligned to EXAMPLE_COLUMNS: [example, name, code]. The default variant
+ * index-aligned to the `componentExample` column set: [example, name, code]. The default variant
  * (config `default`, else `"base"`) gets the check + "Default" flag via
  * `TokenName`, matching the token tables.
  */
@@ -61,7 +47,7 @@ export const ComponentExampleStory = ({ example }: { example: ComponentExample }
   <>
     {/* Match the combined Docs width — the code column needs the full container. */}
     <StoryHeader title={example.name} description={example.description} />
-    <DataTable columns={EXAMPLE_COLUMNS} columnWidths={EXAMPLE_COLUMN_WIDTHS} tables={[{ rows: buildExampleRows(example) }]} />
+    <DataTable {...getColumns("componentExample")} tables={[{ rows: buildExampleRows(example) }]} />
   </>
 )
 
@@ -72,6 +58,6 @@ export const ComponentExampleStory = ({ example }: { example: ComponentExample }
  */
 export default function ComponentDemoTable({ examples }: { examples: ComponentExample[] }) {
   return (
-    <DataTable columns={EXAMPLE_COLUMNS} columnWidths={EXAMPLE_COLUMN_WIDTHS} tables={examples.map(buildExampleTable)} />
+    <DataTable {...getColumns("componentExample")} tables={examples.map(buildExampleTable)} />
   )
 }

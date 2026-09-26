@@ -18,4 +18,6 @@ export interface DataTableRowsProps {
   condensed?: boolean
   /** Vertical padding on each row's outermost Flex, as the `${rowSpacing} none` gap shorthand. */
   rowSpacing?: GapType
+  /** Cap each section heading at the content width (rows stay full width). @default false */
+  sectionWrapped?: boolean
 }

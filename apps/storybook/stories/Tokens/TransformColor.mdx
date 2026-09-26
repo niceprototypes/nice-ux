@@ -1,14 +1,11 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
-import { TOKEN_COLUMN_WIDTHS } from "../../src/dataTables/components/tokens/Modules"
+import { getColumns } from "../../src/data"
 import PreviewCell from "../../src/components/PreviewCell"
 import { transformColor, getToken } from "nice-react-styles"
 import { DataTable } from "../../src/components/DataTable"
 
 <Meta title="Tokens/Colors/transformColor" />
-
-{/* Multi-column like the token tables — let it use the full docs width. */}
-<style>{`.sbdocs.sbdocs-content { max-width: 100%; }`}</style>
 
 <StoryHeader title="transformColor" description="Adjust a colour token's HSLA channels and get a relative colour back — hsl(from var(…) …) — that keeps following the theme." />
 
@@ -61,13 +58,13 @@ Channels are `[hue, saturation, lightness, alpha]`. A number sets the channel,
 <DataTable
   inline
   columns={[
-    { key: "swatch", header: null, render: "node" },
-    { key: "label", header: "Description", render: "text", size: "small" },
-    { key: "css", header: "CSS", render: "node" },
-    { key: "call", header: "JS", render: "shiki", language: "tsx" },
-    { key: "result", header: "Result", render: "text", code: true, size: "small", color: "lighter", clickToCopy: true },
+    { key: "swatch", header: null },
+    { key: "label", header: "Description", render: "nice-react-ink", size: "small" },
+    { key: "css", header: "CSS" },
+    { key: "call", header: "JS", render: "nice-react-code", language: "tsx" },
+    { key: "result", header: "Result", render: "nice-react-ink", code: true, size: "small", color: "lighter", clickToCopy: true },
   ]}
-  columnWidths={TOKEN_COLUMN_WIDTHS}
+  columnWidths={getColumns("tokenModule").columnWidths}
   tables={[{ rows: hslaExamples.map(({ label, call, args }) => {
     const result = transformColor(...args)
     return {

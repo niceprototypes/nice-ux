@@ -1,6 +1,5 @@
 export { default as ComponentDemoTable } from "./Components"
 export {
-  EXAMPLE_COLUMNS,
   buildExampleRows,
   buildExampleTable,
   ComponentExampleStory,

@@ -4,6 +4,7 @@ import Icon from "nice-react-icon"
 import Ink from "../../nice/Ink"
 import styled from "styled-components"
 import { getToken } from "nice-styles"
+import Line from "../Line"
 
 /**
  * A bulletin section — a headline and the points beneath it. Sections stack in
@@ -102,7 +103,6 @@ const SECTIONS: NewsSection[] = [
 const OuterFlex = styled(Flex).attrs({
   direction: "column",
 })`
-  max-width: ${getToken("contentMaxWidth")};
   background-color: ${getToken("backgroundColor", "success")};
   border: 1px solid ${getToken("borderColor", "success")};
   border-radius: ${getToken("borderRadius")};
@@ -216,7 +216,7 @@ const LatestNews: React.FC = () => (
             </ul>
           </Flex>
         </Flex>
-        {sectionIndex < SECTIONS.length - 1 && <hr />}
+        {sectionIndex < SECTIONS.length - 1 && <Line />}
       </React.Fragment>
     ))}
   </OuterFlex>

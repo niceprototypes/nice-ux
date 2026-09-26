@@ -52,13 +52,13 @@ const buildRows = (names: readonly string[], codeColumns: IllustrationTableColum
  */
 export default function IllustrationDemoTable({ codeColumns }: IllustrationTableProps) {
   const columns: DataColumn[] = [
-    { key: "preview", header: null, render: "node" },
-    { key: "name", header: "Name", render: "node" },
+    { key: "preview", header: null },
+    { key: "name", header: "Name" },
     ...codeColumns.map(
       (column, index): DataColumn => ({
         key: `code-${index}`,
         header: column.header,
-        render: "shiki",
+        render: "nice-react-code",
         language: "tsx",
       })
     ),

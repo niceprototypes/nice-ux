@@ -1,27 +1,24 @@
 import { ModuleTokenTable } from "../../src/dataTables/components/tokens/Modules"
 import type { ModuleTokenTableSectionConfig } from "../../src/dataTables/components/tokens/Modules"
-import { tokenTables, tokenTableList } from "./tables"
-
-/** Color modules grouped under the "Colors" cluster, color first. */
-const COLOR_GROUP_NAMES = ["color", "backgroundColor", "borderColor", "brandColor"] as const
-
-/** The "Colors" cluster — the four color modules as h3 sub-tables under one h2. */
-const colorsCluster: ModuleTokenTableSectionConfig = {
-  name: "Colors",
-  groups: COLOR_GROUP_NAMES.map(name => tokenTables[name]),
-}
+import { getItem, getTokenTable, type TokenTable } from "../../src/data"
 
 /**
- * The full Tokens/Docs body. The four color modules collapse into one "Colors"
- * `h2` cluster (each an `h3` sub-table) pinned to the top; every other module
- * follows as its own `h2` table. Pure config → `ModuleTokenTable` does the rendering.
+ * The full Tokens/Docs body, in sidebar order. Each Tokens folder (Animation,
+ * Borders, Colors, …) becomes one cluster — the folder as an `h2`, its tables as
+ * `h3` sub-tables; a top-level token page is its own `h2` table. Hand-written
+ * pages (`table: false`) are skipped. Pure config → `ModuleTokenTable` renders.
  */
 export const TokensDocs = () => {
-  const sections: ModuleTokenTableSectionConfig[] = [colorsCluster]
-  for (const group of tokenTableList) {
-    if ((COLOR_GROUP_NAMES as readonly string[]).includes(group.name)) continue
-    sections.push({ group })
+  const tokens = getItem("tokens")
+  const sections: ModuleTokenTableSectionConfig[] = []
+  for (const item of tokens?.children ?? []) {
+    if (item.isFolder) {
+      const groups = item.children.map(child => getTokenTable(child.id)).filter((table): table is TokenTable => !!table)
+      if (groups.length) sections.push({ name: item.name, groups })
+    } else {
+      const group = getTokenTable(item.id)
+      if (group) sections.push({ group })
+    }
   }
-
-  return <ModuleTokenTable sections={sections} />
+  return <ModuleTokenTable sections={sections} sectionWrapped={tokens?.settings.sectionWrapped === true} />
 }

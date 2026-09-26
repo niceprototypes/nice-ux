@@ -22,7 +22,6 @@ export const WelcomeLinkDiv = styled.div<{ $stripped?: boolean }>`
   border: ${({ $stripped }) => ($stripped ? "0" : `1px solid ${getToken("borderColor")}`)};
   border-radius: ${getToken("borderRadius")};
   box-shadow: ${({ $stripped }) => ($stripped ? "none" : getToken("boxShadow"))};
-  max-width: ${getToken("contentMaxWidth")};
 
   h3 {
     line-height: ${getToken("size", "small")};

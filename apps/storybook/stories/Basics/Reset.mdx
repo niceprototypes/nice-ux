@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
-import HorizontalRule from "../../src/components/HorizontalRule"
+import Line from "../../src/components/Line"
 import ResetDemo from "../../src/components/ResetDemo"
 import { resolveVendorImage } from "nice-react-image-vendor"
 import tokensCss from "nice-styles/tokens.css?raw"
@@ -16,8 +16,6 @@ import responsiveCss from "nice-styles/reset.responsive.css?raw"
 />
 
 {/* Wider docs column so the two frames sit comfortably side by side. */}
-
-<style>{`.sbdocs.sbdocs-content { max-width: 100%; }`}</style>
 
 <StoryHeader title="Reset" description="The bare minimum design work you can do for your project. Resets clear the default browser styles, sets up a consistent design system, and makes your page more accessible." />
 

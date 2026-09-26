@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
-import HorizontalRule from "../../src/components/HorizontalRule"
+import Line from "../../src/components/Line"
 
 <Meta
   title="Bindings/useBreakpoint"
@@ -14,7 +14,7 @@ or `"desktop"` — and re-renders the component when the viewport crosses a band
 Reads `window.innerWidth` directly via `useSyncExternalStore`, so it needs **no
 `StylesProvider`** (unlike `useDevice` / `useTheme`).
 
-<HorizontalRule />
+<Line />
 
 ## Usage
 
@@ -37,7 +37,7 @@ const bp = useBreakpoint()
 const wide = bp === BREAKPOINT_DESKTOP
 ```
 
-<HorizontalRule />
+<Line />
 
 ## Prefer CSS for styling — reach for this only to swap trees
 
@@ -64,7 +64,7 @@ CSS layer:
 | Your own `@media` in a plain CSS file | `nice-styles/breakpoints.custom-media.css` + `postcss-custom-media` (opt-in) |
 | Swap component trees / avoid mounting | **`useBreakpoint`** |
 
-<HorizontalRule />
+<Line />
 
 ## SSR
 

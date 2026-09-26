@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
 import Install from "../../src/components/Install"
-import HorizontalRule from "../../src/components/HorizontalRule"
+import Line from "../../src/components/Line"
 
 <Meta
   title="Configuration/ViteWatcher"
@@ -18,7 +18,7 @@ import HorizontalRule from "../../src/components/HorizontalRule"
 import { viteWatcher } from "nice-vite-watcher"
 ```
 
-<HorizontalRule />
+<Line />
 
 ## The Problem
 
@@ -44,7 +44,7 @@ Browser reloads
 
 This plugin is for Vite projects (including Storybook with Vite). For webpack/CRA projects, use `nice-toolkit --dev --watch` instead.
 
-<HorizontalRule />
+<Line />
 
 ## viteWatcher
 
@@ -79,7 +79,7 @@ export default defineConfig({
 }
 ```
 
-<HorizontalRule />
+<Line />
 
 ## getSourceAliases
 
@@ -104,7 +104,7 @@ const aliases = getSourceAliases(
 // { 'nice-react-button': '/Users/me/Code/nice-react-button/src/index.ts' }
 ```
 
-<HorizontalRule />
+<Line />
 
 ## Combining Both Approaches
 
@@ -149,7 +149,7 @@ export default defineConfig({
 | Uses SVGR, PostCSS, etc.  | Dist watching   | Full reload          |
 ```
 
-<HorizontalRule />
+<Line />
 
 ## Storybook Integration
 
@@ -183,7 +183,7 @@ const config: StorybookConfig = {
 }
 ```
 
-<HorizontalRule />
+<Line />
 
 ## Limitations
 

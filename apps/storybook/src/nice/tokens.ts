@@ -1,11 +1,13 @@
-/// <reference path="./customTokens.d.ts" />
 import { setTokens } from "nice-react-styles"
+import { TOKENS as THEME_TOKENS } from "nice-storybook-theme"
 
 /**
  * Storybook-local token overrides.
  *
  * Imported by `.storybook/preview.tsx` for the side effect — `setTokens`
- * registers the overrides and injects the CSS at module load.
+ * registers the overrides and injects the CSS at module load. The one call
+ * includes nice-storybook-theme's tokens; the app's own entries come last, so
+ * they can override a theme value.
  */
 const AppTokenMap = {
   backgroundColor: {
@@ -23,14 +25,6 @@ const AppTokenMap = {
   fontSize: {
     larger: "40px",
     // large: "22px",
-  },
-  // Content width cap: full width below laptop, 720px from laptop up.
-  contentMaxWidth: {
-    base: {
-      phone: "100%",
-      tablet: "100%",
-      "laptop+": "720px",
-    },
   },
   icon: {
     size: {
@@ -59,4 +53,4 @@ const AppTokenMap = {
   },
 } as const
 
-setTokens(AppTokenMap)
+setTokens({ ...THEME_TOKENS, ...AppTokenMap })

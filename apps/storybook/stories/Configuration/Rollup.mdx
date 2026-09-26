@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
 import Install from "../../src/components/Install"
-import HorizontalRule from "../../src/components/HorizontalRule"
+import Line from "../../src/components/Line"
 
 <Meta
   title="Configuration/Rollup"
@@ -24,7 +24,7 @@ import { createConfiguration } from "nice-config-rollup"
 export default createConfiguration({ plugins: [...] })
 ```
 
-<HorizontalRule />
+<Line />
 
 ## createConfiguration
 
@@ -72,7 +72,7 @@ The following plugins are included automatically:
 • rollup-plugin-dts (for declaration bundling)
 ```
 
-<HorizontalRule />
+<Line />
 
 ## isNiceExternal
 
@@ -108,7 +108,7 @@ export default {
 }
 ```
 
-<HorizontalRule />
+<Line />
 
 ## Watch Mode Configuration
 
@@ -137,7 +137,7 @@ The configuration includes optimized watch settings that prevent file caching is
 
 Without these settings, rollup's watch mode can exhibit an "off by one" caching bug where file changes appear one save behind. The `awaitWriteFinish` option ensures files are fully written to disk before rollup reads them, and `usePolling` provides more reliable file change detection on macOS.
 
-<HorizontalRule />
+<Line />
 
 ## createExternals
 

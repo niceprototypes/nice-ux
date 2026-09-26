@@ -1,6 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
-import HorizontalRule from "../../src/components/HorizontalRule"
+import Line from "../../src/components/Line"
+import Code from "../../src/nice/Code"
 
 <Meta
   title="Toolkit/4. Dev & Watch"
@@ -12,9 +13,9 @@ import HorizontalRule from "../../src/components/HorizontalRule"
 Keep linked packages rebuilding — and consumers reloading — as you edit their
 source. Two flags, usually run together.
 
-<HorizontalRule />
+<Line />
 
-## `--dev`
+## <Code code="--dev" language="bash" inlined />
 
 Runs `npm run dev` (the package's rollup/gen watcher) in every linked package
 concurrently, rebuilding each on source change. Packages without a `dev` script
@@ -24,9 +25,9 @@ are skipped.
 nicely --dev
 ```
 
-<HorizontalRule />
+<Line />
 
-## `--watch`
+## <Code code="--watch" language="bash" inlined />
 
 Watches each linked package's `dist/` folder and touches a trigger file when a
 build lands, which makes webpack/CRA recompile.
@@ -55,9 +56,9 @@ import './.symlink-trigger.js'
 Vite projects (Storybook, Vite apps) use `nice-vite-watcher` instead of the
 trigger file — the plugin watches linked dists directly.
 
-<HorizontalRule />
+<Line />
 
-## `--dev --watch` (recommended)
+## <Code code="--dev --watch" language="bash" inlined /> (recommended)
 
 Combines both: rebuild on source change **and** trigger the consumer to reload.
 
@@ -87,7 +88,7 @@ dist/ updates
 CRA / webpack recompiles  (Vite: nice-vite-watcher reloads)
 ```
 
-<HorizontalRule />
+<Line />
 
 ## Don't run a one-shot build alongside it
 

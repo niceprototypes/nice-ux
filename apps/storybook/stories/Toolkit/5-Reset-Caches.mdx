@@ -1,6 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
-import HorizontalRule from "../../src/components/HorizontalRule"
+import Line from "../../src/components/Line"
+import Code from "../../src/nice/Code"
 
 <Meta
   title="Toolkit/5. Reset & Caches"
@@ -20,9 +21,9 @@ nicely --dedupe      # singleton conflicts in linked packages
 nicely --build-all   # rebuild every linked package's dist
 ```
 
-<HorizontalRule />
+<Line />
 
-## `--clean`
+## <Code code="--clean" language="bash" inlined />
 
 Kills any process bound to a dev-server port (discovered from each consumer's
 `.env` `PORT=` entries and `package.json` `-p` / `--port` flags), then wipes
@@ -42,9 +43,9 @@ The port-kill matters because a running dev server holds an in-memory module
 graph and repopulates its on-disk cache on the next request — wiping the cache
 without stopping the server is a no-op against the symptom.
 
-<HorizontalRule />
+<Line />
 
-## `--reset`
+## <Code code="--reset" language="bash" inlined />
 
 Chains the triad in the order that matters: `--build-all → --dedupe → --clean`.
 

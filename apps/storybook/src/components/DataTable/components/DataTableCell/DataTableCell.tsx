@@ -17,15 +17,15 @@ const nodeText = (node: React.ReactNode): string => {
 
 /**
  * One cell, rendered per its column's policy:
- * - `"shiki"`: a Shiki CodeBlock that copies on click (with an inline copy
- *   icon). Table code is always `inline` — a card would break the cell grid —
- *   so there is no block option here.
- * - `"text"`: a `<Ink>` styled by `code`/`size`/`color`; `clickToCopy`
- *   on a string value copies on click with the same copy-icon affordance.
- * - `"node"` (default): the value rendered as-is.
+ * - `"nice-react-code"`: the nice `Code` component, copying on click (with an
+ *   inline copy icon). Table code is always inlined — a card would break the
+ *   cell grid — so there is no block option here.
+ * - `"nice-react-ink"`: an `<Ink>` styled by `code`/`size`/`color`;
+ *   `clickToCopy` on a string value copies on click with the same affordance.
+ * - no `render` (default): the value rendered as-is.
  */
 export const DataTableCell: React.FC<DataTableCellProps> = ({ column, value }) => {
-  if (column.render === "shiki") {
+  if (column.render === "nice-react-code") {
     // clickToCopy gates both the copy handler (and its pointer cursor, via
     // CodeBlock's copyOnClick) and the copy-icon affordance. Defaults on.
     const copy = column.clickToCopy ?? true
@@ -41,7 +41,7 @@ export const DataTableCell: React.FC<DataTableCellProps> = ({ column, value }) =
     return copy ? withCopyAffordance(block) : block
   }
 
-  if (column.render === "text") {
+  if (column.render === "nice-react-ink") {
     const styled = React.isValidElement(value) ? (
       React.cloneElement(value as React.ReactElement<Record<string, unknown>>, {
         code: column.code,

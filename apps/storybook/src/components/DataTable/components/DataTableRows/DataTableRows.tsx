@@ -1,6 +1,7 @@
 import { Fragment } from "react"
 import Flex from "nice-react-flex"
 import Ink from "../../../../nice/Ink"
+import ContentFlex from "../../../../nice/ContentFlex"
 import { DataTableHeader } from "../DataTableHeader/DataTableHeader"
 import { DataTableRow } from "../DataTableRow/DataTableRow"
 import { RowDivider } from "../DataTableRow/DataTableRow.styles"
@@ -21,10 +22,9 @@ export const DataTableRows = ({
   showLines = false,
   condensed = false,
   rowSpacing,
+  sectionWrapped = false,
 }: DataTableRowsProps) => {
   const level = LEVELS[Math.min(depth, 2)]
-  const isH2 = level === "h2"
-  const isH3 = level === "h3"
 
   // A NESTED leaf table (one that renders a header row) folds its own title into
   // the header's first cell, so a cluster reads as one table of labelled parts. A
@@ -37,14 +37,14 @@ export const DataTableRows = ({
   return (
     <Flex direction="column">
       {showHeading ? (
-        <Flex direction="column" padding={isH2 ? "larger none" : isH3 ? "large none" : undefined}>
+        <ContentFlex direction="column" wrapped={sectionWrapped}>
           <Ink
             as={level}
             {...tableHeadingProps(level)}
           >
             {table.name}
           </Ink>
-        </Flex>
+        </ContentFlex>
       ) : null}
       <Flex direction="column" gap="larger">
         {table.rows ? (
@@ -77,6 +77,7 @@ export const DataTableRows = ({
             showLines={showLines}
             condensed={condensed}
             rowSpacing={rowSpacing}
+            sectionWrapped={sectionWrapped}
           />
         ))}
       </Flex>

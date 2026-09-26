@@ -1,6 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
-import HorizontalRule from "../../src/components/HorizontalRule"
+import Line from "../../src/components/Line"
+import Code from "../../src/nice/Code"
 
 <Meta
   title="Toolkit/6. Publishing"
@@ -14,9 +15,9 @@ what changed in `.nice/bump.md`; `--publish` reads those entries to recommend
 version bumps, then builds and publishes the affected packages in dependency
 order.
 
-<HorizontalRule />
+<Line />
 
-## `--bump` — record intent
+## <Code code="--bump" language="bash" inlined /> — record intent
 
 Append one entry to the current package's `.nice/bump.md`. Commit it alongside
 the change it describes.
@@ -32,9 +33,9 @@ commit subject (drop the `level:` prefix in the commit). Write it for a consumer
 reading release notes, not as a diff summary. Direct-editing `.nice/bump.md` is
 equivalent to `--bump`.
 
-<HorizontalRule />
+<Line />
 
-## `--publish`
+## <Code code="--publish" language="bash" inlined />
 
 Publishes changed packages to npm, resolving the full dependency cascade.
 
@@ -67,9 +68,9 @@ Publish order comes from `nice-toolkit/registry.json` (bottom-to-top per the
 dependency chain). Run `nicely --publish --dry-run` to see the current order and the
 recommended bumps.
 
-<HorizontalRule />
+<Line />
 
-## `--no-npm` / `--dry-publish`
+## <Code code="--no-npm" language="bash" inlined /> / <Code code="--dry-publish" language="bash" inlined />
 
 ```bash
 # Bump, build, commit, push — but skip the npm publish step

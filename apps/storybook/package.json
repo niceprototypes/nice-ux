@@ -5,17 +5,18 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "check:data": "node scripts/check-data.ts",
     "clean:cache": "node ../toolkit/nice-toolkit --clean",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "prestorybook": "node -e \"const fs=require('fs');for(const d of ['node_modules/.cache','node_modules/.vite'])fs.rmSync(d,{recursive:true,force:true})\" && npm run generate:stories",
+    "prestorybook": "node -e \"const fs=require('fs');for(const d of ['node_modules/.cache','node_modules/.vite'])fs.rmSync(d,{recursive:true,force:true})\" && npm run check:data && npm run generate:stories",
     "storybook": "storybook dev -p 6006 --no-open",
     "build": "storybook build",
     "dev": "concurrently \"npm run storybook\" \"node ../toolkit/nice-toolkit --dev\"",
     "prepublish:react-icon": "node scripts/prepublish.js react-icon",
     "publish:react-icon": "npm run prepublish:react-icon && npm --prefix ../react-icon publish",
     "generate:stories": "node scripts/generate-token-stories.mjs",
-    "prebuild": "npm run generate:stories"
+    "prebuild": "npm run check:data && npm run generate:stories"
   },
   "dependencies": {
     "@storybook/addon-docs": "^10.2.19",

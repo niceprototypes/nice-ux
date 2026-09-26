@@ -62,7 +62,7 @@ const CONFIGS: Partial<Record<ComponentPrefixWithTokens, ExampleConfig>> = {
       borderColor: "borderColor",
       backgroundSize: "backgroundSize",
     },
-    render: o => <Image src="rasters/tokens/image-01.png" alt="" width="64px" height="64px" bordered {...(o as any)} />,
+    render: o => <Image src="rasters/tokens/image-02.jpeg" alt="" width="64px" height="64px" bordered {...(o as any)} />,
   },
   tile: {
     props: { backgroundColor: "backgroundColor", color: "color" },

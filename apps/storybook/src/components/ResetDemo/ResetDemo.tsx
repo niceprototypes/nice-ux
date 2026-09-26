@@ -2,6 +2,7 @@ import * as React from "react"
 import Flex from "nice-react-flex"
 import ResetDemoItem from "./ResetDemoItem"
 import NewLines from "../NewLines"
+import Line from "../Line"
 
 /** One reset stylesheet loaded into a demo frame. */
 export interface ResetLayer {
@@ -64,7 +65,7 @@ const ResetDemo: React.FC<ResetDemoProps> = ({
             files={layers.map(layer => layer.file)}
             srcDoc={frame(pageHtml, css)}
           />
-          {index < examples.length - 1 && <hr />}
+          {index < examples.length - 1 && <Line />}
         </React.Fragment>
       )
     })}

@@ -1,11 +1,11 @@
 import * as React from "react"
 import type { ColorType, FontSizeType, GapType } from "nice-react-styles"
 
-/** Language for a `shiki`-rendered column. */
+/** Language for a `nice-react-code` column. */
 export type DataLanguage = "tsx" | "css"
 
-/** How a column's cell values are rendered. */
-export type DataColumnRender = "node" | "shiki" | "text"
+/** How a column's cell values are rendered; omit `render` to render the value as-is. */
+export type DataColumnRender = "nice-react-ink" | "nice-react-code"
 
 /** A column definition — the single owner of a column's render policy, header, and width. */
 export interface DataColumn {
@@ -14,25 +14,24 @@ export interface DataColumn {
   /** Header label; `null`/omitted renders an empty header cell (e.g. a preview). */
   header?: React.ReactNode | null
   /**
-   * - `"node"` (default): the value is a ReactNode, rendered as-is.
-   * - `"shiki"`: the value is a code string, rendered in a Shiki CodeBlock.
-   * - `"text"`: the value is wrapped in a `<Ink>` styled by `code`/`size`/`color`.
-   * @default "node"
+   * - omitted (default): the value is a ReactNode, rendered as-is.
+   * - `"nice-react-code"`: the value is a code string, rendered by the nice `Code` component (inlined).
+   * - `"nice-react-ink"`: the value is wrapped in an `<Ink>` styled by `code`/`size`/`color`.
    */
   render?: DataColumnRender
-  /** (`text`) render in the monospace code font. */
+  /** (`nice-react-ink`) render in the monospace code font. */
   code?: boolean
-  /** (`text`) Ink font size. */
+  /** (`nice-react-ink`) Ink font size. */
   size?: FontSizeType
-  /** (`text`) Nice text color. */
+  /** (`nice-react-ink`) Nice text color. */
   color?: ColorType
   /**
    * Clicking the cell copies to the clipboard, with the hover copy-icon
-   * affordance. `text`/string `shiki` copy the string value; `node` copies the
-   * cell's text content. `shiki` defaults on; `text`/`node` default off.
+   * affordance. `nice-react-ink` / `nice-react-code` copy the string value; a
+   * node copies the cell's text content. `nice-react-code` defaults on; the others default off.
    */
   clickToCopy?: boolean
-  /** (`shiki`) syntax-highlight language. @default "tsx" */
+  /** (`nice-react-code`) syntax-highlight language. @default "tsx" */
   language?: DataLanguage
 }
 
@@ -88,4 +87,6 @@ export interface DataTableProps {
    * Omitted leaves rows with no extra vertical padding.
    */
   rowSpacing?: GapType
+  /** Cap each section heading at the content width (rows stay full width). @default false */
+  sectionWrapped?: boolean
 }

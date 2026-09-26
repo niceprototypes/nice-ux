@@ -6,13 +6,6 @@ import { getConstant } from "nice-react-styles"
  */
 export const DOT_SIZE = "4px"
 
-/**
- * zIndex demo — a neutral reference layer the variant square stacks against,
- * fixed between the `low` (10) and `medium` (100) tiers so scanning the rows
- * shows the accent square cross from behind to in front of it.
- */
-export const REFERENCE_Z = 50
-
 /** lineHeight demo copy. */
 export const loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
 

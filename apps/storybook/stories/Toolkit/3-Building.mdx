@@ -1,6 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
-import HorizontalRule from "../../src/components/HorizontalRule"
+import Line from "../../src/components/Line"
+import Code from "../../src/nice/Code"
 
 <Meta
   title="Toolkit/3. Building"
@@ -13,9 +14,9 @@ One-shot builds of linked package dists, in registry tier order. Use these when
 you are **not** running the live watcher (see
 [Dev & Watch](/docs/toolkit-4-dev-watch--docs)).
 
-<HorizontalRule />
+<Line />
 
-## `--build-all`
+## <Code code="--build-all" language="bash" inlined />
 
 Walks the registry tier order (foundation → context → utility → feature →
 application) and runs `npm run build` in every linked nice-* package that
@@ -31,9 +32,9 @@ nicely --build-all --dry-run
 Use after a fresh clone, after `--dedupe`, or after any foundation-package
 refactor.
 
-<HorizontalRule />
+<Line />
 
-## `--build-icons`
+## <Code code="--build-icons" language="bash" inlined />
 
 The targeted subset of `--build-all` for an icon change. Rebuilds `nice-icons`
 and everything that transitively depends on it — today `nice-react-icon`,
@@ -67,9 +68,9 @@ Stopping dev/watch process 2259
 - Pass **`--no-kill`** to leave the watcher running and build anyway (you own the
   dist race).
 
-<HorizontalRule />
+<Line />
 
-## `--vite`
+## <Code code="--vite" language="bash" inlined />
 
 Refresh Vite's optimized-deps cache and bounce running dev servers so a rebuilt
 linked dist is actually re-bundled. Runs automatically at the end of

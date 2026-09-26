@@ -1,6 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
-import HorizontalRule from "../../src/components/HorizontalRule"
+import Line from "../../src/components/Line"
+import Code from "../../src/nice/Code"
 
 <Meta
   title="Configuration/Caches"
@@ -11,7 +12,7 @@ import HorizontalRule from "../../src/components/HorizontalRule"
 
 Eight cache layers can hold stale state in a Nice workspace. Three workspace-level `nicely` operations clear most of them; the rest belong to other owners (the consumer's `npm install`, npm itself, the user's browser). This page maps which tool clears which layer and gives workflow recipes for the common "something is stale" symptoms.
 
-<HorizontalRule />
+<Line />
 
 ## The eight layers
 
@@ -28,9 +29,9 @@ Eight cache layers can hold stale state in a Nice workspace. Three workspace-lev
 
 ¹ `nicely --clean` currently knows about `node_modules/.cache` (webpack) and `node_modules/.vite` (Vite). Other framework caches — Next.js `.next/cache`, Remix `build/`, Astro `dist/`, Parcel `.parcel-cache` — are **not** covered until their path is added to `CACHE_DIRS` in `toolkit/src/linking/cache-cleaner.js`. Adding a new framework to the workspace requires that single edit.
 
-<HorizontalRule />
+<Line />
 
-## The three `nicely` operations
+## The three <Code code="nicely" language="bash" inlined /> operations
 
 `nicely --clean`, `--dedupe`, and `--build-all` are the workspace-level toolkit operations. They do not overlap. Each addresses a distinct layer at a distinct location. Mistaking one for another produces silent failure.
 
@@ -70,9 +71,9 @@ Then restart any dev server (`npm run dev` in each consumer) and hard-reload the
 - **`--dedupe` before `--build-all`** so singleton cleanup doesn't run *after* a build that expected the singletons in place.
 - **`--build-all` last** because it produces the artifact every later step reads.
 
-<HorizontalRule />
+<Line />
 
-## What the three `nicely` operations do **not** touch
+## What the three <Code code="nicely" language="bash" inlined /> operations do **not** touch
 
 These belong to other owners:
 
@@ -83,7 +84,7 @@ These belong to other owners:
 | Restarting a killed dev server (after `--clean`) | `npm run dev` (or equivalent) in each consumer | the user |
 | Browser tab module cache (layer 8) | hard reload | the user |
 
-<HorizontalRule />
+<Line />
 
 ## Workflow recipes
 
@@ -135,9 +136,9 @@ Restart every dev server. Hard-reload every open browser tab.
 
 If that doesn't fix it, escalate to a per-consumer reinstall (`rm -rf node_modules package-lock.json && npm install`) before reaching for `npm cache clean --force` — the global npm cache is almost never the cause.
 
-<HorizontalRule />
+<Line />
 
-## Why three `nicely` operations and not one
+## Why three <Code code="nicely" language="bash" inlined /> operations and not one
 
 Each addresses a distinct concern with a distinct target directory and a distinct trigger symptom. A single umbrella verb would have to either over-fire (touch directories the symptom doesn't need) or under-fire (miss the directory the symptom does need). The three verbs are exhaustive for the workspace-level operations they cover and orthogonal to one another. Concerns outside the triad — consumer `node_modules` reinstall, global npm cache, browser hard reload — are owned by other tools and intentionally not pulled in.
 

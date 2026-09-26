@@ -1,6 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
-import HorizontalRule from "../../src/components/HorizontalRule"
+import Line from "../../src/components/Line"
+import Code from "../../src/nice/Code"
 
 <Meta
   title="Toolkit/1. Linking"
@@ -29,9 +30,9 @@ Linking rewrites the dependency to `file:../react-button` and runs a dedupe pass
 on the linked package so its `node_modules` doesn't shadow the app's React /
 styled-components.
 
-<HorizontalRule />
+<Line />
 
-## `--unlink`
+## <Code code="--unlink" language="bash" inlined />
 
 Restore every `file:` reference to its original npm version and reinstall from
 the registry.
@@ -47,9 +48,9 @@ Run `--unlink` before `npm install` inside a linked package (or re-run `nicely`
 afterward) — a fresh install reintroduces the singleton duplicates that linking
 removed.
 
-<HorizontalRule />
+<Line />
 
-## `--exclude` / `--add-exclude`
+## <Code code="--exclude" language="bash" inlined /> / <Code code="--add-exclude" language="bash" inlined />
 
 The default singleton set removed from linked packages is `react`, `react-dom`,
 `styled-components`, `@types/react`, `@types/react-dom`.
@@ -62,9 +63,9 @@ nicely --exclude react,react-dom ../my-component
 nicely --add-exclude @emotion/react,@emotion/styled ../my-component
 ```
 
-<HorizontalRule />
+<Line />
 
-## `--manager` / `--skip-peer-check`
+## <Code code="--manager" language="bash" inlined /> / <Code code="--skip-peer-check" language="bash" inlined />
 
 ```bash
 # Force a package manager (auto-detected from the lockfile by default)

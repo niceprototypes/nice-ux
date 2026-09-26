@@ -30,4 +30,6 @@ export type ModuleTokenTableSectionConfig =
 export interface ModuleTokenTableProps {
   /** The sections, in render order. */
   sections: ModuleTokenTableSectionConfig[]
+  /** Cap section headings at the content width. @default false */
+  sectionWrapped?: boolean
 }

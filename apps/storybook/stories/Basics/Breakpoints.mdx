@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
 import ResponsiveDemo from "../../src/components/ResponsiveDemo"
-import HorizontalRule from "../../src/components/HorizontalRule"
+import Line from "../../src/components/Line"
 import { DataTable } from "../../src/components/DataTable"
 import Callout from "../../src/components/Callout"
 import Install from "../../src/components/Install"
@@ -15,27 +15,27 @@ import Ink from "../../src/nice/Ink"
 
 <StoryHeader
   title="Breakpoints"
-  heading="Get breakpoints"
-  headingDescription={
-    <>
-      Configure your design for{" "}
-      <Ink
-        as="span"
-        weight="semibold"
-      >
-        different screen sizes and ranges
-      </Ink>{" "}
-      by tweaking breakpoint variants for tokens and components, or by using{" "}
-      <Ink
-        as="span"
-        code
-      >
-        getBreakpoint
-      </Ink>{" "}
-      in your style code.
-    </>
-  }
 />
+
+<Ink as="h2">Get breakpoints</Ink>
+
+<Ink>
+  Configure your design for{" "}
+  <Ink
+    as="span"
+    weight="semibold"
+  >
+    different screen sizes and ranges
+  </Ink>{" "}
+  by tweaking breakpoint variants for tokens and components, or by using{" "}
+  <Ink
+    as="span"
+    code
+  >
+    getBreakpoint
+  </Ink>{" "}
+  in your style code.
+</Ink>
 
 ### CSS only
 
@@ -85,8 +85,6 @@ const css = `${getBreakpoint("tablet+")} {
   with="styled-components"
 />
 
-<NewLines />
-
 ```tsx
 import styled from "styled-components"
 import { getBreakpoint, getToken } from "nice-react-styles"
@@ -100,7 +98,7 @@ const Wrapper = styled.div`
 `
 ```
 
-<HorizontalRule />
+<Line />
 
 ## Set breakpoints
 
@@ -137,19 +135,20 @@ setBreakpoints({
 
 Both forms take any subset of `tablet`, `laptop`, and `desktop`; `phone` is the base below the first floor and cannot be set. Values must be positive and ascending, or the call throws. Setting a threshold moves every `@media` block that uses it — generated tokens, component overrides, and the values of earlier `setTokens` calls — so `getBreakpoint`, `useBreakpoint`, and the CSS stay on one table.
 
-<HorizontalRule />
+<Line />
 
 ## Media queries
 
 <DataTable
   inline
+  columnWidths={["8em"]}
   columns={[
     {
       key: "name",
       code: true,
       header: null,
       width: "5em",
-      render: "text",
+      render: "nice-react-ink",
       size: "small",
       clickToCopy: true,
     },
@@ -157,14 +156,14 @@ Both forms take any subset of `tablet`, `laptop`, and `desktop`; `phone` is the 
       key: "query",
       header: "Query",
       width: "29em",
-      render: "shiki",
+      render: "nice-react-code",
       language: "css",
       clickToCopy: false,
     },
     {
       key: "range",
       header: "Range",
-      render: "text",
+      render: "nice-react-ink",
       code: true,
       size: "small",
     },
@@ -217,7 +216,7 @@ Both forms take any subset of `tablet`, `laptop`, and `desktop`; `phone` is the 
   ]}
 />
 
-<HorizontalRule />
+<Line />
 
 ## Live demo
 

@@ -10,7 +10,7 @@ import type { HighlightedToken } from "./Modules.hooks"
 /**
  * Build the data rows for one token group, given the runtime theme and the
  * active deep-link highlight. Each row's `values` are index-aligned to
- * `TOKEN_COLUMNS`: [preview, tokenName, cssVar, jsCall, resolvedValue].
+ * the `tokenModule` column set in `src/data/storybook.json`: [preview, tokenName, cssVar, jsCall, resolvedValue].
  *
  * `pristine` reads the canonical seed, not the runtime registry — so the
  * reference page shows real defaults even though src/nice/tokens.ts overrides

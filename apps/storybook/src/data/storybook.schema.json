@@ -1,0 +1,189 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Storybook data",
+  "description": "The single source of storybook data. `items` is the sidebar tree: its depth is the navigation structure and its order is the sidebar order. See manifest/.reports/storybook-data/plan.md.",
+  "type": "object",
+  "required": [
+    "items"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "columns": {
+      "description": "Named column sets. A table references one by name; each column carries its own width, so there is no separate index-aligned widths list.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "$ref": "#/$defs/column"
+        },
+        "minItems": 1
+      }
+    },
+    "defaults": {
+      "description": "Settings every item inherits; any item or folder can override a key.",
+      "$ref": "#/$defs/settings"
+    },
+    "items": {
+      "$ref": "#/$defs/items"
+    }
+  },
+  "$defs": {
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/node"
+      }
+    },
+    "node": {
+      "oneOf": [
+        {
+          "description": "A page, named by the string.",
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "description": "A folder ({ name: [items] }), a page with settings ({ name: {\u2026} }), or a folder with settings ({ name: { \u2026, items: [items] } }).",
+          "type": "object",
+          "minProperties": 1,
+          "maxProperties": 1,
+          "additionalProperties": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/items"
+              },
+              {
+                "$ref": "#/$defs/settings"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "settings": {
+      "description": "An item's settings. They cascade to every descendant; plain objects (widths) merge key by key, everything else replaces. `items` is reserved for a folder's children.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "items": {
+          "$ref": "#/$defs/items"
+        },
+        "table": {
+          "description": "The column set (a `columns` key) this page renders as a data table; false marks a hand-written page inside a table folder.",
+          "type": [
+            "string",
+            "boolean"
+          ]
+        },
+        "widths": {
+          "description": "Column width overrides by column key, e.g. { \"preview\": \"8em\" }.",
+          "type": "object",
+          "additionalProperties": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "description": {
+          "description": "Prose under the page title. `backticks` render as inline code.",
+          "type": "string"
+        },
+        "variants": {
+          "description": "Rows, in order. Omit to read the token group's variants from nice-styles. An object row carries `variant` plus data its renderer needs.",
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "type": "string",
+                "minLength": 1
+              },
+              {
+                "type": "object",
+                "required": [
+                  "variant"
+                ],
+                "properties": {
+                  "variant": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "preview": {
+          "description": "Renderer id, only when this page shares another item's renderer. Defaults to the item's own id.",
+          "type": "string"
+        },
+        "wrapped": {
+          "description": "Cap the docs page at nice-storybook-theme's contentMaxWidth.",
+          "type": "boolean"
+        },
+        "sectionWrapped": {
+          "description": "Cap each data-table section's heading at contentMaxWidth (its rows stay full width).",
+          "type": "boolean"
+        }
+      }
+    },
+    "column": {
+      "description": "One table column. Mirrors DataColumn in src/components/DataTable, plus `width`.",
+      "type": "object",
+      "required": [
+        "key"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Stable identity; also the React key for its cells."
+        },
+        "header": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Header label; null renders an empty header cell."
+        },
+        "render": {
+          "enum": [
+            "nice-react-ink",
+            "nice-react-code"
+          ],
+          "description": "Omit to render the value as-is (a node). nice-react-ink: the value wrapped in Ink, styled by code/size/color. nice-react-code: a code string rendered by the nice Code component, inlined."
+        },
+        "code": {
+          "type": "boolean",
+          "description": "(nice-react-ink) monospace code font."
+        },
+        "size": {
+          "type": "string",
+          "description": "(nice-react-ink) Ink font size \u2014 a fontSize variant."
+        },
+        "color": {
+          "type": "string",
+          "description": "(nice-react-ink) Nice text color \u2014 a color variant."
+        },
+        "clickToCopy": {
+          "type": "boolean",
+          "description": "Clicking the cell copies it."
+        },
+        "language": {
+          "enum": [
+            "tsx",
+            "css"
+          ],
+          "description": "(nice-react-code) highlight language."
+        },
+        "width": {
+          "type": "string",
+          "description": "Fixed width from tablet up (e.g. \"8em\"); omit for equal flex."
+        }
+      }
+    }
+  }
+}
