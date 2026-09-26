@@ -8,7 +8,10 @@ import { StylesProvider } from "nice-react-styles"
 import { applyTheme } from "nice-styles"
 import { ShikiPre } from "../src/components/ShikiPre"
 import { StoryNavigation } from "nice-storybook-navigation"
-import { storyNavigationSequences } from "./storyNavigationSequences"
+import {
+  storyNavigationIndexSequences,
+  storyNavigationSequences,
+} from "./storyNavigationSequences"
 import "nice-react-icon-vendor"
 import "nice-react-image-vendor"
 import "../src/nice/tokens"
@@ -32,7 +35,10 @@ const preview: Preview = {
   ],
   parameters: {
     // Read by the addon's global decorator; the ids are this project's own.
-    storyNavigation: { sequences: storyNavigationSequences },
+    storyNavigation: {
+      sequences: storyNavigationSequences,
+      indexSequences: storyNavigationIndexSequences,
+    },
     docs: {
       // Render fenced code in MDX prose through Shiki instead of Storybook's
       // <Source>, so prose snippets match CodeRow's day/night theming.
@@ -46,7 +52,10 @@ const preview: Preview = {
       // through the same parameter the decorator reads.
       container: ({ children, context }: React.ComponentProps<typeof DocsContainer>) => (
         <DocsContainer context={context}>
-          <StoryNavigation sequences={storyNavigationSequences} />
+          <StoryNavigation
+            sequences={storyNavigationSequences}
+            indexSequences={storyNavigationIndexSequences}
+          />
           {children}
         </DocsContainer>
       ),

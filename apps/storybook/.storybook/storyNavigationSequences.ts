@@ -1,4 +1,7 @@
-import type { StoryNavigationSequence } from "nice-storybook-navigation"
+import type {
+  StoryNavigationIndexSequence,
+  StoryNavigationSequence,
+} from "nice-storybook-navigation"
 
 /**
  * Ordered navigable sequences for the navigation bar. The addon ships none —
@@ -49,4 +52,16 @@ export const storyNavigationSequences: StoryNavigationSequence[] = [
     { id: "tokens-boxshadow--docs", label: "boxShadow" },
     { id: "tokens-zindex--docs", label: "zIndex" },
   ],
+]
+
+/**
+ * Sequences the addon derives from Storybook's own index, so they are never
+ * listed by hand and new pages join automatically. Components: every component
+ * folder — the Forms group, then the flat components — chained as one
+ * continuous sequence in sidebar order (`storySort`: Docs, Tokens, then props).
+ * Within a folder the back/next links name the page; at a folder boundary they
+ * name the neighbouring folder. The `Components` landing page is not in it.
+ */
+export const storyNavigationIndexSequences: StoryNavigationIndexSequence[] = [
+  { titlePrefix: "Components/" },
 ]
