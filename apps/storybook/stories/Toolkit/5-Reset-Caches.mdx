@@ -2,6 +2,7 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
 import Line from "../../src/components/Line"
 import Code from "../../src/nice/Code"
+import Ink from "../../src/nice/Ink"
 
 <Meta
   title="Toolkit/5. Reset & Caches"
@@ -23,7 +24,7 @@ nicely --build-all   # rebuild every linked package's dist
 
 <Line />
 
-## <Code code="--clean" language="bash" inlined />
+<Ink as="h2"><Code code="--clean" language="bash" inlined /></Ink>
 
 Kills any process bound to a dev-server port (discovered from each consumer's
 `.env` `PORT=` entries and `package.json` `-p` / `--port` flags), then wipes
@@ -45,7 +46,7 @@ without stopping the server is a no-op against the symptom.
 
 <Line />
 
-## <Code code="--reset" language="bash" inlined />
+<Ink as="h2"><Code code="--reset" language="bash" inlined /></Ink>
 
 Chains the triad in the order that matters: `--build-all → --dedupe → --clean`.
 

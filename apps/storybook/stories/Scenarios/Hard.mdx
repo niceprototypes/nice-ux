@@ -1,6 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
 import Callout from "../../src/components/Callout"
+import Ink from "../../src/nice/Ink"
 
 <Meta
   title="Scenarios/Hard"
@@ -12,10 +13,7 @@ import Callout from "../../src/components/Callout"
   description="Everything at once — static, responsive, themed, and custom tokens, plus a pinned subtree."
 />
 
-Everything at once: static, responsive, themed, and custom tokens; multiple
-font families; and a subtree pinned to `night` regardless of the OS preference.
-Detection is by shape — a `phone` key makes a value responsive, a `day` key
-makes it themed.
+<Ink as="span">Everything at once: static, responsive, themed, and custom tokens; multiple font families; and a subtree pinned to <Ink as="span" code>night</Ink> regardless of the OS preference. Detection is by shape — a <Ink as="span" code>phone</Ink> key makes a value responsive, a <Ink as="span" code>day</Ink> key makes it themed.</Ink>
 
 ```tsx
 // App.tsx

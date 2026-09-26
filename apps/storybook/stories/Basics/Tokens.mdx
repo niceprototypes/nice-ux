@@ -40,7 +40,7 @@ import Ink from "../../src/nice/Ink"
 
 <NewLines count={2} />
 
-### Use tokens directly
+<Ink as="h3">Use tokens directly</Ink>
 
 Import the stylesheet and reference the tokens:
 
@@ -66,7 +66,7 @@ Import the stylesheet and reference the tokens:
 
 <NewLines />
 
-### Create local aliases
+<Ink as="h3">Create local aliases</Ink>
 
 You may choose to alias the Nice UI tokens you need, and use your aliases everywhere else:
 
@@ -98,11 +98,11 @@ You may choose to alias the Nice UI tokens you need, and use your aliases everyw
 
 <Line />
 
-## JavaScript
+<Ink as="h2">JavaScript</Ink>
 
 Using the tokens in JS allows you to **restructure the token architecture** according to your needs, and easily tweak token values with useful helper functions.
 
-### JS only
+<Ink as="h3">JS only</Ink>
 
 Use the `getToken` function and CSS variables provided by `nice-styles` for vanilla JS:
 
@@ -128,7 +128,7 @@ document.body.append(card)
 
 <NewLines />
 
-### React only
+<Ink as="h3">React only</Ink>
 
 Create and style a React component with tokens:
 
@@ -172,7 +172,7 @@ export default function App() {
 
 <NewLines />
 
-### React + Styled Components
+<Ink as="h3">React + Styled Components</Ink>
 
 Create and style a Styled Component with tokens:
 
@@ -216,11 +216,11 @@ export default function App() {
 
 <Line />
 
-## Set tokens
+<Ink as="h2">Set tokens</Ink>
 
 Override default values, create new tokens, or even create new modules. You have **complete creative control** with the token setter function.
 
-### 1. Wrap subtree with provider
+<Ink as="h3">1. Wrap subtree with provider</Ink>
 
 `App` can now consume the tokens:
 
@@ -236,7 +236,7 @@ import "../App"
 
 <NewLines />
 
-### 2. Call the setter function
+<Ink as="h3">2. Call the setter function</Ink>
 
 Call `setTokens` once on module load:
 
@@ -261,7 +261,7 @@ setTokens({
 
 <NewLines />
 
-### 3. Access new tokens
+<Ink as="h3">3. Access new tokens</Ink>
 
 New tokens can be accessed by the getter function:
 
@@ -282,7 +282,7 @@ const Card = ({ children }) => (
 
 <Line />
 
-## Transform a color
+<Ink as="h2">Transform a color</Ink>
 
 Adjust a token's channels without leaving the token system. The result is still
 a token underneath, so it keeps following day and night:

@@ -15,7 +15,7 @@ import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
   package that registers a resolver as a side effect of being imported.
 </Ink>
 
-### Why a separate vendor package
+<Ink as="h3">Why a separate vendor package</Ink>
 
 Vendor packages are containers for convenient, stable third-party plugins
 that provide **media, not logic** — concrete icon sets and image sources.
@@ -33,7 +33,7 @@ changes to the host component or to any consumer call site.
 The same pattern applies to <code>nice-react-image</code> /
 <code>nice-react-image-vendor</code> for photography.
 
-### Setup
+<Ink as="h3">Setup</Ink>
 
 Import the vendor package once at the application entry point. The import
 has a side effect: it registers the resolver with
@@ -44,7 +44,7 @@ has a side effect: it registers the resolver with
 import "nice-react-icon-vendor"
 ```
 
-### Usage
+<Ink as="h3">Usage</Ink>
 
 Any name not found in the built-in set is then resolved through the
 vendor. Built-in names always win — the vendor is a fallback, not an

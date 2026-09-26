@@ -2,6 +2,7 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
 import Line from "../../src/components/Line"
 import Code from "../../src/nice/Code"
+import Ink from "../../src/nice/Ink"
 
 <Meta
   title="Toolkit/3. Building"
@@ -16,7 +17,7 @@ you are **not** running the live watcher (see
 
 <Line />
 
-## <Code code="--build-all" language="bash" inlined />
+<Ink as="h2"><Code code="--build-all" language="bash" inlined /></Ink>
 
 Walks the registry tier order (foundation → context → utility → feature →
 application) and runs `npm run build` in every linked nice-* package that
@@ -34,7 +35,7 @@ refactor.
 
 <Line />
 
-## <Code code="--build-icons" language="bash" inlined />
+<Ink as="h2"><Code code="--build-icons" language="bash" inlined /></Ink>
 
 The targeted subset of `--build-all` for an icon change. Rebuilds `nice-icons`
 and everything that transitively depends on it — today `nice-react-icon`,
@@ -50,7 +51,7 @@ nicely --build-icons
 nicely --build-icons --dry-run
 ```
 
-#### Dev-watcher auto-stop
+<Ink as="h4">Dev-watcher auto-stop</Ink>
 
 `--build-icons` and a running `nicely --dev`/`--watch` both rebuild the **same**
 dist folders, and every rollup build wipes `dist/` first — so run together they
@@ -70,7 +71,7 @@ Stopping dev/watch process 2259
 
 <Line />
 
-## <Code code="--vite" language="bash" inlined />
+<Ink as="h2" id="-vite"><Code code="--vite" language="bash" inlined /></Ink>
 
 Refresh Vite's optimized-deps cache and bounce running dev servers so a rebuilt
 linked dist is actually re-bundled. Runs automatically at the end of

@@ -4,6 +4,7 @@ import Line from "../../src/components/Line"
 import Install from "../../src/components/Install"
 import NewLines from "../../src/components/NewLines"
 import SpinnerDemo from "../../src/components/SpinnerDemo"
+import Ink from "../../src/nice/Ink"
 
 <Meta
   title="Storybook/Spinner"
@@ -26,7 +27,7 @@ import SpinnerDemo from "../../src/components/SpinnerDemo"
 
 <NewLines />
 
-### Setup
+<Ink as="h3">Setup</Ink>
 
 Add it to `addons` — it is a preset, so there is no manager or preview entry to
 register:
@@ -56,7 +57,7 @@ Peer: `storybook` ≥ 10. The spinner is the real `<Icon name="spinner" />` from
 size, stroke, duration and day / night colors taken from `nice-styles` tokens at
 the same time — so the published package has no dependencies.
 
-### Options
+<Ink as="h3">Options</Ink>
 
 | Option           | Type      | Default | Description |
 |------------------|-----------|---------|-------------|
@@ -67,7 +68,7 @@ the same time — so the published package has no dependencies.
 A `timeout` that is not a finite, non-negative number falls back to `8000`; a
 `viewTransition` that is not a boolean falls back to its default.
 
-### Hold for styling
+<Ink as="h3">Hold for styling</Ink>
 
 To keep the boot overlay on screen while styling it, use any of these — the
 first one present wins. Hold keeps whichever mode is active up: the opaque
@@ -86,7 +87,7 @@ or load with `?nsbHold=0` to release it.
 removed }`, where `mode` is `"overlay"` or `"snapshot"` and `removed` names the
 signal that took it down and is empty while it is up.
 
-### How it works
+<Ink as="h3">How it works</Ink>
 
 The addon is a preset with two hooks. Both put their markup first in the head,
 so it runs before any other head content is fetched or parsed.
@@ -135,7 +136,7 @@ The preview head also carries the boot overlay script, which acts only when
 `iframe.html` is opened on its own. `.sb-nopreview` and `.sb-errordisplay` are
 never touched.
 
-### Accessibility
+<Ink as="h3">Accessibility</Ink>
 
 Both spinners carry `role="progressbar"` and `aria-busy="true"`, labelled
 "Loading Storybook" (boot overlay) and "Loading story" (preview). Under

@@ -5,6 +5,7 @@ import { ComponentDemoTable } from "../../../../src/dataTables/components/demos/
 import { dateFieldExampleList } from "./examples"
 import NewLines from "../../../../src/components/NewLines"
 import Callout from "../../../../src/components/Callout"
+import Ink from "../../../../src/nice/Ink"
 
 <Meta title="Components/Forms/DateField" />
 
@@ -29,7 +30,7 @@ import { DateField } from "nice-react-calendar"
 
 <NewLines count={3} />
 
-## Guide
+<Ink as="h2">Guide</Ink>
 
 DateField v1 is picker-only. The visible Input is read-only and shows the
 value formatted with `Intl.DateTimeFormat(locale, { dateStyle: "medium" })`.

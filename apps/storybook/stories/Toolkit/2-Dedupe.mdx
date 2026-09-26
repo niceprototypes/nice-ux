@@ -1,6 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
 import Line from "../../src/components/Line"
+import Ink from "../../src/nice/Ink"
 
 <Meta
   title="Toolkit/2. Dedupe"
@@ -27,7 +28,7 @@ nicely --dedupe --dry-run
 
 <Line />
 
-## What it removes
+<Ink as="h2">What it removes</Ink>
 
 By default these are stripped from each linked package so the app's copy is the
 only one loaded:
@@ -45,7 +46,7 @@ Override or extend the set per run with `--exclude` / `--add-exclude` (see
 
 <Line />
 
-## When to run it
+<Ink as="h2">When to run it</Ink>
 
 - After `npm install` inside a linked package (install re-adds the duplicates).
 - After changing any `package.json` dependencies.

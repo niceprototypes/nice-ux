@@ -22,7 +22,7 @@ nicely --dedupe
 
 <Line />
 
-## Source changes not appearing
+<Ink as="h2">Source changes not appearing</Ink>
 
 Make sure the rebuild loop is running so a linked package's dist updates on
 change:
@@ -40,7 +40,7 @@ nicely --vite          # wipes .vite + kills the dev-server port; restart after
 
 <Line />
 
-## Icon (SVG) edits not updating
+<Ink as="h2">Icon (SVG) edits not updating</Ink>
 
 Editing an SVG **does** rebuild the icon chain under `nicely --dev --watch` —
 `nice-icons` regenerates its index and `nice-react-icon`'s dist is rebuilt. The
@@ -63,7 +63,7 @@ race; `--build-icons` will prompt you to stop the watcher first.
 
 <Line />
 
-## After installing dependencies in a linked package
+<Ink as="h2">After installing dependencies in a linked package</Ink>
 
 `npm install` reintroduces the singleton duplicates. Either unlink first, or
 re-dedupe after:
@@ -81,7 +81,7 @@ cd - && nicely --dedupe
 
 <Line />
 
-## Everything is stale after a foundation refactor
+<Ink as="h2">Everything is stale after a foundation refactor</Ink>
 
 ```bash
 nicely --reset   # --build-all → --dedupe → --clean, then restart the dev server

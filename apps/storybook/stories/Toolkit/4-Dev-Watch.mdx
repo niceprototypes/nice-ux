@@ -2,6 +2,7 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
 import Line from "../../src/components/Line"
 import Code from "../../src/nice/Code"
+import Ink from "../../src/nice/Ink"
 
 <Meta
   title="Toolkit/4. Dev & Watch"
@@ -15,7 +16,7 @@ source. Two flags, usually run together.
 
 <Line />
 
-## <Code code="--dev" language="bash" inlined />
+<Ink as="h2"><Code code="--dev" language="bash" inlined /></Ink>
 
 Runs `npm run dev` (the package's rollup/gen watcher) in every linked package
 concurrently, rebuilding each on source change. Packages without a `dev` script
@@ -27,7 +28,7 @@ nicely --dev
 
 <Line />
 
-## <Code code="--watch" language="bash" inlined />
+<Ink as="h2"><Code code="--watch" language="bash" inlined /></Ink>
 
 Watches each linked package's `dist/` folder and touches a trigger file when a
 build lands, which makes webpack/CRA recompile.
@@ -39,7 +40,7 @@ nicely --watch
 nicely --watch --watch-dir build
 ```
 
-#### CRA / webpack setup
+<Ink as="h4">CRA / webpack setup</Ink>
 
 Import the trigger file from your entry point and git-ignore it:
 
@@ -58,7 +59,7 @@ trigger file — the plugin watches linked dists directly.
 
 <Line />
 
-## <Code code="--dev --watch" language="bash" inlined /> (recommended)
+<Ink as="h2"><Code code="--dev --watch" language="bash" inlined /> (recommended)</Ink>
 
 Combines both: rebuild on source change **and** trigger the consumer to reload.
 
@@ -74,7 +75,7 @@ npm start          # Terminal 1 — your dev server
 npm run watch:deps # Terminal 2 — the rebuild + reload loop
 ```
 
-#### Flow
+<Ink as="h4">Flow</Ink>
 
 ```bash
 Source change in a linked package
@@ -90,7 +91,7 @@ CRA / webpack recompiles  (Vite: nice-vite-watcher reloads)
 
 <Line />
 
-## Don't run a one-shot build alongside it
+<Ink as="h2">Don't run a one-shot build alongside it</Ink>
 
 `--dev --watch` writes the same dist files a `--build-all` / `--build-icons`
 pass does. Running both at once races on `dist/`. `--build-icons` guards against

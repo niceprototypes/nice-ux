@@ -2,6 +2,7 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
 import Line from "../../src/components/Line"
 import Code from "../../src/nice/Code"
+import Ink from "../../src/nice/Ink"
 
 <Meta
   title="Toolkit/1. Linking"
@@ -32,7 +33,7 @@ styled-components.
 
 <Line />
 
-## <Code code="--unlink" language="bash" inlined />
+<Ink as="h2"><Code code="--unlink" language="bash" inlined /></Ink>
 
 Restore every `file:` reference to its original npm version and reinstall from
 the registry.
@@ -50,7 +51,7 @@ removed.
 
 <Line />
 
-## <Code code="--exclude" language="bash" inlined /> / <Code code="--add-exclude" language="bash" inlined />
+<Ink as="h2"><Code code="--exclude" language="bash" inlined /> / <Code code="--add-exclude" language="bash" inlined /></Ink>
 
 The default singleton set removed from linked packages is `react`, `react-dom`,
 `styled-components`, `@types/react`, `@types/react-dom`.
@@ -65,7 +66,7 @@ nicely --add-exclude @emotion/react,@emotion/styled ../my-component
 
 <Line />
 
-## <Code code="--manager" language="bash" inlined /> / <Code code="--skip-peer-check" language="bash" inlined />
+<Ink as="h2"><Code code="--manager" language="bash" inlined /> / <Code code="--skip-peer-check" language="bash" inlined /></Ink>
 
 ```bash
 # Force a package manager (auto-detected from the lockfile by default)

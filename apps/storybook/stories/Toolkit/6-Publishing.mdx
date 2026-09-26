@@ -2,6 +2,7 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
 import Line from "../../src/components/Line"
 import Code from "../../src/nice/Code"
+import Ink from "../../src/nice/Ink"
 
 <Meta
   title="Toolkit/6. Publishing"
@@ -17,7 +18,7 @@ order.
 
 <Line />
 
-## <Code code="--bump" language="bash" inlined /> — record intent
+<Ink as="h2"><Code code="--bump" language="bash" inlined /> — record intent</Ink>
 
 Append one entry to the current package's `.nice/bump.md`. Commit it alongside
 the change it describes.
@@ -35,7 +36,7 @@ equivalent to `--bump`.
 
 <Line />
 
-## <Code code="--publish" language="bash" inlined />
+<Ink as="h2"><Code code="--publish" language="bash" inlined /></Ink>
 
 Publishes changed packages to npm, resolving the full dependency cascade.
 
@@ -50,7 +51,7 @@ nicely --publish nice-styles,nice-react-styles
 nicely --publish --dry-run
 ```
 
-#### What it does
+<Ink as="h4">What it does</Ink>
 
 ```bash
 1. Resolves affected packages via the reverse file:-dependency graph
@@ -70,7 +71,7 @@ recommended bumps.
 
 <Line />
 
-## <Code code="--no-npm" language="bash" inlined /> / <Code code="--dry-publish" language="bash" inlined />
+<Ink as="h2"><Code code="--no-npm" language="bash" inlined /> / <Code code="--dry-publish" language="bash" inlined /></Ink>
 
 ```bash
 # Bump, build, commit, push — but skip the npm publish step

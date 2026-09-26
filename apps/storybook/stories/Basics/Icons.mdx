@@ -10,6 +10,7 @@ import Flex from "nice-react-flex"
 import { IconPreview } from "./Icons.styles"
 import Install from "../../src/components/Install"
 import Line from "../../src/components/Line"
+import Ink from "../../src/nice/Ink"
 
 <Meta
   title="Basics/Icons"
@@ -18,15 +19,15 @@ import Line from "../../src/components/Line"
 
 <StoryHeader title="Icons" />
 
-### Standalone
+<Ink as="h3">Standalone</Ink>
 <Install package="icons"/>
 
-### React
+<Ink as="h3">React</Ink>
 <Install package="react-icon"/>
 
 <Line />
 
-### {iconNames.length} icons
+<Ink as="h3">{"{iconNames.length} icons"}</Ink>
 
 <IconDemoTable
   codeColumns={[
@@ -35,7 +36,7 @@ import Line from "../../src/components/Line"
   ]}
 />
 
-### {illustrationNames.length} illustrations
+<Ink as="h3">{"{illustrationNames.length} illustrations"}</Ink>
 
 <IllustrationDemoTable
   codeColumns={[
@@ -46,7 +47,7 @@ import Line from "../../src/components/Line"
 
 <Line />
 
-## Strings
+<Ink as="h2">Strings</Ink>
 
 When standard SVG markup is not available or necessary:
 
@@ -56,7 +57,7 @@ import { getIconEncoded } from "nice-icons"
 getIconEncoded("check")
 ```
 
-### SVG
+<Ink as="h3">SVG</Ink>
 
 ```js
 import { getIcon } from "nice-icons"
@@ -69,7 +70,7 @@ getIcon("check", "base", { size: "large", color: "link" })  // configured
 document.querySelector("#slot").innerHTML = getIcon("check")
 ```
 
-### Base64
+<Ink as="h3">Base64</Ink>
 
 ```js
 import { getIconEncoded } from "nice-icons"
@@ -86,7 +87,7 @@ element.style.maskImage = `url("${getIconEncoded("check")}")`
 
 <Line />
 
-## React
+<Ink as="h2">React</Ink>
 
 The Icon component allows you to **easily configure icon properties** without any CSS code:
 

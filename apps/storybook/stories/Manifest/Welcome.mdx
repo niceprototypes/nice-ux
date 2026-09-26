@@ -5,6 +5,7 @@ import Callout from "../../src/components/Callout"
 import WelcomeLink from "../../src/components/WelcomeLink"
 import Line from "../../src/components/Line"
 import NewLines from "../../src/components/NewLines"
+import Ink from "../../src/nice/Ink"
 
 <Meta
   title="Manifest/Welcome"
@@ -23,7 +24,7 @@ The **Nice Manifest** is its own repository, cloned alongside the packages it do
 
 <Line />
 
-## Load model
+<Ink as="h2">Load model</Ink>
 
 "Read the manifest" does not mean read all 40+ files. It loads the always-on **Core**, then lazy-loads a topic body only when the task touches it.
 
@@ -36,7 +37,7 @@ The **Nice Manifest** is its own repository, cloned alongside the packages it do
 
 <Line />
 
-## The folders
+<Ink as="h2">The folders</Ink>
 
 The manifest is organized by phase of work. `discipline/` is the always-on Core; the rest load when the task points to them.
 
@@ -98,7 +99,7 @@ The manifest is organized by phase of work. `discipline/` is the always-on Core;
 
 <Line />
 
-## Principles
+<Ink as="h2">Principles</Ink>
 
 **Decentralized by design.** Every `nice-*` package is its own repository, versioned, published, and consumable on its own. There is no monorepo and no single codebase — a package depends on its foundations through npm like any other consumer would. Work is scoped to one repository at a time, and a change that appears to need edits across several is a signal to look at the dependency boundary between them.
 

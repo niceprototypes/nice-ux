@@ -1,6 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
 import Line from "../../src/components/Line"
+import Ink from "../../src/nice/Ink"
 
 <Meta
   title="Bindings/useDevice"
@@ -17,7 +18,7 @@ device binding; detection lives inside `nice-react-styles`.
 
 <Line />
 
-## Enable detection on the provider
+<Ink as="h2">Enable detection on the provider</Ink>
 
 ```tsx
 import { StylesProvider } from "nice-react-styles"
@@ -30,7 +31,7 @@ import { StylesProvider } from "nice-react-styles"
 `detectDevice` defaults to `false`. When off, no detection runs and no resize
 listener is registered — `useDevice()` returns `{ isMobile: false }`.
 
-## Read it anywhere below
+<Ink as="h2">Read it anywhere below</Ink>
 
 ```tsx
 import { useDevice } from "nice-react-styles"
@@ -46,7 +47,7 @@ No prop drilling — every component under the `StylesProvider` reads the same
 
 <Line />
 
-## What detection checks
+<Ink as="h2">What detection checks</Ink>
 
 `detectDevice` runs detection once and keeps it current on resize / orientation /
 DevTools-emulation changes — a single shared listener for the whole tree. A

@@ -1,6 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
 import Line from "../../src/components/Line"
+import Ink from "../../src/nice/Ink"
 
 <Meta
   title="Bindings/useBreakpoint"
@@ -16,7 +17,7 @@ Reads `window.innerWidth` directly via `useSyncExternalStore`, so it needs **no
 
 <Line />
 
-## Usage
+<Ink as="h2">Usage</Ink>
 
 ```tsx
 import { useBreakpoint } from "nice-react-styles"
@@ -39,7 +40,7 @@ const wide = bp === BREAKPOINT_DESKTOP
 
 <Line />
 
-## Prefer CSS for styling — reach for this only to swap trees
+<Ink as="h2">Prefer CSS for styling — reach for this only to swap trees</Ink>
 
 `useBreakpoint` runs in JS, so it carries costs the CSS layer doesn't:
 
@@ -66,7 +67,7 @@ CSS layer:
 
 <Line />
 
-## SSR
+<Ink as="h2">SSR</Ink>
 
 The server snapshot is always `"phone"`. If the server rendered at a larger
 breakpoint, the component re-renders on hydration once the client snapshot takes

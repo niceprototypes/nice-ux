@@ -1,6 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
 import Line from "../../src/components/Line"
+import Ink from "../../src/nice/Ink"
 
 <Meta
   title="Toolkit"
@@ -20,7 +21,7 @@ npm install -g nice-toolkit
 
 <Line />
 
-## Why it exists
+<Ink as="h2">Why it exists</Ink>
 
 Nice packages depend on each other through `file:` references so local changes
 propagate without a publish. The cost is that each linked package installs its
@@ -41,7 +42,7 @@ nicely --dedupe
 
 <Line />
 
-## Command map
+<Ink as="h2">Command map</Ink>
 
 | Area | Commands | Page |
 |------|----------|------|
@@ -55,7 +56,7 @@ nicely --dedupe
 
 <Line />
 
-## Conventions used on these pages
+<Ink as="h2">Conventions used on these pages</Ink>
 
 - **`--dry-run`** works on every mutating command — it prints what would happen
   and changes nothing. Reach for it first when unsure.

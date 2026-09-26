@@ -1,6 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../../src/components/Story"
 import Install from "../../../../src/components/Install"
+import Ink from "../../../../src/nice/Ink"
 
 <Meta title="Components/Code" />
 
@@ -13,13 +14,13 @@ import Install from "../../../../src/components/Install"
 
 <Install package="react-code" />
 
-### Setup
+<Ink as="h3">Setup</Ink>
 
 ```jsx
 import Code from "nice-react-code"
 ```
 
-### Usage
+<Ink as="h3">Usage</Ink>
 
 ```jsx
 <Code code={source} language="tsx" />

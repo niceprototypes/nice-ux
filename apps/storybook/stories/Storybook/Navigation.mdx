@@ -2,6 +2,7 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
 import Line from "../../src/components/Line"
 import Install from "../../src/components/Install"
+import Ink from "../../src/nice/Ink"
 
 <Meta
   title="Storybook/Navigation"
@@ -20,7 +21,7 @@ import Install from "../../src/components/Install"
 
 <Line />
 
-### Setup
+<Ink as="h3">Setup</Ink>
 
 Add it to `addons` — the entry loads both its manager and preview halves:
 
@@ -40,7 +41,7 @@ export default config
 Peers: `storybook` ≥ 10, `storybook-dark-mode`, `@storybook/addon-links`,
 `react`, `react-dom`, `styled-components`.
 
-### Sequences
+<Ink as="h3">Sequences</Ink>
 
 Back / next are not automatic — the bar walks ordered lists you supply, so a
 guided path can differ from sidebar order and a page outside every sequence
@@ -64,7 +65,7 @@ export const parameters = {
 Ids are your own story ids — the slug Storybook derives from each page's
 `<Meta title>`.
 
-### Why it needs a manager half
+<Ink as="h3">Why it needs a manager half</Ink>
 
 The bar renders in the preview iframe, but the sidebar, the editor and the
 settings tabs all belong to the manager. The preview cannot reach them, so each

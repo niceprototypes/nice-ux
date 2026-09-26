@@ -2,6 +2,7 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
 import Install from "../../src/components/Install"
 import Line from "../../src/components/Line"
+import Ink from "../../src/nice/Ink"
 
 <Meta
   title="Configuration/Rollup"
@@ -12,13 +13,13 @@ import Line from "../../src/components/Line"
 
 <Install package="configuration" dev />
 
-### Setup
+<Ink as="h3">Setup</Ink>
 
 ```js
 import { createConfiguration } from "nice-config-rollup"
 ```
 
-### Usage
+<Ink as="h3">Usage</Ink>
 
 ```js
 export default createConfiguration({ plugins: [...] })
@@ -26,7 +27,7 @@ export default createConfiguration({ plugins: [...] })
 
 <Line />
 
-## createConfiguration
+<Ink as="h2">createConfiguration</Ink>
 
 Creates a complete rollup configuration with sensible defaults for nice-* packages. Outputs both CJS and ESM formats with sourcemaps. All plugins are included by default.
 
@@ -45,7 +46,7 @@ export default createConfiguration({
 })
 ```
 
-#### Options
+<Ink as="h4">Options</Ink>
 
 ```typescript
 {
@@ -60,7 +61,7 @@ export default createConfiguration({
 }
 ```
 
-#### Default Plugins
+<Ink as="h4">Default Plugins</Ink>
 
 The following plugins are included automatically:
 
@@ -74,7 +75,7 @@ The following plugins are included automatically:
 
 <Line />
 
-## isNiceExternal
+<Ink as="h2">isNiceExternal</Ink>
 
 Pattern-based external detection that automatically externalizes all nice-* packages, React ecosystem, and styled-components. Handles subpath imports like CSS files.
 
@@ -92,7 +93,7 @@ isNiceExternal("styled-components")     // styled-components
 isNiceExternal("lodash")                // other packages
 ```
 
-#### Manual Usage
+<Ink as="h4">Manual Usage</Ink>
 
 If you need custom rollup config, use `isNiceExternal` directly:
 
@@ -110,7 +111,7 @@ export default {
 
 <Line />
 
-## Watch Mode Configuration
+<Ink as="h2">Watch Mode Configuration</Ink>
 
 The configuration includes optimized watch settings that prevent file caching issues during local development. This ensures changes appear immediately without delay.
 
@@ -133,13 +134,13 @@ The configuration includes optimized watch settings that prevent file caching is
 }
 ```
 
-#### Why These Settings?
+<Ink as="h4">Why These Settings?</Ink>
 
 Without these settings, rollup's watch mode can exhibit an "off by one" caching bug where file changes appear one save behind. The `awaitWriteFinish` option ensures files are fully written to disk before rollup reads them, and `usePolling` provides more reliable file change detection on macOS.
 
 <Line />
 
-## createExternals
+<Ink as="h2">createExternals</Ink>
 
 Creates an external function with additional packages or bundle overrides.
 

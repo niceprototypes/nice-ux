@@ -2,6 +2,7 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
 import Install from "../../src/components/Install"
 import Line from "../../src/components/Line"
+import Ink from "../../src/nice/Ink"
 
 <Meta
   title="Configuration/TypeScript"
@@ -12,7 +13,7 @@ import Line from "../../src/components/Line"
 
 <Install package="configuration" dev />
 
-### Setup
+<Ink as="h3">Setup</Ink>
 
 ```json
 // tsconfig.json
@@ -21,7 +22,7 @@ import Line from "../../src/components/Line"
 
 <Line />
 
-## Base Configuration
+<Ink as="h2">Base Configuration</Ink>
 
 Extends the base TypeScript configuration for non-React packages like nice-styles.
 
@@ -38,7 +39,7 @@ Extends the base TypeScript configuration for non-React packages like nice-style
 }
 ```
 
-#### Included Options
+<Ink as="h4">Included Options</Ink>
 
 ```json
 {
@@ -59,7 +60,7 @@ Extends the base TypeScript configuration for non-React packages like nice-style
 
 <Line />
 
-## React Configuration
+<Ink as="h2">React Configuration</Ink>
 
 Extends the base configuration with JSX support for React components.
 
@@ -76,7 +77,7 @@ Extends the base configuration with JSX support for React components.
 }
 ```
 
-#### Additional Options
+<Ink as="h4">Additional Options</Ink>
 
 ```json
 {

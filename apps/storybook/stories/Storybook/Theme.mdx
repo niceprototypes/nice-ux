@@ -2,6 +2,7 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
 import Line from "../../src/components/Line"
 import Install from "../../src/components/Install"
+import Ink from "../../src/nice/Ink"
 
 <Meta
   title="Storybook/Theme"
@@ -20,7 +21,7 @@ import Install from "../../src/components/Install"
 
 <Line />
 
-### Setup
+<Ink as="h3">Setup</Ink>
 
 ```ts
 // .storybook/main.ts
@@ -39,14 +40,14 @@ expose the Nice `--np--*` custom properties — the addon styles the tree with
 them but does not inject the token sheet itself, so the theme and branding stay
 yours.
 
-### What it draws
+<Ink as="h3">What it draws</Ink>
 
 The tree's connector lines and folder glyphs are masked SVGs painted with token
 colors, so they flip with day / night rather than shipping two icon sets. Lines
 are aware of both depth and selection: a branch on the path to the open story
 reads as active, and one merely above it does not.
 
-### How it knows the shape
+<Ink as="h3">How it knows the shape</Ink>
 
 CSS cannot see tree structure — the sidebar is a flat list of rows, each naming
 its parent. `tagSidebarPaths` walks that list and stamps derived attributes on
@@ -57,7 +58,7 @@ selects on those attributes.
 It re-runs on tree re-renders and on selection changes, and its own writes are
 outside the observed attribute set, so it does not retrigger itself.
 
-### Caveat
+<Ink as="h3">Caveat</Ink>
 
 The styling depends on Storybook's **private** sidebar DOM — `.sidebar-item`,
 `data-nodetype`, and the element shapes inside each row — verified against

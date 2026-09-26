@@ -37,7 +37,7 @@ import Ink from "../../src/nice/Ink"
   in your style code.
 </Ink>
 
-### CSS only
+<Ink as="h3">CSS only</Ink>
 
 ```css
 @import "nice-styles/tokens.css";
@@ -55,7 +55,7 @@ import Ink from "../../src/nice/Ink"
 
 <NewLines />
 
-### JS + CSS
+<Ink as="h3">JS + CSS</Ink>
 
 [//]: # "For CSS-in-JS or runtime CSS strings, `getBreakpoint` returns the matching `@media (min-width: …)` literal sourced from the same threshold table the build uses, so JS and CSS stay in sync:"
 
@@ -76,7 +76,7 @@ const css = `${getBreakpoint("tablet+")} {
 
 <NewLines />
 
-### Styled Components
+<Ink as="h3">Styled Components</Ink>
 
 [//]: # "The same `getBreakpoint` literal drops straight into a styled-component, paired with `getToken` for the values — JS and CSS stay on one threshold table:"
 
@@ -100,7 +100,7 @@ const Wrapper = styled.div`
 
 <Line />
 
-## Set breakpoints
+<Ink as="h2">Set breakpoints</Ink>
 
 Thresholds are the pixel floors each breakpoint starts at. Set them with the `breakpoints` key of `setTokens`, alongside your tokens. Thresholds apply first, so responsive values in the same call use the new ones:
 
@@ -115,7 +115,7 @@ setTokens({
 
 <NewLines />
 
-### Breakpoints only
+<Ink as="h3">Breakpoints only</Ink>
 
 If a call sets nothing but thresholds, `setBreakpoints` is the shortcut:
 
@@ -137,7 +137,7 @@ Both forms take any subset of `tablet`, `laptop`, and `desktop`; `phone` is the 
 
 <Line />
 
-## Media queries
+<Ink as="h2">Media queries</Ink>
 
 <DataTable
   inline
@@ -218,7 +218,7 @@ Both forms take any subset of `tablet`, `laptop`, and `desktop`; `phone` is the 
 
 <Line />
 
-## Live demo
+<Ink as="h2">Live demo</Ink>
 
 Zoom your browser to simulate different screen sizes.
 

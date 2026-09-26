@@ -1,6 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
 import Callout from "../../src/components/Callout"
+import Ink from "../../src/nice/Ink"
 
 <Meta
   title="Scenarios/Easy"
@@ -12,8 +13,7 @@ import Callout from "../../src/components/Callout"
   description="The minimum — a StylesProvider and one getToken, in a single file."
 />
 
-The minimum: wrap the app in `StylesProvider` and read a token with `getToken`.
-Semantic tokens (no variant suffix) flip day/night on their own.
+<Ink as="span">The minimum: wrap the app in <Ink as="span" code>StylesProvider</Ink> and read a token with <Ink as="span" code>getToken</Ink>. Semantic tokens (no variant suffix) flip day/night on their own.</Ink>
 
 ```tsx
 // App.tsx

@@ -2,6 +2,7 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
 import Line from "../../src/components/Line"
 import Code from "../../src/nice/Code"
+import Ink from "../../src/nice/Ink"
 
 <Meta
   title="Configuration/Caches"
@@ -14,7 +15,7 @@ Eight cache layers can hold stale state in a Nice workspace. Three workspace-lev
 
 <Line />
 
-## The eight layers
+<Ink as="h2">The eight layers</Ink>
 
 | # | Layer | Path | Cleared by |
 |---|---|---|---|
@@ -31,11 +32,11 @@ Eight cache layers can hold stale state in a Nice workspace. Three workspace-lev
 
 <Line />
 
-## The three <Code code="nicely" language="bash" inlined /> operations
+<Ink as="h2">The three <Code code="nicely" language="bash" inlined /> operations</Ink>
 
 `nicely --clean`, `--dedupe`, and `--build-all` are the workspace-level toolkit operations. They do not overlap. Each addresses a distinct layer at a distinct location. Mistaking one for another produces silent failure.
 
-### Distinct targets
+<Ink as="h3">Distinct targets</Ink>
 
 ```bash
 nicely --clean    →    <consumer>/node_modules/{.cache, .vite} + processes on declared ports    (layers 3 + 7)
@@ -43,7 +44,7 @@ nicely --dedupe       →    <linked-pkg>/node_modules/<singleton>              
 nicely --build-all       →    <linked-pkg>/dist/                                                        (layer 5)
 ```
 
-### Side-by-side
+<Ink as="h3">Side-by-side</Ink>
 
 | Command | What it does | What it does **not** do |
 |---|---|---|
@@ -53,7 +54,7 @@ nicely --build-all       →    <linked-pkg>/dist/                              
 
 The port-kill in `nicely --clean` exists because a running dev server holds an in-memory module graph and repopulates its on-disk cache the moment it's wiped. Wiping cache without killing the server is a no-op against the observable symptom. Use `--no-kill` to wipe caches only (e.g. CI environments).
 
-### How they combine
+<Ink as="h3">How they combine</Ink>
 
 For the "everything is stale" reset, the three are chained in this order:
 
@@ -73,7 +74,7 @@ Then restart any dev server (`npm run dev` in each consumer) and hard-reload the
 
 <Line />
 
-## What the three <Code code="nicely" language="bash" inlined /> operations do **not** touch
+<Ink as="h2">What the three <Code code="nicely" language="bash" inlined /> operations do <Ink as="span" weight="semibold">not</Ink> touch</Ink>
 
 These belong to other owners:
 
@@ -86,9 +87,9 @@ These belong to other owners:
 
 <Line />
 
-## Workflow recipes
+<Ink as="h2">Workflow recipes</Ink>
 
-#### Dev server is serving stale code after editing a linked package
+<Ink as="h4">Dev server is serving stale code after editing a linked package</Ink>
 
 ```bash
 nicely --clean
@@ -96,7 +97,7 @@ nicely --clean
 
 Then restart the dev server (`npm run dev` inside the consumer) and hard-reload the browser tab. `nicely --clean` killed the old process and wiped the cache; you bring the server back up when ready.
 
-#### "Invalid hook call" or styled-components context mismatch
+<Ink as="h4">"Invalid hook call" or styled-components context mismatch</Ink>
 
 ```bash
 nicely --dedupe
@@ -104,7 +105,7 @@ nicely --dedupe
 
 The classic duplicate-React-instance error. See [Toolkit → Dedupe](/docs/toolkit-2-dedupe--docs) for the underlying cause.
 
-#### Consumer reports a missing export from a foundation package after a refactor
+<Ink as="h4">Consumer reports a missing export from a foundation package after a refactor</Ink>
 
 ```bash
 nicely --build-all
@@ -112,7 +113,7 @@ nicely --build-all
 
 The consumer is reading an older `dist/` than the source now produces. Rebuild every linked package in tier order.
 
-#### Fresh clone of the workspace
+<Ink as="h4">Fresh clone of the workspace</Ink>
 
 ```bash
 # In each consumer (website, storybook, website-viveka, …)
@@ -124,7 +125,7 @@ nicely --build-all
 
 The `prepare` hook no longer rebuilds linked packages on consumer installs (see `manifest/.nice/reports/npm-install-breaks-consumers.md`). New clones must build dists explicitly.
 
-#### Nuclear: I don't know what's wrong
+<Ink as="h4">Nuclear: I don't know what's wrong</Ink>
 
 ```bash
 nicely --clean
@@ -138,7 +139,7 @@ If that doesn't fix it, escalate to a per-consumer reinstall (`rm -rf node_modul
 
 <Line />
 
-## Why three <Code code="nicely" language="bash" inlined /> operations and not one
+<Ink as="h2">Why three <Code code="nicely" language="bash" inlined /> operations and not one</Ink>
 
 Each addresses a distinct concern with a distinct target directory and a distinct trigger symptom. A single umbrella verb would have to either over-fire (touch directories the symptom doesn't need) or under-fire (miss the directory the symptom does need). The three verbs are exhaustive for the workspace-level operations they cover and orthogonal to one another. Concerns outside the triad — consumer `node_modules` reinstall, global npm cache, browser hard reload — are owned by other tools and intentionally not pulled in.
 
