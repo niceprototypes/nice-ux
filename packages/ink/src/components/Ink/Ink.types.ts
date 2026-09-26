@@ -124,6 +124,9 @@ export type InkProps = {
   /** Apply monospace font for code snippets */
   code?: boolean
 
+  /** Element id, e.g. an anchor target for in-page links */
+  id?: string
+
   /**
    * Text color from nice-styles tokens. Either the variant name, or an object
    * adding effects: `{ name: "highlight", transform: [null, null, 40, null] }`.

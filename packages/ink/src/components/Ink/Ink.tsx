@@ -43,6 +43,7 @@ const Ink: React.FC<InkProps> = ({
   className = "sb-unstyled",
   code = false,
   color,
+  id,
   theme,
   lineClamp,
   lineHeight,
@@ -67,6 +68,7 @@ const Ink: React.FC<InkProps> = ({
       $weight={weight}
       $wordBreak={wordBreak}
       as={as}
+      id={id}
       className={className}
       style={style}
     >
