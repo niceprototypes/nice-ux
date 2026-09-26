@@ -13,12 +13,19 @@ const IMAGE_WIDTH = 1511
 const IMAGE_HEIGHT = 1041
 
 /**
+ * Docs images are capped at this width by `.storybook/preview-docs.css`; the
+ * frame takes the same cap so the image fills it instead of leaving a gap.
+ */
+const DOCS_IMAGE_MAX_WIDTH = "800px"
+
+/**
  * The frame: sized to the image's aspect ratio, clipped to the token radius, and
  * the positioning context for the overlay.
  */
 export const SpinnerDemoDiv = styled.div`
   position: relative;
   width: 100%;
+  max-width: ${DOCS_IMAGE_MAX_WIDTH};
   aspect-ratio: ${IMAGE_WIDTH} / ${IMAGE_HEIGHT};
   overflow: hidden;
   border: ${getToken("borderWidth", "small")} solid ${getToken("borderColor")};
