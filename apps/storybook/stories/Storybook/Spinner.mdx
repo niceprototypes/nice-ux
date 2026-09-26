@@ -5,6 +5,7 @@ import Install from "../../src/components/Install"
 import NewLines from "../../src/components/NewLines"
 import SpinnerDemo from "../../src/components/SpinnerDemo"
 import Ink from "../../src/nice/Ink"
+import { DataTable } from "../../src/components/DataTable"
 
 <Meta
   title="Storybook/Spinner"
@@ -29,8 +30,7 @@ import Ink from "../../src/nice/Ink"
 
 <Ink as="h3">Setup</Ink>
 
-Add it to `addons` — it is a preset, so there is no manager or preview entry to
-register:
+<Ink as="span">Add it to <code>addons</code> — it is a preset, so there is no manager or preview entry to register:</Ink>
 
 ```ts
 // .storybook/main.ts
@@ -44,7 +44,7 @@ const config = {
 export default config
 ```
 
-To pass options, use the object form of the entry:
+<Ink as="span">To pass options, use the object form of the entry:</Ink>
 
 ```ts
 addons: [
@@ -52,92 +52,59 @@ addons: [
 ]
 ```
 
-Peer: `storybook` ≥ 10. The spinner is the real `<Icon name="spinner" />` from
-`nice-react-icon`, rendered to static markup when the addon is built, with its
-size, stroke, duration and day / night colors taken from `nice-styles` tokens at
-the same time — so the published package has no dependencies.
+<Ink as="span">Peer: <code>storybook</code> ≥ 10. The spinner is the real <code>{"<Icon name=\"spinner\" />"}</code> from <code>nice-react-icon</code>, rendered to static markup when the addon is built, with its size, stroke, duration and day / night colors taken from <code>nice-styles</code> tokens at the same time — so the published package has no dependencies.</Ink>
 
 <Ink as="h3">Options</Ink>
 
-| Option           | Type      | Default | Description |
-|------------------|-----------|---------|-------------|
-| `hold`           | `boolean` | `false` | Keep the boot overlay (or the held snapshot) up for good. |
-| `timeout`        | `number`  | `8000`  | Release after this many ms, whatever the readiness signals say. |
-| `viewTransition` | `boolean` | `true`  | Snapshot mode, below. `false` keeps only the opaque overlay: no `@view-transition` rule is injected and `pagereveal` is not handled. |
+<DataTable
+  columns={[{ key: "c0", header: "Option" }, { key: "c1", header: "Type" }, { key: "c2", header: "Default" }, { key: "c3", header: "Description" }]}
+  tables={[{ rows: [
+    { id: "0", values: [<Ink as="span"><code>hold</code></Ink>, <Ink as="span"><code>boolean</code></Ink>, <Ink as="span"><code>false</code></Ink>, <Ink as="span">Keep the boot overlay (or the held snapshot) up for good.</Ink>] },
+    { id: "1", values: [<Ink as="span"><code>timeout</code></Ink>, <Ink as="span"><code>number</code></Ink>, <Ink as="span"><code>8000</code></Ink>, <Ink as="span">Release after this many ms, whatever the readiness signals say.</Ink>] },
+    { id: "2", values: [<Ink as="span"><code>viewTransition</code></Ink>, <Ink as="span"><code>boolean</code></Ink>, <Ink as="span"><code>true</code></Ink>, <Ink as="span">Snapshot mode, below. <code>false</code> keeps only the opaque overlay: no <code>@view-transition</code> rule is injected and <code>pagereveal</code> is not handled.</Ink>] },
+  ] }]}
+/>
 
-A `timeout` that is not a finite, non-negative number falls back to `8000`; a
-`viewTransition` that is not a boolean falls back to its default.
+<Ink as="span">A <code>timeout</code> that is not a finite, non-negative number falls back to <code>8000</code>; a <code>viewTransition</code> that is not a boolean falls back to its default.</Ink>
 
 <Ink as="h3">Hold for styling</Ink>
 
-To keep the boot overlay on screen while styling it, use any of these — the
-first one present wins. Hold keeps whichever mode is active up: the opaque
-overlay, or in snapshot mode the held snapshot with the spinner over it.
+<Ink as="span">To keep the boot overlay on screen while styling it, use any of these — the first one present wins. Hold keeps whichever mode is active up: the opaque overlay, or in snapshot mode the held snapshot with the spinner over it.</Ink>
 
-1. Query parameter: `?nsbHold=1` (or `true`) holds, `?nsbHold=0` (or `false`)
+<ol>
+  <li><Ink as="span">Query parameter: <code>?nsbHold=1</code> (or <code>true</code>) holds, <code>?nsbHold=0</code> (or <code>false</code>)</Ink></li>
+</ol>
    releases.
-2. localStorage: `localStorage.setItem("nice-storybook-spinner:hold", "true")`
+<ol>
+  <li><Ink as="span">localStorage: <code>localStorage.setItem("nice-storybook-spinner:hold", "true")</code></Ink></li>
+</ol>
    holds, `"false"` releases.
-3. The preset option `hold: true`.
+<ol>
+  <li><Ink as="span">The preset option <code>hold: true</code>.</Ink></li>
+</ol>
 
-A held overlay ignores every removal path, the timeout included. Clear the key
-or load with `?nsbHold=0` to release it.
+<Ink as="span">A held overlay ignores every removal path, the timeout included. Clear the key or load with <code>?nsbHold=0</code> to release it.</Ink>
 
 `window.__NSB` is a read-only debug view of the overlay: `{ theme, hold, mode,
 removed }`, where `mode` is `"overlay"` or `"snapshot"` and `removed` names the
-signal that took it down and is empty while it is up.
+<Ink as="span">signal that took it down and is empty while it is up.</Ink>
 
 <Ink as="h3">How it works</Ink>
 
-The addon is a preset with two hooks. Both put their markup first in the head,
-so it runs before any other head content is fetched or parsed.
+<Ink as="span">The addon is a preset with two hooks. Both put their markup first in the head, so it runs before any other head content is fetched or parsed.</Ink>
 
-**`managerHead`** inlines the boot overlay script. It resolves the theme
-synchronously from storybook-dark-mode's localStorage store
-(`sb-addon-themes-3`) — the stored mode when the user chose it explicitly,
-otherwise day — so the overlay's first paint is already in the right theme. It
-then mounts the overlay on `<html>` before `<body>` exists.
+<Ink as="span"><Ink as="span" weight="semibold"><code>managerHead</code></Ink> inlines the boot overlay script. It resolves the theme synchronously from storybook-dark-mode's localStorage store (<code>sb-addon-themes-3</code>) — the stored mode when the user chose it explicitly, otherwise day — so the overlay's first paint is already in the right theme. It then mounts the overlay on <code>{"<html>"}</code> before <code>{"<body>"}</code> exists.</Ink>
 
-The overlay comes down once the page behind it is ready: after
-`storyRendered` or `docsRendered`, then `document.fonts.ready` (capped at 1s),
-then two animation frames, so the first frame without the overlay is a rendered
-page. On `storyErrored`, `storyThrewException` or `storyMissing` it is removed
-immediately, so Storybook's error display is never covered. After `timeout` ms
-it is removed regardless.
+<Ink as="span">The overlay comes down once the page behind it is ready: after <code>storyRendered</code> or <code>docsRendered</code>, then <code>document.fonts.ready</code> (capped at 1s), then two animation frames, so the first frame without the overlay is a rendered page. On <code>storyErrored</code>, <code>storyThrewException</code> or <code>storyMissing</code> it is removed immediately, so Storybook's error display is never covered. After <code>timeout</code> ms it is removed regardless.</Ink>
 
-**Snapshot mode** (`viewTransition`, manager only). `managerHead` also injects
-`@view-transition { navigation: auto }`, which opts the manager into
-cross-document View Transitions. When `pagereveal` carries a `viewTransition`,
-the boot script removes the opaque overlay and holds the transition instead:
-the previous page's snapshot (`::view-transition-old(root)`) stays at full
-opacity, the live new page stays invisible, and the spinner — token size and
-theme color, no background — shows above the snapshot under its own
-`view-transition-name`. The browser blocks pointer and wheel input during the
-transition but not the keyboard, so `keydown` / `keyup` are blocked in the
-capture phase until the release. The same readiness signals (and `timeout`)
-release it with a 180ms cross-fade to the rendered page, and
-`skipTransition()` runs afterwards as a safety net. The preview iframe is part
-of the snapshot and needs no opt-in.
+<Ink as="span"><Ink as="span" weight="semibold">Snapshot mode</Ink> (<code>viewTransition</code>, manager only). <code>managerHead</code> also injects <code>{"@view-transition { navigation: auto }"}</code>, which opts the manager into cross-document View Transitions. When <code>pagereveal</code> carries a <code>viewTransition</code>, the boot script removes the opaque overlay and holds the transition instead: the previous page's snapshot (<code>::view-transition-old(root)</code>) stays at full opacity, the live new page stays invisible, and the spinner — token size and theme color, no background — shows above the snapshot under its own <code>view-transition-name</code>. The browser blocks pointer and wheel input during the transition but not the keyboard, so <code>keydown</code> / <code>keyup</code> are blocked in the capture phase until the release. The same readiness signals (and <code>timeout</code>) release it with a 180ms cross-fade to the rendered page, and <code>skipTransition()</code> runs afterwards as a safety net. The preview iframe is part of the snapshot and needs no opt-in.</Ink>
 
-Snapshot mode covers same-origin navigations — links, `location.assign`, back
-and forward — in Chrome / Edge 126+ and Safari 18.2+. A first visit and a reload
-never get a View Transition (measured in Chromium 139 and WebKit 26), so they,
-and other browsers, get the opaque overlay.
+<Ink as="span">Snapshot mode covers same-origin navigations — links, <code>location.assign</code>, back and forward — in Chrome / Edge 126+ and Safari 18.2+. A first visit and a reload never get a View Transition (measured in Chromium 139 and WebKit 26), so they, and other browsers, get the opaque overlay.</Ink>
 
-**`previewHead`** handles navigation inside the preview iframe. A permanent
-stylesheet hides Storybook's native loaders — the grey docs skeleton
-(`.sb-preparing-docs`) and the story spinner (`.sb-preparing-story`) — and
-shows `#nsb-preview-spinner` exactly when Storybook would show its own loader.
-A script mounts that spinner as the first child of `<body>` as soon as `<body>`
-exists, themed like the overlay and following storybook-dark-mode's
-`DARK_MODE` event afterwards.
+<Ink as="span"><Ink as="span" weight="semibold"><code>previewHead</code></Ink> handles navigation inside the preview iframe. A permanent stylesheet hides Storybook's native loaders — the grey docs skeleton (<code>.sb-preparing-docs</code>) and the story spinner (<code>.sb-preparing-story</code>) — and shows <code>#nsb-preview-spinner</code> exactly when Storybook would show its own loader. A script mounts that spinner as the first child of <code>{"<body>"}</code> as soon as <code>{"<body>"}</code> exists, themed like the overlay and following storybook-dark-mode's <code>DARK_MODE</code> event afterwards.</Ink>
 
-The preview head also carries the boot overlay script, which acts only when
-`iframe.html` is opened on its own. `.sb-nopreview` and `.sb-errordisplay` are
-never touched.
+<Ink as="span">The preview head also carries the boot overlay script, which acts only when <code>iframe.html</code> is opened on its own. <code>.sb-nopreview</code> and <code>.sb-errordisplay</code> are never touched.</Ink>
 
 <Ink as="h3">Accessibility</Ink>
 
-Both spinners carry `role="progressbar"` and `aria-busy="true"`, labelled
-"Loading Storybook" (boot overlay) and "Loading story" (preview). Under
-`prefers-reduced-motion: reduce` the rotation slows to one turn every 2s.
+<Ink as="span">Both spinners carry <code>role="progressbar"</code> and <code>aria-busy="true"</code>, labelled "Loading Storybook" (boot overlay) and "Loading story" (preview). Under <code>prefers-reduced-motion: reduce</code> the rotation slows to one turn every 2s.</Ink>

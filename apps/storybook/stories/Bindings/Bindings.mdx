@@ -10,25 +10,29 @@ import Ink from "../../src/nice/Ink"
 
 <StoryHeader title="Bindings" />
 
-React hooks exposed by `nice-react-styles`. Both read state that
-`StylesProvider` publishes through context — one shared instance for the whole
-tree, no separate provider to wire.
+<Ink as="span">React hooks exposed by <code>nice-react-styles</code>. Both read state that <code>StylesProvider</code> publishes through context — one shared instance for the whole tree, no separate provider to wire.</Ink>
 
 <Line />
 
 <Ink as="h3">Contents</Ink>
 
-- [useBreakpoint](/docs/bindings-usebreakpoint--docs) — Returns the current
+<ul>
+  <li><Ink as="span"><a href="/?path=/docs/bindings-usebreakpoint--docs" target="_top">useBreakpoint</a> — Returns the current</Ink></li>
+</ul>
   viewport breakpoint name (`"phone"` / `"tablet"` / `"laptop"` / `"desktop"`)
   and re-renders on band changes. Needs no `StylesProvider`. For swapping
   component trees; prefer CSS / the `breakpoints` prop for styling.
 
-- [useDevice](/docs/bindings-usedevice--docs) — Reads the shared
+<ul>
+  <li><Ink as="span"><a href="/?path=/docs/bindings-usedevice--docs" target="_top">useDevice</a> — Reads the shared</Ink></li>
+</ul>
   `{ isMobile }` published by `StylesProvider` when given `detectDevice`. One
   mobile-detection instance for the whole tree (user-agent + touch + viewport,
   with `?mobile=true` / localStorage debug overrides).
 
-- [useTheme](/docs/bindings-usetheme--docs) — Reads the shared `{ theme }`
+<ul>
+  <li><Ink as="span"><a href="/?path=/docs/bindings-usetheme--docs" target="_top">useTheme</a> — Reads the shared <code>{"{ theme }"}</code></Ink></li>
+</ul>
   published by `StylesProvider` when given `detectTheme`, following the OS
   color-scheme preference.
 

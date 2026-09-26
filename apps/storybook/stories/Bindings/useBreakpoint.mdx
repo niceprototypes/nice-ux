@@ -2,6 +2,7 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
 import Line from "../../src/components/Line"
 import Ink from "../../src/nice/Ink"
+import { DataTable } from "../../src/components/DataTable"
 
 <Meta
   title="Bindings/useBreakpoint"
@@ -10,10 +11,7 @@ import Ink from "../../src/nice/Ink"
 
 <StoryHeader title="useBreakpoint" />
 
-Returns the current viewport breakpoint name — `"phone"`, `"tablet"`, `"laptop"`,
-or `"desktop"` — and re-renders the component when the viewport crosses a band.
-Reads `window.innerWidth` directly via `useSyncExternalStore`, so it needs **no
-`StylesProvider`** (unlike `useDevice` / `useTheme`).
+<Ink as="span">Returns the current viewport breakpoint name — <code>"phone"</code>, <code>"tablet"</code>, <code>"laptop"</code>, or <code>"desktop"</code> — and re-renders the component when the viewport crosses a band. Reads <code>window.innerWidth</code> directly via <code>useSyncExternalStore</code>, so it needs <Ink as="span" weight="semibold">no <code>StylesProvider</code></Ink> (unlike <code>useDevice</code> / <code>useTheme</code>).</Ink>
 
 <Line />
 
@@ -28,8 +26,7 @@ function Gallery() {
 }
 ```
 
-`BreakpointName` is `"phone" | "tablet" | "laptop" | "desktop"`, smallest to
-largest. The breakpoint constants are exported too:
+<Ink as="span"><code>BreakpointName</code> is <code>"phone" | "tablet" | "laptop" | "desktop"</code>, smallest to largest. The breakpoint constants are exported too:</Ink>
 
 ```tsx
 import { useBreakpoint, BREAKPOINT_DESKTOP } from "nice-react-styles"
@@ -42,33 +39,34 @@ const wide = bp === BREAKPOINT_DESKTOP
 
 <Ink as="h2">Prefer CSS for styling — reach for this only to swap trees</Ink>
 
-`useBreakpoint` runs in JS, so it carries costs the CSS layer doesn't:
+<Ink as="span"><code>useBreakpoint</code> runs in JS, so it carries costs the CSS layer doesn't:</Ink>
 
-- **SSR snapshot is `"phone"`** (phone-first). The server renders the phone
+<ul>
+  <li><Ink as="span"><Ink as="span" weight="semibold">SSR snapshot is <code>"phone"</code></Ink> (phone-first). The server renders the phone</Ink></li>
+</ul>
   branch; the client re-renders on hydration if the viewport is wider — a
   potential flash for non-phone branches.
-- JS-gated content isn't in the initial HTML.
-- The subtree re-renders on every viewport cross.
+<ul>
+  <li><Ink as="span">JS-gated content isn't in the initial HTML.</Ink></li>
+  <li><Ink as="span">The subtree re-renders on every viewport cross.</Ink></li>
+</ul>
 
-So it's the **escape hatch** for cases CSS can't express — swapping component
-**identity / behavior** (a carousel vs a grid, different event wiring), or
-**avoiding mounting** an expensive subtree on the wrong band (CSS `display: none`
-still mounts it and runs its effects). For purely visual differences, prefer the
-CSS layer:
+<Ink as="span">So it's the <Ink as="span" weight="semibold">escape hatch</Ink> for cases CSS can't express — swapping component <Ink as="span" weight="semibold">identity / behavior</Ink> (a carousel vs a grid, different event wiring), or <Ink as="span" weight="semibold">avoiding mounting</Ink> an expensive subtree on the wrong band (CSS <code>display: none</code> still mounts it and runs its effects). For purely visual differences, prefer the CSS layer:</Ink>
 
-| Need | Use |
-|---|---|
-| Responsive styling on a nice component | the `breakpoints` prop (`withBreakpoints`) |
-| Responsive token value | breakpoint variants in `setTokens` (some tokens flip per breakpoint in `nice-styles/tokens.css`) |
-| Hide/show at a breakpoint in plain CSS | `nice-styles/breakpoints.css` utilities (`.np-hide-tablet-up`) |
-| A media query in CSS-in-JS | `getBreakpoint("tablet+")` |
-| Your own `@media` in a plain CSS file | `nice-styles/breakpoints.custom-media.css` + `postcss-custom-media` (opt-in) |
-| Swap component trees / avoid mounting | **`useBreakpoint`** |
+<DataTable
+  columns={[{ key: "c0", header: "Need" }, { key: "c1", header: "Use" }]}
+  tables={[{ rows: [
+    { id: "0", values: [<Ink as="span">Responsive styling on a nice component</Ink>, <Ink as="span">the <code>breakpoints</code> prop (<code>withBreakpoints</code>)</Ink>] },
+    { id: "1", values: [<Ink as="span">Responsive token value</Ink>, <Ink as="span">breakpoint variants in <code>setTokens</code> (some tokens flip per breakpoint in <code>nice-styles/tokens.css</code>)</Ink>] },
+    { id: "2", values: [<Ink as="span">Hide/show at a breakpoint in plain CSS</Ink>, <Ink as="span"><code>nice-styles/breakpoints.css</code> utilities (<code>.np-hide-tablet-up</code>)</Ink>] },
+    { id: "3", values: [<Ink as="span">A media query in CSS-in-JS</Ink>, <Ink as="span"><code>getBreakpoint("tablet+")</code></Ink>] },
+    { id: "4", values: [<Ink as="span">Your own <code>@media</code> in a plain CSS file</Ink>, <Ink as="span"><code>nice-styles/breakpoints.custom-media.css</code> + <code>postcss-custom-media</code> (opt-in)</Ink>] },
+    { id: "5", values: [<Ink as="span">Swap component trees / avoid mounting</Ink>, <Ink as="span"><Ink as="span" weight="semibold"><code>useBreakpoint</code></Ink></Ink>] },
+  ] }]}
+/>
 
 <Line />
 
 <Ink as="h2">SSR</Ink>
 
-The server snapshot is always `"phone"`. If the server rendered at a larger
-breakpoint, the component re-renders on hydration once the client snapshot takes
-over. No `window` access happens during SSR.
+<Ink as="span">The server snapshot is always <code>"phone"</code>. If the server rendered at a larger breakpoint, the component re-renders on hydration once the client snapshot takes over. No <code>window</code> access happens during SSR.</Ink>

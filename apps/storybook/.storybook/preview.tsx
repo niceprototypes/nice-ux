@@ -61,6 +61,7 @@ const preview: Preview = {
           />
           <ContentFlex
             direction="column"
+            gap="base"
             wrapped={getItemForEntry(new URLSearchParams(window.location.search).get("id") ?? "")?.settings.wrapped === true}
           >
             {children}

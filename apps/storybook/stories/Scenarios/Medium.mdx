@@ -73,27 +73,37 @@ export default function App() {
 
 <Ink as="span">Writes overrides, custom tokens, and breakpoint floors to the page as CSS variables. Run it once, at module load.</Ink>
 
-- A string is static; an object keyed by breakpoints is responsive. `laptop` is
+<ul>
+  <li><Ink as="span">A string is static; an object keyed by breakpoints is responsive. <code>laptop</code> is</Ink></li>
+</ul>
   one band, `laptop+` is that band and up, `laptop-` is that band and down.
-- A band with no key keeps the library default — here, `tablet`.
-- Values are emitted as written, so include a fallback font.
-- Headings read `fontFamily.heading`, not `base`.
+<ul>
+  <li><Ink as="span">A band with no key keeps the library default — here, <code>tablet</code>.</Ink></li>
+  <li><Ink as="span">Values are emitted as written, so include a fallback font.</Ink></li>
+  <li><Ink as="span">Headings read <code>fontFamily.heading</code>, not <code>base</code>.</Ink></li>
+</ul>
 
 <Ink as="h2">2. Styled components — <Code code="getToken" language="tsx" inlined />, <Code code="getBreakpoint" language="tsx" inlined /></Ink>
 
-<Ink as="span"><Ink as="span" code>getToken</Ink> returns a <Ink as="span" code>var()</Ink>, so responsive and themed values follow the viewport and theme on their own. <Ink as="span" code>getBreakpoint</Ink> returns a fixed <Ink as="span" code>@media</Ink> string built when it is called.</Ink>
+<Ink as="span"><code>getToken</code> returns a <code>var()</code>, so responsive and themed values follow the viewport and theme on their own. <code>getBreakpoint</code> returns a fixed <code>@media</code> string built when it is called.</Ink>
 
-- Call `setTokens` first — a `getBreakpoint` evaluated earlier keeps the default
+<ul>
+  <li><Ink as="span">Call <code>setTokens</code> first — a <code>getBreakpoint</code> evaluated earlier keeps the default</Ink></li>
+</ul>
   1280px floor. Keep it in its own module, imported first.
-- Unknown token names are compile errors.
+<ul>
+  <li><Ink as="span">Unknown token names are compile errors.</Ink></li>
+</ul>
 
 <Ink as="h2">3. Provider — <Code code="StylesProvider" language="tsx" inlined /></Ink>
 
-<Ink as="span">Supplies tokens to nice components and loads fonts. <Ink as="span" code>googleFonts</Ink> adds the font links to <Ink as="span" code>{"<head>"}</Ink> once.</Ink>
+<Ink as="span">Supplies tokens to nice components and loads fonts. <code>googleFonts</code> adds the font links to <code>{"<head>"}</code> once.</Ink>
 
-- Loading a font does not apply it; the `fontFamily` tokens do.
-- Request every weight used — `h1`–`h3` render at 700.
+<ul>
+  <li><Ink as="span">Loading a font does not apply it; the <code>fontFamily</code> tokens do.</Ink></li>
+  <li><Ink as="span">Request every weight used — <code>h1</code>–<code>h3</code> render at 700.</Ink></li>
+</ul>
 
 <Ink as="h2">4. Components — <Code code="Ink" language="tsx" inlined />, <Code code="Button" language="tsx" inlined /></Ink>
 
-<Ink as="span">Read the same tokens, so they restyle with no extra CSS. <Ink as="span" code>Ink as="h1"</Ink> uses the heading font and <Ink as="span" code>fontSize.larger</Ink>; <Ink as="span" code>Button</Ink> inherits <Ink as="span" code>Card</Ink>'s font.</Ink>
+<Ink as="span">Read the same tokens, so they restyle with no extra CSS. <code>Ink as="h1"</code> uses the heading font and <code>fontSize.larger</code>; <code>Button</code> inherits <code>Card</code>'s font.</Ink>

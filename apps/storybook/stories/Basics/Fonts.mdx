@@ -37,7 +37,7 @@ import { injectFonts } from "nice-styles"
 injectFonts({ googleFonts: "https://fonts.googleapis.com/…" })
 ```
 
-Output:
+<Ink as="span">Output:</Ink>
 
 ```html
 <link data-nice-font="" rel="preconnect" href="https://fonts.googleapis.com">
@@ -55,7 +55,7 @@ import { injectFonts } from "nice-styles"
 injectFonts({ adobeFonts: "https://use.typekit.net/…" })
 ```
 
-Output:
+<Ink as="span">Output:</Ink>
 
 ```html
 <link data-nice-font="" rel="preconnect" href="https://use.typekit.net">
@@ -67,7 +67,7 @@ Output:
 
 <Ink as="h3">Custom fonts</Ink>
 
-Use the `injectFonts` function to inject preconnects and stylesheets for your font family:
+<Ink as="span">Use the <code>injectFonts</code> function to inject preconnects and stylesheets for your font family:</Ink>
 
 ```ts
 import { injectFonts } from "nice-styles"
@@ -80,7 +80,7 @@ injectFonts({
 })
 ```
 
-Output:
+<Ink as="span">Output:</Ink>
 
 ```html
 <link data-nice-font="" rel="preconnect" href="https://cdn.example.com">
@@ -95,7 +95,7 @@ Output:
 
 <Install package="react-styles" />
 
-Call `setTokens` once on module load, from its own `tokens.ts`:
+<Ink as="span">Call <code>setTokens</code> once on module load, from its own <code>tokens.ts</code>:</Ink>
 
 ```tsx
 // tokens.ts
@@ -113,7 +113,7 @@ setTokens({
 
 <Ink as="h3">2. Get tokens</Ink>
 
-Use props on `StylesProvider` to inject and control fonts for your React project:
+<Ink as="span">Use props on <code>StylesProvider</code> to inject and control fonts for your React project:</Ink>
 
 <NewLines />
 

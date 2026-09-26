@@ -4,6 +4,7 @@ import { getColumns } from "../../src/data"
 import PreviewCell from "../../src/components/PreviewCell"
 import { transformColor, getToken } from "nice-react-styles"
 import { DataTable } from "../../src/components/DataTable"
+import Ink from "../../src/nice/Ink"
 
 <Meta title="Tokens/Colors/transformColor" />
 
@@ -39,17 +40,14 @@ export const hslaExamples = [
   },
 ]
 
-These adjust a colour's channels and return CSS relative colour syntax over the
-token's variable, so the result keeps following day and night. It is the same
-expression `getToken` returns for a `transform`:
+<Ink as="span">These adjust a colour's channels and return CSS relative colour syntax over the token's variable, so the result keeps following day and night. It is the same expression <code>getToken</code> returns for a <code>transform</code>:</Ink>
 
 ```tsx
 getToken("color:error", { transform: [null, null, "*0.5", null] })
 // hsl(from var(--np--color--error) h s calc(l * 0.5))
 ```
 
-Channels are `[hue, saturation, lightness, alpha]`. A number sets the channel,
-`"+30"` and `"-30"` shift it, `"*0.5"` scales it, and `null` leaves it alone.
+<Ink as="span">Channels are <code>[hue, saturation, lightness, alpha]</code>. A number sets the channel, <code>"+30"</code> and <code>"-30"</code> shift it, <code>"*0.5"</code> scales it, and <code>null</code> leaves it alone.</Ink>
 
 {/* Columns mirror the module tables above one-for-one so the two line up, which
     is also why columnWidths is their constant rather than a local copy. The CSS

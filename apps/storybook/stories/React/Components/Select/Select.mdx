@@ -6,6 +6,7 @@ import { selectExampleList } from "./examples"
 import NewLines from "../../../../src/components/NewLines"
 import Callout from "../../../../src/components/Callout"
 import Ink from "../../../../src/nice/Ink"
+import { DataTable } from "../../../../src/components/DataTable"
 
 <Meta title="Components/Forms/Select" />
 
@@ -41,45 +42,34 @@ import Select from "nice-react-select"
 
 <Ink as="h2">Guide</Ink>
 
-By default Select is a WAI-ARIA select-only combobox: Input rendered read-only
-with `role="combobox"`, opening a Popover that holds a `role="listbox"` List.
-DOM focus stays on the combobox and the active option is exposed with
-`aria-activedescendant`. Set `native` to render the platform `<select>` instead.
-Both modes are single-value (no `multiple`), render the chevron in Input's `end`
-slot, and call `onChange(value, event)`. The combobox calls it only when the
-value changes.
+<Ink as="span">By default Select is a WAI-ARIA select-only combobox: Input rendered read-only with <code>role="combobox"</code>, opening a Popover that holds a <code>role="listbox"</code> List. DOM focus stays on the combobox and the active option is exposed with <code>aria-activedescendant</code>. Set <code>native</code> to render the platform <code>{"<select>"}</code> instead. Both modes are single-value (no <code>multiple</code>), render the chevron in Input's <code>end</code> slot, and call <code>onChange(value, event)</code>. The combobox calls it only when the value changes.</Ink>
 
-`SelectProps` is discriminated on `native`, so `ref` is typed for the element
-rendered: the combobox `HTMLInputElement`, or the `HTMLSelectElement`. Every
-other Input prop passes through (`status`, `filled`, `width`, `className`,
-`theme`, `id`, …).
+<Ink as="span"><code>SelectProps</code> is discriminated on <code>native</code>, so <code>ref</code> is typed for the element rendered: the combobox <code>HTMLInputElement</code>, or the <code>HTMLSelectElement</code>. Every other Input prop passes through (<code>status</code>, <code>filled</code>, <code>width</code>, <code>className</code>, <code>theme</code>, <code>id</code>, …).</Ink>
 
 ```jsx
 <Select options={options} />          // combobox (default)
 <Select native options={options} />   // platform <select>
 ```
 
-Combobox keyboard, with focus on the control:
+<Ink as="span">Combobox keyboard, with focus on the control:</Ink>
 
-| Key | Closed | Open |
-|-----|--------|------|
-| ArrowDown / ArrowUp | Open on the selected option (else the first enabled) | Next / previous enabled option, no wrap |
-| Alt + ArrowUp | — | Select the active option and close |
-| Enter / Space | Open | Select the active option and close |
-| Home / End | Open on the first / last enabled option | First / last enabled option |
-| PageUp / PageDown | — | 10 options up / down |
-| Escape | — | Close without changing the value |
-| Tab | Focus moves | Select the active option, close, focus moves |
-| Printable characters | Open on the first match | Move to the matching option |
+<DataTable
+  columns={[{ key: "c0", header: "Key" }, { key: "c1", header: "Closed" }, { key: "c2", header: "Open" }]}
+  tables={[{ rows: [
+    { id: "0", values: [<Ink as="span">ArrowDown / ArrowUp</Ink>, <Ink as="span">Open on the selected option (else the first enabled)</Ink>, <Ink as="span">Next / previous enabled option, no wrap</Ink>] },
+    { id: "1", values: [<Ink as="span">Alt + ArrowUp</Ink>, <Ink as="span">—</Ink>, <Ink as="span">Select the active option and close</Ink>] },
+    { id: "2", values: [<Ink as="span">Enter / Space</Ink>, <Ink as="span">Open</Ink>, <Ink as="span">Select the active option and close</Ink>] },
+    { id: "3", values: [<Ink as="span">Home / End</Ink>, <Ink as="span">Open on the first / last enabled option</Ink>, <Ink as="span">First / last enabled option</Ink>] },
+    { id: "4", values: [<Ink as="span">PageUp / PageDown</Ink>, <Ink as="span">—</Ink>, <Ink as="span">10 options up / down</Ink>] },
+    { id: "5", values: [<Ink as="span">Escape</Ink>, <Ink as="span">—</Ink>, <Ink as="span">Close without changing the value</Ink>] },
+    { id: "6", values: [<Ink as="span">Tab</Ink>, <Ink as="span">Focus moves</Ink>, <Ink as="span">Select the active option, close, focus moves</Ink>] },
+    { id: "7", values: [<Ink as="span">Printable characters</Ink>, <Ink as="span">Open on the first match</Ink>, <Ink as="span">Move to the matching option</Ink>] },
+  ] }]}
+/>
 
-Typeahead matches option text by prefix, case-insensitive; characters typed
-within 500 ms form one search, and Space inside a search is part of it.
-Disabled options are skipped. Blur, or a pointer press outside, closes without
-changing the value.
+<Ink as="span">Typeahead matches option text by prefix, case-insensitive; characters typed within 500 ms form one search, and Space inside a search is part of it. Disabled options are skipped. Blur, or a pointer press outside, closes without changing the value.</Ink>
 
-The combobox has no `name`. `name` goes on a hidden input that carries the
-value, so `FormData` and native form posts work. Native mode submits like any
-`<select>`.
+<Ink as="span">The combobox has no <code>name</code>. <code>name</code> goes on a hidden input that carries the value, so <code>FormData</code> and native form posts work. Native mode submits like any <code>{"<select>"}</code>.</Ink>
 
 ```jsx
 <form>
@@ -89,15 +79,8 @@ value, so `FormData` and native form posts work. Native mode submits like any
 // new FormData(form).get("country") → "nl"
 ```
 
-`required` (or a Field's `required`) is rendered on the read-only combobox, so
-assistive technology announces it, but browsers do not run constraint
-validation on read-only or hidden inputs: the form submits with an empty value.
-Validate in your submit handler and show the error through Field, or use
-`native`.
+<Ink as="span"><code>required</code> (or a Field's <code>required</code>) is rendered on the read-only combobox, so assistive technology announces it, but browsers do not run constraint validation on read-only or hidden inputs: the form submits with an empty value. Validate in your submit handler and show the error through Field, or use <code>native</code>.</Ink>
 
-Options carry `start` and `end` content (an icon, a badge) that renders before
-and after the label in the listbox. A native `<option>` renders text only, so
-the slots are ignored with `native`. The trigger shows, and typeahead matches,
-the label when it is a string or number, otherwise the value.
+<Ink as="span">Options carry <code>start</code> and <code>end</code> content (an icon, a badge) that renders before and after the label in the listbox. A native <code>{"<option>"}</code> renders text only, so the slots are ignored with <code>native</code>. The trigger shows, and typeahead matches, the label when it is a string or number, otherwise the value.</Ink>
 
 <Callout type="hint">The combobox does not validate `required` natively — validate on submit, or use `native`.</Callout>

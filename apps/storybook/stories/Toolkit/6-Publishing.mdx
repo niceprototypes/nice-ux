@@ -11,17 +11,13 @@ import Ink from "../../src/nice/Ink"
 
 <StoryHeader title="Publishing" />
 
-Publishing is driven by per-package bump intent. Each publishable package records
-what changed in `.nice/bump.md`; `--publish` reads those entries to recommend
-version bumps, then builds and publishes the affected packages in dependency
-order.
+<Ink as="span">Publishing is driven by per-package bump intent. Each publishable package records what changed in <code>.nice/bump.md</code>; <code>--publish</code> reads those entries to recommend version bumps, then builds and publishes the affected packages in dependency order.</Ink>
 
 <Line />
 
 <Ink as="h2"><Code code="--bump" language="bash" inlined /> — record intent</Ink>
 
-Append one entry to the current package's `.nice/bump.md`. Commit it alongside
-the change it describes.
+<Ink as="span">Append one entry to the current package's <code>.nice/bump.md</code>. Commit it alongside the change it describes.</Ink>
 
 ```bash
 nicely --bump minor "Add useBreakpoint hook"
@@ -29,16 +25,13 @@ nicely --bump major "Rename breakpoint identifiers small/medium/large to phone/t
 nicely --bump patch "Fix icon stroke width regression"
 ```
 
-Each entry is `[<timestamp>] <level>: <message>`. The message doubles as the git
-commit subject (drop the `level:` prefix in the commit). Write it for a consumer
-reading release notes, not as a diff summary. Direct-editing `.nice/bump.md` is
-equivalent to `--bump`.
+<Ink as="span">Each entry is <code>{"[<timestamp>] <level>: <message>"}</code>. The message doubles as the git commit subject (drop the <code>level:</code> prefix in the commit). Write it for a consumer reading release notes, not as a diff summary. Direct-editing <code>.nice/bump.md</code> is equivalent to <code>--bump</code>.</Ink>
 
 <Line />
 
 <Ink as="h2"><Code code="--publish" language="bash" inlined /></Ink>
 
-Publishes changed packages to npm, resolving the full dependency cascade.
+<Ink as="span">Publishes changed packages to npm, resolving the full dependency cascade.</Ink>
 
 ```bash
 # Publish all changed packages (interactive)
@@ -65,9 +58,7 @@ nicely --publish --dry-run
 7. Clears the consumed .nice/bump.md files, commits the version bump, pushes
 ```
 
-Publish order comes from `nice-toolkit/registry.json` (bottom-to-top per the
-dependency chain). Run `nicely --publish --dry-run` to see the current order and the
-recommended bumps.
+<Ink as="span">Publish order comes from <code>nice-toolkit/registry.json</code> (bottom-to-top per the dependency chain). Run <code>nicely --publish --dry-run</code> to see the current order and the recommended bumps.</Ink>
 
 <Line />
 
@@ -81,5 +72,4 @@ nicely --publish --no-npm
 nicely --dry-publish
 ```
 
-`--no-npm` is useful to verify the pipeline, or to push version bumps and let CI
-handle the actual npm publish.
+<Ink as="span"><code>--no-npm</code> is useful to verify the pipeline, or to push version bumps and let CI handle the actual npm publish.</Ink>

@@ -29,7 +29,7 @@ export default createConfiguration({ plugins: [...] })
 
 <Ink as="h2">createConfiguration</Ink>
 
-Creates a complete rollup configuration with sensible defaults for nice-* packages. Outputs both CJS and ESM formats with sourcemaps. All plugins are included by default.
+<Ink as="span">Creates a complete rollup configuration with sensible defaults for nice-* packages. Outputs both CJS and ESM formats with sourcemaps. All plugins are included by default.</Ink>
 
 ```typescript
 // rollup.config.js
@@ -63,7 +63,7 @@ export default createConfiguration({
 
 <Ink as="h4">Default Plugins</Ink>
 
-The following plugins are included automatically:
+<Ink as="span">The following plugins are included automatically:</Ink>
 
 ```text
 • rollup-plugin-peer-deps-external
@@ -77,7 +77,7 @@ The following plugins are included automatically:
 
 <Ink as="h2">isNiceExternal</Ink>
 
-Pattern-based external detection that automatically externalizes all nice-* packages, React ecosystem, and styled-components. Handles subpath imports like CSS files.
+<Ink as="span">Pattern-based external detection that automatically externalizes all nice-* packages, React ecosystem, and styled-components. Handles subpath imports like CSS files.</Ink>
 
 ```typescript
 import { isNiceExternal } from "nice-config-rollup"
@@ -95,7 +95,7 @@ isNiceExternal("lodash")                // other packages
 
 <Ink as="h4">Manual Usage</Ink>
 
-If you need custom rollup config, use `isNiceExternal` directly:
+<Ink as="span">If you need custom rollup config, use <code>isNiceExternal</code> directly:</Ink>
 
 ```typescript
 // rollup.config.js
@@ -113,7 +113,7 @@ export default {
 
 <Ink as="h2">Watch Mode Configuration</Ink>
 
-The configuration includes optimized watch settings that prevent file caching issues during local development. This ensures changes appear immediately without delay.
+<Ink as="span">The configuration includes optimized watch settings that prevent file caching issues during local development. This ensures changes appear immediately without delay.</Ink>
 
 ```typescript
 // Included automatically in createConfiguration()
@@ -136,13 +136,13 @@ The configuration includes optimized watch settings that prevent file caching is
 
 <Ink as="h4">Why These Settings?</Ink>
 
-Without these settings, rollup's watch mode can exhibit an "off by one" caching bug where file changes appear one save behind. The `awaitWriteFinish` option ensures files are fully written to disk before rollup reads them, and `usePolling` provides more reliable file change detection on macOS.
+<Ink as="span">Without these settings, rollup's watch mode can exhibit an "off by one" caching bug where file changes appear one save behind. The <code>awaitWriteFinish</code> option ensures files are fully written to disk before rollup reads them, and <code>usePolling</code> provides more reliable file change detection on macOS.</Ink>
 
 <Line />
 
 <Ink as="h2">createExternals</Ink>
 
-Creates an external function with additional packages or bundle overrides.
+<Ink as="span">Creates an external function with additional packages or bundle overrides.</Ink>
 
 ```typescript
 import { createExternals } from "nice-config-rollup"
@@ -171,5 +171,5 @@ export default {
 }
 ```
 
-Note: Legacy array format is still supported for backwards compatibility.
+<Ink as="span">Note: Legacy array format is still supported for backwards compatibility.</Ink>
 

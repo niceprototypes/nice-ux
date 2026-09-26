@@ -23,11 +23,11 @@ import { viteWatcher } from "nice-vite-watcher"
 
 <Ink as="h2">The Problem</Ink>
 
-When developing with `npm link` or `file:` dependencies, Vite's dev server doesn't detect changes in linked packages. You're forced to restart the dev server every time you modify a linked package.
+<Ink as="span">When developing with <code>npm link</code> or <code>file:</code> dependencies, Vite's dev server doesn't detect changes in linked packages. You're forced to restart the dev server every time you modify a linked package.</Ink>
 
 <Ink as="h4">The Solution</Ink>
 
-This plugin watches the dist folder of linked packages and triggers a browser reload when they rebuild.
+<Ink as="span">This plugin watches the dist folder of linked packages and triggers a browser reload when they rebuild.</Ink>
 
 ```text
 Developer edits source
@@ -43,13 +43,13 @@ Browser reloads
 
 <Ink as="h4">Vite Only</Ink>
 
-This plugin is for Vite projects (including Storybook with Vite). For webpack/CRA projects, use `nice-toolkit --dev --watch` instead.
+<Ink as="span">This plugin is for Vite projects (including Storybook with Vite). For webpack/CRA projects, use <code>nice-toolkit --dev --watch</code> instead.</Ink>
 
 <Line />
 
 <Ink as="h2">viteWatcher</Ink>
 
-Creates the Vite plugin that watches linked package dist folders.
+<Ink as="span">Creates the Vite plugin that watches linked package dist folders.</Ink>
 
 ```typescript
 // vite.config.ts
@@ -84,7 +84,7 @@ export default defineConfig({
 
 <Ink as="h2">getSourceAliases</Ink>
 
-Generates Vite resolve aliases pointing to package source files. Use this for packages without special build transforms to get true HMR with state preservation.
+<Ink as="span">Generates Vite resolve aliases pointing to package source files. Use this for packages without special build transforms to get true HMR with state preservation.</Ink>
 
 ```typescript
 import { getSourceAliases } from 'nice-vite-watcher'
@@ -109,7 +109,7 @@ const aliases = getSourceAliases(
 
 <Ink as="h2">Combining Both Approaches</Ink>
 
-For the best experience, use source aliases for simple packages (true HMR) and dist watching for packages with build transforms (SVGR, PostCSS, etc.).
+<Ink as="span">For the best experience, use source aliases for simple packages (true HMR) and dist watching for packages with build transforms (SVGR, PostCSS, etc.).</Ink>
 
 ```typescript
 // vite.config.ts
@@ -154,7 +154,7 @@ export default defineConfig({
 
 <Ink as="h2">Storybook Integration</Ink>
 
-Works with Storybook's Vite builder via `viteFinal` config.
+<Ink as="span">Works with Storybook's Vite builder via <code>viteFinal</code> config.</Ink>
 
 ```typescript
 // .storybook/main.ts
@@ -190,11 +190,11 @@ const config: StorybookConfig = {
 
 <Ink as="h4">Full Page Reload</Ink>
 
-Packages watched via dist (not source-aliased) trigger full reloads, not granular HMR. This resets React component state.
+<Ink as="span">Packages watched via dist (not source-aliased) trigger full reloads, not granular HMR. This resets React component state.</Ink>
 
 <Ink as="h4">Build Pipeline Delay</Ink>
 
-You need to wait for the linked package's build to complete before changes appear. Run the package in watch mode for faster iteration.
+<Ink as="span">You need to wait for the linked package's build to complete before changes appear. Run the package in watch mode for faster iteration.</Ink>
 
 ```bash
 # In the linked package directory
@@ -203,7 +203,7 @@ npm run dev  # or npm run build --watch
 
 <Ink as="h4">Why Not Source Aliases for Everything?</Ink>
 
-Source aliases bypass the package's build pipeline, which breaks packages using:
+<Ink as="span">Source aliases bypass the package's build pipeline, which breaks packages using:</Ink>
 
 ```text
 • SVGR — transforms SVG imports to React components

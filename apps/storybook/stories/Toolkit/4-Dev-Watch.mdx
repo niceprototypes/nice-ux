@@ -3,6 +3,7 @@ import { StoryHeader } from "../../src/components/Story"
 import Line from "../../src/components/Line"
 import Code from "../../src/nice/Code"
 import Ink from "../../src/nice/Ink"
+import Callout from "../../src/components/Callout"
 
 <Meta
   title="Toolkit/4. Dev & Watch"
@@ -11,16 +12,13 @@ import Ink from "../../src/nice/Ink"
 
 <StoryHeader title="Dev & Watch" />
 
-Keep linked packages rebuilding — and consumers reloading — as you edit their
-source. Two flags, usually run together.
+<Ink as="span">Keep linked packages rebuilding — and consumers reloading — as you edit their source. Two flags, usually run together.</Ink>
 
 <Line />
 
 <Ink as="h2"><Code code="--dev" language="bash" inlined /></Ink>
 
-Runs `npm run dev` (the package's rollup/gen watcher) in every linked package
-concurrently, rebuilding each on source change. Packages without a `dev` script
-are skipped.
+<Ink as="span">Runs <code>npm run dev</code> (the package's rollup/gen watcher) in every linked package concurrently, rebuilding each on source change. Packages without a <code>dev</code> script are skipped.</Ink>
 
 ```bash
 nicely --dev
@@ -30,8 +28,7 @@ nicely --dev
 
 <Ink as="h2"><Code code="--watch" language="bash" inlined /></Ink>
 
-Watches each linked package's `dist/` folder and touches a trigger file when a
-build lands, which makes webpack/CRA recompile.
+<Ink as="span">Watches each linked package's <code>dist/</code> folder and touches a trigger file when a build lands, which makes webpack/CRA recompile.</Ink>
 
 ```bash
 nicely --watch
@@ -42,7 +39,7 @@ nicely --watch --watch-dir build
 
 <Ink as="h4">CRA / webpack setup</Ink>
 
-Import the trigger file from your entry point and git-ignore it:
+<Ink as="span">Import the trigger file from your entry point and git-ignore it:</Ink>
 
 ```typescript
 // src/index.tsx
@@ -54,14 +51,13 @@ import './.symlink-trigger.js'
 .symlink-trigger.js
 ```
 
-Vite projects (Storybook, Vite apps) use `nice-vite-watcher` instead of the
-trigger file — the plugin watches linked dists directly.
+<Ink as="span">Vite projects (Storybook, Vite apps) use <code>nice-vite-watcher</code> instead of the trigger file — the plugin watches linked dists directly.</Ink>
 
 <Line />
 
 <Ink as="h2"><Code code="--dev --watch" language="bash" inlined /> (recommended)</Ink>
 
-Combines both: rebuild on source change **and** trigger the consumer to reload.
+<Ink as="span">Combines both: rebuild on source change <Ink as="span" weight="semibold">and</Ink> trigger the consumer to reload.</Ink>
 
 ```bash
 # package.json
@@ -93,12 +89,6 @@ CRA / webpack recompiles  (Vite: nice-vite-watcher reloads)
 
 <Ink as="h2">Don't run a one-shot build alongside it</Ink>
 
-`--dev --watch` writes the same dist files a `--build-all` / `--build-icons`
-pass does. Running both at once races on `dist/`. `--build-icons` guards against
-this by prompting to stop the watcher first (see
-[Building](/docs/toolkit-3-building--docs)); `--reset` stops it automatically.
+<Ink as="span"><code>--dev --watch</code> writes the same dist files a <code>--build-all</code> / <code>--build-icons</code> pass does. Running both at once races on <code>dist/</code>. <code>--build-icons</code> guards against this by prompting to stop the watcher first (see <a href="/?path=/docs/toolkit-3-building--docs" target="_top">Building</a>); <code>--reset</code> stops it automatically.</Ink>
 
-> Editing an icon while `--dev --watch` runs rebuilds `nice-react-icon`'s dist
-> correctly, but a Vite dev server (Storybook) may keep serving its cached copy
-> until bounced — see
-> [Troubleshooting → icons not updating](/docs/toolkit-7-troubleshooting--docs).
+<Callout><Ink as="span">Editing an icon while <code>--dev --watch</code> runs rebuilds <code>nice-react-icon</code>'s dist correctly, but a Vite dev server (Storybook) may keep serving its cached copy until bounced — see <a href="/?path=/docs/toolkit-7-troubleshooting--docs" target="_top">Troubleshooting → icons not updating</a>.</Ink></Callout>

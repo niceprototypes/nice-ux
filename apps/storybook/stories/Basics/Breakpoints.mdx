@@ -20,7 +20,7 @@ import Ink from "../../src/nice/Ink"
 <Ink as="h2">Get breakpoints</Ink>
 
 <Ink>
-  Configure your design for{" "}
+  Configure your design for
   <Ink
     as="span"
     weight="semibold"
@@ -102,7 +102,7 @@ const Wrapper = styled.div`
 
 <Ink as="h2">Set breakpoints</Ink>
 
-Thresholds are the pixel floors each breakpoint starts at. Set them with the `breakpoints` key of `setTokens`, alongside your tokens. Thresholds apply first, so responsive values in the same call use the new ones:
+<Ink as="span">Thresholds are the pixel floors each breakpoint starts at. Set them with the <code>breakpoints</code> key of <code>setTokens</code>, alongside your tokens. Thresholds apply first, so responsive values in the same call use the new ones:</Ink>
 
 ```ts
 import { setTokens } from "nice-react-styles"
@@ -117,7 +117,7 @@ setTokens({
 
 <Ink as="h3">Breakpoints only</Ink>
 
-If a call sets nothing but thresholds, `setBreakpoints` is the shortcut:
+<Ink as="span">If a call sets nothing but thresholds, <code>setBreakpoints</code> is the shortcut:</Ink>
 
 ```ts
 import { setBreakpoints } from "nice-react-styles"
@@ -133,7 +133,7 @@ setBreakpoints({
 
 <NewLines />
 
-Both forms take any subset of `tablet`, `laptop`, and `desktop`; `phone` is the base below the first floor and cannot be set. Values must be positive and ascending, or the call throws. Setting a threshold moves every `@media` block that uses it — generated tokens, component overrides, and the values of earlier `setTokens` calls — so `getBreakpoint`, `useBreakpoint`, and the CSS stay on one table.
+<Ink as="span">Both forms take any subset of <code>tablet</code>, <code>laptop</code>, and <code>desktop</code>; <code>phone</code> is the base below the first floor and cannot be set. Values must be positive and ascending, or the call throws. Setting a threshold moves every <code>@media</code> block that uses it — generated tokens, component overrides, and the values of earlier <code>setTokens</code> calls — so <code>getBreakpoint</code>, <code>useBreakpoint</code>, and the CSS stay on one table.</Ink>
 
 <Line />
 
@@ -220,7 +220,7 @@ Both forms take any subset of `tablet`, `laptop`, and `desktop`; `phone` is the 
 
 <Ink as="h2">Live demo</Ink>
 
-Zoom your browser to simulate different screen sizes.
+<Ink as="span">Zoom your browser to simulate different screen sizes.</Ink>
 
 <ResponsiveDemo
   items={[

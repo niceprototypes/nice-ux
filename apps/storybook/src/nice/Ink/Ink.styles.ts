@@ -17,7 +17,13 @@ export const StyledInk = styled(NiceInk)`
   a {
     color: ${getToken("color", "link")};
   }
+  /* Inline code inside prose renders as a chip. */
   code {
     font-family: ${getToken("fontFamily", "code")};
+    font-size: 0.9em;
+    padding: 0.1em 0.35em;
+    border: ${getToken("borderWidth", "small")} solid ${getToken("borderColor", "subtle")};
+    border-radius: ${getToken("borderRadius", "small")};
+    background-color: ${getToken("backgroundColor", "raised")};
   }
 ` as unknown as React.FC<InkProps & { forwardedAs?: InkProps["as"]; className?: string }>

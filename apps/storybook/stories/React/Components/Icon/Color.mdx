@@ -5,6 +5,7 @@ import StoryDescription from "../../../../src/components/StoryDescription"
 import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 import { DataTable } from "../../../../src/components/DataTable"
 import { colors } from "./Icon.services"
+import Ink from "../../../../src/nice/Ink"
 
 <Meta title="Components/Icon/color" />
 
@@ -14,15 +15,13 @@ import { colors } from "./Icon.services"
   Sets the color of the icon using color tokens.
 </StoryDescription>
 
-Pass an object to adjust the token's channels. The color stays a token, so it
-still follows day and night:
+<Ink as="span">Pass an object to adjust the token's channels. The color stays a token, so it still follows day and night:</Ink>
 
 ```tsx
 <Icon name="lightning" color={{ name: "highlight", transform: [null, null, 40, null] }} />
 ```
 
-Channels are `[hue, saturation, lightness, alpha]`. A number sets the channel,
-`"+10"` and `"-10"` shift it, `"*0.5"` scales it, and `null` leaves it alone.
+<Ink as="span">Channels are <code>[hue, saturation, lightness, alpha]</code>. A number sets the channel, <code>"+10"</code> and <code>"-10"</code> shift it, <code>"*0.5"</code> scales it, and <code>null</code> leaves it alone.</Ink>
 
 <DataTable
   showHeader={false}

@@ -1,6 +1,8 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
 import Callout from "../../src/components/Callout"
+import Ink from "../../src/nice/Ink"
+import { DataTable } from "../../src/components/DataTable"
 
 <Meta
   title="Manifest/Read"
@@ -12,14 +14,17 @@ import Callout from "../../src/components/Callout"
   description="Understanding the Nice ecosystem's existing structure — the phase before any change."
 />
 
-Files here are topic references: load the one your task or the root index points to, not all of them.
+<Ink as="span">Files here are topic references: load the one your task or the root index points to, not all of them.</Ink>
 
-| File | Contents |
-|------|----------|
-| `inheritance.md` | Package hierarchy, dependency graph, layered system design. |
-| `audit.md` | The audits — architecture (manifest ↔ architecture ↔ stories) and full (architecture + all consumers) — their trigger phrases and scope, plus known manifest gaps. |
-| `projects/storybook.md` | nice-storybook structure and scripts. |
-| `projects/website.md` | nice-website-2025 structure and scripts. |
-| `styles/tokens.md` | Token naming conventions and `getToken` usage. |
+<DataTable
+  columns={[{ key: "c0", header: "File" }, { key: "c1", header: "Contents" }]}
+  tables={[{ rows: [
+    { id: "0", values: [<Ink as="span"><code>inheritance.md</code></Ink>, <Ink as="span">Package hierarchy, dependency graph, layered system design.</Ink>] },
+    { id: "1", values: [<Ink as="span"><code>audit.md</code></Ink>, <Ink as="span">The audits — architecture (manifest ↔ architecture ↔ stories) and full (architecture + all consumers) — their trigger phrases and scope, plus known manifest gaps.</Ink>] },
+    { id: "2", values: [<Ink as="span"><code>projects/storybook.md</code></Ink>, <Ink as="span">nice-storybook structure and scripts.</Ink>] },
+    { id: "3", values: [<Ink as="span"><code>projects/website.md</code></Ink>, <Ink as="span">nice-website-2025 structure and scripts.</Ink>] },
+    { id: "4", values: [<Ink as="span"><code>styles/tokens.md</code></Ink>, <Ink as="span">Token naming conventions and <code>getToken</code> usage.</Ink>] },
+  ] }]}
+/>
 
 <Callout type="hint">The package layers, deps flowing down: Application (storybook, website) → Feature (react-button) → Utility (flex, ink, tile, icon) → Context (react-styles) → Foundation (styles, icons, configuration).</Callout>

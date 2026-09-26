@@ -1,6 +1,8 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
 import Callout from "../../src/components/Callout"
+import Ink from "../../src/nice/Ink"
+import { DataTable } from "../../src/components/DataTable"
 
 <Meta
   title="Manifest/Publish"
@@ -12,12 +14,15 @@ import Callout from "../../src/components/Callout"
   description="Committing, version bumping, and releasing nice-* packages to npm."
 />
 
-Files here are topic references: load the one your task or the root index points to. Each publishable package keeps its own `.nice/bump.md` — both the version-bump intent for `nicely --publish` and the durable per-change record, written in the same commit.
+<Ink as="span">Files here are topic references: load the one your task or the root index points to. Each publishable package keeps its own <code>.nice/bump.md</code> — both the version-bump intent for <code>nicely --publish</code> and the durable per-change record, written in the same commit.</Ink>
 
-| File | Contents |
-|------|----------|
-| `git.md` | Commit format, branching, the `nicely --commit` workflow. |
-| `npm.md` | Version bumping, publish order, peer deps. |
-| `bump-intent.md` | The `.nice/bump.md` per-package bump-intent workflow, `✓` marker, and how `--commit` relates to `--publish`. |
+<DataTable
+  columns={[{ key: "c0", header: "File" }, { key: "c1", header: "Contents" }]}
+  tables={[{ rows: [
+    { id: "0", values: [<Ink as="span"><code>git.md</code></Ink>, <Ink as="span">Commit format, branching, the <code>nicely --commit</code> workflow.</Ink>] },
+    { id: "1", values: [<Ink as="span"><code>npm.md</code></Ink>, <Ink as="span">Version bumping, publish order, peer deps.</Ink>] },
+    { id: "2", values: [<Ink as="span"><code>bump-intent.md</code></Ink>, <Ink as="span">The <code>.nice/bump.md</code> per-package bump-intent workflow, <code>✓</code> marker, and how <code>--commit</code> relates to <code>--publish</code>.</Ink>] },
+  ] }]}
+/>
 
 <Callout type="hint">Publish nice-* packages with `nicely publish`, never `npm publish` directly — the workflow handles the version cascade across consumers.</Callout>

@@ -11,17 +11,13 @@ import Ink from "../../src/nice/Ink"
 
 <StoryHeader title="Building" />
 
-One-shot builds of linked package dists, in registry tier order. Use these when
-you are **not** running the live watcher (see
-[Dev & Watch](/docs/toolkit-4-dev-watch--docs)).
+<Ink as="span">One-shot builds of linked package dists, in registry tier order. Use these when you are <Ink as="span" weight="semibold">not</Ink> running the live watcher (see <a href="/?path=/docs/toolkit-4-dev-watch--docs" target="_top">Dev & Watch</a>).</Ink>
 
 <Line />
 
 <Ink as="h2"><Code code="--build-all" language="bash" inlined /></Ink>
 
-Walks the registry tier order (foundation → context → utility → feature →
-application) and runs `npm run build` in every linked nice-* package that
-defines a build script.
+<Ink as="span">Walks the registry tier order (foundation → context → utility → feature → application) and runs <code>npm run build</code> in every linked nice-* package that defines a build script.</Ink>
 
 ```bash
 nicely --build-all
@@ -30,19 +26,13 @@ nicely --build-all
 nicely --build-all --dry-run
 ```
 
-Use after a fresh clone, after `--dedupe`, or after any foundation-package
-refactor.
+<Ink as="span">Use after a fresh clone, after <code>--dedupe</code>, or after any foundation-package refactor.</Ink>
 
 <Line />
 
 <Ink as="h2"><Code code="--build-icons" language="bash" inlined /></Ink>
 
-The targeted subset of `--build-all` for an icon change. Rebuilds `nice-icons`
-and everything that transitively depends on it — today `nice-react-icon`,
-`nice-react-icon-vendor`, and `nice-react-button` — resolved from the same
-reverse `file:`-dependency graph `--publish` uses, so it stays in sync with the
-publish cascade. On success it then runs [`--vite`](#-vite) so a dev server
-picks up the rebuilt dist.
+<Ink as="span">The targeted subset of <code>--build-all</code> for an icon change. Rebuilds <code>nice-icons</code> and everything that transitively depends on it — today <code>nice-react-icon</code>, <code>nice-react-icon-vendor</code>, and <code>nice-react-button</code> — resolved from the same reverse <code>file:</code>-dependency graph <code>--publish</code> uses, so it stays in sync with the publish cascade. On success it then runs <a href="#-vite"><code>--vite</code></a> so a dev server picks up the rebuilt dist.</Ink>
 
 ```bash
 nicely --build-icons
@@ -53,29 +43,24 @@ nicely --build-icons --dry-run
 
 <Ink as="h4">Dev-watcher auto-stop</Ink>
 
-`--build-icons` and a running `nicely --dev`/`--watch` both rebuild the **same**
-dist folders, and every rollup build wipes `dist/` first — so run together they
-race (transient `Could not resolve entry module "dist/types/index.d.ts"` errors
-and reloads against half-written output). So `--build-icons` **stops** any
-running dev/watch first — the same reflex as the `--vite` port-kill — then
-builds, and reminds you to restart it:
+<Ink as="span"><code>--build-icons</code> and a running <code>nicely --dev</code>/<code>--watch</code> both rebuild the <Ink as="span" weight="semibold">same</Ink> dist folders, and every rollup build wipes <code>dist/</code> first — so run together they race (transient <code>Could not resolve entry module "dist/types/index.d.ts"</code> errors and reloads against half-written output). So <code>--build-icons</code> <Ink as="span" weight="semibold">stops</Ink> any running dev/watch first — the same reflex as the <code>--vite</code> port-kill — then builds, and reminds you to restart it:</Ink>
 
 ```
 Stopping dev/watch process 2259
 ✓ Icons rebuilt. Restart `nicely --dev --watch` to resume hot-reloading.
 ```
 
-- Stop is SIGTERM, then SIGKILL for any straggler.
-- Pass **`--no-kill`** to leave the watcher running and build anyway (you own the
+<ul>
+  <li><Ink as="span">Stop is SIGTERM, then SIGKILL for any straggler.</Ink></li>
+  <li><Ink as="span">Pass <Ink as="span" weight="semibold"><code>--no-kill</code></Ink> to leave the watcher running and build anyway (you own the</Ink></li>
+</ul>
   dist race).
 
 <Line />
 
 <Ink as="h2" id="-vite"><Code code="--vite" language="bash" inlined /></Ink>
 
-Refresh Vite's optimized-deps cache and bounce running dev servers so a rebuilt
-linked dist is actually re-bundled. Runs automatically at the end of
-`--build-icons`; run it standalone after any out-of-band rebuild.
+<Ink as="span">Refresh Vite's optimized-deps cache and bounce running dev servers so a rebuilt linked dist is actually re-bundled. Runs automatically at the end of <code>--build-icons</code>; run it standalone after any out-of-band rebuild.</Ink>
 
 ```bash
 nicely --vite
@@ -84,8 +69,4 @@ nicely --vite
 nicely --vite --no-kill
 ```
 
-Why it's needed: a dev server (Storybook, CRA) holds a transformed copy of a
-linked package's dist. Rewriting that dist on disk doesn't invalidate the
-server's copy on its own — `--vite` wipes the `.vite` cache and kills the
-dev-server port so the next start reads the fresh dist. See
-[Troubleshooting → icons not updating](/docs/toolkit-7-troubleshooting--docs).
+<Ink as="span">Why it's needed: a dev server (Storybook, CRA) holds a transformed copy of a linked package's dist. Rewriting that dist on disk doesn't invalidate the server's copy on its own — <code>--vite</code> wipes the <code>.vite</code> cache and kills the dev-server port so the next start reads the fresh dist. See <a href="/?path=/docs/toolkit-7-troubleshooting--docs" target="_top">Troubleshooting → icons not updating</a>.</Ink>

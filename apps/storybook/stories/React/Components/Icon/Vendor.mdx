@@ -17,27 +17,15 @@ import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 
 <Ink as="h3">Why a separate vendor package</Ink>
 
-Vendor packages are containers for convenient, stable third-party plugins
-that provide **media, not logic** — concrete icon sets and image sources.
-Encapsulating them outside the system keeps the host component
-(<code>nice-react-icon</code>) agnostic of any specific third-party
-dependency, while still letting that third party conveniently address a
-real need — in this case, iconography.
+<Ink as="span">Vendor packages are containers for convenient, stable third-party plugins that provide <Ink as="span" weight="semibold">media, not logic</Ink>{" \u2014 concrete icon sets and image sources. Encapsulating them outside the system keeps the host component (<code>nice-react-icon</code>) agnostic of any specific third-party dependency, while still letting that third party conveniently address a real need \u2014 in this case, iconography."}</Ink>
 
-The host exposes a <code>vendor</code> flag and a
-<code>registerVendorResolver</code> hook. The peer package is the only
-place a concrete vendor (currently Lucide) is referenced. Swapping,
-supplementing, or removing the third-party dependency later requires no
-changes to the host component or to any consumer call site.
+<Ink as="span">{"The host exposes a <code>vendor</code> flag and a <code>registerVendorResolver</code> hook. The peer package is the only place a concrete vendor (currently Lucide) is referenced. Swapping, supplementing, or removing the third-party dependency later requires no changes to the host component or to any consumer call site."}</Ink>
 
-The same pattern applies to <code>nice-react-image</code> /
-<code>nice-react-image-vendor</code> for photography.
+<Ink as="span">{"The same pattern applies to <code>nice-react-image</code> / <code>nice-react-image-vendor</code> for photography."}</Ink>
 
 <Ink as="h3">Setup</Ink>
 
-Import the vendor package once at the application entry point. The import
-has a side effect: it registers the resolver with
-<code>nice-react-icon</code>.
+<Ink as="span">{"Import the vendor package once at the application entry point. The import has a side effect: it registers the resolver with <code>nice-react-icon</code>."}</Ink>
 
 ```tsx
 // app entry
@@ -46,9 +34,7 @@ import "nice-react-icon-vendor"
 
 <Ink as="h3">Usage</Ink>
 
-Any name not found in the built-in set is then resolved through the
-vendor. Built-in names always win — the vendor is a fallback, not an
-override.
+<Ink as="span">Any name not found in the built-in set is then resolved through the vendor. Built-in names always win — the vendor is a fallback, not an override.</Ink>
 
 <DataTableRow
   columns={DEMO_CODE_COLUMNS}

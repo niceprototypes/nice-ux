@@ -34,29 +34,30 @@ import { Field, Fieldset, useField, mergeDescribedBy } from "nice-react-field"
 
 <Ink as="h2">Guide</Ink>
 
-`nice-react-field` has named exports only, no default export.
+<Ink as="span"><code>nice-react-field</code> has named exports only, no default export.</Ink>
 
-Field renders a native `<label>`, the control, an optional description and an
-always-mounted polite live region for the error. It publishes the wiring
-through context; the control applies it. Input, and everything built on it
-(Select, DateField), already does:
+<Ink as="span">Field renders a native <code>{"<label>"}</code>, the control, an optional description and an always-mounted polite live region for the error. It publishes the wiring through context; the control applies it. Input, and everything built on it (Select, DateField), already does:</Ink>
 
-- `id` — the control takes the Field's id, so the label's `htmlFor` names it.
+<ul>
+  <li><Ink as="span"><code>id</code> — the control takes the Field's id, so the label's <code>htmlFor</code> names it.</Ink></li>
+</ul>
   It defaults to `useId()`; pass `id` to fix it.
-- `aria-describedby` — ordered `[description, error, own]`. The error id is
+<ul>
+  <li><Ink as="span"><code>aria-describedby</code> — ordered <code>[description, error, own]</code>. The error id is</Ink></li>
+</ul>
   present only while there is an error.
-- `aria-invalid="true"` — only while the Field is `invalid`, never `"false"`.
+<ul>
+  <li><Ink as="span"><code>aria-invalid="true"</code> — only while the Field is <code>invalid</code>, never <code>"false"</code>.</Ink></li>
+</ul>
   It changes no style; set `status="error"` on the control.
-- `required` — native `required` on the control. The label renders no
+<ul>
+  <li><Ink as="span"><code>required</code> — native <code>required</code> on the control. The label renders no</Ink></li>
+</ul>
   asterisk; mark the other fields with `optionalLabel` instead.
 
-In development, Field warns in the console when no element inside it carries
-the id — the silent failure where the label names nothing.
+<Ink as="span">In development, Field warns in the console when no element inside it carries the id — the silent failure where the label names nothing.</Ink>
 
-`Fieldset` groups related controls under a native `<fieldset>`. `legend` is
-required and names the group; `description` follows it and is referenced by
-the fieldset's `aria-describedby`. `disabled` is the native attribute and
-disables every control inside.
+<Ink as="span"><code>Fieldset</code> groups related controls under a native <code>{"<fieldset>"}</code>. <code>legend</code> is required and names the group; <code>description</code> follows it and is referenced by the fieldset's <code>aria-describedby</code>. <code>disabled</code> is the native attribute and disables every control inside.</Ink>
 
 ```jsx
 <Fieldset legend="Shipping address" description="Where the order is delivered.">
@@ -65,12 +66,7 @@ disables every control inside.
 </Fieldset>
 ```
 
-A custom control reads the wiring with `useField()`, which returns
-`{ id, labelId, descriptionId?, errorId?, describedBy?, invalid, required }`,
-or `null` outside a Field. `mergeDescribedBy(fieldDescribedBy, own)` joins the
-two id lists in order, drops empty entries, keeps the first occurrence of each
-id, and returns `undefined` when nothing is left, so no empty attribute
-renders.
+<Ink as="span">A custom control reads the wiring with <code>useField()</code>, which returns <code>{"{ id, labelId, descriptionId?, errorId?, describedBy?, invalid, required }"}</code>, or <code>null</code> outside a Field. <code>mergeDescribedBy(fieldDescribedBy, own)</code> joins the two id lists in order, drops empty entries, keeps the first occurrence of each id, and returns <code>undefined</code> when nothing is left, so no empty attribute renders.</Ink>
 
 ```jsx
 const field = useField()

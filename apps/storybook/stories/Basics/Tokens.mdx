@@ -6,6 +6,7 @@ import ArrowLink from "../../src/components/ArrowLink"
 import Callout from "../../src/components/Callout"
 import Line from "../../src/components/Line"
 import Ink from "../../src/nice/Ink"
+import { DataTable } from "../../src/components/DataTable"
 
 <Meta
   title="Basics/Tokens"
@@ -42,7 +43,7 @@ import Ink from "../../src/nice/Ink"
 
 <Ink as="h3">Use tokens directly</Ink>
 
-Import the stylesheet and reference the tokens:
+<Ink as="span">Import the stylesheet and reference the tokens:</Ink>
 
 <Install
   package="styles"
@@ -68,7 +69,7 @@ Import the stylesheet and reference the tokens:
 
 <Ink as="h3">Create local aliases</Ink>
 
-You may choose to alias the Nice UI tokens you need, and use your aliases everywhere else:
+<Ink as="span">You may choose to alias the Nice UI tokens you need, and use your aliases everywhere else:</Ink>
 
 <Install
   package="styles"
@@ -100,11 +101,11 @@ You may choose to alias the Nice UI tokens you need, and use your aliases everyw
 
 <Ink as="h2">JavaScript</Ink>
 
-Using the tokens in JS allows you to **restructure the token architecture** according to your needs, and easily tweak token values with useful helper functions.
+<Ink as="span">Using the tokens in JS allows you to <Ink as="span" weight="semibold">restructure the token architecture</Ink> according to your needs, and easily tweak token values with useful helper functions.</Ink>
 
 <Ink as="h3">JS only</Ink>
 
-Use the `getToken` function and CSS variables provided by `nice-styles` for vanilla JS:
+<Ink as="span">Use the <code>getToken</code> function and CSS variables provided by <code>nice-styles</code> for vanilla JS:</Ink>
 
 <Install
   package="styles"
@@ -130,7 +131,7 @@ document.body.append(card)
 
 <Ink as="h3">React only</Ink>
 
-Create and style a React component with tokens:
+<Ink as="span">Create and style a React component with tokens:</Ink>
 
 <Install
   package="react-styles"
@@ -154,7 +155,7 @@ export default function Card({ children }) {
 }
 ```
 
-Then, render the React component inside `StylesProvider`:
+<Ink as="span">Then, render the React component inside <code>StylesProvider</code>:</Ink>
 
 ```tsx
 import { StylesProvider } from "nice-react-styles"
@@ -174,7 +175,7 @@ export default function App() {
 
 <Ink as="h3">React + Styled Components</Ink>
 
-Create and style a Styled Component with tokens:
+<Ink as="span">Create and style a Styled Component with tokens:</Ink>
 
 <Install
   package="react-styles"
@@ -196,7 +197,7 @@ const Card = styled.div`
 export default Card
 ```
 
-Render the Styled Component inside `StylesProvider`:
+<Ink as="span">Render the Styled Component inside <code>StylesProvider</code>:</Ink>
 
 ```tsx
 import { StylesProvider } from "nice-react-styles"
@@ -218,11 +219,11 @@ export default function App() {
 
 <Ink as="h2">Set tokens</Ink>
 
-Override default values, create new tokens, or even create new modules. You have **complete creative control** with the token setter function.
+<Ink as="span">Override default values, create new tokens, or even create new modules. You have <Ink as="span" weight="semibold">complete creative control</Ink> with the token setter function.</Ink>
 
 <Ink as="h3">1. Wrap subtree with provider</Ink>
 
-`App` can now consume the tokens:
+<Ink as="span"><code>App</code> can now consume the tokens:</Ink>
 
 ```tsx
 import { StylesProvider } from "nice-react-styles"
@@ -238,7 +239,7 @@ import "../App"
 
 <Ink as="h3">2. Call the setter function</Ink>
 
-Call `setTokens` once on module load:
+<Ink as="span">Call <code>setTokens</code> once on module load:</Ink>
 
 ```ts
 import { setTokens } from "nice-react-styles"
@@ -263,7 +264,7 @@ setTokens({
 
 <Ink as="h3">3. Access new tokens</Ink>
 
-New tokens can be accessed by the getter function:
+<Ink as="span">New tokens can be accessed by the getter function:</Ink>
 
 ```tsx
 import { getToken } from "nice-react-styles"
@@ -284,8 +285,7 @@ const Card = ({ children }) => (
 
 <Ink as="h2">Transform a color</Ink>
 
-Adjust a token's channels without leaving the token system. The result is still
-a token underneath, so it keeps following day and night:
+<Ink as="span">Adjust a token's channels without leaving the token system. The result is still a token underneath, so it keeps following day and night:</Ink>
 
 ```tsx
 import { getToken } from "nice-react-styles"
@@ -294,20 +294,23 @@ getToken("color:highlight", { transform: [null, null, 40, null] })
 // hsl(from var(--np--color--highlight) h s 40)
 ```
 
-Channels are `[hue, saturation, lightness, alpha]`:
+<Ink as="span">Channels are <code>[hue, saturation, lightness, alpha]</code>:</Ink>
 
-| Entry | Does |
-| --- | --- |
-| `null` | leaves the channel alone |
-| `40` | sets it |
-| `"+10"` / `"-10"` | shifts it |
-| `"*0.5"` | scales it |
+<DataTable
+  columns={[{ key: "c0", header: "Entry" }, { key: "c1", header: "Does" }]}
+  tables={[{ rows: [
+    { id: "0", values: [<Ink as="span"><code>null</code></Ink>, <Ink as="span">leaves the channel alone</Ink>] },
+    { id: "1", values: [<Ink as="span"><code>40</code></Ink>, <Ink as="span">sets it</Ink>] },
+    { id: "2", values: [<Ink as="span"><code>"+10"</code> / <code>"-10"</code></Ink>, <Ink as="span">shifts it</Ink>] },
+    { id: "3", values: [<Ink as="span"><code>"*0.5"</code></Ink>, <Ink as="span">scales it</Ink>] },
+  ] }]}
+/>
 
 <Callout type="hint">Scaling travels better than shifting. A shift sized for the day value can run off the end of the scale at night, where the same token is already dark.</Callout>
 
 <NewLines />
 
-Components take the same object on their color props:
+<Ink as="span">Components take the same object on their color props:</Ink>
 
 ```tsx
 <Ink color={{ name: "highlight", transform: [null, null, 40, null] }}>

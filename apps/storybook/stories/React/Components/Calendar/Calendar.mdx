@@ -6,6 +6,7 @@ import { calendarExampleList } from "./examples"
 import NewLines from "../../../../src/components/NewLines"
 import Callout from "../../../../src/components/Callout"
 import Ink from "../../../../src/nice/Ink"
+import { DataTable } from "../../../../src/components/DataTable"
 
 <Meta title="Components/Forms/Calendar" />
 
@@ -32,14 +33,9 @@ import { Calendar } from "nice-react-calendar"
 
 <Ink as="h2">Guide</Ink>
 
-`nice-react-calendar` has named exports only (`Calendar`, `DateField`), no
-default export.
+<Ink as="span"><code>nice-react-calendar</code> has named exports only (<code>Calendar</code>, <code>DateField</code>), no default export.</Ink>
 
-Dates cross the API only as ISO 8601 `YYYY-MM-DD` strings. `value`,
-`defaultValue`, `min`, `max`, the `onChange` argument and the `isDateDisabled`
-argument are all ISO strings, and `null` means no selection. A JS `Date` is
-never accepted or returned; an invalid string counts as no selection. v1 uses
-the Gregorian calendar with UTC arithmetic, so no time zone shifts a date.
+<Ink as="span">Dates cross the API only as ISO 8601 <code>YYYY-MM-DD</code> strings. <code>value</code>, <code>defaultValue</code>, <code>min</code>, <code>max</code>, the <code>onChange</code> argument and the <code>isDateDisabled</code> argument are all ISO strings, and <code>null</code> means no selection. A JS <code>Date</code> is never accepted or returned; an invalid string counts as no selection. v1 uses the Gregorian calendar with UTC arithmetic, so no time zone shifts a date.</Ink>
 
 ```jsx
 const [date, setDate] = useState("2026-09-24")
@@ -48,16 +44,9 @@ const [date, setDate] = useState("2026-09-24")
 // onChange("2026-09-25")
 ```
 
-The first column comes from the locale: `Intl.Locale` week info where the
-engine provides it, else a region table (Sunday for regions such as US,
-Saturday for regions such as EG, otherwise Monday). `firstDayOfWeek` (0 Sunday … 6 Saturday) overrides it, and
-Home / End follow the resolved start.
+<Ink as="span">The first column comes from the locale: <code>Intl.Locale</code> week info where the engine provides it, else a region table (Sunday for regions such as US, Saturday for regions such as EG, otherwise Monday). <code>firstDayOfWeek</code> (0 Sunday … 6 Saturday) overrides it, and Home / End follow the resolved start.</Ink>
 
-Direction comes from `useLocale()` in `nice-react-styles`: the `dir` / `locale`
-of the nearest `StylesProvider`, else the document's `dir` / `lang`. In RTL,
-ArrowRight moves to the previous day and ArrowLeft to the next, following the
-visual order, and the month carets swap. The `locale` prop changes labels and
-week start, not key direction; the grid mirrors inside a `dir="rtl"` ancestor.
+<Ink as="span">Direction comes from <code>useLocale()</code> in <code>nice-react-styles</code>: the <code>dir</code> / <code>locale</code> of the nearest <code>StylesProvider</code>, else the document's <code>dir</code> / <code>lang</code>. In RTL, ArrowRight moves to the previous day and ArrowLeft to the next, following the visual order, and the month carets swap. The <code>locale</code> prop changes labels and week start, not key direction; the grid mirrors inside a <code>dir="rtl"</code> ancestor.</Ink>
 
 ```jsx
 <div dir="rtl">
@@ -67,21 +56,20 @@ week start, not key direction; the grid mirrors inside a `dir="rtl"` ancestor.
 </div>
 ```
 
-The grid follows the ARIA grid pattern with a roving tabindex: one day is
-tabbable — the selected day, else today, else the first enabled day of the
-visible month.
+<Ink as="span">The grid follows the ARIA grid pattern with a roving tabindex: one day is tabbable — the selected day, else today, else the first enabled day of the visible month.</Ink>
 
-| Key | Action |
-|-----|--------|
-| ArrowRight / ArrowLeft | Next / previous day (mirrored in RTL) |
-| ArrowDown / ArrowUp | Same weekday next / previous week |
-| Home / End | Start / end of the week |
-| PageDown / PageUp | Same day next / previous month |
-| Shift + PageDown / PageUp | Same day next / previous year |
-| Enter / Space | Select the focused day |
+<DataTable
+  columns={[{ key: "c0", header: "Key" }, { key: "c1", header: "Action" }]}
+  tables={[{ rows: [
+    { id: "0", values: [<Ink as="span">ArrowRight / ArrowLeft</Ink>, <Ink as="span">Next / previous day (mirrored in RTL)</Ink>] },
+    { id: "1", values: [<Ink as="span">ArrowDown / ArrowUp</Ink>, <Ink as="span">Same weekday next / previous week</Ink>] },
+    { id: "2", values: [<Ink as="span">Home / End</Ink>, <Ink as="span">Start / end of the week</Ink>] },
+    { id: "3", values: [<Ink as="span">PageDown / PageUp</Ink>, <Ink as="span">Same day next / previous month</Ink>] },
+    { id: "4", values: [<Ink as="span">Shift + PageDown / PageUp</Ink>, <Ink as="span">Same day next / previous year</Ink>] },
+    { id: "5", values: [<Ink as="span">Enter / Space</Ink>, <Ink as="span">Select the focused day</Ink>] },
+  ] }]}
+/>
 
-Moving focus off the visible month changes the month. Focus stops at `min` and
-`max`. Disabled days stay focusable (`aria-disabled`), so the arrows move
-across them.
+<Ink as="span">Moving focus off the visible month changes the month. Focus stops at <code>min</code> and <code>max</code>. Disabled days stay focusable (<code>aria-disabled</code>), so the arrows move across them.</Ink>
 
 <Callout type="hint">Pass and store ISO `YYYY-MM-DD` strings — Calendar never accepts or returns a `Date`.</Callout>
