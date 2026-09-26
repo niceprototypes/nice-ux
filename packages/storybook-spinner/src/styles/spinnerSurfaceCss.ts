@@ -9,10 +9,12 @@ const { keys, themes } = SPINNER_TOKENS
  * colour per `data-theme`. Carries no `display`; the caller decides visibility.
  *
  * @param id - Element id the rules target
+ * @param opaque - Paint the theme background (`false`: transparent surface, icon colour only)
  * @returns CSS text
  */
-export function spinnerSurfaceCss(id: string): string {
+export function spinnerSurfaceCss(id: string, opaque = true): string {
   const selector = `#${id}`
+  const background = (value: string) => (opaque ? `background:${value};` : "")
   const sizes = SPINNER_TOKENS.iconSizeBreakpoints
     .map(({ media, value }) => `${media}{${selector}{${keys.iconSize}:${value}}}`)
     .join("")
@@ -22,8 +24,8 @@ export function spinnerSurfaceCss(id: string): string {
     `${keys.iconStrokeWidth}:${SPINNER_TOKENS.iconStrokeWidth};` +
     `${keys.iconAnimationDuration}:${SPINNER_TOKENS.iconAnimationDuration}}` +
     sizes +
-    `${selector}[data-theme=day]{color-scheme:light;background:${themes.day.background};${keys.iconColor}:${themes.day.color}}` +
-    `${selector}[data-theme=night]{color-scheme:dark;background:${themes.night.background};${keys.iconColor}:${themes.night.color}}` +
+    `${selector}[data-theme=day]{color-scheme:light;${background(themes.day.background)}${keys.iconColor}:${themes.day.color}}` +
+    `${selector}[data-theme=night]{color-scheme:dark;${background(themes.night.background)}${keys.iconColor}:${themes.night.color}}` +
     `@media (prefers-reduced-motion:reduce){${selector} svg{animation-duration:2s!important}}`
   )
 }

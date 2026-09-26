@@ -1,1 +1,2 @@
 [2026-09-25 18:51] minor: Add nice-storybook-spinner: a Storybook preset that paints the Nice spinner at document start in the manager and replaces the preview's native loaders, with hold and timeout options
+[2026-09-26 12:38] minor: Hold the previous page's snapshot under the spinner during same-origin navigations via cross-document View Transitions, with the opaque overlay as fallback and a viewTransition option

@@ -21,3 +21,21 @@ export const BOOT_ID = "nsb-boot"
 
 /** Preview spinner element id (inside the preview iframe). */
 export const PREVIEW_ID = "nsb-preview-spinner"
+
+/** Spinner shown above the held snapshot during a cross-document View Transition (manager). Also its `view-transition-name`. */
+export const SNAPSHOT_ID = "nsb-boot-snapshot"
+
+/** Class on <html> while the previous page's snapshot is held under the spinner. */
+export const VT_HOLD_CLASS = "nsb-vt-hold"
+
+/** Class on <html> while the held snapshot cross-fades to the rendered page. */
+export const VT_RELEASE_CLASS = "nsb-vt-release"
+
+/** Cross-fade from the held snapshot to the rendered page, in ms. */
+export const VT_RELEASE_MS = 180
+
+/** After release, `skipTransition()` is called this many ms later as a safety net. */
+export const VT_SKIP_MS = 1000
+
+/** Default for the `viewTransition` preset option. */
+export const DEFAULT_VIEW_TRANSITION = true
