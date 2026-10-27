@@ -4,10 +4,6 @@ import "@testing-library/jest-dom"
 import Tooltip from "./Tooltip"
 import type { TooltipAnchorType, TooltipPositionType, TooltipProps, TooltipTriggerType } from "./Tooltip.types"
 
-// nice-icons re-exports raw .svg sources, which jest cannot parse; the bubble
-// styles only need encoded mask URLs.
-jest.mock("nice-icons", () => ({ getIconEncoded: (name: string) => `data:${name}` }))
-
 // Trigger rect stubbed so positions are deterministic under jsdom (no layout).
 const TRIGGER_RECT = { top: 100, left: 40, right: 140, bottom: 130, width: 100, height: 30, x: 40, y: 100 }
 // Pointer position carried by the activating event, for anchor="cursor".
@@ -80,6 +76,79 @@ describe("Tooltip", () => {
       activate("hover")
       expect(bubble()?.parentElement).toBe(document.body)
       expect(container.contains(bubble())).toBe(false)
+    })
+  })
+
+  describe("keyboard", () => {
+    const flush = () =>
+      act(() => {
+        jest.advanceTimersByTime(0)
+      })
+
+    it("shows on focus of a focusable child and hides on blur", () => {
+      renderTooltip()
+      fireEvent.focus(screen.getByText("trigger"))
+      flush()
+      expect(bubble()).toBeInTheDocument()
+      fireEvent.blur(screen.getByText("trigger"))
+      flush()
+      expect(bubble()).not.toBeInTheDocument()
+    })
+
+    it("stays shown while focus moves between children of the trigger", () => {
+      render(
+        <Tooltip content="tip">
+          <button>first</button>
+          <button>second</button>
+        </Tooltip>
+      )
+      const first = screen.getByText("first")
+      const second = screen.getByText("second")
+      fireEvent.focus(first)
+      flush()
+      fireEvent.blur(first, { relatedTarget: second })
+      flush()
+      expect(bubble()).toBeInTheDocument()
+      fireEvent.focus(second, { relatedTarget: first })
+      flush()
+      expect(bubble()).toBeInTheDocument()
+    })
+
+    it("anchors a focus-shown bubble to the trigger even with anchor cursor", () => {
+      renderTooltip({ anchor: "cursor" })
+      fireEvent.focus(screen.getByText("trigger"))
+      flush()
+      const el = bubble() as HTMLElement
+      expect(el.style.top).toBe(EXPECTED.trigger.top.top)
+      expect(el.style.left).toBe(EXPECTED.trigger.top.left)
+    })
+
+    it("hides on Escape, bypassing delayHide", () => {
+      renderTooltip({ delayHide: 300 })
+      activate("hover")
+      fireEvent.keyDown(document, { key: "Escape" })
+      expect(bubble()).not.toBeInTheDocument()
+    })
+
+    it("ignores other keys", () => {
+      renderTooltip()
+      activate("hover")
+      fireEvent.keyDown(document, { key: "Enter" })
+      expect(bubble()).toBeInTheDocument()
+    })
+
+    it("hides a click-opened bubble on Escape", () => {
+      renderTooltip({ trigger: "click" })
+      activate("click")
+      fireEvent.keyDown(document, { key: "Escape" })
+      expect(bubble()).not.toBeInTheDocument()
+    })
+
+    it("does not open on focus in click mode", () => {
+      renderTooltip({ trigger: "click" })
+      fireEvent.focus(screen.getByText("trigger"))
+      flush()
+      expect(bubble()).not.toBeInTheDocument()
     })
   })
 

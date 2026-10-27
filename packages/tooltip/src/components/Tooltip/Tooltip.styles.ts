@@ -1,6 +1,5 @@
 import styled from "styled-components"
 import { getToken } from "nice-react-styles"
-import { getIconEncoded } from "nice-icons"
 
 /**
  * Wraps the trigger element so the tooltip can attach handlers and measure its
@@ -19,9 +18,6 @@ export const TriggerWrapper = styled.span<{ $clickable: boolean }>`
  * background-color tokens, so the bubble renders as the opposite theme (a dark
  * chip in day mode, light in night) and flips automatically with the cascade.
  */
-const caratIcon = getIconEncoded("carat-right")
-const folderIcon = getIconEncoded("folder-open")
-const fileIcon = getIconEncoded("file")
 export const Bubble = styled.div`
   position: fixed;
   z-index: 2147483647;
@@ -36,21 +32,4 @@ export const Bubble = styled.div`
   font-family: ${getToken("fontFamily", "base")};
   font-size: ${getToken("fontSize", "small")};
   line-height: ${getToken("lineHeight", "base")};
-
-  [data-nodetype="root"] > button[
-  tabindex] > div:first-child > svg,
-  [data-nodetype="group"] > button[tabindex] > div:first-child > div:first-child > svg {
-    -webkit-mask-image: url("${getIconEncoded("carat-right")}");
-    mask-image: url("${getIconEncoded("carat-right")}");
-  }
-
-  [data-nodetype="group"] > button[tabindex] > div:first-child > svg {
-    -webkit-mask-image: url("${folderIcon}");
-    mask-image: url("${folderIcon}");
-  }
-
-  [data-nodetype="document"] > a[tabindex] > div:first-child > svg {
-    -webkit-mask-image: url("${fileIcon}");
-    mask-image: url("${fileIcon}");
-  }
 `

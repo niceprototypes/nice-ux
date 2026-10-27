@@ -14,9 +14,11 @@ const OFFSET = 8
  *
  * Wraps a single trigger element (`children`) and shows an inverse-themed bubble
  * with `content` when activated. Activation is `hover` (default) or `click`.
- * `delayShow` / `delayHide` defer the render / unrender so brief passes don't
- * flash the tooltip. The bubble renders in a portal at `<body>` with
- * `position: fixed`, so it is never clipped by an overflow-scrolling ancestor.
+ * In hover mode, keyboard focus on a focusable child also shows it and blur
+ * hides it. Escape dismisses the visible bubble. `delayShow` / `delayHide`
+ * defer the render / unrender so brief passes don't flash the tooltip. The
+ * bubble renders in a portal at `<body>` with `position: fixed`, so it is never
+ * clipped by an overflow-scrolling ancestor.
  * `anchor` chooses what the bubble positions against: the trigger's rect
  * (default) or the pointer position captured at activation (`"cursor"`).
  *
@@ -83,9 +85,11 @@ const Tooltip: React.FC<TooltipProps> = ({
 
   // Show after delayShow; measure first so the bubble appears already placed.
   // Capture the pointer position synchronously (before the timeout) for the
-  // cursor anchor — the event's clientX/clientY are only valid right now.
-  const show = (e?: React.MouseEvent) => {
-    if (e) cursor.current = { x: e.clientX, y: e.clientY }
+  // cursor anchor — the event's clientX/clientY are only valid right now. A
+  // keyboard (focus) activation has no pointer, so it clears the captured
+  // position and the bubble anchors to the trigger rect.
+  const show = (event?: React.MouseEvent) => {
+    cursor.current = event ? { x: event.clientX, y: event.clientY } : null
     clearTimers()
     showTimer.current = window.setTimeout(() => {
       computeCoords()
@@ -102,11 +106,40 @@ const Tooltip: React.FC<TooltipProps> = ({
   // Clear any pending timer on unmount so a deferred show/hide can't fire late.
   React.useEffect(() => clearTimers, [])
 
-  // Hover trigger: show on enter, hide on leave. Click trigger: toggle.
+  // Escape dismisses the visible bubble immediately (WCAG 1.4.13), bypassing
+  // delayHide. Listening on document covers focus anywhere, and the pointer
+  // still resting on the trigger.
+  React.useEffect(() => {
+    if (!visible) return
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return
+      clearTimers()
+      setVisible(false)
+    }
+    document.addEventListener("keydown", onKeyDown)
+    return () => document.removeEventListener("keydown", onKeyDown)
+  }, [visible])
+
+  // Focus moving between elements inside the trigger fires blur + focus on the
+  // wrapper (React focus events bubble); skipping those keeps the bubble steady.
+  const isInternalFocusMove = (event: React.FocusEvent) =>
+    event.currentTarget.contains(event.relatedTarget as Node | null)
+
+  // Hover trigger: show on pointer enter or keyboard focus, hide on leave or
+  // blur. Click trigger: toggle.
   const handlers =
     trigger === "click"
-      ? { onClick: (e: React.MouseEvent) => (visible ? hide() : show(e)) }
-      : { onMouseEnter: show, onMouseLeave: hide }
+      ? { onClick: (event: React.MouseEvent) => (visible ? hide() : show(event)) }
+      : {
+          onMouseEnter: show,
+          onMouseLeave: hide,
+          onFocus: (event: React.FocusEvent) => {
+            if (!isInternalFocusMove(event)) show()
+          },
+          onBlur: (event: React.FocusEvent) => {
+            if (!isInternalFocusMove(event)) hide()
+          },
+        }
 
   return (
     <>
