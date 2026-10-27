@@ -1,0 +1,7 @@
+{
+  "$schema": "../config-exports/src/schema.json",
+  "description": "Responsive flexbox layout component with breakpoint-aware spacing.",
+  "default": "Flex",
+  "components": ["Flex"],
+  "services": ["getGapSize", "getSpacingValue", "styleSpacing", "styleFlex"]
+}
