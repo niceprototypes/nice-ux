@@ -1,0 +1,8 @@
+{
+  "$schema": "../config-exports/src/schema.json",
+  "description": "Checkbox built on a native checkbox, with a token-driven box and a nice-react-icon check.",
+  "default": "Checkbox",
+  "components": [
+    "Checkbox"
+  ]
+}
