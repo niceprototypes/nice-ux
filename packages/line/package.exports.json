@@ -1,0 +1,8 @@
+{
+  "$schema": "../config-exports/src/schema.json",
+  "description": "Dashed line of pill-shaped, rimmed dashes that frames its parent element.",
+  "default": "Line",
+  "components": [
+    "Line"
+  ]
+}
