@@ -1,0 +1,37 @@
+import { defineConfig } from "tsup"
+
+/**
+ * Three entry points, matching the Storybook addon contract:
+ * - `index`   — the public API (the `StoryNavigation` component, types, the
+ *   channel event constants) consumers import directly.
+ * - `manager` — the manager-side register: the preview↔manager channel bridge
+ *   that drives the sidebar toggle, open-in-editor, and settings actions. Loaded
+ *   by Storybook from `nice-storybook-navigation/manager`.
+ * - `preview` — the preview-side global decorator that renders the navigation
+ *   bar. Loaded from `nice-storybook-navigation/preview`.
+ *
+ * Everything the host Storybook already provides — React, styled-components,
+ * the storybook runtime, and the Nice packages (kept as singletons by the
+ * consumer) — is externalized so the addon never bundles a second copy.
+ */
+export default defineConfig({
+  entry: ["src/index.ts", "src/manager.tsx", "src/preview.tsx"],
+  format: ["esm"],
+  dts: true,
+  clean: true,
+  sourcemap: true,
+  external: [
+    "react",
+    "react-dom",
+    "react/jsx-runtime",
+    "styled-components",
+    // Subpath-aware: the entries import storybook/manager-api and
+    // storybook/preview-api, which a bare "storybook" external does not match —
+    // bundling them drags in storybook/internal/* and breaks the host's
+    // global-externals mapping at build time.
+    /^storybook(\/|$)/,
+    "storybook-dark-mode",
+    /^@storybook\//,
+    /^nice-/,
+  ],
+})
