@@ -40,11 +40,11 @@ const Fieldset: React.FC<FieldsetProps> = ({
       aria-describedby={hasDescription ? descriptionId : undefined}
     >
       <StyledFieldsetLegend>
-        <Ink as="span">{legend}</Ink>
+        <Ink>{legend}</Ink>
       </StyledFieldsetLegend>
       {hasDescription ? (
         <StyledFieldsetDescription id={descriptionId}>
-          <Ink as="span" color="light">
+          <Ink color="light">
             {description}
           </Ink>
         </StyledFieldsetDescription>

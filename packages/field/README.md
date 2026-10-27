@@ -1,4 +1,5 @@
 # nice-react-field
+![Field](docs/field.png)
 
 Form field composition for React. `Field` wires a label, description and error
 to one control through `useField()`; `Fieldset` groups controls under a legend.

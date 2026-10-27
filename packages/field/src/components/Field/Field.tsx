@@ -86,11 +86,11 @@ const Field: React.FC<FieldProps> = ({
     <FieldContext.Provider value={context}>
       <StyledField ref={setRootNode} className={className}>
         <StyledFieldLabel id={labelId} htmlFor={controlId}>
-          <Ink as="span">{label}</Ink>
+          <Ink>{label}</Ink>
           {!required && optionalLabel !== undefined ? (
             <>
               {" "}
-              <Ink as="span" color="light">
+              <Ink color="light">
                 {optionalLabel}
               </Ink>
             </>
@@ -99,14 +99,14 @@ const Field: React.FC<FieldProps> = ({
         {children}
         {hasDescription ? (
           <StyledFieldDescription id={descriptionId}>
-            <Ink as="span" color="light">
+            <Ink color="light">
               {description}
             </Ink>
           </StyledFieldDescription>
         ) : null}
         <StyledFieldError id={`${controlId}-error`} aria-live="polite">
           {hasError ? (
-            <Ink as="span" color="error">
+            <Ink color="error">
               {error}
             </Ink>
           ) : null}
