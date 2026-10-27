@@ -58,3 +58,6 @@
 [2026-10-15 15:45] patch: Add missing tile backgroundColor highlight and image borderColor subtle/success/highlight/warning/error/link aliases so every core variant a component prop accepts has a component token
 [2026-10-15 15:58] patch: Retune night success, warning and error colours (hues kept): equal luminance ~0.42 and equal OKLCH chroma 0.14 so filled status buttons read balanced on dark backgrounds; label contrast >= 8.6:1, fill vs night background >= 6.6:1
 [2026-10-15 16:22] patch: Set night success, warning and error colours to hsl(146 59% 48%), hsl(29 100% 63%), hsl(10 89% 61%) (supersedes the earlier retune today)
+[2026-10-26 20:22] minor: icon.color:disabled follows icon.color:lighter instead of the core disabled colour, and icon.color gains a muted variant (the core lightest colour)
+[2026-10-26 20:35] minor: Set fontFamily base and heading to 'Helvetica Neue', Inter, Roboto, 'Arial Nova', 'Nimbus Sans', Arial, sans-serif, fonts already on the device, replacing the unloaded Google Sans Flex
+[2026-10-26 20:36] minor: Set fontFamily code to ui-monospace, 'Source Code Pro', Menlo, Consolas, monospace, fonts already on the device, replacing the unloaded Roboto Mono

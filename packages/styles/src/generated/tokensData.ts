@@ -55,9 +55,9 @@ const tokensData: TokensData = {
     "secondary": "hsla(198, 100%, 54.1%, 1)"
   },
   "fontFamily": {
-    "base": "\"Google Sans Flex\", system-ui, sans-serif",
-    "code": "\"Roboto Mono\", \"Courier New\", monospace",
-    "heading": "\"Google Sans Flex\", system-ui, sans-serif"
+    "base": "'Helvetica Neue', Inter, Roboto, 'Arial Nova', 'Nimbus Sans', Arial, sans-serif",
+    "code": "ui-monospace, 'Source Code Pro', Menlo, Consolas, monospace",
+    "heading": "'Helvetica Neue', Inter, Roboto, 'Arial Nova', 'Nimbus Sans', Arial, sans-serif"
   },
   "fontWeight": {
     "light": "300",

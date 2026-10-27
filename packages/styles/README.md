@@ -182,7 +182,7 @@ Component token sets: `button`, `calendar`, `checkbox`, `code`, `dialog`, `field
 
 Each group has a variant union type: `GapType`, `ColorType`, `ColorInverseType`, …, plus `ComponentPrefix`.
 
-`fontFamily` `base` and `heading` name Google Sans Flex, then `system-ui`, then `sans-serif`; the font file itself is not shipped — load it with `injectFonts` or nice-react-styles' `StylesProvider`.
+`fontFamily` `base` and `heading` default to `'Helvetica Neue', Inter, Roboto, 'Arial Nova', 'Nimbus Sans', Arial, sans-serif` and `code` to `ui-monospace, 'Source Code Pro', Menlo, Consolas, monospace`, fonts already on the device; nothing is loaded. To use another family, load it with `injectFonts` or nice-react-styles' `StylesProvider` and override `fontFamily`.
 
 Allowed prop values of nice-react-* components (resolved unions): `~/nice/manifest/agents/catalog.json`.
 
