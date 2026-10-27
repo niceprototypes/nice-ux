@@ -1,0 +1,36 @@
+{
+  "name": "nice-config-typescript",
+  "version": "1.0.0",
+  "description": "Shared TypeScript configuration for the nice-* ecosystem",
+  "exports": {
+    "./base": "./base.json",
+    "./react": "./react.json"
+  },
+  "files": [
+    "base.json",
+    "react.json"
+  ],
+  "keywords": [
+    "nice",
+    "configuration",
+    "typescript",
+    "tsconfig"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niceprototypes/nice-config-typescript.git"
+  },
+  "bugs": {
+    "url": "https://github.com/niceprototypes/nice-config-typescript/issues"
+  },
+  "homepage": "https://github.com/niceprototypes/nice-config-typescript#readme",
+  "peerDependencies": {
+    "typescript": ">=6.0.0"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
+  }
+}
