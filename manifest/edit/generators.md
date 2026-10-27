@@ -1,6 +1,6 @@
 # Generators & Emitters
 
-Standards for code that **produces** code, CSS, or data: build-time generators (`nice-styles/scripts/*`, icon/source generators, `nice-config-exports`) and the runtime emitters they share logic with (`nice-styles/src/utilities/css/*`, `generateTokenCSS`). Inline comment rules live in [`comments.md`](comments.md); this file covers structure, documentation, and tests.
+Standards for code that **produces** code, CSS, or data: build-time generators (`@niceprototypes/styles/scripts/*`, icon/source generators, `@niceprototypes/config-exports`) and the runtime emitters they share logic with (`@niceprototypes/styles/src/utilities/css/*`, `generateTokenCSS`). Inline comment rules live in [`comments.md`](comments.md); this file covers structure, documentation, and tests.
 
 Evidence base: token-system comparables, summary in [`backlog.md` → Facts to keep](../backlog.md#facts-to-keep) (Style Dictionary, Terrazzo, Primer, Polaris, Carbon, Panda, Chakra, Tamagui).
 
@@ -37,7 +37,7 @@ Runtime emitters reuse the Generate phase. When runtime code needs a builder, th
 
 ## Documentation standard
 
-Model: `nice-styles/scripts/shared/readTokenSources.ts` — module header, per-field JSDoc on every interface (`scripts/shared/types.ts`), JSDoc on every function, phase comments inside the entry function.
+Model: `@niceprototypes/styles/scripts/shared/readTokenSources.ts` — module header, per-field JSDoc on every interface (`scripts/shared/types.ts`), JSDoc on every function, phase comments inside the entry function.
 
 ### Module header (every generator/emitter file)
 
@@ -113,7 +113,7 @@ Rules:
 - A snapshot changes only in the commit that intends the output change; run `npm run test:update` and review the snapshot diff as part of the change.
 - A refactor step is done when every snapshot is unchanged, or every change is listed and intended.
 
-Reference implementation: `nice-styles/test/`.
+Reference implementation: `@niceprototypes/styles/test/`.
 
 ---
 

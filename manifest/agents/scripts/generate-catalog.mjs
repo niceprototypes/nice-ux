@@ -1,65 +1,53 @@
 #!/usr/bin/env node
 /**
- * generate-catalog — writes manifest/agents/catalog.json, the machine-readable
- * component catalog for AI agents.
+ * generate-catalog — writes the two agent lookup files from nice-ux sources:
+ *   manifest/agents/components.txt  one line per component (read whole; the builder's index)
+ *   manifest/agents/catalog.json    minified per-component detail (query with jq, never read whole)
  *
- * Sources (read-only; nothing in any package is modified):
- *   ~/nice/react-*\/package.json                       package name, version, description, nice-* peers
- *   ~/nice/react-*\/src/index.ts                       public exports (export lines)
- *   ~/nice/react-*\/src/components/{C}/{C}.types.ts    `{C}Props` members, JSDoc, @default, local alias unions
- *   ~/nice/styles/src/tokens/components/{prefix}.json  component token addresses (`prefix.path:variant`)
- *   ~/nice/storybook/stories/React/Components/**.mdx   <Meta title> → Storybook docs ids (component + per-prop)
+ * Sources (read-only):
+ *   packages/{p}/package.json                                  name, version, @niceprototypes peers
+ *   packages/{p}/src/index.ts                                  public exports
+ *   packages/{p}/src/{components|react/components}/{C}/{C}.types.ts   `{C}Props` members, JSDoc, @default
+ *   packages/styles/src/generated/types.ts                     token unions (SizeType, GapType, …)
+ *   packages/styles/src/tokens/components/{prefix}.json        component token addresses
+ *   apps/storybook/stories/Components/**                       docs page and Playground story ids
  *
- * Parsing uses the TypeScript compiler API, borrowed from the first nice-* package
- * that has it installed (storybook first). No install step, no network.
- *
- * Usage: node ~/nice/manifest/agents/scripts/generate-catalog.mjs [--root ~/nice] [--out path]
+ * TypeScript comes from the nice-ux root devDependencies. No network.
+ * Usage: node manifest/agents/scripts/generate-catalog.mjs [--root path-to-nice-ux]
  */
 import { readFileSync, readdirSync, existsSync, writeFileSync, statSync } from "node:fs"
 import { join, dirname, resolve, relative } from "node:path"
 import { createRequire } from "node:module"
 import { fileURLToPath } from "node:url"
-import { homedir } from "node:os"
 
 const scriptDir = dirname(fileURLToPath(import.meta.url))
 const args = process.argv.slice(2)
-const argValue = (flag, fallback) => {
-  const index = args.indexOf(flag)
-  return index === -1 ? fallback : args[index + 1].replace(/^~/, homedir())
-}
-const root = resolve(argValue("--root", join(homedir(), "nice")))
-const outFile = resolve(argValue("--out", join(scriptDir, "..", "catalog.json")))
+const rootFlag = args.indexOf("--root")
+const root = resolve(rootFlag === -1 ? join(scriptDir, "..", "..", "..") : args[rootFlag + 1])
+const agentsDir = join(scriptDir, "..")
+const ts = createRequire(join(root, "package.json"))("typescript")
 
-const STORYBOOK_DEPLOYED = "https://niceprototypes.com/ui/?path=/docs/"
-const STORYBOOK_LOCAL = "http://localhost:6006/?path=/docs/"
 const TOKEN_RESERVED_KEYS = ["$themes", "$breakpoints", "$inverse"]
 const STATE_PATTERN = /hover|active|focus|disabled|pressed|checked|selected|error|invalid|open|expanded|loading/i
-
-/** Loads `typescript` from the first package under root that has it installed. */
-function loadTypeScript() {
-  const candidates = ["storybook", "react-ink", "react-styles", "styles"]
-  for (const name of candidates) {
-    const manifest = join(root, name, "package.json")
-    if (!existsSync(manifest)) continue
-    try {
-      return createRequire(manifest)("typescript")
-    } catch {
-      // not installed in this package; try the next
-    }
-  }
-  throw new Error(`typescript not found under ${candidates.map(name => join(root, name)).join(", ")}`)
-}
-const ts = loadTypeScript()
+/** Props every component may carry; listed by name only, never per component in components.txt. */
+const isCommonProp = name => ["className", "style", "ref", "id", "data-testid"].includes(name) || name.startsWith("aria-")
+const COMPONENT_DIRS = ["src/components", "src/react/components"]
 
 const readJson = path => JSON.parse(readFileSync(path, "utf8"))
 const isDirectory = path => existsSync(path) && statSync(path).isDirectory()
 const lowerFirst = value => value.charAt(0).toLowerCase() + value.slice(1)
+const sanitizeStoryId = value => value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "")
 
-/** Storybook's id sanitizer: lowercase, every non-alphanumeric run → "-", trimmed. */
-const sanitizeStoryId = value =>
-  value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "")
+/** `export type XType = "a" | "b"` lines from the generated token types. */
+function readTokenUnions() {
+  const path = join(root, "packages", "styles", "src", "generated", "types.ts")
+  const unions = new Map()
+  for (const match of readFileSync(path, "utf8").matchAll(/^export type (\w+) = (.+)$/gm)) unions.set(match[1], match[2].trim())
+  return unions
+}
+const tokenUnions = readTokenUnions()
 
-/** First JSDoc paragraph and @default of a node, if any. */
+/** First JSDoc paragraph and @default of a node. */
 function readJsDoc(node, sourceFile) {
   const docs = ts.getJSDocCommentsAndTags(node).filter(ts.isJSDoc)
   if (docs.length === 0) return {}
@@ -73,13 +61,13 @@ function readJsDoc(node, sourceFile) {
   return { description: description || undefined, default: defaultValue }
 }
 
-/** Parses one `{C}.types.ts`: the `{C}Props` members, with local type aliases resolved one level. */
+/** `{C}Props` members of one types file; local aliases resolve one level, token unions are named. */
 function readPropsFile(typesPath, componentName) {
-  const text = readFileSync(typesPath, "utf8")
-  const sourceFile = ts.createSourceFile(typesPath, text, ts.ScriptTarget.Latest, true)
+  const sourceFile = ts.createSourceFile(typesPath, readFileSync(typesPath, "utf8"), ts.ScriptTarget.Latest, true)
   const aliases = new Map()
   let propsNode
   let propsExtends = []
+  const heritage = node => (node.heritageClauses ?? []).flatMap(clause => clause.types.map(type => type.getText(sourceFile)))
 
   sourceFile.forEachChild(node => {
     if (ts.isTypeAliasDeclaration(node)) {
@@ -88,20 +76,19 @@ function readPropsFile(typesPath, componentName) {
     }
     if (ts.isInterfaceDeclaration(node) && node.name.text === `${componentName}Props`) {
       propsNode = node
-      propsExtends = (node.heritageClauses ?? []).flatMap(clause => clause.types.map(type => type.getText(sourceFile)))
+      propsExtends = heritage(node)
     }
   })
-  // Fallback: the file's single exported `*Props` interface (e.g. SectionLinks → StickySectionLinksProps)
+  // Fallback: the file's single `*Props` interface (e.g. SectionLinks → StickySectionLinksProps)
   if (!propsNode) {
     const candidates = sourceFile.statements.filter(node => ts.isInterfaceDeclaration(node) && node.name.text.endsWith("Props"))
     if (candidates.length === 1) {
       propsNode = candidates[0]
-      propsExtends = (propsNode.heritageClauses ?? []).flatMap(clause => clause.types.map(type => type.getText(sourceFile)))
+      propsExtends = heritage(propsNode)
     }
   }
   if (!propsNode) return null
 
-  // `type XProps = A & { … }` — collect the literal members and record the rest as extends
   let members = []
   const collect = typeNode => {
     if (ts.isTypeLiteralNode(typeNode)) members.push(...typeNode.members)
@@ -116,13 +103,14 @@ function readPropsFile(typesPath, componentName) {
     .filter(member => ts.isPropertySignature(member) && member.name)
     .map(member => {
       const name = member.name.getText(sourceFile).replace(/^["']|["']$/g, "")
-      const type = member.type ? member.type.getText(sourceFile) : "unknown"
-      const resolved = aliases.get(type)
+      const type = member.type ? member.type.getText(sourceFile).replace(/\s+/g, " ") : "unknown"
+      const local = aliases.get(type)?.replace(/\s+/g, " ")
+      // `type` = what to pass: a token union name (SizeType) stays named; any other alias is expanded
+      const shown = local && !tokenUnions.has(local) ? local : (local ?? type)
       return {
         name,
-        type,
-        ...(resolved && resolved !== type ? { resolved } : {}),
-        optional: Boolean(member.questionToken),
+        type: shown,
+        ...(member.questionToken ? {} : { required: true }),
         ...readJsDoc(member, sourceFile),
       }
     })
@@ -131,9 +119,9 @@ function readPropsFile(typesPath, componentName) {
   return { propsName, props, extends: propsExtends.length ? propsExtends : undefined }
 }
 
-/** Flattens a component token JSON into `prefix.path:variant` addresses plus override axes. */
+/** Component token JSON → `prefix.path:variant` addresses plus override axes. */
 function readComponentTokens(prefix) {
-  const path = join(root, "styles", "src", "tokens", "components", `${prefix}.json`)
+  const path = join(root, "packages", "styles", "src", "tokens", "components", `${prefix}.json`)
   if (!existsSync(path)) return null
   const source = readJson(path)
   const addresses = []
@@ -141,54 +129,47 @@ function readComponentTokens(prefix) {
     for (const [key, value] of Object.entries(node)) {
       if (TOKEN_RESERVED_KEYS.includes(key)) continue
       if (value !== null && typeof value === "object") walk(value, [...trail, key])
-      else if (trail.length === 0) addresses.push(`${prefix}.${key}:base`)
-      else addresses.push(`${prefix}.${trail.join(".")}:${key}`)
+      else addresses.push(trail.length === 0 ? `${prefix}.${key}:base` : `${prefix}.${trail.join(".")}:${key}`)
     }
   }
   walk(source, [])
   return {
-    prefix,
-    source: relative(root, path),
     addresses,
-    themes: source.$themes ? Object.keys(source.$themes) : [],
-    breakpoints: source.$breakpoints ? Object.keys(source.$breakpoints) : [],
-    inverse: Boolean(source.$inverse),
+    ...(source.$themes ? { themes: Object.keys(source.$themes) } : {}),
+    ...(source.$breakpoints ? { breakpoints: Object.keys(source.$breakpoints) } : {}),
+    ...(source.$inverse ? { inverse: true } : {}),
   }
 }
 
-/** Every <Meta title> under the storybook component stories, keyed by title. */
-function readStoryTitles() {
-  const storiesRoot = join(root, "storybook", "stories", "React", "Components")
-  const titles = []
+/** Storybook titles under stories/Components: MDX `<Meta title>` and CSF `title:` + `export const Playground`. */
+function readStories() {
+  const storiesRoot = join(root, "apps", "storybook", "stories", "Components")
+  const docs = []
+  const playgrounds = []
   const walk = directory => {
     if (!isDirectory(directory)) return
     for (const entry of readdirSync(directory)) {
       const path = join(directory, entry)
       if (isDirectory(path)) walk(path)
       else if (entry.endsWith(".mdx")) {
+        const match = readFileSync(path, "utf8").match(/<Meta[^>]*\btitle="([^"]+)"/)
+        if (match) docs.push(match[1])
+      } else if (/\.stories\.tsx?$/.test(entry)) {
         const text = readFileSync(path, "utf8")
-        const match = text.match(/<Meta[^>]*\btitle="([^"]+)"/)
-        if (match) titles.push({ title: match[1], file: relative(root, path) })
-        // `<Meta of={XStories} />` — the title lives in the imported CSF file
-        else if (/<Meta[^>]*\bof=\{/.test(text)) {
-          const csfImport = text.match(/import\s+\*\s+as\s+\w+\s+from\s+["'](\.[^"']+)["']/)
-          const csfPath = csfImport && [".tsx", ".ts", ""].map(ext => resolve(directory, csfImport[1] + ext)).find(existsSync)
-          const csfTitle = csfPath && readFileSync(csfPath, "utf8").match(/\btitle:\s*["']([^"']+)["']/)
-          if (csfTitle) titles.push({ title: csfTitle[1], file: relative(root, path) })
+        const title = text.match(/\btitle:\s*["']([^"']+)["']/)
+        if (title) {
+          docs.push(title[1])
+          if (/export const Playground\b/.test(text)) playgrounds.push(title[1])
         }
       }
     }
   }
   walk(storiesRoot)
-  return titles
+  return { docs, playgrounds }
 }
+const stories = readStories()
+const lastSegment = title => title.split("/").pop()
 
-const storyLink = title => {
-  const id = `${sanitizeStoryId(title)}--docs`
-  return { id, local: STORYBOOK_LOCAL + id, deployed: STORYBOOK_DEPLOYED + id }
-}
-
-/** Export names from a package's src/index.ts (`export { a, default as B }`, `export type { … }`). */
 function readExports(indexPath) {
   if (!existsSync(indexPath)) return []
   const text = readFileSync(indexPath, "utf8")
@@ -199,83 +180,92 @@ function readExports(indexPath) {
       if (name) names.add(match[1] ? `type ${name}` : name)
     }
   }
-  if (/export\s+\*\s+from/.test(text)) names.add("* (star re-export, see src/index.ts)")
   return [...names]
 }
 
-const storyTitles = readStoryTitles()
-const packageDirectories = readdirSync(root)
-  .filter(entry => entry.startsWith("react-") && existsSync(join(root, entry, "package.json")))
+const packagesRoot = join(root, "packages")
+const packages = readdirSync(packagesRoot)
+  .filter(directory => !directory.startsWith("storybook-") && existsSync(join(packagesRoot, directory, "package.json")))
   .sort()
-
-const packages = packageDirectories.map(directory => {
-  const packageRoot = join(root, directory)
-  const manifest = readJson(join(packageRoot, "package.json"))
-  const componentsRoot = join(packageRoot, "src", "components")
-  const componentNames = isDirectory(componentsRoot)
-    ? readdirSync(componentsRoot).filter(name => existsSync(join(componentsRoot, name, `${name}.types.ts`)))
-    : []
-
-  const components = componentNames.map(name => {
-    const typesPath = join(componentsRoot, name, `${name}.types.ts`)
-    const parsed = readPropsFile(typesPath, name)
-    const tokens = readComponentTokens(lowerFirst(name))
-
-    // Storybook: the component page is the title whose last segment is the component;
-    // a prop page is `{component title}/{prop}`.
-    const componentStory = storyTitles.find(({ title }) => title.split("/").pop() === name)
-    const propStories = componentStory
-      ? storyTitles.filter(({ title }) => title.startsWith(`${componentStory.title}/`))
-      : []
-    const props = (parsed?.props ?? []).map(prop => {
-      const story = propStories.find(({ title }) => title.split("/").pop().toLowerCase() === prop.name.toLowerCase())
-      return story ? { ...prop, story: storyLink(story.title).id } : prop
+  .map(directory => {
+    const packageRoot = join(packagesRoot, directory)
+    const manifest = readJson(join(packageRoot, "package.json"))
+    const components = COMPONENT_DIRS.flatMap(componentDir => {
+      const componentsRoot = join(packageRoot, componentDir)
+      if (!isDirectory(componentsRoot)) return []
+      return readdirSync(componentsRoot)
+        .filter(name => existsSync(join(componentsRoot, name, `${name}.types.ts`)))
+        .map(name => {
+          const typesPath = join(componentsRoot, name, `${name}.types.ts`)
+          const parsed = readPropsFile(typesPath, name)
+          const tokens = readComponentTokens(lowerFirst(name))
+          const props = parsed?.props ?? []
+          const docsTitle = stories.docs.find(title => lastSegment(title) === name)
+          const playgroundTitle = stories.playgrounds.find(title => lastSegment(title) === name)
+          const states = [
+            ...props.filter(prop => prop.type === "boolean").map(prop => `prop:${prop.name}`),
+            ...new Set((tokens?.addresses ?? []).flatMap(address => address.split(/[.:]/).filter(part => STATE_PATTERN.test(part))).map(part => `token:${part}`)),
+          ]
+          return {
+            name,
+            types: relative(root, typesPath),
+            propsType: parsed?.propsName ?? null,
+            ...(parsed?.extends ? { extends: parsed.extends } : {}),
+            props: props.filter(prop => !isCommonProp(prop.name)),
+            common: props.filter(prop => isCommonProp(prop.name)).map(prop => prop.name),
+            states,
+            tokens,
+            docs: docsTitle ? `${sanitizeStoryId(docsTitle)}--docs` : null,
+            playground: playgroundTitle ? `${sanitizeStoryId(playgroundTitle)}--playground` : null,
+          }
+        })
     })
-
-    const states = [
-      ...props.filter(prop => prop.type === "boolean" || /boolean/.test(prop.resolved ?? "")).map(prop => `prop:${prop.name}`),
-      ...new Set((tokens?.addresses ?? []).flatMap(address => address.split(/[.:]/).filter(part => STATE_PATTERN.test(part))).map(part => `token:${part}`)),
-    ]
-
     return {
-      name,
-      types: relative(root, typesPath),
-      propsType: parsed?.propsName ?? null,
-      extends: parsed?.extends,
-      props,
-      states,
-      tokens,
-      story: componentStory ? { ...storyLink(componentStory.title), file: componentStory.file } : null,
-      otherStories: propStories
-        .filter(({ title }) => !props.some(prop => prop.story === storyLink(title).id))
-        .map(({ title }) => storyLink(title).id),
+      package: manifest.name,
+      directory: `packages/${directory}`,
+      version: manifest.version,
+      private: manifest.private || undefined,
+      nicePeers: Object.keys(manifest.peerDependencies ?? {}).filter(name => name.startsWith("@niceprototypes/")),
+      exports: readExports(join(packageRoot, "src", "index.ts")),
+      components,
     }
   })
 
-  return {
-    package: manifest.name,
-    directory,
-    version: manifest.version,
-    description: manifest.description,
-    nicePeers: Object.keys(manifest.peerDependencies ?? {}).filter(name => name.startsWith("nice-")),
-    exports: readExports(join(packageRoot, "src", "index.ts")),
-    components,
-  }
-})
+const allComponents = packages.flatMap(entry => entry.components.map(component => ({ ...component, package: entry.package })))
+const usedUnions = [...tokenUnions.keys()].filter(name => allComponents.some(component => component.props.some(prop => prop.type.includes(name))))
 
 const catalog = {
-  $comment: "GENERATED by manifest/agents/scripts/generate-catalog.mjs — do not edit by hand. Re-run after any prop/token/story change.",
+  $comment: "GENERATED by manifest/agents/scripts/generate-catalog.mjs; do not edit. Query with jq; never read whole.",
   generatedAt: new Date().toISOString(),
-  root,
-  storybook: { local: STORYBOOK_LOCAL, deployed: STORYBOOK_DEPLOYED },
-  tokenAddressFormat: "getToken(\"{prefix}.{group.path}:{variant}\") from nice-react-styles",
-  packages,
+  storybook: { local: "http://localhost:6006/?path=/docs/", deployed: "https://niceprototypes.com/ui/?path=/docs/" },
+  commonProps: "className style ref id data-testid aria-*",
+  tokenAddressFormat: 'getToken("{prefix}.{group.path}:{variant}") from @niceprototypes/styles',
+  tokenUnions: Object.fromEntries(usedUnions.map(name => [name, tokenUnions.get(name)])),
+  packages: packages.filter(entry => entry.components.length || !entry.private),
 }
+writeFileSync(join(agentsDir, "catalog.json"), JSON.stringify(catalog) + "\n")
 
-writeFileSync(outFile, JSON.stringify(catalog, null, 2) + "\n")
-const componentCount = packages.reduce((total, entry) => total + entry.components.length, 0)
-const missingProps = packages.flatMap(entry => entry.components.filter(component => !component.propsType).map(component => component.name))
-const missingStory = packages.flatMap(entry => entry.components.filter(component => !component.story).map(component => component.name))
-console.log(`catalog: ${packages.length} packages, ${componentCount} components → ${relative(process.cwd(), outFile) || outFile}`)
-if (missingProps.length) console.log(`  no {C}Props found: ${missingProps.join(", ")}`)
+/** components.txt shorthand: functions → fn, ReactNode → node, prose defaults dropped (catalog.json keeps all three). */
+const shortType = type => (type.includes("=>") ? "fn" : type.replace(/React\.ReactNode/g, "node").replace(/ \| /g, "|"))
+const shortDefault = value => (value && !/\s/.test(value) ? `=${value}` : "")
+const propText = prop => `${prop.name}${prop.required ? "" : "?"}:${shortType(prop.type)}${shortDefault(prop.default)}`
+const lines = [
+  "# GENERATED by manifest/agents/scripts/generate-catalog.mjs; do not edit.",
+  "# Component(package) [story id] props. `?` optional, `=x` default. Common props omitted: className style ref id data-testid aria-*.",
+  "# Detail: jq '.packages[].components[]|select(.name==\"Button\")' manifest/agents/catalog.json",
+  "",
+  "## Token unions",
+  ...usedUnions.map(name => `${name} = ${tokenUnions.get(name)}`),
+  "",
+  "## Components",
+  ...allComponents.map(component => {
+    const story = component.playground ?? component.docs
+    return `${component.name}(${component.package.replace("@niceprototypes/", "")})${story ? ` [${story}]` : ""} ${component.props.map(propText).join(" ")}`
+  }),
+]
+writeFileSync(join(agentsDir, "components.txt"), lines.join("\n") + "\n")
+
+const missingStory = allComponents.filter(component => !component.docs).map(component => component.name)
+const missingPlayground = allComponents.filter(component => !component.playground).length
+console.log(`catalog: ${packages.length} packages, ${allComponents.length} components; ${missingPlayground} without a Playground`)
 if (missingStory.length) console.log(`  no storybook page: ${missingStory.join(", ")}`)

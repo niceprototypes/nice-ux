@@ -1,6 +1,6 @@
 # Token Naming Conventions
 
-Design token naming patterns in nice-styles.
+Design token naming patterns in @niceprototypes/styles.
 
 ---
 
@@ -174,7 +174,7 @@ Used by: `borderRadius`, `size`, `fontSize`, `gap`
 JSON sources split into two scopes — module-level (cross-component) under `modules/`, and component-level (per-prefix) under `components/`. Both scopes are **folders of one-file-per-key**: `modules/{group}.json` (one per token group) and `components/{prefix}.json` (one per component). Breakpoint and alt-theme overrides live **inside** each file under the reserved `$breakpoints` and `$themes` keys.
 
 ```
-nice-styles/src/tokens/
+@niceprototypes/styles/src/tokens/
 ├── modules/                     ← one file per token group
 │   ├── color.json               ← base + $themes (alt themes inline)
 │   ├── backgroundColor.json
@@ -279,7 +279,7 @@ Themes are emitted last in `dist/tokens.css`, so on overlap (a token overridden 
 setTokens({ button: { icon: { color: { hover: { day: "#333", night: "#fff" } } } } })
 ```
 
-The component applies them with mutually exclusive state selectors (active > focus > hover > rest; a disabled component shows base only), and a per-instance prop for the same property (Button's `iconColor`) is emitted after the token rules, so the prop beats the token. Reference: `button.icon.color` and react-button's `stateRules`. `focusRing` stays its own group (the focus ring is a separate visual, not a state of another token). Nested component overrides of any depth are accepted by `setTokens` / `generateTokenCSS`: the component's own token tree decides which nodes are groups.
+The component applies them with mutually exclusive state selectors (active > focus > hover > rest; a disabled component shows base only), and a per-instance prop for the same property (Button's `iconColor`) is emitted after the token rules, so the prop beats the token. Reference: `button.icon.color` and button's `stateRules`. `focusRing` stays its own group (the focus ring is a separate visual, not a state of another token). Nested component overrides of any depth are accepted by `setTokens` / `generateTokenCSS`: the component's own token tree decides which nodes are groups.
 
 Adding a new component package = drop one `components/{prefix}.json`. The build picks it up automatically via filename glob — no script edits.
 
@@ -320,7 +320,7 @@ theme-correct.
 Build scripts (`scripts/generate*/`) read the JSON sources and output:
 
 ```
-nice-styles/src/generated/
+@niceprototypes/styles/src/generated/
 ├── types.ts                       ← token type unions, ComponentPrefix
 ├── tokensData.ts                  ← static core tokens as TS object
 ├── themeTokensData.ts             ← theme-keyed tokens as TS object ({day, night})
@@ -335,14 +335,11 @@ The generators reconstitute the `{day, night}` split for runtime consumption —
 
 ## Import Guidance
 
-In React projects, import all nice-styles assets from `nice-react-styles`, which re-exports the entire nice-styles public API. Import directly from `nice-styles` only when working outside the React framework (e.g., vanilla JS, build scripts, non-React tooling). Either import path is valid — they resolve to the same functions.
+`@niceprototypes/styles` is one package: the root entry is the React bindings plus the whole token API. Node scripts and other non-React code import `@niceprototypes/styles/core` (the root imports `tokens.css` and cannot load in plain Node).
 
 ```ts
-// React projects
-import { getToken, getBreakpoint, type FontSizeType } from "nice-react-styles"
-
-// Non-React contexts
-import { getToken, getBreakpoint, type FontSizeType } from "nice-styles"
+import { getToken, getBreakpoint, type FontSizeType } from "@niceprototypes/styles"       // React
+import { getToken, getBreakpoint, type FontSizeType } from "@niceprototypes/styles/core"  // Node / non-React
 ```
 
 ---
@@ -367,7 +364,7 @@ getToken(
 ```
 
 ```ts
-import { getToken } from "nice-react-styles"
+import { getToken } from "@niceprototypes/styles"
 
 getToken("fontSize")                                      // → "var(--np--font-size)"
 getToken("fontSize", "large")                             // → "var(--np--font-size--large)"
@@ -389,7 +386,7 @@ Rules:
 ### Usage in styled-components
 
 ```ts
-import { getToken } from "nice-react-styles"
+import { getToken } from "@niceprototypes/styles"
 
 const StyledDiv = styled.div`
   font-size: ${getToken("fontSize", "large")};
@@ -399,7 +396,7 @@ const StyledDiv = styled.div`
 
 ---
 
-## getConstant (nice-styles)
+## getConstant (@niceprototypes/styles)
 
 Builds CSS variable names following the `--np--` convention. Name only — no registry lookup, no validation. To read a registered token, use `getToken`. `getConstantKey` returns the bare name.
 
@@ -413,7 +410,7 @@ getConstantKey(token: string | string[], param: string, options?: { theme?: stri
 ### Examples
 
 ```ts
-import { getConstant, getConstantKey } from "nice-react-styles"
+import { getConstant, getConstantKey } from "@niceprototypes/styles"
 
 getConstant("backgroundColor", "base")                   // → "var(--np--background-color)"
 getConstant("backgroundColor", "base", { theme: "day" }) // → "var(--np--background-color--day)"
@@ -430,10 +427,10 @@ getConstantKey(["icon", "size"], "base", { pkg: "button" }) // → "--np--button
 
 ## Component tokens
 
-Component tokens are read with `getToken` using an address whose first dotted segment is the component: `"button.icon.size:small"`. Values live in `nice-styles/src/tokens/components/{prefix}.json`. Dots carry the namespace and group path, the first colon carries the variant — group, variant, and effect names never contain a dot or a colon.
+Component tokens are read with `getToken` using an address whose first dotted segment is the component: `"button.icon.size:small"`. Values live in `@niceprototypes/styles/src/tokens/components/{prefix}.json`. Dots carry the namespace and group path, the first colon carries the variant — group, variant, and effect names never contain a dot or a colon.
 
 ```ts
-import { getToken } from "nice-react-styles"
+import { getToken } from "@niceprototypes/styles"
 
 getToken("button.size:base")                                    // → "var(--np--button--size)"
 getToken("icon.color:error")                                    // → "var(--np--icon--color--error)"
@@ -447,10 +444,10 @@ Valid prefixes are listed by the `ComponentPrefix` type (auto-generated from `sr
 
 ## Token Registry
 
-One store in nice-styles (`src/registry/`), re-exported by nice-react-styles. Generated tokens are seeded at module load; custom tokens and overrides are added with `setTokens()` or `registerTokens()`. `breakpoints` is a reserved group holding the breakpoint floors (`getToken("breakpoints:laptop")`), seeded from `breakpoints.json` and updated when `setTokens({ breakpoints })` changes one. Read single tokens with [`getToken`](#gettoken) and enumerate with [`listTokens`](#listtokens--enumerate-tokens).
+One store in @niceprototypes/styles (`src/registry/`). Generated tokens are seeded at module load; custom tokens and overrides are added with `setTokens()` or `registerTokens()`. `breakpoints` is a reserved group holding the breakpoint floors (`getToken("breakpoints:laptop")`), seeded from `breakpoints.json` and updated when `setTokens({ breakpoints })` changes one. Read single tokens with [`getToken`](#gettoken) and enumerate with [`listTokens`](#listtokens--enumerate-tokens).
 
 ```ts
-import { getToken } from "nice-react-styles"
+import { getToken } from "@niceprototypes/styles"
 
 getToken("fontSize")                                     // "var(--np--font-size)" — seeded, always available
 getToken("backgroundColor", "base", { theme: "night" })  // "var(--np--background-color--night)"
@@ -459,10 +456,10 @@ getToken("brandColor", "primary")                        // "var(--np--brand-col
 
 ### setTokens — Register + Generate CSS
 
-Registers app-level token overrides and custom tokens in the runtime registry, and sets breakpoint thresholds. Injects the generated CSS synchronously at call time and returns `getToken`, typed (`TypedGetToken`, `react-styles/src/services/setTokens/setTokens.types.ts`) to accept the core token groups and variants plus every group and variant the map registers — custom groups, variants added to existing groups, and component groups addressed as `{prefix}.{group}`. Same function as the plain `getToken` at runtime; only the accepted names widen. Call it once at module load (typically in `src/nice/tokens.ts`), export the returned getter, and import that file from your app entry.
+Registers app-level token overrides and custom tokens in the runtime registry, and sets breakpoint thresholds. Injects the generated CSS synchronously at call time and returns `getToken`, typed (`TypedGetToken`, `packages/styles/src/react/services/setTokens/setTokens.types.ts`) to accept the core token groups and variants plus every group and variant the map registers — custom groups, variants added to existing groups, and component groups addressed as `{prefix}.{group}`. Same function as the plain `getToken` at runtime; only the accepted names widen. Call it once at module load (typically in `src/nice/tokens.ts`), export the returned getter, and import that file from your app entry.
 
 ```ts
-import { setTokens } from "nice-react-styles"
+import { setTokens } from "@niceprototypes/styles"
 
 const AppTokenMap = {
   // Breakpoint thresholds (reserved key) — applied before the rest of the map
@@ -520,7 +517,7 @@ getToken("brandColor", "primary")   // typed: the core brandColor group plus the
 Directly register tokens without generating CSS.
 
 ```ts
-import { registerTokens } from "nice-react-styles"
+import { registerTokens } from "@niceprototypes/styles"
 
 registerTokens({ brandColor: { primary: "#f00" } }, "app")
 ```
@@ -532,7 +529,7 @@ registerTokens({ brandColor: { primary: "#f00" } }, "app")
 The registry is exported as a `Map<string, TokenEntry>` keyed by CSS variable name. Each entry holds `prefix`, `path`, `variant`, `inverse`, and two value layers: `seed` (generated default) and `runtime` (`setTokens` / `registerTokens` override).
 
 ```ts
-import { registry } from "nice-react-styles"
+import { registry } from "@niceprototypes/styles"
 
 registry.has("--np--font-size")               // true
 registry.get("--np--font-size--large")?.seed  // { phone: "20px", tablet: "20px", laptop: "24px", desktop: "24px" }
@@ -560,10 +557,10 @@ Component colour props take the same thing as an object — `<Ink color={{ name:
 
 ### listTokens — Enumerate tokens
 
-`listTokens(filter?)` lists registered tokens in one pass over the registry — the enumeration counterpart of `getToken`. Exported from nice-styles and nice-react-styles.
+`listTokens(filter?)` lists registered tokens in one pass over the registry — the enumeration counterpart of `getToken`. Exported from @niceprototypes/styles and @niceprototypes/styles.
 
 ```ts
-import { listTokens, getToken } from "nice-react-styles"
+import { listTokens, getToken } from "@niceprototypes/styles"
 
 listTokens({ prefix: "button" })       // every button component token
 listTokens({ group: "color" })         // color variants, base and inverse
@@ -586,9 +583,9 @@ Filter (all optional, all must match): `prefix` (exact), `group` (first path seg
 
 ---
 
-## Token Source Modules (nice-styles)
+## Token Source Modules (@niceprototypes/styles)
 
-Token values originate from per-group JSON files under `nice-styles/src/tokens/modules/` — one file per token group, each carrying the comprehensive base at its top level plus inline `$breakpoints` and `$themes` override sections **scoped to that group**. A shared reader (`scripts/shared/readModuleFolder.ts`) globs the folder and reassembles the combined object the build consumes. Per-component tokens live under `components/{prefix}.json` with the same internal shape.
+Token values originate from per-group JSON files under `@niceprototypes/styles/src/tokens/modules/` — one file per token group, each carrying the comprehensive base at its top level plus inline `$breakpoints` and `$themes` override sections **scoped to that group**. A shared reader (`scripts/shared/readModuleFolder.ts`) globs the folder and reassembles the combined object the build consumes. Per-component tokens live under `components/{prefix}.json` with the same internal shape.
 
 ### modules/{group}.json — Base + `$breakpoints` + `$themes`
 
@@ -664,7 +661,7 @@ Semantic defaults (`scripts/shared/semanticDefaults.ts`): `{ ...core, ...themes.
 
 ## Variant Value Formats in setTokens
 
-When calling `setTokens()` from nice-react-styles, variant values can be one of three formats. These can be mixed freely within the same token group. (Breakpoint *thresholds* are not a variant value — they go under the reserved top-level `breakpoints` key.)
+When calling `setTokens()` from @niceprototypes/styles, variant values can be one of three formats. These can be mixed freely within the same token group. (Breakpoint *thresholds* are not a variant value — they go under the reserved top-level `breakpoints` key.)
 
 ### Static (string)
 
@@ -722,7 +719,7 @@ setTokens({
 
 ## Theme Architecture
 
-- **"day"** is the default theme (`DEFAULT_THEME` in nice-react-styles)
+- **"day"** is the default theme (`DEFAULT_THEME` in @niceprototypes/styles)
 - **"night"** replaces "dark" for mode suffixes throughout the system
 - Stable primitives: `--np--*--day` and `--np--*--night` are never reassigned
 - `@media (prefers-color-scheme: dark)` maps semantic vars to `--night` primitives — this is the **default behavior** when no pin is set
@@ -748,7 +745,7 @@ Three ways consumers pin:
 | Approach | Code | Use when |
 |---|---|---|
 | Whole page | `<html data-theme="day">` | App-wide default that overrides OS preference (e.g. storybook). |
-| Subtree via React | `<Theme name="day">{children}</Theme>` from `nice-react-styles` | Pin a region; uses a `<div style="display:contents">` so layout is unaffected. |
+| Subtree via React | `<Theme name="day">{children}</Theme>` from `@niceprototypes/styles` | Pin a region; uses a `<div style="display:contents">` so layout is unaffected. |
 | Subtree via raw HTML | `<section data-theme="day">…</section>` | Same mechanism without React. |
 
 ### Component `theme` prop
@@ -763,27 +760,27 @@ Visual components (Ink, Tile, Button, Icon, Image, Input) implement their `theme
 
 The `theme` option on `getToken(name, variant, { theme })` returns the bare mode-primitive reference (`var(--np--…--day)` or `--night`) — bypassing the cascade entirely. Use only when an element inside a pinned region needs the opposite mode regardless of any ancestor pin (e.g. Button's inverted-mode text contrast).
 
-### ThemeType (nice-styles)
+### ThemeType (@niceprototypes/styles)
 
 Core type for theme props across the ecosystem. Extensible for consumer-defined custom themes.
 
 ```ts
-import type { ThemeType } from "nice-react-styles"
+import type { ThemeType } from "@niceprototypes/styles"
 // "day" | "night" | (string & {})
 ```
 
 Component packages re-export as component-specific aliases:
 
 ```ts
-// nice-react-ink
-import type { InkThemeType } from "nice-react-ink"
+// @niceprototypes/ink
+import type { InkThemeType } from "@niceprototypes/ink"
 // InkThemeType = ThemeType
 ```
 
-Higher-level components (app code, wrapper components) import `ThemeType` from nice-react-styles:
+Higher-level components (app code, wrapper components) import `ThemeType` from @niceprototypes/styles:
 
 ```ts
-import type { ThemeType } from "nice-react-styles"
+import type { ThemeType } from "@niceprototypes/styles"
 
 interface MyComponentProps {
   theme?: ThemeType

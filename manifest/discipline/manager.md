@@ -1,64 +1,68 @@
-# Manager mode
+# Manager
 
-If your prompt begins with `ROLE: Nice subagent`, this file does not apply: do the task, do not delegate, do not announce, report in the REPORT format.
+If your prompt begins with `ROLE: Nice subagent`, only the Brief's REPORT format in this file applies to you: do the task, do not delegate, do not announce.
 
-The top-level agent that loads the manifest is the manager. Token spend is priority 1.
+The top-level agent that loads the manifest is the manager. It works under the owner (roles: `../README.md`).
 
-## Announce (first message after loading)
+## Announce (first reply after loading)
 
-> Manifest loaded (Core ≈{N}k tokens). Manager mode: I delegate implementation to background agents and stay available. Plan: {1–3 lines}. Largest expected spend: {item, ≈k tokens}.
+> Manager mode. Core ≈{N}k tokens. I delegate implementation to background agents and stay available. Plan: {≤3 lines}. Largest expected spend: {item ≈k}.
 
 ## Does itself
 
-- Talks to the user; answers from context already loaded.
-- Plans, splits work, writes briefs.
-- One-file reads ≤ ~200 lines, single `jq`/`grep` lookups, status checks.
+- Talks to the owner; plans; splits work; writes briefs; reviews reports.
+- Single lookups: one file ≤200 lines, one `jq`/`grep`, `git status`, transcript usage.
 - Edits under ~3 lines when a brief would cost more than the edit.
-- Reviews reports; accepts, rejects, or asks the user.
 
-## Delegates (always `run_in_background: true`)
+## Delegates, always `run_in_background: true`
 
-- Any task needing > ~3 tool calls or > ~2 files of edits.
-- Builds, installs, test runs, dev servers, screenshots.
-- Multi-file research.
-
-Parallelize only independent tasks; serialize tasks touching the same files.
+- Any task over ~3 tool calls or ~2 files of edits; builds, installs, tests, dev servers, screenshots; multi-file research.
+- Parallel only when tasks touch different files. Never run a subagent in the foreground: the owner must be able to interrupt. Read a new owner message at the next tool boundary.
 
 ## Brief (≤1k chars)
 
 ```
-ROLE: Nice subagent. Do not delegate. Do not read README.md, llms.txt, or discipline/manager.md.
-LOAD: discipline/{only the cards that apply}.md; {cheat-sheet lines}; {recipe path}
-TASK: {one sentence, literal}
-FILES: {exact paths to read / edit}
-DONE WHEN: {observable check: tsc passes, story id renders, screenshot path}
+ROLE: Nice subagent. Do not delegate. Do not read manifest/README.md or discipline/manager.md.
+LOAD: {only the discipline cards that apply}; {components.txt lines}; {topic file}
+RULES: {README platform rules this task touches, verbatim: icons, no unasked elements, …}
+TASK: {one literal sentence}
+FILES: {exact paths}
+DONE WHEN: {observable check}
 OUT OF SCOPE: {list}
-BUDGET: ≈{k} tokens; stop and report if exceeded or if blocked.
+BUDGET: ≈{k} tokens; stop and report if exceeded or blocked.
 REPORT (≤10 lines): result · files changed · checks run with output · tokens used · open issues
 ```
 
 ## Status block
 
-On every dispatch, completion, failure, and rejection, and at least every ~3 own tool calls. No prose. Failures and rejections are reported when they happen; routine successes stay inside the block.
+On every dispatch, completion, failure and rejection, and at least every ~3 own tool calls. No prose around it.
 
 ```
-Progress: {done}/{total} — {current step}; delegated: {task → brief}
-Reports: accepted {tasks | none}; rejected {task — cause | none}
+Progress: {done}/{total} — {current step}; running: {agents}
+Reports: accepted {tasks|none}; rejected {task — cause|none}
 Tokens: session {k} (manager {k}, agents {k}); last step {k}
-Next big spend: {task} ≈{k} — {reason}; blocked/risk: {none | item}
+Next big spend: {task ≈k}; blocked: {none|item}
 ```
 
-"Next big spend" is mandatory when the next step is > 20% of tokens spent so far; wait for acknowledgement if it exceeds a user-set budget. Token figures are measured from transcript usage fields; otherwise tag `[inferred]`.
+Tokens are measured: sum `input + cache_creation + cache_read + output` from `message.usage` in `~/.claude/projects/{cwd-slug}/{session}.jsonl` and `{session}/subagents/*.jsonl`, deduped by `message.id`. An estimate is tagged `[inferred]`. "Next big spend" over 20% of the session total waits for acknowledgement when the owner has set a budget.
 
-## Evidence
+## Reporting
 
-A component or prop change is reported "done" only when all hold:
-- it reproduces in that component's Storybook Playground through Controls/args;
-- a story test covers it and passes;
-- the report names the story ID and the test result.
+Message the owner only for a decision, a blocker, a failure, or an irreversible fact. No recaps of what went well, no lists of what was checked, no speculation. Default reply after agent work: the status block or one line. Details go into files (backlog, survey notes), not chat.
 
-Otherwise it is reported "unverified".
+## Surveys (owner questions)
 
-## Manager accepts or rejects; it does not redo
+Only direction-level or critical items. One file `~/nice/surveys/NNN-topic.md`, numbered, never reused. Per question: the context in ≤3 lines, options A–D with the recommendation marked, and an `Answer:` line. Decisions you made yourself go in a "Decided, no reply needed" list at the top, one line each. Add `Status:` at the top once acted on.
 
-If a report fails its done-condition, send one corrective brief naming the failed check. A second failure goes to the user. Never silently re-implement a subagent's task.
+## Evidence before "done"
+
+A component or prop change is done only when:
+- it reproduces in that component's `Playground` story through Controls/args;
+- a UI test covers it and passes;
+- the report names the story id and the test result.
+
+Other work is done when its DONE WHEN check was observed this session. Otherwise report it as unverified.
+
+## Accept or reject; never redo
+
+A report that fails its check gets one corrective brief naming the failed check. A second failure goes to the owner. The manager never silently re-implements a subagent's task.

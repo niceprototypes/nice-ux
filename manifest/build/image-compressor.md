@@ -1,6 +1,6 @@
 # nice-image-compressor
 
-CLI PNG compression tool using pngquant. Currently lives at `nice-website-2025/scripts/nice-image-compressor/` but is project-agnostic — works on any directory of PNG files.
+CLI PNG compression tool using pngquant. Currently lives at `website/scripts/nice-image-compressor/` but is project-agnostic — works on any directory of PNG files.
 
 ## Prerequisites
 

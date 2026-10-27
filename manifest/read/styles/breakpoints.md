@@ -25,7 +25,7 @@ independently.
 
 ## Customizing — build time
 
-Edit `nice-styles/src/tokens/breakpoints.json` (the editable floors — no
+Edit `@niceprototypes/styles/src/tokens/breakpoints.json` (the editable floors — no
 `phone` key; phone is the derived base):
 
 ```json
@@ -36,10 +36,10 @@ Edit `nice-styles/src/tokens/breakpoints.json` (the editable floors — no
 }
 ```
 
-Rebuild nice-styles:
+Rebuild @niceprototypes/styles:
 
 ```bash
-cd nice-styles && npm run build
+pnpm --filter @niceprototypes/styles build
 ```
 
 The generator writes `src/generated/breakpointsData.ts`, which feeds the
@@ -53,11 +53,11 @@ After rebuild: hard-reload the consumer so the new `tokens.css` is fetched.
 ## Customizing — runtime
 
 Set thresholds with the reserved `breakpoints` key of `setTokens`
-(`nice-react-styles`) or `generateTokenCSS` (`nice-styles`) — the same call
+(`@niceprototypes/styles`) or `generateTokenCSS` (`@niceprototypes/styles`) — the same call
 that sets tokens. Partial and additive: omitted breakpoints are preserved.
 
 ```ts
-import { setTokens } from "nice-react-styles"
+import { setTokens } from "@niceprototypes/styles"
 
 setTokens({
   breakpoints: { laptop: 1100, desktop: 1800 },
@@ -168,7 +168,7 @@ Mutable typed object with stable identity. Readers see overrides without
 re-importing. Do not reassign — set thresholds through `setTokens({ breakpoints })`.
 
 ```ts
-import { BREAKPOINTS } from "nice-styles"
+import { BREAKPOINTS } from "@niceprototypes/styles"
 // { tablet: 641, laptop: 1280, desktop: 1720 }
 ```
 
