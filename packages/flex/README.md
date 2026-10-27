@@ -1,4 +1,5 @@
 # Flex Component
+![Flex](docs/flex.png)
 
 > **Responsive props:** Every prop accepts per-breakpoint overrides via the `breakpoints` array. See [withBreakpoints](https://niceprototypes.com/storybook/?path=/docs/react-styles-withbreakpoints--docs).
 
@@ -62,6 +63,7 @@ import Flex from 'nice-react-flex'
 
 | Prop | Type | Description |
 |------|------|-------------|
+| `as` | `"div" \| "nav" \| "header" \| "section" \| "footer" \| "main" \| "article" \| "aside" \| "ul" \| "ol" \| "li"` | HTML element to render (default `div`), for semantic landmarks and lists; flex styles and forwarded props are unchanged |
 | `children` | `React.ReactNode` | Child elements |
 | `className` | `string` | CSS class name |
 | `style` | `React.CSSProperties` | Inline styles |

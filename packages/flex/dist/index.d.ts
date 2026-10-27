@@ -47,6 +47,18 @@ type FlexJustifyContentType = "flex-start" | "flex-end" | "center" | "space-betw
  */
 type FlexWrapType = "nowrap" | "wrap" | "wrap-reverse";
 /**
+ * FlexAsType
+ *
+ * HTML element Flex renders, for semantic landmarks and lists. Passed to styled-components'
+ * `as`, so the flex styles and forwarded DOM props are unchanged.
+ *
+ * Values:
+ * - "div": default
+ * - "nav", "header", "section", "footer", "main", "article", "aside": landmarks / sectioning
+ * - "ul", "ol", "li": lists and list items
+ */
+type FlexAsType = "div" | "nav" | "header" | "section" | "footer" | "main" | "article" | "aside" | "ul" | "ol" | "li";
+/**
  * FlexSpacingType
  *
  * CSS-like shorthand string for spacing using token names. Supports 1-4
@@ -84,6 +96,8 @@ type FlexSpacingDefinitionType = SpacingDefinitionType;
  * - desktop: min-width query for desktop screens
  */
 type FlexProps = {
+    /** HTML element to render. @default "div" */
+    as?: FlexAsType;
     gap?: FlexGapSizeType;
     direction?: FlexDirectionType;
     alignItems?: FlexAlignItemsType;
@@ -118,6 +132,7 @@ declare namespace FlexTypes {
     type AlignItems = FlexAlignItemsType;
     type JustifyContent = FlexJustifyContentType;
     type Wrap = FlexWrapType;
+    type As = FlexAsType;
     type SpacingDefinition = FlexSpacingDefinitionType;
     type Spacing = FlexSpacingType;
     type Props = FlexProps;
@@ -203,4 +218,4 @@ declare const styleSpacing: (type: "padding" | "margin", def?: SpacingDefinition
 declare const styleFlex: (props: FlexProps) => string;
 
 export { FlexTypes, Flex as default, getGapSize, getSpacingValue, styleFlex, styleSpacing };
-export type { Breakpoint, FlexAlignItemsType, FlexBreakpointType, FlexDirectionType, FlexGapSizeType, FlexHeightType, FlexJustifyContentType, FlexProps, FlexSpacingDefinitionType, FlexSpacingType, FlexWrapType, GapSize, Spacing, SpacingDefinition };
+export type { Breakpoint, FlexAlignItemsType, FlexAsType, FlexBreakpointType, FlexDirectionType, FlexGapSizeType, FlexHeightType, FlexJustifyContentType, FlexProps, FlexSpacingDefinitionType, FlexSpacingType, FlexWrapType, GapSize, Spacing, SpacingDefinition };

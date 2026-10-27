@@ -60,6 +60,19 @@ export type FlexJustifyContentType = "flex-start" | "flex-end" | "center" | "spa
 export type FlexWrapType = "nowrap" | "wrap" | "wrap-reverse"
 
 /**
+ * FlexAsType
+ *
+ * HTML element Flex renders, for semantic landmarks and lists. Passed to styled-components'
+ * `as`, so the flex styles and forwarded DOM props are unchanged.
+ *
+ * Values:
+ * - "div": default
+ * - "nav", "header", "section", "footer", "main", "article", "aside": landmarks / sectioning
+ * - "ul", "ol", "li": lists and list items
+ */
+export type FlexAsType = "div" | "nav" | "header" | "section" | "footer" | "main" | "article" | "aside" | "ul" | "ol" | "li"
+
+/**
  * FlexSpacingType
  *
  * CSS-like shorthand string for spacing using token names. Supports 1-4
@@ -99,6 +112,8 @@ export type FlexSpacingDefinitionType = SpacingDefinitionType
  * - desktop: min-width query for desktop screens
  */
 export type FlexProps = {
+  /** HTML element to render. @default "div" */
+  as?: FlexAsType
   gap?: FlexGapSizeType
   direction?: FlexDirectionType
   alignItems?: FlexAlignItemsType
@@ -138,6 +153,7 @@ namespace FlexTypes {
   export type AlignItems = FlexAlignItemsType
   export type JustifyContent = FlexJustifyContentType
   export type Wrap = FlexWrapType
+  export type As = FlexAsType
   export type SpacingDefinition = FlexSpacingDefinitionType
   export type Spacing = FlexSpacingType
   export type Props = FlexProps
