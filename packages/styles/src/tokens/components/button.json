@@ -1,0 +1,89 @@
+{
+  "size": {
+    "smaller": "var(--np--size--smaller)",
+    "small": "var(--np--size--small)",
+    "base": "var(--np--size)",
+    "large": "var(--np--size--large)",
+    "larger": "var(--np--size--larger)"
+  },
+  "spacing": {
+    "smaller": "calc(var(--np--size--smaller) / 2)",
+    "small": "calc(var(--np--size--small) / 2)",
+    "base": "calc(var(--np--size) / 2)",
+    "large": "calc(var(--np--size--large) / 2)",
+    "larger": "calc(var(--np--size--larger) / 2)"
+  },
+  "borderRadius": {
+    "none": "var(--np--border-radius--none)",
+    "smaller": "var(--np--border-radius--smaller)",
+    "small": "var(--np--border-radius--small)",
+    "base": "var(--np--border-radius)",
+    "large": "var(--np--border-radius--large)",
+    "larger": "var(--np--border-radius--larger)",
+    "rounded": "calc(var(--np--button--size) / 2)"
+  },
+  "borderWidth": {
+    "none": "var(--np--border-width--none)",
+    "smaller": "var(--np--border-width--smaller)",
+    "small": "var(--np--border-width--small)",
+    "base": "var(--np--border-width)",
+    "large": "var(--np--border-width--large)",
+    "larger": "var(--np--border-width--larger)"
+  },
+  "borderColor": {
+    "base": "var(--np--border-color)",
+    "subtle": "var(--np--border-color--subtle)",
+    "strong": "var(--np--border-color--strong)",
+    "stronger": "var(--np--border-color--stronger)",
+    "success": "var(--np--border-color--success)",
+    "highlight": "var(--np--border-color--highlight)",
+    "warning": "var(--np--border-color--warning)",
+    "error": "var(--np--border-color--error)",
+    "link": "var(--np--border-color--link)"
+  },
+  "icon": {
+    "color": {
+      "base": "currentColor",
+      "hover": "var(--np--button--icon--color)",
+      "focus": "var(--np--button--icon--color)",
+      "active": "var(--np--button--icon--color)"
+    },
+    "size": {
+      "smaller": "var(--np--font-size--smaller)",
+      "small": "var(--np--font-size--small)",
+      "base": "var(--np--font-size)",
+      "large": "var(--np--font-size--large)",
+      "larger": "var(--np--font-size--larger)"
+    }
+  },
+  "animationDuration": {
+    "none": "0s",
+    "faster": "var(--np--animation-duration--faster)",
+    "fast": "var(--np--animation-duration--fast)",
+    "base": "var(--np--animation-duration--fast)",
+    "slow": "var(--np--animation-duration--slow)",
+    "slower": "var(--np--animation-duration--slower)"
+  },
+  "animationEasing": {
+    "base": "var(--np--animation-easing)"
+  },
+  "selected": {
+    "borderColor": {
+      "base": "var(--np--border-color--stronger)"
+    }
+  },
+  "focusRing": {
+    "width": {
+      "base": "var(--np--border-width--large)"
+    },
+    "color": {
+      "base": "var(--np--color--link)"
+    },
+    "offset": {
+      "base": "var(--np--gap--smaller)"
+    }
+  },
+  "$themes": {
+    "night": {}
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "zIndex": {
+    "base": "9999"
+  },
+  "focusRing": {
+    "width": {
+      "base": "var(--np--border-width--large)"
+    },
+    "color": {
+      "base": "var(--np--color--link)"
+    },
+    "offset": {
+      "base": "var(--np--gap--smaller)"
+    }
+  },
+  "$themes": {
+    "night": {}
+  }
+}

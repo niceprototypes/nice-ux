@@ -1,0 +1,107 @@
+/**
+ * Auto-generated from src/tokens/modules/*.json — do not edit by hand.
+ * Regenerate: npm run build:tokens
+ */
+
+export type TokenDefinition = Record<string, string>
+
+export type TokensData = Record<string, TokenDefinition>
+
+const tokensData: TokensData = {
+  "animationDuration": {
+    "faster": "120ms",
+    "fast": "160ms",
+    "base": "240ms",
+    "slow": "480ms",
+    "slower": "960ms"
+  },
+  "animationEasing": {
+    "base": "ease-in-out",
+    "linear": "linear",
+    "ease-in": "ease-in",
+    "ease-out": "ease-out",
+    "ease": "ease"
+  },
+  "backgroundSize": {
+    "base": "auto",
+    "contain": "contain",
+    "cover": "cover",
+    "fill": "fill",
+    "none": "none",
+    "scale-down": "scale-down"
+  },
+  "borderRadius": {
+    "none": "0",
+    "smaller": "2px",
+    "small": "4px",
+    "base": "8px",
+    "large": "16px",
+    "larger": "32px"
+  },
+  "borderWidth": {
+    "none": "0",
+    "smaller": "0.75px",
+    "small": "1px",
+    "base": "1.5px",
+    "large": "2px",
+    "larger": "4px"
+  },
+  "boxShadow": {
+    "base": "0 1px 4px hsla(0, 0%, 0%, 0.075)",
+    "large": "0 2px 8px hsla(0, 0%, 0%, 0.1)"
+  },
+  "brandColor": {
+    "base": "hsla(240, 100%, 74.5%, 1)",
+    "secondary": "hsla(198, 100%, 54.1%, 1)"
+  },
+  "fontFamily": {
+    "base": "'Helvetica Neue', Inter, Roboto, 'Arial Nova', 'Nimbus Sans', Arial, sans-serif",
+    "code": "ui-monospace, 'Source Code Pro', Menlo, Consolas, monospace",
+    "heading": "'Helvetica Neue', Inter, Roboto, 'Arial Nova', 'Nimbus Sans', Arial, sans-serif"
+  },
+  "fontWeight": {
+    "light": "300",
+    "base": "400",
+    "medium": "500",
+    "semibold": "600",
+    "bold": "700",
+    "extrabold": "800",
+    "black": "900"
+  },
+  "gap": {
+    "none": "0",
+    "smaller": "4px",
+    "small": "8px",
+    "base": "16px",
+    "large": "32px",
+    "larger": "48px"
+  },
+  "letterSpacing": {
+    "tight": "-0.025em",
+    "base": "0",
+    "wide": "0.025em",
+    "wider": "0.05em"
+  },
+  "lineHeight": {
+    "single": "1",
+    "condensed": "1.25",
+    "base": "1.5",
+    "expanded": "1.75"
+  },
+  "size": {
+    "smaller": "24px",
+    "small": "32px",
+    "base": "48px",
+    "large": "64px",
+    "larger": "72px"
+  },
+  "zIndex": {
+    "base": "0",
+    "low": "10",
+    "medium": "100",
+    "high": "1000",
+    "higher": "9999"
+  }
+} as const
+
+export default tokensData

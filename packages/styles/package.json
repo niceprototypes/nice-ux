@@ -1,0 +1,80 @@
+{
+  "name": "nice-styles",
+  "version": "17.1.0",
+  "description": "A collection of CSS custom properties (variables) for consistent design tokens",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./services/*.js": {
+      "types": "./dist/services/*.d.ts",
+      "import": "./dist/services/*.js",
+      "default": "./dist/services/*.js"
+    },
+    "./tokens.css": "./dist/tokens.css",
+    "./breakpoints.css": "./dist/breakpoints.css",
+    "./breakpoints.custom-media.css": "./dist/breakpoints.custom-media.css",
+    "./reset.css": "./static/reset.css",
+    "./reset.spacing.css": "./static/reset.spacing.css",
+    "./reset.colors.css": "./static/reset.colors.css",
+    "./reset.borders.css": "./static/reset.borders.css",
+    "./reset.responsive.css": "./static/reset.responsive.css",
+    "./css/*.css": "./dist/css/*.css",
+    "./static/*": "./static/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "static"
+  ],
+  "scripts": {
+    "build": "npm run clean && npm run build:tokens && npm run build:types && npm run build:css && npm run build:ts && npm run build:post",
+    "clean": "tsx scripts/clean.ts",
+    "build:types": "tsx scripts/generateTypes/index.ts",
+    "build:tokens": "tsx scripts/generateTokens/index.ts",
+    "build:css": "tsx scripts/generateCss/index.ts",
+    "build:ts": "tsc",
+    "build:post": "tsx scripts/postBuild.ts",
+    "dev": "tsc --watch & tsx scripts/generateCss/index.ts --watch & tsx scripts/generateTokens/index.ts --watch & tsx scripts/generateTypes/index.ts --watch",
+    "test": "tsx --test test/*.test.ts",
+    "test:update": "UPDATE_SNAPSHOTS=1 tsx --test test/*.test.ts",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "keywords": [
+    "css",
+    "css-variables",
+    "custom-properties",
+    "design-tokens",
+    "design-system",
+    "theming",
+    "nice"
+  ],
+  "author": "Mohammed Ibrahim",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niceprototypes/nice-styles.git"
+  },
+  "bugs": {
+    "url": "https://github.com/niceprototypes/nice-styles/issues"
+  },
+  "homepage": "https://github.com/niceprototypes/nice-styles#readme",
+  "type": "module",
+  "devDependencies": {
+    "@types/node": "^24.8.0",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.3"
+  },
+  "peerDependencies": {},
+  "dependencies": {}
+}

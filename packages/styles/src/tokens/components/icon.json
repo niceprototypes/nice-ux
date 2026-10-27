@@ -1,0 +1,41 @@
+{
+  "size": {
+    "smaller": "var(--np--font-size--smaller)",
+    "small": "var(--np--font-size--small)",
+    "base": "var(--np--font-size)",
+    "large": "var(--np--font-size--large)",
+    "larger": "var(--np--font-size--larger)"
+  },
+  "color": {
+    "base": "var(--np--color)",
+    "light": "var(--np--color--light)",
+    "lighter": "var(--np--color--lighter)",
+    "lightest": "var(--np--color--lightest)",
+    "disabled": "var(--np--icon--color--lighter)",
+    "muted": "var(--np--color--lightest)",
+    "link": "var(--np--color--link)",
+    "success": "var(--np--color--success)",
+    "highlight": "var(--np--color--highlight)",
+    "warning": "var(--np--color--warning)",
+    "error": "var(--np--color--error)"
+  },
+  "strokeWidth": {
+    "small": "var(--np--border-width--small)",
+    "base": "var(--np--border-width)",
+    "large": "var(--np--border-width--large)"
+  },
+  "strokeWidthScale": {
+    "base": "var(--np--stroke-width-scale)"
+  },
+  "animationDuration": {
+    "fast": "var(--np--animation-duration)",
+    "base": "var(--np--animation-duration--slow)",
+    "slow": "var(--np--animation-duration--slower)"
+  },
+  "viewBox": {
+    "base": "0 0 16 16"
+  },
+  "$themes": {
+    "night": {}
+  }
+}

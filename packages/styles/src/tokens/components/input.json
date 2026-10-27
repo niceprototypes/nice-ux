@@ -1,0 +1,81 @@
+{
+  "size": {
+    "smaller": "var(--np--size--smaller)",
+    "small": "var(--np--size--small)",
+    "base": "var(--np--size)",
+    "large": "var(--np--size--large)",
+    "larger": "var(--np--size--larger)"
+  },
+  "spacing": {
+    "smaller": "calc(var(--np--size--smaller) / 2)",
+    "small": "calc(var(--np--size--small) / 2)",
+    "base": "calc(var(--np--size) / 2)",
+    "large": "calc(var(--np--size--large) / 2)",
+    "larger": "calc(var(--np--size--larger) / 2)"
+  },
+  "borderRadius": {
+    "none": "var(--np--border-radius--none)",
+    "smaller": "var(--np--border-radius--smaller)",
+    "small": "var(--np--border-radius--small)",
+    "base": "var(--np--border-radius)",
+    "large": "var(--np--border-radius--large)",
+    "larger": "var(--np--border-radius--larger)"
+  },
+  "borderWidth": {
+    "none": "var(--np--border-width--none)",
+    "smaller": "var(--np--border-width--smaller)",
+    "small": "var(--np--border-width--small)",
+    "base": "var(--np--border-width)",
+    "large": "var(--np--border-width--large)",
+    "larger": "var(--np--border-width--larger)"
+  },
+  "backgroundColor": {
+    "base": "var(--np--background-color)",
+    "raised": "var(--np--background-color--raised)",
+    "success": "var(--np--background-color--success)",
+    "highlight": "var(--np--background-color--highlight)",
+    "warning": "var(--np--background-color--warning)",
+    "error": "var(--np--background-color--error)",
+    "link": "var(--np--background-color--link)"
+  },
+  "borderColor": {
+    "base": "var(--np--border-color)",
+    "subtle": "var(--np--border-color--subtle)",
+    "strong": "var(--np--border-color--strong)",
+    "stronger": "var(--np--border-color--stronger)",
+    "success": "var(--np--border-color--success)",
+    "highlight": "var(--np--border-color--highlight)",
+    "warning": "var(--np--border-color--warning)",
+    "error": "var(--np--border-color--error)",
+    "link": "var(--np--border-color--link)"
+  },
+  "width": {
+    "2": "2ch",
+    "3": "3ch",
+    "4": "4ch",
+    "5": "5ch",
+    "10": "10ch",
+    "20": "20ch",
+    "full": "100%"
+  },
+  "fontSize": {
+    "base": "max(16px, var(--np--font-size))"
+  },
+  "focusRing": {
+    "width": {
+      "base": "var(--np--border-width--large)"
+    },
+    "color": {
+      "base": "var(--np--color--link)"
+    },
+    "offset": {
+      "base": "var(--np--gap--smaller)"
+    }
+  },
+  "fontFamily": {
+    "base": "var(--np--font-family)"
+  },
+  "$themes": {
+    "night": {}
+  }
+}

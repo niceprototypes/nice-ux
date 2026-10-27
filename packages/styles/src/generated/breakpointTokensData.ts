@@ -1,0 +1,49 @@
+/**
+ * Auto-generated from src/tokens/modules/*.json ($breakpoints) — do not edit by hand.
+ * Regenerate: npm run build:tokens
+ */
+
+export type TokenDefinition = Record<string, string>
+
+export type BreakpointTokensData = Record<string, Record<string, TokenDefinition>>
+
+const breakpointTokensData: BreakpointTokensData = {
+  "phone": {
+    "fontSize": {
+      "smaller": "11px",
+      "small": "12px",
+      "base": "14px",
+      "large": "20px",
+      "larger": "28px"
+    }
+  },
+  "tablet": {
+    "fontSize": {
+      "smaller": "11px",
+      "small": "12px",
+      "base": "14px",
+      "large": "20px",
+      "larger": "28px"
+    }
+  },
+  "laptop": {
+    "fontSize": {
+      "smaller": "12px",
+      "small": "14px",
+      "base": "16px",
+      "large": "24px",
+      "larger": "32px"
+    }
+  },
+  "desktop": {
+    "fontSize": {
+      "smaller": "12px",
+      "small": "14px",
+      "base": "16px",
+      "large": "24px",
+      "larger": "32px"
+    }
+  }
+} as const
+
+export default breakpointTokensData
