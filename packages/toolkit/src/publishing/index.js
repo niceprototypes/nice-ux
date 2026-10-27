@@ -1,0 +1,177 @@
+/**
+ * @fileoverview Main publish workflow orchestrator
+ *
+ * Thin coordinator that calls each phase in sequence:
+ * 1. Scan — discover packages with changes since last publish
+ * 2. Display — show candidates grouped by tier
+ * 3. Prompt — collect version bump decisions
+ * 4. Sort — order by dependency chain
+ * 5. Confirm — show plan and get final approval
+ * 6. Bump — write new versions to package.json
+ * 7. Build — compile all packages, swap deps to semver
+ * 8. Release — verify npm auth, publish to npm with OTP management
+ * 9. Finalize — restore deps, commit, tag, push, summarize
+ *
+ * The npm auth check is deferred until step 8 so scan/display/prompt/build
+ * (the time-consuming phases that don't need npm credentials) can run without
+ * blocking on `npm login`.
+ *
+ * @module publisher
+ */
+
+const { log, info, cyan, green } = require("../shared/logger")
+const { verifyNpmAuth } = require("./npm-auth")
+const { prompt } = require("./helpers")
+const { PUBLISH_TIERS, ALL_PACKAGES } = require("./constants")
+const { bumpVersion } = require("./versioning")
+const { resolveAffected, buildReverseDependencyMap } = require("./graph")
+const { scanPackages } = require("./scan")
+const { displayCandidates } = require("./display")
+const { promptVersionBumps } = require("./prompts")
+const { enrichWithIntent } = require("./prompts/intent")
+const { formatPlanTag } = require("./dependents")
+const { sortByPublishOrder } = require("./order")
+const { buildPackages } = require("./build")
+const { releasePackages } = require("./release")
+const { restoreAllDeps, commitAndTag, printSummary } = require("./finalize")
+const { installRestoreGuard } = require("./restore-guard")
+
+/**
+ * Runs the full publish workflow.
+ *
+ * @param {object} options
+ * @param {string[]} [options.packages] - Packages with actual changes
+ * @param {boolean} [options.doPublish=true] - Whether to publish to npm
+ * @param {boolean} [options.dryRun=false] - Preview mode
+ * @param {number} [options.publishTimeoutMs] - Per-package npm publish timeout (default 120s)
+ * @returns {Promise<void>}
+ */
+async function publish({ packages: requestedPackages, doPublish = true, dryRun = false, publishTimeoutMs } = {}) {
+  // ── 1. Discover candidates ────────────────────────────────────────────────
+  // Each package scans as its own task; the shared reporter checks it off
+  // (✓ candidate / ⊘ unchanged) as `npm view` + git status resolve per package.
+  log("\nScanning packages…\n")
+  const { candidates } = await scanPackages(requestedPackages)
+
+  if (candidates.length === 0) {
+    info("No packages have changes to publish.")
+    return
+  }
+
+  // Attach each candidate's .nice/bump.md intent once; the display tags and
+  // the dependent decision (walk vs auto-patch) both read it.
+  const enrichedCandidates = enrichWithIntent(candidates)
+
+  // ── 2. Display candidates grouped by tier ─────────────────────────────────
+  console.log("")
+  log("Packages with changes:\n")
+  displayCandidates(enrichedCandidates)
+  console.log("")
+
+  // ── 3. Prompt for version bumps ───────────────────────────────────────────
+  const changedCandidates = enrichedCandidates.filter(c => !c.isDependent)
+  const dependentCandidates = enrichedCandidates.filter(c => c.isDependent)
+
+  const toPublish = await promptVersionBumps(changedCandidates, dependentCandidates)
+
+  // null means user aborted
+  if (!toPublish) return
+
+  if (toPublish.length === 0) {
+    info("Nothing to publish.")
+    return
+  }
+
+  // ── 4. Sort by dependency order ───────────────────────────────────────────
+  sortByPublishOrder(toPublish, PUBLISH_TIERS)
+
+  // ── 5. Confirm plan ──────────────────────────────────────────────────────
+  console.log("")
+  log("Publish plan:\n")
+  for (const p of toPublish) {
+    console.log(`  ${cyan(p.name)}  ${p.localVersion} → ${green(p.newVersion)}${formatPlanTag(p)}`)
+  }
+  console.log("")
+
+  if (dryRun) {
+    info("Dry run — no changes made.")
+    return
+  }
+
+  const confirmAnswer = await prompt("Proceed? [Y/n]: ")
+  if (confirmAnswer === "n" || confirmAnswer === "N") {
+    info("Aborted.")
+    return
+  }
+
+  // ── 6. Bump versions ─────────────────────────────────────────────────────
+  for (const p of toPublish) {
+    if (p.newVersion !== p.localVersion) {
+      bumpVersion(p.name, p.newVersion)
+      info(`Bumped ${p.name} to ${p.newVersion}`)
+    }
+  }
+
+  // ── 7-9. Build → publish → finalize ──────────────────────────────────────
+  // The build phase swaps every file: dep to a semver range for npm publish.
+  // Those swaps MUST be reversed no matter how this block exits: an interrupted
+  // or failed publish that leaves semver refs on disk corrupts local dev — they
+  // get swept into a later commit and break `npm install` (ETARGET on ranges
+  // that never resolve locally). The `finally` guarantees the restore.
+  // `restoreOnce` is idempotent so the happy path can restore BEFORE committing
+  // (the version-bump commit must record file: refs, not the transient semver).
+  const swappedDeps = new Map()
+  let restored = false
+  const restoreOnce = () => {
+    if (restored) return
+    restored = true
+    restoreAllDeps(swappedDeps)
+  }
+
+  // Node does not run `finally` on a signal or on process.exit() from another
+  // listener, so the guard also restores on SIGINT / SIGTERM / SIGHUP (terminal
+  // closed) and on process 'exit' (covers heart-spinner's own SIGINT exit).
+  // Removed in the finally.
+  const uninstallRestoreGuard = installRestoreGuard(restoreOnce)
+
+  try {
+    // ── 7. Build all packages (populates swappedDeps in place) ──────────────
+    log("\nBuilding all packages...\n")
+    const { publishable, buildFailed } = buildPackages(toPublish, swappedDeps)
+
+    if (publishable.length === 0) {
+      const { fail } = require("../shared/logger")
+      fail("All builds failed. Nothing to publish.")
+      return
+    }
+
+    // ── 8. Publish to npm ─────────────────────────────────────────────────
+    // Verify npm auth right before the publish step so the user isn't blocked
+    // on login during scan/prompt/build (which don't need npm credentials).
+    if (doPublish && !(await verifyNpmAuth())) return
+
+    const { published, failed } = await releasePackages(publishable, doPublish, { timeoutMs: publishTimeoutMs })
+    const allFailed = [...buildFailed, ...failed]
+
+    // ── 9. Finalize — restore deps, commit, tag, push, summarize ───────────
+    // Restore BEFORE committing so the commit records file: refs (local-dev
+    // state), never the transient semver swap.
+    restoreOnce()
+    console.log("")
+    commitAndTag(published)
+    printSummary(published, allFailed, doPublish)
+  } finally {
+    // Safety net: restore on any early return, thrown error, or failure above.
+    // No-op when the happy path already restored.
+    restoreOnce()
+    uninstallRestoreGuard()
+  }
+}
+
+module.exports = {
+  publish,
+  ALL_PACKAGES,
+  PUBLISH_TIERS,
+  buildReverseDependencyMap,
+  resolveAffected,
+}

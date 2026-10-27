@@ -1,0 +1,44 @@
+{
+  "name": "nice-toolkit",
+  "version": "5.0.0",
+  "description": "Link local packages while preventing duplicate React/styled-components. Essential for the Nice ecosystem.",
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./registry": "./src/shared/registry/index.js",
+    "./registry.json": "./registry.json",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "nice-toolkit": "nice-toolkit",
+    "nicely": "nice-toolkit"
+  },
+  "files": [
+    "src",
+    "registry.json",
+    "nice-toolkit",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "node nice-toolkit --help && node --test test/*.test.js"
+  },
+  "keywords": [
+    "npm",
+    "link",
+    "nice-react",
+    "peer-dependencies",
+    "react",
+    "styled-components",
+    "monorepo",
+    "local-packages"
+  ],
+  "author": "Nice Prototypes",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niceprototypes/nice-toolkit.git"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

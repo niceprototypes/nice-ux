@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+/**
+ * nice-toolkit CLI
+ *
+ * A tool for linking local packages in the Nice ecosystem while preventing
+ * duplicate React and styled-components instances.
+ *
+ * @see ./src/index.js for the main implementation
+ * @see ./README.md for usage documentation
+ */
+
+const { main } = require('./src/index');
+
+// Run the CLI
+try {
+  main();
+} catch (e) {
+  const { fail } = require('./src/shared/logger');
+  fail(e.message || String(e));
+  process.exit(1);
+}
