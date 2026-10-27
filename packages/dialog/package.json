@@ -1,0 +1,59 @@
+{
+  "name": "nice-react-dialog",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "A modal dialog component for React built on the native <dialog> element, with Escape and backdrop-click dismiss, focus return and scroll lock",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "test": "jest",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build",
+    "generate-exports": "nice-generate-exports ."
+  },
+  "keywords": [
+    "react",
+    "dialog",
+    "modal",
+    "styled-components",
+    "component"
+  ],
+  "author": "",
+  "license": "MIT",
+  "peerDependencies": {
+    "nice-react-styles": "^15.0.1",
+    "react": ">=19.2.0 <20.0.0",
+    "styled-components": ">=6.1.18 <7.0.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.5",
+    "@testing-library/jest-dom": "^6.1.0",
+    "@testing-library/react": "^16.3.0",
+    "@types/jest": "^29.5.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "nice-config-exports": "file:../config-exports",
+    "nice-config-jest": "file:../config-jest",
+    "nice-config-rollup": "file:../config-rollup",
+    "nice-config-typescript": "file:../config-typescript",
+    "nice-react-styles": "file:../react-styles",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "rollup": "^4.9.1",
+    "rollup-plugin-dts": "^6.1.0",
+    "styled-components": "6.1.19",
+    "ts-jest": "^29.4.6",
+    "tslib": "^2.6.2",
+    "typescript": "^6.0.3"
+  }
+}
