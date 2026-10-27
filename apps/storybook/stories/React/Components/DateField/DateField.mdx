@@ -1,0 +1,104 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../../src/components/Story"
+import Install from "../../../../src/components/Install"
+import { ComponentDemoTable } from "../../../../src/dataTables/components/demos/Components"
+import { dateFieldExampleList } from "./examples"
+import NewLines from "../../../../src/components/NewLines"
+import Callout from "../../../../src/components/Callout"
+import Ink from "../../../../src/nice/Ink"
+
+<Meta title="Components/Forms/DateField" />
+
+<StoryHeader
+  title="DateField"
+  description="A read-only date field built on Input that opens a Calendar in a popover. Values are ISO strings, submitted through a hidden input."
+/>
+
+<NewLines count={3} />
+
+<Install package="react-calendar" />
+
+```jsx
+import { DateField } from "nice-react-calendar"
+
+<DateField name="start" value={start} onChange={setStart} aria-label="Start date" />
+```
+
+<NewLines count={3} />
+
+<ComponentDemoTable examples={dateFieldExampleList} />
+
+<NewLines count={3} />
+
+<Ink as="h2">Guide</Ink>
+
+<Ink>DateField v1 is picker-only. The visible Input is read-only and shows the value formatted with</Ink>
+<Ink code>{"Intl.DateTimeFormat(locale, { dateStyle: \"medium\" })"}</Ink><Ink>. The calendar button in Input's</Ink>
+<Ink code>end</Ink>
+<Ink>slot (accessible name "Choose date") opens a popover anchored to the field and moves focus to the calendar's tabbable day. Selecting a day sets the value and closes the popover; Escape or a pointer press outside closes it, and focus returns to the field. Typed or segmented entry is not supported yet.</Ink>
+
+<Ink>It uses Calendar's ISO contract:</Ink>
+<Ink code>value</Ink><Ink>,</Ink>
+<Ink code>defaultValue</Ink><Ink>,</Ink>
+<Ink code>min</Ink><Ink>,</Ink>
+<Ink code>max</Ink>
+<Ink>and the</Ink>
+<Ink code>onChange</Ink>
+<Ink>argument are</Ink>
+<Ink code>YYYY-MM-DD</Ink>
+<Ink>strings, and</Ink>
+<Ink code>null</Ink>
+<Ink>means empty.</Ink>
+<Ink code>onChange</Ink>
+<Ink>is typed</Ink>
+<Ink code>string | null</Ink><Ink>; v1 only ever passes a date string.</Ink>
+<Ink code>min</Ink><Ink>,</Ink>
+<Ink code>max</Ink><Ink>,</Ink>
+<Ink code>isDateDisabled</Ink>
+<Ink>and</Ink>
+<Ink code>locale</Ink>
+<Ink>are passed to the Calendar, and</Ink>
+<Ink code>status="disabled"</Ink>
+<Ink>disables the calendar button.</Ink>
+
+<Ink>Every other Input prop passes through, except</Ink>
+<Ink code>as</Ink><Ink>,</Ink>
+<Ink code>type</Ink><Ink>,</Ink>
+<Ink code>end</Ink><Ink>,</Ink>
+<Ink code>value</Ink><Ink>,</Ink>
+<Ink code>defaultValue</Ink><Ink>,</Ink>
+<Ink code>onChange</Ink>
+<Ink>and</Ink>
+<Ink code>name</Ink><Ink>, which DateField owns.</Ink>
+<Ink code>name</Ink>
+<Ink>is placed on a hidden input whose value is the ISO date (or</Ink>
+<Ink code>""</Ink>
+<Ink>when empty); the visible input has no</Ink>
+<Ink code>name</Ink><Ink>.</Ink>
+
+```jsx
+<form onSubmit={handleSubmit}>
+  <DateField name="start" defaultValue="2026-09-24" />
+</form>
+
+// new FormData(form).get("start") → "2026-09-24", not "Sep 24, 2026"
+```
+
+<Ink>DateField renders through Input, so inside a</Ink>
+<Ink code>Field</Ink>
+<Ink>the visible input takes the Field's id, label, description and error wiring,</Ink>
+<Ink code>aria-invalid</Ink>
+<Ink>and</Ink>
+<Ink code>required</Ink>
+<Ink>with no extra props. As with Select's combobox, the read-only input and the hidden input are not validated natively: check</Ink>
+<Ink code>required</Ink>
+<Ink>in your submit handler and report it through the Field's</Ink>
+<Ink code>error</Ink><Ink>.</Ink>
+
+```jsx
+<Field label="Start date" error={error} invalid={!!error} required>
+  <DateField name="start" status={error ? "error" : "base"} />
+</Field>
+```
+
+<Callout type="hint">Forms receive the ISO date from the hidden input — never the locale-formatted text in the field.</Callout>

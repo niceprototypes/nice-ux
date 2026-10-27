@@ -1,0 +1,6 @@
+/* source */
+
+.nice-storybook .docblock-source {
+  margin-top: var(--np--gap--larger);
+  margin-bottom: var(--np--gap--larger);
+}

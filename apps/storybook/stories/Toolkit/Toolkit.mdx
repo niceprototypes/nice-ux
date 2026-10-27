@@ -1,0 +1,78 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import Line from "../../src/components/Line"
+import Ink from "../../src/nice/Ink"
+import { DataTable } from "../../src/components/DataTable"
+
+<Meta
+  title="Toolkit"
+  name="Docs"
+/>
+
+<StoryHeader title="Toolkit" />
+
+<Ink code>nice-toolkit</Ink>
+<Ink>is the CLI that manages local development across the Nice ecosystem — linking packages, resolving singleton conflicts, rebuilding dists, and publishing. Two bin names resolve to the same script:</Ink>
+<Ink code>nice-toolkit</Ink>
+<Ink>(long form) and</Ink>
+<Ink code>nicely</Ink>
+<Ink>(short alias).</Ink>
+
+```bash
+npm install -g nice-toolkit
+```
+
+<Line />
+
+<Ink as="h2">Why it exists</Ink>
+
+<Ink>Nice packages depend on each other through</Ink>
+<Ink code>file:</Ink>
+<Ink>references so local changes propagate without a publish. The cost is that each linked package installs its own copy of React / styled-components, and multiple React instances throw "Invalid hook call".</Ink>
+<Ink code>nicely --dedupe</Ink>
+<Ink>removes those duplicate singletons; the rest of the commands cover the build, cache, and publish lifecycle that</Ink>
+<Ink code>file:</Ink>
+<Ink>linking introduces.</Ink>
+
+```bash
+# The problem — duplicate singletons in each linked package
+your-app/node_modules/react
+nice-react-tile/node_modules/react     ← duplicate (conflict)
+nice-react-flex/node_modules/react     ← duplicate (conflict)
+
+# The fix — strip singletons from every linked package
+nicely --dedupe
+```
+
+<Line />
+
+<Ink as="h2">Command map</Ink>
+
+<DataTable
+  columns={[{ key: "c0", header: "Area" }, { key: "c1", header: "Commands" }, { key: "c2", header: "Page" }]}
+  tables={[{ rows: [
+    { id: "0", values: [<Ink>Link / restore packages</Ink>, <Ink><code>{"nicely <path>"}</code>, <code>--unlink</code>, <code>--exclude</code>, <code>--add-exclude</code></Ink>, <Ink><a href="/?path=/docs/toolkit-1-linking--docs" target="_top">Linking</a></Ink>] },
+    { id: "1", values: [<Ink>Remove singleton conflicts</Ink>, <Ink><code>--dedupe [path]</code></Ink>, <Ink><a href="/?path=/docs/toolkit-2-dedupe--docs" target="_top">Dedupe</a></Ink>] },
+    { id: "2", values: [<Ink>Rebuild dists</Ink>, <Ink><code>--build-all</code>, <code>--build-icons</code>, <code>--vite</code></Ink>, <Ink><a href="/?path=/docs/toolkit-3-building--docs" target="_top">Building</a></Ink>] },
+    { id: "3", values: [<Ink>Live rebuild + reload</Ink>, <Ink><code>--dev</code>, <code>--watch</code>, <code>--dev --watch</code></Ink>, <Ink><a href="/?path=/docs/toolkit-4-dev-watch--docs" target="_top">Dev & Watch</a></Ink>] },
+    { id: "4", values: [<Ink>Cache / full recovery</Ink>, <Ink><code>--clean</code>, <code>--reset</code></Ink>, <Ink><a href="/?path=/docs/toolkit-5-reset-caches--docs" target="_top">Reset & Caches</a></Ink>] },
+    { id: "5", values: [<Ink>Release</Ink>, <Ink><code>--bump</code>, <code>--publish</code>, <code>--no-npm</code></Ink>, <Ink><a href="/?path=/docs/toolkit-6-publishing--docs" target="_top">Publishing</a></Ink>] },
+    { id: "6", values: [<Ink>Fixing common errors</Ink>, <Ink>—</Ink>, <Ink><a href="/?path=/docs/toolkit-7-troubleshooting--docs" target="_top">Troubleshooting</a></Ink>] },
+  ] }]}
+/>
+
+<Line />
+
+<Ink as="h2">Conventions used on these pages</Ink>
+
+<ul>
+  <li><Ink><Ink weight="semibold"><code>--dry-run</code></Ink> works on every mutating command — it prints what would happen</Ink></li>
+</ul>
+  and changes nothing. Reach for it first when unsure.
+<ul>
+  <li><Ink>Commands act on the packages in <code>nice-toolkit/registry.json</code>. A package</Ink></li>
+</ul>
+  missing from the registry is invisible to `nicely`.
+<ul>
+  <li><Ink>Paths are relative to the workspace root (<code>~/nice</code>), e.g. <code>nicely ../react-button</code>.</Ink></li>
+</ul>

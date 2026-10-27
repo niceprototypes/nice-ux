@@ -1,0 +1,101 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import Line from "../../src/components/Line"
+import Ink from "../../src/nice/Ink"
+
+<Meta
+  title="Toolkit/7. Troubleshooting"
+  name="Docs"
+/>
+
+<StoryHeader
+  title="Troubleshooting"
+/>
+
+<Ink as="h2">"Invalid hook call"</Ink>
+
+<Ink>More than one copy of React (or styled-components) is loaded. Strip the duplicates from linked packages:</Ink>
+
+```bash
+nicely --dedupe
+```
+
+<Line />
+
+<Ink as="h2">Source changes not appearing</Ink>
+
+<Ink>Make sure the rebuild loop is running so a linked package's dist updates on change:</Ink>
+
+```bash
+nicely --dev --watch   # separate terminal, alongside your dev server
+```
+
+<Ink>If a change still doesn't show, the dev server is holding a stale cache — bounce it:</Ink>
+
+```bash
+nicely --vite          # wipes .vite + kills the dev-server port; restart after
+```
+
+<Line />
+
+<Ink as="h2">Icon (SVG) edits not updating</Ink>
+
+<Ink>Editing an SVG</Ink>
+<Ink weight="semibold">does</Ink>
+<Ink>rebuild the icon chain under</Ink>
+<Ink code>nicely --dev --watch</Ink>
+<Ink>—</Ink>
+<Ink code>nice-icons</Ink>
+<Ink>regenerates its index and</Ink>
+<Ink code>nice-react-icon</Ink><Ink>'s dist is rebuilt. The snag is on the dev-server side:</Ink>
+<Ink code>nice-react-icon</Ink>
+<Ink>is consumed from</Ink>
+<Ink weight="semibold">dist</Ink>
+<Ink>(it can't be source-aliased because of SVGR), and a Vite dev server such as Storybook keeps serving its already-transformed copy until it's bounced.</Ink>
+
+<Ink>So the fix is to refresh the dev server, not to rebuild again:</Ink>
+
+```bash
+# The rebuilt dist already exists — just make the server re-read it
+nicely --vite
+# then restart the dev server (Storybook, etc.)
+```
+
+<Ink>Only reach for</Ink>
+<Ink code>nicely --build-icons</Ink>
+<Ink>when</Ink>
+<Ink code>nice-react-icon</Ink><Ink>'s dist is actually stale (e.g. you edited icons while no watcher was running). Do</Ink>
+<Ink weight="semibold">not</Ink>
+<Ink>run</Ink>
+<Ink code>--build-icons</Ink>
+<Ink>while</Ink>
+<Ink code>--dev --watch</Ink>
+<Ink>is live — they rebuild the same dist and race;</Ink>
+<Ink code>--build-icons</Ink>
+<Ink>will prompt you to stop the watcher first.</Ink>
+
+<Line />
+
+<Ink as="h2">After installing dependencies in a linked package</Ink>
+
+<Ink code>npm install</Ink>
+<Ink>reintroduces the singleton duplicates. Either unlink first, or re-dedupe after:</Ink>
+
+```bash
+# Option 1 — unlink before installing
+nicely --unlink
+cd ../react-button && npm install
+cd - && nicely ../react-button
+
+# Option 2 — re-dedupe after installing
+cd ../react-button && npm install
+cd - && nicely --dedupe
+```
+
+<Line />
+
+<Ink as="h2">Everything is stale after a foundation refactor</Ink>
+
+```bash
+nicely --reset   # --build-all → --dedupe → --clean, then restart the dev server
+```

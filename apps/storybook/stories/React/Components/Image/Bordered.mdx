@@ -1,0 +1,40 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../../src/components/Story"
+import Image from "nice-react-image"
+import StoryDescription from "../../../../src/components/StoryDescription"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+import { DataTable } from "../../../../src/components/DataTable"
+import { toSource } from "../../../../src/services"
+
+<Meta title="Components/Image/bordered" />
+
+<StoryHeader title="bordered" />
+
+<StoryDescription property="border">
+  Renders a border around the image using <code>borderWidth</code> and
+  <code>borderColor</code> tokens. Both default to <code>"base"</code> when
+  <code>bordered</code> is true.
+</StoryDescription>
+
+<DataTable
+  showHeader={false}
+  columns={DEMO_CODE_COLUMNS}
+  tables={[{ rows: [false, true].map(bordered => {
+    const props = {
+      vendor: true,
+      alt: `bordered=${bordered}`,
+      width: "240px",
+      height: "320px",
+      backgroundSize: "cover",
+      bordered,
+    }
+    return {
+      id: String(bordered),
+      values: [
+        <Image {...props} />,
+        toSource("Image", props),
+      ],
+    }
+  }) }]}
+/>
+

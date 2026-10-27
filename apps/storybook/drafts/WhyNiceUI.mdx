@@ -1,0 +1,196 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import Flex from "nice-react-flex"
+import Icon from "nice-react-icon"
+
+export const Check = props => (
+  <Flex justifyContent="center">
+    <Icon
+      size="smaller"
+      name="check"
+      strokeWidth="large"
+      strokeScaling
+      {...props}
+    />
+  </Flex>
+)
+
+{/*
+  SILOED — intentionally not registered.
+
+  This file lives outside the Storybook stories glob
+  (.storybook/main.ts → "../stories/**/*.mdx"), so Storybook does not load,
+  build, or show it. To re-activate, move it into stories/ (e.g.
+  stories/Basics/) and it will appear under the title below.
+*/}
+
+<Meta title="Basics/Why Nice UI?" />
+
+# Why Nice UI?
+
+Nice UI represents a deliberate **rejection of overbuilt, enterprise-focused design systems** in favor of:
+
+- clarity
+- composability
+- production-realistic UI architecture
+
+Where major systems like Material UI, Ant Design, and Fluent UI optimize for **scale, coverage, and configurability,** Nice UI optimizes for:
+
+- directness of implementation
+- predictable composition
+- low abstraction cost
+- design decisions that survive real production environments
+
+This is not a lighter version of those systems. It is **a different philosophy** of system design.
+
+---
+
+## Core industry problem
+
+Most large design systems converge on the same failure modes:
+
+| Failure mode       | Industry example                                            |
+| ------------------ | ----------------------------------------------------------- |
+| Over-abstraction   | MUI + Ant Design rely heavily on prop matrices and variants |
+| Variant explosion  | Button APIs with many permutations                          |
+| Theming complexity | Deep token layers in systems like Carbon / Fluent           |
+| Design–dev drift   | Separation between Figma and code systems                   |
+| Rigid composition  | Monolithic components instead of primitives                 |
+
+---
+
+## What exists today
+
+Nice UI already demonstrates:
+
+- Composable component structure (not variant-heavy)
+- Minimal API surfaces
+- Visually consistent system without deep token overhead
+- Storybook-first visibility (component truth lives in code)
+- Production-aligned UI patterns (cards, forms, layout blocks)
+
+---
+
+## Feature comparison
+
+|                                                       | Nice UI   | Material UI | Ant Design | Chakra UI | Radix UI  |
+| ----------------------------------------------------- | --------- | ----------- | ---------- | --------- | --------- |
+| Composition-first (no reliance on variant explosion)  | <Check /> |             |            |           | <Check /> |
+| Minimal prop surface per component                    | <Check /> |             |            |           | <Check /> |
+| Flat token model (low semantic layering)              | <Check /> |             |            |           | <Check /> |
+| Storybook as primary system surface                   | <Check /> | <Check />   | <Check />  | <Check /> |           |
+| Production-realistic component patterns               | <Check /> | <Check />   | <Check />  | <Check /> |           |
+| Low abstraction cost (maps closely to DOM)            | <Check /> |             |            |           | <Check /> |
+| Neutral visual system (not branded like Material/Ant) | <Check /> |             |            | <Check /> | <Check /> |
+| Consistency without heavy theming APIs                | <Check /> |             |            |           | <Check /> |
+
+---
+
+## What this means
+
+### 1. Elimination of variant explosion
+
+Instead of large variant systems, Nice UI uses direct composition and minimal APIs, resulting in fewer edge cases and a simpler mental model.
+
+### 2. Reduction of abstraction overhead
+
+Enterprise systems introduce theme providers and token resolution layers. Nice UI removes those layers, resulting in predictable rendering and easier debugging.
+
+### 3. Alignment with real production UI
+
+Nice UI reflects real SaaS UI patterns rather than demo-oriented abstractions, resulting in less translation from system to product.
+
+### 4. Controlled system surface area
+
+Nice UI enforces constraint instead of flexibility overload, resulting in more consistent outputs and reduced misuse.
+
+### 5. Neutral visual layer
+
+Unlike Material UI or Ant Design, Nice UI does not impose a strong visual identity, resulting in easier integration into different products.
+
+---
+
+## Strategic advantage
+
+Nice UI sits in a category of **high-signal, low-noise design systems**. Where MUI competes on completeness, Ant on enterprise coverage, and Radix on primitives, Nice UI competes on coherent system design with minimal overhead.
+
+---
+
+## Why this matters now
+
+The industry is shifting toward:
+
+- smaller teams
+- faster iteration
+- AI-assisted development
+
+In that environment, **systems that minimize abstraction** outperform those that maximize flexibility
+
+---
+
+## What's coming
+
+Our roadmap is set to reinforce Nice UI's core philosophy:
+
+- Expanded component coverage (forms, data tables, navigation, feedback)
+- Cross-framework parity (Vue, Svelte, Web Components)
+- React Native implementation for shared design across web and mobile
+- Figma plugin for two-way token and component sync
+- Motion and interaction primitives
+- CLI scaffolder for one-command project setup
+
+---
+
+## Bottom line
+
+Nice UI competes on **clarity, composability, and directness.** It directly addresses:
+
+- over-abstraction
+- variant explosion
+- design–development mismatch
+
+---
+
+## More about themes
+
+### Why are themes important?
+
+If your user's OS or browser is set to dark mode, and your site is bright, your user may feel that your app is not worth browsing in low-light settings, and may decide to return later.
+
+### How do other design systems handle themes?
+
+Most major React UI libraries treat dark mode as a single binary toggle managed at the provider level. Nice handles it as a cascade through pure CSS, accepts custom theme names, and exposes a `theme` prop on each visual component.
+
+| Capability                                      |  Nice UI  | Tailwind  | Material UI | Ant Design | Chakra UI | Radix UI |
+| ----------------------------------------------- | :-------: | :-------: | :---------: | :--------: | :-------: | :------: |
+| Configure theme directly on a component         | <Check /> |           |             |            |           |          |
+| Pin section to theme without React wrapper      | <Check /> | <Check /> |             |            |           |          |
+| Colors defined once (theme colors derived)      | <Check /> |           |             | <Check />  |           |          |
+| Linked by defaukt to user's OS/browser settings | <Check /> | <Check /> |             |            |           |          |
+| Switch theme at runtime without re-rendering    | <Check /> | <Check /> |  <Check />  |            |           |          |
+| Define custom themes (beyond light/dark)        | <Check /> | <Check /> |             |            |           |          |
+
+### How does the design system pick a theme by default?
+
+By default, the design system matches whatever color mode the browser
+reports as the user's preference. That preference usually mirrors the
+operating system setting, but the browser can override it (browser
+settings, DevTools, or extensions like Dark Reader).
+
+### What does that mean for color variables?
+
+Each color variable
+(e.g. `--np--color`) holds its light value by default
+and automatically swaps to its dark counterpart when the browser
+reports dark.
+
+### Where does the swap actually happen?
+
+The swap is handled by the standard CSS rule
+`@media (prefers-color-scheme: dark)` which is already wired into every color
+variable in `tokens.css` — you don't have to write it yourself.
+
+---
+
+## Who made this?
+
+Nice UI is built and maintained by [Nice Prototypes](https://niceprototypes.com), a zero-to-one design and development agency focused on helping startups get started.

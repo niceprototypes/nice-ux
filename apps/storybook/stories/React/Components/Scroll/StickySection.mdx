@@ -1,0 +1,54 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../../src/components/Story"
+import Ink from "../../../../src/nice/Ink"
+import { DataTableRow } from "../../../../src/components/DataTable"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+
+<Meta title="Components/Scroll/StickySection" />
+
+<StoryHeader title="StickySection" />
+
+<Ink color="light">Wraps content with a semantic section element and ID for use with</Ink>
+<Ink color="light" code>StickySectionLinks</Ink>
+<Ink color="light">navigation.</Ink>
+
+<Ink as="h3">Basic</Ink>
+
+<DataTableRow
+  fullWidth
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+          <Ink size="small" color="light">
+      Wraps content with a semantic section element and ID for use with
+      StickySectionLinks navigation.
+    </Ink>,
+          `<StickySection id="about">\n  <h2>About Us</h2>\n  <p>Content...</p>\n</StickySection>`,
+        ]}
+/>
+
+<Ink as="h3">as</Ink>
+
+<DataTableRow
+  fullWidth
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+          <Ink size="small" color="light">
+      Render as a different HTML element type (default: section)
+    </Ink>,
+          `<StickySection id="hero" as="div">`,
+        ]}
+/>
+
+<Ink as="h3">render</Ink>
+
+<DataTableRow
+  fullWidth
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+          <Ink size="small" color="light">
+      Custom render function for full control over the wrapper element
+    </Ink>,
+          `<StickySection\n  id="custom"\n  render={({ id, children }) => (\n    <article id={id}>{children}</article>\n  )}\n>`,
+        ]}
+/>
+

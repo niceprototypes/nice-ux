@@ -1,0 +1,234 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import ResponsiveDemo from "../../src/components/ResponsiveDemo"
+import Line from "../../src/components/Line"
+import { DataTable } from "../../src/components/DataTable"
+import Callout from "../../src/components/Callout"
+import Install from "../../src/components/Install"
+import NewLines from "../../src/components/NewLines"
+import Ink from "../../src/nice/Ink"
+
+<Meta
+  title="Basics/Breakpoints"
+  name="Docs"
+/>
+
+<StoryHeader title="Breakpoints" />
+
+<Ink as="h2">Get breakpoints</Ink>
+
+<Ink>Configure your design for</Ink>
+<Ink weight="semibold">different screen sizes and ranges </Ink>
+<Ink>by tweaking breakpoint variants for tokens and components, or by using </Ink>
+<Ink code>getBreakpoint</Ink>
+<Ink> in your style code.</Ink>
+
+<Ink as="h3">CSS only</Ink>
+
+```cssapp
+@import "nice-styles/tokens.css";
+
+.phone-only {
+  font-size: var(--np--font-size--phone);
+}
+.laptop-only {
+  font-size: var(--np--font-size--laptop);
+}
+.desktop-only {
+  font-size: var(--np--font-size--desktop);
+}
+```
+
+<NewLines />
+
+<Ink as="h3">JS + CSS</Ink>
+
+[//]: # "For CSS-in-JS or runtime CSS strings, `getBreakpoint` returns the matching `@media (min-width: …)` literal sourced from the same threshold table the build uses, so JS and CSS stay in sync:"
+
+```js
+import { getBreakpoint, getToken } from "nice-styles"
+
+const css = `${getBreakpoint("tablet+")} {
+  h1 {
+    font-size: ${getToken("fontSize", "larger")};
+  }
+}`
+```
+
+<Callout type="learning">
+  Calling `getToken` inside of an instance of `getBreakpoint` will automatically
+  resolve to the correct breakpoint variant.
+</Callout>
+
+<NewLines />
+
+<Ink as="h3">Styled Components</Ink>
+
+[//]: # "The same `getBreakpoint` literal drops straight into a styled-component, paired with `getToken` for the values — JS and CSS stay on one threshold table:"
+
+<Install
+  package="react-styles"
+  with="styled-components"
+/>
+
+```tsx
+import styled from "styled-components"
+import { getBreakpoint, getToken } from "nice-react-styles"
+
+const Wrapper = styled.div`
+  padding: ${getToken("gap")};
+
+  ${getBreakpoint("laptop+")} {
+    padding: ${getToken("gap", "large")};
+  }
+`
+```
+
+<Line />
+
+<Ink as="h2">Set breakpoints</Ink>
+
+<Ink>Thresholds are the pixel floors each breakpoint starts at. Set them with the</Ink>
+<Ink code>breakpoints</Ink>
+<Ink>key of</Ink>
+<Ink code>setTokens</Ink><Ink>, alongside your tokens. Thresholds apply first, so responsive values in the same call use the new ones:</Ink>
+
+```ts
+import { setTokens } from "nice-react-styles"
+
+setTokens({
+  breakpoints: { laptop: 1100 },
+  gap: { base: { phone: "12px", "laptop+": "20px" } },
+})
+```
+
+<NewLines />
+
+<Ink as="h3">Breakpoints only</Ink>
+
+<Ink>If a call sets nothing but thresholds,</Ink>
+<Ink code>setBreakpoints</Ink>
+<Ink>is the shortcut:</Ink>
+
+```ts
+import { setBreakpoints } from "nice-react-styles"
+
+setBreakpoints({
+  tablet: 700,
+  laptop: 1100,
+  desktop: 1800,
+})
+```
+
+<Callout type="hint">`setBreakpoints(values)` is exactly `setTokens({ breakpoints: values })`. Already calling `setTokens`? Add the `breakpoints` key and skip the helper — one call, one source of truth.</Callout>
+
+<NewLines />
+
+<Ink>Both forms take any subset of</Ink>
+<Ink code>tablet</Ink><Ink>,</Ink>
+<Ink code>laptop</Ink><Ink>, and</Ink>
+<Ink code>desktop</Ink><Ink>;</Ink>
+<Ink code>phone</Ink>
+<Ink>is the base below the first floor and cannot be set. Values must be positive and ascending, or the call throws. Setting a threshold moves every</Ink>
+<Ink code>@media</Ink>
+<Ink>block that uses it — generated tokens, component overrides, and the values of earlier</Ink>
+<Ink code>setTokens</Ink>
+<Ink>calls — so</Ink>
+<Ink code>getBreakpoint</Ink><Ink>,</Ink>
+<Ink code>useBreakpoint</Ink><Ink>, and the CSS stay on one table.</Ink>
+
+<Line />
+
+<Ink as="h2">Media queries</Ink>
+
+<DataTable
+  inline
+  columnWidths={["8em"]}
+  columns={[
+    {
+      key: "name",
+      code: true,
+      header: null,
+      width: "5em",
+      render: "nice-react-ink",
+      size: "small",
+      clickToCopy: true,
+    },
+    {
+      key: "query",
+      header: "Query",
+      width: "29em",
+      render: "nice-react-code",
+      language: "css",
+      clickToCopy: false,
+    },
+    {
+      key: "range",
+      header: "Range",
+      render: "nice-react-ink",
+      code: true,
+      size: "small",
+    },
+  ]}
+  tables={[
+    {
+      rows: [
+        {
+          id: "phone",
+          values: ["phone", "@media (max-width: 640px)", "<= 640"],
+        },
+        {
+          id: "tablet",
+          values: [
+            "tablet",
+            "@media (min-width: 641px) and (max-width: 1279px)",
+            "641-1279",
+          ],
+        },
+        {
+          id: "laptop",
+          values: [
+            "laptop",
+            "@media (min-width: 1280px) and (max-width: 1719px)",
+            "1280-1719",
+          ],
+        },
+        {
+          id: "desktop",
+          values: ["desktop", "@media (min-width: 1720px)", ">= 1720"],
+        },
+        {
+          id: "tablet+",
+          values: ["tablet+", "@media (min-width: 641px)", ">= 641"],
+        },
+        {
+          id: "laptop+",
+          values: ["laptop+", "@media (min-width: 1280px)", ">= 1280"],
+        },
+        {
+          id: "tablet-",
+          values: ["tablet-", "@media (max-width: 1279px)", "<= 1279"],
+        },
+        {
+          id: "laptop-",
+          values: ["laptop-", "@media (max-width: 1719px)", "<= 1719"],
+        },
+      ],
+    },
+  ]}
+/>
+
+<Line />
+
+<Ink as="h2">Live demo</Ink>
+
+<Ink>Zoom your browser to simulate different screen sizes.</Ink>
+
+<ResponsiveDemo
+  items={[
+    { breakpoint: "phone", emoji: "📱", text: "Phone" },
+    { breakpoint: "tablet", emoji: "💻", text: "Tablet" },
+    { breakpoint: "laptop", emoji: "🖥️", text: "Laptop" },
+    { breakpoint: "desktop", emoji: "🖼️", text: "Desktop" },
+  ]}
+/>

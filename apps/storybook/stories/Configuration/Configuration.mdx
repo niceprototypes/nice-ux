@@ -1,0 +1,39 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import Line from "../../src/components/Line"
+import Ink from "../../src/nice/Ink"
+
+<Meta
+  title="Configuration"
+  name="Docs"
+/>
+
+<StoryHeader title="Configuration" />
+
+<Ink>Guides for tooling setup across the Nice ecosystem. Each page covers a specific tool's configuration with working examples.</Ink>
+
+<Line />
+
+<Ink as="h3">Contents</Ink>
+
+<ul>
+  <li><Ink><a href="/?path=/docs/configuration-rollup--docs" target="_top">Rollup</a> — Bundler configuration for</Ink></li>
+</ul>
+  building Nice packages with tree-shaking and watch mode
+<ul>
+  <li><Ink><a href="/?path=/docs/configuration-typescript--docs" target="_top">TypeScript</a> — TS compiler options,</Ink></li>
+</ul>
+  path aliases, and declaration output
+<ul>
+  <li><Ink><a href="/?path=/docs/configuration-jest--docs" target="_top">Jest</a> — Test runner setup with module</Ink></li>
+</ul>
+  resolution for Nice packages
+<ul>
+  <li><Ink><a href="/?path=/docs/configuration-vitewatcher--docs" target="_top">Vite Watcher</a> — HMR configuration</Ink></li>
+</ul>
+  for linked packages in Vite/Storybook dev servers
+<ul>
+  <li><Ink><a href="/?path=/docs/configuration-caches--docs" target="_top">Caches</a> — Eight cache layers across the</Ink></li>
+</ul>
+  workspace, the four tools that clear them, and workflow recipes
+

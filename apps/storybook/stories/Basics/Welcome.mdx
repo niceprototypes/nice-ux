@@ -1,0 +1,64 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import Flex from "nice-react-flex"
+import WelcomeLink from "../../src/components/WelcomeLink"
+import LatestNews from "../../src/components/LatestNews"
+import NewLines from "../../src/components/NewLines/index.ts"
+
+<Meta
+  title="Basics/Welcome"
+  name="Docs"
+/>
+
+<NewLines />
+
+<LatestNews />
+
+<NewLines count={3} />
+
+<Flex
+  direction="column"
+  gap="base"
+>
+  <WelcomeLink
+    storyId="basics-reset--docs"
+    iconName="eraser"
+    title="Reset"
+  >
+    <span>Sensible, configurable, token-driven style defaults for all</span>
+  </WelcomeLink>
+  <WelcomeLink
+    storyId="basics-tokens--docs"
+    iconName="palette"
+    title="Tokens"
+  >
+    <span>Relentlessly semantic token matrix all in a single getter</span>
+  </WelcomeLink>
+  <WelcomeLink
+    storyId="basics-fonts--docs"
+    iconName="font"
+    title="Fonts"
+  >
+    <span>Drop-in Google and Adobe fonts, or swap in your own fonts</span>
+  </WelcomeLink>
+  <WelcomeLink
+    storyId="basics-icons--docs"
+    iconName="star"
+    title="Icons"
+  >
+    <span>Your favorite format, outlined or filled, and a Base64 option</span>
+  </WelcomeLink>
+  <WelcomeLink
+    storyId="basics-breakpoints--docs"
+    iconName="phone"
+    title="Breakpoints"
+  >
+    <span>Total control at any viewport, set once, UI follows forever</span>
+  </WelcomeLink>
+  <WelcomeLink
+    storyId="basics-themes--docs"
+    iconName="moon"
+    title="Themes"
+  >
+    <span>Day, night, and custom themes, for widgets or your entire UI</span>
+  </WelcomeLink>
+</Flex>

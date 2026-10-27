@@ -1,0 +1,321 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import Install from "../../src/components/Install"
+import NewLines from "../../src/components/NewLines"
+import ArrowLink from "../../src/components/ArrowLink"
+import Callout from "../../src/components/Callout"
+import Line from "../../src/components/Line"
+import Ink from "../../src/nice/Ink"
+import { DataTable } from "../../src/components/DataTable"
+
+<Meta
+  title="Basics/Tokens"
+  name="Docs"
+/>
+
+<StoryHeader
+  title="Tokens"
+/>
+
+<Ink as="h2">CSS only</Ink>
+
+<Ink>If all you need is some style, and you have</Ink>
+<Ink weight="semibold">no time budget</Ink>
+<Ink>to integrate with a new library, you can still</Ink>
+<Ink weight="semibold">upgrade your UI today</Ink>
+<Ink>by using our design tokens to fill the gaps in your project.</Ink>
+
+<ArrowLink storyId="tokens--docs">Browse CSS tokens</ArrowLink>
+
+<NewLines count={2} />
+
+<Ink as="h3">Use tokens directly</Ink>
+
+<Ink>Import the stylesheet and reference the tokens:</Ink>
+
+<Install
+  package="styles"
+/>
+
+```css
+@import "nice-styles/tokens.css";
+
+.message {
+  color: var(--np--color);
+
+  &.success {
+    color: var(--np--color--success);
+  }
+
+  &.error {
+    color: var(--np--color--error);
+  }
+}
+```
+
+<NewLines />
+
+<Ink as="h3">Create local aliases</Ink>
+
+<Ink>You may choose to alias the Nice UI tokens you need, and use your aliases everywhere else:</Ink>
+
+<Install
+  package="styles"
+/>
+
+```css
+@import "nice-styles/tokens.css";
+
+:root {
+  --color: var(--np--color);
+  --color--success: var(--np--color--success);
+  --color--error: var(--np--color--error);
+}
+
+.message {
+  color: var(--color);
+
+  &.success {
+    color: var(--color--success);
+  }
+
+  &.error {
+    color: var(--color--error);
+  }
+}
+```
+
+<Line />
+
+<Ink as="h2">JavaScript</Ink>
+
+<Ink>Using the tokens in JS allows you to</Ink>
+<Ink weight="semibold">restructure the token architecture</Ink>
+<Ink>according to your needs, and easily tweak token values with useful helper functions.</Ink>
+
+<Ink as="h3">JS only</Ink>
+
+<Ink>Use the</Ink>
+<Ink code>getToken</Ink>
+<Ink>function and CSS variables provided by</Ink>
+<Ink code>nice-styles</Ink>
+<Ink>for vanilla JS:</Ink>
+
+<Install
+  package="styles"
+/>
+
+```js
+import { getToken } from "nice-styles"
+import "nice-styles/tokens.css"
+
+// Create HTML element
+const card = document.createElement("div")
+
+// Apply token values
+card.style.padding = getToken("gap", "large")
+card.style.backgroundColor = getToken("backgroundColor")
+card.style.borderRadius = getToken("borderRadius", "small")
+
+// Append element to DOM
+document.body.append(card)
+```
+
+<NewLines />
+
+<Ink as="h3">React only</Ink>
+
+<Ink>Create and style a React component with tokens:</Ink>
+
+<Install
+  package="react-styles"
+/>
+
+```tsx
+import { getToken } from "nice-react-styles"
+
+export default function Card({ children }) {
+  return (
+    <div
+      style={{
+        padding: getToken("gap", "large"),
+        backgroundColor: getToken("backgroundColor"),
+        borderRadius: getToken("borderRadius", "small"),
+      }}
+    >
+      {children}
+    </div>
+  )
+}
+```
+
+<Ink>Then, render the React component inside</Ink>
+<Ink code>StylesProvider</Ink><Ink>:</Ink>
+
+```tsx
+import { StylesProvider } from "nice-react-styles"
+
+<NewLines />
+
+export default function App() {
+  return (
+    <StylesProvider>
+      <Card>…</Card>
+    </StylesProvider>
+  )
+}
+```
+
+<NewLines />
+
+<Ink as="h3">React + Styled Components</Ink>
+
+<Ink>Create and style a Styled Component with tokens:</Ink>
+
+<Install
+  package="react-styles"
+  with="styled-components"
+/>
+
+```tsx
+// Card.tsx
+
+import { getToken } from "nice-react-styles"
+import styled from "styled-components"
+
+const Card = styled.div`
+  padding: ${getToken("gap", "large")};
+  background-color: ${getToken("backgroundColor")};
+  border-radius: ${getToken("borderRadius", "small")};
+`
+
+export default Card
+```
+
+<Ink>Render the Styled Component inside</Ink>
+<Ink code>StylesProvider</Ink><Ink>:</Ink>
+
+```tsx
+import { StylesProvider } from "nice-react-styles"
+import styled from "styled-components"
+import Card from "./Card"
+
+export default function App() {
+  return (
+    <StylesProvider>
+      <Page>
+        <Card>…</Card>
+      </Page>
+    </StylesProvider>
+  )
+}
+```
+
+<Line />
+
+<Ink as="h2">Set tokens</Ink>
+
+<Ink>Override default values, create new tokens, or even create new modules. You have</Ink>
+<Ink weight="semibold">complete creative control</Ink>
+<Ink>with the token setter function.</Ink>
+
+<Ink as="h3">1. Wrap subtree with provider</Ink>
+
+<Ink code>App</Ink>
+<Ink>can now consume the tokens:</Ink>
+
+```tsx
+import { StylesProvider } from "nice-react-styles"
+import "../tokens.ts"
+import "../App"
+
+<StylesProvider>
+  <App />
+</StylesProvider>
+```
+
+<NewLines />
+
+<Ink as="h3">2. Call the setter function</Ink>
+
+<Ink>Call</Ink>
+<Ink code>setTokens</Ink>
+<Ink>once on module load:</Ink>
+
+```ts
+import { setTokens } from "nice-react-styles"
+
+setTokens({
+  // Static module
+  fontSize: {
+    base: "18px", // Static token
+    jumbo: "96px", // Custom token
+  },
+  // Custom module
+  accentColor: {
+    primary: "#dc0000",
+    secondary: "#1a1a1a",
+  },
+} as const)
+```
+
+<Callout type="hint">Modules and tokens can be modified (static) or created (custom) in the same object.</Callout>
+
+<NewLines />
+
+<Ink as="h3">3. Access new tokens</Ink>
+
+<Ink>New tokens can be accessed by the getter function:</Ink>
+
+```tsx
+import { getToken } from "nice-react-styles"
+
+const Card = ({ children }) => (
+  <div
+    style={{
+      fontSize: getToken("fontSize", "jumbo"),
+      color: getToken("accentColor", "primary"),
+    }}
+  >
+    {children}
+  </div>
+)
+```
+
+<Line />
+
+<Ink as="h2">Transform a color</Ink>
+
+<Ink>Adjust a token's channels without leaving the token system. The result is still a token underneath, so it keeps following day and night:</Ink>
+
+```tsx
+import { getToken } from "nice-react-styles"
+
+getToken("color:highlight", { transform: [null, null, 40, null] })
+// hsl(from var(--np--color--highlight) h s 40)
+```
+
+<Ink>Channels are</Ink>
+<Ink code>[hue, saturation, lightness, alpha]</Ink><Ink>:</Ink>
+
+<DataTable
+  columns={[{ key: "c0", header: "Entry" }, { key: "c1", header: "Does" }]}
+  tables={[{ rows: [
+    { id: "0", values: [<Ink><code>null</code></Ink>, <Ink>leaves the channel alone</Ink>] },
+    { id: "1", values: [<Ink><code>40</code></Ink>, <Ink>sets it</Ink>] },
+    { id: "2", values: [<Ink><code>"+10"</code> / <code>"-10"</code></Ink>, <Ink>shifts it</Ink>] },
+    { id: "3", values: [<Ink><code>"*0.5"</code></Ink>, <Ink>scales it</Ink>] },
+  ] }]}
+/>
+
+<Callout type="hint">Scaling travels better than shifting. A shift sized for the day value can run off the end of the scale at night, where the same token is already dark.</Callout>
+
+<NewLines />
+
+<Ink>Components take the same object on their color props:</Ink>
+
+```tsx
+<Ink color={{ name: "highlight", transform: [null, null, 40, null] }}>
+  Darkened highlight
+</Ink>
+```

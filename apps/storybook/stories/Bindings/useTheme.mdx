@@ -1,0 +1,102 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import Line from "../../src/components/Line"
+import Ink from "../../src/nice/Ink"
+
+<Meta
+  title="Bindings/useTheme"
+  name="Docs"
+/>
+
+<StoryHeader title="useTheme" />
+
+<Ink>The theme sibling of</Ink>
+<Ink><a href="/?path=/docs/bindings-usedevice--docs" target="_top"><code>useDevice</code></a></Ink><Ink>. Reads the theme state published by</Ink>
+<Ink code>StylesProvider</Ink>
+<Ink>and returns</Ink>
+<Ink code>{"{ theme }"}</Ink>
+<Ink>— a theme name (</Ink><Ink code>"day"</Ink><Ink>,</Ink>
+<Ink code>"night"</Ink><Ink>, or a custom theme), not a boolean, so more themes can be added without a breaking signature change. When</Ink>
+<Ink code>StylesProvider</Ink>
+<Ink>is given</Ink>
+<Ink code>detectTheme</Ink><Ink>, it detects the OS color-scheme preference (</Ink><Ink code>prefers-color-scheme: dark</Ink><Ink>) once and shares it through context — so any descendant reads one shared</Ink>
+<Ink code>theme</Ink>
+<Ink>instead of wiring its own</Ink>
+<Ink code>matchMedia</Ink><Ink>.</Ink>
+
+<Line />
+
+<Ink as="h2">Enable detection on the provider</Ink>
+
+```tsx
+import { StylesProvider } from "nice-react-styles"
+
+<StylesProvider detectTheme>
+  <App />
+</StylesProvider>
+```
+
+<Ink code>detectTheme</Ink>
+<Ink>defaults to</Ink>
+<Ink code>false</Ink><Ink>. When off, no detection runs and no listener is registered —</Ink>
+<Ink code>useTheme()</Ink>
+<Ink>returns</Ink>
+<Ink code>{"{ theme: DEFAULT_THEME }"}</Ink>
+<Ink>(</Ink><Ink code>"day"</Ink><Ink>).</Ink>
+
+<Ink as="h2">Read it anywhere below</Ink>
+
+<Ink code>useTheme()</Ink>
+<Ink>returns the theme</Ink>
+<Ink weight="semibold">name</Ink><Ink>. When a component only cares whether it's dark, derive a local</Ink>
+<Ink code>isNight</Ink>
+<Ink>from it — it's a one-liner, and not every consumer needs it, so the hook stays name-based:</Ink>
+
+```tsx
+import { useTheme } from "nice-react-styles"
+
+function Logo() {
+  const { theme } = useTheme()
+  const isNight = theme === "night"
+
+  // append "-dark" to the asset when the night theme is active
+  return <img src={`/logo${isNight ? "-dark" : ""}.svg`} alt="Logo" />
+}
+```
+
+<Ink>Keeping</Ink>
+<Ink code>isNight</Ink>
+<Ink>local rather than baking it into the hook means branching on</Ink>
+<Ink code>theme</Ink>
+<Ink>survives adding more themes later, while dark-only consumers still get a clean boolean.</Ink>
+
+<Ink>Same shape and ergonomics as</Ink>
+<Ink code>useDevice</Ink>
+<Ink>— both come from</Ink>
+<Ink code>StylesProvider</Ink><Ink>, so a component can read device and theme from one place:</Ink>
+
+```tsx
+const { isMobile } = useDevice()
+const { theme } = useTheme()
+```
+
+<Line />
+
+<Ink as="h2">What it reflects</Ink>
+
+<Ink code>theme</Ink>
+<Ink>follows the</Ink>
+<Ink weight="semibold">system color-scheme preference</Ink>
+<Ink>(and the default cascade) — it is the reactive equivalent of mapping</Ink>
+<Ink code>window.matchMedia("(prefers-color-scheme: dark)").matches</Ink>
+<Ink>to</Ink>
+<Ink code>"night"</Ink>
+<Ink>/</Ink>
+<Ink code>"day"</Ink><Ink>.</Ink>
+
+<Ink>It does</Ink>
+<Ink weight="semibold">not</Ink>
+<Ink>reflect an explicit</Ink>
+<Ink><a href="/?path=/docs/basics-themes--docs" target="_top"><code>{"<Theme>"}</code></a></Ink>
+<Ink>pin you apply yourself — pinning is a deliberate override (the theme equivalent of forcing a device state). To force a specific theme on a subtree, use</Ink>
+<Ink code>{"<Theme name=\"night\">"}</Ink><Ink>; to react to a per-element effective theme including pins, read the cascade directly (</Ink><Ink code>getComputedStyle</Ink><Ink>).</Ink>

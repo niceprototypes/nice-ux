@@ -1,0 +1,181 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import Install from "../../src/components/Install"
+import Line from "../../src/components/Line"
+import Ink from "../../src/nice/Ink"
+
+<Meta
+  title="Configuration/Rollup"
+  name="Docs"
+/>
+
+<StoryHeader title="Rollup" />
+
+<Install package="configuration" dev />
+
+<Ink as="h3">Setup</Ink>
+
+```js
+import { createConfiguration } from "nice-config-rollup"
+```
+
+<Ink as="h3">Usage</Ink>
+
+```js
+export default createConfiguration({ plugins: [...] })
+```
+
+<Line />
+
+<Ink as="h2">createConfiguration</Ink>
+
+<Ink>Creates a complete rollup configuration with sensible defaults for nice-* packages. Outputs both CJS and ESM formats with sourcemaps. All plugins are included by default.</Ink>
+
+```typescript
+// rollup.config.js
+import { createConfiguration } from "nice-config-rollup"
+
+// Basic usage - uses all defaults
+export default createConfiguration()
+
+// With options
+export default createConfiguration({
+  input: "src/index.ts",
+  additionalExternals: ["lodash"],
+  bundlePackages: ["nice-icons"],
+})
+```
+
+<Ink as="h4">Options</Ink>
+
+```typescript
+{
+  input?: string              // Entry point (default: "src/index.ts")
+  tsconfig?: string           // Path to tsconfig (default: "./tsconfig.json")
+  output?: object             // Custom output config (merged with defaults)
+  plugins?: Function[]        // Override default plugins (escape hatch)
+  additionalExternals?: string[]   // Extra packages to externalize
+  bundlePackages?: string[]   // nice-* packages to bundle instead of externalize
+  dts?: boolean               // Generate declaration bundle (default: true)
+  dtsInput?: string           // Custom dts input (default: "dist/types/index.d.ts")
+}
+```
+
+<Ink as="h4">Default Plugins</Ink>
+
+<Ink>The following plugins are included automatically:</Ink>
+
+```text
+• rollup-plugin-peer-deps-external
+• @rollup/plugin-node-resolve (browser: true)
+• @rollup/plugin-commonjs
+• @rollup/plugin-typescript
+• rollup-plugin-dts (for declaration bundling)
+```
+
+<Line />
+
+<Ink as="h2">isNiceExternal</Ink>
+
+<Ink>Pattern-based external detection that automatically externalizes all nice-* packages, React ecosystem, and styled-components. Handles subpath imports like CSS files.</Ink>
+
+```typescript
+import { isNiceExternal } from "nice-config-rollup"
+
+// Returns true for:
+isNiceExternal("nice-styles")           // nice-* packages
+isNiceExternal("nice-styles/tokens.css")  // subpath imports
+isNiceExternal("react")                 // React
+isNiceExternal("react-dom")             // React DOM
+isNiceExternal("styled-components")     // styled-components
+
+// Returns false for:
+isNiceExternal("lodash")                // other packages
+```
+
+<Ink as="h4">Manual Usage</Ink>
+
+<Ink>If you need custom rollup config, use</Ink>
+<Ink code>isNiceExternal</Ink>
+<Ink>directly:</Ink>
+
+```typescript
+// rollup.config.js
+import { isNiceExternal } from "nice-config-rollup"
+
+export default {
+  input: "src/index.ts",
+  output: [...],
+  plugins: [...],
+  external: isNiceExternal
+}
+```
+
+<Line />
+
+<Ink as="h2">Watch Mode Configuration</Ink>
+
+<Ink>The configuration includes optimized watch settings that prevent file caching issues during local development. This ensures changes appear immediately without delay.</Ink>
+
+```typescript
+// Included automatically in createConfiguration()
+{
+  cache: false,  // Disable rollup internal caching
+  watch: {
+    buildDelay: 200,  // Debounce rapid changes
+    clearScreen: false,
+    chokidar: {
+      awaitWriteFinish: {
+        stabilityThreshold: 150,
+        pollInterval: 50
+      },
+      usePolling: true,
+      interval: 100
+    }
+  }
+}
+```
+
+<Ink as="h4">Why These Settings?</Ink>
+
+<Ink>Without these settings, rollup's watch mode can exhibit an "off by one" caching bug where file changes appear one save behind. The</Ink>
+<Ink code>awaitWriteFinish</Ink>
+<Ink>option ensures files are fully written to disk before rollup reads them, and</Ink>
+<Ink code>usePolling</Ink>
+<Ink>provides more reliable file change detection on macOS.</Ink>
+
+<Line />
+
+<Ink as="h2">createExternals</Ink>
+
+<Ink>Creates an external function with additional packages or bundle overrides.</Ink>
+
+```typescript
+import { createExternals } from "nice-config-rollup"
+
+// Add extra packages to externalize
+const external = createExternals({
+  additional: ["lodash", "date-fns"],
+})
+
+// Bundle specific nice-* packages instead of externalizing
+const external = createExternals({
+  bundle: ["nice-icons"],
+})
+
+// Both options together
+const external = createExternals({
+  additional: ["lodash"],
+  bundle: ["nice-icons"],
+})
+
+export default {
+  input: "src/index.ts",
+  output: [...],
+  plugins: [...],
+  external
+}
+```
+
+<Ink>Note: Legacy array format is still supported for backwards compatibility.</Ink>
+

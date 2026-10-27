@@ -1,0 +1,89 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import Line from "../../src/components/Line"
+import Code from "../../src/nice/Code"
+import Ink from "../../src/nice/Ink"
+
+<Meta
+  title="Toolkit/1. Linking"
+  name="Docs"
+/>
+
+<StoryHeader title="Linking" />
+
+<Ink>Link a Nice package into the current project via a</Ink>
+<Ink code>file:</Ink>
+<Ink>reference, then strip its duplicate singletons in one step.</Ink>
+
+```bash
+# Link a single package (long form)
+npx nice-toolkit ../react-button
+
+# Short alias
+nicely ../react-button
+
+# Link several — one call each
+nicely ../react-button
+nicely ../react-icon
+nicely ../react-flex
+```
+
+<Ink>Linking rewrites the dependency to</Ink>
+<Ink code>file:../react-button</Ink>
+<Ink>and runs a dedupe pass on the linked package so its</Ink>
+<Ink code>node_modules</Ink>
+<Ink>doesn't shadow the app's React / styled-components.</Ink>
+
+<Line />
+
+<Ink as="h2"><Code code="--unlink" language="bash" inlined /></Ink>
+
+<Ink>Restore every</Ink>
+<Ink code>file:</Ink>
+<Ink>reference to its original npm version and reinstall from the registry.</Ink>
+
+```bash
+nicely --unlink
+
+# Preview what would be unlinked
+nicely --unlink --dry-run
+```
+
+<Ink>Run</Ink>
+<Ink code>--unlink</Ink>
+<Ink>before</Ink>
+<Ink code>npm install</Ink>
+<Ink>inside a linked package (or re-run</Ink>
+<Ink code>nicely</Ink>
+<Ink>afterward) — a fresh install reintroduces the singleton duplicates that linking removed.</Ink>
+
+<Line />
+
+<Ink as="h2"><Code code="--exclude" language="bash" inlined /> / <Code code="--add-exclude" language="bash" inlined /></Ink>
+
+<Ink>The default singleton set removed from linked packages is</Ink>
+<Ink code>react</Ink><Ink>,</Ink>
+<Ink code>react-dom</Ink><Ink>,</Ink>
+<Ink code>styled-components</Ink><Ink>,</Ink>
+<Ink code>@types/react</Ink><Ink>,</Ink>
+<Ink code>@types/react-dom</Ink><Ink>.</Ink>
+
+```bash
+# Replace the default set entirely
+nicely --exclude react,react-dom ../my-component
+
+# Extend the default set
+nicely --add-exclude @emotion/react,@emotion/styled ../my-component
+```
+
+<Line />
+
+<Ink as="h2"><Code code="--manager" language="bash" inlined /> / <Code code="--skip-peer-check" language="bash" inlined /></Ink>
+
+```bash
+# Force a package manager (auto-detected from the lockfile by default)
+nicely --manager pnpm ../my-component
+
+# Skip auto-moving react / react-dom into peerDependencies
+nicely --skip-peer-check ../my-component
+```

@@ -1,0 +1,118 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import { IconDemoTable } from "../../src/dataTables/components/demos/Icons"
+import { IllustrationDemoTable } from "../../src/dataTables/components/demos/Illustrations"
+import { iconNames } from "nice-icons/catalog"
+import { illustrationNames } from "nice-icons/illustration-catalog"
+import Callout from "../../src/components/Callout"
+import Code from "../../src/nice/Code"
+import Flex from "nice-react-flex"
+import { IconPreview } from "./Icons.styles"
+import Install from "../../src/components/Install"
+import Line from "../../src/components/Line"
+import Ink from "../../src/nice/Ink"
+
+<Meta
+  title="Basics/Icons"
+  name="Docs"
+/>
+
+<StoryHeader title="Icons" />
+
+<Ink as="h3">Standalone</Ink>
+<Install package="icons"/>
+
+<Ink as="h3">React</Ink>
+<Install package="react-icon"/>
+
+<Line />
+
+<Ink as="h3">{iconNames.length} icons</Ink>
+
+<IconDemoTable
+  codeColumns={[
+    { header: "JS", code: name => `getIcon("${name}")`, width: "16em" },
+    { header: "React", code: name => `<Icon name="${name}" />`, width: "16em" },
+  ]}
+/>
+
+<Ink as="h3">{"{illustrationNames.length} illustrations"}</Ink>
+
+<IllustrationDemoTable
+  codeColumns={[
+    { header: "JS", code: name => `getIllustration("${name}")`, width: "16em" },
+    { header: "React", code: name => `<Illustration name="${name}" />`, width: "16em" },
+  ]}
+/>
+
+<Line />
+
+<Ink as="h2">Strings</Ink>
+
+<Ink>When standard SVG markup is not available or necessary:</Ink>
+
+```js
+import { getIconEncoded } from "nice-icons"
+
+getIconEncoded("check")
+```
+
+<Ink as="h3">SVG</Ink>
+
+```js
+import { getIcon } from "nice-icons"
+
+getIcon("check")                                             // base variant (default)
+getIcon("check", "fill")                                     // fill variant
+getIcon("check", "base", { size: "large", color: "link" })  // configured
+
+// Inject anywhere:
+document.querySelector("#slot").innerHTML = getIcon("check")
+```
+
+<Ink as="h3">Base64</Ink>
+
+```js
+import { getIconEncoded } from "nice-icons"
+
+getIconEncoded("check")                              // base variant, base theme (#000)
+getIconEncoded("check", "fill")                      // fill variant
+getIconEncoded("check", "base", { theme: "night" })  // white glyph (#fff)
+
+// → "data:image/svg+xml;base64,PHN2Zy…"
+
+// Use directly as an image or CSS asset:
+element.style.maskImage = `url("${getIconEncoded("check")}")`
+```
+
+<Line />
+
+<Ink as="h2">React</Ink>
+
+<Ink>The Icon component allows you to</Ink>
+<Ink weight="semibold">easily configure icon properties</Ink>
+<Ink>without any CSS code:</Ink>
+
+<Install package="react-icon" />
+
+```tsx
+<Icon
+  name="check"
+  size="large"
+  color="link"
+  strokeWidth="base"
+  strokeScaling
+  variant="fill"
+  theme="day"
+  viewBox="0 0 24 24"
+  vendor
+  url="https://example.com/icon.svg"
+  vendorComponent={CustomIcon}
+  className="my-icon"
+  style={{ opacity: 0.8 }}
+/>
+```
+
+<Callout type="hint">
+  See the [Component](/docs/components-icon--docs) page for full documentation.
+</Callout>

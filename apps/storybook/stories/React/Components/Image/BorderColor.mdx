@@ -1,0 +1,40 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../../src/components/Story"
+import Image from "nice-react-image"
+import StoryDescription from "../../../../src/components/StoryDescription"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+import { DataTable } from "../../../../src/components/DataTable"
+import { toSource } from "../../../../src/services"
+
+<Meta title="Components/Image/borderColor" />
+
+<StoryHeader title="borderColor" />
+
+<StoryDescription property="border-color">
+  Sets the border color using <code>borderColor</code> tokens. Only applied
+  when <code>bordered</code> is true.
+</StoryDescription>
+
+<DataTable
+  showHeader={false}
+  columns={DEMO_CODE_COLUMNS}
+  tables={[{ rows: ["base", "dark", "darker"].map(borderColor => {
+    const props = {
+      vendor: true,
+      alt: `${borderColor} border color`,
+      width: "240px",
+      height: "320px",
+      backgroundSize: "cover",
+      bordered: true,
+      borderColor,
+    }
+    return {
+      id: String(borderColor),
+      values: [
+        <Image {...props} />,
+        toSource("Image", props),
+      ],
+    }
+  }) }]}
+/>
+

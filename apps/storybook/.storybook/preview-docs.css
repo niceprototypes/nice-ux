@@ -1,0 +1,187 @@
+/* Storybook docs (autodocs) overrides — restyle the .sbdocs surface with nice-styles tokens. */
+
+.sbdocs {
+  font-family: var(--np--font-family);
+
+  a {
+    text-decoration: none;
+  }
+
+  &.sbdocs-content {
+    margin-right: auto;
+    max-width: 100%;
+  }
+
+  &.sbdocs-wrapper {
+    padding: 0;
+    background: none;
+  }
+
+  @media (min-width: 641px) {
+    padding: 0 0 var(--np--gap--larger) var(--np--gap--larger);
+  }
+}
+
+
+/*
+!* Storybook docs (autodocs) overrides — restyle the .sbdocs surface with nice-styles tokens. *!
+
+.sbdocs {
+  font-family: var(--np--font-family);
+
+  &.sbdocs-content {
+    margin-right: auto;
+    max-width: 100%;
+
+    & :where(div:not(.sb-anchor, .sb-unstyled, .sb-unstyled div)) {
+      font-family: inherit;
+    }
+
+    & :where(p:not(.sb-anchor, .sb-unstyled, .sb-unstyled p)) {
+      margin: 0;
+    }
+
+    & :where(
+      h1:not(.sb-anchor, .sb-unstyled, .sb-unstyled h1),
+      h2:not(.sb-anchor, .sb-unstyled, .sb-unstyled h2),
+      h3:not(.sb-anchor, .sb-unstyled, .sb-unstyled h3),
+      h4:not(.sb-anchor, .sb-unstyled, .sb-unstyled h4),
+      h5:not(.sb-anchor, .sb-unstyled, .sb-unstyled h5),
+      h6:not(.sb-anchor, .sb-unstyled, .sb-unstyled h6),
+      p, li, td, th, code, blockquote, img, span
+    ) {
+      max-width: 800px;
+    }
+
+    & :where(
+      h1:not(.sb-anchor, .sb-unstyled, .sb-unstyled h1),
+      h2:not(.sb-anchor, .sb-unstyled, .sb-unstyled h2),
+      h3:not(.sb-anchor, .sb-unstyled, .sb-unstyled h3),
+      h4:not(.sb-anchor, .sb-unstyled, .sb-unstyled h4),
+      h5:not(.sb-anchor, .sb-unstyled, .sb-unstyled h5),
+      h6:not(.sb-anchor, .sb-unstyled, .sb-unstyled h6),
+      p, li, td, th, code, blockquote
+    ) {
+      color: inherit;
+    }
+
+    & :where(
+      h1:not(.sb-anchor, .sb-unstyled, .sb-unstyled h1),
+      h2:not(.sb-anchor, .sb-unstyled, .sb-unstyled h2),
+      h3:not(.sb-anchor, .sb-unstyled, .sb-unstyled h3),
+      h4:not(.sb-anchor, .sb-unstyled, .sb-unstyled h4),
+      h5:not(.sb-anchor, .sb-unstyled, .sb-unstyled h5),
+      h6:not(.sb-anchor, .sb-unstyled, .sb-unstyled h6),
+      p, li, td, th, blockquote
+    ) {
+      font-family: inherit;
+    }
+
+    & :where(a:not(.sb-anchor, .sb-unstyled, .sb-unstyled a)) {
+      color: var(--np--color--link);
+      text-decoration: inherit;
+    }
+  }
+
+  &.sbdocs-wrapper {
+    padding: var(--np--gap);
+    background: none;
+
+    @media (min-width: 641px) {
+      padding: 0 0 var(--np--gap--larger) var(--np--gap--larger);
+    }
+  }
+
+  p,
+  li,
+  th,
+  td {
+    font-size: var(--np--font-size);
+  }
+
+  !* ── 3. Vertical rhythm (top-level blocks) ────────────────────────── *!
+
+  > h2,
+  > h3,
+  > h4,
+  > h5,
+  > h6 {
+    font-weight: var(--np--font-weight--semibold);
+  }
+
+  > h1 {
+    margin-top: calc(var(--np--gap--larger) * 1.5) !important;
+    margin-bottom: calc(var(--np--gap--larger) * 1.5) !important;
+  }
+
+  > h2 {
+    margin-top: calc(var(--np--gap--larger) * 1.5) !important;
+    margin-bottom: var(--np--gap--large) !important;
+    font-size: var(--np--font-size--larger);
+  }
+
+  > h3,
+  > table,
+  > img.nice-ui {
+    margin-top: var(--np--gap--larger) !important;
+    margin-bottom: var(--np--gap--large) !important;
+  }
+
+  > blockquote,
+  > p {
+    margin-top: var(--np--gap--large) !important;
+    margin-bottom: var(--np--gap--large) !important;
+  }
+
+  hr {
+    margin-top: calc(var(--np--gap--larger) * 1.5);
+    margin-bottom: calc(var(--np--gap--larger) * 1.5);
+    width: 100%;
+  }
+
+  code {
+    font-family: var(--np--font-family--code);
+
+    !* `small` only where there is room. Preview CSS runs through PostCSS, so it
+       can use the @custom-media alias rather than a literal floor. *!
+    @media (--np--laptop--up) {
+      font-size: var(--np--font-size--small);
+    }
+  }
+
+  code:not(pre.shiki code) {
+    border: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  !* ── 4. Element styling ───────────────────────────────────────────── *!
+
+  hr,
+  th,
+  td {
+    border-color: var(--np--border-color);
+  }
+
+  strong {
+    font-weight: 600;
+  }
+
+  blockquote p {
+    color: var(--np--color--lighter) !important;
+  }
+
+  h2:not(.sb-anchor, .sb-unstyled, .sb-unstyled h2) {
+    border-bottom: none;
+  }
+
+  .sbdocs-a {
+    color: var(--np--color--link);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+*/

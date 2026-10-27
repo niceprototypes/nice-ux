@@ -1,0 +1,128 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import Flex from "nice-react-flex"
+import { StoryHeader } from "../../src/components/Story"
+import Callout from "../../src/components/Callout"
+import WelcomeLink from "../../src/components/WelcomeLink"
+import Line from "../../src/components/Line"
+import NewLines from "../../src/components/NewLines"
+import Ink from "../../src/nice/Ink"
+import { DataTable } from "../../src/components/DataTable"
+
+<Meta
+  title="Manifest/Welcome"
+  name="Docs"
+/>
+
+<StoryHeader
+  title="Manifest"
+  description="The context manifest for AI assistants working on the Nice ecosystem."
+  repos={[
+    { name: "nice-manifest", url: "https://github.com/niceprototypes/nice-manifest", license: "MIT" },
+  ]}
+/>
+
+<Ink>The</Ink>
+<Ink weight="semibold">Nice Manifest</Ink>
+<Ink>is its own repository, cloned alongside the packages it documents. Every pattern, convention, and piece of logic an AI instance needs to work on any</Ink>
+<Ink code>nice-*</Ink>
+<Ink>package is documented there — if it is not in the manifest, an AI instance will not know it exists.</Ink>
+
+<Line />
+
+<Ink as="h2">Load model</Ink>
+
+<Ink>"Read the manifest" does not mean read all 40+ files. It loads the always-on</Ink>
+<Ink weight="semibold">Core</Ink><Ink>, then lazy-loads a topic body only when the task touches it.</Ink>
+
+<DataTable
+  columns={[{ key: "c0", header: "Layer" }, { key: "c1", header: "Loads" }, { key: "c2", header: "When" }]}
+  tables={[{ rows: [
+    { id: "0", values: [<Ink><Ink weight="semibold">Core</Ink></Ink>, <Ink>all of <code>discipline/</code> + the root <code>README.md</code> index</Ink>, <Ink>always</Ink>] },
+    { id: "1", values: [<Ink><Ink weight="semibold">Topics</Ink></Ink>, <Ink>the <code>read/</code> <code>edit/</code> <code>build/</code> <code>publish/</code> <code>topics/</code> files</Ink>, <Ink>on demand</Ink>] },
+  ] }]}
+/>
+
+<Callout type="learning">An agent cannot load a topic it does not know exists. The root README's File Tree names every file and its purpose, so the right doc is always discoverable from the Core.</Callout>
+
+<Line />
+
+<Ink as="h2">The folders</Ink>
+
+<Ink>The manifest is organized by phase of work.</Ink>
+<Ink code>discipline/</Ink>
+<Ink>is the always-on Core; the rest load when the task points to them.</Ink>
+
+<NewLines />
+
+<Flex
+  direction="column"
+  gap="larger"
+>
+  <WelcomeLink
+    stripped
+    storyId="manifest-discipline--docs"
+    iconName="lock-up"
+    title="Discipline"
+  >
+    <span>Always-on behavioral rules that govern how any work is done</span>
+  </WelcomeLink>
+  <WelcomeLink
+    stripped
+    storyId="manifest-read--docs"
+    iconName="folder-open"
+    title="Read"
+  >
+    <span>Understanding the existing structure before changing it</span>
+  </WelcomeLink>
+  <WelcomeLink
+    stripped
+    storyId="manifest-edit--docs"
+    iconName="code"
+    title="Edit"
+  >
+    <span>Standards for creating new assets in the ecosystem</span>
+  </WelcomeLink>
+  <WelcomeLink
+    stripped
+    storyId="manifest-build--docs"
+    iconName="laptop"
+    title="Build"
+  >
+    <span>Local development, linking, and rebuild processes</span>
+  </WelcomeLink>
+  <WelcomeLink
+    stripped
+    storyId="manifest-publish--docs"
+    iconName="npm"
+    title="Publish"
+  >
+    <span>Committing, version bumping, and releasing to npm</span>
+  </WelcomeLink>
+  <WelcomeLink
+    stripped
+    storyId="manifest-topics--docs"
+    iconName="lightbulb"
+    title="Topics"
+  >
+    <span>Single-home reference topics that cross the phase folders</span>
+  </WelcomeLink>
+</Flex>
+
+<Line />
+
+<Ink as="h2">Principles</Ink>
+
+<Ink weight="semibold">Decentralized by design.</Ink>
+<Ink>Every</Ink>
+<Ink code>nice-*</Ink>
+<Ink>package is its own repository, versioned, published, and consumable on its own. There is no monorepo and no single codebase — a package depends on its foundations through npm like any other consumer would. Work is scoped to one repository at a time, and a change that appears to need edits across several is a signal to look at the dependency boundary between them.</Ink>
+
+<Ink weight="semibold">The token system is the origin pattern.</Ink>
+<Ink>The token generation system in</Ink>
+<Ink code>nice-styles</Ink>
+<Ink>— token JSON to generated data, types, and CSS, to runtime getters and setters — is the foundation the rest depend on. A package that cannot reach logic it needs through the token system is a showstopper: stop, report the gap, fix the token system first.</Ink>
+
+<Ink weight="semibold">Alignment.</Ink>
+<Ink>Independence is structural; consistency is deliberate. Anything shared — TypeScript version, build config, lint rules — belongs in a foundation package, consumed by every repository at the same version rather than copied into each. Divergence is a defect to fix.</Ink>
+
+<Callout type="hint">Artifacts have fixed homes: an audit report goes to `manifest/.reports/audit/{slug}.md`, a research report to `manifest/.reports/research/{slug}.md`, and a per-package change record to that package's `.nice/bump.md`.</Callout>

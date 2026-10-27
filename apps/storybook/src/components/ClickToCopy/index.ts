@@ -1,0 +1,1 @@
+export { ClickToCopy } from "./ClickToCopy"

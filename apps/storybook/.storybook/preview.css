@@ -1,0 +1,45 @@
+@import "nice-styles/tokens.css";
+@import "nice-styles/reset.css";
+
+@import "preview-reset.css";
+@import "preview-docs.css";
+@import "preview-docblock.css";
+
+/* Named breakpoint queries are available in PREVIEW CSS — no @import needed.
+   postcss.config.js injects nice-styles' @custom-media aliases (via
+   @csstools/postcss-global-data) and resolves them, so the floors track
+   styles/src/tokens/breakpoints.json:
+
+     @media (--np--tablet--up) { ... }    →  min-width: 641px
+     @media (--np--laptop--up) { ... }    →  min-width: 1280px
+     @media (--np--phone)      { ... }    →  max-width: 640px
+
+   Aliases: --np--{phone,tablet,laptop,desktop} (exact band),
+   --np--{tablet,laptop,desktop}--up, --np--{phone,tablet,laptop}--down.
+
+   Manager CSS (manager-sidebar.css) canNOT use these — the manager is bundled
+   by esbuild with no PostCSS, so it uses literal-px media queries instead. */
+
+/* Day mode: turn off the font smoothing Storybook hardcodes via its docs/global
+   resets (e.g. `:where(div…) { -webkit-font-smoothing: antialiased }`) so
+   light-theme text renders at full weight — matching the manager. Keyed on the
+   [data-theme] pin preview.tsx mirrors from storybook-dark-mode; night keeps
+   `antialiased`.
+
+   The descendant selector is needed because Storybook applies its reset to
+   elements directly, and a directly-applied declaration beats an inherited one
+   regardless of specificity — so pinning the theme root alone would not win.
+
+   The `:not()` lets a nested theme escape. Without it, `[data-theme="day"] *`
+   plus `!important` reaches into a `[data-theme="night"]` subtree and forces its
+   text back to `auto`, which makes nested themes impossible to render
+   correctly. */
+[data-theme="day"],
+[data-theme="day"] *:not([data-theme="night"], [data-theme="night"] *) {
+  -webkit-font-smoothing: auto !important;
+  -moz-osx-font-smoothing: auto !important;
+}
+
+.sb-errordisplay_main {
+  border-color: var(--np--color--error) !important;
+}

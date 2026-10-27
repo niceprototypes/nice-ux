@@ -1,0 +1,38 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import Callout from "../../src/components/Callout"
+import Ink from "../../src/nice/Ink"
+import { DataTable } from "../../src/components/DataTable"
+
+<Meta
+  title="Manifest/Build"
+  name="Docs"
+/>
+
+<StoryHeader
+  title="Build"
+  description="Local development build processes for the Nice ecosystem."
+/>
+
+<Ink>Files here are topic references: load the one your task or the root index points to. Local packages link by</Ink>
+<Ink code>file:</Ink>
+<Ink>reference; three non-overlapping</Ink>
+<Ink code>nicely</Ink>
+<Ink>commands cover the workspace-level concerns.</Ink>
+
+<DataTable
+  columns={[{ key: "c0", header: "File" }, { key: "c1", header: "Contents" }]}
+  tables={[{ rows: [
+    { id: "0", values: [<Ink><code>symlinks.md</code></Ink>, <Ink>nice-toolkit, <code>file:</code> references, nice-toolkit CLI usage.</Ink>] },
+    { id: "1", values: [<Ink><code>vite.md</code></Ink>, <Ink>Vite configuration for nice-storybook, nice-vite-watcher.</Ink>] },
+    { id: "2", values: [<Ink><code>image-compressor.md</code></Ink>, <Ink>nice-image-compressor CLI for PNG compression via pngquant.</Ink>] },
+  ] }]}
+/>
+
+```bash
+nicely --clean       # kill dev-server ports + wipe consumer build-tool caches
+nicely --dedupe      # remove duplicate singletons from linked packages
+nicely --build-all   # rebuild every linked package's dist in tier order
+```
+
+<Callout type="hint">After dependency changes, run `nicely --dedupe`. After source changes consumers don't see, `nicely --clean`. After a foundation refactor or a fresh clone, `nicely --build-all`. For one foundation package, `nicely --build-icons` rebuilds just nice-icons and its dependents in tier order.</Callout>

@@ -1,0 +1,93 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import Install from "../../src/components/Install"
+import Line from "../../src/components/Line"
+import Ink from "../../src/nice/Ink"
+
+<Meta
+  title="Configuration/TypeScript"
+  name="Docs"
+/>
+
+<StoryHeader title="TypeScript" />
+
+<Install package="configuration" dev />
+
+<Ink as="h3">Setup</Ink>
+
+```json
+// tsconfig.json
+{ "extends": "nice-config-typescript/react" }
+```
+
+<Line />
+
+<Ink as="h2">Base Configuration</Ink>
+
+<Ink>Extends the base TypeScript configuration for non-React packages like nice-styles.</Ink>
+
+```json
+// tsconfig.json
+{
+  "extends": "nice-config-typescript/base",
+  "compilerOptions": {
+    "outDir": "dist/esm",
+    "declarationDir": "dist/esm/types"
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}
+```
+
+<Ink as="h4">Included Options</Ink>
+
+```json
+{
+  "target": "ES2020",
+  "module": "ESNext",
+  "lib": ["ES2020", "DOM", "DOM.Iterable"],
+  "moduleResolution": "bundler",
+  "declaration": true,
+  "declarationMap": true,
+  "strict": true,
+  "esModuleInterop": true,
+  "skipLibCheck": true,
+  "forceConsistentCasingInFileNames": true,
+  "isolatedModules": true,
+  "resolveJsonModule": true
+}
+```
+
+<Line />
+
+<Ink as="h2">React Configuration</Ink>
+
+<Ink>Extends the base configuration with JSX support for React components.</Ink>
+
+```json
+// tsconfig.json
+{
+  "extends": "nice-config-typescript/react",
+  "compilerOptions": {
+    "outDir": "dist/esm",
+    "declarationDir": "dist/esm/types"
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}
+```
+
+<Ink as="h4">Additional Options</Ink>
+
+```json
+{
+  "jsx": "react-jsx"
+}
+```
+
+<Ink>Note: Path-relative options like</Ink>
+<Ink code>outDir</Ink><Ink>,</Ink>
+<Ink code>declarationDir</Ink><Ink>, and</Ink>
+<Ink code>include</Ink>
+<Ink>must be specified in each project as they resolve relative to the config file location.</Ink>
+

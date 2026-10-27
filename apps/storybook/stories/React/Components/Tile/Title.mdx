@@ -1,0 +1,136 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../../src/components/Story"
+import Tile from "nice-react-tile"
+import Ink from "../../../../src/nice/Ink"
+import { DataTableRow } from "../../../../src/components/DataTable"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+
+<Meta title="Components/Tile/title" />
+
+<StoryHeader title="title" />
+
+<Ink color="light">Renders a primary heading at the top of the tile. Additional Ink props can be forwarded via</Ink>
+<Ink color="light" code>titleProps</Ink><Ink color="light">.</Ink>
+
+<DataTableRow
+  fullWidth
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+          <Tile title="Title" description="Description" />,
+          `<Tile title="Title" description="Description" />`,
+        ]}
+/>
+
+<Ink as="h2">titleProps</Ink>
+
+<Ink>Forwarded to the title's</Ink>
+<Ink code>Ink</Ink><Ink>. Any prop from</Ink>
+<Ink code>InkProps</Ink>
+<Ink>(except</Ink>
+<Ink code>children</Ink><Ink>) can be passed.</Ink>
+
+<Ink as="h3">titleProps.as</Ink>
+
+<DataTableRow
+  fullWidth
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+          <Tile
+      title="Title"
+      description="Description"
+      titleProps={{ as: "h1" }}
+    />,
+          `<Tile\n  title="Title"\n  description="Description"\n  titleProps={{ as: "h1" }}\n/>`,
+        ]}
+/>
+
+<Ink as="h3">titleProps.color</Ink>
+
+<DataTableRow
+  fullWidth
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+          <Tile
+      title="Title"
+      description="Description"
+      titleProps={{ color: "link" }}
+    />,
+          `<Tile\n  title="Title"\n  description="Description"\n  titleProps={{ color: "link" }}\n/>`,
+        ]}
+/>
+
+<Ink as="h3">titleProps.size</Ink>
+
+<DataTableRow
+  fullWidth
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+          <Tile
+      title="Title"
+      description="Description"
+      titleProps={{ size: "larger" }}
+    />,
+          `<Tile\n  title="Title"\n  description="Description"\n  titleProps={{ size: "larger" }}\n/>`,
+        ]}
+/>
+
+<Ink as="h3">titleProps.weight</Ink>
+
+<DataTableRow
+  fullWidth
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+          <Tile
+      title="Title"
+      description="Description"
+      titleProps={{ weight: "light" }}
+    />,
+          `<Tile\n  title="Title"\n  description="Description"\n  titleProps={{ weight: "light" }}\n/>`,
+        ]}
+/>
+
+<Ink as="h3">titleProps.align</Ink>
+
+<DataTableRow
+  fullWidth
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+          <Tile
+      title="Title"
+      description="Description"
+      titleProps={{ align: "center" }}
+    />,
+          `<Tile\n  title="Title"\n  description="Description"\n  titleProps={{ align: "center" }}\n/>`,
+        ]}
+/>
+
+<Ink as="h3">titleProps.code</Ink>
+
+<DataTableRow
+  fullWidth
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+          <Tile
+      title="Title"
+      description="Description"
+      titleProps={{ shiki: true }}
+    />,
+          `<Tile\n  title="Title"\n  description="Description"\n  titleProps={{ shiki: true }}\n/>`,
+        ]}
+/>
+
+<Ink as="h3">titleProps.lineHeight</Ink>
+
+<DataTableRow
+  fullWidth
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+          <Tile
+      title="Title"
+      description="Description"
+      titleProps={{ lineHeight: "expanded" }}
+    />,
+          `<Tile\n  title="Title"\n  description="Description"\n  titleProps={{ lineHeight: "expanded" }}\n/>`,
+        ]}
+/>
+

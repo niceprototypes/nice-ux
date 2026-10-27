@@ -1,0 +1,80 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../../src/components/Story"
+import Install from "../../../../src/components/Install"
+import { ComponentDemoTable } from "../../../../src/dataTables/components/demos/Components"
+import { dialogExampleList } from "./examples"
+import NewLines from "../../../../src/components/NewLines"
+import Callout from "../../../../src/components/Callout"
+
+<Meta title="Components/Dialog" />
+
+<StoryHeader
+  title="Dialog"
+  description="A controlled modal built on the native dialog element, with Escape and backdrop-click dismiss, focus return and scroll lock."
+/>
+
+<NewLines count={3} />
+
+<Install package="react-dialog" />
+
+```jsx
+import Dialog from "nice-react-dialog"
+
+<Dialog open={open} onClose={() => setOpen(false)} title="Delete invoice?">
+  …
+</Dialog>
+```
+
+<NewLines count={3} />
+
+<ComponentDemoTable examples={dialogExampleList} />
+
+<NewLines count={3} />
+
+## Guide
+
+Dialog renders a native `<dialog>` and calls `showModal()` while `open` is true. The browser places it in the top layer and makes the rest of the page inert, so there is no portal and no z-index. The content mounts only while open.
+
+Dialog is controlled. The parent owns `open`; Dialog asks to close through `onClose` and closes only when `open` turns false:
+
+```jsx
+const [open, setOpen] = useState(false)
+
+<Button onClick={() => setOpen(true)}>Delete</Button>
+<Dialog
+  open={open}
+  onClose={() => setOpen(false)}
+  title="Delete invoice?"
+  description="This cannot be undone."
+  actions={<Button onClick={() => setOpen(false)}>Cancel</Button>}
+>
+  …
+</Dialog>
+```
+
+The `title` labels the dialog through `aria-labelledby`, and `description` describes it through `aria-describedby`.
+
+| Key / action | Result |
+|---|---|
+| Escape | Calls `onClose` |
+| Click on the backdrop | Calls `onClose`, unless `closeOnBackdropClick={false}` |
+| Tab | Moves focus between the dialog's controls; the page behind is inert |
+
+On open, focus moves into the dialog. On close, it returns to the element that was focused before opening, usually the trigger. Page scroll is locked while the dialog is open.
+
+<Callout type="hint">A native close that the parent did not ask for, such as a form with method="dialog" being submitted, also calls onClose, so open stays in sync.</Callout>
+
+The surface, size, spacing and backdrop read `dialog.*` component tokens, so `width`, `maxWidth`, `padding` and `backdrop.backgroundColor` are overridable with `setTokens`:
+
+```ts
+import { setTokens } from "nice-react-styles"
+
+setTokens({
+  dialog: {
+    width: { base: "32em" },
+    maxWidth: { base: "calc(100% - 2em)" },
+    padding: { base: "2em" },
+    backdrop: { backgroundColor: { base: "rgba(0, 0, 0, 0.4)" } },
+  },
+})
+```

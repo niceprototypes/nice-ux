@@ -1,0 +1,67 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import Line from "../../src/components/Line"
+import Ink from "../../src/nice/Ink"
+
+<Meta
+  title="Bindings/useDevice"
+  name="Docs"
+/>
+
+<StoryHeader title="useDevice" />
+
+<Ink>Reads the mobile state published by</Ink>
+<Ink code>StylesProvider</Ink><Ink>. Returns</Ink>
+<Ink code>{"{ isMobile }"}</Ink><Ink>. When</Ink>
+<Ink code>StylesProvider</Ink>
+<Ink>is given</Ink>
+<Ink code>detectDevice</Ink><Ink>, it runs detection once and shares the result through context — so every descendant reads one shared value, with no separate provider to wire and no per-component detection. This is the only device binding; detection lives inside</Ink>
+<Ink code>nice-react-styles</Ink><Ink>.</Ink>
+
+<Line />
+
+<Ink as="h2">Enable detection on the provider</Ink>
+
+```tsx
+import { StylesProvider } from "nice-react-styles"
+
+<StylesProvider detectDevice>
+  <App />
+</StylesProvider>
+```
+
+<Ink code>detectDevice</Ink>
+<Ink>defaults to</Ink>
+<Ink code>false</Ink><Ink>. When off, no detection runs and no resize listener is registered —</Ink>
+<Ink code>useDevice()</Ink>
+<Ink>returns</Ink>
+<Ink code>{"{ isMobile: false }"}</Ink><Ink>.</Ink>
+
+<Ink as="h2">Read it anywhere below</Ink>
+
+```tsx
+import { useDevice } from "nice-react-styles"
+
+function Nav() {
+  const { isMobile } = useDevice()
+  return isMobile ? <HamburgerMenu /> : <FullNavBar />
+}
+```
+
+<Ink>No prop drilling — every component under the</Ink>
+<Ink code>StylesProvider</Ink>
+<Ink>reads the same</Ink>
+<Ink code>isMobile</Ink>
+<Ink>directly.</Ink>
+
+<Line />
+
+<Ink as="h2">What detection checks</Ink>
+
+<Ink code>detectDevice</Ink>
+<Ink>runs detection once and keeps it current on resize / orientation / DevTools-emulation changes — a single shared listener for the whole tree. A viewport is mobile when the user-agent matches a known mobile identifier,</Ink>
+<Ink weight="semibold">or</Ink>
+<Ink>the device has touch and a viewport ≤ 640px (the phone band). Debug overrides force mobile on:</Ink>
+<Ink code>?mobile=true</Ink>
+<Ink>in the URL, or</Ink>
+<Ink code>localStorage.setItem("debug-mobile", "true")</Ink><Ink>.</Ink>

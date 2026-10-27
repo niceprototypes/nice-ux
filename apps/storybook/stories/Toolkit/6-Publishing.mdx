@@ -1,0 +1,90 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import Line from "../../src/components/Line"
+import Code from "../../src/nice/Code"
+import Ink from "../../src/nice/Ink"
+
+<Meta
+  title="Toolkit/6. Publishing"
+  name="Docs"
+/>
+
+<StoryHeader title="Publishing" />
+
+<Ink>Publishing is driven by per-package bump intent. Each publishable package records what changed in</Ink>
+<Ink code>.nice/bump.md</Ink><Ink>;</Ink>
+<Ink code>--publish</Ink>
+<Ink>reads those entries to recommend version bumps, then builds and publishes the affected packages in dependency order.</Ink>
+
+<Line />
+
+<Ink as="h2"><Code code="--bump" language="bash" inlined /> — record intent</Ink>
+
+<Ink>Append one entry to the current package's</Ink>
+<Ink code>.nice/bump.md</Ink><Ink>. Commit it alongside the change it describes.</Ink>
+
+```bash
+nicely --bump minor "Add useBreakpoint hook"
+nicely --bump major "Rename breakpoint identifiers small/medium/large to phone/tablet/laptop"
+nicely --bump patch "Fix icon stroke width regression"
+```
+
+<Ink>Each entry is</Ink>
+<Ink code>{"[<timestamp>] <level>: <message>"}</Ink><Ink>. The message doubles as the git commit subject (drop the</Ink>
+<Ink code>level:</Ink>
+<Ink>prefix in the commit). Write it for a consumer reading release notes, not as a diff summary. Direct-editing</Ink>
+<Ink code>.nice/bump.md</Ink>
+<Ink>is equivalent to</Ink>
+<Ink code>--bump</Ink><Ink>.</Ink>
+
+<Line />
+
+<Ink as="h2"><Code code="--publish" language="bash" inlined /></Ink>
+
+<Ink>Publishes changed packages to npm, resolving the full dependency cascade.</Ink>
+
+```bash
+# Publish all changed packages (interactive)
+nicely --publish
+
+# Publish specific packages (dependents auto-resolved)
+nicely --publish nice-styles,nice-react-styles
+
+# Preview without changing anything
+nicely --publish --dry-run
+```
+
+<Ink as="h4">What it does</Ink>
+
+```bash
+1. Resolves affected packages via the reverse file:-dependency graph
+2. Reads each .nice/bump.md → recommends a bump level per changed package
+   (dependents are auto-patched)
+3. Swaps file: deps → semver ranges
+4. Builds every affected package in dependency order (no OTP needed)
+5. Publishes in rapid succession — prompts once for an npm OTP, re-prompts
+   only if it expires mid-run
+6. Restores file: refs for local development
+7. Clears the consumed .nice/bump.md files, commits the version bump, pushes
+```
+
+<Ink>Publish order comes from</Ink>
+<Ink code>nice-toolkit/registry.json</Ink>
+<Ink>(bottom-to-top per the dependency chain). Run</Ink>
+<Ink code>nicely --publish --dry-run</Ink>
+<Ink>to see the current order and the recommended bumps.</Ink>
+
+<Line />
+
+<Ink as="h2"><Code code="--no-npm" language="bash" inlined /> / <Code code="--dry-publish" language="bash" inlined /></Ink>
+
+```bash
+# Bump, build, commit, push — but skip the npm publish step
+nicely --publish --no-npm
+
+# Preview the full plan without changing anything
+nicely --dry-publish
+```
+
+<Ink code>--no-npm</Ink>
+<Ink>is useful to verify the pipeline, or to push version bumps and let CI handle the actual npm publish.</Ink>

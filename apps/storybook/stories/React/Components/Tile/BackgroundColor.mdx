@@ -1,0 +1,34 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../../src/components/Story"
+import Tile from "nice-react-tile"
+import StoryDescription from "../../../../src/components/StoryDescription"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+import { DataTable } from "../../../../src/components/DataTable"
+import { toSource } from "../../../../src/services"
+
+<Meta title="Components/Tile/backgroundColor" />
+
+<StoryHeader title="backgroundColor" />
+
+<StoryDescription property="background-color">
+  Sets the tile's background color from <code>BackgroundColorType</code>
+  tokens. Token-bound — raw CSS color strings are not accepted. Use
+  <code>backgroundImage</code> for gradients or image URLs.
+</StoryDescription>
+
+<DataTable
+  showHeader={false}
+  columns={DEMO_CODE_COLUMNS}
+  tables={[{ rows: ["base", "dark"].map(variant => {
+    const props = { backgroundColor: variant, title: "Title", description: "Description" }
+    return {
+      id: String(variant),
+      values: [
+        <Tile {...props} />,
+        toSource("Tile", props),
+      ],
+      fullWidth: true,
+    }
+  }) }]}
+/>
+

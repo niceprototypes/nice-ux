@@ -1,0 +1,16 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../../src/components/Story"
+import LifecycleStory from "../../../../src/components/LifecycleStory"
+import { renderPopoverLifecycle, popoverLifecycleSteps } from "./examples"
+
+<Meta title="Components/Popover/lifecycle" />
+
+<StoryHeader
+  title="lifecycle"
+  description="A Popover anchored to a Button driven through the states its props reach, looping: closed, open, open on the right."
+/>
+
+<LifecycleStory
+  steps={popoverLifecycleSteps}
+  render={renderPopoverLifecycle}
+/>

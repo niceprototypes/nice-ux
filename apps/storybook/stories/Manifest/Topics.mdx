@@ -1,0 +1,26 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import Callout from "../../src/components/Callout"
+import Ink from "../../src/nice/Ink"
+import { DataTable } from "../../src/components/DataTable"
+
+<Meta
+  title="Manifest/Topics"
+  name="Docs"
+/>
+
+<StoryHeader
+  title="Topics"
+  description="Single-home reference topics that cross the phase folders — each lazy-loaded on demand."
+/>
+
+<Ink>Some subjects don't belong to a single phase of work. Rather than duplicate them across Read, Edit, and Build, they live once here and every phase folder points to them. You are *aware* they exist from the root File Tree; a body loads only when the task touches it.</Ink>
+
+<DataTable
+  columns={[{ key: "c0", header: "File" }, { key: "c1", header: "Contents" }]}
+  tables={[{ rows: [
+    { id: "0", values: [<Ink><code>build-config.md</code></Ink>, <Ink>Config packages (<code>nice-configuration</code> typescript/rollup/jest subpaths), per-package config standards, and the deviation audit — moved here from <code>edit/configuration.md</code> as its single home.</Ink>] },
+  ] }]}
+/>
+
+<Callout type="learning">When a build or config package misbehaves, a config doc always exists — you never need to be told. The Config Surfaces catalog in the root README maps each surface (shared build config, per-package config files, Vite / watcher, the cache / build triad) to the topic that documents it.</Callout>

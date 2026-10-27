@@ -1,0 +1,16 @@
+.sbdocs,
+.sb-show-main,
+.sb-wrapper,
+.sb-preparing-docs,
+.sb-preparing-docs,
+.sb-errordisplay_main,
+.sb-errordisplay_main * {
+  background: none !important;
+  background-color: transparent !important;
+}
+
+.sb-errordisplay_main {
+  border: 0;
+  padding: 0;
+  box-shadow: none;
+}

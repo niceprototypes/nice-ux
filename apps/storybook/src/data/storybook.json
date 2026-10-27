@@ -1,0 +1,342 @@
+{
+  "$schema": "./storybook.schema.json",
+  "columns": {
+    "tokenModule": [
+      {
+        "key": "preview",
+        "header": null,
+        "width": "24em"
+      },
+      {
+        "key": "tokenName",
+        "header": "Token name",
+        "clickToCopy": true,
+        "width": "8em"
+      },
+      {
+        "key": "css",
+        "header": "CSS",
+        "render": "nice-react-code",
+        "language": "tsx",
+        "width": "20em"
+      },
+      {
+        "key": "js",
+        "header": "JS",
+        "render": "nice-react-code",
+        "language": "tsx"
+      },
+      {
+        "key": "value",
+        "header": "Default",
+        "render": "nice-react-ink",
+        "code": true,
+        "size": "small",
+        "color": "lighter",
+        "clickToCopy": true
+      }
+    ],
+    "componentToken": [
+      {
+        "key": "example",
+        "header": null,
+        "width": "16em"
+      },
+      {
+        "key": "tokenName",
+        "header": "Token name",
+        "clickToCopy": true,
+        "width": "20em"
+      },
+      {
+        "key": "variable",
+        "header": "Variable",
+        "clickToCopy": true,
+        "width": "36em"
+      },
+      {
+        "key": "value",
+        "header": "Default"
+      }
+    ],
+    "componentExample": [
+      {
+        "key": "example",
+        "header": null,
+        "width": "16em"
+      },
+      {
+        "key": "name",
+        "header": "Name",
+        "width": "8em"
+      },
+      {
+        "key": "code",
+        "header": "React",
+        "render": "nice-react-code",
+        "language": "tsx"
+      }
+    ],
+    "demoCode": [
+      {
+        "key": "demo"
+      },
+      {
+        "key": "code",
+        "render": "nice-react-code",
+        "language": "tsx"
+      }
+    ],
+    "demoCss": [
+      {
+        "key": "demo"
+      },
+      {
+        "key": "code",
+        "render": "nice-react-code",
+        "language": "css"
+      }
+    ],
+    "demoCodeNote": [
+      {
+        "key": "demo"
+      },
+      {
+        "key": "code",
+        "render": "nice-react-code",
+        "language": "tsx"
+      },
+      {
+        "key": "note",
+        "render": "nice-react-ink",
+        "code": true,
+        "size": "small"
+      }
+    ]
+  },
+  "defaults": {
+    "wrapped": false,
+    "sectionWrapped": false
+  },
+  "items": [
+    {
+      "Basics": {
+        "wrapped": true,
+        "items": [
+          "Welcome",
+          "Reset",
+          "Tokens",
+          "Fonts",
+          {
+            "Icons": {
+              "wrapped": false
+            }
+          },
+          {
+            "Breakpoints": {
+              "wrapped": false
+            }
+          },
+          "Themes"
+        ]
+      }
+    },
+    {
+      "Tokens": {
+        "table": "tokenModule",
+        "items": [
+          {
+            "Docs": {
+              "table": false
+            }
+          },
+          {
+            "Animation": [
+              {
+                "animationDuration": {
+                  "description": "Timing values for CSS transitions and animations."
+                }
+              },
+              {
+                "animationEasing": {
+                  "description": "Easing curves for CSS transitions and animations.",
+                  "widths": {
+                    "preview": "8em"
+                  },
+                  "variants": [
+                    {
+                      "variant": "base",
+                      "path": "M 1 23 C 25.78 23, 35.22 1, 60 1"
+                    },
+                    {
+                      "variant": "linear",
+                      "path": "M 1 23 C 1 23, 60 1, 60 1"
+                    },
+                    {
+                      "variant": "ease-in",
+                      "path": "M 1 23 C 25.78 23, 60 1, 60 1"
+                    },
+                    {
+                      "variant": "ease-out",
+                      "path": "M 1 23 C 1 23, 35.22 1, 60 1"
+                    },
+                    {
+                      "variant": "ease",
+                      "path": "M 1 23 C 15.75 20.8, 15.75 1, 60 1"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "Borders": [
+              {
+                "borderRadius": {
+                  "description": "Corner rounding tokens from `smaller` to `larger`."
+                }
+              },
+              {
+                "borderWidth": {
+                  "description": "Stroke thickness tokens for borders and dividers."
+                }
+              },
+              {
+                "strokeWidthScale": {
+                  "description": "Multiplier on stroke thickness: 1 in day, 0.9 in night, so light strokes on a dark ground read as thin as dark strokes on light. Icons multiply their stroke width by it (darkAntialiasing)."
+                }
+              }
+            ]
+          },
+          {
+            "Colors": [
+              {
+                "backgroundColor": {
+                  "description": "Surface color tokens for page and container backgrounds, including the raised surface step and state fills (success, highlight, warning, error, link)."
+                }
+              },
+              {
+                "borderColor": {
+                  "description": "Stroke color tokens for outlines and dividers. subtle recedes into the surface, strong and stronger advance from it, and the semantic statuses (success, highlight, warning, error, link) are tuned to stand out against their backgroundColor fills."
+                }
+              },
+              {
+                "brandColor": {
+                  "description": "Brand identity colors. Placeholder palette — base (indigo) and secondary (cyan); static across day/night."
+                }
+              },
+              {
+                "color": {
+                  "description": "Text and icon color tokens, including semantic states (`success`, `highlight`, `warning`, `error`).",
+                  "variants": [
+                    "lightest",
+                    "lighter",
+                    "light",
+                    "base",
+                    "disabled",
+                    "link",
+                    "success",
+                    "highlight",
+                    "warning",
+                    "error"
+                  ]
+                }
+              },
+              {
+                "transformColor": {
+                  "table": false
+                }
+              }
+            ]
+          },
+          {
+            "Fonts": {
+              "widths": {
+                "preview": "8em",
+                "js": "20em"
+              },
+              "items": [
+                {
+                  "fontFamily": {
+                    "description": "Typeface tokens for headings, body text, and monospace code.",
+                    "variants": [
+                      {
+                        "variant": "heading",
+                        "weight": "bold",
+                        "text": "Heading"
+                      },
+                      {
+                        "variant": "base",
+                        "text": "Body"
+                      },
+                      {
+                        "variant": "code",
+                        "code": true,
+                        "text": "Code"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "fontSize": {
+                    "description": "Text scale tokens from `smaller` to `larger`. Responsive by default — values change at the laptop breakpoint."
+                  }
+                },
+                {
+                  "fontWeight": {
+                    "description": "Font thickness tokens from `light` (300) to `black` (900)."
+                  }
+                },
+                {
+                  "letterSpacing": {
+                    "description": "Horizontal tracking tokens — letter spacing from `tight` to `wider`.",
+                    "widths": {
+                      "preview": "12em"
+                    }
+                  }
+                },
+                {
+                  "lineHeight": {
+                    "description": "Vertical spacing tokens between lines of text — `single`, `condensed`, `base`, `expanded`.",
+                    "widths": {
+                      "preview": "16em"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "Sizes": [
+              {
+                "backgroundSize": {
+                  "description": "Image fit tokens — map to CSS object-fit (img) / background-size (div). Demoed via nice-react-image."
+                }
+              },
+              {
+                "gap": {
+                  "description": "Spacing tokens for flex/grid gaps and margins between items."
+                }
+              },
+              {
+                "size": {
+                  "description": "Vertical rhythm tokens for controls, buttons, and row heights."
+                }
+              }
+            ]
+          },
+          {
+            "boxShadow": {
+              "description": "Elevation tokens for cards and floating surfaces."
+            }
+          },
+          {
+            "zIndex": {
+              "description": "Stacking-order (z-index) tokens for layered surfaces — overlays, stickies, tooltips."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

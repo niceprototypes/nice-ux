@@ -1,0 +1,32 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import Callout from "../../src/components/Callout"
+import Ink from "../../src/nice/Ink"
+import { DataTable } from "../../src/components/DataTable"
+
+<Meta
+  title="Manifest/Publish"
+  name="Docs"
+/>
+
+<StoryHeader
+  title="Publish"
+  description="Committing, version bumping, and releasing nice-* packages to npm."
+/>
+
+<Ink>Files here are topic references: load the one your task or the root index points to. Each publishable package keeps its own</Ink>
+<Ink code>.nice/bump.md</Ink>
+<Ink>— both the version-bump intent for</Ink>
+<Ink code>nicely --publish</Ink>
+<Ink>and the durable per-change record, written in the same commit.</Ink>
+
+<DataTable
+  columns={[{ key: "c0", header: "File" }, { key: "c1", header: "Contents" }]}
+  tables={[{ rows: [
+    { id: "0", values: [<Ink><code>git.md</code></Ink>, <Ink>Commit format, branching, the <code>nicely --commit</code> workflow.</Ink>] },
+    { id: "1", values: [<Ink><code>npm.md</code></Ink>, <Ink>Version bumping, publish order, peer deps.</Ink>] },
+    { id: "2", values: [<Ink><code>bump-intent.md</code></Ink>, <Ink>The <code>.nice/bump.md</code> per-package bump-intent workflow, <code>✓</code> marker, and how <code>--commit</code> relates to <code>--publish</code>.</Ink>] },
+  ] }]}
+/>
+
+<Callout type="hint">Publish nice-* packages with `nicely publish`, never `npm publish` directly — the workflow handles the version cascade across consumers.</Callout>

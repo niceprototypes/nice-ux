@@ -1,0 +1,30 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import Callout from "../../src/components/Callout"
+import Ink from "../../src/nice/Ink"
+import { DataTable } from "../../src/components/DataTable"
+
+<Meta
+  title="Manifest/Read"
+  name="Docs"
+/>
+
+<StoryHeader
+  title="Read"
+  description="Understanding the Nice ecosystem's existing structure — the phase before any change."
+/>
+
+<Ink>Files here are topic references: load the one your task or the root index points to, not all of them.</Ink>
+
+<DataTable
+  columns={[{ key: "c0", header: "File" }, { key: "c1", header: "Contents" }]}
+  tables={[{ rows: [
+    { id: "0", values: [<Ink><code>inheritance.md</code></Ink>, <Ink>Package hierarchy, dependency graph, layered system design.</Ink>] },
+    { id: "1", values: [<Ink><code>audit.md</code></Ink>, <Ink>The audits — architecture (manifest ↔ architecture ↔ stories) and full (architecture + all consumers) — their trigger phrases and scope, plus known manifest gaps.</Ink>] },
+    { id: "2", values: [<Ink><code>projects/storybook.md</code></Ink>, <Ink>nice-storybook structure and scripts.</Ink>] },
+    { id: "3", values: [<Ink><code>projects/website.md</code></Ink>, <Ink>nice-website-2025 structure and scripts.</Ink>] },
+    { id: "4", values: [<Ink><code>styles/tokens.md</code></Ink>, <Ink>Token naming conventions and <code>getToken</code> usage.</Ink>] },
+  ] }]}
+/>
+
+<Callout type="hint">The package layers, deps flowing down: Application (storybook, website) → Feature (react-button) → Utility (flex, ink, tile, icon) → Context (react-styles) → Foundation (styles, icons, configuration).</Callout>

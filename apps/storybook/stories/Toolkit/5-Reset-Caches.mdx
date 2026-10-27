@@ -1,0 +1,91 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import Line from "../../src/components/Line"
+import Code from "../../src/nice/Code"
+import Ink from "../../src/nice/Ink"
+
+<Meta
+  title="Toolkit/5. Reset & Caches"
+  name="Docs"
+/>
+
+<StoryHeader title="Reset & Caches" />
+
+<Ink>The workspace triad — three commands targeting three distinct, non-overlapping layers — plus</Ink>
+<Ink code>--reset</Ink><Ink>, which chains them for the "everything is stale" case. Full cache topology and recipes live in</Ink>
+<Ink><a href="/?path=/docs/configuration-caches--docs" target="_top">Configuration → Caches</a></Ink><Ink>.</Ink>
+
+```bash
+nicely --clean       # consumer caches + dev-server processes
+nicely --dedupe      # singleton conflicts in linked packages
+nicely --build-all   # rebuild every linked package's dist
+```
+
+<Line />
+
+<Ink as="h2"><Code code="--clean" language="bash" inlined /></Ink>
+
+<Ink>Kills any process bound to a dev-server port (discovered from each consumer's</Ink>
+<Ink code>.env</Ink>
+<Ink code>PORT=</Ink>
+<Ink>entries and</Ink>
+<Ink code>package.json</Ink>
+<Ink code>-p</Ink>
+<Ink>/</Ink>
+<Ink code>--port</Ink>
+<Ink>flags), then wipes</Ink>
+<Ink code>node_modules/.cache</Ink>
+<Ink>and</Ink>
+<Ink code>node_modules/.vite</Ink>
+<Ink>across every consumer.</Ink>
+
+```bash
+nicely --clean
+
+# Preview
+nicely --clean --dry-run
+
+# Skip the port-kill phase (CI / scripted contexts)
+nicely --clean --no-kill
+```
+
+<Ink>The port-kill matters because a running dev server holds an in-memory module graph and repopulates its on-disk cache on the next request — wiping the cache without stopping the server is a no-op against the symptom.</Ink>
+
+<Line />
+
+<Ink as="h2"><Code code="--reset" language="bash" inlined /></Ink>
+
+<Ink>Chains the triad in the order that matters:</Ink>
+<Ink code>--build-all → --dedupe → --clean</Ink><Ink>.</Ink>
+
+```bash
+nicely --reset
+
+# Preview the whole sequence
+nicely --reset --dry-run
+```
+
+<ul>
+  <li><Ink><Ink weight="semibold">build first</Ink> so the new dists exist,</Ink></li>
+  <li><Ink><Ink weight="semibold">dedupe second</Ink> so any duplicate singletons that crept in during the build</Ink></li>
+</ul>
+  cascade are removed,
+<ul>
+  <li><Ink><Ink weight="semibold">clean last</Ink> so dev-server caches are flushed and processes killed before</Ink></li>
+</ul>
+  the next restart.
+
+<Ink code>--reset</Ink>
+<Ink>also</Ink>
+<Ink weight="semibold">stops any running <code>nicely --dev</code>/<code>--watch</code> first</Ink>
+<Ink>— those write the same dists the rebuild does, so leaving them running would race. Exit code reflects</Ink>
+<Ink code>--build-all</Ink><Ink>'s result;</Ink>
+<Ink code>--dedupe</Ink>
+<Ink>and</Ink>
+<Ink code>--clean</Ink>
+<Ink>run regardless.</Ink>
+
+<Ink>Use</Ink>
+<Ink code>--reset</Ink>
+<Ink>after any refactor that touches a foundation package (token renames, type narrowing in</Ink>
+<Ink code>nice-styles</Ink><Ink>, etc.), then restart your dev server.</Ink>

@@ -1,0 +1,45 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import Line from "../../src/components/Line"
+import Ink from "../../src/nice/Ink"
+
+<Meta
+  title="Storybook"
+  name="Docs"
+/>
+
+<StoryHeader title="Storybook" />
+
+<Ink>The three addons that give this Storybook its shape. They are separate packages on purpose: Theme restyles the</Ink>
+<Ink weight="semibold">manager</Ink><Ink>, Navigation renders in the</Ink>
+<Ink weight="semibold">preview iframe</Ink><Ink>, and Spinner covers the loading states of both — Storybook keeps those worlds apart. Each works without the others.</Ink>
+
+<Ink>This site uses all three — the sidebar tree comes from Theme, the bar above every page comes from Navigation, and the spinner shown while a page loads comes from Spinner.</Ink>
+
+<Line />
+
+<Ink as="h3">Contents</Ink>
+
+<ul>
+  <li><Ink><a href="/?path=/docs/storybook-theme--docs" target="_top">Theme</a> — The manager side: a token-styled</Ink></li>
+</ul>
+  sidebar tree with folder and branch-connector glyphs, depth- and
+  selection-aware lines, collapsible sections, and a hidden search. It stamps
+  derived `data-*` attributes on the tree so the stylesheet can read structure
+  CSS alone cannot see.
+
+<ul>
+  <li><Ink><a href="/?path=/docs/storybook-navigation--docs" target="_top">Navigation</a> — The preview-side bar: back /</Ink></li>
+</ul>
+  next links across sequences you define, a sidebar toggle, a dark-mode toggle,
+  open-in-editor, and a settings menu mirroring Storybook's own. Its actions
+  cross the addons channel to a small manager entry, because the preview cannot
+  call the manager `api` directly.
+
+<ul>
+  <li><Ink><a href="/?path=/docs/storybook-spinner--docs" target="_top">Spinner</a> — Both sides of loading: a boot</Ink></li>
+</ul>
+  overlay painted at document start in the manager, in the theme the user last
+  chose, and removed once the first page has rendered; and a preview spinner
+  that replaces Storybook's native loaders during navigation. A preset, so it
+  has no manager or preview entry.

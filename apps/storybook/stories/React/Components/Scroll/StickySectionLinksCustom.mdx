@@ -1,0 +1,41 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../../src/components/Story"
+import Ink from "../../../../src/nice/Ink"
+import { DataTableRow } from "../../../../src/components/DataTable"
+import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
+
+<Meta title="Components/Scroll/StickySectionLinks custom" />
+
+<StoryHeader title="StickySectionLinks custom" />
+
+<Ink color="light">
+  Override the default rendering of individual links or the wrapping container
+  via render props.
+</Ink>
+
+<Ink as="h3">renderLink</Ink>
+
+<DataTableRow
+  fullWidth
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+          <Ink size="small" color="light">
+      Custom renderer for individual link items with isActive state
+    </Ink>,
+          `<StickySectionLinks\n  links={links}\n  renderLink={(link, isActive) => (\n    <Button variant={isActive ? "primary" : "ghost"}>\n      {link.label}\n    </Button>\n  )}\n/>`,
+        ]}
+/>
+
+<Ink as="h3">renderWrapper</Ink>
+
+<DataTableRow
+  fullWidth
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+          <Ink size="small" color="light">
+      Custom renderer for the wrapper container
+    </Ink>,
+          `<StickySectionLinks\n  links={links}\n  renderWrapper={(children) => (\n    <nav className="custom-nav">{children}</nav>\n  )}\n/>`,
+        ]}
+/>
+

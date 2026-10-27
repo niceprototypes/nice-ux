@@ -1,0 +1,179 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import Line from "../../src/components/Line"
+import Install from "../../src/components/Install"
+import NewLines from "../../src/components/NewLines"
+import SpinnerDemo from "../../src/components/SpinnerDemo"
+import Ink from "../../src/nice/Ink"
+import { DataTable } from "../../src/components/DataTable"
+
+<Meta
+  title="Storybook/Spinner"
+  name="Docs"
+/>
+
+<StoryHeader
+  title="Spinner"
+  description="Replaces Storybook's loading states with the Nice spinner — a boot overlay painted at document start in the manager, and a preview spinner in place of Storybook's native loaders."
+  repos={[
+    { name: "nice-storybook-spinner", url: "https://github.com/niceprototypes/nice-storybook-spinner", license: "MIT" },
+  ]}
+/>
+
+<Install package="storybook-spinner" dev />
+
+<Line />
+
+<SpinnerDemo />
+
+<NewLines />
+
+<Ink as="h3">Setup</Ink>
+
+<Ink>Add it to</Ink>
+<Ink code>addons</Ink>
+<Ink>— it is a preset, so there is no manager or preview entry to register:</Ink>
+
+```ts
+// .storybook/main.ts
+const config = {
+  addons: [
+    "storybook-dark-mode",
+    "nice-storybook-spinner",
+  ],
+}
+
+export default config
+```
+
+<Ink>To pass options, use the object form of the entry:</Ink>
+
+```ts
+addons: [
+  { name: "nice-storybook-spinner", options: { hold: false, timeout: 8000 } },
+]
+```
+
+<Ink>Peer:</Ink>
+<Ink code>storybook</Ink>
+<Ink>≥ 10. The spinner is the real</Ink>
+<Ink code>{"<Icon name=\"spinner\" />"}</Ink>
+<Ink>from</Ink>
+<Ink code>nice-react-icon</Ink><Ink>, rendered to static markup when the addon is built, with its size, stroke, duration and day / night colors taken from</Ink>
+<Ink code>nice-styles</Ink>
+<Ink>tokens at the same time — so the published package has no dependencies.</Ink>
+
+<Ink as="h3">Options</Ink>
+
+<DataTable
+  columns={[{ key: "c0", header: "Option" }, { key: "c1", header: "Type" }, { key: "c2", header: "Default" }, { key: "c3", header: "Description" }]}
+  tables={[{ rows: [
+    { id: "0", values: [<Ink><code>hold</code></Ink>, <Ink><code>boolean</code></Ink>, <Ink><code>false</code></Ink>, <Ink>Keep the boot overlay (or the held snapshot) up for good.</Ink>] },
+    { id: "1", values: [<Ink><code>timeout</code></Ink>, <Ink><code>number</code></Ink>, <Ink><code>8000</code></Ink>, <Ink>Release after this many ms, whatever the readiness signals say.</Ink>] },
+    { id: "2", values: [<Ink><code>viewTransition</code></Ink>, <Ink><code>boolean</code></Ink>, <Ink><code>true</code></Ink>, <Ink>Snapshot mode, below. <code>false</code> keeps only the opaque overlay: no <code>@view-transition</code> rule is injected and <code>pagereveal</code> is not handled.</Ink>] },
+  ] }]}
+/>
+
+<Ink>A</Ink>
+<Ink code>timeout</Ink>
+<Ink>that is not a finite, non-negative number falls back to</Ink>
+<Ink code>8000</Ink><Ink>; a</Ink>
+<Ink code>viewTransition</Ink>
+<Ink>that is not a boolean falls back to its default.</Ink>
+
+<Ink as="h3">Hold for styling</Ink>
+
+<Ink>To keep the boot overlay on screen while styling it, use any of these — the first one present wins. Hold keeps whichever mode is active up: the opaque overlay, or in snapshot mode the held snapshot with the spinner over it.</Ink>
+
+<ol>
+  <li><Ink>Query parameter: <code>?nsbHold=1</code> (or <code>true</code>) holds, <code>?nsbHold=0</code> (or <code>false</code>)</Ink></li>
+</ol>
+   releases.
+<ol>
+  <li><Ink>localStorage: <code>localStorage.setItem("nice-storybook-spinner:hold", "true")</code></Ink></li>
+</ol>
+   holds, `"false"` releases.
+<ol>
+  <li><Ink>The preset option <code>hold: true</code>.</Ink></li>
+</ol>
+
+<Ink>A held overlay ignores every removal path, the timeout included. Clear the key or load with</Ink>
+<Ink code>?nsbHold=0</Ink>
+<Ink>to release it.</Ink>
+
+`window.__NSB` is a read-only debug view of the overlay: `{ theme, hold, mode,
+removed }`, where `mode` is `"overlay"` or `"snapshot"` and `removed` names the
+<Ink>signal that took it down and is empty while it is up.</Ink>
+
+<Ink as="h3">How it works</Ink>
+
+<Ink>The addon is a preset with two hooks. Both put their markup first in the head, so it runs before any other head content is fetched or parsed.</Ink>
+
+<Ink weight="semibold"><code>managerHead</code></Ink>
+<Ink>inlines the boot overlay script. It resolves the theme synchronously from storybook-dark-mode's localStorage store (</Ink><Ink code>sb-addon-themes-3</Ink><Ink>) — the stored mode when the user chose it explicitly, otherwise day — so the overlay's first paint is already in the right theme. It then mounts the overlay on</Ink>
+<Ink code>{"<html>"}</Ink>
+<Ink>before</Ink>
+<Ink code>{"<body>"}</Ink>
+<Ink>exists.</Ink>
+
+<Ink>The overlay comes down once the page behind it is ready: after</Ink>
+<Ink code>storyRendered</Ink>
+<Ink>or</Ink>
+<Ink code>docsRendered</Ink><Ink>, then</Ink>
+<Ink code>document.fonts.ready</Ink>
+<Ink>(capped at 1s), then two animation frames, so the first frame without the overlay is a rendered page. On</Ink>
+<Ink code>storyErrored</Ink><Ink>,</Ink>
+<Ink code>storyThrewException</Ink>
+<Ink>or</Ink>
+<Ink code>storyMissing</Ink>
+<Ink>it is removed immediately, so Storybook's error display is never covered. After</Ink>
+<Ink code>timeout</Ink>
+<Ink>ms it is removed regardless.</Ink>
+
+<Ink weight="semibold">Snapshot mode</Ink>
+<Ink>(</Ink><Ink code>viewTransition</Ink><Ink>, manager only).</Ink>
+<Ink code>managerHead</Ink>
+<Ink>also injects</Ink>
+<Ink code>{"@view-transition { navigation: auto }"}</Ink><Ink>, which opts the manager into cross-document View Transitions. When</Ink>
+<Ink code>pagereveal</Ink>
+<Ink>carries a</Ink>
+<Ink code>viewTransition</Ink><Ink>, the boot script removes the opaque overlay and holds the transition instead: the previous page's snapshot (</Ink><Ink code>::view-transition-old(root)</Ink><Ink>) stays at full opacity, the live new page stays invisible, and the spinner — token size and theme color, no background — shows above the snapshot under its own</Ink>
+<Ink code>view-transition-name</Ink><Ink>. The browser blocks pointer and wheel input during the transition but not the keyboard, so</Ink>
+<Ink code>keydown</Ink>
+<Ink>/</Ink>
+<Ink code>keyup</Ink>
+<Ink>are blocked in the capture phase until the release. The same readiness signals (and</Ink>
+<Ink code>timeout</Ink><Ink>) release it with a 180ms cross-fade to the rendered page, and</Ink>
+<Ink code>skipTransition()</Ink>
+<Ink>runs afterwards as a safety net. The preview iframe is part of the snapshot and needs no opt-in.</Ink>
+
+<Ink>Snapshot mode covers same-origin navigations — links,</Ink>
+<Ink code>location.assign</Ink><Ink>, back and forward — in Chrome / Edge 126+ and Safari 18.2+. A first visit and a reload never get a View Transition (measured in Chromium 139 and WebKit 26), so they, and other browsers, get the opaque overlay.</Ink>
+
+<Ink weight="semibold"><code>previewHead</code></Ink>
+<Ink>handles navigation inside the preview iframe. A permanent stylesheet hides Storybook's native loaders — the grey docs skeleton (</Ink><Ink code>.sb-preparing-docs</Ink><Ink>) and the story spinner (</Ink><Ink code>.sb-preparing-story</Ink><Ink>) — and shows</Ink>
+<Ink code>#nsb-preview-spinner</Ink>
+<Ink>exactly when Storybook would show its own loader. A script mounts that spinner as the first child of</Ink>
+<Ink code>{"<body>"}</Ink>
+<Ink>as soon as</Ink>
+<Ink code>{"<body>"}</Ink>
+<Ink>exists, themed like the overlay and following storybook-dark-mode's</Ink>
+<Ink code>DARK_MODE</Ink>
+<Ink>event afterwards.</Ink>
+
+<Ink>The preview head also carries the boot overlay script, which acts only when</Ink>
+<Ink code>iframe.html</Ink>
+<Ink>is opened on its own.</Ink>
+<Ink code>.sb-nopreview</Ink>
+<Ink>and</Ink>
+<Ink code>.sb-errordisplay</Ink>
+<Ink>are never touched.</Ink>
+
+<Ink as="h3">Accessibility</Ink>
+
+<Ink>Both spinners carry</Ink>
+<Ink code>role="progressbar"</Ink>
+<Ink>and</Ink>
+<Ink code>aria-busy="true"</Ink><Ink>, labelled "Loading Storybook" (boot overlay) and "Loading story" (preview). Under</Ink>
+<Ink code>prefers-reduced-motion: reduce</Ink>
+<Ink>the rotation slows to one turn every 2s.</Ink>

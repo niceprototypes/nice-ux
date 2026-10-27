@@ -1,0 +1,125 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../src/components/Story"
+import Callout from "../../src/components/Callout"
+import Code from "../../src/nice/Code"
+import Ink from "../../src/nice/Ink"
+
+<Meta
+  title="Scenarios/Medium"
+  name="Docs"
+/>
+
+<StoryHeader
+  title="Medium"
+  description="Overrides, a provider-loaded font, and responsive tokens."
+/>
+
+<Ink>Override defaults, load a font, and go responsive. The four kinds of code below are broken down underneath.</Ink>
+
+```tsx
+// App.tsx
+
+import {
+  StylesProvider,
+  setTokens,
+  getToken,
+  getBreakpoint,
+} from "nice-react-styles"
+import styled from "styled-components"
+import Ink from "nice-react-ink"
+import Button from "nice-react-button"
+
+setTokens({
+  breakpoints: {
+    tablet: 700,
+    laptop: 1100,
+  },
+  fontFamily: {
+    base: "Inter, sans-serif",    // Default override
+    heading: "Inter, sans-serif", // Headings read their own token
+  },
+  fontSize: {
+    base: { phone: "16px", "laptop+": "18px" },
+    larger: { phone: "32px", "laptop+": "44px" },
+  },
+} as const)
+
+const Card = styled.div`
+  padding: ${getToken("gap", "large")};
+  font-family: ${getToken("fontFamily", "base")};
+
+  ${getBreakpoint("laptop+")} {
+    padding: ${getToken("gap", "larger")};
+  }
+`
+
+export default function App() {
+  return (
+    <StylesProvider googleFonts="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+      <Card>
+        <Ink as="h1" size="larger">Responsive & branded</Ink>
+
+        {/* An interactive component inherits the same tokens — no extra styling. */}
+        <Button status="success" filled iconRight="arrow-right">
+          Get started
+        </Button>
+      </Card>
+    </StylesProvider>
+  )
+}
+```
+
+<Ink as="h2">1. Token map — <Code code="setTokens" language="tsx" inlined /></Ink>
+
+<Ink>Writes overrides, custom tokens, and breakpoint floors to the page as CSS variables. Run it once, at module load.</Ink>
+
+<ul>
+  <li><Ink>A string is static; an object keyed by breakpoints is responsive. <code>laptop</code> is</Ink></li>
+</ul>
+  one band, `laptop+` is that band and up, `laptop-` is that band and down.
+<ul>
+  <li><Ink>A band with no key keeps the library default — here, <code>tablet</code>.</Ink></li>
+  <li><Ink>Values are emitted as written, so include a fallback font.</Ink></li>
+  <li><Ink>Headings read <code>fontFamily.heading</code>, not <code>base</code>.</Ink></li>
+</ul>
+
+<Ink as="h2">2. Styled components — <Code code="getToken" language="tsx" inlined />, <Code code="getBreakpoint" language="tsx" inlined /></Ink>
+
+<Ink code>getToken</Ink>
+<Ink>returns a</Ink>
+<Ink code>var()</Ink><Ink>, so responsive and themed values follow the viewport and theme on their own.</Ink>
+<Ink code>getBreakpoint</Ink>
+<Ink>returns a fixed</Ink>
+<Ink code>@media</Ink>
+<Ink>string built when it is called.</Ink>
+
+<ul>
+  <li><Ink>Call <code>setTokens</code> first — a <code>getBreakpoint</code> evaluated earlier keeps the default</Ink></li>
+</ul>
+  1280px floor. Keep it in its own module, imported first.
+<ul>
+  <li><Ink>Unknown token names are compile errors.</Ink></li>
+</ul>
+
+<Ink as="h2">3. Provider — <Code code="StylesProvider" language="tsx" inlined /></Ink>
+
+<Ink>Supplies tokens to nice components and loads fonts.</Ink>
+<Ink code>googleFonts</Ink>
+<Ink>adds the font links to</Ink>
+<Ink code>{"<head>"}</Ink>
+<Ink>once.</Ink>
+
+<ul>
+  <li><Ink>Loading a font does not apply it; the <code>fontFamily</code> tokens do.</Ink></li>
+  <li><Ink>Request every weight used — <code>h1</code>–<code>h3</code> render at 700.</Ink></li>
+</ul>
+
+<Ink as="h2">4. Components — <Code code="Ink" language="tsx" inlined />, <Code code="Button" language="tsx" inlined /></Ink>
+
+<Ink>Read the same tokens, so they restyle with no extra CSS.</Ink>
+<Ink code>Ink as="h1"</Ink>
+<Ink>uses the heading font and</Ink>
+<Ink code>fontSize.larger</Ink><Ink>;</Ink>
+<Ink code>Button</Ink>
+<Ink>inherits</Ink>
+<Ink code>Card</Ink><Ink>'s font.</Ink>
