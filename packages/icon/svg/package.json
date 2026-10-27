@@ -1,0 +1,89 @@
+{
+  "name": "nice-icons",
+  "version": "4.0.0",
+  "description": "A collection of SVG icons with stroke and fill variants",
+  "main": "src/index.js",
+  "types": "src/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/generateIndex/index.js",
+    "dev": "node scripts/generateIndex/index.js --watch",
+    "prepublishOnly": "npm run build"
+  },
+  "author": "Nice Prototypes",
+  "license": "MIT",
+  "keywords": [
+    "icons",
+    "svg",
+    "nice-icons"
+  ],
+  "files": [
+    "src/index.js",
+    "src/index.d.ts",
+    "src/icons/generated",
+    "src/illustrations/generated",
+    "src/services"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nice-prototypes/nice-icons"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {},
+  "devDependencies": {
+    "nice-svg-generator": "file:../svg-generator"
+  },
+  "dependencies": {
+    "nice-styles": "file:../styles"
+  },
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "default": "./src/index.js"
+    },
+    "./catalog": {
+      "types": "./src/icons/generated/catalog.d.ts",
+      "default": "./src/icons/generated/catalog.js"
+    },
+    "./source": {
+      "types": "./src/icons/generated/source.d.ts",
+      "default": "./src/icons/generated/source.js"
+    },
+    "./base64": {
+      "types": "./src/icons/generated/base64.d.ts",
+      "default": "./src/icons/generated/base64.js"
+    },
+    "./get-icon": {
+      "types": "./src/services/getIcon.d.ts",
+      "default": "./src/services/getIcon.js"
+    },
+    "./get-icon-encoded": {
+      "types": "./src/services/getIconEncoded.d.ts",
+      "default": "./src/services/getIconEncoded.js"
+    },
+    "./illustration-catalog": {
+      "types": "./src/illustrations/generated/catalog.d.ts",
+      "default": "./src/illustrations/generated/catalog.js"
+    },
+    "./illustration-source": {
+      "types": "./src/illustrations/generated/source.d.ts",
+      "default": "./src/illustrations/generated/source.js"
+    },
+    "./illustration-base64": {
+      "types": "./src/illustrations/generated/base64.d.ts",
+      "default": "./src/illustrations/generated/base64.js"
+    },
+    "./get-illustration": {
+      "types": "./src/services/getIllustration.d.ts",
+      "default": "./src/services/getIllustration.js"
+    },
+    "./get-illustration-encoded": {
+      "types": "./src/services/getIllustrationEncoded.d.ts",
+      "default": "./src/services/getIllustrationEncoded.js"
+    },
+    "./illustration/*": "./src/illustrations/generated/*",
+    "./*": "./src/icons/generated/*"
+  }
+}
