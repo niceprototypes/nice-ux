@@ -1,0 +1,1 @@
+export { registerVendorResolver } from "./registerVendorResolver"
