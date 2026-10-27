@@ -1,0 +1,34 @@
+{
+  "name": "nice-config-prettier",
+  "version": "1.0.0",
+  "description": "Shared Prettier configuration for the nice-* ecosystem",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js"
+  },
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "nice",
+    "configuration",
+    "prettier"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niceprototypes/nice-config-prettier.git"
+  },
+  "bugs": {
+    "url": "https://github.com/niceprototypes/nice-config-prettier/issues"
+  },
+  "homepage": "https://github.com/niceprototypes/nice-config-prettier#readme",
+  "peerDependencies": {
+    "prettier": ">=3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "prettier": {
+      "optional": true
+    }
+  }
+}
