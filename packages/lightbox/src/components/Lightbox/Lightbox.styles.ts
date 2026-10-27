@@ -1,0 +1,32 @@
+import styled from "styled-components"
+import { getToken } from "nice-react-styles"
+
+export const Trigger = styled.div`
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: ${getToken("lightbox.focusRing.width:base")} solid ${getToken("lightbox.focusRing.color:base")};
+    outline-offset: ${getToken("lightbox.focusRing.offset:base")};
+  }
+`
+
+export const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: ${getToken("lightbox.zIndex:base")};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.9);
+  cursor: pointer;
+`
+
+export const Image = styled.img`
+  max-width: 90vw;
+  max-height: 80vh;
+  object-fit: contain;
+`

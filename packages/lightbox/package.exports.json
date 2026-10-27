@@ -1,0 +1,6 @@
+{
+  "$schema": "../config-exports/src/schema.json",
+  "description": "Fullscreen image lightbox with portal rendering.",
+  "default": "Lightbox",
+  "components": ["Lightbox"]
+}
