@@ -1,0 +1,8 @@
+{
+  "$schema": "../config-exports/src/schema.json",
+  "description": "The Nice Prototypes logo: the crystal heart illustration and the theme-aware logo name.",
+  "default": "Logo",
+  "components": [
+    "Logo"
+  ]
+}
