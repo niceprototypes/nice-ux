@@ -19,7 +19,8 @@ const PAGE_SIZE = 10
 
 /**
  * WAI-ARIA APG select-only combobox. The trigger is Input rendered read-only
- * with `role="combobox"`; a Popover anchored to the Input control holds a
+ * with `role="combobox"`; a Popover anchored to the Input field chrome, at
+ * least as wide as it, holds a
  * `role="listbox"` List of `role="option"` ListItems. DOM focus stays on the
  * trigger throughout — the active option is conveyed by
  * `aria-activedescendant`. A hidden input carries the value for FormData.
@@ -28,6 +29,7 @@ const SelectCustom: React.FC<SelectCustomProps> = ({
   "aria-label": ariaLabel,
   children,
   defaultValue,
+  disabled: disabledProp = false,
   name,
   native: _native,
   onBlur,
@@ -45,7 +47,8 @@ const SelectCustom: React.FC<SelectCustomProps> = ({
   const baseId = React.useId()
   const listboxId = `${baseId}-listbox`
   const optionId = (index: number) => `${baseId}-option-${index}`
-  const disabled = status === "disabled"
+  // Disabled when either the `disabled` prop or `status="disabled"` asks for it.
+  const disabled = disabledProp || status === "disabled"
 
   // Children win over options when both are given (same as native)
   const options = React.useMemo(
@@ -74,7 +77,9 @@ const SelectCustom: React.FC<SelectCustomProps> = ({
   const active = expanded && activeIndex >= 0 && activeIndex < options.length ? activeIndex : -1
 
   const controlRef = React.useRef<HTMLInputElement | null>(null)
-  const chevronRef = React.useRef<HTMLSpanElement | null>(null)
+  // Input's field chrome (the control's parent): the trigger's rendered box,
+  // which anchors the listbox so the listbox matches its width.
+  const fieldRef = React.useRef<HTMLElement | null>(null)
   const search = React.useRef("")
   const searchTimer = React.useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 
@@ -82,6 +87,7 @@ const SelectCustom: React.FC<SelectCustomProps> = ({
   const setControlNode = React.useCallback(
     (node: HTMLInputElement | null) => {
       controlRef.current = node
+      fieldRef.current = node?.parentElement ?? null
       if (typeof ref === "function") ref(node)
       else if (ref) ref.current = node
     },
@@ -251,6 +257,7 @@ const SelectCustom: React.FC<SelectCustomProps> = ({
         placeholder={placeholder}
         size={size}
         status={status}
+        disabled={disabled}
         theme={theme}
         onKeyDown={event => {
           onKeyDown?.(event)
@@ -270,7 +277,6 @@ const SelectCustom: React.FC<SelectCustomProps> = ({
               value={currentValue}
             />
             <StyledChevron
-              ref={chevronRef}
               $size={size}
               $native={false}
               aria-hidden="true"
@@ -298,8 +304,8 @@ const SelectCustom: React.FC<SelectCustomProps> = ({
         onOpenChange={next => {
           if (!next) setOpen(false)
         }}
-        anchorRef={controlRef}
-        ignoreOutsideRefs={[chevronRef]}
+        anchorRef={fieldRef}
+        matchAnchorWidth
         role="presentation"
         theme={theme}
       >

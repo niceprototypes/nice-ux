@@ -12,6 +12,7 @@ import type { SelectNativeProps } from "./Select.types"
 const SelectNative: React.FC<SelectNativeProps> = ({
   children,
   defaultValue,
+  disabled: disabledProp = false,
   native: _native,
   onChange,
   options,
@@ -22,6 +23,9 @@ const SelectNative: React.FC<SelectNativeProps> = ({
   value,
   ...rest
 }) => {
+  // Disabled when either the `disabled` prop or `status="disabled"` asks for it.
+  const disabled = disabledProp || status === "disabled"
+
   // Children win over options when both are given
   const content =
     children ??
@@ -49,6 +53,7 @@ const SelectNative: React.FC<SelectNativeProps> = ({
       ref={ref}
       size={size}
       status={status}
+      disabled={disabled}
       value={value}
       defaultValue={initialValue}
       onChange={
@@ -67,7 +72,7 @@ const SelectNative: React.FC<SelectNativeProps> = ({
             size="base"
             // Dimmed with the control's disabled text colour (color:disabled,
             // via the icon.color alias)
-            color={status === "disabled" ? "disabled" : "base"}
+            color={disabled ? "disabled" : "base"}
           />
         </StyledChevron>
       }

@@ -602,6 +602,21 @@ describe("Select (custom, default)", () => {
       expect(screen.getByRole("listbox", { name: "fruit" })).toBeInTheDocument()
     })
 
+    it("is at least as wide as the trigger's field chrome", () => {
+      render(
+        <Select
+          aria-label="fruit"
+          options={fruit}
+        />
+      )
+      // jsdom has no layout: stub the field chrome's rect before opening.
+      const field = combobox().parentElement!
+      field.getBoundingClientRect = () =>
+        ({ top: 0, left: 0, right: 240, bottom: 40, width: 240, height: 40, x: 0, y: 0, toJSON: () => ({}) }) as DOMRect
+      key("ArrowDown")
+      expect(listbox().parentElement!.style.minWidth).toBe("240px")
+    })
+
     it("maps <option> / <optgroup> children to options", () => {
       render(
         <Select aria-label="fruit">
@@ -632,6 +647,25 @@ describe("Select (custom, default)", () => {
           aria-label="fruit"
           options={fruit}
           status="disabled"
+        />
+      )
+      expect(combobox()).toBeDisabled()
+      fireEvent.click(combobox())
+      fireEvent.click(chevron())
+      key("ArrowDown")
+      expect(combobox()).toHaveAttribute("aria-expanded", "false")
+      expect(screen.queryByRole("listbox")).toBeNull()
+      expect(screen.getByTestId("icon")).toHaveAttribute("data-color", "disabled")
+    })
+  })
+
+  describe("disabled prop", () => {
+    it("cannot be opened and dims the chevron", () => {
+      render(
+        <Select
+          aria-label="fruit"
+          options={fruit}
+          disabled
         />
       )
       expect(combobox()).toBeDisabled()

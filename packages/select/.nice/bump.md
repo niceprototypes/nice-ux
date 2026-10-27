@@ -1,3 +1,5 @@
 [2026-09-24 19:13] minor: Add Select: native select rendered through Input's field chrome with options, placeholder and a chevron
 [2026-09-24 20:18] minor: Make Select a WAI-ARIA select-only combobox by default (Input + Popover + List, option start/end slots, typeahead, hidden input for forms) and keep the platform select behind a new native prop; unpublished 0.1.0, so the default change breaks no published consumer
 [2026-09-25 19:13] patch: Declare nice-* runtime packages as peer dependencies with a file: devDependency for local builds
+[2026-10-15 15:28] patch: Honour the disabled prop in Select: the custom select cannot open and the chevron dims, as with status="disabled"
+[2026-10-15 15:41] patch: Make the custom Select listbox at least as wide as the field, anchored to the field's edge

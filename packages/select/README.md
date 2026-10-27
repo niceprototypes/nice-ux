@@ -1,4 +1,5 @@
 # nice-react-select
+![Select](docs/select.png)
 
 Select for React, rendered through `nice-react-input`'s field chrome. Part of
 the Nice Prototypes ecosystem.
@@ -102,7 +103,9 @@ Every other inherited prop (`status`, `filled`, `borderRadius`, `borderWidth`,
 | `onChange` | `(value: string, event?) => void` | Native: the `<select>` change event. Custom: the keyboard event (Enter, Space, Tab, Alt+ArrowUp) or option click that selected, and only when the value changes |
 | `name` | `string` | Native: on the `<select>`. Custom: on a hidden `<input type="hidden">` carrying the value (the combobox has no name) |
 | `size` | `SizeType` | Field chrome, chevron and listbox item size. Default `"base"` |
+| `width` | `InputWidthType` | Field chrome width, passed to Input (`input.width` scale). Default `"full"`. In custom mode the listbox is at least as wide as the field |
 | `status` | `InputStatusType` | `"disabled"` disables the control (it cannot open) and dims the chevron (`color:disabled`) |
+| `disabled` | `boolean` | Same effect as `status="disabled"`; either one disables |
 | `className`, `theme`, `breakpoints` | | Standard. `className` lands on Input's wrapper; `theme` is applied by Input around the field (and to the Popover in custom mode) |
 
 The chevron (`carat-bottom` icon) sits in Input's `end` slot, `aria-hidden`.

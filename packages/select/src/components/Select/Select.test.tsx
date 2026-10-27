@@ -232,6 +232,18 @@ describe("Select", () => {
     )
   })
 
+  it("disables the select and dims the chevron with the disabled prop", () => {
+    render(
+      <Select
+        native
+        aria-label="fruit"
+        disabled
+      />
+    )
+    expect(screen.getByRole("combobox")).toBeDisabled()
+    expect(screen.getByTestId("icon")).toHaveAttribute("data-color", "disabled")
+  })
+
   it("applies className to Input's wrapper, not the native select", () => {
     render(
       <Select
@@ -243,6 +255,33 @@ describe("Select", () => {
     const select = screen.getByRole("combobox")
     expect(select).not.toHaveClass("custom")
     expect(select.parentElement).toHaveClass("custom")
+  })
+
+  describe("width", () => {
+    it("forwards width to Input's field chrome (native)", () => {
+      render(
+        <Select
+          native
+          aria-label="fruit"
+          options={fruit}
+          width="20"
+        />
+      )
+      const fieldCss = cssFor(screen.getByRole("combobox").parentElement!)
+      expect(fieldCss).toContain(getToken("input.width:20"))
+    })
+
+    it("forwards width to Input's field chrome (custom)", () => {
+      render(
+        <Select
+          aria-label="fruit"
+          options={fruit}
+          width="20"
+        />
+      )
+      const fieldCss = cssFor(screen.getByRole("combobox").parentElement!)
+      expect(fieldCss).toContain(getToken("input.width:20"))
+    })
   })
 
   it("does not accept multiple (compile-time)", () => {
