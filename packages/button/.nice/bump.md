@@ -12,3 +12,12 @@
 [2026-09-25 18:41] minor: Add a grow prop to Button that sets flex-grow on the root
 [2026-09-25 18:59] patch: Move element attribute logic into Button.helpers and icon rendering into an internal ButtonIcon component
 [2026-09-25 19:12] patch: Declare nice-* runtime packages as peer dependencies with a file: devDependency for local builds
+[2026-10-08 22:00] minor: Add ghost (transparent background and border at rest, or per interaction state), color and iconColor (one color token or one per state), justifyContent (icon and label placement; non-center stretches the content row) and animationDuration (transitions from button.animationDuration tokens; none turns them off)
+[2026-10-08 22:00] patch: Icon color follows the button.icon.color hover, focus and active tokens; transitions read button.animationDuration and animationEasing tokens instead of a fixed 0.15s ease-in-out
+[2026-10-15 15:30] minor: Add a selected prop: a persistent selected look that overrides ghost in every state and, unfilled, takes its border from the button.selected.borderColor token (filled keeps a transparent border; an explicit borderColor still wins); it sets no ARIA attribute
+[2026-10-15 15:30] minor: Forward role, aria-selected, tabIndex and id to the root element; role and tabIndex override as="div"'s role="button" and tabIndex 0, and a disabled button keeps tabIndex -1 or its native disabled
+[2026-10-15 15:30] minor: iconLeft and iconRight accept any name Icon's name prop accepts, including vendor (Lucide) names with iconVendor
+[2026-10-15 15:30] patch: The focus-visible outline reads the button.focusRing width, color and offset tokens instead of the core tokens (same values)
+[2026-10-15 15:38] patch: Reset border, background and padding in the inlined layout, so an inlined native <button> renders like an inlined anchor or div instead of showing the browser's outset border and grey fill
+[2026-10-15 15:38] minor: Forward aria-current to the root element, and form (the id of the form to submit) to the native <button>
+[2026-10-15 15:42] patch: README rewritten for the current API

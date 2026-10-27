@@ -7,14 +7,19 @@ import { getButtonElementProps } from "./Button.helpers"
 import ButtonIcon from "../ButtonIcon"
 import { isDisabled } from "../../utilities/isDisabled"
 import { isSquare } from "../../utilities/isSquare"
+import { resolveGhost } from "../../utilities/resolveGhost"
+import { resolveStateColor } from "../../utilities/resolveStateColor"
 
 const Button: React.FC<ButtonProps> = ({
+  animationDuration = "base",
   antialiased = false,
   "aria-controls": ariaControls,
+  "aria-current": ariaCurrent,
   "aria-expanded": ariaExpanded,
   "aria-haspopup": ariaHasPopup,
   "aria-label": ariaLabel,
   "aria-pressed": ariaPressed,
+  "aria-selected": ariaSelected,
   as,
   backgroundImage,
   borderColor,
@@ -22,15 +27,21 @@ const Button: React.FC<ButtonProps> = ({
   borderWidth = "base",
   children,
   className,
+  color,
   "data-testid": testId,
   disabled: disabledProp = false,
   filled = false,
+  form,
+  ghost = false,
   grow,
   href,
+  iconColor,
   iconLeft,
   iconRight,
   iconVendor = false,
+  id,
   inlined: inlinedProp,
+  justifyContent = "center",
   theme,
   onClick,
   onMouseEnter,
@@ -38,8 +49,11 @@ const Button: React.FC<ButtonProps> = ({
   size = "base",
   padding,
   ref,
+  role,
+  selected = false,
   status = "base",
   style,
+  tabIndex,
   target,
   type = "button",
   weight,
@@ -68,8 +82,11 @@ const Button: React.FC<ButtonProps> = ({
   const elementProps = getButtonElementProps({
     as,
     disabled,
+    form,
     href,
     onClick,
+    role,
+    tabIndex,
     target,
     type,
   })
@@ -92,9 +109,15 @@ const Button: React.FC<ButtonProps> = ({
       $borderRadius={borderRadius}
       $borderWidth={borderWidth}
       $disabled={disabled}
+      // selected overrides ghost in every state.
+      $ghost={resolveGhost(selected ? false : ghost)}
+      $iconColor={resolveStateColor(iconColor)}
+      $color={resolveStateColor(color)}
+      $animationDuration={animationDuration}
       $isHovered={isHovered}
       $isPressed={isPressed}
       $filled={filled}
+      $selected={selected}
       $grow={grow}
       $inlined={inlined}
       $size={size}
@@ -111,6 +134,9 @@ const Button: React.FC<ButtonProps> = ({
       aria-haspopup={ariaHasPopup}
       aria-controls={ariaControls}
       aria-pressed={ariaPressed}
+      aria-selected={ariaSelected}
+      aria-current={ariaCurrent}
+      id={id}
       className={className}
       data-testid={testId}
       style={style}
@@ -118,9 +144,10 @@ const Button: React.FC<ButtonProps> = ({
       <ButtonContent
         direction="row"
         alignItems="center"
-        justifyContent="center"
+        justifyContent={justifyContent}
         inlined
         padding={contentPadding}
+        $fill={justifyContent !== "center"}
         $size={size}
         $square={square}
       >
@@ -133,7 +160,6 @@ const Button: React.FC<ButtonProps> = ({
         )}
         {children && (
           <Ink
-            as="span"
             antialiased={antialiased}
             theme={invertedTheme}
             weight={weight ?? (inlined ? undefined : "medium")}

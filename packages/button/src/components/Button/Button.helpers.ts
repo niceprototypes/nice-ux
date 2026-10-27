@@ -2,16 +2,22 @@ import type * as React from "react"
 import type {
   ButtonAsType,
   ButtonElementType,
+  ButtonFormType,
   ButtonHrefType,
   ButtonOnClickType,
+  ButtonRoleType,
+  ButtonTabIndexType,
   ButtonTargetType,
 } from "./Button.types"
 
 export interface GetButtonElementPropsArgs {
   as?: ButtonAsType
   disabled: boolean
+  form?: ButtonFormType
   href?: ButtonHrefType
   onClick?: ButtonOnClickType
+  role?: ButtonRoleType
+  tabIndex?: ButtonTabIndexType
   target?: ButtonTargetType
   type: ButtonElementType
 }
@@ -21,17 +27,19 @@ export interface GetButtonElementPropsArgs {
  * navigation and removes it from the tab order. Clickable div: button-equivalent
  * a11y (role, tabindex, keyboard activation). Plain button: the native type, and
  * the native `disabled` attribute so it leaves the tab order and is announced
- * as disabled.
+ * as disabled, and `form` (a form attribute only a button has). A consumer `role` / `tabIndex` overrides these defaults, except
+ * that disabled keeps tabIndex -1 (anchor, div) or the native attribute (button).
  */
-export function getButtonElementProps({ as, disabled, href, onClick, target, type }: GetButtonElementPropsArgs) {
+export function getButtonElementProps({ as, disabled, form, href, onClick, role, tabIndex, target, type }: GetButtonElementPropsArgs) {
   if (as === "a") {
     return {
       as: "a" as const,
       href: disabled ? undefined : href,
       target,
       rel: target === "_blank" ? "noopener noreferrer" : undefined,
+      role,
       "aria-disabled": disabled || undefined,
-      tabIndex: disabled ? -1 : undefined,
+      tabIndex: disabled ? -1 : tabIndex,
       onClick: disabled ? (event: React.MouseEvent) => event.preventDefault() : onClick,
     }
   }
@@ -48,8 +56,8 @@ export function getButtonElementProps({ as, disabled, href, onClick, target, typ
 
     return {
       as: "div" as const,
-      role: "button" as const,
-      tabIndex: disabled ? -1 : 0,
+      role: role ?? "button",
+      tabIndex: disabled ? -1 : (tabIndex ?? 0),
       "aria-disabled": disabled || undefined,
       onClick: disabled ? undefined : onClick,
       onKeyDown: disabled ? undefined : onDivKeyDown,
@@ -58,7 +66,10 @@ export function getButtonElementProps({ as, disabled, href, onClick, target, typ
 
   return {
     type,
+    form,
+    role,
     disabled,
+    tabIndex: disabled ? undefined : tabIndex,
     onClick: disabled ? undefined : onClick,
   }
 }

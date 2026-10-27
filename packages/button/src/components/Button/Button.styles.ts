@@ -2,7 +2,15 @@ import styled from "styled-components"
 import Flex from "nice-react-flex"
 import { getToken, resolveColorProp } from "nice-react-styles"
 import type { SizeType, BorderWidthType, BorderColorType, ColorTokenProp } from "nice-react-styles"
-import type { ButtonBorderRadiusType, ButtonGrowType, ButtonStatusType } from "./Button.types"
+import type {
+  ButtonAnimationDurationType,
+  ButtonBorderRadiusType,
+  ButtonGrowType,
+  ButtonColorStatesType,
+  ButtonStatusType,
+} from "./Button.types"
+import type { ResolvedGhost } from "../../utilities/resolveGhost"
+import { stateRules } from "../../utilities/stateRules"
 
 export const StyledButton = styled.button.withConfig({
   shouldForwardProp: (prop) => !prop.startsWith("$"),
@@ -19,6 +27,11 @@ export const StyledButton = styled.button.withConfig({
   $square: boolean
   $status: ButtonStatusType
   $filled: boolean
+  $selected: boolean
+  $ghost: ResolvedGhost
+  $iconColor: ButtonColorStatesType
+  $color: ButtonColorStatesType
+  $animationDuration: ButtonAnimationDurationType
   $grow?: ButtonGrowType
   $inlined: boolean
 }>`
@@ -38,8 +51,8 @@ export const StyledButton = styled.button.withConfig({
      e.g. Tab navigation. Drawn as an outline (not a border) so it adds no layout
      and sits outside the button's own border at every status and fill. */
   &:focus-visible {
-    outline: ${getToken("borderWidth:large")} solid ${getToken("color:link")};
-    outline-offset: ${getToken("gap:smaller")};
+    outline: ${getToken("button.focusRing.width:base")} solid ${getToken("button.focusRing.color:base")};
+    outline-offset: ${getToken("button.focusRing.offset:base")};
   }
 
   text-align: center;
@@ -72,12 +85,14 @@ export const StyledButton = styled.button.withConfig({
     $size,
     $hasPadding,
     $filled,
+    $selected,
     $status,
     $borderWidth,
     $borderRadius,
     $backgroundImage,
     $borderColor,
     $disabled,
+    $animationDuration,
   }) =>
     !$inlined &&
     `
@@ -101,14 +116,16 @@ export const StyledButton = styled.button.withConfig({
        Otherwise it is an outline: transparent fill, with the border coming from
        --np--border-color, whose tints are built to sit quietly beside content
        rather than carry it. Both are theme-aware via the core tokens' cascade,
-       so no per-theme overrides here. */
+       so no per-theme overrides here. A selected unfilled button takes the
+       button.selected.borderColor token instead; a selected filled one keeps the
+       transparent border, the fill already marking it. */
     background-color: ${$filled ? getToken("color", $status) : "transparent"};
     color: ${$filled ? getToken("color", "base", { inverse: true }) : getToken("color", $status)};
     border-style: solid;
     border-width: ${getToken(`button.borderWidth:${$borderWidth}`)};
-    border-color: ${$filled ? "transparent" : getToken("borderColor", $status === "disabled" ? "base" : $status)};
+    border-color: ${$filled ? "transparent" : $selected ? getToken("button.selected.borderColor:base") : getToken("borderColor", $status === "disabled" ? "base" : $status)};
     border-radius: ${$borderRadius === "rounded" ? "calc(var(--np--button--height) / 2)" : getToken(`button.borderRadius:${$borderRadius}`)};
-    transition: all 0.15s ease-in-out;
+    transition: all ${getToken(`button.animationDuration:${$animationDuration}`)} ${getToken("button.animationEasing:base")};
     ${$backgroundImage ? `background-image: ${$backgroundImage};` : ""}
     ${$borderColor ? `border-color: ${resolveColorProp("button", "borderColor", $borderColor)};` : ""}
   `}
@@ -116,10 +133,15 @@ export const StyledButton = styled.button.withConfig({
   /* Inlined (as="a"): strip the button chrome — no fill, border, height, or
      size-derived padding is emitted (the block above is skipped) — leaving an
      inline-flex, content-width, link-colored anchor that flows in text. The
-     icon/label + any padding prop still render via ButtonContent. */
+     icon/label + any padding prop still render via ButtonContent. border,
+     background and padding are reset because a native <button> brings its own
+     (an outset border, a grey fill, UA padding) where an <a> or <div> has none. */
   ${({ $inlined, $size = "base" }) =>
     $inlined &&
     `
+    border: 0;
+    background: none;
+    padding: 0;
     width: auto;
     /* Size the anchor element itself (not just the label span) so its em-box and
        inline flow track $size — the same fontSize scale the label reads. */
@@ -133,6 +155,57 @@ export const StyledButton = styled.button.withConfig({
      label/icons stay centred: this element is inline-flex with
      justify-content: center, and ButtonContent is an inline-flex child. */
   ${({ $grow }) => ($grow !== undefined ? `flex-grow: ${$grow}; flex-basis: 0;` : "")}
+
+  /* Ghost: in each ghosted state only the label and icons show — no fill, border or
+     background image. A filled button's label leaves the inverse color while ghosted, which
+     would vanish on the transparent background. The inlined layout has no chrome to hide. */
+  ${({ $ghost, $inlined, $disabled, $status }) => {
+    if ($inlined) return ""
+    const transparent = `
+      background-color: transparent;
+      background-image: none;
+      border-color: transparent;
+      color: ${getToken("color", $status)};
+    `
+    return stateRules(
+      Object.fromEntries(Object.entries($ghost).filter(([, ghosted]) => ghosted).map(([state]) => [state, transparent])),
+      $disabled
+    )
+  }}
+
+  /* Icon color per state from the button.icon.color state tokens: rest is the base set above;
+     hover, focus and active read their own variants, which follow base until a project
+     overrides them. Emitted before the iconColor prop's rules, so the prop wins. */
+  ${({ $disabled }) =>
+    stateRules(
+      Object.fromEntries(
+        (["hover", "focus", "active"] as const).map((state) => [
+          state,
+          `--np--icon--color: ${getToken(`button.icon.color:${state}`)};`,
+        ])
+      ),
+      $disabled
+    )}
+
+  /* Icon color per state from the iconColor prop: reassigns the --np--icon--color the icons
+     read. Same selectors as the token rules above and emitted after them, so the prop wins in
+     every state it sets; a state it leaves out keeps the token. Applies in the inlined layout too. */
+  ${({ $iconColor, $disabled }) =>
+    stateRules(
+      Object.fromEntries(
+        Object.entries($iconColor).map(([state, color]) => [state, `--np--icon--color: ${getToken(color)};`])
+      ),
+      $disabled
+    )}
+
+  /* Label color per state from the color prop. Emitted last, with the same selectors as the
+     ghost rules (which set the status color), so the prop wins in every state it sets; a state
+     it leaves out keeps the status color. Applies in the inlined layout too. */
+  ${({ $color, $disabled }) =>
+    stateRules(
+      Object.fromEntries(Object.entries($color).map(([state, color]) => [state, `color: ${getToken(color)};`])),
+      $disabled
+    )}
 `
 
 /**
@@ -140,11 +213,15 @@ export const StyledButton = styled.button.withConfig({
  * centered inside StyledButton. It owns the icon/label gap (kept as
  * calc(fontSize/2) so it tracks the label size exactly, as before) and — via the
  * Flex `padding` prop passed from Button — the modern shorthand padding. Square
- * (icon-only) buttons collapse the gap to zero.
+ * (icon-only) buttons collapse the gap to zero. With `$fill` (a justifyContent
+ * other than center) it grows to the button's width, so its justifyContent has
+ * room to act.
  */
 export const ButtonContent = styled(Flex)<{
+  $fill: boolean
   $size: SizeType
   $square: boolean
 }>`
   gap: ${({ $square, $size }) => ($square ? "0" : `0 calc(${getToken("fontSize", $size)} / 2)`)};
+  ${({ $fill }) => ($fill ? "flex: 1 1 auto;" : "")}
 `
