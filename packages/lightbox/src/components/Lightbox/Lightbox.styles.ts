@@ -3,6 +3,11 @@ import { getToken } from "nice-react-styles"
 
 export const Trigger = styled.div`
   cursor: pointer;
+
+  &:focus-visible {
+    outline: ${getToken("lightbox.focusRing.width:base")} solid ${getToken("lightbox.focusRing.color:base")};
+    outline-offset: ${getToken("lightbox.focusRing.offset:base")};
+  }
 `
 
 export const Overlay = styled.div`

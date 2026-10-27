@@ -15,7 +15,18 @@ const Lightbox: React.FC<LightboxProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false)
 
+  const open = useCallback(() => setIsOpen(true), [])
   const close = useCallback(() => setIsOpen(false), [])
+
+  // Children are arbitrary nodes, so the trigger stays a <div> (a <button> may
+  // not contain interactive content) and gets button keyboard activation here;
+  // Space is prevented from scrolling the page.
+  const handleTriggerKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault()
+      open()
+    }
+  }
 
   useEffect(() => {
     if (!isOpen) return
@@ -35,7 +46,16 @@ const Lightbox: React.FC<LightboxProps> = ({
 
   return (
     <>
-      <Trigger onClick={() => setIsOpen(true)} className={className} style={style}>{children}</Trigger>
+      <Trigger
+        role="button"
+        tabIndex={0}
+        onClick={open}
+        onKeyDown={handleTriggerKeyDown}
+        className={className}
+        style={style}
+      >
+        {children}
+      </Trigger>
       {isOpen &&
         createPortal(
           <Overlay onClick={close}>
