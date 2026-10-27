@@ -1,7 +1,7 @@
 # @niceprototypes/config-vite
 
-Shared Vite configuration for apps that consume `nice-*` packages through `file:` links.
-Used by `@niceprototypes/storybook` and nice-browser (through `@niceprototypes/config-crxjs`).
+Shared Vite configuration for apps that consume `@niceprototypes/*` packages, from npm or, in
+local mode, from a nice-ux checkout. Used by nice-browser through `@niceprototypes/config-crxjs`.
 
 ## Usage
 
@@ -11,36 +11,29 @@ import { defineConfig, mergeConfig } from "vite"
 import { createNiceViteConfig } from "@niceprototypes/config-vite"
 
 export default defineConfig(
-  mergeConfig(createNiceViteConfig({ appRoot: import.meta.dirname }), {
+  mergeConfig(createNiceViteConfig({ appRoot: import.meta.dirname, local: process.env.NICE_LOCAL }), {
     // the app's own settings
   }),
 )
 ```
 
-Storybook (`.storybook/main.ts`):
-
-```ts
-viteFinal: async (config) =>
-  mergeConfig(config, createNiceViteConfig({ appRoot: resolve(__dirname, ".."), liveLinks: true })),
-```
+`NICE_LOCAL=~/nice/nice-ux npm run dev` runs the app against the checkout; without it the app uses its npm install.
 
 ## What it sets
 
-| Setting | Why |
-|---|---|
-| `resolve.alias` for react, react-dom, styled-components → the app's `node_modules` | Linked packages resolve imports from their real location (`~/nice/...`), which would load a second copy |
-| `resolve.dedupe`: react, react-dom, styled-components, @niceprototypes/icon, @niceprototypes/styles | One React, one styled-components context, one token registry, one icon registry |
-| `resolve.preserveSymlinks: false`, `server.watch.followSymlinks: true` | Resolve and watch linked packages at their real paths |
-| `server.fs.allow`: the app and `~/nice` | Serve files from linked packages (setting `allow` replaces Vite's default, so the app is listed too) |
-| `optimizeDeps.exclude`: every package in the toolkit registry | A stale optimizer cache would hide added or renamed exports in foundation packages |
-| `liveLinks: true` | Source-aliasable packages are aliased to `src/index.ts` (HMR); the others' `dist/` folders are watched by `@niceprototypes/vite-watcher` (full reload) |
+| Setting | Mode | Why |
+|---|---|---|
+| `resolve.dedupe`: react, react-dom, styled-components | both | One React, one styled-components context |
+| `resolve.dedupe`: @niceprototypes/styles, @niceprototypes/icon | npm | One token registry, one icon registry (in local mode each already has one folder, and dedupe would resolve them from the app instead of the checkout) |
+| Plugin resolving `@niceprototypes/*` from `<local>/packages/ux` | local | The umbrella's install holds every package; the import stays a bare module request, so package `exports` and subpaths apply |
+| `resolve.alias` for react, react-dom, styled-components → the app's `node_modules` | local | Checkout packages resolve imports from their real folder, which would load a second copy |
+| `server.fs.allow`: the app and the checkout | local | Serve files from the checkout (setting `allow` replaces Vite's default, so the app is listed too) |
+| `optimizeDeps.exclude`: the checkout's publishable packages | local | A stale optimizer cache would hide changes in the checkout |
+
+Local packages load the way their `package.json` points (their `dist/` builds today); rebuild a changed package with `pnpm --filter <name> build` in the checkout.
 
 ## Exports
 
 | Export | Purpose |
 |---|---|
-| `createNiceViteConfig({ appRoot, liveLinks? })` | The settings above, as a `UserConfig` to merge |
-| `getNiceRoot()` | The folder holding the linked packages (the registry's `basePath`, `~/nice`) |
-
-Package lists come from `@niceprototypes/toolkit/registry`, so a newly registered package is covered
-without changes here.
+| `createNiceViteConfig({ appRoot, local? })` | The settings above, as a `UserConfig` to merge |

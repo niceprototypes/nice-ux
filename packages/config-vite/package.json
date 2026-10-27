@@ -2,7 +2,7 @@
   "name": "@niceprototypes/config-vite",
   "version": "0.1.0",
   "type": "module",
-  "description": "Shared Vite configuration for apps that consume linked nice-* packages",
+  "description": "Shared Vite configuration for apps that consume @niceprototypes/* packages, with a local mode for a nice-ux checkout",
   "main": "src/index.js",
   "types": "src/index.d.ts",
   "exports": {
@@ -30,13 +30,9 @@
   },
   "homepage": "https://github.com/niceprototypes/nice-ux/tree/main/packages/config-vite#readme",
   "peerDependencies": {
-    "@niceprototypes/toolkit": "workspace:^",
-    "@niceprototypes/vite-watcher": "workspace:^",
     "vite": ">=7.0.0"
   },
   "devDependencies": {
-    "@niceprototypes/toolkit": "workspace:*",
-    "@niceprototypes/vite-watcher": "workspace:*",
     "vite": "^7.1.9"
   }
 }

@@ -3,12 +3,9 @@ import type { UserConfig } from 'vite'
 export type NiceViteConfigOptions = {
   /** The app's folder, whose node_modules holds the shared React and styled-components. */
   appRoot: string
-  /** Hot reload from linked nice-* packages (source aliases + dist watching). */
-  liveLinks?: boolean
+  /** Local mode: the path of a nice-ux checkout (e.g. `~/nice/nice-ux`); every `@niceprototypes/*` import resolves there. Omit to use the npm install. */
+  local?: string
 }
 
-/** Vite settings for an app consuming linked nice-* packages; merge with `mergeConfig`. */
+/** Vite settings for an app consuming @niceprototypes/* packages; merge with `mergeConfig`. */
 export declare const createNiceViteConfig: (options: NiceViteConfigOptions) => UserConfig
-
-/** The folder holding the linked nice-* packages (~/nice). */
-export declare const getNiceRoot: () => string

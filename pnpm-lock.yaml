@@ -697,12 +697,6 @@ importers:
 
   packages/config-vite:
     devDependencies:
-      '@niceprototypes/toolkit':
-        specifier: workspace:*
-        version: link:../toolkit
-      '@niceprototypes/vite-watcher':
-        specifier: workspace:*
-        version: link:../vite-watcher
       vite:
         specifier: ^7.1.9
         version: 7.3.7(@types/node@25.9.9)(tsx@4.23.15)(yaml@2.9.1)

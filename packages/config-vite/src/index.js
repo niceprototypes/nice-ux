@@ -1,1 +1,1 @@
-export { createNiceViteConfig, getNiceRoot } from './config.js'
+export { createNiceViteConfig } from './config.js'
