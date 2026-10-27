@@ -1,0 +1,8 @@
+{
+  "$schema": "../config-exports/src/schema.json",
+  "description": "On/off switch built on a native checkbox.",
+  "default": "Toggle",
+  "components": [
+    "Toggle"
+  ]
+}
