@@ -45,6 +45,7 @@ const Menu = () => {
 | `ignoreOutsideRefs` | `ReadonlyArray<RefObject<HTMLElement \| null>>` | — | Elements where a pointerdown does not dismiss the popover, e.g. a trigger beside the anchor. |
 | `position` | `"top" \| "bottom" \| "left" \| "right"` | `"bottom"` | Side of the anchor. |
 | `align` | `"start" \| "center" \| "end"` | `"start"` | Cross-axis alignment against the anchor (physical: start = left / top). |
+| `matchAnchorWidth` | `boolean` | `false` | Make the popover at least as wide as the anchor (min-width = the anchor's measured width). |
 | `role` | `AriaRole` | `"dialog"` | ARIA role of the popover element. |
 | `aria-label` / `aria-labelledby` | `string` | — | Accessible name. |
 | `id` | `string` | — | Id of the popover element. |

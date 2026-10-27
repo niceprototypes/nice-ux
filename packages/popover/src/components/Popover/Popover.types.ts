@@ -101,6 +101,15 @@ export type PopoverAnchorRefType = React.RefObject<HTMLElement | null>
 export type PopoverIgnoreOutsideRefsType = ReadonlyArray<React.RefObject<HTMLElement | null>>
 
 /**
+ * PopoverMatchAnchorWidthType
+ *
+ * Set true to make the popover at least as wide as the anchor: its min-width is
+ * the anchor's measured width, re-measured with the position on scroll and
+ * resize. Content wider than the anchor still widens the popover.
+ */
+export type PopoverMatchAnchorWidthType = boolean
+
+/**
  * PopoverRoleType
  *
  * ARIA role applied to the popover element.
@@ -148,6 +157,8 @@ export interface PopoverProps {
   position?: PopoverPositionType
   /** Alignment along the anchor's cross axis. @default "start" */
   align?: PopoverAlignType
+  /** Make the popover at least as wide as the anchor. @default false */
+  matchAnchorWidth?: PopoverMatchAnchorWidthType
   /** Popover content. */
   children?: React.ReactNode
   /** ARIA role of the popover element. @default "dialog" */
@@ -181,6 +192,7 @@ namespace PopoverTypes {
   export type OnOpenChange = PopoverOnOpenChangeType
   export type AnchorRef = PopoverAnchorRefType
   export type IgnoreOutsideRefs = PopoverIgnoreOutsideRefsType
+  export type MatchAnchorWidth = PopoverMatchAnchorWidthType
   export type Role = PopoverRoleType
   export type Ref = PopoverRefType
   export type Theme = PopoverThemeType

@@ -17,7 +17,8 @@ const getServerSnapshot = () => false
  *
  * Controlled surface anchored to `anchorRef`. While `open`, renders in a portal
  * at `<body>` with `position: fixed`, placed by `computeAnchorPosition` on
- * `position`'s side of the anchor with `align` on the cross axis. Coordinates
+ * `position`'s side of the anchor with `align` on the cross axis; with
+ * `matchAnchorWidth`, its min-width is the anchor's width. Coordinates
  * are recomputed on window scroll (capture phase, so nested scrollers count)
  * and resize. Escape, or a pointerdown outside the popover, the anchor and
  * every `ignoreOutsideRefs` element, calls `onOpenChange(false)`. On close, focus returns to the anchor
@@ -41,6 +42,7 @@ const Popover: React.FC<PopoverProps> = ({
   ignoreOutsideRefs,
   position = "bottom",
   align = "start",
+  matchAnchorWidth = false,
   children,
   role = "dialog",
   "aria-label": ariaLabel,
@@ -52,7 +54,8 @@ const Popover: React.FC<PopoverProps> = ({
 }) => {
   const isClient = React.useSyncExternalStore(subscribeNoop, getClientSnapshot, getServerSnapshot)
   const popoverRef = React.useRef<HTMLDivElement | null>(null)
-  const [coords, setCoords] = React.useState<PopoverCoordinatesType | null>(null)
+  // Placement plus the anchor's width, measured together (for matchAnchorWidth).
+  const [coords, setCoords] = React.useState<(PopoverCoordinatesType & { anchorWidth: number }) | null>(null)
 
   // Latest onOpenChange, read by the document listeners so they subscribe once
   // per open rather than on every render with an inline callback.
@@ -87,7 +90,8 @@ const Popover: React.FC<PopoverProps> = ({
     const update = () => {
       const anchor = anchorRef.current
       if (!anchor) return
-      setCoords(computeAnchorPosition(anchor.getBoundingClientRect(), position, align, offset))
+      const rect = anchor.getBoundingClientRect()
+      setCoords({ ...computeAnchorPosition(rect, position, align, offset), anchorWidth: rect.width })
     }
     update()
     window.addEventListener("scroll", update, true)
@@ -145,7 +149,12 @@ const Popover: React.FC<PopoverProps> = ({
       className={className}
       style={
         coords
-          ? { top: coords.top, left: coords.left, transform: coords.transform }
+          ? {
+              top: coords.top,
+              left: coords.left,
+              transform: coords.transform,
+              minWidth: matchAnchorWidth ? coords.anchorWidth : undefined,
+            }
           : { top: 0, left: 0, visibility: "hidden" }
       }
     >

@@ -194,6 +194,18 @@ describe("Popover", () => {
     expect(popover.style.transform).toBe(expected.transform)
   })
 
+  describe("matchAnchorWidth", () => {
+    it("sets min-width to the anchor's width", () => {
+      render(<Harness aria-label="menu" matchAnchorWidth />)
+      expect(screen.getByRole("dialog").style.minWidth).toBe(`${ANCHOR_RECT.width}px`)
+    })
+
+    it("sets no min-width by default", () => {
+      render(<Harness aria-label="menu" />)
+      expect(screen.getByRole("dialog").style.minWidth).toBe("")
+    })
+  })
+
   it("forwards className and wraps in Theme when theme is set", () => {
     render(<Harness aria-label="menu" className="custom" theme="night" />)
     const popover = screen.getByRole("dialog")
