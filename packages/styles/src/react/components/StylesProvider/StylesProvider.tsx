@@ -67,13 +67,6 @@ function useAdobeFontsConfig(
  * }
  * ```
  *
- * @example With the Nice default fonts (Google Sans Flex + Roboto Mono):
- * ```tsx
- * <StylesProvider googleFonts="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght,ROND@6..144,1..1000,37&family=Roboto+Mono:wght@100..700&display=swap">
- *   <App />
- * </StylesProvider>
- * ```
- *
  * @example With custom Google Fonts:
  * ```tsx
  * <StylesProvider googleFonts="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">

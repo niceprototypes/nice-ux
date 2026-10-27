@@ -106,10 +106,10 @@ setTokens({ brandColor: { primary: "#dc0000" } })
 
 ## Fonts
 
-`StylesProvider` loads fonts through `googleFonts` (URL or config), `adobeFonts` (kit id, kit URL, or config), and `links` (raw `<link>` descriptors). It loads none by default. The Nice default fonts (Google Sans Flex + Roboto Mono):
+`StylesProvider` loads fonts through `googleFonts` (URL or config), `adobeFonts` (kit id, kit URL, or config), and `links` (raw `<link>` descriptors). It loads none by default. Google Fonts:
 
 ```tsx
-<StylesProvider googleFonts="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght,ROND@6..144,1..1000,37&family=Roboto+Mono:wght@100..700&display=swap">
+<StylesProvider googleFonts="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
   <App />
 </StylesProvider>
 ```
@@ -122,7 +122,7 @@ Self-hosted fonts: pass a stylesheet of `@font-face` rules through `links`:
 </StylesProvider>
 ```
 
-The `fontFamily` `base` and `heading` tokens (nice-styles) name Google Sans Flex first and fall back to `system-ui`, then `sans-serif`, when it is not loaded. To use another family, load it here and override `fontFamily` with `setTokens`.
+The `fontFamily` `base` and `heading` tokens (nice-styles) default to a stack of fonts already on the device and need no loading: `'Helvetica Neue', Inter, Roboto, 'Arial Nova', 'Nimbus Sans', Arial, sans-serif`; `code` defaults to `ui-monospace, 'Source Code Pro', Menlo, Consolas, monospace`. To use another family, load it here and override `fontFamily` with `setTokens`.
 
 `StylesProvider` imports `nice-styles/tokens.css`; it does not load `nice-styles/reset.css` (import that yourself, after `tokens.css` — see the nice-styles README).
 
