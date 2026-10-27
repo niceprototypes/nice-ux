@@ -1,0 +1,6 @@
+{
+  "$schema": "../config-exports/src/schema.json",
+  "description": "Dialog component for nice-react: a modal dialog built on the native <dialog> element.",
+  "default": "Dialog",
+  "components": ["Dialog"]
+}
