@@ -1,0 +1,200 @@
+/**
+ * Styled Components for Ink
+ *
+ * This module contains the styled-components implementation for the Ink component.
+ * It handles dynamic styling based on props and provides fallback values for CSS custom properties.
+ *
+ * @module styles
+ */
+
+import styled, { css } from "styled-components"
+import { getToken, resolveColorProp, type ColorTokenProp, type ColorType, type FontSizeType, type FontWeightType, type LineHeightType } from "nice-react-styles"
+import { InkAsType, InkAlignType, InkItalicType, InkLineClampType, InkWordBreakType } from "./Ink.types"
+import { styleAntialiasing } from "../../utilities/styleAntialiasing"
+
+/**
+ * CSS styles for optimized text legibility
+ *
+ * Applies hardware acceleration and 3D transform optimizations for better text rendering:
+ * - `backface-visibility: hidden` - Prevents text from showing through during transforms
+ * - `perspective: 1000px` - Enables 3D rendering context
+ * - `transform-style: preserve-3d` - Maintains 3D positioning of child elements
+ * - `will-change: transform` - Hints browser to optimize for transform animations
+ *
+ * @remarks
+ * Use this when you need crisp text rendering during animations or transforms.
+ * May impact performance on low-end devices.
+ */
+export const styleOptimizedLegibility = css`
+  backface-visibility: hidden;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  will-change: transform;
+`
+
+const isHeading = ($as: InkAsType): boolean =>
+  $as === "h1" || $as === "h2" || $as === "h3" || $as === "h4"
+
+const getFontFamily = ({ $as, $code }: { $as: InkAsType; $code?: boolean }) => {
+  if ($code) {
+    return css`
+      font-family: ${getToken("ink.fontFamily:code")};
+    `
+  }
+
+  if (isHeading($as)) {
+    return css`
+      font-family: ${getToken("ink.fontFamily:heading")};
+    `
+  }
+
+  return css`
+    font-family: ${getToken("ink.fontFamily:base")};
+  `
+}
+
+const getColor = ({ $color }: { $color?: ColorTokenProp<ColorType> }) => {
+  if (!$color) return css`color: inherit;`
+
+  return css`
+    color: ${resolveColorProp("ink", "color", $color)};
+  `
+}
+
+const getFontSize = ({ $as, $size }: { $as: InkAsType; $size?: FontSizeType }) => {
+  let effectiveFontSize: FontSizeType
+
+  if ($size) {
+    effectiveFontSize = $size
+  } else {
+    // Default sizes for headings
+    switch ($as) {
+      case "h1":
+        effectiveFontSize = "larger"
+        break
+      case "h2":
+        effectiveFontSize = "large"
+        break
+      case "h3":
+        effectiveFontSize = "base"
+        break
+      default:
+        effectiveFontSize = "small"
+    }
+  }
+
+  return css`
+    font-size: ${getToken(`ink.fontSize:${effectiveFontSize}`)};
+  `
+}
+
+const getFontWeight = ({ $as, $weight }: { $as: InkAsType; $weight?: FontWeightType }) => {
+  if ($weight) {
+    return css`
+      font-weight: ${getToken(`ink.fontWeight:${$weight}`)};
+    `
+  }
+
+  // Default weights for headings
+  if ($as === "h1" || $as === "h2" || $as === "h3") {
+    return css`
+      font-weight: ${getToken("ink.fontWeight:bold")};
+    `
+  }
+
+  return undefined
+}
+
+const getTextAlign = ({ $align }: { $align?: InkAlignType }) => {
+  if (!$align) return undefined
+
+  return css`
+    text-align: ${$align};
+  `
+}
+
+const getLineHeight = ({ $lineHeight, $as }: { $lineHeight?: LineHeightType; $as: InkAsType }) => {
+  // Use provided line height or determine default
+  const effectiveLineHeight = $lineHeight || (isHeading($as) ? "condensed" : "base")
+
+  return css`
+    line-height: ${getToken(`ink.lineHeight:${effectiveLineHeight}`)};
+  `
+}
+
+const getLineClamp = ({ $lineClamp }: { $lineClamp?: InkLineClampType }) => {
+  if (!$lineClamp || $lineClamp === "none") return undefined
+
+  return css`
+    display: -webkit-box;
+    -webkit-line-clamp: ${$lineClamp};
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  `
+}
+
+const getFontStyle = ({ $italic }: { $italic?: InkItalicType }) => {
+  if (!$italic) return undefined
+
+  return css`
+    font-style: italic;
+  `
+}
+
+const getWordBreak = ({ $wordBreak }: { $wordBreak?: InkWordBreakType }) => {
+  if (!$wordBreak) return undefined
+
+  return css`
+    word-break: ${$wordBreak};
+  `
+}
+
+export const StyledInk = styled.p<{
+  $as: InkAsType
+  $size?: FontSizeType
+  $weight?: FontWeightType
+  $color?: ColorTokenProp<ColorType>
+  $antialiased?: boolean
+  $legibilityOptimized?: boolean
+  $align?: InkAlignType
+  $lineHeight?: LineHeightType
+  $lineClamp?: InkLineClampType
+  $wordBreak?: InkWordBreakType
+  $code?: boolean
+  $italic?: InkItalicType
+}>`
+  margin: 0;
+
+  /* Font family with nice-styles fallback */
+  ${getFontFamily}
+
+  /* Color */
+  ${getColor}
+
+  /* Font size */
+  ${getFontSize}
+
+  /* Font weight */
+  ${getFontWeight}
+
+  /* Font style */
+  ${getFontStyle}
+
+  /* Antialiasing */
+  ${({ $antialiased }) => $antialiased && styleAntialiasing}
+
+  /* Optimized legibility */
+  ${({ $legibilityOptimized }) => $legibilityOptimized && styleOptimizedLegibility}
+
+  /* Text alignment */
+  ${getTextAlign}
+
+  /* Line height with nice-styles fallback */
+  ${getLineHeight}
+
+  /* Line clamping for text truncation */
+  ${getLineClamp}
+
+  /* Word break behavior */
+  ${getWordBreak}
+`

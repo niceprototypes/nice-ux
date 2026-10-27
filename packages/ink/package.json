@@ -1,0 +1,73 @@
+{
+  "name": "nice-react-ink",
+  "version": "8.0.3",
+  "type": "module",
+  "description": "A flexible and customizable Ink component for React with styled-components",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "test": "jest",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build",
+    "generate-exports": "nice-generate-exports ."
+  },
+  "keywords": [
+    "react",
+    "ink",
+    "text",
+    "styled-components",
+    "responsive",
+    "component"
+  ],
+  "author": "",
+  "license": "MIT",
+  "peerDependencies": {
+    "nice-react-styles": "^15.0.1",
+    "react": ">=19.2.0 <20.0.0",
+    "react-dom": ">=19.2.0 <20.0.0",
+    "styled-components": ">=6.1.18 <7.0.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.5",
+    "@testing-library/jest-dom": "^6.1.0",
+    "@testing-library/react": "^16.3.0",
+    "@types/jest": "^29.5.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.44.0",
+    "eslint-plugin-react": "^7.32.2",
+    "jest": "^29.5.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "nice-config-exports": "file:../config-exports",
+    "nice-config-jest": "file:../config-jest",
+    "nice-config-rollup": "file:../config-rollup",
+    "nice-config-typescript": "file:../config-typescript",
+    "nice-react-styles": "file:../react-styles",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "rollup": "^4.9.1",
+    "rollup-plugin-dts": "^6.1.0",
+    "styled-components": "6.1.19",
+    "ts-jest": "^29.4.6",
+    "tslib": "^2.6.2",
+    "typescript": "^6.0.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niceprototypes/nice-react-ink.git"
+  },
+  "bugs": {
+    "url": "https://github.com/niceprototypes/nice-react-ink/issues"
+  },
+  "homepage": "https://github.com/niceprototypes/nice-react-ink#readme"
+}
