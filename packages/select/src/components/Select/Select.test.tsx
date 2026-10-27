@@ -228,7 +228,7 @@ describe("Select", () => {
     expect(screen.getByRole("combobox")).toBeDisabled()
     expect(screen.getByTestId("icon")).toHaveAttribute("data-color", "disabled")
     expect(getToken("icon.color:disabled", { as: "value" })).toBe(
-      getToken("color", "disabled", { as: "value" })
+      getToken("icon.color:lighter", { as: "value" })
     )
   })
 
