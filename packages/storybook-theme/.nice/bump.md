@@ -5,3 +5,4 @@
 [2026-09-24 20:25] patch: Hide the sidebar's scroll-area scrollbar track in Storybook 10
 [2026-09-25 19:16] patch: Declare nice-* runtime packages as peer dependencies with a file: devDependency for local builds
 [2026-09-25 22:45] patch: Pin the storybook devDependency to the app's exact version so the linked addon builds against the same Storybook
+[2026-10-26 20:18] patch: Story rows in the sidebar wrap long labels like document rows, and the hidden mobile .sb-bar reset applies only to the banner, not the preview toolbar
