@@ -1,0 +1,42 @@
+{
+  "name": "nice-config-crxjs",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Vite + CRXJS configuration for Chrome extensions that consume linked nice-* packages",
+  "main": "src/index.js",
+  "types": "src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "default": "./src/index.js"
+    }
+  },
+  "files": [
+    "src"
+  ],
+  "keywords": [
+    "nice",
+    "configuration",
+    "vite",
+    "crxjs",
+    "chrome-extension"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niceprototypes/nice-config-crxjs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/niceprototypes/nice-config-crxjs/issues"
+  },
+  "homepage": "https://github.com/niceprototypes/nice-config-crxjs#readme",
+  "peerDependencies": {
+    "@crxjs/vite-plugin": ">=2.7.0",
+    "nice-config-vite": "^0.1.0",
+    "vite": ">=7.0.0"
+  },
+  "devDependencies": {
+    "nice-config-vite": "file:../config-vite",
+    "vite": "^7.1.9"
+  }
+}

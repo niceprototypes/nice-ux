@@ -1,0 +1,41 @@
+{
+  "name": "nice-config-vite",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Shared Vite configuration for apps that consume linked nice-* packages",
+  "main": "src/index.js",
+  "types": "src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "default": "./src/index.js"
+    }
+  },
+  "files": [
+    "src"
+  ],
+  "keywords": [
+    "nice",
+    "configuration",
+    "vite"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niceprototypes/nice-config-vite.git"
+  },
+  "bugs": {
+    "url": "https://github.com/niceprototypes/nice-config-vite/issues"
+  },
+  "homepage": "https://github.com/niceprototypes/nice-config-vite#readme",
+  "peerDependencies": {
+    "nice-toolkit": "^5.0.0",
+    "nice-vite-watcher": "^0.1.4",
+    "vite": ">=7.0.0"
+  },
+  "devDependencies": {
+    "nice-toolkit": "file:../toolkit",
+    "nice-vite-watcher": "file:../vite-watcher",
+    "vite": "^7.1.9"
+  }
+}
