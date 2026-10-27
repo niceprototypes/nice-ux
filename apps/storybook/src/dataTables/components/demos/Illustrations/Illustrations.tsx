@@ -16,7 +16,7 @@ import type { IllustrationTableColumn, IllustrationTableProps } from "./Illustra
  * docs table matches the icon table's behavior.
  */
 const remoteIllustrationUrl = (name: string) =>
-  `https://raw.githubusercontent.com/niceprototypes/nice-icons/main/src/illustrations/generated/${name}/base.svg`
+  `https://raw.githubusercontent.com/niceprototypes/nice-ux/main/packages/icon/src/svg/illustrations/generated/${name}/base.svg`
 
 /**
  * One row per illustration name, index-aligned to the columns: the rendered

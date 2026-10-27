@@ -16,7 +16,7 @@ import type { IconTableColumn, IconTableProps } from "./Icons.types"
  * link here so the docs table matches that behavior.
  */
 const remoteIconUrl = (name: string) =>
-  `https://raw.githubusercontent.com/niceprototypes/nice-icons/main/src/icons/generated/${name}/base.svg`
+  `https://raw.githubusercontent.com/niceprototypes/nice-ux/main/packages/icon/src/svg/icons/generated/${name}/base.svg`
 
 /**
  * One row per icon name, index-aligned to the columns: the rendered Icon

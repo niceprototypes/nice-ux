@@ -1,7 +1,7 @@
 # @niceprototypes/button
 ![Button](docs/button.png)
 
-> **Responsive props:** Every prop accepts per-breakpoint overrides through the `breakpoints` object. Keys are a breakpoint name (`phone`, `tablet`, `laptop`, `desktop`), optionally with `+` (that breakpoint and up) or `-` (that breakpoint and down); values are partial props. The most specific matching key wins. See [withBreakpoints](https://niceprototypes.com/storybook/?path=/docs/react-styles-withbreakpoints--docs).
+> **Responsive props:** Every prop accepts per-breakpoint overrides through the `breakpoints` object. Keys are a breakpoint name (`phone`, `tablet`, `laptop`, `desktop`), optionally with `+` (that breakpoint and up) or `-` (that breakpoint and down); values are partial props. The most specific matching key wins. See [withBreakpoints](https://niceprototypes.com/ui/?path=/docs/basics-breakpoints--docs).
 >
 > ```tsx
 > <Button size="small" breakpoints={{ "laptop+": { size: "large" } }}>Save</Button>

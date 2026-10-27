@@ -11,7 +11,7 @@ import Ink from "../../src/nice/Ink"
 
 <StoryHeader title="Jest" />
 
-<Install package="configuration" dev />
+<Install package="config-jest" dev />
 
 <Ink as="h3">Setup</Ink>
 
@@ -43,7 +43,7 @@ export { default } from "@niceprototypes/config-jest/react"
     "^.+\\.(ts|tsx|js|jsx)$": ["ts-jest", { useESM: true }]
   },
   transformIgnorePatterns: [
-    "node_modules/(?!(nice-[^/]+)/)"
+    "node_modules/(?!(@niceprototypes/[^/]+)/)"
   ],
   extensionsToTreatAsEsm: [".ts", ".tsx"],
   moduleNameMapper: {
