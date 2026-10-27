@@ -24,7 +24,7 @@
     "generate": "node scripts/generateSpinner.mjs",
     "prebuild": "npm run generate",
     "build": "tsup",
-    "dev": "tsup --watch",
+    "dev": "tsup --watch src",
     "typecheck": "tsc --noEmit",
     "test": "node --test test/*.test.mjs",
     "prepublishOnly": "npm run build"
