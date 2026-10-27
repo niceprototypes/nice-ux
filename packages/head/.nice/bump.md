@@ -1,0 +1,1 @@
+[2026-09-25 18:59] major: Scale Head into a document-head manager: HeadResources primitive with SEO, Open Graph, Twitter Card and analytics builders plus injectHead and mergeHeadResources; Head is the default export and no longer a children passthrough

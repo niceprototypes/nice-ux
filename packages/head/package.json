@@ -1,0 +1,53 @@
+{
+  "name": "nice-react-head",
+  "version": "0.1.2",
+  "type": "module",
+  "description": "Minimal head-element wrapper relying on React 19 automatic hoisting.",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "typecheck": "tsc --noEmit",
+    "generate-exports": "nice-generate-exports .",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "react",
+    "component",
+    "nice-react",
+    "head"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niceprototypes/nice-react-head.git"
+  },
+  "bugs": {
+    "url": "https://github.com/niceprototypes/nice-react-head/issues"
+  },
+  "homepage": "https://github.com/niceprototypes/nice-react-head#readme",
+  "peerDependencies": {
+    "react": ">=19.2.0 <20.0.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.5",
+    "@types/react": "^19.0.0",
+    "nice-config-exports": "file:../config-exports",
+    "nice-config-rollup": "file:../config-rollup",
+    "nice-config-typescript": "file:../config-typescript",
+    "react": "19.2.0",
+    "rollup": "^4.9.1",
+    "rollup-plugin-dts": "^6.1.0",
+    "tslib": "^2.6.2",
+    "typescript": "^6.0.3"
+  },
+  "dependencies": {}
+}
