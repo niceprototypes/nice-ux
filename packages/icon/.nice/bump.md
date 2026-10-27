@@ -4,3 +4,5 @@
 [2026-09-24 19:18] patch: Declare nice-styles, which the bundled nice-icons code requires at runtime
 [2026-09-25 19:11] patch: Declare nice-* runtime packages as peer dependencies with a file: devDependency for local builds
 [2026-09-25 19:18] patch: Inline nice-icons types into the declaration bundle so consumers need no nice-icons install
+[2026-10-08 22:00] minor: Add darkAntialiasing: stroke widths scale by icon.strokeWidthScale (thinner in night); unset follows the theme, true thins in any theme, false never thins
+[2026-10-15 15:23] patch: Document strokeScaling (JSDoc on IconStrokeScalingType and the prop, README row)

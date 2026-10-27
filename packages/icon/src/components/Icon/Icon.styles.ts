@@ -1,9 +1,10 @@
 import styled, { css, keyframes } from "styled-components"
-import { getToken, resolveColorProp, type ColorTokenProp } from "nice-react-styles"
+import { getConstant, getConstantKey, getToken, resolveColorProp, type ColorTokenProp } from "nice-react-styles"
 import type {
   IconSizeType,
   IconColorType,
   IconStrokeWidthType,
+  IconDarkAntialiasingType,
   IconVariantType,
   IconAnimationType,
   IconAnimationDurationType,
@@ -19,6 +20,23 @@ const spin = keyframes`
 `
 
 /**
+ * The stroke width for a darkAntialiasing setting:
+ * - unset: scaled by icon.strokeWidthScale, which follows the theme (1 in day, 0.9 in night);
+ * - true: scaled by the night scale in any theme — the icon's own night primitive when a project
+ *   set one, else the root strokeWidthScale's;
+ * - false: unscaled.
+ */
+const strokeWidth = (width: IconStrokeWidthType, darkAntialiasing: IconDarkAntialiasingType | undefined) => {
+  const base = getToken(`icon.strokeWidth:${width}`)
+  if (darkAntialiasing === false) return base
+  const scale =
+    darkAntialiasing === true
+      ? `var(${getConstantKey("icon.strokeWidthScale", { theme: "night" })}, ${getConstant("strokeWidthScale", { theme: "night" })})`
+      : getToken("icon.strokeWidthScale:base")
+  return `calc(${base} * ${scale})`
+}
+
+/**
  * Main icon wrapper component with all styling
  */
 export const IconWrapperStyled = styled.div.withConfig({
@@ -29,6 +47,7 @@ export const IconWrapperStyled = styled.div.withConfig({
   $variant?: IconVariantType
   $strokeWidth?: IconStrokeWidthType
   $strokeScaling?: boolean
+  $darkAntialiasing?: IconDarkAntialiasingType
   $animation?: IconAnimationType
   $animationDuration?: IconAnimationDurationType
 }>`
@@ -51,7 +70,7 @@ export const IconWrapperStyled = styled.div.withConfig({
   svg {
     path, circle, rect, line, polyline, polygon, ellipse {
       ${({ $strokeScaling = false }) => !$strokeScaling && css`vector-effect: non-scaling-stroke;`}
-      ${({ $variant = "base", $color = "base", $strokeWidth = "base" }) => {
+      ${({ $variant = "base", $color = "base", $strokeWidth = "base", $darkAntialiasing }) => {
           if ($variant === "fill")
             return css`
               fill: ${resolveColorProp("icon", "color", $color)};
@@ -61,7 +80,7 @@ export const IconWrapperStyled = styled.div.withConfig({
             return css`
               fill: none;
               stroke: ${resolveColorProp("icon", "color", $color)};
-              stroke-width: ${getToken(`icon.strokeWidth:${$strokeWidth}`)};
+              stroke-width: ${strokeWidth($strokeWidth, $darkAntialiasing)};
               stroke-linecap: round;
               stroke-linejoin: round;
             `

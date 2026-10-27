@@ -1,67 +1,66 @@
 # nice-react-icon
+![Icon](docs/icon.png)
 
-> **Responsive props:** Every prop accepts per-breakpoint overrides via the `breakpoints` array. See [withBreakpoints](https://niceprototypes.com/storybook/?path=/docs/react-styles-withbreakpoints--docs).
+> **Responsive props:** every prop accepts per-breakpoint overrides through the `breakpoints` prop added by `withBreakpoints` (`breakpoints={{ "laptop+": { size: "large" } }}`). Key semantics: nice-react-styles README → "Breakpoint keys".
 
-A flexible and customizable React icon component with built-in icon set and theming support.
-
-## Features
-
-- 🎨 **30+ Built-in Icons**: Comprehensive icon set with fill and stroke variants
-- 📐 **Flexible Sizing**: 4 predefined sizes (1-4) with responsive scaling
-- 🎯 **Status-based Theming**: Automatic color theming based on status
-- 🔄 **Animations**: Built-in spinning animation and rotation support
-- 🖼️ **Custom SVG Support**: Use your own SVG URLs
-- ♿ **Accessibility**: Proper ARIA support and screen reader friendly
-- 📱 **Responsive**: Works across all device sizes
-- 🔧 **TypeScript**: Full type safety and IntelliSense support
+React icon component for the nice-icons set, with token-driven sizing, color, and stroke, optional vendor (Lucide) resolution, and an `Illustration` component for fixed-color art.
 
 ## Installation
 
 ```bash
-npm install nice-react-icon
+npm install nice-react-icon nice-react-icon-vendor
 ```
 
-### Peer Dependencies
-
-```bash
-npm install react styled-components
-```
+Peer dependencies: `react`, `react-dom`, `styled-components`, `nice-styles`, `nice-react-styles`, `nice-react-icon-vendor`.
 
 ## Quick Start
 
 ```tsx
-import Icon from 'nice-react-icon'
+import Icon from "nice-react-icon"
 
-function App() {
-  return (
-    <Icon
-      name="arrow"
-      size={3}
-      variant="stroke"
-      color="blue"
-    />
-  )
-}
+<Icon name="star" />
+<Icon name="star" variant="fill" size="large" color="success" />
 ```
 
 ## Props Reference
 
+Types are the aliases exported from `Icon.types.ts`. Allowed values of each union (resolved): `~/nice/manifest/agents/catalog.json` → `nice-react-icon`; aliases imported from nice-styles (`FontSizeType`, `ColorType`, `ThemeType`) stay unresolved there — read `nice-styles/src/generated/types.ts`.
+
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `name` | `IconNameType` | - | Icon name from the built-in set |
-| `variant` | `"fill" \| "stroke"` | `"stroke"` | Icon variant style |
-| `url` | `string` | - | Custom SVG URL (overrides name) |
-| `color` | `string` | - | Icon color (CSS value) |
-| `backgroundColor` | `string` | - | Background color for icon container |
-| `size` | `1 \| 2 \| 3 \| 4` | `3` | Icon size (smallest to largest) |
-| `borderRadius` | `1 \| 2 \| 3` | - | Border radius for icon container |
-| `imageSize` | `string` | `"30%"` | Image size as percentage of container |
-| `status` | `StatusType` | - | Status for automatic theming |
-| `spinning` | `boolean` | `false` | Whether icon should spin |
-| `rotation` | `number` | `0` | Rotation angle in degrees |
-| `strokeWidth` | `1 \| 2` | `1` | Stroke width for stroke variant |
-| `isActive` | `boolean` | `true` | Whether icon is in active state |
-| `className` | `string` | - | Additional CSS class |
+| `name` | `IconNameType \| (string & {})` | `"circle"` | Built-in name (`iconNames`), or a vendor name with `vendor`. An unresolved name renders `circle` |
+| `variant` | `IconVariantType` | `"base"` | Variant stem the icon ships: `"base"` (outline), `"fill"`, or any other the icon ships; an unknown variant renders `"base"` and warns |
+| `outlined` | `boolean` | `false` | Deprecated — use `variant`. `true` maps to `variant="fill"` |
+| `url` | `string` | - | Image URL rendered in place of the built-in SVG (built-in names only) |
+| `color` | `ColorTokenProp<IconColorType>` | `"base"` | Color token variant, or an object with effects |
+| `size` | `IconSizeType` | `"base"` | Size token variant (`icon.size`); sets width and height |
+| `viewBox` | `string` | `"0 0 16 16"` | SVG viewBox override |
+| `strokeWidth` | `IconStrokeWidthType` | `"base"` | Stroke width token variant (`icon.strokeWidth`) |
+| `strokeScaling` | `boolean` | `false` | `false` keeps the stroke width fixed at any icon size (`vector-effect: non-scaling-stroke` on the SVG shapes); `true` lets the stroke scale with the icon |
+| `darkAntialiasing` | `boolean` (optional) | follows the theme | Thins the stroke for dark mode by multiplying it by `icon.strokeWidthScale`, which follows the root `strokeWidthScale` (`1` in day, `0.9` in night). Unset follows the nearest theme (`<Theme>`, `data-theme`, the icon's `theme`, else the OS preference); `true` thins in any theme; `false` never thins |
+| `theme` | `ThemeType` | - | Pins the icon to a theme (wraps it in `<Theme>`) |
+| `vendor` | `boolean` | `false` | Resolve names not in the built-in set through the registered vendor resolver |
+| `vendorComponent` | `React.ComponentType` | - | Renders this component inside the icon wrapper with token styling; bypasses name resolution |
+| `animation` | `IconAnimationType` | - | Named animation (`"spin"`). `spinner` spins without it |
+| `animationDuration` | `IconAnimationDurationType` | `"base"` | Animation speed token variant (`icon.animationDuration`) |
+| `style` | `React.CSSProperties` | - | Inline styles on the root element |
+| `className` | `string` | - | Class on the root element |
+
+### Illustration
+
+`import { Illustration } from "nice-react-icon"` — fixed-color art from nice-icons' illustration set. Recolor and stroke props (`color`, `strokeWidth`, `strokeScaling`, `outlined`) are omitted; sizing and animation reuse the icon tokens.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `name` | `IllustrationNameType \| (string & {})` | `"nice-heart"` | Illustration name |
+| `variant` | `IconVariantType` | `"base"` | Variant the illustration ships |
+| `size` | `IconSizeType` | `"base"` | Size token variant |
+| `viewBox` | `string` | `"0 0 16 16"` | SVG viewBox override |
+| `theme` | `ThemeType` | - | Pins the illustration to a theme |
+| `animation` | `IconAnimationType` | - | Named animation (`"spin"`) |
+| `animationDuration` | `IconAnimationDurationType` | `"base"` | Animation speed token variant |
+| `style` | `React.CSSProperties` | - | Inline styles on the root element |
+| `className` | `string` | - | Class on the root element |
 
 ## Vendor Icons
 
@@ -75,167 +74,45 @@ import "nice-react-icon-vendor"
 <Icon name="TrendingDown" vendor />
 ```
 
+Vendor names are Lucide's PascalCase names (`TrendingDown`, `Pencil`); a name Lucide does not have renders `circle`. Built-in names win: a vendor name that matches a built-in name renders the built-in icon. Without the import, `vendor` names render `circle`.
+
 ### Why a separate peer package
 
 The vendor peer package is part of Nice's commitment to remaining as agnostic as possible from third-party libraries. The host component (`nice-react-icon`) never imports the third-party icon set directly; it exposes a `vendor` flag and a `registerVendorResolver` hook, and the peer package is the only place a concrete vendor (currently Lucide) is referenced. This reserves the right to swap, supplement, or remove the third-party dependency later without touching the host component or any consumer call site.
 
 The same pattern applies to `nice-react-image` / `nice-react-image-vendor`.
 
-## Available Icons
+## Icon names
 
-The following icons are available in both `fill` and `stroke` variants:
-
-- arrow
-- attention
-- box
-- brush
-- calendar
-- cancel
-- carat
-- check
-- cloud
-- code
-- cog
-- contact
-- content
-- edit
-- link
-- lock
-- menu
-- message
-- pause
-- placeholder
-- plus
-- profile
-- puzzle
-- search
-- shuffle
-- skip
-- spinner
-- trash
-- upload
-- x
+Built-in names and their variants come from nice-icons: `import { iconNames } from "nice-react-icon"` (the `IconNameType` union). Add icons by adding them to nice-icons and rebuilding it.
 
 ## Usage Examples
 
-### Basic Icons
-
 ```tsx
-import Icon from 'nice-react-icon'
+import Icon, { Illustration } from "nice-react-icon"
 
-// Arrow icon
-<Icon name="arrow" />
-
-// Check icon with custom color
-<Icon name="check" color="#10b981" />
-
-// Plus icon with fill variant
-<Icon name="plus" variant="fill" />
+<Icon name="star" variant="fill" />                         // filled variant
+<Icon name="star" size="larger" strokeWidth="large" />      // token size and stroke
+<Icon name="star" color="error" theme="night" />            // color token, pinned theme
+<Icon name="spinner" />                                     // spins by default
+<Icon name="star" animation="spin" animationDuration="slow" />
+<Icon name="TrendingDown" vendor />                         // Lucide (needs nice-react-icon-vendor)
+<Icon vendorComponent={MyIcon} color="success" />           // custom component, token styling
+<Icon breakpoints={{ "laptop+": { size: "large" } }} />     // responsive override
+<Illustration name="nice-heart" size="larger" />
 ```
 
-### Different Sizes
+## Tokens
 
-```tsx
-<Icon name="search" size={1} /> // Small
-<Icon name="search" size={2} /> // Medium
-<Icon name="search" size={3} /> // Large (default)
-<Icon name="search" size={4} /> // Extra Large
-```
-
-### With Rotation and Animation
-
-```tsx
-// Rotate 90 degrees
-<Icon name="arrow" rotation={90} />
-
-// Spinning icon
-<Icon name="spinner" spinning />
-
-// Loading state with auto-spin
-<Icon status="active" />
-```
-
-### Status-based Theming
-
-```tsx
-<Icon name="check" status="success" />
-<Icon name="x" status="error" />
-<Icon name="attention" status="warning" />
-<Icon name="arrow" status="primary" />
-```
-
-### Custom SVG
-
-```tsx
-<Icon
-  url="/path/to/custom-icon.svg"
-  size={3}
-  color="#6366f1"
-/>
-```
-
-### With Background and Border Radius
-
-```tsx
-<Icon
-  name="profile"
-  backgroundColor="#f3f4f6"
-  borderRadius={3}
-  size={4}
-/>
-```
-
-## CSS Variables
-
-The component uses CSS variables for theming. Define these in your application:
-
-```css
-:root {
-  /* Icon stroke colors */
-  --icon-stroke-color-primary: currentColor;
-  --icon-stroke-color-default: currentColor;
-
-  /* Content colors for status */
-  --content-color-primary: #000;
-  --content-color-success: #10b981;
-  --content-color-error: #ef4444;
-  --content-color-warning: #f59e0b;
-
-  /* Sizes */
-  --cell-height-1: 16px;
-  --cell-height-2: 24px;
-  --cell-height-3: 32px;
-  --cell-height-4: 40px;
-
-  /* Border radius */
-  --border-radius-1: 4px;
-  --border-radius-2: 8px;
-  --border-radius-3: 12px;
-
-  /* Icon stroke width */
-  --icon-stroke-width-1: 1.5;
-  --icon-stroke-width-2: 2;
-
-  /* Animation */
-  --animation-duration-1: 0.2s;
-  --animation-easing-1: ease;
-}
-```
+Component tokens under the `icon` prefix (`~/nice/styles/src/tokens/components/icon.json`): `size`, `color`, `strokeWidth`, `strokeWidthScale`, `animationDuration`, `viewBox`. Override them with `setTokens({ icon: { … } })` from nice-react-styles; read them with `getToken("icon.size:base")`.
 
 ## TypeScript
 
-The component is fully typed. Import types as needed:
-
 ```tsx
-import Icon, { IconProps, IconNameType, StatusType } from 'nice-react-icon'
-
-const MyComponent: React.FC = () => {
-  const iconName: IconNameType = 'arrow'
-  const status: StatusType = 'primary'
-
-  return <Icon name={iconName} status={status} />
-}
+import Icon, { type IconProps, type IconNameType, IconTypes, Illustration, type IllustrationProps, iconNames, registerVendorResolver } from "nice-react-icon"
 ```
+
+`registerVendorResolver(fn)` registers the resolver used by `vendor` (`(name: string) => React.ComponentType | null`); nice-react-icon-vendor calls it on import.
 
 ## License
 

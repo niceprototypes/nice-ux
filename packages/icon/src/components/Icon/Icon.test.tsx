@@ -1,6 +1,7 @@
 import React from "react"
 import { render, screen } from "@testing-library/react"
 import "@testing-library/jest-dom"
+import { getToken } from "nice-react-styles"
 import Icon from "./Icon"
 
 jest.mock("../../utilities/resolveIconComponent", () => ({
@@ -103,5 +104,51 @@ describe("Icon", () => {
       rerender(<Icon name="check" strokeWidth={strokeWidth} />)
       expect(container.firstChild).toBeInTheDocument()
     })
+  })
+})
+
+describe("Icon darkAntialiasing", () => {
+  /** The stroke-width declarations in the rules for `wrapper`'s own classes. */
+  function strokeWidths(wrapper: Element): string[] {
+    const css = Array.from(document.head.querySelectorAll("style"))
+      .map(tag => tag.textContent ?? "")
+      .join("\n")
+    return Array.from(wrapper.classList).flatMap(className =>
+      Array.from(css.matchAll(new RegExp(`\\.${className}[^{]*\\{([^}]*)\\}`, "g"))).flatMap(([, body]) =>
+        Array.from(body.matchAll(/stroke-width:([^;]+);/g)).map(([, value]) => value)
+      )
+    )
+  }
+
+  const wrapperOf = () => screen.getByTestId("svg-icon").parentElement!
+  const themedScale = getToken("icon.strokeWidthScale:base")
+  const nightScale = "var(--np--icon--stroke-width-scale--night, var(--np--stroke-width-scale--night))"
+
+  it.each(["small", "base", "large"] as const)("follows the theme by default (%s)", strokeWidth => {
+    render(<Icon name="check" strokeWidth={strokeWidth} />)
+    expect(strokeWidths(wrapperOf())).toEqual([`calc(${getToken(`icon.strokeWidth:${strokeWidth}`)} * ${themedScale})`])
+  })
+
+  it.each(["small", "base", "large"] as const)("uses the night scale in any theme when true (%s)", strokeWidth => {
+    render(<Icon name="check" strokeWidth={strokeWidth} darkAntialiasing />)
+    expect(strokeWidths(wrapperOf())).toEqual([`calc(${getToken(`icon.strokeWidth:${strokeWidth}`)} * ${nightScale})`])
+  })
+
+  it.each(["small", "base", "large"] as const)("keeps the plain stroke width when false (%s)", strokeWidth => {
+    render(<Icon name="check" strokeWidth={strokeWidth} darkAntialiasing={false} />)
+    expect(strokeWidths(wrapperOf())).toEqual([getToken(`icon.strokeWidth:${strokeWidth}`)])
+  })
+
+  it("leaves the fill variant without a stroke width", () => {
+    render(<Icon name="check" variant="fill" />)
+    expect(strokeWidths(wrapperOf())).toEqual([])
+  })
+
+  it("reads 1 in day and 0.9 in night, at the root and through the icon token", () => {
+    expect(getToken("icon.strokeWidthScale:base")).toBe("var(--np--icon--stroke-width-scale)")
+    for (const address of ["strokeWidthScale", "icon.strokeWidthScale:base"] as const) {
+      expect(getToken(address, { theme: "day", as: "value" })).toBe("1")
+      expect(getToken(address, { theme: "night", as: "value" })).toBe("0.9")
+    }
   })
 })

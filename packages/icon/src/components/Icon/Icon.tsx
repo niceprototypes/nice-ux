@@ -39,6 +39,7 @@ const Icon: React.FC<IconProps> = ({
   strokeWidth = "base",
   className,
   strokeScaling = false,
+  darkAntialiasing,
   theme,
   style,
   vendor = false,
@@ -62,6 +63,7 @@ const Icon: React.FC<IconProps> = ({
         $variant={resolvedVariant}
         $strokeWidth={strokeWidth}
         $strokeScaling={strokeScaling}
+        $darkAntialiasing={darkAntialiasing}
         $animation={resolvedAnimation}
         $animationDuration={animationDuration}
         className={className}
@@ -82,6 +84,7 @@ const Icon: React.FC<IconProps> = ({
         $variant={resolvedVariant}
         $strokeWidth={strokeWidth}
         $strokeScaling={strokeScaling}
+        $darkAntialiasing={darkAntialiasing}
         $animation={resolvedAnimation}
         $animationDuration={animationDuration}
         className={className}
@@ -103,6 +106,7 @@ const Icon: React.FC<IconProps> = ({
           $variant={resolvedVariant}
           $strokeWidth={strokeWidth}
           $strokeScaling={strokeScaling}
+          $darkAntialiasing={darkAntialiasing}
           $animation={resolvedAnimation}
           $animationDuration={animationDuration}
           className={className}
@@ -123,6 +127,7 @@ const Icon: React.FC<IconProps> = ({
       $variant={resolvedVariant}
       $strokeWidth={strokeWidth}
       $strokeScaling={strokeScaling}
+      $darkAntialiasing={darkAntialiasing}
       $animation={resolvedAnimation}
       $animationDuration={animationDuration}
       className={className}

@@ -22,7 +22,35 @@ export type IconVariantType = "base" | "fill" | (string & {})
 export type IconUrlType = string
 export type IconViewBoxType = string
 export type IconClassNameType = string
+
+/**
+ * IconStrokeScalingType
+ *
+ * Whether the stroke width scales with the icon size. Applies to every SVG shape element
+ * (path, circle, rect, line, polyline, polygon, ellipse) inside the icon.
+ *
+ * Values:
+ * - false (default): the stroke keeps the width set by `strokeWidth` at any icon size —
+ *   shapes get `vector-effect: non-scaling-stroke`
+ * - true: no `vector-effect` is set; the stroke scales with the icon (thicker at larger sizes)
+ */
 export type IconStrokeScalingType = boolean
+
+/**
+ * IconDarkAntialiasingType
+ *
+ * Whether the stroke thins for dark mode. Light strokes on a dark ground look heavier than dark
+ * on light (the irradiation effect), so the stroke width is multiplied by the stroke-width
+ * scale (`icon.strokeWidthScale`, which follows the root `strokeWidthScale`: 1 in day, 0.9 in
+ * night). Same pattern as theming: the nearest theme gives the default, the prop overrides it.
+ *
+ * Values:
+ * - unset (default): follow the theme — the nearest `<Theme>` / `data-theme` pin, the icon's own
+ *   `theme`, else the OS preference: ×1 in day, ×0.9 in night
+ * - true: thin in any theme (the night scale)
+ * - false: never thin (the plain stroke width)
+ */
+export type IconDarkAntialiasingType = boolean
 
 /**
  * IconAnimationType
@@ -72,7 +100,16 @@ export interface IconProps {
   viewBox?: IconViewBoxType
   strokeWidth?: IconStrokeWidthType
   className?: IconClassNameType
+  /**
+   * Scale the stroke width with the icon size; false keeps it fixed (vector-effect: non-scaling-stroke)
+   * @default false
+   */
   strokeScaling?: IconStrokeScalingType
+  /**
+   * Thin the stroke for dark mode: unset follows the theme, true forces it, false turns it off
+   * @default undefined (follow the theme)
+   */
+  darkAntialiasing?: IconDarkAntialiasingType
   /** Force day or night theme */
   theme?: ThemeType
   /** Inline styles applied to the root element */
@@ -101,6 +138,7 @@ namespace IconTypes {
   export type ViewBox = IconViewBoxType
   export type ClassName = IconClassNameType
   export type StrokeScaling = IconStrokeScalingType
+  export type DarkAntialiasing = IconDarkAntialiasingType
   export type Vendor = IconVendorType
   export type VendorComponent = IconVendorComponentType
   export type Animation = IconAnimationType
