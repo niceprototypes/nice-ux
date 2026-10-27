@@ -1,0 +1,60 @@
+{
+  "name": "nice-react-slider",
+  "version": "0.5.5",
+  "description": "A smooth, animated vertical slider component for React",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build",
+    "generate-exports": "nice-generate-exports ."
+  },
+  "keywords": [
+    "react",
+    "slider",
+    "carousel",
+    "animation",
+    "component"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niceprototypes/nice-react-slider.git"
+  },
+  "bugs": {
+    "url": "https://github.com/niceprototypes/nice-react-slider/issues"
+  },
+  "homepage": "https://github.com/niceprototypes/nice-react-slider#readme",
+  "peerDependencies": {
+    "nice-react-styles": "^15.0.1",
+    "react": ">=19.2.0",
+    "styled-components": ">=6.1.18"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.44.0",
+    "eslint-plugin-react": "^7.32.2",
+    "jest": "^29.5.0",
+    "nice-config-exports": "file:../config-exports",
+    "nice-config-rollup": "file:../config-rollup",
+    "nice-config-typescript": "file:../config-typescript",
+    "nice-react-styles": "file:../react-styles",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "rollup": "^4.9.1",
+    "styled-components": "^6.1.19",
+    "tslib": "^2.6.2",
+    "typescript": "^6.0.3"
+  }
+}

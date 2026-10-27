@@ -1,0 +1,6 @@
+{
+  "$schema": "../config-exports/src/schema.json",
+  "description": "Animated vertical slider component.",
+  "default": "Slider",
+  "components": ["Slider"]
+}
