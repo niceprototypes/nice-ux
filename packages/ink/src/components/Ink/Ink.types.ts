@@ -100,6 +100,14 @@ export type InkLineClampType = "none" | number
 export type InkWordBreakType = "normal" | "break-all" | "keep-all" | "break-word"
 
 /**
+ * InkItalicType
+ *
+ * Whether the text renders in italics (`font-style: italic`).
+ * Not token-bound: font-style is a CSS keyword, not a design value.
+ */
+export type InkItalicType = boolean
+
+/**
  * InkProps
  *
  * Complete prop definition for the Ink component.
@@ -112,7 +120,7 @@ export type InkProps = {
   /** Enable font antialiasing for smoother text rendering */
   antialiased?: boolean
 
-  /** HTML element to render */
+  /** HTML element to render. @default "span" */
   as?: InkAsType
 
   /** Text content or child elements */
@@ -126,6 +134,9 @@ export type InkProps = {
 
   /** Element id, e.g. an anchor target for in-page links */
   id?: string
+
+  /** Render the text in italics. @default false */
+  italic?: InkItalicType
 
   /**
    * Text color from nice-styles tokens. Either the variant name, or an object
@@ -175,6 +186,7 @@ namespace InkTypes {
   export type Align = InkAlignType
   export type As = InkAsType
   export type Color = InkColorType
+  export type Italic = InkItalicType
   export type Size = InkSizeType
   export type Weight = InkWeightType
   export type LineHeight = InkLineHeightType

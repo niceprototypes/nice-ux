@@ -38,12 +38,13 @@ const Ink: React.FC<InkProps> = ({
   align,
   antialiased,
   legibilityOptimized = false,
-  as = "p",
+  as = "span",
   children,
   className = "sb-unstyled",
   code = false,
   color,
   id,
+  italic = false,
   theme,
   lineClamp,
   lineHeight,
@@ -62,6 +63,7 @@ const Ink: React.FC<InkProps> = ({
       $as={as}
       $code={code}
       $color={color}
+      $italic={italic}
       $lineClamp={lineClamp}
       $lineHeight={lineHeight}
       $size={size}

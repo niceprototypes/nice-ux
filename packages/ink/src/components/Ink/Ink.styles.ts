@@ -9,7 +9,7 @@
 
 import styled, { css } from "styled-components"
 import { getToken, resolveColorProp, type ColorTokenProp, type ColorType, type FontSizeType, type FontWeightType, type LineHeightType } from "nice-react-styles"
-import { InkAsType, InkAlignType, InkLineClampType, InkWordBreakType } from "./Ink.types"
+import { InkAsType, InkAlignType, InkItalicType, InkLineClampType, InkWordBreakType } from "./Ink.types"
 import { styleAntialiasing } from "../../utilities/styleAntialiasing"
 
 /**
@@ -38,18 +38,18 @@ const isHeading = ($as: InkAsType): boolean =>
 const getFontFamily = ({ $as, $code }: { $as: InkAsType; $code?: boolean }) => {
   if ($code) {
     return css`
-      font-family: ${getToken("fontFamily", "code")};
+      font-family: ${getToken("ink.fontFamily:code")};
     `
   }
 
   if (isHeading($as)) {
     return css`
-      font-family: ${getToken("fontFamily", "heading")};
+      font-family: ${getToken("ink.fontFamily:heading")};
     `
   }
 
   return css`
-    font-family: ${getToken("fontFamily", "base")};
+    font-family: ${getToken("ink.fontFamily:base")};
   `
 }
 
@@ -84,7 +84,7 @@ const getFontSize = ({ $as, $size }: { $as: InkAsType; $size?: FontSizeType }) =
   }
 
   return css`
-    font-size: ${getToken("fontSize", effectiveFontSize)};
+    font-size: ${getToken(`ink.fontSize:${effectiveFontSize}`)};
   `
 }
 
@@ -98,7 +98,7 @@ const getFontWeight = ({ $as, $weight }: { $as: InkAsType; $weight?: FontWeightT
   // Default weights for headings
   if ($as === "h1" || $as === "h2" || $as === "h3") {
     return css`
-      font-weight: ${getToken("fontWeight", "bold")};
+      font-weight: ${getToken("ink.fontWeight:bold")};
     `
   }
 
@@ -118,7 +118,7 @@ const getLineHeight = ({ $lineHeight, $as }: { $lineHeight?: LineHeightType; $as
   const effectiveLineHeight = $lineHeight || (isHeading($as) ? "condensed" : "base")
 
   return css`
-    line-height: ${getToken("lineHeight", effectiveLineHeight)};
+    line-height: ${getToken(`ink.lineHeight:${effectiveLineHeight}`)};
   `
 }
 
@@ -130,6 +130,14 @@ const getLineClamp = ({ $lineClamp }: { $lineClamp?: InkLineClampType }) => {
     -webkit-line-clamp: ${$lineClamp};
     -webkit-box-orient: vertical;
     overflow: hidden;
+  `
+}
+
+const getFontStyle = ({ $italic }: { $italic?: InkItalicType }) => {
+  if (!$italic) return undefined
+
+  return css`
+    font-style: italic;
   `
 }
 
@@ -153,6 +161,7 @@ export const StyledInk = styled.p<{
   $lineClamp?: InkLineClampType
   $wordBreak?: InkWordBreakType
   $code?: boolean
+  $italic?: InkItalicType
 }>`
   margin: 0;
 
@@ -167,6 +176,9 @@ export const StyledInk = styled.p<{
 
   /* Font weight */
   ${getFontWeight}
+
+  /* Font style */
+  ${getFontStyle}
 
   /* Antialiasing */
   ${({ $antialiased }) => $antialiased && styleAntialiasing}
