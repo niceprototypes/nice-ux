@@ -10,8 +10,12 @@
  *
  * For every bare alias to a scoped core token, this emits a parallel
  * reassignment of the component variable into each scope the core participates
- * in (night, breakpoints, extra themes), pointing at the core's stable primitive
- * (`--np--<core>--night`, `--np--<core>--laptop`, …). No new primitives are
+ * in (night, breakpoints, extra themes). Theme scopes point at the core's stable
+ * primitive (`--np--<core>--night`, …), because a pin on a descendant reassigns
+ * the core there. Breakpoint scopes point at the core semantic variable
+ * (`--np--<core>`): breakpoint blocks are `:root` rules, where the semantic
+ * variable already holds the breakpoint value, including a `setTokens` override
+ * of it; the primitive would bypass that override. No new primitives are
  * minted. Shared by the build (`dist/tokens.css`) and `applyBreakpoints`.
  *
  * ## Precedence
@@ -153,10 +157,11 @@ export function generateComponentAliasCss(
         dayPinBody.push(reassignmentLine(cssKey, `${coreVar}--day`))
       }
 
-      // Breakpoints — per breakpoint; an authored $breakpoints.{bp} leaf wins
+      // Breakpoints — per breakpoint; an authored $breakpoints.{bp} leaf wins. The line
+      // restores the alias after a narrower authored override
       for (const bp of scopes.breakpoints) {
         if (leafAt(componentBreakpointTokens[prefix]?.[bp], path) !== undefined) continue
-        ;(bpBuckets[bp] ??= []).push(reassignmentLine(cssKey, `${coreVar}--${bp}`))
+        ;(bpBuckets[bp] ??= []).push(reassignmentLine(cssKey, coreVar))
       }
 
       // Extra themes — per theme; an authored $themes.{extra} leaf wins.
