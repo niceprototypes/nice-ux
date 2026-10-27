@@ -3,7 +3,8 @@ import { fileURLToPath } from "node:url"
 import { createRequire } from "node:module"
 import type { StorybookConfig } from "@storybook/react-vite"
 import { join, dirname, resolve } from "path"
-import { viteWatcher, getSourceAliases } from "nice-vite-watcher"
+import { mergeConfig } from "vite"
+import { createNiceViteConfig } from "nice-config-vite"
 import remarkGfm from "remark-gfm"
 
 const __filename = fileURLToPath(import.meta.url)
@@ -19,36 +20,9 @@ function getAbsolutePath(value: string): string {
 }
 
 /**
- * Package lists from the Nice ecosystem registry (nice-toolkit/registry.json).
- * Adding a new package to the registry automatically makes it available here.
- *
- * Imported through the package boundary (`nice-toolkit/registry`) rather
- * than reaching into `toolkit/src/`. Toolkit's package.json `exports`
- * field declares this subpath; internal layout changes there don't break
- * this import.
- */
-const registry = require("nice-toolkit/registry")
-const linkedPackages: Record<string, string> = registry.getLinkedPackageMap()
-const sourceAliasablePackages: string[] = registry.getSourceAliasableNames()
-const allNicePackages: string[] = registry.getPackageNames()
-
-/**
- * Storybook Configuration
- *
- * This config handles two HMR strategies for linked Nice packages:
- *
- * 1. SOURCE ALIASING (preferred)
- *    Packages in `sourceAliasablePackages` are aliased directly to their
- *    src/index.ts. Changes to source files trigger instant HMR with no
- *    build step required.
- *
- * 2. DIST WATCHING (fallback)
- *    Packages that require build transforms (e.g., nice-react-icon uses SVGR)
- *    cannot be source-aliased. Instead, the symlink watcher monitors their
- *    dist/ folders and triggers a full reload when builds complete.
- *
- * These two strategies are mutually exclusive per package to avoid
- * duplicate invalidations.
+ * Storybook Configuration. Linked nice-* packages hot-reload through nice-config-vite's
+ * `liveLinks`: source-aliasable packages are aliased to their src/index.ts, the others'
+ * dist/ folders are watched (see config-vite/README.md).
  */
 const config: StorybookConfig = {
   stories: [
@@ -88,87 +62,10 @@ const config: StorybookConfig = {
     options: {},
   },
   docs: {},
-  viteFinal: async config => {
-    config.resolve = config.resolve || {}
-
-    // Dedupe ensures a single instance of these packages across all
-    // dependencies. Prevents "multiple React instances" or styled-components
-    // context mismatches when Nice packages have their own copies.
-    config.resolve.dedupe = [
-      ...(config.resolve.dedupe || []),
-      "styled-components",
-      "react",
-      "react-dom",
-      "nice-react-icon",
-      // One token registry and one token stylesheet map: separate instances each
-      // rewrite the shared <style data-nice-tokens> and erase the others' CSS.
-      "nice-styles",
-    ]
-
-    // Required for Vite to resolve the real paths of symlinked packages
-    config.resolve.preserveSymlinks = false
-
-    config.resolve.alias = {
-      ...(config.resolve.alias || {}),
-      // Force styled-components to use Storybook's copy (see dedupe above)
-      "styled-components": resolve(
-        __dirname,
-        "../node_modules/styled-components"
-      ),
-      // Map source-aliasable packages directly to their src/index.ts
-      ...getSourceAliases(linkedPackages, sourceAliasablePackages),
-    }
-
-    // Enable file watching through symlinks
-    config.server = config.server || {}
-    config.server.watch = {
-      ...config.server.watch,
-      followSymlinks: true,
-    }
-
-    // Allow Vite to serve files from the workspace root (~/nice) and below.
-    // Without this, imports that resolve to files outside storybook/ — e.g.
-    // nice-styles/dist/errors.json reached via a symlinked nice-react-styles —
-    // get blocked with HTTP 403.
-    config.server.fs = config.server.fs || {}
-    config.server.fs.allow = [
-      ...(config.server.fs.allow || []),
-      resolve(__dirname, "../.."),
-    ]
-
-    // Exclude every nice-* package — direct or transitive — from Vite's
-    // optimizer. Pre-bundling caches a snapshot of exports; when a foundation
-    // package (e.g. nice-styles) gains or renames an export, transitive
-    // consumers see "module X does not provide export Y" until the cache is
-    // wiped. Sourcing the exclude list from the registry means adding a new
-    // nice-* package automatically excludes it — no per-consumer drift.
-    config.optimizeDeps = config.optimizeDeps || {}
-    config.optimizeDeps.exclude = [
-      ...(config.optimizeDeps.exclude || []),
-      ...allNicePackages,
-    ]
-
-    // Only watch dist/ for packages that aren't source-aliased.
-    // Source-aliased packages already get HMR from their source files.
-    const packagesToWatch = Object.fromEntries(
-      Object.entries(linkedPackages).filter(
-        ([name]) => !sourceAliasablePackages.includes(name)
-      )
-    )
-    config.plugins = [
-      ...(config.plugins || []),
-      // nice-vite-watcher's types resolve against its own vite ^5 devDependency,
-      // so its Plugin type nominally differs from storybook's vite 7 PluginOption.
-      // The versions are runtime-compatible (vite-watcher declares `vite >=4.0.0`
-      // as a peer), so cast to storybook's plugin element type to bridge the leak.
-      viteWatcher({
-        packages: packagesToWatch,
-        verbose: true,
-      }) as NonNullable<typeof config.plugins>[number],
-    ]
-
-    return config
-  },
+  // Nice-on-Vite settings (dedupe, shared React/styled-components, symlinks, fs.allow,
+  // optimizer exclusions, live reload from linked packages) come from nice-config-vite.
+  viteFinal: async config =>
+    mergeConfig(config, createNiceViteConfig({ appRoot: resolve(__dirname, ".."), liveLinks: true })),
   typescript: {
     check: false,
     reactDocgen: "react-docgen-typescript",
