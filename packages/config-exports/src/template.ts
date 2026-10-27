@@ -26,9 +26,9 @@ export function generateIndexContent(config: ExportsConfig): string {
     lines.push("")
   }
 
-  // Default export — emitted before the wildcard so it reads top-down: default, then named
+  // Default export, also named so `export *` re-exports (the @niceprototypes/ux umbrella) carry it
   if (config.default) {
-    lines.push(`export { default } from "./components/${config.default}"`)
+    lines.push(`export { default, default as ${config.default} } from "./components/${config.default}"`)
   }
 
   // Component wildcard exports

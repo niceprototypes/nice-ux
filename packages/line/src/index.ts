@@ -3,5 +3,5 @@
 
 /** Dashed line of pill-shaped, rimmed dashes that frames its parent element. */
 
-export { default } from "./components/Line"
+export { default, default as Line } from "./components/Line"
 export * from "./components/Line"

@@ -3,5 +3,5 @@
 
 /** Select for nice-react: a WAI-ARIA select-only combobox (Input + Popover + List) by default, or the native select with `native`. */
 
-export { default } from "./components/Select"
+export { default, default as Select } from "./components/Select"
 export * from "./components/Select"

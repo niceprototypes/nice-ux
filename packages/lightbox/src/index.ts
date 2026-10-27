@@ -3,5 +3,5 @@
 
 /** Fullscreen image lightbox with portal rendering. */
 
-export { default } from "./components/Lightbox"
+export { default, default as Lightbox } from "./components/Lightbox"
 export * from "./components/Lightbox"

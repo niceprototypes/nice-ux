@@ -3,6 +3,6 @@
 
 /** Document head management — SEO tags, analytics, and raw meta/link/script resources. Generic primitives with Google and Adobe conveniences layered on top. */
 
-export { default } from "./components/Head"
+export { default, default as Head } from "./components/Head"
 export * from "./components/Head"
 export { buildSeoTags, buildOpenGraphTags, buildTwitterCardTags, buildGoogleAnalyticsConfig, buildAdobeAnalyticsConfig, injectHead, mergeHeadResources } from "./services"

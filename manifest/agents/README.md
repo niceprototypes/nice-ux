@@ -14,7 +14,7 @@ For an agent building an app or page with `@niceprototypes/*`. Core (`../README.
 
 - Inside nice-ux: `"workspace:^"`. Outside: npm ranges once the first `@niceprototypes` release is out (backlog row 2); until then outside apps cannot install them.
 - `icon` needs `icon-vendor` installed beside it; install both whenever an icon-bearing component (button, input, …) is used.
-- `@niceprototypes/ux` re-exports every package's named exports. Import components from their own package as default exports (`import Button from "@niceprototypes/button"`).
+- Import components, types and services by name from the umbrella (`import { Button, Flex } from "@niceprototypes/ux"`); the two renamed collisions are `HeadLinkAttributes` and `registerImageVendorResolver`.
 - Vite apps outside nice-ux: `createNiceViteConfig` from `@niceprototypes/config-vite` (its README). Inside: `resolve.dedupe: ["react", "react-dom", "styled-components", "@niceprototypes/styles", "@niceprototypes/icon"]` (as `apps/storybook/.storybook/main.ts`).
 
 ## 2. App tokens — `src/nice/tokens.ts`

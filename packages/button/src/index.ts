@@ -3,5 +3,5 @@
 
 /** Accessible, themable button component with status variants and icon support. */
 
-export { default } from "./components/Button"
+export { default, default as Button } from "./components/Button"
 export * from "./components/Button"

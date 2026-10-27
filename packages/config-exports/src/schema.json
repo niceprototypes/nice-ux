@@ -15,7 +15,7 @@
     },
     "default": {
       "type": "string",
-      "description": "Component name to re-export as the package default export."
+      "description": "Component name to re-export as the package default export and as a named export."
     },
     "components": {
       "type": "array",

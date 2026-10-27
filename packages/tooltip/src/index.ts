@@ -3,5 +3,5 @@
 
 /** Tooltip component for nice-react using inverse design tokens. */
 
-export { default } from "./components/Tooltip"
+export { default, default as Tooltip } from "./components/Tooltip"
 export * from "./components/Tooltip"

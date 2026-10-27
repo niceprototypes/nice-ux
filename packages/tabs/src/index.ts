@@ -3,5 +3,5 @@
 
 /** Tabs: a WAI-ARIA tablist with any node as a tab label, and the selected tab's panel. */
 
-export { default } from "./components/Tabs"
+export { default, default as Tabs } from "./components/Tabs"
 export * from "./components/Tabs"

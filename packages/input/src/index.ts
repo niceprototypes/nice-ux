@@ -3,5 +3,5 @@
 
 /** Accessible, themable input component with status variants matching the Nice design system. */
 
-export { default } from "./components/Input"
+export { default, default as Input } from "./components/Input"
 export * from "./components/Input"

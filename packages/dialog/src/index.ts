@@ -3,5 +3,5 @@
 
 /** Dialog component for nice-react: a modal dialog built on the native <dialog> element. */
 
-export { default } from "./components/Dialog"
+export { default, default as Dialog } from "./components/Dialog"
 export * from "./components/Dialog"

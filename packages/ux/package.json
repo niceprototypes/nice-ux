@@ -21,6 +21,7 @@
   "sideEffects": false,
   "scripts": {
     "build": "rollup -c",
+    "test": "node --test",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

@@ -3,5 +3,5 @@
 
 /** Checkbox built on a native checkbox, with a token-driven box and a @niceprototypes/icon check. */
 
-export { default } from "./components/Checkbox"
+export { default, default as Checkbox } from "./components/Checkbox"
 export * from "./components/Checkbox"

@@ -3,6 +3,6 @@
 
 /** Popover component for nice-react: a portal-positioned surface anchored to an element. */
 
-export { default } from "./components/Popover"
+export { default, default as Popover } from "./components/Popover"
 export * from "./components/Popover"
 export { computeAnchorPosition } from "./services"

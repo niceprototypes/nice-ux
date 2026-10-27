@@ -3,7 +3,7 @@
 
 /** Flexible icon component with 30+ built-in icons and custom SVG support. */
 
-export { default } from "./components/Icon"
+export { default, default as Icon } from "./components/Icon"
 export * from "./components/Icon"
 export * from "./components/Illustration"
 export { iconNames } from "./constants"

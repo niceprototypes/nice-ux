@@ -3,5 +3,5 @@
 
 /** On/off switch built on a native checkbox. */
 
-export { default } from "./components/Toggle"
+export { default, default as Toggle } from "./components/Toggle"
 export * from "./components/Toggle"

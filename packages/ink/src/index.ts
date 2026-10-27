@@ -3,5 +3,5 @@
 
 /** Semantic ink component for nice-react with full token support. */
 
-export { default } from "./components/Ink"
+export { default, default as Ink } from "./components/Ink"
 export * from "./components/Ink"

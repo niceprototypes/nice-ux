@@ -3,5 +3,5 @@
 
 /** Stateless form container for nice-react. */
 
-export { default } from "./components/Form"
+export { default, default as Form } from "./components/Form"
 export * from "./components/Form"

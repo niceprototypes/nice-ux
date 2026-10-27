@@ -3,5 +3,5 @@
 
 /** The Nice Prototypes logo: the crystal heart illustration and the theme-aware logo name. */
 
-export { default } from "./components/Logo"
+export { default, default as Logo } from "./components/Logo"
 export * from "./components/Logo"

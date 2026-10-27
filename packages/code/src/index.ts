@@ -3,5 +3,5 @@
 
 /** Syntax-highlighted code block component for nice-react using Shiki and design tokens. */
 
-export { default } from "./components/Code"
+export { default, default as Code } from "./components/Code"
 export * from "./components/Code"

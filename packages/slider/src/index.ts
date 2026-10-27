@@ -3,5 +3,5 @@
 
 /** Animated vertical slider component. */
 
-export { default } from "./components/Slider"
+export { default, default as Slider } from "./components/Slider"
 export * from "./components/Slider"

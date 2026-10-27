@@ -3,6 +3,6 @@
 
 /** Flexible image component supporting img elements and background-image divs. */
 
-export { default } from "./components/Image"
+export { default, default as Image } from "./components/Image"
 export * from "./components/Image"
 export { registerVendorResolver } from "./services"
