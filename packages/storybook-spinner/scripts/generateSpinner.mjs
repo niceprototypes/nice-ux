@@ -86,6 +86,7 @@ const tokens = {
     iconSize: key("icon.size:larger"),
     iconColor: key("icon.color:base"),
     iconStrokeWidth: key("icon.strokeWidth:base"),
+    iconStrokeWidthScale: key("icon.strokeWidthScale:base"),
     iconAnimationDuration: key("icon.animationDuration:base"),
   },
   iconSize: value("icon.size:larger"),
@@ -99,10 +100,12 @@ const tokens = {
     day: {
       background: getToken("backgroundColor", "base", { as: "value", theme: "day" }),
       color: getToken("color", "base", { as: "value", theme: "day" }),
+      iconStrokeWidthScale: value("icon.strokeWidthScale:base", { theme: "day" }),
     },
     night: {
       background: getToken("backgroundColor", "base", { as: "value", theme: "night" }),
       color: getToken("color", "base", { as: "value", theme: "night" }),
+      iconStrokeWidthScale: value("icon.strokeWidthScale:base", { theme: "night" }),
     },
   },
 }

@@ -6,7 +6,7 @@
 export const SPINNER_HTML = "<div class=\"nsb-spinner\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 16 16\"><style>.base_svg__no-fill{fill:none}.base_svg__stroke{stroke:currentColor;stroke-width:1.5px;stroke-linecap:round;stroke-linejoin:round}</style><path d=\"M14.8 6.5c.1.5.2 1 .2 1.5 0 3.9-3.1 7-7 7s-7-3.1-7-7 3.1-7 7-7 1 0 1.4.1\" class=\"base_svg__no-fill base_svg__stroke\"></path></svg></div>"
 
 /** The icon's styled-components rules (class and keyframes namespaced). */
-export const SPINNER_CSS = ".nsb-spinner{width:var(--np--icon--size--larger);height:var(--np--icon--size--larger);color:var(--np--icon--color);display:flex;flex-shrink:0;justify-content:center;align-items:center;}.nsb-spinner img,.nsb-spinner svg{width:100%;height:100%;animation:nsb-spin var(--np--icon--animation-duration) linear infinite;}.nsb-spinner svg path,.nsb-spinner svg circle,.nsb-spinner svg rect,.nsb-spinner svg line,.nsb-spinner svg polyline,.nsb-spinner svg polygon,.nsb-spinner svg ellipse{vector-effect:non-scaling-stroke;fill:none;stroke:var(--np--icon--color);stroke-width:var(--np--icon--stroke-width);stroke-linecap:round;stroke-linejoin:round;}@keyframes nsb-spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}"
+export const SPINNER_CSS = ".nsb-spinner{width:var(--np--icon--size--larger);height:var(--np--icon--size--larger);color:var(--np--icon--color);display:flex;flex-shrink:0;justify-content:center;align-items:center;}.nsb-spinner img,.nsb-spinner svg{width:100%;height:100%;animation:nsb-spin var(--np--icon--animation-duration) linear infinite;}.nsb-spinner svg path,.nsb-spinner svg circle,.nsb-spinner svg rect,.nsb-spinner svg line,.nsb-spinner svg polyline,.nsb-spinner svg polygon,.nsb-spinner svg ellipse{vector-effect:non-scaling-stroke;fill:none;stroke:var(--np--icon--color);stroke-width:calc(var(--np--icon--stroke-width) * var(--np--icon--stroke-width-scale));stroke-linecap:round;stroke-linejoin:round;}@keyframes nsb-spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}"
 
 /** Token values (and the custom-property names the spinner CSS reads). */
 export const SPINNER_TOKENS = {
@@ -14,6 +14,7 @@ export const SPINNER_TOKENS = {
     "iconSize": "--np--icon--size--larger",
     "iconColor": "--np--icon--color",
     "iconStrokeWidth": "--np--icon--stroke-width",
+    "iconStrokeWidthScale": "--np--icon--stroke-width-scale",
     "iconAnimationDuration": "--np--icon--animation-duration"
   },
   "iconSize": "28px",
@@ -36,11 +37,13 @@ export const SPINNER_TOKENS = {
   "themes": {
     "day": {
       "background": "hsla(212, 10%, 100%, 1)",
-      "color": "hsla(210, 5%, 5%, 1)"
+      "color": "hsla(210, 5%, 5%, 1)",
+      "iconStrokeWidthScale": "1"
     },
     "night": {
       "background": "hsla(212, 10%, 15%, 1)",
-      "color": "hsla(210, 5%, 95%, 1)"
+      "color": "hsla(210, 5%, 95%, 1)",
+      "iconStrokeWidthScale": "0.9"
     }
   }
 } as const
