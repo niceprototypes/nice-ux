@@ -1,0 +1,6 @@
+{
+  "$schema": "../config-exports/src/schema.json",
+  "description": "Stateless form container for nice-react.",
+  "default": "Form",
+  "components": ["Form"]
+}
