@@ -1,0 +1,6 @@
+{
+  "$schema": "../config-exports/src/schema.json",
+  "description": "Syntax-highlighted code block component for nice-react using Shiki and design tokens.",
+  "default": "Code",
+  "components": ["Code"]
+}
