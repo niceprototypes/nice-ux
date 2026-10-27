@@ -8,7 +8,7 @@ Phases, in order: pre-monorepo → monorepo → storybook-rework → components 
 
 | id | item | evidence (file:line) | effort | package | phase |
 |---|---|---|---|---|---|
-| 1 | Owner instruction line cites `getCssConstant`; the API is `getConstant` / `getToken` (S003 Q1) | ~/.claude/CLAUDE.md:19; ~/AGENTS.md:19; styles/src/index.ts:52; react-styles/src/index.ts:40 | S | owner files | pre-monorepo |
+| 1 | DONE 2026-10-26 (getToken). Owner instruction line cites `getCssConstant`; the API is `getConstant` / `getToken` (S003 Q1) | ~/.claude/CLAUDE.md:19; ~/AGENTS.md:19; styles/src/index.ts:52; react-styles/src/index.ts:40 | S | owner files | pre-monorepo |
 | 2 | Publish backlog: no 2026-09/10 change is on npm; 17 packages never published. Ship as the first Changesets release (survey 002 step 7) | npm 404 for nice-react-{tabs,checkbox,toggle,dialog,select,calendar,field,popover}; npm nice-react-input 3.0.2 = local version with unpublished commits | M | all | monorepo |
 | 3 | Peer-range drift on runtime singletons; set one bounded range (`>=19.2.0 <20`, `>=6.1.18 <7`) through the workspace | react-scroll/package.json:38,40 (`>=18`, `>=6.0.0`); unbounded `>=19.2.0` in react-button, react-icon, react-input, react-slider, react-tile | S | 6 packages | monorepo |
 | 4 | Lift React-agnostic logic (setTokens, breakpoint `getCurrent`/subscribe, device detection) into nice-styles; react-styles re-exports, so no public break | react-styles/src/services/setTokens/index.ts:45-50; react-styles/src/services/withBreakpoints/useBreakpoint.ts:15; react-styles/src/components/StylesProvider/useDeviceDetection.ts:59 | M | styles, react-styles | monorepo |

@@ -89,7 +89,7 @@ import "nice-styles/reset.css"                        // optional; must load aft
 import App from "./App"
 
 createRoot(document.getElementById("root")!).render(
-  <StylesProvider googleFonts="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght,ROND@6..144,1..1000,37&family=Roboto+Mono:wght@100..700&display=swap">
+  <StylesProvider>
     <App />
   </StylesProvider>,
 )
