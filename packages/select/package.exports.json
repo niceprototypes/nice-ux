@@ -1,0 +1,6 @@
+{
+  "$schema": "../config-exports/src/schema.json",
+  "description": "Select for nice-react: a WAI-ARIA select-only combobox (Input + Popover + List) by default, or the native select with `native`.",
+  "default": "Select",
+  "components": ["Select"]
+}
