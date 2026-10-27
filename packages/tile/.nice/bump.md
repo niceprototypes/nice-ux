@@ -2,3 +2,6 @@
 [2026-09-16 15:11] patch: getToken call sites migrated to the token address form
 [2026-09-17 14:34] minor: backgroundColor and color accepts the object form — { name, transform } for channel-adjusted colours, resolved through resolveColorProp
 [2026-09-25 19:11] patch: Declare nice-* runtime packages as peer dependencies with a file: devDependency for local builds
+[2026-10-15 15:30] patch: Tile's default background and text color read tile.backgroundColor:base / tile.color:base, so setTokens({ tile: { … } }) now restyles the default surface
+[2026-10-15 15:38] patch: Drop the prepare script so installing the package as a file: dependency no longer runs a build
+[2026-10-15 15:42] patch: README rewritten for the current API

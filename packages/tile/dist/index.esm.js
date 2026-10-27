@@ -10,8 +10,8 @@ const OuterFlex$1 = styled(Flex).withConfig({
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  background-color: ${getToken("backgroundColor", "base")};
-  color: ${getToken("color", "base")};
+  background-color: ${getToken("tile.backgroundColor:base")};
+  color: ${getToken("tile.color:base")};
 
   ${({ $minWidth }) => $minWidth && css `min-width: ${$minWidth};`}
   ${({ $minHeight }) => $minHeight && css `min-height: ${$minHeight};`}

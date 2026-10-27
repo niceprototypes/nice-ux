@@ -20,8 +20,8 @@ const OuterFlex$1 = styled__default.default(Flex__default.default).withConfig({
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  background-color: ${niceReactStyles.getToken("backgroundColor", "base")};
-  color: ${niceReactStyles.getToken("color", "base")};
+  background-color: ${niceReactStyles.getToken("tile.backgroundColor:base")};
+  color: ${niceReactStyles.getToken("tile.color:base")};
 
   ${({ $minWidth }) => $minWidth && styled.css `min-width: ${$minWidth};`}
   ${({ $minHeight }) => $minHeight && styled.css `min-height: ${$minHeight};`}
