@@ -83,6 +83,37 @@ export type InputStatusType =
 export type InputFilledType = boolean
 
 /**
+ * InputGhostStateType
+ *
+ * An interaction state of the field, for `ghost`. Exactly one applies at a time.
+ *
+ * Values:
+ * - "rest": neither hovered nor focused
+ * - "hover": hovered, not focused
+ * - "focus": the native control is focused
+ */
+export type InputGhostStateType = "rest" | "hover" | "focus"
+
+/**
+ * InputGhostStatesType
+ *
+ * Which states are ghosted; a state left out is not.
+ */
+export type InputGhostStatesType = Partial<Record<InputGhostStateType, boolean>>
+
+/**
+ * InputGhostType
+ *
+ * Ghost: a transparent background and border, so only the text and padding show. Per state,
+ * or `true` for the common case: ghosted until focused (`{ rest: true, hover: true }`);
+ * focused, the field shows its normal colors (outline or filled, status and color props
+ * applied). `{ rest: true, hover: true, focus: true }` stays ghosted while focused too; a
+ * ghosted focus keeps a focus outline (`input.focusRing` width, color and offset) on
+ * `:focus-visible`.
+ */
+export type InputGhostType = boolean | InputGhostStatesType
+
+/**
  * InputElementType
  *
  * HTML input type attribute. MVP scope — text-style inputs only.
@@ -538,16 +569,32 @@ export interface InputBaseProps {
   pattern?: InputPatternType
 
   /**
-   * Interactive status (semantic variant)
+   * Interactive status (semantic variant). When unset, an invalid enclosing
+   * Field shows "error"
    * @default "base"
    */
   status?: InputStatusType
+
+  /**
+   * Disable the native control. Combined with `status="disabled"` (either one
+   * disables), as in Button; a disabled input takes the disabled styling
+   * whatever `status` is set to
+   * @default false
+   */
+  disabled?: InputDisabledType
 
   /**
    * Render filled instead of outlined
    * @default false
    */
   filled?: InputFilledType
+
+  /**
+   * Transparent background and border: `true` until focused, or per state (rest, hover, focus);
+   * a ghosted focus keeps a focus outline
+   * @default false
+   */
+  ghost?: InputGhostType
 
   /** Size variant — uses SizeType from nice-styles */
   size?: SizeType
@@ -711,6 +758,9 @@ namespace InputTypes {
   export type BorderRadius = InputBorderRadiusType
   export type Status = InputStatusType
   export type Filled = InputFilledType
+  export type Ghost = InputGhostType
+  export type GhostState = InputGhostStateType
+  export type GhostStates = InputGhostStatesType
   export type Element = InputElementType
   export type Disabled = InputDisabledType
   export type ReadOnly = InputReadOnlyType

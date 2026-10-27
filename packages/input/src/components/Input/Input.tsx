@@ -4,6 +4,7 @@ import { mergeDescribedBy, useField } from "nice-react-field"
 import { StyledControl, StyledField } from "./Input.styles"
 import { InputProps } from "./Input.types"
 import { isDisabled } from "../../utilities/isDisabled"
+import { resolveGhost } from "../../utilities/resolveGhost"
 
 const Input: React.FC<InputProps> = ({
   "aria-activedescendant": ariaActiveDescendant,
@@ -26,9 +27,11 @@ const Input: React.FC<InputProps> = ({
   defaultValue,
   dir,
   dirName,
+  disabled: disabledProp = false,
   end,
   enterKeyHint,
   filled = false,
+  ghost = false,
   id,
   inputMode,
   maxLength,
@@ -49,16 +52,21 @@ const Input: React.FC<InputProps> = ({
   size = "base",
   spellCheck,
   start,
-  status = "base",
+  status,
   style,
   type = "text",
   value,
   width = "full",
 }) => {
-  const disabled = isDisabled(status)
   // Enclosing Field wiring (null outside a Field): id for the label, the
   // description/error ids, invalid and required.
   const fieldContext = useField()
+  // An explicit `status` wins; otherwise an invalid Field shows the error status.
+  const resolvedStatus = status ?? (fieldContext?.invalid ? "error" : "base")
+  // Disabled when either the `disabled` prop or `status="disabled"` asks for it.
+  const disabled = disabledProp || isDisabled(resolvedStatus)
+  // A disabled input takes the disabled styling whichever way it was disabled.
+  const effectiveStatus = disabled ? "disabled" : resolvedStatus
 
   // Attributes that only exist on one element. `type` is an <input> attribute;
   // `rows` a <textarea> one; `pattern` does not apply to <select>/<textarea>.
@@ -80,8 +88,9 @@ const Input: React.FC<InputProps> = ({
       $borderWidth={borderWidth}
       $disabled={disabled}
       $filled={filled}
+      $ghost={resolveGhost(ghost)}
       $size={size}
-      $status={status}
+      $status={effectiveStatus}
       $width={width}
       className={className}
       style={style}

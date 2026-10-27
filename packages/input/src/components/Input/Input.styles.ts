@@ -6,6 +6,7 @@ import type {
   InputBackgroundColorType,
   InputBorderColorType,
   InputBorderRadiusType,
+  InputGhostStateType,
   InputStatusType,
   InputWidthType,
 } from "./Input.types"
@@ -58,7 +59,7 @@ export const StyledControl = styled.input.withConfig({
   outline: none;
   background: transparent;
   box-sizing: border-box;
-  font-family: inherit;
+  font-family: ${getToken("input.fontFamily:base")};
   /* Font floor: max(16px, core font size) — below 16px mobile browsers zoom on focus */
   font-size: ${getToken("input.fontSize:base")};
   -webkit-tap-highlight-color: transparent;
@@ -110,6 +111,13 @@ export const StyledControl = styled.input.withConfig({
   `}
 `
 
+/** Each ghost state's selector on the field; mutually exclusive. */
+const GHOST_SELECTORS: Record<InputGhostStateType, string> = {
+  rest: `&:not(:hover):not(:has(> ${StyledControl}:focus))`,
+  hover: `&:hover:not(:has(> ${StyledControl}:focus))`,
+  focus: `&:has(> ${StyledControl}:focus)`,
+}
+
 /**
  * Field chrome: the root element. Owns height, padding, border, radius,
  * background, status border colour, width and the focus ring, and lays out
@@ -126,6 +134,7 @@ export const StyledField = styled.div.withConfig({
   $borderWidth: BorderWidthType
   $disabled: boolean
   $filled: boolean
+  $ghost: Record<InputGhostStateType, boolean>
   $size: SizeType
   $status: InputStatusType
   $width: InputWidthType
@@ -135,6 +144,7 @@ export const StyledField = styled.div.withConfig({
     $size,
     $status,
     $filled,
+    $ghost,
     $borderWidth,
     $borderRadius,
     $backgroundColor,
@@ -179,17 +189,35 @@ export const StyledField = styled.div.withConfig({
       ? `border-color: ${resolveColorProp("input", "borderColor", $borderColor)};`
       : ""}
 
+    /* Focus: the border takes the focus color (mouse and keyboard alike); no
+       outline outside it. */
     &:has(> ${StyledControl}:focus) {
-      border-color: ${getToken("color", "base")};
+      border-color: ${getToken("input.focusRing.color:base")};
     }
 
-    /* Keyboard focus ring. The native control keeps outline: none; the ring is
-       drawn on the chrome whenever something inside it has :focus-visible, as
-       an outline so it adds no layout — the same look as Button. */
-    &:has(:focus-visible) {
-      outline: ${getToken("input.focusRing.width:base")} solid
-        ${getToken("input.focusRing.color:base")};
-      outline-offset: ${getToken("input.focusRing.offset:base")};
-    }
+    /* Ghost: in each ghosted state only the text and padding show. One state applies at a
+       time (focus > hover > rest); after the focus rule above, so a ghosted focus wins. */
+    ${(Object.keys($ghost) as InputGhostStateType[])
+      .filter((state) => $ghost[state])
+      .map(
+        (state) => css`
+          ${GHOST_SELECTORS[state]} {
+            background-color: transparent;
+            border-color: transparent;
+          }
+        `,
+      )}
+
+    /* Ghosted focus hides the focus border, so the field draws the focus ring as an
+       outline instead. :focus-visible — text controls match it on pointer focus too. */
+    ${$ghost.focus
+      ? css`
+          &:has(> ${StyledControl}:focus-visible) {
+            outline: ${getToken("input.focusRing.width:base")} solid
+              ${getToken("input.focusRing.color:base")};
+            outline-offset: ${getToken("input.focusRing.offset:base")};
+          }
+        `
+      : ""}
   `}
 `

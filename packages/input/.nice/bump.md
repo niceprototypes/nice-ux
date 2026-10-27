@@ -10,3 +10,8 @@
 [2026-09-24 20:04] minor: Accept role, aria-expanded, aria-controls, aria-activedescendant, aria-haspopup and aria-autocomplete on Input's native control
 [2026-09-24 20:04] patch: Do not emit placeholder on the native select
 [2026-09-25 19:12] patch: Declare nice-* runtime packages as peer dependencies with a file: devDependency for local builds
+[2026-10-08 22:00] minor: Add ghost: a transparent background and border, true until focused or per state (rest, hover, focus)
+[2026-10-08 22:00] patch: Focus colors the field border with input.focusRing.color for mouse and keyboard focus alike, replacing the keyboard-only outline ring; the font family reads the input.fontFamily token
+[2026-10-15 15:23] patch: Ghosted focus keeps a focus outline from the input.focusRing tokens
+[2026-10-15 15:24] minor: Add a disabled prop to Input, combined with status="disabled" as in Button
+[2026-10-15 15:38] patch: Show the error status inside an invalid Field

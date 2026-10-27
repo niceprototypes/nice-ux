@@ -5,6 +5,7 @@ import "@testing-library/jest-dom"
 import { getToken } from "nice-react-styles"
 import { Field } from "nice-react-field"
 import Input from "./Input"
+import { resolveGhost } from "../../utilities/resolveGhost"
 import type { InputProps } from "./Input.types"
 
 /** CSS text of every styled-components rule that targets one of `el`'s classes. */
@@ -74,6 +75,60 @@ describe("Input", () => {
     expect(el).toBeDisabled()
     await user.type(el, "x")
     expect(mockOnChange).not.toHaveBeenCalled()
+  })
+
+  describe("disabled", () => {
+    it("disables the native control and blocks typing", async () => {
+      const user = userEvent.setup()
+      render(
+        <Input
+          aria-label="name"
+          disabled
+          onChange={mockOnChange}
+        />
+      )
+      const el = screen.getByRole("textbox")
+      expect(el).toBeDisabled()
+      await user.type(el, "x")
+      expect(mockOnChange).not.toHaveBeenCalled()
+    })
+
+    it("applies the same disabled styling as status=\"disabled\"", () => {
+      const { unmount } = render(<Input aria-label="x" status="disabled" />)
+      const byStatus = screen.getByRole("textbox")
+      const statusControlCss = cssFor(byStatus)
+      const statusFieldCss = cssFor(byStatus.parentElement!)
+      unmount()
+
+      render(<Input aria-label="x" disabled status="error" />)
+      const byProp = screen.getByRole("textbox")
+      const controlCss = cssFor(byProp)
+      const fieldCss = cssFor(byProp.parentElement!)
+      expect(controlCss).toContain(`color:${getToken("color", "disabled")}`)
+      expect(fieldCss).toContain("cursor:not-allowed")
+      // status="error" is overridden: the border is the disabled (base) one.
+      expect(fieldCss).not.toContain(getToken("borderColor", "error"))
+      expect(controlCss).toBe(statusControlCss)
+      expect(fieldCss).toBe(statusFieldCss)
+    })
+
+    it("leaves the control enabled when neither disabled nor status=\"disabled\" is set", () => {
+      render(<Input aria-label="x" disabled={false} status="base" />)
+      expect(screen.getByRole("textbox")).toBeEnabled()
+    })
+
+    it("disables select and textarea too", () => {
+      render(
+        <>
+          <Input as="select" aria-label="s" disabled>
+            <option value="a">A</option>
+          </Input>
+          <Input as="textarea" aria-label="t" disabled />
+        </>
+      )
+      expect(screen.getByRole("combobox", { name: "s" })).toBeDisabled()
+      expect(screen.getByRole("textbox", { name: "t" })).toBeDisabled()
+    })
   })
 
   it("forwards type attribute", () => {
@@ -487,6 +542,50 @@ describe("Input", () => {
       expect(container.querySelector('[aria-invalid="false"]')).toBeNull()
     })
 
+    it("shows the error border when the Field is invalid and no status is set", () => {
+      render(
+        <Field
+          label="Email"
+          invalid
+        >
+          <Input />
+        </Field>
+      )
+      const fieldCss = cssFor(screen.getByRole("textbox").parentElement!)
+      expect(fieldCss).toContain(getToken("borderColor", "error"))
+    })
+
+    it("keeps an explicit status inside an invalid Field", () => {
+      render(
+        <Field
+          label="Email"
+          invalid
+        >
+          <Input status="success" />
+        </Field>
+      )
+      const fieldCss = cssFor(screen.getByRole("textbox").parentElement!)
+      expect(fieldCss).toContain(getToken("borderColor", "success"))
+      expect(fieldCss).not.toContain(getToken("borderColor", "error"))
+    })
+
+    it("shows the disabled styling when disabled inside an invalid Field", () => {
+      render(
+        <Field
+          label="Email"
+          invalid
+        >
+          <Input disabled />
+        </Field>
+      )
+      const control = screen.getByRole("textbox")
+      expect(control).toBeDisabled()
+      expect(cssFor(control)).toContain(`color:${getToken("color", "disabled")}`)
+      expect(cssFor(control.parentElement!)).not.toContain(
+        getToken("borderColor", "error")
+      )
+    })
+
     it("is required when the Field is required", () => {
       render(
         <Field
@@ -531,17 +630,14 @@ describe("Input", () => {
     )
   })
 
-  it("draws the keyboard focus ring on the wrapper via :has(:focus-visible)", () => {
+  it("shows focus as the border color, with no outline", () => {
     render(<Input aria-label="x" />)
     const control = screen.getByRole("textbox")
     const css = cssFor(control.parentElement!)
-    expect(css).toMatch(/:has\(:focus-visible\)\{[^}]*outline:/)
-    expect(css).toContain(
-      `${getToken("input.focusRing.width:base")} solid ${getToken("input.focusRing.color:base")}`
+    expect(css).toMatch(
+      new RegExp(`:focus\\)\\{border-color:${getToken("input.focusRing.color:base").replace(/[()]/g, "\\$&")};\\}`)
     )
-    expect(css).toContain(
-      `outline-offset:${getToken("input.focusRing.offset:base")}`
-    )
+    expect(css).not.toContain("outline")
     expect(cssFor(control)).toContain("outline:none")
   })
 
@@ -753,6 +849,62 @@ describe("Input", () => {
       />
     )
     expect(screen.getByRole("textbox")).toBeInTheDocument()
+  })
+
+  describe("ghost", () => {
+    const GHOST = "{background-color:transparent;border-color:transparent;}"
+    const fieldCss = () => cssFor(screen.getByRole("textbox").parentElement!)
+
+    it("true ghosts rest and hover, not focus", () => {
+      render(<Input aria-label="x" ghost />)
+      const css = fieldCss()
+      expect(css).toContain(`:not(:hover):not(:has(>`)
+      expect(css).toMatch(/:hover:not\(:has\(>[^{]*:focus\)\)\{background-color:transparent;border-color:transparent;\}/)
+      expect(css).not.toMatch(/[^t]\(?:has\(>[^{]*:focus\)\{background-color:transparent/)
+    })
+
+    it("a states object ghosts only the states it names", () => {
+      render(<Input aria-label="x" ghost={{ focus: true }} />)
+      const css = fieldCss()
+      expect(css).toMatch(/:has\(>[^{]*:focus\)\{background-color:transparent;border-color:transparent;\}/)
+      expect(css).not.toContain(":not(:hover)")
+      expect(css).not.toMatch(/:hover:not/)
+    })
+
+    it("ghosts every state, focus included", () => {
+      render(<Input aria-label="x" ghost={{ rest: true, hover: true, focus: true }} />)
+      expect(fieldCss().split(GHOST).length - 1).toBe(3)
+    })
+
+    it("emits no ghost rule by default", () => {
+      render(<Input aria-label="x" />)
+      expect(fieldCss()).not.toContain(GHOST)
+    })
+
+    it("a ghosted focus draws the focus ring as an outline on focus-visible", () => {
+      render(<Input aria-label="x" ghost={{ rest: true, hover: true, focus: true }} />)
+      const escape = (value: string) => value.replace(/[()]/g, "\\$&")
+      expect(fieldCss()).toMatch(
+        new RegExp(
+          `:has\\(>[^{]*:focus-visible\\)\\{outline:${escape(getToken("input.focusRing.width:base"))} solid ${escape(getToken("input.focusRing.color:base"))};outline-offset:${escape(getToken("input.focusRing.offset:base"))};\\}`
+        )
+      )
+    })
+
+    it("draws no focus outline unless focus is ghosted", () => {
+      render(<Input aria-label="x" ghost />)
+      const css = fieldCss()
+      expect(css).not.toContain(":focus-visible")
+      expect(css).not.toContain("outline")
+    })
+  })
+
+  describe("resolveGhost", () => {
+    it("expands true to rest and hover, and an object to its named states", () => {
+      expect(resolveGhost(true)).toEqual({ rest: true, hover: true, focus: false })
+      expect(resolveGhost(false)).toEqual({ rest: false, hover: false, focus: false })
+      expect(resolveGhost({ focus: true })).toEqual({ rest: false, hover: false, focus: true })
+    })
   })
 
   it("forwards readOnly", () => {
