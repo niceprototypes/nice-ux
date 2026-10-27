@@ -1,0 +1,458 @@
+# Storybook Story Architecture
+
+This document outlines the file structure and patterns for component stories in `nice-storybook`.
+
+---
+
+## Component docs pattern (current — follow this)
+
+Reference implementations: `stories/React/Components/Button/` and the Forms components (`Input`, `Select`, `Calendar`, `DateField`, `Field`, restructured 2026-09-25, storybook `cb6279b`). Every component uses the same four pieces; no page is hand-laid-out. Piece 4 (lifecycle story) exists on Select, Form, List and Popover so far — to be replaced by Playground stories (`../backlog.md` #12).
+
+**1. Example data — `{Component}/examples/index.tsx` (+ `examples.types.ts`)**
+- One export per facet, `{component}{Facet}`: `{ name, description, variants, default?, preview(item), code(item) }` with `satisfies ComponentExample`. `description` is a plain string; `code(item)` returns the snippet shown beside the preview.
+- `{component}Examples` — object of all facets; key order is page order.
+- `{component}ExampleList = Object.values({component}Examples)`.
+- Stateful demos are small components in the same file. (Button's data lives in `src/dataTables/data/tables/componentDemoTable/`; Forms keep theirs in the component folder — both are valid, keep one per component.)
+
+**2. Main page — `{Component}.mdx`**, in this order:
+```mdx
+<Meta title="Components/{Group}/{Component}" />
+<StoryHeader title="…" description="one sentence" repos={[…]} />   {/* repos only if the package has a git remote */}
+<NewLines count={3} />
+<Install package="react-{name}" />
+<NewLines />
+```jsx import + minimal usage ```
+<NewLines count={3} />
+<LifecycleStory steps={{component}LifecycleSteps} render={render{Component}Lifecycle} />   {/* piece 4 */}
+<NewLines count={3} />
+<ComponentDemoTable examples={{component}ExampleList} />
+<NewLines count={3} />
+## Guide
+```
+The Guide section follows the **Scenario style** (`stories/Scenarios/*.mdx`): plain Markdown paragraphs, fenced code blocks for anything longer than one line, Markdown tables for keyboard maps, and one `<Callout>` for the key takeaway. No `<Ink color="light">` prose blocks, no inline-HTML `<code>` runs, no `Line` dividers, no hand-escaped template strings for prose-level examples, one heading level (`## Guide`, `###` inside if needed).
+
+**3. Prop pages — `{Prop}.mdx`, one line of content:**
+```mdx
+<Meta title="Components/{Group}/{Component}/{prop}" />
+<ComponentExampleStory example={{component}Examples.{prop}} />
+```
+Keep Meta titles stable — they are the page ids other pages and sequences link to.
+
+**4. Lifecycle story — `Lifecycle.mdx`** (`Components/{Group}/{Component}/lifecycle`), also embedded on the main page after the usage block. Required for every UI component, besides the prop pages.
+- What: the real component, driven automatically through its UX lifecycle (e.g. rest → selected → disabled → invalid), looping. Shared helper `src/components/LifecycleStory` (`steps` + `render`); steps and the render function live in `examples/index.tsx` as `{component}LifecycleSteps` / `render{Component}Lifecycle`.
+- How a state is reached: props or controlled state only — never synthetic DOM events. A state with no controlling prop (CSS `:hover` / `:focus-visible`, internal `open`) is left out and listed as missing controllability in the plan, not faked.
+- Timing: each step is held for a `lifecycleStep` token variant (`src/nice/tokens.ts`, `base` / `long`); a step picks a variant name, never a number of ms.
+- The helper renders the demo region `inert` with `pointer-events: none` (no pointer or keyboard interaction), and labels the current state in a caption under it. With `prefers-reduced-motion: reduce` it does not advance: it shows the first step and lists every step's label.
+- Reference: `stories/React/Components/Select/Lifecycle.mdx`.
+
+**Gotchas:** props discriminated on a boolean (e.g. Select `native`) — branch the JSX per variant (`native={boolean}` does not type-check); Select `children` must be an array, not a Fragment; wide previews (Calendar) need their own width handling — the demo cell is 16em.
+
+**New packages in stories:** Vite resolves registry packages marked `sourceAliasable` through source aliases, but `tsc` does not — add every package a story imports to storybook's `package.json` (`file:../…`) and relink, or the typecheck reports TS2307.
+
+> The sections below describe the older `<Story variables>` / `stories/*.story.tsx` pattern. It is **legacy** — kept for reference until remaining pages are migrated; do not use it for new pages.
+
+---
+
+## Directory Structure
+
+Each component story follows this structure:
+
+```
+stories/Components/{Component}/
+├── {Component}.stories.tsx     # Main stories file with meta + story exports
+├── {Component}.services.ts     # Helper logic, constants, demo components
+├── {Component}.styles.ts       # Styled components (if needed)
+├── index.ts                    # Re-exports
+└── stories/
+    ├── Basic.story.tsx         # Individual story render functions
+    ├── Size.story.tsx
+    └── {PropName}.story.tsx
+```
+
+---
+
+## File Responsibilities
+
+### {Component}.stories.tsx
+
+The main stories file contains:
+- Meta object (must be inline for Storybook CSF static analysis)
+- Story exports that reference render functions from `./stories/`
+
+```tsx
+import type { Meta, StoryObj } from "@storybook/react"
+import Button from "nice-react-button"
+import BasicStory from "./stories/Basic.story"
+import SizeStory from "./stories/Size.story"
+
+const meta = {
+  title: "Components/Forms/Button",
+  component: Button,
+  parameters: {
+    layout: "padded",
+    docs: {
+      source: { code: null },
+      canvas: { sourceState: "none" },
+    },
+  },
+  argTypes: {
+    // ... prop definitions
+  },
+} satisfies Meta<typeof Button>
+
+export default meta
+type Story = StoryObj<typeof meta>
+
+export const Basic: Story = {
+  name: "basic",
+  render: BasicStory,
+}
+
+export const Size: Story = {
+  name: "size",
+  render: SizeStory,
+}
+```
+
+**Important:** The `meta` object must be defined inline. Storybook's CSF static analyzer cannot resolve imported meta objects.
+
+---
+
+### stories/{PropName}.story.tsx
+
+Individual story files export a render function that returns the `<Story>` component:
+
+```tsx
+import Button from "nice-react-button"
+import Story from "../../../../src/components/Story"
+
+const SizeStory = () => (
+  <Story
+    variables={[
+      {
+        name: "smaller",
+        description: 'size="smaller"',
+        demo: (
+          <Button onClick={() => {}} size="smaller">
+            Smaller
+          </Button>
+        ),
+        code: `<Button\n+1onClick={handler}\n+1size="smaller"\n>\n+1{children}\n</Button>`,
+      },
+      {
+        name: "base",
+        description: 'size="base"',
+        default: true,
+        demo: (
+          <Button onClick={() => {}} size="base">
+            Base
+          </Button>
+        ),
+        code: `<Button onClick={handler}>\n+1{children}\n</Button>`,
+      },
+      // ... more variants
+    ]}
+  />
+)
+
+export default SizeStory
+```
+
+---
+
+### {Component}.services.ts/.tsx
+
+Contains helper logic, constants, and demo components used across stories:
+
+```tsx
+// Flex.services.ts
+import { getToken } from "nice-react-styles"
+
+export const twoDots = [
+  {
+    color: getToken("color", "error"),
+    height: getToken("size", "smaller"),
+    width: getToken("size", "smaller"),
+  },
+  {
+    color: getToken("color", "warning"),
+    height: getToken("size", "smaller"),
+    width: getToken("size", "smaller"),
+  },
+]
+
+export const threeDots = [
+  ...twoDots,
+  {
+    color: getToken("color", "link"),
+    height: getToken("size", "smaller"),
+    width: getToken("size", "smaller"),
+  },
+]
+```
+
+```tsx
+// Tile.services.tsx
+import Flex from "nice-react-flex"
+import Ink from "nice-react-ink"
+
+export const SampleContent = () => (
+  <Flex direction="column" gap="small">
+    <Ink as="h2" weight="bold">
+      Section Title
+    </Ink>
+    <Ink color="medium">
+      Lorem ipsum dolor sit amet.
+    </Ink>
+  </Flex>
+)
+```
+
+---
+
+### {Component}.styles.ts
+
+Styled components specific to the story demos (if needed):
+
+```ts
+// Most components don't need custom styles
+// {Component}.styles.ts
+
+// Component story styles
+// No custom styled components needed for {Component} stories
+```
+
+---
+
+### index.ts
+
+Simple re-export:
+
+```ts
+export * from "./{Component}.stories"
+```
+
+---
+
+## Story Variable Object
+
+Each story uses the `<Story>` component with a `variables` array:
+
+```ts
+interface StoryVariable {
+  name: string              // Display name for the variant
+  description?: string      // Prop usage description (e.g., 'size="small"')
+  value?: string           // Token value display (e.g., "12px")
+  default?: boolean        // Mark as default variant
+  demo: React.ReactNode    // Live demo component
+  code?: string            // Code snippet (uses +N for indentation)
+}
+```
+
+### Code Snippet Format
+
+Code snippets use `+N` prefix for indentation levels:
+
+```ts
+code: `<Button\n+1onClick={handler}\n+1size="large"\n>\n+1{children}\n</Button>`
+```
+
+Renders as:
+```tsx
+<Button
+  onClick={handler}
+  size="large"
+>
+  {children}
+</Button>
+```
+
+---
+
+## Naming Conventions
+
+| File | Pattern | Example |
+|------|---------|---------|
+| Main stories | `{Component}.stories.tsx` | `Button.stories.tsx` |
+| Individual story | `{PropName}.story.tsx` | `Size.story.tsx` |
+| Services | `{Component}.services.ts` or `.tsx` | `Flex.services.ts` |
+| Styles | `{Component}.styles.ts` | `Button.styles.ts` |
+| Story function | `{PropName}Story` | `SizeStory` |
+
+---
+
+## Import Patterns
+
+### From story files to services
+
+```tsx
+// stories/Basic.story.tsx
+import { twoDots } from "../Flex.services"
+```
+
+### From story files to shared components
+
+```tsx
+// stories/Size.story.tsx
+import Story from "../../../../src/components/Story"
+import DemoDots from "../../../../src/components/DemoDots"
+```
+
+---
+
+## Sidebar Hierarchy
+
+Stories are organized by category via the `title` field:
+
+```
+Welcome/
+├── Design Tokens
+├── Design Patterns
+└── UI Components
+Tokens/
+├── Browse
+├── Responsive
+└── Icons
+React/
+├── Styles/
+│   ├── StylesProvider
+│   ├── getToken
+│   └── setTokens
+├── Components/
+│   ├── Forms/                  # grouped folder: Button, Input (sorted first)
+│   ├── Code, Flex, Icon, Image, Ink
+│   ├── Lightbox, Scroll, Slider, Tile, Tooltip
+└── Hooks/
+    ├── useBreakpoint
+    ├── useDevice
+    └── useTheme
+Configuration/
+├── NPM
+├── Vite
+├── TypeScript
+├── Jest
+└── Rollup
+```
+
+**Grouped folders** are title segments, not directories: `Tokens/Colors/color` and `Components/Forms/Input` group pages in the sidebar while the files stay flat on disk (`stories/Tokens/generated/`, `stories/React/Components/Input/`). Each grouped folder needs a matching entry in `.storybook/preview.tsx` `storySort` ahead of the `"*"` wildcard — for Components, `["Forms", ["*", ["Docs", "Tokens", "*"]], "*", ["Docs", "Tokens", "*"]]` — or the nested Docs/Tokens ordering stops applying one level down. Form components (the Part C form slice: Input, Button, and future form packages) are titled `Components/Forms/{Component}`.
+
+Each section has an MDX docs page (e.g., `stories/Styles/Styles.mdx` with `<Meta title="Tokens" />`). Component/hook stories use a companion MDX file attached via `<Meta of={Stories} />` with `<Stories />` to render all stories inline.
+
+### Code Blocks
+
+Use the `CodeBlock` component for code examples in story render functions:
+
+```tsx
+import CodeBlock from "../../src/components/CodeBlock"
+
+<CodeBlock>{`const x = 1`}</CodeBlock>
+```
+
+Do not use inline `<pre>/<code>` with repeated style objects. Do not use `<Source>` from `@storybook/addon-docs/blocks` inside story render functions — it requires DocsContext which only exists in MDX docs pages.
+
+---
+
+## Meta Object Constraints
+
+Due to Storybook's CSF (Component Story Format) static analysis:
+
+1. **Meta must be inline** - Cannot import from separate file
+2. **Meta must use `satisfies`** - For proper type inference
+3. **Default export required** - `export default meta`
+
+```tsx
+// ✅ Correct
+const meta = { ... } satisfies Meta<typeof Component>
+export default meta
+
+// ❌ Will fail - Storybook can't statically analyze imported meta
+import { meta } from "./Component.meta"
+export default meta
+
+// ❌ Will fail - Re-export also doesn't work
+export { meta as default } from "./Component.meta"
+```
+
+---
+
+## Layout Parameters
+
+| Layout | Usage |
+|--------|-------|
+| `padded` | Standard component demos with padding |
+| `fullscreen` | Full-width components (Tile, Scroll, Slider) |
+
+---
+
+## Documentation
+
+Component descriptions and setup instructions are written in companion MDX files, not generated via JavaScript. The `generateDescriptionString` service has been removed.
+
+Each component has an MDX file that attaches to its stories via `<Meta of={Stories} />` and renders stories inline with `<Stories />`:
+
+```mdx
+import { Meta, Stories } from '@storybook/addon-docs/blocks'
+import * as ButtonStories from './Button.stories'
+
+<Meta of={ButtonStories} />
+
+# Button
+
+Install and import:
+
+\`\`\`bash
+npm install nice-react-button
+\`\`\`
+
+\`\`\`tsx
+import Button from "nice-react-button"
+\`\`\`
+
+<Stories />
+```
+
+---
+
+## Code Examples in MDX
+
+Story MDX files pair a live demo with a code snippet rendered by `@storybook/addon-docs` `<Source>`. Two formats are supported; pick per demo, not per file.
+
+### Option 1 — `toSource()` (auto-formatted)
+
+Import from `src/services`. Pass a tag name, a props object, and optional `children` / `raw` options.
+
+```tsx
+import { toSource } from '../../../src/services'
+
+<Source language="tsx" code={toSource("Ink", { as: "h1" }, { children: "h1" })} />
+```
+
+Formatting rules:
+
+| Inputs | Output |
+|--------|--------|
+| No props, no children | `<Tag />` |
+| No props, children | `<Tag>\n  children\n</Tag>` |
+| 1–2 props, no children | `<Tag a="1" b="2" />` — single line |
+| Anything else | multi-line — one prop per line |
+
+Options: `children` inserts a string between tags; `raw: { onClick: "handler" }` emits unquoted JSX expressions.
+
+Use when iterating many variants of the same tag via `.map()`.
+
+### Option 2 — Template literal (hand-written)
+
+```tsx
+<Source language="tsx" code={`<Flex direction="${value}">\n  {children}\n</Flex>`} />
+```
+
+Use when the opening tag must stay on one line with children, when children are a `{children}` placeholder, or when the shape does not match the `toSource()` rules.
+
+### Picking one
+
+| Scenario | Use |
+|----------|-----|
+| Array of variants mapped over a single tag | `toSource()` |
+| Children are a `{children}` placeholder | template literal |
+| Short tag with one prop that should stay on one line | template literal |
+| Prop values include raw JSX expressions or identifiers | `toSource()` with `raw` |
