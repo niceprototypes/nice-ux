@@ -14,7 +14,7 @@ import {
   StickySection,
   FadeOnScroll,
   useScroll
-} from 'nice-react-scroll'
+} from '@niceprototypes/scroll'
 import styled from 'styled-components'
 
 const Header = styled.header`
@@ -220,7 +220,7 @@ export default function CompleteExample() {
   Sticky,
   FadeOnScroll,
   useScroll
-} from 'nice-react-scroll'`}
+} from '@niceprototypes/scroll'`}
                 </pre>
               </FadeOnScroll>
             </Content>

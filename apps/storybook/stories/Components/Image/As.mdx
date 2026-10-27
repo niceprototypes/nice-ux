@@ -1,0 +1,83 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../src/components/Story"
+import Image from "@niceprototypes/image"
+import Ink from "../../../src/nice/Ink"
+import Flex from "@niceprototypes/flex"
+import { DataTableRow } from "../../../src/components/DataTable"
+import { DEMO_CODE_COLUMNS } from "../../../src/components/DataTable"
+import { toSource } from "../../../src/services"
+import Tile from "@niceprototypes/tile"
+
+<Meta title="Components/Image/as" />
+
+<StoryHeader title="as" />
+
+<Ink color="light">Renders the image as either an</Ink>
+<Ink color="light" code>&lt;img&gt;</Ink>
+<Ink color="light">element (default) or a</Ink>
+<Ink color="light" code>&lt;div&gt;</Ink>
+<Ink color="light">with a background image — the latter allows overlaying children on top.</Ink>
+
+<DataTableRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+          <Image
+      vendor
+      src="622"
+      alt="Standard img element"
+      width="240px"
+      height="320px"
+      backgroundSize="cover"
+    />,
+          toSource("Image", {
+      vendor: true,
+      src: "622",
+    }),
+        ]}
+/>
+
+<DataTableRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+          <Image
+      vendor
+      as="div"
+      src="622"
+      alt="Background image div"
+      width="800px"
+      height="600px"
+      backgroundSize="cover"
+      borderRadius="base"
+      style={{ maxWidth: "100%" }}
+    >
+      <Flex
+        direction="column"
+        justifyContent="flex-end"
+      >
+        <Tile
+          spacing="large"
+        >
+          <Ink
+            mode="night"
+            color="base"
+            align="center"
+            weight="bold"
+          >
+            Overlay content
+          </Ink>
+        </Tile>
+      </Flex>
+    </Image>,
+          toSource(
+      "Image",
+      {
+        vendor: true,
+        as: "div",
+        src: "622",
+        borderRadius: "base",
+      },
+      { children: "<h1>Overlay content</h1>" }
+    ),
+        ]}
+/>
+

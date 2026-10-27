@@ -31,14 +31,14 @@ export interface InjectHeadConfig {
 /**
  * JS-only head manager — resolves every source to head resources and writes
  * them into `<head>`. The framework-free counterpart to the `<Head>` component,
- * exactly as `injectFonts` is to `FontLoader` in `nice-styles`.
+ * exactly as `injectFonts` is to `FontLoader` in `@niceprototypes/styles`.
  *
  * Call once at startup. SSR-safe and idempotent.
  *
  * @returns A cleanup function removing what this call created.
  *
  * @example
- * import { injectHead } from "nice-react-head"
+ * import { injectHead } from "@niceprototypes/head"
  *
  * injectHead({
  *   seo: { title: "Nice Prototypes", canonical: "https://niceprototypes.com/" },

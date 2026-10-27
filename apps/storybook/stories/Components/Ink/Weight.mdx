@@ -1,0 +1,30 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../src/components/Story"
+import Ink from "../../../src/nice/Ink"
+import StoryDescription from "../../../src/components/StoryDescription"
+import { DEMO_CODE_COLUMNS } from "../../../src/components/DataTable"
+import { DataTable } from "../../../src/components/DataTable"
+import { toSource } from "../../../src/services"
+
+<Meta title="Components/Ink/weight" />
+
+<StoryHeader title="weight" />
+
+<StoryDescription property="font-weight">
+  Sets the font thickness using fontWeight tokens.
+</StoryDescription>
+
+<DataTable
+  showHeader={false}
+  columns={DEMO_CODE_COLUMNS}
+  tables={[{ rows: ["light", "base", "medium", "semibold", "bold", "extrabold", "black"].map(
+    weight => ({
+      id: weight,
+      values: [
+        <Ink weight={weight}>{weight}</Ink>,
+        toSource("Ink", { weight }, { children: weight }),
+      ],
+    })
+  ) }]}
+/>
+

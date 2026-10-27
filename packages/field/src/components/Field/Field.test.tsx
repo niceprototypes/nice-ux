@@ -6,7 +6,7 @@ import { Field as WrappedField } from "./index"
 import { useField } from "../../hooks/useField"
 import { mergeDescribedBy } from "../../services/mergeDescribedBy"
 
-/** A control that applies the Field wiring the way nice-react-input will. */
+/** A control that applies the Field wiring the way @niceprototypes/input will. */
 const Control: React.FC<{ "aria-describedby"?: string }> = ({ "aria-describedby": consumer }) => {
   const field = useField()
   return (

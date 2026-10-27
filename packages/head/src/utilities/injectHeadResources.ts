@@ -35,7 +35,7 @@ function applyAttributes(element: Element, attributes: Record<string, unknown>):
  * SSR-safe (no-ops without a DOM) and idempotent — every element is tagged with
  * `data-nice-head` keyed by identity, and an existing match is updated rather
  * than duplicated. The same contract `injectFontLinks` provides in
- * `nice-styles`.
+ * `@niceprototypes/styles`.
  *
  * Inline scripts are the reason this exists at all. React 19 hoists external
  * async scripts but gives inline ones no treatment, so anything with a body has

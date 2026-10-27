@@ -1,6 +1,6 @@
 import styled from "styled-components"
-import { Illustration } from "nice-react-icon"
-import { getToken } from "nice-react-styles"
+import { Illustration } from "@niceprototypes/icon"
+import { getToken } from "@niceprototypes/styles"
 import type { LogoGapType, LogoHeightType, LogoNameHeightScaleType } from "./Logo.types"
 
 /**
@@ -22,7 +22,7 @@ export const StyledLogo = styled.span<{ $height?: LogoHeightType; $gap: LogoGapT
 `
 
 /**
- * The heart: nice-react-icon's illustration, square at the logo's full height instead of an
+ * The heart: @niceprototypes/icon's illustration, square at the logo's full height instead of an
  * icon size. Doubled class so these sizes win over the illustration's own icon-size rules.
  */
 export const StyledHeart = styled(Illustration)`

@@ -1,5 +1,5 @@
 import * as React from "react"
-import { withBreakpoints, type WithBreakpointsProps } from "nice-react-styles"
+import { withBreakpoints, type WithBreakpointsProps } from "@niceprototypes/styles"
 import BaseSelect from "./Select"
 import type { SelectProps } from "./Select.types"
 

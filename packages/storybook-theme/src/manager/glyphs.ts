@@ -1,4 +1,4 @@
-import { getIconEncoded } from "nice-icons/get-icon-encoded"
+import { getIconEncoded } from "@niceprototypes/icon/get-icon-encoded"
 
 /**
  * Inject the sidebar glyph stylesheet into the manager document: the Nice

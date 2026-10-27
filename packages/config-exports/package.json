@@ -1,5 +1,5 @@
 {
-  "name": "nice-config-exports",
+  "name": "@niceprototypes/config-exports",
   "version": "1.0.1",
   "type": "module",
   "description": "Package export generator (nice-generate-exports) for the nice-* ecosystem",
@@ -27,16 +27,18 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/niceprototypes/nice-config-exports.git"
+    "url": "git+https://github.com/niceprototypes/nice-ux.git",
+    "directory": "packages/config-exports"
   },
   "bugs": {
-    "url": "https://github.com/niceprototypes/nice-config-exports/issues"
+    "url": "https://github.com/niceprototypes/nice-ux/issues"
   },
-  "homepage": "https://github.com/niceprototypes/nice-config-exports#readme",
+  "homepage": "https://github.com/niceprototypes/nice-ux/tree/main/packages/config-exports#readme",
   "devDependencies": {
     "@types/node": "^25.6.0",
-    "typescript": "^6.0.0"
+    "typescript": "catalog:"
   },
   "peerDependencies": {},
-  "dependencies": {}
+  "dependencies": {},
+  "private": true
 }

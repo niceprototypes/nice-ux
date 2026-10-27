@@ -1,5 +1,5 @@
-import Flex from "nice-react-flex"
-import { getToken } from "nice-react-styles"
+import Flex from "@niceprototypes/flex"
+import { getToken } from "@niceprototypes/styles"
 import { DemoDotsProps } from "./DemoDots.types"
 import DemoDot from "./DemoDot"
 import { trackStyle } from "../../dataTables/utilities/dots"

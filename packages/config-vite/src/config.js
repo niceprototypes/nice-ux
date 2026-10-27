@@ -1,12 +1,12 @@
 import os from 'node:os'
 import path from 'node:path'
 import { createRequire } from 'node:module'
-import { getSourceAliases, viteWatcher } from 'nice-vite-watcher'
+import { getSourceAliases, viteWatcher } from '@niceprototypes/vite-watcher'
 
 const require = createRequire(import.meta.url)
-// The package registry (nice-toolkit/registry.json): every nice-* package, its local
+// The package registry (@niceprototypes/toolkit/registry.json): every nice-* package, its local
 // path, and whether it can be aliased to its source.
-const registry = require('nice-toolkit/registry')
+const registry = require('@niceprototypes/toolkit/registry')
 
 /** Packages every nice-* package must share a single copy of with the app. */
 const SHARED_PACKAGES = ['react', 'react-dom', 'styled-components']
@@ -52,7 +52,7 @@ export const createNiceViteConfig = ({ appRoot, liveLinks = false }) => {
 
   return {
     resolve: {
-      dedupe: [...SHARED_PACKAGES, 'nice-react-icon', 'nice-styles'],
+      dedupe: [...SHARED_PACKAGES, '@niceprototypes/icon', '@niceprototypes/styles'],
       preserveSymlinks: false,
       alias: [...sharedAliases, ...liveAliases],
     },

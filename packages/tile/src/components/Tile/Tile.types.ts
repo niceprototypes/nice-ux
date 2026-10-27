@@ -1,5 +1,5 @@
 import * as React from "react"
-import type { FlexSpacingType, FlexProps } from "nice-react-flex"
+import type { FlexSpacingType, FlexProps } from "@niceprototypes/flex"
 import type {
   ThemeType,
   GapType,
@@ -7,13 +7,13 @@ import type {
   BackgroundSizeType,
   ColorTokenProp,
   ColorType,
-} from "nice-react-styles"
+} from "@niceprototypes/styles"
 import type { TileInkProps } from "../TileContent/TileContent.types"
 
 /**
  * TileBackgroundColorType
  *
- * @token Re-export of BackgroundColorType from nice-styles. Token-bound —
+ * @token Re-export of BackgroundColorType from @niceprototypes/styles. Token-bound —
  * raw CSS color strings are not accepted. Use `backgroundImage` for
  * gradients or image URLs.
  */
@@ -22,7 +22,7 @@ export type TileBackgroundColorType = BackgroundColorType
 /**
  * TileBackgroundSizeType
  *
- * @token Re-export of BackgroundSizeType from nice-styles. Token-bound —
+ * @token Re-export of BackgroundSizeType from @niceprototypes/styles. Token-bound —
  * raw CSS background-size strings are not accepted.
  */
 export type TileBackgroundSizeType = BackgroundSizeType
@@ -30,7 +30,7 @@ export type TileBackgroundSizeType = BackgroundSizeType
 /**
  * TileColorType
  *
- * @token Re-export of ColorType from nice-styles. Token-bound —
+ * @token Re-export of ColorType from @niceprototypes/styles. Token-bound —
  * raw CSS color strings are not accepted.
  */
 export type TileColorType = ColorType
@@ -86,7 +86,7 @@ export type { TileInkProps }
 /**
  * TileAlignItemsType
  *
- * Re-export of the `alignItems` prop shape from nice-react-flex.
+ * Re-export of the `alignItems` prop shape from @niceprototypes/flex.
  * Accepts a single value or a breakpoint object for responsive alignment.
  */
 export type TileAlignItemsType = NonNullable<FlexProps["alignItems"]>
@@ -94,7 +94,7 @@ export type TileAlignItemsType = NonNullable<FlexProps["alignItems"]>
 /**
  * TileJustifyContentType
  *
- * Re-export of the `justifyContent` prop shape from nice-react-flex.
+ * Re-export of the `justifyContent` prop shape from @niceprototypes/flex.
  * Accepts a single value or a breakpoint object for responsive justification.
  */
 export type TileJustifyContentType = NonNullable<FlexProps["justifyContent"]>

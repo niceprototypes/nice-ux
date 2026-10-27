@@ -1,4 +1,4 @@
-# nice-react-slider
+# @niceprototypes/slider
 
 > **Responsive props:** Every prop accepts per-breakpoint overrides via the `breakpoints` array. See [withBreakpoints](https://niceprototypes.com/storybook/?path=/docs/react-styles-withbreakpoints--docs).
 
@@ -7,7 +7,7 @@ A smooth, animated vertical slider component for React applications with styled-
 ## Installation
 
 ```bash
-npm install nice-react-slider
+npm install @niceprototypes/slider
 ```
 
 ## Peer Dependencies
@@ -21,7 +21,7 @@ npm install react styled-components
 ## Usage
 
 ```tsx
-import Slider from 'nice-react-slider'
+import Slider from '@niceprototypes/slider'
 import { useState } from 'react'
 
 function App() {

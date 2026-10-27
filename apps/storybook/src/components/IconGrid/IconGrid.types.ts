@@ -1,4 +1,4 @@
-import type { IconNameType } from "nice-react-icon"
+import type { IconNameType } from "@niceprototypes/icon"
 
 export interface IconGridItem {
   name: IconNameType

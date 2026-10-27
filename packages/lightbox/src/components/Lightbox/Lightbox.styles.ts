@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { getToken } from "nice-react-styles"
+import { getToken } from "@niceprototypes/styles"
 
 export const Trigger = styled.div`
   cursor: pointer;

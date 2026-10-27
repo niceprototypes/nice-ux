@@ -1,9 +1,9 @@
 import * as React from "react"
-import Flex from "nice-react-flex"
-import Icon from "nice-react-icon"
+import Flex from "@niceprototypes/flex"
+import Icon from "@niceprototypes/icon"
 import Ink from "../../nice/Ink"
 import styled from "styled-components"
-import { getToken } from "nice-styles"
+import { getToken } from "@niceprototypes/styles"
 import Line from "../Line"
 
 /**

@@ -1,5 +1,5 @@
 {
-  "name": "nice-config-jest",
+  "name": "@niceprototypes/config-jest",
   "version": "1.0.0",
   "type": "module",
   "description": "Shared Jest configuration for the nice-* ecosystem",
@@ -18,12 +18,13 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/niceprototypes/nice-config-jest.git"
+    "url": "git+https://github.com/niceprototypes/nice-ux.git",
+    "directory": "packages/config-jest"
   },
   "bugs": {
-    "url": "https://github.com/niceprototypes/nice-config-jest/issues"
+    "url": "https://github.com/niceprototypes/nice-ux/issues"
   },
-  "homepage": "https://github.com/niceprototypes/nice-config-jest#readme",
+  "homepage": "https://github.com/niceprototypes/nice-ux/tree/main/packages/config-jest#readme",
   "peerDependencies": {
     "@testing-library/jest-dom": ">=6.0.0",
     "jest": ">=29.0.0",
@@ -47,5 +48,9 @@
     "typescript": {
       "optional": true
     }
+  },
+  "private": true,
+  "devDependencies": {
+    "typescript": "catalog:"
   }
 }

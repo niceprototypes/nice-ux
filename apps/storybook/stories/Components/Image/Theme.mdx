@@ -1,0 +1,44 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../src/components/Story"
+import Image from "@niceprototypes/image"
+import Ink from "../../../src/nice/Ink"
+import { DataTableRow } from "../../../src/components/DataTable"
+import { DEMO_CODE_COLUMNS } from "../../../src/components/DataTable"
+import { toSource } from "../../../src/services"
+
+export const baseProps = {
+  vendor: true,
+  width: "240px",
+  height: "320px",
+  backgroundSize: "cover",
+  borderRadius: "base",
+}
+export const dayProps = { ...baseProps, alt: "Day theme", theme: "day" }
+export const nightProps = { ...baseProps, alt: "Night theme", theme: "night" }
+
+<Meta title="Components/Image/theme" />
+
+<StoryHeader title="theme" />
+
+<Ink color="light">Pins the</Ink>
+<Ink color="light" code>borderRadius</Ink>
+<Ink color="light">token resolution to a specific theme. Use this when the containing app is in one theme but a specific image should resolve tokens from another (e.g. locking an image frame to</Ink>
+<Ink color="light" code>"day"</Ink>
+<Ink color="light">tokens inside a night theme panel).</Ink>
+
+<DataTableRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+          <Image {...dayProps} />,
+          toSource("Image", dayProps),
+        ]}
+/>
+
+<DataTableRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+          <Image {...nightProps} />,
+          toSource("Image", nightProps),
+        ]}
+/>
+

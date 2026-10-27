@@ -2,7 +2,7 @@
 
 ## Overview
 
-Successfully implemented IntersectionObserver-based performance improvements to nice-react-scroll, resulting in dramatic performance gains across all scroll-based operations.
+Successfully implemented IntersectionObserver-based performance improvements to @niceprototypes/scroll, resulting in dramatic performance gains across all scroll-based operations.
 
 ## Changes Implemented
 

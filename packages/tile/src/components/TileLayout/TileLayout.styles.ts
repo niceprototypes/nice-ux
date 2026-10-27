@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components"
-import Flex from "nice-react-flex"
+import Flex from "@niceprototypes/flex"
 import type { TileMaxWidthType } from "../Tile/Tile.types"
 
 export const OuterFlex = styled(Flex).withConfig({

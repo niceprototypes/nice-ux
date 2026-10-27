@@ -1,6 +1,6 @@
 import { addons } from "storybook/manager-api"
 import { DARK_MODE_EVENT_NAME } from "storybook-dark-mode"
-import { applyTheme } from "nice-styles"
+import { applyTheme } from "@niceprototypes/styles"
 import { ADDON_ID } from "./constants"
 import { injectSidebarGlyphs } from "./manager/glyphs"
 import { startSidebarTagging } from "./manager/tagSidebarPaths"
@@ -9,7 +9,7 @@ import { managerBackgroundCss } from "./styles/managerBackgroundCss"
 import { managerSidebarCss } from "./styles/managerSidebarCss"
 
 /**
- * Manager entry. Loaded by Storybook from `nice-storybook-theme/manager`.
+ * Manager entry. Loaded by Storybook from `@niceprototypes/storybook-theme/manager`.
  * Runs on import: restyles the sidebar tree (glyphs + token-driven branch lines
  * + hidden search) and keeps its tokens flipping with the theme. Only the
  * sidebar is configured here — the consumer keeps ownership of the manager theme
@@ -31,7 +31,7 @@ injectSidebarGlyphs()
 startSidebarTagging()
 
 // Mirror storybook-dark-mode into <html data-theme="night|day"> so the sidebar's
-// nice tokens flip on toggle (nice-styles keys theming on [data-theme]).
+// nice tokens flip on toggle (@niceprototypes/styles keys theming on [data-theme]).
 const syncTheme = (isDark: boolean) => applyTheme(isDark ? "night" : "day")
 addons.register(`${ADDON_ID}/theme-sync`, () => {
   addons.getChannel().on(DARK_MODE_EVENT_NAME, syncTheme)

@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { getToken } from "nice-react-styles"
+import { getToken } from "@niceprototypes/styles"
 
 /**
  * Field root. Stacks label → control → description → error; the spacing

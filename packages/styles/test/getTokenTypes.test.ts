@@ -41,7 +41,7 @@ test('getToken overloads accept valid addresses and reject invalid ones at compi
 })
 
 test('a custom group declared on CustomTokenVariants type-checks through the built package', () => {
-  // Resolves 'nice-styles' to dist/ by self-reference, so it runs against the build like the other tests
+  // Resolves '@niceprototypes/styles' to dist/ by self-reference, so it runs against the build like the other tests
   const { status, output } = typecheck('customTokens.typecheck.ts')
   assert.equal(status, 0, output)
 })

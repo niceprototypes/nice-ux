@@ -1,9 +1,9 @@
-import { Illustration } from "nice-react-icon"
-// Illustrations are nice-icons' fixed-color surface (distinct from the monochrome
+import { Illustration } from "@niceprototypes/icon"
+// Illustrations are @niceprototypes/icon' fixed-color surface (distinct from the monochrome
 // icon set). Read the names from the data-only illustration catalog (no SVG
 // imports). Unlike icons, illustrations are never recolored — the preview renders
 // them at their authored colors.
-import { illustrationNames } from "nice-icons/illustration-catalog"
+import { illustrationNames } from "@niceprototypes/icon/illustration-catalog"
 import Code from "../../../../nice/Code"
 import { DataTable, withCopyAffordance } from "../../../../components/DataTable"
 import type { DataColumn, DataTableConfig } from "../../../../components/DataTable"
@@ -58,7 +58,7 @@ export default function IllustrationDemoTable({ codeColumns }: IllustrationTable
       (column, index): DataColumn => ({
         key: `code-${index}`,
         header: column.header,
-        render: "nice-react-code",
+        render: "@niceprototypes/code",
         language: "tsx",
       })
     ),

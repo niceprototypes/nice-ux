@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Theme } from "nice-react-styles"
+import { Theme } from "@niceprototypes/styles"
 import { StyledForm } from "./Form.styles"
 import { FormProps } from "./Form.types"
 
@@ -8,7 +8,7 @@ import { FormProps } from "./Form.types"
  *
  * Renders a semantic `<form>`, stacks its children vertically, and forwards
  * the submit event. It owns no field state; the consumer manages values (e.g.
- * via nice-react-input's controlled `value` / `onChange`). Form applies no
+ * via @niceprototypes/input's controlled `value` / `onChange`). Form applies no
  * spacing — wrap children in a `Flex` if you want a gap.
  *
  * @example

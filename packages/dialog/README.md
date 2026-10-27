@@ -1,4 +1,4 @@
-# nice-react-dialog
+# @niceprototypes/dialog
 
 A modal dialog component for React. Renders a controlled native `<dialog>`
 shown with `showModal()`, with Escape and backdrop-click dismiss, focus return
@@ -7,16 +7,16 @@ and page scroll lock. Part of the Nice Prototypes ecosystem.
 ## Install
 
 ```bash
-npm install nice-react-dialog
+npm install @niceprototypes/dialog
 ```
 
-Peer dependencies: `react` (>=19.2), `styled-components` (>=6.1.18), `nice-react-styles`.
+Peer dependencies: `react` (>=19.2), `styled-components` (>=6.1.18), `@niceprototypes/styles`.
 
 ## Usage
 
 ```tsx
 import * as React from "react"
-import Dialog from "nice-react-dialog"
+import Dialog from "@niceprototypes/dialog"
 
 const DeleteInvoice = () => {
   const [open, setOpen] = React.useState(false)
@@ -71,7 +71,7 @@ const DeleteInvoice = () => {
 
 ## Tokens
 
-All from `nice-styles` (`src/tokens/components/dialog.json`); override any of them
+All from `@niceprototypes/styles` (`src/tokens/components/dialog.json`); override any of them
 with `setTokens({ dialog: { … } })` to restyle Dialog without props. The defaults
 equal the previous core-token values and the user-agent `<dialog>` defaults.
 

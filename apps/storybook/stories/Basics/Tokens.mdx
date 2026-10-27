@@ -38,7 +38,7 @@ import { DataTable } from "../../src/components/DataTable"
 />
 
 ```css
-@import "nice-styles/tokens.css";
+@import "@niceprototypes/styles/tokens.css";
 
 .message {
   color: var(--np--color);
@@ -64,7 +64,7 @@ import { DataTable } from "../../src/components/DataTable"
 />
 
 ```css
-@import "nice-styles/tokens.css";
+@import "@niceprototypes/styles/tokens.css";
 
 :root {
   --color: var(--np--color);
@@ -98,7 +98,7 @@ import { DataTable } from "../../src/components/DataTable"
 <Ink>Use the</Ink>
 <Ink code>getToken</Ink>
 <Ink>function and CSS variables provided by</Ink>
-<Ink code>nice-styles</Ink>
+<Ink code>@niceprototypes/styles</Ink>
 <Ink>for vanilla JS:</Ink>
 
 <Install
@@ -106,8 +106,8 @@ import { DataTable } from "../../src/components/DataTable"
 />
 
 ```js
-import { getToken } from "nice-styles"
-import "nice-styles/tokens.css"
+import { getToken } from "@niceprototypes/styles"
+import "@niceprototypes/styles/tokens.css"
 
 // Create HTML element
 const card = document.createElement("div")
@@ -132,7 +132,7 @@ document.body.append(card)
 />
 
 ```tsx
-import { getToken } from "nice-react-styles"
+import { getToken } from "@niceprototypes/styles"
 
 export default function Card({ children }) {
   return (
@@ -153,7 +153,7 @@ export default function Card({ children }) {
 <Ink code>StylesProvider</Ink><Ink>:</Ink>
 
 ```tsx
-import { StylesProvider } from "nice-react-styles"
+import { StylesProvider } from "@niceprototypes/styles"
 
 <NewLines />
 
@@ -180,7 +180,7 @@ export default function App() {
 ```tsx
 // Card.tsx
 
-import { getToken } from "nice-react-styles"
+import { getToken } from "@niceprototypes/styles"
 import styled from "styled-components"
 
 const Card = styled.div`
@@ -196,7 +196,7 @@ export default Card
 <Ink code>StylesProvider</Ink><Ink>:</Ink>
 
 ```tsx
-import { StylesProvider } from "nice-react-styles"
+import { StylesProvider } from "@niceprototypes/styles"
 import styled from "styled-components"
 import Card from "./Card"
 
@@ -225,7 +225,7 @@ export default function App() {
 <Ink>can now consume the tokens:</Ink>
 
 ```tsx
-import { StylesProvider } from "nice-react-styles"
+import { StylesProvider } from "@niceprototypes/styles"
 import "../tokens.ts"
 import "../App"
 
@@ -243,7 +243,7 @@ import "../App"
 <Ink>once on module load:</Ink>
 
 ```ts
-import { setTokens } from "nice-react-styles"
+import { setTokens } from "@niceprototypes/styles"
 
 setTokens({
   // Static module
@@ -268,7 +268,7 @@ setTokens({
 <Ink>New tokens can be accessed by the getter function:</Ink>
 
 ```tsx
-import { getToken } from "nice-react-styles"
+import { getToken } from "@niceprototypes/styles"
 
 const Card = ({ children }) => (
   <div
@@ -289,7 +289,7 @@ const Card = ({ children }) => (
 <Ink>Adjust a token's channels without leaving the token system. The result is still a token underneath, so it keeps following day and night:</Ink>
 
 ```tsx
-import { getToken } from "nice-react-styles"
+import { getToken } from "@niceprototypes/styles"
 
 getToken("color:highlight", { transform: [null, null, 40, null] })
 // hsl(from var(--np--color--highlight) h s 40)

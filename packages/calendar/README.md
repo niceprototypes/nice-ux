@@ -1,15 +1,15 @@
-# nice-react-calendar
+# @niceprototypes/calendar
 ![Calendar](docs/calendar.png)
 
 Date selection for React. `Calendar` is an ISO-date month grid with locale week
 start and RTL-aware keyboard navigation; `DateField` is a picker field built on
-`nice-react-input` and `nice-react-popover`. Part of the Nice Prototypes
+`@niceprototypes/input` and `@niceprototypes/popover`. Part of the Nice Prototypes
 ecosystem.
 
 ## Install
 
 ```bash
-npm install nice-react-calendar
+npm install @niceprototypes/calendar
 ```
 
 Peer dependencies: `react`, `react-dom` (>=19.2), `styled-components` (>=6.1.18).
@@ -21,7 +21,7 @@ Multi-component package: named exports only, no default.
 ### Calendar
 
 ```tsx
-import { Calendar } from "nice-react-calendar"
+import { Calendar } from "@niceprototypes/calendar"
 
 const [date, setDate] = React.useState<string | null>("2026-09-24")
 
@@ -31,7 +31,7 @@ const [date, setDate] = React.useState<string | null>("2026-09-24")
 ### DateField
 
 ```tsx
-import { DateField } from "nice-react-calendar"
+import { DateField } from "@niceprototypes/calendar"
 
 <form>
   <DateField name="start" aria-label="Start date" defaultValue="2026-09-24" />
@@ -41,11 +41,11 @@ import { DateField } from "nice-react-calendar"
 
 ### Inside a Field
 
-`DateField` renders through `Input`, so a nice-react-field `Field` wires the
+`DateField` renders through `Input`, so a @niceprototypes/field `Field` wires the
 label, description and error with no extra props.
 
 ```tsx
-import { Field } from "nice-react-field"
+import { Field } from "@niceprototypes/field"
 
 <Field label="Start date" description="First day of the booking">
   <DateField name="start" value={start} onChange={setStart} />
@@ -66,7 +66,7 @@ the numbering system still follows the locale (e.g. Arabic-Indic digits for
 
 ### RTL
 
-Direction comes from `useLocale()` (nice-react-styles): `StylesProvider`'s `dir`,
+Direction comes from `useLocale()` (@niceprototypes/styles): `StylesProvider`'s `dir`,
 else `document.documentElement.dir`, else the locale. Under RTL, ArrowLeft /
 ArrowRight are mirrored (ArrowLeft moves to the next day) and the month
 navigation carets swap. Layout uses flex on the inline axis, so the header and

@@ -16,7 +16,7 @@ import Ink from "../../src/nice/Ink"
 <Ink as="h3">Setup</Ink>
 
 ```js
-import { viteWatcher } from "nice-vite-watcher"
+import { viteWatcher } from "@niceprototypes/vite-watcher"
 ```
 
 <Line />
@@ -48,7 +48,7 @@ Browser reloads
 <Ink as="h4">Vite Only</Ink>
 
 <Ink>This plugin is for Vite projects (including Storybook with Vite). For webpack/CRA projects, use</Ink>
-<Ink code>nice-toolkit --dev --watch</Ink>
+<Ink code>@niceprototypes/toolkit --dev --watch</Ink>
 <Ink>instead.</Ink>
 
 <Line />
@@ -60,14 +60,14 @@ Browser reloads
 ```typescript
 // vite.config.ts
 import { defineConfig } from 'vite'
-import { viteWatcher } from 'nice-vite-watcher'
+import { viteWatcher } from '@niceprototypes/vite-watcher'
 
 export default defineConfig({
   plugins: [
     viteWatcher({
       packages: {
-        'nice-react-button': '/Users/me/Code/nice-react-button',
-        'nice-react-icon': '/Users/me/Code/nice-react-icon',
+        '@niceprototypes/button': '/Users/me/Code/nice-react-button',
+        '@niceprototypes/icon': '/Users/me/Code/nice-react-icon',
       },
       verbose: true,
     }),
@@ -93,22 +93,22 @@ export default defineConfig({
 <Ink>Generates Vite resolve aliases pointing to package source files. Use this for packages without special build transforms to get true HMR with state preservation.</Ink>
 
 ```typescript
-import { getSourceAliases } from 'nice-vite-watcher'
+import { getSourceAliases } from '@niceprototypes/vite-watcher'
 
 const linkedPackages = {
-  'nice-react-button': '/Users/me/Code/nice-react-button',
-  'nice-react-icon': '/Users/me/Code/nice-react-icon',
+  '@niceprototypes/button': '/Users/me/Code/nice-react-button',
+  '@niceprototypes/icon': '/Users/me/Code/nice-react-icon',
 }
 
 // Only alias packages that don't need build transforms
 const aliases = getSourceAliases(
   linkedPackages,
-  ['nice-react-button'],  // These get aliased to src/
+  ['@niceprototypes/button'],  // These get aliased to src/
   'index.ts'              // Entry point (default)
 )
 
 // Result:
-// { 'nice-react-button': '/Users/me/Code/nice-react-button/src/index.ts' }
+// { '@niceprototypes/button': '/Users/me/Code/nice-react-button/src/index.ts' }
 ```
 
 <Line />
@@ -120,16 +120,16 @@ const aliases = getSourceAliases(
 ```typescript
 // vite.config.ts
 import { defineConfig } from 'vite'
-import { viteWatcher, getSourceAliases } from 'nice-vite-watcher'
+import { viteWatcher, getSourceAliases } from '@niceprototypes/vite-watcher'
 
 const linkedPackages = {
-  'nice-react-button': '/Users/me/Code/nice-react-button',
-  'nice-react-icon': '/Users/me/Code/nice-react-icon',  // Uses SVGR
-  'nice-react-flex': '/Users/me/Code/nice-react-flex',
+  '@niceprototypes/button': '/Users/me/Code/nice-react-button',
+  '@niceprototypes/icon': '/Users/me/Code/nice-react-icon',  // Uses SVGR
+  '@niceprototypes/flex': '/Users/me/Code/nice-react-flex',
 }
 
 // Packages without special build transforms
-const sourceAliasable = ['nice-react-button', 'nice-react-flex']
+const sourceAliasable = ['@niceprototypes/button', '@niceprototypes/flex']
 
 export default defineConfig({
   plugins: [
@@ -166,10 +166,10 @@ export default defineConfig({
 
 ```typescript
 // .storybook/main.ts
-import { viteWatcher, getSourceAliases } from 'nice-vite-watcher'
+import { viteWatcher, getSourceAliases } from '@niceprototypes/vite-watcher'
 
 const linkedPackages = {
-  'nice-react-button': '../react-button',
+  '@niceprototypes/button': '../react-button',
 }
 
 const config: StorybookConfig = {

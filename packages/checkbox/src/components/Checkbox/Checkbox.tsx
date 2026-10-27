@@ -1,14 +1,14 @@
 import * as React from "react"
-import Icon from "nice-react-icon"
-import { Theme } from "nice-react-styles"
-import { useField } from "nice-react-field"
+import Icon from "@niceprototypes/icon"
+import { Theme } from "@niceprototypes/styles"
+import { useField } from "@niceprototypes/field"
 import { StyledBox, StyledCheck, StyledCheckbox, StyledCheckboxLabel, StyledInput } from "./Checkbox.styles"
 import type { CheckboxProps } from "./Checkbox.types"
 
 /**
  * Checkbox replaces the native checkbox's look: a native `<input type="checkbox">` stays the
  * focus target and keyboard handler (Space toggles), invisible over a token-driven box that
- * shows a nice-react-icon check when checked. With `children`, the root is a `<label>` holding
+ * shows a @niceprototypes/icon check when checked. With `children`, the root is a `<label>` holding
  * the box and the label text, so clicking the text toggles it too. Without `children`, name it
  * with `aria-label` or `aria-labelledby`.
  *

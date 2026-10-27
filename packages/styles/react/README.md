@@ -1,11 +1,11 @@
-# nice-react-styles
+# @niceprototypes/styles
 
-React bindings for [nice-styles](https://github.com/niceprototypes/nice-styles): the `StylesProvider` and `Theme` components, `setTokens`, breakpoint hooks, and a re-export of the nice-styles token API — so a React app imports from one package.
+React bindings for [@niceprototypes/styles](https://github.com/niceprototypes/nice-styles): the `StylesProvider` and `Theme` components, `setTokens`, breakpoint hooks, and a re-export of the @niceprototypes/styles token API — so a React app imports from one package.
 
 ## Installation
 
 ```bash
-npm install nice-styles nice-react-styles
+npm install @niceprototypes/styles @niceprototypes/styles
 ```
 
 Peer dependencies: `react` and `react-dom` 19.2+, `styled-components` 6.1.18+.
@@ -16,7 +16,7 @@ Import the generated CSS once, set your tokens at module load, and wrap the app:
 
 ```ts
 // src/nice/tokens.ts
-import { setTokens } from "nice-react-styles"
+import { setTokens } from "@niceprototypes/styles"
 
 export const getToken = setTokens({
   breakpoints: { laptop: 1100 },                                // thresholds (optional)
@@ -28,9 +28,9 @@ export const getToken = setTokens({
 
 ```tsx
 // src/index.tsx
-import "nice-styles/tokens.css"
+import "@niceprototypes/styles/tokens.css"
 import "./nice/tokens"
-import { StylesProvider } from "nice-react-styles"
+import { StylesProvider } from "@niceprototypes/styles"
 
 root.render(
   <StylesProvider>
@@ -45,7 +45,7 @@ root.render(
 
 ```tsx
 import styled from "styled-components"
-import { getToken, getBreakpoint } from "nice-react-styles"
+import { getToken, getBreakpoint } from "@niceprototypes/styles"
 
 const Card = styled.div`
   padding: ${getToken("gap")};                               /* var(--np--gap) */
@@ -61,16 +61,16 @@ getToken("color", "base", { theme: "night" })                // "var(--np--color
 getToken("button.icon.size:small")                           // component token
 ```
 
-`getToken` is the single getter for every token kind; `listTokens` enumerates them (`listTokens({ prefix: "button" })`). See the nice-styles README for options.
+`getToken` is the single getter for every token kind; `listTokens` enumerates them (`listTokens({ prefix: "button" })`). See the @niceprototypes/styles README for options.
 
 ### Typing custom tokens
 
-The `getToken` that `setTokens` returns (Setup above) already accepts the map's groups and variants; import it from `src/nice/tokens.ts` and no declaration is needed. The plain `getToken` re-export accepts only declared groups and variants (`TokenAddress`, `TokenVariants`); to type it for a group added with `setTokens` (`brandColor` above), declare the group on the `CustomTokenVariants` interface. Augment it on `"nice-styles"`, where the interface is declared:
+The `getToken` that `setTokens` returns (Setup above) already accepts the map's groups and variants; import it from `src/nice/tokens.ts` and no declaration is needed. The plain `getToken` re-export accepts only declared groups and variants (`TokenAddress`, `TokenVariants`); to type it for a group added with `setTokens` (`brandColor` above), declare the group on the `CustomTokenVariants` interface. Augment it on `"@niceprototypes/styles"`, where the interface is declared:
 
 ```ts
-import { setTokens } from "nice-react-styles"
+import { setTokens } from "@niceprototypes/styles"
 
-declare module "nice-styles" {
+declare module "@niceprototypes/styles" {
   interface CustomTokenVariants {
     brandColor: "primary"
   }
@@ -79,7 +79,7 @@ declare module "nice-styles" {
 setTokens({ brandColor: { primary: "#dc0000" } })
 ```
 
-`declare module "nice-react-styles"` also merges, because nice-react-styles re-exports `CustomTokenVariants` from nice-styles; before that re-export (nice-react-styles 15.0.1 and earlier) it declared an unrelated interface and `getToken` still rejected the group, with no error on the declaration. `"nice-styles"` works with every version.
+`declare module "@niceprototypes/styles"` also merges, because @niceprototypes/styles re-exports `CustomTokenVariants` from @niceprototypes/styles; before that re-export (@niceprototypes/styles 15.0.1 and earlier) it declared an unrelated interface and `getToken` still rejected the group, with no error on the declaration. `"@niceprototypes/styles"` works with every version.
 
 ## API
 
@@ -100,7 +100,7 @@ setTokens({ brandColor: { primary: "#dc0000" } })
 | `useDevice()` | `{ isMobile, userAgent, mobileUserAgents }` when `StylesProvider detectDevice` is set. |
 | `useTheme()` | `{ theme }` from the OS color-scheme preference when `StylesProvider detectTheme` is set. |
 
-### Re-exported from nice-styles
+### Re-exported from @niceprototypes/styles
 
 `getToken`, `listTokens`, `registry`, `registerTokens`, `getConstant`, `getConstantKey`, `getBreakpoint`, `getBreakpointValue`, `applyTheme`, `transformColor`, `getTextHeight`, `isStyleValue`, `parseGoogleFontsUrl`, `parseAdobeFontsUrl`, the breakpoint constants (`BREAKPOINTS`, `BREAKPOINT_ORDER`, `SETTABLE_BREAKPOINTS`, …), and the token and style-value types, including `TokenAddress`, `TokenGroup`, `TokenVariants`, `TokenInverseVariants`, and `CustomTokenVariants`.
 
@@ -122,9 +122,9 @@ Self-hosted fonts: pass a stylesheet of `@font-face` rules through `links`:
 </StylesProvider>
 ```
 
-The `fontFamily` `base` and `heading` tokens (nice-styles) default to a stack of fonts already on the device and need no loading: `'Helvetica Neue', Inter, Roboto, 'Arial Nova', 'Nimbus Sans', Arial, sans-serif`; `code` defaults to `ui-monospace, 'Source Code Pro', Menlo, Consolas, monospace`. To use another family, load it here and override `fontFamily` with `setTokens`.
+The `fontFamily` `base` and `heading` tokens (@niceprototypes/styles) default to a stack of fonts already on the device and need no loading: `'Helvetica Neue', Inter, Roboto, 'Arial Nova', 'Nimbus Sans', Arial, sans-serif`; `code` defaults to `ui-monospace, 'Source Code Pro', Menlo, Consolas, monospace`. To use another family, load it here and override `fontFamily` with `setTokens`.
 
-`StylesProvider` imports `nice-styles/tokens.css`; it does not load `nice-styles/reset.css` (import that yourself, after `tokens.css` — see the nice-styles README).
+`StylesProvider` imports `@niceprototypes/styles/tokens.css`; it does not load `@niceprototypes/styles/reset.css` (import that yourself, after `tokens.css` — see the @niceprototypes/styles README).
 
 ## Breakpoint keys
 

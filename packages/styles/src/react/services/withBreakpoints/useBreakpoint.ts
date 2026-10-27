@@ -4,7 +4,7 @@ import {
   BREAKPOINT_PHONE,
   SETTABLE_BREAKPOINTS,
   type BreakpointName,
-} from "nice-styles"
+} from "../../../index"
 
 /**
  * Compute the current viewport's breakpoint name from `window.innerWidth`.
@@ -60,7 +60,7 @@ export const subscribe = (onChange: () => void): (() => void) => {
  *   `BREAKPOINT_TABLET` / `BREAKPOINT_LAPTOP` / `BREAKPOINT_DESKTOP`.
  *
  * @example
- * import { useBreakpoint, BREAKPOINT_DESKTOP } from "nice-react-styles"
+ * import { useBreakpoint, BREAKPOINT_DESKTOP } from "../../../index"
  *
  * const Component = () => {
  *   const bp = useBreakpoint()

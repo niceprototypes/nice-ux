@@ -12,7 +12,7 @@ import {
   Sticky,
   StickySectionLinks,
   StickySection
-} from 'nice-react-scroll'
+} from '@niceprototypes/scroll'
 import styled from 'styled-components'
 
 const Header = styled.header`
@@ -115,7 +115,7 @@ export default function SectionNavigationExample() {
         <StickySection id="installation">
           <Section>
             <h2>Installation</h2>
-            <pre>npm install nice-react-scroll</pre>
+            <pre>npm install @niceprototypes/scroll</pre>
           </Section>
         </StickySection>
 

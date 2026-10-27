@@ -6,12 +6,12 @@ import {
   BackgroundColorType,
   BorderColorType,
   ColorTokenProp,
-} from "nice-react-styles"
+} from "@niceprototypes/styles"
 
 /**
  * InputBackgroundColorType
  *
- * @token Re-export of BackgroundColorType from nice-styles. Token-bound —
+ * @token Re-export of BackgroundColorType from @niceprototypes/styles. Token-bound —
  * raw CSS color strings are not accepted. Resolved through the
  * `input.backgroundColor` component group.
  *
@@ -23,7 +23,7 @@ export type InputBackgroundColorType = BackgroundColorType
 /**
  * InputBorderColorType
  *
- * @token Re-export of BorderColorType from nice-styles. Token-bound —
+ * @token Re-export of BorderColorType from @niceprototypes/styles. Token-bound —
  * raw CSS color strings are not accepted. Resolved through the
  * `input.borderColor` component group.
  *
@@ -596,7 +596,7 @@ export interface InputBaseProps {
    */
   ghost?: InputGhostType
 
-  /** Size variant — uses SizeType from nice-styles */
+  /** Size variant — uses SizeType from @niceprototypes/styles */
   size?: SizeType
 
   /**

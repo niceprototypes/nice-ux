@@ -1,6 +1,6 @@
-import Button from "nice-react-button"
+import Button from "@niceprototypes/button"
 import type { ComponentExample } from "../../../components/demos/Components"
-import { getToken } from "nice-react-styles"
+import { getToken } from "@niceprototypes/styles"
 
 const gradient = `linear-gradient(${getToken("backgroundColor", "link")}, ${getToken("backgroundColor", "raised")})`
 

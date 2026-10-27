@@ -3,7 +3,7 @@ import { render, screen, fireEvent } from "@testing-library/react"
 import "@testing-library/jest-dom"
 import Lightbox from "./Lightbox"
 
-jest.mock("nice-react-ink", () => ({
+jest.mock("@niceprototypes/ink", () => ({
   __esModule: true,
   default: ({ children }: { children: React.ReactNode }) => <span>{children}</span>,
 }))

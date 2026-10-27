@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { getToken } from "nice-react-styles"
+import { getToken } from "@niceprototypes/styles"
 
 /** Native `<fieldset>` with the UA border, padding and margin removed. */
 export const StyledFieldset = styled.fieldset`

@@ -1,5 +1,5 @@
 {
-  "name": "nice-react-icon-vendor",
+  "name": "@niceprototypes/icon-vendor",
   "version": "2.0.5",
   "description": "Vendor icon resolver for nice-react-icon — wraps Lucide icons behind a vendor-agnostic API",
   "type": "module",
@@ -26,27 +26,28 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/niceprototypes/nice-react-icon-vendor.git"
+    "url": "git+https://github.com/niceprototypes/nice-ux.git",
+    "directory": "packages/icon-vendor"
   },
   "bugs": {
-    "url": "https://github.com/niceprototypes/nice-react-icon-vendor/issues"
+    "url": "https://github.com/niceprototypes/nice-ux/issues"
   },
-  "homepage": "https://github.com/niceprototypes/nice-react-icon-vendor#readme",
+  "homepage": "https://github.com/niceprototypes/nice-ux/tree/main/packages/icon-vendor#readme",
   "peerDependencies": {
-    "nice-react-icon": "^8.0.3",
+    "@niceprototypes/icon": "workspace:^",
     "react": ">=19.2.0"
   },
   "dependencies": {
     "lucide": "^1.16.0"
   },
   "devDependencies": {
-    "@types/react": "^19.2.7",
-    "nice-config-rollup": "file:../config-rollup",
-    "nice-config-typescript": "file:../config-typescript",
-    "nice-react-icon": "file:../react-icon",
-    "react": "^19.2.0",
+    "@types/react": "catalog:",
+    "@niceprototypes/config-rollup": "workspace:*",
+    "@niceprototypes/config-typescript": "workspace:*",
+    "@niceprototypes/icon": "workspace:*",
+    "react": "catalog:",
     "rollup": "^4.3.0",
     "tslib": "^2.6.0",
-    "typescript": "^6.0.3"
+    "typescript": "catalog:"
   }
 }

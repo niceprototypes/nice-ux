@@ -1,5 +1,5 @@
 import type * as React from "react"
-import type { ThemeType } from "nice-react-styles"
+import type { ThemeType } from "@niceprototypes/styles"
 import type {
   IconSizeType,
   IconVariantType,
@@ -10,7 +10,7 @@ import type {
 } from "../Icon/Icon.types"
 import { illustrationNames } from "../../constants"
 
-/** Every registered illustration name — the exact union from nice-icons' catalog. */
+/** Every registered illustration name — the exact union from @niceprototypes/icon' catalog. */
 export type IllustrationNameType = (typeof illustrationNames)[number]
 
 /**

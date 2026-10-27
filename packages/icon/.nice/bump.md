@@ -1,8 +1,8 @@
-[2026-09-14 22:30] major: Remove getIconToken export and src/tokens wrappers — component tokens are read with getToken(name, variant, { prefix: "icon" }) from nice-react-styles
+[2026-09-14 22:30] major: Remove getIconToken export and src/tokens wrappers — component tokens are read with getToken(name, variant, { prefix: "icon" }) from @niceprototypes/styles
 [2026-09-16 15:11] patch: getToken call sites migrated to the token address form
 [2026-09-16 16:21] minor: color prop accepts the object form — { name, transform } for channel-adjusted colours
-[2026-09-24 19:18] patch: Declare nice-styles, which the bundled nice-icons code requires at runtime
+[2026-09-24 19:18] patch: Declare @niceprototypes/styles, which the bundled @niceprototypes/icon code requires at runtime
 [2026-09-25 19:11] patch: Declare nice-* runtime packages as peer dependencies with a file: devDependency for local builds
-[2026-09-25 19:18] patch: Inline nice-icons types into the declaration bundle so consumers need no nice-icons install
+[2026-09-25 19:18] patch: Inline @niceprototypes/icon types into the declaration bundle so consumers need no @niceprototypes/icon install
 [2026-10-08 22:00] minor: Add darkAntialiasing: stroke widths scale by icon.strokeWidthScale (thinner in night); unset follows the theme, true thins in any theme, false never thins
 [2026-10-15 15:23] patch: Document strokeScaling (JSDoc on IconStrokeScalingType and the prop, README row)

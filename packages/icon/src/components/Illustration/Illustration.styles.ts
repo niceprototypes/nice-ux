@@ -1,5 +1,5 @@
 import styled, { css, keyframes } from "styled-components"
-import { getToken } from "nice-react-styles"
+import { getToken } from "@niceprototypes/styles"
 import type {
   IconSizeType,
   IconAnimationType,

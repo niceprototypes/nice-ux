@@ -1,4 +1,4 @@
-# nice-storybook-navigation
+# @niceprototypes/storybook-navigation
 
 A Storybook addon for the Nice design system: a fixed **preview-side navigation
 bar** with
@@ -9,7 +9,7 @@ bar** with
 
 The bar renders in the preview iframe; a small manager entry bridges its actions
 to the Storybook `api` over the addons channel. (The manager **sidebar tree**
-styling is a separate addon, `nice-storybook-theme`.)
+styling is a separate addon, `@niceprototypes/storybook-theme`.)
 
 ## Screens
 
@@ -30,7 +30,7 @@ own mobile menu.
 ## Install
 
 ```bash
-npm install -D nice-storybook-navigation
+npm install -D @niceprototypes/storybook-navigation
 ```
 
 Requires (peers): `storybook` ≥ 10, `storybook-dark-mode`, `@storybook/addon-links`,
@@ -45,7 +45,7 @@ const config = {
   addons: [
     "@storybook/addon-links",
     "storybook-dark-mode",
-    "nice-storybook-navigation", // loads its manager + preview entries
+    "@niceprototypes/storybook-navigation", // loads its manager + preview entries
   ],
 }
 export default config

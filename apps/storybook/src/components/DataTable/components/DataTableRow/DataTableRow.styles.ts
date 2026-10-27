@@ -1,6 +1,6 @@
 import styled from "styled-components"
-import Flex from "nice-react-flex"
-import { getBreakpoint, getToken } from "nice-react-styles"
+import Flex from "@niceprototypes/flex"
+import { getBreakpoint, getToken } from "@niceprototypes/styles"
 
 // Wraps each row column. Without a width it inherits RowFlex's equal-flex sizing
 // (`> * { flex: 1 1 0 }`); with one, it pins the column to that width at tablet+,

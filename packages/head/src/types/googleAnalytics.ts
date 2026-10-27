@@ -5,7 +5,7 @@
  *
  * Accepted either as a bare measurement id string — `"G-XXXXXXXXXX"` — or as
  * this object when you need config parameters. Mirrors how `googleFonts`
- * accepts a URL or a prebuilt config in `nice-styles`.
+ * accepts a URL or a prebuilt config in `@niceprototypes/styles`.
  */
 export interface GoogleAnalyticsConfig {
   /** Measurement id, `G-XXXXXXXXXX`. Found under the GA4 property's data stream. */

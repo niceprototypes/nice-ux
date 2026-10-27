@@ -1,7 +1,7 @@
 import * as React from "react"
-import Flex from "nice-react-flex"
-import Icon from "nice-react-icon"
-import Tooltip from "nice-react-tooltip"
+import Flex from "@niceprototypes/flex"
+import Icon from "@niceprototypes/icon"
+import Tooltip from "@niceprototypes/tooltip"
 import Ink from "../../nice/Ink"
 
 interface TokenNameProps {

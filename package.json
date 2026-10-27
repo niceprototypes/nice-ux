@@ -1,0 +1,25 @@
+{
+  "name": "nice-ux",
+  "private": true,
+  "description": "Nice UI: the @niceprototypes/* React packages, their Storybook and the manifest",
+  "license": "MIT",
+  "packageManager": "pnpm@11.4.0",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "pnpm -r build",
+    "test": "pnpm -r test",
+    "typecheck": "pnpm -r typecheck",
+    "storybook": "pnpm --filter @niceprototypes/storybook dev",
+    "build-storybook": "pnpm --filter @niceprototypes/storybook build",
+    "changeset": "changeset"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^3.0.3",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "styled-components": "catalog:",
+    "typescript": "catalog:"
+  }
+}

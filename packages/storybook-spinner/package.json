@@ -1,5 +1,5 @@
 {
-  "name": "nice-storybook-spinner",
+  "name": "@niceprototypes/storybook-spinner",
   "version": "0.1.0",
   "description": "Storybook addon: replaces Storybook's boot and preview loaders with the Nice spinner, painted at document start in the resolved theme.",
   "type": "module",
@@ -41,24 +41,26 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/niceprototypes/nice-storybook-spinner"
+    "url": "git+https://github.com/niceprototypes/nice-ux.git",
+    "directory": "packages/storybook-spinner"
   },
   "bugs": {
-    "url": "https://github.com/niceprototypes/nice-storybook-spinner/issues"
+    "url": "https://github.com/niceprototypes/nice-ux/issues"
   },
-  "homepage": "https://github.com/niceprototypes/nice-storybook-spinner#readme",
+  "homepage": "https://github.com/niceprototypes/nice-ux/tree/main/packages/storybook-spinner#readme",
   "peerDependencies": {
     "storybook": ">=10.0.0"
   },
   "devDependencies": {
+    "@niceprototypes/icon": "workspace:*",
+    "@niceprototypes/styles": "workspace:*",
     "@types/node": "^24.10.1",
     "esbuild": "^0.28.2",
-    "nice-react-icon": "file:../react-icon",
-    "nice-styles": "file:../styles",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "styled-components": "^6.1.19",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "storybook": "catalog:",
+    "styled-components": "catalog:",
     "tsup": "^8.0.0",
-    "typescript": "^6.0.3"
+    "typescript": "catalog:"
   }
 }

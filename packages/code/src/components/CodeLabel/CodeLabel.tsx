@@ -1,4 +1,4 @@
-import Ink from "nice-react-ink"
+import Ink from "@niceprototypes/ink"
 import { LabelFlex } from "./CodeLabel.styles"
 import { LANG_LABELS } from "./CodeLabel.constants"
 import type { CodeLabelProps } from "./CodeLabel.types"

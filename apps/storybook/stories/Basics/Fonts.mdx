@@ -25,7 +25,7 @@ import Ink from "../../src/nice/Ink"
 <Ink as="h3">Google</Ink>
 
 ```ts
-import { injectFonts } from "nice-styles"
+import { injectFonts } from "@niceprototypes/styles"
 
 injectFonts({ googleFonts: "https://fonts.googleapis.com/…" })
 ```
@@ -43,7 +43,7 @@ injectFonts({ googleFonts: "https://fonts.googleapis.com/…" })
 <Ink as="h3">Adobe</Ink>
 
 ```ts
-import { injectFonts } from "nice-styles"
+import { injectFonts } from "@niceprototypes/styles"
 
 injectFonts({ adobeFonts: "https://use.typekit.net/…" })
 ```
@@ -65,7 +65,7 @@ injectFonts({ adobeFonts: "https://use.typekit.net/…" })
 <Ink>function to inject preconnects and stylesheets for your font family:</Ink>
 
 ```ts
-import { injectFonts } from "nice-styles"
+import { injectFonts } from "@niceprototypes/styles"
 
 injectFonts({
   links: [
@@ -98,7 +98,7 @@ injectFonts({
 ```tsx
 // tokens.ts
 
-import { setTokens } from "nice-react-styles"
+import { setTokens } from "@niceprototypes/styles"
 
 setTokens({
   fontFamily: {
@@ -120,7 +120,7 @@ setTokens({
 <Ink as="h4">Google</Ink>
 
 ```tsx
-import { StylesProvider } from "nice-react-styles"
+import { StylesProvider } from "@niceprototypes/styles"
 import App from "./App"
 import "./tokens" // runs setTokens once on load
 
@@ -134,7 +134,7 @@ import "./tokens" // runs setTokens once on load
 <Ink as="h4">Adobe</Ink>
 
 ```tsx
-import { StylesProvider } from "nice-react-styles"
+import { StylesProvider } from "@niceprototypes/styles"
 import App from "./App"
 import "./tokens" // runs setTokens once on load
 
@@ -148,7 +148,7 @@ import "./tokens" // runs setTokens once on load
 <Ink as="h4">Custom</Ink>
 
 ```tsx
-import { StylesProvider } from "nice-react-styles"
+import { StylesProvider } from "@niceprototypes/styles"
 import App from "./App"
 import "./tokens" // runs setTokens once on load
 

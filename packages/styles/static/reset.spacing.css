@@ -1,5 +1,5 @@
 /**
- * nice-styles reset — spacing add-on
+ * @niceprototypes/styles reset — spacing add-on
  *
  * Opt-in spacing: block-flow margins plus cell sizing. Re-introduces the block
  * margins that reset.css's `marginStrip` zeroes (token-driven flow spacing), and

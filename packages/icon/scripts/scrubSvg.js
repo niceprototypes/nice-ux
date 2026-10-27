@@ -1,5 +1,5 @@
 /**
- * SVG scrubber for nice-icons.
+ * SVG scrubber for @niceprototypes/icon.
  *
  * Removes Adobe Illustrator artifacts (generator comment, `id="Layer_1"`, the
  * `<defs><style>.st0{…}</style></defs>` block, and `class="st…"`) and replaces

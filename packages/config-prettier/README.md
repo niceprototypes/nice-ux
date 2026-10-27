@@ -1,4 +1,4 @@
-# nice-config-prettier
+# @niceprototypes/config-prettier
 
 Shared Prettier configuration for the `nice-*` ecosystem.
 
@@ -8,7 +8,7 @@ In `package.json`:
 
 ```json
 {
-  "prettier": "nice-config-prettier"
+  "prettier": "@niceprototypes/config-prettier"
 }
 ```
 

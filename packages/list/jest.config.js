@@ -1,1 +1,1 @@
-export { default } from "nice-config-jest/react"
+export { default } from "@niceprototypes/config-jest/react"

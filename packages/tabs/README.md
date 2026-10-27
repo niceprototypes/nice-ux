@@ -1,4 +1,4 @@
-# nice-react-tabs
+# @niceprototypes/tabs
 
 Tabs: a WAI-ARIA tab list, optional content after the tabs (such as an add button), and the
 selected tab's panel. A tab label may be any node, an input included: tabs are not buttons,
@@ -7,15 +7,15 @@ and keys pressed inside a label's own control stay with that control.
 ## Install
 
 ```sh
-npm install nice-react-tabs
+npm install @niceprototypes/tabs
 ```
 
-Peer dependencies: `nice-react-styles`, `react`, `react-dom`, `styled-components`.
+Peer dependencies: `@niceprototypes/styles`, `react`, `react-dom`, `styled-components`.
 
 ## Usage
 
 ```tsx
-import Tabs from "nice-react-tabs"
+import Tabs from "@niceprototypes/tabs"
 
 <Tabs
   aria-label="Pages"
@@ -45,7 +45,7 @@ import Tabs from "nice-react-tabs"
 | `end` | `ReactNode` | | Row content after the last tab; not a tab |
 | `children` | `ReactNode` | | The selected tab's panel (`role="tabpanel"`) |
 | `size` | `smaller`, `small`, `base`, `large`, `larger` | `base` | Tab padding, gap and font size |
-| `justifyContent` | `flex-start`, `flex-end`, `center`, `space-between`, `space-around`, `space-evenly` | | Places the tab list and `end` along the row (the nice-react-flex values); `space-between` puts `end` at the row's end |
+| `justifyContent` | `flex-start`, `flex-end`, `center`, `space-between`, `space-around`, `space-evenly` | | Places the tab list and `end` along the row (the @niceprototypes/flex values); `space-between` puts `end` at the row's end |
 | `gap` | `none`, `smaller`, `small`, `base`, `large`, `larger` | the size's `tabs.gap` | Gap between tabs and between the tab list and `end`, from the `gap` core token |
 | `variant` | `underline`, `pill` | `underline` | `underline`: row bottom border and selected underline. `pill`: a rounded border per tab (`tabs.pill.*`), no row border or underline |
 | `aria-label` | `string` | | Accessible name of the tab list |
@@ -67,7 +67,7 @@ control. Clicking anywhere in a tab, its input included, selects the tab.
 
 ## Tokens
 
-All from `nice-styles` (`src/tokens/components/tabs.json`); override any of them on an
+All from `@niceprototypes/styles` (`src/tokens/components/tabs.json`); override any of them on an
 ancestor to restyle Tabs without props.
 
 | Token | Default |
@@ -83,4 +83,4 @@ ancestor to restyle Tabs without props.
 | `--np--tabs--pill--border-radius`, `--border-width` | `var(--np--border-radius--larger)`, `var(--np--border-width)` (pill variant) |
 | `--np--tabs--pill--border-color` / `--hover` / `--selected` | `transparent` / `var(--np--border-color)` / `var(--np--border-color--stronger)` (pill variant: rest, hovered enabled tab, selected tab) |
 
-Docs: nice-storybook → Components → Tabs.
+Docs: @niceprototypes/storybook → Components → Tabs.

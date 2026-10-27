@@ -1,5 +1,5 @@
 import * as React from "react"
-import type { ComponentPrefix } from "nice-react-styles"
+import type { ComponentPrefix } from "@niceprototypes/styles"
 
 /**
  * A node in a component's generated token tree — a resolved string leaf, or a

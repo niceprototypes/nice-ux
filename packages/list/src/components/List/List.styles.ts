@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components"
-import { getToken } from "nice-react-styles"
+import { getToken } from "@niceprototypes/styles"
 
 /**
  * The list root. UA list styling, margin and padding are removed; colours

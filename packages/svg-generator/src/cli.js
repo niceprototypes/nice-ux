@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * @fileoverview CLI: `nice-svg-generator <folder> <type> [--deep]`.
+ * @fileoverview CLI: `@niceprototypes/svg-generator <folder> <type> [--deep]`.
  *
  * Positional, non-explicit syntax — folder then type, `--deep` to recurse.
  *
@@ -15,18 +15,18 @@ const deep = argv.includes("--deep")
 const [folder, type] = argv.filter((a) => !a.startsWith("--"))
 
 if (!folder || !type) {
-  console.error(`nice-svg-generator — convert design source files to SVG
+  console.error(`@niceprototypes/svg-generator — convert design source files to SVG
 
 Usage:
-  nice-svg-generator <folder> <type> [--deep]
+  @niceprototypes/svg-generator <folder> <type> [--deep]
 
   <folder>   folder to scan for <type> files
   <type>     input type: ${supportedTypes().join(", ")}
   --deep     recurse into subfolders (shallow by default)
 
 Examples:
-  nice-svg-generator ~/nice/icons/.source ai --deep
-  nice-svg-generator ~/nice/icons/.source/github ai`)
+  @niceprototypes/svg-generator ~/nice/icons/.source ai --deep
+  @niceprototypes/svg-generator ~/nice/icons/.source/github ai`)
   process.exit(1)
 }
 

@@ -20,7 +20,7 @@
  * injected `+` / `-` breakpoint blocks move to the new thresholds.
  *
  * This function returns the CSS for the current call without injecting it;
- * the caller (`setTokens` in nice-react-styles) passes it to `injectTokenCSS`.
+ * the caller (`setTokens` in @niceprototypes/styles) passes it to `injectTokenCSS`.
  * Only the regenerated CSS of earlier calls is injected here.
  *
  * @example

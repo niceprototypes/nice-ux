@@ -29,7 +29,7 @@ describe("computeAnchorPosition", () => {
     })
   })
 
-  // Tooltip parity: align "center" reproduces nice-react-tooltip's
+  // Tooltip parity: align "center" reproduces @niceprototypes/tooltip's
   // computeCoords + transformFor for the trigger anchor.
   describe("tooltip parity (center)", () => {
     const tooltip = (position: PopoverPositionType) => {

@@ -15,7 +15,7 @@ interface StoryNavigationParameters {
 }
 
 /**
- * Preview entry. Loaded by Storybook from `nice-storybook-navigation/preview`.
+ * Preview entry. Loaded by Storybook from `@niceprototypes/storybook-navigation/preview`.
  * A global decorator renders the navigation bar beneath every story, reading the
  * navigable sequences from the consumer's `storyNavigation` parameter — so the
  * addon ships no project-specific story ids.

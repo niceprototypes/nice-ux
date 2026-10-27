@@ -4,7 +4,7 @@ This document tracks deprecated CSS variables and TypeScript constants, providin
 
 ## Philosophy
 
-The nice-styles package is committed to maintaining backwards compatibility while improving the API over time. When variables are deprecated:
+The @niceprototypes/styles package is committed to maintaining backwards compatibility while improving the API over time. When variables are deprecated:
 
 1. **Deprecated variables remain functional** - They point to the new variables using `var()` references in `deprecated.css`
 2. **No breaking changes** - Existing code continues to work without modification
@@ -16,7 +16,7 @@ The nice-styles package is committed to maintaining backwards compatibility whil
 To maintain backward compatibility in your application, import the deprecated variables file:
 
 ```css
-@import 'nice-styles/deprecated.css';
+@import '@niceprototypes/styles/deprecated.css';
 ```
 
 This file contains CSS variable aliases that map old variable names to their new equivalents.
@@ -50,10 +50,10 @@ Number-based background color variables have been replaced with semantic names f
 **TypeScript/JavaScript:**
 ```typescript
 // Before
-import { BACKGROUND_COLOR_1 } from 'nice-styles'
+import { BACKGROUND_COLOR_1 } from '@niceprototypes/styles'
 
 // After
-import { BACKGROUND_COLOR_DEFAULT } from 'nice-styles'
+import { BACKGROUND_COLOR_DEFAULT } from '@niceprototypes/styles'
 ```
 
 **Rationale:** Semantic names (`primary`, `secondary`) are more meaningful than arbitrary numbers (`1`, `2`) and make code more self-documenting.

@@ -1,11 +1,11 @@
 import * as React from "react"
-import { InkProps } from "nice-react-ink"
+import { InkProps } from "@niceprototypes/ink"
 import { StyledInk } from "./Ink.styles"
 import { unwrapMdxParagraph } from "./Ink.services"
 
 type Props = InkProps & { unstyled?: boolean }
 
-/** Heading elements keep nice-react-ink's own per-level size and color defaults. */
+/** Heading elements keep @niceprototypes/ink's own per-level size and color defaults. */
 const HEADINGS = new Set(["h1", "h2", "h3", "h4"])
 
 const Ink: React.FC<Props> = ({

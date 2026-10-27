@@ -1,7 +1,7 @@
 import * as React from "react"
-import type { IconNameType } from "nice-react-icon"
-import type { SizeType } from "nice-react-styles"
-import Button from "nice-react-button"
+import type { IconNameType } from "@niceprototypes/icon"
+import type { SizeType } from "@niceprototypes/styles"
+import Button from "@niceprototypes/button"
 import { LinkFlex, Label } from "./StoryNavigationLink.styles"
 
 interface StoryNavigationLinkProps {

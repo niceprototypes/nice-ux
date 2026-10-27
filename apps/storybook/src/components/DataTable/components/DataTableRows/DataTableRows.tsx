@@ -1,5 +1,5 @@
 import { Fragment } from "react"
-import Flex from "nice-react-flex"
+import Flex from "@niceprototypes/flex"
 import Ink from "../../../../nice/Ink"
 import { DataTableHeader } from "../DataTableHeader/DataTableHeader"
 import { DataTableRow } from "../DataTableRow/DataTableRow"

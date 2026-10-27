@@ -1,0 +1,104 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../src/components/Story"
+import Install from "../../../src/components/Install"
+import { ComponentDemoTable } from "../../../src/dataTables/components/demos/Components"
+import { fieldExampleList } from "./examples"
+import NewLines from "../../../src/components/NewLines"
+import Callout from "../../../src/components/Callout"
+import Ink from "../../../src/nice/Ink"
+
+<Meta title="Components/Forms/Field" />
+
+<StoryHeader
+  title="Field"
+  description="Wires a label, description and error to one control through context. Fieldset groups Fields under a legend."
+/>
+
+<NewLines count={3} />
+
+<Install package="react-field" />
+
+```jsx
+import { Field, Fieldset, useField, mergeDescribedBy } from "@niceprototypes/field"
+
+<Field label="Email" description="We never share it." error={error} invalid={!!error}>
+  <Input type="email" value={email} onChange={setEmail} />
+</Field>
+```
+
+<NewLines count={3} />
+
+<ComponentDemoTable examples={fieldExampleList} />
+
+<NewLines count={3} />
+
+<Ink as="h2">Guide</Ink>
+
+<Ink code>@niceprototypes/field</Ink>
+<Ink>has named exports only, no default export.</Ink>
+
+<Ink>Field renders a native</Ink>
+<Ink code>{"<label>"}</Ink><Ink>, the control, an optional description and an always-mounted polite live region for the error. It publishes the wiring through context; the control applies it. Input, and everything built on it (Select, DateField), already does:</Ink>
+
+<ul>
+  <li><Ink><code>id</code> — the control takes the Field's id, so the label's <code>htmlFor</code> names it.</Ink></li>
+</ul>
+  It defaults to `useId()`; pass `id` to fix it.
+<ul>
+  <li><Ink><code>aria-describedby</code> — ordered <code>[description, error, own]</code>. The error id is</Ink></li>
+</ul>
+  present only while there is an error.
+<ul>
+  <li><Ink><code>aria-invalid="true"</code> — only while the Field is <code>invalid</code>, never <code>"false"</code>.</Ink></li>
+</ul>
+  It changes no style; set `status="error"` on the control.
+<ul>
+  <li><Ink><code>required</code> — native <code>required</code> on the control. The label renders no</Ink></li>
+</ul>
+  asterisk; mark the other fields with `optionalLabel` instead.
+
+<Ink>In development, Field warns in the console when no element inside it carries the id — the silent failure where the label names nothing.</Ink>
+
+<Ink code>Fieldset</Ink>
+<Ink>groups related controls under a native</Ink>
+<Ink code>{"<fieldset>"}</Ink><Ink>.</Ink>
+<Ink code>legend</Ink>
+<Ink>is required and names the group;</Ink>
+<Ink code>description</Ink>
+<Ink>follows it and is referenced by the fieldset's</Ink>
+<Ink code>aria-describedby</Ink><Ink>.</Ink>
+<Ink code>disabled</Ink>
+<Ink>is the native attribute and disables every control inside.</Ink>
+
+```jsx
+<Fieldset legend="Shipping address" description="Where the order is delivered.">
+  <Field label="Street and number"><Input /></Field>
+  <Field label="Postcode"><Input width="10" /></Field>
+</Fieldset>
+```
+
+<Ink>A custom control reads the wiring with</Ink>
+<Ink code>useField()</Ink><Ink>, which returns</Ink>
+<Ink code>{"{ id, labelId, descriptionId?, errorId?, describedBy?, invalid, required }"}</Ink><Ink>, or</Ink>
+<Ink code>null</Ink>
+<Ink>outside a Field.</Ink>
+<Ink code>mergeDescribedBy(fieldDescribedBy, own)</Ink>
+<Ink>joins the two id lists in order, drops empty entries, keeps the first occurrence of each id, and returns</Ink>
+<Ink code>undefined</Ink>
+<Ink>when nothing is left, so no empty attribute renders.</Ink>
+
+```jsx
+const field = useField()
+
+<input
+  id={field?.id}
+  aria-describedby={mergeDescribedBy(field?.describedBy, ownDescribedBy)}
+  aria-invalid={field?.invalid ? true : undefined}
+  required={field?.required}
+/>
+
+mergeDescribedBy("f-desc f-err", "hint f-desc") // "f-desc f-err hint"
+mergeDescribedBy(undefined, undefined)          // undefined
+```
+
+<Callout type="hint">Field only publishes the wiring — the control must apply `id`, `aria-describedby`, `aria-invalid` and `required`. Input does this for you.</Callout>

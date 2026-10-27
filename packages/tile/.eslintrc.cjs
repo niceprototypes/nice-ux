@@ -1,1 +1,1 @@
-module.exports = require("nice-config-eslint")
+module.exports = require("@niceprototypes/config-eslint")

@@ -1,6 +1,6 @@
 import * as React from "react"
-import Button from "nice-react-button"
-import { Theme, useLocale } from "nice-react-styles"
+import Button from "@niceprototypes/button"
+import { Theme, useLocale } from "@niceprototypes/styles"
 import {
   StyledCalendar,
   StyledCalendarCell,

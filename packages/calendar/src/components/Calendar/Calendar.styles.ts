@@ -1,6 +1,6 @@
 import styled from "styled-components"
-import { getToken } from "nice-react-styles"
-import type { SizeType } from "nice-react-styles"
+import { getToken } from "@niceprototypes/styles"
+import type { SizeType } from "@niceprototypes/styles"
 
 /**
  * Root: header (navigation + heading) above the grid, separated by the

@@ -1,7 +1,7 @@
 import styled from "styled-components"
-import Icon from "nice-react-icon"
+import Icon from "@niceprototypes/icon"
 
-import { getBreakpoint, getToken } from "nice-styles"
+import { getBreakpoint, getToken } from "@niceprototypes/styles"
 
 /**
  * The trailing arrow.

@@ -1,7 +1,7 @@
 /**
  * Shared Prettier configuration for the nice-* ecosystem.
  *
- * Consume via package.json:  "prettier": "nice-config-prettier"
+ * Consume via package.json:  "prettier": "@niceprototypes/config-prettier"
  */
 module.exports = {
   arrowParens: "avoid",

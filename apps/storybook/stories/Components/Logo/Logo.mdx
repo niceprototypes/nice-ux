@@ -1,0 +1,54 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../src/components/Story"
+import Install from "../../../src/components/Install"
+import { ComponentDemoTable } from "../../../src/dataTables/components/demos/Components"
+import { logoExampleList } from "./examples"
+import NewLines from "../../../src/components/NewLines"
+import Callout from "../../../src/components/Callout"
+
+<Meta title="Components/Logo" />
+
+<StoryHeader
+  title="Logo"
+  description="The Nice Prototypes logo: the crystal heart illustration and the theme-aware logo name."
+  repos={[
+    { name: "@niceprototypes/logo", url: "https://github.com/niceprototypes/nice-react-logo", license: "MIT" },
+  ]}
+/>
+
+<NewLines count={3} />
+
+<Install package="react-logo" />
+
+```jsx
+import Logo from "@niceprototypes/logo"
+
+<Logo />
+```
+
+<NewLines count={3} />
+
+<ComponentDemoTable examples={logoExampleList} />
+
+<NewLines count={3} />
+
+## Guide
+
+Logo puts two pieces side by side: the `nice-heart` illustration from @niceprototypes/icon and the logo name. `height` sets the height in pixels and defaults to the responsive `logo.height` token, a unitless pixel count: 64 on phones, 56 on tablets, 48 from laptop up. The heart fills that height and the name `nameHeightScale` of it (60% by default), each as wide as its SVG's viewBox gives. The space between them is the `gap` prop, 4 pixels by default.
+
+The name is filled with the `logo.color` token, the theme's base text color: dark in day, light in night. The heart is an illustration and keeps its own colors in every theme. Pin a theme with `theme`, or let the logo follow the page:
+
+```jsx
+<Logo theme="night" />
+<Logo showName={false} />
+```
+
+The logo renders as one image (`role="img"`) named "Nice Prototypes"; pass `aria-label` to name it differently, for example when it links home.
+
+Pass a height in pixels:
+
+```jsx
+<Logo height={32} />
+```
+
+<Callout type="hint">Use showName={false} where there is only room for a square mark, such as a favicon-sized slot.</Callout>

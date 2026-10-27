@@ -1,5 +1,5 @@
-import Button from "nice-react-button"
-import Flex from "nice-react-flex"
+import Button from "@niceprototypes/button"
+import Flex from "@niceprototypes/flex"
 import { cap } from "../../../utilities"
 import type { ComponentExample } from "../../../components/demos/Components"
 

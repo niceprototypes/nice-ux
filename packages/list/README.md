@@ -1,4 +1,4 @@
-# nice-react-list
+# @niceprototypes/list
 
 Generic list for React. `List` renders a `<ul>` with `<hr>` dividers between
 items and an optional scrollable body; `ListItem` renders an `<li>` with
@@ -7,7 +7,7 @@ start/end slots. Part of the Nice Prototypes ecosystem.
 ## Install
 
 ```bash
-npm install nice-react-list
+npm install @niceprototypes/list
 ```
 
 Peer dependencies: `react`, `react-dom` (>=19.2), `styled-components` (>=6.1.18).
@@ -15,7 +15,7 @@ Peer dependencies: `react`, `react-dom` (>=19.2), `styled-components` (>=6.1.18)
 ## Usage
 
 ```tsx
-import { List, ListItem } from "nice-react-list"
+import { List, ListItem } from "@niceprototypes/list"
 
 <List size="small">
   <ListItem start={<Icon name="home" />}>Home</ListItem>
@@ -69,7 +69,7 @@ the divider `<li>`s are not exposed as list items.
 
 ## Tokens
 
-Component tokens live in `nice-styles/src/tokens/components/list.json`:
+Component tokens live in `@niceprototypes/styles/src/tokens/components/list.json`:
 `list.padding.block:{size}`, `list.padding.inline:{size}`, `list.gap`,
 `list.divider.color`, `list.divider.width`, `list.maxHeight`,
 `list.backgroundColor:{base|active|selected}`,

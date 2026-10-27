@@ -26,7 +26,7 @@ export const MOBILE_USER_AGENTS: readonly string[] = [
 
 /**
  * Viewport width (px) at/below which a touch device counts as mobile. Aligned
- * with the nice-styles phone band ceiling, so `isMobile` and the phone
+ * with the @niceprototypes/styles phone band ceiling, so `isMobile` and the phone
  * breakpoint map 1:1.
  */
 const MOBILE_MAX_WIDTH = 640

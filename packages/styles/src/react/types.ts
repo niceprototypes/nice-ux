@@ -1,8 +1,8 @@
 /**
- * React-specific shared types for nice-react-styles.
+ * React-specific shared types for @niceprototypes/styles.
  */
 
-import type { BreakpointName } from "nice-styles"
+import type { BreakpointName } from "../index"
 
 /**
  * Generic responsive prop shape used across component packages.

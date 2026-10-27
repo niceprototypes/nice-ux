@@ -1,11 +1,11 @@
-import Button from "nice-react-button"
+import Button from "@niceprototypes/button"
 import type { ComponentExample } from "../../../components/demos/Components"
-import Flex from "nice-react-flex"
+import Flex from "@niceprototypes/flex"
 
 export const buttonGrow = {
   name: "grow",
   description:
-    "Flex grow factor of the root element (flex-grow plus flex-basis: 0, as nice-react-flex grow). Needs a flex-container parent; unset emits no flex-grow. Each preview pairs the button with a fixed one in a Flex row.",
+    "Flex grow factor of the root element (flex-grow plus flex-basis: 0, as @niceprototypes/flex grow). Needs a flex-container parent; unset emits no flex-grow. Each preview pairs the button with a fixed one in a Flex row.",
   variants: ["unset", "1"],
   default: "unset",
   preview: (variant) => (

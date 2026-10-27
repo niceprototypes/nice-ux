@@ -1,5 +1,5 @@
 /**
- * Semantic SVG styling config for nice-icons.
+ * Semantic SVG styling config for @niceprototypes/icon.
  *
  * Adobe Illustrator exports each icon with an arbitrary, inconsistent class
  * (`.st0` meaning `fill:none` in one file and `fill:#231f20` in another) plus a

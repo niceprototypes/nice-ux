@@ -1,4 +1,4 @@
-# nice-config-rollup
+# @niceprototypes/config-rollup
 
 Shared Rollup configuration factory for the `nice-*` ecosystem. Split out of
 `nice-configuration`.
@@ -7,7 +7,7 @@ Shared Rollup configuration factory for the `nice-*` ecosystem. Split out of
 
 ```js
 // rollup.config.js
-import { createConfiguration } from "nice-config-rollup"
+import { createConfiguration } from "@niceprototypes/config-rollup"
 
 export default createConfiguration()
 ```
@@ -15,12 +15,12 @@ export default createConfiguration()
 With options:
 
 ```js
-import { createConfiguration } from "nice-config-rollup"
+import { createConfiguration } from "@niceprototypes/config-rollup"
 
 export default createConfiguration({
   input: "src/index.ts",
   additionalExternals: ["lodash"],
-  bundlePackages: ["nice-icons"],
+  bundlePackages: ["@niceprototypes/icon/svg"],
 })
 ```
 

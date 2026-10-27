@@ -21,11 +21,11 @@ const DEFAULTS = {
  *
  * Renders a Lucide-shaped iconNode tuple array as `<svg>`. Used by
  * `resolveVendorIcon` to produce the React.ComponentType that
- * `nice-react-icon`'s vendor-resolver mechanism expects.
+ * `@niceprototypes/icon`'s vendor-resolver mechanism expects.
  *
  * The component is intentionally not exported from the package root.
  * Vendor consumers reach Lucide icons via `<Icon vendor name="…" />` on
- * `nice-react-icon`; the resolver hands back a Bound component that
+ * `@niceprototypes/icon`; the resolver hands back a Bound component that
  * delegates here.
  */
 const VendorIcon = React.forwardRef<SVGSVGElement, VendorIconProps>(

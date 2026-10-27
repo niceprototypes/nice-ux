@@ -6,8 +6,8 @@ import type {
   ColorTokenProp,
   SizeType,
   ThemeType,
-} from "nice-react-styles"
-import type { IconProps, IconVendorType } from "nice-react-icon"
+} from "@niceprototypes/styles"
+import type { IconProps, IconVendorType } from "@niceprototypes/icon"
 
 /**
  * CheckboxCheckedType
@@ -40,7 +40,7 @@ export type CheckboxDisabledType = boolean
 /**
  * CheckboxSizeType
  *
- * Re-export of SizeType from nice-styles.
+ * Re-export of SizeType from @niceprototypes/styles.
  * Box and check-icon size, from the `checkbox.size` and `checkbox.icon.size` component tokens.
  *
  * Values:
@@ -71,7 +71,7 @@ export type CheckboxBackgroundColorType = "base" | "link" | "success" | "highlig
 /**
  * CheckboxBorderColorType
  *
- * Re-export of BorderColorType from nice-styles.
+ * Re-export of BorderColorType from @niceprototypes/styles.
  * Border of the box when unchecked, from the `checkbox.borderColor` component tokens.
  */
 export type CheckboxBorderColorType = BorderColorType
@@ -79,7 +79,7 @@ export type CheckboxBorderColorType = BorderColorType
 /**
  * CheckboxBorderRadiusType
  *
- * Re-export of BorderRadiusType from nice-styles.
+ * Re-export of BorderRadiusType from @niceprototypes/styles.
  * Corner radius of the box, from the `checkbox.borderRadius` component tokens.
  */
 export type CheckboxBorderRadiusType = BorderRadiusType
@@ -87,7 +87,7 @@ export type CheckboxBorderRadiusType = BorderRadiusType
 /**
  * CheckboxBorderWidthType
  *
- * Re-export of BorderWidthType from nice-styles.
+ * Re-export of BorderWidthType from @niceprototypes/styles.
  * Border width of the box, from the `checkbox.borderWidth` component tokens.
  */
 export type CheckboxBorderWidthType = BorderWidthType
@@ -95,8 +95,8 @@ export type CheckboxBorderWidthType = BorderWidthType
 /**
  * CheckboxIconNameType
  *
- * Re-export of Icon's `name` prop type from nice-react-icon.
- * Icon drawn in the box when checked: a built-in nice-icons name (type-checked), or any
+ * Re-export of Icon's `name` prop type from @niceprototypes/icon.
+ * Icon drawn in the box when checked: a built-in @niceprototypes/icon name (type-checked), or any
  * string, so vendor (Lucide, PascalCase) names resolve when `iconVendor` is set.
  *
  * Values:
@@ -109,9 +109,9 @@ export type CheckboxIconNameType = NonNullable<IconProps["name"]>
 /**
  * CheckboxIconVendorType
  *
- * Re-export of IconVendorType from nice-react-icon.
+ * Re-export of IconVendorType from @niceprototypes/icon.
  * Whether `iconName` resolves through the vendor icon set (passed to Icon's `vendor` prop).
- * Requires nice-react-icon-vendor (or a custom resolver) to be registered.
+ * Requires @niceprototypes/icon-vendor (or a custom resolver) to be registered.
  *
  * Values:
  * - false: default, built-in icon set only
@@ -172,7 +172,7 @@ export type CheckboxClassNameType = string
 /**
  * CheckboxThemeType
  *
- * Re-export of ThemeType from nice-styles.
+ * Re-export of ThemeType from @niceprototypes/styles.
  * Pin token resolution to a specific theme.
  */
 export type CheckboxThemeType = ThemeType
@@ -181,7 +181,7 @@ export type CheckboxThemeType = ThemeType
  * CheckboxProps
  *
  * Complete prop definition for the Checkbox component: a native `<input type="checkbox">`,
- * visually replaced by a token-driven box with a nice-react-icon check. Name it with visible
+ * visually replaced by a token-driven box with a @niceprototypes/icon check. Name it with visible
  * `children`, or with `aria-label` or `aria-labelledby`.
  */
 export interface CheckboxProps {

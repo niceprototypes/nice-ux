@@ -1,6 +1,6 @@
 # Performance Testing
 
-This directory contains performance testing tools to evaluate and compare different implementation approaches for nice-react-scroll.
+This directory contains performance testing tools to evaluate and compare different implementation approaches for @niceprototypes/scroll.
 
 ## Available Tests
 

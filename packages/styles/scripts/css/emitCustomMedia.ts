@@ -5,7 +5,7 @@
  * file can gate media queries on the breakpoint source of truth:
  *
  * ```css
- * @import "nice-styles/breakpoints.custom-media.css";
+ * @import "@niceprototypes/styles/breakpoints.custom-media.css";
  * @media (--np--tablet--up) { … }
  * ```
  *
@@ -33,10 +33,10 @@ import { generatedHeader } from '../shared/generatedHeader.js'
 const HEADER = generatedHeader('src/tokens/breakpoints.json', [
   'OPTIONAL @custom-media breakpoints — requires postcss-custom-media in the',
   'consuming build (not part of the plain-import set). For the native path use',
-  'nice-styles/breakpoints.css (utility classes) or responsive tokens.',
+  '@niceprototypes/styles/breakpoints.css (utility classes) or responsive tokens.',
   '',
   'Usage:',
-  '  @import "nice-styles/breakpoints.custom-media.css";',
+  '  @import "@niceprototypes/styles/breakpoints.custom-media.css";',
   '  @media (--np--tablet--up) { ... }',
 ])
 

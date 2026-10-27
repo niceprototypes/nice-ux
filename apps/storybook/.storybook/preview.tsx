@@ -4,23 +4,23 @@ import { themes } from "storybook/theming"
 import { addons } from "storybook/preview-api"
 import { DARK_MODE_EVENT_NAME } from "storybook-dark-mode"
 import { DocsContainer } from "@storybook/addon-docs/blocks"
-import { StylesProvider } from "nice-react-styles"
-import { applyTheme } from "nice-styles"
+import { StylesProvider } from "@niceprototypes/styles"
+import { applyTheme } from "@niceprototypes/styles"
 import { ShikiPre } from "../src/components/ShikiPre"
 import ContentFlex from "../src/nice/ContentFlex"
 import { getItemForEntry } from "../src/data"
-import { StoryNavigation } from "nice-storybook-navigation"
+import { StoryNavigation } from "@niceprototypes/storybook-navigation"
 import {
   storyNavigationIndexSequences,
   storyNavigationSequences,
 } from "./storyNavigationSequences"
-import "nice-react-icon-vendor"
-import "nice-react-image-vendor"
+import "@niceprototypes/icon-vendor"
+import "@niceprototypes/image-vendor"
 import "../src/nice/tokens"
 import "./preview.css"
 
 // Mirror storybook-dark-mode's state into <html data-theme="night|day"> so
-// nice-styles' [data-theme] cascade applies to canvas, MDX docs prose, and
+// @niceprototypes/styles' [data-theme] cascade applies to canvas, MDX docs prose, and
 // any nice-* component dropped directly into MDX. The addon itself only
 // knows light/dark — we translate to nice's day/night here.
 addons.getChannel().on(DARK_MODE_EVENT_NAME, (isDark: boolean) => {

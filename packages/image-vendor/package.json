@@ -1,5 +1,5 @@
 {
-  "name": "nice-react-image-vendor",
+  "name": "@niceprototypes/image-vendor",
   "version": "1.0.0",
   "description": "Vendor image resolver for nice-react-image — currently emits picsum.photos URLs; reserves the right to swap in a third-party image source later without touching the host component",
   "type": "module",
@@ -26,24 +26,25 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/niceprototypes/nice-react-image-vendor.git"
+    "url": "git+https://github.com/niceprototypes/nice-ux.git",
+    "directory": "packages/image-vendor"
   },
   "bugs": {
-    "url": "https://github.com/niceprototypes/nice-react-image-vendor/issues"
+    "url": "https://github.com/niceprototypes/nice-ux/issues"
   },
-  "homepage": "https://github.com/niceprototypes/nice-react-image-vendor#readme",
+  "homepage": "https://github.com/niceprototypes/nice-ux/tree/main/packages/image-vendor#readme",
   "peerDependencies": {
-    "nice-react-image": "^3.0.2",
+    "@niceprototypes/image": "workspace:^",
     "react": ">=19.2.0"
   },
   "devDependencies": {
-    "@types/react": "^19.2.7",
-    "nice-config-rollup": "file:../config-rollup",
-    "nice-config-typescript": "file:../config-typescript",
-    "nice-react-image": "file:../react-image",
-    "react": "^19.2.0",
+    "@types/react": "catalog:",
+    "@niceprototypes/config-rollup": "workspace:*",
+    "@niceprototypes/config-typescript": "workspace:*",
+    "@niceprototypes/image": "workspace:*",
+    "react": "catalog:",
     "rollup": "^4.3.0",
     "tslib": "^2.6.0",
-    "typescript": "^6.0.3"
+    "typescript": "catalog:"
   }
 }

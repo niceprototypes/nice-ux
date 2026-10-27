@@ -1,4 +1,4 @@
-# nice-react-popover
+# @niceprototypes/popover
 
 A popover component for React. Renders a controlled, portal-positioned surface
 anchored to an element, with Escape and outside-click dismiss and focus return.
@@ -7,7 +7,7 @@ Part of the Nice Prototypes ecosystem.
 ## Install
 
 ```bash
-npm install nice-react-popover
+npm install @niceprototypes/popover
 ```
 
 Peer dependencies: `react`, `react-dom` (>=19.2), `styled-components` (>=6.1.18).
@@ -16,7 +16,7 @@ Peer dependencies: `react`, `react-dom` (>=19.2), `styled-components` (>=6.1.18)
 
 ```tsx
 import * as React from "react"
-import Popover from "nice-react-popover"
+import Popover from "@niceprototypes/popover"
 
 const Menu = () => {
   const anchorRef = React.useRef<HTMLButtonElement>(null)
@@ -59,7 +59,7 @@ const Menu = () => {
 The positioning math is exported as a pure service:
 
 ```ts
-import { computeAnchorPosition } from "nice-react-popover"
+import { computeAnchorPosition } from "@niceprototypes/popover"
 
 const { top, left, transform } = computeAnchorPosition(el.getBoundingClientRect(), "bottom", "start", 8)
 // also accepts a point: computeAnchorPosition({ x: event.clientX, y: event.clientY }, "top", "center", 8)

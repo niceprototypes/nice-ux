@@ -1,4 +1,4 @@
-import Button from "nice-react-button"
+import Button from "@niceprototypes/button"
 import type { ComponentExample } from "../../../components/demos/Components"
 
 // Shown on a fixed-width button: centered content and space-between only differ

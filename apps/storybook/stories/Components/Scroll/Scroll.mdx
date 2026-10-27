@@ -1,0 +1,30 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../src/components/Story"
+import Install from "../../../src/components/Install"
+import Ink from "../../../src/nice/Ink"
+
+<Meta title="Components/Scroll" />
+
+<StoryHeader
+  title="Scroll"
+  repos={[
+    { name: "@niceprototypes/scroll", url: "https://github.com/niceprototypes/nice-react-scroll", license: "MIT" },
+  ]}
+/>
+
+<Install package="react-scroll" />
+
+<Ink as="h3">Setup</Ink>
+
+```jsx
+import { ScrollProvider, Sticky, FadeOnScroll } from "@niceprototypes/scroll"
+```
+
+<Ink as="h3">Usage</Ink>
+
+```jsx
+<ScrollProvider>
+  <Sticky>{header}</Sticky>
+</ScrollProvider>
+```
+

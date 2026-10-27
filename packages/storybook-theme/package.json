@@ -1,5 +1,5 @@
 {
-  "name": "nice-storybook-theme",
+  "name": "@niceprototypes/storybook-theme",
   "version": "0.1.0",
   "description": "Storybook addon: the Nice design-system UX for Storybook's manager — a token-styled sidebar tree (folder + branch-connector glyphs, depth/selection-aware lines, hidden search) plus the surrounding custom chrome.",
   "type": "module",
@@ -37,25 +37,26 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/niceprototypes/nice-storybook-theme"
+    "url": "git+https://github.com/niceprototypes/nice-ux.git",
+    "directory": "packages/storybook-theme"
   },
   "bugs": {
-    "url": "https://github.com/niceprototypes/nice-storybook-theme/issues"
+    "url": "https://github.com/niceprototypes/nice-ux/issues"
   },
-  "homepage": "https://github.com/niceprototypes/nice-storybook-theme#readme",
+  "homepage": "https://github.com/niceprototypes/nice-ux/tree/main/packages/storybook-theme#readme",
   "peerDependencies": {
-    "nice-icons": "^4.0.0",
-    "nice-styles": "^17.1.0",
+    "@niceprototypes/icon": "workspace:^",
+    "@niceprototypes/styles": "workspace:^",
     "storybook": ">=10.0.0",
     "storybook-dark-mode": ">=5.0.0"
   },
   "devDependencies": {
     "@types/node": "^24.10.1",
-    "nice-icons": "file:../icons",
-    "nice-styles": "file:../styles",
-    "storybook": "10.3.5",
+    "@niceprototypes/icon": "workspace:*",
+    "@niceprototypes/styles": "workspace:*",
+    "storybook": "catalog:",
     "storybook-dark-mode": "^5.0.0",
     "tsup": "^8.0.0",
-    "typescript": "^6.0.3"
+    "typescript": "catalog:"
   }
 }

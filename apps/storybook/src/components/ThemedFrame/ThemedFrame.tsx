@@ -1,5 +1,5 @@
 import * as React from "react"
-import Icon from "nice-react-icon"
+import Icon from "@niceprototypes/icon"
 import Ink from "../../nice/Ink"
 import {
   FrameDiv,
@@ -11,7 +11,7 @@ import {
   ThemedFrameToggle,
 } from "./ThemedFrame.styles"
 import type { ThemedFrameProps } from "./ThemedFrame.types"
-import Flex from "nice-react-flex"
+import Flex from "@niceprototypes/flex"
 
 /**
  * An `<iframe srcDoc>` whose own `<html>` mirrors the parent document's

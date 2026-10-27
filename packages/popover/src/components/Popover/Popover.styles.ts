@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { getToken } from "nice-react-styles"
+import { getToken } from "@niceprototypes/styles"
 
 /**
  * The popover surface. Rendered in a portal at `<body>` and positioned with

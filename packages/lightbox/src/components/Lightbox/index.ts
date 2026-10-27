@@ -1,4 +1,4 @@
-import { withBreakpoints } from "nice-react-styles"
+import { withBreakpoints } from "@niceprototypes/styles"
 import BaseLightbox from "./Lightbox"
 import type { LightboxProps } from "./Lightbox.types"
 

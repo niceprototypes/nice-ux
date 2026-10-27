@@ -1,12 +1,12 @@
-import { setTokens } from "nice-react-styles"
-import { TOKENS as THEME_TOKENS } from "nice-storybook-theme"
+import { setTokens } from "@niceprototypes/styles"
+import { TOKENS as THEME_TOKENS } from "@niceprototypes/storybook-theme"
 
 /**
  * Storybook-local token overrides.
  *
  * Imported by `.storybook/preview.tsx` for the side effect — `setTokens`
  * registers the overrides and injects the CSS at module load. The one call
- * includes nice-storybook-theme's tokens; the app's own entries come last, so
+ * includes @niceprototypes/storybook-theme's tokens; the app's own entries come last, so
  * they can override a theme value. Read storybook-local tokens through the
  * exported `getToken`, which is typed for this map.
  */

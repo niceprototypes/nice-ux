@@ -1,4 +1,4 @@
-import { withBreakpoints } from "nice-react-styles"
+import { withBreakpoints } from "@niceprototypes/styles"
 import BaseSlider from "./Slider"
 import type { SliderProps } from "./Slider.types"
 

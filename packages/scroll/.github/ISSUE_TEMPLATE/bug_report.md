@@ -37,7 +37,7 @@ Please provide a minimal code sample that reproduces the issue:
 
 ## Environment
 
-- nice-react-scroll version: [e.g. 1.2.5]
+- @niceprototypes/scroll version: [e.g. 1.2.5]
 - React version: [e.g. 18.2.0]
 - styled-components version: [e.g. 6.1.0]
 - Browser: [e.g. Chrome 120, Safari 17]

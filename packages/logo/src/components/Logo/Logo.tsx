@@ -1,11 +1,11 @@
 import * as React from "react"
-import { Theme } from "nice-react-styles"
+import { Theme } from "@niceprototypes/styles"
 import LogoName from "../LogoName"
 import { StyledHeart, StyledLogo, StyledName } from "./Logo.styles"
 import type { LogoProps } from "./Logo.types"
 
 /**
- * The Nice Prototypes logo: the crystal heart illustration (nice-react-icon's
+ * The Nice Prototypes logo: the crystal heart illustration (@niceprototypes/icon's
  * `nice-heart`) and the logo name, side by side. `height` sets the height in pixels, by default
  * the responsive `logo.height` token; the heart fills it and the name `nameHeightScale` of it (60% by
  * default), each as wide as

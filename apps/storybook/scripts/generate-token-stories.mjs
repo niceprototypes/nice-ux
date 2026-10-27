@@ -11,7 +11,7 @@
  * stripping), so nothing here lists groups or folders.
  *
  * Component tokens are not generated: each component's token table lives on its
- * hand-authored `stories/React/Components/{Name}/Tokens.mdx` page, below Docs.
+ * hand-authored `stories/Components/{Name}/Tokens.mdx` page, below Docs.
  *
  * Output goes to the gitignored `generated/` subfolder, fully owned + rebuilt
  * each run. Wired into `prestorybook` / `prebuild`.

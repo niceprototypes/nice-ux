@@ -18,7 +18,7 @@ export interface GetIconOptions {
 
 /**
  * Get an icon's ready-to-inject SVG markup by name and variant — the vanilla
- * counterpart to the React `<Icon>` component. Styled from nice-styles `icon`
+ * counterpart to the React `<Icon>` component. Styled from @niceprototypes/styles `icon`
  * tokens. An unknown variant falls back to `base` with a console warning; an
  * unknown name returns `undefined`.
  */

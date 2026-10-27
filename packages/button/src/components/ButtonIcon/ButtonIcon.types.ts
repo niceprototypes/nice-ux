@@ -1,11 +1,11 @@
-import type { IconProps } from "nice-react-icon"
-import type { ThemeType } from "nice-react-styles"
+import type { IconProps } from "@niceprototypes/icon"
+import type { ThemeType } from "@niceprototypes/styles"
 import type { ButtonIconVendorType } from "../Button/Button.types"
 
 /**
  * ButtonIconNameType
  *
- * Icon name, the same type as nice-react-icon's `name` prop: a built-in icon name
+ * Icon name, the same type as @niceprototypes/icon's `name` prop: a built-in icon name
  * (autocompleted), or any other string such as a vendor (Lucide) name, which
  * resolves when the button sets `iconVendor`.
  */

@@ -92,7 +92,7 @@
           "type": "string"
         },
         "variants": {
-          "description": "Rows, in order. Omit to read the token group's variants from nice-styles. An object row carries `variant` plus data its renderer needs.",
+          "description": "Rows, in order. Omit to read the token group's variants from @niceprototypes/styles. An object row carries `variant` plus data its renderer needs.",
           "type": "array",
           "items": {
             "oneOf": [
@@ -120,7 +120,7 @@
           "type": "string"
         },
         "wrapped": {
-          "description": "Cap the docs page at nice-storybook-theme's contentMaxWidth.",
+          "description": "Cap the docs page at @niceprototypes/storybook-theme's contentMaxWidth.",
           "type": "boolean"
         },
         "sectionWrapped": {
@@ -151,22 +151,22 @@
         },
         "render": {
           "enum": [
-            "nice-react-ink",
-            "nice-react-code"
+            "@niceprototypes/ink",
+            "@niceprototypes/code"
           ],
-          "description": "Omit to render the value as-is (a node). nice-react-ink: the value wrapped in Ink, styled by code/size/color. nice-react-code: a code string rendered by the nice Code component, inlined."
+          "description": "Omit to render the value as-is (a node). @niceprototypes/ink: the value wrapped in Ink, styled by code/size/color. @niceprototypes/code: a code string rendered by the nice Code component, inlined."
         },
         "code": {
           "type": "boolean",
-          "description": "(nice-react-ink) monospace code font."
+          "description": "(@niceprototypes/ink) monospace code font."
         },
         "size": {
           "type": "string",
-          "description": "(nice-react-ink) Ink font size \u2014 a fontSize variant."
+          "description": "(@niceprototypes/ink) Ink font size \u2014 a fontSize variant."
         },
         "color": {
           "type": "string",
-          "description": "(nice-react-ink) Nice text color \u2014 a color variant."
+          "description": "(@niceprototypes/ink) Nice text color \u2014 a color variant."
         },
         "clickToCopy": {
           "type": "boolean",
@@ -177,7 +177,7 @@
             "tsx",
             "css"
           ],
-          "description": "(nice-react-code) highlight language."
+          "description": "(@niceprototypes/code) highlight language."
         },
         "width": {
           "type": "string",

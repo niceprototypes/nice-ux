@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { getToken } from "nice-react-styles"
+import { getToken } from "@niceprototypes/styles"
 import type { ToggleSizeType } from "./Toggle.types"
 
 type SizeProps = { $size: ToggleSizeType }

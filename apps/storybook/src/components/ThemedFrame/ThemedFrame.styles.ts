@@ -1,7 +1,7 @@
 import styled from "styled-components"
-import Flex from "nice-react-flex"
-import Icon from "nice-react-icon"
-import { getBreakpoint, getToken } from "nice-react-styles"
+import Flex from "@niceprototypes/flex"
+import Icon from "@niceprototypes/icon"
+import { getBreakpoint, getToken } from "@niceprototypes/styles"
 
 /**
  * Positioning context for the overlay and the lock button.

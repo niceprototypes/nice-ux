@@ -7,7 +7,7 @@ let resolver: VendorResolverType = null
  * registerVendorResolver
  *
  * Registers a function that resolves icon names to vendor React components.
- * Called as a side effect by vendor packages (e.g. nice-react-icon-vendor).
+ * Called as a side effect by vendor packages (e.g. @niceprototypes/icon-vendor).
  *
  * @param fn - Resolver function: takes an icon name, returns a component or null
  */

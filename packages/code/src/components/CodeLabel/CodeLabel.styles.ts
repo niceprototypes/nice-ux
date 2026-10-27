@@ -1,6 +1,6 @@
 import styled from "styled-components"
-import { getToken } from "nice-react-styles"
-import Flex from "nice-react-flex"
+import { getToken } from "@niceprototypes/styles"
+import Flex from "@niceprototypes/flex"
 
 /**
  * Language badge pinned to the top-right of a code block.

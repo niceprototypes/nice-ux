@@ -1,5 +1,5 @@
 {
-  "name": "nice-toolkit",
+  "name": "@niceprototypes/toolkit",
   "version": "5.0.0",
   "description": "Link local packages while preventing duplicate React/styled-components. Essential for the Nice ecosystem.",
   "main": "src/index.js",
@@ -36,9 +36,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/niceprototypes/nice-toolkit.git"
+    "url": "git+https://github.com/niceprototypes/nice-ux.git",
+    "directory": "packages/toolkit"
   },
   "engines": {
     "node": ">=14.0.0"
-  }
+  },
+  "private": true
 }

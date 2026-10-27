@@ -1,4 +1,4 @@
-import { getToken, type ColorType } from "nice-react-styles"
+import { getToken, type ColorType } from "@niceprototypes/styles"
 
 /** The bordered track every flex demo draws its items in. */
 export const trackStyle = {

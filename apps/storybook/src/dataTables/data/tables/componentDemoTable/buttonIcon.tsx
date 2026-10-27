@@ -1,4 +1,4 @@
-import Button from "nice-react-button"
+import Button from "@niceprototypes/button"
 import type { ComponentExample } from "../../../components/demos/Components"
 
 // Ad-hoc rows rather than a uniform variant list: an icon beside a label, an
@@ -7,7 +7,7 @@ import type { ComponentExample } from "../../../components/demos/Components"
 export const buttonIcon = {
   name: "icon",
   description:
-    "Renders a nice-react-icon alongside the button label, or as the sole content when no children are provided. iconLeft and iconRight take any name Icon's name prop takes: a built-in icon, or a vendor (Lucide, PascalCase) name with iconVendor.",
+    "Renders a @niceprototypes/icon alongside the button label, or as the sole content when no children are provided. iconLeft and iconRight take any name Icon's name prop takes: a built-in icon, or a vendor (Lucide, PascalCase) name with iconVendor.",
   variants: [
     { variant: "label", iconRight: "arrow-right", children: "Next" },
     { variant: "iconOnly", iconRight: "plus", ariaLabel: "Add item" },

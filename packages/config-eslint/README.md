@@ -1,4 +1,4 @@
-# nice-config-eslint
+# @niceprototypes/config-eslint
 
 Shared ESLint configuration for the `nice-*` ecosystem (React + TypeScript +
 Prettier). Split out of the per-package `.eslintrc.cjs` files.
@@ -8,7 +8,7 @@ Prettier). Split out of the per-package `.eslintrc.cjs` files.
 In `.eslintrc.cjs`:
 
 ```js
-module.exports = require("nice-config-eslint")
+module.exports = require("@niceprototypes/config-eslint")
 ```
 
 Add the `lint` script and the peer dependencies. ESLint 8 resolves plugins from
@@ -18,10 +18,10 @@ the **consumer's** `node_modules`, so the parser/plugins must be installed here
 ```json
 {
   "scripts": { "lint": "eslint src --ext .ts,.tsx" },
-  "prettier": "nice-config-prettier",
+  "prettier": "@niceprototypes/config-prettier",
   "devDependencies": {
-    "nice-config-eslint": "file:../config-eslint",
-    "nice-config-prettier": "file:../config-prettier",
+    "@niceprototypes/config-eslint": "file:../config-eslint",
+    "@niceprototypes/config-prettier": "file:../config-prettier",
     "eslint": "^8.53.0",
     "prettier": "^3.0.0",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
@@ -34,8 +34,8 @@ the **consumer's** `node_modules`, so the parser/plugins must be installed here
 }
 ```
 
-Pair with [`nice-config-prettier`](https://github.com/niceprototypes/nice-config-prettier)
-(`"prettier": "nice-config-prettier"`) so the `prettier/prettier` rule formats
+Pair with [`@niceprototypes/config-prettier`](https://github.com/niceprototypes/nice-config-prettier)
+(`"prettier": "@niceprototypes/config-prettier"`) so the `prettier/prettier` rule formats
 against the shared config.
 
 ## What it provides

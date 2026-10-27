@@ -1,4 +1,4 @@
-# nice-storybook-spinner
+# @niceprototypes/storybook-spinner
 
 A Storybook addon that replaces Storybook's loading states with the Nice
 spinner:
@@ -15,15 +15,15 @@ spinner:
   shows in their place while a story or docs page is preparing.
 
 The spinner is the real `<Icon name="spinner" size="larger" />` from
-`nice-react-icon`, rendered to static markup when the package is built. Its
+`@niceprototypes/icon`, rendered to static markup when the package is built. Its
 size, stroke width, animation duration and the day/night background and colour
-come from `nice-styles` tokens, also at build time. The published package has no
+come from `@niceprototypes/styles` tokens, also at build time. The published package has no
 dependencies.
 
 ## Install
 
 ```bash
-npm install -D nice-storybook-spinner
+npm install -D @niceprototypes/storybook-spinner
 ```
 
 Requires (peer): `storybook` ≥ 10.
@@ -36,7 +36,7 @@ Requires (peer): `storybook` ≥ 10.
 const config = {
   addons: [
     "storybook-dark-mode",
-    "nice-storybook-spinner",
+    "@niceprototypes/storybook-spinner",
   ],
 }
 export default config
@@ -46,7 +46,7 @@ With options:
 
 ```ts
 addons: [
-  { name: "nice-storybook-spinner", options: { hold: false, timeout: 8000, viewTransition: true } },
+  { name: "@niceprototypes/storybook-spinner", options: { hold: false, timeout: 8000, viewTransition: true } },
 ]
 ```
 
@@ -63,7 +63,7 @@ first one present wins). Hold keeps whichever mode is active up: the opaque
 overlay, or in snapshot mode the held snapshot with the spinner over it.
 
 1. Query parameter: `?nsbHold=1` (or `true`) holds, `?nsbHold=0` (or `false`) releases.
-2. localStorage: `localStorage.setItem("nice-storybook-spinner:hold", "true")`
+2. localStorage: `localStorage.setItem("@niceprototypes/storybook-spinner:hold", "true")`
    holds, `"false"` releases.
 3. The preset option `hold: true`.
 
@@ -135,8 +135,8 @@ Both spinners carry `role="progressbar"` and `aria-busy="true"`, labelled
 
 ## Development
 
-`npm run build` regenerates `src/generated/spinner.ts` from `nice-react-icon`
-and `nice-styles` (the `prebuild` step, `npm run generate`) and bundles with
+`npm run build` regenerates `src/generated/spinner.ts` from `@niceprototypes/icon`
+and `@niceprototypes/styles` (the `prebuild` step, `npm run generate`) and bundles with
 tsup. The generated file is committed. `npm test` runs the tests against `dist`.
 
 ## License

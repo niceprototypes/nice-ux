@@ -1,4 +1,4 @@
-# Testing nice-react-scroll Locally
+# Testing @niceprototypes/scroll Locally
 
 This guide explains how to test the package locally in your application without publishing to npm.
 
@@ -13,7 +13,7 @@ Using `toolkit` directly can cause the "Invalid hook call" error because React g
 This is the safest way to test locally:
 
 ```bash
-# In nice-react-scroll directory
+# In @niceprototypes/scroll directory
 npm run build
 npm pack
 
@@ -34,12 +34,12 @@ This installs it like a real npm package and avoids the duplicate React issue.
 
 **Update after changes:**
 ```bash
-# In nice-react-scroll
+# In @niceprototypes/scroll
 npm run build
 npm pack
 
 # In your-app
-npm uninstall nice-react-scroll
+npm uninstall @niceprototypes/scroll
 npm install ../nice-react-scroll/nice-react-scroll-1.2.5.tgz
 ```
 
@@ -64,13 +64,13 @@ npm link
 ### Step 2: Link the library
 
 ```bash
-# In nice-react-scroll directory
+# In @niceprototypes/scroll directory
 npm link react react-dom styled-components
 npm run build
 npm link
 
 # In your-app directory
-npm link nice-react-scroll
+npm link @niceprototypes/scroll
 ```
 
 This ensures both the library and your app use the same React instance.
@@ -79,9 +79,9 @@ This ensures both the library and your app use the same React instance.
 
 ```bash
 # In your-app
-npm unlink nice-react-scroll
+npm unlink @niceprototypes/scroll
 
-# In nice-react-scroll
+# In @niceprototypes/scroll
 npm unlink react react-dom styled-components
 npm unlink
 ```
@@ -94,18 +94,18 @@ Yalc is a better alternative to npm link:
 # Install yalc globally
 npm install -g yalc
 
-# In nice-react-scroll directory
+# In @niceprototypes/scroll directory
 npm run build
 yalc publish
 
 # In your-app directory
-yalc add nice-react-scroll
+yalc add @niceprototypes/scroll
 npm install
 ```
 
 **Update after changes:**
 ```bash
-# In nice-react-scroll
+# In @niceprototypes/scroll
 npm run build
 yalc push
 
@@ -115,7 +115,7 @@ yalc push
 **Remove when done:**
 ```bash
 # In your-app
-yalc remove nice-react-scroll
+yalc remove @niceprototypes/scroll
 npm install
 ```
 
@@ -127,7 +127,7 @@ In your app's `package.json`:
 ```json
 {
   "dependencies": {
-    "nice-react-scroll": "file:../nice-react-scroll"
+    "@niceprototypes/scroll": "file:../nice-react-scroll"
   }
 }
 ```
@@ -151,7 +151,7 @@ npm install
 
 2. **Clear everything and reinstall:**
    ```bash
-   # In nice-react-scroll
+   # In @niceprototypes/scroll
    rm -rf node_modules
    npm install
    npm run build
@@ -165,7 +165,7 @@ npm install
 
 ### Build not updating?
 
-Make sure to run `npm run build` in nice-react-scroll after every change.
+Make sure to run `npm run build` in @niceprototypes/scroll after every change.
 
 ### Type errors?
 
@@ -185,7 +185,7 @@ If you get TypeScript errors, make sure your app's `tsconfig.json` includes:
 For active development:
 
 1. **Use yalc** for best experience
-2. Make changes in nice-react-scroll
+2. Make changes in @niceprototypes/scroll
 3. Run `npm run build && yalc push`
 4. App automatically updates
 5. Test changes
@@ -202,12 +202,12 @@ For final testing before publish:
 
 ```bash
 # Method 1: npm pack (safest)
-cd nice-react-scroll && npm run build && npm pack
+cd @niceprototypes/scroll && npm run build && npm pack
 cd your-app && npm install ../nice-react-scroll/*.tgz
 
 # Method 2: yalc (best for development)
-cd nice-react-scroll && npm run build && yalc push
-cd your-app && yalc add nice-react-scroll
+cd @niceprototypes/scroll && npm run build && yalc push
+cd your-app && yalc add @niceprototypes/scroll
 
 # Method 3: npm link (requires extra steps)
 # See detailed steps above
@@ -218,7 +218,7 @@ cd your-app && yalc add nice-react-scroll
 Once published, you can install normally:
 
 ```bash
-npm install nice-react-scroll
+npm install @niceprototypes/scroll
 ```
 
 No more special steps needed!

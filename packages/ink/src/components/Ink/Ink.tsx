@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Theme } from "nice-react-styles"
+import { Theme } from "@niceprototypes/styles"
 import { StyledInk } from "./Ink.styles"
 import { InkProps } from "./Ink.types"
 
@@ -8,14 +8,14 @@ import { InkProps } from "./Ink.types"
  *
  * Provides comprehensive text styling control with semantic HTML elements,
  * CSS custom properties, and accessibility features. Font families are inlined
- * from nice-styles design tokens for consistent text styling across applications.
+ * from @niceprototypes/styles design tokens for consistent text styling across applications.
  *
  * @example
  * ```tsx
  * // Simple heading
  * <Ink as="h1">Main Heading</Ink>
  *
- * // Custom size from nice-styles tokens
+ * // Custom size from @niceprototypes/styles tokens
  * <Ink size="large">Large text</Ink>
  *
  * // Success message with semantic color

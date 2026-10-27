@@ -1,5 +1,5 @@
 {
-  "name": "nice-react-scroll",
+  "name": "@niceprototypes/scroll",
   "version": "2.2.2",
   "type": "module",
   "description": "Performance-optimized scroll components for React with centralized scroll management, sticky positioning, and intersection observer utilities",
@@ -32,7 +32,8 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/niceprototypes/nice-react-scroll.git"
+    "url": "git+https://github.com/niceprototypes/nice-ux.git",
+    "directory": "packages/scroll"
   },
   "peerDependencies": {
     "react": ">=18.0.0",
@@ -40,16 +41,16 @@
     "styled-components": ">=6.0.0"
   },
   "devDependencies": {
-    "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0",
-    "nice-config-rollup": "file:../config-rollup",
-    "nice-config-typescript": "file:../config-typescript",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@niceprototypes/config-rollup": "workspace:*",
+    "@niceprototypes/config-typescript": "workspace:*",
+    "react": "catalog:",
+    "react-dom": "catalog:",
     "rollup": "^4.0.0",
-    "styled-components": "^6.1.19",
+    "styled-components": "catalog:",
     "tslib": "^2.6.2",
-    "typescript": "^6.0.3"
+    "typescript": "catalog:"
   },
   "dependencies": {}
 }

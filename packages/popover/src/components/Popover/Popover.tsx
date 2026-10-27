@@ -1,6 +1,6 @@
 import * as React from "react"
 import { createPortal } from "react-dom"
-import { Theme } from "nice-react-styles"
+import { Theme } from "@niceprototypes/styles"
 import { StyledPopover } from "./Popover.styles"
 import type { PopoverCoordinatesType, PopoverProps } from "./Popover.types"
 import { computeAnchorPosition } from "../../services/computeAnchorPosition"

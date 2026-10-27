@@ -1,0 +1,113 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../src/components/Story"
+import Install from "../../../src/components/Install"
+import { ComponentDemoTable } from "../../../src/dataTables/components/demos/Components"
+import { calendarExampleList } from "./examples"
+import NewLines from "../../../src/components/NewLines"
+import Callout from "../../../src/components/Callout"
+import Ink from "../../../src/nice/Ink"
+import { DataTable } from "../../../src/components/DataTable"
+
+<Meta title="Components/Forms/Calendar" />
+
+<StoryHeader
+  title="Calendar"
+  description="A month grid for picking one date, with locale week start and RTL-aware keyboard navigation. Dates are ISO strings."
+/>
+
+<NewLines count={3} />
+
+<Install package="react-calendar" />
+
+```jsx
+import { Calendar } from "@niceprototypes/calendar"
+
+<Calendar value={date} onChange={setDate} aria-label="Delivery date" />
+```
+
+<NewLines count={3} />
+
+<ComponentDemoTable examples={calendarExampleList} />
+
+<NewLines count={3} />
+
+<Ink as="h2">Guide</Ink>
+
+<Ink code>@niceprototypes/calendar</Ink>
+<Ink>has named exports only (</Ink><Ink code>Calendar</Ink><Ink>,</Ink>
+<Ink code>DateField</Ink><Ink>), no default export.</Ink>
+
+<Ink>Dates cross the API only as ISO 8601</Ink>
+<Ink code>YYYY-MM-DD</Ink>
+<Ink>strings.</Ink>
+<Ink code>value</Ink><Ink>,</Ink>
+<Ink code>defaultValue</Ink><Ink>,</Ink>
+<Ink code>min</Ink><Ink>,</Ink>
+<Ink code>max</Ink><Ink>, the</Ink>
+<Ink code>onChange</Ink>
+<Ink>argument and the</Ink>
+<Ink code>isDateDisabled</Ink>
+<Ink>argument are all ISO strings, and</Ink>
+<Ink code>null</Ink>
+<Ink>means no selection. A JS</Ink>
+<Ink code>Date</Ink>
+<Ink>is never accepted or returned; an invalid string counts as no selection. v1 uses the Gregorian calendar with UTC arithmetic, so no time zone shifts a date.</Ink>
+
+```jsx
+const [date, setDate] = useState("2026-09-24")
+
+<Calendar value={date} onChange={setDate} min="2026-09-01" />
+// onChange("2026-09-25")
+```
+
+<Ink>The first column comes from the locale:</Ink>
+<Ink code>Intl.Locale</Ink>
+<Ink>week info where the engine provides it, else a region table (Sunday for regions such as US, Saturday for regions such as EG, otherwise Monday).</Ink>
+<Ink code>firstDayOfWeek</Ink>
+<Ink>(0 Sunday … 6 Saturday) overrides it, and Home / End follow the resolved start.</Ink>
+
+<Ink>Direction comes from</Ink>
+<Ink code>useLocale()</Ink>
+<Ink>in</Ink>
+<Ink code>@niceprototypes/styles</Ink><Ink>: the</Ink>
+<Ink code>dir</Ink>
+<Ink>/</Ink>
+<Ink code>locale</Ink>
+<Ink>of the nearest</Ink>
+<Ink code>StylesProvider</Ink><Ink>, else the document's</Ink>
+<Ink code>dir</Ink>
+<Ink>/</Ink>
+<Ink code>lang</Ink><Ink>. In RTL, ArrowRight moves to the previous day and ArrowLeft to the next, following the visual order, and the month carets swap. The</Ink>
+<Ink code>locale</Ink>
+<Ink>prop changes labels and week start, not key direction; the grid mirrors inside a</Ink>
+<Ink code>dir="rtl"</Ink>
+<Ink>ancestor.</Ink>
+
+```jsx
+<div dir="rtl">
+  <StylesProvider locale="ar-EG">
+    <Calendar aria-label="التاريخ" />
+  </StylesProvider>
+</div>
+```
+
+<Ink>The grid follows the ARIA grid pattern with a roving tabindex: one day is tabbable — the selected day, else today, else the first enabled day of the visible month.</Ink>
+
+<DataTable
+  columns={[{ key: "c0", header: "Key" }, { key: "c1", header: "Action" }]}
+  tables={[{ rows: [
+    { id: "0", values: [<Ink>ArrowRight / ArrowLeft</Ink>, <Ink>Next / previous day (mirrored in RTL)</Ink>] },
+    { id: "1", values: [<Ink>ArrowDown / ArrowUp</Ink>, <Ink>Same weekday next / previous week</Ink>] },
+    { id: "2", values: [<Ink>Home / End</Ink>, <Ink>Start / end of the week</Ink>] },
+    { id: "3", values: [<Ink>PageDown / PageUp</Ink>, <Ink>Same day next / previous month</Ink>] },
+    { id: "4", values: [<Ink>Shift + PageDown / PageUp</Ink>, <Ink>Same day next / previous year</Ink>] },
+    { id: "5", values: [<Ink>Enter / Space</Ink>, <Ink>Select the focused day</Ink>] },
+  ] }]}
+/>
+
+<Ink>Moving focus off the visible month changes the month. Focus stops at</Ink>
+<Ink code>min</Ink>
+<Ink>and</Ink>
+<Ink code>max</Ink><Ink>. Disabled days stay focusable (</Ink><Ink code>aria-disabled</Ink><Ink>), so the arrows move across them.</Ink>
+
+<Callout type="hint">Pass and store ISO `YYYY-MM-DD` strings — Calendar never accepts or returns a `Date`.</Callout>

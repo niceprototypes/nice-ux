@@ -10,7 +10,7 @@
 
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import type { ReactNode } from 'react'
-import { DEFAULT_THEME, type ThemeType } from 'nice-styles'
+import { DEFAULT_THEME, type ThemeType } from '../../../index'
 
 /**
  * Shape returned by `useTheme()`.

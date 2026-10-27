@@ -1,6 +1,6 @@
 import styled from "styled-components"
-import { getToken, type BorderColorType, type SpacingShorthandType } from "nice-react-styles"
-import { getSpacingValue, styleSpacing } from "nice-react-flex"
+import { getToken, type BorderColorType, type SpacingShorthandType } from "@niceprototypes/styles"
+import { getSpacingValue, styleSpacing } from "@niceprototypes/flex"
 
 /**
  * Styled `<hr>` for storybook docs.

@@ -2,11 +2,11 @@
  * Shared ESLint configuration for the nice-* ecosystem (React + TypeScript +
  * Prettier).
  *
- * Consume via .eslintrc.cjs:  module.exports = require("nice-config-eslint")
+ * Consume via .eslintrc.cjs:  module.exports = require("@niceprototypes/config-eslint")
  *
  * The parser and plugins are declared as this package's peerDependencies so
  * npm installs them into the CONSUMER's node_modules — the only place ESLint 8
- * resolves plugins from. The consumer lists just nice-config-eslint (plus the
+ * resolves plugins from. The consumer lists just @niceprototypes/config-eslint (plus the
  * eslint / prettier it runs); the plugins come in automatically as peers.
  */
 module.exports = {

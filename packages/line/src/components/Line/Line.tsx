@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Theme } from "nice-react-styles"
+import { Theme } from "@niceprototypes/styles"
 import { isDevelopment } from "../../utilities/isDevelopment"
 import { useFrame } from "../../utilities/useFrame"
 import { StyledDash, StyledLine, StyledRim, StyledSvg } from "./Line.styles"
@@ -40,7 +40,7 @@ const Line: React.FC<LineProps> = ({ color = "base", radius = "element", classNa
     if (!parent || getComputedStyle(parent).position !== "static") return
     warnedRef.current = true
     console.warn(
-      "nice-react-line: Line's parent element is statically positioned, so Line frames its nearest positioned ancestor " +
+      "@niceprototypes/line: Line's parent element is statically positioned, so Line frames its nearest positioned ancestor " +
         "(up to the whole viewport). Line is a frame, not a divider: give its parent a position (relative, absolute, fixed or sticky)."
     )
   })

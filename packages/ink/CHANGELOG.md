@@ -30,7 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- **Updated `nice-styles` to v2.0.1**: Upgraded dependency from v1.1.1 to v2.0.1
+- **Updated `@niceprototypes/styles` to v2.0.1**: Upgraded dependency from v1.1.1 to v2.0.1
   - Adopts semantic naming convention (e.g., `fontSize.default` instead of `FONT_SIZE_3`)
   - Uses "reverse" naming instead of "inverse" (e.g., `backgroundColorReverse`)
   - No breaking changes for this package - all CSS variable names remain compatible
@@ -38,26 +38,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **New shade variant status types**: Added support for content color shade variants from `nice-styles` v2.0+
+- **New shade variant status types**: Added support for content color shade variants from `@niceprototypes/styles` v2.0+
   - New status types: `darker`, `dark`, `light`, `lighter`
   - These map to `--content-color-darker`, `--content-color-dark`, `--content-color-light`, `--content-color-lighter`
   - Enables fine-grained control over text color shades
 
 ### Documentation
 
-- Updated README examples to use semantic naming from `nice-styles` v2.0.0+
+- Updated README examples to use semantic naming from `@niceprototypes/styles` v2.0.0+
   - Changed examples from `FONT_SIZE_3, CONTENT_COLOR_SUCCESS` to `fontSize.default, contentColor.success`
-- Updated all documentation to reflect the new `nice-styles` API
-- Clarified distinction between core status colors (from `nice-styles`), shade variants (from `nice-styles`), and extended status colors (custom)
+- Updated all documentation to reflect the new `@niceprototypes/styles` API
+- Clarified distinction between core status colors (from `@niceprototypes/styles`), shade variants (from `@niceprototypes/styles`), and extended status colors (custom)
 - Added comprehensive status color examples showing all available types
 
 ## [3.0.0] - 2025-01-10
 
 ### Breaking Changes
 
-- **BREAKING**: Replaced `nice-css-variables` dependency with `nice-styles`
-  - `nice-css-variables` has been deprecated in favor of `nice-styles`
-  - The `nice-styles` package provides the same CSS variables with additional features:
+- **BREAKING**: Replaced `nice-css-variables` dependency with `@niceprototypes/styles`
+  - `nice-css-variables` has been deprecated in favor of `@niceprototypes/styles`
+  - The `@niceprototypes/styles` package provides the same CSS variables with additional features:
     - Modular CSS imports for better performance
     - TypeScript constants for all design token values
     - Better organized with individual CSS files per category
@@ -69,7 +69,7 @@ If you were using `nice-css-variables`:
 
 ```bash
 npm uninstall nice-css-variables
-npm install nice-styles
+npm install @niceprototypes/styles
 ```
 
 Update your CSS imports:
@@ -79,18 +79,18 @@ Update your CSS imports:
 @import 'nice-css-variables';
 
 /* New - import all variables */
-@import 'nice-styles/variables.css';
+@import '@niceprototypes/styles/variables.css';
 
 /* Or import selectively for better performance */
-@import 'nice-styles/static/css/content-color.css';
-@import 'nice-styles/static/css/font-size.css';
+@import '@niceprototypes/styles/static/css/content-color.css';
+@import '@niceprototypes/styles/static/css/font-size.css';
 ```
 
 TypeScript/JavaScript usage:
 
 ```typescript
 // New: You can now import constants directly
-import { CONTENT_COLOR_SUCCESS, FONT_SIZE_3 } from 'nice-styles'
+import { CONTENT_COLOR_SUCCESS, FONT_SIZE_3 } from '@niceprototypes/styles'
 ```
 
 ## [2.0.0] - 2025-01-09

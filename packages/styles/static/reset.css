@@ -1,5 +1,5 @@
 /**
- * nice-styles reset
+ * @niceprototypes/styles reset
  *
  * Static, token-driven baseline. Import after tokens.css so the var()
  * references resolve. Follows the modern "sensible reset" model (Comeau/Bell),

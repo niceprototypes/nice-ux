@@ -1,4 +1,4 @@
-import { componentTokensData } from "nice-react-styles"
+import { componentTokensData } from "@niceprototypes/styles"
 import { tokenPageId } from "../data"
 
 /**

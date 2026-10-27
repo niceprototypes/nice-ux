@@ -1,6 +1,6 @@
 import * as React from "react"
-import { getToken } from "nice-react-styles"
-import type { FlexAlignItemsType, FlexJustifyContentType } from "nice-react-flex"
+import { getToken } from "@niceprototypes/styles"
+import type { FlexAlignItemsType, FlexJustifyContentType } from "@niceprototypes/flex"
 import { CellFlex } from "./PreviewCell.styles"
 
 export interface PreviewCellProps {

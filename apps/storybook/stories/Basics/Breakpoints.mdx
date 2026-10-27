@@ -26,7 +26,7 @@ import Ink from "../../src/nice/Ink"
 <Ink as="h3">CSS only</Ink>
 
 ```cssapp
-@import "nice-styles/tokens.css";
+@import "@niceprototypes/styles/tokens.css";
 
 .phone-only {
   font-size: var(--np--font-size--phone);
@@ -46,7 +46,7 @@ import Ink from "../../src/nice/Ink"
 [//]: # "For CSS-in-JS or runtime CSS strings, `getBreakpoint` returns the matching `@media (min-width: …)` literal sourced from the same threshold table the build uses, so JS and CSS stay in sync:"
 
 ```js
-import { getBreakpoint, getToken } from "nice-styles"
+import { getBreakpoint, getToken } from "@niceprototypes/styles"
 
 const css = `${getBreakpoint("tablet+")} {
   h1 {
@@ -73,7 +73,7 @@ const css = `${getBreakpoint("tablet+")} {
 
 ```tsx
 import styled from "styled-components"
-import { getBreakpoint, getToken } from "nice-react-styles"
+import { getBreakpoint, getToken } from "@niceprototypes/styles"
 
 const Wrapper = styled.div`
   padding: ${getToken("gap")};
@@ -94,7 +94,7 @@ const Wrapper = styled.div`
 <Ink code>setTokens</Ink><Ink>, alongside your tokens. Thresholds apply first, so responsive values in the same call use the new ones:</Ink>
 
 ```ts
-import { setTokens } from "nice-react-styles"
+import { setTokens } from "@niceprototypes/styles"
 
 setTokens({
   breakpoints: { laptop: 1100 },
@@ -111,7 +111,7 @@ setTokens({
 <Ink>is the shortcut:</Ink>
 
 ```ts
-import { setBreakpoints } from "nice-react-styles"
+import { setBreakpoints } from "@niceprototypes/styles"
 
 setBreakpoints({
   tablet: 700,
@@ -150,7 +150,7 @@ setBreakpoints({
       code: true,
       header: null,
       width: "5em",
-      render: "nice-react-ink",
+      render: "@niceprototypes/ink",
       size: "small",
       clickToCopy: true,
     },
@@ -158,14 +158,14 @@ setBreakpoints({
       key: "query",
       header: "Query",
       width: "29em",
-      render: "nice-react-code",
+      render: "@niceprototypes/code",
       language: "css",
       clickToCopy: false,
     },
     {
       key: "range",
       header: "Range",
-      render: "nice-react-ink",
+      render: "@niceprototypes/ink",
       code: true,
       size: "small",
     },

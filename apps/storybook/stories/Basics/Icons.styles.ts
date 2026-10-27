@@ -1,6 +1,6 @@
 import styled from "styled-components"
-import Icon from "nice-react-icon"
-import { getToken } from "nice-react-styles"
+import Icon from "@niceprototypes/icon"
+import { getToken } from "@niceprototypes/styles"
 
 /** A standalone-icon preview sized to the `size larger` token. */
 export const IconPreview = styled(Icon)`

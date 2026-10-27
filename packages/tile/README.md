@@ -1,17 +1,17 @@
-# nice-react-tile
+# @niceprototypes/tile
 
 A responsive content Tile for React + styled-components. Renders an optional title and description over a token-aware background, centers and width-caps its inner content column, supports split (sidebar) layouts, and exposes every prop per-breakpoint via the `breakpoints` prop.
 
 ## Installation
 
 ```bash
-npm install nice-react-tile
+npm install @niceprototypes/tile
 ```
 
 ### Peer dependencies
 
 ```bash
-npm install react react-dom styled-components nice-react-flex
+npm install react react-dom styled-components @niceprototypes/flex
 ```
 
 ## Usage
@@ -19,7 +19,7 @@ npm install react react-dom styled-components nice-react-flex
 ### Basic
 
 ```tsx
-import Tile from "nice-react-tile"
+import Tile from "@niceprototypes/tile"
 
 const App = () => (
   <Tile
@@ -31,7 +31,7 @@ const App = () => (
 )
 ```
 
-`title` and `description` render through `nice-react-ink`. Forward Ink props with `titleProps` / `descriptionProps`:
+`title` and `description` render through `@niceprototypes/ink`. Forward Ink props with `titleProps` / `descriptionProps`:
 
 ```tsx
 <Tile
@@ -60,7 +60,7 @@ const App = () => (
 
 ### Token-bound color
 
-`backgroundColor`, `backgroundSize`, and `color` accept **nice-styles token variant names only** — not raw CSS. For a raw color or gradient, use `backgroundImage`.
+`backgroundColor`, `backgroundSize`, and `color` accept **@niceprototypes/styles token variant names only** — not raw CSS. For a raw color or gradient, use `backgroundImage`.
 
 ```tsx
 <Tile backgroundColor="raised" color="light" title="Token-driven surface" />
@@ -80,7 +80,7 @@ Providing `contentLeft` and/or `contentRight` produces a row layout (image-besid
 
 ### Theme pinning
 
-`theme` pins the subtree to a nice-styles theme by wrapping output in `<Theme>`. Descendants inherit it via the `[data-theme]` cascade.
+`theme` pins the subtree to a @niceprototypes/styles theme by wrapping output in `<Theme>`. Descendants inherit it via the `[data-theme]` cascade.
 
 ```tsx
 <Tile theme="night" backgroundImage={'url("/hero.png")'} title="Dark hero" />
@@ -103,7 +103,7 @@ The component is wrapped with `withBreakpoints`, so **any** prop can be overridd
 
 ### Padding
 
-`padding` is `FlexSpacingType` from `nice-react-flex` (`SpacingShorthandType` from nice-styles): a CSS-shorthand string of `gap` token names, 1–4 values in CSS padding order. Strings only; vary it per breakpoint with the `breakpoints` prop.
+`padding` is `FlexSpacingType` from `@niceprototypes/flex` (`SpacingShorthandType` from @niceprototypes/styles): a CSS-shorthand string of `gap` token names, 1–4 values in CSS padding order. Strings only; vary it per breakpoint with the `breakpoints` prop.
 
 ```tsx
 <Tile padding="larger base" />          // vertical "larger", horizontal "base"
@@ -114,7 +114,7 @@ Gap token names: `none`, `smaller`, `small`, `base`, `large`, `larger`.
 
 ## Props
 
-Types are the aliases exported from `Tile.types.ts`. Allowed values of each union (resolved): `~/nice/manifest/agents/catalog.json` → `nice-react-tile`; aliases imported from nice-styles (`GapType`, `BackgroundColorType`, `BackgroundSizeType`, `ColorType`, `ThemeType`) stay unresolved there — read `nice-styles/src/generated/types.ts`.
+Types are the aliases exported from `Tile.types.ts`. Allowed values of each union (resolved): `~/nice/manifest/agents/catalog.json` → `@niceprototypes/tile`; aliases imported from @niceprototypes/styles (`GapType`, `BackgroundColorType`, `BackgroundSizeType`, `ColorType`, `ThemeType`) stay unresolved there — read `@niceprototypes/styles/src/generated/types.ts`.
 
 ### Content
 
@@ -167,7 +167,7 @@ Types are the aliases exported from `Tile.types.ts`. Allowed values of each unio
 
 ## Tokens
 
-Component tokens live in `nice-styles/src/tokens/components/tile.json` and are read with `getToken("tile.{group}:{variant}")`. Each emits a CSS custom property `--np--tile--{group}--{variant}`, with camelCase groups in kebab-case; the `base` variant contributes no segment (`tile.color:base` → `--np--tile--color`). Override them with `setTokens({ tile: { … } })`.
+Component tokens live in `@niceprototypes/styles/src/tokens/components/tile.json` and are read with `getToken("tile.{group}:{variant}")`. Each emits a CSS custom property `--np--tile--{group}--{variant}`, with camelCase groups in kebab-case; the `base` variant contributes no segment (`tile.color:base` → `--np--tile--color`). Override them with `setTokens({ tile: { … } })`.
 
 | Token group | Variants | CSS variables |
 |-------------|----------|---------------|
@@ -180,8 +180,8 @@ The `--inverse` forms are derived for tokens that alias a core color with an inv
 ## Exports
 
 ```ts
-import Tile, { TileTypes } from "nice-react-tile"
-import type { TileProps, TileMaxWidthType, TileMinHeightType } from "nice-react-tile"
+import Tile, { TileTypes } from "@niceprototypes/tile"
+import type { TileProps, TileMaxWidthType, TileMinHeightType } from "@niceprototypes/tile"
 ```
 
 - **`default`** — the `Tile` component, wrapped with `withBreakpoints`.

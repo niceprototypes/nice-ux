@@ -1,0 +1,37 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../src/components/Story"
+import Tooltip from "@niceprototypes/tooltip"
+import Button from "@niceprototypes/button"
+import Ink from "../../../src/nice/Ink"
+import { DataTableRow } from "../../../src/components/DataTable"
+import { DEMO_CODE_COLUMNS } from "../../../src/components/DataTable"
+
+<Meta title="Components/Tooltip/delay" />
+
+<StoryHeader title="delay" />
+
+<Ink color="light" code>delayShow</Ink>
+<Ink color="light">defers rendering after the tooltip is activated;</Ink>
+<Ink color="light" code>delayHide</Ink>
+<Ink color="light">defers unrendering after the trigger ends. Both are in milliseconds and default to</Ink>
+<Ink color="light" code>0</Ink><Ink color="light">. A pending delay is cancelled if the opposite event fires first, so a brief pass never flashes the tooltip.</Ink>
+
+<DataTableRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+    <Tooltip content="Appears after 600ms" delayShow={500}>
+      <Button>delayShow 600</Button>
+    </Tooltip>,
+    `<Tooltip content="…" delayShow={500}>\n  <Button>Hover</Button>\n</Tooltip>`,
+  ]}
+/>
+
+<DataTableRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+    <Tooltip content="Lingers 600ms after leave" delayHide={600}>
+      <Button>delayHide 600</Button>
+    </Tooltip>,
+    `<Tooltip content="…" delayHide={600}>\n  <Button>Hover</Button>\n</Tooltip>`,
+  ]}
+/>

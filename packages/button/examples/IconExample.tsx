@@ -2,7 +2,7 @@ import React from 'react'
 import Button from '../src'
 
 /**
- * Example showing buttons with icons using nice-react-icon
+ * Example showing buttons with icons using @niceprototypes/icon
  * Icons are automatically rendered from the icon name string
  */
 const IconExample: React.FC = () => {

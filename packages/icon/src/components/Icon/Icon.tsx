@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Theme } from "nice-react-styles"
+import { Theme } from "@niceprototypes/styles"
 import { IconProps } from "./Icon.types"
 import { IconWrapperStyled, ImageStyled } from "./Icon.styles"
 import { resolveIconComponent } from "../../utilities/resolveIconComponent"
@@ -16,12 +16,12 @@ import { isSpinning } from "../../utilities/isSpinning"
  *
  * @example
  * ```tsx
- * import Icon from 'nice-react-icon'
+ * import Icon from '@niceprototypes/icon'
  *
  * // Custom icon (tier 1)
  * <Icon name="arrow-right" />
  *
- * // Vendor icon (tier 2) — requires nice-react-icon-vendor
+ * // Vendor icon (tier 2) — requires @niceprototypes/icon-vendor
  * <Icon name="TrendingDown" vendor />
  *
  * // Direct vendor component (tier 3)

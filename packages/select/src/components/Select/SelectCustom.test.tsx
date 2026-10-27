@@ -1,12 +1,12 @@
 import React from "react"
 import { act, fireEvent, render, screen } from "@testing-library/react"
 import "@testing-library/jest-dom"
-import { Field } from "nice-react-field"
+import { Field } from "@niceprototypes/field"
 import Select from "."
 import type { SelectOptionsType } from "./Select.types"
 
 // Stub Icon (as react-button does): renders the name and colour it receives.
-jest.mock("nice-react-icon", () => ({
+jest.mock("@niceprototypes/icon", () => ({
   __esModule: true,
   default: ({ name, color }: { name: string; color?: string }) => (
     <span

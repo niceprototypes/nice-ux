@@ -1,5 +1,5 @@
 import * as React from "react"
-import type { ThemeType } from "nice-react-styles"
+import type { ThemeType } from "@niceprototypes/styles"
 
 /**
  * FormOnSubmitType

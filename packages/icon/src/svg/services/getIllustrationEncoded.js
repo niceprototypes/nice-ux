@@ -14,7 +14,7 @@ function resolveEncoded(name, variant) {
   const dataUri = variants[variant]
   if (!dataUri) {
     console.warn(
-      `nice-icons: illustration "${name}" has no "${variant}" variant; using "base". ` +
+      `@niceprototypes/icon: illustration "${name}" has no "${variant}" variant; using "base". ` +
         `Available: ${Object.keys(variants).join(", ")}.`
     )
     return variants.base

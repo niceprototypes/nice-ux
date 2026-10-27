@@ -1,13 +1,13 @@
 import React from "react"
 import { act, fireEvent, render, screen } from "@testing-library/react"
 import "@testing-library/jest-dom"
-import { Field } from "nice-react-field"
+import { Field } from "@niceprototypes/field"
 import DateField from "./DateField"
 import { DateField as ResponsiveDateField } from "."
 
-// react-icon's dist requires nice-styles without declaring it; mock it the way
+// react-icon's dist requires @niceprototypes/styles without declaring it; mock it the way
 // react-button's tests do.
-jest.mock("nice-react-icon", () => ({
+jest.mock("@niceprototypes/icon", () => ({
   __esModule: true,
   default: ({ name }: { name: string }) => <span data-testid="icon">{name}</span>,
 }))

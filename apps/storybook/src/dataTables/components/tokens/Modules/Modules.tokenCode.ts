@@ -1,4 +1,4 @@
-import { getConstant } from "nice-react-styles"
+import { getConstant } from "@niceprototypes/styles"
 
 /**
  * The CSS-variable and getToken() doc strings for one variant. The CSS var is

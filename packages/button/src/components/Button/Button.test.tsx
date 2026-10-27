@@ -1,19 +1,19 @@
 import React from "react"
 import { render, screen, fireEvent } from "@testing-library/react"
 import "@testing-library/jest-dom"
-import { getToken, resolveColorProp } from "nice-react-styles"
+import { getToken, resolveColorProp } from "@niceprototypes/styles"
 import Button from "./Button"
 import ResponsiveButton from "."
 import type { ButtonRefType } from "./Button.types"
 import { resolveGhost } from "../../utilities/resolveGhost"
 import { resolveStateColor } from "../../utilities/resolveStateColor"
 
-jest.mock("nice-react-ink", () => ({
+jest.mock("@niceprototypes/ink", () => ({
   __esModule: true,
   default: ({ children }: { children: React.ReactNode }) => <span>{children}</span>,
 }))
 
-jest.mock("nice-react-icon", () => ({
+jest.mock("@niceprototypes/icon", () => ({
   __esModule: true,
   default: ({ name }: { name: string }) => <span data-testid="icon">{name}</span>,
 }))

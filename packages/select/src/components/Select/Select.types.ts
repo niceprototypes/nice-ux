@@ -5,8 +5,8 @@ import type {
   InputChildrenType,
   InputDefaultValueType,
   InputValueType,
-} from "nice-react-input"
-import type { SizeType } from "nice-react-styles"
+} from "@niceprototypes/input"
+import type { SizeType } from "@niceprototypes/styles"
 
 /**
  * SelectNativeType
@@ -75,7 +75,7 @@ export type SelectPlaceholderType = string
 /**
  * SelectChildrenType
  *
- * Re-export of InputChildrenType from nice-react-input. `<option>` /
+ * Re-export of InputChildrenType from @niceprototypes/input. `<option>` /
  * `<optgroup>` elements; take precedence over `options` when both are given.
  * Native mode renders them as-is. Custom mode maps each
  * `<option value disabled>label</option>` to a listbox option (value falls
@@ -88,7 +88,7 @@ export type SelectChildrenType = InputChildrenType
 /**
  * SelectSizeType
  *
- * Re-export of SizeType from nice-styles. Sizes the field chrome (via Input)
+ * Re-export of SizeType from @niceprototypes/styles. Sizes the field chrome (via Input)
  * and the chevron (`select.chevron.size` token).
  *
  * Values:
@@ -99,14 +99,14 @@ export type SelectSizeType = SizeType
 /**
  * SelectValueType
  *
- * Re-export of InputValueType from nice-react-input. Controlled value.
+ * Re-export of InputValueType from @niceprototypes/input. Controlled value.
  */
 export type SelectValueType = InputValueType
 
 /**
  * SelectDefaultValueType
  *
- * Re-export of InputDefaultValueType from nice-react-input. Uncontrolled initial value.
+ * Re-export of InputDefaultValueType from @niceprototypes/input. Uncontrolled initial value.
  */
 export type SelectDefaultValueType = InputDefaultValueType
 

@@ -1,0 +1,51 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../src/components/Story"
+import Icon from "@niceprototypes/icon"
+import StoryDescription from "../../../src/components/StoryDescription"
+import { DEMO_CODE_COLUMNS } from "../../../src/components/DataTable"
+import { DataTable } from "../../../src/components/DataTable"
+import { colors } from "./Icon.services"
+import Ink from "../../../src/nice/Ink"
+
+<Meta title="Components/Icon/color" />
+
+<StoryHeader title="color" />
+
+<StoryDescription property="color">
+  Sets the color of the icon using color tokens.
+</StoryDescription>
+
+<Ink>Pass an object to adjust the token's channels. The color stays a token, so it still follows day and night:</Ink>
+
+```tsx
+<Icon name="lightning" color={{ name: "highlight", transform: [null, null, 40, null] }} />
+```
+
+<Ink>Channels are</Ink>
+<Ink code>[hue, saturation, lightness, alpha]</Ink><Ink>. A number sets the channel,</Ink>
+<Ink code>"+10"</Ink>
+<Ink>and</Ink>
+<Ink code>"-10"</Ink>
+<Ink>shift it,</Ink>
+<Ink code>"*0.5"</Ink>
+<Ink>scales it, and</Ink>
+<Ink code>null</Ink>
+<Ink>leaves it alone.</Ink>
+
+<DataTable
+  showHeader={false}
+  columns={DEMO_CODE_COLUMNS}
+  tables={[{ rows: colors.map(color => ({
+    id: String(color),
+    values: [
+      <Icon
+        color={color}
+        name="message"
+        size="larger"
+        strokeWidth="large"
+      />,
+      `<Icon color="${color}" />`,
+    ],
+  })) }]}
+/>
+

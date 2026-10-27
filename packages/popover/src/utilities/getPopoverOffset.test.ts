@@ -1,13 +1,13 @@
-import { getToken } from "nice-react-styles"
+import { getToken } from "@niceprototypes/styles"
 import { getPopoverOffset, POPOVER_OFFSET_FALLBACK } from "./getPopoverOffset"
 
-jest.mock("nice-react-styles", () => {
-  const actual = jest.requireActual("nice-react-styles")
+jest.mock("@niceprototypes/styles", () => {
+  const actual = jest.requireActual("@niceprototypes/styles")
   return { ...actual, getToken: jest.fn(actual.getToken) }
 })
 
 const mockedGetToken = getToken as jest.MockedFunction<typeof getToken>
-const actualGetToken = jest.requireActual("nice-react-styles").getToken as typeof getToken
+const actualGetToken = jest.requireActual("@niceprototypes/styles").getToken as typeof getToken
 
 describe("getPopoverOffset", () => {
   afterEach(() => mockedGetToken.mockImplementation(actualGetToken))

@@ -1,5 +1,5 @@
 import styled, { css, keyframes } from "styled-components"
-import { getConstant, getConstantKey, getToken, resolveColorProp, type ColorTokenProp } from "nice-react-styles"
+import { getConstant, getConstantKey, getToken, resolveColorProp, type ColorTokenProp } from "@niceprototypes/styles"
 import type {
   IconSizeType,
   IconColorType,

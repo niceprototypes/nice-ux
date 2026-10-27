@@ -1,22 +1,22 @@
-# nice-react-icon
+# @niceprototypes/icon
 ![Icon](docs/icon.png)
 
-> **Responsive props:** every prop accepts per-breakpoint overrides through the `breakpoints` prop added by `withBreakpoints` (`breakpoints={{ "laptop+": { size: "large" } }}`). Key semantics: nice-react-styles README → "Breakpoint keys".
+> **Responsive props:** every prop accepts per-breakpoint overrides through the `breakpoints` prop added by `withBreakpoints` (`breakpoints={{ "laptop+": { size: "large" } }}`). Key semantics: @niceprototypes/styles README → "Breakpoint keys".
 
-React icon component for the nice-icons set, with token-driven sizing, color, and stroke, optional vendor (Lucide) resolution, and an `Illustration` component for fixed-color art.
+React icon component for the @niceprototypes/icon set, with token-driven sizing, color, and stroke, optional vendor (Lucide) resolution, and an `Illustration` component for fixed-color art.
 
 ## Installation
 
 ```bash
-npm install nice-react-icon nice-react-icon-vendor
+npm install @niceprototypes/icon @niceprototypes/icon-vendor
 ```
 
-Peer dependencies: `react`, `react-dom`, `styled-components`, `nice-styles`, `nice-react-styles`, `nice-react-icon-vendor`.
+Peer dependencies: `react`, `react-dom`, `styled-components`, `@niceprototypes/styles`, `@niceprototypes/styles`, `@niceprototypes/icon-vendor`.
 
 ## Quick Start
 
 ```tsx
-import Icon from "nice-react-icon"
+import Icon from "@niceprototypes/icon"
 
 <Icon name="star" />
 <Icon name="star" variant="fill" size="large" color="success" />
@@ -24,7 +24,7 @@ import Icon from "nice-react-icon"
 
 ## Props Reference
 
-Types are the aliases exported from `Icon.types.ts`. Allowed values of each union (resolved): `~/nice/manifest/agents/catalog.json` → `nice-react-icon`; aliases imported from nice-styles (`FontSizeType`, `ColorType`, `ThemeType`) stay unresolved there — read `nice-styles/src/generated/types.ts`.
+Types are the aliases exported from `Icon.types.ts`. Allowed values of each union (resolved): `~/nice/manifest/agents/catalog.json` → `@niceprototypes/icon`; aliases imported from @niceprototypes/styles (`FontSizeType`, `ColorType`, `ThemeType`) stay unresolved there — read `@niceprototypes/styles/src/generated/types.ts`.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -48,7 +48,7 @@ Types are the aliases exported from `Icon.types.ts`. Allowed values of each unio
 
 ### Illustration
 
-`import { Illustration } from "nice-react-icon"` — fixed-color art from nice-icons' illustration set. Recolor and stroke props (`color`, `strokeWidth`, `strokeScaling`, `outlined`) are omitted; sizing and animation reuse the icon tokens.
+`import { Illustration } from "@niceprototypes/icon"` — fixed-color art from @niceprototypes/icon' illustration set. Recolor and stroke props (`color`, `strokeWidth`, `strokeScaling`, `outlined`) are omitted; sizing and animation reuse the icon tokens.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -64,11 +64,11 @@ Types are the aliases exported from `Icon.types.ts`. Allowed values of each unio
 
 ## Vendor Icons
 
-Names not in the built-in set can be resolved through `nice-react-icon-vendor`, an optional peer package that registers a resolver as a side effect of being imported.
+Names not in the built-in set can be resolved through `@niceprototypes/icon-vendor`, an optional peer package that registers a resolver as a side effect of being imported.
 
 ```tsx
 // Once, at the app entry
-import "nice-react-icon-vendor"
+import "@niceprototypes/icon-vendor"
 
 // Anywhere
 <Icon name="TrendingDown" vendor />
@@ -78,25 +78,25 @@ Vendor names are Lucide's PascalCase names (`TrendingDown`, `Pencil`); a name Lu
 
 ### Why a separate peer package
 
-The vendor peer package is part of Nice's commitment to remaining as agnostic as possible from third-party libraries. The host component (`nice-react-icon`) never imports the third-party icon set directly; it exposes a `vendor` flag and a `registerVendorResolver` hook, and the peer package is the only place a concrete vendor (currently Lucide) is referenced. This reserves the right to swap, supplement, or remove the third-party dependency later without touching the host component or any consumer call site.
+The vendor peer package is part of Nice's commitment to remaining as agnostic as possible from third-party libraries. The host component (`@niceprototypes/icon`) never imports the third-party icon set directly; it exposes a `vendor` flag and a `registerVendorResolver` hook, and the peer package is the only place a concrete vendor (currently Lucide) is referenced. This reserves the right to swap, supplement, or remove the third-party dependency later without touching the host component or any consumer call site.
 
-The same pattern applies to `nice-react-image` / `nice-react-image-vendor`.
+The same pattern applies to `@niceprototypes/image` / `@niceprototypes/image-vendor`.
 
 ## Icon names
 
-Built-in names and their variants come from nice-icons: `import { iconNames } from "nice-react-icon"` (the `IconNameType` union). Add icons by adding them to nice-icons and rebuilding it.
+Built-in names and their variants come from @niceprototypes/icon: `import { iconNames } from "@niceprototypes/icon"` (the `IconNameType` union). Add icons by adding them to @niceprototypes/icon and rebuilding it.
 
 ## Usage Examples
 
 ```tsx
-import Icon, { Illustration } from "nice-react-icon"
+import Icon, { Illustration } from "@niceprototypes/icon"
 
 <Icon name="star" variant="fill" />                         // filled variant
 <Icon name="star" size="larger" strokeWidth="large" />      // token size and stroke
 <Icon name="star" color="error" theme="night" />            // color token, pinned theme
 <Icon name="spinner" />                                     // spins by default
 <Icon name="star" animation="spin" animationDuration="slow" />
-<Icon name="TrendingDown" vendor />                         // Lucide (needs nice-react-icon-vendor)
+<Icon name="TrendingDown" vendor />                         // Lucide (needs @niceprototypes/icon-vendor)
 <Icon vendorComponent={MyIcon} color="success" />           // custom component, token styling
 <Icon breakpoints={{ "laptop+": { size: "large" } }} />     // responsive override
 <Illustration name="nice-heart" size="larger" />
@@ -104,15 +104,15 @@ import Icon, { Illustration } from "nice-react-icon"
 
 ## Tokens
 
-Component tokens under the `icon` prefix (`~/nice/styles/src/tokens/components/icon.json`): `size`, `color`, `strokeWidth`, `strokeWidthScale`, `animationDuration`, `viewBox`. Override them with `setTokens({ icon: { … } })` from nice-react-styles; read them with `getToken("icon.size:base")`.
+Component tokens under the `icon` prefix (`~/nice/styles/src/tokens/components/icon.json`): `size`, `color`, `strokeWidth`, `strokeWidthScale`, `animationDuration`, `viewBox`. Override them with `setTokens({ icon: { … } })` from @niceprototypes/styles; read them with `getToken("icon.size:base")`.
 
 ## TypeScript
 
 ```tsx
-import Icon, { type IconProps, type IconNameType, IconTypes, Illustration, type IllustrationProps, iconNames, registerVendorResolver } from "nice-react-icon"
+import Icon, { type IconProps, type IconNameType, IconTypes, Illustration, type IllustrationProps, iconNames, registerVendorResolver } from "@niceprototypes/icon"
 ```
 
-`registerVendorResolver(fn)` registers the resolver used by `vendor` (`(name: string) => React.ComponentType | null`); nice-react-icon-vendor calls it on import.
+`registerVendorResolver(fn)` registers the resolver used by `vendor` (`(name: string) => React.ComponentType | null`); @niceprototypes/icon-vendor calls it on import.
 
 ## License
 

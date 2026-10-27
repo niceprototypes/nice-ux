@@ -6,7 +6,7 @@
  */
 
 import React from 'react'
-import { ScrollProvider, StickyProvider, Sticky } from 'nice-react-scroll'
+import { ScrollProvider, StickyProvider, Sticky } from '@niceprototypes/scroll'
 import styled from 'styled-components'
 
 const Header = styled.header`

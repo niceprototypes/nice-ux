@@ -1,5 +1,5 @@
 {
-  "name": "nice-vite-watcher",
+  "name": "@niceprototypes/vite-watcher",
   "version": "0.1.4",
   "description": "Vite plugin for hot-reloading symlinked npm packages. Watches dist folders and triggers browser reload when linked packages rebuild.",
   "type": "module",
@@ -38,20 +38,22 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/niceprototypes/nice-vite-watcher"
+    "url": "git+https://github.com/niceprototypes/nice-ux.git",
+    "directory": "packages/vite-watcher"
   },
   "bugs": {
-    "url": "https://github.com/niceprototypes/nice-vite-watcher/issues"
+    "url": "https://github.com/niceprototypes/nice-ux/issues"
   },
-  "homepage": "https://github.com/niceprototypes/nice-vite-watcher#readme",
+  "homepage": "https://github.com/niceprototypes/nice-ux/tree/main/packages/vite-watcher#readme",
   "peerDependencies": {
     "vite": ">=4.0.0"
   },
   "devDependencies": {
     "@types/node": "^24.10.1",
     "tsup": "^8.0.0",
-    "typescript": "^6.0.3",
+    "typescript": "catalog:",
     "vite": "^5.0.0"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "private": true
 }

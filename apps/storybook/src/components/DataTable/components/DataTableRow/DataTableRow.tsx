@@ -1,4 +1,4 @@
-import { withBreakpoints } from "nice-react-styles"
+import { withBreakpoints } from "@niceprototypes/styles"
 import { RowClip, RowFlex, ColumnFlex } from "./DataTableRow.styles"
 import { ROW_BREAKPOINTS } from "./DataTableRow.helpers"
 import { DataTableCell } from "../DataTableCell/DataTableCell"

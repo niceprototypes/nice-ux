@@ -1,0 +1,54 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../src/components/Story"
+import Ink from "../../../src/nice/Ink"
+import { DataTableRow } from "../../../src/components/DataTable"
+import { DEMO_CODE_COLUMNS } from "../../../src/components/DataTable"
+
+<Meta title="Components/Scroll/FadeOnScroll positions" />
+
+<StoryHeader title="FadeOnScroll positions" />
+
+<Ink color="light">
+  Three position props define the scroll-progress curve at which fade in
+  begins, peaks, and ends.
+</Ink>
+
+<Ink as="h3">startPosition</Ink>
+
+<DataTableRow
+  fullWidth
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+          <Ink size="small" color="light">
+      Scroll progress % where fade in begins (default: 0)
+    </Ink>,
+          `<FadeOnScroll startPosition={30}>`,
+        ]}
+/>
+
+<Ink as="h3">peakPosition</Ink>
+
+<DataTableRow
+  fullWidth
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+          <Ink size="small" color="light">
+      Scroll progress % where peak opacity is reached (default: 50)
+    </Ink>,
+          `<FadeOnScroll peakPosition={50}>`,
+        ]}
+/>
+
+<Ink as="h3">endPosition</Ink>
+
+<DataTableRow
+  fullWidth
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+          <Ink size="small" color="light">
+      Scroll progress % where fade out completes (default: 100)
+    </Ink>,
+          `<FadeOnScroll endPosition={100}>`,
+        ]}
+/>
+

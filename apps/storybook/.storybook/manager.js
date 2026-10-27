@@ -1,8 +1,8 @@
 // @ts-check
 //
 // Project-specific manager configuration only. The sidebar tree styling and the
-// navigation bar's manager bridge are addons now — see `nice-storybook-theme`
-// and `nice-storybook-navigation` in `main.ts`. What stays here is what belongs
+// navigation bar's manager bridge are addons now — see `@niceprototypes/storybook-theme`
+// and `@niceprototypes/storybook-navigation` in `main.ts`. What stays here is what belongs
 // to this Storybook rather than to either addon: its brand theme and its tab
 // title.
 import { addons } from "storybook/manager-api"

@@ -1,4 +1,4 @@
-# nice-react-toggle
+# @niceprototypes/toggle
 
 An on/off switch. It renders a native `<input type="checkbox" role="switch">` inside a
 `<label>`; the checkbox is invisible but stays the focus target and keyboard handler (Space
@@ -7,15 +7,15 @@ toggles), and a track and thumb are drawn in its place. Clicking the label text 
 ## Install
 
 ```sh
-npm install nice-react-toggle
+npm install @niceprototypes/toggle
 ```
 
-Peer dependencies: `nice-react-field`, `nice-react-styles`, `react`, `react-dom`, `styled-components`.
+Peer dependencies: `@niceprototypes/field`, `@niceprototypes/styles`, `react`, `react-dom`, `styled-components`.
 
 ## Usage
 
 ```tsx
-import Toggle from "nice-react-toggle"
+import Toggle from "@niceprototypes/toggle"
 
 // Uncontrolled, with a visible label
 <Toggle defaultChecked>Notifications</Toggle>
@@ -44,7 +44,7 @@ const [hidden, setHidden] = useState(false)
 | `className` | `string` | | Applied to the root `<label>` |
 | `theme` | `ThemeType` | | Pins token resolution to a theme |
 
-Inside a `Field` (nice-react-field), the native checkbox takes the Field's `id` (unless `id`
+Inside a `Field` (@niceprototypes/field), the native checkbox takes the Field's `id` (unless `id`
 is passed), so the Field label names it; it is described by the Field's description and error
 (`aria-describedby`), and takes `aria-invalid="true"` and `required` from the Field's `invalid`
 and `required`.
@@ -59,7 +59,7 @@ A `checked` Toggle with no `onChange` is read-only.
 
 ## Tokens
 
-All from `nice-styles` (`src/tokens/components/toggle.json`); override any of them on an
+All from `@niceprototypes/styles` (`src/tokens/components/toggle.json`); override any of them on an
 ancestor to restyle Toggle without props.
 
 | Token | Default |
@@ -75,4 +75,4 @@ ancestor to restyle Toggle without props.
 | `--np--toggle--transition-duration` | `var(--np--animation-duration--fast)`; no transition under `prefers-reduced-motion` |
 | `--np--toggle--focus-ring--width` / `--color` / `--offset` | `var(--np--border-width--large)` / `var(--np--color--link)` / `var(--np--gap--smaller)` |
 
-Docs: nice-storybook → Components → Forms → Toggle.
+Docs: @niceprototypes/storybook → Components → Forms → Toggle.

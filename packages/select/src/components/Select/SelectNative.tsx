@@ -1,6 +1,6 @@
 import * as React from "react"
-import Icon from "nice-react-icon"
-import Input from "nice-react-input"
+import Icon from "@niceprototypes/icon"
+import Input from "@niceprototypes/input"
 import { StyledChevron } from "./Select.styles"
 import type { SelectNativeProps } from "./Select.types"
 

@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { getToken } from "nice-react-styles"
+import { getToken } from "@niceprototypes/styles"
 import type { TabsGapType, TabsJustifyContentType, TabsSizeType, TabsVariantType } from "./Tabs.types"
 
 /** Gap between tabs and between the tab list and `end`: the `gap` prop, else the size's token. */

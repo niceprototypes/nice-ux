@@ -1,17 +1,17 @@
-# nice-styles
+# @niceprototypes/styles
 
-Design tokens for Nice Prototypes: JSON token sources compiled to CSS custom properties (`--np--…`), typed data, and one runtime store read through a single getter. Framework-agnostic; React bindings live in [nice-react-styles](https://github.com/niceprototypes/nice-react-styles).
+Design tokens for Nice Prototypes: JSON token sources compiled to CSS custom properties (`--np--…`), typed data, and one runtime store read through a single getter. Framework-agnostic; React bindings live in [@niceprototypes/styles](https://github.com/niceprototypes/nice-react-styles).
 
 ## Installation
 
 ```bash
-npm install nice-styles
+npm install @niceprototypes/styles
 ```
 
 ## CSS
 
 ```css
-@import "nice-styles/tokens.css";
+@import "@niceprototypes/styles/tokens.css";
 
 .card {
   padding: var(--np--gap);
@@ -29,15 +29,15 @@ npm install nice-styles
 
 | Import | Contents |
 |---|---|
-| `nice-styles/tokens.css` | All tokens, theme switching, and breakpoint blocks |
-| `nice-styles/css/{group}.css` | One group's variables and primitives, no theme switching (e.g. `css/gap.css`) |
-| `nice-styles/breakpoints.css` | `.np-hide-{breakpoint}`, `-up`, `-down` utility classes |
-| `nice-styles/breakpoints.custom-media.css` | Optional `@custom-media` aliases (`@media (--np--tablet--up)`); requires `postcss-custom-media` |
-| `nice-styles/reset.css` | Token-driven reset (`reset.spacing.css`, `reset.colors.css`, `reset.borders.css`, `reset.responsive.css` individually) |
+| `@niceprototypes/styles/tokens.css` | All tokens, theme switching, and breakpoint blocks |
+| `@niceprototypes/styles/css/{group}.css` | One group's variables and primitives, no theme switching (e.g. `css/gap.css`) |
+| `@niceprototypes/styles/breakpoints.css` | `.np-hide-{breakpoint}`, `-up`, `-down` utility classes |
+| `@niceprototypes/styles/breakpoints.custom-media.css` | Optional `@custom-media` aliases (`@media (--np--tablet--up)`); requires `postcss-custom-media` |
+| `@niceprototypes/styles/reset.css` | Token-driven reset (`reset.spacing.css`, `reset.colors.css`, `reset.borders.css`, `reset.responsive.css` individually) |
 
 Every file except `breakpoints.custom-media.css` is plain CSS for a bare `@import`, with no build step in the consuming app.
 
-`reset.css`, `reset.spacing.css`, `reset.colors.css`, and `reset.borders.css` read `var(--np--…)` tokens, so import them **after** `tokens.css`; `reset.responsive.css` goes after `reset.css`. nice-react-styles' `StylesProvider` loads `tokens.css` but not `reset.css`; import the reset yourself.
+`reset.css`, `reset.spacing.css`, `reset.colors.css`, and `reset.borders.css` read `var(--np--…)` tokens, so import them **after** `tokens.css`; `reset.responsive.css` goes after `reset.css`. @niceprototypes/styles' `StylesProvider` loads `tokens.css` but not `reset.css`; import the reset yourself.
 
 ## JavaScript
 
@@ -46,7 +46,7 @@ Every file except `breakpoints.custom-media.css` is plain CSS for a bare `@impor
 One getter for every token kind: core, custom, theme, breakpoint, inverse, and component.
 
 ```ts
-import { getToken } from "nice-styles"
+import { getToken } from "@niceprototypes/styles"
 
 getToken("gap")                                            // "var(--np--gap)"
 getToken("gap", "large")                                   // "var(--np--gap--large)"
@@ -78,7 +78,7 @@ Declare a runtime group on `CustomTokenVariants` (declaration merging) and it jo
 
 ```ts
 // any .ts file in the consumer's program, e.g. next to the setTokens call
-declare module "nice-styles" {
+declare module "@niceprototypes/styles" {
   interface CustomTokenVariants {
     contentMaxWidth: "base" | "wide"   // variant union of the group
   }
@@ -89,12 +89,12 @@ getToken("contentMaxWidth:wide")     // "var(--np--content-max-width--wide)"
 getToken("contentMaxWidth:narrow")   // compile error — not a declared variant
 ```
 
-Augment `"nice-styles"` even when importing `getToken` from nice-react-styles — the interface is declared there. The declaration only types the name; the value still comes from `setTokens` / `generateTokenCSS`. Custom groups carry no `:inverse` effect.
+Augment `"@niceprototypes/styles"` even when importing `getToken` from @niceprototypes/styles — the interface is declared there. The declaration only types the name; the value still comes from `setTokens` / `generateTokenCSS`. Custom groups carry no `:inverse` effect.
 
 ### List tokens — `listTokens`
 
 ```ts
-import { listTokens } from "nice-styles"
+import { listTokens } from "@niceprototypes/styles"
 
 listTokens({ prefix: "button" })   // every button component token
 listTokens({ group: "color" })     // color variants, base and inverse
@@ -105,7 +105,7 @@ listTokens({ source: "runtime" })  // tokens created at runtime only
 ### Set tokens at runtime — `generateTokenCSS`
 
 ```ts
-import { generateTokenCSS, injectTokenCSS } from "nice-styles"
+import { generateTokenCSS, injectTokenCSS } from "@niceprototypes/styles"
 
 injectTokenCSS("", generateTokenCSS({
   breakpoints: { laptop: 1100 },                                // thresholds, applied first
@@ -115,7 +115,7 @@ injectTokenCSS("", generateTokenCSS({
 }))
 ```
 
-Registers every token (so `getToken` and `listTokens` see it) and returns CSS with the same shape as `tokens.css`. In React, `setTokens` from nice-react-styles does both calls.
+Registers every token (so `getToken` and `listTokens` see it) and returns CSS with the same shape as `tokens.css`. In React, `setTokens` from @niceprototypes/styles does both calls.
 
 ### Breakpoints
 
@@ -127,7 +127,7 @@ Registers every token (so `getToken` and `listTokens` see it) and returns CSS wi
 | `desktop` | 1720px |
 
 ```ts
-import { getBreakpoint, getBreakpointValue } from "nice-styles"
+import { getBreakpoint, getBreakpointValue } from "@niceprototypes/styles"
 
 getBreakpoint("tablet+")      // "@media (min-width: 641px)"
 getBreakpointValue("laptop")  // 1280
@@ -182,7 +182,7 @@ Component token sets: `button`, `calendar`, `checkbox`, `code`, `dialog`, `field
 
 Each group has a variant union type: `GapType`, `ColorType`, `ColorInverseType`, …, plus `ComponentPrefix`.
 
-`fontFamily` `base` and `heading` default to `'Helvetica Neue', Inter, Roboto, 'Arial Nova', 'Nimbus Sans', Arial, sans-serif` and `code` to `ui-monospace, 'Source Code Pro', Menlo, Consolas, monospace`, fonts already on the device; nothing is loaded. To use another family, load it with `injectFonts` or nice-react-styles' `StylesProvider` and override `fontFamily`.
+`fontFamily` `base` and `heading` default to `'Helvetica Neue', Inter, Roboto, 'Arial Nova', 'Nimbus Sans', Arial, sans-serif` and `code` to `ui-monospace, 'Source Code Pro', Menlo, Consolas, monospace`, fonts already on the device; nothing is loaded. To use another family, load it with `injectFonts` or @niceprototypes/styles' `StylesProvider` and override `fontFamily`.
 
 Allowed prop values of nice-react-* components (resolved unions): `~/nice/manifest/agents/catalog.json`.
 

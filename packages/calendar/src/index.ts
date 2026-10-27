@@ -1,9 +1,9 @@
 /**
- * nice-react-calendar — date selection for nice-react.
+ * @niceprototypes/calendar — date selection for nice-react.
  *
  * Multi-component package (named exports, no default). `Calendar` is an ISO-date
- * month grid; `DateField` is a picker field built on nice-react-input and
- * nice-react-popover. Dates cross the API only as ISO `YYYY-MM-DD` strings.
+ * month grid; `DateField` is a picker field built on @niceprototypes/input and
+ * @niceprototypes/popover. Dates cross the API only as ISO `YYYY-MM-DD` strings.
  */
 
 export { Calendar, CalendarTypes } from "./components/Calendar"

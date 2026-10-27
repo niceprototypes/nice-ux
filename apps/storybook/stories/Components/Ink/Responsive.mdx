@@ -1,0 +1,36 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../src/components/Story"
+import Ink from "../../../src/nice/Ink"
+import { getToken, getBreakpointValue } from "@niceprototypes/styles"
+import { DEMO_CODE_COLUMNS } from "../../../src/components/DataTable"
+import { DataTable } from "../../../src/components/DataTable"
+import { toSource } from "../../../src/services"
+
+export const smallLabel = `≤${getBreakpointValue("phone")}px`
+export const largeLabel = `≥${getBreakpointValue("laptop")}px`
+
+<Meta title="Components/Ink/responsive" />
+
+<StoryHeader title="responsive" />
+
+<Ink color="light">Ink sizes scale automatically across breakpoints — the same</Ink>
+<Ink color="light" code>size</Ink>
+<Ink color="light">token resolves to different values at the small and large breakpoints.</Ink>
+
+<DataTable
+  showHeader={false}
+  columns={DEMO_CODE_COLUMNS}
+  tables={[{ rows: ["smaller", "small", "base", "large", "larger"].map(size => {
+    const smallValue = getToken("fontSize", size, { as: "value" })
+    const largeValue = getToken("fontSize", size, { breakpoint: "laptop", as: "value" })
+    const children = `${size} — ${smallLabel}: ${smallValue}, ${largeLabel}: ${largeValue}`
+    return {
+        id: String(size),
+        values: [
+          <Ink size={size}>{children}</Ink>,
+          toSource("Ink", { size }, { children }),
+        ],
+    }
+  }) }]}
+/>
+

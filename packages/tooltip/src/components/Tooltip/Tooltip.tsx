@@ -1,6 +1,6 @@
 import * as React from "react"
 import { createPortal } from "react-dom"
-import { computeAnchorPosition, type PopoverCoordinatesType } from "nice-react-popover"
+import { computeAnchorPosition, type PopoverCoordinatesType } from "@niceprototypes/popover"
 import { TriggerWrapper, Bubble } from "./Tooltip.styles"
 import { TooltipProps } from "./Tooltip.types"
 
@@ -67,7 +67,7 @@ const Tooltip: React.FC<TooltipProps> = ({
   }
 
   // Anchor the bubble to the trigger's current rect, or to the pointer position
-  // captured at activation when anchor="cursor", via nice-react-popover's
+  // captured at activation when anchor="cursor", via @niceprototypes/popover's
   // `computeAnchorPosition` centered on the cross axis. It returns the anchor
   // point plus the translate that places the bubble's edge against it. Both
   // anchors yield viewport coordinates, matching the bubble's position: fixed.

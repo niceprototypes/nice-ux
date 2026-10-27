@@ -1,11 +1,11 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
 import Code from "../../src/nice/Code"
-import Image from "nice-react-image"
+import Image from "@niceprototypes/image"
 import Install from "../../src/components/Install"
 import NewLines from "../../src/components/NewLines"
 import Ink from "../../src/nice/Ink"
-import Flex from "nice-react-flex"
+import Flex from "@niceprototypes/flex"
 import Line from "../../src/components/Line"
 
 <Meta
@@ -35,8 +35,8 @@ import Line from "../../src/components/Line"
 <Install package="styles" />
 
 ```css
-@import "nice-styles/tokens.css";
-@import "nice-styles/reset.css";
+@import "@niceprototypes/styles/tokens.css";
+@import "@niceprototypes/styles/reset.css";
 ```
 
 <Line />
@@ -86,7 +86,7 @@ import Line from "../../src/components/Line"
 <Ink>Use the CSS tokens to pin the theme to a selector:</Ink>
 
 ```css
-@import "nice-styles/tokens.css";
+@import "@niceprototypes/styles/tokens.css";
 
 body.night-mode {
   background-color: var(--np--background-color--night);
@@ -107,7 +107,7 @@ body.night-mode {
 <Install package="styles" />
 
 ```tsx
-import { applyTheme } from "nice-styles"
+import { applyTheme } from "@niceprototypes/styles"
 
 applyTheme("night")           // whole document → night
 applyTheme("day", element)    // a specific element → day
@@ -122,7 +122,7 @@ applyTheme("day", element)    // a specific element → day
 <Ink>For pinning any Nice component:</Ink>
 
 ```tsx
-import Ink from "nice-react-ink"
+import Ink from "@niceprototypes/ink"
 
 <Ink theme="night">Night mode</Ink>
 ```
@@ -134,7 +134,7 @@ import Ink from "nice-react-ink"
 <Ink>For pinning React subtrees:</Ink>
 
 ```tsx
-import { Theme } from "nice-react-styles"
+import { Theme } from "@niceprototypes/styles"
 
 <Theme name="day">{children}</Theme>
 ```
@@ -147,7 +147,7 @@ import { Theme } from "nice-react-styles"
 <Ink code>Theme</Ink><Ink>:</Ink>
 
 ```tsx
-import { Theme } from "nice-react-styles"
+import { Theme } from "@niceprototypes/styles"
 
 <Theme name="day">
   <Ink>Inherits day theme</Ink>
@@ -161,7 +161,7 @@ import { Theme } from "nice-react-styles"
 <Ink>Or even within other pinned components:</Ink>
 
 ```tsx
-import { Theme } from "nice-react-styles"
+import { Theme } from "@niceprototypes/styles"
 
 <Theme name="night">
   <Ink>Inherits night theme</Ink>

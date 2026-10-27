@@ -1,6 +1,6 @@
 import styled from "styled-components"
-import Flex from "nice-react-flex"
-import { getBreakpoint, getToken } from "nice-react-styles"
+import Flex from "@niceprototypes/flex"
+import { getBreakpoint, getToken } from "@niceprototypes/styles"
 
 export const OuterFlex = styled(Flex).attrs({
   gap: "smaller",

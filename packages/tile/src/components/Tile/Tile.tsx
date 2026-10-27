@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Theme } from "nice-react-styles"
+import { Theme } from "@niceprototypes/styles"
 import type { TileProps } from "./Tile.types"
 import { OuterFlex } from "./Tile.styles"
 import TileLayout from "../TileLayout"

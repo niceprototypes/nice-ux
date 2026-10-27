@@ -32,7 +32,7 @@ import { toScriptJson } from "./toScriptJson"
  *   rendered page, then `skipTransition()` runs as a safety net. Without a View
  *   Transition (first visit, reload, unsupported engine) the overlay stays.
  * - Hold: `?nsbHold=` (1/true, 0/false) wins over localStorage
- *   `nice-storybook-spinner:hold` ("true"/"false"), which wins over the preset
+ *   `@niceprototypes/storybook-spinner:hold` ("true"/"false"), which wins over the preset
  *   `hold` option. It keeps whichever mode is active up.
  * - `window.__NSB` is a read-only debug view: `{ theme, hold, mode, removed }`.
  *

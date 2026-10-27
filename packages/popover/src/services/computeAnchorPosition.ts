@@ -36,7 +36,7 @@ const toRect = (anchor: PopoverAnchorType): PopoverAnchorRectType => {
  *
  * `top` / `left` locate the anchor point on the anchor's edge; `transform`
  * shifts the element so its near edge touches that point. For
- * `align: "center"` the output matches nice-react-tooltip's `computeCoords` +
+ * `align: "center"` the output matches @niceprototypes/tooltip's `computeCoords` +
  * `transformFor`. Alignment is physical ("start" = left / top).
  *
  * @param anchor - Viewport-relative anchor rectangle (e.g. a DOMRect) or point

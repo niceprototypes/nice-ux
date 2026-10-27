@@ -1,7 +1,7 @@
 /**
  * withBreakpoints — per-breakpoint prop overrides for any component.
  *
- * Wraps a component with a `breakpoints` prop whose keys use the nice-styles
+ * Wraps a component with a `breakpoints` prop whose keys use the @niceprototypes/styles
  * breakpoint key grammar (`tablet`, `laptop+`, `tablet-`). At render, the keys
  * matching the current viewport (`useBreakpoint`) are merged over the base
  * props, least → most specific, so the most specific key wins.
@@ -19,15 +19,15 @@ import {
   type BreakpointName,
   type BreakpointKey,
   type ParsedBreakpointKey,
-} from "nice-styles"
+} from "../../../index"
 import { useBreakpoint } from "./useBreakpoint"
 
 // Public re-export — the hook is documented as importable from the package root.
 export { useBreakpoint } from "./useBreakpoint"
 
 // Re-export the shared breakpoint-key type — parsing, matching, and specificity
-// all live in nice-styles so this HOC and `setTokens` agree on one grammar.
-export type { BreakpointKey } from "nice-styles"
+// all live in @niceprototypes/styles so this HOC and `setTokens` agree on one grammar.
+export type { BreakpointKey } from "../../../index"
 
 /**
  * Map of breakpoint keys to partial overrides for a component's props.

@@ -60,7 +60,7 @@ export interface GoogleFontsConfig {
 
   /**
    * Optional: Generate `@font-face` declarations for specific font weights.
-   * If provided, will create granular `@font-face` rules mapped to nice-styles
+   * If provided, will create granular `@font-face` rules mapped to @niceprototypes/styles
    * fontWeight tokens.
    */
   fonts?: GoogleFontMetadata[]

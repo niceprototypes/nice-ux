@@ -1,0 +1,61 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../src/components/Story"
+import Image from "@niceprototypes/image"
+import Ink from "../../../src/nice/Ink"
+import { DataTableRow } from "../../../src/components/DataTable"
+import { DEMO_CODE_COLUMNS } from "../../../src/components/DataTable"
+import { toSource } from "../../../src/services"
+
+export const imageProps = {
+  vendor: true,
+  alt: "Custom picture element",
+}
+
+export const renderImageExpr = `(src, alt) => (
+  <picture>
+    <source srcSet={src} type="image/jpeg" />
+    <img src={src} alt={alt} />
+  </picture>
+)`
+
+<Meta title="Components/Image/renderImage" />
+
+<StoryHeader title="renderImage" />
+
+<Ink color="light">Escape hatch: replace the default</Ink>
+<Ink color="light" code>&lt;img&gt;</Ink>
+<Ink color="light">/</Ink>
+<Ink color="light" code>&lt;div&gt;</Ink>
+<Ink color="light">rendering with a custom element. Useful for delegating to a framework-specific image component (e.g.</Ink>
+<Ink color="light" code>next/image</Ink><Ink color="light">, a CDN loader, or a responsive</Ink>
+<Ink color="light" code>&lt;picture&gt;</Ink>
+<Ink color="light">element). Width, height, backgroundSize, borderRadius, and other style props are ignored when</Ink>
+<Ink color="light" code>renderImage</Ink>
+<Ink color="light">is provided.</Ink>
+
+<DataTableRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+          <Image
+      {...imageProps}
+      renderImage={(src, alt) => (
+        <picture>
+          <source
+            srcSet={src}
+            type="image/jpeg"
+          />
+          <img
+            src={src}
+            alt={alt}
+            width={240}
+            style={{ border: "2px dashed currentColor", padding: 4 }}
+          />
+        </picture>
+      )}
+    />,
+          toSource("Image", imageProps, {
+      raw: { renderImage: renderImageExpr },
+    }),
+        ]}
+/>
+

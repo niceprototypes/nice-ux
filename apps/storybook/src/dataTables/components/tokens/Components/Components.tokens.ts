@@ -1,4 +1,4 @@
-import { componentTokensData, getToken } from "nice-react-styles"
+import { componentTokensData, getToken } from "@niceprototypes/styles"
 import { CORE_TOKEN_REFERENCE } from "./Components.constants"
 import type { ComponentTokenGroup, ComponentTokenNode, ComponentPrefixWithTokens } from "./Components.types"
 

@@ -1,5 +1,5 @@
 import type * as React from "react"
-import type { SizeType, ThemeType } from "nice-react-styles"
+import type { SizeType, ThemeType } from "@niceprototypes/styles"
 
 /**
  * ToggleCheckedType
@@ -32,7 +32,7 @@ export type ToggleDisabledType = boolean
 /**
  * ToggleSizeType
  *
- * Re-export of SizeType from nice-styles.
+ * Re-export of SizeType from @niceprototypes/styles.
  * Track and thumb size, from the `toggle.track.*` and `toggle.thumb.size` component tokens.
  *
  * Values:
@@ -96,7 +96,7 @@ export type ToggleClassNameType = string
 /**
  * ToggleThemeType
  *
- * Re-export of ThemeType from nice-styles.
+ * Re-export of ThemeType from @niceprototypes/styles.
  * Pin token resolution to a specific theme.
  */
 export type ToggleThemeType = ThemeType

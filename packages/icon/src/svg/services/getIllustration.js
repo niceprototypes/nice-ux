@@ -1,4 +1,4 @@
-import { getToken } from "nice-styles"
+import { getToken } from "@niceprototypes/styles"
 import { illustrationSource } from "../illustrations/generated/source.js"
 
 /**
@@ -26,7 +26,7 @@ function setRootAttributes(svg, attributes) {
  *
  * Unlike `getIcon`, an illustration carries its own authored, fixed colors, so
  * this NEVER recolors: no stroke/fill token, no `currentColor`. Only the root is
- * touched — `size` sets the `<svg>` width/height (from the nice-styles `icon`
+ * touched — `size` sets the `<svg>` width/height (from the @niceprototypes/styles `icon`
  * size token, so illustrations scale consistently with icons), plus optional
  * `className`, `viewBox`, and `style`. Every fill in the body is left untouched.
  *
@@ -49,7 +49,7 @@ export function getIllustration(name, variant = "base", options = {}) {
   let svg = variants[variant]
   if (!svg) {
     console.warn(
-      `nice-icons: illustration "${name}" has no "${variant}" variant; rendering "base". ` +
+      `@niceprototypes/icon: illustration "${name}" has no "${variant}" variant; rendering "base". ` +
         `Available: ${Object.keys(variants).join(", ")}.`
     )
     svg = variants.base

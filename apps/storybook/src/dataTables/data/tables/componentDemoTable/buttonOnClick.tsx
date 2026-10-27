@@ -1,6 +1,6 @@
 import { useState } from "react"
-import Button from "nice-react-button"
-import Flex from "nice-react-flex"
+import Button from "@niceprototypes/button"
+import Flex from "@niceprototypes/flex"
 import type { ComponentExample } from "../../../components/demos/Components"
 
 /** Shows how many times onClick has been called. */

@@ -8,7 +8,7 @@ import type {
 export const ScrollContext = createContext<ScrollContextValue | null>(null)
 
 /**
- * Centralized scroll management provider for nice-react-scroll
+ * Centralized scroll management provider for @niceprototypes/scroll
  *
  * Provides a single scroll listener with RAF batching for optimal performance.
  * All scroll-dependent components should subscribe via useScroll hook.

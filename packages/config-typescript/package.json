@@ -1,5 +1,5 @@
 {
-  "name": "nice-config-typescript",
+  "name": "@niceprototypes/config-typescript",
   "version": "1.0.0",
   "description": "Shared TypeScript configuration for the nice-* ecosystem",
   "exports": {
@@ -19,12 +19,13 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/niceprototypes/nice-config-typescript.git"
+    "url": "git+https://github.com/niceprototypes/nice-ux.git",
+    "directory": "packages/config-typescript"
   },
   "bugs": {
-    "url": "https://github.com/niceprototypes/nice-config-typescript/issues"
+    "url": "https://github.com/niceprototypes/nice-ux/issues"
   },
-  "homepage": "https://github.com/niceprototypes/nice-config-typescript#readme",
+  "homepage": "https://github.com/niceprototypes/nice-ux/tree/main/packages/config-typescript#readme",
   "peerDependencies": {
     "typescript": ">=6.0.0"
   },
@@ -32,5 +33,9 @@
     "typescript": {
       "optional": true
     }
+  },
+  "private": true,
+  "devDependencies": {
+    "typescript": "catalog:"
   }
 }

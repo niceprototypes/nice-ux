@@ -1,4 +1,4 @@
-import type { GapType } from "nice-react-styles"
+import type { GapType } from "@niceprototypes/styles"
 
 /**
  * CodeCodeType
@@ -48,7 +48,7 @@ export type CodeFitType = boolean
 /**
  * CodeMarginType
  *
- * Re-export of GapType from nice-styles. Top/bottom margin variant. Use "none"
+ * Re-export of GapType from @niceprototypes/styles. Top/bottom margin variant. Use "none"
  * for blocks embedded in a layout that owns its own spacing.
  */
 export type CodeMarginType = GapType

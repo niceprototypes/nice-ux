@@ -1,4 +1,4 @@
-# nice-react-field
+# @niceprototypes/field
 ![Field](docs/field.png)
 
 Form field composition for React. `Field` wires a label, description and error
@@ -8,7 +8,7 @@ Part of the Nice Prototypes ecosystem.
 ## Install
 
 ```bash
-npm install nice-react-field
+npm install @niceprototypes/field
 ```
 
 Peer dependencies: `react`, `react-dom` (>=19.2), `styled-components` (>=6.1.18).
@@ -16,7 +16,7 @@ Peer dependencies: `react`, `react-dom` (>=19.2), `styled-components` (>=6.1.18)
 ## Usage
 
 ```tsx
-import { Field, Fieldset } from "nice-react-field"
+import { Field, Fieldset } from "@niceprototypes/field"
 
 <Fieldset legend="Contact">
   <Field label="Email" description="We never share it." error={error} invalid={!!error} required>
@@ -57,7 +57,7 @@ Native `<fieldset>` + `<legend>`. Props: `legend`, `description` (referenced by
 ## Wiring a control
 
 ```tsx
-import { useField, mergeDescribedBy } from "nice-react-field"
+import { useField, mergeDescribedBy } from "@niceprototypes/field"
 
 const Control = ({ "aria-describedby": describedBy, ...props }) => {
   const field = useField()

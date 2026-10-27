@@ -1,4 +1,4 @@
-import type { ThemeType } from "nice-react-styles"
+import type { ThemeType } from "@niceprototypes/styles"
 
 /**
  * LogoHeightType
@@ -41,7 +41,7 @@ export type LogoAriaLabelType = string
 /**
  * LogoThemeType
  *
- * Re-export of ThemeType from nice-styles.
+ * Re-export of ThemeType from @niceprototypes/styles.
  * Pin token resolution to a specific theme: the name takes that theme's base text color.
  * The heart keeps its own colors in every theme.
  */

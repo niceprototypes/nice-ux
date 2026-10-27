@@ -16,7 +16,7 @@ import { DataTable } from "../../src/components/DataTable"
   title="Spinner"
   description="Replaces Storybook's loading states with the Nice spinner — a boot overlay painted at document start in the manager, and a preview spinner in place of Storybook's native loaders."
   repos={[
-    { name: "nice-storybook-spinner", url: "https://github.com/niceprototypes/nice-storybook-spinner", license: "MIT" },
+    { name: "@niceprototypes/storybook-spinner", url: "https://github.com/niceprototypes/nice-storybook-spinner", license: "MIT" },
   ]}
 />
 
@@ -39,7 +39,7 @@ import { DataTable } from "../../src/components/DataTable"
 const config = {
   addons: [
     "storybook-dark-mode",
-    "nice-storybook-spinner",
+    "@niceprototypes/storybook-spinner",
   ],
 }
 
@@ -50,7 +50,7 @@ export default config
 
 ```ts
 addons: [
-  { name: "nice-storybook-spinner", options: { hold: false, timeout: 8000 } },
+  { name: "@niceprototypes/storybook-spinner", options: { hold: false, timeout: 8000 } },
 ]
 ```
 
@@ -59,8 +59,8 @@ addons: [
 <Ink>≥ 10. The spinner is the real</Ink>
 <Ink code>{"<Icon name=\"spinner\" />"}</Ink>
 <Ink>from</Ink>
-<Ink code>nice-react-icon</Ink><Ink>, rendered to static markup when the addon is built, with its size, stroke, duration and day / night colors taken from</Ink>
-<Ink code>nice-styles</Ink>
+<Ink code>@niceprototypes/icon</Ink><Ink>, rendered to static markup when the addon is built, with its size, stroke, duration and day / night colors taken from</Ink>
+<Ink code>@niceprototypes/styles</Ink>
 <Ink>tokens at the same time — so the published package has no dependencies.</Ink>
 
 <Ink as="h3">Options</Ink>
@@ -90,7 +90,7 @@ addons: [
 </ol>
    releases.
 <ol>
-  <li><Ink>localStorage: <code>localStorage.setItem("nice-storybook-spinner:hold", "true")</code></Ink></li>
+  <li><Ink>localStorage: <code>localStorage.setItem("@niceprototypes/storybook-spinner:hold", "true")</code></Ink></li>
 </ol>
    holds, `"false"` releases.
 <ol>

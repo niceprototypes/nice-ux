@@ -1,6 +1,6 @@
 import styled from "styled-components"
-import { getToken, resolveColorProp } from "nice-react-styles"
-import type { ColorTokenProp } from "nice-react-styles"
+import { getToken, resolveColorProp } from "@niceprototypes/styles"
+import type { ColorTokenProp } from "@niceprototypes/styles"
 import type {
   CheckboxBackgroundColorType,
   CheckboxBorderColorType,

@@ -1,6 +1,6 @@
 import * as React from "react"
-import Flex from "nice-react-flex"
-import { getToken } from "nice-react-styles"
+import Flex from "@niceprototypes/flex"
+import { getToken } from "@niceprototypes/styles"
 import Ink from "../../nice/Ink"
 import Code from "../../nice/Code"
 import ThemedFrame from "../ThemedFrame"
@@ -14,9 +14,9 @@ const frameStyle = { ...frameChrome, width: 800, height: 600, maxWidth: "100%" }
 const frameStyleMobile = { ...frameChrome, width: 390, height: 800 }
 
 const htmlImport = (file: string) =>
-  `<link rel="stylesheet" href="nice-styles/${file}">`
-const cssImport = (file: string) => `@import "nice-styles/${file}";`
-const jsImport = (file: string) => `import "nice-styles/${file}"`
+  `<link rel="stylesheet" href="@niceprototypes/styles/${file}">`
+const cssImport = (file: string) => `@import "@niceprototypes/styles/${file}";`
+const jsImport = (file: string) => `import "@niceprototypes/styles/${file}"`
 
 /** One CodeBlock per import syntax — each lists every loaded file as a line. */
 const importSyntaxes = [

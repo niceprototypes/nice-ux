@@ -58,7 +58,7 @@ import './.symlink-trigger.js'
 ```
 
 <Ink>Vite projects (Storybook, Vite apps) use</Ink>
-<Ink code>nice-vite-watcher</Ink>
+<Ink code>@niceprototypes/vite-watcher</Ink>
 <Ink>instead of the trigger file — the plugin watches linked dists directly.</Ink>
 
 <Line />
@@ -92,7 +92,7 @@ dist/ updates
        ↓
 --watch detects the dist change → touches .symlink-trigger.js
        ↓
-CRA / webpack recompiles  (Vite: nice-vite-watcher reloads)
+CRA / webpack recompiles  (Vite: @niceprototypes/vite-watcher reloads)
 ```
 
 <Line />
@@ -112,4 +112,4 @@ CRA / webpack recompiles  (Vite: nice-vite-watcher reloads)
 <Ink code>--reset</Ink>
 <Ink>stops it automatically.</Ink>
 
-<Callout><Ink>Editing an icon while <code>--dev --watch</code> runs rebuilds <code>nice-react-icon</code>'s dist correctly, but a Vite dev server (Storybook) may keep serving its cached copy until bounced — see <a href="/?path=/docs/toolkit-7-troubleshooting--docs" target="_top">Troubleshooting → icons not updating</a>.</Ink></Callout>
+<Callout><Ink>Editing an icon while <code>--dev --watch</code> runs rebuilds <code>@niceprototypes/icon</code>'s dist correctly, but a Vite dev server (Storybook) may keep serving its cached copy until bounced — see <a href="/?path=/docs/toolkit-7-troubleshooting--docs" target="_top">Troubleshooting → icons not updating</a>.</Ink></Callout>

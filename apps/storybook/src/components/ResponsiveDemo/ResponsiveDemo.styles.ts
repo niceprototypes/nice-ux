@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { getBreakpoint, getToken, type BreakpointName } from "nice-react-styles"
+import { getBreakpoint, getToken, type BreakpointName } from "@niceprototypes/styles"
 
 // The media query for the band in which this item is the active viewport. A
 // bare key is the exact band, so adjacent bands never light up together: phone

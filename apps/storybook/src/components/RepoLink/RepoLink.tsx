@@ -1,8 +1,8 @@
 import * as React from "react"
-import Icon from "nice-react-icon"
+import Icon from "@niceprototypes/icon"
 import { Anchor, StatusPill, LicenseInk, LicenseFlex } from "./RepoLink.styles"
 import type { RepoLinkProps } from "./RepoLink.types"
-import Flex from "nice-react-flex"
+import Flex from "@niceprototypes/flex"
 import Ink from "../../nice/Ink"
 
 /**

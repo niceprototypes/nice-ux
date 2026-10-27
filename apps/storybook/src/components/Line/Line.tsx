@@ -1,5 +1,5 @@
 import * as React from "react"
-import { type BorderColorType, type SpacingShorthandType } from "nice-react-styles"
+import { type BorderColorType, type SpacingShorthandType } from "@niceprototypes/styles"
 import { LineStyled } from "./Line.styles"
 
 interface LineProps {

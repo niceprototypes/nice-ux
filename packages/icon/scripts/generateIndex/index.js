@@ -1,5 +1,5 @@
 /**
- * Index Generator for nice-icons — CLI entrypoint.
+ * Index Generator for @niceprototypes/icon — CLI entrypoint.
  *
  * Scans each asset surface and generates its index.js/.d.ts (one export per
  * variant), catalog.js/.d.ts (data-only names + variants), source.js/.d.ts (raw
@@ -38,7 +38,7 @@ import { SURFACES } from "./targets.js"
 
 const args = process.argv.slice(2)
 
-// --convert [path…]: convert .ai sources into asset SVGs (nice-svg-generator)
+// --convert [path…]: convert .ai sources into asset SVGs (@niceprototypes/svg-generator)
 // before scrubbing/generating. Each non-flag arg is a target — a folder
 // ("nice-heart") or a single .ai file ("nice-heart/base.ai"). A target is routed
 // to whichever surface(s) contain it (icons and illustrations may share a name,

@@ -2,8 +2,8 @@ import React from "react"
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import "@testing-library/jest-dom"
-import { getToken } from "nice-react-styles"
-import { Field } from "nice-react-field"
+import { getToken } from "@niceprototypes/styles"
+import { Field } from "@niceprototypes/field"
 import Toggle from "./Toggle"
 
 /** CSS text of every styled-components rule that targets one of `element`'s classes. */

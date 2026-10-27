@@ -1,5 +1,5 @@
 import * as React from "react"
-import Flex from "nice-react-flex"
+import Flex from "@niceprototypes/flex"
 import { ItemDiv } from "./ResponsiveDemo.styles"
 import type { ResponsiveDemoProps } from "./ResponsiveDemo.types"
 

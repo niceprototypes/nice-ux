@@ -1,5 +1,5 @@
 import * as React from "react"
-import { withBreakpoints, type WithBreakpointsProps } from "nice-react-styles"
+import { withBreakpoints, type WithBreakpointsProps } from "@niceprototypes/styles"
 import BaseInk from "./Ink"
 import type { InkProps } from "./Ink.types"
 

@@ -1,4 +1,4 @@
-import { getToken } from "nice-react-styles"
+import { getToken } from "@niceprototypes/styles"
 import styled, { css } from "styled-components"
 
 const styleHideScrollbar = css`

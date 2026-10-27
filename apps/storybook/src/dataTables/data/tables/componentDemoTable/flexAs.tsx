@@ -1,4 +1,4 @@
-import Flex, { type FlexAsType } from "nice-react-flex"
+import Flex, { type FlexAsType } from "@niceprototypes/flex"
 import type { ComponentExample } from "../../../components/demos/Components"
 
 const variants: FlexAsType[] = ["div", "nav", "header", "section", "footer", "main", "article", "aside", "ul", "ol", "li"]

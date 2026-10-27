@@ -29,7 +29,7 @@ export type SliderIsAnimatingType = boolean
  * SliderOnAnimationCompleteType
  *
  * Callback fired after the slide transition finishes. The duration is
- * driven by the `animationDuration.base` token from nice-styles.
+ * driven by the `animationDuration.base` token from @niceprototypes/styles.
  */
 export type SliderOnAnimationCompleteType = () => void
 

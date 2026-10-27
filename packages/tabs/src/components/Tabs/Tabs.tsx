@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Theme } from "nice-react-styles"
+import { Theme } from "@niceprototypes/styles"
 import { findTabIndex, type TabsNavigationKey } from "../../utilities/findTabIndex"
 import { StyledRow, StyledTab, StyledTabList } from "./Tabs.styles"
 import type { TabsProps, TabsSelectEventType } from "./Tabs.types"

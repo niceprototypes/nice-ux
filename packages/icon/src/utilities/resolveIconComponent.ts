@@ -6,7 +6,7 @@ const iconMap = buildIconMap()
 /**
  * Resolve a built-in icon to its React SVG component by name and variant — the
  * internal resolver the `<Icon>` component renders. (The consumer-facing vanilla
- * string equivalent is `getIcon` in `nice-icons`.)
+ * string equivalent is `getIcon` in `@niceprototypes/icon/svg`.)
  *
  * Variant resolution is dynamic: if the icon ships the requested variant it is
  * returned; if not, the icon's `base` variant is returned instead and a console
@@ -28,7 +28,7 @@ export function resolveIconComponent(
 
   // Requested variant not available — fall back to base and warn.
   console.warn(
-    `nice-react-icon: icon "${name}" has no "${variant}" variant; rendering "base". ` +
+    `@niceprototypes/icon: icon "${name}" has no "${variant}" variant; rendering "base". ` +
       `Available: ${Object.keys(icon).join(", ")}.`
   )
   return icon.base

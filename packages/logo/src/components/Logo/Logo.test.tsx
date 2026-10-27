@@ -1,10 +1,10 @@
 import React from "react"
 import { render, screen } from "@testing-library/react"
 import "@testing-library/jest-dom"
-import { getToken } from "nice-react-styles"
+import { getToken } from "@niceprototypes/styles"
 import Logo from "./Logo"
 
-jest.mock("nice-react-icon", () => ({
+jest.mock("@niceprototypes/icon", () => ({
   __esModule: true,
   Illustration: ({ name, className }: { name: string; className?: string }) => (
     <span data-testid="heart" className={className}>

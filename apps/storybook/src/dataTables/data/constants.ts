@@ -1,4 +1,4 @@
-import { getConstant } from "nice-react-styles"
+import { getConstant } from "@niceprototypes/styles"
 
 /**
  * animationDuration demo — the dot's diameter, shared between the element size

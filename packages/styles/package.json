@@ -1,15 +1,19 @@
 {
-  "name": "nice-styles",
+  "name": "@niceprototypes/styles",
   "version": "17.1.0",
-  "description": "A collection of CSS custom properties (variables) for consistent design tokens",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "description": "Design tokens, CSS custom properties and the React provider, theme and token bindings for Nice UI",
+  "main": "dist/react/index.js",
+  "module": "dist/react/index.js",
+  "types": "dist/react/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/react/index.d.ts",
+      "import": "./dist/react/index.js",
+      "default": "./dist/react/index.js"
+    },
+    "./core": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "require": "./dist/index.js",
       "default": "./dist/index.js"
     },
     "./services/*.js": {
@@ -42,7 +46,7 @@
     "build:ts": "tsc",
     "build:post": "tsx scripts/postBuild.ts",
     "dev": "tsc --watch & tsx scripts/generateCss/index.ts --watch & tsx scripts/generateTokens/index.ts --watch & tsx scripts/generateTypes/index.ts --watch",
-    "test": "tsx --test test/*.test.ts",
+    "test": "tsx --test test/*.test.ts \"src/react/**/*.test.ts\"",
     "test:update": "UPDATE_SNAPSHOTS=1 tsx --test test/*.test.ts",
     "prepublishOnly": "npm run build && npm test"
   },
@@ -63,18 +67,28 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/niceprototypes/nice-styles.git"
+    "url": "git+https://github.com/niceprototypes/nice-ux.git",
+    "directory": "packages/styles"
   },
   "bugs": {
-    "url": "https://github.com/niceprototypes/nice-styles/issues"
+    "url": "https://github.com/niceprototypes/nice-ux/issues"
   },
-  "homepage": "https://github.com/niceprototypes/nice-styles#readme",
+  "homepage": "https://github.com/niceprototypes/nice-ux/tree/main/packages/styles#readme",
   "type": "module",
   "devDependencies": {
     "@types/node": "^24.8.0",
     "tsx": "^4.21.0",
-    "typescript": "^6.0.3"
+    "typescript": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "styled-components": "catalog:"
   },
-  "peerDependencies": {},
+  "peerDependencies": {
+    "react": ">=19.2.0 <20.0.0",
+    "react-dom": ">=19.2.0 <20.0.0",
+    "styled-components": ">=6.1.18 <7.0.0"
+  },
   "dependencies": {}
 }

@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Theme } from "nice-react-styles"
+import { Theme } from "@niceprototypes/styles"
 import { StyledImg, StyledBackgroundImage } from "./Image.styles"
 import type { ImageProps } from "./Image.types"
 import { getVendorImage } from "../../services/registerVendorResolver"
@@ -11,7 +11,7 @@ import { getVendorImage } from "../../services/registerVendorResolver"
  * Two-tier source resolution:
  * 1. Direct src — the URL is used as-is
  * 2. Vendor src — requires the `vendor` flag and a registered resolver
- *    (e.g. nice-react-image-vendor); src/width/height are routed through it
+ *    (e.g. @niceprototypes/image-vendor); src/width/height are routed through it
  *
  * @example
  * ```tsx
@@ -29,7 +29,7 @@ import { getVendorImage } from "../../services/registerVendorResolver"
  * // With border radius token
  * <Image src="/avatar.jpg" alt="User avatar" borderRadius="base" />
  *
- * // Vendor src — requires nice-react-image-vendor
+ * // Vendor src — requires @niceprototypes/image-vendor
  * <Image vendor src="10" width="800px" height="600px" alt="Vendor image" />
  * ```
  */

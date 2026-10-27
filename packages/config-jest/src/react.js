@@ -15,7 +15,7 @@ export default {
     }],
   },
   transformIgnorePatterns: [
-    "node_modules/(?!(nice-[^/]+)/)",
+    "node_modules/(?!(@niceprototypes/[^/]+)/)",
   ],
   extensionsToTreatAsEsm: [".ts", ".tsx"],
   moduleNameMapper: {

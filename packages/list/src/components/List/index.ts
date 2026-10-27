@@ -1,11 +1,11 @@
 import * as React from "react"
-import { withBreakpoints, type WithBreakpointsProps } from "nice-react-styles"
+import { withBreakpoints, type WithBreakpointsProps } from "@niceprototypes/styles"
 import BaseList from "./List"
 import type { ListProps } from "./List.types"
 
 // Explicit return-type annotation — without it, TS declaration emit can leave an
 // unbound generic `<P>` in dist or collapse to `any`, erasing the `breakpoints`
-// prop on consumers. Mirrors the standard bearer (nice-react-ink).
+// prop on consumers. Mirrors the standard bearer (@niceprototypes/ink).
 const List: React.FC<WithBreakpointsProps<ListProps>> = withBreakpoints<ListProps>(BaseList)
 
 export { List }

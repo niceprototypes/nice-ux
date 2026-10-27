@@ -1,5 +1,5 @@
 import * as React from "react"
-import type { ThemeType, GapType } from "nice-react-styles"
+import type { ThemeType, GapType } from "@niceprototypes/styles"
 import type { TileInkProps } from "../TileContent/TileContent.types"
 
 export interface ContentMainProps {

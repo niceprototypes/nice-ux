@@ -1,4 +1,4 @@
-# nice-svg-generator
+# @niceprototypes/svg-generator
 
 Convert design source files to clean SVG. Zero runtime dependencies (Node's
 built-in `zlib` only). The first — and currently only — input type is **`ai`**
@@ -8,7 +8,7 @@ built so a second type can be added as one module.
 ## Usage
 
 ```bash
-nice-svg-generator <folder> <type> [--deep]
+@niceprototypes/svg-generator <folder> <type> [--deep]
 ```
 
 - `<folder>` — folder to scan for `<type>` files
@@ -19,16 +19,16 @@ Each converted file is written as a sibling `.svg` next to its source.
 
 ```bash
 # Convert every .ai under a tree:
-nice-svg-generator path/to/icons/.source ai --deep
+@niceprototypes/svg-generator path/to/icons/.source ai --deep
 
 # Shallow-convert a single icon folder:
-nice-svg-generator path/to/icons/.source/github ai
+@niceprototypes/svg-generator path/to/icons/.source/github ai
 ```
 
 Programmatic:
 
 ```js
-import { convertFolder } from "nice-svg-generator"
+import { convertFolder } from "@niceprototypes/svg-generator"
 const { converted, failed } = convertFolder("path/to/icons/.source/github", "ai")
 ```
 

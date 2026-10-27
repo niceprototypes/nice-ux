@@ -1,5 +1,5 @@
 import * as React from "react"
-import type { ThemeType } from "nice-styles"
+import type { ThemeType } from "../../../index"
 
 export interface ThemeProps {
   /**
@@ -25,7 +25,7 @@ export interface ThemeProps {
  *
  * Pins a subtree to a specific design-system theme (`day` / `night` / …) by
  * setting `data-theme` on a layout-invisible wrapper element. The CSS rules
- * emitted by nice-styles' `tokens.css` reassign semantic theme vars at every
+ * emitted by @niceprototypes/styles' `tokens.css` reassign semantic theme vars at every
  * `[data-theme]` selector, so the pin propagates through the cascade.
  *
  * Children with their own explicit `theme` prop nest cleanly — each one sets

@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { getBreakpoint, getToken } from "nice-react-styles"
+import { getBreakpoint, getToken } from "@niceprototypes/styles"
 
 export const SettingsAnchor = styled.div`
   display: inline-flex;

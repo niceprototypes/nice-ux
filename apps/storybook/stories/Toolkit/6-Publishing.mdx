@@ -48,7 +48,7 @@ nicely --bump patch "Fix icon stroke width regression"
 nicely --publish
 
 # Publish specific packages (dependents auto-resolved)
-nicely --publish nice-styles,nice-react-styles
+nicely --publish @niceprototypes/styles,@niceprototypes/styles
 
 # Preview without changing anything
 nicely --publish --dry-run
@@ -69,7 +69,7 @@ nicely --publish --dry-run
 ```
 
 <Ink>Publish order comes from</Ink>
-<Ink code>nice-toolkit/registry.json</Ink>
+<Ink code>@niceprototypes/toolkit/registry.json</Ink>
 <Ink>(bottom-to-top per the dependency chain). Run</Ink>
 <Ink code>nicely --publish --dry-run</Ink>
 <Ink>to see the current order and the recommended bumps.</Ink>

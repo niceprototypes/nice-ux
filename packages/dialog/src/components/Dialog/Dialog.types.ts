@@ -1,5 +1,5 @@
 import * as React from "react"
-import type { ThemeType } from "nice-react-styles"
+import type { ThemeType } from "@niceprototypes/styles"
 
 /**
  * DialogOpenType
@@ -58,7 +58,7 @@ export type DialogRefType = React.Ref<HTMLDialogElement>
 /**
  * DialogThemeType
  *
- * Re-export of ThemeType from nice-styles.
+ * Re-export of ThemeType from @niceprototypes/styles.
  * Pin token resolution to a specific theme.
  * Extensible for consumer-defined custom themes.
  */

@@ -16,7 +16,7 @@ import Ink from "../../src/nice/Ink"
 <Ink as="h3">Setup</Ink>
 
 ```js
-import { createConfiguration } from "nice-config-rollup"
+import { createConfiguration } from "@niceprototypes/config-rollup"
 ```
 
 <Ink as="h3">Usage</Ink>
@@ -33,7 +33,7 @@ export default createConfiguration({ plugins: [...] })
 
 ```typescript
 // rollup.config.js
-import { createConfiguration } from "nice-config-rollup"
+import { createConfiguration } from "@niceprototypes/config-rollup"
 
 // Basic usage - uses all defaults
 export default createConfiguration()
@@ -42,7 +42,7 @@ export default createConfiguration()
 export default createConfiguration({
   input: "src/index.ts",
   additionalExternals: ["lodash"],
-  bundlePackages: ["nice-icons"],
+  bundlePackages: ["@niceprototypes/icon/svg"],
 })
 ```
 
@@ -80,11 +80,11 @@ export default createConfiguration({
 <Ink>Pattern-based external detection that automatically externalizes all nice-* packages, React ecosystem, and styled-components. Handles subpath imports like CSS files.</Ink>
 
 ```typescript
-import { isNiceExternal } from "nice-config-rollup"
+import { isNiceExternal } from "@niceprototypes/config-rollup"
 
 // Returns true for:
-isNiceExternal("nice-styles")           // nice-* packages
-isNiceExternal("nice-styles/tokens.css")  // subpath imports
+isNiceExternal("@niceprototypes/styles")           // nice-* packages
+isNiceExternal("@niceprototypes/styles/tokens.css")  // subpath imports
 isNiceExternal("react")                 // React
 isNiceExternal("react-dom")             // React DOM
 isNiceExternal("styled-components")     // styled-components
@@ -101,7 +101,7 @@ isNiceExternal("lodash")                // other packages
 
 ```typescript
 // rollup.config.js
-import { isNiceExternal } from "nice-config-rollup"
+import { isNiceExternal } from "@niceprototypes/config-rollup"
 
 export default {
   input: "src/index.ts",
@@ -151,7 +151,7 @@ export default {
 <Ink>Creates an external function with additional packages or bundle overrides.</Ink>
 
 ```typescript
-import { createExternals } from "nice-config-rollup"
+import { createExternals } from "@niceprototypes/config-rollup"
 
 // Add extra packages to externalize
 const external = createExternals({
@@ -160,13 +160,13 @@ const external = createExternals({
 
 // Bundle specific nice-* packages instead of externalizing
 const external = createExternals({
-  bundle: ["nice-icons"],
+  bundle: ["@niceprototypes/icon/svg"],
 })
 
 // Both options together
 const external = createExternals({
   additional: ["lodash"],
-  bundle: ["nice-icons"],
+  bundle: ["@niceprototypes/icon/svg"],
 })
 
 export default {

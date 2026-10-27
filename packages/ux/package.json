@@ -1,0 +1,89 @@
+{
+  "name": "@niceprototypes/ux",
+  "version": "0.1.0",
+  "description": "Every Nice UI React package from one import",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js",
+      "default": "./dist/index.esm.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "rollup -c",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@niceprototypes/button": "workspace:^",
+    "@niceprototypes/calendar": "workspace:^",
+    "@niceprototypes/checkbox": "workspace:^",
+    "@niceprototypes/code": "workspace:^",
+    "@niceprototypes/dialog": "workspace:^",
+    "@niceprototypes/field": "workspace:^",
+    "@niceprototypes/flex": "workspace:^",
+    "@niceprototypes/form": "workspace:^",
+    "@niceprototypes/head": "workspace:^",
+    "@niceprototypes/icon-vendor": "workspace:^",
+    "@niceprototypes/image": "workspace:^",
+    "@niceprototypes/image-vendor": "workspace:^",
+    "@niceprototypes/ink": "workspace:^",
+    "@niceprototypes/input": "workspace:^",
+    "@niceprototypes/lightbox": "workspace:^",
+    "@niceprototypes/line": "workspace:^",
+    "@niceprototypes/list": "workspace:^",
+    "@niceprototypes/logo": "workspace:^",
+    "@niceprototypes/popover": "workspace:^",
+    "@niceprototypes/scroll": "workspace:^",
+    "@niceprototypes/select": "workspace:^",
+    "@niceprototypes/slider": "workspace:^",
+    "@niceprototypes/tabs": "workspace:^",
+    "@niceprototypes/tile": "workspace:^",
+    "@niceprototypes/toggle": "workspace:^",
+    "@niceprototypes/tooltip": "workspace:^"
+  },
+  "peerDependencies": {
+    "@niceprototypes/icon": "workspace:^",
+    "@niceprototypes/styles": "workspace:^",
+    "react": ">=19.2.0 <20.0.0",
+    "react-dom": ">=19.2.0 <20.0.0",
+    "styled-components": ">=6.1.18 <7.0.0"
+  },
+  "devDependencies": {
+    "@niceprototypes/config-rollup": "workspace:*",
+    "@niceprototypes/config-typescript": "workspace:*",
+    "@niceprototypes/icon": "workspace:*",
+    "@niceprototypes/styles": "workspace:*",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "rollup": "^4.3.0",
+    "styled-components": "catalog:",
+    "tslib": "^2.6.0",
+    "typescript": "catalog:"
+  },
+  "license": "MIT",
+  "author": "Nice Prototypes",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niceprototypes/nice-ux.git",
+    "directory": "packages/ux"
+  },
+  "homepage": "https://github.com/niceprototypes/nice-ux/tree/main/packages/ux#readme",
+  "bugs": {
+    "url": "https://github.com/niceprototypes/nice-ux/issues"
+  }
+}

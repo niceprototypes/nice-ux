@@ -1,5 +1,5 @@
 import * as React from "react"
-import type { TokenGroup, TokenVariants } from "nice-styles"
+import type { TokenGroup, TokenVariants } from "@niceprototypes/styles"
 
 /**
  * A row's variant: a bare variant name, or an object carrying the `variant`

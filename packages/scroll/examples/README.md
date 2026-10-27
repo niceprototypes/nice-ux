@@ -1,6 +1,6 @@
 # Examples
 
-This directory contains working examples demonstrating various features of nice-react-scroll.
+This directory contains working examples demonstrating various features of @niceprototypes/scroll.
 
 ## Available Examples
 
@@ -54,7 +54,7 @@ These examples are written in TypeScript and use styled-components. To run them:
 
 1. Install dependencies:
 ```bash
-npm install nice-react-scroll react react-dom styled-components
+npm install @niceprototypes/scroll react react-dom styled-components
 npm install -D @types/react @types/react-dom typescript
 ```
 
@@ -72,7 +72,7 @@ function App() {
 Each example follows this pattern:
 
 ```tsx
-import { ScrollProvider, /* other components */ } from 'nice-react-scroll'
+import { ScrollProvider, /* other components */ } from '@niceprototypes/scroll'
 
 export default function Example() {
   return (

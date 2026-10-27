@@ -1,14 +1,14 @@
-# nice-react-tooltip
+# @niceprototypes/tooltip
 
 A tooltip component for React. Wraps any element as the trigger and renders an
 inverse-themed bubble on hover or click. Part of the Nice Prototypes ecosystem.
 
 ```bash
-npm install nice-react-tooltip
+npm install @niceprototypes/tooltip
 ```
 
 ```tsx
-import Tooltip from "nice-react-tooltip"
+import Tooltip from "@niceprototypes/tooltip"
 
 <Tooltip content="Copy to clipboard" delayShow={600}>
   <button onClick={copy}>{value}</button>

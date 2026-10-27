@@ -23,7 +23,7 @@ import { scrubSvgFile, scrubIllustrationFile } from "../scrubSvg.js"
 const __dirname = dirname(fileURLToPath(import.meta.url))
 // This module sits in scripts/generateIndex/; go up two levels to the package
 // root, then into src.
-const srcDir = path.join(__dirname, "..", "..", "src")
+const srcDir = path.join(__dirname, "..", "..", "src", "svg")
 
 /** Generated-symbol names + React export suffix, per surface. */
 export const ICON_NAMING = {

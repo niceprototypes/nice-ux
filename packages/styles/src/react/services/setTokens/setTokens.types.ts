@@ -1,4 +1,4 @@
-import type { ComponentPrefix, TokenOptions, TokenVariants } from "nice-styles"
+import type { ComponentPrefix, TokenOptions, TokenVariants } from "../../../index"
 
 /** Turns a union of object types into their intersection. */
 type UnionToIntersection<U> = (U extends unknown ? (union: U) => void : never) extends (

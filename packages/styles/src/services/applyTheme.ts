@@ -3,7 +3,7 @@ export type ThemeName = "day" | "night"
 
 /**
  * Set the active Nice theme on a document root by writing the `data-theme`
- * attribute that nice-styles' `[data-theme]` token cascade responds to.
+ * attribute that @niceprototypes/styles' `[data-theme]` token cascade responds to.
  *
  * Use this to bridge an external theme toggle (a host app's control, Storybook's
  * dark-mode addon, etc.) into nice's day/night theming — writing `data-theme`

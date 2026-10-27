@@ -1,4 +1,4 @@
-import { getToken } from "nice-styles"
+import { getToken } from "@niceprototypes/styles"
 import { iconSource } from "../icons/generated/source.js"
 
 /**
@@ -70,7 +70,7 @@ function variantElementStyle(variant, { colorValue, strokeWidthValue, strokeScal
  * counterpart to the React `<Icon>` component, for consumers who want the raw
  * `<svg>` string without writing HTML/JSX.
  *
- * The returned string is styled from nice-styles `icon` tokens: `size` sets the
+ * The returned string is styled from @niceprototypes/styles `icon` tokens: `size` sets the
  * root width/height, `color` sets stroke (base) or fill (fill), and `strokeWidth`
  * sets base stroke weight — each a `var(--np--icon--…)` reference resolved from
  * whatever tokens are on the page (identical contract to `<Icon>`). Custom
@@ -99,7 +99,7 @@ export function getIcon(name, variant = "base", options = {}) {
   let svg = variants[variant]
   if (!svg) {
     console.warn(
-      `nice-icons: icon "${name}" has no "${variant}" variant; rendering "base". ` +
+      `@niceprototypes/icon: icon "${name}" has no "${variant}" variant; rendering "base". ` +
         `Available: ${Object.keys(variants).join(", ")}.`
     )
     resolvedVariant = "base"

@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { getToken } from "nice-react-styles"
+import { getToken } from "@niceprototypes/styles"
 
 /**
  * Wraps the trigger element so the tooltip can attach handlers and measure its

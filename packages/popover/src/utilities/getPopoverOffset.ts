@@ -1,4 +1,4 @@
-import { getToken } from "nice-react-styles"
+import { getToken } from "@niceprototypes/styles"
 
 /**
  * Offset in px used when `popover.offset` does not resolve to a plain number.

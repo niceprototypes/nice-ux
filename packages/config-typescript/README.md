@@ -1,4 +1,4 @@
-# nice-config-typescript
+# @niceprototypes/config-typescript
 
 Shared TypeScript configuration for the `nice-*` ecosystem. Split out of
 `nice-configuration`.
@@ -8,7 +8,7 @@ Shared TypeScript configuration for the `nice-*` ecosystem. Split out of
 ```json
 // tsconfig.json
 {
-  "extends": "nice-config-typescript/react",
+  "extends": "@niceprototypes/config-typescript/react",
   "compilerOptions": {
     "outDir": "dist",
     "declarationDir": "dist/types"
@@ -22,7 +22,7 @@ Shared TypeScript configuration for the `nice-*` ecosystem. Split out of
 
 | Subpath | Extends | Adds |
 |---------|---------|------|
-| `nice-config-typescript/base` | — | ES2020, ESNext modules, bundler resolution, strict, declaration + declarationMap |
-| `nice-config-typescript/react` | `base` | `jsx: react-jsx` |
+| `@niceprototypes/config-typescript/base` | — | ES2020, ESNext modules, bundler resolution, strict, declaration + declarationMap |
+| `@niceprototypes/config-typescript/react` | `base` | `jsx: react-jsx` |
 
 `typescript` is an optional peer dependency provided by the consuming package.

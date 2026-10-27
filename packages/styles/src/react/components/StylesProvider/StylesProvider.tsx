@@ -1,7 +1,7 @@
 /**
  * StylesProvider Component
  *
- * A wrapper component that provides nice-styles CSS variables and theme to the component tree.
+ * A wrapper component that provides @niceprototypes/styles CSS variables and theme to the component tree.
  * Uses styled-components ThemeProvider to make design tokens available via props.theme.
  */
 
@@ -12,19 +12,19 @@ import {
   buildAdobeFontsConfig,
   type GoogleFontsConfig,
   type AdobeFontsConfig,
-} from 'nice-styles'
+} from '../../../index'
 import { FontLoader } from '../FontLoader'
 import { DeviceDetectionProvider } from './DeviceContext'
 import { ThemeDetectionProvider } from './ThemeContext'
 import { LocaleContextProvider } from './LocaleContext'
 import { ThemeProvider } from './StylesProvider.styled'
 import type { StylesProviderProps } from './StylesProvider.types'
-import 'nice-styles/tokens.css'
+import '@niceprototypes/styles/tokens.css'
 
 /**
  * Memoizes the googleFonts prop into a normalized GoogleFontsConfig.
  *
- * Link-building lives in nice-styles (`buildGoogleFontsConfig`) so the React
+ * Link-building lives in @niceprototypes/styles (`buildGoogleFontsConfig`) so the React
  * provider and the JS-only `injectFonts` path share one implementation.
  */
 function useGoogleFontsConfig(
@@ -39,7 +39,7 @@ function useGoogleFontsConfig(
 /**
  * Memoizes the adobeFonts prop into a normalized AdobeFontsConfig.
  *
- * Link-building lives in nice-styles (`buildAdobeFontsConfig`), shared with the
+ * Link-building lives in @niceprototypes/styles (`buildAdobeFontsConfig`), shared with the
  * JS-only `injectFonts` path.
  */
 function useAdobeFontsConfig(
@@ -56,7 +56,7 @@ function useAdobeFontsConfig(
  *
  * @example Basic usage (no fonts):
  * ```tsx
- * import { StylesProvider } from 'nice-react-styles'
+ * import { StylesProvider } from '../../../index'
  *
  * function App() {
  *   return (

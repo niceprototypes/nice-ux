@@ -1,5 +1,5 @@
 /**
- * nice-react-field — form field composition for nice-react.
+ * @niceprototypes/field — form field composition for nice-react.
  *
  * Multi-component package (named exports, no default). `Field` wires a label,
  * description and error to one control through `useField()`; `Fieldset`

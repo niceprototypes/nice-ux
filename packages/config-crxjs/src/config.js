@@ -1,10 +1,10 @@
 import { mergeConfig } from 'vite'
-import { createNiceViteConfig } from 'nice-config-vite'
+import { createNiceViteConfig } from '@niceprototypes/config-vite'
 import { niceCrxjs } from './plugin.js'
 
 /**
  * Vite config for a Chrome extension built with CRXJS that consumes nice-* packages:
- * nice-config-vite's settings and niceCrxjs(). The app adds CRXJS itself (`crx({ manifest })`
+ * @niceprototypes/config-vite's settings and niceCrxjs(). The app adds CRXJS itself (`crx({ manifest })`
  * in `plugins`), so CRXJS runs from the app's install: it looks for @vitejs/plugin-react
  * there to add React's dev preamble to content scripts.
  *

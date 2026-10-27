@@ -1,2 +1,2 @@
 export { default } from "./Ink"
-export type { InkProps } from "nice-react-ink"
+export type { InkProps } from "@niceprototypes/ink"

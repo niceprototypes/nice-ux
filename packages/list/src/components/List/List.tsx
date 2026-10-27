@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Theme } from "nice-react-styles"
+import { Theme } from "@niceprototypes/styles"
 import { ListContext } from "./ListContext"
 import { StyledList, StyledListDivider, StyledListDividerRule } from "./List.styles"
 import type { ListProps } from "./List.types"

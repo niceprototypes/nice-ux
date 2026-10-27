@@ -9,7 +9,7 @@
  */
 
 import styled, { css } from "styled-components"
-import { getToken, resolveColorProp, type BorderRadiusType, type BorderWidthType, type BorderColorType, type ColorTokenProp } from "nice-react-styles"
+import { getToken, resolveColorProp, type BorderRadiusType, type BorderWidthType, type BorderColorType, type ColorTokenProp } from "@niceprototypes/styles"
 import type { ImageBackgroundSizeType, ImageBackgroundPositionType } from "./Image.types"
 
 /**

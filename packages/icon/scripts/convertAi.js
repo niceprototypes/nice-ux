@@ -1,7 +1,7 @@
 /**
  * @fileoverview Convert Adobe Illustrator sources into asset SVGs.
  *
- * `.ai` files are PDF-compatible; nice-svg-generator reads their path geometry
+ * `.ai` files are PDF-compatible; @niceprototypes/svg-generator reads their path geometry
  * and emits a clean SVG (no external pdf2svg / poppler dependency). Sources live
  * under a surface's `sourceDir`, mirroring the flat asset tree:
  * `{sourceDir}/{name}/{variant}.ai` maps to `{generatedDir}/{name}/{variant}.svg`
@@ -20,7 +20,7 @@
 
 import * as fs from "fs"
 import * as path from "path"
-import { convert } from "nice-svg-generator"
+import { convert } from "@niceprototypes/svg-generator"
 
 /** Recursively collect every `*.ai` path under `dir`. */
 function findAiFiles(dir) {
@@ -107,7 +107,7 @@ export function convertAiSources(target = "", surface) {
     console.log(`  (no .ai files under the ${label} source${target ? `/${target}` : ""})`)
   } else {
     if (converted.length) {
-      console.log(`✓ Converted ${converted.length} ${label} .ai → .svg via nice-svg-generator:`)
+      console.log(`✓ Converted ${converted.length} ${label} .ai → .svg via @niceprototypes/svg-generator:`)
       for (const r of converted) console.log(`  ${r} → ${r.replace(/\.ai$/i, ".svg")}`)
     }
     if (skipped.length) console.log(`  (${skipped.length} ${label} up-to-date, skipped)`)

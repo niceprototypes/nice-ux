@@ -1,4 +1,4 @@
-/* Storybook docs (autodocs) overrides — restyle the .sbdocs surface with nice-styles tokens. */
+/* Storybook docs (autodocs) overrides — restyle the .sbdocs surface with @niceprototypes/styles tokens. */
 
 .sbdocs {
   font-family: var(--np--font-family);
@@ -24,7 +24,7 @@
 
 
 /*
-!* Storybook docs (autodocs) overrides — restyle the .sbdocs surface with nice-styles tokens. *!
+!* Storybook docs (autodocs) overrides — restyle the .sbdocs surface with @niceprototypes/styles tokens. *!
 
 .sbdocs {
   font-family: var(--np--font-family);

@@ -7,7 +7,7 @@ export type RepoStatus = "peer" | "dev" | "optional"
 
 /** One GitHub repo shown as a {@link RepoLink}. */
 export interface Repo {
-  /** Package / repo name, e.g. `"nice-react-button"`. */
+  /** Package / repo name, e.g. `"@niceprototypes/button"`. */
   name: string
   /** Full GitHub repo URL. */
   url: string

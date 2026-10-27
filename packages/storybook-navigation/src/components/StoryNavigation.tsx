@@ -6,9 +6,9 @@ import {
   UPDATE_DARK_MODE_EVENT_NAME,
 } from "storybook-dark-mode"
 import { navigate } from "@storybook/addon-links"
-import Flex from "nice-react-flex"
-import Ink from "nice-react-ink"
-import type { ThemeType } from "nice-styles"
+import Flex from "@niceprototypes/flex"
+import Ink from "@niceprototypes/ink"
+import type { ThemeType } from "@niceprototypes/styles"
 import { MobileOnlyDiv, OuterFlex, SpacerDiv, TabletUpDiv } from "./StoryNavigation.styles"
 import {
   TOGGLE_NAV_EVENT,

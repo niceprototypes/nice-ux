@@ -16,20 +16,20 @@
       {
         "key": "css",
         "header": "CSS",
-        "render": "nice-react-code",
+        "render": "@niceprototypes/code",
         "language": "tsx",
         "width": "20em"
       },
       {
         "key": "js",
         "header": "JS",
-        "render": "nice-react-code",
+        "render": "@niceprototypes/code",
         "language": "tsx"
       },
       {
         "key": "value",
         "header": "Default",
-        "render": "nice-react-ink",
+        "render": "@niceprototypes/ink",
         "code": true,
         "size": "small",
         "color": "lighter",
@@ -73,7 +73,7 @@
       {
         "key": "code",
         "header": "React",
-        "render": "nice-react-code",
+        "render": "@niceprototypes/code",
         "language": "tsx"
       }
     ],
@@ -83,7 +83,7 @@
       },
       {
         "key": "code",
-        "render": "nice-react-code",
+        "render": "@niceprototypes/code",
         "language": "tsx"
       }
     ],
@@ -93,7 +93,7 @@
       },
       {
         "key": "code",
-        "render": "nice-react-code",
+        "render": "@niceprototypes/code",
         "language": "css"
       }
     ],
@@ -103,12 +103,12 @@
       },
       {
         "key": "code",
-        "render": "nice-react-code",
+        "render": "@niceprototypes/code",
         "language": "tsx"
       },
       {
         "key": "note",
-        "render": "nice-react-ink",
+        "render": "@niceprototypes/ink",
         "code": true,
         "size": "small"
       }
@@ -310,7 +310,7 @@
             "Sizes": [
               {
                 "backgroundSize": {
-                  "description": "Image fit tokens — map to CSS object-fit (img) / background-size (div). Demoed via nice-react-image."
+                  "description": "Image fit tokens — map to CSS object-fit (img) / background-size (div). Demoed via @niceprototypes/image."
                 }
               },
               {

@@ -1,5 +1,5 @@
 {
-  "name": "nice-react-list",
+  "name": "@niceprototypes/list",
   "version": "0.1.0",
   "type": "module",
   "description": "Generic list for React: List and ListItem with start/end slots, hr dividers between items, and an optional scrollable body",
@@ -26,7 +26,7 @@
   "author": "",
   "license": "MIT",
   "peerDependencies": {
-    "nice-react-styles": "^15.0.1",
+    "@niceprototypes/styles": "workspace:^",
     "react": ">=19.2.0 <20.0.0",
     "react-dom": ">=19.2.0 <20.0.0",
     "styled-components": ">=6.1.18 <7.0.0"
@@ -38,21 +38,26 @@
     "@testing-library/jest-dom": "^6.1.0",
     "@testing-library/react": "^16.3.0",
     "@types/jest": "^29.5.0",
-    "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
-    "nice-config-jest": "file:../config-jest",
-    "nice-config-rollup": "file:../config-rollup",
-    "nice-config-typescript": "file:../config-typescript",
-    "nice-react-styles": "file:../react-styles",
-    "react": "19.2.0",
-    "react-dom": "19.2.0",
+    "@niceprototypes/config-jest": "workspace:*",
+    "@niceprototypes/config-rollup": "workspace:*",
+    "@niceprototypes/config-typescript": "workspace:*",
+    "@niceprototypes/styles": "workspace:*",
+    "react": "catalog:",
+    "react-dom": "catalog:",
     "rollup": "^4.9.1",
     "rollup-plugin-dts": "^6.1.0",
-    "styled-components": "6.1.19",
+    "styled-components": "catalog:",
     "ts-jest": "^29.4.6",
     "tslib": "^2.6.2",
-    "typescript": "^6.0.3"
+    "typescript": "catalog:"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niceprototypes/nice-ux.git",
+    "directory": "packages/list"
   }
 }

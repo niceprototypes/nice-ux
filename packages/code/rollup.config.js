@@ -1,4 +1,4 @@
-import { createConfiguration } from "nice-config-rollup"
+import { createConfiguration } from "@niceprototypes/config-rollup"
 
 // @shikijs/* are runtime dependencies but must be externalized, not bundled
 // (Shiki is large and self-contained). The shared externals matcher only

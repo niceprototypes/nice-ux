@@ -1,13 +1,13 @@
-# nice-react-select
+# @niceprototypes/select
 ![Select](docs/select.png)
 
-Select for React, rendered through `nice-react-input`'s field chrome. Part of
+Select for React, rendered through `@niceprototypes/input`'s field chrome. Part of
 the Nice Prototypes ecosystem.
 
 - **Default (custom):** a WAI-ARIA APG
   [select-only combobox](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-select-only/)
   — Input rendered read-only with `role="combobox"`, opening a
-  `nice-react-popover` Popover that holds a `nice-react-list` List with
+  `@niceprototypes/popover` Popover that holds a `@niceprototypes/list` List with
   `role="listbox"`. Options can carry `start` / `end` content.
 - **`native`:** the platform `<select>` (Input `as="select"`), with options, a
   placeholder option and a chevron.
@@ -17,7 +17,7 @@ Single value only in both modes (no `multiple`).
 ## Install
 
 ```bash
-npm install nice-react-select
+npm install @niceprototypes/select
 ```
 
 Peer dependencies: `react`, `react-dom` (>=19.2), `styled-components` (>=6.1.18).
@@ -27,7 +27,7 @@ Peer dependencies: `react`, `react-dom` (>=19.2), `styled-components` (>=6.1.18)
 ### Options
 
 ```tsx
-import Select from "nice-react-select"
+import Select from "@niceprototypes/select"
 
 <Select
   aria-label="Fruit"
@@ -65,7 +65,7 @@ preferred in custom mode: it also carries `start` / `end`.
 ### Inside a Field
 
 ```tsx
-import { Field } from "nice-react-field"
+import { Field } from "@niceprototypes/field"
 
 <Field label="Fruit" description="Pick one." error={error} invalid={!!error} required>
   <Select options={fruit} />
@@ -150,7 +150,7 @@ combobox — assistive technology announces it as required — but browsers do
 not run constraint validation on read-only controls or hidden inputs, so the
 form submits with an empty value. Validate in your own submit handler (and
 show the error through Field), or use `native`. This is the same limitation as
-`nice-react-calendar`'s DateField.
+`@niceprototypes/calendar`'s DateField.
 
 ## Tokens
 

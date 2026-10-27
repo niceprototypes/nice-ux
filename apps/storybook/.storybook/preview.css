@@ -1,12 +1,12 @@
-@import "nice-styles/tokens.css";
-@import "nice-styles/reset.css";
+@import "@niceprototypes/styles/tokens.css";
+@import "@niceprototypes/styles/reset.css";
 
 @import "preview-reset.css";
 @import "preview-docs.css";
 @import "preview-docblock.css";
 
 /* Named breakpoint queries are available in PREVIEW CSS — no @import needed.
-   postcss.config.js injects nice-styles' @custom-media aliases (via
+   postcss.config.js injects @niceprototypes/styles' @custom-media aliases (via
    @csstools/postcss-global-data) and resolves them, so the floors track
    styles/src/tokens/breakpoints.json:
 

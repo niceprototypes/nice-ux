@@ -1,6 +1,6 @@
 import styled from "styled-components"
-import Flex from "nice-react-flex"
-import { getToken } from "nice-react-styles"
+import Flex from "@niceprototypes/flex"
+import { getToken } from "@niceprototypes/styles"
 import { LabelFlex } from "../CodeLabel/CodeLabel.styles"
 import type { CodeMarginType } from "./Code.types"
 

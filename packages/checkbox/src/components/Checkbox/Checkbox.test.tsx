@@ -2,11 +2,11 @@ import React from "react"
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import "@testing-library/jest-dom"
-import { getToken } from "nice-react-styles"
-import { Field } from "nice-react-field"
+import { getToken } from "@niceprototypes/styles"
+import { Field } from "@niceprototypes/field"
 import Checkbox from "./Checkbox"
 
-jest.mock("nice-react-icon", () => ({
+jest.mock("@niceprototypes/icon", () => ({
   __esModule: true,
   default: ({ name, vendor }: { name: string; vendor: boolean }) => (
     <span data-testid="icon" data-vendor={String(vendor)}>

@@ -1,7 +1,7 @@
 import styled from "styled-components"
-import Flex from "nice-react-flex"
-import Ink from "nice-react-ink"
-import { getToken, getBreakpoint } from "nice-react-styles"
+import Flex from "@niceprototypes/flex"
+import Ink from "@niceprototypes/ink"
+import { getToken, getBreakpoint } from "@niceprototypes/styles"
 
 /**
  * Wrapper for a single navigation control. Overrides the inlined Button's

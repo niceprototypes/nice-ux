@@ -1,9 +1,9 @@
-import type { BorderColorType, ThemeType } from "nice-react-styles"
+import type { BorderColorType, ThemeType } from "@niceprototypes/styles"
 
 /**
  * LineColorType
  *
- * Re-export of BorderColorType from nice-styles.
+ * Re-export of BorderColorType from @niceprototypes/styles.
  * Dash color, from the `line.borderColor` component tokens (which default to the root
  * border colors).
  */
@@ -41,7 +41,7 @@ export type LineClassNameType = string
 /**
  * LineThemeType
  *
- * Re-export of ThemeType from nice-styles.
+ * Re-export of ThemeType from @niceprototypes/styles.
  * Pin token resolution to a specific theme.
  */
 export type LineThemeType = ThemeType

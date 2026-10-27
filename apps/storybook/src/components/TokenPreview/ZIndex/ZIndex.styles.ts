@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { getToken, type TokenVariants } from "nice-react-styles"
+import { getToken, type TokenVariants } from "@niceprototypes/styles"
 import { REFERENCE_Z } from "./ZIndex.constants"
 
 /** The stacking context both squares share — relative, so it mints one; neither child isolates. */

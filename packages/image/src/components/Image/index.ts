@@ -1,4 +1,4 @@
-import { withBreakpoints } from "nice-react-styles"
+import { withBreakpoints } from "@niceprototypes/styles"
 import BaseImage from "./Image"
 import type { ImageProps } from "./Image.types"
 

@@ -1,5 +1,5 @@
 import * as React from "react"
-import Icon from "nice-react-icon"
+import Icon from "@niceprototypes/icon"
 import { SpinnerDemoDiv, SpinnerDemoImg, SpinnerDemoOverlayDiv } from "./SpinnerDemo.styles"
 
 /**

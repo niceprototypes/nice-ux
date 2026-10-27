@@ -1,4 +1,4 @@
-import type { FlexGapSizeType, FlexSpacingType } from "nice-react-flex"
+import type { FlexGapSizeType, FlexSpacingType } from "@niceprototypes/flex"
 
 export interface DotSize {
   name?: string

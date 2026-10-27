@@ -1,7 +1,7 @@
 import * as React from "react"
 import styled from "styled-components"
-import NiceInk, { type InkProps } from "nice-react-ink"
-import { getToken } from "nice-react-styles"
+import NiceInk, { type InkProps } from "@niceprototypes/ink"
+import { getToken } from "@niceprototypes/styles"
 
 /**
  * NiceInk plus the descendant rules the docs pages rely on.

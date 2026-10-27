@@ -1,6 +1,6 @@
 import * as React from "react"
-import { Theme } from "nice-react-styles"
-import { useField } from "nice-react-field"
+import { Theme } from "@niceprototypes/styles"
+import { useField } from "@niceprototypes/field"
 import { StyledInput, StyledSwitch, StyledThumb, StyledToggle, StyledTrack } from "./Toggle.styles"
 import type { ToggleProps } from "./Toggle.types"
 

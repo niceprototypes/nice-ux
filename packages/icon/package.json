@@ -1,20 +1,26 @@
 {
-  "name": "nice-react-icon",
+  "name": "@niceprototypes/icon",
   "version": "8.0.3",
-  "description": "A flexible and customizable React icon component with built-in icon set and theming support",
+  "description": "React Icon and Illustration components with the Nice SVG icon and illustration set",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "src/svg/index.js",
+    "src/svg/index.d.ts",
+    "src/svg/icons/generated",
+    "src/svg/illustrations/generated",
+    "src/svg/services"
   ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:niceprototypes/nice-react-icon.git"
+    "url": "git+https://github.com/niceprototypes/nice-ux.git",
+    "directory": "packages/icon"
   },
-  "homepage": "https://github.com/niceprototypes/nice-react-icon#readme",
+  "homepage": "https://github.com/niceprototypes/nice-ux/tree/main/packages/icon#readme",
   "bugs": {
-    "url": "https://github.com/niceprototypes/nice-react-icon/issues"
+    "url": "https://github.com/niceprototypes/nice-ux/issues"
   },
   "keywords": [
     "react",
@@ -36,12 +42,12 @@
     "test": "jest",
     "typecheck": "tsc --noEmit",
     "prepublishOnly": "npm run build",
-    "generate-exports": "nice-generate-exports ."
+    "generate-exports": "nice-generate-exports .",
+    "generate:icons": "node scripts/generateIndex/index.js"
   },
   "peerDependencies": {
-    "nice-react-icon-vendor": "^2.0.5",
-    "nice-react-styles": "^15.0.1",
-    "nice-styles": "^17.1.0",
+    "@niceprototypes/icon-vendor": "workspace:^",
+    "@niceprototypes/styles": "workspace:^",
     "react": ">=19.2.0",
     "react-dom": ">=19.2.0",
     "styled-components": ">=6.1.18"
@@ -50,7 +56,7 @@
     "react-dom": {
       "optional": true
     },
-    "nice-react-icon-vendor": {
+    "@niceprototypes/icon-vendor": {
       "optional": true
     }
   },
@@ -63,8 +69,8 @@
     "@testing-library/jest-dom": "^6.1.0",
     "@testing-library/react": "^16.3.0",
     "@types/jest": "^29.5.0",
-    "@types/react": "^19.2.7",
-    "@types/react-dom": "^19.0.0",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
     "@types/styled-components": "^5.1.36",
     "@typescript-eslint/eslint-plugin": "^6.10.0",
     "@typescript-eslint/parser": "^6.10.0",
@@ -72,20 +78,18 @@
     "eslint-plugin-react": "^7.33.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
-    "nice-config-exports": "file:../config-exports",
-    "nice-config-jest": "file:../config-jest",
-    "nice-config-rollup": "file:../config-rollup",
-    "nice-config-typescript": "file:../config-typescript",
-    "nice-icons": "file:../icons",
-    "nice-react-styles": "file:../react-styles",
-    "nice-styles": "file:../styles",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
+    "@niceprototypes/config-exports": "workspace:*",
+    "@niceprototypes/config-jest": "workspace:*",
+    "@niceprototypes/config-rollup": "workspace:*",
+    "@niceprototypes/config-typescript": "workspace:*",
+    "@niceprototypes/styles": "workspace:*",
+    "react": "catalog:",
+    "react-dom": "catalog:",
     "rollup": "^4.3.0",
-    "styled-components": "^6.1.19",
+    "styled-components": "catalog:",
     "ts-jest": "^29.4.6",
     "tslib": "^2.6.0",
-    "typescript": "^6.0.3"
+    "typescript": "catalog:"
   },
   "publishConfig": {
     "access": "public"
@@ -93,5 +97,60 @@
   "engines": {
     "node": ">=14.0.0",
     "npm": ">=6.0.0"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js",
+      "default": "./dist/index.esm.js"
+    },
+    "./svg": {
+      "types": "./src/svg/index.d.ts",
+      "default": "./src/svg/index.js"
+    },
+    "./catalog": {
+      "types": "./src/svg/icons/generated/catalog.d.ts",
+      "default": "./src/svg/icons/generated/catalog.js"
+    },
+    "./source": {
+      "types": "./src/svg/icons/generated/source.d.ts",
+      "default": "./src/svg/icons/generated/source.js"
+    },
+    "./base64": {
+      "types": "./src/svg/icons/generated/base64.d.ts",
+      "default": "./src/svg/icons/generated/base64.js"
+    },
+    "./get-icon": {
+      "types": "./src/svg/services/getIcon.d.ts",
+      "default": "./src/svg/services/getIcon.js"
+    },
+    "./get-icon-encoded": {
+      "types": "./src/svg/services/getIconEncoded.d.ts",
+      "default": "./src/svg/services/getIconEncoded.js"
+    },
+    "./illustration-catalog": {
+      "types": "./src/svg/illustrations/generated/catalog.d.ts",
+      "default": "./src/svg/illustrations/generated/catalog.js"
+    },
+    "./illustration-source": {
+      "types": "./src/svg/illustrations/generated/source.d.ts",
+      "default": "./src/svg/illustrations/generated/source.js"
+    },
+    "./illustration-base64": {
+      "types": "./src/svg/illustrations/generated/base64.d.ts",
+      "default": "./src/svg/illustrations/generated/base64.js"
+    },
+    "./get-illustration": {
+      "types": "./src/svg/services/getIllustration.d.ts",
+      "default": "./src/svg/services/getIllustration.js"
+    },
+    "./get-illustration-encoded": {
+      "types": "./src/svg/services/getIllustrationEncoded.d.ts",
+      "default": "./src/svg/services/getIllustrationEncoded.js"
+    },
+    "./illustration/*": "./src/svg/illustrations/generated/*",
+    "./*": "./src/svg/icons/generated/*",
+    "./package.json": "./package.json"
   }
 }

@@ -32,16 +32,16 @@ This Storybook documents the following packages:
 
 ### React Components
 
-- **nice-react-flex** - Responsive flexbox container
-- **nice-react-ink** - Semantic ink component
-- **nice-react-tile** - Full-width container with backgrounds
-- **nice-react-button** - Feature-rich button component
-- **nice-react-icon** - Icon library with 30+ SVG icons
+- **@niceprototypes/flex** - Responsive flexbox container
+- **@niceprototypes/ink** - Semantic ink component
+- **@niceprototypes/tile** - Full-width container with backgrounds
+- **@niceprototypes/button** - Feature-rich button component
+- **@niceprototypes/icon** - Icon library with 30+ SVG icons
 
 ### Utilities
 
-- **nice-styles** - CSS design tokens
-- **nice-toolkit** - CLI for linking, scaffolding, dev/watch, and orchestrated publishing of nice-\* packages
+- **@niceprototypes/styles** - CSS design tokens
+- **@niceprototypes/toolkit** - CLI for linking, scaffolding, dev/watch, and orchestrated publishing of nice-\* packages
 
 ## 📖 Documentation Structure
 
@@ -54,7 +54,7 @@ stories/
 ├── Button.stories.tsx            # Button component examples
 ├── Icon.stories.tsx              # Icon component examples
 ├── CSSVariables.mdx              # CSS variables documentation
-└── NpmLink.mdx                   # nice-toolkit documentation
+└── NpmLink.mdx                   # @niceprototypes/toolkit documentation
 ```
 
 ## 🎨 Features
@@ -133,11 +133,11 @@ The Storybook uses these packages from npm:
 ```json
 {
   "dependencies": {
-    "nice-react-flex": "^1.0.3",
-    "nice-react-ink": "^1.3.3",
-    "nice-react-tile": "^2.0.6",
-    "nice-react-button": "^3.2.3",
-    "nice-react-icon": "^1.1.2",
+    "@niceprototypes/flex": "^1.0.3",
+    "@niceprototypes/ink": "^1.3.3",
+    "@niceprototypes/tile": "^2.0.6",
+    "@niceprototypes/button": "^3.2.3",
+    "@niceprototypes/icon": "^1.1.2",
     "nice-css-variables": "^1.0.4"
   }
 }
@@ -147,46 +147,46 @@ The Storybook uses these packages from npm:
 
 This project uses two tools to enable hot module reloading with symlinked packages:
 
-#### 1. nice-toolkit — Handles npm linking
+#### 1. @niceprototypes/toolkit — Handles npm linking
 
-When you `npm link` React packages, each linked package brings its own copy of React, causing "Invalid hook call" errors. `nice-toolkit` solves this by removing React, React DOM, and styled-components from linked packages' `node_modules`.
+When you `npm link` React packages, each linked package brings its own copy of React, causing "Invalid hook call" errors. `@niceprototypes/toolkit` solves this by removing React, React DOM, and styled-components from linked packages' `node_modules`.
 
 ```bash
 # Install globally (optional)
-npm install -g nice-toolkit
+npm install -g @niceprototypes/toolkit
 
-# Link all configured Nice packages from nice-storybook directory
-npx nice-toolkit
+# Link all configured Nice packages from @niceprototypes/storybook directory
+npx @niceprototypes/toolkit
 
 # After running npm install in any linked package, re-run:
-npx nice-toolkit
+npx @niceprototypes/toolkit
 # or to unlink first:
-npx nice-toolkit --unlink
+npx @niceprototypes/toolkit --unlink
 ```
 
-#### 2. nice-vite-watcher — Enables HMR
+#### 2. @niceprototypes/vite-watcher — Enables HMR
 
-Vite doesn't watch symlinked packages by default. The `nice-vite-watcher` plugin adds watching for linked package dist folders and enables source aliases for true HMR.
+Vite doesn't watch symlinked packages by default. The `@niceprototypes/vite-watcher` plugin adds watching for linked package dist folders and enables source aliases for true HMR.
 
 The configuration is in `.storybook/main.ts`:
 
 ```typescript
-import { viteWatcher, getSourceAliases } from "nice-vite-watcher"
+import { viteWatcher, getSourceAliases } from "@niceprototypes/vite-watcher"
 
 // All linked packages and their local paths
 const linkedPackages = {
-  "nice-react-flex": `${NICE_PACKAGES_BASE}/nice-react-flex`,
-  "nice-react-ink": `${NICE_PACKAGES_BASE}/nice-react-ink`,
+  "@niceprototypes/flex": `${NICE_PACKAGES_BASE}/nice-react-flex`,
+  "@niceprototypes/ink": `${NICE_PACKAGES_BASE}/nice-react-ink`,
   // ... more packages
 }
 
 // Packages that can use source aliases (no special build transforms)
 // These get TRUE HMR with state preservation
 const sourceAliasablePackages = [
-  "nice-react-flex",
-  "nice-react-ink",
-  "nice-react-styles",
-  "nice-react-button",
+  "@niceprototypes/flex",
+  "@niceprototypes/ink",
+  "@niceprototypes/styles",
+  "@niceprototypes/button",
 ]
 ```
 
@@ -197,7 +197,7 @@ const sourceAliasablePackages = [
 npm install
 
 # 2. Link all Nice packages
-npx nice-toolkit
+npx @niceprototypes/toolkit
 
 # 3. Start Storybook with HMR
 npm run dev
@@ -207,24 +207,24 @@ npm run dev
 
 | Category           | HMR Behavior               | Packages                                                                                                 |
 | ------------------ | -------------------------- | -------------------------------------------------------------------------------------------------------- |
-| **Source-aliased** | True HMR — state preserved | nice-react-flex, nice-react-ink, nice-react-styles, nice-react-button |
-| **Dist-watched**   | Full reload — automatic    | nice-react-icon (uses SVGR transforms)                                                                   |
+| **Source-aliased** | True HMR — state preserved | @niceprototypes/flex, @niceprototypes/ink, @niceprototypes/styles, @niceprototypes/button |
+| **Dist-watched**   | Full reload — automatic    | @niceprototypes/icon (uses SVGR transforms)                                                                   |
 
 #### Editing Source-Aliased Packages
 
 Changes appear instantly with HMR. No build step needed.
 
 ```bash
-# Edit nice-react-flex/src/components/Flex.tsx
+# Edit @niceprototypes/flex/src/components/Flex.tsx
 # → Storybook hot-reloads immediately
 ```
 
-#### Editing Dist-Watched Packages (nice-react-icon)
+#### Editing Dist-Watched Packages (@niceprototypes/icon)
 
 Changes require the package's build to run first.
 
 ```bash
-# Terminal 1: Start nice-react-icon in watch mode
+# Terminal 1: Start @niceprototypes/icon in watch mode
 cd ../nice-react-icon
 npm run dev
 
@@ -232,7 +232,7 @@ npm run dev
 cd ../nice-storybook
 npm run dev
 
-# Edit nice-react-icon/src/...
+# Edit @niceprototypes/icon/src/...
 # → Package rebuilds → Storybook detects dist change → Full reload
 ```
 
@@ -261,7 +261,7 @@ npm run dev
 4. Re-run linking:
 
    ```bash
-   npx nice-toolkit
+   npx @niceprototypes/toolkit
    ```
 
 5. Restart Storybook
@@ -271,7 +271,7 @@ npm run dev
 **"Invalid hook call" error**: Multiple React instances running.
 
 ```bash
-npx nice-toolkit
+npx @niceprototypes/toolkit
 ```
 
 **Changes not appearing**:
@@ -282,9 +282,9 @@ npx nice-toolkit
 **After npm install in a linked package**: The linking is broken.
 
 ```bash
-npx nice-toolkit --unlink
+npx @niceprototypes/toolkit --unlink
 npm install
-npx nice-toolkit
+npx @niceprototypes/toolkit
 ```
 
 **Storybook won't start**: Clear caches and restart.

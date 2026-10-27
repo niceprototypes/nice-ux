@@ -1,6 +1,6 @@
 import * as React from "react"
-import { Theme } from "nice-react-styles"
-import Ink from "nice-react-ink"
+import { Theme } from "@niceprototypes/styles"
+import Ink from "@niceprototypes/ink"
 import { StyledFieldset, StyledFieldsetDescription, StyledFieldsetLegend } from "./Fieldset.styles"
 import type { FieldsetProps } from "./Fieldset.types"
 

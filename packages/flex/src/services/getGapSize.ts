@@ -1,4 +1,4 @@
-import { getConstant } from "nice-react-styles"
+import { getConstant } from "@niceprototypes/styles"
 import { GapSize } from "../components/Flex/Flex.types"
 
 /**

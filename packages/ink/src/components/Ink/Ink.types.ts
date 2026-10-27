@@ -1,5 +1,5 @@
 import * as React from "react"
-import type { ColorTokenProp, ColorType, FontSizeType, FontWeightType, LineHeightType, ThemeType } from "nice-react-styles"
+import type { ColorTokenProp, ColorType, FontSizeType, FontWeightType, LineHeightType, ThemeType } from "@niceprototypes/styles"
 
 /**
  * InkAlignType
@@ -30,7 +30,7 @@ export type InkAsType = "h1" | "h2" | "h3" | "h4" | "p" | "span"
 /**
  * InkColorType
  *
- * Re-export of ColorType from nice-styles.
+ * Re-export of ColorType from @niceprototypes/styles.
  * Text color values using design tokens.
  */
 export type InkColorType = ColorType
@@ -38,7 +38,7 @@ export type InkColorType = ColorType
 /**
  * InkSizeType
  *
- * Re-export of FontSizeType from nice-styles.
+ * Re-export of FontSizeType from @niceprototypes/styles.
  * Font size values using design tokens.
  */
 export type InkSizeType = FontSizeType
@@ -46,7 +46,7 @@ export type InkSizeType = FontSizeType
 /**
  * InkWeightType
  *
- * Re-export of FontWeightType from nice-styles.
+ * Re-export of FontWeightType from @niceprototypes/styles.
  * Font weight values using design tokens.
  */
 export type InkWeightType = FontWeightType
@@ -54,7 +54,7 @@ export type InkWeightType = FontWeightType
 /**
  * InkLineHeightType
  *
- * Re-export of LineHeightType from nice-styles.
+ * Re-export of LineHeightType from @niceprototypes/styles.
  * Line height values using design tokens.
  */
 export type InkLineHeightType = LineHeightType
@@ -62,7 +62,7 @@ export type InkLineHeightType = LineHeightType
 /**
  * InkThemeType
  *
- * Re-export of ThemeType from nice-styles.
+ * Re-export of ThemeType from @niceprototypes/styles.
  * Pin token resolution to a specific theme instead of responding to media query.
  *
  * Built-in values:
@@ -111,7 +111,7 @@ export type InkItalicType = boolean
  * InkProps
  *
  * Complete prop definition for the Ink component.
- * All Ink-related props support design tokens from nice-styles.
+ * All Ink-related props support design tokens from @niceprototypes/styles.
  */
 export type InkProps = {
   /** Text alignment */
@@ -139,7 +139,7 @@ export type InkProps = {
   italic?: InkItalicType
 
   /**
-   * Text color from nice-styles tokens. Either the variant name, or an object
+   * Text color from @niceprototypes/styles tokens. Either the variant name, or an object
    * adding effects: `{ name: "highlight", transform: [null, null, 40, null] }`.
    */
   color?: ColorTokenProp<InkColorType>
@@ -159,13 +159,13 @@ export type InkProps = {
   /** Line height setting (defaults based on element type) */
   lineHeight?: InkLineHeightType
 
-  /** Font size from nice-styles tokens */
+  /** Font size from @niceprototypes/styles tokens */
   size?: InkSizeType
 
   /** Inline styles */
   style?: React.CSSProperties
 
-  /** Font weight from nice-styles tokens */
+  /** Font weight from @niceprototypes/styles tokens */
   weight?: InkWeightType
 
   /**

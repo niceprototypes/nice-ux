@@ -1,5 +1,5 @@
 import * as React from "react"
-import type { FlexSpacingType } from "nice-react-flex"
+import type { FlexSpacingType } from "@niceprototypes/flex"
 import type { TileContentProps } from "../TileContent/TileContent.types"
 import type {
   TileMaxWidthType,

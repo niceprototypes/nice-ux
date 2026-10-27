@@ -1,6 +1,6 @@
 import * as React from "react"
-import { getToken } from "nice-react-styles"
-import type { TokenGroup, TokenVariants } from "nice-styles"
+import { getToken } from "@niceprototypes/styles"
+import type { TokenGroup, TokenVariants } from "@niceprototypes/styles"
 import { TokenName, variantKey } from "../../../utilities"
 import { tokenCode } from "./Modules.tokenCode"
 import type { DataTableConfig, DataRowItem } from "../../../../components/DataTable"

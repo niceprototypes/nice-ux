@@ -16,14 +16,14 @@ import Ink from "../../src/nice/Ink"
 <Ink code>StylesProvider</Ink>
 <Ink>is given</Ink>
 <Ink code>detectDevice</Ink><Ink>, it runs detection once and shares the result through context — so every descendant reads one shared value, with no separate provider to wire and no per-component detection. This is the only device binding; detection lives inside</Ink>
-<Ink code>nice-react-styles</Ink><Ink>.</Ink>
+<Ink code>@niceprototypes/styles</Ink><Ink>.</Ink>
 
 <Line />
 
 <Ink as="h2">Enable detection on the provider</Ink>
 
 ```tsx
-import { StylesProvider } from "nice-react-styles"
+import { StylesProvider } from "@niceprototypes/styles"
 
 <StylesProvider detectDevice>
   <App />
@@ -40,7 +40,7 @@ import { StylesProvider } from "nice-react-styles"
 <Ink as="h2">Read it anywhere below</Ink>
 
 ```tsx
-import { useDevice } from "nice-react-styles"
+import { useDevice } from "@niceprototypes/styles"
 
 function Nav() {
   const { isMobile } = useDevice()

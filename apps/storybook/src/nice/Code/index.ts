@@ -1,2 +1,2 @@
 export { default } from "./Code"
-export type { CodeProps } from "nice-react-code"
+export type { CodeProps } from "@niceprototypes/code"

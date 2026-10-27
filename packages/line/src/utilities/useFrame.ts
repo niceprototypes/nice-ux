@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef, useState } from "react"
-import { getToken, type TokenAddress } from "nice-react-styles"
+import { getToken, type TokenAddress } from "@niceprototypes/styles"
 import type { LineRadiusType } from "../components/Line/Line.types"
 import { fitDasharray } from "./fitDasharray"
 import { framePath } from "./framePath"

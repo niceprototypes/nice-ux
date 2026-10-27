@@ -1,7 +1,7 @@
 import * as React from "react"
-import type { AlignType, InkProps } from "nice-react-ink"
-import type { FlexProps } from "nice-react-flex"
-import type { ThemeType, GapType } from "nice-react-styles"
+import type { AlignType, InkProps } from "@niceprototypes/ink"
+import type { FlexProps } from "@niceprototypes/flex"
+import type { ThemeType, GapType } from "@niceprototypes/styles"
 
 export type TileInkProps = Partial<Omit<InkProps, "children">>
 

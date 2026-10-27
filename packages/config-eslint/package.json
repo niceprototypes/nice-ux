@@ -1,5 +1,5 @@
 {
-  "name": "nice-config-eslint",
+  "name": "@niceprototypes/config-eslint",
   "version": "1.0.0",
   "description": "Shared ESLint configuration for the nice-* ecosystem",
   "main": "index.js",
@@ -17,12 +17,13 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/niceprototypes/nice-config-eslint.git"
+    "url": "git+https://github.com/niceprototypes/nice-ux.git",
+    "directory": "packages/config-eslint"
   },
   "bugs": {
-    "url": "https://github.com/niceprototypes/nice-config-eslint/issues"
+    "url": "https://github.com/niceprototypes/nice-ux/issues"
   },
-  "homepage": "https://github.com/niceprototypes/nice-config-eslint#readme",
+  "homepage": "https://github.com/niceprototypes/nice-ux/tree/main/packages/config-eslint#readme",
   "peerDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
@@ -32,5 +33,6 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^4.6.2",
     "prettier": ">=3.0.0"
-  }
+  },
+  "private": true
 }

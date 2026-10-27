@@ -11,15 +11,15 @@ import { DataTable } from "../../src/components/DataTable"
 
 <StoryHeader title="Toolkit" />
 
-<Ink code>nice-toolkit</Ink>
+<Ink code>@niceprototypes/toolkit</Ink>
 <Ink>is the CLI that manages local development across the Nice ecosystem — linking packages, resolving singleton conflicts, rebuilding dists, and publishing. Two bin names resolve to the same script:</Ink>
-<Ink code>nice-toolkit</Ink>
+<Ink code>@niceprototypes/toolkit</Ink>
 <Ink>(long form) and</Ink>
 <Ink code>nicely</Ink>
 <Ink>(short alias).</Ink>
 
 ```bash
-npm install -g nice-toolkit
+npm install -g @niceprototypes/toolkit
 ```
 
 <Line />
@@ -37,8 +37,8 @@ npm install -g nice-toolkit
 ```bash
 # The problem — duplicate singletons in each linked package
 your-app/node_modules/react
-nice-react-tile/node_modules/react     ← duplicate (conflict)
-nice-react-flex/node_modules/react     ← duplicate (conflict)
+@niceprototypes/tile/node_modules/react     ← duplicate (conflict)
+@niceprototypes/flex/node_modules/react     ← duplicate (conflict)
 
 # The fix — strip singletons from every linked package
 nicely --dedupe
@@ -70,7 +70,7 @@ nicely --dedupe
 </ul>
   and changes nothing. Reach for it first when unsure.
 <ul>
-  <li><Ink>Commands act on the packages in <code>nice-toolkit/registry.json</code>. A package</Ink></li>
+  <li><Ink>Commands act on the packages in <code>@niceprototypes/toolkit/registry.json</code>. A package</Ink></li>
 </ul>
   missing from the registry is invisible to `nicely`.
 <ul>

@@ -1,5 +1,5 @@
 import * as React from "react"
-import Icon from "nice-react-icon"
+import Icon from "@niceprototypes/icon"
 import type { ButtonIconProps } from "./ButtonIcon.types"
 
 /**

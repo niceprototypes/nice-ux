@@ -1,11 +1,11 @@
 import * as React from "react"
-import type { ColorType, FontSizeType, GapType } from "nice-react-styles"
+import type { ColorType, FontSizeType, GapType } from "@niceprototypes/styles"
 
-/** Language for a `nice-react-code` column. */
+/** Language for a `@niceprototypes/code` column. */
 export type DataLanguage = "tsx" | "css"
 
 /** How a column's cell values are rendered; omit `render` to render the value as-is. */
-export type DataColumnRender = "nice-react-ink" | "nice-react-code"
+export type DataColumnRender = "@niceprototypes/ink" | "@niceprototypes/code"
 
 /** A column definition — the single owner of a column's render policy, header, and width. */
 export interface DataColumn {
@@ -15,23 +15,23 @@ export interface DataColumn {
   header?: React.ReactNode | null
   /**
    * - omitted (default): the value is a ReactNode, rendered as-is.
-   * - `"nice-react-code"`: the value is a code string, rendered by the nice `Code` component (inlined).
-   * - `"nice-react-ink"`: the value is wrapped in an `<Ink>` styled by `code`/`size`/`color`.
+   * - `"@niceprototypes/code"`: the value is a code string, rendered by the nice `Code` component (inlined).
+   * - `"@niceprototypes/ink"`: the value is wrapped in an `<Ink>` styled by `code`/`size`/`color`.
    */
   render?: DataColumnRender
-  /** (`nice-react-ink`) render in the monospace code font. */
+  /** (`@niceprototypes/ink`) render in the monospace code font. */
   code?: boolean
-  /** (`nice-react-ink`) Ink font size. */
+  /** (`@niceprototypes/ink`) Ink font size. */
   size?: FontSizeType
-  /** (`nice-react-ink`) Nice text color. */
+  /** (`@niceprototypes/ink`) Nice text color. */
   color?: ColorType
   /**
    * Clicking the cell copies to the clipboard, with the hover copy-icon
-   * affordance. `nice-react-ink` / `nice-react-code` copy the string value; a
-   * node copies the cell's text content. `nice-react-code` defaults on; the others default off.
+   * affordance. `@niceprototypes/ink` / `@niceprototypes/code` copy the string value; a
+   * node copies the cell's text content. `@niceprototypes/code` defaults on; the others default off.
    */
   clickToCopy?: boolean
-  /** (`nice-react-code`) syntax-highlight language. @default "tsx" */
+  /** (`@niceprototypes/code`) syntax-highlight language. @default "tsx" */
   language?: DataLanguage
 }
 

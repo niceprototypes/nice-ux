@@ -1,6 +1,6 @@
 import * as React from "react"
 import { navigate } from "@storybook/addon-links"
-import Button from "nice-react-button"
+import Button from "@niceprototypes/button"
 import Plain from "../Plain"
 
 interface ArrowLinkProps {

@@ -1,25 +1,25 @@
-# nice-react-form
+# @niceprototypes/form
 
 Stateless form container for the Nice ecosystem. Renders a semantic `<form>`,
 stacks its children vertically, and forwards the submit event. It applies no
 spacing of its own — wrap children in a [`Flex`](https://github.com/niceprototypes/nice-react-flex)
 if you want a gap. It owns no field state — you manage values yourself (for example
-via [nice-react-input](https://github.com/niceprototypes/nice-react-input)'s
+via [@niceprototypes/input](https://github.com/niceprototypes/nice-react-input)'s
 controlled `value` / `onChange`).
 
 ## Install
 
 ```bash
-npm install nice-react-form
+npm install @niceprototypes/form
 ```
 
 ## Usage
 
 ```tsx
 import * as React from "react"
-import Form from "nice-react-form"
-import Input from "nice-react-input"
-import Button from "nice-react-button"
+import Form from "@niceprototypes/form"
+import Input from "@niceprototypes/input"
+import Button from "@niceprototypes/button"
 
 function ContactForm() {
   const [email, setEmail] = React.useState("")

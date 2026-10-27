@@ -1,8 +1,8 @@
 import * as React from "react"
-import Icon from "nice-react-icon"
-import Input from "nice-react-input"
-import Popover from "nice-react-popover"
-import { useLocale } from "nice-react-styles"
+import Icon from "@niceprototypes/icon"
+import Input from "@niceprototypes/input"
+import Popover from "@niceprototypes/popover"
+import { useLocale } from "@niceprototypes/styles"
 import { StyledDateFieldTrigger } from "./DateField.styles"
 import type { DateFieldProps } from "./DateField.types"
 import type { CalendarDateType } from "../Calendar/Calendar.types"
@@ -15,7 +15,7 @@ const TRIGGER_LABEL = "Choose date"
 /**
  * DateField
  *
- * Picker-only date field (v1): nice-react-input rendered read-only, showing the
+ * Picker-only date field (v1): @niceprototypes/input rendered read-only, showing the
  * value formatted with `Intl.DateTimeFormat(locale, { dateStyle: "medium" })`,
  * with a calendar button in Input's `end` slot that opens a Popover (anchored
  * to the Input control) containing a Calendar. The public value is an ISO
@@ -25,7 +25,7 @@ const TRIGGER_LABEL = "Choose date"
  * On open, focus moves to the calendar's tabbable day. Selecting a date sets
  * the value and closes the popover; Escape or an outside pointerdown closes it.
  * Focus returns to the Input control (Popover's behaviour). Label, description
- * and error wiring inside a nice-react-field `Field` come from Input.
+ * and error wiring inside a @niceprototypes/field `Field` come from Input.
  *
  * @example
  * ```tsx

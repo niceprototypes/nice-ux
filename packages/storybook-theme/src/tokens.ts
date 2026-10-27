@@ -1,4 +1,4 @@
-import { getToken } from "nice-styles"
+import { getToken } from "@niceprototypes/styles"
 
 /** The token groups this addon owns. Consumers spread them into their one `setTokens` call. */
 export const TOKENS = {

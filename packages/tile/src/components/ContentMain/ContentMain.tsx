@@ -1,6 +1,6 @@
 import * as React from "react"
-import Flex from "nice-react-flex"
-import Ink from "nice-react-ink"
+import Flex from "@niceprototypes/flex"
+import Ink from "@niceprototypes/ink"
 import type { ContentMainProps } from "./ContentMain.types"
 
 /**

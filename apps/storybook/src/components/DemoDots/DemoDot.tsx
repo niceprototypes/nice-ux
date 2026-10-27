@@ -1,4 +1,4 @@
-import Flex from "nice-react-flex"
+import Flex from "@niceprototypes/flex"
 import { DemoDotProps } from "./DemoDots.types"
 
 const DemoDot = ({

@@ -12,7 +12,7 @@ import type { VendorIconNodeType } from "../components/VendorIcon"
  * to the internal `VendorIcon` renderer.
  *
  * Returns `null` when the name does not match any Lucide icon, so
- * `nice-react-icon` can fall through to its placeholder.
+ * `@niceprototypes/icon` can fall through to its placeholder.
  *
  * Replaces the previous `lucide-react`-backed implementation that imported
  * pre-built React components from `lucide-react`. Same icon coverage, same

@@ -1,7 +1,7 @@
 import styled from "styled-components"
-import { getBreakpoint, getToken, transformColor } from "nice-react-styles"
+import { getBreakpoint, getToken, transformColor } from "@niceprototypes/styles"
 import Ink from "../../nice/Ink"
-import Flex from "nice-react-flex"
+import Flex from "@niceprototypes/flex"
 
 /**
  * The link itself — the brand icon plus the package name, recoloring to the

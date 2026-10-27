@@ -3,7 +3,7 @@
  */
 
 import type { ReactNode } from 'react'
-import type { GoogleFontsConfig, AdobeFontsConfig, LinkAttributes } from 'nice-styles'
+import type { GoogleFontsConfig, AdobeFontsConfig, LinkAttributes } from '../../../index'
 import type { LocaleCodeType, LocaleDirectionType } from './LocaleContext'
 
 /**
@@ -11,7 +11,7 @@ import type { LocaleCodeType, LocaleDirectionType } from './LocaleContext'
  */
 export interface StylesProviderProps {
   /**
-   * Child components that will have access to nice-styles theme and CSS variables
+   * Child components that will have access to @niceprototypes/styles theme and CSS variables
    */
   children: ReactNode
 

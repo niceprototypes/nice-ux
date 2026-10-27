@@ -1,10 +1,10 @@
 import type * as React from "react"
-import * as Icons from "nice-icons"
+import * as Icons from "../svg/index.js"
 import { iconNames, iconVariants } from "../constants"
 
 /**
  * Convert a kebab-case icon name (or a variant stem) to the PascalCase used by
- * nice-icons exports. Matches nice-icons' own `toPascalCase`: "arrow-top" →
+ * @niceprototypes/icon exports. Matches @niceprototypes/icon' own `toPascalCase`: "arrow-top" →
  * "ArrowTop", "check" → "Check", "base" → "Base", "3d" → "3d".
  */
 function toPascalCase(name: string): string {
@@ -20,7 +20,7 @@ type IconComponent = React.FunctionComponent<React.SVGAttributes<SVGElement>>
 export type IconVariantMap = Record<string, IconComponent>
 
 /**
- * Build the icon map dynamically from nice-icons' `iconVariants` catalog. Each
+ * Build the icon map dynamically from @niceprototypes/icon' `iconVariants` catalog. Each
  * entry maps an icon name to the components for the variants it ships, keyed by
  * variant stem. An icon is included only if its required `base` variant resolves;
  * variants whose export is missing are skipped.

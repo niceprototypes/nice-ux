@@ -1,7 +1,7 @@
-import Button from "nice-react-button"
+import Button from "@niceprototypes/button"
 import type { ComponentExample } from "../../../components/demos/Components"
-import Flex from "nice-react-flex"
-import { Theme, getToken } from "nice-react-styles"
+import Flex from "@niceprototypes/flex"
+import { Theme, getToken } from "@niceprototypes/styles"
 import { cap } from "../../../utilities"
 
 export const buttonTheme = {

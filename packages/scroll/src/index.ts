@@ -1,5 +1,5 @@
 /**
- * nice-react-scroll - Performance-optimized scroll components for React
+ * @niceprototypes/scroll - Performance-optimized scroll components for React
  *
  * @description
  * A comprehensive scroll management library with centralized scroll management,

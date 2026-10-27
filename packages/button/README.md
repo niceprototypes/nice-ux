@@ -1,4 +1,4 @@
-# nice-react-button
+# @niceprototypes/button
 ![Button](docs/button.png)
 
 > **Responsive props:** Every prop accepts per-breakpoint overrides through the `breakpoints` object. Keys are a breakpoint name (`phone`, `tablet`, `laptop`, `desktop`), optionally with `+` (that breakpoint and up) or `-` (that breakpoint and down); values are partial props. The most specific matching key wins. See [withBreakpoints](https://niceprototypes.com/storybook/?path=/docs/react-styles-withbreakpoints--docs).
@@ -17,7 +17,7 @@ A flexible and customizable React button component with built-in theming support
 - **Sizes**: five sizes from `SizeType` — `smaller`, `small`, `base`, `large`, `larger`
 - **Statuses**: `base`, `disabled`, `error`, `success`, `warning`; outline by default, solid with `filled`
 - **Looks**: `ghost` (transparent at rest or per interaction state), `selected` (persistent selected border), per-state `color` and `iconColor`
-- **Icons**: `iconLeft` / `iconRight` through nice-react-icon, vendor (Lucide) names with `iconVendor`; one icon and no label renders a square button
+- **Icons**: `iconLeft` / `iconRight` through @niceprototypes/icon, vendor (Lucide) names with `iconVendor`; one icon and no label renders a square button
 - **Elements**: native `<button>`, `as="a"` (inlined link layout by default), `as="div"` (clickable div with button semantics); `inlined` sets the link layout on any of them
 - **Accessibility**: forwarded `aria-*`, `role`, `tabIndex` and `id`; native `disabled` (or `aria-disabled` + `tabIndex` -1); token-driven `:focus-visible` outline; Enter/Space activation on `as="div"`
 - **Responsive**: per-breakpoint prop overrides through `breakpoints`
@@ -26,7 +26,7 @@ A flexible and customizable React button component with built-in theming support
 ## Installation
 
 ```bash
-npm install nice-react-button
+npm install @niceprototypes/button
 ```
 
 ### Peer Dependencies
@@ -34,13 +34,13 @@ npm install nice-react-button
 Make sure you have the following peer dependencies installed:
 
 ```bash
-npm install react react-dom styled-components nice-react-styles nice-react-flex nice-react-ink nice-react-icon
+npm install react react-dom styled-components @niceprototypes/styles @niceprototypes/flex @niceprototypes/ink @niceprototypes/icon
 ```
 
 ## Quick Start
 
 ```tsx
-import Button from 'nice-react-button'
+import Button from '@niceprototypes/button'
 
 function App() {
   return (
@@ -56,14 +56,14 @@ function App() {
 
 ## Props Reference
 
-Types are the aliases exported from `Button.types.ts`. Allowed values of each union (resolved): `~/nice/manifest/agents/catalog.json` → `nice-react-button`; aliases imported from nice-styles (`SizeType`, `BorderWidthType`, `ThemeType`) stay unresolved there — read `nice-styles/src/generated/types.ts`.
+Types are the aliases exported from `Button.types.ts`. Allowed values of each union (resolved): `~/nice/manifest/agents/catalog.json` → `@niceprototypes/button`; aliases imported from @niceprototypes/styles (`SizeType`, `BorderWidthType`, `ThemeType`) stay unresolved there — read `@niceprototypes/styles/src/generated/types.ts`.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `onClick` | `ButtonOnClickType` (`() => void`) | - | Click handler. Not called while disabled |
 | `filled` | `ButtonFilledType` (`boolean`) | `false` | Status color as background, transparent border, label and icons in `--np--color--inverse`; `false` is the outline (transparent fill, status-colored border and label) |
 | `size` | `SizeType` (`"smaller"`, `"small"`, `"base"`, `"large"`, `"larger"`) | `"base"` | Height from `button.size`, horizontal padding from `button.spacing`, label size passed to Ink as `size`, icon size from `button.icon.size` |
-| `padding` | `ButtonPaddingType` (`FlexSpacingType`: gap-token shorthand, 1–4 values, e.g. `"none base larger"`) | - | Content padding through nice-react-flex; replaces the size-derived horizontal padding, and non-zero vertical values grow the button past its base height. Ignored on square (icon-only) buttons |
+| `padding` | `ButtonPaddingType` (`FlexSpacingType`: gap-token shorthand, 1–4 values, e.g. `"none base larger"`) | - | Content padding through @niceprototypes/flex; replaces the size-derived horizontal padding, and non-zero vertical values grow the button past its base height. Ignored on square (icon-only) buttons |
 | `grow` | `ButtonGrowType` (`number`) | - | `flex-grow: {value}` with `flex-basis: 0` on the root; needs a flex-container parent. Unset emits no flex-grow |
 | `justifyContent` | `ButtonJustifyContentType` (`FlexJustifyContentType`: `"flex-start"`, `"flex-end"`, `"center"`, `"space-between"`, `"space-around"`, `"space-evenly"`) | `"center"` | Placement of the icon(s) and label; anything but `"center"` stretches the content row to the button's width |
 | `ghost` | `ButtonGhostType` (`boolean \| { rest?, hover?, focus?, active?: boolean }`) | `false` | Transparent background and border in the given interaction states; `true` = at rest only. Disabled buttons show their rest setting |
@@ -121,7 +121,7 @@ The keyboard focus outline (`:focus-visible`) reads the `button.focusRing.width`
 ### Status
 
 ```tsx
-import Button from 'nice-react-button'
+import Button from '@niceprototypes/button'
 
 // Outline (default): transparent fill, status-colored border and label
 <Button>Base</Button>
@@ -229,7 +229,7 @@ import Button from 'nice-react-button'
 ### Theming
 
 ```tsx
-import { setTokens } from 'nice-react-styles'
+import { setTokens } from '@niceprototypes/styles'
 
 // Restyle every button through the component tokens
 setTokens({ button: { selected: { borderColor: { day: "#333", night: "#fff" } } } })
@@ -240,7 +240,7 @@ setTokens({ button: { selected: { borderColor: { day: "#333", night: "#fff" } } 
 
 ## Tokens
 
-Component tokens live in `nice-styles/src/tokens/components/button.json` and are read with `getToken("button.{group}:{variant}")`. Each emits a CSS custom property `--np--button--{group}--{variant}`, with camelCase groups in kebab-case; the `base` variant contributes no segment (`button.size:base` → `--np--button--size`). Override them with `setTokens({ button: { … } })`.
+Component tokens live in `@niceprototypes/styles/src/tokens/components/button.json` and are read with `getToken("button.{group}:{variant}")`. Each emits a CSS custom property `--np--button--{group}--{variant}`, with camelCase groups in kebab-case; the `base` variant contributes no segment (`button.size:base` → `--np--button--size`). Override them with `setTokens({ button: { … } })`.
 
 | Token group | Variants | CSS variables |
 |-------------|----------|---------------|
@@ -286,7 +286,7 @@ You can extend the button with custom styles:
 
 ```tsx
 import styled from 'styled-components'
-import Button from 'nice-react-button'
+import Button from '@niceprototypes/button'
 
 const CustomButton = styled(Button)`
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -318,14 +318,14 @@ const CustomButton = styled(Button)`
 
 If you're migrating from the internal Button component:
 
-1. Install `nice-react-button`
+1. Install `@niceprototypes/button`
 2. Update your imports:
    ```tsx
    // Before
    import Button from '@/components/Button'
 
    // After
-   import Button from 'nice-react-button'
+   import Button from '@niceprototypes/button'
 
    // Icons are set by side
    <Button iconRight="arrow-right">

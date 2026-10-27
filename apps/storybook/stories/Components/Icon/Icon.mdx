@@ -1,0 +1,37 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../src/components/Story"
+import { IconDemoTable } from "../../../src/dataTables/components/demos/Icons"
+import Install from "../../../src/components/Install"
+import Ink from "../../../src/nice/Ink"
+
+<Meta title="Components/Icon" />
+
+<StoryHeader
+  title="Icon"
+  repos={[
+    { name: "@niceprototypes/icon", url: "https://github.com/niceprototypes/nice-react-icon", license: "MIT" },
+    { name: "@niceprototypes/icon-vendor", url: "https://github.com/niceprototypes/nice-react-icon-vendor", license: "MIT", status: "peer" },
+  ]}
+/>
+
+<Install package="react-icon" />
+
+<Ink as="h3">Setup</Ink>
+
+```jsx
+import Icon from "@niceprototypes/icon"
+```
+
+<Ink as="h3">Usage</Ink>
+
+```jsx
+<Icon
+  name="check"
+  size="large"
+/>
+```
+
+<Ink as="h3">Browse</Ink>
+
+<IconDemoTable codeColumns={[{ header: "Icon", code: (name) => `<Icon name="${name}" />` }]} />
+

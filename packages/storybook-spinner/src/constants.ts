@@ -1,5 +1,5 @@
 /** Namespace of the addon (also its package name in `addons`). */
-export const ADDON_ID = "nice-storybook-spinner"
+export const ADDON_ID = "@niceprototypes/storybook-spinner"
 
 /** Default for the `timeout` preset option: the boot overlay's hard cap, in ms. */
 export const DEFAULT_TIMEOUT = 8000
@@ -8,7 +8,7 @@ export const DEFAULT_TIMEOUT = 8000
 export const THEME_STORAGE_KEY = "sb-addon-themes-3"
 
 /** localStorage key that holds the boot overlay up (`"true"`) or releases it (`"false"`). */
-export const HOLD_STORAGE_KEY = "nice-storybook-spinner:hold"
+export const HOLD_STORAGE_KEY = "@niceprototypes/storybook-spinner:hold"
 
 /** URL query parameter that holds the boot overlay up (`1` / `true`) or releases it (`0` / `false`). */
 export const HOLD_QUERY_PARAM = "nsbHold"

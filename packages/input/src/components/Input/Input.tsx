@@ -1,6 +1,6 @@
 import * as React from "react"
-import { Theme } from "nice-react-styles"
-import { mergeDescribedBy, useField } from "nice-react-field"
+import { Theme } from "@niceprototypes/styles"
+import { mergeDescribedBy, useField } from "@niceprototypes/field"
 import { StyledControl, StyledField } from "./Input.styles"
 import { InputProps } from "./Input.types"
 import { isDisabled } from "../../utilities/isDisabled"

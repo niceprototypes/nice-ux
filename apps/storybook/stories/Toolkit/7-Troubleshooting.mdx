@@ -45,10 +45,10 @@ nicely --vite          # wipes .vite + kills the dev-server port; restart after
 <Ink>rebuild the icon chain under</Ink>
 <Ink code>nicely --dev --watch</Ink>
 <Ink>—</Ink>
-<Ink code>nice-icons</Ink>
+<Ink code>@niceprototypes/icon</Ink>
 <Ink>regenerates its index and</Ink>
-<Ink code>nice-react-icon</Ink><Ink>'s dist is rebuilt. The snag is on the dev-server side:</Ink>
-<Ink code>nice-react-icon</Ink>
+<Ink code>@niceprototypes/icon</Ink><Ink>'s dist is rebuilt. The snag is on the dev-server side:</Ink>
+<Ink code>@niceprototypes/icon</Ink>
 <Ink>is consumed from</Ink>
 <Ink weight="semibold">dist</Ink>
 <Ink>(it can't be source-aliased because of SVGR), and a Vite dev server such as Storybook keeps serving its already-transformed copy until it's bounced.</Ink>
@@ -64,7 +64,7 @@ nicely --vite
 <Ink>Only reach for</Ink>
 <Ink code>nicely --build-icons</Ink>
 <Ink>when</Ink>
-<Ink code>nice-react-icon</Ink><Ink>'s dist is actually stale (e.g. you edited icons while no watcher was running). Do</Ink>
+<Ink code>@niceprototypes/icon</Ink><Ink>'s dist is actually stale (e.g. you edited icons while no watcher was running). Do</Ink>
 <Ink weight="semibold">not</Ink>
 <Ink>run</Ink>
 <Ink code>--build-icons</Ink>

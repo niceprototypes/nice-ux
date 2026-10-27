@@ -1,6 +1,6 @@
-# Contributing to nice-react-scroll
+# Contributing to @niceprototypes/scroll
 
-Thank you for your interest in contributing to nice-react-scroll! We welcome contributions from the community.
+Thank you for your interest in contributing to @niceprototypes/scroll! We welcome contributions from the community.
 
 ## Table of Contents
 
@@ -38,7 +38,7 @@ This project adheres to a Code of Conduct that all contributors are expected to 
 ```bash
 # Clone your fork
 git clone https://github.com/YOUR_USERNAME/nice-react-scroll.git
-cd nice-react-scroll
+cd @niceprototypes/scroll
 
 # Install dependencies
 npm install
@@ -50,7 +50,7 @@ npm run build
 ### Project Structure
 
 ```
-nice-react-scroll/
+@niceprototypes/scroll/
 ├── src/
 │   ├── components/          # React components
 │   │   ├── FadeOnScroll/   # Fade on scroll component

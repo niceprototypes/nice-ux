@@ -1,6 +1,6 @@
 # API Reference
 
-Complete API reference for nice-react-scroll.
+Complete API reference for @niceprototypes/scroll.
 
 ## Table of Contents
 
@@ -37,7 +37,7 @@ interface ScrollProviderProps {
 #### Usage
 
 ```tsx
-import { ScrollProvider } from 'nice-react-scroll'
+import { ScrollProvider } from '@niceprototypes/scroll'
 
 function App() {
   return (
@@ -73,7 +73,7 @@ interface StickyProviderProps {
 #### Usage
 
 ```tsx
-import { ScrollProvider, StickyProvider } from 'nice-react-scroll'
+import { ScrollProvider, StickyProvider } from '@niceprototypes/scroll'
 
 function App() {
   return (
@@ -121,7 +121,7 @@ interface StickyProps {
 #### Usage
 
 ```tsx
-import { Sticky } from 'nice-react-scroll'
+import { Sticky } from '@niceprototypes/scroll'
 
 function Header() {
   const handleStickyChange = (isSticky) => {
@@ -414,7 +414,7 @@ function useScroll(): number
 #### Usage
 
 ```tsx
-import { useScroll } from 'nice-react-scroll'
+import { useScroll } from '@niceprototypes/scroll'
 
 function MyComponent() {
   const scrollY = useScroll()
@@ -468,7 +468,7 @@ interface StickyContextValue {
 #### Usage
 
 ```tsx
-import { useStickyContext } from 'nice-react-scroll'
+import { useStickyContext } from '@niceprototypes/scroll'
 
 function MyComponent() {
   const { getTotalStickyHeight } = useStickyContext()
@@ -567,7 +567,7 @@ import type {
   StickySectionLink,
   StickySectionLinksProps,
   StickySectionProps
-} from 'nice-react-scroll'
+} from '@niceprototypes/scroll'
 ```
 
 ---

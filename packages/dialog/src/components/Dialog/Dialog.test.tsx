@@ -1,7 +1,7 @@
 import * as React from "react"
 import { render, screen, fireEvent, act } from "@testing-library/react"
 import "@testing-library/jest-dom"
-import { getToken } from "nice-react-styles"
+import { getToken } from "@niceprototypes/styles"
 import Dialog from "./Dialog"
 import WrappedDialog from "./index"
 import type { DialogProps } from "./Dialog.types"

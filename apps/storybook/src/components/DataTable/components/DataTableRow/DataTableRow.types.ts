@@ -1,5 +1,5 @@
 import * as React from "react"
-import type { GapType } from "nice-react-styles"
+import type { GapType } from "@niceprototypes/styles"
 import type { DataColumn } from "../DataTable/DataTable.types"
 
 export interface DataTableRowProps {

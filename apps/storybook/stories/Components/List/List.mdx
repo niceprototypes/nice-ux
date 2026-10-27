@@ -1,0 +1,56 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../src/components/Story"
+import Install from "../../../src/components/Install"
+import { ComponentDemoTable } from "../../../src/dataTables/components/demos/Components"
+import { listExampleList, listLifecycleSteps, renderListLifecycle } from "./examples"
+import LifecycleStory from "../../../src/components/LifecycleStory"
+import NewLines from "../../../src/components/NewLines"
+import Callout from "../../../src/components/Callout"
+
+<Meta title="Components/List" />
+
+<StoryHeader
+  title="List"
+  description="A generic ul list with dividers between items, and ListItem rows with start and end slots and selected, active and disabled states."
+/>
+
+<NewLines count={3} />
+
+<Install package="react-list" />
+
+```jsx
+import { List, ListItem } from "@niceprototypes/list"
+
+<List>
+  <ListItem start={<Icon name="home" />}>Home</ListItem>
+  <ListItem end="⌘S">Settings</ListItem>
+</List>
+```
+
+<NewLines count={3} />
+
+<LifecycleStory
+  steps={listLifecycleSteps}
+  render={renderListLifecycle}
+/>
+
+<NewLines count={3} />
+
+<ComponentDemoTable examples={listExampleList} />
+
+<NewLines count={3} />
+
+## Guide
+
+List renders a `<ul>` and places a divider between each pair of adjacent rendered children. Each divider is an `<hr>` inside `<li aria-hidden="true" role="presentation">`, since an `<hr>` is not a valid direct child of `<ul>`. `size` reaches every ListItem through context.
+
+ListItem renders one `<li>`: the `start` slot, the content, then the `end` slot. `selected`, `active` and `disabled` are visual states; only `disabled` sets an attribute (`aria-disabled`). Standard `<ul>` / `<li>` attributes (role, aria-*, data-*, handlers) pass through, so a listbox is built by adding the roles:
+
+```jsx
+<List role="listbox" aria-label="Plan">
+  <ListItem role="option" aria-selected selected>Team</ListItem>
+  <ListItem role="option" aria-selected={false}>Free</ListItem>
+</List>
+```
+
+<Callout type="hint">List owns no selection or focus state — the consumer sets `selected` / `active` and the ARIA attributes the role needs.</Callout>

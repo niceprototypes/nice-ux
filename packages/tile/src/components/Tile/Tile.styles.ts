@@ -1,11 +1,11 @@
 import styled, { css } from "styled-components"
-import Flex from "nice-react-flex"
-import { getToken, resolveColorProp, type ColorTokenProp } from "nice-react-styles"
+import Flex from "@niceprototypes/flex"
+import { getToken, resolveColorProp, type ColorTokenProp } from "@niceprototypes/styles"
 import type {
   BackgroundColorType,
   BackgroundSizeType,
   ColorType,
-} from "nice-react-styles"
+} from "@niceprototypes/styles"
 
 export const OuterFlex = styled(Flex).withConfig({
   shouldForwardProp: (prop) => !prop.startsWith('$'),

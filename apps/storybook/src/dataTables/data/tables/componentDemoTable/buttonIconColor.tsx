@@ -1,4 +1,4 @@
-import Button, { type ButtonIconColorType } from "nice-react-button"
+import Button, { type ButtonIconColorType } from "@niceprototypes/button"
 import type { ComponentExample } from "../../../components/demos/Components"
 
 // Each variant's icon color; hover, focus (Tab) and press the previews to see the states.

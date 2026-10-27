@@ -1,6 +1,6 @@
 import * as React from "react"
-import { getToken } from "nice-react-styles"
-import Tooltip from "nice-react-tooltip"
+import { getToken } from "@niceprototypes/styles"
+import Tooltip from "@niceprototypes/tooltip"
 import { parseTokenVarLink, HIGHLIGHT_KEY } from "../../../../services"
 import { TokenVarLink } from "./Components.styles"
 

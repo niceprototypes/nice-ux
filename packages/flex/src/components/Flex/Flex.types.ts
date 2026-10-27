@@ -5,12 +5,12 @@ import type {
   SizeType,
   SpacingShorthandType,
   SpacingDefinitionType,
-} from "nice-react-styles"
+} from "@niceprototypes/styles"
 
 /**
  * FlexGapSizeType
  *
- * Re-export of GapType from nice-styles for consistency.
+ * Re-export of GapType from @niceprototypes/styles for consistency.
  * Uses design tokens that map to CSS custom properties.
  */
 export type FlexGapSizeType = GapType
@@ -18,7 +18,7 @@ export type FlexGapSizeType = GapType
 /**
  * FlexHeightType
  *
- * Re-export of SizeType from nice-styles. Fixes the flex container's
+ * Re-export of SizeType from @niceprototypes/styles. Fixes the flex container's
  * height to a size token variant — resolves to `--np--size--{variant}`.
  */
 export type FlexHeightType = SizeType
@@ -26,7 +26,7 @@ export type FlexHeightType = SizeType
 /**
  * FlexBreakpointType
  *
- * Re-export of BreakpointName from nice-styles.
+ * Re-export of BreakpointName from @niceprototypes/styles.
  * Supported breakpoint values: "phone", "tablet", "laptop", "desktop"
  */
 export type FlexBreakpointType = BreakpointName
@@ -90,7 +90,7 @@ export type FlexSpacingType = SpacingShorthandType
 /**
  * FlexSpacingDefinitionType
  *
- * Re-export of SpacingDefinitionType from nice-styles.
+ * Re-export of SpacingDefinitionType from @niceprototypes/styles.
  * Provides granular control over spacing on all sides of the component.
  * Individual side values after parsing from shorthand.
  *

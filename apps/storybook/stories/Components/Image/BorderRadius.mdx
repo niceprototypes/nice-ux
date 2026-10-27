@@ -1,0 +1,38 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../src/components/Story"
+import Image from "@niceprototypes/image"
+import StoryDescription from "../../../src/components/StoryDescription"
+import { DEMO_CODE_COLUMNS } from "../../../src/components/DataTable"
+import { DataTable } from "../../../src/components/DataTable"
+import { toSource } from "../../../src/services"
+
+<Meta title="Components/Image/borderRadius" />
+
+<StoryHeader title="borderRadius" />
+
+<StoryDescription property="border-radius">
+  Rounds the image's corners using borderRadius tokens.
+</StoryDescription>
+
+<DataTable
+  showHeader={false}
+  columns={DEMO_CODE_COLUMNS}
+  tables={[{ rows: ["smaller", "small", "base", "large", "larger"].map(radius => {
+    const props = {
+      vendor: true,
+      alt: `${radius} radius demo`,
+      width: "240px",
+      height: "320px",
+      backgroundSize: "cover",
+      borderRadius: radius,
+    }
+    return {
+      id: String(radius),
+      values: [
+        <Image {...props} />,
+        toSource("Image", props),
+      ],
+    }
+  }) }]}
+/>
+

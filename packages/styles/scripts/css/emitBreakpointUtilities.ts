@@ -7,7 +7,7 @@
  * bundler (Vite, esbuild, the Storybook manager) with no PostCSS.
  *
  * ```css
- * @import "nice-styles/breakpoints.css";
+ * @import "@niceprototypes/styles/breakpoints.css";
  * <div class="np-hide-tablet-up">…</div>   <!-- hidden at ≥ tablet -->
  * ```
  *
@@ -33,7 +33,7 @@ const HEADER = generatedHeader('src/tokens/breakpoints.json', [
   'Native breakpoint utility classes (plain @import, no consumer transform).',
   '',
   'Usage:',
-  '  @import "nice-styles/breakpoints.css";',
+  '  @import "@niceprototypes/styles/breakpoints.css";',
   '  <div class="np-hide-tablet-up">…</div>   <!-- hidden at >= tablet -->',
 ])
 

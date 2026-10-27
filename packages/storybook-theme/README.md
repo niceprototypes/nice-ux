@@ -1,4 +1,4 @@
-# nice-storybook-theme
+# @niceprototypes/storybook-theme
 
 A Storybook addon for the Nice design system that restyles the **manager
 sidebar tree**:
@@ -31,11 +31,11 @@ manager chrome the addon also restyles.
 ## Install
 
 ```bash
-npm install -D nice-storybook-theme
+npm install -D @niceprototypes/storybook-theme
 ```
 
 Requires (peers): `storybook` ≥ 10 and `storybook-dark-mode` ≥ 5. Renders with
-Nice tokens (`nice-styles`) and the Nice folder icon (`nice-icons`).
+Nice tokens (`@niceprototypes/styles`) and the Nice folder icon (`@niceprototypes/icon/svg`).
 
 ## Wire it up
 
@@ -45,7 +45,7 @@ Nice tokens (`nice-styles`) and the Nice folder icon (`nice-icons`).
 const config = {
   addons: [
     "storybook-dark-mode",
-    "nice-storybook-theme", // loads its manager entry
+    "@niceprototypes/storybook-theme", // loads its manager entry
   ],
 }
 export default config
@@ -59,8 +59,8 @@ Register it in your app's one `setTokens` call, then use the `contentMaxWidth`
 constant (`var(--np--content-max-width)`) wherever content is capped:
 
 ```ts
-import { setTokens } from "nice-react-styles"
-import { TOKENS } from "nice-storybook-theme"
+import { setTokens } from "@niceprototypes/styles"
+import { TOKENS } from "@niceprototypes/storybook-theme"
 
 setTokens({ ...TOKENS, ...AppTokenMap })
 ```

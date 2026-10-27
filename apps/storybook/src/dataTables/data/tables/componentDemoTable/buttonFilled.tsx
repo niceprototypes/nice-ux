@@ -1,4 +1,4 @@
-import Button from "nice-react-button"
+import Button from "@niceprototypes/button"
 import { cap } from "../../../utilities"
 import type { ComponentExample } from "../../../components/demos/Components"
 

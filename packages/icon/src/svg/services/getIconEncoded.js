@@ -13,7 +13,7 @@ function resolveEncoded(name, variant, theme) {
   let themes = variants[variant]
   if (!themes) {
     console.warn(
-      `nice-icons: icon "${name}" has no "${variant}" variant; using "base". ` +
+      `@niceprototypes/icon: icon "${name}" has no "${variant}" variant; using "base". ` +
         `Available: ${Object.keys(variants).join(", ")}.`
     )
     themes = variants.base
@@ -22,7 +22,7 @@ function resolveEncoded(name, variant, theme) {
   const dataUri = themes[theme]
   if (!dataUri) {
     console.warn(
-      `nice-icons: icon "${name}" variant has no "${theme}" theme; using "base". ` +
+      `@niceprototypes/icon: icon "${name}" variant has no "${theme}" theme; using "base". ` +
         `Available: ${Object.keys(themes).join(", ")}.`
     )
     return themes.base

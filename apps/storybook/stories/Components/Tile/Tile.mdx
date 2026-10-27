@@ -1,0 +1,65 @@
+import { Meta, Canvas, Controls } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../src/components/Story"
+import Tile from "@niceprototypes/tile"
+import Ink from "../../../src/nice/Ink"
+import { DataTableRow } from "../../../src/components/DataTable"
+import { DEMO_CODE_COLUMNS } from "../../../src/components/DataTable"
+import * as TileStories from "./Tile.stories"
+import Install from "../../../src/components/Install"
+import Line from "../../../src/components/Line"
+
+<Meta of={TileStories} />
+
+<StoryHeader
+  title="Tile"
+  repos={[
+    { name: "@niceprototypes/tile", url: "https://github.com/niceprototypes/nice-react-tile", license: "MIT" },
+  ]}
+/>
+
+<Install package="react-tile" />
+
+<Ink as="h3">Setup</Ink>
+
+```jsx
+import Tile from "@niceprototypes/tile"
+```
+
+<Ink as="h3">Usage</Ink>
+
+```jsx
+<Tile title="Title" description="Description">{children}</Tile>
+```
+
+<Line />
+
+<Ink as="h2">Basic</Ink>
+
+<Ink color="light">
+  Default tile container with built-in spacing and max-width constraints.
+</Ink>
+
+<DataTableRow
+  fullWidth
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+    <Tile title="Title" description="Description" />,
+    `<Tile title="Title" description="Description" />`,
+  ]}
+/>
+
+<Line />
+
+<Ink as="h2">Playground</Ink>
+
+<Ink color="light">
+  Interactive controls for `title` / `description` and their tokenized{" "}
+  `titleProps` / `descriptionProps`. Each Ink sub-prop is a dropdown of
+  live design-token values — adjust them to preview combinations in the canvas
+  above. Controls are grouped by the object prop they compose into.
+</Ink>
+
+<Canvas of={TileStories.Playground} />
+
+<Controls of={TileStories.Playground} />
+

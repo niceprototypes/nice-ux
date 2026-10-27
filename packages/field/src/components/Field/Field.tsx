@@ -1,6 +1,6 @@
 import * as React from "react"
-import { Theme } from "nice-react-styles"
-import Ink from "nice-react-ink"
+import { Theme } from "@niceprototypes/styles"
+import Ink from "@niceprototypes/ink"
 import { FieldContext } from "./FieldContext"
 import { StyledField, StyledFieldDescription, StyledFieldError, StyledFieldLabel } from "./Field.styles"
 import type { FieldContextValue, FieldProps } from "./Field.types"
@@ -76,7 +76,7 @@ const Field: React.FC<FieldProps> = ({
     if (!applied) {
       warnedRef.current = true
       console.warn(
-        `nice-react-field: no element inside this Field has id "${controlId}". ` +
+        `@niceprototypes/field: no element inside this Field has id "${controlId}". ` +
           `The child control must apply useField().id, or the label and description are not associated with it.`
       )
     }

@@ -1,4 +1,4 @@
-import type { BreakpointName } from "nice-react-styles"
+import type { BreakpointName } from "@niceprototypes/styles"
 
 export interface ResponsiveDemoItem {
   /** The breakpoint band this item represents — it highlights when that band is the active viewport */

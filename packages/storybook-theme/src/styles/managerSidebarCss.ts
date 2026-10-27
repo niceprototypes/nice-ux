@@ -14,7 +14,7 @@
  * `data-nodetype`, `[tabindex] > div > svg`, etc.), verified against Storybook
  * 10. A Storybook internal change can require updating these selectors.
  */
-import { getBreakpoint, getToken } from "nice-styles"
+import { getBreakpoint, getToken } from "@niceprototypes/styles"
 
 /* Tree geometry. A folder icon sits at the start of its row's content; its
    children's connectors hang from the icon's centre line, run an arm of `arm`

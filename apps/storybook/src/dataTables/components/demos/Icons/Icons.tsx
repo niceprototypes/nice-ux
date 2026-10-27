@@ -1,9 +1,9 @@
-import Icon from "nice-react-icon"
-// Icons are a single flat, uniquely-named set — read the names from nice-icons'
+import Icon from "@niceprototypes/icon"
+// Icons are a single flat, uniquely-named set — read the names from @niceprototypes/icon'
 // data-only catalog (no SVG imports). To present grouped subtables, define a
-// manual `{ groupName: names[] }` map here and iterate it instead; nice-icons no
+// manual `{ groupName: names[] }` map here and iterate it instead; @niceprototypes/icon no
 // longer ships categories (grouping is intentionally maintained by hand).
-import { iconNames } from "nice-icons/catalog"
+import { iconNames } from "@niceprototypes/icon/catalog"
 import Code from "../../../../nice/Code"
 import { DataTable, withCopyAffordance } from "../../../../components/DataTable"
 import type { DataColumn, DataTableConfig } from "../../../../components/DataTable"
@@ -12,7 +12,7 @@ import type { IconTableColumn, IconTableProps } from "./Icons.types"
 
 /**
  * Remote URL of an icon's generated base SVG on GitHub — the same target the
- * nice-icons README links each icon to. The preview cell wraps its Icon in a
+ * @niceprototypes/icon README links each icon to. The preview cell wraps its Icon in a
  * link here so the docs table matches that behavior.
  */
 const remoteIconUrl = (name: string) =>
@@ -50,7 +50,7 @@ const buildRows = (names: readonly string[], codeColumns: IconTableColumn[]) =>
  * The icon reference table, data-first. The table owns structure (columns,
  * headers, layout); the caller supplies each code column's header and snippet
  * builder. Icons are a single flat set — one row per `iconNames` entry, rendered
- * as one table. `iconNames` comes from nice-icons, so new icons flow in with no
+ * as one table. `iconNames` comes from @niceprototypes/icon, so new icons flow in with no
  * change here. To present grouped subtables, iterate a manual `{ group: names[] }`
  * map (defined here) into `tables` instead.
  */
@@ -62,7 +62,7 @@ export default function IconDemoTable({ codeColumns }: IconTableProps) {
       (column, index): DataColumn => ({
         key: `code-${index}`,
         header: column.header,
-        render: "nice-react-code",
+        render: "@niceprototypes/code",
         language: "tsx",
       })
     ),

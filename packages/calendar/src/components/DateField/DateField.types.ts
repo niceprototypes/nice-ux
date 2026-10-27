@@ -1,4 +1,4 @@
-import type { InputAsInputProps } from "nice-react-input"
+import type { InputAsInputProps } from "@niceprototypes/input"
 import type {
   CalendarDateType,
   CalendarIsDateDisabledType,

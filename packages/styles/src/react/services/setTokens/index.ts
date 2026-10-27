@@ -5,14 +5,14 @@ import {
   type TokenMap,
   type RuntimeTokenMap,
   type BreakpointValues,
-} from "nice-styles"
+} from "../../../index"
 import type { SetTokensVariants, TypedGetToken } from "./setTokens.types"
 
 /** Reserved `breakpoints` key: pixel floors for the settable breakpoints. */
 type BreakpointsKey = { breakpoints?: Partial<BreakpointValues> }
 
 /**
- * React wrapper around `generateTokenCSS` from nice-styles. Builds the token
+ * React wrapper around `generateTokenCSS` from @niceprototypes/styles. Builds the token
  * CSS string and injects it into a shared `<style data-nice-tokens>` element.
  *
  * Top-level keys of the token map are auto-classified by `generateTokenCSS`:

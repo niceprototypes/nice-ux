@@ -6,7 +6,7 @@ import { viewTransitionCss } from "./styles/viewTransitionCss"
 import type { ResolvedSpinnerOptions, SpinnerOptions } from "./types"
 
 /**
- * Storybook preset. Loaded from `nice-storybook-spinner/preset` when the package
+ * Storybook preset. Loaded from `@niceprototypes/storybook-spinner/preset` when the package
  * is listed in `addons`; the entry's `options` arrive merged into the second
  * argument of each hook.
  *

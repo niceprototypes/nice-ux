@@ -5,7 +5,7 @@
  */
 
 import React from 'react'
-import { ScrollProvider, FadeOnScroll } from 'nice-react-scroll'
+import { ScrollProvider, FadeOnScroll } from '@niceprototypes/scroll'
 import styled from 'styled-components'
 
 const Container = styled.div`

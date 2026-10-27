@@ -3,9 +3,9 @@ import { render } from "@testing-library/react"
 import "@testing-library/jest-dom"
 
 /**
- * Loads the built CommonJS bundle without mocks. The bundle inlines nice-icons,
- * whose code requires nice-styles at runtime — this fails with
- * "Cannot find module 'nice-styles'" if that dependency is not declared.
+ * Loads the built CommonJS bundle without mocks. The bundle inlines @niceprototypes/icon,
+ * whose code requires @niceprototypes/styles at runtime — this fails with
+ * "Cannot find module '@niceprototypes/styles'" if that dependency is not declared.
  * Requires `npm run build` first.
  */
 describe("dist bundle", () => {

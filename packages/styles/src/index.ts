@@ -1,15 +1,15 @@
 /**
- * Main Entry Point for nice-styles
+ * Main Entry Point for @niceprototypes/styles
  *
  * Seeds the token registry (side-effect import of `./init.js`), then re-exports
  * the public services, generated token types, layout and theme types, and the
- * raw generated data objects nice-react-styles consumes.
+ * raw generated data objects @niceprototypes/styles consumes.
  *
  * ## Exports
  *
  * ### Token access
  * ```ts
- * import { getToken, listTokens } from 'nice-styles'
+ * import { getToken, listTokens } from '@niceprototypes/styles'
  * getToken('fontSize')                          // "var(--np--font-size)"
  * getToken('fontSize', 'large')                 // "var(--np--font-size--large)"
  * getToken('gap', 'base', { as: 'value' })      // "16px"
@@ -19,7 +19,7 @@
  * ### Types
  * One variant union per token group, plus component prefixes:
  * ```ts
- * import type { GapType, ColorType, ComponentPrefix } from 'nice-styles'
+ * import type { GapType, ColorType, ComponentPrefix } from '@niceprototypes/styles'
  * ```
  *
  * @module index
@@ -152,15 +152,15 @@ export type { ThemeType } from './themeTypes.js'
 // Export the raw tokens data — unthemed core groups + day theme values + phone
 // breakpoint values, as one flat `{ group: { variant: value } }` object.
 // Renamed from `Theme` to `Colors` to avoid collision with the <Theme>
-// component exported from nice-react-styles. Despite the name, this object
-// carries more than colors. nice-react-styles' StylesProvider passes it to
+// component exported from @niceprototypes/styles. Despite the name, this object
+// carries more than colors. @niceprototypes/styles' StylesProvider passes it to
 // styled-components' ThemeProvider as the theme object.
 import tokensData from './generated/tokensData.js'
 import themeTokensData from './generated/themeTokensData.js'
 import breakpointTokensData from './generated/breakpointTokensData.js'
 export const Colors = { ...tokensData, ...themeTokensData.day, ...breakpointTokensData.phone }
 
-// Export component tokens data — component base trees keyed by prefix; re-exported by nice-react-styles
+// Export component tokens data — component base trees keyed by prefix; re-exported by @niceprototypes/styles
 import componentTokensData from './generated/componentTokensData.js'
 export { componentTokensData }
 

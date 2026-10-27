@@ -1,6 +1,6 @@
 # Performance Improvements Analysis
 
-This document outlines potential performance and efficiency improvements for nice-react-scroll, based on analysis of the current implementation and comparison with other scroll libraries like react-nice-scroll.
+This document outlines potential performance and efficiency improvements for @niceprototypes/scroll, based on analysis of the current implementation and comparison with other scroll libraries like react-nice-scroll.
 
 ## Current Performance Strengths
 

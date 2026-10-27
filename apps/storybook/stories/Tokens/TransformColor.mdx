@@ -2,7 +2,7 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
 import { getColumns } from "../../src/data"
 import PreviewCell from "../../src/components/PreviewCell"
-import { transformColor, getToken } from "nice-react-styles"
+import { transformColor, getToken } from "@niceprototypes/styles"
 import { DataTable } from "../../src/components/DataTable"
 import Ink from "../../src/nice/Ink"
 
@@ -69,10 +69,10 @@ getToken("color:error", { transform: [null, null, "*0.5", null] })
   inline
   columns={[
     { key: "swatch", header: null },
-    { key: "label", header: "Description", render: "nice-react-ink", size: "small" },
+    { key: "label", header: "Description", render: "@niceprototypes/ink", size: "small" },
     { key: "css", header: "CSS" },
-    { key: "call", header: "JS", render: "nice-react-code", language: "tsx" },
-    { key: "result", header: "Result", render: "nice-react-ink", code: true, size: "small", color: "lighter", clickToCopy: true },
+    { key: "call", header: "JS", render: "@niceprototypes/code", language: "tsx" },
+    { key: "result", header: "Result", render: "@niceprototypes/ink", code: true, size: "small", color: "lighter", clickToCopy: true },
   ]}
   columnWidths={getColumns("tokenModule").columnWidths}
   tables={[{ rows: hslaExamples.map(({ label, call, args }) => {

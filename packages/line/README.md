@@ -1,4 +1,4 @@
-# nice-react-line
+# @niceprototypes/line
 ![Line](docs/line.png)
 
 A dashed line that frames its parent element: pill-shaped dashes, each with its own rim,
@@ -14,15 +14,15 @@ development, Line logs one `console.warn` per instance when its parent's compute
 ## Install
 
 ```sh
-npm install nice-react-line
+npm install @niceprototypes/line
 ```
 
-Peer dependencies: `nice-react-styles`, `react`, `react-dom`, `styled-components`.
+Peer dependencies: `@niceprototypes/styles`, `react`, `react-dom`, `styled-components`.
 
 ## Usage
 
 ```tsx
-import Line from "nice-react-line"
+import Line from "@niceprototypes/line"
 
 // Line fills its positioned parent and draws on the parent's edge.
 <div style={{ position: "relative", borderRadius: 12 }}>
@@ -47,7 +47,7 @@ import Line from "nice-react-line"
 
 ## Tokens
 
-All from `nice-styles` (`src/tokens/components/line.json`); override any of them on an
+All from `@niceprototypes/styles` (`src/tokens/components/line.json`); override any of them on an
 ancestor to restyle Line without props.
 
 | Token | Default |
@@ -59,4 +59,4 @@ ancestor to restyle Line without props.
 | `--np--line--dash-length` | `18px` (round ends included) |
 | `--np--line--gap` | `5px` (between rims) |
 
-Docs: nice-storybook → Components → Line.
+Docs: @niceprototypes/storybook → Components → Line.

@@ -1,7 +1,7 @@
 import * as React from "react"
 import { render } from "@testing-library/react"
 import "@testing-library/jest-dom"
-import { getToken } from "nice-react-styles"
+import { getToken } from "@niceprototypes/styles"
 import Tile from "./Tile"
 
 /** Text of every <style> tag styled-components injected into the document. */

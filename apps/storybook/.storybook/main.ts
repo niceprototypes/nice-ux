@@ -4,7 +4,6 @@ import { createRequire } from "node:module"
 import type { StorybookConfig } from "@storybook/react-vite"
 import { join, dirname, resolve } from "path"
 import { mergeConfig } from "vite"
-import { createNiceViteConfig } from "nice-config-vite"
 import remarkGfm from "remark-gfm"
 
 const __filename = fileURLToPath(import.meta.url)
@@ -19,10 +18,30 @@ function getAbsolutePath(value: string): string {
   return dirname(require.resolve(join(value, "package.json")))
 }
 
+/** The monorepo's packages folder. */
+const packagesRoot = resolve(__dirname, "../../../packages")
+
 /**
- * Storybook Configuration. Linked nice-* packages hot-reload through nice-config-vite's
- * `liveLinks`: source-aliasable packages are aliased to their src/index.ts, the others'
- * dist/ folders are watched (see config-vite/README.md).
+ * Packages Storybook reads from source: each root import resolves to the package's
+ * `src/index.ts`, so edits show without a build. The others (icon, the vendors and the
+ * Storybook addons) resolve to their built `dist/`. styles' root entry is its React entry.
+ */
+const SOURCE_PACKAGES = [
+  "button", "calendar", "checkbox", "code", "dialog", "field", "flex", "form", "head",
+  "image", "ink", "input", "lightbox", "line", "list", "logo", "popover", "scroll",
+  "select", "slider", "tabs", "tile", "toggle", "tooltip",
+]
+
+const sourceAliases = [
+  ...SOURCE_PACKAGES.map(name => ({
+    find: new RegExp(`^@niceprototypes/${name}$`),
+    replacement: resolve(packagesRoot, name, "src/index.ts"),
+  })),
+  { find: /^@niceprototypes\/styles$/, replacement: resolve(packagesRoot, "styles/src/react/index.ts") },
+]
+
+/**
+ * Storybook Configuration.
  */
 const config: StorybookConfig = {
   stories: [
@@ -30,8 +49,8 @@ const config: StorybookConfig = {
     "../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)",
     // Hidden until ready — excluded from the sidebar, not deleted. The story
     // files stay on disk; remove these negations to re-show Slider / Scroll.
-    "!../stories/React/Components/Slider/**",
-    "!../stories/React/Components/Scroll/**",
+    "!../stories/Components/Slider/**",
+    "!../stories/Components/Scroll/**",
   ],
   addons: [
     getAbsolutePath("@storybook/addon-links"),
@@ -47,10 +66,10 @@ const config: StorybookConfig = {
     },
     "storybook-dark-mode",
     // Both load their own manager (and, for navigation, preview) entries.
-    "nice-storybook-navigation",
-    "nice-storybook-theme",
+    "@niceprototypes/storybook-navigation",
+    "@niceprototypes/storybook-theme",
     // Preset: the boot overlay (managerHead) and the preview loader replacement (previewHead).
-    "nice-storybook-spinner",
+    "@niceprototypes/storybook-spinner",
   ],
   staticDirs: ["../public"],
   core: {
@@ -62,10 +81,15 @@ const config: StorybookConfig = {
     options: {},
   },
   docs: {},
-  // Nice-on-Vite settings (dedupe, shared React/styled-components, symlinks, fs.allow,
-  // optimizer exclusions, live reload from linked packages) come from nice-config-vite.
+  // One copy of React, styled-components and the token and icon registries; package
+  // source through the aliases above.
   viteFinal: async config =>
-    mergeConfig(config, createNiceViteConfig({ appRoot: resolve(__dirname, ".."), liveLinks: true })),
+    mergeConfig(config, {
+      resolve: {
+        dedupe: ["react", "react-dom", "styled-components", "@niceprototypes/styles", "@niceprototypes/icon"],
+        alias: sourceAliases,
+      },
+    }),
   typescript: {
     check: false,
     reactDocgen: "react-docgen-typescript",

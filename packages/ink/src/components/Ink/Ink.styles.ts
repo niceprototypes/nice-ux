@@ -8,7 +8,7 @@
  */
 
 import styled, { css } from "styled-components"
-import { getToken, resolveColorProp, type ColorTokenProp, type ColorType, type FontSizeType, type FontWeightType, type LineHeightType } from "nice-react-styles"
+import { getToken, resolveColorProp, type ColorTokenProp, type ColorType, type FontSizeType, type FontWeightType, type LineHeightType } from "@niceprototypes/styles"
 import { InkAsType, InkAlignType, InkItalicType, InkLineClampType, InkWordBreakType } from "./Ink.types"
 import { styleAntialiasing } from "../../utilities/styleAntialiasing"
 
@@ -165,7 +165,7 @@ export const StyledInk = styled.p<{
 }>`
   margin: 0;
 
-  /* Font family with nice-styles fallback */
+  /* Font family with @niceprototypes/styles fallback */
   ${getFontFamily}
 
   /* Color */
@@ -189,7 +189,7 @@ export const StyledInk = styled.p<{
   /* Text alignment */
   ${getTextAlign}
 
-  /* Line height with nice-styles fallback */
+  /* Line height with @niceprototypes/styles fallback */
   ${getLineHeight}
 
   /* Line clamping for text truncation */

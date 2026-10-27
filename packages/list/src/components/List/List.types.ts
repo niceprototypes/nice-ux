@@ -1,5 +1,5 @@
 import * as React from "react"
-import type { SizeType, ThemeType } from "nice-react-styles"
+import type { SizeType, ThemeType } from "@niceprototypes/styles"
 
 /**
  * ListChildrenType
@@ -20,7 +20,7 @@ export type ListScrollableType = boolean
 /**
  * ListSizeType
  *
- * Re-export of SizeType from nice-styles.
+ * Re-export of SizeType from @niceprototypes/styles.
  * Item padding scale, passed to every ListItem through context.
  *
  * Values:
@@ -31,7 +31,7 @@ export type ListSizeType = SizeType
 /**
  * ListThemeType
  *
- * Re-export of ThemeType from nice-styles.
+ * Re-export of ThemeType from @niceprototypes/styles.
  * Pin token resolution to a specific theme.
  * Extensible for consumer-defined custom themes.
  */

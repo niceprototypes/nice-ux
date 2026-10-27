@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { getToken, type SizeType } from "nice-react-styles"
+import { getToken, type SizeType } from "@niceprototypes/styles"
 
 interface StyledListItemProps {
   $size: SizeType

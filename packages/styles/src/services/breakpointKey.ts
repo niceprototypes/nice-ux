@@ -3,9 +3,9 @@
  * resolution for breakpoint keys with optional `+`/`-` range modifiers.
  *
  * One source of truth for both consumers of the shorthand:
- * - `withBreakpoints` (nice-react-styles) — render-time prop merging, uses
+ * - `withBreakpoints` (@niceprototypes/styles) — render-time prop merging, uses
  *   `parseBreakpointKey` + `breakpointKeyMatches` + `compareBreakpointSpecificity`.
- * - `generateTokenCSS` / `setTokens` (nice-styles) — CSS emission, uses
+ * - `generateTokenCSS` / `setTokens` (@niceprototypes/styles) — CSS emission, uses
  *   `breakpointKeyQuery` + `compareBreakpointSpecificity` to order @media blocks.
  *
  * Key grammar (smallest → largest: phone < tablet < laptop < desktop):

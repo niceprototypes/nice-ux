@@ -12,7 +12,7 @@
  *
  * @example
  * // In the consumer, next to the setTokens call (any .ts file in the program)
- * declare module "nice-styles" {
+ * declare module "@niceprototypes/styles" {
  *   interface CustomTokenVariants {
  *     contentMaxWidth: "base" | "wide"
  *   }

@@ -1,5 +1,5 @@
 import * as React from "react"
-import type { SizeType, ThemeType } from "nice-react-styles"
+import type { SizeType, ThemeType } from "@niceprototypes/styles"
 
 /**
  * CalendarDateType
@@ -61,7 +61,7 @@ export type CalendarIsDateDisabledType = (value: CalendarDateType) => boolean
  * CalendarLocaleType
  *
  * BCP 47 language tag for labels, numbering system and week start. Defaults to
- * `useLocale().locale` from nice-react-styles.
+ * `useLocale().locale` from @niceprototypes/styles.
  */
 export type CalendarLocaleType = string
 
@@ -84,7 +84,7 @@ export type CalendarFirstDayOfWeekType = 0 | 1 | 2 | 3 | 4 | 5 | 6
 /**
  * CalendarSizeType
  *
- * Re-export of SizeType from nice-styles. Selects the day-cell size from
+ * Re-export of SizeType from @niceprototypes/styles. Selects the day-cell size from
  * `calendar.cell.size` and the size of the month-navigation buttons.
  *
  * Values:
@@ -95,7 +95,7 @@ export type CalendarSizeType = SizeType
 /**
  * CalendarThemeType
  *
- * Re-export of ThemeType from nice-styles.
+ * Re-export of ThemeType from @niceprototypes/styles.
  * Pin token resolution to a specific theme.
  * Extensible for consumer-defined custom themes.
  */

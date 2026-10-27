@@ -1,6 +1,6 @@
 import * as React from "react"
-import Flex from "nice-react-flex"
-import { Theme } from "nice-react-styles"
+import Flex from "@niceprototypes/flex"
+import { Theme } from "@niceprototypes/styles"
 
 /** The two pinned themes a colour row demonstrates, in display order. */
 export const PREVIEW_THEMES = ["day", "night"] as const

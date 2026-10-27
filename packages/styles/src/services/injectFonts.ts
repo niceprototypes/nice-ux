@@ -28,7 +28,7 @@ export interface InjectFontsConfig {
  * Call once at startup. SSR-safe and idempotent (see `injectFontLinks`).
  *
  * @example
- * import { injectFonts } from "nice-styles"
+ * import { injectFonts } from "@niceprototypes/styles"
  *
  * // Google and/or Adobe by URL
  * injectFonts({

@@ -1,4 +1,4 @@
-import type { FontSizeType, FontWeightType } from "nice-react-styles"
+import type { FontSizeType, FontWeightType } from "@niceprototypes/styles"
 import type { DataTableConfig } from "../DataTable/DataTable.types"
 
 /** Heading elements a table title can render as. */

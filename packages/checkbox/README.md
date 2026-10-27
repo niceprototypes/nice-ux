@@ -1,22 +1,22 @@
-# nice-react-checkbox
+# @niceprototypes/checkbox
 
 A checkbox that replaces the native one's look. A native `<input type="checkbox">` stays the
 focus target and keyboard handler (Space toggles), invisible over a token-driven box that
-shows a `nice-react-icon` check when checked. Give it a visible label with `children`, or name
+shows a `@niceprototypes/icon` check when checked. Give it a visible label with `children`, or name
 it with `aria-label` or `aria-labelledby`.
 
 ## Install
 
 ```sh
-npm install nice-react-checkbox
+npm install @niceprototypes/checkbox
 ```
 
-Peer dependencies: `nice-react-field`, `nice-react-icon`, `nice-react-styles`, `react`, `react-dom`, `styled-components`.
+Peer dependencies: `@niceprototypes/field`, `@niceprototypes/icon`, `@niceprototypes/styles`, `react`, `react-dom`, `styled-components`.
 
 ## Usage
 
 ```tsx
-import Checkbox from "nice-react-checkbox"
+import Checkbox from "@niceprototypes/checkbox"
 
 // Uncontrolled, with a visible label
 <Checkbox defaultChecked>Visible</Checkbox>
@@ -45,7 +45,7 @@ const [selected, setSelected] = useState(false)
 | `borderRadius` | `none`, `smaller`, `small`, `base`, `large`, `larger` | `small` | |
 | `borderWidth` | `none`, `smaller`, `small`, `base`, `large`, `larger` | `base` | |
 | `iconName` | `IconNameType` (or any vendor name, with `iconVendor`) | `check` | Icon drawn in the box when checked |
-| `iconVendor` | `boolean` | `false` | Resolves `iconName` through the vendor icon set (Icon's `vendor` prop); needs `nice-react-icon-vendor` imported |
+| `iconVendor` | `boolean` | `false` | Resolves `iconName` through the vendor icon set (Icon's `vendor` prop); needs `@niceprototypes/icon-vendor` imported |
 | `children` | `ReactNode` | | Visible label next to the box; the root becomes a `<label>`, so clicking the text toggles it |
 | `aria-label` | `string` | | Accessible name when there are no `children` |
 | `aria-labelledby` | `string` | | id(s) of the element(s) that name it |
@@ -54,7 +54,7 @@ const [selected, setSelected] = useState(false)
 | `className` | `string` | | Applied to the root element (the `<label>` when there are `children`) |
 | `theme` | `ThemeType` | | Pins token resolution to a theme |
 
-Inside a `Field` (nice-react-field), the native checkbox takes the Field's `id` (unless `id`
+Inside a `Field` (@niceprototypes/field), the native checkbox takes the Field's `id` (unless `id`
 is passed), so the Field label names it; it is described by the Field's description and error
 (`aria-describedby`), and takes `aria-invalid="true"` and `required` from the Field's `invalid`
 and `required`.
@@ -74,7 +74,7 @@ A `checked` Checkbox with no `onChange` is read-only. The color props accept the
 
 ## Tokens
 
-All from `nice-styles` (`src/tokens/components/checkbox.json`); override any of them on an
+All from `@niceprototypes/styles` (`src/tokens/components/checkbox.json`); override any of them on an
 ancestor to restyle Checkbox without props.
 
 | Token | Default |
@@ -90,4 +90,4 @@ ancestor to restyle Checkbox without props.
 | `--np--checkbox--disabled-opacity` | `0.5` |
 | `--np--checkbox--focus-ring--width` / `--color` / `--offset` | `var(--np--border-width--large)` / `var(--np--color--link)` / `var(--np--gap--smaller)` |
 
-Docs: nice-storybook → Components → Forms → Checkbox.
+Docs: @niceprototypes/storybook → Components → Forms → Checkbox.

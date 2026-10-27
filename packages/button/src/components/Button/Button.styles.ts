@@ -1,7 +1,7 @@
 import styled from "styled-components"
-import Flex from "nice-react-flex"
-import { getToken, resolveColorProp } from "nice-react-styles"
-import type { SizeType, BorderWidthType, BorderColorType, ColorTokenProp } from "nice-react-styles"
+import Flex from "@niceprototypes/flex"
+import { getToken, resolveColorProp } from "@niceprototypes/styles"
+import type { SizeType, BorderWidthType, BorderColorType, ColorTokenProp } from "@niceprototypes/styles"
 import type {
   ButtonAnimationDurationType,
   ButtonBorderRadiusType,
@@ -149,7 +149,7 @@ export const StyledButton = styled.button.withConfig({
     color: ${getToken("color", "link")};
   `}
 
-  /* Grow: mirrors nice-react-flex's grow (flex-grow paired with flex-basis: 0),
+  /* Grow: mirrors @niceprototypes/flex's grow (flex-grow paired with flex-basis: 0),
      so equal-grow siblings in a flex parent share its width by ratio rather than
      by label width. Emitted for every as= element and outside the inlined branch. The
      label/icons stay centred: this element is inline-flex with
@@ -209,7 +209,7 @@ export const StyledButton = styled.button.withConfig({
 `
 
 /**
- * Inner content container: a nice-react-flex row holding the icon(s) + label,
+ * Inner content container: a @niceprototypes/flex row holding the icon(s) + label,
  * centered inside StyledButton. It owns the icon/label gap (kept as
  * calc(fontSize/2) so it tracks the label size exactly, as before) and — via the
  * Flex `padding` prop passed from Button — the modern shorthand padding. Square

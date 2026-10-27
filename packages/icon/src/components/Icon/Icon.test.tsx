@@ -1,7 +1,7 @@
 import React from "react"
 import { render, screen } from "@testing-library/react"
 import "@testing-library/jest-dom"
-import { getToken } from "nice-react-styles"
+import { getToken } from "@niceprototypes/styles"
 import Icon from "./Icon"
 
 jest.mock("../../utilities/resolveIconComponent", () => ({

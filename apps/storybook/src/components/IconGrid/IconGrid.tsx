@@ -1,7 +1,7 @@
-import Icon from "nice-react-icon"
+import Icon from "@niceprototypes/icon"
 import Ink from "../../nice/Ink"
 import type { IconGridProps } from "./IconGrid.types"
-import Flex from "nice-react-flex"
+import Flex from "@niceprototypes/flex"
 
 const IconGrid = ({ icons }: IconGridProps) => {
   return (

@@ -64,7 +64,7 @@ function nextFloor(name: BreakpointName): number {
  * immediately without re-importing.
  *
  * @example
- * import { getBreakpoint } from "nice-styles"
+ * import { getBreakpoint } from "@niceprototypes/styles"
  *
  * const Container = styled.div`
  *   ${getBreakpoint("tablet+")} {

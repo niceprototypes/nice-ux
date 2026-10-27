@@ -1,6 +1,6 @@
 import styled, { keyframes } from "styled-components"
-import { getToken, type AnimationDurationType } from "nice-react-styles"
-import Flex from "nice-react-flex"
+import { getToken, type AnimationDurationType } from "@niceprototypes/styles"
+import Flex from "@niceprototypes/flex"
 import Ink from "../../nice/Ink"
 import { DOT_SIZE, demoFont } from "./constants"
 

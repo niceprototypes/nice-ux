@@ -1,4 +1,4 @@
-# nice-react-scroll
+# @niceprototypes/scroll
 
 Performance-optimized scroll components for React with centralized scroll management, sticky positioning, fade effects, and section navigation.
 
@@ -40,7 +40,7 @@ Performance-optimized scroll components for React with centralized scroll manage
 ## Installation
 
 ```bash
-npm install nice-react-scroll
+npm install @niceprototypes/scroll
 ```
 
 ### Peer Dependencies
@@ -59,7 +59,7 @@ import {
   StickySectionLinks,
   StickySection,
   FadeOnScroll
-} from 'nice-react-scroll'
+} from '@niceprototypes/scroll'
 
 function App() {
   return (
@@ -103,7 +103,7 @@ function App() {
 Centralized scroll manager that provides a single `requestAnimationFrame`-batched scroll listener.
 
 ```tsx
-import { ScrollProvider } from 'nice-react-scroll'
+import { ScrollProvider } from '@niceprototypes/scroll'
 
 function App() {
   return (
@@ -124,7 +124,7 @@ function App() {
 Access the current scroll position from any component within ScrollProvider.
 
 ```tsx
-import { useScroll } from 'nice-react-scroll'
+import { useScroll } from '@niceprototypes/scroll'
 
 function MyComponent() {
   const scrollY = useScroll()
@@ -138,7 +138,7 @@ function MyComponent() {
 Create sticky elements that stack on top of each other with automatic offset calculation.
 
 ```tsx
-import { StickyProvider, Sticky } from 'nice-react-scroll'
+import { StickyProvider, Sticky } from '@niceprototypes/scroll'
 
 function App() {
   return (
@@ -175,7 +175,7 @@ function App() {
 Navigation component with smooth scrolling and automatic active state detection.
 
 ```tsx
-import { StickySectionLinks } from 'nice-react-scroll'
+import { StickySectionLinks } from '@niceprototypes/scroll'
 
 function Navigation() {
   return (
@@ -219,7 +219,7 @@ function Navigation() {
 Wrapper component that provides a type-safe way to create sections with IDs for use with StickySectionLinks.
 
 ```tsx
-import { StickySection } from 'nice-react-scroll'
+import { StickySection } from '@niceprototypes/scroll'
 
 function Content() {
   return (
@@ -276,7 +276,7 @@ function Content() {
 Apply opacity transitions to elements based on scroll position.
 
 ```tsx
-import { FadeOnScroll } from 'nice-react-scroll'
+import { FadeOnScroll } from '@niceprototypes/scroll'
 
 function Hero() {
   return (
@@ -361,7 +361,7 @@ import {
   StickySection,
   FadeOnScroll,
   useScroll
-} from 'nice-react-scroll'
+} from '@niceprototypes/scroll'
 import styled from 'styled-components'
 
 const Header = styled.header`
@@ -531,7 +531,7 @@ import type {
   FadeOnScrollProps,
   ScrollContextValue,
   StickyContextValue
-} from 'nice-react-scroll'
+} from '@niceprototypes/scroll'
 ```
 
 ## API Documentation

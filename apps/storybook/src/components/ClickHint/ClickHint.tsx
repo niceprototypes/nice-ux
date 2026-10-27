@@ -1,6 +1,6 @@
 import * as React from "react"
-import Icon from "nice-react-icon"
-import type { IconNameType } from "nice-react-icon"
+import Icon from "@niceprototypes/icon"
+import type { IconNameType } from "@niceprototypes/icon"
 import { ClickHintWrapper } from "./ClickHint.styles"
 
 interface ClickHintProps {

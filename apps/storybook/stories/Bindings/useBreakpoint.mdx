@@ -31,7 +31,7 @@ import { DataTable } from "../../src/components/DataTable"
 <Ink as="h2">Usage</Ink>
 
 ```tsx
-import { useBreakpoint } from "nice-react-styles"
+import { useBreakpoint } from "@niceprototypes/styles"
 
 function Gallery() {
   const bp = useBreakpoint()
@@ -44,7 +44,7 @@ function Gallery() {
 <Ink code>"phone" | "tablet" | "laptop" | "desktop"</Ink><Ink>, smallest to largest. The breakpoint constants are exported too:</Ink>
 
 ```tsx
-import { useBreakpoint, BREAKPOINT_DESKTOP } from "nice-react-styles"
+import { useBreakpoint, BREAKPOINT_DESKTOP } from "@niceprototypes/styles"
 
 const bp = useBreakpoint()
 const wide = bp === BREAKPOINT_DESKTOP
@@ -81,10 +81,10 @@ const wide = bp === BREAKPOINT_DESKTOP
   columns={[{ key: "c0", header: "Need" }, { key: "c1", header: "Use" }]}
   tables={[{ rows: [
     { id: "0", values: [<Ink>Responsive styling on a nice component</Ink>, <Ink>the <code>breakpoints</code> prop (<code>withBreakpoints</code>)</Ink>] },
-    { id: "1", values: [<Ink>Responsive token value</Ink>, <Ink>breakpoint variants in <code>setTokens</code> (some tokens flip per breakpoint in <code>nice-styles/tokens.css</code>)</Ink>] },
-    { id: "2", values: [<Ink>Hide/show at a breakpoint in plain CSS</Ink>, <Ink><code>nice-styles/breakpoints.css</code> utilities (<code>.np-hide-tablet-up</code>)</Ink>] },
+    { id: "1", values: [<Ink>Responsive token value</Ink>, <Ink>breakpoint variants in <code>setTokens</code> (some tokens flip per breakpoint in <code>@niceprototypes/styles/tokens.css</code>)</Ink>] },
+    { id: "2", values: [<Ink>Hide/show at a breakpoint in plain CSS</Ink>, <Ink><code>@niceprototypes/styles/breakpoints.css</code> utilities (<code>.np-hide-tablet-up</code>)</Ink>] },
     { id: "3", values: [<Ink>A media query in CSS-in-JS</Ink>, <Ink><code>getBreakpoint("tablet+")</code></Ink>] },
-    { id: "4", values: [<Ink>Your own <code>@media</code> in a plain CSS file</Ink>, <Ink><code>nice-styles/breakpoints.custom-media.css</code> + <code>postcss-custom-media</code> (opt-in)</Ink>] },
+    { id: "4", values: [<Ink>Your own <code>@media</code> in a plain CSS file</Ink>, <Ink><code>@niceprototypes/styles/breakpoints.custom-media.css</code> + <code>postcss-custom-media</code> (opt-in)</Ink>] },
     { id: "5", values: [<Ink>Swap component trees / avoid mounting</Ink>, <Ink><Ink weight="semibold"><code>useBreakpoint</code></Ink></Ink>] },
   ] }]}
 />

@@ -1,5 +1,5 @@
 import * as React from "react"
-import Flex from "nice-react-flex"
+import Flex from "@niceprototypes/flex"
 import TileContent from "../TileContent"
 import type { TileLayoutProps } from "./TileLayout.types"
 import { OuterFlex } from "./TileLayout.styles"

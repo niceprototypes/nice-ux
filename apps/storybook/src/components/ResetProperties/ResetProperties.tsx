@@ -1,5 +1,5 @@
 import * as React from "react"
-import Flex from "nice-react-flex"
+import Flex from "@niceprototypes/flex"
 import ResetPropertiesItem, { ResetPropertiesItemProps } from "./ResetPropertiesItem"
 
 interface ResetPropertiesProps {

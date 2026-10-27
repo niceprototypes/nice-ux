@@ -1,0 +1,40 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../src/components/Story"
+import Tile from "@niceprototypes/tile"
+import Image from "@niceprototypes/image"
+import Ink from "../../../src/nice/Ink"
+import { DataTableRow } from "../../../src/components/DataTable"
+import { DEMO_CODE_COLUMNS } from "../../../src/components/DataTable"
+
+<Meta title="Components/Tile/contentRight" />
+
+<StoryHeader title="contentRight" />
+
+<Ink color="light">
+  Renders custom content in the tile's right column — typically used for actions
+  or secondary media.
+</Ink>
+
+<DataTableRow
+  fullWidth
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+          <Tile
+      title="Title"
+      description="Description"
+      contentRight={
+        <Image
+          vendor
+          src="10"
+          alt="Demo content"
+          width="80px"
+          height="80px"
+          backgroundSize="cover"
+          borderRadius="base"
+        />
+      }
+    />,
+          `<Tile\n  title="Title"\n  description="Description"\n  contentRight={image}\n/>`,
+        ]}
+/>
+

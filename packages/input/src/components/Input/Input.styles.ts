@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components"
-import { getToken, resolveColorProp } from "nice-react-styles"
-import type { SizeType, BorderWidthType, ColorTokenProp } from "nice-react-styles"
+import { getToken, resolveColorProp } from "@niceprototypes/styles"
+import type { SizeType, BorderWidthType, ColorTokenProp } from "@niceprototypes/styles"
 import type {
   InputAsType,
   InputBackgroundColorType,

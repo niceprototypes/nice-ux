@@ -1,5 +1,5 @@
 import type * as React from "react"
-import type { GapType, SizeType, ThemeType } from "nice-react-styles"
+import type { GapType, SizeType, ThemeType } from "@niceprototypes/styles"
 
 /**
  * TabsItemType
@@ -68,7 +68,7 @@ export type TabsChildrenType = React.ReactNode
 /**
  * TabsSizeType
  *
- * Re-export of SizeType from nice-styles.
+ * Re-export of SizeType from @niceprototypes/styles.
  * Tab padding, gap and font size, from the `tabs.*` component tokens.
  *
  * Values:
@@ -84,8 +84,8 @@ export type TabsSizeType = SizeType
  * TabsJustifyContentType
  *
  * Placement of the tab list, and the `end` content after it, along the tab row. The
- * nice-react-flex `FlexJustifyContentType` values, defined here so Tabs does not depend on
- * nice-react-flex. Unset: the tabs start at the row's start.
+ * @niceprototypes/flex `FlexJustifyContentType` values, defined here so Tabs does not depend on
+ * @niceprototypes/flex. Unset: the tabs start at the row's start.
  *
  * Values:
  * - "flex-start": tabs, then `end`, at the start of the row
@@ -100,7 +100,7 @@ export type TabsJustifyContentType = "flex-start" | "flex-end" | "center" | "spa
 /**
  * TabsGapType
  *
- * Re-export of GapType from nice-styles.
+ * Re-export of GapType from @niceprototypes/styles.
  * Gap between tabs, and between the tab list and `end`, from the `gap` core token. Unset:
  * the `tabs.gap` token for the size.
  *
@@ -144,7 +144,7 @@ export type TabsClassNameType = string
 /**
  * TabsThemeType
  *
- * Re-export of ThemeType from nice-styles.
+ * Re-export of ThemeType from @niceprototypes/styles.
  * Pin token resolution to a specific theme.
  */
 export type TabsThemeType = ThemeType

@@ -1,5 +1,5 @@
 import * as React from "react"
-import type { TokenVariants } from "nice-react-styles"
+import type { TokenVariants } from "@niceprototypes/styles"
 import { ZIndexAccent, ZIndexReference, ZIndexStack } from "./ZIndex.styles"
 
 interface ZIndexProps {

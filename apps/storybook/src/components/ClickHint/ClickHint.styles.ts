@@ -1,6 +1,6 @@
 import styled from "styled-components"
-import Flex from "nice-react-flex"
-import { getBreakpoint } from "nice-react-styles"
+import Flex from "@niceprototypes/flex"
+import { getBreakpoint } from "@niceprototypes/styles"
 
 /**
  * Click-hint affordance: an inline-flex row (via Flex's `inlined` prop) holding

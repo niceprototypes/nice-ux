@@ -9,7 +9,7 @@ let resolver: ImageVendorResolverType = null
  * registerVendorResolver
  *
  * Registers a function that resolves Image props into a concrete image URL.
- * Called as a side effect by vendor packages (e.g. nice-react-image-vendor).
+ * Called as a side effect by vendor packages (e.g. @niceprototypes/image-vendor).
  *
  * @param fn - Resolver function: takes the relevant Image props, returns a URL or null
  */

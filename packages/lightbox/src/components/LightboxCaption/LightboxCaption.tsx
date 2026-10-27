@@ -1,5 +1,5 @@
 import React from "react"
-import Ink from "nice-react-ink"
+import Ink from "@niceprototypes/ink"
 import { Wrapper } from "./LightboxCaption.styles"
 import type { LightboxCaptionProps } from "./LightboxCaption.types"
 

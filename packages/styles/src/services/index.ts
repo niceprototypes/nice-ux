@@ -1,7 +1,7 @@
 /**
  * Public API
  *
- * Services are the consumer-facing functions of nice-styles.
+ * Services are the consumer-facing functions of @niceprototypes/styles.
  * Internal utilities (camelToKebab, formatError, etc.) live in ../utilities/.
  *
  * Re-exported by the package entry (`src/index.ts`), which also runs the
@@ -81,7 +81,7 @@ export type { TokenEntry, TokenValue, TokenLayer, TokenIdentity } from '../regis
 export { injectTokenCSS } from '../utilities/tokenStyleSheet.js'
 
 // CSS generation — pure JS core of setTokens. The React wrapper in
-// nice-react-styles calls this then injectTokenCSS.
+// @niceprototypes/styles calls this then injectTokenCSS.
 export { generateTokenCSS } from './generateTokenCSS.js'
 
 // Write `data-theme` on the document root to switch the day/night token cascade.

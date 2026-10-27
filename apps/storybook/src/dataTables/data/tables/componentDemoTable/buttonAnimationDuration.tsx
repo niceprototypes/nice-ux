@@ -1,4 +1,4 @@
-import Button from "nice-react-button"
+import Button from "@niceprototypes/button"
 import type { ComponentExample } from "../../../components/demos/Components"
 
 // Hover the previews: the border and background fade over the chosen duration.

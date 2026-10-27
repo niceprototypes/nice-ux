@@ -6,9 +6,9 @@ import { defineConfig } from "tsup"
  *   channel event constants) consumers import directly.
  * - `manager` — the manager-side register: the preview↔manager channel bridge
  *   that drives the sidebar toggle, open-in-editor, and settings actions. Loaded
- *   by Storybook from `nice-storybook-navigation/manager`.
+ *   by Storybook from `@niceprototypes/storybook-navigation/manager`.
  * - `preview` — the preview-side global decorator that renders the navigation
- *   bar. Loaded from `nice-storybook-navigation/preview`.
+ *   bar. Loaded from `@niceprototypes/storybook-navigation/preview`.
  *
  * Everything the host Storybook already provides — React, styled-components,
  * the storybook runtime, and the Nice packages (kept as singletons by the
@@ -32,6 +32,6 @@ export default defineConfig({
     /^storybook(\/|$)/,
     "storybook-dark-mode",
     /^@storybook\//,
-    /^nice-/,
+    /^@niceprototypes\//,
   ],
 })

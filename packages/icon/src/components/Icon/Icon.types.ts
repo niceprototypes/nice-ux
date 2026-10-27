@@ -1,5 +1,5 @@
 import type * as React from "react"
-import type { ColorTokenProp, FontSizeType, ColorType, ThemeType } from "nice-react-styles"
+import type { ColorTokenProp, FontSizeType, ColorType, ThemeType } from "@niceprototypes/styles"
 import { iconNames } from "../../constants"
 
 export type IconNameType = (typeof iconNames)[number]
@@ -12,7 +12,7 @@ export type IconOutlinedType = boolean
 /**
  * IconVariantType
  *
- * The icon variant to render — a variant stem an icon ships in nice-icons.
+ * The icon variant to render — a variant stem an icon ships in @niceprototypes/icon.
  * "base" is the default (outline in currentColor); "fill" is the filled version;
  * icons may add more (e.g. "3d"). Open string so project-specific variants are
  * accepted: an unknown variant is validated at runtime — the resolver renders "base"
@@ -73,7 +73,7 @@ export type IconAnimationDurationType = "fast" | "base" | "slow"
  * IconVendorType
  *
  * Enables vendor icon resolution for names not found in the custom icon set.
- * Requires nice-react-icon-vendor (or a custom resolver) to be installed and imported.
+ * Requires @niceprototypes/icon-vendor (or a custom resolver) to be installed and imported.
  */
 export type IconVendorType = boolean
 

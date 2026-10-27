@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components"
-import Flex from "nice-react-flex"
+import Flex from "@niceprototypes/flex"
 
 /**
  * The swatch box. Every value arrives as a transient prop so the CSS lives here

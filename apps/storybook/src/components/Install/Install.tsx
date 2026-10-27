@@ -2,7 +2,7 @@ import React from "react"
 import Code from "../../nice/Code"
 
 interface InstallProps {
-  /** Bare package suffix — renders as `nice-{package}`. E.g. `package="styles"` → `nice-styles`. */
+  /** Bare package suffix — renders as `nice-{package}`. E.g. `package="styles"` → `@niceprototypes/styles`. */
   package: string
   /**
    * Additional non-nice packages installed alongside, appended verbatim (no

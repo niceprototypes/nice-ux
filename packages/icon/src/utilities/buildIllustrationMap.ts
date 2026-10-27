@@ -1,10 +1,10 @@
 import type * as React from "react"
-import * as Assets from "nice-icons"
+import * as Assets from "../svg/index.js"
 import { illustrationNames, illustrationVariants } from "../constants"
 
 /**
  * Convert a kebab-case illustration name (or variant stem) to the PascalCase used
- * by nice-icons exports. Matches nice-icons' own `toPascalCase`: "nice-heart" →
+ * by @niceprototypes/icon exports. Matches @niceprototypes/icon' own `toPascalCase`: "nice-heart" →
  * "NiceHeart", "base" → "Base".
  */
 function toPascalCase(name: string): string {
@@ -20,7 +20,7 @@ type IllustrationComponent = React.FunctionComponent<React.SVGAttributes<SVGElem
 export type IllustrationVariantMap = Record<string, IllustrationComponent>
 
 /**
- * Build the illustration map dynamically from nice-icons' `illustrationVariants`
+ * Build the illustration map dynamically from @niceprototypes/icon' `illustrationVariants`
  * catalog. Each entry maps an illustration name to the components for the
  * variants it ships, keyed by variant stem. An illustration is included only if
  * its required `base` variant resolves. The React export name suffix is

@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Theme } from "nice-react-styles"
+import { Theme } from "@niceprototypes/styles"
 import { IllustrationProps } from "./Illustration.types"
 import { IllustrationWrapperStyled } from "./Illustration.styles"
 import { resolveIllustrationComponent } from "../../utilities/resolveIllustrationComponent"
@@ -10,12 +10,12 @@ import { resolveIllustrationComponent } from "../../utilities/resolveIllustratio
  * Overloads Icon's shape but drops every recolor prop (`color`, `strokeWidth`,
  * `strokeScaling`, `outlined`): an illustration ships its own authored colors, so
  * it is only sized/positioned/animated, never repainted. Resolves from
- * nice-icons' illustration surface — `getIllustration` is the vanilla string
+ * @niceprototypes/icon' illustration surface — `getIllustration` is the vanilla string
  * equivalent. An unknown name renders nothing.
  *
  * @example
  * ```tsx
- * import { Illustration } from 'nice-react-icon'
+ * import { Illustration } from '@niceprototypes/icon'
  *
  * <Illustration name="nice-heart" size="larger" />
  * <Illustration name="nice-skull" theme="night" />

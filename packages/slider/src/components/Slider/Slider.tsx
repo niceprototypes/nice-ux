@@ -1,4 +1,4 @@
-import { getToken } from "nice-react-styles"
+import { getToken } from "@niceprototypes/styles"
 import React, { useEffect } from "react"
 import { SliderItemStyled, SliderOuterStyled } from "./Slider.styles"
 import type { SliderProps } from "./Slider.types"

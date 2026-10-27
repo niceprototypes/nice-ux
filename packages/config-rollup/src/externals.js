@@ -49,8 +49,8 @@ export function isNiceExternal(id, bundlePackages = []) {
     if (matchesPackage(id, pkg)) return false
   }
 
-  // All nice-* packages and any subpath (handles nice-styles/tokens.css, etc.)
-  if (id.startsWith('nice-')) return true
+  // All @niceprototypes/* packages and any subpath (handles @niceprototypes/styles/tokens.css, etc.)
+  if (id.startsWith('@niceprototypes/')) return true
 
   // React ecosystem
   if (REACT_PACKAGES.includes(id)) return true

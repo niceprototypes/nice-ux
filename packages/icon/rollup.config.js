@@ -1,11 +1,12 @@
-import { createConfiguration } from 'nice-config-rollup';
+import { createConfiguration } from '@niceprototypes/config-rollup';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
 import json from '@rollup/plugin-json';
 import svgr from '@svgr/rollup';
+import path from 'node:path';
 
-export default createConfiguration({
+const configs = createConfiguration({
   plugins: [
     // Keep icon styling in the `<style>` block + classes for every icon. svgo's
     // default `inlineStyles` plugin would otherwise hoist the rules onto a
@@ -33,7 +34,15 @@ export default createConfiguration({
       declaration: true,
       declarationDir: 'dist/types'
     })
-  ],
-  // Bundle nice-icons so SVGR can transform SVGs into React components
-  bundlePackages: ['nice-icons']
+  ]
 });
+
+// The SVG layer (src/svg) is plain JS that ships its own declarations, so tsc emits none
+// for it. The declaration bundle keeps the SVG layer's import as external and points it at
+// the shipped src/svg/index.d.ts.
+const svgDeclarations = path.resolve('dist/types/svg/index.js');
+const declarationConfig = configs[configs.length - 1];
+declarationConfig.external = (id) => /(^|\/)svg\/index\.js$/.test(id);
+declarationConfig.output[0].paths = (id) => (id === svgDeclarations ? '../src/svg/index.js' : id);
+
+export default configs;

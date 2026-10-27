@@ -1,6 +1,6 @@
 import * as React from "react"
-import Ink from "nice-react-ink"
-import { Theme } from "nice-react-styles"
+import Ink from "@niceprototypes/ink"
+import { Theme } from "@niceprototypes/styles"
 import { StyledButton, ButtonContent } from "./Button.styles"
 import { ButtonProps } from "./Button.types"
 import { getButtonElementProps } from "./Button.helpers"

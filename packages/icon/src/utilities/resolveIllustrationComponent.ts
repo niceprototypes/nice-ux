@@ -6,7 +6,7 @@ const illustrationMap = buildIllustrationMap()
 /**
  * Resolve a built-in illustration to its React SVG component by name and variant
  * — the internal resolver the `<Illustration>` component renders. (The
- * consumer-facing vanilla string equivalent is `getIllustration` in nice-icons.)
+ * consumer-facing vanilla string equivalent is `getIllustration` in @niceprototypes/icon.)
  *
  * Variant resolution is dynamic: if the illustration ships the requested variant
  * it is returned; if not, its `base` variant is returned and a console warning is
@@ -28,7 +28,7 @@ export function resolveIllustrationComponent(
 
   // Requested variant not available — fall back to base and warn.
   console.warn(
-    `nice-react-icon: illustration "${name}" has no "${variant}" variant; rendering "base". ` +
+    `@niceprototypes/icon: illustration "${name}" has no "${variant}" variant; rendering "base". ` +
       `Available: ${Object.keys(illustration).join(", ")}.`
   )
   return illustration.base

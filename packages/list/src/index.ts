@@ -1,5 +1,5 @@
 /**
- * nice-react-list — generic list for nice-react.
+ * @niceprototypes/list — generic list for nice-react.
  *
  * Multi-component package (named exports, no default). `List` renders a
  * `<ul>` with `<hr>` dividers between items and an optional scrollable body;

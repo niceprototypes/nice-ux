@@ -1,4 +1,4 @@
-import Button, { type ButtonGhostType } from "nice-react-button"
+import Button, { type ButtonGhostType } from "@niceprototypes/button"
 import type { ComponentExample } from "../../../components/demos/Components"
 
 // Each variant's ghost setting; hover, focus (Tab) and press the previews to see the states.

@@ -2,11 +2,11 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../src/components/Story"
 import { IconDemoTable } from "../../src/dataTables/components/demos/Icons"
 import { IllustrationDemoTable } from "../../src/dataTables/components/demos/Illustrations"
-import { iconNames } from "nice-icons/catalog"
-import { illustrationNames } from "nice-icons/illustration-catalog"
+import { iconNames } from "@niceprototypes/icon/catalog"
+import { illustrationNames } from "@niceprototypes/icon/illustration-catalog"
 import Callout from "../../src/components/Callout"
 import Code from "../../src/nice/Code"
-import Flex from "nice-react-flex"
+import Flex from "@niceprototypes/flex"
 import { IconPreview } from "./Icons.styles"
 import Install from "../../src/components/Install"
 import Line from "../../src/components/Line"
@@ -52,7 +52,7 @@ import Ink from "../../src/nice/Ink"
 <Ink>When standard SVG markup is not available or necessary:</Ink>
 
 ```js
-import { getIconEncoded } from "nice-icons"
+import { getIconEncoded } from "@niceprototypes/icon/svg"
 
 getIconEncoded("check")
 ```
@@ -60,7 +60,7 @@ getIconEncoded("check")
 <Ink as="h3">SVG</Ink>
 
 ```js
-import { getIcon } from "nice-icons"
+import { getIcon } from "@niceprototypes/icon/svg"
 
 getIcon("check")                                             // base variant (default)
 getIcon("check", "fill")                                     // fill variant
@@ -73,7 +73,7 @@ document.querySelector("#slot").innerHTML = getIcon("check")
 <Ink as="h3">Base64</Ink>
 
 ```js
-import { getIconEncoded } from "nice-icons"
+import { getIconEncoded } from "@niceprototypes/icon/svg"
 
 getIconEncoded("check")                              // base variant, base theme (#000)
 getIconEncoded("check", "fill")                      // fill variant

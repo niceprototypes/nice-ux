@@ -1,5 +1,5 @@
 import * as React from "react"
-import Flex from "nice-react-flex"
+import Flex from "@niceprototypes/flex"
 import { CodeDiv, ScrollDiv } from "./Code.styles"
 import { CodeLabel } from "../CodeLabel"
 import type { CodeProps } from "./Code.types"

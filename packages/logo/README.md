@@ -1,7 +1,7 @@
-# nice-react-logo
+# @niceprototypes/logo
 
 The Nice Prototypes logo: the crystal heart illustration (`nice-heart` from
-`nice-react-icon`) and the logo name, side by side. `height` sets the height, by default the
+`@niceprototypes/icon`) and the logo name, side by side. `height` sets the height, by default the
 responsive `logo.height` token; the name is `nameHeightScale` of it (60% by default) and the widths follow from the pieces' SVG viewBoxes. The name is filled with
 the theme's base text color, so it reads on light and dark backgrounds; the heart keeps its
 own colors in every theme.
@@ -9,15 +9,15 @@ own colors in every theme.
 ## Install
 
 ```sh
-npm install nice-react-logo
+npm install @niceprototypes/logo
 ```
 
-Peer dependencies: `nice-react-icon`, `nice-react-styles`, `react`, `react-dom`, `styled-components`.
+Peer dependencies: `@niceprototypes/icon`, `@niceprototypes/styles`, `react`, `react-dom`, `styled-components`.
 
 ## Usage
 
 ```tsx
-import Logo from "nice-react-logo"
+import Logo from "@niceprototypes/logo"
 
 <Logo />
 <Logo height={32} />
@@ -39,7 +39,7 @@ import Logo from "nice-react-logo"
 
 ## Tokens
 
-All from `nice-styles` (`src/tokens/components/logo.json`); override any of them on an
+All from `@niceprototypes/styles` (`src/tokens/components/logo.json`); override any of them on an
 ancestor to restyle Logo without props.
 
 | Token | Default |
@@ -47,4 +47,4 @@ ancestor to restyle Logo without props.
 | `--np--logo--height` | `64`; `56` from tablet, `48` from laptop (unitless pixels) |
 | `--np--logo--color` | `var(--np--color)`: the name's fill |
 
-Docs: nice-storybook → Components → Logo.
+Docs: @niceprototypes/storybook → Components → Logo.

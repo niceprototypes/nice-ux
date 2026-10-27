@@ -28,7 +28,7 @@ const INDEX_RETRY_MS = 100
 const INDEX_RETRY_LIMIT = 50
 
 /**
- * Manager entry. Loaded by Storybook from `nice-storybook-navigation/manager`.
+ * Manager entry. Loaded by Storybook from `@niceprototypes/storybook-navigation/manager`.
  * Bridges the preview-side navigation bar — which runs in the preview iframe and
  * can't touch the manager-owned sidebar or read story metadata — to the manager
  * `api` over the addons channel.

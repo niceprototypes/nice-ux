@@ -1,5 +1,5 @@
 import * as React from "react"
-import type { BackgroundSizeType, BorderRadiusType, BorderWidthType, BorderColorType, ColorTokenProp, ThemeType } from "nice-react-styles"
+import type { BackgroundSizeType, BorderRadiusType, BorderWidthType, BorderColorType, ColorTokenProp, ThemeType } from "@niceprototypes/styles"
 
 /**
  * ImageAsType
@@ -43,7 +43,7 @@ export type ImageHeightType = string
 /**
  * ImageBackgroundSizeType
  *
- * Re-export of BackgroundSizeType from nice-styles.
+ * Re-export of BackgroundSizeType from @niceprototypes/styles.
  * Controls how the image content fits within its container.
  * Maps to CSS object-fit (img) or background-size (div, with runtime translation
  * for values that CSS `background-size` doesn't accept — `fill`, `none`, `scale-down`).
@@ -78,7 +78,7 @@ export type ImageAspectRatioType = string
 /**
  * ImageBorderRadiusType
  *
- * Re-export of BorderRadiusType from nice-styles.
+ * Re-export of BorderRadiusType from @niceprototypes/styles.
  * Border radius values using design tokens.
  */
 export type ImageBorderRadiusType = BorderRadiusType
@@ -94,7 +94,7 @@ export type ImageBorderedType = boolean
 /**
  * ImageBorderWidthType
  *
- * Re-export of BorderWidthType from nice-styles.
+ * Re-export of BorderWidthType from @niceprototypes/styles.
  * Border width values using design tokens. Applied when `bordered` is true.
  */
 export type ImageBorderWidthType = BorderWidthType
@@ -102,7 +102,7 @@ export type ImageBorderWidthType = BorderWidthType
 /**
  * ImageBorderColorType
  *
- * Re-export of BorderColorType from nice-styles.
+ * Re-export of BorderColorType from @niceprototypes/styles.
  * Border color values using design tokens. Applied when `bordered` is true.
  */
 export type ImageBorderColorType = BorderColorType
@@ -110,7 +110,7 @@ export type ImageBorderColorType = BorderColorType
 /**
  * ImageThemeType
  *
- * Re-export of ThemeType from nice-styles.
+ * Re-export of ThemeType from @niceprototypes/styles.
  * Pin token resolution to a specific theme.
  * Extensible for consumer-defined custom themes.
  */
@@ -128,7 +128,7 @@ export type ImageRenderImageType = (src: string, alt: string) => React.ReactNode
  * ImageVendorType
  *
  * Enables vendor image resolution — props are routed through the registered
- * vendor resolver to produce the concrete URL. Requires nice-react-image-vendor
+ * vendor resolver to produce the concrete URL. Requires @niceprototypes/image-vendor
  * (or a custom resolver) to be installed and imported.
  */
 export type ImageVendorType = boolean
@@ -163,7 +163,7 @@ export type ImageProps = {
   /** Position of the image within its container */
   backgroundPosition?: ImageBackgroundPositionType
 
-  /** Border radius from nice-styles tokens */
+  /** Border radius from @niceprototypes/styles tokens */
   borderRadius?: ImageBorderRadiusType
 
   /** Render a border around the image (uses borderWidth/borderColor tokens) */

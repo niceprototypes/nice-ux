@@ -8,10 +8,10 @@
  * the exact module a consumer augments.
  */
 
-import { getToken, type TokenAddress } from 'nice-styles'
+import { getToken, type TokenAddress } from '@niceprototypes/styles'
 
 // The consumer's declaration — what an app writes next to its setTokens call
-declare module 'nice-styles' {
+declare module '@niceprototypes/styles' {
   interface CustomTokenVariants {
     contentMaxWidth: 'base' | 'wide'
   }

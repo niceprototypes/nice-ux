@@ -1,15 +1,15 @@
-# nice-icons
+# @niceprototypes/icon
 
 ## Usage
 
 **Vanilla JS** — `getIcon` returns the icon's SVG markup as a string:
 
 ```sh
-npm install nice-icons
+npm install @niceprototypes/icon
 ```
 
 ```js
-import { getIcon } from "nice-icons"
+import { getIcon } from "@niceprototypes/icon/svg"
 
 const checkIcon = getIcon("check", {
   color: "light",
@@ -17,14 +17,14 @@ const checkIcon = getIcon("check", {
 })
 ```
 
-**React** — via [nice-react-icon](https://github.com/niceprototypes/nice-react-icon):
+**React** — via [@niceprototypes/icon](https://github.com/niceprototypes/nice-react-icon):
 
 ```sh
-npm install nice-react-icon
+npm install @niceprototypes/icon
 ```
 
 ```jsx
-import Icon from "nice-react-icon"
+import Icon from "@niceprototypes/icon"
 
 const CheckIcon = (
   <Icon

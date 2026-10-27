@@ -18,13 +18,13 @@ A highly flexible and responsive flexbox container component for React with styl
 ## Installation
 
 ```bash
-npm install nice-react-flex
+npm install @niceprototypes/flex
 ```
 
 ## Basic Usage
 
 ```jsx
-import Flex from 'nice-react-flex'
+import Flex from '@niceprototypes/flex'
 
 // Simple horizontal layout
 <Flex direction="row" gap={2} alignItems="center">
@@ -282,7 +282,7 @@ The component is built with a clean, modular architecture:
 Full TypeScript support with comprehensive type definitions:
 
 ```tsx
-import Flex, { FlexProps, GapSize, SpacingDefinition } from 'nice-react-flex'
+import Flex, { FlexProps, GapSize, SpacingDefinition } from '@niceprototypes/flex'
 
 const MyComponent: React.FC = () => {
   const spacing: SpacingDefinition = { horizontal: 2, vertical: 1 }

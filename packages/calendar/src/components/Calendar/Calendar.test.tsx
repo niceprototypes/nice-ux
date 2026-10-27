@@ -4,9 +4,9 @@ import "@testing-library/jest-dom"
 import Calendar from "./Calendar"
 import { Calendar as ResponsiveCalendar } from "."
 
-// react-icon's dist requires nice-styles without declaring it; mock it the way
+// react-icon's dist requires @niceprototypes/styles without declaring it; mock it the way
 // react-button's tests do. The mock renders the icon name for assertions.
-jest.mock("nice-react-icon", () => ({
+jest.mock("@niceprototypes/icon", () => ({
   __esModule: true,
   default: ({ name }: { name: string }) => <span data-testid="icon">{name}</span>,
 }))

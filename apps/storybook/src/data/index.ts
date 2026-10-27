@@ -1,5 +1,5 @@
 import type { ReactNode } from "react"
-import { listTokens, type TokenGroup } from "nice-react-styles"
+import { listTokens, type TokenGroup } from "@niceprototypes/styles"
 import data from "./storybook.json"
 import type { DataColumn } from "../components/DataTable"
 import type { TokenGroupConfig, TokenVariant } from "../dataTables/components/tokens/Modules/Modules.types"
@@ -69,7 +69,7 @@ export interface TokenTable extends TokenGroupConfig, ColumnSet {
   sectionWrapped: boolean
 }
 
-/** The group's variants from nice-styles, in registry order (core, non-inverse). */
+/** The group's variants from @niceprototypes/styles, in registry order (core, non-inverse). */
 const registryVariants = (group: string): TokenVariant[] =>
   listTokens({ group })
     .filter(token => !token.prefix && !token.inverse && token.path.length === 1)

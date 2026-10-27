@@ -1,7 +1,7 @@
 import type {
   StoryNavigationIndexSequence,
   StoryNavigationSequence,
-} from "nice-storybook-navigation"
+} from "@niceprototypes/storybook-navigation"
 
 /**
  * Ordered navigable sequences for the navigation bar. The addon ships none —

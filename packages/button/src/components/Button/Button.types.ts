@@ -1,7 +1,7 @@
 import * as React from "react"
-import { AnimationDurationType, SizeType, BorderWidthType, BorderColorType, ColorTokenProp, FontWeightType, ThemeType, TokenAddress } from "nice-react-styles"
+import { AnimationDurationType, SizeType, BorderWidthType, BorderColorType, ColorTokenProp, FontWeightType, ThemeType, TokenAddress } from "@niceprototypes/styles"
 import type { ButtonIconNameType } from "../ButtonIcon/ButtonIcon.types"
-import type { FlexJustifyContentType, FlexSpacingType } from "nice-react-flex"
+import type { FlexJustifyContentType, FlexSpacingType } from "@niceprototypes/flex"
 
 /**
  * Border radius variants for the button
@@ -11,7 +11,7 @@ export type ButtonBorderRadiusType = "none" | "small" | "base" | "large" | "roun
 /**
  * ButtonBorderColorType
  *
- * @token Re-export of BorderColorType from nice-styles. Token-bound —
+ * @token Re-export of BorderColorType from @niceprototypes/styles. Token-bound —
  * raw CSS color strings are not accepted.
  */
 export type ButtonBorderColorType = BorderColorType
@@ -21,7 +21,7 @@ export type ButtonBorderColorType = BorderColorType
  *
  * Internal padding of the button content, as a CSS-like shorthand of gap tokens
  * (1–4 values following CSS padding order, e.g. "none base larger") — the
- * nice-react-flex padding standard. Overrides the default size-derived
+ * @niceprototypes/flex padding standard. Overrides the default size-derived
  * horizontal padding.
  */
 export type ButtonPaddingType = FlexSpacingType
@@ -29,7 +29,7 @@ export type ButtonPaddingType = FlexSpacingType
 /**
  * ButtonJustifyContentType
  *
- * How the icon(s) and label are placed along the button — the nice-react-flex
+ * How the icon(s) and label are placed along the button — the @niceprototypes/flex
  * justifyContent standard. Anything but "center" stretches the content row to
  * the button's width, so "space-between" puts an icon at each edge with the
  * label between.
@@ -149,7 +149,7 @@ export type ButtonFilledType = boolean
 /**
  * ButtonWeightType
  *
- * Re-export of FontWeightType from nice-styles.
+ * Re-export of FontWeightType from @niceprototypes/styles.
  * Font weight of the button label, forwarded to the underlying Ink.
  */
 export type ButtonWeightType = FontWeightType
@@ -157,7 +157,7 @@ export type ButtonWeightType = FontWeightType
 /**
  * ButtonGrowType
  *
- * Flex grow factor of the button's root element, mirroring nice-react-flex's
+ * Flex grow factor of the button's root element, mirroring @niceprototypes/flex's
  * `grow` prop: emits `flex-grow: {value}` paired with `flex-basis: 0`, so
  * sibling buttons in a flex container size from their grow ratios rather than
  * their label widths (equal values render equal widths). Only takes effect when
@@ -385,7 +385,7 @@ export interface ButtonProps {
 
   /**
    * Internal padding of the content, as a CSS-like shorthand of gap tokens (1–4
-   * values, e.g. "none base larger"), applied via nice-react-flex. Overrides the
+   * values, e.g. "none base larger"), applied via @niceprototypes/flex. Overrides the
    * default size-derived horizontal padding; when set, non-zero vertical values
    * grow the button beyond its base height.
    */
@@ -393,13 +393,13 @@ export interface ButtonProps {
 
   /**
    * Flex grow factor of the root element (`flex-grow` + `flex-basis: 0`, as
-   * nice-react-flex `grow`). Applies to every `as`; needs a flex-container
+   * @niceprototypes/flex `grow`). Applies to every `as`; needs a flex-container
    * parent. Unset emits no flex-grow.
    */
   grow?: ButtonGrowType
 
   /**
-   * Placement of the icon(s) and label along the button (nice-react-flex
+   * Placement of the icon(s) and label along the button (@niceprototypes/flex
    * justifyContent); anything but "center" stretches them across its width.
    * @default "center"
    */

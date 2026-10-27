@@ -1,0 +1,76 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../src/components/Story"
+import Install from "../../../src/components/Install"
+import { ComponentDemoTable } from "../../../src/dataTables/components/demos/Components"
+import { checkboxExampleList } from "./examples"
+import NewLines from "../../../src/components/NewLines"
+import Callout from "../../../src/components/Callout"
+
+<Meta title="Components/Forms/Checkbox" />
+
+<StoryHeader
+  title="Checkbox"
+  description="A checkbox built on a native checkbox, with a token-driven box and a @niceprototypes/icon check."
+/>
+
+<NewLines count={3} />
+
+<Install package="react-checkbox" />
+
+```jsx
+import Checkbox from "@niceprototypes/checkbox"
+
+<Checkbox aria-label="Visible" checked={visible} onChange={setVisible} />
+```
+
+<NewLines count={3} />
+
+<ComponentDemoTable examples={checkboxExampleList} />
+
+<NewLines count={3} />
+
+## Guide
+
+Checkbox renders a native `<input type="checkbox">`, invisible but covering the box, so it stays the focus target, the keyboard handler and the click target. The box beside it is drawn from the `checkbox.*` component tokens, and shows a `check` icon from @niceprototypes/icon when checked.
+
+Use it controlled or uncontrolled. Controlled, the parent owns the value through `checked` and `onChange`; uncontrolled, `defaultChecked` sets the starting value. `onChange` receives the new value first and the native event second, the same order as Input and Toggle:
+
+```jsx
+const [visible, setVisible] = useState(true)
+
+<Checkbox aria-label="Visible" checked={visible} onChange={setVisible} />
+```
+
+Pass `children` for a visible label: the root becomes a `<label>` around the box and the text, so clicking the text toggles the checkbox. Without `children`, name it with `aria-label`, or with `aria-labelledby` pointing at the element that names it.
+
+```jsx
+<Checkbox defaultChecked>Visible</Checkbox>
+```
+
+Inside a `Field` from @niceprototypes/field, the Field's label names the checkbox, and its description and error describe it. The checkbox takes the Field's id, `aria-invalid` and `required`:
+
+```jsx
+import { Field } from "@niceprototypes/field"
+
+<Field label="Visible" description="Shown to everyone.">
+  <Checkbox defaultChecked />
+</Field>
+```
+
+`ref` reaches the native checkbox.
+
+| Key | Action |
+|---|---|
+| Tab | Moves focus to the checkbox; the focus ring is drawn on the box |
+| Space | Toggles the checkbox |
+
+The box takes the same token-bound props as Button: `size`, `borderRadius`, `borderWidth`, and `borderColor` for the unchecked border. `backgroundColor` is the fill when checked. Every value is a component token, so a theme or a subtree can restyle Checkbox without props:
+
+```css
+.table {
+  --np--checkbox--background-color--link: var(--np--color--success);
+  --np--checkbox--border-radius--small: var(--np--border-radius--none);
+}
+```
+
+<Callout type="hint">The check is a @niceprototypes/icon, sized and colored through --np--checkbox--icon--size and --np--checkbox--icon--color, so it restyles without touching other icons.</Callout>
