@@ -1,0 +1,61 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../../src/components/Story"
+import Install from "../../../../src/components/Install"
+import { ComponentDemoTable } from "../../../../src/dataTables/components/demos/Components"
+import { popoverExampleList, popoverLifecycleSteps, renderPopoverLifecycle } from "./examples"
+import LifecycleStory from "../../../../src/components/LifecycleStory"
+import NewLines from "../../../../src/components/NewLines"
+import Callout from "../../../../src/components/Callout"
+
+<Meta title="Components/Popover" />
+
+<StoryHeader
+  title="Popover"
+  description="A controlled surface anchored to an element, rendered in a portal with fixed positioning, with Escape and outside-pointerdown dismiss."
+/>
+
+<NewLines count={3} />
+
+<Install package="react-popover" />
+
+```jsx
+import Popover from "nice-react-popover"
+
+const anchorRef = useRef(null)
+const [open, setOpen] = useState(false)
+
+<Button ref={anchorRef} onClick={() => setOpen(o => !o)}>Options</Button>
+<Popover open={open} onOpenChange={setOpen} anchorRef={anchorRef} aria-label="Options">
+  …
+</Popover>
+```
+
+<NewLines count={3} />
+
+<LifecycleStory
+  steps={popoverLifecycleSteps}
+  render={renderPopoverLifecycle}
+/>
+
+<NewLines count={3} />
+
+<ComponentDemoTable examples={popoverExampleList} />
+
+<NewLines count={3} />
+
+## Guide
+
+While `open`, Popover renders in a portal at `<body>` with `position: fixed`, so a scrolling or overflow-hidden ancestor never clips it. It is placed on `position`'s side of `anchorRef`, `align`ed on the cross axis and `popover.offset` away, and the coordinates are recomputed on window scroll (capture phase, so nested scrollers count) and resize.
+
+Popover is controlled. Escape, or a pointerdown outside the popover, the anchor and every `ignoreOutsideRefs` element, calls `onOpenChange(false)`; the popover closes only when `open` turns false. On close, focus returns to the anchor if it was inside the popover. Focus is not trapped.
+
+The surface sets radius, shadow, stacking and max height from the `popover.*` tokens and scrolls content taller than the max height. It has no padding: put a List, or your own layout, inside. The placement math is exported as `computeAnchorPosition` for surfaces that position themselves:
+
+```js
+import { computeAnchorPosition } from "nice-react-popover"
+
+computeAnchorPosition(anchor.getBoundingClientRect(), "bottom", "start", 8)
+// → { top, left, transform }
+```
+
+<Callout type="hint">Pass the trigger in `ignoreOutsideRefs` when it is not the anchor, or its pointerdown dismisses the popover before its own toggle runs.</Callout>

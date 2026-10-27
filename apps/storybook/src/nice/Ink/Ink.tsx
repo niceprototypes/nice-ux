@@ -9,7 +9,7 @@ type Props = InkProps & { unstyled?: boolean }
 const HEADINGS = new Set(["h1", "h2", "h3", "h4"])
 
 const Ink: React.FC<Props> = ({
-  as = "span",
+  as,
   unstyled = true,
   color,
   size,
@@ -17,7 +17,7 @@ const Ink: React.FC<Props> = ({
   children,
   ...props
 }) => {
-  const isHeading = HEADINGS.has(as)
+  const isHeading = as !== undefined && HEADINGS.has(as)
   const finalColor = color ?? (isHeading ? undefined : "light")
   const finalSize = size ?? (isHeading ? undefined : "base")
   const finalClassName = unstyled

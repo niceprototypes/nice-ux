@@ -4,6 +4,8 @@
 import { useState } from "react"
 import { Field, Fieldset, useField, mergeDescribedBy } from "nice-react-field"
 import Input from "nice-react-input"
+import Flex from "nice-react-flex"
+import { Theme, getToken } from "nice-react-styles"
 import type { ComponentExample } from "./examples.types"
 
 export type { ComponentExample, ExampleVariant } from "./examples.types"
@@ -134,7 +136,7 @@ export const fieldError = {
 export const fieldInvalid = {
   name: "invalid",
   description:
-    "Sets aria-invalid=\"true\" on the control while true, and no aria-invalid attribute otherwise (never \"false\"). It changes no visual style — set status=\"error\" on the control for that.",
+    "Sets aria-invalid=\"true\" on the control while true, and no aria-invalid attribute otherwise (never \"false\"). Input and Select show the error status inside an invalid Field unless they set their own status.",
   variants: ["false", "true"],
   default: "false",
   preview: (variant: string) =>
@@ -261,6 +263,78 @@ export const fieldFieldset = {
 </Fieldset>`,
 } satisfies ComponentExample
 
+export const fieldChildren = {
+  name: "children",
+  description:
+    "The control. Field provides its id, label, description and error wiring through context, and the control must apply useField().id as its id. Input applies it, and Select and DateField inherit it through Input.",
+  variants: ["Input"],
+  default: "Input",
+  preview: () => (
+    <Field label="Full name">
+      <Input autoComplete="name" />
+    </Field>
+  ),
+  code: () => `<Field label="Full name">
+  <Input autoComplete="name" />
+</Field>`,
+} satisfies ComponentExample
+
+export const fieldTheme = {
+  name: "theme",
+  description: "Pins token resolution to a theme. Each preview sits on its theme's base background.",
+  variants: ["day", "night"],
+  default: "day",
+  preview: (variant: string) => (
+    <Theme name={variant}>
+      <Flex
+        padding="small"
+        style={{ backgroundColor: getToken("backgroundColor", "base") }}
+      >
+        <Field
+          label="Email"
+          description="Used for receipts."
+          theme={variant}
+        >
+          <Input type="email" />
+        </Field>
+      </Flex>
+    </Theme>
+  ),
+  code: (variant: string) => `<Field label="Email" description="Used for receipts." theme="${variant}">
+  <Input type="email" />
+</Field>`,
+} satisfies ComponentExample
+
+export const fieldFieldsetTheme = {
+  name: "Fieldset theme",
+  description: "Pins Fieldset's token resolution to a theme. Each preview sits on its theme's base background.",
+  variants: ["day", "night"],
+  default: "day",
+  preview: (variant: string) => (
+    <Theme name={variant}>
+      <Flex
+        padding="small"
+        style={{ backgroundColor: getToken("backgroundColor", "base") }}
+      >
+        <Fieldset
+          legend="Shipping address"
+          theme={variant}
+        >
+          <Field label="Postcode">
+            <Input
+              width="10"
+              autoComplete="postal-code"
+            />
+          </Field>
+        </Fieldset>
+      </Flex>
+    </Theme>
+  ),
+  code: (variant: string) => `<Fieldset legend="Shipping address" theme="${variant}">
+  …
+</Fieldset>`,
+} satisfies ComponentExample
+
 export const fieldUseField = {
   name: "useField",
   description:
@@ -292,7 +366,10 @@ export const fieldExamples = {
   required: fieldRequired,
   optionalLabel: fieldOptionalLabel,
   Fieldset: fieldFieldset,
+  FieldsetTheme: fieldFieldsetTheme,
   useField: fieldUseField,
+  children: fieldChildren,
+  theme: fieldTheme,
 } satisfies Record<string, ComponentExample>
 
 /** Field facets in Docs-page order. */

@@ -89,6 +89,33 @@ export const inputFilled = {
   code: variant => (variant === "filled" ? `<Input filled />` : `<Input />`),
 } satisfies ComponentExample
 
+export const inputGhost = {
+  name: "ghost",
+  description:
+    "Transparent background and border, so only the text and padding show. true: until the input is focused, then its normal colours. Per state (rest, hover, focus): e.g. ghosted while focused too, where the field keeps a focus outline from the input.focusRing tokens.",
+  variants: ["outline", "ghost", "ghost when focused"],
+  default: "outline",
+  preview: variant => (
+    <Input
+      ghost={
+        variant === "ghost"
+          ? true
+          : variant === "ghost when focused"
+            ? { rest: true, hover: true, focus: true }
+            : false
+      }
+      aria-label={cap(variant)}
+      defaultValue={cap(variant)}
+    />
+  ),
+  code: variant =>
+    variant === "ghost"
+      ? `<Input ghost />`
+      : variant === "ghost when focused"
+        ? `<Input ghost={{ rest: true, hover: true, focus: true }} />`
+        : `<Input />`,
+} satisfies ComponentExample
+
 export const inputSize = {
   name: "size",
   description: "Scales the input's height, padding and font size using size tokens.",
@@ -116,6 +143,22 @@ export const inputStatus = {
     />
   ),
   code: variant => (variant === "base" ? `<Input />` : `<Input status="${variant}" />`),
+} satisfies ComponentExample
+
+export const inputDisabled = {
+  name: "disabled",
+  description:
+    "Disables the native control and applies the disabled styling. Combined with status=\"disabled\": either one disables the input, as in Button, and a disabled input shows the disabled styling whatever its status.",
+  variants: ["enabled", "disabled"],
+  default: "enabled",
+  preview: variant => (
+    <Input
+      disabled={variant === "disabled"}
+      aria-label={cap(variant)}
+      placeholder={cap(variant)}
+    />
+  ),
+  code: variant => (variant === "disabled" ? `<Input disabled />` : `<Input />`),
 } satisfies ComponentExample
 
 export const inputBorderRadius = {
@@ -380,8 +423,10 @@ export const inputExamples = {
   type: inputType,
   placeholder: inputPlaceholder,
   filled: inputFilled,
+  ghost: inputGhost,
   size: inputSize,
   status: inputStatus,
+  disabled: inputDisabled,
   borderRadius: inputBorderRadius,
   width: inputWidth,
   start: inputStart,

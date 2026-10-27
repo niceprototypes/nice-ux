@@ -1,0 +1,61 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../../src/components/Story"
+import Install from "../../../../src/components/Install"
+import { ComponentDemoTable } from "../../../../src/dataTables/components/demos/Components"
+import { tabsExampleList } from "./examples"
+import NewLines from "../../../../src/components/NewLines"
+import Callout from "../../../../src/components/Callout"
+
+<Meta title="Components/Tabs" />
+
+<StoryHeader
+  title="Tabs"
+  description="A WAI-ARIA tab list with any node as a tab label, optional row content after the tabs, and the selected tab's panel."
+/>
+
+<NewLines count={3} />
+
+<Install package="react-tabs" />
+
+```jsx
+import Tabs from "nice-react-tabs"
+
+<Tabs aria-label="Pages" items={pages} selected={page} onSelect={setPage}>
+  {panel}
+</Tabs>
+```
+
+<NewLines count={3} />
+
+<ComponentDemoTable examples={tabsExampleList} />
+
+<NewLines count={3} />
+
+## Guide
+
+Tabs renders a row with the tab list and, after it, the optional `end` content, such as an add button. Under the row is the selected tab's panel: `children`, rendered with `role="tabpanel"` and labelled by the selected tab. Only one panel is rendered; pass the content for the selected tab.
+
+Each tab is an element with `role="tab"`, not a `<button>`, so its label can be any node, an input included:
+
+```jsx
+<Tabs
+  items={[
+    { id: "page-1", label: <Input ghost size="small" aria-label="Page name" value={name} onChange={setName} /> },
+  ]}
+  end={<Button iconLeft="plus" size="small" aria-label="Add page" />}
+/>
+```
+
+Clicking anywhere in a tab, its input included, selects the tab. Keys pressed inside the input stay with the input: arrow keys move its caret, not the tab focus.
+
+Only the selected tab is in the tab order. On a focused tab:
+
+| Key | Action |
+|---|---|
+| ArrowRight / ArrowLeft | Focus and select the next / previous enabled tab, wrapping |
+| Home / End | Focus and select the first / last enabled tab |
+| Enter / Space | Select the focused tab |
+
+Use it controlled, with `selected` and `onSelect(id, event)`, or uncontrolled with `defaultSelected`. Padding, gap, font size, colors, the row border, the selected underline and the focus ring are component tokens and follow the active theme. `variant="pill"` replaces the row border and underline with a rounded border per tab; `gap` and `justifyContent` set the spacing and placement of the tabs and `end` in the row.
+
+<Callout type="hint">Give the tab list a name with aria-label, and give an input inside a tab label its own aria-label.</Callout>

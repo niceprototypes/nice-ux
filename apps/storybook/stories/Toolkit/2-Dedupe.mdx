@@ -10,7 +10,10 @@ import Ink from "../../src/nice/Ink"
 
 <StoryHeader title="Dedupe" />
 
-<Ink as="span">Remove duplicate singleton packages (react, styled-components, etc.) from linked packages' <code>node_modules</code>. This is the fix for <Ink as="span" weight="semibold">"Invalid hook call"</Ink> and styled-components context mismatches — both caused by more than one copy of a singleton being loaded at runtime.</Ink>
+<Ink>Remove duplicate singleton packages (react, styled-components, etc.) from linked packages'</Ink>
+<Ink code>node_modules</Ink><Ink>. This is the fix for</Ink>
+<Ink weight="semibold">"Invalid hook call"</Ink>
+<Ink>and styled-components context mismatches — both caused by more than one copy of a singleton being loaded at runtime.</Ink>
 
 ```bash
 # Recurse across every file: linked package
@@ -27,7 +30,7 @@ nicely --dedupe --dry-run
 
 <Ink as="h2">What it removes</Ink>
 
-<Ink as="span">By default these are stripped from each linked package so the app's copy is the only one loaded:</Ink>
+<Ink>By default these are stripped from each linked package so the app's copy is the only one loaded:</Ink>
 
 ```bash
 • react
@@ -37,16 +40,21 @@ nicely --dedupe --dry-run
 • @types/react-dom
 ```
 
-<Ink as="span">Override or extend the set per run with <code>--exclude</code> / <code>--add-exclude</code> (see <a href="/?path=/docs/toolkit-1-linking--docs" target="_top">Linking</a>).</Ink>
+<Ink>Override or extend the set per run with</Ink>
+<Ink code>--exclude</Ink>
+<Ink>/</Ink>
+<Ink code>--add-exclude</Ink>
+<Ink>(see</Ink>
+<Ink><a href="/?path=/docs/toolkit-1-linking--docs" target="_top">Linking</a></Ink><Ink>).</Ink>
 
 <Line />
 
 <Ink as="h2">When to run it</Ink>
 
 <ul>
-  <li><Ink as="span">After <code>npm install</code> inside a linked package (install re-adds the duplicates).</Ink></li>
-  <li><Ink as="span">After changing any <code>package.json</code> dependencies.</Ink></li>
-  <li><Ink as="span">Any time you hit "Invalid hook call" or a styled-components theme/context</Ink></li>
+  <li><Ink>After <code>npm install</code> inside a linked package (install re-adds the duplicates).</Ink></li>
+  <li><Ink>After changing any <code>package.json</code> dependencies.</Ink></li>
+  <li><Ink>Any time you hit "Invalid hook call" or a styled-components theme/context</Ink></li>
 </ul>
   mismatch while developing against linked packages.
 
@@ -56,4 +64,8 @@ npm install
 nicely --dedupe
 ```
 
-<Ink as="span"><code>--dedupe</code> is also the second step of the workspace triad and of <code>--reset</code> — see <a href="/?path=/docs/toolkit-5-reset-caches--docs" target="_top">Reset & Caches</a>.</Ink>
+<Ink code>--dedupe</Ink>
+<Ink>is also the second step of the workspace triad and of</Ink>
+<Ink code>--reset</Ink>
+<Ink>— see</Ink>
+<Ink><a href="/?path=/docs/toolkit-5-reset-caches--docs" target="_top">Reset & Caches</a></Ink><Ink>.</Ink>

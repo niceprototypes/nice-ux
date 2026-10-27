@@ -27,7 +27,7 @@ import Ink from "../../src/nice/Ink"
 
 <Line />
 
-<Ink as="h3">{"{iconNames.length} icons"}</Ink>
+<Ink as="h3">{iconNames.length} icons</Ink>
 
 <IconDemoTable
   codeColumns={[
@@ -49,7 +49,7 @@ import Ink from "../../src/nice/Ink"
 
 <Ink as="h2">Strings</Ink>
 
-<Ink as="span">When standard SVG markup is not available or necessary:</Ink>
+<Ink>When standard SVG markup is not available or necessary:</Ink>
 
 ```js
 import { getIconEncoded } from "nice-icons"
@@ -89,7 +89,9 @@ element.style.maskImage = `url("${getIconEncoded("check")}")`
 
 <Ink as="h2">React</Ink>
 
-<Ink as="span">The Icon component allows you to <Ink as="span" weight="semibold">easily configure icon properties</Ink> without any CSS code:</Ink>
+<Ink>The Icon component allows you to</Ink>
+<Ink weight="semibold">easily configure icon properties</Ink>
+<Ink>without any CSS code:</Ink>
 
 <Install package="react-icon" />
 

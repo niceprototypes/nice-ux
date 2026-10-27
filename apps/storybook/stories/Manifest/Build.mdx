@@ -14,14 +14,18 @@ import { DataTable } from "../../src/components/DataTable"
   description="Local development build processes for the Nice ecosystem."
 />
 
-<Ink as="span">Files here are topic references: load the one your task or the root index points to. Local packages link by <code>file:</code> reference; three non-overlapping <code>nicely</code> commands cover the workspace-level concerns.</Ink>
+<Ink>Files here are topic references: load the one your task or the root index points to. Local packages link by</Ink>
+<Ink code>file:</Ink>
+<Ink>reference; three non-overlapping</Ink>
+<Ink code>nicely</Ink>
+<Ink>commands cover the workspace-level concerns.</Ink>
 
 <DataTable
   columns={[{ key: "c0", header: "File" }, { key: "c1", header: "Contents" }]}
   tables={[{ rows: [
-    { id: "0", values: [<Ink as="span"><code>symlinks.md</code></Ink>, <Ink as="span">nice-toolkit, <code>file:</code> references, nice-toolkit CLI usage.</Ink>] },
-    { id: "1", values: [<Ink as="span"><code>vite.md</code></Ink>, <Ink as="span">Vite configuration for nice-storybook, nice-vite-watcher.</Ink>] },
-    { id: "2", values: [<Ink as="span"><code>image-compressor.md</code></Ink>, <Ink as="span">nice-image-compressor CLI for PNG compression via pngquant.</Ink>] },
+    { id: "0", values: [<Ink><code>symlinks.md</code></Ink>, <Ink>nice-toolkit, <code>file:</code> references, nice-toolkit CLI usage.</Ink>] },
+    { id: "1", values: [<Ink><code>vite.md</code></Ink>, <Ink>Vite configuration for nice-storybook, nice-vite-watcher.</Ink>] },
+    { id: "2", values: [<Ink><code>image-compressor.md</code></Ink>, <Ink>nice-image-compressor CLI for PNG compression via pngquant.</Ink>] },
   ] }]}
 />
 

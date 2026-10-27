@@ -12,7 +12,10 @@ import { DataTable } from "../../src/components/DataTable"
 
 <StoryHeader title="Caches" />
 
-<Ink as="span">Eight cache layers can hold stale state in a Nice workspace. Three workspace-level <code>nicely</code> operations clear most of them; the rest belong to other owners (the consumer's <code>npm install</code>, npm itself, the user's browser). This page maps which tool clears which layer and gives workflow recipes for the common "something is stale" symptoms.</Ink>
+<Ink>Eight cache layers can hold stale state in a Nice workspace. Three workspace-level</Ink>
+<Ink code>nicely</Ink>
+<Ink>operations clear most of them; the rest belong to other owners (the consumer's</Ink>
+<Ink code>npm install</Ink><Ink>, npm itself, the user's browser). This page maps which tool clears which layer and gives workflow recipes for the common "something is stale" symptoms.</Ink>
 
 <Line />
 
@@ -21,24 +24,43 @@ import { DataTable } from "../../src/components/DataTable"
 <DataTable
   columns={[{ key: "c0", header: "#" }, { key: "c1", header: "Layer" }, { key: "c2", header: "Path" }, { key: "c3", header: "Cleared by" }]}
   tables={[{ rows: [
-    { id: "0", values: [<Ink as="span">1</Ink>, <Ink as="span">Global npm cache</Ink>, <Ink as="span"><code>~/.npm/_cacache</code></Ink>, <Ink as="span"><code>npm cache clean --force</code></Ink>] },
-    { id: "1", values: [<Ink as="span">2</Ink>, <Ink as="span">Consumer <code>node_modules</code> + lockfile</Ink>, <Ink as="span"><code>{"<consumer>/node_modules"}</code>, <code>{"<consumer>/package-lock.json"}</code></Ink>, <Ink as="span"><code>rm -rf node_modules package-lock.json && npm install</code> (or <code>website</code> <code>npm run clean</code>)</Ink>] },
-    { id: "2", values: [<Ink as="span">3</Ink>, <Ink as="span">Build-tool on-disk caches (webpack, Vite, …)¹</Ink>, <Ink as="span"><code>{"<consumer>/node_modules/{.cache, .vite, \u2026}"}</code></Ink>, <Ink as="span"><code>nicely --clean</code></Ink>] },
-    { id: "3", values: [<Ink as="span">4</Ink>, <Ink as="span">Linked package singleton conflicts</Ink>, <Ink as="span"><code>{"<linked-pkg>/node_modules/{react,styled-components,\u2026}"}</code></Ink>, <Ink as="span"><code>nicely --dedupe</code></Ink>] },
-    { id: "4", values: [<Ink as="span">5</Ink>, <Ink as="span">nice-* package dists</Ink>, <Ink as="span"><code>{"<nice-pkg>/dist/"}</code></Ink>, <Ink as="span">each package's <code>npm run build</code>, or <code>nicely --build-all</code></Ink>] },
-    { id: "5", values: [<Ink as="span">6</Ink>, <Ink as="span">Generated source (nice-styles only)</Ink>, <Ink as="span"><code>nice-styles/src/generated/</code></Ink>, <Ink as="span"><code>nice-styles</code>'s <code>npm run build</code> (runs <code>clean.ts</code> first)</Ink>] },
-    { id: "6", values: [<Ink as="span">7</Ink>, <Ink as="span">Dev-server process (in-memory module graph + held port)</Ink>, <Ink as="span">running webpack-dev-server / Vite</Ink>, <Ink as="span"><code>nicely --clean</code> kills processes on declared ports; manual restart after</Ink>] },
-    { id: "7", values: [<Ink as="span">8</Ink>, <Ink as="span">Browser module cache</Ink>, <Ink as="span">RAM in the browser tab</Ink>, <Ink as="span">hard reload (Cmd+Shift+R)</Ink>] },
+    { id: "0", values: [<Ink>1</Ink>, <Ink>Global npm cache</Ink>, <Ink><code>~/.npm/_cacache</code></Ink>, <Ink><code>npm cache clean --force</code></Ink>] },
+    { id: "1", values: [<Ink>2</Ink>, <Ink>Consumer <code>node_modules</code> + lockfile</Ink>, <Ink><code>{"<consumer>/node_modules"}</code>, <code>{"<consumer>/package-lock.json"}</code></Ink>, <Ink><code>rm -rf node_modules package-lock.json && npm install</code> (or <code>website</code> <code>npm run clean</code>)</Ink>] },
+    { id: "2", values: [<Ink>3</Ink>, <Ink>Build-tool on-disk caches (webpack, Vite, …)¹</Ink>, <Ink><code>{"<consumer>/node_modules/{.cache, .vite, \u2026}"}</code></Ink>, <Ink><code>nicely --clean</code></Ink>] },
+    { id: "3", values: [<Ink>4</Ink>, <Ink>Linked package singleton conflicts</Ink>, <Ink><code>{"<linked-pkg>/node_modules/{react,styled-components,\u2026}"}</code></Ink>, <Ink><code>nicely --dedupe</code></Ink>] },
+    { id: "4", values: [<Ink>5</Ink>, <Ink>nice-* package dists</Ink>, <Ink><code>{"<nice-pkg>/dist/"}</code></Ink>, <Ink>each package's <code>npm run build</code>, or <code>nicely --build-all</code></Ink>] },
+    { id: "5", values: [<Ink>6</Ink>, <Ink>Generated source (nice-styles only)</Ink>, <Ink><code>nice-styles/src/generated/</code></Ink>, <Ink><code>nice-styles</code>'s <code>npm run build</code> (runs <code>clean.ts</code> first)</Ink>] },
+    { id: "6", values: [<Ink>7</Ink>, <Ink>Dev-server process (in-memory module graph + held port)</Ink>, <Ink>running webpack-dev-server / Vite</Ink>, <Ink><code>nicely --clean</code> kills processes on declared ports; manual restart after</Ink>] },
+    { id: "7", values: [<Ink>8</Ink>, <Ink>Browser module cache</Ink>, <Ink>RAM in the browser tab</Ink>, <Ink>hard reload (Cmd+Shift+R)</Ink>] },
   ] }]}
 />
 
-<Ink as="span">¹ <code>nicely --clean</code> currently knows about <code>node_modules/.cache</code> (webpack) and <code>node_modules/.vite</code> (Vite). Other framework caches — Next.js <code>.next/cache</code>, Remix <code>build/</code>, Astro <code>dist/</code>, Parcel <code>.parcel-cache</code> — are <Ink as="span" weight="semibold">not</Ink> covered until their path is added to <code>CACHE_DIRS</code> in <code>toolkit/src/linking/cache-cleaner.js</code>. Adding a new framework to the workspace requires that single edit.</Ink>
+<Ink>¹</Ink>
+<Ink code>nicely --clean</Ink>
+<Ink>currently knows about</Ink>
+<Ink code>node_modules/.cache</Ink>
+<Ink>(webpack) and</Ink>
+<Ink code>node_modules/.vite</Ink>
+<Ink>(Vite). Other framework caches — Next.js</Ink>
+<Ink code>.next/cache</Ink><Ink>, Remix</Ink>
+<Ink code>build/</Ink><Ink>, Astro</Ink>
+<Ink code>dist/</Ink><Ink>, Parcel</Ink>
+<Ink code>.parcel-cache</Ink>
+<Ink>— are</Ink>
+<Ink weight="semibold">not</Ink>
+<Ink>covered until their path is added to</Ink>
+<Ink code>CACHE_DIRS</Ink>
+<Ink>in</Ink>
+<Ink code>toolkit/src/linking/cache-cleaner.js</Ink><Ink>. Adding a new framework to the workspace requires that single edit.</Ink>
 
 <Line />
 
 <Ink as="h2">The three <Code code="nicely" language="bash" inlined /> operations</Ink>
 
-<Ink as="span"><code>nicely --clean</code>, <code>--dedupe</code>, and <code>--build-all</code> are the workspace-level toolkit operations. They do not overlap. Each addresses a distinct layer at a distinct location. Mistaking one for another produces silent failure.</Ink>
+<Ink code>nicely --clean</Ink><Ink>,</Ink>
+<Ink code>--dedupe</Ink><Ink>, and</Ink>
+<Ink code>--build-all</Ink>
+<Ink>are the workspace-level toolkit operations. They do not overlap. Each addresses a distinct layer at a distinct location. Mistaking one for another produces silent failure.</Ink>
 
 <Ink as="h3">Distinct targets</Ink>
 
@@ -53,17 +75,21 @@ nicely --build-all       →    <linked-pkg>/dist/                              
 <DataTable
   columns={[{ key: "c0", header: "Command" }, { key: "c1", header: "What it does" }, { key: "c2", header: "What it does **not** do" }]}
   tables={[{ rows: [
-    { id: "0", values: [<Ink as="span"><code>nicely --clean</code></Ink>, <Ink as="span">Discovers each consumer's dev-server ports (parses <code>.env</code> <code>PORT=</code> entries and <code>package.json</code> script <code>-p</code>/<code>--port</code> flags), kills any process bound to those ports, then wipes webpack <code>.cache</code> and Vite <code>.vite</code> from every consumer's <code>node_modules</code></Ink>, <Ink as="span">Doesn't rebuild anything. Doesn't touch linked package internals. Doesn't reinstall. Doesn't restart killed servers.</Ink>] },
-    { id: "1", values: [<Ink as="span"><code>nicely --dedupe</code></Ink>, <Ink as="span">Removes duplicate <code>react</code> / <code>react-dom</code> / <code>styled-components</code> / etc. from every linked nice-* package's <code>node_modules</code></Ink>, <Ink as="span">Doesn't rebuild any dist. Doesn't touch consumer caches. Doesn't reinstall.</Ink>] },
-    { id: "2", values: [<Ink as="span"><code>nicely --build-all</code></Ink>, <Ink as="span">Walks registry tier order, runs <code>npm run build</code> in every linked nice-* package</Ink>, <Ink as="span">Doesn't clear any cache. Doesn't touch consumer <code>node_modules</code>. Doesn't restart dev servers.</Ink>] },
+    { id: "0", values: [<Ink><code>nicely --clean</code></Ink>, <Ink>Discovers each consumer's dev-server ports (parses <code>.env</code> <code>PORT=</code> entries and <code>package.json</code> script <code>-p</code>/<code>--port</code> flags), kills any process bound to those ports, then wipes webpack <code>.cache</code> and Vite <code>.vite</code> from every consumer's <code>node_modules</code></Ink>, <Ink>Doesn't rebuild anything. Doesn't touch linked package internals. Doesn't reinstall. Doesn't restart killed servers.</Ink>] },
+    { id: "1", values: [<Ink><code>nicely --dedupe</code></Ink>, <Ink>Removes duplicate <code>react</code> / <code>react-dom</code> / <code>styled-components</code> / etc. from every linked nice-* package's <code>node_modules</code></Ink>, <Ink>Doesn't rebuild any dist. Doesn't touch consumer caches. Doesn't reinstall.</Ink>] },
+    { id: "2", values: [<Ink><code>nicely --build-all</code></Ink>, <Ink>Walks registry tier order, runs <code>npm run build</code> in every linked nice-* package</Ink>, <Ink>Doesn't clear any cache. Doesn't touch consumer <code>node_modules</code>. Doesn't restart dev servers.</Ink>] },
   ] }]}
 />
 
-<Ink as="span">The port-kill in <code>nicely --clean</code> exists because a running dev server holds an in-memory module graph and repopulates its on-disk cache the moment it's wiped. Wiping cache without killing the server is a no-op against the observable symptom. Use <code>--no-kill</code> to wipe caches only (e.g. CI environments).</Ink>
+<Ink>The port-kill in</Ink>
+<Ink code>nicely --clean</Ink>
+<Ink>exists because a running dev server holds an in-memory module graph and repopulates its on-disk cache the moment it's wiped. Wiping cache without killing the server is a no-op against the observable symptom. Use</Ink>
+<Ink code>--no-kill</Ink>
+<Ink>to wipe caches only (e.g. CI environments).</Ink>
 
 <Ink as="h3">How they combine</Ink>
 
-<Ink as="span">For the "everything is stale" reset, the three are chained in this order:</Ink>
+<Ink>For the "everything is stale" reset, the three are chained in this order:</Ink>
 
 ```bash
 nicely --clean    # kill dev servers + invalidate layer 3
@@ -71,29 +97,30 @@ nicely --dedupe       # resolve layer 4 singleton drift
 nicely --build-all       # rebuild layer 5 in tier order
 ```
 
-<Ink as="span">Then restart any dev server (<code>npm run dev</code> in each consumer) and hard-reload the browser tab.</Ink>
+<Ink>Then restart any dev server (</Ink><Ink code>npm run dev</Ink>
+<Ink>in each consumer) and hard-reload the browser tab.</Ink>
 
-<Ink as="span"><Ink as="span" weight="semibold">Order matters:</Ink></Ink>
+<Ink weight="semibold">Order matters:</Ink>
 
 <ul>
-  <li><Ink as="span"><Ink as="span" weight="semibold"><code>--clean</code> first</Ink> so the consumer's dev server is killed and its build-tool analysis is invalidated before the new dist appears.</Ink></li>
-  <li><Ink as="span"><Ink as="span" weight="semibold"><code>--dedupe</code> before <code>--build-all</code></Ink> so singleton cleanup doesn't run *after* a build that expected the singletons in place.</Ink></li>
-  <li><Ink as="span"><Ink as="span" weight="semibold"><code>--build-all</code> last</Ink> because it produces the artifact every later step reads.</Ink></li>
+  <li><Ink><Ink weight="semibold"><code>--clean</code> first</Ink> so the consumer's dev server is killed and its build-tool analysis is invalidated before the new dist appears.</Ink></li>
+  <li><Ink><Ink weight="semibold"><code>--dedupe</code> before <code>--build-all</code></Ink> so singleton cleanup doesn't run *after* a build that expected the singletons in place.</Ink></li>
+  <li><Ink><Ink weight="semibold"><code>--build-all</code> last</Ink> because it produces the artifact every later step reads.</Ink></li>
 </ul>
 
 <Line />
 
-<Ink as="h2">What the three <Code code="nicely" language="bash" inlined /> operations do <Ink as="span" weight="semibold">not</Ink> touch</Ink>
+<Ink as="h2">What the three <Code code="nicely" language="bash" inlined /> operations do <Ink weight="semibold">not</Ink> touch</Ink>
 
-<Ink as="span">These belong to other owners:</Ink>
+<Ink>These belong to other owners:</Ink>
 
 <DataTable
   columns={[{ key: "c0", header: "Concern" }, { key: "c1", header: "Tool" }, { key: "c2", header: "Owned by" }]}
   tables={[{ rows: [
-    { id: "0", values: [<Ink as="span">Consumer <code>node_modules</code> reinstall (layer 2)</Ink>, <Ink as="span"><code>npm install</code> per consumer, or <code>website</code>'s <code>npm run clean</code></Ink>, <Ink as="span">the consumer</Ink>] },
-    { id: "1", values: [<Ink as="span">Global npm cache (layer 1)</Ink>, <Ink as="span"><code>npm cache clean --force</code></Ink>, <Ink as="span">npm itself</Ink>] },
-    { id: "2", values: [<Ink as="span">Restarting a killed dev server (after <code>--clean</code>)</Ink>, <Ink as="span"><code>npm run dev</code> (or equivalent) in each consumer</Ink>, <Ink as="span">the user</Ink>] },
-    { id: "3", values: [<Ink as="span">Browser tab module cache (layer 8)</Ink>, <Ink as="span">hard reload</Ink>, <Ink as="span">the user</Ink>] },
+    { id: "0", values: [<Ink>Consumer <code>node_modules</code> reinstall (layer 2)</Ink>, <Ink><code>npm install</code> per consumer, or <code>website</code>'s <code>npm run clean</code></Ink>, <Ink>the consumer</Ink>] },
+    { id: "1", values: [<Ink>Global npm cache (layer 1)</Ink>, <Ink><code>npm cache clean --force</code></Ink>, <Ink>npm itself</Ink>] },
+    { id: "2", values: [<Ink>Restarting a killed dev server (after <code>--clean</code>)</Ink>, <Ink><code>npm run dev</code> (or equivalent) in each consumer</Ink>, <Ink>the user</Ink>] },
+    { id: "3", values: [<Ink>Browser tab module cache (layer 8)</Ink>, <Ink>hard reload</Ink>, <Ink>the user</Ink>] },
   ] }]}
 />
 
@@ -107,7 +134,10 @@ nicely --build-all       # rebuild layer 5 in tier order
 nicely --clean
 ```
 
-<Ink as="span">Then restart the dev server (<code>npm run dev</code> inside the consumer) and hard-reload the browser tab. <code>nicely --clean</code> killed the old process and wiped the cache; you bring the server back up when ready.</Ink>
+<Ink>Then restart the dev server (</Ink><Ink code>npm run dev</Ink>
+<Ink>inside the consumer) and hard-reload the browser tab.</Ink>
+<Ink code>nicely --clean</Ink>
+<Ink>killed the old process and wiped the cache; you bring the server back up when ready.</Ink>
 
 <Ink as="h4">"Invalid hook call" or styled-components context mismatch</Ink>
 
@@ -115,7 +145,9 @@ nicely --clean
 nicely --dedupe
 ```
 
-<Ink as="span">The classic duplicate-React-instance error. See <a href="/?path=/docs/toolkit-2-dedupe--docs" target="_top">Toolkit → Dedupe</a> for the underlying cause.</Ink>
+<Ink>The classic duplicate-React-instance error. See</Ink>
+<Ink><a href="/?path=/docs/toolkit-2-dedupe--docs" target="_top">Toolkit → Dedupe</a></Ink>
+<Ink>for the underlying cause.</Ink>
 
 <Ink as="h4">Consumer reports a missing export from a foundation package after a refactor</Ink>
 
@@ -123,7 +155,9 @@ nicely --dedupe
 nicely --build-all
 ```
 
-<Ink as="span">The consumer is reading an older <code>dist/</code> than the source now produces. Rebuild every linked package in tier order.</Ink>
+<Ink>The consumer is reading an older</Ink>
+<Ink code>dist/</Ink>
+<Ink>than the source now produces. Rebuild every linked package in tier order.</Ink>
 
 <Ink as="h4">Fresh clone of the workspace</Ink>
 
@@ -135,7 +169,10 @@ npm install
 nicely --build-all
 ```
 
-<Ink as="span">The <code>prepare</code> hook no longer rebuilds linked packages on consumer installs (see <code>manifest/.nice/reports/npm-install-breaks-consumers.md</code>). New clones must build dists explicitly.</Ink>
+<Ink>The</Ink>
+<Ink code>prepare</Ink>
+<Ink>hook no longer rebuilds linked packages on consumer installs (see</Ink>
+<Ink code>manifest/.nice/reports/npm-install-breaks-consumers.md</Ink><Ink>). New clones must build dists explicitly.</Ink>
 
 <Ink as="h4">Nuclear: I don't know what's wrong</Ink>
 
@@ -145,13 +182,17 @@ nicely --dedupe
 nicely --build-all
 ```
 
-<Ink as="span">Restart every dev server. Hard-reload every open browser tab.</Ink>
+<Ink>Restart every dev server. Hard-reload every open browser tab.</Ink>
 
-<Ink as="span">If that doesn't fix it, escalate to a per-consumer reinstall (<code>rm -rf node_modules package-lock.json && npm install</code>) before reaching for <code>npm cache clean --force</code> — the global npm cache is almost never the cause.</Ink>
+<Ink>If that doesn't fix it, escalate to a per-consumer reinstall (</Ink><Ink code>rm -rf node_modules package-lock.json && npm install</Ink><Ink>) before reaching for</Ink>
+<Ink code>npm cache clean --force</Ink>
+<Ink>— the global npm cache is almost never the cause.</Ink>
 
 <Line />
 
 <Ink as="h2">Why three <Code code="nicely" language="bash" inlined /> operations and not one</Ink>
 
-<Ink as="span">Each addresses a distinct concern with a distinct target directory and a distinct trigger symptom. A single umbrella verb would have to either over-fire (touch directories the symptom doesn't need) or under-fire (miss the directory the symptom does need). The three verbs are exhaustive for the workspace-level operations they cover and orthogonal to one another. Concerns outside the triad — consumer <code>node_modules</code> reinstall, global npm cache, browser hard reload — are owned by other tools and intentionally not pulled in.</Ink>
+<Ink>Each addresses a distinct concern with a distinct target directory and a distinct trigger symptom. A single umbrella verb would have to either over-fire (touch directories the symptom doesn't need) or under-fire (miss the directory the symptom does need). The three verbs are exhaustive for the workspace-level operations they cover and orthogonal to one another. Concerns outside the triad — consumer</Ink>
+<Ink code>node_modules</Ink>
+<Ink>reinstall, global npm cache, browser hard reload — are owned by other tools and intentionally not pulled in.</Ink>
 

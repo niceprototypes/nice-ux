@@ -60,6 +60,18 @@ export const tokenRenderers: Record<string, Renderer> = {
     />
   ),
 
+  // A bordered cell under both themes, its border the large width times the scale: the
+  // night half reads thinner (0.9) than the day half (1).
+  "tokens-borders-strokewidthscale": (variant) => (
+    <ThemeSplit>
+      <PreviewCell
+        height={getToken("size", "large")}
+        borderColor={getToken("color")}
+        borderWidth={`calc(${getToken("borderWidth", "large")} * ${getToken("strokeWidthScale", variant)})`}
+      />
+    </ThemeSplit>
+  ),
+
   // One swatch under both themes; the cascade resolves each half.
   "tokens-colors-backgroundcolor": (variant) => (
     <ThemeSplit>

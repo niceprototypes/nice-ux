@@ -4,7 +4,8 @@
 // renders one entry.
 import { useState } from "react"
 import { Calendar } from "nice-react-calendar"
-import { StylesProvider } from "nice-react-styles"
+import Flex from "nice-react-flex"
+import { StylesProvider, Theme, getToken } from "nice-react-styles"
 import type { ComponentExample } from "./examples.types"
 
 export type { ComponentExample, ExampleVariant } from "./examples.types"
@@ -177,6 +178,61 @@ export const calendarFirstDayOfWeek = {
     variant === "1" ? `<Calendar size="small" locale="en-US" firstDayOfWeek={1} />` : `<Calendar size="small" locale="en-US" />`,
 } satisfies ComponentExample
 
+export const calendarSize = {
+  name: "size",
+  description: "Day-cell size (calendar.cell.size) and the size of the month-navigation buttons.",
+  variants: ["smaller", "small", "base", "large", "larger"],
+  default: "base",
+  preview: variant => (
+    <Calendar
+      size={variant}
+      aria-label="Start date"
+      defaultValue="2026-12-31"
+    />
+  ),
+  code: variant =>
+    variant === "base"
+      ? `<Calendar aria-label="Start date" />`
+      : `<Calendar size="${variant}" aria-label="Start date" />`,
+} satisfies ComponentExample
+
+export const calendarAriaLabel = {
+  name: "aria-label",
+  description: "Accessible name of the calendar root, a role=\"group\" element.",
+  variants: ["Start date"],
+  default: "Start date",
+  preview: variant => (
+    <Calendar
+      size="small"
+      aria-label={variant}
+    />
+  ),
+  code: variant => `<Calendar aria-label="${variant}" />`,
+} satisfies ComponentExample
+
+export const calendarTheme = {
+  name: "theme",
+  description: "Pins token resolution to a theme. Each preview sits on its theme's base background.",
+  variants: ["day", "night"],
+  default: "day",
+  preview: variant => (
+    <Theme name={variant}>
+      <Flex
+        padding="small"
+        style={{ backgroundColor: getToken("backgroundColor", "base") }}
+      >
+        <Calendar
+          size="small"
+          aria-label="Start date"
+          defaultValue="2026-12-31"
+          theme={variant}
+        />
+      </Flex>
+    </Theme>
+  ),
+  code: variant => `<Calendar aria-label="Start date" theme="${variant}" />`,
+} satisfies ComponentExample
+
 /**
  * Wraps a facet's preview in `sb-unstyled` so the docs stylesheet's table-cell
  * padding does not inflate the calendar's own grid cells; with size="small" the
@@ -195,6 +251,9 @@ export const calendarExamples = {
   isDateDisabled: unstyled(calendarIsDateDisabled),
   locale: unstyled(calendarLocale),
   firstDayOfWeek: unstyled(calendarFirstDayOfWeek),
+  size: unstyled(calendarSize),
+  ariaLabel: unstyled(calendarAriaLabel),
+  theme: unstyled(calendarTheme),
 } satisfies Record<string, ComponentExample>
 
 /** Calendar facets in Docs-page order. */

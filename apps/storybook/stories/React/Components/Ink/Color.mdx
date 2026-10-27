@@ -14,7 +14,7 @@ import { toSource } from "../../../../src/services"
   Sets the text color using color tokens.
 </StoryDescription>
 
-<Ink as="span">Pass an object to adjust the token's channels. The color stays a token, so it still follows day and night:</Ink>
+<Ink>Pass an object to adjust the token's channels. The color stays a token, so it still follows day and night:</Ink>
 
 ```tsx
 <Ink color={{ name: "highlight", transform: [null, null, 40, null] }}>
@@ -22,7 +22,16 @@ import { toSource } from "../../../../src/services"
 </Ink>
 ```
 
-<Ink as="span">Channels are <code>[hue, saturation, lightness, alpha]</code>. A number sets the channel, <code>"+10"</code> and <code>"-10"</code> shift it, <code>"*0.5"</code> scales it, and <code>null</code> leaves it alone. Scaling travels better than shifting — a fixed shift that suits the day value can run past the end of the scale at night.</Ink>
+<Ink>Channels are</Ink>
+<Ink code>[hue, saturation, lightness, alpha]</Ink><Ink>. A number sets the channel,</Ink>
+<Ink code>"+10"</Ink>
+<Ink>and</Ink>
+<Ink code>"-10"</Ink>
+<Ink>shift it,</Ink>
+<Ink code>"*0.5"</Ink>
+<Ink>scales it, and</Ink>
+<Ink code>null</Ink>
+<Ink>leaves it alone. Scaling travels better than shifting — a fixed shift that suits the day value can run past the end of the scale at night.</Ink>
 
 <DataTable
   showHeader={false}

@@ -35,18 +35,30 @@ const config = {
 export default config
 ```
 
-<Ink as="span">Peers: <code>storybook</code> ≥ 10 and <code>storybook-dark-mode</code> ≥ 5. The manager must already expose the Nice <code>--np--*</code> custom properties — the addon styles the tree with them but does not inject the token sheet itself, so the theme and branding stay yours.</Ink>
+<Ink>Peers:</Ink>
+<Ink code>storybook</Ink>
+<Ink>≥ 10 and</Ink>
+<Ink code>storybook-dark-mode</Ink>
+<Ink>≥ 5. The manager must already expose the Nice</Ink>
+<Ink code>--np--*</Ink>
+<Ink>custom properties — the addon styles the tree with them but does not inject the token sheet itself, so the theme and branding stay yours.</Ink>
 
 <Ink as="h3">What it draws</Ink>
 
-<Ink as="span">The tree's connector lines and folder glyphs are masked SVGs painted with token colors, so they flip with day / night rather than shipping two icon sets. Lines are aware of both depth and selection: a branch on the path to the open story reads as active, and one merely above it does not.</Ink>
+<Ink>The tree's connector lines and folder glyphs are masked SVGs painted with token colors, so they flip with day / night rather than shipping two icon sets. Lines are aware of both depth and selection: a branch on the path to the open story reads as active, and one merely above it does not.</Ink>
 
 <Ink as="h3">How it knows the shape</Ink>
 
-<Ink as="span">CSS cannot see tree structure — the sidebar is a flat list of rows, each naming its parent. <code>tagSidebarPaths</code> walks that list and stamps derived attributes on every row: its depth, whether it ends a branch, whether it is an ancestor of the selection, and whether it sits inside the selection's group. The stylesheet then selects on those attributes.</Ink>
+<Ink>CSS cannot see tree structure — the sidebar is a flat list of rows, each naming its parent.</Ink>
+<Ink code>tagSidebarPaths</Ink>
+<Ink>walks that list and stamps derived attributes on every row: its depth, whether it ends a branch, whether it is an ancestor of the selection, and whether it sits inside the selection's group. The stylesheet then selects on those attributes.</Ink>
 
-<Ink as="span">It re-runs on tree re-renders and on selection changes, and its own writes are outside the observed attribute set, so it does not retrigger itself.</Ink>
+<Ink>It re-runs on tree re-renders and on selection changes, and its own writes are outside the observed attribute set, so it does not retrigger itself.</Ink>
 
 <Ink as="h3">Caveat</Ink>
 
-<Ink as="span">The styling depends on Storybook's <Ink as="span" weight="semibold">private</Ink> sidebar DOM — <code>.sidebar-item</code>, <code>data-nodetype</code>, and the element shapes inside each row — verified against Storybook 10. A Storybook internal change can require an update here, which is the trade for restyling a surface Storybook does not expose.</Ink>
+<Ink>The styling depends on Storybook's</Ink>
+<Ink weight="semibold">private</Ink>
+<Ink>sidebar DOM —</Ink>
+<Ink code>.sidebar-item</Ink><Ink>,</Ink>
+<Ink code>data-nodetype</Ink><Ink>, and the element shapes inside each row — verified against Storybook 10. A Storybook internal change can require an update here, which is the trade for restyling a surface Storybook does not expose.</Ink>

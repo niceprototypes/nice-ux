@@ -35,7 +35,21 @@ import Input from "nice-react-input"
 
 <Ink as="h2">Guide</Ink>
 
-<Ink as="span">Input renders a wrapper, the field chrome (border, radius, background, padding, focus ring), around <code>start</code>, the native control and <code>end</code>. <code>className</code> and <code>style</code> apply to the wrapper. <code>ref</code>, <code>id</code>, <code>name</code>, <code>aria-*</code>, <code>data-testid</code> and every native attribute apply to the native control, which stays the focus target. <code>onChange</code> receives the new string value, then the event.</Ink>
+<Ink>Input renders a wrapper, the field chrome (border, radius, background, padding, focus border), around</Ink>
+<Ink code>start</Ink><Ink>, the native control and</Ink>
+<Ink code>end</Ink><Ink>.</Ink>
+<Ink code>className</Ink>
+<Ink>and</Ink>
+<Ink code>style</Ink>
+<Ink>apply to the wrapper.</Ink>
+<Ink code>ref</Ink><Ink>,</Ink>
+<Ink code>id</Ink><Ink>,</Ink>
+<Ink code>name</Ink><Ink>,</Ink>
+<Ink code>aria-*</Ink><Ink>,</Ink>
+<Ink code>data-testid</Ink>
+<Ink>and every native attribute apply to the native control, which stays the focus target.</Ink>
+<Ink code>onChange</Ink>
+<Ink>receives the new string value, then the event.</Ink>
 
 ```jsx
 <Input className="wrapper-class" ref={controlRef} aria-label="Email" />
@@ -45,16 +59,48 @@ import Input from "nice-react-input"
 // </div>
 ```
 
-<Ink as="span"><code>backgroundColor</code> and <code>borderColor</code> take token variants, not CSS colour strings: a <code>BackgroundColorType</code> / <code>BorderColorType</code> name, or an object <code>{"{ name, theme?, breakpoint?, inverse?, transform? }"}</code>. They resolve through the <code>input.backgroundColor</code> and <code>input.borderColor</code> component groups.</Ink>
+<Ink code>backgroundColor</Ink>
+<Ink>and</Ink>
+<Ink code>borderColor</Ink>
+<Ink>take token variants, not CSS colour strings: a</Ink>
+<Ink code>BackgroundColorType</Ink>
+<Ink>/</Ink>
+<Ink code>BorderColorType</Ink>
+<Ink>name, or an object</Ink>
+<Ink code>{"{ name, theme?, breakpoint?, inverse?, transform? }"}</Ink><Ink>. They resolve through the</Ink>
+<Ink code>input.backgroundColor</Ink>
+<Ink>and</Ink>
+<Ink code>input.borderColor</Ink>
+<Ink>component groups.</Ink>
 
 ```jsx
 <Input backgroundColor="raised" borderColor="link" />
 ```
 
-<Ink as="span">The native control draws no outline. When anything inside the chrome has <code>:focus-visible</code> (the control, or a button in a slot), the wrapper draws an outline ring from the <code>input.focusRing</code> tokens; it adds no layout. Pointer focus changes only the border colour.</Ink>
+<Ink>Neither the native control nor the wrapper draws an outline. While the control has focus (pointer or keyboard), the wrapper's border takes the</Ink>
+<Ink code>input.focusRing.color</Ink>
+<Ink>token. A ghosted focus hides that border, so the wrapper draws an outline on</Ink>
+<Ink code>:focus-visible</Ink>
+<Ink>from</Ink>
+<Ink code>input.focusRing.width</Ink><Ink>,</Ink>
+<Ink code>input.focusRing.color</Ink>
+<Ink>and</Ink>
+<Ink code>input.focusRing.offset</Ink><Ink>.</Ink>
 
-<Ink as="span"><code>start</code> and <code>end</code> sit inside the chrome on the inline-start and inline-end sides, so they mirror in RTL. Input adds no <code>aria-hidden</code>: wrap decorative icons in <code>aria-hidden="true"</code>, and give interactive content such as a clear button its own <code>aria-label</code>.</Ink>
+<Ink code>start</Ink>
+<Ink>and</Ink>
+<Ink code>end</Ink>
+<Ink>sit inside the chrome on the inline-start and inline-end sides, so they mirror in RTL. Input adds no</Ink>
+<Ink code>aria-hidden</Ink><Ink>: wrap decorative icons in</Ink>
+<Ink code>aria-hidden="true"</Ink><Ink>, and give interactive content such as a clear button its own</Ink>
+<Ink code>aria-label</Ink><Ink>.</Ink>
 
-<Ink as="span"><code>width</code> sizes the chrome from the <code>input.width</code> scale. Numeric variants hold that many characters at every <code>size</code>, so the width hints at the expected answer length. <code>full</code> (default) fills the container.</Ink>
+<Ink code>width</Ink>
+<Ink>sizes the chrome from the</Ink>
+<Ink code>input.width</Ink>
+<Ink>scale. Numeric variants hold that many characters at every</Ink>
+<Ink code>size</Ink><Ink>, so the width hints at the expected answer length.</Ink>
+<Ink code>full</Ink>
+<Ink>(default) fills the container.</Ink>
 
 <Callout type="hint">`className` and `style` style the wrapper; `ref`, `id` and `aria-*` go to the native control.</Callout>

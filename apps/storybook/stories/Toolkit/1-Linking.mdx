@@ -11,7 +11,9 @@ import Ink from "../../src/nice/Ink"
 
 <StoryHeader title="Linking" />
 
-<Ink as="span">Link a Nice package into the current project via a <code>file:</code> reference, then strip its duplicate singletons in one step.</Ink>
+<Ink>Link a Nice package into the current project via a</Ink>
+<Ink code>file:</Ink>
+<Ink>reference, then strip its duplicate singletons in one step.</Ink>
 
 ```bash
 # Link a single package (long form)
@@ -26,13 +28,19 @@ nicely ../react-icon
 nicely ../react-flex
 ```
 
-<Ink as="span">Linking rewrites the dependency to <code>file:../react-button</code> and runs a dedupe pass on the linked package so its <code>node_modules</code> doesn't shadow the app's React / styled-components.</Ink>
+<Ink>Linking rewrites the dependency to</Ink>
+<Ink code>file:../react-button</Ink>
+<Ink>and runs a dedupe pass on the linked package so its</Ink>
+<Ink code>node_modules</Ink>
+<Ink>doesn't shadow the app's React / styled-components.</Ink>
 
 <Line />
 
 <Ink as="h2"><Code code="--unlink" language="bash" inlined /></Ink>
 
-<Ink as="span">Restore every <code>file:</code> reference to its original npm version and reinstall from the registry.</Ink>
+<Ink>Restore every</Ink>
+<Ink code>file:</Ink>
+<Ink>reference to its original npm version and reinstall from the registry.</Ink>
 
 ```bash
 nicely --unlink
@@ -41,13 +49,24 @@ nicely --unlink
 nicely --unlink --dry-run
 ```
 
-<Ink as="span">Run <code>--unlink</code> before <code>npm install</code> inside a linked package (or re-run <code>nicely</code> afterward) — a fresh install reintroduces the singleton duplicates that linking removed.</Ink>
+<Ink>Run</Ink>
+<Ink code>--unlink</Ink>
+<Ink>before</Ink>
+<Ink code>npm install</Ink>
+<Ink>inside a linked package (or re-run</Ink>
+<Ink code>nicely</Ink>
+<Ink>afterward) — a fresh install reintroduces the singleton duplicates that linking removed.</Ink>
 
 <Line />
 
 <Ink as="h2"><Code code="--exclude" language="bash" inlined /> / <Code code="--add-exclude" language="bash" inlined /></Ink>
 
-<Ink as="span">The default singleton set removed from linked packages is <code>react</code>, <code>react-dom</code>, <code>styled-components</code>, <code>@types/react</code>, <code>@types/react-dom</code>.</Ink>
+<Ink>The default singleton set removed from linked packages is</Ink>
+<Ink code>react</Ink><Ink>,</Ink>
+<Ink code>react-dom</Ink><Ink>,</Ink>
+<Ink code>styled-components</Ink><Ink>,</Ink>
+<Ink code>@types/react</Ink><Ink>,</Ink>
+<Ink code>@types/react-dom</Ink><Ink>.</Ink>
 
 ```bash
 # Replace the default set entirely

@@ -27,7 +27,7 @@ const ResetPropertiesItem: React.FC<ResetPropertiesItemProps> = ({ token, descri
         <Ink as="h3" code>{token}</Ink>
       </ClickToCopy>
     )}
-    {description != null && <Ink as="span">{description}</Ink>}
+    {description != null && <Ink>{description}</Ink>}
     <Flex wrap="wrap">
       {elements.map(element => (
         <React.Fragment key={element}>

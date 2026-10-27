@@ -14,12 +14,12 @@ import { DataTable } from "../../src/components/DataTable"
   description="Single-home reference topics that cross the phase folders — each lazy-loaded on demand."
 />
 
-<Ink as="span">Some subjects don't belong to a single phase of work. Rather than duplicate them across Read, Edit, and Build, they live once here and every phase folder points to them. You are *aware* they exist from the root File Tree; a body loads only when the task touches it.</Ink>
+<Ink>Some subjects don't belong to a single phase of work. Rather than duplicate them across Read, Edit, and Build, they live once here and every phase folder points to them. You are *aware* they exist from the root File Tree; a body loads only when the task touches it.</Ink>
 
 <DataTable
   columns={[{ key: "c0", header: "File" }, { key: "c1", header: "Contents" }]}
   tables={[{ rows: [
-    { id: "0", values: [<Ink as="span"><code>build-config.md</code></Ink>, <Ink as="span">Config packages (<code>nice-configuration</code> typescript/rollup/jest subpaths), per-package config standards, and the deviation audit — moved here from <code>edit/configuration.md</code> as its single home.</Ink>] },
+    { id: "0", values: [<Ink><code>build-config.md</code></Ink>, <Ink>Config packages (<code>nice-configuration</code> typescript/rollup/jest subpaths), per-package config standards, and the deviation audit — moved here from <code>edit/configuration.md</code> as its single home.</Ink>] },
   ] }]}
 />
 

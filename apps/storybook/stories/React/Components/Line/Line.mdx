@@ -1,0 +1,58 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../../src/components/Story"
+import Install from "../../../../src/components/Install"
+import { ComponentDemoTable } from "../../../../src/dataTables/components/demos/Components"
+import { lineExampleList } from "./examples"
+import NewLines from "../../../../src/components/NewLines"
+import Callout from "../../../../src/components/Callout"
+
+<Meta title="Components/Line" />
+
+<StoryHeader
+  title="Line"
+  description="A dashed line that frames its parent element: pill-shaped dashes, each with its own rim, centered on the edge."
+  repos={[
+    { name: "nice-react-line", url: "https://github.com/niceprototypes/nice-react-line", license: "MIT" },
+  ]}
+/>
+
+<NewLines count={3} />
+
+<Install package="react-line" />
+
+```jsx
+import Line from "nice-react-line"
+
+<div style={{ position: "relative", borderRadius: 12 }}>
+  <Line />
+</div>
+```
+
+<NewLines count={3} />
+
+<ComponentDemoTable examples={lineExampleList} />
+
+<NewLines count={3} />
+
+## Guide
+
+Line fills its parent and draws on the parent's edge, so the parent must be positioned (relative, absolute, fixed or sticky). The edge runs through the middle of every dash: half of each dash sits outside the parent. Line never takes pointer events.
+
+Each dash is a pill, a stroke with round ends, and sits on a slightly wider stroke of the same pattern, its rim. The rim keeps the dashes visible on a background close to their color.
+
+The dash pattern is fitted to the frame: Line measures the path around the corners and stretches the pattern slightly so a whole number of dashes goes around. The loop closes without a short dash or a doubled one, at any size. Line re-measures when its parent resizes.
+
+By default the corners follow the parent's own border radius: every corner on its own, percentages and elliptical radii included, scaled down the way the browser does when they don't fit.
+
+Everything about the dashes is a component token, so a theme or a single subtree can restyle them without props:
+
+```css
+.my-frame {
+  --np--line--border-color: var(--np--color--link);
+  --np--line--rim-color: var(--np--background-color);
+  --np--line--width: 3px;
+  --np--line--dash-length: 24px;
+}
+```
+
+<Callout type="hint">Put Line inside a positioned element. It frames that element exactly, whatever its size and corners.</Callout>

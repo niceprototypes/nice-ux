@@ -6,6 +6,7 @@ import { Field } from "nice-react-field"
 import Icon from "nice-react-icon"
 import { cap } from "../../../../../src/dataTables/utilities"
 import type { ComponentExample } from "./examples.types"
+import type { LifecycleStep } from "../../../../../src/components/LifecycleStory"
 
 export type { ComponentExample, ExampleVariant } from "./examples.types"
 
@@ -211,7 +212,7 @@ export const selectSize = {
 export const selectStatus = {
   name: "status",
   description:
-    "Passed through to Input's semantic chrome styles. disabled also stops the control from opening (or disables the native select) and dims the chevron.",
+    "Passed through to Input's semantic chrome styles. disabled also stops the control from opening (or disables the native select) and dims the chevron; the disabled prop has the same effect.",
   variants: ["base", "disabled", "error", "success", "warning"],
   preview: variant => (
     <Select
@@ -224,10 +225,26 @@ export const selectStatus = {
   code: variant => (variant === "base" ? `<Select />` : `<Select status="${variant}" />`),
 } satisfies ComponentExample
 
+export const selectWidth = {
+  name: "width",
+  description:
+    "Width of the field chrome, passed to Input (input.width token scale): numeric variants hold that many characters, full (default) fills the container. In combobox mode the listbox is at least as wide as the field.",
+  variants: ["2", "3", "4", "5", "10", "20", "full"],
+  default: "full",
+  preview: variant => (
+    <Select
+      width={variant}
+      aria-label={`Width ${variant}`}
+      options={sizes}
+    />
+  ),
+  code: variant => (variant === "full" ? `<Select />` : `<Select width="${variant}" />`),
+} satisfies ComponentExample
+
 export const selectInsideField = {
   name: "inside Field",
   description:
-    "Inside a Field the control takes the Field's id, label, description and error wiring, aria-invalid and required — inherited from Input, so no aria-label is needed. In combobox mode the listbox is labelled by the Field label. invalid sets the accessible state only; set status=\"error\" for the style.",
+    "Inside a Field the control takes the Field's id, label, description and error wiring, aria-invalid and required — inherited from Input, so no aria-label is needed. In combobox mode the listbox is labelled by the Field label. invalid also shows the error status unless status is set.",
   variants: ["base", "invalid"],
   preview: variant =>
     variant === "invalid" ? (
@@ -238,7 +255,6 @@ export const selectInsideField = {
       >
         <Select
           name="country"
-          status="error"
           placeholder="Choose a country"
           options={countries}
         />
@@ -262,7 +278,7 @@ export const selectInsideField = {
   error="Choose a country to continue."
   invalid
 >
-  <Select name="country" status="error" options={countries} />
+  <Select name="country" options={countries} />
 </Field>`
       : `<Field
   label="Country"
@@ -280,8 +296,41 @@ export const selectExamples = {
   placeholder: selectPlaceholder,
   size: selectSize,
   status: selectStatus,
+  width: selectWidth,
   insideField: selectInsideField,
 } satisfies Record<string, ComponentExample>
 
 /** Select facets in Docs-page order. */
 export const selectExampleList: ComponentExample[] = Object.values(selectExamples)
+
+/** Props a Select lifecycle step drives: the controlled value, disabled, and the Field's invalid. */
+type SelectLifecycleProps = { value: string; disabled?: boolean; invalid?: boolean }
+
+/**
+ * Select's lifecycle reachable through props, in order: rest → selected →
+ * disabled → invalid. Hover, focus, open, option hover / active and close are
+ * internal state with no controlling prop, so they are not shown.
+ */
+export const selectLifecycleSteps: ReadonlyArray<LifecycleStep<SelectLifecycleProps>> = [
+  { label: "rest", props: { value: "" } },
+  { label: "selected", props: { value: "nl" } },
+  { label: "disabled", props: { value: "nl", disabled: true } },
+  { label: "invalid", props: { value: "", invalid: true }, duration: "long" },
+]
+
+/** Renders the custom (combobox) Select inside a Field for one lifecycle step. */
+export const renderSelectLifecycle = ({ value, disabled, invalid }: SelectLifecycleProps) => (
+  <Field
+    label="Country"
+    error={invalid ? "Choose a country to continue." : undefined}
+    invalid={invalid}
+  >
+    <Select
+      name="country"
+      placeholder="Choose a country"
+      options={countries}
+      value={value}
+      disabled={disabled}
+    />
+  </Field>
+)

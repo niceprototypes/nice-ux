@@ -1,7 +1,6 @@
 import { Fragment } from "react"
 import Flex from "nice-react-flex"
 import Ink from "../../../../nice/Ink"
-import ContentFlex from "../../../../nice/ContentFlex"
 import { DataTableHeader } from "../DataTableHeader/DataTableHeader"
 import { DataTableRow } from "../DataTableRow/DataTableRow"
 import { RowDivider } from "../DataTableRow/DataTableRow.styles"
@@ -31,25 +30,34 @@ export const DataTableRows = ({
   // top-level table keeps its title as a standalone heading — cluster or not —
   // otherwise consecutive top-level tables render with no heading between them and
   // read as continuations of whichever one last had a real heading.
-  const titleInHeader = depth > 0 && table.rows != null && showHeader && table.name != null
+  const titleInHeader =
+    depth > 0 && table.rows != null && showHeader && table.name != null
   const showHeading = table.name != null && !titleInHeader
 
   return (
     <Flex direction="column">
       {showHeading ? (
-        <ContentFlex direction="column" wrapped={sectionWrapped}>
-          <Ink
-            as={level}
-            {...tableHeadingProps(level)}
-          >
-            {table.name}
-          </Ink>
-        </ContentFlex>
+        <Ink
+          as={level}
+          {...tableHeadingProps(level)}
+        >
+          {table.name}
+        </Ink>
       ) : null}
-      <Flex direction="column" gap="larger">
+      <Flex
+        direction="column"
+        gap="larger"
+      >
         {table.rows ? (
           <Flex direction="column">
-            {showHeader ? <DataTableHeader columns={columns} columnWidths={columnWidths} title={titleInHeader ? table.name : undefined} rowSpacing={rowSpacing} /> : null}
+            {showHeader ? (
+              <DataTableHeader
+                columns={columns}
+                columnWidths={columnWidths}
+                title={titleInHeader ? table.name : undefined}
+                rowSpacing={rowSpacing}
+              />
+            ) : null}
             {table.rows.map((item, index) => (
               <Fragment key={item.id}>
                 {/* Divider between rows (and under the header); never after the last. */}

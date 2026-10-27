@@ -24,13 +24,13 @@ nicely --dedupe
 
 <Ink as="h2">Source changes not appearing</Ink>
 
-<Ink as="span">Make sure the rebuild loop is running so a linked package's dist updates on change:</Ink>
+<Ink>Make sure the rebuild loop is running so a linked package's dist updates on change:</Ink>
 
 ```bash
 nicely --dev --watch   # separate terminal, alongside your dev server
 ```
 
-<Ink as="span">If a change still doesn't show, the dev server is holding a stale cache — bounce it:</Ink>
+<Ink>If a change still doesn't show, the dev server is holding a stale cache — bounce it:</Ink>
 
 ```bash
 nicely --vite          # wipes .vite + kills the dev-server port; restart after
@@ -40,9 +40,20 @@ nicely --vite          # wipes .vite + kills the dev-server port; restart after
 
 <Ink as="h2">Icon (SVG) edits not updating</Ink>
 
-<Ink as="span">Editing an SVG <Ink as="span" weight="semibold">does</Ink> rebuild the icon chain under <code>nicely --dev --watch</code> — <code>nice-icons</code> regenerates its index and <code>nice-react-icon</code>'s dist is rebuilt. The snag is on the dev-server side: <code>nice-react-icon</code> is consumed from <Ink as="span" weight="semibold">dist</Ink> (it can't be source-aliased because of SVGR), and a Vite dev server such as Storybook keeps serving its already-transformed copy until it's bounced.</Ink>
+<Ink>Editing an SVG</Ink>
+<Ink weight="semibold">does</Ink>
+<Ink>rebuild the icon chain under</Ink>
+<Ink code>nicely --dev --watch</Ink>
+<Ink>—</Ink>
+<Ink code>nice-icons</Ink>
+<Ink>regenerates its index and</Ink>
+<Ink code>nice-react-icon</Ink><Ink>'s dist is rebuilt. The snag is on the dev-server side:</Ink>
+<Ink code>nice-react-icon</Ink>
+<Ink>is consumed from</Ink>
+<Ink weight="semibold">dist</Ink>
+<Ink>(it can't be source-aliased because of SVGR), and a Vite dev server such as Storybook keeps serving its already-transformed copy until it's bounced.</Ink>
 
-<Ink as="span">So the fix is to refresh the dev server, not to rebuild again:</Ink>
+<Ink>So the fix is to refresh the dev server, not to rebuild again:</Ink>
 
 ```bash
 # The rebuilt dist already exists — just make the server re-read it
@@ -50,13 +61,25 @@ nicely --vite
 # then restart the dev server (Storybook, etc.)
 ```
 
-<Ink as="span">Only reach for <code>nicely --build-icons</code> when <code>nice-react-icon</code>'s dist is actually stale (e.g. you edited icons while no watcher was running). Do <Ink as="span" weight="semibold">not</Ink> run <code>--build-icons</code> while <code>--dev --watch</code> is live — they rebuild the same dist and race; <code>--build-icons</code> will prompt you to stop the watcher first.</Ink>
+<Ink>Only reach for</Ink>
+<Ink code>nicely --build-icons</Ink>
+<Ink>when</Ink>
+<Ink code>nice-react-icon</Ink><Ink>'s dist is actually stale (e.g. you edited icons while no watcher was running). Do</Ink>
+<Ink weight="semibold">not</Ink>
+<Ink>run</Ink>
+<Ink code>--build-icons</Ink>
+<Ink>while</Ink>
+<Ink code>--dev --watch</Ink>
+<Ink>is live — they rebuild the same dist and race;</Ink>
+<Ink code>--build-icons</Ink>
+<Ink>will prompt you to stop the watcher first.</Ink>
 
 <Line />
 
 <Ink as="h2">After installing dependencies in a linked package</Ink>
 
-<Ink as="span"><code>npm install</code> reintroduces the singleton duplicates. Either unlink first, or re-dedupe after:</Ink>
+<Ink code>npm install</Ink>
+<Ink>reintroduces the singleton duplicates. Either unlink first, or re-dedupe after:</Ink>
 
 ```bash
 # Option 1 — unlink before installing

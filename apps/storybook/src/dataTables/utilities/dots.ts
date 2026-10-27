@@ -1,5 +1,19 @@
 import { getToken, type ColorType } from "nice-react-styles"
 
+/** The bordered track every flex demo draws its items in. */
+export const trackStyle = {
+  borderRadius: `calc(${getToken("size", "smaller")} / 2 + 2px)`,
+  border: `${getToken("borderWidth")} solid ${getToken("borderColor")}`,
+}
+
+/** One demo dot: a token-sized square in a status color. */
+export const dotStyle = (color: ColorType, size: "smaller" | "small" = "smaller") => ({
+  backgroundColor: getToken("color", color),
+  borderRadius: `calc(${getToken("size", "smaller")} / 2)`,
+  width: getToken("size", size),
+  height: getToken("size", size),
+})
+
 /** Two equal dots — the row/column direction and padding demos. */
 export const twoDots = [
   { color: getToken("color", "error"), height: getToken("size", "smaller"), width: getToken("size", "smaller") },

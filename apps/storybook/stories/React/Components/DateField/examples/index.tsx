@@ -149,11 +149,90 @@ export const dateFieldInsideField = {
 </Field>`,
 } satisfies ComponentExample
 
+/** ISO string in, boolean out. Parsed at UTC midnight so the weekday does not shift with the time zone. */
+const isWeekend = (iso: string) => {
+  const day = new Date(`${iso}T00:00:00Z`).getUTCDay()
+  return day === 0 || day === 6
+}
+
+export const dateFieldMin = {
+  name: "min",
+  description: "Earliest selectable ISO date (inclusive), passed to the popup Calendar: earlier days are disabled.",
+  variants: ["none", "2026-12-10"],
+  default: "none",
+  preview: variant => (
+    <DateField
+      aria-label="Start date"
+      defaultValue="2026-12-15"
+      min={variant === "none" ? undefined : variant}
+      width="20"
+    />
+  ),
+  code: variant =>
+    variant === "none" ? `<DateField aria-label="Start date" />` : `<DateField aria-label="Start date" min="${variant}" />`,
+} satisfies ComponentExample
+
+export const dateFieldMax = {
+  name: "max",
+  description: "Latest selectable ISO date (inclusive), passed to the popup Calendar: later days are disabled.",
+  variants: ["none", "2026-12-20"],
+  default: "none",
+  preview: variant => (
+    <DateField
+      aria-label="Start date"
+      defaultValue="2026-12-15"
+      max={variant === "none" ? undefined : variant}
+      width="20"
+    />
+  ),
+  code: variant =>
+    variant === "none" ? `<DateField aria-label="Start date" />` : `<DateField aria-label="Start date" max="${variant}" />`,
+} satisfies ComponentExample
+
+export const dateFieldIsDateDisabled = {
+  name: "isDateDisabled",
+  description: "Called with each ISO date in the popup Calendar; days it returns true for cannot be selected.",
+  variants: ["none", "weekends"],
+  default: "none",
+  preview: variant => (
+    <DateField
+      aria-label="Delivery date"
+      defaultValue="2026-12-15"
+      isDateDisabled={variant === "weekends" ? isWeekend : undefined}
+      width="20"
+    />
+  ),
+  code: variant =>
+    variant === "weekends"
+      ? `<DateField aria-label="Delivery date" isDateDisabled={isWeekend} />`
+      : `<DateField aria-label="Delivery date" />`,
+} satisfies ComponentExample
+
+export const dateFieldLocale = {
+  name: "locale",
+  description: "BCP 47 locale for the displayed value and the popup Calendar. Defaults to useLocale().locale.",
+  variants: ["en-US", "de-DE", "ar-EG"],
+  default: "none",
+  preview: variant => (
+    <DateField
+      aria-label="Start date"
+      defaultValue="2026-12-15"
+      locale={variant}
+      width="20"
+    />
+  ),
+  code: variant => `<DateField aria-label="Start date" locale="${variant}" />`,
+} satisfies ComponentExample
+
 /** Every DateField example facet — key order is the DateField/Docs-page order. */
 export const dateFieldExamples = {
   value: dateFieldValue,
   name: dateFieldName,
   insideField: dateFieldInsideField,
+  min: dateFieldMin,
+  max: dateFieldMax,
+  isDateDisabled: dateFieldIsDateDisabled,
+  locale: dateFieldLocale,
 } satisfies Record<string, ComponentExample>
 
 /** DateField facets in Docs-page order. */

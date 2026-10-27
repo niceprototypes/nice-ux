@@ -22,15 +22,16 @@ export const renderImageExpr = `(src, alt) => (
 
 <StoryHeader title="renderImage" />
 
-<Ink color="light">
-  Escape hatch: replace the default <code>&lt;img&gt;</code> /{" "}
-  <code>&lt;div&gt;</code> rendering with a custom element. Useful for
-  delegating to a framework-specific image component (e.g.{" "}
-  <code>next/image</code>, a CDN loader, or a responsive{" "}
-  <code>&lt;picture&gt;</code> element). Width, height, backgroundSize,
-  borderRadius, and other style props are ignored when <code>renderImage</code>{" "}
-  is provided.
-</Ink>
+<Ink color="light">Escape hatch: replace the default</Ink>
+<Ink color="light" code>&lt;img&gt;</Ink>
+<Ink color="light">/</Ink>
+<Ink color="light" code>&lt;div&gt;</Ink>
+<Ink color="light">rendering with a custom element. Useful for delegating to a framework-specific image component (e.g.</Ink>
+<Ink color="light" code>next/image</Ink><Ink color="light">, a CDN loader, or a responsive</Ink>
+<Ink color="light" code>&lt;picture&gt;</Ink>
+<Ink color="light">element). Width, height, backgroundSize, borderRadius, and other style props are ignored when</Ink>
+<Ink color="light" code>renderImage</Ink>
+<Ink color="light">is provided.</Ink>
 
 <DataTableRow
   columns={DEMO_CODE_COLUMNS}

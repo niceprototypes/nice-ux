@@ -10,12 +10,11 @@ import { DEMO_CODE_COLUMNS } from "../../../../src/components/DataTable"
 
 <StoryHeader title="delay" />
 
-<Ink color="light">
-  <code>delayShow</code> defers rendering after the tooltip is activated;{" "}
-  <code>delayHide</code> defers unrendering after the trigger ends. Both are in
-  milliseconds and default to <code>0</code>. A pending delay is cancelled if the
-  opposite event fires first, so a brief pass never flashes the tooltip.
-</Ink>
+<Ink color="light" code>delayShow</Ink>
+<Ink color="light">defers rendering after the tooltip is activated;</Ink>
+<Ink color="light" code>delayHide</Ink>
+<Ink color="light">defers unrendering after the trigger ends. Both are in milliseconds and default to</Ink>
+<Ink color="light" code>0</Ink><Ink color="light">. A pending delay is cancelled if the opposite event fires first, so a brief pass never flashes the tooltip.</Ink>
 
 <DataTableRow
   columns={DEMO_CODE_COLUMNS}

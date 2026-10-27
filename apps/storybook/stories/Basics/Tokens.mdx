@@ -19,23 +19,11 @@ import { DataTable } from "../../src/components/DataTable"
 
 <Ink as="h2">CSS only</Ink>
 
-<Ink>
-  If all you need is some style, and you have{" "}
-  <Ink
-    as="span"
-    weight="semibold"
-  >
-    no time budget
-  </Ink>{" "}
-  to integrate with a new library, you can still{" "}
-  <Ink
-    as="span"
-    weight="semibold"
-  >
-    upgrade your UI today
-  </Ink>{" "}
-  by using our design tokens to fill the gaps in your project.
-</Ink>
+<Ink>If all you need is some style, and you have</Ink>
+<Ink weight="semibold">no time budget</Ink>
+<Ink>to integrate with a new library, you can still</Ink>
+<Ink weight="semibold">upgrade your UI today</Ink>
+<Ink>by using our design tokens to fill the gaps in your project.</Ink>
 
 <ArrowLink storyId="tokens--docs">Browse CSS tokens</ArrowLink>
 
@@ -43,7 +31,7 @@ import { DataTable } from "../../src/components/DataTable"
 
 <Ink as="h3">Use tokens directly</Ink>
 
-<Ink as="span">Import the stylesheet and reference the tokens:</Ink>
+<Ink>Import the stylesheet and reference the tokens:</Ink>
 
 <Install
   package="styles"
@@ -69,7 +57,7 @@ import { DataTable } from "../../src/components/DataTable"
 
 <Ink as="h3">Create local aliases</Ink>
 
-<Ink as="span">You may choose to alias the Nice UI tokens you need, and use your aliases everywhere else:</Ink>
+<Ink>You may choose to alias the Nice UI tokens you need, and use your aliases everywhere else:</Ink>
 
 <Install
   package="styles"
@@ -101,11 +89,17 @@ import { DataTable } from "../../src/components/DataTable"
 
 <Ink as="h2">JavaScript</Ink>
 
-<Ink as="span">Using the tokens in JS allows you to <Ink as="span" weight="semibold">restructure the token architecture</Ink> according to your needs, and easily tweak token values with useful helper functions.</Ink>
+<Ink>Using the tokens in JS allows you to</Ink>
+<Ink weight="semibold">restructure the token architecture</Ink>
+<Ink>according to your needs, and easily tweak token values with useful helper functions.</Ink>
 
 <Ink as="h3">JS only</Ink>
 
-<Ink as="span">Use the <code>getToken</code> function and CSS variables provided by <code>nice-styles</code> for vanilla JS:</Ink>
+<Ink>Use the</Ink>
+<Ink code>getToken</Ink>
+<Ink>function and CSS variables provided by</Ink>
+<Ink code>nice-styles</Ink>
+<Ink>for vanilla JS:</Ink>
 
 <Install
   package="styles"
@@ -131,7 +125,7 @@ document.body.append(card)
 
 <Ink as="h3">React only</Ink>
 
-<Ink as="span">Create and style a React component with tokens:</Ink>
+<Ink>Create and style a React component with tokens:</Ink>
 
 <Install
   package="react-styles"
@@ -155,7 +149,8 @@ export default function Card({ children }) {
 }
 ```
 
-<Ink as="span">Then, render the React component inside <code>StylesProvider</code>:</Ink>
+<Ink>Then, render the React component inside</Ink>
+<Ink code>StylesProvider</Ink><Ink>:</Ink>
 
 ```tsx
 import { StylesProvider } from "nice-react-styles"
@@ -175,7 +170,7 @@ export default function App() {
 
 <Ink as="h3">React + Styled Components</Ink>
 
-<Ink as="span">Create and style a Styled Component with tokens:</Ink>
+<Ink>Create and style a Styled Component with tokens:</Ink>
 
 <Install
   package="react-styles"
@@ -197,7 +192,8 @@ const Card = styled.div`
 export default Card
 ```
 
-<Ink as="span">Render the Styled Component inside <code>StylesProvider</code>:</Ink>
+<Ink>Render the Styled Component inside</Ink>
+<Ink code>StylesProvider</Ink><Ink>:</Ink>
 
 ```tsx
 import { StylesProvider } from "nice-react-styles"
@@ -219,11 +215,14 @@ export default function App() {
 
 <Ink as="h2">Set tokens</Ink>
 
-<Ink as="span">Override default values, create new tokens, or even create new modules. You have <Ink as="span" weight="semibold">complete creative control</Ink> with the token setter function.</Ink>
+<Ink>Override default values, create new tokens, or even create new modules. You have</Ink>
+<Ink weight="semibold">complete creative control</Ink>
+<Ink>with the token setter function.</Ink>
 
 <Ink as="h3">1. Wrap subtree with provider</Ink>
 
-<Ink as="span"><code>App</code> can now consume the tokens:</Ink>
+<Ink code>App</Ink>
+<Ink>can now consume the tokens:</Ink>
 
 ```tsx
 import { StylesProvider } from "nice-react-styles"
@@ -239,7 +238,9 @@ import "../App"
 
 <Ink as="h3">2. Call the setter function</Ink>
 
-<Ink as="span">Call <code>setTokens</code> once on module load:</Ink>
+<Ink>Call</Ink>
+<Ink code>setTokens</Ink>
+<Ink>once on module load:</Ink>
 
 ```ts
 import { setTokens } from "nice-react-styles"
@@ -264,7 +265,7 @@ setTokens({
 
 <Ink as="h3">3. Access new tokens</Ink>
 
-<Ink as="span">New tokens can be accessed by the getter function:</Ink>
+<Ink>New tokens can be accessed by the getter function:</Ink>
 
 ```tsx
 import { getToken } from "nice-react-styles"
@@ -285,7 +286,7 @@ const Card = ({ children }) => (
 
 <Ink as="h2">Transform a color</Ink>
 
-<Ink as="span">Adjust a token's channels without leaving the token system. The result is still a token underneath, so it keeps following day and night:</Ink>
+<Ink>Adjust a token's channels without leaving the token system. The result is still a token underneath, so it keeps following day and night:</Ink>
 
 ```tsx
 import { getToken } from "nice-react-styles"
@@ -294,15 +295,16 @@ getToken("color:highlight", { transform: [null, null, 40, null] })
 // hsl(from var(--np--color--highlight) h s 40)
 ```
 
-<Ink as="span">Channels are <code>[hue, saturation, lightness, alpha]</code>:</Ink>
+<Ink>Channels are</Ink>
+<Ink code>[hue, saturation, lightness, alpha]</Ink><Ink>:</Ink>
 
 <DataTable
   columns={[{ key: "c0", header: "Entry" }, { key: "c1", header: "Does" }]}
   tables={[{ rows: [
-    { id: "0", values: [<Ink as="span"><code>null</code></Ink>, <Ink as="span">leaves the channel alone</Ink>] },
-    { id: "1", values: [<Ink as="span"><code>40</code></Ink>, <Ink as="span">sets it</Ink>] },
-    { id: "2", values: [<Ink as="span"><code>"+10"</code> / <code>"-10"</code></Ink>, <Ink as="span">shifts it</Ink>] },
-    { id: "3", values: [<Ink as="span"><code>"*0.5"</code></Ink>, <Ink as="span">scales it</Ink>] },
+    { id: "0", values: [<Ink><code>null</code></Ink>, <Ink>leaves the channel alone</Ink>] },
+    { id: "1", values: [<Ink><code>40</code></Ink>, <Ink>sets it</Ink>] },
+    { id: "2", values: [<Ink><code>"+10"</code> / <code>"-10"</code></Ink>, <Ink>shifts it</Ink>] },
+    { id: "3", values: [<Ink><code>"*0.5"</code></Ink>, <Ink>scales it</Ink>] },
   ] }]}
 />
 
@@ -310,7 +312,7 @@ getToken("color:highlight", { transform: [null, null, 40, null] })
 
 <NewLines />
 
-<Ink as="span">Components take the same object on their color props:</Ink>
+<Ink>Components take the same object on their color props:</Ink>
 
 ```tsx
 <Ink color={{ name: "highlight", transform: [null, null, 40, null] }}>

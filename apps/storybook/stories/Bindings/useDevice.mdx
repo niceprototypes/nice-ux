@@ -10,7 +10,13 @@ import Ink from "../../src/nice/Ink"
 
 <StoryHeader title="useDevice" />
 
-<Ink as="span">Reads the mobile state published by <code>StylesProvider</code>. Returns <code>{"{ isMobile }"}</code>. When <code>StylesProvider</code> is given <code>detectDevice</code>, it runs detection once and shares the result through context — so every descendant reads one shared value, with no separate provider to wire and no per-component detection. This is the only device binding; detection lives inside <code>nice-react-styles</code>.</Ink>
+<Ink>Reads the mobile state published by</Ink>
+<Ink code>StylesProvider</Ink><Ink>. Returns</Ink>
+<Ink code>{"{ isMobile }"}</Ink><Ink>. When</Ink>
+<Ink code>StylesProvider</Ink>
+<Ink>is given</Ink>
+<Ink code>detectDevice</Ink><Ink>, it runs detection once and shares the result through context — so every descendant reads one shared value, with no separate provider to wire and no per-component detection. This is the only device binding; detection lives inside</Ink>
+<Ink code>nice-react-styles</Ink><Ink>.</Ink>
 
 <Line />
 
@@ -24,7 +30,12 @@ import { StylesProvider } from "nice-react-styles"
 </StylesProvider>
 ```
 
-<Ink as="span"><code>detectDevice</code> defaults to <code>false</code>. When off, no detection runs and no resize listener is registered — <code>useDevice()</code> returns <code>{"{ isMobile: false }"}</code>.</Ink>
+<Ink code>detectDevice</Ink>
+<Ink>defaults to</Ink>
+<Ink code>false</Ink><Ink>. When off, no detection runs and no resize listener is registered —</Ink>
+<Ink code>useDevice()</Ink>
+<Ink>returns</Ink>
+<Ink code>{"{ isMobile: false }"}</Ink><Ink>.</Ink>
 
 <Ink as="h2">Read it anywhere below</Ink>
 
@@ -37,10 +48,20 @@ function Nav() {
 }
 ```
 
-<Ink as="span">No prop drilling — every component under the <code>StylesProvider</code> reads the same <code>isMobile</code> directly.</Ink>
+<Ink>No prop drilling — every component under the</Ink>
+<Ink code>StylesProvider</Ink>
+<Ink>reads the same</Ink>
+<Ink code>isMobile</Ink>
+<Ink>directly.</Ink>
 
 <Line />
 
 <Ink as="h2">What detection checks</Ink>
 
-<Ink as="span"><code>detectDevice</code> runs detection once and keeps it current on resize / orientation / DevTools-emulation changes — a single shared listener for the whole tree. A viewport is mobile when the user-agent matches a known mobile identifier, <Ink as="span" weight="semibold">or</Ink> the device has touch and a viewport ≤ 640px (the phone band). Debug overrides force mobile on: <code>?mobile=true</code> in the URL, or <code>localStorage.setItem("debug-mobile", "true")</code>.</Ink>
+<Ink code>detectDevice</Ink>
+<Ink>runs detection once and keeps it current on resize / orientation / DevTools-emulation changes — a single shared listener for the whole tree. A viewport is mobile when the user-agent matches a known mobile identifier,</Ink>
+<Ink weight="semibold">or</Ink>
+<Ink>the device has touch and a viewport ≤ 640px (the phone band). Debug overrides force mobile on:</Ink>
+<Ink code>?mobile=true</Ink>
+<Ink>in the URL, or</Ink>
+<Ink code>localStorage.setItem("debug-mobile", "true")</Ink><Ink>.</Ink>

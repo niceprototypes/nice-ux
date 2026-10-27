@@ -14,14 +14,18 @@ import { DataTable } from "../../src/components/DataTable"
   description="Committing, version bumping, and releasing nice-* packages to npm."
 />
 
-<Ink as="span">Files here are topic references: load the one your task or the root index points to. Each publishable package keeps its own <code>.nice/bump.md</code> — both the version-bump intent for <code>nicely --publish</code> and the durable per-change record, written in the same commit.</Ink>
+<Ink>Files here are topic references: load the one your task or the root index points to. Each publishable package keeps its own</Ink>
+<Ink code>.nice/bump.md</Ink>
+<Ink>— both the version-bump intent for</Ink>
+<Ink code>nicely --publish</Ink>
+<Ink>and the durable per-change record, written in the same commit.</Ink>
 
 <DataTable
   columns={[{ key: "c0", header: "File" }, { key: "c1", header: "Contents" }]}
   tables={[{ rows: [
-    { id: "0", values: [<Ink as="span"><code>git.md</code></Ink>, <Ink as="span">Commit format, branching, the <code>nicely --commit</code> workflow.</Ink>] },
-    { id: "1", values: [<Ink as="span"><code>npm.md</code></Ink>, <Ink as="span">Version bumping, publish order, peer deps.</Ink>] },
-    { id: "2", values: [<Ink as="span"><code>bump-intent.md</code></Ink>, <Ink as="span">The <code>.nice/bump.md</code> per-package bump-intent workflow, <code>✓</code> marker, and how <code>--commit</code> relates to <code>--publish</code>.</Ink>] },
+    { id: "0", values: [<Ink><code>git.md</code></Ink>, <Ink>Commit format, branching, the <code>nicely --commit</code> workflow.</Ink>] },
+    { id: "1", values: [<Ink><code>npm.md</code></Ink>, <Ink>Version bumping, publish order, peer deps.</Ink>] },
+    { id: "2", values: [<Ink><code>bump-intent.md</code></Ink>, <Ink>The <code>.nice/bump.md</code> per-package bump-intent workflow, <code>✓</code> marker, and how <code>--commit</code> relates to <code>--publish</code>.</Ink>] },
   ] }]}
 />
 

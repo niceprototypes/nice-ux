@@ -16,16 +16,9 @@ import Ink from "../../src/nice/Ink"
 
 <Ink as="h2">Get fonts</Ink>
 
-<Ink>
-  <Ink>You have the freedom to{" "}</Ink>
-  <Ink
-    as="span"
-    weight="semibold"
-  >
-    use vendor fonts or local font files
-  </Ink>{" "}
-  <Ink>for your project.</Ink>
-</Ink>
+<Ink>You have the freedom to</Ink>
+<Ink weight="semibold">use vendor fonts or local font files</Ink>
+<Ink>for your project.</Ink>
 
 <NewLines />
 
@@ -37,7 +30,7 @@ import { injectFonts } from "nice-styles"
 injectFonts({ googleFonts: "https://fonts.googleapis.com/…" })
 ```
 
-<Ink as="span">Output:</Ink>
+<Ink>Output:</Ink>
 
 ```html
 <link data-nice-font="" rel="preconnect" href="https://fonts.googleapis.com">
@@ -55,7 +48,7 @@ import { injectFonts } from "nice-styles"
 injectFonts({ adobeFonts: "https://use.typekit.net/…" })
 ```
 
-<Ink as="span">Output:</Ink>
+<Ink>Output:</Ink>
 
 ```html
 <link data-nice-font="" rel="preconnect" href="https://use.typekit.net">
@@ -67,7 +60,9 @@ injectFonts({ adobeFonts: "https://use.typekit.net/…" })
 
 <Ink as="h3">Custom fonts</Ink>
 
-<Ink as="span">Use the <code>injectFonts</code> function to inject preconnects and stylesheets for your font family:</Ink>
+<Ink>Use the</Ink>
+<Ink code>injectFonts</Ink>
+<Ink>function to inject preconnects and stylesheets for your font family:</Ink>
 
 ```ts
 import { injectFonts } from "nice-styles"
@@ -80,7 +75,7 @@ injectFonts({
 })
 ```
 
-<Ink as="span">Output:</Ink>
+<Ink>Output:</Ink>
 
 ```html
 <link data-nice-font="" rel="preconnect" href="https://cdn.example.com">
@@ -95,7 +90,10 @@ injectFonts({
 
 <Install package="react-styles" />
 
-<Ink as="span">Call <code>setTokens</code> once on module load, from its own <code>tokens.ts</code>:</Ink>
+<Ink>Call</Ink>
+<Ink code>setTokens</Ink>
+<Ink>once on module load, from its own</Ink>
+<Ink code>tokens.ts</Ink><Ink>:</Ink>
 
 ```tsx
 // tokens.ts
@@ -113,7 +111,9 @@ setTokens({
 
 <Ink as="h3">2. Get tokens</Ink>
 
-<Ink as="span">Use props on <code>StylesProvider</code> to inject and control fonts for your React project:</Ink>
+<Ink>Use props on</Ink>
+<Ink code>StylesProvider</Ink>
+<Ink>to inject and control fonts for your React project:</Ink>
 
 <NewLines />
 

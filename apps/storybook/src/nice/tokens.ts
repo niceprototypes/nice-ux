@@ -7,9 +7,15 @@ import { TOKENS as THEME_TOKENS } from "nice-storybook-theme"
  * Imported by `.storybook/preview.tsx` for the side effect — `setTokens`
  * registers the overrides and injects the CSS at module load. The one call
  * includes nice-storybook-theme's tokens; the app's own entries come last, so
- * they can override a theme value.
+ * they can override a theme value. Read storybook-local tokens through the
+ * exported `getToken`, which is typed for this map.
  */
 const AppTokenMap = {
+  // LifecycleStory step durations; a step picks a variant by name.
+  lifecycleStep: {
+    base: "1200ms",
+    long: "2000ms",
+  },
   backgroundColor: {
     dark: {
       day: "hsla(212, 10%, 100%, 1)",
@@ -53,4 +59,7 @@ const AppTokenMap = {
   },
 } as const
 
-setTokens({ ...THEME_TOKENS, ...AppTokenMap })
+/** A LifecycleStory step duration — a `lifecycleStep` token variant. */
+export type LifecycleStepVariant = keyof (typeof AppTokenMap)["lifecycleStep"]
+
+export const getToken = setTokens({ ...THEME_TOKENS, ...AppTokenMap })

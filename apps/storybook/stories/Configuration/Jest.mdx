@@ -24,7 +24,7 @@ export { default } from "nice-config-jest/react"
 
 <Ink as="h2">React Jest Configuration</Ink>
 
-<Ink as="span">Complete Jest configuration for React components with TypeScript support. Uses ts-jest for native TypeScript compilation.</Ink>
+<Ink>Complete Jest configuration for React components with TypeScript support. Uses ts-jest for native TypeScript compilation.</Ink>
 
 ```typescript
 // jest.config.js
@@ -56,7 +56,7 @@ export { default } from "nice-config-jest/react"
 
 <Ink as="h4">Peer Dependencies</Ink>
 
-<Ink as="span">Install the required peer dependencies:</Ink>
+<Ink>Install the required peer dependencies:</Ink>
 
 ```bash
 npm install -D jest ts-jest jest-environment-jsdom @testing-library/jest-dom
@@ -66,18 +66,20 @@ npm install -D jest ts-jest jest-environment-jsdom @testing-library/jest-dom
 
 <Ink as="h2">CSS Mock</Ink>
 
-<Ink as="span">Empty module export for mocking CSS imports in Jest tests. Referenced by the React config's moduleNameMapper.</Ink>
+<Ink>Empty module export for mocking CSS imports in Jest tests. Referenced by the React config's moduleNameMapper.</Ink>
 
 ```typescript
 // __mocks__/styleMock.js
 module.exports = {}
 ```
 
-<Ink as="span">This mock is automatically configured in the React Jest config. Create the file at <code>__mocks__/styleMock.js</code> in your project root.</Ink>
+<Ink>This mock is automatically configured in the React Jest config. Create the file at</Ink>
+<Ink code>__mocks__/styleMock.js</Ink>
+<Ink>in your project root.</Ink>
 
 <Ink as="h4">Alternative: Direct Import</Ink>
 
-<Ink as="span">You can also import the mock directly if you customize your Jest config:</Ink>
+<Ink>You can also import the mock directly if you customize your Jest config:</Ink>
 
 ```typescript
 // jest.config.js

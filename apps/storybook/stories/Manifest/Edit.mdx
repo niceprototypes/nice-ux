@@ -14,17 +14,17 @@ import { DataTable } from "../../src/components/DataTable"
   description="Standards for creating new assets in the Nice ecosystem."
 />
 
-<Ink as="span">Files here are topic references: load the one your task or the root index points to. Before editing any package, read every source file in it and trace the import chain from the entry point — duplicate and dead files exist, and editing the wrong copy fails silently.</Ink>
+<Ink>Files here are topic references: load the one your task or the root index points to. Before editing any package, read every source file in it and trace the import chain from the entry point — duplicate and dead files exist, and editing the wrong copy fails silently.</Ink>
 
 <DataTable
   columns={[{ key: "c0", header: "File" }, { key: "c1", header: "Contents" }]}
   tables={[{ rows: [
-    { id: "0", values: [<Ink as="span"><code>component.md</code></Ink>, <Ink as="span">Component package structure, types, tokens.</Ink>] },
-    { id: "1", values: [<Ink as="span"><code>comments.md</code></Ink>, <Ink as="span">Inline code comment standards for AI readability.</Ink>] },
-    { id: "2", values: [<Ink as="span"><code>generators.md</code></Ink>, <Ink as="span">Generators and emitters: pipeline shape, structure rules, documentation standard, <code>node:test</code> snapshot tests.</Ink>] },
-    { id: "3", values: [<Ink as="span"><code>storybook.md</code></Ink>, <Ink as="span">Story file patterns for nice-storybook.</Ink>] },
-    { id: "4", values: [<Ink as="span"><code>session-log.md</code></Ink>, <Ink as="span"><Ink as="span" weight="semibold">Deprecated.</Ink> Session logs are now per-package <code>.nice/bump.md</code> files; this file records what moved and keeps the mistake-reporting format.</Ink>] },
-    { id: "5", values: [<Ink as="span">build config</Ink>, <Ink as="span"><Ink as="span" weight="semibold">Moved</Ink> to its single-home topic — <code>topics/build-config.md</code> (config packages, rollup/tsconfig/jest standards, deviation audit).</Ink>] },
+    { id: "0", values: [<Ink><code>component.md</code></Ink>, <Ink>Component package structure, types, tokens.</Ink>] },
+    { id: "1", values: [<Ink><code>comments.md</code></Ink>, <Ink>Inline code comment standards for AI readability.</Ink>] },
+    { id: "2", values: [<Ink><code>generators.md</code></Ink>, <Ink>Generators and emitters: pipeline shape, structure rules, documentation standard, <code>node:test</code> snapshot tests.</Ink>] },
+    { id: "3", values: [<Ink><code>storybook.md</code></Ink>, <Ink>Story file patterns for nice-storybook.</Ink>] },
+    { id: "4", values: [<Ink><code>session-log.md</code></Ink>, <Ink><Ink weight="semibold">Deprecated.</Ink> Session logs are now per-package <code>.nice/bump.md</code> files; this file records what moved and keeps the mistake-reporting format.</Ink>] },
+    { id: "5", values: [<Ink>build config</Ink>, <Ink><Ink weight="semibold">Moved</Ink> to its single-home topic — <code>topics/build-config.md</code> (config packages, rollup/tsconfig/jest standards, deviation audit).</Ink>] },
   ] }]}
 />
 

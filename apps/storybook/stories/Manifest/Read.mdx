@@ -14,16 +14,16 @@ import { DataTable } from "../../src/components/DataTable"
   description="Understanding the Nice ecosystem's existing structure — the phase before any change."
 />
 
-<Ink as="span">Files here are topic references: load the one your task or the root index points to, not all of them.</Ink>
+<Ink>Files here are topic references: load the one your task or the root index points to, not all of them.</Ink>
 
 <DataTable
   columns={[{ key: "c0", header: "File" }, { key: "c1", header: "Contents" }]}
   tables={[{ rows: [
-    { id: "0", values: [<Ink as="span"><code>inheritance.md</code></Ink>, <Ink as="span">Package hierarchy, dependency graph, layered system design.</Ink>] },
-    { id: "1", values: [<Ink as="span"><code>audit.md</code></Ink>, <Ink as="span">The audits — architecture (manifest ↔ architecture ↔ stories) and full (architecture + all consumers) — their trigger phrases and scope, plus known manifest gaps.</Ink>] },
-    { id: "2", values: [<Ink as="span"><code>projects/storybook.md</code></Ink>, <Ink as="span">nice-storybook structure and scripts.</Ink>] },
-    { id: "3", values: [<Ink as="span"><code>projects/website.md</code></Ink>, <Ink as="span">nice-website-2025 structure and scripts.</Ink>] },
-    { id: "4", values: [<Ink as="span"><code>styles/tokens.md</code></Ink>, <Ink as="span">Token naming conventions and <code>getToken</code> usage.</Ink>] },
+    { id: "0", values: [<Ink><code>inheritance.md</code></Ink>, <Ink>Package hierarchy, dependency graph, layered system design.</Ink>] },
+    { id: "1", values: [<Ink><code>audit.md</code></Ink>, <Ink>The audits — architecture (manifest ↔ architecture ↔ stories) and full (architecture + all consumers) — their trigger phrases and scope, plus known manifest gaps.</Ink>] },
+    { id: "2", values: [<Ink><code>projects/storybook.md</code></Ink>, <Ink>nice-storybook structure and scripts.</Ink>] },
+    { id: "3", values: [<Ink><code>projects/website.md</code></Ink>, <Ink>nice-website-2025 structure and scripts.</Ink>] },
+    { id: "4", values: [<Ink><code>styles/tokens.md</code></Ink>, <Ink>Token naming conventions and <code>getToken</code> usage.</Ink>] },
   ] }]}
 />
 

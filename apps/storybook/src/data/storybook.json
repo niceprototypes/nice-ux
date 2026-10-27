@@ -200,6 +200,11 @@
                 "borderWidth": {
                   "description": "Stroke thickness tokens for borders and dividers."
                 }
+              },
+              {
+                "strokeWidthScale": {
+                  "description": "Multiplier on stroke thickness: 1 in day, 0.9 in night, so light strokes on a dark ground read as thin as dark strokes on light. Icons multiply their stroke width by it (darkAntialiasing)."
+                }
               }
             ]
           },

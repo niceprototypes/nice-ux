@@ -1,0 +1,55 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../../src/components/Story"
+import Install from "../../../../src/components/Install"
+import { ComponentDemoTable } from "../../../../src/dataTables/components/demos/Components"
+import { formExampleList, formLifecycleSteps, renderFormLifecycle } from "./examples"
+import LifecycleStory from "../../../../src/components/LifecycleStory"
+import NewLines from "../../../../src/components/NewLines"
+import Callout from "../../../../src/components/Callout"
+
+<Meta title="Components/Forms/Form" />
+
+<StoryHeader
+  title="Form"
+  description="A stateless form element that stacks its children vertically and forwards the submit event, default-prevented."
+/>
+
+<NewLines count={3} />
+
+<Install package="react-form" />
+
+```jsx
+import Form from "nice-react-form"
+
+<Form onSubmit={event => save(new FormData(event.currentTarget))}>
+  …
+</Form>
+```
+
+<NewLines count={3} />
+
+<LifecycleStory
+  steps={formLifecycleSteps}
+  render={renderFormLifecycle}
+/>
+
+<NewLines count={3} />
+
+<ComponentDemoTable examples={formExampleList} />
+
+<NewLines count={3} />
+
+## Guide
+
+Form renders a semantic `<form>` and stacks its direct children in a column. It applies no spacing between them; wrap them in a Flex for a gap. It owns no field state: the consumer manages values, through controlled inputs or `FormData` read from the submit event.
+
+By default Form calls `event.preventDefault()` before `onSubmit`, the single-page-app behavior. Set `preventDefault={false}` to let a native submission run:
+
+```jsx
+<Form onSubmit={onSubmit} />                         // default-prevented
+<Form preventDefault={false} onSubmit={onSubmit} />  // native submission
+```
+
+`theme` pins token resolution for the form and everything inside it.
+
+<Callout type="hint">Form has no gap of its own — space its children with a Flex.</Callout>

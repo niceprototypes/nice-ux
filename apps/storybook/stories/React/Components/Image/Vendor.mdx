@@ -10,24 +10,28 @@ import { toSource } from "../../../../src/services"
 
 <StoryHeader title="vendor" />
 
-<Ink color="light">
-  Routes <code>src</code> / <code>width</code> / <code>height</code> through
-  the registered vendor resolver to produce the concrete image URL. Pairs
-  with <code>nice-react-image-vendor</code>, an optional peer package that
-  registers a resolver as a side effect of being imported.
-</Ink>
+<Ink color="light">Routes</Ink>
+<Ink color="light" code>src</Ink>
+<Ink color="light">/</Ink>
+<Ink color="light" code>width</Ink>
+<Ink color="light">/</Ink>
+<Ink color="light" code>height</Ink>
+<Ink color="light">through the registered vendor resolver to produce the concrete image URL. Pairs with</Ink>
+<Ink color="light" code>nice-react-image-vendor</Ink><Ink color="light">, an optional peer package that registers a resolver as a side effect of being imported.</Ink>
 
 <Ink as="h3">Why a separate vendor package</Ink>
 
-<Ink as="span">Vendor packages are containers for convenient, stable third-party plugins that provide <Ink as="span" weight="semibold">media, not logic</Ink>{" \u2014 concrete photo sources and icon sets. Encapsulating them outside the system keeps the host component (<code>nice-react-image</code>) agnostic of any specific third-party dependency, while still letting that third party conveniently address a real need \u2014 in this case, photography."}</Ink>
+<Ink>Vendor packages are containers for convenient, stable third-party plugins that provide</Ink>
+<Ink weight="semibold">media, not logic</Ink>
+<Ink>\u2014 concrete photo sources and icon sets. Encapsulating them outside the system keeps the host component (<code>nice-react-image</code>) agnostic of any specific third-party dependency, while still letting that third party conveniently address a real need \u2014 in this case, photography.</Ink>
 
-<Ink as="span">{"The host exposes a <code>vendor</code> flag and a <code>registerVendorResolver</code> hook. The peer package is the only place a concrete source is referenced (currently <code>picsum.photos</code>; later this may be a paid CDN, an Unsplash adapter, or any other media source). Swapping, supplementing, or removing the third-party dependency later requires no changes to the host component or to any consumer call site."}</Ink>
+<Ink>The host exposes a <code>vendor</code> flag and a <code>registerVendorResolver</code> hook. The peer package is the only place a concrete source is referenced (currently <code>picsum.photos</code>; later this may be a paid CDN, an Unsplash adapter, or any other media source). Swapping, supplementing, or removing the third-party dependency later requires no changes to the host component or to any consumer call site.</Ink>
 
-<Ink as="span">{"The same pattern applies to <code>nice-react-icon</code> / <code>nice-react-icon-vendor</code> for iconography."}</Ink>
+<Ink>The same pattern applies to <code>nice-react-icon</code> / <code>nice-react-icon-vendor</code> for iconography.</Ink>
 
 <Ink as="h3">Setup</Ink>
 
-<Ink as="span">{"Import the vendor package once at the application entry point. The import has a side effect: it registers the resolver with <code>nice-react-image</code>."}</Ink>
+<Ink>Import the vendor package once at the application entry point. The import has a side effect: it registers the resolver with <code>nice-react-image</code>.</Ink>
 
 ```tsx
 // app entry
@@ -36,7 +40,7 @@ import "nice-react-image-vendor"
 
 <Ink as="h3">Usage</Ink>
 
-<Ink as="span">{"When <code>vendor</code> is set, <code>src</code> is treated as the vendor's identifier (a <code>picsum</code> id) rather than a URL. Omit <code>src</code> to let the vendor return a random image. <code>width</code> and <code>height</code> are forwarded to the resolver as the requested asset size."}</Ink>
+<Ink>When <code>vendor</code> is set, <code>src</code> is treated as the vendor's identifier (a <code>picsum</code> id) rather than a URL. Omit <code>src</code> to let the vendor return a random image. <code>width</code> and <code>height</code> are forwarded to the resolver as the requested asset size.</Ink>
 
 <DataTableRow
   columns={DEMO_CODE_COLUMNS}
@@ -86,7 +90,7 @@ import "nice-react-image-vendor"
 
 <Ink as="h3">Direct URL access</Ink>
 
-<Ink as="span">{"When a raw URL string is needed (e.g. an <code>imageUrl</code> prop on another component), call the resolver directly:"}</Ink>
+<Ink>When a raw URL string is needed (e.g. an <code>imageUrl</code> prop on another component), call the resolver directly:</Ink>
 
 ```tsx
 import { resolveVendorImage } from "nice-react-image-vendor"

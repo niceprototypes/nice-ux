@@ -13,8 +13,16 @@ type ContentFlexProps = FlexProps & {
  * cannot let a child grow wider than itself, so leave an outer one uncapped when
  * a section inside it must be full width.
  */
-const ContentFlex: React.FC<ContentFlexProps> = ({ wrapped = false, ...props }) => (
-  <ContentFlexStyled {...props} $wrapped={wrapped} />
+const ContentFlex: React.FC<ContentFlexProps> = ({
+  wrapped = false,
+  gap = "larger",
+  ...props
+}) => (
+  <ContentFlexStyled
+    {...props}
+    gap={gap}
+    $wrapped={wrapped}
+  />
 )
 
 export default ContentFlex
