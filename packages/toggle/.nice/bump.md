@@ -1,0 +1,1 @@
+[2026-10-15 15:26] minor: Add ref and aria-labelledby props, and wire the switch to an enclosing nice-react-field Field (label, description, error, invalid, required); nice-react-field is a new peer dependency
