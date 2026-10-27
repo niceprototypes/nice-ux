@@ -8,26 +8,26 @@
  */
 
 // Components and their context hooks
-export { StylesProvider, useDevice, useTheme, useLocale, MOBILE_USER_AGENTS } from './components/StylesProvider'
+export { StylesProvider, useDevice, useTheme, useLocale, MOBILE_USER_AGENTS } from './components/StylesProvider/index.js'
 export type {
   DeviceState,
   ThemeContextValue,
   LocaleCodeType,
   LocaleDirectionType,
   LocaleValueType,
-} from './components/StylesProvider'
-export { Theme } from './components/Theme'
-export type { ThemeProps } from './components/Theme'
+} from './components/StylesProvider/index.js'
+export { Theme } from './components/Theme/index.js'
+export type { ThemeProps } from './components/Theme/index.js'
 
 // Service exports
-export { setTokens, setBreakpoints } from './services/setTokens'
-export { withBreakpoints, useBreakpoint } from './services/withBreakpoints'
-export type { BreakpointKey, BreakpointOverride, WithBreakpointsProps } from './services/withBreakpoints'
+export { setTokens, setBreakpoints } from './services/setTokens/index.js'
+export { withBreakpoints, useBreakpoint } from './services/withBreakpoints/index.js'
+export type { BreakpointKey, BreakpointOverride, WithBreakpointsProps } from './services/withBreakpoints/index.js'
 
 // Re-export the whole framework-neutral token API (src/index.ts), so the package
 // root serves both the tokens and the React bindings.
-export * from '../index'
+export * from '../index.js'
 
 // Package-local types
-export type { StylesProviderProps } from './components/StylesProvider/StylesProvider.types'
-export type { Breakpoints } from './types'
+export type { StylesProviderProps } from './components/StylesProvider/StylesProvider.types.js'
+export type { Breakpoints } from './types.js'

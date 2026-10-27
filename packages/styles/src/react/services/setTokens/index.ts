@@ -5,8 +5,8 @@ import {
   type TokenMap,
   type RuntimeTokenMap,
   type BreakpointValues,
-} from "../../../index"
-import type { SetTokensVariants, TypedGetToken } from "./setTokens.types"
+} from "../../../index.js"
+import type { SetTokensVariants, TypedGetToken } from "./setTokens.types.js"
 
 /** Reserved `breakpoints` key: pixel floors for the settable breakpoints. */
 type BreakpointsKey = { breakpoints?: Partial<BreakpointValues> }

@@ -4,7 +4,7 @@ import {
   BREAKPOINT_PHONE,
   SETTABLE_BREAKPOINTS,
   type BreakpointName,
-} from "../../../index"
+} from "../../../index.js"
 
 /**
  * Compute the current viewport's breakpoint name from `window.innerWidth`.

@@ -2,7 +2,7 @@
  * React-specific shared types for @niceprototypes/styles.
  */
 
-import type { BreakpointName } from "../index"
+import type { BreakpointName } from "../index.js"
 
 /**
  * Generic responsive prop shape used across component packages.

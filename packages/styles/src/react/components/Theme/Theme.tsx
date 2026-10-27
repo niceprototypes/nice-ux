@@ -1,5 +1,5 @@
 import * as React from "react"
-import type { ThemeType } from "../../../index"
+import type { ThemeType } from "../../../index.js"
 
 export interface ThemeProps {
   /**

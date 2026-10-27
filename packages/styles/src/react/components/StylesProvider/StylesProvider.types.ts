@@ -3,8 +3,8 @@
  */
 
 import type { ReactNode } from 'react'
-import type { GoogleFontsConfig, AdobeFontsConfig, LinkAttributes } from '../../../index'
-import type { LocaleCodeType, LocaleDirectionType } from './LocaleContext'
+import type { GoogleFontsConfig, AdobeFontsConfig, LinkAttributes } from '../../../index.js'
+import type { LocaleCodeType, LocaleDirectionType } from './LocaleContext.js'
 
 /**
  * Props for the StylesProvider component

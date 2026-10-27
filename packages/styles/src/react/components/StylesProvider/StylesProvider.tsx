@@ -12,13 +12,13 @@ import {
   buildAdobeFontsConfig,
   type GoogleFontsConfig,
   type AdobeFontsConfig,
-} from '../../../index'
-import { FontLoader } from '../FontLoader'
-import { DeviceDetectionProvider } from './DeviceContext'
-import { ThemeDetectionProvider } from './ThemeContext'
-import { LocaleContextProvider } from './LocaleContext'
-import { ThemeProvider } from './StylesProvider.styled'
-import type { StylesProviderProps } from './StylesProvider.types'
+} from '../../../index.js'
+import { FontLoader } from '../FontLoader/index.js'
+import { DeviceDetectionProvider } from './DeviceContext.js'
+import { ThemeDetectionProvider } from './ThemeContext.js'
+import { LocaleContextProvider } from './LocaleContext.js'
+import { ThemeProvider } from './StylesProvider.styled.js'
+import type { StylesProviderProps } from './StylesProvider.types.js'
 import '@niceprototypes/styles/tokens.css'
 
 /**

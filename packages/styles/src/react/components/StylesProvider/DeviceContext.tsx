@@ -15,7 +15,7 @@ import {
   MOBILE_USER_AGENTS,
   DEVICE_DETECTION_DEFAULT,
   type DeviceDetectionState,
-} from './useDeviceDetection'
+} from './useDeviceDetection.js'
 
 /**
  * Shape returned by `useDevice()`.

@@ -2,7 +2,7 @@
  * Type definitions for FontLoader
  */
 
-import type { LinkAttributes } from '../../../index'
+import type { LinkAttributes } from '../../../index.js'
 
 /**
  * Props for FontLoader component

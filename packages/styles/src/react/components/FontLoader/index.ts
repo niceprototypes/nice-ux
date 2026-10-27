@@ -2,4 +2,4 @@
  * FontLoader module exports
  */
 
-export { FontLoader } from './FontLoader'
+export { FontLoader } from './FontLoader.js'

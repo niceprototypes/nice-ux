@@ -1,4 +1,4 @@
-import type { ComponentPrefix, TokenOptions, TokenVariants } from "../../../index"
+import type { ComponentPrefix, TokenOptions, TokenVariants } from "../../../index.js"
 
 /** Turns a union of object types into their intersection. */
 type UnionToIntersection<U> = (U extends unknown ? (union: U) => void : never) extends (
