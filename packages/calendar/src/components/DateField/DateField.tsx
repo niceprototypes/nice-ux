@@ -37,6 +37,7 @@ const TRIGGER_LABEL = "Choose date"
 const DateField: React.FC<DateFieldProps> = ({
   value,
   defaultValue = null,
+  disabled: disabledProp = false,
   onChange,
   min,
   max,
@@ -52,7 +53,8 @@ const DateField: React.FC<DateFieldProps> = ({
   const { locale: contextLocale } = useLocale()
   const locale = localeProp ?? contextLocale
   const popoverId = React.useId()
-  const disabled = status === "disabled"
+  // Disabled when either the `disabled` prop or `status="disabled"` asks for it.
+  const disabled = disabledProp || status === "disabled"
 
   const isControlled = value !== undefined
   const [internalValue, setInternalValue] = React.useState<CalendarDateType | null>(defaultValue)
@@ -135,6 +137,7 @@ const DateField: React.FC<DateFieldProps> = ({
         readOnly
         size={size}
         status={status}
+        disabled={disabled}
         theme={theme}
         end={trigger}
       />

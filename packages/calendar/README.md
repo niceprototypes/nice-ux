@@ -1,4 +1,5 @@
 # nice-react-calendar
+![Calendar](docs/calendar.png)
 
 Date selection for React. `Calendar` is an ISO-date month grid with locale week
 start and RTL-aware keyboard navigation; `DateField` is a picker field built on
@@ -115,6 +116,7 @@ Every `Input` prop except `as`, `type`, `end`, `value`, `defaultValue` and
 | `onChange` | `(value: string \| null) => void` | v1 only ever passes a date string |
 | `min`, `max`, `isDateDisabled`, `locale` | | Passed to the Calendar |
 | `name` | `string` | On a hidden input carrying the ISO value |
+| `disabled` | `boolean` | Disables the input and the calendar button (the popover cannot open). Same effect as `status="disabled"`; either one disables |
 
 v1 is picker-only: the visible input is read-only, has no `name`, and shows the
 value formatted with `Intl.DateTimeFormat(locale, { dateStyle: "medium" })`.

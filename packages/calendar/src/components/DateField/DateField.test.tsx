@@ -139,6 +139,12 @@ describe("DateField", () => {
     expect(trigger()).toBeDisabled()
   })
 
+  it("disables the trigger and the control with the disabled prop", () => {
+    render(<DateField disabled locale="en-US" aria-label="Start" />)
+    expect(trigger()).toBeDisabled()
+    expect(control()).toBeDisabled()
+  })
+
   it("inherits Field wiring from Input (label, describedby)", () => {
     render(
       <Field label="Start date" description="First day of the booking">
