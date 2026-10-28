@@ -1,6 +1,6 @@
 # @niceprototypes/config-crxjs
 
-Vite + CRXJS configuration for Chrome extensions that consume `nice-*` packages. Builds on
+Vite + CRXJS configuration for Chrome extensions that consume `@niceprototypes/*` packages. Builds on
 `@niceprototypes/config-vite`. Used by nice-browser (`~/nice/browser/chrome`).
 
 ## Usage
@@ -31,7 +31,7 @@ looks for `@vitejs/plugin-react` there to add React's preamble to content script
 
 | Part | Why |
 |---|---|
-| `niceCrxjs()`: inlines relative JSON imports in modules outside the project | In dev, CRXJS copies `file.json?import` from `<root>/@fs/<path>`, which doesn't exist for linked packages (@niceprototypes/styles' `errors.json`: ENOENT) |
+| `niceCrxjs()`: inlines relative JSON imports in modules outside the project | In dev, CRXJS copies `file.json?import` from `<root>/@fs/<path>`, which doesn't exist for packages outside the project (local mode) (@niceprototypes/styles' `errors.json`: ENOENT) |
 | `niceCrxjs()`: `@niceprototypes/styles/tokens.css` (plain import) → empty module | @niceprototypes/styles imports it for its side effect; in a content script CRXJS would attach the tokens to the host page's `:root`. Load tokens as `?raw` text instead |
 | `build.modulePreload: false` | Vite's preload helper requests chunks from the host page's origin, breaking on-demand imports in content scripts |
 | Dev server: fixed `port` + HMR port, CORS for `chrome-extension://` and `corsOrigins` | Several extensions can run dev servers at once; content scripts on host pages load dev assets |
@@ -41,5 +41,5 @@ looks for `@vitejs/plugin-react` there to add React's preamble to content script
 
 | Export | Purpose |
 |---|---|
-| `createExtensionConfig({ appRoot, root, outDir, port, corsOrigins?, pages?, plugins? })` | Full Vite config for one extension |
+| `createExtensionConfig({ appRoot, local?, root, outDir, port, corsOrigins?, pages?, plugins? })` | Full Vite config for one extension; `local` = a nice-ux checkout (config-vite's local mode) |
 | `niceCrxjs()` | The plugin alone |

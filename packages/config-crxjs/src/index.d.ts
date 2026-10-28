@@ -3,6 +3,8 @@ import type { Plugin, PluginOption, UserConfig } from 'vite'
 export type ExtensionConfigOptions = {
   /** The app's folder, whose node_modules holds the shared React and styled-components. */
   appRoot: string
+  /** Local mode: the path of a nice-ux checkout (e.g. `~/nice/nice-ux`); every `@niceprototypes/*` import resolves there. Omit to use the npm install. */
+  local?: string
   /** The build root; the manifest's entry paths are relative to it. */
   root: string
   /** The built extension (the folder to load unpacked). */
@@ -17,8 +19,8 @@ export type ExtensionConfigOptions = {
   plugins?: PluginOption[]
 }
 
-/** Vite plugin: CRXJS fixes for nice-* packages (JSON import attributes, side-effect tokens). */
+/** Vite plugin: CRXJS fixes for @niceprototypes/* packages (JSON import attributes, side-effect tokens). */
 export declare const niceCrxjs: () => Plugin
 
-/** Vite config for a CRXJS Chrome extension consuming nice-* packages. */
+/** Vite config for a CRXJS Chrome extension consuming @niceprototypes/* packages. */
 export declare const createExtensionConfig: (options: ExtensionConfigOptions) => UserConfig

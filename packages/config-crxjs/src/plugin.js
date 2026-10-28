@@ -8,9 +8,9 @@ const NO_TOKENS_IMPORT = '\0nice-config-crxjs:no-tokens-import'
 const JSON_DEFAULT_IMPORT = /import\s+([\w$]+)\s+from\s+(['"])(\.{1,2}\/[^'"]+\.json)\2(?:\s+with\s*\{\s*type\s*:\s*['"]json['"]\s*\})?\s*;?/g
 
 /**
- * Vite plugin for CRXJS extensions that consume nice-* packages.
+ * Vite plugin for CRXJS extensions that consume @niceprototypes/* packages.
  *
- * - JSON in linked packages: in dev, Vite serves a JSON import as `file.json?import`, and
+ * - JSON in packages outside the project (local mode): in dev, Vite serves a JSON import as `file.json?import`, and
  *   CRXJS's file writer then copies the raw file from `<root>/@fs/<absolute path>`, which
  *   does not exist for files outside the project (ENOENT, e.g. @niceprototypes/styles' errors.json).
  *   Relative default JSON imports in modules outside the project are inlined as constants,

@@ -2,7 +2,7 @@
   "name": "@niceprototypes/config-crxjs",
   "version": "0.1.0",
   "type": "module",
-  "description": "Vite + CRXJS configuration for Chrome extensions that consume linked nice-* packages",
+  "description": "Vite + CRXJS configuration for Chrome extensions that consume @niceprototypes/* packages, with config-vite's local mode",
   "main": "src/index.js",
   "types": "src/index.d.ts",
   "exports": {
