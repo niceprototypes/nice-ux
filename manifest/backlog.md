@@ -2,7 +2,9 @@
 
 Merged from the 2026-10-26 triage of `manifest/.reports/` (deleted; backup `~/nice/surveys/notes/reports-backup.tgz`, cited below as `bak:`). Paths are relative to `~/nice/nice-ux/` (rewritten to the monorepo layout 2026-10-27). Open owner questions: `~/nice/surveys/003-report-decisions.md` (cited as `S003 Qn`).
 
-Dropped from the source tables: 67 DONE, 26 DEPRECATED, 24 COVERED by planned work. 93 OUTSTANDING rows deduped to 78; rows 79-80 come from this cleanup's manifest checks.
+Dropped from the source tables: 67 DONE, 26 DEPRECATED, 24 COVERED by planned work. 93 OUTSTANDING rows deduped to 78; rows 79-80 come from this cleanup's manifest checks; rows 81-87 were added after.
+
+Rows 88-128 come from the gap analysis `~/nice/surveys/notes/gaps.md` (cited as `gaps`): §1 ranks 1-23 in rank order, then the survey 001 sets (Data grid, Charts, AI/chat), then §2-§3. Covered by earlier rows: Slider (81), Divider (45), Combobox (42), number stepper (41). Total 128 rows; 102 in the components phase.
 
 Phases, in order: pre-monorepo → monorepo → storybook-rework → components → manifest. Within a phase, rows are sorted by impact.
 
@@ -110,3 +112,44 @@ Phases, in order: pre-monorepo → monorepo → storybook-rework → components 
 | 85 | Golden KPI benchmarks: paired agent tasks (e.g. media metadata audit, fix all missing alt text) run on a control site and on a Nice site; record measured tokens and wall-clock time; results feed the token-spend pitch. Owned by the UI-testing agents. Owner direction 2026-10-27 | nice-ux/benchmarks (new), website | L | testing | storybook-rework |
 | 86 | Research: locating component instances (source file:line from a rendered instance or from props), the feasibility and cost for agents. Inputs: React 19 removed _debugSource; prior art for humans (click-to-component, LocatorJS, react-dev-inspector). Decide before rows 84–85 build on it | notes | M | research | components |
 | 87 | DONE 2026-10-27 (ceb2ebc7). `@niceprototypes/ux` re-exports no components: `export *` skips default exports, and component packages export their component only as `default`, so `import { Button } from "@niceprototypes/ux"` fails | packages/ux/src/index.ts; packages/button/src/index.ts:6; packages/ux/dist/index.d.ts | S | ux | monorepo |
+| 88 | Radio + RadioGroup (reuse Checkbox tokens and focus ring; works in Field/Fieldset) | gaps §1 #1; no package | S | new: packages/radio | components |
+| 89 | Menu set: Menu, MenuItem, MenuGroup, MenuSeparator, MenuButton (menu roles, arrow keys, typeahead, close on select; on Popover + List) | gaps §1 #2; no package | M | new: packages/menu | components |
+| 90 | Toast set: Toast, Toaster region, `toast()` service, z-index layer, `aria-live` | gaps §1 #4; no package | M | new: packages/toast | components |
+| 91 | Alert / Banner inline message on the status tokens | gaps §1 #5; no package | S | new: packages/alert | components |
+| 92 | ProgressBar + ProgressCircle/Spinner (`role=progressbar`) + Button `loading` | gaps §1 #6, §2 Button; spinner only via Icon `animation="spin"` | S | new: packages/progress, button | components |
+| 93 | Badge (count/status) + Tag (removable, selectable) + TagGroup | gaps §1 #7; no package | S | new: packages/badge | components |
+| 94 | Card + header/body/footer slots + clickable/selected variant (Tile has no border, radius, shadow or selected state). Needs row 112 | gaps §1 #8, §2 Tile, §4b | S–M | new: packages/card | components |
+| 95 | Grid layout primitive (`columns`, `minChildWidth`, span props) on Flex spacing services; Flex stays the default | gaps §1 #9, §2 Flex, §4a | S–M | new: packages/grid, flex | components |
+| 96 | Table set: semantic Table, sort header, row selection (needs row 115), empty state (row 106), Pagination (row 107) | gaps §1 #10; no package | L | new: packages/table | components |
+| 97 | Data grid: editable, virtualised grid beyond Table (survey 001) | gaps §5; no package | L | new: packages/data-grid | components |
+| 98 | Navigation set: NavList + NavItem + groups, AppShell/PageLayout (header, sidebar, main), Drawer on phone (row 99) | gaps §1 #11; List `selected` covers rows only | M–L | new: packages/navigation | components |
+| 99 | Drawer / Sheet (side and bottom on the Dialog core) + Dialog `size` and full screen on phone | gaps §1 #12, §2 Dialog | M | new: packages/drawer, dialog | components |
+| 100 | Disclosure/Collapsible + Accordion group | gaps §1 #13; no package | S | new: packages/accordion | components |
+| 101 | Avatar (initials, fallback, size tokens) + AvatarGroup | gaps §1 #14; no package | S | new: packages/avatar | components |
+| 102 | Skeleton (box, text, circle) | gaps §1 #15; no package | S | new: packages/skeleton | components |
+| 103 | SegmentedControl/ToggleGroup + ButtonGroup (Tabs `pill` carries tabpanel semantics) | gaps §1 #16; no package | S | new: packages/segmented-control | components |
+| 104 | Breadcrumb + BreadcrumbItem | gaps §1 #18; no package | S | new: packages/breadcrumb | components |
+| 105 | Link: new component or documented `Button href inlined` alias (owner decision) | gaps §1 #19 | S | new: packages/link or button | components |
+| 106 | EmptyState (Illustration + title + description + actions) | gaps §1 #20; no package | S | new: packages/empty-state | components |
+| 107 | Pagination (+ page-size Select) | gaps §1 #21; no package | S | new: packages/pagination | components |
+| 108 | Stepper + Step | gaps §1 #22; no package | M | new: packages/stepper | components |
+| 109 | Utilities: VisuallyHidden, Portal, Show/Hide at breakpoint (on `useBreakpoint`), container queries | gaps §1 #23, §3 Breakpoints | S | styles | components |
+| 110 | Charts set (survey 001): chart components for dashboards, on the chart colour palettes | gaps §5; no package | L | new: packages/chart | components |
+| 111 | AI/chat set (survey 001): Message, Bubble, Attachment, PromptInput, AI label. Icons in row 18 | gaps §5; no package | L | new: packages/chat | components |
+| 112 | Semantic elevation scale (surface + shadow pairs: sunken, raised, overlay) | gaps §3; packages/styles/src/tokens (boxShadow base/large only) | S | styles | components |
+| 113 | Global `focusRing` token + shared focus style service (Popover, List, Select, Calendar, Tile have none or their own) | gaps §3 | S | styles | components |
+| 114 | Semantic z-index steps (dropdown, sticky, modal, toast, tooltip) | gaps §3; zIndex base/low/medium/high/higher | S | styles | components |
+| 115 | Checkbox `indeterminate` | gaps §2; 0 hits in packages/checkbox/src | S | checkbox | components |
+| 116 | List interactive listbox semantics (roving focus) on `selected`/`active` items; base for rows 89, 98 | gaps §2 | M | list | components |
+| 117 | Popover / Tooltip collision flip and shift to stay in the viewport | gaps §2; packages/popover computeAnchorPosition (low-confidence check) | S–M | popover, tooltip | components |
+| 118 | Select `multiple` + rendered option groups (optgroup is flattened) | gaps §2; packages/select/src/components/Select/Select.types.ts | S–M | select | components |
+| 119 | Tabs vertical orientation + overflow scrolling | gaps §2 | S | tabs | components |
+| 120 | Calendar range selection + time picker (DateField range is row 43) | gaps §2 | M | calendar | components |
+| 121 | Input clear button, character count, password reveal (number stepper is row 41) | gaps §2 | S | input | components |
+| 122 | Image error fallback (loading placeholder is row 82) | gaps §2 | S | image | components |
+| 123 | Flex Stack shorthand (vertical by default; optional) | gaps §2 | S | flex | components |
+| 124 | Motion enter/exit presets + Presence helper (reduced motion is row 22) | gaps §3 | S–M | styles | components |
+| 125 | Headless hooks as services: `useControllableState`, `useFocusTrap`, `useClickOutside`, `useId`/`useDisclosure` (internal to Dialog, Popover) | gaps §3 | S–M | styles, dialog, popover | components |
+| 126 | Global density / scale switch | gaps §3; per-component `size` only | M | styles | components |
+| 127 | RTL logical properties (74 `left:`, 27 `right:`) + number, date and relative-time formatter services | gaps §3 | M | styles + packages | components |
+| 128 | High-contrast theme + accent/seed palette generation (forced colors is row 51) | gaps §3 | M | styles | components |
