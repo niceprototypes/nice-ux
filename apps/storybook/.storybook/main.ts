@@ -47,9 +47,8 @@ const config: StorybookConfig = {
   stories: [
     "../stories/**/*.mdx",
     "../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)",
-    // Hidden until ready — excluded from the sidebar, not deleted. The story
-    // files stay on disk; remove these negations to re-show Slider / Scroll.
-    "!../stories/Components/Slider/**",
+    // Legacy Slider / Scroll docs pages, hidden until reworked; the CSF Playgrounds are indexed.
+    "!../stories/Components/Slider/**/*.mdx",
     "!../stories/Components/Scroll/**",
   ],
   addons: [
