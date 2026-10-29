@@ -4,7 +4,7 @@ Merged from the 2026-10-26 triage of `manifest/.reports/` (deleted; backup `~/ni
 
 Dropped from the source tables: 67 DONE, 26 DEPRECATED, 24 COVERED by planned work. 93 OUTSTANDING rows deduped to 78; rows 79-80 come from this cleanup's manifest checks; rows 81-87 were added after.
 
-Rows 88-128 come from the gap analysis `~/nice/surveys/notes/gaps.md` (cited as `gaps`): §1 ranks 1-23 in rank order, then the survey 001 sets (Data grid, Charts, AI/chat), then §2-§3. Covered by earlier rows: Slider (81), Divider (45), Combobox (42), number stepper (41). Total 128 rows; 102 in the components phase.
+Rows 88-128 come from the gap analysis `~/nice/surveys/notes/gaps.md` (cited as `gaps`): §1 ranks 1-23 in rank order, then the survey 001 sets (Data grid, Charts, AI/chat), then §2-§3. Covered by earlier rows: Slider (81), Divider (45), Combobox (42), number stepper (41). Rows 129-142 are API gaps found while writing the Playground stories (storybook-rework). Total 142 rows.
 
 Phases, in order: pre-monorepo → monorepo → storybook-rework → components → manifest. Within a phase, rows are sorted by impact.
 
