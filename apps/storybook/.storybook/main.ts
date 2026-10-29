@@ -54,6 +54,8 @@ const config: StorybookConfig = {
   ],
   addons: [
     getAbsolutePath("@storybook/addon-links"),
+    // Runs story `play` tests in Vitest browser mode (vitest.config.ts); test panel in the UI.
+    getAbsolutePath("@storybook/addon-vitest"),
     {
       name: getAbsolutePath("@storybook/addon-docs"),
       options: {
