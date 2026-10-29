@@ -539,6 +539,8 @@ Seeding and `registerTokens` write through one function (`writeToken` in `regist
 
 ### transform — Adjust a colour's channels
 
+Colour values are written as `hsla(h, s%, l%, a)`, never rgb()/rgba()/hex, so `transform` can adjust their channels.
+
 `getToken(address, { transform })` adjusts a colour token's hsla channels and returns CSS relative color syntax, so the result stays a `var()` underneath and keeps following the theme cascade:
 
 ```ts
