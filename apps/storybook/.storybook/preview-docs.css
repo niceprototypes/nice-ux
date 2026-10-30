@@ -18,6 +18,14 @@
     ):not(.sb-unstyled, .sb-unstyled *) {
       color: inherit;
     }
+
+    /* Inline code: Storybook's light-palette code chip → Nice code tokens. */
+    & code:not(pre code) {
+      color: var(--np--code--color);
+      background-color: var(--np--code--background-color);
+      border-color: var(--np--code--border-color);
+      font-family: var(--np--code--font-family--code);
+    }
   }
 
   &.sbdocs-wrapper {
