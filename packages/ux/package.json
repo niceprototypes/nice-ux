@@ -44,6 +44,7 @@
     "@niceprototypes/list": "workspace:^",
     "@niceprototypes/logo": "workspace:^",
     "@niceprototypes/popover": "workspace:^",
+    "@niceprototypes/radio": "workspace:^",
     "@niceprototypes/scroll": "workspace:^",
     "@niceprototypes/select": "workspace:^",
     "@niceprototypes/slider": "workspace:^",

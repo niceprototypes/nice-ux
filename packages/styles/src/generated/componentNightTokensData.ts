@@ -27,6 +27,7 @@ const componentNightTokensData: ComponentNightTokensData = {
     }
   },
   "popover": {},
+  "radio": {},
   "select": {},
   "tabs": {},
   "tile": {},

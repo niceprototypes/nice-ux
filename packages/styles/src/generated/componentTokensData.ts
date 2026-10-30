@@ -612,6 +612,67 @@ const componentTokensData: ComponentTokensData = {
       "base": "calc(var(--np--size) * 6)"
     }
   },
+  "radio": {
+    "size": {
+      "smaller": "var(--np--checkbox--size--smaller)",
+      "small": "var(--np--checkbox--size--small)",
+      "base": "var(--np--checkbox--size)",
+      "large": "var(--np--checkbox--size--large)",
+      "larger": "var(--np--checkbox--size--larger)"
+    },
+    "backgroundColor": {
+      "unchecked": "var(--np--background-color)",
+      "base": "var(--np--color)",
+      "link": "var(--np--color--link)",
+      "success": "var(--np--color--success)",
+      "highlight": "var(--np--color--highlight)",
+      "warning": "var(--np--color--warning)",
+      "error": "var(--np--color--error)"
+    },
+    "borderColor": {
+      "base": "var(--np--border-color)",
+      "subtle": "var(--np--border-color--subtle)",
+      "strong": "var(--np--border-color--strong)",
+      "stronger": "var(--np--border-color--stronger)",
+      "success": "var(--np--border-color--success)",
+      "highlight": "var(--np--border-color--highlight)",
+      "warning": "var(--np--border-color--warning)",
+      "error": "var(--np--border-color--error)",
+      "link": "var(--np--border-color--link)"
+    },
+    "borderWidth": {
+      "base": "var(--np--checkbox--border-width)"
+    },
+    "dot": {
+      "size": {
+        "smaller": "6px",
+        "small": "6px",
+        "base": "8px",
+        "large": "10px",
+        "larger": "12px"
+      },
+      "color": {
+        "base": "var(--np--color--inverse)"
+      }
+    },
+    "gap": {
+      "base": "var(--np--gap--small)"
+    },
+    "disabledOpacity": {
+      "base": "var(--np--checkbox--disabled-opacity)"
+    },
+    "focusRing": {
+      "width": {
+        "base": "var(--np--checkbox--focus-ring--width)"
+      },
+      "color": {
+        "base": "var(--np--color--link)"
+      },
+      "offset": {
+        "base": "var(--np--checkbox--focus-ring--offset)"
+      }
+    }
+  },
   "select": {
     "chevron": {
       "size": {

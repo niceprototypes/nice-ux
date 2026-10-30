@@ -28,7 +28,7 @@ export type BackgroundColorInverseType = "base" | "raised" | "success" | "highli
 export type BorderColorInverseType = "base" | "subtle" | "strong" | "stronger" | "success" | "highlight" | "warning" | "error" | "link"
 export type ColorInverseType = "base" | "light" | "lighter" | "lightest" | "disabled" | "link" | "success" | "highlight" | "warning" | "error"
 
-export type ComponentPrefix = "button" | "calendar" | "checkbox" | "code" | "dialog" | "field" | "icon" | "image" | "ink" | "input" | "lightbox" | "line" | "list" | "logo" | "popover" | "select" | "tabs" | "tile" | "toggle"
+export type ComponentPrefix = "button" | "calendar" | "checkbox" | "code" | "dialog" | "field" | "icon" | "image" | "ink" | "input" | "lightbox" | "line" | "list" | "logo" | "popover" | "radio" | "select" | "tabs" | "tile" | "toggle"
 
 /** Variant union of every token group, keyed by address group (`"fontSize"`, `"button.icon.size"`), plus custom groups declared on `CustomTokenVariants`. */
 export interface TokenVariants extends CustomTokenVariants {
@@ -161,6 +161,17 @@ export interface TokenVariants extends CustomTokenVariants {
   "popover.boxShadow": "base"
   "popover.zIndex": "base"
   "popover.maxHeight": "base"
+  "radio.size": "smaller" | "small" | "base" | "large" | "larger"
+  "radio.backgroundColor": "unchecked" | "base" | "link" | "success" | "highlight" | "warning" | "error"
+  "radio.borderColor": "base" | "subtle" | "strong" | "stronger" | "success" | "highlight" | "warning" | "error" | "link"
+  "radio.borderWidth": "base"
+  "radio.dot.size": "smaller" | "small" | "base" | "large" | "larger"
+  "radio.dot.color": "base"
+  "radio.gap": "base"
+  "radio.disabledOpacity": "base"
+  "radio.focusRing.width": "base"
+  "radio.focusRing.color": "base"
+  "radio.focusRing.offset": "base"
   "select.chevron.size": "smaller" | "small" | "base" | "large" | "larger"
   "tabs.padding": "smaller" | "small" | "base" | "large" | "larger"
   "tabs.gap": "smaller" | "small" | "base" | "large" | "larger"
@@ -224,6 +235,9 @@ export interface TokenInverseVariants {
   "list.divider.color": "base"
   "list.backgroundColor": "active" | "selected"
   "list.color": "base" | "selected" | "disabled"
+  "radio.backgroundColor": "unchecked" | "base" | "link" | "success" | "highlight" | "warning" | "error"
+  "radio.borderColor": "base" | "subtle" | "strong" | "stronger" | "success" | "highlight" | "warning" | "error" | "link"
+  "radio.focusRing.color": "base"
   "tabs.color": "base" | "selected"
   "tabs.borderColor": "base"
   "tabs.indicator.color": "base"

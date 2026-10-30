@@ -1,0 +1,8 @@
+{
+  "$schema": "../config-exports/src/schema.json",
+  "description": "RadioGroup and Radio: native radios behind token-driven circles, wired to an enclosing Field.",
+  "components": [
+    "RadioGroup",
+    "Radio"
+  ]
+}
