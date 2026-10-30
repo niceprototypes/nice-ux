@@ -2,7 +2,7 @@ import { getIconEncoded } from "@niceprototypes/icon/get-icon-encoded"
 
 /**
  * Inject the sidebar glyph stylesheet into the manager document: the Nice
- * `folder-closed` icon masked over each group row's icon slot, and the Nice `x`
+ * `folder-closed` icon masked over each group or component row's icon slot, and the Nice `x`
  * over the mobile menu's close button. Masks inherit `background-color` from the
  * sidebar stylesheet, so they flip with the `[data-theme]` cascade. The tree's
  * connector lines are not glyphs — the sidebar stylesheet draws them on the guide
@@ -16,7 +16,8 @@ export function injectSidebarGlyphs(): void {
   style.textContent = `
   .sidebar-item {
     /* Folder icons */
-    &[data-nodetype="group"] {
+    &[data-nodetype="group"],
+    &[data-nodetype="component"] {
       > [tabindex] > div > svg {
         -webkit-mask-image: url("${folderIcon}");
         mask-image: url("${folderIcon}");

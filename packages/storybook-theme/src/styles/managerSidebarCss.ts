@@ -97,6 +97,7 @@ export const managerSidebarCss = `
   background-color: transparent !important;
 
   &[data-nodetype="group"],
+  &[data-nodetype="component"],
   &[data-nodetype="document"],
   &[data-nodetype="story"] {
     margin-top: 0 !important;
@@ -116,7 +117,8 @@ export const managerSidebarCss = `
     }
   }
 
-  &[data-nodetype="group"] {
+  &[data-nodetype="group"],
+  &[data-nodetype="component"] {
     &:hover,
     &:focus {
       background-color: transparent !important;
@@ -176,12 +178,15 @@ export const managerSidebarCss = `
 
 /* Tree guides — one cell per depth level. The strip's negative end margin cancels
    the row's flex gap, so a row's icon or label starts exactly at the end of its
-   last cell and a depth-0 row (no cells) starts flush. */
+   last cell and a depth-0 row (no cells) starts flush. Its negative block margins
+   cancel the row's vertical padding, so guides span the full row and join the
+   next row's. */
 
 .nice-tree-guides {
   display: flex;
   flex: none;
   align-self: stretch;
+  margin-block: calc(-1 * ${getToken("gap:smaller")});
   margin-inline-end: calc(-1 * ${iconGap});
   pointer-events: none;
 }
@@ -211,6 +216,7 @@ export const managerSidebarCss = `
 .sidebar-container[data-has-selected="true"] {
   .sidebar-item[data-selected="false"][data-selected-group="false"] {
     &[data-nodetype="group"],
+    &[data-nodetype="component"],
     &[data-nodetype="document"],
     &[data-nodetype="story"] {
       > [tabindex] {
@@ -222,7 +228,8 @@ export const managerSidebarCss = `
       }
     }
 
-    &[data-nodetype="group"] {
+    &[data-nodetype="group"],
+    &[data-nodetype="component"] {
       > [tabindex] {
         > div > svg {
           background-color: ${getToken("color:lighter")};
@@ -249,6 +256,7 @@ ${getBreakpoint("laptop+")} {
   /* The label drops to \`small\` only where there is room; below laptop it keeps
      the base size, which reads better on a narrow menu. */
   .sidebar-item[data-nodetype="group"] > [tabindex],
+  .sidebar-item[data-nodetype="component"] > [tabindex],
   .sidebar-item[data-nodetype="document"] > [tabindex],
   .sidebar-item[data-nodetype="story"] > [tabindex] {
     font-size: ${getToken("fontSize:small")};
