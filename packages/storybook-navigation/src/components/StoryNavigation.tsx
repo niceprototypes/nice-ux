@@ -9,7 +9,7 @@ import { navigate } from "@storybook/addon-links"
 import Flex from "@niceprototypes/flex"
 import Ink from "@niceprototypes/ink"
 import type { ThemeType } from "@niceprototypes/styles"
-import { MobileOnlyDiv, OuterFlex, SpacerDiv, TabletUpDiv } from "./StoryNavigation.styles"
+import { MobileOnlyDiv, OuterFlex, ReservedSpaceStyle, TabletUpDiv } from "./StoryNavigation.styles"
 import {
   TOGGLE_NAV_EVENT,
   NAV_STATE_EVENT,
@@ -256,7 +256,7 @@ const StoryNavigation: React.FC<StoryNavigationProps> = ({
           </MobileOnlyDiv>
         </Flex>
       </OuterFlex>
-      <SpacerDiv />
+      <ReservedSpaceStyle />
     </>
   )
 }

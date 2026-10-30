@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled, { createGlobalStyle } from "styled-components"
 import Flex from "@niceprototypes/flex"
 import { getBreakpoint, getToken } from "@niceprototypes/styles"
 
@@ -39,8 +39,16 @@ export const OuterFlex = styled(Flex).attrs({
   }
 `
 
-export const SpacerDiv = styled.div`
-  height: calc(${getToken("gap", "large")} * 2 + ${getToken("size", "small")});
+/**
+ * Reserves the fixed bar's height at the top of Storybook's story and docs roots,
+ * so their content starts below the bar. Padding on the root, not a spacer
+ * element, keeps the story the root's first child for play functions that select it.
+ */
+export const ReservedSpaceStyle = createGlobalStyle`
+  #storybook-root,
+  #storybook-docs {
+    padding-top: calc(${getToken("gap", "large")} * 2 + ${getToken("size", "small")});
+  }
 `
 
 /**
