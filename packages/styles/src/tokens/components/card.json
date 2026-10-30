@@ -1,0 +1,53 @@
+{
+  "backgroundColor": {
+    "base": "var(--np--background-color)",
+    "raised": "var(--np--background-color--raised)",
+    "success": "var(--np--background-color--success)",
+    "highlight": "var(--np--background-color--highlight)",
+    "warning": "var(--np--background-color--warning)",
+    "error": "var(--np--background-color--error)",
+    "link": "var(--np--background-color--link)"
+  },
+  "borderColor": {
+    "base": "var(--np--border-color)",
+    "selected": "var(--np--border-color--link)"
+  },
+  "hover": {
+    "borderColor": {
+      "base": "var(--np--border-color--strong)"
+    }
+  },
+  "borderWidth": {
+    "base": "var(--np--border-width)"
+  },
+  "borderRadius": {
+    "base": "var(--np--border-radius--large)"
+  },
+  "boxShadow": {
+    "elevated": "var(--np--box-shadow)",
+    "hover": "var(--np--box-shadow--large)"
+  },
+  "padding": {
+    "base": "var(--np--gap)"
+  },
+  "gap": {
+    "base": "var(--np--gap)"
+  },
+  "focusRing": {
+    "width": {
+      "base": "var(--np--border-width--large)"
+    },
+    "color": {
+      "base": "var(--np--color--link)"
+    },
+    "offset": {
+      "base": "var(--np--gap--smaller)"
+    }
+  },
+  "disabledOpacity": {
+    "base": "0.5"
+  },
+  "$themes": {
+    "night": {}
+  }
+}

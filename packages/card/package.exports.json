@@ -1,0 +1,10 @@
+{
+  "$schema": "../config-exports/src/schema.json",
+  "description": "Card: an outline, elevated or filled surface with CardHeader, CardBody and CardFooter slots; static, a link or a (toggle) button.",
+  "components": [
+    "Card",
+    "CardHeader",
+    "CardBody",
+    "CardFooter"
+  ]
+}

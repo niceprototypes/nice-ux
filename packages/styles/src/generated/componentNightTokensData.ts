@@ -10,6 +10,7 @@ export type ComponentNightTokensData = Record<string, { [key: string]: Component
 const componentNightTokensData: ComponentNightTokensData = {
   "button": {},
   "calendar": {},
+  "card": {},
   "checkbox": {},
   "code": {},
   "dialog": {},

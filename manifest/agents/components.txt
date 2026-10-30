@@ -21,6 +21,10 @@ Button(button) [components-forms-button--playground] onClick?:fn filled?:boolean
 ButtonIcon(button) name:NonNullable<IconProps["name"]> vendor?:ButtonIconVendorType theme?:ThemeType
 Calendar(calendar) [components-forms-calendar--playground] value?:CalendarDateType|null defaultValue?:CalendarDateType|null onChange?:fn min?:CalendarDateType max?:CalendarDateType isDateDisabled?:fn locale?:string=useLocale().locale firstDayOfWeek?:0|1|2|3|4|5|6 size?:SizeType="base" theme?:ThemeType
 DateField(calendar) [components-forms-datefield--playground] value?:CalendarDateType|null defaultValue?:CalendarDateType|null onChange?:fn min?:CalendarMinType max?:CalendarMaxType isDateDisabled?:CalendarIsDateDisabledType locale?:CalendarLocaleType=useLocale().locale name?:string
+Card(card) [components-card--playground] children?:node variant?:"outline"|"elevated"|"filled"="outline" padding?:FlexSpacingType gap?:GapType borderRadius?:BorderRadiusType backgroundColor?:ColorTokenProp<CardBackgroundColorType> onClick?:fn href?:string selected?:boolean disabled?:boolean=false theme?:ThemeType
+CardBody(card) [components-cardbody--playground] children?:node
+CardFooter(card) [components-cardfooter--playground] children?:node justifyContent?:FlexJustifyContentType="flex-end"
+CardHeader(card) [components-cardheader--playground] title?:node description?:node titleProps?:Partial<Omit<InkProps, "children">> descriptionProps?:Partial<Omit<InkProps, "children">> end?:node children?:node
 Checkbox(checkbox) [components-forms-checkbox--playground] checked?:boolean defaultChecked?:boolean onChange?:fn disabled?:boolean size?:SizeType backgroundColor?:ColorTokenProp<CheckboxBackgroundColorType> borderColor?:ColorTokenProp<CheckboxBorderColorType> borderRadius?:BorderRadiusType borderWidth?:BorderWidthType iconName?:NonNullable<IconProps["name"]>="check" iconVendor?:IconVendorType=false children?:node name?:string theme?:ThemeType
 Code(code) [components-code--playground] code:string language?:string showLabel?:boolean=true copyOnClick?:boolean=true inlined?:boolean=false fit?:boolean=true margin?:GapType="large"
 CodeLabel(code) language?:string

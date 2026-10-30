@@ -20,7 +20,7 @@ const AS_OPTIONS = ["div", "section", "article", "aside", "main", "nav", "header
 const SPAN_FIRST_OPTIONS = [1, 2, "full"] as const satisfies readonly GridItemColSpanType[]
 
 /** An unset choice for optional selects; `mapping` turns it into `undefined`. */
-const NONE = "none"
+const NONE = "unset"
 
 /**
  * PlaygroundArgs

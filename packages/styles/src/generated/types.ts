@@ -28,7 +28,7 @@ export type BackgroundColorInverseType = "base" | "raised" | "success" | "highli
 export type BorderColorInverseType = "base" | "subtle" | "strong" | "stronger" | "success" | "highlight" | "warning" | "error" | "link"
 export type ColorInverseType = "base" | "light" | "lighter" | "lightest" | "disabled" | "link" | "success" | "highlight" | "warning" | "error"
 
-export type ComponentPrefix = "button" | "calendar" | "checkbox" | "code" | "dialog" | "field" | "icon" | "image" | "ink" | "input" | "lightbox" | "line" | "list" | "logo" | "popover" | "radio" | "select" | "tabs" | "tile" | "toggle"
+export type ComponentPrefix = "button" | "calendar" | "card" | "checkbox" | "code" | "dialog" | "field" | "icon" | "image" | "ink" | "input" | "lightbox" | "line" | "list" | "logo" | "popover" | "radio" | "select" | "tabs" | "tile" | "toggle"
 
 /** Variant union of every token group, keyed by address group (`"fontSize"`, `"button.icon.size"`), plus custom groups declared on `CustomTokenVariants`. */
 export interface TokenVariants extends CustomTokenVariants {
@@ -70,6 +70,18 @@ export interface TokenVariants extends CustomTokenVariants {
   "calendar.color": "base" | "today" | "selected" | "range" | "disabled"
   "calendar.backgroundColor": "base" | "selected" | "range"
   "calendar.borderColor": "today"
+  "card.backgroundColor": "base" | "raised" | "success" | "highlight" | "warning" | "error" | "link"
+  "card.borderColor": "base" | "selected"
+  "card.hover.borderColor": "base"
+  "card.borderWidth": "base"
+  "card.borderRadius": "base"
+  "card.boxShadow": "elevated" | "hover"
+  "card.padding": "base"
+  "card.gap": "base"
+  "card.focusRing.width": "base"
+  "card.focusRing.color": "base"
+  "card.focusRing.offset": "base"
+  "card.disabledOpacity": "base"
   "checkbox.size": "smaller" | "small" | "base" | "large" | "larger"
   "checkbox.backgroundColor": "unchecked" | "base" | "link" | "success" | "highlight" | "warning" | "error"
   "checkbox.borderColor": "base" | "subtle" | "strong" | "stronger" | "success" | "highlight" | "warning" | "error" | "link"
@@ -215,6 +227,10 @@ export interface TokenInverseVariants {
   "calendar.color": "base" | "today" | "selected" | "range" | "disabled"
   "calendar.backgroundColor": "base" | "selected" | "range"
   "calendar.borderColor": "today"
+  "card.backgroundColor": "base" | "raised" | "success" | "highlight" | "warning" | "error" | "link"
+  "card.borderColor": "base" | "selected"
+  "card.hover.borderColor": "base"
+  "card.focusRing.color": "base"
   "checkbox.backgroundColor": "unchecked" | "base" | "link" | "success" | "highlight" | "warning" | "error"
   "checkbox.borderColor": "base" | "subtle" | "strong" | "stronger" | "success" | "highlight" | "warning" | "error" | "link"
   "checkbox.focusRing.color": "base"

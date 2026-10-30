@@ -19,6 +19,7 @@
   "dependencies": {
     "@niceprototypes/button": "workspace:^",
     "@niceprototypes/calendar": "workspace:^",
+    "@niceprototypes/card": "workspace:^",
     "@niceprototypes/checkbox": "workspace:^",
     "@niceprototypes/code": "workspace:^",
     "@niceprototypes/dialog": "workspace:^",
