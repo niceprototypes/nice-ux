@@ -74,7 +74,7 @@ const preview: Preview = {
       // toggle still works and the user's choice persists.
       current: "light",
       dark: themes.dark,
-      light: themes.normal,
+      light: themes.light,
     },
     controls: {
       matchers: {
