@@ -124,6 +124,21 @@ export const managerSidebarCss = `
       background-color: transparent !important;
     }
 
+    /* The context-menu button (@storybook/addon-vitest) paints a fill and a
+       box-shadow fade per state; it keeps only its dots in the row's colour. */
+    > button[data-testid="context-menu"] {
+      &,
+      &:hover,
+      &:focus,
+      &:focus-visible,
+      &:active,
+      &[aria-expanded="true"] {
+        background: none !important;
+        box-shadow: none !important;
+        color: ${getToken("color")} !important;
+      }
+    }
+
     /* The icon slot holds the folder only — the collapse chevron is dropped. */
     > [tabindex] > div {
       gap: 0;
