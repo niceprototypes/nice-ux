@@ -11,28 +11,7 @@
 import styled, { css } from "styled-components"
 import { getToken, resolveColorProp, type BorderRadiusType, type BorderWidthType, type BorderColorType, type ColorTokenProp } from "@niceprototypes/styles"
 import type { ImageBackgroundSizeType, ImageBackgroundPositionType } from "./Image.types"
-
-/**
- * Maps ImageBackgroundSizeType to the equivalent CSS background-size value.
- * "fill" maps to "100% 100%" to stretch in both dimensions.
- * "scale-down" maps to "contain" as the closest background-size equivalent.
- * "none" maps to "auto" (none is not valid for CSS background-size).
- *
- * Used for the div rendering path only; the img path resolves object-fit via
- * the backgroundSize token directly, since CSS object-fit accepts every value.
- */
-function backgroundSizeToCss(size: ImageBackgroundSizeType): string {
-  switch (size) {
-    case "fill":
-      return "100% 100%"
-    case "scale-down":
-      return "contain"
-    case "none":
-      return "auto"
-    default:
-      return size
-  }
-}
+import { backgroundSizeToCss } from "../../utilities/backgroundSizeToCss"
 
 const sharedStyles = css<{
   $width?: string

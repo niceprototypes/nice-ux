@@ -12,6 +12,7 @@
  *   nicely reset                build → dedupe → clean (post-refactor recovery)
  *   nicely develop              Rebuild + reload loop across linked packages
  *   nicely bump <level> <msg>   Record a bump-intent entry
+ *   nicely thumbnails <dir>     Write 16px image thumbnails as JSON keyed by public path
  *
  * Targets for the list verbs (publish / build) are uniform: `all`, a group
  * (`icons`), or space-separated package names. See args/select.js.
@@ -47,6 +48,7 @@ const { handleScopedDedupe } = require('./cli/handle-scoped-dedupe');
 const { handleLink } = require('./cli/handle-link');
 const { handleBuild } = require('./cli/handle-build-icons');
 const { writeResetLog } = require('./cli/reset-log');
+const { handleThumbnails } = require('./cli/handle-thumbnails');
 
 /** Verbs that touch node_modules and therefore report the package manager. */
 const PM_VERBS = new Set(['link', 'unlink', 'dedupe', 'reset', 'develop']);
@@ -225,6 +227,16 @@ function runBump(projectDir, targets) {
   }
 }
 
+function runThumbnails(targets, options) {
+  if (targets.length !== 1) {
+    fail(`thumbnails takes one public directory (got ${targets.length}). Try: ${cyan('nicely thumbnails ./public')}`);
+    process.exit(1);
+  }
+  handleThumbnails(targets[0], { out: options.out, dryRun: options.dryRun })
+    .then((code) => process.exit(code))
+    .catch((e) => { fail(e.message); process.exit(1); });
+}
+
 // ── Main ────────────────────────────────────────────────────────────────────
 
 /**
@@ -271,6 +283,7 @@ function main() {
     case 'reset': return runReset(projectDir, options);
     case 'develop': return runDev(projectDir, options);
     case 'bump': return runBump(projectDir, targets);
+    case 'thumbnails': return runThumbnails(targets, options);
     default:
       // Unreachable — parseCommand only returns known verbs here.
       showUsage();

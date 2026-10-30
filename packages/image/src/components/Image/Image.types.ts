@@ -134,6 +134,42 @@ export type ImageRenderImageType = (src: string, alt: string) => React.ReactNode
 export type ImageVendorType = boolean
 
 /**
+ * ImageThumbnailType
+ *
+ * Low-resolution preview painted on the same element while the full image
+ * loads, then cleared. A data URI is shown blurred; a URL is shown as-is.
+ *
+ * Values:
+ * - string: Data URI or URL of the thumbnail (e.g. from `nice-toolkit thumbnails`)
+ * - false: No thumbnail, intentionally (icons, SVG, GIF, tiny assets)
+ */
+export type ImageThumbnailType = string | false
+
+/**
+ * ImageLoadingType
+ *
+ * Native `loading` attribute, passed through to the img element (as="img" only).
+ * Unset keeps the browser default (eager).
+ *
+ * Values:
+ * - "eager": Load immediately
+ * - "lazy": Defer until near the viewport (not for above-the-fold images)
+ */
+export type ImageLoadingType = "eager" | "lazy"
+
+/**
+ * ImageFetchPriorityType
+ *
+ * Native `fetchpriority` attribute, passed through to the img element (as="img" only).
+ *
+ * Values:
+ * - "high": Fetch ahead of other images (the LCP image)
+ * - "low": Fetch after other images
+ * - "auto": Browser default
+ */
+export type ImageFetchPriorityType = "high" | "low" | "auto"
+
+/**
  * ImageProps
  *
  * Complete prop definition for the Image component.
@@ -184,6 +220,15 @@ export type ImageProps = {
   /** Route src/width/height through the registered vendor resolver */
   vendor?: ImageVendorType
 
+  /** Preview painted until the full image loads; false opts out intentionally */
+  thumbnail?: ImageThumbnailType
+
+  /** Native loading attribute (as="img" only); unset is eager */
+  loading?: ImageLoadingType
+
+  /** Native fetchpriority attribute (as="img" only) */
+  fetchPriority?: ImageFetchPriorityType
+
   /** CSS class name for styling */
   className?: string
 
@@ -213,6 +258,9 @@ namespace ImageTypes {
   export type Theme = ImageThemeType
   export type RenderImage = ImageRenderImageType
   export type Vendor = ImageVendorType
+  export type Thumbnail = ImageThumbnailType
+  export type Loading = ImageLoadingType
+  export type FetchPriority = ImageFetchPriorityType
   export type Props = ImageProps
 }
 

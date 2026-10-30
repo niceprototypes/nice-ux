@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
-import { expect, fn, within } from "storybook/test"
+import { expect, fn, waitFor, within } from "storybook/test"
 import { getToken, themeTokensData } from "@niceprototypes/styles"
 import type {
   BackgroundSizeType,
@@ -11,7 +11,7 @@ import type {
   ColorTokenProp,
 } from "@niceprototypes/styles"
 import Image from "@niceprototypes/image"
-import type { ImageAsType, ImageProps } from "@niceprototypes/image"
+import type { ImageAsType, ImageFetchPriorityType, ImageLoadingType, ImageProps } from "@niceprototypes/image"
 
 /** Option lists, typed against the unions on disk so a renamed token fails the build. */
 const AS_OPTIONS = ["img", "div"] as const satisfies readonly ImageAsType[]
@@ -21,9 +21,20 @@ const BORDER_WIDTH_OPTIONS = ["none", "smaller", "small", "base", "large", "larg
 const BORDER_COLOR_OPTIONS = ["base", "subtle", "strong", "stronger", "success", "highlight", "warning", "error", "link"] as const satisfies readonly BorderColorType[]
 const BREAKPOINT_OPTIONS = ["phone", "tablet", "laptop", "desktop"] as const satisfies readonly BreakpointName[]
 const THEME_OPTIONS = Object.keys(themeTokensData)
+const LOADING_OPTIONS = ["eager", "lazy"] as const satisfies readonly ImageLoadingType[]
+const FETCH_PRIORITY_OPTIONS = ["high", "low", "auto"] as const satisfies readonly ImageFetchPriorityType[]
 
 /** The Storybook static image. */
 const PHOTO = "/rasters/og-image.png"
+
+/** PHOTO's 16px thumbnail, from `nicely thumbnails apps/storybook/public/rasters`. */
+const PHOTO_THUMBNAIL = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAJCAMAAAAM9FwAAAABrVBMVEUTEyU2Hyk5Jy8gFCEkGCEdGCMSEyISFB4SFCAPEhkZFR8aEyInJC8oFiYSERwbGCI0HCkqHC4ZFCMtFCQfIC0gIy8fIikvEyI1JDAVEyURFRsnJDAlHCgpJTMVEyYzJzcpEiUUEyYqIzQ5NT0wLzcqKDoeGyQnJDQ2N0IYFSs3GCkoKi0XFic7FCA+FSQjEiUzGzM3OT8tNDglFykeEygcHyQtJC0xEyUmJitZPi82MyxoOi4nFC5xPjomJiwyHy8dIyY2GiswMjhnRTVnNCh9OjlaOlYcHyYdISVoJR9CHDVXRU5EPTBEGilZHyFiMCiGOjJMHiQxGCcqMnk8Om9tM1VUMG9tMzJAIDF9ME8vNDEyRGsUGyVbT0MgOHQTGyY0T2NRUD4pNDUdQmU6VlpaKzRqJ2yDOB4ZHVs9KnpAJDsdPW11LyckHklYI2l/PCcdMjc4UFBpInZSVj5AIGhhLEcgQ15HJEVcLChYJ046V1MhPldXLjNWJXpDIj1+MR8/T0GgQyl/KVGAMUBiIjN7IWRkIzdwHmSHKEyQKGGGI2OXMEhBGzGdNUeNNDAJyyzLAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAoUlEQVQI12OoLkvOjgvOrC3Kq2zq7GptZyisSkmIDglLK8nIzWru7e5gaChOjPV2C40sLa+ryW/sa2MoSIrycbZ1DQhPrUivz2npYYiP8XCwsrR28Y8I9PTz9QpicHeyszDSNrN3tDHX09UyMGYwNdRQUVbT0TTRVxAXFpCQYZASExWRllVXVZIX5GVk4uFn4GTnYGNgUJSTFOJmZmHl4gMAevknqlc8skkAAAAASUVORK5CYII="
+
+/** A src that never loads (404), so the thumbnail stays painted. */
+const PENDING = "/rasters/pending.png"
+
+/** `thumbnail` presets: unset, PHOTO's generated thumbnail, or the explicit opt-out. */
+const THUMBNAIL_PRESETS = { none: undefined, generated: PHOTO_THUMBNAIL, false: false } as const
 
 /** `renderImage` presets: a plain img with the resolved src and alt. */
 const plainImage = fn((src: string, alt: string) => <img src={src} alt={alt} data-render-image="" />)
@@ -37,8 +48,9 @@ const NONE = "none"
  * breakpoint pin, inverse, one transform channel each) and `renderImage` as a preset name,
  * recomposed in `render`.
  */
-type PlaygroundArgs = Omit<ImageProps, "borderColor" | "renderImage"> & {
+type PlaygroundArgs = Omit<ImageProps, "borderColor" | "renderImage" | "thumbnail"> & {
   renderImage: keyof typeof RENDER_IMAGE_PRESETS
+  thumbnail: keyof typeof THUMBNAIL_PRESETS
   borderColor?: BorderColorType
   borderColorTheme?: string
   borderColorBreakpoint?: BreakpointName
@@ -123,6 +135,7 @@ export const Playground: Story = {
     bordered: false,
     vendor: false,
     renderImage: "none",
+    thumbnail: "none",
     children: "",
     borderColorInverse: false,
     borderColorHue: "",
@@ -139,6 +152,11 @@ export const Playground: Story = {
     renderImage: { control: "select", options: Object.keys(RENDER_IMAGE_PRESETS), table: { category: "Content" } },
     // Routes src/width/height through the registered resolver (@niceprototypes/image-vendor; src is an id).
     vendor: { control: "boolean", table: { category: "Content" } },
+
+    // Painted (blurred) until the full image loads; "false" is the explicit opt-out.
+    thumbnail: { control: "select", options: Object.keys(THUMBNAIL_PRESETS), table: { category: "Loading" } },
+    loading: optionalSelect(LOADING_OPTIONS, "Loading"),
+    fetchPriority: optionalSelect(FETCH_PRIORITY_OPTIONS, "Loading"),
 
     width: { control: "text", table: { category: "Layout" } },
     height: { control: "text", table: { category: "Layout" } },
@@ -175,6 +193,7 @@ export const Playground: Story = {
       borderColorLightness,
       borderColorAlpha,
       renderImage,
+      thumbnail,
       width,
       height,
       aspectRatio,
@@ -190,6 +209,7 @@ export const Playground: Story = {
       backgroundPosition: backgroundPosition || undefined,
       borderColor: toBorderColor(args),
       renderImage: RENDER_IMAGE_PRESETS[renderImage],
+      thumbnail: THUMBNAIL_PRESETS[thumbnail],
       children: children || undefined,
     }
     return <Image {...props} />
@@ -261,5 +281,64 @@ export const Theme: Story = {
   args: { ...Playground.args, theme: "night" },
   play: async ({ canvasElement }) => {
     await expect(image(canvasElement).closest('[data-theme="night"]')).not.toBeNull()
+  },
+}
+
+/** The computed background-image of the image element. */
+const backgroundOf = (canvasElement: HTMLElement) => getComputedStyle(image(canvasElement)).backgroundImage
+
+export const ThumbnailPending: Story = {
+  ...Playground,
+  args: { ...Playground.args, src: PENDING, thumbnail: "generated", width: "240px", aspectRatio: "1200/680" },
+  play: async ({ canvasElement }) => {
+    // The full image never loads, so the blurred thumbnail stays on the same <img>.
+    await expect(image(canvasElement)).toHaveAttribute("decoding", "async")
+    await expect(backgroundOf(canvasElement)).toContain("data:image/svg+xml")
+    await expect(decodeURIComponent(backgroundOf(canvasElement))).toContain("feGaussianBlur")
+  },
+}
+
+export const ThumbnailLoaded: Story = {
+  ...Playground,
+  args: { ...Playground.args, thumbnail: "generated", width: "240px", aspectRatio: "1200/680" },
+  play: async ({ canvasElement }) => {
+    await waitFor(() => expect((image(canvasElement) as HTMLImageElement).complete).toBe(true))
+    await waitFor(() => expect(backgroundOf(canvasElement)).toBe("none"))
+  },
+}
+
+export const ThumbnailFalse: Story = {
+  ...Playground,
+  args: { ...Playground.args, src: PENDING, thumbnail: "false" },
+  play: async ({ canvasElement }) => {
+    await expect(backgroundOf(canvasElement)).toBe("none")
+  },
+}
+
+export const ThumbnailDiv: Story = {
+  ...Playground,
+  args: { ...Playground.args, as: "div", thumbnail: "generated", width: "240px", aspectRatio: "1200/680" },
+  play: async ({ canvasElement }) => {
+    // Layered under the full image until a probe of the src loads, then only the full image remains.
+    await waitFor(() => expect(backgroundOf(canvasElement)).not.toContain("data:image/svg+xml"))
+    await expect(backgroundOf(canvasElement)).toContain(PHOTO)
+  },
+}
+
+export const ThumbnailDivPending: Story = {
+  ...Playground,
+  args: { ...Playground.args, as: "div", src: PENDING, thumbnail: "generated", width: "240px", aspectRatio: "1200/680" },
+  play: async ({ canvasElement }) => {
+    await expect(backgroundOf(canvasElement)).toContain(PENDING)
+    await expect(backgroundOf(canvasElement)).toContain("data:image/svg+xml")
+  },
+}
+
+export const Loading: Story = {
+  ...Playground,
+  args: { ...Playground.args, loading: "lazy", fetchPriority: "low" },
+  play: async ({ canvasElement }) => {
+    await expect(image(canvasElement)).toHaveAttribute("loading", "lazy")
+    await expect(image(canvasElement)).toHaveAttribute("fetchpriority", "low")
   },
 }

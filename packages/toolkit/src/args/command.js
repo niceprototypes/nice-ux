@@ -12,7 +12,7 @@
 const { getArg, getMultiArg, hasFlag, parseList } = require('./parsers');
 
 /** The verbs the router dispatches. */
-const VERBS = ['link', 'unlink', 'publish', 'build', 'dedupe', 'clean', 'reset', 'develop', 'bump'];
+const VERBS = ['link', 'unlink', 'publish', 'build', 'dedupe', 'clean', 'reset', 'develop', 'bump', 'thumbnails'];
 
 /**
  * Old flag-command → new invocation, for the one-release migration shim. When a
@@ -34,7 +34,7 @@ const LEGACY = {
 };
 
 /** Flags that consume the following token as their value (for positional split). */
-const FLAGS_WITH_VALUES = new Set(['--exclude', '--add-exclude', '--manager', '--dir', '--watch-dir', '--publish-timeout']);
+const FLAGS_WITH_VALUES = new Set(['--exclude', '--add-exclude', '--manager', '--dir', '--watch-dir', '--publish-timeout', '--out']);
 
 /**
  * Flags that consume every token after them up to the next flag — a list value.
@@ -139,6 +139,7 @@ function parseModifiers(args, { conflictingPackages, pm: defaultPM }) {
     raw: hasFlag(args, '--raw'),
     verbose: hasFlag(args, '--verbose'),
     watchDir: watchDir || 'dist',
+    out: getArg(args, '--out'),
     packagesToRemove,
     pm: forcedPM || defaultPM,
     forcedPM: Boolean(forcedPM),

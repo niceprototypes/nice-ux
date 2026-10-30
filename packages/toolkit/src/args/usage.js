@@ -28,6 +28,7 @@ Commands:
   ${cyan('reset')}                  build → dedupe → clean (post-refactor recovery)
   ${cyan('develop')}                Rebuild + reload loop across linked packages
   ${cyan('bump')} <level> <message> Record a bump-intent entry in ./.nice/bump.md
+  ${cyan('thumbnails')} <dir>       Write 16px image thumbnails to <dir>/thumbnails.json, keyed by public path
   ${cyan('help')}, --help, -h       Show this help
 
 Targets (for ${cyan('publish')} / ${cyan('build')}):
@@ -54,6 +55,7 @@ Flags:
   --exclude <a,b,c>        link/dedupe: singleton-removal list (overrides defaults)
   --add-exclude <a,b,c>    link/dedupe: extend the removal list
   --skip-peer-check        link/dedupe/reset: don't auto-move react → peerDependencies
+  --out <file>             thumbnails: output JSON path (default: <dir>/thumbnails.json)
   --manager <npm|yarn|pnpm> Force a package manager (auto-detected by default)
 
 Examples:
@@ -73,6 +75,7 @@ Examples:
   nicely develop                                Rebuild + reload loop (the common setup)
   nicely develop --stop                         Stop nicely develop and every watcher it started
   nicely bump minor "Add spacing prop"          Record a bump intent
+  nicely thumbnails ./public                    Thumbnail every raster under ./public
 
 Notes:
   ${cyan('dedupe')} finds file: dependencies recursively and removes duplicate singletons
