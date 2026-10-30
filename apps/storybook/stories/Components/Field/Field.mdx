@@ -34,11 +34,9 @@ import { Field, Fieldset, useField, mergeDescribedBy } from "@niceprototypes/fie
 
 <Ink as="h2">Guide</Ink>
 
-<Ink code>@niceprototypes/field</Ink>
-<Ink>has named exports only, no default export.</Ink>
+<Ink><Ink code>@niceprototypes/field</Ink> <Ink>has named exports only, no default export.</Ink></Ink>
 
-<Ink>Field renders a native</Ink>
-<Ink code>{"<label>"}</Ink><Ink>, the control, an optional description and an always-mounted polite live region for the error. It publishes the wiring through context; the control applies it. Input, and everything built on it (Select, DateField), already does:</Ink>
+<Ink><Ink>Field renders a native</Ink> <Ink code>{"<label>"}</Ink><Ink>, the control, an optional description and an always-mounted polite live region for the error. It publishes the wiring through context; the control applies it. Input, and everything built on it (Select, DateField), already does:</Ink></Ink>
 
 <ul>
   <li><Ink><code>id</code> — the control takes the Field's id, so the label's <code>htmlFor</code> names it.</Ink></li>
@@ -59,16 +57,7 @@ import { Field, Fieldset, useField, mergeDescribedBy } from "@niceprototypes/fie
 
 <Ink>In development, Field warns in the console when no element inside it carries the id — the silent failure where the label names nothing.</Ink>
 
-<Ink code>Fieldset</Ink>
-<Ink>groups related controls under a native</Ink>
-<Ink code>{"<fieldset>"}</Ink><Ink>.</Ink>
-<Ink code>legend</Ink>
-<Ink>is required and names the group;</Ink>
-<Ink code>description</Ink>
-<Ink>follows it and is referenced by the fieldset's</Ink>
-<Ink code>aria-describedby</Ink><Ink>.</Ink>
-<Ink code>disabled</Ink>
-<Ink>is the native attribute and disables every control inside.</Ink>
+<Ink><Ink code>Fieldset</Ink> <Ink>groups related controls under a native</Ink> <Ink code>{"<fieldset>"}</Ink><Ink>.</Ink> <Ink code>legend</Ink> <Ink>is required and names the group;</Ink> <Ink code>description</Ink> <Ink>follows it and is referenced by the fieldset's</Ink> <Ink code>aria-describedby</Ink><Ink>.</Ink> <Ink code>disabled</Ink> <Ink>is the native attribute and disables every control inside.</Ink></Ink>
 
 ```jsx
 <Fieldset legend="Shipping address" description="Where the order is delivered.">
@@ -77,15 +66,7 @@ import { Field, Fieldset, useField, mergeDescribedBy } from "@niceprototypes/fie
 </Fieldset>
 ```
 
-<Ink>A custom control reads the wiring with</Ink>
-<Ink code>useField()</Ink><Ink>, which returns</Ink>
-<Ink code>{"{ id, labelId, descriptionId?, errorId?, describedBy?, invalid, required }"}</Ink><Ink>, or</Ink>
-<Ink code>null</Ink>
-<Ink>outside a Field.</Ink>
-<Ink code>mergeDescribedBy(fieldDescribedBy, own)</Ink>
-<Ink>joins the two id lists in order, drops empty entries, keeps the first occurrence of each id, and returns</Ink>
-<Ink code>undefined</Ink>
-<Ink>when nothing is left, so no empty attribute renders.</Ink>
+<Ink><Ink>A custom control reads the wiring with</Ink> <Ink code>useField()</Ink><Ink>, which returns</Ink> <Ink code>{"{ id, labelId, descriptionId?, errorId?, describedBy?, invalid, required }"}</Ink><Ink>, or</Ink> <Ink code>null</Ink> <Ink>outside a Field.</Ink> <Ink code>mergeDescribedBy(fieldDescribedBy, own)</Ink> <Ink>joins the two id lists in order, drops empty entries, keeps the first occurrence of each id, and returns</Ink> <Ink code>undefined</Ink> <Ink>when nothing is left, so no empty attribute renders.</Ink></Ink>
 
 ```jsx
 const field = useField()

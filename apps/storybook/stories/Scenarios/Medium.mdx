@@ -85,13 +85,7 @@ export default function App() {
 
 <Ink as="h2">2. Styled components — <Code code="getToken" language="tsx" inlined />, <Code code="getBreakpoint" language="tsx" inlined /></Ink>
 
-<Ink code>getToken</Ink>
-<Ink>returns a</Ink>
-<Ink code>var()</Ink><Ink>, so responsive and themed values follow the viewport and theme on their own.</Ink>
-<Ink code>getBreakpoint</Ink>
-<Ink>returns a fixed</Ink>
-<Ink code>@media</Ink>
-<Ink>string built when it is called.</Ink>
+<Ink><Ink code>getToken</Ink> <Ink>returns a</Ink> <Ink code>var()</Ink><Ink>, so responsive and themed values follow the viewport and theme on their own.</Ink> <Ink code>getBreakpoint</Ink> <Ink>returns a fixed</Ink> <Ink code>@media</Ink> <Ink>string built when it is called.</Ink></Ink>
 
 <ul>
   <li><Ink>Call <code>setTokens</code> first — a <code>getBreakpoint</code> evaluated earlier keeps the default</Ink></li>
@@ -103,11 +97,7 @@ export default function App() {
 
 <Ink as="h2">3. Provider — <Code code="StylesProvider" language="tsx" inlined /></Ink>
 
-<Ink>Supplies tokens to nice components and loads fonts.</Ink>
-<Ink code>googleFonts</Ink>
-<Ink>adds the font links to</Ink>
-<Ink code>{"<head>"}</Ink>
-<Ink>once.</Ink>
+<Ink><Ink>Supplies tokens to nice components and loads fonts.</Ink> <Ink code>googleFonts</Ink> <Ink>adds the font links to</Ink> <Ink code>{"<head>"}</Ink> <Ink>once.</Ink></Ink>
 
 <ul>
   <li><Ink>Loading a font does not apply it; the <code>fontFamily</code> tokens do.</Ink></li>
@@ -116,10 +106,4 @@ export default function App() {
 
 <Ink as="h2">4. Components — <Code code="Ink" language="tsx" inlined />, <Code code="Button" language="tsx" inlined /></Ink>
 
-<Ink>Read the same tokens, so they restyle with no extra CSS.</Ink>
-<Ink code>Ink as="h1"</Ink>
-<Ink>uses the heading font and</Ink>
-<Ink code>fontSize.larger</Ink><Ink>;</Ink>
-<Ink code>Button</Ink>
-<Ink>inherits</Ink>
-<Ink code>Card</Ink><Ink>'s font.</Ink>
+<Ink><Ink>Read the same tokens, so they restyle with no extra CSS.</Ink> <Ink code>Ink as="h1"</Ink> <Ink>uses the heading font and</Ink> <Ink code>fontSize.larger</Ink><Ink>;</Ink> <Ink code>Button</Ink> <Ink>inherits</Ink> <Ink code>Card</Ink><Ink>'s font.</Ink></Ink>

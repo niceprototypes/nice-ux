@@ -19,11 +19,7 @@ import { DataTable } from "../../src/components/DataTable"
 
 <Ink as="h2">CSS only</Ink>
 
-<Ink>If all you need is some style, and you have</Ink>
-<Ink weight="semibold">no time budget</Ink>
-<Ink>to integrate with a new library, you can still</Ink>
-<Ink weight="semibold">upgrade your UI today</Ink>
-<Ink>by using our design tokens to fill the gaps in your project.</Ink>
+<Ink><Ink>If all you need is some style, and you have</Ink> <Ink weight="semibold">no time budget</Ink> <Ink>to integrate with a new library, you can still</Ink> <Ink weight="semibold">upgrade your UI today</Ink> <Ink>by using our design tokens to fill the gaps in your project.</Ink></Ink>
 
 <ArrowLink storyId="tokens--docs">Browse CSS tokens</ArrowLink>
 
@@ -89,17 +85,11 @@ import { DataTable } from "../../src/components/DataTable"
 
 <Ink as="h2">JavaScript</Ink>
 
-<Ink>Using the tokens in JS allows you to</Ink>
-<Ink weight="semibold">restructure the token architecture</Ink>
-<Ink>according to your needs, and easily tweak token values with useful helper functions.</Ink>
+<Ink><Ink>Using the tokens in JS allows you to</Ink> <Ink weight="semibold">restructure the token architecture</Ink> <Ink>according to your needs, and easily tweak token values with useful helper functions.</Ink></Ink>
 
 <Ink as="h3">JS only</Ink>
 
-<Ink>Use the</Ink>
-<Ink code>getToken</Ink>
-<Ink>function and CSS variables provided by</Ink>
-<Ink code>@niceprototypes/styles</Ink>
-<Ink>for vanilla JS:</Ink>
+<Ink><Ink>Use the</Ink> <Ink code>getToken</Ink> <Ink>function and CSS variables provided by</Ink> <Ink code>@niceprototypes/styles</Ink> <Ink>for vanilla JS:</Ink></Ink>
 
 <Install
   package="styles"
@@ -149,8 +139,7 @@ export default function Card({ children }) {
 }
 ```
 
-<Ink>Then, render the React component inside</Ink>
-<Ink code>StylesProvider</Ink><Ink>:</Ink>
+<Ink><Ink>Then, render the React component inside</Ink> <Ink code>StylesProvider</Ink><Ink>:</Ink></Ink>
 
 ```tsx
 import { StylesProvider } from "@niceprototypes/styles"
@@ -192,8 +181,7 @@ const Card = styled.div`
 export default Card
 ```
 
-<Ink>Render the Styled Component inside</Ink>
-<Ink code>StylesProvider</Ink><Ink>:</Ink>
+<Ink><Ink>Render the Styled Component inside</Ink> <Ink code>StylesProvider</Ink><Ink>:</Ink></Ink>
 
 ```tsx
 import { StylesProvider } from "@niceprototypes/styles"
@@ -215,14 +203,11 @@ export default function App() {
 
 <Ink as="h2">Set tokens</Ink>
 
-<Ink>Override default values, create new tokens, or even create new modules. You have</Ink>
-<Ink weight="semibold">complete creative control</Ink>
-<Ink>with the token setter function.</Ink>
+<Ink><Ink>Override default values, create new tokens, or even create new modules. You have</Ink> <Ink weight="semibold">complete creative control</Ink> <Ink>with the token setter function.</Ink></Ink>
 
 <Ink as="h3">1. Wrap subtree with provider</Ink>
 
-<Ink code>App</Ink>
-<Ink>can now consume the tokens:</Ink>
+<Ink><Ink code>App</Ink> <Ink>can now consume the tokens:</Ink></Ink>
 
 ```tsx
 import { StylesProvider } from "@niceprototypes/styles"
@@ -238,9 +223,7 @@ import "../App"
 
 <Ink as="h3">2. Call the setter function</Ink>
 
-<Ink>Call</Ink>
-<Ink code>setTokens</Ink>
-<Ink>once on module load:</Ink>
+<Ink><Ink>Call</Ink> <Ink code>setTokens</Ink> <Ink>once on module load:</Ink></Ink>
 
 ```ts
 import { setTokens } from "@niceprototypes/styles"
@@ -295,8 +278,7 @@ getToken("color:highlight", { transform: [null, null, 40, null] })
 // hsl(from var(--np--color--highlight) h s 40)
 ```
 
-<Ink>Channels are</Ink>
-<Ink code>[hue, saturation, lightness, alpha]</Ink><Ink>:</Ink>
+<Ink><Ink>Channels are</Ink> <Ink code>[hue, saturation, lightness, alpha]</Ink><Ink>:</Ink></Ink>
 
 <DataTable
   columns={[{ key: "c0", header: "Entry" }, { key: "c1", header: "Does" }]}

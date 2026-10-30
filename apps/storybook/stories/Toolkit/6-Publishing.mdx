@@ -11,17 +11,13 @@ import Ink from "../../src/nice/Ink"
 
 <StoryHeader title="Publishing" />
 
-<Ink>Publishing is driven by per-package bump intent. Each publishable package records what changed in</Ink>
-<Ink code>.nice/bump.md</Ink><Ink>;</Ink>
-<Ink code>--publish</Ink>
-<Ink>reads those entries to recommend version bumps, then builds and publishes the affected packages in dependency order.</Ink>
+<Ink><Ink>Publishing is driven by per-package bump intent. Each publishable package records what changed in</Ink> <Ink code>.nice/bump.md</Ink><Ink>;</Ink> <Ink code>--publish</Ink> <Ink>reads those entries to recommend version bumps, then builds and publishes the affected packages in dependency order.</Ink></Ink>
 
 <Line />
 
 <Ink as="h2"><Code code="--bump" language="bash" inlined /> — record intent</Ink>
 
-<Ink>Append one entry to the current package's</Ink>
-<Ink code>.nice/bump.md</Ink><Ink>. Commit it alongside the change it describes.</Ink>
+<Ink><Ink>Append one entry to the current package's</Ink> <Ink code>.nice/bump.md</Ink><Ink>. Commit it alongside the change it describes.</Ink></Ink>
 
 ```bash
 nicely --bump minor "Add useBreakpoint hook"
@@ -29,13 +25,7 @@ nicely --bump major "Rename breakpoint identifiers small/medium/large to phone/t
 nicely --bump patch "Fix icon stroke width regression"
 ```
 
-<Ink>Each entry is</Ink>
-<Ink code>{"[<timestamp>] <level>: <message>"}</Ink><Ink>. The message doubles as the git commit subject (drop the</Ink>
-<Ink code>level:</Ink>
-<Ink>prefix in the commit). Write it for a consumer reading release notes, not as a diff summary. Direct-editing</Ink>
-<Ink code>.nice/bump.md</Ink>
-<Ink>is equivalent to</Ink>
-<Ink code>--bump</Ink><Ink>.</Ink>
+<Ink><Ink>Each entry is</Ink> <Ink code>{"[<timestamp>] <level>: <message>"}</Ink><Ink>. The message doubles as the git commit subject (drop the</Ink> <Ink code>level:</Ink> <Ink>prefix in the commit). Write it for a consumer reading release notes, not as a diff summary. Direct-editing</Ink> <Ink code>.nice/bump.md</Ink> <Ink>is equivalent to</Ink> <Ink code>--bump</Ink><Ink>.</Ink></Ink>
 
 <Line />
 
@@ -68,11 +58,7 @@ nicely --publish --dry-run
 7. Clears the consumed .nice/bump.md files, commits the version bump, pushes
 ```
 
-<Ink>Publish order comes from</Ink>
-<Ink code>@niceprototypes/toolkit/registry.json</Ink>
-<Ink>(bottom-to-top per the dependency chain). Run</Ink>
-<Ink code>nicely --publish --dry-run</Ink>
-<Ink>to see the current order and the recommended bumps.</Ink>
+<Ink><Ink>Publish order comes from</Ink> <Ink code>@niceprototypes/toolkit/registry.json</Ink> <Ink>(bottom-to-top per the dependency chain). Run</Ink> <Ink code>nicely --publish --dry-run</Ink> <Ink>to see the current order and the recommended bumps.</Ink></Ink>
 
 <Line />
 
@@ -86,5 +72,4 @@ nicely --publish --no-npm
 nicely --dry-publish
 ```
 
-<Ink code>--no-npm</Ink>
-<Ink>is useful to verify the pipeline, or to push version bumps and let CI handle the actual npm publish.</Ink>
+<Ink><Ink code>--no-npm</Ink> <Ink>is useful to verify the pipeline, or to push version bumps and let CI handle the actual npm publish.</Ink></Ink>

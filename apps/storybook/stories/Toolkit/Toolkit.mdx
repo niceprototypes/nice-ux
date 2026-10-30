@@ -11,12 +11,7 @@ import { DataTable } from "../../src/components/DataTable"
 
 <StoryHeader title="Toolkit" />
 
-<Ink code>@niceprototypes/toolkit</Ink>
-<Ink>is the CLI that manages local development across the Nice ecosystem — linking packages, resolving singleton conflicts, rebuilding dists, and publishing. Two bin names resolve to the same script:</Ink>
-<Ink code>@niceprototypes/toolkit</Ink>
-<Ink>(long form) and</Ink>
-<Ink code>nicely</Ink>
-<Ink>(short alias).</Ink>
+<Ink><Ink code>@niceprototypes/toolkit</Ink> <Ink>is the CLI that manages local development across the Nice ecosystem — linking packages, resolving singleton conflicts, rebuilding dists, and publishing. Two bin names resolve to the same script:</Ink> <Ink code>@niceprototypes/toolkit</Ink> <Ink>(long form) and</Ink> <Ink code>nicely</Ink> <Ink>(short alias).</Ink></Ink>
 
 ```bash
 npm install -g @niceprototypes/toolkit
@@ -26,13 +21,7 @@ npm install -g @niceprototypes/toolkit
 
 <Ink as="h2">Why it exists</Ink>
 
-<Ink>Nice packages depend on each other through</Ink>
-<Ink code>file:</Ink>
-<Ink>references so local changes propagate without a publish. The cost is that each linked package installs its own copy of React / styled-components, and multiple React instances throw "Invalid hook call".</Ink>
-<Ink code>nicely --dedupe</Ink>
-<Ink>removes those duplicate singletons; the rest of the commands cover the build, cache, and publish lifecycle that</Ink>
-<Ink code>file:</Ink>
-<Ink>linking introduces.</Ink>
+<Ink><Ink>Nice packages depend on each other through</Ink> <Ink code>file:</Ink> <Ink>references so local changes propagate without a publish. The cost is that each linked package installs its own copy of React / styled-components, and multiple React instances throw "Invalid hook call".</Ink> <Ink code>nicely --dedupe</Ink> <Ink>removes those duplicate singletons; the rest of the commands cover the build, cache, and publish lifecycle that</Ink> <Ink code>file:</Ink> <Ink>linking introduces.</Ink></Ink>
 
 ```bash
 # The problem — duplicate singletons in each linked package

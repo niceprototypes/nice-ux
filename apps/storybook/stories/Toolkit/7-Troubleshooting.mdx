@@ -40,18 +40,7 @@ nicely --vite          # wipes .vite + kills the dev-server port; restart after
 
 <Ink as="h2">Icon (SVG) edits not updating</Ink>
 
-<Ink>Editing an SVG</Ink>
-<Ink weight="semibold">does</Ink>
-<Ink>rebuild the icon chain under</Ink>
-<Ink code>nicely --dev --watch</Ink>
-<Ink>—</Ink>
-<Ink code>@niceprototypes/icon</Ink>
-<Ink>regenerates its index and</Ink>
-<Ink code>@niceprototypes/icon</Ink><Ink>'s dist is rebuilt. The snag is on the dev-server side:</Ink>
-<Ink code>@niceprototypes/icon</Ink>
-<Ink>is consumed from</Ink>
-<Ink weight="semibold">dist</Ink>
-<Ink>(it can't be source-aliased because of SVGR), and a Vite dev server such as Storybook keeps serving its already-transformed copy until it's bounced.</Ink>
+<Ink><Ink>Editing an SVG</Ink> <Ink weight="semibold">does</Ink> <Ink>rebuild the icon chain under</Ink> <Ink code>nicely --dev --watch</Ink> <Ink>—</Ink> <Ink code>@niceprototypes/icon</Ink> <Ink>regenerates its index and</Ink> <Ink code>@niceprototypes/icon</Ink><Ink>'s dist is rebuilt. The snag is on the dev-server side:</Ink> <Ink code>@niceprototypes/icon</Ink> <Ink>is consumed from</Ink> <Ink weight="semibold">dist</Ink> <Ink>(it can't be source-aliased because of SVGR), and a Vite dev server such as Storybook keeps serving its already-transformed copy until it's bounced.</Ink></Ink>
 
 <Ink>So the fix is to refresh the dev server, not to rebuild again:</Ink>
 
@@ -61,25 +50,13 @@ nicely --vite
 # then restart the dev server (Storybook, etc.)
 ```
 
-<Ink>Only reach for</Ink>
-<Ink code>nicely --build-icons</Ink>
-<Ink>when</Ink>
-<Ink code>@niceprototypes/icon</Ink><Ink>'s dist is actually stale (e.g. you edited icons while no watcher was running). Do</Ink>
-<Ink weight="semibold">not</Ink>
-<Ink>run</Ink>
-<Ink code>--build-icons</Ink>
-<Ink>while</Ink>
-<Ink code>--dev --watch</Ink>
-<Ink>is live — they rebuild the same dist and race;</Ink>
-<Ink code>--build-icons</Ink>
-<Ink>will prompt you to stop the watcher first.</Ink>
+<Ink><Ink>Only reach for</Ink> <Ink code>nicely --build-icons</Ink> <Ink>when</Ink> <Ink code>@niceprototypes/icon</Ink><Ink>'s dist is actually stale (e.g. you edited icons while no watcher was running). Do</Ink> <Ink weight="semibold">not</Ink> <Ink>run</Ink> <Ink code>--build-icons</Ink> <Ink>while</Ink> <Ink code>--dev --watch</Ink> <Ink>is live — they rebuild the same dist and race;</Ink> <Ink code>--build-icons</Ink> <Ink>will prompt you to stop the watcher first.</Ink></Ink>
 
 <Line />
 
 <Ink as="h2">After installing dependencies in a linked package</Ink>
 
-<Ink code>npm install</Ink>
-<Ink>reintroduces the singleton duplicates. Either unlink first, or re-dedupe after:</Ink>
+<Ink><Ink code>npm install</Ink> <Ink>reintroduces the singleton duplicates. Either unlink first, or re-dedupe after:</Ink></Ink>
 
 ```bash
 # Option 1 — unlink before installing

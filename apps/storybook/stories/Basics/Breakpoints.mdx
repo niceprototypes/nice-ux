@@ -17,11 +17,7 @@ import Ink from "../../src/nice/Ink"
 
 <Ink as="h2">Get breakpoints</Ink>
 
-<Ink>Configure your design for</Ink>
-<Ink weight="semibold">different screen sizes and ranges </Ink>
-<Ink>by tweaking breakpoint variants for tokens and components, or by using </Ink>
-<Ink code>getBreakpoint</Ink>
-<Ink> in your style code.</Ink>
+<Ink><Ink>Configure your design for</Ink> <Ink weight="semibold">different screen sizes and ranges </Ink> <Ink>by tweaking breakpoint variants for tokens and components, or by using </Ink> <Ink code>getBreakpoint</Ink> <Ink> in your style code.</Ink></Ink>
 
 <Ink as="h3">CSS only</Ink>
 
@@ -88,10 +84,7 @@ const Wrapper = styled.div`
 
 <Ink as="h2">Set breakpoints</Ink>
 
-<Ink>Thresholds are the pixel floors each breakpoint starts at. Set them with the</Ink>
-<Ink code>breakpoints</Ink>
-<Ink>key of</Ink>
-<Ink code>setTokens</Ink><Ink>, alongside your tokens. Thresholds apply first, so responsive values in the same call use the new ones:</Ink>
+<Ink><Ink>Thresholds are the pixel floors each breakpoint starts at. Set them with the</Ink> <Ink code>breakpoints</Ink> <Ink>key of</Ink> <Ink code>setTokens</Ink><Ink>, alongside your tokens. Thresholds apply first, so responsive values in the same call use the new ones:</Ink></Ink>
 
 ```ts
 import { setTokens } from "@niceprototypes/styles"
@@ -106,9 +99,7 @@ setTokens({
 
 <Ink as="h3">Breakpoints only</Ink>
 
-<Ink>If a call sets nothing but thresholds,</Ink>
-<Ink code>setBreakpoints</Ink>
-<Ink>is the shortcut:</Ink>
+<Ink><Ink>If a call sets nothing but thresholds,</Ink> <Ink code>setBreakpoints</Ink> <Ink>is the shortcut:</Ink></Ink>
 
 ```ts
 import { setBreakpoints } from "@niceprototypes/styles"
@@ -124,18 +115,7 @@ setBreakpoints({
 
 <NewLines />
 
-<Ink>Both forms take any subset of</Ink>
-<Ink code>tablet</Ink><Ink>,</Ink>
-<Ink code>laptop</Ink><Ink>, and</Ink>
-<Ink code>desktop</Ink><Ink>;</Ink>
-<Ink code>phone</Ink>
-<Ink>is the base below the first floor and cannot be set. Values must be positive and ascending, or the call throws. Setting a threshold moves every</Ink>
-<Ink code>@media</Ink>
-<Ink>block that uses it — generated tokens, component overrides, and the values of earlier</Ink>
-<Ink code>setTokens</Ink>
-<Ink>calls — so</Ink>
-<Ink code>getBreakpoint</Ink><Ink>,</Ink>
-<Ink code>useBreakpoint</Ink><Ink>, and the CSS stay on one table.</Ink>
+<Ink><Ink>Both forms take any subset of</Ink> <Ink code>tablet</Ink><Ink>,</Ink> <Ink code>laptop</Ink><Ink>, and</Ink> <Ink code>desktop</Ink><Ink>;</Ink> <Ink code>phone</Ink> <Ink>is the base below the first floor and cannot be set. Values must be positive and ascending, or the call throws. Setting a threshold moves every</Ink> <Ink code>@media</Ink> <Ink>block that uses it — generated tokens, component overrides, and the values of earlier</Ink> <Ink code>setTokens</Ink> <Ink>calls — so</Ink> <Ink code>getBreakpoint</Ink><Ink>,</Ink> <Ink code>useBreakpoint</Ink><Ink>, and the CSS stay on one table.</Ink></Ink>
 
 <Line />
 

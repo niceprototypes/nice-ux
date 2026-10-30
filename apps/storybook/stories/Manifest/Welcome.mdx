@@ -21,18 +21,13 @@ import { DataTable } from "../../src/components/DataTable"
   ]}
 />
 
-<Ink>The</Ink>
-<Ink weight="semibold">Nice Manifest</Ink>
-<Ink>is its own repository, cloned alongside the packages it documents. Every pattern, convention, and piece of logic an AI instance needs to work on any</Ink>
-<Ink code>nice-*</Ink>
-<Ink>package is documented there — if it is not in the manifest, an AI instance will not know it exists.</Ink>
+<Ink><Ink>The</Ink> <Ink weight="semibold">Nice Manifest</Ink> <Ink>is its own repository, cloned alongside the packages it documents. Every pattern, convention, and piece of logic an AI instance needs to work on any</Ink> <Ink code>nice-*</Ink> <Ink>package is documented there — if it is not in the manifest, an AI instance will not know it exists.</Ink></Ink>
 
 <Line />
 
 <Ink as="h2">Load model</Ink>
 
-<Ink>"Read the manifest" does not mean read all 40+ files. It loads the always-on</Ink>
-<Ink weight="semibold">Core</Ink><Ink>, then lazy-loads a topic body only when the task touches it.</Ink>
+<Ink><Ink>"Read the manifest" does not mean read all 40+ files. It loads the always-on</Ink> <Ink weight="semibold">Core</Ink><Ink>, then lazy-loads a topic body only when the task touches it.</Ink></Ink>
 
 <DataTable
   columns={[{ key: "c0", header: "Layer" }, { key: "c1", header: "Loads" }, { key: "c2", header: "When" }]}
@@ -48,9 +43,7 @@ import { DataTable } from "../../src/components/DataTable"
 
 <Ink as="h2">The folders</Ink>
 
-<Ink>The manifest is organized by phase of work.</Ink>
-<Ink code>discipline/</Ink>
-<Ink>is the always-on Core; the rest load when the task points to them.</Ink>
+<Ink><Ink>The manifest is organized by phase of work.</Ink> <Ink code>discipline/</Ink> <Ink>is the always-on Core; the rest load when the task points to them.</Ink></Ink>
 
 <NewLines />
 
@@ -112,17 +105,10 @@ import { DataTable } from "../../src/components/DataTable"
 
 <Ink as="h2">Principles</Ink>
 
-<Ink weight="semibold">Decentralized by design.</Ink>
-<Ink>Every</Ink>
-<Ink code>nice-*</Ink>
-<Ink>package is its own repository, versioned, published, and consumable on its own. There is no monorepo and no single codebase — a package depends on its foundations through npm like any other consumer would. Work is scoped to one repository at a time, and a change that appears to need edits across several is a signal to look at the dependency boundary between them.</Ink>
+<Ink><Ink weight="semibold">Decentralized by design.</Ink> <Ink>Every</Ink> <Ink code>nice-*</Ink> <Ink>package is its own repository, versioned, published, and consumable on its own. There is no monorepo and no single codebase — a package depends on its foundations through npm like any other consumer would. Work is scoped to one repository at a time, and a change that appears to need edits across several is a signal to look at the dependency boundary between them.</Ink></Ink>
 
-<Ink weight="semibold">The token system is the origin pattern.</Ink>
-<Ink>The token generation system in</Ink>
-<Ink code>@niceprototypes/styles</Ink>
-<Ink>— token JSON to generated data, types, and CSS, to runtime getters and setters — is the foundation the rest depend on. A package that cannot reach logic it needs through the token system is a showstopper: stop, report the gap, fix the token system first.</Ink>
+<Ink><Ink weight="semibold">The token system is the origin pattern.</Ink> <Ink>The token generation system in</Ink> <Ink code>@niceprototypes/styles</Ink> <Ink>— token JSON to generated data, types, and CSS, to runtime getters and setters — is the foundation the rest depend on. A package that cannot reach logic it needs through the token system is a showstopper: stop, report the gap, fix the token system first.</Ink></Ink>
 
-<Ink weight="semibold">Alignment.</Ink>
-<Ink>Independence is structural; consistency is deliberate. Anything shared — TypeScript version, build config, lint rules — belongs in a foundation package, consumed by every repository at the same version rather than copied into each. Divergence is a defect to fix.</Ink>
+<Ink><Ink weight="semibold">Alignment.</Ink> <Ink>Independence is structural; consistency is deliberate. Anything shared — TypeScript version, build config, lint rules — belongs in a foundation package, consumed by every repository at the same version rather than copied into each. Divergence is a defect to fix.</Ink></Ink>
 
 <Callout type="hint">Artifacts have fixed homes: an audit report goes to `manifest/.reports/audit/{slug}.md`, a research report to `manifest/.reports/research/{slug}.md`, and a per-package change record to that package's `.nice/bump.md`.</Callout>

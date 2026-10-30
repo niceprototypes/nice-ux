@@ -24,9 +24,7 @@ import Line from "../../src/components/Line"
 
 <NewLines />
 
-<Ink>By default, Nice UI components are pinned to your browser settings, meaning that</Ink>
-<Ink weight="semibold">they will switch themes automatically</Ink>
-<Ink>between day and night depending on your browser or OS.</Ink>
+<Ink><Ink>By default, Nice UI components are pinned to your browser settings, meaning that</Ink> <Ink weight="semibold">they will switch themes automatically</Ink> <Ink>between day and night depending on your browser or OS.</Ink></Ink>
 
 <Line />
 
@@ -49,9 +47,7 @@ import Line from "../../src/components/Line"
   package="styles"
 />
 
-<Ink>You can pin the theme to a whole page via the</Ink>
-<Ink code>html</Ink>
-<Ink>element:</Ink>
+<Ink><Ink>You can pin the theme to a whole page via the</Ink> <Ink code>html</Ink> <Ink>element:</Ink></Ink>
 
 <Code language="html" code={`<html data-theme="day">…</html>`} />
 
@@ -98,11 +94,7 @@ body.night-mode {
 
 <Ink as="h2">Switching at runtime</Ink>
 
-<Ink>The</Ink>
-<Ink code>applyTheme</Ink>
-<Ink>service writes</Ink>
-<Ink code>data-theme</Ink>
-<Ink>— the same attribute as HTML pinning — on the document root (or any element), so a theme toggle can drive nice's day/night cascade dynamically.</Ink>
+<Ink><Ink>The</Ink> <Ink code>applyTheme</Ink> <Ink>service writes</Ink> <Ink code>data-theme</Ink> <Ink>— the same attribute as HTML pinning — on the document root (or any element), so a theme toggle can drive nice's day/night cascade dynamically.</Ink></Ink>
 
 <Install package="styles" />
 
@@ -143,8 +135,7 @@ import { Theme } from "@niceprototypes/styles"
 
 <Ink as="h3">Nesting</Ink>
 
-<Ink>Additionally, you can nest pinned components within a pinned</Ink>
-<Ink code>Theme</Ink><Ink>:</Ink>
+<Ink><Ink>Additionally, you can nest pinned components within a pinned</Ink> <Ink code>Theme</Ink><Ink>:</Ink></Ink>
 
 ```tsx
 import { Theme } from "@niceprototypes/styles"

@@ -16,9 +16,7 @@ import Ink from "../../src/nice/Ink"
 
 <Ink as="h2">Get fonts</Ink>
 
-<Ink>You have the freedom to</Ink>
-<Ink weight="semibold">use vendor fonts or local font files</Ink>
-<Ink>for your project.</Ink>
+<Ink><Ink>You have the freedom to</Ink> <Ink weight="semibold">use vendor fonts or local font files</Ink> <Ink>for your project.</Ink></Ink>
 
 <NewLines />
 
@@ -60,9 +58,7 @@ injectFonts({ adobeFonts: "https://use.typekit.net/…" })
 
 <Ink as="h3">Custom fonts</Ink>
 
-<Ink>Use the</Ink>
-<Ink code>injectFonts</Ink>
-<Ink>function to inject preconnects and stylesheets for your font family:</Ink>
+<Ink><Ink>Use the</Ink> <Ink code>injectFonts</Ink> <Ink>function to inject preconnects and stylesheets for your font family:</Ink></Ink>
 
 ```ts
 import { injectFonts } from "@niceprototypes/styles"
@@ -90,10 +86,7 @@ injectFonts({
 
 <Install package="styles" />
 
-<Ink>Call</Ink>
-<Ink code>setTokens</Ink>
-<Ink>once on module load, from its own</Ink>
-<Ink code>tokens.ts</Ink><Ink>:</Ink>
+<Ink><Ink>Call</Ink> <Ink code>setTokens</Ink> <Ink>once on module load, from its own</Ink> <Ink code>tokens.ts</Ink><Ink>:</Ink></Ink>
 
 ```tsx
 // tokens.ts
@@ -111,9 +104,7 @@ setTokens({
 
 <Ink as="h3">2. Get tokens</Ink>
 
-<Ink>Use props on</Ink>
-<Ink code>StylesProvider</Ink>
-<Ink>to inject and control fonts for your React project:</Ink>
+<Ink><Ink>Use props on</Ink> <Ink code>StylesProvider</Ink> <Ink>to inject and control fonts for your React project:</Ink></Ink>
 
 <NewLines />
 

@@ -23,9 +23,7 @@ import Ink from "../../src/nice/Ink"
 
 <Ink as="h3">Setup</Ink>
 
-<Ink>Add it to</Ink>
-<Ink code>addons</Ink>
-<Ink>— the entry loads both its manager and preview halves:</Ink>
+<Ink><Ink>Add it to</Ink> <Ink code>addons</Ink> <Ink>— the entry loads both its manager and preview halves:</Ink></Ink>
 
 ```ts
 // .storybook/main.ts
@@ -40,14 +38,7 @@ const config = {
 export default config
 ```
 
-<Ink>Peers:</Ink>
-<Ink code>storybook</Ink>
-<Ink>≥ 10,</Ink>
-<Ink code>storybook-dark-mode</Ink><Ink>,</Ink>
-<Ink code>@storybook/addon-links</Ink><Ink>,</Ink>
-<Ink code>react</Ink><Ink>,</Ink>
-<Ink code>react-dom</Ink><Ink>,</Ink>
-<Ink code>styled-components</Ink><Ink>.</Ink>
+<Ink><Ink>Peers:</Ink> <Ink code>storybook</Ink> <Ink>≥ 10,</Ink> <Ink code>storybook-dark-mode</Ink><Ink>,</Ink> <Ink code>@storybook/addon-links</Ink><Ink>,</Ink> <Ink code>react</Ink><Ink>,</Ink> <Ink code>react-dom</Ink><Ink>,</Ink> <Ink code>styled-components</Ink><Ink>.</Ink></Ink>
 
 <Ink as="h3">Sequences</Ink>
 
@@ -68,13 +59,10 @@ export const parameters = {
 }
 ```
 
-<Ink>Ids are your own story ids — the slug Storybook derives from each page's</Ink>
-<Ink code>{"<Meta title>"}</Ink><Ink>.</Ink>
+<Ink><Ink>Ids are your own story ids — the slug Storybook derives from each page's</Ink> <Ink code>{"<Meta title>"}</Ink><Ink>.</Ink></Ink>
 
 <Ink as="h3">Why it needs a manager half</Ink>
 
-<Ink>The bar renders in the preview iframe, but the sidebar, the editor and the settings tabs all belong to the manager. The preview cannot reach them, so each control emits on the addons channel and the manager entry maps it to the matching</Ink>
-<Ink code>api</Ink>
-<Ink>call. The dark-mode toggle rides the same bridge.</Ink>
+<Ink><Ink>The bar renders in the preview iframe, but the sidebar, the editor and the settings tabs all belong to the manager. The preview cannot reach them, so each control emits on the addons channel and the manager entry maps it to the matching</Ink> <Ink code>api</Ink> <Ink>call. The dark-mode toggle rides the same bridge.</Ink></Ink>
 
 <Ink>That split is also why the bar can show sidebar state: the manager answers with the current value rather than the preview guessing.</Ink>

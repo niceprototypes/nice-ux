@@ -33,25 +33,9 @@ import { Calendar } from "@niceprototypes/calendar"
 
 <Ink as="h2">Guide</Ink>
 
-<Ink code>@niceprototypes/calendar</Ink>
-<Ink>has named exports only (</Ink><Ink code>Calendar</Ink><Ink>,</Ink>
-<Ink code>DateField</Ink><Ink>), no default export.</Ink>
+<Ink><Ink code>@niceprototypes/calendar</Ink> <Ink>has named exports only (</Ink><Ink code>Calendar</Ink><Ink>,</Ink> <Ink code>DateField</Ink><Ink>), no default export.</Ink></Ink>
 
-<Ink>Dates cross the API only as ISO 8601</Ink>
-<Ink code>YYYY-MM-DD</Ink>
-<Ink>strings.</Ink>
-<Ink code>value</Ink><Ink>,</Ink>
-<Ink code>defaultValue</Ink><Ink>,</Ink>
-<Ink code>min</Ink><Ink>,</Ink>
-<Ink code>max</Ink><Ink>, the</Ink>
-<Ink code>onChange</Ink>
-<Ink>argument and the</Ink>
-<Ink code>isDateDisabled</Ink>
-<Ink>argument are all ISO strings, and</Ink>
-<Ink code>null</Ink>
-<Ink>means no selection. A JS</Ink>
-<Ink code>Date</Ink>
-<Ink>is never accepted or returned; an invalid string counts as no selection. v1 uses the Gregorian calendar with UTC arithmetic, so no time zone shifts a date.</Ink>
+<Ink><Ink>Dates cross the API only as ISO 8601</Ink> <Ink code>YYYY-MM-DD</Ink> <Ink>strings.</Ink> <Ink code>value</Ink><Ink>,</Ink> <Ink code>defaultValue</Ink><Ink>,</Ink> <Ink code>min</Ink><Ink>,</Ink> <Ink code>max</Ink><Ink>, the</Ink> <Ink code>onChange</Ink> <Ink>argument and the</Ink> <Ink code>isDateDisabled</Ink> <Ink>argument are all ISO strings, and</Ink> <Ink code>null</Ink> <Ink>means no selection. A JS</Ink> <Ink code>Date</Ink> <Ink>is never accepted or returned; an invalid string counts as no selection. v1 uses the Gregorian calendar with UTC arithmetic, so no time zone shifts a date.</Ink></Ink>
 
 ```jsx
 const [date, setDate] = useState("2026-09-24")
@@ -60,28 +44,9 @@ const [date, setDate] = useState("2026-09-24")
 // onChange("2026-09-25")
 ```
 
-<Ink>The first column comes from the locale:</Ink>
-<Ink code>Intl.Locale</Ink>
-<Ink>week info where the engine provides it, else a region table (Sunday for regions such as US, Saturday for regions such as EG, otherwise Monday).</Ink>
-<Ink code>firstDayOfWeek</Ink>
-<Ink>(0 Sunday … 6 Saturday) overrides it, and Home / End follow the resolved start.</Ink>
+<Ink><Ink>The first column comes from the locale:</Ink> <Ink code>Intl.Locale</Ink> <Ink>week info where the engine provides it, else a region table (Sunday for regions such as US, Saturday for regions such as EG, otherwise Monday).</Ink> <Ink code>firstDayOfWeek</Ink> <Ink>(0 Sunday … 6 Saturday) overrides it, and Home / End follow the resolved start.</Ink></Ink>
 
-<Ink>Direction comes from</Ink>
-<Ink code>useLocale()</Ink>
-<Ink>in</Ink>
-<Ink code>@niceprototypes/styles</Ink><Ink>: the</Ink>
-<Ink code>dir</Ink>
-<Ink>/</Ink>
-<Ink code>locale</Ink>
-<Ink>of the nearest</Ink>
-<Ink code>StylesProvider</Ink><Ink>, else the document's</Ink>
-<Ink code>dir</Ink>
-<Ink>/</Ink>
-<Ink code>lang</Ink><Ink>. In RTL, ArrowRight moves to the previous day and ArrowLeft to the next, following the visual order, and the month carets swap. The</Ink>
-<Ink code>locale</Ink>
-<Ink>prop changes labels and week start, not key direction; the grid mirrors inside a</Ink>
-<Ink code>dir="rtl"</Ink>
-<Ink>ancestor.</Ink>
+<Ink><Ink>Direction comes from</Ink> <Ink code>useLocale()</Ink> <Ink>in</Ink> <Ink code>@niceprototypes/styles</Ink><Ink>: the</Ink> <Ink code>dir</Ink> <Ink>/</Ink> <Ink code>locale</Ink> <Ink>of the nearest</Ink> <Ink code>StylesProvider</Ink><Ink>, else the document's</Ink> <Ink code>dir</Ink> <Ink>/</Ink> <Ink code>lang</Ink><Ink>. In RTL, ArrowRight moves to the previous day and ArrowLeft to the next, following the visual order, and the month carets swap. The</Ink> <Ink code>locale</Ink> <Ink>prop changes labels and week start, not key direction; the grid mirrors inside a</Ink> <Ink code>dir="rtl"</Ink> <Ink>ancestor.</Ink></Ink>
 
 ```jsx
 <div dir="rtl">
@@ -105,9 +70,6 @@ const [date, setDate] = useState("2026-09-24")
   ] }]}
 />
 
-<Ink>Moving focus off the visible month changes the month. Focus stops at</Ink>
-<Ink code>min</Ink>
-<Ink>and</Ink>
-<Ink code>max</Ink><Ink>. Disabled days stay focusable (</Ink><Ink code>aria-disabled</Ink><Ink>), so the arrows move across them.</Ink>
+<Ink><Ink>Moving focus off the visible month changes the month. Focus stops at</Ink> <Ink code>min</Ink> <Ink>and</Ink> <Ink code>max</Ink><Ink>. Disabled days stay focusable (</Ink><Ink code>aria-disabled</Ink><Ink>), so the arrows move across them.</Ink></Ink>
 
 <Callout type="hint">Pass and store ISO `YYYY-MM-DD` strings — Calendar never accepts or returns a `Date`.</Callout>

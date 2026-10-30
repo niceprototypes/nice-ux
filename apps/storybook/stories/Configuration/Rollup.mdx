@@ -95,9 +95,7 @@ isNiceExternal("lodash")                // other packages
 
 <Ink as="h4">Manual Usage</Ink>
 
-<Ink>If you need custom rollup config, use</Ink>
-<Ink code>isNiceExternal</Ink>
-<Ink>directly:</Ink>
+<Ink><Ink>If you need custom rollup config, use</Ink> <Ink code>isNiceExternal</Ink> <Ink>directly:</Ink></Ink>
 
 ```typescript
 // rollup.config.js
@@ -138,11 +136,7 @@ export default {
 
 <Ink as="h4">Why These Settings?</Ink>
 
-<Ink>Without these settings, rollup's watch mode can exhibit an "off by one" caching bug where file changes appear one save behind. The</Ink>
-<Ink code>awaitWriteFinish</Ink>
-<Ink>option ensures files are fully written to disk before rollup reads them, and</Ink>
-<Ink code>usePolling</Ink>
-<Ink>provides more reliable file change detection on macOS.</Ink>
+<Ink><Ink>Without these settings, rollup's watch mode can exhibit an "off by one" caching bug where file changes appear one save behind. The</Ink> <Ink code>awaitWriteFinish</Ink> <Ink>option ensures files are fully written to disk before rollup reads them, and</Ink> <Ink code>usePolling</Ink> <Ink>provides more reliable file change detection on macOS.</Ink></Ink>
 
 <Line />
 

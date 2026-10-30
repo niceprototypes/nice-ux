@@ -12,10 +12,7 @@ import { DataTable } from "../../src/components/DataTable"
 
 <StoryHeader title="Caches" />
 
-<Ink>Eight cache layers can hold stale state in a Nice workspace. Three workspace-level</Ink>
-<Ink code>nicely</Ink>
-<Ink>operations clear most of them; the rest belong to other owners (the consumer's</Ink>
-<Ink code>npm install</Ink><Ink>, npm itself, the user's browser). This page maps which tool clears which layer and gives workflow recipes for the common "something is stale" symptoms.</Ink>
+<Ink><Ink>Eight cache layers can hold stale state in a Nice workspace. Three workspace-level</Ink> <Ink code>nicely</Ink> <Ink>operations clear most of them; the rest belong to other owners (the consumer's</Ink> <Ink code>npm install</Ink><Ink>, npm itself, the user's browser). This page maps which tool clears which layer and gives workflow recipes for the common "something is stale" symptoms.</Ink></Ink>
 
 <Line />
 
@@ -35,32 +32,13 @@ import { DataTable } from "../../src/components/DataTable"
   ] }]}
 />
 
-<Ink>¹</Ink>
-<Ink code>nicely --clean</Ink>
-<Ink>currently knows about</Ink>
-<Ink code>node_modules/.cache</Ink>
-<Ink>(webpack) and</Ink>
-<Ink code>node_modules/.vite</Ink>
-<Ink>(Vite). Other framework caches — Next.js</Ink>
-<Ink code>.next/cache</Ink><Ink>, Remix</Ink>
-<Ink code>build/</Ink><Ink>, Astro</Ink>
-<Ink code>dist/</Ink><Ink>, Parcel</Ink>
-<Ink code>.parcel-cache</Ink>
-<Ink>— are</Ink>
-<Ink weight="semibold">not</Ink>
-<Ink>covered until their path is added to</Ink>
-<Ink code>CACHE_DIRS</Ink>
-<Ink>in</Ink>
-<Ink code>toolkit/src/linking/cache-cleaner.js</Ink><Ink>. Adding a new framework to the workspace requires that single edit.</Ink>
+<Ink><Ink>¹</Ink> <Ink code>nicely --clean</Ink> <Ink>currently knows about</Ink> <Ink code>node_modules/.cache</Ink> <Ink>(webpack) and</Ink> <Ink code>node_modules/.vite</Ink> <Ink>(Vite). Other framework caches — Next.js</Ink> <Ink code>.next/cache</Ink><Ink>, Remix</Ink> <Ink code>build/</Ink><Ink>, Astro</Ink> <Ink code>dist/</Ink><Ink>, Parcel</Ink> <Ink code>.parcel-cache</Ink> <Ink>— are</Ink> <Ink weight="semibold">not</Ink> <Ink>covered until their path is added to</Ink> <Ink code>CACHE_DIRS</Ink> <Ink>in</Ink> <Ink code>toolkit/src/linking/cache-cleaner.js</Ink><Ink>. Adding a new framework to the workspace requires that single edit.</Ink></Ink>
 
 <Line />
 
 <Ink as="h2">The three <Code code="nicely" language="bash" inlined /> operations</Ink>
 
-<Ink code>nicely --clean</Ink><Ink>,</Ink>
-<Ink code>--dedupe</Ink><Ink>, and</Ink>
-<Ink code>--build-all</Ink>
-<Ink>are the workspace-level toolkit operations. They do not overlap. Each addresses a distinct layer at a distinct location. Mistaking one for another produces silent failure.</Ink>
+<Ink><Ink code>nicely --clean</Ink><Ink>,</Ink> <Ink code>--dedupe</Ink><Ink>, and</Ink> <Ink code>--build-all</Ink> <Ink>are the workspace-level toolkit operations. They do not overlap. Each addresses a distinct layer at a distinct location. Mistaking one for another produces silent failure.</Ink></Ink>
 
 <Ink as="h3">Distinct targets</Ink>
 
@@ -81,11 +59,7 @@ nicely --build-all       →    <linked-pkg>/dist/                              
   ] }]}
 />
 
-<Ink>The port-kill in</Ink>
-<Ink code>nicely --clean</Ink>
-<Ink>exists because a running dev server holds an in-memory module graph and repopulates its on-disk cache the moment it's wiped. Wiping cache without killing the server is a no-op against the observable symptom. Use</Ink>
-<Ink code>--no-kill</Ink>
-<Ink>to wipe caches only (e.g. CI environments).</Ink>
+<Ink><Ink>The port-kill in</Ink> <Ink code>nicely --clean</Ink> <Ink>exists because a running dev server holds an in-memory module graph and repopulates its on-disk cache the moment it's wiped. Wiping cache without killing the server is a no-op against the observable symptom. Use</Ink> <Ink code>--no-kill</Ink> <Ink>to wipe caches only (e.g. CI environments).</Ink></Ink>
 
 <Ink as="h3">How they combine</Ink>
 
@@ -97,8 +71,7 @@ nicely --dedupe       # resolve layer 4 singleton drift
 nicely --build-all       # rebuild layer 5 in tier order
 ```
 
-<Ink>Then restart any dev server (</Ink><Ink code>npm run dev</Ink>
-<Ink>in each consumer) and hard-reload the browser tab.</Ink>
+<Ink><Ink>Then restart any dev server (</Ink><Ink code>npm run dev</Ink> <Ink>in each consumer) and hard-reload the browser tab.</Ink></Ink>
 
 <Ink weight="semibold">Order matters:</Ink>
 
@@ -134,10 +107,7 @@ nicely --build-all       # rebuild layer 5 in tier order
 nicely --clean
 ```
 
-<Ink>Then restart the dev server (</Ink><Ink code>npm run dev</Ink>
-<Ink>inside the consumer) and hard-reload the browser tab.</Ink>
-<Ink code>nicely --clean</Ink>
-<Ink>killed the old process and wiped the cache; you bring the server back up when ready.</Ink>
+<Ink><Ink>Then restart the dev server (</Ink><Ink code>npm run dev</Ink> <Ink>inside the consumer) and hard-reload the browser tab.</Ink> <Ink code>nicely --clean</Ink> <Ink>killed the old process and wiped the cache; you bring the server back up when ready.</Ink></Ink>
 
 <Ink as="h4">"Invalid hook call" or styled-components context mismatch</Ink>
 
@@ -145,9 +115,7 @@ nicely --clean
 nicely --dedupe
 ```
 
-<Ink>The classic duplicate-React-instance error. See</Ink>
-<Ink><a href="/?path=/docs/toolkit-2-dedupe--docs" target="_top">Toolkit → Dedupe</a></Ink>
-<Ink>for the underlying cause.</Ink>
+<Ink><Ink>The classic duplicate-React-instance error. See</Ink> <Ink><a href="/?path=/docs/toolkit-2-dedupe--docs" target="_top">Toolkit → Dedupe</a></Ink> <Ink>for the underlying cause.</Ink></Ink>
 
 <Ink as="h4">Consumer reports a missing export from a foundation package after a refactor</Ink>
 
@@ -155,9 +123,7 @@ nicely --dedupe
 nicely --build-all
 ```
 
-<Ink>The consumer is reading an older</Ink>
-<Ink code>dist/</Ink>
-<Ink>than the source now produces. Rebuild every linked package in tier order.</Ink>
+<Ink><Ink>The consumer is reading an older</Ink> <Ink code>dist/</Ink> <Ink>than the source now produces. Rebuild every linked package in tier order.</Ink></Ink>
 
 <Ink as="h4">Fresh clone of the workspace</Ink>
 
@@ -169,10 +135,7 @@ npm install
 nicely --build-all
 ```
 
-<Ink>The</Ink>
-<Ink code>prepare</Ink>
-<Ink>hook no longer rebuilds linked packages on consumer installs (see</Ink>
-<Ink code>manifest/.nice/reports/npm-install-breaks-consumers.md</Ink><Ink>). New clones must build dists explicitly.</Ink>
+<Ink><Ink>The</Ink> <Ink code>prepare</Ink> <Ink>hook no longer rebuilds linked packages on consumer installs (see</Ink> <Ink code>manifest/.nice/reports/npm-install-breaks-consumers.md</Ink><Ink>). New clones must build dists explicitly.</Ink></Ink>
 
 <Ink as="h4">Nuclear: I don't know what's wrong</Ink>
 
@@ -184,15 +147,11 @@ nicely --build-all
 
 <Ink>Restart every dev server. Hard-reload every open browser tab.</Ink>
 
-<Ink>If that doesn't fix it, escalate to a per-consumer reinstall (</Ink><Ink code>rm -rf node_modules package-lock.json && npm install</Ink><Ink>) before reaching for</Ink>
-<Ink code>npm cache clean --force</Ink>
-<Ink>— the global npm cache is almost never the cause.</Ink>
+<Ink><Ink>If that doesn't fix it, escalate to a per-consumer reinstall (</Ink><Ink code>rm -rf node_modules package-lock.json && npm install</Ink><Ink>) before reaching for</Ink> <Ink code>npm cache clean --force</Ink> <Ink>— the global npm cache is almost never the cause.</Ink></Ink>
 
 <Line />
 
 <Ink as="h2">Why three <Code code="nicely" language="bash" inlined /> operations and not one</Ink>
 
-<Ink>Each addresses a distinct concern with a distinct target directory and a distinct trigger symptom. A single umbrella verb would have to either over-fire (touch directories the symptom doesn't need) or under-fire (miss the directory the symptom does need). The three verbs are exhaustive for the workspace-level operations they cover and orthogonal to one another. Concerns outside the triad — consumer</Ink>
-<Ink code>node_modules</Ink>
-<Ink>reinstall, global npm cache, browser hard reload — are owned by other tools and intentionally not pulled in.</Ink>
+<Ink><Ink>Each addresses a distinct concern with a distinct target directory and a distinct trigger symptom. A single umbrella verb would have to either over-fire (touch directories the symptom doesn't need) or under-fire (miss the directory the symptom does need). The three verbs are exhaustive for the workspace-level operations they cover and orthogonal to one another. Concerns outside the triad — consumer</Ink> <Ink code>node_modules</Ink> <Ink>reinstall, global npm cache, browser hard reload — are owned by other tools and intentionally not pulled in.</Ink></Ink>
 
