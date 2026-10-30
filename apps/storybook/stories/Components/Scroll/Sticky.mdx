@@ -1,28 +1,30 @@
-import { Meta } from "@storybook/addon-docs/blocks"
+import { Meta, Stories } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../src/components/Story"
-import Ink from "../../../src/nice/Ink"
-import { DataTableRow } from "../../../src/components/DataTable"
-import { DEMO_CODE_COLUMNS } from "../../../src/components/DataTable"
+import Install from "../../../src/components/Install"
+import * as StickyStories from "../Sticky/Sticky.stories"
 
-<Meta title="Components/Scroll/Sticky" />
+<Meta of={StickyStories} />
 
-<StoryHeader title="Sticky" />
-
-<Ink color="light">
-  Sticky headers remain fixed at the top of the viewport when scrolled past
-  their original position. They automatically hide on scroll down and show on
-  scroll up.
-</Ink>
-
-<DataTableRow
-  fullWidth
-  columns={DEMO_CODE_COLUMNS}
-  values={[
-          <Ink size="small" color="light">
-      Wrap any header with <code>&lt;Sticky&gt;</code> inside a
-      <code>StickyProvider</code> to enable the hide-on-scroll-down behavior.
-    </Ink>,
-          `<ScrollProvider>\n  <StickyProvider>\n    <Sticky order={0}>\n      <Header />\n    </Sticky>\n  </StickyProvider>\n</ScrollProvider>`,
-        ]}
+<StoryHeader
+  title="Sticky"
+  description="Sticky: fixes its children to the top of the viewport, hides them on scroll down and shows them on scroll up; lower orders stack above higher ones."
 />
 
+<Install package="scroll" />
+
+```jsx
+import {
+  ScrollProvider,
+  Sticky,
+  StickyProvider,
+} from "@niceprototypes/scroll"
+
+<ScrollProvider>
+  <StickyProvider>
+    <Sticky order={0}>{header}</Sticky>
+    <Sticky order={1}>{subheader}</Sticky>
+  </StickyProvider>
+</ScrollProvider>
+```
+
+<Stories />

@@ -1,0 +1,26 @@
+import { Meta, Stories } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../src/components/Story"
+import Install from "../../../src/components/Install"
+import * as SectionLinksStories from "../SectionLinks/SectionLinks.stories"
+
+<Meta of={SectionLinksStories} />
+
+<StoryHeader
+  title="StickySectionLinks"
+  description="StickySectionLinks: links to StickySection ids that highlight the section in view through IntersectionObserver; renderLink and renderWrapper replace the defaults."
+/>
+
+<Install package="scroll" />
+
+```jsx
+import { StickySectionLinks } from "@niceprototypes/scroll"
+
+<StickySectionLinks
+  links={[
+    { href: "#about", label: "About" },
+    { href: "#services", label: "Services" },
+  ]}
+/>
+```
+
+<Stories />
