@@ -33,6 +33,7 @@
     "@niceprototypes/field": "workspace:^",
     "@niceprototypes/flex": "workspace:^",
     "@niceprototypes/form": "workspace:^",
+    "@niceprototypes/grid": "workspace:^",
     "@niceprototypes/head": "workspace:^",
     "@niceprototypes/icon-vendor": "workspace:^",
     "@niceprototypes/image": "workspace:^",

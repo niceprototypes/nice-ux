@@ -1,0 +1,8 @@
+{
+  "$schema": "../config-exports/src/schema.json",
+  "description": "Grid and GridItem: CSS grid layout with column counts, auto-fill tracks and spans, on Flex's gap tokens.",
+  "components": [
+    "Grid",
+    "GridItem"
+  ]
+}

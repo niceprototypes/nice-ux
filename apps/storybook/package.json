@@ -25,6 +25,7 @@
     "@niceprototypes/field": "workspace:^",
     "@niceprototypes/flex": "workspace:^",
     "@niceprototypes/form": "workspace:^",
+    "@niceprototypes/grid": "workspace:^",
     "@niceprototypes/icon": "workspace:^",
     "@niceprototypes/icon-vendor": "workspace:^",
     "@niceprototypes/image": "workspace:^",

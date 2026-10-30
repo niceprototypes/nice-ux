@@ -27,7 +27,7 @@ const packagesRoot = resolve(__dirname, "../../../packages")
  * Storybook addons) resolve to their built `dist/`. styles' root entry is its React entry.
  */
 const SOURCE_PACKAGES = [
-  "button", "calendar", "checkbox", "code", "dialog", "field", "flex", "form", "head",
+  "button", "calendar", "checkbox", "code", "dialog", "field", "flex", "form", "grid", "head",
   "image", "ink", "input", "lightbox", "line", "list", "logo", "popover", "radio", "scroll",
   "select", "slider", "tabs", "tile", "toggle", "tooltip",
 ]
