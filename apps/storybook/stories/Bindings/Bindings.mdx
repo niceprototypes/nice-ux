@@ -17,22 +17,8 @@ import Ink from "../../src/nice/Ink"
 <Ink as="h3">Contents</Ink>
 
 <ul>
-  <li><Ink><a href="/?path=/docs/bindings-usebreakpoint--docs" target="_top">useBreakpoint</a> — Returns the current</Ink></li>
+  <li><Ink><a href="/?path=/docs/bindings-usebreakpoint--docs" target="_top">useBreakpoint</a> — Returns the current viewport breakpoint name (<code>"phone"</code> / <code>"tablet"</code> / <code>"laptop"</code> / <code>"desktop"</code>) and re-renders on band changes. Needs no <code>StylesProvider</code>. For swapping component trees; prefer CSS / the <code>breakpoints</code> prop for styling.</Ink></li>
+  <li><Ink><a href="/?path=/docs/bindings-usedevice--docs" target="_top">useDevice</a> — Reads the shared <code>{"{ isMobile }"}</code> published by <code>StylesProvider</code> when given <code>detectDevice</code>. One mobile-detection instance for the whole tree (user-agent + touch + viewport, with <code>?mobile=true</code> / localStorage debug overrides).</Ink></li>
+  <li><Ink><a href="/?path=/docs/bindings-usetheme--docs" target="_top">useTheme</a> — Reads the shared <code>{"{ theme }"}</code> published by <code>StylesProvider</code> when given <code>detectTheme</code>, following the OS color-scheme preference.</Ink></li>
 </ul>
-  viewport breakpoint name (`"phone"` / `"tablet"` / `"laptop"` / `"desktop"`)
-  and re-renders on band changes. Needs no `StylesProvider`. For swapping
-  component trees; prefer CSS / the `breakpoints` prop for styling.
-
-<ul>
-  <li><Ink><a href="/?path=/docs/bindings-usedevice--docs" target="_top">useDevice</a> — Reads the shared</Ink></li>
-</ul>
-  `{ isMobile }` published by `StylesProvider` when given `detectDevice`. One
-  mobile-detection instance for the whole tree (user-agent + touch + viewport,
-  with `?mobile=true` / localStorage debug overrides).
-
-<ul>
-  <li><Ink><a href="/?path=/docs/bindings-usetheme--docs" target="_top">useTheme</a> — Reads the shared <code>{"{ theme }"}</code></Ink></li>
-</ul>
-  published by `StylesProvider` when given `detectTheme`, following the OS
-  color-scheme preference.
 

@@ -39,21 +39,11 @@ import { Field, Fieldset, useField, mergeDescribedBy } from "@niceprototypes/fie
 <Ink><Ink>Field renders a native</Ink> <Ink code>{"<label>"}</Ink><Ink>, the control, an optional description and an always-mounted polite live region for the error. It publishes the wiring through context; the control applies it. Input, and everything built on it (Select, DateField), already does:</Ink></Ink>
 
 <ul>
-  <li><Ink><code>id</code> — the control takes the Field's id, so the label's <code>htmlFor</code> names it.</Ink></li>
+  <li><Ink><code>id</code> — the control takes the Field's id, so the label's <code>htmlFor</code> names it. It defaults to <code>useId()</code>; pass <code>id</code> to fix it.</Ink></li>
+  <li><Ink><code>aria-describedby</code> — ordered <code>[description, error, own]</code>. The error id is present only while there is an error.</Ink></li>
+  <li><Ink><code>aria-invalid="true"</code> — only while the Field is <code>invalid</code>, never <code>"false"</code>. It changes no style; set <code>status="error"</code> on the control.</Ink></li>
+  <li><Ink><code>required</code> — native <code>required</code> on the control. The label renders no asterisk; mark the other fields with <code>optionalLabel</code> instead.</Ink></li>
 </ul>
-  It defaults to `useId()`; pass `id` to fix it.
-<ul>
-  <li><Ink><code>aria-describedby</code> — ordered <code>[description, error, own]</code>. The error id is</Ink></li>
-</ul>
-  present only while there is an error.
-<ul>
-  <li><Ink><code>aria-invalid="true"</code> — only while the Field is <code>invalid</code>, never <code>"false"</code>.</Ink></li>
-</ul>
-  It changes no style; set `status="error"` on the control.
-<ul>
-  <li><Ink><code>required</code> — native <code>required</code> on the control. The label renders no</Ink></li>
-</ul>
-  asterisk; mark the other fields with `optionalLabel` instead.
 
 <Ink>In development, Field warns in the console when no element inside it carries the id — the silent failure where the label names nothing.</Ink>
 

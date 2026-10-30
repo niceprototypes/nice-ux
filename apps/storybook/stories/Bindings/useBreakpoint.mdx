@@ -42,11 +42,7 @@ const wide = bp === BREAKPOINT_DESKTOP
 <Ink><Ink code>useBreakpoint</Ink> <Ink>runs in JS, so it carries costs the CSS layer doesn't:</Ink></Ink>
 
 <ul>
-  <li><Ink><Ink weight="semibold">SSR snapshot is <code>"phone"</code></Ink> (phone-first). The server renders the phone</Ink></li>
-</ul>
-  branch; the client re-renders on hydration if the viewport is wider — a
-  potential flash for non-phone branches.
-<ul>
+  <li><Ink><Ink weight="semibold">SSR snapshot is <code>"phone"</code></Ink> (phone-first). The server renders the phone branch; the client re-renders on hydration if the viewport is wider — a potential flash for non-phone branches.</Ink></li>
   <li><Ink>JS-gated content isn't in the initial HTML.</Ink></li>
   <li><Ink>The subtree re-renders on every viewport cross.</Ink></li>
 </ul>

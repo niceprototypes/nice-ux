@@ -22,6 +22,7 @@ const ContentFlex: React.FC<ContentFlexProps> = ({
     {...props}
     gap={gap}
     $wrapped={wrapped}
+    $gap={gap}
   />
 )
 

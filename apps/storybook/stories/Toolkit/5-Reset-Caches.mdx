@@ -52,13 +52,9 @@ nicely --reset --dry-run
 
 <ul>
   <li><Ink><Ink weight="semibold">build first</Ink> so the new dists exist,</Ink></li>
-  <li><Ink><Ink weight="semibold">dedupe second</Ink> so any duplicate singletons that crept in during the build</Ink></li>
+  <li><Ink><Ink weight="semibold">dedupe second</Ink> so any duplicate singletons that crept in during the build cascade are removed,</Ink></li>
+  <li><Ink><Ink weight="semibold">clean last</Ink> so dev-server caches are flushed and processes killed before the next restart.</Ink></li>
 </ul>
-  cascade are removed,
-<ul>
-  <li><Ink><Ink weight="semibold">clean last</Ink> so dev-server caches are flushed and processes killed before</Ink></li>
-</ul>
-  the next restart.
 
 <Ink><Ink code>--reset</Ink> <Ink>also</Ink> <Ink weight="semibold">stops any running <code>nicely --dev</code>/<code>--watch</code> first</Ink> <Ink>— those write the same dists the rebuild does, so leaving them running would race. Exit code reflects</Ink> <Ink code>--build-all</Ink><Ink>'s result;</Ink> <Ink code>--dedupe</Ink> <Ink>and</Ink> <Ink code>--clean</Ink> <Ink>run regardless.</Ink></Ink>
 

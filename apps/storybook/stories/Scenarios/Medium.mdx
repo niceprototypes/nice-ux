@@ -74,10 +74,7 @@ export default function App() {
 <Ink>Writes overrides, custom tokens, and breakpoint floors to the page as CSS variables. Run it once, at module load.</Ink>
 
 <ul>
-  <li><Ink>A string is static; an object keyed by breakpoints is responsive. <code>laptop</code> is</Ink></li>
-</ul>
-  one band, `laptop+` is that band and up, `laptop-` is that band and down.
-<ul>
+  <li><Ink>A string is static; an object keyed by breakpoints is responsive. <code>laptop</code> is one band, <code>laptop+</code> is that band and up, <code>laptop-</code> is that band and down.</Ink></li>
   <li><Ink>A band with no key keeps the library default — here, <code>tablet</code>.</Ink></li>
   <li><Ink>Values are emitted as written, so include a fallback font.</Ink></li>
   <li><Ink>Headings read <code>fontFamily.heading</code>, not <code>base</code>.</Ink></li>
@@ -88,10 +85,7 @@ export default function App() {
 <Ink><Ink code>getToken</Ink> <Ink>returns a</Ink> <Ink code>var()</Ink><Ink>, so responsive and themed values follow the viewport and theme on their own.</Ink> <Ink code>getBreakpoint</Ink> <Ink>returns a fixed</Ink> <Ink code>@media</Ink> <Ink>string built when it is called.</Ink></Ink>
 
 <ul>
-  <li><Ink>Call <code>setTokens</code> first — a <code>getBreakpoint</code> evaluated earlier keeps the default</Ink></li>
-</ul>
-  1280px floor. Keep it in its own module, imported first.
-<ul>
+  <li><Ink>Call <code>setTokens</code> first — a <code>getBreakpoint</code> evaluated earlier keeps the default 1280px floor. Keep it in its own module, imported first.</Ink></li>
   <li><Ink>Unknown token names are compile errors.</Ink></li>
 </ul>
 

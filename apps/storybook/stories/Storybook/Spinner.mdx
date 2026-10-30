@@ -72,14 +72,8 @@ addons: [
 <Ink>To keep the boot overlay on screen while styling it, use any of these — the first one present wins. Hold keeps whichever mode is active up: the opaque overlay, or in snapshot mode the held snapshot with the spinner over it.</Ink>
 
 <ol>
-  <li><Ink>Query parameter: <code>?nsbHold=1</code> (or <code>true</code>) holds, <code>?nsbHold=0</code> (or <code>false</code>)</Ink></li>
-</ol>
-   releases.
-<ol>
-  <li><Ink>localStorage: <code>localStorage.setItem("@niceprototypes/storybook-spinner:hold", "true")</code></Ink></li>
-</ol>
-   holds, `"false"` releases.
-<ol>
+  <li><Ink>Query parameter: <code>?nsbHold=1</code> (or <code>true</code>) holds, <code>?nsbHold=0</code> (or <code>false</code>) releases.</Ink></li>
+  <li><Ink>localStorage: <code>localStorage.setItem("@niceprototypes/storybook-spinner:hold", "true")</code> holds, <code>"false"</code> releases.</Ink></li>
   <li><Ink>The preset option <code>hold: true</code>.</Ink></li>
 </ol>
 
