@@ -47,9 +47,9 @@ const preview: Preview = {
       components: {
         pre: ShikiPre,
       },
-      // Wrap docs pages so the navigation bar floats above MDX prose too — the
-      // addon's global decorator only fires for embedded <Story> renderings, and
-      // this project overrides DocsContainer regardless. The bar is imported
+      // Wrap docs pages so they carry the navigation bar — the addon's global
+      // decorator skips docs pages, and this project overrides DocsContainer
+      // regardless. The bar is imported
       // from the addon rather than rendered by it here, so the sequences come
       // through the same parameter the decorator reads. The page's `wrapped`
       // setting in src/data/storybook.json caps it at the content width.

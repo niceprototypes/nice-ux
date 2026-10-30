@@ -16,7 +16,7 @@ interface StoryNavigationParameters {
 
 /**
  * Preview entry. Loaded by Storybook from `@niceprototypes/storybook-navigation/preview`.
- * A global decorator renders the navigation bar beneath every story, reading the
+ * A global decorator renders the navigation bar beneath every story outside docs pages, reading the
  * navigable sequences from the consumer's `storyNavigation` parameter — so the
  * addon ships no project-specific story ids.
  *
@@ -32,8 +32,10 @@ interface StoryNavigationParameters {
 export const decorators = [
   (
     Story: React.ComponentType,
-    context: { parameters?: Record<string, unknown> }
+    context: { parameters?: Record<string, unknown>; viewMode?: string }
   ) => {
+    // A docs page embeds every story; the bar belongs to the page, not to each.
+    if (context.viewMode === "docs") return <Story />
     const param = context.parameters?.[PARAM_KEY] as
       | StoryNavigationParameters
       | undefined

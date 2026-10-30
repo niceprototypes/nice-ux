@@ -10,6 +10,14 @@
   &.sbdocs-content {
     margin-right: auto;
     max-width: 100%;
+
+    /* Storybook's docs theme colours these with its light palette; inherit the
+       Nice day/night text colour set on the content instead. */
+    & :where(
+      h1, h2, h3, h4, h5, h6, p, li, td, th, blockquote
+    ):not(.sb-unstyled, .sb-unstyled *) {
+      color: inherit;
+    }
   }
 
   &.sbdocs-wrapper {
