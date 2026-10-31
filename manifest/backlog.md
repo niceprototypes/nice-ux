@@ -140,7 +140,7 @@ Phases, in order: pre-monorepo → monorepo → storybook-rework → components 
 | 113 | Global `focusRing` token + shared focus style service (Popover, List, Select, Calendar, Tile have none or their own) | gaps §3 | S | styles | components |
 | 114 | Semantic z-index steps (dropdown, sticky, modal, toast, tooltip) | gaps §3; zIndex base/low/medium/high/higher | S | styles | components |
 | 115 | Checkbox `indeterminate` | gaps §2; 0 hits in packages/checkbox/src | S | checkbox | components |
-| 116 | List interactive listbox semantics (roving focus) on `selected`/`active` items; base for rows 89, 98 | gaps §2 | M | list | components |
+| 116 | DONE 2026-10-31 (cba4f064; new package @niceprototypes/listbox, aria-activedescendant instead of roving focus). List interactive listbox semantics (roving focus) on `selected`/`active` items; base for rows 89, 98 | gaps §2 | M | list | components |
 | 117 | Popover / Tooltip collision flip and shift to stay in the viewport | gaps §2; packages/popover computeAnchorPosition (low-confidence check) | S–M | popover, tooltip | components |
 | 118 | Select `multiple` + rendered option groups (optgroup is flattened) | gaps §2; packages/select/src/components/Select/Select.types.ts | S–M | select | components |
 | 119 | Tabs vertical orientation + overflow scrolling | gaps §2 | S | tabs | components |
