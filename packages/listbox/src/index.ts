@@ -5,4 +5,4 @@
 
 export { default, default as Listbox } from "./components/Listbox"
 export * from "./components/Listbox"
-export { getListboxEdgeIndex, getListboxNextIndex, getListboxOptionId, getListboxOptionText, getListboxTypeaheadIndex, useListboxTypeahead } from "./services"
+export { getListboxEdgeIndex, getListboxFlatOptions, getListboxNextIndex, getListboxOptionId, getListboxOptionText, getListboxTypeaheadIndex, useListboxTypeahead } from "./services"

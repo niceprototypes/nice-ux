@@ -73,3 +73,25 @@ export const StyledListboxOptionLabel = styled.span`
   flex: 1 1 auto;
   min-inline-size: 0;
 `
+
+/** An option group: its title over its options. */
+export const StyledListboxGroup = styled.li`
+  margin: 0;
+`
+
+/** A group's title, inset like an option; keyboard travel never lands on it. */
+export const StyledListboxGroupTitle = styled.div`
+  padding-block: ${getToken("gap", "small")};
+  padding-inline: ${getToken("gap", "base")};
+  color: ${getToken("listbox.groupTitle.color")};
+  user-select: none;
+`
+
+/** A group's options, a column like the root's. */
+export const StyledListboxGroupOptions = styled.ul`
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+`

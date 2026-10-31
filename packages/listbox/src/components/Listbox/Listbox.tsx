@@ -3,12 +3,16 @@ import Ink from "@niceprototypes/ink"
 import { Theme } from "@niceprototypes/styles"
 import {
   StyledListbox,
+  StyledListboxGroup,
+  StyledListboxGroupOptions,
+  StyledListboxGroupTitle,
   StyledListboxOption,
   StyledListboxOptionLabel,
   StyledListboxOptionSlot,
 } from "./Listbox.styles"
-import type { ListboxOnChangeEventType, ListboxProps } from "./Listbox.types"
+import type { ListboxOnChangeEventType, ListboxOptionType, ListboxProps } from "./Listbox.types"
 import { getListboxEdgeIndex } from "../../services/getListboxEdgeIndex"
+import { getListboxFlatOptions } from "../../services/getListboxFlatOptions"
 import { getListboxNextIndex } from "../../services/getListboxNextIndex"
 import { getListboxOptionId } from "../../services/getListboxOptionId"
 import { getListboxTypeaheadIndex } from "../../services/getListboxTypeaheadIndex"
@@ -21,7 +25,9 @@ const PAGE_SIZE = 10
  * Listbox
  *
  * Controlled WAI-ARIA listbox: a `<ul role="listbox">` of `role="option"`
- * rows with `aria-selected`, labels set through Ink. Focusable (default): a
+ * rows with `aria-selected`, labels set through Ink. Option groups render as
+ * `role="group"` named by their title; keyboard travel and typeahead skip the
+ * titles. Focusable (default): a
  * tab stop that keeps DOM focus on the list and names the active option with
  * `aria-activedescendant`. With `focusable={false}` a combobox keeps focus and
  * drives `activeValue`; option presses do not take focus.
@@ -39,7 +45,7 @@ const PAGE_SIZE = 10
  * ```
  */
 const Listbox: React.FC<ListboxProps> = ({
-  options,
+  options: entries,
   value,
   onChange,
   activeValue: activeValueProp,
@@ -55,6 +61,7 @@ const Listbox: React.FC<ListboxProps> = ({
   const generatedId = React.useId()
   const id = idProp ?? generatedId
   const typeahead = useListboxTypeahead()
+  const options = React.useMemo(() => getListboxFlatOptions(entries), [entries])
 
   const [internalActiveValue, setInternalActiveValue] = React.useState<string | null>(null)
   const activeValue = activeValueProp !== undefined ? activeValueProp : internalActiveValue
@@ -132,6 +139,56 @@ const Listbox: React.FC<ListboxProps> = ({
     }
   }
 
+  const renderOption = (option: ListboxOptionType, index: number) => (
+    <StyledListboxOption
+      key={`${index}-${option.value}`}
+      id={getListboxOptionId(id, index)}
+      role="option"
+      aria-selected={index === selectedIndex}
+      aria-disabled={option.disabled ? "true" : undefined}
+      $active={index === activeIndex}
+      $selected={index === selectedIndex}
+      $disabled={!!option.disabled}
+      onClick={event => {
+        if (option.disabled) return
+        activate(index)
+        choose(index, event)
+      }}
+      onPointerMove={() => {
+        if (!option.disabled && index !== activeIndex) activate(index)
+      }}
+    >
+      {option.start !== undefined && option.start !== null ? (
+        <StyledListboxOptionSlot>{option.start}</StyledListboxOptionSlot>
+      ) : null}
+      <StyledListboxOptionLabel>
+        <Ink size={size}>{option.label}</Ink>
+      </StyledListboxOptionLabel>
+      {option.end !== undefined && option.end !== null ? (
+        <StyledListboxOptionSlot>{option.end}</StyledListboxOptionSlot>
+      ) : null}
+    </StyledListboxOption>
+  )
+
+  // Options count in the flat order; a group's title takes no index.
+  let flatIndex = 0
+  const rows = entries.map((entry, entryIndex) => {
+    if (!("options" in entry)) return renderOption(entry, flatIndex++)
+    const titleId = `${id}-group-${entryIndex}`
+    return (
+      <StyledListboxGroup key={`group-${entryIndex}`} role="group" aria-labelledby={titleId}>
+        <StyledListboxGroupTitle id={titleId}>
+          <Ink size={size} weight="semibold">
+            {entry.label}
+          </Ink>
+        </StyledListboxGroupTitle>
+        <StyledListboxGroupOptions role="presentation">
+          {entry.options.map(option => renderOption(option, flatIndex++))}
+        </StyledListboxGroupOptions>
+      </StyledListboxGroup>
+    )
+  })
+
   const listbox = (
     <StyledListbox
       ref={ref}
@@ -154,36 +211,7 @@ const Listbox: React.FC<ListboxProps> = ({
             onMouseDown: (event: React.MouseEvent<HTMLUListElement>) => event.preventDefault(),
           })}
     >
-      {options.map((option, index) => (
-        <StyledListboxOption
-          key={`${index}-${option.value}`}
-          id={getListboxOptionId(id, index)}
-          role="option"
-          aria-selected={index === selectedIndex}
-          aria-disabled={option.disabled ? "true" : undefined}
-          $active={index === activeIndex}
-          $selected={index === selectedIndex}
-          $disabled={!!option.disabled}
-          onClick={event => {
-            if (option.disabled) return
-            activate(index)
-            choose(index, event)
-          }}
-          onPointerMove={() => {
-            if (!option.disabled && index !== activeIndex) activate(index)
-          }}
-        >
-          {option.start !== undefined && option.start !== null ? (
-            <StyledListboxOptionSlot>{option.start}</StyledListboxOptionSlot>
-          ) : null}
-          <StyledListboxOptionLabel>
-            <Ink size={size}>{option.label}</Ink>
-          </StyledListboxOptionLabel>
-          {option.end !== undefined && option.end !== null ? (
-            <StyledListboxOptionSlot>{option.end}</StyledListboxOptionSlot>
-          ) : null}
-        </StyledListboxOption>
-      ))}
+      {rows}
     </StyledListbox>
   )
 

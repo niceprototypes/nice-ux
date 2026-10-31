@@ -1,4 +1,4 @@
-import type { ListboxOptionsType } from "../components/Listbox/Listbox.types"
+import type { ListboxOptionType } from "../components/Listbox/Listbox.types"
 
 /**
  * Index `delta` options away from `current`, clamped to the list (no wrap)
@@ -6,7 +6,7 @@ import type { ListboxOptionsType } from "../components/Listbox/Listbox.types"
  * option lies at or beyond the clamped target, the nearest enabled option
  * between it and `current` is used; failing that, `current` is returned.
  */
-export function getListboxNextIndex(options: ListboxOptionsType, current: number, delta: number): number {
+export function getListboxNextIndex(options: ReadonlyArray<ListboxOptionType>, current: number, delta: number): number {
   const last = options.length - 1
   if (last < 0) return -1
   const direction = delta < 0 ? -1 : 1

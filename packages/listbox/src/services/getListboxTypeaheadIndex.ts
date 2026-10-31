@@ -1,4 +1,4 @@
-import type { ListboxOptionsType } from "../components/Listbox/Listbox.types"
+import type { ListboxOptionType } from "../components/Listbox/Listbox.types"
 import { getListboxOptionText } from "./getListboxOptionText"
 
 /**
@@ -8,7 +8,7 @@ import { getListboxOptionText } from "./getListboxOptionText"
  * through options starting with that character instead. Returns -1 when
  * nothing matches.
  */
-export function getListboxTypeaheadIndex(options: ListboxOptionsType, search: string, current: number): number {
+export function getListboxTypeaheadIndex(options: ReadonlyArray<ListboxOptionType>, search: string, current: number): number {
   const count = options.length
   const start = current + 1
   const ordered = Array.from({ length: count }, (_, offset) => (start + offset) % count)

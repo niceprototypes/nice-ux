@@ -9,6 +9,8 @@ import type {
 import type {
   ListboxOnChangeEventType,
   ListboxOptionEndType,
+  ListboxOptionGroupType,
+  ListboxOptionsType,
   ListboxOptionStartType,
   ListboxOptionType,
 } from "@niceprototypes/listbox"
@@ -58,12 +60,23 @@ export type SelectOptionEndType = ListboxOptionEndType
 export type SelectOptionType = ListboxOptionType
 
 /**
+ * SelectOptionGroupType
+ *
+ * Re-export of ListboxOptionGroupType from @niceprototypes/listbox. A titled
+ * group of options: a native `<optgroup>` (pass a string label), or a listbox
+ * `role="group"` in custom mode.
+ */
+export type SelectOptionGroupType = ListboxOptionGroupType
+
+/**
  * SelectOptionsType
  *
- * Options in array order: native `<option>` elements, or listbox options in
- * custom mode. Ignored when `children` is given (children win).
+ * Re-export of ListboxOptionsType from @niceprototypes/listbox. Options and
+ * option groups in array order: native `<option>` / `<optgroup>` elements, or
+ * the listbox's options and groups in custom mode. Ignored when `children` is
+ * given (children win).
  */
-export type SelectOptionsType = ReadonlyArray<SelectOptionType>
+export type SelectOptionsType = ListboxOptionsType
 
 /**
  * SelectPlaceholderType
@@ -82,9 +95,8 @@ export type SelectPlaceholderType = string
  * `<optgroup>` elements; take precedence over `options` when both are given.
  * Native mode renders them as-is. Custom mode maps each
  * `<option value disabled>label</option>` to a listbox option (value falls
- * back to the text when `value` is absent); `<optgroup>` is flattened (its
- * options are kept, the grouping is not rendered) and other children are
- * ignored. Prefer `options` in custom mode — it also carries `start` / `end`.
+ * back to the text when `value` is absent) and `<optgroup label>` to an
+ * option group; other children are ignored. Prefer `options` in custom mode — it also carries `start` / `end`.
  */
 export type SelectChildrenType = InputChildrenType
 
@@ -244,6 +256,7 @@ namespace SelectTypes {
   export type NativeProps = SelectNativeProps
   export type CustomProps = SelectCustomProps
   export type Option = SelectOptionType
+  export type OptionGroup = SelectOptionGroupType
   export type Options = SelectOptionsType
   export type Placeholder = SelectPlaceholderType
   export type Children = SelectChildrenType

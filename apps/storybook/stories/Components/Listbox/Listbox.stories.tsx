@@ -18,14 +18,19 @@ const LOOP_VALUES = Object.keys(LOOPS) as (keyof typeof LOOPS)[]
 /** An unset choice for optional selects; `mapping` turns it into `undefined`. */
 const NONE = "none"
 
+/** The `grouped` arg's groups: title → option values. */
+const LOOP_GROUPS = { Loop: ["story", "chapter", "scene"], Off: ["off"] } as const satisfies Record<string, readonly (keyof typeof LOOPS)[]>
+
 /**
  * PlaygroundArgs
  *
- * ListboxProps plus `disabledOption`, which disables one option. `options` is built from
- * LOOPS in `render`. `value` is controlled: `onChange` writes the choice back to the args.
+ * ListboxProps plus `disabledOption`, which disables one option, and `grouped`, which sorts
+ * the options into LOOP_GROUPS. `options` is built from LOOPS in `render`. `value` is
+ * controlled: `onChange` writes the choice back to the args.
  */
 type PlaygroundArgs = Omit<ListboxProps, "options"> & {
   disabledOption?: string
+  grouped?: boolean
 }
 
 const meta = {
@@ -66,6 +71,7 @@ export const Playground: Story = {
     value: optionalSelect(LOOP_VALUES, "State"),
     activeValue: optionalSelect(LOOP_VALUES, "State"),
     disabledOption: optionalSelect(LOOP_VALUES, "State"),
+    grouped: { control: "boolean", table: { category: "Content" } },
     focusable: { control: "boolean", table: { category: "State" } },
 
     size: select(SIZE_OPTIONS, "Appearance"),
@@ -80,17 +86,20 @@ export const Playground: Story = {
 
     ref: HIDDEN,
   },
-  render: function Render({ value, onChange, disabledOption, ...rest }) {
+  render: function Render({ value, onChange, disabledOption, grouped, ...rest }) {
     const [, updateArgs] = useArgs<PlaygroundArgs>()
     // Local mirror of `value`: the test runner renders without a manager, so updateArgs
     // alone does not re-render there.
     const [current, setCurrent] = useState(value)
     useEffect(() => setCurrent(value), [value])
-    const options: ListboxOptionsType = LOOP_VALUES.map(loop => ({
+    const option = (loop: keyof typeof LOOPS) => ({
       value: loop,
       label: LOOPS[loop],
       disabled: loop === disabledOption ? true : undefined,
-    }))
+    })
+    const options: ListboxOptionsType = grouped
+      ? Object.entries(LOOP_GROUPS).map(([title, loops]) => ({ label: title, options: loops.map(option) }))
+      : LOOP_VALUES.map(option)
     return (
       <Listbox
         {...rest}
@@ -215,5 +224,33 @@ export const Size: Story = {
     await expect(getComputedStyle(label(canvasElement, "Loop story")).fontSize).toBe(
       resolveCss(canvasElement, "font-size", getToken("fontSize", "larger")),
     )
+  },
+}
+
+/** Option groups: each a `role="group"` named by its title; keyboard travel and typeahead skip the titles. */
+export const Grouped: Story = {
+  ...Playground,
+  args: { ...Playground.args, grouped: true },
+  play: async ({ canvasElement, args, userEvent }) => {
+    const canvas = within(canvasElement)
+    const listbox = canvas.getByRole("listbox", { name: "Loop" })
+    const active = () => document.getElementById(listbox.getAttribute("aria-activedescendant") ?? "")
+    await expect(within(canvas.getByRole("group", { name: "Loop" })).getAllByRole("option")).toHaveLength(3)
+    await expect(within(canvas.getByRole("group", { name: "Off" })).getAllByRole("option")).toHaveLength(1)
+    await expect(getComputedStyle(canvas.getByText("Off")).color).toBe(
+      resolveCss(canvasElement, "color", getToken("listbox.groupTitle.color")),
+    )
+
+    // Arrow keys cross from one group to the next without stopping on the title.
+    await userEvent.tab()
+    await expect(active()).toHaveTextContent("Loop story")
+    await userEvent.keyboard("{ArrowDown}{ArrowDown}{ArrowDown}")
+    await expect(active()).toHaveTextContent("No loop")
+    // Typeahead matches options only: "o" is the "Off" title's initial and "No loop" has none.
+    await userEvent.keyboard("{Home}")
+    await userEvent.keyboard("o")
+    await expect(active()).toHaveTextContent("Loop story")
+    await userEvent.keyboard("{End}{Enter}")
+    await expect(args.onChange).toHaveBeenLastCalledWith("off", expect.anything())
   },
 }

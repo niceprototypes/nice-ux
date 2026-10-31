@@ -5,6 +5,7 @@
   "components": ["Listbox"],
   "services": [
     "getListboxEdgeIndex",
+    "getListboxFlatOptions",
     "getListboxNextIndex",
     "getListboxOptionId",
     "getListboxOptionText",

@@ -605,7 +605,7 @@ describe("Select (custom, default)", () => {
       expect(listbox().parentElement!.style.minWidth).toBe("240px")
     })
 
-    it("maps <option> / <optgroup> children to options", () => {
+    it("maps <option> / <optgroup> children to options and option groups", () => {
       render(
         <Select aria-label="fruit">
           <option value="k">Kiwi</option>
@@ -622,6 +622,7 @@ describe("Select (custom, default)", () => {
       key("ArrowDown")
       expect(options().map(o => o.textContent)).toEqual(["Kiwi", "Peach", "Lime"])
       expect(options()[1]).toHaveAttribute("aria-disabled", "true")
+      expect(screen.getByRole("group", { name: "Stone" })).toContainElement(options()[1])
       key("End")
       key("Enter")
       expect(combobox()).toHaveValue("Lime")

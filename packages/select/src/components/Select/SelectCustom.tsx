@@ -3,6 +3,7 @@ import Icon from "@niceprototypes/icon"
 import Input from "@niceprototypes/input"
 import Listbox, {
   getListboxEdgeIndex,
+  getListboxFlatOptions,
   getListboxNextIndex,
   getListboxOptionId,
   getListboxOptionText,
@@ -48,11 +49,13 @@ const SelectCustom: React.FC<SelectCustomProps> = ({
   // Disabled when either the `disabled` prop or `status="disabled"` asks for it.
   const disabled = disabledProp || status === "disabled"
 
-  // Children win over options when both are given (same as native)
-  const options = React.useMemo(
+  // Children win over options when both are given (same as native). The
+  // index logic runs on the flat options; the Listbox renders the groups.
+  const entries = React.useMemo(
     () => (children !== undefined && children !== null ? optionsFromChildren(children) : (optionsProp ?? [])),
     [children, optionsProp]
   )
+  const options = React.useMemo(() => getListboxFlatOptions(entries), [entries])
 
   // Uncontrolled initial value mirrors a native <select>: "" with a
   // placeholder, otherwise the first enabled option.
@@ -293,7 +296,7 @@ const SelectCustom: React.FC<SelectCustomProps> = ({
       >
         <Listbox
           id={listboxId}
-          options={options}
+          options={entries}
           value={currentValue}
           activeValue={active >= 0 ? options[active].value : null}
           onActiveChange={next => {

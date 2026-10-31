@@ -71,7 +71,7 @@ export const selectNative = {
 export const selectOptions = {
   name: "options",
   description:
-    "Array of { value, label, disabled?, start?, end? } in display order. A disabled option is listed but cannot be chosen. start / end render before / after the label in the combobox listbox only; a native <option> renders text only. Ignored when children are given.",
+    "Array of { value, label, disabled?, start?, end? } in display order, mixed with { label, options } groups (an <optgroup> natively, a titled role=\"group\" in the combobox). A disabled option is listed but cannot be chosen. start / end render before / after the label in the combobox listbox only; a native <option> renders text only. Ignored when children are given.",
   variants: ["labels", "disabled", "start / end"],
   default: "labels",
   preview: variant => {
@@ -144,7 +144,7 @@ export const selectOptions = {
 export const selectChildren = {
   name: "children",
   description:
-    "<option> / <optgroup> elements; they win over options. native renders them as-is. The combobox maps each <option> to a listbox option and flattens <optgroup> (options kept, group heading not rendered) — prefer options there.",
+    "<option> / <optgroup> elements; they win over options. native renders them as-is. The combobox maps each <option> to a listbox option and each <optgroup> to a titled option group — prefer options there.",
   variants: ["combobox", "native"],
   default: "combobox",
   preview: variant =>

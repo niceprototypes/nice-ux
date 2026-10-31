@@ -52,6 +52,22 @@ const OPTIONS_PRESETS: Record<string, SelectOptionsType> = {
     { value: "apple", label: "Apple", start: <Icon name="star" />, end: <Icon name="check" /> },
     { value: "pear", label: "Pear", start: <Icon name="star" />, end: <Icon name="check" /> },
   ],
+  grouped: [
+    {
+      label: "Pome",
+      options: [
+        { value: "apple", label: "Apple" },
+        { value: "pear", label: "Pear" },
+      ],
+    },
+    {
+      label: "Stone",
+      options: [
+        { value: "peach", label: "Peach" },
+        { value: "cherry", label: "Cherry" },
+      ],
+    },
+  ],
 }
 
 /** `children` presets: an array of `<option>` elements (not a Fragment), which win over `options`. */
@@ -325,6 +341,29 @@ export const Keyboard: Story = {
     await userEvent.keyboard("{Escape}")
     await expect(combobox).toHaveAttribute("aria-expanded", "false")
     await expect(combobox).toHaveValue("Pear")
+  },
+}
+
+/** Option groups: each a `role="group"` named by its title; keyboard travel and typeahead skip the titles. */
+export const Grouped: Story = {
+  ...Playground,
+  args: { ...Playground.args, options: "grouped" },
+  play: async ({ canvasElement, args, userEvent }) => {
+    const combobox = within(canvasElement).getByRole("combobox", { name: "Fruit" })
+    const active = () => document.getElementById(combobox.getAttribute("aria-activedescendant") ?? "")
+    combobox.focus()
+    await userEvent.keyboard("{ArrowDown}")
+    const listbox = within(document.body).getByRole("listbox")
+    await expect(within(within(listbox).getByRole("group", { name: "Pome" })).getAllByRole("option")).toHaveLength(2)
+    await expect(within(within(listbox).getByRole("group", { name: "Stone" })).getAllByRole("option")).toHaveLength(2)
+    await expect(active()).toHaveTextContent("Apple")
+    await userEvent.keyboard("{ArrowDown}{ArrowDown}")
+    await expect(active()).toHaveTextContent("Peach")
+    await userEvent.keyboard("c")
+    await expect(active()).toHaveTextContent("Cherry")
+    await userEvent.keyboard("{Enter}")
+    await expect(args.onChange).toHaveBeenLastCalledWith("cherry", expect.anything())
+    await expect(combobox).toHaveValue("Cherry")
   },
 }
 

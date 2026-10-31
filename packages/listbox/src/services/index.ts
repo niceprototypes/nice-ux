@@ -1,4 +1,5 @@
 export { getListboxEdgeIndex } from "./getListboxEdgeIndex"
+export { getListboxFlatOptions } from "./getListboxFlatOptions"
 export { getListboxNextIndex } from "./getListboxNextIndex"
 export { getListboxOptionId } from "./getListboxOptionId"
 export { getListboxOptionText } from "./getListboxOptionText"

@@ -46,7 +46,7 @@ LightboxCaption(lightbox) title?:LightboxTitleType description?:LightboxDescript
 Line(line) [components-line--playground] color?:BorderColorType radius?:"element"|Element|number|[LineCornerType, LineCornerType, LineCornerType, LineCornerType] theme?:ThemeType
 List(list) [components-list--playground] 
 ListItem(list) 
-Listbox(listbox) [components-forms-listbox--playground] options:ReadonlyArray<ListboxOptionType> value?:string onChange?:fn activeValue?:string|null onActiveChange?:fn focusable?:boolean=true size?:SizeType="base" theme?:ThemeType
+Listbox(listbox) [components-forms-listbox--playground] options:ReadonlyArray<ListboxOptionType|ListboxOptionGroupType> value?:string onChange?:fn activeValue?:string|null onActiveChange?:fn focusable?:boolean=true size?:SizeType="base" theme?:ThemeType
 Logo(logo) [components-logo--playground] height?:number showName?:boolean nameHeightScale?:number=0.6 gap?:number=4 theme?:ThemeType
 Popover(popover) [components-popover--playground] open:boolean onOpenChange?:fn anchorRef:React.RefObject<HTMLElement|null> ignoreOutsideRefs?:ReadonlyArray<React.RefObject<HTMLElement|null>> position?:"top"|"bottom"|"left"|"right"="bottom" align?:"start"|"center"|"end"="start" matchAnchorWidth?:boolean=false children?:node role?:React.AriaRole="dialog" theme?:ThemeType
 Radio(radio) [components-forms-radio--playground] value:string disabled?:boolean children?:node size?:RadioSizeType backgroundColor?:ColorTokenProp<RadioBackgroundColorType> borderColor?:ColorTokenProp<RadioBorderColorType>

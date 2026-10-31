@@ -34,11 +34,24 @@ export type ListboxOptionType = {
 }
 
 /**
+ * ListboxOptionGroupType
+ *
+ * A titled `role="group"` of options, named by its title.
+ * - label: the group title, rendered through Ink. Keyboard travel and
+ *   typeahead skip it
+ * - options: the group's options, in order
+ */
+export type ListboxOptionGroupType = {
+  label: React.ReactNode
+  options: ReadonlyArray<ListboxOptionType>
+}
+
+/**
  * ListboxOptionsType
  *
- * Options in array order.
+ * Options and option groups, in array order. Plain options and groups can mix.
  */
-export type ListboxOptionsType = ReadonlyArray<ListboxOptionType>
+export type ListboxOptionsType = ReadonlyArray<ListboxOptionType | ListboxOptionGroupType>
 
 /**
  * ListboxValueType
@@ -116,7 +129,7 @@ export type ListboxThemeType = ThemeType
  * Complete prop definition for the Listbox component.
  */
 export interface ListboxProps {
-  /** Options, in order */
+  /** Options and option groups, in order */
   options: ListboxOptionsType
 
   /** Selected value (controlled) */
@@ -165,6 +178,7 @@ namespace ListboxTypes {
   export type OptionStart = ListboxOptionStartType
   export type OptionEnd = ListboxOptionEndType
   export type Option = ListboxOptionType
+  export type OptionGroup = ListboxOptionGroupType
   export type Options = ListboxOptionsType
   export type Value = ListboxValueType
   export type OnChangeEvent = ListboxOnChangeEventType

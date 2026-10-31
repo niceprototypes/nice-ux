@@ -629,6 +629,7 @@
 	--np--listbox--selected--background-color: var(--np--background-color--link);
 	--np--listbox--selected--background-color--active: var(--np--border-color--link);
 	--np--listbox--selected--color: var(--np--color--link);
+	--np--listbox--group-title--color: var(--np--color--lighter);
 	--np--listbox--focus-ring--width: var(--np--border-width--large);
 	--np--listbox--focus-ring--color: var(--np--border-color--link);
 
@@ -893,6 +894,7 @@
 	--np--listbox--selected--background-color--inverse: var(--np--background-color--link--inverse);
 	--np--listbox--selected--background-color--active--inverse: var(--np--border-color--link--inverse);
 	--np--listbox--selected--color--inverse: var(--np--color--link--inverse);
+	--np--listbox--group-title--color--inverse: var(--np--color--lighter--inverse);
 	--np--listbox--focus-ring--color--inverse: var(--np--border-color--link--inverse);
 	--np--radio--background-color--unchecked--inverse: var(--np--background-color--inverse);
 	--np--radio--background-color--inverse: var(--np--color--inverse);
@@ -1302,6 +1304,7 @@
 		--np--listbox--selected--background-color--inverse: var(--np--background-color--link--night--inverse);
 		--np--listbox--selected--background-color--active--inverse: var(--np--border-color--link--night--inverse);
 		--np--listbox--selected--color--inverse: var(--np--color--link--night--inverse);
+		--np--listbox--group-title--color--inverse: var(--np--color--lighter--night--inverse);
 		--np--listbox--focus-ring--color--inverse: var(--np--border-color--link--night--inverse);
 		--np--radio--background-color--unchecked--inverse: var(--np--background-color--night--inverse);
 		--np--radio--background-color--inverse: var(--np--color--night--inverse);
@@ -1472,6 +1475,7 @@
 		--np--listbox--selected--background-color: var(--np--background-color--link--night);
 		--np--listbox--selected--background-color--active: var(--np--border-color--link--night);
 		--np--listbox--selected--color: var(--np--color--link--night);
+		--np--listbox--group-title--color: var(--np--color--lighter--night);
 		--np--listbox--focus-ring--color: var(--np--border-color--link--night);
 		--np--radio--background-color--unchecked: var(--np--background-color--night);
 		--np--radio--background-color: var(--np--color--night);
@@ -1701,6 +1705,7 @@
 		--np--listbox--selected--background-color--inverse: var(--np--background-color--link--day--inverse);
 		--np--listbox--selected--background-color--active--inverse: var(--np--border-color--link--day--inverse);
 		--np--listbox--selected--color--inverse: var(--np--color--link--day--inverse);
+		--np--listbox--group-title--color--inverse: var(--np--color--lighter--day--inverse);
 		--np--listbox--focus-ring--color--inverse: var(--np--border-color--link--day--inverse);
 		--np--radio--background-color--unchecked--inverse: var(--np--background-color--day--inverse);
 		--np--radio--background-color--inverse: var(--np--color--day--inverse);
@@ -1871,6 +1876,7 @@
 		--np--listbox--selected--background-color: var(--np--background-color--link--day);
 		--np--listbox--selected--background-color--active: var(--np--border-color--link--day);
 		--np--listbox--selected--color: var(--np--color--link--day);
+		--np--listbox--group-title--color: var(--np--color--lighter--day);
 		--np--listbox--focus-ring--color: var(--np--border-color--link--day);
 		--np--radio--background-color--unchecked: var(--np--background-color--day);
 		--np--radio--background-color: var(--np--color--day);
@@ -2099,6 +2105,7 @@
 		--np--listbox--selected--background-color--inverse: var(--np--background-color--link--night--inverse);
 		--np--listbox--selected--background-color--active--inverse: var(--np--border-color--link--night--inverse);
 		--np--listbox--selected--color--inverse: var(--np--color--link--night--inverse);
+		--np--listbox--group-title--color--inverse: var(--np--color--lighter--night--inverse);
 		--np--listbox--focus-ring--color--inverse: var(--np--border-color--link--night--inverse);
 		--np--radio--background-color--unchecked--inverse: var(--np--background-color--night--inverse);
 		--np--radio--background-color--inverse: var(--np--color--night--inverse);
@@ -2269,6 +2276,7 @@
 		--np--listbox--selected--background-color: var(--np--background-color--link--night);
 		--np--listbox--selected--background-color--active: var(--np--border-color--link--night);
 		--np--listbox--selected--color: var(--np--color--link--night);
+		--np--listbox--group-title--color: var(--np--color--lighter--night);
 		--np--listbox--focus-ring--color: var(--np--border-color--link--night);
 		--np--radio--background-color--unchecked: var(--np--background-color--night);
 		--np--radio--background-color: var(--np--color--night);

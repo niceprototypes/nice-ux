@@ -2,7 +2,7 @@ import * as React from "react"
 import Icon from "@niceprototypes/icon"
 import Input from "@niceprototypes/input"
 import { StyledChevron } from "./Select.styles"
-import type { SelectNativeProps } from "./Select.types"
+import type { SelectNativeProps, SelectOptionType } from "./Select.types"
 
 /**
  * Native `<select>` rendered through Input's field chrome (`as="select"`).
@@ -27,17 +27,29 @@ const SelectNative: React.FC<SelectNativeProps> = ({
   const disabled = disabledProp || status === "disabled"
 
   // Children win over options when both are given
+  const renderOption = (option: SelectOptionType) => (
+    <option
+      key={option.value}
+      value={option.value}
+      disabled={option.disabled}
+    >
+      {option.label}
+    </option>
+  )
   const content =
     children ??
-    options?.map(option => (
-      <option
-        key={option.value}
-        value={option.value}
-        disabled={option.disabled}
-      >
-        {option.label}
-      </option>
-    ))
+    options?.map((entry, index) =>
+      "options" in entry ? (
+        <optgroup
+          key={`group-${index}`}
+          label={typeof entry.label === "string" || typeof entry.label === "number" ? String(entry.label) : undefined}
+        >
+          {entry.options.map(renderOption)}
+        </optgroup>
+      ) : (
+        renderOption(entry)
+      )
+    )
 
   // Without a value, a <select> shows its first enabled option; defaulting to
   // "" selects the placeholder option instead.

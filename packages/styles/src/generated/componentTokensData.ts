@@ -647,6 +647,11 @@ const componentTokensData: ComponentTokensData = {
         "base": "var(--np--color--link)"
       }
     },
+    "groupTitle": {
+      "color": {
+        "base": "var(--np--color--lighter)"
+      }
+    },
     "focusRing": {
       "width": {
         "base": "var(--np--border-width--large)"
