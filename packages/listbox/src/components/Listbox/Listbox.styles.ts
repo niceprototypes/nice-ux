@@ -4,7 +4,7 @@ import { getToken } from "@niceprototypes/styles"
 /**
  * The listbox root: a column of options inset by `gap:smaller`, so each
  * option's rounded highlight clears the surface edge. A keyboard-focused
- * Listbox shows the link-coloured outline.
+ * Listbox shows the focus-ring outline.
  */
 export const StyledListbox = styled.ul`
   display: flex;
@@ -19,7 +19,7 @@ export const StyledListbox = styled.ul`
   }
 
   &:focus-visible {
-    outline: ${getToken("borderWidth", "large")} solid ${getToken("borderColor", "link")};
+    outline: ${getToken("listbox.focusRing.width")} solid ${getToken("listbox.focusRing.color")};
   }
 `
 
@@ -30,15 +30,15 @@ interface StyledListboxOptionProps {
 }
 
 const getBackgroundColor = ({ $active, $selected }: StyledListboxOptionProps) => {
-  if ($active && $selected) return getToken("borderColor", "link")
-  if ($active) return getToken("borderColor", "base")
-  if ($selected) return getToken("backgroundColor", "link")
+  if ($active && $selected) return getToken("listbox.selected.backgroundColor:active")
+  if ($active) return getToken("listbox.backgroundColor:active")
+  if ($selected) return getToken("listbox.selected.backgroundColor")
   return "transparent"
 }
 
 const getColor = ({ $disabled, $selected }: StyledListboxOptionProps) => {
   if ($disabled) return getToken("color", "disabled")
-  if ($selected) return getToken("color", "link")
+  if ($selected) return getToken("listbox.selected.color")
   return "inherit"
 }
 

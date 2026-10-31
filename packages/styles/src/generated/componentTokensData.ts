@@ -634,6 +634,28 @@ const componentTokensData: ComponentTokensData = {
       "disabled": "var(--np--color--disabled)"
     }
   },
+  "listbox": {
+    "backgroundColor": {
+      "active": "var(--np--border-color)"
+    },
+    "selected": {
+      "backgroundColor": {
+        "base": "var(--np--background-color--link)",
+        "active": "var(--np--border-color--link)"
+      },
+      "color": {
+        "base": "var(--np--color--link)"
+      }
+    },
+    "focusRing": {
+      "width": {
+        "base": "var(--np--border-width--large)"
+      },
+      "color": {
+        "base": "var(--np--border-color--link)"
+      }
+    }
+  },
   "logo": {
     "height": {
       "base": "64"

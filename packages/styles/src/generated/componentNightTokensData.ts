@@ -22,6 +22,7 @@ const componentNightTokensData: ComponentNightTokensData = {
   "lightbox": {},
   "line": {},
   "list": {},
+  "listbox": {},
   "logo": {
     "color": {
       "base": "var(--np--color--night)"
