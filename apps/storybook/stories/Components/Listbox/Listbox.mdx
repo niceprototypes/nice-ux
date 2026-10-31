@@ -1,0 +1,29 @@
+import { Meta, Stories } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../src/components/Story"
+import Install from "../../../src/components/Install"
+import * as ListboxStories from "./Listbox.stories"
+
+<Meta of={ListboxStories} />
+
+<StoryHeader
+  title="Listbox"
+  description="Listbox: a controlled WAI-ARIA listbox of selectable options, standalone or driven by a combobox such as Select."
+/>
+
+<Install package="listbox" />
+
+```jsx
+import Listbox from "@niceprototypes/listbox"
+
+<Listbox
+  aria-label="Loop"
+  options={[
+    { value: "story", label: "Loop story" },
+    { value: "chapter", label: "Loop chapter" },
+  ]}
+  value={loop}
+  onChange={setLoop}
+/>
+```
+
+<Stories />

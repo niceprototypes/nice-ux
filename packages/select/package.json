@@ -30,7 +30,7 @@
   "peerDependencies": {
     "@niceprototypes/icon": "workspace:^",
     "@niceprototypes/input": "workspace:^",
-    "@niceprototypes/list": "workspace:^",
+    "@niceprototypes/listbox": "workspace:^",
     "@niceprototypes/popover": "workspace:^",
     "@niceprototypes/styles": "workspace:^",
     "react": ">=19.2.0 <20.0.0",
@@ -55,7 +55,6 @@
     "@niceprototypes/field": "workspace:*",
     "@niceprototypes/icon": "workspace:*",
     "@niceprototypes/input": "workspace:*",
-    "@niceprototypes/list": "workspace:*",
     "@niceprototypes/popover": "workspace:*",
     "@niceprototypes/styles": "workspace:*",
     "react": "catalog:",
@@ -65,7 +64,8 @@
     "styled-components": "catalog:",
     "ts-jest": "^29.4.6",
     "tslib": "^2.6.2",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "@niceprototypes/listbox": "workspace:*"
   },
   "repository": {
     "type": "git",

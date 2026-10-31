@@ -1,0 +1,75 @@
+import styled from "styled-components"
+import { getToken } from "@niceprototypes/styles"
+
+/**
+ * The listbox root: a column of options inset by `gap:smaller`, so each
+ * option's rounded highlight clears the surface edge. A keyboard-focused
+ * Listbox shows the link-coloured outline.
+ */
+export const StyledListbox = styled.ul`
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding: ${getToken("gap", "smaller")};
+  color: ${getToken("color", "base")};
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: ${getToken("borderWidth", "large")} solid ${getToken("borderColor", "link")};
+  }
+`
+
+interface StyledListboxOptionProps {
+  $active: boolean
+  $selected: boolean
+  $disabled: boolean
+}
+
+const getBackgroundColor = ({ $active, $selected }: StyledListboxOptionProps) => {
+  if ($active && $selected) return getToken("borderColor", "link")
+  if ($active) return getToken("borderColor", "base")
+  if ($selected) return getToken("backgroundColor", "link")
+  return "transparent"
+}
+
+const getColor = ({ $disabled, $selected }: StyledListboxOptionProps) => {
+  if ($disabled) return getToken("color", "disabled")
+  if ($selected) return getToken("color", "link")
+  return "inherit"
+}
+
+/**
+ * One option row: start slot, label, end slot. Active (keyboard or pointer)
+ * and selected are background states; selected and disabled also set the
+ * text colour, which the Ink label inherits.
+ */
+export const StyledListboxOption = styled.li<StyledListboxOptionProps>`
+  display: flex;
+  align-items: center;
+  gap: ${getToken("gap", "small")};
+  margin: 0;
+  padding-block: ${getToken("gap", "small")};
+  padding-inline: ${getToken("gap", "base")};
+  border-radius: ${getToken("borderRadius", "small")};
+  background-color: ${getBackgroundColor};
+  color: ${getColor};
+  cursor: ${({ $disabled }) => ($disabled ? "default" : "pointer")};
+  user-select: none;
+`
+
+/** Start / end slot; keeps its intrinsic size. */
+export const StyledListboxOptionSlot = styled.span`
+  display: flex;
+  flex: none;
+  align-items: center;
+`
+
+/** Label; takes the remaining inline space and may shrink. */
+export const StyledListboxOptionLabel = styled.span`
+  flex: 1 1 auto;
+  min-inline-size: 0;
+`

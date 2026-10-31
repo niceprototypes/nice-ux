@@ -6,6 +6,12 @@ import type {
   InputDefaultValueType,
   InputValueType,
 } from "@niceprototypes/input"
+import type {
+  ListboxOnChangeEventType,
+  ListboxOptionEndType,
+  ListboxOptionStartType,
+  ListboxOptionType,
+} from "@niceprototypes/listbox"
 import type { SizeType } from "@niceprototypes/styles"
 
 /**
@@ -13,31 +19,34 @@ import type { SizeType } from "@niceprototypes/styles"
  *
  * Set true to render the platform `<select>` (Input `as="select"`). Default
  * false renders the custom WAI-ARIA select-only combobox: a read-only Input
- * with `role="combobox"` that opens a Popover holding a `role="listbox"` List.
+ * with `role="combobox"` that opens a Popover holding a Listbox.
  */
 export type SelectNativeType = boolean
 
 /**
  * SelectOptionStartType
  *
- * Content before the option label in the custom listbox (icon, avatar).
- * Custom mode only — a native `<option>` renders text only.
+ * Re-export of ListboxOptionStartType from @niceprototypes/listbox. Content
+ * before the option label in the custom listbox (icon, avatar). Custom mode
+ * only — a native `<option>` renders text only.
  */
-export type SelectOptionStartType = React.ReactNode
+export type SelectOptionStartType = ListboxOptionStartType
 
 /**
  * SelectOptionEndType
  *
- * Content after the option label in the custom listbox (shortcut, badge).
- * Custom mode only — a native `<option>` renders text only.
+ * Re-export of ListboxOptionEndType from @niceprototypes/listbox. Content
+ * after the option label in the custom listbox (shortcut, badge). Custom mode
+ * only — a native `<option>` renders text only.
  */
-export type SelectOptionEndType = React.ReactNode
+export type SelectOptionEndType = ListboxOptionEndType
 
 /**
  * SelectOptionType
  *
- * One entry of the `options` prop: a native `<option>` (native mode) or a
- * `role="option"` ListItem (custom mode).
+ * Re-export of ListboxOptionType from @niceprototypes/listbox. One entry of
+ * the `options` prop: a native `<option>` (native mode) or a Listbox option
+ * (custom mode).
  * - value: submitted value
  * - label: option text. A native `<option>` renders text only — pass a string
  *   or number. In custom mode an element label renders in the list, but the
@@ -46,13 +55,7 @@ export type SelectOptionEndType = React.ReactNode
  * - disabled: the option is shown but cannot be chosen
  * - start / end: custom-mode slots before / after the label; ignored natively
  */
-export type SelectOptionType = {
-  value: string
-  label: React.ReactNode
-  disabled?: boolean
-  start?: SelectOptionStartType
-  end?: SelectOptionEndType
-}
+export type SelectOptionType = ListboxOptionType
 
 /**
  * SelectOptionsType
@@ -121,7 +124,7 @@ export type SelectDefaultValueType = InputDefaultValueType
 export type SelectOnChangeEventType =
   | React.ChangeEvent<HTMLSelectElement>
   | React.KeyboardEvent<HTMLInputElement>
-  | React.MouseEvent<HTMLLIElement>
+  | ListboxOnChangeEventType
 
 /**
  * SelectOnChangeType

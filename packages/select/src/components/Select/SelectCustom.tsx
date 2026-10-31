@@ -1,18 +1,18 @@
 import * as React from "react"
 import Icon from "@niceprototypes/icon"
 import Input from "@niceprototypes/input"
-import { List, ListItem } from "@niceprototypes/list"
+import Listbox, {
+  getListboxEdgeIndex,
+  getListboxNextIndex,
+  getListboxOptionId,
+  getListboxOptionText,
+  getListboxTypeaheadIndex,
+  useListboxTypeahead,
+} from "@niceprototypes/listbox"
 import Popover from "@niceprototypes/popover"
 import { StyledChevron } from "./Select.styles"
 import type { SelectCustomProps, SelectOnChangeEventType } from "./Select.types"
-import { getEdgeIndex } from "../../utilities/getEdgeIndex"
-import { getNextIndex } from "../../utilities/getNextIndex"
-import { getOptionText } from "../../utilities/getOptionText"
-import { getTypeaheadIndex } from "../../utilities/getTypeaheadIndex"
 import { optionsFromChildren } from "../../utilities/optionsFromChildren"
-
-/** Typeahead buffer lifetime after the last printable key, in ms. */
-const TYPEAHEAD_TIMEOUT = 500
 
 /** Options moved by PageUp / PageDown. */
 const PAGE_SIZE = 10
@@ -20,10 +20,9 @@ const PAGE_SIZE = 10
 /**
  * WAI-ARIA APG select-only combobox. The trigger is Input rendered read-only
  * with `role="combobox"`; a Popover anchored to the Input field chrome, at
- * least as wide as it, holds a
- * `role="listbox"` List of `role="option"` ListItems. DOM focus stays on the
- * trigger throughout — the active option is conveyed by
- * `aria-activedescendant`. A hidden input carries the value for FormData.
+ * least as wide as it, holds a non-focusable
+ * Listbox. DOM focus stays on the trigger throughout — the active option is
+ * conveyed by `aria-activedescendant`. A hidden input carries the value for FormData.
  */
 const SelectCustom: React.FC<SelectCustomProps> = ({
   "aria-label": ariaLabel,
@@ -46,7 +45,6 @@ const SelectCustom: React.FC<SelectCustomProps> = ({
 }) => {
   const baseId = React.useId()
   const listboxId = `${baseId}-listbox`
-  const optionId = (index: number) => `${baseId}-option-${index}`
   // Disabled when either the `disabled` prop or `status="disabled"` asks for it.
   const disabled = disabledProp || status === "disabled"
 
@@ -62,7 +60,7 @@ const SelectCustom: React.FC<SelectCustomProps> = ({
   const [internalValue, setInternalValue] = React.useState<string>(() => {
     if (defaultValue !== undefined) return defaultValue
     if (placeholder !== undefined) return ""
-    const first = getEdgeIndex(options, "first")
+    const first = getListboxEdgeIndex(options, "first")
     return first === -1 ? "" : options[first].value
   })
   const currentValue = isControlled ? value : internalValue
@@ -80,8 +78,7 @@ const SelectCustom: React.FC<SelectCustomProps> = ({
   // Input's field chrome (the control's parent): the trigger's rendered box,
   // which anchors the listbox so the listbox matches its width.
   const fieldRef = React.useRef<HTMLElement | null>(null)
-  const search = React.useRef("")
-  const searchTimer = React.useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
+  const typeaheadBuffer = useListboxTypeahead()
 
   // Forward the native input to both the anchor ref and the consumer's ref.
   const setControlNode = React.useCallback(
@@ -107,7 +104,7 @@ const SelectCustom: React.FC<SelectCustomProps> = ({
 
   // Opening without a target index activates the selected option, else the
   // first enabled one.
-  const openAtCurrent = () => openAt(selectedIndex >= 0 ? selectedIndex : getEdgeIndex(options, "first"))
+  const openAtCurrent = () => openAt(selectedIndex >= 0 ? selectedIndex : getListboxEdgeIndex(options, "first"))
 
   const toggle = () => {
     if (expanded) setOpen(false)
@@ -124,21 +121,14 @@ const SelectCustom: React.FC<SelectCustomProps> = ({
   }
 
   const typeahead = (key: string) => {
-    clearTimeout(searchTimer.current)
-    search.current += key.toLowerCase()
-    searchTimer.current = setTimeout(() => {
-      search.current = ""
-    }, TYPEAHEAD_TIMEOUT)
     const from = expanded ? active : selectedIndex
-    const match = getTypeaheadIndex(options, search.current, from)
+    const match = getListboxTypeaheadIndex(options, typeaheadBuffer.type(key), from)
     if (expanded) {
       if (match !== -1) setActiveIndex(match)
     } else {
-      openAt(match !== -1 ? match : selectedIndex >= 0 ? selectedIndex : getEdgeIndex(options, "first"))
+      openAt(match !== -1 ? match : selectedIndex >= 0 ? selectedIndex : getListboxEdgeIndex(options, "first"))
     }
   }
-
-  React.useEffect(() => () => clearTimeout(searchTimer.current), [])
 
   // Clicking the read-only control toggles. Input exposes no click handler, so
   // the listener is attached to the native element; the latest toggle is read
@@ -155,14 +145,6 @@ const SelectCustom: React.FC<SelectCustomProps> = ({
     return () => node.removeEventListener("click", onClick)
   }, [])
 
-  // Keep the active option in view inside the scrollable listbox.
-  React.useEffect(() => {
-    if (active < 0) return
-    document.getElementById(optionId(active))?.scrollIntoView?.({ block: "nearest" })
-    // optionId is derived from baseId, which is stable
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [active])
-
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     const { key, altKey, ctrlKey, metaKey } = event
     const printable = key.length === 1 && !ctrlKey && !metaKey && !altKey
@@ -173,7 +155,7 @@ const SelectCustom: React.FC<SelectCustomProps> = ({
         openAtCurrent()
       } else if (key === "Home" || key === "End") {
         event.preventDefault()
-        openAt(getEdgeIndex(options, key === "Home" ? "first" : "last"))
+        openAt(getListboxEdgeIndex(options, key === "Home" ? "first" : "last"))
       } else if (printable) {
         event.preventDefault()
         typeahead(key)
@@ -184,7 +166,7 @@ const SelectCustom: React.FC<SelectCustomProps> = ({
     switch (key) {
       case "ArrowDown":
         event.preventDefault()
-        setActiveIndex(getNextIndex(options, active, 1))
+        setActiveIndex(getListboxNextIndex(options, active, 1))
         return
       case "ArrowUp":
         event.preventDefault()
@@ -192,18 +174,18 @@ const SelectCustom: React.FC<SelectCustomProps> = ({
           commit(active, event)
           setOpen(false)
         } else {
-          setActiveIndex(getNextIndex(options, active, -1))
+          setActiveIndex(getListboxNextIndex(options, active, -1))
         }
         return
       case "Home":
       case "End":
         event.preventDefault()
-        setActiveIndex(getEdgeIndex(options, key === "Home" ? "first" : "last"))
+        setActiveIndex(getListboxEdgeIndex(options, key === "Home" ? "first" : "last"))
         return
       case "PageDown":
       case "PageUp":
         event.preventDefault()
-        setActiveIndex(getNextIndex(options, active, key === "PageDown" ? PAGE_SIZE : -PAGE_SIZE))
+        setActiveIndex(getListboxNextIndex(options, active, key === "PageDown" ? PAGE_SIZE : -PAGE_SIZE))
         return
       case "Enter":
         event.preventDefault()
@@ -213,7 +195,7 @@ const SelectCustom: React.FC<SelectCustomProps> = ({
       case " ":
         event.preventDefault()
         // A space inside a typeahead run ("new york") is part of the search
-        if (search.current) {
+        if (typeaheadBuffer.isTyping()) {
           typeahead(key)
         } else {
           commit(active, event)
@@ -252,8 +234,8 @@ const SelectCustom: React.FC<SelectCustomProps> = ({
         aria-haspopup="listbox"
         aria-expanded={expanded}
         aria-controls={listboxId}
-        aria-activedescendant={active >= 0 ? optionId(active) : undefined}
-        value={selected ? getOptionText(selected) : ""}
+        aria-activedescendant={active >= 0 ? getListboxOptionId(listboxId, active) : undefined}
+        value={selected ? getListboxOptionText(selected) : ""}
         placeholder={placeholder}
         size={size}
         status={status}
@@ -309,40 +291,27 @@ const SelectCustom: React.FC<SelectCustomProps> = ({
         role="presentation"
         theme={theme}
       >
-        <List
-          role="listbox"
+        <Listbox
           id={listboxId}
-          scrollable
+          options={options}
+          value={currentValue}
+          activeValue={active >= 0 ? options[active].value : null}
+          onActiveChange={next => {
+            const index = options.findIndex(option => option.value === next)
+            if (index >= 0) setActiveIndex(index)
+          }}
+          onChange={(next, event) => {
+            commit(
+              options.findIndex(option => option.value === next),
+              event
+            )
+            setOpen(false)
+          }}
+          focusable={false}
           size={size}
           aria-labelledby={labelledBy}
           aria-label={labelledBy ? undefined : ariaLabel}
-          // Option presses must not move focus off the trigger
-          onMouseDown={event => event.preventDefault()}
-        >
-          {options.map((option, index) => (
-            <ListItem
-              key={`${index}-${option.value}`}
-              id={optionId(index)}
-              role="option"
-              aria-selected={index === selectedIndex}
-              selected={index === selectedIndex}
-              active={index === active}
-              disabled={option.disabled}
-              start={option.start}
-              end={option.end}
-              onClick={event => {
-                if (option.disabled) return
-                commit(index, event)
-                setOpen(false)
-              }}
-              onPointerMove={() => {
-                if (!option.disabled && index !== active) setActiveIndex(index)
-              }}
-            >
-              {option.label}
-            </ListItem>
-          ))}
-        </List>
+        />
       </Popover>
     </>
   )

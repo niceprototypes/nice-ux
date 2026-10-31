@@ -7,8 +7,8 @@ the Nice Prototypes ecosystem.
 - **Default (custom):** a WAI-ARIA APG
   [select-only combobox](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-select-only/)
   — Input rendered read-only with `role="combobox"`, opening a
-  `@niceprototypes/popover` Popover that holds a `@niceprototypes/list` List with
-  `role="listbox"`. Options can carry `start` / `end` content.
+  `@niceprototypes/popover` Popover that holds a `@niceprototypes/listbox`
+  Listbox. Options can carry `start` / `end` content.
 - **`native`:** the platform `<select>` (Input `as="select"`), with options, a
   placeholder option and a chevron.
 
@@ -155,7 +155,7 @@ show the error through Field), or use `native`. This is the same limitation as
 ## Tokens
 
 `select.chevron.size:{size}` — chevron size per `size`. The chrome uses
-Input's tokens, the popup surface Popover's, and the listbox List's (`list.*`).
+Input's tokens, the popup surface Popover's; the Listbox rows use core tokens.
 
 ## License
 

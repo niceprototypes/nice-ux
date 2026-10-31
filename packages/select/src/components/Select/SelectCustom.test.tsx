@@ -568,18 +568,6 @@ describe("Select (custom, default)", () => {
       expect(apple).toContainElement(screen.getByTestId("end"))
     })
 
-    it("renders a divider between options (from List)", () => {
-      render(
-        <Select
-          aria-label="fruit"
-          options={fruit}
-        />
-      )
-      key("ArrowDown")
-      expect(listbox().querySelectorAll("hr")).toHaveLength(fruit.length - 1)
-      expect(options()).toHaveLength(fruit.length)
-    })
-
     it("marks disabled options aria-disabled", () => {
       render(
         <Select

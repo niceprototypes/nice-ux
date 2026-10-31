@@ -1,0 +1,14 @@
+{
+  "$schema": "../config-exports/src/schema.json",
+  "description": "Listbox: a controlled WAI-ARIA listbox of selectable options, standalone or driven by a combobox such as Select.",
+  "default": "Listbox",
+  "components": ["Listbox"],
+  "services": [
+    "getListboxEdgeIndex",
+    "getListboxNextIndex",
+    "getListboxOptionId",
+    "getListboxOptionText",
+    "getListboxTypeaheadIndex",
+    "useListboxTypeahead"
+  ]
+}

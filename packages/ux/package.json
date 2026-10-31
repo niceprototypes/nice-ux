@@ -44,6 +44,7 @@
     "@niceprototypes/lightbox": "workspace:^",
     "@niceprototypes/line": "workspace:^",
     "@niceprototypes/list": "workspace:^",
+    "@niceprototypes/listbox": "workspace:^",
     "@niceprototypes/logo": "workspace:^",
     "@niceprototypes/popover": "workspace:^",
     "@niceprototypes/radio": "workspace:^",
