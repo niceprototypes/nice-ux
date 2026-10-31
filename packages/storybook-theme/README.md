@@ -54,9 +54,12 @@ export default config
 The consumer's manager must provide the Nice `--np--*` token variables (e.g. via
 the Nice manager theming) for the sidebar to pick up its colors.
 
-The addon owns one preview token, `contentMaxWidth` (the docs content width).
-Register it in your app's one `setTokens` call, then use the `contentMaxWidth`
-constant (`var(--np--content-max-width)`) wherever content is capped:
+The addon owns two tokens: `contentMaxWidth` (the preview's docs content width)
+and `highlight` (the manager sidebar's active colour, `color:link` by default).
+Register them in the app's one `setTokens` call in each document that reads
+them (preview and manager); an app entry after the spread overrides a default.
+Use the `contentMaxWidth` constant (`var(--np--content-max-width)`) wherever
+content is capped:
 
 ```ts
 import { setTokens } from "@niceprototypes/styles"

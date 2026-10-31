@@ -7,7 +7,12 @@
 // title.
 import { addons } from "storybook/manager-api"
 import { create } from "storybook/theming"
+import { setTokens } from "@niceprototypes/styles"
+import { TOKENS } from "@niceprototypes/storybook-theme"
 import "./manager.css"
+
+// The manager document's one setTokens call: the theme's tokens (the sidebar highlight).
+setTokens(TOKENS)
 
 // Seed the initial manager + nice theme from the dark-mode addon's persisted
 // choice (its own localStorage key), defaulting to LIGHT — never the OS

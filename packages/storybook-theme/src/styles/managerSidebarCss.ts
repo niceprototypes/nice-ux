@@ -15,6 +15,7 @@
  * 10. A Storybook internal change can require updating these selectors.
  */
 import { getBreakpoint, getToken } from "@niceprototypes/styles"
+import type { TOKENS } from "../tokens"
 
 /* Tree geometry. A folder icon sits at the start of its row's content; its
    children's connectors hang from the icon's centre line, run an arm of `arm`
@@ -27,7 +28,7 @@ const column = `calc(${icon} / 2 + ${arm} + ${iconGap})`
 const axis = `calc(${icon} / 2 - ${stroke} / 2)`
 
 const neutral = getToken("borderColor")
-const highlight = getToken("color:link")
+const highlight = getToken(["highlight" satisfies keyof typeof TOKENS])
 
 /* Connector pieces, as background layers in a given colour. */
 const fullLine = (color: string) =>
