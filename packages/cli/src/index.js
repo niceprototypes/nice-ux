@@ -3,6 +3,7 @@
  *
  * Grammar: `nicely <verb> [targets…] [--modifiers]`.
  *
+ *   nicely create [name]        Scaffold a Vite SPA on @niceprototypes/app (questionnaire or flags)
  *   nicely link ../my-lib       Link a package via file: protocol
  *   nicely unlink               Restore packages to their original npm versions
  *   nicely publish [targets]    Publish to npm with the dependency cascade
@@ -49,6 +50,7 @@ const { handleLink } = require('./cli/handle-link');
 const { handleBuild } = require('./cli/handle-build-icons');
 const { writeResetLog } = require('./cli/reset-log');
 const { handleThumbnails } = require('./cli/handle-thumbnails');
+const { runCreate } = require('./create');
 
 /** Verbs that touch node_modules and therefore report the package manager. */
 const PM_VERBS = new Set(['link', 'unlink', 'dedupe', 'reset', 'develop']);
@@ -263,6 +265,14 @@ function main() {
     fail(`Unknown command "${cmd.token}".${cmd.suggestion ? ` Did you mean ${cyan('nicely ' + cmd.suggestion)}?` : ''}`);
     info(`Run ${cyan('nicely help')} for the command list.`);
     process.exit(1);
+  }
+
+  // create parses its own flags (create/index.js): one per questionnaire answer.
+  if (cmd.verb === 'create') {
+    runCreate(cmd.rest)
+      .then((code) => process.exit(code))
+      .catch((e) => { fail(e.message); process.exit(1); });
+    return;
   }
 
   const detectedPM = detectPM(projectDir);

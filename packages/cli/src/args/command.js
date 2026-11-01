@@ -12,7 +12,7 @@
 const { getArg, getMultiArg, hasFlag, parseList } = require('./parsers');
 
 /** The verbs the router dispatches. */
-const VERBS = ['link', 'unlink', 'publish', 'build', 'dedupe', 'clean', 'reset', 'develop', 'bump', 'thumbnails'];
+const VERBS = ['create', 'link', 'unlink', 'publish', 'build', 'dedupe', 'clean', 'reset', 'develop', 'bump', 'thumbnails'];
 
 /**
  * Old flag-command → new invocation, for the one-release migration shim. When a

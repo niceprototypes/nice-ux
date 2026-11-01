@@ -19,6 +19,7 @@ Usage:
   nicely <command> [targets…] [--flags]
 
 Commands:
+  ${cyan('create')} [name]          Scaffold a Vite SPA on @niceprototypes/app (asks, or --yes for defaults)
   ${cyan('link')} <path>            Link a package into the workspace via file:
   ${cyan('unlink')}                 Restore packages to their original npm versions
   ${cyan('publish')} [targets]      Publish to npm with the dependency cascade (default: changed)
@@ -58,7 +59,17 @@ Flags:
   --out <file>             thumbnails: output JSON path (default: <dir>/thumbnails.json)
   --manager <npm|yarn|pnpm> Force a package manager (auto-detected by default)
 
+Create flags (each answers one question; --yes takes the default of the rest):
+  --name <dir>  --ts|--no-ts  --pm <npm|pnpm|yarn|bun>  --router <plain|react-router|tanstack-router>
+  --tests <vitest-browser|playwright|jsdom|none>  --lint <oxlint|eslint-prettier|none>
+  --react-compiler|--no-react-compiler  --install|--no-install  --kind <studio|app>  --prefix <slug>
+  --brand <#hex,…>  --fonts <nice|google|adobe|self-hosted> --font-source <url|kit|folder>
+  --theme <os|day|night>  --icons <nice|lucide>  --components <a,b,…>  --local|--no-local
+  --deploy <none|firebase|static>  --yes
+
 Examples:
+  nicely create my-studio --yes                 Scaffold with every default
+  nicely create my-app --kind app --router react-router --yes
   nicely link ../my-lib                         Link and clean a package
   nicely publish                                Publish all changed packages
   nicely publish nice-icons nice-react-icon     Publish specific packages

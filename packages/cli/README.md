@@ -4,6 +4,22 @@ A utility to streamline the npm linking process for React component libraries wh
 
 CLI binary: `nicely`.
 
+## Create a project
+
+`nicely create [name]` scaffolds a Vite SPA on `@niceprototypes/app` (survey 006): the questionnaire
+in `src/create/questions.js`, asked with @clack/prompts. Every answer is also a flag (`nicely help`
+lists them) and `--yes` takes the defaults of the rest, so agents scaffold without prompts:
+
+```sh
+nicely create my-studio --yes
+nicely create my-app --kind app --router react-router --tests playwright --yes
+```
+
+One base template (`template/base` plus `src/create/steps.js`) and one small step per answer. With
+`--local` (the default until the packages are on npm) the project resolves `@niceprototypes/*` from
+this checkout (`NICE_LOCAL`). Every project gets `.nice/surveys/` and `.nice/research/` for dated
+notes.
+
 ## The Story: Why This Tool Exists
 
 You're developing a React component library. You run `npm link` to test it locally in your app. Everything seems fine until you refresh the page and see:

@@ -1,0 +1,8 @@
+node_modules
+dist
+*.local
+.DS_Store
+__screenshots__
+.vitest-attachments
+test-results
+playwright-report
