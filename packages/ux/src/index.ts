@@ -4,6 +4,7 @@
 
 export * from "@niceprototypes/styles"
 export * from "@niceprototypes/icon"
+export * from "@niceprototypes/app"
 export * from "@niceprototypes/button"
 export * from "@niceprototypes/calendar"
 export * from "@niceprototypes/card"

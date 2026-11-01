@@ -1,0 +1,7 @@
+{
+  "$schema": "../config-exports/src/schema.json",
+  "description": "App: the app shell, a Tree nav of scenes and docs pages found by folder beside the scene region, on a router adapter.",
+  "default": "App",
+  "components": ["App"],
+  "services": ["useScenes", "useSceneRegion"]
+}

@@ -1,0 +1,114 @@
+{
+  "name": "@niceprototypes/app",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "App shell for React: a Tree nav over scenes and docs pages found by folder, on a pluggable router",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js",
+      "default": "./dist/index.esm.js"
+    },
+    "./adapters/plain": {
+      "types": "./dist/adapters/plain.d.ts",
+      "import": "./dist/adapters/plain.esm.js",
+      "require": "./dist/adapters/plain.js",
+      "default": "./dist/adapters/plain.esm.js"
+    },
+    "./adapters/react-router": {
+      "types": "./dist/adapters/react-router.d.ts",
+      "import": "./dist/adapters/react-router.esm.js",
+      "require": "./dist/adapters/react-router.js",
+      "default": "./dist/adapters/react-router.esm.js"
+    },
+    "./adapters/tanstack-router": {
+      "types": "./dist/adapters/tanstack-router.d.ts",
+      "import": "./dist/adapters/tanstack-router.esm.js",
+      "require": "./dist/adapters/tanstack-router.js",
+      "default": "./dist/adapters/tanstack-router.esm.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "test": "jest",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build",
+    "generate-exports": "nice-generate-exports ."
+  },
+  "keywords": [
+    "react",
+    "app",
+    "shell",
+    "router",
+    "navigation",
+    "styled-components"
+  ],
+  "author": "",
+  "license": "MIT",
+  "peerDependencies": {
+    "@niceprototypes/ink": "workspace:^",
+    "@niceprototypes/styles": "workspace:^",
+    "@niceprototypes/tree": "workspace:^",
+    "@tanstack/react-router": "^1.170.46",
+    "react": ">=19.2.0 <20.0.0",
+    "react-dom": ">=19.2.0 <20.0.0",
+    "react-router": "^7.18.5",
+    "styled-components": ">=6.1.18 <7.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@tanstack/react-router": {
+      "optional": true
+    },
+    "react-router": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@niceprototypes/config-exports": "workspace:*",
+    "@niceprototypes/config-jest": "workspace:*",
+    "@niceprototypes/config-rollup": "workspace:*",
+    "@niceprototypes/config-typescript": "workspace:*",
+    "@niceprototypes/ink": "workspace:*",
+    "@niceprototypes/styles": "workspace:*",
+    "@niceprototypes/tree": "workspace:*",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.5",
+    "@tanstack/react-router": "^1.170.46",
+    "@testing-library/jest-dom": "^6.1.0",
+    "@testing-library/react": "^16.3.0",
+    "@types/jest": "^29.5.0",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "markdown-to-jsx": "^9.10.4",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "react-router": "^7.18.5",
+    "rollup": "^4.9.1",
+    "rollup-plugin-dts": "^6.1.0",
+    "styled-components": "catalog:",
+    "ts-jest": "^29.4.6",
+    "tslib": "^2.6.2",
+    "typescript": "catalog:"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niceprototypes/nice-ux.git",
+    "directory": "packages/app"
+  },
+  "bugs": {
+    "url": "https://github.com/niceprototypes/nice-ux/issues"
+  },
+  "homepage": "https://github.com/niceprototypes/nice-ux/tree/main/packages/app#readme"
+}
