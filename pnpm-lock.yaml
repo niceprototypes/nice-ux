@@ -167,6 +167,9 @@ importers:
       '@niceprototypes/tooltip':
         specifier: workspace:^
         version: link:../../packages/tooltip
+      '@niceprototypes/tree':
+        specifier: workspace:^
+        version: link:../../packages/tree
       '@storybook/addon-docs':
         specifier: 'catalog:'
         version: 10.3.5(@types/react@19.2.14)(esbuild@0.28.2)(rollup@4.65.1)(storybook@10.3.5(@testing-library/dom@10.4.2)(prettier@3.9.10)(react@19.2.0))(vite@7.3.7(@types/node@25.9.9)(tsx@4.23.15)(yaml@2.9.1))
@@ -2848,6 +2851,81 @@ importers:
         specifier: 'catalog:'
         version: 6.0.3
 
+  packages/tree:
+    devDependencies:
+      '@niceprototypes/config-exports':
+        specifier: workspace:*
+        version: link:../config-exports
+      '@niceprototypes/config-jest':
+        specifier: workspace:*
+        version: link:../config-jest
+      '@niceprototypes/config-rollup':
+        specifier: workspace:*
+        version: link:../config-rollup
+      '@niceprototypes/config-typescript':
+        specifier: workspace:*
+        version: link:../config-typescript
+      '@niceprototypes/ink':
+        specifier: workspace:*
+        version: link:../ink
+      '@niceprototypes/styles':
+        specifier: workspace:*
+        version: link:../styles
+      '@rollup/plugin-commonjs':
+        specifier: ^25.0.7
+        version: 25.0.8(rollup@4.65.1)
+      '@rollup/plugin-node-resolve':
+        specifier: ^15.2.3
+        version: 15.3.1(rollup@4.65.1)
+      '@rollup/plugin-typescript':
+        specifier: ^11.1.5
+        version: 11.1.6(rollup@4.65.1)(tslib@2.8.1)(typescript@6.0.3)
+      '@testing-library/jest-dom':
+        specifier: ^6.1.0
+        version: 6.10.0(@testing-library/dom@10.4.2)
+      '@testing-library/react':
+        specifier: ^16.3.0
+        version: 16.3.3(@testing-library/dom@10.4.2)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      '@types/jest':
+        specifier: ^29.5.0
+        version: 29.5.14
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.2.14
+      '@types/react-dom':
+        specifier: 'catalog:'
+        version: 19.2.3(@types/react@19.2.14)
+      jest:
+        specifier: ^29.7.0
+        version: 29.7.0(@types/node@25.9.9)
+      jest-environment-jsdom:
+        specifier: ^29.7.0
+        version: 29.7.0
+      react:
+        specifier: 'catalog:'
+        version: 19.2.0
+      react-dom:
+        specifier: 'catalog:'
+        version: 19.2.0(react@19.2.0)
+      rollup:
+        specifier: ^4.9.1
+        version: 4.65.1
+      rollup-plugin-dts:
+        specifier: ^6.1.0
+        version: 6.5.1(rollup@4.65.1)(typescript@6.0.3)
+      styled-components:
+        specifier: 'catalog:'
+        version: 6.1.19(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      ts-jest:
+        specifier: ^29.4.6
+        version: 29.4.15(@babel/core@7.29.7)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.29.7))(jest-util@29.7.0)(jest@29.7.0(@types/node@25.9.9))(typescript@6.0.3)
+      tslib:
+        specifier: ^2.6.2
+        version: 2.8.1
+      typescript:
+        specifier: 'catalog:'
+        version: 6.0.3
+
   packages/ux:
     dependencies:
       '@niceprototypes/button':
@@ -2940,6 +3018,9 @@ importers:
       '@niceprototypes/tooltip':
         specifier: workspace:^
         version: link:../tooltip
+      '@niceprototypes/tree':
+        specifier: workspace:^
+        version: link:../tree
     devDependencies:
       '@niceprototypes/config-rollup':
         specifier: workspace:*

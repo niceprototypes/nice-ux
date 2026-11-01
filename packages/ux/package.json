@@ -54,7 +54,8 @@
     "@niceprototypes/tabs": "workspace:^",
     "@niceprototypes/tile": "workspace:^",
     "@niceprototypes/toggle": "workspace:^",
-    "@niceprototypes/tooltip": "workspace:^"
+    "@niceprototypes/tooltip": "workspace:^",
+    "@niceprototypes/tree": "workspace:^"
   },
   "peerDependencies": {
     "@niceprototypes/icon": "workspace:^",

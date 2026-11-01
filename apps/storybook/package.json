@@ -51,6 +51,7 @@
     "@niceprototypes/tile": "workspace:^",
     "@niceprototypes/toggle": "workspace:^",
     "@niceprototypes/tooltip": "workspace:^",
+    "@niceprototypes/tree": "workspace:^",
     "@storybook/addon-docs": "catalog:",
     "@storybook/addon-links": "catalog:",
     "@storybook/react-vite": "catalog:",

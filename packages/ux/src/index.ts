@@ -34,6 +34,7 @@ export * from "@niceprototypes/tabs"
 export * from "@niceprototypes/tile"
 export * from "@niceprototypes/toggle"
 export * from "@niceprototypes/tooltip"
+export * from "@niceprototypes/tree"
 
 // Names two packages both export. The foundation package (styles, icon) keeps the plain
 // name; the other is re-exported under a name qualified by its package.

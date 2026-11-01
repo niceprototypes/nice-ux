@@ -1,0 +1,28 @@
+import { Meta, Stories } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../src/components/Story"
+import Install from "../../../src/components/Install"
+import * as TreeStories from "./Tree.stories"
+
+<Meta of={TreeStories} />
+
+<StoryHeader
+  title="Tree"
+  description="Tree: a navigation tree of nested links and disclosure folders, joined by guide lines, with the path to the active page highlighted."
+/>
+
+<Install package="tree" />
+
+```jsx
+import Tree from "@niceprototypes/tree"
+
+<Tree
+  aria-label="Docs"
+  items={[
+    { id: "guides", name: "Guides", icon: <Icon name="folder-closed" />, items: [
+      { id: "start", name: "Start", icon: null, url: "/start", status: "active" },
+    ] },
+  ]}
+/>
+```
+
+<Stories />

@@ -67,3 +67,4 @@ TileContent(tile) children?:node contentTop?:node contentCenter?:node title?:nod
 TileLayout(tile) contentLeft?:node contentRight?:node padding?:FlexSpacingType maxWidth?:TileMaxWidthType alignItems?:TileAlignItemsType justifyContent?:TileJustifyContentType
 Toggle(toggle) [components-forms-toggle--playground] checked?:boolean defaultChecked?:boolean onChange?:fn disabled?:boolean size?:SizeType children?:node name?:string theme?:ThemeType
 Tooltip(tooltip) [components-tooltip--playground] content:node children:node trigger?:"hover"|"click"="hover" position?:"top"|"bottom"|"left"|"right"="top" anchor?:"trigger"|"cursor"="trigger" delayShow?:number=0 delayHide?:number=0
+Tree(tree) [components-tree--playground] items:ReadonlyArray<TreeNodeType> activeColor?:ColorTokenProp<TreeActiveColorType> expandedIds?:ReadonlyArray<TreeNodeIdType> defaultExpandedIds?:ReadonlyArray<TreeNodeIdType> onExpandedChange?:fn onSelect?:fn
