@@ -27,7 +27,7 @@
     "hmr",
     "hot-reload",
     "symlink",
-    "toolkit",
+    "nicely",
     "linked-packages",
     "monorepo",
     "local-dependencies",

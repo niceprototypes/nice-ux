@@ -41,7 +41,7 @@ This Storybook documents the following packages:
 ### Utilities
 
 - **@niceprototypes/styles** - CSS design tokens
-- **@niceprototypes/toolkit** - CLI for linking, scaffolding, dev/watch, and orchestrated publishing of nice-\* packages
+- **@niceprototypes/cli** - CLI for linking, scaffolding, dev/watch, and orchestrated publishing of nice-\* packages
 
 ## 📖 Documentation Structure
 
@@ -54,7 +54,7 @@ stories/
 ├── Button.stories.tsx            # Button component examples
 ├── Icon.stories.tsx              # Icon component examples
 ├── CSSVariables.mdx              # CSS variables documentation
-└── NpmLink.mdx                   # @niceprototypes/toolkit documentation
+└── NpmLink.mdx                   # @niceprototypes/cli documentation
 ```
 
 ## 🎨 Features
@@ -147,21 +147,21 @@ The Storybook uses these packages from npm:
 
 This project uses two tools to enable hot module reloading with symlinked packages:
 
-#### 1. @niceprototypes/toolkit — Handles npm linking
+#### 1. @niceprototypes/cli — Handles npm linking
 
-When you `npm link` React packages, each linked package brings its own copy of React, causing "Invalid hook call" errors. `@niceprototypes/toolkit` solves this by removing React, React DOM, and styled-components from linked packages' `node_modules`.
+When you `npm link` React packages, each linked package brings its own copy of React, causing "Invalid hook call" errors. `@niceprototypes/cli` solves this by removing React, React DOM, and styled-components from linked packages' `node_modules`.
 
 ```bash
 # Install globally (optional)
-npm install -g @niceprototypes/toolkit
+npm install -g @niceprototypes/cli
 
 # Link all configured Nice packages from @niceprototypes/storybook directory
-npx @niceprototypes/toolkit
+nicely
 
 # After running npm install in any linked package, re-run:
-npx @niceprototypes/toolkit
+nicely
 # or to unlink first:
-npx @niceprototypes/toolkit --unlink
+nicely --unlink
 ```
 
 #### 2. @niceprototypes/vite-watcher — Enables HMR
@@ -197,7 +197,7 @@ const sourceAliasablePackages = [
 npm install
 
 # 2. Link all Nice packages
-npx @niceprototypes/toolkit
+nicely
 
 # 3. Start Storybook with HMR
 npm run dev
@@ -261,7 +261,7 @@ npm run dev
 4. Re-run linking:
 
    ```bash
-   npx @niceprototypes/toolkit
+   nicely
    ```
 
 5. Restart Storybook
@@ -271,7 +271,7 @@ npm run dev
 **"Invalid hook call" error**: Multiple React instances running.
 
 ```bash
-npx @niceprototypes/toolkit
+nicely
 ```
 
 **Changes not appearing**:
@@ -282,9 +282,9 @@ npx @niceprototypes/toolkit
 **After npm install in a linked package**: The linking is broken.
 
 ```bash
-npx @niceprototypes/toolkit --unlink
+nicely --unlink
 npm install
-npx @niceprototypes/toolkit
+nicely
 ```
 
 **Storybook won't start**: Clear caches and restart.
@@ -324,7 +324,7 @@ npm run dev
 ### Documentation
 
 - CSS Variables: http://localhost:6006/?path=/docs/documentation-css-variables--docs
-- toolkit: http://localhost:6006/?path=/docs/documentation-nice-toolkit--docs
+- cli: http://localhost:6006/?path=/docs/cli--docs
 
 ## 🚢 Deployment
 

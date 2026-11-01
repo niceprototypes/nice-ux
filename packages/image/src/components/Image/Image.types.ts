@@ -140,7 +140,7 @@ export type ImageVendorType = boolean
  * loads, then cleared. A data URI is shown blurred; a URL is shown as-is.
  *
  * Values:
- * - string: Data URI or URL of the thumbnail (e.g. from `nice-toolkit thumbnails`)
+ * - string: Data URI or URL of the thumbnail (e.g. from `nicely thumbnails`)
  * - false: No thumbnail, intentionally (icons, SVG, GIF, tiny assets)
  */
 export type ImageThumbnailType = string | false

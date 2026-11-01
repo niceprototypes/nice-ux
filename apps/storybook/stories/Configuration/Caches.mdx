@@ -32,13 +32,13 @@ import { DataTable } from "../../src/components/DataTable"
   ] }]}
 />
 
-<Ink><Ink>¹</Ink> <Ink code>nicely --clean</Ink> <Ink>currently knows about</Ink> <Ink code>node_modules/.cache</Ink> <Ink>(webpack) and</Ink> <Ink code>node_modules/.vite</Ink> <Ink>(Vite). Other framework caches — Next.js</Ink> <Ink code>.next/cache</Ink><Ink>, Remix</Ink> <Ink code>build/</Ink><Ink>, Astro</Ink> <Ink code>dist/</Ink><Ink>, Parcel</Ink> <Ink code>.parcel-cache</Ink> <Ink>— are</Ink> <Ink weight="semibold">not</Ink> <Ink>covered until their path is added to</Ink> <Ink code>CACHE_DIRS</Ink> <Ink>in</Ink> <Ink code>toolkit/src/linking/cache-cleaner.js</Ink><Ink>. Adding a new framework to the workspace requires that single edit.</Ink></Ink>
+<Ink><Ink>¹</Ink> <Ink code>nicely --clean</Ink> <Ink>currently knows about</Ink> <Ink code>node_modules/.cache</Ink> <Ink>(webpack) and</Ink> <Ink code>node_modules/.vite</Ink> <Ink>(Vite). Other framework caches — Next.js</Ink> <Ink code>.next/cache</Ink><Ink>, Remix</Ink> <Ink code>build/</Ink><Ink>, Astro</Ink> <Ink code>dist/</Ink><Ink>, Parcel</Ink> <Ink code>.parcel-cache</Ink> <Ink>— are</Ink> <Ink weight="semibold">not</Ink> <Ink>covered until their path is added to</Ink> <Ink code>CACHE_DIRS</Ink> <Ink>in</Ink> <Ink code>packages/cli/src/linking/cache-cleaner.js</Ink><Ink>. Adding a new framework to the workspace requires that single edit.</Ink></Ink>
 
 <Line />
 
 <Ink as="h2">The three <Code code="nicely" language="bash" inlined /> operations</Ink>
 
-<Ink><Ink code>nicely --clean</Ink><Ink>,</Ink> <Ink code>--dedupe</Ink><Ink>, and</Ink> <Ink code>--build-all</Ink> <Ink>are the workspace-level toolkit operations. They do not overlap. Each addresses a distinct layer at a distinct location. Mistaking one for another produces silent failure.</Ink></Ink>
+<Ink><Ink code>nicely --clean</Ink><Ink>,</Ink> <Ink code>--dedupe</Ink><Ink>, and</Ink> <Ink code>--build-all</Ink> <Ink>are the workspace-level CLI operations. They do not overlap. Each addresses a distinct layer at a distinct location. Mistaking one for another produces silent failure.</Ink></Ink>
 
 <Ink as="h3">Distinct targets</Ink>
 
@@ -115,7 +115,7 @@ nicely --clean
 nicely --dedupe
 ```
 
-<Ink><Ink>The classic duplicate-React-instance error. See</Ink> <Ink><a href="/?path=/docs/toolkit-2-dedupe--docs" target="_top">Toolkit → Dedupe</a></Ink> <Ink>for the underlying cause.</Ink></Ink>
+<Ink><Ink>The classic duplicate-React-instance error. See</Ink> <Ink><a href="/?path=/docs/cli-2-dedupe--docs" target="_top">CLI → Dedupe</a></Ink> <Ink>for the underlying cause.</Ink></Ink>
 
 <Ink as="h4">Consumer reports a missing export from a foundation package after a refactor</Ink>
 

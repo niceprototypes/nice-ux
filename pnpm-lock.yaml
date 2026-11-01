@@ -643,6 +643,12 @@ importers:
         specifier: 'catalog:'
         version: 6.0.3
 
+  packages/cli:
+    dependencies:
+      sharp:
+        specifier: ^0.35.5
+        version: 0.35.5
+
   packages/code:
     dependencies:
       '@shikijs/core':
@@ -2766,12 +2772,6 @@ importers:
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
-
-  packages/toolkit:
-    dependencies:
-      sharp:
-        specifier: ^0.35.5
-        version: 0.35.5
 
   packages/tooltip:
     devDependencies:

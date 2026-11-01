@@ -115,7 +115,7 @@ const preview: Preview = {
           ["Docs", "Theme", "Navigation", "Spinner"],
           "Configuration",
           ["NPM", "Vite", "TypeScript", "Jest", "Rollup"],
-          "Toolkit",
+          "CLI",
           [
             "1. Linking",
             "2. Dedupe",

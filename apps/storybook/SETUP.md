@@ -171,7 +171,7 @@ npm run build-storybook
 | @niceprototypes/button          | 20      | ✅ Complete |
 | @niceprototypes/icon            | 15      | ✅ Complete |
 | nice-css-variables         | 1 doc   | ✅ Complete |
-| @niceprototypes/toolkit               | 1 doc   | ✅ Complete |
+| @niceprototypes/cli               | 1 doc   | ✅ Complete |
 
 **Total: 75+ stories/examples**
 
@@ -219,28 +219,28 @@ The documentation includes:
 
 ### For Local Development
 
-#### Using @niceprototypes/toolkit for Symlinking
+#### Using @niceprototypes/cli for Symlinking
 
-`@niceprototypes/toolkit` creates symlinks to local packages for development, allowing changes to be reflected in real-time.
+`@niceprototypes/cli` creates symlinks to local packages for development, allowing changes to be reflected in real-time.
 
 ```bash
-# Install @niceprototypes/toolkit globally
-npm install -g @niceprototypes/toolkit
+# Install @niceprototypes/cli globally
+npm install -g @niceprototypes/cli
 
 # Link packages from your local filesystem
-@niceprototypes/toolkit ../nice-react-flex
-@niceprototypes/toolkit ../nice-react-ink
-@niceprototypes/toolkit ../nice-react-tile
-@niceprototypes/toolkit ../nice-react-button
-@niceprototypes/toolkit ../nice-react-icon
-@niceprototypes/toolkit ../nice-styles
+nicely ../nice-react-flex
+nicely ../nice-react-ink
+nicely ../nice-react-tile
+nicely ../nice-react-button
+nicely ../nice-react-icon
+nicely ../nice-styles
 ```
 
 This creates symlinks in `node_modules/` pointing to your local package directories using the `file:` protocol in package.json.
 
 #### Understanding Symlinks vs npm link
 
-**Symlinks (what @niceprototypes/toolkit creates):**
+**Symlinks (what @niceprototypes/cli creates):**
 
 - Uses `file:` protocol: `"@niceprototypes/ink": "file:../nice-react-ink"`
 - Creates direct filesystem link to the package directory
@@ -296,12 +296,12 @@ This is necessary because:
 
 ```bash
 # 1. Link all packages
-@niceprototypes/toolkit ../nice-react-flex
-@niceprototypes/toolkit ../nice-react-ink
-@niceprototypes/toolkit ../nice-react-button
-@niceprototypes/toolkit ../nice-react-icon
-@niceprototypes/toolkit ../nice-react-tile
-@niceprototypes/toolkit ../nice-styles
+nicely ../nice-react-flex
+nicely ../nice-react-ink
+nicely ../nice-react-button
+nicely ../nice-react-icon
+nicely ../nice-react-tile
+nicely ../nice-styles
 
 # 2. Start watch mode ONLY for packages that need it
 cd ../nice-styles
@@ -352,7 +352,7 @@ Storybook
 │   └── Icon (15 stories)
 └── Documentation
     ├── CSS Variables
-    └── @niceprototypes/toolkit
+    └── @niceprototypes/cli
 ```
 
 ## 🔧 Configuration Details

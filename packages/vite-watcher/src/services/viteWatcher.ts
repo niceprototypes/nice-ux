@@ -8,7 +8,7 @@ import { createKeyedDebouncer } from "../utilities/createKeyedDebouncer"
 /**
  * Vite plugin that watches linked package dist folders for changes.
  *
- * This plugin enables hot-reloading for toolkited packages by:
+ * This plugin enables hot-reloading for linked packages by:
  * 1. Adding dist folders to Vite's file watcher
  * 2. Detecting changes when the package's build process outputs new files
  * 3. Invalidating affected modules in Vite's module graph

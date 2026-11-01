@@ -10,7 +10,7 @@ One repo: `~/nice/nice-ux`. The old per-package repos, `.nice/bump.md` files and
 
 ## Version
 
-A publishable change adds a changeset in the same commit: `pnpm changeset` (writes `.changeset/*.md`: packages, `major|minor|patch`, one-line summary). Private packages (`config-*` except config-vite and config-crxjs, toolkit, vite-watcher, storybook) take none. Config: `.changeset/config.json` (peer dependents bump only when out of range).
+A publishable change adds a changeset in the same commit: `pnpm changeset` (writes `.changeset/*.md`: packages, `major|minor|patch`, one-line summary). Private packages (`config-*` except config-vite and config-crxjs, cli, vite-watcher, storybook) take none. Config: `.changeset/config.json` (peer dependents bump only when out of range).
 
 ## Publish (owner go-ahead required)
 

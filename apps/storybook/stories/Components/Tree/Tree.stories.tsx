@@ -48,7 +48,7 @@ const COMPONENTS: Outline = [
 ]
 const SIDEBAR: Outline = [
   ["Basics", DOCS], ["Manifest", DOCS], ["Scenarios", DOCS], ["Tokens", DOCS], ["Components", COMPONENTS],
-  ["Bindings", DOCS], ["Storybook", DOCS], ["Configuration", DOCS], ["Toolkit", DOCS],
+  ["Bindings", DOCS], ["Storybook", DOCS], ["Configuration", DOCS], ["CLI", DOCS],
 ]
 const ACTIVE_ID = "components/forms/checkbox/checked"
 
