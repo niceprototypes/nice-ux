@@ -24,11 +24,13 @@ export const StyledAppNav = styled.div`
 `
 
 /**
- * The scene region: the rest of the width (the whole viewport in the bare view), focusable so a
- * scene's keys act only while focus is inside it. It is a container, not a control: no focus ring.
+ * The scene region: the rest of the width (the whole viewport in the bare view), on the theme
+ * background, focusable so a scene's keys act only while focus is inside it. It is a container,
+ * not a control: no focus ring.
  */
 export const StyledAppRegion = styled.div`
   position: relative;
+  background-color: ${getToken("backgroundColor")};
   flex: 1 1 auto;
   min-width: 0;
   min-height: 100dvh;
