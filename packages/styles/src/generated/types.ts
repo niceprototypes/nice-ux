@@ -211,7 +211,7 @@ export interface TokenVariants extends CustomTokenVariants {
   "tile.color": "base" | "light" | "lighter" | "lightest" | "disabled" | "link" | "success" | "highlight" | "warning" | "error"
   "toggle.track.width": "smaller" | "small" | "base" | "large" | "larger"
   "toggle.track.height": "smaller" | "small" | "base" | "large" | "larger"
-  "toggle.track.backgroundColor": "base" | "checked"
+  "toggle.track.backgroundColor": "base" | "checked" | "hover" | "checkedHover"
   "toggle.thumb.size": "smaller" | "small" | "base" | "large" | "larger"
   "toggle.thumb.backgroundColor": "base"
   "toggle.gap": "base"

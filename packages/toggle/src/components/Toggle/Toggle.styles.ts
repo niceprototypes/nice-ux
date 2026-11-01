@@ -70,6 +70,15 @@ export const StyledTrack = styled.span<SizeProps>`
     background-color: ${getToken("toggle.track.backgroundColor:checked")};
   }
 
+  /* Hovered (the root label, so its text too), off and on: the hover tokens, the rest colours by default. */
+  ${StyledToggle}:hover ${StyledInput}:enabled + & {
+    background-color: ${getToken("toggle.track.backgroundColor:hover")};
+  }
+
+  ${StyledToggle}:hover ${StyledInput}:enabled:checked + & {
+    background-color: ${getToken("toggle.track.backgroundColor:checkedHover")};
+  }
+
   /* Checked: the thumb travels the track width less its own size and both insets. */
   ${StyledInput}:checked + & ${StyledThumb} {
     transform: translateX(calc(${trackWidth} - ${thumbSize} - 2 * ${inset}));

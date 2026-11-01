@@ -878,7 +878,9 @@ const componentTokensData: ComponentTokensData = {
       },
       "backgroundColor": {
         "base": "var(--np--border-color--strong)",
-        "checked": "var(--np--color--link)"
+        "checked": "var(--np--color--link)",
+        "hover": "var(--np--toggle--track--background-color)",
+        "checkedHover": "var(--np--toggle--track--background-color--checked)"
       }
     },
     "thumb": {
