@@ -1,3 +1,5 @@
+import { getToken } from "@niceprototypes/styles"
+
 /**
  * Manager chrome reset — body font/background per theme, day-mode font smoothing, hidden sidebar scrollbar, removed default borders.
  *
@@ -10,8 +12,7 @@ export const managerResetCss = `
    "Nunito Sans" stack), not from the theme fontBase — override it here. */
 html[data-theme] body {
   background-color: var(--np--background-color);
-  font-family: "Avenir Next", -apple-system, BlinkMacSystemFont, "Roboto",
-  sans-serif !important;
+  font-family: ${getToken("fontFamily")} !important;
 }
 
 /* The night value is reached through the token's own theme primitive rather
