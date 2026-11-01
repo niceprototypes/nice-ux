@@ -139,8 +139,8 @@ export type ButtonAnimationDurationType = "none" | AnimationDurationType
 export type ButtonStatusType = "base" | "disabled" | "error" | "success" | "warning"
 
 /**
- * Whether the button renders filled. When true, the current status's semantic
- * color fills the background and border and the label/icon flip to
+ * Whether the button renders filled. When true, the status's
+ * `button.backgroundColor` token fills the background and border and the label/icon flip to
  * `--np--color--inverse`; when false (default) the button is an outline —
  * transparent fill with a status-colored border and label.
  */
@@ -186,8 +186,8 @@ export type ButtonAntialiasedType = boolean
  * Whether the button shows a persistent selected look, for toggle groups, pill
  * filters and tabs. A selected button is never ghosted: `selected` overrides
  * `ghost` in every interaction state. Unfilled, its border reads the
- * `button.selected.borderColor` token; filled, the border stays transparent (the
- * fill already marks it). An explicit `borderColor` prop still wins. Sets no ARIA
+ * `button.selected.borderColor` token; filled, the border keeps the background
+ * colour (the fill already marks it). An explicit `borderColor` prop still wins. Sets no ARIA
  * attribute: pass `aria-pressed` for a toggle, or `role="tab"` with
  * `aria-selected` for a tab.
  */

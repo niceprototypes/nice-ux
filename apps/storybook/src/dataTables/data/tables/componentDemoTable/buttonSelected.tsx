@@ -29,7 +29,7 @@ const selectedVariants: Record<string, { code: string; preview: ReactNode }> = {
 export const buttonSelected = {
   name: "selected",
   description:
-    "A persistent selected look for toggle groups, pill filters and tabs. A selected button is never ghosted (selected overrides ghost in every state), and an unfilled one takes its border from the button.selected.borderColor token; a filled one keeps its transparent border, and an explicit borderColor prop still wins. It sets no ARIA attribute: pass aria-pressed for a toggle, or role=\"tab\" with aria-selected for a tab. role, aria-selected, tabIndex and id are forwarded to the root element (a disabled button keeps tabIndex -1 or its native disabled).",
+    "A persistent selected look for toggle groups, pill filters and tabs. A selected button is never ghosted (selected overrides ghost in every state), and an unfilled one takes its border from the button.selected.borderColor token; a filled one keeps its background-coloured border, and an explicit borderColor prop still wins. It sets no ARIA attribute: pass aria-pressed for a toggle, or role=\"tab\" with aria-selected for a tab. role, aria-selected, tabIndex and id are forwarded to the root element (a disabled button keeps tabIndex -1 or its native disabled).",
   variants: Object.keys(selectedVariants),
   default: "none",
   preview: (variant) => selectedVariants[variant].preview,

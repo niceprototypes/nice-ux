@@ -21,3 +21,4 @@
 [2026-10-15 15:38] patch: Reset border, background and padding in the inlined layout, so an inlined native <button> renders like an inlined anchor or div instead of showing the browser's outset border and grey fill
 [2026-10-15 15:38] minor: Forward aria-current to the root element, and form (the id of the form to submit) to the native <button>
 [2026-10-15 15:42] patch: README rewritten for the current API
+[2026-11-01 12:51] minor: Filled buttons read the new button.backgroundColor status token for both background and border, so the border always equals the fill; reassigning the token's variable on the element recolors both. An explicit borderColor prop still wins

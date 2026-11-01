@@ -40,6 +40,13 @@ const componentTokensData: ComponentTokensData = {
       "large": "var(--np--border-width--large)",
       "larger": "var(--np--border-width--larger)"
     },
+    "backgroundColor": {
+      "base": "var(--np--color)",
+      "disabled": "var(--np--color--disabled)",
+      "error": "var(--np--color--error)",
+      "success": "var(--np--color--success)",
+      "warning": "var(--np--color--warning)"
+    },
     "borderColor": {
       "base": "var(--np--border-color)",
       "subtle": "var(--np--border-color--subtle)",

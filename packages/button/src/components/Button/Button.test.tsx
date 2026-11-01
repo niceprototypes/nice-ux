@@ -770,9 +770,22 @@ describe("Button selected", () => {
     expect(borderColors(screen.getByTestId("root"))).toEqual([getToken("borderColor", "base")])
   })
 
-  it("keeps a filled button's border transparent", () => {
+  it("gives a filled button's border its background token", () => {
     render(<Button data-testid="root" selected filled>Tab</Button>)
-    expect(borderColors(screen.getByTestId("root"))).toEqual(["transparent"])
+    expect(borderColors(screen.getByTestId("root"))).toEqual([getToken("button.backgroundColor:base")])
+  })
+
+  it("gives a filled status button's border its status background token", () => {
+    render(<Button data-testid="root" filled status="error">Tab</Button>)
+    expect(borderColors(screen.getByTestId("root"))).toEqual([getToken("button.backgroundColor:error")])
+  })
+
+  it("lets an explicit borderColor prop win over a filled button's border", () => {
+    render(<Button data-testid="root" filled borderColor="link">Tab</Button>)
+    expect(borderColors(screen.getByTestId("root"))).toEqual([
+      getToken("button.backgroundColor:base"),
+      resolveColorProp("button", "borderColor", "link"),
+    ])
   })
 
   it("lets an explicit borderColor prop win, emitted after the selected border", () => {

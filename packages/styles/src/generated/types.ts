@@ -56,6 +56,7 @@ export interface TokenVariants extends CustomTokenVariants {
   "button.spacing": "smaller" | "small" | "base" | "large" | "larger"
   "button.borderRadius": "none" | "smaller" | "small" | "base" | "large" | "larger" | "rounded"
   "button.borderWidth": "none" | "smaller" | "small" | "base" | "large" | "larger"
+  "button.backgroundColor": "base" | "disabled" | "error" | "success" | "warning"
   "button.borderColor": "base" | "subtle" | "strong" | "stronger" | "success" | "highlight" | "warning" | "error" | "link"
   "button.icon.color": "base" | "hover" | "focus" | "active"
   "button.icon.size": "smaller" | "small" | "base" | "large" | "larger"
@@ -227,6 +228,7 @@ export interface TokenInverseVariants {
   "backgroundColor": BackgroundColorInverseType
   "borderColor": BorderColorInverseType
   "color": ColorInverseType
+  "button.backgroundColor": "base" | "disabled" | "error" | "success" | "warning"
   "button.borderColor": "base" | "subtle" | "strong" | "stronger" | "success" | "highlight" | "warning" | "error" | "link"
   "button.selected.borderColor": "base"
   "button.focusRing.color": "base"

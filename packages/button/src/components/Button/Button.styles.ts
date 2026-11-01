@@ -108,22 +108,23 @@ export const StyledButton = styled.button.withConfig({
     width: ${$square ? getToken(`button.size:${$size}`) : "auto"};
     padding: ${$square || $hasPadding ? "0" : `0 ${getToken(`button.spacing:${$size}`)}`};
     font-weight: ${getToken("fontWeight", "base")};
-    /* Colors derive from the status's semantic color (status name maps 1:1 to a
-       --np--color variant). When filled, that color fills the background and the
-       border goes transparent — the background paints to the border box, so the
-       fill shows through it and the button reads as one solid shape without a
-       second colour lookup — and the label/icon flip to --np--color--inverse.
+    /* Colors derive from the status's semantic color through the
+       button.backgroundColor token (one variant per status, each aliasing its
+       --np--color variant). When filled, that token fills the background and the
+       border reads the same token, so the button is one solid shape; a consumer
+       that reassigns the token's variable on the element recolors both together.
+       The borderColor prop still wins. The label/icon flip to --np--color--inverse.
        Otherwise it is an outline: transparent fill, with the border coming from
        --np--border-color, whose tints are built to sit quietly beside content
        rather than carry it. Both are theme-aware via the core tokens' cascade,
        so no per-theme overrides here. A selected unfilled button takes the
        button.selected.borderColor token instead; a selected filled one keeps the
-       transparent border, the fill already marking it. */
-    background-color: ${$filled ? getToken("color", $status) : "transparent"};
+       background-coloured border, the fill already marking it. */
+    background-color: ${$filled ? getToken(`button.backgroundColor:${$status}`) : "transparent"};
     color: ${$filled ? getToken("color", "base", { inverse: true }) : getToken("color", $status)};
     border-style: solid;
     border-width: ${getToken(`button.borderWidth:${$borderWidth}`)};
-    border-color: ${$filled ? "transparent" : $selected ? getToken("button.selected.borderColor:base") : getToken("borderColor", $status === "disabled" ? "base" : $status)};
+    border-color: ${$filled ? getToken(`button.backgroundColor:${$status}`) : $selected ? getToken("button.selected.borderColor:base") : getToken("borderColor", $status === "disabled" ? "base" : $status)};
     border-radius: ${$borderRadius === "rounded" ? "calc(var(--np--button--height) / 2)" : getToken(`button.borderRadius:${$borderRadius}`)};
     transition: all ${getToken(`button.animationDuration:${$animationDuration}`)} ${getToken("button.animationEasing:base")};
     ${$backgroundImage ? `background-image: ${$backgroundImage};` : ""}
