@@ -18,7 +18,7 @@ Priorities, in order: (1) agent token spend in design, engineering, maintenance 
 |---|---|
 | architecture, infrastructure, design, style, colour, aesthetic direction, scalability, roadmaps, concepts, paradigms, new component categories, each Lucide icon | implementation, tooling that follows an approved direction, Node versions, lockfiles, lint, tests, fixes, sibling components, pushes |
 
-The manager also asks before anything critical: irreversible changes, npm publishing, production deploys, cost spikes. Owner questions go to `~/nice/surveys/` (format in `discipline/manager.md`), never into chat. The owner's directions are intent, not spec: research and validate the design that best serves the priorities; when it differs from the owner's example, adopt it and state why in one line.
+The manager also asks before anything critical: irreversible changes, npm publishing, production deploys, cost spikes. Owner questions go to `~/nice/.nice/surveys/YYYY-MM-DD/` and research write-ups to `~/nice/.nice/research/YYYY-MM-DD/` (format in `discipline/manager.md`), never into chat. The owner's directions are intent, not spec: research and validate the design that best serves the priorities; when it differs from the owner's example, adopt it and state why in one line.
 
 ## Platform rules
 
@@ -58,6 +58,6 @@ Naming: components and the types namespace are `default` exports, everything els
 | Audit (component coverage, consumers, manifest) | `read/audit.md` |
 | Storybook / website app paths | `read/projects.md` |
 | PNG compression | `build/image-compressor.md` |
-| Open work | `backlog.md`; owner decisions `~/nice/surveys/` |
+| Open work | `backlog.md`; owner decisions `~/nice/.nice/surveys/YYYY-MM-DD/`, research `~/nice/.nice/research/YYYY-MM-DD/` |
 
 Regenerate `agents/catalog.json` + `agents/components.txt` after any prop, token or story change: `node manifest/agents/scripts/generate-catalog.mjs`.

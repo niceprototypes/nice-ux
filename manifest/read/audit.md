@@ -1,6 +1,6 @@
 # Audits
 
-Package source is the truth: when a doc, story or consumer disagrees with the code, the code wins, unless the audit finds a code bug (a separate finding). Findings become `backlog.md` rows; a long write-up goes to `~/nice/surveys/notes/{slug}.md`. A bare "audit" with no type: list the types below and ask which.
+Package source is the truth: when a doc, story or consumer disagrees with the code, the code wins, unless the audit finds a code bug (a separate finding). Findings become `backlog.md` rows; a long write-up goes to `~/nice/.nice/research/YYYY-MM-DD/{slug}.md` (today's date folder). A bare "audit" with no type: list the types below and ask which.
 
 ## Coverage (`storybook audit`)
 
@@ -14,7 +14,7 @@ Per component, against `agents/catalog.json`:
 
 - Every element Nice covers goes through its component: no raw `<img>` (use `Image`), text through `Ink`, layout through `Flex`. Each raw element is a finding.
 - Valid API use: no invented token variants, no removed props, no hand-written `var(--np--…)` (use `getToken`), no literal sizes.
-- Instance queries ("Images without alt or thumbnail, with file:line"): the planned instance index (`.nice/instances.json`, design in `~/nice/surveys/notes/instance-location.md`) is not built. Until it is, use an AST query (ast-grep or ts-morph) scoped to `@niceprototypes/*` imports; never grep JSX.
+- Instance queries ("Images without alt or thumbnail, with file:line"): the planned instance index (`.nice/instances.json`, design in `~/nice/.nice/research/2026-10-27/instance-location.md`) is not built. Until it is, use an AST query (ast-grep or ts-morph) scoped to `@niceprototypes/*` imports; never grep JSX.
 
 ## Manifest (`manifest audit`)
 

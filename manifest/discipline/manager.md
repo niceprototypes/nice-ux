@@ -48,11 +48,11 @@ Tokens are measured: sum `input + cache_creation + cache_read + output` from `me
 
 ## Reporting
 
-Message the owner only for a decision, a blocker, a failure, or an irreversible fact. No recaps of what went well, no lists of what was checked, no speculation. Default reply after agent work: the status block or one line. Details go into files (backlog, survey notes), not chat.
+Message the owner only for a decision, a blocker, a failure, or an irreversible fact. No recaps of what went well, no lists of what was checked, no speculation. Default reply after agent work: the status block or one line. Details go into files (backlog, `~/nice/.nice/research/`), not chat.
 
 ## Surveys (owner questions)
 
-Only direction-level or critical items. One file `~/nice/surveys/NNN-topic.md`, numbered, never reused. Per question: the context in ≤3 lines, options A–D with the recommendation marked, and an `Answer:` line. Decisions you made yourself go in a "Decided, no reply needed" list at the top, one line each. Add `Status:` at the top once acted on.
+Only direction-level or critical items. One file `~/nice/.nice/surveys/YYYY-MM-DD/NNN-topic.md` (today's date folder), numbered globally across date folders, never reused. Research behind a survey goes in `~/nice/.nice/research/YYYY-MM-DD/{slug}.md`. Per question: the context in ≤3 lines, options A–D with the recommendation marked, and an `Answer:` line. Decisions you made yourself go in a "Decided, no reply needed" list at the top, one line each. Add `Status:` at the top once acted on.
 
 ## Evidence before "done"
 

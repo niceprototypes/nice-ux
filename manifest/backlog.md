@@ -1,10 +1,10 @@
 # Backlog
 
-Merged from the 2026-10-26 triage of `manifest/.reports/` (deleted; backup `~/nice/surveys/notes/reports-backup.tgz`, cited below as `bak:`). Paths are relative to `~/nice/nice-ux/` (rewritten to the monorepo layout 2026-10-27). Open owner questions: `~/nice/surveys/003-report-decisions.md` (cited as `S003 Qn`).
+Merged from the 2026-10-26 triage of `manifest/.reports/` (deleted; backup `~/nice/.nice/research/2026-10-26/reports-backup.tgz`, cited below as `bak:`). Paths are relative to `~/nice/nice-ux/` (rewritten to the monorepo layout 2026-10-27). Open owner questions: `~/nice/.nice/surveys/2026-10-26/003-report-decisions.md` (cited as `S003 Qn`).
 
 Dropped from the source tables: 67 DONE, 26 DEPRECATED, 24 COVERED by planned work. 93 OUTSTANDING rows deduped to 78; rows 79-80 come from this cleanup's manifest checks; rows 81-87 were added after.
 
-Rows 88-128 come from the gap analysis `~/nice/surveys/notes/gaps.md` (cited as `gaps`): §1 ranks 1-23 in rank order, then the survey 001 sets (Data grid, Charts, AI/chat), then §2-§3. Covered by earlier rows: Slider (81), Divider (45), Combobox (42), number stepper (41). Rows 129-142 are API gaps found while writing the Playground stories (storybook-rework). Total 142 rows.
+Rows 88-128 come from the gap analysis `~/nice/.nice/research/2026-10-26/gaps.md` (cited as `gaps`): §1 ranks 1-23 in rank order, then the survey 001 sets (Data grid, Charts, AI/chat), then §2-§3. Covered by earlier rows: Slider (81), Divider (45), Combobox (42), number stepper (41). Rows 129-142 are API gaps found while writing the Playground stories (storybook-rework). Total 142 rows.
 
 Phases, in order: pre-monorepo → monorepo → storybook-rework → components → manifest. Within a phase, rows are sorted by impact.
 
@@ -89,7 +89,7 @@ Phases, in order: pre-monorepo → monorepo → storybook-rework → components 
 | 77 | README stubs / missing: ink 5 lines, image 3, lightbox 7, code 7; none for input, head, image-vendor. Make each a minimal pointer to Playground + catalog | those README.md files | S | READMEs | manifest |
 | 78 | README `## License` missing (24 packages); `## Install` vs `## Installation` (15); flex title | e.g. packages/checkbox/README.md; packages/flex/README.md:1 | S | READMEs | manifest |
 | 79 | DONE 2026-10-27 (manifest refactor). Dead refs to `manifest/.nice/reports/*` (never existed) | manifest/README.md:155; build/symlinks.md:35,96; topics/build-config.md:272; edit/component.md:729 | S | manifest | manifest |
-| 80 | DONE 2026-10-27 (reports → backlog rows + ~/nice/surveys/notes). Reports convention still routes reports to `manifest/.reports/` (folder deleted) | manifest/README.md:222-250; read/audit.md:31,79; .gitignore:4 | S | manifest | manifest |
+| 80 | DONE 2026-10-27 (reports → backlog rows + ~/nice/.nice/research). Reports convention still routes reports to `manifest/.reports/` (folder deleted) | manifest/README.md:222-250; read/audit.md:31,79; .gitignore:4 | S | manifest | manifest |
 
 ## Facts to keep
 
@@ -107,7 +107,7 @@ Phases, in order: pre-monorepo → monorepo → storybook-rework → components 
 - **Proton SDK:** API is CORS-blocked; needs Node with `--conditions=browser`, `@protontech/crypto/polyfill`, `x-pm-appversion: web-drive@5.0.0`. CAPTCHA/HV (9001) blocks headless login.
 | 81 | Rename the carousel to `Carousel` (new package `@niceprototypes/carousel`); `@niceprototypes/slider` becomes the range input. Update its Storybook pages and the cli test fixture | slider, apps/storybook/stories/Components/Slider, packages/cli/test/develop-parser.test.js | M | slider, storybook | components |
 | 82 | Part (a) DONE 2026-10-29: `thumbnail?: string | false` (blurred SVG background on the same element, cleared on load), `loading`/`fetchPriority` passthrough, `decoding="async"`, `nicely thumbnails <dir>`; audit count pending survey 005 Q4. Progressive image loading: Image gets a `thumbnail` prop (shown first, full image loads after); count images that render without a thumbnail so a UX can be audited. Owner direction 2026-10-27, leaning toward a prop over a dedicated component. Playground Controls plus a UI test | packages/image (nice-ux) | M | image | components |
-| 83 | DONE 2026-10-28 (no `as` needed: all 28 default-element Ink uses are flex items, and a probe build with `as="p"` is pixel-identical on every screen; surveys/notes/monorepo-phase3.md). Ink renders a span by default: check about 30 Ink uses in browser/chrome flex layouts on screen; add `as` where the layout breaks | browser/chrome | S | browser | after-monorepo |
+| 83 | DONE 2026-10-28 (no `as` needed: all 28 default-element Ink uses are flex items, and a probe build with `as="p"` is pixel-identical on every screen; ~/nice/.nice/research/2026-10-28/monorepo-phase3.md). Ink renders a span by default: check about 30 Ink uses in browser/chrome flex layouts on screen; add `as` where the layout breaks | browser/chrome | S | browser | after-monorepo |
 | 84 | Audit layer: every Nice component that renders a covered element (Image first: missing thumbnail, missing alt) reports audit data in one consistent way; consumers (website first) replace raw <img> and other covered raw elements; a lint rule flags raw elements. Owner second-tier priority 2026-10-27 | packages/image, packages/* (nice-ux); website | L | image, website | components |
 | 85 | Golden KPI benchmarks: paired agent tasks (e.g. media metadata audit, fix all missing alt text) run on a control site and on a Nice site; record measured tokens and wall-clock time; results feed the token-spend pitch. Owned by the UI-testing agents. Owner direction 2026-10-27 | nice-ux/benchmarks (new), website | L | testing | storybook-rework |
 | 86 | Research: locating component instances (source file:line from a rendered instance or from props), the feasibility and cost for agents. Inputs: React 19 removed _debugSource; prior art for humans (click-to-component, LocatorJS, react-dev-inspector). Decide before rows 84–85 build on it | notes | M | research | components |
