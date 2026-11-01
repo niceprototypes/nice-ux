@@ -28,7 +28,7 @@ export type BackgroundColorInverseType = "base" | "raised" | "success" | "highli
 export type BorderColorInverseType = "base" | "subtle" | "strong" | "stronger" | "success" | "highlight" | "warning" | "error" | "link"
 export type ColorInverseType = "base" | "light" | "lighter" | "lightest" | "disabled" | "link" | "success" | "highlight" | "warning" | "error"
 
-export type ComponentPrefix = "button" | "calendar" | "card" | "checkbox" | "code" | "dialog" | "field" | "icon" | "image" | "ink" | "input" | "lightbox" | "line" | "list" | "listbox" | "logo" | "popover" | "radio" | "select" | "tabs" | "tile" | "toggle"
+export type ComponentPrefix = "button" | "calendar" | "card" | "checkbox" | "code" | "dialog" | "field" | "icon" | "image" | "ink" | "input" | "lightbox" | "line" | "list" | "listbox" | "logo" | "popover" | "radio" | "select" | "tabs" | "tile" | "toggle" | "tree"
 
 /** Variant union of every token group, keyed by address group (`"fontSize"`, `"button.icon.size"`), plus custom groups declared on `CustomTokenVariants`. */
 export interface TokenVariants extends CustomTokenVariants {
@@ -221,6 +221,16 @@ export interface TokenVariants extends CustomTokenVariants {
   "toggle.focusRing.width": "base"
   "toggle.focusRing.color": "base"
   "toggle.focusRing.offset": "base"
+  "tree.color": "base" | "light" | "lighter" | "lightest" | "disabled" | "link" | "success" | "highlight" | "warning" | "error"
+  "tree.activeColor": "base"
+  "tree.inactive.color": "base"
+  "tree.fontWeight": "base" | "active"
+  "tree.row.minHeight": "base"
+  "tree.row.paddingBlock": "base"
+  "tree.icon.size": "base"
+  "tree.guide.color": "base"
+  "tree.guide.width": "base"
+  "tree.guide.arm": "base"
 }
 
 /** Variant union of every token group that has the `:inverse` effect. */
@@ -277,6 +287,10 @@ export interface TokenInverseVariants {
   "toggle.track.backgroundColor": "base" | "checked"
   "toggle.thumb.backgroundColor": "base"
   "toggle.focusRing.color": "base"
+  "tree.color": "base" | "light" | "lighter" | "lightest" | "disabled" | "link" | "success" | "highlight" | "warning" | "error"
+  "tree.activeColor": "base"
+  "tree.inactive.color": "base"
+  "tree.guide.color": "base"
 }
 
 /** Every token group an address or the two-argument `getToken` form can name. */

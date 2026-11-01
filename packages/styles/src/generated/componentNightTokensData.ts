@@ -33,7 +33,8 @@ const componentNightTokensData: ComponentNightTokensData = {
   "select": {},
   "tabs": {},
   "tile": {},
-  "toggle": {}
+  "toggle": {},
+  "tree": {}
 } as const
 
 export default componentNightTokensData

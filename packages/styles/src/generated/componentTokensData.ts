@@ -922,6 +922,56 @@ const componentTokensData: ComponentTokensData = {
         "base": "var(--np--gap--smaller)"
       }
     }
+  },
+  "tree": {
+    "color": {
+      "base": "var(--np--color)",
+      "light": "var(--np--color--light)",
+      "lighter": "var(--np--color--lighter)",
+      "lightest": "var(--np--color--lightest)",
+      "disabled": "var(--np--color--disabled)",
+      "link": "var(--np--color--link)",
+      "success": "var(--np--color--success)",
+      "highlight": "var(--np--color--highlight)",
+      "warning": "var(--np--color--warning)",
+      "error": "var(--np--color--error)"
+    },
+    "activeColor": {
+      "base": "var(--np--color--link)"
+    },
+    "inactive": {
+      "color": {
+        "base": "var(--np--color--lighter)"
+      }
+    },
+    "fontWeight": {
+      "base": "var(--np--font-weight--medium)",
+      "active": "var(--np--font-weight--semibold)"
+    },
+    "row": {
+      "minHeight": {
+        "base": "var(--np--size--small)"
+      },
+      "paddingBlock": {
+        "base": "var(--np--gap--smaller)"
+      }
+    },
+    "icon": {
+      "size": {
+        "base": "var(--np--icon--size)"
+      }
+    },
+    "guide": {
+      "color": {
+        "base": "var(--np--border-color)"
+      },
+      "width": {
+        "base": "var(--np--border-width)"
+      },
+      "arm": {
+        "base": "var(--np--gap)"
+      }
+    }
   }
 } as const
 
