@@ -1,7 +1,6 @@
 import * as React from "react"
 import Flex from "@niceprototypes/flex"
 import ResetDemoItem from "./ResetDemoItem"
-import NewLines from "../NewLines"
 import Line from "../Line"
 
 /** One reset stylesheet loaded into a demo frame. */

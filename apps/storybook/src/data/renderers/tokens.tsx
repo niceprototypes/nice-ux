@@ -41,11 +41,12 @@ export const tokenRenderers: Record<string, Renderer> = {
     </Flex>
   ),
 
+  // The cell grows with the variant, one size step each; size has no "none", so that row takes the smallest.
   "tokens-borders-borderradius": (variant) => (
     <PreviewCell
       backgroundColor={getToken("backgroundColor", "raised")}
       borderColor={getToken("borderColor")}
-      height={getToken("size", variant)}
+      height={getToken("size", variant === "none" ? "smaller" : variant)}
       borderRadius={getToken("borderRadius", variant)}
     />
   ),

@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import Flex from "@niceprototypes/flex"
 import Icon from "@niceprototypes/icon"
 import { getBreakpoint, getToken } from "@niceprototypes/styles"
 
@@ -107,15 +106,16 @@ export const ThemedFrameToggle = styled.div`
 
 /**
  * Locks the frame again once it is live. Sits in the top-right corner, over the
- * frame rather than beside it, so it costs no layout. A Flex rather than a
- * Button: it is frame chrome, not a form action, and it carries only an icon.
- * The role/tabIndex given in ThemedFrame keep it reachable by keyboard.
+ * frame rather than beside it, so it costs no layout. A native button rather
+ * than the Nice Button: it is frame chrome carrying only an icon; the element
+ * gives it keyboard focus and Enter/Space activation.
  */
-export const ThemedFrameFlex = styled(Flex).attrs({
-  alignItems: "center",
-  padding: "small",
-  justifyContent: "center",
-})`
+export const ThemedFrameLock = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: ${getToken("gap", "small")};
+  font: inherit;
   position: absolute;
   top: ${getToken("gap")};
   right: ${getToken("gap")};

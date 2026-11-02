@@ -7,7 +7,7 @@ import {
   FrameScrollDiv,
   LockClosedIcon,
   LockOpenIcon,
-  ThemedFrameFlex,
+  ThemedFrameLock,
   ThemedFrameToggle,
 } from "./ThemedFrame.styles"
 import type { ThemedFrameProps } from "./ThemedFrame.types"
@@ -67,17 +67,9 @@ const ThemedFrame: React.FC<ThemedFrameProps> = ({ toggleLabel = "Click to scrol
         <FrameIframe ref={ref} {...props} onLoad={applyTheme} />
       </FrameScrollDiv>
       {scrollable ? (
-        <ThemedFrameFlex
-          role="button"
-          tabIndex={0}
-          aria-label="Lock frame"
-          onClick={() => setScrollable(false)}
-          onKeyDown={event => {
-            if (event.key === "Enter" || event.key === " ") setScrollable(false)
-          }}
-        >
+        <ThemedFrameLock type="button" aria-label="Lock frame" onClick={() => setScrollable(false)}>
           <Icon name="lock-down" size="small" />
-        </ThemedFrameFlex>
+        </ThemedFrameLock>
       ) : (
         <ThemedFrameToggle onClick={() => setScrollable(true)}>
           <Flex gap="base" alignItems="center">
