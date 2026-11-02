@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { expect, fn, waitFor, within } from "storybook/test"
 import { getToken, type ColorType } from "@niceprototypes/styles"
+import Flex from "@niceprototypes/flex"
 import Icon from "@niceprototypes/icon"
 import Ink from "@niceprototypes/ink"
 import Tree from "@niceprototypes/tree"
@@ -89,7 +90,9 @@ const FOLDER_IDS = ["basics", "components", "components/forms", "components/form
  *
  * TreeProps plus the data controls: `levels` (depth of the sidebar outline), `icons`
  * (folder icons on or off), `slot` (text in the active row's `children` slot) and `folderLinks`
- * (every folder also a link: no toggle, its sub-list follows the open folder ids).
+ * (every folder also a link: no toggle, its sub-list follows the open folder ids), and
+ * `activeColorToken`: not a Tree prop; the `color` variant the wrapper assigns to the
+ * `tree.activeColor` token, the way a project recolours one tree.
  * `items` is built in `render`.
  */
 type PlaygroundArgs = Omit<TreeProps, "items"> & {
@@ -97,6 +100,7 @@ type PlaygroundArgs = Omit<TreeProps, "items"> & {
   icons: boolean
   slot: string
   folderLinks: boolean
+  activeColorToken?: ColorType
 }
 
 const meta = {
@@ -130,11 +134,11 @@ export const Playground: Story = {
     expandedIds: { control: "check", options: FOLDER_IDS, table: { category: "State" } },
     defaultExpandedIds: { control: "check", options: FOLDER_IDS, table: { category: "State" } },
 
-    activeColor: {
+    activeColorToken: {
       control: "select",
       options: [NONE, ...COLOR_OPTIONS],
       mapping: { [NONE]: undefined },
-      table: { category: "Appearance" },
+      table: { category: "Token override" },
     },
 
     "aria-label": { control: "text", table: { category: "Accessibility" } },
@@ -142,16 +146,25 @@ export const Playground: Story = {
     onExpandedChange: { table: { category: "Events" } },
     onSelect: { table: { category: "Events" } },
   },
-  render: ({ levels, icons, slot, folderLinks, onSelect, ...rest }) => (
-    <Tree
-      {...rest}
-      items={toItems(SIDEBAR, levels, icons, slot, folderLinks)}
-      onSelect={(node, event) => {
-        // Keep the story on its page
-        event.preventDefault()
-        onSelect?.(node, event)
-      }}
-    />
+  render: ({ levels, icons, slot, folderLinks, activeColorToken, onSelect, ...rest }) => (
+    <Flex
+      direction="column"
+      style={
+        activeColorToken
+          ? { [getToken("tree.activeColor", { as: "key" })]: getToken("color", activeColorToken) }
+          : undefined
+      }
+    >
+      <Tree
+        {...rest}
+        items={toItems(SIDEBAR, levels, icons, slot, folderLinks)}
+        onSelect={(node, event) => {
+          // Keep the story on its page
+          event.preventDefault()
+          onSelect?.(node, event)
+        }}
+      />
+    </Flex>
   ),
   play: async ({ canvasElement, args, userEvent }) => {
     const canvas = within(canvasElement)
@@ -224,10 +237,10 @@ export const Active: Story = {
   },
 }
 
-/** `activeColor` recolours the active path. */
-export const ActiveColor: Story = {
+/** A wrapper that reassigns the `tree.activeColor` token recolours the active path. */
+export const ActiveColorToken: Story = {
   ...Playground,
-  args: { ...Playground.args, activeColor: "success" },
+  args: { ...Playground.args, activeColorToken: "success" },
   play: async ({ canvasElement }) => {
     const target = within(canvasElement).getByRole("link", { name: "checked" })
     await expect(getComputedStyle(row(target)).color).toBe(

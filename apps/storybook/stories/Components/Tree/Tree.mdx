@@ -25,4 +25,17 @@ import Tree from "@niceprototypes/tree"
 />
 ```
 
+The active path takes the `tree.activeColor` token (default: the link colour). Tree has no colour
+prop: override the token in the project's `setTokens` map for every tree, or on a wrapper for one tree.
+
+```jsx
+import { getToken, setTokens } from "@niceprototypes/styles"
+
+setTokens({ tree: { activeColor: { base: getToken("color:success") } } })
+
+<Flex style={{ [getToken("tree.activeColor", { as: "key" })]: getToken("color:success") }}>
+  <Tree aria-label="Steps" items={items} />
+</Flex>
+```
+
 <Stories />

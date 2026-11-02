@@ -1,6 +1,5 @@
 import styled, { css } from "styled-components"
-import { getToken, resolveColorProp, type ColorTokenProp, type FontSizeType } from "@niceprototypes/styles"
-import type { TreeActiveColorType } from "./Tree.types"
+import { getToken, type FontSizeType } from "@niceprototypes/styles"
 
 /* Geometry. A folder's icon sits at the start of its row; its sub-rows' guide hangs
    from the icon's centre line, runs an arm towards each sub-row and stops `iconGap`
@@ -38,12 +37,10 @@ const guide = (layer: "before" | "after", background: string) => css`
 
 /**
  * The `<nav>` root. Its font size is the label size, so the `em` gap and indent
- * match the labels. `activeColor` reassigns the `tree.activeColor` token here.
+ * match the labels.
  */
-export const StyledTree = styled.nav<{ $size: FontSizeType; $activeColor?: ColorTokenProp<TreeActiveColorType> }>`
+export const StyledTree = styled.nav<{ $size: FontSizeType }>`
   font-size: ${({ $size }) => getToken("fontSize", $size)};
-  ${({ $activeColor }) =>
-    $activeColor && `${getToken("tree.activeColor", { as: "key" })}: ${resolveColorProp("tree", "color", $activeColor)};`}
 `
 
 /** One level's rows. A nested level is indented one column. */

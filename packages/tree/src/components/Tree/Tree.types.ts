@@ -1,5 +1,4 @@
 import type * as React from "react"
-import type { ColorTokenProp, ColorType } from "@niceprototypes/styles"
 
 /**
  * TreeNodeIdType
@@ -37,7 +36,7 @@ export type TreeNodeUrlType = string
  * Row status.
  *
  * Values:
- * - "active": the current page. It and its ancestors take `activeColor`; every other
+ * - "active": the current page. It and its ancestors take the `tree.activeColor` token; every other
  *   row recedes until hovered.
  */
 export type TreeNodeStatusType = "active"
@@ -79,14 +78,6 @@ export type TreeNodeType = {
 export type TreeItemsType = ReadonlyArray<TreeNodeType>
 
 /**
- * TreeActiveColorType
- *
- * Re-export of ColorType from @niceprototypes/styles.
- * Colour of the active row, its ancestors and the guide line leading to it.
- */
-export type TreeActiveColorType = ColorType
-
-/**
  * TreeExpandedIdsType
  *
  * Ids of the open folders.
@@ -120,9 +111,6 @@ export interface TreeProps {
   /** The top-level rows */
   items: TreeItemsType
 
-  /** Colour of the active path; defaults to the `tree.activeColor` token (the link colour) */
-  activeColor?: ColorTokenProp<TreeActiveColorType>
-
   /** Open folders (controlled) */
   expandedIds?: TreeExpandedIdsType
 
@@ -150,7 +138,6 @@ namespace TreeTypes {
   export type NodeChildren = TreeNodeChildrenType
   export type Node = TreeNodeType
   export type Items = TreeItemsType
-  export type ActiveColor = TreeActiveColorType
   export type ExpandedIds = TreeExpandedIdsType
   export type OnExpandedChange = TreeOnExpandedChangeType
   export type OnSelect = TreeOnSelectType

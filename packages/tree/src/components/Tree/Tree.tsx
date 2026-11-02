@@ -24,7 +24,8 @@ const SMALL_LABELS = parseBreakpointKey("laptop+")
  * when active). A folder with a `url` is a link too: it has no toggle, and its sub-list
  * shows while its id is in `expandedIds`. Keyboard support is the native one: Tab between rows, Enter or Space
  * toggles a folder, Enter follows a link. Guide lines join each folder to its sub-rows;
- * the active node, its ancestors and the guide leading to it take `activeColor`.
+ * the active node, its ancestors and the guide leading to it take the `tree.activeColor`
+ * token; a project recolours it by overriding that token (setTokens, or on a wrapper).
  *
  * @example
  * ```tsx
@@ -40,7 +41,6 @@ const SMALL_LABELS = parseBreakpointKey("laptop+")
  */
 const Tree: React.FC<TreeProps> = ({
   items,
-  activeColor,
   expandedIds: expandedIdsProp,
   defaultExpandedIds,
   onExpandedChange,
@@ -130,7 +130,7 @@ const Tree: React.FC<TreeProps> = ({
   }
 
   return (
-    <StyledTree aria-label={ariaLabel} $size={size} $activeColor={activeColor}>
+    <StyledTree aria-label={ariaLabel} $size={size}>
       {renderList(items, 0)}
     </StyledTree>
   )

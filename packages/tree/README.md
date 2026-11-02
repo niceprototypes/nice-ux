@@ -8,7 +8,8 @@ navigation pattern (the APG recommends it over `role="tree"` for site navigation
 - Keyboard: native. Tab and Shift+Tab move between rows, Enter or Space toggles a folder, Enter
   follows a link.
 - Guide lines join each folder's icon to its sub-rows. The active node, its ancestors and the guide
-  leading to it take `activeColor`; every other row recedes to `color:lighter` until hovered.
+  leading to it take the `tree.activeColor` token (default: the link colour); every other row
+  recedes to `color:lighter` until hovered.
 - Labels render through Ink, base size below laptop and small from laptop up.
 
 ## Install
@@ -45,8 +46,25 @@ Prop types are `TreeProps` and `TreeNodeType`; allowed values per prop are in
 `manifest/agents/catalog.json`. Folders are uncontrolled by default (`defaultExpandedIds`, else the
 active node's ancestors) or controlled with `expandedIds` + `onExpandedChange`.
 
+## Active colour
+
+Tree has no colour prop. A project sets the active colour by overriding the `tree.activeColor`
+token: for every tree, in its `setTokens` map; for one tree only, on a wrapper element.
+
+```tsx
+import { getToken, setTokens } from "@niceprototypes/styles"
+import Flex from "@niceprototypes/flex"
+
+// Every tree in the project
+setTokens({ tree: { activeColor: { base: getToken("color:success") } } })
+
+// One tree: reassign the token on a wrapper
+<Flex style={{ [getToken("tree.activeColor", { as: "key" })]: getToken("color:success") }}>
+  <Tree aria-label="Steps" items={items} />
+</Flex>
+```
+
 ## Tokens
 
-`tree.*` in `@niceprototypes/styles`: `color` (the `activeColor` variants), `activeColor`,
-`inactive.color`, `fontWeight` (`base`, `active`), `row.minHeight`, `row.paddingBlock`, `icon.size`,
-`guide.color`, `guide.width`, `guide.arm`.
+`tree.*` in `@niceprototypes/styles`: `color`, `activeColor`, `inactive.color`,
+`fontWeight` (`base`, `active`), `row.minHeight`, `row.paddingBlock`, `icon.size`, `guide.color`, `guide.width`, `guide.arm`.
