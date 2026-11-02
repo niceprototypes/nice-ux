@@ -39,6 +39,7 @@ const ContentMain: React.FC<ContentMainProps> = ({
               <Ink
                 key={index}
                 color="light"
+                size="small"
                 theme={theme}
                 {...descriptionProps}
               >
@@ -50,6 +51,7 @@ const ContentMain: React.FC<ContentMainProps> = ({
         : (
           <Ink
             color="light"
+            size="small"
             theme={theme}
             {...descriptionProps}
           >

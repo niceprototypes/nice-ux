@@ -149,6 +149,7 @@ export const Playground: Story = {
   },
   play: async ({ canvasElement }) => {
     await expect(ink(canvasElement).tagName).toBe("SPAN")
+    await expect(getComputedStyle(ink(canvasElement)).fontSize).toBe(resolveCss(canvasElement, "font-size", getToken("ink.fontSize:base")))
   },
 }
 

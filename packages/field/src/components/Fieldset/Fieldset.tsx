@@ -44,7 +44,7 @@ const Fieldset: React.FC<FieldsetProps> = ({
       </StyledFieldsetLegend>
       {hasDescription ? (
         <StyledFieldsetDescription id={descriptionId}>
-          <Ink color="light">
+          <Ink color="light" size="small">
             {description}
           </Ink>
         </StyledFieldsetDescription>

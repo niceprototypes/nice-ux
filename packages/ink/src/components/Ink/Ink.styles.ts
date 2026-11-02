@@ -75,11 +75,8 @@ const getFontSize = ({ $as, $size }: { $as: InkAsType; $size?: FontSizeType }) =
       case "h2":
         effectiveFontSize = "large"
         break
-      case "h3":
-        effectiveFontSize = "base"
-        break
       default:
-        effectiveFontSize = "small"
+        effectiveFontSize = "base"
     }
   }
 

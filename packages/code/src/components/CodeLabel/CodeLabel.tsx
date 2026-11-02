@@ -10,7 +10,7 @@ export const CodeLabel = ({ language }: CodeLabelProps) => {
   if (!key) return null
   return (
     <LabelFlex>
-      <Ink code color="lightest">{LANG_LABELS[key] ?? key.toUpperCase()}</Ink>
+      <Ink code size="small" color="lightest">{LANG_LABELS[key] ?? key.toUpperCase()}</Ink>
     </LabelFlex>
   )
 }

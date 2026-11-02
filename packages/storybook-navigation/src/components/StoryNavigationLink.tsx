@@ -46,7 +46,7 @@ const StoryNavigationLink: React.FC<StoryNavigationLinkProps> = ({
       iconRight={iconRight}
       iconVendor={iconVendor}
     >
-      <Label as="span">{label}</Label>
+      <Label as="span" size={size}>{label}</Label>
     </Button>
   </LinkFlex>
 )

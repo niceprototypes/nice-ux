@@ -159,7 +159,7 @@ export type InkProps = {
   /** Line height setting (defaults based on element type) */
   lineHeight?: InkLineHeightType
 
-  /** Font size from @niceprototypes/styles tokens */
+  /** Font size from @niceprototypes/styles tokens. Defaults by `as`: h1 "larger", h2 "large", others "base" */
   size?: InkSizeType
 
   /** Inline styles */

@@ -23,7 +23,7 @@ const CardHeader: React.FC<CardHeaderProps> = ({ title, description, titleProps,
         </Ink>
       ) : null}
       {description != null ? (
-        <Ink color="light" {...descriptionProps}>
+        <Ink color="light" size="small" {...descriptionProps}>
           {description}
         </Ink>
       ) : null}

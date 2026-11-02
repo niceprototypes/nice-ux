@@ -99,14 +99,14 @@ const Field: React.FC<FieldProps> = ({
         {children}
         {hasDescription ? (
           <StyledFieldDescription id={descriptionId}>
-            <Ink color="light">
+            <Ink color="light" size="small">
               {description}
             </Ink>
           </StyledFieldDescription>
         ) : null}
         <StyledFieldError id={`${controlId}-error`} aria-live="polite">
           {hasError ? (
-            <Ink color="error">
+            <Ink color="error" size="small">
               {error}
             </Ink>
           ) : null}

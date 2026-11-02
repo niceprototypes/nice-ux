@@ -28,7 +28,7 @@ describe("Ink", () => {
       render(<Ink>text</Ink>)
       const css = getInjectedCss()
       expect(css).toContain(`font-family:${getToken("ink.fontFamily:base")}`)
-      expect(css).toContain(`font-size:${getToken("ink.fontSize:small")}`)
+      expect(css).toContain(`font-size:${getToken("ink.fontSize:base")}`)
       expect(css).toContain(`line-height:${getToken("ink.lineHeight:base")}`)
     })
 
