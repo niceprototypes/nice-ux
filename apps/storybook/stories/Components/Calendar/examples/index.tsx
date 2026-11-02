@@ -1,7 +1,6 @@
 // Calendar example configs — one ComponentExample per facet, shaped like Button's
-// (src/dataTables/data/tables/componentDemoTable). Key order in
-// `calendarExamples` is the Calendar/Docs-page order; each Calendar/<facet>.mdx
-// renders one entry.
+// (src/dataTables/data/tables/componentDemoTable). ComponentDocs renders each entry as a section of the
+// Calendar docs page, sorted by name.
 import { useState } from "react"
 import { Calendar } from "@niceprototypes/calendar"
 import Flex from "@niceprototypes/flex"
@@ -243,7 +242,7 @@ const unstyled = <T extends ComponentExample>(example: T): T => ({
   preview: (item: unknown) => <div className="sb-unstyled">{example.preview(item)}</div>,
 })
 
-/** Every Calendar example facet — key order is the Calendar/Docs-page order. */
+/** Every Calendar example facet — each one a section of the Calendar docs page. */
 export const calendarExamples = {
   value: unstyled(calendarValue),
   min: unstyled(calendarMin),
@@ -256,5 +255,3 @@ export const calendarExamples = {
   theme: unstyled(calendarTheme),
 } satisfies Record<string, ComponentExample>
 
-/** Calendar facets in Docs-page order. */
-export const calendarExampleList: ComponentExample[] = Object.values(calendarExamples)

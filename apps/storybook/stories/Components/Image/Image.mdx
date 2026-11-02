@@ -16,8 +16,14 @@ export const coverProps = {
   height: "320px",
   backgroundSize: "cover",
 }
+import ComponentDocs from "../../../src/components/ComponentDocs"
+import { imageExamples } from "./examples"
+
+export const sections = import.meta.glob("./*.section.mdx", { eager: true })
 
 <Meta title="Components/Image" />
+
+<ComponentDocs component="Image" examples={imageExamples} sections={sections}>
 
 <StoryHeader
   title="Image"
@@ -83,3 +89,4 @@ import Image from "@niceprototypes/image"
         ]}
 />
 
+</ComponentDocs>

@@ -1,6 +1,6 @@
 // Logo example configs — one ComponentExample per facet, shaped like Button's
-// (src/dataTables/data/tables/componentDemoTable). Key order in `logoExamples` is the
-// Logo/Docs-page order; each Logo/<facet>.mdx renders one entry.
+// (src/dataTables/data/tables/componentDemoTable). ComponentDocs renders each entry as a section of the
+// Logo docs page, sorted by name.
 import Logo from "@niceprototypes/logo"
 import { Theme, getToken } from "@niceprototypes/styles"
 import type { ComponentExample } from "./examples.types"
@@ -76,7 +76,7 @@ export const logoTheme = {
   code: variant => `<Logo height={48} theme="${variant}" />`,
 } satisfies ComponentExample
 
-/** Every Logo example facet — key order is the Logo/Docs-page order. */
+/** Every Logo example facet — each one a section of the Logo docs page. */
 export const logoExamples = {
   height: logoHeight,
   showName: logoShowName,
@@ -86,5 +86,3 @@ export const logoExamples = {
   theme: logoTheme,
 } satisfies Record<string, ComponentExample>
 
-/** Logo facets in Docs-page order. */
-export const logoExampleList: ComponentExample[] = Object.values(logoExamples)

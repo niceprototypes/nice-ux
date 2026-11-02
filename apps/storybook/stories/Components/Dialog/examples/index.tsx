@@ -1,6 +1,6 @@
 // Dialog example configs — one ComponentExample per facet, shaped like Button's
-// (src/dataTables/data/tables/componentDemoTable). Key order in `dialogExamples` is the
-// Dialog/Docs-page order; each Dialog/<facet>.mdx renders one entry.
+// (src/dataTables/data/tables/componentDemoTable). ComponentDocs renders each entry as a section of the
+// Dialog docs page, sorted by name.
 import { useState } from "react"
 import Dialog from "@niceprototypes/dialog"
 import Button from "@niceprototypes/button"
@@ -157,7 +157,7 @@ export const dialogTheme = {
   code: variant => `<Dialog open={open} onClose={close} title="Delete invoice?" theme="${variant}">\n  …\n</Dialog>`,
 } satisfies ComponentExample
 
-/** Every Dialog example facet — key order is the Dialog/Docs-page order. */
+/** Every Dialog example facet — each one a section of the Dialog docs page. */
 export const dialogExamples = {
   title: dialogTitle,
   description: dialogDescription,
@@ -169,5 +169,3 @@ export const dialogExamples = {
   theme: dialogTheme,
 } satisfies Record<string, ComponentExample>
 
-/** Dialog facets in Docs-page order. */
-export const dialogExampleList: ComponentExample[] = Object.values(dialogExamples)

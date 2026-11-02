@@ -98,11 +98,12 @@ export const Collapsed: Story = {
     const height = () => root(canvasElement).getBoundingClientRect().height
     const collapsedHeight = height()
     const writeText = spyOn(navigator.clipboard, "writeText").mockResolvedValue()
-    // Expanding shows the whole block, and the toggle click does not copy.
-    await userEvent.click(card.getByRole("button", { name: /^Show more/ }))
+    // Expanding shows the whole block, and the toggle click does not copy. The exact name
+    // checks the chevron icon stays out of it (its SVG carries a <style> element).
+    await userEvent.click(card.getByRole("button", { name: "Show more" }))
     await expect(writeText).not.toHaveBeenCalled()
     await expect(height()).toBeGreaterThan(collapsedHeight)
-    await userEvent.click(card.getByRole("button", { name: /^Show less/ }))
+    await userEvent.click(card.getByRole("button", { name: "Show less" }))
     await expect(height()).toBe(collapsedHeight)
     writeText.mockRestore()
   },

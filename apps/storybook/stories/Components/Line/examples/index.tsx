@@ -1,6 +1,6 @@
 // Line example configs — one ComponentExample per facet, shaped like Button's
-// (src/dataTables/data/tables/componentDemoTable). Key order in `lineExamples` is the
-// Line/Docs-page order; each Line/<facet>.mdx renders one entry.
+// (src/dataTables/data/tables/componentDemoTable). ComponentDocs renders each entry as a section of the
+// Line docs page, sorted by name.
 import type { CSSProperties, ReactNode } from "react"
 import Line, { type LineRadiusType } from "@niceprototypes/line"
 import { Theme, getToken } from "@niceprototypes/styles"
@@ -65,12 +65,10 @@ export const lineTheme = {
   code: variant => `<Line theme="${variant}" />`,
 } satisfies ComponentExample
 
-/** Every Line example facet — key order is the Line/Docs-page order. */
+/** Every Line example facet — each one a section of the Line docs page. */
 export const lineExamples = {
   color: lineColor,
   radius: lineRadius,
   theme: lineTheme,
 } satisfies Record<string, ComponentExample>
 
-/** Line facets in Docs-page order. */
-export const lineExampleList: ComponentExample[] = Object.values(lineExamples)

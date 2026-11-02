@@ -33,8 +33,9 @@
     background: none;
   }
 
+  /* Equal side gutters, so a full-width table or the Contents column stops short of the edge. */
   @media (min-width: 641px) {
-    padding: 0 0 var(--np--gap--larger) var(--np--gap--larger);
+    padding: 0 var(--np--gap--larger) var(--np--gap--larger);
   }
 }
 

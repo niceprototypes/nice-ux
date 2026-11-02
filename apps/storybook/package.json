@@ -22,6 +22,7 @@
     "@niceprototypes/card": "workspace:^",
     "@niceprototypes/checkbox": "workspace:^",
     "@niceprototypes/code": "workspace:^",
+    "@niceprototypes/contents": "workspace:^",
     "@niceprototypes/dialog": "workspace:^",
     "@niceprototypes/field": "workspace:^",
     "@niceprototypes/flex": "workspace:^",

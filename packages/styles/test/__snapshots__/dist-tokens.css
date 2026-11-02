@@ -429,6 +429,7 @@
 	--np--code--color--lightest: var(--np--color--lightest);
 	--np--code--color--link: var(--np--color--link);
 	--np--code--color--highlight: var(--np--color--highlight);
+	--np--code--max-width: 720px;
 	--np--code--max-height: 200px;
 	--np--code--fade-start: 25%;
 	--np--code--syntax-color: hsla(210, 6%, 17%, 1);
@@ -437,6 +438,24 @@
 	--np--code--syntax-color--tag: hsla(268, 50%, 48%, 1);
 	--np--code--syntax-color--constant: hsla(198, 70%, 33%, 1);
 	--np--code--syntax-color--comment: hsla(210, 5%, 45%, 1);
+
+	/* contents component tokens */
+	--np--contents--color: var(--np--color--light);
+	--np--contents--color--active: var(--np--color--link);
+	--np--contents--font-weight: var(--np--font-weight);
+	--np--contents--font-weight--active: var(--np--font-weight--medium);
+	--np--contents--heading--color: var(--np--color);
+	--np--contents--heading--font-weight: var(--np--font-weight--semibold);
+	--np--contents--heading--padding-block: var(--np--gap--small);
+	--np--contents--background-color: var(--np--background-color);
+	--np--contents--rail--color: var(--np--border-color);
+	--np--contents--rail--width: var(--np--border-width);
+	--np--contents--indicator--color: var(--np--color--link);
+	--np--contents--indicator--width: var(--np--border-width--large);
+	--np--contents--item--padding-block: var(--np--gap--smaller);
+	--np--contents--item--padding-inline: var(--np--gap--small);
+	--np--contents--indent: var(--np--gap);
+	--np--contents--top: var(--np--gap--large);
 
 	/* dialog component tokens */
 	--np--dialog--background-color: var(--np--background-color--raised);
@@ -879,6 +898,12 @@
 	--np--code--color--lightest--inverse: var(--np--color--lightest--inverse);
 	--np--code--color--link--inverse: var(--np--color--link--inverse);
 	--np--code--color--highlight--inverse: var(--np--color--highlight--inverse);
+	--np--contents--color--inverse: var(--np--color--light--inverse);
+	--np--contents--color--active--inverse: var(--np--color--link--inverse);
+	--np--contents--heading--color--inverse: var(--np--color--inverse);
+	--np--contents--background-color--inverse: var(--np--background-color--inverse);
+	--np--contents--rail--color--inverse: var(--np--border-color--inverse);
+	--np--contents--indicator--color--inverse: var(--np--color--link--inverse);
 	--np--dialog--background-color--inverse: var(--np--background-color--raised--inverse);
 	--np--dialog--color--inverse: var(--np--color--inverse);
 	--np--dialog--description--color--inverse: var(--np--color--light--inverse);
@@ -1327,6 +1352,12 @@
 		--np--code--color--lightest--inverse: var(--np--color--lightest--night--inverse);
 		--np--code--color--link--inverse: var(--np--color--link--night--inverse);
 		--np--code--color--highlight--inverse: var(--np--color--highlight--night--inverse);
+		--np--contents--color--inverse: var(--np--color--light--night--inverse);
+		--np--contents--color--active--inverse: var(--np--color--link--night--inverse);
+		--np--contents--heading--color--inverse: var(--np--color--night--inverse);
+		--np--contents--background-color--inverse: var(--np--background-color--night--inverse);
+		--np--contents--rail--color--inverse: var(--np--border-color--night--inverse);
+		--np--contents--indicator--color--inverse: var(--np--color--link--night--inverse);
 		--np--dialog--background-color--inverse: var(--np--background-color--raised--night--inverse);
 		--np--dialog--color--inverse: var(--np--color--night--inverse);
 		--np--dialog--description--color--inverse: var(--np--color--light--night--inverse);
@@ -1517,6 +1548,12 @@
 		--np--code--color--lightest: var(--np--color--lightest--night);
 		--np--code--color--link: var(--np--color--link--night);
 		--np--code--color--highlight: var(--np--color--highlight--night);
+		--np--contents--color: var(--np--color--light--night);
+		--np--contents--color--active: var(--np--color--link--night);
+		--np--contents--heading--color: var(--np--color--night);
+		--np--contents--background-color: var(--np--background-color--night);
+		--np--contents--rail--color: var(--np--border-color--night);
+		--np--contents--indicator--color: var(--np--color--link--night);
 		--np--dialog--background-color: var(--np--background-color--raised--night);
 		--np--dialog--color: var(--np--color--night);
 		--np--dialog--description--color: var(--np--color--light--night);
@@ -1774,6 +1811,12 @@
 		--np--code--color--lightest--inverse: var(--np--color--lightest--day--inverse);
 		--np--code--color--link--inverse: var(--np--color--link--day--inverse);
 		--np--code--color--highlight--inverse: var(--np--color--highlight--day--inverse);
+		--np--contents--color--inverse: var(--np--color--light--day--inverse);
+		--np--contents--color--active--inverse: var(--np--color--link--day--inverse);
+		--np--contents--heading--color--inverse: var(--np--color--day--inverse);
+		--np--contents--background-color--inverse: var(--np--background-color--day--inverse);
+		--np--contents--rail--color--inverse: var(--np--border-color--day--inverse);
+		--np--contents--indicator--color--inverse: var(--np--color--link--day--inverse);
 		--np--dialog--background-color--inverse: var(--np--background-color--raised--day--inverse);
 		--np--dialog--color--inverse: var(--np--color--day--inverse);
 		--np--dialog--description--color--inverse: var(--np--color--light--day--inverse);
@@ -1964,6 +2007,12 @@
 		--np--code--color--lightest: var(--np--color--lightest--day);
 		--np--code--color--link: var(--np--color--link--day);
 		--np--code--color--highlight: var(--np--color--highlight--day);
+		--np--contents--color: var(--np--color--light--day);
+		--np--contents--color--active: var(--np--color--link--day);
+		--np--contents--heading--color: var(--np--color--day);
+		--np--contents--background-color: var(--np--background-color--day);
+		--np--contents--rail--color: var(--np--border-color--day);
+		--np--contents--indicator--color: var(--np--color--link--day);
 		--np--dialog--background-color: var(--np--background-color--raised--day);
 		--np--dialog--color: var(--np--color--day);
 		--np--dialog--description--color: var(--np--color--light--day);
@@ -2220,6 +2269,12 @@
 		--np--code--color--lightest--inverse: var(--np--color--lightest--night--inverse);
 		--np--code--color--link--inverse: var(--np--color--link--night--inverse);
 		--np--code--color--highlight--inverse: var(--np--color--highlight--night--inverse);
+		--np--contents--color--inverse: var(--np--color--light--night--inverse);
+		--np--contents--color--active--inverse: var(--np--color--link--night--inverse);
+		--np--contents--heading--color--inverse: var(--np--color--night--inverse);
+		--np--contents--background-color--inverse: var(--np--background-color--night--inverse);
+		--np--contents--rail--color--inverse: var(--np--border-color--night--inverse);
+		--np--contents--indicator--color--inverse: var(--np--color--link--night--inverse);
 		--np--dialog--background-color--inverse: var(--np--background-color--raised--night--inverse);
 		--np--dialog--color--inverse: var(--np--color--night--inverse);
 		--np--dialog--description--color--inverse: var(--np--color--light--night--inverse);
@@ -2410,6 +2465,12 @@
 		--np--code--color--lightest: var(--np--color--lightest--night);
 		--np--code--color--link: var(--np--color--link--night);
 		--np--code--color--highlight: var(--np--color--highlight--night);
+		--np--contents--color: var(--np--color--light--night);
+		--np--contents--color--active: var(--np--color--link--night);
+		--np--contents--heading--color: var(--np--color--night);
+		--np--contents--background-color: var(--np--background-color--night);
+		--np--contents--rail--color: var(--np--border-color--night);
+		--np--contents--indicator--color: var(--np--color--link--night);
 		--np--dialog--background-color: var(--np--background-color--raised--night);
 		--np--dialog--color: var(--np--color--night);
 		--np--dialog--description--color: var(--np--color--light--night);

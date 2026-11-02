@@ -19,7 +19,7 @@ export const CodeDiv = styled.div<{ $clickable?: boolean; $inlined?: boolean; $f
   border: ${({ $inlined }) => ($inlined ? "none" : `1px solid ${getToken("code.borderColor:base")}`)};
   border-radius: ${({ $inlined }) => ($inlined ? "0" : getToken("code.borderRadius:base"))};
   box-shadow: ${({ $inlined }) => ($inlined ? "none" : getToken("code.boxShadow:base"))};
-  max-width: 720px;
+  max-width: ${getToken("code.maxWidth:base")};
   overflow: hidden;
 
   /* fit: size the card to its content; the code and the Show more toggle stack. */

@@ -1,0 +1,33 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "../../../src/components/Story"
+import Install from "../../../src/components/Install"
+import ComponentDocs from "../../../src/components/ComponentDocs"
+
+<Meta title="Components/Contents" />
+
+<ComponentDocs component="Contents">
+
+<StoryHeader
+  title="Contents"
+  description="Contents: the in-page table of contents beside a long page, nested section links under a sticky heading, with scroll-spy marking the section in view."
+  repos={[
+    { name: "@niceprototypes/contents", url: "https://github.com/niceprototypes/nice-ux/tree/main/packages/contents", license: "MIT" },
+  ]}
+/>
+
+<Install package="contents" />
+
+```jsx
+import Contents from "@niceprototypes/contents"
+
+<Contents
+  items={[
+    { id: "docs", label: "Docs" },
+    { id: "props", label: "Props", items: [{ id: "size", label: "size" }] },
+  ]}
+/>
+```
+
+Each `id` is the id of a section on the page. Scroll-spy marks the section whose top has passed the upper quarter of the viewport; a click scrolls smoothly to its section. Give the sections a `scroll-margin-top` to clear a fixed header. This page's own Contents column is one.
+
+</ComponentDocs>

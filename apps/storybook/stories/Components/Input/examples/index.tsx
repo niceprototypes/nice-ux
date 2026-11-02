@@ -1,6 +1,6 @@
 // Input example configs — one ComponentExample per facet, shaped like Button's
-// (src/dataTables/data/tables/componentDemoTable). Key order in `inputExamples`
-// is the Input/Docs-page order; each Input/<facet>.mdx renders one entry.
+// (src/dataTables/data/tables/componentDemoTable). ComponentDocs renders each entry as a section of the
+// Input docs page, sorted by name.
 import { useState } from "react"
 import Input from "@niceprototypes/input"
 import Button from "@niceprototypes/button"
@@ -418,7 +418,7 @@ export const inputDir = {
       : `<Input dir="${variant}" />`,
 } satisfies ComponentExample
 
-/** Every Input example facet — key order is the Input/Docs-page order. */
+/** Every Input example facet — each one a section of the Input docs page. */
 export const inputExamples = {
   type: inputType,
   placeholder: inputPlaceholder,
@@ -437,5 +437,3 @@ export const inputExamples = {
   dir: inputDir,
 } satisfies Record<string, ComponentExample>
 
-/** Input facets in Docs-page order. */
-export const inputExampleList: ComponentExample[] = Object.values(inputExamples)

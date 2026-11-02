@@ -1,6 +1,6 @@
 // Checkbox example configs — one ComponentExample per facet, shaped like Button's
-// (src/dataTables/data/tables/componentDemoTable). Key order in `checkboxExamples` is the
-// Checkbox/Docs-page order; each Checkbox/<facet>.mdx renders one entry.
+// (src/dataTables/data/tables/componentDemoTable). ComponentDocs renders each entry as a section of the
+// Checkbox docs page, sorted by name.
 import { useState } from "react"
 import Checkbox from "@niceprototypes/checkbox"
 import Flex from "@niceprototypes/flex"
@@ -212,7 +212,7 @@ export const checkboxTheme = {
   code: variant => `<Checkbox theme="${variant}" defaultChecked>Visible</Checkbox>`,
 } satisfies ComponentExample
 
-/** Every Checkbox example facet — key order is the Checkbox/Docs-page order. */
+/** Every Checkbox example facet — each one a section of the Checkbox docs page. */
 export const checkboxExamples = {
   checked: checkboxChecked,
   defaultChecked: checkboxDefaultChecked,
@@ -231,5 +231,3 @@ export const checkboxExamples = {
   theme: checkboxTheme,
 } satisfies Record<string, ComponentExample>
 
-/** Checkbox facets in Docs-page order. */
-export const checkboxExampleList: ComponentExample[] = Object.values(checkboxExamples)

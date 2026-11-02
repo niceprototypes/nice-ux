@@ -1,12 +1,14 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../src/components/Story"
 import Install from "../../../src/components/Install"
-import { ComponentDemoTable } from "../../../src/dataTables/components/demos/Components"
-import { buttonExampleList } from "./examples"
 import NewLines from "../../../src/components/NewLines"
 import Line from "../../../src/components/Line"
+import ComponentDocs from "../../../src/components/ComponentDocs"
+import { buttonExamples } from "./examples"
 
 <Meta title="Components/Forms/Button" />
+
+<ComponentDocs component="Button" examples={buttonExamples}>
 
 <StoryHeader
   title="Button"
@@ -27,4 +29,4 @@ import Button from "@niceprototypes/button"
 
 <NewLines count={3} />
 
-<ComponentDemoTable examples={buttonExampleList} />
+</ComponentDocs>

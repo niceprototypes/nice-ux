@@ -2,8 +2,11 @@ import { Meta, Stories } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../src/components/Story"
 import Install from "../../../src/components/Install"
 import * as GridStories from "./Grid.stories"
+import ComponentDocs from "../../../src/components/ComponentDocs"
 
 <Meta of={GridStories} />
+
+<ComponentDocs component="Grid">
 
 <StoryHeader
   title="Grid"
@@ -23,3 +26,5 @@ import { Grid, GridItem } from "@niceprototypes/grid"
 ```
 
 <Stories />
+
+</ComponentDocs>

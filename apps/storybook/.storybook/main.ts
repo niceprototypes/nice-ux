@@ -27,7 +27,7 @@ const packagesRoot = resolve(__dirname, "../../../packages")
  * Storybook addons) resolve to their built `dist/`. styles' root entry is its React entry.
  */
 const SOURCE_PACKAGES = [
-  "button", "calendar", "card", "checkbox", "code", "dialog", "field", "flex", "form", "grid", "head",
+  "button", "calendar", "card", "checkbox", "code", "contents", "dialog", "field", "flex", "form", "grid", "head",
   "image", "ink", "input", "lightbox", "line", "list", "listbox", "logo", "popover", "radio", "scroll",
   "select", "slider", "tabs", "tile", "toggle", "tooltip", "tree",
 ]
@@ -45,7 +45,9 @@ const sourceAliases = [
  */
 const config: StorybookConfig = {
   stories: [
-    "../stories/**/*.mdx",
+    // A component's prop sections (`*.section.mdx`) render inside its docs page
+    // (ComponentDocs), not as pages.
+    "../stories/**/!(*.section).mdx",
     "../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)",
     // Legacy Slider / Scroll docs pages, hidden until reworked; the CSF Playgrounds are indexed.
     "!../stories/Components/Slider/**/*.mdx",

@@ -97,8 +97,9 @@ const preview: Preview = {
           ["Docs", "Animation", "Borders", "Colors", ["*", "transformColor"], "Fonts", "Sizes", "*"],
           "Components",
           // Grouped folders first, then the flat component pages — as in Tokens.
-          // Each component (inside Forms or flat) orders Docs, Tokens, then props.
-          ["Forms", ["*", ["Docs", "Tokens", "*"]], "*", ["Docs", "Tokens", "*"]],
+          // Each component (inside Forms or flat) puts its Docs page (Docs, Tokens and every
+          // prop as sections) before its stories.
+          ["Forms", ["*", ["Docs", "*"]], "*", ["Docs", "*"]],
           "Bindings",
           ["useBreakpoint", "useDevice", "useTheme"],
           "Storybook",

@@ -1,6 +1,6 @@
 // Toggle example configs — one ComponentExample per facet, shaped like Button's
-// (src/dataTables/data/tables/componentDemoTable). Key order in `toggleExamples` is the
-// Toggle/Docs-page order; each Toggle/<facet>.mdx renders one entry.
+// (src/dataTables/data/tables/componentDemoTable). ComponentDocs renders each entry as a section of the
+// Toggle docs page, sorted by name.
 import { useState } from "react"
 import Toggle from "@niceprototypes/toggle"
 import Flex from "@niceprototypes/flex"
@@ -138,7 +138,7 @@ export const toggleTheme = {
   code: variant => `<Toggle theme="${variant}" defaultChecked>Notifications</Toggle>`,
 } satisfies ComponentExample
 
-/** Every Toggle example facet — key order is the Toggle/Docs-page order. */
+/** Every Toggle example facet — each one a section of the Toggle docs page. */
 export const toggleExamples = {
   checked: toggleChecked,
   defaultChecked: toggleDefaultChecked,
@@ -150,5 +150,3 @@ export const toggleExamples = {
   theme: toggleTheme,
 } satisfies Record<string, ComponentExample>
 
-/** Toggle facets in Docs-page order. */
-export const toggleExampleList: ComponentExample[] = Object.values(toggleExamples)

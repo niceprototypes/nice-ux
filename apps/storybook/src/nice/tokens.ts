@@ -1,4 +1,4 @@
-import { setTokens } from "@niceprototypes/styles"
+import { getToken as getCoreToken, setTokens } from "@niceprototypes/styles"
 import { TOKENS as THEME_TOKENS } from "@niceprototypes/storybook-theme"
 
 /**
@@ -15,6 +15,17 @@ const AppTokenMap = {
   lifecycleStep: {
     base: "1200ms",
     long: "2000ms",
+  },
+  docs: {
+    // The Contents column beside a component docs page (ComponentDocs) and the Contents story.
+    contentsWidth: "200px",
+    // The fixed storybook-navigation bar's height at laptop+ (its ReservedSpaceStyle): docs
+    // sections scroll to just below it.
+    barHeight: `calc(${getCoreToken("gap", "large")} * 2 + ${getCoreToken("size", "small")})`,
+  },
+  // Contents sticks a large gap below the navigation bar.
+  contents: {
+    top: `calc(${getCoreToken("gap", "large")} * 3 + ${getCoreToken("size", "small")})`,
   },
   backgroundColor: {
     dark: {

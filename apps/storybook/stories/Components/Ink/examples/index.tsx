@@ -1,6 +1,6 @@
 // Ink example configs — one ComponentExample per facet, shaped like Button's
-// (src/dataTables/data/tables/componentDemoTable). Key order in `inkExamples`
-// is the Ink/Docs-page order; each Ink/<facet>.mdx renders one entry.
+// (src/dataTables/data/tables/componentDemoTable). ComponentDocs renders each entry as a section of the
+// Ink docs page, sorted by name.
 import Ink from "@niceprototypes/ink"
 import Flex from "@niceprototypes/flex"
 import { Theme, getToken } from "@niceprototypes/styles"
@@ -71,7 +71,7 @@ export const inkWordBreak = {
   code: variant => (variant === "normal" ? `<Ink>{url}</Ink>` : `<Ink wordBreak="${variant}">{url}</Ink>`),
 } satisfies ComponentExample
 
-/** Every new Ink example facet — key order is the Ink/Docs-page order. */
+/** Every new Ink example facet — each one a section of the Ink docs page. */
 export const inkExamples = {
   children: inkChildren,
   theme: inkTheme,
@@ -79,5 +79,3 @@ export const inkExamples = {
   wordBreak: inkWordBreak,
 } satisfies Record<string, ComponentExample>
 
-/** Ink facets in Docs-page order. */
-export const inkExampleList: ComponentExample[] = Object.values(inkExamples)

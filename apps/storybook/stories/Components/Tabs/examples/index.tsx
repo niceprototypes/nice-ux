@@ -1,6 +1,6 @@
 // Tabs example configs — one ComponentExample per facet, shaped like Button's
-// (src/dataTables/data/tables/componentDemoTable). Key order in `tabsExamples` is the
-// Tabs/Docs-page order; each Tabs/<facet>.mdx renders one entry.
+// (src/dataTables/data/tables/componentDemoTable). ComponentDocs renders each entry as a section of the
+// Tabs docs page, sorted by name.
 import { useState } from "react"
 import Tabs, { type TabsItemType } from "@niceprototypes/tabs"
 import Input from "@niceprototypes/input"
@@ -203,7 +203,7 @@ export const tabsTheme = {
   code: variant => `<Tabs aria-label="Pages" items={pages} theme="${variant}" />`,
 } satisfies ComponentExample
 
-/** Every Tabs example facet — key order is the Tabs/Docs-page order. */
+/** Every Tabs example facet — each one a section of the Tabs docs page. */
 export const tabsExamples = {
   items: tabsItems,
   selected: tabsSelected,
@@ -219,5 +219,3 @@ export const tabsExamples = {
   theme: tabsTheme,
 } satisfies Record<string, ComponentExample>
 
-/** Tabs facets in Docs-page order. */
-export const tabsExampleList: ComponentExample[] = Object.values(tabsExamples)

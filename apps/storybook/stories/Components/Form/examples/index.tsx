@@ -1,6 +1,6 @@
 // Form example configs — one ComponentExample per facet, shaped like Button's
-// (src/dataTables/data/tables/componentDemoTable). Key order in `formExamples`
-// is the Form/Docs-page order; each Form/<facet>.mdx renders one entry.
+// (src/dataTables/data/tables/componentDemoTable). ComponentDocs renders each entry as a section of the
+// Form docs page, sorted by name.
 import * as React from "react"
 import { useState } from "react"
 import Form from "@niceprototypes/form"
@@ -241,7 +241,7 @@ export const formTheme = {
   code: variant => `<Form theme="${variant}">\n  …\n</Form>`,
 } satisfies ComponentExample
 
-/** Every Form example facet — key order is the Form/Docs-page order. */
+/** Every Form example facet — each one a section of the Form docs page. */
 export const formExamples = {
   children: formChildren,
   onSubmit: formOnSubmit,
@@ -254,8 +254,6 @@ export const formExamples = {
   theme: formTheme,
 } satisfies Record<string, ComponentExample>
 
-/** Form facets in Docs-page order. */
-export const formExampleList: ComponentExample[] = Object.values(formExamples)
 
 /** Props a Form lifecycle step drives: the controlled email value and the Field error. */
 type FormLifecycleProps = { value: string; error?: string }

@@ -1,6 +1,6 @@
 // Tooltip example configs — one ComponentExample per facet, shaped like Button's
-// (src/dataTables/data/tables/componentDemoTable). Key order in `tooltipExamples`
-// is the Tooltip/Docs-page order; each Tooltip/<facet>.mdx renders one entry.
+// (src/dataTables/data/tables/componentDemoTable). ComponentDocs renders each entry as a section of the
+// Tooltip docs page, sorted by name.
 import Tooltip from "@niceprototypes/tooltip"
 import Button from "@niceprototypes/button"
 import Icon from "@niceprototypes/icon"
@@ -70,12 +70,10 @@ export const tooltipAnchor = {
       : `<Tooltip content="…" anchor="${variant}">\n  <Button>Hover me</Button>\n</Tooltip>`,
 } satisfies ComponentExample
 
-/** Every new Tooltip example facet — key order is the Tooltip/Docs-page order. */
+/** Every new Tooltip example facet — each one a section of the Tooltip docs page. */
 export const tooltipExamples = {
   content: tooltipContent,
   children: tooltipChildren,
   anchor: tooltipAnchor,
 } satisfies Record<string, ComponentExample>
 
-/** Tooltip facets in Docs-page order. */
-export const tooltipExampleList: ComponentExample[] = Object.values(tooltipExamples)

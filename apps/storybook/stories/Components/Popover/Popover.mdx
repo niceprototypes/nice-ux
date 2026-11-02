@@ -1,13 +1,18 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../src/components/Story"
 import Install from "../../../src/components/Install"
-import { ComponentDemoTable } from "../../../src/dataTables/components/demos/Components"
-import { popoverExampleList, popoverLifecycleSteps, renderPopoverLifecycle } from "./examples"
+import { popoverLifecycleSteps, renderPopoverLifecycle } from "./examples"
 import LifecycleStory from "../../../src/components/LifecycleStory"
 import NewLines from "../../../src/components/NewLines"
 import Callout from "../../../src/components/Callout"
+import ComponentDocs from "../../../src/components/ComponentDocs"
+import { popoverExamples } from "./examples"
+
+export const sections = import.meta.glob("./*.section.mdx", { eager: true })
 
 <Meta title="Components/Popover" />
+
+<ComponentDocs component="Popover" examples={popoverExamples} sections={sections}>
 
 <StoryHeader
   title="Popover"
@@ -39,7 +44,6 @@ const [open, setOpen] = useState(false)
 
 <NewLines count={3} />
 
-<ComponentDemoTable examples={popoverExampleList} />
 
 <NewLines count={3} />
 
@@ -59,3 +63,5 @@ computeAnchorPosition(anchor.getBoundingClientRect(), "bottom", "start", 8)
 ```
 
 <Callout type="hint">Pass the trigger in `ignoreOutsideRefs` when it is not the anchor, or its pointerdown dismisses the popover before its own toggle runs.</Callout>
+
+</ComponentDocs>

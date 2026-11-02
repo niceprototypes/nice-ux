@@ -3,8 +3,14 @@ import { StoryHeader } from "../../../src/components/Story"
 import { IconDemoTable } from "../../../src/dataTables/components/demos/Icons"
 import Install from "../../../src/components/Install"
 import Ink from "../../../src/nice/Ink"
+import ComponentDocs from "../../../src/components/ComponentDocs"
+import { iconExamples } from "./examples"
+
+export const sections = import.meta.glob("./*.section.mdx", { eager: true })
 
 <Meta title="Components/Icon" />
+
+<ComponentDocs component="Icon" examples={iconExamples} sections={sections}>
 
 <StoryHeader
   title="Icon"
@@ -35,3 +41,4 @@ import Icon from "@niceprototypes/icon"
 
 <IconDemoTable codeColumns={[{ header: "Icon", code: (name) => `<Icon name="${name}" />` }]} />
 
+</ComponentDocs>

@@ -6,8 +6,13 @@ import { DEMO_CODE_COLUMNS } from "../../../src/components/DataTable"
 import { InteractiveSlider } from "./Slider.services"
 import Install from "../../../src/components/Install"
 import Line from "../../../src/components/Line"
+import ComponentDocs from "../../../src/components/ComponentDocs"
+
+export const sections = import.meta.glob("./*.section.mdx", { eager: true })
 
 <Meta title="Components/Slider" />
+
+<ComponentDocs component="Slider" sections={sections}>
 
 <StoryHeader
   title="Slider"
@@ -46,3 +51,4 @@ import Slider from "@niceprototypes/slider"
         ]}
 />
 
+</ComponentDocs>

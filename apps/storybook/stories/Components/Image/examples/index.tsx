@@ -1,6 +1,6 @@
 // Image example configs — one ComponentExample per facet, shaped like Button's
-// (src/dataTables/data/tables/componentDemoTable). Key order in `imageExamples`
-// is the Image/Docs-page order; each Image/<facet>.mdx renders one entry.
+// (src/dataTables/data/tables/componentDemoTable). ComponentDocs renders each entry as a section of the
+// Image docs page, sorted by name.
 import Image from "@niceprototypes/image"
 import Ink from "@niceprototypes/ink"
 import Flex from "@niceprototypes/flex"
@@ -146,7 +146,7 @@ export const imageChildren = {
 </Image>`,
 } satisfies ComponentExample
 
-/** Every new Image example facet — key order is the Image/Docs-page order. */
+/** Every new Image example facet — each one a section of the Image docs page. */
 export const imageExamples = {
   src: imageSrc,
   alt: imageAlt,
@@ -156,5 +156,3 @@ export const imageExamples = {
   children: imageChildren,
 } satisfies Record<string, ComponentExample>
 
-/** Image facets in Docs-page order. */
-export const imageExampleList: ComponentExample[] = Object.values(imageExamples)

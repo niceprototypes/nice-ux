@@ -58,7 +58,7 @@ export const storyNavigationSequences: StoryNavigationSequence[] = [
  * Sequences the addon derives from Storybook's own index, so they are never
  * listed by hand and new pages join automatically. Components: every component
  * folder — the Forms group, then the flat components — chained as one
- * continuous sequence in sidebar order (`storySort`: Docs, Tokens, then props).
+ * continuous sequence in sidebar order (`storySort`: Docs, then the stories).
  * Within a folder the back/next links name the page; at a folder boundary they
  * name the neighbouring folder. The `Components` landing page is not in it.
  */

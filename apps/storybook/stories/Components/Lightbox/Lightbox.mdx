@@ -10,8 +10,14 @@ import Install from "../../../src/components/Install"
 import Line from "../../../src/components/Line"
 
 export const DEMO_IMAGE = resolveVendorImage({ src: "10", width: "800px", height: "600px" })
+import ComponentDocs from "../../../src/components/ComponentDocs"
+import { lightboxExamples } from "./examples"
+
+export const sections = import.meta.glob("./*.section.mdx", { eager: true })
 
 <Meta title="Components/Lightbox" />
+
+<ComponentDocs component="Lightbox" examples={lightboxExamples} sections={sections}>
 
 <StoryHeader
   title="Lightbox"
@@ -67,3 +73,4 @@ import Lightbox from "@niceprototypes/lightbox"
         ]}
 />
 
+</ComponentDocs>

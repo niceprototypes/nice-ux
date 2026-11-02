@@ -1,13 +1,15 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../src/components/Story"
 import Install from "../../../src/components/Install"
-import { ComponentDemoTable } from "../../../src/dataTables/components/demos/Components"
-import { inputExampleList } from "./examples"
 import NewLines from "../../../src/components/NewLines"
 import Callout from "../../../src/components/Callout"
 import Ink from "../../../src/nice/Ink"
+import ComponentDocs from "../../../src/components/ComponentDocs"
+import { inputExamples } from "./examples"
 
 <Meta title="Components/Forms/Input" />
+
+<ComponentDocs component="Input" examples={inputExamples}>
 
 <StoryHeader
   title="Input"
@@ -29,7 +31,6 @@ import Input from "@niceprototypes/input"
 
 <NewLines count={3} />
 
-<ComponentDemoTable examples={inputExampleList} />
 
 <NewLines count={3} />
 
@@ -58,3 +59,5 @@ import Input from "@niceprototypes/input"
 <Ink><Ink code>width</Ink> <Ink>sizes the chrome from the</Ink> <Ink code>input.width</Ink> <Ink>scale. Numeric variants hold that many characters at every</Ink> <Ink code>size</Ink><Ink>, so the width hints at the expected answer length.</Ink> <Ink code>full</Ink> <Ink>(default) fills the container.</Ink></Ink>
 
 <Callout type="hint">`className` and `style` style the wrapper; `ref`, `id` and `aria-*` go to the native control.</Callout>
+
+</ComponentDocs>

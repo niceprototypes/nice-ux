@@ -1,13 +1,15 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../src/components/Story"
 import Install from "../../../src/components/Install"
-import { ComponentDemoTable } from "../../../src/dataTables/components/demos/Components"
-import { dateFieldExampleList } from "./examples"
 import NewLines from "../../../src/components/NewLines"
 import Callout from "../../../src/components/Callout"
 import Ink from "../../../src/nice/Ink"
+import ComponentDocs from "../../../src/components/ComponentDocs"
+import { dateFieldExamples } from "./examples"
 
 <Meta title="Components/Forms/DateField" />
+
+<ComponentDocs component="DateField" examples={dateFieldExamples}>
 
 <StoryHeader
   title="DateField"
@@ -26,7 +28,6 @@ import { DateField } from "@niceprototypes/calendar"
 
 <NewLines count={3} />
 
-<ComponentDemoTable examples={dateFieldExampleList} />
 
 <NewLines count={3} />
 
@@ -55,3 +56,5 @@ import { DateField } from "@niceprototypes/calendar"
 ```
 
 <Callout type="hint">Forms receive the ISO date from the hidden input — never the locale-formatted text in the field.</Callout>
+
+</ComponentDocs>

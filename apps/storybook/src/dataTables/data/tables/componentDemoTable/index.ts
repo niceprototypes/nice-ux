@@ -1,7 +1,8 @@
-// Data for the ComponentDemoTable — one file per example facet (each an
-// `export const` config), for every component demoed (Button, Flex, …). Add a
-// facet by dropping a new `{component}{Facet}.tsx` here and listing it in the
-// relevant `{component}Examples` map below; key order is the Docs-page order.
+// Example facets — one file per facet (each an `export const` config), for
+// every component demoed (Button, Flex, …). Add a facet by dropping a new
+// `{component}{Facet}.tsx` here and listing it in the relevant
+// `{component}Examples` map below; ComponentDocs renders each entry as a
+// section of that component's docs page, sorted by name.
 import type { ComponentExample } from "../../../components/demos/Components"
 import { buttonFilled } from "./buttonFilled"
 import { buttonSize } from "./buttonSize"
@@ -101,7 +102,7 @@ export {
   flexChildren,
 }
 
-/** Every Button example facet — key order is the Button/Docs-page order. */
+/** Every Button example facet — each one a section of the Button docs page. */
 export const buttonExamples = {
   filled: buttonFilled,
   size: buttonSize,
@@ -138,10 +139,8 @@ export const buttonExamples = {
   ariaCurrent: buttonAriaCurrent,
 } satisfies Record<string, ComponentExample>
 
-/** Button facets in Docs-page order. */
-export const buttonExampleList: ComponentExample[] = Object.values(buttonExamples)
 
-/** Every Flex example facet — key order is the Flex/Docs-page order. */
+/** Every Flex example facet — each one a section of the Flex docs page. */
 export const flexExamples = {
   direction: flexDirection,
   gap: flexGap,
@@ -159,5 +158,3 @@ export const flexExamples = {
   children: flexChildren,
 } satisfies Record<string, ComponentExample>
 
-/** Flex facets in Docs-page order. */
-export const flexExampleList: ComponentExample[] = Object.values(flexExamples)

@@ -1,0 +1,6 @@
+{
+  "$schema": "../config-exports/src/schema.json",
+  "description": "Contents: the in-page table of contents beside a long page, nested section links under a sticky heading, with scroll-spy marking the section in view.",
+  "default": "Contents",
+  "components": ["Contents"]
+}

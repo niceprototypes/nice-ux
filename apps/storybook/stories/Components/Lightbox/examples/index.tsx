@@ -1,6 +1,6 @@
 // Lightbox example configs — one ComponentExample per facet, shaped like Button's
-// (src/dataTables/data/tables/componentDemoTable). Key order in `lightboxExamples`
-// is the Lightbox/Docs-page order; each Lightbox/<facet>.mdx renders one entry.
+// (src/dataTables/data/tables/componentDemoTable). ComponentDocs renders each entry as a section of the
+// Lightbox docs page, sorted by name.
 import Lightbox from "@niceprototypes/lightbox"
 import Ink from "@niceprototypes/ink"
 import { resolveVendorImage } from "@niceprototypes/image-vendor"
@@ -79,12 +79,10 @@ export const lightboxAlt = {
       : `<Lightbox imageUrl={url}>\n  …\n</Lightbox>`,
 } satisfies ComponentExample
 
-/** Every new Lightbox example facet — key order is the Lightbox/Docs-page order. */
+/** Every new Lightbox example facet — each one a section of the Lightbox docs page. */
 export const lightboxExamples = {
   children: lightboxChildren,
   imageUrl: lightboxImageUrl,
   alt: lightboxAlt,
 } satisfies Record<string, ComponentExample>
 
-/** Lightbox facets in Docs-page order. */
-export const lightboxExampleList: ComponentExample[] = Object.values(lightboxExamples)

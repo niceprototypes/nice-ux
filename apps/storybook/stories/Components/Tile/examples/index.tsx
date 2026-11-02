@@ -1,6 +1,6 @@
 // Tile example configs — one ComponentExample per facet, shaped like Button's
-// (src/dataTables/data/tables/componentDemoTable). Key order in `tileExamples`
-// is the Tile/Docs-page order; each Tile/<facet>.mdx renders one entry.
+// (src/dataTables/data/tables/componentDemoTable). ComponentDocs renders each entry as a section of the
+// Tile docs page, sorted by name.
 import Tile from "@niceprototypes/tile"
 import Icon from "@niceprototypes/icon"
 import Button from "@niceprototypes/button"
@@ -297,7 +297,7 @@ export const tileTheme = {
   code: variant => `<Tile title="Title" description="Description" theme="${variant}" />`,
 } satisfies ComponentExample
 
-/** Every new Tile example facet — key order is the Tile/Docs-page order. */
+/** Every new Tile example facet — each one a section of the Tile docs page. */
 export const tileExamples = {
   children: tileChildren,
   contentTop: tileContentTop,
@@ -318,5 +318,3 @@ export const tileExamples = {
   theme: tileTheme,
 } satisfies Record<string, ComponentExample>
 
-/** Tile facets in Docs-page order. */
-export const tileExampleList: ComponentExample[] = Object.values(tileExamples)

@@ -2,8 +2,14 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../src/components/Story"
 import Install from "../../../src/components/Install"
 import Ink from "../../../src/nice/Ink"
+import ComponentDocs from "../../../src/components/ComponentDocs"
+import { inkExamples } from "./examples"
+
+export const sections = import.meta.glob("./*.section.mdx", { eager: true })
 
 <Meta title="Components/Ink" />
+
+<ComponentDocs component="Ink" examples={inkExamples} sections={sections}>
 
 <StoryHeader
   title="Ink"
@@ -31,3 +37,4 @@ import Ink from "@niceprototypes/ink"
 </Ink>
 ```
 
+</ComponentDocs>

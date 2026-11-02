@@ -7,8 +7,14 @@ import { DEMO_CODE_COLUMNS } from "../../../src/components/DataTable"
 import * as TileStories from "./Tile.stories"
 import Install from "../../../src/components/Install"
 import Line from "../../../src/components/Line"
+import ComponentDocs from "../../../src/components/ComponentDocs"
+import { tileExamples } from "./examples"
+
+export const sections = import.meta.glob("./*.section.mdx", { eager: true })
 
 <Meta of={TileStories} />
+
+<ComponentDocs component="Tile" examples={tileExamples} sections={sections}>
 
 <StoryHeader
   title="Tile"
@@ -63,3 +69,4 @@ import Tile from "@niceprototypes/tile"
 
 <Controls of={TileStories.Playground} />
 
+</ComponentDocs>

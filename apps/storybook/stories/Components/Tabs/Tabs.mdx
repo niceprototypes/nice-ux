@@ -1,12 +1,14 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../src/components/Story"
 import Install from "../../../src/components/Install"
-import { ComponentDemoTable } from "../../../src/dataTables/components/demos/Components"
-import { tabsExampleList } from "./examples"
 import NewLines from "../../../src/components/NewLines"
 import Callout from "../../../src/components/Callout"
+import ComponentDocs from "../../../src/components/ComponentDocs"
+import { tabsExamples } from "./examples"
 
 <Meta title="Components/Tabs" />
+
+<ComponentDocs component="Tabs" examples={tabsExamples}>
 
 <StoryHeader
   title="Tabs"
@@ -27,7 +29,6 @@ import Tabs from "@niceprototypes/tabs"
 
 <NewLines count={3} />
 
-<ComponentDemoTable examples={tabsExampleList} />
 
 <NewLines count={3} />
 
@@ -59,3 +60,5 @@ Only the selected tab is in the tab order. On a focused tab:
 Use it controlled, with `selected` and `onSelect(id, event)`, or uncontrolled with `defaultSelected`. Padding, gap, font size, colors, the row border, the selected underline and the focus ring are component tokens and follow the active theme. `variant="pill"` replaces the row border and underline with a rounded border per tab; `gap` and `justifyContent` set the spacing and placement of the tabs and `end` in the row.
 
 <Callout type="hint">Give the tab list a name with aria-label, and give an input inside a tab label its own aria-label.</Callout>
+
+</ComponentDocs>

@@ -1,7 +1,6 @@
 // DateField example configs — one ComponentExample per facet, shaped like
-// Button's (src/dataTables/data/tables/componentDemoTable). Key order in
-// `dateFieldExamples` is the DateField/Docs-page order; each
-// DateField/<facet>.mdx renders one entry.
+// Button's (src/dataTables/data/tables/componentDemoTable). ComponentDocs renders each entry as a section of the
+// DateField docs page, sorted by name.
 import { useState } from "react"
 import { DateField } from "@niceprototypes/calendar"
 import { Field } from "@niceprototypes/field"
@@ -224,7 +223,7 @@ export const dateFieldLocale = {
   code: variant => `<DateField aria-label="Start date" locale="${variant}" />`,
 } satisfies ComponentExample
 
-/** Every DateField example facet — key order is the DateField/Docs-page order. */
+/** Every DateField example facet — each one a section of the DateField docs page. */
 export const dateFieldExamples = {
   value: dateFieldValue,
   name: dateFieldName,
@@ -235,5 +234,3 @@ export const dateFieldExamples = {
   locale: dateFieldLocale,
 } satisfies Record<string, ComponentExample>
 
-/** DateField facets in Docs-page order. */
-export const dateFieldExampleList: ComponentExample[] = Object.values(dateFieldExamples)

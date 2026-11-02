@@ -7,8 +7,14 @@ import { DataTableRow } from "../../../src/components/DataTable"
 import { DEMO_CODE_COLUMNS } from "../../../src/components/DataTable"
 import Install from "../../../src/components/Install"
 import Line from "../../../src/components/Line"
+import ComponentDocs from "../../../src/components/ComponentDocs"
+import { tooltipExamples } from "./examples"
+
+export const sections = import.meta.glob("./*.section.mdx", { eager: true })
 
 <Meta title="Components/Tooltip" />
+
+<ComponentDocs component="Tooltip" examples={tooltipExamples} sections={sections}>
 
 <StoryHeader
   title="Tooltip"
@@ -52,3 +58,5 @@ import Tooltip from "@niceprototypes/tooltip"
     `<Tooltip content="Copy to clipboard">\n  <Button>Hover me</Button>\n</Tooltip>`,
   ]}
 />
+
+</ComponentDocs>

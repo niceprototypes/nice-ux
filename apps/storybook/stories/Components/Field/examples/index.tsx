@@ -1,6 +1,6 @@
 // Field example configs — one ComponentExample per facet, shaped like Button's
-// (src/dataTables/data/tables/componentDemoTable). Key order in `fieldExamples`
-// is the Field/Docs-page order; each Field/<facet>.mdx renders one entry.
+// (src/dataTables/data/tables/componentDemoTable). ComponentDocs renders each entry as a section of the
+// Field docs page, sorted by name.
 import { useState } from "react"
 import { Field, Fieldset, useField, mergeDescribedBy } from "@niceprototypes/field"
 import Input from "@niceprototypes/input"
@@ -357,7 +357,7 @@ export const fieldUseField = {
 }`,
 } satisfies ComponentExample
 
-/** Every Field example facet — key order is the Field/Docs-page order. */
+/** Every Field example facet — each one a section of the Field docs page. */
 export const fieldExamples = {
   label: fieldLabel,
   description: fieldDescription,
@@ -372,5 +372,3 @@ export const fieldExamples = {
   theme: fieldTheme,
 } satisfies Record<string, ComponentExample>
 
-/** Field facets in Docs-page order. */
-export const fieldExampleList: ComponentExample[] = Object.values(fieldExamples)

@@ -1,0 +1,35 @@
+import { StoryHeader } from "../../../src/components/Story"
+import Icon from "@niceprototypes/icon"
+import Ink from "../../../src/nice/Ink"
+import { DataTableRow } from "../../../src/components/DataTable"
+import { DEMO_CODE_COLUMNS } from "../../../src/components/DataTable"
+
+export const label = "variant"
+
+<StoryHeader title="variant" />
+
+<Ink><Ink color="light">Selects which variant of the icon to render —</Ink> <Ink color="light" code>base</Ink> <Ink color="light">(the default outline) or</Ink> <Ink color="light" code>fill</Ink> <Ink color="light">(the filled version). Icons may ship additional variants; requesting one an icon does not have falls back to</Ink> <Ink color="light" code>base</Ink><Ink color="light">.</Ink></Ink>
+
+<DataTableRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+          <Icon
+      size="larger"
+      variant="base"
+      name="message"
+    />,
+          `<Icon size="larger" />`,
+        ]}
+/>
+
+<DataTableRow
+  columns={DEMO_CODE_COLUMNS}
+  values={[
+          <Icon
+      size="larger"
+      variant="fill"
+      name="message"
+    />,
+          `<Icon size="larger" variant="fill" />`,
+        ]}
+/>

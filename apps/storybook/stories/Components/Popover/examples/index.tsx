@@ -1,6 +1,6 @@
 // Popover example configs — one ComponentExample per facet, shaped like Button's
-// (src/dataTables/data/tables/componentDemoTable). Key order in `popoverExamples`
-// is the Popover/Docs-page order; each Popover/<facet>.mdx renders one entry.
+// (src/dataTables/data/tables/componentDemoTable). ComponentDocs renders each entry as a section of the
+// Popover docs page, sorted by name.
 import * as React from "react"
 import { useRef, useState } from "react"
 import Popover from "@niceprototypes/popover"
@@ -284,7 +284,7 @@ export const popoverTheme = {
   code: variant => `<Popover open={open} anchorRef={anchorRef} theme="${variant}">\n  …\n</Popover>`,
 } satisfies ComponentExample
 
-/** Every Popover example facet — key order is the Popover/Docs-page order. */
+/** Every Popover example facet — each one a section of the Popover docs page. */
 export const popoverExamples = {
   open: popoverOpen,
   anchorRef: popoverAnchorRef,
@@ -299,8 +299,6 @@ export const popoverExamples = {
   theme: popoverTheme,
 } satisfies Record<string, ComponentExample>
 
-/** Popover facets in Docs-page order. */
-export const popoverExampleList: ComponentExample[] = Object.values(popoverExamples)
 
 /** Props a Popover lifecycle step drives: open, and the side it opens on. */
 type PopoverLifecycleProps = { open: boolean; position?: PopoverPositionType }

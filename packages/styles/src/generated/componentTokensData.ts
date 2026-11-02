@@ -327,6 +327,9 @@ const componentTokensData: ComponentTokensData = {
       "link": "var(--np--color--link)",
       "highlight": "var(--np--color--highlight)"
     },
+    "maxWidth": {
+      "base": "720px"
+    },
     "maxHeight": {
       "base": "200px"
     },
@@ -340,6 +343,60 @@ const componentTokensData: ComponentTokensData = {
       "tag": "hsla(268, 50%, 48%, 1)",
       "constant": "hsla(198, 70%, 33%, 1)",
       "comment": "hsla(210, 5%, 45%, 1)"
+    }
+  },
+  "contents": {
+    "color": {
+      "base": "var(--np--color--light)",
+      "active": "var(--np--color--link)"
+    },
+    "fontWeight": {
+      "base": "var(--np--font-weight)",
+      "active": "var(--np--font-weight--medium)"
+    },
+    "heading": {
+      "color": {
+        "base": "var(--np--color)"
+      },
+      "fontWeight": {
+        "base": "var(--np--font-weight--semibold)"
+      },
+      "paddingBlock": {
+        "base": "var(--np--gap--small)"
+      }
+    },
+    "backgroundColor": {
+      "base": "var(--np--background-color)"
+    },
+    "rail": {
+      "color": {
+        "base": "var(--np--border-color)"
+      },
+      "width": {
+        "base": "var(--np--border-width)"
+      }
+    },
+    "indicator": {
+      "color": {
+        "base": "var(--np--color--link)"
+      },
+      "width": {
+        "base": "var(--np--border-width--large)"
+      }
+    },
+    "item": {
+      "paddingBlock": {
+        "base": "var(--np--gap--smaller)"
+      },
+      "paddingInline": {
+        "base": "var(--np--gap--small)"
+      }
+    },
+    "indent": {
+      "base": "var(--np--gap)"
+    },
+    "top": {
+      "base": "var(--np--gap--large)"
     }
   },
   "dialog": {

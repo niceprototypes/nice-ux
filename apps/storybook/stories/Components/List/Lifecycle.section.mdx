@@ -1,0 +1,15 @@
+import { StoryHeader } from "../../../src/components/Story"
+import LifecycleStory from "../../../src/components/LifecycleStory"
+import { renderListLifecycle, listLifecycleSteps } from "./examples"
+
+export const label = "lifecycle"
+
+<StoryHeader
+  title="lifecycle"
+  description="A List of plans driven through the states its ListItem props reach, looping: rest, active, selected, disabled."
+/>
+
+<LifecycleStory
+  steps={listLifecycleSteps}
+  render={renderListLifecycle}
+/>

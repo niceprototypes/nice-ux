@@ -37,6 +37,9 @@
     "link": "var(--np--color--link)",
     "highlight": "var(--np--color--highlight)"
   },
+  "maxWidth": {
+    "base": "720px"
+  },
   "maxHeight": {
     "base": "200px"
   },

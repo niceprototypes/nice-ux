@@ -1,12 +1,14 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../src/components/Story"
 import Install from "../../../src/components/Install"
-import { ComponentDemoTable } from "../../../src/dataTables/components/demos/Components"
-import { toggleExampleList } from "./examples"
 import NewLines from "../../../src/components/NewLines"
 import Callout from "../../../src/components/Callout"
+import ComponentDocs from "../../../src/components/ComponentDocs"
+import { toggleExamples } from "./examples"
 
 <Meta title="Components/Forms/Toggle" />
+
+<ComponentDocs component="Toggle" examples={toggleExamples}>
 
 <StoryHeader
   title="Toggle"
@@ -25,7 +27,6 @@ import Toggle from "@niceprototypes/toggle"
 
 <NewLines count={3} />
 
-<ComponentDemoTable examples={toggleExampleList} />
 
 <NewLines count={3} />
 
@@ -69,3 +70,5 @@ The thumb slides over the `toggle.transitionDuration` token, and doesn't animate
 ```
 
 <Callout type="hint">Toggle applies a change immediately, like a light switch. For a choice that is only applied when a form is submitted, use a checkbox.</Callout>
+
+</ComponentDocs>

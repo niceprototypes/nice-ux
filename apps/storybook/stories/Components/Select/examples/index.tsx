@@ -1,6 +1,6 @@
 // Select example configs — one ComponentExample per facet, shaped like Button's
-// (src/dataTables/data/tables/componentDemoTable). Key order in `selectExamples`
-// is the Select/Docs-page order; each Select/<facet>.mdx renders one entry.
+// (src/dataTables/data/tables/componentDemoTable). ComponentDocs renders each entry as a section of the
+// Select docs page, sorted by name.
 import Select from "@niceprototypes/select"
 import { Field } from "@niceprototypes/field"
 import Icon from "@niceprototypes/icon"
@@ -288,7 +288,7 @@ export const selectInsideField = {
 </Field>`,
 } satisfies ComponentExample
 
-/** Every Select example facet — key order is the Select/Docs-page order. */
+/** Every Select example facet — each one a section of the Select docs page. */
 export const selectExamples = {
   native: selectNative,
   options: selectOptions,
@@ -300,8 +300,6 @@ export const selectExamples = {
   insideField: selectInsideField,
 } satisfies Record<string, ComponentExample>
 
-/** Select facets in Docs-page order. */
-export const selectExampleList: ComponentExample[] = Object.values(selectExamples)
 
 /** Props a Select lifecycle step drives: the controlled value, disabled, and the Field's invalid. */
 type SelectLifecycleProps = { value: string; disabled?: boolean; invalid?: boolean }

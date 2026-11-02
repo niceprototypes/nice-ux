@@ -1,6 +1,6 @@
 // Code example configs — one ComponentExample per facet, shaped like Button's
-// (src/dataTables/data/tables/componentDemoTable). Key order in `codeExamples`
-// is the Code/Docs-page order; each Code/<facet>.mdx renders one entry.
+// (src/dataTables/data/tables/componentDemoTable). ComponentDocs renders each entry as a section of the
+// Code docs page, sorted by name.
 import Code from "@niceprototypes/code"
 import type { ComponentExample } from "./examples.types"
 
@@ -128,7 +128,27 @@ export const codeMargin = {
     variant === "large" ? `<Code code={source} language="bash" />` : `<Code code={source} language="bash" margin="${variant}" />`,
 } satisfies ComponentExample
 
-/** Every new Code example facet — key order is the Code/Docs-page order. */
+/** Enough lines to pass the collapsed height. */
+const longSource = Array.from({ length: 24 }, (_, index) => `const line${index + 1} = items[${index}]`).join("\n")
+
+export const codeMaxHeight = {
+  name: "maxHeight",
+  description:
+    "Collapsed height of a card block, as a code.maxHeight token variant. Taller code is cut off with a fade and a Show more / Show less toggle; shorter code renders in full. \"none\" never collapses.",
+  variants: ["base", "none"],
+  default: "base",
+  preview: variant => (
+    <Code
+      code={longSource}
+      language="tsx"
+      maxHeight={variant}
+    />
+  ),
+  code: variant =>
+    variant === "base" ? `<Code code={source} language="tsx" />` : `<Code code={source} language="tsx" maxHeight="none" />`,
+} satisfies ComponentExample
+
+/** Every new Code example facet — each one a section of the Code docs page. */
 export const codeExamples = {
   code: codeCode,
   language: codeLanguage,
@@ -137,7 +157,6 @@ export const codeExamples = {
   inlined: codeInlined,
   fit: codeFit,
   margin: codeMargin,
+  maxHeight: codeMaxHeight,
 } satisfies Record<string, ComponentExample>
 
-/** Code facets in Docs-page order. */
-export const codeExampleList: ComponentExample[] = Object.values(codeExamples)

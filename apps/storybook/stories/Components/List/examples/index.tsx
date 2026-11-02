@@ -1,6 +1,6 @@
 // List example configs — one ComponentExample per facet, shaped like Button's
-// (src/dataTables/data/tables/componentDemoTable). Key order in `listExamples`
-// is the List/Docs-page order; each List/<facet>.mdx renders one entry.
+// (src/dataTables/data/tables/componentDemoTable). ComponentDocs renders each entry as a section of the
+// List docs page, sorted by name.
 import { List, ListItem } from "@niceprototypes/list"
 import Flex from "@niceprototypes/flex"
 import Icon from "@niceprototypes/icon"
@@ -167,7 +167,7 @@ export const listItemDisabled = {
     variant === "true" ? `<ListItem disabled>Enterprise</ListItem>` : `<ListItem>Enterprise</ListItem>`,
 } satisfies ComponentExample
 
-/** Every List example facet — key order is the List/Docs-page order. */
+/** Every List example facet — each one a section of the List docs page. */
 export const listExamples = {
   children: listChildren,
   scrollable: listScrollable,
@@ -180,8 +180,6 @@ export const listExamples = {
   itemDisabled: listItemDisabled,
 } satisfies Record<string, ComponentExample>
 
-/** List facets in Docs-page order. */
-export const listExampleList: ComponentExample[] = Object.values(listExamples)
 
 /** Props a List lifecycle step drives: which item is active, which is selected, and whether the last is disabled. */
 type ListLifecycleProps = { active?: string; selected?: string; disabled?: boolean }

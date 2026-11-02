@@ -23,6 +23,7 @@ const componentNightTokensData: ComponentNightTokensData = {
       "comment": "hsla(210, 4%, 60%, 1)"
     }
   },
+  "contents": {},
   "dialog": {},
   "field": {},
   "icon": {},

@@ -1,12 +1,14 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../src/components/Story"
 import Install from "../../../src/components/Install"
-import { ComponentDemoTable } from "../../../src/dataTables/components/demos/Components"
-import { lineExampleList } from "./examples"
 import NewLines from "../../../src/components/NewLines"
 import Callout from "../../../src/components/Callout"
+import ComponentDocs from "../../../src/components/ComponentDocs"
+import { lineExamples } from "./examples"
 
 <Meta title="Components/Line" />
+
+<ComponentDocs component="Line" examples={lineExamples}>
 
 <StoryHeader
   title="Line"
@@ -30,7 +32,6 @@ import Line from "@niceprototypes/line"
 
 <NewLines count={3} />
 
-<ComponentDemoTable examples={lineExampleList} />
 
 <NewLines count={3} />
 
@@ -56,3 +57,5 @@ Everything about the dashes is a component token, so a theme or a single subtree
 ```
 
 <Callout type="hint">Put Line inside a positioned element. It frames that element exactly, whatever its size and corners.</Callout>
+
+</ComponentDocs>
