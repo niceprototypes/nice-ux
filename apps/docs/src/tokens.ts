@@ -12,4 +12,6 @@ export const getToken = setTokens({
   ...AppTokenMap,
   // Contents sticks one page padding below the top of the scrolling page (no navigation bar here).
   contents: { top: getCoreToken("gap", "large") },
+  // Code takes Adobe Fonts' Antarctican Mono (its kit is linked in index.html).
+  fontFamily: { ...AppTokenMap.fontFamily, code: '"antarctican-mono", sans-serif' },
 })
