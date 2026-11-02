@@ -6,18 +6,13 @@ import type { CatalogComponentType, CatalogPropType } from "../../catalog"
 import { getColumns } from "@niceprototypes/docs/data"
 import { ComponentTokenTable, componentPrefixesWithTokens, type ComponentPrefixWithTokens } from "@niceprototypes/docs/dataTables/components/tokens/Components"
 import { buildExampleRows, type ComponentExample } from "@niceprototypes/docs/dataTables/components/demos/Components"
-import * as componentExamples from "@niceprototypes/docs/dataTables/data"
+import { componentExamples } from "@niceprototypes/docs/examples"
 import { DataTable } from "@niceprototypes/docs/components/DataTable"
 import { StoryHeader } from "@niceprototypes/docs/components/Story"
 import { StoryHeaderLevel } from "@niceprototypes/docs/components/Story/StoryHeader/StoryHeaderLevel"
 import Install from "@niceprototypes/docs/components/Install"
 import Code from "@niceprototypes/docs/nice/Code"
 
-/** A component's live examples by facet (Button's `size`, `icon`, …): its `{component}Examples` map, if it has one. */
-const examplesOf = (name: string): Record<string, ComponentExample> => {
-  const key = `${name.charAt(0).toLowerCase()}${name.slice(1)}Examples`
-  return (componentExamples as Record<string, unknown>)[key] as Record<string, ComponentExample> | undefined ?? {}
-}
 
 /** A facet's live examples: each variant rendered beside its code. */
 const ExampleTable = ({ example }: { example: ComponentExample }) => (
@@ -62,7 +57,7 @@ const SectionHeading = ({ title }: { title: string }) => (
  * tokens when its prefix has any.
  */
 const ComponentPage: React.FC<{ component: CatalogComponentType }> = ({ component }) => {
-  const examples = examplesOf(component.name)
+  const examples = componentExamples[component.name] ?? {}
   const propNames = new Set(component.props.map(prop => prop.name))
   const prefix = `${component.name.charAt(0).toLowerCase()}${component.name.slice(1)}` as ComponentPrefixWithTokens
   const importLine = component.named

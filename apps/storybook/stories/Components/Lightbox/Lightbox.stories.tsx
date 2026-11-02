@@ -4,7 +4,7 @@ import Lightbox from "@niceprototypes/lightbox"
 import type { LightboxProps } from "@niceprototypes/lightbox"
 import Ink from "@niceprototypes/ink"
 import { resolveVendorImage } from "@niceprototypes/image-vendor"
-import { DemoImage } from "./Lightbox.styles"
+import { DemoImage } from "@niceprototypes/docs/examples/Lightbox/Lightbox.styles"
 
 const IMAGE = resolveVendorImage({ src: "10", width: "800px", height: "600px" }) ?? ""
 

@@ -1154,36 +1154,81 @@ importers:
       '@niceprototypes/button':
         specifier: workspace:^
         version: link:../button
+      '@niceprototypes/calendar':
+        specifier: workspace:^
+        version: link:../calendar
+      '@niceprototypes/checkbox':
+        specifier: workspace:^
+        version: link:../checkbox
       '@niceprototypes/code':
         specifier: workspace:^
         version: link:../code
+      '@niceprototypes/dialog':
+        specifier: workspace:^
+        version: link:../dialog
+      '@niceprototypes/field':
+        specifier: workspace:^
+        version: link:../field
       '@niceprototypes/flex':
         specifier: workspace:^
         version: link:../flex
+      '@niceprototypes/form':
+        specifier: workspace:^
+        version: link:../form
       '@niceprototypes/icon':
         specifier: workspace:^
         version: link:../icon
       '@niceprototypes/image':
         specifier: workspace:^
         version: link:../image
+      '@niceprototypes/image-vendor':
+        specifier: workspace:^
+        version: link:../image-vendor
       '@niceprototypes/ink':
         specifier: workspace:^
         version: link:../ink
       '@niceprototypes/input':
         specifier: workspace:^
         version: link:../input
+      '@niceprototypes/lightbox':
+        specifier: workspace:^
+        version: link:../lightbox
+      '@niceprototypes/line':
+        specifier: workspace:^
+        version: link:../line
+      '@niceprototypes/list':
+        specifier: workspace:^
+        version: link:../list
+      '@niceprototypes/logo':
+        specifier: workspace:^
+        version: link:../logo
+      '@niceprototypes/popover':
+        specifier: workspace:^
+        version: link:../popover
+      '@niceprototypes/select':
+        specifier: workspace:^
+        version: link:../select
       '@niceprototypes/storybook-theme':
         specifier: workspace:^
         version: link:../storybook-theme
       '@niceprototypes/styles':
         specifier: workspace:^
         version: link:../styles
+      '@niceprototypes/tabs':
+        specifier: workspace:^
+        version: link:../tabs
       '@niceprototypes/tile':
         specifier: workspace:^
         version: link:../tile
+      '@niceprototypes/toggle':
+        specifier: workspace:^
+        version: link:../toggle
       '@niceprototypes/tooltip':
         specifier: workspace:^
         version: link:../tooltip
+      lucide-react:
+        specifier: ^0.545.0
+        version: 0.545.0(react@19.2.0)
     devDependencies:
       '@types/react':
         specifier: 'catalog:'

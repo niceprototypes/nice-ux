@@ -4,7 +4,7 @@ import Contents from "@niceprototypes/contents"
 import type { ContentsItemsType, ContentsProps } from "@niceprototypes/contents"
 import Flex from "@niceprototypes/flex"
 import Ink from "@niceprototypes/ink"
-import LifecycleStory from "../../../src/components/LifecycleStory"
+import LifecycleStory from "@niceprototypes/docs/components/LifecycleStory"
 import { getToken } from "@niceprototypes/docs/nice/tokens"
 
 /** A component docs page's outline: Docs, Tokens, then props, one nested level under Props. */
