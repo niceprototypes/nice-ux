@@ -37,6 +37,7 @@ const SelectCustom: React.FC<SelectCustomProps> = ({
   onKeyDown,
   options: optionsProp,
   placeholder,
+  position = "bottom",
   ref,
   size = "base",
   status,
@@ -290,6 +291,7 @@ const SelectCustom: React.FC<SelectCustomProps> = ({
           if (!next) setOpen(false)
         }}
         anchorRef={fieldRef}
+        position={position}
         matchAnchorWidth
         role="presentation"
         theme={theme}

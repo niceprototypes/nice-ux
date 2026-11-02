@@ -14,6 +14,7 @@ import type {
   ListboxOptionStartType,
   ListboxOptionType,
 } from "@niceprototypes/listbox"
+import type { PopoverPositionType } from "@niceprototypes/popover"
 import type { SizeType } from "@niceprototypes/styles"
 
 /**
@@ -110,6 +111,18 @@ export type SelectChildrenType = InputChildrenType
  * - "smaller", "small", "base", "large", "larger"
  */
 export type SelectSizeType = SizeType
+
+/**
+ * SelectPositionType
+ *
+ * Re-export of PopoverPositionType from @niceprototypes/popover. Side of the
+ * trigger the custom listbox opens on. Custom mode only — the platform
+ * `<select>` places its own list.
+ *
+ * Values:
+ * - "top", "bottom" (default), "left", "right"
+ */
+export type SelectPositionType = PopoverPositionType
 
 /**
  * SelectValueType
@@ -233,6 +246,12 @@ export interface SelectCustomProps
    * @default false
    */
   native?: false
+
+  /**
+   * Side of the trigger the listbox opens on
+   * @default "bottom"
+   */
+  position?: SelectPositionType
 }
 
 /**
@@ -261,6 +280,7 @@ namespace SelectTypes {
   export type Placeholder = SelectPlaceholderType
   export type Children = SelectChildrenType
   export type Size = SelectSizeType
+  export type Position = SelectPositionType
   export type Value = SelectValueType
   export type DefaultValue = SelectDefaultValueType
   export type Props = SelectProps

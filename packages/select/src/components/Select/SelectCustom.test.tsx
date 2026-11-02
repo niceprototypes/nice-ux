@@ -100,6 +100,28 @@ describe("Select (custom, default)", () => {
     expect(hidden(container)).toHaveValue("a")
   })
 
+  it("opens the listbox below the trigger by default, above it with position=\"top\"", () => {
+    const { rerender } = render(
+      <Select
+        aria-label="fruit"
+        options={fruit}
+      />
+    )
+    fireEvent.click(combobox())
+    // The Popover surface wrapping the listbox carries the computed transform.
+    expect(listbox().parentElement!.style.transform).toBe("translate(0, 0)")
+    fireEvent.click(combobox())
+    rerender(
+      <Select
+        aria-label="fruit"
+        options={fruit}
+        position="top"
+      />
+    )
+    fireEvent.click(combobox())
+    expect(listbox().parentElement!.style.transform).toBe("translate(0, -100%)")
+  })
+
   describe("pointer", () => {
     it("clicking the trigger toggles the listbox", () => {
       render(

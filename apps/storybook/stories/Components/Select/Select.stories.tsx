@@ -16,13 +16,14 @@ import type {
   InputWidthType,
 } from "@niceprototypes/input"
 import Select from "@niceprototypes/select"
-import type { SelectCustomProps, SelectNativeProps, SelectOptionsType } from "@niceprototypes/select"
+import type { SelectCustomProps, SelectNativeProps, SelectOptionsType, SelectPositionType } from "@niceprototypes/select"
 
 /**
  * Option lists. Union props are typed against the union on disk, so a renamed token fails
  * the build; colour variants are read from the token data at runtime.
  */
 const SIZE_OPTIONS = ["smaller", "small", "base", "large", "larger"] as const satisfies readonly SizeType[]
+const POSITION_OPTIONS = ["top", "bottom", "left", "right"] as const satisfies readonly SelectPositionType[]
 const STATUS_OPTIONS = ["base", "disabled", "error", "success", "warning"] as const satisfies readonly InputStatusType[]
 const BORDER_RADIUS_OPTIONS = ["none", "smaller", "small", "base", "large", "larger"] as const satisfies readonly InputBorderRadiusType[]
 const BORDER_WIDTH_OPTIONS = ["none", "smaller", "small", "base", "large", "larger"] as const satisfies readonly BorderWidthType[]
@@ -88,13 +89,15 @@ const CHILDREN_PRESETS = {
  * - `start`: an icon name rendered as an Icon
  * - `ghost`: one boolean per interaction state
  * - `backgroundColor` / `borderColor`: variant plus an optional theme pin
- * - native-only ARIA / `readOnly` args are shown only while `native` is on
+ * - native-only ARIA / `readOnly` args are shown only while `native` is on;
+ *   the custom-only `position` only while it is off
  */
 type PlaygroundArgs = Omit<
   SelectNativeProps,
   "native" | "options" | "children" | "ref" | "start" | "ghost" | "backgroundColor" | "borderColor"
 > & {
   native: boolean
+  position: SelectPositionType
   options: string
   children: keyof typeof CHILDREN_PRESETS
   controlled: boolean
@@ -142,6 +145,7 @@ const toColor = <Name extends string>(name: Name | typeof NONE | undefined, them
 export const Playground: Story = {
   args: {
     native: false,
+    position: "bottom",
     options: "fruits",
     children: NONE,
     controlled: true,
@@ -173,6 +177,7 @@ export const Playground: Story = {
   },
   argTypes: {
     native: { control: "boolean", table: { category: "Element" } },
+    position: { ...select(POSITION_OPTIONS, "Element"), if: { arg: "native", truthy: false } },
     options: { ...select(Object.keys(OPTIONS_PRESETS), "Content"), mapping: OPTIONS_PRESETS },
     children: { ...select(Object.keys(CHILDREN_PRESETS), "Content"), mapping: CHILDREN_PRESETS },
     placeholder: { control: "text", table: { category: "Content" } },
@@ -238,6 +243,7 @@ export const Playground: Story = {
   // Recompose the flattened args; each `native` branch is checked against its props.
   render: function Render({
     native,
+    position,
     options,
     children,
     controlled,
@@ -299,7 +305,7 @@ export const Playground: Story = {
       }
       return <Select key={key} {...props} />
     }
-    const props: SelectCustomProps = { ...shared, native }
+    const props: SelectCustomProps = { ...shared, native, position }
     return <Select key={key} {...props} />
   },
   play: async ({ canvasElement, args, userEvent }) => {
@@ -457,5 +463,17 @@ export const FormValue: Story = {
   play: async ({ canvasElement }) => {
     // A hidden input carries the custom select's value for FormData.
     await expect(canvasElement.querySelector('input[type="hidden"][name="fruit"]')).toHaveValue("pear")
+  },
+}
+
+/** `position="top"`: the listbox opens above the trigger. */
+export const PositionTop: Story = {
+  ...Playground,
+  args: { ...Playground.args, position: "top" },
+  play: async ({ canvasElement, userEvent }) => {
+    const combobox = within(canvasElement).getByRole("combobox", { name: "Fruit" })
+    await userEvent.click(combobox)
+    const listbox = within(document.body).getByRole("listbox")
+    await expect(listbox.getBoundingClientRect().bottom).toBeLessThanOrEqual(combobox.parentElement!.getBoundingClientRect().top)
   },
 }

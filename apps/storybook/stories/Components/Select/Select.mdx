@@ -59,6 +59,12 @@ import Select from "@niceprototypes/select"
 <Select native options={options} />   // platform <select>
 ```
 
+<Ink><Ink code>position</Ink> <Ink>sets the side of the trigger the listbox opens on, with Popover's values:</Ink> <Ink code>"bottom"</Ink> <Ink>(default),</Ink> <Ink code>"top"</Ink><Ink>,</Ink> <Ink code>"left"</Ink><Ink>,</Ink> <Ink code>"right"</Ink><Ink>. Use</Ink> <Ink code>"top"</Ink> <Ink>when the select sits near the bottom of the viewport. The platform</Ink> <Ink code>{"<select>"}</Ink> <Ink>places its own list, so</Ink> <Ink code>native</Ink> <Ink>has no</Ink> <Ink code>position</Ink><Ink>.</Ink></Ink>
+
+```jsx
+<Select position="top" options={options} />
+```
+
 <Ink>Combobox keyboard, with focus on the control:</Ink>
 
 <DataTable
