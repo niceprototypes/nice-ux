@@ -337,12 +337,11 @@ const componentTokensData: ComponentTokensData = {
       "base": "25%"
     },
     "syntaxColor": {
-      "base": "hsla(210, 6%, 17%, 1)",
-      "keyword": "hsla(226, 75%, 45%, 1)",
-      "string": "hsla(150, 54%, 30%, 1)",
-      "tag": "hsla(268, 50%, 48%, 1)",
-      "constant": "hsla(198, 70%, 33%, 1)",
-      "comment": "hsla(210, 5%, 45%, 1)"
+      "neutral": "hsla(225, 4%, 17%, 1)",
+      "green": "hsla(155, 64%, 30%, 1)",
+      "cyan": "hsla(195, 69%, 34%, 1)",
+      "blue": "hsla(216, 85%, 49%, 1)",
+      "purple": "hsla(278, 84%, 54%, 1)"
     },
     "inline": {
       "paddingBlock": {

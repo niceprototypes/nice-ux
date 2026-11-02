@@ -15,12 +15,11 @@ const componentNightTokensData: ComponentNightTokensData = {
   "checkbox": {},
   "code": {
     "syntaxColor": {
-      "base": "hsla(210, 6%, 82%, 1)",
-      "keyword": "hsla(228, 85%, 78%, 1)",
-      "string": "hsla(152, 60%, 68%, 1)",
-      "tag": "hsla(268, 80%, 80%, 1)",
-      "constant": "hsla(198, 75%, 75%, 1)",
-      "comment": "hsla(210, 4%, 60%, 1)"
+      "neutral": "hsla(225, 4%, 82%, 1)",
+      "green": "hsla(155, 64%, 69%, 1)",
+      "cyan": "hsla(195, 69%, 77%, 1)",
+      "blue": "hsla(216, 85%, 76%, 1)",
+      "purple": "hsla(278, 84%, 80%, 1)"
     }
   },
   "contents": {},

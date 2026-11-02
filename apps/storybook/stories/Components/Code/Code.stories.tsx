@@ -16,7 +16,7 @@ const SAMPLE = `import Code, { type CodeMaxHeightType } from "@niceprototypes/co
 
 <Code code={source} language="tsx" />`
 
-/** Taller than the `code.maxHeight` token, so the block collapses behind Show more. */
+/** Taller than the `code.maxHeight` token, so the block collapses above the drag bar. */
 const LONG_SAMPLE = `import React, { useState } from "react"
 import { createPortal } from "react-dom"
 
@@ -81,13 +81,18 @@ export const Playground: Story = {
   play: async ({ canvasElement, userEvent }) => {
     const canvas = within(canvasElement)
     await expect(canvasElement.querySelector(".shiki")).toBeTruthy()
-    await expect(canvas.getByText("TSX")).toBeInTheDocument()
+    const copy = canvas.getByRole("button", { name: "Copy TSX" })
     const writeText = spyOn(navigator.clipboard, "writeText").mockResolvedValue()
     await userEvent.click(root(canvasElement))
     await expect(writeText).toHaveBeenCalledWith(SAMPLE)
+    writeText.mockClear()
+    // The copy icon copies from the keyboard too.
+    copy.focus()
+    await userEvent.keyboard("{Enter}")
+    await expect(writeText).toHaveBeenCalledWith(SAMPLE)
     writeText.mockRestore()
-    // Short code fits under maxHeight: no toggle.
-    await expect(within(root(canvasElement)).queryByRole("button")).not.toBeInTheDocument()
+    // Short code fits under maxHeight: no drag bar.
+    await expect(canvas.queryByRole("separator")).not.toBeInTheDocument()
   },
 }
 
@@ -98,12 +103,14 @@ export const Collapsed: Story = {
     const height = () => root(canvasElement).getBoundingClientRect().height
     const collapsedHeight = height()
     const writeText = spyOn(navigator.clipboard, "writeText").mockResolvedValue()
-    // Expanding shows the whole block, and the toggle click does not copy. The exact name
-    // checks the chevron icon stays out of it (its SVG carries a <style> element).
-    await userEvent.click(card.getByRole("button", { name: "Show more" }))
+    // The drag bar's keys show the whole code (End) and return to the cap (Home); a click on it does not copy.
+    const bar = card.getByRole("separator", { name: "Code height" })
+    await userEvent.click(bar)
     await expect(writeText).not.toHaveBeenCalled()
+    await userEvent.keyboard("{End}")
     await expect(height()).toBeGreaterThan(collapsedHeight)
-    await userEvent.click(card.getByRole("button", { name: "Show less" }))
+    await expect(bar).toHaveAttribute("aria-valuenow", bar.getAttribute("aria-valuemax"))
+    await userEvent.keyboard("{Home}")
     await expect(height()).toBe(collapsedHeight)
     writeText.mockRestore()
   },
@@ -112,22 +119,38 @@ export const Collapsed: Story = {
 export const Uncollapsed: Story = {
   args: { code: LONG_SAMPLE, maxHeight: "none" },
   play: async ({ canvasElement }) => {
-    await expect(within(root(canvasElement)).queryByRole("button")).not.toBeInTheDocument()
+    await expect(within(canvasElement).queryByRole("separator")).not.toBeInTheDocument()
   },
 }
 
 export const HiddenLabel: Story = {
   args: { showLabel: false },
   play: async ({ canvasElement }) => {
-    await expect(within(canvasElement).queryByText("TSX")).not.toBeInTheDocument()
+    await expect(within(canvasElement).queryByRole("button", { name: "Copy TSX" })).not.toBeInTheDocument()
+  },
+}
+
+export const Inlined: Story = {
+  args: { code: "border.width", language: undefined, inlined: true },
+  play: async ({ canvasElement, userEvent }) => {
+    const chip = within(canvasElement).getByText("border.width")
+    // A chip: no copy icon, no border.
+    await expect(within(canvasElement).queryByRole("button", { name: /^Copy/ })).not.toBeInTheDocument()
+    await expect(getComputedStyle(chip.closest("span[class]")!).borderTopStyle).toBe("none")
+    const writeText = spyOn(navigator.clipboard, "writeText").mockResolvedValue()
+    await userEvent.hover(chip)
+    await expect(await within(document.body).findByText("Copy to clipboard")).toBeInTheDocument()
+    await userEvent.click(chip)
+    await expect(writeText).toHaveBeenCalledWith("border.width")
+    writeText.mockRestore()
   },
 }
 
 export const UnmappedLanguage: Story = {
   args: { language: "python" },
   play: async ({ canvasElement }) => {
-    // Unmapped languages fall back to plain text and an upper-cased label.
-    await expect(within(canvasElement).getByText("PYTHON")).toBeInTheDocument()
+    // Unmapped languages fall back to plain text; the copy icon names the language upper-cased.
+    await expect(within(canvasElement).getByRole("button", { name: "Copy PYTHON" })).toBeInTheDocument()
   },
 }
 
@@ -138,17 +161,6 @@ export const NoCopy: Story = {
     await userEvent.click(root(canvasElement))
     await expect(writeText).not.toHaveBeenCalled()
     writeText.mockRestore()
-  },
-}
-
-export const Inlined: Story = {
-  args: { inlined: true },
-  play: async ({ canvasElement }) => {
-    // No chrome: no label and a transparent, borderless root.
-    await expect(within(canvasElement).queryByText("TSX")).not.toBeInTheDocument()
-    const style = getComputedStyle(root(canvasElement))
-    await expect(style.backgroundColor).toBe("rgba(0, 0, 0, 0)")
-    await expect(style.borderTopStyle).toBe("none")
   },
 }
 

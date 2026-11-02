@@ -21,36 +21,39 @@ import { getToken, type TokenVariants } from "@niceprototypes/styles"
 const syntaxColor = (variant: TokenVariants["code.syntaxColor"]) => getToken("code.syntaxColor", variant)
 
 /**
- * TextMate scopes per palette role, after Atlassian's code palette: keywords,
- * numbers and booleans blue; strings green; JSX/HTML tags purple; constants and
- * CSS/JSON property names teal; comments dim; operators, arrows, JSX attribute
- * names, punctuation and identifiers the base colour. The more specific scope wins, so
- * `keyword.operator` reads base under `keyword`, and a `const` declaration's
- * name reads base while an UPPER_CASE constant reads teal.
+ * TextMate scopes per palette colour, the `code.syntaxColor` variants named by hue in
+ * spectrum order (green, cyan, blue, purple) plus neutral, after Atlassian's code palette:
+ * strings green; JSX attribute names and their values, constants and CSS/JSON property
+ * names cyan; keywords (bold), numbers and booleans blue; JSX/HTML tags purple; text,
+ * identifiers, operators, arrows and punctuation (tag brackets included) neutral; comments
+ * neutral in italic. The
+ * more specific scope wins, so `keyword.operator` reads neutral under `keyword`, a JSX
+ * attribute's string value reads cyan under `string`, and a `const` declaration's name
+ * reads neutral while an UPPER_CASE constant reads cyan.
  */
 const theme: ThemeRegistration = {
   name: "nice",
   type: "light",
   colors: {
-    "editor.foreground": syntaxColor("base"),
+    "editor.foreground": syntaxColor("neutral"),
     "editor.background": "transparent",
   },
   tokenColors: [
     {
       scope: ["comment", "punctuation.definition.comment"],
-      settings: { foreground: syntaxColor("comment") },
+      settings: { foreground: syntaxColor("neutral"), fontStyle: "italic" },
     },
     {
       scope: ["string", "punctuation.definition.string", "string.template"],
-      settings: { foreground: syntaxColor("string") },
+      settings: { foreground: syntaxColor("green") },
     },
     {
       scope: ["keyword", "storage"],
-      settings: { foreground: syntaxColor("keyword"), fontStyle: "bold" },
+      settings: { foreground: syntaxColor("blue"), fontStyle: "bold" },
     },
     {
       scope: ["constant.numeric", "constant.language", "variable.language", "support.type.primitive"],
-      settings: { foreground: syntaxColor("keyword") },
+      settings: { foreground: syntaxColor("blue") },
     },
     {
       scope: [
@@ -59,23 +62,25 @@ const theme: ThemeRegistration = {
         "meta.embedded",
         "meta.definition.variable variable.other.constant",
         "storage.type.function.arrow",
-        "entity.other.attribute-name",
       ],
-      settings: { foreground: syntaxColor("base"), fontStyle: "" },
+      settings: { foreground: syntaxColor("neutral"), fontStyle: "" },
     },
     {
-      scope: ["entity.name.tag", "support.class.component", "punctuation.definition.tag"],
-      settings: { foreground: syntaxColor("tag") },
+      scope: ["entity.name.tag", "support.class.component"],
+      settings: { foreground: syntaxColor("purple") },
     },
     {
       scope: [
+        "entity.other.attribute-name",
+        "meta.tag.attributes string",
+        "meta.tag.attributes punctuation.definition.string",
         "variable.other.constant",
         "variable.other.enummember",
         "support.constant",
         "constant.other",
         "support.type.property-name",
       ],
-      settings: { foreground: syntaxColor("constant") },
+      settings: { foreground: syntaxColor("cyan") },
     },
   ],
 }

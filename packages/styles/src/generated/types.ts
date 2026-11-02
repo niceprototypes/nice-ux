@@ -116,7 +116,7 @@ export interface TokenVariants extends CustomTokenVariants {
   "code.maxWidth": "base"
   "code.maxHeight": "base"
   "code.fadeStart": "base"
-  "code.syntaxColor": "base" | "keyword" | "string" | "tag" | "constant" | "comment"
+  "code.syntaxColor": "neutral" | "green" | "cyan" | "blue" | "purple"
   "code.inline.paddingBlock": "base"
   "code.inline.paddingInline": "base"
   "contents.color": "base" | "active"

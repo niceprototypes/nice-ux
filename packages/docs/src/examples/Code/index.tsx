@@ -48,7 +48,7 @@ export const codeLanguage = {
 
 export const codeShowLabel = {
   name: "showLabel",
-  description: "Shows the language label in the top-right corner of the card. Inlined code never shows it.",
+  description: "Shows the copy icon (named \"Copy {language}\" for screen readers) in the top-right corner of the card. Inlined code never shows it.",
   variants: ["true", "false"],
   default: "true",
   preview: variant => (
@@ -82,7 +82,7 @@ export const codeCopyOnClick = {
 
 export const codeInlined = {
   name: "inlined",
-  description: "Strips the card chrome and renders the code flush inline as plain code text, without the label.",
+  description: "Renders the code as a chip inside a line of text, with a \"Copy to clipboard\" tooltip; no card, copy icon or drag bar.",
   variants: ["false", "true"],
   default: "false",
   preview: variant => (
@@ -134,7 +134,7 @@ const longSource = Array.from({ length: 24 }, (_, index) => `const line${index +
 export const codeMaxHeight = {
   name: "maxHeight",
   description:
-    "Collapsed height of a card block, as a code.maxHeight token variant. Taller code is cut off with a fade and a Show more / Show less toggle; shorter code renders in full. \"none\" never collapses.",
+    "Collapsed height of a card block, as a code.maxHeight token variant. Taller code is cut off with a fade above a drag bar (pointer, arrow keys, Home, End) that shows between the cap and the full code; shorter code renders in full. \"none\" never collapses.",
   variants: ["base", "none"],
   default: "base",
   preview: variant => (
