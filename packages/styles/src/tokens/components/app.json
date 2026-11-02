@@ -1,0 +1,32 @@
+{
+  "footer": {
+    "rule": {
+      "width": {
+        "base": "var(--np--border-width)"
+      },
+      "color": {
+        "base": "var(--np--border-color)"
+      }
+    },
+    "padding": {
+      "base": "var(--np--gap--large)"
+    }
+  },
+  "handle": {
+    "width": {
+      "base": "32px"
+    },
+    "height": {
+      "base": "var(--np--border-width--larger)"
+    },
+    "color": {
+      "base": "var(--np--border-color--strong)"
+    },
+    "padding": {
+      "base": "var(--np--gap--small)"
+    }
+  },
+  "$themes": {
+    "night": {}
+  }
+}

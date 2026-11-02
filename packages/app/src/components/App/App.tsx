@@ -2,7 +2,16 @@ import * as React from "react"
 import Tree from "@niceprototypes/tree"
 import type { AppEntryType, AppProps } from "./App.types"
 import AppDocs from "./AppDocs"
-import { AppGlobalStyle, StyledApp, StyledAppNav, StyledAppRegion, StyledAppSidebar } from "./App.styles"
+import AppFooter from "./AppFooter"
+import {
+  AppGlobalStyle,
+  StyledApp,
+  StyledAppAside,
+  StyledAppColumns,
+  StyledAppNav,
+  StyledAppRegion,
+  StyledAppSidebar,
+} from "./App.styles"
 import { AppContext, type AppContextValue } from "../../utilities/AppContext"
 import { buildAppIndex, type AppIndexEntry } from "../../utilities/buildAppIndex"
 import { buildAppTree, getAppAncestorIds } from "../../utilities/buildAppTree"
@@ -19,8 +28,9 @@ const AppShell: React.FC<AppProps> = ({ scenes, docs, router, wrapper: Wrapper, 
   const path = (bare ? location.pathname.slice(FRAME.length) : location.pathname).replace(/\/+$/, "")
   const current = index.find(entry => entry.url === path)
   const region = React.useRef<HTMLDivElement>(null)
-  // A state, not a ref: the scene renders its portal into the sidebar once it is mounted.
+  // States, not refs: the scene renders its portals into the sidebar and its footer once they are mounted.
   const [sidebar, setSidebar] = React.useState<HTMLDivElement | null>(null)
+  const [sidebarFooter, setSidebarFooter] = React.useState<HTMLDivElement | null>(null)
   const search = React.useMemo(() => new URLSearchParams(location.search), [location.search])
 
   // Each page's module (or text) loads once; a loaded one renders at once, without a blank frame.
@@ -75,8 +85,9 @@ const AppShell: React.FC<AppProps> = ({ scenes, docs, router, wrapper: Wrapper, 
       },
       region,
       sidebar: bare ? null : sidebar,
+      sidebarFooter: bare ? null : sidebarFooter,
     }
-  }, [bare, current, index, load, location.search, navigate, sidebar])
+  }, [bare, current, index, load, location.search, navigate, sidebar, sidebarFooter])
 
   const page = (() => {
     const entry = shown.current
@@ -101,20 +112,25 @@ const AppShell: React.FC<AppProps> = ({ scenes, docs, router, wrapper: Wrapper, 
         regionElement
       ) : (
         <StyledApp>
-          <StyledAppNav>
-            <Tree
-              aria-label={ariaLabel}
-              items={buildAppTree(index, current, location.search)}
-              expandedIds={expandedIds}
-              onExpandedChange={setExpandedIds}
-              onSelect={(node, event) => {
-                if (node.url === undefined || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
-                event.preventDefault()
-                navigate(node.url)
-              }}
-            />
-          </StyledAppNav>
-          <StyledAppSidebar ref={setSidebar} />
+          <StyledAppAside>
+            <StyledAppColumns>
+              <StyledAppNav>
+                <Tree
+                  aria-label={ariaLabel}
+                  items={buildAppTree(index, current, location.search)}
+                  expandedIds={expandedIds}
+                  onExpandedChange={setExpandedIds}
+                  onSelect={(node, event) => {
+                    if (node.url === undefined || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+                    event.preventDefault()
+                    navigate(node.url)
+                  }}
+                />
+              </StyledAppNav>
+              <StyledAppSidebar ref={setSidebar} />
+            </StyledAppColumns>
+            <AppFooter onContent={setSidebarFooter} />
+          </StyledAppAside>
           {regionElement}
         </StyledApp>
       )}

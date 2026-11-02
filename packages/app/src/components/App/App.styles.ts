@@ -16,6 +16,21 @@ export const StyledApp = styled.div`
   color: ${getToken("color")};
 `
 
+/** The sidebar: the nav and the scene sidebar side by side over the footer, the viewport's full height. */
+export const StyledAppAside = styled.div`
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+`
+
+/** The nav and the scene sidebar, side by side in the height the footer leaves. */
+export const StyledAppColumns = styled.div`
+  flex: 1 1 auto;
+  display: flex;
+  min-height: 0;
+`
+
 /** The nav column: as wide as its rows, scrolling on its own. */
 export const StyledAppNav = styled.div`
   flex: none;
@@ -35,6 +50,47 @@ export const StyledAppSidebar = styled.div`
   &:empty {
     display: none;
   }
+`
+
+/** The footer's content: the element a scene portals into, with the footer's padding. */
+export const StyledAppFooterContent = styled.div`
+  padding: ${getToken("app.footer.padding")};
+  padding-block-start: 0;
+`
+
+/**
+ * The sidebar's footer, the width of the nav and the scene sidebar, under a rule. Empty (docs pages,
+ * scenes without settings), it takes no space.
+ */
+export const StyledAppFooter = styled.div`
+  flex: none;
+  border-block-start: ${getToken("app.footer.rule.width")} solid ${getToken("app.footer.rule.color")};
+
+  &:has(${StyledAppFooterContent}:empty) {
+    display: none;
+  }
+`
+
+/** The footer's drag handle: a pill centred at its top, inside a hit area of the handle's padding. */
+export const StyledAppHandle = styled.div`
+  display: flex;
+  justify-content: center;
+  padding-block: ${getToken("app.handle.padding")};
+  cursor: row-resize;
+  touch-action: none;
+
+  &::before {
+    content: "";
+    width: ${getToken("app.handle.width")};
+    height: ${getToken("app.handle.height")};
+    border-radius: ${getToken("app.handle.height")};
+    background-color: ${getToken("app.handle.color")};
+  }
+`
+
+/** The footer's resizable body: the dragged height, clipping the content below it. */
+export const StyledAppFooterBody = styled.div`
+  overflow: hidden;
 `
 
 /**

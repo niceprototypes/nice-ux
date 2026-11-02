@@ -1,7 +1,7 @@
 import * as React from "react"
 import type { AppEntryType } from "../components/App/App.types"
 
-/** What the shell shares with the scenes under it (services/useScenes, services/useSceneRegion, services/useSceneSidebar). */
+/** What the shell shares with the scenes under it (services/useScenes, services/useSceneRegion, services/useSceneSidebar, services/useSceneSidebarFooter). */
 export type AppContextValue = {
   entries: AppEntryType[]
   current: AppEntryType | undefined
@@ -10,6 +10,7 @@ export type AppContextValue = {
   preload: (entry: AppEntryType) => void
   region: React.RefObject<HTMLDivElement | null>
   sidebar: HTMLDivElement | null
+  sidebarFooter: HTMLDivElement | null
 }
 
 export const AppContext = React.createContext<AppContextValue | null>(null)

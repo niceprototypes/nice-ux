@@ -4,7 +4,7 @@ import "@testing-library/jest-dom"
 import App from "."
 import type { AppRouterType } from "./App.types"
 import { createPortal } from "react-dom"
-import { useSceneRegion, useScenes, useSceneSidebar } from "../../services"
+import { useSceneRegion, useScenes, useSceneSidebar, useSceneSidebarFooter } from "../../services"
 import { plainRouter } from "../../adapters/plain"
 import { reactRouter } from "../../adapters/react-router"
 import { tanstackRouter } from "../../adapters/tanstack-router"
@@ -29,7 +29,19 @@ const WithSteps = () => {
   )
 }
 
+/** A scene that portals its settings into the sidebar's footer, as the studio's controls do. */
+const WithSettings = () => {
+  const footer = useSceneSidebarFooter()
+  return (
+    <>
+      <p>with settings</p>
+      {footer && createPortal(<p>settings</p>, footer)}
+    </>
+  )
+}
+
 const scenes = {
+  "./stories/3 Gamma/2 Settings/index.tsx": () => Promise.resolve({ default: WithSettings }),
   "./stories/3 Gamma/1 Steps/index.tsx": () => Promise.resolve({ default: WithSteps }),
   "./stories/2 Beta/10 Ten/index.tsx": scene("ten"),
   "./stories/2 Beta/9 Nine/index.tsx": scene("nine"),
@@ -60,7 +72,7 @@ describe.each(adapters)("App on the %s adapter", (_, router) => {
     render(<App scenes={scenes} docs={docs} router={router} />)
     await screen.findByText("nine")
     const rows = screen.getAllByRole("link", { hidden: true }).map(link => link.textContent)
-    expect(rows).toEqual(["Solo", "First & last", "Second", "Guide", "Nine", "Ten", "Steps"])
+    expect(rows).toEqual(["Solo", "First & last", "Second", "Guide", "Nine", "Ten", "Steps", "Settings"])
     expect(screen.getByRole("link", { name: "Nine" })).toHaveAttribute("aria-current", "page")
     expect(screen.getByRole("button", { name: "Beta" })).toHaveAttribute("aria-expanded", "true")
     expect(screen.getByRole("button", { name: "Alpha" })).toHaveAttribute("aria-expanded", "false")
@@ -135,5 +147,63 @@ describe.each(adapters)("App on the %s adapter", (_, router) => {
     window.history.replaceState(null, "", "/frame/alpha/pair/first-and-last")
     render(<App scenes={scenes} router={router} />)
     expect(await screen.findByText("next")).toHaveAttribute("data-bare", "true")
+  })
+})
+
+describe("App sidebar footer", () => {
+  /** The footer content's height in jsdom, which lays nothing out. */
+  const CONTENT = 100
+  const offsetHeight = Object.getOwnPropertyDescriptor(HTMLElement.prototype, "offsetHeight")!
+
+  beforeAll(() => {
+    // jsdom lacks pointer capture and PointerEvent (ResizeObserver: jest.setup.js).
+    HTMLElement.prototype.setPointerCapture = () => {}
+    HTMLElement.prototype.releasePointerCapture = () => {}
+    class PointerEvent extends MouseEvent {
+      pointerId: number
+      constructor(type: string, init: PointerEventInit = {}) {
+        super(type, init)
+        this.pointerId = init.pointerId ?? 1
+      }
+    }
+    Object.assign(window, { PointerEvent })
+    Object.defineProperty(HTMLElement.prototype, "offsetHeight", { configurable: true, get: () => CONTENT })
+  })
+  afterAll(() => Object.defineProperty(HTMLElement.prototype, "offsetHeight", offsetHeight))
+  beforeEach(() => window.history.replaceState(null, "", "/gamma/settings"))
+
+  const renderFooter = async () => {
+    render(<App scenes={scenes} router={plainRouter} />)
+    await screen.findByText("settings")
+    return screen.getByRole("separator")
+  }
+
+  it("renders a scene's settings under the nav and the scene sidebar, fully open", async () => {
+    const handle = await renderFooter()
+    expect(handle.parentElement!.previousElementSibling).toContainElement(screen.getByRole("navigation"))
+    expect(handle.parentElement).toContainElement(screen.getByText("settings"))
+    expect(handle).toHaveAttribute("aria-orientation", "horizontal")
+    expect(handle).toHaveAttribute("aria-valuemin", "0")
+    expect(handle).toHaveAttribute("aria-valuemax", String(CONTENT))
+    expect(handle).toHaveAttribute("aria-valuenow", String(CONTENT))
+  })
+
+  it("stops at the content height when dragged or keyed up, and collapses to the handle when dragged or keyed down", async () => {
+    const handle = await renderFooter()
+    fireEvent.pointerDown(handle, { clientY: 500 })
+    fireEvent.pointerMove(handle, { clientY: 200 })
+    expect(handle).toHaveAttribute("aria-valuenow", String(CONTENT))
+    fireEvent.pointerMove(handle, { clientY: 560 })
+    expect(handle).toHaveAttribute("aria-valuenow", String(CONTENT - 60))
+    fireEvent.pointerMove(handle, { clientY: 900 })
+    fireEvent.pointerUp(handle)
+    expect(handle).toHaveAttribute("aria-valuenow", "0")
+    expect(handle.nextElementSibling).toHaveStyle({ height: "0px" })
+    fireEvent.keyDown(handle, { key: "ArrowDown" })
+    expect(handle).toHaveAttribute("aria-valuenow", "0")
+    for (let press = 0; press < 12; press++) fireEvent.keyDown(handle, { key: "ArrowUp" })
+    expect(handle).toHaveAttribute("aria-valuenow", String(CONTENT))
+    fireEvent.keyDown(handle, { key: "ArrowDown" })
+    expect(handle).toHaveAttribute("aria-valuenow", String(CONTENT * 0.9))
   })
 })

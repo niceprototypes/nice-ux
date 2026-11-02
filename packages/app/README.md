@@ -13,7 +13,10 @@ where the current one renders. One page, no iframe.
 - **The scene region** is focusable. `useSceneRegion()` returns it, so a scene's keys and clicks act
   only inside it. `useSceneSidebar()` returns the scene sidebar, the column right of the nav that
   stays fixed with it while the region scrolls, for a scene's own navigation (`createPortal(steps,
-  sidebar)`); empty, it takes no space; `null` in the bare view. `useScenes()` returns the index, the current page, `bare` (the bare view
+  sidebar)`); empty, it takes no space; `null` in the bare view. `useSceneSidebarFooter()` returns the
+  footer under the nav and the scene sidebar, the width of both, for a scene's settings: a drag handle at
+  its top (a separator, arrow keys too) resizes it between the handle alone and its content's height; it
+  opens fully; empty, it takes no space; `null` in the bare view. `useScenes()` returns the index, the current page, `bare` (the bare view
   is on), `open(entry)` and `preload(entry)`, for scenes that move between pages or drop their chrome.
 - **Router adapters**, subpath exports with optional peer dependencies:
   `@niceprototypes/app/adapters/plain` (`plainRouter`, history API, no dependency),

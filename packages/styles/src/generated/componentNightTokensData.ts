@@ -8,6 +8,7 @@ import type { ComponentTokenNode } from './componentTokensData.js'
 export type ComponentNightTokensData = Record<string, { [key: string]: ComponentTokenNode }>
 
 const componentNightTokensData: ComponentNightTokensData = {
+  "app": {},
   "button": {},
   "calendar": {},
   "card": {},

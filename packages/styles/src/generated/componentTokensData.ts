@@ -8,6 +8,35 @@ export type ComponentTokenNode = string | { [key: string]: ComponentTokenNode }
 export type ComponentTokensData = Record<string, { [key: string]: ComponentTokenNode }>
 
 const componentTokensData: ComponentTokensData = {
+  "app": {
+    "footer": {
+      "rule": {
+        "width": {
+          "base": "var(--np--border-width)"
+        },
+        "color": {
+          "base": "var(--np--border-color)"
+        }
+      },
+      "padding": {
+        "base": "var(--np--gap--large)"
+      }
+    },
+    "handle": {
+      "width": {
+        "base": "32px"
+      },
+      "height": {
+        "base": "var(--np--border-width--larger)"
+      },
+      "color": {
+        "base": "var(--np--border-color--strong)"
+      },
+      "padding": {
+        "base": "var(--np--gap--small)"
+      }
+    }
+  },
   "button": {
     "size": {
       "smaller": "var(--np--size--smaller)",

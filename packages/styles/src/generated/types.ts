@@ -28,7 +28,7 @@ export type BackgroundColorInverseType = "base" | "raised" | "success" | "highli
 export type BorderColorInverseType = "base" | "subtle" | "strong" | "stronger" | "success" | "highlight" | "warning" | "error" | "link"
 export type ColorInverseType = "base" | "light" | "lighter" | "lightest" | "disabled" | "link" | "success" | "highlight" | "warning" | "error"
 
-export type ComponentPrefix = "button" | "calendar" | "card" | "checkbox" | "code" | "dialog" | "field" | "icon" | "image" | "ink" | "input" | "lightbox" | "line" | "list" | "listbox" | "logo" | "popover" | "radio" | "select" | "tabs" | "tile" | "toggle" | "tree"
+export type ComponentPrefix = "app" | "button" | "calendar" | "card" | "checkbox" | "code" | "dialog" | "field" | "icon" | "image" | "ink" | "input" | "lightbox" | "line" | "list" | "listbox" | "logo" | "popover" | "radio" | "select" | "tabs" | "tile" | "toggle" | "tree"
 
 /** Variant union of every token group, keyed by address group (`"fontSize"`, `"button.icon.size"`), plus custom groups declared on `CustomTokenVariants`. */
 export interface TokenVariants extends CustomTokenVariants {
@@ -52,6 +52,13 @@ export interface TokenVariants extends CustomTokenVariants {
   "strokeWidthScale": StrokeWidthScaleType
   "fontSize": FontSizeType
   "breakpoints": "tablet" | "laptop" | "desktop"
+  "app.footer.rule.width": "base"
+  "app.footer.rule.color": "base"
+  "app.footer.padding": "base"
+  "app.handle.width": "base"
+  "app.handle.height": "base"
+  "app.handle.color": "base"
+  "app.handle.padding": "base"
   "button.size": "smaller" | "small" | "base" | "large" | "larger"
   "button.spacing": "smaller" | "small" | "base" | "large" | "larger"
   "button.borderRadius": "none" | "smaller" | "small" | "base" | "large" | "larger" | "rounded"
@@ -237,6 +244,8 @@ export interface TokenInverseVariants {
   "backgroundColor": BackgroundColorInverseType
   "borderColor": BorderColorInverseType
   "color": ColorInverseType
+  "app.footer.rule.color": "base"
+  "app.handle.color": "base"
   "button.backgroundColor": "base" | "disabled" | "error" | "success" | "warning"
   "button.borderColor": "base" | "subtle" | "strong" | "stronger" | "success" | "highlight" | "warning" | "error" | "link"
   "button.selected.borderColor": "base"
