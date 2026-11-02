@@ -150,11 +150,19 @@ describe.each(adapters)("App on the %s adapter", (_, router) => {
     const header = screen.getByText("logo").parentElement!
     expect(header.nextElementSibling).toContainElement(screen.getByRole("navigation"))
     expect(header.nextElementSibling).toContainElement(screen.getByText("steps"))
+    expect(getComputedStyle(screen.getByRole("navigation").parentElement!).paddingBlockStart).toBe("var(--np--gap)")
     unmount()
     window.history.replaceState(null, "", "/frame/gamma/steps")
     render(<App scenes={scenes} router={router} header={<p>logo</p>} />)
     await screen.findByText("with steps")
     expect(screen.queryByText("logo")).not.toBeInTheDocument()
+  })
+
+  it("leaves the nav's top padding alone without a header", async () => {
+    window.history.replaceState(null, "", "/gamma/steps")
+    render(<App scenes={scenes} router={router} />)
+    await screen.findByText("steps")
+    expect(getComputedStyle(screen.getByRole("navigation").parentElement!).paddingBlockStart).not.toBe("var(--np--gap)")
   })
 
   it("sizes the sidebar from the app.sidebar.minWidth token", async () => {

@@ -32,11 +32,15 @@ export const StyledAppHeader = styled.div`
   padding: ${getToken("gap:large")} ${getToken("gap:large")} 0;
 `
 
-/** The nav and the scene sidebar, side by side in the height the footer leaves. */
+/** The nav and the scene sidebar, side by side in the height the footer leaves; under a header, their top padding is the base gap. */
 export const StyledAppColumns = styled.div`
   flex: 1 1 auto;
   display: flex;
   min-height: 0;
+
+  ${StyledAppHeader} + & > * {
+    padding-block-start: ${getToken("gap")};
+  }
 `
 
 /** The nav column: as wide as its rows, scrolling on its own. */
