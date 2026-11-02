@@ -1,3 +1,4 @@
+import Ink from "@niceprototypes/ink"
 import { useState } from "react"
 import Button from "@niceprototypes/button"
 import Flex from "@niceprototypes/flex"
@@ -11,7 +12,7 @@ const Reporting = () => {
       <Button onClick={() => {}} onMouseEnter={event => setLast(event.type)}>
         Hover
       </Button>
-      <code>{last === null ? "–" : `onMouseEnter(${last})`}</code>
+      <Ink code>{last === null ? "–" : `onMouseEnter(${last})`}</Ink>
     </Flex>
   )
 }

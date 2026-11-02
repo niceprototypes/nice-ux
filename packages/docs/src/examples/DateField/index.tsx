@@ -1,6 +1,7 @@
 // DateField example configs — one ComponentExample per facet, shaped like
 // Button's (src/dataTables/data/tables/componentDemoTable). ComponentDocs renders each entry as a section of the
 // DateField docs page, sorted by name.
+import Ink from "@niceprototypes/ink"
 import { useState } from "react"
 import { DateField } from "@niceprototypes/calendar"
 import { Field } from "@niceprototypes/field"
@@ -20,7 +21,7 @@ const ControlledDateField = () => {
         onChange={setValue}
         width="20"
       />
-      <code>value: {JSON.stringify(value)}</code>
+      <Ink code>value: {JSON.stringify(value)}</Ink>
     </div>
   )
 }
@@ -42,7 +43,7 @@ const FormDataDemo = () => {
         width="20"
       />
       <Button type="submit">Submit</Button>
-      <code>FormData: {submitted ? JSON.stringify(submitted) : "—"}</code>
+      <Ink code>FormData: {submitted ? JSON.stringify(submitted) : "—"}</Ink>
     </form>
   )
 }

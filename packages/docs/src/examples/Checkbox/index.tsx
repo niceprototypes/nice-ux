@@ -1,6 +1,7 @@
 // Checkbox example configs — one ComponentExample per facet, shaped like Button's
 // (src/dataTables/data/tables/componentDemoTable). ComponentDocs renders each entry as a section of the
 // Checkbox docs page, sorted by name.
+import Ink from "@niceprototypes/ink"
 import { useState } from "react"
 import Checkbox from "@niceprototypes/checkbox"
 import Flex from "@niceprototypes/flex"
@@ -21,7 +22,7 @@ const ReportingCheckbox = () => {
   return (
     <span style={{ display: "inline-flex", alignItems: "center", gap: "0.5em" }}>
       <Checkbox aria-label="Report" onChange={setLast} />
-      <code>{last === null ? "–" : `onChange(${last})`}</code>
+      <Ink code>{last === null ? "–" : `onChange(${last})`}</Ink>
     </span>
   )
 }

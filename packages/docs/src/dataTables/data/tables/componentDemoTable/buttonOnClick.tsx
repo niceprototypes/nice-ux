@@ -1,3 +1,4 @@
+import Ink from "@niceprototypes/ink"
 import { useState } from "react"
 import Button from "@niceprototypes/button"
 import Flex from "@niceprototypes/flex"
@@ -9,7 +10,7 @@ const ReportingButton = () => {
   return (
     <Flex gap="small" alignItems="center">
       <Button onClick={() => setCount(current => current + 1)}>Click</Button>
-      <code>{count === 0 ? "–" : `onClick() × ${count}`}</code>
+      <Ink code>{count === 0 ? "–" : `onClick() × ${count}`}</Ink>
     </Flex>
   )
 }

@@ -1,3 +1,4 @@
+import Ink from "@niceprototypes/ink"
 import Flex, { type FlexAsType } from "@niceprototypes/flex"
 import type { ComponentExample } from "../../../components/demos/Components"
 
@@ -5,7 +6,7 @@ const variants: FlexAsType[] = ["div", "nav", "header", "section", "footer", "ma
 
 /** The rendered element's tag, inside a Flex of that element; list items sit in a list. */
 const preview = (variant: FlexAsType) => {
-  const tag = <code>{`<${variant}>`}</code>
+  const tag = <Ink code>{`<${variant}>`}</Ink>
   if (variant === "ul" || variant === "ol") {
     return (
       <Flex as={variant}>

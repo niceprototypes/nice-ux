@@ -1,6 +1,7 @@
 // Calendar example configs — one ComponentExample per facet, shaped like Button's
 // (src/dataTables/data/tables/componentDemoTable). ComponentDocs renders each entry as a section of the
 // Calendar docs page, sorted by name.
+import Ink from "@niceprototypes/ink"
 import { useState } from "react"
 import { Calendar } from "@niceprototypes/calendar"
 import Flex from "@niceprototypes/flex"
@@ -20,7 +21,7 @@ const ControlledCalendar = () => {
         value={value}
         onChange={setValue}
       />
-      <code>value: {JSON.stringify(value)}</code>
+      <Ink code>value: {JSON.stringify(value)}</Ink>
     </div>
   )
 }

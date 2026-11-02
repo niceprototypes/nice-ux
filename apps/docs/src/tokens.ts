@@ -12,6 +12,9 @@ export const getToken = setTokens({
   ...AppTokenMap,
   // Contents sticks one page padding below the top of the scrolling page (no navigation bar here).
   contents: { top: getCoreToken("gap", "large") },
+  // One scale at every breakpoint, base 12 to larger 48: base to larger doubles each step (×2), and
+  // below base the steps go down 1px each, since halving would make them unreadable.
+  fontSize: { smaller: "10px", small: "11px", base: "12px", large: "24px", larger: "48px" },
   // Code takes Adobe Fonts' Antarctican Mono (its kit is linked in index.html).
   fontFamily: { ...AppTokenMap.fontFamily, code: '"antarctican-mono", sans-serif' },
 })
