@@ -52,8 +52,18 @@ const SIDEBAR: Outline = [
 ]
 const ACTIVE_ID = "components/forms/checkbox/checked"
 
-/** Build the nodes from an outline, `levels` deep; a folder at the last level becomes a link. */
-const toItems = (outline: Outline, levels: number, icons: boolean, slot: string, parent = ""): TreeNodeType[] =>
+/**
+ * Build the nodes from an outline, `levels` deep; a folder at the last level becomes a link, and with
+ * `folderLinks` every folder carries a url too.
+ */
+const toItems = (
+  outline: Outline,
+  levels: number,
+  icons: boolean,
+  slot: string,
+  folderLinks: boolean,
+  parent = "",
+): TreeNodeType[] =>
   outline.map(entry => {
     const [name, rows] = typeof entry === "string" ? [entry, undefined] : entry
     const id = `${parent}${name.toLowerCase()}`
@@ -64,7 +74,10 @@ const toItems = (outline: Outline, levels: number, icons: boolean, slot: string,
       status: id === ACTIVE_ID ? "active" : undefined,
       children: id === ACTIVE_ID && slot ? <Ink size="small">{slot}</Ink> : undefined,
     }
-    if (rows && levels > 1) return { ...node, items: toItems(rows, levels - 1, icons, slot, `${id}/`) }
+    if (rows && levels > 1) {
+      const items = toItems(rows, levels - 1, icons, slot, folderLinks, `${id}/`)
+      return folderLinks ? { ...node, url: `#${id}`, items } : { ...node, items }
+    }
     return { ...node, url: `#${id}` }
   })
 
@@ -75,13 +88,15 @@ const FOLDER_IDS = ["basics", "components", "components/forms", "components/form
  * PlaygroundArgs
  *
  * TreeProps plus the data controls: `levels` (depth of the sidebar outline), `icons`
- * (folder icons on or off) and `slot` (text in the active row's `children` slot).
+ * (folder icons on or off), `slot` (text in the active row's `children` slot) and `folderLinks`
+ * (every folder also a link: no toggle, its sub-list follows the open folder ids).
  * `items` is built in `render`.
  */
 type PlaygroundArgs = Omit<TreeProps, "items"> & {
   levels: number
   icons: boolean
   slot: string
+  folderLinks: boolean
 }
 
 const meta = {
@@ -102,6 +117,7 @@ export const Playground: Story = {
     levels: 4,
     icons: true,
     slot: "",
+    folderLinks: false,
     onExpandedChange: fn(),
     onSelect: fn(),
   },
@@ -109,6 +125,7 @@ export const Playground: Story = {
     levels: { control: { type: "range", min: 1, max: 4, step: 1 }, table: { category: "Content" } },
     icons: { control: "boolean", table: { category: "Content" } },
     slot: { control: "text", table: { category: "Content" } },
+    folderLinks: { control: "boolean", table: { category: "Content" } },
 
     expandedIds: { control: "check", options: FOLDER_IDS, table: { category: "State" } },
     defaultExpandedIds: { control: "check", options: FOLDER_IDS, table: { category: "State" } },
@@ -125,10 +142,10 @@ export const Playground: Story = {
     onExpandedChange: { table: { category: "Events" } },
     onSelect: { table: { category: "Events" } },
   },
-  render: ({ levels, icons, slot, onSelect, ...rest }) => (
+  render: ({ levels, icons, slot, folderLinks, onSelect, ...rest }) => (
     <Tree
       {...rest}
-      items={toItems(SIDEBAR, levels, icons, slot)}
+      items={toItems(SIDEBAR, levels, icons, slot, folderLinks)}
       onSelect={(node, event) => {
         // Keep the story on its page
         event.preventDefault()
@@ -263,5 +280,19 @@ export const Slot: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
     await waitFor(() => expect(row(canvas.getByRole("link", { name: "checked" }))).toHaveTextContent("checkedNew"))
+  },
+}
+
+/** `folderLinks`: every folder is a link with no toggle; the open folders (the active node's ancestors) stay open. */
+export const FolderLinks: Story = {
+  ...Playground,
+  args: { ...Playground.args, folderLinks: true },
+  play: async ({ canvasElement, args, userEvent }) => {
+    const tree = within(within(canvasElement).getByRole("navigation"))
+    await expect(tree.queryAllByRole("button")).toHaveLength(0)
+    await expect(tree.getByRole("link", { name: "checked" })).toBeVisible()
+    await userEvent.click(tree.getByRole("link", { name: "Components" }))
+    await expect(args.onSelect).toHaveBeenLastCalledWith(expect.objectContaining({ id: "components" }), expect.anything())
+    await expect(tree.getByRole("link", { name: "checked" })).toBeVisible()
   },
 }

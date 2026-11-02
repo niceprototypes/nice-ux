@@ -25,8 +25,9 @@ export type TreeNodeIconType = React.ReactNode
 /**
  * TreeNodeUrlType
  *
- * Link target of a leaf. A node with `items` is a folder: its row toggles it and
- * renders no link.
+ * Link target of the row. A node with `items` and no `url` is a folder whose row
+ * toggles it; with a `url`, the row is a link instead and the sub-list shows while
+ * the node's id is in `expandedIds`.
  */
 export type TreeNodeUrlType = string
 
@@ -55,7 +56,7 @@ export type TreeNodeChildrenType = React.ReactNode
  * - id: unique across the tree
  * - name: label
  * - icon: content before the label, or null
- * - url: link target of a leaf
+ * - url: link target of the row
  * - status: "active" for the current page
  * - items: sub-rows; a node with items is a folder
  * - children: custom content inside the row
@@ -105,7 +106,7 @@ export type TreeOnExpandedChangeType = (
 /**
  * TreeOnSelectType
  *
- * Called when a leaf's link is clicked, with the node and the click event. A client-side
+ * Called when a row's link is clicked, with the node and the click event. A client-side
  * router calls `event.preventDefault()` and navigates itself.
  */
 export type TreeOnSelectType = (node: TreeNodeType, event: React.MouseEvent<HTMLAnchorElement>) => void
@@ -131,7 +132,7 @@ export interface TreeProps {
   /** Folder toggle handler */
   onExpandedChange?: TreeOnExpandedChangeType
 
-  /** Leaf link click handler */
+  /** Row link click handler */
   onSelect?: TreeOnSelectType
 
   /** Accessible name of the `<nav>` landmark */

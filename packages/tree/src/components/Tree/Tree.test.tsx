@@ -57,6 +57,20 @@ describe("Tree", () => {
     expect(onSelect).toHaveBeenCalledWith(expect.objectContaining({ id: "start" }), expect.anything())
   })
 
+  it("renders a folder with a url as a link whose sub-list follows expandedIds", () => {
+    const onSelect = jest.fn()
+    const linked: TreeItemsType = [
+      { id: "step", name: "Step", icon: null, url: "#step", items: [{ id: "sub", name: "Sub", icon: null, url: "#sub" }] },
+    ]
+    const { rerender } = render(<Tree items={linked} expandedIds={["step"]} onSelect={onSelect} />)
+    expect(screen.queryByRole("button")).toBeNull()
+    fireEvent.click(screen.getByRole("link", { name: "Step" }))
+    expect(onSelect).toHaveBeenCalledWith(expect.objectContaining({ id: "step" }), expect.anything())
+    expect(screen.getByRole("link", { name: "Sub" })).toBeVisible()
+    rerender(<Tree items={linked} expandedIds={[]} onSelect={onSelect} />)
+    expect(screen.getByRole("link", { name: "Sub", hidden: true })).not.toBeVisible()
+  })
+
   it("renders a node's children inside its row", () => {
     render(
       <Tree items={[{ id: "a", name: "A", icon: null, url: "/a", children: <span>badge</span> }]} />,

@@ -20,8 +20,9 @@ const SMALL_LABELS = parseBreakpointKey("laptop+")
  *
  * Navigation tree, built on the WAI-ARIA disclosure navigation pattern: a `<nav>` of
  * nested lists, where a node with `items` is a folder whose `<button aria-expanded>`
- * shows or hides its sub-list, and a leaf with a `url` is a link (`aria-current="page"`
- * when active). Keyboard support is the native one: Tab between rows, Enter or Space
+ * shows or hides its sub-list, and a node with a `url` is a link (`aria-current="page"`
+ * when active). A folder with a `url` is a link too: it has no toggle, and its sub-list
+ * shows while its id is in `expandedIds`. Keyboard support is the native one: Tab between rows, Enter or Space
  * toggles a folder, Enter follows a link. Guide lines join each folder to its sub-rows;
  * the active node, its ancestors and the guide leading to it take `activeColor`.
  *
@@ -69,6 +70,18 @@ const Tree: React.FC<TreeProps> = ({
         </Ink>
       </>
     )
+    if (node.url !== undefined) {
+      return (
+        <StyledTreeTarget
+          as="a"
+          href={node.url}
+          aria-current={node.status === "active" ? "page" : undefined}
+          onClick={(event: React.MouseEvent<HTMLAnchorElement>) => onSelect?.(node, event)}
+        >
+          {content}
+        </StyledTreeTarget>
+      )
+    }
     if (node.items) {
       const open = expandedIds.includes(node.id)
       return (
@@ -79,18 +92,6 @@ const Tree: React.FC<TreeProps> = ({
           aria-controls={`${idPrefix}-${node.id}`}
           aria-current={node.status === "active" ? "true" : undefined}
           onClick={(event: React.MouseEvent<HTMLButtonElement>) => toggle(node.id, event)}
-        >
-          {content}
-        </StyledTreeTarget>
-      )
-    }
-    if (node.url !== undefined) {
-      return (
-        <StyledTreeTarget
-          as="a"
-          href={node.url}
-          aria-current={node.status === "active" ? "page" : undefined}
-          onClick={(event: React.MouseEvent<HTMLAnchorElement>) => onSelect?.(node, event)}
         >
           {content}
         </StyledTreeTarget>
