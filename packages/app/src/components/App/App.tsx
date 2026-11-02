@@ -65,6 +65,7 @@ const AppShell: React.FC<AppProps> = ({ scenes, docs, router, wrapper: Wrapper, 
     return {
       entries: index,
       current,
+      bare,
       open: entry => navigate(`${bare ? FRAME : ""}${entry.url}${location.search}`),
       preload: entry => {
         const found = byId(entry)

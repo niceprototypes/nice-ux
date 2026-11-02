@@ -5,6 +5,7 @@ import type { AppEntryType } from "../components/App/App.types"
 export type AppContextValue = {
   entries: AppEntryType[]
   current: AppEntryType | undefined
+  bare: boolean
   open: (entry: AppEntryType) => void
   preload: (entry: AppEntryType) => void
   region: React.RefObject<HTMLDivElement | null>

@@ -10,11 +10,11 @@ import { tanstackRouter } from "../../adapters/tanstack-router"
 
 const scene = (text: string) => () => Promise.resolve({ default: () => <p>{text}</p> })
 
-/** A scene that opens the next page through useScenes, as a stepper's chain does. */
+/** A scene that opens the next page through useScenes, as a stepper's chain does, and shows whether the bare view is on. */
 const Chaining = () => {
-  const { entries, current, open } = useScenes()
+  const { entries, current, bare, open } = useScenes()
   const next = entries[entries.findIndex(entry => entry === current) + 1]
-  return <button onClick={() => next && open(next)}>next</button>
+  return <button data-bare={bare} onClick={() => next && open(next)}>next</button>
 }
 
 const scenes = {
@@ -70,7 +70,8 @@ describe.each(adapters)("App on the %s adapter", (_, router) => {
   it("lets a scene open the next page, and renders a docs page", async () => {
     window.history.replaceState(null, "", "/alpha/pair/first-and-last")
     render(<App scenes={scenes} docs={docs} router={router} />)
-    fireEvent.click(await screen.findByText("next"))
+    expect(await screen.findByText("next")).toHaveAttribute("data-bare", "false")
+    fireEvent.click(screen.getByText("next"))
     expect(await screen.findByText("second")).toBeInTheDocument()
     await act(async () => {
       window.history.pushState(null, "", "/alpha/overview/guide")
@@ -89,5 +90,11 @@ describe.each(adapters)("App on the %s adapter", (_, router) => {
     expect(screen.queryByRole("navigation")).not.toBeInTheDocument()
     expect(screen.getByTestId("wrapper")).toHaveAttribute("data-device", "phone")
     await waitFor(() => expect(screen.getByTestId("wrapper").parentElement).toHaveFocus())
+  })
+
+  it("tells a scene the bare view is on", async () => {
+    window.history.replaceState(null, "", "/frame/alpha/pair/first-and-last")
+    render(<App scenes={scenes} router={router} />)
+    expect(await screen.findByText("next")).toHaveAttribute("data-bare", "true")
   })
 })

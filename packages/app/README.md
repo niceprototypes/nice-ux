@@ -11,8 +11,8 @@ where the current one renders. One page, no iframe.
   `/frame/accessibility/context/stock-ticker` is the scene alone, full screen, focused. Navigation keeps
   the query string. Back and forward work.
 - **The scene region** is focusable. `useSceneRegion()` returns it, so a scene's keys and clicks act
-  only inside it. `useScenes()` returns the index, the current page, `open(entry)` and
-  `preload(entry)`, for scenes that move between pages.
+  only inside it. `useScenes()` returns the index, the current page, `bare` (the bare view
+  is on), `open(entry)` and `preload(entry)`, for scenes that move between pages or drop their chrome.
 - **Router adapters**, subpath exports with optional peer dependencies:
   `@niceprototypes/app/adapters/plain` (`plainRouter`, history API, no dependency),
   `/react-router` (`reactRouter`, React Router 7 library mode), `/tanstack-router` (`tanstackRouter`).
