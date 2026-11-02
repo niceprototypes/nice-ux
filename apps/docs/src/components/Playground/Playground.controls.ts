@@ -37,10 +37,10 @@ export const controlOf = (prop: CatalogPropType): PlaygroundControlType | undefi
   return options ? { prop, kind: "select", options } : undefined
 }
 
-/** A prop's starting value: its catalog default when that is a literal; children start as the component's name. */
+/** A prop's starting value: its catalog default when that is a literal; children and required text start as the component's name. */
 export const initialOf = (control: PlaygroundControlType, componentName: string): PlaygroundValueType => {
   const fallback = control.prop.default
-  if (control.prop.name === "children") return componentName
+  if (control.prop.name === "children" || (control.prop.required && control.kind === "text")) return componentName
   if (fallback === undefined) return undefined
   const literal = /^"([^"]*)"$/.exec(fallback)
   if (literal) return literal[1]

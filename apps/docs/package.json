@@ -22,6 +22,7 @@
     "@niceprototypes/ink": "workspace:^",
     "@niceprototypes/input": "workspace:^",
     "@niceprototypes/logo": "workspace:^",
+    "@niceprototypes/scroll": "workspace:^",
     "@niceprototypes/select": "workspace:^",
     "@niceprototypes/storybook-theme": "workspace:^",
     "@niceprototypes/styles": "workspace:^",

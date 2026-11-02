@@ -98,6 +98,9 @@ importers:
       '@niceprototypes/logo':
         specifier: workspace:^
         version: link:../../packages/logo
+      '@niceprototypes/scroll':
+        specifier: workspace:^
+        version: link:../../packages/scroll
       '@niceprototypes/select':
         specifier: workspace:^
         version: link:../../packages/select
