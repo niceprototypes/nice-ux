@@ -36,6 +36,7 @@ export const StyledAppNav = styled.div`
   flex: none;
   overflow-y: auto;
   padding: ${getToken("gap:large")};
+  padding-inline-end: calc(2 * ${getToken("gap:large")});
 `
 
 /**
