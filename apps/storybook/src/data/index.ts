@@ -69,10 +69,14 @@ export interface TokenTable extends TokenGroupConfig, ColumnSet {
   sectionWrapped: boolean
 }
 
-/** The group's variants from @niceprototypes/styles, in registry order (core, non-inverse). */
+/**
+ * The group's variants from @niceprototypes/styles, in registry order (core, non-inverse).
+ * Runtime-only variants (this Storybook's own `setTokens` entries, e.g. `backgroundColor.dark`)
+ * are left out: the tables read `pristine` seed values, which those tokens do not have.
+ */
 const registryVariants = (group: string): TokenVariant[] =>
   listTokens({ group })
-    .filter(token => !token.prefix && !token.inverse && token.path.length === 1)
+    .filter(token => !token.prefix && !token.inverse && token.path.length === 1 && token.source !== "runtime")
     .map(token => token.variant as TokenVariant)
 
 /** Whether an item is a token module page (its `table` is the tokenModule set). */
