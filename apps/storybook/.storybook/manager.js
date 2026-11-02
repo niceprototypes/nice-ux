@@ -7,8 +7,9 @@
 // title.
 import { addons } from "storybook/manager-api"
 import { create } from "storybook/theming"
-import { setTokens } from "@niceprototypes/styles"
+import { getToken, setTokens } from "@niceprototypes/styles"
 import { TOKENS } from "@niceprototypes/storybook-theme"
+import { BRAND_LOGO } from "./brandLogo"
 import "./manager.css"
 
 // The manager document's one setTokens call: the theme's tokens (the sidebar highlight).
@@ -28,15 +29,30 @@ const prefersDark = (() => {
 })()
 const theme = create({
   base: prefersDark ? "dark" : "light",
-  brandTitle: "Nice Components",
+  brandTitle: BRAND_LOGO,
   brandUrl: "https://niceprototypes.com",
-  brandImage: "https://niceprototypes.com/vectors/logo.svg",
+  // null makes Storybook render brandTitle as HTML: the inline logo, themed below.
+  brandImage: null,
   brandTarget: "_self",
 
   fontBase:
     "'Avenir Next', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif",
   fontCode: '"Roboto Mono", "Courier New", serif',
 })
+
+// The brand wordmark follows the theme: letters in the logo colour, outlined in the
+// base background so they keep their weight on either background.
+const brandStyle = document.createElement("style")
+brandStyle.textContent = `
+.nice-brand {
+  display: block;
+  height: ${getToken("size:small")};
+}
+.nice-brand-name {
+  fill: ${getToken("logo.color:base")};
+  stroke: ${getToken("backgroundColor")};
+}`
+document.head.appendChild(brandStyle)
 
 addons.setConfig({
   theme,
