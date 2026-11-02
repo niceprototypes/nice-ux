@@ -59,6 +59,7 @@ export interface TokenVariants extends CustomTokenVariants {
   "app.handle.height": "base"
   "app.handle.color": "base"
   "app.handle.padding": "base"
+  "app.handle.paddingBottom": "base"
   "button.size": "smaller" | "small" | "base" | "large" | "larger"
   "button.spacing": "smaller" | "small" | "base" | "large" | "larger"
   "button.borderRadius": "none" | "smaller" | "small" | "base" | "large" | "larger" | "rounded"

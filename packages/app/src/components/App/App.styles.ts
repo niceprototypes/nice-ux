@@ -75,7 +75,7 @@ export const StyledAppFooter = styled.div`
 export const StyledAppHandle = styled.div`
   display: flex;
   justify-content: center;
-  padding-block: ${getToken("app.handle.padding")};
+  padding-block: ${getToken("app.handle.padding")} ${getToken("app.handle.paddingBottom")};
   cursor: row-resize;
   touch-action: none;
 

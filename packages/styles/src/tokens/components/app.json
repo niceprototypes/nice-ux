@@ -24,6 +24,9 @@
     },
     "padding": {
       "base": "var(--np--gap--small)"
+    },
+    "paddingBottom": {
+      "base": "var(--np--gap)"
     }
   },
   "$themes": {
