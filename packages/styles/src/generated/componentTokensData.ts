@@ -41,7 +41,7 @@ const componentTokensData: ComponentTokensData = {
         "base": "var(--np--gap--small)"
       },
       "paddingBottom": {
-        "base": "var(--np--gap)"
+        "base": "var(--np--gap--large)"
       }
     }
   },
