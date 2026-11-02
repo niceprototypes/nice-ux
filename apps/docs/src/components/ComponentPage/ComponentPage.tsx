@@ -3,6 +3,8 @@ import Flex from "@niceprototypes/flex"
 import Ink from "@niceprototypes/ink"
 import NiceCode from "@niceprototypes/code"
 import DocsPage, { type DocsPageSectionType } from "../DocsPage"
+import Playground from "../Playground"
+import { hasPlayground } from "../Playground/Playground.controls"
 import type { CatalogComponentType, CatalogPropType } from "../../catalog"
 import { getColumns } from "@niceprototypes/docs/data"
 import { ComponentTokenTable, componentPrefixesWithTokens, type ComponentPrefixWithTokens } from "@niceprototypes/docs/dataTables/components/tokens/Components"
@@ -56,7 +58,8 @@ const SectionHeading = ({ title }: { title: string }) => (
 /**
  * ComponentPage
  *
- * One component's docs page, from the catalog: the overview (install and import), every prop
+ * One component's docs page, from the catalog: the overview (install and import), a playground
+ * (when the props allow one), every prop
  * (its type, default and live examples), the examples that are not one prop, and the component
  * tokens when its prefix has any.
  */
@@ -80,6 +83,20 @@ const ComponentPage: React.FC<{ component: CatalogComponentType }> = ({ componen
         </Flex>
       ),
     },
+    ...(hasPlayground(component)
+      ? [
+          {
+            id: "playground",
+            label: "Playground",
+            content: (
+              <>
+                <SectionHeading title="Playground" />
+                <Playground component={component} />
+              </>
+            ),
+          },
+        ]
+      : []),
     {
       id: "props",
       label: "Props",

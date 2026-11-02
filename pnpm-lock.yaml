@@ -80,6 +80,9 @@ importers:
       '@niceprototypes/flex':
         specifier: workspace:^
         version: link:../../packages/flex
+      '@niceprototypes/icon':
+        specifier: workspace:^
+        version: link:../../packages/icon
       '@niceprototypes/icon-vendor':
         specifier: workspace:^
         version: link:../../packages/icon-vendor
@@ -89,9 +92,15 @@ importers:
       '@niceprototypes/ink':
         specifier: workspace:^
         version: link:../../packages/ink
+      '@niceprototypes/input':
+        specifier: workspace:^
+        version: link:../../packages/input
       '@niceprototypes/logo':
         specifier: workspace:^
         version: link:../../packages/logo
+      '@niceprototypes/select':
+        specifier: workspace:^
+        version: link:../../packages/select
       '@niceprototypes/storybook-theme':
         specifier: workspace:^
         version: link:../../packages/storybook-theme

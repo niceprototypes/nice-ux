@@ -1,12 +1,14 @@
 import catalog from "../../../manifest/agents/catalog.json"
 
 /** One prop of a component, as the catalog generator reads it from the component's types file. */
-export type CatalogPropType = { name: string; type: string; description?: string; default?: string }
+export type CatalogPropType = { name: string; type: string; description?: string; default?: string; required?: boolean }
 
 /** One documented component: its catalog entry, its package, and its docs folder (Forms, Scroll) if any. */
 export type CatalogComponentType = {
   name: string
   package: string
+  /** Its package's folder in the monorepo (`packages/button`) */
+  directory: string
   /** Its folder under Components, from its Storybook docs id (`components-forms-button--docs` → Forms) */
   folder?: string
   /** Its Storybook docs page id (`components-forms-button--docs`) */
@@ -32,6 +34,7 @@ export const catalogComponents: CatalogComponentType[] = catalog.packages.flatMa
       {
         name: component.name,
         package: pkg.package,
+        directory: pkg.directory,
         folder: segments.length ? folderName(segments[0]) : undefined,
         docsId: component.docs,
         named: (pkg.exports as string[]).includes(component.name),
@@ -40,3 +43,6 @@ export const catalogComponents: CatalogComponentType[] = catalog.packages.flatMa
     ]
   }),
 )
+
+/** Each token union type by name, as its literal values (`SizeType` → `"smaller" | … | "larger"`). */
+export const tokenUnions: Record<string, string> = catalog.tokenUnions
