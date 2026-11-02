@@ -65,7 +65,7 @@ const Tree: React.FC<TreeProps> = ({
     const content = (
       <>
         {node.icon !== null && node.icon !== undefined ? <StyledTreeIcon aria-hidden="true">{node.icon}</StyledTreeIcon> : null}
-        <Ink size={size} lineHeight={node.items ? "condensed" : "base"}>
+        <Ink size={size}>
           {node.name}
         </Ink>
       </>
