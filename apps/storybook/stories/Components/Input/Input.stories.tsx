@@ -4,6 +4,7 @@ import { useArgs } from "storybook/preview-api"
 import { expect, fn, within } from "storybook/test"
 import { getToken, themeTokensData } from "@niceprototypes/styles"
 import type { BackgroundColorType, BorderColorType, BorderWidthType, SizeType } from "@niceprototypes/styles"
+import Button from "@niceprototypes/button"
 import Icon, { iconNames } from "@niceprototypes/icon"
 import Input from "@niceprototypes/input"
 import type {
@@ -60,7 +61,7 @@ const CHILDREN_PRESETS = {
  *
  * One flat arg set for every `as` branch, recomposed into InputProps in `render`:
  * - `controlled`: `value` (kept in sync through useArgs) or `defaultValue`
- * - `start` / `end`: an icon name rendered as an Icon
+ * - `start` / `end`: an icon name rendered as an Icon; `end` also offers a clear Button
  * - `ghost`: one boolean per interaction state
  * - `backgroundColor` / `borderColor`: variant plus an optional theme pin
  */
@@ -110,6 +111,9 @@ const optionalSelect = (options: readonly string[], category: string) => ({
 const HIDDEN = { table: { disable: true } }
 
 const ICON_OPTIONS = [NONE, ...iconNames]
+
+/** An `end` choice that renders an action button instead of an icon. */
+const CLEAR_BUTTON = "Clear button"
 
 /** A token variant, optionally pinned to a theme. */
 const toColor = <Name extends string>(name: Name | typeof NONE | undefined, theme: string | undefined) =>
@@ -163,7 +167,7 @@ export const Playground: Story = {
     placeholder: { control: "text", table: { category: "Value" } },
 
     start: optionalSelect(ICON_OPTIONS.slice(1), "Content"),
-    end: optionalSelect(ICON_OPTIONS.slice(1), "Content"),
+    end: optionalSelect([CLEAR_BUTTON, ...ICON_OPTIONS.slice(1)], "Content"),
 
     size: select(SIZE_OPTIONS, "Appearance"),
     status: select(STATUS_OPTIONS, "Appearance"),
@@ -255,7 +259,20 @@ export const Playground: Story = {
       }) satisfies InputProps["onChange"],
       // `mapping` has already turned "none" into undefined; the casts restore the arg types.
       start: toIcon(start),
-      end: toIcon(end),
+      end:
+        end === CLEAR_BUTTON ? (
+          <Button
+            iconLeft="x"
+            size="smaller"
+            aria-label="Clear"
+            onClick={() => {
+              setCurrent("")
+              updateArgs({ value: "" })
+            }}
+          />
+        ) : (
+          toIcon(end)
+        ),
       ghost: ghostHover || ghostFocus ? { rest: ghostRest, hover: ghostHover, focus: ghostFocus } : ghostRest,
       backgroundColor: toColor(backgroundColor, backgroundColorTheme),
       borderColor: toColor(borderColor, borderColorTheme),
@@ -400,6 +417,19 @@ export const StartEnd: Story = {
     const chrome = field(canvasElement)
     await expect(chrome.querySelectorAll("svg")).toHaveLength(2)
     await expect(chrome.firstElementChild?.querySelector("svg")).toBeTruthy()
+  },
+}
+
+export const EndClear: Story = {
+  ...Playground,
+  args: { ...Playground.args, end: CLEAR_BUTTON },
+  play: async ({ canvasElement, userEvent }) => {
+    const canvas = within(canvasElement)
+    const textbox = canvas.getByRole("textbox", { name: "Field" })
+    await userEvent.type(textbox, "Ada")
+    await expect(textbox).toHaveValue("Ada")
+    await userEvent.click(canvas.getByRole("button", { name: "Clear" }))
+    await expect(textbox).toHaveValue("")
   },
 }
 
