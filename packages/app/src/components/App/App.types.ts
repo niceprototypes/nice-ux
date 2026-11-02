@@ -3,7 +3,7 @@ import type * as React from "react"
 /**
  * AppLocationType
  *
- * The URL the router is on: its path (`/accessibility/context/stock-ticker`) and its query
+ * The URL the router is on: its path (`/stories/accessibility/context/stock-ticker`) and its query
  * string, with the leading `?` (`?device=desktop`), or `""`.
  */
 export type AppLocationType = { pathname: string; search: string }
@@ -52,9 +52,17 @@ export type AppScenesType = Record<string, () => Promise<{ default: React.Compon
 export type AppDocsType = Record<string, () => Promise<string>>
 
 /**
+ * AppPagesType
+ *
+ * A lazy `import.meta.glob` of every `index.tsx` under `docs/`, keyed by path: the docs section's
+ * pages, `docs/<N Page>/index.tsx`, one folder each. The module's default export is the page.
+ */
+export type AppPagesType = Record<string, () => Promise<{ default: React.ComponentType }>>
+
+/**
  * AppWrapperType
  *
- * Wraps every scene (not docs pages) inside the scene region, with the URL's query parameters:
+ * Wraps every scene (not markdown or docs section pages) inside the scene region, with the URL's query parameters:
  * where a project puts its scene-only providers, styles and URL settings (`?device=`).
  */
 export type AppWrapperType = React.ComponentType<{ children: React.ReactNode; search: URLSearchParams }>
@@ -62,19 +70,19 @@ export type AppWrapperType = React.ComponentType<{ children: React.ReactNode; se
 /**
  * AppEntryType
  *
- * One page of the index, a scene or a docs page, in nav order.
- * - id: its path without the leading slash, unique (`accessibility/context/stock-ticker`)
- * - url: its path (`/accessibility/context/stock-ticker`)
- * - folders: its folder names from the story down, as on disk (`["3 Accessibility", "2 Context", "2.1 Stock ticker"]`)
+ * One page of the index, in nav order: a scene or markdown page under `/stories`, or a docs section page under `/docs`.
+ * - id: its path without the leading slash, unique (`stories/accessibility/context/stock-ticker`, `docs/getting-started`)
+ * - url: its path (`/stories/accessibility/context/stock-ticker`)
+ * - folders: its folder names under `stories/` or `docs/`, as on disk (`["3 Accessibility", "2 Context", "2.1 Stock ticker"]`)
  * - names: the same without their numbers, as the nav shows them (`["Accessibility", "Context", "Stock ticker"]`)
- * - kind: "scene", or "doc" for a markdown page
+ * - kind: "scene", "doc" for a markdown page in a story, or "page" for a docs section page
  */
 export type AppEntryType = {
   id: string
   url: string
   folders: string[]
   names: string[]
-  kind: "scene" | "doc"
+  kind: "scene" | "doc" | "page"
 }
 
 /**
@@ -86,8 +94,11 @@ export interface AppProps {
   /** The scenes: a lazy `import.meta.glob` over `stories/` */
   scenes: AppScenesType
 
-  /** The docs pages: a lazy `import.meta.glob` of `.md` files as text */
+  /** The markdown pages in stories: a lazy `import.meta.glob` of `.md` files as text */
   docs?: AppDocsType
+
+  /** The docs section's pages: a lazy `import.meta.glob` over `docs/` */
+  pages?: AppPagesType
 
   /** The router adapter */
   router: AppRouterType
@@ -110,6 +121,7 @@ namespace AppTypes {
   export type Router = AppRouterType
   export type Scenes = AppScenesType
   export type Docs = AppDocsType
+  export type Pages = AppPagesType
   export type Wrapper = AppWrapperType
   export type Entry = AppEntryType
   export type Props = AppProps

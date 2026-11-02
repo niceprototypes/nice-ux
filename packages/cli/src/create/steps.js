@@ -63,7 +63,7 @@ const literal = (value) => `'${String(value).replace(/\\/g, '\\\\').replace(/'/g
 
 /** The URL path of a scene folder key, as @niceprototypes/app builds it (for tests that open scenes). */
 const SLUG_SOURCE = `const urlOf = (key: string) =>
-  '/frame/' +
+  '/frame/stories/' +
   key
     .split('/')
     .slice(key.split('/').indexOf('stories') + 1, -1)
@@ -150,7 +150,7 @@ ${plan.routerImport}
 import '@niceprototypes/styles/tokens.css';
 ${plan.tokens.prefixed.length || plan.tokens.core.length ? "import './app/tokens';\n" : ''}${wrapperImport}
 // One test per scene, from the same glob as src/main.tsx. Each opens the scene in the app's bare
-// view (/frame/…) ${environmentNote} and fails on any error it throws or reports.
+// view (/frame/stories/…) ${environmentNote} and fails on any error it throws or reports.
 const scenes = import.meta.glob<{ default: ComponentType }>('./stories/**/index.tsx');
 
 ${SLUG_SOURCE}
@@ -216,7 +216,7 @@ export default defineConfig({
       `import { globSync } from 'node:fs';
 import { expect, test } from '@playwright/test';
 
-// One test per scene folder under src/stories: its bare view (/frame/…) renders without page errors.
+// One test per scene folder under src/stories: its bare view (/frame/stories/…) renders without page errors.
 const keys = globSync('src/stories/**/index.tsx');
 
 ${SLUG_SOURCE}
@@ -353,7 +353,7 @@ export const SceneWrapper: AppWrapperType = ({ children, search }: ComponentProp
   plan.main.appProps.push('wrapper={SceneWrapper}');
   plan.readme.push(
     '- Scenes: `src/stories/<N Story>/<N Chapter>/<N.M Scene>/index.tsx`, or `<N Chapter>/index.tsx` for a one-scene chapter (default export).',
-    '  Folder names are the nav, the URL and the only metadata; numbers order them. `/frame/<path>` shows a scene alone; `?device=` picks the frame.',
+    '  Folder names are the nav, the URL and the only metadata; numbers order them. `/stories/<path>` is a scene, `/frame/stories/<path>` the scene alone; `?device=` picks the frame.',
   );
 }
 

@@ -8,6 +8,7 @@ import {
   StyledApp,
   StyledAppAside,
   StyledAppColumns,
+  StyledAppDocs,
   StyledAppHeader,
   StyledAppNav,
   StyledAppRegion,
@@ -17,14 +18,14 @@ import { AppContext, type AppContextValue } from "../../utilities/AppContext"
 import { buildAppIndex, type AppIndexEntry } from "../../utilities/buildAppIndex"
 import { buildAppTree, getAppAncestorIds } from "../../utilities/buildAppTree"
 
-/** The bare view's path prefix: `/frame/<page>` shows the page alone, full screen (for recording). */
+/** The bare view's path prefix: `/frame/stories/<page>` shows the page alone, full screen (for recording). */
 const FRAME = "/frame"
 
 /** The shell inside the router's Provider, where the router's hooks work. */
-const AppShell: React.FC<AppProps> = ({ scenes, docs, router, wrapper: Wrapper, header, "aria-label": ariaLabel = "Scenes" }) => {
+const AppShell: React.FC<AppProps> = ({ scenes, docs, pages, router, wrapper: Wrapper, header, "aria-label": ariaLabel = "Scenes" }) => {
   const location = router.useLocation()
   const navigate = router.useNavigate()
-  const index = React.useMemo(() => buildAppIndex(scenes, docs), [scenes, docs])
+  const index = React.useMemo(() => buildAppIndex(scenes, docs, pages), [scenes, docs, pages])
   const bare = location.pathname === FRAME || location.pathname.startsWith(`${FRAME}/`)
   const path = (bare ? location.pathname.slice(FRAME.length) : location.pathname).replace(/\/+$/, "")
   const current = index.find(entry => entry.url === path)
@@ -96,6 +97,8 @@ const AppShell: React.FC<AppProps> = ({ scenes, docs, router, wrapper: Wrapper, 
     const value = loaded.current.get(entry.id)
     if (entry.kind === "doc") return <AppDocs text={value as string} Link={router.Link} />
     const Scene = (value as { default: React.ComponentType }).default
+    // A docs section page is a plain page: the region's padding, no wrapper (no device frame).
+    if (entry.kind === "page") return <StyledAppDocs><Scene key={entry.id} /></StyledAppDocs>
     const scene = <Scene key={entry.id} />
     return Wrapper ? <Wrapper search={search}>{scene}</Wrapper> : scene
   })()
@@ -144,10 +147,12 @@ const AppShell: React.FC<AppProps> = ({ scenes, docs, router, wrapper: Wrapper, 
  * App
  *
  * The app shell: a Tree nav of the project's scenes and docs pages, found by folder, beside the
- * scene region where the current one renders, under an optional `header` row (a logo). Folder names are the only metadata: depth is the
+ * scene region where the current one renders, under an optional `header` row (a logo). The nav has
+ * two groups: Stories (`stories/`, at `/stories/...`) and, when there are docs section pages, Docs
+ * (`docs/<N Page>/index.tsx`, at `/docs/<page>`). Folder names are the only metadata: depth is the
  * level (story, chapter, scene), numbers order them by value and are left out of names and URLs.
- * One page, no iframe: `/accessibility/context/stock-ticker?device=desktop` is the shell on a scene,
- * `/frame/accessibility/context/stock-ticker` the scene alone, full screen. Back and forward work.
+ * One page, no iframe: `/stories/accessibility/context/stock-ticker?device=desktop` is the shell on a scene,
+ * `/frame/stories/accessibility/context/stock-ticker` the scene alone, full screen. Back and forward work.
  * The router comes in as an adapter (`@niceprototypes/app/adapters/*`).
  *
  * @example
@@ -156,7 +161,8 @@ const AppShell: React.FC<AppProps> = ({ scenes, docs, router, wrapper: Wrapper, 
  * import { plainRouter } from "@niceprototypes/app/adapters/plain"
  *
  * // scenes: import.meta.glob over every index.tsx under ./stories (a literal pattern)
- * <App scenes={scenes} router={plainRouter} />
+ * // pages: import.meta.glob over every index.tsx under ./docs
+ * <App scenes={scenes} pages={pages} router={plainRouter} />
  * ```
  */
 const App: React.FC<AppProps> = props => (

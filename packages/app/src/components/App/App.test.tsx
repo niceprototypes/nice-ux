@@ -49,7 +49,11 @@ const scenes = {
   "./stories/1 Alpha/2 Pair/2.1 First & last/index.tsx": () => Promise.resolve({ default: Chaining }),
   "./stories/1 Alpha/1 Solo/index.tsx": scene("solo"),
 }
-const docs = { "./stories/1 Alpha/Overview/Guide.md": () => Promise.resolve("# Guide\n\nRead [solo](/alpha/solo).") }
+const docs = { "./stories/1 Alpha/Overview/Guide.md": () => Promise.resolve("# Guide\n\nRead [solo](/stories/alpha/solo).") }
+const pages = {
+  "./docs/10 Ten pages/index.tsx": scene("ten pages"),
+  "./docs/2 Getting started/index.tsx": scene("getting started"),
+}
 
 const adapters: [string, AppRouterType][] = [
   ["plain", plainRouter],
@@ -64,28 +68,52 @@ describe.each(adapters)("App on the %s adapter", (_, router) => {
     window.history.replaceState(null, "", "/?device=desktop")
     render(<App scenes={scenes} docs={docs} router={router} />)
     expect(await screen.findByText("solo")).toBeInTheDocument()
-    expect(window.location.pathname + window.location.search).toBe("/alpha/solo?device=desktop")
+    expect(window.location.pathname + window.location.search).toBe("/stories/alpha/solo?device=desktop")
   })
 
   it("lists stories, chapters and scenes in folder order, numbers by value and left out of names", async () => {
-    window.history.replaceState(null, "", "/beta/nine")
+    window.history.replaceState(null, "", "/stories/beta/nine")
     render(<App scenes={scenes} docs={docs} router={router} />)
     await screen.findByText("nine")
     const rows = screen.getAllByRole("link", { hidden: true }).map(link => link.textContent)
     expect(rows).toEqual(["Solo", "First & last", "Second", "Guide", "Nine", "Ten", "Steps", "Settings"])
+    expect(screen.queryByRole("button", { name: "Docs" })).not.toBeInTheDocument()
+    expect(screen.getByRole("button", { name: "Stories" })).toHaveAttribute("aria-expanded", "true")
     expect(screen.getByRole("link", { name: "Nine" })).toHaveAttribute("aria-current", "page")
     expect(screen.getByRole("button", { name: "Beta" })).toHaveAttribute("aria-expanded", "true")
     expect(screen.getByRole("button", { name: "Alpha" })).toHaveAttribute("aria-expanded", "false")
   })
 
+  it("lists the docs section's pages under Docs, after Stories, in folder order", async () => {
+    window.history.replaceState(null, "", "/docs/getting-started")
+    render(<App scenes={scenes} docs={docs} pages={pages} router={router} />)
+    await screen.findByText("getting started")
+    const groups = screen.getAllByRole("button", { hidden: true }).map(button => button.textContent)
+    expect(groups.slice(0, 1)).toEqual(["Stories"])
+    expect(groups).toContain("Docs")
+    expect(screen.getByRole("button", { name: "Docs" })).toHaveAttribute("aria-expanded", "true")
+    const rows = screen.getAllByRole("link", { hidden: true }).map(link => link.textContent)
+    expect(rows.slice(-2)).toEqual(["Getting started", "Ten pages"])
+    expect(screen.getByRole("link", { name: "Getting started" })).toHaveAttribute("aria-current", "page")
+  })
+
+  it("renders a docs section page without the wrapper or a scene's sidebar", async () => {
+    const Wrapper = ({ children }: { children: React.ReactNode }) => <div data-testid="wrapper">{children}</div>
+    window.history.replaceState(null, "", "/docs/ten-pages")
+    render(<App scenes={scenes} pages={pages} router={router} wrapper={Wrapper} />)
+    expect(await screen.findByText("ten pages")).toBeInTheDocument()
+    expect(screen.queryByTestId("wrapper")).not.toBeInTheDocument()
+    expect(screen.queryByRole("separator")).not.toBeInTheDocument()
+  })
+
   it("navigates from the nav and back and forward", async () => {
-    window.history.replaceState(null, "", "/alpha/solo")
+    window.history.replaceState(null, "", "/stories/alpha/solo")
     render(<App scenes={scenes} docs={docs} router={router} />)
     await screen.findByText("solo")
     fireEvent.click(screen.getByRole("button", { name: "Pair" }))
     fireEvent.click(screen.getByRole("link", { name: "Second", hidden: true }))
     expect(await screen.findByText("second")).toBeInTheDocument()
-    expect(window.location.pathname).toBe("/alpha/pair/second")
+    expect(window.location.pathname).toBe("/stories/alpha/pair/second")
     await act(async () => window.history.back())
     expect(await screen.findByText("solo")).toBeInTheDocument()
     await act(async () => window.history.forward())
@@ -93,13 +121,13 @@ describe.each(adapters)("App on the %s adapter", (_, router) => {
   })
 
   it("lets a scene open the next page, and renders a docs page", async () => {
-    window.history.replaceState(null, "", "/alpha/pair/first-and-last")
+    window.history.replaceState(null, "", "/stories/alpha/pair/first-and-last")
     render(<App scenes={scenes} docs={docs} router={router} />)
     expect(await screen.findByText("next")).toHaveAttribute("data-bare", "false")
     fireEvent.click(screen.getByText("next"))
     expect(await screen.findByText("second")).toBeInTheDocument()
     await act(async () => {
-      window.history.pushState(null, "", "/alpha/overview/guide")
+      window.history.pushState(null, "", "/stories/alpha/overview/guide")
       window.dispatchEvent(new PopStateEvent("popstate"))
     })
     expect(await screen.findByRole("heading", { name: "Guide" })).toBeInTheDocument()
@@ -109,7 +137,7 @@ describe.each(adapters)("App on the %s adapter", (_, router) => {
     const Wrapper = ({ children, search }: { children: React.ReactNode; search: URLSearchParams }) => (
       <div data-testid="wrapper" data-device={search.get("device") ?? ""}>{children}</div>
     )
-    window.history.replaceState(null, "", "/frame/beta/ten?device=phone")
+    window.history.replaceState(null, "", "/frame/stories/beta/ten?device=phone")
     render(<App scenes={scenes} router={router} wrapper={Wrapper} />)
     expect(await screen.findByText("ten")).toBeInTheDocument()
     expect(screen.queryByRole("navigation")).not.toBeInTheDocument()
@@ -123,7 +151,7 @@ describe.each(adapters)("App on the %s adapter", (_, router) => {
       region = useSceneRegion().current
       return <>{children}</>
     }
-    window.history.replaceState(null, "", "/gamma/steps")
+    window.history.replaceState(null, "", "/stories/gamma/steps")
     const { unmount } = render(<App scenes={scenes} router={router} wrapper={Region} />)
     await screen.findByText("with steps")
     const steps = await screen.findByText("steps")
@@ -131,20 +159,20 @@ describe.each(adapters)("App on the %s adapter", (_, router) => {
     expect(sidebar.previousElementSibling).toContainElement(screen.getByRole("navigation"))
     expect(region).not.toContainElement(steps)
     await act(async () => {
-      window.history.pushState(null, "", "/alpha/solo")
+      window.history.pushState(null, "", "/stories/alpha/solo")
       window.dispatchEvent(new PopStateEvent("popstate"))
     })
     await screen.findByText("solo")
     expect(sidebar).toBeEmptyDOMElement()
     unmount()
-    window.history.replaceState(null, "", "/frame/gamma/steps")
+    window.history.replaceState(null, "", "/frame/stories/gamma/steps")
     render(<App scenes={scenes} router={router} />)
     await screen.findByText("with steps")
     expect(screen.queryByText("steps")).not.toBeInTheDocument()
   })
 
   it("renders the header above the nav and the scene sidebar; none in the bare view", async () => {
-    window.history.replaceState(null, "", "/gamma/steps")
+    window.history.replaceState(null, "", "/stories/gamma/steps")
     const { unmount } = render(<App scenes={scenes} router={router} header={<p>logo</p>} />)
     await screen.findByText("steps")
     const header = screen.getByText("logo").parentElement!
@@ -152,21 +180,21 @@ describe.each(adapters)("App on the %s adapter", (_, router) => {
     expect(header.nextElementSibling).toContainElement(screen.getByText("steps"))
     expect(getComputedStyle(screen.getByRole("navigation").parentElement!).paddingBlockStart).toBe("var(--np--gap)")
     unmount()
-    window.history.replaceState(null, "", "/frame/gamma/steps")
+    window.history.replaceState(null, "", "/frame/stories/gamma/steps")
     render(<App scenes={scenes} router={router} header={<p>logo</p>} />)
     await screen.findByText("with steps")
     expect(screen.queryByText("logo")).not.toBeInTheDocument()
   })
 
   it("leaves the nav's top padding alone without a header", async () => {
-    window.history.replaceState(null, "", "/gamma/steps")
+    window.history.replaceState(null, "", "/stories/gamma/steps")
     render(<App scenes={scenes} router={router} />)
     await screen.findByText("steps")
     expect(getComputedStyle(screen.getByRole("navigation").parentElement!).paddingBlockStart).not.toBe("var(--np--gap)")
   })
 
   it("sizes the sidebar from the app.sidebar.minWidth token", async () => {
-    window.history.replaceState(null, "", "/alpha/solo")
+    window.history.replaceState(null, "", "/stories/alpha/solo")
     render(<App scenes={scenes} router={router} />)
     await screen.findByText("solo")
     const aside = screen.getByRole("navigation").closest("div")!.parentElement!.parentElement!
@@ -174,7 +202,7 @@ describe.each(adapters)("App on the %s adapter", (_, router) => {
   })
 
   it("tells a scene the bare view is on", async () => {
-    window.history.replaceState(null, "", "/frame/alpha/pair/first-and-last")
+    window.history.replaceState(null, "", "/frame/stories/alpha/pair/first-and-last")
     render(<App scenes={scenes} router={router} />)
     expect(await screen.findByText("next")).toHaveAttribute("data-bare", "true")
   })
@@ -200,7 +228,7 @@ describe("App sidebar footer", () => {
     Object.defineProperty(HTMLElement.prototype, "offsetHeight", { configurable: true, get: () => CONTENT })
   })
   afterAll(() => Object.defineProperty(HTMLElement.prototype, "offsetHeight", offsetHeight))
-  beforeEach(() => window.history.replaceState(null, "", "/gamma/settings"))
+  beforeEach(() => window.history.replaceState(null, "", "/stories/gamma/settings"))
 
   const renderFooter = async () => {
     render(<App scenes={scenes} router={plainRouter} />)

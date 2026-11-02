@@ -125,7 +125,7 @@ export const StyledAppRegion = styled.div`
   outline: none;
 `
 
-/** A docs page: the markdown's text with the region's padding. */
+/** A markdown or docs section page: its content with the region's padding. */
 export const StyledAppDocs = styled.div`
   padding: ${getToken("gap:large")};
 `

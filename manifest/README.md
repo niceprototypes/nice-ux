@@ -36,7 +36,7 @@ The manager also asks before anything critical: irreversible changes, npm publis
 
 ```
 Application  apps/storybook; ~/nice/website (package "np"), ~/nice/browser, ~/nice/animation-studio
-Shell        app (Tree nav of stories/ folders + scene region, router adapters; scaffolded by `nicely create`)
+Shell        app (Tree nav of stories/ and docs/ folders at /stories, /docs + scene region, router adapters; scaffolded by `nicely create`)
 Feature      button, input, select, dialog, calendar, form, tabs, …   (agents/components.txt)
 Utility      flex, ink, tile, icon, image, line, list, scroll, …
 Foundation   styles (tokens + React bindings: StylesProvider, Theme, setTokens), icon (+ svg set), config-*
