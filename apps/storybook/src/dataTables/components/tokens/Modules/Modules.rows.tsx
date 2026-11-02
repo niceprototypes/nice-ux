@@ -2,15 +2,18 @@ import * as React from "react"
 import { getToken } from "@niceprototypes/styles"
 import type { TokenGroup, TokenVariants } from "@niceprototypes/styles"
 import { TokenName, variantKey } from "../../../utilities"
+import ThemeValue from "../../../../components/ThemeValue"
 import { tokenCode } from "./Modules.tokenCode"
 import type { DataTableConfig, DataRowItem } from "../../../../components/DataTable"
-import type { TokenGroupConfig, TokenVariant } from "./Modules.types"
+import type { TokenGroupConfig } from "./Modules.types"
 import type { HighlightedToken } from "./Modules.hooks"
 
 /**
  * Build the data rows for one token group, given the runtime theme and the
- * active deep-link highlight. Each row's `values` are index-aligned to
- * the `tokenModule` column set in `src/data/storybook.json`: [preview, tokenName, cssVar, jsCall, resolvedValue].
+ * active deep-link highlight. Each row's `values` are index-aligned to the
+ * group's column set in `src/data/storybook.json`:
+ * - `tokenModule`: [preview, tokenName, cssVar, jsCall, resolvedValue]
+ * - `tokenColor`: [tokenName, cssVar, lightValue, darkValue]
  *
  * `pristine` reads the canonical seed, not the runtime registry — so the
  * reference page shows real defaults even though src/nice/tokens.ts overrides
@@ -28,9 +31,7 @@ function nightValueOf(group: TokenGroup, variant: TokenVariants[TokenGroup], day
 }
 
 export function buildTokenRows(
-  group: TokenGroup,
-  variants: ReadonlyArray<TokenVariant>,
-  preview: ((item: TokenVariant) => React.ReactNode) | undefined,
+  { name: group, variants, preview, columnSet }: TokenGroupConfig,
   isNight: boolean,
   highlight: HighlightedToken | null
 ): DataRowItem[] {
@@ -40,10 +41,21 @@ export function buildTokenRows(
     const nightValue = nightValueOf(group, variant, dayValue)
     const themed = nightValue !== dayValue
     const theme = isNight && themed ? "night" : undefined
-    const { cssVar, jsCall } = tokenCode(group, variant, theme)
+    // A colour row shows both themes, so its code is the unpinned (semantic) form.
+    const { cssVar, jsCall } = tokenCode(group, variant, columnSet === "tokenColor" ? undefined : theme)
+    // Each value cell is pinned to its theme, so the unpinned read resolves per cell.
+    const values =
+      columnSet === "tokenColor"
+        ? [
+            <TokenName variant={variant} />,
+            cssVar,
+            <ThemeValue theme="day" color={getToken(group, variant)} value={dayValue} />,
+            <ThemeValue theme="night" color={getToken(group, variant)} value={nightValue} />,
+          ]
+        : [preview?.(item), <TokenName variant={variant} />, cssVar, jsCall, isNight ? nightValue : dayValue]
     return {
       id: variant,
-      values: [preview?.(item), <TokenName variant={variant} />, cssVar, jsCall, isNight ? nightValue : dayValue],
+      values,
       highlighted: highlight?.group === group && highlight.variant === variant,
     }
   })
@@ -61,6 +73,6 @@ export function buildTokenTable(
 ): DataTableConfig {
   return {
     name: name ?? group.name,
-    rows: buildTokenRows(group.name, group.variants, group.preview, isNight, highlight),
+    rows: buildTokenRows(group, isNight, highlight),
   }
 }

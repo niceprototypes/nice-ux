@@ -36,6 +36,30 @@
         "clickToCopy": true
       }
     ],
+    "tokenColor": [
+      {
+        "key": "tokenName",
+        "header": "Token name",
+        "clickToCopy": true,
+        "width": "8em"
+      },
+      {
+        "key": "css",
+        "header": "CSS",
+        "render": "@niceprototypes/code",
+        "language": "tsx"
+      },
+      {
+        "key": "light",
+        "header": "Light value",
+        "width": "12em"
+      },
+      {
+        "key": "dark",
+        "header": "Dark value",
+        "width": "12em"
+      }
+    ],
     "componentToken": [
       {
         "key": "example",
@@ -209,45 +233,48 @@
             ]
           },
           {
-            "Colors": [
-              {
-                "backgroundColor": {
-                  "description": "Surface color tokens for page and container backgrounds, including the raised surface step and state fills (success, highlight, warning, error, link)."
+            "Colors": {
+              "table": "tokenColor",
+              "items": [
+                {
+                  "backgroundColor": {
+                    "description": "Surface color tokens for page and container backgrounds, including the raised surface step and state fills (success, highlight, warning, error, link)."
+                  }
+                },
+                {
+                  "borderColor": {
+                    "description": "Stroke color tokens for outlines and dividers. subtle recedes into the surface, strong and stronger advance from it, and the semantic statuses (success, highlight, warning, error, link) are tuned to stand out against their backgroundColor fills."
+                  }
+                },
+                {
+                  "brandColor": {
+                    "description": "Brand identity colors. Placeholder palette — base (indigo) and secondary (cyan); static across day/night."
+                  }
+                },
+                {
+                  "color": {
+                    "description": "Text and icon color tokens, including semantic states (`success`, `highlight`, `warning`, `error`).",
+                    "variants": [
+                      "lightest",
+                      "lighter",
+                      "light",
+                      "base",
+                      "disabled",
+                      "link",
+                      "success",
+                      "highlight",
+                      "warning",
+                      "error"
+                    ]
+                  }
+                },
+                {
+                  "transformColor": {
+                    "table": false
+                  }
                 }
-              },
-              {
-                "borderColor": {
-                  "description": "Stroke color tokens for outlines and dividers. subtle recedes into the surface, strong and stronger advance from it, and the semantic statuses (success, highlight, warning, error, link) are tuned to stand out against their backgroundColor fills."
-                }
-              },
-              {
-                "brandColor": {
-                  "description": "Brand identity colors. Placeholder palette — base (indigo) and secondary (cyan); static across day/night."
-                }
-              },
-              {
-                "color": {
-                  "description": "Text and icon color tokens, including semantic states (`success`, `highlight`, `warning`, `error`).",
-                  "variants": [
-                    "lightest",
-                    "lighter",
-                    "light",
-                    "base",
-                    "disabled",
-                    "link",
-                    "success",
-                    "highlight",
-                    "warning",
-                    "error"
-                  ]
-                }
-              },
-              {
-                "transformColor": {
-                  "table": false
-                }
-              }
-            ]
+              ]
+            }
           },
           {
             "Fonts": {

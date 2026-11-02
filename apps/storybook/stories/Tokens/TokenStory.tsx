@@ -19,7 +19,7 @@ export const TokenStory = ({ id }: { id: string }) => {
   const highlight = useHighlightedToken()
   const table = getTokenTable(id)
   if (!table) throw new Error(`TokenStory: no token table "${id}" in storybook.json`)
-  const rows = buildTokenRows(table.name, table.variants, table.preview, isNight, highlight)
+  const rows = buildTokenRows(table, isNight, highlight)
   return (
     <>
       <StoryHeader title={table.name} description={table.description} />

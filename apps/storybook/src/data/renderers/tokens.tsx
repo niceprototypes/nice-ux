@@ -6,7 +6,7 @@ import PreviewCell from "../../components/PreviewCell"
 import ThemeSplit from "../../components/ThemeSplit"
 import DemoDots from "../../components/DemoDots"
 import { TokenPreview } from "../../components/TokenPreview"
-import { ColorSample, Dot, EasingPath, EasingSvg, Track } from "../../dataTables/data/styles"
+import { Dot, EasingPath, EasingSvg, Track } from "../../dataTables/data/styles"
 import { loremIpsum } from "../../dataTables/data/constants"
 import type { Renderer } from "./index"
 
@@ -69,57 +69,6 @@ export const tokenRenderers: Record<string, Renderer> = {
         borderColor={getToken("color")}
         borderWidth={`calc(${getToken("borderWidth", "large")} * ${getToken("strokeWidthScale", variant)})`}
       />
-    </ThemeSplit>
-  ),
-
-  // One swatch under both themes; the cascade resolves each half.
-  "tokens-colors-backgroundcolor": (variant) => (
-    <ThemeSplit>
-      <PreviewCell
-        backgroundColor={getToken("backgroundColor", variant)}
-        height={getToken("size", "large")}
-        borderRadius={getToken("borderRadius", "small")}
-      />
-    </ThemeSplit>
-  ),
-
-  // The stroke colour shown as a fill, so it reads directly rather than as a
-  // hairline. One swatch under both themes; the cascade resolves each half.
-  "tokens-colors-bordercolor": (variant) => (
-    <ThemeSplit>
-      <PreviewCell
-        backgroundColor={getToken("borderColor", variant)}
-        height={getToken("size", "large")}
-        borderRadius={getToken("borderRadius", "small")}
-      />
-    </ThemeSplit>
-  ),
-
-  "tokens-colors-brandcolor": (variant) => (
-    <PreviewCell
-      backgroundColor={getToken("brandColor", variant)}
-      height={getToken("size", "large")}
-      borderRadius={getToken("borderRadius", "small")}
-    />
-  ),
-
-  // One swatch, rendered under both themes by ThemeSplit. The reads are
-  // unpinned: each half is a real nested theme, so the cascade resolves them.
-  // The surface is pinned alongside the sample because a colour alone is not
-  // legible — night text on a day-lit cell is near-white on near-white.
-  "tokens-colors-color": (variant) => (
-    <ThemeSplit>
-      <PreviewCell
-        backgroundColor={getToken("backgroundColor", "base")}
-        height={getToken("size", "large")}
-        borderRadius={getToken("borderRadius", "small")}
-        alignItems="center"
-        justifyContent="flex-start"
-      >
-        <ColorSample size="large" $color={getToken("color", variant)}>
-          {label(variant)}
-        </ColorSample>
-      </PreviewCell>
     </ThemeSplit>
   ),
 

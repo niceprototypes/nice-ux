@@ -429,6 +429,14 @@
 	--np--code--color--lightest: var(--np--color--lightest);
 	--np--code--color--link: var(--np--color--link);
 	--np--code--color--highlight: var(--np--color--highlight);
+	--np--code--max-height: 200px;
+	--np--code--fade-start: 25%;
+	--np--code--syntax-color: hsla(210, 6%, 17%, 1);
+	--np--code--syntax-color--keyword: hsla(226, 75%, 45%, 1);
+	--np--code--syntax-color--string: hsla(150, 54%, 30%, 1);
+	--np--code--syntax-color--tag: hsla(268, 50%, 48%, 1);
+	--np--code--syntax-color--constant: hsla(198, 70%, 33%, 1);
+	--np--code--syntax-color--comment: hsla(210, 5%, 45%, 1);
 
 	/* dialog component tokens */
 	--np--dialog--background-color: var(--np--background-color--raised);
@@ -1002,9 +1010,21 @@
 	--np--tree--guide--color--inverse: var(--np--border-color--inverse);
 
 	/* Component day mode primitives */
+	--np--code--syntax-color--day: hsla(210, 6%, 17%, 1);
+	--np--code--syntax-color--keyword--day: hsla(226, 75%, 45%, 1);
+	--np--code--syntax-color--string--day: hsla(150, 54%, 30%, 1);
+	--np--code--syntax-color--tag--day: hsla(268, 50%, 48%, 1);
+	--np--code--syntax-color--constant--day: hsla(198, 70%, 33%, 1);
+	--np--code--syntax-color--comment--day: hsla(210, 5%, 45%, 1);
 	--np--logo--color--day: var(--np--color--day);
 
 	/* Component night mode primitives */
+	--np--code--syntax-color--night: hsla(210, 6%, 82%, 1);
+	--np--code--syntax-color--keyword--night: hsla(228, 85%, 78%, 1);
+	--np--code--syntax-color--string--night: hsla(152, 60%, 68%, 1);
+	--np--code--syntax-color--tag--night: hsla(268, 80%, 80%, 1);
+	--np--code--syntax-color--constant--night: hsla(198, 75%, 75%, 1);
+	--np--code--syntax-color--comment--night: hsla(210, 4%, 60%, 1);
 	--np--logo--color--night: var(--np--color--night);
 
 	/* Breakpoint thresholds */
@@ -1239,6 +1259,12 @@
 		--np--color--highlight--inverse: var(--np--color--highlight--night--inverse);
 		--np--color--warning--inverse: var(--np--color--warning--night--inverse);
 		--np--color--error--inverse: var(--np--color--error--night--inverse);
+		--np--code--syntax-color: var(--np--code--syntax-color--night);
+		--np--code--syntax-color--keyword: var(--np--code--syntax-color--keyword--night);
+		--np--code--syntax-color--string: var(--np--code--syntax-color--string--night);
+		--np--code--syntax-color--tag: var(--np--code--syntax-color--tag--night);
+		--np--code--syntax-color--constant: var(--np--code--syntax-color--constant--night);
+		--np--code--syntax-color--comment: var(--np--code--syntax-color--comment--night);
 		--np--logo--color: var(--np--logo--color--night);
 		--np--app--footer--rule--color--inverse: var(--np--border-color--night--inverse);
 		--np--app--handle--color--inverse: var(--np--border-color--strong--night--inverse);
@@ -1680,6 +1706,12 @@
 		--np--color--highlight--inverse: var(--np--color--highlight--day--inverse);
 		--np--color--warning--inverse: var(--np--color--warning--day--inverse);
 		--np--color--error--inverse: var(--np--color--error--day--inverse);
+		--np--code--syntax-color: var(--np--code--syntax-color--day);
+		--np--code--syntax-color--keyword: var(--np--code--syntax-color--keyword--day);
+		--np--code--syntax-color--string: var(--np--code--syntax-color--string--day);
+		--np--code--syntax-color--tag: var(--np--code--syntax-color--tag--day);
+		--np--code--syntax-color--constant: var(--np--code--syntax-color--constant--day);
+		--np--code--syntax-color--comment: var(--np--code--syntax-color--comment--day);
 		--np--logo--color: var(--np--logo--color--day);
 		--np--app--footer--rule--color--inverse: var(--np--border-color--day--inverse);
 		--np--app--handle--color--inverse: var(--np--border-color--strong--day--inverse);
@@ -2120,6 +2152,12 @@
 		--np--color--highlight--inverse: var(--np--color--highlight--night--inverse);
 		--np--color--warning--inverse: var(--np--color--warning--night--inverse);
 		--np--color--error--inverse: var(--np--color--error--night--inverse);
+		--np--code--syntax-color: var(--np--code--syntax-color--night);
+		--np--code--syntax-color--keyword: var(--np--code--syntax-color--keyword--night);
+		--np--code--syntax-color--string: var(--np--code--syntax-color--string--night);
+		--np--code--syntax-color--tag: var(--np--code--syntax-color--tag--night);
+		--np--code--syntax-color--constant: var(--np--code--syntax-color--constant--night);
+		--np--code--syntax-color--comment: var(--np--code--syntax-color--comment--night);
 		--np--logo--color: var(--np--logo--color--night);
 		--np--app--footer--rule--color--inverse: var(--np--border-color--night--inverse);
 		--np--app--handle--color--inverse: var(--np--border-color--strong--night--inverse);

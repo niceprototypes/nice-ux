@@ -754,6 +754,9 @@ importers:
         specifier: ^4.1.0
         version: 4.5.0
     devDependencies:
+      '@niceprototypes/button':
+        specifier: workspace:*
+        version: link:../button
       '@niceprototypes/config-exports':
         specifier: workspace:*
         version: link:../config-exports
@@ -766,6 +769,9 @@ importers:
       '@niceprototypes/flex':
         specifier: workspace:*
         version: link:../flex
+      '@niceprototypes/icon':
+        specifier: workspace:*
+        version: link:../icon
       '@niceprototypes/ink':
         specifier: workspace:*
         version: link:../ink

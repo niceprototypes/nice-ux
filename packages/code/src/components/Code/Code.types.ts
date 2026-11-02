@@ -1,4 +1,4 @@
-import type { GapType } from "@niceprototypes/styles"
+import type { GapType, TokenVariants } from "@niceprototypes/styles"
 
 /**
  * CodeCodeType
@@ -54,6 +54,15 @@ export type CodeFitType = boolean
 export type CodeMarginType = GapType
 
 /**
+ * CodeMaxHeightType
+ *
+ * Collapsed height of a card block, as a `code.maxHeight` token variant. Taller
+ * code is cut off with a fade and a "Show more" / "Show less" toggle; shorter
+ * code renders in full with no toggle. "none" never collapses.
+ */
+export type CodeMaxHeightType = "none" | TokenVariants["code.maxHeight"]
+
+/**
  * CodeClassNameType
  *
  * CSS class name applied to the root element.
@@ -80,6 +89,8 @@ export interface CodeProps {
   fit?: CodeFitType
   /** Top/bottom margin as a `gap` token variant. @default "large" */
   margin?: CodeMarginType
+  /** Collapse card blocks taller than this `code.maxHeight` token, with a fade and a Show more toggle. @default "base" */
+  maxHeight?: CodeMaxHeightType
   /** CSS class name applied to the root element. */
   className?: CodeClassNameType
 }
@@ -95,6 +106,7 @@ namespace CodeTypes {
   export type Inlined = CodeInlinedType
   export type Fit = CodeFitType
   export type Margin = CodeMarginType
+  export type MaxHeight = CodeMaxHeightType
   export type ClassName = CodeClassNameType
   export type Props = CodeProps
 }

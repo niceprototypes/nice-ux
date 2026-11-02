@@ -13,7 +13,16 @@ const componentNightTokensData: ComponentNightTokensData = {
   "calendar": {},
   "card": {},
   "checkbox": {},
-  "code": {},
+  "code": {
+    "syntaxColor": {
+      "base": "hsla(210, 6%, 82%, 1)",
+      "keyword": "hsla(228, 85%, 78%, 1)",
+      "string": "hsla(152, 60%, 68%, 1)",
+      "tag": "hsla(268, 80%, 80%, 1)",
+      "constant": "hsla(198, 75%, 75%, 1)",
+      "comment": "hsla(210, 4%, 60%, 1)"
+    }
+  },
   "dialog": {},
   "field": {},
   "icon": {},

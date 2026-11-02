@@ -2,7 +2,7 @@ import type { ReactNode } from "react"
 import { listTokens, type TokenGroup } from "@niceprototypes/styles"
 import data from "./storybook.json"
 import type { DataColumn } from "../components/DataTable"
-import type { TokenGroupConfig, TokenVariant } from "../dataTables/components/tokens/Modules/Modules.types"
+import type { TokenColumnSetType, TokenGroupConfig, TokenVariant } from "../dataTables/components/tokens/Modules/Modules.types"
 import { buildTree, flatten, storySortOrder, type DataItem, type DataNode, type DataSettings } from "./tree.ts"
 import { renderers } from "./renderers"
 import { renderInline } from "./text"
@@ -79,8 +79,12 @@ const registryVariants = (group: string): TokenVariant[] =>
     .filter(token => !token.prefix && !token.inverse && token.path.length === 1 && token.source !== "runtime")
     .map(token => token.variant as TokenVariant)
 
-/** Whether an item is a token module page (its `table` is the tokenModule set). */
-const isTokenPage = (item: DataItem): boolean => !item.isFolder && item.settings.table === "tokenModule"
+/** The token column sets a token module page can render with. */
+const TOKEN_COLUMN_SETS: readonly string[] = ["tokenModule", "tokenColor"] satisfies TokenColumnSetType[]
+
+/** Whether an item is a token module page (its `table` is a token column set). */
+const isTokenPage = (item: DataItem): boolean =>
+  !item.isFolder && TOKEN_COLUMN_SETS.includes(item.settings.table as string)
 
 /** Resolved token tables by item id, built on first use. */
 let tokenTables: Map<string, TokenTable> | undefined
@@ -93,16 +97,19 @@ const toTokenTable = (item: DataItem): TokenTable => {
     preview?: string
     widths?: ColumnWidths
   }
-  const render = renderers[preview ?? item.id]
-  if (!render) throw new Error(`storybook data: no renderer "${preview ?? item.id}" for ${item.title}`)
+  const columnSet = item.settings.table as TokenColumnSetType
+  // Only the tokenModule set has a preview column; its renderer is required.
+  const render = columnSet === "tokenModule" ? renderers[preview ?? item.id] : undefined
+  if (columnSet === "tokenModule" && !render) throw new Error(`storybook data: no renderer "${preview ?? item.id}" for ${item.title}`)
   return {
     id: item.id,
     name: item.name as TokenGroup,
     description: description === undefined ? undefined : renderInline(description),
     variants: variants ?? registryVariants(item.name),
+    columnSet,
     preview: render,
     sectionWrapped: item.settings.sectionWrapped === true,
-    ...getColumns("tokenModule", widths),
+    ...getColumns(columnSet, widths),
   }
 }
 

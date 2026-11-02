@@ -7,14 +7,23 @@ import type { TokenGroup, TokenVariants } from "@niceprototypes/styles"
  */
 export type TokenVariant = TokenVariants[TokenGroup] | { variant: TokenVariants[TokenGroup]; [key: string]: unknown }
 
+/**
+ * The column set a token table renders with (a `columns` key in storybook.json):
+ * `tokenModule` leads with a bespoke preview and ends with the current theme's
+ * value; `tokenColor` ends with the light and dark values side by side.
+ */
+export type TokenColumnSetType = "tokenModule" | "tokenColor"
+
 /** One token group's reference data — the config each `tables/{group}.tsx` exports. */
 export interface TokenGroupConfig {
   /** camelCase token group — the table's name column and the story title. */
   name: TokenGroup
   /** Variant names, or objects with a `variant` key plus preview data. */
   variants: ReadonlyArray<TokenVariant>
-  /** Returns the bespoke preview cell for a row, given its variant item. */
-  preview: (item: TokenVariant) => React.ReactNode
+  /** The column set the rows are built for. */
+  columnSet: TokenColumnSetType
+  /** Returns the bespoke preview cell for a row, given its variant item (`tokenModule` only). */
+  preview?: (item: TokenVariant) => React.ReactNode
 }
 
 /**

@@ -37,7 +37,30 @@
     "link": "var(--np--color--link)",
     "highlight": "var(--np--color--highlight)"
   },
+  "maxHeight": {
+    "base": "200px"
+  },
+  "fadeStart": {
+    "base": "25%"
+  },
+  "syntaxColor": {
+    "base": "hsla(210, 6%, 17%, 1)",
+    "keyword": "hsla(226, 75%, 45%, 1)",
+    "string": "hsla(150, 54%, 30%, 1)",
+    "tag": "hsla(268, 50%, 48%, 1)",
+    "constant": "hsla(198, 70%, 33%, 1)",
+    "comment": "hsla(210, 5%, 45%, 1)"
+  },
   "$themes": {
-    "night": {}
+    "night": {
+      "syntaxColor": {
+        "base": "hsla(210, 6%, 82%, 1)",
+        "keyword": "hsla(228, 85%, 78%, 1)",
+        "string": "hsla(152, 60%, 68%, 1)",
+        "tag": "hsla(268, 80%, 80%, 1)",
+        "constant": "hsla(198, 75%, 75%, 1)",
+        "comment": "hsla(210, 4%, 60%, 1)"
+      }
+    }
   }
 }
