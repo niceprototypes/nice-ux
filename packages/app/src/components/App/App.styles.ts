@@ -24,6 +24,20 @@ export const StyledAppNav = styled.div`
 `
 
 /**
+ * The scene sidebar, right of the nav: as wide as what a scene portals into it, scrolling on its own,
+ * one nav padding from the nav. Empty (docs pages, scenes without one), it takes no space.
+ */
+export const StyledAppSidebar = styled.div`
+  flex: none;
+  overflow-y: auto;
+  padding: ${getToken("gap:large")} ${getToken("gap:large")} ${getToken("gap:large")} 0;
+
+  &:empty {
+    display: none;
+  }
+`
+
+/**
  * The scene region: the rest of the width (the whole viewport in the bare view), on the theme
  * background, focusable so a scene's keys act only while focus is inside it. It is a container,
  * not a control: no focus ring.

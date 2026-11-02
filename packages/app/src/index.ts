@@ -5,4 +5,4 @@
 
 export { default, default as App } from "./components/App"
 export * from "./components/App"
-export { useScenes, useSceneRegion } from "./services"
+export { useScenes, useSceneRegion, useSceneSidebar } from "./services"

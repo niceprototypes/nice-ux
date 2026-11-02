@@ -3,7 +3,8 @@ import { act, fireEvent, render, screen, waitFor } from "@testing-library/react"
 import "@testing-library/jest-dom"
 import App from "."
 import type { AppRouterType } from "./App.types"
-import { useScenes } from "../../services"
+import { createPortal } from "react-dom"
+import { useSceneRegion, useScenes, useSceneSidebar } from "../../services"
 import { plainRouter } from "../../adapters/plain"
 import { reactRouter } from "../../adapters/react-router"
 import { tanstackRouter } from "../../adapters/tanstack-router"
@@ -17,7 +18,19 @@ const Chaining = () => {
   return <button data-bare={bare} onClick={() => next && open(next)}>next</button>
 }
 
+/** A scene that portals its steps into the scene sidebar, as the studio's step list does. */
+const WithSteps = () => {
+  const sidebar = useSceneSidebar()
+  return (
+    <>
+      <p>with steps</p>
+      {sidebar && createPortal(<p>steps</p>, sidebar)}
+    </>
+  )
+}
+
 const scenes = {
+  "./stories/3 Gamma/1 Steps/index.tsx": () => Promise.resolve({ default: WithSteps }),
   "./stories/2 Beta/10 Ten/index.tsx": scene("ten"),
   "./stories/2 Beta/9 Nine/index.tsx": scene("nine"),
   "./stories/1 Alpha/2 Pair/2.2 Second/index.tsx": scene("second"),
@@ -47,7 +60,7 @@ describe.each(adapters)("App on the %s adapter", (_, router) => {
     render(<App scenes={scenes} docs={docs} router={router} />)
     await screen.findByText("nine")
     const rows = screen.getAllByRole("link", { hidden: true }).map(link => link.textContent)
-    expect(rows).toEqual(["Solo", "First & last", "Second", "Guide", "Nine", "Ten"])
+    expect(rows).toEqual(["Solo", "First & last", "Second", "Guide", "Nine", "Ten", "Steps"])
     expect(screen.getByRole("link", { name: "Nine" })).toHaveAttribute("aria-current", "page")
     expect(screen.getByRole("button", { name: "Beta" })).toHaveAttribute("aria-expanded", "true")
     expect(screen.getByRole("button", { name: "Alpha" })).toHaveAttribute("aria-expanded", "false")
@@ -90,6 +103,32 @@ describe.each(adapters)("App on the %s adapter", (_, router) => {
     expect(screen.queryByRole("navigation")).not.toBeInTheDocument()
     expect(screen.getByTestId("wrapper")).toHaveAttribute("data-device", "phone")
     await waitFor(() => expect(screen.getByTestId("wrapper").parentElement).toHaveFocus())
+  })
+
+  it("renders a scene's sidebar right of the nav, outside the scene region; none on other pages or the bare view", async () => {
+    let region: HTMLElement | null = null
+    const Region = ({ children }: { children: React.ReactNode }) => {
+      region = useSceneRegion().current
+      return <>{children}</>
+    }
+    window.history.replaceState(null, "", "/gamma/steps")
+    const { unmount } = render(<App scenes={scenes} router={router} wrapper={Region} />)
+    await screen.findByText("with steps")
+    const steps = await screen.findByText("steps")
+    const sidebar = steps.parentElement!
+    expect(sidebar.previousElementSibling).toContainElement(screen.getByRole("navigation"))
+    expect(region).not.toContainElement(steps)
+    await act(async () => {
+      window.history.pushState(null, "", "/alpha/solo")
+      window.dispatchEvent(new PopStateEvent("popstate"))
+    })
+    await screen.findByText("solo")
+    expect(sidebar).toBeEmptyDOMElement()
+    unmount()
+    window.history.replaceState(null, "", "/frame/gamma/steps")
+    render(<App scenes={scenes} router={router} />)
+    await screen.findByText("with steps")
+    expect(screen.queryByText("steps")).not.toBeInTheDocument()
   })
 
   it("tells a scene the bare view is on", async () => {
