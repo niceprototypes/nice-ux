@@ -24,6 +24,7 @@ where the current one renders. One page, no iframe.
   its top (a separator, arrow keys too) resizes it between the handle alone and its content's height; it
   opens fully; shorter than its content, the body under the handle scrolls; empty, it takes no space; `null` in the bare view. `useScenes()` returns the index, the current page, `bare` (the bare view
   is on), `open(entry)` and `preload(entry)`, for scenes that move between pages or drop their chrome.
+- **`getAppPageUrl(key)`** gives a docs section page's URL from its `pages` key, for links from outside the router.
 - **Router adapters**, subpath exports with optional peer dependencies:
   `@niceprototypes/app/adapters/plain` (`plainRouter`, history API, no dependency),
   `/react-router` (`reactRouter`, React Router 7 library mode), `/tanstack-router` (`tanstackRouter`).

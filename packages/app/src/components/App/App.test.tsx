@@ -4,7 +4,7 @@ import "@testing-library/jest-dom"
 import App from "."
 import type { AppRouterType } from "./App.types"
 import { createPortal } from "react-dom"
-import { useSceneRegion, useScenes, useSceneSidebar, useSceneSidebarFooter } from "../../services"
+import { getAppPageUrl, useSceneRegion, useScenes, useSceneSidebar, useSceneSidebarFooter } from "../../services"
 import { plainRouter } from "../../adapters/plain"
 import { reactRouter } from "../../adapters/react-router"
 import { tanstackRouter } from "../../adapters/tanstack-router"
@@ -293,5 +293,11 @@ describe("App sidebar footer", () => {
     expect(handle).toHaveAttribute("aria-valuenow", String(CONTENT))
     fireEvent.keyDown(handle, { key: "ArrowDown" })
     expect(handle).toHaveAttribute("aria-valuenow", String(CONTENT * 0.9))
+  })
+})
+
+describe("getAppPageUrl", () => {
+  it("gives a docs page's URL from its pages key, as the nav links it", () => {
+    expect(getAppPageUrl("./docs/2 Components/1 Forms/10 Dev & Watch/index.tsx")).toBe("/docs/components/forms/dev-and-watch")
   })
 })

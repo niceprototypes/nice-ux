@@ -1,5 +1,5 @@
 import * as React from "react"
-import Code from "@niceprototypes/docs/nice/Code"
+import Code from "../../nice/Code"
 
 /**
  * Replacement for the markdown `pre` component in MDX docs.

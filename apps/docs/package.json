@@ -26,11 +26,13 @@
     "@niceprototypes/tree": "workspace:^"
   },
   "devDependencies": {
+    "@mdx-js/rollup": "^3.1.1",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "@vitejs/plugin-react": "^5.0.4",
     "react": "catalog:",
     "react-dom": "catalog:",
+    "remark-gfm": "^4.0.1",
     "styled-components": "catalog:",
     "typescript": "catalog:",
     "vite": "^7.1.9"

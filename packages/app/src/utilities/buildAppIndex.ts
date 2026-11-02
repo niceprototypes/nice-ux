@@ -46,6 +46,9 @@ const entryOf = (folders: string[], kind: AppEntryType["kind"], load: () => Prom
   return { id, url: `/${id}`, folders, names, kind, load }
 }
 
+/** A docs section page's URL from its `pages` key, as its index entry gets it. */
+export const urlOfDocsPage = (key: string): string => entryOf(foldersOf(key, "docs"), "page", () => Promise.resolve()).url
+
 /**
  * The index, in nav order: under `/stories`, every scene (an `index.tsx` two or three folders under
  * `stories/`) and markdown page (an `.md` file, named by its file, two folders under `stories/`);

@@ -5,21 +5,19 @@ import { unwrapMdxParagraph } from "./Ink.services"
 
 type Props = InkProps & { unstyled?: boolean }
 
-/** Heading elements keep @niceprototypes/ink's own per-level size and color defaults. */
+/** Heading elements keep @niceprototypes/ink's own color default. */
 const HEADINGS = new Set(["h1", "h2", "h3", "h4"])
 
 const Ink: React.FC<Props> = ({
   as,
   unstyled = true,
   color,
-  size,
   className,
   children,
   ...props
 }) => {
   const isHeading = as !== undefined && HEADINGS.has(as)
   const finalColor = color ?? (isHeading ? undefined : "light")
-  const finalSize = size ?? (isHeading ? undefined : "base")
   const finalClassName = unstyled
     ? ["sb-unstyled", className].filter(Boolean).join(" ")
     : className
@@ -27,7 +25,6 @@ const Ink: React.FC<Props> = ({
     <StyledInk
       forwardedAs={as}
       color={finalColor}
-      size={finalSize}
       {...props}
       className={finalClassName}
     >

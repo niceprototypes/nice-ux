@@ -151,6 +151,19 @@
       }
     },
     {
+      "Manifest": {
+        "items": [
+          "Welcome",
+          "Discipline",
+          "Read",
+          "Edit",
+          "Build",
+          "Publish",
+          "Topics"
+        ]
+      }
+    },
+    {
       "Tokens": {
         "table": "tokenModule",
         "items": [
@@ -343,6 +356,39 @@
               "description": "Stacking-order (z-index) tokens for layered surfaces — overlays, stickies, tooltips."
             }
           }
+        ]
+      }
+    },
+    {
+      "Bindings": {
+        "items": [
+          "useBreakpoint",
+          "useDevice",
+          "useTheme"
+        ]
+      }
+    },
+    {
+      "Configuration": {
+        "items": [
+          "TypeScript",
+          "Jest",
+          "Rollup",
+          "Caches",
+          "ViteWatcher"
+        ]
+      }
+    },
+    {
+      "CLI": {
+        "items": [
+          "1. Linking",
+          "2. Dedupe",
+          "3. Building",
+          "4. Dev & Watch",
+          "5. Reset & Caches",
+          "6. Publishing",
+          "7. Troubleshooting"
         ]
       }
     }

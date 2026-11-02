@@ -8,6 +8,7 @@ import { renderers } from "./renderers"
 import { renderInline } from "./text"
 
 export type { DataItem, DataNode, DataSettings } from "./tree.ts"
+export { sanitize } from "./tree.ts"
 export { renderers, type Renderer } from "./renderers"
 
 /** The resolved sidebar tree, built once from `storybook.json` (its shape is validated by `check:data`). */

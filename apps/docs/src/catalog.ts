@@ -9,6 +9,8 @@ export type CatalogComponentType = {
   package: string
   /** Its folder under Components, from its Storybook docs id (`components-forms-button--docs` → Forms) */
   folder?: string
+  /** Its Storybook docs page id (`components-forms-button--docs`) */
+  docsId: string
   /** Whether the package exports it by name; otherwise it is the default export */
   named: boolean
   props: CatalogPropType[]
@@ -31,6 +33,7 @@ export const catalogComponents: CatalogComponentType[] = catalog.packages.flatMa
         name: component.name,
         package: pkg.package,
         folder: segments.length ? folderName(segments[0]) : undefined,
+        docsId: component.docs,
         named: (pkg.exports as string[]).includes(component.name),
         props: component.props as CatalogPropType[],
       },
