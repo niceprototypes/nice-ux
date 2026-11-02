@@ -6,7 +6,7 @@ Storybook 10, Vite, React 19, styled-components 6. Reads workspace packages; no 
 
 - `.storybook/main.ts` Vite config (dedupe react, react-dom, styled-components, styles, icon); `preview.tsx` sidebar order (`storySort`).
 - `stories/Components/{Component}/` component stories; `stories/Tokens/` generated token galleries (`scripts/generate-token-stories.mjs`); `stories/Configuration/` build docs.
-- `src/` shared story components and data (`scripts/check-data.ts` validates it).
+- `src/` Storybook-only story components; the data and docs tables live in `@niceprototypes/docs` (`scripts/check-data.ts` validates `packages/docs/src/data/storybook.json`).
 - Run: `pnpm storybook` at the root (port 6006). Build: `pnpm build-storybook`.
 
 ## Nice docs — `apps/docs` (`@niceprototypes/docs-site`, private)
@@ -15,7 +15,7 @@ The custom docs site replacing Storybook (phase 1), on `@niceprototypes/app` (do
 
 - `src/pages.tsx` the nav: Tokens, then every component with a Storybook docs page in `manifest/agents/catalog.json`.
 - `src/components/` DocsPage (sections column + Contents), ComponentPage (catalog props, live examples, tokens), TokensPage (storybook.json token tables), ThemeToggle.
-- `src/storybook.ts` the one import boundary to the reused `apps/storybook/src` modules; `src/tokens.ts` the one unprefixed token map (the Storybook's plus the site's overrides).
+- Docs building blocks (data, token and example tables, headers, code) come from `@niceprototypes/docs` (`packages/docs`, private, source-only, one subpath export per module), shared with the Storybook; `src/tokens.ts` the one unprefixed token map (the Storybook's plus the site's overrides).
 - Run: `pnpm --filter @niceprototypes/docs-site dev` (port 6020).
 
 ## Website — `~/nice/website` (package `np`, own repo)

@@ -1,6 +1,6 @@
 import * as React from "react"
 import Icon from "@niceprototypes/icon"
-import Ink from "../../nice/Ink"
+import Ink from "@niceprototypes/docs/nice/Ink"
 import {
   FrameDiv,
   FrameIframe,

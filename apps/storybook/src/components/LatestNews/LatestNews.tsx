@@ -1,10 +1,10 @@
 import * as React from "react"
 import Flex from "@niceprototypes/flex"
 import Icon from "@niceprototypes/icon"
-import Ink from "../../nice/Ink"
+import Ink from "@niceprototypes/docs/nice/Ink"
 import styled from "styled-components"
 import { getToken } from "@niceprototypes/styles"
-import Line from "../Line"
+import Line from "@niceprototypes/docs/components/Line"
 
 /**
  * A bulletin section — a headline and the points beneath it. Sections stack in

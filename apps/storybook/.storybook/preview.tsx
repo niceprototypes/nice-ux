@@ -6,8 +6,8 @@ import { StylesProvider } from "@niceprototypes/styles"
 import { DARK_MODE_EVENT } from "@niceprototypes/storybook-theme"
 import { applyTheme } from "@niceprototypes/styles"
 import { ShikiPre } from "../src/components/ShikiPre"
-import ContentFlex from "../src/nice/ContentFlex"
-import { getItemForEntry } from "../src/data"
+import ContentFlex from "@niceprototypes/docs/nice/ContentFlex"
+import { getItemForEntry } from "@niceprototypes/docs/data"
 import { StoryNavigation } from "@niceprototypes/storybook-navigation"
 import {
   storyNavigationIndexSequences,
@@ -15,7 +15,7 @@ import {
 } from "./storyNavigationSequences"
 import "@niceprototypes/icon-vendor"
 import "@niceprototypes/image-vendor"
-import "../src/nice/tokens"
+import "@niceprototypes/docs/nice/tokens"
 import "./preview.css"
 
 // Mirror the manager's theme into <html data-theme="night|day"> so
@@ -50,7 +50,7 @@ const preview: Preview = {
       // regardless. The bar is imported
       // from the addon rather than rendered by it here, so the sequences come
       // through the same parameter the decorator reads. The page's `wrapped`
-      // setting in src/data/storybook.json caps it at the content width.
+      // setting in packages/docs/src/data/storybook.json caps it at the content width.
       container: ({ children, context }: React.ComponentProps<typeof DocsContainer>) => (
         <DocsContainer context={context}>
           <StoryNavigation

@@ -4,10 +4,10 @@ import { Illustration } from "@niceprototypes/icon"
 // imports). Unlike icons, illustrations are never recolored — the preview renders
 // them at their authored colors.
 import { illustrationNames } from "@niceprototypes/icon/illustration-catalog"
-import Code from "../../../../nice/Code"
-import { DataTable, withCopyAffordance } from "../../../../components/DataTable"
-import type { DataColumn, DataTableConfig } from "../../../../components/DataTable"
-import { ClickHint } from "../../../../components/ClickHint"
+import Code from "@niceprototypes/docs/nice/Code"
+import { DataTable, withCopyAffordance } from "@niceprototypes/docs/components/DataTable"
+import type { DataColumn, DataTableConfig } from "@niceprototypes/docs/components/DataTable"
+import { ClickHint } from "@niceprototypes/docs/components/ClickHint"
 import type { IllustrationTableColumn, IllustrationTableProps } from "./Illustrations.types"
 
 /**

@@ -1,5 +1,5 @@
 import type * as React from "react"
-import type { LifecycleStepVariant } from "../../nice/tokens"
+import type { LifecycleStepVariant } from "@niceprototypes/docs/nice/tokens"
 
 /**
  * One state of a component's UX lifecycle.

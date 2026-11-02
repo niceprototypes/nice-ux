@@ -1,0 +1,57 @@
+{
+  "name": "@niceprototypes/docs",
+  "version": "0.1.0",
+  "description": "Docs building blocks for the Nice docs site and the Storybook: the docs data (storybook.json), token and component-example tables, headers and code blocks",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@niceprototypes/button": "workspace:^",
+    "@niceprototypes/code": "workspace:^",
+    "@niceprototypes/flex": "workspace:^",
+    "@niceprototypes/icon": "workspace:^",
+    "@niceprototypes/image": "workspace:^",
+    "@niceprototypes/ink": "workspace:^",
+    "@niceprototypes/input": "workspace:^",
+    "@niceprototypes/storybook-theme": "workspace:^",
+    "@niceprototypes/styles": "workspace:^",
+    "@niceprototypes/tile": "workspace:^",
+    "@niceprototypes/tooltip": "workspace:^"
+  },
+  "peerDependencies": {
+    "react": ">=19.2.0 <20.0.0",
+    "react-dom": ">=19.2.0 <20.0.0",
+    "styled-components": ">=6.1.18 <7.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "styled-components": "catalog:",
+    "typescript": "catalog:"
+  },
+  "exports": {
+    "./components/ClickHint": "./src/components/ClickHint/index.ts",
+    "./components/ClickToCopy": "./src/components/ClickToCopy/index.ts",
+    "./components/DataTable": "./src/components/DataTable/index.ts",
+    "./components/Install": "./src/components/Install/index.ts",
+    "./components/Line": "./src/components/Line/index.ts",
+    "./components/PreviewCell": "./src/components/PreviewCell/index.ts",
+    "./components/Story": "./src/components/Story/index.ts",
+    "./components/Story/StoryHeader/StoryHeaderLevel": "./src/components/Story/StoryHeader/StoryHeaderLevel.ts",
+    "./data": "./src/data/index.ts",
+    "./dataTables/components/demos/Components": "./src/dataTables/components/demos/Components/index.ts",
+    "./dataTables/components/tokens/Components": "./src/dataTables/components/tokens/Components/index.ts",
+    "./dataTables/components/tokens/Modules": "./src/dataTables/components/tokens/Modules/index.ts",
+    "./dataTables/data": "./src/dataTables/data/index.ts",
+    "./dataTables/utilities": "./src/dataTables/utilities/index.ts",
+    "./nice/Code": "./src/nice/Code/index.ts",
+    "./nice/ContentFlex": "./src/nice/ContentFlex/index.ts",
+    "./nice/Ink": "./src/nice/Ink/index.ts",
+    "./nice/tokens": "./src/nice/tokens.ts",
+    "./services": "./src/services/index.ts"
+  }
+}

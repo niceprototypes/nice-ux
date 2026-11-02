@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { expect } from "storybook/test"
-import { getTokenTables } from "../../src/data"
+import { getTokenTables } from "@niceprototypes/docs/data"
 import { TokenStory } from "./TokenStory"
 
 /**

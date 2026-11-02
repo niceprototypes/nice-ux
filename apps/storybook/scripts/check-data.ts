@@ -1,13 +1,13 @@
 /**
- * `npm run check:data` — validates `src/data/storybook.json` with the same tree
- * logic storybook uses (`src/data/tree.ts`; Node strips the types). Exits 1 and
+ * `npm run check:data` — validates `packages/docs/src/data/storybook.json` with the same tree
+ * logic storybook uses (`packages/docs/src/data/tree.ts`; Node strips the types). Exits 1 and
  * lists every problem when the data is malformed.
  */
 import { readFileSync } from "node:fs"
 import { fileURLToPath } from "node:url"
-import { flatten, buildTree, validate, type DataItem, type DataNode, type DataSettings } from "../src/data/tree.ts"
+import { flatten, buildTree, validate, type DataItem, type DataNode, type DataSettings } from "../../../packages/docs/src/data/tree.ts"
 
-const file = fileURLToPath(new URL("../src/data/storybook.json", import.meta.url))
+const file = fileURLToPath(new URL("../../../packages/docs/src/data/storybook.json", import.meta.url))
 
 /** The parsed file, or exit 1 when it is missing or not valid JSON. */
 const read = (): { columns?: unknown; items?: unknown; defaults?: unknown } => {
@@ -21,7 +21,7 @@ const read = (): { columns?: unknown; items?: unknown; defaults?: unknown } => {
 
 const data = read()
 
-const schema = JSON.parse(readFileSync(fileURLToPath(new URL("../src/data/storybook.schema.json", import.meta.url)), "utf8"))
+const schema = JSON.parse(readFileSync(fileURLToPath(new URL("../../../packages/docs/src/data/storybook.schema.json", import.meta.url)), "utf8"))
 
 /** A JSON-schema property: its allowed values, or its allowed JSON types. */
 type Rule = { enum?: unknown[]; type?: string | string[] }

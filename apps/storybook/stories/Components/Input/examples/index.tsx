@@ -5,7 +5,7 @@ import { useState } from "react"
 import Input from "@niceprototypes/input"
 import Button from "@niceprototypes/button"
 import Icon from "@niceprototypes/icon"
-import { cap } from "../../../../src/dataTables/utilities"
+import { cap } from "@niceprototypes/docs/dataTables/utilities"
 import type { ComponentExample } from "./examples.types"
 
 export type { ComponentExample, ExampleVariant } from "./examples.types"

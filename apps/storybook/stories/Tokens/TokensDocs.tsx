@@ -1,6 +1,6 @@
-import { ModuleTokenTable } from "../../src/dataTables/components/tokens/Modules"
-import type { ModuleTokenTableSectionConfig } from "../../src/dataTables/components/tokens/Modules"
-import { getItem, getTokenTable, type TokenTable } from "../../src/data"
+import { ModuleTokenTable } from "@niceprototypes/docs/dataTables/components/tokens/Modules"
+import type { ModuleTokenTableSectionConfig } from "@niceprototypes/docs/dataTables/components/tokens/Modules"
+import { getItem, getTokenTable, type TokenTable } from "@niceprototypes/docs/data"
 
 /**
  * The full Tokens/Docs body, in sidebar order. Each Tokens folder (Animation,

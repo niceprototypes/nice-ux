@@ -24,6 +24,7 @@
     "@niceprototypes/code": "workspace:^",
     "@niceprototypes/contents": "workspace:^",
     "@niceprototypes/dialog": "workspace:^",
+    "@niceprototypes/docs": "workspace:^",
     "@niceprototypes/field": "workspace:^",
     "@niceprototypes/flex": "workspace:^",
     "@niceprototypes/form": "workspace:^",

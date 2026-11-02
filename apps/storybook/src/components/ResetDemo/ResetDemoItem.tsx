@@ -1,8 +1,8 @@
 import * as React from "react"
 import Flex from "@niceprototypes/flex"
 import { getToken } from "@niceprototypes/styles"
-import Ink from "../../nice/Ink"
-import Code from "../../nice/Code"
+import Ink from "@niceprototypes/docs/nice/Ink"
+import Code from "@niceprototypes/docs/nice/Code"
 import ThemedFrame from "../ThemedFrame"
 
 /** Shared iframe chrome; width/height/radius differ per desktop vs mobile. */

@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { getBreakpoint } from "@niceprototypes/styles"
-import { getToken } from "../../nice/tokens"
+import { getToken } from "@niceprototypes/docs/nice/tokens"
 
 /** The sections column, capped at `docs.columnWidth`; a wider table scrolls sideways. */
 export const StyledMain = styled.div`

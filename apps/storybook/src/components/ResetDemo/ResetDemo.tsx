@@ -1,7 +1,7 @@
 import * as React from "react"
 import Flex from "@niceprototypes/flex"
 import ResetDemoItem from "./ResetDemoItem"
-import Line from "../Line"
+import Line from "@niceprototypes/docs/components/Line"
 
 /** One reset stylesheet loaded into a demo frame. */
 export interface ResetLayer {

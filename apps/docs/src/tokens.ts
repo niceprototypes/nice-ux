@@ -1,6 +1,6 @@
 import { getToken as getCoreToken, setTokens } from "@niceprototypes/styles"
 import { TOKENS as THEME_TOKENS } from "@niceprototypes/storybook-theme"
-import { AppTokenMap } from "./storybook"
+import { AppTokenMap } from "@niceprototypes/docs/nice/tokens"
 
 /**
  * The site's one unprefixed token map. A second unprefixed `setTokens` call replaces the first's

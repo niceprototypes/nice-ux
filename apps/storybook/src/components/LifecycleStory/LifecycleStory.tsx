@@ -1,7 +1,7 @@
 import * as React from "react"
 import Flex from "@niceprototypes/flex"
-import Ink from "../../nice/Ink"
-import { getToken } from "../../nice/tokens"
+import Ink from "@niceprototypes/docs/nice/Ink"
+import { getToken } from "@niceprototypes/docs/nice/tokens"
 import { DemoRegion } from "./LifecycleStory.styles"
 import type { LifecycleStoryProps } from "./LifecycleStory.types"
 

@@ -1,6 +1,8 @@
 import * as React from "react"
 import DocsPage, { type DocsPageSectionType } from "../DocsPage"
-import { getItem, getTokenTable, ModuleTokenTable, StoryHeader, type DataItem, type ModuleTokenTableSectionConfig, type TokenTable } from "../../storybook"
+import { getItem, getTokenTable, type DataItem, type TokenTable } from "@niceprototypes/docs/data"
+import { ModuleTokenTable, type ModuleTokenTableSectionConfig } from "@niceprototypes/docs/dataTables/components/tokens/Modules"
+import { StoryHeader } from "@niceprototypes/docs/components/Story"
 
 /** A Tokens entry's tables: a folder's groups as one cluster, or a page's one group; none for a hand-written page (`table: false`). */
 const toConfig = (item: DataItem): ModuleTokenTableSectionConfig | undefined => {

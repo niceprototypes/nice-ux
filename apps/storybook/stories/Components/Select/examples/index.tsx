@@ -4,7 +4,7 @@
 import Select from "@niceprototypes/select"
 import { Field } from "@niceprototypes/field"
 import Icon from "@niceprototypes/icon"
-import { cap } from "../../../../src/dataTables/utilities"
+import { cap } from "@niceprototypes/docs/dataTables/utilities"
 import type { ComponentExample } from "./examples.types"
 import type { LifecycleStep } from "../../../../src/components/LifecycleStory"
 

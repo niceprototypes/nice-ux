@@ -1,5 +1,5 @@
 import React from "react"
-import Ink from "../../nice/Ink"
+import Ink from "@niceprototypes/docs/nice/Ink"
 
 type StoryDescriptionKind = "css" | "svg"
 

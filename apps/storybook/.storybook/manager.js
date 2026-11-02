@@ -11,7 +11,7 @@ import { getToken } from "@niceprototypes/styles"
 import { THEME_STORAGE_KEY } from "@niceprototypes/storybook-theme"
 import { BRAND_LOGO } from "./brandLogo"
 // The manager document's one setTokens call, the same map as the preview's (theme tokens, Avenir).
-import "../src/nice/tokens"
+import "@niceprototypes/docs/nice/tokens"
 import "./manager.css"
 
 // Open in the persisted theme, light when none is stored (never the OS

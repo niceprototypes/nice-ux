@@ -1,9 +1,9 @@
 import * as React from "react"
 import Flex from "@niceprototypes/flex"
-import Code from "../../nice/Code"
-import Ink from "../../nice/Ink"
-import { withCopyAffordance } from "../DataTable"
-import { ClickToCopy } from "../ClickToCopy"
+import Code from "@niceprototypes/docs/nice/Code"
+import Ink from "@niceprototypes/docs/nice/Ink"
+import { withCopyAffordance } from "@niceprototypes/docs/components/DataTable"
+import { ClickToCopy } from "@niceprototypes/docs/components/ClickToCopy"
 
 export interface ResetPropertiesItemProps {
   /** The key / token name, rendered as an `<h3>` in inline code (e.g. `borderBox`). */

@@ -14,6 +14,7 @@
     "@niceprototypes/app": "workspace:^",
     "@niceprototypes/code": "workspace:^",
     "@niceprototypes/contents": "workspace:^",
+    "@niceprototypes/docs": "workspace:^",
     "@niceprototypes/flex": "workspace:^",
     "@niceprototypes/icon-vendor": "workspace:^",
     "@niceprototypes/image-vendor": "workspace:^",

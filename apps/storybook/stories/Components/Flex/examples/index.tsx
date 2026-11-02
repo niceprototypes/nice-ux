@@ -2,4 +2,4 @@
 // `src/dataTables/data.tsx` (one place to survey every table). This barrel
 // re-exports them so the Flex docs page keeps importing from `./examples`.
 export type { ComponentExample, ExampleVariant } from "./examples.types"
-export { flexExamples } from "../../../../src/dataTables/data"
+export { flexExamples } from "@niceprototypes/docs/dataTables/data"

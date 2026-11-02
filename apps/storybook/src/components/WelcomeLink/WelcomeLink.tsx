@@ -2,7 +2,7 @@ import * as React from "react"
 import { navigate } from "@storybook/addon-links"
 import Icon from "@niceprototypes/icon"
 import Flex from "@niceprototypes/flex"
-import Ink from "../../nice/Ink"
+import Ink from "@niceprototypes/docs/nice/Ink"
 import { ArrowIcon, WelcomeLinkDiv } from "./WelcomeLink.styles"
 import type { WelcomeLinkProps } from "./WelcomeLink.types"
 

@@ -3,20 +3,15 @@ import Flex from "@niceprototypes/flex"
 import Ink from "@niceprototypes/ink"
 import DocsPage, { type DocsPageSectionType } from "../DocsPage"
 import type { CatalogComponentType, CatalogPropType } from "../../catalog"
-import {
-  buildExampleRows,
-  Code,
-  ComponentTokenTable,
-  componentExamples,
-  componentPrefixesWithTokens,
-  DataTable,
-  getColumns,
-  Install,
-  StoryHeader,
-  StoryHeaderLevel,
-  type ComponentExample,
-  type ComponentPrefixWithTokens,
-} from "../../storybook"
+import { getColumns } from "@niceprototypes/docs/data"
+import { ComponentTokenTable, componentPrefixesWithTokens, type ComponentPrefixWithTokens } from "@niceprototypes/docs/dataTables/components/tokens/Components"
+import { buildExampleRows, type ComponentExample } from "@niceprototypes/docs/dataTables/components/demos/Components"
+import * as componentExamples from "@niceprototypes/docs/dataTables/data"
+import { DataTable } from "@niceprototypes/docs/components/DataTable"
+import { StoryHeader } from "@niceprototypes/docs/components/Story"
+import { StoryHeaderLevel } from "@niceprototypes/docs/components/Story/StoryHeader/StoryHeaderLevel"
+import Install from "@niceprototypes/docs/components/Install"
+import Code from "@niceprototypes/docs/nice/Code"
 
 /** A component's live examples by facet (Button's `size`, `icon`, …): its `{component}Examples` map, if it has one. */
 const examplesOf = (name: string): Record<string, ComponentExample> => {

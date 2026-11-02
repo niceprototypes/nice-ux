@@ -1,5 +1,5 @@
 import type * as React from "react"
-import type { ComponentExample } from "../../dataTables/components/demos/Components"
+import type { ComponentExample } from "@niceprototypes/docs/dataTables/components/demos/Components"
 
 /** A `{Name}.section.mdx` module: its content and its `label` export (the section heading in Contents). */
 export interface ComponentDocsSectionModule {

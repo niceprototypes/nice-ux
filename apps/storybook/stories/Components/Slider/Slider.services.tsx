@@ -2,7 +2,7 @@ import { useState } from "react"
 import Slider from "@niceprototypes/slider"
 import Button from "@niceprototypes/button"
 import Flex from "@niceprototypes/flex"
-import Ink from "../../../src/nice/Ink"
+import Ink from "@niceprototypes/docs/nice/Ink"
 import { getToken } from "@niceprototypes/styles"
 
 export const SlideContent = ({

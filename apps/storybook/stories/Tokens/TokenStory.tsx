@@ -1,14 +1,14 @@
 import styled from "styled-components"
 import Flex from "@niceprototypes/flex"
-import { StoryHeader } from "../../src/components/Story"
-import { getToken } from "../../src/nice/tokens"
-import { DataTable } from "../../src/components/DataTable"
-import { getTokenTable } from "../../src/data"
+import { StoryHeader } from "@niceprototypes/docs/components/Story"
+import { getToken } from "@niceprototypes/docs/nice/tokens"
+import { DataTable } from "@niceprototypes/docs/components/DataTable"
+import { getTokenTable } from "@niceprototypes/docs/data"
 import {
   buildTokenRows,
   useNiceTheme,
   useHighlightedToken,
-} from "../../src/dataTables/components/tokens/Modules"
+} from "@niceprototypes/docs/dataTables/components/tokens/Modules"
 
 /** The page column: `docs.columnWidth`, centred in the docs flex column, as on the component docs pages. */
 const StyledColumn = styled.div`
