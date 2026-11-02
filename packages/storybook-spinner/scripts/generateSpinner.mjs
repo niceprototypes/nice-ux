@@ -67,7 +67,7 @@ let css = rawCss
 
 // Namespace the generated class and keyframes names so the overlay's rules can
 // never touch (or be touched by) the host page's own styled-components output.
-const classAttr = rawHtml.match(/^<div class="([^"]+)"/)
+const classAttr = rawHtml.match(/^<div[^>]*\sclass="([^"]+)"/)
 if (!classAttr) throw new Error("generateSpinner: unexpected Icon markup (no wrapper class)")
 const styleClass = classAttr[1].split(/\s+/).find(name => css.includes(`.${name}`))
 if (!styleClass) throw new Error("generateSpinner: no styled class found in the Icon markup")
