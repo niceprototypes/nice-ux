@@ -1,4 +1,5 @@
 import type * as React from "react"
+import type { ContentsItemsType } from "@niceprototypes/contents"
 
 /**
  * DocsPageSectionType
@@ -25,4 +26,7 @@ export interface DocsPageProps {
 
   /** Cap the sections column at `docs.columnWidth`; off, it takes the width Contents leaves. @default true */
   wrapped?: boolean
+
+  /** Contents rows in place of the sections' (an MDX page lists its headings) */
+  contents?: ContentsItemsType
 }

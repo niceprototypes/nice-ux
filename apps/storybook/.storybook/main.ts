@@ -49,6 +49,8 @@ const config: StorybookConfig = {
     // (ComponentDocs), not as pages.
     "../stories/**/!(*.section).mdx",
     "../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)",
+    // The docs pages shared with the docs site (Basics, Manifest, Bindings, Configuration, CLI).
+    "../../../packages/docs/src/content/**/*.mdx",
     // Legacy Slider / Scroll docs pages, hidden until reworked; the CSF Playgrounds are indexed.
     "!../stories/Components/Slider/**/*.mdx",
     "!../stories/Components/Scroll/**",

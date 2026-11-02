@@ -26,10 +26,9 @@ const sourceAliases = [
   { find: /^@niceprototypes\/app\/adapters\/(.*)$/, replacement: resolve(packagesRoot, "app/src/adapters/$1.tsx") },
 ]
 
-/** The Storybook APIs the reused MDX pages import, answered by this site (src/storybookShims). */
+/** The Storybook API the shared MDX pages import (Meta), answered by this site (src/storybookShims). */
 const storybookShims = [
   { find: /^@storybook\/addon-docs\/blocks$/, replacement: resolve(import.meta.dirname, "src/storybookShims/blocks.tsx") },
-  { find: /^@storybook\/addon-links$/, replacement: resolve(import.meta.dirname, "src/storybookShims/links.ts") },
 ]
 
 /** MDX compiled to components, GFM tables as in Storybook; a `?raw` import stays text (the plugin filters on the path alone). */

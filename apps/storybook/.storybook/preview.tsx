@@ -2,6 +2,8 @@ import React from "react"
 import type { Preview } from "@storybook/react-vite"
 import { addons } from "storybook/preview-api"
 import { DocsContainer } from "@storybook/addon-docs/blocks"
+import { navigate } from "@storybook/addon-links"
+import { DocsNavigationContext } from "@niceprototypes/docs/components/DocsNavigation"
 import { StylesProvider } from "@niceprototypes/styles"
 import { DARK_MODE_EVENT } from "@niceprototypes/storybook-theme"
 import { applyTheme } from "@niceprototypes/styles"
@@ -25,11 +27,16 @@ addons.getChannel().on(DARK_MODE_EVENT, (isDark: boolean) => {
   applyTheme(isDark ? "night" : "day")
 })
 
+/** Docs links (WelcomeLink, ArrowLink) open pages through the manager, so they route from inside the docs iframe. */
+const openStory = (storyId: string) => navigate({ storyId })
+
 const preview: Preview = {
   decorators: [
     Story => (
       <StylesProvider links={[{ rel: "stylesheet", href: "/fonts/avenir.css" }]}>
-        <Story />
+        <DocsNavigationContext.Provider value={openStory}>
+          <Story />
+        </DocsNavigationContext.Provider>
       </StylesProvider>
     ),
   ],
@@ -53,6 +60,7 @@ const preview: Preview = {
       // setting in packages/docs/src/data/storybook.json caps it at the content width.
       container: ({ children, context }: React.ComponentProps<typeof DocsContainer>) => (
         <DocsContainer context={context}>
+          <DocsNavigationContext.Provider value={openStory}>
           <StoryNavigation
             sequences={storyNavigationSequences}
             indexSequences={storyNavigationIndexSequences}
@@ -63,6 +71,7 @@ const preview: Preview = {
           >
             {children}
           </ContentFlex>
+          </DocsNavigationContext.Provider>
         </DocsContainer>
       ),
     },

@@ -10,13 +10,21 @@ import "./tokens"
 import DocsSearch from "./components/DocsSearch"
 import ThemeToggle from "./components/ThemeToggle"
 import { DocsSettingsContext } from "./components/DocsPage"
-import { pages } from "./pages"
+import { DocsNavigationContext } from "@niceprototypes/docs/components/DocsNavigation"
+import { docsUrlOf, pages } from "./pages"
 
 // The site opens in the OS theme; ThemeToggle switches it.
 applyTheme(window.matchMedia("(prefers-color-scheme: dark)").matches ? "night" : "day")
 
+/** Docs links written for Storybook open the docs page of their Storybook id. */
+const openStory = (storyId: string) => {
+  const url = docsUrlOf(storyId)
+  if (url) window.location.assign(url)
+}
+
 createRoot(document.getElementById("root")!).render(
   <StylesProvider links={[{ rel: "stylesheet", href: "/fonts/avenir.css" }]}>
+    <DocsNavigationContext.Provider value={openStory}>
     <DocsSettingsContext.Provider value={<ThemeToggle />}>
       <App
         pages={pages}
@@ -30,5 +38,6 @@ createRoot(document.getElementById("root")!).render(
         }
       />
     </DocsSettingsContext.Provider>
+    </DocsNavigationContext.Provider>
   </StylesProvider>,
 )

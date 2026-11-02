@@ -36,7 +36,7 @@ const Section = ({ section }: { section: DocsPageSectionType }) => (
  * site's settings (DocsSettingsContext) in a sticky column right of that; the columns sit centred
  * in the page. Below tablet the settings are a row above the sections.
  */
-const DocsPage: React.FC<DocsPageProps> = ({ sections, wrapped = true }) => (
+const DocsPage: React.FC<DocsPageProps> = ({ sections, wrapped = true, contents }) => (
   <StyledDocsPage>
     <StyledDocsPageMain $wrapped={wrapped}>
       <Flex direction="column" gap="larger">
@@ -44,7 +44,7 @@ const DocsPage: React.FC<DocsPageProps> = ({ sections, wrapped = true }) => (
       </Flex>
     </StyledDocsPageMain>
     <StyledDocsPageAside>
-      <Contents items={toItems(sections)} />
+      <Contents items={contents ?? toItems(sections)} />
     </StyledDocsPageAside>
     <StyledDocsPageSettings aria-label="Settings">
       <StyledDocsPageSettingsContent>{React.useContext(DocsSettingsContext)}</StyledDocsPageSettingsContent>

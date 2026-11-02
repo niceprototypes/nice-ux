@@ -12,9 +12,9 @@ const pageOf = (Page: React.ComponentType) => () => Promise.resolve({ default: P
 /** Names in alphabetical order. */
 const byName = (a: string, b: string) => a.localeCompare(b, "en", { sensitivity: "base" })
 
-/** The Storybook MDX pages, as text (to read each one's Meta title) and as lazy modules. */
-const mdxText = import.meta.glob<string>("../../storybook/stories/*/*.mdx", { query: "?raw", import: "default", eager: true })
-const mdxModules = import.meta.glob<MdxModuleType>("../../storybook/stories/*/*.mdx")
+/** The docs pages (@niceprototypes/docs content), as text (to read each one's Meta title) and as lazy modules. */
+const mdxText = import.meta.glob<string>("../../../packages/docs/src/content/*/*.mdx", { query: "?raw", import: "default", eager: true })
+const mdxModules = import.meta.glob<MdxModuleType>("../../../packages/docs/src/content/*/*.mdx")
 
 /** Each MDX page's file by its data item id: the sanitized Meta title (`CLI/4. Dev & Watch` → `cli-4-dev-watch`). */
 const mdxByItemId = new Map(

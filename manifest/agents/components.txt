@@ -34,6 +34,9 @@ Dialog(dialog) [components-dialog--playground] open:boolean onClose?:fn title:no
 DemoDots(docs) gap?:FlexGapSizeType direction?:"row"|"column" justifyContent?:| "flex-start"|"flex-end"|"center"|"space-between"|"space-around"|"space-evenly" alignItems?:| "flex-start"|"flex-end"|"center"|"baseline"|"stretch" wrap?:"nowrap"|"wrap"|"wrap-reverse" spacing?:FlexSpacingType width?:string height?:string bordered?:boolean dots?:DotSize[]
 LifecycleStory(docs) steps:ReadonlyArray<LifecycleStep<P>> render:fn
 RepoLink(docs) repo:Repo
+ResponsiveDemo(docs) items:ResponsiveDemoItem[]
+ThemedFrame(docs) toggleLabel?:string
+WelcomeLink(docs) storyId:string iconName:string title:string children:node stripped?:boolean
 Field(field) [components-forms-field--playground] label:node description?:node error?:node invalid?:boolean required?:boolean optionalLabel?:node children:node theme?:ThemeType
 Fieldset(field) [components-forms-field-fieldset--playground] legend:node description?:node children:node disabled?:boolean theme?:ThemeType
 Flex(flex) [components-flex--playground] as?:"div"|"nav"|"header"|"section"|"footer"|"main"|"article"|"aside"|"ul"|"ol"|"li"="div" gap?:GapType direction?:"row"|"column" alignItems?:"flex-start"|"flex-end"|"center"|"baseline"|"stretch" justifyContent?:"flex-start"|"flex-end"|"center"|"space-between"|"space-around"|"space-evenly" grow?:number shrink?:number wrap?:"nowrap"|"wrap"|"wrap-reverse" fit?:boolean=false inlined?:boolean=false padding?:SpacingShorthandType margin?:SpacingShorthandType height?:SizeType children:node
