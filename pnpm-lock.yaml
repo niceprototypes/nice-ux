@@ -240,9 +240,6 @@ importers:
       remark-gfm:
         specifier: ^4.0.1
         version: 4.0.1
-      storybook-dark-mode:
-        specifier: ^5.0.0
-        version: 5.0.0(react@19.2.0)(storybook@10.3.5(@testing-library/dom@10.4.2)(prettier@3.9.10)(react@19.2.0))
       styled-components:
         specifier: 'catalog:'
         version: 6.1.19(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -2464,6 +2461,9 @@ importers:
       '@niceprototypes/ink':
         specifier: workspace:*
         version: link:../ink
+      '@niceprototypes/storybook-theme':
+        specifier: workspace:*
+        version: link:../storybook-theme
       '@niceprototypes/styles':
         specifier: workspace:*
         version: link:../styles
@@ -2488,9 +2488,6 @@ importers:
       storybook:
         specifier: 'catalog:'
         version: 10.3.5(@testing-library/dom@10.4.2)(prettier@3.9.10)(react@19.2.0)
-      storybook-dark-mode:
-        specifier: ^5.0.0
-        version: 5.0.0(react@19.2.0)(storybook@10.3.5(@testing-library/dom@10.4.2)(prettier@3.9.10)(react@19.2.0))
       styled-components:
         specifier: 'catalog:'
         version: 6.1.19(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -2548,9 +2545,6 @@ importers:
       storybook:
         specifier: 'catalog:'
         version: 10.3.5(@testing-library/dom@10.4.2)(prettier@3.9.10)(react@19.2.0)
-      storybook-dark-mode:
-        specifier: ^5.0.0
-        version: 5.0.0(react@19.2.0)(storybook@10.3.5(@testing-library/dom@10.4.2)(prettier@3.9.10)(react@19.2.0))
       tsup:
         specifier: ^8.0.0
         version: 8.5.1(postcss@8.5.31)(tsx@4.23.15)(typescript@6.0.3)(yaml@2.9.1)
@@ -6986,9 +6980,6 @@ packages:
   makeerror@1.0.12:
     resolution: {integrity: sha512-JmqCvUhmt43madlpFzG4BQzG2Z3m6tvQDNKdClZnO3VbIudJYmxsT0FNJMeiB2+JTSlTQTSbU8QdesVmwJcmLg==}
 
-  map-or-similar@1.5.0:
-    resolution: {integrity: sha512-0aF7ZmVon1igznGI4VS30yugpduQW3y3GkcgGJOp7d8x8QrizhigUxjI/m2UojsXXto+jLAH3KSz+xOJTiORjg==}
-
   markdown-table@3.0.4:
     resolution: {integrity: sha512-wiYz4+JrLyb/DqW2hkFJxP7Vd7JuTDm77fvbM8VfEQdmSMqcImWeeRbHwZjBjIFki/VaMK2BhFi7oUUZeM5bqw==}
 
@@ -7055,9 +7046,6 @@ packages:
 
   mdn-data@2.0.30:
     resolution: {integrity: sha512-GaqWWShW4kv/G9IEucWScBx9G1/vsFZZJUO+tD26M8J8z3Kw5RDQjaoZe03YAClgeS/SWPOcb4nkFBTEi5DUEA==}
-
-  memoizerific@1.11.3:
-    resolution: {integrity: sha512-/EuHYwAPdLtXwAwSZkh/Gutery6pD2KYd44oQLhAvQp/50mpyduZh8Q7PYHXTCJ+wuXxt7oij2LXyIJOOYFPog==}
 
   merge-stream@2.0.0:
     resolution: {integrity: sha512-abv/qOcuPfk3URPfDzmZU1LKmuw8kT+0nIHvKrKgFrwifol/doWcdA4ZqsWQ8ENrFKkd67Mfpo/LovbIUsbt3w==}
@@ -7852,11 +7840,6 @@ packages:
   stop-iteration-iterator@1.1.0:
     resolution: {integrity: sha512-eLoXW/DHyl62zxY4SCaIgnRhuMr6ri4juEYARS8E6sCEqzKpOiE521Ucofdx+KnDZl5xmvGYaaKCk5FEOxJCoQ==}
     engines: {node: '>= 0.4'}
-
-  storybook-dark-mode@5.0.0:
-    resolution: {integrity: sha512-UJPN3ohLLw2HPyyajQzfuzErXhTLCovLVZrrOA2q7L50ZnFkYmHIU5zVi1213u5IezDgCexWje1w+V4yHPZm8g==}
-    peerDependencies:
-      storybook: ^10.0.0
 
   storybook@10.3.5:
     resolution: {integrity: sha512-uBSZu/GZa9aEIW3QMGvdQPMZWhGxSe4dyRWU8B3/Vd47Gy/XLC7tsBxRr13txmmPOEDHZR94uLuq0H50fvuqBw==}
@@ -12933,8 +12916,6 @@ snapshots:
     dependencies:
       tmpl: 1.0.5
 
-  map-or-similar@1.5.0: {}
-
   markdown-table@3.0.4: {}
 
   markdown-to-jsx@9.10.4(react@19.2.0):
@@ -13062,10 +13043,6 @@ snapshots:
   mdn-data@2.0.28: {}
 
   mdn-data@2.0.30: {}
-
-  memoizerific@1.11.3:
-    dependencies:
-      map-or-similar: 1.5.0
 
   merge-stream@2.0.0: {}
 
@@ -14044,15 +14021,6 @@ snapshots:
     dependencies:
       es-errors: 1.3.0
       internal-slot: 1.1.0
-
-  storybook-dark-mode@5.0.0(react@19.2.0)(storybook@10.3.5(@testing-library/dom@10.4.2)(prettier@3.9.10)(react@19.2.0)):
-    dependencies:
-      '@storybook/icons': 2.2.0(react@19.2.0)
-      fast-deep-equal: 3.1.3
-      memoizerific: 1.11.3
-      storybook: 10.3.5(@testing-library/dom@10.4.2)(prettier@3.9.10)(react@19.2.0)
-    transitivePeerDependencies:
-      - react
 
   storybook@10.3.5(@testing-library/dom@10.4.2)(prettier@3.9.10)(react@19.2.0):
     dependencies:

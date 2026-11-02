@@ -35,7 +35,7 @@ Requires (peer): `storybook` ≥ 10.
 ```ts
 const config = {
   addons: [
-    "storybook-dark-mode",
+    "@niceprototypes/storybook-theme",
     "@niceprototypes/storybook-spinner",
   ],
 }
@@ -78,9 +78,9 @@ so it runs before any other head content is fetched or parsed.
 
 **`managerHead`** inlines the boot overlay script. It:
 
-- resolves the theme synchronously from storybook-dark-mode's localStorage
-  store (`sb-addon-themes-3`): the stored mode when the user chose it explicitly,
-  otherwise day;
+- resolves the theme synchronously from the localStorage key
+  @niceprototypes/storybook-theme persists it under (`sb-addon-themes-3`): night
+  when stored dark, otherwise day;
 - mounts the overlay on `<html>` before `<body>` exists;
 - removes it after `storyRendered` or `docsRendered`, then `document.fonts.ready`
   (capped at 1s), then two animation frames, so the first frame without the
@@ -121,7 +121,7 @@ in other browsers; those get the opaque overlay.
   `sb-show-main`);
 - a script that mounts `#nsb-preview-spinner` as the first child of `<body>`
   as soon as `<body>` exists, themed like the overlay and following
-  storybook-dark-mode's `DARK_MODE` event afterwards;
+  @niceprototypes/storybook-theme's `DARK_MODE` event afterwards;
 - the boot overlay script, which acts only when `iframe.html` is opened
   top-level (it hides the native loaders and the preview spinner while it is up).
 

@@ -1,14 +1,11 @@
 import * as React from "react"
 import { useEffect, useState } from "react"
 import { addons } from "storybook/preview-api"
-import {
-  DARK_MODE_EVENT_NAME,
-  UPDATE_DARK_MODE_EVENT_NAME,
-} from "storybook-dark-mode"
 import { navigate } from "@storybook/addon-links"
 import Flex from "@niceprototypes/flex"
 import Ink from "@niceprototypes/ink"
 import type { ThemeType } from "@niceprototypes/styles"
+import { DARK_MODE_EVENT, UPDATE_DARK_MODE_EVENT } from "@niceprototypes/storybook-theme"
 import { MobileOnlyDiv, OuterFlex, ReservedSpaceStyle, TabletUpDiv } from "./StoryNavigation.styles"
 import {
   TOGGLE_NAV_EVENT,
@@ -55,7 +52,7 @@ export interface StoryNavigationProps {
   name?: string
   /**
    * Active theme, driving the theme toggle's icon and label. Defaults to the
-   * theme reported by storybook-dark-mode over the addons channel.
+   * theme reported by @niceprototypes/storybook-theme over the addons channel.
    */
   theme?: ThemeType
 }
@@ -104,8 +101,8 @@ const StoryNavigation: React.FC<StoryNavigationProps> = ({
   name,
   theme,
 }) => {
-  // storybook-dark-mode only knows light/dark; the `data-theme` attribute
-  // mirrored onto <html> in the manager is the day/night equivalent.
+  // The theme the preview's <html data-theme> holds at mount; DARK_MODE events
+  // from @niceprototypes/storybook-theme keep it current.
   const [detectedTheme, setDetectedTheme] = useState<ThemeType>(() =>
     typeof document !== "undefined" &&
     document.documentElement.getAttribute("data-theme") === "night"
@@ -120,11 +117,11 @@ const StoryNavigation: React.FC<StoryNavigationProps> = ({
     const channel = addons.getChannel()
     const onDarkMode = (isDark: boolean) =>
       setDetectedTheme(isDark ? "night" : "day")
-    channel.on(DARK_MODE_EVENT_NAME, onDarkMode)
+    channel.on(DARK_MODE_EVENT, onDarkMode)
     channel.on(NAV_STATE_EVENT, setIsNavShown)
     channel.emit(REQUEST_NAV_STATE_EVENT)
     return () => {
-      channel.off(DARK_MODE_EVENT_NAME, onDarkMode)
+      channel.off(DARK_MODE_EVENT, onDarkMode)
       channel.off(NAV_STATE_EVENT, setIsNavShown)
     }
   }, [])
@@ -241,7 +238,7 @@ const StoryNavigation: React.FC<StoryNavigationProps> = ({
           <StoryNavigationLink
             label={`Switch to ${otherTheme} mode`}
             onClick={() =>
-              addons.getChannel().emit(UPDATE_DARK_MODE_EVENT_NAME)
+              addons.getChannel().emit(UPDATE_DARK_MODE_EVENT)
             }
             iconLeft={otherTheme === "day" ? "sun" : "moon"}
             iconVendor

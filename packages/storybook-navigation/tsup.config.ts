@@ -30,7 +30,6 @@ export default defineConfig({
     // bundling them drags in storybook/internal/* and breaks the host's
     // global-externals mapping at build time.
     /^storybook(\/|$)/,
-    "storybook-dark-mode",
     /^@storybook\//,
     /^@niceprototypes\//,
   ],

@@ -1,9 +1,8 @@
 import { addons } from "storybook/manager-api"
-import { DARK_MODE_EVENT_NAME } from "storybook-dark-mode"
-import { applyTheme } from "@niceprototypes/styles"
 import { ADDON_ID } from "./constants"
 import { injectSidebarGlyphs } from "./manager/glyphs"
 import { startSidebarTagging } from "./manager/tagSidebarPaths"
+import { startThemeController } from "./manager/themeController"
 import { managerResetCss } from "./styles/managerResetCss"
 import { managerBackgroundCss } from "./styles/managerBackgroundCss"
 import { managerSidebarCss } from "./styles/managerSidebarCss"
@@ -30,12 +29,8 @@ document.head.appendChild(chromeStyle)
 injectSidebarGlyphs()
 startSidebarTagging()
 
-// Mirror storybook-dark-mode into <html data-theme="night|day"> so the sidebar's
-// nice tokens flip on toggle (@niceprototypes/styles keys theming on [data-theme]).
-const syncTheme = (isDark: boolean) => applyTheme(isDark ? "night" : "day")
-addons.register(`${ADDON_ID}/theme-sync`, () => {
-  addons.getChannel().on(DARK_MODE_EVENT_NAME, syncTheme)
-})
+// The theme: day or night, persisted, switched by the navigation bar's toggle.
+startThemeController()
 
 // Unbind the sidebar search shortcut. The field is hidden in the stylesheet;
 // cmd/ctrl-K would otherwise still leave fullscreen and force-show the sidebar

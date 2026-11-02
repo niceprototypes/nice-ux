@@ -4,7 +4,7 @@ import { TOKENS as THEME_TOKENS } from "@niceprototypes/storybook-theme"
 /**
  * Storybook-local token overrides.
  *
- * Imported by `.storybook/preview.tsx` for the side effect — `setTokens`
+ * Imported by `.storybook/preview.tsx` and `.storybook/manager.js` for the side effect — `setTokens`
  * registers the overrides and injects the CSS at module load. The one call
  * includes @niceprototypes/storybook-theme's tokens; the app's own entries come last, so
  * they can override a theme value. Read storybook-local tokens through the

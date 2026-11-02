@@ -20,5 +20,5 @@ export default defineConfig({
   // Subpath-aware: the manager entry imports storybook/manager-api, which a bare
   // "storybook" external does not match — bundling it drags in
   // storybook/internal/* and breaks the host's global-externals mapping.
-  external: [/^storybook(\/|$)/, "storybook-dark-mode", /^@storybook\//, /^@niceprototypes\//],
+  external: [/^storybook(\/|$)/, /^@storybook\//, /^@niceprototypes\//],
 })

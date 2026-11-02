@@ -1,10 +1,9 @@
 import React from "react"
 import type { Preview } from "@storybook/react-vite"
-import { themes } from "storybook/theming"
 import { addons } from "storybook/preview-api"
-import { DARK_MODE_EVENT_NAME } from "storybook-dark-mode"
 import { DocsContainer } from "@storybook/addon-docs/blocks"
 import { StylesProvider } from "@niceprototypes/styles"
+import { DARK_MODE_EVENT } from "@niceprototypes/storybook-theme"
 import { applyTheme } from "@niceprototypes/styles"
 import { ShikiPre } from "../src/components/ShikiPre"
 import ContentFlex from "../src/nice/ContentFlex"
@@ -19,11 +18,10 @@ import "@niceprototypes/image-vendor"
 import "../src/nice/tokens"
 import "./preview.css"
 
-// Mirror storybook-dark-mode's state into <html data-theme="night|day"> so
+// Mirror the manager's theme into <html data-theme="night|day"> so
 // @niceprototypes/styles' [data-theme] cascade applies to canvas, MDX docs prose, and
-// any nice-* component dropped directly into MDX. The addon itself only
-// knows light/dark — we translate to nice's day/night here.
-addons.getChannel().on(DARK_MODE_EVENT_NAME, (isDark: boolean) => {
+// any nice-* component dropped directly into MDX.
+addons.getChannel().on(DARK_MODE_EVENT, (isDark: boolean) => {
   applyTheme(isDark ? "night" : "day")
 })
 
@@ -67,14 +65,6 @@ const preview: Preview = {
           </ContentFlex>
         </DocsContainer>
       ),
-    },
-    darkMode: {
-      // Default to light regardless of the OS color-scheme. When `current` is
-      // set, storybook-dark-mode stops following prefers-color-scheme; the
-      // toggle still works and the user's choice persists.
-      current: "light",
-      dark: themes.dark,
-      light: themes.light,
     },
     controls: {
       matchers: {

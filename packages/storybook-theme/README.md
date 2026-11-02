@@ -34,7 +34,11 @@ manager chrome the addon also restyles.
 npm install -D @niceprototypes/storybook-theme
 ```
 
-Requires (peers): `storybook` ≥ 10 and `storybook-dark-mode` ≥ 5. Renders with
+Owns the day/night theme: it applies the persisted choice (`sb-addon-themes-3`),
+switches on the `UPDATE_DARK_MODE` channel event, and reports the theme with
+`DARK_MODE`, keeping the consumer's brand and font theme fields.
+
+Requires (peers): `storybook` ≥ 10. Renders with
 Nice tokens (`@niceprototypes/styles`) and the Nice folder icon (`@niceprototypes/icon/svg`).
 
 ## Wire it up
@@ -44,7 +48,6 @@ Nice tokens (`@niceprototypes/styles`) and the Nice folder icon (`@niceprototype
 ```ts
 const config = {
   addons: [
-    "storybook-dark-mode",
     "@niceprototypes/storybook-theme", // loads its manager entry
   ],
 }

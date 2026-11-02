@@ -65,7 +65,6 @@ const config: StorybookConfig = {
         },
       },
     },
-    "storybook-dark-mode",
     // Both load their own manager (and, for navigation, preview) entries.
     "@niceprototypes/storybook-navigation",
     "@niceprototypes/storybook-theme",
@@ -73,6 +72,12 @@ const config: StorybookConfig = {
     "@niceprototypes/storybook-spinner",
   ],
   staticDirs: ["../public"],
+  // Toolbar-only features; the toolbar is hidden (manager.js).
+  features: {
+    backgrounds: false,
+    outline: false,
+    measure: false,
+  },
   core: {
     // Suppress the "Learn what's new in Storybook" toast on every launch.
     disableWhatsNewNotifications: true,

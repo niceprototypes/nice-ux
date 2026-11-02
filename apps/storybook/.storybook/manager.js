@@ -7,22 +7,18 @@
 // title.
 import { addons } from "storybook/manager-api"
 import { create } from "storybook/theming"
-import { getToken, setTokens } from "@niceprototypes/styles"
-import { TOKENS } from "@niceprototypes/storybook-theme"
+import { getToken } from "@niceprototypes/styles"
+import { THEME_STORAGE_KEY } from "@niceprototypes/storybook-theme"
 import { BRAND_LOGO } from "./brandLogo"
+// The manager document's one setTokens call, the same map as the preview's (theme tokens, Avenir).
+import "../src/nice/tokens"
 import "./manager.css"
 
-// The manager document's one setTokens call: the theme's tokens (the sidebar highlight).
-setTokens(TOKENS)
-
-// Seed the initial manager + nice theme from the dark-mode addon's persisted
-// choice (its own localStorage key), defaulting to LIGHT — never the OS
-// prefers-color-scheme — so Storybook opens light regardless of browser
-// settings. The addon takes over once it initializes; see darkMode.current in
-// preview.tsx.
+// Open in the persisted theme, light when none is stored (never the OS
+// prefers-color-scheme). @niceprototypes/storybook-theme owns the theme after load.
 const prefersDark = (() => {
   try {
-    return JSON.parse(window.localStorage.getItem("sb-addon-themes-3") || "{}").current === "dark"
+    return JSON.parse(window.localStorage.getItem(THEME_STORAGE_KEY) || "{}").current === "dark"
   } catch {
     return false
   }
@@ -62,6 +58,10 @@ addons.setConfig({
   // fresh load Basics is open and every other section is collapsed.
   sidebar: {
     showRoots: false,
+  },
+  // No toolbar: the docs navigation bar holds the theme toggle.
+  layoutCustomisations: {
+    showToolbar: () => false,
   },
 })
 

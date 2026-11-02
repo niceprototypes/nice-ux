@@ -23,12 +23,10 @@ html[data-theme="night"] body {
 
 /* Day mode only: turn off Storybook's default font smoothing so light-theme
    text renders at full weight. Night keeps Storybook's \`antialiased\` default.
-   storybook-dark-mode toggles \`light\`/\`dark\` on the manager <body>
-   (classTarget: 'body'), so key off \`light\` to track the actual theme toggle.
    Storybook applies \`-webkit-font-smoothing\` per element via its theme reset,
    so \`*\` + \`!important\` is needed to override. */
-body.light,
-body.light * {
+html[data-theme="day"] body,
+html[data-theme="day"] body * {
   -webkit-font-smoothing: auto !important;
   -moz-osx-font-smoothing: auto !important;
 }

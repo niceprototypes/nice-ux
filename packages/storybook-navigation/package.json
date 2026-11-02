@@ -54,11 +54,11 @@
     "@niceprototypes/button": "workspace:^",
     "@niceprototypes/flex": "workspace:^",
     "@niceprototypes/ink": "workspace:^",
+    "@niceprototypes/storybook-theme": "workspace:^",
     "@niceprototypes/styles": "workspace:^",
     "react": ">=19.2.0 <20.0.0",
     "react-dom": ">=19.2.0 <20.0.0",
     "storybook": ">=10.0.0",
-    "storybook-dark-mode": ">=5.0.0",
     "styled-components": ">=6.1.18 <7.0.0"
   },
   "devDependencies": {
@@ -70,11 +70,11 @@
     "@niceprototypes/flex": "workspace:*",
     "@niceprototypes/icon": "workspace:*",
     "@niceprototypes/ink": "workspace:*",
+    "@niceprototypes/storybook-theme": "workspace:*",
     "@niceprototypes/styles": "workspace:*",
     "react": "catalog:",
     "react-dom": "catalog:",
     "storybook": "catalog:",
-    "storybook-dark-mode": "^5.0.0",
     "styled-components": "catalog:",
     "tsup": "^8.0.0",
     "typescript": "catalog:"

@@ -33,7 +33,8 @@ own mobile menu.
 npm install -D @niceprototypes/storybook-navigation
 ```
 
-Requires (peers): `storybook` ≥ 10, `storybook-dark-mode`, `@storybook/addon-links`,
+Requires (peers): `storybook` ≥ 10, `@niceprototypes/storybook-theme` (owns the theme the
+toggle switches), `@storybook/addon-links`,
 `react`, `react-dom`, `styled-components`, and the Nice packages it renders with.
 
 ## Wire it up
@@ -44,7 +45,7 @@ Requires (peers): `storybook` ≥ 10, `storybook-dark-mode`, `@storybook/addon-l
 const config = {
   addons: [
     "@storybook/addon-links",
-    "storybook-dark-mode",
+    "@niceprototypes/storybook-theme",
     "@niceprototypes/storybook-navigation", // loads its manager + preview entries
   ],
 }

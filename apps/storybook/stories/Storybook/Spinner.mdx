@@ -36,7 +36,7 @@ import { DataTable } from "../../src/components/DataTable"
 // .storybook/main.ts
 const config = {
   addons: [
-    "storybook-dark-mode",
+    "@niceprototypes/storybook-theme",
     "@niceprototypes/storybook-spinner",
   ],
 }
@@ -87,7 +87,7 @@ removed }`, where `mode` is `"overlay"` or `"snapshot"` and `removed` names the
 
 <Ink>The addon is a preset with two hooks. Both put their markup first in the head, so it runs before any other head content is fetched or parsed.</Ink>
 
-<Ink><Ink weight="semibold"><code>managerHead</code></Ink> <Ink>inlines the boot overlay script. It resolves the theme synchronously from storybook-dark-mode's localStorage store (</Ink><Ink code>sb-addon-themes-3</Ink><Ink>) — the stored mode when the user chose it explicitly, otherwise day — so the overlay's first paint is already in the right theme. It then mounts the overlay on</Ink> <Ink code>{"<html>"}</Ink> <Ink>before</Ink> <Ink code>{"<body>"}</Ink> <Ink>exists.</Ink></Ink>
+<Ink><Ink weight="semibold"><code>managerHead</code></Ink> <Ink>inlines the boot overlay script. It resolves the theme synchronously from the localStorage key</Ink> <Ink code>@niceprototypes/storybook-theme</Ink> <Ink>persists it under (</Ink><Ink code>sb-addon-themes-3</Ink><Ink>) — night when stored dark, otherwise day — so the overlay's first paint is already in the right theme. It then mounts the overlay on</Ink> <Ink code>{"<html>"}</Ink> <Ink>before</Ink> <Ink code>{"<body>"}</Ink> <Ink>exists.</Ink></Ink>
 
 <Ink><Ink>The overlay comes down once the page behind it is ready: after</Ink> <Ink code>storyRendered</Ink> <Ink>or</Ink> <Ink code>docsRendered</Ink><Ink>, then</Ink> <Ink code>document.fonts.ready</Ink> <Ink>(capped at 1s), then two animation frames, so the first frame without the overlay is a rendered page. On</Ink> <Ink code>storyErrored</Ink><Ink>,</Ink> <Ink code>storyThrewException</Ink> <Ink>or</Ink> <Ink code>storyMissing</Ink> <Ink>it is removed immediately, so Storybook's error display is never covered. After</Ink> <Ink code>timeout</Ink> <Ink>ms it is removed regardless.</Ink></Ink>
 
@@ -95,7 +95,7 @@ removed }`, where `mode` is `"overlay"` or `"snapshot"` and `removed` names the
 
 <Ink><Ink>Snapshot mode covers same-origin navigations — links,</Ink> <Ink code>location.assign</Ink><Ink>, back and forward — in Chrome / Edge 126+ and Safari 18.2+. A first visit and a reload never get a View Transition (measured in Chromium 139 and WebKit 26), so they, and other browsers, get the opaque overlay.</Ink></Ink>
 
-<Ink><Ink weight="semibold"><code>previewHead</code></Ink> <Ink>handles navigation inside the preview iframe. A permanent stylesheet hides Storybook's native loaders — the grey docs skeleton (</Ink><Ink code>.sb-preparing-docs</Ink><Ink>) and the story spinner (</Ink><Ink code>.sb-preparing-story</Ink><Ink>) — and shows</Ink> <Ink code>#nsb-preview-spinner</Ink> <Ink>exactly when Storybook would show its own loader. A script mounts that spinner as the first child of</Ink> <Ink code>{"<body>"}</Ink> <Ink>as soon as</Ink> <Ink code>{"<body>"}</Ink> <Ink>exists, themed like the overlay and following storybook-dark-mode's</Ink> <Ink code>DARK_MODE</Ink> <Ink>event afterwards.</Ink></Ink>
+<Ink><Ink weight="semibold"><code>previewHead</code></Ink> <Ink>handles navigation inside the preview iframe. A permanent stylesheet hides Storybook's native loaders — the grey docs skeleton (</Ink><Ink code>.sb-preparing-docs</Ink><Ink>) and the story spinner (</Ink><Ink code>.sb-preparing-story</Ink><Ink>) — and shows</Ink> <Ink code>#nsb-preview-spinner</Ink> <Ink>exactly when Storybook would show its own loader. A script mounts that spinner as the first child of</Ink> <Ink code>{"<body>"}</Ink> <Ink>as soon as</Ink> <Ink code>{"<body>"}</Ink> <Ink>exists, themed like the overlay and following the theme addon's</Ink> <Ink code>DARK_MODE</Ink> <Ink>event afterwards.</Ink></Ink>
 
 <Ink><Ink>The preview head also carries the boot overlay script, which acts only when</Ink> <Ink code>iframe.html</Ink> <Ink>is opened on its own.</Ink> <Ink code>.sb-nopreview</Ink> <Ink>and</Ink> <Ink code>.sb-errordisplay</Ink> <Ink>are never touched.</Ink></Ink>
 

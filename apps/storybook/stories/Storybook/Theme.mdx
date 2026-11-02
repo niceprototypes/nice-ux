@@ -27,7 +27,6 @@ import Ink from "../../src/nice/Ink"
 // .storybook/main.ts
 const config = {
   addons: [
-    "storybook-dark-mode",
     "@niceprototypes/storybook-theme",
   ],
 }
@@ -35,7 +34,7 @@ const config = {
 export default config
 ```
 
-<Ink><Ink>Peers:</Ink> <Ink code>storybook</Ink> <Ink>≥ 10 and</Ink> <Ink code>storybook-dark-mode</Ink> <Ink>≥ 5. The manager must already expose the Nice</Ink> <Ink code>--np--*</Ink> <Ink>custom properties — the addon styles the tree with them but does not inject the token sheet itself, so the theme and branding stay yours.</Ink></Ink>
+<Ink><Ink>Peers:</Ink> <Ink code>storybook</Ink> <Ink>≥ 10. The addon owns the day/night theme: it applies the persisted choice, switches on</Ink> <Ink code>UPDATE_DARK_MODE</Ink><Ink>, and reports it with</Ink> <Ink code>DARK_MODE</Ink><Ink>. The manager must already expose the Nice</Ink> <Ink code>--np--*</Ink> <Ink>custom properties — the addon styles the tree with them but does not inject the token sheet itself, so the branding stays yours.</Ink></Ink>
 
 <Ink as="h3">What it draws</Ink>
 

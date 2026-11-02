@@ -7,7 +7,7 @@ import { toScriptJson } from "./toScriptJson"
  * Preview spinner script, run at document start in the preview iframe (and in
  * iframe.html opened top-level). Mounts `#nsb-preview-spinner` as the first
  * child of <body> as soon as <body> exists; `previewCss` decides when it shows.
- * Its theme is resolved like the boot overlay's and follows storybook-dark-mode's
+ * Its theme is resolved like the boot overlay's and follows the theme addon's
  * `DARK_MODE` channel event afterwards, so a later navigation never shows a
  * stale theme.
  *

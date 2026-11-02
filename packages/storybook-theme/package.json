@@ -47,15 +47,13 @@
   "peerDependencies": {
     "@niceprototypes/icon": "workspace:^",
     "@niceprototypes/styles": "workspace:^",
-    "storybook": ">=10.0.0",
-    "storybook-dark-mode": ">=5.0.0"
+    "storybook": ">=10.0.0"
   },
   "devDependencies": {
     "@types/node": "^24.10.1",
     "@niceprototypes/icon": "workspace:*",
     "@niceprototypes/styles": "workspace:*",
     "storybook": "catalog:",
-    "storybook-dark-mode": "^5.0.0",
     "tsup": "^8.0.0",
     "typescript": "catalog:"
   }

@@ -19,7 +19,7 @@ import { toScriptJson } from "./toScriptJson"
  * when it is opened top-level (inside the manager's iframe it does nothing; the
  * preview spinner covers that document).
  *
- * - Paints a full-viewport spinner, themed synchronously from storybook-dark-mode's store.
+ * - Paints a full-viewport spinner, themed synchronously from the persisted theme.
  * - Removes it after `storyRendered` / `docsRendered`, then fonts ready (capped
  *   at 1s), then two animation frames; immediately on `storyErrored` /
  *   `storyThrewException` / `storyMissing`; and after `timeout` ms regardless.

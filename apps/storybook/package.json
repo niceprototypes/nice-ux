@@ -77,7 +77,6 @@
     "react": "catalog:",
     "react-dom": "catalog:",
     "remark-gfm": "^4.0.1",
-    "storybook-dark-mode": "^5.0.0",
     "styled-components": "catalog:",
     "typescript": "catalog:",
     "vite": "^7.1.9",
