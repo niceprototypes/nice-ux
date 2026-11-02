@@ -1,5 +1,6 @@
 import { useState } from "react"
 import Slider from "@niceprototypes/slider"
+import Button from "@niceprototypes/button"
 import Flex from "@niceprototypes/flex"
 import Ink from "../../../src/nice/Ink"
 import { getToken } from "@niceprototypes/styles"
@@ -13,8 +14,8 @@ export const SlideContent = ({
 }) => (
   <Flex
     direction="column"
-    align="center"
-    justify="center"
+    alignItems="center"
+    justifyContent="center"
     style={{
       height: "100%",
       backgroundColor: color,
@@ -72,21 +73,15 @@ export const InteractiveSlider = () => {
       </Slider>
       <Flex
         gap="small"
-        justify="center"
+        justifyContent="center"
       >
         {slides.map((_, index) => (
-          <Flex
+          <Button
             key={index}
-            as="button"
+            borderRadius="rounded"
+            selected={index === currentIndex}
+            disabled={isAnimating}
             onClick={() => goToSlide(index)}
-            style={{
-              width: "12px",
-              height: "12px",
-              borderRadius: "50%",
-              border: "none",
-              cursor: isAnimating ? "not-allowed" : "pointer",
-              transition: "background-color 0.2s ease",
-            }}
           />
         ))}
       </Flex>
