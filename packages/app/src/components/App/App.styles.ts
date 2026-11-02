@@ -97,9 +97,13 @@ export const StyledAppHandle = styled.div`
   }
 `
 
-/** The footer's resizable body: the dragged height, clipping the content below it. */
+/**
+ * The footer's resizable body: the dragged height, under the handle (which stays put). Shorter than
+ * its content, it scrolls vertically; fully open, it is as tall as its content and shows no scrollbar.
+ */
 export const StyledAppFooterBody = styled.div`
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 `
 
 /**

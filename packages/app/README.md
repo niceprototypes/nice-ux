@@ -16,7 +16,7 @@ where the current one renders. One page, no iframe.
   sidebar)`); empty, it takes no space; `null` in the bare view. `useSceneSidebarFooter()` returns the
   footer under the nav and the scene sidebar, the width of both, for a scene's settings: a drag handle at
   its top (a separator, arrow keys too) resizes it between the handle alone and its content's height; it
-  opens fully; empty, it takes no space; `null` in the bare view. `useScenes()` returns the index, the current page, `bare` (the bare view
+  opens fully; shorter than its content, the body under the handle scrolls; empty, it takes no space; `null` in the bare view. `useScenes()` returns the index, the current page, `bare` (the bare view
   is on), `open(entry)` and `preload(entry)`, for scenes that move between pages or drop their chrome.
 - **Router adapters**, subpath exports with optional peer dependencies:
   `@niceprototypes/app/adapters/plain` (`plainRouter`, history API, no dependency),

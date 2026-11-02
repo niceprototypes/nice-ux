@@ -210,6 +210,19 @@ describe("App sidebar footer", () => {
     expect(handle).toHaveAttribute("aria-valuenow", String(CONTENT))
   })
 
+  it("scrolls the body under the handle when shorter than its content; follows the content when fully open", async () => {
+    const handle = await renderFooter()
+    const body = handle.nextElementSibling as HTMLElement
+    expect(body).toContainElement(screen.getByText("settings"))
+    expect(body).not.toContainElement(handle)
+    expect(body).toHaveStyle({ overflowY: "auto" })
+    expect(body.style.height).toBe("")
+    fireEvent.pointerDown(handle, { clientY: 500 })
+    fireEvent.pointerMove(handle, { clientY: 550 })
+    fireEvent.pointerUp(handle)
+    expect(body).toHaveStyle({ height: `${CONTENT - 50}px`, overflowY: "auto" })
+  })
+
   it("stops at the content height when dragged or keyed up, and collapses to the handle when dragged or keyed down", async () => {
     const handle = await renderFooter()
     fireEvent.pointerDown(handle, { clientY: 500 })

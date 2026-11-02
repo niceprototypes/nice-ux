@@ -10,7 +10,8 @@ const clamp = (height: number, content: number) => Math.min(Math.max(height, 0),
 /**
  * The sidebar's footer, under the nav and the scene sidebar, the width of both: a rule, a drag handle
  * and the element a scene portals its settings into (`onContent`). Dragging the handle (or its arrow
- * keys) resizes the footer between the handle alone and its content's height; it opens fully.
+ * keys) resizes the footer between the handle alone and its content's height; it opens fully. Shorter
+ * than its content, the body under the handle scrolls vertically; the handle stays at the top.
  * Empty, it takes no space.
  */
 const AppFooter: React.FC<{ onContent: (element: HTMLDivElement | null) => void }> = ({ onContent }) => {
@@ -71,7 +72,8 @@ const AppFooter: React.FC<{ onContent: (element: HTMLDivElement | null) => void 
         onPointerCancel={onPointerUp}
         onKeyDown={onKeyDown}
       />
-      <StyledAppFooterBody style={{ height: shown }}>
+      {/* Fully open, its height follows the content: a rounded measurement never shows a scrollbar. */}
+      <StyledAppFooterBody style={{ height: shown < contentHeight ? shown : undefined }}>
         <StyledAppFooterContent ref={setContentElement} />
       </StyledAppFooterBody>
     </StyledAppFooter>
