@@ -14,7 +14,7 @@ Storybook 10, Vite, React 19, styled-components 6. Reads workspace packages; no 
 The custom docs site replacing Storybook (phase 1), on `@niceprototypes/app` (docs-only: `pages` built from data, no scenes). Vite, React 19.
 
 - `src/pages.tsx` the nav: the storybook.json sections in order (Basics, Manifest, Tokens, Bindings, Configuration, CLI; each page the Storybook MDX whose `Meta` title matches the item, rendered by MdxPage), with every catalog component (live examples from `@niceprototypes/docs/examples`) after Tokens. `src/storybookShims/` answers the Storybook APIs those MDX pages import (`Meta`, `navigate`).
-- `src/components/` DocsPage (sections column + Contents), ComponentPage (catalog props, live examples, tokens), TokensPage (storybook.json token tables), ThemeToggle.
+- `src/components/` DocsPage (sections column, Contents, settings column), ComponentPage (playground, catalog props, live examples, tokens), Playground (controls from catalog prop types; components whose required props have none get no playground), TokensPage (storybook.json token tables), MdxPage, DocsSearch (sidebar combobox over the page index), ThemeToggle.
 - Docs building blocks (data, token and example tables, headers, code) come from `@niceprototypes/docs` (`packages/docs`, private, source-only, one subpath export per module), shared with the Storybook; `src/tokens.ts` the one unprefixed token map (the Storybook's plus the site's overrides).
 - Run: `pnpm --filter @niceprototypes/docs-site dev` (port 6020).
 
