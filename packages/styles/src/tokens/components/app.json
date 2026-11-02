@@ -1,4 +1,9 @@
 {
+  "sidebar": {
+    "minWidth": {
+      "base": "auto"
+    }
+  },
   "footer": {
     "rule": {
       "width": {

@@ -37,6 +37,10 @@ createRoot(root).render(<App scenes={scenes} docs={docs} router={plainRouter} />
 `header` is a row at the top of the sidebar, above the nav and the scene sidebar, with the nav's
 padding (a logo); the bare view leaves it out.
 
+The sidebar is at least `app.sidebar.minWidth` wide (a component token, `auto` by default: as wide as
+its content). Set it per breakpoint in the app's token map, e.g.
+`setTokens({ app: { sidebar: { minWidth: { base: { "desktop+": "32em" } } } } })`.
+
 `wrapper` wraps every scene (not docs pages) inside the region, with the URL's query parameters: the
 place for scene-only providers and styles.
 

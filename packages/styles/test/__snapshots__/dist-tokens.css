@@ -257,6 +257,7 @@
 	--np--color--error--night--inverse: hsla(10, 92%, 63%, 1);
 
 	/* app component tokens */
+	--np--app--sidebar--min-width: auto;
 	--np--app--footer--rule--width: var(--np--border-width);
 	--np--app--footer--rule--color: var(--np--border-color);
 	--np--app--footer--padding: var(--np--gap--large);

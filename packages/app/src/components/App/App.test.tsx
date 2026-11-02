@@ -157,6 +157,14 @@ describe.each(adapters)("App on the %s adapter", (_, router) => {
     expect(screen.queryByText("logo")).not.toBeInTheDocument()
   })
 
+  it("sizes the sidebar from the app.sidebar.minWidth token", async () => {
+    window.history.replaceState(null, "", "/alpha/solo")
+    render(<App scenes={scenes} router={router} />)
+    await screen.findByText("solo")
+    const aside = screen.getByRole("navigation").closest("div")!.parentElement!.parentElement!
+    expect(aside).toHaveStyle({ minWidth: "var(--np--app--sidebar--min-width)" })
+  })
+
   it("tells a scene the bare view is on", async () => {
     window.history.replaceState(null, "", "/frame/alpha/pair/first-and-last")
     render(<App scenes={scenes} router={router} />)

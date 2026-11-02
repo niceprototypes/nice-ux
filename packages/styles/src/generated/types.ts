@@ -52,6 +52,7 @@ export interface TokenVariants extends CustomTokenVariants {
   "strokeWidthScale": StrokeWidthScaleType
   "fontSize": FontSizeType
   "breakpoints": "tablet" | "laptop" | "desktop"
+  "app.sidebar.minWidth": "base"
   "app.footer.rule.width": "base"
   "app.footer.rule.color": "base"
   "app.footer.padding": "base"

@@ -16,9 +16,10 @@ export const StyledApp = styled.div`
   color: ${getToken("color")};
 `
 
-/** The sidebar: the header row over the nav and the scene sidebar side by side, over the footer, the viewport's full height. */
+/** The sidebar: the header row over the nav and the scene sidebar side by side, over the footer, the viewport's full height, at least `app.sidebar.minWidth` wide. */
 export const StyledAppAside = styled.div`
   flex: none;
+  min-width: ${getToken("app.sidebar.minWidth")};
   display: flex;
   flex-direction: column;
   min-height: 0;

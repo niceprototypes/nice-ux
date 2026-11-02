@@ -9,6 +9,11 @@ export type ComponentTokensData = Record<string, { [key: string]: ComponentToken
 
 const componentTokensData: ComponentTokensData = {
   "app": {
+    "sidebar": {
+      "minWidth": {
+        "base": "auto"
+      }
+    },
     "footer": {
       "rule": {
         "width": {
