@@ -31,6 +31,8 @@ export interface DataColumn {
    * node copies the cell's text content. `@niceprototypes/code` defaults on; the others default off.
    */
   clickToCopy?: boolean
+  /** (@niceprototypes/code) Render the code as an inline chip (a token name, an identifier) instead of a block. */
+  inlined?: boolean
   /** (`@niceprototypes/code`) syntax-highlight language. @default "tsx" */
   language?: DataLanguage
 }

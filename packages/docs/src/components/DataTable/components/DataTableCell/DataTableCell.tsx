@@ -26,19 +26,16 @@ const nodeText = (node: React.ReactNode): string => {
  */
 export const DataTableCell: React.FC<DataTableCellProps> = ({ column, value }) => {
   if (column.render === "@niceprototypes/code") {
-    // clickToCopy gates both the copy handler (and its pointer cursor, via
-    // CodeBlock's copyOnClick) and the copy-icon affordance. Defaults on.
-    const copy = column.clickToCopy ?? true
-    const block = (
+    // A Code block, or an inline chip where the column says `inlined`; clickToCopy gates copy on click. Defaults on.
+    return (
       <Code
         code={String(value)}
         language={column.language ?? "tsx"}
-        inlined
+        inlined={column.inlined}
         margin="none"
-        copyOnClick={copy}
+        copyOnClick={column.clickToCopy ?? true}
       />
     )
-    return copy ? withCopyAffordance(block) : block
   }
 
   if (column.render === "@niceprototypes/ink") {

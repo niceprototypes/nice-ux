@@ -2,7 +2,7 @@ import * as React from "react"
 import Flex from "@niceprototypes/flex"
 import Icon from "@niceprototypes/icon"
 import Tooltip from "@niceprototypes/tooltip"
-import Ink from "../../nice/Ink"
+import Code from "@niceprototypes/code"
 
 interface TokenNameProps {
   /** The token variant name shown in the first column. */
@@ -16,20 +16,20 @@ interface TokenNameProps {
 }
 
 /**
- * The token-name cell, shared by the module and component token tables. The
- * default variant renders in the lighter color with a small check Icon (and a
- * "Default" tooltip) to flag it; every other variant renders its name plainly.
+ * The token-name cell, shared by the module and component token tables: the
+ * variant as an inline Code chip (click copies it), the default one after a small
+ * check Icon with a "Default" tooltip.
  */
 export const TokenName: React.FC<TokenNameProps> = ({ variant, isDefault = variant === "base" }) =>
   isDefault ? (
-    <Flex direction="row" alignItems="center">
+    <Flex direction="row" alignItems="center" gap="smaller">
       {/* Tooltip scoped to the check icon only — hovering the variant name should
           not surface the "Default" tooltip. */}
       <Tooltip delayShow={500} content="Default">
         <Icon name="check" size="smaller" color="lighter" />
       </Tooltip>
-      <Ink code size="small" color="lighter">&nbsp;{variant}</Ink>
+      <Code code={variant} inlined margin="none" />
     </Flex>
   ) : (
-    <Ink code size="small">{variant}</Ink>
+    <Code code={variant} inlined margin="none" />
   )

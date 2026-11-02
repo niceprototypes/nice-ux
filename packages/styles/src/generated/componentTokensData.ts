@@ -343,6 +343,14 @@ const componentTokensData: ComponentTokensData = {
       "tag": "hsla(268, 50%, 48%, 1)",
       "constant": "hsla(198, 70%, 33%, 1)",
       "comment": "hsla(210, 5%, 45%, 1)"
+    },
+    "inline": {
+      "paddingBlock": {
+        "base": "0.6em"
+      },
+      "paddingInline": {
+        "base": "1em"
+      }
     }
   },
   "contents": {

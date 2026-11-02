@@ -108,11 +108,13 @@ const resolveLang = (language?: string): string =>
 
 /**
  * Highlight `code` as Shiki HTML in the token theme. The trailing newline is
- * stripped so single-line snippets don't render a blank last line.
+ * stripped so single-line snippets don't render a blank last line. `inline`
+ * gives the token spans alone (no `<pre>`/`<code>`), for code inside a line of text.
  */
-export function highlightCode(code: string, language?: string): string {
+export function highlightCode(code: string, language?: string, inline = false): string {
   return highlighter.codeToHtml(code.replace(/\n$/, ""), {
     lang: resolveLang(language),
     theme: theme.name!,
+    structure: inline ? "inline" : "classic",
   })
 }

@@ -18,7 +18,7 @@ export type CodeLanguageType = string
 /**
  * CodeShowLabelType
  *
- * Whether to show the language label in the top-right corner.
+ * Whether to show the copy icon (named "Copy TSX" for screen readers) in the top-right corner.
  */
 export type CodeShowLabelType = boolean
 
@@ -57,8 +57,9 @@ export type CodeMarginType = GapType
  * CodeMaxHeightType
  *
  * Collapsed height of a card block, as a `code.maxHeight` token variant. Taller
- * code is cut off with a fade and a "Show more" / "Show less" toggle; shorter
- * code renders in full with no toggle. "none" never collapses.
+ * code is cut off with a fade above a drag bar that sets the visible height between
+ * this cap and the full code (pointer, or arrow keys, Home and End); shorter code
+ * renders in full with no bar. "none" never collapses.
  */
 export type CodeMaxHeightType = "none" | TokenVariants["code.maxHeight"]
 
@@ -79,7 +80,7 @@ export interface CodeProps {
   code: CodeCodeType
   /** Fence language (e.g. "tsx", "css", "bash"). */
   language?: CodeLanguageType
-  /** Show the language label in the top-right corner. @default true */
+  /** Show the copy icon in the top-right corner. @default true */
   showLabel?: CodeShowLabelType
   /** Copy the code to the clipboard on click. @default true */
   copyOnClick?: CodeCopyOnClickType
@@ -89,7 +90,7 @@ export interface CodeProps {
   fit?: CodeFitType
   /** Top/bottom margin as a `gap` token variant. @default "large" */
   margin?: CodeMarginType
-  /** Collapse card blocks taller than this `code.maxHeight` token, with a fade and a Show more toggle. @default "base" */
+  /** Collapse card blocks taller than this `code.maxHeight` token, with a fade and a drag bar. @default "base" */
   maxHeight?: CodeMaxHeightType
   /** CSS class name applied to the root element. */
   className?: CodeClassNameType

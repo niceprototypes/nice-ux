@@ -1,7 +1,7 @@
 import * as React from "react"
 import { InkProps } from "@niceprototypes/ink"
 import { StyledInk } from "./Ink.styles"
-import { unwrapMdxParagraph } from "./Ink.services"
+import { inlineCode, unwrapMdxParagraph } from "./Ink.services"
 
 type Props = InkProps & { unstyled?: boolean }
 
@@ -28,7 +28,7 @@ const Ink: React.FC<Props> = ({
       {...props}
       className={finalClassName}
     >
-      {unwrapMdxParagraph(children)}
+      {inlineCode(unwrapMdxParagraph(children))}
     </StyledInk>
   )
 }

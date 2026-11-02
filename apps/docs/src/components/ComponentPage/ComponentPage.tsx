@@ -1,6 +1,7 @@
 import * as React from "react"
 import Flex from "@niceprototypes/flex"
 import Ink from "@niceprototypes/ink"
+import NiceCode from "@niceprototypes/code"
 import DocsPage, { type DocsPageSectionType } from "../DocsPage"
 import type { CatalogComponentType, CatalogPropType } from "../../catalog"
 import { getColumns } from "@niceprototypes/docs/data"
@@ -31,13 +32,16 @@ const SubHeading = ({ title, description }: { title: string; description?: React
 const Prop = ({ prop, example }: { prop: CatalogPropType; example?: ComponentExample }) => (
   <Flex direction="column" gap="base">
     <SubHeading title={prop.name} description={prop.description ?? example?.description} />
-    <Code language="tsx" code={prop.type} fit />
-    {prop.default !== undefined && (
-      <Flex gap="small" alignItems="center">
-        <Ink size="small" color="lighter">Default</Ink>
-        <Ink size="small" code>{prop.default}</Ink>
-      </Flex>
-    )}
+    <Flex gap="small" alignItems="center" wrap="wrap">
+      <Ink size="small" color="lighter">Type</Ink>
+      <NiceCode language="tsx" code={prop.type} inlined margin="none" />
+      {prop.default !== undefined && (
+        <>
+          <Ink size="small" color="lighter">Default</Ink>
+          <NiceCode language="tsx" code={prop.default} inlined margin="none" />
+        </>
+      )}
+    </Flex>
     {example && <ExampleTable example={example} />}
   </Flex>
 )

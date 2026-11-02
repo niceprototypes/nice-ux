@@ -438,6 +438,8 @@
 	--np--code--syntax-color--tag: hsla(268, 50%, 48%, 1);
 	--np--code--syntax-color--constant: hsla(198, 70%, 33%, 1);
 	--np--code--syntax-color--comment: hsla(210, 5%, 45%, 1);
+	--np--code--inline--padding-block: 0.6em;
+	--np--code--inline--padding-inline: 1em;
 
 	/* contents component tokens */
 	--np--contents--color: var(--np--color--light);

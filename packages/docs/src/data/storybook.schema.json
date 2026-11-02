@@ -154,7 +154,7 @@
             "@niceprototypes/ink",
             "@niceprototypes/code"
           ],
-          "description": "Omit to render the value as-is (a node). @niceprototypes/ink: the value wrapped in Ink, styled by code/size/color. @niceprototypes/code: a code string rendered by the nice Code component, inlined."
+          "description": "Omit to render the value as-is (a node). @niceprototypes/ink: the value wrapped in Ink, styled by code/size/color. @niceprototypes/code: a code string rendered by the nice Code component: a block, or an inline chip with `inlined`."
         },
         "code": {
           "type": "boolean",
@@ -178,6 +178,10 @@
             "css"
           ],
           "description": "(@niceprototypes/code) highlight language."
+        },
+        "inlined": {
+          "type": "boolean",
+          "description": "(@niceprototypes/code) an inline chip (a token name, an identifier) instead of a block."
         },
         "width": {
           "type": "string",
