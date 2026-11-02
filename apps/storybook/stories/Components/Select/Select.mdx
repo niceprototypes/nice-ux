@@ -1,8 +1,6 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../src/components/Story"
 import Install from "../../../src/components/Install"
-import { renderSelectLifecycle, selectLifecycleSteps } from "./examples"
-import LifecycleStory from "../../../src/components/LifecycleStory"
 import NewLines from "../../../src/components/NewLines"
 import Callout from "../../../src/components/Callout"
 import Ink from "../../../src/nice/Ink"
@@ -39,16 +37,6 @@ import Select from "@niceprototypes/select"
   onChange={setValue}
 />
 ```
-
-<NewLines count={3} />
-
-<LifecycleStory
-  steps={selectLifecycleSteps}
-  render={renderSelectLifecycle}
-/>
-
-<NewLines count={3} />
-
 
 <NewLines count={3} />
 

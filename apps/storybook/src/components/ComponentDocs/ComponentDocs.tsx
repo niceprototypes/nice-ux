@@ -18,9 +18,10 @@ type Section = { id: string; label: string; content: React.ReactNode }
 /**
  * One component's docs page: the intro (Docs), the component tokens (Tokens, when the
  * component's prefix has any) and one section per prop or facet, with Contents listing
- * them in a sticky column on the right. The facet sections come from data, not a list:
- * every entry of `examples` (its table, labelled by `name`) and every `*.section.mdx` in
- * the component's folder (labelled by its `label` export), sorted by label.
+ * them in a sticky column on the right; the two columns sit centred on the page. The facet
+ * sections come from data, not a list: every entry of `examples` (its table, labelled by
+ * `name`) and every `*.section.mdx` in the component's folder (labelled by its `label`
+ * export), sorted by label.
  */
 const ComponentDocs: React.FC<ComponentDocsProps> = ({ component, examples = {}, sections = {}, children }) => {
   const prefix = (component.charAt(0).toLowerCase() + component.slice(1)) as ComponentPrefixWithTokens
@@ -66,7 +67,7 @@ const ComponentDocs: React.FC<ComponentDocsProps> = ({ component, examples = {},
   const items: ContentsItemsType = all.map(({ id, label }) => ({ id, label }))
 
   return (
-    <Flex gap="larger">
+    <Flex gap="larger" justifyContent="center">
       <StyledMain>
         <Flex direction="column" gap="larger">
           {all.map(section => (

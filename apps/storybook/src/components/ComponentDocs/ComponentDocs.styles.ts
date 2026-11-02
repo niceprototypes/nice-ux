@@ -2,9 +2,9 @@ import styled from "styled-components"
 import { getBreakpoint } from "@niceprototypes/styles"
 import { getToken } from "../../nice/tokens"
 
-/** The sections column: takes the room Contents leaves; a table wider than that scrolls sideways. */
+/** The sections column, capped at `docs.columnWidth`; a wider table scrolls sideways. */
 export const StyledMain = styled.div`
-  flex: 1 1 auto;
+  flex: 0 1 ${getToken("docs", "columnWidth")};
   min-width: 0;
   overflow-x: auto;
 `

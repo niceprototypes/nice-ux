@@ -1,8 +1,6 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../../src/components/Story"
 import Install from "../../../src/components/Install"
-import { popoverLifecycleSteps, renderPopoverLifecycle } from "./examples"
-import LifecycleStory from "../../../src/components/LifecycleStory"
 import NewLines from "../../../src/components/NewLines"
 import Callout from "../../../src/components/Callout"
 import ComponentDocs from "../../../src/components/ComponentDocs"
@@ -34,16 +32,6 @@ const [open, setOpen] = useState(false)
   …
 </Popover>
 ```
-
-<NewLines count={3} />
-
-<LifecycleStory
-  steps={popoverLifecycleSteps}
-  render={renderPopoverLifecycle}
-/>
-
-<NewLines count={3} />
-
 
 <NewLines count={3} />
 

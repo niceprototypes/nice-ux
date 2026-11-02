@@ -52,12 +52,12 @@
       {
         "key": "light",
         "header": "Light value",
-        "width": "12em"
+        "width": "10em"
       },
       {
         "key": "dark",
         "header": "Dark value",
-        "width": "12em"
+        "width": "10em"
       }
     ],
     "componentToken": [

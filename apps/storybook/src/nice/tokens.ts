@@ -17,6 +17,8 @@ const AppTokenMap = {
     long: "2000ms",
   },
   docs: {
+    // The docs text column (component docs sections, token tables), centred; Atlassian's measure.
+    columnWidth: "756px",
     // The Contents column beside a component docs page (ComponentDocs) and the Contents story.
     contentsWidth: "200px",
     // The fixed storybook-navigation bar's height at laptop+ (its ReservedSpaceStyle): docs
