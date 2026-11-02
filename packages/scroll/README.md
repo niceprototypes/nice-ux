@@ -114,6 +114,22 @@ function App() {
 }
 ```
 
+**Scrolling inside an element.** When the page scrolls in an element (an app shell's
+region) instead of the window, pass it as `root`, a ref or the element. Sticky then sticks to
+the root's top (CSS `sticky`, with a zero-height sentinel for `onStickyChange`), StickySectionLinks
+observes and scrolls the root, and FadeOnScroll measures against the root's visible box. Without
+`root` (or without a ScrollProvider) everything follows the window, as before.
+
+```tsx
+const region = useRef<HTMLDivElement>(null)
+
+<div ref={region} style={{ overflowY: "auto" }}>
+  <ScrollProvider root={region}>
+    <StickyProvider>{/* … */}</StickyProvider>
+  </ScrollProvider>
+</div>
+```
+
 **Why use ScrollProvider?**
 - Prevents multiple scroll listeners from degrading performance
 - Batches scroll updates using RAF for smoother animations

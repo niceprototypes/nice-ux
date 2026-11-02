@@ -15,14 +15,9 @@ const LABELS = ["About", "Services", "Contact"]
 const getLinks = (scope: string, count = LABELS.length): StickySectionLink[] =>
   LABELS.slice(0, count).map(label => ({ href: `#sectionlinks-${scope}-${label.toLowerCase()}`, label }))
 
-/** The links, then the box of sections they point at, one box-height each. */
+/** The links over the box of sections they point at, one box-height each; the links scroll the box. */
 const Preview = (props: StickySectionLinksProps) => (
-  <Flex
-    direction="column"
-    gap="small"
-  >
-    <StickySectionLinks {...props} />
-    <ScrollBox>
+  <ScrollBox header={<StickySectionLinks {...props} />}>
       {props.links.map(link => (
         <StickySection
           key={link.href}
@@ -34,8 +29,7 @@ const Preview = (props: StickySectionLinksProps) => (
           </Flex>
         </StickySection>
       ))}
-    </ScrollBox>
-  </Flex>
+  </ScrollBox>
 )
 
 /** A link drawn as a Button, filled while its section is active. */

@@ -1,46 +1,25 @@
-// FadeOnScroll example configs — one ComponentExample per prop, shaped like Toggle's. FadeOnScroll
-// measures its position against the viewport, so each preview fades as the docs page scrolls.
-import type * as React from "react"
-import { useCallback, useMemo } from "react"
-import { FadeOnScroll, ScrollContext } from "@niceprototypes/scroll"
-import type { FadeOnScrollProps, ScrollContextValue, ScrollSubscribeCallbackType } from "@niceprototypes/scroll"
+// FadeOnScroll example configs — one ComponentExample per prop, shaped like Toggle's. Each preview
+// scrolls a box (a ScrollProvider root) with the line in the middle, so it fades through its range.
+import { FadeOnScroll } from "@niceprototypes/scroll"
+import type { FadeOnScrollProps } from "@niceprototypes/scroll"
 import Ink from "@niceprototypes/ink"
 import type { ComponentExample } from "../../dataTables/components/demos/Components"
+import ScrollBox, { SCROLL_BOX_HEIGHT } from "../Sticky/ScrollBox"
 
-/** The scroll offset of whichever element scrolled: the docs page scrolls its scene region, not the window. */
-const getScrollTop = (target: EventTarget | null) => (target instanceof Element ? target.scrollTop : window.scrollY)
+const CONTENT = "Scroll the box"
 
-/**
- * ScrollProvider's context fed by every scroll on the page (capture phase), so FadeOnScroll
- * re-measures when the scene region scrolls; ScrollProvider itself listens to the window only.
- */
-const PageScrollProvider = ({ children }: { children: React.ReactNode }) => {
-  const subscribe = useCallback((callback: ScrollSubscribeCallbackType) => {
-    let frame = 0
-    const onScroll = (event: Event) => {
-      cancelAnimationFrame(frame)
-      frame = requestAnimationFrame(() => callback(getScrollTop(event.target)))
-    }
-    callback(window.scrollY)
-    document.addEventListener("scroll", onScroll, { capture: true, passive: true })
-    return () => {
-      cancelAnimationFrame(frame)
-      document.removeEventListener("scroll", onScroll, { capture: true })
-    }
-  }, [])
-  const value = useMemo<ScrollContextValue>(() => ({ scrollY: window.scrollY, subscribe }), [subscribe])
-  return <ScrollContext.Provider value={value}>{children}</ScrollContext.Provider>
-}
+/** Room above and below the line, so it can enter and leave the box. */
+const Room = () => <div style={{ blockSize: SCROLL_BOX_HEIGHT }} />
 
-const CONTENT = "Scroll the page"
-
-/** FadeOnScroll around one line of text, with `props` over the defaults. */
+/** FadeOnScroll around one line of text, with `props` over the defaults, in a scrolling box. */
 const Fade = (props: Omit<FadeOnScrollProps, "children">) => (
-  <PageScrollProvider>
+  <ScrollBox>
+    <Room />
     <FadeOnScroll {...props}>
       <Ink>{CONTENT}</Ink>
     </FadeOnScroll>
-  </PageScrollProvider>
+    <Room />
+  </ScrollBox>
 )
 
 /** A numeric prop's facet: each variant is passed as that prop; the default variant is left out of the code. */

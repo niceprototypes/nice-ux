@@ -16,6 +16,7 @@ export { default as ScrollProvider, ScrollContext } from "./components/ScrollPro
 export type {
   ScrollContextValue,
   ScrollProviderProps,
+  ScrollProviderRootType,
   ScrollSubscribeCallbackType,
   ScrollUnsubscribeType,
 } from "./components/ScrollProvider/ScrollProvider.types"

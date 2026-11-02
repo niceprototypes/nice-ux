@@ -6,6 +6,7 @@ import Select from "@niceprototypes/select"
 import Toggle from "@niceprototypes/toggle"
 import NiceCode from "@niceprototypes/code"
 import { ScrollProvider, StickyProvider } from "@niceprototypes/scroll"
+import { useSceneRegion } from "@niceprototypes/app"
 import type { CatalogComponentType } from "../../catalog"
 import { controlOf, initialOf, type PlaygroundControlType, type PlaygroundValueType } from "./Playground.controls"
 import { StyledPlaygroundControls, StyledPlaygroundPreview } from "./Playground.styles"
@@ -79,6 +80,8 @@ const Playground: React.FC<{ component: CatalogComponentType }> = ({ component }
     Object.fromEntries(controls.map(control => [control.prop.name, initialOf(control, component.name)])),
   )
   const Component = useComponent(component)
+  // The docs page scrolls in the App's region, not the window.
+  const region = useSceneRegion()
 
   const set = (name: string) => (value: PlaygroundValueType) => setValues(current => ({ ...current, [name]: value }))
   const { children, ...props } = values
@@ -91,8 +94,8 @@ const Playground: React.FC<{ component: CatalogComponentType }> = ({ component }
   return (
     <Flex direction="column" gap="large">
       <StyledPlaygroundPreview>
-        {/* The context the scroll components need above them; the rest ignore it. */}
-        <ScrollProvider>
+        {/* The context the scroll components need above them, scrolling with the page's region; the rest ignore it. */}
+        <ScrollProvider root={region}>
           <StickyProvider>
             <PreviewBoundary values={values}>{Component && <Component {...props}>{children}</Component>}</PreviewBoundary>
           </StickyProvider>

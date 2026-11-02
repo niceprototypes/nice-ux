@@ -1,6 +1,7 @@
 export { default, ScrollContext } from "./ScrollProvider"
 export type {
   ScrollContextValue,
+  ScrollProviderRootType,
   ScrollProviderProps,
   ScrollSubscribeCallbackType,
   ScrollUnsubscribeType,

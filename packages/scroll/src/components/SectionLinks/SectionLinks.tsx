@@ -1,6 +1,8 @@
 import React, { useContext, useState, useEffect } from "react"
 import { StickyContext } from "../Sticky/StickyProvider"
 import { LinksWrapper, LinkAnchor, LinkInk } from "./SectionLinks.styles"
+import { useScrollRoot } from "../../utilities/useScrollRoot"
+import { scrollRootTo, scrollTopOf, viewportOf } from "../../utilities/scrollRoot"
 import type { StickySectionLinksProps } from "./SectionLinks.types"
 
 /**
@@ -34,6 +36,8 @@ const StickySectionLinks: React.FC<StickySectionLinksProps> = ({
   className,
 }) => {
   const stickyContext = useContext(StickyContext)
+  // The page scrolls in the ScrollProvider's root, or the window.
+  const root = useScrollRoot()
   const [activeSection, setActiveSection] = useState<string>("")
 
   useEffect(() => {
@@ -72,6 +76,7 @@ const StickySectionLinks: React.FC<StickySectionLinksProps> = ({
         }
       },
       {
+        root,
         rootMargin,
         threshold: 0,
       }
@@ -84,7 +89,7 @@ const StickySectionLinks: React.FC<StickySectionLinksProps> = ({
     return () => {
       sections.forEach(section => observer.unobserve(section))
     }
-  }, [links, stickyContext])
+  }, [links, stickyContext, root])
 
   const handleClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
@@ -101,13 +106,13 @@ const StickySectionLinks: React.FC<StickySectionLinksProps> = ({
 
     if (targetElement) {
       const elementPosition =
-        targetElement.getBoundingClientRect().top + window.scrollY
+        targetElement.getBoundingClientRect().top - viewportOf(root).top + scrollTopOf(root)
       const stickyOffset = stickyContext?.getTotalStickyHeight() || 0
 
       const offsetPosition = elementPosition - stickyOffset + 1
 
       // Custom smooth scroll with faster duration (300ms)
-      const startPosition = window.scrollY
+      const startPosition = scrollTopOf(root)
       const distance = offsetPosition - startPosition
       const duration = 300
       let startTime: number | null = null
@@ -123,7 +128,7 @@ const StickySectionLinks: React.FC<StickySectionLinksProps> = ({
             ? 2 * progress * progress
             : 1 - Math.pow(-2 * progress + 2, 2) / 2
 
-        window.scrollTo(0, startPosition + distance * ease)
+        scrollRootTo(root, startPosition + distance * ease)
 
         if (progress < 1) {
           requestAnimationFrame(animation)

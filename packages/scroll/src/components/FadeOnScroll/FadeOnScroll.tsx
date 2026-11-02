@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from "react"
 import { useScroll } from "../../hooks/useScroll"
+import { useScrollRoot } from "../../utilities/useScrollRoot"
+import { scrollTopOf, viewportOf } from "../../utilities/scrollRoot"
 import { getFadeOpacity, getScrollProgress } from "./FadeOnScroll.helpers"
 import { FadeWrapper } from "./FadeOnScroll.styles"
 import type { FadeOnScrollProps } from "./FadeOnScroll.types"
@@ -40,6 +42,8 @@ const FadeOnScroll: React.FC<FadeOnScrollProps> = ({
   endOpacity = 0,
 }) => {
   const scrollY = useScroll()
+  // Positions are measured in the page's scroll root (the ScrollProvider's, or the window).
+  const root = useScrollRoot()
   const wrapperRef = useRef<HTMLDivElement>(null)
   const [opacity, setOpacity] = useState(startOpacity)
 
@@ -53,7 +57,7 @@ const FadeOnScroll: React.FC<FadeOnScrollProps> = ({
     const updateDimensions = () => {
       if (!wrapperRef.current) return
       elementTopRef.current =
-        wrapperRef.current.getBoundingClientRect().top + window.scrollY
+        wrapperRef.current.getBoundingClientRect().top - viewportOf(root).top + scrollTopOf(root)
     }
 
     // Initial measurement
@@ -64,13 +68,14 @@ const FadeOnScroll: React.FC<FadeOnScrollProps> = ({
     resizeObserver.observe(wrapperRef.current)
 
     return () => resizeObserver.disconnect()
-  }, [])
+  }, [root])
 
   useEffect(() => {
     if (!wrapperRef.current) return
 
     const rect = wrapperRef.current.getBoundingClientRect()
-    const scrollProgress = getScrollProgress(rect.top, window.innerHeight)
+    const viewport = viewportOf(root)
+    const scrollProgress = getScrollProgress(rect.top - viewport.top, viewport.height)
     const currentOpacity = getFadeOpacity({
       scrollProgress,
       startPosition,
@@ -88,6 +93,7 @@ const FadeOnScroll: React.FC<FadeOnScrollProps> = ({
     })
   }, [
     scrollY,
+    root,
     startPosition,
     peakPosition,
     endPosition,

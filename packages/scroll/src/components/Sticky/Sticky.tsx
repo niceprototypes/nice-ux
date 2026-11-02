@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useRef, useState } from "react"
 import { StickyContext } from "./StickyProvider"
 import { StickyWrapper, StickySpacer } from "./Sticky.styles"
+import { useScrollRoot } from "../../utilities/useScrollRoot"
+import { scrollTargetOf, scrollTopOf, viewportOf } from "../../utilities/scrollRoot"
 import type { StickyProps } from "./Sticky.types"
 
 /**
@@ -9,7 +11,8 @@ import type { StickyProps } from "./Sticky.types"
  * Uses native CSS position: sticky with IntersectionObserver for callbacks.
  * Provides significantly better performance than scroll-based approaches.
  *
- * Elements stick to the top of the viewport when scrolled to their position.
+ * Elements stick to the top of the viewport when scrolled to their position, or to the top
+ * of the ScrollProvider's `root` when the page scrolls in one.
  * Multiple sticky elements stack on top of each other based on their order prop.
  *
  * @param order - Stacking order (lower numbers appear above). Default: 0
@@ -29,6 +32,8 @@ const Sticky: React.FC<StickyProps> = ({
   onStickyChange,
 }) => {
   const context = useContext(StickyContext)
+  // In a scroll root the bar sticks inside it (CSS sticky), not to the viewport.
+  const root = useScrollRoot()
   const wrapperRef = useRef<HTMLDivElement>(null)
   const spacerRef = useRef<HTMLDivElement>(null)
   const [stickyTop, setStickyTop] = useState(0)
@@ -64,11 +69,11 @@ const Sticky: React.FC<StickyProps> = ({
       ticking.current = true
 
       requestAnimationFrame(() => {
-        const currentScrollY = window.scrollY
+        const currentScrollY = scrollTopOf(root)
 
         // Only hide/show if scrolled past the spacer
         if (spacerRef.current) {
-          const spacerTop = spacerRef.current.getBoundingClientRect().top
+          const spacerTop = spacerRef.current.getBoundingClientRect().top - viewportOf(root).top
 
           // If we're past the original position
           if (spacerTop < 0) {
@@ -89,12 +94,13 @@ const Sticky: React.FC<StickyProps> = ({
       })
     }
 
-    window.addEventListener("scroll", handleScroll, { passive: true })
+    const target = scrollTargetOf(root)
+    target.addEventListener("scroll", handleScroll, { passive: true })
 
     return () => {
-      window.removeEventListener("scroll", handleScroll)
+      target.removeEventListener("scroll", handleScroll)
     }
-  }, [])
+  }, [root])
 
   // Use IntersectionObserver for sticky state callback
   useEffect(() => {
@@ -108,6 +114,7 @@ const Sticky: React.FC<StickyProps> = ({
         onStickyChange(isSticky)
       },
       {
+        root,
         threshold: [0],
         // Account for sticky offset from stacked elements
         rootMargin: `-${stickyTop}px 0px 0px 0px`,
@@ -119,7 +126,7 @@ const Sticky: React.FC<StickyProps> = ({
     return () => {
       observer.disconnect()
     }
-  }, [onStickyChange, stickyTop])
+  }, [onStickyChange, stickyTop, root])
 
   if (!context) {
     return <>{children}</>
@@ -128,10 +135,11 @@ const Sticky: React.FC<StickyProps> = ({
   return (
     <>
       {/* Spacer that also acts as spacer for scroll position detection */}
-      <StickySpacer ref={spacerRef} $height={height} />
+      {/* In a scroll root the bar stays in the flow, so the spacer is a zero-height sentinel. */}
+      <StickySpacer ref={spacerRef} $height={root ? 0 : height} />
 
-      {/* Fixed header that slides up/down based on scroll direction */}
-      <StickyWrapper ref={wrapperRef} className={className} $top={stickyTop} $isHidden={isHidden}>
+      {/* Fixed header (sticky inside a scroll root) that slides up/down based on scroll direction */}
+      <StickyWrapper ref={wrapperRef} className={className} $top={stickyTop} $isHidden={isHidden} $contained={root !== null}>
         {children}
       </StickyWrapper>
     </>

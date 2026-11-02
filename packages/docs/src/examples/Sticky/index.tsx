@@ -1,5 +1,5 @@
 // Sticky example configs — one ComponentExample per prop, shaped like Toggle's. Each preview is a
-// bounded scrolling box with its own StickyProvider; scroll the box to move the rows under the bar.
+// bounded scrolling box (a ScrollProvider root) with its own StickyProvider; scroll the box to move the rows under the bar.
 import type * as React from "react"
 import { useState } from "react"
 import { Sticky, StickyProvider } from "@niceprototypes/scroll"
@@ -51,7 +51,7 @@ const ReportingSticky = () => {
 export const stickyChildren = {
   name: "children",
   description:
-    "Content of the bar. Sticky renders it in a fixed wrapper at the top of its containing block and leaves a spacer of the same height in the flow. Without a StickyProvider it renders the children in place.",
+    "Content of the bar. Sticky renders it in a fixed wrapper at the top of the viewport and leaves a spacer of the same height in the flow; in a ScrollProvider root it sticks to the root's top instead. Without a StickyProvider it renders the children in place.",
   variants: ["header"],
   default: "header",
   preview: () => (

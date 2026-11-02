@@ -1,7 +1,8 @@
 import styled from "styled-components"
 
-export const StickyWrapper = styled.div<{ $top: number; $isHidden: boolean }>`
-  position: fixed;
+export const StickyWrapper = styled.div<{ $top: number; $isHidden: boolean; $contained: boolean }>`
+  /* Fixed to the viewport; inside a scroll root, sticky to the root's top. */
+  position: ${p => (p.$contained ? "sticky" : "fixed")};
   top: ${p => p.$top}px;
   left: 0;
   right: 0;

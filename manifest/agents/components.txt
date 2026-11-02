@@ -57,7 +57,7 @@ Popover(popover) [components-popover--playground] open:boolean onOpenChange?:fn 
 Radio(radio) [components-forms-radio--playground] value:string disabled?:boolean children?:node size?:RadioSizeType backgroundColor?:ColorTokenProp<RadioBackgroundColorType> borderColor?:ColorTokenProp<RadioBorderColorType>
 RadioGroup(radio) [components-forms-radiogroup--playground] value?:string defaultValue?:string onChange?:fn name?:string disabled?:boolean required?:boolean direction?:"row"|"column"="column" gap?:GapType="small" size?:RadioSizeType="base" backgroundColor?:ColorTokenProp<RadioBackgroundColorType> borderColor?:ColorTokenProp<RadioBorderColorType> children?:node theme?:ThemeType
 FadeOnScroll(scroll) [components-scroll-fadeonscroll--playground] children:node startPosition?:number peakPosition?:number endPosition?:number startOpacity?:number peakOpacity?:number endOpacity?:number
-ScrollProvider(scroll) children:node
+ScrollProvider(scroll) children:node root?:React.RefObject<HTMLElement|null>|HTMLElement|null
 SectionLinks(scroll) [components-scroll-sectionlinks--playground] links:StickySectionLink[] renderLink?:fn renderWrapper?:fn
 Sticky(scroll) [components-scroll-sticky--playground] children:node order?:number onStickyChange?:fn
 StickySection(scroll) [components-scroll-stickysection--playground] children:node as?:keyof React.JSX.IntrinsicElements render?:fn
