@@ -2,6 +2,18 @@ import styled from "styled-components"
 import { getBreakpoint } from "@niceprototypes/styles"
 import { getToken } from "../../tokens"
 
+/** The page's columns side by side, centred, `docs.columnGap` apart; the settings row wraps above them below tablet. */
+export const StyledDocsPage = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: ${getToken("docs", "columnGap")};
+
+  ${getBreakpoint("tablet+")} {
+    flex-wrap: nowrap;
+  }
+`
+
 /** The sections column: capped at `docs.columnWidth` when wrapped, else the width Contents leaves; a wider table scrolls sideways. */
 export const StyledDocsPageMain = styled.div<{ $wrapped: boolean }>`
   flex: ${({ $wrapped }) => ($wrapped ? `0 1 ${getToken("docs", "columnWidth")}` : "1 1 auto")};
@@ -24,4 +36,28 @@ export const StyledDocsPageAside = styled.aside`
     display: flex;
     flex-direction: column;
   }
+`
+
+/**
+ * The settings column, rightmost, `docs.settingsWidth` wide, its content sticky with Contents.
+ * Below tablet it is a row above the sections, at their right.
+ */
+export const StyledDocsPageSettings = styled.aside`
+  order: -1;
+  flex: 1 0 100%;
+  display: flex;
+  justify-content: flex-end;
+
+  ${getBreakpoint("tablet+")} {
+    order: 0;
+    flex: none;
+    width: ${getToken("docs", "settingsWidth")};
+    display: block;
+  }
+`
+
+/** The settings, sticky at the height Contents sticks at. */
+export const StyledDocsPageSettingsContent = styled.div`
+  position: sticky;
+  top: ${getToken("contents.top")};
 `

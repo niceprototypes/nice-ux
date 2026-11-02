@@ -2,8 +2,16 @@ import * as React from "react"
 import Contents from "@niceprototypes/contents"
 import type { ContentsItemsType } from "@niceprototypes/contents"
 import Flex from "@niceprototypes/flex"
+import { DocsSettingsContext } from "./DocsSettings"
 import type { DocsPageProps, DocsPageSectionType } from "./DocsPage.types"
-import { StyledDocsPageAside, StyledDocsPageMain, StyledDocsPageSection } from "./DocsPage.styles"
+import {
+  StyledDocsPage,
+  StyledDocsPageAside,
+  StyledDocsPageMain,
+  StyledDocsPageSection,
+  StyledDocsPageSettings,
+  StyledDocsPageSettingsContent,
+} from "./DocsPage.styles"
 
 /** Contents rows for a level of sections, nested sections one level deeper. */
 const toItems = (sections: ReadonlyArray<DocsPageSectionType>): ContentsItemsType =>
@@ -24,11 +32,12 @@ const Section = ({ section }: { section: DocsPageSectionType }) => (
  *
  * A docs page: its sections stacked in a column capped at `docs.columnWidth` (unless not
  * `wrapped`), and Contents
- * listing them (nested sections nested) in a sticky column on the right, from tablet up; the two
- * columns sit centred in the page.
+ * listing them (nested sections nested) in a sticky column on the right, from tablet up, and the
+ * site's settings (DocsSettingsContext) in a sticky column right of that; the columns sit centred
+ * in the page. Below tablet the settings are a row above the sections.
  */
 const DocsPage: React.FC<DocsPageProps> = ({ sections, wrapped = true }) => (
-  <Flex gap="larger" justifyContent="center">
+  <StyledDocsPage>
     <StyledDocsPageMain $wrapped={wrapped}>
       <Flex direction="column" gap="larger">
         {sections.map(section => <Section key={section.id} section={section} />)}
@@ -37,7 +46,10 @@ const DocsPage: React.FC<DocsPageProps> = ({ sections, wrapped = true }) => (
     <StyledDocsPageAside>
       <Contents items={toItems(sections)} />
     </StyledDocsPageAside>
-  </Flex>
+    <StyledDocsPageSettings aria-label="Settings">
+      <StyledDocsPageSettingsContent>{React.useContext(DocsSettingsContext)}</StyledDocsPageSettingsContent>
+    </StyledDocsPageSettings>
+  </StyledDocsPage>
 )
 
 export default DocsPage

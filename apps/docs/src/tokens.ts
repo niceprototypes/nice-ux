@@ -10,6 +10,8 @@ import { AppTokenMap } from "@niceprototypes/docs/nice/tokens"
 export const getToken = setTokens({
   ...THEME_TOKENS,
   ...AppTokenMap,
+  // DocsPage's columns: the gap between them, and the settings column right of Contents, as wide as its Dark toggle.
+  docs: { ...AppTokenMap.docs, columnGap: getCoreToken("gap", "larger"), settingsWidth: "80px" },
   // Contents sticks one page padding below the top of the scrolling page (no navigation bar here).
   contents: { top: getCoreToken("gap", "large") },
   // One scale at every breakpoint, base 12 to larger 48: base to larger doubles each step (×2), and
