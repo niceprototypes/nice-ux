@@ -1,4 +1,3 @@
-import * as React from "react"
 import { getToken } from "@niceprototypes/styles"
 import Tooltip from "@niceprototypes/tooltip"
 import { parseTokenVarLink, HIGHLIGHT_KEY } from "../../../../services"
@@ -40,7 +39,7 @@ export const VarNameLink = ({ reference }: VarNameLinkProps) => {
   // so guard and drop the preview rather than crash the row.
   let value: string | null = null
   try {
-    value = getToken(link.group, link.variant, { pristine: true, as: "value" })
+    value = getToken([link.group], link.variant, { pristine: true, as: "value" })
   } catch {
     value = null
   }

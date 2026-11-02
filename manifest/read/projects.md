@@ -9,6 +9,15 @@ Storybook 10, Vite, React 19, styled-components 6. Reads workspace packages; no 
 - `src/` shared story components and data (`scripts/check-data.ts` validates it).
 - Run: `pnpm storybook` at the root (port 6006). Build: `pnpm build-storybook`.
 
+## Nice docs — `apps/docs` (`@niceprototypes/docs-site`, private)
+
+The custom docs site replacing Storybook (phase 1), on `@niceprototypes/app` (docs-only: `pages` built from data, no scenes). Vite, React 19.
+
+- `src/pages.tsx` the nav: Tokens, then every component with a Storybook docs page in `manifest/agents/catalog.json`.
+- `src/components/` DocsPage (sections column + Contents), ComponentPage (catalog props, live examples, tokens), TokensPage (storybook.json token tables), ThemeToggle.
+- `src/storybook.ts` the one import boundary to the reused `apps/storybook/src` modules; `src/tokens.ts` the one unprefixed token map (the Storybook's plus the site's overrides).
+- Run: `pnpm --filter @niceprototypes/docs-site dev` (port 6020).
+
 ## Website — `~/nice/website` (package `np`, own repo)
 
 CRA 5 via craco, React 19, styled-components 6, React Router 7. Staging ground for nice-ux: done = works on localhost against nice-ux, then production.

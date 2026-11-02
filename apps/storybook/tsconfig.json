@@ -18,6 +18,6 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["stories/**/*", ".storybook/**/*"],
+  "include": ["stories/**/*", ".storybook/**/*", "src/data/**/*", "src/dataTables/**/*"],
   "exclude": ["node_modules"]
 }

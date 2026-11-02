@@ -10,7 +10,7 @@ import { TOKENS as THEME_TOKENS } from "@niceprototypes/storybook-theme"
  * they can override a theme value. Read storybook-local tokens through the
  * exported `getToken`, which is typed for this map.
  */
-const AppTokenMap = {
+export const AppTokenMap = {
   // LifecycleStory step durations; a step picks a variant by name.
   lifecycleStep: {
     base: "1200ms",

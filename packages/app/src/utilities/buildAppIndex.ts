@@ -49,10 +49,10 @@ const entryOf = (folders: string[], kind: AppEntryType["kind"], load: () => Prom
 /**
  * The index, in nav order: under `/stories`, every scene (an `index.tsx` two or three folders under
  * `stories/`) and markdown page (an `.md` file, named by its file, two folders under `stories/`);
- * under `/docs`, every docs section page (an `index.tsx` one folder under `docs/`).
+ * under `/docs`, every docs section page (an `index.tsx` one or more folders under `docs/`).
  * Other depths are left out with a warning.
  */
-export const buildAppIndex = (scenes: AppScenesType, docs: AppDocsType = {}, pages: AppPagesType = {}): AppIndexEntry[] => {
+export const buildAppIndex = (scenes: AppScenesType = {}, docs: AppDocsType = {}, pages: AppPagesType = {}): AppIndexEntry[] => {
   const entries: AppIndexEntry[] = []
   for (const [key, load] of Object.entries(scenes)) {
     const folders = foldersOf(key, "stories")
@@ -66,8 +66,8 @@ export const buildAppIndex = (scenes: AppScenesType, docs: AppDocsType = {}, pag
   }
   for (const [key, load] of Object.entries(pages)) {
     const folders = foldersOf(key, "docs")
-    if (folders.length === 1) entries.push(entryOf(folders, "page", load))
-    else console.warn(`@niceprototypes/app: ${key} is not docs/<Page>/index.tsx; left out`)
+    if (folders.length >= 1) entries.push(entryOf(folders, "page", load))
+    else console.warn(`@niceprototypes/app: ${key} is not docs/[<Folder>/]<Page>/index.tsx; left out`)
   }
   return entries.sort(
     (a, b) => SECTIONS.indexOf(sectionOf(a.kind)) - SECTIONS.indexOf(sectionOf(b.kind)) || compareFolders(a.folders, b.folders),

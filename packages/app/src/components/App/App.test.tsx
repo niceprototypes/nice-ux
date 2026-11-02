@@ -97,6 +97,23 @@ describe.each(adapters)("App on the %s adapter", (_, router) => {
     expect(screen.getByRole("link", { name: "Getting started" })).toHaveAttribute("aria-current", "page")
   })
 
+  it("lists a docs-only app's nested pages at the top level, as folders, without a group row", async () => {
+    const nested = {
+      "./docs/2 Components/2 Forms/1 Button/index.tsx": scene("button page"),
+      "./docs/2 Components/1 Card/index.tsx": scene("card page"),
+      "./docs/1 Tokens/index.tsx": scene("tokens page"),
+    }
+    window.history.replaceState(null, "", "/docs/components/forms/button")
+    render(<App pages={nested} router={router} />)
+    expect(await screen.findByText("button page")).toBeInTheDocument()
+    expect(screen.queryByRole("button", { name: "Docs" })).not.toBeInTheDocument()
+    const rows = screen.getAllByRole("link", { hidden: true }).map(link => link.textContent)
+    expect(rows).toEqual(["Tokens", "Card", "Button"])
+    expect(screen.getByRole("button", { name: "Components" })).toHaveAttribute("aria-expanded", "true")
+    expect(screen.getByRole("button", { name: "Forms" })).toHaveAttribute("aria-expanded", "true")
+    expect(screen.getByRole("link", { name: "Button" })).toHaveAttribute("aria-current", "page")
+  })
+
   it("renders a docs section page without the wrapper or a scene's sidebar", async () => {
     const Wrapper = ({ children }: { children: React.ReactNode }) => <div data-testid="wrapper">{children}</div>
     window.history.replaceState(null, "", "/docs/ten-pages")

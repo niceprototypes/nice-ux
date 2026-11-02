@@ -149,7 +149,7 @@ const AppShell: React.FC<AppProps> = ({ scenes, docs, pages, router, wrapper: Wr
  * The app shell: a Tree nav of the project's scenes and docs pages, found by folder, beside the
  * scene region where the current one renders, under an optional `header` row (a logo). The nav has
  * two groups: Stories (`stories/`, at `/stories/...`) and, when there are docs section pages, Docs
- * (`docs/<N Page>/index.tsx`, at `/docs/<page>`). Folder names are the only metadata: depth is the
+ * (`docs/<N Page>/index.tsx`, at `/docs/<page>`, or nested in folders); a docs-only app has no group row. Folder names are the only metadata: depth is the
  * level (story, chapter, scene), numbers order them by value and are left out of names and URLs.
  * One page, no iframe: `/stories/accessibility/context/stock-ticker?device=desktop` is the shell on a scene,
  * `/frame/stories/accessibility/context/stock-ticker` the scene alone, full screen. Back and forward work.

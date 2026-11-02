@@ -1,0 +1,37 @@
+{
+  "name": "@niceprototypes/docs-site",
+  "version": "0.1.0",
+  "description": "Nice docs: the nice-ux documentation site on @niceprototypes/app, replacing Storybook",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@niceprototypes/app": "workspace:^",
+    "@niceprototypes/code": "workspace:^",
+    "@niceprototypes/contents": "workspace:^",
+    "@niceprototypes/flex": "workspace:^",
+    "@niceprototypes/icon-vendor": "workspace:^",
+    "@niceprototypes/image-vendor": "workspace:^",
+    "@niceprototypes/ink": "workspace:^",
+    "@niceprototypes/logo": "workspace:^",
+    "@niceprototypes/storybook-theme": "workspace:^",
+    "@niceprototypes/styles": "workspace:^",
+    "@niceprototypes/toggle": "workspace:^",
+    "@niceprototypes/tree": "workspace:^"
+  },
+  "devDependencies": {
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@vitejs/plugin-react": "^5.0.4",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "styled-components": "catalog:",
+    "typescript": "catalog:",
+    "vite": "^7.1.9"
+  }
+}

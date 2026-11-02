@@ -55,7 +55,9 @@ export type AppDocsType = Record<string, () => Promise<string>>
  * AppPagesType
  *
  * A lazy `import.meta.glob` of every `index.tsx` under `docs/`, keyed by path: the docs section's
- * pages, `docs/<N Page>/index.tsx`, one folder each. The module's default export is the page.
+ * pages, `docs/<N Page>/index.tsx`, one folder each, or nested in folders (`docs/<N Folder>/<N Page>/index.tsx`),
+ * which the nav shows as folders. Keys need not be files: a data-driven site builds the record itself.
+ * The module's default export is the page.
  */
 export type AppPagesType = Record<string, () => Promise<{ default: React.ComponentType }>>
 
@@ -91,8 +93,8 @@ export type AppEntryType = {
  * Complete prop definition for the App component.
  */
 export interface AppProps {
-  /** The scenes: a lazy `import.meta.glob` over `stories/` */
-  scenes: AppScenesType
+  /** The scenes: a lazy `import.meta.glob` over `stories/`; absent in a docs-only app */
+  scenes?: AppScenesType
 
   /** The markdown pages in stories: a lazy `import.meta.glob` of `.md` files as text */
   docs?: AppDocsType

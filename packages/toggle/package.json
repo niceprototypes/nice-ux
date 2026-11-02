@@ -30,6 +30,7 @@
   "license": "MIT",
   "peerDependencies": {
     "@niceprototypes/field": "workspace:^",
+    "@niceprototypes/ink": "workspace:^",
     "@niceprototypes/styles": "workspace:^",
     "react": ">=19.2.0 <20.0.0",
     "react-dom": ">=19.2.0 <20.0.0",
@@ -56,6 +57,7 @@
     "@niceprototypes/config-rollup": "workspace:*",
     "@niceprototypes/config-typescript": "workspace:*",
     "@niceprototypes/field": "workspace:*",
+    "@niceprototypes/ink": "workspace:*",
     "@niceprototypes/styles": "workspace:*",
     "react": "catalog:",
     "react-dom": "catalog:",

@@ -52,7 +52,11 @@ function readJsDoc(node, sourceFile) {
   const docs = ts.getJSDocCommentsAndTags(node).filter(ts.isJSDoc)
   if (docs.length === 0) return {}
   const doc = docs[docs.length - 1]
-  const comment = typeof doc.comment === "string" ? doc.comment : (doc.comment ?? []).map(part => part.text ?? "").join("")
+  // The raw comment up to its first tag (`@default`, inline or on its own line): TypeScript's parsed
+  // `doc.comment` also ends at a package name in the prose (`@niceprototypes/flex`), cutting it short.
+  const raw = doc.getText(sourceFile).replace(/^\/\*\*|\*\/$/g, "").split("\n").map(line => line.replace(/^\s*\* ?/, "")).join("\n")
+  const tag = raw.search(/(^|\s)@[a-zA-Z]+(?=\s|$)/)
+  const comment = tag === -1 ? raw : raw.slice(0, tag)
   const description = comment.split(/\n\s*\n/)[0].replace(/\s+/g, " ").trim()
   const defaultTag = (doc.tags ?? []).find(tag => tag.tagName.text === "default")
   const defaultValue = defaultTag

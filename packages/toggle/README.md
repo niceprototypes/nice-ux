@@ -10,7 +10,7 @@ toggles), and a track and thumb are drawn in its place. Clicking the label text 
 npm install @niceprototypes/toggle
 ```
 
-Peer dependencies: `@niceprototypes/field`, `@niceprototypes/styles`, `react`, `react-dom`, `styled-components`.
+Peer dependencies: `@niceprototypes/field`, `@niceprototypes/ink`, `@niceprototypes/styles`, `react`, `react-dom`, `styled-components`.
 
 ## Usage
 

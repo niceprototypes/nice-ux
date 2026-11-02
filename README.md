@@ -29,6 +29,7 @@ Each component is also published on its own, for example `@niceprototypes/button
 
 - `packages/`: one folder per package (components, `styles`, `icon`, configs, `cli`). `ux` is the umbrella that re-exports every component.
 - `apps/storybook`: the Storybook, which reads package source directly. The live version is at https://niceprototypes.com/ui/.
+- `apps/docs`: Nice docs, the custom docs site replacing the Storybook (in progress; port 6020).
 - `manifest/`: the agent docs.
 
 ## Develop

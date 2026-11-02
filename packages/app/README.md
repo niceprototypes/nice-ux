@@ -7,11 +7,14 @@ where the current one renders. One page, no iframe.
   `stories/<N Story>/<N Chapter>/index.tsx` for a one-scene chapter (one nav row). The default export
   is the scene component. Folder names are the only metadata: numbers order them by value and are
   left out of names and URLs. Markdown pages in a story are `.md` files, `stories/<Story>/<Chapter>/<Page>.md`.
-  Docs section pages are `docs/<N Page>/index.tsx` (default export), named and ordered by the same rules.
+  Docs section pages are `docs/<N Page>/index.tsx` (default export), or nested in folders
+  (`docs/<N Folder>/<N Page>/index.tsx`), named and ordered by the same rules. The `pages` keys need not
+  be files: a data-driven docs site builds the record itself. `scenes` is optional (a docs-only app).
 - **Nav groups.** The Tree has two top-level groups: Stories, and Docs when there are docs section pages.
+  In a docs-only app (pages alone), its rows are top level, without a group row.
 - **URLs.** `/stories/accessibility/context/stock-ticker?device=desktop` is the shell on a scene;
   `/frame/stories/accessibility/context/stock-ticker` is the scene alone, full screen, focused.
-  `/docs/<page>` is a docs section page: a plain scrollable page in the region, without `wrapper`, the
+  `/docs/<page>` (or `/docs/<folder>/<page>`) is a docs section page: a plain scrollable page in the region, without `wrapper`, the
   scene sidebar or its footer. Navigation keeps the query string. Back and forward work.
 - **The scene region** is focusable. `useSceneRegion()` returns it, so a scene's keys and clicks act
   only inside it. `useSceneSidebar()` returns the scene sidebar, the column right of the nav that

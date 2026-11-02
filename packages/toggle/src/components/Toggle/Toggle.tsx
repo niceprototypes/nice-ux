@@ -1,4 +1,5 @@
 import * as React from "react"
+import Ink from "@niceprototypes/ink"
 import { Theme } from "@niceprototypes/styles"
 import { useField } from "@niceprototypes/field"
 import { StyledInput, StyledSwitch, StyledThumb, StyledToggle, StyledTrack } from "./Toggle.styles"
@@ -12,7 +13,7 @@ import type { ToggleProps } from "./Toggle.types"
  * Controlled with `checked` + `onChange`, or uncontrolled with `defaultChecked`. Without
  * visible `children`, pass `aria-label`.
  *
- * Sizes and colors come from the `toggle.*` component tokens.
+ * The label renders through Ink. Sizes and colors come from the `toggle.*` component tokens.
  *
  * @example
  * ```tsx
@@ -66,7 +67,7 @@ const Toggle: React.FC<ToggleProps> = ({
           <StyledThumb $size={size} />
         </StyledTrack>
       </StyledSwitch>
-      {children}
+      {children != null && typeof children !== "boolean" ? <Ink>{children}</Ink> : null}
     </StyledToggle>
   )
 
