@@ -208,7 +208,9 @@ export const tokenRenderers: Record<string, Renderer> = {
           borderRadius: getToken("borderRadius", "small"),
           boxShadow: getToken("boxShadow", variant),
         }}
-      />
+      >
+        {null}
+      </Flex>
     </Flex>
   ),
 

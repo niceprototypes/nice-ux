@@ -23,7 +23,9 @@ const DemoDot = ({
         width,
         ...style,
       }}
-    />
+    >
+      {null}
+    </Flex>
   </Flex>
 )
 

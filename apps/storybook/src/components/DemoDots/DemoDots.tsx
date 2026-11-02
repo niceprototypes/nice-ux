@@ -28,8 +28,8 @@ const DemoDots = ({
         style={{
           height,
           width,
-          padding: !spacing && 1,
-          gap: !gap && 1,
+          padding: spacing ? undefined : 1,
+          gap: gap ? undefined : 1,
           ...(bordered && trackStyle),
         }}
       >

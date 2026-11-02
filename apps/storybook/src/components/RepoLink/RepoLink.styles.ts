@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { getBreakpoint, getToken, transformColor } from "@niceprototypes/styles"
+import { getBreakpoint, getToken } from "@niceprototypes/styles"
 import Ink from "../../nice/Ink"
 import Flex from "@niceprototypes/flex"
 
