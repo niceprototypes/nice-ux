@@ -264,6 +264,7 @@
 	--np--app--handle--height: var(--np--border-width--larger);
 	--np--app--handle--color: var(--np--border-color--strong);
 	--np--app--handle--padding: var(--np--gap--small);
+	--np--app--handle--padding-bottom: var(--np--gap);
 
 	/* button component tokens */
 	--np--button--size--smaller: var(--np--size--smaller);
