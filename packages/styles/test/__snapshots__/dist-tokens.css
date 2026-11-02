@@ -792,7 +792,6 @@
 	--np--tree--inactive--color: var(--np--color--lighter);
 	--np--tree--font-weight: var(--np--font-weight--medium);
 	--np--tree--font-weight--active: var(--np--font-weight--semibold);
-	--np--tree--row--min-height: var(--np--size--small);
 	--np--tree--row--padding-block: var(--np--gap--smaller);
 	--np--tree--icon--size: var(--np--icon--size);
 	--np--tree--guide--color: var(--np--border-color);

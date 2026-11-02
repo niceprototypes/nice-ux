@@ -949,9 +949,6 @@ const componentTokensData: ComponentTokensData = {
       "active": "var(--np--font-weight--semibold)"
     },
     "row": {
-      "minHeight": {
-        "base": "var(--np--size--small)"
-      },
       "paddingBlock": {
         "base": "var(--np--gap--smaller)"
       }

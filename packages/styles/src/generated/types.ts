@@ -225,7 +225,6 @@ export interface TokenVariants extends CustomTokenVariants {
   "tree.activeColor": "base"
   "tree.inactive.color": "base"
   "tree.fontWeight": "base" | "active"
-  "tree.row.minHeight": "base"
   "tree.row.paddingBlock": "base"
   "tree.icon.size": "base"
   "tree.guide.color": "base"

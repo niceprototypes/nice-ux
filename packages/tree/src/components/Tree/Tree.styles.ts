@@ -104,7 +104,6 @@ export const StyledTreeTarget = styled.span`
   align-items: center;
   gap: ${iconGap};
   min-width: 0;
-  min-height: ${getToken("tree.row.minHeight")};
   margin: 0;
   padding: ${getToken("tree.row.paddingBlock")} 0;
   border: 0;

@@ -67,4 +67,4 @@ setTokens({ tree: { activeColor: { base: getToken("color:success") } } })
 ## Tokens
 
 `tree.*` in `@niceprototypes/styles`: `color`, `activeColor`, `inactive.color`,
-`fontWeight` (`base`, `active`), `row.minHeight`, `row.paddingBlock`, `icon.size`, `guide.color`, `guide.width`, `guide.arm`.
+`fontWeight` (`base`, `active`), `row.paddingBlock`, `icon.size`, `guide.color`, `guide.width`, `guide.arm`.
