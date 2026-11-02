@@ -16,12 +16,19 @@ export const StyledApp = styled.div`
   color: ${getToken("color")};
 `
 
-/** The sidebar: the nav and the scene sidebar side by side over the footer, the viewport's full height. */
+/** The sidebar: the header row over the nav and the scene sidebar side by side, over the footer, the viewport's full height. */
 export const StyledAppAside = styled.div`
   flex: none;
   display: flex;
   flex-direction: column;
   min-height: 0;
+`
+
+/** The sidebar's header row, above the nav and the scene sidebar, with the nav's padding; the nav's top padding sets it apart. */
+export const StyledAppHeader = styled.div`
+  flex: none;
+  display: flex;
+  padding: ${getToken("gap:large")} ${getToken("gap:large")} 0;
 `
 
 /** The nav and the scene sidebar, side by side in the height the footer leaves. */

@@ -143,6 +143,20 @@ describe.each(adapters)("App on the %s adapter", (_, router) => {
     expect(screen.queryByText("steps")).not.toBeInTheDocument()
   })
 
+  it("renders the header above the nav and the scene sidebar; none in the bare view", async () => {
+    window.history.replaceState(null, "", "/gamma/steps")
+    const { unmount } = render(<App scenes={scenes} router={router} header={<p>logo</p>} />)
+    await screen.findByText("steps")
+    const header = screen.getByText("logo").parentElement!
+    expect(header.nextElementSibling).toContainElement(screen.getByRole("navigation"))
+    expect(header.nextElementSibling).toContainElement(screen.getByText("steps"))
+    unmount()
+    window.history.replaceState(null, "", "/frame/gamma/steps")
+    render(<App scenes={scenes} router={router} header={<p>logo</p>} />)
+    await screen.findByText("with steps")
+    expect(screen.queryByText("logo")).not.toBeInTheDocument()
+  })
+
   it("tells a scene the bare view is on", async () => {
     window.history.replaceState(null, "", "/frame/alpha/pair/first-and-last")
     render(<App scenes={scenes} router={router} />)

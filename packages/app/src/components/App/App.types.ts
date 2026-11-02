@@ -95,6 +95,9 @@ export interface AppProps {
   /** Wraps every scene inside the scene region */
   wrapper?: AppWrapperType
 
+  /** A row at the top of the sidebar, above the nav and the scene sidebar (a logo); absent in the bare view */
+  header?: React.ReactNode
+
   /** Accessible name of the nav landmark */
   "aria-label"?: string
 }

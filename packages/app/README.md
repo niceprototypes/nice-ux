@@ -34,6 +34,9 @@ const docs = import.meta.glob("./stories/*/Overview/*.md", { query: "?raw", impo
 createRoot(root).render(<App scenes={scenes} docs={docs} router={plainRouter} />)
 ```
 
+`header` is a row at the top of the sidebar, above the nav and the scene sidebar, with the nav's
+padding (a logo); the bare view leaves it out.
+
 `wrapper` wraps every scene (not docs pages) inside the region, with the URL's query parameters: the
 place for scene-only providers and styles.
 

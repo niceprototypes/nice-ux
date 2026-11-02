@@ -8,6 +8,7 @@ import {
   StyledApp,
   StyledAppAside,
   StyledAppColumns,
+  StyledAppHeader,
   StyledAppNav,
   StyledAppRegion,
   StyledAppSidebar,
@@ -20,7 +21,7 @@ import { buildAppTree, getAppAncestorIds } from "../../utilities/buildAppTree"
 const FRAME = "/frame"
 
 /** The shell inside the router's Provider, where the router's hooks work. */
-const AppShell: React.FC<AppProps> = ({ scenes, docs, router, wrapper: Wrapper, "aria-label": ariaLabel = "Scenes" }) => {
+const AppShell: React.FC<AppProps> = ({ scenes, docs, router, wrapper: Wrapper, header, "aria-label": ariaLabel = "Scenes" }) => {
   const location = router.useLocation()
   const navigate = router.useNavigate()
   const index = React.useMemo(() => buildAppIndex(scenes, docs), [scenes, docs])
@@ -113,6 +114,7 @@ const AppShell: React.FC<AppProps> = ({ scenes, docs, router, wrapper: Wrapper, 
       ) : (
         <StyledApp>
           <StyledAppAside>
+            {header !== undefined && <StyledAppHeader>{header}</StyledAppHeader>}
             <StyledAppColumns>
               <StyledAppNav>
                 <Tree
@@ -142,7 +144,7 @@ const AppShell: React.FC<AppProps> = ({ scenes, docs, router, wrapper: Wrapper, 
  * App
  *
  * The app shell: a Tree nav of the project's scenes and docs pages, found by folder, beside the
- * scene region where the current one renders. Folder names are the only metadata: depth is the
+ * scene region where the current one renders, under an optional `header` row (a logo). Folder names are the only metadata: depth is the
  * level (story, chapter, scene), numbers order them by value and are left out of names and URLs.
  * One page, no iframe: `/accessibility/context/stock-ticker?device=desktop` is the shell on a scene,
  * `/frame/accessibility/context/stock-ticker` the scene alone, full screen. Back and forward work.
