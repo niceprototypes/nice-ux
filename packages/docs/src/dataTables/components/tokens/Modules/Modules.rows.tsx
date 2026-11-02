@@ -12,7 +12,7 @@ import type { HighlightedToken } from "./Modules.hooks"
  * Build the data rows for one token group, given the runtime theme and the
  * active deep-link highlight. Each row's `values` are index-aligned to the
  * group's column set in `src/data/storybook.json`:
- * - `tokenModule`: [preview, tokenName, cssVar, jsCall, resolvedValue]
+ * - `tokenModule`: [tokenName, cssVar, value card (preview over the resolved value)]
  * - `tokenColor`: [tokenName, cssVar, lightValue, darkValue]
  *
  * `pristine` reads the canonical seed, not the runtime registry — so the
@@ -42,7 +42,7 @@ export function buildTokenRows(
     const themed = nightValue !== dayValue
     const theme = isNight && themed ? "night" : undefined
     // A colour row shows both themes, so its code is the unpinned (semantic) form.
-    const { cssVar, jsCall } = tokenCode(group, variant, columnSet === "tokenColor" ? undefined : theme)
+    const { cssVar } = tokenCode(group, variant, columnSet === "tokenColor" ? undefined : theme)
     // Each value cell is pinned to its theme, so the unpinned read resolves per cell.
     const values =
       columnSet === "tokenColor"
@@ -52,7 +52,7 @@ export function buildTokenRows(
             <ThemeValue theme="day" color={getToken(group, variant)} value={dayValue} />,
             <ThemeValue theme="night" color={getToken(group, variant)} value={nightValue} />,
           ]
-        : [preview?.(item), <TokenName variant={variant} />, cssVar, jsCall, isNight ? nightValue : dayValue]
+        : [<TokenName variant={variant} />, cssVar, <ThemeValue value={isNight ? nightValue : dayValue}>{preview?.(item)}</ThemeValue>]
     return {
       id: variant,
       values,

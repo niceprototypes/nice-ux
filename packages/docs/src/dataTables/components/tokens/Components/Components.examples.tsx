@@ -9,6 +9,7 @@ import Ink from "../../../../nice/Ink"
 import { getToken, type SizeType } from "@niceprototypes/styles"
 import OverrideExample from "../../../../components/OverrideExample"
 import type { ComponentPrefixWithTokens, ExampleConfig, OverrideConfig } from "./Components.types"
+import { assetUrl } from "../../../../utilities/assetUrl"
 
 /**
  * Live-component examples for the component token tables (each
@@ -62,7 +63,7 @@ const CONFIGS: Partial<Record<ComponentPrefixWithTokens, ExampleConfig>> = {
       borderColor: "borderColor",
       backgroundSize: "backgroundSize",
     },
-    render: o => <Image src="rasters/tokens/image-02.jpeg" alt="" width="64px" height="64px" bordered {...(o as any)} />,
+    render: o => <Image src={assetUrl("rasters/tokens/image-02.jpeg")} alt="" width="64px" height="64px" bordered {...(o as any)} />,
   },
   tile: {
     props: { backgroundColor: "backgroundColor", color: "color" },

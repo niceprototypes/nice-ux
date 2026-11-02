@@ -3,11 +3,6 @@
   "columns": {
     "tokenModule": [
       {
-        "key": "preview",
-        "header": null,
-        "width": "24em"
-      },
-      {
         "key": "tokenName",
         "header": "Token name",
         "clickToCopy": true,
@@ -21,19 +16,9 @@
         "width": "20em"
       },
       {
-        "key": "js",
-        "header": "JS",
-        "render": "@niceprototypes/code",
-        "language": "tsx"
-      },
-      {
-        "key": "value",
+        "key": "preview",
         "header": "Default",
-        "render": "@niceprototypes/ink",
-        "code": true,
-        "size": "small",
-        "color": "lighter",
-        "clickToCopy": true
+        "width": "20em"
       }
     ],
     "tokenColor": [
@@ -278,10 +263,6 @@
           },
           {
             "Fonts": {
-              "widths": {
-                "preview": "8em",
-                "js": "20em"
-              },
               "items": [
                 {
                   "fontFamily": {

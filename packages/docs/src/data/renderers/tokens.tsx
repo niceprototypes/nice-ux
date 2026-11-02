@@ -9,6 +9,7 @@ import { TokenPreview } from "../../components/TokenPreview"
 import { Dot, EasingPath, EasingSvg, Track } from "../../dataTables/data/styles"
 import { loremIpsum } from "../../dataTables/data/constants"
 import type { Renderer } from "./index"
+import { assetUrl } from "../../utilities/assetUrl"
 
 /** Capitalized variant name, for text previews. */
 const label = (variant: string) => variant.charAt(0).toUpperCase() + variant.slice(1)
@@ -100,7 +101,7 @@ export const tokenRenderers: Record<string, Renderer> = {
     <Flex direction="column" grow={1}>
       <Image
         as="div"
-        src="rasters/tokens/image-02.jpeg"
+        src={assetUrl("rasters/tokens/image-02.jpeg")}
         alt={`background-size ${variant}`}
         backgroundSize={variant}
         borderRadius="small"
