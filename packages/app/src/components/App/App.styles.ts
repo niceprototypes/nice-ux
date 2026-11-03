@@ -69,13 +69,35 @@ export const StyledAppDrawer = styled.div<{ $drawer: boolean; $open: boolean }>`
   background-color: ${getToken("backgroundColor")};
 `
 
-/** The nav and the scene sidebar, side by side in the height the footer leaves; under a header, which spaces them, they have no top padding. */
+/**
+ * The sidebar search (`search`), over the nav and the scene sidebar, with the nav's padding; its own
+ * bottom padding (the base gap) sets it apart from the rows. Under a header, which spaces it, it has
+ * no top padding: one base gap above it and one below, as between the header and the rows.
+ */
+export const StyledAppSearch = styled.div`
+  flex: none;
+  padding: ${getToken("gap:large")};
+  padding-block-end: ${getToken("gap")};
+
+  ${StyledAppHeader} + ${StyledAppDrawer} > & {
+    padding-block-start: 0;
+  }
+`
+
+/** The search field's row, the anchor the results open under: the sidebar's width inside its padding. */
+export const StyledAppSearchField = styled.div`
+  display: flex;
+  min-width: 0;
+`
+
+/** The nav and the scene sidebar, side by side in the height the footer leaves; under a header or the search, which space them, they have no top padding. */
 export const StyledAppColumns = styled.div`
   flex: 1 1 auto;
   display: flex;
   min-height: 0;
 
-  ${StyledAppHeader} + ${StyledAppDrawer} > & > * {
+  ${StyledAppHeader} + ${StyledAppDrawer} > & > *,
+  ${StyledAppSearch} + & > * {
     padding-block-start: 0;
   }
 `

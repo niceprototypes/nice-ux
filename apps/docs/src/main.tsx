@@ -1,13 +1,11 @@
 import { createRoot } from "react-dom/client"
 import App from "@niceprototypes/app"
-import Flex from "@niceprototypes/flex"
 import Logo from "@niceprototypes/logo"
 import { applyTheme, StylesProvider } from "@niceprototypes/styles"
 import "@niceprototypes/styles/reset.css"
 import "@niceprototypes/icon-vendor"
 import "@niceprototypes/image-vendor"
 import "./tokens"
-import DocsSearch from "./components/DocsSearch"
 import ThemeToggle from "./components/ThemeToggle"
 import { DocsSettingsContext } from "./components/DocsPage"
 import { DocsNavigationContext } from "@niceprototypes/docs/components/DocsNavigation"
@@ -36,12 +34,8 @@ createRoot(document.getElementById("root")!).render(
         router={docsRouter}
         aria-label="Docs"
         navSize="base"
-        header={
-          <Flex direction="column" gap="base" grow={1}>
-            <Logo />
-            <DocsSearch />
-          </Flex>
-        }
+        header={<Logo />}
+        search
       />
     </DocsSettingsContext.Provider>
     </DocsNavigationContext.Provider>

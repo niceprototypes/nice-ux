@@ -45,6 +45,11 @@ createRoot(root).render(<App scenes={scenes} docs={docs} pages={pages} router={p
 `header` is a row at the top of the sidebar, above the nav and the scene sidebar, with the nav's
 padding (a logo); the bare view leaves it out.
 
+`search` puts a search field under the header: a combobox over every page's name and the story,
+chapter or folder names above it. Names that start with the query come first, then names that hold
+it, then pages under a matching story or chapter (ten at most); the arrow keys and Enter or a click
+open one. Below tablet it is in the drawer, and a picked result closes it.
+
 Below tablet the sidebar is a drawer: the header row (with or without `header`) gets a menu button
 (`aria-expanded`, `aria-controls`) that opens it over the scene region and closes it again. Escape
 and picking a page close it; focus moves to the current page's link on opening and back to the button

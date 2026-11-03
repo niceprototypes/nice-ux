@@ -124,6 +124,7 @@ export const Playground: Story = {
     withPages: { control: "boolean", table: { category: "Content" } },
     withHeader: { control: "boolean", table: { category: "Content" } },
     withWrapper: { control: "boolean", table: { category: "Content" } },
+    search: { control: "boolean", table: { category: "Content" } },
 
     navSize: {
       control: "select",
@@ -193,6 +194,21 @@ export const NoHeader: Story = {
   play: async ({ canvasElement }) => {
     const menu = await within(canvasElement).findByRole("button", { name: "Menu" })
     await expect(menu.parentElement?.children).toHaveLength(1)
+  },
+}
+
+/** `search` adds a field under the header that opens a matching page; below tablet it is in the drawer. */
+export const Search: Story = {
+  ...Playground,
+  args: { ...Playground.args, search: true },
+  play: async ({ canvasElement, userEvent }) => {
+    const canvas = within(canvasElement)
+    await canvas.findByRole("heading", { name: "Welcome" })
+    await userEvent.click(canvas.getByRole("button", { name: "Menu" }))
+    await userEvent.type(canvas.getByRole("combobox", { name: "Search Docs" }), "dur")
+    await userEvent.keyboard("{Enter}")
+    await canvas.findByRole("heading", { name: "Duration" })
+    await expect(canvas.getByRole("button", { name: "Menu" })).toHaveAttribute("aria-expanded", "false")
   },
 }
 

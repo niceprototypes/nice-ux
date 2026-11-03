@@ -1,11 +1,11 @@
 import * as React from "react"
-import { useScenes, type AppEntryType } from "@niceprototypes/app"
 import Flex from "@niceprototypes/flex"
 import Ink from "@niceprototypes/ink"
 import Input from "@niceprototypes/input"
 import Listbox, { getListboxOptionId } from "@niceprototypes/listbox"
 import Popover from "@niceprototypes/popover"
-import { StyledDocsSearch } from "./DocsSearch.styles"
+import type { AppEntryType } from "./App.types"
+import { StyledAppSearch, StyledAppSearchField } from "./App.styles"
 
 /** The most results the list shows. */
 const LIMIT = 10
@@ -29,14 +29,17 @@ const search = (entries: AppEntryType[], query: string): AppEntryType[] => {
 }
 
 /**
- * DocsSearch
+ * AppSearch
  *
- * The site search: a combobox field over the pages' names and sections. Typing lists matches
- * under it; the arrow keys move through them while focus stays in the field, Enter or a click
- * opens one on the router, Escape closes the list.
+ * The sidebar search: a combobox field over the index's page names and the story, chapter or folder
+ * names above them. Typing lists matches under it; the arrow keys move through them while focus stays
+ * in the field, Enter or a click opens one (`onGo`), Escape closes the list.
  */
-const DocsSearch: React.FC = () => {
-  const { entries, open } = useScenes()
+const AppSearch: React.FC<{ entries: AppEntryType[]; onGo: (entry: AppEntryType) => void; "aria-label": string }> = ({
+  entries,
+  onGo,
+  "aria-label": ariaLabel,
+}) => {
   const [query, setQuery] = React.useState("")
   const [active, setActive] = React.useState<string>()
   const [expanded, setExpanded] = React.useState(false)
@@ -49,7 +52,7 @@ const DocsSearch: React.FC = () => {
   const go = (id: string) => {
     const entry = results.find(result => result.id === id)
     if (!entry) return
-    open(entry)
+    onGo(entry)
     setQuery("")
     setExpanded(false)
   }
@@ -69,25 +72,27 @@ const DocsSearch: React.FC = () => {
   }
 
   return (
-    <StyledDocsSearch ref={anchor}>
-      <Input
-        type="search"
-        role="combobox"
-        aria-label="Search docs"
-        aria-autocomplete="list"
-        aria-expanded={shown}
-        aria-controls={listboxId}
-        aria-activedescendant={shown && activeIndex >= 0 ? getListboxOptionId(listboxId, activeIndex) : undefined}
-        placeholder="Search"
-        size="small"
-        value={query}
-        onChange={value => {
-          setQuery(value)
-          setExpanded(true)
-          setActive(search(entries, value)[0]?.id)
-        }}
-        onKeyDown={onKeyDown}
-      />
+    <StyledAppSearch>
+      <StyledAppSearchField ref={anchor}>
+        <Input
+          type="search"
+          role="combobox"
+          aria-label={ariaLabel}
+          aria-autocomplete="list"
+          aria-expanded={shown}
+          aria-controls={listboxId}
+          aria-activedescendant={shown && activeIndex >= 0 ? getListboxOptionId(listboxId, activeIndex) : undefined}
+          placeholder="Search"
+          size="small"
+          value={query}
+          onChange={value => {
+            setQuery(value)
+            setExpanded(true)
+            setActive(search(entries, value)[0]?.id)
+          }}
+          onKeyDown={onKeyDown}
+        />
+      </StyledAppSearchField>
       <Popover open={shown} onOpenChange={setExpanded} anchorRef={anchor} matchAnchorWidth position="bottom" align="start">
         <Listbox
           id={listboxId}
@@ -108,8 +113,8 @@ const DocsSearch: React.FC = () => {
           }))}
         />
       </Popover>
-    </StyledDocsSearch>
+    </StyledAppSearch>
   )
 }
 
-export default DocsSearch
+export default AppSearch

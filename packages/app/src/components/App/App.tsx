@@ -5,6 +5,7 @@ import Tree from "@niceprototypes/tree"
 import type { AppEntryType, AppProps } from "./App.types"
 import AppDocs from "./AppDocs"
 import AppFooter from "./AppFooter"
+import AppSearch from "./AppSearch"
 import {
   AppGlobalStyle,
   StyledApp,
@@ -38,6 +39,7 @@ const AppShell: React.FC<AppProps> = ({
   router,
   wrapper: Wrapper,
   header,
+  search: searchable,
   "aria-label": ariaLabel = "Scenes",
   navSize,
   sidebarOpen,
@@ -188,6 +190,16 @@ const AppShell: React.FC<AppProps> = ({
               </StyledAppHeader>
             )}
             <StyledAppDrawer ref={drawerElement} id={drawerId} $drawer={drawer} $open={open}>
+              {searchable && (
+                <AppSearch
+                  entries={index}
+                  aria-label={`Search ${ariaLabel}`}
+                  onGo={entry => {
+                    context.open(entry)
+                    if (open) setOpen(false)
+                  }}
+                />
+              )}
               <StyledAppColumns>
                 <StyledAppNav>
                   <Tree

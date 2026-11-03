@@ -95,15 +95,9 @@ importers:
       '@niceprototypes/input':
         specifier: workspace:^
         version: link:../../packages/input
-      '@niceprototypes/listbox':
-        specifier: workspace:^
-        version: link:../../packages/listbox
       '@niceprototypes/logo':
         specifier: workspace:^
         version: link:../../packages/logo
-      '@niceprototypes/popover':
-        specifier: workspace:^
-        version: link:../../packages/popover
       '@niceprototypes/scroll':
         specifier: workspace:^
         version: link:../../packages/scroll
@@ -382,6 +376,15 @@ importers:
       '@niceprototypes/ink':
         specifier: workspace:*
         version: link:../ink
+      '@niceprototypes/input':
+        specifier: workspace:*
+        version: link:../input
+      '@niceprototypes/listbox':
+        specifier: workspace:*
+        version: link:../listbox
+      '@niceprototypes/popover':
+        specifier: workspace:*
+        version: link:../popover
       '@niceprototypes/scroll':
         specifier: workspace:*
         version: link:../scroll

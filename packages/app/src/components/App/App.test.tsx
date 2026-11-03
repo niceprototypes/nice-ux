@@ -319,6 +319,83 @@ describe("App below tablet", () => {
   })
 })
 
+describe("App search", () => {
+  beforeEach(() => window.history.replaceState(null, "", "/stories/beta/nine"))
+
+  const renderSearch = async (props: Partial<React.ComponentProps<typeof App>> = {}) => {
+    render(<App scenes={scenes} docs={docs} pages={pages} router={plainRouter} header={<p>logo</p>} search aria-label="Docs" {...props} />)
+    await screen.findByText("nine")
+    return screen.queryByRole("combobox", { name: "Search Docs", hidden: true })!
+  }
+  const type = (field: HTMLElement, value: string) => fireEvent.change(field, { target: { value } })
+  const results = () => screen.getAllByRole("option").map(option => option.textContent)
+
+  it("shows no field without search", async () => {
+    expect(await renderSearch({ search: undefined })).toBeNull()
+  })
+
+  it("lists names that start with the query, then names that hold it, then pages under a matching story or chapter", async () => {
+    const field = await renderSearch()
+    type(field, "te")
+    // "Ten" and "Ten pages" start with it; "Steps" and "Getting started" hold it, in nav order.
+    expect(results()).toEqual(["TenBeta", "Ten pages", "StepsGamma", "Getting started"])
+    type(field, "pair")
+    expect(results()).toEqual(["First & lastAlpha / Pair", "SecondAlpha / Pair"])
+  })
+
+  it("opens a result with the arrow keys and Enter, keeping the query string, and clears the field", async () => {
+    window.history.replaceState(null, "", "/stories/beta/nine?device=desktop")
+    const field = await renderSearch()
+    type(field, "second")
+    fireEvent.keyDown(field, { key: "ArrowDown" })
+    fireEvent.keyDown(field, { key: "ArrowUp" })
+    fireEvent.keyDown(field, { key: "Enter" })
+    expect(await screen.findByText("second")).toBeInTheDocument()
+    expect(window.location.pathname + window.location.search).toBe("/stories/alpha/pair/second?device=desktop")
+    expect(field).toHaveValue("")
+    expect(screen.queryByRole("option")).not.toBeInTheDocument()
+  })
+
+  it("sits between the header and the nav, one base gap from each", async () => {
+    const field = await renderSearch()
+    const block = screen.getByText("logo").parentElement!.nextElementSibling!.firstElementChild!
+    expect(block).toContainElement(field)
+    expect(getComputedStyle(block).paddingBlockStart).toBe("0")
+    expect(getComputedStyle(block).paddingBlockEnd).toBe("var(--np--gap)")
+    expect(block.nextElementSibling).toContainElement(screen.getByRole("navigation"))
+    expect(getComputedStyle(screen.getByRole("navigation").parentElement!).paddingBlockStart).toBe("0")
+  })
+
+  it("keeps its top padding without a header", async () => {
+    const field = await renderSearch({ header: undefined })
+    expect(getComputedStyle(field.parentElement!.parentElement!).paddingBlockStart).not.toBe("0")
+  })
+
+  it("sits in the drawer below tablet, and a picked result closes it", async () => {
+    const innerWidth = window.innerWidth
+    act(() => {
+      window.innerWidth = 390
+      window.dispatchEvent(new Event("resize"))
+    })
+    try {
+      const field = await renderSearch()
+      const menu = screen.getByRole("button", { name: "Menu" })
+      expect(document.getElementById(menu.getAttribute("aria-controls")!)).toContainElement(field)
+      fireEvent.click(menu)
+      type(field, "ten pages")
+      fireEvent.click(screen.getByRole("option"))
+      expect(await screen.findByText("ten pages")).toBeInTheDocument()
+      expect(window.location.pathname).toBe("/docs/ten-pages")
+      expect(menu).toHaveAttribute("aria-expanded", "false")
+    } finally {
+      act(() => {
+        window.innerWidth = innerWidth
+        window.dispatchEvent(new Event("resize"))
+      })
+    }
+  })
+})
+
 describe("App sidebar footer", () => {
   /** The footer content's height in jsdom, which lays nothing out. */
   const CONTENT = 100

@@ -56,7 +56,11 @@
   "license": "MIT",
   "peerDependencies": {
     "@niceprototypes/button": "workspace:^",
+    "@niceprototypes/flex": "workspace:^",
     "@niceprototypes/ink": "workspace:^",
+    "@niceprototypes/input": "workspace:^",
+    "@niceprototypes/listbox": "workspace:^",
+    "@niceprototypes/popover": "workspace:^",
     "@niceprototypes/scroll": "workspace:^",
     "@niceprototypes/styles": "workspace:^",
     "@niceprototypes/tree": "workspace:^",
@@ -106,7 +110,10 @@
     "@niceprototypes/scroll": "workspace:*",
     "@niceprototypes/button": "workspace:*",
     "@niceprototypes/flex": "workspace:*",
-    "@niceprototypes/icon": "workspace:*"
+    "@niceprototypes/icon": "workspace:*",
+    "@niceprototypes/input": "workspace:*",
+    "@niceprototypes/listbox": "workspace:*",
+    "@niceprototypes/popover": "workspace:*"
   },
   "repository": {
     "type": "git",

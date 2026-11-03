@@ -115,6 +115,12 @@ export interface AppProps {
   /** A row at the top of the sidebar, above the nav and the scene sidebar (a logo); absent in the bare view */
   header?: React.ReactNode
 
+  /**
+   * Whether the sidebar shows a search field under the header: a combobox over every page's name and
+   * the story, chapter or folder names above it, which opens the picked page. Below tablet it is in the drawer
+   */
+  search?: boolean
+
   /** Accessible name of the nav landmark */
   "aria-label"?: string
 
