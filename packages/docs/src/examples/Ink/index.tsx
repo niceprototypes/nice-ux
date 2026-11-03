@@ -21,15 +21,15 @@ export const inkChildren = {
   preview: variant =>
     variant === "elements" ? (
       <Ink>
-        Read the <a href="#guide">guide</a> first.
+        See the <a href="#tokens">tokens</a> first.
       </Ink>
     ) : (
-      <Ink>Read the guide first.</Ink>
+      <Ink>See the tokens first.</Ink>
     ),
   code: variant =>
     variant === "elements"
-      ? `<Ink>\n  Read the <a href="#guide">guide</a> first.\n</Ink>`
-      : `<Ink>Read the guide first.</Ink>`,
+      ? `<Ink>\n  See the <a href="#tokens">tokens</a> first.\n</Ink>`
+      : `<Ink>See the tokens first.</Ink>`,
 } satisfies ComponentExample
 
 export const inkTheme = {

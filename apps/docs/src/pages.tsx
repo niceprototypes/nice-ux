@@ -127,6 +127,9 @@ export const docsUrlOf = (storyId: string): string | undefined => {
   // A subcomponent's old Storybook id (`components-cardheader--docs`): its parent's section.
   const sub = storyId.startsWith("components-") ? subcomponentPages.find(page => storyId.replace(/--.*$/, "").endsWith(`-${page.id}`)) : undefined
   if (sub) return sub.to
+  // A page of its own wins (Tokens is a folder with its own page); otherwise where it moved.
+  const exact = entries.find(([, , itemId]) => itemId === storyId.replace(/--.*$/, ""))?.[0]
+  if (exact) return getAppPageUrl(exact)
   const id = moved(storyId.replace(/--.*$/, ""))
   const key = entries.find(([, , itemId]) => itemId === id.page || itemId === storyId)?.[0]
   return key && getAppPageUrl(key) + id.hash

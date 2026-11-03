@@ -161,14 +161,14 @@ export const cardOnClick = {
 export const cardHref = {
   name: "href",
   description: "Link target. The card renders as a native link; it takes precedence over onClick's button.",
-  variants: ["#plans"],
-  default: "#plans",
+  variants: ["#tokens"],
+  default: "#tokens",
   preview: variant => (
     <Card href={variant}>
-      <CardHeader title="Plan" description="Opens the plans page." />
+      <CardHeader title="Tokens" description="Opens this page's Tokens section." />
     </Card>
   ),
-  code: variant => `<Card href="${variant}">\n  <CardHeader title="Plan" description="Opens the plans page." />\n</Card>`,
+  code: variant => `<Card href="${variant}">\n  <CardHeader title="Tokens" description="Opens this page's Tokens section." />\n</Card>`,
 } satisfies ComponentExample
 
 export const cardSelected = {
