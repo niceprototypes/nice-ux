@@ -12,7 +12,6 @@
         "header": "CSS",
         "render": "@niceprototypes/code",
         "language": "tsx",
-        "width": "20em",
         "inlined": true
       },
       {

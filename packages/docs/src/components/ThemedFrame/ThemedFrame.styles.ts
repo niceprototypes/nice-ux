@@ -1,6 +1,5 @@
 import styled from "styled-components"
-import Icon from "@niceprototypes/icon"
-import { getBreakpoint, getToken } from "@niceprototypes/styles"
+import { getToken } from "@niceprototypes/styles"
 import { Scroll } from "@niceprototypes/scroll"
 
 /**
@@ -43,72 +42,11 @@ export const FrameIframe = styled.iframe`
   border: 0;
 `
 
-/**
- * The overlay's lock state: closed at rest, open on hover, so the padlock
- * previews what clicking does rather than describing what it currently is. Both
- * render and one is hidden — a CSS swap, so there is no hover state in React.
- * Declared above ThemedFrameToggle because it targets them as component
- * selectors.
- */
-export const LockClosedIcon = styled(Icon)`
-  display: block;
-  color: inherit;
-`
-
-export const LockOpenIcon = styled(Icon)`
-  display: none;
-  color: inherit;
-`
-
-/**
- * Full-bleed click target over the frame. The backdrop filter blurs the demo
- * underneath, so the frame reads as inert rather than as content the reader is
- * failing to interact with, and the label sits legibly on top of it.
- * The scrim and its text colour are pinned to the night theme: a dark veil with light text
- * in either theme (an inverse read flips to the day surface at night). The label and padlocks
- * inherit the colour, since Ink's and Icon's own colour tokens have no night layer to pin.
- */
-export const ThemedFrameToggle = styled.div`
+/** Holds the unlock Button in the frame's bottom-right corner, over the demo, one gap in. */
+export const ThemedFrameUnlock = styled.div`
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: ${getToken("gap", "smaller")};
-  cursor: pointer;
-  border-radius: inherit;
-  color: ${getToken("color", "base", { theme: "night" })};
-
-  &:hover {
-    ${LockClosedIcon} {
-      display: none;
-    }
-
-    ${LockOpenIcon} {
-      display: block;
-    }
-  }
-
-  /* Touch has no hover, so the padlock would sit closed with no way to reach the
-     open state. Show it open below tablet instead. */
-  ${getBreakpoint("phone")} {
-    ${LockClosedIcon} {
-      display: none;
-    }
-
-    ${LockOpenIcon} {
-      display: block;
-    }
-  }
-
-  backdrop-filter: blur(8px);
-  background-color: ${getToken("backgroundColor", "raised", {
-    theme: "night",
-    transform: [null, null, null, 0.375],
-  })};
+  right: ${getToken("gap")};
+  bottom: ${getToken("gap")};
 `
 
 /**

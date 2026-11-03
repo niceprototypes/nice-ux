@@ -1,17 +1,14 @@
 import * as React from "react"
 import Icon from "@niceprototypes/icon"
-import Ink from "@niceprototypes/ink"
+import Button from "@niceprototypes/button"
 import {
   FrameDiv,
   FrameIframe,
   FrameScrollDiv,
-  LockClosedIcon,
-  LockOpenIcon,
   ThemedFrameLock,
-  ThemedFrameToggle,
+  ThemedFrameUnlock,
 } from "./ThemedFrame.styles"
 import type { ThemedFrameProps } from "./ThemedFrame.types"
-import Flex from "@niceprototypes/flex"
 
 /**
  * An `<iframe srcDoc>` whose own `<html>` mirrors the parent document's
@@ -25,10 +22,10 @@ import Flex from "@niceprototypes/flex"
  * match. Re-applied on mount, on toggle (a `data-theme` MutationObserver), and
  * on every (re)load.
  *
- * The frame starts behind a full-bleed overlay and its container clips overflow,
- * so scrolling the page past a demo does not get captured by the frame. Clicking
- * the overlay dismisses it and switches the container to `overflow: auto`;
- * a button in the corner puts it back.
+ * The frame starts locked: its container clips overflow, so scrolling the page
+ * past a demo does not get captured by the frame. A button floating in the
+ * bottom-right corner unlocks it (the container switches to `overflow: auto`);
+ * a button in the top-right corner locks it again.
  *
  * The lock is a button rather than a second click on the frame because a click
  * inside an iframe belongs to that document and never reaches this one — there
@@ -71,15 +68,11 @@ const ThemedFrame: React.FC<ThemedFrameProps> = ({ toggleLabel = "Click to scrol
           <Icon name="lock-down" size="small" />
         </ThemedFrameLock>
       ) : (
-        <ThemedFrameToggle onClick={() => setScrollable(true)}>
-          <Flex gap="base" alignItems="center">
-            <LockClosedIcon name="lock-down" size="larger" strokeWidth="large" />
-            <LockOpenIcon name="lock-up" size="larger" strokeWidth="large" />
-            <Ink size="large">
-              {toggleLabel}
-            </Ink>
-          </Flex>
-        </ThemedFrameToggle>
+        <ThemedFrameUnlock>
+          <Button filled iconLeft="lock-down" onClick={() => setScrollable(true)}>
+            {toggleLabel}
+          </Button>
+        </ThemedFrameUnlock>
       )}
     </FrameDiv>
   )

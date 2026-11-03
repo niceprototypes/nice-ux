@@ -144,7 +144,9 @@ export const InlineCode = styled.code`
   font-size: inherit;
   line-height: 1;
   text-box: trim-both cap alphabetic;
-  white-space: pre;
+  /* Wraps (anywhere, as code has few spaces) rather than clip when the chip's container is narrower. */
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 `
 
 /**
