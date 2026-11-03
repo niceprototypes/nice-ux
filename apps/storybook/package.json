@@ -17,6 +17,7 @@
     "test-storybook": "vitest run --project=storybook"
   },
   "dependencies": {
+    "@niceprototypes/app": "workspace:^",
     "@niceprototypes/button": "workspace:^",
     "@niceprototypes/calendar": "workspace:^",
     "@niceprototypes/card": "workspace:^",

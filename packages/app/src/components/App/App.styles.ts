@@ -9,33 +9,64 @@ export const AppGlobalStyle = createGlobalStyle`
   }
 `
 
-/** The shell: the nav beside the scene region, the viewport's full height, on the theme background. */
-export const StyledApp = styled.div`
-  display: flex;
+/**
+ * The shell: the nav beside the scene region, the viewport's full height, on the theme background.
+ * With `$drawer` (below tablet) a grid instead: the header row over one cell, which the scene region
+ * fills and the open drawer covers.
+ */
+export const StyledApp = styled.div<{ $drawer: boolean }>`
+  display: ${({ $drawer }) => ($drawer ? "grid" : "flex")};
+  grid-template-rows: auto minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr);
   height: 100dvh;
   background-color: ${getToken("backgroundColor")};
   color: ${getToken("color")};
 `
 
-/** The sidebar: the header row over the nav and the scene sidebar side by side, over the footer, the viewport's full height, at least `app.sidebar.minWidth` wide. */
-export const StyledAppAside = styled.div`
+/**
+ * The sidebar: the header row over the nav and the scene sidebar side by side, over the footer, the
+ * viewport's full height, at least `app.sidebar.minWidth` wide. With `$drawer` (below tablet) it
+ * generates no box: the header row and the drawer are the shell grid's own items.
+ */
+export const StyledAppAside = styled.div<{ $drawer: boolean }>`
   flex: none;
   min-width: ${getToken("app.sidebar.minWidth")};
-  display: flex;
+  display: ${({ $drawer }) => ($drawer ? "contents" : "flex")};
   flex-direction: column;
   min-height: 0;
 `
 
 /**
- * The sidebar's header row, above the nav and the scene sidebar, with the nav's padding. Its own
- * bottom padding (the base gap) sets it apart: padding inside the scrolling columns would scroll
- * away, and the rows would slide up against the header.
+ * The sidebar's header row, above the nav and the scene sidebar, with the nav's padding; below
+ * tablet the menu button sits at its end. Its own bottom padding (the base gap) sets it apart:
+ * padding inside the scrolling columns would scroll away, and the rows would slide up against the
+ * header.
  */
 export const StyledAppHeader = styled.div`
   flex: none;
   display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: ${getToken("gap")};
   padding: ${getToken("gap:large")};
   padding-block-end: ${getToken("gap")};
+`
+
+/**
+ * The nav and the scene sidebar over the footer. Tablet and up it generates no box. With `$drawer`
+ * (below tablet) it is the drawer: shown only while `$open`, over the scene region in the shell
+ * grid's second row, on the theme background. Wider than the viewport (the nav beside a scene
+ * sidebar), it scrolls sideways, not the page.
+ */
+export const StyledAppDrawer = styled.div<{ $drawer: boolean; $open: boolean }>`
+  display: ${({ $drawer, $open }) => (!$drawer ? "contents" : $open ? "flex" : "none")};
+  flex-direction: column;
+  grid-row: 2;
+  grid-column: 1;
+  min-height: 0;
+  overflow-x: auto;
+  z-index: ${getToken("zIndex", "medium")};
+  background-color: ${getToken("backgroundColor")};
 `
 
 /** The nav and the scene sidebar, side by side in the height the footer leaves; under a header, which spaces them, they have no top padding. */
@@ -44,7 +75,7 @@ export const StyledAppColumns = styled.div`
   display: flex;
   min-height: 0;
 
-  ${StyledAppHeader} + & > * {
+  ${StyledAppHeader} + ${StyledAppDrawer} > & > * {
     padding-block-start: 0;
   }
 `
@@ -118,12 +149,14 @@ export const StyledAppFooterBody = styled(Scroll)`
  * background, focusable so a scene's keys act only while focus is inside it. It is a container,
  * not a control: no focus ring.
  */
-export const StyledAppRegion = styled(Scroll).attrs({ axis: "both" })`
+export const StyledAppRegion = styled(Scroll).attrs({ axis: "both" })<{ $drawer: boolean }>`
   position: relative;
   background-color: ${getToken("backgroundColor")};
   flex: 1 1 auto;
+  grid-row: 2;
+  grid-column: 1;
   min-width: 0;
-  min-height: 100dvh;
+  min-height: ${({ $drawer }) => ($drawer ? "0" : "100dvh")};
   outline: none;
 `
 

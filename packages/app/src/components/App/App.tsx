@@ -1,4 +1,6 @@
 import * as React from "react"
+import Button from "@niceprototypes/button"
+import { breakpointKeyMatches, parseBreakpointKey, useBreakpoint } from "@niceprototypes/styles"
 import Tree from "@niceprototypes/tree"
 import type { AppEntryType, AppProps } from "./App.types"
 import AppDocs from "./AppDocs"
@@ -9,6 +11,7 @@ import {
   StyledAppAside,
   StyledAppColumns,
   StyledAppDocs,
+  StyledAppDrawer,
   StyledAppHeader,
   StyledAppNav,
   StyledAppRegion,
@@ -21,8 +24,25 @@ import { buildAppTree, getAppAncestorIds } from "../../utilities/buildAppTree"
 /** The bare view's path prefix: `/frame/stories/<page>` shows the page alone, full screen (for recording). */
 const FRAME = "/frame"
 
+/** Below tablet the sidebar is a drawer, opened from the header row's menu button. */
+const DRAWER = parseBreakpointKey("phone")
+
+/** What can take focus when the drawer opens, after the current page's link. */
+const FOCUSABLE = 'a[href], button:not(:disabled), input, select, textarea, [tabindex]:not([tabindex="-1"])'
+
 /** The shell inside the router's Provider, where the router's hooks work. */
-const AppShell: React.FC<AppProps> = ({ scenes, docs, pages, router, wrapper: Wrapper, header, "aria-label": ariaLabel = "Scenes", navSize }) => {
+const AppShell: React.FC<AppProps> = ({
+  scenes,
+  docs,
+  pages,
+  router,
+  wrapper: Wrapper,
+  header,
+  "aria-label": ariaLabel = "Scenes",
+  navSize,
+  sidebarOpen,
+  onSidebarOpenChange,
+}) => {
   const location = router.useLocation()
   const navigate = router.useNavigate()
   const index = React.useMemo(() => buildAppIndex(scenes, docs, pages), [scenes, docs, pages])
@@ -34,6 +54,41 @@ const AppShell: React.FC<AppProps> = ({ scenes, docs, pages, router, wrapper: Wr
   const [sidebar, setSidebar] = React.useState<HTMLElement | null>(null)
   const [sidebarFooter, setSidebarFooter] = React.useState<HTMLDivElement | null>(null)
   const search = React.useMemo(() => new URLSearchParams(location.search), [location.search])
+
+  // Below tablet, the drawer: closed at first, unless `sidebarOpen` controls it.
+  const drawer = !bare && breakpointKeyMatches(DRAWER, useBreakpoint())
+  const [ownOpen, setOwnOpen] = React.useState(false)
+  const open = drawer && (sidebarOpen ?? ownOpen)
+  const setOpen = React.useCallback(
+    (next: boolean) => {
+      if (sidebarOpen === undefined) setOwnOpen(next)
+      onSidebarOpenChange?.(next)
+    },
+    [onSidebarOpenChange, sidebarOpen],
+  )
+  const drawerId = React.useId()
+  const drawerElement = React.useRef<HTMLDivElement>(null)
+  const menu = React.useRef<HTMLButtonElement>(null)
+
+  // Opening moves focus into the drawer, to the current page's link; closing returns it to the menu button.
+  const wasOpen = React.useRef(open)
+  React.useEffect(() => {
+    if (open) {
+      const element = drawerElement.current
+      ;(element?.querySelector<HTMLElement>('[aria-current="page"]') ?? element?.querySelector<HTMLElement>(FOCUSABLE))?.focus()
+    } else if (wasOpen.current) menu.current?.focus()
+    wasOpen.current = open
+  }, [open])
+
+  // Escape closes the open drawer.
+  React.useEffect(() => {
+    if (!open) return
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false)
+    }
+    document.addEventListener("keydown", onKeyDown)
+    return () => document.removeEventListener("keydown", onKeyDown)
+  }, [open, setOpen])
 
   // Each page's module (or text) loads once; a loaded one renders at once, without a blank frame.
   const loading = React.useRef(new Map<string, Promise<unknown>>())
@@ -104,7 +159,7 @@ const AppShell: React.FC<AppProps> = ({ scenes, docs, pages, router, wrapper: Wr
   })()
 
   const regionElement = (
-    <StyledAppRegion ref={region} tabIndex={-1}>
+    <StyledAppRegion ref={region} tabIndex={-1} $drawer={drawer}>
       {page}
     </StyledAppRegion>
   )
@@ -115,29 +170,47 @@ const AppShell: React.FC<AppProps> = ({ scenes, docs, pages, router, wrapper: Wr
       {bare ? (
         regionElement
       ) : (
-        <StyledApp>
-          <StyledAppAside>
-            {header !== undefined && <StyledAppHeader>{header}</StyledAppHeader>}
-            <StyledAppColumns>
-              <StyledAppNav>
-                <Tree
-                  aria-label={ariaLabel}
-                  size={navSize}
-                  items={buildAppTree(index, current, location.search, router.href)}
-                  expandedIds={expandedIds}
-                  onExpandedChange={setExpandedIds}
-                  onSelect={(node, event) => {
-                    if (node.url === undefined || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
-                    event.preventDefault()
-                    // The row's URL is the router's href; navigate takes the entry's own path.
-                    const entry = index.find(({ url }) => (router.href?.(`${url}${location.search}`) ?? `${url}${location.search}`) === node.url)
-                    if (entry) navigate(`${entry.url}${location.search}`)
-                  }}
-                />
-              </StyledAppNav>
-              <StyledAppSidebar ref={setSidebar} />
-            </StyledAppColumns>
-            <AppFooter onContent={setSidebarFooter} />
+        <StyledApp $drawer={drawer}>
+          <StyledAppAside $drawer={drawer}>
+            {(header !== undefined || drawer) && (
+              <StyledAppHeader>
+                {header}
+                {drawer && (
+                  <Button
+                    ref={menu}
+                    iconLeft="menu"
+                    aria-label="Menu"
+                    aria-expanded={open}
+                    aria-controls={drawerId}
+                    onClick={() => setOpen(!open)}
+                  />
+                )}
+              </StyledAppHeader>
+            )}
+            <StyledAppDrawer ref={drawerElement} id={drawerId} $drawer={drawer} $open={open}>
+              <StyledAppColumns>
+                <StyledAppNav>
+                  <Tree
+                    aria-label={ariaLabel}
+                    size={navSize}
+                    items={buildAppTree(index, current, location.search, router.href)}
+                    expandedIds={expandedIds}
+                    onExpandedChange={setExpandedIds}
+                    onSelect={(node, event) => {
+                      if (node.url === undefined || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+                      event.preventDefault()
+                      // The row's URL is the router's href; navigate takes the entry's own path.
+                      const entry = index.find(({ url }) => (router.href?.(`${url}${location.search}`) ?? `${url}${location.search}`) === node.url)
+                      if (!entry) return
+                      navigate(`${entry.url}${location.search}`)
+                      if (open) setOpen(false)
+                    }}
+                  />
+                </StyledAppNav>
+                <StyledAppSidebar ref={setSidebar} />
+              </StyledAppColumns>
+              <AppFooter onContent={setSidebarFooter} />
+            </StyledAppDrawer>
           </StyledAppAside>
           {regionElement}
         </StyledApp>

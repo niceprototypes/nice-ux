@@ -120,6 +120,16 @@ export interface AppProps {
 
   /** The nav's label size; unset, the Tree's own (base below laptop, small from it up) */
   navSize?: TreeSizeType
+
+  /**
+   * Below tablet, whether the sidebar drawer is open over the scene region. Set, it is controlled
+   * (the menu button, Escape and a picked page only report through `onSidebarOpenChange`); unset,
+   * the shell keeps it, closed at first. Tablet and up the sidebar always shows beside the region
+   */
+  sidebarOpen?: boolean
+
+  /** Below tablet, called with the drawer's next open state: the menu button, Escape, or a picked page */
+  onSidebarOpenChange?: (open: boolean) => void
 }
 
 const AppTypes = {} as const

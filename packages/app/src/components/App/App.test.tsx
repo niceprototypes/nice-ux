@@ -216,7 +216,8 @@ describe.each(adapters)("App on the %s adapter", (_, router) => {
     window.history.replaceState(null, "", "/stories/alpha/solo")
     render(<App scenes={scenes} router={router} />)
     await screen.findByText("solo")
-    const aside = screen.getByRole("navigation").closest("div")!.parentElement!.parentElement!
+    // nav → its column → the columns → the drawer → the sidebar
+    const aside = screen.getByRole("navigation").closest("div")!.parentElement!.parentElement!.parentElement!
     expect(aside).toHaveStyle({ minWidth: "var(--np--app--sidebar--min-width)" })
   })
 
@@ -224,6 +225,97 @@ describe.each(adapters)("App on the %s adapter", (_, router) => {
     window.history.replaceState(null, "", "/frame/stories/alpha/pair/first-and-last")
     render(<App scenes={scenes} router={router} />)
     expect(await screen.findByText("next")).toHaveAttribute("data-bare", "true")
+  })
+})
+
+describe("App below tablet", () => {
+  const innerWidth = window.innerWidth
+  /** Resizes the window, as useBreakpoint reads it. */
+  const resize = (width: number) =>
+    act(() => {
+      window.innerWidth = width
+      window.dispatchEvent(new Event("resize"))
+    })
+
+  beforeEach(() => {
+    window.history.replaceState(null, "", "/stories/beta/nine")
+    resize(390)
+  })
+  afterEach(() => resize(innerWidth))
+
+  const renderPhone = async (props: Partial<React.ComponentProps<typeof App>> = {}) => {
+    render(<App scenes={scenes} router={plainRouter} header={<p>logo</p>} {...props} />)
+    await screen.findByText("nine")
+    return screen.getByRole("button", { name: "Menu" })
+  }
+
+  it("hides the sidebar behind a menu button in the header row, which controls the drawer", async () => {
+    const menu = await renderPhone()
+    expect(screen.getByText("logo").parentElement).toContainElement(menu)
+    expect(menu).toHaveAttribute("aria-expanded", "false")
+    const drawer = document.getElementById(menu.getAttribute("aria-controls")!)!
+    expect(drawer).toContainElement(screen.getByRole("navigation", { hidden: true }))
+    expect(drawer).toHaveStyle({ display: "none" })
+    expect(screen.queryByRole("navigation")).not.toBeInTheDocument()
+  })
+
+  it("opens the drawer over the scene region, focus on the current page's link, and closes it again, focus back on the button", async () => {
+    const menu = await renderPhone()
+    fireEvent.click(menu)
+    expect(menu).toHaveAttribute("aria-expanded", "true")
+    const drawer = document.getElementById(menu.getAttribute("aria-controls")!)!
+    // The drawer and the scene region (after the sidebar) share the cell under the header row.
+    expect(drawer).toHaveStyle({ display: "flex", gridRow: "2", gridColumn: "1" })
+    expect(drawer.parentElement!.nextElementSibling).toHaveStyle({ gridRow: "2", gridColumn: "1" })
+    expect(screen.getByRole("link", { name: "Nine" })).toHaveFocus()
+    fireEvent.click(menu)
+    expect(menu).toHaveAttribute("aria-expanded", "false")
+    expect(drawer).toHaveStyle({ display: "none" })
+    expect(menu).toHaveFocus()
+  })
+
+  it("closes on Escape", async () => {
+    const menu = await renderPhone()
+    fireEvent.click(menu)
+    fireEvent.keyDown(screen.getByRole("link", { name: "Nine" }), { key: "Escape" })
+    expect(menu).toHaveAttribute("aria-expanded", "false")
+    expect(menu).toHaveFocus()
+  })
+
+  it("closes when a page is picked, on that page", async () => {
+    const menu = await renderPhone()
+    fireEvent.click(menu)
+    fireEvent.click(screen.getByRole("link", { name: "Ten" }))
+    expect(await screen.findByText("ten")).toBeInTheDocument()
+    expect(window.location.pathname).toBe("/stories/beta/ten")
+    expect(menu).toHaveAttribute("aria-expanded", "false")
+    expect(menu).toHaveFocus()
+  })
+
+  it("gives the menu button a header row of its own without a header", async () => {
+    const menu = await renderPhone({ header: undefined })
+    expect(menu.parentElement!.nextElementSibling).toHaveAttribute("id", menu.getAttribute("aria-controls"))
+  })
+
+  it("follows sidebarOpen when set, reporting through onSidebarOpenChange", async () => {
+    const onSidebarOpenChange = jest.fn()
+    const menu = await renderPhone({ sidebarOpen: true, onSidebarOpenChange })
+    expect(menu).toHaveAttribute("aria-expanded", "true")
+    expect(screen.getByRole("navigation")).toBeInTheDocument()
+    fireEvent.click(menu)
+    expect(onSidebarOpenChange).toHaveBeenLastCalledWith(false)
+    expect(menu).toHaveAttribute("aria-expanded", "true")
+    fireEvent.keyDown(document, { key: "Escape" })
+    expect(onSidebarOpenChange).toHaveBeenCalledTimes(2)
+  })
+
+  it("shows the sidebar beside the scene region from tablet up, with no menu button", async () => {
+    resize(700)
+    render(<App scenes={scenes} router={plainRouter} header={<p>logo</p>} sidebarOpen={false} />)
+    await screen.findByText("nine")
+    expect(screen.queryByRole("button", { name: "Menu" })).not.toBeInTheDocument()
+    expect(screen.getByRole("navigation")).toBeInTheDocument()
+    expect(screen.getByText("logo").parentElement!.nextElementSibling).toHaveStyle({ display: "contents" })
   })
 })
 

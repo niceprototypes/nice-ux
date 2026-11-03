@@ -45,6 +45,12 @@ createRoot(root).render(<App scenes={scenes} docs={docs} pages={pages} router={p
 `header` is a row at the top of the sidebar, above the nav and the scene sidebar, with the nav's
 padding (a logo); the bare view leaves it out.
 
+Below tablet the sidebar is a drawer: the header row (with or without `header`) gets a menu button
+(`aria-expanded`, `aria-controls`) that opens it over the scene region and closes it again. Escape
+and picking a page close it; focus moves to the current page's link on opening and back to the button
+on closing. `sidebarOpen` controls it, `onSidebarOpenChange` reports each change. Tablet and up the
+sidebar always shows beside the region.
+
 The sidebar is at least `app.sidebar.minWidth` wide (a component token, `auto` by default: as wide as
 its content). Set it per breakpoint in the app's token map, e.g.
 `setTokens({ app: { sidebar: { minWidth: { base: { "desktop+": "32em" } } } } })`.
@@ -56,5 +62,5 @@ place for scene-only providers and styles.
 
 Prop types are `AppProps`, `AppRouterType`, `AppScenesType`, `AppDocsType`, `AppPagesType`, `AppEntryType` (`App.types.ts`).
 
-Peer dependencies: `@niceprototypes/ink`, `@niceprototypes/styles`, `@niceprototypes/tree`, `react`,
+Peer dependencies: `@niceprototypes/button`, `@niceprototypes/ink`, `@niceprototypes/scroll`, `@niceprototypes/styles`, `@niceprototypes/tree`, `react`,
 `react-dom`, `styled-components`; optionally `react-router` or `@tanstack/react-router`.
