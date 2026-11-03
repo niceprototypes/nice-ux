@@ -39,10 +39,10 @@ describe("Contents", () => {
     expect(screen.getByRole("link", { name: "size" })).toHaveAttribute("href", "#size")
   })
 
-  it("takes aria-label over the heading as the nav name", () => {
-    render(<Contents items={items} heading="On this page" aria-label="Page content" />)
+  it("renders no heading, and names the nav by aria-label", () => {
+    render(<Contents items={items} aria-label="Page content" />)
     expect(screen.getByRole("navigation", { name: "Page content" })).toBeInTheDocument()
-    expect(screen.getByText("On this page")).toBeInTheDocument()
+    expect(screen.queryByText("Contents")).not.toBeInTheDocument()
   })
 
   it("marks the controlled activeId with aria-current", () => {

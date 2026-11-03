@@ -75,14 +75,12 @@ type Story = StoryObj<ContentsProps>
 export const Playground: Story = {
   args: {
     items: ITEMS,
-    heading: "Contents",
     activeId: undefined,
     "aria-label": undefined,
     onActiveChange: fn(),
   },
   argTypes: {
     items: { control: "object", table: { category: "Content" } },
-    heading: { control: "text", table: { category: "Content" } },
     activeId: {
       control: "select",
       options: [NONE, ...IDS],
@@ -110,23 +108,13 @@ export const Playground: Story = {
   },
 }
 
-/** `heading` replaces the heading text and the nav's name. */
-export const Heading: Story = {
-  ...Playground,
-  args: { ...Playground.args, heading: "On this page" },
-  play: async ({ canvasElement }) => {
-    await expect(within(canvasElement).getByRole("navigation", { name: "On this page" })).toBeInTheDocument()
-  },
-}
-
-/** `aria-label` names the nav instead of the heading. */
+/** `aria-label` names the nav in place of the default "Contents". */
 export const AriaLabel: Story = {
   ...Playground,
   args: { ...Playground.args, "aria-label": "Page content" },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
     await expect(canvas.getByRole("navigation", { name: "Page content" })).toBeInTheDocument()
-    await expect(canvas.getByText("Contents")).toBeInTheDocument()
   },
 }
 

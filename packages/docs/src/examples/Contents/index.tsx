@@ -87,21 +87,6 @@ export const contentsItems = {
       : `<Contents\n  items={[\n    { id: "install", label: "Install" },\n    { id: "usage", label: "Usage" },\n    { id: "props", label: "Props" },\n  ]}\n/>`,
 } satisfies ComponentExample
 
-export const contentsHeading = {
-  name: "heading",
-  description: "Text of the sticky heading above the rows; it also names the nav landmark.",
-  variants: ["Contents", "On this page"],
-  default: "Contents",
-  preview: variant => (
-    <Preview
-      items={getItems(`heading-${variant.replace(/ /g, "-").toLowerCase()}`)}
-      heading={variant}
-    />
-  ),
-  code: variant =>
-    variant === "Contents" ? `<Contents\n  ${ITEMS_CODE}\n/>` : `<Contents\n  heading="${variant}"\n  ${ITEMS_CODE}\n/>`,
-} satisfies ComponentExample
-
 export const contentsActiveId = {
   name: "activeId",
   description: "Pins the highlight to this row whatever is in view; unset, scroll-spy moves it.",
@@ -132,7 +117,6 @@ export const contentsOnActiveChange = {
 /** Every Contents example facet — each one a section of the Contents docs page. */
 export const contentsExamples = {
   items: contentsItems,
-  heading: contentsHeading,
   activeId: contentsActiveId,
   onActiveChange: contentsOnActiveChange,
 } satisfies Record<string, ComponentExample>

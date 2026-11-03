@@ -34,13 +34,6 @@ export type ContentsItemType = {
 export type ContentsItemsType = ReadonlyArray<ContentsItemType>
 
 /**
- * ContentsHeadingType
- *
- * The sticky heading above the rows; it also names the `<nav>` landmark.
- */
-export type ContentsHeadingType = React.ReactNode
-
-/**
  * ContentsActiveIdType
  *
  * The id of the highlighted row. Set, it pins the highlight (controlled); unset, scroll-spy
@@ -63,7 +56,7 @@ export type ContentsOnActiveChangeType = (id: ContentsItemIdType) => void
 /**
  * ContentsSizeType
  *
- * The heading's and rows' text size, a font size token variant.
+ * The rows' text size, a font size token variant.
  */
 export type ContentsSizeType = FontSizeType
 
@@ -71,19 +64,16 @@ export interface ContentsProps {
   /** The rows, nested by `items` */
   items: ContentsItemsType
 
-  /** Heading text */
-  heading?: ContentsHeadingType
-
   /** Highlighted row (controlled) */
   activeId?: ContentsActiveIdType
 
   /** Active-row change handler */
   onActiveChange?: ContentsOnActiveChangeType
 
-  /** Accessible name of the `<nav>` landmark; defaults to the heading */
+  /** Accessible name of the `<nav>` landmark. @default "Contents" */
   "aria-label"?: string
 
-  /** Text size of the heading and rows. @default "smaller" */
+  /** Text size of the rows. @default "smaller" */
   size?: ContentsSizeType
 }
 
@@ -95,7 +85,6 @@ namespace ContentsTypes {
   export type ItemLabel = ContentsItemLabelType
   export type Item = ContentsItemType
   export type Items = ContentsItemsType
-  export type Heading = ContentsHeadingType
   export type ActiveId = ContentsActiveIdType
   export type OnActiveChange = ContentsOnActiveChangeType
   export type Props = ContentsProps

@@ -15,12 +15,13 @@ export type MdxModuleType = { default: React.ComponentType<{ components?: Record
 const slugOf = (text: string) => text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")
 
 /**
- * The page's headings as Contents rows, each h3 under the h2 before it. A heading without an
- * id gets one from its text, made unique on the page.
+ * The page's headings as Contents rows, each h3 under the h2 before it. An h3 with no h2 above
+ * it is a top-level row, and so are the h3s after it: an h3 nests only under an h2, so sibling
+ * sections stay siblings. A heading without an id gets one from its text, made unique on the page.
  */
 const headingsOf = (root: HTMLElement): ContentsItemType[] => {
   const taken = new Set<string>()
-  const rows: { id: string; label: string; items: ContentsItemType[] }[] = []
+  const rows: { id: string; label: string; items: ContentsItemType[]; h2: boolean }[] = []
   for (const heading of root.querySelectorAll<HTMLElement>("h2, h3")) {
     const label = heading.textContent?.trim() ?? ""
     if (!label) continue
@@ -31,11 +32,12 @@ const headingsOf = (root: HTMLElement): ContentsItemType[] => {
       heading.id = id
     }
     taken.add(heading.id)
-    const row = { id: heading.id, label, items: [] as ContentsItemType[] }
-    if (heading.tagName === "H3" && rows.length) rows[rows.length - 1].items.push(row)
+    const row = { id: heading.id, label, items: [] as ContentsItemType[], h2: heading.tagName === "H2" }
+    const parent = rows[rows.length - 1]
+    if (!row.h2 && parent?.h2) parent.items.push({ id: row.id, label: row.label })
     else rows.push(row)
   }
-  return rows.map(({ items, ...row }) => (items.length ? { ...row, items } : row))
+  return rows.map(({ items, h2: _h2, ...row }) => (items.length ? { ...row, items } : row))
 }
 
 /**

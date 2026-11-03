@@ -18,22 +18,6 @@ export const StyledContents = styled(Scroll).attrs({ forwardedAs: "nav" })`
   max-block-size: calc(100vh - 2 * ${getToken("contents.top")});
 `
 
-/**
- * The heading row; sticks to the top of the nav while the rows scroll under it, stacked
- * over their positioned links.
- */
-export const StyledContentsHeading = styled.div`
-  display: flex;
-  position: sticky;
-  top: 0;
-  z-index: ${getToken("zIndex", "low")};
-  padding-block-end: ${getToken("contents.heading.paddingBlock")};
-  padding-inline-start: ${getToken("contents.item.paddingInline")};
-  background-color: ${getToken("contents.backgroundColor")};
-  color: ${getToken("contents.heading.color")};
-  font-weight: ${getToken("contents.heading.fontWeight")};
-`
-
 /** A level's rows; nesting shows in the links' indent, so every row's indicator meets the rail. */
 export const StyledContentsList = styled.ul`
   list-style: none;

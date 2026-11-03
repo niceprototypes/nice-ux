@@ -2,7 +2,6 @@ import * as React from "react"
 import Ink from "@niceprototypes/ink"
 import {
   StyledContents,
-  StyledContentsHeading,
   StyledContentsItem,
   StyledContentsLink,
   StyledContentsList,
@@ -17,8 +16,8 @@ const USER_SCROLL_EVENTS = ["wheel", "touchstart", "keydown"] as const
 /**
  * Contents
  *
- * The in-page table of contents beside a long page: a `<nav>` named by its sticky heading,
- * holding nested lists of links to the page's sections (`href="#{id}"`). Scroll-spy marks
+ * The in-page table of contents beside a long page: a `<nav>` (named "Contents" unless
+ * `aria-label` says otherwise, with no visible heading) holding nested lists of links to the page's sections (`href="#{id}"`). Scroll-spy marks
  * the section in view with `aria-current="location"`, the active colour and an indicator
  * bar over the rail. A click scrolls smoothly to the section (instantly under
  * `prefers-reduced-motion`) and holds the highlight on it until the scroll ends. Targets
@@ -36,13 +35,11 @@ const USER_SCROLL_EVENTS = ["wheel", "touchstart", "keydown"] as const
  */
 const Contents: React.FC<ContentsProps> = ({
   items,
-  heading = "Contents",
   activeId: activeIdProp,
   onActiveChange,
-  "aria-label": ariaLabel,
+  "aria-label": ariaLabel = "Contents",
   size = "smaller",
 }) => {
-  const headingId = React.useId()
   const ids = React.useMemo(() => getContentsIds(items), [items])
   const [spiedId, setSpiedId] = React.useState<string | undefined>(ids[0])
   const heldId = React.useRef<string | null>(null)
@@ -56,8 +53,7 @@ const Contents: React.FC<ContentsProps> = ({
     const nav = navRef.current
     const link = nav?.querySelector<HTMLElement>('[aria-current="location"]')
     if (!nav || !link) return
-    const heading = nav.firstElementChild as HTMLElement
-    const top = link.offsetTop - heading.offsetHeight
+    const top = link.offsetTop
     const bottom = link.offsetTop + link.offsetHeight - nav.clientHeight
     if (nav.scrollTop > top) nav.scrollTop = top
     else if (nav.scrollTop < bottom) nav.scrollTop = bottom
@@ -134,11 +130,7 @@ const Contents: React.FC<ContentsProps> = ({
     <StyledContents
       ref={navRef}
       aria-label={ariaLabel}
-      aria-labelledby={ariaLabel === undefined ? headingId : undefined}
     >
-      <StyledContentsHeading id={headingId}>
-        <Ink size={size}>{heading}</Ink>
-      </StyledContentsHeading>
       {renderList(items, 0)}
     </StyledContents>
   )
