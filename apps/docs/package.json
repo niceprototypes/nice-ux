@@ -22,7 +22,6 @@
     "@niceprototypes/image-vendor": "workspace:^",
     "@niceprototypes/ink": "workspace:^",
     "@niceprototypes/input": "workspace:^",
-    "@niceprototypes/logo": "workspace:^",
     "@niceprototypes/scroll": "workspace:^",
     "@niceprototypes/select": "workspace:^",
     "@niceprototypes/storybook-theme": "workspace:^",

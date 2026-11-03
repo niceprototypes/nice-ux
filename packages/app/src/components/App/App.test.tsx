@@ -188,11 +188,11 @@ describe.each(adapters)("App on the %s adapter", (_, router) => {
     expect(screen.queryByText("steps")).not.toBeInTheDocument()
   })
 
-  it("renders the header above the nav and the scene sidebar; none in the bare view", async () => {
+  it("renders the logo in the header row above the nav and the scene sidebar; none in the bare view", async () => {
     window.history.replaceState(null, "", "/stories/gamma/steps")
-    const { unmount } = render(<App scenes={scenes} router={router} header={<p>logo</p>} />)
+    const { unmount } = render(<App scenes={scenes} router={router} />)
     await screen.findByText("steps")
-    const header = screen.getByText("logo").parentElement!
+    const header = screen.getByRole("img", { name: "Nice Prototypes" }).parentElement!
     expect(header.nextElementSibling).toContainElement(screen.getByRole("navigation"))
     expect(header.nextElementSibling).toContainElement(screen.getByText("steps"))
     // The header carries the gap below it; the scrolling nav under it has no top padding to scroll away.
@@ -200,16 +200,9 @@ describe.each(adapters)("App on the %s adapter", (_, router) => {
     expect(getComputedStyle(screen.getByRole("navigation").parentElement!).paddingBlockStart).toBe("0")
     unmount()
     window.history.replaceState(null, "", "/frame/stories/gamma/steps")
-    render(<App scenes={scenes} router={router} header={<p>logo</p>} />)
-    await screen.findByText("with steps")
-    expect(screen.queryByText("logo")).not.toBeInTheDocument()
-  })
-
-  it("leaves the nav's top padding alone without a header", async () => {
-    window.history.replaceState(null, "", "/stories/gamma/steps")
     render(<App scenes={scenes} router={router} />)
-    await screen.findByText("steps")
-    expect(getComputedStyle(screen.getByRole("navigation").parentElement!).paddingBlockStart).not.toBe("0")
+    await screen.findByText("with steps")
+    expect(screen.queryByRole("img", { name: "Nice Prototypes" })).not.toBeInTheDocument()
   })
 
   it("sizes the sidebar from the app.sidebar.minWidth token", async () => {
@@ -244,14 +237,14 @@ describe("App below tablet", () => {
   afterEach(() => resize(innerWidth))
 
   const renderPhone = async (props: Partial<React.ComponentProps<typeof App>> = {}) => {
-    render(<App scenes={scenes} router={plainRouter} header={<p>logo</p>} {...props} />)
+    render(<App scenes={scenes} router={plainRouter} {...props} />)
     await screen.findByText("nine")
     return screen.getByRole("button", { name: "Menu" })
   }
 
   it("hides the sidebar behind a menu button in the header row, which controls the drawer", async () => {
     const menu = await renderPhone()
-    expect(screen.getByText("logo").parentElement).toContainElement(menu)
+    expect(screen.getByRole("img", { name: "Nice Prototypes" }).parentElement).toContainElement(menu)
     expect(menu).toHaveAttribute("aria-expanded", "false")
     const drawer = document.getElementById(menu.getAttribute("aria-controls")!)!
     expect(drawer).toContainElement(screen.getByRole("navigation", { hidden: true }))
@@ -292,11 +285,6 @@ describe("App below tablet", () => {
     expect(menu).toHaveFocus()
   })
 
-  it("gives the menu button a header row of its own without a header", async () => {
-    const menu = await renderPhone({ header: undefined })
-    expect(menu.parentElement!.nextElementSibling).toHaveAttribute("id", menu.getAttribute("aria-controls"))
-  })
-
   it("follows sidebarOpen when set, reporting through onSidebarOpenChange", async () => {
     const onSidebarOpenChange = jest.fn()
     const menu = await renderPhone({ sidebarOpen: true, onSidebarOpenChange })
@@ -311,11 +299,11 @@ describe("App below tablet", () => {
 
   it("shows the sidebar beside the scene region from tablet up, with no menu button", async () => {
     resize(700)
-    render(<App scenes={scenes} router={plainRouter} header={<p>logo</p>} sidebarOpen={false} />)
+    render(<App scenes={scenes} router={plainRouter} sidebarOpen={false} />)
     await screen.findByText("nine")
     expect(screen.queryByRole("button", { name: "Menu" })).not.toBeInTheDocument()
     expect(screen.getByRole("navigation")).toBeInTheDocument()
-    expect(screen.getByText("logo").parentElement!.nextElementSibling).toHaveStyle({ display: "contents" })
+    expect(screen.getByRole("img", { name: "Nice Prototypes" }).parentElement!.nextElementSibling).toHaveStyle({ display: "contents" })
   })
 })
 
@@ -323,15 +311,41 @@ describe("App search", () => {
   beforeEach(() => window.history.replaceState(null, "", "/stories/beta/nine"))
 
   const renderSearch = async (props: Partial<React.ComponentProps<typeof App>> = {}) => {
-    render(<App scenes={scenes} docs={docs} pages={pages} router={plainRouter} header={<p>logo</p>} search aria-label="Docs" {...props} />)
+    render(<App scenes={scenes} docs={docs} pages={pages} router={plainRouter} search aria-label="Docs" {...props} />)
     await screen.findByText("nine")
+    const button = screen.queryByRole("button", { name: "Search Docs", hidden: true })
+    if (button) fireEvent.click(button)
     return screen.queryByRole("combobox", { name: "Search Docs", hidden: true })!
   }
   const type = (field: HTMLElement, value: string) => fireEvent.change(field, { target: { value } })
   const results = () => screen.getAllByRole("option").map(option => option.textContent)
 
-  it("shows no field without search", async () => {
+  it("shows no search without search", async () => {
     expect(await renderSearch({ search: undefined })).toBeNull()
+    expect(screen.queryByRole("button", { name: "Search Docs" })).not.toBeInTheDocument()
+  })
+
+  it("starts as a square search button that expands into the focused field, and collapses on Escape or an empty blur", async () => {
+    render(<App scenes={scenes} router={plainRouter} search aria-label="Docs" />)
+    await screen.findByText("nine")
+    const button = screen.getByRole("button", { name: "Search Docs" })
+    const block = button.parentElement!
+    expect(block).toHaveStyle({ width: "var(--np--input--size--small)" })
+    expect(screen.queryByRole("combobox")).not.toBeInTheDocument()
+    fireEvent.click(button)
+    const field = screen.getByRole("combobox", { name: "Search Docs" })
+    expect(field).toHaveFocus()
+    expect(block).toHaveStyle({ width: "100%" })
+    fireEvent.keyDown(field, { key: "Escape" })
+    expect(screen.queryByRole("combobox")).not.toBeInTheDocument()
+    expect(screen.getByRole("button", { name: "Search Docs" })).toHaveFocus()
+    fireEvent.click(screen.getByRole("button", { name: "Search Docs" }))
+    type(screen.getByRole("combobox"), "x")
+    fireEvent.blur(screen.getByRole("combobox"))
+    expect(screen.getByRole("combobox")).toBeInTheDocument()
+    type(screen.getByRole("combobox"), "")
+    fireEvent.blur(screen.getByRole("combobox"))
+    expect(screen.queryByRole("combobox")).not.toBeInTheDocument()
   })
 
   it("lists names that start with the query, then names that hold it, then pages under a matching story or chapter", async () => {
@@ -343,7 +357,7 @@ describe("App search", () => {
     expect(results()).toEqual(["First & lastAlpha / Pair", "SecondAlpha / Pair"])
   })
 
-  it("opens a result with the arrow keys and Enter, keeping the query string, and clears the field", async () => {
+  it("opens a result with the arrow keys and Enter, keeping the query string, and collapses", async () => {
     window.history.replaceState(null, "", "/stories/beta/nine?device=desktop")
     const field = await renderSearch()
     type(field, "second")
@@ -352,36 +366,47 @@ describe("App search", () => {
     fireEvent.keyDown(field, { key: "Enter" })
     expect(await screen.findByText("second")).toBeInTheDocument()
     expect(window.location.pathname + window.location.search).toBe("/stories/alpha/pair/second?device=desktop")
-    expect(field).toHaveValue("")
+    // The field collapses back to the button.
+    expect(screen.queryByRole("combobox")).not.toBeInTheDocument()
+    expect(screen.getByRole("button", { name: "Search Docs" })).toBeInTheDocument()
     expect(screen.queryByRole("option")).not.toBeInTheDocument()
   })
 
-  it("sits between the header and the nav, one base gap from each", async () => {
-    const field = await renderSearch()
-    const block = screen.getByText("logo").parentElement!.nextElementSibling!.firstElementChild!
+  it("sits in the header row right of the logo, the large gap apart, at the nav labels' size, without the link color", async () => {
+    const field = await renderSearch({ navSize: "base" })
+    const logo = screen.getByRole("img", { name: "Nice Prototypes" })
+    const block = logo.nextElementSibling as HTMLElement
     expect(block).toContainElement(field)
-    expect(getComputedStyle(block).paddingBlockStart).toBe("0")
-    expect(getComputedStyle(block).paddingBlockEnd).toBe("var(--np--gap)")
-    expect(block.nextElementSibling).toContainElement(screen.getByRole("navigation"))
+    expect(logo.parentElement).toHaveStyle({ alignItems: "center", gap: "var(--np--gap--large)" })
+    expect(logo.parentElement!.style.getPropertyValue("--np--logo--height") || getComputedStyle(logo.parentElement!).getPropertyValue("--np--logo--height")).toBe(
+      "var(--np--app--logo--height)",
+    )
+    expect(block).toHaveStyle({ fontSize: "var(--np--font-size)" })
+    const property = (name: string) => getComputedStyle(block).getPropertyValue(name)
+    expect(property("--np--input--font-size")).toBe("var(--np--app--search--font-size)")
+    expect(property("--np--input--focus-ring--color")).toBe("var(--np--app--search--focus-color)")
+    expect(property("--np--button--focus-ring--color")).toBe("var(--np--app--search--focus-color)")
+    expect(property("--np--input--background-color--raised")).toBe("var(--np--app--search--background-color)")
+    // The nav keeps the header row's gap below it.
+    expect(logo.parentElement!.nextElementSibling).toContainElement(screen.getByRole("navigation"))
     expect(getComputedStyle(screen.getByRole("navigation").parentElement!).paddingBlockStart).toBe("0")
   })
 
-  it("keeps its top padding without a header", async () => {
-    const field = await renderSearch({ header: undefined })
-    expect(getComputedStyle(field.parentElement!.parentElement!).paddingBlockStart).not.toBe("0")
-  })
-
-  it("sits in the drawer below tablet, and a picked result closes it", async () => {
+  it("stays in the header row beside the menu button below tablet, and a picked result closes the drawer", async () => {
     const innerWidth = window.innerWidth
     act(() => {
       window.innerWidth = 390
       window.dispatchEvent(new Event("resize"))
     })
     try {
-      const field = await renderSearch()
+      render(<App scenes={scenes} docs={docs} pages={pages} router={plainRouter} search aria-label="Docs" />)
+      await screen.findByText("nine")
       const menu = screen.getByRole("button", { name: "Menu" })
-      expect(document.getElementById(menu.getAttribute("aria-controls")!)).toContainElement(field)
       fireEvent.click(menu)
+      const button = screen.getByRole("button", { name: "Search Docs" })
+      expect(menu.parentElement).toContainElement(button)
+      fireEvent.click(button)
+      const field = screen.getByRole("combobox", { name: "Search Docs" })
       type(field, "ten pages")
       fireEvent.click(screen.getByRole("option"))
       expect(await screen.findByText("ten pages")).toBeInTheDocument()

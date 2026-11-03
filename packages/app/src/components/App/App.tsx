@@ -1,7 +1,8 @@
 import * as React from "react"
 import Button from "@niceprototypes/button"
 import { breakpointKeyMatches, parseBreakpointKey, useBreakpoint } from "@niceprototypes/styles"
-import Tree from "@niceprototypes/tree"
+import Logo from "@niceprototypes/logo"
+import Tree, { useTreeSize } from "@niceprototypes/tree"
 import type { AppEntryType, AppProps } from "./App.types"
 import AppDocs from "./AppDocs"
 import AppFooter from "./AppFooter"
@@ -38,7 +39,6 @@ const AppShell: React.FC<AppProps> = ({
   pages,
   router,
   wrapper: Wrapper,
-  header,
   search: searchable,
   "aria-label": ariaLabel = "Scenes",
   navSize,
@@ -56,6 +56,7 @@ const AppShell: React.FC<AppProps> = ({
   const [sidebar, setSidebar] = React.useState<HTMLElement | null>(null)
   const [sidebarFooter, setSidebarFooter] = React.useState<HTMLDivElement | null>(null)
   const search = React.useMemo(() => new URLSearchParams(location.search), [location.search])
+  const navLabelSize = useTreeSize(navSize)
 
   // Below tablet, the drawer: closed at first, unless `sidebarOpen` controls it.
   const drawer = !bare && breakpointKeyMatches(DRAWER, useBreakpoint())
@@ -174,32 +175,31 @@ const AppShell: React.FC<AppProps> = ({
       ) : (
         <StyledApp $drawer={drawer}>
           <StyledAppAside $drawer={drawer}>
-            {(header !== undefined || drawer) && (
-              <StyledAppHeader>
-                {header}
-                {drawer && (
-                  <Button
-                    ref={menu}
-                    iconLeft="menu"
-                    aria-label="Menu"
-                    aria-expanded={open}
-                    aria-controls={drawerId}
-                    onClick={() => setOpen(!open)}
-                  />
-                )}
-              </StyledAppHeader>
-            )}
-            <StyledAppDrawer ref={drawerElement} id={drawerId} $drawer={drawer} $open={open}>
+            <StyledAppHeader>
+              <Logo />
               {searchable && (
                 <AppSearch
                   entries={index}
                   aria-label={`Search ${ariaLabel}`}
+                  size={navLabelSize}
                   onGo={entry => {
                     context.open(entry)
                     if (open) setOpen(false)
                   }}
                 />
               )}
+              {drawer && (
+                <Button
+                  ref={menu}
+                  iconLeft="menu"
+                  aria-label="Menu"
+                  aria-expanded={open}
+                  aria-controls={drawerId}
+                  onClick={() => setOpen(!open)}
+                />
+              )}
+            </StyledAppHeader>
+            <StyledAppDrawer ref={drawerElement} id={drawerId} $drawer={drawer} $open={open}>
               <StyledAppColumns>
                 <StyledAppNav>
                   <Tree
@@ -235,7 +235,7 @@ const AppShell: React.FC<AppProps> = ({
  * App
  *
  * The app shell: a Tree nav of the project's scenes and docs pages, found by folder, beside the
- * scene region where the current one renders, under an optional `header` row (a logo). The nav has
+ * scene region where the current one renders, under a header row: the Nice logo and, with `search`, a search field. The nav has
  * two groups: Stories (`stories/`, at `/stories/...`) and, when there are docs section pages, Docs
  * (`docs/<N Page>/index.tsx`, at `/docs/<page>`, or nested in folders); a docs-only app has no group row. Folder names are the only metadata: depth is the
  * level (story, chapter, scene), numbers order them by value and are left out of names and URLs.

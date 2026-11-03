@@ -1,5 +1,5 @@
 import styled, { createGlobalStyle } from "styled-components"
-import { getToken } from "@niceprototypes/styles"
+import { getToken, type FontSizeType } from "@niceprototypes/styles"
 import { Scroll } from "@niceprototypes/scroll"
 
 /** The page has no margin: the shell (or, in the bare view, the scene region) fills the viewport. */
@@ -37,19 +37,46 @@ export const StyledAppAside = styled.div<{ $drawer: boolean }>`
 `
 
 /**
- * The sidebar's header row, above the nav and the scene sidebar, with the nav's padding; below
- * tablet the menu button sits at its end. Its own bottom padding (the base gap) sets it apart:
- * padding inside the scrolling columns would scroll away, and the rows would slide up against the
- * header.
+ * The sidebar's header row, above the nav and the scene sidebar, with the nav's padding: the logo
+ * (`app.logo.height` tall), then the search and below tablet the menu button at its end, all
+ * vertically centred, the large gap apart. Its own bottom padding (the base gap) sets it apart:
+ * padding inside the scrolling columns would scroll away, and the rows would slide up against the header.
  */
 export const StyledAppHeader = styled.div`
   flex: none;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  gap: ${getToken("gap")};
+  align-items: center;
+  gap: ${getToken("gap:large")};
+  ${getToken("logo.height", { as: "key" })}: ${getToken("app.logo.height")};
   padding: ${getToken("gap:large")};
   padding-block-end: ${getToken("gap")};
+`
+
+/**
+ * The search in the header row (`search`), at the row's end: collapsed, a square the small field's
+ * height (the search button); `$expanded`, the field, filling the width right of the logo, its width
+ * animating between the two. The anchor the results open under. Its text is the nav labels' size
+ * (`$size`): it sets that font size and points the field's at `app.search.fontSize`, that size from
+ * tablet up and at least 16px below (under 16px iOS zooms in on focus). The field's focus border and
+ * the button's focus ring take `app.search.focusColor`, the field's raised fill `app.search.backgroundColor`.
+ */
+export const StyledAppSearch = styled.div<{ $size: FontSizeType; $expanded: boolean }>`
+  flex: 0 1 auto;
+  display: flex;
+  min-width: 0;
+  width: ${({ $expanded }) => ($expanded ? "100%" : getToken("input.size:small"))};
+  margin-inline-start: auto;
+  transition: width ${getToken("animationDuration")} ${getToken("animationEasing")};
+  font-size: ${({ $size }) => getToken("fontSize", $size)};
+  ${getToken("input.fontSize", { as: "key" })}: ${getToken("app.search.fontSize")};
+  ${getToken("input.focusRing.color", { as: "key" })}: ${getToken("app.search.focusColor")};
+  ${getToken("button.focusRing.color", { as: "key" })}: ${getToken("app.search.focusColor")};
+  ${getToken("input.backgroundColor:raised", { as: "key" })}: ${getToken("app.search.backgroundColor")};
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 `
 
 /**
@@ -69,35 +96,13 @@ export const StyledAppDrawer = styled.div<{ $drawer: boolean; $open: boolean }>`
   background-color: ${getToken("backgroundColor")};
 `
 
-/**
- * The sidebar search (`search`), over the nav and the scene sidebar, with the nav's padding; its own
- * bottom padding (the base gap) sets it apart from the rows. Under a header, which spaces it, it has
- * no top padding: one base gap above it and one below, as between the header and the rows.
- */
-export const StyledAppSearch = styled.div`
-  flex: none;
-  padding: ${getToken("gap:large")};
-  padding-block-end: ${getToken("gap")};
-
-  ${StyledAppHeader} + ${StyledAppDrawer} > & {
-    padding-block-start: 0;
-  }
-`
-
-/** The search field's row, the anchor the results open under: the sidebar's width inside its padding. */
-export const StyledAppSearchField = styled.div`
-  display: flex;
-  min-width: 0;
-`
-
-/** The nav and the scene sidebar, side by side in the height the footer leaves; under a header or the search, which space them, they have no top padding. */
+/** The nav and the scene sidebar, side by side in the height the footer leaves; under the header row, which spaces them, they have no top padding. */
 export const StyledAppColumns = styled.div`
   flex: 1 1 auto;
   display: flex;
   min-height: 0;
 
-  ${StyledAppHeader} + ${StyledAppDrawer} > & > *,
-  ${StyledAppSearch} + & > * {
+  ${StyledAppHeader} + ${StyledAppDrawer} > & > * {
     padding-block-start: 0;
   }
 `

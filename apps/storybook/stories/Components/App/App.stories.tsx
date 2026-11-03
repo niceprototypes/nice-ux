@@ -6,7 +6,6 @@ import type { AppLocationType, AppProps, AppRouterType, AppWrapperType, AppNavig
 import Flex from "@niceprototypes/flex"
 import type { TreeSizeType } from "@niceprototypes/tree"
 import Ink from "@niceprototypes/ink"
-import Logo from "@niceprototypes/logo"
 import LifecycleStory from "@niceprototypes/docs/components/LifecycleStory"
 
 /** The story's router: the location in React state, so the shell navigates without leaving the story's URL. */
@@ -71,18 +70,16 @@ const SIDEBAR_OPEN_OPTIONS = { unset: undefined, open: true, closed: false } as 
  * PlaygroundArgs
  *
  * AppProps with data controls in place of the globs: `withScenes`, `withDocs` and `withPages` add the
- * story's scenes, markdown pages and docs pages; `withHeader` puts the Logo in the header row;
- * `withWrapper` wraps each scene. The router is the story's own, kept in memory.
+ * story's scenes, markdown pages and docs pages; `withWrapper` wraps each scene. The router is the story's own, kept in memory.
  */
-type PlaygroundArgs = Omit<AppProps, "scenes" | "docs" | "pages" | "router" | "wrapper" | "header"> & {
+type PlaygroundArgs = Omit<AppProps, "scenes" | "docs" | "pages" | "router" | "wrapper"> & {
   withScenes: boolean
   withDocs: boolean
   withPages: boolean
-  withHeader: boolean
   withWrapper: boolean
 }
 
-const renderApp = ({ withScenes, withDocs, withPages, withHeader, withWrapper, ...rest }: PlaygroundArgs) => (
+const renderApp = ({ withScenes, withDocs, withPages, withWrapper, ...rest }: PlaygroundArgs) => (
   <App
     {...rest}
     scenes={withScenes ? SCENES : undefined}
@@ -90,7 +87,6 @@ const renderApp = ({ withScenes, withDocs, withPages, withHeader, withWrapper, .
     pages={withPages ? PAGES : undefined}
     router={memoryRouter}
     wrapper={withWrapper ? Padded : undefined}
-    header={withHeader ? <Logo /> : undefined}
   />
 )
 
@@ -113,7 +109,6 @@ export const Playground: Story = {
     withScenes: true,
     withDocs: true,
     withPages: true,
-    withHeader: true,
     withWrapper: true,
     "aria-label": "Docs",
     onSidebarOpenChange: fn(),
@@ -122,7 +117,6 @@ export const Playground: Story = {
     withScenes: { control: "boolean", table: { category: "Content" } },
     withDocs: { control: "boolean", table: { category: "Content" } },
     withPages: { control: "boolean", table: { category: "Content" } },
-    withHeader: { control: "boolean", table: { category: "Content" } },
     withWrapper: { control: "boolean", table: { category: "Content" } },
     search: { control: "boolean", table: { category: "Content" } },
 
@@ -187,28 +181,17 @@ export const SidebarOpen: Story = {
   },
 }
 
-/** Without a header the menu button has the header row to itself. */
-export const NoHeader: Story = {
-  ...Playground,
-  args: { ...Playground.args, withHeader: false },
-  play: async ({ canvasElement }) => {
-    const menu = await within(canvasElement).findByRole("button", { name: "Menu" })
-    await expect(menu.parentElement?.children).toHaveLength(1)
-  },
-}
-
-/** `search` adds a field under the header that opens a matching page; below tablet it is in the drawer. */
+/** `search` adds a search button at the header row's end that expands into a field opening a matching page. */
 export const Search: Story = {
   ...Playground,
   args: { ...Playground.args, search: true },
   play: async ({ canvasElement, userEvent }) => {
     const canvas = within(canvasElement)
     await canvas.findByRole("heading", { name: "Welcome" })
-    await userEvent.click(canvas.getByRole("button", { name: "Menu" }))
+    await userEvent.click(canvas.getByRole("button", { name: "Search Docs" }))
     await userEvent.type(canvas.getByRole("combobox", { name: "Search Docs" }), "dur")
     await userEvent.keyboard("{Enter}")
     await canvas.findByRole("heading", { name: "Duration" })
-    await expect(canvas.getByRole("button", { name: "Menu" })).toHaveAttribute("aria-expanded", "false")
   },
 }
 

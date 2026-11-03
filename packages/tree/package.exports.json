@@ -2,5 +2,10 @@
   "$schema": "../config-exports/src/schema.json",
   "description": "Tree: a navigation tree of nested links and disclosure folders, joined by guide lines, with the path to the active page highlighted.",
   "default": "Tree",
-  "components": ["Tree"]
+  "components": [
+    "Tree"
+  ],
+  "services": [
+    "useTreeSize"
+  ]
 }

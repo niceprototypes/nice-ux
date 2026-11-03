@@ -43,6 +43,22 @@ const componentTokensData: ComponentTokensData = {
       "paddingBottom": {
         "base": "var(--np--gap--large)"
       }
+    },
+    "logo": {
+      "height": {
+        "base": "32"
+      }
+    },
+    "search": {
+      "fontSize": {
+        "base": "max(16px, 1em)"
+      },
+      "focusColor": {
+        "base": "var(--np--color)"
+      },
+      "backgroundColor": {
+        "base": "var(--np--background-color--raised)"
+      }
     }
   },
   "button": {

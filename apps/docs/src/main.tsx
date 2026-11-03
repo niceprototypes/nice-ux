@@ -1,6 +1,5 @@
 import { createRoot } from "react-dom/client"
 import App from "@niceprototypes/app"
-import Logo from "@niceprototypes/logo"
 import { applyTheme, StylesProvider } from "@niceprototypes/styles"
 import "@niceprototypes/styles/reset.css"
 import "@niceprototypes/icon-vendor"
@@ -34,7 +33,6 @@ createRoot(document.getElementById("root")!).render(
         router={docsRouter}
         aria-label="Docs"
         navSize="base"
-        header={<Logo />}
         search
       />
     </DocsSettingsContext.Provider>

@@ -112,12 +112,9 @@ export interface AppProps {
   /** Wraps every scene inside the scene region */
   wrapper?: AppWrapperType
 
-  /** A row at the top of the sidebar, above the nav and the scene sidebar (a logo); absent in the bare view */
-  header?: React.ReactNode
-
   /**
-   * Whether the sidebar shows a search field under the header: a combobox over every page's name and
-   * the story, chapter or folder names above it, which opens the picked page. Below tablet it is in the drawer
+   * Whether the sidebar's header row shows a search field right of the logo: a combobox over every
+   * page's name and the story, chapter or folder names above it, which opens the picked page
    */
   search?: boolean
 

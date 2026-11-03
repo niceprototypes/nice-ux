@@ -60,6 +60,7 @@
     "@niceprototypes/ink": "workspace:^",
     "@niceprototypes/input": "workspace:^",
     "@niceprototypes/listbox": "workspace:^",
+    "@niceprototypes/logo": "workspace:^",
     "@niceprototypes/popover": "workspace:^",
     "@niceprototypes/scroll": "workspace:^",
     "@niceprototypes/styles": "workspace:^",
@@ -113,7 +114,8 @@
     "@niceprototypes/icon": "workspace:*",
     "@niceprototypes/input": "workspace:*",
     "@niceprototypes/listbox": "workspace:*",
-    "@niceprototypes/popover": "workspace:*"
+    "@niceprototypes/popover": "workspace:*",
+    "@niceprototypes/logo": "workspace:*"
   },
   "repository": {
     "type": "git",

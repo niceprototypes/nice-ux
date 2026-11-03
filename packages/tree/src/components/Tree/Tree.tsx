@@ -1,6 +1,5 @@
 import * as React from "react"
 import Ink from "@niceprototypes/ink"
-import { breakpointKeyMatches, parseBreakpointKey, useBreakpoint } from "@niceprototypes/styles"
 import {
   StyledTree,
   StyledTreeIcon,
@@ -11,9 +10,7 @@ import {
 } from "./Tree.styles"
 import type { TreeItemsType, TreeNodeType, TreeProps } from "./Tree.types"
 import { getTreeActivePath } from "../../utilities/getTreeActivePath"
-
-/** Labels drop to the small size from this breakpoint up, unless `size` sets one. */
-const SMALL_LABELS = parseBreakpointKey("laptop+")
+import { useTreeSize } from "../../services/useTreeSize"
 
 /**
  * Tree
@@ -49,8 +46,7 @@ const Tree: React.FC<TreeProps> = ({
   size: sizeProp,
 }) => {
   const idPrefix = React.useId()
-  const breakpointSize = breakpointKeyMatches(SMALL_LABELS, useBreakpoint()) ? "small" : "base"
-  const size = sizeProp ?? breakpointSize
+  const size = useTreeSize(sizeProp)
   const activePath = React.useMemo(() => getTreeActivePath(items), [items])
   const [internalExpandedIds, setInternalExpandedIds] = React.useState<readonly string[]>(
     () => defaultExpandedIds ?? activePath.slice(0, -1),

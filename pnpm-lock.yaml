@@ -95,9 +95,6 @@ importers:
       '@niceprototypes/input':
         specifier: workspace:^
         version: link:../../packages/input
-      '@niceprototypes/logo':
-        specifier: workspace:^
-        version: link:../../packages/logo
       '@niceprototypes/scroll':
         specifier: workspace:^
         version: link:../../packages/scroll
@@ -382,6 +379,9 @@ importers:
       '@niceprototypes/listbox':
         specifier: workspace:*
         version: link:../listbox
+      '@niceprototypes/logo':
+        specifier: workspace:*
+        version: link:../logo
       '@niceprototypes/popover':
         specifier: workspace:*
         version: link:../popover

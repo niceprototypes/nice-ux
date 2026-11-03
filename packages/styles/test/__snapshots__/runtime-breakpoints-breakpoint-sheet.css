@@ -36,6 +36,7 @@
 
 @media (min-width: 641px) {
 	:root {
+		--np--app--search--font-size: var(--np--app--search--font-size--tablet);
 		--np--logo--height: var(--np--logo--height--tablet);
 	}
 }

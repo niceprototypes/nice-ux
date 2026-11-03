@@ -5,3 +5,4 @@
 
 export { default, default as Tree } from "./components/Tree"
 export * from "./components/Tree"
+export { useTreeSize } from "./services"
