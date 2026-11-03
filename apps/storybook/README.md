@@ -324,7 +324,7 @@ npm run dev
 ### Documentation
 
 - CSS Variables: http://localhost:6006/?path=/docs/documentation-css-variables--docs
-- cli: http://localhost:6006/?path=/docs/cli--docs
+- cli: http://localhost:6006/?path=/docs/cli-linking--docs
 
 ## 🚢 Deployment
 

@@ -5,13 +5,13 @@ import Code from "../../nice/Code"
 import Ink from "../../nice/Ink"
 
 <Meta
-  title="CLI/3. Building"
+  title="CLI/Building"
   name="Docs"
 />
 
 <StoryHeader title="Building" />
 
-<Ink><Ink>One-shot builds of linked package dists, in registry tier order. Use these when you are</Ink> <Ink weight="semibold">not</Ink> <Ink>running the live watcher (see</Ink> <Ink><a href="/?path=/docs/cli-4-dev-watch--docs" target="_top">Dev & Watch</a></Ink><Ink>).</Ink></Ink>
+<Ink><Ink>One-shot builds of linked package dists, in registry tier order. Use these when you are</Ink> <Ink weight="semibold">not</Ink> <Ink>running the live watcher (see</Ink> <Ink><a href="/?path=/docs/cli-dev-watch--docs" target="_top">Dev & Watch</a></Ink><Ink>).</Ink></Ink>
 
 <Line />
 
@@ -68,4 +68,4 @@ nicely --vite
 nicely --vite --no-kill
 ```
 
-<Ink><Ink>Why it's needed: a dev server (Storybook, CRA) holds a transformed copy of a linked package's dist. Rewriting that dist on disk doesn't invalidate the server's copy on its own —</Ink> <Ink code>--vite</Ink> <Ink>wipes the</Ink> <Ink code>.vite</Ink> <Ink>cache and kills the dev-server port so the next start reads the fresh dist. See</Ink> <Ink><a href="/?path=/docs/cli-7-troubleshooting--docs" target="_top">Troubleshooting → icons not updating</a></Ink><Ink>.</Ink></Ink>
+<Ink><Ink>Why it's needed: a dev server (Storybook, CRA) holds a transformed copy of a linked package's dist. Rewriting that dist on disk doesn't invalidate the server's copy on its own —</Ink> <Ink code>--vite</Ink> <Ink>wipes the</Ink> <Ink code>.vite</Ink> <Ink>cache and kills the dev-server port so the next start reads the fresh dist. See</Ink> <Ink><a href="/?path=/docs/cli-troubleshooting--docs" target="_top">Troubleshooting → icons not updating</a></Ink><Ink>.</Ink></Ink>

@@ -6,7 +6,7 @@ import Ink from "../../nice/Ink"
 import Callout from "../../components/Callout"
 
 <Meta
-  title="CLI/4. Dev & Watch"
+  title="CLI/Dev & Watch"
   name="Docs"
 />
 
@@ -89,6 +89,6 @@ CRA / webpack recompiles  (Vite: @niceprototypes/vite-watcher reloads)
 
 <Ink as="h2">Don't run a one-shot build alongside it</Ink>
 
-<Ink><Ink code>--dev --watch</Ink> <Ink>writes the same dist files a</Ink> <Ink code>--build-all</Ink> <Ink>/</Ink> <Ink code>--build-icons</Ink> <Ink>pass does. Running both at once races on</Ink> <Ink code>dist/</Ink><Ink>.</Ink> <Ink code>--build-icons</Ink> <Ink>guards against this by prompting to stop the watcher first (see</Ink> <Ink><a href="/?path=/docs/cli-3-building--docs" target="_top">Building</a></Ink><Ink>);</Ink> <Ink code>--reset</Ink> <Ink>stops it automatically.</Ink></Ink>
+<Ink><Ink code>--dev --watch</Ink> <Ink>writes the same dist files a</Ink> <Ink code>--build-all</Ink> <Ink>/</Ink> <Ink code>--build-icons</Ink> <Ink>pass does. Running both at once races on</Ink> <Ink code>dist/</Ink><Ink>.</Ink> <Ink code>--build-icons</Ink> <Ink>guards against this by prompting to stop the watcher first (see</Ink> <Ink><a href="/?path=/docs/cli-building--docs" target="_top">Building</a></Ink><Ink>);</Ink> <Ink code>--reset</Ink> <Ink>stops it automatically.</Ink></Ink>
 
-<Callout><Ink>Editing an icon while <code>--dev --watch</code> runs rebuilds <code>@niceprototypes/icon</code>'s dist correctly, but a Vite dev server (Storybook) may keep serving its cached copy until bounced — see <a href="/?path=/docs/cli-7-troubleshooting--docs" target="_top">Troubleshooting → icons not updating</a>.</Ink></Callout>
+<Callout><Ink>Editing an icon while <code>--dev --watch</code> runs rebuilds <code>@niceprototypes/icon</code>'s dist correctly, but a Vite dev server (Storybook) may keep serving its cached copy until bounced — see <a href="/?path=/docs/cli-troubleshooting--docs" target="_top">Troubleshooting → icons not updating</a>.</Ink></Callout>

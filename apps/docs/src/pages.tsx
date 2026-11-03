@@ -1,6 +1,6 @@
 import type * as React from "react"
 import { getAppPageUrl, type AppPagesType } from "@niceprototypes/app"
-import { getTree, sanitize, type DataItem } from "@niceprototypes/docs/data"
+import { getItem, getTree, sanitize, type DataItem } from "@niceprototypes/docs/data"
 import ComponentPage from "./components/ComponentPage"
 import MdxPage, { type MdxModuleType } from "./components/MdxPage"
 import TokensPage from "./components/TokensPage"
@@ -16,7 +16,7 @@ const byName = (a: string, b: string) => a.localeCompare(b, "en", { sensitivity:
 const mdxText = import.meta.glob<string>("../../../packages/docs/src/content/*/*.mdx", { query: "?raw", import: "default", eager: true })
 const mdxModules = import.meta.glob<MdxModuleType>("../../../packages/docs/src/content/*/*.mdx")
 
-/** Each MDX page's file by its data item id: the sanitized Meta title (`CLI/4. Dev & Watch` → `cli-4-dev-watch`). */
+/** Each MDX page's file by its data item id: the sanitized Meta title (`CLI/Dev & Watch` → `cli-dev-watch`). */
 const mdxByItemId = new Map(
   Object.entries(mdxText).flatMap(([path, text]) => {
     const title = /<Meta[\s\S]*?title="([^"]+)"/.exec(text)?.[1]
@@ -132,15 +132,25 @@ export const docsUrlOf = (storyId: string): string | undefined => {
   return key && getAppPageUrl(key) + id.hash
 }
 
-/** Pages that moved: Basics is Onboarding; the Manifest pages are the Welcome page's "For agents" section. */
-const moved = (id: string): { page: string; hash: string } =>
-  id === "manifest" || id.startsWith("manifest-")
-    ? { page: "onboarding-welcome", hash: "#for-agents" }
-    : { page: id.replace(/^basics-/, "onboarding-"), hash: "" }
+/** A folder's first page, depth first: where a group's own (now removed) Overview page went. */
+const firstPageOf = (item: DataItem): DataItem => (item.isFolder && item.children.length ? firstPageOf(item.children[0]) : item)
+
+/**
+ * Pages that moved: Basics is Onboarding; the Manifest pages are the Welcome page's "For agents"
+ * section; a group's Overview (`bindings--docs`) is its first page; CLI pages lost their numbers
+ * (`cli-4-dev-watch` is `cli-dev-watch`).
+ */
+const moved = (id: string): { page: string; hash: string } => {
+  if (id === "manifest" || id.startsWith("manifest-")) return { page: "onboarding-welcome", hash: "#for-agents" }
+  const renamed = id.replace(/^basics-/, "onboarding-").replace(/^cli-\d+-/, "cli-")
+  const item = getItem(renamed)
+  return { page: item?.isFolder ? firstPageOf(item).id : renamed, hash: "" }
+}
 
 /**
  * The docs URL for an address that no longer exists, or undefined: the Basics and Manifest
- * pages before they moved, subcomponents' old pages, and Storybook links
+ * pages before they moved, subcomponents' old pages, groups' removed Overview pages, numbered
+ * CLI pages, and Storybook links
  * (`/?path=/docs/onboarding-themes--docs`).
  */
 export const redirectOf = (pathname: string, search: string): string | undefined => {
@@ -148,5 +158,10 @@ export const redirectOf = (pathname: string, search: string): string | undefined
   if (story) return docsUrlOf(story)
   if (pathname.startsWith("/docs/manifest")) return docsUrlOf("manifest")
   if (pathname.startsWith("/docs/basics")) return pathname.replace(/^\/docs\/basics/, "/docs/onboarding")
-  return subcomponentPages.find(page => page.from === pathname.replace(/\/+$/, ""))?.to
+  // A group's removed Overview opens its first page; a numbered CLI page, its unnumbered one.
+  const path = pathname.replace(/\/+$/, "")
+  const urls = entries.map(([key]) => getAppPageUrl(key))
+  if (path.endsWith("/overview") && !urls.includes(path)) return urls.find(url => url.startsWith(path.replace(/overview$/, "")))
+  if (/^\/docs\/cli\/\d+-/.test(path)) return path.replace(/^\/docs\/cli\/\d+-/, "/docs/cli/")
+  return subcomponentPages.find(page => page.from === path)?.to
 }
