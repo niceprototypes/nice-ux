@@ -49,7 +49,7 @@ const ResetDemo: React.FC<ResetDemoProps> = ({
   tokensCss,
   examples,
 }) => (
-  <Flex direction="column">
+  <Flex direction="column" gap="larger">
     {examples.map((example, index) => {
       const layers = example.layers ?? []
       const css = layers.length

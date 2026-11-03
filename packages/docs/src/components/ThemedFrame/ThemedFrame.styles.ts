@@ -52,16 +52,21 @@ export const FrameIframe = styled.iframe`
  */
 export const LockClosedIcon = styled(Icon)`
   display: block;
+  color: inherit;
 `
 
 export const LockOpenIcon = styled(Icon)`
   display: none;
+  color: inherit;
 `
 
 /**
  * Full-bleed click target over the frame. The backdrop filter blurs the demo
  * underneath, so the frame reads as inert rather than as content the reader is
  * failing to interact with, and the label sits legibly on top of it.
+ * The scrim and its text colour are pinned to the night theme: a dark veil with light text
+ * in either theme (an inverse read flips to the day surface at night). The label and padlocks
+ * inherit the colour, since Ink's and Icon's own colour tokens have no night layer to pin.
  */
 export const ThemedFrameToggle = styled.div`
   position: absolute;
@@ -75,6 +80,7 @@ export const ThemedFrameToggle = styled.div`
   gap: ${getToken("gap", "smaller")};
   cursor: pointer;
   border-radius: inherit;
+  color: ${getToken("color", "base", { theme: "night" })};
 
   &:hover {
     ${LockClosedIcon} {
@@ -100,7 +106,7 @@ export const ThemedFrameToggle = styled.div`
 
   backdrop-filter: blur(8px);
   background-color: ${getToken("backgroundColor", "raised", {
-    inverse: true,
+    theme: "night",
     transform: [null, null, null, 0.375],
   })};
 `

@@ -56,7 +56,8 @@ const ResetDemoItem: React.FC<ResetDemoItemProps> = ({
   srcDoc,
   mobile,
 }) => (
-  <Flex direction="column" gap="large">
+  // The title sits a `larger` gap below ResetDemo's rule and the same gap above its content.
+  <Flex direction="column" gap="larger">
     <Ink
       as="h3"
       size="large"
@@ -64,33 +65,35 @@ const ResetDemoItem: React.FC<ResetDemoItemProps> = ({
     >
       {label}
     </Ink>
-    {description ? <Ink>{description}</Ink> : null}
-    {files?.length ? (
-      <Flex direction="column" gap="large">
-        {importSyntaxes.map(syntax => (
-          <Flex key={syntax.language} direction="column" gap="small">
-            <Ink as="h4" size="base" weight="semibold">
-              {syntax.heading}
-            </Ink>
-            <Code
-              code={files.map(syntax.line).join("\n")}
-              language={syntax.language}
-              margin="none"
-              showLabel={false}
-            />
-          </Flex>
-        ))}
+    <Flex direction="column" gap="large">
+      {description ? <Ink>{description}</Ink> : null}
+      {files?.length ? (
+        <Flex direction="column" gap="large">
+          {importSyntaxes.map(syntax => (
+            <Flex key={syntax.language} direction="column" gap="small">
+              <Ink as="h4" size="base" weight="semibold">
+                {syntax.heading}
+              </Ink>
+              <Code
+                code={files.map(syntax.line).join("\n")}
+                language={syntax.language}
+                margin="none"
+                showLabel={false}
+              />
+            </Flex>
+          ))}
+        </Flex>
+      ) : null}
+      <Flex direction="column" gap="small">
+        <Ink as="h4" size="base" weight="semibold">
+          Demo
+        </Ink>
+        <ThemedFrame
+          title={label}
+          srcDoc={srcDoc}
+          style={mobile ? frameStyleMobile : frameStyle}
+        />
       </Flex>
-    ) : null}
-    <Flex direction="column" gap="small">
-      <Ink as="h4" size="base" weight="semibold">
-        Demo
-      </Ink>
-      <ThemedFrame
-        title={label}
-        srcDoc={srcDoc}
-        style={mobile ? frameStyleMobile : frameStyle}
-      />
     </Flex>
   </Flex>
 )

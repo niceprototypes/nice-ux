@@ -11,7 +11,7 @@ const BaseDataTableHeader = ({ columns, columnWidths, title, rowSpacing }: DataT
       {columns.map((column, index) => (
         <ColumnFlex key={column.key ?? index} $width={columnWidths?.[index] ?? undefined}>
           {index === 0 && title != null ? (
-            <Ink code size="small" weight="semibold" color="base">{title}</Ink>
+            <Ink code size="small" weight="base" color="base">{title}</Ink>
           ) : column.header == null ? null : typeof column.header === "string" ? (
             <Ink code size="small" color="lightest">{column.header}</Ink>
           ) : (

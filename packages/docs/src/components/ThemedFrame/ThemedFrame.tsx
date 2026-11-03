@@ -1,6 +1,6 @@
 import * as React from "react"
 import Icon from "@niceprototypes/icon"
-import Ink from "../../nice/Ink"
+import Ink from "@niceprototypes/ink"
 import {
   FrameDiv,
   FrameIframe,
@@ -73,9 +73,9 @@ const ThemedFrame: React.FC<ThemedFrameProps> = ({ toggleLabel = "Click to scrol
       ) : (
         <ThemedFrameToggle onClick={() => setScrollable(true)}>
           <Flex gap="base" alignItems="center">
-            <LockClosedIcon name="lock-down" size="larger" strokeWidth="large" color={{ name: "base", inverse: true }} />
-            <LockOpenIcon name="lock-up" size="larger" strokeWidth="large" color={{ name: "base", inverse: true }} />
-            <Ink size="large" color={{ name: "base", inverse: true }}>
+            <LockClosedIcon name="lock-down" size="larger" strokeWidth="large" />
+            <LockOpenIcon name="lock-up" size="larger" strokeWidth="large" />
+            <Ink size="large">
               {toggleLabel}
             </Ink>
           </Flex>

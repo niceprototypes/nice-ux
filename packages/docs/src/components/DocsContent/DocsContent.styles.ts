@@ -6,7 +6,8 @@ import { getToken } from "../../nice/tokens"
  * top margin of every block after the first, so nothing doubles up and the first block sits
  * at the top: one flow step between blocks; an h2 a section step above and a smaller step
  * below, an h3 a subsection step above and a smaller one below; the page title (the first
- * block) its own step below; a rule a rule step on each side. Prose and links laid out inline
+ * block) its own step below; a rule a rule step on each side, except a heading after a rule,
+ * which gets a section step on each side. Prose and links laid out inline
  * become blocks, `<br>` spacers give way to the rhythm, and the doubled class outranks a
  * component's own margins.
  */
@@ -55,6 +56,12 @@ export const StyledDocsContent = styled.div`
   && > hr,
   && > hr + * {
     margin-top: ${getToken("docs", "rule")};
+  }
+
+  /* A heading opening a ruled section sits a section step below the rule and the same step above its content, as on the Tokens page. */
+  && > hr + :is(h2, h3),
+  && > hr + :is(h2, h3) + * {
+    margin-top: ${getToken("docs", "sectionAbove")};
   }
 
   && > :first-child {

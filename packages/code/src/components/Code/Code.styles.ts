@@ -27,6 +27,11 @@ export const CodeDiv = styled.div<{ $clickable?: boolean; $inlined?: boolean; $f
   max-width: ${getToken("code.maxWidth:base")};
   overflow: hidden;
 
+  /* Shiki's <pre> drops the user agent's 1em block margin; spacing around the block is the consumer's. */
+  pre.shiki {
+    margin: 0;
+  }
+
   /* Inline: a chip around the code (em padding, so it scales with the code), a step off the surface, lighter again under the pointer. */
   ${({ $inlined, $clickable }) =>
     $inlined &&

@@ -34,8 +34,10 @@ export const DataTableRows = ({
     depth > 0 && table.rows != null && showHeader && table.name != null
   const showHeading = table.name != null && !titleInHeader
 
+  // A top-level heading sits below DataTable's rule, a `larger` gap down; a `large` gap plus the
+  // header row's own padding puts the same visual space between heading and table.
   return (
-    <Flex direction="column">
+    <Flex direction="column" gap={depth === 0 && showHeading ? "large" : undefined}>
       {showHeading ? (
         <Ink
           as={level}
