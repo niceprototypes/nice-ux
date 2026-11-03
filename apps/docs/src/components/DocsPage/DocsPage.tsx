@@ -32,9 +32,9 @@ const Section = ({ section }: { section: DocsPageSectionType }) => (
  *
  * A docs page: its sections stacked in a column capped at `docs.columnWidth` (unless not
  * `wrapped`), and Contents
- * listing them (nested sections nested) in a sticky column on the right, from tablet up, and the
+ * listing them (nested sections nested) in a sticky column on the right, from laptop up, and the
  * site's settings (DocsSettingsContext) in a sticky column right of that; the columns sit centred
- * in the page. Below tablet the settings are a row above the sections.
+ * in the page. Below laptop the settings are a row above the sections.
  */
 const DocsPage: React.FC<DocsPageProps> = ({ sections, wrapped = true, contents }) => {
   // A link to a section or heading (`#cardheader`, `#for-agents`) lands on it once the page is in:

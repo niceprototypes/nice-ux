@@ -9,7 +9,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
-    "check:pages": "node scripts/check-pages.cjs"
+    "check:pages": "node scripts/check-pages.cjs && node scripts/check-widths.cjs"
   },
   "dependencies": {
     "@niceprototypes/app": "workspace:^",
