@@ -58,8 +58,10 @@ export const StyledAppHeader = styled.div`
  * height (the search button); `$expanded`, the field, filling the width right of the logo, its width
  * animating between the two. The anchor the results open under. Its text is the nav labels' size
  * (`$size`): it sets that font size and points the field's at `app.search.fontSize`, that size from
- * tablet up and at least 16px below (under 16px iOS zooms in on focus). The field's focus border and
- * the button's focus ring take `app.search.focusColor`, the field's raised fill `app.search.backgroundColor`.
+ * tablet up and at least 16px below (under 16px iOS zooms in on focus). The button's icon is
+ * `app.search.icon.color`, its hover and focus variant on hover and focus; the field's focus border and
+ * the button's focus ring stay `app.search.focusColor` (the border color), and the field's fill is
+ * `app.search.backgroundColor` (pure black at night, pure white by day).
  */
 export const StyledAppSearch = styled.div<{ $size: FontSizeType; $expanded: boolean }>`
   flex: 0 1 auto;
@@ -73,6 +75,9 @@ export const StyledAppSearch = styled.div<{ $size: FontSizeType; $expanded: bool
   ${getToken("input.focusRing.color", { as: "key" })}: ${getToken("app.search.focusColor")};
   ${getToken("button.focusRing.color", { as: "key" })}: ${getToken("app.search.focusColor")};
   ${getToken("input.backgroundColor:raised", { as: "key" })}: ${getToken("app.search.backgroundColor")};
+  ${getToken("button.icon.color", { as: "key" })}: ${getToken("app.search.icon.color")};
+  ${getToken("button.icon.color:hover", { as: "key" })}: ${getToken("app.search.icon.color:hover")};
+  ${getToken("button.icon.color:focus", { as: "key" })}: ${getToken("app.search.icon.color:hover")};
 
   @media (prefers-reduced-motion: reduce) {
     transition: none;

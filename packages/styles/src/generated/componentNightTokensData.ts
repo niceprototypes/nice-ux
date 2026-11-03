@@ -8,7 +8,13 @@ import type { ComponentTokenNode } from './componentTokensData.js'
 export type ComponentNightTokensData = Record<string, { [key: string]: ComponentTokenNode }>
 
 const componentNightTokensData: ComponentNightTokensData = {
-  "app": {},
+  "app": {
+    "search": {
+      "backgroundColor": {
+        "base": "hsla(0, 0%, 0%, 1)"
+      }
+    }
+  },
   "button": {},
   "calendar": {},
   "card": {},

@@ -372,7 +372,7 @@ describe("App search", () => {
     expect(screen.queryByRole("option")).not.toBeInTheDocument()
   })
 
-  it("sits in the header row right of the logo, the large gap apart, at the nav labels' size, without the link color", async () => {
+  it("sits in the header row right of the logo, the large gap apart, at the nav labels' size, in the app.search colors", async () => {
     const field = await renderSearch({ navSize: "base" })
     const logo = screen.getByRole("img", { name: "Nice Prototypes" })
     const block = logo.nextElementSibling as HTMLElement
@@ -387,6 +387,8 @@ describe("App search", () => {
     expect(property("--np--input--focus-ring--color")).toBe("var(--np--app--search--focus-color)")
     expect(property("--np--button--focus-ring--color")).toBe("var(--np--app--search--focus-color)")
     expect(property("--np--input--background-color--raised")).toBe("var(--np--app--search--background-color)")
+    expect(property("--np--button--icon--color")).toBe("var(--np--app--search--icon--color)")
+    expect(property("--np--button--icon--color--hover")).toBe("var(--np--app--search--icon--color--hover)")
     // The nav keeps the header row's gap below it.
     expect(logo.parentElement!.nextElementSibling).toContainElement(screen.getByRole("navigation"))
     expect(getComputedStyle(screen.getByRole("navigation").parentElement!).paddingBlockStart).toBe("0")

@@ -46,7 +46,7 @@ const componentTokensData: ComponentTokensData = {
     },
     "logo": {
       "height": {
-        "base": "32"
+        "base": "40"
       }
     },
     "search": {
@@ -54,10 +54,16 @@ const componentTokensData: ComponentTokensData = {
         "base": "max(16px, 1em)"
       },
       "focusColor": {
-        "base": "var(--np--color)"
+        "base": "var(--np--border-color)"
       },
       "backgroundColor": {
-        "base": "var(--np--background-color--raised)"
+        "base": "var(--np--background-color--day)"
+      },
+      "icon": {
+        "color": {
+          "base": "var(--np--color--lighter)",
+          "hover": "var(--np--color)"
+        }
       }
     }
   },

@@ -266,10 +266,12 @@
 	--np--app--handle--color: var(--np--border-color--strong);
 	--np--app--handle--padding: var(--np--gap--small);
 	--np--app--handle--padding-bottom: var(--np--gap--large);
-	--np--app--logo--height: 32;
+	--np--app--logo--height: 40;
 	--np--app--search--font-size: max(16px, 1em);
-	--np--app--search--focus-color: var(--np--color);
-	--np--app--search--background-color: var(--np--background-color--raised);
+	--np--app--search--focus-color: var(--np--border-color);
+	--np--app--search--background-color: var(--np--background-color--day);
+	--np--app--search--icon--color: var(--np--color--lighter);
+	--np--app--search--icon--color--hover: var(--np--color);
 
 	/* button component tokens */
 	--np--button--size--smaller: var(--np--size--smaller);
@@ -849,8 +851,9 @@
 	/* Component inverse colors */
 	--np--app--footer--rule--color--inverse: var(--np--border-color--inverse);
 	--np--app--handle--color--inverse: var(--np--border-color--strong--inverse);
-	--np--app--search--focus-color--inverse: var(--np--color--inverse);
-	--np--app--search--background-color--inverse: var(--np--background-color--raised--inverse);
+	--np--app--search--focus-color--inverse: var(--np--border-color--inverse);
+	--np--app--search--icon--color--inverse: var(--np--color--lighter--inverse);
+	--np--app--search--icon--color--hover--inverse: var(--np--color--inverse);
 	--np--button--background-color--inverse: var(--np--color--inverse);
 	--np--button--background-color--disabled--inverse: var(--np--color--disabled--inverse);
 	--np--button--background-color--error--inverse: var(--np--color--error--inverse);
@@ -1047,6 +1050,7 @@
 	--np--tree--guide--color--inverse: var(--np--border-color--inverse);
 
 	/* Component day mode primitives */
+	--np--app--search--background-color--day: var(--np--background-color--day);
 	--np--code--syntax-color--neutral--day: hsla(225, 4%, 17%, 1);
 	--np--code--syntax-color--green--day: hsla(155, 64%, 30%, 1);
 	--np--code--syntax-color--cyan--day: hsla(195, 69%, 34%, 1);
@@ -1055,6 +1059,7 @@
 	--np--logo--color--day: var(--np--color--day);
 
 	/* Component night mode primitives */
+	--np--app--search--background-color--night: hsla(0, 0%, 0%, 1);
 	--np--code--syntax-color--neutral--night: hsla(225, 4%, 82%, 1);
 	--np--code--syntax-color--green--night: hsla(155, 64%, 69%, 1);
 	--np--code--syntax-color--cyan--night: hsla(195, 69%, 77%, 1);
@@ -1297,6 +1302,7 @@
 		--np--color--highlight--inverse: var(--np--color--highlight--night--inverse);
 		--np--color--warning--inverse: var(--np--color--warning--night--inverse);
 		--np--color--error--inverse: var(--np--color--error--night--inverse);
+		--np--app--search--background-color: var(--np--app--search--background-color--night);
 		--np--code--syntax-color--neutral: var(--np--code--syntax-color--neutral--night);
 		--np--code--syntax-color--green: var(--np--code--syntax-color--green--night);
 		--np--code--syntax-color--cyan: var(--np--code--syntax-color--cyan--night);
@@ -1305,8 +1311,9 @@
 		--np--logo--color: var(--np--logo--color--night);
 		--np--app--footer--rule--color--inverse: var(--np--border-color--night--inverse);
 		--np--app--handle--color--inverse: var(--np--border-color--strong--night--inverse);
-		--np--app--search--focus-color--inverse: var(--np--color--night--inverse);
-		--np--app--search--background-color--inverse: var(--np--background-color--raised--night--inverse);
+		--np--app--search--focus-color--inverse: var(--np--border-color--night--inverse);
+		--np--app--search--icon--color--inverse: var(--np--color--lighter--night--inverse);
+		--np--app--search--icon--color--hover--inverse: var(--np--color--night--inverse);
 		--np--button--background-color--inverse: var(--np--color--night--inverse);
 		--np--button--background-color--disabled--inverse: var(--np--color--disabled--night--inverse);
 		--np--button--background-color--error--inverse: var(--np--color--error--night--inverse);
@@ -1503,8 +1510,9 @@
 		--np--tree--guide--color--inverse: var(--np--border-color--night--inverse);
 		--np--app--footer--rule--color: var(--np--border-color--night);
 		--np--app--handle--color: var(--np--border-color--strong--night);
-		--np--app--search--focus-color: var(--np--color--night);
-		--np--app--search--background-color: var(--np--background-color--raised--night);
+		--np--app--search--focus-color: var(--np--border-color--night);
+		--np--app--search--icon--color: var(--np--color--lighter--night);
+		--np--app--search--icon--color--hover: var(--np--color--night);
 		--np--button--background-color: var(--np--color--night);
 		--np--button--background-color--disabled: var(--np--color--disabled--night);
 		--np--button--background-color--error: var(--np--color--error--night);
@@ -1759,6 +1767,7 @@
 		--np--color--highlight--inverse: var(--np--color--highlight--day--inverse);
 		--np--color--warning--inverse: var(--np--color--warning--day--inverse);
 		--np--color--error--inverse: var(--np--color--error--day--inverse);
+		--np--app--search--background-color: var(--np--app--search--background-color--day);
 		--np--code--syntax-color--neutral: var(--np--code--syntax-color--neutral--day);
 		--np--code--syntax-color--green: var(--np--code--syntax-color--green--day);
 		--np--code--syntax-color--cyan: var(--np--code--syntax-color--cyan--day);
@@ -1767,8 +1776,9 @@
 		--np--logo--color: var(--np--logo--color--day);
 		--np--app--footer--rule--color--inverse: var(--np--border-color--day--inverse);
 		--np--app--handle--color--inverse: var(--np--border-color--strong--day--inverse);
-		--np--app--search--focus-color--inverse: var(--np--color--day--inverse);
-		--np--app--search--background-color--inverse: var(--np--background-color--raised--day--inverse);
+		--np--app--search--focus-color--inverse: var(--np--border-color--day--inverse);
+		--np--app--search--icon--color--inverse: var(--np--color--lighter--day--inverse);
+		--np--app--search--icon--color--hover--inverse: var(--np--color--day--inverse);
 		--np--button--background-color--inverse: var(--np--color--day--inverse);
 		--np--button--background-color--disabled--inverse: var(--np--color--disabled--day--inverse);
 		--np--button--background-color--error--inverse: var(--np--color--error--day--inverse);
@@ -1965,8 +1975,9 @@
 		--np--tree--guide--color--inverse: var(--np--border-color--day--inverse);
 		--np--app--footer--rule--color: var(--np--border-color--day);
 		--np--app--handle--color: var(--np--border-color--strong--day);
-		--np--app--search--focus-color: var(--np--color--day);
-		--np--app--search--background-color: var(--np--background-color--raised--day);
+		--np--app--search--focus-color: var(--np--border-color--day);
+		--np--app--search--icon--color: var(--np--color--lighter--day);
+		--np--app--search--icon--color--hover: var(--np--color--day);
 		--np--button--background-color: var(--np--color--day);
 		--np--button--background-color--disabled: var(--np--color--disabled--day);
 		--np--button--background-color--error: var(--np--color--error--day);
@@ -2220,6 +2231,7 @@
 		--np--color--highlight--inverse: var(--np--color--highlight--night--inverse);
 		--np--color--warning--inverse: var(--np--color--warning--night--inverse);
 		--np--color--error--inverse: var(--np--color--error--night--inverse);
+		--np--app--search--background-color: var(--np--app--search--background-color--night);
 		--np--code--syntax-color--neutral: var(--np--code--syntax-color--neutral--night);
 		--np--code--syntax-color--green: var(--np--code--syntax-color--green--night);
 		--np--code--syntax-color--cyan: var(--np--code--syntax-color--cyan--night);
@@ -2228,8 +2240,9 @@
 		--np--logo--color: var(--np--logo--color--night);
 		--np--app--footer--rule--color--inverse: var(--np--border-color--night--inverse);
 		--np--app--handle--color--inverse: var(--np--border-color--strong--night--inverse);
-		--np--app--search--focus-color--inverse: var(--np--color--night--inverse);
-		--np--app--search--background-color--inverse: var(--np--background-color--raised--night--inverse);
+		--np--app--search--focus-color--inverse: var(--np--border-color--night--inverse);
+		--np--app--search--icon--color--inverse: var(--np--color--lighter--night--inverse);
+		--np--app--search--icon--color--hover--inverse: var(--np--color--night--inverse);
 		--np--button--background-color--inverse: var(--np--color--night--inverse);
 		--np--button--background-color--disabled--inverse: var(--np--color--disabled--night--inverse);
 		--np--button--background-color--error--inverse: var(--np--color--error--night--inverse);
@@ -2426,8 +2439,9 @@
 		--np--tree--guide--color--inverse: var(--np--border-color--night--inverse);
 		--np--app--footer--rule--color: var(--np--border-color--night);
 		--np--app--handle--color: var(--np--border-color--strong--night);
-		--np--app--search--focus-color: var(--np--color--night);
-		--np--app--search--background-color: var(--np--background-color--raised--night);
+		--np--app--search--focus-color: var(--np--border-color--night);
+		--np--app--search--icon--color: var(--np--color--lighter--night);
+		--np--app--search--icon--color--hover: var(--np--color--night);
 		--np--button--background-color: var(--np--color--night);
 		--np--button--background-color--disabled: var(--np--color--disabled--night);
 		--np--button--background-color--error: var(--np--color--error--night);

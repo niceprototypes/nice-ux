@@ -43,14 +43,16 @@ createRoot(root).render(<App scenes={scenes} docs={docs} pages={pages} router={p
 ```
 
 The sidebar's header row, above the nav and the scene sidebar, with the nav's padding, holds the
-Nice logo at `app.logo.height` (32); the bare view leaves it out. `search` adds a search button at
+Nice logo at `app.logo.height` (40); the bare view leaves it out. `search` adds a search button at
 the row's end, the large gap from the logo: clicked (or Enter, Space) it expands into a field filling
 the row, focused, and collapses back on Escape or when left empty. The field is a combobox over every
 page's name and the story, chapter or folder names above it. Names that start with the query come
 first, then names that hold it, then pages under a matching story or chapter (ten at most); the arrow
 keys and Enter or a click open one, and a pick closes the drawer. Its text is the nav labels' size
-from tablet up (`app.search.fontSize`), at least 16px below; its focus border and the button's focus
-ring are `app.search.focusColor` (the text color) and its fill `app.search.backgroundColor` (raised).
+from tablet up (`app.search.fontSize`), at least 16px below. The button shows only its icon at rest
+(`app.search.icon.color`, the nav's gray) and on hover a white icon (`app.search.icon.color:hover`) in
+the border; the field's border stays gray when focused (`app.search.focusColor`) on a pure black fill
+at night, pure white by day (`app.search.backgroundColor`).
 
 Below tablet the sidebar is a drawer: the header row gets a menu button
 (`aria-expanded`, `aria-controls`) that opens it over the scene region and closes it again. Escape

@@ -36,7 +36,7 @@
   },
   "logo": {
     "height": {
-      "base": "32"
+      "base": "40"
     }
   },
   "search": {
@@ -44,10 +44,16 @@
       "base": "max(16px, 1em)"
     },
     "focusColor": {
-      "base": "var(--np--color)"
+      "base": "var(--np--border-color)"
     },
     "backgroundColor": {
-      "base": "var(--np--background-color--raised)"
+      "base": "var(--np--background-color--day)"
+    },
+    "icon": {
+      "color": {
+        "base": "var(--np--color--lighter)",
+        "hover": "var(--np--color)"
+      }
     }
   },
   "$breakpoints": {
@@ -60,6 +66,12 @@
     }
   },
   "$themes": {
-    "night": {}
+    "night": {
+      "search": {
+        "backgroundColor": {
+          "base": "hsla(0, 0%, 0%, 1)"
+        }
+      }
+    }
   }
 }

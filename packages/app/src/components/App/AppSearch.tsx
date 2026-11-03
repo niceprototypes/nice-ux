@@ -100,7 +100,15 @@ const AppSearch: React.FC<{
   return (
     <StyledAppSearch ref={anchor} $size={size} $expanded={open}>
       {!open ? (
-        <Button ref={button} size="small" iconLeft="search" aria-label={ariaLabel} onClick={() => setOpen(true)} />
+        <Button
+          ref={button}
+          size="small"
+          iconLeft="search"
+          // At rest only the icon shows; hover and focus draw the border.
+          ghost={{ rest: true }}
+          aria-label={ariaLabel}
+          onClick={() => setOpen(true)}
+        />
       ) : (
         <Input
           type="search"
