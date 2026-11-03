@@ -12,14 +12,12 @@ interface InstallProps {
   with?: string
   /** Install as a dev dependency — renders `npm i -D @niceprototypes/{package}`. @default false */
   dev?: boolean
-  /** Strip the card chrome so the command sits flush inline. Forwarded to CodeBlock. @default false */
-  inlined?: boolean
 }
 
-const Install: React.FC<InstallProps> = ({ package: pkg, with: peers, dev = false, inlined = false }) => (
+/** The install command as an inline Code chip: one line, copied on click, with the "Copy to clipboard" tooltip. */
+const Install: React.FC<InstallProps> = ({ package: pkg, with: peers, dev = false }) => (
   <Code
-    fit
-    inlined={inlined}
+    inlined
     language="bash"
     code={`npm i ${dev ? "-D " : ""}@niceprototypes/${pkg}${peers ? ` ${peers}` : ""}`}
   />

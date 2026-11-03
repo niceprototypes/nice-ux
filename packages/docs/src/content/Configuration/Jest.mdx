@@ -2,6 +2,7 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import { StoryHeader } from "../../components/Story"
 import Install from "../../components/Install"
 import Line from "../../components/Line"
+import Code from "../../nice/Code"
 import Ink from "../../nice/Ink"
 
 <Meta
@@ -58,9 +59,7 @@ export { default } from "@niceprototypes/config-jest/react"
 
 <Ink>Install the required peer dependencies:</Ink>
 
-```bash
-npm install -D jest ts-jest jest-environment-jsdom @testing-library/jest-dom
-```
+<Code code="npm install -D jest ts-jest jest-environment-jsdom @testing-library/jest-dom" language="bash" inlined />
 
 <Line />
 
