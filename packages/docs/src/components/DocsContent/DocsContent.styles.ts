@@ -24,7 +24,8 @@ export const StyledDocsContent = styled.div`
     display: block;
   }
 
-  && > a {
+  /* Bare MDX links only: a styled link component (it carries a class) keeps its own display. */
+  && > a:not([class]) {
     display: block;
     width: fit-content;
   }
