@@ -22,6 +22,8 @@ interface NewsSection {
    */
   date: number
   items: React.ReactNode[]
+  /** Kept in the source, left out of the bulletin. */
+  archived?: boolean
 }
 
 const HOUR_MS = 60 * 60 * 1000
@@ -40,6 +42,7 @@ function timeAgo(timestamp: number): string {
 const SECTIONS: NewsSection[] = [
   {
     title: "Manifest is now public and ready for teams to use",
+    archived: true,
     // Added 2026-09-22 — the manifest published for public use.
     date: new Date("2026-09-22T18:41:00-04:00").getTime(),
     items: [
@@ -51,6 +54,7 @@ const SECTIONS: NewsSection[] = [
   },
   {
     title: "You can now have agents tune your colors quickly and safely",
+    archived: true,
     // Added 2026-09-16 in 994b2cc ("add colors section").
     date: new Date("2026-09-16T17:48:00-04:00").getTime(),
     items: [
@@ -72,10 +76,10 @@ const SECTIONS: NewsSection[] = [
       "AI may now tweak semantic HSLA-based color tokens, instead of inventing new hex colors (always valid, type-checked and theme-correct)",
     ],
   },
-  /*
-   * Commented out 2026-09-22 — the earliest item, rolled off as newer news was added above.
   {
     title: "Agents can now access every token and breakpoint from one place",
+    // Rolled off 2026-09-22, as newer news was added above.
+    archived: true,
     // The panel's original item, added 2026-09-16 in 07ec01c.
     date: new Date("2026-09-16T17:33:00-04:00").getTime(),
     items: [
@@ -97,7 +101,6 @@ const SECTIONS: NewsSection[] = [
       "Changing a breakpoint updates every media query at once (JS and CSS stay synced)",
     ],
   },
-  */
 ]
 
 const OuterFlex = styled(Flex).attrs({
@@ -149,11 +152,16 @@ const MarkerFlex = styled(Flex).attrs({
 /**
  * The bulletin block at the top of the Welcome page — each section a
  * headline marked by the shared icon, with its points beneath it. Content
- * lives in {@link SECTIONS}.
+ * lives in {@link SECTIONS}; archived sections stay there but are not shown, and with
+ * none left the bulletin renders nothing.
  */
-const LatestNews: React.FC = () => (
+/** The sections the bulletin shows: every one not archived. */
+const SHOWN = SECTIONS.filter(section => !section.archived)
+
+const LatestNews: React.FC = () =>
+  SHOWN.length === 0 ? null : (
   <OuterFlex>
-    {SECTIONS.map((section, sectionIndex) => (
+    {SHOWN.map((section, sectionIndex) => (
       // Static list authored in order, so the index is a stable identity.
       <React.Fragment key={sectionIndex}>
         <Flex
@@ -216,7 +224,7 @@ const LatestNews: React.FC = () => (
             </ul>
           </Flex>
         </Flex>
-        {sectionIndex < SECTIONS.length - 1 && <Line />}
+        {sectionIndex < SHOWN.length - 1 && <Line />}
       </React.Fragment>
     ))}
   </OuterFlex>
