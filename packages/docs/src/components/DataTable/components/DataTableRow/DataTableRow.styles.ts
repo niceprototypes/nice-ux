@@ -1,15 +1,16 @@
 import styled from "styled-components"
 import Flex from "@niceprototypes/flex"
 import { getBreakpoint, getToken } from "@niceprototypes/styles"
+import type { RowFromType } from "./DataTableRow.helpers"
 
 // Wraps each row column. Without a width it inherits RowFlex's equal-flex sizing
-// (`> * { flex: 1 1 0 }`); with one, it pins the column to that width at tablet+,
-// where the row is horizontal. `&&` doubles class specificity so the pin beats
+// (`> * { flex: 1 1 0 }`); with one, it pins the column to that width from `$from`
+// up, where the row is horizontal. `&&` doubles class specificity so the pin beats
 // RowFlex's `> *` rule; the inner cell fills the column via `> * { width: 100% }`.
-export const ColumnFlex = styled(Flex)<{ $width?: string | null }>`
+export const ColumnFlex = styled(Flex)<{ $width?: string | null; $from: RowFromType }>`
   min-width: 0;
 
-  ${getBreakpoint("tablet+")} {
+  ${({ $from }) => getBreakpoint(`${$from}+`)} {
     ${({ $width }) =>
       $width &&
       `
@@ -42,7 +43,7 @@ export const RowDivider = styled.hr`
 
 // `$condensed` removes the top padding (keeping the bottom padding), collapsing
 // rows against each other. The dividers are a separate concern — see `showLines`.
-export const RowFlex = styled(Flex)<{ $highlighted?: boolean; $condensed?: boolean }>`
+export const RowFlex = styled(Flex)<{ $highlighted?: boolean; $condensed?: boolean; $from: RowFromType }>`
   /* Vertical rim from padding="base none"; a base inline padding rim + an equal
      negative inline margin so a highlighted row bleeds into the gutter while its
      content stays aligned with the surrounding rows. */
@@ -107,7 +108,7 @@ export const RowFlex = styled(Flex)<{ $highlighted?: boolean; $condensed?: boole
     }
   }
 
-  ${getBreakpoint("tablet+")} {
+  ${({ $from }) => getBreakpoint(`${$from}+`)} {
     > * {
       flex: 1 1 0;
       min-width: 0;

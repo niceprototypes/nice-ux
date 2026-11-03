@@ -1,5 +1,6 @@
   import type { GapType } from "@niceprototypes/styles"
 import type { DataColumn, DataTableConfig } from "../DataTable/DataTable.types"
+import type { RowFromType } from "../DataTableRow/DataTableRow.helpers"
 
 export interface DataTableRowsProps {
   /** The table node — an optional `name`, and `rows` and/or nested `tables`. */
@@ -18,6 +19,8 @@ export interface DataTableRowsProps {
   condensed?: boolean
   /** Vertical padding on each row's outermost Flex, as the `${rowSpacing} none` gap shorthand. */
   rowSpacing?: GapType
+  /** The breakpoint from which the columns sit side by side; below it they stack. @default "tablet" */
+  rowFrom?: RowFromType
   /** Cap each section heading at the content width (rows stay full width). @default false */
   sectionWrapped?: boolean
 }

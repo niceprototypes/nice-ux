@@ -21,6 +21,7 @@ export const DataTableRows = ({
   showLines = false,
   condensed = false,
   rowSpacing,
+  rowFrom,
   sectionWrapped = false,
 }: DataTableRowsProps) => {
   const level = LEVELS[Math.min(depth, 2)]
@@ -58,6 +59,7 @@ export const DataTableRows = ({
                 columnWidths={columnWidths}
                 title={titleInHeader ? table.name : undefined}
                 rowSpacing={rowSpacing}
+                rowFrom={rowFrom}
               />
             ) : null}
             {table.rows.map((item, index) => (
@@ -71,6 +73,7 @@ export const DataTableRows = ({
                   highlighted={item.highlighted}
                   condensed={condensed}
                   rowSpacing={rowSpacing}
+                  rowFrom={rowFrom}
                 />
               </Fragment>
             ))}
@@ -87,6 +90,7 @@ export const DataTableRows = ({
             showLines={showLines}
             condensed={condensed}
             rowSpacing={rowSpacing}
+            rowFrom={rowFrom}
             sectionWrapped={sectionWrapped}
           />
         ))}

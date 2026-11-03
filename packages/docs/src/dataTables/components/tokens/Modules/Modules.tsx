@@ -13,7 +13,8 @@ const columnSetOf = (config: ModuleTokenTableSectionConfig): TokenColumnSetType 
  * The theme-aware token-table renderer. Reads the runtime theme + deep-link
  * highlight once, turns each config into a `DataTable` node (a leaf group, or a
  * cluster of groups nested one heading level deeper), and hands each run of
- * consecutive sections sharing a column set to one `DataTable`.
+ * consecutive sections sharing a column set to one `DataTable`. Token rows (name,
+ * CSS, then the value cells) stack below laptop, where they do not fit side by side.
  */
 export default function ModuleTokenTable({ sections, sectionWrapped }: ModuleTokenTableProps) {
   const isNight = useNiceTheme() === "night"
@@ -37,6 +38,7 @@ export default function ModuleTokenTable({ sections, sectionWrapped }: ModuleTok
         <DataTable
           key={index}
           {...getColumns(columnSetOf(run[0]))}
+          rowFrom="laptop"
           sectionWrapped={sectionWrapped}
           tables={run.map(toTable)}
         />

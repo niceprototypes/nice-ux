@@ -13,12 +13,12 @@ import type { DataTableProps } from "./DataTable.types"
  * cluster is `[{ name, tables: [...] }]`. Each entry is rendered by
  * `DataTableRows`, with a rule above each top-level entry.
  */
-export const DataTable = ({ columns, tables, columnWidths, showHeader = true, showLines = false, condensed = false, rowSpacing = "base", sectionWrapped = false }: DataTableProps) => (
+export const DataTable = ({ columns, tables, columnWidths, showHeader = true, showLines = false, condensed = false, rowSpacing = "base", rowFrom, sectionWrapped = false }: DataTableProps) => (
   <Flex direction="column" gap="larger">
     {tables.map((table, index) => (
       <React.Fragment key={tableKey(table, index)}>
         <Line />
-        <DataTableRows table={table} columns={columns} columnWidths={columnWidths} showHeader={showHeader} showLines={showLines} condensed={condensed} rowSpacing={rowSpacing} sectionWrapped={sectionWrapped} />
+        <DataTableRows table={table} columns={columns} columnWidths={columnWidths} showHeader={showHeader} showLines={showLines} condensed={condensed} rowSpacing={rowSpacing} rowFrom={rowFrom} sectionWrapped={sectionWrapped} />
       </React.Fragment>
     ))}
   </Flex>

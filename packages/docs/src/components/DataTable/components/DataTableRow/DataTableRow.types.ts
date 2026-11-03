@@ -1,6 +1,7 @@
 import * as React from "react"
 import type { GapType } from "@niceprototypes/styles"
 import type { DataColumn } from "../DataTable/DataTable.types"
+import type { RowFromType } from "./DataTableRow.helpers"
 
 export interface DataTableRowProps {
   /** Column definitions — render policy. */
@@ -15,4 +16,6 @@ export interface DataTableRowProps {
   condensed?: boolean
   /** Vertical padding on the row's outermost Flex, applied as the `${rowSpacing} none` gap shorthand. */
   rowSpacing?: GapType
+  /** The breakpoint from which the columns sit side by side; below it they stack. @default "tablet" */
+  rowFrom?: RowFromType
 }

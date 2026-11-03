@@ -1,6 +1,7 @@
 import type * as React from "react"
 import type { GapType } from "@niceprototypes/styles"
 import type { DataColumn } from "../DataTable/DataTable.types"
+import type { RowFromType } from "../DataTableRow/DataTableRow.helpers"
 
 export interface DataTableHeaderProps {
   /** Column definitions — each `header` labels its column. */
@@ -9,6 +10,8 @@ export interface DataTableHeaderProps {
   columnWidths?: (string | null)[]
   /** Vertical padding on the header row's outermost Flex, as the `${rowSpacing} none` gap shorthand. */
   rowSpacing?: GapType
+  /** The breakpoint from which the columns sit side by side; below it they stack. @default "tablet" */
+  rowFrom?: RowFromType
   /**
    * The leaf table's title, rendered in the first cell (small/semibold/base) in
    * place of that column's (empty) header. Set/cluster tables keep a heading

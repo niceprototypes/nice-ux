@@ -1,5 +1,6 @@
 import * as React from "react"
 import type { ColorType, FontSizeType, GapType } from "@niceprototypes/styles"
+import type { RowFromType } from "../DataTableRow/DataTableRow.helpers"
 
 /** Language for a `@niceprototypes/code` column. */
 export type DataLanguage = "tsx" | "css"
@@ -89,6 +90,8 @@ export interface DataTableProps {
    * Omitted leaves rows with no extra vertical padding.
    */
   rowSpacing?: GapType
+  /** The breakpoint from which the columns sit side by side; below it they stack. @default "tablet" */
+  rowFrom?: RowFromType
   /** Cap each section heading at the content width (rows stay full width). @default false */
   sectionWrapped?: boolean
 }
