@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "pnpm -r build",
-    "test": "pnpm -r test && pnpm build-docs",
+    "test": "pnpm -r test && pnpm build-docs && pnpm build-storybook",
     "typecheck": "pnpm -r typecheck",
     "storybook": "pnpm --filter @niceprototypes/storybook dev",
     "build-storybook": "pnpm --filter @niceprototypes/storybook build",
