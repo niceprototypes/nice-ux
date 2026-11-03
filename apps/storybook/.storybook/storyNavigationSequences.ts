@@ -12,16 +12,16 @@ import type {
  * ids use the slug Storybook generates from each page's `<Meta title>`.
  */
 export const storyNavigationSequences: StoryNavigationSequence[] = [
-  // Basics — the guided tutorial flow, continuing into the Scenarios
+  // Onboarding — the guided tutorial flow, continuing into the Scenarios
   // section (the culminating easy/medium/hard examples).
   [
-    { id: "basics-welcome--docs", label: "Welcome" },
-    { id: "basics-reset--docs", label: "Reset" },
-    { id: "basics-tokens--docs", label: "Tokens" },
-    { id: "basics-fonts--docs", label: "Fonts" },
-    { id: "basics-icons--docs", label: "Icons" },
-    { id: "basics-breakpoints--docs", label: "Breakpoints" },
-    { id: "basics-themes--docs", label: "Themes" },
+    { id: "onboarding-welcome--docs", label: "Welcome" },
+    { id: "onboarding-reset--docs", label: "Reset" },
+    { id: "onboarding-tokens--docs", label: "Tokens" },
+    { id: "onboarding-fonts--docs", label: "Fonts" },
+    { id: "onboarding-icons--docs", label: "Icons" },
+    { id: "onboarding-breakpoints--docs", label: "Breakpoints" },
+    { id: "onboarding-themes--docs", label: "Themes" },
     { id: "scenarios-easy--docs", label: "Easy" },
     { id: "scenarios-medium--docs", label: "Medium" },
     { id: "scenarios-hard--docs", label: "Hard" },

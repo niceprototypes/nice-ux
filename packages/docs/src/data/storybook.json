@@ -128,7 +128,7 @@
   },
   "items": [
     {
-      "Basics": {
+      "Onboarding": {
         "wrapped": true,
         "items": [
           "Welcome",
@@ -146,19 +146,6 @@
             }
           },
           "Themes"
-        ]
-      }
-    },
-    {
-      "Manifest": {
-        "items": [
-          "Welcome",
-          "Discipline",
-          "Read",
-          "Edit",
-          "Build",
-          "Publish",
-          "Topics"
         ]
       }
     },

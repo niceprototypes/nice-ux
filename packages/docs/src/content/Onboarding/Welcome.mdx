@@ -1,0 +1,229 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import Flex from "@niceprototypes/flex"
+import WelcomeLink from "../../components/WelcomeLink"
+import LatestNews from "../../components/LatestNews"
+import NewLines from "../../components/NewLines/index.ts"
+import Callout from "../../components/Callout"
+import Line from "../../components/Line"
+import RepoLink from "../../components/RepoLink"
+import Ink from "../../nice/Ink"
+import { DataTable } from "../../components/DataTable"
+
+<Meta
+  title="Onboarding/Welcome"
+  name="Docs"
+/>
+
+<NewLines />
+
+<LatestNews />
+
+<NewLines count={3} />
+
+<Flex
+  direction="column"
+  gap="base"
+>
+  <WelcomeLink
+    storyId="onboarding-reset--docs"
+    iconName="eraser"
+    title="Reset"
+  >
+    <span>Sensible, configurable, token-driven style defaults for all</span>
+  </WelcomeLink>
+  <WelcomeLink
+    storyId="onboarding-tokens--docs"
+    iconName="palette"
+    title="Tokens"
+  >
+    <span>Relentlessly semantic token matrix all in a single getter</span>
+  </WelcomeLink>
+  <WelcomeLink
+    storyId="onboarding-fonts--docs"
+    iconName="font"
+    title="Fonts"
+  >
+    <span>Drop-in Google and Adobe fonts, or swap in your own fonts</span>
+  </WelcomeLink>
+  <WelcomeLink
+    storyId="onboarding-icons--docs"
+    iconName="star"
+    title="Icons"
+  >
+    <span>Your favorite format, outlined or filled, and a Base64 option</span>
+  </WelcomeLink>
+  <WelcomeLink
+    storyId="onboarding-breakpoints--docs"
+    iconName="phone"
+    title="Breakpoints"
+  >
+    <span>Total control at any viewport, set once, UI follows forever</span>
+  </WelcomeLink>
+  <WelcomeLink
+    storyId="onboarding-themes--docs"
+    iconName="moon"
+    title="Themes"
+  >
+    <span>Day, night, and custom themes, for widgets or your entire UI</span>
+  </WelcomeLink>
+</Flex>
+
+<Line />
+
+<Ink as="h2">For agents</Ink>
+
+<Ink>The context manifest for AI assistants working on the Nice ecosystem.</Ink>
+
+<RepoLink repo={{ name: "nice-manifest", url: "https://github.com/niceprototypes/nice-manifest", license: "MIT" }} />
+
+<Ink><Ink>The</Ink> <Ink weight="semibold">Nice Manifest</Ink> <Ink>is its own repository, cloned alongside the packages it documents. Every pattern, convention, and piece of logic an AI instance needs to work on any</Ink> <Ink code>nice-*</Ink> <Ink>package is documented there — if it is not in the manifest, an AI instance will not know it exists.</Ink></Ink>
+
+<Line />
+
+<Ink as="h3">Load model</Ink>
+
+<Ink><Ink>"Read the manifest" does not mean read all 40+ files. It loads the always-on</Ink> <Ink weight="semibold">Core</Ink><Ink>, then lazy-loads a topic body only when the task touches it.</Ink></Ink>
+
+<DataTable
+  columns={[{ key: "c0", header: "Layer" }, { key: "c1", header: "Loads" }, { key: "c2", header: "When" }]}
+  tables={[{ rows: [
+    { id: "0", values: [<Ink><Ink weight="semibold">Core</Ink></Ink>, <Ink>all of <code>discipline/</code> + the root <code>README.md</code> index</Ink>, <Ink>always</Ink>] },
+    { id: "1", values: [<Ink><Ink weight="semibold">Topics</Ink></Ink>, <Ink>the <code>read/</code> <code>edit/</code> <code>build/</code> <code>publish/</code> <code>topics/</code> files</Ink>, <Ink>on demand</Ink>] },
+  ] }]}
+/>
+
+<Callout type="learning">An agent cannot load a topic it does not know exists. The root README's File Tree names every file and its purpose, so the right doc is always discoverable from the Core.</Callout>
+
+<Line />
+
+<Ink as="h3">The folders</Ink>
+
+<Ink><Ink>The manifest is organized by phase of work.</Ink> <Ink code>discipline/</Ink> <Ink>is the always-on Core; the rest load when the task points to them.</Ink></Ink>
+
+
+<Ink as="h3">Discipline</Ink>
+
+<Ink>Behavioral rules for AI instances working in the ecosystem — the meta-rules that govern how any work is done, in any phase.</Ink>
+
+<Ink><Ink>These are not phase-of-work guides like Read or Edit. They are the always-on</Ink> <Ink weight="semibold">Core</Ink><Ink>: loaded on every "read the manifest" and applied to all work, always. When a rule in another folder conflicts with a rule here, the discipline rule wins.</Ink></Ink>
+
+<DataTable
+  columns={[{ key: "c0", header: "File" }, { key: "c1", header: "Contents" }]}
+  tables={[{ rows: [
+    { id: "0", values: [<Ink><code>responsiveness.md</code></Ink>, <Ink>Never go unresponsive. No foreground subagents (<code>run_in_background: true</code> always); don't delegate small/mechanical work; emit progress every ~3 tool calls; match effort to task size.</Ink>] },
+    { id: "1", values: [<Ink><code>grounding.md</code></Ink>, <Ink>Never present a guess as fact. Verify before claiming; tag every factual claim <code>[verified]</code> / <code>[inferred]</code> / <code>[guess]</code>; never invent a typed or enumerated value (read the registry).</Ink>] },
+    { id: "2", values: [<Ink><code>refactor-safety.md</code></Ink>, <Ink>Every save must compile — both directions. <Ink weight="semibold">Adding:</Ink> define the referent fully before any consumer references it. <Ink weight="semibold">Removing:</Ink> delete every reference before the import or definition. State the edit order before the first edit. The manifest's most-violated rule.</Ink>] },
+    { id: "3", values: [<Ink><code>offboarding.md</code></Ink>, <Ink>Before finishing a unit of work, reconcile every new discrepancy your change opened between the manifest and the package. The per-change, self-reviewed subset of the audit.</Ink>] },
+    { id: "4", values: [<Ink><code>scope.md</code></Ink>, <Ink>Do exactly what was asked. No unrequested rewrites, abstractions, extra components, or adjacent "improvements". An incidental mention is context, not a request.</Ink>] },
+    { id: "5", values: [<Ink><code>communication.md</code></Ink>, <Ink>No sycophancy, fake-human tone, lecturing, or unsolicited caveats and next-steps. Announce long or hanging ops. Match answer length to the question.</Ink>] },
+    { id: "6", values: [<Ink><code>stale-first.md</code></Ink>, <Ink>Before investigating "broken" code, rule out stale state — browser tab, dev server, un-rebuilt package — especially right after your own rename. The biggest token sink.</Ink>] },
+  ] }]}
+/>
+
+<Callout type="learning">Discipline cuts across every phase (read, edit, build, publish). It is loaded first and applied always, which is why it lives outside the phase folders and outranks them on conflict.</Callout>
+
+<Ink as="h3">Read</Ink>
+
+<Ink>Understanding the Nice ecosystem's existing structure — the phase before any change.</Ink>
+
+<Ink>Files here are topic references: load the one your task or the root index points to, not all of them.</Ink>
+
+<DataTable
+  columns={[{ key: "c0", header: "File" }, { key: "c1", header: "Contents" }]}
+  tables={[{ rows: [
+    { id: "0", values: [<Ink><code>inheritance.md</code></Ink>, <Ink>Package hierarchy, dependency graph, layered system design.</Ink>] },
+    { id: "1", values: [<Ink><code>audit.md</code></Ink>, <Ink>The audits — architecture (manifest ↔ architecture ↔ stories) and full (architecture + all consumers) — their trigger phrases and scope, plus known manifest gaps.</Ink>] },
+    { id: "2", values: [<Ink><code>projects/storybook.md</code></Ink>, <Ink>@niceprototypes/storybook structure and scripts.</Ink>] },
+    { id: "3", values: [<Ink><code>projects/website.md</code></Ink>, <Ink>nice-website-2025 structure and scripts.</Ink>] },
+    { id: "4", values: [<Ink><code>styles/tokens.md</code></Ink>, <Ink>Token naming conventions and <code>getToken</code> usage.</Ink>] },
+  ] }]}
+/>
+
+<Callout type="hint">The package layers, deps flowing down: Application (storybook, website) → Feature (react-button) → Utility (flex, ink, tile, icon) → Context (react-styles) → Foundation (styles, icons, configuration).</Callout>
+
+<Ink as="h3">Edit</Ink>
+
+<Ink>Standards for creating new assets in the Nice ecosystem.</Ink>
+
+<Ink>Files here are topic references: load the one your task or the root index points to. Before editing any package, read every source file in it and trace the import chain from the entry point — duplicate and dead files exist, and editing the wrong copy fails silently.</Ink>
+
+<DataTable
+  columns={[{ key: "c0", header: "File" }, { key: "c1", header: "Contents" }]}
+  tables={[{ rows: [
+    { id: "0", values: [<Ink><code>component.md</code></Ink>, <Ink>Component package structure, types, tokens.</Ink>] },
+    { id: "1", values: [<Ink><code>comments.md</code></Ink>, <Ink>Inline code comment standards for AI readability.</Ink>] },
+    { id: "2", values: [<Ink><code>generators.md</code></Ink>, <Ink>Generators and emitters: pipeline shape, structure rules, documentation standard, <code>node:test</code> snapshot tests.</Ink>] },
+    { id: "3", values: [<Ink><code>storybook.md</code></Ink>, <Ink>Story file patterns for @niceprototypes/storybook.</Ink>] },
+    { id: "4", values: [<Ink><code>session-log.md</code></Ink>, <Ink><Ink weight="semibold">Deprecated.</Ink> Session logs are now per-package <code>.nice/bump.md</code> files; this file records what moved and keeps the mistake-reporting format.</Ink>] },
+    { id: "5", values: [<Ink>build config</Ink>, <Ink><Ink weight="semibold">Moved</Ink> to its single-home topic — <code>topics/build-config.md</code> (config packages, rollup/tsconfig/jest standards, deviation audit).</Ink>] },
+  ] }]}
+/>
+
+<Callout type="learning">The services folder of a package holds functions available to any consumer; the utilities folder holds functions meant for internal use only.</Callout>
+
+<Ink as="h3">Build</Ink>
+
+<Ink>Local development build processes for the Nice ecosystem.</Ink>
+
+<Ink><Ink>Files here are topic references: load the one your task or the root index points to. Local packages link by</Ink> <Ink code>file:</Ink> <Ink>reference; three non-overlapping</Ink> <Ink code>nicely</Ink> <Ink>commands cover the workspace-level concerns.</Ink></Ink>
+
+<DataTable
+  columns={[{ key: "c0", header: "File" }, { key: "c1", header: "Contents" }]}
+  tables={[{ rows: [
+    { id: "0", values: [<Ink><code>symlinks.md</code></Ink>, <Ink>@niceprototypes/cli, <code>file:</code> references, <code>nicely</code> usage.</Ink>] },
+    { id: "1", values: [<Ink><code>vite.md</code></Ink>, <Ink>Vite configuration for @niceprototypes/storybook, @niceprototypes/vite-watcher.</Ink>] },
+    { id: "2", values: [<Ink><code>image-compressor.md</code></Ink>, <Ink>nice-image-compressor CLI for PNG compression via pngquant.</Ink>] },
+  ] }]}
+/>
+
+```bash
+nicely --clean       # kill dev-server ports + wipe consumer build-tool caches
+nicely --dedupe      # remove duplicate singletons from linked packages
+nicely --build-all   # rebuild every linked package's dist in tier order
+```
+
+<Callout type="hint">After dependency changes, run `nicely --dedupe`. After source changes consumers don't see, `nicely --clean`. After a foundation refactor or a fresh clone, `nicely --build-all`. For one foundation package, `nicely --build-icons` rebuilds just @niceprototypes/icon and its dependents in tier order.</Callout>
+
+<Ink as="h3">Publish</Ink>
+
+<Ink>Committing, version bumping, and releasing nice-* packages to npm.</Ink>
+
+<Ink><Ink>Files here are topic references: load the one your task or the root index points to. Each publishable package keeps its own</Ink> <Ink code>.nice/bump.md</Ink> <Ink>— both the version-bump intent for</Ink> <Ink code>nicely --publish</Ink> <Ink>and the durable per-change record, written in the same commit.</Ink></Ink>
+
+<DataTable
+  columns={[{ key: "c0", header: "File" }, { key: "c1", header: "Contents" }]}
+  tables={[{ rows: [
+    { id: "0", values: [<Ink><code>git.md</code></Ink>, <Ink>Commit format, branching, the <code>nicely --commit</code> workflow.</Ink>] },
+    { id: "1", values: [<Ink><code>npm.md</code></Ink>, <Ink>Version bumping, publish order, peer deps.</Ink>] },
+    { id: "2", values: [<Ink><code>bump-intent.md</code></Ink>, <Ink>The <code>.nice/bump.md</code> per-package bump-intent workflow, <code>✓</code> marker, and how <code>--commit</code> relates to <code>--publish</code>.</Ink>] },
+  ] }]}
+/>
+
+<Callout type="hint">Publish nice-* packages with `nicely publish`, never `npm publish` directly — the workflow handles the version cascade across consumers.</Callout>
+
+<Ink as="h3">Topics</Ink>
+
+<Ink>Single-home reference topics that cross the phase folders — each lazy-loaded on demand.</Ink>
+
+<Ink>Some subjects don't belong to a single phase of work. Rather than duplicate them across Read, Edit, and Build, they live once here and every phase folder points to them. You are *aware* they exist from the root File Tree; a body loads only when the task touches it.</Ink>
+
+<DataTable
+  columns={[{ key: "c0", header: "File" }, { key: "c1", header: "Contents" }]}
+  tables={[{ rows: [
+    { id: "0", values: [<Ink><code>build-config.md</code></Ink>, <Ink>Config packages (<code>@niceprototypes/config-typescript</code>, <code>@niceprototypes/config-rollup</code>, <code>@niceprototypes/config-jest</code>), per-package config standards, and the deviation audit — moved here from <code>edit/configuration.md</code> as its single home.</Ink>] },
+  ] }]}
+/>
+
+<Callout type="learning">When a build or config package misbehaves, a config doc always exists — you never need to be told. The Config Surfaces catalog in the root README maps each surface (shared build config, per-package config files, Vite / watcher, the cache / build triad) to the topic that documents it.</Callout>
+
+<Line />
+
+<Ink as="h3">Principles</Ink>
+
+<Ink><Ink weight="semibold">Decentralized by design.</Ink> <Ink>Every</Ink> <Ink code>nice-*</Ink> <Ink>package is its own repository, versioned, published, and consumable on its own. There is no monorepo and no single codebase — a package depends on its foundations through npm like any other consumer would. Work is scoped to one repository at a time, and a change that appears to need edits across several is a signal to look at the dependency boundary between them.</Ink></Ink>
+
+<Ink><Ink weight="semibold">The token system is the origin pattern.</Ink> <Ink>The token generation system in</Ink> <Ink code>@niceprototypes/styles</Ink> <Ink>— token JSON to generated data, types, and CSS, to runtime getters and setters — is the foundation the rest depend on. A package that cannot reach logic it needs through the token system is a showstopper: stop, report the gap, fix the token system first.</Ink></Ink>
+
+<Ink><Ink weight="semibold">Alignment.</Ink> <Ink>Independence is structural; consistency is deliberate. Anything shared — TypeScript version, build config, lint rules — belongs in a foundation package, consumed by every repository at the same version rather than copied into each. Divergence is a defect to fix.</Ink></Ink>
+
+<Callout type="hint">Artifacts have fixed homes: an audit report goes to `manifest/.reports/audit/{slug}.md`, a research report to `manifest/.reports/research/{slug}.md`, and a per-package change record to that package's `.nice/bump.md`.</Callout>

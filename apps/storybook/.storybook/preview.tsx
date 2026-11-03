@@ -84,7 +84,7 @@ const preview: Preview = {
     options: {
       storySort: {
         order: [
-          "Basics",
+          "Onboarding",
           [
             "Welcome",
             "Reset",
@@ -94,8 +94,6 @@ const preview: Preview = {
             "Breakpoints",
             "Themes",
           ],
-          "Manifest",
-          ["Welcome", "Discipline", "Read", "Edit", "Build", "Publish", "Topics"],
           "Scenarios",
           ["Easy", "Medium", "Hard"],
           "Tokens",

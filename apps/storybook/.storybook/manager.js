@@ -54,8 +54,8 @@ addons.setConfig({
   theme,
   // Render top-level sections as collapsible folders instead of always-open
   // roots. Storybook expands only the selected story's ancestors on load, and
-  // the default landing story is Basics/Welcome (first in storySort) — so on a
-  // fresh load Basics is open and every other section is collapsed.
+  // the default landing story is Onboarding/Welcome (first in storySort) — so on a
+  // fresh load Onboarding is open and every other section is collapsed.
   sidebar: {
     showRoots: false,
   },

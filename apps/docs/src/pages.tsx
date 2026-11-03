@@ -107,9 +107,27 @@ const entries: [string, AppPagesType[string], string?][] = getTree().flatMap((it
 /** Every page of the site, keyed as `@niceprototypes/app` reads docs section pages. */
 export const pages: AppPagesType = Object.fromEntries(entries.map(([key, load]) => [key, load]))
 
-/** The docs URL of a Storybook page id (`basics-tokens--docs`, `components-forms-button--docs`), for links written for Storybook. */
+/** The docs URL of a Storybook page id (`onboarding-tokens--docs`, `components-forms-button--docs`), for links written for Storybook. */
 export const docsUrlOf = (storyId: string): string | undefined => {
-  const id = storyId.replace(/--.*$/, "")
-  const key = entries.find(([, , itemId]) => itemId === id || itemId === storyId)?.[0]
-  return key && getAppPageUrl(key)
+  const id = moved(storyId.replace(/--.*$/, ""))
+  const key = entries.find(([, , itemId]) => itemId === id.page || itemId === storyId)?.[0]
+  return key && getAppPageUrl(key) + id.hash
+}
+
+/** Pages that moved: Basics is Onboarding; the Manifest pages are the Welcome page's "For agents" section. */
+const moved = (id: string): { page: string; hash: string } =>
+  id === "manifest" || id.startsWith("manifest-")
+    ? { page: "onboarding-welcome", hash: "#for-agents" }
+    : { page: id.replace(/^basics-/, "onboarding-"), hash: "" }
+
+/**
+ * The docs URL for an address that no longer exists, or undefined: the Basics and Manifest
+ * pages before they moved, and Storybook links (`/?path=/docs/onboarding-themes--docs`).
+ */
+export const redirectOf = (pathname: string, search: string): string | undefined => {
+  const story = new URLSearchParams(search).get("path")?.replace(/^\/docs\//, "")
+  if (story) return docsUrlOf(story)
+  if (pathname.startsWith("/docs/manifest")) return docsUrlOf("manifest")
+  if (pathname.startsWith("/docs/basics")) return pathname.replace(/^\/docs\/basics/, "/docs/onboarding")
+  return undefined
 }
