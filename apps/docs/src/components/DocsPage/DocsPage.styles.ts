@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import { getBreakpoint } from "@niceprototypes/styles"
+import { Scroll } from "@niceprototypes/scroll"
 import { getToken } from "../../tokens"
 
 /** The page's columns side by side, centred, `docs.columnGap` apart; the settings row wraps above them below tablet. */
@@ -15,10 +16,9 @@ export const StyledDocsPage = styled.div`
 `
 
 /** The sections column: capped at `docs.columnWidth` when wrapped, else the width Contents leaves; a wider table scrolls sideways. */
-export const StyledDocsPageMain = styled.div<{ $wrapped: boolean }>`
+export const StyledDocsPageMain = styled(Scroll).attrs({ axis: "x" })<{ $wrapped: boolean }>`
   flex: ${({ $wrapped }) => ($wrapped ? `0 1 ${getToken("docs", "columnWidth")}` : "1 1 auto")};
   min-width: 0;
-  overflow-x: auto;
 `
 
 /** One section: scrolled to one page padding below the top, where Contents sticks. */

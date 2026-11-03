@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import Icon from "@niceprototypes/icon"
 import { getBreakpoint, getToken } from "@niceprototypes/styles"
+import { Scroll } from "@niceprototypes/scroll"
 
 /**
  * Positioning context for the overlay and the lock button.
@@ -28,8 +29,8 @@ export const FrameDiv = styled.div<{ $scrollable?: boolean }>`
  * would otherwise scroll as soon as the pointer crossed it, stealing wheel
  * events from the page.
  */
-export const FrameScrollDiv = styled.div<{ $scrollable?: boolean }>`
-  overflow: ${({ $scrollable }) => ($scrollable ? "auto" : "hidden")};
+export const FrameScrollDiv = styled(Scroll).attrs({ axis: "both" })<{ $scrollable?: boolean }>`
+  ${({ $scrollable }) => !$scrollable && "overflow: hidden;"}
   border-radius: inherit;
 `
 

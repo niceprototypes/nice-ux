@@ -1,6 +1,6 @@
 import styled from "styled-components"
-import Flex from "@niceprototypes/flex"
 import { getToken } from "@niceprototypes/styles"
+import { Scroll } from "@niceprototypes/scroll"
 import type { CodeMarginType } from "./Code.types"
 
 /** The inline chip's surface: the text colour at a low alpha, so it reads one step off the page in either theme. */
@@ -93,15 +93,14 @@ export const CollapseDiv = styled.div<{ $maxHeight?: string; $dragged?: boolean;
 `
 
 /**
- * Horizontal scroll container for long code lines, with the scrollbar hidden.
+ * Horizontal scroll container for long code lines, a Scroll (scrollbar hidden by default).
  * Only card (non-inlined) blocks use it — inlined blocks render the code as plain
  * text with no scroll container — so it always carries the base padding.
  */
-export const ScrollDiv = styled(Flex).attrs({ padding: "base" })`
+export const ScrollDiv = styled(Scroll).attrs({ axis: "x" })`
+  display: flex;
   max-width: 100%;
-  overflow-x: auto;
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
-  scrollbar-width: none; /* Firefox, Safari 18.2+, Chromium 121+ */
+  padding: ${getToken("gap")};
 `
 
 /**

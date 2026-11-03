@@ -872,6 +872,9 @@ importers:
       '@niceprototypes/ink':
         specifier: workspace:*
         version: link:../ink
+      '@niceprototypes/scroll':
+        specifier: workspace:*
+        version: link:../scroll
       '@niceprototypes/styles':
         specifier: workspace:*
         version: link:../styles

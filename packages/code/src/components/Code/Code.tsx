@@ -117,7 +117,7 @@ const Code: React.FC<CodeProps> = ({
             $faded={bounds !== undefined && current < bounds.max}
             style={height === undefined ? undefined : { height }}
           >
-            <ScrollDiv gap="large" grow={1}>
+            <ScrollDiv>
               {/* fit: shrink to content (width: max-content); otherwise fill the row. */}
               <Flex fit={fit} grow={fit ? undefined : 1} style={fit ? undefined : { width: "100%" }}>
                 {highlighted}

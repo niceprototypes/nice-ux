@@ -30,6 +30,7 @@
     "@niceprototypes/flex": "workspace:^",
     "@niceprototypes/icon": "workspace:^",
     "@niceprototypes/ink": "workspace:^",
+    "@niceprototypes/scroll": "workspace:^",
     "@niceprototypes/styles": "workspace:^",
     "@niceprototypes/tooltip": "workspace:^",
     "react": ">=19.2.0 <20.0.0",
@@ -62,7 +63,8 @@
     "rollup-plugin-dts": "^6.1.0",
     "styled-components": "catalog:",
     "tslib": "^2.6.2",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "@niceprototypes/scroll": "workspace:*"
   },
   "repository": {
     "type": "git",
