@@ -1,3 +1,4 @@
+import type * as React from "react"
 import type { GapType, TokenVariants } from "@niceprototypes/styles"
 
 /**
@@ -72,6 +73,14 @@ export type CodeMaxHeightType = "none" | TokenVariants["code.maxHeight"]
 export type CodeClassNameType = string
 
 /**
+ * CodeChildrenType
+ *
+ * A live demo of the code, shown above it in the same block (a card block only): with the
+ * code's padding on the block's surface, one divider in the border's colour between them.
+ */
+export type CodeChildrenType = React.ReactNode
+
+/**
  * CodeProps
  *
  * Complete prop definition for the Code component.
@@ -95,6 +104,8 @@ export interface CodeProps {
   maxHeight?: CodeMaxHeightType
   /** CSS class name applied to the root element. */
   className?: CodeClassNameType
+  /** A live demo of the code, shown above it in the same block (card blocks only). */
+  children?: CodeChildrenType
 }
 
 // Declaration merging: const + namespace creates an exportable type namespace.
@@ -110,6 +121,7 @@ namespace CodeTypes {
   export type Margin = CodeMarginType
   export type MaxHeight = CodeMaxHeightType
   export type ClassName = CodeClassNameType
+  export type Children = CodeChildrenType
   export type Props = CodeProps
 }
 

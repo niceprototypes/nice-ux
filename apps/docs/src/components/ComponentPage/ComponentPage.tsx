@@ -5,7 +5,8 @@ import DocsPage, { type DocsPageSectionType } from "../DocsPage"
 import Playground from "../Playground"
 import { hasPlayground } from "../Playground/Playground.controls"
 import { subcomponentsOf, type CatalogComponentType } from "../../catalog"
-import PropDocs, { ExampleTable, SubHeading } from "@niceprototypes/docs/components/PropDocs"
+import PropDocs, { SubHeading } from "@niceprototypes/docs/components/PropDocs"
+import ExampleBlocks from "@niceprototypes/docs/components/ExampleBlocks"
 import { ComponentTokenTable, componentPrefixesWithTokens, type ComponentPrefixWithTokens } from "@niceprototypes/docs/dataTables/components/tokens/Components"
 import { componentExamples } from "@niceprototypes/docs/examples"
 import { StoryHeader } from "@niceprototypes/docs/components/Story"
@@ -108,7 +109,7 @@ const ComponentPage: React.FC<{ component: CatalogComponentType }> = ({ componen
         content: (
           <Flex direction="column" gap="base">
             <SubHeading title={example.name} description={example.description} />
-            <ExampleTable example={example} />
+            <ExampleBlocks example={example} />
           </Flex>
         ),
       })),

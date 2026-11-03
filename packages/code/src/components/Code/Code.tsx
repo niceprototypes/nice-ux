@@ -2,7 +2,7 @@ import * as React from "react"
 import Flex from "@niceprototypes/flex"
 import Tooltip from "@niceprototypes/tooltip"
 import { getToken } from "@niceprototypes/styles"
-import { BodyDiv, CodeDiv, CollapseDiv, HandleDiv, InlineCode, ScrollDiv } from "./Code.styles"
+import { BodyDiv, CodeDiv, CollapseDiv, HandleDiv, InlineCode, PreviewDiv, ScrollDiv } from "./Code.styles"
 import { CodeCopy } from "../CodeCopy"
 import type { CodeProps } from "./Code.types"
 import { highlightCode } from "../../utilities/highlightCode"
@@ -19,7 +19,8 @@ type Bounds = { min: number; max: number }
  * the highlighted HTML in a horizontal scroll container (ScrollDiv) inside a
  * height limit (CollapseDiv) beside the copy icon (CodeCopy); code taller than
  * `maxHeight` fades out above a drag bar that sets the visible height between the
- * cap and the full code (pointer or arrow keys). Inlined blocks render the code
+ * cap and the full code (pointer or arrow keys); `children`, a live demo, sit above the code
+ * behind one divider. Inlined blocks render the code
  * as a chip with a "Copy to clipboard" tooltip.
  */
 const Code: React.FC<CodeProps> = ({
@@ -32,6 +33,7 @@ const Code: React.FC<CodeProps> = ({
   margin = "large",
   maxHeight = "base",
   className,
+  children,
 }) => {
   const collapseRef = React.useRef<HTMLDivElement>(null)
   // The dragged height in px; unset, the cap applies.
@@ -88,9 +90,9 @@ const Code: React.FC<CodeProps> = ({
     <div dangerouslySetInnerHTML={{ __html: highlightCode(code, language) }} />
   )
 
-  // Copy on click, except clicks on the copy icon and the drag bar, which act on their own.
+  // Copy on click, except clicks on the copy icon, the drag bar and the live demo, which act on their own.
   const onClick = (event: React.MouseEvent) => {
-    if ((event.target as Element).closest("[role=button], [role=separator]")) return
+    if ((event.target as Element).closest("[role=button], [role=separator], [data-code-preview]")) return
     copyToClipboard(code)
   }
 
@@ -106,6 +108,8 @@ const Code: React.FC<CodeProps> = ({
     >
       {/* inline blocks render as plain code text — no scroll container/padding.
           Card blocks put the code in a horizontal scroll container. */}
+      {/* A live demo above the code, divided from it by the border's colour. */}
+      {!inlined && children !== undefined && <PreviewDiv data-code-preview>{children}</PreviewDiv>}
       {inlined ? (
         highlighted
       ) : (

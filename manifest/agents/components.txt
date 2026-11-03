@@ -27,7 +27,7 @@ CardBody(card) [components-cardbody--playground] children?:node
 CardFooter(card) [components-cardfooter--playground] children?:node justifyContent?:FlexJustifyContentType="flex-end"
 CardHeader(card) [components-cardheader--playground] title?:node description?:node titleProps?:Partial<Omit<InkProps, "children">> descriptionProps?:Partial<Omit<InkProps, "children">> end?:node children?:node
 Checkbox(checkbox) [components-forms-checkbox--playground] checked?:boolean defaultChecked?:boolean onChange?:fn disabled?:boolean size?:SizeType backgroundColor?:ColorTokenProp<CheckboxBackgroundColorType> borderColor?:ColorTokenProp<CheckboxBorderColorType> borderRadius?:BorderRadiusType borderWidth?:BorderWidthType iconName?:NonNullable<IconProps["name"]>="check" iconVendor?:IconVendorType=false children?:node name?:string theme?:ThemeType
-Code(code) [components-code--playground] code:string language?:string showLabel?:boolean=true copyOnClick?:boolean=true inlined?:boolean=false fit?:boolean=false margin?:GapType="large" maxHeight?:"none"|TokenVariants["code.maxHeight"]="base"
+Code(code) [components-code--playground] code:string language?:string showLabel?:boolean=true copyOnClick?:boolean=true inlined?:boolean=false fit?:boolean=false margin?:GapType="large" maxHeight?:"none"|TokenVariants["code.maxHeight"]="base" children?:node
 CodeCopy(code) code:string language?:string
 Contents(contents) [components-contents--playground] items:ReadonlyArray<ContentsItemType> heading?:node activeId?:ContentsItemIdType onActiveChange?:fn size?:FontSizeType="smaller"
 Dialog(dialog) [components-dialog--playground] open:boolean onClose?:fn title:node description?:node children?:node actions?:node closeOnBackdropClick?:boolean=true theme?:ThemeType

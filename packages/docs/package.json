@@ -64,6 +64,7 @@
     "./components/DataTable": "./src/components/DataTable/index.ts",
     "./components/DocsContent": "./src/components/DocsContent/index.ts",
     "./components/DocsNavigation": "./src/components/DocsNavigation/index.ts",
+    "./components/ExampleBlocks": "./src/components/ExampleBlocks/index.ts",
     "./components/Install": "./src/components/Install/index.ts",
     "./components/LifecycleStory": "./src/components/LifecycleStory/index.ts",
     "./components/Line": "./src/components/Line/index.ts",

@@ -2,15 +2,9 @@ import * as React from "react"
 import Flex from "@niceprototypes/flex"
 import Ink from "@niceprototypes/ink"
 import Code from "@niceprototypes/code"
-import { getColumns } from "../../data"
 import type { CatalogPropType } from "../../data/catalog"
-import { buildExampleRows, type ComponentExample } from "../../dataTables/components/demos/Components"
-import { DataTable } from "../DataTable"
-
-/** A facet's live examples: each variant rendered beside its code. */
-export const ExampleTable = ({ example }: { example: ComponentExample }) => (
-  <DataTable {...getColumns("componentExample")} tables={[{ rows: buildExampleRows(example) }]} />
-)
+import type { ComponentExample } from "../../dataTables/components/demos/Components"
+import ExampleBlocks from "../ExampleBlocks"
 
 /** A heading two levels under the page title (a prop, an example), and its description. */
 export const SubHeading = ({ title, description }: { title: string; description?: React.ReactNode }) => (
@@ -39,7 +33,7 @@ const PropDocs = ({ prop, example }: { prop: CatalogPropType; example?: Componen
         </>
       )}
     </Flex>
-    {example && <ExampleTable example={example} />}
+    {example && <ExampleBlocks example={example} />}
   </Flex>
 )
 

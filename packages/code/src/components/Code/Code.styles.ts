@@ -141,3 +141,12 @@ export const InlineCode = styled.code`
   text-box: trim-both cap alphabetic;
   white-space: pre;
 `
+
+/**
+ * The live demo above the code (Code's children): the code's padding on the block's surface,
+ * one edge-to-edge divider in the block's border colour below it.
+ */
+export const PreviewDiv = styled.div`
+  padding: ${getToken("gap")};
+  border-bottom: 1px solid ${getToken("code.borderColor:base")};
+`

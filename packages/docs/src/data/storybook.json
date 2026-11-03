@@ -67,24 +67,6 @@
         "header": "Default"
       }
     ],
-    "componentExample": [
-      {
-        "key": "example",
-        "header": null,
-        "width": "16em"
-      },
-      {
-        "key": "name",
-        "header": "Name",
-        "width": "8em"
-      },
-      {
-        "key": "code",
-        "header": "React",
-        "render": "@niceprototypes/code",
-        "language": "tsx"
-      }
-    ],
     "demoCode": [
       {
         "key": "demo"

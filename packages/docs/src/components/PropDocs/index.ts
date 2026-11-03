@@ -1,1 +1,1 @@
-export { default, ExampleTable, SubHeading } from "./PropDocs"
+export { default, SubHeading } from "./PropDocs"

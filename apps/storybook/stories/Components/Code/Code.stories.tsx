@@ -164,6 +164,23 @@ export const NoCopy: Story = {
   },
 }
 
+export const WithPreview: Story = {
+  args: { children: <button type="button">Live demo</button> },
+  play: async ({ canvasElement, userEvent }) => {
+    // The demo sits above the code, behind one divider in the outer border's colour.
+    const demo = within(canvasElement).getByRole("button", { name: "Live demo" })
+    const preview = demo.parentElement!
+    const card = root(canvasElement)
+    await expect(preview.compareDocumentPosition(card.querySelector(".shiki")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
+    await expect(getComputedStyle(preview).borderBottomColor).toBe(getComputedStyle(card).borderTopColor)
+    // Using the demo does not copy the code.
+    const writeText = spyOn(navigator.clipboard, "writeText").mockResolvedValue()
+    await userEvent.click(demo)
+    await expect(writeText).not.toHaveBeenCalled()
+    writeText.mockRestore()
+  },
+}
+
 export const Fit: Story = {
   args: { fit: true },
   play: async ({ canvasElement }) => {
