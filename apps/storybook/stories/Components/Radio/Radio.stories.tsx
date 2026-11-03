@@ -26,6 +26,8 @@ type PlaygroundArgs = RadioProps & { checked: boolean }
 
 const meta = {
   title: "Components/Forms/Radio",
+  // A subcomponent: documented on its parent's page; its stories run as tests only.
+  tags: ["!dev"],
   component: Radio,
   parameters: {
     layout: "padded",

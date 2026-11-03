@@ -15,6 +15,8 @@ type PlaygroundArgs = Omit<GridItemProps, "colSpan"> & { colSpan: number; full: 
 
 const meta = {
   title: "Components/GridItem",
+  // A subcomponent: documented on its parent's page; its stories run as tests only.
+  tags: ["!dev"],
   component: GridItem,
   parameters: {
     layout: "padded",

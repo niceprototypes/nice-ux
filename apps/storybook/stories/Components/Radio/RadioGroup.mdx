@@ -4,9 +4,11 @@ import Install from "@niceprototypes/docs/components/Install"
 import * as RadioGroupStories from "./RadioGroup.stories"
 import ComponentDocs from "../../../src/components/ComponentDocs"
 
+export const sections = import.meta.glob("./*.section.mdx", { eager: true })
+
 <Meta of={RadioGroupStories} />
 
-<ComponentDocs component="RadioGroup">
+<ComponentDocs component="RadioGroup" sections={sections}>
 
 <StoryHeader
   title="Radio"

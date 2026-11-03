@@ -1,48 +1,27 @@
-import catalog from "../../../manifest/agents/catalog.json"
+import { catalogEntries, type CatalogEntryType } from "@niceprototypes/docs/data/catalog"
 
-/** One prop of a component, as the catalog generator reads it from the component's types file. */
-export type CatalogPropType = { name: string; type: string; description?: string; default?: string; required?: boolean }
+export type { CatalogPropType } from "@niceprototypes/docs/data/catalog"
+export { tokenUnions, subcomponentsOf } from "@niceprototypes/docs/data/catalog"
 
-/** One documented component: its catalog entry, its package, and its docs folder (Forms, Scroll) if any. */
-export type CatalogComponentType = {
-  name: string
-  package: string
-  /** Its package's folder in the monorepo (`packages/button`) */
-  directory: string
+/** One component with its own page: its catalog entry and its docs folder (Forms, Scroll) if any. */
+export type CatalogComponentType = CatalogEntryType & {
   /** Its folder under Components, from its Storybook docs id (`components-forms-button--docs` → Forms) */
   folder?: string
   /** Its Storybook docs page id (`components-forms-button--docs`) */
   docsId: string
-  /** Whether the package exports it by name; otherwise it is the default export */
-  named: boolean
-  props: CatalogPropType[]
 }
 
 /** A folder segment of a docs id as a name: `forms` → Forms. */
 const folderName = (segment: string) => segment.charAt(0).toUpperCase() + segment.slice(1)
 
 /**
- * Every component with a Storybook docs page in `manifest/agents/catalog.json`, in catalog order.
- * The docs id's segments between `components` and the page are its folders; the first is kept, so
- * a page nested under another page's folder (Forms/Field/Fieldset) sits beside it.
+ * Every component with its own page (a Storybook docs page in the catalog; subcomponents are
+ * sections of their parent's page), in catalog order. The docs id's segments between
+ * `components` and the page are its folders; the first is kept, so a page nested under another
+ * page's folder (Forms/Field/Fieldset) sits beside it.
  */
-export const catalogComponents: CatalogComponentType[] = catalog.packages.flatMap(pkg =>
-  pkg.components.flatMap(component => {
-    if (!component.docs) return []
-    const segments = component.docs.replace(/--docs$/, "").split("-").slice(1, -1)
-    return [
-      {
-        name: component.name,
-        package: pkg.package,
-        directory: pkg.directory,
-        folder: segments.length ? folderName(segments[0]) : undefined,
-        docsId: component.docs,
-        named: (pkg.exports as string[]).includes(component.name),
-        props: component.props as CatalogPropType[],
-      },
-    ]
-  }),
-)
-
-/** Each token union type by name, as its literal values (`SizeType` → `"smaller" | … | "larger"`). */
-export const tokenUnions: Record<string, string> = catalog.tokenUnions
+export const catalogComponents: CatalogComponentType[] = catalogEntries.flatMap(entry => {
+  if (!entry.docs || entry.parent) return []
+  const segments = entry.docs.replace(/--docs$/, "").split("-").slice(1, -1)
+  return [{ ...entry, folder: segments.length ? folderName(segments[0]) : undefined, docsId: entry.docs }]
+})

@@ -19,6 +19,8 @@ type PlaygroundArgs = Omit<CardHeaderProps, "end" | "titleProps"> & {
 
 const meta = {
   title: "Components/CardHeader",
+  // A subcomponent: documented on its parent's page; its stories run as tests only.
+  tags: ["!dev"],
   component: CardHeader,
   parameters: {
     layout: "padded",

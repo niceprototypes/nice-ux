@@ -4,9 +4,11 @@ import Install from "@niceprototypes/docs/components/Install"
 import * as CardStories from "./Card.stories"
 import ComponentDocs from "../../../src/components/ComponentDocs"
 
+export const sections = import.meta.glob("./*.section.mdx", { eager: true })
+
 <Meta of={CardStories} />
 
-<ComponentDocs component="Card">
+<ComponentDocs component="Card" sections={sections}>
 
 <StoryHeader
   title="Card"

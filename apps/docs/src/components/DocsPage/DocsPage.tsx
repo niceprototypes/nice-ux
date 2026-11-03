@@ -36,20 +36,27 @@ const Section = ({ section }: { section: DocsPageSectionType }) => (
  * site's settings (DocsSettingsContext) in a sticky column right of that; the columns sit centred
  * in the page. Below tablet the settings are a row above the sections.
  */
-const DocsPage: React.FC<DocsPageProps> = ({ sections, wrapped = true, contents }) => (
-  <StyledDocsPage>
-    <StyledDocsPageMain $wrapped={wrapped}>
-      <Flex direction="column" gap="larger">
-        {sections.map(section => <Section key={section.id} section={section} />)}
-      </Flex>
-    </StyledDocsPageMain>
-    <StyledDocsPageAside>
-      <Contents size="base" items={contents ?? toItems(sections)} />
-    </StyledDocsPageAside>
-    <StyledDocsPageSettings aria-label="Settings">
-      <StyledDocsPageSettingsContent>{React.useContext(DocsSettingsContext)}</StyledDocsPageSettingsContent>
-    </StyledDocsPageSettings>
-  </StyledDocsPage>
-)
+const DocsPage: React.FC<DocsPageProps> = ({ sections, wrapped = true, contents }) => {
+  // A link to a section or heading (`#cardheader`, `#for-agents`) lands on it once the page is in:
+  // a passive effect, after every section and heading id is set.
+  React.useEffect(() => {
+    if (window.location.hash) document.getElementById(decodeURIComponent(window.location.hash.slice(1)))?.scrollIntoView()
+  }, [])
+  return (
+    <StyledDocsPage>
+      <StyledDocsPageMain $wrapped={wrapped}>
+        <Flex direction="column" gap="larger">
+          {sections.map(section => <Section key={section.id} section={section} />)}
+        </Flex>
+      </StyledDocsPageMain>
+      <StyledDocsPageAside>
+        <Contents size="base" items={contents ?? toItems(sections)} />
+      </StyledDocsPageAside>
+      <StyledDocsPageSettings aria-label="Settings">
+        <StyledDocsPageSettingsContent>{React.useContext(DocsSettingsContext)}</StyledDocsPageSettingsContent>
+      </StyledDocsPageSettings>
+    </StyledDocsPage>
+  )
+}
 
 export default DocsPage

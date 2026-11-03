@@ -6,9 +6,11 @@ import Line from "@niceprototypes/docs/components/Line"
 import ComponentDocs from "../../../src/components/ComponentDocs"
 import { buttonExamples } from "@niceprototypes/docs/examples/Button"
 
+export const sections = import.meta.glob("./*.section.mdx", { eager: true })
+
 <Meta title="Components/Forms/Button" />
 
-<ComponentDocs component="Button" examples={buttonExamples}>
+<ComponentDocs component="Button" examples={buttonExamples} sections={sections}>
 
 <StoryHeader
   title="Button"

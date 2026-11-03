@@ -1,6 +1,6 @@
 # Build on Nice
 
-For an agent building an app or page with `@niceprototypes/*`. Core (`../README.md`, `../discipline/`) applies. Component index: `components.txt` (read whole). One component's detail: `jq '.packages[].components[]|select(.name=="Button")' catalog.json` (never read catalog.json whole). Live props and Controls: each component's `Playground` story.
+For an agent building an app or page with `@niceprototypes/*`. Core (`../README.md`, `../discipline/`) applies. Component index: `components.txt` (read whole). One component's detail: `jq '.packages[].components[]|select(.name=="Button")' catalog.json` (never read catalog.json whole). Live props and Controls: each component's `Playground` story. A subcomponent (CardHeader, GridItem, Radio, …) has `parent` set: it is documented as a section of the parent's page and has no page of its own.
 
 ## 1. Dependencies
 

@@ -50,10 +50,7 @@ const MdxPage: React.FC<{ id: string; label: string; wrapped: boolean; Content: 
   const content = React.useRef<HTMLDivElement>(null)
   const [contents, setContents] = React.useState<ContentsItemType[]>()
   React.useLayoutEffect(() => {
-    if (!content.current) return
-    setContents(headingsOf(content.current))
-    // A link to a heading (`#for-agents`) lands on it once its id exists.
-    if (window.location.hash) document.getElementById(window.location.hash.slice(1))?.scrollIntoView()
+    if (content.current) setContents(headingsOf(content.current))
   }, [Content])
   return (
     <DocsPage

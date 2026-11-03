@@ -145,6 +145,24 @@ function readComponentTokens(prefix) {
   }
 }
 
+/**
+ * Subcomponents: parts that only make sense inside their parent, documented as sections of the
+ * parent's page (no page of their own). The catalog keeps their entries for agents, with `parent`.
+ */
+const PARENTS = {
+  CardHeader: "Card",
+  CardBody: "Card",
+  CardFooter: "Card",
+  GridItem: "Grid",
+  Radio: "RadioGroup",
+  ListItem: "List",
+  LightboxCaption: "Lightbox",
+  TileLayout: "Tile",
+  TileContent: "Tile",
+  ContentMain: "Tile",
+  ButtonIcon: "Button",
+}
+
 /** Storybook titles under stories/Components: MDX `<Meta title>` and CSF `title:` + `export const Playground`. */
 function readStories() {
   const storiesRoot = join(root, "apps", "storybook", "stories", "Components")
@@ -219,7 +237,9 @@ const packages = readdirSync(packagesRoot)
             common: props.filter(prop => isCommonProp(prop.name)).map(prop => prop.name),
             states,
             tokens,
-            docs: docsTitle ? `${sanitizeStoryId(docsTitle)}--docs` : null,
+            ...(PARENTS[name] ? { parent: PARENTS[name] } : {}),
+            // A subcomponent's docs are a section of its parent's page.
+            docs: docsTitle && !PARENTS[name] ? `${sanitizeStoryId(docsTitle)}--docs` : null,
             playground: playgroundTitle ? `${sanitizeStoryId(playgroundTitle)}--playground` : null,
           }
         })

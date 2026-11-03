@@ -14,6 +14,8 @@ const JUSTIFY_CONTENT_OPTIONS = [
 
 const meta = {
   title: "Components/CardFooter",
+  // A subcomponent: documented on its parent's page; its stories run as tests only.
+  tags: ["!dev"],
   component: CardFooter,
   parameters: {
     layout: "padded",

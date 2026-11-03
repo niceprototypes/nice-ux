@@ -4,7 +4,7 @@ import { getTree, sanitize, type DataItem } from "@niceprototypes/docs/data"
 import ComponentPage from "./components/ComponentPage"
 import MdxPage, { type MdxModuleType } from "./components/MdxPage"
 import TokensPage from "./components/TokensPage"
-import { catalogComponents, type CatalogComponentType } from "./catalog"
+import { catalogComponents, subcomponentsOf, type CatalogComponentType } from "./catalog"
 
 /** A loaded page module for the App's `pages`. */
 const pageOf = (Page: React.ComponentType) => () => Promise.resolve({ default: Page })
@@ -108,7 +108,25 @@ const entries: [string, AppPagesType[string], string?][] = getTree().flatMap((it
 export const pages: AppPagesType = Object.fromEntries(entries.map(([key, load]) => [key, load]))
 
 /** The docs URL of a Storybook page id (`onboarding-tokens--docs`, `components-forms-button--docs`), for links written for Storybook. */
+/**
+ * Subcomponents' old pages (`/docs/components/cardheader`, `/docs/components/forms/radio`): the
+ * parent's URL with its last segment the subcomponent's, now the parent page at its section.
+ */
+const subcomponentPages = catalogComponents.flatMap(component => {
+  const key = entries.find(([, , itemId]) => itemId === component.docsId)?.[0]
+  if (!key) return []
+  const url = getAppPageUrl(key)
+  return subcomponentsOf(component.name).map(sub => ({
+    id: sub.name.toLowerCase(),
+    from: url.replace(/[^/]+$/, sub.name.toLowerCase()),
+    to: `${url}#${sub.name.toLowerCase()}`,
+  }))
+})
+
 export const docsUrlOf = (storyId: string): string | undefined => {
+  // A subcomponent's old Storybook id (`components-cardheader--docs`): its parent's section.
+  const sub = storyId.startsWith("components-") ? subcomponentPages.find(page => storyId.replace(/--.*$/, "").endsWith(`-${page.id}`)) : undefined
+  if (sub) return sub.to
   const id = moved(storyId.replace(/--.*$/, ""))
   const key = entries.find(([, , itemId]) => itemId === id.page || itemId === storyId)?.[0]
   return key && getAppPageUrl(key) + id.hash
@@ -122,12 +140,13 @@ const moved = (id: string): { page: string; hash: string } =>
 
 /**
  * The docs URL for an address that no longer exists, or undefined: the Basics and Manifest
- * pages before they moved, and Storybook links (`/?path=/docs/onboarding-themes--docs`).
+ * pages before they moved, subcomponents' old pages, and Storybook links
+ * (`/?path=/docs/onboarding-themes--docs`).
  */
 export const redirectOf = (pathname: string, search: string): string | undefined => {
   const story = new URLSearchParams(search).get("path")?.replace(/^\/docs\//, "")
   if (story) return docsUrlOf(story)
   if (pathname.startsWith("/docs/manifest")) return docsUrlOf("manifest")
   if (pathname.startsWith("/docs/basics")) return pathname.replace(/^\/docs\/basics/, "/docs/onboarding")
-  return undefined
+  return subcomponentPages.find(page => page.from === pathname.replace(/\/+$/, ""))?.to
 }

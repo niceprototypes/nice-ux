@@ -5,6 +5,8 @@ import type { CardBodyProps } from "@niceprototypes/card"
 
 const meta = {
   title: "Components/CardBody",
+  // A subcomponent: documented on its parent's page; its stories run as tests only.
+  tags: ["!dev"],
   component: CardBody,
   parameters: {
     layout: "padded",

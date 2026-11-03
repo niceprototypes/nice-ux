@@ -1,52 +1,18 @@
 import * as React from "react"
 import Flex from "@niceprototypes/flex"
 import Ink from "@niceprototypes/ink"
-import NiceCode from "@niceprototypes/code"
 import DocsPage, { type DocsPageSectionType } from "../DocsPage"
 import Playground from "../Playground"
 import { hasPlayground } from "../Playground/Playground.controls"
-import type { CatalogComponentType, CatalogPropType } from "../../catalog"
-import { getColumns } from "@niceprototypes/docs/data"
+import { subcomponentsOf, type CatalogComponentType } from "../../catalog"
+import PropDocs, { ExampleTable, SubHeading } from "@niceprototypes/docs/components/PropDocs"
 import { ComponentTokenTable, componentPrefixesWithTokens, type ComponentPrefixWithTokens } from "@niceprototypes/docs/dataTables/components/tokens/Components"
-import { buildExampleRows, type ComponentExample } from "@niceprototypes/docs/dataTables/components/demos/Components"
 import { componentExamples } from "@niceprototypes/docs/examples"
-import { DataTable } from "@niceprototypes/docs/components/DataTable"
 import { StoryHeader } from "@niceprototypes/docs/components/Story"
 import { StoryHeaderLevel } from "@niceprototypes/docs/components/Story/StoryHeader/StoryHeaderLevel"
 import Install from "@niceprototypes/docs/components/Install"
 import Code from "@niceprototypes/docs/nice/Code"
 
-
-/** A facet's live examples: each variant rendered beside its code. */
-const ExampleTable = ({ example }: { example: ComponentExample }) => (
-  <DataTable {...getColumns("componentExample")} tables={[{ rows: buildExampleRows(example) }]} />
-)
-
-/** A heading two levels under the page title (a prop, an example), and its description. */
-const SubHeading = ({ title, description }: { title: string; description?: React.ReactNode }) => (
-  <Flex direction="column" gap="base">
-    <Ink as="h3">{title}</Ink>
-    {description ? <Ink>{description}</Ink> : null}
-  </Flex>
-)
-
-/** One prop: its name, description, type, default, and its live examples when it has some. */
-const Prop = ({ prop, example }: { prop: CatalogPropType; example?: ComponentExample }) => (
-  <Flex direction="column" gap="base">
-    <SubHeading title={prop.name} description={prop.description ?? example?.description} />
-    <Flex gap="small" alignItems="center" wrap="wrap">
-      <Ink size="small" color="lighter">Type</Ink>
-      <NiceCode language="tsx" code={prop.type} inlined margin="none" />
-      {prop.default !== undefined && (
-        <>
-          <Ink size="small" color="lighter">Default</Ink>
-          <NiceCode language="tsx" code={prop.default} inlined margin="none" />
-        </>
-      )}
-    </Flex>
-    {example && <ExampleTable example={example} />}
-  </Flex>
-)
 
 /** A section heading one level under the page title. */
 const SectionHeading = ({ title }: { title: string }) => (
@@ -59,9 +25,9 @@ const SectionHeading = ({ title }: { title: string }) => (
  * ComponentPage
  *
  * One component's docs page, from the catalog: the overview (install and import), a playground
- * (when the props allow one), every prop
- * (its type, default and live examples), the examples that are not one prop, and the component
- * tokens when its prefix has any.
+ * (when the props allow one), every prop (its type, default and live examples), a section per
+ * subcomponent with its props, the examples that are not one prop, and the component tokens
+ * when its prefix has any.
  */
 const ComponentPage: React.FC<{ component: CatalogComponentType }> = ({ component }) => {
   const examples = componentExamples[component.name] ?? {}
@@ -104,9 +70,30 @@ const ComponentPage: React.FC<{ component: CatalogComponentType }> = ({ componen
       sections: component.props.map(prop => ({
         id: `prop-${prop.name}`,
         label: prop.name,
-        content: <Prop prop={prop} example={examples[prop.name]} />,
+        content: <PropDocs prop={prop} example={examples[prop.name]} />,
       })),
     },
+    // Each subcomponent (CardHeader on Card) as a section: its import, then its props.
+    ...subcomponentsOf(component.name).map(sub => {
+      const subExamples = componentExamples[sub.name] ?? {}
+      const anchor = sub.name.toLowerCase()
+      return {
+        id: anchor,
+        label: sub.name,
+        content: (
+          <Flex direction="column" gap="large">
+            <SectionHeading title={sub.name} />
+            <Code language="tsx" code={`import { ${sub.name} } from "${sub.package}"`} />
+            {sub.props.length === 0 && <Ink>No props of its own.</Ink>}
+          </Flex>
+        ),
+        sections: sub.props.map(prop => ({
+          id: `${anchor}-prop-${prop.name}`,
+          label: prop.name,
+          content: <PropDocs prop={prop} example={subExamples[prop.name]} />,
+        })),
+      }
+    }),
   ]
 
   const otherExamples = Object.entries(examples).filter(([key]) => !propNames.has(key))
