@@ -35,7 +35,7 @@ const WelcomeLink: React.FC<WelcomeLinkProps> = ({
       >
         <Icon
           name={iconName}
-          size="larger"
+          size="large"
           strokeScaling
         />
         <Flex
