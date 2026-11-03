@@ -41,7 +41,7 @@ export const SPINNER_TOKENS = {
       "iconStrokeWidthScale": "1"
     },
     "night": {
-      "background": "hsla(212, 10%, 15%, 1)",
+      "background": "hsla(240, 4%, 12.5%, 1)",
       "color": "hsla(210, 5%, 95%, 1)",
       "iconStrokeWidthScale": "0.9"
     }

@@ -10,7 +10,7 @@ export type InverseTokensData = Record<string, { day: TokenDefinition; night: To
 const inverseTokensData: InverseTokensData = {
   "backgroundColor": {
     "day": {
-      "base": "hsla(212, 10%, 15%, 1)",
+      "base": "hsla(240, 4%, 12.5%, 1)",
       "raised": "hsla(212, 10%, 13%, 1)",
       "success": "hsla(146, 45%, 18%, 1)",
       "highlight": "hsla(48, 55%, 22%, 1)",

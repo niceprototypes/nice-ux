@@ -40,8 +40,8 @@ export const AppTokenMap = {
   },
   backgroundColor: {
     dark: {
-      day: "hsla(212, 10%, 100%, 1)",
-      night: "hsla(212, 10%, 15%, 1)",
+      day: getCoreToken("backgroundColor", "base", { theme: "day" }),
+      night: getCoreToken("backgroundColor", "base", { theme: "night" }),
     }
   },
   fontFamily: {
