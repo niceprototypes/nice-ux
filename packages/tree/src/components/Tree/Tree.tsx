@@ -12,7 +12,7 @@ import {
 import type { TreeItemsType, TreeNodeType, TreeProps } from "./Tree.types"
 import { getTreeActivePath } from "../../utilities/getTreeActivePath"
 
-/** Labels drop to the small size from this breakpoint up. */
+/** Labels drop to the small size from this breakpoint up, unless `size` sets one. */
 const SMALL_LABELS = parseBreakpointKey("laptop+")
 
 /**
@@ -46,9 +46,11 @@ const Tree: React.FC<TreeProps> = ({
   onExpandedChange,
   onSelect,
   "aria-label": ariaLabel,
+  size: sizeProp,
 }) => {
   const idPrefix = React.useId()
-  const size = breakpointKeyMatches(SMALL_LABELS, useBreakpoint()) ? "small" : "base"
+  const breakpointSize = breakpointKeyMatches(SMALL_LABELS, useBreakpoint()) ? "small" : "base"
+  const size = sizeProp ?? breakpointSize
   const activePath = React.useMemo(() => getTreeActivePath(items), [items])
   const [internalExpandedIds, setInternalExpandedIds] = React.useState<readonly string[]>(
     () => defaultExpandedIds ?? activePath.slice(0, -1),

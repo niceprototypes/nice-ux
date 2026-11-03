@@ -107,6 +107,13 @@ export type TreeOnSelectType = (node: TreeNodeType, event: React.MouseEvent<HTML
  *
  * Complete prop definition for the Tree component.
  */
+/**
+ * TreeSizeType
+ *
+ * The rows' label size. Unset, labels are base below the laptop breakpoint and small from it up.
+ */
+export type TreeSizeType = "small" | "base"
+
 export interface TreeProps {
   /** The top-level rows */
   items: TreeItemsType
@@ -125,11 +132,15 @@ export interface TreeProps {
 
   /** Accessible name of the `<nav>` landmark */
   "aria-label"?: string
+
+  /** Label size for every breakpoint; unset, base below laptop and small from it up */
+  size?: TreeSizeType
 }
 
 const TreeTypes = {} as const
 
 namespace TreeTypes {
+  export type Size = TreeSizeType
   export type NodeId = TreeNodeIdType
   export type NodeName = TreeNodeNameType
   export type NodeIcon = TreeNodeIconType

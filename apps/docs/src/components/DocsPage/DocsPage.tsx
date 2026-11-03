@@ -44,7 +44,7 @@ const DocsPage: React.FC<DocsPageProps> = ({ sections, wrapped = true, contents 
       </Flex>
     </StyledDocsPageMain>
     <StyledDocsPageAside>
-      <Contents items={contents ?? toItems(sections)} />
+      <Contents size="base" items={contents ?? toItems(sections)} />
     </StyledDocsPageAside>
     <StyledDocsPageSettings aria-label="Settings">
       <StyledDocsPageSettingsContent>{React.useContext(DocsSettingsContext)}</StyledDocsPageSettingsContent>

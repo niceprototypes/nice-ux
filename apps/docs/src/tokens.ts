@@ -14,9 +14,10 @@ export const getToken = setTokens({
   docs: { ...AppTokenMap.docs, columnGap: getCoreToken("gap", "larger"), settingsWidth: "80px" },
   // Contents sticks one page padding below the top of the scrolling page (no navigation bar here).
   contents: { top: getCoreToken("gap", "large") },
-  // One scale at every breakpoint, base 12 to larger 48: base to larger doubles each step (×2), and
-  // below base the steps go down 1px each, since halving would make them unreadable.
-  fontSize: { smaller: "10px", small: "11px", base: "12px", large: "24px", larger: "48px" },
+  // One scale at every breakpoint, base 14 to larger 48: base to larger grows by one ratio each
+  // step (√(48/14) ≈ 1.85, large rounded to 26), and below base the steps go down 1px each, since
+  // the same ratio downward would make them unreadable.
+  fontSize: { smaller: "12px", small: "13px", base: "14px", large: "26px", larger: "48px" },
   // Code blocks: a surface a step off the page, a faint border, no shadow.
   code: {
     backgroundColor: { base: getCoreToken("backgroundColor", "raised") },

@@ -30,6 +30,7 @@ createRoot(document.getElementById("root")!).render(
         pages={pages}
         router={plainRouter}
         aria-label="Docs"
+        navSize="base"
         header={
           <Flex direction="column" gap="base" grow={1}>
             <Logo />

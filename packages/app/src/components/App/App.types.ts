@@ -1,4 +1,5 @@
 import type * as React from "react"
+import type { TreeSizeType } from "@niceprototypes/tree"
 
 /**
  * AppLocationType
@@ -113,6 +114,9 @@ export interface AppProps {
 
   /** Accessible name of the nav landmark */
   "aria-label"?: string
+
+  /** The nav's label size; unset, the Tree's own (base below laptop, small from it up) */
+  navSize?: TreeSizeType
 }
 
 const AppTypes = {} as const

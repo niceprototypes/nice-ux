@@ -1,3 +1,4 @@
+import type { FontSizeType } from "@niceprototypes/styles"
 import type * as React from "react"
 
 /**
@@ -59,6 +60,13 @@ export type ContentsOnActiveChangeType = (id: ContentsItemIdType) => void
  *
  * Complete prop definition for the Contents component.
  */
+/**
+ * ContentsSizeType
+ *
+ * The heading's and rows' text size, a font size token variant.
+ */
+export type ContentsSizeType = FontSizeType
+
 export interface ContentsProps {
   /** The rows, nested by `items` */
   items: ContentsItemsType
@@ -74,11 +82,15 @@ export interface ContentsProps {
 
   /** Accessible name of the `<nav>` landmark; defaults to the heading */
   "aria-label"?: string
+
+  /** Text size of the heading and rows. @default "smaller" */
+  size?: ContentsSizeType
 }
 
 const ContentsTypes = {} as const
 
 namespace ContentsTypes {
+  export type Size = ContentsSizeType
   export type ItemId = ContentsItemIdType
   export type ItemLabel = ContentsItemLabelType
   export type Item = ContentsItemType

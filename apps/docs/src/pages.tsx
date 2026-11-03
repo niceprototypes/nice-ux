@@ -39,15 +39,22 @@ const componentPage = (component: CatalogComponentType) => pageOf(() => <Compone
 
 /**
  * The Components section, as the Storybook sidebar orders it: the folders (Forms, Scroll)
- * alphabetically, then the pages outside a folder alphabetically, each folder's pages alphabetically.
+ * alphabetically, then the pages outside a folder alphabetically, each folder's pages alphabetically
+ * after the component the folder is named for.
  */
 const componentPages = (section: string): [string, AppPagesType[string], string?][] => {
   const folders = [...new Set(catalogComponents.flatMap(component => (component.folder ? [component.folder] : [])))].sort(byName)
   const sorted = [...catalogComponents].sort((a, b) => byName(a.name, b.name))
+  // A component named like a folder (Scroll beside FadeOnScroll and the others in Scroll) is that
+  // folder's first page: a page and a folder cannot share a URL.
+  const folderOf = (component: CatalogComponentType) => component.folder ?? (folders.includes(component.name) ? component.name : undefined)
+  const inFolder = (component: CatalogComponentType, folder: string) =>
+    folderOf(component) === folder ? (component.name === folder ? 0 : 1) : -1
   return [
     ...folders.flatMap((folder, folderIndex) =>
       sorted
-        .filter(component => component.folder === folder)
+        .filter(component => inFolder(component, folder) >= 0)
+        .sort((a, b) => inFolder(a, folder) - inFolder(b, folder))
         .map((component, index): [string, AppPagesType[string], string] => [
           `./docs/${section}/${folderIndex + 1} ${folder}/${index + 1} ${component.name}/index.tsx`,
           componentPage(component),
@@ -55,7 +62,7 @@ const componentPages = (section: string): [string, AppPagesType[string], string?
         ]),
     ),
     ...sorted
-      .filter(component => !component.folder)
+      .filter(component => !folderOf(component))
       .map((component, index): [string, AppPagesType[string], string] => [
         `./docs/${section}/${folders.length + index + 1} ${component.name}/index.tsx`,
         componentPage(component),

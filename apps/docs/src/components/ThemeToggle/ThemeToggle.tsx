@@ -1,6 +1,7 @@
 import * as React from "react"
 import Toggle from "@niceprototypes/toggle"
 import { applyTheme, type ThemeName } from "@niceprototypes/styles"
+import { StyledThemeToggleLabel } from "./ThemeToggle.styles"
 
 /** The theme on `<html data-theme>`, which `main.tsx` sets from the OS preference before the first render. */
 const readTheme = (): ThemeName => (document.documentElement.getAttribute("data-theme") === "night" ? "night" : "day")
@@ -23,7 +24,7 @@ const ThemeToggle: React.FC = () => {
         setTheme(next)
       }}
     >
-      Dark
+      <StyledThemeToggleLabel>Dark</StyledThemeToggleLabel>
     </Toggle>
   )
 }

@@ -32,7 +32,7 @@ const ThemeValue = ({ theme, color, value, children }: ThemeValueProps) => {
     <ThemeValueFlex>
       {/* A row, as the table cell was: a preview that grows takes the card's width, not its height. */}
       {color === undefined ? <Flex>{children}</Flex> : <SwatchDiv $color={color} />}
-      <Ink code size="smaller" color="light">
+      <Ink code size="small" color="light">
         {value}
       </Ink>
     </ThemeValueFlex>

@@ -40,6 +40,7 @@ const Contents: React.FC<ContentsProps> = ({
   activeId: activeIdProp,
   onActiveChange,
   "aria-label": ariaLabel,
+  size = "smaller",
 }) => {
   const headingId = React.useId()
   const ids = React.useMemo(() => getContentsIds(items), [items])
@@ -120,7 +121,7 @@ const Contents: React.FC<ContentsProps> = ({
               $depth={depth}
               $active={active}
             >
-              <Ink size="smaller">{item.label}</Ink>
+              <Ink size={size}>{item.label}</Ink>
             </StyledContentsLink>
             {item.items && item.items.length > 0 ? renderList(item.items, depth + 1) : null}
           </StyledContentsItem>
@@ -136,7 +137,7 @@ const Contents: React.FC<ContentsProps> = ({
       aria-labelledby={ariaLabel === undefined ? headingId : undefined}
     >
       <StyledContentsHeading id={headingId}>
-        <Ink size="smaller">{heading}</Ink>
+        <Ink size={size}>{heading}</Ink>
       </StyledContentsHeading>
       {renderList(items, 0)}
     </StyledContents>
