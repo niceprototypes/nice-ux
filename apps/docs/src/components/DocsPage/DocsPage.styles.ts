@@ -15,10 +15,18 @@ export const StyledDocsPage = styled.div`
   }
 `
 
-/** The sections column: capped at `docs.columnWidth` when wrapped, else the width Contents leaves; a wider table scrolls sideways. */
+/**
+ * The sections column: capped at `docs.columnWidth` when wrapped, else the width Contents leaves; a
+ * wider table scrolls sideways. From tablet up its auto margin shares the free space with the
+ * settings column's, so the sections and Contents stay near the centre.
+ */
 export const StyledDocsPageMain = styled(Scroll).attrs({ axis: "x" })<{ $wrapped: boolean }>`
   flex: ${({ $wrapped }) => ($wrapped ? `0 1 ${getToken("docs", "columnWidth")}` : "1 1 auto")};
   min-width: 0;
+
+  ${getBreakpoint("tablet+")} {
+    margin-inline-start: auto;
+  }
 `
 
 /** One section: scrolled to one page padding below the top, where Contents sticks. */
@@ -40,7 +48,9 @@ export const StyledDocsPageAside = styled.aside`
 
 /**
  * The settings column, rightmost, `docs.settingsWidth` wide, its content sticky with Contents.
- * Below tablet it is a row above the sections, at their right.
+ * From tablet up it sits at the page's right edge (an auto margin takes the free space the centred
+ * columns leave) with its content at its right, so the page padding alone separates it from the
+ * edge, as it does from the top. Below tablet it is a row above the sections, at their right.
  */
 export const StyledDocsPageSettings = styled.aside`
   order: -1;
@@ -52,7 +62,7 @@ export const StyledDocsPageSettings = styled.aside`
     order: 0;
     flex: none;
     width: ${getToken("docs", "settingsWidth")};
-    display: block;
+    margin-inline-start: auto;
   }
 `
 

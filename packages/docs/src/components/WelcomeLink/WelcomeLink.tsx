@@ -1,9 +1,8 @@
 import * as React from "react"
 import { DocsNavigationContext } from "../DocsNavigation"
-import Icon from "@niceprototypes/icon"
 import Flex from "@niceprototypes/flex"
 import Ink from "../../nice/Ink"
-import { ArrowIcon, WelcomeLinkDiv } from "./WelcomeLink.styles"
+import { ArrowIcon, LeadIcon, WelcomeLinkDiv } from "./WelcomeLink.styles"
 import type { WelcomeLinkProps } from "./WelcomeLink.types"
 
 const WelcomeLink: React.FC<WelcomeLinkProps> = ({
@@ -31,11 +30,10 @@ const WelcomeLink: React.FC<WelcomeLinkProps> = ({
     >
       <Flex
         gap={stripped ? "base" : "large"}
-        padding={stripped ? "none" : "base"}
+        padding={stripped ? "none" : "large"}
       >
-        <Icon
+        <LeadIcon
           name={iconName}
-          size="large"
           strokeScaling
         />
         <Flex

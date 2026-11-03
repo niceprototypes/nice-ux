@@ -24,6 +24,18 @@ export const getToken = setTokens({
     borderColor: { base: getCoreToken("borderColor", "subtle") },
     boxShadow: { base: "none" },
   },
+  // Fields (the sidebar Search) at the nav links' size from tablet up; phones keep Input's 16px floor, below which iOS zooms in on focus.
+  input: {
+    fontSize: {
+      base: {
+        phone: `max(16px, ${getCoreToken("fontSize", "base")})`,
+        // Each breakpoint key covers only its own range, so laptop and desktop are listed too.
+        tablet: getCoreToken("fontSize", "base"),
+        laptop: getCoreToken("fontSize", "base"),
+        desktop: getCoreToken("fontSize", "base"),
+      },
+    },
+  },
   // Code takes Adobe Fonts' Antarctican Mono (its kit is linked in index.html).
   fontFamily: { ...AppTokenMap.fontFamily, code: '"antarctican-mono", sans-serif' },
 })

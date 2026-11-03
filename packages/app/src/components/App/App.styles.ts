@@ -26,21 +26,25 @@ export const StyledAppAside = styled.div`
   min-height: 0;
 `
 
-/** The sidebar's header row, above the nav and the scene sidebar, with the nav's padding; the nav's top padding sets it apart. */
+/**
+ * The sidebar's header row, above the nav and the scene sidebar, with the nav's padding. Its own
+ * bottom padding (the base gap) sets it apart: padding inside the scrolling columns would scroll
+ * away, and the rows would slide up against the header.
+ */
 export const StyledAppHeader = styled.div`
   flex: none;
   display: flex;
-  padding: ${getToken("gap:large")} ${getToken("gap:large")} 0;
+  padding: ${getToken("gap:large")} ${getToken("gap:large")} ${getToken("gap")};
 `
 
-/** The nav and the scene sidebar, side by side in the height the footer leaves; under a header, their top padding is the base gap. */
+/** The nav and the scene sidebar, side by side in the height the footer leaves; under a header, which spaces them, they have no top padding. */
 export const StyledAppColumns = styled.div`
   flex: 1 1 auto;
   display: flex;
   min-height: 0;
 
   ${StyledAppHeader} + & > * {
-    padding-block-start: ${getToken("gap")};
+    padding-block-start: 0;
   }
 `
 

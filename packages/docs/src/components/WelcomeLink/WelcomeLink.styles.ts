@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import Icon from "@niceprototypes/icon"
 
-import { getBreakpoint, getToken } from "@niceprototypes/styles"
+import { getBreakpoint, getTextHeight, getToken } from "@niceprototypes/styles"
 
 /**
  * The trailing arrow.
@@ -14,6 +14,12 @@ export const ArrowIcon = styled(Icon)`
   ${getBreakpoint("laptop+")} {
     opacity: 0.15;
   }
+`
+
+/** The leading icon, a square as tall as one line of the title (large type at condensed heading leading). */
+export const LeadIcon = styled(Icon)`
+  width: ${getTextHeight("large", "condensed")};
+  height: ${getTextHeight("large", "condensed")};
 `
 
 export const WelcomeLinkDiv = styled.div<{ $stripped?: boolean }>`
