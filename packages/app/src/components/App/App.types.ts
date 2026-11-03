@@ -26,12 +26,15 @@ export type AppNavigateType = (to: string, options?: { replace?: boolean }) => v
  * - useLocation: the current location; re-renders on every change, back and forward included
  * - useNavigate: a function that goes to a path
  * - Link: an anchor that navigates on the router instead of loading the page
+ * - href: the address of a path for the plain anchors the shell renders (the nav); a site served
+ *   under a base path adds it. Unset, the path itself
  */
 export type AppRouterType = {
   Provider: React.ComponentType<{ children?: React.ReactNode }>
   useLocation: () => AppLocationType
   useNavigate: () => AppNavigateType
   Link: React.ComponentType<{ to: string; children?: React.ReactNode }>
+  href?: (to: string) => string
 }
 
 /**

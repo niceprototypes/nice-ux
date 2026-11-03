@@ -10,7 +10,10 @@
  */
 const { chromium } = require("playwright")
 
-const base = process.env.DOCS_URL ?? "http://localhost:6020"
+/** DOCS_URL may carry a base path (http://localhost:5000/ui): pages open at the origin plus their href, which includes it. */
+const docsUrl = new URL(process.env.DOCS_URL ?? "http://localhost:6020")
+const origin = docsUrl.origin
+const prefix = docsUrl.pathname.replace(/\/$/, "")
 const INSTALL = /^(npm (i|install)|pnpm (add|i|install)|yarn add)\b/
 
 ;(async () => {
@@ -20,20 +23,20 @@ const INSTALL = /^(npm (i|install)|pnpm (add|i|install)|yarn add)\b/
   let pages = 0
   for (const dark of [false, true]) {
     const page = await browser.newPage({ viewport: { width: 1400, height: 900 }, colorScheme: dark ? "dark" : "light" })
-    await page.goto(`${base}/docs/tokens`, { waitUntil: "domcontentloaded" })
-    const urls = new Set(await page.evaluate(() => [...document.querySelectorAll("nav a[href^='/docs/']")].map(a => a.getAttribute("href"))))
+    await page.goto(`${origin}${prefix}/docs/tokens`, { waitUntil: "domcontentloaded" })
+    const urls = new Set(await page.evaluate(prefix => [...document.querySelectorAll(`nav a[href^='${prefix}/docs/']`)].map(a => a.getAttribute("href")), prefix))
     for (const url of urls) {
       const errors = []
       const onError = error => errors.push(error.message)
       // A resource from another origin (a demo image service) that fails to load is not the site's error.
       const onConsole = message =>
-        message.type() === "error" && !(message.text().startsWith("Failed to load resource") && !message.location().url.startsWith(base)) && errors.push(message.text())
+        message.type() === "error" && !(message.text().startsWith("Failed to load resource") && !message.location().url.startsWith(origin)) && errors.push(message.text())
       page.on("pageerror", onError)
       page.on("console", onConsole)
-      await page.goto(base + url, { waitUntil: "domcontentloaded" })
+      await page.goto(origin + url, { waitUntil: "domcontentloaded" })
       await page.waitForTimeout(1500)
       // Folders open as their pages load: every page in the sidebar gets visited.
-      for (const more of await page.evaluate(() => [...document.querySelectorAll("nav a[href^='/docs/']")].map(a => a.getAttribute("href")))) urls.add(more)
+      for (const more of await page.evaluate(prefix => [...document.querySelectorAll(`nav a[href^='${prefix}/docs/']`)].map(a => a.getAttribute("href")), prefix)) urls.add(more)
       const blocks = await page.evaluate(
         pattern => [...document.querySelectorAll("pre.shiki")].map(pre => pre.textContent.trim()).filter(text => !text.includes("\n") && new RegExp(pattern).test(text)),
         INSTALL.source,
@@ -61,7 +64,7 @@ const INSTALL = /^(npm (i|install)|pnpm (add|i|install)|yarn add)\b/
           const landed = new URL(page.url()).pathname
           const opened = await page.evaluate(() => !!document.querySelector("section"))
           if (landed === url || !opened) errors.push(`link goes nowhere: "${label}" (at ${landed})`)
-          await page.goto(base + url, { waitUntil: "domcontentloaded" })
+          await page.goto(origin + url, { waitUntil: "domcontentloaded" })
           await page.waitForTimeout(500)
         }
       }
@@ -76,11 +79,11 @@ const INSTALL = /^(npm (i|install)|pnpm (add|i|install)|yarn add)\b/
   {
     const page = await browser.newPage()
     for (const { from, href } of linkChecks.filter((check, index, all) => all.findIndex(other => other.href === check.href) === index)) {
-      await page.goto(base + href, { waitUntil: "domcontentloaded" })
+      await page.goto(new URL(href, origin + from).href, { waitUntil: "domcontentloaded" })
       await page.waitForTimeout(800)
       const landed = new URL(page.url()).pathname
       const pageExists = await page.evaluate(() => !!document.querySelector("section"))
-      if (!pageExists || !landed.startsWith("/docs/")) problems.push(`dead link on ${from}: ${href} (lands on ${landed})`)
+      if (!pageExists || !landed.startsWith(`${prefix}/docs/`)) problems.push(`dead link on ${from}: ${href} (lands on ${landed})`)
     }
     await page.close()
   }

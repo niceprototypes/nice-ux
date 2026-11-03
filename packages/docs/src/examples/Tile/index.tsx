@@ -6,10 +6,11 @@ import Icon from "@niceprototypes/icon"
 import Button from "@niceprototypes/button"
 import { Theme, getToken } from "@niceprototypes/styles"
 import type { ComponentExample } from "./examples.types"
+import { assetUrl } from "../../utilities/assetUrl"
 
 export type { ComponentExample, ExampleVariant } from "./examples.types"
 
-const image = `url("/rasters/og-image.png")`
+const image = `url("${assetUrl("rasters/og-image.png")}")`
 const gradient = `linear-gradient(135deg, ${getToken("backgroundColor", "link")}, ${getToken("backgroundColor", "success")})`
 
 export const tileChildren = {

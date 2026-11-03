@@ -25,7 +25,8 @@ import { tokenPageId } from "../data"
  * A non-component reference with more than two `--` segments (a theme / inverse
  * primitive) is not a module root and returns `null`.
  *
- * The href uses Storybook's manager-route form (`/?path=/docs/{id}--docs`) — a
+ * The href uses Storybook's manager-route form (`/?path=/docs/{id}--docs`, under the app's
+ * base: `/ui/?path=…` on the docs site, `./?path=…` in Storybook's relative build) — a
  * raw `/docs/…` anchor 404s, since only MDX-rendered links get rewritten — and
  * the anchor navigates with `target="_top"` (it lives inside the preview
  * iframe). The highlight target is carried solely by sessionStorage (written on
@@ -74,7 +75,7 @@ export function parseTokenVarLink(value: string): TokenVarLink | null {
       group,
       variant,
       token: `${group}--${variant}`,
-      href: `/?path=/docs/components-${group.toLowerCase()}-tokens--docs`,
+      href: `${import.meta.env.BASE_URL}?path=/docs/components-${group.toLowerCase()}-tokens--docs`,
     }
   }
 
@@ -86,5 +87,5 @@ export function parseTokenVarLink(value: string): TokenVarLink | null {
   const pageId = tokenPageId(group)
   if (!pageId) return null // no page documents this group
 
-  return { group, variant, token, href: `/?path=/docs/${pageId}--docs` }
+  return { group, variant, token, href: `${import.meta.env.BASE_URL}?path=/docs/${pageId}--docs` }
 }

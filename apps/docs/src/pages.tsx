@@ -128,7 +128,8 @@ export const docsUrlOf = (storyId: string): string | undefined => {
   const sub = storyId.startsWith("components-") ? subcomponentPages.find(page => storyId.replace(/--.*$/, "").endsWith(`-${page.id}`)) : undefined
   if (sub) return sub.to
   // A page of its own wins (Tokens is a folder with its own page); otherwise where it moved.
-  const exact = entries.find(([, , itemId]) => itemId === storyId.replace(/--.*$/, ""))?.[0]
+  // Component pages keep their `--docs` id, so a story of the same component (`--primary`) matches too.
+  const exact = entries.find(([, , itemId]) => itemId?.replace(/--.*$/, "") === storyId.replace(/--.*$/, ""))?.[0]
   if (exact) return getAppPageUrl(exact)
   const id = moved(storyId.replace(/--.*$/, ""))
   const key = entries.find(([, , itemId]) => itemId === id.page || itemId === storyId)?.[0]
@@ -157,8 +158,12 @@ const moved = (id: string): { page: string; hash: string } => {
  * (`/?path=/docs/onboarding-themes--docs`).
  */
 export const redirectOf = (pathname: string, search: string): string | undefined => {
-  const story = new URLSearchParams(search).get("path")?.replace(/^\/docs\//, "")
+  const params = new URLSearchParams(search)
+  const story = params.get("path")?.replace(/^\/(docs|story)\//, "")
   if (story) return docsUrlOf(story)
+  // Storybook's preview frame (`/iframe.html?id=components-forms-button--primary`) opens the docs page of its id.
+  if (pathname === "/iframe.html") return (params.get("id") && docsUrlOf(params.get("id")!)) || "/"
+  if (pathname === "/index.html") return "/"
   if (pathname.startsWith("/docs/manifest")) return docsUrlOf("manifest")
   if (pathname.startsWith("/docs/basics")) return pathname.replace(/^\/docs\/basics/, "/docs/onboarding")
   // A group's removed Overview opens its first page; a numbered CLI page, its unnumbered one.

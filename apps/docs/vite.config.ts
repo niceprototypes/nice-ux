@@ -31,19 +31,42 @@ const storybookShims = [
   { find: /^@storybook\/addon-docs\/blocks$/, replacement: resolve(import.meta.dirname, "src/storybookShims/blocks.tsx") },
 ]
 
-/** MDX compiled to components, GFM tables as in Storybook; a `?raw` import stays text (the plugin filters on the path alone). */
-const mdxPlugin = mdx({ remarkPlugins: [remarkGfm] })
-const mdxPages: Plugin = {
-  ...mdxPlugin,
-  enforce: "pre",
-  transform(code, id) {
-    return id.includes("?raw") ? null : mdxPlugin.transform.call(this, code, id)
-  },
+/** An MDX tree node: a markdown link (`url`) or a JSX element (`<a href>`) among the ones walked. */
+type MdxNodeType = { type: string; name?: string; url?: string; attributes?: { name?: string; value?: unknown }[]; children?: MdxNodeType[] }
+
+/** Root-relative links (`/?path=/docs/…`, `[…](/docs/…)`, JSX `<a href>` included) under the site's base. */
+const remarkBase = (base: string) => () => (tree: MdxNodeType) => {
+  const prefixed = (url: string) => (url.startsWith("/") && !url.startsWith("//") ? `${base}${url}` : url)
+  const walk = (node: MdxNodeType) => {
+    if (node.type === "link" && node.url) node.url = prefixed(node.url)
+    if (node.name === "a")
+      node.attributes?.forEach(attribute => {
+        if (attribute.name === "href" && typeof attribute.value === "string") attribute.value = prefixed(attribute.value)
+      })
+    node.children?.forEach(walk)
+  }
+  walk(tree)
 }
 
-export default defineConfig({
+/** MDX compiled to components, GFM tables as in Storybook; a `?raw` import stays text (the plugin filters on the path alone). */
+const mdxPages = (base: string): Plugin => {
+  const mdxPlugin = mdx({ remarkPlugins: [remarkGfm, remarkBase(base)] })
+  return {
+    ...mdxPlugin,
+    enforce: "pre",
+    transform(code, id) {
+      return id.includes("?raw") ? null : mdxPlugin.transform.call(this, code, id)
+    },
+  }
+}
+
+/** Built for niceprototypes.com/ui (the website's public/ui); the dev server stays at the root. */
+const baseOf = (command: string) => (command === "build" ? "/ui" : "")
+
+export default defineConfig(({ command }) => ({
+  base: `${baseOf(command)}/`,
   // MDX before React, so the compiled pages get React's transform.
-  plugins: [mdxPages, react({ include: /\.(mdx|tsx?)$/ })],
+  plugins: [mdxPages(baseOf(command)), react({ include: /\.(mdx|tsx?)$/ })],
   resolve: {
     alias: [...sourceAliases, ...storybookShims],
     // One React and one styled-components context for this app and the Storybook modules it reuses.
@@ -53,4 +76,4 @@ export default defineConfig({
   publicDir: resolve(import.meta.dirname, "../storybook/public"),
   server: { port: 6020, strictPort: true },
   preview: { port: 6020, strictPort: true },
-})
+}))

@@ -123,13 +123,15 @@ const AppShell: React.FC<AppProps> = ({ scenes, docs, pages, router, wrapper: Wr
                 <Tree
                   aria-label={ariaLabel}
                   size={navSize}
-                  items={buildAppTree(index, current, location.search)}
+                  items={buildAppTree(index, current, location.search, router.href)}
                   expandedIds={expandedIds}
                   onExpandedChange={setExpandedIds}
                   onSelect={(node, event) => {
                     if (node.url === undefined || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
                     event.preventDefault()
-                    navigate(node.url)
+                    // The row's URL is the router's href; navigate takes the entry's own path.
+                    const entry = index.find(({ url }) => (router.href?.(`${url}${location.search}`) ?? `${url}${location.search}`) === node.url)
+                    if (entry) navigate(`${entry.url}${location.search}`)
                   }}
                 />
               </StyledAppNav>

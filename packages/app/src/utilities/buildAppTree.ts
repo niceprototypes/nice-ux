@@ -14,8 +14,14 @@ const isGrouped = (entries: AppEntryType[]) => entries.some(entry => entry.kind 
  * docs section pages; none in a docs-only app), a folder per story, chapter of several
  * pages or docs folder, and a link per page (a one-scene chapter is one link). Links keep the URL's
  * query string (`search`), so a setting such as `?device=` survives the switch; the current page is active.
+ * Each link's URL goes through `href` (the router's, which adds a base path) when given.
  */
-export const buildAppTree = (entries: AppEntryType[], current: AppEntryType | undefined, search: string): TreeItemsType => {
+export const buildAppTree = (
+  entries: AppEntryType[],
+  current: AppEntryType | undefined,
+  search: string,
+  href: (to: string) => string = to => to,
+): TreeItemsType => {
   const root: MutableNode[] = []
   const grouped = isGrouped(entries)
   for (const entry of entries) {
@@ -27,7 +33,7 @@ export const buildAppTree = (entries: AppEntryType[], current: AppEntryType | un
     names.forEach((name, depth) => {
       const id = slugs.slice(0, depth + 1 + skip).join("/")
       if (depth === names.length - 1) {
-        level.push({ id, name, icon: null, url: `${entry.url}${search}`, status: entry === current ? "active" : undefined })
+        level.push({ id, name, icon: null, url: href(`${entry.url}${search}`), status: entry === current ? "active" : undefined })
         return
       }
       let folder = level.find(node => node.id === id)

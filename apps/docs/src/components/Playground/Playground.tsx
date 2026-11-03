@@ -17,7 +17,7 @@ import { StyledPlaygroundControls, StyledPlaygroundPreview } from "./Playground.
  * whose sources need their generators.
  */
 const packages: Record<string, () => Promise<Record<string, unknown>>> = {
-  ...import.meta.glob<Record<string, unknown>>(["../../../../../packages/*/src/index.ts", "!**/packages/icon/**"]),
+  ...import.meta.glob<Record<string, unknown>>(["../../../../../packages/*/src/index.ts", "!../../../../../packages/icon/**", "!../../../../../packages/config-exports/**", "!../../../../../packages/vite-watcher/**"]),
   "../../../../../packages/icon/src/index.ts": () => import("@niceprototypes/icon"),
 }
 

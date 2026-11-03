@@ -9,10 +9,11 @@
   },
   "scripts": {
     "build": "pnpm -r build",
-    "test": "pnpm -r test",
+    "test": "pnpm -r test && pnpm build-docs",
     "typecheck": "pnpm -r typecheck",
     "storybook": "pnpm --filter @niceprototypes/storybook dev",
     "build-storybook": "pnpm --filter @niceprototypes/storybook build",
+    "build-docs": "pnpm --filter @niceprototypes/docs-site build",
     "changeset": "changeset"
   },
   "devDependencies": {

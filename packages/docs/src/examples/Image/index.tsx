@@ -5,10 +5,11 @@ import Image from "@niceprototypes/image"
 import Ink from "@niceprototypes/ink"
 import Flex from "@niceprototypes/flex"
 import type { ComponentExample } from "./examples.types"
+import { assetUrl } from "../../utilities/assetUrl"
 
 export type { ComponentExample, ExampleVariant } from "./examples.types"
 
-const photo = "/rasters/og-image.png"
+const photo = assetUrl("rasters/og-image.png")
 
 export const imageSrc = {
   name: "src",
