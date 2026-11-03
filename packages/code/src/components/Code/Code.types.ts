@@ -40,8 +40,9 @@ export type CodeInlinedType = boolean
 /**
  * CodeFitType
  *
- * Shrink the card to its content (`width: max-content`) so it sits inline beside
- * other content rather than filling the row.
+ * Shrink the card to its content (`width: max-content`) so it sits beside other
+ * content. Off (the default), the card fills its container, capped by `code.maxWidth`
+ * (100% unless set narrower), and long lines scroll inside it.
  */
 export type CodeFitType = boolean
 
@@ -86,7 +87,7 @@ export interface CodeProps {
   copyOnClick?: CodeCopyOnClickType
   /** Strip card chrome and render flush inline as plain code text. @default false */
   inlined?: CodeInlinedType
-  /** Shrink the card to its content width. @default true */
+  /** Shrink the card to its content width. @default false */
   fit?: CodeFitType
   /** Top/bottom margin as a `gap` token variant. @default "large" */
   margin?: CodeMarginType

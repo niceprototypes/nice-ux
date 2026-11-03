@@ -49,7 +49,7 @@ const meta = {
     showLabel: true,
     copyOnClick: true,
     inlined: false,
-    fit: true,
+    fit: false,
     margin: "large",
     maxHeight: "base",
   },
@@ -70,10 +70,10 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-/** The rendered Code root: the nearest ancestor of the highlighted block that sets the card's fixed max-width (the scroll container's 100% is skipped). */
+/** The rendered Code root: the nearest ancestor of the highlighted block with the card's border. */
 const root = (canvasElement: HTMLElement) => {
   let element = canvasElement.querySelector(".shiki")!.parentElement!
-  while (["none", "100%"].includes(getComputedStyle(element).maxWidth)) element = element.parentElement!
+  while (getComputedStyle(element).borderTopStyle !== "solid") element = element.parentElement!
   return element
 }
 
@@ -161,6 +161,14 @@ export const NoCopy: Story = {
     await userEvent.click(root(canvasElement))
     await expect(writeText).not.toHaveBeenCalled()
     writeText.mockRestore()
+  },
+}
+
+export const Fit: Story = {
+  args: { fit: true },
+  play: async ({ canvasElement }) => {
+    // Hugged: the card is as wide as its code, narrower than the canvas it would otherwise fill.
+    await expect(root(canvasElement).getBoundingClientRect().width).toBeLessThan(canvasElement.getBoundingClientRect().width)
   },
 }
 

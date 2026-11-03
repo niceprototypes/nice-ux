@@ -3,7 +3,7 @@ import Code from "@niceprototypes/code"
 import type { ContentsItemType } from "@niceprototypes/contents"
 import { ShikiPre } from "@niceprototypes/docs/components/ShikiPre"
 import DocsPage from "../DocsPage"
-import { StyledMdxContent } from "./MdxPage.styles"
+import DocsContent from "@niceprototypes/docs/components/DocsContent"
 
 /** Markdown inline code as the inline Code chip; fenced code goes through ShikiPre, which reads its own `<code>`. */
 const InlineCode = ({ children }: { children?: React.ReactNode }) => <Code code={String(children)} inlined margin="none" />
@@ -42,7 +42,8 @@ const headingsOf = (root: HTMLElement): ContentsItemType[] => {
  * MdxPage
  *
  * One MDX page on the docs site: its content as the page's one section, fenced code through
- * Code (ShikiPre), inline code as Code chips, Contents listing its headings, the column capped
+ * Code (ShikiPre), inline code as Code chips, the docs rhythm (DocsContent), Contents listing
+ * its headings, the column capped
  * unless the page's data says `wrapped: false`.
  */
 const MdxPage: React.FC<{ id: string; label: string; wrapped: boolean; Content: MdxModuleType["default"] }> = ({ id, label, wrapped, Content }) => {
@@ -60,9 +61,9 @@ const MdxPage: React.FC<{ id: string; label: string; wrapped: boolean; Content: 
           id,
           label,
           content: (
-            <StyledMdxContent ref={content}>
+            <DocsContent ref={content}>
               <Content components={{ pre: ShikiPre, code: InlineCode }} />
-            </StyledMdxContent>
+            </DocsContent>
           ),
         },
       ]}

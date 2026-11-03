@@ -24,6 +24,15 @@ export const AppTokenMap = {
     // The fixed storybook-navigation bar's height at laptop+ (its ReservedSpaceStyle): docs
     // sections scroll to just below it.
     barHeight: `calc(${getCoreToken("gap", "large")} * 2 + ${getCoreToken("size", "small")})`,
+    // The vertical rhythm of a docs page's content (DocsContent), on the gap scale: each block
+    // one flow step apart; a heading more space above than below, so it groups with its content.
+    flow: getCoreToken("gap", "base"),
+    titleBelow: getCoreToken("gap", "large"),
+    sectionAbove: getCoreToken("gap", "larger"),
+    sectionBelow: getCoreToken("gap", "base"),
+    subsectionAbove: getCoreToken("gap", "large"),
+    subsectionBelow: getCoreToken("gap", "small"),
+    rule: getCoreToken("gap", "large"),
   },
   // Contents sticks a large gap below the navigation bar.
   contents: {

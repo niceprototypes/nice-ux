@@ -429,7 +429,7 @@
 	--np--code--color--lightest: var(--np--color--lightest);
 	--np--code--color--link: var(--np--color--link);
 	--np--code--color--highlight: var(--np--color--highlight);
-	--np--code--max-width: 720px;
+	--np--code--max-width: 100%;
 	--np--code--max-height: 200px;
 	--np--code--fade-start: 25%;
 	--np--code--syntax-color--neutral: hsla(225, 4%, 17%, 1);

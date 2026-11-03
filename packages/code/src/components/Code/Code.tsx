@@ -28,7 +28,7 @@ const Code: React.FC<CodeProps> = ({
   showLabel = true,
   copyOnClick = true,
   inlined = false,
-  fit = true,
+  fit = false,
   margin = "large",
   maxHeight = "base",
   className,

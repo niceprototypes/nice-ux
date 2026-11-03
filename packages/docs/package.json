@@ -62,6 +62,7 @@
     "./components/ClickHint": "./src/components/ClickHint/index.ts",
     "./components/ClickToCopy": "./src/components/ClickToCopy/index.ts",
     "./components/DataTable": "./src/components/DataTable/index.ts",
+    "./components/DocsContent": "./src/components/DocsContent/index.ts",
     "./components/DocsNavigation": "./src/components/DocsNavigation/index.ts",
     "./components/Install": "./src/components/Install/index.ts",
     "./components/LifecycleStory": "./src/components/LifecycleStory/index.ts",

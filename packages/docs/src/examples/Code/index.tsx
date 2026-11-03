@@ -98,9 +98,9 @@ export const codeInlined = {
 
 export const codeFit = {
   name: "fit",
-  description: "true shrinks the card to its content width; false fills the row.",
+  description: "false (the default) fills the container, long lines scrolling inside; true shrinks the card to its content width.",
   variants: ["true", "false"],
-  default: "true",
+  default: "false",
   preview: variant => (
     <Code
       code={sources.bash}

@@ -328,7 +328,7 @@ const componentTokensData: ComponentTokensData = {
       "highlight": "var(--np--color--highlight)"
     },
     "maxWidth": {
-      "base": "720px"
+      "base": "100%"
     },
     "maxHeight": {
       "base": "200px"

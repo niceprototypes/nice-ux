@@ -6,9 +6,9 @@ import { getToken } from "@niceprototypes/styles"
  * Sizing wrapper for storybook Code instances: a ContentFlex, so `wrapped` caps
  * it at the content width, and the card inside always fits its parent.
  *
- * @niceprototypes/code's card caps at the `code.maxWidth` token (with `width: max-content`
- * when `fit`), which ignores the viewport — so the child rule re-caps the card to
- * this wrapper.
+ * @niceprototypes/code's card fills its container up to the `code.maxWidth` token
+ * (`width: max-content` when `fit`); the child rule keeps a fit card inside this
+ * wrapper as well.
  */
 export const CodeFlex = styled(ContentFlex)`
   min-width: 0;
