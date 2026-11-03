@@ -195,7 +195,9 @@ describe.each(adapters)("App on the %s adapter", (_, router) => {
     const header = screen.getByText("logo").parentElement!
     expect(header.nextElementSibling).toContainElement(screen.getByRole("navigation"))
     expect(header.nextElementSibling).toContainElement(screen.getByText("steps"))
-    expect(getComputedStyle(screen.getByRole("navigation").parentElement!).paddingBlockStart).toBe("var(--np--gap)")
+    // The header carries the gap below it; the scrolling nav under it has no top padding to scroll away.
+    expect(getComputedStyle(header).paddingBlockEnd).toBe("var(--np--gap)")
+    expect(getComputedStyle(screen.getByRole("navigation").parentElement!).paddingBlockStart).toBe("0")
     unmount()
     window.history.replaceState(null, "", "/frame/stories/gamma/steps")
     render(<App scenes={scenes} router={router} header={<p>logo</p>} />)
@@ -207,7 +209,7 @@ describe.each(adapters)("App on the %s adapter", (_, router) => {
     window.history.replaceState(null, "", "/stories/gamma/steps")
     render(<App scenes={scenes} router={router} />)
     await screen.findByText("steps")
-    expect(getComputedStyle(screen.getByRole("navigation").parentElement!).paddingBlockStart).not.toBe("var(--np--gap)")
+    expect(getComputedStyle(screen.getByRole("navigation").parentElement!).paddingBlockStart).not.toBe("0")
   })
 
   it("sizes the sidebar from the app.sidebar.minWidth token", async () => {

@@ -34,7 +34,8 @@ export const StyledAppAside = styled.div`
 export const StyledAppHeader = styled.div`
   flex: none;
   display: flex;
-  padding: ${getToken("gap:large")} ${getToken("gap:large")} ${getToken("gap")};
+  padding: ${getToken("gap:large")};
+  padding-block-end: ${getToken("gap")};
 `
 
 /** The nav and the scene sidebar, side by side in the height the footer leaves; under a header, which spaces them, they have no top padding. */
