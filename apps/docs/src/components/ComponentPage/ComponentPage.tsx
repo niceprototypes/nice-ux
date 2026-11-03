@@ -44,7 +44,7 @@ const ComponentPage: React.FC<{ component: CatalogComponentType }> = ({ componen
       label: "Overview",
       content: (
         <Flex direction="column" gap="large">
-          <StoryHeader title={component.name} />
+          <StoryHeader title={component.name} packageName={component.package} />
           <Install package={component.package.replace("@niceprototypes/", "")} />
           <Code language="tsx" code={importLine} />
         </Flex>

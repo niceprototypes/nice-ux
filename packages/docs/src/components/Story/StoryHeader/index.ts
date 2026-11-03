@@ -1,2 +1,2 @@
 export { default } from "./StoryHeader"
-export type { Repo, RepoStatus, StoryHeaderProps } from "./StoryHeader.types"
+export type { StoryHeaderProps } from "./StoryHeader.types"
