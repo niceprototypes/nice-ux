@@ -22,21 +22,25 @@ export const WelcomeLinkDiv = styled.div<{ $stripped?: boolean }>`
   border: ${({ $stripped }) => ($stripped ? "0" : `1px solid ${getToken("borderColor")}`)};
   border-radius: ${getToken("borderRadius")};
   box-shadow: ${({ $stripped }) => ($stripped ? "none" : getToken("boxShadow"))};
+  /* A raised surface, like a code block. */
+  background-color: ${({ $stripped }) => ($stripped ? "transparent" : getToken("backgroundColor", "raised"))};
 
   h3 {
     line-height: ${getToken("size", "small")};
   }
 
-  &:hover {
-    border: ${({ $stripped }) => ($stripped ? "0" : `1px solid ${getToken("color", "link")}`)};
-    color: ${getToken("color", "link")};
-    
+  /* Highlighted in the base text colour: near-white at night, near-black by day. */
+  &:hover,
+  &:focus-visible {
+    border: ${({ $stripped }) => ($stripped ? "0" : `1px solid ${getToken("color")}`)};
+    color: ${getToken("color")};
+
     h3, span {
       color: inherit;
     }
-    
+
     svg * {
-      stroke: ${getToken("color", "link")};
+      stroke: ${getToken("color")};
     }
 
     ${ArrowIcon} {

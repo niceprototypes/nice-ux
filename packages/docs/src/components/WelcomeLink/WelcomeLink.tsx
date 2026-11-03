@@ -31,7 +31,7 @@ const WelcomeLink: React.FC<WelcomeLinkProps> = ({
     >
       <Flex
         gap={stripped ? "base" : "large"}
-        padding={stripped ? "none" : "large"}
+        padding={stripped ? "none" : "base"}
       >
         <Icon
           name={iconName}
