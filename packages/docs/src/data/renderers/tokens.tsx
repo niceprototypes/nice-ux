@@ -6,7 +6,7 @@ import PreviewCell from "../../components/PreviewCell"
 import ThemeSplit from "../../components/ThemeSplit"
 import DemoDots from "../../components/DemoDots"
 import { TokenPreview } from "../../components/TokenPreview"
-import { Dot, EasingPath, EasingSvg, Track } from "../../dataTables/data/styles"
+import { Dot, EasingAcross, EasingBall, EasingChart, EasingPath, EasingRail, EasingRise, EasingSvg, Track } from "../../dataTables/data/styles"
 import { loremIpsum } from "../../dataTables/data/constants"
 import type { Renderer } from "./index"
 import { assetUrl } from "../../utilities/assetUrl"
@@ -26,7 +26,7 @@ export const tokenRenderers: Record<string, Renderer> = {
     </Track>
   ),
 
-  "tokens-animation-animationeasing": ({ path }) => (
+  "tokens-animation-animationeasing": ({ path, variant }) => (
     <Flex
       grow={1}
       padding="smaller"
@@ -36,9 +36,19 @@ export const tokenRenderers: Record<string, Renderer> = {
         borderRadius: getToken("borderRadius", "small"),
       }}
     >
-      <EasingSvg viewBox="0 0 60 24">
-        <EasingPath d={path} />
-      </EasingSvg>
+      <EasingChart>
+        <EasingSvg viewBox="0 0 60 24">
+          <EasingPath d={path} />
+        </EasingSvg>
+        {/* The ball rides the curve: x linear in time, y on this token's easing. */}
+        <EasingRail>
+          <EasingAcross>
+            <EasingRise $easing={getToken("animationEasing", variant, { as: "value" })}>
+              <EasingBall />
+            </EasingRise>
+          </EasingAcross>
+        </EasingRail>
+      </EasingChart>
     </Flex>
   ),
 
