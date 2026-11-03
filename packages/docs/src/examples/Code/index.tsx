@@ -37,13 +37,18 @@ export const codeLanguage = {
     "Fence language, mapped to a grammar: tsx (also ts, typescript, jsx, js, javascript), css, bash (also sh, shell), html (also xml) and json. Anything else, or none, renders as plain text.",
   variants: ["tsx", "css", "bash", "html", "json", "none"],
   default: "none",
+  // The bash sample is an install command, which renders as an inline chip.
   preview: variant => (
     <Code
       code={sources[variant] ?? source}
       language={variant === "none" ? undefined : variant}
+      inlined={variant === "bash"}
     />
   ),
-  code: variant => (variant === "none" ? `<Code code={source} />` : `<Code code={source} language="${variant}" />`),
+  code: variant =>
+    variant === "none"
+      ? `<Code code={source} />`
+      : `<Code code={source} language="${variant}"${variant === "bash" ? " inlined" : ""} />`,
 } satisfies ComponentExample
 
 export const codeShowLabel = {
@@ -103,13 +108,12 @@ export const codeFit = {
   default: "false",
   preview: variant => (
     <Code
-      code={sources.bash}
-      language="bash"
+      code={source}
+      language="tsx"
       fit={variant === "true"}
     />
   ),
-  code: variant =>
-    variant === "false" ? `<Code code={source} language="bash" fit={false} />` : `<Code code={source} language="bash" />`,
+  code: variant => (variant === "true" ? `<Code code={source} language="tsx" fit />` : `<Code code={source} language="tsx" />`),
 } satisfies ComponentExample
 
 export const codeMargin = {
@@ -119,13 +123,13 @@ export const codeMargin = {
   default: "large",
   preview: variant => (
     <Code
-      code={sources.bash}
-      language="bash"
+      code={source}
+      language="tsx"
       margin={variant}
     />
   ),
   code: variant =>
-    variant === "large" ? `<Code code={source} language="bash" />` : `<Code code={source} language="bash" margin="${variant}" />`,
+    variant === "large" ? `<Code code={source} language="tsx" />` : `<Code code={source} language="tsx" margin="${variant}" />`,
 } satisfies ComponentExample
 
 /** Enough lines to pass the collapsed height. */
