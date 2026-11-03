@@ -9,7 +9,7 @@ export type AppContextValue = {
   open: (entry: AppEntryType) => void
   preload: (entry: AppEntryType) => void
   region: React.RefObject<HTMLDivElement | null>
-  sidebar: HTMLDivElement | null
+  sidebar: HTMLElement | null
   sidebarFooter: HTMLDivElement | null
 }
 

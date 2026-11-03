@@ -53,7 +53,7 @@ const config: StorybookConfig = {
     "../../../packages/docs/src/content/**/*.mdx",
     // Legacy Slider / Scroll docs pages, hidden until reworked; the CSF Playgrounds are indexed.
     "!../stories/Components/Slider/**/*.mdx",
-    "!../stories/Components/Scroll/**",
+    "!../stories/Components/Scroll/**/*.mdx",
   ],
   addons: [
     getAbsolutePath("@storybook/addon-links"),

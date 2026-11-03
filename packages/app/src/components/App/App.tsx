@@ -22,7 +22,7 @@ import { buildAppTree, getAppAncestorIds } from "../../utilities/buildAppTree"
 const FRAME = "/frame"
 
 /** The shell inside the router's Provider, where the router's hooks work. */
-const AppShell: React.FC<AppProps> = ({ scenes, docs, pages, router, wrapper: Wrapper, header, "aria-label": ariaLabel = "Scenes" }) => {
+const AppShell: React.FC<AppProps> = ({ scenes, docs, pages, router, wrapper: Wrapper, header, "aria-label": ariaLabel = "Scenes", navSize }) => {
   const location = router.useLocation()
   const navigate = router.useNavigate()
   const index = React.useMemo(() => buildAppIndex(scenes, docs, pages), [scenes, docs, pages])
@@ -31,7 +31,7 @@ const AppShell: React.FC<AppProps> = ({ scenes, docs, pages, router, wrapper: Wr
   const current = index.find(entry => entry.url === path)
   const region = React.useRef<HTMLDivElement>(null)
   // States, not refs: the scene renders its portals into the sidebar and its footer once they are mounted.
-  const [sidebar, setSidebar] = React.useState<HTMLDivElement | null>(null)
+  const [sidebar, setSidebar] = React.useState<HTMLElement | null>(null)
   const [sidebarFooter, setSidebarFooter] = React.useState<HTMLDivElement | null>(null)
   const search = React.useMemo(() => new URLSearchParams(location.search), [location.search])
 
@@ -122,6 +122,7 @@ const AppShell: React.FC<AppProps> = ({ scenes, docs, pages, router, wrapper: Wr
               <StyledAppNav>
                 <Tree
                   aria-label={ariaLabel}
+                  size={navSize}
                   items={buildAppTree(index, current, location.search)}
                   expandedIds={expandedIds}
                   onExpandedChange={setExpandedIds}

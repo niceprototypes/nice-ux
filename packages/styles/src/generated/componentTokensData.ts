@@ -872,6 +872,13 @@ const componentTokensData: ComponentTokensData = {
       }
     }
   },
+  "scroll": {
+    "scrollbarWidth": {
+      "base": "var(--np--scroll--scrollbar-width--hidden)",
+      "hidden": "none",
+      "shown": "auto"
+    }
+  },
   "select": {
     "chevron": {
       "size": {

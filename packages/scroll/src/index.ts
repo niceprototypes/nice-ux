@@ -22,6 +22,10 @@ export type {
 } from "./components/ScrollProvider/ScrollProvider.types"
 export { default as ScrollProviderTypes } from "./components/ScrollProvider/ScrollProvider.types"
 
+// The scroll container
+export { default as Scroll, ScrollTypes } from "./components/Scroll"
+export type { ScrollProps, ScrollAxisType, ScrollAsType } from "./components/Scroll"
+
 // Hooks
 export { useScroll } from "./hooks/useScroll"
 

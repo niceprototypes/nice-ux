@@ -1,5 +1,6 @@
 import styled, { createGlobalStyle } from "styled-components"
 import { getToken } from "@niceprototypes/styles"
+import { Scroll } from "@niceprototypes/scroll"
 
 /** The page has no margin: the shell (or, in the bare view, the scene region) fills the viewport. */
 export const AppGlobalStyle = createGlobalStyle`
@@ -44,9 +45,8 @@ export const StyledAppColumns = styled.div`
 `
 
 /** The nav column: as wide as its rows, scrolling on its own. */
-export const StyledAppNav = styled.div`
+export const StyledAppNav = styled(Scroll)`
   flex: none;
-  overflow-y: auto;
   padding: ${getToken("gap:large")};
   padding-inline-end: calc(2 * ${getToken("gap:large")});
 `
@@ -55,9 +55,8 @@ export const StyledAppNav = styled.div`
  * The scene sidebar, right of the nav: as wide as what a scene portals into it, scrolling on its own,
  * one nav padding from the nav. Empty (docs pages, scenes without one), it takes no space.
  */
-export const StyledAppSidebar = styled.div`
+export const StyledAppSidebar = styled(Scroll)`
   flex: none;
-  overflow-y: auto;
   padding: ${getToken("gap:large")} ${getToken("gap:large")} ${getToken("gap:large")} 0;
 
   &:empty {
@@ -105,9 +104,8 @@ export const StyledAppHandle = styled.div`
  * The footer's resizable body: the dragged height, under the handle (which stays put). Shorter than
  * its content, it scrolls vertically; fully open, it is as tall as its content and shows no scrollbar.
  */
-export const StyledAppFooterBody = styled.div`
+export const StyledAppFooterBody = styled(Scroll)`
   overflow-x: hidden;
-  overflow-y: auto;
 `
 
 /**
@@ -115,13 +113,12 @@ export const StyledAppFooterBody = styled.div`
  * background, focusable so a scene's keys act only while focus is inside it. It is a container,
  * not a control: no focus ring.
  */
-export const StyledAppRegion = styled.div`
+export const StyledAppRegion = styled(Scroll).attrs({ axis: "both" })`
   position: relative;
   background-color: ${getToken("backgroundColor")};
   flex: 1 1 auto;
   min-width: 0;
   min-height: 100dvh;
-  overflow: auto;
   outline: none;
 `
 

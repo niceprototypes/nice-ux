@@ -28,7 +28,7 @@ export type BackgroundColorInverseType = "base" | "raised" | "success" | "highli
 export type BorderColorInverseType = "base" | "subtle" | "strong" | "stronger" | "success" | "highlight" | "warning" | "error" | "link"
 export type ColorInverseType = "base" | "light" | "lighter" | "lightest" | "disabled" | "link" | "success" | "highlight" | "warning" | "error"
 
-export type ComponentPrefix = "app" | "button" | "calendar" | "card" | "checkbox" | "code" | "contents" | "dialog" | "field" | "icon" | "image" | "ink" | "input" | "lightbox" | "line" | "list" | "listbox" | "logo" | "popover" | "radio" | "select" | "tabs" | "tile" | "toggle" | "tree"
+export type ComponentPrefix = "app" | "button" | "calendar" | "card" | "checkbox" | "code" | "contents" | "dialog" | "field" | "icon" | "image" | "ink" | "input" | "lightbox" | "line" | "list" | "listbox" | "logo" | "popover" | "radio" | "scroll" | "select" | "tabs" | "tile" | "toggle" | "tree"
 
 /** Variant union of every token group, keyed by address group (`"fontSize"`, `"button.icon.size"`), plus custom groups declared on `CustomTokenVariants`. */
 export interface TokenVariants extends CustomTokenVariants {
@@ -220,6 +220,7 @@ export interface TokenVariants extends CustomTokenVariants {
   "radio.focusRing.width": "base"
   "radio.focusRing.color": "base"
   "radio.focusRing.offset": "base"
+  "scroll.scrollbarWidth": "base" | "hidden" | "shown"
   "select.chevron.size": "smaller" | "small" | "base" | "large" | "larger"
   "tabs.padding": "smaller" | "small" | "base" | "large" | "larger"
   "tabs.gap": "smaller" | "small" | "base" | "large" | "larger"

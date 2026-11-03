@@ -1,21 +1,21 @@
 import styled, { css } from "styled-components"
 import { getToken } from "@niceprototypes/styles"
+import { Scroll } from "@niceprototypes/scroll"
 
 const railWidth = getToken("contents.rail.width")
 
 /**
- * The `<nav>` root: sticks `contents.top` below the top of its scroll container and
+ * The `<nav>` root, a Scroll: sticks `contents.top` below the top of its scroll container and
  * scrolls on its own when taller than the viewport. The rail beside the heading and every
  * row is painted in its start padding, inside the scroll clip, so the active row's
  * indicator can cover it.
  */
-export const StyledContents = styled.nav`
+export const StyledContents = styled(Scroll).attrs({ forwardedAs: "nav" })`
   padding-inline-start: ${railWidth};
   box-shadow: inset ${railWidth} 0 0 ${getToken("contents.rail.color")};
   position: sticky;
   top: ${getToken("contents.top")};
   max-block-size: calc(100vh - 2 * ${getToken("contents.top")});
-  overflow-y: auto;
 `
 
 /**

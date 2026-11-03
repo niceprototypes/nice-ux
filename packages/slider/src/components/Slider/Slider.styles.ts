@@ -1,15 +1,9 @@
 import { getToken } from "@niceprototypes/styles"
-import styled, { css } from "styled-components"
+import styled from "styled-components"
+import { Scroll } from "@niceprototypes/scroll"
 
-const styleHideScrollbar = css`
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-`
-
-export const SliderItemStyled = styled.div<{
+/** A slide: a Scroll, its scrollbar hidden by default. */
+export const SliderItemStyled = styled(Scroll)<{
   $index: number
   $currentIndex: number
   $isAnimating: boolean
@@ -19,8 +13,6 @@ export const SliderItemStyled = styled.div<{
   left: 0;
   right: 0;
   height: 100%;
-  overflow-y: auto;
-  ${styleHideScrollbar}
   transform: translateY(${(props) => (props.$index - props.$currentIndex) * 100}%);
   transition: transform ${getToken("animationDuration", "base")} ${getToken("animationEasing", "base")};
 `

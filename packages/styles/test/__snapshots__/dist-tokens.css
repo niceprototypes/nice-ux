@@ -724,6 +724,11 @@
 	--np--radio--focus-ring--color: var(--np--color--link);
 	--np--radio--focus-ring--offset: var(--np--checkbox--focus-ring--offset);
 
+	/* scroll component tokens */
+	--np--scroll--scrollbar-width: var(--np--scroll--scrollbar-width--hidden);
+	--np--scroll--scrollbar-width--hidden: none;
+	--np--scroll--scrollbar-width--shown: auto;
+
 	/* select component tokens */
 	--np--select--chevron--size--smaller: var(--np--font-size--smaller);
 	--np--select--chevron--size--small: var(--np--font-size--small);
