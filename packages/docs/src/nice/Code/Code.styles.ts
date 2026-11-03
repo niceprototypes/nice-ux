@@ -3,8 +3,7 @@ import ContentFlex from "../ContentFlex"
 import { getToken } from "@niceprototypes/styles"
 
 /**
- * Sizing wrapper for storybook Code instances: a ContentFlex, so `wrapped` caps
- * it at the content width, and the card inside always fits its parent.
+ * Sizing wrapper for docs Code instances: a ContentFlex the card inside always fits.
  *
  * @niceprototypes/code's card fills its container up to the `code.maxWidth` token
  * (`width: max-content` when `fit`); the child rule keeps a fit card inside this
@@ -22,7 +21,9 @@ export const CodeFlex = styled(ContentFlex)`
      sentence would otherwise count as adjacent. */
   ${({ inlined }) =>
     !inlined &&
-    `& + & {
+    `width: 100%;
+
+    & + & {
       margin-top: ${getToken("gap")};
     }`}
 `

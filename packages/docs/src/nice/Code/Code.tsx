@@ -3,19 +3,15 @@ import NiceCode, { type CodeProps } from "@niceprototypes/code"
 import type { WithBreakpointsProps } from "@niceprototypes/styles"
 import { CodeFlex } from "./Code.styles"
 
-type StorybookCodeProps = WithBreakpointsProps<CodeProps> & {
-  /** Cap the block at the content width (ContentFlex `wrapped`). Ignored when `inlined`. @default true */
-  wrapped?: boolean
-}
+type StorybookCodeProps = WithBreakpointsProps<CodeProps>
 
 /**
- * @niceprototypes/code's Code inside a ContentFlex, so storybook code blocks are
- * capped at the content width by default. An `inlined` Code renders
- * `inline-flex` and is never wrapped — a capped wrapper is full width, which
- * would pull it out of its line of text or heading.
+ * @niceprototypes/code's Code inside a ContentFlex, with no width cap of its own: a block runs
+ * the full width of its column, edge to edge with the column's rules. An `inlined` Code renders
+ * `inline-flex` in its line of text or heading.
  */
-const Code: React.FC<StorybookCodeProps> = ({ wrapped = true, ...props }) => (
-  <CodeFlex inlined={props.inlined} wrapped={wrapped && !props.inlined}>
+const Code: React.FC<StorybookCodeProps> = props => (
+  <CodeFlex inlined={props.inlined}>
     <NiceCode {...props} />
   </CodeFlex>
 )

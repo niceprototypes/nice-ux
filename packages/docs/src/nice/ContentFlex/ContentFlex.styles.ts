@@ -2,7 +2,7 @@ import styled, { css } from "styled-components"
 import Flex from "@niceprototypes/flex"
 import type { FlexGapSizeType } from "@niceprototypes/flex"
 import { getToken } from "@niceprototypes/styles"
-import { contentMaxWidth } from "@niceprototypes/storybook-theme"
+import { getToken as getDocsToken } from "../tokens"
 
 /**
  * Flex, capped at the content width when `$wrapped`.
@@ -35,6 +35,6 @@ export const ContentFlexStyled = styled(Flex)<{ $wrapped: boolean; $gap: FlexGap
     css`
       width: 100%;
       min-width: 0;
-      max-width: ${contentMaxWidth};
+      max-width: ${getDocsToken("docs", "columnWidth")};
     `}
 `

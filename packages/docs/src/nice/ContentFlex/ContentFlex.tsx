@@ -3,7 +3,7 @@ import type { FlexProps } from "@niceprototypes/flex"
 import { ContentFlexStyled } from "./ContentFlex.styles"
 
 type ContentFlexProps = FlexProps & {
-  /** Cap the content at @niceprototypes/storybook-theme's `contentMaxWidth`. @default false */
+  /** Cap the content at the docs column width (`docs.columnWidth`). @default false */
   wrapped?: boolean
 }
 

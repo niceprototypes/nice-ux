@@ -120,11 +120,11 @@
           "type": "string"
         },
         "wrapped": {
-          "description": "Cap the docs page at @niceprototypes/storybook-theme's contentMaxWidth.",
+          "description": "Cap the docs page at the docs column width (docs.columnWidth).",
           "type": "boolean"
         },
         "sectionWrapped": {
-          "description": "Cap each data-table section's heading at contentMaxWidth (its rows stay full width).",
+          "description": "Cap each data-table section's heading at the docs column width (its rows stay full width).",
           "type": "boolean"
         }
       }
