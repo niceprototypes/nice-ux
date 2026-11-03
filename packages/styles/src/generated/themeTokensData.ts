@@ -48,7 +48,7 @@ const themeTokensData: ThemeTokensData = {
   "night": {
     "backgroundColor": {
       "base": "hsla(240, 4%, 12.5%, 1)",
-      "raised": "hsla(212, 10%, 13%, 1)",
+      "raised": "hsla(240, 3%, 10%, 1)",
       "success": "hsla(146, 45%, 18%, 1)",
       "highlight": "hsla(48, 55%, 22%, 1)",
       "warning": "hsla(29, 60%, 18%, 1)",

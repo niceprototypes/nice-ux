@@ -7,7 +7,7 @@
 	--np--background-color--error: hsla(10, 100%, 95%, 1);
 	--np--background-color--link: hsla(212, 100%, 95%, 1);
 	--np--background-color--inverse: hsla(240, 4%, 12.5%, 1);
-	--np--background-color--raised--inverse: hsla(212, 10%, 13%, 1);
+	--np--background-color--raised--inverse: hsla(240, 3%, 10%, 1);
 	--np--background-color--success--inverse: hsla(146, 45%, 18%, 1);
 	--np--background-color--highlight--inverse: hsla(48, 55%, 22%, 1);
 	--np--background-color--warning--inverse: hsla(29, 60%, 18%, 1);
@@ -23,7 +23,7 @@
 	--np--background-color--error--day: hsla(10, 100%, 95%, 1);
 	--np--background-color--link--day: hsla(212, 100%, 95%, 1);
 	--np--background-color--day--inverse: hsla(240, 4%, 12.5%, 1);
-	--np--background-color--raised--day--inverse: hsla(212, 10%, 13%, 1);
+	--np--background-color--raised--day--inverse: hsla(240, 3%, 10%, 1);
 	--np--background-color--success--day--inverse: hsla(146, 45%, 18%, 1);
 	--np--background-color--highlight--day--inverse: hsla(48, 55%, 22%, 1);
 	--np--background-color--warning--day--inverse: hsla(29, 60%, 18%, 1);
@@ -32,7 +32,7 @@
 
 	/* Night mode primitives */
 	--np--background-color--night: hsla(240, 4%, 12.5%, 1);
-	--np--background-color--raised--night: hsla(212, 10%, 13%, 1);
+	--np--background-color--raised--night: hsla(240, 3%, 10%, 1);
 	--np--background-color--success--night: hsla(146, 45%, 18%, 1);
 	--np--background-color--highlight--night: hsla(48, 55%, 22%, 1);
 	--np--background-color--warning--night: hsla(29, 60%, 18%, 1);

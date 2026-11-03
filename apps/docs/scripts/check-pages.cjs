@@ -4,7 +4,9 @@
  * a page logs an error or renders a one-line install command (npm i / npm install / pnpm add /
  * yarn add) as a code block instead of an inline chip, or links nowhere: an internal href or
  * hash that opens no page or anchor, or a link without an href (WelcomeLink, ArrowLink) that
- * navigates to no page when clicked.
+ * navigates to no page when clicked. Each page is checked once its DOM is in and has settled,
+ * not when the network goes idle: a demo image from another origin may never finish, and a
+ * failed load from another origin is not the site's error.
  */
 const { chromium } = require("playwright")
 
@@ -18,16 +20,18 @@ const INSTALL = /^(npm (i|install)|pnpm (add|i|install)|yarn add)\b/
   let pages = 0
   for (const dark of [false, true]) {
     const page = await browser.newPage({ viewport: { width: 1400, height: 900 }, colorScheme: dark ? "dark" : "light" })
-    await page.goto(`${base}/docs/tokens`, { waitUntil: "networkidle" })
+    await page.goto(`${base}/docs/tokens`, { waitUntil: "domcontentloaded" })
     const urls = new Set(await page.evaluate(() => [...document.querySelectorAll("nav a[href^='/docs/']")].map(a => a.getAttribute("href"))))
     for (const url of urls) {
       const errors = []
       const onError = error => errors.push(error.message)
-      const onConsole = message => message.type() === "error" && errors.push(message.text())
+      // A resource from another origin (a demo image service) that fails to load is not the site's error.
+      const onConsole = message =>
+        message.type() === "error" && !(message.text().startsWith("Failed to load resource") && !message.location().url.startsWith(base)) && errors.push(message.text())
       page.on("pageerror", onError)
       page.on("console", onConsole)
-      await page.goto(base + url, { waitUntil: "networkidle" })
-      await page.waitForTimeout(500)
+      await page.goto(base + url, { waitUntil: "domcontentloaded" })
+      await page.waitForTimeout(1500)
       // Folders open as their pages load: every page in the sidebar gets visited.
       for (const more of await page.evaluate(() => [...document.querySelectorAll("nav a[href^='/docs/']")].map(a => a.getAttribute("href")))) urls.add(more)
       const blocks = await page.evaluate(
@@ -57,7 +61,7 @@ const INSTALL = /^(npm (i|install)|pnpm (add|i|install)|yarn add)\b/
           const landed = new URL(page.url()).pathname
           const opened = await page.evaluate(() => !!document.querySelector("section"))
           if (landed === url || !opened) errors.push(`link goes nowhere: "${label}" (at ${landed})`)
-          await page.goto(base + url, { waitUntil: "networkidle" })
+          await page.goto(base + url, { waitUntil: "domcontentloaded" })
           await page.waitForTimeout(500)
         }
       }
@@ -72,7 +76,7 @@ const INSTALL = /^(npm (i|install)|pnpm (add|i|install)|yarn add)\b/
   {
     const page = await browser.newPage()
     for (const { from, href } of linkChecks.filter((check, index, all) => all.findIndex(other => other.href === check.href) === index)) {
-      await page.goto(base + href, { waitUntil: "networkidle" })
+      await page.goto(base + href, { waitUntil: "domcontentloaded" })
       await page.waitForTimeout(800)
       const landed = new URL(page.url()).pathname
       const pageExists = await page.evaluate(() => !!document.querySelector("section"))
