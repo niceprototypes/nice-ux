@@ -5,7 +5,7 @@ import Input from "@niceprototypes/input"
 import Select from "@niceprototypes/select"
 import Toggle from "@niceprototypes/toggle"
 import NiceCode from "@niceprototypes/code"
-import { ScrollProvider, StickyProvider } from "@niceprototypes/scroll"
+import { Scroll } from "@niceprototypes/scroll"
 import { useSceneRegion } from "@niceprototypes/app"
 import type { CatalogComponentType } from "../../catalog"
 import { controlOf, initialOf, type PlaygroundControlType, type PlaygroundValueType } from "./Playground.controls"
@@ -95,11 +95,9 @@ const Playground: React.FC<{ component: CatalogComponentType }> = ({ component }
     <Flex direction="column" gap="large">
       <StyledPlaygroundPreview>
         {/* The context the scroll components need above them, scrolling with the page's region; the rest ignore it. */}
-        <ScrollProvider root={region}>
-          <StickyProvider>
-            <PreviewBoundary values={values}>{Component && <Component {...props}>{children}</Component>}</PreviewBoundary>
-          </StickyProvider>
-        </ScrollProvider>
+        <Scroll root={region}>
+          <PreviewBoundary values={values}>{Component && <Component {...props}>{children}</Component>}</PreviewBoundary>
+        </Scroll>
       </StyledPlaygroundPreview>
       <NiceCode code={jsx} language="tsx" fit={false} />
       <StyledPlaygroundControls>

@@ -8,16 +8,15 @@ This directory contains working examples demonstrating various features of @nice
 The simplest example showing how to make a header stick to the top of the page.
 
 **Features demonstrated:**
-- ScrollProvider setup
-- StickyProvider setup
-- Basic Sticky component usage
+- `<Scroll root>` setup
+- Basic `<Scroll sticky>` usage
 
 ### 2. Multiple Sticky (`multiple-sticky.tsx`)
 Shows how to stack multiple sticky elements on top of each other.
 
 **Features demonstrated:**
-- Multiple Sticky components
-- Using the `order` prop for stacking
+- Multiple `<Scroll sticky>` elements
+- Using the sticky `order` option for stacking
 - Automatic offset calculation
 
 ### 3. Section Navigation (`section-navigation.tsx`)
@@ -34,7 +33,7 @@ A complete navigation system with automatic active section detection.
 Various fade effects based on scroll position.
 
 **Features demonstrated:**
-- FadeOnScroll component
+- `<Scroll fade>`
 - Different fade configurations
 - Fade in, fade out, and fade through
 - Parallax-style effects
@@ -45,7 +44,7 @@ A comprehensive example combining all features.
 **Features demonstrated:**
 - All components together
 - useScroll hook
-- onStickyChange callback
+- `sticky.onChange` callback
 - Real-world application structure
 
 ## Running the Examples
@@ -72,13 +71,13 @@ function App() {
 Each example follows this pattern:
 
 ```tsx
-import { ScrollProvider, /* other components */ } from '@niceprototypes/scroll'
+import { Scroll, /* other components */ } from '@niceprototypes/scroll'
 
 export default function Example() {
   return (
-    <ScrollProvider>
+    <Scroll root>
       {/* Your components */}
-    </ScrollProvider>
+    </Scroll>
   )
 }
 ```
@@ -95,21 +94,19 @@ We recommend exploring the examples in this order:
 
 ## Common Patterns
 
-### Provider Setup
-Always wrap your app with both providers:
+### Root Setup
+Always wrap your app with a Scroll root:
 ```tsx
-<ScrollProvider>
-  <StickyProvider>
-    {/* Your app */}
-  </StickyProvider>
-</ScrollProvider>
+<Scroll root>
+  {/* Your app */}
+</Scroll>
 ```
 
 ### Sticky Stacking
-Use the `order` prop to control stacking (lower = higher):
+Use the sticky `order` option to control stacking (lower = higher):
 ```tsx
-<Sticky order={0}>Header</Sticky>
-<Sticky order={1}>Nav</Sticky>
+<Scroll sticky={{ order: 0 }}>Header</Scroll>
+<Scroll sticky={{ order: 1 }}>Nav</Scroll>
 ```
 
 ### Section Navigation

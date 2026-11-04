@@ -1,12 +1,12 @@
 /**
  * Basic Sticky Example
  *
- * This example demonstrates the basic usage of the Sticky component
+ * This example demonstrates the basic usage of `<Scroll sticky>`
  * with a simple header that sticks to the top of the page.
  */
 
 import React from 'react'
-import { ScrollProvider, StickyProvider, Sticky } from '@niceprototypes/scroll'
+import { Scroll } from '@niceprototypes/scroll'
 import styled from 'styled-components'
 
 const Header = styled.header`
@@ -22,21 +22,19 @@ const Content = styled.div`
 
 export default function BasicStickyExample() {
   return (
-    <ScrollProvider>
-      <StickyProvider>
-        {/* Simple sticky header */}
-        <Sticky order={0}>
-          <Header>
-            <h1>My Sticky Header</h1>
-          </Header>
-        </Sticky>
+    <Scroll root>
+      {/* Simple sticky header */}
+      <Scroll sticky>
+        <Header>
+          <h1>My Sticky Header</h1>
+        </Header>
+      </Scroll>
 
-        <Content>
-          <h2>Page Content</h2>
-          <p>Scroll down to see the header stick to the top of the page.</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-        </Content>
-      </StickyProvider>
-    </ScrollProvider>
+      <Content>
+        <h2>Page Content</h2>
+        <p>Scroll down to see the header stick to the top of the page.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+      </Content>
+    </Scroll>
   )
 }

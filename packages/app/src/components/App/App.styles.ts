@@ -115,15 +115,14 @@ export const StyledAppDocsLink = styled.div`
  * The nav and the scene sidebar over the footer. Tablet and up it generates no box. With `$drawer`
  * (below laptop) it is the drawer: shown only while `$open`, over the scene region in the shell
  * grid's second row, on the theme background. Wider than the viewport (the nav beside a scene
- * sidebar), it scrolls sideways, not the page.
+ * sidebar), it scrolls sideways (a Scroll), not the page.
  */
-export const StyledAppDrawer = styled.div<{ $drawer: boolean; $open: boolean }>`
+export const StyledAppDrawer = styled(Scroll).attrs({ axis: "x" })<{ $drawer: boolean; $open: boolean }>`
   display: ${({ $drawer, $open }) => (!$drawer ? "contents" : $open ? "flex" : "none")};
   flex-direction: column;
   grid-row: 2;
   grid-column: 1;
   min-height: 0;
-  overflow-x: auto;
   z-index: ${getToken("zIndex", "medium")};
   background-color: ${getToken("backgroundColor")};
 `

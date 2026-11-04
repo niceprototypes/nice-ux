@@ -920,6 +920,25 @@ const componentTokensData: ComponentTokensData = {
       "base": "var(--np--scroll--scrollbar-width--hidden)",
       "hidden": "none",
       "shown": "auto"
+    },
+    "sticky": {
+      "zIndex": {
+        "base": "var(--np--z-index--medium)"
+      },
+      "animationDuration": {
+        "base": "300ms"
+      },
+      "animationEasing": {
+        "base": "var(--np--animation-easing)"
+      }
+    },
+    "fade": {
+      "animationDuration": {
+        "base": "100ms"
+      },
+      "animationEasing": {
+        "base": "var(--np--animation-easing--linear)"
+      }
     }
   },
   "select": {

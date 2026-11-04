@@ -7,7 +7,7 @@ import Button from "@niceprototypes/button"
 import Flex from "@niceprototypes/flex"
 import Ink from "@niceprototypes/ink"
 import type { ComponentExample } from "../../dataTables/components/demos/Components"
-import ScrollBox, { SCROLL_BOX_HEIGHT } from "../Sticky/ScrollBox"
+import ScrollBox, { SCROLL_BOX_HEIGHT } from "../../components/ScrollBox"
 
 const LABELS = ["About", "Services", "Contact"]
 

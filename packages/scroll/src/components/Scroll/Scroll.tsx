@@ -1,23 +1,50 @@
 import * as React from "react"
 import { StyledScroll } from "./Scroll.styles"
+import ScrollRoot from "./ScrollRoot"
+import ScrollSticky from "./ScrollSticky"
+import ScrollFade from "./ScrollFade"
 import type { ScrollProps } from "./Scroll.types"
 
 /**
  * Scroll
  *
- * The scroll container every scrolling region in Nice UI renders through, so one setting
- * shows or hides every scrollbar. Scrollbars are hidden by default; `showScrollbar` sets
- * one instance, the `scroll.scrollbarWidth` token sets the project default.
+ * Every scrolling element and every page scroll behaviour in Nice UI.
+ *
+ * - The scroll container (default): scrollbars are hidden by default; `showScrollbar` sets one
+ *   instance, the `scroll.scrollbarWidth` token sets the project default.
+ * - `root`: the page scroller (`true` for the window) that the behaviours under it measure against.
+ * - `sticky`: keeps its children at the top of the root, stacked by `order`.
+ * - `fade`: fades its children with their place in the root's view.
  *
  * @example
  * ```tsx
  * <Scroll axis="x" showScrollbar>{wideContent}</Scroll>
+ *
+ * <Scroll root>
+ *   <Scroll sticky={{ onChange: setIsSticky }}><Header /></Scroll>
+ *   <Scroll fade>{section}</Scroll>
+ * </Scroll>
  * ```
  */
-const Scroll: React.FC<ScrollProps> = ({ axis = "y", showScrollbar, children, ...rest }) => (
-  <StyledScroll $axis={axis} $showScrollbar={showScrollbar} {...rest}>
-    {children}
-  </StyledScroll>
-)
+const Scroll: React.FC<ScrollProps> = ({ axis = "y", showScrollbar, root, sticky, fade, children, ref, ...rest }) => {
+  if (root) return <ScrollRoot root={root}>{children}</ScrollRoot>
+  if (sticky)
+    return (
+      <ScrollSticky options={sticky === true ? {} : sticky} {...rest}>
+        {children}
+      </ScrollSticky>
+    )
+  if (fade)
+    return (
+      <ScrollFade options={fade === true ? {} : fade} {...rest}>
+        {children}
+      </ScrollFade>
+    )
+  return (
+    <StyledScroll ref={ref} $axis={axis} $showScrollbar={showScrollbar} {...rest}>
+      {children}
+    </StyledScroll>
+  )
+}
 
 export default Scroll

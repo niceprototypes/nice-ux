@@ -268,7 +268,7 @@ After testing:
 1. **Document your findings** using the template above
 2. **Share results** by opening an issue or discussion
 3. **If results are positive**, consider implementing:
-   - Update `Sticky.tsx` to use IntersectionObserver
+   - Update `ScrollSticky.tsx` to use IntersectionObserver
    - Add feature flag for gradual rollout
    - Monitor production metrics
    - Update documentation

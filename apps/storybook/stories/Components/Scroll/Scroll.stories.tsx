@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
-import { expect, waitFor, within } from "storybook/test"
+import { expect, fn, waitFor, within } from "storybook/test"
 import { setTokens } from "@niceprototypes/styles"
 import { Scroll } from "@niceprototypes/scroll"
 import type { ScrollAsType, ScrollAxisType, ScrollProps } from "@niceprototypes/scroll"
@@ -13,6 +13,9 @@ const getToken = setTokens(
     boxHeight: { base: "240px" },
     boxWidth: { base: "320px" },
     contentWidth: { base: "640px" },
+    // Page room around the sticky and fade stories, so they travel through the whole viewport.
+    fadeRoom: { base: "100vh" },
+    stickyRoom: { base: "300vh" },
   },
   "scrollStory",
 )
@@ -69,6 +72,9 @@ export const Playground: Story = {
     as: { control: "select", options: AS_OPTIONS, table: { category: "Element" } },
     children: { table: { disable: true } },
     ref: { table: { disable: true } },
+    root: { table: { disable: true } },
+    sticky: { table: { disable: true } },
+    fade: { table: { disable: true } },
   },
   render: args => (
     <Scroll {...args} data-testid="scroll" style={box}>
@@ -165,4 +171,131 @@ export const Lifecycle: Story = {
       )}
     />
   ),
+}
+
+/** The sticky bar holding `text`. */
+const barOf = (canvasElement: HTMLElement, text: string) => within(canvasElement).getByText(text)
+
+/** `sticky` under a window root: fixed at the top once the page passes it, hidden while scrolling down. */
+export const Sticky: Story = {
+  args: { sticky: { order: 0, onChange: fn() } },
+  parameters: { layout: "fullscreen" },
+  render: args => (
+    <Scroll root>
+      <Scroll sticky={args.sticky}>Header</Scroll>
+      <div style={{ height: getToken("scrollStory.stickyRoom:base") }} />
+    </Scroll>
+  ),
+  play: async ({ canvasElement, args }) => {
+    const onChange = (args.sticky as { onChange: (isSticky: boolean) => void }).onChange
+    window.scrollTo(0, 0)
+    const header = barOf(canvasElement, "Header")
+    await expect(getComputedStyle(header).position).toBe("fixed")
+    await expect(header.getBoundingClientRect().top).toBe(0)
+    // The spacer holds the header's place in the flow.
+    await expect((header.previousElementSibling as HTMLElement).offsetHeight).toBe(header.offsetHeight)
+    await waitFor(() => expect(onChange).toHaveBeenLastCalledWith(false))
+
+    // Scrolling down past the spacer: sticky, and the header slides out of view.
+    window.scrollTo(0, window.innerHeight / 2)
+    await waitFor(() => expect(onChange).toHaveBeenLastCalledWith(true))
+    await waitFor(() => expect(header.getBoundingClientRect().bottom).toBeLessThanOrEqual(0))
+
+    // Scrolling up: the header slides back in.
+    window.scrollTo(0, window.innerHeight / 4)
+    await waitFor(() => expect(header.getBoundingClientRect().top).toBe(0))
+
+    window.scrollTo(0, 0)
+    await waitFor(() => expect(onChange).toHaveBeenLastCalledWith(false))
+  },
+}
+
+/** `sticky.order`: a Header at order 0 stacks above a Subheader at order 1. */
+export const StickyOrder: Story = {
+  args: { sticky: { order: 1 } },
+  parameters: { layout: "fullscreen" },
+  render: args => (
+    <Scroll root>
+      <Scroll sticky={{ order: 0 }}>Header</Scroll>
+      <Scroll sticky={args.sticky}>Subheader</Scroll>
+      <div style={{ height: getToken("scrollStory.stickyRoom:base") }} />
+    </Scroll>
+  ),
+  play: async ({ canvasElement }) => {
+    window.scrollTo(0, 0)
+    const header = barOf(canvasElement, "Header")
+    const subheader = barOf(canvasElement, "Subheader")
+    await waitFor(() => expect(subheader.getBoundingClientRect().top).toBe(header.getBoundingClientRect().bottom))
+  },
+}
+
+const FADE_CONTENT = "Fades in and out as it scrolls"
+
+/** The fade wrapper around the content. */
+const fadeOf = (canvasElement: HTMLElement) => within(canvasElement).getByText(FADE_CONTENT).parentElement!
+
+/** Scroll the window so the wrapper's top sits at `progress` percent of the viewport, from the bottom. */
+const scrollToProgress = (canvasElement: HTMLElement, progress: number) => {
+  const top = fadeOf(canvasElement).getBoundingClientRect().top + window.scrollY
+  window.scrollTo(0, top - window.innerHeight * (1 - progress / 100))
+}
+
+const expectOpacity = (canvasElement: HTMLElement, value: number) =>
+  waitFor(() => expect(Number(getComputedStyle(fadeOf(canvasElement)).opacity)).toBeCloseTo(value, 2))
+
+/** `fade` under a window root: opacity follows the content's place in the viewport. */
+export const Fade: Story = {
+  args: { fade: { start: 0, peak: 50, end: 100, opacity: [0, 1, 0] } },
+  render: args => (
+    <Scroll root>
+      <div style={{ height: getToken("scrollStory.fadeRoom:base") }} />
+      <Scroll fade={args.fade}>
+        <Ink>{FADE_CONTENT}</Ink>
+      </Scroll>
+      <div style={{ height: getToken("scrollStory.fadeRoom:base") }} />
+    </Scroll>
+  ),
+  play: async ({ canvasElement }) => {
+    // Below the viewport: the first opacity. At the middle: the peak. Past the top: the last.
+    window.scrollTo(0, 0)
+    await expectOpacity(canvasElement, 0)
+    scrollToProgress(canvasElement, 50)
+    await expectOpacity(canvasElement, 1)
+    scrollToProgress(canvasElement, 25)
+    await expectOpacity(canvasElement, 0.5)
+    scrollToProgress(canvasElement, 120)
+    await expectOpacity(canvasElement, 0)
+    window.scrollTo(0, 0)
+  },
+}
+
+/** `fade.opacity`: the opacities before start, at peak and after end. */
+export const FadeOpacity: Story = {
+  ...Fade,
+  args: { fade: { opacity: [0.25, 0.5, 0.75] } },
+  play: async ({ canvasElement }) => {
+    window.scrollTo(0, 0)
+    await expectOpacity(canvasElement, 0.25)
+    scrollToProgress(canvasElement, 50)
+    await expectOpacity(canvasElement, 0.5)
+    scrollToProgress(canvasElement, 120)
+    await expectOpacity(canvasElement, 0.75)
+    window.scrollTo(0, 0)
+  },
+}
+
+/** `fade.start`, `peak` and `end`: where the fade begins, peaks and completes. */
+export const FadePositions: Story = {
+  ...Fade,
+  args: { fade: { start: 20, peak: 30, end: 40 } },
+  play: async ({ canvasElement }) => {
+    window.scrollTo(0, 0)
+    scrollToProgress(canvasElement, 10)
+    await expectOpacity(canvasElement, 0)
+    scrollToProgress(canvasElement, 30)
+    await expectOpacity(canvasElement, 1)
+    scrollToProgress(canvasElement, 50)
+    await expectOpacity(canvasElement, 0)
+    window.scrollTo(0, 0)
+  },
 }

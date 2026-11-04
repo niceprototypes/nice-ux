@@ -739,6 +739,11 @@
 	--np--scroll--scrollbar-width: var(--np--scroll--scrollbar-width--hidden);
 	--np--scroll--scrollbar-width--hidden: none;
 	--np--scroll--scrollbar-width--shown: auto;
+	--np--scroll--sticky--z-index: var(--np--z-index--medium);
+	--np--scroll--sticky--animation-duration: 300ms;
+	--np--scroll--sticky--animation-easing: var(--np--animation-easing);
+	--np--scroll--fade--animation-duration: 100ms;
+	--np--scroll--fade--animation-easing: var(--np--animation-easing--linear);
 
 	/* select component tokens */
 	--np--select--chevron--size--smaller: var(--np--font-size--smaller);

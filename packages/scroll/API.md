@@ -4,134 +4,131 @@ Complete API reference for @niceprototypes/scroll.
 
 ## Table of Contents
 
-- [Providers](#providers)
-  - [ScrollProvider](#scrollprovider)
-  - [StickyProvider](#stickyprovider)
 - [Components](#components)
-  - [Sticky](#sticky)
-  - [FadeOnScroll](#fadeonscroll)
+  - [Scroll](#scroll)
+  - [Scroll root](#scroll-root)
+  - [Scroll sticky](#scroll-sticky)
+  - [Scroll fade](#scroll-fade)
   - [StickySectionLinks](#stickysectionlinks)
   - [StickySection](#stickysection)
 - [Hooks](#hooks)
   - [useScroll](#usescroll)
-  - [useStickyContext](#usestickycontext)
 - [Types](#types)
-- [Context](#context)
-
----
-
-## Providers
-
-### ScrollProvider
-
-Centralized scroll manager that provides a single RAF-batched scroll listener for optimal performance.
-
-#### Props
-
-```typescript
-interface ScrollProviderProps {
-  children: ReactNode
-}
-```
-
-#### Usage
-
-```tsx
-import { ScrollProvider } from '@niceprototypes/scroll'
-
-function App() {
-  return (
-    <ScrollProvider>
-      {/* Your app components */}
-    </ScrollProvider>
-  )
-}
-```
-
-#### Implementation Details
-
-- Creates a single scroll event listener for the entire application
-- Uses `requestAnimationFrame` to batch scroll updates
-- Provides scroll position to all child components via context
-- Uses passive event listeners for better scroll performance
-- Automatically cleans up listeners on unmount
-
----
-
-### StickyProvider
-
-Provider for managing multiple sticky elements with automatic stacking and positioning.
-
-#### Props
-
-```typescript
-interface StickyProviderProps {
-  children: ReactNode
-}
-```
-
-#### Usage
-
-```tsx
-import { ScrollProvider, StickyProvider } from '@niceprototypes/scroll'
-
-function App() {
-  return (
-    <ScrollProvider>
-      <StickyProvider>
-        {/* Sticky components */}
-      </StickyProvider>
-    </ScrollProvider>
-  )
-}
-```
-
-#### Implementation Details
-
-- Must be used within `ScrollProvider`
-- Manages registration and positioning of all sticky elements
-- Calculates cumulative offsets for proper stacking
-- Updates positions on scroll events
-- Provides context for sticky elements to register themselves
 
 ---
 
 ## Components
 
-### Sticky
+### Scroll
 
-Creates a sticky element that remains fixed at the top of the viewport when scrolled.
+Every scrolling element and every page scroll behaviour. Without `root`, `sticky` or `fade` it is the scroll container; HTML attributes pass through to the element.
 
 #### Props
 
 ```typescript
-interface StickyProps {
-  children: ReactNode
-  order?: number
-  onStickyChange?: (isSticky: boolean) => void
+type ScrollProps = React.HTMLAttributes<HTMLElement> & {
+  as?: ScrollAsType
+  axis?: ScrollAxisType
+  showScrollbar?: boolean
+  ref?: React.Ref<HTMLElement>
+  root?: ScrollRootType
+  sticky?: boolean | ScrollStickyOptionsType
+  fade?: boolean | ScrollFadeOptionsType
+  children?: ReactNode
 }
 ```
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `children` | `ReactNode` | Required | Content to render inside the sticky element |
-| `order` | `number` | `0` | Stacking order (lower numbers appear above) |
-| `onStickyChange` | `(isSticky: boolean) => void` | `undefined` | Callback fired when sticky state changes |
+| `as` | `"div" \| "nav" \| "ul"` | `"div"` | Element to render |
+| `axis` | `"x" \| "y" \| "both"` | `"y"` | Direction the content scrolls in |
+| `showScrollbar` | `boolean` | `undefined` | Show the scrollbar. Unset, the `scroll.scrollbarWidth` token decides (hidden by default) |
+| `ref` | `React.Ref<HTMLElement>` | `undefined` | The scroll container element |
+| `root` | `true \| HTMLElement \| RefObject<HTMLElement \| null>` | `undefined` | Marks the page scroller. See [Scroll root](#scroll-root) |
+| `sticky` | `boolean \| ScrollStickyOptionsType` | `undefined` | Keeps the children at the top of the root. See [Scroll sticky](#scroll-sticky) |
+| `fade` | `boolean \| ScrollFadeOptionsType` | `undefined` | Fades the children with their place in the root's view. See [Scroll fade](#scroll-fade) |
 
 #### Usage
 
 ```tsx
-import { Sticky } from '@niceprototypes/scroll'
+import { Scroll } from '@niceprototypes/scroll'
+
+<Scroll axis="x" showScrollbar>{wideContent}</Scroll>
+```
+
+---
+
+### Scroll root
+
+Centralized scroll manager that provides a single RAF-batched scroll listener and the sticky stack for optimal performance.
+
+#### Props
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `root` | `true \| HTMLElement \| RefObject<HTMLElement \| null>` | `true` for the window, or the element the page scrolls in (an app shell region) |
+
+#### Usage
+
+```tsx
+import { Scroll } from '@niceprototypes/scroll'
+
+function App() {
+  return (
+    <Scroll root>
+      {/* Your app components */}
+    </Scroll>
+  )
+}
+```
+
+#### Implementation Details
+
+- Creates a single scroll event listener for the root
+- Uses `requestAnimationFrame` to batch scroll updates
+- Provides scroll position to all child components via context
+- Manages registration and positioning of all sticky elements
+- Calculates cumulative offsets for proper stacking
+- Uses passive event listeners for better scroll performance
+- Automatically cleans up listeners on unmount
+- Renders only its children
+
+---
+
+### Scroll sticky
+
+Creates a sticky element that remains at the top of the root when scrolled.
+
+#### Options
+
+```typescript
+type ScrollStickyOptionsType = {
+  order?: number
+  onChange?: (isSticky: boolean) => void
+}
+```
+
+| Option | Type | Default | Description |
+|------|------|---------|-------------|
+| `order` | `number` | `0` | Stacking order (lower numbers appear above) |
+| `onChange` | `(isSticky: boolean) => void` | `undefined` | Callback fired when sticky state changes |
+
+`sticky={true}` uses the defaults.
+
+#### Usage
+
+```tsx
+import { Scroll } from '@niceprototypes/scroll'
 
 function Header() {
-  const handleStickyChange = (isSticky) => {
+  const handleStickyChange = (isSticky: boolean) => {
     console.log('Sticky state:', isSticky)
   }
 
   return (
-    <Sticky order={0} onStickyChange={handleStickyChange}>
+    <Scroll sticky={{ order: 0, onChange: handleStickyChange }}>
       <nav>Navigation</nav>
-    </Sticky>
+    </Scroll>
   )
 }
 ```
@@ -141,49 +138,45 @@ function Header() {
 Elements with lower `order` values appear above elements with higher values:
 
 ```tsx
-<Sticky order={0}>Top element</Sticky>
-<Sticky order={1}>Second element (below first)</Sticky>
-<Sticky order={2}>Third element (below second)</Sticky>
+<Scroll sticky={{ order: 0 }}>Top element</Scroll>
+<Scroll sticky={{ order: 1 }}>Second element (below first)</Scroll>
+<Scroll sticky={{ order: 2 }}>Third element (below second)</Scroll>
 ```
 
 #### Implementation Details
 
-- Automatically registers with `StickyProvider`
-- Calculates original position on mount
-- Updates position based on scroll
-- Wraps content in two divs for proper positioning
-- The outer wrapper maintains space in the document flow
-- The inner wrapper becomes sticky
+- Automatically registers with the nearest `<Scroll root>`
+- Under a window root the element is fixed, with a spacer of its height in the document flow
+- Under an element root the element is CSS sticky, with a zero-height sentinel
+- Hides on scroll down and shows on scroll up
+- Reads the `scroll.sticky.zIndex`, `scroll.sticky.animationDuration` and `scroll.sticky.animationEasing` tokens
+- Outside a `<Scroll root>` it renders its children in place
 
 ---
 
-### FadeOnScroll
+### Scroll fade
 
-Applies opacity transitions to elements based on scroll position within the viewport.
+Applies opacity transitions to elements based on scroll position within the root's view. Needs a `<Scroll root>` above it.
 
-#### Props
+#### Options
 
 ```typescript
-interface FadeOnScrollProps {
-  children: ReactNode
-  startPosition?: number
-  peakPosition?: number
-  endPosition?: number
-  startOpacity?: number
-  peakOpacity?: number
-  endOpacity?: number
+type ScrollFadeOptionsType = {
+  start?: number
+  peak?: number
+  end?: number
+  opacity?: readonly [number, number, number]
 }
 ```
 
-| Prop | Type | Default | Description |
+| Option | Type | Default | Description |
 |------|------|---------|-------------|
-| `children` | `ReactNode` | Required | Content to fade |
-| `startPosition` | `number` | `0` | Scroll progress % where fade begins (0-100) |
-| `peakPosition` | `number` | `50` | Scroll progress % where peak opacity is reached |
-| `endPosition` | `number` | `100` | Scroll progress % where fade ends |
-| `startOpacity` | `number` | `0` | Starting opacity value (0-1) |
-| `peakOpacity` | `number` | `1` | Peak opacity value (0-1) |
-| `endOpacity` | `number` | `0` | Ending opacity value (0-1) |
+| `start` | `number` | `0` | Scroll progress % where fade begins (0-100) |
+| `peak` | `number` | `50` | Scroll progress % where peak opacity is reached |
+| `end` | `number` | `100` | Scroll progress % where fade ends |
+| `opacity` | `[number, number, number]` | `[0, 1, 0]` | Opacity before `start`, at `peak` and after `end` (0-1) |
+
+`fade={true}` uses the defaults.
 
 #### Scroll Position Calculation
 
@@ -197,42 +190,23 @@ The scroll position is calculated as a percentage based on the element's positio
 
 **Fade in only:**
 ```tsx
-<FadeOnScroll
-  startPosition={20}
-  peakPosition={50}
-  startOpacity={0}
-  peakOpacity={1}
->
+<Scroll fade={{ start: 20, peak: 50 }}>
   <Content />
-</FadeOnScroll>
+</Scroll>
 ```
 
 **Fade in and out:**
 ```tsx
-<FadeOnScroll
-  startPosition={10}
-  peakPosition={50}
-  endPosition={90}
-  startOpacity={0.2}
-  peakOpacity={1}
-  endOpacity={0.2}
->
+<Scroll fade={{ start: 10, peak: 50, end: 90, opacity: [0.2, 1, 0.2] }}>
   <Content />
-</FadeOnScroll>
+</Scroll>
 ```
 
 **Parallax-style subtle fade:**
 ```tsx
-<FadeOnScroll
-  startPosition={0}
-  peakPosition={30}
-  endPosition={60}
-  startOpacity={0.5}
-  peakOpacity={1}
-  endOpacity={0.5}
->
+<Scroll fade={{ start: 0, peak: 30, end: 60, opacity: [0.5, 1, 0.5] }}>
   <BackgroundImage />
-</FadeOnScroll>
+</Scroll>
 ```
 
 #### Implementation Details
@@ -240,7 +214,7 @@ The scroll position is calculated as a percentage based on the element's positio
 - Uses `getBoundingClientRect()` to track element position
 - Calculates opacity based on current scroll position
 - Updates on every scroll event (RAF batched)
-- Applies CSS transition for smooth opacity changes
+- Applies a CSS transition from the `scroll.fade.animationDuration` and `scroll.fade.animationEasing` tokens
 
 ---
 
@@ -399,7 +373,7 @@ interface StickySectionProps {
 
 ### useScroll
 
-Hook to access the current scroll position from anywhere within `ScrollProvider`.
+Hook to access the current scroll position from anywhere within a `<Scroll root>`.
 
 #### Signature
 
@@ -425,65 +399,17 @@ function MyComponent() {
 
 #### Throws
 
-Throws an error if used outside of `ScrollProvider`:
+Throws an error if used outside of a `<Scroll root>`:
 ```
-Error: useScroll must be used within a ScrollProvider
+Error: useScroll must be used within a <Scroll root>
 ```
 
 #### Implementation Details
 
-- Subscribes to scroll updates from `ScrollProvider`
+- Subscribes to scroll updates from the nearest `<Scroll root>`
 - Updates are RAF-batched for performance
 - Automatically unsubscribes on unmount
 - Initial value is set immediately on mount
-
----
-
-### useStickyContext
-
-Hook to access the sticky context for advanced use cases.
-
-#### Signature
-
-```typescript
-function useStickyContext(): StickyContextValue
-```
-
-#### Returns
-
-```typescript
-interface StickyContextValue {
-  registerInstance: (
-    order: number,
-    height: number,
-    element: HTMLDivElement,
-    outerElement: HTMLDivElement,
-    originalTop: number
-  ) => void
-  unregisterInstance: (order: number) => void
-  getTotalStickyHeight: () => number
-}
-```
-
-#### Usage
-
-```tsx
-import { useStickyContext } from '@niceprototypes/scroll'
-
-function MyComponent() {
-  const { getTotalStickyHeight } = useStickyContext()
-
-  const offset = getTotalStickyHeight()
-  return <div>Total sticky height: {offset}px</div>
-}
-```
-
-#### Throws
-
-Throws an error if used outside of `StickyProvider`:
-```
-Error: Sticky components must be used within StickyProvider
-```
 
 ---
 
@@ -493,39 +419,33 @@ Error: Sticky components must be used within StickyProvider
 
 ```typescript
 // Scroll
-export interface ScrollContextValue {
-  scrollY: number
-  subscribe: (callback: (scrollY: number) => void) => () => void
-}
+export type ScrollAxisType = "x" | "y" | "both"
 
-// Sticky
-export interface StickyProps {
-  children: ReactNode
+export type ScrollAsType = "div" | "nav" | "ul"
+
+export type ScrollRootType = true | HTMLElement | React.RefObject<HTMLElement | null>
+
+export type ScrollStickyOptionsType = {
   order?: number
-  onStickyChange?: (isSticky: boolean) => void
+  onChange?: (isSticky: boolean) => void
 }
 
-export interface StickyContextValue {
-  registerInstance: (
-    order: number,
-    height: number,
-    element: HTMLDivElement,
-    outerElement: HTMLDivElement,
-    originalTop: number
-  ) => void
-  unregisterInstance: (order: number) => void
-  getTotalStickyHeight: () => number
+export type ScrollFadeOptionsType = {
+  start?: number
+  peak?: number
+  end?: number
+  opacity?: readonly [number, number, number]
 }
 
-// Fade
-export interface FadeOnScrollProps {
-  children: ReactNode
-  startPosition?: number
-  peakPosition?: number
-  endPosition?: number
-  startOpacity?: number
-  peakOpacity?: number
-  endOpacity?: number
+export type ScrollProps = React.HTMLAttributes<HTMLElement> & {
+  as?: ScrollAsType
+  axis?: ScrollAxisType
+  showScrollbar?: boolean
+  ref?: React.Ref<HTMLElement>
+  root?: ScrollRootType
+  sticky?: boolean | ScrollStickyOptionsType
+  fade?: boolean | ScrollFadeOptionsType
+  children?: React.ReactNode
 }
 
 // Section Links
@@ -560,41 +480,17 @@ export interface StickySectionProps {
 
 ```typescript
 import type {
-  ScrollContextValue,
-  StickyProps,
-  StickyContextValue,
-  FadeOnScrollProps,
+  ScrollProps,
+  ScrollAxisType,
+  ScrollAsType,
+  ScrollRootType,
+  ScrollStickyOptionsType,
+  ScrollFadeOptionsType,
   StickySectionLink,
   StickySectionLinksProps,
   StickySectionProps
 } from '@niceprototypes/scroll'
 ```
-
----
-
-## Context
-
-### ScrollContext
-
-React context for scroll management.
-
-```typescript
-export const ScrollContext = React.createContext<ScrollContextValue | null>(null)
-```
-
-Direct usage is not recommended. Use `useScroll` hook instead.
-
----
-
-### StickyContext
-
-React context for sticky element management.
-
-```typescript
-export const StickyContext = React.createContext<StickyContextValue | null>(null)
-```
-
-Direct usage is not recommended for most cases. Use `useStickyContext` hook if needed.
 
 ---
 
@@ -648,9 +544,9 @@ const scrollY = useScroll()
 
 **After:**
 ```tsx
-<Sticky order={0}>
+<Scroll sticky={{ order: 0 }}>
   <Header />
-</Sticky>
+</Scroll>
 ```
 
 Benefits: Automatic stacking, callbacks, and better control.
@@ -666,9 +562,9 @@ function ConditionalSticky({ children, shouldBeSticky }) {
   const [isSticky, setIsSticky] = useState(false)
 
   return shouldBeSticky ? (
-    <Sticky onStickyChange={setIsSticky}>
+    <Scroll sticky={{ onChange: setIsSticky }}>
       {children}
-    </Sticky>
+    </Scroll>
   ) : (
     children
   )
@@ -689,21 +585,21 @@ function ScrollAnimation() {
 ### Multiple Sticky Sections
 
 ```tsx
-<StickyProvider>
-  <Sticky order={0}>
+<Scroll root>
+  <Scroll sticky={{ order: 0 }}>
     <GlobalHeader />
-  </Sticky>
+  </Scroll>
 
-  <Sticky order={1}>
+  <Scroll sticky={{ order: 1 }}>
     <SubHeader />
-  </Sticky>
+  </Scroll>
 
-  <Sticky order={2}>
+  <Scroll sticky={{ order: 2 }}>
     <StickySectionLinks links={links} />
-  </Sticky>
+  </Scroll>
 
   <StickySection id="content">
     <Content />
   </StickySection>
-</StickyProvider>
+</Scroll>
 ```

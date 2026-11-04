@@ -2,8 +2,8 @@
  * @niceprototypes/scroll - Performance-optimized scroll components for React
  *
  * @description
- * A comprehensive scroll management library with centralized scroll management,
- * sticky positioning, fade effects, and intersection observer utilities.
+ * Scroll: every scrolling element, and the page behaviours (root, sticky, fade) as its props,
+ * with centralized scroll management; useScroll; StickySection and StickySectionLinks.
  * Designed to work seamlessly with the nice-react ecosystem.
  *
  * @author Nice Prototypes
@@ -11,48 +11,21 @@
  * @license MIT
  */
 
-// Main provider export
-export { default as ScrollProvider, ScrollContext } from "./components/ScrollProvider"
-export type {
-  ScrollContextValue,
-  ScrollProviderProps,
-  ScrollProviderRootType,
-  ScrollSubscribeCallbackType,
-  ScrollUnsubscribeType,
-} from "./components/ScrollProvider/ScrollProvider.types"
-export { default as ScrollProviderTypes } from "./components/ScrollProvider/ScrollProvider.types"
-
-// The scroll container
+// The scroll container and the page behaviours
 export { default as Scroll, ScrollTypes } from "./components/Scroll"
-export type { ScrollProps, ScrollAxisType, ScrollAsType } from "./components/Scroll"
+export type {
+  ScrollProps,
+  ScrollAxisType,
+  ScrollAsType,
+  ScrollRootType,
+  ScrollStickyOptionsType,
+  ScrollFadeOptionsType,
+} from "./components/Scroll"
 
 // Hooks
 export { useScroll } from "./hooks/useScroll"
 
 // Components
-export {
-  Sticky,
-  StickyProvider,
-  StickyContext,
-  useStickyContext,
-  StickyTypes,
-} from "./components/Sticky"
-export type {
-  StickyProps,
-  StickyContextValue,
-  StickyProviderProps,
-  StickyOrderType,
-  StickyOnChangeType,
-  StickyInstance,
-} from "./components/Sticky"
-
-export { FadeOnScroll, FadeOnScrollTypes } from "./components/FadeOnScroll"
-export type {
-  FadeOnScrollProps,
-  FadePositionType,
-  FadeOpacityType,
-} from "./components/FadeOnScroll"
-
 export {
   StickySectionLinks,
   SectionLinksTypes,

@@ -7,12 +7,9 @@
 
 import React, { useState } from 'react'
 import {
-  ScrollProvider,
-  StickyProvider,
-  Sticky,
+  Scroll,
   StickySectionLinks,
   StickySection,
-  FadeOnScroll,
   useScroll
 } from '@niceprototypes/scroll'
 import styled from 'styled-components'
@@ -97,156 +94,128 @@ export default function CompleteExample() {
   const [stickyState, setStickyState] = useState<{ [key: string]: boolean }>({})
 
   return (
-    <ScrollProvider>
-      <StickyProvider>
-        {/* Main header with scroll indicator */}
-        <Sticky
-          order={0}
-          onStickyChange={(isSticky) => setStickyState(prev => ({ ...prev, header: isSticky }))}
-        >
-          <Header>
-            <h1>Nice React Scroll</h1>
-            <ScrollDisplay />
-          </Header>
-        </Sticky>
+    <Scroll root>
+      {/* Main header with scroll indicator */}
+      <Scroll
+        sticky={{
+          order: 0,
+          onChange: (isSticky) => setStickyState(prev => ({ ...prev, header: isSticky }))
+        }}
+      >
+        <Header>
+          <h1>Nice React Scroll</h1>
+          <ScrollDisplay />
+        </Header>
+      </Scroll>
 
-        {/* Navigation with active section detection */}
-        <Sticky
-          order={1}
-          onStickyChange={(isSticky) => setStickyState(prev => ({ ...prev, nav: isSticky }))}
-        >
-          <Nav>
-            <StickySectionLinks
-              links={links}
-              renderLink={(link, isActive, onClick) => (
-                <a
-                  href={link.href}
-                  onClick={onClick}
-                  className={isActive ? 'active' : ''}
-                >
-                  {link.label}
-                </a>
-              )}
-            />
-          </Nav>
-        </Sticky>
-
-        {/* Hero section with fade effect */}
-        <FadeOnScroll
-          startPosition={0}
-          peakPosition={30}
-          startOpacity={0.5}
-          peakOpacity={1}
-        >
-          <StickySection id="hero">
-            <Hero>
-              <div>
-                <h1>Welcome to Nice React Scroll</h1>
-                <p>Performance-optimized scroll components for React</p>
-              </div>
-            </Hero>
-          </StickySection>
-        </FadeOnScroll>
-
-        {/* About section */}
-        <StickySection id="about">
-          <Section>
-            <Content>
-              <FadeOnScroll
-                startPosition={20}
-                peakPosition={50}
-                startOpacity={0}
-                peakOpacity={1}
+      {/* Navigation with active section detection */}
+      <Scroll
+        sticky={{
+          order: 1,
+          onChange: (isSticky) => setStickyState(prev => ({ ...prev, nav: isSticky }))
+        }}
+      >
+        <Nav>
+          <StickySectionLinks
+            links={links}
+            renderLink={(link, isActive, onClick) => (
+              <a
+                href={link.href}
+                onClick={onClick}
+                className={isActive ? 'active' : ''}
               >
-                <h2>About</h2>
-                <p>
-                  Nice React Scroll provides a centralized scroll manager with
-                  RAF-batched updates for optimal performance. Build beautiful
-                  scroll-based interactions without worrying about performance.
-                </p>
-                <p>
-                  Header sticky: {stickyState.header ? 'Yes' : 'No'} |
-                  Nav sticky: {stickyState.nav ? 'Yes' : 'No'}
-                </p>
-              </FadeOnScroll>
-            </Content>
-          </Section>
+                {link.label}
+              </a>
+            )}
+          />
+        </Nav>
+      </Scroll>
+
+      {/* Hero section with fade effect */}
+      <Scroll fade={{ start: 0, peak: 30, opacity: [0.5, 1, 0] }}>
+        <StickySection id="hero">
+          <Hero>
+            <div>
+              <h1>Welcome to Nice React Scroll</h1>
+              <p>Performance-optimized scroll components for React</p>
+            </div>
+          </Hero>
         </StickySection>
+      </Scroll>
 
-        {/* Features section */}
-        <StickySection id="features">
-          <Section>
-            <Content>
-              <FadeOnScroll
-                startPosition={20}
-                peakPosition={50}
-                startOpacity={0}
-                peakOpacity={1}
-              >
-                <h2>Features</h2>
-                <ul>
-                  <li>🚀 Single RAF-batched scroll listener</li>
-                  <li>📌 Sticky positioning with automatic stacking</li>
-                  <li>🎯 Smart section navigation</li>
-                  <li>🌊 Customizable fade effects</li>
-                  <li>⚡ TypeScript support</li>
-                </ul>
-              </FadeOnScroll>
-            </Content>
-          </Section>
-        </StickySection>
+      {/* About section */}
+      <StickySection id="about">
+        <Section>
+          <Content>
+            <Scroll fade={{ start: 20, peak: 50 }}>
+              <h2>About</h2>
+              <p>
+                Nice React Scroll provides a centralized scroll manager with
+                RAF-batched updates for optimal performance. Build beautiful
+                scroll-based interactions without worrying about performance.
+              </p>
+              <p>
+                Header sticky: {stickyState.header ? 'Yes' : 'No'} |
+                Nav sticky: {stickyState.nav ? 'Yes' : 'No'}
+              </p>
+            </Scroll>
+          </Content>
+        </Section>
+      </StickySection>
 
-        {/* Documentation section */}
-        <StickySection id="documentation">
-          <Section>
-            <Content>
-              <FadeOnScroll
-                startPosition={10}
-                peakPosition={50}
-                endPosition={90}
-                startOpacity={0.2}
-                peakOpacity={1}
-                endOpacity={0.2}
-              >
-                <h2>Documentation</h2>
-                <p>
-                  Check out the API documentation for detailed information about
-                  all components, hooks, and their props.
-                </p>
-                <pre style={{ background: '#f4f4f4', padding: '1rem', borderRadius: '4px' }}>
-                  {`import {
-  ScrollProvider,
-  StickyProvider,
-  Sticky,
-  FadeOnScroll,
+      {/* Features section */}
+      <StickySection id="features">
+        <Section>
+          <Content>
+            <Scroll fade={{ start: 20, peak: 50 }}>
+              <h2>Features</h2>
+              <ul>
+                <li>🚀 Single RAF-batched scroll listener</li>
+                <li>📌 Sticky positioning with automatic stacking</li>
+                <li>🎯 Smart section navigation</li>
+                <li>🌊 Customizable fade effects</li>
+                <li>⚡ TypeScript support</li>
+              </ul>
+            </Scroll>
+          </Content>
+        </Section>
+      </StickySection>
+
+      {/* Documentation section */}
+      <StickySection id="documentation">
+        <Section>
+          <Content>
+            <Scroll fade={{ start: 10, peak: 50, end: 90, opacity: [0.2, 1, 0.2] }}>
+              <h2>Documentation</h2>
+              <p>
+                Check out the API documentation for detailed information about
+                all components, hooks, and their props.
+              </p>
+              <pre style={{ background: '#f4f4f4', padding: '1rem', borderRadius: '4px' }}>
+                {`import {
+  Scroll,
   useScroll
 } from '@niceprototypes/scroll'`}
-                </pre>
-              </FadeOnScroll>
-            </Content>
-          </Section>
-        </StickySection>
+              </pre>
+            </Scroll>
+          </Content>
+        </Section>
+      </StickySection>
 
-        {/* Contact section */}
-        <StickySection id="contact">
-          <Section>
-            <Content>
-              <FadeOnScroll
-                startPosition={20}
-                peakPosition={50}
-                startOpacity={0}
-                peakOpacity={1}
-              >
-                <h2>Contact</h2>
-                <p>
-                  Questions or feedback? Visit our GitHub repository to open an
-                  issue or contribute to the project.
-                </p>
-              </FadeOnScroll>
-            </Content>
-          </Section>
-        </StickySection>
-      </StickyProvider>
-    </ScrollProvider>
+      {/* Contact section */}
+      <StickySection id="contact">
+        <Section>
+          <Content>
+            <Scroll fade={{ start: 20, peak: 50 }}>
+              <h2>Contact</h2>
+              <p>
+                Questions or feedback? Visit our GitHub repository to open an
+                issue or contribute to the project.
+              </p>
+            </Scroll>
+          </Content>
+        </Section>
+      </StickySection>
+    </Scroll>
   )
 }

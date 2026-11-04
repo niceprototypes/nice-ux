@@ -1,6 +1,6 @@
 import * as React from "react"
 import Flex from "@niceprototypes/flex"
-import { ScrollProvider } from "@niceprototypes/scroll"
+import { Scroll } from "@niceprototypes/scroll"
 import { getToken } from "@niceprototypes/styles"
 import { ScrollRegion } from "./ScrollBox.styles"
 
@@ -8,10 +8,9 @@ import { ScrollRegion } from "./ScrollBox.styles"
 export const SCROLL_BOX_HEIGHT = `calc(${getToken("size", "larger")} * 3)`
 
 /**
- * A bounded scrolling box for scroll-driven previews: its region is the ScrollProvider's
- * `root`, so Sticky sticks to its top, SectionLinks scrolls it, and FadeOnScroll measures
- * against it, as on a page that scrolls inside an app shell. `header` sits above the region,
- * inside the same provider (a SectionLinks bar).
+ * A bounded scrolling box for the SectionLinks and Contents previews: its region is a
+ * `<Scroll root>`, so the links scroll it and track its sections. `header` sits above the region,
+ * inside the same root (the SectionLinks bar).
  */
 const ScrollBox = ({ children, header }: { children: React.ReactNode; header?: React.ReactNode }) => {
   const region = React.useRef<HTMLDivElement>(null)
@@ -26,14 +25,14 @@ const ScrollBox = ({ children, header }: { children: React.ReactNode; header?: R
         overflow: "hidden",
       }}
     >
-      <ScrollProvider root={region}>
+      <Scroll root={region}>
         {header}
         <ScrollRegion ref={region}>
           <Flex direction="column" shrink={0}>
             {children}
           </Flex>
         </ScrollRegion>
-      </ScrollProvider>
+      </Scroll>
     </Flex>
   )
 }

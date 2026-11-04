@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Removed
+- **BREAKING**: `ScrollProvider`, `ScrollContext`, `StickyProvider`, `StickyContext`, `useStickyContext`, `Sticky` and `FadeOnScroll` and their types. Use `Scroll`'s props: `<Scroll root>` (window) or `<Scroll root={element}>` for the providers, `<Scroll sticky={{ order, onChange }}>` for `Sticky`, `<Scroll fade={{ start, peak, end, opacity }}>` for `FadeOnScroll`
+
 ### Changed
 - **BREAKING**: Replaced scroll-based sticky detection with IntersectionObserver API for significantly better performance
 - Optimized `Sticky` component to eliminate scroll event handlers entirely

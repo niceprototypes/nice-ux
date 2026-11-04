@@ -59,11 +59,8 @@ Logo(logo) [components-logo--playground] height?:number showName?:boolean nameHe
 Popover(popover) [components-popover--playground] open:boolean onOpenChange?:fn anchorRef:React.RefObject<HTMLElement|null> ignoreOutsideRefs?:ReadonlyArray<React.RefObject<HTMLElement|null>> position?:"top"|"bottom"|"left"|"right"="bottom" align?:"start"|"center"|"end"="start" matchAnchorWidth?:boolean=false children?:node role?:React.AriaRole="dialog" theme?:ThemeType
 Radio(radio) [components-forms-radio--playground] value:string disabled?:boolean children?:node size?:RadioSizeType backgroundColor?:ColorTokenProp<RadioBackgroundColorType> borderColor?:ColorTokenProp<RadioBorderColorType>
 RadioGroup(radio) [components-forms-radiogroup--playground] value?:string defaultValue?:string onChange?:fn name?:string disabled?:boolean required?:boolean direction?:"row"|"column"="column" gap?:GapType="small" size?:RadioSizeType="base" backgroundColor?:ColorTokenProp<RadioBackgroundColorType> borderColor?:ColorTokenProp<RadioBorderColorType> children?:node theme?:ThemeType
-FadeOnScroll(scroll) [components-scroll-fadeonscroll--playground] children:node startPosition?:number peakPosition?:number endPosition?:number startOpacity?:number peakOpacity?:number endOpacity?:number
-Scroll(scroll) [components-scroll-scroll--playground] as?:"div"|"nav"|"ul"="div" axis?:"x"|"y"|"both"="y" showScrollbar?:boolean children?:node
-ScrollProvider(scroll) children:node root?:React.RefObject<HTMLElement|null>|HTMLElement|null
+Scroll(scroll) [components-scroll-scroll--playground] as?:"div"|"nav"|"ul"="div" axis?:"x"|"y"|"both"="y" showScrollbar?:boolean root?:true|HTMLElement|React.RefObject<HTMLElement|null> sticky?:boolean|ScrollStickyOptionsType fade?:boolean|ScrollFadeOptionsType children?:node
 SectionLinks(scroll) [components-scroll-sectionlinks--playground] links:StickySectionLink[] renderLink?:fn renderWrapper?:fn
-Sticky(scroll) [components-scroll-sticky--playground] children:node order?:number onStickyChange?:fn
 StickySection(scroll) [components-scroll-stickysection--playground] children:node as?:keyof React.JSX.IntrinsicElements render?:fn
 Select(select) [components-forms-select--playground] 
 Slider(slider) [components-slider--playground] children:node[] currentIndex?:number isAnimating?:boolean onAnimationComplete?:fn

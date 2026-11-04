@@ -4,6 +4,7 @@ import { getItem, getTree, sanitize, type DataItem } from "@niceprototypes/docs/
 import ComponentPage from "./components/ComponentPage"
 import MdxPage, { type MdxModuleType } from "./components/MdxPage"
 import TokensPage from "./components/TokensPage"
+import ScrollPageBehaviour from "./components/ScrollPageBehaviour"
 import { catalogComponents, subcomponentsOf, type CatalogComponentType } from "./catalog"
 
 /** A loaded page module for the App's `pages`. */
@@ -37,6 +38,11 @@ const mdxPage = (item: DataItem, label: string) => {
 /** A component's page, bound to its catalog entry. */
 const componentPage = (component: CatalogComponentType) => pageOf(() => <ComponentPage component={component} />)
 
+/** Pages of a folder that are not a component's, after its components: Scroll's page-wide behaviours. */
+const folderPages: Record<string, [string, AppPagesType[string]][]> = {
+  Scroll: [["Page behaviour", pageOf(ScrollPageBehaviour)]],
+}
+
 /**
  * The Components section, as the Storybook sidebar orders it: the folders (Forms, Scroll)
  * alphabetically, then the pages outside a folder alphabetically, each folder's pages alphabetically
@@ -45,22 +51,26 @@ const componentPage = (component: CatalogComponentType) => pageOf(() => <Compone
 const componentPages = (section: string): [string, AppPagesType[string], string?][] => {
   const folders = [...new Set(catalogComponents.flatMap(component => (component.folder ? [component.folder] : [])))].sort(byName)
   const sorted = [...catalogComponents].sort((a, b) => byName(a.name, b.name))
-  // A component named like a folder (Scroll beside FadeOnScroll and the others in Scroll) is that
+  // A component named like a folder (Scroll beside StickySection and the others in Scroll) is that
   // folder's first page: a page and a folder cannot share a URL.
   const folderOf = (component: CatalogComponentType) => component.folder ?? (folders.includes(component.name) ? component.name : undefined)
   const inFolder = (component: CatalogComponentType, folder: string) =>
     folderOf(component) === folder ? (component.name === folder ? 0 : 1) : -1
   return [
-    ...folders.flatMap((folder, folderIndex) =>
-      sorted
-        .filter(component => inFolder(component, folder) >= 0)
-        .sort((a, b) => inFolder(a, folder) - inFolder(b, folder))
-        .map((component, index): [string, AppPagesType[string], string] => [
+    ...folders.flatMap((folder, folderIndex) => {
+      const components = sorted.filter(component => inFolder(component, folder) >= 0).sort((a, b) => inFolder(a, folder) - inFolder(b, folder))
+      return [
+        ...components.map((component, index): [string, AppPagesType[string], string] => [
           `./docs/${section}/${folderIndex + 1} ${folder}/${index + 1} ${component.name}/index.tsx`,
           componentPage(component),
           component.docsId,
         ]),
-    ),
+        ...(folderPages[folder] ?? []).map(([name, page], index): [string, AppPagesType[string]] => [
+          `./docs/${section}/${folderIndex + 1} ${folder}/${components.length + index + 1} ${name}/index.tsx`,
+          page,
+        ]),
+      ]
+    }),
     ...sorted
       .filter(component => !folderOf(component))
       .map((component, index): [string, AppPagesType[string], string] => [

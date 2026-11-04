@@ -106,9 +106,7 @@ Some packages export multiple related components rather than a single primary co
 @niceprototypes/scroll/
 └── src/
     ├── components/
-    │   ├── ScrollProvider/
-    │   ├── Sticky/
-    │   ├── FadeOnScroll/
+    │   ├── Scroll/
     │   ├── SectionLinks/
     │   └── StickySection/
     ├── hooks/
@@ -119,17 +117,16 @@ Some packages export multiple related components rather than a single primary co
 **Export pattern:** Each component folder is re-exported by name. No `export { default }` — consumers import each component individually.
 
 ```ts
-export { default as ScrollProvider, ScrollContext } from "./components/ScrollProvider"
-export type { ScrollProviderProps } from "./components/ScrollProvider/ScrollProvider.types"
-export { default as ScrollProviderTypes } from "./components/ScrollProvider/ScrollProvider.types"
+export { default as Scroll, ScrollTypes } from "./components/Scroll"
+export type { ScrollProps, ScrollAxisType } from "./components/Scroll"
 
 export { useScroll } from "./hooks/useScroll"
 
-export { Sticky, StickyProvider, StickyContext } from "./components/Sticky"
-export type { StickyProps, StickyOrderType } from "./components/Sticky"
+export { StickySectionLinks, SectionLinksTypes } from "./components/SectionLinks"
+export type { StickySectionLinksProps } from "./components/SectionLinks"
 
-export { FadeOnScroll } from "./components/FadeOnScroll"
-export type { FadeOnScrollProps } from "./components/FadeOnScroll"
+export { StickySection, StickySectionTypes } from "./components/StickySection"
+export type { StickySectionProps } from "./components/StickySection"
 ```
 
 **Key differences from single-component packages:**
@@ -526,7 +523,7 @@ export { default as InkTypes } from "./types"
 **When to skip the wrap:**
 
 - Hook-only packages (no rendered output).
-- Pure context providers with no DOM (`StylesProvider`, `ScrollProvider`).
+- Pure context providers with no DOM (`StylesProvider`, `<Scroll root>`).
 - Multi-component packages where each component would need its own wrap;
   decide per component, not at the package level (`@niceprototypes/scroll`).
 - Components whose every meaningful prop is already a CSS shape that Flex's

@@ -1,6 +1,6 @@
 /**
  * The scroll root helpers: one place that reads and drives the scroll position, of an element
- * when a ScrollProvider has a `root`, else of the window.
+ * when a `<Scroll root>` names one, else of the window.
  */
 
 /** The element that scrolls, or null for the window. */

@@ -11,12 +11,12 @@ Performance-optimized scroll components for React with centralized scroll manage
 - [Installation](#installation)
 - [Quick Start](#quick-start)
 - [Components](#components)
-  - [ScrollProvider](#scrollprovider)
+  - [Scroll root](#scroll-root)
   - [useScroll Hook](#usescroll-hook)
-  - [StickyProvider & Sticky](#stickyprovider--sticky)
+  - [Scroll sticky](#scroll-sticky)
   - [StickySectionLinks](#stickysectionlinks)
   - [StickySection](#stickysection)
-  - [FadeOnScroll](#fadeonscroll)
+  - [Scroll fade](#scroll-fade)
 - [Complete Example](#complete-example)
 - [Advanced Usage](#advanced-usage)
 - [Performance Tips](#performance-tips)
@@ -53,91 +53,84 @@ npm install react react-dom styled-components
 
 ```tsx
 import {
-  ScrollProvider,
-  StickyProvider,
-  Sticky,
+  Scroll,
   StickySectionLinks,
-  StickySection,
-  FadeOnScroll
+  StickySection
 } from '@niceprototypes/scroll'
 
 function App() {
   return (
-    <ScrollProvider>
-      <StickyProvider>
-        {/* Sticky header */}
-        <Sticky order={0}>
-          <Header />
-        </Sticky>
+    <Scroll root>
+      {/* Sticky header */}
+      <Scroll sticky={{ order: 0 }}>
+        <Header />
+      </Scroll>
 
-        {/* Sticky navigation */}
-        <Sticky order={1}>
-          <StickySectionLinks
-            links={[
-              { href: '#intro', label: 'Introduction' },
-              { href: '#features', label: 'Features' }
-            ]}
-          />
-        </Sticky>
+      {/* Sticky navigation */}
+      <Scroll sticky={{ order: 1 }}>
+        <StickySectionLinks
+          links={[
+            { href: '#intro', label: 'Introduction' },
+            { href: '#features', label: 'Features' }
+          ]}
+        />
+      </Scroll>
 
-        {/* Content with fade effect */}
-        <FadeOnScroll startPosition={20} peakPosition={50}>
-          <StickySection id="intro">
-            <h1>Welcome</h1>
-          </StickySection>
-        </FadeOnScroll>
-
-        <StickySection id="features">
-          <h2>Features</h2>
+      {/* Content with fade effect */}
+      <Scroll fade={{ start: 20, peak: 50 }}>
+        <StickySection id="intro">
+          <h1>Welcome</h1>
         </StickySection>
-      </StickyProvider>
-    </ScrollProvider>
+      </Scroll>
+
+      <StickySection id="features">
+        <h2>Features</h2>
+      </StickySection>
+    </Scroll>
   )
 }
 ```
 
 ## Components
 
-### ScrollProvider
+### Scroll root
 
-Centralized scroll manager that provides a single `requestAnimationFrame`-batched scroll listener.
+Centralized scroll manager that provides a single `requestAnimationFrame`-batched scroll listener and the sticky stack. `<Scroll root>` renders only its children.
 
 ```tsx
-import { ScrollProvider } from '@niceprototypes/scroll'
+import { Scroll } from '@niceprototypes/scroll'
 
 function App() {
   return (
-    <ScrollProvider>
+    <Scroll root>
       {/* Your app */}
-    </ScrollProvider>
+    </Scroll>
   )
 }
 ```
 
 **Scrolling inside an element.** When the page scrolls in an element (an app shell's
-region) instead of the window, pass it as `root`, a ref or the element. Sticky then sticks to
-the root's top (CSS `sticky`, with a zero-height sentinel for `onStickyChange`), StickySectionLinks
-observes and scrolls the root, and FadeOnScroll measures against the root's visible box. Without
-`root` (or without a ScrollProvider) everything follows the window, as before.
+region) instead of the window, pass it as `root`, a ref or the element. `<Scroll sticky>` then
+sticks to the root's top (CSS `sticky`, with a zero-height sentinel for `sticky.onChange`),
+StickySectionLinks observes and scrolls the root, and `<Scroll fade>` measures against the root's
+visible box. With `root={true}` everything follows the window.
 
 ```tsx
 const region = useRef<HTMLDivElement>(null)
 
 <div ref={region} style={{ overflowY: "auto" }}>
-  <ScrollProvider root={region}>
-    <StickyProvider>{/* … */}</StickyProvider>
-  </ScrollProvider>
+  <Scroll root={region}>{/* … */}</Scroll>
 </div>
 ```
 
-**Why use ScrollProvider?**
+**Why use a Scroll root?**
 - Prevents multiple scroll listeners from degrading performance
 - Batches scroll updates using RAF for smoother animations
 - Provides `useScroll()` hook for components that need scroll position
 
 ### useScroll Hook
 
-Access the current scroll position from any component within ScrollProvider.
+Access the current scroll position from any component within a `<Scroll root>`.
 
 ```tsx
 import { useScroll } from '@niceprototypes/scroll'
@@ -149,35 +142,36 @@ function MyComponent() {
 }
 ```
 
-### StickyProvider & Sticky
+### Scroll sticky
 
 Create sticky elements that stack on top of each other with automatic offset calculation.
 
 ```tsx
-import { StickyProvider, Sticky } from '@niceprototypes/scroll'
+import { Scroll } from '@niceprototypes/scroll'
 
 function App() {
   return (
-    <StickyProvider>
+    <Scroll root>
       {/* First sticky (top) */}
-      <Sticky order={0}>
+      <Scroll sticky={{ order: 0 }}>
         <Header />
-      </Sticky>
+      </Scroll>
 
       {/* Second sticky (below first) */}
-      <Sticky order={1}>
+      <Scroll sticky={{ order: 1 }}>
         <Subheader />
-      </Sticky>
+      </Scroll>
 
       {/* Content */}
       <main>...</main>
-    </StickyProvider>
+    </Scroll>
   )
 }
 ```
 
-**Props:**
+**Options** (`sticky={true}` or `sticky={{ ... }}`):
 - `order` (number): Stacking order (lower numbers appear above). Default: `0`
+- `onChange?` (function): Called with `true` when the element sticks, `false` when it returns to its place
 
 **How it works:**
 - Elements with `order={0}` appear first (topmost)
@@ -185,6 +179,7 @@ function App() {
 - Automatically calculates offsets for proper stacking
 - Uses IntersectionObserver for efficient sticky detection (no scroll events!)
 - Callbacks fire only when sticky state actually changes
+- Outside a `<Scroll root>` the children render in place
 
 ### StickySectionLinks
 
@@ -287,36 +282,27 @@ function Content() {
 </StickySection>
 ```
 
-### FadeOnScroll
+### Scroll fade
 
-Apply opacity transitions to elements based on scroll position.
+Apply opacity transitions to elements based on scroll position. Needs a `<Scroll root>` above it.
 
 ```tsx
-import { FadeOnScroll } from '@niceprototypes/scroll'
+import { Scroll } from '@niceprototypes/scroll'
 
 function Hero() {
   return (
-    <FadeOnScroll
-      startPosition={0}
-      peakPosition={30}
-      endPosition={60}
-      startOpacity={0}
-      peakOpacity={1}
-      endOpacity={0.3}
-    >
+    <Scroll fade={{ start: 0, peak: 30, end: 60, opacity: [0, 1, 0.3] }}>
       <img src="hero.jpg" alt="Hero" />
-    </FadeOnScroll>
+    </Scroll>
   )
 }
 ```
 
-**Props:**
-- `startPosition` (number): Scroll % where fade begins. Default: `0`
-- `peakPosition` (number): Scroll % where opacity reaches peak. Default: `50`
-- `endPosition?` (number): Scroll % where fade ends. Optional
-- `startOpacity` (number): Starting opacity (0-1). Default: `0`
-- `peakOpacity` (number): Peak opacity (0-1). Default: `1`
-- `endOpacity?` (number): Ending opacity (0-1). Optional
+**Options** (`fade={true}` or `fade={{ ... }}`):
+- `start` (number): Scroll % where fade begins. Default: `0`
+- `peak` (number): Scroll % where opacity reaches peak. Default: `50`
+- `end` (number): Scroll % where fade ends. Default: `100`
+- `opacity` ([number, number, number]): Opacity at start, peak and end (0-1). Default: `[0, 1, 0]`
 
 **Scroll position calculation:**
 - `0%` = element just enters viewport (bottom of element at bottom of viewport)
@@ -327,42 +313,23 @@ function Hero() {
 
 Fade in on scroll:
 ```tsx
-<FadeOnScroll
-  startPosition={20}
-  peakPosition={50}
-  startOpacity={0}
-  peakOpacity={1}
->
+<Scroll fade={{ start: 20, peak: 50 }}>
   <Content />
-</FadeOnScroll>
+</Scroll>
 ```
 
 Fade in and out:
 ```tsx
-<FadeOnScroll
-  startPosition={10}
-  peakPosition={50}
-  endPosition={90}
-  startOpacity={0.2}
-  peakOpacity={1}
-  endOpacity={0.2}
->
+<Scroll fade={{ start: 10, peak: 50, end: 90, opacity: [0.2, 1, 0.2] }}>
   <Content />
-</FadeOnScroll>
+</Scroll>
 ```
 
 Parallax-style fade:
 ```tsx
-<FadeOnScroll
-  startPosition={0}
-  peakPosition={30}
-  endPosition={60}
-  startOpacity={0.1}
-  peakOpacity={1}
-  endOpacity={0.1}
->
+<Scroll fade={{ start: 0, peak: 30, end: 60, opacity: [0.1, 1, 0.1] }}>
   <BackgroundImage />
-</FadeOnScroll>
+</Scroll>
 ```
 
 ## Complete Example
@@ -370,12 +337,9 @@ Parallax-style fade:
 ```tsx
 import React from 'react'
 import {
-  ScrollProvider,
-  StickyProvider,
-  Sticky,
+  Scroll,
   StickySectionLinks,
   StickySection,
-  FadeOnScroll,
   useScroll
 } from '@niceprototypes/scroll'
 import styled from 'styled-components'
@@ -392,58 +356,51 @@ function ScrollIndicator() {
 
 function App() {
   return (
-    <ScrollProvider>
-      <StickyProvider>
-        {/* Sticky Header */}
-        <Sticky order={0}>
-          <Header>
-            <h1>My Website</h1>
-            <ScrollIndicator />
-          </Header>
-        </Sticky>
+    <Scroll root>
+      {/* Sticky Header */}
+      <Scroll sticky={{ order: 0 }}>
+        <Header>
+          <h1>My Website</h1>
+          <ScrollIndicator />
+        </Header>
+      </Scroll>
 
-        {/* Sticky Navigation */}
-        <Sticky order={1}>
-          <StickySectionLinks
-            links={[
-              { href: '#intro', label: 'Introduction' },
-              { href: '#about', label: 'About' },
-              { href: '#services', label: 'Services' },
-              { href: '#contact', label: 'Contact' }
-            ]}
-          />
-        </Sticky>
+      {/* Sticky Navigation */}
+      <Scroll sticky={{ order: 1 }}>
+        <StickySectionLinks
+          links={[
+            { href: '#intro', label: 'Introduction' },
+            { href: '#about', label: 'About' },
+            { href: '#services', label: 'Services' },
+            { href: '#contact', label: 'Contact' }
+          ]}
+        />
+      </Scroll>
 
-        {/* Hero with Fade */}
-        <FadeOnScroll
-          startPosition={0}
-          peakPosition={40}
-          startOpacity={0.3}
-          peakOpacity={1}
-        >
-          <StickySection id="intro">
-            <h2>Welcome</h2>
-            <p>Scroll to explore</p>
-          </StickySection>
-        </FadeOnScroll>
-
-        {/* Regular Sections */}
-        <StickySection id="about">
-          <h2>About Us</h2>
-          <p>Learn more about what we do</p>
+      {/* Hero with Fade */}
+      <Scroll fade={{ start: 0, peak: 40, opacity: [0.3, 1, 0] }}>
+        <StickySection id="intro">
+          <h2>Welcome</h2>
+          <p>Scroll to explore</p>
         </StickySection>
+      </Scroll>
 
-        <StickySection id="services">
-          <h2>Our Services</h2>
-          <p>Discover our offerings</p>
-        </StickySection>
+      {/* Regular Sections */}
+      <StickySection id="about">
+        <h2>About Us</h2>
+        <p>Learn more about what we do</p>
+      </StickySection>
 
-        <StickySection id="contact">
-          <h2>Get in Touch</h2>
-          <p>Contact us today</p>
-        </StickySection>
-      </StickyProvider>
-    </ScrollProvider>
+      <StickySection id="services">
+        <h2>Our Services</h2>
+        <p>Discover our offerings</p>
+      </StickySection>
+
+      <StickySection id="contact">
+        <h2>Get in Touch</h2>
+        <p>Contact us today</p>
+      </StickySection>
+    </Scroll>
   )
 }
 
@@ -472,47 +429,46 @@ export default App
 ### Multiple Sticky Elements
 
 ```tsx
-<StickyProvider>
-  <Sticky order={0}>
+<Scroll root>
+  <Scroll sticky={{ order: 0 }}>
     <TopNav />
-  </Sticky>
+  </Scroll>
 
-  <Sticky order={1}>
+  <Scroll sticky={{ order: 1 }}>
     <Breadcrumbs />
-  </Sticky>
+  </Scroll>
 
-  <Sticky order={2}>
+  <Scroll sticky={{ order: 2 }}>
     <StickySectionLinks links={links} />
-  </Sticky>
+  </Scroll>
 
   <StickySection id="content">
     <Content />
   </StickySection>
-</StickyProvider>
+</Scroll>
 ```
 
 ### Dynamic Fade Effects
 
 ```tsx
 function DynamicFade() {
-  const [config, setConfig] = useState({
-    startPosition: 20,
-    peakPosition: 50,
-    startOpacity: 0,
-    peakOpacity: 1
+  const [config, setConfig] = useState<ScrollFadeOptionsType>({
+    start: 20,
+    peak: 50,
+    opacity: [0, 1, 0]
   })
 
   return (
-    <FadeOnScroll {...config}>
+    <Scroll fade={config}>
       <Content />
-    </FadeOnScroll>
+    </Scroll>
   )
 }
 ```
 
 ## Performance Tips
 
-1. **Use ScrollProvider** - Always wrap your app in `<ScrollProvider>` for optimal performance
+1. **Use a Scroll root** - Always wrap your app in `<Scroll root>` for optimal performance
 2. **IntersectionObserver Magic** - Sticky detection runs off the main thread with zero scroll events
 3. **ResizeObserver Caching** - Dimensions are cached and updated only when elements resize
 4. **GPU Acceleration** - `will-change` CSS hints enable hardware acceleration
@@ -543,10 +499,10 @@ import type {
   StickySectionLink,
   StickySectionLinksProps,
   StickySectionProps,
-  StickyProps,
-  FadeOnScrollProps,
-  ScrollContextValue,
-  StickyContextValue
+  ScrollProps,
+  ScrollRootType,
+  ScrollStickyOptionsType,
+  ScrollFadeOptionsType
 } from '@niceprototypes/scroll'
 ```
 

@@ -1,1 +1,2 @@
 [2026-09-25 18:59] patch: Drop the prepare script so file: installs no longer rebuild the package
+[2026-11-04 12:56] major: ScrollProvider, StickyProvider, Sticky and FadeOnScroll fold into Scroll as props: <Scroll root> marks the page scroller (true for the window), <Scroll sticky={{ order, onChange }}> and <Scroll fade={{ start, peak, end, opacity }}> replace Sticky and FadeOnScroll; their exports and types are removed

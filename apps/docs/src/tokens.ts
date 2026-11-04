@@ -12,6 +12,8 @@ export const getToken = setTokens({
   ...AppTokenMap,
   // DocsPage's columns: the gap between them, and the settings column right of Contents, as wide as its Dark toggle.
   docs: { ...AppTokenMap.docs, columnGap: getCoreToken("gap", "larger"), settingsWidth: "80px" },
+  // Scroll / Page behaviour: the room each fade line has, so it enters and leaves the view.
+  pageBehaviour: { room: "60vh" },
   // Contents sticks one page padding below the top of the scrolling page (no navigation bar here).
   contents: { top: getCoreToken("gap", "large") },
   // One scale at every breakpoint, base 14 to larger 48: base to larger grows by one ratio each

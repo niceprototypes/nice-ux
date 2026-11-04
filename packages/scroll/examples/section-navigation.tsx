@@ -7,9 +7,7 @@
 
 import React from 'react'
 import {
-  ScrollProvider,
-  StickyProvider,
-  Sticky,
+  Scroll,
   StickySectionLinks,
   StickySection
 } from '@niceprototypes/scroll'
@@ -64,75 +62,73 @@ const links = [
 
 export default function SectionNavigationExample() {
   return (
-    <ScrollProvider>
-      <StickyProvider>
-        {/* Sticky header */}
-        <Sticky order={0}>
-          <Header>
-            <h1>Documentation</h1>
-          </Header>
-        </Sticky>
+    <Scroll root>
+      {/* Sticky header */}
+      <Scroll sticky={{ order: 0 }}>
+        <Header>
+          <h1>Documentation</h1>
+        </Header>
+      </Scroll>
 
-        {/* Sticky navigation with auto-active sections */}
-        <Sticky order={1}>
-          <Nav>
-            <StickySectionLinks
-              links={links}
-              renderLink={(link, isActive, onClick) => (
-                <a
-                  href={link.href}
-                  onClick={onClick}
-                  className={isActive ? 'active' : ''}
-                >
-                  {link.label}
-                </a>
-              )}
-            />
-          </Nav>
-        </Sticky>
+      {/* Sticky navigation with auto-active sections */}
+      <Scroll sticky={{ order: 1 }}>
+        <Nav>
+          <StickySectionLinks
+            links={links}
+            renderLink={(link, isActive, onClick) => (
+              <a
+                href={link.href}
+                onClick={onClick}
+                className={isActive ? 'active' : ''}
+              >
+                {link.label}
+              </a>
+            )}
+          />
+        </Nav>
+      </Scroll>
 
-        {/* Content sections */}
-        <StickySection id="introduction">
-          <Section>
-            <h2>Introduction</h2>
-            <p>Welcome to our documentation. This example shows automatic section detection.</p>
-            <p>Scroll down and watch the navigation highlight the active section.</p>
-          </Section>
-        </StickySection>
+      {/* Content sections */}
+      <StickySection id="introduction">
+        <Section>
+          <h2>Introduction</h2>
+          <p>Welcome to our documentation. This example shows automatic section detection.</p>
+          <p>Scroll down and watch the navigation highlight the active section.</p>
+        </Section>
+      </StickySection>
 
-        <StickySection id="features">
-          <Section>
-            <h2>Features</h2>
-            <ul>
-              <li>Automatic active section detection with IntersectionObserver</li>
-              <li>Smooth scroll animation</li>
-              <li>Sticky offset calculation</li>
-              <li>Customizable link rendering</li>
-            </ul>
-          </Section>
-        </StickySection>
+      <StickySection id="features">
+        <Section>
+          <h2>Features</h2>
+          <ul>
+            <li>Automatic active section detection with IntersectionObserver</li>
+            <li>Smooth scroll animation</li>
+            <li>Sticky offset calculation</li>
+            <li>Customizable link rendering</li>
+          </ul>
+        </Section>
+      </StickySection>
 
-        <StickySection id="installation">
-          <Section>
-            <h2>Installation</h2>
-            <pre>npm install @niceprototypes/scroll</pre>
-          </Section>
-        </StickySection>
+      <StickySection id="installation">
+        <Section>
+          <h2>Installation</h2>
+          <pre>npm install @niceprototypes/scroll</pre>
+        </Section>
+      </StickySection>
 
-        <StickySection id="usage">
-          <Section>
-            <h2>Usage</h2>
-            <p>Import the components you need and wrap your app with ScrollProvider.</p>
-          </Section>
-        </StickySection>
+      <StickySection id="usage">
+        <Section>
+          <h2>Usage</h2>
+          <p>Import the components you need and wrap your app with a Scroll root.</p>
+        </Section>
+      </StickySection>
 
-        <StickySection id="contact">
-          <Section>
-            <h2>Contact</h2>
-            <p>Get in touch with us for support or questions.</p>
-          </Section>
-        </StickySection>
-      </StickyProvider>
-    </ScrollProvider>
+      <StickySection id="contact">
+        <Section>
+          <h2>Contact</h2>
+          <p>Get in touch with us for support or questions.</p>
+        </Section>
+      </StickySection>
+    </Scroll>
   )
 }

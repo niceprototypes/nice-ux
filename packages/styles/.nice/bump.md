@@ -61,3 +61,4 @@
 [2026-10-26 20:22] minor: icon.color:disabled follows icon.color:lighter instead of the core disabled colour, and icon.color gains a muted variant (the core lightest colour)
 [2026-10-26 20:35] minor: Set fontFamily base and heading to 'Helvetica Neue', Inter, Roboto, 'Arial Nova', 'Nimbus Sans', Arial, sans-serif, fonts already on the device, replacing the unloaded Google Sans Flex
 [2026-10-26 20:36] minor: Set fontFamily code to ui-monospace, 'Source Code Pro', Menlo, Consolas, monospace, fonts already on the device, replacing the unloaded Roboto Mono
+[2026-11-04 12:56] minor: scroll.sticky (zIndex, animationDuration, animationEasing) and scroll.fade (animationDuration, animationEasing) tokens for Scroll's sticky and fade

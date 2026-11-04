@@ -1,11 +1,11 @@
 /**
  * Fade on Scroll Example
  *
- * This example demonstrates various fade effects using the FadeOnScroll component.
+ * This example demonstrates various fade effects using `<Scroll fade>`.
  */
 
 import React from 'react'
-import { ScrollProvider, FadeOnScroll } from '@niceprototypes/scroll'
+import { Scroll } from '@niceprototypes/scroll'
 import styled from 'styled-components'
 
 const Container = styled.div`
@@ -52,53 +52,36 @@ const ImageWrapper = styled.div`
   color: #666;
 `
 
-export default function FadeOnScrollExample() {
+export default function FadeExample() {
   return (
-    <ScrollProvider>
+    <Scroll root>
       {/* Hero section with fade in */}
-      <FadeOnScroll
-        startPosition={0}
-        peakPosition={30}
-        startOpacity={0.3}
-        peakOpacity={1}
-      >
+      <Scroll fade={{ start: 0, peak: 30, opacity: [0.3, 1, 0] }}>
         <Hero>
           <div>
             <h1>Fade Effects Demo</h1>
             <p>Scroll down to see various fade animations</p>
           </div>
         </Hero>
-      </FadeOnScroll>
+      </Scroll>
 
       <Container>
         {/* Fade in example */}
         <Section>
-          <FadeOnScroll
-            startPosition={20}
-            peakPosition={50}
-            startOpacity={0}
-            peakOpacity={1}
-          >
+          <Scroll fade={{ start: 20, peak: 50 }}>
             <Card>
               <h2>Fade In</h2>
               <p>This card fades in as you scroll.</p>
               <p>
-                <strong>Configuration:</strong> startPosition=20, peakPosition=50
+                <strong>Configuration:</strong> start=20, peak=50
               </p>
             </Card>
-          </FadeOnScroll>
+          </Scroll>
         </Section>
 
         {/* Fade in and out example */}
         <Section>
-          <FadeOnScroll
-            startPosition={10}
-            peakPosition={50}
-            endPosition={90}
-            startOpacity={0.2}
-            peakOpacity={1}
-            endOpacity={0.2}
-          >
+          <Scroll fade={{ start: 10, peak: 50, end: 90, opacity: [0.2, 1, 0.2] }}>
             <Card>
               <h2>Fade In and Out</h2>
               <p>This card fades in as it enters, then fades out as it exits.</p>
@@ -106,19 +89,12 @@ export default function FadeOnScrollExample() {
                 <strong>Configuration:</strong> Fades from 0.2 to 1 to 0.2
               </p>
             </Card>
-          </FadeOnScroll>
+          </Scroll>
         </Section>
 
         {/* Parallax-style fade for background */}
         <Section>
-          <FadeOnScroll
-            startPosition={0}
-            peakPosition={30}
-            endPosition={70}
-            startOpacity={0.3}
-            peakOpacity={1}
-            endOpacity={0.3}
-          >
+          <Scroll fade={{ start: 0, peak: 30, end: 70, opacity: [0.3, 1, 0.3] }}>
             <div>
               <ImageWrapper>Background Image</ImageWrapper>
               <Card style={{ marginTop: '2rem' }}>
@@ -126,17 +102,12 @@ export default function FadeOnScrollExample() {
                 <p>The image above uses a subtle fade effect for a parallax feel.</p>
               </Card>
             </div>
-          </FadeOnScroll>
+          </Scroll>
         </Section>
 
         {/* Quick fade */}
         <Section>
-          <FadeOnScroll
-            startPosition={30}
-            peakPosition={40}
-            startOpacity={0}
-            peakOpacity={1}
-          >
+          <Scroll fade={{ start: 30, peak: 40 }}>
             <Card>
               <h2>Quick Fade</h2>
               <p>This card fades in quickly over a short scroll distance.</p>
@@ -144,17 +115,12 @@ export default function FadeOnScrollExample() {
                 <strong>Configuration:</strong> Only 10% scroll distance (30-40)
               </p>
             </Card>
-          </FadeOnScroll>
+          </Scroll>
         </Section>
 
         {/* Slow fade */}
         <Section>
-          <FadeOnScroll
-            startPosition={0}
-            peakPosition={80}
-            startOpacity={0}
-            peakOpacity={1}
-          >
+          <Scroll fade={{ start: 0, peak: 80 }}>
             <Card>
               <h2>Slow Fade</h2>
               <p>This card fades in slowly over a long scroll distance.</p>
@@ -162,9 +128,9 @@ export default function FadeOnScrollExample() {
                 <strong>Configuration:</strong> 80% scroll distance (0-80)
               </p>
             </Card>
-          </FadeOnScroll>
+          </Scroll>
         </Section>
       </Container>
-    </ScrollProvider>
+    </Scroll>
   )
 }

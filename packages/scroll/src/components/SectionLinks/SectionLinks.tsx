@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react"
-import { StickyContext } from "../Sticky/StickyProvider"
+import { StickyContext } from "../Scroll/ScrollRoot"
 import { LinksWrapper, LinkAnchor, LinkInk } from "./SectionLinks.styles"
 import { useScrollRoot } from "../../utilities/useScrollRoot"
 import { scrollRootTo, scrollTopOf, viewportOf } from "../../utilities/scrollRoot"
@@ -36,7 +36,7 @@ const StickySectionLinks: React.FC<StickySectionLinksProps> = ({
   className,
 }) => {
   const stickyContext = useContext(StickyContext)
-  // The page scrolls in the ScrollProvider's root, or the window.
+  // The page scrolls in the nearest Scroll root's element, or the window.
   const root = useScrollRoot()
   const [activeSection, setActiveSection] = useState<string>("")
 

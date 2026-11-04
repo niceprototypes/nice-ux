@@ -53,13 +53,12 @@ npm run build
 @niceprototypes/scroll/
 ├── src/
 │   ├── components/          # React components
-│   │   ├── FadeOnScroll/   # Fade on scroll component
+│   │   ├── Scroll/         # Scroll: the container, and its root, sticky and fade behaviours
 │   │   ├── SectionLinks/   # Section navigation component
-│   │   ├── Sticky/         # Sticky positioning components
 │   │   └── StickySection/  # Section wrapper component
 │   ├── hooks/              # React hooks
 │   │   └── useScroll.ts    # Scroll position hook
-│   ├── ScrollProvider.tsx  # Main scroll provider
+│   ├── utilities/          # Internal scroll root helpers
 │   └── index.ts            # Public API exports
 ├── dist/                   # Compiled output (generated)
 ├── README.md               # Main documentation

@@ -2,11 +2,11 @@
  * Multiple Sticky Elements Example
  *
  * This example shows how to stack multiple sticky elements
- * on top of each other using the order prop.
+ * on top of each other using the sticky `order` option.
  */
 
 import React from 'react'
-import { ScrollProvider, StickyProvider, Sticky } from '@niceprototypes/scroll'
+import { Scroll } from '@niceprototypes/scroll'
 import styled from 'styled-components'
 
 const Header = styled.header`
@@ -45,39 +45,37 @@ const Content = styled.div`
 
 export default function MultipleStickyExample() {
   return (
-    <ScrollProvider>
-      <StickyProvider>
-        {/* First sticky - topmost */}
-        <Sticky order={0}>
-          <Header>
-            <h1>Main Header</h1>
-          </Header>
-        </Sticky>
+    <Scroll root>
+      {/* First sticky - topmost */}
+      <Scroll sticky={{ order: 0 }}>
+        <Header>
+          <h1>Main Header</h1>
+        </Header>
+      </Scroll>
 
-        {/* Second sticky - below header */}
-        <Sticky order={1}>
-          <SubHeader>
-            <p>Subheader - Current Page: Home</p>
-          </SubHeader>
-        </Sticky>
+      {/* Second sticky - below header */}
+      <Scroll sticky={{ order: 1 }}>
+        <SubHeader>
+          <p>Subheader - Current Page: Home</p>
+        </SubHeader>
+      </Scroll>
 
-        {/* Third sticky - below subheader */}
-        <Sticky order={2}>
-          <Navigation>
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#services">Services</a>
-            <a href="#contact">Contact</a>
-          </Navigation>
-        </Sticky>
+      {/* Third sticky - below subheader */}
+      <Scroll sticky={{ order: 2 }}>
+        <Navigation>
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#contact">Contact</a>
+        </Navigation>
+      </Scroll>
 
-        <Content>
-          <h2>Page Content</h2>
-          <p>Scroll down to see all three elements stack on top of each other.</p>
-          <p>The header (order=0) appears first, followed by the subheader (order=1),
-             and then the navigation (order=2).</p>
-        </Content>
-      </StickyProvider>
-    </ScrollProvider>
+      <Content>
+        <h2>Page Content</h2>
+        <p>Scroll down to see all three elements stack on top of each other.</p>
+        <p>The header (order=0) appears first, followed by the subheader (order=1),
+           and then the navigation (order=2).</p>
+      </Content>
+    </Scroll>
   )
 }

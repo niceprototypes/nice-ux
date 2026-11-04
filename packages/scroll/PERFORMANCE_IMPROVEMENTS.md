@@ -42,7 +42,7 @@ const observerConfig = useMemo(() => ({
 
 **Issue**: Multiple `getBoundingClientRect()` calls on scroll can be expensive.
 
-**Current** (in `FadeOnScroll/FadeOnScroll.tsx:58-88`):
+**Current** (in `Scroll/ScrollFade.tsx`):
 ```tsx
 useEffect(() => {
   if (!wrapperRef.current) return
@@ -82,7 +82,7 @@ useEffect(() => {
 
 **Issue**: Sticky elements measure and register on every mount, which can cause layout thrashing with multiple sticky elements.
 
-**Current** (in `Sticky/Sticky.tsx:47-63`):
+**Current** (in `Scroll/ScrollSticky.tsx`):
 ```tsx
 useEffect(() => {
   if (!context || !innerRef.current || !outerRef.current) return
@@ -130,7 +130,7 @@ useEffect(() => {
 
 **Issue**: No CSS hints for elements that will be transformed.
 
-**Improvement** (in `Sticky/Sticky.tsx`):
+**Improvement** (in `Scroll/ScrollSticky.tsx`):
 ```tsx
 const StickyInnerWrapper = styled.div`
   width: 100%;
@@ -208,7 +208,7 @@ const linksContent = useMemo(() =>
 
 **Issue**: Every subscriber gets called even if the scroll change is minimal.
 
-**Current** (in `ScrollProvider.tsx:45-63`):
+**Current** (in `Scroll/ScrollRoot.tsx`):
 ```tsx
 const handleScroll = () => {
   rafIdRef.current = requestAnimationFrame(() => {
@@ -254,7 +254,7 @@ const handleScroll = () => {
 
 **Issue**: Changing `position` and `top` properties triggers layout recalculation.
 
-**Current** (in `StickyProvider.tsx:71-86`):
+**Current** (in `Scroll/ScrollRoot.tsx`):
 ```tsx
 const handleScroll = useCallback((scrollY: number) => {
   instancesRef.current.forEach(instance => {
@@ -290,7 +290,7 @@ const handleScroll = useCallback((scrollY: number) => {
 
 **Issue**: Sticky state is calculated on every scroll event.
 
-**Current** (in `Sticky/Sticky.tsx:66-82`):
+**Current** (in `Scroll/ScrollSticky.tsx`):
 ```tsx
 useEffect(() => {
   // Calculates on every scroll
@@ -298,9 +298,9 @@ useEffect(() => {
 
   if (shouldBeSticky !== isSticky) {
     setIsSticky(shouldBeSticky)
-    onStickyChange?.(shouldBeSticky)
+    onChange?.(shouldBeSticky)
   }
-}, [scrollY, context, isSticky, onStickyChange])
+}, [scrollY, context, isSticky, onChange])
 ```
 
 **Improvement**:
@@ -316,7 +316,7 @@ useEffect(() => {
       const shouldBeSticky = !entry.isIntersecting
       if (shouldBeSticky !== isSticky) {
         setIsSticky(shouldBeSticky)
-        onStickyChange?.(shouldBeSticky)
+        onChange?.(shouldBeSticky)
       }
     },
     {
@@ -327,7 +327,7 @@ useEffect(() => {
 
   observer.observe(outerRef.current)
   return () => observer.disconnect()
-}, [onStickyChange])
+}, [onChange])
 ```
 
 ### 10. Add Production-Only Optimizations
@@ -338,10 +338,10 @@ useEffect(() => {
 - Use production builds of dependencies
 
 ```tsx
-// Add to ScrollProvider
+// Add to ScrollRoot
 if (process.env.NODE_ENV !== 'production') {
   if (subscribersRef.current.size > 100) {
-    console.warn('ScrollProvider: More than 100 subscribers detected. Consider optimizing.')
+    console.warn('Scroll root: More than 100 subscribers detected. Consider optimizing.')
   }
 }
 ```

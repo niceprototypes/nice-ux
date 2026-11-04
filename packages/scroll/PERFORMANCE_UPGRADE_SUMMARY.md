@@ -6,7 +6,7 @@ Successfully implemented IntersectionObserver-based performance improvements to 
 
 ## Changes Implemented
 
-### 1. Sticky Component (`src/components/Sticky/Sticky.tsx`)
+### 1. Sticky behaviour (`src/components/Scroll/ScrollSticky.tsx`)
 
 **Before:**
 - Used `useScroll()` hook with scroll events
@@ -37,7 +37,7 @@ const observer = new IntersectionObserver(([entry]) => {
 })
 ```
 
-### 2. FadeOnScroll Component (`src/components/FadeOnScroll/FadeOnScroll.tsx`)
+### 2. Fade behaviour (`src/components/Scroll/ScrollFade.tsx`)
 
 **Optimizations:**
 - Added ResizeObserver to cache element dimensions
@@ -86,8 +86,8 @@ Based on testing methodology outlined in `tests/performance/`:
 ## Files Changed
 
 ### Core Implementation
-1. `src/components/Sticky/Sticky.tsx` - IntersectionObserver implementation
-2. `src/components/FadeOnScroll/FadeOnScroll.tsx` - ResizeObserver optimization
+1. `src/components/Scroll/ScrollSticky.tsx` - IntersectionObserver implementation
+2. `src/components/Scroll/ScrollFade.tsx` - ResizeObserver optimization
 
 ### Documentation
 3. `README.md` - Updated features and performance tips
@@ -136,7 +136,7 @@ npm install intersection-observer resize-observer-polyfill
 - [x] TypeScript compilation passes
 - [x] No runtime errors in console
 - [ ] Sticky behavior works correctly (needs browser testing)
-- [ ] FadeOnScroll animations smooth
+- [ ] `<Scroll fade>` animations smooth
 - [ ] Multiple sticky elements stack properly
 - [ ] Callbacks fire correctly
 - [ ] Works on mobile devices
@@ -191,7 +191,7 @@ See `TESTING_GUIDE.md` for detailed instructions.
    - Update docs with actual numbers
 
 3. **Consider additional optimizations**
-   - Throttle ScrollProvider updates (1px threshold)
+   - Throttle `<Scroll root>` updates (1px threshold)
    - Add performance mode prop for heavy applications
    - Consider virtual scrolling for very long lists
 

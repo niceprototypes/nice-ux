@@ -6,17 +6,17 @@ import Install from "@niceprototypes/docs/components/Install"
 
 <StoryHeader
   title="useScroll"
-  description="useScroll: returns the window scroll position, re-rendering once per animation frame through the enclosing ScrollProvider."
+  description="useScroll: returns the page scroller's scroll position, re-rendering once per animation frame through the enclosing <Scroll root>."
 />
 
 <Install package="scroll" />
 
 ```jsx
-import { ScrollProvider, useScroll } from "@niceprototypes/scroll"
+import { Scroll, useScroll } from "@niceprototypes/scroll"
 
 const Position = () => <div>Scrolled: {useScroll()}px</div>
 
-<ScrollProvider>
+<Scroll root>
   <Position />
-</ScrollProvider>
+</Scroll>
 ```
