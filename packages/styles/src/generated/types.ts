@@ -59,6 +59,7 @@ export interface TokenVariants extends CustomTokenVariants {
   "app.panel.label.fontSize": "base"
   "app.panel.label.color": "base"
   "app.panel.label.letterSpacing": "base"
+  "app.panel.restOpacity": "base"
   "app.handle.width": "base"
   "app.handle.height": "base"
   "app.handle.color": "base"

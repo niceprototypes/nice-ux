@@ -175,7 +175,8 @@ export const StyledAppPanelBody = styled(Scroll).attrs({ showScrollbar: false })
 /**
  * A panel's label (`panelLabels`): at the panel's top left, at the content's inset, vertically centred
  * on the handle's pill; small, the lighter gray, uppercase and letter-spaced (`app.panel.label.*`).
- * It takes no clicks, so the handle under it still drags.
+ * It takes no clicks, so the handle under it still drags. It rests at `app.panel.restOpacity` and shows
+ * fully while its row is hovered, its handle focused or dragged.
  */
 export const StyledAppPanelLabel = styled.div`
   position: absolute;
@@ -191,6 +192,12 @@ export const StyledAppPanelLabel = styled.div`
   color: ${getToken("app.panel.label.color")};
   letter-spacing: ${getToken("app.panel.label.letterSpacing")};
   text-transform: uppercase;
+  opacity: ${getToken("app.panel.restOpacity")};
+  transition: opacity ${getToken("animationDuration", "fast")} ${getToken("animationEasing")};
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 `
 
 /** The nav's label row (`panelLabels.nav`): as tall as a panel's handle row, so its label sits where theirs do. */
@@ -198,10 +205,17 @@ export const StyledAppNavLabel = styled.div`
   position: relative;
   flex: none;
   height: calc(${getToken("app.handle.padding")} + ${getToken("app.handle.height")} + ${getToken("app.handle.paddingBottom")});
+
+  &:hover > ${StyledAppPanelLabel} {
+    opacity: 1;
+  }
 `
 
-/** A panel's drag handle: a pill centred at its top, inside a hit area of the handle's padding. */
-export const StyledAppHandle = styled.div`
+/**
+ * A panel's drag handle: a pill centred at its top, inside a hit area of the handle's padding. The pill
+ * rests at `app.panel.restOpacity`; hovered, focused or dragged, it and the panel's label show fully.
+ */
+export const StyledAppHandle = styled.div<{ $dragging: boolean }>`
   display: flex;
   justify-content: center;
   padding-block: ${getToken("app.handle.padding")} ${getToken("app.handle.paddingBottom")};
@@ -214,7 +228,28 @@ export const StyledAppHandle = styled.div`
     height: ${getToken("app.handle.height")};
     border-radius: ${getToken("app.handle.height")};
     background-color: ${getToken("app.handle.color")};
+    opacity: ${getToken("app.panel.restOpacity")};
+    transition: opacity ${getToken("animationDuration", "fast")} ${getToken("animationEasing")};
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
   }
+
+  &:is(:hover, :focus-visible)::before,
+  &:is(:hover, :focus-visible) ~ ${StyledAppPanelLabel} {
+    opacity: 1;
+  }
+
+  /* While dragged (the pointer is captured, and may leave the row) */
+  ${({ $dragging }) =>
+    $dragging &&
+    css`
+      &::before,
+      & ~ ${StyledAppPanelLabel} {
+        opacity: 1;
+      }
+    `}
 `
 
 /**

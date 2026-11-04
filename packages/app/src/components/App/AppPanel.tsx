@@ -24,6 +24,7 @@ const AppPanel: React.FC<{ onContent: (element: HTMLDivElement | null) => void; 
   // `null` follows the content's height: fully open.
   const [height, setHeight] = React.useState<number | null>(null)
   const drag = React.useRef<{ y: number; height: number } | null>(null)
+  const [dragging, setDragging] = React.useState(false)
   const shown = clamp(height ?? contentHeight, contentHeight)
 
   const setContentElement = React.useCallback(
@@ -44,6 +45,7 @@ const AppPanel: React.FC<{ onContent: (element: HTMLDivElement | null) => void; 
   const onPointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
     event.currentTarget.setPointerCapture(event.pointerId)
     drag.current = { y: event.clientY, height: shown }
+    setDragging(true)
   }
   const onPointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
     if (drag.current) setHeight(clamp(drag.current.height + drag.current.y - event.clientY, contentHeight))
@@ -51,6 +53,7 @@ const AppPanel: React.FC<{ onContent: (element: HTMLDivElement | null) => void; 
   const onPointerUp = (event: React.PointerEvent<HTMLDivElement>) => {
     event.currentTarget.releasePointerCapture(event.pointerId)
     drag.current = null
+    setDragging(false)
   }
   const onKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     const direction = { ArrowUp: 1, ArrowDown: -1 }[event.key]
@@ -70,6 +73,7 @@ const AppPanel: React.FC<{ onContent: (element: HTMLDivElement | null) => void; 
         aria-valuemax={Math.round(contentHeight)}
         aria-valuenow={Math.round(shown)}
         tabIndex={0}
+        $dragging={dragging}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}

@@ -36,6 +36,9 @@ const componentTokensData: ComponentTokensData = {
         "letterSpacing": {
           "base": "var(--np--letter-spacing--wider)"
         }
+      },
+      "restOpacity": {
+        "base": "0.5"
       }
     },
     "handle": {

@@ -264,6 +264,7 @@
 	--np--app--panel--label--font-size: var(--np--font-size--smaller);
 	--np--app--panel--label--color: var(--np--color--lighter);
 	--np--app--panel--label--letter-spacing: var(--np--letter-spacing--wider);
+	--np--app--panel--rest-opacity: 0.5;
 	--np--app--handle--width: 32px;
 	--np--app--handle--height: var(--np--border-width--larger);
 	--np--app--handle--color: var(--np--border-color--strong);
