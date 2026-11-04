@@ -25,6 +25,17 @@ const componentTokensData: ComponentTokensData = {
       },
       "padding": {
         "base": "var(--np--gap--large)"
+      },
+      "label": {
+        "fontSize": {
+          "base": "var(--np--font-size--smaller)"
+        },
+        "color": {
+          "base": "var(--np--color--lighter)"
+        },
+        "letterSpacing": {
+          "base": "var(--np--letter-spacing--wider)"
+        }
       }
     },
     "handle": {

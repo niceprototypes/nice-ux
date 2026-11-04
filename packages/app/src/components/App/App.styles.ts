@@ -11,7 +11,7 @@ export const AppGlobalStyle = createGlobalStyle`
 
 /**
  * The shell: the nav beside the scene region, the viewport's full height, on the theme background.
- * With `$drawer` (below tablet) a grid instead: the header row over one cell, which the scene region
+ * With `$drawer` (below laptop) a grid instead: the header row over one cell, which the scene region
  * fills and the open drawer covers.
  */
 export const StyledApp = styled.div<{ $drawer: boolean }>`
@@ -25,7 +25,7 @@ export const StyledApp = styled.div<{ $drawer: boolean }>`
 
 /**
  * The sidebar: the header row over the nav and the scene sidebar side by side, over the footer, the
- * viewport's full height, at least `app.sidebar.minWidth` wide. With `$drawer` (below tablet) it
+ * viewport's full height, at least `app.sidebar.minWidth` wide. With `$drawer` (below laptop) it
  * generates no box: the header row and the drawer are the shell grid's own items.
  */
 export const StyledAppAside = styled.div<{ $drawer: boolean }>`
@@ -38,7 +38,7 @@ export const StyledAppAside = styled.div<{ $drawer: boolean }>`
 
 /**
  * The sidebar's header row, above the nav and the scene sidebar, with the nav's padding: the logo
- * (`app.logo.height` tall), then the search and below tablet the menu button at its end, all
+ * (`app.logo.height` tall), then the search and below laptop the menu button at its end, all
  * vertically centred, the large gap apart. Its own bottom padding (the base gap) sets it apart:
  * padding inside the scrolling columns would scroll away, and the rows would slide up against the header.
  */
@@ -113,7 +113,7 @@ export const StyledAppDocsLink = styled.div`
 
 /**
  * The nav and the scene sidebar over the footer. Tablet and up it generates no box. With `$drawer`
- * (below tablet) it is the drawer: shown only while `$open`, over the scene region in the shell
+ * (below laptop) it is the drawer: shown only while `$open`, over the scene region in the shell
  * grid's second row, on the theme background. Wider than the viewport (the nav beside a scene
  * sidebar), it scrolls sideways, not the page.
  */
@@ -154,6 +154,7 @@ export const StyledAppPanelContent = styled.div`
  * rule. Empty, it takes no space.
  */
 export const StyledAppPanel = styled.div`
+  position: relative;
   flex: none;
   min-height: 0;
   border-block-start: ${getToken("app.panel.rule.width")} solid ${getToken("app.panel.rule.color")};
@@ -169,6 +170,34 @@ export const StyledAppPanel = styled.div`
  */
 export const StyledAppPanelBody = styled(Scroll).attrs({ showScrollbar: false })`
   overflow-x: hidden;
+`
+
+/**
+ * A panel's label (`panelLabels`): at the panel's top left, at the content's inset, vertically centred
+ * on the handle's pill; small, the lighter gray, uppercase and letter-spaced (`app.panel.label.*`).
+ * It takes no clicks, so the handle under it still drags.
+ */
+export const StyledAppPanelLabel = styled.div`
+  position: absolute;
+  inset-inline-start: ${getToken("app.panel.padding")};
+  inset-block-start: ${getToken("app.handle.padding")};
+  height: ${getToken("app.handle.height")};
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  pointer-events: none;
+  font-family: ${getToken("fontFamily")};
+  font-size: ${getToken("app.panel.label.fontSize")};
+  color: ${getToken("app.panel.label.color")};
+  letter-spacing: ${getToken("app.panel.label.letterSpacing")};
+  text-transform: uppercase;
+`
+
+/** The nav's label row (`panelLabels.nav`): as tall as a panel's handle row, so its label sits where theirs do. */
+export const StyledAppNavLabel = styled.div`
+  position: relative;
+  flex: none;
+  height: calc(${getToken("app.handle.padding")} + ${getToken("app.handle.height")} + ${getToken("app.handle.paddingBottom")});
 `
 
 /** A panel's drag handle: a pill centred at its top, inside a hit area of the handle's padding. */

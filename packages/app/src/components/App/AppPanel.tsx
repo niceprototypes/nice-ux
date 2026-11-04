@@ -1,5 +1,5 @@
 import * as React from "react"
-import { StyledAppHandle, StyledAppPanel, StyledAppPanelBody, StyledAppPanelContent } from "./App.styles"
+import { StyledAppHandle, StyledAppPanel, StyledAppPanelBody, StyledAppPanelContent, StyledAppPanelLabel } from "./App.styles"
 
 /** The fraction of the content height one arrow key moves the handle. */
 const KEY_STEP = 0.1
@@ -8,15 +8,16 @@ const KEY_STEP = 0.1
 const clamp = (height: number, content: number) => Math.min(Math.max(height, 0), content)
 
 /**
- * A resizable panel under the nav, the sidebar's width: a rule, a drag handle (`aria-label` names it)
- * and the element a scene portals into (`onContent`). Dragging the handle (or its arrow keys) resizes
+ * A resizable panel under the nav, the sidebar's width: a rule, a drag handle (`aria-label` names it),
+ * an optional `label` left of the handle on its line, and the element a scene portals into (`onContent`). Dragging the handle (or its arrow keys) resizes
  * the panel between the handle alone and its content's height; it opens fully. Shorter than its
  * content, the body under the handle scrolls vertically; the handle stays at the top. Empty, it takes
  * no space. The shell stacks two: the scene sidebar and, under it, the scene sidebar's footer.
  */
-const AppPanel: React.FC<{ onContent: (element: HTMLDivElement | null) => void; "aria-label": string }> = ({
+const AppPanel: React.FC<{ onContent: (element: HTMLDivElement | null) => void; "aria-label": string; label?: string }> = ({
   onContent,
   "aria-label": ariaLabel,
+  label,
 }) => {
   const [content, setContent] = React.useState<HTMLDivElement | null>(null)
   const [contentHeight, setContentHeight] = React.useState(0)
@@ -79,6 +80,7 @@ const AppPanel: React.FC<{ onContent: (element: HTMLDivElement | null) => void; 
       <StyledAppPanelBody style={{ height: shown < contentHeight ? shown : undefined }}>
         <StyledAppPanelContent ref={setContentElement} />
       </StyledAppPanelBody>
+      {label && <StyledAppPanelLabel>{label}</StyledAppPanelLabel>}
     </StyledAppPanel>
   )
 }

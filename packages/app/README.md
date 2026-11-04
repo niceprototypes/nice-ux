@@ -22,7 +22,9 @@ where the current one renders. One page, no iframe.
   sidebar, for a scene's own navigation (`createPortal(steps, sidebar)`), and under it the footer, for
   its settings. Each has a drag handle at its top (a separator, arrow keys too) that resizes it between
   the handle alone and its content's height; it opens fully; shorter than its content, the body under
-  the handle scrolls without a scrollbar; empty, it takes no space; `null` in the bare view. `useScenes()` returns the index, the current page, `bare` (the bare view
+  the handle scrolls without a scrollbar; empty, it takes no space; `null` in the bare view. `panelLabels`
+  (`{ nav, sidebar, footer }`) labels the nav and the two panels at their top left, on the handle's line
+  (`app.panel.label.*`: small, lighter, uppercase, letter-spaced). `useScenes()` returns the index, the current page, `bare` (the bare view
   is on), `open(entry)` and `preload(entry)`, for scenes that move between pages or drop their chrome.
 - **`getAppPageUrl(key)`** gives a docs section page's URL from its `pages` key, for links from outside the router.
 - **Router adapters**, subpath exports with optional peer dependencies:
@@ -56,10 +58,10 @@ at night, pure white by day (`app.search.backgroundColor`).
 `docsLink` adds a book icon link after the search, in the same icon-only treatment, that opens the
 first docs section page in a new tab (`rel="noopener noreferrer"`).
 
-Below tablet the sidebar is a drawer: the header row gets a menu button
+Below laptop the sidebar is a drawer: the header row gets a menu button
 (`aria-expanded`, `aria-controls`) that opens it over the scene region and closes it again. Escape
 and picking a page close it; focus moves to the current page's link on opening and back to the button
-on closing. `sidebarOpen` controls it, `onSidebarOpenChange` reports each change. Tablet and up the
+on closing. `sidebarOpen` controls it, `onSidebarOpenChange` reports each change. Laptop and up the
 sidebar always shows beside the region.
 
 The sidebar is at least `app.sidebar.minWidth` wide (a component token, `24em` by default; wider

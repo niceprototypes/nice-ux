@@ -124,6 +124,12 @@ export interface AppProps {
    */
   docsLink?: boolean
 
+  /**
+   * Labels for the sidebar's stacked parts, top to bottom: the nav, the scene sidebar panel and its
+   * footer panel. Each shows at the part's top left, on its drag handle's line (the nav has no handle)
+   */
+  panelLabels?: { nav?: string; sidebar?: string; footer?: string }
+
   /** Accessible name of the nav landmark */
   "aria-label"?: string
 
@@ -131,13 +137,13 @@ export interface AppProps {
   navSize?: TreeSizeType
 
   /**
-   * Below tablet, whether the sidebar drawer is open over the scene region. Set, it is controlled
+   * Below laptop, whether the sidebar drawer is open over the scene region. Set, it is controlled
    * (the menu button, Escape and a picked page only report through `onSidebarOpenChange`); unset,
    * the shell keeps it, closed at first. Tablet and up the sidebar always shows beside the region
    */
   sidebarOpen?: boolean
 
-  /** Below tablet, called with the drawer's next open state: the menu button, Escape, or a picked page */
+  /** Below laptop, called with the drawer's next open state: the menu button, Escape, or a picked page */
   onSidebarOpenChange?: (open: boolean) => void
 }
 

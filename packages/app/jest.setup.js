@@ -14,3 +14,7 @@ globalThis.ResizeObserver = class {
   unobserve() {}
   disconnect() {}
 }
+
+// jsdom's window is 1024px wide, below laptop, where the sidebar is a drawer; tests start at a laptop
+// width and resize for the drawer themselves.
+window.innerWidth = 1440

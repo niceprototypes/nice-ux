@@ -96,7 +96,7 @@ const meta = {
   parameters: {
     layout: "fullscreen",
   },
-  // Below tablet the sidebar is a drawer behind the header row's menu button.
+  // Below laptop the sidebar is a drawer behind the header row's menu button.
   globals: { viewport: { value: "mobile2", isRotated: false } },
 } satisfies Meta<typeof App>
 
@@ -120,6 +120,7 @@ export const Playground: Story = {
     withWrapper: { control: "boolean", table: { category: "Content" } },
     search: { control: "boolean", table: { category: "Content" } },
     docsLink: { control: "boolean", table: { category: "Content" } },
+    panelLabels: { control: "object", table: { category: "Content" } },
 
     navSize: {
       control: "select",
@@ -196,14 +197,15 @@ export const Search: Story = {
   },
 }
 
-/** From tablet up the sidebar shows beside the pages, with no menu button. */
+/** At tablet width the sidebar is still the drawer behind the menu button; from laptop up it shows beside the pages. */
 export const Tablet: Story = {
   ...Playground,
   globals: { viewport: { value: "tablet", isRotated: false } },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    await waitFor(() => expect(canvas.getByRole("navigation", { name: "Docs" })).toBeVisible())
-    await expect(canvas.queryByRole("button", { name: "Menu" })).not.toBeInTheDocument()
+    const menu = await canvas.findByRole("button", { name: "Menu" })
+    await expect(menu).toHaveAttribute("aria-expanded", "false")
+    await waitFor(() => expect(canvas.queryByRole("navigation", { name: "Docs" })).not.toBeInTheDocument())
   },
 }
 

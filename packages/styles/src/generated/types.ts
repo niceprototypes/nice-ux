@@ -56,6 +56,9 @@ export interface TokenVariants extends CustomTokenVariants {
   "app.panel.rule.width": "base"
   "app.panel.rule.color": "base"
   "app.panel.padding": "base"
+  "app.panel.label.fontSize": "base"
+  "app.panel.label.color": "base"
+  "app.panel.label.letterSpacing": "base"
   "app.handle.width": "base"
   "app.handle.height": "base"
   "app.handle.color": "base"
@@ -274,6 +277,7 @@ export interface TokenInverseVariants {
   "borderColor": BorderColorInverseType
   "color": ColorInverseType
   "app.panel.rule.color": "base"
+  "app.panel.label.color": "base"
   "app.handle.color": "base"
   "app.header.icon.color": "base" | "hover"
   "app.header.focusRing.color": "base"

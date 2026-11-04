@@ -1,5 +1,5 @@
 import * as React from "react"
-import { act, fireEvent, render, screen, waitFor } from "@testing-library/react"
+import { act, cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react"
 import "@testing-library/jest-dom"
 import App from "."
 import type { AppRouterType } from "./App.types"
@@ -226,7 +226,7 @@ describe.each(adapters)("App on the %s adapter", (_, router) => {
   })
 })
 
-describe("App below tablet", () => {
+describe("App below laptop", () => {
   const innerWidth = window.innerWidth
   /** Resizes the window, as useBreakpoint reads it. */
   const resize = (width: number) =>
@@ -302,8 +302,13 @@ describe("App below tablet", () => {
     expect(onSidebarOpenChange).toHaveBeenCalledTimes(2)
   })
 
-  it("shows the sidebar beside the scene region from tablet up, with no menu button", async () => {
+  it("is a drawer at tablet width too, and shows the sidebar beside the scene region from laptop up, with no menu button", async () => {
     resize(700)
+    render(<App scenes={scenes} router={plainRouter} />)
+    await screen.findByText("nine")
+    expect(screen.getByRole("button", { name: "Menu" })).toBeInTheDocument()
+    cleanup()
+    resize(1280)
     render(<App scenes={scenes} router={plainRouter} sidebarOpen={false} />)
     await screen.findByText("nine")
     expect(screen.queryByRole("button", { name: "Menu" })).not.toBeInTheDocument()
@@ -402,7 +407,7 @@ describe("App search", () => {
     expect(getComputedStyle(screen.getByRole("navigation").parentElement!).paddingBlockStart).toBe("0")
   })
 
-  it("stays in the header row beside the menu button below tablet, and a picked result closes the drawer", async () => {
+  it("stays in the header row beside the menu button below laptop, and a picked result closes the drawer", async () => {
     const innerWidth = window.innerWidth
     act(() => {
       window.innerWidth = 390
@@ -510,6 +515,30 @@ describe("App sidebar footer", () => {
     fireEvent.pointerMove(handle, { clientY: 550 })
     fireEvent.pointerUp(handle)
     expect(body).toHaveStyle({ height: `${CONTENT - 50}px`, overflowY: "auto" })
+  })
+
+  it("labels the nav and each panel on its handle's line, through the app.panel.label tokens; none without panelLabels", async () => {
+    const { unmount } = render(
+      <App scenes={scenes} router={plainRouter} panelLabels={{ nav: "Index", sidebar: "Channels", footer: "Controls" }} />,
+    )
+    await screen.findByText("settings")
+    const footerLabel = screen.getByText("Controls")
+    expect(screen.getByRole("separator", { name: "Resize settings" }).parentElement).toContainElement(footerLabel)
+    expect(footerLabel).toHaveStyle({
+      textTransform: "uppercase",
+      fontSize: "var(--np--app--panel--label--font-size)",
+      color: "var(--np--app--panel--label--color)",
+      letterSpacing: "var(--np--app--panel--label--letter-spacing)",
+      top: "var(--np--app--handle--padding)",
+      height: "var(--np--app--handle--height)",
+    })
+    expect(screen.getByText("Channels")).toBeInTheDocument()
+    // The nav's label row sits right above the nav.
+    expect(screen.getByText("Index").parentElement!.nextElementSibling).toContainElement(screen.getByRole("navigation"))
+    unmount()
+    render(<App scenes={scenes} router={plainRouter} />)
+    await screen.findByText("settings")
+    expect(screen.queryByText("Controls")).not.toBeInTheDocument()
   })
 
   it("stops at the content height when dragged or keyed up, and collapses to the handle when dragged or keyed down", async () => {

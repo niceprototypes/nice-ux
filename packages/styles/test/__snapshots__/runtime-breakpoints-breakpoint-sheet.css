@@ -49,6 +49,7 @@
 
 @media (min-width: 641px) {
 	:root {
+		--np--app--panel--label--font-size: var(--np--font-size--smaller);
 		--np--button--icon--size--smaller: var(--np--font-size--smaller);
 		--np--button--icon--size--small: var(--np--font-size--small);
 		--np--button--icon--size: var(--np--font-size);
@@ -83,6 +84,7 @@
 
 @media (min-width: 1100px) {
 	:root {
+		--np--app--panel--label--font-size: var(--np--font-size--smaller);
 		--np--button--icon--size--smaller: var(--np--font-size--smaller);
 		--np--button--icon--size--small: var(--np--font-size--small);
 		--np--button--icon--size: var(--np--font-size);
@@ -117,6 +119,7 @@
 
 @media (min-width: 1720px) {
 	:root {
+		--np--app--panel--label--font-size: var(--np--font-size--smaller);
 		--np--button--icon--size--smaller: var(--np--font-size--smaller);
 		--np--button--icon--size--small: var(--np--font-size--small);
 		--np--button--icon--size: var(--np--font-size);

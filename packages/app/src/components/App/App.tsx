@@ -17,6 +17,8 @@ import {
   StyledAppDrawer,
   StyledAppHeader,
   StyledAppNav,
+  StyledAppNavLabel,
+  StyledAppPanelLabel,
   StyledAppRegion,
 } from "./App.styles"
 import { AppContext, type AppContextValue } from "../../utilities/AppContext"
@@ -26,8 +28,8 @@ import { buildAppTree, getAppAncestorIds } from "../../utilities/buildAppTree"
 /** The bare view's path prefix: `/frame/stories/<page>` shows the page alone, full screen (for recording). */
 const FRAME = "/frame"
 
-/** Below tablet the sidebar is a drawer, opened from the header row's menu button. */
-const DRAWER = parseBreakpointKey("phone")
+/** Below laptop the sidebar is a drawer, opened from the header row's menu button. */
+const DRAWER = parseBreakpointKey("tablet-")
 
 /** What can take focus when the drawer opens, after the current page's link. */
 const FOCUSABLE = 'a[href], button:not(:disabled), input, select, textarea, [tabindex]:not([tabindex="-1"])'
@@ -41,6 +43,7 @@ const AppShell: React.FC<AppProps> = ({
   wrapper: Wrapper,
   search: searchable,
   docsLink,
+  panelLabels,
   "aria-label": ariaLabel = "Scenes",
   navSize,
   sidebarOpen,
@@ -61,7 +64,7 @@ const AppShell: React.FC<AppProps> = ({
   // The docs link opens the docs section's first page.
   const docsPage = docsLink ? index.find(entry => entry.kind === "page") : undefined
 
-  // Below tablet, the drawer: closed at first, unless `sidebarOpen` controls it.
+  // Below laptop, the drawer: closed at first, unless `sidebarOpen` controls it.
   const drawer = !bare && breakpointKeyMatches(DRAWER, useBreakpoint())
   const [ownOpen, setOwnOpen] = React.useState(false)
   const open = drawer && (sidebarOpen ?? ownOpen)
@@ -223,6 +226,11 @@ const AppShell: React.FC<AppProps> = ({
               )}
             </StyledAppHeader>
             <StyledAppDrawer ref={drawerElement} id={drawerId} $drawer={drawer} $open={open}>
+              {panelLabels?.nav && (
+                <StyledAppNavLabel>
+                  <StyledAppPanelLabel>{panelLabels.nav}</StyledAppPanelLabel>
+                </StyledAppNavLabel>
+              )}
               <StyledAppNav>
                 <Tree
                   aria-label={ariaLabel}
@@ -241,8 +249,8 @@ const AppShell: React.FC<AppProps> = ({
                   }}
                 />
               </StyledAppNav>
-              <AppPanel aria-label="Resize scene sidebar" onContent={setSidebar} />
-              <AppPanel aria-label="Resize settings" onContent={setSidebarFooter} />
+              <AppPanel aria-label="Resize scene sidebar" label={panelLabels?.sidebar} onContent={setSidebar} />
+              <AppPanel aria-label="Resize settings" label={panelLabels?.footer} onContent={setSidebarFooter} />
             </StyledAppDrawer>
           </StyledAppAside>
           {regionElement}
