@@ -176,7 +176,7 @@ export const StyledAppPanelBody = styled(Scroll).attrs({ showScrollbar: false })
  * A panel's label (`panelLabels`): at the panel's top left, at the content's inset, vertically centred
  * on the handle's pill; small, the lighter gray, uppercase and letter-spaced (`app.panel.label.*`).
  * It takes no clicks, so the handle under it still drags. It rests at `app.panel.restOpacity` and shows
- * fully while its row is hovered, its handle focused or dragged.
+ * fully while its handle is hovered (the handle spans the row), focused or dragged.
  */
 export const StyledAppPanelLabel = styled.div`
   position: absolute;
@@ -200,19 +200,9 @@ export const StyledAppPanelLabel = styled.div`
   }
 `
 
-/** The nav's label row (`panelLabels.nav`): as tall as a panel's handle row, so its label sits where theirs do. */
-export const StyledAppNavLabel = styled.div`
-  position: relative;
-  flex: none;
-  height: calc(${getToken("app.handle.padding")} + ${getToken("app.handle.height")} + ${getToken("app.handle.paddingBottom")});
-
-  &:hover > ${StyledAppPanelLabel} {
-    opacity: 1;
-  }
-`
-
 /**
- * A panel's drag handle: a pill centred at its top, inside a hit area of the handle's padding. The pill
+ * A panel's drag handle: a pill at its top, the same large gap from the rule above (`app.handle.padding`)
+ * and the content below (`app.handle.paddingBottom`), so the handle row sits centred between them. The pill
  * rests at `app.panel.restOpacity`; hovered, focused or dragged, it and the panel's label show fully.
  */
 export const StyledAppHandle = styled.div<{ $dragging: boolean }>`

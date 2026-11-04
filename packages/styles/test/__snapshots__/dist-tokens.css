@@ -268,7 +268,7 @@
 	--np--app--handle--width: 32px;
 	--np--app--handle--height: var(--np--border-width--larger);
 	--np--app--handle--color: var(--np--border-color--strong);
-	--np--app--handle--padding: var(--np--gap--small);
+	--np--app--handle--padding: var(--np--gap--large);
 	--np--app--handle--padding-bottom: var(--np--gap--large);
 	--np--app--logo--height: 40;
 	--np--app--header--icon--color: var(--np--color--lighter);

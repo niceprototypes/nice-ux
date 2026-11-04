@@ -125,10 +125,10 @@ export interface AppProps {
   docsLink?: boolean
 
   /**
-   * Labels for the sidebar's stacked parts, top to bottom: the nav, the scene sidebar panel and its
-   * footer panel. Each shows at the part's top left, on its drag handle's line (the nav has no handle)
+   * Labels for the panels under the nav: the scene sidebar panel and its footer panel. Each shows at
+   * the panel's top left, on its drag handle's line
    */
-  panelLabels?: { nav?: string; sidebar?: string; footer?: string }
+  panelLabels?: { sidebar?: string; footer?: string }
 
   /** Accessible name of the nav landmark */
   "aria-label"?: string

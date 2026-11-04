@@ -17,8 +17,6 @@ import {
   StyledAppDrawer,
   StyledAppHeader,
   StyledAppNav,
-  StyledAppNavLabel,
-  StyledAppPanelLabel,
   StyledAppRegion,
 } from "./App.styles"
 import { AppContext, type AppContextValue } from "../../utilities/AppContext"
@@ -226,11 +224,6 @@ const AppShell: React.FC<AppProps> = ({
               )}
             </StyledAppHeader>
             <StyledAppDrawer ref={drawerElement} id={drawerId} $drawer={drawer} $open={open}>
-              {panelLabels?.nav && (
-                <StyledAppNavLabel>
-                  <StyledAppPanelLabel>{panelLabels.nav}</StyledAppPanelLabel>
-                </StyledAppNavLabel>
-              )}
               <StyledAppNav>
                 <Tree
                   aria-label={ariaLabel}

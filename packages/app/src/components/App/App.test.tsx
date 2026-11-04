@@ -517,9 +517,9 @@ describe("App sidebar footer", () => {
     expect(body).toHaveStyle({ height: `${CONTENT - 50}px`, overflowY: "auto" })
   })
 
-  it("labels the nav and each panel on its handle's line, through the app.panel.label tokens; none without panelLabels", async () => {
+  it("labels each panel on its handle's line, through the app.panel.label tokens; none without panelLabels", async () => {
     const { unmount } = render(
-      <App scenes={scenes} router={plainRouter} panelLabels={{ nav: "Index", sidebar: "Channels", footer: "Controls" }} />,
+      <App scenes={scenes} router={plainRouter} panelLabels={{ sidebar: "Channels", footer: "Controls" }} />,
     )
     await screen.findByText("settings")
     const footerLabel = screen.getByText("Controls")
@@ -533,8 +533,6 @@ describe("App sidebar footer", () => {
       height: "var(--np--app--handle--height)",
     })
     expect(screen.getByText("Channels")).toBeInTheDocument()
-    // The nav's label row sits right above the nav.
-    expect(screen.getByText("Index").parentElement!.nextElementSibling).toContainElement(screen.getByRole("navigation"))
     unmount()
     render(<App scenes={scenes} router={plainRouter} />)
     await screen.findByText("settings")

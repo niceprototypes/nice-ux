@@ -23,7 +23,7 @@ where the current one renders. One page, no iframe.
   its settings. Each has a drag handle at its top (a separator, arrow keys too) that resizes it between
   the handle alone and its content's height; it opens fully; shorter than its content, the body under
   the handle scrolls without a scrollbar; empty, it takes no space; `null` in the bare view. `panelLabels`
-  (`{ nav, sidebar, footer }`) labels the nav and the two panels at their top left, on the handle's line
+  (`{ sidebar, footer }`) labels the two panels at their top left, on the handle's line
   (`app.panel.label.*`: small, lighter, uppercase, letter-spaced). `useScenes()` returns the index, the current page, `bare` (the bare view
   is on), `open(entry)` and `preload(entry)`, for scenes that move between pages or drop their chrome.
 - **`getAppPageUrl(key)`** gives a docs section page's URL from its `pages` key, for links from outside the router.

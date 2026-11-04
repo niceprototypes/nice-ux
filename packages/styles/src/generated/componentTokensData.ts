@@ -52,7 +52,7 @@ const componentTokensData: ComponentTokensData = {
         "base": "var(--np--border-color--strong)"
       },
       "padding": {
-        "base": "var(--np--gap--small)"
+        "base": "var(--np--gap--large)"
       },
       "paddingBottom": {
         "base": "var(--np--gap--large)"
