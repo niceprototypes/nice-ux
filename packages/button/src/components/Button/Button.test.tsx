@@ -408,6 +408,11 @@ describe("Button", () => {
       expect(div).toBe(button)
     })
 
+    it("sizes an anchor's chrome as a button's (border-box)", () => {
+      render(<Button data-testid="root" as="a" href="#" inlined={false} size="small" iconLeft="search" aria-label="Search" />)
+      expect(screen.getByTestId("root")).toHaveStyle({ boxSizing: "border-box" })
+    })
+
     it("keeps the button chrome when not inlined", () => {
       render(<Button data-testid="root">Label</Button>)
       expect(ownRules(screen.getByTestId("root")).join("")).not.toContain(RESET)

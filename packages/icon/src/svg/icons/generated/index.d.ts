@@ -18,6 +18,8 @@ export const AttentionBaseIcon: SvgComponent;
 export const AttentionFillIcon: SvgComponent;
 export const BellBaseIcon: SvgComponent;
 export const BellFillIcon: SvgComponent;
+export const BookOpenBaseIcon: SvgComponent;
+export const BookOpenFillIcon: SvgComponent;
 export const BoxBaseIcon: SvgComponent;
 export const BoxFillIcon: SvgComponent;
 export const BrushBaseIcon: SvgComponent;

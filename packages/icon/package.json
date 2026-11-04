@@ -89,7 +89,8 @@
     "styled-components": "catalog:",
     "ts-jest": "^29.4.6",
     "tslib": "^2.6.0",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "@niceprototypes/svg-generator": "workspace:*"
   },
   "publishConfig": {
     "access": "public"

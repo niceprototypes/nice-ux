@@ -117,3 +117,5 @@ import Icon, { type IconProps, type IconNameType, IconTypes, Illustration, type 
 ## License
 
 MIT © Nice Prototypes
+
+`book-open` is adapted from [Lucide](https://lucide.dev) (ISC); its notice is in LICENSE.

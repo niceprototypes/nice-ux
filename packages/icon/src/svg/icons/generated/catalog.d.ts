@@ -7,6 +7,7 @@ export const iconNames: readonly [
   "arrow-top",
   "attention",
   "bell",
+  "book-open",
   "box",
   "brush",
   "calculator",

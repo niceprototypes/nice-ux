@@ -49,6 +49,19 @@ const componentTokensData: ComponentTokensData = {
         "base": "40"
       }
     },
+    "header": {
+      "icon": {
+        "color": {
+          "base": "var(--np--color--lighter)",
+          "hover": "var(--np--color)"
+        }
+      },
+      "focusRing": {
+        "color": {
+          "base": "var(--np--border-color)"
+        }
+      }
+    },
     "search": {
       "fontSize": {
         "base": "max(16px, 1em)"
@@ -58,12 +71,6 @@ const componentTokensData: ComponentTokensData = {
       },
       "backgroundColor": {
         "base": "var(--np--background-color--day)"
-      },
-      "icon": {
-        "color": {
-          "base": "var(--np--color--lighter)",
-          "hover": "var(--np--color)"
-        }
       }
     }
   },

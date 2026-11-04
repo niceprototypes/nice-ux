@@ -50,8 +50,11 @@ page's name and the story, chapter or folder names above it. Names that start wi
 first, then names that hold it, then pages under a matching story or chapter (ten at most); the arrow
 keys and Enter or a click open one, and a pick closes the drawer. Its text is the nav labels' size
 from tablet up (`app.search.fontSize`), at least 16px below. The button shows only its icon, no border:
-the nav's gray (`app.search.icon.color`), white on hover and focus (`app.search.icon.color:hover`); the field's border stays gray when focused (`app.search.focusColor`) on a pure black fill
+the nav's gray (`app.header.icon.color`), white on hover and focus (`app.header.icon.color:hover`); the field's border stays gray when focused (`app.search.focusColor`) on a pure black fill
 at night, pure white by day (`app.search.backgroundColor`).
+
+`docsLink` adds a book icon link after the search, in the same icon-only treatment, that opens the
+first docs section page in a new tab (`rel="noopener noreferrer"`).
 
 Below tablet the sidebar is a drawer: the header row gets a menu button
 (`aria-expanded`, `aria-controls`) that opens it over the scene region and closes it again. Escape

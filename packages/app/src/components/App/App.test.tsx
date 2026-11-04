@@ -386,10 +386,10 @@ describe("App search", () => {
     const property = (name: string) => getComputedStyle(block).getPropertyValue(name)
     expect(property("--np--input--font-size")).toBe("var(--np--app--search--font-size)")
     expect(property("--np--input--focus-ring--color")).toBe("var(--np--app--search--focus-color)")
-    expect(property("--np--button--focus-ring--color")).toBe("var(--np--app--search--focus-color)")
     expect(property("--np--input--background-color--raised")).toBe("var(--np--app--search--background-color)")
-    expect(property("--np--button--icon--color")).toBe("var(--np--app--search--icon--color)")
-    expect(property("--np--button--icon--color--hover")).toBe("var(--np--app--search--icon--color--hover)")
+    expect(property("--np--button--icon--color")).toBe("var(--np--app--header--icon--color)")
+    expect(property("--np--button--icon--color--hover")).toBe("var(--np--app--header--icon--color--hover)")
+    expect(property("--np--button--focus-ring--color")).toBe("var(--np--app--header--focus-ring--color)")
     // The nav keeps the header row's gap below it.
     expect(logo.parentElement!.nextElementSibling).toContainElement(screen.getByRole("navigation"))
     expect(getComputedStyle(screen.getByRole("navigation").parentElement!).paddingBlockStart).toBe("0")
@@ -421,6 +421,32 @@ describe("App search", () => {
         window.dispatchEvent(new Event("resize"))
       })
     }
+  })
+})
+
+describe("App docs link", () => {
+  beforeEach(() => window.history.replaceState(null, "", "/stories/beta/nine"))
+
+  it("opens the first docs section page in a new tab from the header row, after the search, in the header buttons' tokens", async () => {
+    render(<App scenes={scenes} pages={pages} router={plainRouter} search docsLink />)
+    await screen.findByText("nine")
+    const link = screen.getByRole("link", { name: "Docs (opens in a new tab)" })
+    expect(link).toHaveAttribute("href", "/docs/getting-started")
+    expect(link).toHaveAttribute("target", "_blank")
+    expect(link.getAttribute("rel")).toContain("noopener")
+    const block = link.parentElement!
+    expect(block.previousElementSibling).toContainElement(screen.getByRole("button", { name: "Search Scenes" }))
+    expect(getComputedStyle(block).getPropertyValue("--np--button--icon--color")).toBe("var(--np--app--header--icon--color)")
+  })
+
+  it("shows no docs link without docsLink, or without docs section pages", async () => {
+    const { unmount } = render(<App scenes={scenes} pages={pages} router={plainRouter} />)
+    await screen.findByText("nine")
+    expect(screen.queryByRole("link", { name: "Docs (opens in a new tab)" })).not.toBeInTheDocument()
+    unmount()
+    render(<App scenes={scenes} router={plainRouter} docsLink />)
+    await screen.findByText("nine")
+    expect(screen.queryByRole("link", { name: "Docs (opens in a new tab)" })).not.toBeInTheDocument()
   })
 })
 

@@ -1666,6 +1666,9 @@ importers:
       '@niceprototypes/styles':
         specifier: workspace:*
         version: link:../styles
+      '@niceprototypes/svg-generator':
+        specifier: workspace:*
+        version: link:../svg-generator
       '@rollup/plugin-commonjs':
         specifier: ^25.0.0
         version: 25.0.8(rollup@4.65.1)

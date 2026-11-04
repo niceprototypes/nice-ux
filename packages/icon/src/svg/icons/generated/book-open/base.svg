@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+  <style>.no-fill{fill:none}.stroke{stroke:currentColor;stroke-width:1.5px;stroke-linecap:round;stroke-linejoin:round}</style>
+  <line class="no-fill stroke" x1="8" y1="4.5" x2="8" y2="14.3"/>
+  <path class="no-fill stroke" d="M1.7,12.2A.7.7,0,0,1,1,11.5V2.4A.7.7,0,0,1,1.7,1.7H5.2A2.8,2.8,0,0,1,8,4.5A2.8,2.8,0,0,1,10.8,1.7H14.3A.7.7,0,0,1,15,2.4V11.5A.7.7,0,0,1,14.3,12.2H10.1A2.1,2.1,0,0,0,8,14.3A2.1,2.1,0,0,0,5.9,12.2Z"/>
+</svg>

@@ -14,6 +14,8 @@ export { default as AttentionBaseIcon } from "./attention/base.svg";
 export { default as AttentionFillIcon } from "./attention/fill.svg";
 export { default as BellBaseIcon } from "./bell/base.svg";
 export { default as BellFillIcon } from "./bell/fill.svg";
+export { default as BookOpenBaseIcon } from "./book-open/base.svg";
+export { default as BookOpenFillIcon } from "./book-open/fill.svg";
 export { default as BoxBaseIcon } from "./box/base.svg";
 export { default as BoxFillIcon } from "./box/fill.svg";
 export { default as BrushBaseIcon } from "./brush/base.svg";

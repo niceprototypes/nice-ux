@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from "styled-components"
+import styled, { createGlobalStyle, css } from "styled-components"
 import { getToken, type FontSizeType } from "@niceprototypes/styles"
 import { Scroll } from "@niceprototypes/scroll"
 
@@ -54,14 +54,25 @@ export const StyledAppHeader = styled.div`
 `
 
 /**
+ * The header row's icon buttons (the search square, the docs link): their icon is
+ * `app.header.icon.color`, its hover variant on hover and focus, and their focus ring
+ * `app.header.focusRing.color`.
+ */
+const headerButtonTokens = css`
+  ${getToken("button.icon.color", { as: "key" })}: ${getToken("app.header.icon.color")};
+  ${getToken("button.icon.color:hover", { as: "key" })}: ${getToken("app.header.icon.color:hover")};
+  ${getToken("button.icon.color:focus", { as: "key" })}: ${getToken("app.header.icon.color:hover")};
+  ${getToken("button.focusRing.color", { as: "key" })}: ${getToken("app.header.focusRing.color")};
+`
+
+/**
  * The search in the header row (`search`), at the row's end: collapsed, a square the small field's
  * height (the search button); `$expanded`, the field, filling the width right of the logo, its width
  * animating between the two. The anchor the results open under. Its text is the nav labels' size
  * (`$size`): it sets that font size and points the field's at `app.search.fontSize`, that size from
- * tablet up and at least 16px below (under 16px iOS zooms in on focus). The button's icon is
- * `app.search.icon.color`, its hover and focus variant on hover and focus; the field's focus border and
- * the button's focus ring stay `app.search.focusColor` (the border color), and the field's fill is
- * `app.search.backgroundColor` (pure black at night, pure white by day).
+ * tablet up and at least 16px below (under 16px iOS zooms in on focus). The button takes the header
+ * buttons' tokens; the field's focus border stays `app.search.focusColor` (the border color), and its
+ * fill is `app.search.backgroundColor` (pure black at night, pure white by day).
  */
 export const StyledAppSearch = styled.div<{ $size: FontSizeType; $expanded: boolean }>`
   flex: 0 1 auto;
@@ -73,14 +84,26 @@ export const StyledAppSearch = styled.div<{ $size: FontSizeType; $expanded: bool
   font-size: ${({ $size }) => getToken("fontSize", $size)};
   ${getToken("input.fontSize", { as: "key" })}: ${getToken("app.search.fontSize")};
   ${getToken("input.focusRing.color", { as: "key" })}: ${getToken("app.search.focusColor")};
-  ${getToken("button.focusRing.color", { as: "key" })}: ${getToken("app.search.focusColor")};
   ${getToken("input.backgroundColor:raised", { as: "key" })}: ${getToken("app.search.backgroundColor")};
-  ${getToken("button.icon.color", { as: "key" })}: ${getToken("app.search.icon.color")};
-  ${getToken("button.icon.color:hover", { as: "key" })}: ${getToken("app.search.icon.color:hover")};
-  ${getToken("button.icon.color:focus", { as: "key" })}: ${getToken("app.search.icon.color:hover")};
+  ${headerButtonTokens}
 
   @media (prefers-reduced-motion: reduce) {
     transition: none;
+  }
+`
+
+/**
+ * The docs link in the header row (`docsLink`), after the search: an icon button in the header
+ * buttons' tokens. Without a search before it, it takes the row's free space on its start side.
+ */
+export const StyledAppDocsLink = styled.div`
+  flex: none;
+  display: flex;
+  margin-inline-start: auto;
+  ${headerButtonTokens}
+
+  ${StyledAppSearch} + & {
+    margin-inline-start: 0;
   }
 `
 

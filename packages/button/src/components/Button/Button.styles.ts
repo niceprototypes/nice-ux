@@ -38,6 +38,8 @@ export const StyledButton = styled.button.withConfig({
   /* Reset */
   position: relative;
   margin: 0;
+  /* A <button> is border-box by default and an anchor is not; set it so both render the same size. */
+  box-sizing: border-box;
   display: inline-flex;
   align-items: center;
   justify-content: center;

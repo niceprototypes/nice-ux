@@ -13,6 +13,7 @@ import {
   StyledAppAside,
   StyledAppColumns,
   StyledAppDocs,
+  StyledAppDocsLink,
   StyledAppDrawer,
   StyledAppHeader,
   StyledAppNav,
@@ -40,6 +41,7 @@ const AppShell: React.FC<AppProps> = ({
   router,
   wrapper: Wrapper,
   search: searchable,
+  docsLink,
   "aria-label": ariaLabel = "Scenes",
   navSize,
   sidebarOpen,
@@ -57,6 +59,8 @@ const AppShell: React.FC<AppProps> = ({
   const [sidebarFooter, setSidebarFooter] = React.useState<HTMLDivElement | null>(null)
   const search = React.useMemo(() => new URLSearchParams(location.search), [location.search])
   const navLabelSize = useTreeSize(navSize)
+  // The docs link opens the docs section's first page.
+  const docsPage = docsLink ? index.find(entry => entry.kind === "page") : undefined
 
   // Below tablet, the drawer: closed at first, unless `sidebarOpen` controls it.
   const drawer = !bare && breakpointKeyMatches(DRAWER, useBreakpoint())
@@ -187,6 +191,22 @@ const AppShell: React.FC<AppProps> = ({
                     if (open) setOpen(false)
                   }}
                 />
+              )}
+              {docsPage && (
+                <StyledAppDocsLink>
+                  <Button
+                    as="a"
+                    href={router.href?.(docsPage.url) ?? docsPage.url}
+                    target="_blank"
+                    // An anchor Button is an inline link unless told otherwise; this one is a square like the search's.
+                    inlined={false}
+                    size="small"
+                    iconLeft="book-open"
+                    // Only the icon shows, as on the search square; keyboard focus keeps the border and ring.
+                    ghost={{ rest: true, hover: true, active: true }}
+                    aria-label="Docs (opens in a new tab)"
+                  />
+                </StyledAppDocsLink>
               )}
               {drawer && (
                 <Button

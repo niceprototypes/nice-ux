@@ -118,6 +118,12 @@ export interface AppProps {
    */
   search?: boolean
 
+  /**
+   * Whether the header row shows a docs link after the search: a book icon button that opens the
+   * first docs section page in a new tab. Needs docs section pages (`pages`)
+   */
+  docsLink?: boolean
+
   /** Accessible name of the nav landmark */
   "aria-label"?: string
 

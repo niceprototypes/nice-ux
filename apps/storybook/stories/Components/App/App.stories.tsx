@@ -119,6 +119,7 @@ export const Playground: Story = {
     withPages: { control: "boolean", table: { category: "Content" } },
     withWrapper: { control: "boolean", table: { category: "Content" } },
     search: { control: "boolean", table: { category: "Content" } },
+    docsLink: { control: "boolean", table: { category: "Content" } },
 
     navSize: {
       control: "select",
