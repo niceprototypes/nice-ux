@@ -53,9 +53,9 @@ export interface TokenVariants extends CustomTokenVariants {
   "fontSize": FontSizeType
   "breakpoints": "tablet" | "laptop" | "desktop"
   "app.sidebar.minWidth": "base"
-  "app.footer.rule.width": "base"
-  "app.footer.rule.color": "base"
-  "app.footer.padding": "base"
+  "app.panel.rule.width": "base"
+  "app.panel.rule.color": "base"
+  "app.panel.padding": "base"
   "app.handle.width": "base"
   "app.handle.height": "base"
   "app.handle.color": "base"
@@ -273,7 +273,7 @@ export interface TokenInverseVariants {
   "backgroundColor": BackgroundColorInverseType
   "borderColor": BorderColorInverseType
   "color": ColorInverseType
-  "app.footer.rule.color": "base"
+  "app.panel.rule.color": "base"
   "app.handle.color": "base"
   "app.header.icon.color": "base" | "hover"
   "app.header.focusRing.color": "base"

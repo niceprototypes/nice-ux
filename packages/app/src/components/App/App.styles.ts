@@ -128,57 +128,50 @@ export const StyledAppDrawer = styled.div<{ $drawer: boolean; $open: boolean }>`
   background-color: ${getToken("backgroundColor")};
 `
 
-/** The nav and the scene sidebar, side by side in the height the footer leaves; under the header row, which spaces them, they have no top padding. */
-export const StyledAppColumns = styled.div`
+/**
+ * The nav: the sidebar's width and the height the panels under it leave, scrolling on its own. Under
+ * the header row, which spaces it, it has no top padding.
+ */
+export const StyledAppNav = styled(Scroll)`
   flex: 1 1 auto;
-  display: flex;
   min-height: 0;
+  padding: ${getToken("gap:large")};
+  padding-inline-end: calc(2 * ${getToken("gap:large")});
 
-  ${StyledAppHeader} + ${StyledAppDrawer} > & > * {
+  ${StyledAppHeader} + ${StyledAppDrawer} > & {
     padding-block-start: 0;
   }
 `
 
-/** The nav column: as wide as its rows, scrolling on its own. */
-export const StyledAppNav = styled(Scroll)`
-  flex: none;
-  padding: ${getToken("gap:large")};
-  padding-inline-end: calc(2 * ${getToken("gap:large")});
-`
-
-/**
- * The scene sidebar, right of the nav: as wide as what a scene portals into it, scrolling on its own,
- * one nav padding from the nav. Empty (docs pages, scenes without one), it takes no space.
- */
-export const StyledAppSidebar = styled(Scroll)`
-  flex: none;
-  padding: ${getToken("gap:large")} ${getToken("gap:large")} ${getToken("gap:large")} 0;
-
-  &:empty {
-    display: none;
-  }
-`
-
-/** The footer's content: the element a scene portals into, with the footer's padding. */
-export const StyledAppFooterContent = styled.div`
-  padding: ${getToken("app.footer.padding")};
+/** A panel's content: the element a scene portals into, with the panel's padding (none on top, under the handle). */
+export const StyledAppPanelContent = styled.div`
+  padding: ${getToken("app.panel.padding")};
   padding-block-start: 0;
 `
 
 /**
- * The sidebar's footer, the width of the nav and the scene sidebar, under a rule. Empty (docs pages,
- * scenes without settings), it takes no space.
+ * A resizable panel under the nav (the scene sidebar, then its footer), the sidebar's width, under a
+ * rule. Empty, it takes no space.
  */
-export const StyledAppFooter = styled.div`
+export const StyledAppPanel = styled.div`
   flex: none;
-  border-block-start: ${getToken("app.footer.rule.width")} solid ${getToken("app.footer.rule.color")};
+  min-height: 0;
+  border-block-start: ${getToken("app.panel.rule.width")} solid ${getToken("app.panel.rule.color")};
 
-  &:has(${StyledAppFooterContent}:empty) {
+  &:has(${StyledAppPanelContent}:empty) {
     display: none;
   }
 `
 
-/** The footer's drag handle: a pill centred at its top, inside a hit area of the handle's padding. */
+/**
+ * A panel's resizable body: the dragged height, under the handle (which stays put). Shorter than its
+ * content, it scrolls vertically without a scrollbar; fully open, it is as tall as its content.
+ */
+export const StyledAppPanelBody = styled(Scroll).attrs({ showScrollbar: false })`
+  overflow-x: hidden;
+`
+
+/** A panel's drag handle: a pill centred at its top, inside a hit area of the handle's padding. */
 export const StyledAppHandle = styled.div`
   display: flex;
   justify-content: center;
@@ -193,14 +186,6 @@ export const StyledAppHandle = styled.div`
     border-radius: ${getToken("app.handle.height")};
     background-color: ${getToken("app.handle.color")};
   }
-`
-
-/**
- * The footer's resizable body: the dragged height, under the handle (which stays put). Shorter than
- * its content, it scrolls vertically; fully open, it is as tall as its content and shows no scrollbar.
- */
-export const StyledAppFooterBody = styled(Scroll)`
-  overflow-x: hidden;
 `
 
 /**

@@ -258,9 +258,9 @@
 
 	/* app component tokens */
 	--np--app--sidebar--min-width: 24em;
-	--np--app--footer--rule--width: var(--np--border-width);
-	--np--app--footer--rule--color: var(--np--border-color);
-	--np--app--footer--padding: var(--np--gap--large);
+	--np--app--panel--rule--width: var(--np--border-width);
+	--np--app--panel--rule--color: var(--np--border-color);
+	--np--app--panel--padding: var(--np--gap--large);
 	--np--app--handle--width: 32px;
 	--np--app--handle--height: var(--np--border-width--larger);
 	--np--app--handle--color: var(--np--border-color--strong);
@@ -850,7 +850,7 @@
 	--np--tree--guide--arm: var(--np--gap);
 
 	/* Component inverse colors */
-	--np--app--footer--rule--color--inverse: var(--np--border-color--inverse);
+	--np--app--panel--rule--color--inverse: var(--np--border-color--inverse);
 	--np--app--handle--color--inverse: var(--np--border-color--strong--inverse);
 	--np--app--header--icon--color--inverse: var(--np--color--lighter--inverse);
 	--np--app--header--icon--color--hover--inverse: var(--np--color--inverse);
@@ -1311,7 +1311,7 @@
 		--np--code--syntax-color--blue: var(--np--code--syntax-color--blue--night);
 		--np--code--syntax-color--purple: var(--np--code--syntax-color--purple--night);
 		--np--logo--color: var(--np--logo--color--night);
-		--np--app--footer--rule--color--inverse: var(--np--border-color--night--inverse);
+		--np--app--panel--rule--color--inverse: var(--np--border-color--night--inverse);
 		--np--app--handle--color--inverse: var(--np--border-color--strong--night--inverse);
 		--np--app--header--icon--color--inverse: var(--np--color--lighter--night--inverse);
 		--np--app--header--icon--color--hover--inverse: var(--np--color--night--inverse);
@@ -1511,7 +1511,7 @@
 		--np--tree--active-color--inverse: var(--np--color--link--night--inverse);
 		--np--tree--inactive--color--inverse: var(--np--color--lighter--night--inverse);
 		--np--tree--guide--color--inverse: var(--np--border-color--night--inverse);
-		--np--app--footer--rule--color: var(--np--border-color--night);
+		--np--app--panel--rule--color: var(--np--border-color--night);
 		--np--app--handle--color: var(--np--border-color--strong--night);
 		--np--app--header--icon--color: var(--np--color--lighter--night);
 		--np--app--header--icon--color--hover: var(--np--color--night);
@@ -1778,7 +1778,7 @@
 		--np--code--syntax-color--blue: var(--np--code--syntax-color--blue--day);
 		--np--code--syntax-color--purple: var(--np--code--syntax-color--purple--day);
 		--np--logo--color: var(--np--logo--color--day);
-		--np--app--footer--rule--color--inverse: var(--np--border-color--day--inverse);
+		--np--app--panel--rule--color--inverse: var(--np--border-color--day--inverse);
 		--np--app--handle--color--inverse: var(--np--border-color--strong--day--inverse);
 		--np--app--header--icon--color--inverse: var(--np--color--lighter--day--inverse);
 		--np--app--header--icon--color--hover--inverse: var(--np--color--day--inverse);
@@ -1978,7 +1978,7 @@
 		--np--tree--active-color--inverse: var(--np--color--link--day--inverse);
 		--np--tree--inactive--color--inverse: var(--np--color--lighter--day--inverse);
 		--np--tree--guide--color--inverse: var(--np--border-color--day--inverse);
-		--np--app--footer--rule--color: var(--np--border-color--day);
+		--np--app--panel--rule--color: var(--np--border-color--day);
 		--np--app--handle--color: var(--np--border-color--strong--day);
 		--np--app--header--icon--color: var(--np--color--lighter--day);
 		--np--app--header--icon--color--hover: var(--np--color--day);
@@ -2244,7 +2244,7 @@
 		--np--code--syntax-color--blue: var(--np--code--syntax-color--blue--night);
 		--np--code--syntax-color--purple: var(--np--code--syntax-color--purple--night);
 		--np--logo--color: var(--np--logo--color--night);
-		--np--app--footer--rule--color--inverse: var(--np--border-color--night--inverse);
+		--np--app--panel--rule--color--inverse: var(--np--border-color--night--inverse);
 		--np--app--handle--color--inverse: var(--np--border-color--strong--night--inverse);
 		--np--app--header--icon--color--inverse: var(--np--color--lighter--night--inverse);
 		--np--app--header--icon--color--hover--inverse: var(--np--color--night--inverse);
@@ -2444,7 +2444,7 @@
 		--np--tree--active-color--inverse: var(--np--color--link--night--inverse);
 		--np--tree--inactive--color--inverse: var(--np--color--lighter--night--inverse);
 		--np--tree--guide--color--inverse: var(--np--border-color--night--inverse);
-		--np--app--footer--rule--color: var(--np--border-color--night);
+		--np--app--panel--rule--color: var(--np--border-color--night);
 		--np--app--handle--color: var(--np--border-color--strong--night);
 		--np--app--header--icon--color: var(--np--color--lighter--night);
 		--np--app--header--icon--color--hover: var(--np--color--night);

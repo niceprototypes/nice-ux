@@ -165,7 +165,7 @@ describe.each(adapters)("App on the %s adapter", (_, router) => {
     await waitFor(() => expect(screen.getByTestId("wrapper").parentElement).toHaveFocus())
   })
 
-  it("renders a scene's sidebar right of the nav, outside the scene region; none on other pages or the bare view", async () => {
+  it("renders a scene's sidebar in a resizable panel under the nav, outside the scene region; none on other pages or the bare view", async () => {
     let region: HTMLElement | null = null
     const Region = ({ children }: { children: React.ReactNode }) => {
       region = useSceneRegion().current
@@ -176,7 +176,9 @@ describe.each(adapters)("App on the %s adapter", (_, router) => {
     await screen.findByText("with steps")
     const steps = await screen.findByText("steps")
     const sidebar = steps.parentElement!
-    expect(sidebar.previousElementSibling).toContainElement(screen.getByRole("navigation"))
+    const panel = screen.getByRole("separator", { name: "Resize scene sidebar" }).parentElement!
+    expect(panel).toContainElement(sidebar)
+    expect(panel.previousElementSibling).toContainElement(screen.getByRole("navigation"))
     expect(region).not.toContainElement(steps)
     await act(async () => {
       window.history.pushState(null, "", "/stories/alpha/solo")
@@ -212,8 +214,8 @@ describe.each(adapters)("App on the %s adapter", (_, router) => {
     window.history.replaceState(null, "", "/stories/alpha/solo")
     render(<App scenes={scenes} router={router} />)
     await screen.findByText("solo")
-    // nav → its column → the columns → the drawer → the sidebar
-    const aside = screen.getByRole("navigation").closest("div")!.parentElement!.parentElement!.parentElement!
+    // nav → its scroll column → the drawer → the sidebar
+    const aside = screen.getByRole("navigation").closest("div")!.parentElement!.parentElement!
     expect(aside).toHaveStyle({ minWidth: "var(--np--app--sidebar--min-width)" })
   })
 
@@ -482,12 +484,14 @@ describe("App sidebar footer", () => {
   const renderFooter = async () => {
     render(<App scenes={scenes} router={plainRouter} />)
     await screen.findByText("settings")
-    return screen.getByRole("separator")
+    return screen.getByRole("separator", { name: "Resize settings" })
   }
 
-  it("renders a scene's settings under the nav and the scene sidebar, fully open", async () => {
+  it("renders a scene's settings in a panel under the scene sidebar's, fully open", async () => {
     const handle = await renderFooter()
-    expect(handle.parentElement!.previousElementSibling).toContainElement(screen.getByRole("navigation"))
+    const sidebarPanel = handle.parentElement!.previousElementSibling!
+    expect(sidebarPanel).toContainElement(screen.getByRole("separator", { name: "Resize scene sidebar", hidden: true }))
+    expect(sidebarPanel.previousElementSibling).toContainElement(screen.getByRole("navigation"))
     expect(handle.parentElement).toContainElement(screen.getByText("settings"))
     expect(handle).toHaveAttribute("aria-orientation", "horizontal")
     expect(handle).toHaveAttribute("aria-valuemin", "0")

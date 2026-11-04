@@ -17,12 +17,12 @@ where the current one renders. One page, no iframe.
   `/docs/<page>` (or `/docs/<folder>/<page>`) is a docs section page: a plain scrollable page in the region, without `wrapper`, the
   scene sidebar or its footer. Navigation keeps the query string. Back and forward work.
 - **The scene region** is focusable. `useSceneRegion()` returns it, so a scene's keys and clicks act
-  only inside it. `useSceneSidebar()` returns the scene sidebar, the column right of the nav that
-  stays fixed with it while the region scrolls, for a scene's own navigation (`createPortal(steps,
-  sidebar)`); empty, it takes no space; `null` in the bare view. `useSceneSidebarFooter()` returns the
-  footer under the nav and the scene sidebar, the width of both, for a scene's settings: a drag handle at
-  its top (a separator, arrow keys too) resizes it between the handle alone and its content's height; it
-  opens fully; shorter than its content, the body under the handle scrolls; empty, it takes no space; `null` in the bare view. `useScenes()` returns the index, the current page, `bare` (the bare view
+  only inside it. `useSceneSidebar()` and `useSceneSidebarFooter()` return two
+  panels stacked under the nav, the sidebar's width, fixed with it while the region scrolls: the scene
+  sidebar, for a scene's own navigation (`createPortal(steps, sidebar)`), and under it the footer, for
+  its settings. Each has a drag handle at its top (a separator, arrow keys too) that resizes it between
+  the handle alone and its content's height; it opens fully; shorter than its content, the body under
+  the handle scrolls without a scrollbar; empty, it takes no space; `null` in the bare view. `useScenes()` returns the index, the current page, `bare` (the bare view
   is on), `open(entry)` and `preload(entry)`, for scenes that move between pages or drop their chrome.
 - **`getAppPageUrl(key)`** gives a docs section page's URL from its `pages` key, for links from outside the router.
 - **Router adapters**, subpath exports with optional peer dependencies:

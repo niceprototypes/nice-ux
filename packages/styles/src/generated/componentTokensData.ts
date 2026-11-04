@@ -14,7 +14,7 @@ const componentTokensData: ComponentTokensData = {
         "base": "24em"
       }
     },
-    "footer": {
+    "panel": {
       "rule": {
         "width": {
           "base": "var(--np--border-width)"

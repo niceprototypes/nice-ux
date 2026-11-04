@@ -5,21 +5,19 @@ import Logo from "@niceprototypes/logo"
 import Tree, { useTreeSize } from "@niceprototypes/tree"
 import type { AppEntryType, AppProps } from "./App.types"
 import AppDocs from "./AppDocs"
-import AppFooter from "./AppFooter"
+import AppPanel from "./AppPanel"
 import AppSearch from "./AppSearch"
 import {
   AppGlobalStyle,
   StyledApp,
   StyledAppActions,
   StyledAppAside,
-  StyledAppColumns,
   StyledAppDocs,
   StyledAppDocsLink,
   StyledAppDrawer,
   StyledAppHeader,
   StyledAppNav,
   StyledAppRegion,
-  StyledAppSidebar,
 } from "./App.styles"
 import { AppContext, type AppContextValue } from "../../utilities/AppContext"
 import { buildAppIndex, type AppIndexEntry } from "../../utilities/buildAppIndex"
@@ -225,28 +223,26 @@ const AppShell: React.FC<AppProps> = ({
               )}
             </StyledAppHeader>
             <StyledAppDrawer ref={drawerElement} id={drawerId} $drawer={drawer} $open={open}>
-              <StyledAppColumns>
-                <StyledAppNav>
-                  <Tree
-                    aria-label={ariaLabel}
-                    size={navSize}
-                    items={buildAppTree(index, current, location.search, router.href)}
-                    expandedIds={expandedIds}
-                    onExpandedChange={setExpandedIds}
-                    onSelect={(node, event) => {
-                      if (node.url === undefined || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
-                      event.preventDefault()
-                      // The row's URL is the router's href; navigate takes the entry's own path.
-                      const entry = index.find(({ url }) => (router.href?.(`${url}${location.search}`) ?? `${url}${location.search}`) === node.url)
-                      if (!entry) return
-                      navigate(`${entry.url}${location.search}`)
-                      if (open) setOpen(false)
-                    }}
-                  />
-                </StyledAppNav>
-                <StyledAppSidebar ref={setSidebar} />
-              </StyledAppColumns>
-              <AppFooter onContent={setSidebarFooter} />
+              <StyledAppNav>
+                <Tree
+                  aria-label={ariaLabel}
+                  size={navSize}
+                  items={buildAppTree(index, current, location.search, router.href)}
+                  expandedIds={expandedIds}
+                  onExpandedChange={setExpandedIds}
+                  onSelect={(node, event) => {
+                    if (node.url === undefined || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+                    event.preventDefault()
+                    // The row's URL is the router's href; navigate takes the entry's own path.
+                    const entry = index.find(({ url }) => (router.href?.(`${url}${location.search}`) ?? `${url}${location.search}`) === node.url)
+                    if (!entry) return
+                    navigate(`${entry.url}${location.search}`)
+                    if (open) setOpen(false)
+                  }}
+                />
+              </StyledAppNav>
+              <AppPanel aria-label="Resize scene sidebar" onContent={setSidebar} />
+              <AppPanel aria-label="Resize settings" onContent={setSidebarFooter} />
             </StyledAppDrawer>
           </StyledAppAside>
           {regionElement}
