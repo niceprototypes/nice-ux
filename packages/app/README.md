@@ -10,8 +10,8 @@ where the current one renders. One page, no iframe.
   Docs section pages are `docs/<N Page>/index.tsx` (default export), or nested in folders
   (`docs/<N Folder>/<N Page>/index.tsx`), named and ordered by the same rules. The `pages` keys need not
   be files: a data-driven docs site builds the record itself. `scenes` is optional (a docs-only app).
-- **Nav groups.** The Tree has two top-level groups: Stories, and Docs when there are docs section pages.
-  In a docs-only app (pages alone), its rows are top level, without a group row.
+- **Nav groups.** The stories (`stories/`) are the Tree's top-level folders; the docs section pages follow
+  under a Docs group. In a docs-only app (pages alone), its rows are top level, without a group row.
 - **URLs.** `/stories/accessibility/context/stock-ticker?device=desktop` is the shell on a scene;
   `/frame/stories/accessibility/context/stock-ticker` is the scene alone, full screen, focused.
   `/docs/<page>` (or `/docs/<folder>/<page>`) is a docs section page: a plain scrollable page in the region, without `wrapper`, the
@@ -49,9 +49,8 @@ the row, focused, and collapses back on Escape or when left empty. The field is 
 page's name and the story, chapter or folder names above it. Names that start with the query come
 first, then names that hold it, then pages under a matching story or chapter (ten at most); the arrow
 keys and Enter or a click open one, and a pick closes the drawer. Its text is the nav labels' size
-from tablet up (`app.search.fontSize`), at least 16px below. The button shows only its icon at rest
-(`app.search.icon.color`, the nav's gray) and on hover a white icon (`app.search.icon.color:hover`) in
-the border; the field's border stays gray when focused (`app.search.focusColor`) on a pure black fill
+from tablet up (`app.search.fontSize`), at least 16px below. The button shows only its icon, no border:
+the nav's gray (`app.search.icon.color`), white on hover and focus (`app.search.icon.color:hover`); the field's border stays gray when focused (`app.search.focusColor`) on a pure black fill
 at night, pure white by day (`app.search.backgroundColor`).
 
 Below tablet the sidebar is a drawer: the header row gets a menu button

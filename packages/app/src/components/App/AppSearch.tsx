@@ -104,8 +104,9 @@ const AppSearch: React.FC<{
           ref={button}
           size="small"
           iconLeft="search"
-          // At rest only the icon shows; hover and focus draw the border.
-          ghost={{ rest: true }}
+          // Only the icon shows (hover turns it white); the border comes with the field it opens into.
+          // Keyboard focus keeps the border and ring, so a Tab stop stays visible.
+          ghost={{ rest: true, hover: true, active: true }}
           aria-label={ariaLabel}
           onClick={() => setOpen(true)}
         />

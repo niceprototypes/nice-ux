@@ -3,16 +3,16 @@ import type { AppEntryType } from "../components/App/App.types"
 
 type MutableNode = Omit<TreeNodeType, "items"> & { items?: MutableNode[] }
 
-/** The nav's top-level groups, by the first segment of an entry's id. */
-const GROUPS: Record<string, string> = { stories: "Stories", docs: "Docs" }
+/** The docs section's group row, above its pages when the app also has stories. */
+const DOCS_GROUP = "Docs"
 
-/** Whether the nav groups its rows by section: always, except in a docs-only app (docs section pages alone). */
+/** Whether the docs section's pages sit under a Docs group row: only beside stories, not in a docs-only app. */
 const isGrouped = (entries: AppEntryType[]) => entries.some(entry => entry.kind !== "page")
 
 /**
- * The nav's rows from the index: a top-level group per section ("Stories", and "Docs" when there are
- * docs section pages; none in a docs-only app), a folder per story, chapter of several
- * pages or docs folder, and a link per page (a one-scene chapter is one link). Links keep the URL's
+ * The nav's rows from the index: the stories at the top level, then a "Docs" group of the docs
+ * section's pages (at the top level themselves in a docs-only app), a folder per story, chapter of
+ * several pages or docs folder, and a link per page (a one-scene chapter is one link). Links keep the URL's
  * query string (`search`), so a setting such as `?device=` survives the switch; the current page is active.
  * Each link's URL goes through `href` (the router's, which adds a base path) when given.
  */
@@ -27,9 +27,10 @@ export const buildAppTree = (
   for (const entry of entries) {
     let level = root
     const slugs = entry.id.split("/")
-    // Without groups, a row's depth starts under the section: its id still carries the section slug.
-    const skip = grouped ? 0 : 1
-    const names = grouped ? [GROUPS[slugs[0]], ...entry.names] : entry.names
+    // Outside the Docs group a row's depth starts under the section: its id still carries the section slug.
+    const docsGroup = grouped && entry.kind === "page"
+    const skip = docsGroup ? 0 : 1
+    const names = docsGroup ? [DOCS_GROUP, ...entry.names] : entry.names
     names.forEach((name, depth) => {
       const id = slugs.slice(0, depth + 1 + skip).join("/")
       if (depth === names.length - 1) {
@@ -48,8 +49,9 @@ export const buildAppTree = (
 }
 
 /**
- * The ids of the folders above an entry: its group's, its story's, and its chapter's for a scene of
- * several (a docs page's folders likewise). Ids with no row (the group, in an ungrouped nav) expand nothing.
+ * The ids of the folders above an entry: its section's, its story's, and its chapter's for a scene of
+ * several (a docs page's folders likewise). Ids with no row (the stories section, the docs section in a
+ * docs-only app) expand nothing.
  */
 export const getAppAncestorIds = (entry: AppEntryType) =>
   entry.id

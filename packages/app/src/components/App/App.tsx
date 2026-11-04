@@ -235,9 +235,9 @@ const AppShell: React.FC<AppProps> = ({
  * App
  *
  * The app shell: a Tree nav of the project's scenes and docs pages, found by folder, beside the
- * scene region where the current one renders, under a header row: the Nice logo and, with `search`, a search field. The nav has
- * two groups: Stories (`stories/`, at `/stories/...`) and, when there are docs section pages, Docs
- * (`docs/<N Page>/index.tsx`, at `/docs/<page>`, or nested in folders); a docs-only app has no group row. Folder names are the only metadata: depth is the
+ * scene region where the current one renders, under a header row: the Nice logo and, with `search`, a search field. The nav lists
+ * the stories (`stories/`, at `/stories/...`) as top-level folders, then, when there are docs section pages, a Docs
+ * group (`docs/<N Page>/index.tsx`, at `/docs/<page>`, or nested in folders); a docs-only app has no group row. Folder names are the only metadata: depth is the
  * level (story, chapter, scene), numbers order them by value and are left out of names and URLs.
  * One page, no iframe: `/stories/accessibility/context/stock-ticker?device=desktop` is the shell on a scene,
  * `/frame/stories/accessibility/context/stock-ticker` the scene alone, full screen. Back and forward work.

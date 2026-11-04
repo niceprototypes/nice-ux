@@ -71,26 +71,27 @@ describe.each(adapters)("App on the %s adapter", (_, router) => {
     expect(window.location.pathname + window.location.search).toBe("/stories/alpha/solo?device=desktop")
   })
 
-  it("lists stories, chapters and scenes in folder order, numbers by value and left out of names", async () => {
+  it("lists stories at the top level, then chapters and scenes, in folder order, numbers by value and left out of names", async () => {
     window.history.replaceState(null, "", "/stories/beta/nine")
     render(<App scenes={scenes} docs={docs} router={router} />)
     await screen.findByText("nine")
     const rows = screen.getAllByRole("link", { hidden: true }).map(link => link.textContent)
     expect(rows).toEqual(["Solo", "First & last", "Second", "Guide", "Nine", "Ten", "Steps", "Settings"])
     expect(screen.queryByRole("button", { name: "Docs" })).not.toBeInTheDocument()
-    expect(screen.getByRole("button", { name: "Stories" })).toHaveAttribute("aria-expanded", "true")
+    expect(screen.queryByRole("button", { name: "Stories" })).not.toBeInTheDocument()
+    expect(screen.getAllByRole("button").map(button => button.textContent)).toEqual(["Alpha", "Beta", "Gamma"])
     expect(screen.getByRole("link", { name: "Nine" })).toHaveAttribute("aria-current", "page")
     expect(screen.getByRole("button", { name: "Beta" })).toHaveAttribute("aria-expanded", "true")
     expect(screen.getByRole("button", { name: "Alpha" })).toHaveAttribute("aria-expanded", "false")
   })
 
-  it("lists the docs section's pages under Docs, after Stories, in folder order", async () => {
+  it("lists the docs section's pages under a Docs group after the stories, in folder order", async () => {
     window.history.replaceState(null, "", "/docs/getting-started")
     render(<App scenes={scenes} docs={docs} pages={pages} router={router} />)
     await screen.findByText("getting started")
     const groups = screen.getAllByRole("button", { hidden: true }).map(button => button.textContent)
-    expect(groups.slice(0, 1)).toEqual(["Stories"])
-    expect(groups).toContain("Docs")
+    expect(groups.slice(0, 1)).toEqual(["Alpha"])
+    expect(groups.at(-1)).toBe("Docs")
     expect(screen.getByRole("button", { name: "Docs" })).toHaveAttribute("aria-expanded", "true")
     const rows = screen.getAllByRole("link", { hidden: true }).map(link => link.textContent)
     expect(rows.slice(-2)).toEqual(["Getting started", "Ten pages"])
