@@ -1,12 +1,10 @@
 import * as React from "react"
-import Icon from "@niceprototypes/icon"
 import Button from "@niceprototypes/button"
 import {
   FrameDiv,
   FrameIframe,
   FrameScrollDiv,
-  ThemedFrameLock,
-  ThemedFrameUnlock,
+  ThemedFrameControl,
 } from "./ThemedFrame.styles"
 import type { ThemedFrameProps } from "./ThemedFrame.types"
 
@@ -22,16 +20,16 @@ import type { ThemedFrameProps } from "./ThemedFrame.types"
  * match. Re-applied on mount, on toggle (a `data-theme` MutationObserver), and
  * on every (re)load.
  *
- * The frame starts locked: its container clips overflow, so scrolling the page
- * past a demo does not get captured by the frame. A button floating in the
- * bottom-right corner unlocks it (the container switches to `overflow: auto`);
- * a button in the top-right corner locks it again.
+ * The frame starts locked: the iframe takes no pointer input and its container
+ * clips overflow, so wheel and touch over a demo scroll the page, not the frame.
+ * One button in the bottom-right corner toggles the lock: a closed padlock while
+ * locked, an open one while scrolling, `aria-pressed` while unlocked.
  *
- * The lock is a button rather than a second click on the frame because a click
- * inside an iframe belongs to that document and never reaches this one — there
- * is no event here to hang it on.
+ * The lock is a button rather than a click on the frame because a click inside an
+ * iframe belongs to that document and never reaches this one — there is no event
+ * here to hang it on.
  */
-const ThemedFrame: React.FC<ThemedFrameProps> = ({ toggleLabel = "Click to scroll", ...props }) => {
+const ThemedFrame: React.FC<ThemedFrameProps> = props => {
   const ref = React.useRef<HTMLIFrameElement>(null)
   const [scrollable, setScrollable] = React.useState(false)
 
@@ -61,19 +59,17 @@ const ThemedFrame: React.FC<ThemedFrameProps> = ({ toggleLabel = "Click to scrol
   return (
     <FrameDiv $scrollable={scrollable}>
       <FrameScrollDiv $scrollable={scrollable}>
-        <FrameIframe ref={ref} {...props} onLoad={applyTheme} />
+        <FrameIframe ref={ref} {...props} $locked={!scrollable} onLoad={applyTheme} />
       </FrameScrollDiv>
-      {scrollable ? (
-        <ThemedFrameLock type="button" aria-label="Lock frame" onClick={() => setScrollable(false)}>
-          <Icon name="lock-down" size="small" />
-        </ThemedFrameLock>
-      ) : (
-        <ThemedFrameUnlock>
-          <Button filled iconLeft="lock-down" onClick={() => setScrollable(true)}>
-            {toggleLabel}
-          </Button>
-        </ThemedFrameUnlock>
-      )}
+      <ThemedFrameControl>
+        <Button
+          filled
+          iconLeft={scrollable ? "lock-up" : "lock-down"}
+          aria-label="Scroll the demo"
+          aria-pressed={scrollable}
+          onClick={() => setScrollable(current => !current)}
+        />
+      </ThemedFrameControl>
     </FrameDiv>
   )
 }

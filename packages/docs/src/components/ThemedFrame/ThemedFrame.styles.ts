@@ -37,46 +37,17 @@ export const FrameScrollDiv = styled(Scroll).attrs({ axis: "both" })<{ $scrollab
  * The frame itself. `display: block` drops the inline baseline gap an iframe
  * would otherwise leave under it, and the border lives on {@link FrameDiv}.
  */
-export const FrameIframe = styled.iframe`
+export const FrameIframe = styled.iframe<{ $locked: boolean }>`
   display: block;
   border: 0;
+  /* Locked, the frame takes no pointer input: the iframe's own document would scroll under
+     wheel and touch otherwise, whatever its container clips, so they reach the page instead. */
+  ${({ $locked }) => $locked && "pointer-events: none;"}
 `
 
-/** Holds the unlock Button in the frame's bottom-right corner, over the demo, one gap in. */
-export const ThemedFrameUnlock = styled.div`
+/** Holds the lock toggle in the frame's bottom-right corner, over the demo, one gap in. */
+export const ThemedFrameControl = styled.div`
   position: absolute;
   right: ${getToken("gap")};
   bottom: ${getToken("gap")};
-`
-
-/**
- * Locks the frame again once it is live. Sits in the top-right corner, over the
- * frame rather than beside it, so it costs no layout. A native button rather
- * than the Nice Button: it is frame chrome carrying only an icon; the element
- * gives it keyboard focus and Enter/Space activation.
- */
-export const ThemedFrameLock = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: ${getToken("gap", "small")};
-  font: inherit;
-  position: absolute;
-  top: ${getToken("gap")};
-  right: ${getToken("gap")};
-  border: 1px solid ${getToken("borderColor")};
-  border-radius: ${getToken("borderRadius", "small")};
-  /* The frame shows through otherwise, so it gets an opaque surface and a shadow
-     to lift it off the demo underneath. */
-  background-color: ${getToken("backgroundColor")};
-  box-shadow: ${getToken("boxShadow")};
-  color: ${getToken("color", "light")};
-  cursor: pointer;
-  border-radius: 50%;
-
-  &:hover,
-  &:focus-visible {
-    border-color: ${getToken("borderColor", "strong")};
-    color: ${getToken("color")};
-  }
 `
