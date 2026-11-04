@@ -66,7 +66,19 @@ const headerButtonTokens = css`
 `
 
 /**
- * The search in the header row (`search`), at the row's end: collapsed, a square the small field's
+ * The header row's icon group (the search, the docs link): flush side by side at the row's end,
+ * taking the row's free space so the expanded search can fill it.
+ */
+export const StyledAppActions = styled.div`
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  min-width: 0;
+`
+
+/**
+ * The search in the header row (`search`), in the icon group: collapsed, a square the small field's
  * height (the search button); `$expanded`, the field, filling the width right of the logo, its width
  * animating between the two. The anchor the results open under. Its text is the nav labels' size
  * (`$size`): it sets that font size and points the field's at `app.search.fontSize`, that size from
@@ -79,7 +91,6 @@ export const StyledAppSearch = styled.div<{ $size: FontSizeType; $expanded: bool
   display: flex;
   min-width: 0;
   width: ${({ $expanded }) => ($expanded ? "100%" : getToken("input.size:small"))};
-  margin-inline-start: auto;
   transition: width ${getToken("animationDuration")} ${getToken("animationEasing")};
   font-size: ${({ $size }) => getToken("fontSize", $size)};
   ${getToken("input.fontSize", { as: "key" })}: ${getToken("app.search.fontSize")};
@@ -92,19 +103,11 @@ export const StyledAppSearch = styled.div<{ $size: FontSizeType; $expanded: bool
   }
 `
 
-/**
- * The docs link in the header row (`docsLink`), after the search: an icon button in the header
- * buttons' tokens. Without a search before it, it takes the row's free space on its start side.
- */
+/** The docs link in the header row (`docsLink`), after the search: an icon button in the header buttons' tokens. */
 export const StyledAppDocsLink = styled.div`
   flex: none;
   display: flex;
-  margin-inline-start: auto;
   ${headerButtonTokens}
-
-  ${StyledAppSearch} + & {
-    margin-inline-start: 0;
-  }
 `
 
 /**

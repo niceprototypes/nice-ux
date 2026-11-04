@@ -10,6 +10,7 @@ import AppSearch from "./AppSearch"
 import {
   AppGlobalStyle,
   StyledApp,
+  StyledAppActions,
   StyledAppAside,
   StyledAppColumns,
   StyledAppDocs,
@@ -181,32 +182,36 @@ const AppShell: React.FC<AppProps> = ({
           <StyledAppAside $drawer={drawer}>
             <StyledAppHeader>
               <Logo />
-              {searchable && (
-                <AppSearch
-                  entries={index}
-                  aria-label={`Search ${ariaLabel}`}
-                  size={navLabelSize}
-                  onGo={entry => {
-                    context.open(entry)
-                    if (open) setOpen(false)
-                  }}
-                />
-              )}
-              {docsPage && (
-                <StyledAppDocsLink>
-                  <Button
-                    as="a"
-                    href={router.href?.(docsPage.url) ?? docsPage.url}
-                    target="_blank"
-                    // An anchor Button is an inline link unless told otherwise; this one is a square like the search's.
-                    inlined={false}
-                    size="small"
-                    iconLeft="book-open"
-                    // Only the icon shows, as on the search square; keyboard focus keeps the border and ring.
-                    ghost={{ rest: true, hover: true, active: true }}
-                    aria-label="Docs (opens in a new tab)"
-                  />
-                </StyledAppDocsLink>
+              {(searchable || docsPage) && (
+                <StyledAppActions>
+                  {searchable && (
+                    <AppSearch
+                      entries={index}
+                      aria-label={`Search ${ariaLabel}`}
+                      size={navLabelSize}
+                      onGo={entry => {
+                        context.open(entry)
+                        if (open) setOpen(false)
+                      }}
+                    />
+                  )}
+                  {docsPage && (
+                    <StyledAppDocsLink>
+                      <Button
+                        as="a"
+                        href={router.href?.(docsPage.url) ?? docsPage.url}
+                        target="_blank"
+                        // An anchor Button is an inline link unless told otherwise; this one is a square like the search's.
+                        inlined={false}
+                        size="small"
+                        iconLeft="book-open"
+                        // Only the icon shows, as on the search square; keyboard focus keeps the border and ring.
+                        ghost={{ rest: true, hover: true, active: true }}
+                        aria-label="Docs (opens in a new tab)"
+                      />
+                    </StyledAppDocsLink>
+                  )}
+                </StyledAppActions>
               )}
               {drawer && (
                 <Button

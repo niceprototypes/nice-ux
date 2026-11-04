@@ -376,7 +376,10 @@ describe("App search", () => {
   it("sits in the header row right of the logo, the large gap apart, at the nav labels' size, in the app.search colors", async () => {
     const field = await renderSearch({ navSize: "base" })
     const logo = screen.getByRole("img", { name: "Nice Prototypes" })
-    const block = logo.nextElementSibling as HTMLElement
+    // The logo, then the icon group, which the search block sits in.
+    const group = logo.nextElementSibling as HTMLElement
+    const block = group.firstElementChild as HTMLElement
+    expect(group).toHaveStyle({ flexGrow: "1", justifyContent: "flex-end" })
     expect(block).toContainElement(field)
     expect(logo.parentElement).toHaveStyle({ alignItems: "center", gap: "var(--np--gap--large)" })
     expect(logo.parentElement!.style.getPropertyValue("--np--logo--height") || getComputedStyle(logo.parentElement!).getPropertyValue("--np--logo--height")).toBe(
@@ -435,7 +438,9 @@ describe("App docs link", () => {
     expect(link).toHaveAttribute("target", "_blank")
     expect(link.getAttribute("rel")).toContain("noopener")
     const block = link.parentElement!
+    // Flush beside the search in the icon group: the group has no gap.
     expect(block.previousElementSibling).toContainElement(screen.getByRole("button", { name: "Search Scenes" }))
+    expect(getComputedStyle(block.parentElement!).gap).toBe("")
     expect(getComputedStyle(block).getPropertyValue("--np--button--icon--color")).toBe("var(--np--app--header--icon--color)")
   })
 
