@@ -10,8 +10,8 @@ where the current one renders. One page, no iframe.
   Docs section pages are `docs/<N Page>/index.tsx` (default export), or nested in folders
   (`docs/<N Folder>/<N Page>/index.tsx`), named and ordered by the same rules. The `pages` keys need not
   be files: a data-driven docs site builds the record itself. `scenes` is optional (a docs-only app).
-- **Nav groups.** The stories (`stories/`) are the Tree's top-level folders; the docs section pages follow
-  under a Docs group. In a docs-only app (pages alone), its rows are top level, without a group row.
+- **Nav sections.** The Tree lists the current page's section only, at the top level: on a story page
+  the stories (`stories/`) as folders, on a docs section page the docs pages. Search covers both.
 - **URLs.** `/stories/accessibility/context/stock-ticker?device=desktop` is the shell on a scene;
   `/frame/stories/accessibility/context/stock-ticker` is the scene alone, full screen, focused.
   `/docs/<page>` (or `/docs/<folder>/<page>`) is a docs section page: a plain scrollable page in the region, without `wrapper`, the
@@ -62,8 +62,8 @@ and picking a page close it; focus moves to the current page's link on opening a
 on closing. `sidebarOpen` controls it, `onSidebarOpenChange` reports each change. Tablet and up the
 sidebar always shows beside the region.
 
-The sidebar is at least `app.sidebar.minWidth` wide (a component token, `auto` by default: as wide as
-its content). Set it per breakpoint in the app's token map, e.g.
+The sidebar is at least `app.sidebar.minWidth` wide (a component token, `24em` by default; wider
+content widens it). Set it per breakpoint in the app's token map, e.g.
 `setTokens({ app: { sidebar: { minWidth: { base: { "desktop+": "32em" } } } } })`.
 
 `wrapper` wraps every scene (not markdown or docs section pages) inside the region, with the URL's query parameters: the

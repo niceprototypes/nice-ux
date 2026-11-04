@@ -11,7 +11,7 @@ const componentTokensData: ComponentTokensData = {
   "app": {
     "sidebar": {
       "minWidth": {
-        "base": "auto"
+        "base": "24em"
       }
     },
     "footer": {

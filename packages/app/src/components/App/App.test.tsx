@@ -85,17 +85,19 @@ describe.each(adapters)("App on the %s adapter", (_, router) => {
     expect(screen.getByRole("button", { name: "Alpha" })).toHaveAttribute("aria-expanded", "false")
   })
 
-  it("lists the docs section's pages under a Docs group after the stories, in folder order", async () => {
+  it("lists only the current page's section: the docs pages on a docs page, the stories on a story", async () => {
     window.history.replaceState(null, "", "/docs/getting-started")
-    render(<App scenes={scenes} docs={docs} pages={pages} router={router} />)
+    const { unmount } = render(<App scenes={scenes} docs={docs} pages={pages} router={router} />)
     await screen.findByText("getting started")
-    const groups = screen.getAllByRole("button", { hidden: true }).map(button => button.textContent)
-    expect(groups.slice(0, 1)).toEqual(["Alpha"])
-    expect(groups.at(-1)).toBe("Docs")
-    expect(screen.getByRole("button", { name: "Docs" })).toHaveAttribute("aria-expanded", "true")
-    const rows = screen.getAllByRole("link", { hidden: true }).map(link => link.textContent)
-    expect(rows.slice(-2)).toEqual(["Getting started", "Ten pages"])
+    expect(screen.getAllByRole("link", { hidden: true }).map(link => link.textContent)).toEqual(["Getting started", "Ten pages"])
+    expect(screen.queryByRole("button", { name: "Docs" })).not.toBeInTheDocument()
     expect(screen.getByRole("link", { name: "Getting started" })).toHaveAttribute("aria-current", "page")
+    unmount()
+    window.history.replaceState(null, "", "/stories/beta/nine")
+    render(<App scenes={scenes} docs={docs} pages={pages} router={router} />)
+    await screen.findByText("nine")
+    expect(screen.queryByRole("link", { name: "Getting started" })).not.toBeInTheDocument()
+    expect(screen.queryByRole("button", { name: "Docs" })).not.toBeInTheDocument()
   })
 
   it("lists a docs-only app's nested pages at the top level, as folders, without a group row", async () => {
@@ -438,9 +440,9 @@ describe("App docs link", () => {
     expect(link).toHaveAttribute("target", "_blank")
     expect(link.getAttribute("rel")).toContain("noopener")
     const block = link.parentElement!
-    // Flush beside the search in the icon group: the group has no gap.
+    // Beside the search in the icon group, the smaller gap apart.
     expect(block.previousElementSibling).toContainElement(screen.getByRole("button", { name: "Search Scenes" }))
-    expect(getComputedStyle(block.parentElement!).gap).toBe("")
+    expect(block.parentElement).toHaveStyle({ gap: "var(--np--gap--smaller)" })
     expect(getComputedStyle(block).getPropertyValue("--np--button--icon--color")).toBe("var(--np--app--header--icon--color)")
   })
 
