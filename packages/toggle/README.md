@@ -72,7 +72,8 @@ ancestor to restyle Toggle without props.
 | `--np--toggle--thumb--background-color` | `var(--np--background-color)` |
 | `--np--toggle--gap` | `var(--np--gap--small)` (between switch and label) |
 | `--np--toggle--disabled-opacity` | `0.5` |
-| `--np--toggle--transition-duration` | `var(--np--animation-duration--fast)`; no transition under `prefers-reduced-motion` |
+| `--np--toggle--animation-duration` | `var(--np--animation-duration--fast)`; no transition under `prefers-reduced-motion` |
+| `--np--toggle--animation-easing` | `var(--np--animation-easing--ease-out)` |
 | `--np--toggle--focus-ring--width` / `--color` / `--offset` | `var(--np--border-width--large)` / `var(--np--color--link)` / `var(--np--gap--smaller)` |
 
 Docs: @niceprototypes/storybook → Components → Forms → Toggle.

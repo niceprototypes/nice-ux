@@ -48,7 +48,7 @@ export const StyledThumb = styled.span<SizeProps>`
   height: ${thumbSize};
   border-radius: 50%;
   background-color: ${getToken("toggle.thumb.backgroundColor:base")};
-  transition: transform ${getToken("toggle.transitionDuration:base")} ease-out;
+  transition: transform ${getToken("toggle.animationDuration:base")} ${getToken("toggle.animationEasing:base")};
 
   @media (prefers-reduced-motion: reduce) {
     transition: none;
@@ -60,7 +60,7 @@ export const StyledTrack = styled.span<SizeProps>`
   inset: 0;
   border-radius: calc(${trackHeight} / 2);
   background-color: ${getToken("toggle.track.backgroundColor:base")};
-  transition: background-color ${getToken("toggle.transitionDuration:base")} ease-out;
+  transition: background-color ${getToken("toggle.animationDuration:base")} ${getToken("toggle.animationEasing:base")};
 
   @media (prefers-reduced-motion: reduce) {
     transition: none;

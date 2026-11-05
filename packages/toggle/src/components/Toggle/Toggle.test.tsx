@@ -96,6 +96,14 @@ describe("Toggle", () => {
     expect(css).toContain(`height:${getToken("toggle.track.height:large")}`)
   })
 
+  it("transitions the track and thumb over the toggle animation tokens", () => {
+    render(<Toggle aria-label="x" />)
+    const track = screen.getByRole("switch").nextElementSibling!
+    const timing = `${getToken("toggle.animationDuration:base")} ${getToken("toggle.animationEasing:base")}`
+    expect(cssFor(track)).toContain(`transition:background-color ${timing}`)
+    expect(cssFor(track.firstElementChild!)).toContain(`transition:transform ${timing}`)
+  })
+
   it("draws the keyboard focus ring on the track", () => {
     render(<Toggle aria-label="x" />)
     const track = screen.getByRole("switch").nextElementSibling!
