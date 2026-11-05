@@ -1,5 +1,5 @@
 import * as React from "react"
-import { copyToClipboard } from "../../services/copyToClipboard"
+import { copyToClipboard } from "@niceprototypes/code"
 import { ClickToCopyWrapper } from "./ClickToCopy.styles"
 
 interface ClickToCopyProps {
