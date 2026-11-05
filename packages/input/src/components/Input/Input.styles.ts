@@ -191,8 +191,8 @@ export const StyledField = styled.div.withConfig({
     border-color: ${getBorderColor($status, $filled)};
     border-radius: ${getToken(`input.borderRadius:${$borderRadius}`)};
     transition:
-      border-color 0.15s ease-in-out,
-      background-color 0.15s ease-in-out;
+      border-color ${getToken("input.animationDuration:base")} ${getToken("input.animationEasing:base")},
+      background-color ${getToken("input.animationDuration:base")} ${getToken("input.animationEasing:base")};
     cursor: ${$disabled ? "not-allowed" : "text"};
     ${$backgroundColor
       ? `background-color: ${resolveColorProp("input", "backgroundColor", $backgroundColor)};`

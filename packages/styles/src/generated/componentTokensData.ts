@@ -749,6 +749,12 @@ const componentTokensData: ComponentTokensData = {
     },
     "fontFamily": {
       "base": "var(--np--font-family)"
+    },
+    "animationDuration": {
+      "base": "var(--np--animation-duration--fast)"
+    },
+    "animationEasing": {
+      "base": "var(--np--animation-easing)"
     }
   },
   "lightbox": {

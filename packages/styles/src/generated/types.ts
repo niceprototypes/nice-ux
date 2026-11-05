@@ -197,6 +197,8 @@ export interface TokenVariants extends CustomTokenVariants {
   "input.focusRing.color": "base"
   "input.focusRing.offset": "base"
   "input.fontFamily": "base"
+  "input.animationDuration": "base"
+  "input.animationEasing": "base"
   "lightbox.backgroundColor": "base"
   "lightbox.image.maxWidth": "base"
   "lightbox.image.maxHeight": "base"

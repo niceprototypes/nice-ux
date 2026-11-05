@@ -62,7 +62,7 @@ export type InputBorderRadiusType =
  * Values:
  * - "base": Default status
  * - "disabled": Non-interactive, dimmed
- * - "error": Validation error
+ * - "error": Validation error; sets `aria-invalid="true"` on the control
  * - "success": Validation success
  * - "warning": Validation warning
  */

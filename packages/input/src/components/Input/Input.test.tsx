@@ -112,6 +112,14 @@ describe("Input", () => {
       expect(fieldCss).toBe(statusFieldCss)
     })
 
+    it("transitions the border and background over the input animation tokens", () => {
+      render(<Input aria-label="x" />)
+      const timing = `${getToken("input.animationDuration:base")} ${getToken("input.animationEasing:base")}`
+      expect(cssFor(screen.getByRole("textbox").parentElement!)).toContain(
+        `transition:border-color ${timing},background-color ${timing};`
+      )
+    })
+
     it("leaves the control enabled when neither disabled nor status=\"disabled\" is set", () => {
       render(<Input aria-label="x" disabled={false} status="base" />)
       expect(screen.getByRole("textbox")).toBeEnabled()
@@ -616,7 +624,7 @@ describe("Input", () => {
       )
     })
 
-    it("sets aria-invalid only when the Field is invalid, never \"false\"", () => {
+    it("sets aria-invalid when the Field is invalid or status is \"error\", never \"false\"", () => {
       const { rerender, container } = render(
         <Field label="Email">
           <Input />
@@ -640,11 +648,20 @@ describe("Input", () => {
           label="Email"
           invalid={false}
         >
-          <Input status="error" />
+          <Input status="success" />
         </Field>
       )
       expect(screen.getByRole("textbox")).not.toHaveAttribute("aria-invalid")
       expect(container.querySelector('[aria-invalid="false"]')).toBeNull()
+      rerender(
+        <Field
+          label="Email"
+          invalid={false}
+        >
+          <Input status="error" />
+        </Field>
+      )
+      expect(screen.getByRole("textbox")).toHaveAttribute("aria-invalid", "true")
     })
 
     it("shows the error border when the Field is invalid and no status is set", () => {

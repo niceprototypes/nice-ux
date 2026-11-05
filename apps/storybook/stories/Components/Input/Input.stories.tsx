@@ -316,6 +316,9 @@ export const Playground: Story = {
     await expect(textbox).toHaveValue("Ada")
     await userEvent.tab()
     await expect(args.onBlur).toHaveBeenCalled()
+    // Border and background colours transition over the input.animationDuration token.
+    const duration = resolveCss(canvasElement, "transition-duration", getToken("input.animationDuration:base"))
+    await expect(getComputedStyle(field(canvasElement)).transitionDuration).toBe(`${duration}, ${duration}`)
   },
 }
 
@@ -369,6 +372,7 @@ export const StatusError: Story = {
     await expect(getComputedStyle(field(canvasElement)).borderTopColor).toBe(
       resolveCss(canvasElement, "color", getToken("borderColor:error")),
     )
+    await expect(within(canvasElement).getByRole("textbox", { name: "Field" })).toHaveAttribute("aria-invalid", "true")
   },
 }
 

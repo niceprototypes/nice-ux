@@ -146,8 +146,8 @@ const Input: React.FC<InputProps> = ({
           fieldContext?.describedBy,
           ariaDescribedBy
         )}
-        // Only ever "true" — never render aria-invalid="false"
-        aria-invalid={fieldContext?.invalid ? true : undefined}
+        // Invalid from the Field or from status="error"; only ever "true" — never render aria-invalid="false"
+        aria-invalid={fieldContext?.invalid || effectiveStatus === "error" ? true : undefined}
         aria-label={ariaLabel}
         autoComplete={autoComplete}
         autoFocus={autoFocus}
