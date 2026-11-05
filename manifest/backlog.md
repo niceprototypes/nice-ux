@@ -6,88 +6,90 @@ Dropped from the source tables: 67 DONE, 26 DEPRECATED, 24 COVERED by planned wo
 
 Rows 88-128 come from the gap analysis `~/nice/.nice/research/2026-10-26/gaps.md` (cited as `gaps`): §1 ranks 1-23 in rank order, then the survey 001 sets (Data grid, Charts, AI/chat), then §2-§3. Covered by earlier rows: Slider (81), Divider (45), Combobox (42), number stepper (41). Rows 129-142 are API gaps found while writing the Playground stories (storybook-rework). Total 142 rows.
 
+Re-triaged 2026-11-05 against the code: 11 DONE, 15 PARTLY DONE, 14 IN PROGRESS, 102 OPEN. Status leads each row's item text.
+
 Phases, in order: pre-monorepo → monorepo → storybook-rework → components → manifest. Within a phase, rows are sorted by impact.
 
 | id | item | evidence (file:line) | effort | package | phase |
 |---|---|---|---|---|---|
 | 1 | DONE 2026-10-26 (getToken). Owner instruction line cites `getCssConstant`; the API is `getConstant` / `getToken` (S003 Q1) | ~/.claude/CLAUDE.md:19; ~/AGENTS.md:19; packages/styles/src/index.ts:52; packages/styles/src/react/index.ts:40 | S | owner files | pre-monorepo |
-| 2 | Publish backlog: no 2026-09/10 change is on npm; 17 packages never published. Ship as the first Changesets release (survey 002 step 7) | npm 404 for @niceprototypes/{tabs,checkbox,toggle,dialog,select,calendar,field,popover}; npm @niceprototypes/input 3.0.2 = local version with unpublished commits | M | all | monorepo |
-| 3 | Peer-range drift on runtime singletons; set one bounded range (`>=19.2.0 <20`, `>=6.1.18 <7`) through the workspace | packages/scroll/package.json:38,40 (`>=18`, `>=6.0.0`); unbounded `>=19.2.0` in button, icon, input, slider, tile | S | 6 packages | monorepo |
-| 4 | Lift React-agnostic logic (setTokens, breakpoint `getCurrent`/subscribe, device detection) into @niceprototypes/styles; styles re-exports, so no public break | packages/styles/src/react/services/setTokens/index.ts:45-50; packages/styles/src/react/services/withBreakpoints/useBreakpoint.ts:15; packages/styles/src/react/components/StylesProvider/useDeviceDetection.ts:59 | M | styles, styles | monorepo |
-| 5 | `@ts-expect-error` not type-checked under ts-jest; fix in the root test config | packages/input/package.json:81 | S | test config | monorepo |
-| 6 | tooltip declares unused `@niceprototypes/icon` dep | packages/tooltip/package.json:37,59 | S | tooltip | monorepo |
-| 7 | App scaffold generator for cold agents, as the `nicely create` subcommand in @niceprototypes/cli (owner decision) | packages/cli/src/args/command.js:15 (no verb); recipe in manifest/agents/README.md §1 | M | monorepo tooling | monorepo |
-| 8 | Remove app workarounds in nice-accountant / demo after publish (blocked by 2) | bak: .reports/nice-ui-hardening/plan.md:173-184 | S | external apps | monorepo |
-| 9 | Deployed Storybook stale: 181 of 228 catalog story ids missing from the live index; redeploy after the rework | niceprototypes.com/ui/index.json vs manifest/agents/catalog.json | S | storybook | storybook-rework |
-| 10 | Ink default `className="sb-unstyled"` puts a Storybook class in production markup; drop it, scope docs surfaces in Storybook | packages/ink/src/components/Ink/Ink.tsx:43 | M | ink, storybook | storybook-rework |
-| 11 | Theme load-flash leftovers: nav toggle never sets the explicit-theme flag (night lost on reload); theme mirrors rewrite `data-theme` with no diff check | packages/storybook-navigation/src/components/StoryNavigation.tsx:244; packages/storybook-spinner/src/scripts/themeResolverSource.ts:11; apps/storybook/.storybook/preview.tsx:26; packages/storybook-theme/src/manager.ts:35-37; packages/styles/src/services/applyTheme.ts:19 | S | storybook-navigation, storybook-theme, styles | storybook-rework |
-| 12 | Delete the 4 Lifecycle.mdx pages + LifecycleStory; Playground `play` tests replace them | manifest/edit/storybook.md:9 | S | storybook | storybook-rework |
-| 13 | Storybook data plan remainder: TokenPreview groups beyond ZIndex; storySort and prev/next generated from the tree (inline marked block) | apps/storybook/src/components/TokenPreview/; apps/storybook/.storybook/preview.tsx:86; apps/storybook/.storybook/storyNavigationSequences.ts | M | storybook | storybook-rework |
-| 14 | Icons.mdx uses the root `@niceprototypes/icon` import, which fails outside a bundler (see 21) | apps/storybook/stories/Basics/Icons.mdx:55,76 | S | storybook | storybook-rework |
-| 15 | Unknown icon `name` silently renders the `circle` fallback; add a dev warning | packages/icon/src/components/Icon/Icon.tsx:121-122 (warn exists only for variants: resolveIconComponent.ts:30) | S | icon | components |
-| 16 | Component colour tokens bypassed for defaults, so `setTokens({input/button/popover…})` has no effect on a default instance | packages/input/src/components/Input/Input.styles.ts:21,23; packages/button/src/components/Button/Button.styles.ts:126; packages/popover/src/components/Popover/Popover.styles.ts:16 | M | styles, input, button, popover | components |
-| 17 | Prop unions alias core types (`BorderColorType`…) instead of `TokenVariants["x.y"]`; props and token files drift with no tsc error (S003 Q2) | only packages/styles/src/react/services/setTokens/setTokens.types.ts uses `TokenVariants[` | M | styles + all react-* | components |
-| 18 | Missing icons for Data grid / AI chat / Header: play, more, eye/eye-off, share, refresh, cart, send, attachment, microphone, external-link, unlock (S003 Q5) | packages/icon/src/svg/icons/generated/*/base.svg (78 dirs; none of these) | M | icons | components |
-| 19 | Lightbox overlay is not a modal dialog (no role=dialog, aria-modal, focus trap, focus return) | packages/lightbox/src/components/Lightbox/Lightbox.tsx:50 (only `role="button"` on the trigger) | M | lightbox | components |
-| 20 | Icon bundle 1.47 MB for 1 Button + Icon; ship a components-only @niceprototypes/icon export + opt-in vendor registration (non-breaking, measured −67% JS) | packages/icon/src/utilities/buildIconMap.ts:2; packages/icon-vendor/src/services/resolveVendorIcon.ts:2 | M | icons, icon, icon-vendor | components |
-| 21 | @niceprototypes/icon root import fails outside a bundler (166 `.svg` imports); `getIconEncoded` loads the full base64 map. Split a no-SVG root entry; load per-icon JSON lazily | packages/icon/src/svg/index.js:19; packages/icon/src/svg/services/getIconEncoded.js:1 | M | icons | components |
-| 22 | Global `prefers-reduced-motion` + reset P1 remainder (`text-wrap: pretty`, `:target { scroll-margin }`, `textarea:not([rows])` min-height) | only packages/toggle/src/components/Toggle/Toggle.styles.ts has the query; none in styles/static/reset*.css | S | styles | components |
-| 23 | Cascade layers: `@layer reset` + `@layer np.components`, so consumer CSS wins without specificity | 0 `@layer` in styles/static/reset*.css, styles/src, react-*/src | M | styles, all react-* | components |
-| 24 | Tooltip: no `tooltip.json`, z-index `2147483647`, own `OFFSET = 8`, `nowrap` + max-width overflows | packages/tooltip/src/components/Tooltip/Tooltip.styles.ts:23,25-26; Tooltip.tsx:10 | M | styles, tooltip | components |
-| 25 | Tooltip trigger span not focusable; focus works only with a focusable child | packages/tooltip/src/components/Tooltip/Tooltip.tsx:136 | S | tooltip | components |
-| 26 | Off-screen slides stay in the a11y tree and tab order (no `inert`) | packages/slider/src/components/Slider/Slider.tsx | S | slider | components |
-| 27 | Code `copyOnClick` `<div>` not keyboard operable; no focus-visible style | packages/code/src/components/Code/Code.tsx; Code.styles.ts | S | code | components |
-| 28 | Icon: no `aria-hidden` default, no `aria-label` prop | packages/icon/src/components/Icon/Icon.tsx | S | icon | components |
-| 29 | Input `status="error"` does not set `aria-invalid` (only Field `invalid` does) | packages/input/src/components/Input/Input.tsx:124 | S | input | components |
-| 30 | Tabs: no `ref`; `tabpanel` lacks `tabIndex={0}` | packages/tabs/src/components/Tabs/Tabs.types.ts; Tabs.tsx | S | tabs | components |
-| 31 | Lightbox literals (backdrop `rgba(0,0,0,0.9)`, caption padding, max sizes, zIndex 9999); add an overlay/scrim colour token | packages/lightbox/src/components/Lightbox/Lightbox.styles.ts:24,29,30; LightboxCaption.styles.ts:4-5; packages/styles/src/tokens/components/lightbox.json:3 | S | styles, lightbox | components |
-| 32 | Scroll literals: z-index 100, `0.3s ease-in-out`, `0.1s linear` (tokens exist) | packages/scroll/src/components/Sticky/Sticky.styles.ts:9,11; FadeOnScroll.styles.ts:5 | S | scroll | components |
-| 33 | Input transition literal `0.15s ease-in-out` | packages/input/src/components/Input/Input.styles.ts:181-183 | S | input | components |
-| 34 | Code literals (1px border, 720px, 5em, label shadow) | packages/code/src/components/Code/Code.styles.ts:19,22,73; CodeLabel.styles.ts:19 | S | styles, code | components |
-| 35 | Toggle `transitionDuration` naming + literal `ease-out` | packages/styles/src/tokens/components/toggle.json:40; packages/toggle/src/components/Toggle/Toggle.styles.ts:51,63 | S | styles, toggle | components |
-| 36 | Logo: `gap` literal px prop (token unread); `logo.height` unitless × 1px | packages/logo/src/components/Logo/Logo.tsx:27; Logo.styles.ts:16; packages/styles/src/tokens/components/logo.json:3,6 | S | styles, logo | components |
-| 37 | Hover/`:active` states missing on checkbox, toggle, calendar, list | 0 `:hover` in those packages' styles | M | styles + 4 packages | components |
-| 38 | Button has no brand/primary tone (S003 Q4) | packages/button/src/components/Button/Button.types.ts:139 | M | styles, button | components |
-| 39 | Registered variants (e.g. `gap.jumbo`) cannot pass through Flex/Ink props; fontSize and other scales stop at `larger` (no display tier) | packages/styles/src/tokens/modules/fontSize.json; Flex/Ink props typed `GapType`/`FontSizeType` | L | styles, flex, ink, styles | components |
-| 40 | Ink `as` widening (`a`, `li`, `h5/h6`, `blockquote`, `cite`, `mark`, `s`) + `href`, `decoration`, `truncate` | packages/ink/src/components/Ink/Ink.types.ts:28 | S | ink | components |
-| 41 | Number entry: Input `min`/`max`/`step` + NumberField stepper (S003 Q3) | packages/input/src/components/Input/Input.types.ts (no props) | M | input / new | components |
-| 42 | Editable Combobox (filtering, IME-safe) (S003 Q3) | packages/select/src/components/Select/Select.types.ts:15-16 | L | new | components |
-| 43 | DateField typed entry, clear, range, `required` (S003 Q3) | packages/calendar/src/components/DateField/DateField.types.ts:27 | L | calendar | components |
-| 44 | Container / page-width primitive (S003 Q3) | no package | M | new or Flex props | components |
-| 45 | Divider (Line is a frame) (S003 Q3) | no package | S | new | components |
-| 46 | Stat / KPI block (S003 Q3) | no package | S | new | components |
-| 47 | Timer (role=timer, milestone live region, `endAt` clock) from the prototype (S003 Q3) | bak: .reports/timer/demo-source/Timer.stories.tsx | M | new | components |
-| 48 | Token naming pass: `generateTokenCSS`/`injectTokenCSS` casing, `getConstant` name, `modeNotFound` key (S003 Q2) | packages/styles/src/services/index.ts:81,85; packages/styles/src/services/getConstant.ts:78; packages/styles/src/services/getToken.ts:134 | M | styles, styles | components |
-| 49 | Inline padding named 3 ways (`spacing` vs `padding`) (S003 Q2) | packages/styles/src/tokens/components/button.json:9; input.json:9; tabs.json:2; list.json:2 | M | styles, button, input | components |
-| 50 | `getToken` theme pin on a component alias with no theme layer throws (no repro yet) | packages/styles/src/services/getToken.ts:130-136 | M | styles | components |
-| 51 | No `forced-colors` handling | 0 hits in styles/src, react-*/src | M | styles + drawn controls | components |
-| 52 | Validation timing: late default, `:user-invalid` | 0 `user-invalid` in packages/field/src | M | field | components |
-| 53 | Select `appearance: base-select` progressive enhancement | 0 `base-select` in packages/select/src | M | select | components |
-| 54 | Calendar: no `focusRing` / `borderWidth` / `borderRadius` tokens | packages/styles/src/tokens/components/calendar.json | S | styles, calendar | components |
-| 55 | Calendar/DateField aria-labels hard-coded in English | packages/calendar/src/components/Calendar/Calendar.tsx:244,254; DateField.tsx:13 | S | calendar | components |
-| 56 | No core disabled-opacity token; literal 0.5 in 3 files | packages/styles/src/tokens/components/checkbox.json:57-58 | S | styles | components |
-| 57 | `theme` prop missing on Code, Lightbox, Slider, Tooltip, Flex, Scroll | their `*.types.ts` (0 `theme`) | S | 6 packages | components |
-| 58 | `sensitive` prop (session-replay redaction markers) | 0 hits in packages/input/src, packages/field/src | S | field, input | components |
-| 59 | Encoded icon theme `"base"\|"night"` vs `ThemeType` `"day"\|"night"`; accept `day`, keep `base` as alias | packages/icon/src/svg/services/getIconEncoded.d.ts:14 | S | icons | components |
-| 60 | flex calls `getConstant` (no registry validation) instead of `getToken` | packages/flex/src/services/styleFlex.ts:1,62 | S | flex | components |
-| 61 | button builds `--np--button--height` var string by hand | packages/button/src/components/Button/Button.styles.ts:102,107,127 | S | button | components |
-| 62 | Line `rimColor` literal white, no night value | packages/styles/src/tokens/components/line.json:14 | S | styles | components |
-| 63 | No `@media print` theme handling | 0 hits in styles/src, styles/static, styles/scripts | S | styles | components |
-| 64 | Ink `letterSpacing` / `maxWidth` tokens have no prop or reader | packages/styles/src/tokens/components/ink.json:29,47 | S | styles, ink | components |
-| 65 | Unused tokens: `icon.viewBox`, `image.objectFit`, `code.fontWeight` | packages/icon/.../Icon.tsx:38; Illustration.tsx:28; packages/styles/src/tokens/components/image.json:37; code.json:27 | S | styles, icon, image, code | components |
-| 66 | Input types used bare (`SizeType`, `BorderWidthType`, `ThemeType`) | packages/input/src/components/Input/Input.types.ts:600,612,615 | S | input | components |
-| 67 | Form root is raw flex CSS, not Flex; no gap | packages/form/src/components/Form/Form.styles.ts:13-15 | S | form | components |
-| 68 | List `variant="plain"` (bullets/checklist) | packages/list/src/components/List/List.types.ts | S | list | components |
-| 69 | Popover offset doc says aliases are not resolved; `getToken` now follows them | packages/popover/src/utilities/getPopoverOffset.ts:16-19 vs packages/styles/src/services/getToken.ts:231-272 | S | popover | components |
-| 70 | Icon: 4 duplicated `IconWrapperStyled` render branches | packages/icon/src/components/Icon/Icon.tsx | S | icon | components |
-| 71 | `e` → `event` param naming | packages/lightbox/.../LightboxCaption.tsx:14; Lightbox.tsx:34,62; packages/styles/.../ThemeContext.tsx:68 | S | lightbox, styles | components |
-| 72 | flex README documents the deprecated object `spacing` API (~120 lines; wrong examples, token waste) | packages/flex/README.md:115-120,140-236 | S | flex | manifest |
-| 73 | Catalog regenerates by hand and goes stale; run the generator on build | manifest/agents/scripts/generate-catalog.mjs (not in any build script) | S | manifest | manifest |
-| 74 | PARTLY DONE 2026-10-27: token unions (SizeType, GapType…) resolve from styles generated types; package-imported aliases (FlexSpacingType) remain. Catalog leaves imported type aliases unresolved (`SizeType`, `FlexSpacingType`; 11 strings) | manifest/agents/catalog.json | M | manifest | manifest |
-| 75 | icons README: `getIcon("check", {color,size})` passes options in the `variant` slot; no encoded/base64 docs | packages/icon/svg/README.md:14 vs packages/icon/src/svg/services/getIcon.d.ts:25 | S | icons | manifest |
-| 76 | 7 READMEs call breakpoints an "array" and link a non-existent `withbreakpoints--docs` page | packages/{code,button,flex,image,ink,lightbox,slider}/README.md | S | READMEs | manifest |
-| 77 | README stubs / missing: ink 5 lines, image 3, lightbox 7, code 7; none for input, head, image-vendor. Make each a minimal pointer to Playground + catalog | those README.md files | S | READMEs | manifest |
-| 78 | README `## License` missing (24 packages); `## Install` vs `## Installation` (15); flex title | e.g. packages/checkbox/README.md; packages/flex/README.md:1 | S | READMEs | manifest |
+| 2 | OPEN 2026-11-05. npm unreachable at check; .changeset/ holds unreleased changesets. Publish backlog: no 2026-09/10 change is on npm; 17 packages never published. Ship as the first Changesets release (survey 002 step 7) | npm 404 for @niceprototypes/{tabs,checkbox,toggle,dialog,select,calendar,field,popover}; npm @niceprototypes/input 3.0.2 = local version with unpublished commits | M | all | monorepo |
+| 3 | PARTLY DONE 2026-11-05: scroll and newer packages bounded (dfd23f02); button, icon, input, slider, tile still unbounded. Peer-range drift on runtime singletons; set one bounded range (`>=19.2.0 <20`, `>=6.1.18 <7`) through the workspace | packages/scroll/package.json:38,40 (`>=18`, `>=6.0.0`); unbounded `>=19.2.0` in button, icon, input, slider, tile | S | 6 packages | monorepo |
+| 4 | OPEN 2026-11-05. Lift React-agnostic logic (setTokens, breakpoint `getCurrent`/subscribe, device detection) into @niceprototypes/styles; styles re-exports, so no public break | packages/styles/src/react/services/setTokens/index.ts:45-50; packages/styles/src/react/services/withBreakpoints/useBreakpoint.ts:15; packages/styles/src/react/components/StylesProvider/useDeviceDetection.ts:59 | M | styles, styles | monorepo |
+| 5 | OPEN 2026-11-05. `@ts-expect-error` not type-checked under ts-jest; fix in the root test config | packages/input/package.json:81 | S | test config | monorepo |
+| 6 | OPEN 2026-11-05. tooltip declares unused `@niceprototypes/icon` dep | packages/tooltip/package.json:37,59 | S | tooltip | monorepo |
+| 7 | DONE 2026-11-01 (7a2a71a2, `nicely create`). App scaffold generator for cold agents, as the `nicely create` subcommand in @niceprototypes/cli (owner decision) | packages/cli/src/args/command.js:15 (no verb); recipe in manifest/agents/README.md §1 | M | monorepo tooling | monorepo |
+| 8 | OPEN 2026-11-05. Remove app workarounds in nice-accountant / demo after publish (blocked by 2) | bak: .reports/nice-ui-hardening/plan.md:173-184 | S | external apps | monorepo |
+| 9 | PARTLY DONE 2026-11-05: /ui now serves the Nice docs app (3424f46e); Storybook itself is not deployed (/ui/storybook/index.json returns HTML). Deployed Storybook stale: 181 of 228 catalog story ids missing from the live index; redeploy after the rework | niceprototypes.com/ui/index.json vs manifest/agents/catalog.json | S | storybook | storybook-rework |
+| 10 | OPEN 2026-11-05. Ink default `className="sb-unstyled"` puts a Storybook class in production markup; drop it, scope docs surfaces in Storybook | packages/ink/src/components/Ink/Ink.tsx:43 | M | ink, storybook | storybook-rework |
+| 11 | PARTLY DONE 2026-11-05: storybook-theme persists the theme (766cba33); applyTheme.ts:19 still rewrites `data-theme` with no diff check. Theme load-flash leftovers: nav toggle never sets the explicit-theme flag (night lost on reload); theme mirrors rewrite `data-theme` with no diff check | packages/storybook-navigation/src/components/StoryNavigation.tsx:244; packages/storybook-spinner/src/scripts/themeResolverSource.ts:11; apps/storybook/.storybook/preview.tsx:26; packages/storybook-theme/src/manager.ts:35-37; packages/styles/src/services/applyTheme.ts:19 | S | storybook-navigation, storybook-theme, styles | storybook-rework |
+| 12 | OPEN 2026-11-05. Delete the 4 Lifecycle.mdx pages + LifecycleStory; Playground `play` tests replace them | manifest/edit/storybook.md:9 | S | storybook | storybook-rework |
+| 13 | OPEN 2026-11-05. Storybook data plan remainder: TokenPreview groups beyond ZIndex; storySort and prev/next generated from the tree (inline marked block) | apps/storybook/src/components/TokenPreview/; apps/storybook/.storybook/preview.tsx:86; apps/storybook/.storybook/storyNavigationSequences.ts | M | storybook | storybook-rework |
+| 14 | OPEN 2026-11-05. Now packages/docs/src/content/Onboarding/Icons.mdx:55,63,76. Icons.mdx uses the root `@niceprototypes/icon` import, which fails outside a bundler (see 21) | apps/storybook/stories/Basics/Icons.mdx:55,76 | S | storybook | storybook-rework |
+| 15 | IN PROGRESS 2026-11-05. Unknown icon `name` silently renders the `circle` fallback; add a dev warning | packages/icon/src/components/Icon/Icon.tsx:121-122 (warn exists only for variants: resolveIconComponent.ts:30) | S | icon | components |
+| 16 | PARTLY DONE 2026-11-05: Button filled border reads button.backgroundColor (33d0fe07); Input.styles.ts:23-25, Button.styles.ts:129 (unfilled), Popover.styles.ts:17 still on core tokens. Component colour tokens bypassed for defaults, so `setTokens({input/button/popover…})` has no effect on a default instance | packages/input/src/components/Input/Input.styles.ts:21,23; packages/button/src/components/Button/Button.styles.ts:126; packages/popover/src/components/Popover/Popover.styles.ts:16 | M | styles, input, button, popover | components |
+| 17 | OPEN 2026-11-05. Prop unions alias core types (`BorderColorType`…) instead of `TokenVariants["x.y"]`; props and token files drift with no tsc error (S003 Q2) | only packages/styles/src/react/services/setTokens/setTokens.types.ts uses `TokenVariants[` | M | styles + all react-* | components |
+| 18 | OPEN 2026-11-05. Only book-open added since (d38d0163). Missing icons for Data grid / AI chat / Header: play, more, eye/eye-off, share, refresh, cart, send, attachment, microphone, external-link, unlock (S003 Q5) | packages/icon/src/svg/icons/generated/*/base.svg (78 dirs; none of these) | M | icons | components |
+| 19 | IN PROGRESS 2026-11-05. Lightbox overlay is not a modal dialog (no role=dialog, aria-modal, focus trap, focus return) | packages/lightbox/src/components/Lightbox/Lightbox.tsx:50 (only `role="button"` on the trigger) | M | lightbox | components |
+| 20 | OPEN 2026-11-05. Icon bundle 1.47 MB for 1 Button + Icon; ship a components-only @niceprototypes/icon export + opt-in vendor registration (non-breaking, measured −67% JS) | packages/icon/src/utilities/buildIconMap.ts:2; packages/icon-vendor/src/services/resolveVendorIcon.ts:2 | M | icons, icon, icon-vendor | components |
+| 21 | OPEN 2026-11-05. @niceprototypes/icon root import fails outside a bundler (166 `.svg` imports); `getIconEncoded` loads the full base64 map. Split a no-SVG root entry; load per-icon JSON lazily | packages/icon/src/svg/index.js:19; packages/icon/src/svg/services/getIconEncoded.js:1 | M | icons | components |
+| 22 | OPEN 2026-11-05. Global `prefers-reduced-motion` + reset P1 remainder (`text-wrap: pretty`, `:target { scroll-margin }`, `textarea:not([rows])` min-height) | only packages/toggle/src/components/Toggle/Toggle.styles.ts has the query; none in styles/static/reset*.css | S | styles | components |
+| 23 | OPEN 2026-11-05. Cascade layers: `@layer reset` + `@layer np.components`, so consumer CSS wins without specificity | 0 `@layer` in styles/static/reset*.css, styles/src, react-*/src | M | styles, all react-* | components |
+| 24 | OPEN 2026-11-05. Tooltip: no `tooltip.json`, z-index `2147483647`, own `OFFSET = 8`, `nowrap` + max-width overflows | packages/tooltip/src/components/Tooltip/Tooltip.styles.ts:23,25-26; Tooltip.tsx:10 | M | styles, tooltip | components |
+| 25 | IN PROGRESS 2026-11-05. Tooltip trigger span not focusable; focus works only with a focusable child | packages/tooltip/src/components/Tooltip/Tooltip.tsx:136 | S | tooltip | components |
+| 26 | IN PROGRESS 2026-11-05. Off-screen slides stay in the a11y tree and tab order (no `inert`) | packages/slider/src/components/Slider/Slider.tsx | S | slider | components |
+| 27 | IN PROGRESS 2026-11-05. Code `copyOnClick` `<div>` not keyboard operable; no focus-visible style | packages/code/src/components/Code/Code.tsx; Code.styles.ts | S | code | components |
+| 28 | IN PROGRESS 2026-11-05. Icon: no `aria-hidden` default, no `aria-label` prop | packages/icon/src/components/Icon/Icon.tsx | S | icon | components |
+| 29 | IN PROGRESS 2026-11-05. Input `status="error"` does not set `aria-invalid` (only Field `invalid` does) | packages/input/src/components/Input/Input.tsx:124 | S | input | components |
+| 30 | IN PROGRESS 2026-11-05. Tabs: no `ref`; `tabpanel` lacks `tabIndex={0}` | packages/tabs/src/components/Tabs/Tabs.types.ts; Tabs.tsx | S | tabs | components |
+| 31 | IN PROGRESS 2026-11-05. Lightbox literals (backdrop `rgba(0,0,0,0.9)`, caption padding, max sizes, zIndex 9999); add an overlay/scrim colour token | packages/lightbox/src/components/Lightbox/Lightbox.styles.ts:24,29,30; LightboxCaption.styles.ts:4-5; packages/styles/src/tokens/components/lightbox.json:3 | S | styles, lightbox | components |
+| 32 | IN PROGRESS 2026-11-05. Scroll literals: z-index 100, `0.3s ease-in-out`, `0.1s linear` (tokens exist) | packages/scroll/src/components/Sticky/Sticky.styles.ts:9,11; FadeOnScroll.styles.ts:5 | S | scroll | components |
+| 33 | IN PROGRESS 2026-11-05. Input transition literal `0.15s ease-in-out` | packages/input/src/components/Input/Input.styles.ts:181-183 | S | input | components |
+| 34 | IN PROGRESS 2026-11-05. Code literals (1px border, 720px, 5em, label shadow) | packages/code/src/components/Code/Code.styles.ts:19,22,73; CodeLabel.styles.ts:19 | S | styles, code | components |
+| 35 | IN PROGRESS 2026-11-05. Toggle `transitionDuration` naming + literal `ease-out` | packages/styles/src/tokens/components/toggle.json:40; packages/toggle/src/components/Toggle/Toggle.styles.ts:51,63 | S | styles, toggle | components |
+| 36 | IN PROGRESS 2026-11-05. Logo: `gap` literal px prop (token unread); `logo.height` unitless × 1px | packages/logo/src/components/Logo/Logo.tsx:27; Logo.styles.ts:16; packages/styles/src/tokens/components/logo.json:3,6 | S | styles, logo | components |
+| 37 | PARTLY DONE 2026-11-05: Toggle hover track tokens (6442fea1); checkbox, calendar, list still have no :hover/:active. Hover/`:active` states missing on checkbox, toggle, calendar, list | 0 `:hover` in those packages' styles | M | styles + 4 packages | components |
+| 38 | OPEN 2026-11-05. Button has no brand/primary tone (S003 Q4) | packages/button/src/components/Button/Button.types.ts:139 | M | styles, button | components |
+| 39 | OPEN 2026-11-05. Registered variants (e.g. `gap.jumbo`) cannot pass through Flex/Ink props; fontSize and other scales stop at `larger` (no display tier) | packages/styles/src/tokens/modules/fontSize.json; Flex/Ink props typed `GapType`/`FontSizeType` | L | styles, flex, ink, styles | components |
+| 40 | OPEN 2026-11-05. Ink `as` widening (`a`, `li`, `h5/h6`, `blockquote`, `cite`, `mark`, `s`) + `href`, `decoration`, `truncate` | packages/ink/src/components/Ink/Ink.types.ts:28 | S | ink | components |
+| 41 | OPEN 2026-11-05. Number entry: Input `min`/`max`/`step` + NumberField stepper (S003 Q3) | packages/input/src/components/Input/Input.types.ts (no props) | M | input / new | components |
+| 42 | OPEN 2026-11-05. Editable Combobox (filtering, IME-safe) (S003 Q3) | packages/select/src/components/Select/Select.types.ts:15-16 | L | new | components |
+| 43 | OPEN 2026-11-05. DateField typed entry, clear, range, `required` (S003 Q3) | packages/calendar/src/components/DateField/DateField.types.ts:27 | L | calendar | components |
+| 44 | OPEN 2026-11-05. Container / page-width primitive (S003 Q3) | no package | M | new or Flex props | components |
+| 45 | OPEN 2026-11-05. Divider (Line is a frame) (S003 Q3) | no package | S | new | components |
+| 46 | OPEN 2026-11-05. Stat / KPI block (S003 Q3) | no package | S | new | components |
+| 47 | OPEN 2026-11-05. Timer (role=timer, milestone live region, `endAt` clock) from the prototype (S003 Q3) | bak: .reports/timer/demo-source/Timer.stories.tsx | M | new | components |
+| 48 | OPEN 2026-11-05. Token naming pass: `generateTokenCSS`/`injectTokenCSS` casing, `getConstant` name, `modeNotFound` key (S003 Q2) | packages/styles/src/services/index.ts:81,85; packages/styles/src/services/getConstant.ts:78; packages/styles/src/services/getToken.ts:134 | M | styles, styles | components |
+| 49 | OPEN 2026-11-05. Inline padding named 3 ways (`spacing` vs `padding`) (S003 Q2) | packages/styles/src/tokens/components/button.json:9; input.json:9; tabs.json:2; list.json:2 | M | styles, button, input | components |
+| 50 | OPEN 2026-11-05. `getToken` theme pin on a component alias with no theme layer throws (no repro yet) | packages/styles/src/services/getToken.ts:130-136 | M | styles | components |
+| 51 | OPEN 2026-11-05. No `forced-colors` handling | 0 hits in styles/src, react-*/src | M | styles + drawn controls | components |
+| 52 | OPEN 2026-11-05. Validation timing: late default, `:user-invalid` | 0 `user-invalid` in packages/field/src | M | field | components |
+| 53 | OPEN 2026-11-05. Select `appearance: base-select` progressive enhancement | 0 `base-select` in packages/select/src | M | select | components |
+| 54 | OPEN 2026-11-05. Calendar: no `focusRing` / `borderWidth` / `borderRadius` tokens | packages/styles/src/tokens/components/calendar.json | S | styles, calendar | components |
+| 55 | OPEN 2026-11-05. Calendar/DateField aria-labels hard-coded in English | packages/calendar/src/components/Calendar/Calendar.tsx:244,254; DateField.tsx:13 | S | calendar | components |
+| 56 | OPEN 2026-11-05. Literal 0.5 now in 5 token files (app, card, checkbox, tabs, toggle). No core disabled-opacity token; literal 0.5 in 3 files | packages/styles/src/tokens/components/checkbox.json:57-58 | S | styles | components |
+| 57 | OPEN 2026-11-05. `theme` prop missing on Code, Lightbox, Slider, Tooltip, Flex, Scroll | their `*.types.ts` (0 `theme`) | S | 6 packages | components |
+| 58 | OPEN 2026-11-05. `sensitive` prop (session-replay redaction markers) | 0 hits in packages/input/src, packages/field/src | S | field, input | components |
+| 59 | OPEN 2026-11-05. Encoded icon theme `"base"\|"night"` vs `ThemeType` `"day"\|"night"`; accept `day`, keep `base` as alias | packages/icon/src/svg/services/getIconEncoded.d.ts:14 | S | icons | components |
+| 60 | OPEN 2026-11-05. flex calls `getConstant` (no registry validation) instead of `getToken` | packages/flex/src/services/styleFlex.ts:1,62 | S | flex | components |
+| 61 | OPEN 2026-11-05. button builds `--np--button--height` var string by hand | packages/button/src/components/Button/Button.styles.ts:102,107,127 | S | button | components |
+| 62 | OPEN 2026-11-05. Line `rimColor` literal white, no night value | packages/styles/src/tokens/components/line.json:14 | S | styles | components |
+| 63 | OPEN 2026-11-05. No `@media print` theme handling | 0 hits in styles/src, styles/static, styles/scripts | S | styles | components |
+| 64 | OPEN 2026-11-05. Ink `letterSpacing` / `maxWidth` tokens have no prop or reader | packages/styles/src/tokens/components/ink.json:29,47 | S | styles, ink | components |
+| 65 | OPEN 2026-11-05. Unused tokens: `icon.viewBox`, `image.objectFit`, `code.fontWeight` | packages/icon/.../Icon.tsx:38; Illustration.tsx:28; packages/styles/src/tokens/components/image.json:37; code.json:27 | S | styles, icon, image, code | components |
+| 66 | OPEN 2026-11-05. Input types used bare (`SizeType`, `BorderWidthType`, `ThemeType`) | packages/input/src/components/Input/Input.types.ts:600,612,615 | S | input | components |
+| 67 | OPEN 2026-11-05. Form root is raw flex CSS, not Flex; no gap | packages/form/src/components/Form/Form.styles.ts:13-15 | S | form | components |
+| 68 | OPEN 2026-11-05. List `variant="plain"` (bullets/checklist) | packages/list/src/components/List/List.types.ts | S | list | components |
+| 69 | OPEN 2026-11-05. Popover offset doc says aliases are not resolved; `getToken` now follows them | packages/popover/src/utilities/getPopoverOffset.ts:16-19 vs packages/styles/src/services/getToken.ts:231-272 | S | popover | components |
+| 70 | OPEN 2026-11-05. Icon: 4 duplicated `IconWrapperStyled` render branches | packages/icon/src/components/Icon/Icon.tsx | S | icon | components |
+| 71 | OPEN 2026-11-05. `e` → `event` param naming | packages/lightbox/.../LightboxCaption.tsx:14; Lightbox.tsx:34,62; packages/styles/.../ThemeContext.tsx:68 | S | lightbox, styles | components |
+| 72 | OPEN 2026-11-05. flex README documents the deprecated object `spacing` API (~120 lines; wrong examples, token waste) | packages/flex/README.md:115-120,140-236 | S | flex | manifest |
+| 73 | OPEN 2026-11-05. Catalog regenerates by hand and goes stale; run the generator on build | manifest/agents/scripts/generate-catalog.mjs (not in any build script) | S | manifest | manifest |
+| 74 | PARTLY DONE 2026-11-05: token unions resolve (2026-10-27); FlexSpacingType (5×), AlignType, BoxShadowType still unresolved in catalog.json. Catalog leaves imported type aliases unresolved (`SizeType`, `FlexSpacingType`; 11 strings) | manifest/agents/catalog.json | M | manifest | manifest |
+| 75 | OPEN 2026-11-05. icons README: `getIcon("check", {color,size})` passes options in the `variant` slot; no encoded/base64 docs | packages/icon/svg/README.md:14 vs packages/icon/src/svg/services/getIcon.d.ts:25 | S | icons | manifest |
+| 76 | PARTLY DONE 2026-11-05: button README fixed (13cd23f3); code, flex, image, ink, lightbox, slider still link withbreakpoints--docs. 7 READMEs call breakpoints an "array" and link a non-existent `withbreakpoints--docs` page | packages/{code,button,flex,image,ink,lightbox,slider}/README.md | S | READMEs | manifest |
+| 77 | OPEN 2026-11-05. README stubs / missing: ink 5 lines, image 3, lightbox 7, code 7; none for input, head, image-vendor. Make each a minimal pointer to Playground + catalog | those README.md files | S | READMEs | manifest |
+| 78 | OPEN 2026-11-05. README `## License` missing (24 packages); `## Install` vs `## Installation` (15); flex title | e.g. packages/checkbox/README.md; packages/flex/README.md:1 | S | READMEs | manifest |
 | 79 | DONE 2026-10-27 (manifest refactor). Dead refs to `manifest/.nice/reports/*` (never existed) | manifest/README.md:155; build/symlinks.md:35,96; topics/build-config.md:272; edit/component.md:729 | S | manifest | manifest |
 | 80 | DONE 2026-10-27 (reports → backlog rows + ~/nice/.nice/research). Reports convention still routes reports to `manifest/.reports/` (folder deleted) | manifest/README.md:222-250; read/audit.md:31,79; .gitignore:4 | S | manifest | manifest |
 
@@ -105,65 +107,87 @@ Phases, in order: pre-monorepo → monorepo → storybook-rework → components 
 - **Spinner SSR:** @niceprototypes/icon and styles dists are `"type":"module"` with a CJS `main` and a `.css` import; Node imports need esbuild `--main-fields=module,main --loader:.css=empty`.
 - **Timer a11y/timing:** `role="timer"` (aria-live off) + a separate polite live region for milestones; WCAG 2.2.1 requires pause/extend; derive remaining time from `endAt`, never decrement; recalculate on `visibilitychange`; colour stops as one `[{at,color}]` array.
 - **Proton SDK:** API is CORS-blocked; needs Node with `--conditions=browser`, `@protontech/crypto/polyfill`, `x-pm-appversion: web-drive@5.0.0`. CAPTCHA/HV (9001) blocks headless login.
-| 81 | Rename the carousel to `Carousel` (new package `@niceprototypes/carousel`); `@niceprototypes/slider` becomes the range input. Update its Storybook pages and the cli test fixture | slider, apps/storybook/stories/Components/Slider, packages/cli/test/develop-parser.test.js | M | slider, storybook | components |
-| 82 | Part (a) DONE 2026-10-29: `thumbnail?: string | false` (blurred SVG background on the same element, cleared on load), `loading`/`fetchPriority` passthrough, `decoding="async"`, `nicely thumbnails <dir>`; audit count pending survey 005 Q4. Progressive image loading: Image gets a `thumbnail` prop (shown first, full image loads after); count images that render without a thumbnail so a UX can be audited. Owner direction 2026-10-27, leaning toward a prop over a dedicated component. Playground Controls plus a UI test | packages/image (nice-ux) | M | image | components |
+| 81 | OPEN 2026-11-05. Rename the carousel to `Carousel` (new package `@niceprototypes/carousel`); `@niceprototypes/slider` becomes the range input. Update its Storybook pages and the cli test fixture | slider, apps/storybook/stories/Components/Slider, packages/cli/test/develop-parser.test.js | M | slider, storybook | components |
+| 82 | PARTLY DONE 2026-11-05: part (a) DONE 2026-10-29 (aebe8ae9); audit count remains (design only: ~/nice/.nice/research/2026-10-29/image-audit.md). Progressive image loading: Image gets a `thumbnail` prop (shown first, full image loads after); count images that render without a thumbnail so a UX can be audited. Owner direction 2026-10-27, leaning toward a prop over a dedicated component. Playground Controls plus a UI test | packages/image (nice-ux) | M | image | components |
 | 83 | DONE 2026-10-28 (no `as` needed: all 28 default-element Ink uses are flex items, and a probe build with `as="p"` is pixel-identical on every screen; ~/nice/.nice/research/2026-10-28/monorepo-phase3.md). Ink renders a span by default: check about 30 Ink uses in browser/chrome flex layouts on screen; add `as` where the layout breaks | browser/chrome | S | browser | after-monorepo |
-| 84 | Audit layer: every Nice component that renders a covered element (Image first: missing thumbnail, missing alt) reports audit data in one consistent way; consumers (website first) replace raw <img> and other covered raw elements; a lint rule flags raw elements. Owner second-tier priority 2026-10-27 | packages/image, packages/* (nice-ux); website | L | image, website | components |
-| 85 | Golden KPI benchmarks: paired agent tasks (e.g. media metadata audit, fix all missing alt text) run on a control site and on a Nice site; record measured tokens and wall-clock time; results feed the token-spend pitch. Owned by the UI-testing agents. Owner direction 2026-10-27 | nice-ux/benchmarks (new), website | L | testing | storybook-rework |
-| 86 | Research: locating component instances (source file:line from a rendered instance or from props), the feasibility and cost for agents. Inputs: React 19 removed _debugSource; prior art for humans (click-to-component, LocatorJS, react-dev-inspector). Decide before rows 84–85 build on it | notes | M | research | components |
+| 84 | OPEN 2026-11-05. Audit layer: every Nice component that renders a covered element (Image first: missing thumbnail, missing alt) reports audit data in one consistent way; consumers (website first) replace raw <img> and other covered raw elements; a lint rule flags raw elements. Owner second-tier priority 2026-10-27 | packages/image, packages/* (nice-ux); website | L | image, website | components |
+| 85 | OPEN 2026-11-05. Golden KPI benchmarks: paired agent tasks (e.g. media metadata audit, fix all missing alt text) run on a control site and on a Nice site; record measured tokens and wall-clock time; results feed the token-spend pitch. Owned by the UI-testing agents. Owner direction 2026-10-27 | nice-ux/benchmarks (new), website | L | testing | storybook-rework |
+| 86 | DONE 2026-10-27 (no commit; ~/nice/.nice/research/2026-10-27/instance-location.md: feasible via react-scanner + code-inspector-plugin). Research: locating component instances (source file:line from a rendered instance or from props), the feasibility and cost for agents. Inputs: React 19 removed _debugSource; prior art for humans (click-to-component, LocatorJS, react-dev-inspector). Decide before rows 84–85 build on it | notes | M | research | components |
 | 87 | DONE 2026-10-27 (ceb2ebc7). `@niceprototypes/ux` re-exports no components: `export *` skips default exports, and component packages export their component only as `default`, so `import { Button } from "@niceprototypes/ux"` fails | packages/ux/src/index.ts; packages/button/src/index.ts:6; packages/ux/dist/index.d.ts | S | ux | monorepo |
 | 88 | DONE 2026-10-29 (7d1204db). Radio + RadioGroup (reuse Checkbox tokens and focus ring; works in Field/Fieldset) | gaps §1 #1; no package | S | new: packages/radio | components |
-| 89 | Menu set: Menu, MenuItem, MenuGroup, MenuSeparator, MenuButton (menu roles, arrow keys, typeahead, close on select; on Popover + List) | gaps §1 #2; no package | M | new: packages/menu | components |
-| 90 | Toast set: Toast, Toaster region, `toast()` service, z-index layer, `aria-live` | gaps §1 #4; no package | M | new: packages/toast | components |
-| 91 | Alert / Banner inline message on the status tokens | gaps §1 #5; no package | S | new: packages/alert | components |
-| 92 | ProgressBar + ProgressCircle/Spinner (`role=progressbar`) + Button `loading` | gaps §1 #6, §2 Button; spinner only via Icon `animation="spin"` | S | new: packages/progress, button | components |
-| 93 | Badge (count/status) + Tag (removable, selectable) + TagGroup | gaps §1 #7; no package | S | new: packages/badge | components |
+| 89 | OPEN 2026-11-05. Menu set: Menu, MenuItem, MenuGroup, MenuSeparator, MenuButton (menu roles, arrow keys, typeahead, close on select; on Popover + List) | gaps §1 #2; no package | M | new: packages/menu | components |
+| 90 | OPEN 2026-11-05. Toast set: Toast, Toaster region, `toast()` service, z-index layer, `aria-live` | gaps §1 #4; no package | M | new: packages/toast | components |
+| 91 | OPEN 2026-11-05. Alert / Banner inline message on the status tokens | gaps §1 #5; no package | S | new: packages/alert | components |
+| 92 | OPEN 2026-11-05. ProgressBar + ProgressCircle/Spinner (`role=progressbar`) + Button `loading` | gaps §1 #6, §2 Button; spinner only via Icon `animation="spin"` | S | new: packages/progress, button | components |
+| 93 | OPEN 2026-11-05. Badge (count/status) + Tag (removable, selectable) + TagGroup | gaps §1 #7; no package | S | new: packages/badge | components |
 | 94 | DONE 2026-10-29 (22473aa2; elevation uses box-shadow tokens until row 112). Card + header/body/footer slots + clickable/selected variant (Tile has no border, radius, shadow or selected state). Needs row 112 | gaps §1 #8, §2 Tile, §4b | S–M | new: packages/card | components |
 | 95 | DONE 2026-10-29 (77364cad). Grid layout primitive (`columns`, `minChildWidth`, span props) on Flex spacing services; Flex stays the default | gaps §1 #9, §2 Flex, §4a | S–M | new: packages/grid, flex | components |
-| 96 | Table set: semantic Table, sort header, row selection (needs row 115), empty state (row 106), Pagination (row 107) | gaps §1 #10; no package | L | new: packages/table | components |
-| 97 | Data grid: editable, virtualised grid beyond Table (survey 001) | gaps §5; no package | L | new: packages/data-grid | components |
-| 98 | Navigation set: NavList + NavItem + groups, AppShell/PageLayout (header, sidebar, main), Drawer on phone (row 99) | gaps §1 #11; List `selected` covers rows only | M–L | new: packages/navigation | components |
-| 99 | Drawer / Sheet (side and bottom on the Dialog core) + Dialog `size` and full screen on phone | gaps §1 #12, §2 Dialog | M | new: packages/drawer, dialog | components |
-| 100 | Disclosure/Collapsible + Accordion group | gaps §1 #13; no package | S | new: packages/accordion | components |
-| 101 | Avatar (initials, fallback, size tokens) + AvatarGroup | gaps §1 #14; no package | S | new: packages/avatar | components |
-| 102 | Skeleton (box, text, circle) | gaps §1 #15; no package | S | new: packages/skeleton | components |
-| 103 | SegmentedControl/ToggleGroup + ButtonGroup (Tabs `pill` carries tabpanel semantics) | gaps §1 #16; no package | S | new: packages/segmented-control | components |
-| 104 | Breadcrumb + BreadcrumbItem | gaps §1 #18; no package | S | new: packages/breadcrumb | components |
-| 105 | Link: new component or documented `Button href inlined` alias (owner decision) | gaps §1 #19 | S | new: packages/link or button | components |
-| 106 | EmptyState (Illustration + title + description + actions) | gaps §1 #20; no package | S | new: packages/empty-state | components |
-| 107 | Pagination (+ page-size Select) | gaps §1 #21; no package | S | new: packages/pagination | components |
-| 108 | Stepper + Step | gaps §1 #22; no package | M | new: packages/stepper | components |
-| 109 | Utilities: VisuallyHidden, Portal, Show/Hide at breakpoint (on `useBreakpoint`), container queries | gaps §1 #23, §3 Breakpoints | S | styles | components |
-| 110 | Charts set (survey 001): chart components for dashboards, on the chart colour palettes | gaps §5; no package | L | new: packages/chart | components |
-| 111 | AI/chat set (survey 001): Message, Bubble, Attachment, PromptInput, AI label. Icons in row 18 | gaps §5; no package | L | new: packages/chat | components |
-| 112 | Semantic elevation scale (surface + shadow pairs: sunken, raised, overlay) | gaps §3; packages/styles/src/tokens (boxShadow base/large only) | S | styles | components |
-| 113 | Global `focusRing` token + shared focus style service (Popover, List, Select, Calendar, Tile have none or their own) | gaps §3 | S | styles | components |
-| 114 | Semantic z-index steps (dropdown, sticky, modal, toast, tooltip) | gaps §3; zIndex base/low/medium/high/higher | S | styles | components |
-| 115 | Checkbox `indeterminate` | gaps §2; 0 hits in packages/checkbox/src | S | checkbox | components |
+| 96 | OPEN 2026-11-05. Table set: semantic Table, sort header, row selection (needs row 115), empty state (row 106), Pagination (row 107) | gaps §1 #10; no package | L | new: packages/table | components |
+| 97 | OPEN 2026-11-05. Data grid: editable, virtualised grid beyond Table (survey 001) | gaps §5; no package | L | new: packages/data-grid | components |
+| 98 | PARTLY DONE 2026-11-05: App shell (391949ad, header 1ee590fd, drawer 5e2f8232) + Tree nav (8deec0e6); standalone NavList/NavItem and PageLayout outside App remain. Navigation set: NavList + NavItem + groups, AppShell/PageLayout (header, sidebar, main), Drawer on phone (row 99) | gaps §1 #11; List `selected` covers rows only | M–L | new: packages/navigation | components |
+| 99 | PARTLY DONE 2026-11-05: App sidebar drawer only (b2ec456c); no Drawer/Sheet component, no Dialog `size` or phone full screen. Drawer / Sheet (side and bottom on the Dialog core) + Dialog `size` and full screen on phone | gaps §1 #12, §2 Dialog | M | new: packages/drawer, dialog | components |
+| 100 | OPEN 2026-11-05. Disclosure/Collapsible + Accordion group | gaps §1 #13; no package | S | new: packages/accordion | components |
+| 101 | OPEN 2026-11-05. Avatar (initials, fallback, size tokens) + AvatarGroup | gaps §1 #14; no package | S | new: packages/avatar | components |
+| 102 | OPEN 2026-11-05. Skeleton (box, text, circle) | gaps §1 #15; no package | S | new: packages/skeleton | components |
+| 103 | OPEN 2026-11-05. SegmentedControl/ToggleGroup + ButtonGroup (Tabs `pill` carries tabpanel semantics) | gaps §1 #16; no package | S | new: packages/segmented-control | components |
+| 104 | OPEN 2026-11-05. Breadcrumb + BreadcrumbItem | gaps §1 #18; no package | S | new: packages/breadcrumb | components |
+| 105 | OPEN 2026-11-05. Link: new component or documented `Button href inlined` alias (owner decision) | gaps §1 #19 | S | new: packages/link or button | components |
+| 106 | OPEN 2026-11-05. EmptyState (Illustration + title + description + actions) | gaps §1 #20; no package | S | new: packages/empty-state | components |
+| 107 | OPEN 2026-11-05. Pagination (+ page-size Select) | gaps §1 #21; no package | S | new: packages/pagination | components |
+| 108 | OPEN 2026-11-05. Stepper + Step | gaps §1 #22; no package | M | new: packages/stepper | components |
+| 109 | OPEN 2026-11-05. Utilities: VisuallyHidden, Portal, Show/Hide at breakpoint (on `useBreakpoint`), container queries | gaps §1 #23, §3 Breakpoints | S | styles | components |
+| 110 | OPEN 2026-11-05. Charts set (survey 001): chart components for dashboards, on the chart colour palettes | gaps §5; no package | L | new: packages/chart | components |
+| 111 | PARTLY DONE 2026-11-05: @niceprototypes/chat (35472078, 04b4ebdc) ships ChatLog, ChatMessage, ChatComposer, ChatSuggestions, ChatCopyAction; Attachment and AI label remain. AI/chat set (survey 001): Message, Bubble, Attachment, PromptInput, AI label. Icons in row 18 | gaps §5; no package | L | new: packages/chat | components |
+| 112 | OPEN 2026-11-05. Semantic elevation scale (surface + shadow pairs: sunken, raised, overlay) | gaps §3; packages/styles/src/tokens (boxShadow base/large only) | S | styles | components |
+| 113 | PARTLY DONE 2026-11-05: per-component focusRing tokens (10 components); no global token or shared focus-style service. Global `focusRing` token + shared focus style service (Popover, List, Select, Calendar, Tile have none or their own) | gaps §3 | S | styles | components |
+| 114 | OPEN 2026-11-05. Semantic z-index steps (dropdown, sticky, modal, toast, tooltip) | gaps §3; zIndex base/low/medium/high/higher | S | styles | components |
+| 115 | OPEN 2026-11-05. Checkbox `indeterminate` | gaps §2; 0 hits in packages/checkbox/src | S | checkbox | components |
 | 116 | DONE 2026-10-31 (cba4f064; new package @niceprototypes/listbox, aria-activedescendant instead of roving focus). List interactive listbox semantics (roving focus) on `selected`/`active` items; base for rows 89, 98 | gaps §2 | M | list | components |
-| 117 | Popover / Tooltip collision flip and shift to stay in the viewport | gaps §2; packages/popover computeAnchorPosition (low-confidence check) | S–M | popover, tooltip | components |
-| 118 | Select `multiple` + rendered option groups (optgroup is flattened) | gaps §2; packages/select/src/components/Select/Select.types.ts | S–M | select | components |
-| 119 | Tabs vertical orientation + overflow scrolling | gaps §2 | S | tabs | components |
-| 120 | Calendar range selection + time picker (DateField range is row 43) | gaps §2 | M | calendar | components |
-| 121 | Input clear button, character count, password reveal (number stepper is row 41) | gaps §2 | S | input | components |
-| 122 | Image error fallback (loading placeholder is row 82) | gaps §2 | S | image | components |
-| 123 | Flex Stack shorthand (vertical by default; optional) | gaps §2 | S | flex | components |
-| 124 | Motion enter/exit presets + Presence helper (reduced motion is row 22) | gaps §3 | S–M | styles | components |
-| 125 | Headless hooks as services: `useControllableState`, `useFocusTrap`, `useClickOutside`, `useId`/`useDisclosure` (internal to Dialog, Popover) | gaps §3 | S–M | styles, dialog, popover | components |
-| 126 | Global density / scale switch | gaps §3; per-component `size` only | M | styles | components |
-| 127 | RTL logical properties (74 `left:`, 27 `right:`) + number, date and relative-time formatter services | gaps §3 | M | styles + packages | components |
-| 128 | High-contrast theme + accent/seed palette generation (forced colors is row 51) | gaps §3 | M | styles | components |
-| 129 | Code `margin` prop has no effect: `$margin` reaches CodeDiv but no style rule reads it; the Playground control changes nothing (no play test until fixed) | packages/code/src/components/Code/Code.styles.ts:14; packages/code/src/components/Code/Code.tsx:37 | S | code | storybook-rework |
-| 130 | Button icon size and stroke are not props: ButtonIcon hard-codes `size="base" color="base"`, so "stroke-scaled icon on filled error Button" has no control | packages/button/src/components/ButtonIcon/ButtonIcon.tsx:15 | S | button | storybook-rework |
-| 131 | Code language options are not exported; Code.stories.tsx hand-copies the highlighter's fence list. Export one `codeLanguages` constant (ALIASES / LANG_LABELS keys) for the story select | packages/code/src/utilities/highlightCode.ts; packages/code/src/components/CodeLabel/CodeLabel.constants.ts:6; apps/storybook/stories/Components/Code/Code.stories.tsx:12 | S | code, storybook | storybook-rework |
-| 132 | Icon `illustrationNames`, `illustrationVariants`, `iconVariants` not exported from root; stories cannot build selects from them | packages/icon/src/index.ts:13 | S | icon | storybook-rework |
-| 133 | Line `radius="element"` reads the Theme wrapper (`display: contents`) and gets radius 0; Element radius has no control | packages/line/src/components/Line/Line.tsx:41,55; packages/line/src/components/Line/Line.types.ts:31 | S | line | storybook-rework |
-| 134 | Tooltip has no `open` / `theme` prop; Playground cannot show it open or themed | packages/tooltip/src/components/Tooltip/Tooltip.types.ts:64 | S | tooltip | storybook-rework |
-| 135 | withBreakpoints `breakpoints` prop is not in Controls for any component | packages/styles/src/react/services/withBreakpoints | S | styles, storybook | storybook-rework |
-| 136 | DateField default `status="base"` hides the Field invalid error; DateField accepts no-op Input props | packages/calendar/src/components/DateField/DateField.tsx:49; packages/calendar/src/components/DateField/DateField.types.ts:78 | S | calendar | storybook-rework |
-| 137 | Checkbox / Toggle hover state not controllable; Icon output has no name attribute, so icons are untestable | packages/checkbox; packages/toggle; packages/icon | S | checkbox, toggle, icon | storybook-rework |
-| 138 | Lightbox has no `open` / `onOpenChange` (uncontrolled only) | packages/lightbox/src/components/Lightbox/Lightbox.tsx:17 | S | lightbox | storybook-rework |
-| 139 | Scroll: SectionLinks `$isActive` sets no style; `unobserve` without `disconnect`; StickySection `id` required but missing from catalog; Sticky / FadeOnScroll literal transition, z-index, threshold | packages/scroll/src/components/SectionLinks/SectionLinks.styles.ts; packages/scroll/src/components/SectionLinks/SectionLinks.tsx:57; packages/scroll/src/components/Sticky/Sticky.styles.ts:5-16; packages/scroll/src/components/FadeOnScroll/FadeOnScroll.styles.ts | M | scroll | storybook-rework |
-| 140 | Tile max/min width/height are raw CSS strings, not tokens | packages/tile/src/components/Tile/Tile.types.ts | S | tile | storybook-rework |
-| 141 | Slider renders 0px tall without a fixed-height parent | packages/slider/src/components/Slider/Slider.tsx | S | slider | storybook-rework |
-| 142 | Vitest: `updateArgs` does not re-render, so stories keep local state copies | apps/storybook/vitest.config.ts | S | storybook | storybook-rework |
+| 117 | OPEN 2026-11-05. Popover / Tooltip collision flip and shift to stay in the viewport | gaps §2; packages/popover computeAnchorPosition (low-confidence check) | S–M | popover, tooltip | components |
+| 118 | PARTLY DONE 2026-11-05: option groups DONE 2026-10-31 (5f3da2f8); `multiple` remains (Select.types.ts:209). Select `multiple` + rendered option groups (optgroup is flattened) | gaps §2; packages/select/src/components/Select/Select.types.ts | S–M | select | components |
+| 119 | OPEN 2026-11-05. Tabs vertical orientation + overflow scrolling | gaps §2 | S | tabs | components |
+| 120 | OPEN 2026-11-05. Calendar range selection + time picker (DateField range is row 43) | gaps §2 | M | calendar | components |
+| 121 | OPEN 2026-11-05. Clear button exists only in the Input Playground (df59ebb1). Input clear button, character count, password reveal (number stepper is row 41) | gaps §2 | S | input | components |
+| 122 | OPEN 2026-11-05. Image error fallback (loading placeholder is row 82) | gaps §2 | S | image | components |
+| 123 | OPEN 2026-11-05. Flex Stack shorthand (vertical by default; optional) | gaps §2 | S | flex | components |
+| 124 | OPEN 2026-11-05. Motion enter/exit presets + Presence helper (reduced motion is row 22) | gaps §3 | S–M | styles | components |
+| 125 | OPEN 2026-11-05. Headless hooks as services: `useControllableState`, `useFocusTrap`, `useClickOutside`, `useId`/`useDisclosure` (internal to Dialog, Popover) | gaps §3 | S–M | styles, dialog, popover | components |
+| 126 | OPEN 2026-11-05. Global density / scale switch | gaps §3; per-component `size` only | M | styles | components |
+| 127 | OPEN 2026-11-05. RTL logical properties (74 `left:`, 27 `right:`) + number, date and relative-time formatter services | gaps §3 | M | styles + packages | components |
+| 128 | OPEN 2026-11-05. High-contrast theme + accent/seed palette generation (forced colors is row 51) | gaps §3 | M | styles | components |
+| 129 | OPEN 2026-11-05. Code `margin` prop has no effect: `$margin` reaches CodeDiv but no style rule reads it; the Playground control changes nothing (no play test until fixed) | packages/code/src/components/Code/Code.styles.ts:14; packages/code/src/components/Code/Code.tsx:37 | S | code | storybook-rework |
+| 130 | OPEN 2026-11-05. Button icon size and stroke are not props: ButtonIcon hard-codes `size="base" color="base"`, so "stroke-scaled icon on filled error Button" has no control | packages/button/src/components/ButtonIcon/ButtonIcon.tsx:15 | S | button | storybook-rework |
+| 131 | OPEN 2026-11-05. Code language options are not exported; Code.stories.tsx hand-copies the highlighter's fence list. Export one `codeLanguages` constant (ALIASES / LANG_LABELS keys) for the story select | packages/code/src/utilities/highlightCode.ts; packages/code/src/components/CodeLabel/CodeLabel.constants.ts:6; apps/storybook/stories/Components/Code/Code.stories.tsx:12 | S | code, storybook | storybook-rework |
+| 132 | OPEN 2026-11-05. Icon `illustrationNames`, `illustrationVariants`, `iconVariants` not exported from root; stories cannot build selects from them | packages/icon/src/index.ts:13 | S | icon | storybook-rework |
+| 133 | OPEN 2026-11-05. Line `radius="element"` reads the Theme wrapper (`display: contents`) and gets radius 0; Element radius has no control | packages/line/src/components/Line/Line.tsx:41,55; packages/line/src/components/Line/Line.types.ts:31 | S | line | storybook-rework |
+| 134 | OPEN 2026-11-05. Tooltip has no `open` / `theme` prop; Playground cannot show it open or themed | packages/tooltip/src/components/Tooltip/Tooltip.types.ts:64 | S | tooltip | storybook-rework |
+| 135 | PARTLY DONE 2026-11-05: `breakpoints` control on Flex and Illustration (da3891ab); no other story has it. withBreakpoints `breakpoints` prop is not in Controls for any component | packages/styles/src/react/services/withBreakpoints | S | styles, storybook | storybook-rework |
+| 136 | OPEN 2026-11-05. DateField default `status="base"` hides the Field invalid error; DateField accepts no-op Input props | packages/calendar/src/components/DateField/DateField.tsx:49; packages/calendar/src/components/DateField/DateField.types.ts:78 | S | calendar | storybook-rework |
+| 137 | OPEN 2026-11-05. Toggle hover tokens landed (6442fea1); hover prop and Icon name attribute still missing. Checkbox / Toggle hover state not controllable; Icon output has no name attribute, so icons are untestable | packages/checkbox; packages/toggle; packages/icon | S | checkbox, toggle, icon | storybook-rework |
+| 138 | OPEN 2026-11-05. Lightbox has no `open` / `onOpenChange` (uncontrolled only) | packages/lightbox/src/components/Lightbox/Lightbox.tsx:17 | S | lightbox | storybook-rework |
+| 139 | PARTLY DONE 2026-11-05: Sticky/FadeOnScroll folded into Scroll with tokens (eace396d); `$isActive` style, `disconnect`, catalog StickySection `id` remain. Scroll: SectionLinks `$isActive` sets no style; `unobserve` without `disconnect`; StickySection `id` required but missing from catalog; Sticky / FadeOnScroll literal transition, z-index, threshold | packages/scroll/src/components/SectionLinks/SectionLinks.styles.ts; packages/scroll/src/components/SectionLinks/SectionLinks.tsx:57; packages/scroll/src/components/Sticky/Sticky.styles.ts:5-16; packages/scroll/src/components/FadeOnScroll/FadeOnScroll.styles.ts | M | scroll | storybook-rework |
+| 140 | OPEN 2026-11-05. Tile max/min width/height are raw CSS strings, not tokens | packages/tile/src/components/Tile/Tile.types.ts | S | tile | storybook-rework |
+| 141 | OPEN 2026-11-05. Slider renders 0px tall without a fixed-height parent | packages/slider/src/components/Slider/Slider.tsx | S | slider | storybook-rework |
+| 142 | OPEN 2026-11-05. Vitest: `updateArgs` does not re-render, so stories keep local state copies | apps/storybook/vitest.config.ts | S | storybook | storybook-rework |
+
+## Next waves (2026-11-05)
+
+Ranked by value to the animation-studio launch (the studio imports styles, icon, app, ink, flex, button, input, chat, tree, toggle, select, markdown), then by value to agents. Each unit owns disjoint packages; component token JSON in packages/styles goes with its component's unit.
+
+**Wave 1 (studio-facing)**
+- U1 icon, icon-vendor: 20, 21, 14 (docs Icons.mdx import), 59, 70, 132, 137 (Icon name attribute). Bundle size and Node-safe root import for the studio's 13 icon imports.
+- U2 ink, button: 10 (sb-unstyled out of production markup; Storybook scoping), 40, 64, 92 (Button `loading` only), 130, 61, 16 (button part).
+- U3 input: 121 (password reveal, clear, count; the studio's API-key field), 66, 16 (input part).
+- U4 popover, tooltip: 117, 69, 16 (popover part), 24, 134, 6.
+
+**Wave 2 (agents and foundation)**
+- U5 styles tokens and reset: 112, 113, 114, 56, 22, 62, 63.
+- U6 manifest and READMEs: 73, 74, 72, 75, 76, 77, 78.
+- U7 code, line, tile, calendar: 129, 131, 133, 140, 136, 54, 55.
+- U8 scroll, lightbox, checkbox: 139 remainder, 138, 71 (lightbox part), 115, 37 (checkbox part).
+
+**Owner decisions (kept out of the waves)**
+- Publish go-ahead: 2, then 8.
+- Icon choices: 18 (and studio G14 help, G25 cursors).
+- Breaking API: 17, 48, 49 (S003 Q2); 81 (slider → carousel); 38 Button tone (S003 Q4, studio G15 `status="link"`); 23 cascade layers (changes override order for every consumer).
+- New categories: 41-47 (S003 Q3); 89-91, 92 (progress package), 93, 96-110 incl. 105 Link; 111 remainder (Attachment, AI label); 123-128.
