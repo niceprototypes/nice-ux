@@ -43,12 +43,13 @@ import Tabs from "@niceprototypes/tabs"
 | `defaultSelected` | `string` | first enabled tab | Selected tab id at first (uncontrolled) |
 | `onSelect` | `(id: string, event: MouseEvent \| KeyboardEvent) => void` | | Id first, then the click or key event |
 | `end` | `ReactNode` | | Row content after the last tab; not a tab |
-| `children` | `ReactNode` | | The selected tab's panel (`role="tabpanel"`) |
+| `children` | `ReactNode` | | The selected tab's panel (`role="tabpanel"`, `tabIndex={0}`: Tab moves from the selected tab to the panel) |
 | `size` | `smaller`, `small`, `base`, `large`, `larger` | `base` | Tab padding, gap and font size |
 | `justifyContent` | `flex-start`, `flex-end`, `center`, `space-between`, `space-around`, `space-evenly` | | Places the tab list and `end` along the row (the @niceprototypes/flex values); `space-between` puts `end` at the row's end |
 | `gap` | `none`, `smaller`, `small`, `base`, `large`, `larger` | the size's `tabs.gap` | Gap between tabs and between the tab list and `end`, from the `gap` core token |
 | `variant` | `underline`, `pill` | `underline` | `underline`: row bottom border and selected underline. `pill`: a rounded border per tab (`tabs.pill.*`), no row border or underline |
 | `aria-label` | `string` | | Accessible name of the tab list |
+| `ref` | `Ref<HTMLDivElement>` | | Ref to the root element |
 | `className` | `string` | | Applied to the root element |
 | `theme` | `ThemeType` | | Pins token resolution to a theme |
 

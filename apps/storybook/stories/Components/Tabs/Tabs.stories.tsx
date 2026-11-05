@@ -159,6 +159,8 @@ export const Playground: Story = {
     const panel = within(canvasElement).getByRole("tabpanel")
     await expect(panel).toHaveTextContent("Panel")
     await expect(panel).toHaveAttribute("aria-labelledby", tab(canvasElement, "Page 1").id)
+    // The panel is in the tab order after the selected tab.
+    await expect(panel).toHaveAttribute("tabindex", "0")
 
     // Click: onSelect fires and useArgs writes the id back to `selected`.
     await userEvent.click(tab(canvasElement, "Page 2"))

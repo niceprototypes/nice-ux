@@ -135,6 +135,13 @@ export type TabsVariantType = "underline" | "pill"
 export type TabsAriaLabelType = string
 
 /**
+ * TabsRefType
+ *
+ * Ref to the root element (React 19 ref-as-prop).
+ */
+export type TabsRefType = React.Ref<HTMLDivElement>
+
+/**
  * TabsClassNameType
  *
  * CSS class name applied to the root element.
@@ -178,6 +185,8 @@ export interface TabsProps {
   variant?: TabsVariantType
   /** Accessible name of the tab list */
   "aria-label"?: TabsAriaLabelType
+  /** Ref to the root element */
+  ref?: TabsRefType
   /** CSS class name applied to the root element */
   className?: TabsClassNameType
   /** Pin token resolution to a specific theme */
@@ -201,6 +210,7 @@ namespace TabsTypes {
   export type Gap = TabsGapType
   export type Variant = TabsVariantType
   export type AriaLabel = TabsAriaLabelType
+  export type Ref = TabsRefType
   export type ClassName = TabsClassNameType
   export type Theme = TabsThemeType
   export type Props = TabsProps

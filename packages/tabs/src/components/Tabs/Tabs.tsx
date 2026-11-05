@@ -12,7 +12,8 @@ const NAVIGATION_KEYS: string[] = ["ArrowRight", "ArrowLeft", "Home", "End"] sat
  * an input: tabs are not buttons, and keys pressed inside a label's own control stay with
  * that control.
  *
- * The selected tab is the only one in the tab order (roving tabindex). On a focused tab,
+ * The selected tab is the only one in the tab order (roving tabindex); the panel follows it
+ * in the tab order (`tabIndex={0}`). On a focused tab,
  * ArrowLeft / ArrowRight move to and select the previous / next enabled tab, wrapping; Home
  * and End go to the first and last; Enter and Space select.
  *
@@ -42,6 +43,7 @@ const Tabs: React.FC<TabsProps> = ({
   gap,
   variant = "underline",
   "aria-label": ariaLabel,
+  ref,
   className,
   theme,
 }) => {
@@ -81,7 +83,7 @@ const Tabs: React.FC<TabsProps> = ({
   }
 
   const element = (
-    <div className={className}>
+    <div ref={ref} className={className}>
       <StyledRow $size={size} $gap={gap} $justifyContent={justifyContent} $variant={variant}>
         <StyledTabList role="tablist" aria-label={ariaLabel} $size={size} $gap={gap}>
           {items.map((item, index) => {
@@ -117,7 +119,7 @@ const Tabs: React.FC<TabsProps> = ({
         {end}
       </StyledRow>
       {selectedId !== undefined && (
-        <div role="tabpanel" id={panelId} aria-labelledby={tabId(selectedId)}>
+        <div role="tabpanel" id={panelId} aria-labelledby={tabId(selectedId)} tabIndex={0}>
           {children}
         </div>
       )}

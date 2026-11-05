@@ -64,6 +64,21 @@ describe("Tabs", () => {
     expect(tabs[0]).toHaveAttribute("aria-controls", panel.id)
   })
 
+  it("puts the panel in the tab order after the selected tab", async () => {
+    const user = userEvent.setup()
+    render(<Tabs items={ITEMS}>Panel</Tabs>)
+    await user.tab()
+    expect(screen.getByRole("tab", { name: "One" })).toHaveFocus()
+    await user.tab()
+    expect(screen.getByRole("tabpanel")).toHaveFocus()
+  })
+
+  it("forwards ref to the root element", () => {
+    const ref = React.createRef<HTMLDivElement>()
+    const { container } = render(<Tabs items={ITEMS} ref={ref} />)
+    expect(ref.current).toBe(container.firstChild)
+  })
+
   it("keeps only the selected tab in the tab order", () => {
     render(<Tabs items={ITEMS} defaultSelected="two" />)
     expect(screen.getAllByRole("tab").map(tab => tab.tabIndex)).toEqual([-1, 0, -1])
