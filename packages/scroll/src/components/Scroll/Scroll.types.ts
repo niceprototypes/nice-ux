@@ -53,6 +53,14 @@ export type ScrollFadeOptionsType = {
 }
 
 /**
+ * ScrollFollowType
+ *
+ * Pin the scroll position to the end while the content grows. Scrolling up releases the pin;
+ * returning to the end, by scrolling or `useScrollEnd().scrollToEnd`, pins it again.
+ */
+export type ScrollFollowType = boolean
+
+/**
  * ScrollProps
  *
  * Every scrolling element and every page scroll behaviour. Without `root`, `sticky` or `fade` it
@@ -79,6 +87,11 @@ export type ScrollProps = React.HTMLAttributes<HTMLElement> & {
    * `true` for the window, or the element the page scrolls in. Renders only the children.
    */
   root?: ScrollRootType
+  /**
+   * Keep the scroll position at the end while the content grows; useScrollEnd under it reads and
+   * drives it. Within `scroll.follow.threshold` of the end counts as at the end.
+   */
+  follow?: ScrollFollowType
   /** Keep the children at the top of the root while the page scrolls past them. */
   sticky?: boolean | ScrollStickyOptionsType
   /** Fade the children in and out with their place in the root's view. */
@@ -95,6 +108,7 @@ namespace ScrollTypes {
   export type Root = ScrollRootType
   export type StickyOptions = ScrollStickyOptionsType
   export type FadeOptions = ScrollFadeOptionsType
+  export type Follow = ScrollFollowType
   export type Props = ScrollProps
 }
 

@@ -2,8 +2,8 @@
  * @niceprototypes/scroll - Performance-optimized scroll components for React
  *
  * @description
- * Scroll: every scrolling element, and the page behaviours (root, sticky, fade) as its props,
- * with centralized scroll management; useScroll; StickySection and StickySectionLinks.
+ * Scroll: every scrolling element, and the page behaviours (root, sticky, fade) and end pinning
+ * (follow) as its props, with centralized scroll management; useScroll; useScrollEnd; StickySection and StickySectionLinks.
  * Designed to work seamlessly with the nice-react ecosystem.
  *
  * @author Nice Prototypes
@@ -20,10 +20,12 @@ export type {
   ScrollRootType,
   ScrollStickyOptionsType,
   ScrollFadeOptionsType,
+  ScrollFollowType,
 } from "./components/Scroll"
 
 // Hooks
 export { useScroll } from "./hooks/useScroll"
+export { useScrollEnd } from "./hooks/useScrollEnd"
 
 // Components
 export {

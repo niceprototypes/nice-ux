@@ -13,6 +13,7 @@ Complete API reference for @niceprototypes/scroll.
   - [StickySection](#stickysection)
 - [Hooks](#hooks)
   - [useScroll](#usescroll)
+  - [useScrollEnd](#usescrollend)
 - [Types](#types)
 
 ---
@@ -21,7 +22,7 @@ Complete API reference for @niceprototypes/scroll.
 
 ### Scroll
 
-Every scrolling element and every page scroll behaviour. Without `root`, `sticky` or `fade` it is the scroll container; HTML attributes pass through to the element.
+Every scrolling element and every page scroll behaviour. Without `root`, `sticky` or `fade` it is the scroll container (with `follow`, pinned to the end); HTML attributes pass through to the element.
 
 #### Props
 
@@ -32,6 +33,7 @@ type ScrollProps = React.HTMLAttributes<HTMLElement> & {
   showScrollbar?: boolean
   ref?: React.Ref<HTMLElement>
   root?: ScrollRootType
+  follow?: ScrollFollowType
   sticky?: boolean | ScrollStickyOptionsType
   fade?: boolean | ScrollFadeOptionsType
   children?: ReactNode
@@ -45,6 +47,7 @@ type ScrollProps = React.HTMLAttributes<HTMLElement> & {
 | `showScrollbar` | `boolean` | `undefined` | Show the scrollbar. Unset, the `scroll.scrollbarWidth` token decides (hidden by default) |
 | `ref` | `React.Ref<HTMLElement>` | `undefined` | The scroll container element |
 | `root` | `true \| HTMLElement \| RefObject<HTMLElement \| null>` | `undefined` | Marks the page scroller. See [Scroll root](#scroll-root) |
+| `follow` | `boolean` | `undefined` | Pins the scroll position to the end while the content grows. See [useScrollEnd](#usescrollend) |
 | `sticky` | `boolean \| ScrollStickyOptionsType` | `undefined` | Keeps the children at the top of the root. See [Scroll sticky](#scroll-sticky) |
 | `fade` | `boolean \| ScrollFadeOptionsType` | `undefined` | Fades the children with their place in the root's view. See [Scroll fade](#scroll-fade) |
 
@@ -413,6 +416,35 @@ Error: useScroll must be used within a <Scroll root>
 
 ---
 
+### useScrollEnd
+
+The end state of the nearest `<Scroll follow>`.
+
+#### Signature
+
+```typescript
+function useScrollEnd(): { atEnd: boolean; scrollToEnd: (behavior?: ScrollBehavior) => void }
+```
+
+#### Returns
+
+- `atEnd` - True while the scroll position is pinned to the end
+- `scrollToEnd(behavior?)` - Scrolls to the end and pins it. `behavior` defaults to `"smooth"`; under `prefers-reduced-motion: reduce` the scroll is instant
+
+#### Behaviour
+
+- Opens at the end; content growth (children added, text streamed in, a child resizing) scrolls to the end while pinned
+- Scrolling up farther than the `scroll.follow.threshold` token from the end releases the pin; reaching the end pins it again
+- The threshold is read from the element's computed `--np--scroll--follow--threshold`, as px
+
+#### Throws
+
+```
+Error: useScrollEnd must be used within a <Scroll follow>
+```
+
+---
+
 ## Types
 
 ### Exported Types
@@ -437,12 +469,15 @@ export type ScrollFadeOptionsType = {
   opacity?: readonly [number, number, number]
 }
 
+export type ScrollFollowType = boolean
+
 export type ScrollProps = React.HTMLAttributes<HTMLElement> & {
   as?: ScrollAsType
   axis?: ScrollAxisType
   showScrollbar?: boolean
   ref?: React.Ref<HTMLElement>
   root?: ScrollRootType
+  follow?: ScrollFollowType
   sticky?: boolean | ScrollStickyOptionsType
   fade?: boolean | ScrollFadeOptionsType
   children?: React.ReactNode

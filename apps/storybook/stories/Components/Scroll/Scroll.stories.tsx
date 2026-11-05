@@ -60,6 +60,7 @@ export const Playground: Story = {
     axis: "y",
     showScrollbar: undefined,
     as: "div",
+    follow: false,
   },
   argTypes: {
     axis: { control: "select", options: AXIS_OPTIONS, table: { category: "Layout" } },
@@ -70,6 +71,7 @@ export const Playground: Story = {
       table: { category: "Appearance" },
     },
     as: { control: "select", options: AS_OPTIONS, table: { category: "Element" } },
+    follow: { control: "boolean", table: { category: "Behaviour" } },
     children: { table: { disable: true } },
     ref: { table: { disable: true } },
     root: { table: { disable: true } },
@@ -167,6 +169,63 @@ export const Lifecycle: Story = {
       render={({ showScrollbar, axis }: Pick<ScrollProps, "showScrollbar" | "axis">) => (
         <Scroll {...args} showScrollbar={showScrollbar} axis={axis} style={box}>
           <Content />
+        </Scroll>
+      )}
+    />
+  ),
+}
+
+/** One log line per row. */
+const Rows = ({ count }: { count: number }) =>
+  Array.from({ length: count }, (_, index) => <Ink key={index}>{`Row ${index + 1}`}</Ink>)
+
+/** Whether the scroll position is at the end of the content. */
+const isAtEnd = (scroll: HTMLElement) => scroll.scrollHeight - scroll.scrollTop - scroll.clientHeight <= 1
+
+/** Add a row the way streamed content arrives: straight into the DOM, no re-render. */
+const appendRow = (scroll: HTMLElement) => {
+  const row = scroll.lastElementChild!.cloneNode(true) as HTMLElement
+  row.textContent = `Row ${scroll.children.length + 1}`
+  scroll.append(row)
+}
+
+/** `follow`: pinned to the end while rows are added; scrolling up releases, the end pins again. */
+export const Follow: Story = {
+  args: { follow: true },
+  render: args => (
+    <Scroll {...args} data-testid="scroll" style={box}>
+      <Rows count={12} />
+    </Scroll>
+  ),
+  play: async ({ canvasElement }) => {
+    const scroll = scrollOf(canvasElement)
+    // Opens at the end.
+    await waitFor(() => expect(isAtEnd(scroll)).toBe(true))
+    appendRow(scroll)
+    await waitFor(() => expect(isAtEnd(scroll)).toBe(true))
+    // Scrolled up, added rows do not move the view.
+    scroll.scrollTop = 0
+    await waitFor(() => expect(scroll.scrollTop).toBe(0))
+    appendRow(scroll)
+    await new Promise(resolve => setTimeout(resolve, 300))
+    await expect(scroll.scrollTop).toBe(0)
+    // Back at the end, it follows again.
+    scroll.scrollTop = scroll.scrollHeight
+    await waitFor(() => expect(isAtEnd(scroll)).toBe(true))
+    appendRow(scroll)
+    await waitFor(() => expect(isAtEnd(scroll)).toBe(true))
+  },
+}
+
+/** `follow` looping: rows are added each step and the view stays on the newest. */
+export const FollowLifecycle: Story = {
+  args: { follow: true },
+  render: args => (
+    <LifecycleStory
+      steps={Array.from({ length: 8 }, (_, index) => ({ label: `${8 + index * 2} rows`, props: { count: 8 + index * 2 } }))}
+      render={({ count }: { count: number }) => (
+        <Scroll {...args} style={box}>
+          <Rows count={count} />
         </Scroll>
       )}
     />

@@ -17,6 +17,7 @@ Performance-optimized scroll components for React with centralized scroll manage
   - [StickySectionLinks](#stickysectionlinks)
   - [StickySection](#stickysection)
   - [Scroll fade](#scroll-fade)
+  - [Scroll follow](#scroll-follow)
 - [Complete Example](#complete-example)
 - [Advanced Usage](#advanced-usage)
 - [Performance Tips](#performance-tips)
@@ -329,6 +330,26 @@ Parallax-style fade:
 ```tsx
 <Scroll fade={{ start: 0, peak: 30, end: 60, opacity: [0.1, 1, 0.1] }}>
   <BackgroundImage />
+</Scroll>
+```
+
+### Scroll follow
+
+A scroll container that stays pinned to the end while its content grows (chat logs, build logs, terminals). It opens at the end. Scrolling up releases the pin; reaching the end again, by scrolling or `scrollToEnd`, pins it. Within the `scroll.follow.threshold` token of the end counts as the end. Smooth scrolling becomes instant under `prefers-reduced-motion: reduce`.
+
+`useScrollEnd()`, inside a `<Scroll follow>`, returns `{ atEnd, scrollToEnd(behavior?) }`.
+
+```tsx
+import { Scroll, useScrollEnd } from '@niceprototypes/scroll'
+
+function ScrollToLatest() {
+  const { atEnd, scrollToEnd } = useScrollEnd()
+  return <Button inert={atEnd} onClick={() => scrollToEnd()} aria-label="Scroll to latest" />
+}
+
+<Scroll follow role="log" style={{ maxHeight }}>
+  {messages}
+  <ScrollToLatest />
 </Scroll>
 ```
 

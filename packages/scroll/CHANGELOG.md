@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- `<Scroll follow>`: pins the scroll position to the end while the content grows; scrolling up releases, the end pins again. `useScrollEnd()` returns `{ atEnd, scrollToEnd(behavior?) }`; the `scroll.follow.threshold` token sets the distance that counts as the end
+
 ### Removed
 - **BREAKING**: `ScrollProvider`, `ScrollContext`, `StickyProvider`, `StickyContext`, `useStickyContext`, `Sticky` and `FadeOnScroll` and their types. Use `Scroll`'s props: `<Scroll root>` (window) or `<Scroll root={element}>` for the providers, `<Scroll sticky={{ order, onChange }}>` for `Sticky`, `<Scroll fade={{ start, peak, end, opacity }}>` for `FadeOnScroll`
 

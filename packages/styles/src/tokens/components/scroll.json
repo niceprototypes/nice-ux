@@ -22,5 +22,10 @@
     "animationEasing": {
       "base": "var(--np--animation-easing--linear)"
     }
+  },
+  "follow": {
+    "threshold": {
+      "base": "var(--np--gap)"
+    }
   }
 }

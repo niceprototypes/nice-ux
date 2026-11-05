@@ -6,7 +6,7 @@ import Install from "@niceprototypes/docs/components/Install"
 
 <StoryHeader
   title="Scroll"
-  description="Scroll: every scrolling element (scrollbar hidden by default), and the page behaviours: root marks the page scroller, sticky keeps a bar at its top, fade fades content with its place in the view. One root batches scroll events for useScroll, sticky, fade and StickySectionLinks."
+  description="Scroll: every scrolling element (scrollbar hidden by default), and the page behaviours: root marks the page scroller, sticky keeps a bar at its top, fade fades content with its place in the view, follow pins a container to the end while its content grows (useScrollEnd). One root batches scroll events for useScroll, sticky, fade and StickySectionLinks."
   packageName="@niceprototypes/scroll"
 />
 
@@ -21,4 +21,6 @@ import { Scroll } from "@niceprototypes/scroll"
   <Scroll sticky={{ onChange: setIsSticky }}>{header}</Scroll>
   <Scroll fade>{section}</Scroll>
 </Scroll>
+
+<Scroll follow role="log">{messages}</Scroll>
 ```
