@@ -1,10 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { expect, within } from "storybook/test"
-import { themeTokensData } from "@niceprototypes/styles"
+import { getToken, themeTokensData } from "@niceprototypes/styles"
+import type { GapType } from "@niceprototypes/styles"
 import Logo from "@niceprototypes/logo"
 
 /** Theme names are read from the token data at runtime; "none" leaves the theme unpinned. */
 const THEME_OPTIONS = ["none", ...Object.keys(themeTokensData)]
+
+/** "none" leaves gap unset: the logo.gap token. */
+const GAP_OPTIONS = ["none", "smaller", "small", "base", "large", "larger"] as const satisfies readonly (GapType | "none")[]
 
 const meta = {
   title: "Components/Logo",
@@ -15,7 +19,6 @@ const meta = {
   args: {
     showName: true,
     nameHeightScale: 0.6,
-    gap: 4,
     "aria-label": "Nice Prototypes",
   },
   argTypes: {
@@ -23,7 +26,7 @@ const meta = {
     height: { control: "number" },
     showName: { control: "boolean" },
     nameHeightScale: { control: { type: "number", min: 0, max: 1, step: 0.05 } },
-    gap: { control: "number" },
+    gap: { control: "select", options: GAP_OPTIONS, mapping: { none: undefined } },
     "aria-label": { control: "text" },
     theme: { control: "select", options: THEME_OPTIONS, mapping: { none: undefined } },
   },
@@ -65,9 +68,19 @@ export const NameHeightScale: Story = {
 }
 
 export const Gap: Story = {
-  args: { gap: 12 },
+  args: { gap: "large" },
   play: async ({ canvasElement }) => {
-    await expect(getComputedStyle(logo(canvasElement)).columnGap).toBe("12px")
+    await expect(getComputedStyle(logo(canvasElement)).columnGap).toBe(
+      getComputedStyle(canvasElement).getPropertyValue(getToken("gap", "large", { as: "key" })).trim(),
+    )
+  },
+}
+
+export const DefaultGap: Story = {
+  play: async ({ canvasElement }) => {
+    await expect(getComputedStyle(logo(canvasElement)).columnGap).toBe(
+      getComputedStyle(canvasElement).getPropertyValue(getToken("gap", "smaller", { as: "key" })).trim(),
+    )
   },
 }
 

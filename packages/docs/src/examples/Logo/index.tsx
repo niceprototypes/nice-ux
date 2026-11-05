@@ -3,6 +3,7 @@
 // Logo docs page, sorted by name.
 import Logo from "@niceprototypes/logo"
 import { Theme, getToken } from "@niceprototypes/styles"
+import type { GapType } from "@niceprototypes/styles"
 import type { ComponentExample } from "./examples.types"
 
 export type { ComponentExample, ExampleVariant } from "./examples.types"
@@ -37,11 +38,11 @@ export const logoNameHeightScale = {
 
 export const logoGap = {
   name: "gap",
-  description: "Space between the heart and the name, in pixels. Defaults to 4.",
-  variants: ["4", "10"],
-  default: "4",
-  preview: variant => <Logo height={48} gap={Number(variant)} />,
-  code: variant => (variant === "4" ? `<Logo height={48} />` : `<Logo height={48} gap={${variant}} />`),
+  description: "Space between the heart and the name, a core gap token. Defaults to the logo.gap token (the smaller gap).",
+  variants: ["logo.gap", "small", "large"],
+  default: "logo.gap",
+  preview: variant => (variant === "logo.gap" ? <Logo height={48} /> : <Logo height={48} gap={variant as GapType} />),
+  code: variant => (variant === "logo.gap" ? `<Logo height={48} />` : `<Logo height={48} gap="${variant}" />`),
 } satisfies ComponentExample
 
 export const logoAriaLabel = {

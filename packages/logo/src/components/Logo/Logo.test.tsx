@@ -63,22 +63,22 @@ describe("Logo", () => {
 
   it("takes the logo.height token as its default height", () => {
     render(<Logo />)
-    expect(cssFor(screen.getByRole("img"))).toContain(`height:calc(${getToken("logo.height")} * 1px)`)
+    expect(cssFor(screen.getByRole("img"))).toContain(`height:${getToken("logo.height")}`)
   })
 
   it("takes its height from the height prop, in pixels", () => {
     render(<Logo height={35} />)
-    expect(cssFor(screen.getByRole("img"))).toContain("height:calc(35 * 1px)")
+    expect(cssFor(screen.getByRole("img"))).toContain("height:35px")
   })
 
-  it("puts a 4px gap between heart and name by default", () => {
+  it("takes the logo.gap token as its default gap", () => {
     render(<Logo />)
-    expect(cssFor(screen.getByRole("img"))).toContain("gap:4px")
+    expect(cssFor(screen.getByRole("img"))).toContain(`gap:${getToken("logo.gap")}`)
   })
 
-  it("takes its gap from the gap prop, in pixels", () => {
-    render(<Logo gap={6} />)
-    expect(cssFor(screen.getByRole("img"))).toContain("gap:6px")
+  it("takes its gap from the gap prop's core gap token", () => {
+    render(<Logo gap="large" />)
+    expect(cssFor(screen.getByRole("img"))).toContain(`gap:${getToken("gap", "large")}`)
   })
 
   it("sizes the heart square at the logo's full height", () => {

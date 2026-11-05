@@ -24,7 +24,7 @@ const Logo: React.FC<LogoProps> = ({
   height,
   showName = true,
   nameHeightScale = 0.6,
-  gap = 4,
+  gap,
   "aria-label": ariaLabel = "Nice Prototypes",
   theme,
 }) => {

@@ -1,10 +1,10 @@
-import type { ThemeType } from "@niceprototypes/styles"
+import type { GapType, ThemeType } from "@niceprototypes/styles"
 
 /**
  * LogoHeightType
  *
- * Height of the logo in pixels. Unset, the logo takes the responsive `logo.height` token, also
- * a unitless pixel count (overridable with setTokens, e.g. `{ logo: { height: { base: 26 } } }`). The heart is that tall and the name `nameHeightScale` of it;
+ * Height of the logo in pixels. Unset, the logo takes the responsive `logo.height` token
+ * (overridable with setTokens, e.g. `{ logo: { height: { base: "26px" } } }`). The heart is that tall and the name `nameHeightScale` of it;
  * the widths follow from their SVGs.
  */
 export type LogoHeightType = number
@@ -12,9 +12,10 @@ export type LogoHeightType = number
 /**
  * LogoGapType
  *
- * Space between the heart and the name in pixels (a unitless number). Defaults to 4.
+ * Re-export of GapType from @niceprototypes/styles.
+ * Space between the heart and the name, a core gap token. Unset, the `logo.gap` token.
  */
-export type LogoGapType = number
+export type LogoGapType = GapType
 
 /**
  * LogoNameHeightScaleType
@@ -63,10 +64,7 @@ export interface LogoProps {
    * @default 0.6
    */
   nameHeightScale?: LogoNameHeightScaleType
-  /**
-   * Space between the heart and the name, in pixels
-   * @default 4
-   */
+  /** Space between the heart and the name, a core gap token (unset: the logo.gap token) */
   gap?: LogoGapType
   /** Accessible name of the logo */
   "aria-label"?: LogoAriaLabelType

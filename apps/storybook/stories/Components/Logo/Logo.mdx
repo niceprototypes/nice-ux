@@ -30,7 +30,7 @@ import Logo from "@niceprototypes/logo"
 
 ## Guide
 
-Logo puts two pieces side by side: the `nice-heart` illustration from @niceprototypes/icon and the logo name. `height` sets the height in pixels and defaults to the responsive `logo.height` token, a unitless pixel count: 64 on phones, 56 on tablets, 48 from laptop up. The heart fills that height and the name `nameHeightScale` of it (60% by default), each as wide as its SVG's viewBox gives. The space between them is the `gap` prop, 4 pixels by default.
+Logo puts two pieces side by side: the `nice-heart` illustration from @niceprototypes/icon and the logo name. `height` sets the height in pixels and defaults to the responsive `logo.height` token: 64px on phones, 56px on tablets, 48px from laptop up. The heart fills that height and the name `nameHeightScale` of it (60% by default), each as wide as its SVG's viewBox gives. The space between them is the `gap` prop, a core gap token, by default the `logo.gap` token (the smaller gap).
 
 The name is filled with the `logo.color` token, the theme's base text color: dark in day, light in night. The heart is an illustration and keeps its own colors in every theme. Pin a theme with `theme`, or let the logo follow the page:
 

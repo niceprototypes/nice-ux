@@ -5,16 +5,15 @@ import type { LogoGapType, LogoHeightType, LogoNameHeightScaleType } from "./Log
 
 /**
  * The root: its height is the `height` prop in pixels, or the `logo.height` token when unset;
- * each piece takes its width from its SVG's viewBox. The space between them is the `gap`
- * prop in pixels (a fixed length, so it counts toward the logo's width and nothing shrinks).
+ * each piece takes its width from its SVG's viewBox. The space between them is the `gap` prop's
+ * core gap token, or the `logo.gap` token when unset (a fixed length, so nothing shrinks).
  */
-export const StyledLogo = styled.span<{ $height?: LogoHeightType; $gap: LogoGapType }>`
+export const StyledLogo = styled.span<{ $height?: LogoHeightType; $gap?: LogoGapType }>`
   display: inline-flex;
   align-items: center;
   flex-shrink: 0;
-  /* Both the prop and the logo.height token are unitless pixel counts */
-  height: calc(${({ $height }) => $height ?? getToken("logo.height")} * 1px);
-  gap: ${({ $gap }) => `${$gap}px`};
+  height: ${({ $height }) => ($height === undefined ? getToken("logo.height") : `${$height}px`)};
+  gap: ${({ $gap }) => ($gap === undefined ? getToken("logo.gap") : getToken("gap", $gap))};
 
   svg {
     height: 100%;

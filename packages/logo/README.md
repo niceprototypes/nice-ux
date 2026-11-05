@@ -33,7 +33,7 @@ import Logo from "@niceprototypes/logo"
 | `height` | `number` (pixels) | `logo.height` token (64px phone, 56px tablet, 48px laptop+) | Height of the logo; the width follows |
 | `showName` | `boolean` | `true` | Show the name beside the heart |
 | `nameHeightScale` | `number` | `0.6` | The name's height as a fraction of the logo's height |
-| `gap` | `number` (pixels) | `4` | Space between the heart and the name |
+| `gap` | `GapType` | `logo.gap` token | Space between the heart and the name, a core gap token |
 | `aria-label` | `string` | `"Nice Prototypes"` | Accessible name; the logo renders as one image (`role="img"`) |
 | `theme` | `ThemeType` | | Pins token resolution to a theme: the name takes that theme's base text color |
 
@@ -44,7 +44,8 @@ ancestor to restyle Logo without props.
 
 | Token | Default |
 |---|---|
-| `--np--logo--height` | `64`; `56` from tablet, `48` from laptop (unitless pixels) |
+| `--np--logo--height` | `64px`; `56px` from tablet, `48px` from laptop |
+| `--np--logo--gap` | `var(--np--gap--smaller)` |
 | `--np--logo--color` | `var(--np--color)`: the name's fill |
 
 Docs: @niceprototypes/storybook → Components → Logo.
