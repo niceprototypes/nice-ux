@@ -162,6 +162,9 @@ importers:
       '@niceprototypes/card':
         specifier: workspace:^
         version: link:../../packages/card
+      '@niceprototypes/chat':
+        specifier: workspace:^
+        version: link:../../packages/chat
       '@niceprototypes/checkbox':
         specifier: workspace:^
         version: link:../../packages/checkbox
@@ -724,6 +727,96 @@ importers:
       eslint-plugin-react:
         specifier: ^7.32.2
         version: 7.37.5(eslint@8.57.1)
+      jest:
+        specifier: ^29.7.0
+        version: 29.7.0(@types/node@25.9.9)
+      jest-environment-jsdom:
+        specifier: ^29.7.0
+        version: 29.7.0
+      react:
+        specifier: 'catalog:'
+        version: 19.2.0
+      react-dom:
+        specifier: 'catalog:'
+        version: 19.2.0(react@19.2.0)
+      rollup:
+        specifier: ^4.9.1
+        version: 4.65.1
+      rollup-plugin-dts:
+        specifier: ^6.1.0
+        version: 6.5.1(rollup@4.65.1)(typescript@6.0.3)
+      styled-components:
+        specifier: 'catalog:'
+        version: 6.1.19(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      ts-jest:
+        specifier: ^29.4.6
+        version: 29.4.15(@babel/core@7.29.7)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.29.7))(jest-util@29.7.0)(jest@29.7.0(@types/node@25.9.9))(typescript@6.0.3)
+      tslib:
+        specifier: ^2.6.2
+        version: 2.8.1
+      typescript:
+        specifier: 'catalog:'
+        version: 6.0.3
+
+  packages/chat:
+    devDependencies:
+      '@niceprototypes/button':
+        specifier: workspace:*
+        version: link:../button
+      '@niceprototypes/code':
+        specifier: workspace:*
+        version: link:../code
+      '@niceprototypes/config-exports':
+        specifier: workspace:*
+        version: link:../config-exports
+      '@niceprototypes/config-jest':
+        specifier: workspace:*
+        version: link:../config-jest
+      '@niceprototypes/config-rollup':
+        specifier: workspace:*
+        version: link:../config-rollup
+      '@niceprototypes/config-typescript':
+        specifier: workspace:*
+        version: link:../config-typescript
+      '@niceprototypes/flex':
+        specifier: workspace:*
+        version: link:../flex
+      '@niceprototypes/input':
+        specifier: workspace:*
+        version: link:../input
+      '@niceprototypes/scroll':
+        specifier: workspace:*
+        version: link:../scroll
+      '@niceprototypes/styles':
+        specifier: workspace:*
+        version: link:../styles
+      '@rollup/plugin-commonjs':
+        specifier: ^25.0.7
+        version: 25.0.8(rollup@4.65.1)
+      '@rollup/plugin-node-resolve':
+        specifier: ^15.2.3
+        version: 15.3.1(rollup@4.65.1)
+      '@rollup/plugin-typescript':
+        specifier: ^11.1.5
+        version: 11.1.6(rollup@4.65.1)(tslib@2.8.1)(typescript@6.0.3)
+      '@testing-library/jest-dom':
+        specifier: ^6.1.0
+        version: 6.10.0(@testing-library/dom@10.4.2)
+      '@testing-library/react':
+        specifier: ^16.3.0
+        version: 16.3.3(@testing-library/dom@10.4.2)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      '@testing-library/user-event':
+        specifier: ^14.5.0
+        version: 14.6.8(@testing-library/dom@10.4.2)
+      '@types/jest':
+        specifier: ^29.5.0
+        version: 29.5.14
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.2.14
+      '@types/react-dom':
+        specifier: 'catalog:'
+        version: 19.2.3(@types/react@19.2.14)
       jest:
         specifier: ^29.7.0
         version: 29.7.0(@types/node@25.9.9)
@@ -3486,6 +3579,9 @@ importers:
       '@niceprototypes/card':
         specifier: workspace:^
         version: link:../card
+      '@niceprototypes/chat':
+        specifier: workspace:^
+        version: link:../chat
       '@niceprototypes/checkbox':
         specifier: workspace:^
         version: link:../checkbox

@@ -2,7 +2,7 @@ import * as React from "react"
 import Icon from "@niceprototypes/icon"
 import { CopyDiv, CopySpan } from "./CodeCopy.styles"
 import { LANG_LABELS } from "./CodeCopy.constants"
-import { copyToClipboard } from "../../utilities/copyToClipboard"
+import { copyToClipboard } from "../../services/copyToClipboard"
 import type { CodeCopyProps } from "./CodeCopy.types"
 
 /**

@@ -1,0 +1,5 @@
+{
+  "$schema": "../config-exports/src/schema.json",
+  "description": "Chat: ChatLog, a log that follows new messages; ChatMessage, user bubbles and full-width replies; ChatComposer, send and stop; ChatSuggestions; ChatCopyAction.",
+  "components": ["ChatLog", "ChatMessage", "ChatComposer", "ChatSuggestions", "ChatCopyAction"]
+}

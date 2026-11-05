@@ -1,0 +1,32 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "@niceprototypes/docs/components/Story"
+import Install from "@niceprototypes/docs/components/Install"
+import * as ChatLogStories from "./ChatLog.stories"
+import ComponentDocs from "../../../src/components/ComponentDocs"
+
+<Meta of={ChatLogStories} />
+
+<ComponentDocs component="Chat">
+
+<StoryHeader
+  title="Chat"
+  description="Chat: ChatLog, a log that follows new messages; ChatMessage, user bubbles and full-width replies; ChatComposer, send and stop; ChatSuggestions; ChatCopyAction."
+  packageName="@niceprototypes/chat"
+/>
+
+<Install package="chat" />
+
+```jsx
+import { ChatComposer, ChatCopyAction, ChatLog, ChatMessage } from "@niceprototypes/chat"
+
+<ChatLog aria-label="Conversation" streaming={busy}>
+  {messages.map(message => (
+    <ChatMessage key={message.id} role={message.role} status={message.status} actions={<ChatCopyAction text={message.text} />}>
+      <Markdown>{message.text}</Markdown>
+    </ChatMessage>
+  ))}
+</ChatLog>
+<ChatComposer value={draft} onChange={setDraft} onSubmit={send} onStop={stop} busy={busy} />
+```
+
+</ComponentDocs>

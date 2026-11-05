@@ -6,7 +6,7 @@ Per-package facts (version, peers, exports, components) live only in `agents/cat
 
 ```
 Application  apps/storybook; ~/nice/website, ~/nice/browser, ~/nice/animation-studio
-Feature      button, input, select, calendar, dialog, form, tabs, tooltip, lightbox, checkbox, toggle
+Feature      button, input, select, calendar, dialog, form, tabs, tooltip, lightbox, checkbox, toggle, chat
 Utility      flex, ink, tile, icon, image, line, list, listbox, logo, popover, scroll, slider, tree, contents, field, code, head, markdown
 Foundation   styles (tokens, CSS, React bindings), icon svg set (packages/icon/src/svg), config-*
 Plugins      icon-vendor (Lucide resolver for icon), image-vendor (resolver for image)

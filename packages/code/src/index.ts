@@ -5,3 +5,4 @@
 
 export { default, default as Code } from "./components/Code"
 export * from "./components/Code"
+export { copyToClipboard } from "./services"

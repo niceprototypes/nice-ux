@@ -265,6 +265,36 @@ const componentTokensData: ComponentTokensData = {
       "base": "0.5"
     }
   },
+  "chat": {
+    "message": {
+      "maxWidth": {
+        "user": "80%",
+        "assistant": "100%"
+      },
+      "padding": {
+        "user": "var(--np--gap--small) var(--np--gap)",
+        "assistant": "var(--np--gap--none)"
+      },
+      "borderRadius": {
+        "user": "var(--np--border-radius--large)",
+        "assistant": "var(--np--border-radius--none)"
+      },
+      "backgroundColor": {
+        "user": "var(--np--background-color--raised)",
+        "assistant": "transparent"
+      }
+    },
+    "log": {
+      "gap": {
+        "base": "var(--np--gap--large)"
+      }
+    },
+    "composer": {
+      "maxRows": {
+        "base": "6"
+      }
+    }
+  },
   "checkbox": {
     "size": {
       "smaller": "14px",

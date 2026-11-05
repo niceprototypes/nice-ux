@@ -6,7 +6,7 @@ import { BodyDiv, CodeDiv, CollapseDiv, HandleDiv, InlineCode, PreviewDiv, Scrol
 import { CodeCopy } from "../CodeCopy"
 import type { CodeProps } from "./Code.types"
 import { highlightCode } from "../../utilities/highlightCode"
-import { copyToClipboard } from "../../utilities/copyToClipboard"
+import { copyToClipboard } from "../../services/copyToClipboard"
 
 /** The heights the handle moves between: the cap, and the full code. */
 type Bounds = { min: number; max: number }

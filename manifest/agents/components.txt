@@ -26,6 +26,11 @@ Card(card) [components-card--playground] children?:node variant?:"outline"|"elev
 CardBody(card) [components-cardbody--playground] children?:node
 CardFooter(card) [components-cardfooter--playground] children?:node justifyContent?:FlexJustifyContentType="flex-end"
 CardHeader(card) [components-cardheader--playground] title?:node description?:node titleProps?:Partial<Omit<InkProps, "children">> descriptionProps?:Partial<Omit<InkProps, "children">> end?:node children?:node
+ChatComposer(chat) [components-chat-chatcomposer--playground] value:InputValueType onChange:InputOnChangeType onSubmit:fn onStop?:fn busy?:boolean=false disabled?:boolean=false placeholder?:InputPlaceholderType actions?:node maxRows?:InputMaxRowsType
+ChatCopyAction(chat) [components-chat-chatcopyaction--playground] text:string
+ChatLog(chat) [components-chat-chatlog--playground] children?:node streaming?:boolean
+ChatMessage(chat) [components-chat-chatmessage--playground] role:"user"|"assistant" children?:node status?:"base"|"streaming"|"error"="base" actions?:node
+ChatSuggestions(chat) [components-chat-chatsuggestions--playground] items:ReadonlyArray<ChatSuggestionsItemType> onPick:fn
 Checkbox(checkbox) [components-forms-checkbox--playground] checked?:boolean defaultChecked?:boolean onChange?:fn disabled?:boolean size?:SizeType backgroundColor?:ColorTokenProp<CheckboxBackgroundColorType> borderColor?:ColorTokenProp<CheckboxBorderColorType> borderRadius?:BorderRadiusType borderWidth?:BorderWidthType iconName?:NonNullable<IconProps["name"]>="check" iconVendor?:IconVendorType=false children?:node name?:string theme?:ThemeType
 Code(code) [components-code--playground] code:string language?:string showLabel?:boolean=true copyOnClick?:boolean=true inlined?:boolean=false fit?:boolean=false margin?:GapType="large" maxHeight?:"none"|TokenVariants["code.maxHeight"]="base" children?:node
 CodeCopy(code) code:string language?:string
