@@ -61,6 +61,7 @@
     "@niceprototypes/input": "workspace:^",
     "@niceprototypes/listbox": "workspace:^",
     "@niceprototypes/logo": "workspace:^",
+    "@niceprototypes/markdown": "workspace:^",
     "@niceprototypes/popover": "workspace:^",
     "@niceprototypes/scroll": "workspace:^",
     "@niceprototypes/styles": "workspace:^",
@@ -98,7 +99,6 @@
     "@types/react-dom": "catalog:",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
-    "markdown-to-jsx": "^9.10.4",
     "react": "catalog:",
     "react-dom": "catalog:",
     "react-router": "^7.18.5",
@@ -115,7 +115,8 @@
     "@niceprototypes/input": "workspace:*",
     "@niceprototypes/listbox": "workspace:*",
     "@niceprototypes/popover": "workspace:*",
-    "@niceprototypes/logo": "workspace:*"
+    "@niceprototypes/logo": "workspace:*",
+    "@niceprototypes/markdown": "workspace:*"
   },
   "repository": {
     "type": "git",

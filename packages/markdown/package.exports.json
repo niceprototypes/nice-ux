@@ -1,0 +1,6 @@
+{
+  "$schema": "../config-exports/src/schema.json",
+  "description": "Markdown: markdown text through Ink and Code, re-rendering only the blocks that change, so a streaming reply re-renders its last block.",
+  "default": "Markdown",
+  "components": ["Markdown"]
+}

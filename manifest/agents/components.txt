@@ -56,7 +56,7 @@ List(list) [components-list--playground]
 ListItem(list) 
 Listbox(listbox) [components-forms-listbox--playground] options:ReadonlyArray<ListboxOptionType|ListboxOptionGroupType> value?:string onChange?:fn activeValue?:string|null onActiveChange?:fn focusable?:boolean=true size?:SizeType="base" theme?:ThemeType
 Logo(logo) [components-logo--playground] height?:number showName?:boolean nameHeightScale?:number=0.6 gap?:number=4 theme?:ThemeType
-Markdown(markdown) children:string linkComponent?:React.ComponentType<{ href: string; children: node }> size?:FontSizeType overrides?:MarkdownToJSX.Overrides
+Markdown(markdown) [components-markdown--playground] children:string linkComponent?:React.ComponentType<{ href: string; children: node }> size?:FontSizeType overrides?:MarkdownToJSX.Overrides
 Popover(popover) [components-popover--playground] open:boolean onOpenChange?:fn anchorRef:React.RefObject<HTMLElement|null> ignoreOutsideRefs?:ReadonlyArray<React.RefObject<HTMLElement|null>> position?:"top"|"bottom"|"left"|"right"="bottom" align?:"start"|"center"|"end"="start" matchAnchorWidth?:boolean=false children?:node role?:React.AriaRole="dialog" theme?:ThemeType
 Radio(radio) [components-forms-radio--playground] value:string disabled?:boolean children?:node size?:RadioSizeType backgroundColor?:ColorTokenProp<RadioBackgroundColorType> borderColor?:ColorTokenProp<RadioBorderColorType>
 RadioGroup(radio) [components-forms-radiogroup--playground] value?:string defaultValue?:string onChange?:fn name?:string disabled?:boolean required?:boolean direction?:"row"|"column"="column" gap?:GapType="small" size?:RadioSizeType="base" backgroundColor?:ColorTokenProp<RadioBackgroundColorType> borderColor?:ColorTokenProp<RadioBorderColorType> children?:node theme?:ThemeType

@@ -1,0 +1,28 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { StoryHeader } from "@niceprototypes/docs/components/Story"
+import Install from "@niceprototypes/docs/components/Install"
+import ComponentDocs from "../../../src/components/ComponentDocs"
+
+<Meta title="Components/Markdown" />
+
+<ComponentDocs component="Markdown">
+
+<StoryHeader
+  title="Markdown"
+  description="Markdown: markdown text through Ink and Code, re-rendering only the blocks that change, so a streaming reply re-renders its last block."
+  packageName="@niceprototypes/markdown"
+/>
+
+<Install package="markdown" />
+
+```jsx
+import Markdown from "@niceprototypes/markdown"
+
+<Markdown linkComponent={({ href, children }) => <Link to={href}>{children}</Link>}>
+  {"# Title\n\nA paragraph with `inline code`."}
+</Markdown>
+```
+
+Headings, paragraphs and list items render as Ink, fenced code as Code, inline code as `Code inlined`. `overrides` replace any element.
+
+</ComponentDocs>
