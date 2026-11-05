@@ -7,6 +7,7 @@ import type { BackgroundColorType, BorderColorType, BorderWidthType, SizeType } 
 import Button from "@niceprototypes/button"
 import Icon, { iconNames } from "@niceprototypes/icon"
 import Input from "@niceprototypes/input"
+import LifecycleStory from "@niceprototypes/docs/components/LifecycleStory"
 import type {
   InputAriaAutocompleteType,
   InputAsType,
@@ -15,6 +16,7 @@ import type {
   InputElementType,
   InputEnterKeyHintType,
   InputInputModeType,
+  InputOnSubmitType,
   InputProps,
   InputRoleType,
   InputStatusType,
@@ -64,14 +66,28 @@ const CHILDREN_PRESETS = {
  * - `start` / `end`: an icon name rendered as an Icon; `end` also offers a clear Button
  * - `ghost`: one boolean per interaction state
  * - `backgroundColor` / `borderColor`: variant plus an optional theme pin
+ * - `rows` / `maxRows` / `onSubmit`: applied for `as="textarea"` only
  */
 type PlaygroundArgs = Omit<
   InputProps,
-  "as" | "type" | "rows" | "children" | "ref" | "start" | "end" | "ghost" | "backgroundColor" | "borderColor"
+  | "as"
+  | "type"
+  | "rows"
+  | "maxRows"
+  | "onSubmit"
+  | "children"
+  | "ref"
+  | "start"
+  | "end"
+  | "ghost"
+  | "backgroundColor"
+  | "borderColor"
 > & {
   as: InputAsType
   type: InputElementType
   rows?: number
+  maxRows?: number
+  onSubmit: InputOnSubmitType
   children: keyof typeof CHILDREN_PRESETS
   controlled: boolean
   start: string
@@ -135,6 +151,7 @@ export const Playground: Story = {
     onFocus: fn(),
     onBlur: fn(),
     onKeyDown: fn(),
+    onSubmit: fn(),
     size: "base",
     status: "base",
     disabled: false,
@@ -159,6 +176,7 @@ export const Playground: Story = {
     as: select(AS_OPTIONS, "Element"),
     type: { ...select(TYPE_OPTIONS, "Element"), if: { arg: "as", eq: "input" } },
     rows: { control: "number", table: { category: "Element" }, if: { arg: "as", eq: "textarea" } },
+    maxRows: { control: "number", table: { category: "Element" }, if: { arg: "as", eq: "textarea" } },
     children: { ...select(Object.keys(CHILDREN_PRESETS), "Element"), mapping: CHILDREN_PRESETS, if: { arg: "as", eq: "select" } },
 
     controlled: { control: "boolean", table: { category: "Value" } },
@@ -216,6 +234,7 @@ export const Playground: Story = {
     onFocus: { table: { category: "Events" } },
     onBlur: { table: { category: "Events" } },
     onKeyDown: { table: { category: "Events" } },
+    onSubmit: { table: { category: "Events" }, if: { arg: "as", eq: "textarea" } },
 
     className: HIDDEN,
     style: HIDDEN,
@@ -227,6 +246,8 @@ export const Playground: Story = {
     as,
     type,
     rows,
+    maxRows,
+    onSubmit,
     children,
     controlled,
     value,
@@ -281,7 +302,7 @@ export const Playground: Story = {
       as === "select"
         ? { ...shared, as, children: children as unknown as InputProps["children"] }
         : as === "textarea"
-          ? { ...shared, as, rows }
+          ? { ...shared, as, rows, maxRows, onSubmit }
           : { ...shared, as, type }
     // Remount when the uncontrolled initial value or the element changes.
     return <Input key={`${as}-${controlled}-${defaultValue}`} {...props} />
@@ -441,6 +462,67 @@ export const Textarea: Story = {
     await expect(textbox.tagName).toBe("TEXTAREA")
     await expect(textbox).toHaveAttribute("rows", "4")
   },
+}
+
+export const MaxRows: Story = {
+  ...Playground,
+  args: { ...Playground.args, as: "textarea", rows: 1, maxRows: 3, value: "1\n2\n3\n4\n5\n6" },
+  play: async ({ canvasElement }) => {
+    const textbox = within(canvasElement).getByRole("textbox", { name: "Field" })
+    const style = getComputedStyle(textbox)
+    await expect(style.resize).toBe("none")
+    // Six lines in a three-line cap: the field stops growing and scrolls.
+    await expect(textbox.clientHeight).toBeLessThanOrEqual(parseFloat(style.maxHeight))
+    await expect(textbox.scrollHeight).toBeGreaterThan(textbox.clientHeight)
+  },
+}
+
+export const Submit: Story = {
+  ...Playground,
+  args: { ...Playground.args, as: "textarea", rows: 1, maxRows: 4 },
+  play: async ({ canvasElement, args, userEvent }) => {
+    const textbox = within(canvasElement).getByRole("textbox", { name: "Field" })
+    await userEvent.type(textbox, "Hi{Shift>}{Enter}{/Shift}there")
+    await expect(args.onSubmit).not.toHaveBeenCalled()
+    await expect(textbox).toHaveValue("Hi\nthere")
+    await userEvent.type(textbox, "{Enter}")
+    await expect(args.onSubmit).toHaveBeenCalledWith("Hi\nthere", expect.anything())
+    await expect(textbox).toHaveValue("Hi\nthere")
+  },
+}
+
+/** A composer's message, one more line per step. */
+const COMPOSER_LINES = [
+  "Draft the intro scene",
+  "Fade the title in over 400ms",
+  "then slide the cards up",
+  "one at a time",
+  "and hold on the last card",
+]
+
+/** A composer growing a line per step from empty, up to its `maxRows` cap and past it. */
+export const Lifecycle: Story = {
+  render: () => (
+    <LifecycleStory
+      steps={[
+        { label: "empty", props: { lines: 0 } },
+        ...COMPOSER_LINES.map((_, index) => ({
+          label: index === 3 ? "4 lines: maxRows reached" : index === 4 ? "5 lines: scrolls" : `${index + 1} line${index ? "s" : ""}`,
+          props: { lines: index + 1 },
+        })),
+      ]}
+      render={({ lines }: { lines: number }) => (
+        <Input
+          as="textarea"
+          aria-label="Message"
+          placeholder="Message"
+          rows={1}
+          maxRows={4}
+          value={COMPOSER_LINES.slice(0, lines).join("\n")}
+        />
+      )}
+    />
+  ),
 }
 
 export const AsSelect: Story = {

@@ -7,6 +7,8 @@ import type {
   InputBorderColorType,
   InputBorderRadiusType,
   InputGhostStateType,
+  InputMaxRowsType,
+  InputRowsType,
   InputStatusType,
   InputWidthType,
 } from "./Input.types"
@@ -49,7 +51,8 @@ export const StyledControl = styled.input.withConfig({
 })<{
   $as: InputAsType
   $disabled: boolean
-  $rows?: number
+  $maxRows?: InputMaxRowsType
+  $rows?: InputRowsType
   $size: SizeType
 }>`
   /* Reset */
@@ -66,7 +69,7 @@ export const StyledControl = styled.input.withConfig({
   appearance: none;
   -webkit-appearance: none;
 
-  ${({ $as, $disabled, $rows, $size }) => css`
+  ${({ $as, $disabled, $maxRows, $rows, $size }) => css`
     flex: 1 1 0;
     min-inline-size: 0;
     align-self: stretch;
@@ -84,12 +87,21 @@ export const StyledControl = styled.input.withConfig({
              text would (vertically centred in the size token), and min-block-size
              keeps at least $rows lines (HTML default 2) so it never collapses. */
           field-sizing: content;
-          resize: vertical;
+          resize: ${$maxRows === undefined ? "vertical" : "none"};
           line-height: ${getToken("lineHeight", "base")};
           padding-block: calc((${getToken(`input.size:${$size}`)} - 1lh) / 2);
           min-block-size: calc(
             ${$rows ?? 2} * 1lh + ${getToken(`input.size:${$size}`)} - 1lh
           );
+          /* Growth cap: $maxRows lines, measured like min-block-size; past it
+             the content scrolls. */
+          ${$maxRows === undefined
+            ? ""
+            : css`
+                max-block-size: calc(
+                  ${$maxRows} * 1lh + ${getToken(`input.size:${$size}`)} - 1lh
+                );
+              `}
         `
       : css`
           line-height: 1;

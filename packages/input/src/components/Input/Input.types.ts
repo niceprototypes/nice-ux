@@ -346,6 +346,28 @@ export type InputWidthType = "2" | "3" | "4" | "5" | "10" | "20" | "full"
 export type InputRowsType = number
 
 /**
+ * InputMaxRowsType
+ *
+ * Growth cap in text lines for `as="textarea"`. Past it the textarea scrolls,
+ * and it has no resize handle. Ignored for other `as` values.
+ */
+export type InputMaxRowsType = number
+
+/**
+ * InputOnSubmitType
+ *
+ * Submit handler for `as="textarea"`. Enter without Shift calls it with the
+ * current value and prevents the newline; Shift+Enter inserts a newline. Enter
+ * during IME composition (`event.nativeEvent.isComposing`) is left to the
+ * browser. `onKeyDown` runs first; calling `event.preventDefault()` there
+ * cancels the submit.
+ */
+export type InputOnSubmitType = (
+  value: string,
+  event: React.KeyboardEvent<HTMLTextAreaElement>
+) => void
+
+/**
  * InputChildrenType
  *
  * `<option>` / `<optgroup>` content for `as="select"`. Ignored for other `as` values.
@@ -706,6 +728,8 @@ export interface InputAsInputProps extends InputBaseProps {
   /** HTML input type — text-style inputs only */
   type?: InputElementType
   rows?: never
+  maxRows?: never
+  onSubmit?: never
   children?: never
 }
 
@@ -723,6 +747,8 @@ export interface InputAsSelectProps extends InputBaseProps {
   children?: InputChildrenType
   type?: never
   rows?: never
+  maxRows?: never
+  onSubmit?: never
 }
 
 /**
@@ -737,6 +763,10 @@ export interface InputAsTextareaProps extends InputBaseProps {
   ref?: React.Ref<HTMLTextAreaElement>
   /** Minimum visible lines; the textarea grows with content past this */
   rows?: InputRowsType
+  /** Growth cap in lines; past it the textarea scrolls */
+  maxRows?: InputMaxRowsType
+  /** Enter without Shift submits the value */
+  onSubmit?: InputOnSubmitType
   type?: never
   children?: never
 }
@@ -745,7 +775,7 @@ export interface InputAsTextareaProps extends InputBaseProps {
  * InputProps
  *
  * Complete prop definition for the Input component — one branch per `as`, so
- * `ref`, `type`, `rows` and `children` are typed for the element rendered.
+ * `ref`, `type`, `rows`, `maxRows`, `onSubmit` and `children` are typed for the element rendered.
  */
 export type InputProps =
   | InputAsInputProps
@@ -799,6 +829,8 @@ namespace InputTypes {
   export type End = InputEndType
   export type Width = InputWidthType
   export type Rows = InputRowsType
+  export type MaxRows = InputMaxRowsType
+  export type OnSubmit = InputOnSubmitType
   export type Children = InputChildrenType
   export type InputMode = InputInputModeType
   export type EnterKeyHint = InputEnterKeyHintType

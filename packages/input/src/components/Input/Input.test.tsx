@@ -317,6 +317,111 @@ describe("Input", () => {
     })
   })
 
+  describe("maxRows", () => {
+    it("caps the textarea at maxRows lines and removes the resize handle", () => {
+      render(
+        <Input
+          as="textarea"
+          aria-label="notes"
+          maxRows={6}
+        />
+      )
+      const css = cssFor(screen.getByRole("textbox", { name: "notes" }))
+      expect(css).toMatch(/max-block-size:calc\(\s*6 \* 1lh/)
+      expect(css).toContain("resize:none")
+    })
+
+    it("leaves the textarea uncapped and resizable without maxRows", () => {
+      render(
+        <Input
+          as="textarea"
+          aria-label="notes"
+        />
+      )
+      const css = cssFor(screen.getByRole("textbox", { name: "notes" }))
+      expect(css).not.toContain("max-block-size")
+      expect(css).toContain("resize:vertical")
+    })
+
+    it("is typed for as=\"textarea\" only", () => {
+      // @ts-expect-error — `maxRows` applies only to as="textarea"
+      render(<Input aria-label="a" maxRows={3} />)
+      // @ts-expect-error — `onSubmit` applies only to as="textarea"
+      render(<Input as="select" aria-label="b" onSubmit={jest.fn()} />)
+      expect(screen.getAllByLabelText(/^[ab]$/)).toHaveLength(2)
+    })
+  })
+
+  describe("onSubmit", () => {
+    const renderComposer = (props: Partial<Extract<InputProps, { as: "textarea" }>> = {}) => {
+      const onSubmit = jest.fn()
+      render(
+        <Input
+          as="textarea"
+          aria-label="message"
+          onSubmit={onSubmit}
+          {...props}
+        />
+      )
+      return { onSubmit, textarea: screen.getByRole("textbox", { name: "message" }) }
+    }
+
+    it("submits the value on Enter without inserting a newline", async () => {
+      const { onSubmit, textarea } = renderComposer()
+      await userEvent.type(textarea, "Hello{Enter}")
+      expect(onSubmit).toHaveBeenCalledTimes(1)
+      expect(onSubmit).toHaveBeenCalledWith("Hello", expect.objectContaining({ key: "Enter" }))
+      expect(textarea).toHaveValue("Hello")
+    })
+
+    it("inserts a newline on Shift+Enter and does not submit", async () => {
+      const { onSubmit, textarea } = renderComposer()
+      await userEvent.type(textarea, "a{Shift>}{Enter}{/Shift}b")
+      expect(onSubmit).not.toHaveBeenCalled()
+      expect(textarea).toHaveValue("a\nb")
+    })
+
+    it("ignores Enter during IME composition", () => {
+      const { onSubmit, textarea } = renderComposer()
+      const notCancelled = fireEvent.keyDown(textarea, { key: "Enter", isComposing: true })
+      expect(onSubmit).not.toHaveBeenCalled()
+      expect(notCancelled).toBe(true)
+    })
+
+    it("runs onKeyDown first, and preventDefault there cancels the submit", () => {
+      const calls: string[] = []
+      const { onSubmit, textarea } = renderComposer({
+        onKeyDown: event => {
+          calls.push("keydown")
+          event.preventDefault()
+        },
+      })
+      fireEvent.keyDown(textarea, { key: "Enter" })
+      expect(calls).toEqual(["keydown"])
+      expect(onSubmit).not.toHaveBeenCalled()
+    })
+
+    it("calls onKeyDown before onSubmit when not prevented", () => {
+      const calls: string[] = []
+      const { textarea } = renderComposer({
+        onKeyDown: () => calls.push("keydown"),
+        onSubmit: () => calls.push("submit"),
+      })
+      fireEvent.keyDown(textarea, { key: "Enter" })
+      expect(calls).toEqual(["keydown", "submit"])
+    })
+
+    it("keeps Enter native on a textarea without onSubmit", () => {
+      render(
+        <Input
+          as="textarea"
+          aria-label="notes"
+        />
+      )
+      expect(fireEvent.keyDown(screen.getByRole("textbox", { name: "notes" }), { key: "Enter" })).toBe(true)
+    })
+  })
+
   it("renders start and end slots in order start → control → end", () => {
     render(
       <Input

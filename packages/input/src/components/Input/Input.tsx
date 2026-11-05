@@ -35,6 +35,7 @@ const Input: React.FC<InputProps> = ({
   id,
   inputMode,
   maxLength,
+  maxRows,
   minLength,
   theme,
   name,
@@ -42,6 +43,7 @@ const Input: React.FC<InputProps> = ({
   onChange,
   onFocus,
   onKeyDown,
+  onSubmit,
   pattern,
   placeholder,
   readOnly = false,
@@ -74,6 +76,29 @@ const Input: React.FC<InputProps> = ({
   // (a camelCase `dirName` renders verbatim and triggers an unknown-prop warning).
   const elementProps =
     as === "input" ? { type, pattern } : as === "textarea" ? { rows } : {}
+  // Composer keys: the consumer's onKeyDown runs first and may preventDefault to
+  // keep the newline. Shift+Enter and Enter that commits an IME composition
+  // stay native; any other Enter on a textarea with onSubmit submits instead.
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    onKeyDown?.(event)
+    if (
+      as !== "textarea" ||
+      !onSubmit ||
+      event.defaultPrevented ||
+      event.key !== "Enter" ||
+      event.shiftKey ||
+      event.nativeEvent.isComposing
+    ) {
+      return
+    }
+    event.preventDefault()
+    // as="textarea" here, so the control is a <textarea>; StyledControl's
+    // <input> typing is narrowed back (same as the ref cast below).
+    onSubmit(
+      event.currentTarget.value,
+      event as unknown as React.KeyboardEvent<HTMLTextAreaElement>
+    )
+  }
   const dirNameAttribute =
     dirName === undefined
       ? {}
@@ -100,6 +125,7 @@ const Input: React.FC<InputProps> = ({
         as={as}
         $as={as}
         $disabled={disabled}
+        $maxRows={maxRows}
         $rows={rows}
         $size={size}
         {...elementProps}
@@ -140,7 +166,7 @@ const Input: React.FC<InputProps> = ({
           onChange?.(event.target.value, event)
         }}
         onFocus={onFocus}
-        onKeyDown={onKeyDown}
+        onKeyDown={handleKeyDown}
         // `placeholder` is not a valid <select> attribute — omitted for as="select"
         placeholder={as === "select" ? undefined : placeholder}
         readOnly={readOnly}
