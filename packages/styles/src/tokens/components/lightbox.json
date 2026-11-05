@@ -1,6 +1,22 @@
 {
-  "zIndex": {
-    "base": "9999"
+  "backgroundColor": {
+    "base": "var(--np--overlay-color)"
+  },
+  "image": {
+    "maxWidth": {
+      "base": "90vw"
+    },
+    "maxHeight": {
+      "base": "80vh"
+    }
+  },
+  "caption": {
+    "maxWidth": {
+      "base": "600px"
+    },
+    "padding": {
+      "base": "var(--np--gap) var(--np--gap--large)"
+    }
   },
   "focusRing": {
     "width": {

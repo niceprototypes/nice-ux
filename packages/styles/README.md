@@ -173,6 +173,7 @@ Keys: a bare name is one band (`tablet`), `+` is that breakpoint and wider, `-` 
 | `gap` | none, smaller, small, base, large, larger |
 | `letterSpacing` | tight, base, wide, wider |
 | `lineHeight` | single, condensed, base, expanded |
+| `overlayColor` | base (the scrim behind fullscreen overlays) |
 | `size` | smaller, small, base, large, larger |
 | `zIndex` | base, low, medium, high, higher |
 

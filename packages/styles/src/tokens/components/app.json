@@ -55,7 +55,7 @@
   },
   "logo": {
     "height": {
-      "base": "40"
+      "base": "40px"
     }
   },
   "header": {

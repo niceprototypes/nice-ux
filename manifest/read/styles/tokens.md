@@ -94,6 +94,7 @@ ComponentPrefix     // "button" | "icon" | "tile" | "ink" (auto-generated)
 | `gap` | `gap` | none, smaller, small, base, large, larger |
 | `letterSpacing` | `letter-spacing` | tight, base, wide, wider |
 | `lineHeight` | `line-height` | single, condensed, base, expanded |
+| `overlayColor` | `overlay-color` | base (the scrim behind fullscreen overlays) |
 | `size` | `size` | smaller, small, base, large, larger |
 | `strokeWidthScale` | `stroke-width-scale` | base (+ themed: night) |
 | `zIndex` | `z-index` | base, low, medium, high, higher |
@@ -435,7 +436,7 @@ import { getToken } from "@niceprototypes/styles"
 getToken("button.size:base")                                    // → "var(--np--button--size)"
 getToken("icon.color:error")                                    // → "var(--np--icon--color--error)"
 getToken("button.icon.size:small")                              // → "var(--np--button--icon--size--small)"
-getToken("lightbox.zIndex:base", { as: "value" })               // → "9999"
+getToken("lightbox.image.maxWidth:base", { as: "value" })       // → "90vw"
 ```
 
 Valid prefixes are listed by the `ComponentPrefix` type (auto-generated from `src/tokens/components/*.json` filenames). Component packages have no per-package `get{Component}Token` wrappers.

@@ -39,8 +39,11 @@
   "disabledOpacity": {
     "base": "0.5"
   },
-  "transitionDuration": {
+  "animationDuration": {
     "base": "var(--np--animation-duration--fast)"
+  },
+  "animationEasing": {
+    "base": "var(--np--animation-easing--ease-out)"
   },
   "focusRing": {
     "width": {

@@ -69,6 +69,8 @@
 	--np--line-height: 1.5;
 	--np--line-height--expanded: 1.75;
 
+	--np--overlay-color: hsla(0, 0%, 0%, 0.9);
+
 	--np--size--smaller: 24px;
 	--np--size--small: 32px;
 	--np--size: 48px;
@@ -271,7 +273,7 @@
 	--np--app--handle--color: var(--np--border-color--strong);
 	--np--app--handle--padding: var(--np--gap--large);
 	--np--app--handle--padding-bottom: var(--np--gap--large);
-	--np--app--logo--height: 40;
+	--np--app--logo--height: 40px;
 	--np--app--header--icon--color: var(--np--color--lighter);
 	--np--app--header--icon--color--hover: var(--np--color);
 	--np--app--header--focus-ring--color: var(--np--border-color);
@@ -377,6 +379,18 @@
 	--np--card--focus-ring--offset: var(--np--gap--smaller);
 	--np--card--disabled-opacity: 0.5;
 
+	/* chat component tokens */
+	--np--chat--message--max-width--user: 80%;
+	--np--chat--message--max-width--assistant: 100%;
+	--np--chat--message--padding--user: var(--np--gap--small) var(--np--gap);
+	--np--chat--message--padding--assistant: var(--np--gap--none);
+	--np--chat--message--border-radius--user: var(--np--border-radius--large);
+	--np--chat--message--border-radius--assistant: var(--np--border-radius--none);
+	--np--chat--message--background-color--user: var(--np--background-color--raised);
+	--np--chat--message--background-color--assistant: transparent;
+	--np--chat--log--gap: var(--np--gap--large);
+	--np--chat--composer--max-rows: 6;
+
 	/* checkbox component tokens */
 	--np--checkbox--size--smaller: 14px;
 	--np--checkbox--size--small: 16px;
@@ -425,6 +439,7 @@
 	/* code component tokens */
 	--np--code--background-color: var(--np--background-color);
 	--np--code--border-color: var(--np--border-color);
+	--np--code--border-width: var(--np--border-width--small);
 	--np--code--border-radius: var(--np--border-radius);
 	--np--code--border-radius--small: var(--np--border-radius--small);
 	--np--code--box-shadow: var(--np--box-shadow);
@@ -635,9 +650,15 @@
 	--np--input--focus-ring--color: var(--np--color--link);
 	--np--input--focus-ring--offset: var(--np--gap--smaller);
 	--np--input--font-family: var(--np--font-family);
+	--np--input--animation-duration: var(--np--animation-duration--fast);
+	--np--input--animation-easing: var(--np--animation-easing);
 
 	/* lightbox component tokens */
-	--np--lightbox--z-index: 9999;
+	--np--lightbox--background-color: var(--np--overlay-color);
+	--np--lightbox--image--max-width: 90vw;
+	--np--lightbox--image--max-height: 80vh;
+	--np--lightbox--caption--max-width: 600px;
+	--np--lightbox--caption--padding: var(--np--gap) var(--np--gap--large);
 	--np--lightbox--focus-ring--width: var(--np--border-width--large);
 	--np--lightbox--focus-ring--color: var(--np--color--link);
 	--np--lightbox--focus-ring--offset: var(--np--gap--smaller);
@@ -690,8 +711,8 @@
 	--np--listbox--focus-ring--color: var(--np--border-color--link);
 
 	/* logo component tokens */
-	--np--logo--height: 64;
-	--np--logo--gap: 0.121;
+	--np--logo--height: 64px;
+	--np--logo--gap: var(--np--gap--smaller);
 	--np--logo--color: var(--np--color--day);
 
 	/* markdown component tokens */
@@ -837,7 +858,8 @@
 	--np--toggle--thumb--background-color: var(--np--background-color);
 	--np--toggle--gap: var(--np--gap--small);
 	--np--toggle--disabled-opacity: 0.5;
-	--np--toggle--transition-duration: var(--np--animation-duration--fast);
+	--np--toggle--animation-duration: var(--np--animation-duration--fast);
+	--np--toggle--animation-easing: var(--np--animation-easing--ease-out);
 	--np--toggle--focus-ring--width: var(--np--border-width--large);
 	--np--toggle--focus-ring--color: var(--np--color--link);
 	--np--toggle--focus-ring--offset: var(--np--gap--smaller);
@@ -907,6 +929,7 @@
 	--np--card--border-color--selected--inverse: var(--np--border-color--link--inverse);
 	--np--card--hover--border-color--inverse: var(--np--border-color--strong--inverse);
 	--np--card--focus-ring--color--inverse: var(--np--color--link--inverse);
+	--np--chat--message--background-color--user--inverse: var(--np--background-color--raised--inverse);
 	--np--checkbox--background-color--unchecked--inverse: var(--np--background-color--inverse);
 	--np--checkbox--background-color--inverse: var(--np--color--inverse);
 	--np--checkbox--background-color--link--inverse: var(--np--color--link--inverse);
@@ -1114,9 +1137,9 @@
 	/* Component breakpoint primitives */
 	--np--app--search--font-size--phone: max(16px, 1em);
 	--np--app--search--font-size--tablet: 1em;
-	--np--logo--height--phone: 64;
-	--np--logo--height--tablet: 56;
-	--np--logo--height--laptop: 48;
+	--np--logo--height--phone: 64px;
+	--np--logo--height--tablet: 56px;
+	--np--logo--height--laptop: 48px;
 }
 
 @media (min-width: 641px) {
@@ -1372,6 +1395,7 @@
 		--np--card--border-color--selected--inverse: var(--np--border-color--link--night--inverse);
 		--np--card--hover--border-color--inverse: var(--np--border-color--strong--night--inverse);
 		--np--card--focus-ring--color--inverse: var(--np--color--link--night--inverse);
+		--np--chat--message--background-color--user--inverse: var(--np--background-color--raised--night--inverse);
 		--np--checkbox--background-color--unchecked--inverse: var(--np--background-color--night--inverse);
 		--np--checkbox--background-color--inverse: var(--np--color--night--inverse);
 		--np--checkbox--background-color--link--inverse: var(--np--color--link--night--inverse);
@@ -1573,6 +1597,7 @@
 		--np--card--border-color--selected: var(--np--border-color--link--night);
 		--np--card--hover--border-color: var(--np--border-color--strong--night);
 		--np--card--focus-ring--color: var(--np--color--link--night);
+		--np--chat--message--background-color--user: var(--np--background-color--raised--night);
 		--np--checkbox--background-color--unchecked: var(--np--background-color--night);
 		--np--checkbox--background-color: var(--np--color--night);
 		--np--checkbox--background-color--link: var(--np--color--link--night);
@@ -1841,6 +1866,7 @@
 		--np--card--border-color--selected--inverse: var(--np--border-color--link--day--inverse);
 		--np--card--hover--border-color--inverse: var(--np--border-color--strong--day--inverse);
 		--np--card--focus-ring--color--inverse: var(--np--color--link--day--inverse);
+		--np--chat--message--background-color--user--inverse: var(--np--background-color--raised--day--inverse);
 		--np--checkbox--background-color--unchecked--inverse: var(--np--background-color--day--inverse);
 		--np--checkbox--background-color--inverse: var(--np--color--day--inverse);
 		--np--checkbox--background-color--link--inverse: var(--np--color--link--day--inverse);
@@ -2042,6 +2068,7 @@
 		--np--card--border-color--selected: var(--np--border-color--link--day);
 		--np--card--hover--border-color: var(--np--border-color--strong--day);
 		--np--card--focus-ring--color: var(--np--color--link--day);
+		--np--chat--message--background-color--user: var(--np--background-color--raised--day);
 		--np--checkbox--background-color--unchecked: var(--np--background-color--day);
 		--np--checkbox--background-color: var(--np--color--day);
 		--np--checkbox--background-color--link: var(--np--color--link--day);
@@ -2309,6 +2336,7 @@
 		--np--card--border-color--selected--inverse: var(--np--border-color--link--night--inverse);
 		--np--card--hover--border-color--inverse: var(--np--border-color--strong--night--inverse);
 		--np--card--focus-ring--color--inverse: var(--np--color--link--night--inverse);
+		--np--chat--message--background-color--user--inverse: var(--np--background-color--raised--night--inverse);
 		--np--checkbox--background-color--unchecked--inverse: var(--np--background-color--night--inverse);
 		--np--checkbox--background-color--inverse: var(--np--color--night--inverse);
 		--np--checkbox--background-color--link--inverse: var(--np--color--link--night--inverse);
@@ -2510,6 +2538,7 @@
 		--np--card--border-color--selected: var(--np--border-color--link--night);
 		--np--card--hover--border-color: var(--np--border-color--strong--night);
 		--np--card--focus-ring--color: var(--np--color--link--night);
+		--np--chat--message--background-color--user: var(--np--background-color--raised--night);
 		--np--checkbox--background-color--unchecked: var(--np--background-color--night);
 		--np--checkbox--background-color: var(--np--color--night);
 		--np--checkbox--background-color--link: var(--np--color--link--night);
