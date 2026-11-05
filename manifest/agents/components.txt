@@ -54,13 +54,13 @@ VendorIcon(icon-vendor) iconNode:[string, Record<string, unknown>][]
 Image(image) [components-image--playground] as?:"img"|"div" src?:string alt:string width?:string height?:string aspectRatio?:string backgroundSize?:BackgroundSizeType backgroundPosition?:string borderRadius?:BorderRadiusType bordered?:boolean borderWidth?:BorderWidthType borderColor?:ColorTokenProp<ImageBorderColorType> theme?:ThemeType renderImage?:fn vendor?:boolean thumbnail?:string|false loading?:"eager"|"lazy" fetchPriority?:"high"|"low"|"auto" children?:node
 Ink(ink) [components-ink--playground] align?:"left"|"center"|"right"|"justify" antialiased?:boolean as?:"h1"|"h2"|"h3"|"h4"|"p"|"span"="span" children:node code?:boolean italic?:boolean=false color?:ColorTokenProp<InkColorType> theme?:ThemeType legibilityOptimized?:boolean lineClamp?:"none"|number lineHeight?:LineHeightType size?:FontSizeType weight?:FontWeightType wordBreak?:"normal"|"break-all"|"keep-all"|"break-word"
 Input(input) [components-forms-input--playground] 
-Lightbox(lightbox) [components-lightbox--playground] children:node imageUrl:string alt?:string title?:string description?:string
+Lightbox(lightbox) [components-lightbox--playground] children:node imageUrl:string alt?:string title?:string description?:string open?:boolean onOpenChange?:fn
 LightboxCaption(lightbox) title?:LightboxTitleType description?:LightboxDescriptionType
 Line(line) [components-line--playground] color?:BorderColorType radius?:"element"|Element|number|[LineCornerType, LineCornerType, LineCornerType, LineCornerType] theme?:ThemeType
 List(list) [components-list--playground] 
 ListItem(list) 
 Listbox(listbox) [components-forms-listbox--playground] options:ReadonlyArray<ListboxOptionType|ListboxOptionGroupType> value?:string onChange?:fn activeValue?:string|null onActiveChange?:fn focusable?:boolean=true size?:SizeType="base" theme?:ThemeType
-Logo(logo) [components-logo--playground] height?:number showName?:boolean nameHeightScale?:number=0.6 gap?:number=4 theme?:ThemeType
+Logo(logo) [components-logo--playground] height?:number showName?:boolean nameHeightScale?:number=0.6 gap?:GapType theme?:ThemeType
 Markdown(markdown) [components-markdown--playground] children:string linkComponent?:React.ComponentType<{ href: string; children: node }> size?:FontSizeType overrides?:MarkdownToJSX.Overrides
 Popover(popover) [components-popover--playground] open:boolean onOpenChange?:fn anchorRef:React.RefObject<HTMLElement|null> ignoreOutsideRefs?:ReadonlyArray<React.RefObject<HTMLElement|null>> position?:"top"|"bottom"|"left"|"right"="bottom" align?:"start"|"center"|"end"="start" matchAnchorWidth?:boolean=false children?:node role?:React.AriaRole="dialog" theme?:ThemeType
 Radio(radio) [components-forms-radio--playground] value:string disabled?:boolean children?:node size?:RadioSizeType backgroundColor?:ColorTokenProp<RadioBackgroundColorType> borderColor?:ColorTokenProp<RadioBorderColorType>

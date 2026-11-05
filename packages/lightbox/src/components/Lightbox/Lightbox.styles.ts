@@ -10,23 +10,40 @@ export const Trigger = styled.div`
   }
 `
 
-export const Overlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: ${getToken("lightbox.zIndex:base")};
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0.9);
+/**
+ * The native `<dialog>`, shown with `showModal()`: the top layer needs no z-index and makes the
+ * page behind it inert. It fills the viewport and carries the scrim itself, so a click whose target
+ * is the dialog is a click outside the image and caption; the user-agent backdrop is cleared.
+ */
+export const Overlay = styled.dialog`
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: ${getToken("lightbox.backgroundColor:base")};
   cursor: pointer;
+
+  &[open] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &::backdrop {
+    background: none;
+  }
+
+  &:focus {
+    outline: none;
+  }
 `
 
 export const Image = styled.img`
-  max-width: 90vw;
-  max-height: 80vh;
+  max-width: ${getToken("lightbox.image.maxWidth:base")};
+  max-height: ${getToken("lightbox.image.maxHeight:base")};
   object-fit: contain;
 `

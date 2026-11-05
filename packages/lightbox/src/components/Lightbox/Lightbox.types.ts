@@ -29,6 +29,22 @@ export type LightboxTitleType = string
 export type LightboxDescriptionType = string
 
 /**
+ * LightboxOpenType
+ *
+ * Whether the overlay is shown. Set it to control the Lightbox; leave it unset
+ * and the Lightbox opens and closes itself.
+ */
+export type LightboxOpenType = boolean
+
+/**
+ * LightboxOnOpenChangeType
+ *
+ * Called with the open state the Lightbox requests: `true` from the trigger,
+ * `false` from Escape or a click outside the image and caption.
+ */
+export type LightboxOnOpenChangeType = (open: boolean) => void
+
+/**
  * LightboxProps
  *
  * Complete prop definition for the Lightbox component.
@@ -44,6 +60,10 @@ export interface LightboxProps {
   title?: LightboxTitleType
   /** Description shown below the title in the overlay */
   description?: LightboxDescriptionType
+  /** Whether the overlay is shown (controlled); unset, the Lightbox manages it */
+  open?: LightboxOpenType
+  /** Called with the requested open state, in controlled and uncontrolled use */
+  onOpenChange?: LightboxOnOpenChangeType
   /** CSS class name applied to the trigger element */
   className?: string
   /** Inline styles applied to the trigger element */
@@ -57,6 +77,8 @@ namespace LightboxTypes {
   export type Alt = LightboxAltType
   export type Title = LightboxTitleType
   export type Description = LightboxDescriptionType
+  export type Open = LightboxOpenType
+  export type OnOpenChange = LightboxOnOpenChangeType
   export type Props = LightboxProps
 }
 

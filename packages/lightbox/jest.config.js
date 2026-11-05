@@ -1,0 +1,1 @@
+export { default } from "@niceprototypes/config-jest/react"

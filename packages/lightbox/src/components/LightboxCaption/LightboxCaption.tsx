@@ -11,7 +11,7 @@ const LightboxCaption: React.FC<LightboxCaptionProps> = ({
   if (!title && !description) return null
 
   return (
-    <Wrapper className={className} onClick={(e) => e.stopPropagation()}>
+    <Wrapper className={className} onClick={(event) => event.stopPropagation()}>
       {title && (
         <Ink as="h3" size="large" weight="semibold" theme="night">
           {title}

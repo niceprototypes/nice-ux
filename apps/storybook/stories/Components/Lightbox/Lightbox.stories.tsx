@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
-import { expect, within } from "storybook/test"
+import { expect, fn, within } from "storybook/test"
 import Lightbox from "@niceprototypes/lightbox"
 import type { LightboxProps } from "@niceprototypes/lightbox"
 import Ink from "@niceprototypes/ink"
@@ -38,6 +38,9 @@ const HIDDEN = { table: { disable: true } }
 const overlayImage = (canvasElement: HTMLElement) =>
   Array.from(document.body.querySelectorAll("img")).find(image => !canvasElement.contains(image))
 
+/** The open overlay: the modal `<dialog>` rendered into `document.body`. */
+const overlayDialog = () => document.body.querySelector("dialog")
+
 export const Playground: Story = {
   args: {
     children: "image",
@@ -45,6 +48,7 @@ export const Playground: Story = {
     alt: "Mountain landscape",
     title: "Mountain landscape",
     description: "Morning light over the ridge.",
+    onOpenChange: fn(),
   },
   argTypes: {
     children: { control: "select", options: CHILDREN_OPTIONS, table: { category: "Content" } },
@@ -52,6 +56,9 @@ export const Playground: Story = {
     alt: { control: "text", table: { category: "Content" } },
     title: { control: "text", table: { category: "Caption" } },
     description: { control: "text", table: { category: "Caption" } },
+    // Unset: the Lightbox manages its own open state.
+    open: { control: "boolean", table: { category: "State" } },
+    onOpenChange: { table: { category: "State" } },
     className: HIDDEN,
     style: HIDDEN,
   },
@@ -78,11 +85,20 @@ export const Playground: Story = {
     await expect(body.getByText(args.title!)).toBeInTheDocument()
     await expect(body.getByText(args.description!)).toBeInTheDocument()
     await expect(document.body.style.overflow).toBe("hidden")
-    // A click on the image keeps the overlay open; Escape closes it.
+    // A modal dialog named by the title, holding the focus; the page behind it is inert.
+    const dialog = overlayDialog()!
+    await expect(within(document.body).getByRole("dialog", { name: args.title })).toBe(dialog)
+    await expect(dialog).toHaveAttribute("aria-modal", "true")
+    await expect(dialog.matches(":modal")).toBe(true)
+    await expect(dialog.contains(document.activeElement)).toBe(true)
+    await expect(args.onOpenChange).toHaveBeenLastCalledWith(true)
+    // A click on the image keeps the overlay open; Escape closes it and focus returns to the trigger.
     await userEvent.click(image)
     await expect(overlayImage(canvasElement)).toBeDefined()
     await userEvent.keyboard("{Escape}")
     await expect(overlayImage(canvasElement)).toBeUndefined()
+    await expect(args.onOpenChange).toHaveBeenLastCalledWith(false)
+    await expect(trigger).toHaveFocus()
     await expect(document.body.style.overflow).toBe("")
   },
 }
@@ -112,5 +128,17 @@ export const NoCaption: Story = {
     // A click on the backdrop closes the overlay.
     await userEvent.click(overlay)
     await expect(overlayImage(canvasElement)).toBeUndefined()
+  },
+}
+
+export const Controlled: Story = {
+  ...Playground,
+  args: { ...Playground.args, open: true },
+  play: async ({ canvasElement, args, userEvent }) => {
+    // open shows the overlay without a click; Escape only requests the close.
+    await expect(overlayDialog()!.matches(":modal")).toBe(true)
+    await userEvent.keyboard("{Escape}")
+    await expect(args.onOpenChange).toHaveBeenLastCalledWith(false)
+    await expect(overlayImage(canvasElement)).toBeDefined()
   },
 }
