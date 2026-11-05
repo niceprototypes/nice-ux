@@ -5,6 +5,9 @@
   "borderColor": {
     "base": "var(--np--border-color)"
   },
+  "borderWidth": {
+    "base": "var(--np--border-width--small)"
+  },
   "borderRadius": {
     "base": "var(--np--border-radius)",
     "small": "var(--np--border-radius--small)"

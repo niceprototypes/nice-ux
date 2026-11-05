@@ -17,6 +17,7 @@ export type FontWeightType = "light" | "base" | "medium" | "semibold" | "bold" |
 export type GapType = "none" | "smaller" | "small" | "base" | "large" | "larger"
 export type LetterSpacingType = "tight" | "base" | "wide" | "wider"
 export type LineHeightType = "single" | "condensed" | "base" | "expanded"
+export type OverlayColorType = "base"
 export type SizeType = "smaller" | "small" | "base" | "large" | "larger"
 export type ZIndexType = "base" | "low" | "medium" | "high" | "higher"
 export type BackgroundColorType = "base" | "raised" | "success" | "highlight" | "warning" | "error" | "link"
@@ -44,6 +45,7 @@ export interface TokenVariants extends CustomTokenVariants {
   "gap": GapType
   "letterSpacing": LetterSpacingType
   "lineHeight": LineHeightType
+  "overlayColor": OverlayColorType
   "size": SizeType
   "zIndex": ZIndexType
   "backgroundColor": BackgroundColorType
@@ -122,6 +124,7 @@ export interface TokenVariants extends CustomTokenVariants {
   "checkbox.focusRing.offset": "base"
   "code.backgroundColor": "base"
   "code.borderColor": "base"
+  "code.borderWidth": "base"
   "code.borderRadius": "base" | "small"
   "code.boxShadow": "base"
   "code.gap": "base"
@@ -194,7 +197,11 @@ export interface TokenVariants extends CustomTokenVariants {
   "input.focusRing.color": "base"
   "input.focusRing.offset": "base"
   "input.fontFamily": "base"
-  "lightbox.zIndex": "base"
+  "lightbox.backgroundColor": "base"
+  "lightbox.image.maxWidth": "base"
+  "lightbox.image.maxHeight": "base"
+  "lightbox.caption.maxWidth": "base"
+  "lightbox.caption.padding": "base"
   "lightbox.focusRing.width": "base"
   "lightbox.focusRing.color": "base"
   "lightbox.focusRing.offset": "base"
@@ -271,7 +278,8 @@ export interface TokenVariants extends CustomTokenVariants {
   "toggle.thumb.backgroundColor": "base"
   "toggle.gap": "base"
   "toggle.disabledOpacity": "base"
-  "toggle.transitionDuration": "base"
+  "toggle.animationDuration": "base"
+  "toggle.animationEasing": "base"
   "toggle.focusRing.width": "base"
   "toggle.focusRing.color": "base"
   "toggle.focusRing.offset": "base"

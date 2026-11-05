@@ -20,12 +20,12 @@ const componentBreakpointTokensData: ComponentBreakpointTokensData = {
   "logo": {
     "tablet": {
       "height": {
-        "base": "56"
+        "base": "56px"
       }
     },
     "laptop": {
       "height": {
-        "base": "48"
+        "base": "48px"
       }
     }
   }

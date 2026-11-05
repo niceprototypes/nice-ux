@@ -21,7 +21,8 @@ type Bounds = { min: number; max: number }
  * `maxHeight` fades out above a drag bar that sets the visible height between the
  * cap and the full code (pointer or arrow keys); `children`, a live demo, sit above the code
  * behind one divider. Inlined blocks render the code
- * as a chip with a "Copy to clipboard" tooltip.
+ * as a chip with a "Copy to clipboard" tooltip; with `copyOnClick` the chip is a
+ * button (Enter or Space copies).
  */
 const Code: React.FC<CodeProps> = ({
   code,
@@ -92,15 +93,27 @@ const Code: React.FC<CodeProps> = ({
 
   // Copy on click, except clicks on the copy icon, the drag bar and the live demo, which act on their own.
   const onClick = (event: React.MouseEvent) => {
-    if ((event.target as Element).closest("[role=button], [role=separator], [data-code-preview]")) return
+    const owner = (event.target as Element).closest("[role=button], [role=separator], [data-code-preview]")
+    if (owner && owner !== event.currentTarget) return
     copyToClipboard(code)
   }
+
+  // The inline chip is the copy button itself: Enter or Space copies.
+  const onChipKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key !== "Enter" && event.key !== " ") return
+    event.preventDefault()
+    copyToClipboard(code)
+  }
+  const chipButton = inlined && copyOnClick
 
   const block = (
     <CodeDiv
       as={inlined ? "span" : undefined}
       className={className}
       onClick={copyOnClick ? onClick : undefined}
+      role={chipButton ? "button" : undefined}
+      tabIndex={chipButton ? 0 : undefined}
+      onKeyDown={chipButton ? onChipKeyDown : undefined}
       $clickable={copyOnClick}
       $inlined={inlined}
       $fit={fit}

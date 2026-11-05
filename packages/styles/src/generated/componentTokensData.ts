@@ -65,7 +65,7 @@ const componentTokensData: ComponentTokensData = {
     },
     "logo": {
       "height": {
-        "base": "40"
+        "base": "40px"
       }
     },
     "header": {
@@ -372,6 +372,9 @@ const componentTokensData: ComponentTokensData = {
     },
     "borderColor": {
       "base": "var(--np--border-color)"
+    },
+    "borderWidth": {
+      "base": "var(--np--border-width--small)"
     },
     "borderRadius": {
       "base": "var(--np--border-radius)",
@@ -749,8 +752,24 @@ const componentTokensData: ComponentTokensData = {
     }
   },
   "lightbox": {
-    "zIndex": {
-      "base": "9999"
+    "backgroundColor": {
+      "base": "var(--np--overlay-color)"
+    },
+    "image": {
+      "maxWidth": {
+        "base": "90vw"
+      },
+      "maxHeight": {
+        "base": "80vh"
+      }
+    },
+    "caption": {
+      "maxWidth": {
+        "base": "600px"
+      },
+      "padding": {
+        "base": "var(--np--gap) var(--np--gap--large)"
+      }
     },
     "focusRing": {
       "width": {
@@ -863,10 +882,10 @@ const componentTokensData: ComponentTokensData = {
   },
   "logo": {
     "height": {
-      "base": "64"
+      "base": "64px"
     },
     "gap": {
-      "base": "0.121"
+      "base": "var(--np--gap--smaller)"
     },
     "color": {
       "base": "var(--np--color--day)"
@@ -1137,8 +1156,11 @@ const componentTokensData: ComponentTokensData = {
     "disabledOpacity": {
       "base": "0.5"
     },
-    "transitionDuration": {
+    "animationDuration": {
       "base": "var(--np--animation-duration--fast)"
+    },
+    "animationEasing": {
+      "base": "var(--np--animation-easing--ease-out)"
     },
     "focusRing": {
       "width": {

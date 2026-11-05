@@ -88,6 +88,9 @@ const tokensData: TokensData = {
     "base": "1.5",
     "expanded": "1.75"
   },
+  "overlayColor": {
+    "base": "hsla(0, 0%, 0%, 0.9)"
+  },
   "size": {
     "smaller": "24px",
     "small": "32px",

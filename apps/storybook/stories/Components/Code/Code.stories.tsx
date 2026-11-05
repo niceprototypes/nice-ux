@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { expect, spyOn, within } from "storybook/test"
-import type { GapType } from "@niceprototypes/styles"
+import { getToken, type GapType } from "@niceprototypes/styles"
 import Code, { type CodeMaxHeightType } from "@niceprototypes/code"
 
 /**
@@ -93,6 +93,12 @@ export const Playground: Story = {
     writeText.mockRestore()
     // Short code fits under maxHeight: no drag bar.
     await expect(canvas.queryByRole("separator")).not.toBeInTheDocument()
+    // The card border reads the code.borderWidth token.
+    const probe = document.createElement("div")
+    probe.style.borderTop = `${getToken("code.borderWidth:base")} solid`
+    canvasElement.appendChild(probe)
+    await expect(getComputedStyle(root(canvasElement)).borderTopWidth).toBe(getComputedStyle(probe).borderTopWidth)
+    probe.remove()
   },
 }
 
@@ -142,6 +148,17 @@ export const Inlined: Story = {
     await expect(await within(document.body).findByText("Copy to clipboard")).toBeInTheDocument()
     await userEvent.click(chip)
     await expect(writeText).toHaveBeenCalledWith("border.width")
+    writeText.mockClear()
+    // The chip is a button: Tab reaches it, Enter and Space copy, and it shows a focus ring.
+    const button = within(canvasElement).getByRole("button", { name: "border.width" })
+    button.blur()
+    await userEvent.tab()
+    await expect(button).toHaveFocus()
+    await expect(getComputedStyle(button).outlineStyle).toBe("solid")
+    await userEvent.keyboard("{Enter}")
+    await expect(writeText).toHaveBeenCalledTimes(1)
+    await userEvent.keyboard(" ")
+    await expect(writeText).toHaveBeenCalledTimes(2)
     writeText.mockRestore()
   },
 }

@@ -21,7 +21,7 @@ export const CodeDiv = styled.div<{ $clickable?: boolean; $inlined?: boolean; $f
   background-color: ${({ $inlined }) => ($inlined ? INLINE_BACKGROUND : getToken("code.backgroundColor:base"))};
   ${({ $clickable }) => $clickable && `cursor: pointer;`}
   flex-grow: 1;
-  border: ${({ $inlined }) => ($inlined ? "none" : `1px solid ${getToken("code.borderColor:base")}`)};
+  border: ${({ $inlined }) => ($inlined ? "none" : `${getToken("code.borderWidth:base")} solid ${getToken("code.borderColor:base")}`)};
   border-radius: ${({ $inlined }) => getToken("code.borderRadius", $inlined ? "small" : "base")};
   box-shadow: ${({ $inlined }) => ($inlined ? "none" : getToken("code.boxShadow:base"))};
   max-width: ${getToken("code.maxWidth:base")};
@@ -32,14 +32,15 @@ export const CodeDiv = styled.div<{ $clickable?: boolean; $inlined?: boolean; $f
     margin: 0;
   }
 
-  /* Inline: a chip around the code (em padding, so it scales with the code), a step off the surface, lighter again under the pointer. */
+  /* Inline: a chip around the code (em padding, so it scales with the code), a step off the surface, lighter again under the pointer, ringed on keyboard focus. */
   ${({ $inlined, $clickable }) =>
     $inlined &&
     `display: inline-flex;
     vertical-align: baseline;
     font-size: ${getToken("code.fontSize:small")};
     padding: ${getToken("code.inline.paddingBlock:base")} ${getToken("code.inline.paddingInline:base")};
-    ${$clickable ? `&:hover { background-color: ${INLINE_BACKGROUND_HOVER}; }` : ""}`}
+    ${$clickable ? `&:hover { background-color: ${INLINE_BACKGROUND_HOVER}; }` : ""}
+    ${$clickable ? `&:focus-visible { outline: ${getToken("borderWidth", "large")} solid ${getToken("code.color:link")}; outline-offset: ${getToken("borderWidth", "large")}; }` : ""}`}
 
   /* fit: size the card to its content; the code and the Show more toggle stack. */
   ${({ $fit, $inlined }) =>
@@ -155,5 +156,5 @@ export const InlineCode = styled.code`
  */
 export const PreviewDiv = styled.div`
   padding: ${getToken("gap")};
-  border-bottom: 1px solid ${getToken("code.borderColor:base")};
+  border-bottom: ${getToken("code.borderWidth:base")} solid ${getToken("code.borderColor:base")};
 `
