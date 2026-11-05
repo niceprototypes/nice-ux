@@ -87,19 +87,27 @@ describe("Scroll follow", () => {
     expect(atEndOf()).toBe("true")
   })
 
-  it("stays pinned to the end while the content grows, smoothly", async () => {
+  it("stays pinned to the end while the content grows, instantly", async () => {
     const { rerender } = render(<Log rows={5} />)
     rerender(<Log rows={8} />)
     await flush()
-    expect(logOf().scrollTo).toHaveBeenLastCalledWith({ top: 9 * ROW_HEIGHT, behavior: "smooth" })
+    expect(logOf().scrollTo).toHaveBeenLastCalledWith({ top: 9 * ROW_HEIGHT, behavior: "instant" })
     expect(logOf().scrollTop).toBe(9 * ROW_HEIGHT - VIEW_HEIGHT)
   })
 
   it("follows a size change without a mutation", () => {
     render(<Log rows={5} />)
     const calls = (logOf().scrollTo as jest.Mock).mock.calls.length
+    Object.defineProperty(logOf(), "scrollHeight", { configurable: true, get: () => 7 * ROW_HEIGHT })
     act(() => resizeCallbacks.forEach(callback => callback([], {} as ResizeObserver)))
     expect((logOf().scrollTo as jest.Mock).mock.calls.length).toBe(calls + 1)
+  })
+
+  it("ignores a change that leaves the end in place", () => {
+    render(<Log rows={5} />)
+    const calls = (logOf().scrollTo as jest.Mock).mock.calls.length
+    act(() => resizeCallbacks.forEach(callback => callback([], {} as ResizeObserver)))
+    expect((logOf().scrollTo as jest.Mock).mock.calls.length).toBe(calls)
   })
 
   it("scrolls instantly under prefers-reduced-motion", async () => {

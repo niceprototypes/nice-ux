@@ -335,7 +335,7 @@ Parallax-style fade:
 
 ### Scroll follow
 
-A scroll container that stays pinned to the end while its content grows (chat logs, build logs, terminals). It opens at the end. Scrolling up releases the pin; reaching the end again, by scrolling or `scrollToEnd`, pins it. Within the `scroll.follow.threshold` token of the end counts as the end. Smooth scrolling becomes instant under `prefers-reduced-motion: reduce`.
+A scroll container that stays pinned to the end while its content grows (chat logs, build logs, terminals). It opens at the end. Scrolling up releases the pin; reaching the end again, by scrolling or `scrollToEnd`, pins it. Within the `scroll.follow.threshold` token of the end counts as the end. Following the content is instant; `scrollToEnd` is smooth, and instant under `prefers-reduced-motion: reduce`.
 
 `useScrollEnd()`, inside a `<Scroll follow>`, returns `{ atEnd, scrollToEnd(behavior?) }`.
 

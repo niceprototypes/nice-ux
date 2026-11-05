@@ -17,6 +17,11 @@ describe("ChatMessage", () => {
     expect(screen.getByRole("button", { name: "Copy" })).toBeInTheDocument()
   })
 
+  it("keeps a user message's line breaks", () => {
+    render(<ChatMessage role="user">{"First line\nsecond line"}</ChatMessage>)
+    expect(screen.getByText(/First line/)).toHaveStyle({ whiteSpace: "pre-wrap" })
+  })
+
   it("is busy and withholds its actions while streaming", () => {
     render(
       <ChatMessage

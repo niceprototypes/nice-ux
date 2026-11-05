@@ -3,8 +3,8 @@
 Chat UI parts built on Scroll, Input and Button.
 
 - `ChatLog`: a `<Scroll follow>` with `role="log"`. It stays at the end while messages arrive and replies stream in, releases when the reader scrolls up, and shows a "Scroll to latest" button while not at the end. `streaming` sets `aria-busy`.
-- `ChatMessage`: `role="user"` is an end-aligned bubble (`chat.message.*:user`); `role="assistant"` is full width with no bubble, so its children (e.g. `<Markdown>`) read as a document. The `actions` row shows on hover and focus within, always on the last message, and not while `status="streaming"`. `status="error"` colours the text.
-- `ChatComposer`: `Input as="textarea" rows={1}` growing to `maxRows` (`chat.composer.maxRows` by default). Enter sends, Shift+Enter inserts a newline; blank text is not sent. While `busy` the send button is a stop button, and Escape calls `onStop`. `disabled` disables all of it.
+- `ChatMessage`: `role="user"` is an end-aligned bubble (`chat.message.*:user`) that keeps its line breaks; `role="assistant"` is full width with no bubble, so its children (e.g. `<Markdown>`) read as a document. The `actions` row shows on hover and focus within, always on the last message, and not while `status="streaming"`. `status="error"` colours the text.
+- `ChatComposer`: `Input as="textarea" rows={1}` growing to `maxRows` (`chat.composer.maxRows` by default). The send button is a `smaller` end-slot Button, centred on the field's line and kept at its bottom as it grows. Enter sends, Shift+Enter inserts a newline; blank text is not sent. While `busy` the send button is a stop button, and Escape calls `onStop`. `disabled` disables all of it.
 - `ChatSuggestions`: one rounded Button per item in a wrapping Flex; `onPick` receives the item.
 - `ChatCopyAction`: a copy-icon Button for a message's `actions`, through `copyToClipboard` from @niceprototypes/code.
 

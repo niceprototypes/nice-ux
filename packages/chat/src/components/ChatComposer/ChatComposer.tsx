@@ -1,8 +1,8 @@
 import * as React from "react"
 import Button from "@niceprototypes/button"
-import Flex from "@niceprototypes/flex"
 import Input from "@niceprototypes/input"
 import { getToken } from "@niceprototypes/styles"
+import { StyledChatComposerEnd } from "./ChatComposer.styles"
 import type { ChatComposerProps } from "./ChatComposer.types"
 
 /**
@@ -49,7 +49,7 @@ const ChatComposer: React.FC<ChatComposerProps> = ({
       placeholder={placeholder}
       aria-label={ariaLabel}
       end={
-        <Flex
+        <StyledChatComposerEnd
           gap="smaller"
           alignItems="center"
         >
@@ -57,8 +57,7 @@ const ChatComposer: React.FC<ChatComposerProps> = ({
           {busy ? (
             <Button
               iconLeft="pause"
-              borderRadius="rounded"
-              filled
+              size="smaller"
               aria-label="Stop"
               disabled={disabled || !onStop}
               onClick={onStop}
@@ -66,14 +65,13 @@ const ChatComposer: React.FC<ChatComposerProps> = ({
           ) : (
             <Button
               iconLeft="arrow-top"
-              borderRadius="rounded"
-              filled
+              size="smaller"
               aria-label="Send"
               disabled={!canSend}
               onClick={submit}
             />
           )}
-        </Flex>
+        </StyledChatComposerEnd>
       }
     />
   )

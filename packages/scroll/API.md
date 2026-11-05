@@ -433,7 +433,7 @@ function useScrollEnd(): { atEnd: boolean; scrollToEnd: (behavior?: ScrollBehavi
 
 #### Behaviour
 
-- Opens at the end; content growth (children added, text streamed in, a child resizing) scrolls to the end while pinned
+- Opens at the end; content growth (children added, text streamed in, a child resizing) scrolls to the end instantly while pinned
 - Scrolling up farther than the `scroll.follow.threshold` token from the end releases the pin; reaching the end pins it again
 - The threshold is read from the element's computed `--np--scroll--follow--threshold`, as px
 

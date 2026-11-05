@@ -26,11 +26,17 @@ export const StyledChatMessage = styled.div<{ $role: ChatMessageRoleType; $statu
   }
 `
 
-/** The content: a bubble for user messages, bare for assistant messages, both from `chat.message.*`. */
+/** The content: a bubble for user messages, keeping their line breaks; bare for assistant messages. */
 export const StyledChatMessageContent = styled.div<{ $role: ChatMessageRoleType }>`
   box-sizing: border-box;
   max-inline-size: ${({ $role }) => getToken(`chat.message.maxWidth:${$role}`)};
   padding: ${({ $role }) => getToken(`chat.message.padding:${$role}`)};
   border-radius: ${({ $role }) => getToken(`chat.message.borderRadius:${$role}`)};
   background-color: ${({ $role }) => getToken(`chat.message.backgroundColor:${$role}`)};
+
+  ${({ $role }) =>
+    $role === "user" &&
+    css`
+      white-space: pre-wrap;
+    `}
 `

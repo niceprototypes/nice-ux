@@ -71,9 +71,16 @@ const ScrollFollow = ({
       setAtEnd(pinnedRef.current)
     }
 
+    // Only a moved end is followed, so a change that leaves it in place (the end button leaving)
+    // does not cut short a smooth scrollToEnd. Instant: a smooth scroll restarts on every growth
+    // and trails the end until the content stops.
+    let lastEnd = element.scrollHeight - element.clientHeight
     const handleContentChange = () => {
       threshold = thresholdOf(element)
-      if (pinnedRef.current) scrollToEnd()
+      const end = element.scrollHeight - element.clientHeight
+      if (end === lastEnd) return
+      lastEnd = end
+      if (pinnedRef.current) scrollToEnd("instant")
     }
 
     // The container's own size and each child's: content grows inside them without a mutation
