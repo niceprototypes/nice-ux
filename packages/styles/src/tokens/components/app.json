@@ -4,6 +4,11 @@
       "base": "24em"
     }
   },
+  "end": {
+    "width": {
+      "base": "24em"
+    }
+  },
   "panel": {
     "rule": {
       "width": {

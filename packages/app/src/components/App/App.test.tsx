@@ -317,6 +317,93 @@ describe("App below laptop", () => {
   })
 })
 
+describe("App end", () => {
+  const innerWidth = window.innerWidth
+  const resize = (width: number) =>
+    act(() => {
+      window.innerWidth = width
+      window.dispatchEvent(new Event("resize"))
+    })
+
+  beforeEach(() => window.history.replaceState(null, "", "/stories/beta/nine"))
+  afterEach(() => resize(innerWidth))
+
+  /** Counts its mounts, so a remount on page change shows. */
+  let mounts = 0
+  const Column = () => {
+    React.useEffect(() => {
+      mounts += 1
+    }, [])
+    return <button>column</button>
+  }
+
+  it("renders a column after the scene region, outside it and the wrapper, app.end.width wide with the panels' rule", async () => {
+    let region: HTMLElement | null = null
+    const Region = ({ children }: { children: React.ReactNode }) => {
+      region = useSceneRegion().current
+      return <div data-testid="wrapper">{children}</div>
+    }
+    render(<App scenes={scenes} router={plainRouter} wrapper={Region} end={<Column />} />)
+    await screen.findByText("nine")
+    const end = screen.getByRole("button", { name: "column" }).parentElement!
+    expect(region!.nextElementSibling).toBe(end)
+    expect(region).not.toContainElement(end)
+    expect(screen.getByTestId("wrapper")).not.toContainElement(end)
+    expect(end).toHaveStyle({
+      flex: "none",
+      width: "var(--np--app--end--width)",
+      borderInlineStart: "var(--np--app--panel--rule--width) solid var(--np--app--panel--rule--color)",
+    })
+  })
+
+  it("keeps the region's clicks and keys from the column", async () => {
+    const onClick = jest.fn()
+    const onKeyDown = jest.fn()
+    let region: HTMLElement | null = null
+    const Region = ({ children }: { children: React.ReactNode }) => {
+      region = useSceneRegion().current
+      return <>{children}</>
+    }
+    render(<App scenes={scenes} router={plainRouter} wrapper={Region} end={<Column />} />)
+    await screen.findByText("nine")
+    region!.addEventListener("click", onClick)
+    region!.addEventListener("keydown", onKeyDown)
+    const button = screen.getByRole("button", { name: "column" })
+    fireEvent.click(button)
+    fireEvent.keyDown(button, { key: "ArrowRight" })
+    expect(onClick).not.toHaveBeenCalled()
+    expect(onKeyDown).not.toHaveBeenCalled()
+  })
+
+  it("stays mounted across page changes", async () => {
+    mounts = 0
+    render(<App scenes={scenes} router={plainRouter} end={<Column />} />)
+    await screen.findByText("nine")
+    const button = screen.getByRole("button", { name: "column" })
+    await act(async () => {
+      window.history.pushState(null, "", "/stories/alpha/solo")
+      window.dispatchEvent(new PopStateEvent("popstate"))
+    })
+    await screen.findByText("solo")
+    expect(screen.getByRole("button", { name: "column" })).toBe(button)
+    expect(mounts).toBe(1)
+  })
+
+  it("is not rendered below laptop or in the bare view", async () => {
+    resize(1279)
+    const { unmount } = render(<App scenes={scenes} router={plainRouter} end={<Column />} />)
+    await screen.findByText("nine")
+    expect(screen.queryByRole("button", { name: "column" })).not.toBeInTheDocument()
+    resize(1280)
+    expect(screen.getByRole("button", { name: "column" })).toBeInTheDocument()
+    unmount()
+    window.history.replaceState(null, "", "/frame/stories/beta/nine")
+    render(<App scenes={scenes} router={plainRouter} end={<Column />} />)
+    await screen.findByText("nine")
+    expect(screen.queryByRole("button", { name: "column" })).not.toBeInTheDocument()
+  })
+})
+
 describe("App search", () => {
   beforeEach(() => window.history.replaceState(null, "", "/stories/beta/nine"))
 

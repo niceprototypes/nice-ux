@@ -258,6 +258,7 @@
 
 	/* app component tokens */
 	--np--app--sidebar--min-width: 24em;
+	--np--app--end--width: 24em;
 	--np--app--panel--rule--width: var(--np--border-width);
 	--np--app--panel--rule--color: var(--np--border-color);
 	--np--app--panel--padding: var(--np--gap--large);
@@ -693,6 +694,9 @@
 	--np--logo--gap: 0.121;
 	--np--logo--color: var(--np--color--day);
 
+	/* markdown component tokens */
+	--np--markdown--gap: var(--np--gap);
+
 	/* popover component tokens */
 	--np--popover--offset: var(--np--gap--small);
 	--np--popover--border-radius: var(--np--border-radius);
@@ -744,6 +748,7 @@
 	--np--scroll--sticky--animation-easing: var(--np--animation-easing);
 	--np--scroll--fade--animation-duration: 100ms;
 	--np--scroll--fade--animation-easing: var(--np--animation-easing--linear);
+	--np--scroll--follow--threshold: var(--np--gap);
 
 	/* select component tokens */
 	--np--select--chevron--size--smaller: var(--np--font-size--smaller);

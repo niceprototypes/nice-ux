@@ -14,6 +14,11 @@ const componentTokensData: ComponentTokensData = {
         "base": "24em"
       }
     },
+    "end": {
+      "width": {
+        "base": "24em"
+      }
+    },
     "panel": {
       "rule": {
         "width": {
@@ -837,6 +842,11 @@ const componentTokensData: ComponentTokensData = {
       "base": "var(--np--color--day)"
     }
   },
+  "markdown": {
+    "gap": {
+      "base": "var(--np--gap)"
+    }
+  },
   "popover": {
     "offset": {
       "base": "var(--np--gap--small)"
@@ -938,6 +948,11 @@ const componentTokensData: ComponentTokensData = {
       },
       "animationEasing": {
         "base": "var(--np--animation-easing--linear)"
+      }
+    },
+    "follow": {
+      "threshold": {
+        "base": "var(--np--gap)"
       }
     }
   },

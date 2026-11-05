@@ -58,6 +58,13 @@ const DOCS = {
 /** A scene wrapper with the large gap around each scene. */
 const Padded: AppWrapperType = ({ children }) => <Flex padding="large">{children}</Flex>
 
+/** The end column's stand-in content. */
+const END = (
+  <Flex padding="large">
+    <Ink color="lighter">End column</Ink>
+  </Flex>
+)
+
 /** An unset choice for optional selects; `mapping` turns it into `undefined`. */
 const NONE = "none"
 
@@ -70,16 +77,17 @@ const SIDEBAR_OPEN_OPTIONS = { unset: undefined, open: true, closed: false } as 
  * PlaygroundArgs
  *
  * AppProps with data controls in place of the globs: `withScenes`, `withDocs` and `withPages` add the
- * story's scenes, markdown pages and docs pages; `withWrapper` wraps each scene. The router is the story's own, kept in memory.
+ * story's scenes, markdown pages and docs pages; `withWrapper` wraps each scene; `withEnd` fills the end column. The router is the story's own, kept in memory.
  */
-type PlaygroundArgs = Omit<AppProps, "scenes" | "docs" | "pages" | "router" | "wrapper"> & {
+type PlaygroundArgs = Omit<AppProps, "scenes" | "docs" | "pages" | "router" | "wrapper" | "end"> & {
   withScenes: boolean
   withDocs: boolean
   withPages: boolean
   withWrapper: boolean
+  withEnd: boolean
 }
 
-const renderApp = ({ withScenes, withDocs, withPages, withWrapper, ...rest }: PlaygroundArgs) => (
+const renderApp = ({ withScenes, withDocs, withPages, withWrapper, withEnd, ...rest }: PlaygroundArgs) => (
   <App
     {...rest}
     scenes={withScenes ? SCENES : undefined}
@@ -87,6 +95,7 @@ const renderApp = ({ withScenes, withDocs, withPages, withWrapper, ...rest }: Pl
     pages={withPages ? PAGES : undefined}
     router={memoryRouter}
     wrapper={withWrapper ? Padded : undefined}
+    end={withEnd ? END : undefined}
   />
 )
 
@@ -110,6 +119,7 @@ export const Playground: Story = {
     withDocs: true,
     withPages: true,
     withWrapper: true,
+    withEnd: true,
     "aria-label": "Docs",
     onSidebarOpenChange: fn(),
   },
@@ -118,6 +128,7 @@ export const Playground: Story = {
     withDocs: { control: "boolean", table: { category: "Content" } },
     withPages: { control: "boolean", table: { category: "Content" } },
     withWrapper: { control: "boolean", table: { category: "Content" } },
+    withEnd: { control: "boolean", table: { category: "Content" } },
     search: { control: "boolean", table: { category: "Content" } },
     docsLink: { control: "boolean", table: { category: "Content" } },
     panelLabels: { control: "object", table: { category: "Content" } },
@@ -206,6 +217,20 @@ export const Tablet: Story = {
     const menu = await canvas.findByRole("button", { name: "Menu" })
     await expect(menu).toHaveAttribute("aria-expanded", "false")
     await waitFor(() => expect(canvas.queryByRole("navigation", { name: "Docs" })).not.toBeInTheDocument())
+  },
+}
+
+/** From laptop up the end column shows right of the pages and stays across page changes; below laptop it is not rendered. */
+export const End: Story = {
+  ...Playground,
+  globals: { viewport: { value: "desktop", isRotated: false } },
+  play: async ({ canvasElement, userEvent }) => {
+    const canvas = within(canvasElement)
+    await canvas.findByRole("heading", { name: "Welcome" })
+    const end = canvas.getByText("End column")
+    await userEvent.click(canvas.getByRole("link", { name: "Install" }))
+    await canvas.findByRole("heading", { name: "Install" })
+    await expect(canvas.getByText("End column")).toBe(end)
   },
 }
 

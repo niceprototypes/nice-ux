@@ -130,6 +130,13 @@ export interface AppProps {
    */
   panelLabels?: { sidebar?: string; footer?: string }
 
+  /**
+   * A column right of the scene region, outside it (the region's clicks, keys and wrapper never
+   * reach it), `app.end.width` wide. Laptop and up only; not rendered below laptop or in the bare
+   * view. It stays mounted across page changes
+   */
+  end?: React.ReactNode
+
   /** Accessible name of the nav landmark */
   "aria-label"?: string
 

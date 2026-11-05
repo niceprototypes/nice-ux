@@ -257,6 +257,19 @@ export const StyledAppRegion = styled(Scroll).attrs({ axis: "both" })<{ $drawer:
   outline: none;
 `
 
+/**
+ * The end column (`end`), right of the scene region: `app.end.width` wide, the viewport's height, with
+ * the panels' rule on its start edge. A flex column, so its content can fill the height.
+ */
+export const StyledAppEnd = styled.div`
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  width: ${getToken("app.end.width")};
+  min-height: 0;
+  border-inline-start: ${getToken("app.panel.rule.width")} solid ${getToken("app.panel.rule.color")};
+`
+
 /** A markdown or docs section page: its content with the region's padding. */
 export const StyledAppDocs = styled.div`
   padding: ${getToken("gap:large")};

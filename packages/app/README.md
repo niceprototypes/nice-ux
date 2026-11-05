@@ -26,6 +26,9 @@ where the current one renders. One page, no iframe.
   (`{ sidebar, footer }`) labels the two panels at their top left, on the handle's line
   (`app.panel.label.*`: small, lighter, uppercase, letter-spaced). `useScenes()` returns the index, the current page, `bare` (the bare view
   is on), `open(entry)` and `preload(entry)`, for scenes that move between pages or drop their chrome.
+- **`end`** is a column right of the scene region, outside it (the region's clicks, keys and `wrapper`
+  never reach it), `app.end.width` wide, with the panels' rule on its start edge. Laptop and up only;
+  not rendered below laptop or in the bare view. It stays mounted across page changes.
 - **`getAppPageUrl(key)`** gives a docs section page's URL from its `pages` key, for links from outside the router.
 - **Router adapters**, subpath exports with optional peer dependencies:
   `@niceprototypes/app/adapters/plain` (`plainRouter`, history API, no dependency),

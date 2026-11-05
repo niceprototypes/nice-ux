@@ -15,6 +15,7 @@ import {
   StyledAppDocs,
   StyledAppDocsLink,
   StyledAppDrawer,
+  StyledAppEnd,
   StyledAppHeader,
   StyledAppNav,
   StyledAppRegion,
@@ -42,6 +43,7 @@ const AppShell: React.FC<AppProps> = ({
   search: searchable,
   docsLink,
   panelLabels,
+  end,
   "aria-label": ariaLabel = "Scenes",
   navSize,
   sidebarOpen,
@@ -247,6 +249,7 @@ const AppShell: React.FC<AppProps> = ({
             </StyledAppDrawer>
           </StyledAppAside>
           {regionElement}
+          {!drawer && end != null && end !== false && <StyledAppEnd>{end}</StyledAppEnd>}
         </StyledApp>
       )}
     </AppContext.Provider>
@@ -257,7 +260,8 @@ const AppShell: React.FC<AppProps> = ({
  * App
  *
  * The app shell: a Tree nav of the project's scenes and docs pages, found by folder, beside the
- * scene region where the current one renders, under a header row: the Nice logo and, with `search`, a search field. The nav lists
+ * scene region where the current one renders, under a header row: the Nice logo and, with `search`, a search field; with `end`,
+ * a column right of the region, laptop and up. The nav lists
  * the current page's section at the top level: the stories (`stories/`, at `/stories/...`) as folders on a
  * story page, the docs section pages (`docs/<N Page>/index.tsx`, at `/docs/<page>`, or nested in folders) on a docs page. Folder names are the only metadata: depth is the
  * level (story, chapter, scene), numbers order them by value and are left out of names and URLs.
