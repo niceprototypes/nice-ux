@@ -95,6 +95,28 @@ describe("Tooltip", () => {
       expect(bubble()).not.toBeInTheDocument()
     })
 
+    it("makes the wrapper focusable when the trigger has no focusable child", () => {
+      render(
+        <Tooltip content="tip">
+          <span>plain</span>
+        </Tooltip>
+      )
+      const wrapper = screen.getByText("plain").parentElement!
+      expect(wrapper).toHaveAttribute("tabindex", "0")
+      act(() => wrapper.focus())
+      flush()
+      expect(bubble()).toBeInTheDocument()
+    })
+
+    it("leaves the wrapper out of the tab order when a child is focusable", () => {
+      render(
+        <Tooltip content="tip">
+          <button>action</button>
+        </Tooltip>
+      )
+      expect(screen.getByText("action").parentElement).not.toHaveAttribute("tabindex")
+    })
+
     it("stays shown while focus moves between children of the trigger", () => {
       render(
         <Tooltip content="tip">

@@ -35,12 +35,12 @@ import Tooltip from "@niceprototypes/tooltip"
 - **Portal rendering.** The bubble renders in a portal at `<body>` with
   `position: fixed`, so it is never clipped by a scrolling or `overflow: hidden`
   ancestor.
-- **Keyboard.** In `hover` mode, focusing a focusable child of the trigger shows
-  the bubble and blurring it hides it; focus moving between children of the
-  trigger keeps it shown. A focus-shown bubble anchors to the trigger. Escape
-  hides a visible bubble immediately in either mode, ignoring `delayHide`. The
-  trigger wrapper is not focusable itself — wrap a focusable element (a button
-  or link) for keyboard users to reach the tooltip.
+- **Keyboard.** In `hover` mode, focusing the trigger shows the bubble and
+  blurring it hides it; focus moving between children of the trigger keeps it
+  shown. A focus-shown bubble anchors to the trigger. Escape hides a visible
+  bubble immediately in either mode, ignoring `delayHide`. When `children` hold
+  no focusable element (a link, button, form control or positive `tabIndex`),
+  the trigger wrapper gets `tabIndex={0}` so keyboard users reach it.
 - **Accessibility.** The bubble has `role="tooltip"`, and the trigger wrapper
   carries `aria-describedby` pointing at it while it is shown.
 - **Delays** defer render (`delayShow`) and unrender (`delayHide`); a pending

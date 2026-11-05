@@ -9,13 +9,16 @@ import { TooltipProps } from "./Tooltip.types"
 // can't be read directly.
 const OFFSET = 8
 
+/** Descendants that take keyboard focus themselves; without one, the trigger wrapper does. */
+const FOCUSABLE = 'a[href], button:not(:disabled), input:not(:disabled), select:not(:disabled), textarea:not(:disabled), [tabindex]:not([tabindex="-1"])'
+
 /**
  * Tooltip
  *
  * Wraps a single trigger element (`children`) and shows an inverse-themed bubble
  * with `content` when activated. Activation is `hover` (default) or `click`.
- * In hover mode, keyboard focus on a focusable child also shows it and blur
- * hides it. Escape dismisses the visible bubble. `delayShow` / `delayHide`
+ * In hover mode, keyboard focus on the trigger also shows it and blur hides it;
+ * a trigger with no focusable child gets `tabIndex={0}` on its wrapper. Escape dismisses the visible bubble. `delayShow` / `delayHide`
  * defer the render / unrender so brief passes don't flash the tooltip. The
  * bubble renders in a portal at `<body>` with `position: fixed`, so it is never
  * clipped by an overflow-scrolling ancestor.
@@ -57,6 +60,11 @@ const Tooltip: React.FC<TooltipProps> = ({
   // depend on event pooling.
   const cursor = React.useRef<{ x: number; y: number } | null>(null)
   const [visible, setVisible] = React.useState(false)
+  // Whether the wrapper itself takes focus: true when `children` hold no focusable element.
+  const [wrapperFocusable, setWrapperFocusable] = React.useState(false)
+  React.useLayoutEffect(() => {
+    setWrapperFocusable(!triggerRef.current?.querySelector(FOCUSABLE))
+  }, [children])
   // Links the trigger to the bubble via aria-describedby while it is shown.
   const bubbleId = React.useId()
   const [coords, setCoords] = React.useState<PopoverCoordinatesType>({ top: 0, left: 0, transform: "none" })
@@ -147,6 +155,7 @@ const Tooltip: React.FC<TooltipProps> = ({
         ref={triggerRef}
         className={className}
         aria-describedby={visible ? bubbleId : undefined}
+        tabIndex={wrapperFocusable ? 0 : undefined}
         $clickable={trigger === "click"}
         {...handlers}
       >

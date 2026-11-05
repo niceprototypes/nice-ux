@@ -74,6 +74,17 @@ export const Focus: Story = {
   },
 }
 
+export const FocusText: Story = {
+  args: { children: "text" },
+  play: async ({ canvasElement, userEvent }) => {
+    const wrapper = within(canvasElement).getByText("Trigger")
+    await userEvent.tab()
+    await expect(wrapper).toHaveFocus()
+    await waitFor(() => expect(bubble()).toBeInTheDocument())
+    await expect(wrapper).toHaveAttribute("aria-describedby", bubble().id)
+  },
+}
+
 export const ClickTrigger: Story = {
   args: { trigger: "click", children: "text" },
   play: async ({ canvasElement, userEvent }) => {
