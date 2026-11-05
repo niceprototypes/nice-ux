@@ -65,6 +65,7 @@ function App() {
 - Smooth vertical sliding animations
 - Customizable animation state management
 - Hidden scrollbars for clean UI
+- Every slide but the current one is `inert`: out of the tab order and the accessibility tree
 - TypeScript support
 - Lightweight and performant
 

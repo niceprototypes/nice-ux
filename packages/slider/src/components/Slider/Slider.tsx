@@ -32,6 +32,8 @@ const Slider: React.FC<SliderProps> = ({
           $index={index}
           $currentIndex={currentIndex}
           $isAnimating={isAnimating}
+          // Off-screen slides leave the tab order and the accessibility tree.
+          inert={index !== currentIndex}
         >
           {child}
         </SliderItemStyled>

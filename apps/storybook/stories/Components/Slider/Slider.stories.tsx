@@ -110,6 +110,9 @@ export const Playground: Story = {
     // The current slide covers the viewport; the next one sits one viewport height below.
     await expect(first.getBoundingClientRect().top).toBe(viewport.getBoundingClientRect().top)
     await expect(second.getBoundingClientRect().top).toBe(viewport.getBoundingClientRect().bottom)
+    // Off-screen slides are inert: out of the tab order and the accessibility tree.
+    await expect(first).not.toHaveAttribute("inert")
+    await expect(second).toHaveAttribute("inert")
     await expect(args.onAnimationComplete).not.toHaveBeenCalled()
   },
 }
@@ -121,6 +124,8 @@ export const CurrentIndex: Story = {
     const viewport = slide(canvasElement, "Slide 1").parentElement!
     await expect(slide(canvasElement, "Slide 2").getBoundingClientRect().top).toBe(viewport.getBoundingClientRect().top)
     await expect(slide(canvasElement, "Slide 1").getBoundingClientRect().bottom).toBe(viewport.getBoundingClientRect().top)
+    await expect(slide(canvasElement, "Slide 2")).not.toHaveAttribute("inert")
+    await expect(slide(canvasElement, "Slide 1")).toHaveAttribute("inert")
   },
 }
 
