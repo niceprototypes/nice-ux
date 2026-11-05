@@ -28,7 +28,7 @@ Types are the aliases exported from `Icon.types.ts`. Allowed values of each unio
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `name` | `IconNameType \| (string & {})` | `"circle"` | Built-in name (`iconNames`), or a vendor name with `vendor`. An unresolved name renders `circle` |
+| `name` | `IconNameType \| (string & {})` | `"circle"` | Built-in name (`iconNames`), or a vendor name with `vendor`. An unresolved name renders `circle` and warns in development |
 | `variant` | `IconVariantType` | `"base"` | Variant stem the icon ships: `"base"` (outline), `"fill"`, or any other the icon ships; an unknown variant renders `"base"` and warns |
 | `outlined` | `boolean` | `false` | Deprecated — use `variant`. `true` maps to `variant="fill"` |
 | `url` | `string` | - | Image URL rendered in place of the built-in SVG (built-in names only) |
@@ -43,6 +43,7 @@ Types are the aliases exported from `Icon.types.ts`. Allowed values of each unio
 | `vendorComponent` | `React.ComponentType` | - | Renders this component inside the icon wrapper with token styling; bypasses name resolution |
 | `animation` | `IconAnimationType` | - | Named animation (`"spin"`). `spinner` spins without it |
 | `animationDuration` | `IconAnimationDurationType` | `"base"` | Animation speed token variant (`icon.animationDuration`) |
+| `aria-label` | `IconAriaLabelType` | - | Accessible name: the icon gets `role="img"` and this name. Unset, the icon is decorative (`aria-hidden="true"`) |
 | `style` | `React.CSSProperties` | - | Inline styles on the root element |
 | `className` | `string` | - | Class on the root element |
 

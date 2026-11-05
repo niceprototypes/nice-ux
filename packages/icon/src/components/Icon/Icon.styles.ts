@@ -37,15 +37,14 @@ const strokeWidth = (width: IconStrokeWidthType, darkAntialiasing: IconDarkAntia
 }
 
 /**
- * Main icon wrapper component with all styling. Hidden from assistive technology: Icon
- * takes no accessible name, so it is decorative, and an inline SVG's `<style>` text would
- * otherwise join the accessible name of the control around it.
+ * Main icon wrapper component with all styling. Icon sets `aria-hidden` on it unless an
+ * `aria-label` is given: an inline SVG's `<style>` text would otherwise join the accessible
+ * name of the control around it.
  */
 export const IconWrapperStyled = styled.div
   .withConfig({
     shouldForwardProp: (prop) => !String(prop).startsWith("$"),
-  })
-  .attrs({ "aria-hidden": true })<{
+  })<{
   $color?: ColorTokenProp<IconColorType>
   $size?: IconSizeType
   $variant?: IconVariantType

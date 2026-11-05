@@ -5,6 +5,7 @@ import { IconWrapperStyled, ImageStyled } from "./Icon.styles"
 import { resolveIconComponent } from "../../utilities/resolveIconComponent"
 import { getVendorIcon } from "../../services/registerVendorResolver"
 import { isSpinning } from "../../utilities/isSpinning"
+import { isDevelopment } from "../../utilities/isDevelopment"
 
 /**
  * A flexible and customizable React icon component with built-in icon set
@@ -46,6 +47,7 @@ const Icon: React.FC<IconProps> = ({
   vendorComponent: VendorComponent,
   animation,
   animationDuration = "base",
+  "aria-label": ariaLabel,
 }) => {
   // Back-compat: `spinner` still auto-spins when no explicit animation is set.
   const resolvedAnimation = animation ?? (isSpinning(name) ? "spin" : undefined)
@@ -53,6 +55,7 @@ const Icon: React.FC<IconProps> = ({
   // `variant` always takes precedence.
   const resolvedVariant = variant ?? (outlined ? "fill" : "base")
   const withTheme = (el: React.ReactElement) => (theme ? <Theme name={theme}>{el}</Theme> : el)
+  const a11yProps = ariaLabel ? { role: "img", "aria-label": ariaLabel } : { "aria-hidden": true }
 
   // Tier 3: direct vendor component — bypass all resolution, apply token styling
   if (VendorComponent) {
@@ -68,6 +71,7 @@ const Icon: React.FC<IconProps> = ({
         $animationDuration={animationDuration}
         className={className}
         style={style}
+        {...a11yProps}
       >
         <VendorComponent />
       </IconWrapperStyled>
@@ -89,6 +93,7 @@ const Icon: React.FC<IconProps> = ({
         $animationDuration={animationDuration}
         className={className}
         style={style}
+        {...a11yProps}
       >
         {url ? <ImageStyled src={url} alt="" /> : <SvgIcon viewBox={viewBox} />}
       </IconWrapperStyled>
@@ -111,6 +116,7 @@ const Icon: React.FC<IconProps> = ({
           $animationDuration={animationDuration}
           className={className}
           style={style}
+          {...a11yProps}
         >
           <VendorIcon />
         </IconWrapperStyled>
@@ -119,6 +125,13 @@ const Icon: React.FC<IconProps> = ({
   }
 
   // Fallback: render the circle — name not found in custom or vendor sets
+  if (isDevelopment()) {
+    console.warn(
+      `@niceprototypes/icon: no icon named "${name}"` +
+        (vendor ? " in the built-in set or the vendor resolver" : "; vendor names need the `vendor` prop") +
+        `; rendering "circle".`
+    )
+  }
   const FallbackIcon = resolveIconComponent("circle", resolvedVariant)
   return withTheme(
     <IconWrapperStyled
@@ -132,6 +145,7 @@ const Icon: React.FC<IconProps> = ({
       $animationDuration={animationDuration}
       className={className}
       style={style}
+      {...a11yProps}
     >
       {FallbackIcon && <FallbackIcon viewBox={viewBox} />}
     </IconWrapperStyled>

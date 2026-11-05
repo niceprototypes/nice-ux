@@ -85,6 +85,14 @@ export type IconVendorType = boolean
  */
 export type IconVendorComponentType = React.ComponentType
 
+/**
+ * IconAriaLabelType
+ *
+ * Accessible name for a meaningful icon. Without it the icon is decorative (`aria-hidden`);
+ * with it the icon is exposed as `role="img"` with this name.
+ */
+export type IconAriaLabelType = string
+
 export interface IconProps {
   name?: IconNameType | (string & {})
   /** Variant to render — "base" (default outline), "fill", or any variant the icon ships */
@@ -122,6 +130,8 @@ export interface IconProps {
   animation?: IconAnimationType
   /** Animation speed — icon duration token variant (default "base") */
   animationDuration?: IconAnimationDurationType
+  /** Accessible name; unset leaves the icon decorative (aria-hidden) */
+  "aria-label"?: IconAriaLabelType
 }
 
 const IconTypes = {} as const
@@ -143,6 +153,7 @@ namespace IconTypes {
   export type VendorComponent = IconVendorComponentType
   export type Animation = IconAnimationType
   export type AnimationDuration = IconAnimationDurationType
+  export type AriaLabel = IconAriaLabelType
   export type Props = IconProps
 }
 

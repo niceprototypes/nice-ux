@@ -119,6 +119,7 @@ export const Playground: Story = {
     variant: "base",
     outlined: false,
     url: "",
+    "aria-label": "",
     size: "larger",
     viewBox: "0 0 16 16",
     strokeWidth: "base",
@@ -140,6 +141,7 @@ export const Playground: Story = {
     outlined: { control: "boolean", table: { category: "Content" } },
     url: { control: "text", table: { category: "Content" } },
     viewBox: { control: "text", table: { category: "Content" } },
+    "aria-label": { control: "text", table: { category: "Content" } },
     vendor: { control: "boolean", table: { category: "Content" } },
     vendorComponent: { control: "select", options: Object.keys(VENDOR_COMPONENT_PRESETS), table: { category: "Content" } },
 
@@ -164,7 +166,7 @@ export const Playground: Story = {
     className: { table: { disable: true } },
     style: { table: { disable: true } },
   },
-  // Recompose the flattened args; an empty url is unset. The result is checked against IconProps.
+  // Recompose the flattened args; an empty url or aria-label is unset. The result is checked against IconProps.
   render: args => {
     const {
       colorTheme,
@@ -177,11 +179,13 @@ export const Playground: Story = {
       darkAntialiasing,
       vendorComponent,
       url,
+      "aria-label": ariaLabel,
       ...rest
     } = args
     const props: IconProps = {
       ...rest,
       url: url || undefined,
+      "aria-label": ariaLabel || undefined,
       color: toColor(args),
       darkAntialiasing: DARK_ANTIALIASING[darkAntialiasing],
       vendorComponent: VENDOR_COMPONENT_PRESETS[vendorComponent],
@@ -190,6 +194,7 @@ export const Playground: Story = {
   },
   play: async ({ canvasElement }) => {
     const wrapper = svg(canvasElement).parentElement!
+    await expect(wrapper).toHaveAttribute("aria-hidden", "true")
     await expect(getComputedStyle(wrapper).width).toBe(resolveCss(canvasElement, "width", getToken("icon.size:larger")))
     await expect(svg(canvasElement)).toHaveAttribute("viewBox", "0 0 16 16")
     // Base variant: stroked, unfilled, fixed stroke width.
@@ -248,6 +253,17 @@ export const ViewBox: Story = {
   args: { ...Playground.args, viewBox: "0 0 32 32" },
   play: async ({ canvasElement }) => {
     await expect(svg(canvasElement)).toHaveAttribute("viewBox", "0 0 32 32")
+  },
+}
+
+export const AriaLabel: Story = {
+  ...Playground,
+  args: { ...Playground.args, "aria-label": "Next" },
+  play: async ({ canvasElement }) => {
+    const wrapper = svg(canvasElement).parentElement!
+    await expect(wrapper).toHaveAttribute("role", "img")
+    await expect(wrapper).toHaveAccessibleName("Next")
+    await expect(wrapper).not.toHaveAttribute("aria-hidden")
   },
 }
 

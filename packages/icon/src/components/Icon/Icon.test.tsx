@@ -67,8 +67,33 @@ describe("Icon", () => {
   })
 
   it("renders the circle fallback when icon is not found", () => {
+    const warn = jest.spyOn(console, "warn").mockImplementation(() => {})
     render(<Icon name={"unknown" as "check"} />)
     expect(screen.getByTestId("svg-icon")).toHaveAttribute("data-name", "circle")
+    expect(warn).toHaveBeenCalledWith(expect.stringContaining('no icon named "unknown"'))
+    warn.mockRestore()
+  })
+
+  it("does not warn about an unknown name in production", () => {
+    const warn = jest.spyOn(console, "warn").mockImplementation(() => {})
+    const previous = process.env.NODE_ENV
+    process.env.NODE_ENV = "production"
+    render(<Icon name={"unknown" as "check"} />)
+    process.env.NODE_ENV = previous
+    expect(warn).not.toHaveBeenCalled()
+    warn.mockRestore()
+  })
+
+  it("is decorative (aria-hidden) by default", () => {
+    const { container } = render(<Icon name="check" />)
+    expect(container.firstChild).toHaveAttribute("aria-hidden", "true")
+    expect(container.firstChild).not.toHaveAttribute("role")
+  })
+
+  it("is an image named by aria-label when one is set", () => {
+    render(<Icon name="check" aria-label="Done" />)
+    const icon = screen.getByRole("img", { name: "Done" })
+    expect(icon).not.toHaveAttribute("aria-hidden")
   })
 
   it("renders spinner icon with spinning animation class", () => {
