@@ -50,7 +50,7 @@ const niceLocal = (local) => {
  * config with Vite's `mergeConfig`.
  *
  * - From npm (default): one copy of React, styled-components and the singleton packages.
- * - `local`: the path of a nice-ux checkout (e.g. `~/nice/nice-ux`). Every
+ * - `local`: the path of a nice-ux checkout (e.g. `~/nice/ui`). Every
  *   `@niceprototypes/*` import resolves to that checkout instead of `node_modules`, so the
  *   app runs unreleased changes. Packages resolve the way their `package.json` points
  *   (their builds today: rebuild with `pnpm --filter <name> build`). React and

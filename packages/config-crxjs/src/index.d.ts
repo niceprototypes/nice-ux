@@ -3,7 +3,7 @@ import type { Plugin, PluginOption, UserConfig } from 'vite'
 export type ExtensionConfigOptions = {
   /** The app's folder, whose node_modules holds the shared React and styled-components. */
   appRoot: string
-  /** Local mode: the path of a nice-ux checkout (e.g. `~/nice/nice-ux`); every `@niceprototypes/*` import resolves there. Omit to use the npm install. */
+  /** Local mode: the path of a nice-ux checkout (e.g. `~/nice/ui`); every `@niceprototypes/*` import resolves there. Omit to use the npm install. */
   local?: string
   /** The build root; the manifest's entry paths are relative to it. */
   root: string

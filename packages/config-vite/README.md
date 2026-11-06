@@ -23,7 +23,7 @@ export default defineConfig(
 )
 ```
 
-`NICE_LOCAL=~/nice/nice-ux npm run dev` runs the app against the checkout; without it the app uses its npm install.
+`NICE_LOCAL=~/nice/ui npm run dev` runs the app against the checkout; without it the app uses its npm install.
 
 ## What it sets
 

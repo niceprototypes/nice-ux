@@ -1,6 +1,6 @@
 # Nice Manifest
 
-Rules and lookups for agents working on Nice UI: the `@niceprototypes/*` React packages in `~/nice/nice-ux` (pnpm workspace: `packages/*`, `apps/storybook`, this `manifest/`). Paths below are relative to `~/nice/nice-ux` unless they start with `~`.
+Rules and lookups for agents working on Nice UI: the `@niceprototypes/*` React packages in `~/nice/ui` (pnpm workspace: `packages/*`, `apps/storybook`, this `manifest/`). Paths below are relative to `~/nice/ui` unless they start with `~`.
 
 Priorities, in order: (1) agent token spend in design, engineering, maintenance and debugging; (2) no backtracking; (3) speed, which is always traded for 1 and 2.
 

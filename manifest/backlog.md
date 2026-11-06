@@ -1,6 +1,6 @@
 # Backlog
 
-Merged from the 2026-10-26 triage of `manifest/.reports/` (deleted; backup `~/nice/.nice/research/2026-10-26/reports-backup.tgz`, cited below as `bak:`). Paths are relative to `~/nice/nice-ux/` (rewritten to the monorepo layout 2026-10-27). Open owner questions: `~/nice/.nice/surveys/2026-10-26/003-report-decisions.md` (cited as `S003 Qn`).
+Merged from the 2026-10-26 triage of `manifest/.reports/` (deleted; backup `~/nice/.nice/research/2026-10-26/reports-backup.tgz`, cited below as `bak:`). Paths are relative to `~/nice/ui/` (rewritten to the monorepo layout 2026-10-27). Open owner questions: `~/nice/.nice/surveys/2026-10-26/003-report-decisions.md` (cited as `S003 Qn`).
 
 Dropped from the source tables: 67 DONE, 26 DEPRECATED, 24 COVERED by planned work. 93 OUTSTANDING rows deduped to 78; rows 79-80 come from this cleanup's manifest checks; rows 81-87 were added after.
 

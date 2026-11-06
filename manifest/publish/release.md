@@ -1,6 +1,6 @@
 # Commit, version, publish
 
-One repo: `~/nice/nice-ux`. The old per-package repos, `.nice/bump.md` files and `nicely` publishing are retired.
+One repo: `~/nice/ui`. The old per-package repos, `.nice/bump.md` files and `nicely` publishing are retired.
 
 ## Commit
 
