@@ -38,7 +38,7 @@
       "larger": "12px"
     },
     "color": {
-      "base": "var(--np--color--inverse)"
+      "base": "var(--np--color)"
     }
   },
   "gap": {

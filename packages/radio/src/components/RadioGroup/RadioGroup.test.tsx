@@ -168,6 +168,11 @@ describe("RadioGroup", () => {
     )
   })
 
+  it("colours the dot with radio.dot.color's inverse, which theme pins reassign", () => {
+    render(<Plans />)
+    expect(sheet()).toContain(`background-color:${getToken("radio.dot.color:base", { inverse: true })}`)
+  })
+
   it("dims a disabled Radio", () => {
     render(<Plans disabled />)
     const label = screen.getAllByRole("radio")[0].closest("label")!

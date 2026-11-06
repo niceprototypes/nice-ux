@@ -33,12 +33,15 @@ export const StyledInput = styled.input`
   cursor: inherit;
 `
 
-/** The dot in the circle's center; shown only when checked. */
+/**
+ * The dot in the circle's center; shown only when checked. Its colour is radio.dot.color's
+ * inverse, which the theme pins reassign.
+ */
 export const StyledDot = styled.span<{ $size: RadioSizeType }>`
   width: ${({ $size }) => getToken(`radio.dot.size:${$size}`)};
   height: ${({ $size }) => getToken(`radio.dot.size:${$size}`)};
   border-radius: 50%;
-  background-color: ${getToken("radio.dot.color:base")};
+  background-color: ${getToken("radio.dot.color:base", { inverse: true })};
   visibility: hidden;
 `
 
