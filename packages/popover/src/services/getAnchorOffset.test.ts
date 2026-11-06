@@ -1,5 +1,5 @@
 import { getToken } from "@niceprototypes/styles"
-import { getPopoverOffset, POPOVER_OFFSET_FALLBACK } from "./getPopoverOffset"
+import { getAnchorOffset, ANCHOR_OFFSET_FALLBACK } from "./getAnchorOffset"
 
 jest.mock("@niceprototypes/styles", () => {
   const actual = jest.requireActual("@niceprototypes/styles")
@@ -9,23 +9,29 @@ jest.mock("@niceprototypes/styles", () => {
 const mockedGetToken = getToken as jest.MockedFunction<typeof getToken>
 const actualGetToken = jest.requireActual("@niceprototypes/styles").getToken as typeof getToken
 
-describe("getPopoverOffset", () => {
+describe("getAnchorOffset", () => {
   afterEach(() => mockedGetToken.mockImplementation(actualGetToken))
 
-  it("reads popover.offset as a raw value", () => {
-    getPopoverOffset()
+  it("reads popover.offset as a raw value by default", () => {
+    getAnchorOffset()
     expect(mockedGetToken).toHaveBeenCalledWith("popover.offset", { as: "value" })
+  })
+
+  it("reads the given token", () => {
+    getAnchorOffset("tooltip.offset")
+    expect(mockedGetToken).toHaveBeenCalledWith("tooltip.offset", { as: "value" })
+    expect(getAnchorOffset("tooltip.offset")).toBe(8)
   })
 
   it("reads the real token: the seed alias resolves to 8px", () => {
     expect(actualGetToken("popover.offset", { as: "value" })).toBe("8px")
-    expect(getPopoverOffset()).toBe(8)
+    expect(getAnchorOffset()).toBe(8)
   })
 
   it("falls back to 8px when the token is not a plain px value", () => {
     mockedGetToken.mockReturnValue("calc(var(--np--gap--small) + 2px)")
-    expect(getPopoverOffset()).toBe(POPOVER_OFFSET_FALLBACK)
-    expect(POPOVER_OFFSET_FALLBACK).toBe(8)
+    expect(getAnchorOffset()).toBe(ANCHOR_OFFSET_FALLBACK)
+    expect(ANCHOR_OFFSET_FALLBACK).toBe(8)
   })
 
   it.each([
@@ -35,11 +41,11 @@ describe("getPopoverOffset", () => {
     ["-2px", -2],
   ])("parses %p as %p", (raw, expected) => {
     mockedGetToken.mockReturnValue(raw)
-    expect(getPopoverOffset()).toBe(expected)
+    expect(getAnchorOffset()).toBe(expected)
   })
 
   it.each(["1rem", "calc(8px + 2px)", "var(--x)", ""])("falls back for %p", (raw) => {
     mockedGetToken.mockReturnValue(raw)
-    expect(getPopoverOffset()).toBe(POPOVER_OFFSET_FALLBACK)
+    expect(getAnchorOffset()).toBe(ANCHOR_OFFSET_FALLBACK)
   })
 })

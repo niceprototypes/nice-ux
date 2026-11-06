@@ -2,7 +2,7 @@ import * as React from "react"
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { useArgs } from "storybook/preview-api"
 import { expect, fn, waitFor, within } from "storybook/test"
-import { themeTokensData } from "@niceprototypes/styles"
+import { getToken, themeTokensData } from "@niceprototypes/styles"
 import Button from "@niceprototypes/button"
 import Popover from "@niceprototypes/popover"
 import type { PopoverAlignType, PopoverPositionType, PopoverProps } from "@niceprototypes/popover"
@@ -40,6 +40,18 @@ export default meta
 type Story = StoryObj<PlaygroundArgs>
 
 const HIDDEN = { table: { disable: true } }
+
+/**
+ * Room above and to the left of the anchor, so a top or left placement fits
+ * without flipping: the Vitest browser renders the anchor at the canvas corner.
+ */
+const withRoom: NonNullable<Story["decorators"]> = [
+  Story => (
+    <div style={{ paddingTop: getToken("popover.maxHeight"), paddingLeft: getToken("popover.maxHeight") }}>
+      <Story />
+    </div>
+  ),
+]
 
 export const Playground: Story = {
   args: {
@@ -166,6 +178,7 @@ export const BottomStart: Story = {
 export const TopEnd: Story = {
   ...Playground,
   args: { ...Playground.args, position: "top", align: "end" },
+  decorators: withRoom,
   play: async () => {
     const { popover, anchor } = await boxes()
     await expect(popover.bottom).toBeLessThanOrEqual(anchor.top)
@@ -186,9 +199,21 @@ export const RightCenter: Story = {
 export const Left: Story = {
   ...Playground,
   args: { ...Playground.args, position: "left" },
+  decorators: withRoom,
   play: async () => {
     const { popover, anchor } = await boxes()
     await expect(popover.right).toBeLessThanOrEqual(anchor.left)
+  },
+}
+
+/** At the canvas's top edge, a top popover flips below the anchor. */
+export const FlipAtEdge: Story = {
+  ...Playground,
+  args: { ...Playground.args, position: "top" },
+  parameters: { layout: "padded" },
+  play: async () => {
+    const { popover, anchor } = await boxes()
+    await expect(popover.top).toBeGreaterThanOrEqual(anchor.bottom)
   },
 }
 

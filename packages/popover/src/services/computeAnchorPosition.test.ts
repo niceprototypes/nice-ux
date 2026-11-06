@@ -71,6 +71,66 @@ describe("computeAnchorPosition", () => {
     })
   })
 
+  describe("bounds (flip and shift)", () => {
+    const viewport = { width: 1000, height: 800 }
+    const size = { width: 120, height: 60 }
+
+    it("leaves a fitting element unchanged", () => {
+      expect(computeAnchorPosition(rect, "bottom", "start", OFFSET, { size, viewport })).toEqual(
+        computeAnchorPosition(rect, "bottom", "start", OFFSET)
+      )
+    })
+
+    it("flips bottom to top when the bottom overflows", () => {
+      const low = { top: 760, left: 200, right: 300, bottom: 790, width: 100, height: 30 }
+      expect(computeAnchorPosition(low, "bottom", "start", OFFSET, { size, viewport })).toEqual(
+        computeAnchorPosition(low, "top", "start", OFFSET)
+      )
+    })
+
+    it("flips left to right when the left overflows", () => {
+      const edge = { top: 300, left: 20, right: 60, bottom: 340, width: 40, height: 40 }
+      expect(computeAnchorPosition(edge, "left", "center", OFFSET, { size, viewport })).toEqual(
+        computeAnchorPosition(edge, "right", "center", OFFSET)
+      )
+    })
+
+    it("keeps the side when the opposite side overflows more", () => {
+      const tall = { width: 120, height: 500 }
+      const nearBottom = { top: 400, left: 200, right: 300, bottom: 440, width: 100, height: 40 }
+      // bottom overflows 448 + 500 - 800 = 148; top overflows 500 - 392 = 108 → flip
+      expect(computeAnchorPosition(nearBottom, "bottom", "start", OFFSET, { size: tall, viewport }).transform).toBe("translate(0, -100%)")
+      const nearTop = { top: 360, left: 200, right: 300, bottom: 400, width: 100, height: 40 }
+      // bottom overflows 408 + 500 - 800 = 108; top overflows 500 - 352 = 148 → stay
+      expect(computeAnchorPosition(nearTop, "bottom", "start", OFFSET, { size: tall, viewport }).transform).toBe("translate(0, 0)")
+    })
+
+    it("shifts along the cross axis to stay inside the right edge", () => {
+      const right = { top: 300, left: 920, right: 980, bottom: 340, width: 60, height: 40 }
+      const coords = computeAnchorPosition(right, "bottom", "start", OFFSET, { size, viewport })
+      expect(coords).toEqual({ top: 348, left: 880, transform: "translate(0, 0)" })
+    })
+
+    it("shifts a centered element inside the left edge", () => {
+      const left = { top: 300, left: 0, right: 40, bottom: 340, width: 40, height: 40 }
+      const coords = computeAnchorPosition(left, "top", "center", OFFSET, { size, viewport })
+      // centre at 20, box left = 20 - 60 = -40 → shift +40
+      expect(coords).toEqual({ top: 292, left: 60, transform: "translate(-50%, -100%)" })
+    })
+
+    it("shifts vertically for a side placement", () => {
+      const bottomEdge = { top: 770, left: 200, right: 300, bottom: 790, width: 100, height: 20 }
+      const coords = computeAnchorPosition(bottomEdge, "right", "start", OFFSET, { size, viewport })
+      expect(coords).toEqual({ top: 740, left: 308, transform: "translate(0, 0)" })
+    })
+
+    it("keeps the start edge visible when the element is larger than the viewport", () => {
+      const huge = { width: 1200, height: 60 }
+      const coords = computeAnchorPosition(rect, "bottom", "start", OFFSET, { size: huge, viewport })
+      expect(coords.left).toBe(0)
+    })
+  })
+
   it("accepts a DOMRect-shaped object with extra fields", () => {
     const domRect = { ...rect, x: 200, y: 300, toJSON: () => ({}) }
     expect(computeAnchorPosition(domRect, "bottom", "start", 0)).toEqual({ top: 340, left: 200, transform: "translate(0, 0)" })

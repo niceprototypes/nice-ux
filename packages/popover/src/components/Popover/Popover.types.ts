@@ -67,6 +67,23 @@ export type PopoverAnchorType = PopoverAnchorRectType | PopoverAnchorPointType
 export type PopoverCoordinatesType = { top: number; left: number; transform: string }
 
 /**
+ * PopoverSizeType
+ *
+ * Width and height in px. A `DOMRect` satisfies it.
+ */
+export type PopoverSizeType = Pick<DOMRect, "width" | "height">
+
+/**
+ * PopoverBoundsType
+ *
+ * What `computeAnchorPosition` needs to keep the element in the viewport: the
+ * element's own size and the viewport's size. With it, the element flips to the
+ * opposite side when its side overflows and the opposite side overflows less,
+ * then shifts along the cross axis to stay inside the viewport.
+ */
+export type PopoverBoundsType = { size: PopoverSizeType; viewport: PopoverSizeType }
+
+/**
  * PopoverOpenType
  *
  * Whether the popover is rendered. Controlled by the consumer.
@@ -188,6 +205,8 @@ namespace PopoverTypes {
   export type AnchorPoint = PopoverAnchorPointType
   export type Anchor = PopoverAnchorType
   export type Coordinates = PopoverCoordinatesType
+  export type Size = PopoverSizeType
+  export type Bounds = PopoverBoundsType
   export type Open = PopoverOpenType
   export type OnOpenChange = PopoverOnOpenChangeType
   export type AnchorRef = PopoverAnchorRefType

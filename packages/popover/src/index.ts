@@ -5,4 +5,4 @@
 
 export { default, default as Popover } from "./components/Popover"
 export * from "./components/Popover"
-export { computeAnchorPosition } from "./services"
+export { computeAnchorPosition, getAnchorOffset } from "./services"

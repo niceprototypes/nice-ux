@@ -63,6 +63,23 @@ import { computeAnchorPosition } from "@niceprototypes/popover"
 
 const { top, left, transform } = computeAnchorPosition(el.getBoundingClientRect(), "bottom", "start", 8)
 // also accepts a point: computeAnchorPosition({ x: event.clientX, y: event.clientY }, "top", "center", 8)
+
+// with the element's and viewport's sizes, it flips and shifts into the viewport
+computeAnchorPosition(rect, "bottom", "start", 8, {
+  size: { width: el.offsetWidth, height: el.offsetHeight },
+  viewport: { width: window.innerWidth, height: window.innerHeight },
+})
+```
+
+### `getAnchorOffset`
+
+Reads an offset token as a px number (default `popover.offset`):
+
+```ts
+import { getAnchorOffset } from "@niceprototypes/popover"
+
+getAnchorOffset() // 8
+getAnchorOffset("tooltip.offset")
 ```
 
 ### Notes
@@ -70,6 +87,9 @@ const { top, left, transform } = computeAnchorPosition(el.getBoundingClientRect(
 - **Portal rendering.** The popover renders at `<body>` with `position: fixed`,
   so it is never clipped by a scrolling or `overflow: hidden` ancestor. Position
   is recomputed on scroll (capture) and resize while open.
+- **Viewport.** When the popover overflows the viewport on its `position` side
+  and the opposite side overflows less, it flips to the opposite side; it then
+  shifts along the cross axis to stay inside the viewport.
 - **Outside dismiss.** A pointerdown outside the popover and the anchor calls
   `onOpenChange(false)`. A trigger that sits beside the anchor (e.g. a date
   field's calendar button) would dismiss the popover on pointerdown and then
@@ -83,13 +103,14 @@ const { top, left, transform } = computeAnchorPosition(el.getBoundingClientRect(
   The array may be written inline; the latest value is read on each pointerdown.
 - **Focus.** Focus is not trapped. On close, focus returns to the anchor if it
   was inside the popover.
-- **Tokens.** Radius, shadow, stacking and max height use the `popover.*`
-  component tokens (`popover.borderRadius`, `popover.boxShadow`,
-  `popover.zIndex`, `popover.maxHeight`); content taller than the max height
-  scrolls. Colours use core `backgroundColor:raised` / `color:base`.
-- **Offset.** The anchor gap is read from `popover.offset` as a raw value and
-  parsed as px, because positioning runs in JS. A non-px value — including the
-  seed alias `var(--np--gap--small)` — falls back to 8px.
+- **Tokens.** Colours, radius, shadow, stacking and max height use the
+  `popover.*` component tokens (`popover.backgroundColor`, `popover.color`,
+  `popover.borderRadius`, `popover.boxShadow`, `popover.zIndex`,
+  `popover.maxHeight`); content taller than the max height scrolls.
+- **Offset.** The anchor gap is read from `popover.offset` with
+  `getAnchorOffset` and parsed as px, because positioning runs in JS. A
+  single-`var()` alias such as the seed `var(--np--gap--small)` is followed to
+  its value; any other non-px value falls back to 8px.
 
 ## License
 

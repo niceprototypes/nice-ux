@@ -470,6 +470,15 @@ export const FormValue: Story = {
 export const PositionTop: Story = {
   ...Playground,
   args: { ...Playground.args, position: "top" },
+  // Room above the trigger, so the listbox fits without flipping: the Vitest
+  // browser renders the trigger at the canvas's top edge.
+  decorators: [
+    Story => (
+      <div style={{ paddingTop: getToken("popover.maxHeight") }}>
+        <Story />
+      </div>
+    ),
+  ],
   play: async ({ canvasElement, userEvent }) => {
     const combobox = within(canvasElement).getByRole("combobox", { name: "Fruit" })
     await userEvent.click(combobox)

@@ -4,7 +4,7 @@ import { Theme } from "@niceprototypes/styles"
 import { StyledPopover } from "./Popover.styles"
 import type { PopoverCoordinatesType, PopoverProps } from "./Popover.types"
 import { computeAnchorPosition } from "../../services/computeAnchorPosition"
-import { getPopoverOffset } from "../../utilities/getPopoverOffset"
+import { getAnchorOffset } from "../../services/getAnchorOffset"
 
 // Hydration-safe client check: false during server render and hydration, true
 // on client renders. Keeps createPortal / document access off the server.
@@ -17,7 +17,8 @@ const getServerSnapshot = () => false
  *
  * Controlled surface anchored to `anchorRef`. While `open`, renders in a portal
  * at `<body>` with `position: fixed`, placed by `computeAnchorPosition` on
- * `position`'s side of the anchor with `align` on the cross axis; with
+ * `position`'s side of the anchor with `align` on the cross axis, flipped to the
+ * opposite side and shifted along the cross axis to stay in the viewport; with
  * `matchAnchorWidth`, its min-width is the anchor's width. Coordinates
  * are recomputed on window scroll (capture phase, so nested scrollers count)
  * and resize. Escape, or a pointerdown outside the popover, the anchor and
@@ -86,12 +87,20 @@ const Popover: React.FC<PopoverProps> = ({
   React.useLayoutEffect(() => {
     if (!open) return
     // Gap in px from the `popover.offset` token, read once per open.
-    const offset = getPopoverOffset()
+    const offset = getAnchorOffset()
     const update = () => {
       const anchor = anchorRef.current
       if (!anchor) return
       const rect = anchor.getBoundingClientRect()
-      setCoords({ ...computeAnchorPosition(rect, position, align, offset), anchorWidth: rect.width })
+      // offsetWidth / offsetHeight ignore the transform. The first measure runs
+      // before min-width is applied, so matchAnchorWidth counts the anchor's width.
+      const node = popoverRef.current
+      const size = {
+        width: Math.max(node?.offsetWidth ?? 0, matchAnchorWidth ? rect.width : 0),
+        height: node?.offsetHeight ?? 0,
+      }
+      const viewport = { width: window.innerWidth, height: window.innerHeight }
+      setCoords({ ...computeAnchorPosition(rect, position, align, offset, { size, viewport }), anchorWidth: rect.width })
     }
     update()
     window.addEventListener("scroll", update, true)
@@ -101,7 +110,7 @@ const Popover: React.FC<PopoverProps> = ({
       window.removeEventListener("resize", update)
       setCoords(null)
     }
-  }, [open, anchorRef, position, align])
+  }, [open, anchorRef, position, align, matchAnchorWidth])
 
   // Dismiss + focus return. focusin tracks whether focus is inside the popover,
   // because by the time this cleanup runs the popover node is already removed

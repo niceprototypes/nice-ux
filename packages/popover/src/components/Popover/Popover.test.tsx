@@ -4,7 +4,7 @@ import "@testing-library/jest-dom"
 import Popover from "./Popover"
 import WrappedPopover from "./index"
 import { computeAnchorPosition } from "../../services/computeAnchorPosition"
-import { POPOVER_OFFSET_FALLBACK } from "../../utilities/getPopoverOffset"
+import { ANCHOR_OFFSET_FALLBACK } from "../../services/getAnchorOffset"
 import type { PopoverProps } from "./Popover.types"
 
 const ANCHOR_RECT = { top: 100, left: 40, right: 140, bottom: 130, width: 100, height: 30, x: 40, y: 100 }
@@ -178,7 +178,7 @@ describe("Popover", () => {
 
   it("applies position styles from computeAnchorPosition (defaults bottom / start)", () => {
     render(<Harness aria-label="menu" />)
-    const expected = computeAnchorPosition(ANCHOR_RECT, "bottom", "start", POPOVER_OFFSET_FALLBACK)
+    const expected = computeAnchorPosition(ANCHOR_RECT, "bottom", "start", ANCHOR_OFFSET_FALLBACK)
     const popover = screen.getByRole("dialog")
     expect(popover.style.top).toBe(`${expected.top}px`)
     expect(popover.style.left).toBe(`${expected.left}px`)
@@ -187,11 +187,21 @@ describe("Popover", () => {
 
   it("applies position styles for a given position and align", () => {
     render(<Harness aria-label="menu" position="right" align="center" />)
-    const expected = computeAnchorPosition(ANCHOR_RECT, "right", "center", POPOVER_OFFSET_FALLBACK)
+    const expected = computeAnchorPosition(ANCHOR_RECT, "right", "center", ANCHOR_OFFSET_FALLBACK)
     const popover = screen.getByRole("dialog")
     expect(popover.style.top).toBe(`${expected.top}px`)
     expect(popover.style.left).toBe(`${expected.left}px`)
     expect(popover.style.transform).toBe(expected.transform)
+  })
+
+  it("flips to the opposite side when its side overflows the viewport", () => {
+    const height = jest.spyOn(HTMLElement.prototype, "offsetHeight", "get").mockReturnValue(window.innerHeight)
+    const width = jest.spyOn(HTMLElement.prototype, "offsetWidth", "get").mockReturnValue(80)
+    render(<Harness aria-label="menu" position="top" />)
+    // top overflows by innerHeight - 92; bottom by 138 → bottom
+    expect(screen.getByRole("dialog").style.transform).toBe("translate(0, 0)")
+    height.mockRestore()
+    width.mockRestore()
   })
 
   describe("matchAnchorWidth", () => {
