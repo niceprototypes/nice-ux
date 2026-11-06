@@ -4,5 +4,5 @@
   "default": "Icon",
   "components": ["Icon", "Illustration"],
   "services": ["registerVendorResolver"],
-  "constants": ["iconNames"]
+  "constants": ["iconNames", "iconVariants", "illustrationNames", "illustrationVariants"]
 }

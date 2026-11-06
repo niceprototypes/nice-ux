@@ -6,5 +6,5 @@
 export { default, default as Icon } from "./components/Icon"
 export * from "./components/Icon"
 export * from "./components/Illustration"
-export { iconNames } from "./constants"
+export { iconNames, iconVariants, illustrationNames, illustrationVariants } from "./constants"
 export { registerVendorResolver } from "./services"

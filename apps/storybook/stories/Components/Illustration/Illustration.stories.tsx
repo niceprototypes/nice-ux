@@ -2,9 +2,8 @@ import type { Meta, StoryObj } from "@storybook/react-vite"
 import { expect } from "storybook/test"
 import { getToken, themeTokensData } from "@niceprototypes/styles"
 import type { FontSizeType } from "@niceprototypes/styles"
-import { Illustration } from "@niceprototypes/icon"
+import { Illustration, illustrationNames, illustrationVariants } from "@niceprototypes/icon"
 import type { IconAnimationDurationType } from "@niceprototypes/icon"
-import { illustrationNames, illustrationVariants } from "@niceprototypes/icon/svg"
 
 /**
  * Option lists. Names and variants are read from the icon package's illustration catalog;

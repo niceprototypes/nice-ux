@@ -3,9 +3,8 @@ import { expect } from "storybook/test"
 import { Heart, Star } from "lucide-react"
 import { getToken, themeTokensData } from "@niceprototypes/styles"
 import type { BreakpointName, ChannelValue, ColorTokenProp, FontSizeType } from "@niceprototypes/styles"
-import Icon, { iconNames } from "@niceprototypes/icon"
+import Icon, { iconNames, iconVariants } from "@niceprototypes/icon"
 import type { IconAnimationDurationType, IconColorType, IconProps, IconStrokeWidthType } from "@niceprototypes/icon"
-import { iconVariants } from "@niceprototypes/icon/svg"
 
 /**
  * Option lists. Names and variants are read from the icon catalog; the other unions are typed

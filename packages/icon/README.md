@@ -47,6 +47,8 @@ Types are the aliases exported from `Icon.types.ts`. Allowed values of each unio
 | `style` | `React.CSSProperties` | - | Inline styles on the root element |
 | `className` | `string` | - | Class on the root element |
 
+The root element carries `data-icon` with the `name` it was given (omitted with `vendorComponent`), so tests can find an icon by name.
+
 ### Illustration
 
 `import { Illustration } from "@niceprototypes/icon"` — fixed-color art from @niceprototypes/icon' illustration set. Recolor and stroke props (`color`, `strokeWidth`, `strokeScaling`, `outlined`) are omitted; sizing and animation reuse the icon tokens.
@@ -85,7 +87,9 @@ The same pattern applies to `@niceprototypes/image` / `@niceprototypes/image-ven
 
 ## Icon names
 
-Built-in names and their variants come from @niceprototypes/icon: `import { iconNames } from "@niceprototypes/icon"` (the `IconNameType` union). Add icons by adding them to @niceprototypes/icon and rebuilding it.
+Built-in names and their variants come from @niceprototypes/icon: `import { iconNames, iconVariants, illustrationNames, illustrationVariants } from "@niceprototypes/icon"` (`iconNames` is the `IconNameType` union). Add icons by adding them to @niceprototypes/icon and rebuilding it.
+
+The string and base64 services (`getIcon`, `getIconEncoded`, `getIllustration`, `getIllustrationEncoded`) and the catalogs come from `@niceprototypes/icon/svg`. Under Node that entry leaves out the SVG React components, whose `.svg` imports need a bundler.
 
 ## Usage Examples
 
