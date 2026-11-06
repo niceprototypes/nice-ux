@@ -90,6 +90,14 @@ export const StyledControl = styled.input.withConfig({
           resize: ${$maxRows === undefined ? "vertical" : "none"};
           line-height: ${getToken("lineHeight", "base")};
           padding-block: calc((${getToken(`input.size:${$size}`)} - 1lh) / 2);
+          /* On a side with no slot the textarea takes the field's inline padding
+             itself, so it fills the field edge to edge (StyledField drops its own). */
+          &:first-child {
+            padding-inline-start: ${getToken(`input.spacing:${$size}`)};
+          }
+          &:last-child {
+            padding-inline-end: ${getToken(`input.spacing:${$size}`)};
+          }
           min-block-size: calc(
             ${$rows ?? 2} * 1lh + ${getToken(`input.size:${$size}`)} - 1lh
           );
@@ -201,6 +209,16 @@ export const StyledField = styled.div.withConfig({
     ${$borderColor
       ? `border-color: ${resolveColorProp("input", "borderColor", $borderColor)};`
       : ""}
+
+    /* A textarea fills the field on any side without a slot: the padding moves
+       onto the textarea (StyledControl), so its whole box, resize corner
+       included, reaches the border. */
+    &:has(> textarea:first-child) {
+      padding-inline-start: 0;
+    }
+    &:has(> textarea:last-child) {
+      padding-inline-end: 0;
+    }
 
     /* Focus: the border takes the focus color (mouse and keyboard alike); no
        outline outside it. */
