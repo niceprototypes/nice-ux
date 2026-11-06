@@ -40,7 +40,7 @@ const Ink: React.FC<InkProps> = ({
   legibilityOptimized = false,
   as = "span",
   children,
-  className = "sb-unstyled",
+  className,
   code = false,
   color,
   id,

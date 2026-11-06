@@ -31,7 +31,7 @@ export const TokenStory = ({ id }: { id: string }) => {
   if (!table) throw new Error(`TokenStory: no token table "${id}" in storybook.json`)
   const rows = buildTokenRows(table, isNight, highlight)
   return (
-    <StyledColumn>
+    <StyledColumn className="sb-unstyled">
       <Flex direction="column" gap="larger">
         <StoryHeader title={table.name} description={table.description} />
         <DataTable columns={table.columns} columnWidths={table.columnWidths} sectionWrapped={table.sectionWrapped} tables={[{ rows }]} />

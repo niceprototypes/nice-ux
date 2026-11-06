@@ -61,10 +61,13 @@ const preview: Preview = {
       container: ({ children, context }: React.ComponentProps<typeof DocsContainer>) => (
         <DocsContainer context={context}>
           <DocsNavigationContext.Provider value={openStory}>
-          <StoryNavigation
-            sequences={storyNavigationSequences}
-            indexSequences={storyNavigationIndexSequences}
-          />
+          {/* sb-unstyled: Storybook's docs typography stays out of the bar's Nice components */}
+          <div className="sb-unstyled">
+            <StoryNavigation
+              sequences={storyNavigationSequences}
+              indexSequences={storyNavigationIndexSequences}
+            />
+          </div>
           <ContentFlex
             direction="column"
             wrapped={getItemForEntry(new URLSearchParams(window.location.search).get("id") ?? "")?.settings.wrapped === true}

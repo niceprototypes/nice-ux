@@ -23,7 +23,8 @@ interface ArrowLinkProps {
 const ArrowLink: React.FC<ArrowLinkProps> = ({ storyId, children }) => {
   const navigate = React.useContext(DocsNavigationContext)
   return (
-    <Button as="a" weight="semibold" iconRight="arrow-right" onClick={() => navigate(storyId)}>
+    // sb-unstyled: inside Storybook docs prose, Storybook's typography stays out of the link
+    <Button as="a" className="sb-unstyled" weight="semibold" iconRight="arrow-right" onClick={() => navigate(storyId)}>
       <Plain>{children}</Plain>
     </Button>
   )

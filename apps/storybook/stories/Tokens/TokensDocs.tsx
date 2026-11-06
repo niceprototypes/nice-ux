@@ -1,6 +1,12 @@
+import styled from "styled-components"
 import { ModuleTokenTable } from "@niceprototypes/docs/dataTables/components/tokens/Modules"
 import type { ModuleTokenTableSectionConfig } from "@niceprototypes/docs/dataTables/components/tokens/Modules"
 import { getItem, getTokenTable, type TokenTable } from "@niceprototypes/docs/data"
+
+/** Groups the tables under one `sb-unstyled` ancestor without adding a box to the page's flex column. */
+const StyledUnstyled = styled.div.attrs({ className: "sb-unstyled" })`
+  display: contents;
+`
 
 /**
  * The full Tokens/Docs body, in sidebar order. Each Tokens folder (Animation,
@@ -20,5 +26,9 @@ export const TokensDocs = () => {
       if (group) sections.push({ group })
     }
   }
-  return <ModuleTokenTable sections={sections} sectionWrapped={tokens?.settings.sectionWrapped === true} />
+  return (
+    <StyledUnstyled>
+      <ModuleTokenTable sections={sections} sectionWrapped={tokens?.settings.sectionWrapped === true} />
+    </StyledUnstyled>
+  )
 }

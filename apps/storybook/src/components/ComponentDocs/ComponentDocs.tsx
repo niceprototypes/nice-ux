@@ -71,7 +71,8 @@ const ComponentDocs: React.FC<ComponentDocsProps> = ({ component, examples = {},
       <StyledMain>
         <Flex direction="column" gap="larger">
           {all.map(section => (
-            <StyledSection key={section.id} id={section.id}>
+            // sb-unstyled: past the Docs intro, sections hold Nice components only, so Storybook's docs typography stays out
+            <StyledSection key={section.id} id={section.id} className={section.id === "docs" ? undefined : "sb-unstyled"}>
               <Flex direction="column" gap="larger">
                 {section.content}
               </Flex>
