@@ -50,8 +50,8 @@ export type CodeFitType = boolean
 /**
  * CodeMarginType
  *
- * Re-export of GapType from @niceprototypes/styles. Top/bottom margin variant. Use "none"
- * for blocks embedded in a layout that owns its own spacing.
+ * Re-export of GapType from @niceprototypes/styles. Top/bottom margin (`margin-block`) as a
+ * `gap` token variant. "none" leaves the spacing to the surrounding layout.
  */
 export type CodeMarginType = GapType
 
@@ -98,7 +98,7 @@ export interface CodeProps {
   inlined?: CodeInlinedType
   /** Shrink the card to its content width. @default false */
   fit?: CodeFitType
-  /** Top/bottom margin as a `gap` token variant. @default "large" */
+  /** Top/bottom margin as a `gap` token variant. @default "none" */
   margin?: CodeMarginType
   /** Collapse card blocks taller than this `code.maxHeight` token, with a fade and a drag bar. @default "base" */
   maxHeight?: CodeMaxHeightType

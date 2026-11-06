@@ -5,4 +5,5 @@
 
 export { default, default as Code } from "./components/Code"
 export * from "./components/Code"
+export { codeLanguages } from "./constants"
 export { copyToClipboard } from "./services"

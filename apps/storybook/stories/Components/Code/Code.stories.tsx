@@ -1,16 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { expect, spyOn, within } from "storybook/test"
 import { getToken, type GapType } from "@niceprototypes/styles"
-import Code, { type CodeMaxHeightType } from "@niceprototypes/code"
+import Code, { codeLanguages, type CodeMaxHeightType } from "@niceprototypes/code"
 
 /**
  * Option lists. `margin` is typed against GapType on disk. `language` is a plain string
- * in CodeProps; the options are the fence languages the highlighter maps
- * (packages/code/src/utilities/highlightCode.ts).
+ * in CodeProps; the options are the package's `codeLanguages`.
  */
 const MARGIN_OPTIONS = ["none", "smaller", "small", "base", "large", "larger"] as const satisfies readonly GapType[]
 const MAX_HEIGHT_OPTIONS = ["none", "base"] as const satisfies readonly CodeMaxHeightType[]
-const LANGUAGE_OPTIONS = ["none", "tsx", "ts", "typescript", "jsx", "js", "javascript", "css", "bash", "sh", "shell", "html", "xml", "json"]
+const LANGUAGE_OPTIONS = ["none", ...codeLanguages]
 
 const SAMPLE = `import Code, { type CodeMaxHeightType } from "@niceprototypes/code"
 
@@ -50,7 +49,7 @@ const meta = {
     copyOnClick: true,
     inlined: false,
     fit: false,
-    margin: "large",
+    margin: "none",
     maxHeight: "base",
   },
   argTypes: {
@@ -212,5 +211,19 @@ export const Fill: Story = {
     const width = root(canvasElement).getBoundingClientRect().width
     const shiki = canvasElement.querySelector(".shiki")!.getBoundingClientRect().width
     await expect(width).toBeGreaterThan(shiki)
+  },
+}
+
+export const Margin: Story = {
+  args: { margin: "large" },
+  play: async ({ canvasElement }) => {
+    // The margin reads the gap token on both block edges.
+    const probe = document.createElement("div")
+    probe.style.marginTop = getToken("gap", "large")
+    canvasElement.appendChild(probe)
+    const style = getComputedStyle(root(canvasElement))
+    await expect(style.marginTop).toBe(getComputedStyle(probe).marginTop)
+    await expect(style.marginBottom).toBe(getComputedStyle(probe).marginTop)
+    probe.remove()
   },
 }

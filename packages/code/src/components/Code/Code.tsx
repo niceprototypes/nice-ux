@@ -31,7 +31,7 @@ const Code: React.FC<CodeProps> = ({
   copyOnClick = true,
   inlined = false,
   fit = false,
-  margin = "large",
+  margin = "none",
   maxHeight = "base",
   className,
   children,

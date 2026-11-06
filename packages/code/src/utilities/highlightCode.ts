@@ -92,7 +92,7 @@ const highlighter = createHighlighterCoreSync({
 })
 
 // Fence language → registered grammar. Anything unmapped falls back to "text".
-const ALIASES: Record<string, string> = {
+export const ALIASES: Record<string, string> = {
   tsx: "tsx",
   ts: "tsx",
   typescript: "tsx",

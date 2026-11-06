@@ -16,7 +16,7 @@ const INLINE_BACKGROUND_HOVER = getToken("code.color:base", { transform: [null, 
  * the cascade picks the day or night value; these rules set the code font from
  * the code tokens.
  */
-export const CodeDiv = styled.div<{ $clickable?: boolean; $inlined?: boolean; $fit?: boolean; $margin?: CodeMarginType }>`
+export const CodeDiv = styled.div<{ $clickable?: boolean; $inlined?: boolean; $fit?: boolean; $margin: CodeMarginType }>`
   position: relative;
   background-color: ${({ $inlined }) => ($inlined ? INLINE_BACKGROUND : getToken("code.backgroundColor:base"))};
   ${({ $clickable }) => $clickable && `cursor: pointer;`}
@@ -26,6 +26,7 @@ export const CodeDiv = styled.div<{ $clickable?: boolean; $inlined?: boolean; $f
   box-shadow: ${({ $inlined }) => ($inlined ? "none" : getToken("code.boxShadow:base"))};
   max-width: ${getToken("code.maxWidth:base")};
   overflow: hidden;
+  margin-block: ${({ $margin }) => getToken("gap", $margin)};
 
   /* Shiki's <pre> drops the user agent's 1em block margin; spacing around the block is the consumer's. */
   pre.shiki {
