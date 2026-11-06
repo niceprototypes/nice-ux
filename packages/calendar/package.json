@@ -67,7 +67,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/niceprototypes/nice-ux.git",
+    "url": "git+https://github.com/niceprototypes/ui.git",
     "directory": "packages/calendar"
   }
 }

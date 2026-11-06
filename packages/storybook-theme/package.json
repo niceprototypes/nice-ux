@@ -37,13 +37,13 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/niceprototypes/nice-ux.git",
+    "url": "git+https://github.com/niceprototypes/ui.git",
     "directory": "packages/storybook-theme"
   },
   "bugs": {
-    "url": "https://github.com/niceprototypes/nice-ux/issues"
+    "url": "https://github.com/niceprototypes/ui/issues"
   },
-  "homepage": "https://github.com/niceprototypes/nice-ux/tree/main/packages/storybook-theme#readme",
+  "homepage": "https://github.com/niceprototypes/ui/tree/main/packages/storybook-theme#readme",
   "peerDependencies": {
     "@niceprototypes/icon": "workspace:^",
     "@niceprototypes/styles": "workspace:^",

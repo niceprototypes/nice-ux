@@ -26,13 +26,13 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/niceprototypes/nice-ux.git",
+    "url": "git+https://github.com/niceprototypes/ui.git",
     "directory": "packages/image-vendor"
   },
   "bugs": {
-    "url": "https://github.com/niceprototypes/nice-ux/issues"
+    "url": "https://github.com/niceprototypes/ui/issues"
   },
-  "homepage": "https://github.com/niceprototypes/nice-ux/tree/main/packages/image-vendor#readme",
+  "homepage": "https://github.com/niceprototypes/ui/tree/main/packages/image-vendor#readme",
   "peerDependencies": {
     "@niceprototypes/image": "workspace:^",
     "react": ">=19.2.0"

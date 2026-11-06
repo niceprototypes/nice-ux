@@ -67,13 +67,13 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/niceprototypes/nice-ux.git",
+    "url": "git+https://github.com/niceprototypes/ui.git",
     "directory": "packages/styles"
   },
   "bugs": {
-    "url": "https://github.com/niceprototypes/nice-ux/issues"
+    "url": "https://github.com/niceprototypes/ui/issues"
   },
-  "homepage": "https://github.com/niceprototypes/nice-ux/tree/main/packages/styles#readme",
+  "homepage": "https://github.com/niceprototypes/ui/tree/main/packages/styles#readme",
   "type": "module",
   "devDependencies": {
     "@types/node": "^24.8.0",

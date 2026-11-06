@@ -27,13 +27,13 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/niceprototypes/nice-ux.git",
+    "url": "git+https://github.com/niceprototypes/ui.git",
     "directory": "packages/tooltip"
   },
   "bugs": {
-    "url": "https://github.com/niceprototypes/nice-ux/issues"
+    "url": "https://github.com/niceprototypes/ui/issues"
   },
-  "homepage": "https://github.com/niceprototypes/nice-ux/tree/main/packages/tooltip#readme",
+  "homepage": "https://github.com/niceprototypes/ui/tree/main/packages/tooltip#readme",
   "peerDependencies": {
     "@niceprototypes/popover": "workspace:^",
     "@niceprototypes/styles": "workspace:^",

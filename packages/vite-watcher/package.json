@@ -38,13 +38,13 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/niceprototypes/nice-ux.git",
+    "url": "git+https://github.com/niceprototypes/ui.git",
     "directory": "packages/vite-watcher"
   },
   "bugs": {
-    "url": "https://github.com/niceprototypes/nice-ux/issues"
+    "url": "https://github.com/niceprototypes/ui/issues"
   },
-  "homepage": "https://github.com/niceprototypes/nice-ux/tree/main/packages/vite-watcher#readme",
+  "homepage": "https://github.com/niceprototypes/ui/tree/main/packages/vite-watcher#readme",
   "peerDependencies": {
     "vite": ">=4.0.0"
   },

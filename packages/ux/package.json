@@ -89,11 +89,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/niceprototypes/nice-ux.git",
+    "url": "git+https://github.com/niceprototypes/ui.git",
     "directory": "packages/ux"
   },
-  "homepage": "https://github.com/niceprototypes/nice-ux/tree/main/packages/ux#readme",
+  "homepage": "https://github.com/niceprototypes/ui/tree/main/packages/ux#readme",
   "bugs": {
-    "url": "https://github.com/niceprototypes/nice-ux/issues"
+    "url": "https://github.com/niceprototypes/ui/issues"
   }
 }
