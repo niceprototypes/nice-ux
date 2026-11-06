@@ -1,6 +1,6 @@
 {
   "name": "@niceprototypes/slider",
-  "version": "0.5.5",
+  "version": "0.6.0",
   "description": "A smooth, animated vertical slider component for React",
   "type": "module",
   "main": "dist/index.js",

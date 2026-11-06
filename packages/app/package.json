@@ -1,6 +1,6 @@
 {
   "name": "@niceprototypes/app",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "description": "App shell for React: a Tree nav over scenes and docs pages found by folder, on a pluggable router",
   "main": "dist/index.js",

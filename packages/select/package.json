@@ -1,6 +1,6 @@
 {
   "name": "@niceprototypes/select",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "description": "Select for React: a WAI-ARIA select-only combobox through nice-react-input's field chrome by default, or the native select with the native prop",
   "main": "dist/index.js",

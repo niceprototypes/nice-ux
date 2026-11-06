@@ -1,6 +1,6 @@
 {
   "name": "@niceprototypes/card",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "description": "Card for React: an outline, elevated or filled surface with header, body and footer slots, optionally a link or a (toggle) button",
   "main": "dist/index.js",

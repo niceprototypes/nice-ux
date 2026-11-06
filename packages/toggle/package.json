@@ -1,6 +1,6 @@
 {
   "name": "@niceprototypes/toggle",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "description": "An on/off switch built on a native checkbox, for nice-react",
   "main": "dist/index.js",

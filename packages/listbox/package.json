@@ -1,6 +1,6 @@
 {
   "name": "@niceprototypes/listbox",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "description": "Listbox for React: a controlled WAI-ARIA listbox of selectable options with keyboard navigation and typeahead",
   "main": "dist/index.js",

@@ -1,6 +1,6 @@
 {
   "name": "@niceprototypes/lightbox",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "type": "module",
   "description": "A fullscreen image lightbox component for React with styled-components",
   "main": "dist/index.js",

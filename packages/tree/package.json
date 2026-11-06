@@ -1,6 +1,6 @@
 {
   "name": "@niceprototypes/tree",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "description": "Tree for React: a navigation tree of nested links and disclosure folders with guide lines",
   "main": "dist/index.js",

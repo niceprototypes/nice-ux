@@ -1,6 +1,6 @@
 {
   "name": "@niceprototypes/list",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "description": "Generic list for React: List and ListItem with start/end slots, hr dividers between items, and an optional scrollable body",
   "main": "dist/index.js",

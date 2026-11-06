@@ -1,6 +1,6 @@
 {
   "name": "@niceprototypes/ink",
-  "version": "8.0.3",
+  "version": "8.1.0",
   "type": "module",
   "description": "A flexible and customizable Ink component for React with styled-components",
   "main": "dist/index.js",

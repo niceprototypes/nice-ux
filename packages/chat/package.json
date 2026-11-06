@@ -1,6 +1,6 @@
 {
   "name": "@niceprototypes/chat",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "description": "Chat for React: a following message log, user and assistant messages, a composer with send and stop, and suggestions",
   "main": "dist/index.js",

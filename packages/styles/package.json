@@ -1,6 +1,6 @@
 {
   "name": "@niceprototypes/styles",
-  "version": "17.1.0",
+  "version": "17.2.0",
   "description": "Design tokens, CSS custom properties and the React provider, theme and token bindings for Nice UI",
   "main": "dist/react/index.js",
   "module": "dist/react/index.js",

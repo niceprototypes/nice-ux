@@ -1,6 +1,6 @@
 {
   "name": "@niceprototypes/icon",
-  "version": "8.0.3",
+  "version": "8.1.0",
   "description": "React Icon and Illustration components with the Nice SVG icon and illustration set",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",

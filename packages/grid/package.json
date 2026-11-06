@@ -1,6 +1,6 @@
 {
   "name": "@niceprototypes/grid",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "description": "CSS grid layout for React: Grid and GridItem with column counts, auto-fill tracks and spans, spaced by the Flex gap tokens",
   "main": "dist/index.js",

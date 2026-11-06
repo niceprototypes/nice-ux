@@ -1,5 +1,15 @@
 # Changelog
 
+## 8.1.0
+
+### Minor Changes
+
+- 0c3e8ab: `as` accepts h5, h6, a, li, blockquote, cite, mark and s; `href` (for `as="a"`, which defaults to the link colour), `decoration`, `truncate`, and `letterSpacing` / `maxWidth` reading the `ink.letterSpacing` / `ink.maxWidth` tokens.
+
+### Patch Changes
+
+- 0c3e8ab: Ink no longer sets `className="sb-unstyled"` by default, so production markup carries no Storybook class.
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
@@ -76,21 +86,21 @@ Update your CSS imports:
 
 ```css
 /* Old */
-@import 'nice-css-variables';
+@import "nice-css-variables";
 
 /* New - import all variables */
-@import '@niceprototypes/styles/variables.css';
+@import "@niceprototypes/styles/variables.css";
 
 /* Or import selectively for better performance */
-@import '@niceprototypes/styles/static/css/content-color.css';
-@import '@niceprototypes/styles/static/css/font-size.css';
+@import "@niceprototypes/styles/static/css/content-color.css";
+@import "@niceprototypes/styles/static/css/font-size.css";
 ```
 
 TypeScript/JavaScript usage:
 
 ```typescript
 // New: You can now import constants directly
-import { CONTENT_COLOR_SUCCESS, FONT_SIZE_3 } from '@niceprototypes/styles'
+import { CONTENT_COLOR_SUCCESS, FONT_SIZE_3 } from "@niceprototypes/styles"
 ```
 
 ## [2.0.0] - 2025-01-09
@@ -98,10 +108,12 @@ import { CONTENT_COLOR_SUCCESS, FONT_SIZE_3 } from '@niceprototypes/styles'
 ### Breaking Changes
 
 - **BREAKING**: Changed `size` prop from `number` to `string` type
+
   - Previously: `size={3}` (integer values 1-6)
   - Now: `size="1rem"` or `size="var(--text-lg)"` (any valid CSS size value or variable)
 
 - **BREAKING**: Changed `weight` prop from `number` to `string` type
+
   - Previously: `weight={500}` (integer values)
   - Now: `weight="500"` or `weight="var(--font-semibold)"` (any valid CSS weight value or variable)
 
@@ -111,11 +123,13 @@ import { CONTENT_COLOR_SUCCESS, FONT_SIZE_3 } from '@niceprototypes/styles'
 ### Added
 
 - New CSS custom properties for flexible theming:
+
   - `--ink-size-default`: Default font size (fallback: `1rem`)
   - `--ink-weight-default`: Default font weight (fallback: `normal`)
   - `--ink-weight-heading`: Heading weight for h1, h2, h3 (fallback: `600`)
 
 - New exported types:
+
   - `AlignType`: Text alignment options
   - `LineHeightType`: Line height options
 
@@ -134,6 +148,7 @@ import { CONTENT_COLOR_SUCCESS, FONT_SIZE_3 } from '@niceprototypes/styles'
 To migrate from v1.x to v2.0:
 
 1. Update `size` prop values from numbers to strings:
+
    ```tsx
    // Before (v1.x)
    <Ink size={3}>Text</Ink>
@@ -145,6 +160,7 @@ To migrate from v1.x to v2.0:
    ```
 
 2. Update `weight` prop values from numbers to strings:
+
    ```tsx
    // Before (v1.x)
    <Ink weight={500}>Text</Ink>
@@ -169,46 +185,55 @@ To migrate from v1.x to v2.0:
 ## [1.3.5] - Previous Release
 
 ### Changed
+
 - Dependency updates and bug fixes
 
 ## [1.3.4] - Previous Release
 
 ### Changed
+
 - Minor improvements and optimizations
 
 ## [1.3.3] - Previous Release
 
 ### Added
+
 - Heading font family support
 
 ## [1.3.2] - Previous Release
 
 ### Changed
+
 - Documentation improvements
 
 ## [1.3.1] - Previous Release
 
 ### Fixed
+
 - Bug fixes and stability improvements
 
 ## [1.3.0] - Previous Release
 
 ### Added
+
 - Enhanced ink features
 
 ## [1.2.0] - Previous Release
 
 ### Added
+
 - Additional status types
 
 ## [1.1.0] - Previous Release
 
 ### Added
+
 - Line height controls
 
 ## [1.0.0] - Initial Release
 
 ### Added
+
 - Initial release with core ink features
 - Semantic HTML element support (h1-h4, p, span)
 - Size and weight system with CSS variables

@@ -1,6 +1,6 @@
 {
   "name": "@niceprototypes/button",
-  "version": "9.1.3",
+  "version": "9.2.0",
   "description": "A flexible and customizable React button component with built-in theming support",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",

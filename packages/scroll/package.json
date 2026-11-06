@@ -1,6 +1,6 @@
 {
   "name": "@niceprototypes/scroll",
-  "version": "2.2.2",
+  "version": "2.3.0",
   "type": "module",
   "description": "Performance-optimized scroll components for React with centralized scroll management, sticky positioning, and intersection observer utilities",
   "main": "dist/index.js",

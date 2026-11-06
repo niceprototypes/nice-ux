@@ -1,6 +1,6 @@
 {
   "name": "@niceprototypes/popover",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "description": "A popover component for React that renders a portal-positioned surface anchored to an element, with Escape and outside-click dismiss",
   "main": "dist/index.js",

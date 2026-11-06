@@ -1,6 +1,6 @@
 {
   "name": "@niceprototypes/radio",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "description": "Radio buttons for React: RadioGroup and Radio on native radios, with token-driven circles and Field wiring",
   "main": "dist/index.js",

@@ -1,6 +1,6 @@
 {
   "name": "@niceprototypes/logo",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "type": "module",
   "description": "The Nice Prototypes logo: the crystal heart illustration and the theme-aware logo name, for nice-react",
   "main": "dist/index.js",

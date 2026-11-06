@@ -1,6 +1,6 @@
 {
   "name": "@niceprototypes/calendar",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "description": "Calendar and DateField for React: an ISO-date month grid with locale week start and RTL-aware keyboard navigation, and a picker field built on Input and Popover",
   "main": "dist/index.js",
