@@ -175,6 +175,45 @@ describe("Tooltip", () => {
   })
 
   describe("click trigger", () => {
+    const flush = () =>
+      act(() => {
+        jest.advanceTimersByTime(0)
+      })
+
+    it.each(["Enter", " "])("toggles a focusable wrapper on %p", (key) => {
+      render(
+        <Tooltip content="tip" trigger="click">
+          <span>plain</span>
+        </Tooltip>
+      )
+      const wrapper = screen.getByText("plain").parentElement!
+      expect(wrapper).toHaveAttribute("tabindex", "0")
+      fireEvent.keyDown(wrapper, { key })
+      flush()
+      expect(bubble()).toBeInTheDocument()
+      fireEvent.keyDown(wrapper, { key })
+      flush()
+      expect(bubble()).not.toBeInTheDocument()
+    })
+
+    it("ignores Enter on a focusable child (its own click toggles)", () => {
+      renderTooltip({ trigger: "click" })
+      fireEvent.keyDown(screen.getByText("trigger"), { key: "Enter" })
+      flush()
+      expect(bubble()).not.toBeInTheDocument()
+    })
+
+    it("ignores other keys on the wrapper", () => {
+      render(
+        <Tooltip content="tip" trigger="click">
+          <span>plain</span>
+        </Tooltip>
+      )
+      fireEvent.keyDown(screen.getByText("plain").parentElement!, { key: "a" })
+      flush()
+      expect(bubble()).not.toBeInTheDocument()
+    })
+
     it("toggles on click", () => {
       renderTooltip({ trigger: "click" })
       activate("click")
@@ -265,6 +304,64 @@ describe("Tooltip", () => {
       expect(el.style.top).toBe(EXPECTED.trigger.top.top)
       expect(el.style.left).toBe(EXPECTED.trigger.top.left)
       expect(el.style.transform).toBe(EXPECTED.trigger.top.transform)
+    })
+  })
+
+  describe("viewport", () => {
+    it("flips to the opposite side when its side overflows", () => {
+      jest.spyOn(HTMLElement.prototype, "offsetHeight", "get").mockReturnValue(200)
+      jest.spyOn(HTMLElement.prototype, "offsetWidth", "get").mockReturnValue(40)
+      renderTooltip()
+      activate("hover")
+      // top: 92 - 200 < 0 → bottom
+      expect((bubble() as HTMLElement).style.transform).toBe(EXPECTED.trigger.bottom.transform)
+      expect((bubble() as HTMLElement).style.top).toBe(EXPECTED.trigger.bottom.top)
+    })
+
+    it("shifts along the cross axis to stay inside the viewport", () => {
+      jest.spyOn(HTMLElement.prototype, "offsetWidth", "get").mockReturnValue(200)
+      renderTooltip()
+      activate("hover")
+      // centre 90, box left 90 - 100 = -10 → shifted +10
+      expect((bubble() as HTMLElement).style.left).toBe("100px")
+    })
+  })
+
+  describe("open", () => {
+    it("shows the bubble without activation when true", () => {
+      renderTooltip({ open: true })
+      const el = bubble() as HTMLElement
+      expect(el).toBeInTheDocument()
+      expect(el.style.top).toBe(EXPECTED.trigger.top.top)
+      expect(triggerEl()).toHaveAttribute("aria-describedby", el.id)
+    })
+
+    it("keeps the bubble shown on mouseleave and Escape when true", () => {
+      renderTooltip({ open: true })
+      fireEvent.mouseLeave(triggerEl())
+      fireEvent.keyDown(document, { key: "Escape" })
+      act(() => {
+        jest.advanceTimersByTime(0)
+      })
+      expect(bubble()).toBeInTheDocument()
+    })
+
+    it("hides the bubble on hover when false", () => {
+      renderTooltip({ open: false })
+      activate("hover")
+      expect(bubble()).not.toBeInTheDocument()
+    })
+  })
+
+  describe("theme", () => {
+    it("wraps the bubble in Theme", () => {
+      renderTooltip({ open: true, theme: "night" })
+      expect(bubble()?.parentElement).toHaveAttribute("data-theme", "night")
+    })
+
+    it("renders the bubble directly into body without a theme", () => {
+      renderTooltip({ open: true })
+      expect(bubble()?.parentElement).toBe(document.body)
     })
   })
 

@@ -1,4 +1,5 @@
 import * as React from "react"
+import type { ThemeType } from "@niceprototypes/styles"
 
 /**
  * TooltipTriggerType
@@ -50,6 +51,24 @@ export type TooltipContentType = React.ReactNode
 export type TooltipDelayType = number
 
 /**
+ * TooltipOpenType
+ *
+ * Forces the bubble shown (true) or hidden (false). While set, hover, focus,
+ * click and Escape do not change it.
+ */
+export type TooltipOpenType = boolean
+
+/**
+ * TooltipThemeType
+ *
+ * Re-export of ThemeType from @niceprototypes/styles.
+ * Pin token resolution of the bubble to a specific theme; the bubble renders
+ * the inverse of that theme.
+ * Extensible for consumer-defined custom themes.
+ */
+export type TooltipThemeType = ThemeType
+
+/**
  * TooltipClassNameType
  *
  * CSS class name applied to the trigger wrapper element.
@@ -79,6 +98,10 @@ export interface TooltipProps {
   delayShow?: TooltipDelayType
   /** Delay in ms before the tooltip is unrendered. @default 0 */
   delayHide?: TooltipDelayType
+  /** Force the bubble shown or hidden, overriding the trigger. Unset: the trigger controls it. */
+  open?: TooltipOpenType
+  /** Pin the bubble's token resolution to a specific theme instead of responding to media query. */
+  theme?: TooltipThemeType
   /** CSS class name applied to the trigger wrapper. */
   className?: TooltipClassNameType
 }
@@ -92,6 +115,8 @@ namespace TooltipTypes {
   export type Anchor = TooltipAnchorType
   export type Content = TooltipContentType
   export type Delay = TooltipDelayType
+  export type Open = TooltipOpenType
+  export type Theme = TooltipThemeType
   export type ClassName = TooltipClassNameType
   export type Props = TooltipProps
 }

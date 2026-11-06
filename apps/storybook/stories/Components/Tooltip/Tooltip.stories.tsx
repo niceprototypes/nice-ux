@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { expect, waitFor, within } from "storybook/test"
+import { getToken, themeTokensData } from "@niceprototypes/styles"
 import Button from "@niceprototypes/button"
 import Tooltip from "@niceprototypes/tooltip"
 import type { TooltipAnchorType, TooltipPositionType, TooltipTriggerType } from "@niceprototypes/tooltip"
@@ -7,6 +8,10 @@ import type { TooltipAnchorType, TooltipPositionType, TooltipTriggerType } from 
 const TRIGGER_OPTIONS = ["hover", "click"] as const satisfies readonly TooltipTriggerType[]
 const POSITION_OPTIONS = ["top", "bottom", "left", "right"] as const satisfies readonly TooltipPositionType[]
 const ANCHOR_OPTIONS = ["trigger", "cursor"] as const satisfies readonly TooltipAnchorType[]
+const THEME_OPTIONS = Object.keys(themeTokensData)
+
+/** An unset choice for optional selects; `mapping` turns it into `undefined`. */
+const NONE = "none"
 
 /** `children` presets: the trigger the bubble describes. */
 const CHILDREN_PRESETS = {
@@ -37,6 +42,8 @@ const meta = {
     delayHide: { control: "number", table: { category: "Behavior" } },
     position: { control: "select", options: POSITION_OPTIONS, table: { category: "Placement" } },
     anchor: { control: "select", options: ANCHOR_OPTIONS, table: { category: "Placement" } },
+    open: { control: "boolean", table: { category: "State" } },
+    theme: { control: "select", options: [NONE, ...THEME_OPTIONS], mapping: { [NONE]: undefined }, table: { category: "Appearance" } },
     className: { table: { disable: true } },
   },
 } satisfies Meta<typeof Tooltip>
@@ -44,6 +51,19 @@ const meta = {
 export default meta
 
 type Story = StoryObj<typeof meta>
+
+/**
+ * Room above and to the left of the trigger, so a top or left bubble fits
+ * without flipping or shifting: the Vitest browser renders the trigger at the
+ * canvas corner.
+ */
+const withRoom: NonNullable<Story["decorators"]> = [
+  Story => (
+    <div style={{ paddingTop: getToken("tooltip.maxWidth"), paddingLeft: getToken("tooltip.maxWidth") }}>
+      <Story />
+    </div>
+  ),
+]
 
 /** The trigger wrapper: the element that carries the bubble's aria-describedby. */
 const triggerWrapper = (canvasElement: HTMLElement) => within(canvasElement).getByText("Trigger").closest("button")!.parentElement!
@@ -98,6 +118,48 @@ export const ClickTrigger: Story = {
   },
 }
 
+export const ClickTriggerKeyboard: Story = {
+  args: { trigger: "click", children: "text" },
+  play: async ({ canvasElement, userEvent }) => {
+    const wrapper = within(canvasElement).getByText("Trigger")
+    await userEvent.tab()
+    await expect(wrapper).toHaveFocus()
+    await expect(within(document.body).queryByRole("tooltip")).not.toBeInTheDocument()
+    await userEvent.keyboard("{Enter}")
+    await waitFor(() => expect(bubble()).toBeInTheDocument())
+    await userEvent.keyboard(" ")
+    await waitFor(() => expect(within(document.body).queryByRole("tooltip")).not.toBeInTheDocument())
+  },
+}
+
+export const Open: Story = {
+  args: { open: true },
+  play: async ({ canvasElement, userEvent }) => {
+    await expect(bubble()).toHaveTextContent("Tooltip content")
+    await userEvent.keyboard("{Escape}")
+    await userEvent.unhover(triggerWrapper(canvasElement))
+    await expect(bubble()).toBeInTheDocument()
+  },
+}
+
+export const Themed: Story = {
+  args: { open: true, theme: "night" },
+  play: async () => {
+    await expect(bubble().parentElement).toHaveAttribute("data-theme", "night")
+  },
+}
+
+/** At the canvas's top-left corner, a top bubble flips below and shifts right into the viewport. */
+export const ViewportEdge: Story = {
+  args: { open: true },
+  parameters: { layout: "padded" },
+  play: async ({ canvasElement }) => {
+    const box = bubble().getBoundingClientRect()
+    await expect(box.top).toBeGreaterThanOrEqual(triggerWrapper(canvasElement).getBoundingClientRect().bottom)
+    await expect(box.left).toBeGreaterThanOrEqual(0)
+  },
+}
+
 export const Delay: Story = {
   args: { delayShow: 300, delayHide: 300 },
   play: async ({ canvasElement, userEvent }) => {
@@ -119,6 +181,7 @@ const showBoxes = async (canvasElement: HTMLElement, userEvent: Parameters<NonNu
 }
 
 export const Top: Story = {
+  decorators: withRoom,
   play: async ({ canvasElement, userEvent }) => {
     const { bubble, trigger } = await showBoxes(canvasElement, userEvent)
     await expect(bubble.bottom).toBeLessThanOrEqual(trigger.top)
@@ -136,6 +199,7 @@ export const Bottom: Story = {
 
 export const Left: Story = {
   args: { position: "left" },
+  decorators: withRoom,
   play: async ({ canvasElement, userEvent }) => {
     const { bubble, trigger } = await showBoxes(canvasElement, userEvent)
     await expect(bubble.right).toBeLessThanOrEqual(trigger.left)
@@ -152,6 +216,7 @@ export const Right: Story = {
 
 export const CursorAnchor: Story = {
   args: { anchor: "cursor" },
+  decorators: withRoom,
   play: async ({ canvasElement, userEvent }) => {
     const wrapper = triggerWrapper(canvasElement)
     const { left, top } = wrapper.getBoundingClientRect()

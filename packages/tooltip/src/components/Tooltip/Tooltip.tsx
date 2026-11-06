@@ -1,13 +1,9 @@
 import * as React from "react"
 import { createPortal } from "react-dom"
-import { computeAnchorPosition, type PopoverCoordinatesType } from "@niceprototypes/popover"
+import { Theme } from "@niceprototypes/styles"
+import { computeAnchorPosition, getAnchorOffset, type PopoverCoordinatesType } from "@niceprototypes/popover"
 import { TriggerWrapper, Bubble } from "./Tooltip.styles"
 import { TooltipProps } from "./Tooltip.types"
-
-// Gap in px between the trigger and the bubble. A plain constant (not a token)
-// because positioning runs in JS off getBoundingClientRect, where a CSS var
-// can't be read directly.
-const OFFSET = 8
 
 /** Descendants that take keyboard focus themselves; without one, the trigger wrapper does. */
 const FOCUSABLE = 'a[href], button:not(:disabled), input:not(:disabled), select:not(:disabled), textarea:not(:disabled), [tabindex]:not([tabindex="-1"])'
@@ -18,10 +14,13 @@ const FOCUSABLE = 'a[href], button:not(:disabled), input:not(:disabled), select:
  * Wraps a single trigger element (`children`) and shows an inverse-themed bubble
  * with `content` when activated. Activation is `hover` (default) or `click`.
  * In hover mode, keyboard focus on the trigger also shows it and blur hides it;
- * a trigger with no focusable child gets `tabIndex={0}` on its wrapper. Escape dismisses the visible bubble. `delayShow` / `delayHide`
+ * a trigger with no focusable child gets `tabIndex={0}` on its wrapper, and in
+ * click mode that wrapper toggles on Enter and Space. Escape dismisses the visible bubble. `delayShow` / `delayHide`
  * defer the render / unrender so brief passes don't flash the tooltip. The
  * bubble renders in a portal at `<body>` with `position: fixed`, so it is never
- * clipped by an overflow-scrolling ancestor.
+ * clipped by an overflow-scrolling ancestor, and flips / shifts to stay in the
+ * viewport (@niceprototypes/popover's `computeAnchorPosition`). `open` forces it
+ * shown or hidden; `theme` pins the bubble's theme.
  * `anchor` chooses what the bubble positions against: the trigger's rect
  * (default) or the pointer position captured at activation (`"cursor"`).
  *
@@ -50,9 +49,12 @@ const Tooltip: React.FC<TooltipProps> = ({
   anchor = "trigger",
   delayShow = 0,
   delayHide = 0,
+  open,
+  theme,
   className,
 }) => {
   const triggerRef = React.useRef<HTMLSpanElement>(null)
+  const bubbleRef = React.useRef<HTMLDivElement>(null)
   const showTimer = React.useRef<number | undefined>(undefined)
   const hideTimer = React.useRef<number | undefined>(undefined)
   // Pointer position captured synchronously at activation, for anchor="cursor".
@@ -60,6 +62,7 @@ const Tooltip: React.FC<TooltipProps> = ({
   // depend on event pooling.
   const cursor = React.useRef<{ x: number; y: number } | null>(null)
   const [visible, setVisible] = React.useState(false)
+  const shown = open ?? visible
   // Whether the wrapper itself takes focus: true when `children` hold no focusable element.
   const [wrapperFocusable, setWrapperFocusable] = React.useState(false)
   React.useLayoutEffect(() => {
@@ -74,24 +77,27 @@ const Tooltip: React.FC<TooltipProps> = ({
     window.clearTimeout(hideTimer.current)
   }
 
-  // Anchor the bubble to the trigger's current rect, or to the pointer position
-  // captured at activation when anchor="cursor", via @niceprototypes/popover's
-  // `computeAnchorPosition` centered on the cross axis. It returns the anchor
-  // point plus the translate that places the bubble's edge against it. Both
-  // anchors yield viewport coordinates, matching the bubble's position: fixed.
-  const computeCoords = () => {
-    // Cursor anchor: clientX/clientY rode in on the activating event — no
-    // measurement, no reflow. Passed as a point (a zero-size anchor).
-    if (anchor === "cursor" && cursor.current) {
-      setCoords(computeAnchorPosition(cursor.current, position, "center", OFFSET))
-      return
+  // Once the bubble renders, place it before paint against the trigger's rect,
+  // or the pointer position captured at activation when anchor="cursor", via
+  // @niceprototypes/popover's `computeAnchorPosition` centered on the cross
+  // axis, with the bubble's size so it flips and shifts into the viewport.
+  // offsetWidth / offsetHeight ignore the transform. Both anchors yield
+  // viewport coordinates, matching the bubble's position: fixed.
+  React.useLayoutEffect(() => {
+    if (!shown) return
+    const bubble = bubbleRef.current
+    const bounds = {
+      size: { width: bubble?.offsetWidth ?? 0, height: bubble?.offsetHeight ?? 0 },
+      viewport: { width: window.innerWidth, height: window.innerHeight },
     }
-    const el = triggerRef.current
-    if (!el) return
-    setCoords(computeAnchorPosition(el.getBoundingClientRect(), position, "center", OFFSET))
-  }
+    const offset = getAnchorOffset("tooltip.offset")
+    // Cursor anchor: clientX/clientY rode in on the activating event, passed
+    // as a point (a zero-size anchor).
+    const target = anchor === "cursor" && cursor.current ? cursor.current : triggerRef.current?.getBoundingClientRect()
+    if (target) setCoords(computeAnchorPosition(target, position, "center", offset, bounds))
+  }, [shown, anchor, position])
 
-  // Show after delayShow; measure first so the bubble appears already placed.
+  // Show after delayShow.
   // Capture the pointer position synchronously (before the timeout) for the
   // cursor anchor — the event's clientX/clientY are only valid right now. A
   // keyboard (focus) activation has no pointer, so it clears the captured
@@ -99,10 +105,7 @@ const Tooltip: React.FC<TooltipProps> = ({
   const show = (event?: React.MouseEvent) => {
     cursor.current = event ? { x: event.clientX, y: event.clientY } : null
     clearTimers()
-    showTimer.current = window.setTimeout(() => {
-      computeCoords()
-      setVisible(true)
-    }, delayShow)
+    showTimer.current = window.setTimeout(() => setVisible(true), delayShow)
   }
 
   // Hide after delayHide.
@@ -134,10 +137,19 @@ const Tooltip: React.FC<TooltipProps> = ({
     event.currentTarget.contains(event.relatedTarget as Node | null)
 
   // Hover trigger: show on pointer enter or keyboard focus, hide on leave or
-  // blur. Click trigger: toggle.
+  // blur. Click trigger: toggle on click, and on Enter / Space when the wrapper
+  // itself has focus (a focusable child fires its own click on those keys).
   const handlers =
     trigger === "click"
-      ? { onClick: (event: React.MouseEvent) => (visible ? hide() : show(event)) }
+      ? {
+          onClick: (event: React.MouseEvent) => (visible ? hide() : show(event)),
+          onKeyDown: (event: React.KeyboardEvent) => {
+            if (event.target !== event.currentTarget || (event.key !== "Enter" && event.key !== " ")) return
+            event.preventDefault()
+            if (visible) hide()
+            else show()
+          },
+        }
       : {
           onMouseEnter: show,
           onMouseLeave: hide,
@@ -149,27 +161,32 @@ const Tooltip: React.FC<TooltipProps> = ({
           },
         }
 
+  const withTheme = (element: React.ReactElement) => (theme ? <Theme name={theme}>{element}</Theme> : element)
+
   return (
     <>
       <TriggerWrapper
         ref={triggerRef}
         className={className}
-        aria-describedby={visible ? bubbleId : undefined}
+        aria-describedby={shown ? bubbleId : undefined}
         tabIndex={wrapperFocusable ? 0 : undefined}
         $clickable={trigger === "click"}
         {...handlers}
       >
         {children}
       </TriggerWrapper>
-      {visible && typeof document !== "undefined"
+      {shown && typeof document !== "undefined"
         ? createPortal(
-            <Bubble
-              id={bubbleId}
-              role="tooltip"
-              style={{ top: coords.top, left: coords.left, transform: coords.transform }}
-            >
-              {content}
-            </Bubble>,
+            withTheme(
+              <Bubble
+                ref={bubbleRef}
+                id={bubbleId}
+                role="tooltip"
+                style={{ top: coords.top, left: coords.left, transform: coords.transform }}
+              >
+                {content}
+              </Bubble>
+            ),
             document.body
           )
         : null}
