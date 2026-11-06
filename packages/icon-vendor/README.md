@@ -36,6 +36,7 @@ Components that render an icon by name take the same flag, e.g. Button: `<Button
 - A name Lucide does not have resolves to `null`, and `Icon` renders its `circle` fallback.
 - Built-in @niceprototypes/icon names are checked first; the vendor resolver is used only when the name is not built in and `vendor` is set.
 - Without the side-effect import, `vendor` names render the `circle` fallback.
+- `@niceprototypes/ux` re-exports this package but does not register it: its `sideEffects: false` lets bundlers drop the registration. Apps on the umbrella still import `@niceprototypes/icon-vendor` at the entry.
 
 ## API
 
