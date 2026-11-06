@@ -18,7 +18,7 @@
   },
   "focusRing": {
     "width": {
-      "base": "var(--np--border-width--large)"
+      "base": "var(--np--focus-ring--width)"
     },
     "color": {
       "base": "var(--np--border-color--link)"

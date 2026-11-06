@@ -41,6 +41,8 @@ export { getToken } from './getToken.js'
 export type { TokenOptions, TokenAccessor } from './getToken.js'
 export { resolveColorProp } from './resolveColorProp.js'
 export type { ColorTokenProp, ColorPropObject, ChannelValue } from './resolveColorProp.js'
+export { getFocusRingStyle } from './getFocusRingStyle.js'
+export type { FocusRingPrefix } from './getFocusRingStyle.js'
 export { listTokens } from './listTokens.js'
 export type { TokenListing, ListTokensFilter, TokenSource } from './listTokens.js'
 

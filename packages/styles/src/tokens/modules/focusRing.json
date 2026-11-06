@@ -1,0 +1,18 @@
+{
+  "width": "var(--np--border-width--large)",
+  "color": "var(--np--color--link--day)",
+  "offset": "var(--np--gap--smaller)",
+  "$themes": {
+    "night": {
+      "color": "var(--np--color--link--night)"
+    }
+  },
+  "$inverse": {
+    "color": "var(--np--color--link--day--inverse)",
+    "$themes": {
+      "night": {
+        "color": "var(--np--color--link--night--inverse)"
+      }
+    }
+  }
+}

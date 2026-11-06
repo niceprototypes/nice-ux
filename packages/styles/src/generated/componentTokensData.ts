@@ -187,13 +187,13 @@ const componentTokensData: ComponentTokensData = {
     },
     "focusRing": {
       "width": {
-        "base": "var(--np--border-width--large)"
+        "base": "var(--np--focus-ring--width)"
       },
       "color": {
-        "base": "var(--np--color--link)"
+        "base": "var(--np--focus-ring--color)"
       },
       "offset": {
-        "base": "var(--np--gap--smaller)"
+        "base": "var(--np--focus-ring--offset)"
       }
     }
   },
@@ -280,13 +280,13 @@ const componentTokensData: ComponentTokensData = {
     },
     "focusRing": {
       "width": {
-        "base": "var(--np--border-width--large)"
+        "base": "var(--np--focus-ring--width)"
       },
       "color": {
-        "base": "var(--np--color--link)"
+        "base": "var(--np--focus-ring--color)"
       },
       "offset": {
-        "base": "var(--np--gap--smaller)"
+        "base": "var(--np--focus-ring--offset)"
       }
     },
     "disabledOpacity": {
@@ -812,13 +812,13 @@ const componentTokensData: ComponentTokensData = {
     },
     "focusRing": {
       "width": {
-        "base": "var(--np--border-width--large)"
+        "base": "var(--np--focus-ring--width)"
       },
       "color": {
-        "base": "var(--np--color--link)"
+        "base": "var(--np--focus-ring--color)"
       },
       "offset": {
-        "base": "var(--np--gap--smaller)"
+        "base": "var(--np--focus-ring--offset)"
       }
     },
     "fontFamily": {
@@ -953,7 +953,7 @@ const componentTokensData: ComponentTokensData = {
     },
     "focusRing": {
       "width": {
-        "base": "var(--np--border-width--large)"
+        "base": "var(--np--focus-ring--width)"
       },
       "color": {
         "base": "var(--np--border-color--link)"
@@ -1153,13 +1153,13 @@ const componentTokensData: ComponentTokensData = {
     },
     "focusRing": {
       "width": {
-        "base": "var(--np--border-width--large)"
+        "base": "var(--np--focus-ring--width)"
       },
       "color": {
-        "base": "var(--np--color--link)"
+        "base": "var(--np--focus-ring--color)"
       },
       "offset": {
-        "base": "var(--np--gap--smaller)"
+        "base": "var(--np--focus-ring--offset)"
       }
     },
     "pill": {
@@ -1258,13 +1258,13 @@ const componentTokensData: ComponentTokensData = {
     },
     "focusRing": {
       "width": {
-        "base": "var(--np--border-width--large)"
+        "base": "var(--np--focus-ring--width)"
       },
       "color": {
-        "base": "var(--np--color--link)"
+        "base": "var(--np--focus-ring--color)"
       },
       "offset": {
-        "base": "var(--np--gap--smaller)"
+        "base": "var(--np--focus-ring--offset)"
       }
     }
   },

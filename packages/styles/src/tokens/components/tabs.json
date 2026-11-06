@@ -43,13 +43,13 @@
   },
   "focusRing": {
     "width": {
-      "base": "var(--np--border-width--large)"
+      "base": "var(--np--focus-ring--width)"
     },
     "color": {
-      "base": "var(--np--color--link)"
+      "base": "var(--np--focus-ring--color)"
     },
     "offset": {
-      "base": "var(--np--gap--smaller)"
+      "base": "var(--np--focus-ring--offset)"
     }
   },
   "pill": {

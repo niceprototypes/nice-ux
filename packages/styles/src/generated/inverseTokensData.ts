@@ -81,6 +81,14 @@ const inverseTokensData: InverseTokensData = {
       "warning": "hsla(29, 98%, 62%, 1)",
       "error": "hsla(10, 92%, 63%, 1)"
     }
+  },
+  "focusRing": {
+    "day": {
+      "color": "var(--np--color--link--day--inverse)"
+    },
+    "night": {
+      "color": "var(--np--color--link--night--inverse)"
+    }
   }
 } as const
 

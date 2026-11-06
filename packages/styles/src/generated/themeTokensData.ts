@@ -43,6 +43,11 @@ const themeTokensData: ThemeTokensData = {
       "warning": "hsla(29, 98%, 62%, 1)",
       "error": "hsla(10, 92%, 63%, 1)"
     },
+    "focusRing": {
+      "width": "var(--np--border-width--large)",
+      "color": "var(--np--color--link--day)",
+      "offset": "var(--np--gap--smaller)"
+    },
     "strokeWidthScale": {
       "base": "1"
     }
@@ -81,6 +86,9 @@ const themeTokensData: ThemeTokensData = {
       "highlight": "hsla(48, 90%, 65%, 1)",
       "warning": "hsla(29, 100%, 63%, 1)",
       "error": "hsla(10, 89%, 61%, 1)"
+    },
+    "focusRing": {
+      "color": "var(--np--color--link--night)"
     },
     "strokeWidthScale": {
       "base": "0.9"

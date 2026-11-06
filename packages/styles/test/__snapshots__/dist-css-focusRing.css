@@ -1,0 +1,14 @@
+:root {
+	--np--focus-ring--width: var(--np--border-width--large);
+	--np--focus-ring--color: var(--np--color--link--day);
+	--np--focus-ring--offset: var(--np--gap--smaller);
+	--np--focus-ring--color--inverse: var(--np--color--link--day--inverse);
+
+	/* Day mode primitives */
+	--np--focus-ring--color--day: var(--np--color--link--day);
+	--np--focus-ring--color--day--inverse: var(--np--color--link--day--inverse);
+
+	/* Night mode primitives */
+	--np--focus-ring--color--night: var(--np--color--link--night);
+	--np--focus-ring--color--night--inverse: var(--np--color--link--night--inverse);
+}

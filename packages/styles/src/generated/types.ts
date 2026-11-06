@@ -24,11 +24,13 @@ export type ZIndexType = "base" | "low" | "medium" | "high" | "higher" | "sticky
 export type BackgroundColorType = "base" | "raised" | "sunken" | "overlay" | "success" | "highlight" | "warning" | "error" | "link"
 export type BorderColorType = "base" | "subtle" | "strong" | "stronger" | "success" | "highlight" | "warning" | "error" | "link"
 export type ColorType = "base" | "light" | "lighter" | "lightest" | "disabled" | "link" | "success" | "highlight" | "warning" | "error"
+export type FocusRingType = "width" | "color" | "offset"
 export type StrokeWidthScaleType = "base"
 export type FontSizeType = "smaller" | "small" | "base" | "large" | "larger"
 export type BackgroundColorInverseType = "base" | "raised" | "sunken" | "overlay" | "success" | "highlight" | "warning" | "error" | "link"
 export type BorderColorInverseType = "base" | "subtle" | "strong" | "stronger" | "success" | "highlight" | "warning" | "error" | "link"
 export type ColorInverseType = "base" | "light" | "lighter" | "lightest" | "disabled" | "link" | "success" | "highlight" | "warning" | "error"
+export type FocusRingInverseType = "color"
 
 export type ComponentPrefix = "app" | "button" | "calendar" | "card" | "chat" | "checkbox" | "code" | "contents" | "dialog" | "field" | "icon" | "image" | "ink" | "input" | "lightbox" | "line" | "list" | "listbox" | "logo" | "markdown" | "popover" | "radio" | "scroll" | "select" | "tabs" | "tile" | "toggle" | "tooltip" | "tree"
 
@@ -53,6 +55,7 @@ export interface TokenVariants extends CustomTokenVariants {
   "backgroundColor": BackgroundColorType
   "borderColor": BorderColorType
   "color": ColorType
+  "focusRing": FocusRingType
   "strokeWidthScale": StrokeWidthScaleType
   "fontSize": FontSizeType
   "breakpoints": "tablet" | "laptop" | "desktop"
@@ -328,6 +331,7 @@ export interface TokenInverseVariants {
   "backgroundColor": BackgroundColorInverseType
   "borderColor": BorderColorInverseType
   "color": ColorInverseType
+  "focusRing": FocusRingInverseType
   "app.panel.rule.color": "base"
   "app.panel.label.color": "base"
   "app.handle.color": "base"

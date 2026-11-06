@@ -124,6 +124,10 @@
 	--np--color--warning: hsla(29, 98%, 62%, 1);
 	--np--color--error: hsla(10, 92%, 63%, 1);
 
+	--np--focus-ring--width: var(--np--border-width--large);
+	--np--focus-ring--color: var(--np--color--link--day);
+	--np--focus-ring--offset: var(--np--gap--smaller);
+
 	--np--stroke-width-scale: 1;
 
 	--np--font-size--smaller: 11px;
@@ -161,6 +165,7 @@
 	--np--color--highlight--inverse: hsla(48, 90%, 65%, 1);
 	--np--color--warning--inverse: hsla(29, 100%, 63%, 1);
 	--np--color--error--inverse: hsla(10, 89%, 61%, 1);
+	--np--focus-ring--color--inverse: var(--np--color--link--day--inverse);
 
 	/* Day mode primitives */
 	--np--background-color--day: hsla(212, 10%, 100%, 1);
@@ -191,6 +196,7 @@
 	--np--color--highlight--day: hsla(48, 95%, 50%, 1);
 	--np--color--warning--day: hsla(29, 98%, 62%, 1);
 	--np--color--error--day: hsla(10, 92%, 63%, 1);
+	--np--focus-ring--color--day: var(--np--color--link--day);
 	--np--stroke-width-scale--day: 1;
 	--np--background-color--day--inverse: hsla(240, 4%, 12.5%, 1);
 	--np--background-color--raised--day--inverse: hsla(240, 3%, 10%, 1);
@@ -220,6 +226,7 @@
 	--np--color--highlight--day--inverse: hsla(48, 90%, 65%, 1);
 	--np--color--warning--day--inverse: hsla(29, 100%, 63%, 1);
 	--np--color--error--day--inverse: hsla(10, 89%, 61%, 1);
+	--np--focus-ring--color--day--inverse: var(--np--color--link--day--inverse);
 
 	/* Night mode primitives */
 	--np--background-color--night: hsla(240, 4%, 12.5%, 1);
@@ -250,6 +257,7 @@
 	--np--color--highlight--night: hsla(48, 90%, 65%, 1);
 	--np--color--warning--night: hsla(29, 100%, 63%, 1);
 	--np--color--error--night: hsla(10, 89%, 61%, 1);
+	--np--focus-ring--color--night: var(--np--color--link--night);
 	--np--stroke-width-scale--night: 0.9;
 	--np--background-color--night--inverse: hsla(212, 5%, 100%, 1);
 	--np--background-color--raised--night--inverse: hsla(212, 5%, 95%, 1);
@@ -279,6 +287,7 @@
 	--np--color--highlight--night--inverse: hsla(48, 95%, 50%, 1);
 	--np--color--warning--night--inverse: hsla(29, 98%, 62%, 1);
 	--np--color--error--night--inverse: hsla(10, 92%, 63%, 1);
+	--np--focus-ring--color--night--inverse: var(--np--color--link--night--inverse);
 
 	/* app component tokens */
 	--np--app--sidebar--min-width: 24em;
@@ -365,9 +374,9 @@
 	--np--button--animation-duration--slower: var(--np--animation-duration--slower);
 	--np--button--animation-easing: var(--np--animation-easing);
 	--np--button--selected--border-color: var(--np--border-color--stronger);
-	--np--button--focus-ring--width: var(--np--border-width--large);
-	--np--button--focus-ring--color: var(--np--color--link);
-	--np--button--focus-ring--offset: var(--np--gap--smaller);
+	--np--button--focus-ring--width: var(--np--focus-ring--width);
+	--np--button--focus-ring--color: var(--np--focus-ring--color);
+	--np--button--focus-ring--offset: var(--np--focus-ring--offset);
 
 	/* calendar component tokens */
 	--np--calendar--cell--size--smaller: var(--np--size--smaller);
@@ -385,6 +394,11 @@
 	--np--calendar--background-color--selected: var(--np--color--link);
 	--np--calendar--background-color--range: var(--np--background-color--link);
 	--np--calendar--border-color--today: var(--np--border-color--link);
+	--np--calendar--border-width: var(--np--border-width);
+	--np--calendar--border-radius: var(--np--border-radius);
+	--np--calendar--focus-ring--width: var(--np--border-width--large);
+	--np--calendar--focus-ring--color: var(--np--color--link);
+	--np--calendar--focus-ring--offset: var(--np--border-width);
 
 	/* card component tokens */
 	--np--card--background-color: var(--np--background-color);
@@ -403,9 +417,9 @@
 	--np--card--box-shadow--hover: var(--np--box-shadow--large);
 	--np--card--padding: var(--np--gap);
 	--np--card--gap: var(--np--gap);
-	--np--card--focus-ring--width: var(--np--border-width--large);
-	--np--card--focus-ring--color: var(--np--color--link);
-	--np--card--focus-ring--offset: var(--np--gap--smaller);
+	--np--card--focus-ring--width: var(--np--focus-ring--width);
+	--np--card--focus-ring--color: var(--np--focus-ring--color);
+	--np--card--focus-ring--offset: var(--np--focus-ring--offset);
 	--np--card--disabled-opacity: var(--np--opacity--disabled);
 
 	/* chat component tokens */
@@ -709,9 +723,9 @@
 	--np--input--width--20: 20ch;
 	--np--input--width--full: 100%;
 	--np--input--font-size: max(16px, var(--np--font-size));
-	--np--input--focus-ring--width: var(--np--border-width--large);
-	--np--input--focus-ring--color: var(--np--color--link);
-	--np--input--focus-ring--offset: var(--np--gap--smaller);
+	--np--input--focus-ring--width: var(--np--focus-ring--width);
+	--np--input--focus-ring--color: var(--np--focus-ring--color);
+	--np--input--focus-ring--offset: var(--np--focus-ring--offset);
 	--np--input--font-family: var(--np--font-family);
 	--np--input--animation-duration: var(--np--animation-duration--fast);
 	--np--input--animation-easing: var(--np--animation-easing);
@@ -770,7 +784,7 @@
 	--np--listbox--selected--background-color--active: var(--np--border-color--link);
 	--np--listbox--selected--color: var(--np--color--link);
 	--np--listbox--group-title--color: var(--np--color--lighter);
-	--np--listbox--focus-ring--width: var(--np--border-width--large);
+	--np--listbox--focus-ring--width: var(--np--focus-ring--width);
 	--np--listbox--focus-ring--color: var(--np--border-color--link);
 
 	/* logo component tokens */
@@ -868,9 +882,9 @@
 	--np--tabs--indicator--color: var(--np--color--link);
 	--np--tabs--indicator--width: var(--np--border-width--large);
 	--np--tabs--disabled-opacity: var(--np--opacity--disabled);
-	--np--tabs--focus-ring--width: var(--np--border-width--large);
-	--np--tabs--focus-ring--color: var(--np--color--link);
-	--np--tabs--focus-ring--offset: var(--np--gap--smaller);
+	--np--tabs--focus-ring--width: var(--np--focus-ring--width);
+	--np--tabs--focus-ring--color: var(--np--focus-ring--color);
+	--np--tabs--focus-ring--offset: var(--np--focus-ring--offset);
 	--np--tabs--pill--border-radius: var(--np--border-radius--larger);
 	--np--tabs--pill--border-width: var(--np--border-width);
 	--np--tabs--pill--border-color: transparent;
@@ -929,9 +943,9 @@
 	--np--toggle--disabled-opacity: var(--np--opacity--disabled);
 	--np--toggle--animation-duration: var(--np--animation-duration--fast);
 	--np--toggle--animation-easing: var(--np--animation-easing--ease-out);
-	--np--toggle--focus-ring--width: var(--np--border-width--large);
-	--np--toggle--focus-ring--color: var(--np--color--link);
-	--np--toggle--focus-ring--offset: var(--np--gap--smaller);
+	--np--toggle--focus-ring--width: var(--np--focus-ring--width);
+	--np--toggle--focus-ring--color: var(--np--focus-ring--color);
+	--np--toggle--focus-ring--offset: var(--np--focus-ring--offset);
 
 	/* tooltip component tokens */
 	--np--tooltip--offset: var(--np--gap--small);
@@ -996,7 +1010,7 @@
 	--np--button--border-color--error--inverse: var(--np--border-color--error--inverse);
 	--np--button--border-color--link--inverse: var(--np--border-color--link--inverse);
 	--np--button--selected--border-color--inverse: var(--np--border-color--stronger--inverse);
-	--np--button--focus-ring--color--inverse: var(--np--color--link--inverse);
+	--np--button--focus-ring--color--inverse: var(--np--focus-ring--color--inverse);
 	--np--calendar--color--inverse: var(--np--color--inverse);
 	--np--calendar--color--today--inverse: var(--np--color--link--inverse);
 	--np--calendar--color--selected--inverse: var(--np--background-color--inverse);
@@ -1006,6 +1020,7 @@
 	--np--calendar--background-color--selected--inverse: var(--np--color--link--inverse);
 	--np--calendar--background-color--range--inverse: var(--np--background-color--link--inverse);
 	--np--calendar--border-color--today--inverse: var(--np--border-color--link--inverse);
+	--np--calendar--focus-ring--color--inverse: var(--np--color--link--inverse);
 	--np--card--background-color--inverse: var(--np--background-color--inverse);
 	--np--card--background-color--raised--inverse: var(--np--background-color--raised--inverse);
 	--np--card--background-color--success--inverse: var(--np--background-color--success--inverse);
@@ -1016,7 +1031,7 @@
 	--np--card--border-color--inverse: var(--np--border-color--inverse);
 	--np--card--border-color--selected--inverse: var(--np--border-color--link--inverse);
 	--np--card--hover--border-color--inverse: var(--np--border-color--strong--inverse);
-	--np--card--focus-ring--color--inverse: var(--np--color--link--inverse);
+	--np--card--focus-ring--color--inverse: var(--np--focus-ring--color--inverse);
 	--np--chat--message--background-color--user--inverse: var(--np--background-color--raised--inverse);
 	--np--checkbox--background-color--unchecked--inverse: var(--np--background-color--inverse);
 	--np--checkbox--background-color--inverse: var(--np--color--inverse);
@@ -1130,7 +1145,7 @@
 	--np--input--border-color--warning--inverse: var(--np--border-color--warning--inverse);
 	--np--input--border-color--error--inverse: var(--np--border-color--error--inverse);
 	--np--input--border-color--link--inverse: var(--np--border-color--link--inverse);
-	--np--input--focus-ring--color--inverse: var(--np--color--link--inverse);
+	--np--input--focus-ring--color--inverse: var(--np--focus-ring--color--inverse);
 	--np--lightbox--focus-ring--color--inverse: var(--np--color--link--inverse);
 	--np--line--border-color--inverse: var(--np--border-color--inverse);
 	--np--line--border-color--subtle--inverse: var(--np--border-color--subtle--inverse);
@@ -1179,7 +1194,7 @@
 	--np--tabs--color--selected--inverse: var(--np--color--inverse);
 	--np--tabs--border-color--inverse: var(--np--border-color--inverse);
 	--np--tabs--indicator--color--inverse: var(--np--color--link--inverse);
-	--np--tabs--focus-ring--color--inverse: var(--np--color--link--inverse);
+	--np--tabs--focus-ring--color--inverse: var(--np--focus-ring--color--inverse);
 	--np--tabs--pill--border-color--hover--inverse: var(--np--border-color--inverse);
 	--np--tabs--pill--border-color--selected--inverse: var(--np--border-color--stronger--inverse);
 	--np--tile--background-color--inverse: var(--np--background-color--inverse);
@@ -1204,7 +1219,7 @@
 	--np--toggle--track--background-color--inverse: var(--np--border-color--strong--inverse);
 	--np--toggle--track--background-color--checked--inverse: var(--np--color--link--inverse);
 	--np--toggle--thumb--background-color--inverse: var(--np--background-color--inverse);
-	--np--toggle--focus-ring--color--inverse: var(--np--color--link--inverse);
+	--np--toggle--focus-ring--color--inverse: var(--np--focus-ring--color--inverse);
 	--np--tooltip--background-color--inverse: var(--np--background-color--inverse);
 	--np--tooltip--color--inverse: var(--np--color--inverse);
 	--np--tree--color--inverse: var(--np--color--inverse);
@@ -1455,6 +1470,7 @@
 		--np--color--highlight: var(--np--color--highlight--night);
 		--np--color--warning: var(--np--color--warning--night);
 		--np--color--error: var(--np--color--error--night);
+		--np--focus-ring--color: var(--np--focus-ring--color--night);
 		--np--stroke-width-scale: var(--np--stroke-width-scale--night);
 		--np--background-color--inverse: var(--np--background-color--night--inverse);
 		--np--background-color--raised--inverse: var(--np--background-color--raised--night--inverse);
@@ -1484,6 +1500,7 @@
 		--np--color--highlight--inverse: var(--np--color--highlight--night--inverse);
 		--np--color--warning--inverse: var(--np--color--warning--night--inverse);
 		--np--color--error--inverse: var(--np--color--error--night--inverse);
+		--np--focus-ring--color--inverse: var(--np--focus-ring--color--night--inverse);
 		--np--app--search--background-color: var(--np--app--search--background-color--night);
 		--np--code--syntax-color--neutral: var(--np--code--syntax-color--neutral--night);
 		--np--code--syntax-color--green: var(--np--code--syntax-color--green--night);
@@ -1519,7 +1536,7 @@
 		--np--button--border-color--error--inverse: var(--np--border-color--error--night--inverse);
 		--np--button--border-color--link--inverse: var(--np--border-color--link--night--inverse);
 		--np--button--selected--border-color--inverse: var(--np--border-color--stronger--night--inverse);
-		--np--button--focus-ring--color--inverse: var(--np--color--link--night--inverse);
+		--np--button--focus-ring--color--inverse: var(--np--focus-ring--color--night--inverse);
 		--np--calendar--color--inverse: var(--np--color--night--inverse);
 		--np--calendar--color--today--inverse: var(--np--color--link--night--inverse);
 		--np--calendar--color--selected--inverse: var(--np--background-color--night--inverse);
@@ -1529,6 +1546,7 @@
 		--np--calendar--background-color--selected--inverse: var(--np--color--link--night--inverse);
 		--np--calendar--background-color--range--inverse: var(--np--background-color--link--night--inverse);
 		--np--calendar--border-color--today--inverse: var(--np--border-color--link--night--inverse);
+		--np--calendar--focus-ring--color--inverse: var(--np--color--link--night--inverse);
 		--np--card--background-color--inverse: var(--np--background-color--night--inverse);
 		--np--card--background-color--raised--inverse: var(--np--background-color--raised--night--inverse);
 		--np--card--background-color--success--inverse: var(--np--background-color--success--night--inverse);
@@ -1539,7 +1557,7 @@
 		--np--card--border-color--inverse: var(--np--border-color--night--inverse);
 		--np--card--border-color--selected--inverse: var(--np--border-color--link--night--inverse);
 		--np--card--hover--border-color--inverse: var(--np--border-color--strong--night--inverse);
-		--np--card--focus-ring--color--inverse: var(--np--color--link--night--inverse);
+		--np--card--focus-ring--color--inverse: var(--np--focus-ring--color--night--inverse);
 		--np--chat--message--background-color--user--inverse: var(--np--background-color--raised--night--inverse);
 		--np--checkbox--background-color--unchecked--inverse: var(--np--background-color--night--inverse);
 		--np--checkbox--background-color--inverse: var(--np--color--night--inverse);
@@ -1653,7 +1671,7 @@
 		--np--input--border-color--warning--inverse: var(--np--border-color--warning--night--inverse);
 		--np--input--border-color--error--inverse: var(--np--border-color--error--night--inverse);
 		--np--input--border-color--link--inverse: var(--np--border-color--link--night--inverse);
-		--np--input--focus-ring--color--inverse: var(--np--color--link--night--inverse);
+		--np--input--focus-ring--color--inverse: var(--np--focus-ring--color--night--inverse);
 		--np--lightbox--focus-ring--color--inverse: var(--np--color--link--night--inverse);
 		--np--line--border-color--inverse: var(--np--border-color--night--inverse);
 		--np--line--border-color--subtle--inverse: var(--np--border-color--subtle--night--inverse);
@@ -1702,7 +1720,7 @@
 		--np--tabs--color--selected--inverse: var(--np--color--night--inverse);
 		--np--tabs--border-color--inverse: var(--np--border-color--night--inverse);
 		--np--tabs--indicator--color--inverse: var(--np--color--link--night--inverse);
-		--np--tabs--focus-ring--color--inverse: var(--np--color--link--night--inverse);
+		--np--tabs--focus-ring--color--inverse: var(--np--focus-ring--color--night--inverse);
 		--np--tabs--pill--border-color--hover--inverse: var(--np--border-color--night--inverse);
 		--np--tabs--pill--border-color--selected--inverse: var(--np--border-color--stronger--night--inverse);
 		--np--tile--background-color--inverse: var(--np--background-color--night--inverse);
@@ -1727,7 +1745,7 @@
 		--np--toggle--track--background-color--inverse: var(--np--border-color--strong--night--inverse);
 		--np--toggle--track--background-color--checked--inverse: var(--np--color--link--night--inverse);
 		--np--toggle--thumb--background-color--inverse: var(--np--background-color--night--inverse);
-		--np--toggle--focus-ring--color--inverse: var(--np--color--link--night--inverse);
+		--np--toggle--focus-ring--color--inverse: var(--np--focus-ring--color--night--inverse);
 		--np--tooltip--background-color--inverse: var(--np--background-color--night--inverse);
 		--np--tooltip--color--inverse: var(--np--color--night--inverse);
 		--np--tree--color--inverse: var(--np--color--night--inverse);
@@ -1771,7 +1789,7 @@
 		--np--button--border-color--error: var(--np--border-color--error--night);
 		--np--button--border-color--link: var(--np--border-color--link--night);
 		--np--button--selected--border-color: var(--np--border-color--stronger--night);
-		--np--button--focus-ring--color: var(--np--color--link--night);
+		--np--button--focus-ring--color: var(--np--focus-ring--color--night);
 		--np--calendar--color: var(--np--color--night);
 		--np--calendar--color--today: var(--np--color--link--night);
 		--np--calendar--color--selected: var(--np--background-color--night);
@@ -1781,6 +1799,7 @@
 		--np--calendar--background-color--selected: var(--np--color--link--night);
 		--np--calendar--background-color--range: var(--np--background-color--link--night);
 		--np--calendar--border-color--today: var(--np--border-color--link--night);
+		--np--calendar--focus-ring--color: var(--np--color--link--night);
 		--np--card--background-color: var(--np--background-color--night);
 		--np--card--background-color--raised: var(--np--background-color--raised--night);
 		--np--card--background-color--success: var(--np--background-color--success--night);
@@ -1791,7 +1810,7 @@
 		--np--card--border-color: var(--np--border-color--night);
 		--np--card--border-color--selected: var(--np--border-color--link--night);
 		--np--card--hover--border-color: var(--np--border-color--strong--night);
-		--np--card--focus-ring--color: var(--np--color--link--night);
+		--np--card--focus-ring--color: var(--np--focus-ring--color--night);
 		--np--chat--message--background-color--user: var(--np--background-color--raised--night);
 		--np--checkbox--background-color--unchecked: var(--np--background-color--night);
 		--np--checkbox--background-color: var(--np--color--night);
@@ -1906,7 +1925,7 @@
 		--np--input--border-color--warning: var(--np--border-color--warning--night);
 		--np--input--border-color--error: var(--np--border-color--error--night);
 		--np--input--border-color--link: var(--np--border-color--link--night);
-		--np--input--focus-ring--color: var(--np--color--link--night);
+		--np--input--focus-ring--color: var(--np--focus-ring--color--night);
 		--np--lightbox--focus-ring--color: var(--np--color--link--night);
 		--np--line--border-color: var(--np--border-color--night);
 		--np--line--border-color--subtle: var(--np--border-color--subtle--night);
@@ -1955,7 +1974,7 @@
 		--np--tabs--color--selected: var(--np--color--night);
 		--np--tabs--border-color: var(--np--border-color--night);
 		--np--tabs--indicator--color: var(--np--color--link--night);
-		--np--tabs--focus-ring--color: var(--np--color--link--night);
+		--np--tabs--focus-ring--color: var(--np--focus-ring--color--night);
 		--np--tabs--pill--border-color--hover: var(--np--border-color--night);
 		--np--tabs--pill--border-color--selected: var(--np--border-color--stronger--night);
 		--np--tile--background-color: var(--np--background-color--night);
@@ -1980,7 +1999,7 @@
 		--np--toggle--track--background-color: var(--np--border-color--strong--night);
 		--np--toggle--track--background-color--checked: var(--np--color--link--night);
 		--np--toggle--thumb--background-color: var(--np--background-color--night);
-		--np--toggle--focus-ring--color: var(--np--color--link--night);
+		--np--toggle--focus-ring--color: var(--np--focus-ring--color--night);
 		--np--tooltip--background-color: var(--np--background-color--night);
 		--np--tooltip--color: var(--np--color--night);
 		--np--tree--color: var(--np--color--night);
@@ -2030,6 +2049,7 @@
 		--np--color--highlight: var(--np--color--highlight--day);
 		--np--color--warning: var(--np--color--warning--day);
 		--np--color--error: var(--np--color--error--day);
+		--np--focus-ring--color: var(--np--focus-ring--color--day);
 		--np--stroke-width-scale: var(--np--stroke-width-scale--day);
 		--np--background-color--inverse: var(--np--background-color--day--inverse);
 		--np--background-color--raised--inverse: var(--np--background-color--raised--day--inverse);
@@ -2059,6 +2079,7 @@
 		--np--color--highlight--inverse: var(--np--color--highlight--day--inverse);
 		--np--color--warning--inverse: var(--np--color--warning--day--inverse);
 		--np--color--error--inverse: var(--np--color--error--day--inverse);
+		--np--focus-ring--color--inverse: var(--np--focus-ring--color--day--inverse);
 		--np--app--search--background-color: var(--np--app--search--background-color--day);
 		--np--code--syntax-color--neutral: var(--np--code--syntax-color--neutral--day);
 		--np--code--syntax-color--green: var(--np--code--syntax-color--green--day);
@@ -2094,7 +2115,7 @@
 		--np--button--border-color--error--inverse: var(--np--border-color--error--day--inverse);
 		--np--button--border-color--link--inverse: var(--np--border-color--link--day--inverse);
 		--np--button--selected--border-color--inverse: var(--np--border-color--stronger--day--inverse);
-		--np--button--focus-ring--color--inverse: var(--np--color--link--day--inverse);
+		--np--button--focus-ring--color--inverse: var(--np--focus-ring--color--day--inverse);
 		--np--calendar--color--inverse: var(--np--color--day--inverse);
 		--np--calendar--color--today--inverse: var(--np--color--link--day--inverse);
 		--np--calendar--color--selected--inverse: var(--np--background-color--day--inverse);
@@ -2104,6 +2125,7 @@
 		--np--calendar--background-color--selected--inverse: var(--np--color--link--day--inverse);
 		--np--calendar--background-color--range--inverse: var(--np--background-color--link--day--inverse);
 		--np--calendar--border-color--today--inverse: var(--np--border-color--link--day--inverse);
+		--np--calendar--focus-ring--color--inverse: var(--np--color--link--day--inverse);
 		--np--card--background-color--inverse: var(--np--background-color--day--inverse);
 		--np--card--background-color--raised--inverse: var(--np--background-color--raised--day--inverse);
 		--np--card--background-color--success--inverse: var(--np--background-color--success--day--inverse);
@@ -2114,7 +2136,7 @@
 		--np--card--border-color--inverse: var(--np--border-color--day--inverse);
 		--np--card--border-color--selected--inverse: var(--np--border-color--link--day--inverse);
 		--np--card--hover--border-color--inverse: var(--np--border-color--strong--day--inverse);
-		--np--card--focus-ring--color--inverse: var(--np--color--link--day--inverse);
+		--np--card--focus-ring--color--inverse: var(--np--focus-ring--color--day--inverse);
 		--np--chat--message--background-color--user--inverse: var(--np--background-color--raised--day--inverse);
 		--np--checkbox--background-color--unchecked--inverse: var(--np--background-color--day--inverse);
 		--np--checkbox--background-color--inverse: var(--np--color--day--inverse);
@@ -2228,7 +2250,7 @@
 		--np--input--border-color--warning--inverse: var(--np--border-color--warning--day--inverse);
 		--np--input--border-color--error--inverse: var(--np--border-color--error--day--inverse);
 		--np--input--border-color--link--inverse: var(--np--border-color--link--day--inverse);
-		--np--input--focus-ring--color--inverse: var(--np--color--link--day--inverse);
+		--np--input--focus-ring--color--inverse: var(--np--focus-ring--color--day--inverse);
 		--np--lightbox--focus-ring--color--inverse: var(--np--color--link--day--inverse);
 		--np--line--border-color--inverse: var(--np--border-color--day--inverse);
 		--np--line--border-color--subtle--inverse: var(--np--border-color--subtle--day--inverse);
@@ -2277,7 +2299,7 @@
 		--np--tabs--color--selected--inverse: var(--np--color--day--inverse);
 		--np--tabs--border-color--inverse: var(--np--border-color--day--inverse);
 		--np--tabs--indicator--color--inverse: var(--np--color--link--day--inverse);
-		--np--tabs--focus-ring--color--inverse: var(--np--color--link--day--inverse);
+		--np--tabs--focus-ring--color--inverse: var(--np--focus-ring--color--day--inverse);
 		--np--tabs--pill--border-color--hover--inverse: var(--np--border-color--day--inverse);
 		--np--tabs--pill--border-color--selected--inverse: var(--np--border-color--stronger--day--inverse);
 		--np--tile--background-color--inverse: var(--np--background-color--day--inverse);
@@ -2302,7 +2324,7 @@
 		--np--toggle--track--background-color--inverse: var(--np--border-color--strong--day--inverse);
 		--np--toggle--track--background-color--checked--inverse: var(--np--color--link--day--inverse);
 		--np--toggle--thumb--background-color--inverse: var(--np--background-color--day--inverse);
-		--np--toggle--focus-ring--color--inverse: var(--np--color--link--day--inverse);
+		--np--toggle--focus-ring--color--inverse: var(--np--focus-ring--color--day--inverse);
 		--np--tooltip--background-color--inverse: var(--np--background-color--day--inverse);
 		--np--tooltip--color--inverse: var(--np--color--day--inverse);
 		--np--tree--color--inverse: var(--np--color--day--inverse);
@@ -2346,7 +2368,7 @@
 		--np--button--border-color--error: var(--np--border-color--error--day);
 		--np--button--border-color--link: var(--np--border-color--link--day);
 		--np--button--selected--border-color: var(--np--border-color--stronger--day);
-		--np--button--focus-ring--color: var(--np--color--link--day);
+		--np--button--focus-ring--color: var(--np--focus-ring--color--day);
 		--np--calendar--color: var(--np--color--day);
 		--np--calendar--color--today: var(--np--color--link--day);
 		--np--calendar--color--selected: var(--np--background-color--day);
@@ -2356,6 +2378,7 @@
 		--np--calendar--background-color--selected: var(--np--color--link--day);
 		--np--calendar--background-color--range: var(--np--background-color--link--day);
 		--np--calendar--border-color--today: var(--np--border-color--link--day);
+		--np--calendar--focus-ring--color: var(--np--color--link--day);
 		--np--card--background-color: var(--np--background-color--day);
 		--np--card--background-color--raised: var(--np--background-color--raised--day);
 		--np--card--background-color--success: var(--np--background-color--success--day);
@@ -2366,7 +2389,7 @@
 		--np--card--border-color: var(--np--border-color--day);
 		--np--card--border-color--selected: var(--np--border-color--link--day);
 		--np--card--hover--border-color: var(--np--border-color--strong--day);
-		--np--card--focus-ring--color: var(--np--color--link--day);
+		--np--card--focus-ring--color: var(--np--focus-ring--color--day);
 		--np--chat--message--background-color--user: var(--np--background-color--raised--day);
 		--np--checkbox--background-color--unchecked: var(--np--background-color--day);
 		--np--checkbox--background-color: var(--np--color--day);
@@ -2481,7 +2504,7 @@
 		--np--input--border-color--warning: var(--np--border-color--warning--day);
 		--np--input--border-color--error: var(--np--border-color--error--day);
 		--np--input--border-color--link: var(--np--border-color--link--day);
-		--np--input--focus-ring--color: var(--np--color--link--day);
+		--np--input--focus-ring--color: var(--np--focus-ring--color--day);
 		--np--lightbox--focus-ring--color: var(--np--color--link--day);
 		--np--line--border-color: var(--np--border-color--day);
 		--np--line--border-color--subtle: var(--np--border-color--subtle--day);
@@ -2530,7 +2553,7 @@
 		--np--tabs--color--selected: var(--np--color--day);
 		--np--tabs--border-color: var(--np--border-color--day);
 		--np--tabs--indicator--color: var(--np--color--link--day);
-		--np--tabs--focus-ring--color: var(--np--color--link--day);
+		--np--tabs--focus-ring--color: var(--np--focus-ring--color--day);
 		--np--tabs--pill--border-color--hover: var(--np--border-color--day);
 		--np--tabs--pill--border-color--selected: var(--np--border-color--stronger--day);
 		--np--tile--background-color: var(--np--background-color--day);
@@ -2555,7 +2578,7 @@
 		--np--toggle--track--background-color: var(--np--border-color--strong--day);
 		--np--toggle--track--background-color--checked: var(--np--color--link--day);
 		--np--toggle--thumb--background-color: var(--np--background-color--day);
-		--np--toggle--focus-ring--color: var(--np--color--link--day);
+		--np--toggle--focus-ring--color: var(--np--focus-ring--color--day);
 		--np--tooltip--background-color: var(--np--background-color--day);
 		--np--tooltip--color: var(--np--color--day);
 		--np--tree--color: var(--np--color--day);
@@ -2604,6 +2627,7 @@
 		--np--color--highlight: var(--np--color--highlight--night);
 		--np--color--warning: var(--np--color--warning--night);
 		--np--color--error: var(--np--color--error--night);
+		--np--focus-ring--color: var(--np--focus-ring--color--night);
 		--np--stroke-width-scale: var(--np--stroke-width-scale--night);
 		--np--background-color--inverse: var(--np--background-color--night--inverse);
 		--np--background-color--raised--inverse: var(--np--background-color--raised--night--inverse);
@@ -2633,6 +2657,7 @@
 		--np--color--highlight--inverse: var(--np--color--highlight--night--inverse);
 		--np--color--warning--inverse: var(--np--color--warning--night--inverse);
 		--np--color--error--inverse: var(--np--color--error--night--inverse);
+		--np--focus-ring--color--inverse: var(--np--focus-ring--color--night--inverse);
 		--np--app--search--background-color: var(--np--app--search--background-color--night);
 		--np--code--syntax-color--neutral: var(--np--code--syntax-color--neutral--night);
 		--np--code--syntax-color--green: var(--np--code--syntax-color--green--night);
@@ -2668,7 +2693,7 @@
 		--np--button--border-color--error--inverse: var(--np--border-color--error--night--inverse);
 		--np--button--border-color--link--inverse: var(--np--border-color--link--night--inverse);
 		--np--button--selected--border-color--inverse: var(--np--border-color--stronger--night--inverse);
-		--np--button--focus-ring--color--inverse: var(--np--color--link--night--inverse);
+		--np--button--focus-ring--color--inverse: var(--np--focus-ring--color--night--inverse);
 		--np--calendar--color--inverse: var(--np--color--night--inverse);
 		--np--calendar--color--today--inverse: var(--np--color--link--night--inverse);
 		--np--calendar--color--selected--inverse: var(--np--background-color--night--inverse);
@@ -2678,6 +2703,7 @@
 		--np--calendar--background-color--selected--inverse: var(--np--color--link--night--inverse);
 		--np--calendar--background-color--range--inverse: var(--np--background-color--link--night--inverse);
 		--np--calendar--border-color--today--inverse: var(--np--border-color--link--night--inverse);
+		--np--calendar--focus-ring--color--inverse: var(--np--color--link--night--inverse);
 		--np--card--background-color--inverse: var(--np--background-color--night--inverse);
 		--np--card--background-color--raised--inverse: var(--np--background-color--raised--night--inverse);
 		--np--card--background-color--success--inverse: var(--np--background-color--success--night--inverse);
@@ -2688,7 +2714,7 @@
 		--np--card--border-color--inverse: var(--np--border-color--night--inverse);
 		--np--card--border-color--selected--inverse: var(--np--border-color--link--night--inverse);
 		--np--card--hover--border-color--inverse: var(--np--border-color--strong--night--inverse);
-		--np--card--focus-ring--color--inverse: var(--np--color--link--night--inverse);
+		--np--card--focus-ring--color--inverse: var(--np--focus-ring--color--night--inverse);
 		--np--chat--message--background-color--user--inverse: var(--np--background-color--raised--night--inverse);
 		--np--checkbox--background-color--unchecked--inverse: var(--np--background-color--night--inverse);
 		--np--checkbox--background-color--inverse: var(--np--color--night--inverse);
@@ -2802,7 +2828,7 @@
 		--np--input--border-color--warning--inverse: var(--np--border-color--warning--night--inverse);
 		--np--input--border-color--error--inverse: var(--np--border-color--error--night--inverse);
 		--np--input--border-color--link--inverse: var(--np--border-color--link--night--inverse);
-		--np--input--focus-ring--color--inverse: var(--np--color--link--night--inverse);
+		--np--input--focus-ring--color--inverse: var(--np--focus-ring--color--night--inverse);
 		--np--lightbox--focus-ring--color--inverse: var(--np--color--link--night--inverse);
 		--np--line--border-color--inverse: var(--np--border-color--night--inverse);
 		--np--line--border-color--subtle--inverse: var(--np--border-color--subtle--night--inverse);
@@ -2851,7 +2877,7 @@
 		--np--tabs--color--selected--inverse: var(--np--color--night--inverse);
 		--np--tabs--border-color--inverse: var(--np--border-color--night--inverse);
 		--np--tabs--indicator--color--inverse: var(--np--color--link--night--inverse);
-		--np--tabs--focus-ring--color--inverse: var(--np--color--link--night--inverse);
+		--np--tabs--focus-ring--color--inverse: var(--np--focus-ring--color--night--inverse);
 		--np--tabs--pill--border-color--hover--inverse: var(--np--border-color--night--inverse);
 		--np--tabs--pill--border-color--selected--inverse: var(--np--border-color--stronger--night--inverse);
 		--np--tile--background-color--inverse: var(--np--background-color--night--inverse);
@@ -2876,7 +2902,7 @@
 		--np--toggle--track--background-color--inverse: var(--np--border-color--strong--night--inverse);
 		--np--toggle--track--background-color--checked--inverse: var(--np--color--link--night--inverse);
 		--np--toggle--thumb--background-color--inverse: var(--np--background-color--night--inverse);
-		--np--toggle--focus-ring--color--inverse: var(--np--color--link--night--inverse);
+		--np--toggle--focus-ring--color--inverse: var(--np--focus-ring--color--night--inverse);
 		--np--tooltip--background-color--inverse: var(--np--background-color--night--inverse);
 		--np--tooltip--color--inverse: var(--np--color--night--inverse);
 		--np--tree--color--inverse: var(--np--color--night--inverse);
@@ -2920,7 +2946,7 @@
 		--np--button--border-color--error: var(--np--border-color--error--night);
 		--np--button--border-color--link: var(--np--border-color--link--night);
 		--np--button--selected--border-color: var(--np--border-color--stronger--night);
-		--np--button--focus-ring--color: var(--np--color--link--night);
+		--np--button--focus-ring--color: var(--np--focus-ring--color--night);
 		--np--calendar--color: var(--np--color--night);
 		--np--calendar--color--today: var(--np--color--link--night);
 		--np--calendar--color--selected: var(--np--background-color--night);
@@ -2930,6 +2956,7 @@
 		--np--calendar--background-color--selected: var(--np--color--link--night);
 		--np--calendar--background-color--range: var(--np--background-color--link--night);
 		--np--calendar--border-color--today: var(--np--border-color--link--night);
+		--np--calendar--focus-ring--color: var(--np--color--link--night);
 		--np--card--background-color: var(--np--background-color--night);
 		--np--card--background-color--raised: var(--np--background-color--raised--night);
 		--np--card--background-color--success: var(--np--background-color--success--night);
@@ -2940,7 +2967,7 @@
 		--np--card--border-color: var(--np--border-color--night);
 		--np--card--border-color--selected: var(--np--border-color--link--night);
 		--np--card--hover--border-color: var(--np--border-color--strong--night);
-		--np--card--focus-ring--color: var(--np--color--link--night);
+		--np--card--focus-ring--color: var(--np--focus-ring--color--night);
 		--np--chat--message--background-color--user: var(--np--background-color--raised--night);
 		--np--checkbox--background-color--unchecked: var(--np--background-color--night);
 		--np--checkbox--background-color: var(--np--color--night);
@@ -3055,7 +3082,7 @@
 		--np--input--border-color--warning: var(--np--border-color--warning--night);
 		--np--input--border-color--error: var(--np--border-color--error--night);
 		--np--input--border-color--link: var(--np--border-color--link--night);
-		--np--input--focus-ring--color: var(--np--color--link--night);
+		--np--input--focus-ring--color: var(--np--focus-ring--color--night);
 		--np--lightbox--focus-ring--color: var(--np--color--link--night);
 		--np--line--border-color: var(--np--border-color--night);
 		--np--line--border-color--subtle: var(--np--border-color--subtle--night);
@@ -3104,7 +3131,7 @@
 		--np--tabs--color--selected: var(--np--color--night);
 		--np--tabs--border-color: var(--np--border-color--night);
 		--np--tabs--indicator--color: var(--np--color--link--night);
-		--np--tabs--focus-ring--color: var(--np--color--link--night);
+		--np--tabs--focus-ring--color: var(--np--focus-ring--color--night);
 		--np--tabs--pill--border-color--hover: var(--np--border-color--night);
 		--np--tabs--pill--border-color--selected: var(--np--border-color--stronger--night);
 		--np--tile--background-color: var(--np--background-color--night);
@@ -3129,7 +3156,7 @@
 		--np--toggle--track--background-color: var(--np--border-color--strong--night);
 		--np--toggle--track--background-color--checked: var(--np--color--link--night);
 		--np--toggle--thumb--background-color: var(--np--background-color--night);
-		--np--toggle--focus-ring--color: var(--np--color--link--night);
+		--np--toggle--focus-ring--color: var(--np--focus-ring--color--night);
 		--np--tooltip--background-color: var(--np--background-color--night);
 		--np--tooltip--color: var(--np--color--night);
 		--np--tree--color: var(--np--color--night);
