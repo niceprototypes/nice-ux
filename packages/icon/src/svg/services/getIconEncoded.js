@@ -4,9 +4,11 @@ import { iconBase64 } from "../icons/generated/base64.js"
  * Resolve an icon's encoded data-URI from the generated `iconBase64` map,
  * mirroring `getIcon`'s resolution: unknown name → `undefined`; unknown variant
  * → fall back to `base` with a console warning; unknown theme → fall back to the
- * variant's `base` theme with a warning.
+ * variant's day theme with a warning.
  */
-function resolveEncoded(name, variant, theme) {
+function resolveEncoded(name, variant, requestedTheme) {
+  // The generated map keys the day theme as "base"
+  const theme = requestedTheme === "day" ? "base" : requestedTheme
   const variants = iconBase64[name]
   if (!variants) return undefined
 
@@ -22,7 +24,7 @@ function resolveEncoded(name, variant, theme) {
   const dataUri = themes[theme]
   if (!dataUri) {
     console.warn(
-      `@niceprototypes/icon: icon "${name}" variant has no "${theme}" theme; using "base". ` +
+      `@niceprototypes/icon: icon "${name}" variant has no "${requestedTheme}" theme; using "day". ` +
         `Available: ${Object.keys(themes).join(", ")}.`
     )
     return themes.base
@@ -33,7 +35,7 @@ function resolveEncoded(name, variant, theme) {
 /**
  * Get an icon's ready-to-use SVG base64 **data-URI** by name, glyph variant, and
  * color theme — the encoded counterpart to `getIcon`. The color is baked in
- * (`base` = #000, `night` = #fff), so the result renders standalone with no CSS
+ * (`day` = #000, `night` = #fff), so the result renders standalone with no CSS
  * cascade: drop it straight into an `<img src>`, a CSS `url()`/`background-image`,
  * or a `mask-image`.
  *
@@ -46,10 +48,10 @@ function resolveEncoded(name, variant, theme) {
  * @param {string} name - The icon name (e.g. "check", "file").
  * @param {string} [variant="base"] - The glyph variant stem ("base" stroke, "fill").
  * @param {object} [options] - Encoding options.
- * @param {string} [options.theme="base"] - Color theme: "base" (#000) or "night" (#fff).
+ * @param {string} [options.theme="day"] - Color theme: "day" (#000) or "night" (#fff); "base" is an alias of "day".
  * @returns {string | undefined} The data-URI, or `undefined` if the name is unknown.
  */
-export function getIconEncoded(name, variant = "base", { theme = "base" } = {}) {
+export function getIconEncoded(name, variant = "base", { theme = "day" } = {}) {
   return resolveEncoded(name, variant, theme)
 }
 
@@ -62,10 +64,10 @@ export function getIconEncoded(name, variant = "base", { theme = "base" } = {}) 
  * @param {string} name - The icon name.
  * @param {string} [variant="base"] - The glyph variant stem.
  * @param {object} [options] - Encoding options.
- * @param {string} [options.theme="base"] - Color theme: "base" (#000) or "night" (#fff).
+ * @param {string} [options.theme="day"] - Color theme: "day" (#000) or "night" (#fff); "base" is an alias of "day".
  * @returns {string | undefined} The bare base64 string, or `undefined` if unknown.
  */
-export function getIconEncodedKey(name, variant = "base", { theme = "base" } = {}) {
+export function getIconEncodedKey(name, variant = "base", { theme = "day" } = {}) {
   const dataUri = resolveEncoded(name, variant, theme)
   if (dataUri === undefined) return undefined
   return dataUri.slice(dataUri.indexOf(",") + 1)

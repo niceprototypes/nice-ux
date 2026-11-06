@@ -10,14 +10,14 @@ export type IconName = (typeof iconNames)[number]
 
 /** Encoding options for the base64 icon accessors. */
 export interface GetIconEncodedOptions {
-  /** Color theme: "base" (#000) or "night" (#fff). Default "base". */
-  theme?: "base" | "night"
+  /** Color theme: "day" (#000) or "night" (#fff). Default "day". "base" is an alias of "day". */
+  theme?: "day" | "night" | "base"
 }
 
 /**
  * Get an icon's ready-to-use SVG base64 data-URI by name, glyph variant, and
  * color theme — the encoded counterpart to `getIcon`. Color is baked in
- * (`base` = #000, `night` = #fff), so it renders standalone (no CSS cascade):
+ * (`day` = #000, `night` = #fff), so it renders standalone (no CSS cascade):
  * usable directly as an `<img src>`, CSS `url()`, or `mask-image`. Returns the
  * wrapped `data:image/svg+xml;base64,…` form; the sibling `getIconEncodedKey`
  * returns the bare payload. Unknown variant → `base` + warning; unknown name →
