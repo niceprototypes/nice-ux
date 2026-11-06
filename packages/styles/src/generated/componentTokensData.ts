@@ -917,6 +917,12 @@ const componentTokensData: ComponentTokensData = {
     },
     "maxHeight": {
       "base": "calc(var(--np--size) * 6)"
+    },
+    "backgroundColor": {
+      "base": "var(--np--background-color--raised)"
+    },
+    "color": {
+      "base": "var(--np--color)"
     }
   },
   "radio": {
@@ -1178,6 +1184,41 @@ const componentTokensData: ComponentTokensData = {
       "offset": {
         "base": "var(--np--gap--smaller)"
       }
+    }
+  },
+  "tooltip": {
+    "offset": {
+      "base": "var(--np--gap--small)"
+    },
+    "zIndex": {
+      "base": "var(--np--z-index--higher)"
+    },
+    "maxWidth": {
+      "base": "20em"
+    },
+    "padding": {
+      "base": "var(--np--gap--small) var(--np--gap)"
+    },
+    "backgroundColor": {
+      "base": "var(--np--background-color)"
+    },
+    "color": {
+      "base": "var(--np--color)"
+    },
+    "borderRadius": {
+      "base": "var(--np--border-radius--small)"
+    },
+    "boxShadow": {
+      "base": "var(--np--box-shadow)"
+    },
+    "fontFamily": {
+      "base": "var(--np--font-family)"
+    },
+    "fontSize": {
+      "base": "var(--np--font-size--small)"
+    },
+    "lineHeight": {
+      "base": "var(--np--line-height)"
     }
   },
   "tree": {

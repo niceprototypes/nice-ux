@@ -50,6 +50,7 @@ const componentNightTokensData: ComponentNightTokensData = {
   "tabs": {},
   "tile": {},
   "toggle": {},
+  "tooltip": {},
   "tree": {}
 } as const
 

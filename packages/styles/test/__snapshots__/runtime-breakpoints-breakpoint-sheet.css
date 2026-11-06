@@ -79,6 +79,7 @@
 		--np--tabs--font-size: var(--np--font-size);
 		--np--tabs--font-size--large: var(--np--font-size--large);
 		--np--tabs--font-size--larger: var(--np--font-size--larger);
+		--np--tooltip--font-size: var(--np--font-size--small);
 	}
 }
 
@@ -114,6 +115,7 @@
 		--np--tabs--font-size: var(--np--font-size);
 		--np--tabs--font-size--large: var(--np--font-size--large);
 		--np--tabs--font-size--larger: var(--np--font-size--larger);
+		--np--tooltip--font-size: var(--np--font-size--small);
 	}
 }
 
@@ -149,5 +151,6 @@
 		--np--tabs--font-size: var(--np--font-size);
 		--np--tabs--font-size--large: var(--np--font-size--large);
 		--np--tabs--font-size--larger: var(--np--font-size--larger);
+		--np--tooltip--font-size: var(--np--font-size--small);
 	}
 }

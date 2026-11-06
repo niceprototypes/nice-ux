@@ -724,6 +724,8 @@
 	--np--popover--box-shadow: var(--np--box-shadow--large);
 	--np--popover--z-index: var(--np--z-index--high);
 	--np--popover--max-height: calc(var(--np--size) * 6);
+	--np--popover--background-color: var(--np--background-color--raised);
+	--np--popover--color: var(--np--color);
 
 	/* radio component tokens */
 	--np--radio--size--smaller: var(--np--checkbox--size--smaller);
@@ -863,6 +865,19 @@
 	--np--toggle--focus-ring--width: var(--np--border-width--large);
 	--np--toggle--focus-ring--color: var(--np--color--link);
 	--np--toggle--focus-ring--offset: var(--np--gap--smaller);
+
+	/* tooltip component tokens */
+	--np--tooltip--offset: var(--np--gap--small);
+	--np--tooltip--z-index: var(--np--z-index--higher);
+	--np--tooltip--max-width: 20em;
+	--np--tooltip--padding: var(--np--gap--small) var(--np--gap);
+	--np--tooltip--background-color: var(--np--background-color);
+	--np--tooltip--color: var(--np--color);
+	--np--tooltip--border-radius: var(--np--border-radius--small);
+	--np--tooltip--box-shadow: var(--np--box-shadow);
+	--np--tooltip--font-family: var(--np--font-family);
+	--np--tooltip--font-size: var(--np--font-size--small);
+	--np--tooltip--line-height: var(--np--line-height);
 
 	/* tree component tokens */
 	--np--tree--color: var(--np--color);
@@ -1030,6 +1045,8 @@
 	--np--listbox--selected--color--inverse: var(--np--color--link--inverse);
 	--np--listbox--group-title--color--inverse: var(--np--color--lighter--inverse);
 	--np--listbox--focus-ring--color--inverse: var(--np--border-color--link--inverse);
+	--np--popover--background-color--inverse: var(--np--background-color--raised--inverse);
+	--np--popover--color--inverse: var(--np--color--inverse);
 	--np--radio--background-color--unchecked--inverse: var(--np--background-color--inverse);
 	--np--radio--background-color--inverse: var(--np--color--inverse);
 	--np--radio--background-color--link--inverse: var(--np--color--link--inverse);
@@ -1075,6 +1092,8 @@
 	--np--toggle--track--background-color--checked--inverse: var(--np--color--link--inverse);
 	--np--toggle--thumb--background-color--inverse: var(--np--background-color--inverse);
 	--np--toggle--focus-ring--color--inverse: var(--np--color--link--inverse);
+	--np--tooltip--background-color--inverse: var(--np--background-color--inverse);
+	--np--tooltip--color--inverse: var(--np--color--inverse);
 	--np--tree--color--inverse: var(--np--color--inverse);
 	--np--tree--color--light--inverse: var(--np--color--light--inverse);
 	--np--tree--color--lighter--inverse: var(--np--color--lighter--inverse);
@@ -1217,6 +1236,7 @@
 		--np--tabs--font-size: var(--np--font-size);
 		--np--tabs--font-size--large: var(--np--font-size--large);
 		--np--tabs--font-size--larger: var(--np--font-size--larger);
+		--np--tooltip--font-size: var(--np--font-size--small);
 	}
 }
 
@@ -1252,6 +1272,7 @@
 		--np--tabs--font-size: var(--np--font-size);
 		--np--tabs--font-size--large: var(--np--font-size--large);
 		--np--tabs--font-size--larger: var(--np--font-size--larger);
+		--np--tooltip--font-size: var(--np--font-size--small);
 	}
 }
 
@@ -1287,6 +1308,7 @@
 		--np--tabs--font-size: var(--np--font-size);
 		--np--tabs--font-size--large: var(--np--font-size--large);
 		--np--tabs--font-size--larger: var(--np--font-size--larger);
+		--np--tooltip--font-size: var(--np--font-size--small);
 	}
 }
 
@@ -1496,6 +1518,8 @@
 		--np--listbox--selected--color--inverse: var(--np--color--link--night--inverse);
 		--np--listbox--group-title--color--inverse: var(--np--color--lighter--night--inverse);
 		--np--listbox--focus-ring--color--inverse: var(--np--border-color--link--night--inverse);
+		--np--popover--background-color--inverse: var(--np--background-color--raised--night--inverse);
+		--np--popover--color--inverse: var(--np--color--night--inverse);
 		--np--radio--background-color--unchecked--inverse: var(--np--background-color--night--inverse);
 		--np--radio--background-color--inverse: var(--np--color--night--inverse);
 		--np--radio--background-color--link--inverse: var(--np--color--link--night--inverse);
@@ -1541,6 +1565,8 @@
 		--np--toggle--track--background-color--checked--inverse: var(--np--color--link--night--inverse);
 		--np--toggle--thumb--background-color--inverse: var(--np--background-color--night--inverse);
 		--np--toggle--focus-ring--color--inverse: var(--np--color--link--night--inverse);
+		--np--tooltip--background-color--inverse: var(--np--background-color--night--inverse);
+		--np--tooltip--color--inverse: var(--np--color--night--inverse);
 		--np--tree--color--inverse: var(--np--color--night--inverse);
 		--np--tree--color--light--inverse: var(--np--color--light--night--inverse);
 		--np--tree--color--lighter--inverse: var(--np--color--lighter--night--inverse);
@@ -1699,6 +1725,8 @@
 		--np--listbox--selected--color: var(--np--color--link--night);
 		--np--listbox--group-title--color: var(--np--color--lighter--night);
 		--np--listbox--focus-ring--color: var(--np--border-color--link--night);
+		--np--popover--background-color: var(--np--background-color--raised--night);
+		--np--popover--color: var(--np--color--night);
 		--np--radio--background-color--unchecked: var(--np--background-color--night);
 		--np--radio--background-color: var(--np--color--night);
 		--np--radio--background-color--link: var(--np--color--link--night);
@@ -1744,6 +1772,8 @@
 		--np--toggle--track--background-color--checked: var(--np--color--link--night);
 		--np--toggle--thumb--background-color: var(--np--background-color--night);
 		--np--toggle--focus-ring--color: var(--np--color--link--night);
+		--np--tooltip--background-color: var(--np--background-color--night);
+		--np--tooltip--color: var(--np--color--night);
 		--np--tree--color: var(--np--color--night);
 		--np--tree--color--light: var(--np--color--light--night);
 		--np--tree--color--lighter: var(--np--color--lighter--night);
@@ -1967,6 +1997,8 @@
 		--np--listbox--selected--color--inverse: var(--np--color--link--day--inverse);
 		--np--listbox--group-title--color--inverse: var(--np--color--lighter--day--inverse);
 		--np--listbox--focus-ring--color--inverse: var(--np--border-color--link--day--inverse);
+		--np--popover--background-color--inverse: var(--np--background-color--raised--day--inverse);
+		--np--popover--color--inverse: var(--np--color--day--inverse);
 		--np--radio--background-color--unchecked--inverse: var(--np--background-color--day--inverse);
 		--np--radio--background-color--inverse: var(--np--color--day--inverse);
 		--np--radio--background-color--link--inverse: var(--np--color--link--day--inverse);
@@ -2012,6 +2044,8 @@
 		--np--toggle--track--background-color--checked--inverse: var(--np--color--link--day--inverse);
 		--np--toggle--thumb--background-color--inverse: var(--np--background-color--day--inverse);
 		--np--toggle--focus-ring--color--inverse: var(--np--color--link--day--inverse);
+		--np--tooltip--background-color--inverse: var(--np--background-color--day--inverse);
+		--np--tooltip--color--inverse: var(--np--color--day--inverse);
 		--np--tree--color--inverse: var(--np--color--day--inverse);
 		--np--tree--color--light--inverse: var(--np--color--light--day--inverse);
 		--np--tree--color--lighter--inverse: var(--np--color--lighter--day--inverse);
@@ -2170,6 +2204,8 @@
 		--np--listbox--selected--color: var(--np--color--link--day);
 		--np--listbox--group-title--color: var(--np--color--lighter--day);
 		--np--listbox--focus-ring--color: var(--np--border-color--link--day);
+		--np--popover--background-color: var(--np--background-color--raised--day);
+		--np--popover--color: var(--np--color--day);
 		--np--radio--background-color--unchecked: var(--np--background-color--day);
 		--np--radio--background-color: var(--np--color--day);
 		--np--radio--background-color--link: var(--np--color--link--day);
@@ -2215,6 +2251,8 @@
 		--np--toggle--track--background-color--checked: var(--np--color--link--day);
 		--np--toggle--thumb--background-color: var(--np--background-color--day);
 		--np--toggle--focus-ring--color: var(--np--color--link--day);
+		--np--tooltip--background-color: var(--np--background-color--day);
+		--np--tooltip--color: var(--np--color--day);
 		--np--tree--color: var(--np--color--day);
 		--np--tree--color--light: var(--np--color--light--day);
 		--np--tree--color--lighter: var(--np--color--lighter--day);
@@ -2437,6 +2475,8 @@
 		--np--listbox--selected--color--inverse: var(--np--color--link--night--inverse);
 		--np--listbox--group-title--color--inverse: var(--np--color--lighter--night--inverse);
 		--np--listbox--focus-ring--color--inverse: var(--np--border-color--link--night--inverse);
+		--np--popover--background-color--inverse: var(--np--background-color--raised--night--inverse);
+		--np--popover--color--inverse: var(--np--color--night--inverse);
 		--np--radio--background-color--unchecked--inverse: var(--np--background-color--night--inverse);
 		--np--radio--background-color--inverse: var(--np--color--night--inverse);
 		--np--radio--background-color--link--inverse: var(--np--color--link--night--inverse);
@@ -2482,6 +2522,8 @@
 		--np--toggle--track--background-color--checked--inverse: var(--np--color--link--night--inverse);
 		--np--toggle--thumb--background-color--inverse: var(--np--background-color--night--inverse);
 		--np--toggle--focus-ring--color--inverse: var(--np--color--link--night--inverse);
+		--np--tooltip--background-color--inverse: var(--np--background-color--night--inverse);
+		--np--tooltip--color--inverse: var(--np--color--night--inverse);
 		--np--tree--color--inverse: var(--np--color--night--inverse);
 		--np--tree--color--light--inverse: var(--np--color--light--night--inverse);
 		--np--tree--color--lighter--inverse: var(--np--color--lighter--night--inverse);
@@ -2640,6 +2682,8 @@
 		--np--listbox--selected--color: var(--np--color--link--night);
 		--np--listbox--group-title--color: var(--np--color--lighter--night);
 		--np--listbox--focus-ring--color: var(--np--border-color--link--night);
+		--np--popover--background-color: var(--np--background-color--raised--night);
+		--np--popover--color: var(--np--color--night);
 		--np--radio--background-color--unchecked: var(--np--background-color--night);
 		--np--radio--background-color: var(--np--color--night);
 		--np--radio--background-color--link: var(--np--color--link--night);
@@ -2685,6 +2729,8 @@
 		--np--toggle--track--background-color--checked: var(--np--color--link--night);
 		--np--toggle--thumb--background-color: var(--np--background-color--night);
 		--np--toggle--focus-ring--color: var(--np--color--link--night);
+		--np--tooltip--background-color: var(--np--background-color--night);
+		--np--tooltip--color: var(--np--color--night);
 		--np--tree--color: var(--np--color--night);
 		--np--tree--color--light: var(--np--color--light--night);
 		--np--tree--color--lighter: var(--np--color--lighter--night);

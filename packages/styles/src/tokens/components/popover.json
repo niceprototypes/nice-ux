@@ -14,6 +14,12 @@
   "maxHeight": {
     "base": "calc(var(--np--size) * 6)"
   },
+  "backgroundColor": {
+    "base": "var(--np--background-color--raised)"
+  },
+  "color": {
+    "base": "var(--np--color)"
+  },
   "$themes": {
     "night": {}
   }
