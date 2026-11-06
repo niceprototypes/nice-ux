@@ -8,9 +8,9 @@ import type { CheckboxProps } from "./Checkbox.types"
 /**
  * Checkbox replaces the native checkbox's look: a native `<input type="checkbox">` stays the
  * focus target and keyboard handler (Space toggles), invisible over a token-driven box that
- * shows a @niceprototypes/icon check when checked. With `children`, the root is a `<label>` holding
- * the box and the label text, so clicking the text toggles it too. Without `children`, name it
- * with `aria-label` or `aria-labelledby`.
+ * shows a @niceprototypes/icon check when checked, and a minus when `indeterminate`. With
+ * `children`, the root is a `<label>` holding the box and the label text, so clicking the text
+ * toggles it too. Without `children`, name it with `aria-label` or `aria-labelledby`.
  *
  * Controlled with `checked` + `onChange`, or uncontrolled with `defaultChecked`. Sizes, fill,
  * border, radius and the check come from the `checkbox.*` component tokens.
@@ -27,6 +27,7 @@ import type { CheckboxProps } from "./Checkbox.types"
 const Checkbox: React.FC<CheckboxProps> = ({
   checked,
   defaultChecked,
+  indeterminate = false,
   onChange,
   disabled = false,
   size = "base",
@@ -51,6 +52,14 @@ const Checkbox: React.FC<CheckboxProps> = ({
 
   const hasLabel = children != null && typeof children !== "boolean"
 
+  // indeterminate is a DOM property with no attribute, so it is set on the native checkbox after
+  // every render: a click clears it there, and the next render restores the prop's value.
+  const inputRef = React.useRef<HTMLInputElement>(null)
+  React.useImperativeHandle(ref, () => inputRef.current!)
+  React.useLayoutEffect(() => {
+    inputRef.current!.indeterminate = indeterminate
+  })
+
   const checkbox = (
     <StyledCheckbox className={hasLabel ? undefined : className} $size={size} $disabled={disabled}>
       <StyledInput
@@ -69,7 +78,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
         required={fieldContext?.required}
         id={id ?? fieldContext?.id}
         name={name}
-        ref={ref}
+        ref={inputRef}
       />
       <StyledBox
         aria-hidden="true"
@@ -79,7 +88,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
         $borderWidth={borderWidth}
       >
         <StyledCheck>
-          <Icon name={iconName} vendor={iconVendor} size="base" color="base" />
+          <Icon name={indeterminate ? "minus" : iconName} vendor={iconVendor} size="base" color="base" />
         </StyledCheck>
       </StyledBox>
     </StyledCheckbox>

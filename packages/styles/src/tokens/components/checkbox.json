@@ -44,7 +44,7 @@
   },
   "icon": {
     "color": {
-      "base": "var(--np--color--inverse)"
+      "base": "var(--np--color)"
     },
     "size": {
       "smaller": "10px",
@@ -66,6 +66,50 @@
     },
     "offset": {
       "base": "var(--np--gap--smaller)"
+    }
+  },
+  "hover": {
+    "backgroundColor": {
+      "unchecked": "var(--np--background-color)",
+      "base": "var(--np--color)",
+      "link": "var(--np--color--link)",
+      "success": "var(--np--color--success)",
+      "highlight": "var(--np--color--highlight)",
+      "warning": "var(--np--color--warning)",
+      "error": "var(--np--color--error)"
+    },
+    "borderColor": {
+      "base": "var(--np--border-color)",
+      "subtle": "var(--np--border-color--subtle)",
+      "strong": "var(--np--border-color--strong)",
+      "stronger": "var(--np--border-color--stronger)",
+      "success": "var(--np--border-color--success)",
+      "highlight": "var(--np--border-color--highlight)",
+      "warning": "var(--np--border-color--warning)",
+      "error": "var(--np--border-color--error)",
+      "link": "var(--np--border-color--link)"
+    }
+  },
+  "active": {
+    "backgroundColor": {
+      "unchecked": "var(--np--background-color)",
+      "base": "var(--np--color)",
+      "link": "var(--np--color--link)",
+      "success": "var(--np--color--success)",
+      "highlight": "var(--np--color--highlight)",
+      "warning": "var(--np--color--warning)",
+      "error": "var(--np--color--error)"
+    },
+    "borderColor": {
+      "base": "var(--np--border-color)",
+      "subtle": "var(--np--border-color--subtle)",
+      "strong": "var(--np--border-color--strong)",
+      "stronger": "var(--np--border-color--stronger)",
+      "success": "var(--np--border-color--success)",
+      "highlight": "var(--np--border-color--highlight)",
+      "warning": "var(--np--border-color--warning)",
+      "error": "var(--np--border-color--error)",
+      "link": "var(--np--border-color--link)"
     }
   },
   "$themes": {

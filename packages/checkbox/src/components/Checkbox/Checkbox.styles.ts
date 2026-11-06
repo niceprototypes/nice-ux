@@ -12,7 +12,8 @@ import type {
 /**
  * The root: sized to the box. The nested check icon reads --np--icon--size / --np--icon--color,
  * reassigned here to the checkbox-scoped icon tokens (as Button does for its icons), so
- * overriding --np--checkbox--icon--* restyles the check without touching other icons.
+ * overriding --np--checkbox--icon--* restyles the check without touching other icons. The colour
+ * is checkbox.icon.color's inverse, which the theme pins reassign (as a filled Button's label).
  */
 export const StyledCheckbox = styled.span<{ $size: CheckboxSizeType; $disabled: boolean }>`
   position: relative;
@@ -22,7 +23,7 @@ export const StyledCheckbox = styled.span<{ $size: CheckboxSizeType; $disabled: 
   height: ${({ $size }) => getToken(`checkbox.size:${$size}`)};
   cursor: ${({ $disabled }) => ($disabled ? "not-allowed" : "pointer")};
   opacity: ${({ $disabled }) => ($disabled ? getToken("checkbox.disabledOpacity:base") : 1)};
-  --np--icon--color: ${getToken("checkbox.icon.color:base")};
+  --np--icon--color: ${getToken("checkbox.icon.color:base", { inverse: true })};
   --np--icon--size: ${({ $size }) => getToken(`checkbox.icon.size:${$size}`)};
 `
 
@@ -56,11 +57,27 @@ export const StyledInput = styled.input`
   cursor: inherit;
 `
 
-/** Holds the check icon, centered; shown only when checked. */
+/** Holds the check icon, centered; shown only when checked or indeterminate. */
 export const StyledCheck = styled.span`
   display: flex;
   visibility: hidden;
 `
+
+/** The pointer states with their own checkbox tokens, in cascade order. */
+const STATES = ["hover", "active"] as const
+
+/**
+ * The box's selector while the enabled checkbox, in `inputState`, is in the pointer `state`:
+ * on the native checkbox (it covers the box), or on the root label, so its text counts too.
+ */
+const stateSelector = (state: (typeof STATES)[number], inputState: string) =>
+  `${StyledInput}:enabled${inputState}:${state} + &, ${StyledCheckboxLabel}:${state} ${StyledInput}:enabled${inputState} + &`
+
+/** The filled box: the backgroundColor prop's fill, with a transparent border. */
+const fill = ({ $backgroundColor }: { $backgroundColor: ColorTokenProp<CheckboxBackgroundColorType> }) => `
+    background-color: ${resolveColorProp("checkbox", "backgroundColor", $backgroundColor)};
+    border-color: transparent;
+  `
 
 /** The drawn box, beside the native checkbox. */
 export const StyledBox = styled.span<{
@@ -81,16 +98,35 @@ export const StyledBox = styled.span<{
   border-color: ${({ $borderColor }) => resolveColorProp("checkbox", "borderColor", $borderColor)};
   border-radius: ${({ $borderRadius }) => getToken(`checkbox.borderRadius:${$borderRadius}`)};
 
-  /* Checked: the fill paints to the border box and the border goes transparent, so the
-     box reads as one solid shape (as a filled Button does). */
+  /* Checked or indeterminate: the fill paints to the border box and the border goes transparent,
+     so the box reads as one solid shape (as a filled Button does). */
   ${StyledInput}:checked + & {
-    background-color: ${({ $backgroundColor }) => resolveColorProp("checkbox", "backgroundColor", $backgroundColor)};
-    border-color: transparent;
+    ${fill}
   }
 
-  ${StyledInput}:checked + & ${StyledCheck} {
+  ${StyledInput}:indeterminate + & {
+    ${fill}
+  }
+
+  ${StyledInput}:checked + & ${StyledCheck}, ${StyledInput}:indeterminate + & ${StyledCheck} {
     visibility: visible;
   }
+
+  /* Hovered (the box, or the root label with its text) and pressed: the checkbox.hover and
+     checkbox.active tokens, which default to the rest colours. Pressed comes last, so it wins. */
+  ${({ $backgroundColor, $borderColor }) =>
+    STATES.map(
+      state => `
+    ${stateSelector(state, ":not(:checked):not(:indeterminate)")} {
+      background-color: ${getToken(`checkbox.${state}.backgroundColor:unchecked`)};
+      border-color: ${resolveColorProp("checkbox", `${state}.borderColor`, $borderColor)};
+    }
+
+    ${stateSelector(state, ":checked")}, ${stateSelector(state, ":indeterminate")} {
+      background-color: ${resolveColorProp("checkbox", `${state}.backgroundColor`, $backgroundColor)};
+    }
+  `
+    ).join("")}
 
   /* Keyboard focus ring, on the drawn box; the native checkbox is invisible. */
   ${StyledInput}:focus-visible + & {

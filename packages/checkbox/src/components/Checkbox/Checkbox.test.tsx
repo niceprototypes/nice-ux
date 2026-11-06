@@ -162,6 +162,50 @@ describe("Checkbox", () => {
     )
   })
 
+  it("colours the check with checkbox.icon.color's inverse, which theme pins reassign", () => {
+    const { container } = render(<Checkbox aria-label="x" />)
+    expect(cssFor(container.firstElementChild!)).toContain(
+      `--np--icon--color:${getToken("checkbox.icon.color:base", { inverse: true })}`,
+    )
+  })
+
+  it("sets the native indeterminate property, fills the box and draws a minus", () => {
+    const { rerender } = render(<Checkbox aria-label="x" indeterminate />)
+    const control = screen.getByRole("checkbox") as HTMLInputElement
+    expect(control.indeterminate).toBe(true)
+    expect(control).toBePartiallyChecked()
+    expect(screen.getByTestId("icon")).toHaveTextContent("minus")
+    expect(stateRule(box(), "indeterminate")).toContain(
+      `background-color:${getToken("checkbox.backgroundColor:link")}`,
+    )
+    rerender(<Checkbox aria-label="x" />)
+    expect(control.indeterminate).toBe(false)
+    expect(screen.getByTestId("icon")).toHaveTextContent("check")
+  })
+
+  it("restores indeterminate after a click clears it, on the next render", async () => {
+    const Controlled = () => {
+      const [checked, setChecked] = React.useState(false)
+      return <Checkbox aria-label="x" checked={checked} onChange={setChecked} indeterminate />
+    }
+    render(<Controlled />)
+    const control = screen.getByRole("checkbox") as HTMLInputElement
+    await userEvent.click(control)
+    expect(control).toBeChecked()
+    expect(control.indeterminate).toBe(true)
+  })
+
+  it("reads the hover and active tokens for the box, unchecked and filled", () => {
+    render(<Checkbox aria-label="x" borderColor="error" backgroundColor="success" />)
+    const css = sheet()
+    for (const state of ["hover", "active"] as const) {
+      expect(css).toContain(`background-color:${getToken(`checkbox.${state}.backgroundColor:unchecked`)}`)
+      expect(css).toContain(`border-color:${getToken(`checkbox.${state}.borderColor:error`)}`)
+      expect(css).toContain(`background-color:${getToken(`checkbox.${state}.backgroundColor:success`)}`)
+    }
+    expect(css).toMatch(/:enabled:not\(:checked\):not\(:indeterminate\):hover\+/)
+  })
+
   it("forwards ref to the native input", () => {
     const ref = React.createRef<HTMLInputElement>()
     render(<Checkbox aria-label="x" ref={ref} />)

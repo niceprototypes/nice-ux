@@ -24,6 +24,19 @@ export type CheckboxCheckedType = boolean
 export type CheckboxDefaultCheckedType = boolean
 
 /**
+ * CheckboxIndeterminateType
+ *
+ * Whether the checkbox shows the mixed state: the box fills and draws a minus, and assistive
+ * technology reads it as mixed. Set on the native checkbox's `indeterminate` property; a click
+ * clears it there, so keep it in sync from `onChange`.
+ *
+ * Values:
+ * - false: default
+ * - true: mixed
+ */
+export type CheckboxIndeterminateType = boolean
+
+/**
  * CheckboxOnChangeType
  *
  * Change handler: the new checked value first, then the native change event.
@@ -189,6 +202,11 @@ export interface CheckboxProps {
   checked?: CheckboxCheckedType
   /** Initial checked value (uncontrolled) */
   defaultChecked?: CheckboxDefaultCheckedType
+  /**
+   * Mixed state, drawn over checked and unchecked
+   * @default false
+   */
+  indeterminate?: CheckboxIndeterminateType
   /** Change handler: new value, then the native event */
   onChange?: CheckboxOnChangeType
   /** Disabled state */
@@ -237,6 +255,7 @@ const CheckboxTypes = {} as const
 namespace CheckboxTypes {
   export type Checked = CheckboxCheckedType
   export type DefaultChecked = CheckboxDefaultCheckedType
+  export type Indeterminate = CheckboxIndeterminateType
   export type OnChange = CheckboxOnChangeType
   export type Disabled = CheckboxDisabledType
   export type Size = CheckboxSizeType
