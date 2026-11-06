@@ -1,3 +1,4 @@
+import { useLayoutEffect, useRef, useState } from "react"
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { expect, waitFor } from "storybook/test"
 import { getToken, themeTokensData } from "@niceprototypes/styles"
@@ -7,7 +8,7 @@ import type { LineProps, LineRadiusType } from "@niceprototypes/line"
 
 /**
  * Option lists. `color` is typed against BorderColorType on disk; `radius` presets cover each
- * form of LineRadiusType except an Element reference, which has no serialisable control.
+ * form of LineRadiusType; `ELEMENT_RADIUS` stands for an Element reference, resolved in `render`.
  */
 const COLOR_OPTIONS = ["base", "subtle", "strong", "stronger", "success", "highlight", "warning", "error", "link"] as const satisfies readonly BorderColorType[]
 const THEME_OPTIONS = ["none", ...Object.keys(themeTokensData)]
@@ -24,9 +25,23 @@ const RADIUS_PRESETS = {
     [24, 8],
   ],
 } satisfies Record<string, LineRadiusType>
+const ELEMENT_RADIUS = "Element: the host"
 
 /** LineProps with `radius` as a preset name, mapped back to the radius in `render`. */
-type PlaygroundArgs = Omit<LineProps, "radius"> & { radius: keyof typeof RADIUS_PRESETS }
+type PlaygroundArgs = Omit<LineProps, "radius"> & { radius: keyof typeof RADIUS_PRESETS | typeof ELEMENT_RADIUS }
+
+/** Line given the host element itself as `radius` (an Element), read from a hidden marker after mount. */
+const ElementRadiusLine = (props: Omit<LineProps, "radius">) => {
+  const markerRef = useRef<HTMLSpanElement>(null)
+  const [host, setHost] = useState<Element | null>(null)
+  useLayoutEffect(() => setHost(markerRef.current!.parentElement), [])
+  return (
+    <>
+      <span ref={markerRef} hidden />
+      {host && <Line {...props} radius={host} />}
+    </>
+  )
+}
 
 const meta = {
   title: "Components/Line",
@@ -54,7 +69,7 @@ const meta = {
   argTypes: {
     // An explicit select overrides preview.tsx's `color` matcher (a colour picker).
     color: { control: "select", options: COLOR_OPTIONS },
-    radius: { control: "select", options: Object.keys(RADIUS_PRESETS) },
+    radius: { control: "select", options: [...Object.keys(RADIUS_PRESETS), ELEMENT_RADIUS] },
     theme: { control: "select", options: THEME_OPTIONS, mapping: { none: undefined } },
     className: { table: { disable: true } },
   },
@@ -85,7 +100,8 @@ const dash = async (canvasElement: HTMLElement) => {
 
 export const Playground: Story = {
   args: { radius: "element" },
-  render: ({ radius, ...rest }) => <Line {...rest} radius={RADIUS_PRESETS[radius]} />,
+  render: ({ radius, ...rest }) =>
+    radius === ELEMENT_RADIUS ? <ElementRadiusLine {...rest} /> : <Line {...rest} radius={RADIUS_PRESETS[radius]} />,
   play: async ({ canvasElement }) => {
     const path = await dash(canvasElement)
     // "element": the host's own corner radius.
@@ -148,5 +164,18 @@ export const Theme: Story = {
   play: async ({ canvasElement }) => {
     const path = await dash(canvasElement)
     await expect(path.closest('[data-theme="night"]')).not.toBeNull()
+    // "element" reads the host's radius through the Theme wrapper (display: contents).
+    const radius = parseFloat(resolveCss(canvasElement, "border-top-left-radius", getToken("borderRadius:large")))
+    await expect(path.getAttribute("d")).toMatch(new RegExp(`^M ${radius} 0`))
+  },
+}
+
+export const RadiusElement: Story = {
+  ...Playground,
+  args: { ...Playground.args, radius: ELEMENT_RADIUS },
+  play: async ({ canvasElement }) => {
+    const path = await dash(canvasElement)
+    const radius = parseFloat(resolveCss(canvasElement, "border-top-left-radius", getToken("borderRadius:large")))
+    await expect(path.getAttribute("d")).toMatch(new RegExp(`^M ${radius} 0`))
   },
 }

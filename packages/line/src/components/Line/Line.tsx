@@ -1,5 +1,6 @@
 import * as React from "react"
 import { Theme } from "@niceprototypes/styles"
+import { getHostElement } from "../../utilities/getHostElement"
 import { isDevelopment } from "../../utilities/isDevelopment"
 import { useFrame } from "../../utilities/useFrame"
 import { StyledDash, StyledLine, StyledRim, StyledSvg } from "./Line.styles"
@@ -36,7 +37,7 @@ const Line: React.FC<LineProps> = ({ color = "base", radius = "element", classNa
   const warnedRef = React.useRef(false)
   React.useEffect(() => {
     if (warnedRef.current || !isDevelopment()) return
-    const parent = ref.current?.parentElement
+    const parent = ref.current && getHostElement(ref.current)
     if (!parent || getComputedStyle(parent).position !== "static") return
     warnedRef.current = true
     console.warn(

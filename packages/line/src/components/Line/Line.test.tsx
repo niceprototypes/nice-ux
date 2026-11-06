@@ -5,6 +5,7 @@ import Line from "./Line"
 import { resolveCorners } from "../../utilities/resolveCorners"
 import { framePath } from "../../utilities/framePath"
 import { fitDasharray } from "../../utilities/fitDasharray"
+import { getHostElement } from "../../utilities/getHostElement"
 
 // jsdom has no ResizeObserver; the frame is measured once on mount.
 class ResizeObserverStub {
@@ -51,6 +52,20 @@ describe("resolveCorners with an Element", () => {
     document.body.append(element)
     expect(resolveCorners(element, null, 100, 40)[0]).toEqual({ x: 12, y: 12 })
     element.remove()
+  })
+})
+
+describe("getHostElement", () => {
+  it("skips display: contents wrappers, such as the theme prop's Theme", () => {
+    const host = document.createElement("div")
+    const wrapper = document.createElement("div")
+    wrapper.style.display = "contents"
+    const line = document.createElement("span")
+    wrapper.append(line)
+    host.append(wrapper)
+    document.body.append(host)
+    expect(getHostElement(line)).toBe(host)
+    host.remove()
   })
 })
 

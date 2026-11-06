@@ -3,6 +3,7 @@ import { getToken, type TokenAddress } from "@niceprototypes/styles"
 import type { LineRadiusType } from "../components/Line/Line.types"
 import { fitDasharray } from "./fitDasharray"
 import { framePath } from "./framePath"
+import { getHostElement } from "./getHostElement"
 import { resolveCorners } from "./resolveCorners"
 
 export type Frame = { width: number; height: number; d: string; dasharray: string }
@@ -26,7 +27,7 @@ export const useFrame = (radius: LineRadiusType) => {
       const { width, height } = element.getBoundingClientRect()
       const style = getComputedStyle(element)
       const read = (address: TokenAddress) => parseFloat(style.getPropertyValue(getToken(address, { as: "key" }))) || 0
-      const { d, length } = framePath(width, height, resolveCorners(radius, element.parentElement, width, height))
+      const { d, length } = framePath(width, height, resolveCorners(radius, getHostElement(element), width, height))
       const dasharray = fitDasharray(length, {
         width: read("line.width:base"),
         rimWidth: read("line.rimWidth:base"),
