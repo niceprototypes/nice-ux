@@ -1,55 +1,34 @@
 # @niceprototypes/radio
 
-`RadioGroup` and `Radio`. Each Radio is a native `<input type="radio">`, invisible over a
-token-driven circle that shows a dot when checked, inside a `<label>` with its text. The Radios
-of a group share one native `name`, so the browser supplies the keyboard model: one tab stop,
-arrow keys move and check, Space checks.
-
 ## Install
 
 ```sh
-npm install @niceprototypes/radio
+pnpm add @niceprototypes/radio
 ```
 
-Peer dependencies: `@niceprototypes/field`, `@niceprototypes/ink`, `@niceprototypes/styles`, `react`, `react-dom`, `styled-components`.
+Peer dependencies and app setup: [Build on Nice](../../manifest/agents/README.md).
 
 ## Usage
 
 ```tsx
 import { Radio, RadioGroup } from "@niceprototypes/radio"
-
-// Uncontrolled
-<RadioGroup aria-label="Plan" defaultValue="free">
-  <Radio value="free">Free</Radio>
-  <Radio value="pro">Pro</Radio>
-</RadioGroup>
-
-// Controlled: onChange receives the value first, then the native event
-const [plan, setPlan] = useState("free")
-<RadioGroup aria-label="Plan" value={plan} onChange={setPlan} direction="row">
-  <Radio value="free">Free</Radio>
-  <Radio value="pro" disabled>Pro</Radio>
-</RadioGroup>
 ```
 
-## Props
+Each component also takes `breakpoints`: breakpoint keys to partial props (`BreakpointOverride`, `packages/styles/src/react/services/withBreakpoints`).
 
-Prop types are `RadioGroupProps` and `RadioProps`; allowed values per prop are in
-`manifest/agents/catalog.json`. `size`, `backgroundColor`, `borderColor` and `disabled` set on the
-group reach every Radio; a Radio's own prop wins.
+## Docs
 
-## Field and Fieldset
+| Component | Storybook story |
+|---|---|
+| Radio | `components-forms-radio--playground` |
+| RadioGroup | `components-forms-radiogroup--playground` |
 
-Inside a `Field` (@niceprototypes/field) the group takes the Field's id and is named by the Field
-label through `aria-labelledby` (the label's `for` points at a `div`, which does not name it). It
-is described by the Field's description and error, takes `aria-invalid="true"` when the Field is
-invalid, and every radio takes the Field's `required`.
+Storybook runs with `pnpm storybook` at the nice-ux root. Props, types, defaults, token addresses and exports: [`manifest/agents/catalog.json`](../../manifest/agents/catalog.json), from the nice-ux root:
 
-Inside a `Fieldset`, the legend names the group of controls, and `Fieldset disabled` disables
-every radio natively.
+```sh
+jq '.packages[]|select(.package=="@niceprototypes/radio")' manifest/agents/catalog.json
+```
 
-## Tokens
+## License
 
-`radio.*` in `@niceprototypes/styles` (`src/tokens/components/radio.json`). Sizes, border width,
-disabled opacity and focus-ring width and offset alias the Checkbox tokens; colours alias the
-same core colours Checkbox uses.
+MIT

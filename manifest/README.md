@@ -61,4 +61,4 @@ Naming: components and the types namespace are `default` exports, everything els
 | PNG compression | `build/image-compressor.md` |
 | Open work | `backlog.md`; owner decisions `~/nice/.nice/surveys/YYYY-MM-DD/`, research `~/nice/.nice/research/YYYY-MM-DD/` |
 
-Regenerate `agents/catalog.json` + `agents/components.txt` after any prop, token or story change: `node manifest/agents/scripts/generate-catalog.mjs`.
+`agents/catalog.json` + `agents/components.txt` regenerate on the root `pnpm build`; after a prop, token or story change without one, run `node manifest/agents/scripts/generate-catalog.mjs`. Output is byte-stable for the same sources (no timestamp, sorted reads), so commit it with the change.

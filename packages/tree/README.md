@@ -1,70 +1,33 @@
 # @niceprototypes/tree
 
-`Tree`: a navigation tree of nested data. A `<nav>` of nested lists, on the WAI-ARIA disclosure
-navigation pattern (the APG recommends it over `role="tree"` for site navigation):
-
-- A node with `items` is a folder: a `<button aria-expanded aria-controls>` that shows or hides its
-  sub-list. A leaf with a `url` is a link, `aria-current="page"` when its status is `"active"`.
-- Keyboard: native. Tab and Shift+Tab move between rows, Enter or Space toggles a folder, Enter
-  follows a link.
-- Guide lines join each folder's icon to its sub-rows. The active node, its ancestors and the guide
-  leading to it take the `tree.activeColor` token (default: the link colour); every other row
-  recedes to `color:lighter` until hovered.
-- Labels render through Ink, base size below laptop and small from laptop up.
-
 ## Install
 
 ```sh
-npm install @niceprototypes/tree
+pnpm add @niceprototypes/tree
 ```
 
-Peer dependencies: `@niceprototypes/ink`, `@niceprototypes/styles`, `react`, `react-dom`, `styled-components`.
+Peer dependencies and app setup: [Build on Nice](../../manifest/agents/README.md).
 
 ## Usage
 
 ```tsx
-import Icon from "@niceprototypes/icon"
-import Tree from "@niceprototypes/tree"
-
-<Tree
-  aria-label="Docs"
-  items={[
-    { id: "guides", name: "Guides", icon: <Icon name="folder-closed" />, items: [
-      { id: "start", name: "Start", icon: null, url: "/start", status: "active" },
-    ] },
-  ]}
-  onSelect={(node, event) => {
-    event.preventDefault()
-    router.push(node.url)
-  }}
-/>
+import { Tree } from "@niceprototypes/tree"
 ```
 
-## Props
+`Tree` also takes `breakpoints`: breakpoint keys to partial props (`BreakpointOverride`, `packages/styles/src/react/services/withBreakpoints`).
 
-Prop types are `TreeProps` and `TreeNodeType`; allowed values per prop are in
-`manifest/agents/catalog.json`. Folders are uncontrolled by default (`defaultExpandedIds`, else the
-active node's ancestors) or controlled with `expandedIds` + `onExpandedChange`.
+## Docs
 
-## Active colour
+| Component | Storybook story |
+|---|---|
+| Tree | `components-tree--playground` |
 
-Tree has no colour prop. A project sets the active colour by overriding the `tree.activeColor`
-token: for every tree, in its `setTokens` map; for one tree only, on a wrapper element.
+Storybook runs with `pnpm storybook` at the nice-ux root. Props, types, defaults, token addresses and exports: [`manifest/agents/catalog.json`](../../manifest/agents/catalog.json), from the nice-ux root:
 
-```tsx
-import { getToken, setTokens } from "@niceprototypes/styles"
-import Flex from "@niceprototypes/flex"
-
-// Every tree in the project
-setTokens({ tree: { activeColor: { base: getToken("color:success") } } })
-
-// One tree: reassign the token on a wrapper
-<Flex style={{ [getToken("tree.activeColor", { as: "key" })]: getToken("color:success") }}>
-  <Tree aria-label="Steps" items={items} />
-</Flex>
+```sh
+jq '.packages[]|select(.package=="@niceprototypes/tree")' manifest/agents/catalog.json
 ```
 
-## Tokens
+## License
 
-`tree.*` in `@niceprototypes/styles`: `color`, `activeColor`, `inactive.color`,
-`fontWeight` (`base`, `active`), `row.paddingBlock`, `icon.size`, `guide.color`, `guide.width`, `guide.arm`.
+MIT

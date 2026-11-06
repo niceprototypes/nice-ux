@@ -3,6 +3,12 @@
 Shared Vite configuration for apps that consume `@niceprototypes/*` packages, from npm or, in
 local mode, from a nice-ux checkout. Used by nice-browser through `@niceprototypes/config-crxjs`.
 
+## Install
+
+```sh
+pnpm add -D @niceprototypes/config-vite
+```
+
 ## Usage
 
 ```js
@@ -37,3 +43,7 @@ Local packages load the way their `package.json` points (their `dist/` builds to
 | Export | Purpose |
 |---|---|
 | `createNiceViteConfig({ appRoot, local? })` | The settings above, as a `UserConfig` to merge |
+
+## License
+
+MIT

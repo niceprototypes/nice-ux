@@ -3,6 +3,14 @@
 Shared Jest configuration for the `nice-*` ecosystem. Split out of
 `nice-configuration`.
 
+## Install
+
+Private to the nice-ux workspace:
+
+```json
+"devDependencies": { "@niceprototypes/config-jest": "workspace:^" }
+```
+
 ## Usage
 
 ```js
@@ -20,3 +28,7 @@ export { default } from "@niceprototypes/config-jest/react"
 Peer dependencies (`jest`, `ts-jest`, `jest-environment-jsdom`,
 `@testing-library/jest-dom`, `typescript`) are optional and provided by the
 consuming package. Add this package only to packages that actually have tests.
+
+## License
+
+MIT

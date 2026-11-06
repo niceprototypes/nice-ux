@@ -1,7 +1,33 @@
 # @niceprototypes/code
 
-> **Responsive props:** Every prop accepts per-breakpoint overrides via the `breakpoints` array. See [withBreakpoints](https://niceprototypes.com/ui/?path=/docs/basics-breakpoints--docs).
+## Install
 
-A syntax-highlighted code block component for React. Renders a code string as [Shiki](https://shiki.style) HTML coloured by the `code.syntaxColor` tokens (day/night via the `[data-theme]` cascade), with a copy icon (named "Copy {language}" for screen readers; Enter or Space copies too), click-to-copy, and a `maxHeight` collapse with a drag bar (a separator: drag it, or use the arrow keys, Home and End, to show between the cap and the full code). `inlined` renders a chip for code inside a line of text (`code.inline.paddingBlock` / `paddingInline`, in em) with a "Copy to clipboard" tooltip; with `copyOnClick` the chip is a button (Tab reaches it, Enter or Space copies, a focus ring shows). The `copyToClipboard(text)` service copies text the same way (trailing newline stripped). Part of the Nice Prototypes ecosystem.
+```sh
+pnpm add @niceprototypes/code
+```
 
-Documentation for this package has moved to **[Storybook](https://niceprototypes.com/ui/)**.
+Peer dependencies and app setup: [Build on Nice](../../manifest/agents/README.md).
+
+## Usage
+
+```tsx
+import { Code } from "@niceprototypes/code"
+```
+
+`Code` also takes `breakpoints`: breakpoint keys to partial props (`BreakpointOverride`, `packages/styles/src/react/services/withBreakpoints`).
+
+## Docs
+
+| Component | Storybook story |
+|---|---|
+| Code | `components-code--playground` |
+
+Storybook runs with `pnpm storybook` at the nice-ux root. Props, types, defaults, token addresses and exports: [`manifest/agents/catalog.json`](../../manifest/agents/catalog.json), from the nice-ux root:
+
+```sh
+jq '.packages[]|select(.package=="@niceprototypes/code")' manifest/agents/catalog.json
+```
+
+## License
+
+MIT

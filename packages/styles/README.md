@@ -2,7 +2,7 @@
 
 Design tokens for Nice Prototypes: JSON token sources compiled to CSS custom properties (`--np--…`), typed data, and one runtime store read through a single getter. Framework-agnostic; React bindings live in [@niceprototypes/styles](https://github.com/niceprototypes/nice-react-styles).
 
-## Installation
+## Install
 
 ```bash
 npm install @niceprototypes/styles

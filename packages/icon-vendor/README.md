@@ -2,7 +2,7 @@
 
 Vendor icon resolver for [@niceprototypes/icon](https://github.com/niceprototypes/nice-react-icon). Resolves names outside the built-in @niceprototypes/icon set to [Lucide](https://lucide.dev/icons/) icons, so `@niceprototypes/icon` itself never imports a third-party icon set.
 
-## Installation
+## Install
 
 ```bash
 npm install @niceprototypes/icon @niceprototypes/icon-vendor

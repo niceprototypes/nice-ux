@@ -3,6 +3,14 @@
 Shared TypeScript configuration for the `nice-*` ecosystem. Split out of
 `nice-configuration`.
 
+## Install
+
+Private to the nice-ux workspace:
+
+```json
+"devDependencies": { "@niceprototypes/config-typescript": "workspace:^" }
+```
+
 ## Usage
 
 ```json
@@ -26,3 +34,7 @@ Shared TypeScript configuration for the `nice-*` ecosystem. Split out of
 | `@niceprototypes/config-typescript/react` | `base` | `jsx: react-jsx` |
 
 `typescript` is an optional peer dependency provided by the consuming package.
+
+## License
+
+MIT

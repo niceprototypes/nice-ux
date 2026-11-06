@@ -4,6 +4,14 @@ The package export generator for the `nice-*` ecosystem — generates a componen
 package's `src/index.ts` from a declarative `package.exports.json`. Split out of
 `nice-configuration`.
 
+## Install
+
+Private to the nice-ux workspace:
+
+```json
+"devDependencies": { "@niceprototypes/config-exports": "workspace:^" }
+```
+
 ## Usage
 
 ```bash
@@ -34,3 +42,7 @@ Point `package.exports.json` at the schema:
 TypeScript source is compiled to `dist/` (`npm run build`). The built `dist/` is
 committed so consumers get the `nice-generate-exports` bin without a post-install
 build step (no `prepare` hook — see the ecosystem's forbidden-`prepare` rule).
+
+## License
+
+MIT

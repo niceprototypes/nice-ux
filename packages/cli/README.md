@@ -96,7 +96,7 @@ This is why you can have multiple versions of your own component libraries in `n
 2. **Enforcing peerDependencies** - Ensures React and friends are listed as peerDependencies so they use your app's versions
 3. **Simple CLI interface** - One command handles everything automatically
 
-## Installation
+## Install
 
 ### Global Installation (Recommended)
 

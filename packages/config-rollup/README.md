@@ -3,6 +3,14 @@
 Shared Rollup configuration factory for the `nice-*` ecosystem. Split out of
 `nice-configuration`.
 
+## Install
+
+Private to the nice-ux workspace:
+
+```json
+"devDependencies": { "@niceprototypes/config-rollup": "workspace:^" }
+```
+
 ## Usage
 
 ```js
@@ -49,3 +57,7 @@ bundle (`dist/index.d.ts`) is kept. A failed build writes nothing and prunes not
 ```sh
 npm test   # the prune, including a real build of a fixture with a stale declaration
 ```
+
+## License
+
+MIT

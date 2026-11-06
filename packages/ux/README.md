@@ -2,6 +2,16 @@
 
 Every Nice UI React package from one import.
 
+## Install
+
+```sh
+pnpm add @niceprototypes/ux
+```
+
+Peer dependencies and app setup: [Build on Nice](../../manifest/agents/README.md).
+
+## Usage
+
 ```tsx
 import { Button, Flex, Icon } from "@niceprototypes/ux"
 ```
@@ -20,3 +30,7 @@ import "@niceprototypes/icon-vendor"
 ```tsx
 <Icon name="TrendingDown" vendor />
 ```
+
+## License
+
+MIT

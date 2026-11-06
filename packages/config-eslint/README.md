@@ -3,6 +3,14 @@
 Shared ESLint configuration for the `nice-*` ecosystem (React + TypeScript +
 Prettier). Split out of the per-package `.eslintrc.cjs` files.
 
+## Install
+
+Private to the nice-ux workspace:
+
+```json
+"devDependencies": { "@niceprototypes/config-eslint": "workspace:^" }
+```
+
 ## Usage
 
 In `.eslintrc.cjs`:
@@ -47,3 +55,7 @@ against the shared config.
   requires the same rules, so they can't drift. The parser/plugins are
   `peerDependencies` the consumer installs (an ESLint 8 constraint: plugins
   resolve from the consuming project, not from a shared config's own tree).
+
+## License
+
+MIT

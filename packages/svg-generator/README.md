@@ -5,6 +5,12 @@ built-in `zlib` only). The first — and currently only — input type is **`ai`
 (Adobe Illustrator, read via its PDF representation); the converter registry is
 built so a second type can be added as one module.
 
+## Install
+
+```sh
+pnpm add -D @niceprototypes/svg-generator
+```
+
 ## Usage
 
 ```bash
@@ -49,3 +55,7 @@ presentation artifacts.
 
 Add `src/converters/{type}.js` exporting `types: ["{type}"]` and
 `convert(buffer) → svgString`, then register it in `src/converters/index.js`.
+
+## License
+
+MIT

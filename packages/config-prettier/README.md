@@ -2,6 +2,14 @@
 
 Shared Prettier configuration for the `nice-*` ecosystem.
 
+## Install
+
+Private to the nice-ux workspace:
+
+```json
+"devDependencies": { "@niceprototypes/config-prettier": "workspace:^" }
+```
+
 ## Usage
 
 In `package.json`:
@@ -13,3 +21,7 @@ In `package.json`:
 ```
 
 `prettier` is an optional peer dependency provided by the consuming package.
+
+## License
+
+MIT

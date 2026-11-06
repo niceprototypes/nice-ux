@@ -12,7 +12,11 @@ Order follows `../discipline/refactor-safety.md` (producer before consumer). Ref
 6. Exports: `package.exports.json`, then `pnpm --filter @niceprototypes/{name} generate-exports`.
 7. Wire consumers: `packages/ux` (dependency + `export *` line), `apps/storybook/package.json`.
 8. Playground story with every prop in Controls, plus UI tests: `storybook.md`.
-9. Changeset (`../publish/release.md`); regenerate the catalog (`node manifest/agents/scripts/generate-catalog.mjs`).
+9. Changeset (`../publish/release.md`); regenerate the catalog (root `pnpm build`, or `node manifest/agents/scripts/generate-catalog.mjs`).
+
+## README
+
+Every package README: `# {package name}`, `## Install`, `## Usage`, then sections the package needs, `## License` last. A component package's README is a pointer: the import line, `## Docs` with each component's Playground story id and the catalog `jq` line; no props, types, defaults or tokens (the catalog and the Playground hold them). Reference: `packages/card/README.md`.
 
 ## File Size and Decomposition
 
@@ -264,7 +268,7 @@ export const DEFAULT_SIZE = "base"
 - Co-located with the component file (e.g., `Button.types.ts` alongside `Button.tsx` in the component folder)
 - All prop types abstracted as `{Component}{PropName}Type` - never hardcode types like `boolean` or `string` directly in props
 - Uses declaration merging with default export for type namespace
-- Allowed prop values are not restated in READMEs: the generated `manifest/agents/catalog.json` (`agents/scripts/generate-catalog.mjs`) resolves each `{Component}Props` member's union; READMEs name the type alias and point to the catalog. Aliases imported from @niceprototypes/styles stay unresolved in the catalog (`@niceprototypes/styles/src/generated/types.ts`)
+- Allowed prop values are not restated in READMEs: the generated `manifest/agents/catalog.json` (`agents/scripts/generate-catalog.mjs`) resolves each `{Component}Props` member's union; READMEs point to the catalog. The catalog expands every alias that names a value set (literals, template literals, primitives), across packages; token unions from `@niceprototypes/styles/src/generated/types.ts` stay named and are listed under `tokenUnions`
 
 #### Type Naming Convention
 

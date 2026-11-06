@@ -35,6 +35,8 @@ const COMPONENT_DIRS = ["src/components", "src/react/components"]
 
 const readJson = path => JSON.parse(readFileSync(path, "utf8"))
 const isDirectory = path => existsSync(path) && statSync(path).isDirectory()
+/** Directory entries in code-point order, so output never depends on the file system's order. */
+const listDirectory = path => readdirSync(path).sort()
 const lowerFirst = value => value.charAt(0).toLowerCase() + value.slice(1)
 const sanitizeStoryId = value => value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "")
 
@@ -46,6 +48,125 @@ function readTokenUnions() {
   return unions
 }
 const tokenUnions = readTokenUnions()
+
+/** Parsed source files, each read once. */
+const parsedFiles = new Map()
+const parseFile = file => {
+  if (!parsedFiles.has(file)) parsedFiles.set(file, ts.createSourceFile(file, readFileSync(file, "utf8"), ts.ScriptTarget.Latest, true))
+  return parsedFiles.get(file)
+}
+
+/**
+ * Every top-level `type X = …` in packages/{p}/src (tests and the generated token types excluded):
+ * name → [{ file, directory, node }]. Imported aliases resolve through it (resolveValueAliases).
+ */
+function readAliasIndex() {
+  const index = new Map()
+  const tokenTypesPath = join(root, "packages", "styles", "src", "generated", "types.ts")
+  const walk = (directory, packageDirectory) => {
+    for (const entry of listDirectory(directory)) {
+      const path = join(directory, entry)
+      if (isDirectory(path)) walk(path, packageDirectory)
+      else if (/\.tsx?$/.test(entry) && !/\.(test|stories)\.tsx?$/.test(entry) && path !== tokenTypesPath) {
+        for (const node of parseFile(path).statements) {
+          if (!ts.isTypeAliasDeclaration(node) || node.typeParameters) continue
+          const entries = index.get(node.name.text) ?? []
+          entries.push({ file: path, directory: packageDirectory, node })
+          index.set(node.name.text, entries)
+        }
+      }
+    }
+  }
+  for (const directory of listDirectory(join(root, "packages"))) {
+    const source = join(root, "packages", directory, "src")
+    if (isDirectory(source)) walk(source, directory)
+  }
+  return index
+}
+const aliasIndex = readAliasIndex()
+
+/** `@niceprototypes/{x}` import source of `name` in `file`, as the package directory `x`. */
+function importedFrom(name, file) {
+  const sourceFile = parseFile(file)
+  for (const node of sourceFile.statements) {
+    if (!ts.isImportDeclaration(node) || !node.importClause?.namedBindings || !ts.isNamedImports(node.importClause.namedBindings)) continue
+    const specifier = node.moduleSpecifier.text
+    if (node.importClause.namedBindings.elements.some(element => element.name.text === name) && specifier.startsWith("@niceprototypes/")) {
+      return specifier.replace("@niceprototypes/", "").split("/")[0]
+    }
+  }
+  return null
+}
+
+/** The definition `name` refers to from `file`: same file, same package, the imported package, else the only one. */
+function findAlias(name, file) {
+  const entries = aliasIndex.get(name) ?? []
+  const directory = relative(packagesRoot, file).split("/")[0]
+  const imported = importedFrom(name, file)
+  return entries.find(entry => entry.file === file)
+    ?? entries.find(entry => entry.directory === directory)
+    ?? entries.find(entry => entry.directory === imported)
+    ?? (entries.length === 1 ? entries[0] : undefined)
+}
+
+/** Type nodes a value set is built from: literals, keywords, unions, template literals, tuples and named references. */
+const VALUE_KINDS = new Set([
+  ts.SyntaxKind.LiteralType, ts.SyntaxKind.UnionType, ts.SyntaxKind.IntersectionType, ts.SyntaxKind.ParenthesizedType,
+  ts.SyntaxKind.TemplateLiteralType, ts.SyntaxKind.TemplateLiteralTypeSpan, ts.SyntaxKind.TemplateHead,
+  ts.SyntaxKind.TemplateMiddle, ts.SyntaxKind.TemplateTail, ts.SyntaxKind.TupleType, ts.SyntaxKind.NamedTupleMember,
+  ts.SyntaxKind.ArrayType, ts.SyntaxKind.Identifier, ts.SyntaxKind.StringKeyword, ts.SyntaxKind.NumberKeyword,
+  ts.SyntaxKind.BooleanKeyword, ts.SyntaxKind.NullKeyword, ts.SyntaxKind.UndefinedKeyword, ts.SyntaxKind.StringLiteral,
+  ts.SyntaxKind.NumericLiteral, ts.SyntaxKind.TrueKeyword, ts.SyntaxKind.FalseKeyword, ts.SyntaxKind.TypeReference,
+])
+/** Parents in which an inserted union needs parentheses. */
+const BINDING_PARENTS = new Set([ts.SyntaxKind.ArrayType, ts.SyntaxKind.IntersectionType, ts.SyntaxKind.TypeOperator, ts.SyntaxKind.IndexedAccessType])
+
+/**
+ * Expands, in a type's text, every reference to an alias that names a value set (`AlignType` →
+ * `"left" | "center" | …`), following imports across packages. Token unions stay named (they are
+ * listed under `tokenUnions`); references to objects, functions, generics and interfaces stay as written.
+ * @param text - type text as written in `file`
+ * @param file - the file the text comes from, for name resolution
+ * @param seen - alias names being expanded, against cycles
+ * @returns the expanded text
+ */
+function resolveValueAliases(text, file, seen = new Set()) {
+  const sourceFile = ts.createSourceFile("value.ts", `type Value = ${text}`, ts.ScriptTarget.Latest, true)
+  const replacements = []
+  const visit = node => {
+    if (ts.isTypeReferenceNode(node) && ts.isIdentifier(node.typeName) && !node.typeArguments) {
+      const expansion = expandAlias(node.typeName.text, file, seen)
+      if (expansion !== null) {
+        const wrap = /[|&]/.test(expansion) && BINDING_PARENTS.has(node.parent.kind)
+        replacements.push({ start: node.getStart(sourceFile), end: node.getEnd(), text: wrap ? `(${expansion})` : expansion })
+      }
+      return
+    }
+    ts.forEachChild(node, visit)
+  }
+  visit(sourceFile.statements[0].type)
+  let result = sourceFile.text
+  for (const { start, end, text: replacement } of replacements.reverse()) result = result.slice(0, start) + replacement + result.slice(end)
+  // A union written one member per line keeps its leading `|`
+  return result.slice("type Value = ".length).replace(/^\|\s*/, "")
+}
+
+/** The expanded body of alias `name` seen from `file` when it is a value set, else null. */
+function expandAlias(name, file, seen) {
+  if (tokenUnions.has(name) || seen.has(name)) return null
+  const alias = findAlias(name, file)
+  if (!alias) return null
+  let isValueSet = true
+  const check = node => {
+    if (!VALUE_KINDS.has(node.kind) && !(ts.isTypeLiteralNode(node) && node.members.length === 0)) isValueSet = false
+    else if (ts.isTypeReferenceNode(node) && (node.typeArguments || !ts.isIdentifier(node.typeName))) isValueSet = false
+    else ts.forEachChild(node, check)
+  }
+  check(alias.node.type)
+  if (!isValueSet) return null
+  const body = alias.node.type.getText(alias.node.getSourceFile()).replace(/\s+/g, " ")
+  return resolveValueAliases(body, alias.file, new Set([...seen, name]))
+}
 
 /** First JSDoc paragraph and @default of a node. */
 function readJsDoc(node, sourceFile) {
@@ -108,12 +229,11 @@ function readPropsFile(typesPath, componentName) {
     .map(member => {
       const name = member.name.getText(sourceFile).replace(/^["']|["']$/g, "")
       const type = member.type ? member.type.getText(sourceFile).replace(/\s+/g, " ") : "unknown"
+      // `type` = what to pass: a local alias is expanded one level, then every value-set alias inside it
       const local = aliases.get(type)?.replace(/\s+/g, " ")
-      // `type` = what to pass: a token union name (SizeType) stays named; any other alias is expanded
-      const shown = local && !tokenUnions.has(local) ? local : (local ?? type)
       return {
         name,
-        type: shown,
+        type: resolveValueAliases(local ?? type, typesPath),
         ...(member.questionToken ? {} : { required: true }),
         ...readJsDoc(member, sourceFile),
       }
@@ -170,7 +290,7 @@ function readStories() {
   const playgrounds = []
   const walk = directory => {
     if (!isDirectory(directory)) return
-    for (const entry of readdirSync(directory)) {
+    for (const entry of listDirectory(directory)) {
       const path = join(directory, entry)
       if (isDirectory(path)) walk(path)
       else if (entry.endsWith(".mdx")) {
@@ -206,16 +326,15 @@ function readExports(indexPath) {
 }
 
 const packagesRoot = join(root, "packages")
-const packages = readdirSync(packagesRoot)
+const packages = listDirectory(packagesRoot)
   .filter(directory => !directory.startsWith("storybook-") && existsSync(join(packagesRoot, directory, "package.json")))
-  .sort()
   .map(directory => {
     const packageRoot = join(packagesRoot, directory)
     const manifest = readJson(join(packageRoot, "package.json"))
     const components = COMPONENT_DIRS.flatMap(componentDir => {
       const componentsRoot = join(packageRoot, componentDir)
       if (!isDirectory(componentsRoot)) return []
-      return readdirSync(componentsRoot)
+      return listDirectory(componentsRoot)
         .filter(name => existsSync(join(componentsRoot, name, `${name}.types.ts`)))
         .map(name => {
           const typesPath = join(componentsRoot, name, `${name}.types.ts`)
@@ -260,7 +379,6 @@ const usedUnions = [...tokenUnions.keys()].filter(name => allComponents.some(com
 
 const catalog = {
   $comment: "GENERATED by manifest/agents/scripts/generate-catalog.mjs; do not edit. Query with jq; never read whole.",
-  generatedAt: new Date().toISOString(),
   storybook: { local: "http://localhost:6006/?path=/docs/", deployed: "https://niceprototypes.com/ui/?path=/docs/" },
   commonProps: "className style ref id data-testid aria-*",
   tokenAddressFormat: 'getToken("{prefix}.{group.path}:{variant}") from @niceprototypes/styles',

@@ -1,9 +1,6 @@
-# nice-vite-watcher
+# @niceprototypes/vite-watcher
 
 **Hot-reload linked npm packages in Vite** — automatically detect changes in linked package dist folders and trigger browser reload.
-
-[![npm version](https://img.shields.io/npm/v/nice-vite-watcher.svg)](https://www.npmjs.com/package/nice-vite-watcher)
-[![license](https://img.shields.io/npm/l/nice-vite-watcher.svg)](https://github.com/niceprototypes/nice-vite-watcher/blob/main/LICENSE)
 
 ## The Problem
 
@@ -31,10 +28,12 @@ This plugin fills a specific gap: **watching the `dist` folder of linked package
 
 It works alongside source aliases — use source aliases for simple packages (true HMR), and this plugin for packages with build transforms.
 
-## Installation
+## Install
 
-```bash
-npm install -D nice-vite-watcher
+Private to the nice-ux workspace:
+
+```json
+"devDependencies": { "@niceprototypes/vite-watcher": "workspace:^" }
 ```
 
 ## Quick Start
@@ -42,7 +41,7 @@ npm install -D nice-vite-watcher
 ```typescript
 // vite.config.ts
 import { defineConfig } from 'vite'
-import { viteWatcher } from 'nice-vite-watcher'
+import { viteWatcher } from '@niceprototypes/vite-watcher'
 
 export default defineConfig({
   plugins: [
@@ -64,7 +63,7 @@ For the best development experience, use **source aliases** for packages without
 ```typescript
 // vite.config.ts
 import { defineConfig } from 'vite'
-import { viteWatcher, getSourceAliases } from 'nice-vite-watcher'
+import { viteWatcher, getSourceAliases } from '@niceprototypes/vite-watcher'
 
 // All your linked packages
 const linkedPackages = {
@@ -177,7 +176,7 @@ Works great with Storybook's Vite builder:
 
 ```typescript
 // .storybook/main.ts
-import { viteWatcher, getSourceAliases } from 'nice-vite-watcher'
+import { viteWatcher, getSourceAliases } from '@niceprototypes/vite-watcher'
 
 const config: StorybookConfig = {
   // ...

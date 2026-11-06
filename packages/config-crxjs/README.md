@@ -3,6 +3,12 @@
 Vite + CRXJS configuration for Chrome extensions that consume `@niceprototypes/*` packages. Builds on
 `@niceprototypes/config-vite`. Used by nice-browser (`~/nice/browser/chrome`).
 
+## Install
+
+```sh
+pnpm add -D @niceprototypes/config-crxjs
+```
+
 ## Usage
 
 ```ts
@@ -43,3 +49,7 @@ looks for `@vitejs/plugin-react` there to add React's preamble to content script
 |---|---|
 | `createExtensionConfig({ appRoot, local?, root, outDir, port, corsOrigins?, pages?, plugins? })` | Full Vite config for one extension; `local` = a nice-ux checkout (config-vite's local mode) |
 | `niceCrxjs()` | The plugin alone |
+
+## License
+
+MIT
