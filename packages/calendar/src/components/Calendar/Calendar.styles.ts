@@ -67,8 +67,7 @@ export const StyledCalendarCell = styled.td<{ $size: SizeType }>`
 /**
  * Native day button. States map onto calendar.* colour tokens: today gets the
  * today colour and border, selected the selected fill, disabled the disabled
- * colour. The keyboard focus ring uses the today colour (the link colour, as
- * Button's ring does).
+ * colour. The keyboard focus ring reads the calendar.focusRing tokens.
  */
 export const StyledCalendarDay = styled.button.withConfig({
   shouldForwardProp: (prop) => !prop.startsWith("$"),
@@ -86,8 +85,8 @@ export const StyledCalendarDay = styled.button.withConfig({
   font: inherit;
   line-height: 1;
   border-style: solid;
-  border-width: ${getToken("borderWidth", "base")};
-  border-radius: ${getToken("borderRadius", "base")};
+  border-width: ${getToken("calendar.borderWidth:base")};
+  border-radius: ${getToken("calendar.borderRadius:base")};
   outline: none;
   -webkit-tap-highlight-color: transparent;
   cursor: ${({ $disabled }) => ($disabled ? "not-allowed" : "pointer")};
@@ -98,7 +97,7 @@ export const StyledCalendarDay = styled.button.withConfig({
     getToken(`calendar.color:${$disabled ? "disabled" : $selected ? "selected" : $today ? "today" : "base"}`)};
 
   &:focus-visible {
-    outline: ${getToken("borderWidth", "large")} solid ${getToken("calendar.color:today")};
-    outline-offset: ${getToken("borderWidth", "base")};
+    outline: ${getToken("calendar.focusRing.width:base")} solid ${getToken("calendar.focusRing.color:base")};
+    outline-offset: ${getToken("calendar.focusRing.offset:base")};
   }
 `

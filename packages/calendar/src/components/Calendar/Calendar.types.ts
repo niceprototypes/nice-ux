@@ -109,6 +109,20 @@ export type CalendarThemeType = ThemeType
 export type CalendarAriaLabelType = string
 
 /**
+ * CalendarPreviousMonthLabelType
+ *
+ * Accessible name of the previous-month button, in the calendar's language.
+ */
+export type CalendarPreviousMonthLabelType = string
+
+/**
+ * CalendarNextMonthLabelType
+ *
+ * Accessible name of the next-month button, in the calendar's language.
+ */
+export type CalendarNextMonthLabelType = string
+
+/**
  * CalendarClassNameType
  *
  * CSS class name applied to the root element.
@@ -148,6 +162,10 @@ export interface CalendarProps {
   size?: CalendarSizeType
   /** Accessible name of the calendar group */
   "aria-label"?: CalendarAriaLabelType
+  /** Accessible name of the previous-month button @default "Previous month" */
+  previousMonthLabel?: CalendarPreviousMonthLabelType
+  /** Accessible name of the next-month button @default "Next month" */
+  nextMonthLabel?: CalendarNextMonthLabelType
   /** CSS class name applied to the root element */
   className?: CalendarClassNameType
   /** Pin token resolution to a specific theme */
@@ -172,6 +190,8 @@ namespace CalendarTypes {
   export type Size = CalendarSizeType
   export type Theme = CalendarThemeType
   export type AriaLabel = CalendarAriaLabelType
+  export type PreviousMonthLabel = CalendarPreviousMonthLabelType
+  export type NextMonthLabel = CalendarNextMonthLabelType
   export type ClassName = CalendarClassNameType
   export type Ref = CalendarRefType
   export type Props = CalendarProps

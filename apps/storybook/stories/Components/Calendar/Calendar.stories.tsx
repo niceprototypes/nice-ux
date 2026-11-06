@@ -90,6 +90,8 @@ export const Playground: Story = {
     isDateDisabled: NONE,
     locale: "en-US",
     size: "base",
+    previousMonthLabel: "Previous month",
+    nextMonthLabel: "Next month",
   },
   argTypes: {
     controlled: { control: "boolean", table: { category: "State" } },
@@ -103,6 +105,8 @@ export const Playground: Story = {
     size: select(SIZE_OPTIONS, "Appearance"),
     theme: optionalSelect(THEME_OPTIONS, "Appearance"),
     "aria-label": { control: "text", table: { category: "Accessibility" } },
+    previousMonthLabel: { control: "text", table: { category: "Accessibility" } },
+    nextMonthLabel: { control: "text", table: { category: "Accessibility" } },
     onChange: { table: { category: "Events" } },
     ref: HIDDEN,
     className: HIDDEN,
@@ -177,7 +181,17 @@ export const Keyboard: Story = {
     const canvas = within(canvasElement)
     canvas.getByRole("button", { name: "Thursday, October 15, 2026" }).focus()
     await userEvent.keyboard("{ArrowRight}")
-    await expect(canvas.getByRole("button", { name: "Friday, October 16, 2026" })).toHaveFocus()
+    const friday = canvas.getByRole("button", { name: "Friday, October 16, 2026" })
+    await expect(friday).toHaveFocus()
+    // The keyboard focus ring reads the calendar.focusRing tokens.
+    const probe = document.createElement("div")
+    probe.style.outline = `${getToken("calendar.focusRing.width:base")} solid ${getToken("calendar.focusRing.color:base")}`
+    probe.style.outlineOffset = getToken("calendar.focusRing.offset:base")
+    canvasElement.appendChild(probe)
+    const ring = getComputedStyle(friday)
+    const expected = getComputedStyle(probe)
+    await expect([ring.outlineWidth, ring.outlineColor, ring.outlineOffset]).toEqual([expected.outlineWidth, expected.outlineColor, expected.outlineOffset])
+    probe.remove()
     await userEvent.keyboard("{ArrowDown}")
     await expect(canvas.getByRole("button", { name: "Friday, October 23, 2026" })).toHaveFocus()
     await userEvent.keyboard("{PageDown}")
@@ -220,12 +234,15 @@ export const IsDateDisabled: Story = {
 
 export const Locale: Story = {
   ...Playground,
-  args: { ...Playground.args, locale: "de-DE" },
+  args: { ...Playground.args, locale: "de-DE", previousMonthLabel: "Vorheriger Monat", nextMonthLabel: "Nächster Monat" },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
     await expect(canvas.getByRole("grid", { name: "Oktober 2026" })).toBeInTheDocument()
     // de-DE weeks start on Monday.
     await expect(canvas.getAllByRole("columnheader")[0]).toHaveAttribute("aria-label", "Montag")
+    // The month buttons take their names from the label props.
+    await expect(canvas.getByRole("button", { name: "Vorheriger Monat" })).toBeInTheDocument()
+    await expect(canvas.getByRole("button", { name: "Nächster Monat" })).toBeInTheDocument()
   },
 }
 

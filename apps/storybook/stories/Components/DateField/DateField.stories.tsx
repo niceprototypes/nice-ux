@@ -2,8 +2,9 @@ import { useEffect, useState } from "react"
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { useArgs } from "storybook/preview-api"
 import { expect, fn, waitFor, within } from "storybook/test"
-import { themeTokensData } from "@niceprototypes/styles"
+import { getToken, themeTokensData } from "@niceprototypes/styles"
 import type { BackgroundColorType, BorderColorType, BorderWidthType, SizeType } from "@niceprototypes/styles"
+import { Field } from "@niceprototypes/field"
 import Icon from "@niceprototypes/icon"
 import { DateField } from "@niceprototypes/calendar"
 import type { CalendarDateType, DateFieldProps } from "@niceprototypes/calendar"
@@ -135,7 +136,6 @@ export const Playground: Story = {
     locale: "en-US",
     start: NONE,
     size: "base",
-    status: "base",
     disabled: false,
     required: false,
     filled: false,
@@ -146,6 +146,9 @@ export const Playground: Story = {
     borderWidth: "base",
     backgroundColorTheme: NONE,
     borderColorTheme: NONE,
+    triggerLabel: "Choose date",
+    previousMonthLabel: "Previous month",
+    nextMonthLabel: "Next month",
   },
   argTypes: {
     controlled: { control: "boolean", table: { category: "State" } },
@@ -164,7 +167,7 @@ export const Playground: Story = {
     start: select(Object.keys(START_PRESETS), "Content"),
 
     size: select(SIZE_OPTIONS, "Appearance"),
-    status: select(STATUS_OPTIONS, "Appearance"),
+    status: optionalSelect(STATUS_OPTIONS, "Appearance"),
     filled: { control: "boolean", table: { category: "Appearance" } },
     width: optionalSelect(WIDTH_OPTIONS, "Appearance"),
     theme: optionalSelect(THEME_OPTIONS, "Appearance"),
@@ -189,21 +192,15 @@ export const Playground: Story = {
     dir: optionalSelect(["ltr", "rtl", "auto"], "Element"),
     "aria-label": { control: "text", table: { category: "Accessibility" } },
     "aria-describedby": { control: "text", table: { category: "Accessibility" } },
+    triggerLabel: { control: "text", table: { category: "Accessibility" } },
+    previousMonthLabel: { control: "text", table: { category: "Accessibility" } },
+    nextMonthLabel: { control: "text", table: { category: "Accessibility" } },
 
     onChange: { table: { category: "Events" } },
     onFocus: { table: { category: "Events" } },
     onBlur: { table: { category: "Events" } },
     onKeyDown: { table: { category: "Events" } },
 
-    // Accepted by the type, but overridden (readOnly) or meaningless on a read-only picker.
-    readOnly: HIDDEN,
-    maxLength: HIDDEN,
-    minLength: HIDDEN,
-    pattern: HIDDEN,
-    inputMode: HIDDEN,
-    enterKeyHint: HIDDEN,
-    spellCheck: HIDDEN,
-    dirName: HIDDEN,
     role: HIDDEN,
     "aria-expanded": HIDDEN,
     "aria-controls": HIDDEN,
@@ -375,5 +372,39 @@ export const Required: Story = {
     const input = within(canvasElement).getByRole("textbox")
     await expect(input).toBeRequired()
     await expect(input).toHaveAttribute("id", "start-date")
+  },
+}
+
+export const InvalidField: Story = {
+  ...Playground,
+  decorators: [
+    Story => (
+      <Field label="Start date" invalid error="Pick a start date">
+        <Story />
+      </Field>
+    ),
+  ],
+  args: { ...Playground.args, "aria-label": undefined },
+  play: async ({ canvasElement }) => {
+    // With no status set, the invalid Field's error status reaches the input.
+    const input = within(canvasElement).getByRole("textbox", { name: "Start date" })
+    await expect(input).toHaveAttribute("aria-invalid", "true")
+    await expect(within(canvasElement).getByText("Pick a start date")).toBeInTheDocument()
+    const probe = document.createElement("div")
+    probe.style.borderColor = getToken("input.borderColor:error")
+    canvasElement.appendChild(probe)
+    await expect(getComputedStyle(input.parentElement!).borderTopColor).toBe(getComputedStyle(probe).borderTopColor)
+    probe.remove()
+  },
+}
+
+export const Labels: Story = {
+  ...Playground,
+  args: { ...Playground.args, locale: "de-DE", triggerLabel: "Datum wählen", previousMonthLabel: "Vorheriger Monat", nextMonthLabel: "Nächster Monat" },
+  play: async ({ canvasElement, userEvent }) => {
+    await userEvent.click(within(canvasElement).getByRole("button", { name: "Datum wählen" }))
+    const dialog = within(await within(document.body).findByRole("dialog", { name: "Datum wählen" }))
+    await expect(await dialog.findByRole("button", { name: "Vorheriger Monat" })).toBeInTheDocument()
+    await expect(dialog.getByRole("button", { name: "Nächster Monat" })).toBeInTheDocument()
   },
 }

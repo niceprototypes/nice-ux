@@ -73,6 +73,16 @@ describe("Calendar", () => {
       expect(columnHeaders()).toHaveLength(7)
     })
 
+    it("names the month buttons in English by default and from the label props", () => {
+      const { unmount } = render(<Calendar locale="en-US" />)
+      expect(screen.getByRole("button", { name: "Previous month" })).toBeInTheDocument()
+      expect(screen.getByRole("button", { name: "Next month" })).toBeInTheDocument()
+      unmount()
+      render(<Calendar locale="de-DE" previousMonthLabel="Vorheriger Monat" nextMonthLabel="Nächster Monat" />)
+      expect(screen.getByRole("button", { name: "Vorheriger Monat" })).toBeInTheDocument()
+      expect(screen.getByRole("button", { name: "Nächster Monat" })).toBeInTheDocument()
+    })
+
     it("marks today with aria-current=date", () => {
       render(<Calendar locale="en-US" />)
       expect(day("2026-09-24")).toHaveAttribute("aria-current", "date")

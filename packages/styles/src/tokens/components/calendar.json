@@ -26,6 +26,23 @@
   "borderColor": {
     "today": "var(--np--border-color--link)"
   },
+  "borderWidth": {
+    "base": "var(--np--border-width)"
+  },
+  "borderRadius": {
+    "base": "var(--np--border-radius)"
+  },
+  "focusRing": {
+    "width": {
+      "base": "var(--np--focus-ring--width)"
+    },
+    "color": {
+      "base": "var(--np--focus-ring--color)"
+    },
+    "offset": {
+      "base": "var(--np--border-width)"
+    }
+  },
   "$themes": {
     "night": {}
   }

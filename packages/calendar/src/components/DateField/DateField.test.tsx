@@ -157,6 +157,43 @@ describe("DateField", () => {
     expect(document.getElementById(describedBy)).toHaveTextContent("First day of the booking")
   })
 
+  it("shows the error status inside an invalid Field", () => {
+    const chromeClass = (element: React.ReactElement) => {
+      const { container, unmount } = render(element)
+      const className = container.querySelector(".chrome")!.className
+      unmount()
+      return className
+    }
+    const errorClass = chromeClass(<DateField status="error" className="chrome" locale="en-US" aria-label="Start" />)
+    const baseClass = chromeClass(<DateField className="chrome" locale="en-US" aria-label="Start" />)
+    const invalidClass = chromeClass(
+      <Field label="Start date" invalid error="Pick a date">
+        <DateField className="chrome" locale="en-US" />
+      </Field>
+    )
+    expect(invalidClass).toBe(errorClass)
+    expect(invalidClass).not.toBe(baseClass)
+  })
+
+  it("names the trigger, popover and month buttons from the label props", () => {
+    render(
+      <DateField
+        locale="de-DE"
+        aria-label="Start"
+        triggerLabel="Datum wählen"
+        previousMonthLabel="Vorheriger Monat"
+        nextMonthLabel="Nächster Monat"
+      />
+    )
+    const button = screen.getByRole("button", { name: "Datum wählen" })
+    fireEvent.pointerDown(button)
+    fireEvent.click(button)
+    flushFrame()
+    expect(screen.getByRole("dialog", { name: "Datum wählen" })).toBeInTheDocument()
+    expect(screen.getByRole("button", { name: "Vorheriger Monat" })).toBeInTheDocument()
+    expect(screen.getByRole("button", { name: "Nächster Monat" })).toBeInTheDocument()
+  })
+
   it("forwards ref to the native input and className to the chrome", () => {
     const ref = React.createRef<HTMLInputElement>()
     const { container } = render(

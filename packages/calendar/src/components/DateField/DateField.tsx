@@ -10,8 +10,6 @@ import { Calendar } from "../Calendar"
 import { isoToUtcDate } from "../../utilities/isoToUtcDate"
 import { parseIsoDate } from "../../utilities/parseIsoDate"
 
-const TRIGGER_LABEL = "Choose date"
-
 /**
  * DateField
  *
@@ -46,8 +44,11 @@ const DateField: React.FC<DateFieldProps> = ({
   name,
   ref,
   size = "base",
-  status = "base",
+  status,
   theme,
+  triggerLabel = "Choose date",
+  previousMonthLabel,
+  nextMonthLabel,
   ...inputProps
 }) => {
   const { locale: contextLocale } = useLocale()
@@ -106,7 +107,7 @@ const DateField: React.FC<DateFieldProps> = ({
     <>
       <StyledDateFieldTrigger
         type="button"
-        aria-label={TRIGGER_LABEL}
+        aria-label={triggerLabel}
         aria-haspopup="dialog"
         aria-expanded={open}
         aria-controls={open ? popoverId : undefined}
@@ -147,7 +148,7 @@ const DateField: React.FC<DateFieldProps> = ({
         anchorRef={controlRef}
         id={popoverId}
         ref={popoverRef}
-        aria-label={TRIGGER_LABEL}
+        aria-label={triggerLabel}
         theme={theme}
       >
         <Calendar
@@ -158,6 +159,8 @@ const DateField: React.FC<DateFieldProps> = ({
           isDateDisabled={isDateDisabled}
           locale={locale}
           size={size}
+          previousMonthLabel={previousMonthLabel}
+          nextMonthLabel={nextMonthLabel}
         />
       </Popover>
     </>

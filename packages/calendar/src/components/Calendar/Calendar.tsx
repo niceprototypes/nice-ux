@@ -68,6 +68,8 @@ const Calendar: React.FC<CalendarProps> = ({
   firstDayOfWeek,
   size = "base",
   "aria-label": ariaLabel,
+  previousMonthLabel = "Previous month",
+  nextMonthLabel = "Next month",
   className,
   theme,
   ref,
@@ -241,7 +243,7 @@ const Calendar: React.FC<CalendarProps> = ({
       <StyledCalendarHeader>
         <Button
           iconLeft={rtl ? "carat-right" : "carat-left"}
-          aria-label="Previous month"
+          aria-label={previousMonthLabel}
           size={size}
           status={previousDisabled ? "disabled" : "base"}
           onClick={() => goToMonth(-1)}
@@ -251,7 +253,7 @@ const Calendar: React.FC<CalendarProps> = ({
         </StyledCalendarHeading>
         <Button
           iconLeft={rtl ? "carat-left" : "carat-right"}
-          aria-label="Next month"
+          aria-label={nextMonthLabel}
           size={size}
           status={nextDisabled ? "disabled" : "base"}
           onClick={() => goToMonth(1)}
