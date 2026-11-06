@@ -80,13 +80,16 @@ export function themePinBlock(theme: string, body: string[]): string[] {
  * The pin bodies reuse the depth-2 media lines (the generated CSS has always
  * indented them that way).
  *
+ * Night applies on screen only: the OS-preference block and the night pin sit in
+ * `screen` media, so print always renders the day values.
+ *
  * @param nightBody - Reassignments of semantic vars to their `--night` primitives
  * @param dayBody - The matching reassignments to their `--day` primitives
  */
 export function themeBlocks(nightBody: string[], dayBody: string[]): string[] {
   if (nightBody.length === 0) return []
   return [
-    ...mediaBlock('@media (prefers-color-scheme: dark)', nightBody),
+    ...mediaBlock('@media screen and (prefers-color-scheme: dark)', nightBody),
     '',
     '[data-theme="day"] {',
     '\tcolor-scheme: light;',
@@ -94,10 +97,12 @@ export function themeBlocks(nightBody: string[], dayBody: string[]): string[] {
     ...dayBody,
     '}',
     '',
-    '[data-theme="night"] {',
-    '\tcolor-scheme: dark;',
-    THEME_TEXT_COLOR,
+    '@media screen {',
+    '\t[data-theme="night"] {',
+    '\t\tcolor-scheme: dark;',
+    `\t${THEME_TEXT_COLOR}`,
     ...nightBody,
+    '\t}',
     '}',
   ]
 }

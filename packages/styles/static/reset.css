@@ -33,6 +33,14 @@
 	color-scheme: light dark;
 }
 
+/* printColorScheme — Print native controls in the light scheme, matching the
+   day token values tokens.css applies in print */
+@media print {
+	:root {
+		color-scheme: light;
+	}
+}
+
 /* printColorExact — Print colours and backgrounds as set (Chrome's default
    "economy" darkens light text and drops backgrounds) */
 :root {

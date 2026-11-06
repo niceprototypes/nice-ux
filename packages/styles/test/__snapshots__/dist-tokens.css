@@ -1441,7 +1441,7 @@
 	}
 }
 
-@media (prefers-color-scheme: dark) {
+@media screen and (prefers-color-scheme: dark) {
 	:root {
 		--np--background-color: var(--np--background-color--night);
 		--np--background-color--raised: var(--np--background-color--raised--night);
@@ -2601,9 +2601,10 @@
 		--np--tree--guide--color: var(--np--border-color--day);
 }
 
-[data-theme="night"] {
-	color-scheme: dark;
-	color: var(--np--color);
+@media screen {
+	[data-theme="night"] {
+		color-scheme: dark;
+		color: var(--np--color);
 		--np--background-color: var(--np--background-color--night);
 		--np--background-color--raised: var(--np--background-color--raised--night);
 		--np--background-color--sunken: var(--np--background-color--sunken--night);
@@ -3179,4 +3180,5 @@
 		--np--tree--active-color: var(--np--color--link--night);
 		--np--tree--inactive--color: var(--np--color--lighter--night);
 		--np--tree--guide--color: var(--np--border-color--night);
+	}
 }

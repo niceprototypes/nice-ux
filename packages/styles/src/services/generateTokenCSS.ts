@@ -8,7 +8,8 @@
  *
  * - `:root` — semantic vars plus stable primitives (`--day`, `--night`, extra themes).
  * - Breakpoint `@media` blocks for breakpoint values.
- * - `@media (prefers-color-scheme: dark)` plus `[data-theme="day"|"night"]` pins,
+ * - `@media screen and (prefers-color-scheme: dark)` plus `[data-theme="day"|"night"]` pins
+ *   (night on screen only),
  *   and a `[data-theme="{name}"]` pin per extra theme — so runtime themed tokens
  *   follow the OS preference, `<Theme>`, and `applyTheme` like generated ones.
  *
@@ -26,8 +27,8 @@
  * @example
  * generateTokenCSS({ brandColor: { primary: { day: "#000", night: "#fff" } } })
  * // :root { --np--brand-color--primary: #000; --np--brand-color--primary--day: #000; --np--brand-color--primary--night: #fff; }
- * // @media (prefers-color-scheme: dark) { :root { --np--brand-color--primary: var(--np--brand-color--primary--night); } }
- * // [data-theme="day"] { … }  [data-theme="night"] { … }
+ * // @media screen and (prefers-color-scheme: dark) { :root { --np--brand-color--primary: var(--np--brand-color--primary--night); } }
+ * // [data-theme="day"] { … }  @media screen { [data-theme="night"] { … } }
  *
  * @param tokenMap - Token map. Top-level keys may include:
  *   - `breakpoints` — breakpoint thresholds (see above).

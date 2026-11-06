@@ -1,7 +1,7 @@
 /**
  * Extra theme CSS emitter — every named theme other than `night`.
  *
- * `night` is the one theme mapped to `@media (prefers-color-scheme: dark)`
+ * `night` is the one theme mapped to `@media screen and (prefers-color-scheme: dark)`
  * (`coreTokenCss.ts`, `componentTokenCss.ts`). Any other theme under a `$themes`
  * key (e.g. `sepia`) is pin-only: it activates solely through
  * `[data-theme="{theme}"]`, which `<Theme>` and `applyTheme` set for any name.

@@ -22,8 +22,8 @@
  *   /* Component extra theme primitives *\/
  * }
  * @media (min-width: …) { :root { … } }                core, component, then alias breakpoint blocks
- * @media (prefers-color-scheme: dark) { :root { … } }  night reassignments
- * [data-theme="day"] { … }  [data-theme="night"] { … }  pins
+ * @media screen and (prefers-color-scheme: dark) { :root { … } }  night reassignments
+ * [data-theme="day"] { … }  @media screen { [data-theme="night"] { … } }  pins
  * [data-theme="{theme}"] { … }                         extra theme pins: core, component, alias
  * ```
  *
