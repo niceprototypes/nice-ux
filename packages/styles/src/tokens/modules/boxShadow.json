@@ -1,4 +1,7 @@
 {
-  "base": "0 1px 4px hsla(0, 0%, 0%, 0.075)",
-  "large": "0 2px 8px hsla(0, 0%, 0%, 0.1)"
+  "base": "var(--np--box-shadow--raised)",
+  "large": "var(--np--box-shadow--overlay)",
+  "sunken": "inset 0 1px 2px hsla(0, 0%, 0%, 0.075)",
+  "raised": "0 1px 4px hsla(0, 0%, 0%, 0.075)",
+  "overlay": "0 2px 8px hsla(0, 0%, 0%, 0.1)"
 }

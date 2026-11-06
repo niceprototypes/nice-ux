@@ -39,7 +39,7 @@
     }
   },
   "disabledOpacity": {
-    "base": "0.5"
+    "base": "var(--np--opacity--disabled)"
   },
   "focusRing": {
     "width": {

@@ -2,6 +2,8 @@
   "backgroundColor": {
     "base": "var(--np--background-color)",
     "raised": "var(--np--background-color--raised)",
+    "sunken": "var(--np--background-color--sunken)",
+    "overlay": "var(--np--background-color--overlay)",
     "success": "var(--np--background-color--success)",
     "highlight": "var(--np--background-color--highlight)",
     "warning": "var(--np--background-color--warning)",

@@ -224,6 +224,23 @@ const componentTokensData: ComponentTokensData = {
     },
     "borderColor": {
       "today": "var(--np--border-color--link)"
+    },
+    "borderWidth": {
+      "base": "var(--np--border-width)"
+    },
+    "borderRadius": {
+      "base": "var(--np--border-radius)"
+    },
+    "focusRing": {
+      "width": {
+        "base": "var(--np--border-width--large)"
+      },
+      "color": {
+        "base": "var(--np--color--link)"
+      },
+      "offset": {
+        "base": "var(--np--border-width)"
+      }
     }
   },
   "card": {
@@ -252,7 +269,7 @@ const componentTokensData: ComponentTokensData = {
       "base": "var(--np--border-radius--large)"
     },
     "boxShadow": {
-      "elevated": "var(--np--box-shadow)",
+      "elevated": "var(--np--box-shadow--raised)",
       "hover": "var(--np--box-shadow--large)"
     },
     "padding": {
@@ -273,7 +290,7 @@ const componentTokensData: ComponentTokensData = {
       }
     },
     "disabledOpacity": {
-      "base": "0.5"
+      "base": "var(--np--opacity--disabled)"
     }
   },
   "chat": {
@@ -352,7 +369,7 @@ const componentTokensData: ComponentTokensData = {
     },
     "icon": {
       "color": {
-        "base": "var(--np--color--inverse)"
+        "base": "var(--np--color)"
       },
       "size": {
         "smaller": "10px",
@@ -374,6 +391,50 @@ const componentTokensData: ComponentTokensData = {
       },
       "offset": {
         "base": "var(--np--gap--smaller)"
+      }
+    },
+    "hover": {
+      "backgroundColor": {
+        "unchecked": "var(--np--background-color)",
+        "base": "var(--np--color)",
+        "link": "var(--np--color--link)",
+        "success": "var(--np--color--success)",
+        "highlight": "var(--np--color--highlight)",
+        "warning": "var(--np--color--warning)",
+        "error": "var(--np--color--error)"
+      },
+      "borderColor": {
+        "base": "var(--np--border-color)",
+        "subtle": "var(--np--border-color--subtle)",
+        "strong": "var(--np--border-color--strong)",
+        "stronger": "var(--np--border-color--stronger)",
+        "success": "var(--np--border-color--success)",
+        "highlight": "var(--np--border-color--highlight)",
+        "warning": "var(--np--border-color--warning)",
+        "error": "var(--np--border-color--error)",
+        "link": "var(--np--border-color--link)"
+      }
+    },
+    "active": {
+      "backgroundColor": {
+        "unchecked": "var(--np--background-color)",
+        "base": "var(--np--color)",
+        "link": "var(--np--color--link)",
+        "success": "var(--np--color--success)",
+        "highlight": "var(--np--color--highlight)",
+        "warning": "var(--np--color--warning)",
+        "error": "var(--np--color--error)"
+      },
+      "borderColor": {
+        "base": "var(--np--border-color)",
+        "subtle": "var(--np--border-color--subtle)",
+        "strong": "var(--np--border-color--strong)",
+        "stronger": "var(--np--border-color--stronger)",
+        "success": "var(--np--border-color--success)",
+        "highlight": "var(--np--border-color--highlight)",
+        "warning": "var(--np--border-color--warning)",
+        "error": "var(--np--border-color--error)",
+        "link": "var(--np--border-color--link)"
       }
     }
   },
@@ -509,7 +570,7 @@ const componentTokensData: ComponentTokensData = {
       "base": "var(--np--border-radius)"
     },
     "boxShadow": {
-      "base": "var(--np--box-shadow--large)"
+      "base": "var(--np--box-shadow--overlay)"
     },
     "width": {
       "base": "fit-content"
@@ -718,6 +779,8 @@ const componentTokensData: ComponentTokensData = {
     "backgroundColor": {
       "base": "var(--np--background-color)",
       "raised": "var(--np--background-color--raised)",
+      "sunken": "var(--np--background-color--sunken)",
+      "overlay": "var(--np--background-color--overlay)",
       "success": "var(--np--background-color--success)",
       "highlight": "var(--np--background-color--highlight)",
       "warning": "var(--np--background-color--warning)",
@@ -921,10 +984,10 @@ const componentTokensData: ComponentTokensData = {
       "base": "var(--np--border-radius)"
     },
     "boxShadow": {
-      "base": "var(--np--box-shadow--large)"
+      "base": "var(--np--box-shadow--overlay)"
     },
     "zIndex": {
-      "base": "var(--np--z-index--high)"
+      "base": "var(--np--z-index--dropdown)"
     },
     "maxHeight": {
       "base": "calc(var(--np--size) * 6)"
@@ -976,7 +1039,7 @@ const componentTokensData: ComponentTokensData = {
         "larger": "12px"
       },
       "color": {
-        "base": "var(--np--color--inverse)"
+        "base": "var(--np--color)"
       }
     },
     "gap": {
@@ -1025,6 +1088,12 @@ const componentTokensData: ComponentTokensData = {
     "follow": {
       "threshold": {
         "base": "var(--np--gap)"
+      }
+    },
+    "sectionLinks": {
+      "color": {
+        "base": "var(--np--color--light)",
+        "active": "var(--np--color--link)"
       }
     }
   },
@@ -1080,7 +1149,7 @@ const componentTokensData: ComponentTokensData = {
       }
     },
     "disabledOpacity": {
-      "base": "0.5"
+      "base": "var(--np--opacity--disabled)"
     },
     "focusRing": {
       "width": {
@@ -1111,6 +1180,8 @@ const componentTokensData: ComponentTokensData = {
     "backgroundColor": {
       "base": "var(--np--background-color)",
       "raised": "var(--np--background-color--raised)",
+      "sunken": "var(--np--background-color--sunken)",
+      "overlay": "var(--np--background-color--overlay)",
       "success": "var(--np--background-color--success)",
       "highlight": "var(--np--background-color--highlight)",
       "warning": "var(--np--background-color--warning)",
@@ -1177,7 +1248,7 @@ const componentTokensData: ComponentTokensData = {
       "base": "var(--np--gap--small)"
     },
     "disabledOpacity": {
-      "base": "0.5"
+      "base": "var(--np--opacity--disabled)"
     },
     "animationDuration": {
       "base": "var(--np--animation-duration--fast)"
@@ -1202,7 +1273,7 @@ const componentTokensData: ComponentTokensData = {
       "base": "var(--np--gap--small)"
     },
     "zIndex": {
-      "base": "var(--np--z-index--higher)"
+      "base": "var(--np--z-index--tooltip)"
     },
     "maxWidth": {
       "base": "20em"

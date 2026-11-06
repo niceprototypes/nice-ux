@@ -12,6 +12,8 @@ const inverseTokensData: InverseTokensData = {
     "day": {
       "base": "hsla(240, 4%, 12.5%, 1)",
       "raised": "hsla(240, 3%, 10%, 1)",
+      "sunken": "hsla(240, 3%, 8%, 1)",
+      "overlay": "hsla(240, 4%, 16%, 1)",
       "success": "hsla(146, 45%, 18%, 1)",
       "highlight": "hsla(48, 55%, 22%, 1)",
       "warning": "hsla(29, 60%, 18%, 1)",
@@ -21,6 +23,8 @@ const inverseTokensData: InverseTokensData = {
     "night": {
       "base": "hsla(212, 5%, 100%, 1)",
       "raised": "hsla(212, 5%, 95%, 1)",
+      "sunken": "hsla(212, 5%, 92%, 1)",
+      "overlay": "hsla(212, 5%, 100%, 1)",
       "success": "hsla(146, 60%, 92%, 1)",
       "highlight": "hsla(48, 100%, 80%, 1)",
       "warning": "hsla(29, 90%, 92%, 1)",

@@ -37,7 +37,7 @@
     "base": "var(--np--gap--small)"
   },
   "disabledOpacity": {
-    "base": "0.5"
+    "base": "var(--np--opacity--disabled)"
   },
   "animationDuration": {
     "base": "var(--np--animation-duration--fast)"

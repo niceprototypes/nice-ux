@@ -12,6 +12,8 @@ const themeTokensData: ThemeTokensData = {
     "backgroundColor": {
       "base": "hsla(212, 10%, 100%, 1)",
       "raised": "hsla(212, 10%, 97%, 1)",
+      "sunken": "hsla(212, 10%, 94%, 1)",
+      "overlay": "hsla(212, 10%, 100%, 1)",
       "success": "hsla(146, 60%, 97%, 1)",
       "highlight": "hsla(55, 100%, 97%, 1)",
       "warning": "hsla(29, 100%, 94%, 1)",
@@ -49,6 +51,8 @@ const themeTokensData: ThemeTokensData = {
     "backgroundColor": {
       "base": "hsla(240, 4%, 12.5%, 1)",
       "raised": "hsla(240, 3%, 10%, 1)",
+      "sunken": "hsla(240, 3%, 8%, 1)",
+      "overlay": "hsla(240, 4%, 16%, 1)",
       "success": "hsla(146, 45%, 18%, 1)",
       "highlight": "hsla(48, 55%, 22%, 1)",
       "warning": "hsla(29, 60%, 18%, 1)",

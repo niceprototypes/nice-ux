@@ -47,8 +47,11 @@ const tokensData: TokensData = {
     "larger": "4px"
   },
   "boxShadow": {
-    "base": "0 1px 4px hsla(0, 0%, 0%, 0.075)",
-    "large": "0 2px 8px hsla(0, 0%, 0%, 0.1)"
+    "base": "var(--np--box-shadow--raised)",
+    "large": "var(--np--box-shadow--overlay)",
+    "sunken": "inset 0 1px 2px hsla(0, 0%, 0%, 0.075)",
+    "raised": "0 1px 4px hsla(0, 0%, 0%, 0.075)",
+    "overlay": "0 2px 8px hsla(0, 0%, 0%, 0.1)"
   },
   "brandColor": {
     "base": "hsla(240, 100%, 74.5%, 1)",
@@ -88,6 +91,9 @@ const tokensData: TokensData = {
     "base": "1.5",
     "expanded": "1.75"
   },
+  "opacity": {
+    "disabled": "0.5"
+  },
   "overlayColor": {
     "base": "hsla(0, 0%, 0%, 0.9)"
   },
@@ -103,7 +109,12 @@ const tokensData: TokensData = {
     "low": "10",
     "medium": "100",
     "high": "1000",
-    "higher": "9999"
+    "higher": "9999",
+    "sticky": "100",
+    "dropdown": "1000",
+    "modal": "2000",
+    "toast": "3000",
+    "tooltip": "9999"
   }
 } as const
 

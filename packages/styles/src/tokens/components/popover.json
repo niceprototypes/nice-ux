@@ -6,10 +6,10 @@
     "base": "var(--np--border-radius)"
   },
   "boxShadow": {
-    "base": "var(--np--box-shadow--large)"
+    "base": "var(--np--box-shadow--overlay)"
   },
   "zIndex": {
-    "base": "var(--np--z-index--high)"
+    "base": "var(--np--z-index--dropdown)"
   },
   "maxHeight": {
     "base": "calc(var(--np--size) * 6)"

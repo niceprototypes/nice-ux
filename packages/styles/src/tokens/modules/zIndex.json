@@ -3,5 +3,10 @@
   "low": "10",
   "medium": "100",
   "high": "1000",
-  "higher": "9999"
+  "higher": "9999",
+  "sticky": "100",
+  "dropdown": "1000",
+  "modal": "2000",
+  "toast": "3000",
+  "tooltip": "9999"
 }

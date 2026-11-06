@@ -3,7 +3,7 @@
     "base": "var(--np--gap--small)"
   },
   "zIndex": {
-    "base": "var(--np--z-index--higher)"
+    "base": "var(--np--z-index--tooltip)"
   },
   "maxWidth": {
     "base": "20em"

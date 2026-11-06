@@ -9,7 +9,7 @@
     "base": "var(--np--border-radius)"
   },
   "boxShadow": {
-    "base": "var(--np--box-shadow--large)"
+    "base": "var(--np--box-shadow--overlay)"
   },
   "width": {
     "base": "fit-content"

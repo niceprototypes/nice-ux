@@ -4,4 +4,9 @@
 	--np--z-index--medium: 100;
 	--np--z-index--high: 1000;
 	--np--z-index--higher: 9999;
+	--np--z-index--sticky: 100;
+	--np--z-index--dropdown: 1000;
+	--np--z-index--modal: 2000;
+	--np--z-index--toast: 3000;
+	--np--z-index--tooltip: 9999;
 }
