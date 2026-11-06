@@ -27,5 +27,11 @@
     "threshold": {
       "base": "var(--np--gap)"
     }
+  },
+  "sectionLinks": {
+    "color": {
+      "base": "var(--np--color--light)",
+      "active": "var(--np--color--link)"
+    }
   }
 }

@@ -85,17 +85,14 @@ const StickySectionLinks: React.FC<StickySectionLinksProps> = ({
     // Observe all sections
     sections.forEach(section => observer.observe(section))
 
-    // Cleanup
-    return () => {
-      sections.forEach(section => observer.unobserve(section))
-    }
+    return () => observer.disconnect()
   }, [links, stickyContext, root])
 
   const handleClick = (
-    e: React.MouseEvent<HTMLAnchorElement>,
+    event: React.MouseEvent<HTMLAnchorElement>,
     href: string
   ) => {
-    e.preventDefault()
+    event.preventDefault()
 
     // Extract the hash from the href (e.g., "#roles")
     const hash = href.startsWith("#")
@@ -149,13 +146,13 @@ const StickySectionLinks: React.FC<StickySectionLinksProps> = ({
       <LinkAnchor
         key={index}
         href={link.href}
-        onClick={e => handleClick(e, link.href)}
+        onClick={event => handleClick(event, link.href)}
         $isActive={isActive}
       >
         {renderLink ? (
           renderLink(link, isActive)
         ) : (
-          <LinkInk $isActive={isActive}>{link.label}</LinkInk>
+          <LinkInk>{link.label}</LinkInk>
         )}
       </LinkAnchor>
     )
