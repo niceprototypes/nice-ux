@@ -1,0 +1,6 @@
+export * from "./icons/generated/catalog"
+export * from "./illustrations/generated/catalog"
+export * from "./services/getIcon"
+export * from "./services/getIconEncoded"
+export * from "./services/getIllustration"
+export * from "./services/getIllustrationEncoded"

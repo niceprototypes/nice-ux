@@ -1,4 +1,4 @@
-import { getToken } from "@niceprototypes/styles"
+import { getToken } from "@niceprototypes/styles/core"
 import { iconSource } from "../icons/generated/source.js"
 
 /**

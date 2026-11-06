@@ -1,5 +1,5 @@
 import type * as React from "react"
-import * as Assets from "../svg/index.js"
+import * as Assets from "../svg/illustrations/generated/index.js"
 import { illustrationNames, illustrationVariants } from "../constants"
 
 /**

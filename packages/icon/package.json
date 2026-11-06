@@ -9,6 +9,8 @@
     "dist",
     "src/svg/index.js",
     "src/svg/index.d.ts",
+    "src/svg/core.js",
+    "src/svg/core.d.ts",
     "src/svg/icons/generated",
     "src/svg/illustrations/generated",
     "src/svg/services"
@@ -108,6 +110,7 @@
     },
     "./svg": {
       "types": "./src/svg/index.d.ts",
+      "node": "./src/svg/core.js",
       "default": "./src/svg/index.js"
     },
     "./catalog": {

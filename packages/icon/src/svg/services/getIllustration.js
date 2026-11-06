@@ -1,4 +1,4 @@
-import { getToken } from "@niceprototypes/styles"
+import { getToken } from "@niceprototypes/styles/core"
 import { illustrationSource } from "../illustrations/generated/source.js"
 
 /**

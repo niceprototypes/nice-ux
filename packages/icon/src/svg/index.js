@@ -11,14 +11,12 @@
  * (`getIcon`/`getIconEncoded`) and fixed-color **illustrations**
  * (`getIllustration`/`getIllustrationEncoded`). The subpath exports
  * (`@niceprototypes/icon/get-icon`, `/catalog`, `/illustration-catalog`, …) remain for
- * narrow/direct access, but the root is the intended surface.
+ * narrow/direct access, but the root is the intended surface. Under Node the root
+ * resolves to `core.js` (everything but the SVG components).
  *
  * @module @niceprototypes/icon
  */
 
 export * from "./icons/generated/index.js"
 export * from "./illustrations/generated/index.js"
-export * from "./services/getIcon.js"
-export * from "./services/getIconEncoded.js"
-export * from "./services/getIllustration.js"
-export * from "./services/getIllustrationEncoded.js"
+export * from "./core.js"

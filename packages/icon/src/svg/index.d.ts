@@ -1,6 +1,3 @@
 export * from "./icons/generated/index"
 export * from "./illustrations/generated/index"
-export * from "./services/getIcon"
-export * from "./services/getIconEncoded"
-export * from "./services/getIllustration"
-export * from "./services/getIllustrationEncoded"
+export * from "./core"
