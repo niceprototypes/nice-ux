@@ -93,6 +93,11 @@ h2 {
 	font-size: var(--np--font-size--large);
 }
 
+/* textWrapPretty — Avoid single-word last lines in paragraphs */
+p {
+	text-wrap: pretty;
+}
+
 /* textOverflow — Let long words and URLs wrap instead of overflowing */
 p,
 h1,
@@ -137,6 +142,11 @@ select {
 	color: inherit;
 }
 
+/* textareaHeight — Give a textarea without a rows attribute a usable height */
+textarea:not([rows]) {
+	min-height: 10em;
+}
+
 /* interactiveLineHeight — Match the tighter heading leading on interactive
    controls and labels (set after formInheritance so `font: inherit` doesn't
    clobber it) */
@@ -154,4 +164,23 @@ a {
 /* codeFont — Render inline code in the monospace token */
 code {
 	font-family: var(--np--font-family--code);
+}
+
+/* targetScrollMargin — Leave room above an anchor-targeted element so it does
+   not land flush against the viewport edge */
+:target {
+	scroll-margin-block: var(--np--gap--large);
+}
+
+/* reducedMotion — Honor the OS reduce-motion preference: collapse animations
+   and transitions to an instant end state and turn off smooth scrolling */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
 }
