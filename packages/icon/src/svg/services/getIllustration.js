@@ -56,7 +56,7 @@ export function getIllustration(name, variant = "base", options = {}) {
   }
 
   const { size = "base", className, viewBox, style } = options
-  const sizeValue = getToken("size", size, { prefix: "icon" })
+  const sizeValue = getToken(`icon.size:${size}`)
 
   return setRootAttributes(svg, {
     width: sizeValue,

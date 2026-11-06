@@ -9,7 +9,7 @@ const DRAW_ELEMENTS = ["path", "rect", "circle", "ellipse", "polygon", "polyline
 
 /** Resolve an `icon` component token to its `var(--np--icon--…)` reference. */
 function iconToken(token, variant) {
-  return getToken(token, variant, { prefix: "icon" })
+  return getToken(`icon.${token}:${variant}`)
 }
 
 /**
