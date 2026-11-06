@@ -876,7 +876,7 @@ const componentTokensData: ComponentTokensData = {
       "link": "var(--np--border-color--link)"
     },
     "rimColor": {
-      "base": "hsla(0, 0%, 100%, 1)"
+      "base": "var(--np--background-color)"
     },
     "width": {
       "base": "4px"

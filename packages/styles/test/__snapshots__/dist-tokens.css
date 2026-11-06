@@ -750,7 +750,7 @@
 	--np--line--border-color--warning: var(--np--border-color--warning);
 	--np--line--border-color--error: var(--np--border-color--error);
 	--np--line--border-color--link: var(--np--border-color--link);
-	--np--line--rim-color: hsla(0, 0%, 100%, 1);
+	--np--line--rim-color: var(--np--background-color);
 	--np--line--width: 4px;
 	--np--line--rim-width: 1.5px;
 	--np--line--dash-length: 18px;
@@ -1156,6 +1156,7 @@
 	--np--line--border-color--warning--inverse: var(--np--border-color--warning--inverse);
 	--np--line--border-color--error--inverse: var(--np--border-color--error--inverse);
 	--np--line--border-color--link--inverse: var(--np--border-color--link--inverse);
+	--np--line--rim-color--inverse: var(--np--background-color--inverse);
 	--np--list--divider--color--inverse: var(--np--border-color--subtle--inverse);
 	--np--list--background-color--active--inverse: var(--np--border-color--inverse);
 	--np--list--background-color--selected--inverse: var(--np--background-color--link--inverse);
@@ -1682,6 +1683,7 @@
 		--np--line--border-color--warning--inverse: var(--np--border-color--warning--night--inverse);
 		--np--line--border-color--error--inverse: var(--np--border-color--error--night--inverse);
 		--np--line--border-color--link--inverse: var(--np--border-color--link--night--inverse);
+		--np--line--rim-color--inverse: var(--np--background-color--night--inverse);
 		--np--list--divider--color--inverse: var(--np--border-color--subtle--night--inverse);
 		--np--list--background-color--active--inverse: var(--np--border-color--night--inverse);
 		--np--list--background-color--selected--inverse: var(--np--background-color--link--night--inverse);
@@ -1936,6 +1938,7 @@
 		--np--line--border-color--warning: var(--np--border-color--warning--night);
 		--np--line--border-color--error: var(--np--border-color--error--night);
 		--np--line--border-color--link: var(--np--border-color--link--night);
+		--np--line--rim-color: var(--np--background-color--night);
 		--np--list--divider--color: var(--np--border-color--subtle--night);
 		--np--list--background-color--active: var(--np--border-color--night);
 		--np--list--background-color--selected: var(--np--background-color--link--night);
@@ -2261,6 +2264,7 @@
 		--np--line--border-color--warning--inverse: var(--np--border-color--warning--day--inverse);
 		--np--line--border-color--error--inverse: var(--np--border-color--error--day--inverse);
 		--np--line--border-color--link--inverse: var(--np--border-color--link--day--inverse);
+		--np--line--rim-color--inverse: var(--np--background-color--day--inverse);
 		--np--list--divider--color--inverse: var(--np--border-color--subtle--day--inverse);
 		--np--list--background-color--active--inverse: var(--np--border-color--day--inverse);
 		--np--list--background-color--selected--inverse: var(--np--background-color--link--day--inverse);
@@ -2515,6 +2519,7 @@
 		--np--line--border-color--warning: var(--np--border-color--warning--day);
 		--np--line--border-color--error: var(--np--border-color--error--day);
 		--np--line--border-color--link: var(--np--border-color--link--day);
+		--np--line--rim-color: var(--np--background-color--day);
 		--np--list--divider--color: var(--np--border-color--subtle--day);
 		--np--list--background-color--active: var(--np--border-color--day);
 		--np--list--background-color--selected: var(--np--background-color--link--day);
@@ -2839,6 +2844,7 @@
 		--np--line--border-color--warning--inverse: var(--np--border-color--warning--night--inverse);
 		--np--line--border-color--error--inverse: var(--np--border-color--error--night--inverse);
 		--np--line--border-color--link--inverse: var(--np--border-color--link--night--inverse);
+		--np--line--rim-color--inverse: var(--np--background-color--night--inverse);
 		--np--list--divider--color--inverse: var(--np--border-color--subtle--night--inverse);
 		--np--list--background-color--active--inverse: var(--np--border-color--night--inverse);
 		--np--list--background-color--selected--inverse: var(--np--background-color--link--night--inverse);
@@ -3093,6 +3099,7 @@
 		--np--line--border-color--warning: var(--np--border-color--warning--night);
 		--np--line--border-color--error: var(--np--border-color--error--night);
 		--np--line--border-color--link: var(--np--border-color--link--night);
+		--np--line--rim-color: var(--np--background-color--night);
 		--np--list--divider--color: var(--np--border-color--subtle--night);
 		--np--list--background-color--active: var(--np--border-color--night);
 		--np--list--background-color--selected: var(--np--background-color--link--night);

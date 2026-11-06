@@ -379,6 +379,7 @@ export interface TokenInverseVariants {
   "input.focusRing.color": "base"
   "lightbox.focusRing.color": "base"
   "line.borderColor": "base" | "subtle" | "strong" | "stronger" | "success" | "highlight" | "warning" | "error" | "link"
+  "line.rimColor": "base"
   "list.divider.color": "base"
   "list.backgroundColor": "active" | "selected"
   "list.color": "base" | "selected" | "disabled"
