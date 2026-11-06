@@ -16,6 +16,8 @@ import type {
   ButtonColorStatesType,
   ButtonColorTokenType,
   ButtonGhostStatesType,
+  ButtonIconSizeType,
+  ButtonIconStrokeWidthType,
   ButtonProps,
   ButtonStatusType,
 } from "@niceprototypes/button"
@@ -36,6 +38,8 @@ const AS_OPTIONS = ["a", "div"] as const satisfies readonly NonNullable<ButtonPr
 const TARGET_OPTIONS = ["_blank", "_self", "_parent", "_top"] as const satisfies readonly NonNullable<ButtonProps["target"]>[]
 const THEME_OPTIONS = Object.keys(themeTokensData)
 const ICON_OPTIONS = ["none", ...iconNames]
+const ICON_SIZE_OPTIONS = ["smaller", "small", "base", "large", "larger"] as const satisfies readonly ButtonIconSizeType[]
+const ICON_STROKE_WIDTH_OPTIONS = ["small", "base", "large"] as const satisfies readonly ButtonIconStrokeWidthType[]
 const BORDER_COLOR_OPTIONS = Object.keys(themeTokensData.day.borderColor) as BorderColorType[]
 
 /** Every `color` / `borderColor` token address, plain and inverse. */
@@ -141,6 +145,8 @@ export const Playground: Story = {
     iconLeft: NONE,
     iconRight: NONE,
     iconVendor: false,
+    iconStrokeScaling: false,
+    loading: false,
     color: NONE,
     colorHover: NONE,
     colorFocus: NONE,
@@ -162,6 +168,10 @@ export const Playground: Story = {
     iconLeft: optionalSelect(ICON_OPTIONS.slice(1), "Content"),
     iconRight: optionalSelect(ICON_OPTIONS.slice(1), "Content"),
     iconVendor: { control: "boolean", table: { category: "Content" } },
+    iconSize: optionalSelect(ICON_SIZE_OPTIONS, "Content"),
+    iconStrokeWidth: optionalSelect(ICON_STROKE_WIDTH_OPTIONS, "Content"),
+    iconStrokeScaling: { control: "boolean", table: { category: "Content" } },
+    loading: { control: "boolean", table: { category: "Appearance" } },
 
     filled: { control: "boolean", table: { category: "Appearance" } },
     size: select(SIZE_OPTIONS, "Appearance"),
@@ -386,5 +396,42 @@ export const Color: Story = {
   play: async ({ canvasElement }) => {
     const button = within(canvasElement).getByRole("button", { name: "Button" })
     await expect(getComputedStyle(button).color).toBe(resolveCss(canvasElement, "color", getToken("color:error")))
+  },
+}
+
+export const IconSize: Story = {
+  ...Playground,
+  args: { ...Playground.args, size: "small", iconSize: "larger", iconLeft: "plus" },
+  play: async ({ canvasElement }) => {
+    const button = within(canvasElement).getByText("Button").closest("button") as HTMLElement
+    await expect(getComputedStyle(button).getPropertyValue("--np--icon--size")).toBe(
+      resolveCss(canvasElement, "--np--icon--size", getToken("button.icon.size:larger")),
+    )
+  },
+}
+
+export const IconStroke: Story = {
+  ...Playground,
+  args: { ...Playground.args, iconLeft: "plus", iconStrokeWidth: "large", iconStrokeScaling: true },
+  play: async ({ canvasElement }) => {
+    const shape = within(canvasElement).getByText("Button").closest("button")?.querySelector("svg path, svg line") as Element
+    await expect(getComputedStyle(shape).vectorEffect).toBe("none")
+  },
+}
+
+export const Loading: Story = {
+  ...Playground,
+  args: { ...Playground.args, loading: true },
+  play: async ({ canvasElement, args }) => {
+    const label = within(canvasElement).getByText("Button")
+    const button = label.closest("button") as HTMLElement
+    await expect(button).toHaveAttribute("aria-busy", "true")
+    await expect(button).not.toBeDisabled()
+    // The label keeps its space, hidden, so the width does not change.
+    await expect(getComputedStyle(label).visibility).toBe("hidden")
+    await expect(label.getBoundingClientRect().width).toBeGreaterThan(0)
+    await expect(button.querySelectorAll("svg")).toHaveLength(1)
+    button.click()
+    await expect(args.onClick).not.toHaveBeenCalled()
   },
 }

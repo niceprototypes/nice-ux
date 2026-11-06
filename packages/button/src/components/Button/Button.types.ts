@@ -1,5 +1,6 @@
 import * as React from "react"
-import { AnimationDurationType, SizeType, BorderWidthType, BorderColorType, ColorTokenProp, FontWeightType, ThemeType, TokenAddress } from "@niceprototypes/styles"
+import { AnimationDurationType, SizeType, BorderWidthType, BorderColorType, ColorTokenProp, FontWeightType, ThemeType, TokenAddress, TokenVariants } from "@niceprototypes/styles"
+import type { IconStrokeScalingType, IconStrokeWidthType } from "@niceprototypes/icon"
 import type { ButtonIconNameType } from "../ButtonIcon/ButtonIcon.types"
 import type { FlexJustifyContentType, FlexSpacingType } from "@niceprototypes/flex"
 
@@ -197,6 +198,45 @@ export type ButtonSelectedType = boolean
  * Whether the button's icon resolves through the vendor icon set
  */
 export type ButtonIconVendorType = boolean
+
+/**
+ * ButtonIconSizeType
+ *
+ * Size of the button's icons, from the `button.icon.size` component tokens. Unset, the icons
+ * follow the button's `size`.
+ *
+ * Values:
+ * - "smaller", "small", "base", "large", "larger"
+ */
+export type ButtonIconSizeType = TokenVariants["button.icon.size"]
+
+/**
+ * ButtonIconStrokeWidthType
+ *
+ * Re-export of IconStrokeWidthType from @niceprototypes/icon: the stroke width of the button's
+ * icons.
+ *
+ * Values:
+ * - "small", "base", "large"
+ */
+export type ButtonIconStrokeWidthType = IconStrokeWidthType
+
+/**
+ * ButtonIconStrokeScalingType
+ *
+ * Re-export of IconStrokeScalingType from @niceprototypes/icon: whether the icons' stroke
+ * scales with their size (true) or keeps its width (false, the Icon default).
+ */
+export type ButtonIconStrokeScalingType = IconStrokeScalingType
+
+/**
+ * ButtonLoadingType
+ *
+ * Whether the button shows the spinner icon in place of its content. The content keeps its
+ * space, so the button's width does not change. The button sets `aria-busy`, ignores clicks
+ * (a submit button does not submit) and keyboard activation, and stays focusable.
+ */
+export type ButtonLoadingType = boolean
 
 /**
  * Whether the button renders with the inlined, chrome-stripped layout (no
@@ -444,6 +484,25 @@ export interface ButtonProps {
   iconVendor?: ButtonIconVendorType
 
   /**
+   * Size of the icons, from the `button.icon.size` tokens
+   * @default the button's `size`
+   */
+  iconSize?: ButtonIconSizeType
+
+  /** Stroke width of the icons (passed to Icon's `strokeWidth` prop) */
+  iconStrokeWidth?: ButtonIconStrokeWidthType
+
+  /** Scale the icons' stroke with their size (passed to Icon's `strokeScaling` prop) */
+  iconStrokeScaling?: ButtonIconStrokeScalingType
+
+  /**
+   * Show the spinner icon in place of the content, keeping the width; sets `aria-busy` and
+   * ignores activation while set
+   * @default false
+   */
+  loading?: ButtonLoadingType
+
+  /**
    * Render with the inlined, chrome-stripped, link-like layout regardless of
    * element. Defaults to `true` when `as="a"`, `false` otherwise — set it
    * explicitly to inline a `div` or give an anchor the full button chrome.
@@ -552,6 +611,10 @@ namespace ButtonTypes {
   export type Disabled = ButtonDisabledType
   export type Antialiased = ButtonAntialiasedType
   export type IconVendor = ButtonIconVendorType
+  export type IconSize = ButtonIconSizeType
+  export type IconStrokeWidth = ButtonIconStrokeWidthType
+  export type IconStrokeScaling = ButtonIconStrokeScalingType
+  export type Loading = ButtonLoadingType
   export type Inlined = ButtonInlinedType
   export type OnClick = ButtonOnClickType
   export type OnMouseEnter = ButtonOnMouseEnterType

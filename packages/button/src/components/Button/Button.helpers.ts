@@ -4,6 +4,7 @@ import type {
   ButtonElementType,
   ButtonFormType,
   ButtonHrefType,
+  ButtonLoadingType,
   ButtonOnClickType,
   ButtonRoleType,
   ButtonTabIndexType,
@@ -15,6 +16,7 @@ export interface GetButtonElementPropsArgs {
   disabled: boolean
   form?: ButtonFormType
   href?: ButtonHrefType
+  loading: ButtonLoadingType
   onClick?: ButtonOnClickType
   role?: ButtonRoleType
   tabIndex?: ButtonTabIndexType
@@ -29,8 +31,14 @@ export interface GetButtonElementPropsArgs {
  * the native `disabled` attribute so it leaves the tab order and is announced
  * as disabled, and `form` (a form attribute only a button has). A consumer `role` / `tabIndex` overrides these defaults, except
  * that disabled keeps tabIndex -1 (anchor, div) or the native attribute (button).
+ * Loading ignores activation like disabled (a click is prevented, so an anchor does not
+ * navigate and a submit button does not submit) but keeps the element focusable.
  */
-export function getButtonElementProps({ as, disabled, form, href, onClick, role, tabIndex, target, type }: GetButtonElementPropsArgs) {
+export function getButtonElementProps({ as, disabled, form, href, loading, onClick, role, tabIndex, target, type }: GetButtonElementPropsArgs) {
+  // Loading ignores activation but stays focusable; disabled also leaves the tab order.
+  const inactive = disabled || loading
+  const preventActivation = (event: React.SyntheticEvent) => event.preventDefault()
+
   if (as === "a") {
     return {
       as: "a" as const,
@@ -38,9 +46,9 @@ export function getButtonElementProps({ as, disabled, form, href, onClick, role,
       target,
       rel: target === "_blank" ? "noopener noreferrer" : undefined,
       role,
-      "aria-disabled": disabled || undefined,
+      "aria-disabled": inactive || undefined,
       tabIndex: disabled ? -1 : tabIndex,
-      onClick: disabled ? (event: React.MouseEvent) => event.preventDefault() : onClick,
+      onClick: inactive ? preventActivation : onClick,
     }
   }
 
@@ -58,9 +66,9 @@ export function getButtonElementProps({ as, disabled, form, href, onClick, role,
       as: "div" as const,
       role: role ?? "button",
       tabIndex: disabled ? -1 : (tabIndex ?? 0),
-      "aria-disabled": disabled || undefined,
-      onClick: disabled ? undefined : onClick,
-      onKeyDown: disabled ? undefined : onDivKeyDown,
+      "aria-disabled": inactive || undefined,
+      onClick: inactive ? undefined : onClick,
+      onKeyDown: inactive ? undefined : onDivKeyDown,
     }
   }
 
@@ -69,7 +77,8 @@ export function getButtonElementProps({ as, disabled, form, href, onClick, role,
     form,
     role,
     disabled,
+    "aria-disabled": (loading && !disabled) || undefined,
     tabIndex: disabled ? undefined : tabIndex,
-    onClick: disabled ? undefined : onClick,
+    onClick: disabled ? undefined : loading ? preventActivation : onClick,
   }
 }

@@ -1,6 +1,6 @@
 import type { IconProps } from "@niceprototypes/icon"
 import type { ThemeType } from "@niceprototypes/styles"
-import type { ButtonIconVendorType } from "../Button/Button.types"
+import type { ButtonIconStrokeScalingType, ButtonIconStrokeWidthType, ButtonIconVendorType } from "../Button/Button.types"
 
 /**
  * ButtonIconNameType
@@ -25,4 +25,10 @@ export interface ButtonIconProps {
 
   /** Theme pin passed through from the Button */
   theme?: ThemeType
+
+  /** Stroke width passed through from the Button's `iconStrokeWidth` */
+  strokeWidth?: ButtonIconStrokeWidthType
+
+  /** Stroke scaling passed through from the Button's `iconStrokeScaling` */
+  strokeScaling?: ButtonIconStrokeScalingType
 }

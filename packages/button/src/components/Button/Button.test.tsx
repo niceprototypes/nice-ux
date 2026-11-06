@@ -15,8 +15,18 @@ jest.mock("@niceprototypes/ink", () => ({
 
 jest.mock("@niceprototypes/icon", () => ({
   __esModule: true,
-  default: ({ name }: { name: string }) => <span data-testid="icon">{name}</span>,
+  default: ({ name, strokeWidth, strokeScaling }: { name: string; strokeWidth?: string; strokeScaling?: boolean }) => (
+    <span data-testid="icon" data-stroke-width={strokeWidth} data-stroke-scaling={strokeScaling === undefined ? undefined : String(strokeScaling)}>
+      {name}
+    </span>
+  ),
 }))
+
+/** Text of every <style> tag styled-components injected into the document. */
+const getInjectedCss = () =>
+  Array.from(document.head.querySelectorAll("style"))
+    .map(tag => tag.textContent ?? "")
+    .join("\n")
 
 const mockOnClick = jest.fn()
 
@@ -494,7 +504,7 @@ describe("Button ghost", () => {
       css.includes(`.${name}${STATE_SELECTORS.rest}{`),
     )
     const rule = css.match(new RegExp(`\\.${className}:not\\(:hover\\)[^{]*\\{([^}]*)\\}`))?.[1] ?? ""
-    expect(rule).toContain(`color:${getToken("color", "error")}`)
+    expect(rule).toContain(`color:${getToken("button.color:error")}`)
   })
 
   it("shows the rest setting in every state when disabled", () => {
@@ -717,7 +727,7 @@ describe("Button color", () => {
     render(<Button data-testid="root" ghost color={{ rest: "color:lighter" }}>Save</Button>)
     const rest = stateColorRules(screen.getByTestId("root")).filter(([selector]) => selector === STATE_SELECTORS.rest)
     expect(rest).toEqual([
-      [STATE_SELECTORS.rest, getToken("color", "base")],
+      [STATE_SELECTORS.rest, getToken("button.color:base")],
       [STATE_SELECTORS.rest, getToken("color:lighter")],
     ])
   })
@@ -772,7 +782,7 @@ describe("Button selected", () => {
 
   it("keeps the status border when not selected", () => {
     render(<Button data-testid="root">Tab</Button>)
-    expect(borderColors(screen.getByTestId("root"))).toEqual([getToken("borderColor", "base")])
+    expect(borderColors(screen.getByTestId("root"))).toEqual([getToken("button.borderColor:base")])
   })
 
   it("gives a filled button's border its background token", () => {
@@ -811,5 +821,96 @@ describe("Button selected", () => {
     const root = screen.getByTestId("root")
     expect(root).not.toHaveAttribute("aria-pressed")
     expect(root).not.toHaveAttribute("aria-selected")
+  })
+})
+
+describe("Button component tokens", () => {
+  it("reads button.color and button.borderColor for the default outline", () => {
+    render(<Button status="error">Save</Button>)
+    const css = getInjectedCss()
+    expect(css).toContain(`color:${getToken("button.color:error")}`)
+    expect(css).toContain(`border-color:${getToken("button.borderColor:error")}`)
+  })
+
+  it("reads button.color's inverse for the filled label", () => {
+    render(<Button filled>Save</Button>)
+    expect(getInjectedCss()).toContain(`color:${getToken("button.color:base", { inverse: true })}`)
+  })
+
+  it("reads button.color:link for the inlined layout", () => {
+    render(<Button as="a" href="#">Docs</Button>)
+    expect(getInjectedCss()).toContain(`color:${getToken("button.color:link")}`)
+  })
+
+  it("reassigns the button.height token per size and reads it for height and the rounded radius", () => {
+    render(<Button size="small" borderRadius="rounded">Save</Button>)
+    const css = getInjectedCss()
+    expect(css).toContain(`${getToken("button.height", { as: "key" })}:${getToken("button.size:small")}`)
+    expect(css).toContain(`height:${getToken("button.height")}`)
+    expect(css).toContain(`border-radius:calc(${getToken("button.height")} / 2)`)
+  })
+})
+
+describe("Button icon size and stroke", () => {
+  it("sizes icons from the button size by default", () => {
+    render(<Button size="small" iconLeft="plus">Add</Button>)
+    expect(getInjectedCss()).toContain(`--np--icon--size:${getToken("button.icon.size:small")}`)
+  })
+
+  it("sizes icons from iconSize when set", () => {
+    render(<Button size="small" iconSize="large" iconLeft="plus">Add</Button>)
+    expect(getInjectedCss()).toContain(`--np--icon--size:${getToken("button.icon.size:large")}`)
+  })
+
+  it("passes iconStrokeWidth and iconStrokeScaling to every icon", () => {
+    render(<Button iconLeft="plus" iconRight="check" iconStrokeWidth="large" iconStrokeScaling>Add</Button>)
+    screen.getAllByTestId("icon").forEach(icon => {
+      expect(icon).toHaveAttribute("data-stroke-width", "large")
+      expect(icon).toHaveAttribute("data-stroke-scaling", "true")
+    })
+  })
+})
+
+describe("Button loading", () => {
+  it("shows the spinner icon and keeps the content in place, hidden", () => {
+    render(<Button loading>Save</Button>)
+    expect(screen.getByTestId("icon")).toHaveTextContent("spinner")
+    expect(screen.getByText("Save")).toBeInTheDocument()
+    expect(getInjectedCss()).toContain("visibility:hidden")
+  })
+
+  it("sets aria-busy and aria-disabled and stays focusable", () => {
+    render(<Button loading>Save</Button>)
+    const button = screen.getByRole("button")
+    expect(button).toHaveAttribute("aria-busy", "true")
+    expect(button).toHaveAttribute("aria-disabled", "true")
+    expect(button).not.toBeDisabled()
+  })
+
+  it("ignores clicks, and a submit button does not submit", () => {
+    const onSubmit = jest.fn((event: React.FormEvent) => event.preventDefault())
+    const onClick = jest.fn()
+    render(
+      <form onSubmit={onSubmit}>
+        <Button type="submit" loading onClick={onClick}>Save</Button>
+      </form>,
+    )
+    fireEvent.click(screen.getByRole("button"))
+    expect(onClick).not.toHaveBeenCalled()
+    expect(onSubmit).not.toHaveBeenCalled()
+  })
+
+  it("ignores Enter on a clickable div", () => {
+    const onClick = jest.fn()
+    render(<Button as="div" loading onClick={onClick}>Save</Button>)
+    fireEvent.keyDown(screen.getByRole("button"), { key: "Enter" })
+    expect(onClick).not.toHaveBeenCalled()
+    expect(screen.getByRole("button")).toHaveAttribute("tabindex", "0")
+  })
+
+  it("sets nothing when not loading", () => {
+    render(<Button>Save</Button>)
+    expect(screen.getByRole("button")).not.toHaveAttribute("aria-busy")
+    expect(screen.queryByTestId("icon")).toBeNull()
   })
 })

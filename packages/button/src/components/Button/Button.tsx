@@ -1,7 +1,7 @@
 import * as React from "react"
 import Ink from "@niceprototypes/ink"
 import { Theme } from "@niceprototypes/styles"
-import { StyledButton, ButtonContent } from "./Button.styles"
+import { StyledButton, ButtonContent, ButtonSpinner } from "./Button.styles"
 import { ButtonProps } from "./Button.types"
 import { getButtonElementProps } from "./Button.helpers"
 import ButtonIcon from "../ButtonIcon"
@@ -38,10 +38,14 @@ const Button: React.FC<ButtonProps> = ({
   iconColor,
   iconLeft,
   iconRight,
+  iconSize,
+  iconStrokeScaling,
+  iconStrokeWidth,
   iconVendor = false,
   id,
   inlined: inlinedProp,
   justifyContent = "center",
+  loading = false,
   theme,
   onClick,
   onMouseEnter,
@@ -84,6 +88,7 @@ const Button: React.FC<ButtonProps> = ({
     disabled,
     form,
     href,
+    loading,
     onClick,
     role,
     tabIndex,
@@ -120,6 +125,8 @@ const Button: React.FC<ButtonProps> = ({
       $selected={selected}
       $grow={grow}
       $inlined={inlined}
+      $iconSize={iconSize}
+      $loading={loading}
       $size={size}
       $hasPadding={contentPadding !== undefined}
       $square={square}
@@ -130,6 +137,7 @@ const Button: React.FC<ButtonProps> = ({
       // the public ButtonRefType union is narrowed to the base element here.
       ref={ref as React.Ref<HTMLButtonElement>}
       aria-label={ariaLabel}
+      aria-busy={loading || undefined}
       aria-expanded={ariaExpanded}
       aria-haspopup={ariaHasPopup}
       aria-controls={ariaControls}
@@ -148,6 +156,7 @@ const Button: React.FC<ButtonProps> = ({
         inlined
         padding={contentPadding}
         $fill={justifyContent !== "center"}
+        $loading={loading}
         $size={size}
         $square={square}
       >
@@ -156,6 +165,8 @@ const Button: React.FC<ButtonProps> = ({
             name={iconLeft}
             vendor={iconVendor}
             theme={invertedTheme}
+            strokeWidth={iconStrokeWidth}
+            strokeScaling={iconStrokeScaling}
           />
         )}
         {children && (
@@ -173,9 +184,21 @@ const Button: React.FC<ButtonProps> = ({
             name={iconRight}
             vendor={iconVendor}
             theme={invertedTheme}
+            strokeWidth={iconStrokeWidth}
+            strokeScaling={iconStrokeScaling}
           />
         )}
       </ButtonContent>
+      {loading && (
+        <ButtonSpinner>
+          <ButtonIcon
+            name="spinner"
+            theme={invertedTheme}
+            strokeWidth={iconStrokeWidth}
+            strokeScaling={iconStrokeScaling}
+          />
+        </ButtonSpinner>
+      )}
     </StyledButton>
   )
 

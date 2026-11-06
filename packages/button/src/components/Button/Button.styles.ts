@@ -5,6 +5,7 @@ import type { SizeType, BorderWidthType, BorderColorType, ColorTokenProp } from 
 import type {
   ButtonAnimationDurationType,
   ButtonBorderRadiusType,
+  ButtonIconSizeType,
   ButtonGrowType,
   ButtonColorStatesType,
   ButtonStatusType,
@@ -34,6 +35,8 @@ export const StyledButton = styled.button.withConfig({
   $animationDuration: ButtonAnimationDurationType
   $grow?: ButtonGrowType
   $inlined: boolean
+  $iconSize?: ButtonIconSizeType
+  $loading: boolean
 }>`
   /* Reset */
   position: relative;
@@ -59,7 +62,7 @@ export const StyledButton = styled.button.withConfig({
 
   text-align: center;
   text-decoration: none;
-  cursor: ${({ $disabled }) => ($disabled ? "not-allowed" : "pointer")};
+  cursor: ${({ $disabled, $loading }) => ($disabled ? "not-allowed" : $loading ? "progress" : "pointer")};
   -webkit-tap-highlight-color: transparent;
 
   /* The nested icon's color flows through a button-scoped token layer:
@@ -79,7 +82,7 @@ export const StyledButton = styled.button.withConfig({
      touching the global --np--icon--size (which all other icons read). Defaulting
      the token to the --np--font-size scale rather than var(--np--icon--size) avoids
      a custom-property cycle, since --np--icon--size is the var we reassign. */
-  ${({ $size = "base" }) => `--np--icon--size: ${getToken(`button.icon.size:${$size}`)};`}
+  ${({ $size = "base", $iconSize }) => `--np--icon--size: ${getToken(`button.icon.size:${$iconSize ?? $size}`)};`}
 
   ${({
     $inlined,
@@ -98,36 +101,36 @@ export const StyledButton = styled.button.withConfig({
   }) =>
     !$inlined &&
     `
-    /* Element-scoped resolved height. Reassigned per $size on this element, so a
-       calc() over it reads the live chosen height instead of the frozen :root
+    /* Element-scoped resolved height: the button.height token reassigned per $size on this
+       element, so a calc() over it reads the live chosen height instead of the frozen :root
        token value (which is always base — substitution resolves at :root). */
-    --np--button--height: ${getToken(`button.size:${$size}`)};
+    ${getToken("button.height", { as: "key" })}: ${getToken(`button.size:${$size}`)};
     /* The content gap lives on the inner ButtonContent flex. Default horizontal
        padding is size-derived (--np--button--spacing); when a padding prop is set
        it moves to the flex (see ButtonContent) and the button switches to
        min-height so non-zero vertical padding can grow it past the base height. */
-    ${$hasPadding ? "min-height" : "height"}: var(--np--button--height);
+    ${$hasPadding ? "min-height" : "height"}: ${getToken("button.height")};
     width: ${$square ? getToken(`button.size:${$size}`) : "auto"};
     padding: ${$square || $hasPadding ? "0" : `0 ${getToken(`button.spacing:${$size}`)}`};
     font-weight: ${getToken("fontWeight", "base")};
-    /* Colors derive from the status's semantic color through the
-       button.backgroundColor token (one variant per status, each aliasing its
-       --np--color variant). When filled, that token fills the background and the
+    /* Colors derive from the status's semantic color through the button component
+       tokens (one variant per status, each aliasing its core variant), so setTokens({ button })
+       restyles a default button. When filled, button.backgroundColor fills the background and the
        border reads the same token, so the button is one solid shape; a consumer
        that reassigns the token's variable on the element recolors both together.
-       The borderColor prop still wins. The label/icon flip to --np--color--inverse.
-       Otherwise it is an outline: transparent fill, with the border coming from
-       --np--border-color, whose tints are built to sit quietly beside content
-       rather than carry it. Both are theme-aware via the core tokens' cascade,
+       The borderColor prop still wins. The label/icon take button.color's inverse.
+       Otherwise it is an outline: transparent fill, the label in button.color, and the border
+       from button.borderColor, whose tints are built to sit quietly beside content
+       rather than carry it. All are theme-aware via the token cascade,
        so no per-theme overrides here. A selected unfilled button takes the
        button.selected.borderColor token instead; a selected filled one keeps the
        background-coloured border, the fill already marking it. */
     background-color: ${$filled ? getToken(`button.backgroundColor:${$status}`) : "transparent"};
-    color: ${$filled ? getToken("color", "base", { inverse: true }) : getToken("color", $status)};
+    color: ${$filled ? getToken("button.color:base", { inverse: true }) : getToken(`button.color:${$status}`)};
     border-style: solid;
     border-width: ${getToken(`button.borderWidth:${$borderWidth}`)};
-    border-color: ${$filled ? getToken(`button.backgroundColor:${$status}`) : $selected ? getToken("button.selected.borderColor:base") : getToken("borderColor", $status === "disabled" ? "base" : $status)};
-    border-radius: ${$borderRadius === "rounded" ? "calc(var(--np--button--height) / 2)" : getToken(`button.borderRadius:${$borderRadius}`)};
+    border-color: ${$filled ? getToken(`button.backgroundColor:${$status}`) : $selected ? getToken("button.selected.borderColor:base") : getToken(`button.borderColor:${$status === "disabled" ? "base" : $status}`)};
+    border-radius: ${$borderRadius === "rounded" ? `calc(${getToken("button.height")} / 2)` : getToken(`button.borderRadius:${$borderRadius}`)};
     transition: all ${getToken(`button.animationDuration:${$animationDuration}`)} ${getToken("button.animationEasing:base")};
     ${$backgroundImage ? `background-image: ${$backgroundImage};` : ""}
     ${$borderColor ? `border-color: ${resolveColorProp("button", "borderColor", $borderColor)};` : ""}
@@ -149,7 +152,7 @@ export const StyledButton = styled.button.withConfig({
     /* Size the anchor element itself (not just the label span) so its em-box and
        inline flow track $size — the same fontSize scale the label reads. */
     font-size: ${getToken("fontSize", $size)};
-    color: ${getToken("color", "link")};
+    color: ${getToken("button.color:link")};
   `}
 
   /* Grow: mirrors @niceprototypes/flex's grow (flex-grow paired with flex-basis: 0),
@@ -168,7 +171,7 @@ export const StyledButton = styled.button.withConfig({
       background-color: transparent;
       background-image: none;
       border-color: transparent;
-      color: ${getToken("color", $status)};
+      color: ${getToken(`button.color:${$status}`)};
     `
     return stateRules(
       Object.fromEntries(Object.entries($ghost).filter(([, ghosted]) => ghosted).map(([state]) => [state, transparent])),
@@ -222,9 +225,21 @@ export const StyledButton = styled.button.withConfig({
  */
 export const ButtonContent = styled(Flex)<{
   $fill: boolean
+  $loading: boolean
   $size: SizeType
   $square: boolean
 }>`
   gap: ${({ $square, $size }) => ($square ? "0" : `0 calc(${getToken("fontSize", $size)} / 2)`)};
   ${({ $fill }) => ($fill ? "flex: 1 1 auto;" : "")}
+  /* Loading hides the content but keeps its space, so the button keeps its width. */
+  ${({ $loading }) => ($loading ? "visibility: hidden;" : "")}
+`
+
+/** The loading spinner, centred over the hidden content. */
+export const ButtonSpinner = styled.span`
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `

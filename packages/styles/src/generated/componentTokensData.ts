@@ -101,6 +101,9 @@ const componentTokensData: ComponentTokensData = {
       "large": "var(--np--size--large)",
       "larger": "var(--np--size--larger)"
     },
+    "height": {
+      "base": "var(--np--button--size)"
+    },
     "spacing": {
       "smaller": "calc(var(--np--size--smaller) / 2)",
       "small": "calc(var(--np--size--small) / 2)",
@@ -131,6 +134,14 @@ const componentTokensData: ComponentTokensData = {
       "error": "var(--np--color--error)",
       "success": "var(--np--color--success)",
       "warning": "var(--np--color--warning)"
+    },
+    "color": {
+      "base": "var(--np--color)",
+      "disabled": "var(--np--color--disabled)",
+      "error": "var(--np--color--error)",
+      "success": "var(--np--color--success)",
+      "warning": "var(--np--color--warning)",
+      "link": "var(--np--color--link)"
     },
     "borderColor": {
       "base": "var(--np--border-color)",
