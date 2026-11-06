@@ -53,4 +53,50 @@ describe("Ink", () => {
       expect(css).toContain(`line-height:${getToken("ink.lineHeight:single")}`)
     })
   })
+  describe("as", () => {
+    it("renders h5 and h6 with the heading font family", () => {
+      render(<Ink as="h6">text</Ink>)
+      expect(screen.getByRole("heading", { level: 6 })).toBeInTheDocument()
+      expect(getInjectedCss()).toContain(`font-family:${getToken("ink.fontFamily:heading")}`)
+    })
+
+    it("renders a link with href and the link color by default", () => {
+      render(<Ink as="a" href="/docs">text</Ink>)
+      expect(screen.getByRole("link", { name: "text" })).toHaveAttribute("href", "/docs")
+      expect(getInjectedCss()).toContain(`color:${getToken("ink.color:link")}`)
+    })
+
+    it("drops href on elements other than a", () => {
+      render(<Ink href="/docs">text</Ink>)
+      expect(screen.getByText("text")).not.toHaveAttribute("href")
+    })
+
+    it.each(["li", "blockquote", "cite", "mark", "s"] as const)("renders %s", (as) => {
+      render(<Ink as={as}>text</Ink>)
+      expect(screen.getByText("text").tagName).toBe(as.toUpperCase())
+    })
+  })
+
+  describe("letterSpacing and maxWidth", () => {
+    it("read the matching ink tokens", () => {
+      render(<Ink letterSpacing="wide" maxWidth="prose">text</Ink>)
+      const css = getInjectedCss()
+      expect(css).toContain(`letter-spacing:${getToken("ink.letterSpacing:wide")}`)
+      expect(css).toContain(`max-width:${getToken("ink.maxWidth:prose")}`)
+    })
+  })
+
+  describe("decoration", () => {
+    it("sets text-decoration-line", () => {
+      render(<Ink decoration="underline">text</Ink>)
+      expect(screen.getByText("text")).toHaveStyle("text-decoration-line: underline")
+    })
+  })
+
+  describe("truncate", () => {
+    it("clips to one line with an ellipsis, as a block for inline elements", () => {
+      render(<Ink truncate>text</Ink>)
+      expect(screen.getByText("text")).toHaveStyle({ display: "block", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" })
+    })
+  })
 })

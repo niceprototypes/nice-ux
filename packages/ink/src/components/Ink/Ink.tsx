@@ -43,13 +43,18 @@ const Ink: React.FC<InkProps> = ({
   className,
   code = false,
   color,
+  decoration,
+  href,
   id,
   italic = false,
   theme,
+  letterSpacing,
   lineClamp,
   lineHeight,
+  maxWidth,
   size,
   style,
+  truncate = false,
   weight,
   wordBreak,
 }) => {
@@ -69,7 +74,12 @@ const Ink: React.FC<InkProps> = ({
       $size={size}
       $weight={weight}
       $wordBreak={wordBreak}
+      $letterSpacing={letterSpacing}
+      $maxWidth={maxWidth}
+      $decoration={decoration}
+      $truncate={truncate}
       as={as}
+      href={as === "a" ? href : undefined}
       id={id}
       className={className}
       style={style}

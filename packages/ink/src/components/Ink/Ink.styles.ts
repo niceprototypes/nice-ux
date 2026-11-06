@@ -9,7 +9,17 @@
 
 import styled, { css } from "styled-components"
 import { getToken, resolveColorProp, type ColorTokenProp, type ColorType, type FontSizeType, type FontWeightType, type LineHeightType } from "@niceprototypes/styles"
-import { InkAsType, InkAlignType, InkItalicType, InkLineClampType, InkWordBreakType } from "./Ink.types"
+import {
+  InkAsType,
+  InkAlignType,
+  InkDecorationType,
+  InkItalicType,
+  InkLetterSpacingType,
+  InkLineClampType,
+  InkMaxWidthType,
+  InkTruncateType,
+  InkWordBreakType,
+} from "./Ink.types"
 import { styleAntialiasing } from "../../utilities/styleAntialiasing"
 
 /**
@@ -32,8 +42,12 @@ export const styleOptimizedLegibility = css`
   will-change: transform;
 `
 
-const isHeading = ($as: InkAsType): boolean =>
-  $as === "h1" || $as === "h2" || $as === "h3" || $as === "h4"
+const HEADINGS: readonly InkAsType[] = ["h1", "h2", "h3", "h4", "h5", "h6"]
+
+/** Elements that render inline by default; truncation turns them into blocks. */
+const INLINE_ELEMENTS: readonly InkAsType[] = ["span", "a", "cite", "mark", "s"]
+
+const isHeading = ($as: InkAsType): boolean => HEADINGS.includes($as)
 
 const getFontFamily = ({ $as, $code }: { $as: InkAsType; $code?: boolean }) => {
   if ($code) {
@@ -53,7 +67,8 @@ const getFontFamily = ({ $as, $code }: { $as: InkAsType; $code?: boolean }) => {
   `
 }
 
-const getColor = ({ $color }: { $color?: ColorTokenProp<ColorType> }) => {
+const getColor = ({ $as, $color }: { $as: InkAsType; $color?: ColorTokenProp<ColorType> }) => {
+  if (!$color && $as === "a") return css`color: ${getToken("ink.color:link")};`
   if (!$color) return css`color: inherit;`
 
   return css`
@@ -146,6 +161,41 @@ const getWordBreak = ({ $wordBreak }: { $wordBreak?: InkWordBreakType }) => {
   `
 }
 
+const getLetterSpacing = ({ $letterSpacing }: { $letterSpacing?: InkLetterSpacingType }) => {
+  if (!$letterSpacing) return undefined
+
+  return css`
+    letter-spacing: ${getToken(`ink.letterSpacing:${$letterSpacing}`)};
+  `
+}
+
+const getMaxWidth = ({ $maxWidth }: { $maxWidth?: InkMaxWidthType }) => {
+  if (!$maxWidth) return undefined
+
+  return css`
+    max-width: ${getToken(`ink.maxWidth:${$maxWidth}`)};
+  `
+}
+
+const getDecoration = ({ $decoration }: { $decoration?: InkDecorationType }) => {
+  if (!$decoration) return undefined
+
+  return css`
+    text-decoration-line: ${$decoration};
+  `
+}
+
+const getTruncate = ({ $as, $truncate }: { $as: InkAsType; $truncate?: InkTruncateType }) => {
+  if (!$truncate) return undefined
+
+  return css`
+    ${INLINE_ELEMENTS.includes($as) ? "display: block;" : ""}
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  `
+}
+
 export const StyledInk = styled.p<{
   $as: InkAsType
   $size?: FontSizeType
@@ -159,6 +209,10 @@ export const StyledInk = styled.p<{
   $wordBreak?: InkWordBreakType
   $code?: boolean
   $italic?: InkItalicType
+  $letterSpacing?: InkLetterSpacingType
+  $maxWidth?: InkMaxWidthType
+  $decoration?: InkDecorationType
+  $truncate?: InkTruncateType
 }>`
   margin: 0;
 
@@ -194,4 +248,16 @@ export const StyledInk = styled.p<{
 
   /* Word break behavior */
   ${getWordBreak}
+
+  /* Letter spacing */
+  ${getLetterSpacing}
+
+  /* Measure */
+  ${getMaxWidth}
+
+  /* Text decoration */
+  ${getDecoration}
+
+  /* Single-line truncation */
+  ${getTruncate}
 `
