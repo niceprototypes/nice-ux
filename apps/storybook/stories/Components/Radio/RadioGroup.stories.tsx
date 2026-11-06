@@ -316,3 +316,15 @@ export const BorderColor: Story = {
     )
   },
 }
+
+export const Theme: Story = {
+  ...Playground,
+  args: { ...Playground.args, theme: "night" },
+  play: async ({ canvasElement }) => {
+    // The dot follows the pinned theme: the inverse text colour of the pinned subtree.
+    const dot = circle(canvasElement, "Free").firstElementChild!
+    await expect(getComputedStyle(dot).backgroundColor).toBe(
+      resolveCss(dot as HTMLElement, "background-color", getToken("color", "base", { inverse: true })),
+    )
+  },
+}

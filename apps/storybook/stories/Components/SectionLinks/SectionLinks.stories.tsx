@@ -151,3 +151,28 @@ export const RenderWrapper: Story = {
     await expect(nav.parentElement).toHaveAttribute("data-sectionlinks")
   },
 }
+
+/** The computed value of a CSS property set to `value`, read from a throwaway element in the canvas. */
+const resolveCss = (canvasElement: HTMLElement, property: string, value: string) => {
+  const probe = document.createElement("div")
+  probe.style.setProperty(property, value)
+  canvasElement.appendChild(probe)
+  const resolved = getComputedStyle(probe).getPropertyValue(property)
+  probe.remove()
+  return resolved
+}
+
+export const Active: Story = {
+  ...Playground,
+  play: async ({ canvasElement, userEvent }) => {
+    window.scrollTo(0, 0)
+    // The link to the section in view takes the active colour; the others keep the base colour.
+    const color = (label: string) => getComputedStyle(link(canvasElement, label)).color
+    await userEvent.click(link(canvasElement, "Services"))
+    await waitFor(() =>
+      expect(color("Services")).toBe(resolveCss(canvasElement, "color", getToken("scroll.sectionLinks.color:active"))),
+    )
+    await expect(color("About")).toBe(resolveCss(canvasElement, "color", getToken("scroll.sectionLinks.color:base")))
+    window.scrollTo(0, 0)
+  },
+}

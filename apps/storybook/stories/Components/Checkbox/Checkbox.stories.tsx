@@ -72,6 +72,7 @@ export const Playground: Story = {
     controlled: true,
     checked: false,
     defaultChecked: false,
+    indeterminate: false,
     onChange: fn(),
     disabled: false,
     size: "base",
@@ -88,6 +89,7 @@ export const Playground: Story = {
     controlled: { control: "boolean", table: { category: "State" } },
     checked: { control: "boolean", table: { category: "State" } },
     defaultChecked: { control: "boolean", table: { category: "State" } },
+    indeterminate: { control: "boolean", table: { category: "State" } },
     disabled: { control: "boolean", table: { category: "State" } },
 
     children: { control: "text", table: { category: "Content" } },
@@ -268,5 +270,29 @@ export const IconName: Story = {
   args: { ...Playground.args, checked: true, iconName: "minus" },
   play: async ({ canvasElement }) => {
     await expect(box(canvasElement).querySelector("svg")).toBeTruthy()
+  },
+}
+
+export const Indeterminate: Story = {
+  ...Playground,
+  args: { ...Playground.args, indeterminate: true },
+  play: async ({ canvasElement }) => {
+    const checkbox = within(canvasElement).getByRole("checkbox")
+    await expect(checkbox).toBePartiallyChecked()
+    await expect(box(canvasElement).querySelector("svg")).toBeVisible()
+    await expect(getComputedStyle(box(canvasElement)).backgroundColor).toBe(
+      resolveCss(canvasElement, "background-color", getToken("checkbox.backgroundColor:link")),
+    )
+  },
+}
+
+export const Theme: Story = {
+  ...Playground,
+  args: { ...Playground.args, checked: true, theme: "night" },
+  play: async ({ canvasElement }) => {
+    // The check follows the pinned theme: the inverse text colour of the pinned subtree.
+    const root = within(canvasElement).getByRole("checkbox").parentElement!
+    const style = getComputedStyle(root)
+    await expect(style.getPropertyValue("--np--icon--color")).toBe(style.getPropertyValue("--np--color--inverse"))
   },
 }
