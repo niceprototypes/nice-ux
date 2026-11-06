@@ -2058,6 +2058,9 @@ importers:
 
   packages/input:
     devDependencies:
+      '@niceprototypes/button':
+        specifier: workspace:*
+        version: link:../button
       '@niceprototypes/config-eslint':
         specifier: workspace:*
         version: link:../config-eslint

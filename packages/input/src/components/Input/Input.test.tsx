@@ -107,7 +107,7 @@ describe("Input", () => {
       expect(controlCss).toContain(`color:${getToken("color", "disabled")}`)
       expect(fieldCss).toContain("cursor:not-allowed")
       // status="error" is overridden: the border is the disabled (base) one.
-      expect(fieldCss).not.toContain(getToken("borderColor", "error"))
+      expect(fieldCss).not.toContain(getToken("input.borderColor:error"))
       expect(controlCss).toBe(statusControlCss)
       expect(fieldCss).toBe(statusFieldCss)
     })
@@ -674,7 +674,7 @@ describe("Input", () => {
         </Field>
       )
       const fieldCss = cssFor(screen.getByRole("textbox").parentElement!)
-      expect(fieldCss).toContain(getToken("borderColor", "error"))
+      expect(fieldCss).toContain(getToken("input.borderColor:error"))
     })
 
     it("keeps an explicit status inside an invalid Field", () => {
@@ -687,8 +687,8 @@ describe("Input", () => {
         </Field>
       )
       const fieldCss = cssFor(screen.getByRole("textbox").parentElement!)
-      expect(fieldCss).toContain(getToken("borderColor", "success"))
-      expect(fieldCss).not.toContain(getToken("borderColor", "error"))
+      expect(fieldCss).toContain(getToken("input.borderColor:success"))
+      expect(fieldCss).not.toContain(getToken("input.borderColor:error"))
     })
 
     it("shows the disabled styling when disabled inside an invalid Field", () => {
@@ -704,7 +704,7 @@ describe("Input", () => {
       expect(control).toBeDisabled()
       expect(cssFor(control)).toContain(`color:${getToken("color", "disabled")}`)
       expect(cssFor(control.parentElement!)).not.toContain(
-        getToken("borderColor", "error")
+        getToken("input.borderColor:error")
       )
     })
 
@@ -1047,5 +1047,60 @@ describe("Input", () => {
       />
     )
     expect(screen.getByRole("textbox")).toBeRequired()
+  })
+})
+
+describe("Input component colour defaults", () => {
+  it("reads the outline border and base background from the input tokens", () => {
+    render(<Input aria-label="x" />)
+    const fieldCss = cssFor(screen.getByRole("textbox").parentElement!)
+    expect(fieldCss).toContain(`border-color:${getToken("input.borderColor:base")}`)
+    expect(fieldCss).toContain(`background-color:${getToken("input.backgroundColor:base")}`)
+  })
+
+  it("reads the filled background from the input tokens", () => {
+    render(<Input aria-label="x" filled />)
+    const fieldCss = cssFor(screen.getByRole("textbox").parentElement!)
+    expect(fieldCss).toContain(`background-color:${getToken("input.backgroundColor:raised")}`)
+  })
+})
+
+describe("Input in a flex row", () => {
+  it("lets the field shrink below its control's intrinsic width", () => {
+    render(<Input aria-label="x" />)
+    expect(cssFor(screen.getByRole("textbox").parentElement!)).toContain("min-inline-size:0")
+  })
+})
+
+describe("Input passwordReveal", () => {
+  it("toggles a password between hidden and visible", async () => {
+    render(<Input aria-label="Key" type="password" passwordReveal defaultValue="secret" />)
+    const control = screen.getByLabelText("Key")
+    expect(control).toHaveAttribute("type", "password")
+    await userEvent.click(screen.getByRole("button", { name: "Show" }))
+    expect(control).toHaveAttribute("type", "text")
+    expect(control).toHaveValue("secret")
+    await userEvent.click(screen.getByRole("button", { name: "Hide" }))
+    expect(control).toHaveAttribute("type", "password")
+  })
+
+  it("renders the toggle after the end content", () => {
+    render(<Input aria-label="Key" type="password" passwordReveal end={<span data-testid="end" />} />)
+    const chrome = screen.getByLabelText("Key").parentElement!
+    expect(chrome.lastElementChild).toBe(screen.getByRole("button", { name: "Show" }))
+    expect(chrome.lastElementChild?.previousElementSibling).toBe(screen.getByTestId("end"))
+  })
+
+  it("disables the toggle with the input", () => {
+    render(<Input aria-label="Key" type="password" passwordReveal disabled />)
+    expect(screen.getByRole("button", { name: "Show" })).toBeDisabled()
+  })
+
+  it("renders no toggle without passwordReveal or for other types", () => {
+    const { unmount } = render(<Input aria-label="Key" type="password" />)
+    expect(screen.queryByRole("button")).toBeNull()
+    unmount()
+    render(<Input aria-label="Key" type="text" passwordReveal />)
+    expect(screen.queryByRole("button")).toBeNull()
   })
 })

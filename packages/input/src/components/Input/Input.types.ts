@@ -34,6 +34,36 @@ export type InputBackgroundColorType = BackgroundColorType
 export type InputBorderColorType = BorderColorType
 
 /**
+ * InputSizeType
+ *
+ * Re-export of SizeType from @niceprototypes/styles. Height and inline padding
+ * of the field, from the `input.size` and `input.spacing` component tokens.
+ *
+ * Values:
+ * - "smaller", "small", "base" (default), "large", "larger"
+ */
+export type InputSizeType = SizeType
+
+/**
+ * InputBorderWidthType
+ *
+ * Re-export of BorderWidthType from @niceprototypes/styles. Border width of the
+ * field, from the `input.borderWidth` component tokens.
+ *
+ * Values:
+ * - "none", "smaller", "small", "base" (default), "large", "larger"
+ */
+export type InputBorderWidthType = BorderWidthType
+
+/**
+ * InputThemeType
+ *
+ * Re-export of ThemeType from @niceprototypes/styles. Pins token resolution to
+ * a specific theme.
+ */
+export type InputThemeType = ThemeType
+
+/**
  * InputBorderRadiusType
  *
  * Border radius variants for the input.
@@ -135,6 +165,16 @@ export type InputElementType =
   | "search"
   | "tel"
   | "url"
+
+/**
+ * InputPasswordRevealType
+ *
+ * Whether a `type="password"` input shows a toggle in the `end` slot (after any
+ * `end` content) that switches the value between hidden and visible. The
+ * toggle reads "Show" while hidden and "Hide" while visible. Ignored for other
+ * `type` values.
+ */
+export type InputPasswordRevealType = boolean
 
 /**
  * InputDisabledType
@@ -618,8 +658,8 @@ export interface InputBaseProps {
    */
   ghost?: InputGhostType
 
-  /** Size variant — uses SizeType from @niceprototypes/styles */
-  size?: SizeType
+  /** Size variant @default "base" */
+  size?: InputSizeType
 
   /**
    * Border radius
@@ -631,10 +671,10 @@ export interface InputBaseProps {
    * Border width
    * @default "base"
    */
-  borderWidth?: BorderWidthType
+  borderWidth?: InputBorderWidthType
 
   /** Pin token resolution to a specific theme instead of responding to media query */
-  theme?: ThemeType
+  theme?: InputThemeType
 
   /**
    * @token Override background color — a BackgroundColorType variant or
@@ -727,6 +767,11 @@ export interface InputAsInputProps extends InputBaseProps {
   ref?: React.Ref<HTMLInputElement>
   /** HTML input type — text-style inputs only */
   type?: InputElementType
+  /**
+   * Show/Hide toggle in the `end` slot for `type="password"`
+   * @default false
+   */
+  passwordReveal?: InputPasswordRevealType
   rows?: never
   maxRows?: never
   onSubmit?: never
@@ -746,6 +791,7 @@ export interface InputAsSelectProps extends InputBaseProps {
   /** `<option>` / `<optgroup>` elements */
   children?: InputChildrenType
   type?: never
+  passwordReveal?: never
   rows?: never
   maxRows?: never
   onSubmit?: never
@@ -768,6 +814,7 @@ export interface InputAsTextareaProps extends InputBaseProps {
   /** Enter without Shift submits the value */
   onSubmit?: InputOnSubmitType
   type?: never
+  passwordReveal?: never
   children?: never
 }
 
@@ -775,7 +822,7 @@ export interface InputAsTextareaProps extends InputBaseProps {
  * InputProps
  *
  * Complete prop definition for the Input component — one branch per `as`, so
- * `ref`, `type`, `rows`, `maxRows`, `onSubmit` and `children` are typed for the element rendered.
+ * `ref`, `type`, `passwordReveal`, `rows`, `maxRows`, `onSubmit` and `children` are typed for the element rendered.
  */
 export type InputProps =
   | InputAsInputProps
@@ -785,6 +832,8 @@ export type InputProps =
 const InputTypes = {} as const
 
 namespace InputTypes {
+  export type Size = InputSizeType
+  export type BorderWidth = InputBorderWidthType
   export type BorderRadius = InputBorderRadiusType
   export type Status = InputStatusType
   export type Filled = InputFilledType
@@ -792,6 +841,7 @@ namespace InputTypes {
   export type GhostState = InputGhostStateType
   export type GhostStates = InputGhostStatesType
   export type Element = InputElementType
+  export type PasswordReveal = InputPasswordRevealType
   export type Disabled = InputDisabledType
   export type ReadOnly = InputReadOnlyType
   export type Required = InputRequiredType
@@ -819,7 +869,7 @@ namespace InputTypes {
   export type AriaHasPopup = InputAriaHasPopupType
   export type AriaAutocomplete = InputAriaAutocompleteType
   export type TestId = InputTestIdType
-  export type Theme = ThemeType
+  export type Theme = InputThemeType
   export type BackgroundColor = InputBackgroundColorType
   export type BorderColor = InputBorderColorType
   export type ControlElement = InputControlElementType

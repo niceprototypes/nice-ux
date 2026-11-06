@@ -33,6 +33,7 @@
     "generate-exports": "nice-generate-exports ."
   },
   "peerDependencies": {
+    "@niceprototypes/button": "workspace:^",
     "@niceprototypes/field": "workspace:^",
     "@niceprototypes/styles": "workspace:^",
     "react": ">=19.2.0",
@@ -71,6 +72,7 @@
     "@niceprototypes/config-prettier": "workspace:*",
     "@niceprototypes/config-rollup": "workspace:*",
     "@niceprototypes/config-typescript": "workspace:*",
+    "@niceprototypes/button": "workspace:*",
     "@niceprototypes/field": "workspace:*",
     "@niceprototypes/styles": "workspace:*",
     "prettier": "^3.1.0",

@@ -67,11 +67,13 @@ const CHILDREN_PRESETS = {
  * - `ghost`: one boolean per interaction state
  * - `backgroundColor` / `borderColor`: variant plus an optional theme pin
  * - `rows` / `maxRows` / `onSubmit`: applied for `as="textarea"` only
+ * - `passwordReveal`: applied for `as="input"` only
  */
 type PlaygroundArgs = Omit<
   InputProps,
   | "as"
   | "type"
+  | "passwordReveal"
   | "rows"
   | "maxRows"
   | "onSubmit"
@@ -85,6 +87,7 @@ type PlaygroundArgs = Omit<
 > & {
   as: InputAsType
   type: InputElementType
+  passwordReveal: boolean
   rows?: number
   maxRows?: number
   onSubmit: InputOnSubmitType
@@ -141,6 +144,7 @@ export const Playground: Story = {
   args: {
     as: "input",
     type: "text",
+    passwordReveal: false,
     children: "options",
     controlled: true,
     value: "",
@@ -175,6 +179,7 @@ export const Playground: Story = {
   argTypes: {
     as: select(AS_OPTIONS, "Element"),
     type: { ...select(TYPE_OPTIONS, "Element"), if: { arg: "as", eq: "input" } },
+    passwordReveal: { control: "boolean", table: { category: "Element" }, if: { arg: "as", eq: "input" } },
     rows: { control: "number", table: { category: "Element" }, if: { arg: "as", eq: "textarea" } },
     maxRows: { control: "number", table: { category: "Element" }, if: { arg: "as", eq: "textarea" } },
     children: { ...select(Object.keys(CHILDREN_PRESETS), "Element"), mapping: CHILDREN_PRESETS, if: { arg: "as", eq: "select" } },
@@ -245,6 +250,7 @@ export const Playground: Story = {
   render: function Render({
     as,
     type,
+    passwordReveal,
     rows,
     maxRows,
     onSubmit,
@@ -303,7 +309,7 @@ export const Playground: Story = {
         ? { ...shared, as, children: children as unknown as InputProps["children"] }
         : as === "textarea"
           ? { ...shared, as, rows, maxRows, onSubmit }
-          : { ...shared, as, type }
+          : { ...shared, as, type, passwordReveal }
     // Remount when the uncontrolled initial value or the element changes.
     return <Input key={`${as}-${controlled}-${defaultValue}`} {...props} />
   },
@@ -455,6 +461,20 @@ export const EndClear: Story = {
     await expect(textbox).toHaveValue("Ada")
     await userEvent.click(canvas.getByRole("button", { name: "Clear" }))
     await expect(textbox).toHaveValue("")
+  },
+}
+
+export const PasswordReveal: Story = {
+  ...Playground,
+  args: { ...Playground.args, type: "password", passwordReveal: true, value: "secret" },
+  play: async ({ canvasElement, userEvent }) => {
+    const canvas = within(canvasElement)
+    const control = canvas.getByLabelText("Field")
+    await expect(control).toHaveAttribute("type", "password")
+    await userEvent.click(canvas.getByRole("button", { name: "Show" }))
+    await expect(control).toHaveAttribute("type", "text")
+    await userEvent.click(canvas.getByRole("button", { name: "Hide" }))
+    await expect(control).toHaveAttribute("type", "password")
   },
 }
 

@@ -1,5 +1,6 @@
 import * as React from "react"
 import { Theme } from "@niceprototypes/styles"
+import Button from "@niceprototypes/button"
 import { mergeDescribedBy, useField } from "@niceprototypes/field"
 import { StyledControl, StyledField } from "./Input.styles"
 import { InputProps } from "./Input.types"
@@ -44,6 +45,7 @@ const Input: React.FC<InputProps> = ({
   onFocus,
   onKeyDown,
   onSubmit,
+  passwordReveal = false,
   pattern,
   placeholder,
   readOnly = false,
@@ -74,8 +76,15 @@ const Input: React.FC<InputProps> = ({
   // `rows` a <textarea> one; `pattern` does not apply to <select>/<textarea>.
   // React 19 has no camelCase mapping for `dirname`, so it is passed lowercase
   // (a camelCase `dirName` renders verbatim and triggers an unknown-prop warning).
+  // Password reveal: the value shows as plain text while revealed.
+  const [revealed, setRevealed] = React.useState(false)
+  const hasReveal = as === "input" && type === "password" && passwordReveal
   const elementProps =
-    as === "input" ? { type, pattern } : as === "textarea" ? { rows } : {}
+    as === "input"
+      ? { type: hasReveal && revealed ? "text" : type, pattern }
+      : as === "textarea"
+        ? { rows }
+        : {}
   // Composer keys: the consumer's onKeyDown runs first and may preventDefault to
   // keep the newline. Shift+Enter and Enter that commits an IME composition
   // stay native; any other Enter on a textarea with onSubmit submits instead.
@@ -177,6 +186,15 @@ const Input: React.FC<InputProps> = ({
         {as === "select" ? children : undefined}
       </StyledControl>
       {end}
+      {hasReveal ? (
+        <Button
+          size="smaller"
+          disabled={disabled}
+          onClick={() => setRevealed(current => !current)}
+        >
+          {revealed ? "Hide" : "Show"}
+        </Button>
+      ) : null}
     </StyledField>
   )
 

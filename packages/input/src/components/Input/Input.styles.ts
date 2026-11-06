@@ -14,15 +14,15 @@ import type {
 } from "./Input.types"
 
 /**
- * Border color: status name maps 1:1 to a core --np--border-color variant.
+ * Border color: status name maps 1:1 to an `input.borderColor` variant.
  * Outline inputs fall back to the base border when disabled; filled inputs have
  * no border unless the status is semantic (error / success / warning).
  */
 function getBorderColor(status: InputStatusType, filled: boolean): string {
   if (status === "base" || status === "disabled") {
-    return filled ? "transparent" : getToken("borderColor", "base")
+    return filled ? "transparent" : getToken("input.borderColor:base")
   }
-  return getToken("borderColor", status)
+  return getToken(`input.borderColor:${status}`)
 }
 
 /**
@@ -173,6 +173,8 @@ export const StyledField = styled.div.withConfig({
        font size, so it matches the control's floored font size. */
     font-size: ${getToken("input.fontSize:base")};
     width: ${getWidth($width, $size, $borderWidth)};
+    /* As a flex item the field shrinks below its control's intrinsic width. */
+    min-inline-size: 0;
     ${$as === "textarea"
       ? css`
           min-block-size: ${getToken(`input.size:${$size}`)};
@@ -183,8 +185,7 @@ export const StyledField = styled.div.withConfig({
     padding-block: 0;
     padding-inline: ${getToken(`input.spacing:${$size}`)};
     background-color: ${getToken(
-      "backgroundColor",
-      $filled ? "raised" : "base"
+      `input.backgroundColor:${$filled ? "raised" : "base"}`
     )};
     border-style: solid;
     border-width: ${getToken(`input.borderWidth:${$borderWidth}`)};
