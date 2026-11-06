@@ -58,81 +58,27 @@ const Icon: React.FC<IconProps> = ({
   const a11yProps = ariaLabel ? { role: "img", "aria-label": ariaLabel } : { "aria-hidden": true }
 
   // Tier 3: direct vendor component — bypass all resolution, apply token styling
-  if (VendorComponent) {
-    return withTheme(
-      <IconWrapperStyled
-        $color={color}
-        $size={size}
-        $variant={resolvedVariant}
-        $strokeWidth={strokeWidth}
-        $strokeScaling={strokeScaling}
-        $darkAntialiasing={darkAntialiasing}
-        $animation={resolvedAnimation}
-        $animationDuration={animationDuration}
-        className={className}
-        style={style}
-        {...a11yProps}
-      >
-        <VendorComponent />
-      </IconWrapperStyled>
-    )
-  }
-
   // Tier 1: custom icon — check internal map first
-  const SvgIcon = resolveIconComponent(name, resolvedVariant)
-  if (SvgIcon) {
-    return withTheme(
-      <IconWrapperStyled
-        $color={color}
-        $size={size}
-        $variant={resolvedVariant}
-        $strokeWidth={strokeWidth}
-        $strokeScaling={strokeScaling}
-        $darkAntialiasing={darkAntialiasing}
-        $animation={resolvedAnimation}
-        $animationDuration={animationDuration}
-        className={className}
-        style={style}
-        {...a11yProps}
-      >
-        {url ? <ImageStyled src={url} alt="" /> : <SvgIcon viewBox={viewBox} />}
-      </IconWrapperStyled>
-    )
-  }
-
   // Tier 2: vendor icon — only when vendor flag is set and resolver is registered
-  if (vendor) {
-    const VendorIcon = getVendorIcon(name)
-    if (VendorIcon) {
-      return withTheme(
-        <IconWrapperStyled
-          $color={color}
-          $size={size}
-          $variant={resolvedVariant}
-          $strokeWidth={strokeWidth}
-          $strokeScaling={strokeScaling}
-          $darkAntialiasing={darkAntialiasing}
-          $animation={resolvedAnimation}
-          $animationDuration={animationDuration}
-          className={className}
-          style={style}
-          {...a11yProps}
-        >
-          <VendorIcon />
-        </IconWrapperStyled>
+  const SvgIcon = VendorComponent ? undefined : resolveIconComponent(name, resolvedVariant)
+  const VendorIcon = VendorComponent || SvgIcon || !vendor ? null : getVendorIcon(name)
+  let content: React.ReactNode
+  if (VendorComponent) content = <VendorComponent />
+  else if (SvgIcon) content = url ? <ImageStyled src={url} alt="" /> : <SvgIcon viewBox={viewBox} />
+  else if (VendorIcon) content = <VendorIcon />
+  else {
+    // Fallback: render the circle — name not found in custom or vendor sets
+    if (isDevelopment()) {
+      console.warn(
+        `@niceprototypes/icon: no icon named "${name}"` +
+          (vendor ? " in the built-in set or the vendor resolver" : "; vendor names need the `vendor` prop") +
+          `; rendering "circle".`
       )
     }
+    const FallbackIcon = resolveIconComponent("circle", resolvedVariant)
+    content = FallbackIcon && <FallbackIcon viewBox={viewBox} />
   }
 
-  // Fallback: render the circle — name not found in custom or vendor sets
-  if (isDevelopment()) {
-    console.warn(
-      `@niceprototypes/icon: no icon named "${name}"` +
-        (vendor ? " in the built-in set or the vendor resolver" : "; vendor names need the `vendor` prop") +
-        `; rendering "circle".`
-    )
-  }
-  const FallbackIcon = resolveIconComponent("circle", resolvedVariant)
   return withTheme(
     <IconWrapperStyled
       $color={color}
@@ -145,9 +91,10 @@ const Icon: React.FC<IconProps> = ({
       $animationDuration={animationDuration}
       className={className}
       style={style}
+      data-icon={VendorComponent ? undefined : name}
       {...a11yProps}
     >
-      {FallbackIcon && <FallbackIcon viewBox={viewBox} />}
+      {content}
     </IconWrapperStyled>
   )
 }

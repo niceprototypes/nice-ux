@@ -96,6 +96,13 @@ describe("Icon", () => {
     expect(icon).not.toHaveAttribute("aria-hidden")
   })
 
+  it("names the icon in data-icon", () => {
+    const { container, rerender } = render(<Icon name="check" />)
+    expect(container.firstChild).toHaveAttribute("data-icon", "check")
+    rerender(<Icon vendorComponent={() => <svg />} />)
+    expect(container.firstChild).not.toHaveAttribute("data-icon")
+  })
+
   it("renders spinner icon with spinning animation class", () => {
     const { container } = render(<Icon name="spinner" />)
     expect(container.firstChild).toBeInTheDocument()
