@@ -35,7 +35,6 @@
   },
   "homepage": "https://github.com/niceprototypes/nice-ux/tree/main/packages/tooltip#readme",
   "peerDependencies": {
-    "@niceprototypes/icon": "workspace:^",
     "@niceprototypes/popover": "workspace:^",
     "@niceprototypes/styles": "workspace:^",
     "react": ">=19.2.0 <20.0.0",
@@ -57,7 +56,6 @@
     "@niceprototypes/config-jest": "workspace:*",
     "@niceprototypes/config-rollup": "workspace:*",
     "@niceprototypes/config-typescript": "workspace:*",
-    "@niceprototypes/icon": "workspace:*",
     "@niceprototypes/popover": "workspace:*",
     "@niceprototypes/styles": "workspace:*",
     "react": "catalog:",

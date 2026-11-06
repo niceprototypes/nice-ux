@@ -3447,9 +3447,6 @@ importers:
       '@niceprototypes/config-typescript':
         specifier: workspace:*
         version: link:../config-typescript
-      '@niceprototypes/icon':
-        specifier: workspace:*
-        version: link:../icon
       '@niceprototypes/popover':
         specifier: workspace:*
         version: link:../popover
